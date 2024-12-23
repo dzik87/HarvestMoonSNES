@@ -3832,7 +3832,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_81A58B:
-                       dw CODE_01FFFF                       ;81A58B|        |01FFFF;
+                       dw EMPTY_01FFFF                      ;81A58B|        |01FFFF;
                        dw CODE_01809A                       ;81A58D|        |01809A;
                                                             ;      |        |      ;
           CODE_81A58F:
@@ -14107,5 +14107,4 @@ IncrementPowerBerryEatenRoutine:
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;81FFE4|        |      ;
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;81FFEC|        |      ;
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;81FFF4|        |      ;
-                       db $00,$00,$00                       ;81FFFC|        |      ;
-                       BRK #$E2                             ;81FFFF|00E2    |      ;
+                       db $00,$00,$00,$00                   ;81FFFC|        |      ;

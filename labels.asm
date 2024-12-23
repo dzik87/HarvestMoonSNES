@@ -412,7 +412,7 @@
                        CODE_01F942 = $01F942                ;      |        |      ;
                        CODE_01FA69 = $01FA69                ;      |        |      ;
                        CODE_01FA84 = $01FA84                ;      |        |      ;
-                       CODE_01FFFF = $01FFFF                ;      |        |      ;
+                       EMPTY_01FFFF = $01FFFF               ;      |        |      ;
                        CODE_0290DD = $0290DD                ;      |        |      ;
                        CODE_0290DE = $0290DE                ;      |        |      ;
                        CODE_0290EC = $0290EC                ;      |        |      ;
@@ -470,5 +470,3 @@
                        CODE_02A4C2 = $02A4C2                ;      |        |      ;
                        CODE_02A570 = $02A570                ;      |        |      ;
                        LOOSE_OP_81A901 = $81A901            ;      |        |      ;
-                       LOOSE_OP_828000 = $828000            ;      |        |      ;
-                       LOOSE_OP_838000 = $838000            ;      |        |      ;
