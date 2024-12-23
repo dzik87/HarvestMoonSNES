@@ -483,7 +483,7 @@
 ;!^!-UNUSED-!                        CODE_01F942 = $01F942                ;      |        |      ;
 ;!^!-UNUSED-!                        CODE_01FA69 = $01FA69                ;      |        |      ;
 ;!^!-UNUSED-!                        CODE_01FA84 = $01FA84                ;      |        |      ;
-;!^!-UNUSED-!                        CODE_01FFFF = $01FFFF                ;      |        |      ;
+;!^!-UNUSED-!                        EMPTY_01FFFF = $01FFFF               ;      |        |      ;
 ;!^!-UNUSED-!                        CODE_0290DD = $0290DD                ;      |        |      ;
 ;!^!-UNUSED-!                        CODE_0290DE = $0290DE                ;      |        |      ;
 ;!^!-UNUSED-!                        CODE_0290EC = $0290EC                ;      |        |      ;
@@ -1875,7 +1875,7 @@
 ;!^!-USED-!                        CODE_81FA95 = $81FA95                ;      |        |      ;
 ;!^!-USED-!                        DATA8_81FAB4 = $81FAB4               ;      |        |      ;
 ;!^!-USED-!                        DATA8_81FAD4 = $81FAD4               ;      |        |      ;
-;!^!-UNUSED-!                        LOOSE_OP_828000 = $828000            ;      |        |      ;
+;!^!-USED-!                        CODE_828000 = $828000                ;      |        |      ;
 ;!^!-USED-!                        CODE_82800E = $82800E                ;      |        |      ;
 ;!^!-USED-!                        CODE_828018 = $828018                ;      |        |      ;
 ;!^!-USED-!                        CODE_828026 = $828026                ;      |        |      ;
@@ -2479,7 +2479,7 @@
 ;!^!-USED-!                        CODE_82EBD2 = $82EBD2                ;      |        |      ;
 ;!^!-USED-!                        CODE_82EBDF = $82EBDF                ;      |        |      ;
 ;!^!-USED-!                        DATA8_82F298 = $82F298               ;      |        |      ;
-;!^!-UNUSED-!                        LOOSE_OP_838000 = $838000            ;      |        |      ;
+;!^!-USED-!                        CODE_838000 = $838000                ;      |        |      ;
 ;!^!-USED-!                        CODE_83803B = $83803B                ;      |        |      ;
 ;!^!-USED-!                        CODE_83805A = $83805A                ;      |        |      ;
 ;!^!-USED-!                        CODE_838067 = $838067                ;      |        |      ;
