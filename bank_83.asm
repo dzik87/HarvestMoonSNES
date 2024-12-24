@@ -4756,10 +4756,12 @@ SetDefaultValuesForVariables:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_83ADA6:
-                       dw CODE_03ADAE                       ;83ADA6|        |03ADAE;
-                       dw CODE_03ADC4                       ;83ADA8|        |03ADC4;
-                       dw CODE_03ADDB                       ;83ADAA|        |03ADDB;
-                       dw CODE_03ADF1                       ;83ADAC|        |03ADF1;
+                       dw CODE_83ADAE                       ;83ADA6|        |83ADAE;
+                       dw CODE_83ADC4                       ;83ADA8|        |83ADC4;
+                       dw CODE_83ADDB                       ;83ADAA|        |83ADDB;
+                       dw CODE_83ADF1                       ;83ADAC|        |83ADF1;
+                                                            ;      |        |      ;
+          CODE_83ADAE:
                        LDA.B $DF                            ;83ADAE|A5DF    |0000DF;
                        CLC                                  ;83ADB0|18      |      ;
                        ADC.W #$000C                         ;83ADB1|690C00  |      ;
@@ -4772,6 +4774,8 @@ SetDefaultValuesForVariables:
                        STA.B $82                            ;83ADC0|8582    |000082;
                        BRA CODE_83AE08                      ;83ADC2|8044    |83AE08;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83ADC4:
                        LDA.B $DF                            ;83ADC4|A5DF    |0000DF;
                        CLC                                  ;83ADC6|18      |      ;
                        ADC.W #$000C                         ;83ADC7|690C00  |      ;
@@ -4785,6 +4789,8 @@ SetDefaultValuesForVariables:
                        STA.B $82                            ;83ADD7|8582    |000082;
                        BRA CODE_83AE08                      ;83ADD9|802D    |83AE08;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83ADDB:
                        LDA.B $DF                            ;83ADDB|A5DF    |0000DF;
                        CLC                                  ;83ADDD|18      |      ;
                        ADC.B $E5                            ;83ADDE|65E5    |0000E5;
@@ -4797,6 +4803,8 @@ SetDefaultValuesForVariables:
                        STA.B $82                            ;83ADED|8582    |000082;
                        BRA CODE_83AE08                      ;83ADEF|8017    |83AE08;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83ADF1:
                        LDA.B $DF                            ;83ADF1|A5DF    |0000DF;
                        SEC                                  ;83ADF3|38      |      ;
                        SBC.B $E5                            ;83ADF4|E5E5    |0000E5;
@@ -4931,10 +4939,12 @@ SetDefaultValuesForVariables:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_83AECA:
-                       dw CODE_03AED2                       ;83AECA|        |03AED2;
-                       dw CODE_03AEDF                       ;83AECC|        |03AEDF;
-                       dw CODE_03AEEC                       ;83AECE|        |03AEEC;
-                       dw CODE_03AEF9                       ;83AED0|        |03AEF9;
+                       dw CODE_83AED2                       ;83AECA|        |83AED2;
+                       dw CODE_83AEDF                       ;83AECC|        |83AEDF;
+                       dw CODE_83AEEC                       ;83AECE|        |83AEEC;
+                       dw CODE_83AEF9                       ;83AED0|        |83AEF9;
+                                                            ;      |        |      ;
+          CODE_83AED2:
                        LDA.B $DF                            ;83AED2|A5DF    |0000DF;
                        STA.B $80                            ;83AED4|8580    |000080;
                        LDA.B $E1                            ;83AED6|A5E1    |0000E1;
@@ -4943,6 +4953,8 @@ SetDefaultValuesForVariables:
                        STA.B $82                            ;83AEDB|8582    |000082;
                        BRA CODE_83AF06                      ;83AEDD|8027    |83AF06;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83AEDF:
                        LDA.B $DF                            ;83AEDF|A5DF    |0000DF;
                        STA.B $80                            ;83AEE1|8580    |000080;
                        LDA.B $E1                            ;83AEE3|A5E1    |0000E1;
@@ -4951,6 +4963,8 @@ SetDefaultValuesForVariables:
                        STA.B $82                            ;83AEE8|8582    |000082;
                        BRA CODE_83AF06                      ;83AEEA|801A    |83AF06;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83AEEC:
                        LDA.B $DF                            ;83AEEC|A5DF    |0000DF;
                        CLC                                  ;83AEEE|18      |      ;
                        ADC.B $E5                            ;83AEEF|65E5    |0000E5;
@@ -4959,6 +4973,8 @@ SetDefaultValuesForVariables:
                        STA.B $82                            ;83AEF5|8582    |000082;
                        BRA CODE_83AF06                      ;83AEF7|800D    |83AF06;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83AEF9:
                        LDA.B $DF                            ;83AEF9|A5DF    |0000DF;
                        SEC                                  ;83AEFB|38      |      ;
                        SBC.B $E5                            ;83AEFC|E5E5    |0000E5;
@@ -5007,10 +5023,12 @@ SetDefaultValuesForVariables:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_83AF3E:
-                       dw CODE_03AF46                       ;83AF3E|        |03AF46;
-                       dw CODE_03AFAE                       ;83AF40|        |03AFAE;
-                       dw CODE_03B016                       ;83AF42|        |03B016;
-                       dw CODE_03B07C                       ;83AF44|        |03B07C;
+                       dw CODE_83AF46                       ;83AF3E|        |83AF46;
+                       dw CODE_83AFAE                       ;83AF40|        |83AFAE;
+                       dw CODE_83B016                       ;83AF42|        |83B016;
+                       dw CODE_83B07C                       ;83AF44|        |83B07C;
+                                                            ;      |        |      ;
+          CODE_83AF46:
                        LDA.B $DF                            ;83AF46|A5DF    |0000DF;
                        SEC                                  ;83AF48|38      |      ;
                        SBC.W #$0006                         ;83AF49|E90600  |      ;
@@ -5073,6 +5091,8 @@ SetDefaultValuesForVariables:
                        TAY                                  ;83AFAA|A8      |      ;
                        JMP.W CODE_83B0E1                    ;83AFAB|4CE1B0  |83B0E1;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83AFAE:
                        LDA.B $DF                            ;83AFAE|A5DF    |0000DF;
                        SEC                                  ;83AFB0|38      |      ;
                        SBC.W #$0006                         ;83AFB1|E90600  |      ;
@@ -5135,6 +5155,8 @@ SetDefaultValuesForVariables:
                        TAY                                  ;83B012|A8      |      ;
                        JMP.W CODE_83B0E1                    ;83B013|4CE1B0  |83B0E1;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83B016:
                        LDA.B $DF                            ;83B016|A5DF    |0000DF;
                        CLC                                  ;83B018|18      |      ;
                        ADC.B $E5                            ;83B019|65E5    |0000E5;
@@ -5197,6 +5219,8 @@ SetDefaultValuesForVariables:
                        TAX                                  ;83B079|AA      |      ;
                        BRA CODE_83B0E1                      ;83B07A|8065    |83B0E1;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83B07C:
                        LDA.B $DF                            ;83B07C|A5DF    |0000DF;
                        SEC                                  ;83B07E|38      |      ;
                        SBC.B $E5                            ;83B07F|E5E5    |0000E5;
@@ -8572,17 +8596,62 @@ SetDefaultValuesForVariables:
                        STA.B $74                            ;83C9B7|8574    |000074;
                        RTL                                  ;83C9B9|6B      |      ;
                                                             ;      |        |      ;
-                       db $A2,$00,$00,$A0,$00,$00,$C2,$30   ;83C9BA|        |      ;
-                       db $5A,$DA,$8A,$22,$95,$C9,$83,$E2   ;83C9C2|        |      ;
-                       db $20,$C2,$10,$FA,$A0,$00,$00,$B7   ;83C9CA|        |8310C2;
-                       db $72,$7A,$29,$01,$F0,$01,$C8,$C2   ;83C9D2|        |00007A;
-                       db $30,$E8,$E0,$0D,$00,$D0,$DF,$C2   ;83C9DA|        |83C9C4;
-                       db $20,$98,$6B,$A2,$00,$00,$A0,$00   ;83C9E2|        |836B98;
-                       db $00,$C2,$30,$5A,$DA,$8A,$22,$A7   ;83C9EA|        |      ;
-                       db $C9,$83,$E2,$20,$C2,$10,$FA,$A0   ;83C9F2|        |      ;
-                       db $00,$00,$B7,$72,$7A,$29,$01,$F0   ;83C9FA|        |      ;
-                       db $01,$C8,$C2,$30,$E8,$E0,$0C,$00   ;83CA02|        |0000C8;
-                       db $D0,$DF,$C2,$20,$98,$6B           ;83CA0A|        |83C9EB;
+                       LDX.W #$0000                         ;83C9BA|A20000  |      ;
+                       LDY.W #$0000                         ;83C9BD|A00000  |      ;
+                                                            ;      |        |      ;
+          CODE_83C9C0:
+                       REP #$30                             ;83C9C0|C230    |      ;
+                       PHY                                  ;83C9C2|5A      |      ;
+                       PHX                                  ;83C9C3|DA      |      ;
+                       TXA                                  ;83C9C4|8A      |      ;
+                       JSL.L CODE_83C995                    ;83C9C5|2295C983|83C995;
+                       SEP #$20                             ;83C9C9|E220    |      ;
+                       REP #$10                             ;83C9CB|C210    |      ;
+                       PLX                                  ;83C9CD|FA      |      ;
+                       LDY.W #$0000                         ;83C9CE|A00000  |      ;
+                       LDA.B [$72],Y                        ;83C9D1|B772    |000072;
+                       PLY                                  ;83C9D3|7A      |      ;
+                       AND.B #$01                           ;83C9D4|2901    |      ;
+                       BEQ CODE_83C9D9                      ;83C9D6|F001    |83C9D9;
+                       INY                                  ;83C9D8|C8      |      ;
+                                                            ;      |        |      ;
+          CODE_83C9D9:
+                       REP #$30                             ;83C9D9|C230    |      ;
+                       INX                                  ;83C9DB|E8      |      ;
+                       CPX.W #$000D                         ;83C9DC|E00D00  |      ;
+                       BNE CODE_83C9C0                      ;83C9DF|D0DF    |83C9C0;
+                       REP #$20                             ;83C9E1|C220    |      ;
+                       TYA                                  ;83C9E3|98      |      ;
+                       RTL                                  ;83C9E4|6B      |      ;
+                                                            ;      |        |      ;
+                       LDX.W #$0000                         ;83C9E5|A20000  |      ;
+                       LDY.W #$0000                         ;83C9E8|A00000  |      ;
+                                                            ;      |        |      ;
+          CODE_83C9EB:
+                       REP #$30                             ;83C9EB|C230    |      ;
+                       PHY                                  ;83C9ED|5A      |      ;
+                       PHX                                  ;83C9EE|DA      |      ;
+                       TXA                                  ;83C9EF|8A      |      ;
+                       JSL.L CODE_83C9A7                    ;83C9F0|22A7C983|83C9A7;
+                       SEP #$20                             ;83C9F4|E220    |      ;
+                       REP #$10                             ;83C9F6|C210    |      ;
+                       PLX                                  ;83C9F8|FA      |      ;
+                       LDY.W #$0000                         ;83C9F9|A00000  |      ;
+                       LDA.B [$72],Y                        ;83C9FC|B772    |000072;
+                       PLY                                  ;83C9FE|7A      |      ;
+                       AND.B #$01                           ;83C9FF|2901    |      ;
+                       BEQ CODE_83CA04                      ;83CA01|F001    |83CA04;
+                       INY                                  ;83CA03|C8      |      ;
+                                                            ;      |        |      ;
+          CODE_83CA04:
+                       REP #$30                             ;83CA04|C230    |      ;
+                       INX                                  ;83CA06|E8      |      ;
+                       CPX.W #$000C                         ;83CA07|E00C00  |      ;
+                       BNE CODE_83C9EB                      ;83CA0A|D0DF    |83C9EB;
+                       REP #$20                             ;83CA0C|C220    |      ;
+                       TYA                                  ;83CA0E|98      |      ;
+                       RTL                                  ;83CA0F|6B      |      ;
+                                                            ;      |        |      ;
                                                             ;      |        |      ;
          Table_83CA10:
                        dw $0018,$0048,$0038,$0058           ;83CA10|        |      ;
@@ -8622,102 +8691,104 @@ SetDefaultValuesForVariables:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_83CAA9:
-                       dw CODE_03CB69                       ;83CAA9|        |03CB69;
-                       dw CODE_03CB69                       ;83CAAB|        |03CB69;
-                       dw CODE_03CB69                       ;83CAAD|        |03CB69;
-                       dw CODE_03CB69                       ;83CAAF|        |03CB69;
-                       dw CODE_03D2E0                       ;83CAB1|        |03D2E0;
-                       dw CODE_03D2E0                       ;83CAB3|        |03D2E0;
-                       dw CODE_03D2E0                       ;83CAB5|        |03D2E0;
-                       dw CODE_03D2E0                       ;83CAB7|        |03D2E0;
-                       dw CODE_03E5DF                       ;83CAB9|        |03E5DF;
-                       dw CODE_03E5F1                       ;83CABB|        |03E5F1;
-                       dw CODE_03E603                       ;83CABD|        |03E603;
-                       dw CODE_03E6B2                       ;83CABF|        |03E6B2;
-                       dw CODE_03E407                       ;83CAC1|        |03E407;
-                       dw CODE_03E407                       ;83CAC3|        |03E407;
-                       dw CODE_03E407                       ;83CAC5|        |03E407;
-                       dw CODE_03E407                       ;83CAC7|        |03E407;
-                       dw CODE_03DC4A                       ;83CAC9|        |03DC4A;
-                       dw CODE_03DC4A                       ;83CACB|        |03DC4A;
-                       dw CODE_03DC4A                       ;83CACD|        |03DC4A;
-                       dw CODE_03DC4A                       ;83CACF|        |03DC4A;
-                       dw CODE_03E661                       ;83CAD1|        |03E661;
-                       dw CODE_03DED3                       ;83CAD3|        |03DED3;
-                       dw CODE_03DED3                       ;83CAD5|        |03DED3;
-                       dw CODE_03DED3                       ;83CAD7|        |03DED3;
-                       dw CODE_03D4D7                       ;83CAD9|        |03D4D7;
-                       dw CODE_03D4D7                       ;83CADB|        |03D4D7;
-                       dw CODE_03D5E7                       ;83CADD|        |03D5E7;
-                       dw CODE_03D613                       ;83CADF|        |03D613;
-                       dw CODE_03D74E                       ;83CAE1|        |03D74E;
-                       dw CODE_03D818                       ;83CAE3|        |03D818;
-                       dw CODE_03DB8F                       ;83CAE5|        |03DB8F;
-                       dw CODE_03DC1E                       ;83CAE7|        |03DC1E;
-                       dw CODE_03D955                       ;83CAE9|        |03D955;
-                       dw CODE_03DA1F                       ;83CAEB|        |03DA1F;
-                       dw CODE_03D844                       ;83CAED|        |03D844;
-                       dw CODE_03D929                       ;83CAEF|        |03D929;
-                       dw CODE_03DAED                       ;83CAF1|        |03DAED;
-                       dw CODE_03DA4B                       ;83CAF3|        |03DA4B;
-                       dw CODE_03E6C4                       ;83CAF5|        |03E6C4;
-                       dw CODE_03DE9B                       ;83CAF7|        |03DE9B;
-                       dw CODE_03E5B4                       ;83CAF9|        |03E5B4;
-                       dw CODE_03E4CB                       ;83CAFB|        |03E4CB;
-                       dw CODE_03DE64                       ;83CAFD|        |03DE64;
-                       dw CODE_03DD95                       ;83CAFF|        |03DD95;
-                       dw CODE_03E5A2                       ;83CB01|        |03E5A2;
-                       dw CODE_03E5CD                       ;83CB03|        |03E5CD;
-                       dw CODE_03E5CD                       ;83CB05|        |03E5CD;
-                       dw CODE_03E5CD                       ;83CB07|        |03E5CD;
-                       dw CODE_03E5CD                       ;83CB09|        |03E5CD;
-                       dw CODE_03E586                       ;83CB0B|        |03E586;
-                       dw CODE_03E586                       ;83CB0D|        |03E586;
-                       dw CODE_03E586                       ;83CB0F|        |03E586;
-                       dw CODE_03E586                       ;83CB11|        |03E586;
-                       dw CODE_03E586                       ;83CB13|        |03E586;
-                       dw CODE_03E586                       ;83CB15|        |03E586;
-                       dw CODE_03E586                       ;83CB17|        |03E586;
-                       dw CODE_03E586                       ;83CB19|        |03E586;
-                       dw CODE_03E632                       ;83CB1B|        |03E632;
-                       dw CODE_03E690                       ;83CB1D|        |03E690;
-                       dw CODE_03E74C                       ;83CB1F|        |03E74C;
-                       dw CODE_03E76D                       ;83CB21|        |03E76D;
-                       dw CODE_03EBA6                       ;83CB23|        |03EBA6;
-                       dw CODE_03E74C                       ;83CB25|        |03E74C;
-                       dw CODE_03E74C                       ;83CB27|        |03E74C;
-                       dw CODE_03E74C                       ;83CB29|        |03E74C;
-                       dw CODE_03E74C                       ;83CB2B|        |03E74C;
-                       dw CODE_03E74C                       ;83CB2D|        |03E74C;
-                       dw CODE_03E74C                       ;83CB2F|        |03E74C;
-                       dw CODE_03E74C                       ;83CB31|        |03E74C;
-                       dw CODE_03E74C                       ;83CB33|        |03E74C;
-                       dw CODE_03E74C                       ;83CB35|        |03E74C;
-                       dw CODE_03E74C                       ;83CB37|        |03E74C;
-                       dw CODE_03E74C                       ;83CB39|        |03E74C;
-                       dw CODE_03E74C                       ;83CB3B|        |03E74C;
-                       dw CODE_03E74C                       ;83CB3D|        |03E74C;
-                       dw CODE_03EBA6                       ;83CB3F|        |03EBA6;
-                       dw CODE_03E74C                       ;83CB41|        |03E74C;
-                       dw CODE_03E74C                       ;83CB43|        |03E74C;
-                       dw CODE_03E74C                       ;83CB45|        |03E74C;
-                       dw CODE_03E74C                       ;83CB47|        |03E74C;
-                       dw CODE_03E74C                       ;83CB49|        |03E74C;
-                       dw CODE_03E74C                       ;83CB4B|        |03E74C;
-                       dw CODE_03E74C                       ;83CB4D|        |03E74C;
-                       dw CODE_03E74C                       ;83CB4F|        |03E74C;
-                       dw CODE_03E74C                       ;83CB51|        |03E74C;
-                       dw CODE_03E74C                       ;83CB53|        |03E74C;
-                       dw CODE_03E74C                       ;83CB55|        |03E74C;
-                       dw CODE_03E74C                       ;83CB57|        |03E74C;
-                       dw CODE_03E74C                       ;83CB59|        |03E74C;
-                       dw CODE_03E74C                       ;83CB5B|        |03E74C;
-                       dw CODE_03E74C                       ;83CB5D|        |03E74C;
-                       dw CODE_03E74C                       ;83CB5F|        |03E74C;
-                       dw CODE_03E74C                       ;83CB61|        |03E74C;
-                       dw CODE_03E74C                       ;83CB63|        |03E74C;
-                       dw CODE_03E74C                       ;83CB65|        |03E74C;
-                       dw CODE_03E74C                       ;83CB67|        |03E74C;
+                       dw CODE_83CB69                       ;83CAA9|        |83CB69;
+                       dw CODE_83CB69                       ;83CAAB|        |83CB69;
+                       dw CODE_83CB69                       ;83CAAD|        |83CB69;
+                       dw CODE_83CB69                       ;83CAAF|        |83CB69;
+                       dw CODE_83D2E0                       ;83CAB1|        |83D2E0;
+                       dw CODE_83D2E0                       ;83CAB3|        |83D2E0;
+                       dw CODE_83D2E0                       ;83CAB5|        |83D2E0;
+                       dw CODE_83D2E0                       ;83CAB7|        |83D2E0;
+                       dw CODE_83E5DF                       ;83CAB9|        |83E5DF;
+                       dw CODE_83E5F1                       ;83CABB|        |83E5F1;
+                       dw CODE_83E603                       ;83CABD|        |83E603;
+                       dw CODE_83E6B2                       ;83CABF|        |83E6B2;
+                       dw CODE_83E407                       ;83CAC1|        |83E407;
+                       dw CODE_83E407                       ;83CAC3|        |83E407;
+                       dw CODE_83E407                       ;83CAC5|        |83E407;
+                       dw CODE_83E407                       ;83CAC7|        |83E407;
+                       dw CODE_83DC4A                       ;83CAC9|        |83DC4A;
+                       dw CODE_83DC4A                       ;83CACB|        |83DC4A;
+                       dw CODE_83DC4A                       ;83CACD|        |83DC4A;
+                       dw CODE_83DC4A                       ;83CACF|        |83DC4A;
+                       dw CODE_83E661                       ;83CAD1|        |83E661;
+                       dw CODE_83DED3                       ;83CAD3|        |83DED3;
+                       dw CODE_83DED3                       ;83CAD5|        |83DED3;
+                       dw CODE_83DED3                       ;83CAD7|        |83DED3;
+                       dw CODE_83D4D7                       ;83CAD9|        |83D4D7;
+                       dw CODE_83D4D7                       ;83CADB|        |83D4D7;
+                       dw CODE_83D5E7                       ;83CADD|        |83D5E7;
+                       dw CODE_83D613                       ;83CADF|        |83D613;
+                       dw CODE_83D74E                       ;83CAE1|        |83D74E;
+                       dw CODE_83D818                       ;83CAE3|        |83D818;
+                       dw CODE_83DB8F                       ;83CAE5|        |83DB8F;
+                       dw CODE_83DC1E                       ;83CAE7|        |83DC1E;
+                       dw CODE_83D955                       ;83CAE9|        |83D955;
+                       dw CODE_83DA1F                       ;83CAEB|        |83DA1F;
+                       dw CODE_83D844                       ;83CAED|        |83D844;
+                       dw CODE_83D929                       ;83CAEF|        |83D929;
+                       dw CODE_83DAED                       ;83CAF1|        |83DAED;
+                       dw CODE_83DA4B                       ;83CAF3|        |83DA4B;
+                       dw CODE_83E6C4                       ;83CAF5|        |83E6C4;
+                       dw CODE_83DE9B                       ;83CAF7|        |83DE9B;
+                       dw CODE_83E5B4                       ;83CAF9|        |83E5B4;
+                       dw CODE_83E4CB                       ;83CAFB|        |83E4CB;
+                       dw CODE_83DE64                       ;83CAFD|        |83DE64;
+                       dw CODE_83DD95                       ;83CAFF|        |83DD95;
+                       dw CODE_83E5A2                       ;83CB01|        |83E5A2;
+                       dw CODE_83E5CD                       ;83CB03|        |83E5CD;
+                       dw CODE_83E5CD                       ;83CB05|        |83E5CD;
+                       dw CODE_83E5CD                       ;83CB07|        |83E5CD;
+                       dw CODE_83E5CD                       ;83CB09|        |83E5CD;
+                       dw CODE_83E586                       ;83CB0B|        |83E586;
+                       dw CODE_83E586                       ;83CB0D|        |83E586;
+                       dw CODE_83E586                       ;83CB0F|        |83E586;
+                       dw CODE_83E586                       ;83CB11|        |83E586;
+                       dw CODE_83E586                       ;83CB13|        |83E586;
+                       dw CODE_83E586                       ;83CB15|        |83E586;
+                       dw CODE_83E586                       ;83CB17|        |83E586;
+                       dw CODE_83E586                       ;83CB19|        |83E586;
+                       dw CODE_83E632                       ;83CB1B|        |83E632;
+                       dw CODE_83E690                       ;83CB1D|        |83E690;
+                       dw CODE_83E74C                       ;83CB1F|        |83E74C;
+                       dw CODE_83E76D                       ;83CB21|        |83E76D;
+                       dw CODE_83EBA6                       ;83CB23|        |83EBA6;
+                       dw CODE_83E74C                       ;83CB25|        |83E74C;
+                       dw CODE_83E74C                       ;83CB27|        |83E74C;
+                       dw CODE_83E74C                       ;83CB29|        |83E74C;
+                       dw CODE_83E74C                       ;83CB2B|        |83E74C;
+                       dw CODE_83E74C                       ;83CB2D|        |83E74C;
+                       dw CODE_83E74C                       ;83CB2F|        |83E74C;
+                       dw CODE_83E74C                       ;83CB31|        |83E74C;
+                       dw CODE_83E74C                       ;83CB33|        |83E74C;
+                       dw CODE_83E74C                       ;83CB35|        |83E74C;
+                       dw CODE_83E74C                       ;83CB37|        |83E74C;
+                       dw CODE_83E74C                       ;83CB39|        |83E74C;
+                       dw CODE_83E74C                       ;83CB3B|        |83E74C;
+                       dw CODE_83E74C                       ;83CB3D|        |83E74C;
+                       dw CODE_83EBA6                       ;83CB3F|        |83EBA6;
+                       dw CODE_83E74C                       ;83CB41|        |83E74C;
+                       dw CODE_83E74C                       ;83CB43|        |83E74C;
+                       dw CODE_83E74C                       ;83CB45|        |83E74C;
+                       dw CODE_83E74C                       ;83CB47|        |83E74C;
+                       dw CODE_83E74C                       ;83CB49|        |83E74C;
+                       dw CODE_83E74C                       ;83CB4B|        |83E74C;
+                       dw CODE_83E74C                       ;83CB4D|        |83E74C;
+                       dw CODE_83E74C                       ;83CB4F|        |83E74C;
+                       dw CODE_83E74C                       ;83CB51|        |83E74C;
+                       dw CODE_83E74C                       ;83CB53|        |83E74C;
+                       dw CODE_83E74C                       ;83CB55|        |83E74C;
+                       dw CODE_83E74C                       ;83CB57|        |83E74C;
+                       dw CODE_83E74C                       ;83CB59|        |83E74C;
+                       dw CODE_83E74C                       ;83CB5B|        |83E74C;
+                       dw CODE_83E74C                       ;83CB5D|        |83E74C;
+                       dw CODE_83E74C                       ;83CB5F|        |83E74C;
+                       dw CODE_83E74C                       ;83CB61|        |83E74C;
+                       dw CODE_83E74C                       ;83CB63|        |83E74C;
+                       dw CODE_83E74C                       ;83CB65|        |83E74C;
+                       dw CODE_83E74C                       ;83CB67|        |83E74C;
+                                                            ;      |        |      ;
+          CODE_83CB69:
                        REP #$30                             ;83CB69|C230    |      ;
                        LDA.L $7F1F6E                        ;83CB6B|AF6E1F7F|7F1F6E;
                        AND.W #$0002                         ;83CB6F|290200  |      ;
@@ -9541,6 +9612,8 @@ SetDefaultValuesForVariables:
           CODE_83D2DF:
                        RTS                                  ;83D2DF|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D2E0:
                        REP #$30                             ;83D2E0|C230    |      ;
                        LDA.L $7F1F60                        ;83D2E2|AF601F7F|7F1F60;
                        AND.W #$0400                         ;83D2E6|290004  |      ;
@@ -9779,6 +9852,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D4D2|22978084|848097;
                        RTS                                  ;83D4D6|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D4D7:
                        REP #$30                             ;83D4D7|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D4D9|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83D4DD|290100  |      ;
@@ -9913,6 +9988,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D5E2|22978084|848097;
                        RTS                                  ;83D5E6|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D5E7:
                        REP #$30                             ;83D5E7|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D5E9|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83D5ED|290100  |      ;
@@ -9936,6 +10013,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D60E|22978084|848097;
                        RTS                                  ;83D612|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D613:
                        SEP #$20                             ;83D613|E220    |      ;
                        REP #$10                             ;83D615|C210    |      ;
                        LDA.L CurrentSeasonID                ;83D617|AF191F7F|7F1F19;
@@ -10097,6 +10176,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D749|22978084|848097;
                        RTS                                  ;83D74D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D74E:
                        REP #$30                             ;83D74E|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D750|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83D754|290400  |      ;
@@ -10198,6 +10279,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D813|22978084|848097;
                        RTS                                  ;83D817|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D818:
                        REP #$30                             ;83D818|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D81A|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83D81E|290400  |      ;
@@ -10221,6 +10304,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D83F|22978084|848097;
                        RTS                                  ;83D843|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D844:
                        REP #$30                             ;83D844|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D846|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83D84A|290200  |      ;
@@ -10335,6 +10420,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D924|22978084|848097;
                        RTS                                  ;83D928|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D929:
                        REP #$30                             ;83D929|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D92B|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83D92F|290200  |      ;
@@ -10358,6 +10445,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83D950|22978084|848097;
                        RTS                                  ;83D954|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83D955:
                        REP #$30                             ;83D955|C230    |      ;
                        LDA.L MarriedGirlID                  ;83D957|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83D95B|290800  |      ;
@@ -10459,6 +10548,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DA1A|22978084|848097;
                        RTS                                  ;83DA1E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DA1F:
                        REP #$30                             ;83DA1F|C230    |      ;
                        LDA.L MarriedGirlID                  ;83DA21|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83DA25|290800  |      ;
@@ -10482,6 +10573,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DA46|22978084|848097;
                        RTS                                  ;83DA4A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DA4B:
                        REP #$30                             ;83DA4B|C230    |      ;
                        LDA.L $7F1F68                        ;83DA4D|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83DA51|290100  |      ;
@@ -10562,6 +10655,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DAE8|22978084|848097;
                        RTS                                  ;83DAEC|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DAED:
                        REP #$30                             ;83DAED|C230    |      ;
                        LDA.L $7F1F68                        ;83DAEF|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83DAF3|290100  |      ;
@@ -10642,6 +10737,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DB8A|22978084|848097;
                        RTS                                  ;83DB8E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DB8F:
                        REP #$30                             ;83DB8F|C230    |      ;
                        LDA.L MarriedGirlID                  ;83DB91|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83DB95|291000  |      ;
@@ -10708,6 +10805,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DC19|22978084|848097;
                        RTS                                  ;83DC1D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DC1E:
                        REP #$30                             ;83DC1E|C230    |      ;
                        LDA.L MarriedGirlID                  ;83DC20|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83DC24|291000  |      ;
@@ -10731,6 +10830,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DC45|22978084|848097;
                        RTS                                  ;83DC49|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DC4A:
                        REP #$30                             ;83DC4A|C230    |      ;
                        LDA.L $7F1F68                        ;83DC4C|AF681F7F|7F1F68;
                        AND.W #$0004                         ;83DC50|290400  |      ;
@@ -10886,6 +10987,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DD90|22978084|848097;
                        RTS                                  ;83DD94|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DD95:
                        REP #$30                             ;83DD95|C230    |      ;
                        LDA.L $7F1F6A                        ;83DD97|AF6A1F7F|7F1F6A;
                        AND.W #$2000                         ;83DD9B|290020  |      ;
@@ -10982,6 +11085,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83DE5F|22978084|848097;
                        RTS                                  ;83DE63|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DE64:
                        REP #$30                             ;83DE64|C230    |      ;
                        LDA.L $7F1F68                        ;83DE66|AF681F7F|7F1F68;
                        AND.W #$2000                         ;83DE6A|290020  |      ;
@@ -11010,6 +11115,8 @@ SetDefaultValuesForVariables:
           CODE_83DE9A:
                        RTS                                  ;83DE9A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DE9B:
                        REP #$20                             ;83DE9B|C220    |      ;
                        LDA.L $7F1F64                        ;83DE9D|AF641F7F|7F1F64;
                        AND.W #$0008                         ;83DEA1|290800  |      ;
@@ -11035,6 +11142,8 @@ SetDefaultValuesForVariables:
           CODE_83DED2:
                        RTS                                  ;83DED2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83DED3:
                        SEP #$20                             ;83DED3|E220    |      ;
                        REP #$10                             ;83DED5|C210    |      ;
                        LDA.L CurrentYearID                  ;83DED7|AF181F7F|7F1F18;
@@ -11637,6 +11746,8 @@ SetDefaultValuesForVariables:
           CODE_83E406:
                        RTS                                  ;83E406|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E407:
                        REP #$30                             ;83E407|C230    |      ;
                        LDA.L $7F1F5C                        ;83E409|AF5C1F7F|7F1F5C;
                        AND.W #$FF7F                         ;83E40D|297FFF  |      ;
@@ -11723,6 +11834,8 @@ SetDefaultValuesForVariables:
           CODE_83E4CA:
                        RTS                                  ;83E4CA|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E4CB:
                        REP #$30                             ;83E4CB|C230    |      ;
                        LDA.L $7F1F6A                        ;83E4CD|AF6A1F7F|7F1F6A;
                        AND.W #$0040                         ;83E4D1|294000  |      ;
@@ -11810,6 +11923,8 @@ SetDefaultValuesForVariables:
           CODE_83E585:
                        RTS                                  ;83E585|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E586:
                        REP #$30                             ;83E586|C230    |      ;
                        LDA.L $7F1F68                        ;83E588|AF681F7F|7F1F68;
                        AND.W #$0200                         ;83E58C|290002  |      ;
@@ -11825,6 +11940,8 @@ SetDefaultValuesForVariables:
           CODE_83E5A1:
                        RTS                                  ;83E5A1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E5A2:
                        REP #$30                             ;83E5A2|C230    |      ;
                        REP #$30                             ;83E5A4|C230    |      ;
                        LDA.W #$0000                         ;83E5A6|A90000  |      ;
@@ -11833,6 +11950,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83E5AF|22978084|848097;
                        RTS                                  ;83E5B3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E5B4:
                        REP #$30                             ;83E5B4|C230    |      ;
                        LDA.L $7F1F6A                        ;83E5B6|AF6A1F7F|7F1F6A;
                        AND.W #$4000                         ;83E5BA|290040  |      ;
@@ -11845,6 +11964,8 @@ SetDefaultValuesForVariables:
           CODE_83E5CC:
                        RTS                                  ;83E5CC|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E5CD:
                        REP #$30                             ;83E5CD|C230    |      ;
                        REP #$30                             ;83E5CF|C230    |      ;
                        LDA.W #$0000                         ;83E5D1|A90000  |      ;
@@ -11853,6 +11974,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83E5DA|22978084|848097;
                        RTS                                  ;83E5DE|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E5DF:
                        REP #$30                             ;83E5DF|C230    |      ;
                        REP #$30                             ;83E5E1|C230    |      ;
                        LDA.W #$0000                         ;83E5E3|A90000  |      ;
@@ -11861,6 +11984,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83E5EC|22978084|848097;
                        RTS                                  ;83E5F0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E5F1:
                        REP #$30                             ;83E5F1|C230    |      ;
                        REP #$30                             ;83E5F3|C230    |      ;
                        LDA.W #$0000                         ;83E5F5|A90000  |      ;
@@ -11869,6 +11994,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83E5FE|22978084|848097;
                        RTS                                  ;83E602|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E603:
                        SEP #$20                             ;83E603|E220    |      ;
                        REP #$10                             ;83E605|C210    |      ;
                        LDA.L CurrentSeasonID                ;83E607|AF191F7F|7F1F19;
@@ -11890,6 +12017,8 @@ SetDefaultValuesForVariables:
           CODE_83E631:
                        RTS                                  ;83E631|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E632:
                        SEP #$20                             ;83E632|E220    |      ;
                        REP #$10                             ;83E634|C210    |      ;
                        LDA.L CurrentSeasonID                ;83E636|AF191F7F|7F1F19;
@@ -11911,6 +12040,8 @@ SetDefaultValuesForVariables:
           CODE_83E660:
                        RTS                                  ;83E660|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E661:
                        SEP #$20                             ;83E661|E220    |      ;
                        REP #$10                             ;83E663|C210    |      ;
                        LDA.L CurrentSeasonID                ;83E665|AF191F7F|7F1F19;
@@ -11932,6 +12063,8 @@ SetDefaultValuesForVariables:
           CODE_83E68F:
                        RTS                                  ;83E68F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E690:
                        SEP #$20                             ;83E690|E220    |      ;
                        REP #$10                             ;83E692|C210    |      ;
                        LDA.L CurrentSeasonID                ;83E694|AF191F7F|7F1F19;
@@ -11948,6 +12081,8 @@ SetDefaultValuesForVariables:
           CODE_83E6B1:
                        RTS                                  ;83E6B1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E6B2:
                        REP #$30                             ;83E6B2|C230    |      ;
                        REP #$30                             ;83E6B4|C230    |      ;
                        LDA.W #$0000                         ;83E6B6|A90000  |      ;
@@ -11956,6 +12091,8 @@ SetDefaultValuesForVariables:
                        JSL.L CODE_848097                    ;83E6BF|22978084|848097;
                        RTS                                  ;83E6C3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E6C4:
                        REP #$30                             ;83E6C4|C230    |      ;
                        LDA.L $7F1F6E                        ;83E6C6|AF6E1F7F|7F1F6E;
                        AND.W #$0002                         ;83E6CA|290200  |      ;
@@ -12018,6 +12155,8 @@ SetDefaultValuesForVariables:
           CODE_83E74B:
                        RTS                                  ;83E74B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83E74C:
                        RTS                                  ;83E74C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12026,6 +12165,8 @@ SetDefaultValuesForVariables:
                        dw $0010,$0020,$0040,$0080           ;83E755|        |      ;
                        dw $0100,$0200,$0400,$0800           ;83E75D|        |      ;
                        dw $1000,$2000,$4000,$8000           ;83E765|        |      ;
+                                                            ;      |        |      ;
+          CODE_83E76D:
                        SEP #$20                             ;83E76D|E220    |      ;
                        REP #$10                             ;83E76F|C210    |      ;
                        SEP #$20                             ;83E771|E220    |      ;
@@ -12625,6 +12766,8 @@ SetDefaultValuesForVariables:
           CODE_83EBA5:
                        RTS                                  ;83EBA5|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_83EBA6:
                        SEP #$20                             ;83EBA6|E220    |      ;
                        REP #$10                             ;83EBA8|C210    |      ;
                        SEP #$20                             ;83EBAA|E220    |      ;

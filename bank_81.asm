@@ -76,6 +76,8 @@
           CODE_818099:
                        RTL                                  ;818099|6B      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81809A:
                        SEP #$20                             ;81809A|E220    |      ;
                        REP #$10                             ;81809C|C210    |      ;
                        LDA.B #$00                           ;81809E|A900    |      ;
@@ -3832,8 +3834,8 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_81A58B:
-                       dw EMPTY_01FFFF                      ;81A58B|        |01FFFF;
-                       dw CODE_01809A                       ;81A58D|        |01809A;
+                       dw EMPTY_81FFFF                      ;81A58B|        |81FFFF;
+                       dw CODE_81809A                       ;81A58D|        |81809A;
                                                             ;      |        |      ;
           CODE_81A58F:
                        SEP #$20                             ;81A58F|E220    |      ;
@@ -4549,102 +4551,104 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_81A9F6:
-                       dw CODE_01AAB6                       ;81A9F6|        |01AAB6;
-                       dw CODE_01AAB6                       ;81A9F8|        |01AAB6;
-                       dw CODE_01AAB6                       ;81A9FA|        |01AAB6;
-                       dw CODE_01AAB6                       ;81A9FC|        |01AAB6;
-                       dw CODE_01AC71                       ;81A9FE|        |01AC71;
-                       dw CODE_01AC71                       ;81AA00|        |01AC71;
-                       dw CODE_01AC71                       ;81AA02|        |01AC71;
-                       dw CODE_01AC71                       ;81AA04|        |01AC71;
-                       dw CODE_01AC78                       ;81AA06|        |01AC78;
-                       dw CODE_01AC79                       ;81AA08|        |01AC79;
-                       dw CODE_01AC7A                       ;81AA0A|        |01AC7A;
-                       dw CODE_01AC7B                       ;81AA0C|        |01AC7B;
-                       dw CODE_01AC7C                       ;81AA0E|        |01AC7C;
-                       dw CODE_01AC7D                       ;81AA10|        |01AC7D;
-                       dw CODE_01AC7E                       ;81AA12|        |01AC7E;
-                       dw CODE_01AC7F                       ;81AA14|        |01AC7F;
-                       dw CODE_01AC80                       ;81AA16|        |01AC80;
-                       dw CODE_01AC80                       ;81AA18|        |01AC80;
-                       dw CODE_01AC80                       ;81AA1A|        |01AC80;
-                       dw CODE_01AC80                       ;81AA1C|        |01AC80;
-                       dw CODE_01ACCB                       ;81AA1E|        |01ACCB;
-                       dw CODE_01ACCC                       ;81AA20|        |01ACCC;
-                       dw CODE_01AD23                       ;81AA22|        |01AD23;
-                       dw CODE_01AD7A                       ;81AA24|        |01AD7A;
-                       dw CODE_01ADD1                       ;81AA26|        |01ADD1;
-                       dw CODE_01ADD2                       ;81AA28|        |01ADD2;
-                       dw CODE_01ADD3                       ;81AA2A|        |01ADD3;
-                       dw CODE_01ADD4                       ;81AA2C|        |01ADD4;
-                       dw CODE_01ADD5                       ;81AA2E|        |01ADD5;
-                       dw CODE_01AE6A                       ;81AA30|        |01AE6A;
-                       dw CODE_01AE6B                       ;81AA32|        |01AE6B;
-                       dw CODE_01AE6C                       ;81AA34|        |01AE6C;
-                       dw CODE_01AE6D                       ;81AA36|        |01AE6D;
-                       dw CODE_01AE6E                       ;81AA38|        |01AE6E;
-                       dw CODE_01AE6F                       ;81AA3A|        |01AE6F;
-                       dw CODE_01AFBF                       ;81AA3C|        |01AFBF;
-                       dw CODE_01AFC0                       ;81AA3E|        |01AFC0;
-                       dw CODE_01B063                       ;81AA40|        |01B063;
-                       dw CODE_01B064                       ;81AA42|        |01B064;
-                       dw CODE_01B0A8                       ;81AA44|        |01B0A8;
-                       dw CODE_01B121                       ;81AA46|        |01B121;
-                       dw CODE_01B1CF                       ;81AA48|        |01B1CF;
-                       dw CODE_01B21E                       ;81AA4A|        |01B21E;
-                       dw CODE_01B261                       ;81AA4C|        |01B261;
-                       dw CODE_01B262                       ;81AA4E|        |01B262;
-                       dw CODE_01B263                       ;81AA50|        |01B263;
-                       dw CODE_01B264                       ;81AA52|        |01B264;
-                       dw CODE_01B265                       ;81AA54|        |01B265;
-                       dw CODE_01B266                       ;81AA56|        |01B266;
-                       dw CODE_01B267                       ;81AA58|        |01B267;
-                       dw CODE_01B268                       ;81AA5A|        |01B268;
-                       dw CODE_01B269                       ;81AA5C|        |01B269;
-                       dw CODE_01B26A                       ;81AA5E|        |01B26A;
-                       dw CODE_01B26B                       ;81AA60|        |01B26B;
-                       dw CODE_01B26C                       ;81AA62|        |01B26C;
-                       dw CODE_01B26D                       ;81AA64|        |01B26D;
-                       dw CODE_01B293                       ;81AA66|        |01B293;
-                       dw CODE_01B294                       ;81AA68|        |01B294;
-                       dw CODE_01B295                       ;81AA6A|        |01B295;
-                       dw CODE_01B296                       ;81AA6C|        |01B296;
-                       dw CODE_01B297                       ;81AA6E|        |01B297;
-                       dw CODE_01B298                       ;81AA70|        |01B298;
-                       dw CODE_01B299                       ;81AA72|        |01B299;
-                       dw CODE_01B29A                       ;81AA74|        |01B29A;
-                       dw CODE_01B29B                       ;81AA76|        |01B29B;
-                       dw CODE_01B29C                       ;81AA78|        |01B29C;
-                       dw CODE_01B29D                       ;81AA7A|        |01B29D;
-                       dw CODE_01B29E                       ;81AA7C|        |01B29E;
-                       dw CODE_01B29F                       ;81AA7E|        |01B29F;
-                       dw CODE_01B2A0                       ;81AA80|        |01B2A0;
-                       dw CODE_01B2A1                       ;81AA82|        |01B2A1;
-                       dw CODE_01B2A2                       ;81AA84|        |01B2A2;
-                       dw CODE_01B2A3                       ;81AA86|        |01B2A3;
-                       dw CODE_01B2A4                       ;81AA88|        |01B2A4;
-                       dw CODE_01B2A5                       ;81AA8A|        |01B2A5;
-                       dw CODE_01B2A6                       ;81AA8C|        |01B2A6;
-                       dw CODE_01B2A7                       ;81AA8E|        |01B2A7;
-                       dw CODE_01B2A8                       ;81AA90|        |01B2A8;
-                       dw CODE_01B2A9                       ;81AA92|        |01B2A9;
-                       dw CODE_01B2AA                       ;81AA94|        |01B2AA;
-                       dw CODE_01B2AB                       ;81AA96|        |01B2AB;
-                       dw CODE_01B2AC                       ;81AA98|        |01B2AC;
-                       dw CODE_01B2AD                       ;81AA9A|        |01B2AD;
-                       dw CODE_01B2AE                       ;81AA9C|        |01B2AE;
-                       dw CODE_01B2AF                       ;81AA9E|        |01B2AF;
-                       dw CODE_01B2B0                       ;81AAA0|        |01B2B0;
-                       dw CODE_01B2B1                       ;81AAA2|        |01B2B1;
-                       dw CODE_01B2B2                       ;81AAA4|        |01B2B2;
-                       dw CODE_01B2B3                       ;81AAA6|        |01B2B3;
-                       dw CODE_01B2B4                       ;81AAA8|        |01B2B4;
-                       dw CODE_01B2B5                       ;81AAAA|        |01B2B5;
-                       dw CODE_01B2B6                       ;81AAAC|        |01B2B6;
-                       dw CODE_01B2B7                       ;81AAAE|        |01B2B7;
-                       dw CODE_01B2B8                       ;81AAB0|        |01B2B8;
-                       dw CODE_01B2B9                       ;81AAB2|        |01B2B9;
-                       dw CODE_01B2BA                       ;81AAB4|        |01B2BA;
+                       dw CODE_81AAB6                       ;81A9F6|        |81AAB6;
+                       dw CODE_81AAB6                       ;81A9F8|        |81AAB6;
+                       dw CODE_81AAB6                       ;81A9FA|        |81AAB6;
+                       dw CODE_81AAB6                       ;81A9FC|        |81AAB6;
+                       dw CODE_81AC71                       ;81A9FE|        |81AC71;
+                       dw CODE_81AC71                       ;81AA00|        |81AC71;
+                       dw CODE_81AC71                       ;81AA02|        |81AC71;
+                       dw CODE_81AC71                       ;81AA04|        |81AC71;
+                       dw CODE_81AC78                       ;81AA06|        |81AC78;
+                       dw CODE_81AC79                       ;81AA08|        |81AC79;
+                       dw CODE_81AC7A                       ;81AA0A|        |81AC7A;
+                       dw CODE_81AC7B                       ;81AA0C|        |81AC7B;
+                       dw CODE_81AC7C                       ;81AA0E|        |81AC7C;
+                       dw CODE_81AC7D                       ;81AA10|        |81AC7D;
+                       dw CODE_81AC7E                       ;81AA12|        |81AC7E;
+                       dw CODE_81AC7F                       ;81AA14|        |81AC7F;
+                       dw CODE_81AC80                       ;81AA16|        |81AC80;
+                       dw CODE_81AC80                       ;81AA18|        |81AC80;
+                       dw CODE_81AC80                       ;81AA1A|        |81AC80;
+                       dw CODE_81AC80                       ;81AA1C|        |81AC80;
+                       dw CODE_81ACCB                       ;81AA1E|        |81ACCB;
+                       dw CODE_81ACCC                       ;81AA20|        |81ACCC;
+                       dw CODE_81AD23                       ;81AA22|        |81AD23;
+                       dw CODE_81AD7A                       ;81AA24|        |81AD7A;
+                       dw CODE_81ADD1                       ;81AA26|        |81ADD1;
+                       dw CODE_81ADD2                       ;81AA28|        |81ADD2;
+                       dw CODE_81ADD3                       ;81AA2A|        |81ADD3;
+                       dw CODE_81ADD4                       ;81AA2C|        |81ADD4;
+                       dw CODE_81ADD5                       ;81AA2E|        |81ADD5;
+                       dw CODE_81AE6A                       ;81AA30|        |81AE6A;
+                       dw CODE_81AE6B                       ;81AA32|        |81AE6B;
+                       dw CODE_81AE6C                       ;81AA34|        |81AE6C;
+                       dw CODE_81AE6D                       ;81AA36|        |81AE6D;
+                       dw CODE_81AE6E                       ;81AA38|        |81AE6E;
+                       dw CODE_81AE6F                       ;81AA3A|        |81AE6F;
+                       dw CODE_81AFBF                       ;81AA3C|        |81AFBF;
+                       dw CODE_81AFC0                       ;81AA3E|        |81AFC0;
+                       dw CODE_81B063                       ;81AA40|        |81B063;
+                       dw CODE_81B064                       ;81AA42|        |81B064;
+                       dw CODE_81B0A8                       ;81AA44|        |81B0A8;
+                       dw CODE_81B121                       ;81AA46|        |81B121;
+                       dw CODE_81B1CF                       ;81AA48|        |81B1CF;
+                       dw CODE_81B21E                       ;81AA4A|        |81B21E;
+                       dw CODE_81B261                       ;81AA4C|        |81B261;
+                       dw CODE_81B262                       ;81AA4E|        |81B262;
+                       dw CODE_81B263                       ;81AA50|        |81B263;
+                       dw CODE_81B264                       ;81AA52|        |81B264;
+                       dw CODE_81B265                       ;81AA54|        |81B265;
+                       dw CODE_81B266                       ;81AA56|        |81B266;
+                       dw CODE_81B267                       ;81AA58|        |81B267;
+                       dw CODE_81B268                       ;81AA5A|        |81B268;
+                       dw CODE_81B269                       ;81AA5C|        |81B269;
+                       dw CODE_81B26A                       ;81AA5E|        |81B26A;
+                       dw CODE_81B26B                       ;81AA60|        |81B26B;
+                       dw CODE_81B26C                       ;81AA62|        |81B26C;
+                       dw CODE_81B26D                       ;81AA64|        |81B26D;
+                       dw CODE_81B293                       ;81AA66|        |81B293;
+                       dw CODE_81B294                       ;81AA68|        |81B294;
+                       dw CODE_81B295                       ;81AA6A|        |81B295;
+                       dw CODE_81B296                       ;81AA6C|        |81B296;
+                       dw CODE_81B297                       ;81AA6E|        |81B297;
+                       dw CODE_81B298                       ;81AA70|        |81B298;
+                       dw CODE_81B299                       ;81AA72|        |81B299;
+                       dw CODE_81B29A                       ;81AA74|        |81B29A;
+                       dw CODE_81B29B                       ;81AA76|        |81B29B;
+                       dw CODE_81B29C                       ;81AA78|        |81B29C;
+                       dw CODE_81B29D                       ;81AA7A|        |81B29D;
+                       dw CODE_81B29E                       ;81AA7C|        |81B29E;
+                       dw CODE_81B29F                       ;81AA7E|        |81B29F;
+                       dw CODE_81B2A0                       ;81AA80|        |81B2A0;
+                       dw CODE_81B2A1                       ;81AA82|        |81B2A1;
+                       dw CODE_81B2A2                       ;81AA84|        |81B2A2;
+                       dw CODE_81B2A3                       ;81AA86|        |81B2A3;
+                       dw CODE_81B2A4                       ;81AA88|        |81B2A4;
+                       dw CODE_81B2A5                       ;81AA8A|        |81B2A5;
+                       dw CODE_81B2A6                       ;81AA8C|        |81B2A6;
+                       dw CODE_81B2A7                       ;81AA8E|        |81B2A7;
+                       dw CODE_81B2A8                       ;81AA90|        |81B2A8;
+                       dw CODE_81B2A9                       ;81AA92|        |81B2A9;
+                       dw CODE_81B2AA                       ;81AA94|        |81B2AA;
+                       dw CODE_81B2AB                       ;81AA96|        |81B2AB;
+                       dw CODE_81B2AC                       ;81AA98|        |81B2AC;
+                       dw CODE_81B2AD                       ;81AA9A|        |81B2AD;
+                       dw CODE_81B2AE                       ;81AA9C|        |81B2AE;
+                       dw CODE_81B2AF                       ;81AA9E|        |81B2AF;
+                       dw CODE_81B2B0                       ;81AAA0|        |81B2B0;
+                       dw CODE_81B2B1                       ;81AAA2|        |81B2B1;
+                       dw CODE_81B2B2                       ;81AAA4|        |81B2B2;
+                       dw CODE_81B2B3                       ;81AAA6|        |81B2B3;
+                       dw CODE_81B2B4                       ;81AAA8|        |81B2B4;
+                       dw CODE_81B2B5                       ;81AAAA|        |81B2B5;
+                       dw CODE_81B2B6                       ;81AAAC|        |81B2B6;
+                       dw CODE_81B2B7                       ;81AAAE|        |81B2B7;
+                       dw CODE_81B2B8                       ;81AAB0|        |81B2B8;
+                       dw CODE_81B2B9                       ;81AAB2|        |81B2B9;
+                       dw CODE_81B2BA                       ;81AAB4|        |81B2BA;
+                                                            ;      |        |      ;
+          CODE_81AAB6:
                        REP #$30                             ;81AAB6|C230    |      ;
                        LDA.L $7F1F64                        ;81AAB8|AF641F7F|7F1F64;
                        AND.W #$0002                         ;81AABC|290200  |      ;
@@ -4863,6 +4867,8 @@
                        dd $005001C0,$00600180               ;81AC59|        |      ;
                        dd $00600190,$006001A0               ;81AC61|        |      ;
                        dd $006001B0,$006001C0               ;81AC69|        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC71:
                        RTS                                  ;81AC71|60      |      ;
                                                             ;      |        |      ;
                        RTS                                  ;81AC72|60      |      ;
@@ -4877,22 +4883,40 @@
                                                             ;      |        |      ;
                        RTS                                  ;81AC77|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC78:
                        RTS                                  ;81AC78|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC79:
                        RTS                                  ;81AC79|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC7A:
                        RTS                                  ;81AC7A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC7B:
                        RTS                                  ;81AC7B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC7C:
                        RTS                                  ;81AC7C|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC7D:
                        RTS                                  ;81AC7D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC7E:
                        RTS                                  ;81AC7E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC7F:
                        RTS                                  ;81AC7F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AC80:
                        REP #$30                             ;81AC80|C230    |      ;
                        LDA.W $0196                          ;81AC82|AD9601  |000196;
                        AND.W #$0002                         ;81AC85|290200  |      ;
@@ -4937,8 +4961,12 @@
                                                             ;      |        |      ;
                        RTS                                  ;81ACCA|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ACCB:
                        RTS                                  ;81ACCB|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ACCC:
                        REP #$30                             ;81ACCC|C230    |      ;
                        LDA.W $0196                          ;81ACCE|AD9601  |000196;
                        AND.W #$0010                         ;81ACD1|291000  |      ;
@@ -4976,6 +5004,8 @@
           CODE_81AD22:
                        RTS                                  ;81AD22|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AD23:
                        REP #$30                             ;81AD23|C230    |      ;
                        LDA.W $0196                          ;81AD25|AD9601  |000196;
                        AND.W #$0010                         ;81AD28|291000  |      ;
@@ -5013,6 +5043,8 @@
           CODE_81AD79:
                        RTS                                  ;81AD79|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AD7A:
                        REP #$30                             ;81AD7A|C230    |      ;
                        LDA.W $0196                          ;81AD7C|AD9601  |000196;
                        AND.W #$0010                         ;81AD7F|291000  |      ;
@@ -5050,14 +5082,24 @@
           CODE_81ADD0:
                        RTS                                  ;81ADD0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ADD1:
                        RTS                                  ;81ADD1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ADD2:
                        RTS                                  ;81ADD2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ADD3:
                        RTS                                  ;81ADD3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ADD4:
                        RTS                                  ;81ADD4|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81ADD5:
                        REP #$30                             ;81ADD5|C230    |      ;
                        LDA.L $7F1F68                        ;81ADD7|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81ADDB|290100  |      ;
@@ -5143,16 +5185,28 @@
           CODE_81AE69:
                        RTS                                  ;81AE69|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AE6A:
                        RTS                                  ;81AE6A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AE6B:
                        RTS                                  ;81AE6B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AE6C:
                        RTS                                  ;81AE6C|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AE6D:
                        RTS                                  ;81AE6D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AE6E:
                        RTS                                  ;81AE6E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AE6F:
                        REP #$30                             ;81AE6F|C230    |      ;
                        LDA.L $7F1F68                        ;81AE71|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81AE75|290100  |      ;
@@ -5307,8 +5361,12 @@
           CODE_81AFBE:
                        RTS                                  ;81AFBE|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AFBF:
                        RTS                                  ;81AFBF|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81AFC0:
                        REP #$30                             ;81AFC0|C230    |      ;
                        LDA.L $7F1F68                        ;81AFC2|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81AFC6|290100  |      ;
@@ -5385,8 +5443,12 @@
           CODE_81B062:
                        RTS                                  ;81B062|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B063:
                        RTS                                  ;81B063|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B064:
                        REP #$30                             ;81B064|C230    |      ;
                        LDY.W #$0000                         ;81B066|A00000  |      ;
                                                             ;      |        |      ;
@@ -5427,6 +5489,8 @@
           CODE_81B0A7:
                        RTS                                  ;81B0A7|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B0A8:
                        REP #$30                             ;81B0A8|C230    |      ;
                        LDA.W #$001A                         ;81B0AA|A91A00  |      ;
                        LDX.W #$0000                         ;81B0AD|A20000  |      ;
@@ -5476,6 +5540,8 @@
                        dd $00D80058,$00980058               ;81B10D|        |      ;
                        dd $00780058,$00580058               ;81B115|        |      ;
                        dd $016800C8                         ;81B11D|        |      ;
+                                                            ;      |        |      ;
+          CODE_81B121:
                        REP #$30                             ;81B121|C230    |      ;
                        LDA.W #$0019                         ;81B123|A91900  |      ;
                        LDX.W #$0000                         ;81B126|A20000  |      ;
@@ -5558,6 +5624,8 @@
                        dd $00200080,$00200090               ;81B1B7|        |      ;
                        dd $002000A0,$002000B0               ;81B1BF|        |      ;
                        dd $002000C0,$002000D0               ;81B1C7|        |      ;
+                                                            ;      |        |      ;
+          CODE_81B1CF:
                        REP #$30                             ;81B1CF|C230    |      ;
                        LDA.L $7F1F6C                        ;81B1D1|AF6C1F7F|7F1F6C;
                        AND.W #$0011                         ;81B1D5|291100  |      ;
@@ -5601,6 +5669,8 @@
           CODE_81B21D:
                        RTS                                  ;81B21D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B21E:
                        REP #$30                             ;81B21E|C230    |      ;
                        LDA.L $7F1F64                        ;81B220|AF641F7F|7F1F64;
                        AND.W #$0002                         ;81B224|290200  |      ;
@@ -5638,30 +5708,56 @@
           CODE_81B260:
                        RTS                                  ;81B260|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B261:
                        RTS                                  ;81B261|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B262:
                        RTS                                  ;81B262|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B263:
                        RTS                                  ;81B263|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B264:
                        RTS                                  ;81B264|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B265:
                        RTS                                  ;81B265|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B266:
                        RTS                                  ;81B266|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B267:
                        RTS                                  ;81B267|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B268:
                        RTS                                  ;81B268|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B269:
                        RTS                                  ;81B269|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B26A:
                        RTS                                  ;81B26A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B26B:
                        RTS                                  ;81B26B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B26C:
                        RTS                                  ;81B26C|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B26D:
                        REP #$30                             ;81B26D|C230    |      ;
                        LDA.L $7F1F5A                        ;81B26F|AF5A1F7F|7F1F5A;
                        AND.W #$0001                         ;81B273|290100  |      ;
@@ -5678,84 +5774,164 @@
           CODE_81B292:
                        RTS                                  ;81B292|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B293:
                        RTS                                  ;81B293|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B294:
                        RTS                                  ;81B294|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B295:
                        RTS                                  ;81B295|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B296:
                        RTS                                  ;81B296|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B297:
                        RTS                                  ;81B297|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B298:
                        RTS                                  ;81B298|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B299:
                        RTS                                  ;81B299|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B29A:
                        RTS                                  ;81B29A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B29B:
                        RTS                                  ;81B29B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B29C:
                        RTS                                  ;81B29C|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B29D:
                        RTS                                  ;81B29D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B29E:
                        RTS                                  ;81B29E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B29F:
                        RTS                                  ;81B29F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A0:
                        RTS                                  ;81B2A0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A1:
                        RTS                                  ;81B2A1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A2:
                        RTS                                  ;81B2A2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A3:
                        RTS                                  ;81B2A3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A4:
                        RTS                                  ;81B2A4|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A5:
                        RTS                                  ;81B2A5|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A6:
                        RTS                                  ;81B2A6|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A7:
                        RTS                                  ;81B2A7|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A8:
                        RTS                                  ;81B2A8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2A9:
                        RTS                                  ;81B2A9|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2AA:
                        RTS                                  ;81B2AA|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2AB:
                        RTS                                  ;81B2AB|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2AC:
                        RTS                                  ;81B2AC|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2AD:
                        RTS                                  ;81B2AD|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2AE:
                        RTS                                  ;81B2AE|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2AF:
                        RTS                                  ;81B2AF|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B0:
                        RTS                                  ;81B2B0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B1:
                        RTS                                  ;81B2B1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B2:
                        RTS                                  ;81B2B2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B3:
                        RTS                                  ;81B2B3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B4:
                        RTS                                  ;81B2B4|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B5:
                        RTS                                  ;81B2B5|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B6:
                        RTS                                  ;81B2B6|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B7:
                        RTS                                  ;81B2B7|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B8:
                        RTS                                  ;81B2B8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2B9:
                        RTS                                  ;81B2B9|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81B2BA:
                        RTS                                  ;81B2BA|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6301,6 +6477,8 @@
                        TAX                                  ;81BFD8|AA      |      ;
                        JMP.W (PTR16_81C027,X)               ;81BFD9|7C27C0  |81C027;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81BFDC:
                        REP #$30                             ;81BFDC|C230    |      ;
                        LDA.B $D2                            ;81BFDE|A5D2    |0000D2;
                        AND.W #$0004                         ;81BFE0|290400  |      ;
@@ -6351,35 +6529,37 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_81C027:
-                       dw CODE_01BFDC                       ;81C027|        |01BFDC;
-                       dw CODE_01BFDC                       ;81C029|        |01BFDC;
-                       dw CODE_01BFDC                       ;81C02B|        |01BFDC;
-                       dw CODE_01C86B                       ;81C02D|        |01C86B;
-                       dw CODE_01C991                       ;81C02F|        |01C991;
-                       dw CODE_01C9DF                       ;81C031|        |01C9DF;
-                       dw CODE_01BFDC                       ;81C033|        |01BFDC;
-                       dw CODE_01BFDC                       ;81C035|        |01BFDC;
-                       dw CODE_01CA36                       ;81C037|        |01CA36;
-                       dw CODE_01CB5E                       ;81C039|        |01CB5E;
-                       dw CODE_01C51A                       ;81C03B|        |01C51A;
-                       dw CODE_01C4EC                       ;81C03D|        |01C4EC;
-                       dw CODE_01C395                       ;81C03F|        |01C395;
-                       dw CODE_01C364                       ;81C041|        |01C364;
-                       dw CODE_01BFDC                       ;81C043|        |01BFDC;
-                       dw CODE_01C232                       ;81C045|        |01C232;
-                       dw CODE_01C242                       ;81C047|        |01C242;
-                       dw CODE_01C263                       ;81C049|        |01C263;
-                       dw CODE_01C28E                       ;81C04B|        |01C28E;
-                       dw CODE_01C2AF                       ;81C04D|        |01C2AF;
-                       dw CODE_01C211                       ;81C04F|        |01C211;
-                       dw CODE_01C1F0                       ;81C051|        |01C1F0;
-                       dw CODE_01C1A1                       ;81C053|        |01C1A1;
-                       dw CODE_01C111                       ;81C055|        |01C111;
-                       dw CODE_01C153                       ;81C057|        |01C153;
-                       dw CODE_01C00E                       ;81C059|        |01C00E;
-                       dw CODE_01C0B5                       ;81C05B|        |01C0B5;
-                       dw CODE_01C333                       ;81C05D|        |01C333;
-                       dw CODE_01C061                       ;81C05F|        |01C061;
+                       dw CODE_81BFDC                       ;81C027|        |81BFDC;
+                       dw CODE_81BFDC                       ;81C029|        |81BFDC;
+                       dw CODE_81BFDC                       ;81C02B|        |81BFDC;
+                       dw CODE_81C86B                       ;81C02D|        |81C86B;
+                       dw CODE_81C991                       ;81C02F|        |81C991;
+                       dw CODE_81C9DF                       ;81C031|        |81C9DF;
+                       dw CODE_81BFDC                       ;81C033|        |81BFDC;
+                       dw CODE_81BFDC                       ;81C035|        |81BFDC;
+                       dw CODE_81CA36                       ;81C037|        |81CA36;
+                       dw CODE_81CB5E                       ;81C039|        |81CB5E;
+                       dw CODE_81C51A                       ;81C03B|        |81C51A;
+                       dw CODE_81C4EC                       ;81C03D|        |81C4EC;
+                       dw CODE_81C395                       ;81C03F|        |81C395;
+                       dw CODE_81C364                       ;81C041|        |81C364;
+                       dw CODE_81BFDC                       ;81C043|        |81BFDC;
+                       dw CODE_81C232                       ;81C045|        |81C232;
+                       dw CODE_81C242                       ;81C047|        |81C242;
+                       dw CODE_81C263                       ;81C049|        |81C263;
+                       dw CODE_81C28E                       ;81C04B|        |81C28E;
+                       dw CODE_81C2AF                       ;81C04D|        |81C2AF;
+                       dw CODE_81C211                       ;81C04F|        |81C211;
+                       dw CODE_81C1F0                       ;81C051|        |81C1F0;
+                       dw CODE_81C1A1                       ;81C053|        |81C1A1;
+                       dw CODE_81C111                       ;81C055|        |81C111;
+                       dw CODE_81C153                       ;81C057|        |81C153;
+                       dw CODE_81C00E                       ;81C059|        |81C00E;
+                       dw CODE_81C0B5                       ;81C05B|        |81C0B5;
+                       dw CODE_81C333                       ;81C05D|        |81C333;
+                       dw CODE_81C061                       ;81C05F|        |81C061;
+                                                            ;      |        |      ;
+          CODE_81C061:
                        REP #$30                             ;81C061|C230    |      ;
                        REP #$30                             ;81C063|C230    |      ;
                        LDA.B $D2                            ;81C065|A5D2    |0000D2;
@@ -6424,6 +6604,8 @@
           CODE_81C0B2:
                        JMP.W CODE_81C002                    ;81C0B2|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C0B5:
                        REP #$30                             ;81C0B5|C230    |      ;
                        REP #$30                             ;81C0B7|C230    |      ;
                        LDA.W #$00F2                         ;81C0B9|A9F200  |      ;
@@ -6466,6 +6648,8 @@
           CODE_81C10E:
                        JMP.W CODE_81C002                    ;81C10E|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C111:
                        REP #$30                             ;81C111|C230    |      ;
                        LDA.W $0913                          ;81C113|AD1309  |000913;
                        STA.B $DA                            ;81C116|85DA    |0000DA;
@@ -6495,6 +6679,8 @@
           CODE_81C150:
                        JMP.W CODE_81C002                    ;81C150|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C153:
                        REP #$30                             ;81C153|C230    |      ;
                        REP #$30                             ;81C155|C230    |      ;
                        LDA.W #$00E0                         ;81C157|A9E000  |      ;
@@ -6529,6 +6715,8 @@
           CODE_81C19E:
                        JMP.W CODE_81C002                    ;81C19E|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C1A1:
                        REP #$30                             ;81C1A1|C230    |      ;
                        REP #$30                             ;81C1A3|C230    |      ;
                        LDA.W #$00D8                         ;81C1A5|A9D800  |      ;
@@ -6561,6 +6749,8 @@
           CODE_81C1ED:
                        JMP.W CODE_81C002                    ;81C1ED|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C1F0:
                        REP #$30                             ;81C1F0|C230    |      ;
                        REP #$30                             ;81C1F2|C230    |      ;
                        LDA.W #$00CC                         ;81C1F4|A9CC00  |      ;
@@ -6577,6 +6767,8 @@
           CODE_81C20E:
                        JMP.W CODE_81C002                    ;81C20E|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C211:
                        REP #$30                             ;81C211|C230    |      ;
                        REP #$30                             ;81C213|C230    |      ;
                        LDA.W #$008F                         ;81C215|A98F00  |      ;
@@ -6593,6 +6785,8 @@
           CODE_81C22F:
                        JMP.W CODE_81C002                    ;81C22F|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C232:
                        REP #$30                             ;81C232|C230    |      ;
                        REP #$30                             ;81C234|C230    |      ;
                        LDA.W #$0088                         ;81C236|A98800  |      ;
@@ -6600,6 +6794,8 @@
                        JSR.W CODE_81CFE6                    ;81C23C|20E6CF  |81CFE6;
                        JMP.W CODE_81C002                    ;81C23F|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C242:
                        REP #$30                             ;81C242|C230    |      ;
                        REP #$30                             ;81C244|C230    |      ;
                        LDA.W #$0089                         ;81C246|A98900  |      ;
@@ -6616,6 +6812,8 @@
           CODE_81C260:
                        JMP.W CODE_81C002                    ;81C260|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C263:
                        REP #$30                             ;81C263|C230    |      ;
                        SEP #$20                             ;81C265|E220    |      ;
                        LDA.B #$FF                           ;81C267|A9FF    |      ;
@@ -6636,6 +6834,8 @@
                        JSR.W CODE_81CFE6                    ;81C288|20E6CF  |81CFE6;
                        JMP.W CODE_81C002                    ;81C28B|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C28E:
                        REP #$30                             ;81C28E|C230    |      ;
                        REP #$30                             ;81C290|C230    |      ;
                        LDA.W #$008A                         ;81C292|A98A00  |      ;
@@ -6652,6 +6852,8 @@
           CODE_81C2AC:
                        JMP.W CODE_81C002                    ;81C2AC|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C2AF:
                        REP #$30                             ;81C2AF|C230    |      ;
                        JSR.W CODE_81CFE6                    ;81C2B1|20E6CF  |81CFE6;
                        REP #$20                             ;81C2B4|C220    |      ;
@@ -6712,6 +6914,8 @@
           CODE_81C330:
                        JMP.W CODE_81C002                    ;81C330|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C333:
                        REP #$30                             ;81C333|C230    |      ;
                        LDA.L $7F1F60                        ;81C335|AF601F7F|7F1F60;
                        ORA.W #$0010                         ;81C339|091000  |      ;
@@ -6734,6 +6938,8 @@
           CODE_81C361:
                        JMP.W CODE_81C002                    ;81C361|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C364:
                        REP #$30                             ;81C364|C230    |      ;
                        LDA.L $7F1F5C                        ;81C366|AF5C1F7F|7F1F5C;
                        ORA.W #$0400                         ;81C36A|090004  |      ;
@@ -6756,6 +6962,8 @@
           CODE_81C392:
                        JMP.W CODE_81C002                    ;81C392|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C395:
                        REP #$30                             ;81C395|C230    |      ;
                        REP #$30                             ;81C397|C230    |      ;
                        LDA.B $D2                            ;81C399|A5D2    |0000D2;
@@ -6954,6 +7162,8 @@
           CODE_81C4E9:
                        JMP.W CODE_81C002                    ;81C4E9|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C4EC:
                        REP #$30                             ;81C4EC|C230    |      ;
                        REP #$30                             ;81C4EE|C230    |      ;
                        LDA.B $D2                            ;81C4F0|A5D2    |0000D2;
@@ -6981,6 +7191,8 @@
           CODE_81C517:
                        JMP.W CODE_81C002                    ;81C517|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C51A:
                        REP #$30                             ;81C51A|C230    |      ;
                        REP #$30                             ;81C51C|C230    |      ;
                        LDA.B $D2                            ;81C51E|A5D2    |0000D2;
@@ -7493,6 +7705,8 @@
                        STZ.W $096D                          ;81C865|9C6D09  |00096D;
                        JMP.W CODE_81C00E                    ;81C868|4C0EC0  |81C00E;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C86B:
                        REP #$30                             ;81C86B|C230    |      ;
                        REP #$30                             ;81C86D|C230    |      ;
                        LDA.B $D2                            ;81C86F|A5D2    |0000D2;
@@ -7658,6 +7872,8 @@
           CODE_81C98E:
                        JMP.W CODE_81C002                    ;81C98E|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C991:
                        REP #$30                             ;81C991|C230    |      ;
                        REP #$30                             ;81C993|C230    |      ;
                        LDA.B $D2                            ;81C995|A5D2    |0000D2;
@@ -7698,6 +7914,8 @@
           CODE_81C9DC:
                        JMP.W CODE_81C002                    ;81C9DC|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81C9DF:
                        REP #$30                             ;81C9DF|C230    |      ;
                        REP #$30                             ;81C9E1|C230    |      ;
                        LDA.B $D2                            ;81C9E3|A5D2    |0000D2;
@@ -7742,6 +7960,8 @@
           CODE_81CA33:
                        JMP.W CODE_81C002                    ;81CA33|4C02C0  |81C002;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81CA36:
                        SEP #$20                             ;81CA36|E220    |      ;
                        REP #$10                             ;81CA38|C210    |      ;
                        REP #$30                             ;81CA3A|C230    |      ;
@@ -9067,96 +9287,100 @@ IncrementPowerBerryEatenRoutine:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          PTR16_81D593:
-                       dw CODE_01D643                       ;81D593|        |01D643;
-                       dw CODE_01D644                       ;81D595|        |01D644;
-                       dw CODE_01D66F                       ;81D597|        |01D66F;
-                       dw CODE_01D670                       ;81D599|        |01D670;
-                       dw CODE_01D6E1                       ;81D59B|        |01D6E1;
-                       dw CODE_01D6E2                       ;81D59D|        |01D6E2;
-                       dw CODE_01D6F8                       ;81D59F|        |01D6F8;
-                       dw CODE_01D70E                       ;81D5A1|        |01D70E;
-                       dw CODE_01D70F                       ;81D5A3|        |01D70F;
-                       dw CODE_01D710                       ;81D5A5|        |01D710;
-                       dw CODE_01D711                       ;81D5A7|        |01D711;
-                       dw CODE_01D712                       ;81D5A9|        |01D712;
-                       dw CODE_01D713                       ;81D5AB|        |01D713;
-                       dw CODE_01D714                       ;81D5AD|        |01D714;
-                       dw CODE_01D715                       ;81D5AF|        |01D715;
-                       dw CODE_01D716                       ;81D5B1|        |01D716;
-                       dw CODE_01D7C5                       ;81D5B3|        |01D7C5;
-                       dw CODE_01D979                       ;81D5B5|        |01D979;
-                       dw CODE_01D9CC                       ;81D5B7|        |01D9CC;
-                       dw CODE_01DA82                       ;81D5B9|        |01DA82;
-                       dw CODE_01DB38                       ;81D5BB|        |01DB38;
-                       dw CODE_01DBA1                       ;81D5BD|        |01DBA1;
-                       dw CODE_01DBCC                       ;81D5BF|        |01DBCC;
-                       dw CODE_01DBCD                       ;81D5C1|        |01DBCD;
-                       dw CODE_01DBCE                       ;81D5C3|        |01DBCE;
-                       dw CODE_01DBCF                       ;81D5C5|        |01DBCF;
-                       dw CODE_01DBD0                       ;81D5C7|        |01DBD0;
-                       dw CODE_01DBD1                       ;81D5C9|        |01DBD1;
-                       dw CODE_01DBD2                       ;81D5CB|        |01DBD2;
-                       dw CODE_01DBD3                       ;81D5CD|        |01DBD3;
-                       dw CODE_01DBF0                       ;81D5CF|        |01DBF0;
-                       dw CODE_01DC57                       ;81D5D1|        |01DC57;
-                       dw CODE_01DC58                       ;81D5D3|        |01DC58;
-                       dw CODE_01DC59                       ;81D5D5|        |01DC59;
-                       dw CODE_01DC5A                       ;81D5D7|        |01DC5A;
-                       dw CODE_01DC5B                       ;81D5D9|        |01DC5B;
-                       dw CODE_01DC5C                       ;81D5DB|        |01DC5C;
-                       dw CODE_01DC5D                       ;81D5DD|        |01DC5D;
-                       dw CODE_01DC5E                       ;81D5DF|        |01DC5E;
-                       dw CODE_01DCCE                       ;81D5E1|        |01DCCE;
-                       dw CODE_01DCF3                       ;81D5E3|        |01DCF3;
-                       dw CODE_01DD18                       ;81D5E5|        |01DD18;
-                       dw CODE_01DD3D                       ;81D5E7|        |01DD3D;
-                       dw CODE_01DD62                       ;81D5E9|        |01DD62;
-                       dw CODE_01DD87                       ;81D5EB|        |01DD87;
-                       dw CODE_01DDAC                       ;81D5ED|        |01DDAC;
-                       dw CODE_01DE1C                       ;81D5EF|        |01DE1C;
-                       dw CODE_01E245                       ;81D5F1|        |01E245;
-                       dw CODE_01E26A                       ;81D5F3|        |01E26A;
-                       dw CODE_01E28F                       ;81D5F5|        |01E28F;
-                       dw CODE_01E2B4                       ;81D5F7|        |01E2B4;
-                       dw CODE_01E2D9                       ;81D5F9|        |01E2D9;
-                       dw CODE_01E349                       ;81D5FB|        |01E349;
-                       dw CODE_01E36E                       ;81D5FD|        |01E36E;
-                       dw CODE_01E394                       ;81D5FF|        |01E394;
-                       dw CODE_01E404                       ;81D601|        |01E404;
-                       dw CODE_01E429                       ;81D603|        |01E429;
-                       dw CODE_01E44E                       ;81D605|        |01E44E;
-                       dw CODE_01E473                       ;81D607|        |01E473;
-                       dw CODE_01E498                       ;81D609|        |01E498;
-                       dw CODE_01E4BD                       ;81D60B|        |01E4BD;
-                       dw CODE_01E4E2                       ;81D60D|        |01E4E2;
-                       dw CODE_01E507                       ;81D60F|        |01E507;
-                       dw CODE_01E52C                       ;81D611|        |01E52C;
-                       dw CODE_01E59C                       ;81D613|        |01E59C;
-                       dw CODE_01E6C3                       ;81D615|        |01E6C3;
-                       dw CODE_01E6EA                       ;81D617|        |01E6EA;
-                       dw CODE_01E79E                       ;81D619|        |01E79E;
-                       dw CODE_01EBD5                       ;81D61B|        |01EBD5;
-                       dw CODE_01EFAD                       ;81D61D|        |01EFAD;
-                       dw CODE_01F061                       ;81D61F|        |01F061;
-                       dw CODE_01F121                       ;81D621|        |01F121;
-                       dw CODE_01F2DA                       ;81D623|        |01F2DA;
-                       dw CODE_01F40E                       ;81D625|        |01F40E;
-                       dw CODE_01F490                       ;81D627|        |01F490;
-                       dw CODE_01F4AD                       ;81D629|        |01F4AD;
-                       dw CODE_01F4CA                       ;81D62B|        |01F4CA;
-                       dw CODE_01F4E6                       ;81D62D|        |01F4E6;
-                       dw CODE_01F502                       ;81D62F|        |01F502;
-                       dw CODE_01F51E                       ;81D631|        |01F51E;
-                       dw CODE_01F53A                       ;81D633|        |01F53A;
-                       dw CODE_01F5B0                       ;81D635|        |01F5B0;
-                       dw CODE_01F6D7                       ;81D637|        |01F6D7;
-                       dw CODE_01F7FF                       ;81D639|        |01F7FF;
-                       dw CODE_01F86A                       ;81D63B|        |01F86A;
-                       dw CODE_01F942                       ;81D63D|        |01F942;
-                       dw CODE_01FA69                       ;81D63F|        |01FA69;
-                       dw CODE_01FA84                       ;81D641|        |01FA84;
+                       dw CODE_81D643                       ;81D593|        |81D643;
+                       dw CODE_81D644                       ;81D595|        |81D644;
+                       dw CODE_81D66F                       ;81D597|        |81D66F;
+                       dw CODE_81D670                       ;81D599|        |81D670;
+                       dw CODE_81D6E1                       ;81D59B|        |81D6E1;
+                       dw CODE_81D6E2                       ;81D59D|        |81D6E2;
+                       dw CODE_81D6F8                       ;81D59F|        |81D6F8;
+                       dw CODE_81D70E                       ;81D5A1|        |81D70E;
+                       dw CODE_81D70F                       ;81D5A3|        |81D70F;
+                       dw CODE_81D710                       ;81D5A5|        |81D710;
+                       dw CODE_81D711                       ;81D5A7|        |81D711;
+                       dw CODE_81D712                       ;81D5A9|        |81D712;
+                       dw CODE_81D713                       ;81D5AB|        |81D713;
+                       dw CODE_81D714                       ;81D5AD|        |81D714;
+                       dw CODE_81D715                       ;81D5AF|        |81D715;
+                       dw CODE_81D716                       ;81D5B1|        |81D716;
+                       dw CODE_81D7C5                       ;81D5B3|        |81D7C5;
+                       dw CODE_81D979                       ;81D5B5|        |81D979;
+                       dw CODE_81D9CC                       ;81D5B7|        |81D9CC;
+                       dw CODE_81DA82                       ;81D5B9|        |81DA82;
+                       dw CODE_81DB38                       ;81D5BB|        |81DB38;
+                       dw CODE_81DBA1                       ;81D5BD|        |81DBA1;
+                       dw CODE_81DBCC                       ;81D5BF|        |81DBCC;
+                       dw CODE_81DBCD                       ;81D5C1|        |81DBCD;
+                       dw CODE_81DBCE                       ;81D5C3|        |81DBCE;
+                       dw CODE_81DBCF                       ;81D5C5|        |81DBCF;
+                       dw CODE_81DBD0                       ;81D5C7|        |81DBD0;
+                       dw CODE_81DBD1                       ;81D5C9|        |81DBD1;
+                       dw CODE_81DBD2                       ;81D5CB|        |81DBD2;
+                       dw CODE_81DBD3                       ;81D5CD|        |81DBD3;
+                       dw CODE_81DBF0                       ;81D5CF|        |81DBF0;
+                       dw CODE_81DC57                       ;81D5D1|        |81DC57;
+                       dw CODE_81DC58                       ;81D5D3|        |81DC58;
+                       dw CODE_81DC59                       ;81D5D5|        |81DC59;
+                       dw CODE_81DC5A                       ;81D5D7|        |81DC5A;
+                       dw CODE_81DC5B                       ;81D5D9|        |81DC5B;
+                       dw CODE_81DC5C                       ;81D5DB|        |81DC5C;
+                       dw CODE_81DC5D                       ;81D5DD|        |81DC5D;
+                       dw CODE_81DC5E                       ;81D5DF|        |81DC5E;
+                       dw CODE_81DCCE                       ;81D5E1|        |81DCCE;
+                       dw CODE_81DCF3                       ;81D5E3|        |81DCF3;
+                       dw CODE_81DD18                       ;81D5E5|        |81DD18;
+                       dw CODE_81DD3D                       ;81D5E7|        |81DD3D;
+                       dw CODE_81DD62                       ;81D5E9|        |81DD62;
+                       dw CODE_81DD87                       ;81D5EB|        |81DD87;
+                       dw CODE_81DDAC                       ;81D5ED|        |81DDAC;
+                       dw CODE_81DE1C                       ;81D5EF|        |81DE1C;
+                       dw CODE_81E245                       ;81D5F1|        |81E245;
+                       dw CODE_81E26A                       ;81D5F3|        |81E26A;
+                       dw CODE_81E28F                       ;81D5F5|        |81E28F;
+                       dw CODE_81E2B4                       ;81D5F7|        |81E2B4;
+                       dw CODE_81E2D9                       ;81D5F9|        |81E2D9;
+                       dw CODE_81E349                       ;81D5FB|        |81E349;
+                       dw CODE_81E36E                       ;81D5FD|        |81E36E;
+                       dw CODE_81E394                       ;81D5FF|        |81E394;
+                       dw CODE_81E404                       ;81D601|        |81E404;
+                       dw CODE_81E429                       ;81D603|        |81E429;
+                       dw CODE_81E44E                       ;81D605|        |81E44E;
+                       dw CODE_81E473                       ;81D607|        |81E473;
+                       dw CODE_81E498                       ;81D609|        |81E498;
+                       dw CODE_81E4BD                       ;81D60B|        |81E4BD;
+                       dw CODE_81E4E2                       ;81D60D|        |81E4E2;
+                       dw CODE_81E507                       ;81D60F|        |81E507;
+                       dw CODE_81E52C                       ;81D611|        |81E52C;
+                       dw CODE_81E59C                       ;81D613|        |81E59C;
+                       dw CODE_81E6C3                       ;81D615|        |81E6C3;
+                       dw CODE_81E6EA                       ;81D617|        |81E6EA;
+                       dw CODE_81E79E                       ;81D619|        |81E79E;
+                       dw CODE_81EBD5                       ;81D61B|        |81EBD5;
+                       dw CODE_81EFAD                       ;81D61D|        |81EFAD;
+                       dw CODE_81F061                       ;81D61F|        |81F061;
+                       dw CODE_81F121                       ;81D621|        |81F121;
+                       dw CODE_81F2DA                       ;81D623|        |81F2DA;
+                       dw CODE_81F40E                       ;81D625|        |81F40E;
+                       dw CODE_81F490                       ;81D627|        |81F490;
+                       dw CODE_81F4AD                       ;81D629|        |81F4AD;
+                       dw CODE_81F4CA                       ;81D62B|        |81F4CA;
+                       dw CODE_81F4E6                       ;81D62D|        |81F4E6;
+                       dw CODE_81F502                       ;81D62F|        |81F502;
+                       dw CODE_81F51E                       ;81D631|        |81F51E;
+                       dw CODE_81F53A                       ;81D633|        |81F53A;
+                       dw CODE_81F5B0                       ;81D635|        |81F5B0;
+                       dw CODE_81F6D7                       ;81D637|        |81F6D7;
+                       dw CODE_81F7FF                       ;81D639|        |81F7FF;
+                       dw CODE_81F86A                       ;81D63B|        |81F86A;
+                       dw CODE_81F942                       ;81D63D|        |81F942;
+                       dw CODE_81FA69                       ;81D63F|        |81FA69;
+                       dw CODE_81FA84                       ;81D641|        |81FA84;
+                                                            ;      |        |      ;
+          CODE_81D643:
                        RTS                                  ;81D643|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D644:
                        REP #$20                             ;81D644|C220    |      ;
                        LDA.W #$FFFE                         ;81D646|A9FEFF  |      ;
                        JSL.L CODE_83B224                    ;81D649|2224B283|83B224;
@@ -9178,8 +9402,12 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81D66C|85D2    |0000D2;
                        RTS                                  ;81D66E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D66F:
                        RTS                                  ;81D66F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D670:
                        SEP #$20                             ;81D670|E220    |      ;
                        REP #$10                             ;81D672|C210    |      ;
                        LDA.W $096F                          ;81D674|AD6F09  |00096F;
@@ -9231,8 +9459,12 @@ IncrementPowerBerryEatenRoutine:
           CODE_81D6E0:
                        RTS                                  ;81D6E0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D6E1:
                        RTS                                  ;81D6E1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D6E2:
                        REP #$20                             ;81D6E2|C220    |      ;
                        LDA.W #$0011                         ;81D6E4|A91100  |      ;
                        JSL.L CODE_81A5E1                    ;81D6E7|22E1A581|81A5E1;
@@ -9243,6 +9475,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81D6F5|85D2    |0000D2;
                        RTS                                  ;81D6F7|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D6F8:
                        REP #$20                             ;81D6F8|C220    |      ;
                        LDA.W #$0012                         ;81D6FA|A91200  |      ;
                        JSL.L CODE_81A5E1                    ;81D6FD|22E1A581|81A5E1;
@@ -9253,22 +9487,40 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81D70B|85D2    |0000D2;
                        RTS                                  ;81D70D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D70E:
                        RTS                                  ;81D70E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D70F:
                        RTS                                  ;81D70F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D710:
                        RTS                                  ;81D710|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D711:
                        RTS                                  ;81D711|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D712:
                        RTS                                  ;81D712|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D713:
                        RTS                                  ;81D713|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D714:
                        RTS                                  ;81D714|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D715:
                        RTS                                  ;81D715|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D716:
                        SEP #$20                             ;81D716|E220    |      ;
                        REP #$10                             ;81D718|C210    |      ;
                        LDA.W $096F                          ;81D71A|AD6F09  |00096F;
@@ -9358,6 +9610,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81D7C4:
                        RTS                                  ;81D7C4|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D7C5:
                        REP #$30                             ;81D7C5|C230    |      ;
                        LDA.L $7F1F6E                        ;81D7C7|AF6E1F7F|7F1F6E;
                        AND.W #$0010                         ;81D7CB|291000  |      ;
@@ -9581,6 +9835,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81D976|85D2    |0000D2;
                        RTS                                  ;81D978|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D979:
                        SEP #$20                             ;81D979|E220    |      ;
                        REP #$10                             ;81D97B|C210    |      ;
                        LDA.W $096F                          ;81D97D|AD6F09  |00096F;
@@ -9622,6 +9878,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81D9CB:
                        RTS                                  ;81D9CB|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81D9CC:
                        SEP #$20                             ;81D9CC|E220    |      ;
                        REP #$10                             ;81D9CE|C210    |      ;
                        LDA.W $096F                          ;81D9D0|AD6F09  |00096F;
@@ -9717,6 +9975,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81DA81:
                        RTS                                  ;81DA81|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DA82:
                        SEP #$20                             ;81DA82|E220    |      ;
                        REP #$10                             ;81DA84|C210    |      ;
                        LDA.W $096F                          ;81DA86|AD6F09  |00096F;
@@ -9812,6 +10072,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81DB37:
                        RTS                                  ;81DB37|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DB38:
                        SEP #$20                             ;81DB38|E220    |      ;
                        REP #$10                             ;81DB3A|C210    |      ;
                        LDA.W $096F                          ;81DB3C|AD6F09  |00096F;
@@ -9871,6 +10133,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81DBA0:
                        RTS                                  ;81DBA0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBA1:
                        REP #$20                             ;81DBA1|C220    |      ;
                        LDA.W #$FFFF                         ;81DBA3|A9FFFF  |      ;
                        JSL.L CODE_83B253                    ;81DBA6|2253B283|83B253;
@@ -9892,20 +10156,36 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DBC9|85D2    |0000D2;
                        RTS                                  ;81DBCB|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBCC:
                        RTS                                  ;81DBCC|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBCD:
                        RTS                                  ;81DBCD|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBCE:
                        RTS                                  ;81DBCE|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBCF:
                        RTS                                  ;81DBCF|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBD0:
                        RTS                                  ;81DBD0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBD1:
                        RTS                                  ;81DBD1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBD2:
                        RTS                                  ;81DBD2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBD3:
                        REP #$30                             ;81DBD3|C230    |      ;
                        LDA.W #$00FB                         ;81DBD5|A9FB00  |      ;
                        LDX.W #$02E0                         ;81DBD8|A2E002  |      ;
@@ -9917,6 +10197,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0000                         ;81DBEA|A90000  |      ;
                        JMP.W CODE_81F556                    ;81DBED|4C56F5  |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DBF0:
                        SEP #$20                             ;81DBF0|E220    |      ;
                        REP #$10                             ;81DBF2|C210    |      ;
                        LDA.W $096F                          ;81DBF4|AD6F09  |00096F;
@@ -9974,20 +10256,36 @@ IncrementPowerBerryEatenRoutine:
           CODE_81DC56:
                        RTS                                  ;81DC56|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC57:
                        RTS                                  ;81DC57|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC58:
                        RTS                                  ;81DC58|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC59:
                        RTS                                  ;81DC59|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC5A:
                        RTS                                  ;81DC5A|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC5B:
                        RTS                                  ;81DC5B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC5C:
                        RTS                                  ;81DC5C|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC5D:
                        RTS                                  ;81DC5D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DC5E:
                        SEP #$20                             ;81DC5E|E220    |      ;
                        REP #$10                             ;81DC60|C210    |      ;
                        LDA.W $096F                          ;81DC62|AD6F09  |00096F;
@@ -10047,6 +10345,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81DCCD:
                        RTS                                  ;81DCCD|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DCCE:
                        REP #$20                             ;81DCCE|C220    |      ;
                        LDA.W #$0070                         ;81DCD0|A97000  |      ;
                        ASL A                                ;81DCD3|0A      |      ;
@@ -10065,6 +10365,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DCF0|85D2    |0000D2;
                        RTS                                  ;81DCF2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DCF3:
                        REP #$20                             ;81DCF3|C220    |      ;
                        LDA.W #$0071                         ;81DCF5|A97100  |      ;
                        ASL A                                ;81DCF8|0A      |      ;
@@ -10083,6 +10385,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DD15|85D2    |0000D2;
                        RTS                                  ;81DD17|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DD18:
                        REP #$20                             ;81DD18|C220    |      ;
                        LDA.W #$0072                         ;81DD1A|A97200  |      ;
                        ASL A                                ;81DD1D|0A      |      ;
@@ -10101,6 +10405,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DD3A|85D2    |0000D2;
                        RTS                                  ;81DD3C|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DD3D:
                        REP #$20                             ;81DD3D|C220    |      ;
                        LDA.W #$0073                         ;81DD3F|A97300  |      ;
                        ASL A                                ;81DD42|0A      |      ;
@@ -10119,6 +10425,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DD5F|85D2    |0000D2;
                        RTS                                  ;81DD61|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DD62:
                        REP #$20                             ;81DD62|C220    |      ;
                        LDA.W #$0074                         ;81DD64|A97400  |      ;
                        ASL A                                ;81DD67|0A      |      ;
@@ -10137,6 +10445,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DD84|85D2    |0000D2;
                        RTS                                  ;81DD86|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DD87:
                        REP #$20                             ;81DD87|C220    |      ;
                        LDA.W #$0075                         ;81DD89|A97500  |      ;
                        ASL A                                ;81DD8C|0A      |      ;
@@ -10155,6 +10465,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81DDA9|85D2    |0000D2;
                        RTS                                  ;81DDAB|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DDAC:
                        SEP #$20                             ;81DDAC|E220    |      ;
                        REP #$10                             ;81DDAE|C210    |      ;
                        LDA.W $096F                          ;81DDB0|AD6F09  |00096F;
@@ -10214,6 +10526,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81DE1B:
                        RTS                                  ;81DE1B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81DE1C:
                        SEP #$20                             ;81DE1C|E220    |      ;
                        REP #$10                             ;81DE1E|C210    |      ;
                        LDA.W $096F                          ;81DE20|AD6F09  |00096F;
@@ -10742,6 +11056,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E242|85D2    |0000D2;
                        RTS                                  ;81E244|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E245:
                        REP #$20                             ;81E245|C220    |      ;
                        LDA.W #$007E                         ;81E247|A97E00  |      ;
                        ASL A                                ;81E24A|0A      |      ;
@@ -10760,6 +11076,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E267|85D2    |0000D2;
                        RTS                                  ;81E269|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E26A:
                        REP #$20                             ;81E26A|C220    |      ;
                        LDA.W #$007F                         ;81E26C|A97F00  |      ;
                        ASL A                                ;81E26F|0A      |      ;
@@ -10778,6 +11096,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E28C|85D2    |0000D2;
                        RTS                                  ;81E28E|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E28F:
                        REP #$20                             ;81E28F|C220    |      ;
                        LDA.W #$0080                         ;81E291|A98000  |      ;
                        ASL A                                ;81E294|0A      |      ;
@@ -10796,6 +11116,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E2B1|85D2    |0000D2;
                        RTS                                  ;81E2B3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E2B4:
                        REP #$20                             ;81E2B4|C220    |      ;
                        LDA.W #$0081                         ;81E2B6|A98100  |      ;
                        ASL A                                ;81E2B9|0A      |      ;
@@ -10814,6 +11136,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E2D6|85D2    |0000D2;
                        RTS                                  ;81E2D8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E2D9:
                        SEP #$20                             ;81E2D9|E220    |      ;
                        REP #$10                             ;81E2DB|C210    |      ;
                        LDA.W $096F                          ;81E2DD|AD6F09  |00096F;
@@ -10873,6 +11197,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81E348:
                        RTS                                  ;81E348|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E349:
                        REP #$20                             ;81E349|C220    |      ;
                        LDA.W #$0082                         ;81E34B|A98200  |      ;
                        ASL A                                ;81E34E|0A      |      ;
@@ -10891,6 +11217,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E36B|85D2    |0000D2;
                        RTS                                  ;81E36D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E36E:
                        SEP #$20                             ;81E36E|E220    |      ;
                        REP #$10                             ;81E370|C210    |      ;
                        LDA.B #$24                           ;81E372|A924    |      ;
@@ -10907,6 +11235,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E391|85D2    |0000D2;
                        RTS                                  ;81E393|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E394:
                        SEP #$20                             ;81E394|E220    |      ;
                        REP #$10                             ;81E396|C210    |      ;
                        LDA.W $096F                          ;81E398|AD6F09  |00096F;
@@ -10966,6 +11296,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81E403:
                        RTS                                  ;81E403|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E404:
                        REP #$20                             ;81E404|C220    |      ;
                        LDA.W #$0077                         ;81E406|A97700  |      ;
                        ASL A                                ;81E409|0A      |      ;
@@ -10984,6 +11316,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E426|85D2    |0000D2;
                        RTS                                  ;81E428|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E429:
                        REP #$20                             ;81E429|C220    |      ;
                        LDA.W #$0076                         ;81E42B|A97600  |      ;
                        ASL A                                ;81E42E|0A      |      ;
@@ -11002,6 +11336,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E44B|85D2    |0000D2;
                        RTS                                  ;81E44D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E44E:
                        REP #$20                             ;81E44E|C220    |      ;
                        LDA.W #$0078                         ;81E450|A97800  |      ;
                        ASL A                                ;81E453|0A      |      ;
@@ -11020,6 +11356,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E470|85D2    |0000D2;
                        RTS                                  ;81E472|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E473:
                        REP #$20                             ;81E473|C220    |      ;
                        LDA.W #$007D                         ;81E475|A97D00  |      ;
                        ASL A                                ;81E478|0A      |      ;
@@ -11038,6 +11376,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E495|85D2    |0000D2;
                        RTS                                  ;81E497|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E498:
                        REP #$20                             ;81E498|C220    |      ;
                        LDA.W #$0079                         ;81E49A|A97900  |      ;
                        ASL A                                ;81E49D|0A      |      ;
@@ -11056,6 +11396,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E4BA|85D2    |0000D2;
                        RTS                                  ;81E4BC|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E4BD:
                        REP #$20                             ;81E4BD|C220    |      ;
                        LDA.W #$007A                         ;81E4BF|A97A00  |      ;
                        ASL A                                ;81E4C2|0A      |      ;
@@ -11074,6 +11416,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E4DF|85D2    |0000D2;
                        RTS                                  ;81E4E1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E4E2:
                        REP #$20                             ;81E4E2|C220    |      ;
                        LDA.W #$007B                         ;81E4E4|A97B00  |      ;
                        ASL A                                ;81E4E7|0A      |      ;
@@ -11092,6 +11436,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E504|85D2    |0000D2;
                        RTS                                  ;81E506|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E507:
                        REP #$20                             ;81E507|C220    |      ;
                        LDA.W #$007C                         ;81E509|A97C00  |      ;
                        ASL A                                ;81E50C|0A      |      ;
@@ -11110,6 +11456,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E529|85D2    |0000D2;
                        RTS                                  ;81E52B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E52C:
                        SEP #$20                             ;81E52C|E220    |      ;
                        REP #$10                             ;81E52E|C210    |      ;
                        LDA.W $096F                          ;81E530|AD6F09  |00096F;
@@ -11169,6 +11517,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81E59B:
                        RTS                                  ;81E59B|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E59C:
                        SEP #$20                             ;81E59C|E220    |      ;
                        REP #$10                             ;81E59E|C210    |      ;
                        LDA.W $096F                          ;81E5A0|AD6F09  |00096F;
@@ -11317,6 +11667,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81E6C0|85D2    |0000D2;
                        RTS                                  ;81E6C2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E6C3:
                        REP #$30                             ;81E6C3|C230    |      ;
                        REP #$30                             ;81E6C5|C230    |      ;
                        LDA.B $D2                            ;81E6C7|A5D2    |0000D2;
@@ -11335,6 +11687,8 @@ IncrementPowerBerryEatenRoutine:
                        JSL.L CODE_81D061                    ;81E6E5|2261D081|81D061;
                        RTS                                  ;81E6E9|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E6EA:
                        SEP #$20                             ;81E6EA|E220    |      ;
                        REP #$10                             ;81E6EC|C210    |      ;
                        LDA.W $096F                          ;81E6EE|AD6F09  |00096F;
@@ -11429,6 +11783,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81E79D:
                        RTS                                  ;81E79D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81E79E:
                        SEP #$20                             ;81E79E|E220    |      ;
                        REP #$10                             ;81E7A0|C210    |      ;
                        LDA.W $096F                          ;81E7A2|AD6F09  |00096F;
@@ -11980,6 +12336,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EBD4:
                        RTS                                  ;81EBD4|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81EBD5:
                        SEP #$20                             ;81EBD5|E220    |      ;
                        REP #$10                             ;81EBD7|C210    |      ;
                        LDA.W $096F                          ;81EBD9|AD6F09  |00096F;
@@ -12481,6 +12839,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EFAC:
                        RTS                                  ;81EFAC|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81EFAD:
                        SEP #$20                             ;81EFAD|E220    |      ;
                        REP #$10                             ;81EFAF|C210    |      ;
                        LDA.W $096F                          ;81EFB1|AD6F09  |00096F;
@@ -12580,6 +12940,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F060:
                        RTS                                  ;81F060|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F061:
                        SEP #$20                             ;81F061|E220    |      ;
                        REP #$10                             ;81F063|C210    |      ;
                        LDA.W $096F                          ;81F065|AD6F09  |00096F;
@@ -12685,6 +13047,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F120:
                        RTS                                  ;81F120|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F121:
                        SEP #$20                             ;81F121|E220    |      ;
                        REP #$10                             ;81F123|C210    |      ;
                        LDA.W $096F                          ;81F125|AD6F09  |00096F;
@@ -12914,6 +13278,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F2D9:
                        RTS                                  ;81F2D9|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F2DA:
                        SEP #$20                             ;81F2DA|E220    |      ;
                        REP #$10                             ;81F2DC|C210    |      ;
                        LDA.W $096F                          ;81F2DE|AD6F09  |00096F;
@@ -13070,6 +13436,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F40D:
                        RTS                                  ;81F40D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F40E:
                        SEP #$20                             ;81F40E|E220    |      ;
                        REP #$10                             ;81F410|C210    |      ;
                        LDA.W $096F                          ;81F412|AD6F09  |00096F;
@@ -13141,6 +13509,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F48F:
                        RTS                                  ;81F48F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F490:
                        REP #$30                             ;81F490|C230    |      ;
                        LDA.W #$00FB                         ;81F492|A9FB00  |      ;
                        LDX.W #$0010                         ;81F495|A21000  |      ;
@@ -13152,6 +13522,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0001                         ;81F4A7|A90100  |      ;
                        JMP.W CODE_81F556                    ;81F4AA|4C56F5  |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F4AD:
                        REP #$30                             ;81F4AD|C230    |      ;
                        LDA.W #$00FB                         ;81F4AF|A9FB00  |      ;
                        LDX.W #$00B0                         ;81F4B2|A2B000  |      ;
@@ -13163,6 +13535,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0002                         ;81F4C4|A90200  |      ;
                        JMP.W CODE_81F556                    ;81F4C7|4C56F5  |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F4CA:
                        REP #$30                             ;81F4CA|C230    |      ;
                        LDA.W #$00FB                         ;81F4CC|A9FB00  |      ;
                        LDX.W #$01C0                         ;81F4CF|A2C001  |      ;
@@ -13174,6 +13548,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0003                         ;81F4E1|A90300  |      ;
                        BRA CODE_81F556                      ;81F4E4|8070    |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F4E6:
                        REP #$30                             ;81F4E6|C230    |      ;
                        LDA.W #$00FB                         ;81F4E8|A9FB00  |      ;
                        LDX.W #$02A0                         ;81F4EB|A2A002  |      ;
@@ -13185,6 +13561,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0004                         ;81F4FD|A90400  |      ;
                        BRA CODE_81F556                      ;81F500|8054    |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F502:
                        REP #$30                             ;81F502|C230    |      ;
                        LDA.W #$00FB                         ;81F504|A9FB00  |      ;
                        LDX.W #$0050                         ;81F507|A25000  |      ;
@@ -13196,6 +13574,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0005                         ;81F519|A90500  |      ;
                        BRA CODE_81F556                      ;81F51C|8038    |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F51E:
                        REP #$30                             ;81F51E|C230    |      ;
                        LDA.W #$00FB                         ;81F520|A9FB00  |      ;
                        LDX.W #$0210                         ;81F523|A21002  |      ;
@@ -13207,6 +13587,8 @@ IncrementPowerBerryEatenRoutine:
                        LDA.W #$0006                         ;81F535|A90600  |      ;
                        BRA CODE_81F556                      ;81F538|801C    |81F556;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F53A:
                        REP #$30                             ;81F53A|C230    |      ;
                        LDA.W #$00FB                         ;81F53C|A9FB00  |      ;
                        LDX.W #$0210                         ;81F53F|A21002  |      ;
@@ -13266,6 +13648,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81F5AD|85D2    |0000D2;
                        RTS                                  ;81F5AF|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F5B0:
                        SEP #$20                             ;81F5B0|E220    |      ;
                        REP #$10                             ;81F5B2|C210    |      ;
                        LDA.W $096F                          ;81F5B4|AD6F09  |00096F;
@@ -13420,6 +13804,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F6D6:
                        RTS                                  ;81F6D6|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F6D7:
                        SEP #$20                             ;81F6D7|E220    |      ;
                        REP #$10                             ;81F6D9|C210    |      ;
                        LDA.W $096F                          ;81F6DB|AD6F09  |00096F;
@@ -13574,6 +13960,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F7FE:
                        RTS                                  ;81F7FE|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F7FF:
                        SEP #$20                             ;81F7FF|E220    |      ;
                        REP #$10                             ;81F801|C210    |      ;
                        REP #$30                             ;81F803|C230    |      ;
@@ -13637,6 +14025,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F869:
                        RTS                                  ;81F869|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F86A:
                        SEP #$20                             ;81F86A|E220    |      ;
                        REP #$10                             ;81F86C|C210    |      ;
                        LDA.W $096F                          ;81F86E|AD6F09  |00096F;
@@ -13747,6 +14137,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81F93F|85D2    |0000D2;
                        RTS                                  ;81F941|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81F942:
                        SEP #$20                             ;81F942|E220    |      ;
                        REP #$10                             ;81F944|C210    |      ;
                        LDA.W $096F                          ;81F946|AD6F09  |00096F;
@@ -13895,6 +14287,8 @@ IncrementPowerBerryEatenRoutine:
                        STA.B $D2                            ;81FA66|85D2    |0000D2;
                        RTS                                  ;81FA68|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81FA69:
                        SEP #$20                             ;81FA69|E220    |      ;
                        REP #$10                             ;81FA6B|C210    |      ;
                        INC.W $0970                          ;81FA6D|EE7009  |000970;
@@ -13910,6 +14304,8 @@ IncrementPowerBerryEatenRoutine:
           CODE_81FA83:
                        RTS                                  ;81FA83|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+          CODE_81FA84:
                        REP #$30                             ;81FA84|C230    |      ;
                        LDX.W #$0491                         ;81FA86|A29104  |      ;
                        LDA.L MarriedGirlID                  ;81FA89|AF661F7F|7F1F66;
@@ -14107,4 +14503,7 @@ IncrementPowerBerryEatenRoutine:
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;81FFE4|        |      ;
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;81FFEC|        |      ;
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;81FFF4|        |      ;
-                       db $00,$00,$00,$00                   ;81FFFC|        |      ;
+                       db $00,$00,$00                       ;81FFFC|        |      ;
+                                                            ;      |        |      ;
+         EMPTY_81FFFF:
+                       db $00                               ;81FFFF|        |      ;
