@@ -5531,11 +5531,11 @@
                        ASL A                                ;81B17D|0A      |      ;
                        ASL A                                ;81B17E|0A      |      ;
                        TAX                                  ;81B17F|AA      |      ;
-                       LDA.L UNREACH_83CA10,X               ;81B180|BF10CA83|83CA10;
+                       LDA.L Table_83CA10,X                 ;81B180|BF10CA83|83CA10;
                        PHA                                  ;81B184|48      |      ;
                        INX                                  ;81B185|E8      |      ;
                        INX                                  ;81B186|E8      |      ;
-                       LDA.L UNREACH_83CA10,X               ;81B187|BF10CA83|83CA10;
+                       LDA.L Table_83CA10,X                 ;81B187|BF10CA83|83CA10;
                        PHA                                  ;81B18B|48      |      ;
                        LDA.W #$00F1                         ;81B18C|A9F100  |      ;
                        PLY                                  ;81B18F|7A      |      ;
@@ -6671,7 +6671,7 @@
                        BEQ CODE_81C2E2                      ;81C2D7|F009    |81C2E2;
                        REP #$30                             ;81C2D9|C230    |      ;
                        LDA.W #$0014                         ;81C2DB|A91400  |      ;
-                       JSL.L UNREACH_848020                 ;81C2DE|22208084|848020;
+                       JSL.L CODE_848020                    ;81C2DE|22208084|848020;
                                                             ;      |        |      ;
           CODE_81C2E2:
                        REP #$30                             ;81C2E2|C230    |      ;
@@ -11688,7 +11688,7 @@ IncrementPowerBerryEatenRoutine:
                        JSL.L CODE_83B1C9                    ;81E979|22C9B183|83B1C9;
                        REP #$20                             ;81E97D|C220    |      ;
                        LDA.W #$0007                         ;81E97F|A90700  |      ;
-                       JSL.L UNREACH_848020                 ;81E982|22208084|848020;
+                       JSL.L CODE_848020                    ;81E982|22208084|848020;
                        REP #$20                             ;81E986|C220    |      ;
                        LDA.W #$0007                         ;81E988|A90700  |      ;
                        LDX.W #$0000                         ;81E98B|A20000  |      ;
@@ -11765,7 +11765,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EA1D:
                        REP #$20                             ;81EA1D|C220    |      ;
                        LDA.W #$0007                         ;81EA1F|A90700  |      ;
-                       JSL.L UNREACH_848020                 ;81EA22|22208084|848020;
+                       JSL.L CODE_848020                    ;81EA22|22208084|848020;
                        REP #$20                             ;81EA26|C220    |      ;
                        LDA.W #$0007                         ;81EA28|A90700  |      ;
                        LDX.W #$0000                         ;81EA2B|A20000  |      ;
@@ -11893,7 +11893,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EB13:
                        REP #$20                             ;81EB13|C220    |      ;
                        LDA.W #$0008                         ;81EB15|A90800  |      ;
-                       JSL.L UNREACH_848020                 ;81EB18|22208084|848020;
+                       JSL.L CODE_848020                    ;81EB18|22208084|848020;
                        REP #$20                             ;81EB1C|C220    |      ;
                        LDA.W #$0008                         ;81EB1E|A90800  |      ;
                        LDX.W #$0000                         ;81EB21|A20000  |      ;
@@ -11950,7 +11950,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EB9B:
                        REP #$20                             ;81EB9B|C220    |      ;
                        LDA.W #$0008                         ;81EB9D|A90800  |      ;
-                       JSL.L UNREACH_848020                 ;81EBA0|22208084|848020;
+                       JSL.L CODE_848020                    ;81EBA0|22208084|848020;
                        REP #$20                             ;81EBA4|C220    |      ;
                        LDA.W #$0008                         ;81EBA6|A90800  |      ;
                        LDX.W #$0000                         ;81EBA9|A20000  |      ;
@@ -12183,7 +12183,7 @@ IncrementPowerBerryEatenRoutine:
                        JSL.L CODE_83B1C9                    ;81ED3C|22C9B183|83B1C9;
                        REP #$20                             ;81ED40|C220    |      ;
                        LDA.W #$0007                         ;81ED42|A90700  |      ;
-                       JSL.L UNREACH_848020                 ;81ED45|22208084|848020;
+                       JSL.L CODE_848020                    ;81ED45|22208084|848020;
                        REP #$20                             ;81ED49|C220    |      ;
                        LDA.W #$0007                         ;81ED4B|A90700  |      ;
                        LDX.W #$0000                         ;81ED4E|A20000  |      ;
@@ -12260,7 +12260,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EDE0:
                        REP #$20                             ;81EDE0|C220    |      ;
                        LDA.W #$0007                         ;81EDE2|A90700  |      ;
-                       JSL.L UNREACH_848020                 ;81EDE5|22208084|848020;
+                       JSL.L CODE_848020                    ;81EDE5|22208084|848020;
                        REP #$20                             ;81EDE9|C220    |      ;
                        LDA.W #$0007                         ;81EDEB|A90700  |      ;
                        LDX.W #$0000                         ;81EDEE|A20000  |      ;
@@ -12386,7 +12386,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EED6:
                        REP #$20                             ;81EED6|C220    |      ;
                        LDA.W #$0008                         ;81EED8|A90800  |      ;
-                       JSL.L UNREACH_848020                 ;81EEDB|22208084|848020;
+                       JSL.L CODE_848020                    ;81EEDB|22208084|848020;
                        REP #$20                             ;81EEDF|C220    |      ;
                        LDA.W #$0008                         ;81EEE1|A90800  |      ;
                        LDX.W #$0000                         ;81EEE4|A20000  |      ;
@@ -12451,7 +12451,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81EF73:
                        REP #$20                             ;81EF73|C220    |      ;
                        LDA.W #$0008                         ;81EF75|A90800  |      ;
-                       JSL.L UNREACH_848020                 ;81EF78|22208084|848020;
+                       JSL.L CODE_848020                    ;81EF78|22208084|848020;
                        REP #$20                             ;81EF7C|C220    |      ;
                        LDA.W #$0008                         ;81EF7E|A90800  |      ;
                        LDX.W #$0000                         ;81EF81|A20000  |      ;
@@ -12651,7 +12651,7 @@ IncrementPowerBerryEatenRoutine:
           CODE_81F0DE:
                        REP #$20                             ;81F0DE|C220    |      ;
                        LDA.W #$0006                         ;81F0E0|A90600  |      ;
-                       JSL.L UNREACH_848020                 ;81F0E3|22208084|848020;
+                       JSL.L CODE_848020                    ;81F0E3|22208084|848020;
                        REP #$20                             ;81F0E7|C220    |      ;
                        LDA.W #$0006                         ;81F0E9|A90600  |      ;
                        LDX.W #$0000                         ;81F0EC|A20000  |      ;
@@ -13611,7 +13611,7 @@ IncrementPowerBerryEatenRoutine:
                        ASL A                                ;81F841|0A      |      ;
                        ASL A                                ;81F842|0A      |      ;
                        TAX                                  ;81F843|AA      |      ;
-                       LDA.L UNREACH_83CA10,X               ;81F844|BF10CA83|83CA10;
+                       LDA.L Table_83CA10,X                 ;81F844|BF10CA83|83CA10;
                        SEC                                  ;81F848|38      |      ;
                        SBC.W #$0008                         ;81F849|E90800  |      ;
                        CMP.B $7E                            ;81F84C|C57E    |00007E;
