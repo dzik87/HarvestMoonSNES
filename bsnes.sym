@@ -280,6 +280,7 @@
 83:9567 CheckSpecialChar5
 83:957F CheckSpecialChar6
 83:958F CheckSpecialChar7
+83:9862 GetLetterGlyphOffset
 83:98AE pTableFontGlyphs
 83:98CC Table_8398CC
 83:98D6 Table_8398D6
@@ -4214,6 +4215,7 @@ FF:FFFF EMPTY_FFFFFF
 82:AD06 Season index based
 83:8F83 Each entry is 14 bytes long
 83:90EF Each entry is 10 bytes long
+83:9862 In A register we have current letter to load
 83:98AE Letters graphics pointers
 83:98CC each entry is 1 byte long
 94:9843 Each glyph is 0x10 long

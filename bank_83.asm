@@ -3005,7 +3005,7 @@
                        REP #$30                             ;839823|C230    |      ;
                        LDX.W #$0000                         ;839825|A20000  |      ;
                        PHX                                  ;839828|DA      |      ;
-                       JSR.W CODE_839862                    ;839829|206298  |839862;
+                       JSR.W GetLetterGlyphOffset           ;839829|206298  |839862;
                        REP #$30                             ;83982C|C230    |      ;
                        PLX                                  ;83982E|FA      |      ;
                        TXA                                  ;83982F|8A      |      ;
@@ -3039,8 +3039,8 @@
                        RTS                                  ;839861|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839862:
-                       REP #$30                             ;839862|C230    |      ;
+ GetLetterGlyphOffset:
+                       REP #$30                             ;839862|C230    |      ; In A register we have current letter to load
                        STA.B $7E                            ;839864|857E    |00007E;
                        LSR A                                ;839866|4A      |      ;
                        LSR A                                ;839867|4A      |      ;
@@ -3052,14 +3052,14 @@
                        ASL A                                ;83986E|0A      |      ;
                        CLC                                  ;83986F|18      |      ;
                        ADC.B $80                            ;839870|6580    |000080;
-                       TAX                                  ;839872|AA      |      ;
+                       TAX                                  ;839872|AA      |      ; Store pTable index into X
                        LDA.L pTableFontGlyphs,X             ;839873|BFAE9883|8398AE;
-                       STA.B $72                            ;839877|8572    |000072;
+                       STA.B $72                            ;839877|8572    |000072; Save LOW (pointer)
                        INX                                  ;839879|E8      |      ;
                        INX                                  ;83987A|E8      |      ;
                        SEP #$20                             ;83987B|E220    |      ;
                        LDA.L pTableFontGlyphs,X             ;83987D|BFAE9883|8398AE;
-                       STA.B $74                            ;839881|8574    |000074;
+                       STA.B $74                            ;839881|8574    |000074; Save HI (bank)
                        REP #$20                             ;839883|C220    |      ;
                        LDA.B $7E                            ;839885|A57E    |00007E;
                        AND.W #$003F                         ;839887|293F00  |      ;
@@ -3075,7 +3075,7 @@
                        ASL A                                ;839893|0A      |      ;
                        ASL A                                ;839894|0A      |      ;
                        ASL A                                ;839895|0A      |      ;
-                       STA.B $80                            ;839896|8580    |000080;
+                       STA.B $80                            ;839896|8580    |000080; store calculated row offset
                        LDA.B $7E                            ;839898|A57E    |00007E;
                        AND.W #$0007                         ;83989A|290700  |      ;
                        ASL A                                ;83989D|0A      |      ;
@@ -3083,12 +3083,12 @@
                        ASL A                                ;83989F|0A      |      ;
                        ASL A                                ;8398A0|0A      |      ;
                        ASL A                                ;8398A1|0A      |      ;
-                       STA.B $7E                            ;8398A2|857E    |00007E;
+                       STA.B $7E                            ;8398A2|857E    |00007E; store calculated column offset
                        LDA.B $72                            ;8398A4|A572    |000072;
                        CLC                                  ;8398A6|18      |      ;
-                       ADC.B $7E                            ;8398A7|657E    |00007E;
-                       ADC.B $80                            ;8398A9|6580    |000080;
-                       STA.B $72                            ;8398AB|8572    |000072;
+                       ADC.B $7E                            ;8398A7|657E    |00007E; add column offset to pointer
+                       ADC.B $80                            ;8398A9|6580    |000080; add row offset to pointer
+                       STA.B $72                            ;8398AB|8572    |000072; save calculated offset to memory
                        RTS                                  ;8398AD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
