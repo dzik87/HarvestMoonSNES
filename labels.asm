@@ -205,10 +205,8 @@
                        MarriedGirlID = $7F1F66              ;      |        |      ;
                        PlayerHasHorse = $7F1F69; !^ 00 - No, 01 - Yes ^!;      |        |      ;
                        ;      |        |      ;
-                       Table_82CFB4 = $82CFB4               ;      |        |      ;
                        Table_858C8E = $858C8E               ;      |        |      ;
                        Padding_920000 = $92EE4B             ;      |        |      ;
-                       FontGlyphs = $949843                 ;      |        |      ;
                        Padding_960000 = $96F55B             ;      |        |      ;
                        Padding_980000 = $98F97D             ;      |        |      ;
                        Padding_9A0000 = $9AF6E3             ;      |        |      ;
@@ -223,3 +221,4 @@
                        DATA8_00BE44 = $00BE44               ;      |        |      ;
                        DATA8_00BEEC = $00BEEC               ;      |        |      ;
                        LOOSE_OP_81A901 = $81A901            ;      |        |      ;
+                       EMPTY_FFFFFF = $FFFFFF               ;      |        |      ;
