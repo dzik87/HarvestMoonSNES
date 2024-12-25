@@ -280,6 +280,7 @@
 ;!^!-USED-!                        CheckSpecialChar5 = $839567          ;      |        |      ;
 ;!^!-USED-!                        CheckSpecialChar6 = $83957F          ;      |        |      ;
 ;!^!-USED-!                        CheckSpecialChar7 = $83958F          ;      |        |      ;
+;!^!-USED-!                        GetLetterGlyphOffset = $839862       ;      |        |      ;
 ;!^!-USED-!                        pTableFontGlyphs = $8398AE           ;      |        |      ;
 ;!^!-USED-!                        Table_8398CC = $8398CC               ;      |        |      ;
 ;!^!-USED-!                        Table_8398D6 = $8398D6               ;      |        |      ;
@@ -2893,7 +2894,6 @@
 ;!^!-USED-!                        CODE_839823 = $839823                ;      |        |      ;
 ;!^!-USED-!                        CODE_839838 = $839838                ;      |        |      ;
 ;!^!-USED-!                        CODE_839861 = $839861                ;      |        |      ;
-;!^!-USED-!                        CODE_839862 = $839862                ;      |        |      ;
 ;!^!-USED-!                        CODE_83ABF0 = $83ABF0                ;      |        |      ;
 ;!^!-USED-!                        CODE_83AD85 = $83AD85                ;      |        |      ;
 ;!^!-USED-!                        CODE_83AD91 = $83AD91                ;      |        |      ;
