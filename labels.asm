@@ -204,16 +204,7 @@
                        RanchDevelopmentRate = $7F1F56; !^ range 00h-64h ^!;      |        |      ;
                        MarriedGirlID = $7F1F66              ;      |        |      ;
                        PlayerHasHorse = $7F1F69; !^ 00 - No, 01 - Yes ^!;      |        |      ;
-                       ;      |        |      ;
                        Table_858C8E = $858C8E               ;      |        |      ;
-                       Padding_920000 = $92EE4B             ;      |        |      ;
-                       Padding_960000 = $96F55B             ;      |        |      ;
-                       Padding_980000 = $98F97D             ;      |        |      ;
-                       Padding_9A0000 = $9AF6E3             ;      |        |      ;
-                       Padding_9B0000 = $9BE6E5             ;      |        |      ;
-                       Padding_9C0000 = $9CFFB5             ;      |        |      ;
-                       Padding_9E0000 = $9EEFD1             ;      |        |      ;
-                       Padding_A00000 = $A0FCC9             ;      |        |      ;
                        CODE_008428 = $008428                ;      |        |      ;
                        CODE_00867B = $00867B                ;      |        |      ;
                        CODE_008698 = $008698                ;      |        |      ;
