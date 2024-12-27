@@ -341,7 +341,6 @@
 80:FFF4 Native_IRQ
 80:FFFE Emulation_RESET
 81:A1A5 Table_81A1A5
-81:A65C .return
 81:AC49 BerryTable
 81:B363 Table_81B363
 81:B963 pTable_81B963

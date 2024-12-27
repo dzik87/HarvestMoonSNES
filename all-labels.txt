@@ -341,7 +341,7 @@
 ;!^!-USED-!                        Native_IRQ = $80FFF4                 ;      |        |      ;
 ;!^!-USED-!                        Emulation_RESET = $80FFFE            ;      |        |      ;
 ;!^!-USED-!                        Table_81A1A5 = $81A1A5               ;      |        |      ;
-;!^!-USED-!                        .return = $81A65C                    ;      |        |      ;
+;!^!-USED-!                        ;      |        |      ;
 ;!^!-USED-!                        BerryTable = $81AC49                 ;      |        |      ;
 ;!^!-USED-!                        Table_81B363 = $81B363               ;      |        |      ;
 ;!^!-UNUSED-!                        ;      |        |      ;
