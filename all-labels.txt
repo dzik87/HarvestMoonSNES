@@ -346,7 +346,7 @@
 ;!^!-USED-!                        Table_81B363 = $81B363               ;      |        |      ;
 ;!^!-UNUSED-!                        ;      |        |      ;
 ;!^!-USED-!                        pTable_81B963 = $81B963              ;      |        |      ;
-;!^!-USED-!                        Table_81BE0F = $81BE0F               ;      |        |      ;
+;!^!-USED-!                        nToolsRelatedTable = $81BE0F         ;      |        |      ;
 ;!^!-USED-!                        Table_81BF97 = $81BF97               ;      |        |      ;
 ;!^!-USED-!                        IncrementPowerBerryEatenRoutine = $81CAAB;      |        |      ;
 ;!^!-USED-!                        Table_81D1E8 = $81D1E8               ;      |        |      ;

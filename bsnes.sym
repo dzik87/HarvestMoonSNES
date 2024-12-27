@@ -345,7 +345,7 @@
 81:AC49 BerryTable
 81:B363 Table_81B363
 81:B963 pTable_81B963
-81:BE0F Table_81BE0F
+81:BE0F nToolsRelatedTable
 81:BF97 Table_81BF97
 81:CAAB IncrementPowerBerryEatenRoutine
 81:D1E8 Table_81D1E8
@@ -4757,7 +4757,7 @@ FF:FFFF EMPTY_FFFFFF
 80:AB3C Graphic Preset
 80:B6F5 b16 nTransitionDestination, b16, b16 nDestX, b16 nDestY
 81:AC49 10 entries with 4 bytes each?
-81:BE0F Each entry is 6 bytes long, 41 entries
+81:B963 if last 16b are $FFFF = end if $FFFE then it follows with prt24 (looping same data again)
 82:8298 Each entry is 3 bytes long
 82:8AD9 Season index based, each entry 16 bytes long
 82:8B19 Weekday index based, each entry 32 bytes long
