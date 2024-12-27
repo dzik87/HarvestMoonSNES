@@ -8436,10 +8436,10 @@
                        ADC.W #$0006                         ;84BB75|690600  |      ;
                        TAX                                  ;84BB78|AA      |      ;
                        SEP #$20                             ;84BB79|E220    |      ;
-                       LDA.L Table_81BE0F,X                 ;84BB7B|BF0FBE81|81BE0F;
+                       LDA.L nToolsRelatedTable,X           ;84BB7B|BF0FBE81|81BE0F;
                        PHA                                  ;84BB7F|48      |      ;
                        INX                                  ;84BB80|E8      |      ;
-                       LDA.L Table_81BE0F,X                 ;84BB81|BF0FBE81|81BE0F;
+                       LDA.L nToolsRelatedTable,X           ;84BB81|BF0FBE81|81BE0F;
                        STA.B $92                            ;84BB85|8592    |000092;
                        PLA                                  ;84BB87|68      |      ;
                        XBA                                  ;84BB88|EB      |      ;
@@ -8468,10 +8468,10 @@
                        ADC.W #$0006                         ;84BBB0|690600  |      ;
                        TAX                                  ;84BBB3|AA      |      ;
                        SEP #$20                             ;84BBB4|E220    |      ;
-                       LDA.L Table_81BE0F,X                 ;84BBB6|BF0FBE81|81BE0F;
+                       LDA.L nToolsRelatedTable,X           ;84BBB6|BF0FBE81|81BE0F;
                        PHA                                  ;84BBBA|48      |      ;
                        INX                                  ;84BBBB|E8      |      ;
-                       LDA.L Table_81BE0F,X                 ;84BBBC|BF0FBE81|81BE0F;
+                       LDA.L nToolsRelatedTable,X           ;84BBBC|BF0FBE81|81BE0F;
                        STA.B $92                            ;84BBC0|8592    |000092;
                        PLA                                  ;84BBC2|68      |      ;
                        XBA                                  ;84BBC3|EB      |      ;
