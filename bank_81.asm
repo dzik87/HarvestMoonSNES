@@ -2105,7 +2105,7 @@
                        SBC.W #$00E2                         ;818EE0|E9E200  |      ;
                        ASL A                                ;818EE3|0A      |      ;
                        TAX                                  ;818EE4|AA      |      ;
-                       LDA.L Table_82A571,X                 ;818EE5|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;818EE5|BF71A582|82A571;
                        ORA.W $0932                          ;818EE9|0D3209  |000932;
                        STA.W $0932                          ;818EEC|8D3209  |000932;
                        SEP #$20                             ;818EEF|E220    |      ;
@@ -2134,7 +2134,7 @@
                        SBC.W #$00E2                         ;818F0F|E9E200  |      ;
                        ASL A                                ;818F12|0A      |      ;
                        TAX                                  ;818F13|AA      |      ;
-                       LDA.L Table_82A571,X                 ;818F14|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;818F14|BF71A582|82A571;
                        ORA.W $0934                          ;818F18|0D3409  |000934;
                        STA.W $0934                          ;818F1B|8D3409  |000934;
                        SEP #$20                             ;818F1E|E220    |      ;
@@ -5505,7 +5505,7 @@
                        TYA                                  ;81B0BE|98      |      ;
                        ASL A                                ;81B0BF|0A      |      ;
                        TAX                                  ;81B0C0|AA      |      ;
-                       LDA.L Table_82A571,X                 ;81B0C1|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;81B0C1|BF71A582|82A571;
                        AND.W $0932                          ;81B0C5|2D3209  |000932;
                        BEQ CODE_81B0E3                      ;81B0C8|F019    |81B0E3;
                        TYA                                  ;81B0CA|98      |      ;
@@ -5557,7 +5557,7 @@
                        TYA                                  ;81B139|98      |      ;
                        ASL A                                ;81B13A|0A      |      ;
                        TAX                                  ;81B13B|AA      |      ;
-                       LDA.L Table_82A571,X                 ;81B13C|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;81B13C|BF71A582|82A571;
                        AND.W $0934                          ;81B140|2D3409  |000934;
                        BEQ CODE_81B15E                      ;81B143|F019    |81B15E;
                        TYA                                  ;81B145|98      |      ;
