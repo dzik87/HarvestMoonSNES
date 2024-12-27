@@ -1880,7 +1880,7 @@
                        REP #$20                             ;829027|C220    |      ;
                        TAX                                  ;829029|AA      |      ;
                        SEP #$20                             ;82902A|E220    |      ;
-                       LDA.L DATA8_80B8CD,X                 ;82902C|BFCDB880|80B8CD;
+                       LDA.L Table_80B8CD,X                 ;82902C|BFCDB880|80B8CD;
                        INC A                                ;829030|1A      |      ;
                        STA.W $0103                          ;829031|8D0301  |000103;
                        JSL.L CODE_83833E                    ;829034|223E8383|83833E;
@@ -4636,12 +4636,12 @@ ToolAnimationNoAction:
                        REP #$20                             ;82A621|C220    |      ;
                        TAX                                  ;82A623|AA      |      ;
                        PHX                                  ;82A624|DA      |      ;
-                       LDA.L MapPointerTable,X              ;82A625|BF74B182|82B174;
+                       LDA.L pMapTable,X                    ;82A625|BF74B182|82B174;
                        STA.B $72                            ;82A629|8572    |000072;
                        SEP #$20                             ;82A62B|E220    |      ;
                        INX                                  ;82A62D|E8      |      ;
                        INX                                  ;82A62E|E8      |      ;
-                       LDA.L MapPointerTable,X              ;82A62F|BF74B182|82B174;
+                       LDA.L pMapTable,X                    ;82A62F|BF74B182|82B174;
                        STA.B $74                            ;82A633|8574    |000074;
                                                             ;      |        |      ;
           CODE_82A635:
@@ -4670,12 +4670,12 @@ ToolAnimationNoAction:
           CODE_82A65A:
                        REP #$30                             ;82A65A|C230    |      ;
                        LDX.W #$0000                         ;82A65C|A20000  |      ;
-                       LDA.L MapPointerTable,X              ;82A65F|BF74B182|82B174;
+                       LDA.L pMapTable,X                    ;82A65F|BF74B182|82B174;
                        STA.B $72                            ;82A663|8572    |000072;
                        INX                                  ;82A665|E8      |      ;
                        INX                                  ;82A666|E8      |      ;
                        SEP #$20                             ;82A667|E220    |      ;
-                       LDA.L MapPointerTable,X              ;82A669|BF74B182|82B174;
+                       LDA.L pMapTable,X                    ;82A669|BF74B182|82B174;
                        STA.B $74                            ;82A66D|8574    |000074;
                        SEP #$20                             ;82A66F|E220    |      ;
                        LDY.W #$0000                         ;82A671|A00000  |      ;
@@ -5937,7 +5937,7 @@ IncreaseRanchDevelopmentRate:
                        INC A                                ;82AE05|1A      |      ;
                        TAX                                  ;82AE06|AA      |      ;
                        SEP #$20                             ;82AE07|E220    |      ;
-                       LDA.L Table_80B6F5,X                 ;82AE09|BFF5B680|80B6F5;
+                       LDA.L aScreenTransitionTable,X       ;82AE09|BFF5B680|80B6F5;
                        AND.B #$02                           ;82AE0D|2902    |      ;
                        BEQ CODE_82AE1B                      ;82AE0F|F00A    |82AE1B;
                        LDA.L CurrentTimeID                  ;82AE11|AF1C1F7F|7F1F1C;
@@ -5948,7 +5948,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82AE1B:
                        SEP #$20                             ;82AE1B|E220    |      ;
-                       LDA.L Table_80B6F5,X                 ;82AE1D|BFF5B680|80B6F5;
+                       LDA.L aScreenTransitionTable,X       ;82AE1D|BFF5B680|80B6F5;
                        AND.B #$04                           ;82AE21|2904    |      ;
                        BEQ CODE_82AE2F                      ;82AE23|F00A    |82AE2F;
                        LDA.L CurrentTimeID                  ;82AE25|AF1C1F7F|7F1F1C;
@@ -5959,7 +5959,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82AE2F:
                        SEP #$20                             ;82AE2F|E220    |      ;
-                       LDA.L Table_80B6F5,X                 ;82AE31|BFF5B680|80B6F5;
+                       LDA.L aScreenTransitionTable,X       ;82AE31|BFF5B680|80B6F5;
                        AND.B #$08                           ;82AE35|2908    |      ;
                        BEQ CODE_82AE45                      ;82AE37|F00C    |82AE45;
                        LDA.L CurrentWeekdayID               ;82AE39|AF1A1F7F|7F1F1A;
@@ -5971,7 +5971,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82AE45:
                        SEP #$20                             ;82AE45|E220    |      ;
-                       LDA.L Table_80B6F5,X                 ;82AE47|BFF5B680|80B6F5;
+                       LDA.L aScreenTransitionTable,X       ;82AE47|BFF5B680|80B6F5;
                        AND.B #$10                           ;82AE4B|2910    |      ;
                        BEQ CODE_82AE59                      ;82AE4D|F00A    |82AE59;
                        LDA.L CurrentWeekdayID               ;82AE4F|AF1A1F7F|7F1F1A;
@@ -5982,7 +5982,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82AE59:
                        SEP #$20                             ;82AE59|E220    |      ;
-                       LDA.L Table_80B6F5,X                 ;82AE5B|BFF5B680|80B6F5;
+                       LDA.L aScreenTransitionTable,X       ;82AE5B|BFF5B680|80B6F5;
                        AND.B #$20                           ;82AE5F|2920    |      ;
                        BEQ CODE_82AE6B                      ;82AE61|F008    |82AE6B;
                        LDA.L CurrentWeekdayID               ;82AE63|AF1A1F7F|7F1F1A;
@@ -5992,7 +5992,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82AE6B:
                        SEP #$20                             ;82AE6B|E220    |      ;
-                       LDA.L Table_80B6F5,X                 ;82AE6D|BFF5B680|80B6F5;
+                       LDA.L aScreenTransitionTable,X       ;82AE6D|BFF5B680|80B6F5;
                        AND.B #$80                           ;82AE71|2980    |      ;
                        BEQ CODE_82AEE5                      ;82AE73|F070    |82AEE5;
                        REP #$20                             ;82AE75|C220    |      ;
@@ -6499,7 +6499,7 @@ IncreaseRanchDevelopmentRate:
                        RTS                                  ;82B173|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      MapPointerTable:
+            pMapTable:
                        dl Data_A78000                       ;82B174|        |A78000;
                        dl Data_A78000                       ;82B177|        |A78000;
                        dl Data_A78000                       ;82B17A|        |A78000;
