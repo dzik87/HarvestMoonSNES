@@ -6667,7 +6667,7 @@ SetDefaultValuesForVariables:
                        TXA                                  ;83BCB3|8A      |      ;
                        ASL A                                ;83BCB4|0A      |      ;
                        TAX                                  ;83BCB5|AA      |      ;
-                       LDA.L Table_82A571,X                 ;83BCB6|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;83BCB6|BF71A582|82A571;
                        AND.W $0932                          ;83BCBA|2D3209  |000932;
                        BEQ CODE_83BD10                      ;83BCBD|F051    |83BD10;
                        JMP.W CODE_83BD9E                    ;83BCBF|4C9EBD  |83BD9E;
@@ -6676,7 +6676,7 @@ SetDefaultValuesForVariables:
           CODE_83BCC2:
                        REP #$30                             ;83BCC2|C230    |      ;
                        LDX.W #$0018                         ;83BCC4|A21800  |      ;
-                       LDA.L Table_82A571,X                 ;83BCC7|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;83BCC7|BF71A582|82A571;
                        AND.W $0932                          ;83BCCB|2D3209  |000932;
                        BEQ CODE_83BD10                      ;83BCCE|F040    |83BD10;
                        JMP.W CODE_83BD9E                    ;83BCD0|4C9EBD  |83BD9E;

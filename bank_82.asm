@@ -1934,7 +1934,7 @@
                        LDA.W $0921                          ;8290C3|AD2109  |000921;
                        ASL A                                ;8290C6|0A      |      ;
                        TAX                                  ;8290C7|AA      |      ;
-                       JSR.W (PTR16_82A58B,X)               ;8290C8|FC8BA5  |82A58B;
+                       JSR.W (Tool_Animation_Table,X)       ;8290C8|FC8BA5  |82A58B;
                        BRA CODE_8290DC                      ;8290CB|800F    |8290DC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1950,11 +1950,11 @@
                        RTL                                  ;8290DC|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8290DD:
+ToolAnimationNoAction:
                        RTS                                  ;8290DD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8290DE:
+  ToolAnimationSickle:
                        REP #$30                             ;8290DE|C230    |      ;
                        REP #$30                             ;8290E0|C230    |      ;
                        LDA.W #$0050                         ;8290E2|A95000  |      ;
@@ -1964,7 +1964,7 @@
                        RTS                                  ;8290EB|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8290EC:
+     ToolAnimationHoe:
                        REP #$30                             ;8290EC|C230    |      ;
                        REP #$30                             ;8290EE|C230    |      ;
                        LDA.W #$0054                         ;8290F0|A95400  |      ;
@@ -1974,7 +1974,7 @@
                        RTS                                  ;8290F9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8290FA:
+  ToolAnimationHammer:
                        REP #$30                             ;8290FA|C230    |      ;
                        REP #$30                             ;8290FC|C230    |      ;
                        LDA.W #$0058                         ;8290FE|A95800  |      ;
@@ -2234,7 +2234,7 @@
                        LDA.W $0921                          ;829267|AD2109  |000921;
                        ASL A                                ;82926A|0A      |      ;
                        TAX                                  ;82926B|AA      |      ;
-                       JSR.W (PTR16_82A5C3,X)               ;82926C|FCC3A5  |82A5C3;
+                       JSR.W (Tool_Used_Table,X)            ;82926C|FCC3A5  |82A5C3;
                        REP #$20                             ;82926F|C220    |      ;
                        LDA.L $7F1F5A                        ;829271|AF5A1F7F|7F1F5A;
                        ORA.W #$0040                         ;829275|094000  |      ;
@@ -4407,7 +4407,7 @@
                        SBC.W #$00E2                         ;82A44A|E9E200  |      ;
                        ASL A                                ;82A44D|0A      |      ;
                        TAX                                  ;82A44E|AA      |      ;
-                       LDA.L Table_82A571,X                 ;82A44F|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;82A44F|BF71A582|82A571;
                        ORA.W $0934                          ;82A453|0D3409  |000934;
                        STA.W $0934                          ;82A456|8D3409  |000934;
                        SEP #$20                             ;82A459|E220    |      ;
@@ -4486,7 +4486,7 @@
                        SBC.W #$00E2                         ;82A4F8|E9E200  |      ;
                        ASL A                                ;82A4FB|0A      |      ;
                        TAX                                  ;82A4FC|AA      |      ;
-                       LDA.L Table_82A571,X                 ;82A4FD|BF71A582|82A571;
+                       LDA.L Cow_Feed_Flags,X               ;82A4FD|BF71A582|82A571;
                        ORA.W $0932                          ;82A501|0D3209  |000932;
                        STA.W $0932                          ;82A504|8D3209  |000932;
                        SEP #$20                             ;82A507|E220    |      ;
@@ -4543,17 +4543,17 @@
                        RTS                                  ;82A570|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-         Table_82A571:
+       Cow_Feed_Flags:
                        dw $0001,$0002,$0004,$0008           ;82A571|        |      ;
                        dw $0010,$0020,$0040,$0080           ;82A579|        |      ;
                        dw $0100,$0200,$0400,$0800           ;82A581|        |      ;
                        dw $1000                             ;82A589|        |      ;
                                                             ;      |        |      ;
-         PTR16_82A58B:
-                       dw CODE_8290DD                       ;82A58B|        |8290DD;
-                       dw CODE_8290DE                       ;82A58D|        |8290DE;
-                       dw CODE_8290EC                       ;82A58F|        |8290EC;
-                       dw CODE_8290FA                       ;82A591|        |8290FA;
+ Tool_Animation_Table:
+                       dw ToolAnimationNoAction             ;82A58B|        |8290DD;
+                       dw ToolAnimationSickle               ;82A58D|        |8290DE;
+                       dw ToolAnimationHoe                  ;82A58F|        |8290EC;
+                       dw ToolAnimationHammer               ;82A591|        |8290FA;
                        dw CODE_829108                       ;82A593|        |829108;
                        dw CODE_829116                       ;82A595|        |829116;
                        dw CODE_829121                       ;82A597|        |829121;
@@ -4579,7 +4579,7 @@
                        dw CODE_82924B                       ;82A5BF|        |82924B;
                        dw CODE_829257                       ;82A5C1|        |829257;
                                                             ;      |        |      ;
-         PTR16_82A5C3:
+      Tool_Used_Table:
                        dw CODE_82931E                       ;82A5C3|        |82931E;
                        dw CODE_829328                       ;82A5C5|        |829328;
                        dw CODE_829460                       ;82A5C7|        |829460;
@@ -4636,12 +4636,12 @@
                        REP #$20                             ;82A621|C220    |      ;
                        TAX                                  ;82A623|AA      |      ;
                        PHX                                  ;82A624|DA      |      ;
-                       LDA.L pTable_82B174,X                ;82A625|BF74B182|82B174;
+                       LDA.L MapPointerTable,X              ;82A625|BF74B182|82B174;
                        STA.B $72                            ;82A629|8572    |000072;
                        SEP #$20                             ;82A62B|E220    |      ;
                        INX                                  ;82A62D|E8      |      ;
                        INX                                  ;82A62E|E8      |      ;
-                       LDA.L pTable_82B174,X                ;82A62F|BF74B182|82B174;
+                       LDA.L MapPointerTable,X              ;82A62F|BF74B182|82B174;
                        STA.B $74                            ;82A633|8574    |000074;
                                                             ;      |        |      ;
           CODE_82A635:
@@ -4670,12 +4670,12 @@
           CODE_82A65A:
                        REP #$30                             ;82A65A|C230    |      ;
                        LDX.W #$0000                         ;82A65C|A20000  |      ;
-                       LDA.L pTable_82B174,X                ;82A65F|BF74B182|82B174;
+                       LDA.L MapPointerTable,X              ;82A65F|BF74B182|82B174;
                        STA.B $72                            ;82A663|8572    |000072;
                        INX                                  ;82A665|E8      |      ;
                        INX                                  ;82A666|E8      |      ;
                        SEP #$20                             ;82A667|E220    |      ;
-                       LDA.L pTable_82B174,X                ;82A669|BF74B182|82B174;
+                       LDA.L MapPointerTable,X              ;82A669|BF74B182|82B174;
                        STA.B $74                            ;82A66D|8574    |000074;
                        SEP #$20                             ;82A66F|E220    |      ;
                        LDY.W #$0000                         ;82A671|A00000  |      ;
@@ -6499,7 +6499,7 @@ IncreaseRanchDevelopmentRate:
                        RTS                                  ;82B173|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-        pTable_82B174:
+      MapPointerTable:
                        dl Data_A78000                       ;82B174|        |A78000;
                        dl Data_A78000                       ;82B177|        |A78000;
                        dl Data_A78000                       ;82B17A|        |A78000;
@@ -10691,6 +10691,8 @@ IncreaseRanchDevelopmentRate:
                        LDA.B [$72],Y                        ;82EBF5|B772    |000072;
                        RTL                                  ;82EBF7|6B      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+    NameGridPositions:
                        db $28,$44,$05,$1F,$01,$28,$1A,$00   ;82EBF8|        |      ;
                        db $38,$44,$06,$20,$02,$00,$1B,$00   ;82EC00|        |      ;
                        db $48,$44,$07,$21,$03,$01,$1C,$00   ;82EC08|        |      ;

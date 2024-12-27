@@ -54,7 +54,6 @@
                        incsrc "bank_B3.asm"                 ;      |        |      ;
                        incsrc "bank_B4.asm"                 ;      |        |      ;
                        incsrc "bank_B5.asm"                 ;      |        |      ;
-                       incsrc "letters.asm"                 ;      |        |      ;
                        incsrc "bank_B6.asm"                 ;      |        |      ;
                        incsrc "bank_B7.asm"                 ;      |        |      ;
                        incsrc "bank_B8.asm"                 ;      |        |      ;
