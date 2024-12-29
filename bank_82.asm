@@ -5,14 +5,14 @@
           CODE_828000:
                        SEP #$20                             ;828000|E220    |      ;
                        REP #$10                             ;828002|C210    |      ;
-                       LDA.W $0973                          ;828004|AD7309  |000973;
+                       LDA.W nTimeState                     ;828004|AD7309  |000973;
                        AND.B #$02                           ;828007|2902    |      ;
                        BEQ CODE_82800E                      ;828009|F003    |82800E;
                        JMP.W NextDayHandler                 ;82800B|4CAC82  |8282AC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82800E:
-                       LDA.W $0973                          ;82800E|AD7309  |000973;
+                       LDA.W nTimeState                     ;82800E|AD7309  |000973;
                        AND.B #$01                           ;828011|2901    |      ;
                        BNE CODE_828018                      ;828013|D003    |828018;
                        JMP.W CODE_8280A9                    ;828015|4CA980  |8280A9;
@@ -73,14 +73,14 @@
                        SEP #$20                             ;82808C|E220    |      ;
                        LDA.W $017B                          ;82808E|AD7B01  |00017B;
                        PHA                                  ;828091|48      |      ;
-                       JSL.L CODE_809501                    ;828092|22019580|809501;
+                       JSL.L fTimePalleteRelated_809501     ;828092|22019580|809501;
                        SEP #$20                             ;828096|E220    |      ;
                        PLA                                  ;828098|68      |      ;
                        CMP.W $017B                          ;828099|CD7B01  |00017B;
                        BEQ CODE_8280A9                      ;82809C|F00B    |8280A9;
                        LDY.W #$0004                         ;82809E|A00400  |      ;
-                       JSL.L CODE_808F92                    ;8280A1|22928F80|808F92;
-                       JSL.L CODE_809553                    ;8280A5|22539580|809553;
+                       JSL.L fUnknown_808F92                ;8280A1|22928F80|808F92;
+                       JSL.L fSubrutinesExecute_809553      ;8280A5|22539580|809553;
                                                             ;      |        |      ;
           CODE_8280A9:
                        RTL                                  ;8280A9|6B      |      ;
@@ -159,7 +159,7 @@
           CODE_828111:
                        SEP #$20                             ;828111|E220    |      ;
                        LDA.B #$03                           ;828113|A903    |      ;
-                       JSL.L CODE_8089F9                    ;828115|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;828115|22F98980|8089F9;
                        SEP #$20                             ;828119|E220    |      ;
                        STA.W $0924                          ;82811B|8D2409  |000924;
                        REP #$30                             ;82811E|C230    |      ;
@@ -216,10 +216,10 @@
                        STA.W $019A                          ;82817F|8D9A01  |00019A;
                        LDX.W #$031A                         ;828182|A21A03  |      ;
                        REP #$20                             ;828185|C220    |      ;
-                       LDA.L $7F1F07                        ;828187|AF071F7F|7F1F07;
+                       LDA.L nMoneyLow16                    ;828187|AF071F7F|7F1F07;
                        BNE CODE_828198                      ;82818B|D00B    |828198;
                        SEP #$20                             ;82818D|E220    |      ;
-                       LDA.L $7F1F09                        ;82818F|AF091F7F|7F1F09;
+                       LDA.L nMoneyHi8                      ;82818F|AF091F7F|7F1F09;
                        BNE CODE_828198                      ;828193|D003    |828198;
                        LDX.W #$031B                         ;828195|A21B03  |      ;
                                                             ;      |        |      ;
@@ -227,7 +227,7 @@
                        SEP #$20                             ;828198|E220    |      ;
                        LDA.B #$00                           ;82819A|A900    |      ;
                        STA.W $0191                          ;82819C|8D9101  |000191;
-                       JSL.L CODE_83935F                    ;82819F|225F9383|83935F;
+                       JSL.L DialogRelated                  ;82819F|225F9383|83935F;
                        REP #$20                             ;8281A3|C220    |      ;
                        LDA.W #$0006                         ;8281A5|A90600  |      ;
                        LDX.W #$0000                         ;8281A8|A20000  |      ;
@@ -282,7 +282,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          Table_8281FD:
-                       db $00,$01,$02,$03,$00,$00,$05,$06   ;8281FD|        |      ;
+                       db $00,$01,$02,$03,$00,$00,$05,$06   ;8281FD|        |      ; 8b
                        db $07,$08,$09,$0A                   ;828205|        |      ;
                                                             ;      |        |      ;
           CODE_828209:
@@ -310,24 +310,24 @@
           CODE_828234:
                        REP #$20                             ;828234|C220    |      ;
                        LDA.W #$0000                         ;828236|A90000  |      ;
-                       JSR.W NextYearRelated                ;828239|207082  |828270;
-                       JSL.L NextYearRelated2               ;82823C|2213A782|82A713;
+                       JSR.W NewYearPrepareArgumentsAXY     ;828239|207082  |828270;
+                       JSL.L NewYearStoreIntoA86_X88_Y8A    ;82823C|2213A782|82A713;
                        BRA CODE_828233                      ;828240|80F1    |828233;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_828242:
                        REP #$20                             ;828242|C220    |      ;
                        LDA.W #$0001                         ;828244|A90100  |      ;
-                       JSR.W NextYearRelated                ;828247|207082  |828270;
-                       JSL.L NextYearRelated2               ;82824A|2213A782|82A713;
+                       JSR.W NewYearPrepareArgumentsAXY     ;828247|207082  |828270;
+                       JSL.L NewYearStoreIntoA86_X88_Y8A    ;82824A|2213A782|82A713;
                        BRA CODE_828233                      ;82824E|80E3    |828233;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_828250:
                        REP #$20                             ;828250|C220    |      ;
                        LDA.W #$0002                         ;828252|A90200  |      ;
-                       JSR.W NextYearRelated                ;828255|207082  |828270;
-                       JSL.L NextYearRelated2               ;828258|2213A782|82A713;
+                       JSR.W NewYearPrepareArgumentsAXY     ;828255|207082  |828270;
+                       JSL.L NewYearStoreIntoA86_X88_Y8A    ;828258|2213A782|82A713;
                        BRA CODE_828233                      ;82825C|80D5    |828233;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -338,14 +338,14 @@
           CODE_828260:
                        REP #$20                             ;828260|C220    |      ;
                        LDA.W #$0003                         ;828262|A90300  |      ;
-                       JSR.W NextYearRelated                ;828265|207082  |828270;
-                       JSL.L NextYearRelated2               ;828268|2213A782|82A713;
+                       JSR.W NewYearPrepareArgumentsAXY     ;828265|207082  |828270;
+                       JSL.L NewYearStoreIntoA86_X88_Y8A    ;828268|2213A782|82A713;
                        BRA CODE_828233                      ;82826C|80C5    |828233;
                                                             ;      |        |      ;
                        BRA CODE_828233                      ;82826E|80C3    |828233;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      NextYearRelated:
+NewYearPrepareArgumentsAXY:
                        REP #$30                             ;828270|C230    |      ;
                        ASL A                                ;828272|0A      |      ;
                        ASL A                                ;828273|0A      |      ;
@@ -372,7 +372,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          Table_828298:
-                       db $60,$00,$00,$00,$40,$00,$00,$00   ;828298|        |      ; Each entry is 3 bytes long
+                       db $60,$00,$00,$00,$40,$00,$00,$00   ;828298|        |      ; 8b argA, 8b argX, 8b argY, 8b unused
                        db $08,$10,$04,$00,$08,$00,$04,$00   ;8282A0|        |      ;
                        db $00,$40,$20,$00                   ;8282A8|        |      ;
                                                             ;      |        |      ;
@@ -402,8 +402,8 @@
                        STA.L CurrentYearID                  ;8282DA|8F181F7F|7F1F18; Store Year Value
                        REP #$20                             ;8282DE|C220    |      ;
                        LDA.W #$0004                         ;8282E0|A90400  |      ; Load something to A
-                       JSR.W NextYearRelated                ;8282E3|207082  |828270;
-                       JSL.L NextYearRelated2               ;8282E6|2213A782|82A713;
+                       JSR.W NewYearPrepareArgumentsAXY     ;8282E3|207082  |828270;
+                       JSL.L NewYearStoreIntoA86_X88_Y8A    ;8282E6|2213A782|82A713;
                        SEP #$20                             ;8282EA|E220    |      ;
                        LDA.B #$00                           ;8282EC|A900    |      ;
                                                             ;      |        |      ;
@@ -425,8 +425,8 @@
                        STA.B $93                            ;82830D|8593    |000093;
                        LDA.B #$01                           ;82830F|A901    |      ;
                        STA.B $94                            ;828311|8594    |000094;
-                       JSL.L CODE_80880A                    ;828313|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;828317|220F8E80|808E0F;
+                       JSL.L fScreenFadeout                 ;828313|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;828317|220F8E80|808E0F;
                        SEP #$20                             ;82831B|E220    |      ;
                        LDA.B #$0F                           ;82831D|A90F    |      ;
                        STA.B $22                            ;82831F|8522    |000022;
@@ -465,7 +465,7 @@
                        STA.L $7F1F70                        ;828378|8F701F7F|7F1F70;
                                                             ;      |        |      ;
                NewDay:
-                       JSL.L CODE_8095F5                    ;82837C|22F59580|8095F5;
+                       JSL.L fUnknown_8095F5                ;82837C|22F59580|8095F5;
                        SEP #$20                             ;828380|E220    |      ;
                        LDA.B #$06                           ;828382|A906    |      ; Set time to 6:00AM
                        STA.L CurrentTimeID                  ;828384|8F1C1F7F|7F1F1C; Store current time
@@ -473,7 +473,7 @@
                        STA.L $7F1F1D                        ;82838A|8F1D1F7F|7F1F1D; Save time
                        LDA.B #$00                           ;82838E|A900    |      ;
                        STA.L $7F1F1E                        ;828390|8F1E1F7F|7F1F1E;
-                       JSL.L CODE_8289D6                    ;828394|22D68982|8289D6;
+                       JSL.L WriteSeasonWeekdayAndDayOrdinal;828394|22D68982|8289D6;
                        JSL.L CODE_82A811                    ;828398|2211A882|82A811;
                        JSL.L CODE_828209                    ;82839C|22098282|828209;
                        JSL.L CODE_83BC5A                    ;8283A0|225ABC83|83BC5A;
@@ -505,18 +505,18 @@
                        LDA.W #$0000                         ;8283E5|A90000  |      ;
                        STA.W $0901                          ;8283E8|8D0109  |000901;
                        REP #$20                             ;8283EB|C220    |      ;
-                       LDA.L $7F1F07                        ;8283ED|AF071F7F|7F1F07;
+                       LDA.L nMoneyLow16                    ;8283ED|AF071F7F|7F1F07;
                        STA.B $72                            ;8283F1|8572    |000072;
                        SEP #$20                             ;8283F3|E220    |      ;
-                       LDA.L $7F1F09                        ;8283F5|AF091F7F|7F1F09;
+                       LDA.L nMoneyHi8                      ;8283F5|AF091F7F|7F1F09;
                        STA.B $74                            ;8283F9|8574    |000074;
                        JSL.L CODE_83B1C9                    ;8283FB|22C9B183|83B1C9;
                        REP #$20                             ;8283FF|C220    |      ;
                        LDA.W #$0000                         ;828401|A90000  |      ;
-                       STA.L $7F1F07                        ;828404|8F071F7F|7F1F07;
+                       STA.L nMoneyLow16                    ;828404|8F071F7F|7F1F07;
                        SEP #$20                             ;828408|E220    |      ;
                        LDA.B #$00                           ;82840A|A900    |      ;
-                       STA.L $7F1F09                        ;82840C|8F091F7F|7F1F09;
+                       STA.L nMoneyHi8                      ;82840C|8F091F7F|7F1F09;
                        SEP #$20                             ;828410|E220    |      ;
                        STZ.W $0930                          ;828412|9C3009  |000930;
                        STZ.W $0931                          ;828415|9C3109  |000931;
@@ -804,7 +804,7 @@
                                                             ;      |        |      ;
           CODE_8286FD:
                        SEP #$20                             ;8286FD|E220    |      ;
-                       LDA.W $0973                          ;8286FF|AD7309  |000973;
+                       LDA.W nTimeState                     ;8286FF|AD7309  |000973;
                        AND.B #$04                           ;828702|2904    |      ;
                        BEQ CODE_828712                      ;828704|F00C    |828712;
                        SEP #$20                             ;828706|E220    |      ;
@@ -829,7 +829,7 @@
                                                             ;      |        |      ;
           CODE_828733:
                        SEP #$20                             ;828733|E220    |      ;
-                       STZ.W $0973                          ;828735|9C7309  |000973;
+                       STZ.W nTimeState                     ;828735|9C7309  |000973;
                        SEP #$20                             ;828738|E220    |      ;
                        STZ.W $091D                          ;82873A|9C1D09  |00091D;
                        REP #$30                             ;82873D|C230    |      ;
@@ -845,7 +845,7 @@
                        SEP #$20                             ;828757|E220    |      ;
                        LDA.B #$15                           ;828759|A915    |      ;
                        STA.W $098B                          ;82875B|8D8B09  |00098B;
-                       JSL.L CODE_8096D3                    ;82875E|22D39680|8096D3;
+                       JSL.L fUnknown_8096D3                ;82875E|22D39680|8096D3;
                        SEP #$20                             ;828762|E220    |      ;
                        REP #$10                             ;828764|C210    |      ;
                        LDA.B #$14                           ;828766|A914    |      ;
@@ -856,7 +856,7 @@
                        BNE CODE_82878D                      ;828775|D016    |82878D;
                        SEP #$20                             ;828777|E220    |      ;
                        LDA.B #$03                           ;828779|A903    |      ;
-                       JSL.L CODE_8089F9                    ;82877B|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82877B|22F98980|8089F9;
                        SEP #$20                             ;82877F|E220    |      ;
                        STA.W $0924                          ;828781|8D2409  |000924;
                        REP #$30                             ;828784|C230    |      ;
@@ -1144,7 +1144,7 @@
                        RTL                                  ;8289D5|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8289D6:
+WriteSeasonWeekdayAndDayOrdinal:
                        SEP #$20                             ;8289D6|E220    |      ;
                        REP #$10                             ;8289D8|C210    |      ;
                        LDA.B #$00                           ;8289DA|A900    |      ;
@@ -1154,29 +1154,29 @@
                        ASL A                                ;8289E3|0A      |      ;
                        ASL A                                ;8289E4|0A      |      ;
                        ASL A                                ;8289E5|0A      |      ;
-                       ASL A                                ;8289E6|0A      |      ;
+                       ASL A                                ;8289E6|0A      |      ; * 16
                        TAX                                  ;8289E7|AA      |      ;
-                       LDA.L Table_828AD9,X                 ;8289E8|BFD98A82|828AD9;
-                       STA.W $08B3                          ;8289EC|8DB308  |0008B3;
+                       LDA.L sSeasonNameTable,X             ;8289E8|BFD98A82|828AD9;
+                       STA.W sSeasonName                    ;8289EC|8DB308  |0008B3;
                        INX                                  ;8289EF|E8      |      ;
                        INX                                  ;8289F0|E8      |      ;
-                       LDA.L Table_828AD9,X                 ;8289F1|BFD98A82|828AD9;
+                       LDA.L sSeasonNameTable,X             ;8289F1|BFD98A82|828AD9;
                        STA.W $08B5                          ;8289F5|8DB508  |0008B5;
                        INX                                  ;8289F8|E8      |      ;
                        INX                                  ;8289F9|E8      |      ;
-                       LDA.L Table_828AD9,X                 ;8289FA|BFD98A82|828AD9;
+                       LDA.L sSeasonNameTable,X             ;8289FA|BFD98A82|828AD9;
                        STA.W $08B7                          ;8289FE|8DB708  |0008B7;
                        INX                                  ;828A01|E8      |      ;
                        INX                                  ;828A02|E8      |      ;
-                       LDA.L Table_828AD9,X                 ;828A03|BFD98A82|828AD9;
+                       LDA.L sSeasonNameTable,X             ;828A03|BFD98A82|828AD9;
                        STA.W $08B9                          ;828A07|8DB908  |0008B9;
                        INX                                  ;828A0A|E8      |      ;
                        INX                                  ;828A0B|E8      |      ;
-                       LDA.L Table_828AD9,X                 ;828A0C|BFD98A82|828AD9;
+                       LDA.L sSeasonNameTable,X             ;828A0C|BFD98A82|828AD9;
                        STA.W $08BB                          ;828A10|8DBB08  |0008BB;
                        INX                                  ;828A13|E8      |      ;
                        INX                                  ;828A14|E8      |      ;
-                       LDA.L Table_828AD9,X                 ;828A15|BFD98A82|828AD9;
+                       LDA.L sSeasonNameTable,X             ;828A15|BFD98A82|828AD9;
                        STA.W $08BD                          ;828A19|8DBD08  |0008BD;
                        SEP #$20                             ;828A1C|E220    |      ;
                        LDA.B #$00                           ;828A1E|A900    |      ;
@@ -1189,39 +1189,39 @@
                        ASL A                                ;828A2A|0A      |      ;
                        ASL A                                ;828A2B|0A      |      ;
                        TAX                                  ;828A2C|AA      |      ;
-                       LDA.L Table_828B19,X                 ;828A2D|BF198B82|828B19;
-                       STA.W $08BF                          ;828A31|8DBF08  |0008BF;
+                       LDA.L sWeekdayNameTable,X            ;828A2D|BF198B82|828B19;
+                       STA.W sWeekdayName                   ;828A31|8DBF08  |0008BF;
                        INX                                  ;828A34|E8      |      ;
                        INX                                  ;828A35|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A36|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A36|BF198B82|828B19;
                        STA.W $08C1                          ;828A3A|8DC108  |0008C1;
                        INX                                  ;828A3D|E8      |      ;
                        INX                                  ;828A3E|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A3F|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A3F|BF198B82|828B19;
                        STA.W $08C3                          ;828A43|8DC308  |0008C3;
                        INX                                  ;828A46|E8      |      ;
                        INX                                  ;828A47|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A48|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A48|BF198B82|828B19;
                        STA.W $08C5                          ;828A4C|8DC508  |0008C5;
                        INX                                  ;828A4F|E8      |      ;
                        INX                                  ;828A50|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A51|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A51|BF198B82|828B19;
                        STA.W $08C7                          ;828A55|8DC708  |0008C7;
                        INX                                  ;828A58|E8      |      ;
                        INX                                  ;828A59|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A5A|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A5A|BF198B82|828B19;
                        STA.W $08C9                          ;828A5E|8DC908  |0008C9;
                        INX                                  ;828A61|E8      |      ;
                        INX                                  ;828A62|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A63|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A63|BF198B82|828B19;
                        STA.W $08CB                          ;828A67|8DCB08  |0008CB;
                        INX                                  ;828A6A|E8      |      ;
                        INX                                  ;828A6B|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A6C|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A6C|BF198B82|828B19;
                        STA.W $08CD                          ;828A70|8DCD08  |0008CD;
                        INX                                  ;828A73|E8      |      ;
                        INX                                  ;828A74|E8      |      ;
-                       LDA.L Table_828B19,X                 ;828A75|BF198B82|828B19;
+                       LDA.L sWeekdayNameTable,X            ;828A75|BF198B82|828B19;
                        STA.W $08CF                          ;828A79|8DCF08  |0008CF;
                        SEP #$20                             ;828A7C|E220    |      ;
                        LDA.B #$00                           ;828A7E|A900    |      ;
@@ -1229,40 +1229,40 @@
                        LDA.L CurrentDay                     ;828A81|AF1B1F7F|7F1F1B;
                        REP #$20                             ;828A85|C220    |      ;
                        CMP.W #$0001                         ;828A87|C90100  |      ;
-                       BEQ CODE_828A9B                      ;828A8A|F00F    |828A9B;
+                       BEQ .first                           ;828A8A|F00F    |828A9B;
                        CMP.W #$0002                         ;828A8C|C90200  |      ;
-                       BEQ CODE_828AA2                      ;828A8F|F011    |828AA2;
+                       BEQ .nd                              ;828A8F|F011    |828AA2;
                        CMP.W #$0003                         ;828A91|C90300  |      ;
-                       BEQ CODE_828AA9                      ;828A94|F013    |828AA9;
+                       BEQ .rd                              ;828A94|F013    |828AA9;
                        LDX.W #$000C                         ;828A96|A20C00  |      ;
-                       BRA CODE_828AB0                      ;828A99|8015    |828AB0;
+                       BRA .loadordinal                     ;828A99|8015    |828AB0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_828A9B:
+               .first:
                        REP #$30                             ;828A9B|C230    |      ;
                        LDX.W #$0000                         ;828A9D|A20000  |      ;
-                       BRA CODE_828AB0                      ;828AA0|800E    |828AB0;
+                       BRA .loadordinal                     ;828AA0|800E    |828AB0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_828AA2:
+                  .nd:
                        REP #$30                             ;828AA2|C230    |      ;
                        LDX.W #$0004                         ;828AA4|A20400  |      ;
-                       BRA CODE_828AB0                      ;828AA7|8007    |828AB0;
+                       BRA .loadordinal                     ;828AA7|8007    |828AB0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_828AA9:
+                  .rd:
                        REP #$30                             ;828AA9|C230    |      ;
                        LDX.W #$0008                         ;828AAB|A20800  |      ;
-                       BRA CODE_828AB0                      ;828AAE|8000    |828AB0;
+                       BRA .loadordinal                     ;828AAE|8000    |828AB0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_828AB0:
+         .loadordinal:
                        REP #$30                             ;828AB0|C230    |      ;
-                       LDA.L Table_828BF9,X                 ;828AB2|BFF98B82|828BF9;
-                       STA.W $08D1                          ;828AB6|8DD108  |0008D1;
+                       LDA.L sDayOrdinalTable,X             ;828AB2|BFF98B82|828BF9;
+                       STA.W sDayOrdinal                    ;828AB6|8DD108  |0008D1;
                        INX                                  ;828AB9|E8      |      ;
                        INX                                  ;828ABA|E8      |      ;
-                       LDA.L Table_828BF9,X                 ;828ABB|BFF98B82|828BF9;
+                       LDA.L sDayOrdinalTable,X             ;828ABB|BFF98B82|828BF9;
                        STA.W $08D3                          ;828ABF|8DD308  |0008D3;
                        RTL                                  ;828AC2|6B      |      ;
                                                             ;      |        |      ;
@@ -1270,8 +1270,8 @@
                        db $29,$01,$3C,$01,$78,$02,$6C,$01   ;828ACB|        |      ;
                        db $AA,$01,$38,$01,$E4,$00           ;828AD3|        |      ;
                                                             ;      |        |      ;
-         Table_828AD9:
-                       dw $002C,$000F,$0011,$0008           ;828AD9|        |      ; Season index based, each entry 16 bytes long
+     sSeasonNameTable:
+                       dw $002C,$000F,$0011,$0008           ;828AD9|        |      ; string[16] - for each Season
                        dw $000D,$0006,$0000,$0000           ;828AE1|        |      ;
                        dw $002C,$0014,$000C,$000C           ;828AE9|        |      ;
                        dw $0004,$0011,$0000,$0000           ;828AF1|        |      ;
@@ -1280,8 +1280,8 @@
                        dw $0030,$0008,$000D,$0013           ;828B09|        |      ;
                        dw $0004,$0011,$0000,$0000           ;828B11|        |      ;
                                                             ;      |        |      ;
-         Table_828B19:
-                       dw $002C,$0014,$000D,$0003           ;828B19|        |      ; Weekday index based, each entry 32 bytes long
+    sWeekdayNameTable:
+                       dw $002C,$0014,$000D,$0003           ;828B19|        |      ; string[32] - for each Weekday
                        dw $0000,$0018,$00B1,$00B1           ;828B21|        |      ;
                        dw $00B1,$0000,$0000,$0000           ;828B29|        |      ;
                        dw $0000,$0000,$0000,$0000           ;828B31|        |      ;
@@ -1310,8 +1310,8 @@
                        dw $00B1,$0000,$0000,$0000           ;828BE9|        |      ;
                        dw $0000,$0000,$0000,$0000           ;828BF1|        |      ;
                                                             ;      |        |      ;
-         Table_828BF9:
-                       dw $0012,$0013,$000D,$0003           ;828BF9|        |      ;
+     sDayOrdinalTable:
+                       dw $0012,$0013,$000D,$0003           ;828BF9|        |      ; string[2] - st, nd, rd, th
                        dw $0011,$0003,$0013,$0007           ;828C01|        |      ;
                                                             ;      |        |      ;
           CODE_828C09:
@@ -1556,7 +1556,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_828DCA:
-                       JSL.L CODE_8089F9                    ;828DCA|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;828DCA|22F98980|8089F9;
                        SEP #$20                             ;828DCE|E220    |      ;
                        BEQ CODE_828DD5                      ;828DD0|F003    |828DD5;
                        JMP.W CODE_828E64                    ;828DD2|4C648E  |828E64;
@@ -1589,7 +1589,7 @@
                        SEP #$20                             ;828E06|E220    |      ;
                        LDA.L Event_Summer29thDay,X          ;828E08|BFBE8E82|828EBE; Load A from address with offset X
                        BEQ CODE_828E20                      ;828E0C|F012    |828E20;
-                       JSL.L CODE_8089F9                    ;828E0E|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;828E0E|22F98980|8089F9;
                        SEP #$20                             ;828E12|E220    |      ;
                        BNE CODE_828E20                      ;828E14|D00A    |828E20;
                                                             ;      |        |      ;
@@ -1629,7 +1629,7 @@
                        REP #$30                             ;828E50|C230    |      ;
                        TYA                                  ;828E52|98      |      ;
                        SEP #$20                             ;828E53|E220    |      ;
-                       JSL.L CODE_8089F9                    ;828E55|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;828E55|22F98980|8089F9;
                        SEP #$20                             ;828E59|E220    |      ;
                        BNE CODE_828E64                      ;828E5B|D007    |828E64;
                        LDA.B #$03                           ;828E5D|A903    |      ;
@@ -1647,7 +1647,7 @@
                        SEP #$20                             ;828E70|E220    |      ;
                        LDA.L Event_Unknown1,X               ;828E72|BFB68E82|828EB6;
                        BEQ CODE_828E87                      ;828E76|F00F    |828E87;
-                       JSL.L CODE_8089F9                    ;828E78|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;828E78|22F98980|8089F9;
                        SEP #$20                             ;828E7C|E220    |      ;
                        BNE CODE_828E87                      ;828E7E|D007    |828E87;
                        LDA.B #$01                           ;828E80|A901    |      ;
@@ -1665,7 +1665,7 @@
                        SEP #$20                             ;828E93|E220    |      ;
                        LDA.L Event_Unknown2,X               ;828E95|BFBA8E82|828EBA;
                        BEQ CODE_828EAA                      ;828E99|F00F    |828EAA;
-                       JSL.L CODE_8089F9                    ;828E9B|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;828E9B|22F98980|8089F9;
                        SEP #$20                             ;828E9F|E220    |      ;
                        BNE CODE_828EAA                      ;828EA1|D007    |828EAA;
                        LDA.B #$02                           ;828EA3|A902    |      ;
@@ -1934,7 +1934,7 @@
                        LDA.W $0921                          ;8290C3|AD2109  |000921;
                        ASL A                                ;8290C6|0A      |      ;
                        TAX                                  ;8290C7|AA      |      ;
-                       JSR.W (Tool_Animation_Table,X)       ;8290C8|FC8BA5  |82A58B;
+                       JSR.W (pToolAnimationTable,X)        ;8290C8|FC8BA5  |82A58B;
                        BRA CODE_8290DC                      ;8290CB|800F    |8290DC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2439,7 +2439,7 @@ ToolAnimationNoAction:
                        BNE CODE_829450                      ;82941F|D02F    |829450;
                        SEP #$20                             ;829421|E220    |      ;
                        LDA.B #$10                           ;829423|A910    |      ;
-                       JSL.L CODE_8089F9                    ;829425|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829425|22F98980|8089F9;
                        BNE CODE_829450                      ;829429|D025    |829450;
                        REP #$30                             ;82942B|C230    |      ;
                        LDA.W #$0012                         ;82942D|A91200  |      ;
@@ -2490,7 +2490,7 @@ ToolAnimationNoAction:
                        BNE CODE_8294C5                      ;829495|D02E    |8294C5;
                        SEP #$20                             ;829497|E220    |      ;
                        LDA.B #$20                           ;829499|A920    |      ;
-                       JSL.L CODE_8089F9                    ;82949B|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82949B|22F98980|8089F9;
                        BNE CODE_8294C5                      ;82949F|D024    |8294C5;
                        REP #$30                             ;8294A1|C230    |      ;
                        LDA.W #$0011                         ;8294A3|A91100  |      ;
@@ -2516,7 +2516,7 @@ ToolAnimationNoAction:
                        BNE CODE_82954A                      ;8294D7|D071    |82954A;
                        SEP #$20                             ;8294D9|E220    |      ;
                        LDA.B #$10                           ;8294DB|A910    |      ;
-                       JSL.L CODE_8089F9                    ;8294DD|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;8294DD|22F98980|8089F9;
                        BNE CODE_829511                      ;8294E1|D02E    |829511;
                        REP #$30                             ;8294E3|C230    |      ;
                        LDA.L $7F1F5C                        ;8294E5|AF5C1F7F|7F1F5C;
@@ -2539,7 +2539,7 @@ ToolAnimationNoAction:
           CODE_829511:
                        SEP #$20                             ;829511|E220    |      ;
                        LDA.B #$10                           ;829513|A910    |      ;
-                       JSL.L CODE_8089F9                    ;829515|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829515|22F98980|8089F9;
                        BNE CODE_82954A                      ;829519|D02F    |82954A;
                        REP #$30                             ;82951B|C230    |      ;
                        LDA.L $7F1F5C                        ;82951D|AF5C1F7F|7F1F5C;
@@ -2563,7 +2563,7 @@ ToolAnimationNoAction:
           CODE_82954A:
                        SEP #$20                             ;82954A|E220    |      ;
                        LDA.B #$40                           ;82954C|A940    |      ;
-                       JSL.L CODE_8089F9                    ;82954E|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82954E|22F98980|8089F9;
                        BNE CODE_8295B0                      ;829552|D05C    |8295B0;
                        REP #$30                             ;829554|C230    |      ;
                        LDA.L $7F1F60                        ;829556|AF601F7F|7F1F60;
@@ -2818,7 +2818,7 @@ ToolAnimationNoAction:
                        JSL.L CODE_84803F                    ;829768|223F8084|84803F;
                        SEP #$20                             ;82976C|E220    |      ;
                        LDA.B #$04                           ;82976E|A904    |      ;
-                       JSL.L CODE_8089F9                    ;829770|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829770|22F98980|8089F9;
                        BNE CODE_82972F                      ;829774|D0B9    |82972F;
                        REP #$30                             ;829776|C230    |      ;
                        LDA.L $7F1F64                        ;829778|AF641F7F|7F1F64;
@@ -2931,7 +2931,7 @@ ToolAnimationNoAction:
                        BNE CODE_8298B5                      ;82985A|D059    |8298B5;
                        SEP #$20                             ;82985C|E220    |      ;
                        LDA.B #$10                           ;82985E|A910    |      ;
-                       JSL.L CODE_8089F9                    ;829860|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829860|22F98980|8089F9;
                        BNE CODE_8298B5                      ;829864|D04F    |8298B5;
                        REP #$30                             ;829866|C230    |      ;
                        LDA.L $7F1F64                        ;829868|AF641F7F|7F1F64;
@@ -3689,7 +3689,7 @@ ToolAnimationNoAction:
                        BNE CODE_829E6E                      ;829E3D|D02F    |829E6E;
                        SEP #$20                             ;829E3F|E220    |      ;
                        LDA.B #$10                           ;829E41|A910    |      ;
-                       JSL.L CODE_8089F9                    ;829E43|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829E43|22F98980|8089F9;
                        BNE CODE_829E6E                      ;829E47|D025    |829E6E;
                        REP #$30                             ;829E49|C230    |      ;
                        LDA.W #$0012                         ;829E4B|A91200  |      ;
@@ -3754,7 +3754,7 @@ ToolAnimationNoAction:
                        BNE CODE_829EF8                      ;829ECD|D029    |829EF8;
                        SEP #$20                             ;829ECF|E220    |      ;
                        LDA.B #$20                           ;829ED1|A920    |      ;
-                       JSL.L CODE_8089F9                    ;829ED3|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829ED3|22F98980|8089F9;
                        BNE CODE_829EF8                      ;829ED7|D01F    |829EF8;
                        REP #$30                             ;829ED9|C230    |      ;
                        LDA.W #$0011                         ;829EDB|A91100  |      ;
@@ -3778,7 +3778,7 @@ ToolAnimationNoAction:
                        BNE CODE_829F7D                      ;829F0A|D071    |829F7D;
                        SEP #$20                             ;829F0C|E220    |      ;
                        LDA.B #$10                           ;829F0E|A910    |      ;
-                       JSL.L CODE_8089F9                    ;829F10|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829F10|22F98980|8089F9;
                        BNE CODE_829F44                      ;829F14|D02E    |829F44;
                        REP #$30                             ;829F16|C230    |      ;
                        LDA.L $7F1F5C                        ;829F18|AF5C1F7F|7F1F5C;
@@ -3801,7 +3801,7 @@ ToolAnimationNoAction:
           CODE_829F44:
                        SEP #$20                             ;829F44|E220    |      ;
                        LDA.B #$10                           ;829F46|A910    |      ;
-                       JSL.L CODE_8089F9                    ;829F48|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829F48|22F98980|8089F9;
                        BNE CODE_829F7D                      ;829F4C|D02F    |829F7D;
                        REP #$30                             ;829F4E|C230    |      ;
                        LDA.L $7F1F5C                        ;829F50|AF5C1F7F|7F1F5C;
@@ -3825,7 +3825,7 @@ ToolAnimationNoAction:
           CODE_829F7D:
                        SEP #$20                             ;829F7D|E220    |      ;
                        LDA.B #$40                           ;829F7F|A940    |      ;
-                       JSL.L CODE_8089F9                    ;829F81|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;829F81|22F98980|8089F9;
                        BNE CODE_829FE3                      ;829F85|D05C    |829FE3;
                        REP #$30                             ;829F87|C230    |      ;
                        LDA.L $7F1F60                        ;829F89|AF601F7F|7F1F60;
@@ -4063,7 +4063,7 @@ ToolAnimationNoAction:
                        JSL.L CODE_84803F                    ;82A16A|223F8084|84803F;
                        SEP #$20                             ;82A16E|E220    |      ;
                        LDA.B #$04                           ;82A170|A904    |      ;
-                       JSL.L CODE_8089F9                    ;82A172|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A172|22F98980|8089F9;
                        BNE CODE_82A131                      ;82A176|D0B9    |82A131;
                        REP #$30                             ;82A178|C230    |      ;
                        LDA.L $7F1F64                        ;82A17A|AF641F7F|7F1F64;
@@ -4157,7 +4157,7 @@ ToolAnimationNoAction:
                        BCC CODE_82A2A4                      ;82A23B|9067    |82A2A4;
                        SEP #$20                             ;82A23D|E220    |      ;
                        LDA.B #$10                           ;82A23F|A910    |      ;
-                       JSL.L CODE_8089F9                    ;82A241|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A241|22F98980|8089F9;
                        BNE CODE_82A296                      ;82A245|D04F    |82A296;
                        REP #$30                             ;82A247|C230    |      ;
                        LDA.L $7F1F64                        ;82A249|AF641F7F|7F1F64;
@@ -4407,7 +4407,7 @@ ToolAnimationNoAction:
                        SBC.W #$00E2                         ;82A44A|E9E200  |      ;
                        ASL A                                ;82A44D|0A      |      ;
                        TAX                                  ;82A44E|AA      |      ;
-                       LDA.L Cow_Feed_Flags,X               ;82A44F|BF71A582|82A571;
+                       LDA.L nCowFeedFlagsTable,X           ;82A44F|BF71A582|82A571;
                        ORA.W $0934                          ;82A453|0D3409  |000934;
                        STA.W $0934                          ;82A456|8D3409  |000934;
                        SEP #$20                             ;82A459|E220    |      ;
@@ -4486,7 +4486,7 @@ ToolAnimationNoAction:
                        SBC.W #$00E2                         ;82A4F8|E9E200  |      ;
                        ASL A                                ;82A4FB|0A      |      ;
                        TAX                                  ;82A4FC|AA      |      ;
-                       LDA.L Cow_Feed_Flags,X               ;82A4FD|BF71A582|82A571;
+                       LDA.L nCowFeedFlagsTable,X           ;82A4FD|BF71A582|82A571;
                        ORA.W $0932                          ;82A501|0D3209  |000932;
                        STA.W $0932                          ;82A504|8D3209  |000932;
                        SEP #$20                             ;82A507|E220    |      ;
@@ -4543,13 +4543,13 @@ ToolAnimationNoAction:
                        RTS                                  ;82A570|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-       Cow_Feed_Flags:
-                       dw $0001,$0002,$0004,$0008           ;82A571|        |      ;
+   nCowFeedFlagsTable:
+                       dw $0001,$0002,$0004,$0008           ;82A571|        |      ; 16b
                        dw $0010,$0020,$0040,$0080           ;82A579|        |      ;
                        dw $0100,$0200,$0400,$0800           ;82A581|        |      ;
                        dw $1000                             ;82A589|        |      ;
                                                             ;      |        |      ;
- Tool_Animation_Table:
+  pToolAnimationTable:
                        dw ToolAnimationNoAction             ;82A58B|        |8290DD;
                        dw ToolAnimationSickle               ;82A58D|        |8290DE;
                        dw ToolAnimationHoe                  ;82A58F|        |8290EC;
@@ -4789,8 +4789,8 @@ ToolAnimationNoAction:
                        RTL                                  ;82A712|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-     NextYearRelated2:
-                       REP #$30                             ;82A713|C230    |      ;
+NewYearStoreIntoA86_X88_Y8A:
+                       REP #$30                             ;82A713|C230    |      ; A - arg1, X - arg2, Y - arg3
                        STA.B $86                            ;82A715|8586    |000086;
                        STX.B $88                            ;82A717|8688    |000088;
                        STY.B $8A                            ;82A719|848A    |00008A;
@@ -4845,7 +4845,7 @@ ToolAnimationNoAction:
                                                             ;      |        |      ;
           CODE_82A767:
                        PHX                                  ;82A767|DA      |      ;
-                       JSL.L CODE_8089F9                    ;82A768|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A768|22F98980|8089F9;
                        SEP #$20                             ;82A76C|E220    |      ;
                        REP #$10                             ;82A76E|C210    |      ;
                        PLX                                  ;82A770|FA      |      ;
@@ -4866,7 +4866,7 @@ ToolAnimationNoAction:
                        LDA.B $88                            ;82A786|A588    |000088;
                        BEQ CODE_82A7F0                      ;82A788|F066    |82A7F0;
                        PHX                                  ;82A78A|DA      |      ;
-                       JSL.L CODE_8089F9                    ;82A78B|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A78B|22F98980|8089F9;
                        SEP #$20                             ;82A78F|E220    |      ;
                        REP #$10                             ;82A791|C210    |      ;
                        PLX                                  ;82A793|FA      |      ;
@@ -4895,7 +4895,7 @@ ToolAnimationNoAction:
                        LDA.B $88                            ;82A7BA|A588    |000088;
                        BEQ CODE_82A7F0                      ;82A7BC|F032    |82A7F0;
                        PHX                                  ;82A7BE|DA      |      ;
-                       JSL.L CODE_8089F9                    ;82A7BF|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A7BF|22F98980|8089F9;
                        SEP #$20                             ;82A7C3|E220    |      ;
                        REP #$10                             ;82A7C5|C210    |      ;
                        PLX                                  ;82A7C7|FA      |      ;
@@ -4911,7 +4911,7 @@ ToolAnimationNoAction:
                        LDA.B $8A                            ;82A7D6|A58A    |00008A;
                        BEQ CODE_82A7F0                      ;82A7D8|F016    |82A7F0;
                        PHX                                  ;82A7DA|DA      |      ;
-                       JSL.L CODE_8089F9                    ;82A7DB|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A7DB|22F98980|8089F9;
                        SEP #$20                             ;82A7DF|E220    |      ;
                        REP #$10                             ;82A7E1|C210    |      ;
                        PLX                                  ;82A7E3|FA      |      ;
@@ -5142,7 +5142,7 @@ ToolAnimationNoAction:
                        BNE CODE_82A969                      ;82A92F|D038    |82A969;
                        REP #$10                             ;82A931|C210    |      ;
                        PHX                                  ;82A933|DA      |      ;
-                       JSL.L CODE_838138                    ;82A934|22388183|838138;
+                       JSL.L fRNG                           ;82A934|22388183|838138;
                        SEP #$20                             ;82A938|E220    |      ;
                        REP #$10                             ;82A93A|C210    |      ;
                        PLX                                  ;82A93C|FA      |      ;
@@ -5156,7 +5156,7 @@ ToolAnimationNoAction:
           CODE_82A949:
                        SEP #$20                             ;82A949|E220    |      ;
                        LDA.B #$08                           ;82A94B|A908    |      ;
-                       JSL.L CODE_8089F9                    ;82A94D|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;82A94D|22F98980|8089F9;
                        BNE CODE_82A969                      ;82A951|D016    |82A969;
                        REP #$20                             ;82A953|C220    |      ;
                        LDA.W $0196                          ;82A955|AD9601  |000196;
@@ -5877,7 +5877,7 @@ IncreaseRanchDevelopmentRate:
                        ADC.B $7E                            ;82ADAF|657E    |00007E;
                        TAX                                  ;82ADB1|AA      |      ;
                        SEP #$20                             ;82ADB2|E220    |      ;
-                       LDA.L Table_82CFB4,X                 ;82ADB4|BFB4CF82|82CFB4;
+                       LDA.L nUnkownItemOnHandTable,X       ;82ADB4|BFB4CF82|82CFB4;
                        STA.W $091D                          ;82ADB8|8D1D09  |00091D;
                        REP #$30                             ;82ADBB|C230    |      ;
                        LDA.W #$0004                         ;82ADBD|A90400  |      ;
@@ -6013,7 +6013,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.B $93                            ;82AE90|A593    |000093;
                        REP #$20                             ;82AE92|C220    |      ;
                        TAX                                  ;82AE94|AA      |      ;
-                       JSL.L CODE_83935F                    ;82AE95|225F9383|83935F;
+                       JSL.L DialogRelated                  ;82AE95|225F9383|83935F;
                        BRA CODE_82AEE5                      ;82AE99|804A    |82AEE5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6031,7 +6031,7 @@ IncreaseRanchDevelopmentRate:
                        STA.W $019A                          ;82AEAA|8D9A01  |00019A;
                        LDA.B #$00                           ;82AEAD|A900    |      ;
                        STA.W $0191                          ;82AEAF|8D9101  |000191;
-                       JSL.L CODE_83935F                    ;82AEB2|225F9383|83935F;
+                       JSL.L DialogRelated                  ;82AEB2|225F9383|83935F;
                        BRA CODE_82AEE5                      ;82AEB6|802D    |82AEE5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -7605,8 +7605,8 @@ IncreaseRanchDevelopmentRate:
                        db $3F,$01,$01,$F2,$40,$01,$01,$FF   ;82CFA4|        |      ;
                        db $00,$00,$00,$FF,$00,$00,$00,$FF   ;82CFAC|        |      ;
                                                             ;      |        |      ;
-         Table_82CFB4:
-                       db $00,$00,$00,$00,$00,$00,$00,$00   ;82CFB4|        |      ;
+nUnkownItemOnHandTable:
+                       db $00,$00,$00,$00,$00,$00,$00,$00   ;82CFB4|        |      ; 8b, 8b, 8b, 8b - season subindexed
                        db $00,$00,$00,$00,$09,$09,$0A,$00   ;82CFBC|        |      ;
                        db $0D,$0D,$0D,$0E,$0F,$0F,$0F,$0F   ;82CFC4|        |      ;
                        db $0B,$0B,$0B,$00,$00,$00,$00,$00   ;82CFCC|        |      ;
@@ -7682,7 +7682,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82D1CA|8593    |000093;
                        LDA.B #$01                           ;82D1CC|A901    |      ;
                        STA.B $94                            ;82D1CE|8594    |000094;
-                       JSL.L CODE_80880A                    ;82D1D0|220A8880|80880A;
+                       JSL.L fScreenFadeout                 ;82D1D0|220A8880|80880A;
                        SEP #$20                             ;82D1D4|E220    |      ;
                        LDA.B #$06                           ;82D1D6|A906    |      ;
                        STA.L CurrentTimeID                  ;82D1D8|8F1C1F7F|7F1F1C;
@@ -7766,7 +7766,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W #$0000                         ;82D2BE|A90000  |      ;
                        STA.W $0901                          ;82D2C1|8D0109  |000901;
                        SEP #$20                             ;82D2C4|E220    |      ;
-                       STZ.W $0973                          ;82D2C6|9C7309  |000973;
+                       STZ.W nTimeState                     ;82D2C6|9C7309  |000973;
                        LDA.B #$00                           ;82D2C9|A900    |      ;
                        STA.L CurrentSeasonID                ;82D2CB|8F191F7F|7F1F19;
                        SEP #$20                             ;82D2CF|E220    |      ;
@@ -7782,9 +7782,9 @@ IncreaseRanchDevelopmentRate:
                        LDA.L $7F1F5C                        ;82D2E8|AF5C1F7F|7F1F5C;
                        AND.W #$FFFB                         ;82D2EC|29FBFF  |      ;
                        STA.L $7F1F5C                        ;82D2EF|8F5C1F7F|7F1F5C;
-                       JSL.L CODE_808846                    ;82D2F3|22468880|808846;
-                       JSL.L CODE_808980                    ;82D2F7|22808980|808980;
-                       JSL.L CODE_808FAB                    ;82D2FB|22AB8F80|808FAB;
+                       JSL.L fZeroVRAM                      ;82D2F3|22468880|808846;
+                       JSL.L fZeroCGRAM                     ;82D2F7|22808980|808980;
+                       JSL.L fUnknown_808FAB                ;82D2FB|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D2FF|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D303|220F8285|85820F;
                        JSL.L CODE_81A4C7                    ;82D307|22C7A481|81A4C7;
@@ -7802,10 +7802,10 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82D32E|E220    |      ;
                        LDA.W $098B                          ;82D330|AD8B09  |00098B;
                        STA.B $22                            ;82D333|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82D335|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82D335|22DE9580|8095DE;
                        SEP #$20                             ;82D339|E220    |      ;
                        LDA.W $098B                          ;82D33B|AD8B09  |00098B;
-                       JSL.L CODE_80972C                    ;82D33E|222C9780|80972C;
+                       JSL.L fUnknown_80972C                ;82D33E|222C9780|80972C;
                        REP #$30                             ;82D342|C230    |      ;
                        LDY.W #$0000                         ;82D344|A00000  |      ;
                                                             ;      |        |      ;
@@ -7818,16 +7818,16 @@ IncreaseRanchDevelopmentRate:
                        REP #$20                             ;82D351|C220    |      ;
                        LDA.W #$1800                         ;82D353|A90018  |      ;
                        STA.B $C7                            ;82D356|85C7    |0000C7;
-                       JSL.L CODE_809671                    ;82D358|22719680|809671;
-                       JSL.L CODE_809A64                    ;82D35C|22649A80|809A64;
+                       JSL.L fUnknown_809671                ;82D358|22719680|809671;
+                       JSL.L fUnknown_809A64                ;82D35C|22649A80|809A64;
                        JSL.L CODE_828000                    ;82D360|22008082|828000;
                        JSL.L ReadText                       ;82D364|221C9583|83951C;
-                       JSL.L CODE_80900C                    ;82D368|220C9080|80900C;
+                       JSL.L fUnknown_80900C                ;82D368|220C9080|80900C;
                        JSL.L CODE_808E69                    ;82D36C|22698E80|808E69;
                        JSL.L CODE_84C034                    ;82D370|2234C084|84C034;
                        JSL.L CODE_81A383                    ;82D374|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;82D378|22B7BF81|81BFB7;
-                       JSL.L CODE_8095B3                    ;82D37C|22B39580|8095B3;
+                       JSL.L fUnknown_8095B3                ;82D37C|22B39580|8095B3;
                        JSL.L CODE_84816F                    ;82D380|226F8184|84816F;
                        JSL.L CODE_81A600                    ;82D384|2200A681|81A600;
                        JSL.L CODE_8582C7                    ;82D388|22C78285|8582C7;
@@ -7870,7 +7870,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82D3D1|8593    |000093;
                        LDA.B #$01                           ;82D3D3|A901    |      ;
                        STA.B $94                            ;82D3D5|8594    |000094;
-                       JSL.L CODE_80880A                    ;82D3D7|220A8880|80880A;
+                       JSL.L fScreenFadeout                 ;82D3D7|220A8880|80880A;
                        SEP #$20                             ;82D3DB|E220    |      ;
                        LDA.B #$06                           ;82D3DD|A906    |      ;
                        STA.L CurrentTimeID                  ;82D3DF|8F1C1F7F|7F1F1C;
@@ -7952,7 +7952,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W #$0000                         ;82D4BF|A90000  |      ;
                        STA.W $0901                          ;82D4C2|8D0109  |000901;
                        SEP #$20                             ;82D4C5|E220    |      ;
-                       STZ.W $0973                          ;82D4C7|9C7309  |000973;
+                       STZ.W nTimeState                     ;82D4C7|9C7309  |000973;
                        LDA.B #$00                           ;82D4CA|A900    |      ;
                        STA.L CurrentSeasonID                ;82D4CC|8F191F7F|7F1F19;
                        SEP #$20                             ;82D4D0|E220    |      ;
@@ -7968,9 +7968,9 @@ IncreaseRanchDevelopmentRate:
                        LDA.L $7F1F5C                        ;82D4E9|AF5C1F7F|7F1F5C;
                        AND.W #$FFFB                         ;82D4ED|29FBFF  |      ;
                        STA.L $7F1F5C                        ;82D4F0|8F5C1F7F|7F1F5C;
-                       JSL.L CODE_808846                    ;82D4F4|22468880|808846;
-                       JSL.L CODE_808980                    ;82D4F8|22808980|808980;
-                       JSL.L CODE_808FAB                    ;82D4FC|22AB8F80|808FAB;
+                       JSL.L fZeroVRAM                      ;82D4F4|22468880|808846;
+                       JSL.L fZeroCGRAM                     ;82D4F8|22808980|808980;
+                       JSL.L fUnknown_808FAB                ;82D4FC|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D500|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D504|220F8285|85820F;
                        JSL.L CODE_81A4C7                    ;82D508|22C7A481|81A4C7;
@@ -8200,10 +8200,10 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82D6B0|E220    |      ;
                        LDA.W $098B                          ;82D6B2|AD8B09  |00098B;
                        STA.B $22                            ;82D6B5|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82D6B7|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82D6B7|22DE9580|8095DE;
                        SEP #$20                             ;82D6BB|E220    |      ;
                        LDA.W $098B                          ;82D6BD|AD8B09  |00098B;
-                       JSL.L CODE_80972C                    ;82D6C0|222C9780|80972C;
+                       JSL.L fUnknown_80972C                ;82D6C0|222C9780|80972C;
                        REP #$30                             ;82D6C4|C230    |      ;
                        LDY.W #$0000                         ;82D6C6|A00000  |      ;
                                                             ;      |        |      ;
@@ -8216,16 +8216,16 @@ IncreaseRanchDevelopmentRate:
                        REP #$20                             ;82D6D3|C220    |      ;
                        LDA.W #$1800                         ;82D6D5|A90018  |      ;
                        STA.B $C7                            ;82D6D8|85C7    |0000C7;
-                       JSL.L CODE_809671                    ;82D6DA|22719680|809671;
-                       JSL.L CODE_809A64                    ;82D6DE|22649A80|809A64;
+                       JSL.L fUnknown_809671                ;82D6DA|22719680|809671;
+                       JSL.L fUnknown_809A64                ;82D6DE|22649A80|809A64;
                        JSL.L CODE_828000                    ;82D6E2|22008082|828000;
                        JSL.L ReadText                       ;82D6E6|221C9583|83951C;
-                       JSL.L CODE_80900C                    ;82D6EA|220C9080|80900C;
+                       JSL.L fUnknown_80900C                ;82D6EA|220C9080|80900C;
                        JSL.L CODE_808E69                    ;82D6EE|22698E80|808E69;
                        JSL.L CODE_84C034                    ;82D6F2|2234C084|84C034;
                        JSL.L CODE_81A383                    ;82D6F6|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;82D6FA|22B7BF81|81BFB7;
-                       JSL.L CODE_8095B3                    ;82D6FE|22B39580|8095B3;
+                       JSL.L fUnknown_8095B3                ;82D6FE|22B39580|8095B3;
                        JSL.L CODE_84816F                    ;82D702|226F8184|84816F;
                        JSL.L CODE_81A600                    ;82D706|2200A681|81A600;
                        JSL.L CODE_8582C7                    ;82D70A|22C78285|8582C7;
@@ -8293,15 +8293,15 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82D78E|E220    |      ;
                        LDA.B #$03                           ;82D790|A903    |      ;
                        JSL.L CODE_808C59                    ;82D792|22598C80|808C59;
-                       JSL.L CODE_808E0F                    ;82D796|220F8E80|808E0F;
-                       JSL.L CODE_808846                    ;82D79A|22468880|808846;
+                       JSL.L fSetForceBlank                 ;82D796|220F8E80|808E0F;
+                       JSL.L fZeroVRAM                      ;82D79A|22468880|808846;
                        SEP #$20                             ;82D79E|E220    |      ;
                        LDA.B #$5D                           ;82D7A0|A95D    |      ;
                        STA.B $22                            ;82D7A2|8522    |000022;
                        JSL.L CODE_80A7C6                    ;82D7A4|22C6A780|80A7C6;
                        REP #$20                             ;82D7A8|C220    |      ;
                        LDA.W #$006E                         ;82D7AA|A96E00  |      ;
-                       JSL.L CODE_8091CF                    ;82D7AD|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82D7AD|22CF9180|8091CF;
                        SEP #$20                             ;82D7B1|E220    |      ;
                        REP #$10                             ;82D7B3|C210    |      ;
                        LDA.B #$00                           ;82D7B5|A900    |      ;
@@ -8316,15 +8316,15 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82D7CA|E220    |      ;
                        LDA.B #$A9                           ;82D7CC|A9A9    |      ;
                        STA.B $74                            ;82D7CE|8574    |000074;
-                       JSL.L CODE_808A33                    ;82D7D0|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82D7D4|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82D7D0|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82D7D4|22B28A80|808AB2;
                        REP #$20                             ;82D7D8|C220    |      ;
                        STZ.W $013C                          ;82D7DA|9C3C01  |00013C;
                        STZ.W $013E                          ;82D7DD|9C3E01  |00013E;
                        STZ.W $0140                          ;82D7E0|9C4001  |000140;
                        STZ.W $0142                          ;82D7E3|9C4201  |000142;
-                       JSL.L CODE_808E1E                    ;82D7E6|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82D7EA|22458680|808645;
+                       JSL.L fResetForceBlank               ;82D7E6|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82D7EA|22458680|808645;
                        SEP #$20                             ;82D7EE|E220    |      ;
                        LDA.B #$03                           ;82D7F0|A903    |      ;
                        STA.B $92                            ;82D7F2|8592    |000092;
@@ -8332,7 +8332,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82D7F6|8593    |000093;
                        LDA.B #$0F                           ;82D7F8|A90F    |      ;
                        STA.B $94                            ;82D7FA|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82D7FC|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82D7FC|22CE8780|8087CE;
                        SEP #$20                             ;82D800|E220    |      ;
                        STZ.B $97                            ;82D802|6497    |000097;
                        REP #$20                             ;82D804|C220    |      ;
@@ -8427,7 +8427,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82D886:
                        PHY                                  ;82D886|5A      |      ;
-                       JSL.L CODE_808645                    ;82D887|22458680|808645;
+                       JSL.L fWaitForNextNMI                ;82D887|22458680|808645;
                        REP #$30                             ;82D88B|C230    |      ;
                        PLY                                  ;82D88D|7A      |      ;
                        INY                                  ;82D88E|C8      |      ;
@@ -8440,7 +8440,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82D89C|8593    |000093;
                        LDA.B #$01                           ;82D89E|A901    |      ;
                        STA.B $94                            ;82D8A0|8594    |000094;
-                       JSL.L CODE_80880A                    ;82D8A2|220A8880|80880A;
+                       JSL.L fScreenFadeout                 ;82D8A2|220A8880|80880A;
                        SEP #$20                             ;82D8A6|E220    |      ;
                        LDA.B #$01                           ;82D8A8|A901    |      ;
                        STA.B $95                            ;82D8AA|8595    |000095;
@@ -8450,9 +8450,9 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
           CODE_82D8B0:
                        REP #$30                             ;82D8B0|C230    |      ;
-                       JSL.L CODE_808846                    ;82D8B2|22468880|808846;
-                       JSL.L CODE_808980                    ;82D8B6|22808980|808980;
-                       JSL.L CODE_808FAB                    ;82D8BA|22AB8F80|808FAB;
+                       JSL.L fZeroVRAM                      ;82D8B2|22468880|808846;
+                       JSL.L fZeroCGRAM                     ;82D8B6|22808980|808980;
+                       JSL.L fUnknown_808FAB                ;82D8BA|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D8BE|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D8C2|220F8285|85820F;
                        JSL.L CODE_81A4C7                    ;82D8C6|22C7A481|81A4C7;
@@ -8486,7 +8486,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82D912|E220    |      ;
                        LDA.W $098B                          ;82D914|AD8B09  |00098B;
                        STA.B $22                            ;82D917|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82D919|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82D919|22DE9580|8095DE;
                        JSL.L CODE_83841F                    ;82D91D|221F8483|83841F;
                        JSL.L CODE_8383A4                    ;82D921|22A48383|8383A4;
                        JSL.L CODE_838380                    ;82D925|22808383|838380;
@@ -8495,7 +8495,7 @@ IncreaseRanchDevelopmentRate:
                        STA.W $0117                          ;82D92E|8D1701  |000117;
                        SEP #$20                             ;82D931|E220    |      ;
                        LDA.W $098B                          ;82D933|AD8B09  |00098B;
-                       JSL.L CODE_80972C                    ;82D936|222C9780|80972C;
+                       JSL.L fUnknown_80972C                ;82D936|222C9780|80972C;
                        REP #$30                             ;82D93A|C230    |      ;
                        LDY.W #$0000                         ;82D93C|A00000  |      ;
                                                             ;      |        |      ;
@@ -8506,16 +8506,16 @@ IncreaseRanchDevelopmentRate:
                        REP #$20                             ;82D945|C220    |      ;
                        LDA.W #$1800                         ;82D947|A90018  |      ;
                        STA.B $C7                            ;82D94A|85C7    |0000C7;
-                       JSL.L CODE_809671                    ;82D94C|22719680|809671;
-                       JSL.L CODE_809A64                    ;82D950|22649A80|809A64;
+                       JSL.L fUnknown_809671                ;82D94C|22719680|809671;
+                       JSL.L fUnknown_809A64                ;82D950|22649A80|809A64;
                        JSL.L CODE_828000                    ;82D954|22008082|828000;
                        JSL.L ReadText                       ;82D958|221C9583|83951C;
-                       JSL.L CODE_80900C                    ;82D95C|220C9080|80900C;
+                       JSL.L fUnknown_80900C                ;82D95C|220C9080|80900C;
                        JSL.L CODE_808E69                    ;82D960|22698E80|808E69;
                        JSL.L CODE_84C034                    ;82D964|2234C084|84C034;
                        JSL.L CODE_81A383                    ;82D968|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;82D96C|22B7BF81|81BFB7;
-                       JSL.L CODE_8095B3                    ;82D970|22B39580|8095B3;
+                       JSL.L fUnknown_8095B3                ;82D970|22B39580|8095B3;
                        JSL.L CODE_84816F                    ;82D974|226F8184|84816F;
                        JSL.L CODE_81A600                    ;82D978|2200A681|81A600;
                        JSL.L CODE_8582C7                    ;82D97C|22C78285|8582C7;
@@ -8540,7 +8540,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82D9A9|8593    |000093;
                        LDA.B #$01                           ;82D9AB|A901    |      ;
                        STA.B $94                            ;82D9AD|8594    |000094;
-                       JSL.L CODE_80880A                    ;82D9AF|220A8880|80880A;
+                       JSL.L fScreenFadeout                 ;82D9AF|220A8880|80880A;
                                                             ;      |        |      ;
           CODE_82D9B3:
                        SEP #$20                             ;82D9B3|E220    |      ;
@@ -8558,14 +8558,14 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82D9C6|8593    |000093;
                        LDA.B #$01                           ;82D9C8|A901    |      ;
                        STA.B $94                            ;82D9CA|8594    |000094;
-                       JSL.L CODE_80880A                    ;82D9CC|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82D9D0|220F8E80|808E0F;
+                       JSL.L fScreenFadeout                 ;82D9CC|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82D9D0|220F8E80|808E0F;
                        SEP #$20                             ;82D9D4|E220    |      ;
                        LDA.B #$03                           ;82D9D6|A903    |      ;
                        JSL.L CODE_808C59                    ;82D9D8|22598C80|808C59;
-                       JSL.L CODE_808846                    ;82D9DC|22468880|808846;
-                       JSL.L CODE_808980                    ;82D9E0|22808980|808980;
-                       JSL.L CODE_808FAB                    ;82D9E4|22AB8F80|808FAB;
+                       JSL.L fZeroVRAM                      ;82D9DC|22468880|808846;
+                       JSL.L fZeroCGRAM                     ;82D9E0|22808980|808980;
+                       JSL.L fUnknown_808FAB                ;82D9E4|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D9E8|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D9EC|220F8285|85820F;
                        JSL.L CODE_81A4C7                    ;82D9F0|22C7A481|81A4C7;
@@ -8576,7 +8576,7 @@ IncreaseRanchDevelopmentRate:
                        JSL.L CODE_80A7C6                    ;82D9FE|22C6A780|80A7C6;
                        REP #$20                             ;82DA02|C220    |      ;
                        LDA.W #$006D                         ;82DA04|A96D00  |      ;
-                       JSL.L CODE_8091CF                    ;82DA07|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82DA07|22CF9180|8091CF;
                        SEP #$20                             ;82DA0B|E220    |      ;
                        REP #$10                             ;82DA0D|C210    |      ;
                        LDA.B #$00                           ;82DA0F|A900    |      ;
@@ -8591,8 +8591,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DA24|E220    |      ;
                        LDA.B #$A9                           ;82DA26|A9A9    |      ;
                        STA.B $74                            ;82DA28|8574    |000074;
-                       JSL.L CODE_808A33                    ;82DA2A|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82DA2E|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82DA2A|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82DA2E|22B28A80|808AB2;
                        REP #$20                             ;82DA32|C220    |      ;
                        LDA.W #$0100                         ;82DA34|A90001  |      ;
                        STA.W $013C                          ;82DA37|8D3C01  |00013C;
@@ -8602,15 +8602,15 @@ IncreaseRanchDevelopmentRate:
                        STA.W $013E                          ;82DA43|8D3E01  |00013E;
                        LDA.W #$0100                         ;82DA46|A90001  |      ;
                        STA.W $0142                          ;82DA49|8D4201  |000142;
-                       JSL.L CODE_8095DE                    ;82DA4C|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82DA4C|22DE9580|8095DE;
                        JSL.L CODE_83841F                    ;82DA50|221F8483|83841F;
                        JSL.L CODE_8383A4                    ;82DA54|22A48383|8383A4;
                        JSL.L CODE_838380                    ;82DA58|22808383|838380;
                        SEP #$20                             ;82DA5C|E220    |      ;
                        LDA.W $0110                          ;82DA5E|AD1001  |000110;
                        STA.W $0117                          ;82DA61|8D1701  |000117;
-                       JSL.L CODE_808E1E                    ;82DA64|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82DA68|22458680|808645;
+                       JSL.L fResetForceBlank               ;82DA64|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82DA68|22458680|808645;
                        SEP #$20                             ;82DA6C|E220    |      ;
                        LDA.B #$01                           ;82DA6E|A901    |      ;
                        STA.B $92                            ;82DA70|8592    |000092;
@@ -8618,7 +8618,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DA74|8593    |000093;
                        LDA.B #$0F                           ;82DA76|A90F    |      ;
                        STA.B $94                            ;82DA78|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82DA7A|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82DA7A|22CE8780|8087CE;
                        SEP #$20                             ;82DA7E|E220    |      ;
                        LDA.B #$02                           ;82DA80|A902    |      ;
                        STA.B $95                            ;82DA82|8595    |000095;
@@ -8696,7 +8696,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DAF5|E220    |      ;
                        LDA.B #$5C                           ;82DAF7|A95C    |      ;
                        STA.B $22                            ;82DAF9|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82DAFB|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82DAFB|22DE9580|8095DE;
                        JSL.L CODE_838401                    ;82DAFF|22018483|838401;
                        SEP #$20                             ;82DB03|E220    |      ;
                        LDA.B #$0F                           ;82DB05|A90F    |      ;
@@ -8705,14 +8705,14 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DB0B|8593    |000093;
                        LDA.B #$01                           ;82DB0D|A901    |      ;
                        STA.B $94                            ;82DB0F|8594    |000094;
-                       JSL.L CODE_80880A                    ;82DB11|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82DB15|220F8E80|808E0F;
+                       JSL.L fScreenFadeout                 ;82DB11|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82DB15|220F8E80|808E0F;
                        SEP #$20                             ;82DB19|E220    |      ;
                        LDA.B #$03                           ;82DB1B|A903    |      ;
                        JSL.L CODE_808C59                    ;82DB1D|22598C80|808C59;
-                       JSL.L CODE_808846                    ;82DB21|22468880|808846;
-                       JSL.L CODE_808980                    ;82DB25|22808980|808980;
-                       JSL.L CODE_808FAB                    ;82DB29|22AB8F80|808FAB;
+                       JSL.L fZeroVRAM                      ;82DB21|22468880|808846;
+                       JSL.L fZeroCGRAM                     ;82DB25|22808980|808980;
+                       JSL.L fUnknown_808FAB                ;82DB29|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82DB2D|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82DB31|220F8285|85820F;
                        JSL.L CODE_81A4C7                    ;82DB35|22C7A481|81A4C7;
@@ -8729,7 +8729,7 @@ IncreaseRanchDevelopmentRate:
                        JSL.L CODE_80A7C6                    ;82DB52|22C6A780|80A7C6;
                        REP #$20                             ;82DB56|C220    |      ;
                        LDA.W #$006D                         ;82DB58|A96D00  |      ;
-                       JSL.L CODE_8091CF                    ;82DB5B|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82DB5B|22CF9180|8091CF;
                        SEP #$20                             ;82DB5F|E220    |      ;
                        REP #$10                             ;82DB61|C210    |      ;
                        LDA.B #$00                           ;82DB63|A900    |      ;
@@ -8744,8 +8744,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DB78|E220    |      ;
                        LDA.B #$A9                           ;82DB7A|A9A9    |      ;
                        STA.B $74                            ;82DB7C|8574    |000074;
-                       JSL.L CODE_808A33                    ;82DB7E|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82DB82|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82DB7E|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82DB82|22B28A80|808AB2;
                        SEP #$20                             ;82DB86|E220    |      ;
                        LDA.B #$5C                           ;82DB88|A95C    |      ;
                        STA.B $22                            ;82DB8A|8522    |000022;
@@ -8756,7 +8756,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DB8E|E220    |      ;
                        LDA.B #$5C                           ;82DB90|A95C    |      ;
                        STA.B $22                            ;82DB92|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82DB94|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82DB94|22DE9580|8095DE;
                        JSL.L CODE_838401                    ;82DB98|22018483|838401;
                        SEP #$20                             ;82DB9C|E220    |      ;
                        LDA.B #$0F                           ;82DB9E|A90F    |      ;
@@ -8765,8 +8765,8 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DBA4|8593    |000093;
                        LDA.B #$01                           ;82DBA6|A901    |      ;
                        STA.B $94                            ;82DBA8|8594    |000094;
-                       JSL.L CODE_80880A                    ;82DBAA|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82DBAE|220F8E80|808E0F;
+                       JSL.L fScreenFadeout                 ;82DBAA|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82DBAE|220F8E80|808E0F;
                                                             ;      |        |      ;
           CODE_82DBB2:
                        REP #$20                             ;82DBB2|C220    |      ;
@@ -8787,8 +8787,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DBDF|E220    |      ;
                        LDA.W $0110                          ;82DBE1|AD1001  |000110;
                        STA.W $0117                          ;82DBE4|8D1701  |000117;
-                       JSL.L CODE_808E1E                    ;82DBE7|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82DBEB|22458680|808645;
+                       JSL.L fResetForceBlank               ;82DBE7|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82DBEB|22458680|808645;
                        SEP #$20                             ;82DBEF|E220    |      ;
                        LDA.B #$01                           ;82DBF1|A901    |      ;
                        STA.B $92                            ;82DBF3|8592    |000092;
@@ -8796,7 +8796,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DBF7|8593    |000093;
                        LDA.B #$0F                           ;82DBF9|A90F    |      ;
                        STA.B $94                            ;82DBFB|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82DBFD|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82DBFD|22CE8780|8087CE;
                        SEP #$20                             ;82DC01|E220    |      ;
                        LDA.B #$04                           ;82DC03|A904    |      ;
                        STA.B $95                            ;82DC05|8595    |000095;
@@ -8829,7 +8829,7 @@ IncreaseRanchDevelopmentRate:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82DC32:
-                       JSL.L CODE_808FAB                    ;82DC32|22AB8F80|808FAB;
+                       JSL.L fUnknown_808FAB                ;82DC32|22AB8F80|808FAB;
                        REP #$20                             ;82DC36|C220    |      ;
                        SEP #$10                             ;82DC38|E210    |      ;
                        LDA.W #$F2A4                         ;82DC3A|A9A4F2  |      ;
@@ -9157,7 +9157,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DEC5|E220    |      ;
                        LDA.B #$5C                           ;82DEC7|A95C    |      ;
                        STA.B $22                            ;82DEC9|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82DECB|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82DECB|22DE9580|8095DE;
                        JSL.L CODE_838401                    ;82DECF|22018483|838401;
                        SEP #$20                             ;82DED3|E220    |      ;
                        LDA.B #$0F                           ;82DED5|A90F    |      ;
@@ -9166,9 +9166,9 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DEDB|8593    |000093;
                        LDA.B #$01                           ;82DEDD|A901    |      ;
                        STA.B $94                            ;82DEDF|8594    |000094;
-                       JSL.L CODE_80880A                    ;82DEE1|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82DEE5|220F8E80|808E0F;
-                       JSL.L CODE_808846                    ;82DEE9|22468880|808846;
+                       JSL.L fScreenFadeout                 ;82DEE1|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82DEE5|220F8E80|808E0F;
+                       JSL.L fZeroVRAM                      ;82DEE9|22468880|808846;
                        SEP #$20                             ;82DEED|E220    |      ;
                        LDA.B #$03                           ;82DEEF|A903    |      ;
                        JSL.L CODE_808C59                    ;82DEF1|22598C80|808C59;
@@ -9192,7 +9192,7 @@ IncreaseRanchDevelopmentRate:
                        JSL.L CODE_80A7C6                    ;82DF20|22C6A780|80A7C6;
                        REP #$20                             ;82DF24|C220    |      ;
                        LDA.W #$006D                         ;82DF26|A96D00  |      ;
-                       JSL.L CODE_8091CF                    ;82DF29|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82DF29|22CF9180|8091CF;
                        SEP #$20                             ;82DF2D|E220    |      ;
                        REP #$10                             ;82DF2F|C210    |      ;
                        LDA.B #$00                           ;82DF31|A900    |      ;
@@ -9207,16 +9207,16 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DF46|E220    |      ;
                        LDA.B #$A9                           ;82DF48|A9A9    |      ;
                        STA.B $74                            ;82DF4A|8574    |000074;
-                       JSL.L CODE_808A33                    ;82DF4C|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82DF50|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82DF4C|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82DF50|22B28A80|808AB2;
                        JSL.L CODE_83841F                    ;82DF54|221F8483|83841F;
                        JSL.L CODE_8383A4                    ;82DF58|22A48383|8383A4;
                        JSL.L CODE_838380                    ;82DF5C|22808383|838380;
                        SEP #$20                             ;82DF60|E220    |      ;
                        LDA.W $0110                          ;82DF62|AD1001  |000110;
                        STA.W $0117                          ;82DF65|8D1701  |000117;
-                       JSL.L CODE_808E1E                    ;82DF68|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82DF6C|22458680|808645;
+                       JSL.L fResetForceBlank               ;82DF68|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82DF6C|22458680|808645;
                        SEP #$20                             ;82DF70|E220    |      ;
                        LDA.B #$01                           ;82DF72|A901    |      ;
                        STA.B $92                            ;82DF74|8592    |000092;
@@ -9224,7 +9224,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DF78|8593    |000093;
                        LDA.B #$0F                           ;82DF7A|A90F    |      ;
                        STA.B $94                            ;82DF7C|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82DF7E|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82DF7E|22CE8780|8087CE;
                        SEP #$20                             ;82DF82|E220    |      ;
                        LDA.B #$04                           ;82DF84|A904    |      ;
                        STA.B $95                            ;82DF86|8595    |000095;
@@ -9238,7 +9238,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DF92|E220    |      ;
                        LDA.B #$5E                           ;82DF94|A95E    |      ;
                        STA.B $22                            ;82DF96|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82DF98|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82DF98|22DE9580|8095DE;
                        JSL.L CODE_838401                    ;82DF9C|22018483|838401;
                        SEP #$20                             ;82DFA0|E220    |      ;
                        LDA.B #$0F                           ;82DFA2|A90F    |      ;
@@ -9247,16 +9247,16 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82DFA8|8593    |000093;
                        LDA.B #$01                           ;82DFAA|A901    |      ;
                        STA.B $94                            ;82DFAC|8594    |000094;
-                       JSL.L CODE_80880A                    ;82DFAE|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82DFB2|220F8E80|808E0F;
-                       JSL.L CODE_808846                    ;82DFB6|22468880|808846;
+                       JSL.L fScreenFadeout                 ;82DFAE|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82DFB2|220F8E80|808E0F;
+                       JSL.L fZeroVRAM                      ;82DFB6|22468880|808846;
                        SEP #$20                             ;82DFBA|E220    |      ;
                        LDA.B #$04                           ;82DFBC|A904    |      ;
                        JSL.L CODE_808C59                    ;82DFBE|22598C80|808C59;
                        JSL.L CODE_80A7C6                    ;82DFC2|22C6A780|80A7C6;
                        REP #$20                             ;82DFC6|C220    |      ;
                        LDA.W #$006F                         ;82DFC8|A96F00  |      ;
-                       JSL.L CODE_8091CF                    ;82DFCB|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82DFCB|22CF9180|8091CF;
                        SEP #$20                             ;82DFCF|E220    |      ;
                        REP #$10                             ;82DFD1|C210    |      ;
                        LDA.B #$00                           ;82DFD3|A900    |      ;
@@ -9271,8 +9271,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82DFE8|E220    |      ;
                        LDA.B #$A9                           ;82DFEA|A9A9    |      ;
                        STA.B $74                            ;82DFEC|8574    |000074;
-                       JSL.L CODE_808A33                    ;82DFEE|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82DFF2|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82DFEE|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82DFF2|22B28A80|808AB2;
                        JSR.W CODE_82E742                    ;82DFF6|2042E7  |82E742;
                        REP #$30                             ;82DFF9|C230    |      ;
                        LDA.W #$0000                         ;82DFFB|A90000  |      ;
@@ -9282,7 +9282,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W #$0001                         ;82E006|A90100  |      ;
                        LDY.W #$0000                         ;82E009|A00000  |      ;
                        JSR.W CODE_82E405                    ;82E00C|2005E4  |82E405;
-                       JSL.L CODE_808FAB                    ;82E00F|22AB8F80|808FAB;
+                       JSL.L fUnknown_808FAB                ;82E00F|22AB8F80|808FAB;
                        REP #$20                             ;82E013|C220    |      ;
                        STZ.W $013C                          ;82E015|9C3C01  |00013C;
                        STZ.W $013E                          ;82E018|9C3E01  |00013E;
@@ -9367,8 +9367,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E0C1|E220    |      ;
                        LDA.W $0110                          ;82E0C3|AD1001  |000110;
                        STA.W $0117                          ;82E0C6|8D1701  |000117;
-                       JSL.L CODE_808E1E                    ;82E0C9|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82E0CD|22458680|808645;
+                       JSL.L fResetForceBlank               ;82E0C9|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82E0CD|22458680|808645;
                        SEP #$20                             ;82E0D1|E220    |      ;
                        LDA.B #$03                           ;82E0D3|A903    |      ;
                        STA.B $92                            ;82E0D5|8592    |000092;
@@ -9376,7 +9376,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82E0D9|8593    |000093;
                        LDA.B #$0F                           ;82E0DB|A90F    |      ;
                        STA.B $94                            ;82E0DD|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82E0DF|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82E0DF|22CE8780|8087CE;
                        SEP #$20                             ;82E0E3|E220    |      ;
                        STZ.B $94                            ;82E0E5|6494    |000094;
                        STZ.B $96                            ;82E0E7|6496    |000096;
@@ -9532,7 +9532,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E1F1|E220    |      ;
                        LDA.B #$5E                           ;82E1F3|A95E    |      ;
                        STA.B $22                            ;82E1F5|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82E1F7|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82E1F7|22DE9580|8095DE;
                        JSL.L CODE_838401                    ;82E1FB|22018483|838401;
                        SEP #$20                             ;82E1FF|E220    |      ;
                        LDA.B #$0F                           ;82E201|A90F    |      ;
@@ -9541,16 +9541,16 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82E207|8593    |000093;
                        LDA.B #$01                           ;82E209|A901    |      ;
                        STA.B $94                            ;82E20B|8594    |000094;
-                       JSL.L CODE_80880A                    ;82E20D|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82E211|220F8E80|808E0F;
-                       JSL.L CODE_808846                    ;82E215|22468880|808846;
+                       JSL.L fScreenFadeout                 ;82E20D|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82E211|220F8E80|808E0F;
+                       JSL.L fZeroVRAM                      ;82E215|22468880|808846;
                        SEP #$20                             ;82E219|E220    |      ;
                        LDA.B #$04                           ;82E21B|A904    |      ;
                        JSL.L CODE_808C59                    ;82E21D|22598C80|808C59;
                        JSL.L CODE_80A7C6                    ;82E221|22C6A780|80A7C6;
                        REP #$20                             ;82E225|C220    |      ;
                        LDA.W #$006F                         ;82E227|A96F00  |      ;
-                       JSL.L CODE_8091CF                    ;82E22A|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82E22A|22CF9180|8091CF;
                        SEP #$20                             ;82E22E|E220    |      ;
                        REP #$10                             ;82E230|C210    |      ;
                        LDA.B #$00                           ;82E232|A900    |      ;
@@ -9565,8 +9565,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E247|E220    |      ;
                        LDA.B #$A9                           ;82E249|A9A9    |      ;
                        STA.B $74                            ;82E24B|8574    |000074;
-                       JSL.L CODE_808A33                    ;82E24D|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82E251|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82E24D|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82E251|22B28A80|808AB2;
                        JSR.W CODE_82E742                    ;82E255|2042E7  |82E742;
                        REP #$30                             ;82E258|C230    |      ;
                        LDA.W #$0000                         ;82E25A|A90000  |      ;
@@ -9576,7 +9576,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W #$0001                         ;82E265|A90100  |      ;
                        LDY.W #$0001                         ;82E268|A00100  |      ;
                        JSR.W CODE_82E405                    ;82E26B|2005E4  |82E405;
-                       JSL.L CODE_808FAB                    ;82E26E|22AB8F80|808FAB;
+                       JSL.L fUnknown_808FAB                ;82E26E|22AB8F80|808FAB;
                        SEP #$20                             ;82E272|E220    |      ;
                        LDA.W $098E                          ;82E274|AD8E09  |00098E;
                        BEQ CODE_82E27D                      ;82E277|F004    |82E27D;
@@ -9651,8 +9651,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E30D|E220    |      ;
                        LDA.W $0110                          ;82E30F|AD1001  |000110;
                        STA.W $0117                          ;82E312|8D1701  |000117;
-                       JSL.L CODE_808E1E                    ;82E315|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82E319|22458680|808645;
+                       JSL.L fResetForceBlank               ;82E315|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82E319|22458680|808645;
                        SEP #$20                             ;82E31D|E220    |      ;
                        LDA.B #$03                           ;82E31F|A903    |      ;
                        STA.B $92                            ;82E321|8592    |000092;
@@ -9660,7 +9660,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82E325|8593    |000093;
                        LDA.B #$0F                           ;82E327|A90F    |      ;
                        STA.B $94                            ;82E329|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82E32B|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82E32B|22CE8780|8087CE;
                        SEP #$20                             ;82E32F|E220    |      ;
                        STZ.B $94                            ;82E331|6494    |000094;
                        STZ.B $96                            ;82E333|6496    |000096;
@@ -9809,10 +9809,10 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E431|E220    |      ;
                        LDA.B #$00                           ;82E433|A900    |      ;
                        XBA                                  ;82E435|EB      |      ;
-                       LDA.W $0881,X                        ;82E436|BD8108  |000881;
+                       LDA.W sPlayerNameShort,X             ;82E436|BD8108  |000881;
                        LDX.W #$0000                         ;82E439|A20000  |      ;
                        JSL.L CODE_839823                    ;82E43C|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E440|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E440|22F08A80|808AF0;
                        REP #$30                             ;82E444|C230    |      ;
                        LDA.B $82                            ;82E446|A582    |000082;
                        CLC                                  ;82E448|18      |      ;
@@ -9842,7 +9842,7 @@ IncreaseRanchDevelopmentRate:
                        AND.B #$7F                           ;82E47C|297F    |      ;
                        STA.W $019B                          ;82E47E|8D9B01  |00019B;
                        JSL.L CODE_8397A6                    ;82E481|22A69783|8397A6;
-                       JSL.L CODE_808AF0                    ;82E485|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E485|22F08A80|808AF0;
                        REP #$30                             ;82E489|C230    |      ;
                        LDA.L $800185                        ;82E48B|AF850180|800185;
                        CLC                                  ;82E48F|18      |      ;
@@ -9859,7 +9859,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.L DATA8_82F298,X                 ;82E4A7|BF98F282|82F298;
                        LDX.W #$0000                         ;82E4AB|A20000  |      ;
                        JSL.L CODE_839823                    ;82E4AE|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E4B2|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E4B2|22F08A80|808AF0;
                        REP #$30                             ;82E4B6|C230    |      ;
                        LDA.L $800185                        ;82E4B8|AF850180|800185;
                        CLC                                  ;82E4BC|18      |      ;
@@ -9878,7 +9878,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.L DATA8_82F298,X                 ;82E4D8|BF98F282|82F298;
                        LDX.W #$0000                         ;82E4DC|A20000  |      ;
                        JSL.L CODE_839823                    ;82E4DF|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E4E3|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E4E3|22F08A80|808AF0;
                        REP #$30                             ;82E4E7|C230    |      ;
                        PLX                                  ;82E4E9|FA      |      ;
                        INX                                  ;82E4EA|E8      |      ;
@@ -9898,7 +9898,7 @@ IncreaseRanchDevelopmentRate:
                        AND.B #$7F                           ;82E50D|297F    |      ;
                        STA.W $019B                          ;82E50F|8D9B01  |00019B;
                        JSL.L CODE_8397A6                    ;82E512|22A69783|8397A6;
-                       JSL.L CODE_808AF0                    ;82E516|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E516|22F08A80|808AF0;
                        REP #$30                             ;82E51A|C230    |      ;
                        PLX                                  ;82E51C|FA      |      ;
                        LDA.L Table_82F278,X                 ;82E51D|BF78F282|82F278;
@@ -9910,19 +9910,19 @@ IncreaseRanchDevelopmentRate:
                        LDA.B #$00                           ;82E52C|A900    |      ;
                        STA.W $018C                          ;82E52E|8D8C01  |00018C;
                        JSL.L CODE_8397A6                    ;82E531|22A69783|8397A6;
-                       JSL.L CODE_808AF0                    ;82E535|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E535|22F08A80|808AF0;
                        REP #$30                             ;82E539|C230    |      ;
-                       JSL.L CODE_8289D6                    ;82E53B|22D68982|8289D6;
+                       JSL.L WriteSeasonWeekdayAndDayOrdinal;82E53B|22D68982|8289D6;
                        REP #$20                             ;82E53F|C220    |      ;
                        PLX                                  ;82E541|FA      |      ;
                        INX                                  ;82E542|E8      |      ;
                        INX                                  ;82E543|E8      |      ;
                        LDA.L Table_82F278,X                 ;82E544|BF78F282|82F278;
                        STA.L $800185                        ;82E548|8F850180|800185;
-                       LDA.W $08B3                          ;82E54C|ADB308  |0008B3;
+                       LDA.W sSeasonName                    ;82E54C|ADB308  |0008B3;
                        LDX.W #$0000                         ;82E54F|A20000  |      ;
                        JSL.L CODE_839823                    ;82E552|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E556|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E556|22F08A80|808AF0;
                        REP #$30                             ;82E55A|C230    |      ;
                        LDA.L $800185                        ;82E55C|AF850180|800185;
                        CLC                                  ;82E560|18      |      ;
@@ -9931,7 +9931,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W $08B5                          ;82E568|ADB508  |0008B5;
                        LDX.W #$0000                         ;82E56B|A20000  |      ;
                        JSL.L CODE_839823                    ;82E56E|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E572|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E572|22F08A80|808AF0;
                        REP #$30                             ;82E576|C230    |      ;
                        LDA.L $800185                        ;82E578|AF850180|800185;
                        CLC                                  ;82E57C|18      |      ;
@@ -9940,7 +9940,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W $08B7                          ;82E584|ADB708  |0008B7;
                        LDX.W #$0000                         ;82E587|A20000  |      ;
                        JSL.L CODE_839823                    ;82E58A|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E58E|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E58E|22F08A80|808AF0;
                        REP #$30                             ;82E592|C230    |      ;
                        LDA.L $800185                        ;82E594|AF850180|800185;
                        CLC                                  ;82E598|18      |      ;
@@ -9949,7 +9949,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W $08B9                          ;82E5A0|ADB908  |0008B9;
                        LDX.W #$0000                         ;82E5A3|A20000  |      ;
                        JSL.L CODE_839823                    ;82E5A6|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E5AA|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E5AA|22F08A80|808AF0;
                        REP #$30                             ;82E5AE|C230    |      ;
                        LDA.L $800185                        ;82E5B0|AF850180|800185;
                        CLC                                  ;82E5B4|18      |      ;
@@ -9958,7 +9958,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W $08BB                          ;82E5BC|ADBB08  |0008BB;
                        LDX.W #$0000                         ;82E5BF|A20000  |      ;
                        JSL.L CODE_839823                    ;82E5C2|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E5C6|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E5C6|22F08A80|808AF0;
                        REP #$30                             ;82E5CA|C230    |      ;
                        LDA.L $800185                        ;82E5CC|AF850180|800185;
                        CLC                                  ;82E5D0|18      |      ;
@@ -9967,7 +9967,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W $08BD                          ;82E5D8|ADBD08  |0008BD;
                        LDX.W #$0000                         ;82E5DB|A20000  |      ;
                        JSL.L CODE_839823                    ;82E5DE|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82E5E2|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82E5E2|22F08A80|808AF0;
                        RTS                                  ;82E5E6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10015,8 +10015,8 @@ IncreaseRanchDevelopmentRate:
                        LDA.B #$80                           ;82E62C|A980    |      ;
                        PHY                                  ;82E62E|5A      |      ;
                        PHX                                  ;82E62F|DA      |      ;
-                       JSL.L CODE_808A33                    ;82E630|22338A80|808A33;
-                       JSL.L CODE_808AB2                    ;82E634|22B28A80|808AB2;
+                       JSL.L fUnkown_808A33                 ;82E630|22338A80|808A33;
+                       JSL.L fUnknown_808AB2                ;82E634|22B28A80|808AB2;
                        REP #$30                             ;82E638|C230    |      ;
                        PLX                                  ;82E63A|FA      |      ;
                        PLY                                  ;82E63B|7A      |      ;
@@ -10114,7 +10114,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $74                            ;82E780|8574    |000074;
                        REP #$20                             ;82E782|C220    |      ;
                        LDA.W #$0080                         ;82E784|A98000  |      ;
-                       JSL.L CODE_808A33                    ;82E787|22338A80|808A33;
+                       JSL.L fUnkown_808A33                 ;82E787|22338A80|808A33;
                        SEP #$20                             ;82E78B|E220    |      ;
                        LDA.B #$01                           ;82E78D|A901    |      ;
                        STA.B $27                            ;82E78F|8527    |000027;
@@ -10134,8 +10134,8 @@ IncreaseRanchDevelopmentRate:
                        STA.B $74                            ;82E7AB|8574    |000074;
                        REP #$20                             ;82E7AD|C220    |      ;
                        LDA.W #$0080                         ;82E7AF|A98000  |      ;
-                       JSL.L CODE_808A33                    ;82E7B2|22338A80|808A33;
-                       JSL.L CODE_808AF0                    ;82E7B6|22F08A80|808AF0;
+                       JSL.L fUnkown_808A33                 ;82E7B2|22338A80|808A33;
+                       JSL.L fStartProgrammedDMA            ;82E7B6|22F08A80|808AF0;
                        REP #$30                             ;82E7BA|C230    |      ;
                        INC.B $7E                            ;82E7BC|E67E    |00007E;
                        INC.B $7E                            ;82E7BE|E67E    |00007E;
@@ -10188,7 +10188,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E80C|E220    |      ;
                        LDA.B #$5F                           ;82E80E|A95F    |      ;
                        STA.B $22                            ;82E810|8522    |000022;
-                       JSL.L CODE_8095DE                    ;82E812|22DE9580|8095DE;
+                       JSL.L fUnknown_8095DE                ;82E812|22DE9580|8095DE;
                        JSL.L CODE_838401                    ;82E816|22018483|838401;
                        SEP #$20                             ;82E81A|E220    |      ;
                        LDA.B #$0F                           ;82E81C|A90F    |      ;
@@ -10197,10 +10197,10 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82E822|8593    |000093;
                        LDA.B #$01                           ;82E824|A901    |      ;
                        STA.B $94                            ;82E826|8594    |000094;
-                       JSL.L CODE_80880A                    ;82E828|220A8880|80880A;
-                       JSL.L CODE_808E0F                    ;82E82C|220F8E80|808E0F;
-                       JSL.L CODE_808846                    ;82E830|22468880|808846;
-                       JSL.L CODE_808FAB                    ;82E834|22AB8F80|808FAB;
+                       JSL.L fScreenFadeout                 ;82E828|220A8880|80880A;
+                       JSL.L fSetForceBlank                 ;82E82C|220F8E80|808E0F;
+                       JSL.L fZeroVRAM                      ;82E830|22468880|808846;
+                       JSL.L fUnknown_808FAB                ;82E834|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82E838|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82E83C|220F8285|85820F;
                        REP #$20                             ;82E840|C220    |      ;
@@ -10217,7 +10217,7 @@ IncreaseRanchDevelopmentRate:
                        JSL.L CODE_80A7C6                    ;82E85D|22C6A780|80A7C6;
                        REP #$20                             ;82E861|C220    |      ;
                        LDA.W #$006F                         ;82E863|A96F00  |      ;
-                       JSL.L CODE_8091CF                    ;82E866|22CF9180|8091CF;
+                       JSL.L fCopyPalleteFromIndex1         ;82E866|22CF9180|8091CF;
                        SEP #$20                             ;82E86A|E220    |      ;
                        REP #$10                             ;82E86C|C210    |      ;
                        LDA.B #$00                           ;82E86E|A900    |      ;
@@ -10232,7 +10232,7 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E883|E220    |      ;
                        LDA.B #$A9                           ;82E885|A9A9    |      ;
                        STA.B $74                            ;82E887|8574    |000074;
-                       JSL.L CODE_808A33                    ;82E889|22338A80|808A33;
+                       JSL.L fUnkown_808A33                 ;82E889|22338A80|808A33;
                        SEP #$20                             ;82E88D|E220    |      ;
                        REP #$10                             ;82E88F|C210    |      ;
                        LDA.B #$01                           ;82E891|A901    |      ;
@@ -10247,8 +10247,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E8A6|E220    |      ;
                        LDA.B #$A9                           ;82E8A8|A9A9    |      ;
                        STA.B $74                            ;82E8AA|8574    |000074;
-                       JSL.L CODE_808A33                    ;82E8AC|22338A80|808A33;
-                       JSL.L CODE_808AF0                    ;82E8B0|22F08A80|808AF0;
+                       JSL.L fUnkown_808A33                 ;82E8AC|22338A80|808A33;
+                       JSL.L fStartProgrammedDMA            ;82E8B0|22F08A80|808AF0;
                        JSL.L CODE_81A4C7                    ;82E8B4|22C7A481|81A4C7;
                        REP #$20                             ;82E8B8|C220    |      ;
                        LDA.W #$0219                         ;82E8BA|A91902  |      ;
@@ -10283,8 +10283,8 @@ IncreaseRanchDevelopmentRate:
                        SEP #$20                             ;82E90F|E220    |      ;
                        LDA.W $0110                          ;82E911|AD1001  |000110;
                        STA.W $0117                          ;82E914|8D1701  |000117;
-                       JSL.L CODE_808E1E                    ;82E917|221E8E80|808E1E;
-                       JSL.L CODE_808645                    ;82E91B|22458680|808645;
+                       JSL.L fResetForceBlank               ;82E917|221E8E80|808E1E;
+                       JSL.L fWaitForNextNMI                ;82E91B|22458680|808645;
                        SEP #$20                             ;82E91F|E220    |      ;
                        LDA.B #$03                           ;82E921|A903    |      ;
                        STA.B $92                            ;82E923|8592    |000092;
@@ -10292,7 +10292,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $93                            ;82E927|8593    |000093;
                        LDA.B #$0F                           ;82E929|A90F    |      ;
                        STA.B $94                            ;82E92B|8594    |000094;
-                       JSL.L CODE_8087CE                    ;82E92D|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;82E92D|22CE8780|8087CE;
                        REP #$20                             ;82E931|C220    |      ;
                        STZ.W $0991                          ;82E933|9C9109  |000991;
                        SEP #$20                             ;82E936|E220    |      ;
@@ -10375,43 +10375,43 @@ IncreaseRanchDevelopmentRate:
                        LDA.W $099F                          ;82E9D8|AD9F09  |00099F;
                        CMP.B #$00                           ;82E9DB|C900    |      ;
                        BNE CODE_82E9E3                      ;82E9DD|D004    |82E9E3;
-                       JML.L CODE_8080ED                    ;82E9DF|5CED8080|8080ED;
+                       JML.L fSetPlayerName                 ;82E9DF|5CED8080|8080ED;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82E9E3:
                        CMP.B #$01                           ;82E9E3|C901    |      ;
                        BNE CODE_82E9EB                      ;82E9E5|D004    |82E9EB;
-                       JML.L CODE_80815F                    ;82E9E7|5C5F8180|80815F;
+                       JML.L fSetBoughtCowName              ;82E9E7|5C5F8180|80815F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82E9EB:
                        CMP.B #$02                           ;82E9EB|C902    |      ;
                        BNE CODE_82E9F3                      ;82E9ED|D004    |82E9F3;
-                       JML.L CODE_8081D2                    ;82E9EF|5CD28180|8081D2;
+                       JML.L fSetBornCowName                ;82E9EF|5CD28180|8081D2;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82E9F3:
                        CMP.B #$03                           ;82E9F3|C903    |      ;
                        BNE CODE_82E9FB                      ;82E9F5|D004    |82E9FB;
-                       JML.L CODE_808254                    ;82E9F7|5C548280|808254;
+                       JML.L fSetDogName                    ;82E9F7|5C548280|808254;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82E9FB:
                        CMP.B #$04                           ;82E9FB|C904    |      ;
                        BNE CODE_82EA03                      ;82E9FD|D004    |82EA03;
-                       JML.L CODE_8082C6                    ;82E9FF|5CC68280|8082C6;
+                       JML.L fSetHorseName                  ;82E9FF|5CC68280|8082C6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82EA03:
                        CMP.B #$05                           ;82EA03|C905    |      ;
                        BNE CODE_82EA0B                      ;82EA05|D004    |82EA0B;
-                       JML.L CODE_808338                    ;82EA07|5C388380|808338;
+                       JML.L fSetFirstChildName             ;82EA07|5C388380|808338;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82EA0B:
                        CMP.B #$06                           ;82EA0B|C906    |      ;
                        BNE CODE_82EA13                      ;82EA0D|D004    |82EA13;
-                       JML.L CODE_8083AE                    ;82EA0F|5CAE8380|8083AE;
+                       JML.L fSetSecondChildName            ;82EA0F|5CAE8380|8083AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82EA13:
@@ -10493,7 +10493,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.W #$00A8                         ;82EA94|A9A800  |      ;
                        LDX.W #$0001                         ;82EA97|A20100  |      ;
                        JSL.L CODE_839823                    ;82EA9A|22239883|839823;
-                       JSL.L CODE_808AF0                    ;82EA9E|22F08A80|808AF0;
+                       JSL.L fStartProgrammedDMA            ;82EA9E|22F08A80|808AF0;
                        REP #$30                             ;82EAA2|C230    |      ;
                        LDA.B $82                            ;82EAA4|A582    |000082;
                        CLC                                  ;82EAA6|18      |      ;
@@ -10538,7 +10538,7 @@ IncreaseRanchDevelopmentRate:
                        STA.B $74                            ;82EAEC|8574    |000074;
                        REP #$20                             ;82EAEE|C220    |      ;
                        LDA.W #$0080                         ;82EAF0|A98000  |      ;
-                       JSL.L CODE_808A33                    ;82EAF3|22338A80|808A33;
+                       JSL.L fUnkown_808A33                 ;82EAF3|22338A80|808A33;
                        SEP #$20                             ;82EAF7|E220    |      ;
                        LDA.B #$01                           ;82EAF9|A901    |      ;
                        STA.B $27                            ;82EAFB|8527    |000027;
@@ -10558,8 +10558,8 @@ IncreaseRanchDevelopmentRate:
                        STA.B $74                            ;82EB17|8574    |000074;
                        REP #$20                             ;82EB19|C220    |      ;
                        LDA.W #$0080                         ;82EB1B|A98000  |      ;
-                       JSL.L CODE_808A33                    ;82EB1E|22338A80|808A33;
-                       JSL.L CODE_808AF0                    ;82EB22|22F08A80|808AF0;
+                       JSL.L fUnkown_808A33                 ;82EB1E|22338A80|808A33;
+                       JSL.L fStartProgrammedDMA            ;82EB22|22F08A80|808AF0;
                        REP #$30                             ;82EB26|C230    |      ;
                        INC.B $7E                            ;82EB28|E67E    |00007E;
                        INC.B $7E                            ;82EB2A|E67E    |00007E;

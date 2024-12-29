@@ -223,7 +223,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_848190:
-                       JSL.L CODE_838138                    ;848190|22388183|838138;
+                       JSL.L fRNG                           ;848190|22388183|838138;
                        SEP #$20                             ;848194|E220    |      ;
                        STA.B $DE                            ;848196|85DE    |0000DE;
                        REP #$20                             ;848198|C220    |      ;
@@ -1396,7 +1396,7 @@
                        STA.B $C9                            ;8489ED|85C9    |0000C9;
                        SEP #$20                             ;8489EF|E220    |      ;
                        LDA.B #$01                           ;8489F1|A901    |      ;
-                       STA.W $0973                          ;8489F3|8D7309  |000973;
+                       STA.W nTimeState                     ;8489F3|8D7309  |000973;
                        REP #$20                             ;8489F6|C220    |      ;
                        LDA.L $7F1F5C                        ;8489F8|AF5C1F7F|7F1F5C;
                        AND.W #$FFFE                         ;8489FC|29FEFF  |      ;
@@ -1416,7 +1416,7 @@
                        STA.B $C9                            ;848A17|85C9    |0000C9;
                        SEP #$20                             ;848A19|E220    |      ;
                        LDA.B #$00                           ;848A1B|A900    |      ;
-                       STA.W $0973                          ;848A1D|8D7309  |000973;
+                       STA.W nTimeState                     ;848A1D|8D7309  |000973;
                        REP #$20                             ;848A20|C220    |      ;
                        LDA.L $7F1F5C                        ;848A22|AF5C1F7F|7F1F5C;
                        ORA.W #$0001                         ;848A26|090100  |      ;
@@ -1630,7 +1630,7 @@
                        STA.B $93                            ;848BA1|8593    |000093;
                        LDA.B #$0F                           ;848BA3|A90F    |      ;
                        STA.B $94                            ;848BA5|8594    |000094;
-                       JSL.L CODE_8087CE                    ;848BA7|22CE8780|8087CE;
+                       JSL.L fScreenFadein                  ;848BA7|22CE8780|8087CE;
                        RTS                                  ;848BAB|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1798,7 +1798,7 @@
                        STA.B $93                            ;848CD7|8593    |000093;
                        LDA.B #$00                           ;848CD9|A900    |      ;
                        STA.B $94                            ;848CDB|8594    |000094;
-                       JSL.L CODE_80880A                    ;848CDD|220A8880|80880A;
+                       JSL.L fScreenFadeout                 ;848CDD|220A8880|80880A;
                        RTS                                  ;848CE1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2040,7 +2040,7 @@
                        STA.B $C9                            ;848E72|85C9    |0000C9;
                        SEP #$20                             ;848E74|E220    |      ;
                        LDA.B [$C9]                          ;848E76|A7C9    |0000C9;
-                       JSL.L CODE_8089F9                    ;848E78|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;848E78|22F98980|8089F9;
                        SEP #$20                             ;848E7C|E220    |      ;
                        REP #$10                             ;848E7E|C210    |      ;
                        LDY.W #$000D                         ;848E80|A00D00  |      ;
@@ -2265,7 +2265,7 @@
                        SEP #$20                             ;849011|E220    |      ;
                        LDA.B #$02                           ;849013|A902    |      ;
                        STA.W $019A                          ;849015|8D9A01  |00019A;
-                       JSL.L CODE_83935F                    ;849018|225F9383|83935F;
+                       JSL.L DialogRelated                  ;849018|225F9383|83935F;
                        REP #$30                             ;84901C|C230    |      ;
                        LDA.B $C9                            ;84901E|A5C9    |0000C9;
                        CLC                                  ;849020|18      |      ;
@@ -2301,7 +2301,7 @@
                        SEP #$20                             ;849056|E220    |      ;
                        LDA.B #$02                           ;849058|A902    |      ;
                        STA.W $019A                          ;84905A|8D9A01  |00019A;
-                       JSL.L CODE_83935F                    ;84905D|225F9383|83935F;
+                       JSL.L DialogRelated                  ;84905D|225F9383|83935F;
                        REP #$30                             ;849061|C230    |      ;
                        LDA.B $C9                            ;849063|A5C9    |0000C9;
                        CLC                                  ;849065|18      |      ;
@@ -2723,7 +2723,7 @@
                        STA.B $C9                            ;849360|85C9    |0000C9;
                        SEP #$20                             ;849362|E220    |      ;
                        LDA.B [$C9]                          ;849364|A7C9    |0000C9;
-                       JSL.L CODE_808FC7                    ;849366|22C78F80|808FC7;
+                       JSL.L fUnknown_808FC7                ;849366|22C78F80|808FC7;
                        REP #$30                             ;84936A|C230    |      ;
                        LDA.B $C9                            ;84936C|A5C9    |0000C9;
                        CLC                                  ;84936E|18      |      ;
@@ -3384,7 +3384,7 @@
                        LDA.B #$00                           ;849870|A900    |      ;
                        XBA                                  ;849872|EB      |      ;
                        REP #$20                             ;849873|C220    |      ;
-                       JSL.L CODE_83C995                    ;849875|2295C983|83C995;
+                       JSL.L fGetChickenDataPointer         ;849875|2295C983|83C995;
                        REP #$30                             ;849879|C230    |      ;
                        LDY.W #$001A                         ;84987B|A01A00  |      ;
                        LDA.B [$CC],Y                        ;84987E|B7CC    |0000CC;
@@ -3740,7 +3740,7 @@
                        LDA.B #$00                           ;849AED|A900    |      ;
                        XBA                                  ;849AEF|EB      |      ;
                        REP #$20                             ;849AF0|C220    |      ;
-                       JSL.L CODE_83C9A7                    ;849AF2|22A7C983|83C9A7;
+                       JSL.L fGetCowPointer                 ;849AF2|22A7C983|83C9A7;
                        REP #$30                             ;849AF6|C230    |      ;
                        LDY.W #$001A                         ;849AF8|A01A00  |      ;
                        LDA.B [$CC],Y                        ;849AFB|B7CC    |0000CC;
@@ -3964,7 +3964,7 @@
                        STA.W $0191                          ;849C6A|8D9101  |000191;
                        LDA.B #$02                           ;849C6D|A902    |      ;
                        STA.W $019A                          ;849C6F|8D9A01  |00019A;
-                       JSL.L CODE_83935F                    ;849C72|225F9383|83935F;
+                       JSL.L DialogRelated                  ;849C72|225F9383|83935F;
                        SEP #$20                             ;849C76|E220    |      ;
                        REP #$10                             ;849C78|C210    |      ;
                        LDY.W #$0001                         ;849C7A|A00100  |      ;
@@ -8522,7 +8522,7 @@
                        SBC.B #$24                           ;84BC11|E924    |      ;
                        REP #$20                             ;84BC13|C220    |      ;
                        PHA                                  ;84BC15|48      |      ;
-                       JSL.L CODE_83C995                    ;84BC16|2295C983|83C995;
+                       JSL.L fGetChickenDataPointer         ;84BC16|2295C983|83C995;
                        SEP #$20                             ;84BC1A|E220    |      ;
                        LDY.W #$0001                         ;84BC1C|A00100  |      ;
                        LDA.B #$28                           ;84BC1F|A928    |      ;
@@ -8624,7 +8624,7 @@
                        SBC.B #$24                           ;84BCCF|E924    |      ;
                        REP #$20                             ;84BCD1|C220    |      ;
                        PHA                                  ;84BCD3|48      |      ;
-                       JSL.L CODE_83C995                    ;84BCD4|2295C983|83C995;
+                       JSL.L fGetChickenDataPointer         ;84BCD4|2295C983|83C995;
                        SEP #$20                             ;84BCD8|E220    |      ;
                        LDY.W #$0001                         ;84BCDA|A00100  |      ;
                        LDA.B #$28                           ;84BCDD|A928    |      ;
@@ -8937,7 +8937,7 @@
                        SEP #$20                             ;84BEFD|E220    |      ;
                        LDA.B #$06                           ;84BEFF|A906    |      ;
                        STA.W $019A                          ;84BF01|8D9A01  |00019A;
-                       JSL.L CODE_83935F                    ;84BF04|225F9383|83935F;
+                       JSL.L DialogRelated                  ;84BF04|225F9383|83935F;
                        REP #$30                             ;84BF08|C230    |      ;
                        LDA.B $C9                            ;84BF0A|A5C9    |0000C9;
                        CLC                                  ;84BF0C|18      |      ;
@@ -9930,7 +9930,7 @@
                        SEP #$20                             ;84C5BD|E220    |      ;
                        LDA.B #$00                           ;84C5BF|A900    |      ;
                        STA.W $0191                          ;84C5C1|8D9101  |000191;
-                       JSL.L CODE_83935F                    ;84C5C4|225F9383|83935F;
+                       JSL.L DialogRelated                  ;84C5C4|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_84C5C8:
                        REP #$20                             ;84C5C8|C220    |      ;
@@ -11138,7 +11138,7 @@
                        STA.B $D4                            ;84CDF2|85D4    |0000D4;
                        SEP #$20                             ;84CDF4|E220    |      ;
                        LDA.B #$03                           ;84CDF6|A903    |      ;
-                       JSL.L CODE_8089F9                    ;84CDF8|22F98980|8089F9;
+                       JSL.L fRollRNG                       ;84CDF8|22F98980|8089F9;
                        SEP #$20                             ;84CDFC|E220    |      ;
                        XBA                                  ;84CDFE|EB      |      ;
                        LDA.B #$00                           ;84CDFF|A900    |      ;
@@ -11389,7 +11389,7 @@
                        LDA.W #$5000                         ;84CF7A|A90050  |      ;
                        CLC                                  ;84CF7D|18      |      ;
                        ADC.W #$0010                         ;84CF7E|691000  |      ;
-                       STA.W DialogIndexID                  ;84CF81|8D8501  |000185;
+                       STA.W $0185                          ;84CF81|8D8501  |000185;
                        SEP #$20                             ;84CF84|E220    |      ;
                        STZ.W $018B                          ;84CF86|9C8B01  |00018B;
                        LDA.W $019B                          ;84CF89|AD9B01  |00019B;
