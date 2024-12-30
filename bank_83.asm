@@ -292,7 +292,7 @@
                        RTL                                  ;8381F7|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8381F8:
+   fDecompressTilemap:
                        PHP                                  ;8381F8|08      |      ;
                        REP #$30                             ;8381F9|C230    |      ;
                        LDA.W #$0000                         ;8381FB|A90000  |      ;
@@ -453,7 +453,7 @@
                        INC A                                ;83831D|1A      |      ;
                        STA.W $0103                          ;83831E|8D0301  |000103;
                        JSL.L CODE_83833E                    ;838321|223E8383|83833E;
-                       JSL.L CODE_838332                    ;838325|22328383|838332;
+                       JSL.L fUnknown_838332                ;838325|22328383|838332;
                        REP #$30                             ;838329|C230    |      ;
                        PLY                                  ;83832B|7A      |      ;
                        TYA                                  ;83832C|98      |      ;
@@ -461,7 +461,7 @@
                        RTL                                  ;838331|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838332:
+      fUnknown_838332:
                        SEP #$20                             ;838332|E220    |      ;
                        LDA.B #$0A                           ;838334|A90A    |      ;
                        STA.W $0116                          ;838336|8D1601  |000116;
@@ -2337,7 +2337,7 @@
                        STA.B $74                            ;8392CD|8574    |000074;
                        LDA.B #$7E                           ;8392CF|A97E    |      ;
                        STA.B $77                            ;8392D1|8577    |000077;
-                       JSL.L CODE_8381F8                    ;8392D3|22F88183|8381F8;
+                       JSL.L fDecompressTilemap             ;8392D3|22F88183|8381F8;
                        SEP #$20                             ;8392D7|E220    |      ;
                        LDA.B #$00                           ;8392D9|A900    |      ;
                        STA.B $27                            ;8392DB|8527    |000027;
@@ -2403,7 +2403,7 @@
                                                             ;      |        |      ;
         DialogRelated:
                        REP #$30                             ;83935F|C230    |      ; X: nDialogIndex
-                       STX.W nDialogIndex16                 ;839361|8E8301  |000183;
+                       STX.W nDialogIndex                   ;839361|8E8301  |000183;
                        LDA.W #$5000                         ;839364|A90050  |      ;
                        CLC                                  ;839367|18      |      ;
                        ADC.W #$0010                         ;839368|691000  |      ;
@@ -2420,10 +2420,10 @@
                        STZ.W $018F                          ;839387|9C8F01  |00018F;
                        STZ.W $0190                          ;83938A|9C9001  |000190;
                        REP #$20                             ;83938D|C220    |      ;
-                       LDA.W nDialogIndex16                 ;83938F|AD8301  |000183;
+                       LDA.W nDialogIndex                   ;83938F|AD8301  |000183;
                        ASL A                                ;839392|0A      |      ;
                        CLC                                  ;839393|18      |      ;
-                       ADC.W nDialogIndex16                 ;839394|6D8301  |000183;
+                       ADC.W nDialogIndex                   ;839394|6D8301  |000183;
                        TAX                                  ;839397|AA      |      ;
                        LDA.L pDialogTable,X                 ;839398|BFF69B83|839BF6;
                        STA.B $01                            ;83939C|8501    |000001;
@@ -2620,23 +2620,23 @@
                        RTL                                  ;83951B|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-             ReadText:
+            fReadText:
                        SEP #$20                             ;83951C|E220    |      ;
                        REP #$10                             ;83951E|C210    |      ;
                        LDA.W $019B                          ;839520|AD9B01  |00019B;
                        AND.B #$20                           ;839523|2920    |      ;
-                       BEQ CODE_83952A                      ;839525|F003    |83952A;
+                       BEQ .label1                          ;839525|F003    |83952A;
                        JMP.W CODE_839447                    ;839527|4C4794  |839447;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83952A:
+              .label1:
                        LDA.W $019B                          ;83952A|AD9B01  |00019B;
                        AND.B #$01                           ;83952D|2901    |      ;
-                       BNE CODE_839534                      ;83952F|D003    |839534;
-                       JMP.W CODE_8395F0                    ;839531|4CF095  |8395F0;
+                       BNE .label2                          ;83952F|D003    |839534;
+                       JMP.W .return                        ;839531|4CF095  |8395F0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839534:
+              .label2:
                        SEP #$20                             ;839534|E220    |      ;
                        LDA.W $019B                          ;839536|AD9B01  |00019B;
                        AND.B #$FD                           ;839539|29FD    |      ;
@@ -2646,117 +2646,111 @@
                        ASL A                                ;839543|0A      |      ;
                        TAY                                  ;839544|A8      |      ;
                        LDA.B [$01],Y                        ;839545|B701    |000001;
-                                                            ;      |        |      ;
-    CheckSpecialChar1:
                        CMP.W #$00A2                         ;839547|C9A200  |      ;
-                       BNE CheckSpecialChar2                ;83954A|D003    |83954F;
-                       JMP.W CODE_8395F1                    ;83954C|4CF195  |8395F1;
+                       BNE .not00A2                         ;83954A|D003    |83954F;
+                       JMP.W .textNextScreenHandler         ;83954C|4CF195  |8395F1;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    CheckSpecialChar2:
+             .not00A2:
                        CMP.W #$00B1                         ;83954F|C9B100  |      ;
-                       BNE CheckSpecialChar3                ;839552|D003    |839557;
-                       JMP.W CODE_83960D                    ;839554|4C0D96  |83960D;
+                       BNE .not00B1                         ;839552|D003    |839557;
+                       JMP.W .textSpaceHandler              ;839554|4C0D96  |83960D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    CheckSpecialChar3:
+             .not00B1:
                        CMP.W #$FFFC                         ;839557|C9FCFF  |      ;
-                       BNE CheckSpecialChar4                ;83955A|D003    |83955F;
-                       JMP.W CODE_839621                    ;83955C|4C2196  |839621;
+                       BNE .notFFFC                         ;83955A|D003    |83955F;
+                       JMP.W .textFFFCHandler               ;83955C|4C2196  |839621;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    CheckSpecialChar4:
+             .notFFFC:
                        CMP.W #$FFFE                         ;83955F|C9FEFF  |      ;
-                       BNE CheckSpecialChar5                ;839562|D003    |839567;
-                       JMP.W CODE_839719                    ;839564|4C1997  |839719;
+                       BNE .notFFFE                         ;839562|D003    |839567;
+                       JMP.W .textFFFEHandler               ;839564|4C1997  |839719;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    CheckSpecialChar5:
+             .notFFFE:
                        CMP.W #$FFFF                         ;839567|C9FFFF  |      ;
-                       BNE CODE_83956F                      ;83956A|D003    |83956F;
-                       JMP.W CODE_839752                    ;83956C|4C5297  |839752;
+                       BNE .notFFFF                         ;83956A|D003    |83956F;
+                       JMP.W .textFFFFHandler               ;83956C|4C5297  |839752;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83956F:
+             .notFFFF:
                        SEP #$20                             ;83956F|E220    |      ;
                        LDA.W $0189                          ;839571|AD8901  |000189;
                        CMP.B #$04                           ;839574|C904    |      ;
-                       BNE CODE_8395E7                      ;839576|D06F    |8395E7;
+                       BNE .label3                          ;839576|D06F    |8395E7;
                        STZ.W $0189                          ;839578|9C8901  |000189;
                        REP #$20                             ;83957B|C220    |      ;
                        LDA.B [$01],Y                        ;83957D|B701    |000001;
-                                                            ;      |        |      ;
-    CheckSpecialChar6:
                        CMP.W #$FFFD                         ;83957F|C9FDFF  |      ;
-                       BNE CODE_839587                      ;839582|D003    |839587;
-                       JMP.W CODE_8396A1                    ;839584|4CA196  |8396A1;
+                       BNE .notFFFD                         ;839582|D003    |839587;
+                       JMP.W .textFFFDHandler               ;839584|4CA196  |8396A1;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839587:
+             .notFFFD:
                        REP #$30                             ;839587|C230    |      ;
                        LDA.B [$01],Y                        ;839589|B701    |000001;
                        SEP #$10                             ;83958B|E210    |      ;
                        LDX.B #$01                           ;83958D|A201    |      ;
-                                                            ;      |        |      ;
-    CheckSpecialChar7:
                        CMP.W #$00BC                         ;83958F|C9BC00  |      ;
-                       BCC CODE_83959D                      ;839592|9009    |83959D;
+                       BCC .label4                          ;839592|9009    |83959D;
                        CMP.W #$00C6                         ;839594|C9C600  |      ;
-                       BCS CODE_83959D                      ;839597|B004    |83959D;
+                       BCS .label4                          ;839597|B004    |83959D;
                        LDX.B #$00                           ;839599|A200    |      ;
-                       BRA CODE_8395A4                      ;83959B|8007    |8395A4;
+                       BRA .label5                          ;83959B|8007    |8395A4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83959D:
+              .label4:
                        CMP.W #$0270                         ;83959D|C97002  |      ;
-                       BNE CODE_8395A4                      ;8395A0|D002    |8395A4;
+                       BNE .label5                          ;8395A0|D002    |8395A4;
                        LDX.B #$00                           ;8395A2|A200    |      ;
                                                             ;      |        |      ;
-          CODE_8395A4:
+              .label5:
                        STX.W $0190                          ;8395A4|8E9001  |000190;
-                       JSL.L CODE_839823                    ;8395A7|22239883|839823;
+                       JSL.L fUnknown_839823                ;8395A7|22239883|839823;
                        SEP #$20                             ;8395AB|E220    |      ;
                        REP #$10                             ;8395AD|C210    |      ;
                        LDA.B #$03                           ;8395AF|A903    |      ;
                        STA.W $0114                          ;8395B1|8D1401  |000114;
                        LDA.B #$06                           ;8395B4|A906    |      ;
                        STA.W $0115                          ;8395B6|8D1501  |000115;
-                       JSL.L CODE_838332                    ;8395B9|22328383|838332;
+                       JSL.L fUnknown_838332                ;8395B9|22328383|838332;
                        SEP #$20                             ;8395BD|E220    |      ;
                        LDA.W $019B                          ;8395BF|AD9B01  |00019B;
                        ORA.B #$02                           ;8395C2|0902    |      ;
                        STA.W $019B                          ;8395C4|8D9B01  |00019B;
                        REP #$30                             ;8395C7|C230    |      ;
                                                             ;      |        |      ;
-          CODE_8395C9:
+             .label12:
                        SEP #$20                             ;8395C9|E220    |      ;
                        LDA.W $018C                          ;8395CB|AD8C01  |00018C;
-                       BNE CODE_8395D9                      ;8395CE|D009    |8395D9;
+                       BNE .label6                          ;8395CE|D009    |8395D9;
                        REP #$20                             ;8395D0|C220    |      ;
                        LDA.W $0187                          ;8395D2|AD8701  |000187;
                        INC A                                ;8395D5|1A      |      ;
                        STA.W $0187                          ;8395D6|8D8701  |000187;
                                                             ;      |        |      ;
-          CODE_8395D9:
+              .label6:
                        SEP #$20                             ;8395D9|E220    |      ;
                        LDA.B #$00                           ;8395DB|A900    |      ;
                        XBA                                  ;8395DD|EB      |      ;
                        LDA.W $0190                          ;8395DE|AD9001  |000190;
                        REP #$30                             ;8395E1|C230    |      ;
                        TAX                                  ;8395E3|AA      |      ;
-                       JSR.W CODE_839838                    ;8395E4|203898  |839838;
+                       JSR.W fUnknownText_839838            ;8395E4|203898  |839838;
                                                             ;      |        |      ;
-          CODE_8395E7:
+              .label3:
                        SEP #$20                             ;8395E7|E220    |      ;
                        LDA.W $0189                          ;8395E9|AD8901  |000189;
                        INC A                                ;8395EC|1A      |      ;
                        STA.W $0189                          ;8395ED|8D8901  |000189;
                                                             ;      |        |      ;
-          CODE_8395F0:
+              .return:
                        RTL                                  ;8395F0|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8395F1:
+.textNextScreenHandler:
                        SEP #$20                             ;8395F1|E220    |      ;
                        LDA.W $019B                          ;8395F3|AD9B01  |00019B;
                        ORA.B #$08                           ;8395F6|0908    |      ;
@@ -2766,25 +2760,25 @@
                        STA.W $0185                          ;839600|8D8501  |000185;
                        REP #$20                             ;839603|C220    |      ;
                        LDA.W #$00A2                         ;839605|A9A200  |      ;
-                       JSR.W CODE_83975F                    ;839608|205F97  |83975F;
-                       BRA CODE_8395F0                      ;83960B|80E3    |8395F0;
+                       JSR.W fUnknownText_83975F            ;839608|205F97  |83975F;
+                       BRA .return                          ;83960B|80E3    |8395F0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83960D:
+    .textSpaceHandler:
                        REP #$20                             ;83960D|C220    |      ;
                        LDA.W $0187                          ;83960F|AD8701  |000187;
                        INC A                                ;839612|1A      |      ;
                        STA.W $0187                          ;839613|8D8701  |000187;
                        REP #$30                             ;839616|C230    |      ;
                        LDX.W #$0001                         ;839618|A20100  |      ;
-                       JSR.W CODE_839838                    ;83961B|203898  |839838;
-                       JMP.W CODE_839534                    ;83961E|4C3495  |839534;
+                       JSR.W fUnknownText_839838            ;83961B|203898  |839838;
+                       JMP.W .label2                        ;83961E|4C3495  |839534;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839621:
+     .textFFFCHandler:
                        SEP #$20                             ;839621|E220    |      ;
                        LDA.W $018C                          ;839623|AD8C01  |00018C;
-                       BNE CODE_83967A                      ;839626|D052    |83967A;
+                       BNE .label7                          ;839626|D052    |83967A;
                        REP #$20                             ;839628|C220    |      ;
                        LDA.W $0187                          ;83962A|AD8701  |000187;
                        ASL A                                ;83962D|0A      |      ;
@@ -2820,7 +2814,7 @@
                        LDY.W #$0000                         ;839668|A00000  |      ;
                        LDX.W #$0000                         ;83966B|A20000  |      ;
                                                             ;      |        |      ;
-          CODE_83966E:
+              .label8:
                        PHA                                  ;83966E|48      |      ;
                        LDA.B [$72],Y                        ;83966F|B772    |000072;
                        STA.W $0192,X                        ;839671|9D9201  |000192;
@@ -2828,33 +2822,33 @@
                        INX                                  ;839675|E8      |      ;
                        PLA                                  ;839676|68      |      ;
                        DEC A                                ;839677|3A      |      ;
-                       BNE CODE_83966E                      ;839678|D0F4    |83966E;
+                       BNE .label8                          ;839678|D0F4    |83966E;
                                                             ;      |        |      ;
-          CODE_83967A:
+              .label7:
                        SEP #$20                             ;83967A|E220    |      ;
                        LDA.W $018C                          ;83967C|AD8C01  |00018C;
                        DEC A                                ;83967F|3A      |      ;
                        STA.W $018C                          ;839680|8D8C01  |00018C;
-                       JSL.L CODE_8397A6                    ;839683|22A69783|8397A6;
+                       JSL.L fUnknown_8397A6                ;839683|22A69783|8397A6;
                        SEP #$20                             ;839687|E220    |      ;
                        STZ.W $0190                          ;839689|9C9001  |000190;
                        SEP #$20                             ;83968C|E220    |      ;
                        STZ.W $0189                          ;83968E|9C8901  |000189;
                        LDA.W $018C                          ;839691|AD8C01  |00018C;
-                       BNE CODE_83969E                      ;839694|D008    |83969E;
+                       BNE .label9                          ;839694|D008    |83969E;
                        LDA.W $0187                          ;839696|AD8701  |000187;
                        INC A                                ;839699|1A      |      ;
                        INC A                                ;83969A|1A      |      ;
                        STA.W $0187                          ;83969B|8D8701  |000187;
                                                             ;      |        |      ;
-          CODE_83969E:
-                       JMP.W CODE_8395C9                    ;83969E|4CC995  |8395C9;
+              .label9:
+                       JMP.W .label12                       ;83969E|4CC995  |8395C9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8396A1:
+     .textFFFDHandler:
                        SEP #$20                             ;8396A1|E220    |      ;
                        LDA.W $018C                          ;8396A3|AD8C01  |00018C;
-                       BNE CODE_8396BC                      ;8396A6|D014    |8396BC;
+                       BNE .label10                         ;8396A6|D014    |8396BC;
                        REP #$20                             ;8396A8|C220    |      ;
                        LDA.W $0187                          ;8396AA|AD8701  |000187;
                        ASL A                                ;8396AD|0A      |      ;
@@ -2867,7 +2861,7 @@
                        DEC A                                ;8396B8|3A      |      ;
                        STA.W $018D                          ;8396B9|8D8D01  |00018D;
                                                             ;      |        |      ;
-          CODE_8396BC:
+             .label10:
                        REP #$20                             ;8396BC|C220    |      ;
                        LDA.W $0187                          ;8396BE|AD8701  |000187;
                        ASL A                                ;8396C1|0A      |      ;
@@ -2900,24 +2894,24 @@
                        TAY                                  ;8396F3|A8      |      ;
                        LDA.B [$72],Y                        ;8396F4|B772    |000072;
                        LDX.W #$0001                         ;8396F6|A20100  |      ;
-                       JSL.L CODE_839823                    ;8396F9|22239883|839823;
+                       JSL.L fUnknown_839823                ;8396F9|22239883|839823;
                        SEP #$20                             ;8396FD|E220    |      ;
                        LDA.B #$01                           ;8396FF|A901    |      ;
                        STA.W $0190                          ;839701|8D9001  |000190;
                        SEP #$20                             ;839704|E220    |      ;
                        STZ.W $0189                          ;839706|9C8901  |000189;
                        LDA.W $018C                          ;839709|AD8C01  |00018C;
-                       BNE CODE_839716                      ;83970C|D008    |839716;
+                       BNE .label11                         ;83970C|D008    |839716;
                        LDA.W $0187                          ;83970E|AD8701  |000187;
                        INC A                                ;839711|1A      |      ;
                        INC A                                ;839712|1A      |      ;
                        STA.W $0187                          ;839713|8D8701  |000187;
                                                             ;      |        |      ;
-          CODE_839716:
-                       JMP.W CODE_8395C9                    ;839716|4CC995  |8395C9;
+             .label11:
+                       JMP.W .label12                       ;839716|4CC995  |8395C9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839719:
+     .textFFFEHandler:
                        SEP #$20                             ;839719|E220    |      ;
                        LDA.W $019B                          ;83971B|AD9B01  |00019B;
                        ORA.B #$10                           ;83971E|0910    |      ;
@@ -2939,23 +2933,23 @@
                        ASL A                                ;83973C|0A      |      ;
                        TAX                                  ;83973D|AA      |      ;
                        REP #$20                             ;83973E|C220    |      ;
-                       LDA.L nTextRelatedTable,X            ;839740|BFCC9883|8398CC;
+                       LDA.L nTextFFFETable,X               ;839740|BFCC9883|8398CC;
                        STA.W $0185                          ;839744|8D8501  |000185;
                        REP #$20                             ;839747|C220    |      ;
                        LDA.W #$0275                         ;839749|A97502  |      ;
-                       JSR.W CODE_83975F                    ;83974C|205F97  |83975F;
-                       JMP.W CODE_8395F0                    ;83974F|4CF095  |8395F0;
+                       JSR.W fUnknownText_83975F            ;83974C|205F97  |83975F;
+                       JMP.W .return                        ;83974F|4CF095  |8395F0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839752:
+     .textFFFFHandler:
                        SEP #$20                             ;839752|E220    |      ;
                        LDA.W $019B                          ;839754|AD9B01  |00019B;
                        ORA.B #$04                           ;839757|0904    |      ;
                        STA.W $019B                          ;839759|8D9B01  |00019B;
-                       JMP.W CODE_8395F0                    ;83975C|4CF095  |8395F0;
+                       JMP.W .return                        ;83975C|4CF095  |8395F0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83975F:
+  fUnknownText_83975F:
                        REP #$20                             ;83975F|C220    |      ;
                        STA.B $7E                            ;839761|857E    |00007E;
                        LDA.W $018B                          ;839763|AD8B01  |00018B;
@@ -2976,7 +2970,7 @@
                        REP #$30                             ;839783|C230    |      ;
                        LDX.W #$0001                         ;839785|A20100  |      ;
                        LDA.B $7E                            ;839788|A57E    |00007E;
-                       JSL.L CODE_839823                    ;83978A|22239883|839823;
+                       JSL.L fUnknown_839823                ;83978A|22239883|839823;
                        BRA CODE_83979C                      ;83978E|800C    |83979C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2984,7 +2978,7 @@
                        REP #$30                             ;839790|C230    |      ;
                        LDX.W #$0001                         ;839792|A20100  |      ;
                        LDA.W #$00B1                         ;839795|A9B100  |      ;
-                       JSL.L CODE_839823                    ;839798|22239883|839823;
+                       JSL.L fUnknown_839823                ;839798|22239883|839823;
                                                             ;      |        |      ;
           CODE_83979C:
                        SEP #$20                             ;83979C|E220    |      ;
@@ -2994,7 +2988,7 @@
                        RTS                                  ;8397A5|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8397A6:
+      fUnknown_8397A6:
                        SEP #$20                             ;8397A6|E220    |      ;
                        REP #$10                             ;8397A8|C210    |      ;
                        LDA.B #$00                           ;8397AA|A900    |      ;
@@ -3057,17 +3051,17 @@
                        CLC                                  ;839818|18      |      ;
                        ADC.B $7E                            ;839819|657E    |00007E;
                        LDX.W #$0000                         ;83981B|A20000  |      ;
-                       JSL.L CODE_839823                    ;83981E|22239883|839823;
+                       JSL.L fUnknown_839823                ;83981E|22239883|839823;
                                                             ;      |        |      ;
           CODE_839822:
                        RTL                                  ;839822|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839823:
+      fUnknown_839823:
                        REP #$30                             ;839823|C230    |      ;
                        LDX.W #$0000                         ;839825|A20000  |      ;
                        PHX                                  ;839828|DA      |      ;
-                       JSR.W GetLetterGlyphOffset           ;839829|206298  |839862;
+                       JSR.W fGetGlyphPointer               ;839829|206298  |839862;
                        REP #$30                             ;83982C|C230    |      ;
                        PLX                                  ;83982E|FA      |      ;
                        TXA                                  ;83982F|8A      |      ;
@@ -3076,7 +3070,7 @@
                        RTL                                  ;839837|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_839838:
+  fUnknownText_839838:
                        REP #$30                             ;839838|C230    |      ;
                        LDX.W #$0000                         ;83983A|A20000  |      ;
                        TXA                                  ;83983D|8A      |      ;
@@ -3101,8 +3095,8 @@
                        RTS                                  ;839861|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
- GetLetterGlyphOffset:
-                       REP #$30                             ;839862|C230    |      ; In A register we have current letter to load
+     fGetGlyphPointer:
+                       REP #$30                             ;839862|C230    |      ; A: nLetterCode, return $72: ptr24 pGlyph
                        STA.B $7E                            ;839864|857E    |00007E;
                        LSR A                                ;839866|4A      |      ;
                        LSR A                                ;839867|4A      |      ;
@@ -3115,13 +3109,13 @@
                        CLC                                  ;83986F|18      |      ;
                        ADC.B $80                            ;839870|6580    |000080;
                        TAX                                  ;839872|AA      |      ; Store pTable index into X
-                       LDA.L pTableFontGlyphs,X             ;839873|BFAE9883|8398AE;
-                       STA.B $72                            ;839877|8572    |000072; Save LOW (pointer)
+                       LDA.L pFontGlyphsTable,X             ;839873|BFAE9883|8398AE;
+                       STA.B $72                            ;839877|8572    |000072;
                        INX                                  ;839879|E8      |      ;
                        INX                                  ;83987A|E8      |      ;
                        SEP #$20                             ;83987B|E220    |      ;
-                       LDA.L pTableFontGlyphs,X             ;83987D|BFAE9883|8398AE;
-                       STA.B $74                            ;839881|8574    |000074; Save HI (bank)
+                       LDA.L pFontGlyphsTable,X             ;83987D|BFAE9883|8398AE;
+                       STA.B $74                            ;839881|8574    |000074;
                        REP #$20                             ;839883|C220    |      ;
                        LDA.B $7E                            ;839885|A57E    |00007E;
                        AND.W #$003F                         ;839887|293F00  |      ;
@@ -3154,7 +3148,7 @@
                        RTS                                  ;8398AD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-     pTableFontGlyphs:
+     pFontGlyphsTable:
                        dl GFX_949843                        ;8398AE|        |949843; Letters graphics pointers
                        dl GFX_94A843                        ;8398B1|        |94A843;
                        dl GFX_94B843                        ;8398B4|        |94B843;
@@ -3166,7 +3160,7 @@
                        dl GFX_95A000                        ;8398C6|        |95A000;
                        dl GFX_95B000                        ;8398C9|        |95B000;
                                                             ;      |        |      ;
-    nTextRelatedTable:
+       nTextFFFETable:
                        dw $5010,$5170,$5350,$5108           ;8398CC|        |      ; 16b * 5 (stored at $185)
                        dw $5268                             ;8398D4|        |      ;
                                                             ;      |        |      ;
@@ -4746,17 +4740,17 @@ sTextFFFDPointerTable:
                        dl TEXT_BBBCBC                       ;83A9B8|        |BBBCBC;
                        dl TEXT_BBBD54                       ;83A9BB|        |BBBD54;
                                                             ;      |        |      ;
-SetDefaultValuesForVariables:
+fSetDefaultValuesForVariables:
                        SEP #$20                             ;83A9BE|E220    |      ;
                        REP #$10                             ;83A9C0|C210    |      ;
                        LDA.B #$00                           ;83A9C2|A900    |      ; Load 0 to A
-                       STA.L CurrentYearID                  ;83A9C4|8F181F7F|7F1F18; Store A to CurrentYear
+                       STA.L nCurrentYearID                 ;83A9C4|8F181F7F|7F1F18; Store A to CurrentYear
                        LDA.B #$00                           ;83A9C8|A900    |      ; Load 0 to A
-                       STA.L CurrentSeasonID                ;83A9CA|8F191F7F|7F1F19; Store A to CurrentSeason
+                       STA.L nCurrentSeasonID               ;83A9CA|8F191F7F|7F1F19; Store A to CurrentSeason
                        LDA.B #$01                           ;83A9CE|A901    |      ; Load 1 to A
-                       STA.L CurrentWeekdayID               ;83A9D0|8F1A1F7F|7F1F1A; Store A to CurrentWeekday
+                       STA.L nCurrentWeekdayID              ;83A9D0|8F1A1F7F|7F1F1A; Store A to CurrentWeekday
                        LDA.B #$01                           ;83A9D4|A901    |      ; Load 1 to A
-                       STA.L CurrentDay                     ;83A9D6|8F1B1F7F|7F1F1B; Store A to CurrentDay
+                       STA.L nCurrentDay                    ;83A9D6|8F1B1F7F|7F1F1B; Store A to CurrentDay
                        LDA.B #$01                           ;83A9DA|A901    |      ;
                        STA.W $0927                          ;83A9DC|8D2709  |000927;
                        STZ.W $0928                          ;83A9DF|9C2809  |000928; Write 0
@@ -4838,109 +4832,109 @@ SetDefaultValuesForVariables:
                        LDA.W #$0000                         ;83AAD3|A90000  |      ;
                        STA.L PrengacyFlag                   ;83AAD6|8F3B1F7F|7F1F3B;
                        LDA.W #$0000                         ;83AADA|A90000  |      ;
-                       STA.L $7F1F37                        ;83AADD|8F371F7F|7F1F37;
+                       STA.L nFirstChildAge                 ;83AADD|8F371F7F|7F1F37;
                        LDA.W #$0000                         ;83AAE1|A90000  |      ;
-                       STA.L $7F1F39                        ;83AAE4|8F391F7F|7F1F39;
+                       STA.L nSecondChildAge                ;83AAE4|8F391F7F|7F1F39;
                        LDA.W #$0000                         ;83AAE8|A90000  |      ;
-                       STA.L $7F1F4A                        ;83AAEB|8F4A1F7F|7F1F4A;
+                       STA.L nStatShippedCorns              ;83AAEB|8F4A1F7F|7F1F4A;
                        LDA.W #$0000                         ;83AAEF|A90000  |      ;
-                       STA.L $7F1F4C                        ;83AAF2|8F4C1F7F|7F1F4C;
+                       STA.L nStatShippedTomatoes           ;83AAF2|8F4C1F7F|7F1F4C;
                        LDA.W #$0000                         ;83AAF6|A90000  |      ;
-                       STA.L $7F1F4E                        ;83AAF9|8F4E1F7F|7F1F4E;
+                       STA.L nStatShippedTurnips            ;83AAF9|8F4E1F7F|7F1F4E;
                        LDA.W #$0000                         ;83AAFD|A90000  |      ;
-                       STA.L $7F1F50                        ;83AB00|8F501F7F|7F1F50;
+                       STA.L nStatShippedPotatoes           ;83AB00|8F501F7F|7F1F50;
                        LDA.W #$0000                         ;83AB04|A90000  |      ;
                        STA.L $7F1F52                        ;83AB07|8F521F7F|7F1F52;
                        REP #$20                             ;83AB0B|C220    |      ;
                        LDA.W #$001E                         ;83AB0D|A91E00  |      ;
-                       STA.L $7F1F04                        ;83AB10|8F041F7F|7F1F04;
+                       STA.L nMoney                         ;83AB10|8F041F7F|7F1F04;
                        SEP #$20                             ;83AB14|E220    |      ;
                        LDA.B #$00                           ;83AB16|A900    |      ;
-                       STA.L $7F1F06                        ;83AB18|8F061F7F|7F1F06;
+                       STA.L nMoney+2                       ;83AB18|8F061F7F|7F1F06;
                        SEP #$20                             ;83AB1C|E220    |      ;
                        LDA.B #$B1                           ;83AB1E|A9B1    |      ;
                        STA.W sPlayerNameShort               ;83AB20|8D8108  |000881;
                        LDA.B #$B1                           ;83AB23|A9B1    |      ;
-                       STA.W $0882                          ;83AB25|8D8208  |000882;
+                       STA.W sPlayerNameShort+1             ;83AB25|8D8208  |000882;
                        LDA.B #$B1                           ;83AB28|A9B1    |      ;
-                       STA.W $0883                          ;83AB2A|8D8308  |000883;
+                       STA.W sPlayerNameShort+2             ;83AB2A|8D8308  |000883;
                        LDA.B #$B1                           ;83AB2D|A9B1    |      ;
-                       STA.W $0884                          ;83AB2F|8D8408  |000884;
+                       STA.W sPlayerNameShort+3             ;83AB2F|8D8408  |000884;
                        SEP #$20                             ;83AB32|E220    |      ;
                        LDA.B #$0F                           ;83AB34|A90F    |      ;
-                       STA.L $7F1F00                        ;83AB36|8F001F7F|7F1F00;
+                       STA.L sShedItems                     ;83AB36|8F001F7F|7F1F00;
                        LDA.B #$88                           ;83AB3A|A988    |      ;
-                       STA.L $7F1F01                        ;83AB3C|8F011F7F|7F1F01;
+                       STA.L sShedItems+1                   ;83AB3C|8F011F7F|7F1F01;
                        LDA.B #$00                           ;83AB40|A900    |      ;
-                       STA.L $7F1F02                        ;83AB42|8F021F7F|7F1F02;
+                       STA.L sShedItems+2                   ;83AB42|8F021F7F|7F1F02;
                        LDA.B #$00                           ;83AB46|A900    |      ;
-                       STA.L $7F1F03                        ;83AB48|8F031F7F|7F1F03;
+                       STA.L sShedItems+3                   ;83AB48|8F031F7F|7F1F03;
                        SEP #$20                             ;83AB4C|E220    |      ;
                        LDA.B #$B1                           ;83AB4E|A9B1    |      ;
                        STA.W sDogNameShort                  ;83AB50|8D9908  |000899;
                        LDA.B #$B1                           ;83AB53|A9B1    |      ;
-                       STA.W $089A                          ;83AB55|8D9A08  |00089A;
+                       STA.W sDogNameShort+1                ;83AB55|8D9A08  |00089A;
                        LDA.B #$B1                           ;83AB58|A9B1    |      ;
-                       STA.W $089B                          ;83AB5A|8D9B08  |00089B;
+                       STA.W sDogNameShort+2                ;83AB5A|8D9B08  |00089B;
                        LDA.B #$B1                           ;83AB5D|A9B1    |      ;
-                       STA.W $089C                          ;83AB5F|8D9C08  |00089C;
+                       STA.W sDogNameShort+3                ;83AB5F|8D9C08  |00089C;
                        SEP #$20                             ;83AB62|E220    |      ;
                        LDA.B #$B1                           ;83AB64|A9B1    |      ;
                        STA.W sHorseNameShort                ;83AB66|8D9D08  |00089D;
                        LDA.B #$B1                           ;83AB69|A9B1    |      ;
-                       STA.W $089E                          ;83AB6B|8D9E08  |00089E;
+                       STA.W sHorseNameShort+1              ;83AB6B|8D9E08  |00089E;
                        LDA.B #$B1                           ;83AB6E|A9B1    |      ;
-                       STA.W $089F                          ;83AB70|8D9F08  |00089F;
+                       STA.W sHorseNameShort+2              ;83AB70|8D9F08  |00089F;
                        LDA.B #$B1                           ;83AB73|A9B1    |      ;
-                       STA.W $08A0                          ;83AB75|8DA008  |0008A0;
+                       STA.W sHorseNameShort+3              ;83AB75|8DA008  |0008A0;
                        SEP #$20                             ;83AB78|E220    |      ;
                        LDA.B #$B1                           ;83AB7A|A9B1    |      ;
                        STA.W sHorseNameShort                ;83AB7C|8D9D08  |00089D;
                        LDA.B #$B1                           ;83AB7F|A9B1    |      ;
-                       STA.W $089E                          ;83AB81|8D9E08  |00089E;
+                       STA.W sHorseNameShort+1              ;83AB81|8D9E08  |00089E;
                        LDA.B #$B1                           ;83AB84|A9B1    |      ;
-                       STA.W $089F                          ;83AB86|8D9F08  |00089F;
+                       STA.W sHorseNameShort+2              ;83AB86|8D9F08  |00089F;
                        LDA.B #$B1                           ;83AB89|A9B1    |      ;
-                       STA.W $08A0                          ;83AB8B|8DA008  |0008A0;
+                       STA.W sHorseNameShort+3              ;83AB8B|8DA008  |0008A0;
                        SEP #$20                             ;83AB8E|E220    |      ;
                        LDA.B #$B1                           ;83AB90|A9B1    |      ;
                        STA.L sFirstChildNameShort           ;83AB92|8F3D1F7F|7F1F3D;
                        LDA.B #$B1                           ;83AB96|A9B1    |      ;
-                       STA.L $7F1F3E                        ;83AB98|8F3E1F7F|7F1F3E;
+                       STA.L sFirstChildNameShort+1         ;83AB98|8F3E1F7F|7F1F3E;
                        LDA.B #$B1                           ;83AB9C|A9B1    |      ;
-                       STA.L $7F1F3F                        ;83AB9E|8F3F1F7F|7F1F3F;
+                       STA.L sFirstChildNameShort+2         ;83AB9E|8F3F1F7F|7F1F3F;
                        LDA.B #$B1                           ;83ABA2|A9B1    |      ;
-                       STA.L $7F1F40                        ;83ABA4|8F401F7F|7F1F40;
+                       STA.L sFirstChildNameShort+3         ;83ABA4|8F401F7F|7F1F40;
                        SEP #$20                             ;83ABA8|E220    |      ;
                        LDA.B #$B1                           ;83ABAA|A9B1    |      ;
                        STA.L sSecondChildNameShort          ;83ABAC|8F411F7F|7F1F41;
                        LDA.B #$B1                           ;83ABB0|A9B1    |      ;
-                       STA.L $7F1F42                        ;83ABB2|8F421F7F|7F1F42;
+                       STA.L sSecondChildNameShort+1        ;83ABB2|8F421F7F|7F1F42;
                        LDA.B #$B1                           ;83ABB6|A9B1    |      ;
-                       STA.L $7F1F43                        ;83ABB8|8F431F7F|7F1F43;
+                       STA.L sSecondChildNameShort+2        ;83ABB8|8F431F7F|7F1F43;
                        LDA.B #$B1                           ;83ABBC|A9B1    |      ;
-                       STA.L $7F1F44                        ;83ABBE|8F441F7F|7F1F44;
+                       STA.L sSecondChildNameShort+3        ;83ABBE|8F441F7F|7F1F44;
                        REP #$20                             ;83ABC2|C220    |      ;
                        LDA.W #$00B1                         ;83ABC4|A9B100  |      ;
                        STA.W sPlayerNameLong                ;83ABC7|8DD508  |0008D5;
-                       STA.W $08D7                          ;83ABCA|8DD708  |0008D7;
-                       STA.W $08D9                          ;83ABCD|8DD908  |0008D9;
-                       STA.W $08DB                          ;83ABD0|8DDB08  |0008DB;
+                       STA.W sPlayerNameLong+2              ;83ABCA|8DD708  |0008D7;
+                       STA.W sPlayerNameLong+4              ;83ABCD|8DD908  |0008D9;
+                       STA.W sPlayerNameLong+6              ;83ABD0|8DDB08  |0008DB;
                        STA.W sDogNameLong                   ;83ABD3|8DDD08  |0008DD;
-                       STA.W $08DF                          ;83ABD6|8DDF08  |0008DF;
-                       STA.W $08E1                          ;83ABD9|8DE108  |0008E1;
-                       STA.W $08E3                          ;83ABDC|8DE308  |0008E3;
+                       STA.W sDogNameLong+2                 ;83ABD6|8DDF08  |0008DF;
+                       STA.W sDogNameLong+4                 ;83ABD9|8DE108  |0008E1;
+                       STA.W sDogNameLong+6                 ;83ABDC|8DE308  |0008E3;
                        STA.W sHorseNameLong                 ;83ABDF|8DE508  |0008E5;
-                       STA.W $08E7                          ;83ABE2|8DE708  |0008E7;
-                       STA.W $08E9                          ;83ABE5|8DE908  |0008E9;
-                       STA.W $08EB                          ;83ABE8|8DEB08  |0008EB;
+                       STA.W sHorseNameLong+2               ;83ABE2|8DE708  |0008E7;
+                       STA.W sHorseNameLong+4               ;83ABE5|8DE908  |0008E9;
+                       STA.W sHorseNameLong+6               ;83ABE8|8DEB08  |0008EB;
                        JSL.L CODE_82A65A                    ;83ABEB|225AA682|82A65A;
                        RTL                                  ;83ABEF|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83ABF0:
                        REP #$30                             ;83ABF0|C230    |      ;
-                       STZ.W nDialogIndex16                 ;83ABF2|9C8301  |000183;
+                       STZ.W nDialogIndex                   ;83ABF2|9C8301  |000183;
                        STZ.W $0185                          ;83ABF5|9C8501  |000185;
                        STZ.W $0187                          ;83ABF8|9C8701  |000187;
                        SEP #$20                             ;83ABFB|E220    |      ;
@@ -4952,19 +4946,19 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83AC09|E220    |      ;
                        STZ.B $06                            ;83AC0B|6406    |000006;
                        REP #$20                             ;83AC0D|C220    |      ;
-                       STZ.B $42                            ;83AC0F|6442    |000042;
+                       STZ.B ptrUnknown42                   ;83AC0F|6442    |000042;
                        STZ.B $45                            ;83AC11|6445    |000045;
                        STZ.B $48                            ;83AC13|6448    |000048;
                        SEP #$20                             ;83AC15|E220    |      ;
-                       STZ.B $44                            ;83AC17|6444    |000044;
+                       STZ.B ptrUnknown42+2                 ;83AC17|6444    |000044;
                        STZ.B $47                            ;83AC19|6447    |000047;
                        STZ.B $4A                            ;83AC1B|644A    |00004A;
                        REP #$20                             ;83AC1D|C220    |      ;
                        LDA.W #$0000                         ;83AC1F|A90000  |      ;
-                       STA.L nMoneyLow16                    ;83AC22|8F071F7F|7F1F07;
+                       STA.L nShippingProfit                ;83AC22|8F071F7F|7F1F07;
                        SEP #$20                             ;83AC26|E220    |      ;
                        LDA.B #$00                           ;83AC28|A900    |      ;
-                       STA.L nMoneyHi8                      ;83AC2A|8F091F7F|7F1F09;
+                       STA.L nShippingProfit+2              ;83AC2A|8F091F7F|7F1F09;
                        JSL.L WriteSeasonWeekdayAndDayOrdinal;83AC2E|22D68982|8289D6;
                        SEP #$20                             ;83AC32|E220    |      ;
                        STZ.W $096D                          ;83AC34|9C6D09  |00096D;
@@ -4982,8 +4976,8 @@ SetDefaultValuesForVariables:
                        STZ.W $098A                          ;83AC50|9C8A09  |00098A;
                        STZ.W $0972                          ;83AC53|9C7209  |000972;
                        REP #$20                             ;83AC56|C220    |      ;
-                       STZ.B $D6                            ;83AC58|64D6    |0000D6;
-                       STZ.B $D8                            ;83AC5A|64D8    |0000D8;
+                       STZ.B nPlayerPosX                    ;83AC58|64D6    |0000D6;
+                       STZ.B nPlayerPosY                    ;83AC5A|64D8    |0000D8;
                        STZ.W $0907                          ;83AC5C|9C0709  |000907;
                        STZ.W $0909                          ;83AC5F|9C0909  |000909;
                        SEP #$20                             ;83AC62|E220    |      ;
@@ -4996,7 +4990,7 @@ SetDefaultValuesForVariables:
                        STZ.W $018B                          ;83AC74|9C8B01  |00018B;
                        SEP #$20                             ;83AC77|E220    |      ;
                        LDA.B #$06                           ;83AC79|A906    |      ;
-                       STA.L CurrentTimeID                  ;83AC7B|8F1C1F7F|7F1F1C;
+                       STA.L nCurrentTimeID                 ;83AC7B|8F1C1F7F|7F1F1C;
                        LDA.B #$00                           ;83AC7F|A900    |      ;
                        STA.L $7F1F1D                        ;83AC81|8F1D1F7F|7F1F1D;
                        LDA.B #$00                           ;83AC85|A900    |      ;
@@ -5347,14 +5341,14 @@ SetDefaultValuesForVariables:
           CODE_83AF06:
                        LDA.B $80                            ;83AF06|A580    |000080;
                        SEC                                  ;83AF08|38      |      ;
-                       SBC.B $D6                            ;83AF09|E5D6    |0000D6;
+                       SBC.B nPlayerPosX                    ;83AF09|E5D6    |0000D6;
                        CLC                                  ;83AF0B|18      |      ;
                        ADC.W #$000C                         ;83AF0C|690C00  |      ;
                        CMP.W #$0019                         ;83AF0F|C91900  |      ;
                        BCS CODE_83AF2D                      ;83AF12|B019    |83AF2D;
                        LDA.B $82                            ;83AF14|A582    |000082;
                        SEC                                  ;83AF16|38      |      ;
-                       SBC.B $D8                            ;83AF17|E5D8    |0000D8;
+                       SBC.B nPlayerPosY                    ;83AF17|E5D8    |0000D8;
                        CLC                                  ;83AF19|18      |      ;
                        ADC.W #$000C                         ;83AF1A|690C00  |      ;
                        CMP.W #$0019                         ;83AF1D|C91900  |      ;
@@ -5799,12 +5793,12 @@ SetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83B1C9:
                        REP #$30                             ;83B1C9|C230    |      ;
-                       LDA.L $7F1F04                        ;83B1CB|AF041F7F|7F1F04;
+                       LDA.L nMoney                         ;83B1CB|AF041F7F|7F1F04;
                        CLC                                  ;83B1CF|18      |      ;
                        ADC.B $72                            ;83B1D0|6572    |000072;
                        STA.B $75                            ;83B1D2|8575    |000075;
                        SEP #$20                             ;83B1D4|E220    |      ;
-                       LDA.L $7F1F06                        ;83B1D6|AF061F7F|7F1F06;
+                       LDA.L nMoney+2                       ;83B1D6|AF061F7F|7F1F06;
                        ADC.B $74                            ;83B1DA|6574    |000074;
                        STA.B $77                            ;83B1DC|8577    |000077;
                        BMI CODE_83B206                      ;83B1DE|3026    |83B206;
@@ -5817,10 +5811,10 @@ SetDefaultValuesForVariables:
                        BCS CODE_83B20D                      ;83B1ED|B01E    |83B20D;
                        REP #$20                             ;83B1EF|C220    |      ;
                        LDA.B $75                            ;83B1F1|A575    |000075;
-                       STA.L $7F1F04                        ;83B1F3|8F041F7F|7F1F04;
+                       STA.L nMoney                         ;83B1F3|8F041F7F|7F1F04;
                        SEP #$20                             ;83B1F7|E220    |      ;
                        LDA.B $77                            ;83B1F9|A577    |000077;
-                       STA.L $7F1F06                        ;83B1FB|8F061F7F|7F1F06;
+                       STA.L nMoney+2                       ;83B1FB|8F061F7F|7F1F06;
                        REP #$20                             ;83B1FF|C220    |      ;
                        LDA.W #$0000                         ;83B201|A90000  |      ;
                        BRA CODE_83B223                      ;83B204|801D    |83B223;
@@ -5835,10 +5829,10 @@ SetDefaultValuesForVariables:
           CODE_83B20D:
                        REP #$20                             ;83B20D|C220    |      ;
                        LDA.W #$423F                         ;83B20F|A93F42  |      ;
-                       STA.L $7F1F04                        ;83B212|8F041F7F|7F1F04;
+                       STA.L nMoney                         ;83B212|8F041F7F|7F1F04;
                        SEP #$20                             ;83B216|E220    |      ;
                        LDA.B #$0F                           ;83B218|A90F    |      ;
-                       STA.L $7F1F06                        ;83B21A|8F061F7F|7F1F06;
+                       STA.L nMoney+2                       ;83B21A|8F061F7F|7F1F06;
                        REP #$20                             ;83B21E|C220    |      ;
                        LDA.W #$0000                         ;83B220|A90000  |      ;
                                                             ;      |        |      ;
@@ -5958,16 +5952,16 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83B2D2|E220    |      ;
                        LDY.W #$0000                         ;83B2D4|A00000  |      ;
                        LDA.B [$72],Y                        ;83B2D7|B772    |000072;
-                       STA.L CurrentYearID                  ;83B2D9|8F181F7F|7F1F18;
+                       STA.L nCurrentYearID                 ;83B2D9|8F181F7F|7F1F18;
                        LDY.W #$0001                         ;83B2DD|A00100  |      ;
                        LDA.B [$72],Y                        ;83B2E0|B772    |000072;
-                       STA.L CurrentSeasonID                ;83B2E2|8F191F7F|7F1F19;
+                       STA.L nCurrentSeasonID               ;83B2E2|8F191F7F|7F1F19;
                        LDY.W #$0002                         ;83B2E6|A00200  |      ;
                        LDA.B [$72],Y                        ;83B2E9|B772    |000072;
-                       STA.L CurrentWeekdayID               ;83B2EB|8F1A1F7F|7F1F1A;
+                       STA.L nCurrentWeekdayID              ;83B2EB|8F1A1F7F|7F1F1A;
                        LDY.W #$0003                         ;83B2EF|A00300  |      ;
                        LDA.B [$72],Y                        ;83B2F2|B772    |000072;
-                       STA.L CurrentDay                     ;83B2F4|8F1B1F7F|7F1F1B;
+                       STA.L nCurrentDay                    ;83B2F4|8F1B1F7F|7F1F1B;
                        LDY.W #$0004                         ;83B2F8|A00400  |      ;
                        LDA.B [$72],Y                        ;83B2FB|B772    |000072;
                        STA.W $0927                          ;83B2FD|8D2709  |000927;
@@ -6106,33 +6100,33 @@ SetDefaultValuesForVariables:
                        STA.L PrengacyFlag                   ;83B47C|8F3B1F7F|7F1F3B;
                        LDY.W #$007A                         ;83B480|A07A00  |      ;
                        LDA.B [$72],Y                        ;83B483|B772    |000072;
-                       STA.L $7F1F37                        ;83B485|8F371F7F|7F1F37;
+                       STA.L nFirstChildAge                 ;83B485|8F371F7F|7F1F37;
                        LDY.W #$007C                         ;83B489|A07C00  |      ;
                        LDA.B [$72],Y                        ;83B48C|B772    |000072;
-                       STA.L $7F1F39                        ;83B48E|8F391F7F|7F1F39;
+                       STA.L nSecondChildAge                ;83B48E|8F391F7F|7F1F39;
                        LDY.W #$0031                         ;83B492|A03100  |      ;
                        LDA.B [$72],Y                        ;83B495|B772    |000072;
-                       STA.L $7F1F4A                        ;83B497|8F4A1F7F|7F1F4A;
+                       STA.L nStatShippedCorns              ;83B497|8F4A1F7F|7F1F4A;
                        LDY.W #$0033                         ;83B49B|A03300  |      ;
                        LDA.B [$72],Y                        ;83B49E|B772    |000072;
-                       STA.L $7F1F4C                        ;83B4A0|8F4C1F7F|7F1F4C;
+                       STA.L nStatShippedTomatoes           ;83B4A0|8F4C1F7F|7F1F4C;
                        LDY.W #$0035                         ;83B4A4|A03500  |      ;
                        LDA.B [$72],Y                        ;83B4A7|B772    |000072;
-                       STA.L $7F1F4E                        ;83B4A9|8F4E1F7F|7F1F4E;
+                       STA.L nStatShippedTurnips            ;83B4A9|8F4E1F7F|7F1F4E;
                        LDY.W #$0037                         ;83B4AD|A03700  |      ;
                        LDA.B [$72],Y                        ;83B4B0|B772    |000072;
-                       STA.L $7F1F50                        ;83B4B2|8F501F7F|7F1F50;
+                       STA.L nStatShippedPotatoes           ;83B4B2|8F501F7F|7F1F50;
                        LDY.W #$007E                         ;83B4B6|A07E00  |      ;
                        LDA.B [$72],Y                        ;83B4B9|B772    |000072;
                        STA.L $7F1F52                        ;83B4BB|8F521F7F|7F1F52;
                        REP #$20                             ;83B4BF|C220    |      ;
                        LDY.W #$0039                         ;83B4C1|A03900  |      ;
                        LDA.B [$72],Y                        ;83B4C4|B772    |000072;
-                       STA.L $7F1F04                        ;83B4C6|8F041F7F|7F1F04;
+                       STA.L nMoney                         ;83B4C6|8F041F7F|7F1F04;
                        SEP #$20                             ;83B4CA|E220    |      ;
                        LDY.W #$003B                         ;83B4CC|A03B00  |      ;
                        LDA.B [$72],Y                        ;83B4CF|B772    |000072;
-                       STA.L $7F1F06                        ;83B4D1|8F061F7F|7F1F06;
+                       STA.L nMoney+2                       ;83B4D1|8F061F7F|7F1F06;
                        SEP #$20                             ;83B4D5|E220    |      ;
                        LDA.B #$00                           ;83B4D7|A900    |      ;
                        XBA                                  ;83B4D9|EB      |      ;
@@ -6144,34 +6138,34 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83B4E7|E220    |      ;
                        LDY.W #$0081                         ;83B4E9|A08100  |      ;
                        LDA.B [$72],Y                        ;83B4EC|B772    |000072;
-                       STA.W $0882                          ;83B4EE|8D8208  |000882;
+                       STA.W sPlayerNameShort+1             ;83B4EE|8D8208  |000882;
                        REP #$20                             ;83B4F1|C220    |      ;
-                       STA.W $08D7                          ;83B4F3|8DD708  |0008D7;
+                       STA.W sPlayerNameLong+2              ;83B4F3|8DD708  |0008D7;
                        SEP #$20                             ;83B4F6|E220    |      ;
                        LDY.W #$0082                         ;83B4F8|A08200  |      ;
                        LDA.B [$72],Y                        ;83B4FB|B772    |000072;
-                       STA.W $0883                          ;83B4FD|8D8308  |000883;
+                       STA.W sPlayerNameShort+2             ;83B4FD|8D8308  |000883;
                        REP #$20                             ;83B500|C220    |      ;
-                       STA.W $08D9                          ;83B502|8DD908  |0008D9;
+                       STA.W sPlayerNameLong+4              ;83B502|8DD908  |0008D9;
                        SEP #$20                             ;83B505|E220    |      ;
                        LDY.W #$0083                         ;83B507|A08300  |      ;
                        LDA.B [$72],Y                        ;83B50A|B772    |000072;
-                       STA.W $0884                          ;83B50C|8D8408  |000884;
+                       STA.W sPlayerNameShort+3             ;83B50C|8D8408  |000884;
                        REP #$20                             ;83B50F|C220    |      ;
-                       STA.W $08DB                          ;83B511|8DDB08  |0008DB;
+                       STA.W sPlayerNameLong+6              ;83B511|8DDB08  |0008DB;
                        SEP #$20                             ;83B514|E220    |      ;
                        LDY.W #$0084                         ;83B516|A08400  |      ;
                        LDA.B [$72],Y                        ;83B519|B772    |000072;
-                       STA.L $7F1F00                        ;83B51B|8F001F7F|7F1F00;
+                       STA.L sShedItems                     ;83B51B|8F001F7F|7F1F00;
                        LDY.W #$0085                         ;83B51F|A08500  |      ;
                        LDA.B [$72],Y                        ;83B522|B772    |000072;
-                       STA.L $7F1F01                        ;83B524|8F011F7F|7F1F01;
+                       STA.L sShedItems+1                   ;83B524|8F011F7F|7F1F01;
                        LDY.W #$0086                         ;83B528|A08600  |      ;
                        LDA.B [$72],Y                        ;83B52B|B772    |000072;
-                       STA.L $7F1F02                        ;83B52D|8F021F7F|7F1F02;
+                       STA.L sShedItems+2                   ;83B52D|8F021F7F|7F1F02;
                        LDY.W #$0087                         ;83B531|A08700  |      ;
                        LDA.B [$72],Y                        ;83B534|B772    |000072;
-                       STA.L $7F1F03                        ;83B536|8F031F7F|7F1F03;
+                       STA.L sShedItems+3                   ;83B536|8F031F7F|7F1F03;
                        SEP #$20                             ;83B53A|E220    |      ;
                        LDA.B #$00                           ;83B53C|A900    |      ;
                        XBA                                  ;83B53E|EB      |      ;
@@ -6183,21 +6177,21 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83B54C|E220    |      ;
                        LDY.W #$0089                         ;83B54E|A08900  |      ;
                        LDA.B [$72],Y                        ;83B551|B772    |000072;
-                       STA.W $089A                          ;83B553|8D9A08  |00089A;
+                       STA.W sDogNameShort+1                ;83B553|8D9A08  |00089A;
                        REP #$20                             ;83B556|C220    |      ;
-                       STA.W $08DF                          ;83B558|8DDF08  |0008DF;
+                       STA.W sDogNameLong+2                 ;83B558|8DDF08  |0008DF;
                        SEP #$20                             ;83B55B|E220    |      ;
                        LDY.W #$008A                         ;83B55D|A08A00  |      ;
                        LDA.B [$72],Y                        ;83B560|B772    |000072;
-                       STA.W $089B                          ;83B562|8D9B08  |00089B;
+                       STA.W sDogNameShort+2                ;83B562|8D9B08  |00089B;
                        REP #$20                             ;83B565|C220    |      ;
-                       STA.W $08E1                          ;83B567|8DE108  |0008E1;
+                       STA.W sDogNameLong+4                 ;83B567|8DE108  |0008E1;
                        SEP #$20                             ;83B56A|E220    |      ;
                        LDY.W #$008B                         ;83B56C|A08B00  |      ;
                        LDA.B [$72],Y                        ;83B56F|B772    |000072;
-                       STA.W $089C                          ;83B571|8D9C08  |00089C;
+                       STA.W sDogNameShort+3                ;83B571|8D9C08  |00089C;
                        REP #$20                             ;83B574|C220    |      ;
-                       STA.W $08E3                          ;83B576|8DE308  |0008E3;
+                       STA.W sDogNameLong+6                 ;83B576|8DE308  |0008E3;
                        SEP #$20                             ;83B579|E220    |      ;
                        LDA.B #$00                           ;83B57B|A900    |      ;
                        XBA                                  ;83B57D|EB      |      ;
@@ -6209,21 +6203,21 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83B58B|E220    |      ;
                        LDY.W #$008D                         ;83B58D|A08D00  |      ;
                        LDA.B [$72],Y                        ;83B590|B772    |000072;
-                       STA.W $089E                          ;83B592|8D9E08  |00089E;
+                       STA.W sHorseNameShort+1              ;83B592|8D9E08  |00089E;
                        REP #$20                             ;83B595|C220    |      ;
-                       STA.W $08E7                          ;83B597|8DE708  |0008E7;
+                       STA.W sHorseNameLong+2               ;83B597|8DE708  |0008E7;
                        SEP #$20                             ;83B59A|E220    |      ;
                        LDY.W #$008E                         ;83B59C|A08E00  |      ;
                        LDA.B [$72],Y                        ;83B59F|B772    |000072;
-                       STA.W $089F                          ;83B5A1|8D9F08  |00089F;
+                       STA.W sHorseNameShort+2              ;83B5A1|8D9F08  |00089F;
                        REP #$20                             ;83B5A4|C220    |      ;
-                       STA.W $08E9                          ;83B5A6|8DE908  |0008E9;
+                       STA.W sHorseNameLong+4               ;83B5A6|8DE908  |0008E9;
                        SEP #$20                             ;83B5A9|E220    |      ;
                        LDY.W #$008F                         ;83B5AB|A08F00  |      ;
                        LDA.B [$72],Y                        ;83B5AE|B772    |000072;
-                       STA.W $08A0                          ;83B5B0|8DA008  |0008A0;
+                       STA.W sHorseNameShort+3              ;83B5B0|8DA008  |0008A0;
                        REP #$20                             ;83B5B3|C220    |      ;
-                       STA.W $08EB                          ;83B5B5|8DEB08  |0008EB;
+                       STA.W sHorseNameLong+6               ;83B5B5|8DEB08  |0008EB;
                        SEP #$20                             ;83B5B8|E220    |      ;
                        LDA.B #$00                           ;83B5BA|A900    |      ;
                        XBA                                  ;83B5BC|EB      |      ;
@@ -6235,21 +6229,21 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83B5CB|E220    |      ;
                        LDY.W #$0091                         ;83B5CD|A09100  |      ;
                        LDA.B [$72],Y                        ;83B5D0|B772    |000072;
-                       STA.L $7F1F3E                        ;83B5D2|8F3E1F7F|7F1F3E;
+                       STA.L sFirstChildNameShort+1         ;83B5D2|8F3E1F7F|7F1F3E;
                        REP #$20                             ;83B5D6|C220    |      ;
-                       STA.W $08EF                          ;83B5D8|8DEF08  |0008EF;
+                       STA.W sFirstChildNameLong+2          ;83B5D8|8DEF08  |0008EF;
                        SEP #$20                             ;83B5DB|E220    |      ;
                        LDY.W #$0092                         ;83B5DD|A09200  |      ;
                        LDA.B [$72],Y                        ;83B5E0|B772    |000072;
-                       STA.L $7F1F3F                        ;83B5E2|8F3F1F7F|7F1F3F;
+                       STA.L sFirstChildNameShort+2         ;83B5E2|8F3F1F7F|7F1F3F;
                        REP #$20                             ;83B5E6|C220    |      ;
-                       STA.W $08F1                          ;83B5E8|8DF108  |0008F1;
+                       STA.W sFirstChildNameLong+4          ;83B5E8|8DF108  |0008F1;
                        SEP #$20                             ;83B5EB|E220    |      ;
                        LDY.W #$0093                         ;83B5ED|A09300  |      ;
                        LDA.B [$72],Y                        ;83B5F0|B772    |000072;
-                       STA.L $7F1F40                        ;83B5F2|8F401F7F|7F1F40;
+                       STA.L sFirstChildNameShort+3         ;83B5F2|8F401F7F|7F1F40;
                        REP #$20                             ;83B5F6|C220    |      ;
-                       STA.W $08F3                          ;83B5F8|8DF308  |0008F3;
+                       STA.W sFirstChildNameLong+6          ;83B5F8|8DF308  |0008F3;
                        SEP #$20                             ;83B5FB|E220    |      ;
                        LDA.B #$00                           ;83B5FD|A900    |      ;
                        XBA                                  ;83B5FF|EB      |      ;
@@ -6261,21 +6255,21 @@ SetDefaultValuesForVariables:
                        SEP #$20                             ;83B60E|E220    |      ;
                        LDY.W #$0095                         ;83B610|A09500  |      ;
                        LDA.B [$72],Y                        ;83B613|B772    |000072;
-                       STA.L $7F1F42                        ;83B615|8F421F7F|7F1F42;
+                       STA.L sSecondChildNameShort+1        ;83B615|8F421F7F|7F1F42;
                        REP #$20                             ;83B619|C220    |      ;
-                       STA.W $08F7                          ;83B61B|8DF708  |0008F7;
+                       STA.W sSecondChildNameLong+2         ;83B61B|8DF708  |0008F7;
                        SEP #$20                             ;83B61E|E220    |      ;
                        LDY.W #$0096                         ;83B620|A09600  |      ;
                        LDA.B [$72],Y                        ;83B623|B772    |000072;
-                       STA.L $7F1F43                        ;83B625|8F431F7F|7F1F43;
+                       STA.L sSecondChildNameShort+2        ;83B625|8F431F7F|7F1F43;
                        REP #$20                             ;83B629|C220    |      ;
-                       STA.W $08F9                          ;83B62B|8DF908  |0008F9;
+                       STA.W sSecondChildNameLong+4         ;83B62B|8DF908  |0008F9;
                        SEP #$20                             ;83B62E|E220    |      ;
                        LDY.W #$0097                         ;83B630|A09700  |      ;
                        LDA.B [$72],Y                        ;83B633|B772    |000072;
-                       STA.L $7F1F44                        ;83B635|8F441F7F|7F1F44;
+                       STA.L sSecondChildNameShort+3        ;83B635|8F441F7F|7F1F44;
                        REP #$20                             ;83B639|C220    |      ;
-                       STA.W $08FB                          ;83B63B|8DFB08  |0008FB;
+                       STA.W sSecondChildNameLong+6         ;83B63B|8DFB08  |0008FB;
                        SEP #$20                             ;83B63E|E220    |      ;
                        LDY.W #$0098                         ;83B640|A09800  |      ;
                        LDX.W #$0000                         ;83B643|A20000  |      ;
@@ -6341,16 +6335,16 @@ SetDefaultValuesForVariables:
           CODE_83B6B0:
                        SEP #$20                             ;83B6B0|E220    |      ;
                        LDY.W #$0000                         ;83B6B2|A00000  |      ;
-                       LDA.L CurrentYearID                  ;83B6B5|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83B6B5|AF181F7F|7F1F18;
                        STA.B [$72],Y                        ;83B6B9|9772    |000072;
                        LDY.W #$0001                         ;83B6BB|A00100  |      ;
-                       LDA.L CurrentSeasonID                ;83B6BE|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83B6BE|AF191F7F|7F1F19;
                        STA.B [$72],Y                        ;83B6C2|9772    |000072;
                        LDY.W #$0002                         ;83B6C4|A00200  |      ;
-                       LDA.L CurrentWeekdayID               ;83B6C7|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83B6C7|AF1A1F7F|7F1F1A;
                        STA.B [$72],Y                        ;83B6CB|9772    |000072;
                        LDY.W #$0003                         ;83B6CD|A00300  |      ;
-                       LDA.L CurrentDay                     ;83B6D0|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83B6D0|AF1B1F7F|7F1F1B;
                        STA.B [$72],Y                        ;83B6D4|9772    |000072;
                        LDY.W #$0004                         ;83B6D6|A00400  |      ;
                        LDA.W $0927                          ;83B6D9|AD2709  |000927;
@@ -6489,111 +6483,111 @@ SetDefaultValuesForVariables:
                        LDA.L PrengacyFlag                   ;83B858|AF3B1F7F|7F1F3B;
                        STA.B [$72],Y                        ;83B85C|9772    |000072;
                        LDY.W #$007A                         ;83B85E|A07A00  |      ;
-                       LDA.L $7F1F37                        ;83B861|AF371F7F|7F1F37;
+                       LDA.L nFirstChildAge                 ;83B861|AF371F7F|7F1F37;
                        STA.B [$72],Y                        ;83B865|9772    |000072;
                        LDY.W #$007C                         ;83B867|A07C00  |      ;
-                       LDA.L $7F1F39                        ;83B86A|AF391F7F|7F1F39;
+                       LDA.L nSecondChildAge                ;83B86A|AF391F7F|7F1F39;
                        STA.B [$72],Y                        ;83B86E|9772    |000072;
                        LDY.W #$0031                         ;83B870|A03100  |      ;
-                       LDA.L $7F1F4A                        ;83B873|AF4A1F7F|7F1F4A;
+                       LDA.L nStatShippedCorns              ;83B873|AF4A1F7F|7F1F4A;
                        STA.B [$72],Y                        ;83B877|9772    |000072;
                        LDY.W #$0033                         ;83B879|A03300  |      ;
-                       LDA.L $7F1F4C                        ;83B87C|AF4C1F7F|7F1F4C;
+                       LDA.L nStatShippedTomatoes           ;83B87C|AF4C1F7F|7F1F4C;
                        STA.B [$72],Y                        ;83B880|9772    |000072;
                        LDY.W #$0035                         ;83B882|A03500  |      ;
-                       LDA.L $7F1F4E                        ;83B885|AF4E1F7F|7F1F4E;
+                       LDA.L nStatShippedTurnips            ;83B885|AF4E1F7F|7F1F4E;
                        STA.B [$72],Y                        ;83B889|9772    |000072;
                        LDY.W #$0037                         ;83B88B|A03700  |      ;
-                       LDA.L $7F1F50                        ;83B88E|AF501F7F|7F1F50;
+                       LDA.L nStatShippedPotatoes           ;83B88E|AF501F7F|7F1F50;
                        STA.B [$72],Y                        ;83B892|9772    |000072;
                        LDY.W #$007E                         ;83B894|A07E00  |      ;
                        LDA.L $7F1F52                        ;83B897|AF521F7F|7F1F52;
                        STA.B [$72],Y                        ;83B89B|9772    |000072;
                        REP #$20                             ;83B89D|C220    |      ;
                        LDY.W #$0039                         ;83B89F|A03900  |      ;
-                       LDA.L $7F1F04                        ;83B8A2|AF041F7F|7F1F04;
+                       LDA.L nMoney                         ;83B8A2|AF041F7F|7F1F04;
                        STA.B [$72],Y                        ;83B8A6|9772    |000072;
                        SEP #$20                             ;83B8A8|E220    |      ;
                        LDY.W #$003B                         ;83B8AA|A03B00  |      ;
-                       LDA.L $7F1F06                        ;83B8AD|AF061F7F|7F1F06;
+                       LDA.L nMoney+2                       ;83B8AD|AF061F7F|7F1F06;
                        STA.B [$72],Y                        ;83B8B1|9772    |000072;
                        SEP #$20                             ;83B8B3|E220    |      ;
                        LDY.W #$0080                         ;83B8B5|A08000  |      ;
                        LDA.W sPlayerNameShort               ;83B8B8|AD8108  |000881;
                        STA.B [$72],Y                        ;83B8BB|9772    |000072;
                        LDY.W #$0081                         ;83B8BD|A08100  |      ;
-                       LDA.W $0882                          ;83B8C0|AD8208  |000882;
+                       LDA.W sPlayerNameShort+1             ;83B8C0|AD8208  |000882;
                        STA.B [$72],Y                        ;83B8C3|9772    |000072;
                        LDY.W #$0082                         ;83B8C5|A08200  |      ;
-                       LDA.W $0883                          ;83B8C8|AD8308  |000883;
+                       LDA.W sPlayerNameShort+2             ;83B8C8|AD8308  |000883;
                        STA.B [$72],Y                        ;83B8CB|9772    |000072;
                        LDY.W #$0083                         ;83B8CD|A08300  |      ;
-                       LDA.W $0884                          ;83B8D0|AD8408  |000884;
+                       LDA.W sPlayerNameShort+3             ;83B8D0|AD8408  |000884;
                        STA.B [$72],Y                        ;83B8D3|9772    |000072;
                        SEP #$20                             ;83B8D5|E220    |      ;
                        LDY.W #$0084                         ;83B8D7|A08400  |      ;
-                       LDA.L $7F1F00                        ;83B8DA|AF001F7F|7F1F00;
+                       LDA.L sShedItems                     ;83B8DA|AF001F7F|7F1F00;
                        STA.B [$72],Y                        ;83B8DE|9772    |000072;
                        LDY.W #$0085                         ;83B8E0|A08500  |      ;
-                       LDA.L $7F1F01                        ;83B8E3|AF011F7F|7F1F01;
+                       LDA.L sShedItems+1                   ;83B8E3|AF011F7F|7F1F01;
                        STA.B [$72],Y                        ;83B8E7|9772    |000072;
                        LDY.W #$0086                         ;83B8E9|A08600  |      ;
-                       LDA.L $7F1F02                        ;83B8EC|AF021F7F|7F1F02;
+                       LDA.L sShedItems+2                   ;83B8EC|AF021F7F|7F1F02;
                        STA.B [$72],Y                        ;83B8F0|9772    |000072;
                        LDY.W #$0087                         ;83B8F2|A08700  |      ;
-                       LDA.L $7F1F03                        ;83B8F5|AF031F7F|7F1F03;
+                       LDA.L sShedItems+3                   ;83B8F5|AF031F7F|7F1F03;
                        STA.B [$72],Y                        ;83B8F9|9772    |000072;
                        SEP #$20                             ;83B8FB|E220    |      ;
                        LDY.W #$0088                         ;83B8FD|A08800  |      ;
                        LDA.W sDogNameShort                  ;83B900|AD9908  |000899;
                        STA.B [$72],Y                        ;83B903|9772    |000072;
                        LDY.W #$0089                         ;83B905|A08900  |      ;
-                       LDA.W $089A                          ;83B908|AD9A08  |00089A;
+                       LDA.W sDogNameShort+1                ;83B908|AD9A08  |00089A;
                        STA.B [$72],Y                        ;83B90B|9772    |000072;
                        LDY.W #$008A                         ;83B90D|A08A00  |      ;
-                       LDA.W $089B                          ;83B910|AD9B08  |00089B;
+                       LDA.W sDogNameShort+2                ;83B910|AD9B08  |00089B;
                        STA.B [$72],Y                        ;83B913|9772    |000072;
                        LDY.W #$008B                         ;83B915|A08B00  |      ;
-                       LDA.W $089C                          ;83B918|AD9C08  |00089C;
+                       LDA.W sDogNameShort+3                ;83B918|AD9C08  |00089C;
                        STA.B [$72],Y                        ;83B91B|9772    |000072;
                        SEP #$20                             ;83B91D|E220    |      ;
                        LDY.W #$008C                         ;83B91F|A08C00  |      ;
                        LDA.W sHorseNameShort                ;83B922|AD9D08  |00089D;
                        STA.B [$72],Y                        ;83B925|9772    |000072;
                        LDY.W #$008D                         ;83B927|A08D00  |      ;
-                       LDA.W $089E                          ;83B92A|AD9E08  |00089E;
+                       LDA.W sHorseNameShort+1              ;83B92A|AD9E08  |00089E;
                        STA.B [$72],Y                        ;83B92D|9772    |000072;
                        LDY.W #$008E                         ;83B92F|A08E00  |      ;
-                       LDA.W $089F                          ;83B932|AD9F08  |00089F;
+                       LDA.W sHorseNameShort+2              ;83B932|AD9F08  |00089F;
                        STA.B [$72],Y                        ;83B935|9772    |000072;
                        LDY.W #$008F                         ;83B937|A08F00  |      ;
-                       LDA.W $08A0                          ;83B93A|ADA008  |0008A0;
+                       LDA.W sHorseNameShort+3              ;83B93A|ADA008  |0008A0;
                        STA.B [$72],Y                        ;83B93D|9772    |000072;
                        SEP #$20                             ;83B93F|E220    |      ;
                        LDY.W #$0090                         ;83B941|A09000  |      ;
                        LDA.L sFirstChildNameShort           ;83B944|AF3D1F7F|7F1F3D;
                        STA.B [$72],Y                        ;83B948|9772    |000072;
                        LDY.W #$0091                         ;83B94A|A09100  |      ;
-                       LDA.L $7F1F3E                        ;83B94D|AF3E1F7F|7F1F3E;
+                       LDA.L sFirstChildNameShort+1         ;83B94D|AF3E1F7F|7F1F3E;
                        STA.B [$72],Y                        ;83B951|9772    |000072;
                        LDY.W #$0092                         ;83B953|A09200  |      ;
-                       LDA.L $7F1F3F                        ;83B956|AF3F1F7F|7F1F3F;
+                       LDA.L sFirstChildNameShort+2         ;83B956|AF3F1F7F|7F1F3F;
                        STA.B [$72],Y                        ;83B95A|9772    |000072;
                        LDY.W #$0093                         ;83B95C|A09300  |      ;
-                       LDA.L $7F1F40                        ;83B95F|AF401F7F|7F1F40;
+                       LDA.L sFirstChildNameShort+3         ;83B95F|AF401F7F|7F1F40;
                        STA.B [$72],Y                        ;83B963|9772    |000072;
                        SEP #$20                             ;83B965|E220    |      ;
                        LDY.W #$0094                         ;83B967|A09400  |      ;
                        LDA.L sSecondChildNameShort          ;83B96A|AF411F7F|7F1F41;
                        STA.B [$72],Y                        ;83B96E|9772    |000072;
                        LDY.W #$0095                         ;83B970|A09500  |      ;
-                       LDA.L $7F1F42                        ;83B973|AF421F7F|7F1F42;
+                       LDA.L sSecondChildNameShort+1        ;83B973|AF421F7F|7F1F42;
                        STA.B [$72],Y                        ;83B977|9772    |000072;
                        LDY.W #$0096                         ;83B979|A09600  |      ;
-                       LDA.L $7F1F43                        ;83B97C|AF431F7F|7F1F43;
+                       LDA.L sSecondChildNameShort+2        ;83B97C|AF431F7F|7F1F43;
                        STA.B [$72],Y                        ;83B980|9772    |000072;
                        LDY.W #$0097                         ;83B982|A09700  |      ;
-                       LDA.L $7F1F44                        ;83B985|AF441F7F|7F1F44;
+                       LDA.L sSecondChildNameShort+3        ;83B985|AF441F7F|7F1F44;
                        STA.B [$72],Y                        ;83B989|9772    |000072;
                        SEP #$20                             ;83B98B|E220    |      ;
                        LDY.W #$0098                         ;83B98D|A09800  |      ;
@@ -6725,13 +6719,13 @@ SetDefaultValuesForVariables:
                        LDX.W #$0000                         ;83BA6A|A20000  |      ;
                        LDY.W #$0000                         ;83BA6D|A00000  |      ;
                        LDA.B [$72],Y                        ;83BA70|B772    |000072;
-                       STA.L CurrentYearID                  ;83BA72|8F181F7F|7F1F18;
+                       STA.L nCurrentYearID                 ;83BA72|8F181F7F|7F1F18;
                        LDY.W #$0001                         ;83BA76|A00100  |      ;
                        LDA.B [$72],Y                        ;83BA79|B772    |000072;
-                       STA.L CurrentSeasonID                ;83BA7B|8F191F7F|7F1F19;
+                       STA.L nCurrentSeasonID               ;83BA7B|8F191F7F|7F1F19;
                        LDY.W #$0003                         ;83BA7F|A00300  |      ;
                        LDA.B [$72],Y                        ;83BA82|B772    |000072;
-                       STA.L CurrentDay                     ;83BA84|8F1B1F7F|7F1F1B;
+                       STA.L nCurrentDay                    ;83BA84|8F1B1F7F|7F1F1B;
                        BEQ CODE_83BAD3                      ;83BA88|F049    |83BAD3;
                        LDY.W #$003C                         ;83BA8A|A03C00  |      ;
                        LDA.B [$72],Y                        ;83BA8D|B772    |000072;
@@ -6755,13 +6749,13 @@ SetDefaultValuesForVariables:
                        STA.W sPlayerNameShort               ;83BAB5|8D8108  |000881;
                        LDY.W #$0081                         ;83BAB8|A08100  |      ;
                        LDA.B [$72],Y                        ;83BABB|B772    |000072;
-                       STA.W $0882                          ;83BABD|8D8208  |000882;
+                       STA.W sPlayerNameShort+1             ;83BABD|8D8208  |000882;
                        LDY.W #$0082                         ;83BAC0|A08200  |      ;
                        LDA.B [$72],Y                        ;83BAC3|B772    |000072;
-                       STA.W $0883                          ;83BAC5|8D8308  |000883;
+                       STA.W sPlayerNameShort+2             ;83BAC5|8D8308  |000883;
                        LDY.W #$0083                         ;83BAC8|A08300  |      ;
                        LDA.B [$72],Y                        ;83BACB|B772    |000072;
-                       STA.W $0884                          ;83BACD|8D8408  |000884;
+                       STA.W sPlayerNameShort+3             ;83BACD|8D8408  |000884;
                        LDX.W #$0001                         ;83BAD0|A20100  |      ;
                                                             ;      |        |      ;
           CODE_83BAD3:
@@ -8786,7 +8780,7 @@ SetDefaultValuesForVariables:
                        LDA.B #$09                           ;83C892|A909    |      ;
                        STA.B [$72],Y                        ;83C894|9772    |000072;
                        LDY.W #$0001                         ;83C896|A00100  |      ;
-                       LDA.L CurrentSeasonID                ;83C899|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83C899|AF191F7F|7F1F19;
                        CLC                                  ;83C89D|18      |      ;
                        ADC.B #$04                           ;83C89E|6904    |      ;
                        STA.B [$72],Y                        ;83C8A0|9772    |000072;
@@ -9197,7 +9191,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83CBC6|AF6E1F7F|7F1F6E;
                        AND.W #$0004                         ;83CBCA|290400  |      ;
                        BEQ CODE_83CBE7                      ;83CBCD|F018    |83CBE7;
-                       LDA.L $7F1F37                        ;83CBCF|AF371F7F|7F1F37;
+                       LDA.L nFirstChildAge                 ;83CBCF|AF371F7F|7F1F37;
                        CMP.W #$003C                         ;83CBD3|C93C00  |      ;
                        BCC CODE_83CBE7                      ;83CBD6|900F    |83CBE7;
                        REP #$30                             ;83CBD8|C230    |      ;
@@ -9211,7 +9205,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83CBE9|AF6E1F7F|7F1F6E;
                        AND.W #$0008                         ;83CBED|290800  |      ;
                        BEQ CODE_83CC0A                      ;83CBF0|F018    |83CC0A;
-                       LDA.L $7F1F39                        ;83CBF2|AF391F7F|7F1F39;
+                       LDA.L nSecondChildAge                ;83CBF2|AF391F7F|7F1F39;
                        CMP.W #$003C                         ;83CBF6|C93C00  |      ;
                        BCC CODE_83CC0A                      ;83CBF9|900F    |83CC0A;
                        REP #$30                             ;83CBFB|C230    |      ;
@@ -9265,7 +9259,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83CC53:
                        SEP #$20                             ;83CC53|E220    |      ;
-                       LDA.L CurrentTimeID                  ;83CC55|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83CC55|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83CC59|C906    |      ;
                        BEQ CODE_83CC60                      ;83CC5B|F003    |83CC60;
                        JMP.W CODE_83CE5B                    ;83CC5D|4C5BCE  |83CE5B;
@@ -9284,7 +9278,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83CC72:
-                       LDA.L CurrentDay                     ;83CC72|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83CC72|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;83CC76|C901    |      ;
                        BNE CODE_83CC7D                      ;83CC78|D003    |83CC7D;
                        JMP.W CODE_83CE5B                    ;83CC7A|4C5BCE  |83CE5B;
@@ -9565,7 +9559,7 @@ fGetChickenDataPointer:
                        LDA.W $098C                          ;83CF14|AD8C09  |00098C;
                        CMP.B #$06                           ;83CF17|C906    |      ;
                        BCC CODE_83CF42                      ;83CF19|9027    |83CF42;
-                       LDA.L CurrentTimeID                  ;83CF1B|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83CF1B|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83CF1F|C906    |      ;
                        BNE CODE_83CF42                      ;83CF21|D01F    |83CF42;
                        LDA.L $7F1F1D                        ;83CF23|AF1D1F7F|7F1F1D;
@@ -9590,7 +9584,7 @@ fGetChickenDataPointer:
                        AND.W #$0002                         ;83CF48|290200  |      ;
                        BEQ CODE_83CF73                      ;83CF4B|F026    |83CF73;
                        SEP #$20                             ;83CF4D|E220    |      ;
-                       LDA.L CurrentTimeID                  ;83CF4F|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83CF4F|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83CF53|C906    |      ;
                        BNE CODE_83CF73                      ;83CF55|D01C    |83CF73;
                        LDA.L $7F1F1D                        ;83CF57|AF1D1F7F|7F1F1D;
@@ -9611,7 +9605,7 @@ fGetChickenDataPointer:
                        AND.W #$0010                         ;83CF79|291000  |      ;
                        BEQ CODE_83CFA4                      ;83CF7C|F026    |83CFA4;
                        SEP #$20                             ;83CF7E|E220    |      ;
-                       LDA.L CurrentTimeID                  ;83CF80|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83CF80|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83CF84|C906    |      ;
                        BNE CODE_83CFA4                      ;83CF86|D01C    |83CFA4;
                        LDA.L $7F1F1D                        ;83CF88|AF1D1F7F|7F1F1D;
@@ -9632,15 +9626,15 @@ fGetChickenDataPointer:
                        AND.W #$0001                         ;83CFAA|290100  |      ;
                        BNE CODE_83CFF8                      ;83CFAD|D049    |83CFF8;
                        SEP #$20                             ;83CFAF|E220    |      ;
-                       LDA.L CurrentYearID                  ;83CFB1|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83CFB1|AF181F7F|7F1F18;
                        BNE CODE_83CFF8                      ;83CFB5|D041    |83CFF8;
-                       LDA.L CurrentSeasonID                ;83CFB7|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83CFB7|AF191F7F|7F1F19;
                        CMP.B #$01                           ;83CFBB|C901    |      ;
                        BNE CODE_83CFF8                      ;83CFBD|D039    |83CFF8;
-                       LDA.L CurrentDay                     ;83CFBF|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83CFBF|AF1B1F7F|7F1F1B;
                        CMP.B #$14                           ;83CFC3|C914    |      ;
                        BCS CODE_83CFF8                      ;83CFC5|B031    |83CFF8;
-                       LDA.L CurrentTimeID                  ;83CFC7|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83CFC7|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83CFCB|C906    |      ;
                        BNE CODE_83CFF8                      ;83CFCD|D029    |83CFF8;
                        LDA.L $7F1F1D                        ;83CFCF|AF1D1F7F|7F1F1D;
@@ -9772,9 +9766,9 @@ fGetChickenDataPointer:
           CODE_83D0FF:
                        SEP #$20                             ;83D0FF|E220    |      ;
                        REP #$10                             ;83D101|C210    |      ;
-                       LDA.L CurrentYearID                  ;83D103|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83D103|AF181F7F|7F1F18;
                        BEQ CODE_83D163                      ;83D107|F05A    |83D163;
-                       LDA.L CurrentTimeID                  ;83D109|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D109|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83D10D|C906    |      ;
                        BNE CODE_83D163                      ;83D10F|D052    |83D163;
                        LDA.L $7F1F1D                        ;83D111|AF1D1F7F|7F1F1D;
@@ -9786,11 +9780,11 @@ fGetChickenDataPointer:
                        AND.W #$001A                         ;83D122|291A00  |      ;
                        BNE CODE_83D163                      ;83D125|D03C    |83D163;
                        REP #$20                             ;83D127|C220    |      ;
-                       LDA.L $7F1F04                        ;83D129|AF041F7F|7F1F04;
+                       LDA.L nMoney                         ;83D129|AF041F7F|7F1F04;
                        CLC                                  ;83D12D|18      |      ;
                        ADC.W #$F448                         ;83D12E|6948F4  |      ;
                        SEP #$20                             ;83D131|E220    |      ;
-                       LDA.L $7F1F06                        ;83D133|AF061F7F|7F1F06;
+                       LDA.L nMoney+2                       ;83D133|AF061F7F|7F1F06;
                        ADC.B #$FF                           ;83D137|69FF    |      ;
                        BMI CODE_83D163                      ;83D139|3028    |83D163;
                        REP #$30                             ;83D13B|C230    |      ;
@@ -9812,22 +9806,22 @@ fGetChickenDataPointer:
           CODE_83D163:
                        SEP #$20                             ;83D163|E220    |      ;
                        REP #$10                             ;83D165|C210    |      ;
-                       LDA.L CurrentYearID                  ;83D167|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83D167|AF181F7F|7F1F18;
                        BNE CODE_83D175                      ;83D16B|D008    |83D175;
-                       LDA.L CurrentSeasonID                ;83D16D|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D16D|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83D171|C903    |      ;
                        BNE CODE_83D1CE                      ;83D173|D059    |83D1CE;
                                                             ;      |        |      ;
           CODE_83D175:
                        SEP #$20                             ;83D175|E220    |      ;
-                       LDA.L CurrentTimeID                  ;83D177|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D177|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83D17B|C906    |      ;
                        BNE CODE_83D1CE                      ;83D17D|D04F    |83D1CE;
                        LDA.L $7F1F1D                        ;83D17F|AF1D1F7F|7F1F1D;
                        BNE CODE_83D1CE                      ;83D183|D049    |83D1CE;
                        LDA.L $7F1F1E                        ;83D185|AF1E1F7F|7F1F1E;
                        BNE CODE_83D1CE                      ;83D189|D043    |83D1CE;
-                       LDA.L CurrentWeekdayID               ;83D18B|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83D18B|AF1A1F7F|7F1F1A;
                        CMP.B #$06                           ;83D18F|C906    |      ;
                        BNE CODE_83D1CE                      ;83D191|D03B    |83D1CE;
                        REP #$20                             ;83D193|C220    |      ;
@@ -9856,10 +9850,10 @@ fGetChickenDataPointer:
           CODE_83D1CE:
                        SEP #$20                             ;83D1CE|E220    |      ;
                        REP #$10                             ;83D1D0|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D1D2|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D1D2|AF191F7F|7F1F19;
                        CMP.B #$02                           ;83D1D6|C902    |      ;
                        BNE CODE_83D23E                      ;83D1D8|D064    |83D23E;
-                       LDA.L CurrentDay                     ;83D1DA|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D1DA|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;83D1DE|C901    |      ;
                        BEQ CODE_83D23E                      ;83D1E0|F05C    |83D23E;
                        CMP.B #$08                           ;83D1E2|C908    |      ;
@@ -9921,7 +9915,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F0B                        ;83D265|AF0B1F7F|7F1F0B;
                        CMP.B #$06                           ;83D269|C906    |      ;
                        BCC CODE_83D29E                      ;83D26B|9031    |83D29E;
-                       LDA.L CurrentTimeID                  ;83D26D|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D26D|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83D271|C906    |      ;
                        BNE CODE_83D29E                      ;83D273|D029    |83D29E;
                        LDA.L $7F1F1D                        ;83D275|AF1D1F7F|7F1F1D;
@@ -9948,7 +9942,7 @@ fGetChickenDataPointer:
                        AND.W #$001A                         ;83D2A3|291A00  |      ;
                        BNE CODE_83D2DF                      ;83D2A6|D037    |83D2DF;
                        SEP #$20                             ;83D2A8|E220    |      ;
-                       LDA.L CurrentTimeID                  ;83D2AA|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D2AA|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83D2AE|C906    |      ;
                        BNE CODE_83D2DF                      ;83D2B0|D02D    |83D2DF;
                        LDA.L $7F1F1D                        ;83D2B2|AF1D1F7F|7F1F1D;
@@ -9992,21 +9986,21 @@ fGetChickenDataPointer:
           CODE_83D304:
                        SEP #$20                             ;83D304|E220    |      ;
                        REP #$10                             ;83D306|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D308|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D308|AF191F7F|7F1F19;
                        CMP.B #$02                           ;83D30C|C902    |      ;
                        BEQ CODE_83D313                      ;83D30E|F003    |83D313;
                        JMP.W CODE_83D3B8                    ;83D310|4CB8D3  |83D3B8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83D313:
-                       LDA.L CurrentDay                     ;83D313|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D313|AF1B1F7F|7F1F1B;
                        CMP.B #$14                           ;83D317|C914    |      ;
                        BEQ CODE_83D31E                      ;83D319|F003    |83D31E;
                        JMP.W CODE_83D3B8                    ;83D31B|4CB8D3  |83D3B8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83D31E:
-                       LDA.L CurrentTimeID                  ;83D31E|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D31E|AF1C1F7F|7F1F1C;
                        CMP.B #$0F                           ;83D322|C90F    |      ;
                        BCC CODE_83D329                      ;83D324|9003    |83D329;
                        JMP.W CODE_83D3B8                    ;83D326|4CB8D3  |83D3B8;
@@ -10082,12 +10076,12 @@ fGetChickenDataPointer:
           CODE_83D3B8:
                        SEP #$20                             ;83D3B8|E220    |      ;
                        REP #$10                             ;83D3BA|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D3BC|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D3BC|AF191F7F|7F1F19;
                        BNE CODE_83D3E2                      ;83D3C0|D020    |83D3E2;
-                       LDA.L CurrentDay                     ;83D3C2|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D3C2|AF1B1F7F|7F1F1B;
                        CMP.B #$17                           ;83D3C6|C917    |      ;
                        BNE CODE_83D3E2                      ;83D3C8|D018    |83D3E2;
-                       LDA.L CurrentTimeID                  ;83D3CA|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D3CA|AF1C1F7F|7F1F1C;
                        CMP.B #$0F                           ;83D3CE|C90F    |      ;
                        BCS CODE_83D3E2                      ;83D3D0|B010    |83D3E2;
                        REP #$30                             ;83D3D2|C230    |      ;
@@ -10101,13 +10095,13 @@ fGetChickenDataPointer:
           CODE_83D3E2:
                        SEP #$20                             ;83D3E2|E220    |      ;
                        REP #$10                             ;83D3E4|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D3E6|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D3E6|AF191F7F|7F1F19;
                        CMP.B #$02                           ;83D3EA|C902    |      ;
                        BNE CODE_83D40E                      ;83D3EC|D020    |83D40E;
-                       LDA.L CurrentDay                     ;83D3EE|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D3EE|AF1B1F7F|7F1F1B;
                        CMP.B #$0C                           ;83D3F2|C90C    |      ;
                        BNE CODE_83D40E                      ;83D3F4|D018    |83D40E;
-                       LDA.L CurrentTimeID                  ;83D3F6|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D3F6|AF1C1F7F|7F1F1C;
                        CMP.B #$0F                           ;83D3FA|C90F    |      ;
                        BCS CODE_83D40E                      ;83D3FC|B010    |83D40E;
                        REP #$30                             ;83D3FE|C230    |      ;
@@ -10121,13 +10115,13 @@ fGetChickenDataPointer:
           CODE_83D40E:
                        SEP #$20                             ;83D40E|E220    |      ;
                        REP #$10                             ;83D410|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D412|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D412|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83D416|C903    |      ;
                        BNE CODE_83D43A                      ;83D418|D020    |83D43A;
-                       LDA.L CurrentDay                     ;83D41A|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D41A|AF1B1F7F|7F1F1B;
                        CMP.B #$0A                           ;83D41E|C90A    |      ;
                        BNE CODE_83D43A                      ;83D420|D018    |83D43A;
-                       LDA.L CurrentTimeID                  ;83D422|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D422|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;83D426|C911    |      ;
                        BCS CODE_83D43A                      ;83D428|B010    |83D43A;
                        REP #$30                             ;83D42A|C230    |      ;
@@ -10181,7 +10175,7 @@ fGetChickenDataPointer:
                        AND.W #$0002                         ;83D496|290200  |      ;
                        BNE CODE_83D4B6                      ;83D499|D01B    |83D4B6;
                        SEP #$20                             ;83D49B|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;83D49D|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83D49D|AF1A1F7F|7F1F1A;
                        BEQ CODE_83D4B7                      ;83D4A1|F014    |83D4B7;
                        CMP.B #$06                           ;83D4A3|C906    |      ;
                        BEQ CODE_83D4C7                      ;83D4A5|F020    |83D4C7;
@@ -10237,13 +10231,13 @@ fGetChickenDataPointer:
           CODE_83D4FF:
                        SEP #$20                             ;83D4FF|E220    |      ;
                        REP #$10                             ;83D501|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D503|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D503|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83D507|C903    |      ;
                        BNE CODE_83D52B                      ;83D509|D020    |83D52B;
-                       LDA.L CurrentDay                     ;83D50B|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D50B|AF1B1F7F|7F1F1B;
                        CMP.B #$0A                           ;83D50F|C90A    |      ;
                        BNE CODE_83D52B                      ;83D511|D018    |83D52B;
-                       LDA.L CurrentTimeID                  ;83D513|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D513|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;83D517|C911    |      ;
                        BCS CODE_83D52B                      ;83D519|B010    |83D52B;
                        REP #$30                             ;83D51B|C230    |      ;
@@ -10291,7 +10285,7 @@ fGetChickenDataPointer:
                        AND.W #$0002                         ;83D578|290200  |      ;
                        BNE CODE_83D5A7                      ;83D57B|D02A    |83D5A7;
                        SEP #$20                             ;83D57D|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;83D57F|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83D57F|AF1A1F7F|7F1F1A;
                        CMP.B #$06                           ;83D583|C906    |      ;
                        BEQ CODE_83D597                      ;83D585|F010    |83D597;
                                                             ;      |        |      ;
@@ -10377,13 +10371,13 @@ fGetChickenDataPointer:
           CODE_83D613:
                        SEP #$20                             ;83D613|E220    |      ;
                        REP #$10                             ;83D615|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D617|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D617|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83D61B|C903    |      ;
                        BNE CODE_83D63F                      ;83D61D|D020    |83D63F;
-                       LDA.L CurrentDay                     ;83D61F|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D61F|AF1B1F7F|7F1F1B;
                        CMP.B #$0A                           ;83D623|C90A    |      ;
                        BNE CODE_83D63F                      ;83D625|D018    |83D63F;
-                       LDA.L CurrentTimeID                  ;83D627|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83D627|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;83D62B|C911    |      ;
                        BCS CODE_83D63F                      ;83D62D|B010    |83D63F;
                        REP #$30                             ;83D62F|C230    |      ;
@@ -10397,10 +10391,10 @@ fGetChickenDataPointer:
           CODE_83D63F:
                        SEP #$20                             ;83D63F|E220    |      ;
                        REP #$10                             ;83D641|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83D643|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83D643|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83D647|C903    |      ;
                        BNE CODE_83D66E                      ;83D649|D023    |83D66E;
-                       LDA.L CurrentDay                     ;83D64B|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83D64B|AF1B1F7F|7F1F1B;
                        CMP.B #$18                           ;83D64F|C918    |      ;
                        BNE CODE_83D66E                      ;83D651|D01B    |83D66E;
                        REP #$20                             ;83D653|C220    |      ;
@@ -10467,7 +10461,7 @@ fGetChickenDataPointer:
                        AND.W #$0002                         ;83D6CD|290200  |      ;
                        BNE CODE_83D70E                      ;83D6D0|D03C    |83D70E;
                        SEP #$20                             ;83D6D2|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;83D6D4|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83D6D4|AF1A1F7F|7F1F1A;
                        BEQ CODE_83D6EE                      ;83D6D8|F014    |83D6EE;
                        CMP.B #$06                           ;83D6DA|C906    |      ;
                        BEQ CODE_83D6FE                      ;83D6DC|F020    |83D6FE;
@@ -11122,10 +11116,10 @@ fGetChickenDataPointer:
           CODE_83DBB7:
                        SEP #$20                             ;83DBB7|E220    |      ;
                        REP #$10                             ;83DBB9|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83DBBB|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83DBBB|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83DBBF|C903    |      ;
                        BNE CODE_83DBE6                      ;83DBC1|D023    |83DBE6;
-                       LDA.L CurrentDay                     ;83DBC3|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83DBC3|AF1B1F7F|7F1F1B;
                        CMP.B #$18                           ;83DBC7|C918    |      ;
                        BNE CODE_83DBE6                      ;83DBC9|D01B    |83DBE6;
                        REP #$20                             ;83DBCB|C220    |      ;
@@ -11262,12 +11256,12 @@ fGetChickenDataPointer:
           CODE_83DCDF:
                        SEP #$20                             ;83DCDF|E220    |      ;
                        REP #$10                             ;83DCE1|C210    |      ;
-                       LDA.L CurrentYearID                  ;83DCE3|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83DCE3|AF181F7F|7F1F18;
                        BEQ CODE_83DD3F                      ;83DCE7|F056    |83DD3F;
-                       LDA.L CurrentSeasonID                ;83DCE9|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83DCE9|AF191F7F|7F1F19;
                        CMP.B #$02                           ;83DCED|C902    |      ;
                        BCC CODE_83DD3F                      ;83DCEF|904E    |83DD3F;
-                       LDA.L CurrentDay                     ;83DCF1|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83DCF1|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;83DCF5|C901    |      ;
                        BEQ CODE_83DD3F                      ;83DCF7|F046    |83DD3F;
                        CMP.B #$08                           ;83DCF9|C908    |      ;
@@ -11292,7 +11286,7 @@ fGetChickenDataPointer:
                        AND.W #$0200                         ;83DD1D|290002  |      ;
                        BNE CODE_83DD3F                      ;83DD20|D01D    |83DD3F;
                        SEP #$20                             ;83DD22|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;83DD24|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83DD24|AF1A1F7F|7F1F1A;
                        BEQ CODE_83DD3F                      ;83DD28|F015    |83DD3F;
                        CMP.B #$06                           ;83DD2A|C906    |      ;
                        BEQ CODE_83DD3F                      ;83DD2C|F011    |83DD3F;
@@ -11316,7 +11310,7 @@ fGetChickenDataPointer:
                        AND.W #$0002                         ;83DD54|290200  |      ;
                        BNE CODE_83DD74                      ;83DD57|D01B    |83DD74;
                        SEP #$20                             ;83DD59|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;83DD5B|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83DD5B|AF1A1F7F|7F1F1A;
                        BEQ CODE_83DD75                      ;83DD5F|F014    |83DD75;
                        CMP.B #$06                           ;83DD61|C906    |      ;
                        BEQ CODE_83DD85                      ;83DD63|F020    |83DD85;
@@ -11370,14 +11364,14 @@ fGetChickenDataPointer:
                        AND.W #$0008                         ;83DDBF|290800  |      ;
                        BNE CODE_83DE0A                      ;83DDC2|D046    |83DE0A;
                        SEP #$20                             ;83DDC4|E220    |      ;
-                       LDA.L CurrentYearID                  ;83DDC6|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83DDC6|AF181F7F|7F1F18;
                        BNE CODE_83DDFD                      ;83DDCA|D031    |83DDFD;
-                       LDA.L CurrentSeasonID                ;83DDCC|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83DDCC|AF191F7F|7F1F19;
                        CMP.B #$02                           ;83DDD0|C902    |      ;
                        BCS CODE_83DDFD                      ;83DDD2|B029    |83DDFD;
                        CMP.B #$00                           ;83DDD4|C900    |      ;
                        BEQ CODE_83DDE0                      ;83DDD6|F008    |83DDE0;
-                       LDA.L CurrentDay                     ;83DDD8|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83DDD8|AF1B1F7F|7F1F1B;
                        CMP.B #$1A                           ;83DDDC|C91A    |      ;
                        BCS CODE_83DDFD                      ;83DDDE|B01D    |83DDFD;
                                                             ;      |        |      ;
@@ -11506,13 +11500,13 @@ fGetChickenDataPointer:
           CODE_83DED3:
                        SEP #$20                             ;83DED3|E220    |      ;
                        REP #$10                             ;83DED5|C210    |      ;
-                       LDA.L CurrentYearID                  ;83DED7|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83DED7|AF181F7F|7F1F18;
                        CMP.B #$02                           ;83DEDB|C902    |      ;
                        BNE CODE_83DEF2                      ;83DEDD|D013    |83DEF2;
-                       LDA.L CurrentSeasonID                ;83DEDF|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83DEDF|AF191F7F|7F1F19;
                        CMP.B #$01                           ;83DEE3|C901    |      ;
                        BNE CODE_83DEF2                      ;83DEE5|D00B    |83DEF2;
-                       LDA.L CurrentDay                     ;83DEE7|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83DEE7|AF1B1F7F|7F1F1B;
                        CMP.B #$1E                           ;83DEEB|C91E    |      ;
                        BNE CODE_83DEF2                      ;83DEED|D003    |83DEF2;
                        JMP.W CODE_83F4D8                    ;83DEEF|4CD8F4  |83F4D8;
@@ -11702,7 +11696,7 @@ fGetChickenDataPointer:
                        LDY.W #$0001                         ;83E0A9|A00100  |      ;
                        JSL.L CODE_848097                    ;83E0AC|22978084|848097;
                        REP #$20                             ;83E0B0|C220    |      ;
-                       LDA.L $7F1F37                        ;83E0B2|AF371F7F|7F1F37;
+                       LDA.L nFirstChildAge                 ;83E0B2|AF371F7F|7F1F37;
                        CMP.W #$003C                         ;83E0B6|C93C00  |      ;
                        BNE CODE_83E0C3                      ;83E0B9|D008    |83E0C3;
                        SEP #$20                             ;83E0BB|E220    |      ;
@@ -11839,7 +11833,7 @@ fGetChickenDataPointer:
           CODE_83E1BA:
                        SEP #$20                             ;83E1BA|E220    |      ;
                        REP #$10                             ;83E1BC|C210    |      ;
-                       LDA.L CurrentTimeID                  ;83E1BE|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83E1BE|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83E1C2|C906    |      ;
                        BNE CODE_83E210                      ;83E1C4|D04A    |83E210;
                        LDA.L $7F1F1D                        ;83E1C6|AF1D1F7F|7F1F1D;
@@ -11968,7 +11962,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83E2C8|AF6E1F7F|7F1F6E;
                        AND.W #$0004                         ;83E2CC|290400  |      ;
                        BEQ CODE_83E2E9                      ;83E2CF|F018    |83E2E9;
-                       LDA.L $7F1F37                        ;83E2D1|AF371F7F|7F1F37;
+                       LDA.L nFirstChildAge                 ;83E2D1|AF371F7F|7F1F37;
                        CMP.W #$003C                         ;83E2D5|C93C00  |      ;
                        BCC CODE_83E2E9                      ;83E2D8|900F    |83E2E9;
                        REP #$30                             ;83E2DA|C230    |      ;
@@ -11982,7 +11976,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83E2EB|AF6E1F7F|7F1F6E;
                        AND.W #$0008                         ;83E2EF|290800  |      ;
                        BEQ CODE_83E30C                      ;83E2F2|F018    |83E30C;
-                       LDA.L $7F1F39                        ;83E2F4|AF391F7F|7F1F39;
+                       LDA.L nSecondChildAge                ;83E2F4|AF391F7F|7F1F39;
                        CMP.W #$003C                         ;83E2F8|C93C00  |      ;
                        BCC CODE_83E30C                      ;83E2FB|900F    |83E30C;
                        REP #$30                             ;83E2FD|C230    |      ;
@@ -12019,16 +12013,16 @@ fGetChickenDataPointer:
           CODE_83E340:
                        SEP #$20                             ;83E340|E220    |      ;
                        REP #$10                             ;83E342|C210    |      ;
-                       LDA.L CurrentYearID                  ;83E344|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83E344|AF181F7F|7F1F18;
                        CMP.B #$01                           ;83E348|C901    |      ;
                        BNE CODE_83E380                      ;83E34A|D034    |83E380;
-                       LDA.L CurrentSeasonID                ;83E34C|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E34C|AF191F7F|7F1F19;
                        CMP.B #$01                           ;83E350|C901    |      ;
                        BNE CODE_83E380                      ;83E352|D02C    |83E380;
-                       LDA.L CurrentDay                     ;83E354|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E354|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;83E358|C901    |      ;
                        BNE CODE_83E380                      ;83E35A|D024    |83E380;
-                       LDA.L CurrentTimeID                  ;83E35C|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83E35C|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83E360|C906    |      ;
                        BNE CODE_83E380                      ;83E362|D01C    |83E380;
                        LDA.L $7F1F1D                        ;83E364|AF1D1F7F|7F1F1D;
@@ -12046,16 +12040,16 @@ fGetChickenDataPointer:
           CODE_83E380:
                        SEP #$20                             ;83E380|E220    |      ;
                        REP #$10                             ;83E382|C210    |      ;
-                       LDA.L CurrentYearID                  ;83E384|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83E384|AF181F7F|7F1F18;
                        CMP.B #$02                           ;83E388|C902    |      ;
                        BNE CODE_83E3C0                      ;83E38A|D034    |83E3C0;
-                       LDA.L CurrentSeasonID                ;83E38C|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E38C|AF191F7F|7F1F19;
                        CMP.B #$01                           ;83E390|C901    |      ;
                        BNE CODE_83E3C0                      ;83E392|D02C    |83E3C0;
-                       LDA.L CurrentDay                     ;83E394|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E394|AF1B1F7F|7F1F1B;
                        CMP.B #$1D                           ;83E398|C91D    |      ;
                        BNE CODE_83E3C0                      ;83E39A|D024    |83E3C0;
-                       LDA.L CurrentTimeID                  ;83E39C|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;83E39C|AF1C1F7F|7F1F1C;
                        CMP.B #$06                           ;83E3A0|C906    |      ;
                        BNE CODE_83E3C0                      ;83E3A2|D01C    |83E3C0;
                        LDA.L $7F1F1D                        ;83E3A4|AF1D1F7F|7F1F1D;
@@ -12073,9 +12067,9 @@ fGetChickenDataPointer:
           CODE_83E3C0:
                        SEP #$20                             ;83E3C0|E220    |      ;
                        REP #$10                             ;83E3C2|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83E3C4|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E3C4|AF191F7F|7F1F19;
                        BNE CODE_83E3E2                      ;83E3C8|D018    |83E3E2;
-                       LDA.L CurrentDay                     ;83E3CA|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E3CA|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;83E3CE|C901    |      ;
                        BNE CODE_83E3E2                      ;83E3D0|D010    |83E3E2;
                        REP #$30                             ;83E3D2|C230    |      ;
@@ -12089,10 +12083,10 @@ fGetChickenDataPointer:
           CODE_83E3E2:
                        SEP #$20                             ;83E3E2|E220    |      ;
                        REP #$10                             ;83E3E4|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83E3E6|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E3E6|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83E3EA|C903    |      ;
                        BNE CODE_83E406                      ;83E3EC|D018    |83E406;
-                       LDA.L CurrentDay                     ;83E3EE|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E3EE|AF1B1F7F|7F1F1B;
                        CMP.B #$18                           ;83E3F2|C918    |      ;
                        BNE CODE_83E406                      ;83E3F4|D010    |83E406;
                        REP #$30                             ;83E3F6|C230    |      ;
@@ -12148,10 +12142,10 @@ fGetChickenDataPointer:
           CODE_83E464:
                        SEP #$20                             ;83E464|E220    |      ;
                        REP #$10                             ;83E466|C210    |      ;
-                       LDA.L CurrentYearID                  ;83E468|AF181F7F|7F1F18;
+                       LDA.L nCurrentYearID                 ;83E468|AF181F7F|7F1F18;
                        BNE CODE_83E478                      ;83E46C|D00A    |83E478;
                        SEP #$20                             ;83E46E|E220    |      ;
-                       LDA.L CurrentSeasonID                ;83E470|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E470|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83E474|C903    |      ;
                        BNE CODE_83E4CA                      ;83E476|D052    |83E4CA;
                                                             ;      |        |      ;
@@ -12211,7 +12205,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83E4EF:
                        REP #$30                             ;83E4EF|C230    |      ;
-                       LDA.B $D8                            ;83E4F1|A5D8    |0000D8;
+                       LDA.B nPlayerPosY                    ;83E4F1|A5D8    |0000D8;
                        CMP.W #$0200                         ;83E4F3|C90002  |      ;
                        BCC CODE_83E535                      ;83E4F6|903D    |83E535;
                        REP #$30                             ;83E4F8|C230    |      ;
@@ -12228,7 +12222,7 @@ fGetChickenDataPointer:
                        AND.B $D2                            ;83E50C|25D2    |0000D2;
                        STA.B $D2                            ;83E50E|85D2    |0000D2;
                        SEP #$20                             ;83E510|E220    |      ;
-                       LDA.L CurrentSeasonID                ;83E512|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E512|AF191F7F|7F1F19;
                        STA.L $7F1F30                        ;83E516|8F301F7F|7F1F30;
                        REP #$30                             ;83E51A|C230    |      ;
                        LDA.W #$0078                         ;83E51C|A97800  |      ;
@@ -12269,7 +12263,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83E56B:
                        SEP #$20                             ;83E56B|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;83E56D|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;83E56D|AF1A1F7F|7F1F1A;
                        CMP.B #$06                           ;83E571|C906    |      ;
                        BNE CODE_83E585                      ;83E573|D010    |83E585;
                        REP #$30                             ;83E575|C230    |      ;
@@ -12358,10 +12352,10 @@ fGetChickenDataPointer:
           CODE_83E603:
                        SEP #$20                             ;83E603|E220    |      ;
                        REP #$10                             ;83E605|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83E607|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E607|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83E60B|C903    |      ;
                        BNE CODE_83E631                      ;83E60D|D022    |83E631;
-                       LDA.L CurrentDay                     ;83E60F|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E60F|AF1B1F7F|7F1F1B;
                        CMP.B #$18                           ;83E613|C918    |      ;
                        BNE CODE_83E631                      ;83E615|D01A    |83E631;
                        REP #$20                             ;83E617|C220    |      ;
@@ -12381,10 +12375,10 @@ fGetChickenDataPointer:
           CODE_83E632:
                        SEP #$20                             ;83E632|E220    |      ;
                        REP #$10                             ;83E634|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83E636|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E636|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83E63A|C903    |      ;
                        BNE CODE_83E660                      ;83E63C|D022    |83E660;
-                       LDA.L CurrentDay                     ;83E63E|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E63E|AF1B1F7F|7F1F1B;
                        CMP.B #$18                           ;83E642|C918    |      ;
                        BNE CODE_83E660                      ;83E644|D01A    |83E660;
                        REP #$20                             ;83E646|C220    |      ;
@@ -12404,10 +12398,10 @@ fGetChickenDataPointer:
           CODE_83E661:
                        SEP #$20                             ;83E661|E220    |      ;
                        REP #$10                             ;83E663|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83E665|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E665|AF191F7F|7F1F19;
                        CMP.B #$03                           ;83E669|C903    |      ;
                        BNE CODE_83E68F                      ;83E66B|D022    |83E68F;
-                       LDA.L CurrentDay                     ;83E66D|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E66D|AF1B1F7F|7F1F1B;
                        CMP.B #$18                           ;83E671|C918    |      ;
                        BNE CODE_83E68F                      ;83E673|D01A    |83E68F;
                        REP #$20                             ;83E675|C220    |      ;
@@ -12427,9 +12421,9 @@ fGetChickenDataPointer:
           CODE_83E690:
                        SEP #$20                             ;83E690|E220    |      ;
                        REP #$10                             ;83E692|C210    |      ;
-                       LDA.L CurrentSeasonID                ;83E694|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;83E694|AF191F7F|7F1F19;
                        BNE CODE_83E6B1                      ;83E698|D017    |83E6B1;
-                       LDA.L CurrentDay                     ;83E69A|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;83E69A|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;83E69E|C901    |      ;
                        BNE CODE_83E6B1                      ;83E6A0|D00F    |83E6B1;
                        REP #$30                             ;83E6A2|C230    |      ;
@@ -12489,7 +12483,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83E707|AF6E1F7F|7F1F6E;
                        AND.W #$0004                         ;83E70B|290400  |      ;
                        BEQ CODE_83E728                      ;83E70E|F018    |83E728;
-                       LDA.L $7F1F37                        ;83E710|AF371F7F|7F1F37;
+                       LDA.L nFirstChildAge                 ;83E710|AF371F7F|7F1F37;
                        CMP.W #$003C                         ;83E714|C93C00  |      ;
                        BCC CODE_83E728                      ;83E717|900F    |83E728;
                        REP #$30                             ;83E719|C230    |      ;
@@ -12503,7 +12497,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83E72A|AF6E1F7F|7F1F6E;
                        AND.W #$0008                         ;83E72E|290800  |      ;
                        BEQ CODE_83E74B                      ;83E731|F018    |83E74B;
-                       LDA.L $7F1F39                        ;83E733|AF391F7F|7F1F39;
+                       LDA.L nSecondChildAge                ;83E733|AF391F7F|7F1F39;
                        CMP.W #$003C                         ;83E737|C93C00  |      ;
                        BCC CODE_83E74B                      ;83E73A|900F    |83E74B;
                        REP #$30                             ;83E73C|C230    |      ;
@@ -12531,7 +12525,7 @@ fGetChickenDataPointer:
                        REP #$10                             ;83E76F|C210    |      ;
                        SEP #$20                             ;83E771|E220    |      ;
                        LDA.B #$07                           ;83E773|A907    |      ;
-                       STA.L CurrentTimeID                  ;83E775|8F1C1F7F|7F1F1C;
+                       STA.L nCurrentTimeID                 ;83E775|8F1C1F7F|7F1F1C;
                        LDA.B #$00                           ;83E779|A900    |      ;
                        STA.L $7F1F1D                        ;83E77B|8F1D1F7F|7F1F1D;
                        LDA.B #$00                           ;83E77F|A900    |      ;
@@ -12840,13 +12834,13 @@ fGetChickenDataPointer:
           CODE_83E955:
                        SEP #$20                             ;83E955|E220    |      ;
                        LDA.B #$3D                           ;83E957|A93D    |      ;
-                       STA.L $7F1F00                        ;83E959|8F001F7F|7F1F00;
+                       STA.L sShedItems                     ;83E959|8F001F7F|7F1F00;
                        LDA.B #$00                           ;83E95D|A900    |      ;
-                       STA.L $7F1F01                        ;83E95F|8F011F7F|7F1F01;
+                       STA.L sShedItems+1                   ;83E95F|8F011F7F|7F1F01;
                        LDA.B #$12                           ;83E963|A912    |      ;
-                       STA.L $7F1F02                        ;83E965|8F021F7F|7F1F02;
+                       STA.L sShedItems+2                   ;83E965|8F021F7F|7F1F02;
                        LDA.B #$00                           ;83E969|A900    |      ;
-                       STA.L $7F1F03                        ;83E96B|8F031F7F|7F1F03;
+                       STA.L sShedItems+3                   ;83E96B|8F031F7F|7F1F03;
                        STZ.W $0921                          ;83E96F|9C2109  |000921;
                        STZ.W $0923                          ;83E972|9C2309  |000923;
                        REP #$30                             ;83E975|C230    |      ;
@@ -12923,13 +12917,13 @@ fGetChickenDataPointer:
           CODE_83EA05:
                        SEP #$20                             ;83EA05|E220    |      ;
                        LDA.B #$0D                           ;83EA07|A90D    |      ;
-                       STA.L $7F1F00                        ;83EA09|8F001F7F|7F1F00;
+                       STA.L sShedItems                     ;83EA09|8F001F7F|7F1F00;
                        LDA.B #$64                           ;83EA0D|A964    |      ;
-                       STA.L $7F1F01                        ;83EA0F|8F011F7F|7F1F01;
+                       STA.L sShedItems+1                   ;83EA0F|8F011F7F|7F1F01;
                        LDA.B #$12                           ;83EA13|A912    |      ;
-                       STA.L $7F1F02                        ;83EA15|8F021F7F|7F1F02;
+                       STA.L sShedItems+2                   ;83EA15|8F021F7F|7F1F02;
                        LDA.B #$00                           ;83EA19|A900    |      ;
-                       STA.L $7F1F03                        ;83EA1B|8F031F7F|7F1F03;
+                       STA.L sShedItems+3                   ;83EA1B|8F031F7F|7F1F03;
                        STZ.W $0921                          ;83EA1F|9C2109  |000921;
                        STZ.W $0923                          ;83EA22|9C2309  |000923;
                        REP #$30                             ;83EA25|C230    |      ;
@@ -13132,7 +13126,7 @@ fGetChickenDataPointer:
                        REP #$10                             ;83EBA8|C210    |      ;
                        SEP #$20                             ;83EBAA|E220    |      ;
                        LDA.B #$06                           ;83EBAC|A906    |      ;
-                       STA.L CurrentTimeID                  ;83EBAE|8F1C1F7F|7F1F1C;
+                       STA.L nCurrentTimeID                 ;83EBAE|8F1C1F7F|7F1F1C;
                        LDA.B #$00                           ;83EBB2|A900    |      ;
                        STA.L $7F1F1D                        ;83EBB4|8F1D1F7F|7F1F1D;
                        LDA.B #$00                           ;83EBB8|A900    |      ;
@@ -13501,7 +13495,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EDF6:
                        REP #$30                             ;83EDF6|C230    |      ;
-                       LDA.L $7F1F4A                        ;83EDF8|AF4A1F7F|7F1F4A;
+                       LDA.L nStatShippedCorns              ;83EDF8|AF4A1F7F|7F1F4A;
                        CMP.W #$00C8                         ;83EDFC|C9C800  |      ;
                        BCC CODE_83EE19                      ;83EDFF|9018    |83EE19;
                        REP #$30                             ;83EE01|C230    |      ;
@@ -13517,7 +13511,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EE19:
                        REP #$30                             ;83EE19|C230    |      ;
-                       LDA.L $7F1F4C                        ;83EE1B|AF4C1F7F|7F1F4C;
+                       LDA.L nStatShippedTomatoes           ;83EE1B|AF4C1F7F|7F1F4C;
                        CMP.W #$00C8                         ;83EE1F|C9C800  |      ;
                        BCC CODE_83EE3C                      ;83EE22|9018    |83EE3C;
                        REP #$30                             ;83EE24|C230    |      ;
@@ -13533,7 +13527,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EE3C:
                        REP #$30                             ;83EE3C|C230    |      ;
-                       LDA.L $7F1F4E                        ;83EE3E|AF4E1F7F|7F1F4E;
+                       LDA.L nStatShippedTurnips            ;83EE3E|AF4E1F7F|7F1F4E;
                        CMP.W #$00C8                         ;83EE42|C9C800  |      ;
                        BCC CODE_83EE5F                      ;83EE45|9018    |83EE5F;
                        REP #$30                             ;83EE47|C230    |      ;
@@ -13549,7 +13543,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EE5F:
                        REP #$30                             ;83EE5F|C230    |      ;
-                       LDA.L $7F1F50                        ;83EE61|AF501F7F|7F1F50;
+                       LDA.L nStatShippedPotatoes           ;83EE61|AF501F7F|7F1F50;
                        CMP.W #$00C8                         ;83EE65|C9C800  |      ;
                        BCC CODE_83EE82                      ;83EE68|9018    |83EE82;
                        REP #$30                             ;83EE6A|C230    |      ;
@@ -13805,11 +13799,11 @@ fGetChickenDataPointer:
                        CMP.B #$0A                           ;83F09B|C90A    |      ;
                        BNE CODE_83F0E3                      ;83F09D|D044    |83F0E3;
                        REP #$20                             ;83F09F|C220    |      ;
-                       LDA.L $7F1F04                        ;83F0A1|AF041F7F|7F1F04;
+                       LDA.L nMoney                         ;83F0A1|AF041F7F|7F1F04;
                        CLC                                  ;83F0A5|18      |      ;
                        ADC.W #$FC18                         ;83F0A6|6918FC  |      ;
                        SEP #$20                             ;83F0A9|E220    |      ;
-                       LDA.L $7F1F06                        ;83F0AB|AF061F7F|7F1F06;
+                       LDA.L nMoney+2                       ;83F0AB|AF061F7F|7F1F06;
                        ADC.B #$FF                           ;83F0AF|69FF    |      ;
                        BMI CODE_83F0E3                      ;83F0B1|3030    |83F0E3;
                        REP #$20                             ;83F0B3|C220    |      ;
@@ -14021,7 +14015,7 @@ fGetChickenDataPointer:
                        REP #$20                             ;83F26D|C220    |      ;
                        LDA.W #$0000                         ;83F26F|A90000  |      ;
                        STA.L $7F1F54                        ;83F272|8F541F7F|7F1F54;
-                       LDA.L $7F1F04                        ;83F276|AF041F7F|7F1F04;
+                       LDA.L nMoney                         ;83F276|AF041F7F|7F1F04;
                        LSR A                                ;83F27A|4A      |      ;
                        LSR A                                ;83F27B|4A      |      ;
                        LSR A                                ;83F27C|4A      |      ;
@@ -14117,7 +14111,7 @@ fGetChickenDataPointer:
                        ADC.L $7F1F54                        ;83F33C|6F541F7F|7F1F54;
                        STA.L $7F1F54                        ;83F340|8F541F7F|7F1F54;
                        REP #$20                             ;83F344|C220    |      ;
-                       LDA.L $7F1F4C                        ;83F346|AF4C1F7F|7F1F4C;
+                       LDA.L nStatShippedTomatoes           ;83F346|AF4C1F7F|7F1F4C;
                        AND.W #$01FF                         ;83F34A|29FF01  |      ;
                        LSR A                                ;83F34D|4A      |      ;
                        LSR A                                ;83F34E|4A      |      ;
@@ -14127,7 +14121,7 @@ fGetChickenDataPointer:
                        ADC.L $7F1F54                        ;83F352|6F541F7F|7F1F54;
                        STA.L $7F1F54                        ;83F356|8F541F7F|7F1F54;
                        REP #$20                             ;83F35A|C220    |      ;
-                       LDA.L $7F1F4A                        ;83F35C|AF4A1F7F|7F1F4A;
+                       LDA.L nStatShippedCorns              ;83F35C|AF4A1F7F|7F1F4A;
                        AND.W #$01FF                         ;83F360|29FF01  |      ;
                        LSR A                                ;83F363|4A      |      ;
                        LSR A                                ;83F364|4A      |      ;
@@ -14137,7 +14131,7 @@ fGetChickenDataPointer:
                        ADC.L $7F1F54                        ;83F368|6F541F7F|7F1F54;
                        STA.L $7F1F54                        ;83F36C|8F541F7F|7F1F54;
                        REP #$20                             ;83F370|C220    |      ;
-                       LDA.L $7F1F50                        ;83F372|AF501F7F|7F1F50;
+                       LDA.L nStatShippedPotatoes           ;83F372|AF501F7F|7F1F50;
                        AND.W #$01FF                         ;83F376|29FF01  |      ;
                        LSR A                                ;83F379|4A      |      ;
                        LSR A                                ;83F37A|4A      |      ;
@@ -14147,7 +14141,7 @@ fGetChickenDataPointer:
                        ADC.L $7F1F54                        ;83F37E|6F541F7F|7F1F54;
                        STA.L $7F1F54                        ;83F382|8F541F7F|7F1F54;
                        REP #$20                             ;83F386|C220    |      ;
-                       LDA.L $7F1F4E                        ;83F388|AF4E1F7F|7F1F4E;
+                       LDA.L nStatShippedTurnips            ;83F388|AF4E1F7F|7F1F4E;
                        AND.W #$01FF                         ;83F38C|29FF01  |      ;
                        LSR A                                ;83F38F|4A      |      ;
                        LSR A                                ;83F390|4A      |      ;

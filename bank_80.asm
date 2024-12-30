@@ -2,7 +2,7 @@
                        ORG $808000                          ;      |        |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808000:
+      fUnknown_808000:
                        REP #$30                             ;808000|C230    |      ;
                        SEP #$20                             ;808002|E220    |      ;
                        LDA.B #$15                           ;808004|A915    |      ;
@@ -30,9 +30,9 @@
                        STA.W $019A                          ;808042|8D9A01  |00019A;
                        REP #$30                             ;808045|C230    |      ;
                        LDA.W #$0088                         ;808047|A98800  |      ;
-                       STA.W $017D                          ;80804A|8D7D01  |00017D;
+                       STA.W nDestinationX                  ;80804A|8D7D01  |00017D;
                        LDA.W #$0078                         ;80804D|A97800  |      ;
-                       STA.W $017F                          ;808050|8D7F01  |00017F;
+                       STA.W nDestinationY                  ;808050|8D7F01  |00017F;
                        SEP #$20                             ;808053|E220    |      ;
                        LDA.B #$15                           ;808055|A915    |      ;
                        STA.W $098B                          ;808057|8D8B09  |00098B;
@@ -69,9 +69,9 @@
                        JSL.L fUnknown_809671                ;80809B|22719680|809671;
                        JSL.L fUnknown_809A64                ;80809F|22649A80|809A64;
                        JSL.L CODE_828000                    ;8080A3|22008082|828000;
-                       JSL.L ReadText                       ;8080A7|221C9583|83951C;
+                       JSL.L fReadText                      ;8080A7|221C9583|83951C;
                        JSL.L fUnknown_80900C                ;8080AB|220C9080|80900C;
-                       JSL.L CODE_808E69                    ;8080AF|22698E80|808E69;
+                       JSL.L fUnknown_808E69                ;8080AF|22698E80|808E69;
                        JSL.L CODE_84C034                    ;8080B3|2234C084|84C034;
                        JSL.L CODE_81A383                    ;8080B7|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;8080BB|22B7BF81|81BFB7;
@@ -110,25 +110,25 @@
                        SEP #$20                             ;80810D|E220    |      ;
                        LDA.B #$00                           ;80810F|A900    |      ;
                        XBA                                  ;808111|EB      |      ;
-                       LDA.W $0885                          ;808112|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;808112|AD8508  |000885;
                        STA.W sPlayerNameShort               ;808115|8D8108  |000881;
                        REP #$20                             ;808118|C220    |      ;
                        STA.W sPlayerNameLong                ;80811A|8DD508  |0008D5;
                        SEP #$20                             ;80811D|E220    |      ;
-                       LDA.W $0886                          ;80811F|AD8608  |000886;
-                       STA.W $0882                          ;808122|8D8208  |000882;
+                       LDA.W sTempNameVariable+1            ;80811F|AD8608  |000886;
+                       STA.W sPlayerNameShort+1             ;808122|8D8208  |000882;
                        REP #$20                             ;808125|C220    |      ;
-                       STA.W $08D7                          ;808127|8DD708  |0008D7;
+                       STA.W sPlayerNameLong+2              ;808127|8DD708  |0008D7;
                        SEP #$20                             ;80812A|E220    |      ;
-                       LDA.W $0887                          ;80812C|AD8708  |000887;
-                       STA.W $0883                          ;80812F|8D8308  |000883;
+                       LDA.W sTempNameVariable+2            ;80812C|AD8708  |000887;
+                       STA.W sPlayerNameShort+2             ;80812F|8D8308  |000883;
                        REP #$20                             ;808132|C220    |      ;
-                       STA.W $08D9                          ;808134|8DD908  |0008D9;
+                       STA.W sPlayerNameLong+4              ;808134|8DD908  |0008D9;
                        SEP #$20                             ;808137|E220    |      ;
-                       LDA.W $0888                          ;808139|AD8808  |000888;
-                       STA.W $0884                          ;80813C|8D8408  |000884;
+                       LDA.W sTempNameVariable+3            ;808139|AD8808  |000888;
+                       STA.W sPlayerNameShort+3             ;80813C|8D8408  |000884;
                        REP #$20                             ;80813F|C220    |      ;
-                       STA.W $08DB                          ;808141|8DDB08  |0008DB;
+                       STA.W sPlayerNameLong+6              ;808141|8DDB08  |0008DB;
                        REP #$20                             ;808144|C220    |      ;
                        LDA.W $0196                          ;808146|AD9601  |000196;
                        ORA.W #$4000                         ;808149|090040  |      ;
@@ -160,16 +160,16 @@
                        SEP #$20                             ;808188|E220    |      ;
                        REP #$10                             ;80818A|C210    |      ;
                        LDY.W #$000C                         ;80818C|A00C00  |      ;
-                       LDA.W $0885                          ;80818F|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;80818F|AD8508  |000885;
                        STA.B [$72],Y                        ;808192|9772    |000072;
                        LDY.W #$000D                         ;808194|A00D00  |      ;
-                       LDA.W $0886                          ;808197|AD8608  |000886;
+                       LDA.W sTempNameVariable+1            ;808197|AD8608  |000886;
                        STA.B [$72],Y                        ;80819A|9772    |000072;
                        LDY.W #$000E                         ;80819C|A00E00  |      ;
-                       LDA.W $0887                          ;80819F|AD8708  |000887;
+                       LDA.W sTempNameVariable+2            ;80819F|AD8708  |000887;
                        STA.B [$72],Y                        ;8081A2|9772    |000072;
                        LDY.W #$000F                         ;8081A4|A00F00  |      ;
-                       LDA.W $0888                          ;8081A7|AD8808  |000888;
+                       LDA.W sTempNameVariable+3            ;8081A7|AD8808  |000888;
                        STA.B [$72],Y                        ;8081AA|9772    |000072;
                        REP #$20                             ;8081AC|C220    |      ;
                        LDA.W $0196                          ;8081AE|AD9601  |000196;
@@ -205,16 +205,16 @@
                        SEP #$20                             ;8081FB|E220    |      ;
                        REP #$10                             ;8081FD|C210    |      ;
                        LDY.W #$000C                         ;8081FF|A00C00  |      ;
-                       LDA.W $0885                          ;808202|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;808202|AD8508  |000885;
                        STA.B [$72],Y                        ;808205|9772    |000072;
                        LDY.W #$000D                         ;808207|A00D00  |      ;
-                       LDA.W $0886                          ;80820A|AD8608  |000886;
+                       LDA.W sTempNameVariable+1            ;80820A|AD8608  |000886;
                        STA.B [$72],Y                        ;80820D|9772    |000072;
                        LDY.W #$000E                         ;80820F|A00E00  |      ;
-                       LDA.W $0887                          ;808212|AD8708  |000887;
+                       LDA.W sTempNameVariable+2            ;808212|AD8708  |000887;
                        STA.B [$72],Y                        ;808215|9772    |000072;
                        LDY.W #$000F                         ;808217|A00F00  |      ;
-                       LDA.W $0888                          ;80821A|AD8808  |000888;
+                       LDA.W sTempNameVariable+3            ;80821A|AD8808  |000888;
                        STA.B [$72],Y                        ;80821D|9772    |000072;
                        REP #$20                             ;80821F|C220    |      ;
                        LDA.L $7F1F64                        ;808221|AF641F7F|7F1F64;
@@ -252,25 +252,25 @@
                        SEP #$20                             ;808274|E220    |      ;
                        LDA.B #$00                           ;808276|A900    |      ;
                        XBA                                  ;808278|EB      |      ;
-                       LDA.W $0885                          ;808279|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;808279|AD8508  |000885;
                        STA.W sDogNameShort                  ;80827C|8D9908  |000899;
                        REP #$20                             ;80827F|C220    |      ;
                        STA.W sDogNameLong                   ;808281|8DDD08  |0008DD;
                        SEP #$20                             ;808284|E220    |      ;
-                       LDA.W $0886                          ;808286|AD8608  |000886;
-                       STA.W $089A                          ;808289|8D9A08  |00089A;
+                       LDA.W sTempNameVariable+1            ;808286|AD8608  |000886;
+                       STA.W sDogNameShort+1                ;808289|8D9A08  |00089A;
                        REP #$20                             ;80828C|C220    |      ;
-                       STA.W $08DF                          ;80828E|8DDF08  |0008DF;
+                       STA.W sDogNameLong+2                 ;80828E|8DDF08  |0008DF;
                        SEP #$20                             ;808291|E220    |      ;
-                       LDA.W $0887                          ;808293|AD8708  |000887;
-                       STA.W $089B                          ;808296|8D9B08  |00089B;
+                       LDA.W sTempNameVariable+2            ;808293|AD8708  |000887;
+                       STA.W sDogNameShort+2                ;808296|8D9B08  |00089B;
                        REP #$20                             ;808299|C220    |      ;
-                       STA.W $08E1                          ;80829B|8DE108  |0008E1;
+                       STA.W sDogNameLong+4                 ;80829B|8DE108  |0008E1;
                        SEP #$20                             ;80829E|E220    |      ;
-                       LDA.W $0888                          ;8082A0|AD8808  |000888;
-                       STA.W $089C                          ;8082A3|8D9C08  |00089C;
+                       LDA.W sTempNameVariable+3            ;8082A0|AD8808  |000888;
+                       STA.W sDogNameShort+3                ;8082A3|8D9C08  |00089C;
                        REP #$20                             ;8082A6|C220    |      ;
-                       STA.W $08E3                          ;8082A8|8DE308  |0008E3;
+                       STA.W sDogNameLong+6                 ;8082A8|8DE308  |0008E3;
                        REP #$20                             ;8082AB|C220    |      ;
                        LDA.W $0196                          ;8082AD|AD9601  |000196;
                        ORA.W #$4000                         ;8082B0|090040  |      ;
@@ -299,25 +299,25 @@
                        SEP #$20                             ;8082E6|E220    |      ;
                        LDA.B #$00                           ;8082E8|A900    |      ;
                        XBA                                  ;8082EA|EB      |      ;
-                       LDA.W $0885                          ;8082EB|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;8082EB|AD8508  |000885;
                        STA.W sHorseNameShort                ;8082EE|8D9D08  |00089D;
                        REP #$20                             ;8082F1|C220    |      ;
                        STA.W sHorseNameLong                 ;8082F3|8DE508  |0008E5;
                        SEP #$20                             ;8082F6|E220    |      ;
-                       LDA.W $0886                          ;8082F8|AD8608  |000886;
-                       STA.W $089E                          ;8082FB|8D9E08  |00089E;
+                       LDA.W sTempNameVariable+1            ;8082F8|AD8608  |000886;
+                       STA.W sHorseNameShort+1              ;8082FB|8D9E08  |00089E;
                        REP #$20                             ;8082FE|C220    |      ;
-                       STA.W $08E7                          ;808300|8DE708  |0008E7;
+                       STA.W sHorseNameLong+2               ;808300|8DE708  |0008E7;
                        SEP #$20                             ;808303|E220    |      ;
-                       LDA.W $0887                          ;808305|AD8708  |000887;
-                       STA.W $089F                          ;808308|8D9F08  |00089F;
+                       LDA.W sTempNameVariable+2            ;808305|AD8708  |000887;
+                       STA.W sHorseNameShort+2              ;808308|8D9F08  |00089F;
                        REP #$20                             ;80830B|C220    |      ;
-                       STA.W $08E9                          ;80830D|8DE908  |0008E9;
+                       STA.W sHorseNameLong+4               ;80830D|8DE908  |0008E9;
                        SEP #$20                             ;808310|E220    |      ;
-                       LDA.W $0888                          ;808312|AD8808  |000888;
-                       STA.W $08A0                          ;808315|8DA008  |0008A0;
+                       LDA.W sTempNameVariable+3            ;808312|AD8808  |000888;
+                       STA.W sHorseNameShort+3              ;808315|8DA008  |0008A0;
                        REP #$20                             ;808318|C220    |      ;
-                       STA.W $08EB                          ;80831A|8DEB08  |0008EB;
+                       STA.W sHorseNameLong+6               ;80831A|8DEB08  |0008EB;
                        REP #$20                             ;80831D|C220    |      ;
                        LDA.W $0196                          ;80831F|AD9601  |000196;
                        ORA.W #$4000                         ;808322|090040  |      ;
@@ -346,25 +346,25 @@
                        SEP #$20                             ;808358|E220    |      ;
                        LDA.B #$00                           ;80835A|A900    |      ;
                        XBA                                  ;80835C|EB      |      ;
-                       LDA.W $0885                          ;80835D|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;80835D|AD8508  |000885;
                        STA.L sFirstChildNameShort           ;808360|8F3D1F7F|7F1F3D;
                        REP #$20                             ;808364|C220    |      ;
                        STA.W sFirstChildNameLong            ;808366|8DED08  |0008ED;
                        SEP #$20                             ;808369|E220    |      ;
-                       LDA.W $0886                          ;80836B|AD8608  |000886;
-                       STA.L $7F1F3E                        ;80836E|8F3E1F7F|7F1F3E;
+                       LDA.W sTempNameVariable+1            ;80836B|AD8608  |000886;
+                       STA.L sFirstChildNameShort+1         ;80836E|8F3E1F7F|7F1F3E;
                        REP #$20                             ;808372|C220    |      ;
-                       STA.W $08EF                          ;808374|8DEF08  |0008EF;
+                       STA.W sFirstChildNameLong+2          ;808374|8DEF08  |0008EF;
                        SEP #$20                             ;808377|E220    |      ;
-                       LDA.W $0887                          ;808379|AD8708  |000887;
-                       STA.L $7F1F3F                        ;80837C|8F3F1F7F|7F1F3F;
+                       LDA.W sTempNameVariable+2            ;808379|AD8708  |000887;
+                       STA.L sFirstChildNameShort+2         ;80837C|8F3F1F7F|7F1F3F;
                        REP #$20                             ;808380|C220    |      ;
-                       STA.W $08F1                          ;808382|8DF108  |0008F1;
+                       STA.W sFirstChildNameLong+4          ;808382|8DF108  |0008F1;
                        SEP #$20                             ;808385|E220    |      ;
-                       LDA.W $0888                          ;808387|AD8808  |000888;
-                       STA.L $7F1F40                        ;80838A|8F401F7F|7F1F40;
+                       LDA.W sTempNameVariable+3            ;808387|AD8808  |000888;
+                       STA.L sFirstChildNameShort+3         ;80838A|8F401F7F|7F1F40;
                        REP #$20                             ;80838E|C220    |      ;
-                       STA.W $08F3                          ;808390|8DF308  |0008F3;
+                       STA.W sFirstChildNameLong+6          ;808390|8DF308  |0008F3;
                        REP #$20                             ;808393|C220    |      ;
                        LDA.W $0196                          ;808395|AD9601  |000196;
                        ORA.W #$4000                         ;808398|090040  |      ;
@@ -393,25 +393,25 @@
                        SEP #$20                             ;8083CE|E220    |      ;
                        LDA.B #$00                           ;8083D0|A900    |      ;
                        XBA                                  ;8083D2|EB      |      ;
-                       LDA.W $0885                          ;8083D3|AD8508  |000885;
+                       LDA.W sTempNameVariable              ;8083D3|AD8508  |000885;
                        STA.L sSecondChildNameShort          ;8083D6|8F411F7F|7F1F41;
                        REP #$20                             ;8083DA|C220    |      ;
                        STA.W sSecondChildNameLong           ;8083DC|8DF508  |0008F5;
                        SEP #$20                             ;8083DF|E220    |      ;
-                       LDA.W $0886                          ;8083E1|AD8608  |000886;
-                       STA.L $7F1F42                        ;8083E4|8F421F7F|7F1F42;
+                       LDA.W sTempNameVariable+1            ;8083E1|AD8608  |000886;
+                       STA.L sSecondChildNameShort+1        ;8083E4|8F421F7F|7F1F42;
                        REP #$20                             ;8083E8|C220    |      ;
-                       STA.W $08F7                          ;8083EA|8DF708  |0008F7;
+                       STA.W sSecondChildNameLong+2         ;8083EA|8DF708  |0008F7;
                        SEP #$20                             ;8083ED|E220    |      ;
-                       LDA.W $0887                          ;8083EF|AD8708  |000887;
-                       STA.L $7F1F43                        ;8083F2|8F431F7F|7F1F43;
+                       LDA.W sTempNameVariable+2            ;8083EF|AD8708  |000887;
+                       STA.L sSecondChildNameShort+2        ;8083F2|8F431F7F|7F1F43;
                        REP #$20                             ;8083F6|C220    |      ;
-                       STA.W $08F9                          ;8083F8|8DF908  |0008F9;
+                       STA.W sSecondChildNameLong+4         ;8083F8|8DF908  |0008F9;
                        SEP #$20                             ;8083FB|E220    |      ;
-                       LDA.W $0888                          ;8083FD|AD8808  |000888;
-                       STA.L $7F1F44                        ;808400|8F441F7F|7F1F44;
+                       LDA.W sTempNameVariable+3            ;8083FD|AD8808  |000888;
+                       STA.L sSecondChildNameShort+3        ;808400|8F441F7F|7F1F44;
                        REP #$20                             ;808404|C220    |      ;
-                       STA.W $08FB                          ;808406|8DFB08  |0008FB;
+                       STA.W sSecondChildNameLong+6         ;808406|8DFB08  |0008FB;
                        REP #$20                             ;808409|C220    |      ;
                        LDA.W $0196                          ;80840B|AD9601  |000196;
                        ORA.W #$4000                         ;80840E|090040  |      ;
@@ -561,32 +561,32 @@
                        LDX.W #$0000                         ;8085A2|A20000  |      ;
                        LDA.W #$0000                         ;8085A5|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_8085A8:
+              .label0:
                        STA.W $0000,X                        ;8085A8|9D0000  |000000;
                        INX                                  ;8085AB|E8      |      ;
                        INX                                  ;8085AC|E8      |      ;
                        CPX.W #$2000                         ;8085AD|E00020  |      ;
-                       BNE CODE_8085A8                      ;8085B0|D0F6    |8085A8;
+                       BNE .label0                          ;8085B0|D0F6    |8085A8;
                        REP #$30                             ;8085B2|C230    |      ;
                        LDX.W #$0000                         ;8085B4|A20000  |      ;
                        LDA.W #$0000                         ;8085B7|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_8085BA:
+              .label1:
                        STA.L $7E2000,X                      ;8085BA|9F00207E|7E2000;
                        INX                                  ;8085BE|E8      |      ;
                        INX                                  ;8085BF|E8      |      ;
                        CPX.W #$E000                         ;8085C0|E000E0  |      ;
-                       BNE CODE_8085BA                      ;8085C3|D0F5    |8085BA;
+                       BNE .label1                          ;8085C3|D0F5    |8085BA;
                        REP #$30                             ;8085C5|C230    |      ;
                        LDX.W #$0000                         ;8085C7|A20000  |      ;
                        LDA.W #$0000                         ;8085CA|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_8085CD:
+              .label2:
                        STA.L $7F0000,X                      ;8085CD|9F00007F|7F0000;
                        INX                                  ;8085D1|E8      |      ;
                        INX                                  ;8085D2|E8      |      ;
                        CPX.W #$0000                         ;8085D3|E00000  |      ;
-                       BNE CODE_8085CD                      ;8085D6|D0F5    |8085CD;
+                       BNE .label2                          ;8085D6|D0F5    |8085CD;
                        STZ.W $0124                          ;8085D8|9C2401  |000124;
                        STZ.W $0128                          ;8085DB|9C2801  |000128;
                        STZ.W $0126                          ;8085DE|9C2601  |000126;
@@ -606,7 +606,7 @@
                        JSL.L CODE_838E32                    ;808604|22328E83|838E32;
                        JSL.L CODE_838598                    ;808608|22988583|838598;
                        JSL.L CODE_8384D3                    ;80860C|22D38483|8384D3;
-                       JSL.L CODE_808C4C                    ;808610|224C8C80|808C4C;
+                       JSL.L fInitializeScreenStatus        ;808610|224C8C80|808C4C;
                        JSL.L fZeroVRAM                      ;808614|22468880|808846;
                        JSL.L fZeroOAM                       ;808618|22878880|808887;
                        JSL.L fZeroCGRAM                     ;80861C|22808980|808980;
@@ -635,9 +635,9 @@
                        CLI                                  ;808651|58      |      ;
                        STZ.B $00                            ;808652|6400    |000000;
                                                             ;      |        |      ;
-          CODE_808654:
+              .label1:
                        LDA.B $00                            ;808654|A500    |000000;
-                       BEQ CODE_808654                      ;808656|F0FC    |808654;
+                       BEQ .label1                          ;808656|F0FC    |808654;
                        REP #$20                             ;808658|C220    |      ;
                        PLA                                  ;80865A|68      |      ;
                        PLP                                  ;80865B|28      |      ;
@@ -647,7 +647,7 @@
       fWaitForManyNMI:
                        PHP                                  ;80865D|08      |      ; A: nCount
                                                             ;      |        |      ;
-          CODE_80865E:
+              .label1:
                        REP #$20                             ;80865E|C220    |      ;
                        PHA                                  ;808660|48      |      ;
                        SEP #$20                             ;808661|E220    |      ;
@@ -656,14 +656,14 @@
                        CLI                                  ;808669|58      |      ;
                        STZ.B $00                            ;80866A|6400    |000000;
                                                             ;      |        |      ;
-          CODE_80866C:
+              .label2:
                        LDA.B $00                            ;80866C|A500    |000000;
-                       BEQ CODE_80866C                      ;80866E|F0FC    |80866C;
+                       BEQ .label2                          ;80866E|F0FC    |80866C;
                        REP #$20                             ;808670|C220    |      ;
                        PLA                                  ;808672|68      |      ;
                        DEC A                                ;808673|3A      |      ;
                        CMP.W #$0000                         ;808674|C90000  |      ;
-                       BNE CODE_80865E                      ;808677|D0E5    |80865E;
+                       BNE .label1                          ;808677|D0E5    |80865E;
                        PLP                                  ;808679|28      |      ;
                        RTL                                  ;80867A|6B      |      ;
                                                             ;      |        |      ;
@@ -864,7 +864,7 @@
                                                             ;      |        |      ;
               .label2:
                        LDA.B $25                            ;8087DE|A525    |000025;
-                       JSL.L CODE_808E2D                    ;8087E0|222D8E80|808E2D;
+                       JSL.L fSetBrightness                 ;8087E0|222D8E80|808E2D;
                        LDA.B $25                            ;8087E4|A525    |000025;
                        CMP.B $94                            ;8087E6|C594    |000094;
                        BEQ .label4                          ;8087E8|F012    |8087FC;
@@ -902,7 +902,7 @@
                                                             ;      |        |      ;
               .label2:
                        LDA.B $25                            ;80881A|A525    |000025;
-                       JSL.L CODE_808E2D                    ;80881C|222D8E80|808E2D;
+                       JSL.L fSetBrightness                 ;80881C|222D8E80|808E2D;
                        LDA.B $25                            ;808820|A525    |000025;
                        CMP.B $94                            ;808822|C594    |000094;
                        BEQ .label4                          ;808824|F012    |808838;
@@ -1438,7 +1438,7 @@ Table_WOBJLOG_Presets:
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;808C41|        |      ;
                        db $00,$00,$00                       ;808C49|        |      ;
                                                             ;      |        |      ;
-          CODE_808C4C:
+fInitializeScreenStatus:
                        PHP                                  ;808C4C|08      |      ;
                        REP #$10                             ;808C4D|C210    |      ;
                        SEP #$20                             ;808C4F|E220    |      ;
@@ -1448,7 +1448,7 @@ Table_WOBJLOG_Presets:
                        JMP.W fSetForceBlank                 ;808C56|4C0F8E  |808E0F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808C59:
+fManageGraphicsPresets:
                        PHP                                  ;808C59|08      |      ;
                        SEP #$30                             ;808C5A|E230    |      ;
                        STA.L $8019B6                        ;808C5C|8FB61980|8019B6;
@@ -1511,11 +1511,11 @@ Table_WOBJLOG_Presets:
                        STA.L $8019CE                        ;808D17|8FCE1980|8019CE;
                        SEP #$20                             ;808D1B|E220    |      ;
                        BIT.B $24                            ;808D1D|2424    |000024;
-                       BPL CODE_808D3B                      ;808D1F|101A    |808D3B;
+                       BPL .label2                          ;808D1F|101A    |808D3B;
                        PHX                                  ;808D21|DA      |      ;
                        LDX.B #$00                           ;808D22|A200    |      ;
                                                             ;      |        |      ;
-          CODE_808D24:
+              .label1:
                        STA.L SNES_BG1HOFS,X                 ;808D24|9F0D2100|00210D;
                        STA.L SNES_BG1HOFS,X                 ;808D28|9F0D2100|00210D;
                        STA.L SNES_BG1VOFS,X                 ;808D2C|9F0E2100|00210E;
@@ -1523,10 +1523,10 @@ Table_WOBJLOG_Presets:
                        INX                                  ;808D34|E8      |      ;
                        INX                                  ;808D35|E8      |      ;
                        CPX.B #$08                           ;808D36|E008    |      ;
-                       BNE CODE_808D24                      ;808D38|D0EA    |808D24;
+                       BNE .label1                          ;808D38|D0EA    |808D24;
                        PLX                                  ;808D3A|FA      |      ;
                                                             ;      |        |      ;
-          CODE_808D3B:
+              .label2:
                        STA.L $8019D0                        ;808D3B|8FD01980|8019D0;
                        STA.L SNES_M7SEL                     ;808D3F|8F1A2100|00211A;
                        LDA.L Table_W12SEL_Presets,X         ;808D43|BFE98B80|808BE9;
@@ -1606,14 +1606,14 @@ Table_WOBJLOG_Presets:
                        RTL                                  ;808E2C|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808E2D:
-                       PHP                                  ;808E2D|08      |      ;
+       fSetBrightness:
+                       PHP                                  ;808E2D|08      |      ; A: nBrightness
                        SEP #$20                             ;808E2E|E220    |      ;
                        AND.B #$0F                           ;808E30|290F    |      ;
-                       BNE CODE_808E36                      ;808E32|D002    |808E36;
+                       BNE .label1                          ;808E32|D002    |808E36;
                        LDA.B #$80                           ;808E34|A980    |      ;
                                                             ;      |        |      ;
-          CODE_808E36:
+              .label1:
                        STA.L $80007E                        ;808E36|8F7E0080|80007E;
                        LDA.B $24                            ;808E3A|A524    |000024;
                        AND.B #$80                           ;808E3C|2980    |      ;
@@ -1624,8 +1624,8 @@ Table_WOBJLOG_Presets:
                        RTL                                  ;808E47|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808E48:
-                       SEP #$30                             ;808E48|E230    |      ;
+      fUnknown_808E48:
+                       SEP #$30                             ;808E48|E230    |      ; A, X nIndex, Y, $72: ptr24
                        STA.W $015A,X                        ;808E4A|9D5A01  |00015A;
                        TYA                                  ;808E4D|98      |      ;
                        STA.W $016A,X                        ;808E4E|9D6A01  |00016A;
@@ -1635,17 +1635,17 @@ Table_WOBJLOG_Presets:
                        STA.B $7E                            ;808E57|857E    |00007E;
                        ASL A                                ;808E59|0A      |      ;
                        CLC                                  ;808E5A|18      |      ;
-                       ADC.B $7E                            ;808E5B|657E    |00007E;
+                       ADC.B $7E                            ;808E5B|657E    |00007E; X * 3
                        TAX                                  ;808E5D|AA      |      ;
                        LDA.B $72                            ;808E5E|A572    |000072;
-                       STA.B $42,X                          ;808E60|9542    |000042;
+                       STA.B ptrUnknown42,X                 ;808E60|9542    |000042; $72 -> $42
                        SEP #$20                             ;808E62|E220    |      ;
                        LDA.B $74                            ;808E64|A574    |000074;
-                       STA.B $44,X                          ;808E66|9544    |000044;
+                       STA.B ptrUnknown42+2,X               ;808E66|9544    |000044;
                        RTL                                  ;808E68|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808E69:
+      fUnknown_808E69:
                        REP #$30                             ;808E69|C230    |      ;
                        SEP #$20                             ;808E6B|E220    |      ;
                        STZ.B $92                            ;808E6D|6492    |000092;
@@ -1654,10 +1654,10 @@ Table_WOBJLOG_Presets:
                        REP #$20                             ;808E74|C220    |      ;
                        LDA.W $0196                          ;808E76|AD9601  |000196;
                        AND.W #$000A                         ;808E79|290A00  |      ;
-                       BNE CODE_808E81                      ;808E7C|D003    |808E81;
+                       BNE .label1                          ;808E7C|D003    |808E81;
                        LDY.W #$0004                         ;808E7E|A00400  |      ;
                                                             ;      |        |      ;
-          CODE_808E81:
+              .label1:
                        REP #$20                             ;808E81|C220    |      ;
                        TYA                                  ;808E83|98      |      ;
                        STA.B $7E                            ;808E84|857E    |00007E;
@@ -1665,50 +1665,50 @@ Table_WOBJLOG_Presets:
                        CLC                                  ;808E87|18      |      ;
                        ADC.B $7E                            ;808E88|657E    |00007E;
                        TAX                                  ;808E8A|AA      |      ;
-                       LDA.B $42,X                          ;808E8B|B542    |000042;
-                       BNE CODE_808E9D                      ;808E8D|D00E    |808E9D;
+                       LDA.B ptrUnknown42,X                 ;808E8B|B542    |000042;
+                       BNE .label2                          ;808E8D|D00E    |808E9D;
                        SEP #$20                             ;808E8F|E220    |      ;
-                       LDA.B $44,X                          ;808E91|B544    |000044;
-                       BNE CODE_808E9D                      ;808E93|D008    |808E9D;
+                       LDA.B ptrUnknown42+2,X               ;808E91|B544    |000044;
+                       BNE .label2                          ;808E93|D008    |808E9D;
                        CPY.W #$0004                         ;808E95|C00400  |      ;
-                       BCC CODE_808F19                      ;808E98|907F    |808F19;
-                       JMP.W CODE_808F2C                    ;808E9A|4C2C8F  |808F2C;
+                       BCC .label6                          ;808E98|907F    |808F19;
+                       JMP.W .label7                        ;808E9A|4C2C8F  |808F2C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808E9D:
+              .label2:
                        SEP #$20                             ;808E9D|E220    |      ;
                        LDA.B #$01                           ;808E9F|A901    |      ;
                        STA.B $93                            ;808EA1|8593    |000093;
                        REP #$20                             ;808EA3|C220    |      ;
                        PHY                                  ;808EA5|5A      |      ;
-                       LDA.B $42,X                          ;808EA6|B542    |000042;
+                       LDA.B ptrUnknown42,X                 ;808EA6|B542    |000042;
                        STA.B $72                            ;808EA8|8572    |000072;
                        SEP #$20                             ;808EAA|E220    |      ;
-                       LDA.B $44,X                          ;808EAC|B544    |000044;
+                       LDA.B ptrUnknown42+2,X               ;808EAC|B544    |000044;
                        STA.B $74                            ;808EAE|8574    |000074;
                        REP #$20                             ;808EB0|C220    |      ;
                        LDA.B [$72]                          ;808EB2|A772    |000072;
                        CMP.W #$FFFF                         ;808EB4|C9FFFF  |      ;
-                       BNE CODE_808EBC                      ;808EB7|D003    |808EBC;
-                       JMP.W CODE_808F57                    ;808EB9|4C578F  |808F57;
+                       BNE .notFFFF                         ;808EB7|D003    |808EBC;
+                       JMP.W .noMoreData                    ;808EB9|4C578F  |808F57;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808EBC:
+             .notFFFF:
                        CMP.W #$FFFE                         ;808EBC|C9FEFF  |      ;
-                       BNE CODE_808EC4                      ;808EBF|D003    |808EC4;
-                       JMP.W CODE_808F62                    ;808EC1|4C628F  |808F62;
+                       BNE .loop                            ;808EBF|D003    |808EC4;
+                       JMP.W .loadNextPointer               ;808EC1|4C628F  |808F62;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808EC4:
+                .loop:
                        PLY                                  ;808EC4|7A      |      ;
                        TYX                                  ;808EC5|BB      |      ;
                        SEP #$20                             ;808EC6|E220    |      ;
                        LDA.W $014A,X                        ;808EC8|BD4A01  |00014A;
-                       BEQ CODE_808ED0                      ;808ECB|F003    |808ED0;
-                       JMP.W CODE_808F52                    ;808ECD|4C528F  |808F52;
+                       BEQ .label5                          ;808ECB|F003    |808ED0;
+                       JMP.W .label8                        ;808ECD|4C528F  |808F52;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808ED0:
+              .label5:
                        PHY                                  ;808ED0|5A      |      ;
                        TYX                                  ;808ED1|BB      |      ;
                        LDA.B #$00                           ;808ED2|A900    |      ;
@@ -1743,16 +1743,16 @@ Table_WOBJLOG_Presets:
                        CLC                                  ;808F05|18      |      ;
                        ADC.B $7E                            ;808F06|657E    |00007E;
                        TAX                                  ;808F08|AA      |      ;
-                       LDA.B $42,X                          ;808F09|B542    |000042;
+                       LDA.B ptrUnknown42,X                 ;808F09|B542    |000042;
                        CLC                                  ;808F0B|18      |      ;
                        ADC.W #$0003                         ;808F0C|690300  |      ;
-                       STA.B $42,X                          ;808F0F|9542    |000042;
+                       STA.B ptrUnknown42,X                 ;808F0F|9542    |000042;
                        SEP #$20                             ;808F11|E220    |      ;
-                       LDA.B $44,X                          ;808F13|B544    |000044;
+                       LDA.B ptrUnknown42+2,X               ;808F13|B544    |000044;
                        ADC.B #$00                           ;808F15|6900    |      ;
-                       STA.B $44,X                          ;808F17|9544    |000044;
+                       STA.B ptrUnknown42+2,X               ;808F17|9544    |000044;
                                                             ;      |        |      ;
-          CODE_808F19:
+              .label6:
                        REP #$20                             ;808F19|C220    |      ;
                        TYA                                  ;808F1B|98      |      ;
                        STA.B $7E                            ;808F1C|857E    |00007E;
@@ -1762,14 +1762,14 @@ Table_WOBJLOG_Presets:
                        TAX                                  ;808F22|AA      |      ;
                        INY                                  ;808F23|C8      |      ;
                        CPY.W #$0010                         ;808F24|C01000  |      ;
-                       BEQ CODE_808F2C                      ;808F27|F003    |808F2C;
-                       JMP.W CODE_808E81                    ;808F29|4C818E  |808E81;
+                       BEQ .label7                          ;808F27|F003    |808F2C;
+                       JMP.W .label1                        ;808F29|4C818E  |808E81;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808F2C:
+              .label7:
                        SEP #$20                             ;808F2C|E220    |      ;
                        LDA.B $93                            ;808F2E|A593    |000093;
-                       BEQ CODE_808F51                      ;808F30|F01F    |808F51;
+                       BEQ .return                          ;808F30|F01F    |808F51;
                        LDA.B #$05                           ;808F32|A905    |      ;
                        STA.B $27                            ;808F34|8527    |000027;
                        LDA.B #$22                           ;808F36|A922    |      ;
@@ -1784,57 +1784,57 @@ Table_WOBJLOG_Presets:
                        STA.B $74                            ;808F4B|8574    |000074;
                        JSL.L fUnkown_808A33                 ;808F4D|22338A80|808A33;
                                                             ;      |        |      ;
-          CODE_808F51:
+              .return:
                        RTL                                  ;808F51|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808F52:
+              .label8:
                        DEC.W $014A,X                        ;808F52|DE4A01  |00014A;
-                       BRA CODE_808F19                      ;808F55|80C2    |808F19;
+                       BRA .label6                          ;808F55|80C2    |808F19;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808F57:
+          .noMoreData:
                        REP #$20                             ;808F57|C220    |      ;
-                       STZ.B $42,X                          ;808F59|7442    |000042;
+                       STZ.B ptrUnknown42,X                 ;808F59|7442    |000042;
                        SEP #$20                             ;808F5B|E220    |      ;
-                       STZ.B $44,X                          ;808F5D|7444    |000044;
-                       JMP.W CODE_808EC4                    ;808F5F|4CC48E  |808EC4;
+                       STZ.B ptrUnknown42+2,X               ;808F5D|7444    |000044;
+                       JMP.W .loop                          ;808F5F|4CC48E  |808EC4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_808F62:
+     .loadNextPointer:
                        REP #$20                             ;808F62|C220    |      ;
                        LDY.W #$0002                         ;808F64|A00200  |      ;
                        LDA.B [$72],Y                        ;808F67|B772    |000072;
-                       STA.B $42,X                          ;808F69|9542    |000042;
+                       STA.B ptrUnknown42,X                 ;808F69|9542    |000042;
                        INY                                  ;808F6B|C8      |      ;
                        INY                                  ;808F6C|C8      |      ;
                        SEP #$20                             ;808F6D|E220    |      ;
                        LDA.B [$72],Y                        ;808F6F|B772    |000072;
-                       STA.B $44,X                          ;808F71|9544    |000044;
+                       STA.B ptrUnknown42+2,X               ;808F71|9544    |000044;
                        REP #$20                             ;808F73|C220    |      ;
-                       LDA.B $42,X                          ;808F75|B542    |000042;
+                       LDA.B ptrUnknown42,X                 ;808F75|B542    |000042;
                        STA.B $72                            ;808F77|8572    |000072;
                        SEP #$20                             ;808F79|E220    |      ;
-                       LDA.B $44,X                          ;808F7B|B544    |000044;
+                       LDA.B ptrUnknown42+2,X               ;808F7B|B544    |000044;
                        STA.B $74                            ;808F7D|8574    |000074;
-                       JMP.W CODE_808EC4                    ;808F7F|4CC48E  |808EC4;
+                       JMP.W .loop                          ;808F7F|4CC48E  |808EC4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fZero42AtOffset:
-                       REP #$30                             ;808F82|C230    |      ; A: nOffset
+fZero42PointerAtIndex:
+                       REP #$30                             ;808F82|C230    |      ; A: nIndex
                        STA.B $7E                            ;808F84|857E    |00007E;
                        ASL A                                ;808F86|0A      |      ;
                        CLC                                  ;808F87|18      |      ;
                        ADC.B $7E                            ;808F88|657E    |00007E;
                        TAX                                  ;808F8A|AA      |      ;
-                       STZ.B $42,X                          ;808F8B|7442    |000042;
+                       STZ.B ptrUnknown42,X                 ;808F8B|7442    |000042;
                        SEP #$20                             ;808F8D|E220    |      ;
-                       STZ.B $44,X                          ;808F8F|7444    |000044;
+                       STZ.B ptrUnknown42+2,X               ;808F8F|7444    |000044;
                        RTL                                  ;808F91|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_808F92:
-                       REP #$30                             ;808F92|C230    |      ;
+fZero42PointersFromIndex:
+                       REP #$30                             ;808F92|C230    |      ; A: nIndex
                                                             ;      |        |      ;
                 .loop:
                        REP #$20                             ;808F94|C220    |      ;
@@ -1844,16 +1844,16 @@ Table_WOBJLOG_Presets:
                        CLC                                  ;808F9A|18      |      ;
                        ADC.B $7E                            ;808F9B|657E    |00007E;
                        TAX                                  ;808F9D|AA      |      ;
-                       STZ.B $42,X                          ;808F9E|7442    |000042;
+                       STZ.B ptrUnknown42,X                 ;808F9E|7442    |000042;
                        SEP #$20                             ;808FA0|E220    |      ;
-                       STZ.B $44,X                          ;808FA2|7444    |000044;
+                       STZ.B ptrUnknown42+2,X               ;808FA2|7444    |000044;
                        INY                                  ;808FA4|C8      |      ;
                        CPY.W #$0010                         ;808FA5|C01000  |      ;
                        BNE .loop                            ;808FA8|D0EA    |808F94;
                        RTL                                  ;808FAA|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_808FAB:
+   fZeroAll42Pointers:
                        REP #$30                             ;808FAB|C230    |      ;
                        LDY.W #$0000                         ;808FAD|A00000  |      ;
                                                             ;      |        |      ;
@@ -1865,9 +1865,9 @@ Table_WOBJLOG_Presets:
                        CLC                                  ;808FB6|18      |      ;
                        ADC.B $7E                            ;808FB7|657E    |00007E;
                        TAX                                  ;808FB9|AA      |      ;
-                       STZ.B $42,X                          ;808FBA|7442    |000042;
+                       STZ.B ptrUnknown42,X                 ;808FBA|7442    |000042;
                        SEP #$20                             ;808FBC|E220    |      ;
-                       STZ.B $44,X                          ;808FBE|7444    |000044;
+                       STZ.B ptrUnknown42+2,X               ;808FBE|7444    |000044;
                        INY                                  ;808FC0|C8      |      ;
                        CPY.W #$0010                         ;808FC1|C01000  |      ;
                        BNE .loop                            ;808FC4|D0EA    |808FB0;
@@ -1885,7 +1885,7 @@ Table_WOBJLOG_Presets:
                        REP #$20                             ;808FD5|C220    |      ;
                        STA.B $7E                            ;808FD7|857E    |00007E;
                        SEP #$20                             ;808FD9|E220    |      ;
-                       LDA.L CurrentTimeID                  ;808FDB|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;808FDB|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;808FDF|C912    |      ;
                        BCC .label1                          ;808FE1|900F    |808FF2;
                        REP #$20                             ;808FE3|C220    |      ;
@@ -1951,7 +1951,7 @@ Table_WOBJLOG_Presets:
                        LDA.W #$0100                         ;80903E|A90001  |      ;
                        STA.B $84                            ;809041|8584    |000084;
                        SEP #$20                             ;809043|E220    |      ;
-                       LDA.L CurrentTimeID                  ;809045|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809045|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;809049|C912    |      ;
                        BCC .is6PM                           ;80904B|9007    |809054;
                        REP #$20                             ;80904D|C220    |      ;
@@ -2371,7 +2371,7 @@ fLoadNextPalleteOnTime:
                        SEP #$20                             ;8092E2|E220    |      ;
                        REP #$10                             ;8092E4|C210    |      ;
                        LDX.W #$0000                         ;8092E6|A20000  |      ;
-                       LDA.L CurrentTimeID                  ;8092E9|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;8092E9|AF1C1F7F|7F1F1C;
                        CMP.B #$07                           ;8092ED|C907    |      ;
                        BCC .storeIndex                      ;8092EF|9010    |809301;
                        INX                                  ;8092F1|E8      |      ;
@@ -2426,7 +2426,7 @@ fUnknownEndAt6PM_809329:
                        LDA.B $22                            ;80934B|A522    |000022;
                        ASL A                                ;80934D|0A      |      ;
                        TAX                                  ;80934E|AA      |      ;
-                       LDA.L CurrentTimeID                  ;80934F|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;80934F|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;809353|C912    |      ;
                        BCC .time6PM                         ;809355|9001    |809358;
                        INX                                  ;809357|E8      |      ;
@@ -2479,7 +2479,7 @@ fUnknownEndAt6PM_809329:
                        SEP #$20                             ;8093A8|E220    |      ;
                        LDA.B $92                            ;8093AA|A592    |000092;
                        BNE .label1                          ;8093AC|D012    |8093C0;
-                       LDA.L CurrentTimeID                  ;8093AE|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;8093AE|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;8093B2|C912    |      ;
                        BCC .label2                          ;8093B4|9011    |8093C7;
                        LDA.B $22                            ;8093B6|A522    |000022;
@@ -2503,7 +2503,7 @@ fUnknownEndAt6PM_809329:
                                                             ;      |        |      ;
          .getSeasonId:
                        SEP #$20                             ;8093D3|E220    |      ;
-                       LDA.L CurrentSeasonID                ;8093D5|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;8093D5|AF191F7F|7F1F19;
                        REP #$20                             ;8093D9|C220    |      ;
                        STA.B $82                            ;8093DB|8582    |000082;
                        BRA .loadData                        ;8093DD|8012    |8093F1;
@@ -2561,7 +2561,7 @@ fUnknownEndAt6PM_809329:
                        SEP #$20                             ;80943F|E220    |      ;
                        LDA.B $92                            ;809441|A592    |000092;
                        BNE .label4                          ;809443|D012    |809457;
-                       LDA.L CurrentTimeID                  ;809445|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809445|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;809449|C912    |      ;
                        BCC .checkPregnacy                   ;80944B|9013    |809460;
                        LDA.B $22                            ;80944D|A522    |000022;
@@ -2674,7 +2674,7 @@ fTimePalleteRelated_809501:
                        SEP #$20                             ;809501|E220    |      ;
                        REP #$10                             ;809503|C210    |      ;
                        LDX.W #$0000                         ;809505|A20000  |      ;
-                       LDA.L CurrentTimeID                  ;809508|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809508|AF1C1F7F|7F1F1C;
                        CMP.B #$07                           ;80950C|C907    |      ;
                        BCC .findOffset                      ;80950E|9010    |809520;
                        INX                                  ;809510|E8      |      ;
@@ -2724,7 +2724,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;809553|E220    |      ;
                        REP #$10                             ;809555|C210    |      ;
                        LDX.W #$0000                         ;809557|A20000  |      ;
-                       LDA.L CurrentTimeID                  ;80955A|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;80955A|AF1C1F7F|7F1F1C;
                        CMP.B #$07                           ;80955E|C907    |      ;
                        BCC .findOffset                      ;809560|9010    |809572;
                        INX                                  ;809562|E8      |      ;
@@ -2759,7 +2759,7 @@ fSubrutinesExecute_809553:
                        CMP.W #$FFFF                         ;80958F|C9FFFF  |      ;
                        BEQ .load                            ;809592|F00A    |80959E;
                        SEP #$20                             ;809594|E220    |      ;
-                       LDA.L CurrentSeasonID                ;809596|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809596|AF191F7F|7F1F19;
                        CMP.B #$02                           ;80959A|C902    |      ;
                        BCC .return                          ;80959C|9014    |8095B2;
                                                             ;      |        |      ;
@@ -2811,7 +2811,7 @@ fSubrutinesExecute_809553:
                        CMP.B #$1E                           ;8095E4|C91E    |      ;
                        BEQ fUnknown_8095F5                  ;8095E6|F00D    |8095F5;
                        SEP #$20                             ;8095E8|E220    |      ;
-                       LDA.L CurrentTimeID                  ;8095EA|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;8095EA|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;8095EE|C912    |      ;
                        BCC fUnknown_8095F5                  ;8095F0|9003    |8095F5;
                        JMP.W fWriteFFto110                  ;8095F2|4C6996  |809669;
@@ -2844,7 +2844,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;809624|E220    |      ;
                        LDA.B #$00                           ;809626|A900    |      ;
                        XBA                                  ;809628|EB      |      ;
-                       LDA.L CurrentSeasonID                ;809629|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809629|AF191F7F|7F1F19;
                        REP #$20                             ;80962D|C220    |      ;
                        TAY                                  ;80962F|A8      |      ;
                        SEP #$20                             ;809630|E220    |      ;
@@ -2960,7 +2960,7 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;8096F2|C220    |      ;
                        LDA.W #$7000                         ;8096F4|A90070  |      ;
                        JSL.L fZero1000bytesFromVRAM         ;8096F7|22BC8980|8089BC;
-                       JSL.L fUnknown_808FAB                ;8096FB|22AB8F80|808FAB;
+                       JSL.L fZeroAll42Pointers             ;8096FB|22AB8F80|808FAB;
                        JSL.L fZero04and06                   ;8096FF|22669180|809166;
                        JSL.L CODE_858ED7                    ;809703|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;809707|220F8285|85820F;
@@ -2988,7 +2988,7 @@ fSubrutinesExecute_809553:
                        STZ.W nTimeState                     ;809735|9C7309  |000973;
                        REP #$30                             ;809738|C230    |      ;
                        LDY.W #$0001                         ;80973A|A00100  |      ;
-                       JSL.L CODE_80A7AE                    ;80973D|22AEA780|80A7AE;
+                       JSL.L fWriteMapGraphicsPointer       ;80973D|22AEA780|80A7AE;
                        SEP #$20                             ;809741|E220    |      ;
                        PHA                                  ;809743|48      |      ;
                        AND.B #$20                           ;809744|2920    |      ;
@@ -3035,7 +3035,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;80978D|E220    |      ;
                        LDA.B #$57                           ;80978F|A957    |      ;
                        STA.B $22                            ;809791|8522    |000022;
-                       JSL.L CODE_80A7C6                    ;809793|22C6A780|80A7C6;
+                       JSL.L nUnknown_80A7C6                ;809793|22C6A780|80A7C6;
                        REP #$20                             ;809797|C220    |      ;
                        SEP #$10                             ;809799|E210    |      ;
                        LDA.W #$B9D7                         ;80979B|A9D7B9  |      ;
@@ -3047,7 +3047,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0C                           ;8097A8|A90C    |      ;
                        LDX.B #$00                           ;8097AA|A200    |      ;
                        LDY.B #$00                           ;8097AC|A000    |      ;
-                       JSL.L CODE_808E48                    ;8097AE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;8097AE|22488E80|808E48;
                        REP #$20                             ;8097B2|C220    |      ;
                        SEP #$10                             ;8097B4|E210    |      ;
                        LDA.W #$B9DC                         ;8097B6|A9DCB9  |      ;
@@ -3059,7 +3059,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0D                           ;8097C3|A90D    |      ;
                        LDX.B #$01                           ;8097C5|A201    |      ;
                        LDY.B #$00                           ;8097C7|A000    |      ;
-                       JSL.L CODE_808E48                    ;8097C9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;8097C9|22488E80|808E48;
                        REP #$20                             ;8097CD|C220    |      ;
                        SEP #$10                             ;8097CF|E210    |      ;
                        LDA.W #$B9E2                         ;8097D1|A9E2B9  |      ;
@@ -3071,7 +3071,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0E                           ;8097DE|A90E    |      ;
                        LDX.B #$02                           ;8097E0|A202    |      ;
                        LDY.B #$00                           ;8097E2|A000    |      ;
-                       JSL.L CODE_808E48                    ;8097E4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;8097E4|22488E80|808E48;
                        REP #$20                             ;8097E8|C220    |      ;
                        SEP #$10                             ;8097EA|E210    |      ;
                        LDA.W #$B9DF                         ;8097EC|A9DFB9  |      ;
@@ -3083,7 +3083,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0F                           ;8097F9|A90F    |      ;
                        LDX.B #$03                           ;8097FB|A203    |      ;
                        LDY.B #$00                           ;8097FD|A000    |      ;
-                       JSL.L CODE_808E48                    ;8097FF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;8097FF|22488E80|808E48;
                        JMP.W .label8                        ;809803|4CA898  |8098A8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -3093,7 +3093,7 @@ fSubrutinesExecute_809553:
                        AND.W #$0004                         ;80980B|290400  |      ;
                        BEQ .label7                          ;80980E|F018    |809828;
                        SEP #$20                             ;809810|E220    |      ;
-                       LDA.L CurrentTimeID                  ;809812|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809812|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;809816|C911    |      ;
                        BCC .label6                          ;809818|9003    |80981D;
                        JMP.W .label8                        ;80981A|4CA898  |8098A8;
@@ -3102,7 +3102,7 @@ fSubrutinesExecute_809553:
               .label6:
                        LDA.B #$58                           ;80981D|A958    |      ;
                        STA.B $22                            ;80981F|8522    |000022;
-                       JSL.L CODE_80A7C6                    ;809821|22C6A780|80A7C6;
+                       JSL.L nUnknown_80A7C6                ;809821|22C6A780|80A7C6;
                        JMP.W .label8                        ;809825|4CA898  |8098A8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -3114,7 +3114,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;809832|E220    |      ;
                        LDA.B #$59                           ;809834|A959    |      ;
                        STA.B $22                            ;809836|8522    |000022;
-                       JSL.L CODE_80A7C6                    ;809838|22C6A780|80A7C6;
+                       JSL.L nUnknown_80A7C6                ;809838|22C6A780|80A7C6;
                        REP #$20                             ;80983C|C220    |      ;
                        SEP #$10                             ;80983E|E210    |      ;
                        LDA.W #$B9EA                         ;809840|A9EAB9  |      ;
@@ -3126,7 +3126,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0C                           ;80984D|A90C    |      ;
                        LDX.B #$00                           ;80984F|A200    |      ;
                        LDY.B #$00                           ;809851|A000    |      ;
-                       JSL.L CODE_808E48                    ;809853|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;809853|22488E80|808E48;
                        REP #$20                             ;809857|C220    |      ;
                        SEP #$10                             ;809859|E210    |      ;
                        LDA.W #$B9EF                         ;80985B|A9EFB9  |      ;
@@ -3138,7 +3138,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0D                           ;809868|A90D    |      ;
                        LDX.B #$01                           ;80986A|A201    |      ;
                        LDY.B #$00                           ;80986C|A000    |      ;
-                       JSL.L CODE_808E48                    ;80986E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80986E|22488E80|808E48;
                        REP #$20                             ;809872|C220    |      ;
                        SEP #$10                             ;809874|E210    |      ;
                        LDA.W #$B9F2                         ;809876|A9F2B9  |      ;
@@ -3150,7 +3150,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0E                           ;809883|A90E    |      ;
                        LDX.B #$02                           ;809885|A202    |      ;
                        LDY.B #$00                           ;809887|A000    |      ;
-                       JSL.L CODE_808E48                    ;809889|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;809889|22488E80|808E48;
                        REP #$20                             ;80988D|C220    |      ;
                        SEP #$10                             ;80988F|E210    |      ;
                        LDA.W #$B9F5                         ;809891|A9F5B9  |      ;
@@ -3162,7 +3162,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$0F                           ;80989E|A90F    |      ;
                        LDX.B #$03                           ;8098A0|A203    |      ;
                        LDY.B #$00                           ;8098A2|A000    |      ;
-                       JSL.L CODE_808E48                    ;8098A4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;8098A4|22488E80|808E48;
                                                             ;      |        |      ;
               .label8:
                        JSL.L CODE_8392BB                    ;8098A8|22BB9283|8392BB;
@@ -3170,12 +3170,12 @@ fSubrutinesExecute_809553:
                        PLA                                  ;8098AE|68      |      ;
                        STA.B $22                            ;8098AF|8522    |000022;
                        JSL.L CODE_82A5FB                    ;8098B1|22FBA582|82A5FB;
-                       JSL.L CODE_80A7C6                    ;8098B5|22C6A780|80A7C6;
+                       JSL.L nUnknown_80A7C6                ;8098B5|22C6A780|80A7C6;
                        JSL.L fLoadNextPalleteOnTime         ;8098B9|22E29280|8092E2;
                        JSL.L fUnknownEndAt6PM_809329        ;8098BD|22299380|809329;
                        JSL.L fSubrutinesExecute_809553      ;8098C1|22539580|809553;
                        JSL.L fLoadTimePallete               ;8098C5|22419280|809241;
-                       JSL.L CODE_808E69                    ;8098C9|22698E80|808E69;
+                       JSL.L fUnknown_808E69                ;8098C9|22698E80|808E69;
                        SEP #$20                             ;8098CD|E220    |      ;
                        REP #$10                             ;8098CF|C210    |      ;
                        LDA.B #$00                           ;8098D1|A900    |      ;
@@ -3216,9 +3216,9 @@ fSubrutinesExecute_809553:
                        LDA.W #$0000                         ;809924|A90000  |      ;
                        STA.L $7F1F7A                        ;809927|8F7A1F7F|7F1F7A;
                        STZ.W $0878                          ;80992B|9C7808  |000878;
-                       LDA.B $D6                            ;80992E|A5D6    |0000D6;
+                       LDA.B nPlayerPosX                    ;80992E|A5D6    |0000D6;
                        STA.W $0907                          ;809930|8D0709  |000907;
-                       LDA.B $D8                            ;809933|A5D8    |0000D8;
+                       LDA.B nPlayerPosY                    ;809933|A5D8    |0000D8;
                        STA.W $0909                          ;809935|8D0909  |000909;
                        SEP #$20                             ;809938|E220    |      ;
                        STZ.W $098A                          ;80993A|9C8A09  |00098A;
@@ -3463,7 +3463,7 @@ fSubrutinesExecute_809553:
                        BEQ .label10                         ;809B29|F00B    |809B36;
                        LDA.W $098B                          ;809B2B|AD8B09  |00098B;
                        CLC                                  ;809B2E|18      |      ;
-                       ADC.L CurrentSeasonID                ;809B2F|6F191F7F|7F1F19;
+                       ADC.L nCurrentSeasonID               ;809B2F|6F191F7F|7F1F19;
                        STA.W $098B                          ;809B33|8D8B09  |00098B;
                                                             ;      |        |      ;
              .label10:
@@ -3471,7 +3471,7 @@ fSubrutinesExecute_809553:
                        LDA.L aScreenTransitionTable,X       ;809B38|BFF5B680|80B6F5;
                        AND.B #$40                           ;809B3C|2940    |      ;
                        BEQ .label13                         ;809B3E|F03D    |809B7D;
-                       LDA.L CurrentDay                     ;809B40|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;809B40|AF1B1F7F|7F1F1B;
                        CMP.B #$01                           ;809B44|C901    |      ;
                        BEQ .label11                         ;809B46|F017    |809B5F;
                        CMP.B #$18                           ;809B48|C918    |      ;
@@ -3489,7 +3489,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label11:
                        SEP #$20                             ;809B5F|E220    |      ;
-                       LDA.L CurrentSeasonID                ;809B61|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809B61|AF191F7F|7F1F19;
                        BNE .label13                         ;809B65|D016    |809B7D;
                        LDA.B #$3A                           ;809B67|A93A    |      ;
                        STA.W $098B                          ;809B69|8D8B09  |00098B;
@@ -3498,7 +3498,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label12:
                        SEP #$20                             ;809B6E|E220    |      ;
-                       LDA.L CurrentSeasonID                ;809B70|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809B70|AF191F7F|7F1F19;
                        CMP.B #$03                           ;809B74|C903    |      ;
                        BNE .label13                         ;809B76|D005    |809B7D;
                        LDA.B #$39                           ;809B78|A939    |      ;
@@ -3516,7 +3516,7 @@ fSubrutinesExecute_809553:
                        LDA.L aScreenTransitionTable,X       ;809B88|BFF5B680|80B6F5;
                        AND.B #$02                           ;809B8C|2902    |      ;
                        BEQ .label15                         ;809B8E|F00A    |809B9A;
-                       LDA.L CurrentTimeID                  ;809B90|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809B90|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;809B94|C911    |      ;
                        BCC .label15                         ;809B96|9002    |809B9A;
                        BRA .label21                         ;809B98|807A    |809C14;
@@ -3527,7 +3527,7 @@ fSubrutinesExecute_809553:
                        LDA.L aScreenTransitionTable,X       ;809B9C|BFF5B680|80B6F5;
                        AND.B #$04                           ;809BA0|2904    |      ;
                        BEQ .label16                         ;809BA2|F00A    |809BAE;
-                       LDA.L CurrentTimeID                  ;809BA4|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809BA4|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;809BA8|C911    |      ;
                        BCS .label16                         ;809BAA|B002    |809BAE;
                        BRA .label21                         ;809BAC|8066    |809C14;
@@ -3538,7 +3538,7 @@ fSubrutinesExecute_809553:
                        LDA.L aScreenTransitionTable,X       ;809BB0|BFF5B680|80B6F5;
                        AND.B #$08                           ;809BB4|2908    |      ;
                        BEQ .label17                         ;809BB6|F00C    |809BC4;
-                       LDA.L CurrentWeekdayID               ;809BB8|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;809BB8|AF1A1F7F|7F1F1A;
                        BEQ .label17                         ;809BBC|F006    |809BC4;
                        CMP.B #$06                           ;809BBE|C906    |      ;
                        BEQ .label17                         ;809BC0|F002    |809BC4;
@@ -3550,10 +3550,10 @@ fSubrutinesExecute_809553:
                        LDA.L aScreenTransitionTable,X       ;809BC6|BFF5B680|80B6F5;
                        AND.B #$10                           ;809BCA|2910    |      ;
                        BEQ .label19                         ;809BCC|F01E    |809BEC;
-                       LDA.L CurrentSeasonID                ;809BCE|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809BCE|AF191F7F|7F1F19;
                        CMP.B #$03                           ;809BD2|C903    |      ;
                        BNE .label18                         ;809BD4|D00A    |809BE0;
-                       LDA.L CurrentDay                     ;809BD6|AF1B1F7F|7F1F1B;
+                       LDA.L nCurrentDay                    ;809BD6|AF1B1F7F|7F1F1B;
                        CMP.B #$0A                           ;809BDA|C90A    |      ;
                        BNE .label18                         ;809BDC|D002    |809BE0;
                        BRA .label21                         ;809BDE|8034    |809C14;
@@ -3561,7 +3561,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label18:
                        SEP #$20                             ;809BE0|E220    |      ;
-                       LDA.L CurrentWeekdayID               ;809BE2|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;809BE2|AF1A1F7F|7F1F1A;
                        CMP.B #$06                           ;809BE6|C906    |      ;
                        BNE .label19                         ;809BE8|D002    |809BEC;
                        BRA .label21                         ;809BEA|8028    |809C14;
@@ -3572,7 +3572,7 @@ fSubrutinesExecute_809553:
                        LDA.L aScreenTransitionTable,X       ;809BEE|BFF5B680|80B6F5;
                        AND.B #$20                           ;809BF2|2920    |      ;
                        BEQ .label20                         ;809BF4|F008    |809BFE;
-                       LDA.L CurrentWeekdayID               ;809BF6|AF1A1F7F|7F1F1A;
+                       LDA.L nCurrentWeekdayID              ;809BF6|AF1A1F7F|7F1F1A;
                        BNE .label20                         ;809BFA|D002    |809BFE;
                        BRA .label21                         ;809BFC|8016    |809C14;
                                                             ;      |        |      ;
@@ -3609,11 +3609,11 @@ fSubrutinesExecute_809553:
                        INX                                  ;809C35|E8      |      ;
                        REP #$20                             ;809C36|C220    |      ;
                        LDA.L aScreenTransitionTable,X       ;809C38|BFF5B680|80B6F5;
-                       STA.W $017D                          ;809C3C|8D7D01  |00017D;
+                       STA.W nDestinationX                  ;809C3C|8D7D01  |00017D;
                        INX                                  ;809C3F|E8      |      ;
                        INX                                  ;809C40|E8      |      ;
                        LDA.L aScreenTransitionTable,X       ;809C41|BFF5B680|80B6F5;
-                       STA.W $017F                          ;809C45|8D7F01  |00017F;
+                       STA.W nDestinationY                  ;809C45|8D7F01  |00017F;
                        SEP #$20                             ;809C48|E220    |      ;
                        LDA.B #$00                           ;809C4A|A900    |      ;
                        XBA                                  ;809C4C|EB      |      ;
@@ -3707,11 +3707,11 @@ fSubrutinesExecute_809553:
                        LDA.B $22                            ;809CE8|A522    |000022;
                        CMP.B #$10                           ;809CEA|C910    |      ;
                        BCS .label31                         ;809CEC|B011    |809CFF;
-                       LDA.L CurrentTimeID                  ;809CEE|AF1C1F7F|7F1F1C;
+                       LDA.L nCurrentTimeID                 ;809CEE|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;809CF2|C912    |      ;
                        BEQ .label31                         ;809CF4|F009    |809CFF;
                        INC A                                ;809CF6|1A      |      ;
-                       STA.L CurrentTimeID                  ;809CF7|8F1C1F7F|7F1F1C;
+                       STA.L nCurrentTimeID                 ;809CF7|8F1C1F7F|7F1F1C;
                        JSL.L CODE_8280AA                    ;809CFB|22AA8082|8280AA;
                                                             ;      |        |      ;
              .label31:
@@ -3886,7 +3886,7 @@ fSubrutinesExecute_809553:
               .caseF9:
                        SEP #$20                             ;809DFD|E220    |      ;
                        REP #$10                             ;809DFF|C210    |      ;
-                       LDA.L CurrentSeasonID                ;809E01|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809E01|AF191F7F|7F1F19;
                        BEQ .label54                         ;809E05|F003    |809E0A;
                        JMP.W .return2                       ;809E07|4CBB9E  |809EBB;
                                                             ;      |        |      ;
@@ -3921,7 +3921,7 @@ fSubrutinesExecute_809553:
               .caseFA:
                        SEP #$20                             ;809E3F|E220    |      ;
                        REP #$10                             ;809E41|C210    |      ;
-                       LDA.L CurrentSeasonID                ;809E43|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809E43|AF191F7F|7F1F19;
                        CMP.B #$02                           ;809E47|C902    |      ;
                        BNE .return2                         ;809E49|D070    |809EBB;
                        LDA.B #$10                           ;809E4B|A910    |      ;
@@ -3949,7 +3949,7 @@ fSubrutinesExecute_809553:
               .case7B:
                        SEP #$20                             ;809E7D|E220    |      ;
                        REP #$10                             ;809E7F|C210    |      ;
-                       LDA.L CurrentSeasonID                ;809E81|AF191F7F|7F1F19;
+                       LDA.L nCurrentSeasonID               ;809E81|AF191F7F|7F1F19;
                        CMP.B #$03                           ;809E85|C903    |      ;
                        BNE .return2                         ;809E87|D032    |809EBB;
                        LDA.B #$10                           ;809E89|A910    |      ;
@@ -3980,7 +3980,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
       fUnknown_809EBC:
                        REP #$30                             ;809EBC|C230    |      ;
-                       LDA.B $D6                            ;809EBE|A5D6    |0000D6;
+                       LDA.B nPlayerPosX                    ;809EBE|A5D6    |0000D6;
                        SEC                                  ;809EC0|38      |      ;
                        SBC.W #$0080                         ;809EC1|E98000  |      ;
                        CMP.B $ED                            ;809EC4|C5ED    |0000ED;
@@ -4030,7 +4030,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
               .label4:
                        REP #$20                             ;809F0E|C220    |      ;
-                       LDA.B $D8                            ;809F10|A5D8    |0000D8;
+                       LDA.B nPlayerPosY                    ;809F10|A5D8    |0000D8;
                        SEC                                  ;809F12|38      |      ;
                        SBC.W #$0080                         ;809F13|E98000  |      ;
                        CMP.B $EF                            ;809F16|C5EF    |0000EF;
@@ -4354,7 +4354,7 @@ fSubrutinesExecute_809553:
                        CLC                                  ;80A112|18      |      ;
                        ADC.B $21                            ;80A113|6521    |000021;
                        STA.B $21                            ;80A115|8521    |000021;
-                       JSL.L CODE_80A308                    ;80A117|2208A380|80A308;
+                       JSL.L fUnknown_80A308                ;80A117|2208A380|80A308;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;80A11B|6B      |      ;
@@ -4387,7 +4387,7 @@ fSubrutinesExecute_809553:
                        SEC                                  ;80A148|38      |      ;
                        SBC.B #$08                           ;80A149|E908    |      ;
                        STA.B $20                            ;80A14B|8520    |000020;
-                       JSL.L CODE_80A481                    ;80A14D|2281A480|80A481;
+                       JSL.L fUnknown_80A481                ;80A14D|2281A480|80A481;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;80A151|6B      |      ;
@@ -4644,33 +4644,33 @@ fSubrutinesExecute_809553:
                        RTL                                  ;80A307|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A308:
+      fUnknown_80A308:
                        REP #$30                             ;80A308|C230    |      ;
                        LDA.B $12                            ;80A30A|A512    |000012;
                        CMP.W #$0020                         ;80A30C|C92000  |      ;
-                       BCC CODE_80A32C                      ;80A30F|901B    |80A32C;
+                       BCC .case0020                        ;80A30F|901B    |80A32C;
                        CMP.W #$0040                         ;80A311|C94000  |      ;
-                       BCC CODE_80A336                      ;80A314|9020    |80A336;
+                       BCC .case0040                        ;80A314|9020    |80A336;
                        CMP.W #$0060                         ;80A316|C96000  |      ;
-                       BCC CODE_80A346                      ;80A319|902B    |80A346;
+                       BCC .case0060                        ;80A319|902B    |80A346;
                        CMP.W #$0080                         ;80A31B|C98000  |      ;
-                       BCC CODE_80A356                      ;80A31E|9036    |80A356;
+                       BCC .case0080                        ;80A31E|9036    |80A356;
                        CMP.W #$00A0                         ;80A320|C9A000  |      ;
-                       BCC CODE_80A369                      ;80A323|9044    |80A369;
+                       BCC .case00A0                        ;80A323|9044    |80A369;
                        CMP.W #$00C0                         ;80A325|C9C000  |      ;
-                       BCC CODE_80A37C                      ;80A328|9052    |80A37C;
-                       BRA CODE_80A395                      ;80A32A|8069    |80A395;
+                       BCC .case00C0                        ;80A328|9052    |80A37C;
+                       BRA .continue                        ;80A32A|8069    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A32C:
+            .case0020:
                        STZ.B $7E                            ;80A32C|647E    |00007E;
                        STZ.B $80                            ;80A32E|6480    |000080;
                        STZ.B $82                            ;80A330|6482    |000082;
                        STZ.B $84                            ;80A332|6484    |000084;
-                       BRA CODE_80A395                      ;80A334|805F    |80A395;
+                       BRA .continue                        ;80A334|805F    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A336:
+            .case0040:
                        LDA.B $12                            ;80A336|A512    |000012;
                        SEC                                  ;80A338|38      |      ;
                        SBC.W #$0020                         ;80A339|E92000  |      ;
@@ -4678,10 +4678,10 @@ fSubrutinesExecute_809553:
                        STA.B $80                            ;80A33E|8580    |000080;
                        STZ.B $82                            ;80A340|6482    |000082;
                        STZ.B $84                            ;80A342|6484    |000084;
-                       BRA CODE_80A395                      ;80A344|804F    |80A395;
+                       BRA .continue                        ;80A344|804F    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A346:
+            .case0060:
                        LDA.B $12                            ;80A346|A512    |000012;
                        SEC                                  ;80A348|38      |      ;
                        SBC.W #$0020                         ;80A349|E92000  |      ;
@@ -4689,10 +4689,10 @@ fSubrutinesExecute_809553:
                        STA.B $80                            ;80A34E|8580    |000080;
                        STZ.B $82                            ;80A350|6482    |000082;
                        STZ.B $84                            ;80A352|6484    |000084;
-                       BRA CODE_80A395                      ;80A354|803F    |80A395;
+                       BRA .continue                        ;80A354|803F    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A356:
+            .case0080:
                        LDA.W #$0080                         ;80A356|A98000  |      ;
                        STA.B $7E                            ;80A359|857E    |00007E;
                        STZ.B $80                            ;80A35B|6480    |000080;
@@ -4701,10 +4701,10 @@ fSubrutinesExecute_809553:
                        SBC.W #$0060                         ;80A360|E96000  |      ;
                        STA.B $82                            ;80A363|8582    |000082;
                        STA.B $84                            ;80A365|8584    |000084;
-                       BRA CODE_80A395                      ;80A367|802C    |80A395;
+                       BRA .continue                        ;80A367|802C    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A369:
+            .case00A0:
                        LDA.W #$0080                         ;80A369|A98000  |      ;
                        STA.B $7E                            ;80A36C|857E    |00007E;
                        STZ.B $80                            ;80A36E|6480    |000080;
@@ -4713,10 +4713,10 @@ fSubrutinesExecute_809553:
                        SBC.W #$0060                         ;80A373|E96000  |      ;
                        STA.B $82                            ;80A376|8582    |000082;
                        STA.B $84                            ;80A378|8584    |000084;
-                       BRA CODE_80A395                      ;80A37A|8019    |80A395;
+                       BRA .continue                        ;80A37A|8019    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A37C:
+            .case00C0:
                        LDA.B $12                            ;80A37C|A512    |000012;
                        SEC                                  ;80A37E|38      |      ;
                        SBC.W #$0020                         ;80A37F|E92000  |      ;
@@ -4728,10 +4728,10 @@ fSubrutinesExecute_809553:
                        LDA.W #$0080                         ;80A38C|A98000  |      ;
                        STA.B $82                            ;80A38F|8582    |000082;
                        STZ.B $84                            ;80A391|6484    |000084;
-                       BRA CODE_80A395                      ;80A393|8000    |80A395;
+                       BRA .continue                        ;80A393|8000    |80A395;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A395:
+            .continue:
                        LDA.B $1C                            ;80A395|A51C    |00001C;
                        LSR A                                ;80A397|4A      |      ;
                        LSR A                                ;80A398|4A      |      ;
@@ -4752,28 +4752,28 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;80A3B4|C220    |      ;
                        LDX.W #$0000                         ;80A3B6|A20000  |      ;
                                                             ;      |        |      ;
-          CODE_80A3B9:
+              .label1:
                        PHX                                  ;80A3B9|DA      |      ;
                        LDA.B $80                            ;80A3BA|A580    |000080;
                        CMP.W #$0040                         ;80A3BC|C94000  |      ;
-                       BNE CODE_80A3CB                      ;80A3BF|D00A    |80A3CB;
+                       BNE .label2                          ;80A3BF|D00A    |80A3CB;
                        STZ.B $80                            ;80A3C1|6480    |000080;
                        LDA.B $7E                            ;80A3C3|A57E    |00007E;
                        CLC                                  ;80A3C5|18      |      ;
                        ADC.W #$0040                         ;80A3C6|694000  |      ;
                        STA.B $7E                            ;80A3C9|857E    |00007E;
                                                             ;      |        |      ;
-          CODE_80A3CB:
+              .label2:
                        LDA.B $84                            ;80A3CB|A584    |000084;
                        CMP.W #$0040                         ;80A3CD|C94000  |      ;
-                       BNE CODE_80A3DC                      ;80A3D0|D00A    |80A3DC;
+                       BNE .label3                          ;80A3D0|D00A    |80A3DC;
                        STZ.B $84                            ;80A3D2|6484    |000084;
                        LDA.B $82                            ;80A3D4|A582    |000082;
                        CLC                                  ;80A3D6|18      |      ;
                        ADC.W #$0040                         ;80A3D7|694000  |      ;
                        STA.B $82                            ;80A3DA|8582    |000082;
                                                             ;      |        |      ;
-          CODE_80A3DC:
+              .label3:
                        LDY.B $7E                            ;80A3DC|A47E    |00007E;
                        LDX.B $80                            ;80A3DE|A680    |000080;
                        LDA.B [$72],Y                        ;80A3E0|B772    |000072;
@@ -4794,7 +4794,7 @@ fSubrutinesExecute_809553:
                        INX                                  ;80A3FF|E8      |      ;
                        INX                                  ;80A400|E8      |      ;
                        CPX.W #$0040                         ;80A401|E04000  |      ;
-                       BNE CODE_80A3B9                      ;80A404|D0B3    |80A3B9;
+                       BNE .label1                          ;80A404|D0B3    |80A3B9;
                        SEP #$20                             ;80A406|E220    |      ;
                        LDA.B #$00                           ;80A408|A900    |      ;
                        STA.B $27                            ;80A40A|8527    |000027;
@@ -4843,48 +4843,48 @@ fSubrutinesExecute_809553:
                        SEC                                  ;80A468|38      |      ;
                        SBC.W #$0020                         ;80A469|E92000  |      ;
                        CMP.W #$FFE0                         ;80A46C|C9E0FF  |      ;
-                       BNE CODE_80A476                      ;80A46F|D005    |80A476;
+                       BNE .label4                          ;80A46F|D005    |80A476;
                        LDA.W #$0BE0                         ;80A471|A9E00B  |      ;
-                       BRA CODE_80A47E                      ;80A474|8008    |80A47E;
+                       BRA .return                          ;80A474|8008    |80A47E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A476:
+              .label4:
                        CMP.W #$07E0                         ;80A476|C9E007  |      ;
-                       BNE CODE_80A47E                      ;80A479|D003    |80A47E;
+                       BNE .return                          ;80A479|D003    |80A47E;
                        LDA.W #$03E0                         ;80A47B|A9E003  |      ;
                                                             ;      |        |      ;
-          CODE_80A47E:
+              .return:
                        STA.B $14                            ;80A47E|8514    |000014;
                        RTL                                  ;80A480|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A481:
+      fUnknown_80A481:
                        REP #$30                             ;80A481|C230    |      ;
                        LDA.B $16                            ;80A483|A516    |000016;
                        CMP.W #$1000                         ;80A485|C90010  |      ;
-                       BCC CODE_80A4A6                      ;80A488|901C    |80A4A6;
+                       BCC .case0100                        ;80A488|901C    |80A4A6;
                        CMP.W #$2000                         ;80A48A|C90020  |      ;
-                       BCC CODE_80A4B1                      ;80A48D|9022    |80A4B1;
+                       BCC .case0200                        ;80A48D|9022    |80A4B1;
                        CMP.W #$3000                         ;80A48F|C90030  |      ;
-                       BCC CODE_80A4C6                      ;80A492|9032    |80A4C6;
+                       BCC .case0300                        ;80A492|9032    |80A4C6;
                        CMP.W #$4000                         ;80A494|C90040  |      ;
-                       BCC CODE_80A4DB                      ;80A497|9042    |80A4DB;
+                       BCC .case0400                        ;80A497|9042    |80A4DB;
                        CMP.W #$5000                         ;80A499|C90050  |      ;
-                       BCC CODE_80A4F3                      ;80A49C|9055    |80A4F3;
+                       BCC .case0500                        ;80A49C|9055    |80A4F3;
                        CMP.W #$6000                         ;80A49E|C90060  |      ;
-                       BCC CODE_80A50B                      ;80A4A1|9068    |80A50B;
-                       JMP.W CODE_80A529                    ;80A4A3|4C29A5  |80A529;
+                       BCC .case0600                        ;80A4A1|9068    |80A50B;
+                       JMP.W .continue                      ;80A4A3|4C29A5  |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A4A6:
+            .case0100:
                        STZ.B $7E                            ;80A4A6|647E    |00007E;
                        STZ.B $80                            ;80A4A8|6480    |000080;
                        STZ.B $82                            ;80A4AA|6482    |000082;
                        STZ.B $84                            ;80A4AC|6484    |000084;
-                       JMP.W CODE_80A529                    ;80A4AE|4C29A5  |80A529;
+                       JMP.W .continue                      ;80A4AE|4C29A5  |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A4B1:
+            .case0200:
                        LDA.B $16                            ;80A4B1|A516    |000016;
                        SEC                                  ;80A4B3|38      |      ;
                        SBC.W #$1000                         ;80A4B4|E90010  |      ;
@@ -4895,10 +4895,10 @@ fSubrutinesExecute_809553:
                        STA.B $80                            ;80A4BE|8580    |000080;
                        STZ.B $82                            ;80A4C0|6482    |000082;
                        STZ.B $84                            ;80A4C2|6484    |000084;
-                       BRA CODE_80A529                      ;80A4C4|8063    |80A529;
+                       BRA .continue                        ;80A4C4|8063    |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A4C6:
+            .case0300:
                        LDA.B $16                            ;80A4C6|A516    |000016;
                        SEC                                  ;80A4C8|38      |      ;
                        SBC.W #$1000                         ;80A4C9|E90010  |      ;
@@ -4909,10 +4909,10 @@ fSubrutinesExecute_809553:
                        STA.B $80                            ;80A4D3|8580    |000080;
                        STZ.B $82                            ;80A4D5|6482    |000082;
                        STZ.B $84                            ;80A4D7|6484    |000084;
-                       BRA CODE_80A529                      ;80A4D9|804E    |80A529;
+                       BRA .continue                        ;80A4D9|804E    |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A4DB:
+            .case0400:
                        LDA.W #$4000                         ;80A4DB|A90040  |      ;
                        STA.B $7E                            ;80A4DE|857E    |00007E;
                        STZ.B $80                            ;80A4E0|6480    |000080;
@@ -4924,10 +4924,10 @@ fSubrutinesExecute_809553:
                        AND.W #$001F                         ;80A4EB|291F00  |      ;
                        ASL A                                ;80A4EE|0A      |      ;
                        STA.B $84                            ;80A4EF|8584    |000084;
-                       BRA CODE_80A529                      ;80A4F1|8036    |80A529;
+                       BRA .continue                        ;80A4F1|8036    |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A4F3:
+            .case0500:
                        LDA.W #$4000                         ;80A4F3|A90040  |      ;
                        STA.B $7E                            ;80A4F6|857E    |00007E;
                        STZ.B $80                            ;80A4F8|6480    |000080;
@@ -4939,10 +4939,10 @@ fSubrutinesExecute_809553:
                        AND.W #$001F                         ;80A503|291F00  |      ;
                        ASL A                                ;80A506|0A      |      ;
                        STA.B $84                            ;80A507|8584    |000084;
-                       BRA CODE_80A529                      ;80A509|801E    |80A529;
+                       BRA .continue                        ;80A509|801E    |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A50B:
+            .case0600:
                        LDA.B $16                            ;80A50B|A516    |000016;
                        SEC                                  ;80A50D|38      |      ;
                        SBC.W #$1000                         ;80A50E|E90010  |      ;
@@ -4957,10 +4957,10 @@ fSubrutinesExecute_809553:
                        LDA.W #$4000                         ;80A520|A90040  |      ;
                        STA.B $82                            ;80A523|8582    |000082;
                        STZ.B $84                            ;80A525|6484    |000084;
-                       BRA CODE_80A529                      ;80A527|8000    |80A529;
+                       BRA .continue                        ;80A527|8000    |80A529;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A529:
+            .continue:
                        LDA.W #$2000                         ;80A529|A90020  |      ;
                        CLC                                  ;80A52C|18      |      ;
                        ADC.B $12                            ;80A52D|6512    |000012;
@@ -4975,28 +4975,28 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;80A541|C220    |      ;
                        LDX.W #$0000                         ;80A543|A20000  |      ;
                                                             ;      |        |      ;
-          CODE_80A546:
+              .label1:
                        PHX                                  ;80A546|DA      |      ;
                        LDA.B $80                            ;80A547|A580    |000080;
                        CMP.W #$0040                         ;80A549|C94000  |      ;
-                       BNE CODE_80A558                      ;80A54C|D00A    |80A558;
+                       BNE .label2                          ;80A54C|D00A    |80A558;
                        STZ.B $80                            ;80A54E|6480    |000080;
                        LDA.B $7E                            ;80A550|A57E    |00007E;
                        CLC                                  ;80A552|18      |      ;
                        ADC.W #$2000                         ;80A553|690020  |      ;
                        STA.B $7E                            ;80A556|857E    |00007E;
                                                             ;      |        |      ;
-          CODE_80A558:
+              .label2:
                        LDA.B $84                            ;80A558|A584    |000084;
                        CMP.W #$0040                         ;80A55A|C94000  |      ;
-                       BNE CODE_80A569                      ;80A55D|D00A    |80A569;
+                       BNE .label3                          ;80A55D|D00A    |80A569;
                        STZ.B $84                            ;80A55F|6484    |000084;
                        LDA.B $82                            ;80A561|A582    |000082;
                        CLC                                  ;80A563|18      |      ;
                        ADC.W #$2000                         ;80A564|690020  |      ;
                        STA.B $82                            ;80A567|8582    |000082;
                                                             ;      |        |      ;
-          CODE_80A569:
+              .label3:
                        LDY.B $7E                            ;80A569|A47E    |00007E;
                        LDX.B $80                            ;80A56B|A680    |000080;
                        LDA.B [$72],Y                        ;80A56D|B772    |000072;
@@ -5021,7 +5021,7 @@ fSubrutinesExecute_809553:
                        INX                                  ;80A594|E8      |      ;
                        INX                                  ;80A595|E8      |      ;
                        CPX.W #$0040                         ;80A596|E04000  |      ;
-                       BNE CODE_80A546                      ;80A599|D0AB    |80A546;
+                       BNE .label1                          ;80A599|D0AB    |80A546;
                        SEP #$20                             ;80A59B|E220    |      ;
                        LDA.B #$00                           ;80A59D|A900    |      ;
                        STA.B $27                            ;80A59F|8527    |000027;
@@ -5070,17 +5070,17 @@ fSubrutinesExecute_809553:
                        CLC                                  ;80A5FE|18      |      ;
                        ADC.W #$0001                         ;80A5FF|690100  |      ;
                        CMP.W #$0020                         ;80A602|C92000  |      ;
-                       BNE CODE_80A60C                      ;80A605|D005    |80A60C;
+                       BNE .label4                          ;80A605|D005    |80A60C;
                        LDA.W #$0400                         ;80A607|A90004  |      ;
-                       BRA CODE_80A614                      ;80A60A|8008    |80A614;
+                       BRA .return                          ;80A60A|8008    |80A614;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A60C:
+              .label4:
                        CMP.W #$0420                         ;80A60C|C92004  |      ;
-                       BNE CODE_80A614                      ;80A60F|D003    |80A614;
+                       BNE .return                          ;80A60F|D003    |80A614;
                        LDA.W #$0000                         ;80A611|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_80A614:
+              .return:
                        STA.B $10                            ;80A614|8510    |000010;
                        RTL                                  ;80A616|6B      |      ;
                                                             ;      |        |      ;
@@ -5089,29 +5089,29 @@ fSubrutinesExecute_809553:
                        REP #$30                             ;80A617|C230    |      ;
                        LDA.B $16                            ;80A619|A516    |000016;
                        CMP.W #$1000                         ;80A61B|C90010  |      ;
-                       BCC CODE_80A63C                      ;80A61E|901C    |80A63C;
+                       BCC .case1000                        ;80A61E|901C    |80A63C;
                        CMP.W #$2000                         ;80A620|C90020  |      ;
-                       BCC CODE_80A646                      ;80A623|9021    |80A646;
+                       BCC .case2000                        ;80A623|9021    |80A646;
                        CMP.W #$3000                         ;80A625|C90030  |      ;
-                       BCC CODE_80A65B                      ;80A628|9031    |80A65B;
+                       BCC .case3000                        ;80A628|9031    |80A65B;
                        CMP.W #$4000                         ;80A62A|C90040  |      ;
-                       BCC CODE_80A670                      ;80A62D|9041    |80A670;
+                       BCC .case4000                        ;80A62D|9041    |80A670;
                        CMP.W #$5000                         ;80A62F|C90050  |      ;
-                       BCC CODE_80A688                      ;80A632|9054    |80A688;
+                       BCC .case5000                        ;80A632|9054    |80A688;
                        CMP.W #$6000                         ;80A634|C90060  |      ;
-                       BCC CODE_80A6A0                      ;80A637|9067    |80A6A0;
-                       JMP.W CODE_80A6BE                    ;80A639|4CBEA6  |80A6BE;
+                       BCC .case6000                        ;80A637|9067    |80A6A0;
+                       JMP.W .continue                      ;80A639|4CBEA6  |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A63C:
+            .case1000:
                        STZ.B $7E                            ;80A63C|647E    |00007E;
                        STZ.B $80                            ;80A63E|6480    |000080;
                        STZ.B $82                            ;80A640|6482    |000082;
                        STZ.B $84                            ;80A642|6484    |000084;
-                       BRA CODE_80A6BE                      ;80A644|8078    |80A6BE;
+                       BRA .continue                        ;80A644|8078    |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A646:
+            .case2000:
                        LDA.B $16                            ;80A646|A516    |000016;
                        SEC                                  ;80A648|38      |      ;
                        SBC.W #$1000                         ;80A649|E90010  |      ;
@@ -5122,10 +5122,10 @@ fSubrutinesExecute_809553:
                        STA.B $80                            ;80A653|8580    |000080;
                        STZ.B $82                            ;80A655|6482    |000082;
                        STZ.B $84                            ;80A657|6484    |000084;
-                       BRA CODE_80A6BE                      ;80A659|8063    |80A6BE;
+                       BRA .continue                        ;80A659|8063    |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A65B:
+            .case3000:
                        LDA.B $16                            ;80A65B|A516    |000016;
                        SEC                                  ;80A65D|38      |      ;
                        SBC.W #$1000                         ;80A65E|E90010  |      ;
@@ -5136,10 +5136,10 @@ fSubrutinesExecute_809553:
                        STA.B $80                            ;80A668|8580    |000080;
                        STZ.B $82                            ;80A66A|6482    |000082;
                        STZ.B $84                            ;80A66C|6484    |000084;
-                       BRA CODE_80A6BE                      ;80A66E|804E    |80A6BE;
+                       BRA .continue                        ;80A66E|804E    |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A670:
+            .case4000:
                        LDA.W #$4000                         ;80A670|A90040  |      ;
                        STA.B $7E                            ;80A673|857E    |00007E;
                        STZ.B $80                            ;80A675|6480    |000080;
@@ -5151,10 +5151,10 @@ fSubrutinesExecute_809553:
                        AND.W #$001F                         ;80A680|291F00  |      ;
                        ASL A                                ;80A683|0A      |      ;
                        STA.B $84                            ;80A684|8584    |000084;
-                       BRA CODE_80A6BE                      ;80A686|8036    |80A6BE;
+                       BRA .continue                        ;80A686|8036    |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A688:
+            .case5000:
                        LDA.W #$4000                         ;80A688|A90040  |      ;
                        STA.B $7E                            ;80A68B|857E    |00007E;
                        STZ.B $80                            ;80A68D|6480    |000080;
@@ -5166,10 +5166,10 @@ fSubrutinesExecute_809553:
                        AND.W #$001F                         ;80A698|291F00  |      ;
                        ASL A                                ;80A69B|0A      |      ;
                        STA.B $84                            ;80A69C|8584    |000084;
-                       BRA CODE_80A6BE                      ;80A69E|801E    |80A6BE;
+                       BRA .continue                        ;80A69E|801E    |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A6A0:
+            .case6000:
                        LDA.B $16                            ;80A6A0|A516    |000016;
                        SEC                                  ;80A6A2|38      |      ;
                        SBC.W #$1000                         ;80A6A3|E90010  |      ;
@@ -5184,10 +5184,10 @@ fSubrutinesExecute_809553:
                        LDA.W #$4000                         ;80A6B5|A90040  |      ;
                        STA.B $82                            ;80A6B8|8582    |000082;
                        STZ.B $84                            ;80A6BA|6484    |000084;
-                       BRA CODE_80A6BE                      ;80A6BC|8000    |80A6BE;
+                       BRA .continue                        ;80A6BC|8000    |80A6BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A6BE:
+            .continue:
                        LDA.W #$2000                         ;80A6BE|A90020  |      ;
                        CLC                                  ;80A6C1|18      |      ;
                        ADC.B $12                            ;80A6C2|6512    |000012;
@@ -5204,28 +5204,28 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;80A6D8|C220    |      ;
                        LDX.W #$0000                         ;80A6DA|A20000  |      ;
                                                             ;      |        |      ;
-          CODE_80A6DD:
+              .label1:
                        PHX                                  ;80A6DD|DA      |      ;
                        LDA.B $80                            ;80A6DE|A580    |000080;
                        CMP.W #$0040                         ;80A6E0|C94000  |      ;
-                       BNE CODE_80A6EF                      ;80A6E3|D00A    |80A6EF;
+                       BNE .label2                          ;80A6E3|D00A    |80A6EF;
                        STZ.B $80                            ;80A6E5|6480    |000080;
                        LDA.B $7E                            ;80A6E7|A57E    |00007E;
                        CLC                                  ;80A6E9|18      |      ;
                        ADC.W #$2000                         ;80A6EA|690020  |      ;
                        STA.B $7E                            ;80A6ED|857E    |00007E;
                                                             ;      |        |      ;
-          CODE_80A6EF:
+              .label2:
                        LDA.B $84                            ;80A6EF|A584    |000084;
                        CMP.W #$0040                         ;80A6F1|C94000  |      ;
-                       BNE CODE_80A700                      ;80A6F4|D00A    |80A700;
+                       BNE .label3                          ;80A6F4|D00A    |80A700;
                        STZ.B $84                            ;80A6F6|6484    |000084;
                        LDA.B $82                            ;80A6F8|A582    |000082;
                        CLC                                  ;80A6FA|18      |      ;
                        ADC.W #$2000                         ;80A6FB|690020  |      ;
                        STA.B $82                            ;80A6FE|8582    |000082;
                                                             ;      |        |      ;
-          CODE_80A700:
+              .label3:
                        LDY.B $7E                            ;80A700|A47E    |00007E;
                        LDX.B $80                            ;80A702|A680    |000080;
                        LDA.B [$72],Y                        ;80A704|B772    |000072;
@@ -5250,7 +5250,7 @@ fSubrutinesExecute_809553:
                        INX                                  ;80A72B|E8      |      ;
                        INX                                  ;80A72C|E8      |      ;
                        CPX.W #$0040                         ;80A72D|E04000  |      ;
-                       BNE CODE_80A6DD                      ;80A730|D0AB    |80A6DD;
+                       BNE .label1                          ;80A730|D0AB    |80A6DD;
                        SEP #$20                             ;80A732|E220    |      ;
                        LDA.B #$00                           ;80A734|A900    |      ;
                        STA.B $27                            ;80A736|8527    |000027;
@@ -5299,23 +5299,23 @@ fSubrutinesExecute_809553:
                        SEC                                  ;80A795|38      |      ;
                        SBC.W #$0001                         ;80A796|E90100  |      ;
                        CMP.W #$FFFF                         ;80A799|C9FFFF  |      ;
-                       BNE CODE_80A7A3                      ;80A79C|D005    |80A7A3;
+                       BNE .label4                          ;80A79C|D005    |80A7A3;
                        LDA.W #$041F                         ;80A79E|A91F04  |      ;
-                       BRA CODE_80A7AB                      ;80A7A1|8008    |80A7AB;
+                       BRA .return                          ;80A7A1|8008    |80A7AB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A7A3:
+              .label4:
                        CMP.W #$03FF                         ;80A7A3|C9FF03  |      ;
-                       BNE CODE_80A7AB                      ;80A7A6|D003    |80A7AB;
+                       BNE .return                          ;80A7A6|D003    |80A7AB;
                        LDA.W #$001F                         ;80A7A8|A91F00  |      ;
                                                             ;      |        |      ;
-          CODE_80A7AB:
+              .return:
                        STA.B $10                            ;80A7AB|8510    |000010;
                        RTL                                  ;80A7AD|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A7AE:
-                       SEP #$20                             ;80A7AE|E220    |      ;
+fWriteMapGraphicsPointer:
+                       SEP #$20                             ;80A7AE|E220    |      ; $22: nIndex, Y: nFieldOffset, return A: nValue, $18: pMapGraphics
                        REP #$10                             ;80A7B0|C210    |      ;
                        LDA.B #$00                           ;80A7B2|A900    |      ;
                        XBA                                  ;80A7B4|EB      |      ;
@@ -5330,7 +5330,7 @@ fSubrutinesExecute_809553:
                        RTL                                  ;80A7C5|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A7C6:
+      nUnknown_80A7C6:
                        SEP #$20                             ;80A7C6|E220    |      ;
                        REP #$10                             ;80A7C8|C210    |      ;
                        LDA.B #$00                           ;80A7CA|A900    |      ;
@@ -5345,10 +5345,10 @@ fSubrutinesExecute_809553:
                        LDY.W #$0000                         ;80A7DB|A00000  |      ;
                        LDA.B $22                            ;80A7DE|A522    |000022;
                        CMP.B #$57                           ;80A7E0|C957    |      ;
-                       BCS CODE_80A812                      ;80A7E2|B02E    |80A812;
+                       BCS .label2                          ;80A7E2|B02E    |80A812;
                        LDA.B ($18),Y                        ;80A7E4|B118    |000018;
                        STA.W $0195                          ;80A7E6|8D9501  |000195;
-                       JSL.L CODE_808C59                    ;80A7E9|22598C80|808C59;
+                       JSL.L fManageGraphicsPresets         ;80A7E9|22598C80|808C59;
                        REP #$30                             ;80A7ED|C230    |      ;
                        INY                                  ;80A7EF|C8      |      ;
                        LDA.B ($18),Y                        ;80A7F0|B118    |000018;
@@ -5357,18 +5357,18 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;80A7F8|C220    |      ;
                        LDA.L $7F1F5C                        ;80A7FA|AF5C1F7F|7F1F5C;
                        AND.W #$0001                         ;80A7FE|290100  |      ;
-                       BEQ CODE_80A80E                      ;80A801|F00B    |80A80E;
+                       BEQ .label1                          ;80A801|F00B    |80A80E;
                        REP #$30                             ;80A803|C230    |      ;
                        LDA.W $0196                          ;80A805|AD9601  |000196;
                        AND.W #$FFDF                         ;80A808|29DFFF  |      ;
                        STA.W $0196                          ;80A80B|8D9601  |000196;
                                                             ;      |        |      ;
-          CODE_80A80E:
+              .label1:
                        REP #$30                             ;80A80E|C230    |      ;
                        INY                                  ;80A810|C8      |      ;
                        INY                                  ;80A811|C8      |      ;
                                                             ;      |        |      ;
-          CODE_80A812:
+              .label2:
                        SEP #$20                             ;80A812|E220    |      ;
                        LDA.B ($18),Y                        ;80A814|B118    |000018;
                        STA.W $0181                          ;80A816|8D8101  |000181;
@@ -5376,24 +5376,24 @@ fSubrutinesExecute_809553:
                        LDA.B ($18),Y                        ;80A81A|B118    |000018;
                        STA.W $0182                          ;80A81C|8D8201  |000182;
                        CMP.B #$03                           ;80A81F|C903    |      ;
-                       BCC CODE_80A82E                      ;80A821|900B    |80A82E;
+                       BCC .label3                          ;80A821|900B    |80A82E;
                        REP #$20                             ;80A823|C220    |      ;
                        LDA.W $0196                          ;80A825|AD9601  |000196;
                        ORA.W #$0001                         ;80A828|090100  |      ;
                        STA.W $0196                          ;80A82B|8D9601  |000196;
                                                             ;      |        |      ;
-          CODE_80A82E:
+              .label3:
                        SEP #$20                             ;80A82E|E220    |      ;
                        INY                                  ;80A830|C8      |      ;
-                       LDA.B ($18),Y                        ;80A831|B118    |000018;
+                       LDA.B ($18),Y                        ;80A831|B118    |000018; nNumberOfTilemaps
                        STA.B $92                            ;80A833|8592    |000092;
                        INY                                  ;80A835|C8      |      ;
                        LDA.B ($18),Y                        ;80A836|B118    |000018;
-                       STA.B $93                            ;80A838|8593    |000093;
+                       STA.B $93                            ;80A838|8593    |000093; nNumberOfCharactermaps
                        INY                                  ;80A83A|C8      |      ;
                        LDA.B $22                            ;80A83B|A522    |000022;
                        CMP.B #$57                           ;80A83D|C957    |      ;
-                       BCS CODE_80A85B                      ;80A83F|B01A    |80A85B;
+                       BCS .label4                          ;80A83F|B01A    |80A85B;
                        REP #$20                             ;80A841|C220    |      ;
                        LDA.B ($18),Y                        ;80A843|B118    |000018;
                        STA.B $ED                            ;80A845|85ED    |0000ED;
@@ -5412,18 +5412,18 @@ fSubrutinesExecute_809553:
                        INY                                  ;80A859|C8      |      ;
                        INY                                  ;80A85A|C8      |      ;
                                                             ;      |        |      ;
-          CODE_80A85B:
+              .label4:
                        SEP #$20                             ;80A85B|E220    |      ;
                        LDA.B $92                            ;80A85D|A592    |000092;
-                       BEQ CODE_80A8BE                      ;80A85F|F05D    |80A8BE;
+                       BEQ .charactermaps                   ;80A85F|F05D    |80A8BE;
                                                             ;      |        |      ;
-          CODE_80A861:
+            .tilemaps:
                        REP #$20                             ;80A861|C220    |      ;
-                       LDA.B ($18),Y                        ;80A863|B118    |000018;
+                       LDA.B ($18),Y                        ;80A863|B118    |000018; nDestinationAddress
                        PHA                                  ;80A865|48      |      ;
                        INY                                  ;80A866|C8      |      ;
                        INY                                  ;80A867|C8      |      ;
-                       LDA.B ($18),Y                        ;80A868|B118    |000018;
+                       LDA.B ($18),Y                        ;80A868|B118    |000018; pCompressedMap
                        STA.B $72                            ;80A86A|8572    |000072;
                        INY                                  ;80A86C|C8      |      ;
                        INY                                  ;80A86D|C8      |      ;
@@ -5438,7 +5438,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;80A87D|E220    |      ;
                        LDA.B #$7E                           ;80A87F|A97E    |      ;
                        STA.B $77                            ;80A881|8577    |000077;
-                       JSL.L CODE_8381F8                    ;80A883|22F88183|8381F8;
+                       JSL.L fDecompressTilemap             ;80A883|22F88183|8381F8;
                        SEP #$20                             ;80A887|E220    |      ;
                        LDA.B #$00                           ;80A889|A900    |      ;
                        STA.B $27                            ;80A88B|8527    |000027;
@@ -5465,9 +5465,9 @@ fSubrutinesExecute_809553:
                        LDA.B $92                            ;80A8B7|A592    |000092;
                        DEC A                                ;80A8B9|3A      |      ;
                        STA.B $92                            ;80A8BA|8592    |000092;
-                       BNE CODE_80A861                      ;80A8BC|D0A3    |80A861;
+                       BNE .tilemaps                        ;80A8BC|D0A3    |80A861;
                                                             ;      |        |      ;
-          CODE_80A8BE:
+       .charactermaps:
                        REP #$30                             ;80A8BE|C230    |      ;
                        LDA.B ($18),Y                        ;80A8C0|B118    |000018;
                        STA.B $8A                            ;80A8C2|858A    |00008A;
@@ -5491,42 +5491,42 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;80A8E1|C220    |      ;
                        LDA.W $0196                          ;80A8E3|AD9601  |000196;
                        AND.W #$8000                         ;80A8E6|290080  |      ;
-                       BNE CODE_80A8F1                      ;80A8E9|D006    |80A8F1;
-                       JSL.L CODE_8381F8                    ;80A8EB|22F88183|8381F8;
-                       BRA CODE_80A901                      ;80A8EF|8010    |80A901;
+                       BNE .label7                          ;80A8E9|D006    |80A8F1;
+                       JSL.L fDecompressTilemap             ;80A8EB|22F88183|8381F8;
+                       BRA .label9                          ;80A8EF|8010    |80A901;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A8F1:
+              .label7:
                        REP #$30                             ;80A8F1|C230    |      ;
                        LDY.W #$0000                         ;80A8F3|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_80A8F6:
+                .loop:
                        LDA.B [$72],Y                        ;80A8F6|B772    |000072;
                        STA.B [$75],Y                        ;80A8F8|9775    |000075;
                        INY                                  ;80A8FA|C8      |      ;
                        INY                                  ;80A8FB|C8      |      ;
                        CPY.W #$8000                         ;80A8FC|C00080  |      ;
-                       BNE CODE_80A8F6                      ;80A8FF|D0F5    |80A8F6;
+                       BNE .loop                            ;80A8FF|D0F5    |80A8F6;
                                                             ;      |        |      ;
-          CODE_80A901:
+              .label9:
                        SEP #$20                             ;80A901|E220    |      ;
                        LDA.B $22                            ;80A903|A522    |000022;
                        CMP.B #$04                           ;80A905|C904    |      ;
-                       BCS CODE_80A90D                      ;80A907|B004    |80A90D;
+                       BCS .label10                         ;80A907|B004    |80A90D;
                        JSL.L CODE_82AF00                    ;80A909|2200AF82|82AF00;
                                                             ;      |        |      ;
-          CODE_80A90D:
+             .label10:
                        SEP #$20                             ;80A90D|E220    |      ;
                        LDA.B $93                            ;80A90F|A593    |000093;
                        CMP.B #$01                           ;80A911|C901    |      ;
-                       BNE CODE_80A924                      ;80A913|D00F    |80A924;
+                       BNE .label11                         ;80A913|D00F    |80A924;
                        REP #$30                             ;80A915|C230    |      ;
                        LDA.L $7F1F5E                        ;80A917|AF5E1F7F|7F1F5E;
                        AND.W #$0002                         ;80A91B|290200  |      ;
-                       BNE CODE_80A924                      ;80A91E|D004    |80A924;
+                       BNE .label11                         ;80A91E|D004    |80A924;
                        JSL.L CODE_81A9E5                    ;80A920|22E5A981|81A9E5;
                                                             ;      |        |      ;
-          CODE_80A924:
+             .label11:
                        REP #$20                             ;80A924|C220    |      ;
                        STZ.B $F5                            ;80A926|64F5    |0000F5;
                        STZ.B $F7                            ;80A928|64F7    |0000F7;
@@ -5540,8 +5540,8 @@ fSubrutinesExecute_809553:
                        STZ.B $20                            ;80A93A|6420    |000020;
                        STZ.B $21                            ;80A93C|6421    |000021;
                        REP #$20                             ;80A93E|C220    |      ;
-                       STZ.B $D6                            ;80A940|64D6    |0000D6;
-                       STZ.B $D8                            ;80A942|64D8    |0000D8;
+                       STZ.B nPlayerPosX                    ;80A940|64D6    |0000D6;
+                       STZ.B nPlayerPosY                    ;80A942|64D8    |0000D8;
                        SEP #$20                             ;80A944|E220    |      ;
                        LDA.B #$00                           ;80A946|A900    |      ;
                        XBA                                  ;80A948|EB      |      ;
@@ -5563,15 +5563,15 @@ fSubrutinesExecute_809553:
                        LDY.W #$0040                         ;80A96B|A04000  |      ;
                        LDA.W #$0000                         ;80A96E|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_80A971:
+    .copy40characters:
                        REP #$20                             ;80A971|C220    |      ;
                        PHA                                  ;80A973|48      |      ;
                        LDA.W #$0000                         ;80A974|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_80A977:
+             .label13:
                        REP #$30                             ;80A977|C230    |      ;
                        PHA                                  ;80A979|48      |      ;
-                       JSR.W CODE_80AA38                    ;80A97A|2038AA  |80AA38;
+                       JSR.W fUnknown_80AA38                ;80A97A|2038AA  |80AA38;
                        REP #$30                             ;80A97D|C230    |      ;
                        LDA.B $7E                            ;80A97F|A57E    |00007E;
                        CLC                                  ;80A981|18      |      ;
@@ -5584,16 +5584,16 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;80A98D|E220    |      ;
                        LDA.B $22                            ;80A98F|A522    |000022;
                        CMP.B #$5B                           ;80A991|C95B    |      ;
-                       BCS CODE_80A99C                      ;80A993|B007    |80A99C;
+                       BCS .label14                         ;80A993|B007    |80A99C;
                        LDY.B $8A                            ;80A995|A48A    |00008A;
                        CPY.W #$7000                         ;80A997|C00070  |      ;
-                       BEQ CODE_80A9A2                      ;80A99A|F006    |80A9A2;
+                       BEQ .label15                         ;80A99A|F006    |80A9A2;
                                                             ;      |        |      ;
-          CODE_80A99C:
+             .label14:
                        LDY.W #$0040                         ;80A99C|A04000  |      ;
-                       JSR.W CODE_80AA38                    ;80A99F|2038AA  |80AA38;
+                       JSR.W fUnknown_80AA38                ;80A99F|2038AA  |80AA38;
                                                             ;      |        |      ;
-          CODE_80A9A2:
+             .label15:
                        REP #$30                             ;80A9A2|C230    |      ;
                        LDA.B $7E                            ;80A9A4|A57E    |00007E;
                        CLC                                  ;80A9A6|18      |      ;
@@ -5607,83 +5607,83 @@ fSubrutinesExecute_809553:
                        PLA                                  ;80A9B4|68      |      ;
                        INC A                                ;80A9B5|1A      |      ;
                        CMP.W #$0020                         ;80A9B6|C92000  |      ;
-                       BNE CODE_80A977                      ;80A9B9|D0BC    |80A977;
+                       BNE .label13                         ;80A9B9|D0BC    |80A977;
                        SEP #$20                             ;80A9BB|E220    |      ;
                        LDA.B $22                            ;80A9BD|A522    |000022;
                        CMP.B #$5B                           ;80A9BF|C95B    |      ;
-                       BCS CODE_80A9CA                      ;80A9C1|B007    |80A9CA;
+                       BCS .label16                         ;80A9C1|B007    |80A9CA;
                        LDY.B $8A                            ;80A9C3|A48A    |00008A;
                        CPY.W #$7000                         ;80A9C5|C00070  |      ;
-                       BEQ CODE_80A9D2                      ;80A9C8|F008    |80A9D2;
+                       BEQ .label17                         ;80A9C8|F008    |80A9D2;
                                                             ;      |        |      ;
-          CODE_80A9CA:
+             .label16:
                        REP #$20                             ;80A9CA|C220    |      ;
                        TXA                                  ;80A9CC|8A      |      ;
                        CLC                                  ;80A9CD|18      |      ;
                        ADC.W #$0400                         ;80A9CE|690004  |      ;
                        TAX                                  ;80A9D1|AA      |      ;
                                                             ;      |        |      ;
-          CODE_80A9D2:
+             .label17:
                        REP #$30                             ;80A9D2|C230    |      ;
                        LDY.W #$0040                         ;80A9D4|A04000  |      ;
                        PLA                                  ;80A9D7|68      |      ;
                        INC A                                ;80A9D8|1A      |      ;
                        CMP.W #$0002                         ;80A9D9|C90200  |      ;
-                       BNE CODE_80A971                      ;80A9DC|D093    |80A971;
+                       BNE .copy40characters                ;80A9DC|D093    |80A971;
                        REP #$30                             ;80A9DE|C230    |      ;
                        PLY                                  ;80A9E0|7A      |      ;
                        SEP #$20                             ;80A9E1|E220    |      ;
                        LDA.B $93                            ;80A9E3|A593    |000093;
                        DEC A                                ;80A9E5|3A      |      ;
                        STA.B $93                            ;80A9E6|8593    |000093;
-                       BEQ CODE_80A9ED                      ;80A9E8|F003    |80A9ED;
-                       JMP.W CODE_80A8BE                    ;80A9EA|4CBEA8  |80A8BE;
+                       BEQ .continue                        ;80A9E8|F003    |80A9ED;
+                       JMP.W .charactermaps                 ;80A9EA|4CBEA8  |80A8BE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80A9ED:
+            .continue:
                        SEP #$20                             ;80A9ED|E220    |      ;
                        LDA.B $22                            ;80A9EF|A522    |000022;
                        CMP.B #$57                           ;80A9F1|C957    |      ;
-                       BCS CODE_80AA37                      ;80A9F3|B042    |80AA37;
+                       BCS .return                          ;80A9F3|B042    |80AA37;
                        SEP #$20                             ;80A9F5|E220    |      ;
                        LDA.B #$08                           ;80A9F7|A908    |      ;
                        STA.B $1E                            ;80A9F9|851E    |00001E;
                                                             ;      |        |      ;
-          CODE_80A9FB:
+        .destinationX:
                        REP #$20                             ;80A9FB|C220    |      ;
-                       LDA.B $D6                            ;80A9FD|A5D6    |0000D6;
-                       CMP.W $017D                          ;80A9FF|CD7D01  |00017D;
-                       BEQ CODE_80AA19                      ;80AA02|F015    |80AA19;
-                       LDA.B $D6                            ;80AA04|A5D6    |0000D6;
+                       LDA.B nPlayerPosX                    ;80A9FD|A5D6    |0000D6;
+                       CMP.W nDestinationX                  ;80A9FF|CD7D01  |00017D;
+                       BEQ .destinationY                    ;80AA02|F015    |80AA19;
+                       LDA.B nPlayerPosX                    ;80AA04|A5D6    |0000D6;
                        CLC                                  ;80AA06|18      |      ;
                        ADC.B $1E                            ;80AA07|651E    |00001E;
-                       STA.B $D6                            ;80AA09|85D6    |0000D6;
+                       STA.B nPlayerPosX                    ;80AA09|85D6    |0000D6;
                        JSL.L fUnknown_809EBC                ;80AA0B|22BC9E80|809EBC;
                        JSL.L fUnknown_80A11C                ;80AA0F|221CA180|80A11C;
                        JSL.L fStartProgrammedDMA            ;80AA13|22F08A80|808AF0;
-                       BRA CODE_80A9FB                      ;80AA17|80E2    |80A9FB;
+                       BRA .destinationX                    ;80AA17|80E2    |80A9FB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80AA19:
+        .destinationY:
                        REP #$20                             ;80AA19|C220    |      ;
-                       LDA.B $D8                            ;80AA1B|A5D8    |0000D8;
-                       CMP.W $017F                          ;80AA1D|CD7F01  |00017F;
-                       BEQ CODE_80AA37                      ;80AA20|F015    |80AA37;
-                       LDA.B $D8                            ;80AA22|A5D8    |0000D8;
+                       LDA.B nPlayerPosY                    ;80AA1B|A5D8    |0000D8;
+                       CMP.W nDestinationY                  ;80AA1D|CD7F01  |00017F;
+                       BEQ .return                          ;80AA20|F015    |80AA37;
+                       LDA.B nPlayerPosY                    ;80AA22|A5D8    |0000D8;
                        CLC                                  ;80AA24|18      |      ;
                        ADC.B $1E                            ;80AA25|651E    |00001E;
-                       STA.B $D8                            ;80AA27|85D8    |0000D8;
+                       STA.B nPlayerPosY                    ;80AA27|85D8    |0000D8;
                        JSL.L fUnknown_809EBC                ;80AA29|22BC9E80|809EBC;
                        JSL.L fUnknown_80A0AB                ;80AA2D|22ABA080|80A0AB;
                        JSL.L fStartProgrammedDMA            ;80AA31|22F08A80|808AF0;
-                       BRA CODE_80AA19                      ;80AA35|80E2    |80AA19;
+                       BRA .destinationY                    ;80AA35|80E2    |80AA19;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80AA37:
+              .return:
                        RTL                                  ;80AA37|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80AA38:
+      fUnknown_80AA38:
                        REP #$30                             ;80AA38|C230    |      ;
                        PHX                                  ;80AA3A|DA      |      ;
                        PHY                                  ;80AA3B|5A      |      ;
@@ -7493,23 +7493,23 @@ aScreenTransitionTable:
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BEE4|        |      ;
                                                             ;      |        |      ;
      pSubrutinesTable:
-                       dw CODE_80C36C                       ;80BEEC|        |80C36C; ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16
-                       dw CODE_80C36C                       ;80BEEE|        |80C36C;
-                       dw CODE_80C3D9                       ;80BEF0|        |80C3D9;
-                       dw CODE_80C446                       ;80BEF2|        |80C446;
-                       dw CODE_80C4B3                       ;80BEF4|        |80C4B3;
+                       dw subUnknown_80C36C                 ;80BEEC|        |80C36C; ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16
+                       dw subUnknown_80C36C                 ;80BEEE|        |80C36C;
+                       dw subUnknown_80C3D9                 ;80BEF0|        |80C3D9;
+                       dw subUnknown_80C446                 ;80BEF2|        |80C446;
+                       dw subUnknown_80C4B3                 ;80BEF4|        |80C4B3;
                        dw PTR16_80FFFF                      ;80BEF6|        |80FFFF;
-                       dw CODE_80C36C                       ;80BEF8|        |80C36C;
-                       dw CODE_80C36C                       ;80BEFA|        |80C36C;
-                       dw CODE_80C3D9                       ;80BEFC|        |80C3D9;
-                       dw CODE_80C446                       ;80BEFE|        |80C446;
-                       dw CODE_80C4B3                       ;80BF00|        |80C4B3;
+                       dw subUnknown_80C36C                 ;80BEF8|        |80C36C;
+                       dw subUnknown_80C36C                 ;80BEFA|        |80C36C;
+                       dw subUnknown_80C3D9                 ;80BEFC|        |80C3D9;
+                       dw subUnknown_80C446                 ;80BEFE|        |80C446;
+                       dw subUnknown_80C4B3                 ;80BF00|        |80C4B3;
                        dw PTR16_80FFFF                      ;80BF02|        |80FFFF;
-                       dw CODE_80C520                       ;80BF04|        |80C520;
-                       dw CODE_80C520                       ;80BF06|        |80C520;
-                       dw CODE_80C58D                       ;80BF08|        |80C58D;
-                       dw CODE_80C5FA                       ;80BF0A|        |80C5FA;
-                       dw CODE_80C667                       ;80BF0C|        |80C667;
+                       dw subUnknown_80C520                 ;80BF04|        |80C520;
+                       dw subUnknown_80C520                 ;80BF06|        |80C520;
+                       dw subUnknown_80C58D                 ;80BF08|        |80C58D;
+                       dw subUnknown_80C5FA                 ;80BF0A|        |80C5FA;
+                       dw subUnknown_80C667                 ;80BF0C|        |80C667;
                        dw PTR16_80FFFF                      ;80BF0E|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF10|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF12|        |80FFFF;
@@ -7518,49 +7518,49 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80BF18|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF1A|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF1C|        |80FFFF;
-                       dw CODE_80CADE                       ;80BF1E|        |80CADE;
-                       dw CODE_80CB30                       ;80BF20|        |80CB30;
-                       dw CODE_80CB82                       ;80BF22|        |80CB82;
-                       dw CODE_80CBD4                       ;80BF24|        |80CBD4;
+                       dw subUnknown_80CADE                 ;80BF1E|        |80CADE;
+                       dw subUnknown_80CB30                 ;80BF20|        |80CB30;
+                       dw subUnknown_80CB82                 ;80BF22|        |80CB82;
+                       dw subUnknown_80CBD4                 ;80BF24|        |80CBD4;
                        dw PTR16_80FFFF                      ;80BF26|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF28|        |80FFFF;
-                       dw CODE_80CC92                       ;80BF2A|        |80CC92;
-                       dw CODE_80CCE4                       ;80BF2C|        |80CCE4;
-                       dw CODE_80CD36                       ;80BF2E|        |80CD36;
-                       dw CODE_80CD88                       ;80BF30|        |80CD88;
+                       dw subUnknown_80CC92                 ;80BF2A|        |80CC92;
+                       dw subUnknown_80CCE4                 ;80BF2C|        |80CCE4;
+                       dw subUnknown_80CD36                 ;80BF2E|        |80CD36;
+                       dw subUnknown_80CD88                 ;80BF30|        |80CD88;
                        dw PTR16_80FFFF                      ;80BF32|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF34|        |80FFFF;
-                       dw CODE_80CE46                       ;80BF36|        |80CE46;
-                       dw CODE_80CE98                       ;80BF38|        |80CE98;
-                       dw CODE_80CEEA                       ;80BF3A|        |80CEEA;
-                       dw CODE_80CF3C                       ;80BF3C|        |80CF3C;
+                       dw subUnknown_80CE46                 ;80BF36|        |80CE46;
+                       dw subUnknown_80CE98                 ;80BF38|        |80CE98;
+                       dw subUnknown_80CEEA                 ;80BF3A|        |80CEEA;
+                       dw subUnknown_80CF3C                 ;80BF3C|        |80CF3C;
                        dw PTR16_80FFFF                      ;80BF3E|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF40|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF42|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF44|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF46|        |80FFFF;
-                       dw CODE_80CFFA                       ;80BF48|        |80CFFA;
+                       dw subUnknown_80CFFA                 ;80BF48|        |80CFFA;
                        dw PTR16_80FFFF                      ;80BF4A|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF4C|        |80FFFF;
-                       dw CODE_80CADE                       ;80BF4E|        |80CADE;
+                       dw subUnknown_80CADE                 ;80BF4E|        |80CADE;
                        dw PTR16_80FFFF                      ;80BF50|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF52|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF54|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF56|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF58|        |80FFFF;
-                       dw CODE_80DC30                       ;80BF5A|        |80DC30;
+                       dw subUnknown_80DC30                 ;80BF5A|        |80DC30;
                        dw PTR16_80FFFF                      ;80BF5C|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF5E|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF60|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF62|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF64|        |80FFFF;
-                       dw CODE_80CE46                       ;80BF66|        |80CE46;
+                       dw subUnknown_80CE46                 ;80BF66|        |80CE46;
                        dw PTR16_80FFFF                      ;80BF68|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF6A|        |80FFFF;
-                       dw CODE_80DAB4                       ;80BF6C|        |80DAB4;
+                       dw subUnknown_80DAB4                 ;80BF6C|        |80DAB4;
                        dw PTR16_80FFFF                      ;80BF6E|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF70|        |80FFFF;
-                       dw CODE_80CADE                       ;80BF72|        |80CADE;
+                       dw subUnknown_80CADE                 ;80BF72|        |80CADE;
                        dw PTR16_80FFFF                      ;80BF74|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF76|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BF78|        |80FFFF;
@@ -7590,58 +7590,58 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80BFA8|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BFAA|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BFAC|        |80FFFF;
-                       dw CODE_80D067                       ;80BFAE|        |80D067;
-                       dw CODE_80D125                       ;80BFB0|        |80D125;
-                       dw CODE_80D1E3                       ;80BFB2|        |80D1E3;
-                       dw CODE_80D2A1                       ;80BFB4|        |80D2A1;
+                       dw subUnknown_80D067                 ;80BFAE|        |80D067;
+                       dw subUnknown_80D125                 ;80BFB0|        |80D125;
+                       dw subUnknown_80D1E3                 ;80BFB2|        |80D1E3;
+                       dw subUnknown_80D2A1                 ;80BFB4|        |80D2A1;
                        dw PTR16_80FFFF                      ;80BFB6|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BFB8|        |80FFFF;
-                       dw CODE_80D344                       ;80BFBA|        |80D344;
-                       dw CODE_80D402                       ;80BFBC|        |80D402;
-                       dw CODE_80D4C0                       ;80BFBE|        |80D4C0;
-                       dw CODE_80D563                       ;80BFC0|        |80D563;
+                       dw subUnknown_80D344                 ;80BFBA|        |80D344;
+                       dw subUnknown_80D402                 ;80BFBC|        |80D402;
+                       dw subUnknown_80D4C0                 ;80BFBE|        |80D4C0;
+                       dw subUnknown_80D563                 ;80BFC0|        |80D563;
                        dw PTR16_80FFFF                      ;80BFC2|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BFC4|        |80FFFF;
-                       dw CODE_80D606                       ;80BFC6|        |80D606;
-                       dw CODE_80D6FA                       ;80BFC8|        |80D6FA;
-                       dw CODE_80D7EE                       ;80BFCA|        |80D7EE;
-                       dw CODE_80D891                       ;80BFCC|        |80D891;
+                       dw subUnknown_80D606                 ;80BFC6|        |80D606;
+                       dw subUnknown_80D6FA                 ;80BFC8|        |80D6FA;
+                       dw subUnknown_80D7EE                 ;80BFCA|        |80D7EE;
+                       dw subUnknown_80D891                 ;80BFCC|        |80D891;
                        dw PTR16_80FFFF                      ;80BFCE|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BFD0|        |80FFFF;
-                       dw CODE_80D934                       ;80BFD2|        |80D934;
-                       dw CODE_80D96B                       ;80BFD4|        |80D96B;
-                       dw CODE_80D9A2                       ;80BFD6|        |80D9A2;
-                       dw CODE_80D9D9                       ;80BFD8|        |80D9D9;
+                       dw subUnknown_80D934                 ;80BFD2|        |80D934;
+                       dw subUnknown_80D96B                 ;80BFD4|        |80D96B;
+                       dw subUnknown_80D9A2                 ;80BFD6|        |80D9A2;
+                       dw subUnknown_80D9D9                 ;80BFD8|        |80D9D9;
                        dw PTR16_80FFFF                      ;80BFDA|        |80FFFF;
                        dw PTR16_80FFFF                      ;80BFDC|        |80FFFF;
-                       dw CODE_80D934                       ;80BFDE|        |80D934;
-                       dw CODE_80D96B                       ;80BFE0|        |80D96B;
-                       dw CODE_80D9A2                       ;80BFE2|        |80D9A2;
-                       dw CODE_80D9D9                       ;80BFE4|        |80D9D9;
+                       dw subUnknown_80D934                 ;80BFDE|        |80D934;
+                       dw subUnknown_80D96B                 ;80BFE0|        |80D96B;
+                       dw subUnknown_80D9A2                 ;80BFE2|        |80D9A2;
+                       dw subUnknown_80D9D9                 ;80BFE4|        |80D9D9;
                        dw PTR16_80FFFF                      ;80BFE6|        |80FFFF;
-                       dw CODE_80C792                       ;80BFE8|        |80C792;
-                       dw CODE_80C792                       ;80BFEA|        |80C792;
-                       dw CODE_80C792                       ;80BFEC|        |80C792;
-                       dw CODE_80C792                       ;80BFEE|        |80C792;
-                       dw CODE_80C792                       ;80BFF0|        |80C792;
+                       dw subUnknown_80C792                 ;80BFE8|        |80C792;
+                       dw subUnknown_80C792                 ;80BFEA|        |80C792;
+                       dw subUnknown_80C792                 ;80BFEC|        |80C792;
+                       dw subUnknown_80C792                 ;80BFEE|        |80C792;
+                       dw subUnknown_80C792                 ;80BFF0|        |80C792;
                        dw $0001                             ;80BFF2|        |800001;
-                       dw CODE_80C792                       ;80BFF4|        |80C792;
-                       dw CODE_80C792                       ;80BFF6|        |80C792;
-                       dw CODE_80C792                       ;80BFF8|        |80C792;
-                       dw CODE_80C792                       ;80BFFA|        |80C792;
-                       dw CODE_80C792                       ;80BFFC|        |80C792;
+                       dw subUnknown_80C792                 ;80BFF4|        |80C792;
+                       dw subUnknown_80C792                 ;80BFF6|        |80C792;
+                       dw subUnknown_80C792                 ;80BFF8|        |80C792;
+                       dw subUnknown_80C792                 ;80BFFA|        |80C792;
+                       dw subUnknown_80C792                 ;80BFFC|        |80C792;
                        dw $0001                             ;80BFFE|        |800001;
-                       dw CODE_80C792                       ;80C000|        |80C792;
-                       dw CODE_80C792                       ;80C002|        |80C792;
-                       dw CODE_80C792                       ;80C004|        |80C792;
-                       dw CODE_80C792                       ;80C006|        |80C792;
-                       dw CODE_80C792                       ;80C008|        |80C792;
+                       dw subUnknown_80C792                 ;80C000|        |80C792;
+                       dw subUnknown_80C792                 ;80C002|        |80C792;
+                       dw subUnknown_80C792                 ;80C004|        |80C792;
+                       dw subUnknown_80C792                 ;80C006|        |80C792;
+                       dw subUnknown_80C792                 ;80C008|        |80C792;
                        dw $0001                             ;80C00A|        |800001;
                        dw PTR16_80FFFF                      ;80C00C|        |80FFFF;
-                       dw CODE_80C7FF                       ;80C00E|        |80C7FF;
-                       dw CODE_80C7FF                       ;80C010|        |80C7FF;
-                       dw CODE_80C7FF                       ;80C012|        |80C7FF;
-                       dw CODE_80C7FF                       ;80C014|        |80C7FF;
+                       dw subUnknown_80C7FF                 ;80C00E|        |80C7FF;
+                       dw subUnknown_80C7FF                 ;80C010|        |80C7FF;
+                       dw subUnknown_80C7FF                 ;80C012|        |80C7FF;
+                       dw subUnknown_80C7FF                 ;80C014|        |80C7FF;
                        dw $0001                             ;80C016|        |800001;
                        dw PTR16_80FFFF                      ;80C018|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C01A|        |80FFFF;
@@ -7656,10 +7656,10 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C02C|        |80FFFF;
                        dw $0001                             ;80C02E|        |800001;
                        dw PTR16_80FFFF                      ;80C030|        |80FFFF;
-                       dw CODE_80C86C                       ;80C032|        |80C86C;
-                       dw CODE_80C86C                       ;80C034|        |80C86C;
-                       dw CODE_80C86C                       ;80C036|        |80C86C;
-                       dw CODE_80C86C                       ;80C038|        |80C86C;
+                       dw subUnknown_80C86C                 ;80C032|        |80C86C;
+                       dw subUnknown_80C86C                 ;80C034|        |80C86C;
+                       dw subUnknown_80C86C                 ;80C036|        |80C86C;
+                       dw subUnknown_80C86C                 ;80C038|        |80C86C;
                        dw PTR16_80FFFF                      ;80C03A|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C03C|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C03E|        |80FFFF;
@@ -7668,10 +7668,10 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C044|        |80FFFF;
                        dw $0001                             ;80C046|        |800001;
                        dw PTR16_80FFFF                      ;80C048|        |80FFFF;
-                       dw CODE_80C945                       ;80C04A|        |80C945;
-                       dw CODE_80C945                       ;80C04C|        |80C945;
-                       dw CODE_80C945                       ;80C04E|        |80C945;
-                       dw CODE_80C945                       ;80C050|        |80C945;
+                       dw subUnknown_80C945                 ;80C04A|        |80C945;
+                       dw subUnknown_80C945                 ;80C04C|        |80C945;
+                       dw subUnknown_80C945                 ;80C04E|        |80C945;
+                       dw subUnknown_80C945                 ;80C050|        |80C945;
                        dw $0001                             ;80C052|        |800001;
                        dw PTR16_80FFFF                      ;80C054|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C056|        |80FFFF;
@@ -7680,10 +7680,10 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C05C|        |80FFFF;
                        dw $0001                             ;80C05E|        |800001;
                        dw PTR16_80FFFF                      ;80C060|        |80FFFF;
-                       dw CODE_80C9B2                       ;80C062|        |80C9B2;
-                       dw CODE_80C9B2                       ;80C064|        |80C9B2;
-                       dw CODE_80C9B2                       ;80C066|        |80C9B2;
-                       dw CODE_80C9B2                       ;80C068|        |80C9B2;
+                       dw subUnknown_80C9B2                 ;80C062|        |80C9B2;
+                       dw subUnknown_80C9B2                 ;80C064|        |80C9B2;
+                       dw subUnknown_80C9B2                 ;80C066|        |80C9B2;
+                       dw subUnknown_80C9B2                 ;80C068|        |80C9B2;
                        dw $0001                             ;80C06A|        |800001;
                        dw PTR16_80FFFF                      ;80C06C|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C06E|        |80FFFF;
@@ -7692,10 +7692,10 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C074|        |80FFFF;
                        dw $0001                             ;80C076|        |800001;
                        dw PTR16_80FFFF                      ;80C078|        |80FFFF;
-                       dw CODE_80DD09                       ;80C07A|        |80DD09;
-                       dw CODE_80DD09                       ;80C07C|        |80DD09;
-                       dw CODE_80DD09                       ;80C07E|        |80DD09;
-                       dw CODE_80DD09                       ;80C080|        |80DD09;
+                       dw subUnknown_80DD09                 ;80C07A|        |80DD09;
+                       dw subUnknown_80DD09                 ;80C07C|        |80DD09;
+                       dw subUnknown_80DD09                 ;80C07E|        |80DD09;
+                       dw subUnknown_80DD09                 ;80C080|        |80DD09;
                        dw $0001                             ;80C082|        |800001;
                        dw PTR16_80FFFF                      ;80C084|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C086|        |80FFFF;
@@ -7704,22 +7704,22 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C08C|        |80FFFF;
                        dw $0001                             ;80C08E|        |800001;
                        dw PTR16_80FFFF                      ;80C090|        |80FFFF;
-                       dw CODE_80CA1F                       ;80C092|        |80CA1F;
-                       dw CODE_80CA1F                       ;80C094|        |80CA1F;
-                       dw CODE_80CA1F                       ;80C096|        |80CA1F;
-                       dw CODE_80CA1F                       ;80C098|        |80CA1F;
+                       dw subUnknown_80CA1F                 ;80C092|        |80CA1F;
+                       dw subUnknown_80CA1F                 ;80C094|        |80CA1F;
+                       dw subUnknown_80CA1F                 ;80C096|        |80CA1F;
+                       dw subUnknown_80CA1F                 ;80C098|        |80CA1F;
                        dw $0001                             ;80C09A|        |800001;
                        dw PTR16_80FFFF                      ;80C09C|        |80FFFF;
-                       dw CODE_80CA8C                       ;80C09E|        |80CA8C;
-                       dw CODE_80CA8C                       ;80C0A0|        |80CA8C;
-                       dw CODE_80CA8C                       ;80C0A2|        |80CA8C;
-                       dw CODE_80CA8C                       ;80C0A4|        |80CA8C;
+                       dw subUnknown_80CA8C                 ;80C09E|        |80CA8C;
+                       dw subUnknown_80CA8C                 ;80C0A0|        |80CA8C;
+                       dw subUnknown_80CA8C                 ;80C0A2|        |80CA8C;
+                       dw subUnknown_80CA8C                 ;80C0A4|        |80CA8C;
                        dw $0001                             ;80C0A6|        |800001;
                        dw PTR16_80FFFF                      ;80C0A8|        |80FFFF;
-                       dw CODE_80DB06                       ;80C0AA|        |80DB06;
-                       dw CODE_80DB06                       ;80C0AC|        |80DB06;
-                       dw CODE_80DB06                       ;80C0AE|        |80DB06;
-                       dw CODE_80DB06                       ;80C0B0|        |80DB06;
+                       dw subUnknown_80DB06                 ;80C0AA|        |80DB06;
+                       dw subUnknown_80DB06                 ;80C0AC|        |80DB06;
+                       dw subUnknown_80DB06                 ;80C0AE|        |80DB06;
+                       dw subUnknown_80DB06                 ;80C0B0|        |80DB06;
                        dw PTR16_80FFFF                      ;80C0B2|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0B4|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0B6|        |80FFFF;
@@ -7745,11 +7745,11 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C0DE|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0E0|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0E2|        |80FFFF;
-                       dw CODE_80C6D4                       ;80C0E4|        |80C6D4;
-                       dw CODE_80C6D4                       ;80C0E6|        |80C6D4;
-                       dw CODE_80C6D4                       ;80C0E8|        |80C6D4;
-                       dw CODE_80C6D4                       ;80C0EA|        |80C6D4;
-                       dw CODE_80C6D4                       ;80C0EC|        |80C6D4;
+                       dw subUnknown_80C6D4                 ;80C0E4|        |80C6D4;
+                       dw subUnknown_80C6D4                 ;80C0E6|        |80C6D4;
+                       dw subUnknown_80C6D4                 ;80C0E8|        |80C6D4;
+                       dw subUnknown_80C6D4                 ;80C0EA|        |80C6D4;
+                       dw subUnknown_80C6D4                 ;80C0EC|        |80C6D4;
                        dw PTR16_80FFFF                      ;80C0EE|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0F0|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0F2|        |80FFFF;
@@ -7757,11 +7757,11 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C0F6|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0F8|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C0FA|        |80FFFF;
-                       dw CODE_80DA47                       ;80C0FC|        |80DA47;
-                       dw CODE_80DA47                       ;80C0FE|        |80DA47;
-                       dw CODE_80DA47                       ;80C100|        |80DA47;
-                       dw CODE_80DA47                       ;80C102|        |80DA47;
-                       dw CODE_80DA47                       ;80C104|        |80DA47;
+                       dw subUnknown_80DA47                 ;80C0FC|        |80DA47;
+                       dw subUnknown_80DA47                 ;80C0FE|        |80DA47;
+                       dw subUnknown_80DA47                 ;80C100|        |80DA47;
+                       dw subUnknown_80DA47                 ;80C102|        |80DA47;
+                       dw subUnknown_80DA47                 ;80C104|        |80DA47;
                        dw PTR16_80FFFF                      ;80C106|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C108|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C10A|        |80FFFF;
@@ -7791,25 +7791,25 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C13A|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C13C|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C13E|        |80FFFF;
-                       dw CODE_80DA10                       ;80C140|        |80DA10;
+                       dw subUnknown_80DA10                 ;80C140|        |80DA10;
                        dw PTR16_80FFFF                      ;80C142|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C144|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C146|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C148|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C14A|        |80FFFF;
-                       dw CODE_80DA10                       ;80C14C|        |80DA10;
+                       dw subUnknown_80DA10                 ;80C14C|        |80DA10;
                        dw PTR16_80FFFF                      ;80C14E|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C150|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C152|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C154|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C156|        |80FFFF;
-                       dw CODE_80DA10                       ;80C158|        |80DA10;
+                       dw subUnknown_80DA10                 ;80C158|        |80DA10;
                        dw PTR16_80FFFF                      ;80C15A|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C15C|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C15E|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C160|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C162|        |80FFFF;
-                       dw CODE_80DA10                       ;80C164|        |80DA10;
+                       dw subUnknown_80DA10                 ;80C164|        |80DA10;
                        dw PTR16_80FFFF                      ;80C166|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C168|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C16A|        |80FFFF;
@@ -7839,7 +7839,7 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C19A|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C19C|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C19E|        |80FFFF;
-                       dw CODE_80DA10                       ;80C1A0|        |80DA10;
+                       dw subUnknown_80DA10                 ;80C1A0|        |80DA10;
                        dw PTR16_80FFFF                      ;80C1A2|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C1A4|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C1A6|        |80FFFF;
@@ -8070,7 +8070,7 @@ aScreenTransitionTable:
                        dw PTR16_80FFFF                      ;80C368|        |80FFFF;
                        dw PTR16_80FFFF                      ;80C36A|        |80FFFF;
                                                             ;      |        |      ;
-          CODE_80C36C:
+    subUnknown_80C36C:
                        REP #$20                             ;80C36C|C220    |      ;
                        SEP #$10                             ;80C36E|E210    |      ;
                        LDA.W #$DD5B                         ;80C370|A95BDD  |      ;
@@ -8082,7 +8082,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C37D|A909    |      ;
                        LDX.B #$04                           ;80C37F|A204    |      ;
                        LDY.B #$04                           ;80C381|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C383|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C383|22488E80|808E48;
                        REP #$20                             ;80C387|C220    |      ;
                        SEP #$10                             ;80C389|E210    |      ;
                        LDA.W #$DD78                         ;80C38B|A978DD  |      ;
@@ -8094,7 +8094,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C398|A90A    |      ;
                        LDX.B #$05                           ;80C39A|A205    |      ;
                        LDY.B #$04                           ;80C39C|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C39E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C39E|22488E80|808E48;
                        REP #$20                             ;80C3A2|C220    |      ;
                        SEP #$10                             ;80C3A4|E210    |      ;
                        LDA.W #$DD95                         ;80C3A6|A995DD  |      ;
@@ -8106,7 +8106,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C3B3|A90B    |      ;
                        LDX.B #$06                           ;80C3B5|A206    |      ;
                        LDY.B #$04                           ;80C3B7|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C3B9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C3B9|22488E80|808E48;
                        REP #$20                             ;80C3BD|C220    |      ;
                        SEP #$10                             ;80C3BF|E210    |      ;
                        LDA.W #$DDB2                         ;80C3C1|A9B2DD  |      ;
@@ -8118,11 +8118,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C3CE|A90C    |      ;
                        LDX.B #$07                           ;80C3D0|A207    |      ;
                        LDY.B #$04                           ;80C3D2|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C3D4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C3D4|22488E80|808E48;
                        RTS                                  ;80C3D8|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C3D9:
+    subUnknown_80C3D9:
                        REP #$20                             ;80C3D9|C220    |      ;
                        SEP #$10                             ;80C3DB|E210    |      ;
                        LDA.W #$DDCF                         ;80C3DD|A9CFDD  |      ;
@@ -8134,7 +8134,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C3EA|A909    |      ;
                        LDX.B #$04                           ;80C3EC|A204    |      ;
                        LDY.B #$04                           ;80C3EE|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C3F0|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C3F0|22488E80|808E48;
                        REP #$20                             ;80C3F4|C220    |      ;
                        SEP #$10                             ;80C3F6|E210    |      ;
                        LDA.W #$DDEC                         ;80C3F8|A9ECDD  |      ;
@@ -8146,7 +8146,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C405|A90A    |      ;
                        LDX.B #$05                           ;80C407|A205    |      ;
                        LDY.B #$04                           ;80C409|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C40B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C40B|22488E80|808E48;
                        REP #$20                             ;80C40F|C220    |      ;
                        SEP #$10                             ;80C411|E210    |      ;
                        LDA.W #$DE09                         ;80C413|A909DE  |      ;
@@ -8158,7 +8158,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C420|A90B    |      ;
                        LDX.B #$06                           ;80C422|A206    |      ;
                        LDY.B #$04                           ;80C424|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C426|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C426|22488E80|808E48;
                        REP #$20                             ;80C42A|C220    |      ;
                        SEP #$10                             ;80C42C|E210    |      ;
                        LDA.W #$DE26                         ;80C42E|A926DE  |      ;
@@ -8170,11 +8170,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C43B|A90C    |      ;
                        LDX.B #$07                           ;80C43D|A207    |      ;
                        LDY.B #$04                           ;80C43F|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C441|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C441|22488E80|808E48;
                        RTS                                  ;80C445|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C446:
+    subUnknown_80C446:
                        REP #$20                             ;80C446|C220    |      ;
                        SEP #$10                             ;80C448|E210    |      ;
                        LDA.W #$DE43                         ;80C44A|A943DE  |      ;
@@ -8186,7 +8186,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C457|A909    |      ;
                        LDX.B #$04                           ;80C459|A204    |      ;
                        LDY.B #$04                           ;80C45B|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C45D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C45D|22488E80|808E48;
                        REP #$20                             ;80C461|C220    |      ;
                        SEP #$10                             ;80C463|E210    |      ;
                        LDA.W #$DE60                         ;80C465|A960DE  |      ;
@@ -8198,7 +8198,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C472|A90A    |      ;
                        LDX.B #$05                           ;80C474|A205    |      ;
                        LDY.B #$04                           ;80C476|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C478|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C478|22488E80|808E48;
                        REP #$20                             ;80C47C|C220    |      ;
                        SEP #$10                             ;80C47E|E210    |      ;
                        LDA.W #$DE7D                         ;80C480|A97DDE  |      ;
@@ -8210,7 +8210,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C48D|A90B    |      ;
                        LDX.B #$06                           ;80C48F|A206    |      ;
                        LDY.B #$04                           ;80C491|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C493|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C493|22488E80|808E48;
                        REP #$20                             ;80C497|C220    |      ;
                        SEP #$10                             ;80C499|E210    |      ;
                        LDA.W #$DE9A                         ;80C49B|A99ADE  |      ;
@@ -8222,11 +8222,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C4A8|A90C    |      ;
                        LDX.B #$07                           ;80C4AA|A207    |      ;
                        LDY.B #$04                           ;80C4AC|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C4AE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C4AE|22488E80|808E48;
                        RTS                                  ;80C4B2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C4B3:
+    subUnknown_80C4B3:
                        REP #$20                             ;80C4B3|C220    |      ;
                        SEP #$10                             ;80C4B5|E210    |      ;
                        LDA.W #$DEB7                         ;80C4B7|A9B7DE  |      ;
@@ -8238,7 +8238,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C4C4|A909    |      ;
                        LDX.B #$04                           ;80C4C6|A204    |      ;
                        LDY.B #$04                           ;80C4C8|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C4CA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C4CA|22488E80|808E48;
                        REP #$20                             ;80C4CE|C220    |      ;
                        SEP #$10                             ;80C4D0|E210    |      ;
                        LDA.W #$DED4                         ;80C4D2|A9D4DE  |      ;
@@ -8250,7 +8250,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C4DF|A90A    |      ;
                        LDX.B #$05                           ;80C4E1|A205    |      ;
                        LDY.B #$04                           ;80C4E3|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C4E5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C4E5|22488E80|808E48;
                        REP #$20                             ;80C4E9|C220    |      ;
                        SEP #$10                             ;80C4EB|E210    |      ;
                        LDA.W #$DEF1                         ;80C4ED|A9F1DE  |      ;
@@ -8262,7 +8262,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C4FA|A90B    |      ;
                        LDX.B #$06                           ;80C4FC|A206    |      ;
                        LDY.B #$04                           ;80C4FE|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C500|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C500|22488E80|808E48;
                        REP #$20                             ;80C504|C220    |      ;
                        SEP #$10                             ;80C506|E210    |      ;
                        LDA.W #$DF0E                         ;80C508|A90EDF  |      ;
@@ -8274,11 +8274,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C515|A90C    |      ;
                        LDX.B #$07                           ;80C517|A207    |      ;
                        LDY.B #$04                           ;80C519|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C51B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C51B|22488E80|808E48;
                        RTS                                  ;80C51F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C520:
+    subUnknown_80C520:
                        REP #$20                             ;80C520|C220    |      ;
                        SEP #$10                             ;80C522|E210    |      ;
                        LDA.W #$DF2B                         ;80C524|A92BDF  |      ;
@@ -8290,7 +8290,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C531|A909    |      ;
                        LDX.B #$04                           ;80C533|A204    |      ;
                        LDY.B #$04                           ;80C535|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C537|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C537|22488E80|808E48;
                        REP #$20                             ;80C53B|C220    |      ;
                        SEP #$10                             ;80C53D|E210    |      ;
                        LDA.W #$DF48                         ;80C53F|A948DF  |      ;
@@ -8302,7 +8302,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C54C|A90A    |      ;
                        LDX.B #$05                           ;80C54E|A205    |      ;
                        LDY.B #$04                           ;80C550|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C552|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C552|22488E80|808E48;
                        REP #$20                             ;80C556|C220    |      ;
                        SEP #$10                             ;80C558|E210    |      ;
                        LDA.W #$DF65                         ;80C55A|A965DF  |      ;
@@ -8314,7 +8314,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C567|A90B    |      ;
                        LDX.B #$06                           ;80C569|A206    |      ;
                        LDY.B #$04                           ;80C56B|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C56D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C56D|22488E80|808E48;
                        REP #$20                             ;80C571|C220    |      ;
                        SEP #$10                             ;80C573|E210    |      ;
                        LDA.W #$DF82                         ;80C575|A982DF  |      ;
@@ -8326,11 +8326,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C582|A90C    |      ;
                        LDX.B #$07                           ;80C584|A207    |      ;
                        LDY.B #$04                           ;80C586|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C588|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C588|22488E80|808E48;
                        RTS                                  ;80C58C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C58D:
+    subUnknown_80C58D:
                        REP #$20                             ;80C58D|C220    |      ;
                        SEP #$10                             ;80C58F|E210    |      ;
                        LDA.W #$DF9F                         ;80C591|A99FDF  |      ;
@@ -8342,7 +8342,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C59E|A909    |      ;
                        LDX.B #$04                           ;80C5A0|A204    |      ;
                        LDY.B #$04                           ;80C5A2|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C5A4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C5A4|22488E80|808E48;
                        REP #$20                             ;80C5A8|C220    |      ;
                        SEP #$10                             ;80C5AA|E210    |      ;
                        LDA.W #$DFBC                         ;80C5AC|A9BCDF  |      ;
@@ -8354,7 +8354,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C5B9|A90A    |      ;
                        LDX.B #$05                           ;80C5BB|A205    |      ;
                        LDY.B #$04                           ;80C5BD|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C5BF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C5BF|22488E80|808E48;
                        REP #$20                             ;80C5C3|C220    |      ;
                        SEP #$10                             ;80C5C5|E210    |      ;
                        LDA.W #$DFD9                         ;80C5C7|A9D9DF  |      ;
@@ -8366,7 +8366,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C5D4|A90B    |      ;
                        LDX.B #$06                           ;80C5D6|A206    |      ;
                        LDY.B #$04                           ;80C5D8|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C5DA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C5DA|22488E80|808E48;
                        REP #$20                             ;80C5DE|C220    |      ;
                        SEP #$10                             ;80C5E0|E210    |      ;
                        LDA.W #$DFF6                         ;80C5E2|A9F6DF  |      ;
@@ -8378,11 +8378,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C5EF|A90C    |      ;
                        LDX.B #$07                           ;80C5F1|A207    |      ;
                        LDY.B #$04                           ;80C5F3|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C5F5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C5F5|22488E80|808E48;
                        RTS                                  ;80C5F9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C5FA:
+    subUnknown_80C5FA:
                        REP #$20                             ;80C5FA|C220    |      ;
                        SEP #$10                             ;80C5FC|E210    |      ;
                        LDA.W #$E013                         ;80C5FE|A913E0  |      ;
@@ -8394,7 +8394,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C60B|A909    |      ;
                        LDX.B #$04                           ;80C60D|A204    |      ;
                        LDY.B #$04                           ;80C60F|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C611|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C611|22488E80|808E48;
                        REP #$20                             ;80C615|C220    |      ;
                        SEP #$10                             ;80C617|E210    |      ;
                        LDA.W #$E030                         ;80C619|A930E0  |      ;
@@ -8406,7 +8406,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C626|A90A    |      ;
                        LDX.B #$05                           ;80C628|A205    |      ;
                        LDY.B #$04                           ;80C62A|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C62C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C62C|22488E80|808E48;
                        REP #$20                             ;80C630|C220    |      ;
                        SEP #$10                             ;80C632|E210    |      ;
                        LDA.W #$E04D                         ;80C634|A94DE0  |      ;
@@ -8418,7 +8418,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C641|A90B    |      ;
                        LDX.B #$06                           ;80C643|A206    |      ;
                        LDY.B #$04                           ;80C645|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C647|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C647|22488E80|808E48;
                        REP #$20                             ;80C64B|C220    |      ;
                        SEP #$10                             ;80C64D|E210    |      ;
                        LDA.W #$E06A                         ;80C64F|A96AE0  |      ;
@@ -8430,11 +8430,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C65C|A90C    |      ;
                        LDX.B #$07                           ;80C65E|A207    |      ;
                        LDY.B #$04                           ;80C660|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C662|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C662|22488E80|808E48;
                        RTS                                  ;80C666|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C667:
+    subUnknown_80C667:
                        REP #$20                             ;80C667|C220    |      ;
                        SEP #$10                             ;80C669|E210    |      ;
                        LDA.W #$E087                         ;80C66B|A987E0  |      ;
@@ -8446,7 +8446,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C678|A909    |      ;
                        LDX.B #$04                           ;80C67A|A204    |      ;
                        LDY.B #$04                           ;80C67C|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C67E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C67E|22488E80|808E48;
                        REP #$20                             ;80C682|C220    |      ;
                        SEP #$10                             ;80C684|E210    |      ;
                        LDA.W #$E0A4                         ;80C686|A9A4E0  |      ;
@@ -8458,7 +8458,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80C693|A90A    |      ;
                        LDX.B #$05                           ;80C695|A205    |      ;
                        LDY.B #$04                           ;80C697|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C699|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C699|22488E80|808E48;
                        REP #$20                             ;80C69D|C220    |      ;
                        SEP #$10                             ;80C69F|E210    |      ;
                        LDA.W #$E0C1                         ;80C6A1|A9C1E0  |      ;
@@ -8470,7 +8470,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C6AE|A90B    |      ;
                        LDX.B #$06                           ;80C6B0|A206    |      ;
                        LDY.B #$04                           ;80C6B2|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C6B4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C6B4|22488E80|808E48;
                        REP #$20                             ;80C6B8|C220    |      ;
                        SEP #$10                             ;80C6BA|E210    |      ;
                        LDA.W #$E0DE                         ;80C6BC|A9DEE0  |      ;
@@ -8482,11 +8482,11 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C6C9|A90C    |      ;
                        LDX.B #$07                           ;80C6CB|A207    |      ;
                        LDY.B #$04                           ;80C6CD|A004    |      ;
-                       JSL.L CODE_808E48                    ;80C6CF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C6CF|22488E80|808E48;
                        RTS                                  ;80C6D3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C6D4:
+    subUnknown_80C6D4:
                        REP #$20                             ;80C6D4|C220    |      ;
                        SEP #$10                             ;80C6D6|E210    |      ;
                        LDA.W #$E0FB                         ;80C6D8|A9FBE0  |      ;
@@ -8498,7 +8498,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80C6E5|A906    |      ;
                        LDX.B #$04                           ;80C6E7|A204    |      ;
                        LDY.B #$02                           ;80C6E9|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C6EB|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C6EB|22488E80|808E48;
                        REP #$20                             ;80C6EF|C220    |      ;
                        SEP #$10                             ;80C6F1|E210    |      ;
                        LDA.W #$E10C                         ;80C6F3|A90CE1  |      ;
@@ -8510,7 +8510,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80C700|A907    |      ;
                        LDX.B #$05                           ;80C702|A205    |      ;
                        LDY.B #$02                           ;80C704|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C706|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C706|22488E80|808E48;
                        REP #$20                             ;80C70A|C220    |      ;
                        SEP #$10                             ;80C70C|E210    |      ;
                        LDA.W #$E11D                         ;80C70E|A91DE1  |      ;
@@ -8522,7 +8522,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C71B|A90B    |      ;
                        LDX.B #$06                           ;80C71D|A206    |      ;
                        LDY.B #$02                           ;80C71F|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C721|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C721|22488E80|808E48;
                        REP #$20                             ;80C725|C220    |      ;
                        SEP #$10                             ;80C727|E210    |      ;
                        LDA.W #$E12E                         ;80C729|A92EE1  |      ;
@@ -8534,7 +8534,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C736|A90C    |      ;
                        LDX.B #$07                           ;80C738|A207    |      ;
                        LDY.B #$02                           ;80C73A|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C73C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C73C|22488E80|808E48;
                        REP #$20                             ;80C740|C220    |      ;
                        SEP #$10                             ;80C742|E210    |      ;
                        LDA.W #$E13F                         ;80C744|A93FE1  |      ;
@@ -8546,7 +8546,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80C751|A90D    |      ;
                        LDX.B #$08                           ;80C753|A208    |      ;
                        LDY.B #$02                           ;80C755|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C757|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C757|22488E80|808E48;
                        REP #$20                             ;80C75B|C220    |      ;
                        SEP #$10                             ;80C75D|E210    |      ;
                        LDA.W #$E150                         ;80C75F|A950E1  |      ;
@@ -8558,7 +8558,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80C76C|A90E    |      ;
                        LDX.B #$09                           ;80C76E|A209    |      ;
                        LDY.B #$02                           ;80C770|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C772|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C772|22488E80|808E48;
                        REP #$20                             ;80C776|C220    |      ;
                        SEP #$10                             ;80C778|E210    |      ;
                        LDA.W #$E161                         ;80C77A|A961E1  |      ;
@@ -8570,11 +8570,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80C787|A90F    |      ;
                        LDX.B #$0A                           ;80C789|A20A    |      ;
                        LDY.B #$02                           ;80C78B|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C78D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C78D|22488E80|808E48;
                        RTS                                  ;80C791|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C792:
+    subUnknown_80C792:
                        REP #$20                             ;80C792|C220    |      ;
                        SEP #$10                             ;80C794|E210    |      ;
                        LDA.W #$E172                         ;80C796|A972E1  |      ;
@@ -8586,7 +8586,7 @@ aScreenTransitionTable:
                        LDA.B #$02                           ;80C7A3|A902    |      ;
                        LDX.B #$04                           ;80C7A5|A204    |      ;
                        LDY.B #$03                           ;80C7A7|A003    |      ;
-                       JSL.L CODE_808E48                    ;80C7A9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C7A9|22488E80|808E48;
                        REP #$20                             ;80C7AD|C220    |      ;
                        SEP #$10                             ;80C7AF|E210    |      ;
                        LDA.W #$E17D                         ;80C7B1|A97DE1  |      ;
@@ -8598,7 +8598,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80C7BE|A90D    |      ;
                        LDX.B #$05                           ;80C7C0|A205    |      ;
                        LDY.B #$03                           ;80C7C2|A003    |      ;
-                       JSL.L CODE_808E48                    ;80C7C4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C7C4|22488E80|808E48;
                        REP #$20                             ;80C7C8|C220    |      ;
                        SEP #$10                             ;80C7CA|E210    |      ;
                        LDA.W #$E188                         ;80C7CC|A988E1  |      ;
@@ -8610,7 +8610,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80C7D9|A90E    |      ;
                        LDX.B #$06                           ;80C7DB|A206    |      ;
                        LDY.B #$03                           ;80C7DD|A003    |      ;
-                       JSL.L CODE_808E48                    ;80C7DF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C7DF|22488E80|808E48;
                        REP #$20                             ;80C7E3|C220    |      ;
                        SEP #$10                             ;80C7E5|E210    |      ;
                        LDA.W #$E193                         ;80C7E7|A993E1  |      ;
@@ -8622,11 +8622,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80C7F4|A90F    |      ;
                        LDX.B #$07                           ;80C7F6|A207    |      ;
                        LDY.B #$03                           ;80C7F8|A003    |      ;
-                       JSL.L CODE_808E48                    ;80C7FA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C7FA|22488E80|808E48;
                        RTS                                  ;80C7FE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C7FF:
+    subUnknown_80C7FF:
                        REP #$20                             ;80C7FF|C220    |      ;
                        SEP #$10                             ;80C801|E210    |      ;
                        LDA.W #$E19E                         ;80C803|A99EE1  |      ;
@@ -8638,7 +8638,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80C810|A907    |      ;
                        LDX.B #$04                           ;80C812|A204    |      ;
                        LDY.B #$01                           ;80C814|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C816|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C816|22488E80|808E48;
                        REP #$20                             ;80C81A|C220    |      ;
                        SEP #$10                             ;80C81C|E210    |      ;
                        LDA.W #$E1A9                         ;80C81E|A9A9E1  |      ;
@@ -8650,7 +8650,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80C82B|A908    |      ;
                        LDX.B #$05                           ;80C82D|A205    |      ;
                        LDY.B #$01                           ;80C82F|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C831|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C831|22488E80|808E48;
                        REP #$20                             ;80C835|C220    |      ;
                        SEP #$10                             ;80C837|E210    |      ;
                        LDA.W #$E1B4                         ;80C839|A9B4E1  |      ;
@@ -8662,7 +8662,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C846|A909    |      ;
                        LDX.B #$06                           ;80C848|A206    |      ;
                        LDY.B #$01                           ;80C84A|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C84C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C84C|22488E80|808E48;
                        REP #$20                             ;80C850|C220    |      ;
                        SEP #$10                             ;80C852|E210    |      ;
                        LDA.W #$E1BF                         ;80C854|A9BFE1  |      ;
@@ -8674,11 +8674,11 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C861|A909    |      ;
                        LDX.B #$07                           ;80C863|A207    |      ;
                        LDY.B #$02                           ;80C865|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C867|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C867|22488E80|808E48;
                        RTS                                  ;80C86B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C86C:
+    subUnknown_80C86C:
                        REP #$20                             ;80C86C|C220    |      ;
                        SEP #$10                             ;80C86E|E210    |      ;
                        LDA.W #$E1CA                         ;80C870|A9CAE1  |      ;
@@ -8690,7 +8690,7 @@ aScreenTransitionTable:
                        LDA.B #$01                           ;80C87D|A901    |      ;
                        LDX.B #$04                           ;80C87F|A204    |      ;
                        LDY.B #$05                           ;80C881|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C883|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C883|22488E80|808E48;
                        REP #$20                             ;80C887|C220    |      ;
                        SEP #$10                             ;80C889|E210    |      ;
                        LDA.W #$E1DB                         ;80C88B|A9DBE1  |      ;
@@ -8702,7 +8702,7 @@ aScreenTransitionTable:
                        LDA.B #$04                           ;80C898|A904    |      ;
                        LDX.B #$05                           ;80C89A|A205    |      ;
                        LDY.B #$05                           ;80C89C|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C89E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C89E|22488E80|808E48;
                        REP #$20                             ;80C8A2|C220    |      ;
                        SEP #$10                             ;80C8A4|E210    |      ;
                        LDA.W #$E1EC                         ;80C8A6|A9ECE1  |      ;
@@ -8714,7 +8714,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80C8B3|A907    |      ;
                        LDX.B #$06                           ;80C8B5|A206    |      ;
                        LDY.B #$05                           ;80C8B7|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C8B9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C8B9|22488E80|808E48;
                        REP #$20                             ;80C8BD|C220    |      ;
                        SEP #$10                             ;80C8BF|E210    |      ;
                        LDA.W #$E1FD                         ;80C8C1|A9FDE1  |      ;
@@ -8726,7 +8726,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80C8CE|A908    |      ;
                        LDX.B #$07                           ;80C8D0|A207    |      ;
                        LDY.B #$05                           ;80C8D2|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C8D4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C8D4|22488E80|808E48;
                        REP #$20                             ;80C8D8|C220    |      ;
                        SEP #$10                             ;80C8DA|E210    |      ;
                        LDA.W #$E20E                         ;80C8DC|A90EE2  |      ;
@@ -8738,7 +8738,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80C8E9|A909    |      ;
                        LDX.B #$08                           ;80C8EB|A208    |      ;
                        LDY.B #$05                           ;80C8ED|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C8EF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C8EF|22488E80|808E48;
                        REP #$20                             ;80C8F3|C220    |      ;
                        SEP #$10                             ;80C8F5|E210    |      ;
                        LDA.W #$E21F                         ;80C8F7|A91FE2  |      ;
@@ -8750,7 +8750,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C904|A90B    |      ;
                        LDX.B #$09                           ;80C906|A209    |      ;
                        LDY.B #$05                           ;80C908|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C90A|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C90A|22488E80|808E48;
                        REP #$20                             ;80C90E|C220    |      ;
                        SEP #$10                             ;80C910|E210    |      ;
                        LDA.W #$E230                         ;80C912|A930E2  |      ;
@@ -8762,7 +8762,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80C91F|A90D    |      ;
                        LDX.B #$0A                           ;80C921|A20A    |      ;
                        LDY.B #$05                           ;80C923|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C925|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C925|22488E80|808E48;
                        REP #$20                             ;80C929|C220    |      ;
                        SEP #$10                             ;80C92B|E210    |      ;
                        LDA.W #$E241                         ;80C92D|A941E2  |      ;
@@ -8774,11 +8774,11 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80C93A|A90E    |      ;
                        LDX.B #$0B                           ;80C93C|A20B    |      ;
                        LDY.B #$05                           ;80C93E|A005    |      ;
-                       JSL.L CODE_808E48                    ;80C940|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C940|22488E80|808E48;
                        RTS                                  ;80C944|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C945:
+    subUnknown_80C945:
                        REP #$20                             ;80C945|C220    |      ;
                        SEP #$10                             ;80C947|E210    |      ;
                        LDA.W #$E252                         ;80C949|A952E2  |      ;
@@ -8790,7 +8790,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80C956|A908    |      ;
                        LDX.B #$04                           ;80C958|A204    |      ;
                        LDY.B #$01                           ;80C95A|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C95C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C95C|22488E80|808E48;
                        REP #$20                             ;80C960|C220    |      ;
                        SEP #$10                             ;80C962|E210    |      ;
                        LDA.W #$E25D                         ;80C964|A95DE2  |      ;
@@ -8802,7 +8802,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80C971|A90B    |      ;
                        LDX.B #$05                           ;80C973|A205    |      ;
                        LDY.B #$01                           ;80C975|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C977|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C977|22488E80|808E48;
                        REP #$20                             ;80C97B|C220    |      ;
                        SEP #$10                             ;80C97D|E210    |      ;
                        LDA.W #$E268                         ;80C97F|A968E2  |      ;
@@ -8814,7 +8814,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80C98C|A90C    |      ;
                        LDX.B #$06                           ;80C98E|A206    |      ;
                        LDY.B #$01                           ;80C990|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C992|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C992|22488E80|808E48;
                        REP #$20                             ;80C996|C220    |      ;
                        SEP #$10                             ;80C998|E210    |      ;
                        LDA.W #$E273                         ;80C99A|A973E2  |      ;
@@ -8826,11 +8826,11 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80C9A7|A90D    |      ;
                        LDX.B #$07                           ;80C9A9|A207    |      ;
                        LDY.B #$01                           ;80C9AB|A001    |      ;
-                       JSL.L CODE_808E48                    ;80C9AD|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C9AD|22488E80|808E48;
                        RTS                                  ;80C9B1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80C9B2:
+    subUnknown_80C9B2:
                        REP #$20                             ;80C9B2|C220    |      ;
                        SEP #$10                             ;80C9B4|E210    |      ;
                        LDA.W #$E27E                         ;80C9B6|A97EE2  |      ;
@@ -8842,7 +8842,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80C9C3|A907    |      ;
                        LDX.B #$04                           ;80C9C5|A204    |      ;
                        LDY.B #$02                           ;80C9C7|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C9C9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C9C9|22488E80|808E48;
                        REP #$20                             ;80C9CD|C220    |      ;
                        SEP #$10                             ;80C9CF|E210    |      ;
                        LDA.W #$E289                         ;80C9D1|A989E2  |      ;
@@ -8854,7 +8854,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80C9DE|A908    |      ;
                        LDX.B #$05                           ;80C9E0|A205    |      ;
                        LDY.B #$02                           ;80C9E2|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C9E4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C9E4|22488E80|808E48;
                        REP #$20                             ;80C9E8|C220    |      ;
                        SEP #$10                             ;80C9EA|E210    |      ;
                        LDA.W #$E294                         ;80C9EC|A994E2  |      ;
@@ -8866,7 +8866,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80C9F9|A90D    |      ;
                        LDX.B #$06                           ;80C9FB|A206    |      ;
                        LDY.B #$02                           ;80C9FD|A002    |      ;
-                       JSL.L CODE_808E48                    ;80C9FF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80C9FF|22488E80|808E48;
                        REP #$20                             ;80CA03|C220    |      ;
                        SEP #$10                             ;80CA05|E210    |      ;
                        LDA.W #$E29F                         ;80CA07|A99FE2  |      ;
@@ -8878,11 +8878,11 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CA14|A90E    |      ;
                        LDX.B #$07                           ;80CA16|A207    |      ;
                        LDY.B #$02                           ;80CA18|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CA1A|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CA1A|22488E80|808E48;
                        RTS                                  ;80CA1E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CA1F:
+    subUnknown_80CA1F:
                        REP #$20                             ;80CA1F|C220    |      ;
                        SEP #$10                             ;80CA21|E210    |      ;
                        LDA.W #$E2AA                         ;80CA23|A9AAE2  |      ;
@@ -8894,7 +8894,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80CA30|A90A    |      ;
                        LDX.B #$04                           ;80CA32|A204    |      ;
                        LDY.B #$01                           ;80CA34|A001    |      ;
-                       JSL.L CODE_808E48                    ;80CA36|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CA36|22488E80|808E48;
                        REP #$20                             ;80CA3A|C220    |      ;
                        SEP #$10                             ;80CA3C|E210    |      ;
                        LDA.W #$E2B5                         ;80CA3E|A9B5E2  |      ;
@@ -8906,7 +8906,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80CA4B|A90B    |      ;
                        LDX.B #$05                           ;80CA4D|A205    |      ;
                        LDY.B #$01                           ;80CA4F|A001    |      ;
-                       JSL.L CODE_808E48                    ;80CA51|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CA51|22488E80|808E48;
                        REP #$20                             ;80CA55|C220    |      ;
                        SEP #$10                             ;80CA57|E210    |      ;
                        LDA.W #$E2C0                         ;80CA59|A9C0E2  |      ;
@@ -8918,7 +8918,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80CA66|A90C    |      ;
                        LDX.B #$06                           ;80CA68|A206    |      ;
                        LDY.B #$01                           ;80CA6A|A001    |      ;
-                       JSL.L CODE_808E48                    ;80CA6C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CA6C|22488E80|808E48;
                        REP #$20                             ;80CA70|C220    |      ;
                        SEP #$10                             ;80CA72|E210    |      ;
                        LDA.W #$E2CB                         ;80CA74|A9CBE2  |      ;
@@ -8930,11 +8930,11 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80CA81|A90D    |      ;
                        LDX.B #$07                           ;80CA83|A207    |      ;
                        LDY.B #$01                           ;80CA85|A001    |      ;
-                       JSL.L CODE_808E48                    ;80CA87|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CA87|22488E80|808E48;
                        RTS                                  ;80CA8B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CA8C:
+    subUnknown_80CA8C:
                        REP #$20                             ;80CA8C|C220    |      ;
                        SEP #$10                             ;80CA8E|E210    |      ;
                        LDA.W #$E2D6                         ;80CA90|A9D6E2  |      ;
@@ -8946,7 +8946,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80CA9D|A90D    |      ;
                        LDX.B #$04                           ;80CA9F|A204    |      ;
                        LDY.B #$02                           ;80CAA1|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CAA3|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CAA3|22488E80|808E48;
                        REP #$20                             ;80CAA7|C220    |      ;
                        SEP #$10                             ;80CAA9|E210    |      ;
                        LDA.W #$E2E1                         ;80CAAB|A9E1E2  |      ;
@@ -8958,7 +8958,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CAB8|A90E    |      ;
                        LDX.B #$05                           ;80CABA|A205    |      ;
                        LDY.B #$02                           ;80CABC|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CABE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CABE|22488E80|808E48;
                        REP #$20                             ;80CAC2|C220    |      ;
                        SEP #$10                             ;80CAC4|E210    |      ;
                        LDA.W #$E2EC                         ;80CAC6|A9ECE2  |      ;
@@ -8970,11 +8970,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CAD3|A90F    |      ;
                        LDX.B #$06                           ;80CAD5|A206    |      ;
                        LDY.B #$02                           ;80CAD7|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CAD9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CAD9|22488E80|808E48;
                        RTS                                  ;80CADD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CADE:
+    subUnknown_80CADE:
                        REP #$20                             ;80CADE|C220    |      ;
                        SEP #$10                             ;80CAE0|E210    |      ;
                        LDA.W #$E2F7                         ;80CAE2|A9F7E2  |      ;
@@ -8986,7 +8986,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CAEF|A906    |      ;
                        LDX.B #$04                           ;80CAF1|A204    |      ;
                        LDY.B #$02                           ;80CAF3|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CAF5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CAF5|22488E80|808E48;
                        REP #$20                             ;80CAF9|C220    |      ;
                        SEP #$10                             ;80CAFB|E210    |      ;
                        LDA.W #$E305                         ;80CAFD|A905E3  |      ;
@@ -8998,7 +8998,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CB0A|A90E    |      ;
                        LDX.B #$05                           ;80CB0C|A205    |      ;
                        LDY.B #$02                           ;80CB0E|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CB10|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CB10|22488E80|808E48;
                        REP #$20                             ;80CB14|C220    |      ;
                        SEP #$10                             ;80CB16|E210    |      ;
                        LDA.W #$E313                         ;80CB18|A913E3  |      ;
@@ -9010,11 +9010,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CB25|A90F    |      ;
                        LDX.B #$06                           ;80CB27|A206    |      ;
                        LDY.B #$02                           ;80CB29|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CB2B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CB2B|22488E80|808E48;
                        RTS                                  ;80CB2F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CB30:
+    subUnknown_80CB30:
                        REP #$20                             ;80CB30|C220    |      ;
                        SEP #$10                             ;80CB32|E210    |      ;
                        LDA.W #$E321                         ;80CB34|A921E3  |      ;
@@ -9026,7 +9026,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CB41|A906    |      ;
                        LDX.B #$04                           ;80CB43|A204    |      ;
                        LDY.B #$02                           ;80CB45|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CB47|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CB47|22488E80|808E48;
                        REP #$20                             ;80CB4B|C220    |      ;
                        SEP #$10                             ;80CB4D|E210    |      ;
                        LDA.W #$E32F                         ;80CB4F|A92FE3  |      ;
@@ -9038,7 +9038,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CB5C|A90E    |      ;
                        LDX.B #$05                           ;80CB5E|A205    |      ;
                        LDY.B #$02                           ;80CB60|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CB62|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CB62|22488E80|808E48;
                        REP #$20                             ;80CB66|C220    |      ;
                        SEP #$10                             ;80CB68|E210    |      ;
                        LDA.W #$E33D                         ;80CB6A|A93DE3  |      ;
@@ -9050,11 +9050,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CB77|A90F    |      ;
                        LDX.B #$06                           ;80CB79|A206    |      ;
                        LDY.B #$02                           ;80CB7B|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CB7D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CB7D|22488E80|808E48;
                        RTS                                  ;80CB81|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CB82:
+    subUnknown_80CB82:
                        REP #$20                             ;80CB82|C220    |      ;
                        SEP #$10                             ;80CB84|E210    |      ;
                        LDA.W #$E34B                         ;80CB86|A94BE3  |      ;
@@ -9066,7 +9066,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CB93|A906    |      ;
                        LDX.B #$04                           ;80CB95|A204    |      ;
                        LDY.B #$02                           ;80CB97|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CB99|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CB99|22488E80|808E48;
                        REP #$20                             ;80CB9D|C220    |      ;
                        SEP #$10                             ;80CB9F|E210    |      ;
                        LDA.W #$E359                         ;80CBA1|A959E3  |      ;
@@ -9078,7 +9078,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CBAE|A90E    |      ;
                        LDX.B #$05                           ;80CBB0|A205    |      ;
                        LDY.B #$02                           ;80CBB2|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CBB4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CBB4|22488E80|808E48;
                        REP #$20                             ;80CBB8|C220    |      ;
                        SEP #$10                             ;80CBBA|E210    |      ;
                        LDA.W #$E367                         ;80CBBC|A967E3  |      ;
@@ -9090,11 +9090,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CBC9|A90F    |      ;
                        LDX.B #$06                           ;80CBCB|A206    |      ;
                        LDY.B #$02                           ;80CBCD|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CBCF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CBCF|22488E80|808E48;
                        RTS                                  ;80CBD3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CBD4:
+    subUnknown_80CBD4:
                        REP #$20                             ;80CBD4|C220    |      ;
                        SEP #$10                             ;80CBD6|E210    |      ;
                        LDA.W #$E375                         ;80CBD8|A975E3  |      ;
@@ -9106,7 +9106,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CBE5|A906    |      ;
                        LDX.B #$04                           ;80CBE7|A204    |      ;
                        LDY.B #$02                           ;80CBE9|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CBEB|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CBEB|22488E80|808E48;
                        REP #$20                             ;80CBEF|C220    |      ;
                        SEP #$10                             ;80CBF1|E210    |      ;
                        LDA.W #$E383                         ;80CBF3|A983E3  |      ;
@@ -9118,7 +9118,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CC00|A90E    |      ;
                        LDX.B #$05                           ;80CC02|A205    |      ;
                        LDY.B #$02                           ;80CC04|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CC06|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CC06|22488E80|808E48;
                        REP #$20                             ;80CC0A|C220    |      ;
                        SEP #$10                             ;80CC0C|E210    |      ;
                        LDA.W #$E391                         ;80CC0E|A991E3  |      ;
@@ -9130,7 +9130,7 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CC1B|A90F    |      ;
                        LDX.B #$06                           ;80CC1D|A206    |      ;
                        LDY.B #$02                           ;80CC1F|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CC21|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CC21|22488E80|808E48;
                        REP #$20                             ;80CC25|C220    |      ;
                        SEP #$10                             ;80CC27|E210    |      ;
                        LDA.W #$E4EF                         ;80CC29|A9EFE4  |      ;
@@ -9142,7 +9142,7 @@ aScreenTransitionTable:
                        LDA.B #$03                           ;80CC36|A903    |      ;
                        LDX.B #$07                           ;80CC38|A207    |      ;
                        LDY.B #$02                           ;80CC3A|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CC3C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CC3C|22488E80|808E48;
                        REP #$20                             ;80CC40|C220    |      ;
                        SEP #$10                             ;80CC42|E210    |      ;
                        LDA.W #$E500                         ;80CC44|A900E5  |      ;
@@ -9154,7 +9154,7 @@ aScreenTransitionTable:
                        LDA.B #$04                           ;80CC51|A904    |      ;
                        LDX.B #$08                           ;80CC53|A208    |      ;
                        LDY.B #$02                           ;80CC55|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CC57|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CC57|22488E80|808E48;
                        REP #$20                             ;80CC5B|C220    |      ;
                        SEP #$10                             ;80CC5D|E210    |      ;
                        LDA.W #$E511                         ;80CC5F|A911E5  |      ;
@@ -9166,7 +9166,7 @@ aScreenTransitionTable:
                        LDA.B #$05                           ;80CC6C|A905    |      ;
                        LDX.B #$09                           ;80CC6E|A209    |      ;
                        LDY.B #$02                           ;80CC70|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CC72|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CC72|22488E80|808E48;
                        REP #$20                             ;80CC76|C220    |      ;
                        SEP #$10                             ;80CC78|E210    |      ;
                        LDA.W #$E522                         ;80CC7A|A922E5  |      ;
@@ -9178,11 +9178,11 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80CC87|A907    |      ;
                        LDX.B #$0A                           ;80CC89|A20A    |      ;
                        LDY.B #$02                           ;80CC8B|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CC8D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CC8D|22488E80|808E48;
                        RTS                                  ;80CC91|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CC92:
+    subUnknown_80CC92:
                        REP #$20                             ;80CC92|C220    |      ;
                        SEP #$10                             ;80CC94|E210    |      ;
                        LDA.W #$E39F                         ;80CC96|A99FE3  |      ;
@@ -9194,7 +9194,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CCA3|A906    |      ;
                        LDX.B #$04                           ;80CCA5|A204    |      ;
                        LDY.B #$02                           ;80CCA7|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CCA9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CCA9|22488E80|808E48;
                        REP #$20                             ;80CCAD|C220    |      ;
                        SEP #$10                             ;80CCAF|E210    |      ;
                        LDA.W #$E3AD                         ;80CCB1|A9ADE3  |      ;
@@ -9206,7 +9206,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CCBE|A90E    |      ;
                        LDX.B #$05                           ;80CCC0|A205    |      ;
                        LDY.B #$02                           ;80CCC2|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CCC4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CCC4|22488E80|808E48;
                        REP #$20                             ;80CCC8|C220    |      ;
                        SEP #$10                             ;80CCCA|E210    |      ;
                        LDA.W #$E3BB                         ;80CCCC|A9BBE3  |      ;
@@ -9218,11 +9218,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CCD9|A90F    |      ;
                        LDX.B #$06                           ;80CCDB|A206    |      ;
                        LDY.B #$02                           ;80CCDD|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CCDF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CCDF|22488E80|808E48;
                        RTS                                  ;80CCE3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CCE4:
+    subUnknown_80CCE4:
                        REP #$20                             ;80CCE4|C220    |      ;
                        SEP #$10                             ;80CCE6|E210    |      ;
                        LDA.W #$E3C9                         ;80CCE8|A9C9E3  |      ;
@@ -9234,7 +9234,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CCF5|A906    |      ;
                        LDX.B #$04                           ;80CCF7|A204    |      ;
                        LDY.B #$02                           ;80CCF9|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CCFB|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CCFB|22488E80|808E48;
                        REP #$20                             ;80CCFF|C220    |      ;
                        SEP #$10                             ;80CD01|E210    |      ;
                        LDA.W #$E3D7                         ;80CD03|A9D7E3  |      ;
@@ -9246,7 +9246,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CD10|A90E    |      ;
                        LDX.B #$05                           ;80CD12|A205    |      ;
                        LDY.B #$02                           ;80CD14|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CD16|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CD16|22488E80|808E48;
                        REP #$20                             ;80CD1A|C220    |      ;
                        SEP #$10                             ;80CD1C|E210    |      ;
                        LDA.W #$E3E5                         ;80CD1E|A9E5E3  |      ;
@@ -9258,11 +9258,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CD2B|A90F    |      ;
                        LDX.B #$06                           ;80CD2D|A206    |      ;
                        LDY.B #$02                           ;80CD2F|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CD31|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CD31|22488E80|808E48;
                        RTS                                  ;80CD35|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CD36:
+    subUnknown_80CD36:
                        REP #$20                             ;80CD36|C220    |      ;
                        SEP #$10                             ;80CD38|E210    |      ;
                        LDA.W #$E3F3                         ;80CD3A|A9F3E3  |      ;
@@ -9274,7 +9274,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CD47|A906    |      ;
                        LDX.B #$04                           ;80CD49|A204    |      ;
                        LDY.B #$02                           ;80CD4B|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CD4D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CD4D|22488E80|808E48;
                        REP #$20                             ;80CD51|C220    |      ;
                        SEP #$10                             ;80CD53|E210    |      ;
                        LDA.W #$E401                         ;80CD55|A901E4  |      ;
@@ -9286,7 +9286,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CD62|A90E    |      ;
                        LDX.B #$05                           ;80CD64|A205    |      ;
                        LDY.B #$02                           ;80CD66|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CD68|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CD68|22488E80|808E48;
                        REP #$20                             ;80CD6C|C220    |      ;
                        SEP #$10                             ;80CD6E|E210    |      ;
                        LDA.W #$E40F                         ;80CD70|A90FE4  |      ;
@@ -9298,11 +9298,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CD7D|A90F    |      ;
                        LDX.B #$06                           ;80CD7F|A206    |      ;
                        LDY.B #$02                           ;80CD81|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CD83|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CD83|22488E80|808E48;
                        RTS                                  ;80CD87|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CD88:
+    subUnknown_80CD88:
                        REP #$20                             ;80CD88|C220    |      ;
                        SEP #$10                             ;80CD8A|E210    |      ;
                        LDA.W #$E41D                         ;80CD8C|A91DE4  |      ;
@@ -9314,7 +9314,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CD99|A906    |      ;
                        LDX.B #$04                           ;80CD9B|A204    |      ;
                        LDY.B #$02                           ;80CD9D|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CD9F|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CD9F|22488E80|808E48;
                        REP #$20                             ;80CDA3|C220    |      ;
                        SEP #$10                             ;80CDA5|E210    |      ;
                        LDA.W #$E42B                         ;80CDA7|A92BE4  |      ;
@@ -9326,7 +9326,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CDB4|A90E    |      ;
                        LDX.B #$05                           ;80CDB6|A205    |      ;
                        LDY.B #$02                           ;80CDB8|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CDBA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CDBA|22488E80|808E48;
                        REP #$20                             ;80CDBE|C220    |      ;
                        SEP #$10                             ;80CDC0|E210    |      ;
                        LDA.W #$E439                         ;80CDC2|A939E4  |      ;
@@ -9338,7 +9338,7 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CDCF|A90F    |      ;
                        LDX.B #$06                           ;80CDD1|A206    |      ;
                        LDY.B #$02                           ;80CDD3|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CDD5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CDD5|22488E80|808E48;
                        REP #$20                             ;80CDD9|C220    |      ;
                        SEP #$10                             ;80CDDB|E210    |      ;
                        LDA.W #$E533                         ;80CDDD|A933E5  |      ;
@@ -9350,7 +9350,7 @@ aScreenTransitionTable:
                        LDA.B #$03                           ;80CDEA|A903    |      ;
                        LDX.B #$07                           ;80CDEC|A207    |      ;
                        LDY.B #$02                           ;80CDEE|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CDF0|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CDF0|22488E80|808E48;
                        REP #$20                             ;80CDF4|C220    |      ;
                        SEP #$10                             ;80CDF6|E210    |      ;
                        LDA.W #$E544                         ;80CDF8|A944E5  |      ;
@@ -9362,7 +9362,7 @@ aScreenTransitionTable:
                        LDA.B #$04                           ;80CE05|A904    |      ;
                        LDX.B #$08                           ;80CE07|A208    |      ;
                        LDY.B #$02                           ;80CE09|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CE0B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CE0B|22488E80|808E48;
                        REP #$20                             ;80CE0F|C220    |      ;
                        SEP #$10                             ;80CE11|E210    |      ;
                        LDA.W #$E555                         ;80CE13|A955E5  |      ;
@@ -9374,7 +9374,7 @@ aScreenTransitionTable:
                        LDA.B #$05                           ;80CE20|A905    |      ;
                        LDX.B #$09                           ;80CE22|A209    |      ;
                        LDY.B #$02                           ;80CE24|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CE26|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CE26|22488E80|808E48;
                        REP #$20                             ;80CE2A|C220    |      ;
                        SEP #$10                             ;80CE2C|E210    |      ;
                        LDA.W #$E566                         ;80CE2E|A966E5  |      ;
@@ -9386,11 +9386,11 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80CE3B|A907    |      ;
                        LDX.B #$0A                           ;80CE3D|A20A    |      ;
                        LDY.B #$02                           ;80CE3F|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CE41|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CE41|22488E80|808E48;
                        RTS                                  ;80CE45|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CE46:
+    subUnknown_80CE46:
                        REP #$20                             ;80CE46|C220    |      ;
                        SEP #$10                             ;80CE48|E210    |      ;
                        LDA.W #$E447                         ;80CE4A|A947E4  |      ;
@@ -9402,7 +9402,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CE57|A906    |      ;
                        LDX.B #$04                           ;80CE59|A204    |      ;
                        LDY.B #$02                           ;80CE5B|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CE5D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CE5D|22488E80|808E48;
                        REP #$20                             ;80CE61|C220    |      ;
                        SEP #$10                             ;80CE63|E210    |      ;
                        LDA.W #$E455                         ;80CE65|A955E4  |      ;
@@ -9414,7 +9414,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CE72|A90E    |      ;
                        LDX.B #$05                           ;80CE74|A205    |      ;
                        LDY.B #$02                           ;80CE76|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CE78|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CE78|22488E80|808E48;
                        REP #$20                             ;80CE7C|C220    |      ;
                        SEP #$10                             ;80CE7E|E210    |      ;
                        LDA.W #$E463                         ;80CE80|A963E4  |      ;
@@ -9426,11 +9426,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CE8D|A90F    |      ;
                        LDX.B #$06                           ;80CE8F|A206    |      ;
                        LDY.B #$02                           ;80CE91|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CE93|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CE93|22488E80|808E48;
                        RTS                                  ;80CE97|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CE98:
+    subUnknown_80CE98:
                        REP #$20                             ;80CE98|C220    |      ;
                        SEP #$10                             ;80CE9A|E210    |      ;
                        LDA.W #$E471                         ;80CE9C|A971E4  |      ;
@@ -9442,7 +9442,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CEA9|A906    |      ;
                        LDX.B #$04                           ;80CEAB|A204    |      ;
                        LDY.B #$02                           ;80CEAD|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CEAF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CEAF|22488E80|808E48;
                        REP #$20                             ;80CEB3|C220    |      ;
                        SEP #$10                             ;80CEB5|E210    |      ;
                        LDA.W #$E47F                         ;80CEB7|A97FE4  |      ;
@@ -9454,7 +9454,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CEC4|A90E    |      ;
                        LDX.B #$05                           ;80CEC6|A205    |      ;
                        LDY.B #$02                           ;80CEC8|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CECA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CECA|22488E80|808E48;
                        REP #$20                             ;80CECE|C220    |      ;
                        SEP #$10                             ;80CED0|E210    |      ;
                        LDA.W #$E48D                         ;80CED2|A98DE4  |      ;
@@ -9466,11 +9466,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CEDF|A90F    |      ;
                        LDX.B #$06                           ;80CEE1|A206    |      ;
                        LDY.B #$02                           ;80CEE3|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CEE5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CEE5|22488E80|808E48;
                        RTS                                  ;80CEE9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CEEA:
+    subUnknown_80CEEA:
                        REP #$20                             ;80CEEA|C220    |      ;
                        SEP #$10                             ;80CEEC|E210    |      ;
                        LDA.W #$E49B                         ;80CEEE|A99BE4  |      ;
@@ -9482,7 +9482,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CEFB|A906    |      ;
                        LDX.B #$04                           ;80CEFD|A204    |      ;
                        LDY.B #$02                           ;80CEFF|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CF01|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CF01|22488E80|808E48;
                        REP #$20                             ;80CF05|C220    |      ;
                        SEP #$10                             ;80CF07|E210    |      ;
                        LDA.W #$E4A9                         ;80CF09|A9A9E4  |      ;
@@ -9494,7 +9494,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CF16|A90E    |      ;
                        LDX.B #$05                           ;80CF18|A205    |      ;
                        LDY.B #$02                           ;80CF1A|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CF1C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CF1C|22488E80|808E48;
                        REP #$20                             ;80CF20|C220    |      ;
                        SEP #$10                             ;80CF22|E210    |      ;
                        LDA.W #$E4B7                         ;80CF24|A9B7E4  |      ;
@@ -9506,11 +9506,11 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CF31|A90F    |      ;
                        LDX.B #$06                           ;80CF33|A206    |      ;
                        LDY.B #$02                           ;80CF35|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CF37|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CF37|22488E80|808E48;
                        RTS                                  ;80CF3B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CF3C:
+    subUnknown_80CF3C:
                        REP #$20                             ;80CF3C|C220    |      ;
                        SEP #$10                             ;80CF3E|E210    |      ;
                        LDA.W #$E4C5                         ;80CF40|A9C5E4  |      ;
@@ -9522,7 +9522,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80CF4D|A906    |      ;
                        LDX.B #$04                           ;80CF4F|A204    |      ;
                        LDY.B #$02                           ;80CF51|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CF53|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CF53|22488E80|808E48;
                        REP #$20                             ;80CF57|C220    |      ;
                        SEP #$10                             ;80CF59|E210    |      ;
                        LDA.W #$E4D3                         ;80CF5B|A9D3E4  |      ;
@@ -9534,7 +9534,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80CF68|A90E    |      ;
                        LDX.B #$05                           ;80CF6A|A205    |      ;
                        LDY.B #$02                           ;80CF6C|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CF6E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CF6E|22488E80|808E48;
                        REP #$20                             ;80CF72|C220    |      ;
                        SEP #$10                             ;80CF74|E210    |      ;
                        LDA.W #$E4E1                         ;80CF76|A9E1E4  |      ;
@@ -9546,7 +9546,7 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80CF83|A90F    |      ;
                        LDX.B #$06                           ;80CF85|A206    |      ;
                        LDY.B #$02                           ;80CF87|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CF89|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CF89|22488E80|808E48;
                        REP #$20                             ;80CF8D|C220    |      ;
                        SEP #$10                             ;80CF8F|E210    |      ;
                        LDA.W #$E577                         ;80CF91|A977E5  |      ;
@@ -9558,7 +9558,7 @@ aScreenTransitionTable:
                        LDA.B #$03                           ;80CF9E|A903    |      ;
                        LDX.B #$07                           ;80CFA0|A207    |      ;
                        LDY.B #$02                           ;80CFA2|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CFA4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CFA4|22488E80|808E48;
                        REP #$20                             ;80CFA8|C220    |      ;
                        SEP #$10                             ;80CFAA|E210    |      ;
                        LDA.W #$E588                         ;80CFAC|A988E5  |      ;
@@ -9570,7 +9570,7 @@ aScreenTransitionTable:
                        LDA.B #$04                           ;80CFB9|A904    |      ;
                        LDX.B #$08                           ;80CFBB|A208    |      ;
                        LDY.B #$02                           ;80CFBD|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CFBF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CFBF|22488E80|808E48;
                        REP #$20                             ;80CFC3|C220    |      ;
                        SEP #$10                             ;80CFC5|E210    |      ;
                        LDA.W #$E599                         ;80CFC7|A999E5  |      ;
@@ -9582,7 +9582,7 @@ aScreenTransitionTable:
                        LDA.B #$05                           ;80CFD4|A905    |      ;
                        LDX.B #$09                           ;80CFD6|A209    |      ;
                        LDY.B #$02                           ;80CFD8|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CFDA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CFDA|22488E80|808E48;
                        REP #$20                             ;80CFDE|C220    |      ;
                        SEP #$10                             ;80CFE0|E210    |      ;
                        LDA.W #$E5AA                         ;80CFE2|A9AAE5  |      ;
@@ -9594,11 +9594,11 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80CFEF|A907    |      ;
                        LDX.B #$0A                           ;80CFF1|A20A    |      ;
                        LDY.B #$02                           ;80CFF3|A002    |      ;
-                       JSL.L CODE_808E48                    ;80CFF5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80CFF5|22488E80|808E48;
                        RTS                                  ;80CFF9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80CFFA:
+    subUnknown_80CFFA:
                        REP #$20                             ;80CFFA|C220    |      ;
                        SEP #$10                             ;80CFFC|E210    |      ;
                        LDA.W #$E5BB                         ;80CFFE|A9BBE5  |      ;
@@ -9610,7 +9610,7 @@ aScreenTransitionTable:
                        LDA.B #$03                           ;80D00B|A903    |      ;
                        LDX.B #$04                           ;80D00D|A204    |      ;
                        LDY.B #$02                           ;80D00F|A002    |      ;
-                       JSL.L CODE_808E48                    ;80D011|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D011|22488E80|808E48;
                        REP #$20                             ;80D015|C220    |      ;
                        SEP #$10                             ;80D017|E210    |      ;
                        LDA.W #$E5CC                         ;80D019|A9CCE5  |      ;
@@ -9622,7 +9622,7 @@ aScreenTransitionTable:
                        LDA.B #$04                           ;80D026|A904    |      ;
                        LDX.B #$05                           ;80D028|A205    |      ;
                        LDY.B #$02                           ;80D02A|A002    |      ;
-                       JSL.L CODE_808E48                    ;80D02C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D02C|22488E80|808E48;
                        REP #$20                             ;80D030|C220    |      ;
                        SEP #$10                             ;80D032|E210    |      ;
                        LDA.W #$E5DD                         ;80D034|A9DDE5  |      ;
@@ -9634,7 +9634,7 @@ aScreenTransitionTable:
                        LDA.B #$05                           ;80D041|A905    |      ;
                        LDX.B #$06                           ;80D043|A206    |      ;
                        LDY.B #$02                           ;80D045|A002    |      ;
-                       JSL.L CODE_808E48                    ;80D047|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D047|22488E80|808E48;
                        REP #$20                             ;80D04B|C220    |      ;
                        SEP #$10                             ;80D04D|E210    |      ;
                        LDA.W #$E5EE                         ;80D04F|A9EEE5  |      ;
@@ -9646,11 +9646,11 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80D05C|A907    |      ;
                        LDX.B #$07                           ;80D05E|A207    |      ;
                        LDY.B #$02                           ;80D060|A002    |      ;
-                       JSL.L CODE_808E48                    ;80D062|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D062|22488E80|808E48;
                        RTS                                  ;80D066|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D067:
+    subUnknown_80D067:
                        REP #$20                             ;80D067|C220    |      ;
                        SEP #$10                             ;80D069|E210    |      ;
                        LDA.W #$E5FF                         ;80D06B|A9FFE5  |      ;
@@ -9662,7 +9662,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D078|A908    |      ;
                        LDX.B #$04                           ;80D07A|A204    |      ;
                        LDY.B #$03                           ;80D07C|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D07E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D07E|22488E80|808E48;
                        REP #$20                             ;80D082|C220    |      ;
                        SEP #$10                             ;80D084|E210    |      ;
                        LDA.W #$E616                         ;80D086|A916E6  |      ;
@@ -9674,7 +9674,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D093|A909    |      ;
                        LDX.B #$05                           ;80D095|A205    |      ;
                        LDY.B #$03                           ;80D097|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D099|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D099|22488E80|808E48;
                        REP #$20                             ;80D09D|C220    |      ;
                        SEP #$10                             ;80D09F|E210    |      ;
                        LDA.W #$E62D                         ;80D0A1|A92DE6  |      ;
@@ -9686,7 +9686,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D0AE|A90A    |      ;
                        LDX.B #$06                           ;80D0B0|A206    |      ;
                        LDY.B #$03                           ;80D0B2|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D0B4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D0B4|22488E80|808E48;
                        REP #$20                             ;80D0B8|C220    |      ;
                        SEP #$10                             ;80D0BA|E210    |      ;
                        LDA.W #$E644                         ;80D0BC|A944E6  |      ;
@@ -9698,7 +9698,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D0C9|A90B    |      ;
                        LDX.B #$07                           ;80D0CB|A207    |      ;
                        LDY.B #$03                           ;80D0CD|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D0CF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D0CF|22488E80|808E48;
                        REP #$20                             ;80D0D3|C220    |      ;
                        SEP #$10                             ;80D0D5|E210    |      ;
                        LDA.W #$E65B                         ;80D0D7|A95BE6  |      ;
@@ -9710,7 +9710,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D0E4|A90C    |      ;
                        LDX.B #$08                           ;80D0E6|A208    |      ;
                        LDY.B #$03                           ;80D0E8|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D0EA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D0EA|22488E80|808E48;
                        REP #$20                             ;80D0EE|C220    |      ;
                        SEP #$10                             ;80D0F0|E210    |      ;
                        LDA.W #$EB4C                         ;80D0F2|A94CEB  |      ;
@@ -9722,7 +9722,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D0FF|A90A    |      ;
                        LDX.B #$09                           ;80D101|A209    |      ;
                        LDY.B #$04                           ;80D103|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D105|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D105|22488E80|808E48;
                        REP #$20                             ;80D109|C220    |      ;
                        SEP #$10                             ;80D10B|E210    |      ;
                        LDA.W #$EB5D                         ;80D10D|A95DEB  |      ;
@@ -9734,11 +9734,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D11A|A90B    |      ;
                        LDX.B #$0A                           ;80D11C|A20A    |      ;
                        LDY.B #$04                           ;80D11E|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D120|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D120|22488E80|808E48;
                        RTS                                  ;80D124|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D125:
+    subUnknown_80D125:
                        REP #$20                             ;80D125|C220    |      ;
                        SEP #$10                             ;80D127|E210    |      ;
                        LDA.W #$E672                         ;80D129|A972E6  |      ;
@@ -9750,7 +9750,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D136|A908    |      ;
                        LDX.B #$04                           ;80D138|A204    |      ;
                        LDY.B #$03                           ;80D13A|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D13C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D13C|22488E80|808E48;
                        REP #$20                             ;80D140|C220    |      ;
                        SEP #$10                             ;80D142|E210    |      ;
                        LDA.W #$E689                         ;80D144|A989E6  |      ;
@@ -9762,7 +9762,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D151|A909    |      ;
                        LDX.B #$05                           ;80D153|A205    |      ;
                        LDY.B #$03                           ;80D155|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D157|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D157|22488E80|808E48;
                        REP #$20                             ;80D15B|C220    |      ;
                        SEP #$10                             ;80D15D|E210    |      ;
                        LDA.W #$E6A0                         ;80D15F|A9A0E6  |      ;
@@ -9774,7 +9774,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D16C|A90A    |      ;
                        LDX.B #$06                           ;80D16E|A206    |      ;
                        LDY.B #$03                           ;80D170|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D172|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D172|22488E80|808E48;
                        REP #$20                             ;80D176|C220    |      ;
                        SEP #$10                             ;80D178|E210    |      ;
                        LDA.W #$E6B7                         ;80D17A|A9B7E6  |      ;
@@ -9786,7 +9786,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D187|A90B    |      ;
                        LDX.B #$07                           ;80D189|A207    |      ;
                        LDY.B #$03                           ;80D18B|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D18D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D18D|22488E80|808E48;
                        REP #$20                             ;80D191|C220    |      ;
                        SEP #$10                             ;80D193|E210    |      ;
                        LDA.W #$E6CE                         ;80D195|A9CEE6  |      ;
@@ -9798,7 +9798,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D1A2|A90C    |      ;
                        LDX.B #$08                           ;80D1A4|A208    |      ;
                        LDY.B #$03                           ;80D1A6|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D1A8|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D1A8|22488E80|808E48;
                        REP #$20                             ;80D1AC|C220    |      ;
                        SEP #$10                             ;80D1AE|E210    |      ;
                        LDA.W #$EB6E                         ;80D1B0|A96EEB  |      ;
@@ -9810,7 +9810,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D1BD|A90A    |      ;
                        LDX.B #$09                           ;80D1BF|A209    |      ;
                        LDY.B #$04                           ;80D1C1|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D1C3|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D1C3|22488E80|808E48;
                        REP #$20                             ;80D1C7|C220    |      ;
                        SEP #$10                             ;80D1C9|E210    |      ;
                        LDA.W #$EB7F                         ;80D1CB|A97FEB  |      ;
@@ -9822,11 +9822,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D1D8|A90B    |      ;
                        LDX.B #$0A                           ;80D1DA|A20A    |      ;
                        LDY.B #$04                           ;80D1DC|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D1DE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D1DE|22488E80|808E48;
                        RTS                                  ;80D1E2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D1E3:
+    subUnknown_80D1E3:
                        REP #$20                             ;80D1E3|C220    |      ;
                        SEP #$10                             ;80D1E5|E210    |      ;
                        LDA.W #$E6E5                         ;80D1E7|A9E5E6  |      ;
@@ -9838,7 +9838,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D1F4|A908    |      ;
                        LDX.B #$04                           ;80D1F6|A204    |      ;
                        LDY.B #$03                           ;80D1F8|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D1FA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D1FA|22488E80|808E48;
                        REP #$20                             ;80D1FE|C220    |      ;
                        SEP #$10                             ;80D200|E210    |      ;
                        LDA.W #$E6FC                         ;80D202|A9FCE6  |      ;
@@ -9850,7 +9850,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D20F|A909    |      ;
                        LDX.B #$05                           ;80D211|A205    |      ;
                        LDY.B #$03                           ;80D213|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D215|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D215|22488E80|808E48;
                        REP #$20                             ;80D219|C220    |      ;
                        SEP #$10                             ;80D21B|E210    |      ;
                        LDA.W #$E713                         ;80D21D|A913E7  |      ;
@@ -9862,7 +9862,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D22A|A90A    |      ;
                        LDX.B #$06                           ;80D22C|A206    |      ;
                        LDY.B #$03                           ;80D22E|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D230|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D230|22488E80|808E48;
                        REP #$20                             ;80D234|C220    |      ;
                        SEP #$10                             ;80D236|E210    |      ;
                        LDA.W #$E72A                         ;80D238|A92AE7  |      ;
@@ -9874,7 +9874,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D245|A90B    |      ;
                        LDX.B #$07                           ;80D247|A207    |      ;
                        LDY.B #$03                           ;80D249|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D24B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D24B|22488E80|808E48;
                        REP #$20                             ;80D24F|C220    |      ;
                        SEP #$10                             ;80D251|E210    |      ;
                        LDA.W #$E741                         ;80D253|A941E7  |      ;
@@ -9886,7 +9886,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D260|A90C    |      ;
                        LDX.B #$08                           ;80D262|A208    |      ;
                        LDY.B #$03                           ;80D264|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D266|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D266|22488E80|808E48;
                        REP #$20                             ;80D26A|C220    |      ;
                        SEP #$10                             ;80D26C|E210    |      ;
                        LDA.W #$EB90                         ;80D26E|A990EB  |      ;
@@ -9898,7 +9898,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D27B|A90A    |      ;
                        LDX.B #$09                           ;80D27D|A209    |      ;
                        LDY.B #$04                           ;80D27F|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D281|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D281|22488E80|808E48;
                        REP #$20                             ;80D285|C220    |      ;
                        SEP #$10                             ;80D287|E210    |      ;
                        LDA.W #$EBA1                         ;80D289|A9A1EB  |      ;
@@ -9910,11 +9910,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D296|A90B    |      ;
                        LDX.B #$0A                           ;80D298|A20A    |      ;
                        LDY.B #$04                           ;80D29A|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D29C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D29C|22488E80|808E48;
                        RTS                                  ;80D2A0|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D2A1:
+    subUnknown_80D2A1:
                        REP #$20                             ;80D2A1|C220    |      ;
                        SEP #$10                             ;80D2A3|E210    |      ;
                        LDA.W #$E758                         ;80D2A5|A958E7  |      ;
@@ -9926,7 +9926,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D2B2|A908    |      ;
                        LDX.B #$04                           ;80D2B4|A204    |      ;
                        LDY.B #$03                           ;80D2B6|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D2B8|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D2B8|22488E80|808E48;
                        REP #$20                             ;80D2BC|C220    |      ;
                        SEP #$10                             ;80D2BE|E210    |      ;
                        LDA.W #$E76F                         ;80D2C0|A96FE7  |      ;
@@ -9938,7 +9938,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D2CD|A909    |      ;
                        LDX.B #$05                           ;80D2CF|A205    |      ;
                        LDY.B #$03                           ;80D2D1|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D2D3|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D2D3|22488E80|808E48;
                        REP #$20                             ;80D2D7|C220    |      ;
                        SEP #$10                             ;80D2D9|E210    |      ;
                        LDA.W #$E786                         ;80D2DB|A986E7  |      ;
@@ -9950,7 +9950,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D2E8|A90A    |      ;
                        LDX.B #$06                           ;80D2EA|A206    |      ;
                        LDY.B #$03                           ;80D2EC|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D2EE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D2EE|22488E80|808E48;
                        REP #$20                             ;80D2F2|C220    |      ;
                        SEP #$10                             ;80D2F4|E210    |      ;
                        LDA.W #$E79D                         ;80D2F6|A99DE7  |      ;
@@ -9962,7 +9962,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D303|A90B    |      ;
                        LDX.B #$07                           ;80D305|A207    |      ;
                        LDY.B #$03                           ;80D307|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D309|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D309|22488E80|808E48;
                        REP #$20                             ;80D30D|C220    |      ;
                        SEP #$10                             ;80D30F|E210    |      ;
                        LDA.W #$EBB2                         ;80D311|A9B2EB  |      ;
@@ -9974,7 +9974,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D31E|A90A    |      ;
                        LDX.B #$08                           ;80D320|A208    |      ;
                        LDY.B #$04                           ;80D322|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D324|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D324|22488E80|808E48;
                        REP #$20                             ;80D328|C220    |      ;
                        SEP #$10                             ;80D32A|E210    |      ;
                        LDA.W #$EBC3                         ;80D32C|A9C3EB  |      ;
@@ -9986,11 +9986,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D339|A90B    |      ;
                        LDX.B #$09                           ;80D33B|A209    |      ;
                        LDY.B #$04                           ;80D33D|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D33F|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D33F|22488E80|808E48;
                        RTS                                  ;80D343|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D344:
+    subUnknown_80D344:
                        REP #$20                             ;80D344|C220    |      ;
                        SEP #$10                             ;80D346|E210    |      ;
                        LDA.W #$E7B4                         ;80D348|A9B4E7  |      ;
@@ -10002,7 +10002,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D355|A908    |      ;
                        LDX.B #$04                           ;80D357|A204    |      ;
                        LDY.B #$03                           ;80D359|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D35B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D35B|22488E80|808E48;
                        REP #$20                             ;80D35F|C220    |      ;
                        SEP #$10                             ;80D361|E210    |      ;
                        LDA.W #$E7CB                         ;80D363|A9CBE7  |      ;
@@ -10014,7 +10014,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D370|A909    |      ;
                        LDX.B #$05                           ;80D372|A205    |      ;
                        LDY.B #$03                           ;80D374|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D376|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D376|22488E80|808E48;
                        REP #$20                             ;80D37A|C220    |      ;
                        SEP #$10                             ;80D37C|E210    |      ;
                        LDA.W #$E7E2                         ;80D37E|A9E2E7  |      ;
@@ -10026,7 +10026,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D38B|A90A    |      ;
                        LDX.B #$06                           ;80D38D|A206    |      ;
                        LDY.B #$03                           ;80D38F|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D391|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D391|22488E80|808E48;
                        REP #$20                             ;80D395|C220    |      ;
                        SEP #$10                             ;80D397|E210    |      ;
                        LDA.W #$E7F9                         ;80D399|A9F9E7  |      ;
@@ -10038,7 +10038,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D3A6|A90B    |      ;
                        LDX.B #$07                           ;80D3A8|A207    |      ;
                        LDY.B #$03                           ;80D3AA|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D3AC|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D3AC|22488E80|808E48;
                        REP #$20                             ;80D3B0|C220    |      ;
                        SEP #$10                             ;80D3B2|E210    |      ;
                        LDA.W #$E810                         ;80D3B4|A910E8  |      ;
@@ -10050,7 +10050,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D3C1|A90C    |      ;
                        LDX.B #$08                           ;80D3C3|A208    |      ;
                        LDY.B #$03                           ;80D3C5|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D3C7|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D3C7|22488E80|808E48;
                        REP #$20                             ;80D3CB|C220    |      ;
                        SEP #$10                             ;80D3CD|E210    |      ;
                        LDA.W #$EBD4                         ;80D3CF|A9D4EB  |      ;
@@ -10062,7 +10062,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D3DC|A90A    |      ;
                        LDX.B #$09                           ;80D3DE|A209    |      ;
                        LDY.B #$04                           ;80D3E0|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D3E2|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D3E2|22488E80|808E48;
                        REP #$20                             ;80D3E6|C220    |      ;
                        SEP #$10                             ;80D3E8|E210    |      ;
                        LDA.W #$EBE5                         ;80D3EA|A9E5EB  |      ;
@@ -10074,11 +10074,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D3F7|A90B    |      ;
                        LDX.B #$0A                           ;80D3F9|A20A    |      ;
                        LDY.B #$04                           ;80D3FB|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D3FD|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D3FD|22488E80|808E48;
                        RTS                                  ;80D401|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D402:
+    subUnknown_80D402:
                        REP #$20                             ;80D402|C220    |      ;
                        SEP #$10                             ;80D404|E210    |      ;
                        LDA.W #$E827                         ;80D406|A927E8  |      ;
@@ -10090,7 +10090,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D413|A908    |      ;
                        LDX.B #$04                           ;80D415|A204    |      ;
                        LDY.B #$03                           ;80D417|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D419|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D419|22488E80|808E48;
                        REP #$20                             ;80D41D|C220    |      ;
                        SEP #$10                             ;80D41F|E210    |      ;
                        LDA.W #$E83E                         ;80D421|A93EE8  |      ;
@@ -10102,7 +10102,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D42E|A909    |      ;
                        LDX.B #$05                           ;80D430|A205    |      ;
                        LDY.B #$03                           ;80D432|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D434|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D434|22488E80|808E48;
                        REP #$20                             ;80D438|C220    |      ;
                        SEP #$10                             ;80D43A|E210    |      ;
                        LDA.W #$E855                         ;80D43C|A955E8  |      ;
@@ -10114,7 +10114,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D449|A90A    |      ;
                        LDX.B #$06                           ;80D44B|A206    |      ;
                        LDY.B #$03                           ;80D44D|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D44F|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D44F|22488E80|808E48;
                        REP #$20                             ;80D453|C220    |      ;
                        SEP #$10                             ;80D455|E210    |      ;
                        LDA.W #$E86C                         ;80D457|A96CE8  |      ;
@@ -10126,7 +10126,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D464|A90B    |      ;
                        LDX.B #$07                           ;80D466|A207    |      ;
                        LDY.B #$03                           ;80D468|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D46A|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D46A|22488E80|808E48;
                        REP #$20                             ;80D46E|C220    |      ;
                        SEP #$10                             ;80D470|E210    |      ;
                        LDA.W #$E883                         ;80D472|A983E8  |      ;
@@ -10138,7 +10138,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D47F|A90C    |      ;
                        LDX.B #$08                           ;80D481|A208    |      ;
                        LDY.B #$03                           ;80D483|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D485|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D485|22488E80|808E48;
                        REP #$20                             ;80D489|C220    |      ;
                        SEP #$10                             ;80D48B|E210    |      ;
                        LDA.W #$EBF6                         ;80D48D|A9F6EB  |      ;
@@ -10150,7 +10150,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D49A|A90A    |      ;
                        LDX.B #$09                           ;80D49C|A209    |      ;
                        LDY.B #$04                           ;80D49E|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D4A0|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D4A0|22488E80|808E48;
                        REP #$20                             ;80D4A4|C220    |      ;
                        SEP #$10                             ;80D4A6|E210    |      ;
                        LDA.W #$EC07                         ;80D4A8|A907EC  |      ;
@@ -10162,11 +10162,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D4B5|A90B    |      ;
                        LDX.B #$0A                           ;80D4B7|A20A    |      ;
                        LDY.B #$04                           ;80D4B9|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D4BB|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D4BB|22488E80|808E48;
                        RTS                                  ;80D4BF|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D4C0:
+    subUnknown_80D4C0:
                        REP #$20                             ;80D4C0|C220    |      ;
                        SEP #$10                             ;80D4C2|E210    |      ;
                        LDA.W #$E89A                         ;80D4C4|A99AE8  |      ;
@@ -10178,7 +10178,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D4D1|A908    |      ;
                        LDX.B #$04                           ;80D4D3|A204    |      ;
                        LDY.B #$03                           ;80D4D5|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D4D7|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D4D7|22488E80|808E48;
                        REP #$20                             ;80D4DB|C220    |      ;
                        SEP #$10                             ;80D4DD|E210    |      ;
                        LDA.W #$E8B1                         ;80D4DF|A9B1E8  |      ;
@@ -10190,7 +10190,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D4EC|A909    |      ;
                        LDX.B #$05                           ;80D4EE|A205    |      ;
                        LDY.B #$03                           ;80D4F0|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D4F2|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D4F2|22488E80|808E48;
                        REP #$20                             ;80D4F6|C220    |      ;
                        SEP #$10                             ;80D4F8|E210    |      ;
                        LDA.W #$E8C8                         ;80D4FA|A9C8E8  |      ;
@@ -10202,7 +10202,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D507|A90A    |      ;
                        LDX.B #$06                           ;80D509|A206    |      ;
                        LDY.B #$03                           ;80D50B|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D50D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D50D|22488E80|808E48;
                        REP #$20                             ;80D511|C220    |      ;
                        SEP #$10                             ;80D513|E210    |      ;
                        LDA.W #$E8DF                         ;80D515|A9DFE8  |      ;
@@ -10214,7 +10214,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D522|A90B    |      ;
                        LDX.B #$07                           ;80D524|A207    |      ;
                        LDY.B #$03                           ;80D526|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D528|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D528|22488E80|808E48;
                        REP #$20                             ;80D52C|C220    |      ;
                        SEP #$10                             ;80D52E|E210    |      ;
                        LDA.W #$EC18                         ;80D530|A918EC  |      ;
@@ -10226,7 +10226,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D53D|A90A    |      ;
                        LDX.B #$08                           ;80D53F|A208    |      ;
                        LDY.B #$04                           ;80D541|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D543|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D543|22488E80|808E48;
                        REP #$20                             ;80D547|C220    |      ;
                        SEP #$10                             ;80D549|E210    |      ;
                        LDA.W #$EC29                         ;80D54B|A929EC  |      ;
@@ -10238,11 +10238,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D558|A90B    |      ;
                        LDX.B #$09                           ;80D55A|A209    |      ;
                        LDY.B #$04                           ;80D55C|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D55E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D55E|22488E80|808E48;
                        RTS                                  ;80D562|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D563:
+    subUnknown_80D563:
                        REP #$20                             ;80D563|C220    |      ;
                        SEP #$10                             ;80D565|E210    |      ;
                        LDA.W #$E8F6                         ;80D567|A9F6E8  |      ;
@@ -10254,7 +10254,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D574|A908    |      ;
                        LDX.B #$04                           ;80D576|A204    |      ;
                        LDY.B #$03                           ;80D578|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D57A|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D57A|22488E80|808E48;
                        REP #$20                             ;80D57E|C220    |      ;
                        SEP #$10                             ;80D580|E210    |      ;
                        LDA.W #$E90D                         ;80D582|A90DE9  |      ;
@@ -10266,7 +10266,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D58F|A909    |      ;
                        LDX.B #$05                           ;80D591|A205    |      ;
                        LDY.B #$03                           ;80D593|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D595|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D595|22488E80|808E48;
                        REP #$20                             ;80D599|C220    |      ;
                        SEP #$10                             ;80D59B|E210    |      ;
                        LDA.W #$E924                         ;80D59D|A924E9  |      ;
@@ -10278,7 +10278,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D5AA|A90A    |      ;
                        LDX.B #$06                           ;80D5AC|A206    |      ;
                        LDY.B #$03                           ;80D5AE|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D5B0|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D5B0|22488E80|808E48;
                        REP #$20                             ;80D5B4|C220    |      ;
                        SEP #$10                             ;80D5B6|E210    |      ;
                        LDA.W #$E93B                         ;80D5B8|A93BE9  |      ;
@@ -10290,7 +10290,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D5C5|A90B    |      ;
                        LDX.B #$07                           ;80D5C7|A207    |      ;
                        LDY.B #$03                           ;80D5C9|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D5CB|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D5CB|22488E80|808E48;
                        REP #$20                             ;80D5CF|C220    |      ;
                        SEP #$10                             ;80D5D1|E210    |      ;
                        LDA.W #$EC3A                         ;80D5D3|A93AEC  |      ;
@@ -10302,7 +10302,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D5E0|A90A    |      ;
                        LDX.B #$08                           ;80D5E2|A208    |      ;
                        LDY.B #$04                           ;80D5E4|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D5E6|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D5E6|22488E80|808E48;
                        REP #$20                             ;80D5EA|C220    |      ;
                        SEP #$10                             ;80D5EC|E210    |      ;
                        LDA.W #$EC4B                         ;80D5EE|A94BEC  |      ;
@@ -10314,11 +10314,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D5FB|A90B    |      ;
                        LDX.B #$09                           ;80D5FD|A209    |      ;
                        LDY.B #$04                           ;80D5FF|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D601|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D601|22488E80|808E48;
                        RTS                                  ;80D605|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D606:
+    subUnknown_80D606:
                        REP #$20                             ;80D606|C220    |      ;
                        SEP #$10                             ;80D608|E210    |      ;
                        LDA.W #$E952                         ;80D60A|A952E9  |      ;
@@ -10330,7 +10330,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80D617|A906    |      ;
                        LDX.B #$04                           ;80D619|A204    |      ;
                        LDY.B #$03                           ;80D61B|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D61D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D61D|22488E80|808E48;
                        REP #$20                             ;80D621|C220    |      ;
                        SEP #$10                             ;80D623|E210    |      ;
                        LDA.W #$E969                         ;80D625|A969E9  |      ;
@@ -10342,7 +10342,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80D632|A907    |      ;
                        LDX.B #$05                           ;80D634|A205    |      ;
                        LDY.B #$03                           ;80D636|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D638|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D638|22488E80|808E48;
                        REP #$20                             ;80D63C|C220    |      ;
                        SEP #$10                             ;80D63E|E210    |      ;
                        LDA.W #$E980                         ;80D640|A980E9  |      ;
@@ -10354,7 +10354,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D64D|A908    |      ;
                        LDX.B #$06                           ;80D64F|A206    |      ;
                        LDY.B #$03                           ;80D651|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D653|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D653|22488E80|808E48;
                        REP #$20                             ;80D657|C220    |      ;
                        SEP #$10                             ;80D659|E210    |      ;
                        LDA.W #$E997                         ;80D65B|A997E9  |      ;
@@ -10366,7 +10366,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D668|A909    |      ;
                        LDX.B #$07                           ;80D66A|A207    |      ;
                        LDY.B #$03                           ;80D66C|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D66E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D66E|22488E80|808E48;
                        REP #$20                             ;80D672|C220    |      ;
                        SEP #$10                             ;80D674|E210    |      ;
                        LDA.W #$E9AE                         ;80D676|A9AEE9  |      ;
@@ -10378,7 +10378,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D683|A90A    |      ;
                        LDX.B #$08                           ;80D685|A208    |      ;
                        LDY.B #$03                           ;80D687|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D689|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D689|22488E80|808E48;
                        REP #$20                             ;80D68D|C220    |      ;
                        SEP #$10                             ;80D68F|E210    |      ;
                        LDA.W #$E9C5                         ;80D691|A9C5E9  |      ;
@@ -10390,7 +10390,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D69E|A90B    |      ;
                        LDX.B #$09                           ;80D6A0|A209    |      ;
                        LDY.B #$03                           ;80D6A2|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D6A4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D6A4|22488E80|808E48;
                        REP #$20                             ;80D6A8|C220    |      ;
                        SEP #$10                             ;80D6AA|E210    |      ;
                        LDA.W #$E9DC                         ;80D6AC|A9DCE9  |      ;
@@ -10402,7 +10402,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D6B9|A90C    |      ;
                        LDX.B #$0A                           ;80D6BB|A20A    |      ;
                        LDY.B #$03                           ;80D6BD|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D6BF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D6BF|22488E80|808E48;
                        REP #$20                             ;80D6C3|C220    |      ;
                        SEP #$10                             ;80D6C5|E210    |      ;
                        LDA.W #$EC5C                         ;80D6C7|A95CEC  |      ;
@@ -10414,7 +10414,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D6D4|A90A    |      ;
                        LDX.B #$0B                           ;80D6D6|A20B    |      ;
                        LDY.B #$04                           ;80D6D8|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D6DA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D6DA|22488E80|808E48;
                        REP #$20                             ;80D6DE|C220    |      ;
                        SEP #$10                             ;80D6E0|E210    |      ;
                        LDA.W #$EC6D                         ;80D6E2|A96DEC  |      ;
@@ -10426,11 +10426,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D6EF|A90B    |      ;
                        LDX.B #$0C                           ;80D6F1|A20C    |      ;
                        LDY.B #$04                           ;80D6F3|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D6F5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D6F5|22488E80|808E48;
                        RTS                                  ;80D6F9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D6FA:
+    subUnknown_80D6FA:
                        REP #$20                             ;80D6FA|C220    |      ;
                        SEP #$10                             ;80D6FC|E210    |      ;
                        LDA.W #$E9F3                         ;80D6FE|A9F3E9  |      ;
@@ -10442,7 +10442,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80D70B|A906    |      ;
                        LDX.B #$04                           ;80D70D|A204    |      ;
                        LDY.B #$03                           ;80D70F|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D711|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D711|22488E80|808E48;
                        REP #$20                             ;80D715|C220    |      ;
                        SEP #$10                             ;80D717|E210    |      ;
                        LDA.W #$EA0A                         ;80D719|A90AEA  |      ;
@@ -10454,7 +10454,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80D726|A907    |      ;
                        LDX.B #$05                           ;80D728|A205    |      ;
                        LDY.B #$03                           ;80D72A|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D72C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D72C|22488E80|808E48;
                        REP #$20                             ;80D730|C220    |      ;
                        SEP #$10                             ;80D732|E210    |      ;
                        LDA.W #$EA21                         ;80D734|A921EA  |      ;
@@ -10466,7 +10466,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D741|A908    |      ;
                        LDX.B #$06                           ;80D743|A206    |      ;
                        LDY.B #$03                           ;80D745|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D747|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D747|22488E80|808E48;
                        REP #$20                             ;80D74B|C220    |      ;
                        SEP #$10                             ;80D74D|E210    |      ;
                        LDA.W #$EA38                         ;80D74F|A938EA  |      ;
@@ -10478,7 +10478,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D75C|A909    |      ;
                        LDX.B #$07                           ;80D75E|A207    |      ;
                        LDY.B #$03                           ;80D760|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D762|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D762|22488E80|808E48;
                        REP #$20                             ;80D766|C220    |      ;
                        SEP #$10                             ;80D768|E210    |      ;
                        LDA.W #$EA4F                         ;80D76A|A94FEA  |      ;
@@ -10490,7 +10490,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D777|A90A    |      ;
                        LDX.B #$08                           ;80D779|A208    |      ;
                        LDY.B #$03                           ;80D77B|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D77D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D77D|22488E80|808E48;
                        REP #$20                             ;80D781|C220    |      ;
                        SEP #$10                             ;80D783|E210    |      ;
                        LDA.W #$EA66                         ;80D785|A966EA  |      ;
@@ -10502,7 +10502,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D792|A90B    |      ;
                        LDX.B #$09                           ;80D794|A209    |      ;
                        LDY.B #$03                           ;80D796|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D798|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D798|22488E80|808E48;
                        REP #$20                             ;80D79C|C220    |      ;
                        SEP #$10                             ;80D79E|E210    |      ;
                        LDA.W #$EA7D                         ;80D7A0|A97DEA  |      ;
@@ -10514,7 +10514,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80D7AD|A90C    |      ;
                        LDX.B #$0A                           ;80D7AF|A20A    |      ;
                        LDY.B #$03                           ;80D7B1|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D7B3|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D7B3|22488E80|808E48;
                        REP #$20                             ;80D7B7|C220    |      ;
                        SEP #$10                             ;80D7B9|E210    |      ;
                        LDA.W #$EC7E                         ;80D7BB|A97EEC  |      ;
@@ -10526,7 +10526,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D7C8|A90A    |      ;
                        LDX.B #$0B                           ;80D7CA|A20B    |      ;
                        LDY.B #$04                           ;80D7CC|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D7CE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D7CE|22488E80|808E48;
                        REP #$20                             ;80D7D2|C220    |      ;
                        SEP #$10                             ;80D7D4|E210    |      ;
                        LDA.W #$EC8F                         ;80D7D6|A98FEC  |      ;
@@ -10538,11 +10538,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D7E3|A90B    |      ;
                        LDX.B #$0C                           ;80D7E5|A20C    |      ;
                        LDY.B #$04                           ;80D7E7|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D7E9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D7E9|22488E80|808E48;
                        RTS                                  ;80D7ED|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D7EE:
+    subUnknown_80D7EE:
                        REP #$20                             ;80D7EE|C220    |      ;
                        SEP #$10                             ;80D7F0|E210    |      ;
                        LDA.W #$EA94                         ;80D7F2|A994EA  |      ;
@@ -10554,7 +10554,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D7FF|A908    |      ;
                        LDX.B #$04                           ;80D801|A204    |      ;
                        LDY.B #$03                           ;80D803|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D805|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D805|22488E80|808E48;
                        REP #$20                             ;80D809|C220    |      ;
                        SEP #$10                             ;80D80B|E210    |      ;
                        LDA.W #$EAAB                         ;80D80D|A9ABEA  |      ;
@@ -10566,7 +10566,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D81A|A909    |      ;
                        LDX.B #$05                           ;80D81C|A205    |      ;
                        LDY.B #$03                           ;80D81E|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D820|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D820|22488E80|808E48;
                        REP #$20                             ;80D824|C220    |      ;
                        SEP #$10                             ;80D826|E210    |      ;
                        LDA.W #$EAC2                         ;80D828|A9C2EA  |      ;
@@ -10578,7 +10578,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D835|A90A    |      ;
                        LDX.B #$06                           ;80D837|A206    |      ;
                        LDY.B #$03                           ;80D839|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D83B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D83B|22488E80|808E48;
                        REP #$20                             ;80D83F|C220    |      ;
                        SEP #$10                             ;80D841|E210    |      ;
                        LDA.W #$EAD9                         ;80D843|A9D9EA  |      ;
@@ -10590,7 +10590,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D850|A90B    |      ;
                        LDX.B #$07                           ;80D852|A207    |      ;
                        LDY.B #$03                           ;80D854|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D856|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D856|22488E80|808E48;
                        REP #$20                             ;80D85A|C220    |      ;
                        SEP #$10                             ;80D85C|E210    |      ;
                        LDA.W #$ECA0                         ;80D85E|A9A0EC  |      ;
@@ -10602,7 +10602,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D86B|A90A    |      ;
                        LDX.B #$08                           ;80D86D|A208    |      ;
                        LDY.B #$04                           ;80D86F|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D871|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D871|22488E80|808E48;
                        REP #$20                             ;80D875|C220    |      ;
                        SEP #$10                             ;80D877|E210    |      ;
                        LDA.W #$ECB1                         ;80D879|A9B1EC  |      ;
@@ -10614,11 +10614,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D886|A90B    |      ;
                        LDX.B #$09                           ;80D888|A209    |      ;
                        LDY.B #$04                           ;80D88A|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D88C|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D88C|22488E80|808E48;
                        RTS                                  ;80D890|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D891:
+    subUnknown_80D891:
                        REP #$20                             ;80D891|C220    |      ;
                        SEP #$10                             ;80D893|E210    |      ;
                        LDA.W #$EAF0                         ;80D895|A9F0EA  |      ;
@@ -10630,7 +10630,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80D8A2|A908    |      ;
                        LDX.B #$04                           ;80D8A4|A204    |      ;
                        LDY.B #$03                           ;80D8A6|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D8A8|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D8A8|22488E80|808E48;
                        REP #$20                             ;80D8AC|C220    |      ;
                        SEP #$10                             ;80D8AE|E210    |      ;
                        LDA.W #$EB07                         ;80D8B0|A907EB  |      ;
@@ -10642,7 +10642,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80D8BD|A909    |      ;
                        LDX.B #$05                           ;80D8BF|A205    |      ;
                        LDY.B #$03                           ;80D8C1|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D8C3|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D8C3|22488E80|808E48;
                        REP #$20                             ;80D8C7|C220    |      ;
                        SEP #$10                             ;80D8C9|E210    |      ;
                        LDA.W #$EB1E                         ;80D8CB|A91EEB  |      ;
@@ -10654,7 +10654,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D8D8|A90A    |      ;
                        LDX.B #$06                           ;80D8DA|A206    |      ;
                        LDY.B #$03                           ;80D8DC|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D8DE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D8DE|22488E80|808E48;
                        REP #$20                             ;80D8E2|C220    |      ;
                        SEP #$10                             ;80D8E4|E210    |      ;
                        LDA.W #$EB35                         ;80D8E6|A935EB  |      ;
@@ -10666,7 +10666,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D8F3|A90B    |      ;
                        LDX.B #$07                           ;80D8F5|A207    |      ;
                        LDY.B #$03                           ;80D8F7|A003    |      ;
-                       JSL.L CODE_808E48                    ;80D8F9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D8F9|22488E80|808E48;
                        REP #$20                             ;80D8FD|C220    |      ;
                        SEP #$10                             ;80D8FF|E210    |      ;
                        LDA.W #$ECC2                         ;80D901|A9C2EC  |      ;
@@ -10678,7 +10678,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D90E|A90A    |      ;
                        LDX.B #$08                           ;80D910|A208    |      ;
                        LDY.B #$04                           ;80D912|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D914|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D914|22488E80|808E48;
                        REP #$20                             ;80D918|C220    |      ;
                        SEP #$10                             ;80D91A|E210    |      ;
                        LDA.W #$ECD3                         ;80D91C|A9D3EC  |      ;
@@ -10690,11 +10690,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D929|A90B    |      ;
                        LDX.B #$09                           ;80D92B|A209    |      ;
                        LDY.B #$04                           ;80D92D|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D92F|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D92F|22488E80|808E48;
                        RTS                                  ;80D933|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D934:
+    subUnknown_80D934:
                        REP #$20                             ;80D934|C220    |      ;
                        SEP #$10                             ;80D936|E210    |      ;
                        LDA.W #$ECE4                         ;80D938|A9E4EC  |      ;
@@ -10706,7 +10706,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D945|A90A    |      ;
                        LDX.B #$04                           ;80D947|A204    |      ;
                        LDY.B #$04                           ;80D949|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D94B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D94B|22488E80|808E48;
                        REP #$20                             ;80D94F|C220    |      ;
                        SEP #$10                             ;80D951|E210    |      ;
                        LDA.W #$ECF5                         ;80D953|A9F5EC  |      ;
@@ -10718,11 +10718,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D960|A90B    |      ;
                        LDX.B #$05                           ;80D962|A205    |      ;
                        LDY.B #$04                           ;80D964|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D966|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D966|22488E80|808E48;
                        RTS                                  ;80D96A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D96B:
+    subUnknown_80D96B:
                        REP #$20                             ;80D96B|C220    |      ;
                        SEP #$10                             ;80D96D|E210    |      ;
                        LDA.W #$ED06                         ;80D96F|A906ED  |      ;
@@ -10734,7 +10734,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D97C|A90A    |      ;
                        LDX.B #$04                           ;80D97E|A204    |      ;
                        LDY.B #$04                           ;80D980|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D982|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D982|22488E80|808E48;
                        REP #$20                             ;80D986|C220    |      ;
                        SEP #$10                             ;80D988|E210    |      ;
                        LDA.W #$ED17                         ;80D98A|A917ED  |      ;
@@ -10746,11 +10746,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D997|A90B    |      ;
                        LDX.B #$05                           ;80D999|A205    |      ;
                        LDY.B #$04                           ;80D99B|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D99D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D99D|22488E80|808E48;
                        RTS                                  ;80D9A1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D9A2:
+    subUnknown_80D9A2:
                        REP #$20                             ;80D9A2|C220    |      ;
                        SEP #$10                             ;80D9A4|E210    |      ;
                        LDA.W #$ED28                         ;80D9A6|A928ED  |      ;
@@ -10762,7 +10762,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D9B3|A90A    |      ;
                        LDX.B #$04                           ;80D9B5|A204    |      ;
                        LDY.B #$04                           ;80D9B7|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D9B9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D9B9|22488E80|808E48;
                        REP #$20                             ;80D9BD|C220    |      ;
                        SEP #$10                             ;80D9BF|E210    |      ;
                        LDA.W #$ED39                         ;80D9C1|A939ED  |      ;
@@ -10774,11 +10774,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80D9CE|A90B    |      ;
                        LDX.B #$05                           ;80D9D0|A205    |      ;
                        LDY.B #$04                           ;80D9D2|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D9D4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D9D4|22488E80|808E48;
                        RTS                                  ;80D9D8|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80D9D9:
+    subUnknown_80D9D9:
                        REP #$20                             ;80D9D9|C220    |      ;
                        SEP #$10                             ;80D9DB|E210    |      ;
                        LDA.W #$ED4A                         ;80D9DD|A94AED  |      ;
@@ -10790,7 +10790,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80D9EA|A90A    |      ;
                        LDX.B #$04                           ;80D9EC|A204    |      ;
                        LDY.B #$04                           ;80D9EE|A004    |      ;
-                       JSL.L CODE_808E48                    ;80D9F0|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80D9F0|22488E80|808E48;
                        REP #$20                             ;80D9F4|C220    |      ;
                        SEP #$10                             ;80D9F6|E210    |      ;
                        LDA.W #$ED5B                         ;80D9F8|A95BED  |      ;
@@ -10802,11 +10802,11 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80DA05|A90B    |      ;
                        LDX.B #$05                           ;80DA07|A205    |      ;
                        LDY.B #$04                           ;80DA09|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DA0B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DA0B|22488E80|808E48;
                        RTS                                  ;80DA0F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80DA10:
+    subUnknown_80DA10:
                        REP #$20                             ;80DA10|C220    |      ;
                        SEP #$10                             ;80DA12|E210    |      ;
                        LDA.W #$ED6C                         ;80DA14|A96CED  |      ;
@@ -10818,7 +10818,7 @@ aScreenTransitionTable:
                        LDA.B #$03                           ;80DA21|A903    |      ;
                        LDX.B #$04                           ;80DA23|A204    |      ;
                        LDY.B #$04                           ;80DA25|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DA27|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DA27|22488E80|808E48;
                        REP #$20                             ;80DA2B|C220    |      ;
                        SEP #$10                             ;80DA2D|E210    |      ;
                        LDA.W #$ED83                         ;80DA2F|A983ED  |      ;
@@ -10830,11 +10830,11 @@ aScreenTransitionTable:
                        LDA.B #$05                           ;80DA3C|A905    |      ;
                        LDX.B #$05                           ;80DA3E|A205    |      ;
                        LDY.B #$04                           ;80DA40|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DA42|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DA42|22488E80|808E48;
                        RTS                                  ;80DA46|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80DA47:
+    subUnknown_80DA47:
                        REP #$20                             ;80DA47|C220    |      ;
                        SEP #$10                             ;80DA49|E210    |      ;
                        LDA.W #$ED9A                         ;80DA4B|A99AED  |      ;
@@ -10846,7 +10846,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80DA58|A90B    |      ;
                        LDX.B #$04                           ;80DA5A|A204    |      ;
                        LDY.B #$04                           ;80DA5C|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DA5E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DA5E|22488E80|808E48;
                        REP #$20                             ;80DA62|C220    |      ;
                        SEP #$10                             ;80DA64|E210    |      ;
                        LDA.W #$EDAB                         ;80DA66|A9ABED  |      ;
@@ -10858,7 +10858,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80DA73|A90C    |      ;
                        LDX.B #$05                           ;80DA75|A205    |      ;
                        LDY.B #$04                           ;80DA77|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DA79|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DA79|22488E80|808E48;
                        REP #$20                             ;80DA7D|C220    |      ;
                        SEP #$10                             ;80DA7F|E210    |      ;
                        LDA.W #$EDBC                         ;80DA81|A9BCED  |      ;
@@ -10870,7 +10870,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80DA8E|A90D    |      ;
                        LDX.B #$06                           ;80DA90|A206    |      ;
                        LDY.B #$04                           ;80DA92|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DA94|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DA94|22488E80|808E48;
                        REP #$20                             ;80DA98|C220    |      ;
                        SEP #$10                             ;80DA9A|E210    |      ;
                        LDA.W #$EDCD                         ;80DA9C|A9CDED  |      ;
@@ -10882,11 +10882,11 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DAA9|A90E    |      ;
                        LDX.B #$07                           ;80DAAB|A207    |      ;
                        LDY.B #$04                           ;80DAAD|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DAAF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DAAF|22488E80|808E48;
                        RTS                                  ;80DAB3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80DAB4:
+    subUnknown_80DAB4:
                        REP #$20                             ;80DAB4|C220    |      ;
                        SEP #$10                             ;80DAB6|E210    |      ;
                        LDA.W #$EDDE                         ;80DAB8|A9DEED  |      ;
@@ -10898,7 +10898,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80DAC5|A90C    |      ;
                        LDX.B #$04                           ;80DAC7|A204    |      ;
                        LDY.B #$04                           ;80DAC9|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DACB|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DACB|22488E80|808E48;
                        REP #$20                             ;80DACF|C220    |      ;
                        SEP #$10                             ;80DAD1|E210    |      ;
                        LDA.W #$EDEC                         ;80DAD3|A9ECED  |      ;
@@ -10910,7 +10910,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80DAE0|A90D    |      ;
                        LDX.B #$05                           ;80DAE2|A205    |      ;
                        LDY.B #$04                           ;80DAE4|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DAE6|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DAE6|22488E80|808E48;
                        REP #$20                             ;80DAEA|C220    |      ;
                        SEP #$10                             ;80DAEC|E210    |      ;
                        LDA.W #$EDFA                         ;80DAEE|A9FAED  |      ;
@@ -10922,11 +10922,11 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DAFB|A90E    |      ;
                        LDX.B #$06                           ;80DAFD|A206    |      ;
                        LDY.B #$04                           ;80DAFF|A004    |      ;
-                       JSL.L CODE_808E48                    ;80DB01|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DB01|22488E80|808E48;
                        RTS                                  ;80DB05|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80DB06:
+    subUnknown_80DB06:
                        REP #$20                             ;80DB06|C220    |      ;
                        SEP #$10                             ;80DB08|E210    |      ;
                        LDA.W #$EE08                         ;80DB0A|A908EE  |      ;
@@ -10938,7 +10938,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80DB17|A907    |      ;
                        LDX.B #$04                           ;80DB19|A204    |      ;
                        LDY.B #$01                           ;80DB1B|A001    |      ;
-                       JSL.L CODE_808E48                    ;80DB1D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DB1D|22488E80|808E48;
                        REP #$20                             ;80DB21|C220    |      ;
                        SEP #$10                             ;80DB23|E210    |      ;
                        LDA.W #$EE16                         ;80DB25|A916EE  |      ;
@@ -10950,7 +10950,7 @@ aScreenTransitionTable:
                        LDA.B #$08                           ;80DB32|A908    |      ;
                        LDX.B #$05                           ;80DB34|A205    |      ;
                        LDY.B #$01                           ;80DB36|A001    |      ;
-                       JSL.L CODE_808E48                    ;80DB38|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DB38|22488E80|808E48;
                        REP #$20                             ;80DB3C|C220    |      ;
                        SEP #$10                             ;80DB3E|E210    |      ;
                        LDA.W #$EE24                         ;80DB40|A924EE  |      ;
@@ -10962,7 +10962,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80DB4D|A90D    |      ;
                        LDX.B #$06                           ;80DB4F|A206    |      ;
                        LDY.B #$01                           ;80DB51|A001    |      ;
-                       JSL.L CODE_808E48                    ;80DB53|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DB53|22488E80|808E48;
                        REP #$20                             ;80DB57|C220    |      ;
                        SEP #$10                             ;80DB59|E210    |      ;
                        LDA.W #$EE32                         ;80DB5B|A932EE  |      ;
@@ -10974,7 +10974,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DB68|A90E    |      ;
                        LDX.B #$07                           ;80DB6A|A207    |      ;
                        LDY.B #$01                           ;80DB6C|A001    |      ;
-                       JSL.L CODE_808E48                    ;80DB6E|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DB6E|22488E80|808E48;
                        REP #$20                             ;80DB72|C220    |      ;
                        SEP #$10                             ;80DB74|E210    |      ;
                        LDA.W #$EE40                         ;80DB76|A940EE  |      ;
@@ -10986,7 +10986,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80DB83|A906    |      ;
                        LDX.B #$08                           ;80DB85|A208    |      ;
                        LDY.B #$03                           ;80DB87|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DB89|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DB89|22488E80|808E48;
                        REP #$20                             ;80DB8D|C220    |      ;
                        SEP #$10                             ;80DB8F|E210    |      ;
                        LDA.W #$EE4E                         ;80DB91|A94EEE  |      ;
@@ -10998,7 +10998,7 @@ aScreenTransitionTable:
                        LDA.B #$09                           ;80DB9E|A909    |      ;
                        LDX.B #$09                           ;80DBA0|A209    |      ;
                        LDY.B #$03                           ;80DBA2|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DBA4|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DBA4|22488E80|808E48;
                        REP #$20                             ;80DBA8|C220    |      ;
                        SEP #$10                             ;80DBAA|E210    |      ;
                        LDA.W #$EE5C                         ;80DBAC|A95CEE  |      ;
@@ -11010,7 +11010,7 @@ aScreenTransitionTable:
                        LDA.B #$0A                           ;80DBB9|A90A    |      ;
                        LDX.B #$0A                           ;80DBBB|A20A    |      ;
                        LDY.B #$03                           ;80DBBD|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DBBF|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DBBF|22488E80|808E48;
                        REP #$20                             ;80DBC3|C220    |      ;
                        SEP #$10                             ;80DBC5|E210    |      ;
                        LDA.W #$EE6A                         ;80DBC7|A96AEE  |      ;
@@ -11022,7 +11022,7 @@ aScreenTransitionTable:
                        LDA.B #$0B                           ;80DBD4|A90B    |      ;
                        LDX.B #$0B                           ;80DBD6|A20B    |      ;
                        LDY.B #$03                           ;80DBD8|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DBDA|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DBDA|22488E80|808E48;
                        REP #$20                             ;80DBDE|C220    |      ;
                        SEP #$10                             ;80DBE0|E210    |      ;
                        LDA.W #$EE78                         ;80DBE2|A978EE  |      ;
@@ -11034,7 +11034,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80DBEF|A90C    |      ;
                        LDX.B #$0C                           ;80DBF1|A20C    |      ;
                        LDY.B #$03                           ;80DBF3|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DBF5|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DBF5|22488E80|808E48;
                        REP #$20                             ;80DBF9|C220    |      ;
                        SEP #$10                             ;80DBFB|E210    |      ;
                        LDA.W #$EE86                         ;80DBFD|A986EE  |      ;
@@ -11046,7 +11046,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80DC0A|A90D    |      ;
                        LDX.B #$0D                           ;80DC0C|A20D    |      ;
                        LDY.B #$03                           ;80DC0E|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DC10|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DC10|22488E80|808E48;
                        REP #$20                             ;80DC14|C220    |      ;
                        SEP #$10                             ;80DC16|E210    |      ;
                        LDA.W #$EE94                         ;80DC18|A994EE  |      ;
@@ -11058,11 +11058,11 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DC25|A90E    |      ;
                        LDX.B #$0E                           ;80DC27|A20E    |      ;
                        LDY.B #$03                           ;80DC29|A003    |      ;
-                       JSL.L CODE_808E48                    ;80DC2B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DC2B|22488E80|808E48;
                        RTS                                  ;80DC2F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80DC30:
+    subUnknown_80DC30:
                        REP #$20                             ;80DC30|C220    |      ;
                        SEP #$10                             ;80DC32|E210    |      ;
                        LDA.W #$E447                         ;80DC34|A947E4  |      ;
@@ -11074,7 +11074,7 @@ aScreenTransitionTable:
                        LDA.B #$06                           ;80DC41|A906    |      ;
                        LDX.B #$04                           ;80DC43|A204    |      ;
                        LDY.B #$02                           ;80DC45|A002    |      ;
-                       JSL.L CODE_808E48                    ;80DC47|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DC47|22488E80|808E48;
                        REP #$20                             ;80DC4B|C220    |      ;
                        SEP #$10                             ;80DC4D|E210    |      ;
                        LDA.W #$E455                         ;80DC4F|A955E4  |      ;
@@ -11086,7 +11086,7 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DC5C|A90E    |      ;
                        LDX.B #$05                           ;80DC5E|A205    |      ;
                        LDY.B #$02                           ;80DC60|A002    |      ;
-                       JSL.L CODE_808E48                    ;80DC62|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DC62|22488E80|808E48;
                        REP #$20                             ;80DC66|C220    |      ;
                        SEP #$10                             ;80DC68|E210    |      ;
                        LDA.W #$E463                         ;80DC6A|A963E4  |      ;
@@ -11098,7 +11098,7 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80DC77|A90F    |      ;
                        LDX.B #$06                           ;80DC79|A206    |      ;
                        LDY.B #$02                           ;80DC7B|A002    |      ;
-                       JSL.L CODE_808E48                    ;80DC7D|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DC7D|22488E80|808E48;
                        REP #$20                             ;80DC81|C220    |      ;
                        SEP #$10                             ;80DC83|E210    |      ;
                        LDA.W #$EEA2                         ;80DC85|A9A2EE  |      ;
@@ -11110,7 +11110,7 @@ aScreenTransitionTable:
                        LDA.B #$0C                           ;80DC92|A90C    |      ;
                        LDX.B #$07                           ;80DC94|A207    |      ;
                        LDY.B #$06                           ;80DC96|A006    |      ;
-                       JSL.L CODE_808E48                    ;80DC98|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DC98|22488E80|808E48;
                        REP #$20                             ;80DC9C|C220    |      ;
                        SEP #$10                             ;80DC9E|E210    |      ;
                        LDA.W #$EEB3                         ;80DCA0|A9B3EE  |      ;
@@ -11122,7 +11122,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80DCAD|A90D    |      ;
                        LDX.B #$08                           ;80DCAF|A208    |      ;
                        LDY.B #$06                           ;80DCB1|A006    |      ;
-                       JSL.L CODE_808E48                    ;80DCB3|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DCB3|22488E80|808E48;
                        REP #$20                             ;80DCB7|C220    |      ;
                        SEP #$10                             ;80DCB9|E210    |      ;
                        LDA.W #$EEC4                         ;80DCBB|A9C4EE  |      ;
@@ -11134,7 +11134,7 @@ aScreenTransitionTable:
                        LDA.B #$0F                           ;80DCC8|A90F    |      ;
                        LDX.B #$09                           ;80DCCA|A209    |      ;
                        LDY.B #$06                           ;80DCCC|A006    |      ;
-                       JSL.L CODE_808E48                    ;80DCCE|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DCCE|22488E80|808E48;
                        REP #$20                             ;80DCD2|C220    |      ;
                        SEP #$10                             ;80DCD4|E210    |      ;
                        LDA.W #$EED5                         ;80DCD6|A9D5EE  |      ;
@@ -11146,7 +11146,7 @@ aScreenTransitionTable:
                        LDA.B #$05                           ;80DCE3|A905    |      ;
                        LDX.B #$0A                           ;80DCE5|A20A    |      ;
                        LDY.B #$06                           ;80DCE7|A006    |      ;
-                       JSL.L CODE_808E48                    ;80DCE9|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DCE9|22488E80|808E48;
                        REP #$20                             ;80DCED|C220    |      ;
                        SEP #$10                             ;80DCEF|E210    |      ;
                        LDA.W #$EEEC                         ;80DCF1|A9ECEE  |      ;
@@ -11158,11 +11158,11 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DCFE|A90E    |      ;
                        LDX.B #$0B                           ;80DD00|A20B    |      ;
                        LDY.B #$06                           ;80DD02|A006    |      ;
-                       JSL.L CODE_808E48                    ;80DD04|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DD04|22488E80|808E48;
                        RTS                                  ;80DD08|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_80DD09:
+    subUnknown_80DD09:
                        REP #$20                             ;80DD09|C220    |      ;
                        SEP #$10                             ;80DD0B|E210    |      ;
                        LDA.W #$EF06                         ;80DD0D|A906EF  |      ;
@@ -11174,7 +11174,7 @@ aScreenTransitionTable:
                        LDA.B #$07                           ;80DD1A|A907    |      ;
                        LDX.B #$04                           ;80DD1C|A204    |      ;
                        LDY.B #$02                           ;80DD1E|A002    |      ;
-                       JSL.L CODE_808E48                    ;80DD20|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DD20|22488E80|808E48;
                        REP #$20                             ;80DD24|C220    |      ;
                        SEP #$10                             ;80DD26|E210    |      ;
                        LDA.W #$EF11                         ;80DD28|A911EF  |      ;
@@ -11186,7 +11186,7 @@ aScreenTransitionTable:
                        LDA.B #$0D                           ;80DD35|A90D    |      ;
                        LDX.B #$05                           ;80DD37|A205    |      ;
                        LDY.B #$02                           ;80DD39|A002    |      ;
-                       JSL.L CODE_808E48                    ;80DD3B|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DD3B|22488E80|808E48;
                        REP #$20                             ;80DD3F|C220    |      ;
                        SEP #$10                             ;80DD41|E210    |      ;
                        LDA.W #$EF1C                         ;80DD43|A91CEF  |      ;
@@ -11198,579 +11198,1410 @@ aScreenTransitionTable:
                        LDA.B #$0E                           ;80DD50|A90E    |      ;
                        LDX.B #$06                           ;80DD52|A206    |      ;
                        LDY.B #$02                           ;80DD54|A002    |      ;
-                       JSL.L CODE_808E48                    ;80DD56|22488E80|808E48;
+                       JSL.L fUnknown_808E48                ;80DD56|22488E80|808E48;
                        RTS                                  ;80DD5A|60      |      ;
                                                             ;      |        |      ;
-                       db $79,$7F,$10,$11,$3A,$10,$8E,$6A   ;80DD5B|        |      ;
-                       db $10,$0D,$5E,$10,$D2,$6A,$10,$0D   ;80DD63|        |      ;
-                       db $5E,$10,$8E,$6A,$10,$11,$3A,$10   ;80DD6B|        |      ;
-                       db $FE,$FF,$5B,$DD,$80,$D2,$6A,$10   ;80DD73|        |      ;
-                       db $8E,$6A,$10,$0D,$5E,$10,$D2,$6A   ;80DD7B|        |      ;
-                       db $10,$11,$3A,$10,$D2,$6A,$10,$0D   ;80DD83|        |      ;
-                       db $5E,$10,$8E,$6A,$10,$FE,$FF,$78   ;80DD8B|        |      ;
-                       db $DD,$80,$8E,$6A,$10,$0D,$5E,$10   ;80DD93|        |      ;
-                       db $D2,$6A,$10,$11,$3A,$10,$0D,$5E   ;80DD9B|        |      ;
-                       db $10,$11,$3A,$10,$D2,$6A,$10,$0D   ;80DDA3|        |      ;
-                       db $5E,$10,$FE,$FF,$95,$DD,$80,$0D   ;80DDAB|        |      ;
-                       db $5E,$10,$D2,$6A,$10,$53,$42,$10   ;80DDB3|        |      ;
-                       db $0D,$5E,$10,$8E,$6A,$10,$0D,$5E   ;80DDBB|        |      ;
-                       db $10,$53,$42,$10,$D2,$6A,$10,$FE   ;80DDC3|        |      ;
-                       db $FF,$B2,$DD,$80,$9D,$53,$10,$12   ;80DDCB|        |      ;
-                       db $2E,$10,$FB,$1D,$10,$94,$1D,$10   ;80DDD3|        |      ;
-                       db $FE,$2E,$10,$94,$1D,$10,$FB,$1D   ;80DDDB|        |      ;
-                       db $10,$12,$2E,$10,$FE,$FF,$CF,$DD   ;80DDE3|        |      ;
-                       db $80,$FE,$2E,$10,$FB,$1D,$10,$94   ;80DDEB|        |      ;
-                       db $1D,$10,$FE,$2E,$10,$12,$2E,$10   ;80DDF3|        |      ;
-                       db $FE,$2E,$10,$94,$1D,$10,$FB,$1D   ;80DDFB|        |      ;
-                       db $10,$FE,$FF,$EC,$DD,$80,$FB,$1D   ;80DE03|        |      ;
-                       db $10,$94,$1D,$10,$FE,$2E,$10,$12   ;80DE0B|        |      ;
-                       db $2E,$10,$94,$1D,$10,$12,$2E,$10   ;80DE13|        |      ;
-                       db $FE,$2E,$10,$94,$1D,$10,$FE,$FF   ;80DE1B|        |      ;
-                       db $09,$DE,$80,$94,$1D,$10,$FE,$2E   ;80DE23|        |      ;
-                       db $10,$74,$2E,$10,$FB,$1D,$10,$FB   ;80DE2B|        |      ;
-                       db $1D,$10,$FB,$1D,$10,$74,$2E,$10   ;80DE33|        |      ;
-                       db $FE,$2E,$10,$FE,$FF,$26,$DE,$80   ;80DE3B|        |      ;
-                       db $52,$5A,$10,$4C,$31,$10,$6B,$35   ;80DE43|        |      ;
-                       db $10,$08,$29,$10,$52,$5A,$10,$08   ;80DE4B|        |      ;
-                       db $29,$10,$6B,$35,$10,$4C,$31,$10   ;80DE53|        |      ;
-                       db $FE,$FF,$43,$DE,$80,$EF,$45,$10   ;80DE5B|        |      ;
-                       db $EF,$49,$10,$08,$29,$10,$52,$5A   ;80DE63|        |      ;
-                       db $10,$4C,$31,$10,$52,$5A,$10,$08   ;80DE6B|        |      ;
-                       db $29,$10,$EF,$49,$10,$FE,$FF,$60   ;80DE73|        |      ;
-                       db $DE,$80,$6B,$35,$10,$4A,$39,$10   ;80DE7B|        |      ;
-                       db $52,$5A,$10,$4C,$31,$10,$08,$29   ;80DE83|        |      ;
-                       db $10,$4C,$31,$10,$52,$5A,$10,$4A   ;80DE8B|        |      ;
-                       db $39,$10,$FE,$FF,$7D,$DE,$80,$08   ;80DE93|        |      ;
-                       db $29,$10,$52,$5A,$10,$4C,$31,$10   ;80DE9B|        |      ;
-                       db $6B,$35,$10,$6B,$35,$10,$6B,$35   ;80DEA3|        |      ;
-                       db $10,$4C,$31,$10,$52,$5A,$10,$FE   ;80DEAB|        |      ;
-                       db $FF,$9A,$DE,$80,$6B,$45,$10,$E7   ;80DEB3|        |      ;
-                       db $1C,$10,$E7,$28,$10,$08,$29,$10   ;80DEBB|        |      ;
-                       db $6B,$45,$10,$08,$29,$10,$E7,$28   ;80DEC3|        |      ;
-                       db $10,$E7,$1C,$10,$FE,$FF,$B7,$DE   ;80DECB|        |      ;
-                       db $80,$08,$35,$10,$08,$35,$10,$E7   ;80DED3|        |      ;
-                       db $28,$10,$08,$29,$10,$6B,$45,$10   ;80DEDB|        |      ;
-                       db $08,$29,$10,$E7,$28,$10,$08,$35   ;80DEE3|        |      ;
-                       db $10,$FE,$FF,$D4,$DE,$80,$E7,$28   ;80DEEB|        |      ;
-                       db $10,$E7,$28,$10,$6B,$45,$10,$E7   ;80DEF3|        |      ;
-                       db $1C,$10,$0B,$29,$10,$E7,$1C,$10   ;80DEFB|        |      ;
-                       db $6B,$45,$10,$E7,$28,$10,$FE,$FF   ;80DF03|        |      ;
-                       db $F1,$DE,$80,$C5,$28,$10,$6B,$45   ;80DF0B|        |      ;
-                       db $10,$08,$35,$10,$E7,$28,$10,$E7   ;80DF13|        |      ;
-                       db $1C,$10,$E7,$28,$10,$08,$35,$10   ;80DF1B|        |      ;
-                       db $6B,$45,$10,$FE,$FF,$0E,$DF,$80   ;80DF23|        |      ;
-                       db $99,$7F,$10,$0F,$32,$10,$8E,$5A   ;80DF2B|        |      ;
-                       db $10,$4D,$52,$10,$D2,$62,$10,$4D   ;80DF33|        |      ;
-                       db $52,$10,$8E,$5A,$10,$0F,$32,$10   ;80DF3B|        |      ;
-                       db $FE,$FF,$2B,$DF,$80,$D2,$62,$10   ;80DF43|        |      ;
-                       db $8E,$5A,$10,$4D,$52,$10,$D2,$62   ;80DF4B|        |      ;
-                       db $10,$0F,$32,$10,$D2,$62,$10,$4D   ;80DF53|        |      ;
-                       db $52,$10,$8E,$5A,$10,$FE,$FF,$48   ;80DF5B|        |      ;
-                       db $DF,$80,$8E,$5A,$10,$4D,$52,$10   ;80DF63|        |      ;
-                       db $D2,$62,$10,$0F,$32,$10,$8E,$5A   ;80DF6B|        |      ;
-                       db $10,$0F,$32,$10,$D2,$62,$10,$4D   ;80DF73|        |      ;
-                       db $52,$10,$FE,$FF,$65,$DF,$80,$4D   ;80DF7B|        |      ;
-                       db $52,$10,$D2,$62,$10,$0F,$32,$10   ;80DF83|        |      ;
-                       db $8E,$5A,$10,$4D,$52,$10,$8E,$5A   ;80DF8B|        |      ;
-                       db $10,$0F,$32,$10,$D2,$62,$10,$FE   ;80DF93|        |      ;
-                       db $FF,$82,$DF,$80,$FE,$23,$10,$98   ;80DF9B|        |      ;
-                       db $22,$10,$DB,$11,$10,$9B,$02,$10   ;80DFA3|        |      ;
-                       db $1F,$03,$10,$9B,$02,$10,$DB,$11   ;80DFAB|        |      ;
-                       db $10,$98,$22,$10,$FE,$FF,$9F,$DF   ;80DFB3|        |      ;
-                       db $80,$1F,$03,$10,$DC,$11,$10,$B6   ;80DFBB|        |      ;
-                       db $01,$10,$1F,$03,$10,$76,$22,$10   ;80DFC3|        |      ;
-                       db $1F,$03,$10,$B6,$01,$10,$DC,$11   ;80DFCB|        |      ;
-                       db $10,$FE,$FF,$BC,$DF,$80,$DB,$11   ;80DFD3|        |      ;
-                       db $10,$B6,$01,$10,$1F,$03,$10,$76   ;80DFDB|        |      ;
-                       db $22,$10,$5F,$12,$10,$76,$22,$10   ;80DFE3|        |      ;
-                       db $1F,$03,$10,$B6,$01,$10,$FE,$FF   ;80DFEB|        |      ;
-                       db $D9,$DF,$80,$B6,$01,$10,$1F,$03   ;80DFF3|        |      ;
-                       db $10,$76,$22,$10,$DB,$11,$10,$B6   ;80DFFB|        |      ;
-                       db $01,$10,$DB,$11,$10,$76,$22,$10   ;80E003|        |      ;
-                       db $1F,$03,$10,$FE,$FF,$F6,$DF,$80   ;80E00B|        |      ;
-                       db $CD,$51,$10,$6B,$21,$10,$6B,$49   ;80E013|        |      ;
-                       db $10,$87,$45,$10,$CD,$51,$10,$87   ;80E01B|        |      ;
-                       db $45,$10,$6B,$49,$10,$6B,$21,$10   ;80E023|        |      ;
-                       db $FE,$FF,$13,$E0,$80,$6B,$49,$10   ;80E02B|        |      ;
-                       db $6B,$49,$10,$87,$45,$10,$CD,$51   ;80E033|        |      ;
-                       db $10,$6B,$21,$10,$CD,$51,$10,$87   ;80E03B|        |      ;
-                       db $45,$10,$6B,$49,$10,$FE,$FF,$30   ;80E043|        |      ;
-                       db $E0,$80,$DB,$11,$10,$B6,$01,$10   ;80E04B|        |      ;
-                       db $1F,$03,$10,$76,$22,$10,$5F,$12   ;80E053|        |      ;
-                       db $10,$76,$22,$10,$1F,$03,$10,$B6   ;80E05B|        |      ;
-                       db $01,$10,$FE,$FF,$4D,$E0,$80,$07   ;80E063|        |      ;
-                       db $35,$10,$CD,$51,$10,$6B,$21,$10   ;80E06B|        |      ;
-                       db $6B,$69,$10,$87,$45,$10,$6B,$49   ;80E073|        |      ;
-                       db $10,$6B,$21,$10,$CD,$51,$10,$FE   ;80E07B|        |      ;
-                       db $FF,$6A,$E0,$80,$40,$61,$10,$C6   ;80E083|        |      ;
-                       db $20,$10,$04,$41,$10,$C0,$30,$10   ;80E08B|        |      ;
-                       db $64,$45,$10,$C0,$30,$10,$04,$41   ;80E093|        |      ;
-                       db $10,$C6,$20,$10,$FE,$FF,$87,$E0   ;80E09B|        |      ;
-                       db $80,$64,$45,$10,$04,$41,$10,$C0   ;80E0A3|        |      ;
-                       db $30,$10,$64,$45,$10,$C6,$20,$10   ;80E0AB|        |      ;
-                       db $64,$45,$10,$C0,$30,$10,$04,$41   ;80E0B3|        |      ;
-                       db $10,$FE,$FF,$A4,$E0,$80,$04,$41   ;80E0BB|        |      ;
-                       db $10,$C0,$30,$10,$64,$45,$10,$C6   ;80E0C3|        |      ;
-                       db $20,$10,$04,$41,$10,$C6,$20,$10   ;80E0CB|        |      ;
-                       db $64,$45,$10,$C0,$30,$10,$FE,$FF   ;80E0D3|        |      ;
-                       db $C1,$E0,$80,$C0,$30,$10,$64,$45   ;80E0DB|        |      ;
-                       db $10,$C6,$20,$10,$04,$41,$10,$C0   ;80E0E3|        |      ;
-                       db $30,$10,$04,$41,$10,$C6,$20,$10   ;80E0EB|        |      ;
-                       db $64,$45,$10,$FE,$FF,$DE,$E0,$80   ;80E0F3|        |      ;
-                       db $50,$01,$08,$53,$01,$08,$50,$01   ;80E0FB|        |      ;
-                       db $08,$53,$01,$08,$FE,$FF,$FB,$E0   ;80E103|        |      ;
-                       db $80,$D7,$09,$08,$D9,$09,$08,$D7   ;80E10B|        |      ;
-                       db $09,$08,$D9,$09,$08,$FE,$FF,$0C   ;80E113|        |      ;
-                       db $E1,$80,$9F,$02,$08,$9F,$03,$08   ;80E11B|        |      ;
-                       db $9F,$02,$08,$9F,$03,$08,$FE,$FF   ;80E123|        |      ;
-                       db $1D,$E1,$80,$9C,$01,$08,$9F,$02   ;80E12B|        |      ;
-                       db $08,$9C,$01,$08,$9F,$02,$08,$FE   ;80E133|        |      ;
-                       db $FF,$2E,$E1,$80,$38,$01,$08,$9C   ;80E13B|        |      ;
-                       db $01,$08,$38,$01,$08,$9C,$01,$08   ;80E143|        |      ;
-                       db $FE,$FF,$3F,$E1,$80,$EA,$00,$08   ;80E14B|        |      ;
-                       db $1C,$01,$08,$EA,$00,$08,$EA,$00   ;80E153|        |      ;
-                       db $08,$FE,$FF,$50,$E1,$80,$2D,$01   ;80E15B|        |      ;
-                       db $08,$2D,$01,$08,$2D,$01,$08,$3B   ;80E163|        |      ;
-                       db $01,$08,$FE,$FF,$61,$E1,$80,$48   ;80E16B|        |      ;
-                       db $00,$08,$0C,$00,$08,$FE,$FF,$72   ;80E173|        |      ;
-                       db $E1,$80,$17,$00,$08,$1A,$00,$08   ;80E17B|        |      ;
-                       db $FE,$FF,$7D,$E1,$80,$1F,$00,$08   ;80E183|        |      ;
-                       db $7F,$01,$08,$FE,$FF,$88,$E1,$80   ;80E18B|        |      ;
-                       db $B4,$01,$08,$19,$02,$08,$FE,$FF   ;80E193|        |      ;
-                       db $93,$E1,$80,$4C,$00,$08,$52,$00   ;80E19B|        |      ;
-                       db $08,$FE,$FF,$9E,$E1,$80,$BF,$02   ;80E1A3|        |      ;
-                       db $08,$7F,$01,$08,$FE,$FF,$A9,$E1   ;80E1AB|        |      ;
-                       db $80,$9F,$00,$08,$5F,$03,$08,$FE   ;80E1B3|        |      ;
-                       db $FF,$B4,$E1,$80,$9F,$02,$08,$9F   ;80E1BB|        |      ;
-                       db $03,$08,$FE,$FF,$BF,$E1,$80,$8D   ;80E1C3|        |      ;
-                       db $21,$08,$10,$2E,$08,$10,$2E,$08   ;80E1CB|        |      ;
-                       db $10,$2E,$08,$FE,$FF,$CA,$E1,$80   ;80E1D3|        |      ;
-                       db $9C,$5F,$08,$7B,$5F,$08,$F9,$4A   ;80E1DB|        |      ;
-                       db $08,$7B,$5F,$08,$FE,$FF,$DB,$E1   ;80E1E3|        |      ;
-                       db $80,$F9,$4A,$08,$F9,$4A,$08,$1F   ;80E1EB|        |      ;
-                       db $26,$08,$F9,$4A,$08,$FE,$FF,$EC   ;80E1F3|        |      ;
-                       db $E1,$80,$1F,$26,$08,$1F,$26,$08   ;80E1FB|        |      ;
-                       db $3E,$05,$08,$1F,$26,$08,$FE,$FF   ;80E203|        |      ;
-                       db $FD,$E1,$80,$3E,$05,$08,$1F,$26   ;80E20B|        |      ;
-                       db $08,$F9,$4A,$08,$1F,$26,$08,$FE   ;80E213|        |      ;
-                       db $FF,$0E,$E2,$80,$1F,$26,$08,$F9   ;80E21B|        |      ;
-                       db $4A,$08,$F9,$4A,$08,$F9,$4A,$08   ;80E223|        |      ;
-                       db $FE,$FF,$1F,$E2,$80,$BF,$03,$08   ;80E22B|        |      ;
-                       db $1F,$26,$08,$BF,$03,$08,$1F,$26   ;80E233|        |      ;
-                       db $08,$FE,$FF,$30,$E2,$80,$BF,$03   ;80E23B|        |      ;
-                       db $08,$1F,$26,$08,$3E,$05,$08,$1F   ;80E243|        |      ;
-                       db $26,$08,$FE,$FF,$41,$E2,$80,$3F   ;80E24B|        |      ;
-                       db $12,$08,$BF,$06,$08,$FE,$FF,$52   ;80E253|        |      ;
-                       db $E2,$80,$48,$00,$08,$4D,$00,$08   ;80E25B|        |      ;
-                       db $FE,$FF,$5D,$E2,$80,$1F,$02,$08   ;80E263|        |      ;
-                       db $3A,$01,$08,$FE,$FF,$68,$E2,$80   ;80E26B|        |      ;
-                       db $FA,$00,$08,$3F,$03,$08,$FE,$FF   ;80E273|        |      ;
-                       db $73,$E2,$80,$48,$00,$08,$4F,$00   ;80E27B|        |      ;
-                       db $08,$FE,$FF,$7E,$E2,$80,$9A,$1E   ;80E283|        |      ;
-                       db $08,$1F,$1F,$08,$FE,$FF,$89,$E2   ;80E28B|        |      ;
-                       db $80,$1F,$02,$08,$37,$00,$08,$FE   ;80E293|        |      ;
-                       db $FF,$94,$E2,$80,$19,$00,$08,$25   ;80E29B|        |      ;
-                       db $00,$08,$FE,$FF,$9F,$E2,$80,$7F   ;80E2A3|        |      ;
-                       db $2E,$08,$3F,$23,$08,$FE,$FF,$AA   ;80E2AB|        |      ;
-                       db $E2,$80,$88,$00,$08,$8C,$00,$08   ;80E2B3|        |      ;
-                       db $FE,$FF,$B5,$E2,$80,$9D,$00,$08   ;80E2BB|        |      ;
-                       db $9F,$02,$08,$FE,$FF,$C0,$E2,$80   ;80E2C3|        |      ;
-                       db $1F,$02,$08,$1F,$01,$08,$FE,$FF   ;80E2CB|        |      ;
-                       db $CB,$E2,$80,$90,$00,$08,$9C,$00   ;80E2D3|        |      ;
-                       db $08,$FE,$FF,$D6,$E2,$80,$DE,$01   ;80E2DB|        |      ;
-                       db $08,$BF,$02,$08,$FE,$FF,$E1,$E2   ;80E2E3|        |      ;
-                       db $80,$4F,$00,$08,$D0,$00,$08,$FE   ;80E2EB|        |      ;
-                       db $FF,$EC,$E2,$80,$0F,$5E,$10,$54   ;80E2F3|        |      ;
-                       db $4A,$10,$17,$7F,$10,$FE,$FF,$F7   ;80E2FB|        |      ;
-                       db $E2,$80,$54,$4A,$10,$17,$7F,$10   ;80E303|        |      ;
-                       db $0F,$5E,$10,$FE,$FF,$05,$E3,$80   ;80E30B|        |      ;
-                       db $17,$7F,$10,$0F,$5E,$10,$54,$4A   ;80E313|        |      ;
-                       db $10,$FE,$FF,$13,$E3,$80,$13,$42   ;80E31B|        |      ;
-                       db $10,$57,$42,$10,$FC,$56,$10,$FE   ;80E323|        |      ;
-                       db $FF,$21,$E3,$80,$57,$42,$10,$FC   ;80E32B|        |      ;
-                       db $56,$10,$13,$42,$10,$FE,$FF,$2F   ;80E333|        |      ;
-                       db $E3,$80,$FC,$56,$10,$13,$42,$10   ;80E33B|        |      ;
-                       db $57,$42,$10,$FE,$FF,$3D,$E3,$80   ;80E343|        |      ;
-                       db $4A,$3D,$10,$4A,$3D,$10,$8C,$45   ;80E34B|        |      ;
-                       db $10,$FE,$FF,$4B,$E3,$80,$4A,$3D   ;80E353|        |      ;
-                       db $10,$8C,$45,$10,$4A,$3D,$10,$FE   ;80E35B|        |      ;
-                       db $FF,$59,$E3,$80,$8C,$45,$10,$4A   ;80E363|        |      ;
-                       db $3D,$10,$4A,$3D,$10,$FE,$FF,$67   ;80E36B|        |      ;
-                       db $E3,$80,$29,$31,$10,$08,$29,$10   ;80E373|        |      ;
-                       db $6B,$31,$10,$FE,$FF,$75,$E3,$80   ;80E37B|        |      ;
-                       db $08,$29,$10,$6B,$31,$10,$29,$31   ;80E383|        |      ;
-                       db $10,$FE,$FF,$83,$E3,$80,$6B,$31   ;80E38B|        |      ;
-                       db $10,$29,$31,$10,$08,$29,$10,$FE   ;80E393|        |      ;
-                       db $FF,$91,$E3,$80,$50,$62,$10,$71   ;80E39B|        |      ;
-                       db $72,$10,$79,$7F,$10,$FE,$FF,$9F   ;80E3A3|        |      ;
-                       db $E3,$80,$71,$72,$10,$79,$7F,$10   ;80E3AB|        |      ;
-                       db $50,$62,$10,$FE,$FF,$AD,$E3,$80   ;80E3B3|        |      ;
-                       db $79,$7F,$10,$50,$62,$10,$71,$72   ;80E3BB|        |      ;
-                       db $10,$FE,$FF,$BB,$E3,$80,$78,$5E   ;80E3C3|        |      ;
-                       db $10,$54,$56,$10,$19,$7F,$10,$FE   ;80E3CB|        |      ;
-                       db $FF,$C9,$E3,$80,$54,$56,$10,$19   ;80E3D3|        |      ;
-                       db $7F,$10,$78,$5E,$10,$FE,$FF,$D7   ;80E3DB|        |      ;
-                       db $E3,$80,$19,$7F,$10,$78,$5E,$10   ;80E3E3|        |      ;
-                       db $54,$56,$10,$FE,$FF,$E5,$E3,$80   ;80E3EB|        |      ;
-                       db $4A,$3D,$10,$4A,$3D,$10,$8C,$45   ;80E3F3|        |      ;
-                       db $10,$FE,$FF,$F3,$E3,$80,$4A,$3D   ;80E3FB|        |      ;
-                       db $10,$8C,$45,$10,$4A,$3D,$10,$FE   ;80E403|        |      ;
-                       db $FF,$01,$E4,$80,$8C,$45,$10,$4A   ;80E40B|        |      ;
-                       db $3D,$10,$4A,$3D,$10,$FE,$FF,$0F   ;80E413|        |      ;
-                       db $E4,$80,$E7,$30,$10,$E7,$30,$10   ;80E41B|        |      ;
-                       db $29,$35,$10,$FE,$FF,$1D,$E4,$80   ;80E423|        |      ;
-                       db $E7,$30,$10,$29,$35,$10,$E7,$30   ;80E42B|        |      ;
-                       db $10,$FE,$FF,$2B,$E4,$80,$29,$35   ;80E433|        |      ;
-                       db $10,$E7,$30,$10,$E7,$30,$10,$FE   ;80E43B|        |      ;
-                       db $FF,$39,$E4,$80,$91,$4A,$10,$CE   ;80E443|        |      ;
-                       db $62,$10,$74,$63,$10,$FE,$FF,$47   ;80E44B|        |      ;
-                       db $E4,$80,$CE,$62,$10,$74,$63,$10   ;80E453|        |      ;
-                       db $91,$4A,$10,$FE,$FF,$55,$E4,$80   ;80E45B|        |      ;
-                       db $74,$63,$10,$91,$4A,$10,$CE,$62   ;80E463|        |      ;
-                       db $10,$FE,$FF,$63,$E4,$80,$94,$36   ;80E46B|        |      ;
-                       db $10,$54,$32,$10,$FC,$3A,$10,$FE   ;80E473|        |      ;
-                       db $FF,$71,$E4,$80,$54,$32,$10,$FC   ;80E47B|        |      ;
-                       db $3A,$10,$94,$36,$10,$FE,$FF,$7F   ;80E483|        |      ;
-                       db $E4,$80,$EC,$3A,$10,$94,$36,$10   ;80E48B|        |      ;
-                       db $54,$32,$10,$FE,$FF,$8D,$E4,$80   ;80E493|        |      ;
-                       db $CB,$2D,$10,$CB,$2D,$10,$0E,$36   ;80E49B|        |      ;
-                       db $10,$FE,$FF,$9B,$E4,$80,$CB,$2D   ;80E4A3|        |      ;
-                       db $10,$0E,$36,$10,$CB,$2D,$10,$FE   ;80E4AB|        |      ;
-                       db $FF,$A9,$E4,$80,$0E,$36,$10,$CB   ;80E4B3|        |      ;
-                       db $2D,$10,$CB,$2D,$10,$FE,$FF,$B7   ;80E4BB|        |      ;
-                       db $E4,$80,$E7,$30,$10,$27,$31,$10   ;80E4C3|        |      ;
-                       db $6A,$35,$10,$FE,$FF,$C5,$E4,$80   ;80E4CB|        |      ;
-                       db $27,$31,$10,$6A,$35,$10,$E7,$30   ;80E4D3|        |      ;
-                       db $10,$FE,$FF,$D3,$E4,$80,$6A,$35   ;80E4DB|        |      ;
-                       db $10,$E7,$30,$10,$27,$31,$10,$FE   ;80E4E3|        |      ;
-                       db $FF,$E1,$E4,$80,$62,$21,$0A,$90   ;80E4EB|        |      ;
-                       db $21,$0A,$D2,$25,$10,$90,$21,$0A   ;80E4F3|        |      ;
-                       db $FE,$FF,$EF,$E4,$80,$58,$0E,$0A   ;80E4FB|        |      ;
-                       db $9A,$12,$0A,$DC,$16,$10,$9A,$12   ;80E503|        |      ;
-                       db $0A,$FE,$FF,$00,$E5,$80,$7D,$37   ;80E50B|        |      ;
-                       db $0A,$9F,$47,$0A,$DF,$53,$10,$9F   ;80E513|        |      ;
-                       db $47,$0A,$FE,$FF,$11,$E5,$80,$2C   ;80E51B|        |      ;
-                       db $09,$0A,$6F,$11,$0A,$B1,$11,$10   ;80E523|        |      ;
-                       db $6F,$11,$0A,$FE,$FF,$22,$E5,$80   ;80E52B|        |      ;
-                       db $8E,$0D,$0A,$B1,$0D,$0A,$B4,$0D   ;80E533|        |      ;
-                       db $10,$B1,$0D,$0A,$FE,$FF,$33,$E5   ;80E53B|        |      ;
-                       db $80,$D7,$36,$0A,$19,$37,$0A,$7F   ;80E543|        |      ;
-                       db $37,$10,$19,$37,$0A,$FE,$FF,$44   ;80E54B|        |      ;
-                       db $E5,$80,$DE,$27,$0A,$FF,$3F,$0A   ;80E553|        |      ;
-                       db $FF,$53,$10,$FF,$3F,$0A,$FE,$FF   ;80E55B|        |      ;
-                       db $55,$E5,$80,$6E,$19,$0A,$70,$19   ;80E563|        |      ;
-                       db $0A,$92,$19,$10,$70,$19,$0A,$FE   ;80E56B|        |      ;
-                       db $FF,$66,$E5,$80,$0A,$15,$0A,$4F   ;80E573|        |      ;
-                       db $1D,$0A,$90,$1D,$10,$4F,$1D,$0A   ;80E57B|        |      ;
-                       db $FE,$FF,$77,$E5,$80,$18,$0A,$0A   ;80E583|        |      ;
-                       db $1C,$0A,$0A,$9F,$0A,$10,$1C,$0A   ;80E58B|        |      ;
-                       db $0A,$FE,$FF,$88,$E5,$80,$7C,$2F   ;80E593|        |      ;
-                       db $0A,$BE,$2F,$0A,$DF,$4B,$10,$BE   ;80E59B|        |      ;
-                       db $2F,$0A,$FE,$FF,$99,$E5,$80,$0C   ;80E5A3|        |      ;
-                       db $09,$0A,$6E,$11,$0A,$90,$11,$10   ;80E5AB|        |      ;
-                       db $6E,$11,$0A,$FE,$FF,$AA,$E5,$80   ;80E5B3|        |      ;
-                       db $E8,$1C,$0A,$0A,$21,$0A,$6F,$21   ;80E5BB|        |      ;
-                       db $10,$0A,$21,$0A,$FE,$FF,$BB,$E5   ;80E5C3|        |      ;
-                       db $80,$F3,$29,$0A,$19,$2A,$0A,$7B   ;80E5CB|        |      ;
-                       db $32,$10,$19,$2A,$0A,$FE,$FF,$CC   ;80E5D3|        |      ;
-                       db $E5,$80,$B8,$3E,$0A,$3D,$3F,$0A   ;80E5DB|        |      ;
-                       db $7F,$43,$10,$3D,$3F,$0A,$FE,$FF   ;80E5E3|        |      ;
-                       db $DD,$E5,$80,$6C,$1D,$0A,$8E,$21   ;80E5EB|        |      ;
-                       db $0A,$AF,$25,$10,$8E,$21,$0A,$FE   ;80E5F3|        |      ;
-                       db $FF,$EE,$E5,$80,$3B,$7F,$10,$B5   ;80E5FB|        |      ;
-                       db $6E,$10,$2E,$5E,$0F,$F0,$51,$10   ;80E603|        |      ;
-                       db $33,$52,$0C,$B7,$6E,$10,$FE,$FF   ;80E60B|        |      ;
-                       db $FF,$E5,$80,$B7,$6E,$10,$2E,$5E   ;80E613|        |      ;
-                       db $10,$F0,$51,$0F,$39,$7F,$10,$F0   ;80E61B|        |      ;
-                       db $51,$0C,$33,$52,$10,$FE,$FF,$16   ;80E623|        |      ;
-                       db $E6,$80,$2E,$5E,$10,$F0,$51,$10   ;80E62B|        |      ;
-                       db $3B,$7F,$0F,$B7,$6E,$10,$39,$7F   ;80E633|        |      ;
-                       db $0C,$D1,$4D,$10,$FE,$FF,$2D,$E6   ;80E63B|        |      ;
-                       db $80,$F0,$51,$10,$39,$7F,$10,$B7   ;80E643|        |      ;
-                       db $6E,$0F,$2E,$5E,$10,$B7,$6E,$0C   ;80E64B|        |      ;
-                       db $39,$7F,$10,$FE,$FF,$44,$E6,$80   ;80E653|        |      ;
-                       db $F0,$41,$10,$F1,$3D,$10,$11,$42   ;80E65B|        |      ;
-                       db $0F,$F1,$41,$10,$11,$42,$0C,$F1   ;80E663|        |      ;
-                       db $3D,$10,$FE,$FF,$5B,$E6,$80,$7B   ;80E66B|        |      ;
-                       db $53,$10,$BB,$42,$10,$34,$32,$0F   ;80E673|        |      ;
-                       db $33,$32,$10,$34,$32,$0C,$BB,$42   ;80E67B|        |      ;
-                       db $10,$FE,$FF,$72,$E6,$80,$B8,$42   ;80E683|        |      ;
-                       db $10,$34,$32,$10,$33,$32,$0F,$DB   ;80E68B|        |      ;
-                       db $42,$10,$33,$32,$0C,$34,$32,$10   ;80E693|        |      ;
-                       db $FE,$FF,$89,$E6,$80,$34,$32,$10   ;80E69B|        |      ;
-                       db $33,$32,$10,$DB,$42,$0F,$B8,$32   ;80E6A3|        |      ;
-                       db $10,$DB,$42,$0C,$33,$32,$10,$FE   ;80E6AB|        |      ;
-                       db $FF,$A0,$E6,$80,$33,$32,$10,$DB   ;80E6B3|        |      ;
-                       db $42,$10,$B8,$32,$0F,$34,$32,$10   ;80E6BB|        |      ;
-                       db $B8,$32,$0C,$DB,$42,$10,$FE,$FF   ;80E6C3|        |      ;
-                       db $B7,$E6,$80,$B1,$21,$10,$D1,$25   ;80E6CB|        |      ;
-                       db $10,$D1,$29,$0F,$34,$32,$10,$D1   ;80E6D3|        |      ;
-                       db $29,$0C,$D1,$25,$10,$FE,$FF,$CE   ;80E6DB|        |      ;
-                       db $E6,$80,$13,$32,$10,$8C,$1D,$10   ;80E6E3|        |      ;
-                       db $CF,$29,$0F,$11,$2E,$10,$CF,$29   ;80E6EB|        |      ;
-                       db $0C,$8C,$1D,$10,$FE,$FF,$E5,$E6   ;80E6F3|        |      ;
-                       db $80,$F1,$2D,$10,$33,$32,$10,$8C   ;80E6FB|        |      ;
-                       db $1D,$0F,$CF,$29,$10,$8C,$1D,$0C   ;80E703|        |      ;
-                       db $33,$32,$10,$FE,$FF,$FC,$E6,$80   ;80E70B|        |      ;
-                       db $AF,$21,$10,$11,$2E,$10,$33,$32   ;80E713|        |      ;
-                       db $0F,$8C,$1D,$10,$33,$32,$0C,$11   ;80E71B|        |      ;
-                       db $2E,$10,$FE,$FF,$13,$E7,$80,$6C   ;80E723|        |      ;
-                       db $1D,$10,$CF,$29,$10,$11,$2E,$0F   ;80E72B|        |      ;
-                       db $33,$32,$10,$11,$2E,$0C,$CF,$29   ;80E733|        |      ;
-                       db $10,$FE,$FF,$2A,$E7,$80,$4C,$1D   ;80E73B|        |      ;
-                       db $10,$4C,$1D,$10,$4C,$21,$0F,$4C   ;80E743|        |      ;
-                       db $21,$10,$4C,$21,$0C,$4C,$1D,$10   ;80E74B|        |      ;
-                       db $FE,$FF,$41,$E7,$80,$8B,$21,$10   ;80E753|        |      ;
-                       db $2A,$19,$10,$4B,$1D,$0F,$4B,$1D   ;80E75B|        |      ;
-                       db $10,$4B,$1D,$0C,$2A,$19,$10,$FE   ;80E763|        |      ;
-                       db $FF,$58,$E7,$80,$4B,$1D,$10,$6B   ;80E76B|        |      ;
-                       db $21,$10,$2A,$19,$0F,$4B,$1D,$10   ;80E773|        |      ;
-                       db $2A,$19,$0C,$6B,$21,$10,$FE,$FF   ;80E77B|        |      ;
-                       db $6F,$E7,$80,$2A,$1D,$10,$48,$1D   ;80E783|        |      ;
-                       db $10,$4B,$21,$0F,$2A,$19,$10,$4B   ;80E78B|        |      ;
-                       db $21,$0C,$48,$1D,$10,$FE,$FF,$86   ;80E793|        |      ;
-                       db $E7,$80,$28,$19,$10,$4B,$1D,$10   ;80E79B|        |      ;
-                       db $4B,$1D,$0F,$6B,$1D,$10,$4B,$1D   ;80E7A3|        |      ;
-                       db $0C,$4B,$1D,$10,$FE,$FF,$9D,$E7   ;80E7AB|        |      ;
-                       db $80,$52,$7F,$10,$66,$5D,$10,$86   ;80E7B3|        |      ;
-                       db $7D,$0F,$4B,$7E,$10,$86,$7D,$0C   ;80E7BB|        |      ;
-                       db $66,$5D,$10,$FE,$FF,$B4,$E7,$80   ;80E7C3|        |      ;
-                       db $4B,$7E,$10,$32,$4F,$10,$66,$5D   ;80E7CB|        |      ;
-                       db $0F,$86,$7D,$10,$66,$5D,$0C,$32   ;80E7D3|        |      ;
-                       db $7F,$10,$FE,$FF,$CB,$E7,$80,$86   ;80E7DB|        |      ;
-                       db $7D,$10,$4B,$7E,$10,$32,$7F,$0F   ;80E7E3|        |      ;
-                       db $66,$5D,$10,$32,$7F,$0C,$4B,$7E   ;80E7EB|        |      ;
-                       db $10,$FE,$FF,$E2,$E7,$80,$66,$5D   ;80E7F3|        |      ;
-                       db $10,$86,$7D,$10,$4B,$7E,$0F,$32   ;80E7FB|        |      ;
-                       db $7F,$10,$4B,$7E,$0C,$86,$7D,$10   ;80E803|        |      ;
-                       db $FE,$FF,$F9,$E7,$80,$66,$5D,$10   ;80E80B|        |      ;
-                       db $86,$61,$10,$86,$65,$0F,$A6,$69   ;80E813|        |      ;
-                       db $10,$86,$65,$0C,$86,$61,$10,$FE   ;80E81B|        |      ;
-                       db $FF,$10,$E8,$80,$9E,$3F,$10,$9E   ;80E823|        |      ;
-                       db $16,$10,$18,$12,$0F,$74,$11,$10   ;80E82B|        |      ;
-                       db $18,$12,$0C,$9E,$16,$10,$FE,$FF   ;80E833|        |      ;
-                       db $27,$E8,$80,$9E,$16,$10,$18,$12   ;80E83B|        |      ;
-                       db $10,$74,$11,$0F,$FA,$2A,$10,$74   ;80E843|        |      ;
-                       db $11,$0C,$18,$12,$10,$FE,$FF,$3E   ;80E84B|        |      ;
-                       db $E8,$80,$18,$12,$10,$74,$11,$10   ;80E853|        |      ;
-                       db $9E,$3F,$0F,$9E,$16,$10,$9E,$3F   ;80E85B|        |      ;
-                       db $0C,$74,$11,$10,$FE,$FF,$55,$E8   ;80E863|        |      ;
-                       db $80,$74,$11,$10,$7B,$26,$10,$9E   ;80E86B|        |      ;
-                       db $16,$0F,$18,$12,$10,$9E,$16,$0C   ;80E873|        |      ;
-                       db $7B,$26,$10,$FE,$FF,$6C,$E8,$80   ;80E87B|        |      ;
-                       db $B1,$1D,$10,$B2,$1D,$10,$B3,$1D   ;80E883|        |      ;
-                       db $0F,$B3,$1D,$10,$B3,$1D,$0C,$B2   ;80E88B|        |      ;
-                       db $1D,$10,$FE,$FF,$83,$E8,$80,$B3   ;80E893|        |      ;
-                       db $0D,$10,$B3,$09,$10,$91,$09,$0F   ;80E89B|        |      ;
-                       db $72,$01,$10,$91,$09,$0C,$B3,$09   ;80E8A3|        |      ;
-                       db $10,$FE,$FF,$9A,$E8,$80,$B3,$09   ;80E8AB|        |      ;
-                       db $10,$91,$09,$10,$72,$01,$0F,$B3   ;80E8B3|        |      ;
-                       db $0D,$10,$72,$01,$0C,$91,$09,$10   ;80E8BB|        |      ;
-                       db $FE,$FF,$B1,$E8,$80,$91,$09,$10   ;80E8C3|        |      ;
-                       db $72,$01,$10,$B3,$0D,$0F,$B3,$09   ;80E8CB|        |      ;
-                       db $10,$B3,$0D,$0C,$72,$01,$10,$FE   ;80E8D3|        |      ;
-                       db $FF,$C8,$E8,$80,$72,$01,$10,$B3   ;80E8DB|        |      ;
-                       db $0D,$10,$B3,$09,$0F,$91,$09,$10   ;80E8E3|        |      ;
-                       db $B3,$09,$0C,$B3,$0D,$10,$FE,$FF   ;80E8EB|        |      ;
-                       db $DF,$E8,$80,$4E,$19,$10,$0C,$11   ;80E8F3|        |      ;
-                       db $10,$0B,$11,$0F,$0B,$11,$10,$0B   ;80E8FB|        |      ;
-                       db $11,$0C,$0C,$11,$10,$FE,$FF,$F6   ;80E903|        |      ;
-                       db $E8,$80,$0C,$11,$10,$0B,$11,$10   ;80E90B|        |      ;
-                       db $0B,$11,$0F,$4E,$19,$10,$0B,$11   ;80E913|        |      ;
-                       db $0C,$0B,$11,$10,$FE,$FF,$0D,$E9   ;80E91B|        |      ;
-                       db $80,$0B,$11,$10,$0B,$11,$10,$4E   ;80E923|        |      ;
-                       db $19,$0F,$0C,$11,$10,$4E,$19,$0C   ;80E92B|        |      ;
-                       db $0B,$11,$10,$FE,$FF,$24,$E9,$80   ;80E933|        |      ;
-                       db $0B,$11,$10,$4E,$19,$10,$0C,$11   ;80E93B|        |      ;
-                       db $0F,$0B,$11,$10,$0C,$11,$0C,$4E   ;80E943|        |      ;
-                       db $19,$10,$FE,$FF,$3B,$E9,$80,$AC   ;80E94B|        |      ;
-                       db $21,$10,$8B,$1D,$10,$2B,$0D,$0F   ;80E953|        |      ;
-                       db $2B,$0D,$10,$2B,$0D,$0C,$8B,$1D   ;80E95B|        |      ;
-                       db $10,$FE,$FF,$52,$E9,$80,$2B,$0D   ;80E963|        |      ;
-                       db $10,$2B,$0D,$10,$8B,$1D,$0F,$AC   ;80E96B|        |      ;
-                       db $21,$10,$8B,$1D,$0C,$2B,$0D,$10   ;80E973|        |      ;
-                       db $FE,$FF,$69,$E9,$80,$FE,$32,$10   ;80E97B|        |      ;
-                       db $EE,$21,$10,$D1,$29,$0F,$14,$22   ;80E983|        |      ;
-                       db $10,$D1,$29,$0C,$EE,$21,$10,$FE   ;80E98B|        |      ;
-                       db $FF,$80,$E9,$80,$F5,$29,$10,$76   ;80E993|        |      ;
-                       db $2E,$10,$EE,$21,$0F,$D1,$29,$10   ;80E99B|        |      ;
-                       db $EE,$21,$0C,$76,$2E,$10,$FE,$FF   ;80E9A3|        |      ;
-                       db $97,$E9,$80,$F4,$15,$10,$14,$32   ;80E9AB|        |      ;
-                       db $10,$33,$2E,$0F,$EE,$21,$10,$33   ;80E9B3|        |      ;
-                       db $2E,$0C,$14,$32,$10,$FE,$FF,$AE   ;80E9BB|        |      ;
-                       db $E9,$80,$D3,$1D,$10,$D1,$29,$10   ;80E9C3|        |      ;
-                       db $34,$2E,$0F,$D1,$1D,$10,$34,$2E   ;80E9CB|        |      ;
-                       db $0C,$D1,$29,$10,$FE,$FF,$C5,$E9   ;80E9D3|        |      ;
-                       db $80,$EF,$25,$10,$CE,$25,$10,$AE   ;80E9DB|        |      ;
-                       db $25,$0F,$AD,$25,$10,$AE,$25,$0C   ;80E9E3|        |      ;
-                       db $CE,$25,$10,$FE,$FF,$DC,$E9,$80   ;80E9EB|        |      ;
-                       db $4E,$21,$10,$4F,$1D,$10,$B4,$1D   ;80E9F3|        |      ;
-                       db $0F,$B4,$1D,$10,$B4,$1D,$0C,$4F   ;80E9FB|        |      ;
-                       db $1D,$10,$FE,$FF,$F3,$E9,$80,$B4   ;80EA03|        |      ;
-                       db $1D,$10,$72,$1D,$10,$72,$1D,$0F   ;80EA0B|        |      ;
-                       db $4F,$1D,$10,$72,$1D,$0C,$72,$1D   ;80EA13|        |      ;
-                       db $10,$FE,$FF,$0A,$EA,$80,$7F,$37   ;80EA1B|        |      ;
-                       db $10,$B0,$21,$10,$1C,$16,$0F,$59   ;80EA23|        |      ;
-                       db $1A,$10,$1C,$16,$0C,$B0,$21,$10   ;80EA2B|        |      ;
-                       db $FE,$FF,$21,$EA,$80,$59,$1A,$10   ;80EA33|        |      ;
-                       db $9B,$1A,$10,$B0,$21,$0F,$1C,$16   ;80EA3B|        |      ;
-                       db $10,$B0,$21,$0C,$9B,$1A,$10,$FE   ;80EA43|        |      ;
-                       db $FF,$38,$EA,$80,$1C,$16,$10,$59   ;80EA4B|        |      ;
-                       db $1A,$10,$1F,$1B,$0F,$B0,$21,$10   ;80EA53|        |      ;
-                       db $1F,$1B,$0C,$59,$1A,$10,$FE,$FF   ;80EA5B|        |      ;
-                       db $4F,$EA,$80,$94,$09,$10,$1C,$16   ;80EA63|        |      ;
-                       db $10,$59,$1A,$0F,$9B,$1A,$10,$59   ;80EA6B|        |      ;
-                       db $1A,$0C,$1C,$16,$10,$FE,$FF,$66   ;80EA73|        |      ;
-                       db $EA,$80,$90,$21,$10,$B0,$21,$10   ;80EA7B|        |      ;
-                       db $91,$21,$0F,$B1,$21,$10,$91,$21   ;80EA83|        |      ;
-                       db $0C,$B0,$21,$10,$FE,$FF,$7D,$EA   ;80EA8B|        |      ;
-                       db $80,$4C,$1D,$10,$8E,$21,$10,$B0   ;80EA93|        |      ;
-                       db $21,$0F,$B2,$21,$10,$B0,$21,$0C   ;80EA9B|        |      ;
-                       db $8E,$21,$10,$FE,$FF,$94,$EA,$80   ;80EAA3|        |      ;
-                       db $B2,$21,$10,$4C,$1D,$10,$8E,$21   ;80EAAB|        |      ;
-                       db $0F,$B0,$21,$10,$8E,$21,$0C,$4C   ;80EAB3|        |      ;
-                       db $1D,$10,$FE,$FF,$AB,$EA,$80,$B0   ;80EABB|        |      ;
-                       db $21,$10,$B2,$21,$10,$4C,$1D,$0F   ;80EAC3|        |      ;
-                       db $8E,$21,$10,$4C,$1D,$0C,$B2,$21   ;80EACB|        |      ;
-                       db $10,$FE,$FF,$C2,$EA,$80,$8E,$21   ;80EAD3|        |      ;
-                       db $10,$B0,$21,$10,$B2,$21,$0F,$4C   ;80EADB|        |      ;
-                       db $1D,$10,$B2,$21,$0C,$B0,$21,$10   ;80EAE3|        |      ;
-                       db $FE,$FF,$D9,$EA,$80,$6C,$1D,$10   ;80EAEB|        |      ;
-                       db $09,$15,$10,$2C,$1D,$0F,$4C,$1D   ;80EAF3|        |      ;
-                       db $10,$2C,$1D,$0C,$09,$15,$10,$FE   ;80EAFB|        |      ;
-                       db $FF,$F0,$EA,$80,$4C,$1D,$10,$6C   ;80EB03|        |      ;
-                       db $1D,$10,$09,$15,$0F,$2C,$1D,$10   ;80EB0B|        |      ;
-                       db $09,$15,$0C,$6C,$1D,$10,$FE,$FF   ;80EB13|        |      ;
-                       db $07,$EB,$80,$2C,$1D,$10,$4C,$1D   ;80EB1B|        |      ;
-                       db $10,$6C,$1D,$0F,$09,$15,$10,$6C   ;80EB23|        |      ;
-                       db $1D,$0C,$4C,$1D,$10,$FE,$FF,$1E   ;80EB2B|        |      ;
-                       db $EB,$80,$09,$15,$10,$2C,$1D,$10   ;80EB33|        |      ;
-                       db $4C,$1D,$0F,$6C,$1D,$10,$4C,$1D   ;80EB3B|        |      ;
-                       db $0C,$2C,$1D,$10,$FE,$FF,$35,$EB   ;80EB43|        |      ;
-                       db $80,$DB,$77,$10,$98,$73,$10,$98   ;80EB4B|        |      ;
-                       db $73,$10,$98,$73,$10,$FE,$FF,$4C   ;80EB53|        |      ;
-                       db $EB,$80,$98,$73,$10,$98,$73,$10   ;80EB5B|        |      ;
-                       db $DB,$77,$10,$98,$73,$10,$FE,$FF   ;80EB63|        |      ;
-                       db $5D,$EB,$80,$7D,$5F,$10,$3B,$4B   ;80EB6B|        |      ;
-                       db $10,$3B,$4B,$10,$3B,$4B,$10,$FE   ;80EB73|        |      ;
-                       db $FF,$6E,$EB,$80,$3B,$4B,$10,$3B   ;80EB7B|        |      ;
-                       db $4B,$10,$7D,$5F,$10,$3B,$4B,$10   ;80EB83|        |      ;
-                       db $FE,$FF,$7F,$EB,$80,$95,$32,$10   ;80EB8B|        |      ;
-                       db $52,$2E,$10,$52,$2E,$10,$52,$2E   ;80EB93|        |      ;
-                       db $10,$FE,$FF,$90,$EB,$80,$52,$2E   ;80EB9B|        |      ;
-                       db $10,$52,$2E,$10,$95,$32,$10,$52   ;80EBA3|        |      ;
-                       db $2E,$10,$FE,$FF,$A1,$EB,$80,$4A   ;80EBAB|        |      ;
-                       db $31,$10,$29,$2D,$10,$29,$2D,$10   ;80EBB3|        |      ;
-                       db $29,$2D,$10,$FE,$FF,$B2,$EB,$80   ;80EBBB|        |      ;
-                       db $29,$2D,$10,$29,$2D,$10,$4A,$31   ;80EBC3|        |      ;
-                       db $10,$29,$2D,$10,$FE,$FF,$C3,$EB   ;80EBCB|        |      ;
-                       db $80,$99,$77,$10,$34,$63,$10,$34   ;80EBD3|        |      ;
-                       db $63,$10,$34,$63,$10,$FE,$FF,$D4   ;80EBDB|        |      ;
-                       db $EB,$80,$34,$63,$10,$34,$63,$10   ;80EBE3|        |      ;
-                       db $DB,$77,$10,$34,$63,$10,$FE,$FF   ;80EBEB|        |      ;
-                       db $E5,$EB,$80,$7E,$67,$10,$1C,$47   ;80EBF3|        |      ;
-                       db $10,$1C,$47,$10,$1C,$47,$10,$FE   ;80EBFB|        |      ;
-                       db $FF,$F6,$EB,$80,$1C,$47,$10,$1C   ;80EC03|        |      ;
-                       db $47,$10,$7E,$67,$10,$1C,$47,$10   ;80EC0B|        |      ;
-                       db $FE,$FF,$07,$EC,$80,$94,$56,$10   ;80EC13|        |      ;
-                       db $31,$4E,$10,$31,$4E,$10,$31,$4E   ;80EC1B|        |      ;
-                       db $10,$FE,$FF,$18,$EC,$80,$31,$4E   ;80EC23|        |      ;
-                       db $10,$31,$4E,$10,$94,$56,$10,$31   ;80EC2B|        |      ;
-                       db $4E,$10,$FE,$FF,$29,$EC,$80,$8C   ;80EC33|        |      ;
-                       db $49,$10,$4A,$41,$10,$4A,$41,$10   ;80EC3B|        |      ;
-                       db $4A,$41,$10,$FE,$FF,$3A,$EC,$80   ;80EC43|        |      ;
-                       db $4A,$41,$10,$4A,$41,$10,$8C,$49   ;80EC4B|        |      ;
-                       db $10,$4A,$41,$10,$FE,$FF,$4B,$EC   ;80EC53|        |      ;
-                       db $80,$76,$73,$10,$34,$63,$10,$34   ;80EC5B|        |      ;
-                       db $63,$10,$34,$63,$10,$FE,$FF,$5C   ;80EC63|        |      ;
-                       db $EC,$80,$34,$63,$10,$34,$63,$10   ;80EC6B|        |      ;
-                       db $76,$73,$10,$34,$63,$10,$FE,$FF   ;80EC73|        |      ;
-                       db $6D,$EC,$80,$7F,$53,$10,$FB,$42   ;80EC7B|        |      ;
-                       db $10,$FB,$42,$10,$FB,$42,$10,$FE   ;80EC83|        |      ;
-                       db $FF,$7E,$EC,$80,$FB,$42,$10,$FB   ;80EC8B|        |      ;
-                       db $42,$10,$7F,$53,$10,$FB,$42,$10   ;80EC93|        |      ;
-                       db $FE,$FF,$8F,$EC,$80,$71,$46,$10   ;80EC9B|        |      ;
-                       db $31,$3E,$10,$31,$3E,$10,$31,$3E   ;80ECA3|        |      ;
-                       db $10,$FE,$FF,$A0,$EC,$80,$31,$3E   ;80ECAB|        |      ;
-                       db $10,$31,$3E,$10,$71,$46,$10,$31   ;80ECB3|        |      ;
-                       db $3E,$10,$FE,$FF,$B1,$EC,$80,$6A   ;80ECBB|        |      ;
-                       db $31,$10,$49,$2D,$10,$49,$2D,$10   ;80ECC3|        |      ;
-                       db $49,$2D,$10,$FE,$FF,$C2,$EC,$80   ;80ECCB|        |      ;
-                       db $49,$2D,$10,$49,$2D,$10,$6A,$31   ;80ECD3|        |      ;
-                       db $10,$49,$2D,$10,$FE,$FF,$C2,$EC   ;80ECDB|        |      ;
-                       db $80,$9B,$77,$10,$77,$73,$10,$77   ;80ECE3|        |      ;
-                       db $73,$10,$77,$73,$10,$FE,$FF,$E4   ;80ECEB|        |      ;
-                       db $EC,$80,$77,$73,$10,$77,$73,$10   ;80ECF3|        |      ;
-                       db $9B,$77,$10,$77,$73,$10,$FE,$FF   ;80ECFB|        |      ;
-                       db $F5,$EC,$80,$59,$6F,$10,$37,$6B   ;80ED03|        |      ;
-                       db $10,$37,$6B,$10,$37,$6B,$10,$FE   ;80ED0B|        |      ;
-                       db $FF,$06,$ED,$80,$37,$6B,$10,$37   ;80ED13|        |      ;
-                       db $6B,$10,$59,$6F,$10,$37,$6B,$10   ;80ED1B|        |      ;
-                       db $FE,$FF,$17,$ED,$80,$B5,$5A,$10   ;80ED23|        |      ;
-                       db $73,$52,$10,$73,$52,$10,$73,$52   ;80ED2B|        |      ;
-                       db $10,$FE,$FF,$28,$ED,$80,$73,$52   ;80ED33|        |      ;
-                       db $10,$73,$52,$10,$B5,$5A,$10,$73   ;80ED3B|        |      ;
-                       db $52,$10,$FE,$FF,$39,$ED,$80,$EE   ;80ED43|        |      ;
-                       db $4D,$10,$CE,$45,$10,$CE,$45,$10   ;80ED4B|        |      ;
-                       db $CE,$45,$10,$FE,$FF,$4A,$ED,$80   ;80ED53|        |      ;
-                       db $CE,$45,$10,$CE,$45,$10,$EE,$4D   ;80ED5B|        |      ;
-                       db $10,$CE,$45,$10,$FE,$FF,$5B,$ED   ;80ED63|        |      ;
-                       db $80,$85,$51,$0C,$E8,$61,$0C,$4C   ;80ED6B|        |      ;
-                       db $6E,$0C,$0C,$7F,$0C,$4C,$6E,$0C   ;80ED73|        |      ;
-                       db $E8,$61,$0C,$FE,$FF,$6C,$ED,$80   ;80ED7B|        |      ;
-                       db $E7,$69,$0C,$88,$79,$0C,$E7,$69   ;80ED83|        |      ;
-                       db $0C,$67,$61,$0C,$E7,$69,$0C,$88   ;80ED8B|        |      ;
-                       db $79,$0C,$FE,$FF,$83,$ED,$80,$2C   ;80ED93|        |      ;
-                       db $7E,$0F,$97,$7F,$0F,$53,$7F,$0F   ;80ED9B|        |      ;
-                       db $E7,$7E,$0F,$FE,$FF,$9A,$ED,$80   ;80EDA3|        |      ;
-                       db $EF,$7E,$0F,$2C,$7E,$0F,$97,$7F   ;80EDAB|        |      ;
-                       db $0F,$53,$7F,$0F,$FE,$FF,$AB,$ED   ;80EDB3|        |      ;
-                       db $80,$53,$7F,$0F,$EF,$7E,$0F,$2C   ;80EDBB|        |      ;
-                       db $7E,$0F,$97,$7F,$0F,$FE,$FF,$BC   ;80EDC3|        |      ;
-                       db $ED,$80,$97,$7F,$0F,$53,$7F,$0F   ;80EDCB|        |      ;
-                       db $E7,$7E,$0F,$2C,$7E,$0F,$FE,$FF   ;80EDD3|        |      ;
-                       db $CD,$ED,$80,$70,$00,$0F,$5F,$0E   ;80EDDB|        |      ;
-                       db $0F,$FF,$03,$0F,$FE,$FF,$DE,$ED   ;80EDE3|        |      ;
-                       db $80,$5F,$0E,$0F,$70,$00,$0F,$FF   ;80EDEB|        |      ;
-                       db $03,$0F,$FE,$FF,$EC,$ED,$80,$FF   ;80EDF3|        |      ;
-                       db $03,$0F,$5F,$0E,$0F,$70,$00,$0F   ;80EDFB|        |      ;
-                       db $FE,$FF,$FA,$ED,$80,$0C,$00,$08   ;80EE03|        |      ;
-                       db $0A,$00,$08,$09,$00,$08,$FE,$FF   ;80EE0B|        |      ;
-                       db $08,$EE,$80,$0A,$00,$08,$D8,$00   ;80EE13|        |      ;
-                       db $08,$7E,$02,$08,$FE,$FF,$16,$EE   ;80EE1B|        |      ;
-                       db $80,$7F,$01,$08,$9F,$02,$08,$D2   ;80EE23|        |      ;
-                       db $00,$08,$FE,$FF,$24,$EE,$80,$1F   ;80EE2B|        |      ;
-                       db $03,$08,$5F,$03,$08,$FF,$03,$08   ;80EE33|        |      ;
-                       db $FE,$FF,$32,$EE,$80,$79,$22,$10   ;80EE3B|        |      ;
-                       db $9B,$22,$10,$DC,$22,$10,$FE,$FF   ;80EE43|        |      ;
-                       db $40,$EE,$80,$54,$08,$10,$DE,$08   ;80EE4B|        |      ;
-                       db $10,$DC,$08,$10,$FE,$FF,$4E,$EE   ;80EE53|        |      ;
-                       db $80,$9D,$08,$10,$DE,$08,$10,$1F   ;80EE5B|        |      ;
-                       db $09,$10,$FE,$FF,$5C,$EE,$80,$DF   ;80EE63|        |      ;
-                       db $08,$10,$DF,$08,$10,$1F,$0A,$10   ;80EE6B|        |      ;
-                       db $FE,$FF,$6A,$EE,$80,$DF,$08,$10   ;80EE73|        |      ;
-                       db $3F,$0A,$10,$9F,$0A,$10,$FE,$FF   ;80EE7B|        |      ;
-                       db $78,$EE,$80,$9F,$02,$10,$9F,$02   ;80EE83|        |      ;
-                       db $10,$1F,$03,$10,$FE,$FF,$86,$EE   ;80EE8B|        |      ;
-                       db $80,$5F,$03,$10,$DF,$03,$10,$FF   ;80EE93|        |      ;
-                       db $03,$10,$FE,$FF,$94,$EE,$80,$3C   ;80EE9B|        |      ;
-                       db $0A,$0C,$DB,$00,$0C,$DF,$00,$0C   ;80EEA3|        |      ;
-                       db $DF,$00,$0C,$FE,$FF,$A2,$EE,$80   ;80EEAB|        |      ;
-                       db $B3,$09,$0C,$FF,$11,$0C,$5F,$0A   ;80EEB3|        |      ;
-                       db $0C,$5F,$12,$0C,$FE,$FF,$B3,$EE   ;80EEBB|        |      ;
-                       db $80,$92,$09,$0C,$15,$0A,$0C,$3A   ;80EEC3|        |      ;
-                       db $02,$0C,$3F,$13,$0C,$FE,$FF,$C4   ;80EECB|        |      ;
-                       db $EE,$80,$98,$2A,$10,$3D,$43,$10   ;80EED3|        |      ;
-                       db $98,$2A,$10,$7F,$4F,$10,$5F,$4F   ;80EEDB|        |      ;
-                       db $10,$3D,$43,$10,$FE,$FF,$D5,$EE   ;80EEE3|        |      ;
-                       db $80,$FA,$42,$10,$98,$2A,$10,$FA   ;80EEEB|        |      ;
-                       db $42,$10,$DB,$2A,$10,$1C,$37,$10   ;80EEF3|        |      ;
-                       db $98,$2A,$10,$DB,$2A,$10,$FE,$FF   ;80EEFB|        |      ;
-                       db $EC,$EE,$80,$49,$00,$08,$4C,$00   ;80EF03|        |      ;
-                       db $08,$FE,$FF,$06,$EF,$80,$37,$00   ;80EF0B|        |      ;
-                       db $08,$3D,$01,$08,$FE,$FF,$11,$EF   ;80EF13|        |      ;
-                       db $80,$5F,$02,$08,$DF,$02,$08,$FE   ;80EF1B|        |      ;
-                       db $FF,$1C,$EF,$80                   ;80EF23|        |      ;
+                                                            ;      |        |      ;
+         Table_80DD5B:
+                       dl $107F79,$103A11,$106A8E           ;80DD5B|        |      ;
+                       dl $105E0D,$106AD2,$105E0D           ;80DD64|        |      ;
+                       dl $106A8E,$103A11                   ;80DD6D|        |      ;
+                       dw $FFFE                             ;80DD73|        |      ;
+                       dl Table_80DD5B                      ;80DD75|        |80DD5B;
+                                                            ;      |        |      ;
+        DATA24_80DD78:
+                       dl $106AD2,$106A8E,$105E0D           ;80DD78|        |      ;
+                       dl $106AD2,$103A11,$106AD2           ;80DD81|        |      ;
+                       dl $105E0D,$106A8E                   ;80DD8A|        |      ;
+                       dw $FFFE                             ;80DD90|        |      ;
+                       dl DATA24_80DD78                     ;80DD92|        |80DD78;
+                                                            ;      |        |      ;
+        DATA24_80DD95:
+                       dl $106A8E,$105E0D,$106AD2           ;80DD95|        |      ;
+                       dl $103A11,$105E0D,$103A11           ;80DD9E|        |      ;
+                       dl $106AD2,$105E0D                   ;80DDA7|        |      ;
+                       dw $FFFE                             ;80DDAD|        |      ;
+                       dl DATA24_80DD95                     ;80DDAF|        |80DD95;
+                                                            ;      |        |      ;
+        DATA24_80DDB2:
+                       dl $105E0D,$106AD2,$104253           ;80DDB2|        |      ;
+                       dl $105E0D,$106A8E,$105E0D           ;80DDBB|        |      ;
+                       dl $104253,$106AD2                   ;80DDC4|        |      ;
+                       dw $FFFE                             ;80DDCA|        |      ;
+                       dl DATA24_80DDB2                     ;80DDCC|        |80DDB2;
+                                                            ;      |        |      ;
+        DATA24_80DDCF:
+                       dl $10539D,$102E12,$101DFB           ;80DDCF|        |      ;
+                       dl $101D94,$102EFE,$101D94           ;80DDD8|        |      ;
+                       dl $101DFB,$102E12                   ;80DDE1|        |      ;
+                       dw $FFFE                             ;80DDE7|        |      ;
+                       dl DATA24_80DDCF                     ;80DDE9|        |80DDCF;
+                                                            ;      |        |      ;
+        DATA24_80DDEC:
+                       dl $102EFE,$101DFB,$101D94           ;80DDEC|        |      ;
+                       dl $102EFE,$102E12,$102EFE           ;80DDF5|        |      ;
+                       dl $101D94,$101DFB                   ;80DDFE|        |      ;
+                       dw $FFFE                             ;80DE04|        |      ;
+                       dl DATA24_80DDEC                     ;80DE06|        |80DDEC;
+                                                            ;      |        |      ;
+        DATA24_80DE09:
+                       dl $101DFB,$101D94,$102EFE           ;80DE09|        |      ;
+                       dl $102E12,$101D94,$102E12           ;80DE12|        |      ;
+                       dl $102EFE,$101D94                   ;80DE1B|        |      ;
+                       dw $FFFE                             ;80DE21|        |      ;
+                       dl DATA24_80DE09                     ;80DE23|        |80DE09;
+                                                            ;      |        |      ;
+        DATA24_80DE26:
+                       dl $101D94,$102EFE,$102E74           ;80DE26|        |      ;
+                       dl $101DFB,$101DFB,$101DFB           ;80DE2F|        |      ;
+                       dl $102E74,$102EFE                   ;80DE38|        |      ;
+                       dw $FFFE                             ;80DE3E|        |      ;
+                       dl DATA24_80DE26                     ;80DE40|        |80DE26;
+                                                            ;      |        |      ;
+        DATA24_80DE43:
+                       dl $105A52,$10314C,$10356B           ;80DE43|        |      ;
+                       dl $102908,$105A52,$102908           ;80DE4C|        |      ;
+                       dl $10356B,$10314C                   ;80DE55|        |      ;
+                       dw $FFFE                             ;80DE5B|        |      ;
+                       dl DATA24_80DE43                     ;80DE5D|        |80DE43;
+                                                            ;      |        |      ;
+        DATA24_80DE60:
+                       dl $1045EF,$1049EF,$102908           ;80DE60|        |      ;
+                       dl $105A52,$10314C,$105A52           ;80DE69|        |      ;
+                       dl $102908,$1049EF                   ;80DE72|        |      ;
+                       dw $FFFE                             ;80DE78|        |      ;
+                       dl DATA24_80DE60                     ;80DE7A|        |80DE60;
+                                                            ;      |        |      ;
+        DATA24_80DE7D:
+                       dl $10356B,$10394A,$105A52           ;80DE7D|        |      ;
+                       dl $10314C,$102908,$10314C           ;80DE86|        |      ;
+                       dl $105A52,$10394A                   ;80DE8F|        |      ;
+                       dw $FFFE                             ;80DE95|        |      ;
+                       dl DATA24_80DE7D                     ;80DE97|        |80DE7D;
+                                                            ;      |        |      ;
+        DATA24_80DE9A:
+                       dl $102908,$105A52,$10314C           ;80DE9A|        |      ;
+                       dl $10356B,$10356B,$10356B           ;80DEA3|        |      ;
+                       dl $10314C,$105A52                   ;80DEAC|        |      ;
+                       dw $FFFE                             ;80DEB2|        |      ;
+                       dl DATA24_80DE9A                     ;80DEB4|        |80DE9A;
+                                                            ;      |        |      ;
+        DATA24_80DEB7:
+                       dl $10456B,$101CE7,$1028E7           ;80DEB7|        |      ;
+                       dl $102908,$10456B,$102908           ;80DEC0|        |      ;
+                       dl $1028E7,$101CE7                   ;80DEC9|        |      ;
+                       dw $FFFE                             ;80DECF|        |      ;
+                       dl DATA24_80DEB7                     ;80DED1|        |80DEB7;
+                                                            ;      |        |      ;
+        DATA24_80DED4:
+                       dl $103508,$103508,$1028E7           ;80DED4|        |      ;
+                       dl $102908,$10456B,$102908           ;80DEDD|        |      ;
+                       dl $1028E7,$103508                   ;80DEE6|        |      ;
+                       dw $FFFE                             ;80DEEC|        |      ;
+                       dl DATA24_80DED4                     ;80DEEE|        |80DED4;
+                                                            ;      |        |      ;
+        DATA24_80DEF1:
+                       dl $1028E7,$1028E7,$10456B           ;80DEF1|        |      ;
+                       dl $101CE7,$10290B,$101CE7           ;80DEFA|        |      ;
+                       dl $10456B,$1028E7                   ;80DF03|        |      ;
+                       dw $FFFE                             ;80DF09|        |      ;
+                       dl DATA24_80DEF1                     ;80DF0B|        |80DEF1;
+                                                            ;      |        |      ;
+        DATA24_80DF0E:
+                       dl $1028C5,$10456B,$103508           ;80DF0E|        |      ;
+                       dl $1028E7,$101CE7,$1028E7           ;80DF17|        |      ;
+                       dl $103508,$10456B                   ;80DF20|        |      ;
+                       dw $FFFE                             ;80DF26|        |      ;
+                       dl DATA24_80DF0E                     ;80DF28|        |80DF0E;
+                                                            ;      |        |      ;
+        DATA24_80DF2B:
+                       dl $107F99,$10320F,$105A8E           ;80DF2B|        |      ;
+                       dl $10524D,$1062D2,$10524D           ;80DF34|        |      ;
+                       dl $105A8E,$10320F                   ;80DF3D|        |      ;
+                       dw $FFFE                             ;80DF43|        |      ;
+                       dl DATA24_80DF2B                     ;80DF45|        |80DF2B;
+                                                            ;      |        |      ;
+        DATA24_80DF48:
+                       dl $1062D2,$105A8E,$10524D           ;80DF48|        |      ;
+                       dl $1062D2,$10320F,$1062D2           ;80DF51|        |      ;
+                       dl $10524D,$105A8E                   ;80DF5A|        |      ;
+                       dw $FFFE                             ;80DF60|        |      ;
+                       dl DATA24_80DF48                     ;80DF62|        |80DF48;
+                                                            ;      |        |      ;
+        DATA24_80DF65:
+                       dl $105A8E,$10524D,$1062D2           ;80DF65|        |      ;
+                       dl $10320F,$105A8E,$10320F           ;80DF6E|        |      ;
+                       dl $1062D2,$10524D                   ;80DF77|        |      ;
+                       dw $FFFE                             ;80DF7D|        |      ;
+                       dl DATA24_80DF65                     ;80DF7F|        |80DF65;
+                                                            ;      |        |      ;
+        DATA24_80DF82:
+                       dl $10524D,$1062D2,$10320F           ;80DF82|        |      ;
+                       dl $105A8E,$10524D,$105A8E           ;80DF8B|        |      ;
+                       dl $10320F,$1062D2                   ;80DF94|        |      ;
+                       dw $FFFE                             ;80DF9A|        |      ;
+                       dl DATA24_80DF82                     ;80DF9C|        |80DF82;
+                                                            ;      |        |      ;
+        DATA24_80DF9F:
+                       dl $1023FE,$102298,$1011DB           ;80DF9F|        |      ;
+                       dl $10029B,$10031F,$10029B           ;80DFA8|        |      ;
+                       dl $1011DB,$102298                   ;80DFB1|        |      ;
+                       dw $FFFE                             ;80DFB7|        |      ;
+                       dl DATA24_80DF9F                     ;80DFB9|        |80DF9F;
+                                                            ;      |        |      ;
+        DATA24_80DFBC:
+                       dl $10031F,$1011DC,$1001B6           ;80DFBC|        |      ;
+                       dl $10031F,$102276,$10031F           ;80DFC5|        |      ;
+                       dl $1001B6,$1011DC                   ;80DFCE|        |      ;
+                       dw $FFFE                             ;80DFD4|        |      ;
+                       dl DATA24_80DFBC                     ;80DFD6|        |80DFBC;
+                                                            ;      |        |      ;
+        DATA24_80DFD9:
+                       dl $1011DB,$1001B6,$10031F           ;80DFD9|        |      ;
+                       dl $102276,$10125F,$102276           ;80DFE2|        |      ;
+                       dl $10031F,$1001B6                   ;80DFEB|        |      ;
+                       dw $FFFE                             ;80DFF1|        |      ;
+                       dl DATA24_80DFD9                     ;80DFF3|        |80DFD9;
+                                                            ;      |        |      ;
+        DATA24_80DFF6:
+                       dl $1001B6,$10031F,$102276           ;80DFF6|        |      ;
+                       dl $1011DB,$1001B6,$1011DB           ;80DFFF|        |      ;
+                       dl $102276,$10031F                   ;80E008|        |      ;
+                       dw $FFFE                             ;80E00E|        |      ;
+                       dl DATA24_80DFF6                     ;80E010|        |80DFF6;
+                                                            ;      |        |      ;
+        DATA24_80E013:
+                       dl $1051CD,$10216B,$10496B           ;80E013|        |      ;
+                       dl $104587,$1051CD,$104587           ;80E01C|        |      ;
+                       dl $10496B,$10216B                   ;80E025|        |      ;
+                       dw $FFFE                             ;80E02B|        |      ;
+                       dl DATA24_80E013                     ;80E02D|        |80E013;
+                                                            ;      |        |      ;
+        DATA24_80E030:
+                       dl $10496B,$10496B,$104587           ;80E030|        |      ;
+                       dl $1051CD,$10216B,$1051CD           ;80E039|        |      ;
+                       dl $104587,$10496B                   ;80E042|        |      ;
+                       dw $FFFE                             ;80E048|        |      ;
+                       dl DATA24_80E030                     ;80E04A|        |80E030;
+                                                            ;      |        |      ;
+        DATA24_80E04D:
+                       dl $1011DB,$1001B6,$10031F           ;80E04D|        |      ;
+                       dl $102276,$10125F,$102276           ;80E056|        |      ;
+                       dl $10031F,$1001B6                   ;80E05F|        |      ;
+                       dw $FFFE                             ;80E065|        |      ;
+                       dl DATA24_80E04D                     ;80E067|        |80E04D;
+                                                            ;      |        |      ;
+        DATA24_80E06A:
+                       dl $103507,$1051CD,$10216B           ;80E06A|        |      ;
+                       dl $10696B,$104587,$10496B           ;80E073|        |      ;
+                       dl $10216B,$1051CD                   ;80E07C|        |      ;
+                       dw $FFFE                             ;80E082|        |      ;
+                       dl DATA24_80E06A                     ;80E084|        |80E06A;
+                                                            ;      |        |      ;
+        DATA24_80E087:
+                       dl $106140,$1020C6,$104104           ;80E087|        |      ;
+                       dl $1030C0,$104564,$1030C0           ;80E090|        |      ;
+                       dl $104104,$1020C6                   ;80E099|        |      ;
+                       dw $FFFE                             ;80E09F|        |      ;
+                       dl DATA24_80E087                     ;80E0A1|        |80E087;
+                                                            ;      |        |      ;
+        DATA24_80E0A4:
+                       dl $104564,$104104,$1030C0           ;80E0A4|        |      ;
+                       dl $104564,$1020C6,$104564           ;80E0AD|        |      ;
+                       dl $1030C0,$104104                   ;80E0B6|        |      ;
+                       dw $FFFE                             ;80E0BC|        |      ;
+                       dl DATA24_80E0A4                     ;80E0BE|        |80E0A4;
+                                                            ;      |        |      ;
+        DATA24_80E0C1:
+                       dl $104104,$1030C0,$104564           ;80E0C1|        |      ;
+                       dl $1020C6,$104104,$1020C6           ;80E0CA|        |      ;
+                       dl $104564,$1030C0                   ;80E0D3|        |      ;
+                       dw $FFFE                             ;80E0D9|        |      ;
+                       dl DATA24_80E0C1                     ;80E0DB|        |80E0C1;
+                                                            ;      |        |      ;
+        DATA24_80E0DE:
+                       dl $1030C0,$104564,$1020C6           ;80E0DE|        |      ;
+                       dl $104104,$1030C0,$104104           ;80E0E7|        |      ;
+                       dl $1020C6,$104564                   ;80E0F0|        |      ;
+                       dw $FFFE                             ;80E0F6|        |      ;
+                       dl DATA24_80E0DE                     ;80E0F8|        |80E0DE;
+                                                            ;      |        |      ;
+        DATA24_80E0FB:
+                       dl $080150,$080153,$080150           ;80E0FB|        |      ;
+                       dl $080153                           ;80E104|        |      ;
+                       dw $FFFE                             ;80E107|        |      ;
+                       dl DATA24_80E0FB                     ;80E109|        |80E0FB;
+                                                            ;      |        |      ;
+        DATA24_80E10C:
+                       dl $0809D7,$0809D9,$0809D7           ;80E10C|        |      ;
+                       dl $0809D9                           ;80E115|        |      ;
+                       dw $FFFE                             ;80E118|        |      ;
+                       dl DATA24_80E10C                     ;80E11A|        |80E10C;
+                                                            ;      |        |      ;
+        DATA24_80E11D:
+                       dl $08029F,$08039F,$08029F           ;80E11D|        |      ;
+                       dl $08039F                           ;80E126|        |      ;
+                       dw $FFFE                             ;80E129|        |      ;
+                       dl DATA24_80E11D                     ;80E12B|        |80E11D;
+                                                            ;      |        |      ;
+        DATA24_80E12E:
+                       dl $08019C,$08029F,$08019C           ;80E12E|        |      ;
+                       dl $08029F                           ;80E137|        |      ;
+                       dw $FFFE                             ;80E13A|        |      ;
+                       dl DATA24_80E12E                     ;80E13C|        |80E12E;
+                                                            ;      |        |      ;
+        DATA24_80E13F:
+                       dl $080138,$08019C,$080138           ;80E13F|        |      ;
+                       dl $08019C                           ;80E148|        |      ;
+                       dw $FFFE                             ;80E14B|        |      ;
+                       dl DATA24_80E13F                     ;80E14D|        |80E13F;
+                                                            ;      |        |      ;
+        DATA24_80E150:
+                       dl $0800EA,$08011C,$0800EA           ;80E150|        |      ;
+                       dl $0800EA                           ;80E159|        |      ;
+                       dw $FFFE                             ;80E15C|        |      ;
+                       dl DATA24_80E150                     ;80E15E|        |80E150;
+                                                            ;      |        |      ;
+        DATA24_80E161:
+                       dl $08012D,$08012D,$08012D           ;80E161|        |      ;
+                       dl $08013B                           ;80E16A|        |      ;
+                       dw $FFFE                             ;80E16D|        |      ;
+                       dl DATA24_80E161                     ;80E16F|        |80E161;
+                                                            ;      |        |      ;
+        DATA24_80E172:
+                       dl $080048,$08000C                   ;80E172|        |      ;
+                       dw $FFFE                             ;80E178|        |      ;
+                       dl DATA24_80E172                     ;80E17A|        |80E172;
+                                                            ;      |        |      ;
+        DATA24_80E17D:
+                       dl $080017,$08001A                   ;80E17D|        |      ;
+                       dw $FFFE                             ;80E183|        |      ;
+                       dl DATA24_80E17D                     ;80E185|        |80E17D;
+                                                            ;      |        |      ;
+        DATA24_80E188:
+                       dl $08001F,$08017F                   ;80E188|        |      ;
+                       dw $FFFE                             ;80E18E|        |      ;
+                       dl DATA24_80E188                     ;80E190|        |80E188;
+                                                            ;      |        |      ;
+        DATA24_80E193:
+                       dl $0801B4,$080219                   ;80E193|        |      ;
+                       dw $FFFE                             ;80E199|        |      ;
+                       dl DATA24_80E193                     ;80E19B|        |80E193;
+                                                            ;      |        |      ;
+        DATA24_80E19E:
+                       dl $08004C,$080052                   ;80E19E|        |      ;
+                       dw $FFFE                             ;80E1A4|        |      ;
+                       dl DATA24_80E19E                     ;80E1A6|        |80E19E;
+                                                            ;      |        |      ;
+        DATA24_80E1A9:
+                       dl $0802BF,$08017F                   ;80E1A9|        |      ;
+                       dw $FFFE                             ;80E1AF|        |      ;
+                       dl DATA24_80E1A9                     ;80E1B1|        |80E1A9;
+                                                            ;      |        |      ;
+        DATA24_80E1B4:
+                       dl $08009F,$08035F                   ;80E1B4|        |      ;
+                       dw $FFFE                             ;80E1BA|        |      ;
+                       dl DATA24_80E1B4                     ;80E1BC|        |80E1B4;
+                                                            ;      |        |      ;
+        DATA24_80E1BF:
+                       dl $08029F,$08039F                   ;80E1BF|        |      ;
+                       dw $FFFE                             ;80E1C5|        |      ;
+                       dl DATA24_80E1BF                     ;80E1C7|        |80E1BF;
+                                                            ;      |        |      ;
+        DATA24_80E1CA:
+                       dl $08218D,$082E10,$082E10           ;80E1CA|        |      ;
+                       dl $082E10                           ;80E1D3|        |      ;
+                       dw $FFFE                             ;80E1D6|        |      ;
+                       dl DATA24_80E1CA                     ;80E1D8|        |80E1CA;
+                                                            ;      |        |      ;
+        DATA24_80E1DB:
+                       dl $085F9C,$085F7B,$084AF9           ;80E1DB|        |      ;
+                       dl $085F7B                           ;80E1E4|        |      ;
+                       dw $FFFE                             ;80E1E7|        |      ;
+                       dl DATA24_80E1DB                     ;80E1E9|        |80E1DB;
+                                                            ;      |        |      ;
+        DATA24_80E1EC:
+                       dl $084AF9,$084AF9,$08261F           ;80E1EC|        |      ;
+                       dl $084AF9                           ;80E1F5|        |      ;
+                       dw $FFFE                             ;80E1F8|        |      ;
+                       dl DATA24_80E1EC                     ;80E1FA|        |80E1EC;
+                                                            ;      |        |      ;
+        DATA24_80E1FD:
+                       dl $08261F,$08261F,$08053E           ;80E1FD|        |      ;
+                       dl $08261F                           ;80E206|        |      ;
+                       dw $FFFE                             ;80E209|        |      ;
+                       dl DATA24_80E1FD                     ;80E20B|        |80E1FD;
+                                                            ;      |        |      ;
+        DATA24_80E20E:
+                       dl $08053E,$08261F,$084AF9           ;80E20E|        |      ;
+                       dl $08261F                           ;80E217|        |      ;
+                       dw $FFFE                             ;80E21A|        |      ;
+                       dl DATA24_80E20E                     ;80E21C|        |80E20E;
+                                                            ;      |        |      ;
+        DATA24_80E21F:
+                       dl $08261F,$084AF9,$084AF9           ;80E21F|        |      ;
+                       dl $084AF9                           ;80E228|        |      ;
+                       dw $FFFE                             ;80E22B|        |      ;
+                       dl DATA24_80E21F                     ;80E22D|        |80E21F;
+                                                            ;      |        |      ;
+        DATA24_80E230:
+                       dl $0803BF,$08261F,$0803BF           ;80E230|        |      ;
+                       dl $08261F                           ;80E239|        |      ;
+                       dw $FFFE                             ;80E23C|        |      ;
+                       dl DATA24_80E230                     ;80E23E|        |80E230;
+                                                            ;      |        |      ;
+        DATA24_80E241:
+                       dl $0803BF,$08261F,$08053E           ;80E241|        |      ;
+                       dl $08261F                           ;80E24A|        |      ;
+                       dw $FFFE                             ;80E24D|        |      ;
+                       dl DATA24_80E241                     ;80E24F|        |80E241;
+                                                            ;      |        |      ;
+        DATA24_80E252:
+                       dl $08123F,$0806BF                   ;80E252|        |      ;
+                       dw $FFFE                             ;80E258|        |      ;
+                       dl DATA24_80E252                     ;80E25A|        |80E252;
+                                                            ;      |        |      ;
+        DATA24_80E25D:
+                       dl $080048,$08004D                   ;80E25D|        |      ;
+                       dw $FFFE                             ;80E263|        |      ;
+                       dl DATA24_80E25D                     ;80E265|        |80E25D;
+                                                            ;      |        |      ;
+        DATA24_80E268:
+                       dl $08021F,$08013A                   ;80E268|        |      ;
+                       dw $FFFE                             ;80E26E|        |      ;
+                       dl DATA24_80E268                     ;80E270|        |80E268;
+                                                            ;      |        |      ;
+        DATA24_80E273:
+                       dl $0800FA,$08033F                   ;80E273|        |      ;
+                       dw $FFFE                             ;80E279|        |      ;
+                       dl DATA24_80E273                     ;80E27B|        |80E273;
+                                                            ;      |        |      ;
+        DATA24_80E27E:
+                       dl $080048,$08004F                   ;80E27E|        |      ;
+                       dw $FFFE                             ;80E284|        |      ;
+                       dl DATA24_80E27E                     ;80E286|        |80E27E;
+                                                            ;      |        |      ;
+        DATA24_80E289:
+                       dl $081E9A,$081F1F                   ;80E289|        |      ;
+                       dw $FFFE                             ;80E28F|        |      ;
+                       dl DATA24_80E289                     ;80E291|        |80E289;
+                                                            ;      |        |      ;
+        DATA24_80E294:
+                       dl $08021F,$080037                   ;80E294|        |      ;
+                       dw $FFFE                             ;80E29A|        |      ;
+                       dl DATA24_80E294                     ;80E29C|        |80E294;
+                                                            ;      |        |      ;
+        DATA24_80E29F:
+                       dl $080019,$080025                   ;80E29F|        |      ;
+                       dw $FFFE                             ;80E2A5|        |      ;
+                       dl DATA24_80E29F                     ;80E2A7|        |80E29F;
+                                                            ;      |        |      ;
+        DATA24_80E2AA:
+                       dl $082E7F,$08233F                   ;80E2AA|        |      ;
+                       dw $FFFE                             ;80E2B0|        |      ;
+                       dl DATA24_80E2AA                     ;80E2B2|        |80E2AA;
+                                                            ;      |        |      ;
+        DATA24_80E2B5:
+                       dl $080088,$08008C                   ;80E2B5|        |      ;
+                       dw $FFFE                             ;80E2BB|        |      ;
+                       dl DATA24_80E2B5                     ;80E2BD|        |80E2B5;
+                                                            ;      |        |      ;
+        DATA24_80E2C0:
+                       dl $08009D,$08029F                   ;80E2C0|        |      ;
+                       dw $FFFE                             ;80E2C6|        |      ;
+                       dl DATA24_80E2C0                     ;80E2C8|        |80E2C0;
+                                                            ;      |        |      ;
+        DATA24_80E2CB:
+                       dl $08021F,$08011F                   ;80E2CB|        |      ;
+                       dw $FFFE                             ;80E2D1|        |      ;
+                       dl DATA24_80E2CB                     ;80E2D3|        |80E2CB;
+                                                            ;      |        |      ;
+        DATA24_80E2D6:
+                       dl $080090,$08009C                   ;80E2D6|        |      ;
+                       dw $FFFE                             ;80E2DC|        |      ;
+                       dl DATA24_80E2D6                     ;80E2DE|        |80E2D6;
+                                                            ;      |        |      ;
+        DATA24_80E2E1:
+                       dl $0801DE,$0802BF                   ;80E2E1|        |      ;
+                       dw $FFFE                             ;80E2E7|        |      ;
+                       dl DATA24_80E2E1                     ;80E2E9|        |80E2E1;
+                                                            ;      |        |      ;
+        DATA24_80E2EC:
+                       dl $08004F,$0800D0                   ;80E2EC|        |      ;
+                       dw $FFFE                             ;80E2F2|        |      ;
+                       dl DATA24_80E2EC                     ;80E2F4|        |80E2EC;
+                                                            ;      |        |      ;
+        DATA24_80E2F7:
+                       dl $105E0F,$104A54,$107F17           ;80E2F7|        |      ;
+                       dw $FFFE                             ;80E300|        |      ;
+                       dl DATA24_80E2F7                     ;80E302|        |80E2F7;
+                                                            ;      |        |      ;
+        DATA24_80E305:
+                       dl $104A54,$107F17,$105E0F           ;80E305|        |      ;
+                       dw $FFFE                             ;80E30E|        |      ;
+                       dl DATA24_80E305                     ;80E310|        |80E305;
+                                                            ;      |        |      ;
+        DATA24_80E313:
+                       dl $107F17,$105E0F,$104A54           ;80E313|        |      ;
+                       dw $FFFE                             ;80E31C|        |      ;
+                       dl DATA24_80E313                     ;80E31E|        |80E313;
+                                                            ;      |        |      ;
+        DATA24_80E321:
+                       dl $104213,$104257,$1056FC           ;80E321|        |      ;
+                       dw $FFFE                             ;80E32A|        |      ;
+                       dl DATA24_80E321                     ;80E32C|        |80E321;
+                                                            ;      |        |      ;
+        DATA24_80E32F:
+                       dl $104257,$1056FC,$104213           ;80E32F|        |      ;
+                       dw $FFFE                             ;80E338|        |      ;
+                       dl DATA24_80E32F                     ;80E33A|        |80E32F;
+                                                            ;      |        |      ;
+        DATA24_80E33D:
+                       dl $1056FC,$104213,$104257           ;80E33D|        |      ;
+                       dw $FFFE                             ;80E346|        |      ;
+                       dl DATA24_80E33D                     ;80E348|        |80E33D;
+                                                            ;      |        |      ;
+        DATA24_80E34B:
+                       dl $103D4A,$103D4A,$10458C           ;80E34B|        |      ;
+                       dw $FFFE                             ;80E354|        |      ;
+                       dl DATA24_80E34B                     ;80E356|        |80E34B;
+                                                            ;      |        |      ;
+        DATA24_80E359:
+                       dl $103D4A,$10458C,$103D4A           ;80E359|        |      ;
+                       dw $FFFE                             ;80E362|        |      ;
+                       dl DATA24_80E359                     ;80E364|        |80E359;
+                                                            ;      |        |      ;
+        DATA24_80E367:
+                       dl $10458C,$103D4A,$103D4A           ;80E367|        |      ;
+                       dw $FFFE                             ;80E370|        |      ;
+                       dl DATA24_80E367                     ;80E372|        |80E367;
+                                                            ;      |        |      ;
+        DATA24_80E375:
+                       dl $103129,$102908,$10316B           ;80E375|        |      ;
+                       dw $FFFE                             ;80E37E|        |      ;
+                       dl DATA24_80E375                     ;80E380|        |80E375;
+                                                            ;      |        |      ;
+        DATA24_80E383:
+                       dl $102908,$10316B,$103129           ;80E383|        |      ;
+                       dw $FFFE                             ;80E38C|        |      ;
+                       dl DATA24_80E383                     ;80E38E|        |80E383;
+                                                            ;      |        |      ;
+        DATA24_80E391:
+                       dl $10316B,$103129,$102908           ;80E391|        |      ;
+                       dw $FFFE                             ;80E39A|        |      ;
+                       dl DATA24_80E391                     ;80E39C|        |80E391;
+                                                            ;      |        |      ;
+        DATA24_80E39F:
+                       dl $106250,$107271,$107F79           ;80E39F|        |      ;
+                       dw $FFFE                             ;80E3A8|        |      ;
+                       dl DATA24_80E39F                     ;80E3AA|        |80E39F;
+                                                            ;      |        |      ;
+        DATA24_80E3AD:
+                       dl $107271,$107F79,$106250           ;80E3AD|        |      ;
+                       dw $FFFE                             ;80E3B6|        |      ;
+                       dl DATA24_80E3AD                     ;80E3B8|        |80E3AD;
+                                                            ;      |        |      ;
+        DATA24_80E3BB:
+                       dl $107F79,$106250,$107271           ;80E3BB|        |      ;
+                       dw $FFFE                             ;80E3C4|        |      ;
+                       dl DATA24_80E3BB                     ;80E3C6|        |80E3BB;
+                                                            ;      |        |      ;
+        DATA24_80E3C9:
+                       dl $105E78,$105654,$107F19           ;80E3C9|        |      ;
+                       dw $FFFE                             ;80E3D2|        |      ;
+                       dl DATA24_80E3C9                     ;80E3D4|        |80E3C9;
+                                                            ;      |        |      ;
+        DATA24_80E3D7:
+                       dl $105654,$107F19,$105E78           ;80E3D7|        |      ;
+                       dw $FFFE                             ;80E3E0|        |      ;
+                       dl DATA24_80E3D7                     ;80E3E2|        |80E3D7;
+                                                            ;      |        |      ;
+        DATA24_80E3E5:
+                       dl $107F19,$105E78,$105654           ;80E3E5|        |      ;
+                       dw $FFFE                             ;80E3EE|        |      ;
+                       dl DATA24_80E3E5                     ;80E3F0|        |80E3E5;
+                                                            ;      |        |      ;
+        DATA24_80E3F3:
+                       dl $103D4A,$103D4A,$10458C           ;80E3F3|        |      ;
+                       dw $FFFE                             ;80E3FC|        |      ;
+                       dl DATA24_80E3F3                     ;80E3FE|        |80E3F3;
+                                                            ;      |        |      ;
+        DATA24_80E401:
+                       dl $103D4A,$10458C,$103D4A           ;80E401|        |      ;
+                       dw $FFFE                             ;80E40A|        |      ;
+                       dl DATA24_80E401                     ;80E40C|        |80E401;
+                                                            ;      |        |      ;
+        DATA24_80E40F:
+                       dl $10458C,$103D4A,$103D4A           ;80E40F|        |      ;
+                       dw $FFFE                             ;80E418|        |      ;
+                       dl DATA24_80E40F                     ;80E41A|        |80E40F;
+                                                            ;      |        |      ;
+        DATA24_80E41D:
+                       dl $1030E7,$1030E7,$103529           ;80E41D|        |      ;
+                       dw $FFFE                             ;80E426|        |      ;
+                       dl DATA24_80E41D                     ;80E428|        |80E41D;
+                                                            ;      |        |      ;
+        DATA24_80E42B:
+                       dl $1030E7,$103529,$1030E7           ;80E42B|        |      ;
+                       dw $FFFE                             ;80E434|        |      ;
+                       dl DATA24_80E42B                     ;80E436|        |80E42B;
+                                                            ;      |        |      ;
+        DATA24_80E439:
+                       dl $103529,$1030E7,$1030E7           ;80E439|        |      ;
+                       dw $FFFE                             ;80E442|        |      ;
+                       dl DATA24_80E439                     ;80E444|        |80E439;
+                                                            ;      |        |      ;
+        DATA24_80E447:
+                       dl $104A91,$1062CE,$106374           ;80E447|        |      ;
+                       dw $FFFE                             ;80E450|        |      ;
+                       dl DATA24_80E447                     ;80E452|        |80E447;
+                                                            ;      |        |      ;
+        DATA24_80E455:
+                       dl $1062CE,$106374,$104A91           ;80E455|        |      ;
+                       dw $FFFE                             ;80E45E|        |      ;
+                       dl DATA24_80E455                     ;80E460|        |80E455;
+                                                            ;      |        |      ;
+        DATA24_80E463:
+                       dl $106374,$104A91,$1062CE           ;80E463|        |      ;
+                       dw $FFFE                             ;80E46C|        |      ;
+                       dl DATA24_80E463                     ;80E46E|        |80E463;
+                                                            ;      |        |      ;
+        DATA24_80E471:
+                       dl $103694,$103254,$103AFC           ;80E471|        |      ;
+                       dw $FFFE                             ;80E47A|        |      ;
+                       dl DATA24_80E471                     ;80E47C|        |80E471;
+                                                            ;      |        |      ;
+        DATA24_80E47F:
+                       dl $103254,$103AFC,$103694           ;80E47F|        |      ;
+                       dw $FFFE                             ;80E488|        |      ;
+                       dl DATA24_80E47F                     ;80E48A|        |80E47F;
+                                                            ;      |        |      ;
+        DATA24_80E48D:
+                       dl $103AEC,$103694,$103254           ;80E48D|        |      ;
+                       dw $FFFE                             ;80E496|        |      ;
+                       dl DATA24_80E48D                     ;80E498|        |80E48D;
+                                                            ;      |        |      ;
+        DATA24_80E49B:
+                       dl $102DCB,$102DCB,$10360E           ;80E49B|        |      ;
+                       dw $FFFE                             ;80E4A4|        |      ;
+                       dl DATA24_80E49B                     ;80E4A6|        |80E49B;
+                                                            ;      |        |      ;
+        DATA24_80E4A9:
+                       dl $102DCB,$10360E,$102DCB           ;80E4A9|        |      ;
+                       dw $FFFE                             ;80E4B2|        |      ;
+                       dl DATA24_80E4A9                     ;80E4B4|        |80E4A9;
+                                                            ;      |        |      ;
+        DATA24_80E4B7:
+                       dl $10360E,$102DCB,$102DCB           ;80E4B7|        |      ;
+                       dw $FFFE                             ;80E4C0|        |      ;
+                       dl DATA24_80E4B7                     ;80E4C2|        |80E4B7;
+                                                            ;      |        |      ;
+        DATA24_80E4C5:
+                       dl $1030E7,$103127,$10356A           ;80E4C5|        |      ;
+                       dw $FFFE                             ;80E4CE|        |      ;
+                       dl DATA24_80E4C5                     ;80E4D0|        |80E4C5;
+                                                            ;      |        |      ;
+        DATA24_80E4D3:
+                       dl $103127,$10356A,$1030E7           ;80E4D3|        |      ;
+                       dw $FFFE                             ;80E4DC|        |      ;
+                       dl DATA24_80E4D3                     ;80E4DE|        |80E4D3;
+                                                            ;      |        |      ;
+        DATA24_80E4E1:
+                       dl $10356A,$1030E7,$103127           ;80E4E1|        |      ;
+                       dw $FFFE                             ;80E4EA|        |      ;
+                       dl DATA24_80E4E1                     ;80E4EC|        |80E4E1;
+                                                            ;      |        |      ;
+        DATA24_80E4EF:
+                       dl $0A2162,$0A2190,$1025D2           ;80E4EF|        |      ;
+                       dl $0A2190                           ;80E4F8|        |      ;
+                       dw $FFFE                             ;80E4FB|        |      ;
+                       dl DATA24_80E4EF                     ;80E4FD|        |80E4EF;
+                                                            ;      |        |      ;
+        DATA24_80E500:
+                       dl $0A0E58,$0A129A,$1016DC           ;80E500|        |      ;
+                       dl $0A129A                           ;80E509|        |      ;
+                       dw $FFFE                             ;80E50C|        |      ;
+                       dl DATA24_80E500                     ;80E50E|        |80E500;
+                                                            ;      |        |      ;
+        DATA24_80E511:
+                       dl $0A377D,$0A479F,$1053DF           ;80E511|        |      ;
+                       dl $0A479F                           ;80E51A|        |      ;
+                       dw $FFFE                             ;80E51D|        |      ;
+                       dl DATA24_80E511                     ;80E51F|        |80E511;
+                                                            ;      |        |      ;
+        DATA24_80E522:
+                       dl $0A092C,$0A116F,$1011B1           ;80E522|        |      ;
+                       dl $0A116F                           ;80E52B|        |      ;
+                       dw $FFFE                             ;80E52E|        |      ;
+                       dl DATA24_80E522                     ;80E530|        |80E522;
+                                                            ;      |        |      ;
+        DATA24_80E533:
+                       dl $0A0D8E,$0A0DB1,$100DB4           ;80E533|        |      ;
+                       dl $0A0DB1                           ;80E53C|        |      ;
+                       dw $FFFE                             ;80E53F|        |      ;
+                       dl DATA24_80E533                     ;80E541|        |80E533;
+                                                            ;      |        |      ;
+        DATA24_80E544:
+                       dl $0A36D7,$0A3719,$10377F           ;80E544|        |      ;
+                       dl $0A3719                           ;80E54D|        |      ;
+                       dw $FFFE                             ;80E550|        |      ;
+                       dl DATA24_80E544                     ;80E552|        |80E544;
+                                                            ;      |        |      ;
+        DATA24_80E555:
+                       dl $0A27DE,$0A3FFF,$1053FF           ;80E555|        |      ;
+                       dl $0A3FFF                           ;80E55E|        |      ;
+                       dw $FFFE                             ;80E561|        |      ;
+                       dl DATA24_80E555                     ;80E563|        |80E555;
+                                                            ;      |        |      ;
+        DATA24_80E566:
+                       dl $0A196E,$0A1970,$101992           ;80E566|        |      ;
+                       dl $0A1970                           ;80E56F|        |      ;
+                       dw $FFFE                             ;80E572|        |      ;
+                       dl DATA24_80E566                     ;80E574|        |80E566;
+                                                            ;      |        |      ;
+        DATA24_80E577:
+                       dl $0A150A,$0A1D4F,$101D90           ;80E577|        |      ;
+                       dl $0A1D4F                           ;80E580|        |      ;
+                       dw $FFFE                             ;80E583|        |      ;
+                       dl DATA24_80E577                     ;80E585|        |80E577;
+                                                            ;      |        |      ;
+        DATA24_80E588:
+                       dl $0A0A18,$0A0A1C,$100A9F           ;80E588|        |      ;
+                       dl $0A0A1C                           ;80E591|        |      ;
+                       dw $FFFE                             ;80E594|        |      ;
+                       dl DATA24_80E588                     ;80E596|        |80E588;
+                                                            ;      |        |      ;
+        DATA24_80E599:
+                       dl $0A2F7C,$0A2FBE,$104BDF           ;80E599|        |      ;
+                       dl $0A2FBE                           ;80E5A2|        |      ;
+                       dw $FFFE                             ;80E5A5|        |      ;
+                       dl DATA24_80E599                     ;80E5A7|        |80E599;
+                                                            ;      |        |      ;
+        DATA24_80E5AA:
+                       dl $0A090C,$0A116E,$101190           ;80E5AA|        |      ;
+                       dl $0A116E                           ;80E5B3|        |      ;
+                       dw $FFFE                             ;80E5B6|        |      ;
+                       dl DATA24_80E5AA                     ;80E5B8|        |80E5AA;
+                                                            ;      |        |      ;
+        DATA24_80E5BB:
+                       dl $0A1CE8,$0A210A,$10216F           ;80E5BB|        |      ;
+                       dl $0A210A                           ;80E5C4|        |      ;
+                       dw $FFFE                             ;80E5C7|        |      ;
+                       dl DATA24_80E5BB                     ;80E5C9|        |80E5BB;
+                                                            ;      |        |      ;
+        DATA24_80E5CC:
+                       dl $0A29F3,$0A2A19,$10327B           ;80E5CC|        |      ;
+                       dl $0A2A19                           ;80E5D5|        |      ;
+                       dw $FFFE                             ;80E5D8|        |      ;
+                       dl DATA24_80E5CC                     ;80E5DA|        |80E5CC;
+                                                            ;      |        |      ;
+        DATA24_80E5DD:
+                       dl $0A3EB8,$0A3F3D,$10437F           ;80E5DD|        |      ;
+                       dl $0A3F3D                           ;80E5E6|        |      ;
+                       dw $FFFE                             ;80E5E9|        |      ;
+                       dl DATA24_80E5DD                     ;80E5EB|        |80E5DD;
+                                                            ;      |        |      ;
+        DATA24_80E5EE:
+                       dl $0A1D6C,$0A218E,$1025AF           ;80E5EE|        |      ;
+                       dl $0A218E                           ;80E5F7|        |      ;
+                       dw $FFFE                             ;80E5FA|        |      ;
+                       dl DATA24_80E5EE                     ;80E5FC|        |80E5EE;
+                                                            ;      |        |      ;
+        DATA24_80E5FF:
+                       dl $107F3B,$106EB5,$0F5E2E           ;80E5FF|        |      ;
+                       dl $1051F0,$0C5233,$106EB7           ;80E608|        |      ;
+                       dw $FFFE                             ;80E611|        |      ;
+                       dl DATA24_80E5FF                     ;80E613|        |80E5FF;
+                                                            ;      |        |      ;
+        DATA24_80E616:
+                       dl $106EB7,$105E2E,$0F51F0           ;80E616|        |      ;
+                       dl $107F39,$0C51F0,$105233           ;80E61F|        |      ;
+                       dw $FFFE                             ;80E628|        |      ;
+                       dl DATA24_80E616                     ;80E62A|        |80E616;
+                                                            ;      |        |      ;
+        DATA24_80E62D:
+                       dl $105E2E,$1051F0,$0F7F3B           ;80E62D|        |      ;
+                       dl $106EB7,$0C7F39,$104DD1           ;80E636|        |      ;
+                       dw $FFFE                             ;80E63F|        |      ;
+                       dl DATA24_80E62D                     ;80E641|        |80E62D;
+                                                            ;      |        |      ;
+        DATA24_80E644:
+                       dl $1051F0,$107F39,$0F6EB7           ;80E644|        |      ;
+                       dl $105E2E,$0C6EB7,$107F39           ;80E64D|        |      ;
+                       dw $FFFE                             ;80E656|        |      ;
+                       dl DATA24_80E644                     ;80E658|        |80E644;
+                                                            ;      |        |      ;
+        DATA24_80E65B:
+                       dl $1041F0,$103DF1,$0F4211           ;80E65B|        |      ;
+                       dl $1041F1,$0C4211,$103DF1           ;80E664|        |      ;
+                       dw $FFFE                             ;80E66D|        |      ;
+                       dl DATA24_80E65B                     ;80E66F|        |80E65B;
+                                                            ;      |        |      ;
+        DATA24_80E672:
+                       dl $10537B,$1042BB,$0F3234           ;80E672|        |      ;
+                       dl $103233,$0C3234,$1042BB           ;80E67B|        |      ;
+                       dw $FFFE                             ;80E684|        |      ;
+                       dl DATA24_80E672                     ;80E686|        |80E672;
+                                                            ;      |        |      ;
+        DATA24_80E689:
+                       dl $1042B8,$103234,$0F3233           ;80E689|        |      ;
+                       dl $1042DB,$0C3233,$103234           ;80E692|        |      ;
+                       dw $FFFE                             ;80E69B|        |      ;
+                       dl DATA24_80E689                     ;80E69D|        |80E689;
+                                                            ;      |        |      ;
+        DATA24_80E6A0:
+                       dl $103234,$103233,$0F42DB           ;80E6A0|        |      ;
+                       dl $1032B8,$0C42DB,$103233           ;80E6A9|        |      ;
+                       dw $FFFE                             ;80E6B2|        |      ;
+                       dl DATA24_80E6A0                     ;80E6B4|        |80E6A0;
+                                                            ;      |        |      ;
+        DATA24_80E6B7:
+                       dl $103233,$1042DB,$0F32B8           ;80E6B7|        |      ;
+                       dl $103234,$0C32B8,$1042DB           ;80E6C0|        |      ;
+                       dw $FFFE                             ;80E6C9|        |      ;
+                       dl DATA24_80E6B7                     ;80E6CB|        |80E6B7;
+                                                            ;      |        |      ;
+        DATA24_80E6CE:
+                       dl $1021B1,$1025D1,$0F29D1           ;80E6CE|        |      ;
+                       dl $103234,$0C29D1,$1025D1           ;80E6D7|        |      ;
+                       dw $FFFE                             ;80E6E0|        |      ;
+                       dl DATA24_80E6CE                     ;80E6E2|        |80E6CE;
+                                                            ;      |        |      ;
+        DATA24_80E6E5:
+                       dl $103213,$101D8C,$0F29CF           ;80E6E5|        |      ;
+                       dl $102E11,$0C29CF,$101D8C           ;80E6EE|        |      ;
+                       dw $FFFE                             ;80E6F7|        |      ;
+                       dl DATA24_80E6E5                     ;80E6F9|        |80E6E5;
+                                                            ;      |        |      ;
+        DATA24_80E6FC:
+                       dl $102DF1,$103233,$0F1D8C           ;80E6FC|        |      ;
+                       dl $1029CF,$0C1D8C,$103233           ;80E705|        |      ;
+                       dw $FFFE                             ;80E70E|        |      ;
+                       dl DATA24_80E6FC                     ;80E710|        |80E6FC;
+                                                            ;      |        |      ;
+        DATA24_80E713:
+                       dl $1021AF,$102E11,$0F3233           ;80E713|        |      ;
+                       dl $101D8C,$0C3233,$102E11           ;80E71C|        |      ;
+                       dw $FFFE                             ;80E725|        |      ;
+                       dl DATA24_80E713                     ;80E727|        |80E713;
+                                                            ;      |        |      ;
+        DATA24_80E72A:
+                       dl $101D6C,$1029CF,$0F2E11           ;80E72A|        |      ;
+                       dl $103233,$0C2E11,$1029CF           ;80E733|        |      ;
+                       dw $FFFE                             ;80E73C|        |      ;
+                       dl DATA24_80E72A                     ;80E73E|        |80E72A;
+                                                            ;      |        |      ;
+        DATA24_80E741:
+                       dl $101D4C,$101D4C,$0F214C           ;80E741|        |      ;
+                       dl $10214C,$0C214C,$101D4C           ;80E74A|        |      ;
+                       dw $FFFE                             ;80E753|        |      ;
+                       dl DATA24_80E741                     ;80E755|        |80E741;
+                                                            ;      |        |      ;
+        DATA24_80E758:
+                       dl $10218B,$10192A,$0F1D4B           ;80E758|        |      ;
+                       dl $101D4B,$0C1D4B,$10192A           ;80E761|        |      ;
+                       dw $FFFE                             ;80E76A|        |      ;
+                       dl DATA24_80E758                     ;80E76C|        |80E758;
+                                                            ;      |        |      ;
+        DATA24_80E76F:
+                       dl $101D4B,$10216B,$0F192A           ;80E76F|        |      ;
+                       dl $101D4B,$0C192A,$10216B           ;80E778|        |      ;
+                       dw $FFFE                             ;80E781|        |      ;
+                       dl DATA24_80E76F                     ;80E783|        |80E76F;
+                                                            ;      |        |      ;
+        DATA24_80E786:
+                       dl $101D2A,$101D48,$0F214B           ;80E786|        |      ;
+                       dl $10192A,$0C214B,$101D48           ;80E78F|        |      ;
+                       dw $FFFE                             ;80E798|        |      ;
+                       dl DATA24_80E786                     ;80E79A|        |80E786;
+                                                            ;      |        |      ;
+        DATA24_80E79D:
+                       dl $101928,$101D4B,$0F1D4B           ;80E79D|        |      ;
+                       dl $101D6B,$0C1D4B,$101D4B           ;80E7A6|        |      ;
+                       dw $FFFE                             ;80E7AF|        |      ;
+                       dl DATA24_80E79D                     ;80E7B1|        |80E79D;
+                                                            ;      |        |      ;
+        DATA24_80E7B4:
+                       dl $107F52,$105D66,$0F7D86           ;80E7B4|        |      ;
+                       dl $107E4B,$0C7D86,$105D66           ;80E7BD|        |      ;
+                       dw $FFFE                             ;80E7C6|        |      ;
+                       dl DATA24_80E7B4                     ;80E7C8|        |80E7B4;
+                                                            ;      |        |      ;
+        DATA24_80E7CB:
+                       dl $107E4B,$104F32,$0F5D66           ;80E7CB|        |      ;
+                       dl $107D86,$0C5D66,$107F32           ;80E7D4|        |      ;
+                       dw $FFFE                             ;80E7DD|        |      ;
+                       dl DATA24_80E7CB                     ;80E7DF|        |80E7CB;
+                                                            ;      |        |      ;
+        DATA24_80E7E2:
+                       dl $107D86,$107E4B,$0F7F32           ;80E7E2|        |      ;
+                       dl $105D66,$0C7F32,$107E4B           ;80E7EB|        |      ;
+                       dw $FFFE                             ;80E7F4|        |      ;
+                       dl DATA24_80E7E2                     ;80E7F6|        |80E7E2;
+                                                            ;      |        |      ;
+        DATA24_80E7F9:
+                       dl $105D66,$107D86,$0F7E4B           ;80E7F9|        |      ;
+                       dl $107F32,$0C7E4B,$107D86           ;80E802|        |      ;
+                       dw $FFFE                             ;80E80B|        |      ;
+                       dl DATA24_80E7F9                     ;80E80D|        |80E7F9;
+                                                            ;      |        |      ;
+        DATA24_80E810:
+                       dl $105D66,$106186,$0F6586           ;80E810|        |      ;
+                       dl $1069A6,$0C6586,$106186           ;80E819|        |      ;
+                       dw $FFFE                             ;80E822|        |      ;
+                       dl DATA24_80E810                     ;80E824|        |80E810;
+                                                            ;      |        |      ;
+        DATA24_80E827:
+                       dl $103F9E,$10169E,$0F1218           ;80E827|        |      ;
+                       dl $101174,$0C1218,$10169E           ;80E830|        |      ;
+                       dw $FFFE                             ;80E839|        |      ;
+                       dl DATA24_80E827                     ;80E83B|        |80E827;
+                                                            ;      |        |      ;
+        DATA24_80E83E:
+                       dl $10169E,$101218,$0F1174           ;80E83E|        |      ;
+                       dl $102AFA,$0C1174,$101218           ;80E847|        |      ;
+                       dw $FFFE                             ;80E850|        |      ;
+                       dl DATA24_80E83E                     ;80E852|        |80E83E;
+                                                            ;      |        |      ;
+        DATA24_80E855:
+                       dl $101218,$101174,$0F3F9E           ;80E855|        |      ;
+                       dl $10169E,$0C3F9E,$101174           ;80E85E|        |      ;
+                       dw $FFFE                             ;80E867|        |      ;
+                       dl DATA24_80E855                     ;80E869|        |80E855;
+                                                            ;      |        |      ;
+        DATA24_80E86C:
+                       dl $101174,$10267B,$0F169E           ;80E86C|        |      ;
+                       dl $101218,$0C169E,$10267B           ;80E875|        |      ;
+                       dw $FFFE                             ;80E87E|        |      ;
+                       dl DATA24_80E86C                     ;80E880|        |80E86C;
+                                                            ;      |        |      ;
+        DATA24_80E883:
+                       dl $101DB1,$101DB2,$0F1DB3           ;80E883|        |      ;
+                       dl $101DB3,$0C1DB3,$101DB2           ;80E88C|        |      ;
+                       dw $FFFE                             ;80E895|        |      ;
+                       dl DATA24_80E883                     ;80E897|        |80E883;
+                                                            ;      |        |      ;
+        DATA24_80E89A:
+                       dl $100DB3,$1009B3,$0F0991           ;80E89A|        |      ;
+                       dl $100172,$0C0991,$1009B3           ;80E8A3|        |      ;
+                       dw $FFFE                             ;80E8AC|        |      ;
+                       dl DATA24_80E89A                     ;80E8AE|        |80E89A;
+                                                            ;      |        |      ;
+        DATA24_80E8B1:
+                       dl $1009B3,$100991,$0F0172           ;80E8B1|        |      ;
+                       dl $100DB3,$0C0172,$100991           ;80E8BA|        |      ;
+                       dw $FFFE                             ;80E8C3|        |      ;
+                       dl DATA24_80E8B1                     ;80E8C5|        |80E8B1;
+                                                            ;      |        |      ;
+        DATA24_80E8C8:
+                       dl $100991,$100172,$0F0DB3           ;80E8C8|        |      ;
+                       dl $1009B3,$0C0DB3,$100172           ;80E8D1|        |      ;
+                       dw $FFFE                             ;80E8DA|        |      ;
+                       dl DATA24_80E8C8                     ;80E8DC|        |80E8C8;
+                                                            ;      |        |      ;
+        DATA24_80E8DF:
+                       dl $100172,$100DB3,$0F09B3           ;80E8DF|        |      ;
+                       dl $100991,$0C09B3,$100DB3           ;80E8E8|        |      ;
+                       dw $FFFE                             ;80E8F1|        |      ;
+                       dl DATA24_80E8DF                     ;80E8F3|        |80E8DF;
+                                                            ;      |        |      ;
+        DATA24_80E8F6:
+                       dl $10194E,$10110C,$0F110B           ;80E8F6|        |      ;
+                       dl $10110B,$0C110B,$10110C           ;80E8FF|        |      ;
+                       dw $FFFE                             ;80E908|        |      ;
+                       dl DATA24_80E8F6                     ;80E90A|        |80E8F6;
+                                                            ;      |        |      ;
+        DATA24_80E90D:
+                       dl $10110C,$10110B,$0F110B           ;80E90D|        |      ;
+                       dl $10194E,$0C110B,$10110B           ;80E916|        |      ;
+                       dw $FFFE                             ;80E91F|        |      ;
+                       dl DATA24_80E90D                     ;80E921|        |80E90D;
+                                                            ;      |        |      ;
+        DATA24_80E924:
+                       dl $10110B,$10110B,$0F194E           ;80E924|        |      ;
+                       dl $10110C,$0C194E,$10110B           ;80E92D|        |      ;
+                       dw $FFFE                             ;80E936|        |      ;
+                       dl DATA24_80E924                     ;80E938|        |80E924;
+                                                            ;      |        |      ;
+        DATA24_80E93B:
+                       dl $10110B,$10194E,$0F110C           ;80E93B|        |      ;
+                       dl $10110B,$0C110C,$10194E           ;80E944|        |      ;
+                       dw $FFFE                             ;80E94D|        |      ;
+                       dl DATA24_80E93B                     ;80E94F|        |80E93B;
+                                                            ;      |        |      ;
+        DATA24_80E952:
+                       dl $1021AC,$101D8B,$0F0D2B           ;80E952|        |      ;
+                       dl $100D2B,$0C0D2B,$101D8B           ;80E95B|        |      ;
+                       dw $FFFE                             ;80E964|        |      ;
+                       dl DATA24_80E952                     ;80E966|        |80E952;
+                                                            ;      |        |      ;
+        DATA24_80E969:
+                       dl $100D2B,$100D2B,$0F1D8B           ;80E969|        |      ;
+                       dl $1021AC,$0C1D8B,$100D2B           ;80E972|        |      ;
+                       dw $FFFE                             ;80E97B|        |      ;
+                       dl DATA24_80E969                     ;80E97D|        |80E969;
+                                                            ;      |        |      ;
+        DATA24_80E980:
+                       dl $1032FE,$1021EE,$0F29D1           ;80E980|        |      ;
+                       dl $102214,$0C29D1,$1021EE           ;80E989|        |      ;
+                       dw $FFFE                             ;80E992|        |      ;
+                       dl DATA24_80E980                     ;80E994|        |80E980;
+                                                            ;      |        |      ;
+        DATA24_80E997:
+                       dl $1029F5,$102E76,$0F21EE           ;80E997|        |      ;
+                       dl $1029D1,$0C21EE,$102E76           ;80E9A0|        |      ;
+                       dw $FFFE                             ;80E9A9|        |      ;
+                       dl DATA24_80E997                     ;80E9AB|        |80E997;
+                                                            ;      |        |      ;
+        DATA24_80E9AE:
+                       dl $1015F4,$103214,$0F2E33           ;80E9AE|        |      ;
+                       dl $1021EE,$0C2E33,$103214           ;80E9B7|        |      ;
+                       dw $FFFE                             ;80E9C0|        |      ;
+                       dl DATA24_80E9AE                     ;80E9C2|        |80E9AE;
+                                                            ;      |        |      ;
+        DATA24_80E9C5:
+                       dl $101DD3,$1029D1,$0F2E34           ;80E9C5|        |      ;
+                       dl $101DD1,$0C2E34,$1029D1           ;80E9CE|        |      ;
+                       dw $FFFE                             ;80E9D7|        |      ;
+                       dl DATA24_80E9C5                     ;80E9D9|        |80E9C5;
+                                                            ;      |        |      ;
+        DATA24_80E9DC:
+                       dl $1025EF,$1025CE,$0F25AE           ;80E9DC|        |      ;
+                       dl $1025AD,$0C25AE,$1025CE           ;80E9E5|        |      ;
+                       dw $FFFE                             ;80E9EE|        |      ;
+                       dl DATA24_80E9DC                     ;80E9F0|        |80E9DC;
+                                                            ;      |        |      ;
+        DATA24_80E9F3:
+                       dl $10214E,$101D4F,$0F1DB4           ;80E9F3|        |      ;
+                       dl $101DB4,$0C1DB4,$101D4F           ;80E9FC|        |      ;
+                       dw $FFFE                             ;80EA05|        |      ;
+                       dl DATA24_80E9F3                     ;80EA07|        |80E9F3;
+                                                            ;      |        |      ;
+        DATA24_80EA0A:
+                       dl $101DB4,$101D72,$0F1D72           ;80EA0A|        |      ;
+                       dl $101D4F,$0C1D72,$101D72           ;80EA13|        |      ;
+                       dw $FFFE                             ;80EA1C|        |      ;
+                       dl DATA24_80EA0A                     ;80EA1E|        |80EA0A;
+                                                            ;      |        |      ;
+        DATA24_80EA21:
+                       dl $10377F,$1021B0,$0F161C           ;80EA21|        |      ;
+                       dl $101A59,$0C161C,$1021B0           ;80EA2A|        |      ;
+                       dw $FFFE                             ;80EA33|        |      ;
+                       dl DATA24_80EA21                     ;80EA35|        |80EA21;
+                                                            ;      |        |      ;
+        DATA24_80EA38:
+                       dl $101A59,$101A9B,$0F21B0           ;80EA38|        |      ;
+                       dl $10161C,$0C21B0,$101A9B           ;80EA41|        |      ;
+                       dw $FFFE                             ;80EA4A|        |      ;
+                       dl DATA24_80EA38                     ;80EA4C|        |80EA38;
+                                                            ;      |        |      ;
+        DATA24_80EA4F:
+                       dl $10161C,$101A59,$0F1B1F           ;80EA4F|        |      ;
+                       dl $1021B0,$0C1B1F,$101A59           ;80EA58|        |      ;
+                       dw $FFFE                             ;80EA61|        |      ;
+                       dl DATA24_80EA4F                     ;80EA63|        |80EA4F;
+                                                            ;      |        |      ;
+        DATA24_80EA66:
+                       dl $100994,$10161C,$0F1A59           ;80EA66|        |      ;
+                       dl $101A9B,$0C1A59,$10161C           ;80EA6F|        |      ;
+                       dw $FFFE                             ;80EA78|        |      ;
+                       dl DATA24_80EA66                     ;80EA7A|        |80EA66;
+                                                            ;      |        |      ;
+        DATA24_80EA7D:
+                       dl $102190,$1021B0,$0F2191           ;80EA7D|        |      ;
+                       dl $1021B1,$0C2191,$1021B0           ;80EA86|        |      ;
+                       dw $FFFE                             ;80EA8F|        |      ;
+                       dl DATA24_80EA7D                     ;80EA91|        |80EA7D;
+                                                            ;      |        |      ;
+        DATA24_80EA94:
+                       dl $101D4C,$10218E,$0F21B0           ;80EA94|        |      ;
+                       dl $1021B2,$0C21B0,$10218E           ;80EA9D|        |      ;
+                       dw $FFFE                             ;80EAA6|        |      ;
+                       dl DATA24_80EA94                     ;80EAA8|        |80EA94;
+                                                            ;      |        |      ;
+        DATA24_80EAAB:
+                       dl $1021B2,$101D4C,$0F218E           ;80EAAB|        |      ;
+                       dl $1021B0,$0C218E,$101D4C           ;80EAB4|        |      ;
+                       dw $FFFE                             ;80EABD|        |      ;
+                       dl DATA24_80EAAB                     ;80EABF|        |80EAAB;
+                                                            ;      |        |      ;
+        DATA24_80EAC2:
+                       dl $1021B0,$1021B2,$0F1D4C           ;80EAC2|        |      ;
+                       dl $10218E,$0C1D4C,$1021B2           ;80EACB|        |      ;
+                       dw $FFFE                             ;80EAD4|        |      ;
+                       dl DATA24_80EAC2                     ;80EAD6|        |80EAC2;
+                                                            ;      |        |      ;
+        DATA24_80EAD9:
+                       dl $10218E,$1021B0,$0F21B2           ;80EAD9|        |      ;
+                       dl $101D4C,$0C21B2,$1021B0           ;80EAE2|        |      ;
+                       dw $FFFE                             ;80EAEB|        |      ;
+                       dl DATA24_80EAD9                     ;80EAED|        |80EAD9;
+                                                            ;      |        |      ;
+        DATA24_80EAF0:
+                       dl $101D6C,$101509,$0F1D2C           ;80EAF0|        |      ;
+                       dl $101D4C,$0C1D2C,$101509           ;80EAF9|        |      ;
+                       dw $FFFE                             ;80EB02|        |      ;
+                       dl DATA24_80EAF0                     ;80EB04|        |80EAF0;
+                                                            ;      |        |      ;
+        DATA24_80EB07:
+                       dl $101D4C,$101D6C,$0F1509           ;80EB07|        |      ;
+                       dl $101D2C,$0C1509,$101D6C           ;80EB10|        |      ;
+                       dw $FFFE                             ;80EB19|        |      ;
+                       dl DATA24_80EB07                     ;80EB1B|        |80EB07;
+                                                            ;      |        |      ;
+        DATA24_80EB1E:
+                       dl $101D2C,$101D4C,$0F1D6C           ;80EB1E|        |      ;
+                       dl $101509,$0C1D6C,$101D4C           ;80EB27|        |      ;
+                       dw $FFFE                             ;80EB30|        |      ;
+                       dl DATA24_80EB1E                     ;80EB32|        |80EB1E;
+                                                            ;      |        |      ;
+        DATA24_80EB35:
+                       dl $101509,$101D2C,$0F1D4C           ;80EB35|        |      ;
+                       dl $101D6C,$0C1D4C,$101D2C           ;80EB3E|        |      ;
+                       dw $FFFE                             ;80EB47|        |      ;
+                       dl DATA24_80EB35                     ;80EB49|        |80EB35;
+                                                            ;      |        |      ;
+        DATA24_80EB4C:
+                       dl $1077DB,$107398,$107398           ;80EB4C|        |      ;
+                       dl $107398                           ;80EB55|        |      ;
+                       dw $FFFE                             ;80EB58|        |      ;
+                       dl DATA24_80EB4C                     ;80EB5A|        |80EB4C;
+                                                            ;      |        |      ;
+        DATA24_80EB5D:
+                       dl $107398,$107398,$1077DB           ;80EB5D|        |      ;
+                       dl $107398                           ;80EB66|        |      ;
+                       dw $FFFE                             ;80EB69|        |      ;
+                       dl DATA24_80EB5D                     ;80EB6B|        |80EB5D;
+                                                            ;      |        |      ;
+        DATA24_80EB6E:
+                       dl $105F7D,$104B3B,$104B3B           ;80EB6E|        |      ;
+                       dl $104B3B                           ;80EB77|        |      ;
+                       dw $FFFE                             ;80EB7A|        |      ;
+                       dl DATA24_80EB6E                     ;80EB7C|        |80EB6E;
+                                                            ;      |        |      ;
+        DATA24_80EB7F:
+                       dl $104B3B,$104B3B,$105F7D           ;80EB7F|        |      ;
+                       dl $104B3B                           ;80EB88|        |      ;
+                       dw $FFFE                             ;80EB8B|        |      ;
+                       dl DATA24_80EB7F                     ;80EB8D|        |80EB7F;
+                                                            ;      |        |      ;
+        DATA24_80EB90:
+                       dl $103295,$102E52,$102E52           ;80EB90|        |      ;
+                       dl $102E52                           ;80EB99|        |      ;
+                       dw $FFFE                             ;80EB9C|        |      ;
+                       dl DATA24_80EB90                     ;80EB9E|        |80EB90;
+                                                            ;      |        |      ;
+        DATA24_80EBA1:
+                       dl $102E52,$102E52,$103295           ;80EBA1|        |      ;
+                       dl $102E52                           ;80EBAA|        |      ;
+                       dw $FFFE                             ;80EBAD|        |      ;
+                       dl DATA24_80EBA1                     ;80EBAF|        |80EBA1;
+                                                            ;      |        |      ;
+        DATA24_80EBB2:
+                       dl $10314A,$102D29,$102D29           ;80EBB2|        |      ;
+                       dl $102D29                           ;80EBBB|        |      ;
+                       dw $FFFE                             ;80EBBE|        |      ;
+                       dl DATA24_80EBB2                     ;80EBC0|        |80EBB2;
+                                                            ;      |        |      ;
+        DATA24_80EBC3:
+                       dl $102D29,$102D29,$10314A           ;80EBC3|        |      ;
+                       dl $102D29                           ;80EBCC|        |      ;
+                       dw $FFFE                             ;80EBCF|        |      ;
+                       dl DATA24_80EBC3                     ;80EBD1|        |80EBC3;
+                                                            ;      |        |      ;
+        DATA24_80EBD4:
+                       dl $107799,$106334,$106334           ;80EBD4|        |      ;
+                       dl $106334                           ;80EBDD|        |      ;
+                       dw $FFFE                             ;80EBE0|        |      ;
+                       dl DATA24_80EBD4                     ;80EBE2|        |80EBD4;
+                                                            ;      |        |      ;
+        DATA24_80EBE5:
+                       dl $106334,$106334,$1077DB           ;80EBE5|        |      ;
+                       dl $106334                           ;80EBEE|        |      ;
+                       dw $FFFE                             ;80EBF1|        |      ;
+                       dl DATA24_80EBE5                     ;80EBF3|        |80EBE5;
+                                                            ;      |        |      ;
+        DATA24_80EBF6:
+                       dl $10677E,$10471C,$10471C           ;80EBF6|        |      ;
+                       dl $10471C                           ;80EBFF|        |      ;
+                       dw $FFFE                             ;80EC02|        |      ;
+                       dl DATA24_80EBF6                     ;80EC04|        |80EBF6;
+                                                            ;      |        |      ;
+        DATA24_80EC07:
+                       dl $10471C,$10471C,$10677E           ;80EC07|        |      ;
+                       dl $10471C                           ;80EC10|        |      ;
+                       dw $FFFE                             ;80EC13|        |      ;
+                       dl DATA24_80EC07                     ;80EC15|        |80EC07;
+                                                            ;      |        |      ;
+        DATA24_80EC18:
+                       dl $105694,$104E31,$104E31           ;80EC18|        |      ;
+                       dl $104E31                           ;80EC21|        |      ;
+                       dw $FFFE                             ;80EC24|        |      ;
+                       dl DATA24_80EC18                     ;80EC26|        |80EC18;
+                                                            ;      |        |      ;
+        DATA24_80EC29:
+                       dl $104E31,$104E31,$105694           ;80EC29|        |      ;
+                       dl $104E31                           ;80EC32|        |      ;
+                       dw $FFFE                             ;80EC35|        |      ;
+                       dl DATA24_80EC29                     ;80EC37|        |80EC29;
+                                                            ;      |        |      ;
+        DATA24_80EC3A:
+                       dl $10498C,$10414A,$10414A           ;80EC3A|        |      ;
+                       dl $10414A                           ;80EC43|        |      ;
+                       dw $FFFE                             ;80EC46|        |      ;
+                       dl DATA24_80EC3A                     ;80EC48|        |80EC3A;
+                                                            ;      |        |      ;
+        DATA24_80EC4B:
+                       dl $10414A,$10414A,$10498C           ;80EC4B|        |      ;
+                       dl $10414A                           ;80EC54|        |      ;
+                       dw $FFFE                             ;80EC57|        |      ;
+                       dl DATA24_80EC4B                     ;80EC59|        |80EC4B;
+                                                            ;      |        |      ;
+        DATA24_80EC5C:
+                       dl $107376,$106334,$106334           ;80EC5C|        |      ;
+                       dl $106334                           ;80EC65|        |      ;
+                       dw $FFFE                             ;80EC68|        |      ;
+                       dl DATA24_80EC5C                     ;80EC6A|        |80EC5C;
+                                                            ;      |        |      ;
+        DATA24_80EC6D:
+                       dl $106334,$106334,$107376           ;80EC6D|        |      ;
+                       dl $106334                           ;80EC76|        |      ;
+                       dw $FFFE                             ;80EC79|        |      ;
+                       dl DATA24_80EC6D                     ;80EC7B|        |80EC6D;
+                                                            ;      |        |      ;
+        DATA24_80EC7E:
+                       dl $10537F,$1042FB,$1042FB           ;80EC7E|        |      ;
+                       dl $1042FB                           ;80EC87|        |      ;
+                       dw $FFFE                             ;80EC8A|        |      ;
+                       dl DATA24_80EC7E                     ;80EC8C|        |80EC7E;
+                                                            ;      |        |      ;
+        DATA24_80EC8F:
+                       dl $1042FB,$1042FB,$10537F           ;80EC8F|        |      ;
+                       dl $1042FB                           ;80EC98|        |      ;
+                       dw $FFFE                             ;80EC9B|        |      ;
+                       dl DATA24_80EC8F                     ;80EC9D|        |80EC8F;
+                                                            ;      |        |      ;
+        DATA24_80ECA0:
+                       dl $104671,$103E31,$103E31           ;80ECA0|        |      ;
+                       dl $103E31                           ;80ECA9|        |      ;
+                       dw $FFFE                             ;80ECAC|        |      ;
+                       dl DATA24_80ECA0                     ;80ECAE|        |80ECA0;
+                                                            ;      |        |      ;
+        DATA24_80ECB1:
+                       dl $103E31,$103E31,$104671           ;80ECB1|        |      ;
+                       dl $103E31                           ;80ECBA|        |      ;
+                       dw $FFFE                             ;80ECBD|        |      ;
+                       dl DATA24_80ECB1                     ;80ECBF|        |80ECB1;
+                                                            ;      |        |      ;
+        DATA24_80ECC2:
+                       dl $10316A,$102D49,$102D49           ;80ECC2|        |      ;
+                       dl $102D49                           ;80ECCB|        |      ;
+                       dw $FFFE                             ;80ECCE|        |      ;
+                       dl DATA24_80ECC2                     ;80ECD0|        |80ECC2;
+                       dl $102D49,$102D49,$10316A           ;80ECD3|        |      ;
+                       dl $102D49                           ;80ECDC|        |      ;
+                       dw $FFFE                             ;80ECDF|        |      ;
+                       dl DATA24_80ECC2                     ;80ECE1|        |80ECC2;
+                                                            ;      |        |      ;
+        DATA24_80ECE4:
+                       dl $10779B,$107377,$107377           ;80ECE4|        |      ;
+                       dl $107377                           ;80ECED|        |      ;
+                       dw $FFFE                             ;80ECF0|        |      ;
+                       dl DATA24_80ECE4                     ;80ECF2|        |80ECE4;
+                                                            ;      |        |      ;
+        DATA24_80ECF5:
+                       dl $107377,$107377,$10779B           ;80ECF5|        |      ;
+                       dl $107377                           ;80ECFE|        |      ;
+                       dw $FFFE                             ;80ED01|        |      ;
+                       dl DATA24_80ECF5                     ;80ED03|        |80ECF5;
+                                                            ;      |        |      ;
+        DATA24_80ED06:
+                       dl $106F59,$106B37,$106B37           ;80ED06|        |      ;
+                       dl $106B37                           ;80ED0F|        |      ;
+                       dw $FFFE                             ;80ED12|        |      ;
+                       dl DATA24_80ED06                     ;80ED14|        |80ED06;
+                                                            ;      |        |      ;
+        DATA24_80ED17:
+                       dl $106B37,$106B37,$106F59           ;80ED17|        |      ;
+                       dl $106B37                           ;80ED20|        |      ;
+                       dw $FFFE                             ;80ED23|        |      ;
+                       dl DATA24_80ED17                     ;80ED25|        |80ED17;
+                                                            ;      |        |      ;
+        DATA24_80ED28:
+                       dl $105AB5,$105273,$105273           ;80ED28|        |      ;
+                       dl $105273                           ;80ED31|        |      ;
+                       dw $FFFE                             ;80ED34|        |      ;
+                       dl DATA24_80ED28                     ;80ED36|        |80ED28;
+                                                            ;      |        |      ;
+        DATA24_80ED39:
+                       dl $105273,$105273,$105AB5           ;80ED39|        |      ;
+                       dl $105273                           ;80ED42|        |      ;
+                       dw $FFFE                             ;80ED45|        |      ;
+                       dl DATA24_80ED39                     ;80ED47|        |80ED39;
+                                                            ;      |        |      ;
+        DATA24_80ED4A:
+                       dl $104DEE,$1045CE,$1045CE           ;80ED4A|        |      ;
+                       dl $1045CE                           ;80ED53|        |      ;
+                       dw $FFFE                             ;80ED56|        |      ;
+                       dl DATA24_80ED4A                     ;80ED58|        |80ED4A;
+                                                            ;      |        |      ;
+        DATA24_80ED5B:
+                       dl $1045CE,$1045CE,$104DEE           ;80ED5B|        |      ;
+                       dl $1045CE                           ;80ED64|        |      ;
+                       dw $FFFE                             ;80ED67|        |      ;
+                       dl DATA24_80ED5B                     ;80ED69|        |80ED5B;
+                                                            ;      |        |      ;
+        DATA24_80ED6C:
+                       dl $0C5185,$0C61E8,$0C6E4C           ;80ED6C|        |      ;
+                       dl $0C7F0C,$0C6E4C,$0C61E8           ;80ED75|        |      ;
+                       dw $FFFE                             ;80ED7E|        |      ;
+                       dl DATA24_80ED6C                     ;80ED80|        |80ED6C;
+                                                            ;      |        |      ;
+        DATA24_80ED83:
+                       dl $0C69E7,$0C7988,$0C69E7           ;80ED83|        |      ;
+                       dl $0C6167,$0C69E7,$0C7988           ;80ED8C|        |      ;
+                       dw $FFFE                             ;80ED95|        |      ;
+                       dl DATA24_80ED83                     ;80ED97|        |80ED83;
+                                                            ;      |        |      ;
+        DATA24_80ED9A:
+                       dl $0F7E2C,$0F7F97,$0F7F53           ;80ED9A|        |      ;
+                       dl $0F7EE7                           ;80EDA3|        |      ;
+                       dw $FFFE                             ;80EDA6|        |      ;
+                       dl DATA24_80ED9A                     ;80EDA8|        |80ED9A;
+                                                            ;      |        |      ;
+        DATA24_80EDAB:
+                       dl $0F7EEF,$0F7E2C,$0F7F97           ;80EDAB|        |      ;
+                       dl $0F7F53                           ;80EDB4|        |      ;
+                       dw $FFFE                             ;80EDB7|        |      ;
+                       dl DATA24_80EDAB                     ;80EDB9|        |80EDAB;
+                                                            ;      |        |      ;
+        DATA24_80EDBC:
+                       dl $0F7F53,$0F7EEF,$0F7E2C           ;80EDBC|        |      ;
+                       dl $0F7F97                           ;80EDC5|        |      ;
+                       dw $FFFE                             ;80EDC8|        |      ;
+                       dl DATA24_80EDBC                     ;80EDCA|        |80EDBC;
+                                                            ;      |        |      ;
+        DATA24_80EDCD:
+                       dl $0F7F97,$0F7F53,$0F7EE7           ;80EDCD|        |      ;
+                       dl $0F7E2C                           ;80EDD6|        |      ;
+                       dw $FFFE                             ;80EDD9|        |      ;
+                       dl DATA24_80EDCD                     ;80EDDB|        |80EDCD;
+                                                            ;      |        |      ;
+        DATA24_80EDDE:
+                       dl $0F0070,$0F0E5F,$0F03FF           ;80EDDE|        |      ;
+                       dw $FFFE                             ;80EDE7|        |      ;
+                       dl DATA24_80EDDE                     ;80EDE9|        |80EDDE;
+                                                            ;      |        |      ;
+        DATA24_80EDEC:
+                       dl $0F0E5F,$0F0070,$0F03FF           ;80EDEC|        |      ;
+                       dw $FFFE                             ;80EDF5|        |      ;
+                       dl DATA24_80EDEC                     ;80EDF7|        |80EDEC;
+                                                            ;      |        |      ;
+        DATA24_80EDFA:
+                       dl $0F03FF,$0F0E5F,$0F0070           ;80EDFA|        |      ;
+                       dw $FFFE                             ;80EE03|        |      ;
+                       dl DATA24_80EDFA                     ;80EE05|        |80EDFA;
+                                                            ;      |        |      ;
+        DATA24_80EE08:
+                       dl $08000C,$08000A,$080009           ;80EE08|        |      ;
+                       dw $FFFE                             ;80EE11|        |      ;
+                       dl DATA24_80EE08                     ;80EE13|        |80EE08;
+                                                            ;      |        |      ;
+        DATA24_80EE16:
+                       dl $08000A,$0800D8,$08027E           ;80EE16|        |      ;
+                       dw $FFFE                             ;80EE1F|        |      ;
+                       dl DATA24_80EE16                     ;80EE21|        |80EE16;
+                                                            ;      |        |      ;
+        DATA24_80EE24:
+                       dl $08017F,$08029F,$0800D2           ;80EE24|        |      ;
+                       dw $FFFE                             ;80EE2D|        |      ;
+                       dl DATA24_80EE24                     ;80EE2F|        |80EE24;
+                                                            ;      |        |      ;
+        DATA24_80EE32:
+                       dl $08031F,$08035F,$0803FF           ;80EE32|        |      ;
+                       dw $FFFE                             ;80EE3B|        |      ;
+                       dl DATA24_80EE32                     ;80EE3D|        |80EE32;
+                                                            ;      |        |      ;
+        DATA24_80EE40:
+                       dl $102279,$10229B,$1022DC           ;80EE40|        |      ;
+                       dw $FFFE                             ;80EE49|        |      ;
+                       dl DATA24_80EE40                     ;80EE4B|        |80EE40;
+                                                            ;      |        |      ;
+        DATA24_80EE4E:
+                       dl $100854,$1008DE,$1008DC           ;80EE4E|        |      ;
+                       dw $FFFE                             ;80EE57|        |      ;
+                       dl DATA24_80EE4E                     ;80EE59|        |80EE4E;
+                                                            ;      |        |      ;
+        DATA24_80EE5C:
+                       dl $10089D,$1008DE,$10091F           ;80EE5C|        |      ;
+                       dw $FFFE                             ;80EE65|        |      ;
+                       dl DATA24_80EE5C                     ;80EE67|        |80EE5C;
+                                                            ;      |        |      ;
+        DATA24_80EE6A:
+                       dl $1008DF,$1008DF,$100A1F           ;80EE6A|        |      ;
+                       dw $FFFE                             ;80EE73|        |      ;
+                       dl DATA24_80EE6A                     ;80EE75|        |80EE6A;
+                                                            ;      |        |      ;
+        DATA24_80EE78:
+                       dl $1008DF,$100A3F,$100A9F           ;80EE78|        |      ;
+                       dw $FFFE                             ;80EE81|        |      ;
+                       dl DATA24_80EE78                     ;80EE83|        |80EE78;
+                                                            ;      |        |      ;
+        DATA24_80EE86:
+                       dl $10029F,$10029F,$10031F           ;80EE86|        |      ;
+                       dw $FFFE                             ;80EE8F|        |      ;
+                       dl DATA24_80EE86                     ;80EE91|        |80EE86;
+                                                            ;      |        |      ;
+        DATA24_80EE94:
+                       dl $10035F,$1003DF,$1003FF           ;80EE94|        |      ;
+                       dw $FFFE                             ;80EE9D|        |      ;
+                       dl DATA24_80EE94                     ;80EE9F|        |80EE94;
+                                                            ;      |        |      ;
+        DATA24_80EEA2:
+                       dl $0C0A3C,$0C00DB,$0C00DF           ;80EEA2|        |      ;
+                       dl $0C00DF                           ;80EEAB|        |      ;
+                       dw $FFFE                             ;80EEAE|        |      ;
+                       dl DATA24_80EEA2                     ;80EEB0|        |80EEA2;
+                                                            ;      |        |      ;
+        DATA24_80EEB3:
+                       dl $0C09B3,$0C11FF,$0C0A5F           ;80EEB3|        |      ;
+                       dl $0C125F                           ;80EEBC|        |      ;
+                       dw $FFFE                             ;80EEBF|        |      ;
+                       dl DATA24_80EEB3                     ;80EEC1|        |80EEB3;
+                                                            ;      |        |      ;
+        DATA24_80EEC4:
+                       dl $0C0992,$0C0A15,$0C023A           ;80EEC4|        |      ;
+                       dl $0C133F                           ;80EECD|        |      ;
+                       dw $FFFE                             ;80EED0|        |      ;
+                       dl DATA24_80EEC4                     ;80EED2|        |80EEC4;
+                                                            ;      |        |      ;
+        DATA24_80EED5:
+                       dl $102A98,$10433D,$102A98           ;80EED5|        |      ;
+                       dl $104F7F,$104F5F,$10433D           ;80EEDE|        |      ;
+                       dw $FFFE                             ;80EEE7|        |      ;
+                       dl DATA24_80EED5                     ;80EEE9|        |80EED5;
+                                                            ;      |        |      ;
+        DATA24_80EEEC:
+                       dl $1042FA,$102A98,$1042FA           ;80EEEC|        |      ;
+                       dl $102ADB,$10371C,$102A98           ;80EEF5|        |      ;
+                       dl $102ADB                           ;80EEFE|        |      ;
+                       dw $FFFE                             ;80EF01|        |      ;
+                       dl DATA24_80EEEC                     ;80EF03|        |80EEEC;
+                                                            ;      |        |      ;
+        DATA24_80EF06:
+                       dl $080049,$08004C                   ;80EF06|        |      ;
+                       dw $FFFE                             ;80EF0C|        |      ;
+                       dl DATA24_80EF06                     ;80EF0E|        |80EF06;
+                                                            ;      |        |      ;
+        DATA24_80EF11:
+                       dl $080037,$08013D                   ;80EF11|        |      ;
+                       dw $FFFE                             ;80EF17|        |      ;
+                       dl DATA24_80EF11                     ;80EF19|        |80EF11;
+                                                            ;      |        |      ;
+        DATA24_80EF1C:
+                       dl $08025F,$0802DF                   ;80EF1C|        |      ;
+                       dw $FFFE                             ;80EF22|        |      ;
+                       dl DATA24_80EF1C                     ;80EF24|        |80EF1C;
                                                             ;      |        |      ;
        Padding_800000:
                        db $00,$00,$00,$00,$00,$00,$00,$00   ;80EF27|        |      ;
