@@ -257,7 +257,7 @@
                        RTL                                  ;8581CA|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8581CB:
+      fUnknown_8581CB:
                        REP #$30                             ;8581CB|C230    |      ;
                        LDA.B $A5                            ;8581CD|A5A5    |0000A5;
                        ASL A                                ;8581CF|0A      |      ;

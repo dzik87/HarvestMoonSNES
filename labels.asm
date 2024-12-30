@@ -1,5 +1,9 @@
-                       ptrUnknown42 = $000042; !^ ptr24 * 16 ^!;      |        |      ;
-;                       ptrUnknown42+2 = $000044             ;      |        |      ;
+                       ptrUnknown0x0D = $00000D; !^ ptr24 ^!;      |        |      ;
+;                       ptrUnknown0x0D+2 = $00000F           ;      |        |      ;
+                       ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!;      |        |      ;
+;                       ptrUnknown0x42+2 = $000044           ;      |        |      ;
+                       ptrUnknown0x72 = $000072; !^ ptr24 - in post cases ^!;      |        |      ;
+;                       ptrUnknown0x72+2 = $000074           ;      |        |      ;
                        nPlayerPosX = $0000D6; !^ n16 ^!     ;      |        |      ;
                        nPlayerPosY = $0000D8; !^ n16 ^!     ;      |        |      ;
                        nDestinationX = $00017D; !^ n16 (used when we change map) ^!;      |        |      ;
@@ -61,7 +65,7 @@
                        nTimeState = $000973; !^ n16, 00 - stop, 01- run, 02 - skip to next day ^!;      |        |      ;
                        nUnknownX = $000980; !^ n16 ^!       ;      |        |      ;
                        nUnknownY = $000982; !^ n16 ^!       ;      |        |      ;
-                       nHeldItemId = $000984; !^ n16 ^!     ;      |        |      ;
+                       nCarriedItemId = $000984; !^ n16 ^!  ;      |        |      ;
                        SNES_INIDISP = $002100               ;      |        |      ;
                        SNES_OBSEL = $002101                 ;      |        |      ;
                        SNES_OAMADDL = $002102               ;      |        |      ;
@@ -290,6 +294,7 @@
                        RanchDevelopmentRate = $7F1F56; !^ range 00h-64h ^!;      |        |      ;
                        MarriedGirlID = $7F1F66              ;      |        |      ;
                        PlayerHasHorse = $7F1F69; !^ 00 - No, 01 - Yes ^!;      |        |      ;
+                       ;      |        |      ;
                        Table_858C8E = $858C8E               ;      |        |      ;
                        PTR16_80FFFF = $80FFFF               ;      |        |      ;
                        LOOSE_OP_81A901 = $81A901            ;      |        |      ;
