@@ -2,7 +2,7 @@
                        ORG $818000                          ;      |        |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818000:
+      fUnknown_818000:
                        SEP #$20                             ;818000|E220    |      ;
                        REP #$10                             ;818002|C210    |      ;
                        LDA.B #$01                           ;818004|A901    |      ;
@@ -12,36 +12,36 @@
                        LDA.B #$00                           ;81800E|A900    |      ;
                        STA.W $0976                          ;818010|8D7609  |000976;
                        LDA.W $091D                          ;818013|AD1D09  |00091D;
-                       STA.W $0984                          ;818016|8D8409  |000984;
+                       STA.W nHeldItemId                    ;818016|8D8409  |000984;
                        REP #$20                             ;818019|C220    |      ;
                        LDA.W #$0002                         ;81801B|A90200  |      ;
                        CLC                                  ;81801E|18      |      ;
                        ADC.B $DA                            ;81801F|65DA    |0000DA;
                        TAY                                  ;818021|A8      |      ;
-                       JSL.L CODE_8180B7                    ;818022|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;818022|22B78081|8180B7;
                        REP #$20                             ;818026|C220    |      ;
                        LDA.B nPlayerPosX                    ;818028|A5D6    |0000D6;
-                       STA.W $0980                          ;81802A|8D8009  |000980;
+                       STA.W nUnknownX                      ;81802A|8D8009  |000980;
                        LDA.B nPlayerPosY                    ;81802D|A5D8    |0000D8;
                        INC A                                ;81802F|1A      |      ;
                        INC A                                ;818030|1A      |      ;
-                       STA.W $0982                          ;818031|8D8209  |000982;
-                       JSL.L CODE_81A500                    ;818034|2200A581|81A500;
+                       STA.W nUnknownY                      ;818031|8D8209  |000982;
+                       JSL.L fUnknown_81A500                ;818034|2200A581|81A500;
                        REP #$30                             ;818038|C230    |      ;
                        LDA.W #$0001                         ;81803A|A90100  |      ;
                        LDX.W #$0000                         ;81803D|A20000  |      ;
                        LDY.W #$0000                         ;818040|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;818043|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;818043|224ED181|81D14E;
                        SEP #$20                             ;818047|E220    |      ;
                        REP #$10                             ;818049|C210    |      ;
                        LDA.B #$00                           ;81804B|A900    |      ;
                        XBA                                  ;81804D|EB      |      ;
-                       LDA.W $0984                          ;81804E|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81804E|AD8409  |000984;
                        REP #$20                             ;818051|C220    |      ;
                        TAX                                  ;818053|AA      |      ;
                        SEP #$20                             ;818054|E220    |      ;
                        LDA.L DATA8_81A2AD,X                 ;818056|BFADA281|81A2AD;
-                       BEQ CODE_818072                      ;81805A|F016    |818072;
+                       BEQ .label1                          ;81805A|F016    |818072;
                        REP #$20                             ;81805C|C220    |      ;
                        ASL A                                ;81805E|0A      |      ;
                        ASL A                                ;81805F|0A      |      ;
@@ -52,19 +52,19 @@
                        LDA.B [$0D],Y                        ;818066|B70D    |00000D;
                        LDX.W $0985                          ;818068|AE8509  |000985;
                        LDY.W $0987                          ;81806B|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;81806E|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81806E|2288A681|81A688;
                                                             ;      |        |      ;
-          CODE_818072:
+              .label1:
                        SEP #$20                             ;818072|E220    |      ;
                        REP #$10                             ;818074|C210    |      ;
                        LDA.B #$00                           ;818076|A900    |      ;
                        XBA                                  ;818078|EB      |      ;
-                       LDA.W $0984                          ;818079|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818079|AD8409  |000984;
                        REP #$20                             ;81807C|C220    |      ;
                        TAX                                  ;81807E|AA      |      ;
                        SEP #$20                             ;81807F|E220    |      ;
                        LDA.L DATA8_81A308,X                 ;818081|BF08A381|81A308;
-                       BEQ CODE_818099                      ;818085|F012    |818099;
+                       BEQ .return                          ;818085|F012    |818099;
                        SEP #$20                             ;818087|E220    |      ;
                        REP #$10                             ;818089|C210    |      ;
                        LDA.B #$08                           ;81808B|A908    |      ;
@@ -73,19 +73,19 @@
                        STA.W $0115                          ;818092|8D1501  |000115;
                        JSL.L fUnknown_838332                ;818095|22328383|838332;
                                                             ;      |        |      ;
-          CODE_818099:
+              .return:
                        RTL                                  ;818099|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81809A:
+    subUnknown_81809A:
                        SEP #$20                             ;81809A|E220    |      ;
                        REP #$10                             ;81809C|C210    |      ;
                        LDA.B #$00                           ;81809E|A900    |      ;
                        XBA                                  ;8180A0|EB      |      ;
-                       LDA.W $0984                          ;8180A1|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8180A1|AD8409  |000984;
                        ASL A                                ;8180A4|0A      |      ;
                        TAX                                  ;8180A5|AA      |      ;
-                       JSR.W (DATA8_8197C0,X)               ;8180A6|FCC097  |8197C0;
+                       JSR.W (pItemHoldSubrutines,X)        ;8180A6|FCC097  |8197C0;
                        REP #$30                             ;8180A9|C230    |      ;
                        LDA.L $7F1F5E                        ;8180AB|AF5E1F7F|7F1F5E;
                        AND.W #$FFFE                         ;8180AF|29FEFF  |      ;
@@ -93,24 +93,24 @@
                        RTS                                  ;8180B6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8180B7:
+      fUnknown_8180B7:
                        SEP #$20                             ;8180B7|E220    |      ;
                        REP #$10                             ;8180B9|C210    |      ;
                        LDA.B #$00                           ;8180BB|A900    |      ;
                        XBA                                  ;8180BD|EB      |      ;
-                       LDA.W $0984                          ;8180BE|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8180BE|AD8409  |000984;
                        REP #$20                             ;8180C1|C220    |      ;
                        STA.B $7E                            ;8180C3|857E    |00007E;
                        ASL A                                ;8180C5|0A      |      ;
                        CLC                                  ;8180C6|18      |      ;
                        ADC.B $7E                            ;8180C7|657E    |00007E;
                        TAX                                  ;8180C9|AA      |      ;
-                       LDA.L PTR24_8196AF,X                 ;8180CA|BFAF9681|8196AF;
+                       LDA.L pTable_8196AF,X                ;8180CA|BFAF9681|8196AF;
                        STA.B $72                            ;8180CE|8572    |000072;
                        INX                                  ;8180D0|E8      |      ;
                        INX                                  ;8180D1|E8      |      ;
                        SEP #$20                             ;8180D2|E220    |      ;
-                       LDA.L PTR24_8196AF,X                 ;8180D4|BFAF9681|8196AF;
+                       LDA.L pTable_8196AF,X                ;8180D4|BFAF9681|8196AF;
                        STA.B $74                            ;8180D8|8574    |000074;
                        REP #$30                             ;8180DA|C230    |      ;
                        TYA                                  ;8180DC|98      |      ;
@@ -137,333 +137,397 @@
                        STA.W $097E                          ;8180FA|8D7E09  |00097E;
                        RTL                                  ;8180FD|6B      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;8180FE|205588  |818855;
+                                                            ;      |        |      ;
+subItemCarried_Mushroom:
+                       JSR.W fUnknown_818855                ;8180FE|205588  |818855;
                        RTS                                  ;818101|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;818102|205588  |818855;
+                                                            ;      |        |      ;
+subItemCarried_PoisonMushroom:
+                       JSR.W fUnknown_818855                ;818102|205588  |818855;
                        RTS                                  ;818105|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;818106|205588  |818855;
+                                                            ;      |        |      ;
+subItemCarried_WildGrape:
+                       JSR.W fUnknown_818855                ;818106|205588  |818855;
                        RTS                                  ;818109|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;81810A|205588  |818855;
+                                                            ;      |        |      ;
+subItemCarried_BerryStrongSmell:
+                       JSR.W fUnknown_818855                ;81810A|205588  |818855;
                        RTS                                  ;81810D|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;81810E|205588  |818855;
+                                                            ;      |        |      ;
+subItemCarried_MoonFlower:
+                       JSR.W fUnknown_818855                ;81810E|205588  |818855;
                        RTS                                  ;818111|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;818112|205588  |818855;
+                                                            ;      |        |      ;
+  subItemCarried_Cake:
+                       JSR.W fUnknown_818855                ;818112|205588  |818855;
                        RTS                                  ;818115|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;818116|205588  |818855;
+                                                            ;      |        |      ;
+  subItemCarried_Fish:
+                       JSR.W fUnknown_818855                ;818116|205588  |818855;
                        RTS                                  ;818119|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818855                    ;81811A|205588  |818855;
+                                                            ;      |        |      ;
+subItemCarried_PowerBerry:
+                       JSR.W fUnknown_818855                ;81811A|205588  |818855;
                        RTS                                  ;81811D|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;81811E|20E588  |8188E5;
+                                                            ;      |        |      ;
+  subItemCarried_Bush:
+                       JSR.W fUnknown_8188E5                ;81811E|20E588  |8188E5;
                        RTS                                  ;818121|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;818122|20E588  |8188E5;
+                                                            ;      |        |      ;
+ subItemCarried_Bush2:
+                       JSR.W fUnknown_8188E5                ;818122|20E588  |8188E5;
                        RTS                                  ;818125|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_81889A                    ;818126|209A88  |81889A;
+                                                            ;      |        |      ;
+  subItemCarried_0x0D:
+                       JSR.W fUnknown_81889A                ;818126|209A88  |81889A;
                        RTS                                  ;818129|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_81889A                    ;81812A|209A88  |81889A;
+                                                            ;      |        |      ;
+  subItemCarried_0x0E:
+                       JSR.W fUnknown_81889A                ;81812A|209A88  |81889A;
                        RTS                                  ;81812D|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_81889A                    ;81812E|209A88  |81889A;
+                                                            ;      |        |      ;
+  subItemCarried_0x57:
+                       JSR.W fUnknown_81889A                ;81812E|209A88  |81889A;
                        RTS                                  ;818131|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;818132|20E588  |8188E5;
+                                                            ;      |        |      ;
+  subItemCarried_Corn:
+                       JSR.W fUnknown_8188E5                ;818132|20E588  |8188E5;
                        REP #$30                             ;818135|C230    |      ;
                        LDA.L $7F1F5E                        ;818137|AF5E1F7F|7F1F5E;
                        AND.W #$0001                         ;81813B|290100  |      ;
-                       BEQ CODE_818149                      ;81813E|F009    |818149;
+                       BEQ .return                          ;81813E|F009    |818149;
                        LDA.L nStatShippedCorns              ;818140|AF4A1F7F|7F1F4A;
                        INC A                                ;818144|1A      |      ;
                        STA.L nStatShippedCorns              ;818145|8F4A1F7F|7F1F4A;
                                                             ;      |        |      ;
-          CODE_818149:
+              .return:
                        RTS                                  ;818149|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;81814A|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_Tomato:
+                       JSR.W fUnknown_8188E5                ;81814A|20E588  |8188E5;
                        REP #$30                             ;81814D|C230    |      ;
                        LDA.L $7F1F5E                        ;81814F|AF5E1F7F|7F1F5E;
                        AND.W #$0001                         ;818153|290100  |      ;
-                       BEQ CODE_818161                      ;818156|F009    |818161;
+                       BEQ .return                          ;818156|F009    |818161;
                        LDA.L nStatShippedTomatoes           ;818158|AF4C1F7F|7F1F4C;
                        INC A                                ;81815C|1A      |      ;
                        STA.L nStatShippedTomatoes           ;81815D|8F4C1F7F|7F1F4C;
                                                             ;      |        |      ;
-          CODE_818161:
+              .return:
                        RTS                                  ;818161|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;818162|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_Potato:
+                       JSR.W fUnknown_8188E5                ;818162|20E588  |8188E5;
                        REP #$30                             ;818165|C230    |      ;
                        LDA.L $7F1F5E                        ;818167|AF5E1F7F|7F1F5E;
                        AND.W #$0001                         ;81816B|290100  |      ;
-                       BEQ CODE_818179                      ;81816E|F009    |818179;
+                       BEQ .return                          ;81816E|F009    |818179;
                        LDA.L nStatShippedPotatoes           ;818170|AF501F7F|7F1F50;
                        INC A                                ;818174|1A      |      ;
                        STA.L nStatShippedPotatoes           ;818175|8F501F7F|7F1F50;
                                                             ;      |        |      ;
-          CODE_818179:
+              .return:
                        RTS                                  ;818179|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;81817A|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_Turnip:
+                       JSR.W fUnknown_8188E5                ;81817A|20E588  |8188E5; X = 26
                        REP #$30                             ;81817D|C230    |      ;
                        LDA.L $7F1F5E                        ;81817F|AF5E1F7F|7F1F5E;
                        AND.W #$0001                         ;818183|290100  |      ;
-                       BEQ CODE_818191                      ;818186|F009    |818191;
+                       BEQ .return                          ;818186|F009    |818191;
                        LDA.L nStatShippedTurnips            ;818188|AF4E1F7F|7F1F4E;
                        INC A                                ;81818C|1A      |      ;
                        STA.L nStatShippedTurnips            ;81818D|8F4E1F7F|7F1F4E;
                                                             ;      |        |      ;
-          CODE_818191:
+              .return:
                        RTS                                  ;818191|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;818192|20E588  |8188E5;
+                                                            ;      |        |      ;
+   subItemCarried_Egg:
+                       JSR.W fUnknown_8188E5                ;818192|20E588  |8188E5;
                        RTS                                  ;818195|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;818196|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_SmallMilk:
+                       JSR.W fUnknown_8188E5                ;818196|20E588  |8188E5;
                        RTS                                  ;818199|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;81819A|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_MediumMilk:
+                       JSR.W fUnknown_8188E5                ;81819A|20E588  |8188E5;
                        RTS                                  ;81819D|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;81819E|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_LargeMilk:
+                       JSR.W fUnknown_8188E5                ;81819E|20E588  |8188E5;
                        RTS                                  ;8181A1|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;8181A2|20E588  |8188E5;
+                                                            ;      |        |      ;
+  subItemCarried_Herb:
+                       JSR.W fUnknown_8188E5                ;8181A2|20E588  |8188E5;
                        RTS                                  ;8181A5|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;8181A6|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_Flower:
+                       JSR.W fUnknown_8188E5                ;8181A6|20E588  |8188E5;
                        RTS                                  ;8181A9|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188BC                    ;8181AA|20BC88  |8188BC;
+                                                            ;      |        |      ;
+  subItemCarried_Feed:
+                       JSR.W fUnknown_8188BC                ;8181AA|20BC88  |8188BC;
                        RTS                                  ;8181AD|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8181AE|202389  |818923;
+                                                            ;      |        |      ;
+subItemCarried_GreenPerfume:
+                       JSR.W fItemHandlerMain               ;8181AE|202389  |818923;
                        SEP #$20                             ;8181B1|E220    |      ;
                        LDA.W $0976                          ;8181B3|AD7609  |000976;
                        CMP.B #$FF                           ;8181B6|C9FF    |      ;
-                       BNE CODE_8181C7                      ;8181B8|D00D    |8181C7;
+                       BNE .return                          ;8181B8|D00D    |8181C7;
                        SEP #$20                             ;8181BA|E220    |      ;
                        STZ.W $0976                          ;8181BC|9C7609  |000976;
                        LDA.B #$58                           ;8181BF|A958    |      ;
-                       STA.W $0984                          ;8181C1|8D8409  |000984;
+                       STA.W nHeldItemId                    ;8181C1|8D8409  |000984;
                        STA.W $091D                          ;8181C4|8D1D09  |00091D;
                                                             ;      |        |      ;
-          CODE_8181C7:
+              .return:
                        RTS                                  ;8181C7|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8181C8|202389  |818923;
+                                                            ;      |        |      ;
+subItemCarried_RedPerfume:
+                       JSR.W fItemHandlerMain               ;8181C8|202389  |818923;
                        SEP #$20                             ;8181CB|E220    |      ;
                        LDA.W $0976                          ;8181CD|AD7609  |000976;
                        CMP.B #$FF                           ;8181D0|C9FF    |      ;
-                       BNE CODE_8181E1                      ;8181D2|D00D    |8181E1;
+                       BNE .return                          ;8181D2|D00D    |8181E1;
                        SEP #$20                             ;8181D4|E220    |      ;
                        STZ.W $0976                          ;8181D6|9C7609  |000976;
                        LDA.B #$59                           ;8181D9|A959    |      ;
-                       STA.W $0984                          ;8181DB|8D8409  |000984;
+                       STA.W nHeldItemId                    ;8181DB|8D8409  |000984;
                        STA.W $091D                          ;8181DE|8D1D09  |00091D;
                                                             ;      |        |      ;
-          CODE_8181E1:
+              .return:
                        RTS                                  ;8181E1|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8181E2|202389  |818923;
+                                                            ;      |        |      ;
+subItemCarried_BluePerfume:
+                       JSR.W fItemHandlerMain               ;8181E2|202389  |818923;
                        SEP #$20                             ;8181E5|E220    |      ;
                        LDA.W $0976                          ;8181E7|AD7609  |000976;
                        CMP.B #$FF                           ;8181EA|C9FF    |      ;
-                       BNE CODE_8181FB                      ;8181EC|D00D    |8181FB;
+                       BNE .return                          ;8181EC|D00D    |8181FB;
                        SEP #$20                             ;8181EE|E220    |      ;
                        STZ.W $0976                          ;8181F0|9C7609  |000976;
                        LDA.B #$5A                           ;8181F3|A95A    |      ;
-                       STA.W $0984                          ;8181F5|8D8409  |000984;
+                       STA.W nHeldItemId                    ;8181F5|8D8409  |000984;
                        STA.W $091D                          ;8181F8|8D1D09  |00091D;
                                                             ;      |        |      ;
-          CODE_8181FB:
+              .return:
                        RTS                                  ;8181FB|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+subItemCarried_RedEgg:
                        REP #$30                             ;8181FC|C230    |      ;
                        LDA.L $7F1F74                        ;8181FE|AF741F7F|7F1F74;
                        AND.W #$0020                         ;818202|292000  |      ;
-                       BEQ CODE_81820A                      ;818205|F003    |81820A;
-                       JMP.W CODE_818337                    ;818207|4C3783  |818337;
+                       BEQ .label1                          ;818205|F003    |81820A;
+                       JMP.W fEggFestivalUnknown_818337     ;818207|4C3783  |818337;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81820A:
+              .label1:
                        SEP #$20                             ;81820A|E220    |      ;
                        REP #$10                             ;81820C|C210    |      ;
                        LDA.W $0976                          ;81820E|AD7609  |000976;
-                       BNE CODE_81822C                      ;818211|D019    |81822C;
+                       BNE .label2                          ;818211|D019    |81822C;
                        LDA.W $09AC                          ;818213|ADAC09  |0009AC;
                        CMP.B #$01                           ;818216|C901    |      ;
-                       BEQ CODE_81821D                      ;818218|F003    |81821D;
-                       JMP.W CODE_81836C                    ;81821A|4C6C83  |81836C;
+                       BEQ .label3                          ;818218|F003    |81821D;
+                       JMP.W fEggFestivalUnknown_81836C     ;81821A|4C6C83  |81836C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81821D:
+              .label3:
                        REP #$30                             ;81821D|C230    |      ;
                        LDA.W #$00A1                         ;81821F|A9A100  |      ;
                        LDX.W $09AD                          ;818222|AEAD09  |0009AD;
                        LDY.W $09AF                          ;818225|ACAF09  |0009AF;
-                       JSL.L CODE_82B03A                    ;818228|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;818228|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_81822C:
-                       JSR.W CODE_8188E5                    ;81822C|20E588  |8188E5;
+              .label2:
+                       JSR.W fUnknown_8188E5                ;81822C|20E588  |8188E5;
                        SEP #$20                             ;81822F|E220    |      ;
                        REP #$10                             ;818231|C210    |      ;
                        LDA.W $0976                          ;818233|AD7609  |000976;
                        CMP.B #$03                           ;818236|C903    |      ;
-                       BNE CODE_81823D                      ;818238|D003    |81823D;
-                       JMP.W CODE_81835E                    ;81823A|4C5E83  |81835E;
+                       BNE .return                          ;818238|D003    |81823D;
+                       JMP.W fEggFestivalUnknown_81835E     ;81823A|4C5E83  |81835E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81823D:
+              .return:
                        RTS                                  ;81823D|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+subItemCarried_LightPurpleEgg:
                        REP #$30                             ;81823E|C230    |      ;
                        LDA.L $7F1F74                        ;818240|AF741F7F|7F1F74;
                        AND.W #$0020                         ;818244|292000  |      ;
-                       BEQ CODE_81824C                      ;818247|F003    |81824C;
-                       JMP.W CODE_818337                    ;818249|4C3783  |818337;
+                       BEQ .label1                          ;818247|F003    |81824C;
+                       JMP.W fEggFestivalUnknown_818337     ;818249|4C3783  |818337;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81824C:
+              .label1:
                        SEP #$20                             ;81824C|E220    |      ;
                        REP #$10                             ;81824E|C210    |      ;
                        LDA.W $0976                          ;818250|AD7609  |000976;
-                       BNE CODE_81826E                      ;818253|D019    |81826E;
+                       BNE .label2                          ;818253|D019    |81826E;
                        LDA.W $09AC                          ;818255|ADAC09  |0009AC;
                        CMP.B #$02                           ;818258|C902    |      ;
-                       BEQ CODE_81825F                      ;81825A|F003    |81825F;
-                       JMP.W CODE_81836C                    ;81825C|4C6C83  |81836C;
+                       BEQ .label3                          ;81825A|F003    |81825F;
+                       JMP.W fEggFestivalUnknown_81836C     ;81825C|4C6C83  |81836C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81825F:
+              .label3:
                        REP #$30                             ;81825F|C230    |      ;
                        LDA.W #$00A1                         ;818261|A9A100  |      ;
                        LDX.W $09AD                          ;818264|AEAD09  |0009AD;
                        LDY.W $09AF                          ;818267|ACAF09  |0009AF;
-                       JSL.L CODE_82B03A                    ;81826A|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;81826A|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_81826E:
-                       JSR.W CODE_8188E5                    ;81826E|20E588  |8188E5;
+              .label2:
+                       JSR.W fUnknown_8188E5                ;81826E|20E588  |8188E5;
                        SEP #$20                             ;818271|E220    |      ;
                        REP #$10                             ;818273|C210    |      ;
                        LDA.W $0976                          ;818275|AD7609  |000976;
                        CMP.B #$03                           ;818278|C903    |      ;
-                       BNE CODE_81827F                      ;81827A|D003    |81827F;
-                       JMP.W CODE_81835E                    ;81827C|4C5E83  |81835E;
+                       BNE .return                          ;81827A|D003    |81827F;
+                       JMP.W fEggFestivalUnknown_81835E     ;81827C|4C5E83  |81835E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81827F:
+              .return:
                        RTS                                  ;81827F|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+subItemCarried_BlueEgg:
                        REP #$30                             ;818280|C230    |      ;
                        LDA.L $7F1F74                        ;818282|AF741F7F|7F1F74;
                        AND.W #$0020                         ;818286|292000  |      ;
-                       BEQ CODE_81828E                      ;818289|F003    |81828E;
-                       JMP.W CODE_818337                    ;81828B|4C3783  |818337;
+                       BEQ .label1                          ;818289|F003    |81828E;
+                       JMP.W fEggFestivalUnknown_818337     ;81828B|4C3783  |818337;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81828E:
+              .label1:
                        SEP #$20                             ;81828E|E220    |      ;
                        REP #$10                             ;818290|C210    |      ;
                        LDA.W $0976                          ;818292|AD7609  |000976;
-                       BNE CODE_8182B0                      ;818295|D019    |8182B0;
+                       BNE .label2                          ;818295|D019    |8182B0;
                        LDA.W $09AC                          ;818297|ADAC09  |0009AC;
                        CMP.B #$03                           ;81829A|C903    |      ;
-                       BEQ CODE_8182A1                      ;81829C|F003    |8182A1;
-                       JMP.W CODE_81836C                    ;81829E|4C6C83  |81836C;
+                       BEQ .label3                          ;81829C|F003    |8182A1;
+                       JMP.W fEggFestivalUnknown_81836C     ;81829E|4C6C83  |81836C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8182A1:
+              .label3:
                        REP #$30                             ;8182A1|C230    |      ;
                        LDA.W #$00A1                         ;8182A3|A9A100  |      ;
                        LDX.W $09AD                          ;8182A6|AEAD09  |0009AD;
                        LDY.W $09AF                          ;8182A9|ACAF09  |0009AF;
-                       JSL.L CODE_82B03A                    ;8182AC|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;8182AC|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_8182B0:
-                       JSR.W CODE_8188E5                    ;8182B0|20E588  |8188E5;
+              .label2:
+                       JSR.W fUnknown_8188E5                ;8182B0|20E588  |8188E5;
                        SEP #$20                             ;8182B3|E220    |      ;
                        REP #$10                             ;8182B5|C210    |      ;
                        LDA.W $0976                          ;8182B7|AD7609  |000976;
                        CMP.B #$03                           ;8182BA|C903    |      ;
-                       BNE CODE_8182C1                      ;8182BC|D003    |8182C1;
-                       JMP.W CODE_81835E                    ;8182BE|4C5E83  |81835E;
+                       BNE .return                          ;8182BC|D003    |8182C1;
+                       JMP.W fEggFestivalUnknown_81835E     ;8182BE|4C5E83  |81835E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8182C1:
+              .return:
                        RTS                                  ;8182C1|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+subItemCarried_PurpleEgg:
                        REP #$30                             ;8182C2|C230    |      ;
                        LDA.L $7F1F74                        ;8182C4|AF741F7F|7F1F74;
                        AND.W #$0020                         ;8182C8|292000  |      ;
-                       BNE CODE_818337                      ;8182CB|D06A    |818337;
+                       BNE fEggFestivalUnknown_818337       ;8182CB|D06A    |818337;
                        SEP #$20                             ;8182CD|E220    |      ;
                        REP #$10                             ;8182CF|C210    |      ;
                        LDA.W $0976                          ;8182D1|AD7609  |000976;
-                       BNE CODE_8182EF                      ;8182D4|D019    |8182EF;
+                       BNE .label1                          ;8182D4|D019    |8182EF;
                        LDA.W $09AC                          ;8182D6|ADAC09  |0009AC;
                        CMP.B #$04                           ;8182D9|C904    |      ;
-                       BEQ CODE_8182E0                      ;8182DB|F003    |8182E0;
-                       JMP.W CODE_81836C                    ;8182DD|4C6C83  |81836C;
+                       BEQ .label2                          ;8182DB|F003    |8182E0;
+                       JMP.W fEggFestivalUnknown_81836C     ;8182DD|4C6C83  |81836C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8182E0:
+              .label2:
                        REP #$30                             ;8182E0|C230    |      ;
                        LDA.W #$00A1                         ;8182E2|A9A100  |      ;
                        LDX.W $09AD                          ;8182E5|AEAD09  |0009AD;
                        LDY.W $09AF                          ;8182E8|ACAF09  |0009AF;
-                       JSL.L CODE_82B03A                    ;8182EB|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;8182EB|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_8182EF:
-                       JSR.W CODE_8188E5                    ;8182EF|20E588  |8188E5;
+              .label1:
+                       JSR.W fUnknown_8188E5                ;8182EF|20E588  |8188E5;
                        SEP #$20                             ;8182F2|E220    |      ;
                        REP #$10                             ;8182F4|C210    |      ;
                        LDA.W $0976                          ;8182F6|AD7609  |000976;
                        CMP.B #$03                           ;8182F9|C903    |      ;
-                       BEQ CODE_81835E                      ;8182FB|F061    |81835E;
+                       BEQ fEggFestivalUnknown_81835E       ;8182FB|F061    |81835E;
                        RTS                                  ;8182FD|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+subItemCarried_GreenEgg:
                        REP #$30                             ;8182FE|C230    |      ;
                        LDA.L $7F1F74                        ;818300|AF741F7F|7F1F74;
                        AND.W #$0020                         ;818304|292000  |      ;
-                       BNE CODE_818337                      ;818307|D02E    |818337;
+                       BNE fEggFestivalUnknown_818337       ;818307|D02E    |818337;
                        SEP #$20                             ;818309|E220    |      ;
                        REP #$10                             ;81830B|C210    |      ;
                        LDA.W $0976                          ;81830D|AD7609  |000976;
-                       BNE CODE_818328                      ;818310|D016    |818328;
+                       BNE .label1                          ;818310|D016    |818328;
                        LDA.W $09AC                          ;818312|ADAC09  |0009AC;
                        CMP.B #$05                           ;818315|C905    |      ;
-                       BNE CODE_81836C                      ;818317|D053    |81836C;
+                       BNE fEggFestivalUnknown_81836C       ;818317|D053    |81836C;
                        REP #$30                             ;818319|C230    |      ;
                        LDA.W #$00A1                         ;81831B|A9A100  |      ;
                        LDX.W $09AD                          ;81831E|AEAD09  |0009AD;
                        LDY.W $09AF                          ;818321|ACAF09  |0009AF;
-                       JSL.L CODE_82B03A                    ;818324|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;818324|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_818328:
-                       JSR.W CODE_8188E5                    ;818328|20E588  |8188E5;
+              .label1:
+                       JSR.W fUnknown_8188E5                ;818328|20E588  |8188E5;
                        SEP #$20                             ;81832B|E220    |      ;
                        REP #$10                             ;81832D|C210    |      ;
                        LDA.W $0976                          ;81832F|AD7609  |000976;
                        CMP.B #$03                           ;818332|C903    |      ;
-                       BEQ CODE_81835E                      ;818334|F028    |81835E;
+                       BEQ fEggFestivalUnknown_81835E       ;818334|F028    |81835E;
                        RTS                                  ;818336|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818337:
+fEggFestivalUnknown_818337:
                        REP #$30                             ;818337|C230    |      ;
                        LDA.W $0978                          ;818339|AD7809  |000978;
                        STA.B $A5                            ;81833C|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;81833E|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;818342|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;81833E|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;818342|22F1A481|81A4F1;
                        SEP #$20                             ;818346|E220    |      ;
                        STZ.W $091D                          ;818348|9C1D09  |00091D;
                        REP #$30                             ;81834B|C230    |      ;
@@ -475,7 +539,7 @@
                        AND.B $D2                            ;81835A|25D2    |0000D2;
                        STA.B $D2                            ;81835C|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81835E:
+fEggFestivalUnknown_81835E:
                        REP #$30                             ;81835E|C230    |      ;
                        LDA.L $7F1F74                        ;818360|AF741F7F|7F1F74;
                        ORA.W #$0040                         ;818364|094000  |      ;
@@ -483,17 +547,17 @@
                        RTS                                  ;81836B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81836C:
+fEggFestivalUnknown_81836C:
                        REP #$30                             ;81836C|C230    |      ;
                        LDA.W #$00FC                         ;81836E|A9FC00  |      ;
                        LDX.W $09AD                          ;818371|AEAD09  |0009AD;
                        LDY.W $09AF                          ;818374|ACAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;818377|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;818377|2288A681|81A688;
                        REP #$30                             ;81837B|C230    |      ;
                        LDA.W $0978                          ;81837D|AD7809  |000978;
                        STA.B $A5                            ;818380|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818382|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;818386|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;818382|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;818386|22F1A481|81A4F1;
                        SEP #$20                             ;81838A|E220    |      ;
                        STZ.W $091D                          ;81838C|9C1D09  |00091D;
                        REP #$30                             ;81838F|C230    |      ;
@@ -510,346 +574,432 @@
                        LDX.W #$038D                         ;8183A9|A28D03  |      ;
                        LDA.B #$00                           ;8183AC|A900    |      ;
                        STA.W $0191                          ;8183AE|8D9101  |000191;
-                       JSL.L DialogRelated                  ;8183B1|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;8183B1|225F9383|83935F;
                        RTS                                  ;8183B5|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+subItemCarried_YellowEgg:
                        RTS                                  ;8183B6|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;8183B7|20E588  |8188E5;
+                                                            ;      |        |      ;
+subItemCarried_ChickenWindMeasured:
+                       JSR.W fUnknown_8188E5                ;8183B7|20E588  |8188E5;
                        RTS                                  ;8183BA|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_81883A                    ;8183BB|203A88  |81883A;
+                                                            ;      |        |      ;
+subItemCarried_Chicken:
+                       JSR.W fUnknown_81883A                ;8183BB|203A88  |81883A;
                        RTS                                  ;8183BE|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_81883A                    ;8183BF|203A88  |81883A;
+                                                            ;      |        |      ;
+ subItemCarried_Chick:
+                       JSR.W fUnknown_81883A                ;8183BF|203A88  |81883A;
                        RTS                                  ;8183C2|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x27:
                        RTS                                  ;8183C3|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x28:
                        RTS                                  ;8183C4|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_81883A                    ;8183C5|203A88  |81883A;
+                                                            ;      |        |      ;
+  subItemCarried_Mole:
+                       JSR.W fUnknown_81883A                ;8183C5|203A88  |81883A;
                        RTS                                  ;8183C8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x2A:
                        JSL.L CODE_81A94A                    ;8183C9|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183CD|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183CD|20C387  |8187C3;
                        RTS                                  ;8183D0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x2B:
                        JSL.L CODE_81A94A                    ;8183D1|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183D5|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183D5|20C387  |8187C3;
                        RTS                                  ;8183D8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x2C:
                        JSL.L CODE_81A94A                    ;8183D9|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183DD|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183DD|20C387  |8187C3;
                        RTS                                  ;8183E0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x2D:
                        JSL.L CODE_81A94A                    ;8183E1|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183E5|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183E5|20C387  |8187C3;
                        RTS                                  ;8183E8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x2E:
                        JSL.L CODE_81A94A                    ;8183E9|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183ED|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183ED|20C387  |8187C3;
                        RTS                                  ;8183F0|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x2F:
                        JSL.L CODE_81A94A                    ;8183F1|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183F5|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183F5|20C387  |8187C3;
                        RTS                                  ;8183F8|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x30:
                        JSL.L CODE_81A94A                    ;8183F9|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;8183FD|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;8183FD|20C387  |8187C3;
                        RTS                                  ;818400|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x31:
                        JSL.L CODE_81A94A                    ;818401|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818405|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818405|20C387  |8187C3;
                        RTS                                  ;818408|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x32:
                        JSL.L CODE_81A94A                    ;818409|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81840D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81840D|20C387  |8187C3;
                        RTS                                  ;818410|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x33:
                        JSL.L CODE_81A94A                    ;818411|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818415|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818415|20C387  |8187C3;
                        RTS                                  ;818418|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x34:
                        JSL.L CODE_81A94A                    ;818419|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81841D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81841D|20C387  |8187C3;
                        RTS                                  ;818420|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x35:
                        JSL.L CODE_81A94A                    ;818421|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818425|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818425|20C387  |8187C3;
                        RTS                                  ;818428|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x36:
                        JSL.L CODE_81A94A                    ;818429|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81842D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81842D|20C387  |8187C3;
                        RTS                                  ;818430|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x37:
                        JSL.L CODE_81A94A                    ;818431|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818435|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818435|20C387  |8187C3;
                        RTS                                  ;818438|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x38:
                        JSL.L CODE_81A94A                    ;818439|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81843D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81843D|20C387  |8187C3;
                        RTS                                  ;818440|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x39:
                        JSL.L CODE_81A94A                    ;818441|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818445|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818445|20C387  |8187C3;
                        RTS                                  ;818448|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x3A:
                        JSL.L CODE_81A94A                    ;818449|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81844D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81844D|20C387  |8187C3;
                        RTS                                  ;818450|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x3B:
                        JSL.L CODE_81A94A                    ;818451|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818455|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818455|20C387  |8187C3;
                        RTS                                  ;818458|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x3C:
                        JSL.L CODE_81A94A                    ;818459|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81845D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81845D|20C387  |8187C3;
                        RTS                                  ;818460|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x3D:
                        JSL.L CODE_81A94A                    ;818461|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818465|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818465|20C387  |8187C3;
                        RTS                                  ;818468|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x3E:
                        JSL.L CODE_81A94A                    ;818469|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81846D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81846D|20C387  |8187C3;
                        RTS                                  ;818470|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x3F:
                        JSL.L CODE_81A94A                    ;818471|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818475|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818475|20C387  |8187C3;
                        RTS                                  ;818478|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x40:
                        JSL.L CODE_81A94A                    ;818479|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81847D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81847D|20C387  |8187C3;
                        RTS                                  ;818480|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x41:
                        JSL.L CODE_81A94A                    ;818481|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818485|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818485|20C387  |8187C3;
                        RTS                                  ;818488|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x42:
                        JSL.L CODE_81A94A                    ;818489|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;81848D|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;81848D|20C387  |8187C3;
                        RTS                                  ;818490|60      |      ;
                                                             ;      |        |      ;
+                                                            ;      |        |      ;
+  subItemCarried_0x43:
                        JSL.L CODE_81A94A                    ;818491|224AA981|81A94A;
-                       JSR.W CODE_8187C3                    ;818495|20C387  |8187C3;
+                       JSR.W fUnknown_8187C3                ;818495|20C387  |8187C3;
                        RTS                                  ;818498|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818499|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x44:
+                       JSR.W fItemHandlerMain               ;818499|202389  |818923;
                        SEP #$20                             ;81849C|E220    |      ;
                        LDA.W $0976                          ;81849E|AD7609  |000976;
                        CMP.B #$FF                           ;8184A1|C9FF    |      ;
-                       BNE CODE_8184D4                      ;8184A3|D02F    |8184D4;
+                       BNE .return                          ;8184A3|D02F    |8184D4;
                        LDA.L sShedItems+1                   ;8184A5|AF011F7F|7F1F01;
                        ORA.B #$08                           ;8184A9|0908    |      ;
                        STA.L sShedItems+1                   ;8184AB|8F011F7F|7F1F01;
                        SEP #$20                             ;8184AF|E220    |      ;
                        LDA.W $0921                          ;8184B1|AD2109  |000921;
                        CMP.B #$0C                           ;8184B4|C90C    |      ;
-                       BNE CODE_8184BB                      ;8184B6|D003    |8184BB;
+                       BNE .skip1                           ;8184B6|D003    |8184BB;
                        STZ.W $0921                          ;8184B8|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_8184BB:
+               .skip1:
                        SEP #$20                             ;8184BB|E220    |      ;
                        LDA.W $0923                          ;8184BD|AD2309  |000923;
                        CMP.B #$0C                           ;8184C0|C90C    |      ;
-                       BNE CODE_8184C7                      ;8184C2|D003    |8184C7;
+                       BNE .skip2                           ;8184C2|D003    |8184C7;
                        STZ.W $0923                          ;8184C4|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_8184C7:
+               .skip2:
                        SEP #$20                             ;8184C7|E220    |      ;
                        LDA.W $0927                          ;8184C9|AD2709  |000927;
                        CMP.B #$FF                           ;8184CC|C9FF    |      ;
-                       BEQ CODE_8184D4                      ;8184CE|F004    |8184D4;
+                       BEQ .return                          ;8184CE|F004    |8184D4;
                        INC A                                ;8184D0|1A      |      ;
                        STA.W $0927                          ;8184D1|8D2709  |000927;
                                                             ;      |        |      ;
-          CODE_8184D4:
+              .return:
                        RTS                                  ;8184D4|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8184D5|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x45:
+                       JSR.W fItemHandlerMain               ;8184D5|202389  |818923;
                        SEP #$20                             ;8184D8|E220    |      ;
                        LDA.W $0976                          ;8184DA|AD7609  |000976;
                        CMP.B #$FF                           ;8184DD|C9FF    |      ;
-                       BNE CODE_818510                      ;8184DF|D02F    |818510;
+                       BNE .return                          ;8184DF|D02F    |818510;
                        LDA.L sShedItems                     ;8184E1|AF001F7F|7F1F00;
                        ORA.B #$10                           ;8184E5|0910    |      ;
                        STA.L sShedItems                     ;8184E7|8F001F7F|7F1F00;
                        SEP #$20                             ;8184EB|E220    |      ;
                        LDA.W $0921                          ;8184ED|AD2109  |000921;
                        CMP.B #$05                           ;8184F0|C905    |      ;
-                       BNE CODE_8184F7                      ;8184F2|D003    |8184F7;
+                       BNE .skip1                           ;8184F2|D003    |8184F7;
                        STZ.W $0921                          ;8184F4|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_8184F7:
+               .skip1:
                        SEP #$20                             ;8184F7|E220    |      ;
                        LDA.W $0923                          ;8184F9|AD2309  |000923;
                        CMP.B #$05                           ;8184FC|C905    |      ;
-                       BNE CODE_818503                      ;8184FE|D003    |818503;
+                       BNE .skip2                           ;8184FE|D003    |818503;
                        STZ.W $0923                          ;818500|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_818503:
+               .skip2:
                        SEP #$20                             ;818503|E220    |      ;
                        LDA.W $0928                          ;818505|AD2809  |000928;
                        CMP.B #$FF                           ;818508|C9FF    |      ;
-                       BEQ CODE_818510                      ;81850A|F004    |818510;
+                       BEQ .return                          ;81850A|F004    |818510;
                        INC A                                ;81850C|1A      |      ;
                        STA.W $0928                          ;81850D|8D2809  |000928;
                                                             ;      |        |      ;
-          CODE_818510:
+              .return:
                        RTS                                  ;818510|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818511|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x46:
+                       JSR.W fItemHandlerMain               ;818511|202389  |818923;
                        SEP #$20                             ;818514|E220    |      ;
                        LDA.W $0976                          ;818516|AD7609  |000976;
                        CMP.B #$FF                           ;818519|C9FF    |      ;
-                       BNE CODE_81854C                      ;81851B|D02F    |81854C;
+                       BNE .return                          ;81851B|D02F    |81854C;
                        LDA.L sShedItems                     ;81851D|AF001F7F|7F1F00;
                        ORA.B #$20                           ;818521|0920    |      ;
                        STA.L sShedItems                     ;818523|8F001F7F|7F1F00;
                        SEP #$20                             ;818527|E220    |      ;
                        LDA.W $0921                          ;818529|AD2109  |000921;
                        CMP.B #$06                           ;81852C|C906    |      ;
-                       BNE CODE_818533                      ;81852E|D003    |818533;
+                       BNE .skip1                           ;81852E|D003    |818533;
                        STZ.W $0921                          ;818530|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_818533:
+               .skip1:
                        SEP #$20                             ;818533|E220    |      ;
                        LDA.W $0923                          ;818535|AD2309  |000923;
                        CMP.B #$06                           ;818538|C906    |      ;
-                       BNE CODE_81853F                      ;81853A|D003    |81853F;
+                       BNE .skip2                           ;81853A|D003    |81853F;
                        STZ.W $0923                          ;81853C|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_81853F:
+               .skip2:
                        SEP #$20                             ;81853F|E220    |      ;
                        LDA.W $0929                          ;818541|AD2909  |000929;
                        CMP.B #$FF                           ;818544|C9FF    |      ;
-                       BEQ CODE_81854C                      ;818546|F004    |81854C;
+                       BEQ .return                          ;818546|F004    |81854C;
                        INC A                                ;818548|1A      |      ;
                        STA.W $0929                          ;818549|8D2909  |000929;
                                                             ;      |        |      ;
-          CODE_81854C:
+              .return:
                        RTS                                  ;81854C|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;81854D|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x47:
+                       JSR.W fItemHandlerMain               ;81854D|202389  |818923;
                        SEP #$20                             ;818550|E220    |      ;
                        LDA.W $0976                          ;818552|AD7609  |000976;
                        CMP.B #$FF                           ;818555|C9FF    |      ;
-                       BNE CODE_818588                      ;818557|D02F    |818588;
+                       BNE .return                          ;818557|D02F    |818588;
                        LDA.L sShedItems                     ;818559|AF001F7F|7F1F00;
                        ORA.B #$40                           ;81855D|0940    |      ;
                        STA.L sShedItems                     ;81855F|8F001F7F|7F1F00;
                        SEP #$20                             ;818563|E220    |      ;
                        LDA.W $0921                          ;818565|AD2109  |000921;
                        CMP.B #$07                           ;818568|C907    |      ;
-                       BNE CODE_81856F                      ;81856A|D003    |81856F;
+                       BNE .skip1                           ;81856A|D003    |81856F;
                        STZ.W $0921                          ;81856C|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_81856F:
+               .skip1:
                        SEP #$20                             ;81856F|E220    |      ;
                        LDA.W $0923                          ;818571|AD2309  |000923;
                        CMP.B #$07                           ;818574|C907    |      ;
-                       BNE CODE_81857B                      ;818576|D003    |81857B;
+                       BNE .skip2                           ;818576|D003    |81857B;
                        STZ.W $0923                          ;818578|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_81857B:
+               .skip2:
                        SEP #$20                             ;81857B|E220    |      ;
                        LDA.W $092A                          ;81857D|AD2A09  |00092A;
                        CMP.B #$FF                           ;818580|C9FF    |      ;
-                       BEQ CODE_818588                      ;818582|F004    |818588;
+                       BEQ .return                          ;818582|F004    |818588;
                        INC A                                ;818584|1A      |      ;
                        STA.W $092A                          ;818585|8D2A09  |00092A;
                                                             ;      |        |      ;
-          CODE_818588:
+              .return:
                        RTS                                  ;818588|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818589|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x48:
+                       JSR.W fItemHandlerMain               ;818589|202389  |818923;
                        SEP #$20                             ;81858C|E220    |      ;
                        LDA.W $0976                          ;81858E|AD7609  |000976;
                        CMP.B #$FF                           ;818591|C9FF    |      ;
-                       BNE CODE_8185C4                      ;818593|D02F    |8185C4;
+                       BNE .return                          ;818593|D02F    |8185C4;
                        LDA.L sShedItems                     ;818595|AF001F7F|7F1F00;
                        ORA.B #$80                           ;818599|0980    |      ;
                        STA.L sShedItems                     ;81859B|8F001F7F|7F1F00;
                        SEP #$20                             ;81859F|E220    |      ;
                        LDA.W $0921                          ;8185A1|AD2109  |000921;
                        CMP.B #$08                           ;8185A4|C908    |      ;
-                       BNE CODE_8185AB                      ;8185A6|D003    |8185AB;
+                       BNE .jump1                           ;8185A6|D003    |8185AB;
                        STZ.W $0921                          ;8185A8|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_8185AB:
+               .jump1:
                        SEP #$20                             ;8185AB|E220    |      ;
                        LDA.W $0923                          ;8185AD|AD2309  |000923;
                        CMP.B #$08                           ;8185B0|C908    |      ;
-                       BNE CODE_8185B7                      ;8185B2|D003    |8185B7;
+                       BNE .jump2                           ;8185B2|D003    |8185B7;
                        STZ.W $0923                          ;8185B4|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_8185B7:
+               .jump2:
                        SEP #$20                             ;8185B7|E220    |      ;
                        LDA.W $092B                          ;8185B9|AD2B09  |00092B;
                        CMP.B #$FF                           ;8185BC|C9FF    |      ;
-                       BEQ CODE_8185C4                      ;8185BE|F004    |8185C4;
+                       BEQ .return                          ;8185BE|F004    |8185C4;
                        INC A                                ;8185C0|1A      |      ;
                        STA.W $092B                          ;8185C1|8D2B09  |00092B;
                                                             ;      |        |      ;
-          CODE_8185C4:
+              .return:
                        RTS                                  ;8185C4|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8185C5|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x49:
+                       JSR.W fItemHandlerMain               ;8185C5|202389  |818923;
                        SEP #$20                             ;8185C8|E220    |      ;
                        LDA.W $0976                          ;8185CA|AD7609  |000976;
                        CMP.B #$FF                           ;8185CD|C9FF    |      ;
-                       BNE CODE_8185DE                      ;8185CF|D00D    |8185DE;
+                       BNE .return                          ;8185CF|D00D    |8185DE;
                        SEP #$20                             ;8185D1|E220    |      ;
                        STZ.W $0976                          ;8185D3|9C7609  |000976;
                        LDA.B #$19                           ;8185D6|A919    |      ;
-                       STA.W $0984                          ;8185D8|8D8409  |000984;
+                       STA.W nHeldItemId                    ;8185D8|8D8409  |000984;
                        STA.W $091D                          ;8185DB|8D1D09  |00091D;
                                                             ;      |        |      ;
-          CODE_8185DE:
+              .return:
                        RTS                                  ;8185DE|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8185DF|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x4A:
+                       JSR.W fItemHandlerMain               ;8185DF|202389  |818923;
                        SEP #$20                             ;8185E2|E220    |      ;
                        LDA.W $0976                          ;8185E4|AD7609  |000976;
                        CMP.B #$FF                           ;8185E7|C9FF    |      ;
-                       BNE CODE_8185F5                      ;8185E9|D00A    |8185F5;
+                       BNE .return                          ;8185E9|D00A    |8185F5;
                        LDA.L sShedItems+1                   ;8185EB|AF011F7F|7F1F01;
                        ORA.B #$10                           ;8185EF|0910    |      ;
                        STA.L sShedItems+1                   ;8185F1|8F011F7F|7F1F01;
                                                             ;      |        |      ;
-          CODE_8185F5:
+              .return:
                        RTS                                  ;8185F5|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8185F6|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x4B:
+                       JSR.W fItemHandlerMain               ;8185F6|202389  |818923;
                        SEP #$20                             ;8185F9|E220    |      ;
                        LDA.W $0976                          ;8185FB|AD7609  |000976;
                        CMP.B #$FF                           ;8185FE|C9FF    |      ;
-                       BNE CODE_81860C                      ;818600|D00A    |81860C;
+                       BNE .return                          ;818600|D00A    |81860C;
                        LDA.L sShedItems+1                   ;818602|AF011F7F|7F1F01;
                        ORA.B #$20                           ;818606|0920    |      ;
                        STA.L sShedItems+1                   ;818608|8F011F7F|7F1F01;
                                                             ;      |        |      ;
-          CODE_81860C:
+              .return:
                        RTS                                  ;81860C|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;81860D|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x4C:
+                       JSR.W fItemHandlerMain               ;81860D|202389  |818923;
                        SEP #$20                             ;818610|E220    |      ;
                        LDA.W $0976                          ;818612|AD7609  |000976;
                        CMP.B #$FF                           ;818615|C9FF    |      ;
-                       BNE CODE_818623                      ;818617|D00A    |818623;
+                       BNE .return                          ;818617|D00A    |818623;
                        LDA.L sShedItems+1                   ;818619|AF011F7F|7F1F01;
                        ORA.B #$40                           ;81861D|0940    |      ;
                        STA.L sShedItems+1                   ;81861F|8F011F7F|7F1F01;
                                                             ;      |        |      ;
-          CODE_818623:
+              .return:
                        RTS                                  ;818623|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818624|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x4D:
+                       JSR.W fItemHandlerMain               ;818624|202389  |818923;
                        SEP #$20                             ;818627|E220    |      ;
                        LDA.W $0976                          ;818629|AD7609  |000976;
                        CMP.B #$FF                           ;81862C|C9FF    |      ;
-                       BNE CODE_81865A                      ;81862E|D02A    |81865A;
+                       BNE .return                          ;81862E|D02A    |81865A;
                        LDA.L sShedItems+2                   ;818630|AF021F7F|7F1F02;
                        ORA.B #$01                           ;818634|0901    |      ;
                        STA.L sShedItems+2                   ;818636|8F021F7F|7F1F02;
@@ -858,24 +1008,26 @@
                        STA.L sShedItems                     ;818640|8F001F7F|7F1F00;
                        LDA.W $0921                          ;818644|AD2109  |000921;
                        CMP.B #$01                           ;818647|C901    |      ;
-                       BNE CODE_81864E                      ;818649|D003    |81864E;
+                       BNE .jump                            ;818649|D003    |81864E;
                        STZ.W $0921                          ;81864B|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_81864E:
+                .jump:
                        SEP #$20                             ;81864E|E220    |      ;
                        LDA.W $0923                          ;818650|AD2309  |000923;
                        CMP.B #$01                           ;818653|C901    |      ;
-                       BNE CODE_81865A                      ;818655|D003    |81865A;
+                       BNE .return                          ;818655|D003    |81865A;
                        STZ.W $0923                          ;818657|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_81865A:
+              .return:
                        RTS                                  ;81865A|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;81865B|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x4E:
+                       JSR.W fItemHandlerMain               ;81865B|202389  |818923;
                        SEP #$20                             ;81865E|E220    |      ;
                        LDA.W $0976                          ;818660|AD7609  |000976;
                        CMP.B #$FF                           ;818663|C9FF    |      ;
-                       BNE CODE_818691                      ;818665|D02A    |818691;
+                       BNE .return                          ;818665|D02A    |818691;
                        LDA.L sShedItems+2                   ;818667|AF021F7F|7F1F02;
                        ORA.B #$02                           ;81866B|0902    |      ;
                        STA.L sShedItems+2                   ;81866D|8F021F7F|7F1F02;
@@ -884,24 +1036,26 @@
                        STA.L sShedItems                     ;818677|8F001F7F|7F1F00;
                        LDA.W $0921                          ;81867B|AD2109  |000921;
                        CMP.B #$02                           ;81867E|C902    |      ;
-                       BNE CODE_818685                      ;818680|D003    |818685;
+                       BNE .jump                            ;818680|D003    |818685;
                        STZ.W $0921                          ;818682|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_818685:
+                .jump:
                        SEP #$20                             ;818685|E220    |      ;
                        LDA.W $0923                          ;818687|AD2309  |000923;
                        CMP.B #$02                           ;81868A|C902    |      ;
-                       BNE CODE_818691                      ;81868C|D003    |818691;
+                       BNE .return                          ;81868C|D003    |818691;
                        STZ.W $0923                          ;81868E|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_818691:
+              .return:
                        RTS                                  ;818691|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818692|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x4F:
+                       JSR.W fItemHandlerMain               ;818692|202389  |818923;
                        SEP #$20                             ;818695|E220    |      ;
                        LDA.W $0976                          ;818697|AD7609  |000976;
                        CMP.B #$FF                           ;81869A|C9FF    |      ;
-                       BNE CODE_8186C8                      ;81869C|D02A    |8186C8;
+                       BNE .return                          ;81869C|D02A    |8186C8;
                        LDA.L sShedItems+2                   ;81869E|AF021F7F|7F1F02;
                        ORA.B #$04                           ;8186A2|0904    |      ;
                        STA.L sShedItems+2                   ;8186A4|8F021F7F|7F1F02;
@@ -910,24 +1064,26 @@
                        STA.L sShedItems                     ;8186AE|8F001F7F|7F1F00;
                        LDA.W $0921                          ;8186B2|AD2109  |000921;
                        CMP.B #$03                           ;8186B5|C903    |      ;
-                       BNE CODE_8186BC                      ;8186B7|D003    |8186BC;
+                       BNE .jump                            ;8186B7|D003    |8186BC;
                        STZ.W $0921                          ;8186B9|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_8186BC:
+                .jump:
                        SEP #$20                             ;8186BC|E220    |      ;
                        LDA.W $0923                          ;8186BE|AD2309  |000923;
                        CMP.B #$03                           ;8186C1|C903    |      ;
-                       BNE CODE_8186C8                      ;8186C3|D003    |8186C8;
+                       BNE .return                          ;8186C3|D003    |8186C8;
                        STZ.W $0923                          ;8186C5|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_8186C8:
+              .return:
                        RTS                                  ;8186C8|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;8186C9|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x50:
+                       JSR.W fItemHandlerMain               ;8186C9|202389  |818923;
                        SEP #$20                             ;8186CC|E220    |      ;
                        LDA.W $0976                          ;8186CE|AD7609  |000976;
                        CMP.B #$FF                           ;8186D1|C9FF    |      ;
-                       BNE CODE_8186FF                      ;8186D3|D02A    |8186FF;
+                       BNE .return                          ;8186D3|D02A    |8186FF;
                        LDA.L sShedItems+2                   ;8186D5|AF021F7F|7F1F02;
                        ORA.B #$08                           ;8186D9|0908    |      ;
                        STA.L sShedItems+2                   ;8186DB|8F021F7F|7F1F02;
@@ -936,24 +1092,26 @@
                        STA.L sShedItems                     ;8186E5|8F001F7F|7F1F00;
                        LDA.W $0921                          ;8186E9|AD2109  |000921;
                        CMP.B #$04                           ;8186EC|C904    |      ;
-                       BNE CODE_8186F3                      ;8186EE|D003    |8186F3;
+                       BNE .jump                            ;8186EE|D003    |8186F3;
                        STZ.W $0921                          ;8186F0|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_8186F3:
+                .jump:
                        SEP #$20                             ;8186F3|E220    |      ;
                        LDA.W $0923                          ;8186F5|AD2309  |000923;
                        CMP.B #$04                           ;8186F8|C904    |      ;
-                       BNE CODE_8186FF                      ;8186FA|D003    |8186FF;
+                       BNE .return                          ;8186FA|D003    |8186FF;
                        STZ.W $0923                          ;8186FC|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_8186FF:
+              .return:
                        RTS                                  ;8186FF|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818700|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x51:
+                       JSR.W fItemHandlerMain               ;818700|202389  |818923;
                        SEP #$20                             ;818703|E220    |      ;
                        LDA.W $0976                          ;818705|AD7609  |000976;
                        CMP.B #$FF                           ;818708|C9FF    |      ;
-                       BNE CODE_818736                      ;81870A|D02A    |818736;
+                       BNE .return                          ;81870A|D02A    |818736;
                        LDA.L sShedItems+2                   ;81870C|AF021F7F|7F1F02;
                        ORA.B #$10                           ;818710|0910    |      ;
                        STA.L sShedItems+2                   ;818712|8F021F7F|7F1F02;
@@ -962,108 +1120,124 @@
                        STA.L sShedItems+1                   ;81871C|8F011F7F|7F1F01;
                        LDA.W $0921                          ;818720|AD2109  |000921;
                        CMP.B #$10                           ;818723|C910    |      ;
-                       BNE CODE_81872A                      ;818725|D003    |81872A;
+                       BNE .jump                            ;818725|D003    |81872A;
                        STZ.W $0921                          ;818727|9C2109  |000921;
                                                             ;      |        |      ;
-          CODE_81872A:
+                .jump:
                        SEP #$20                             ;81872A|E220    |      ;
                        LDA.W $0923                          ;81872C|AD2309  |000923;
                        CMP.B #$10                           ;81872F|C910    |      ;
-                       BNE CODE_818736                      ;818731|D003    |818736;
+                       BNE .return                          ;818731|D003    |818736;
                        STZ.W $0923                          ;818733|9C2309  |000923;
                                                             ;      |        |      ;
-          CODE_818736:
+              .return:
                        RTS                                  ;818736|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818737|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x52:
+                       JSR.W fItemHandlerMain               ;818737|202389  |818923;
                        SEP #$20                             ;81873A|E220    |      ;
                        LDA.W $0976                          ;81873C|AD7609  |000976;
                        CMP.B #$FF                           ;81873F|C9FF    |      ;
-                       BNE CODE_81874D                      ;818741|D00A    |81874D;
+                       BNE .return                          ;818741|D00A    |81874D;
                        LDA.L sShedItems+1                   ;818743|AF011F7F|7F1F01;
                        ORA.B #$01                           ;818747|0901    |      ;
                        STA.L sShedItems+1                   ;818749|8F011F7F|7F1F01;
                                                             ;      |        |      ;
-          CODE_81874D:
+              .return:
                        RTS                                  ;81874D|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;81874E|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x53:
+                       JSR.W fItemHandlerMain               ;81874E|202389  |818923;
                        SEP #$20                             ;818751|E220    |      ;
                        LDA.W $0976                          ;818753|AD7609  |000976;
                        CMP.B #$FF                           ;818756|C9FF    |      ;
-                       BNE CODE_818764                      ;818758|D00A    |818764;
+                       BNE .return                          ;818758|D00A    |818764;
                        LDA.L sShedItems+1                   ;81875A|AF011F7F|7F1F01;
                        ORA.B #$02                           ;81875E|0902    |      ;
                        STA.L sShedItems+1                   ;818760|8F011F7F|7F1F01;
                                                             ;      |        |      ;
-          CODE_818764:
+              .return:
                        RTS                                  ;818764|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818765|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x54:
+                       JSR.W fItemHandlerMain               ;818765|202389  |818923;
                        SEP #$20                             ;818768|E220    |      ;
                        LDA.W $0976                          ;81876A|AD7609  |000976;
                        CMP.B #$FF                           ;81876D|C9FF    |      ;
-                       BNE CODE_818780                      ;81876F|D00F    |818780;
+                       BNE .return                          ;81876F|D00F    |818780;
                        LDA.L sShedItems+3                   ;818771|AF031F7F|7F1F03;
                        ORA.B #$01                           ;818775|0901    |      ;
                        STA.L sShedItems+3                   ;818777|8F031F7F|7F1F03;
                        LDA.B #$0C                           ;81877B|A90C    |      ;
                        STA.W $092D                          ;81877D|8D2D09  |00092D;
                                                             ;      |        |      ;
-          CODE_818780:
+              .return:
                        RTS                                  ;818780|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;818781|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x55:
+                       JSR.W fItemHandlerMain               ;818781|202389  |818923;
                        SEP #$20                             ;818784|E220    |      ;
                        LDA.W $0976                          ;818786|AD7609  |000976;
                        CMP.B #$FF                           ;818789|C9FF    |      ;
-                       BNE CODE_81879C                      ;81878B|D00F    |81879C;
+                       BNE .return                          ;81878B|D00F    |81879C;
                        LDA.L sShedItems+3                   ;81878D|AF031F7F|7F1F03;
                        ORA.B #$02                           ;818791|0902    |      ;
                        STA.L sShedItems+3                   ;818793|8F031F7F|7F1F03;
                        LDA.B #$0C                           ;818797|A90C    |      ;
                        STA.W $092C                          ;818799|8D2C09  |00092C;
                                                             ;      |        |      ;
-          CODE_81879C:
+              .return:
                        RTS                                  ;81879C|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_818923                    ;81879D|202389  |818923;
+                                                            ;      |        |      ;
+  subItemCarried_0x56:
+                       JSR.W fItemHandlerMain               ;81879D|202389  |818923;
                        SEP #$20                             ;8187A0|E220    |      ;
                        LDA.W $0976                          ;8187A2|AD7609  |000976;
                        CMP.B #$FF                           ;8187A5|C9FF    |      ;
-                       BNE CODE_8187B6                      ;8187A7|D00D    |8187B6;
+                       BNE .return                          ;8187A7|D00D    |8187B6;
                        SEP #$20                             ;8187A9|E220    |      ;
                        STZ.W $0976                          ;8187AB|9C7609  |000976;
                        LDA.B #$06                           ;8187AE|A906    |      ;
-                       STA.W $0984                          ;8187B0|8D8409  |000984;
+                       STA.W nHeldItemId                    ;8187B0|8D8409  |000984;
                        STA.W $091D                          ;8187B3|8D1D09  |00091D;
                                                             ;      |        |      ;
-          CODE_8187B6:
+              .return:
                        RTS                                  ;8187B6|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;8187B7|20E588  |8188E5;
+                                                            ;      |        |      ;
+  subItemCarried_0x58:
+                       JSR.W fUnknown_8188E5                ;8187B7|20E588  |8188E5;
                        RTS                                  ;8187BA|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;8187BB|20E588  |8188E5;
+                                                            ;      |        |      ;
+  subItemCarried_0x59:
+                       JSR.W fUnknown_8188E5                ;8187BB|20E588  |8188E5;
                        RTS                                  ;8187BE|60      |      ;
                                                             ;      |        |      ;
-                       JSR.W CODE_8188E5                    ;8187BF|20E588  |8188E5;
+                                                            ;      |        |      ;
+  subItemCarried_0x5A:
+                       JSR.W fUnknown_8188E5                ;8187BF|20E588  |8188E5;
                        RTS                                  ;8187C2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8187C3:
+      fUnknown_8187C3:
                        SEP #$20                             ;8187C3|E220    |      ;
                        REP #$10                             ;8187C5|C210    |      ;
                        LDA.W $0923                          ;8187C7|AD2309  |000923;
-                       BNE CODE_8187D2                      ;8187CA|D006    |8187D2;
+                       BNE .skip                            ;8187CA|D006    |8187D2;
                        LDA.W $0921                          ;8187CC|AD2109  |000921;
                        STA.W $0923                          ;8187CF|8D2309  |000923;
                                                             ;      |        |      ;
-          CODE_8187D2:
+                .skip:
                        SEP #$20                             ;8187D2|E220    |      ;
                        LDA.B #$00                           ;8187D4|A900    |      ;
                        XBA                                  ;8187D6|EB      |      ;
-                       LDA.W $0984                          ;8187D7|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8187D7|AD8409  |000984;
                        SEC                                  ;8187DA|38      |      ;
                        SBC.B #$29                           ;8187DB|E929    |      ;
                        STA.W $0921                          ;8187DD|8D2109  |000921;
@@ -1102,23 +1276,23 @@
                        REP #$20                             ;818821|C220    |      ;
                        LDA.W $0978                          ;818823|AD7809  |000978;
                        STA.B $A5                            ;818826|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818828|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;81882C|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;818828|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;81882C|22F1A481|81A4F1;
                        SEP #$20                             ;818830|E220    |      ;
                        STZ.W $091D                          ;818832|9C1D09  |00091D;
                        JSL.L CODE_828FF3                    ;818835|22F38F82|828FF3;
                        RTS                                  ;818839|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81883A:
+      fUnknown_81883A:
                        SEP #$20                             ;81883A|E220    |      ;
                        REP #$10                             ;81883C|C210    |      ;
                        LDA.W $0976                          ;81883E|AD7609  |000976;
-                       BNE CODE_818846                      ;818841|D003    |818846;
+                       BNE .skip                            ;818841|D003    |818846;
                        JMP.W CODE_819010                    ;818843|4C1090  |819010;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818846:
+                .skip:
                        CMP.B #$02                           ;818846|C902    |      ;
                        BNE CODE_81884D                      ;818848|D003    |81884D;
                        JMP.W CODE_819228                    ;81884A|4C2892  |819228;
@@ -1126,75 +1300,75 @@
                                                             ;      |        |      ;
           CODE_81884D:
                        CMP.B #$03                           ;81884D|C903    |      ;
-                       BNE CODE_818854                      ;81884F|D003    |818854;
+                       BNE .return                          ;81884F|D003    |818854;
                        JMP.W CODE_818E1B                    ;818851|4C1B8E  |818E1B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818854:
+              .return:
                        RTS                                  ;818854|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818855:
+      fUnknown_818855:
                        SEP #$20                             ;818855|E220    |      ;
                        REP #$10                             ;818857|C210    |      ;
                        LDA.W $0976                          ;818859|AD7609  |000976;
-                       BNE CODE_818861                      ;81885C|D003    |818861;
-                       JMP.W CODE_818B6B                    ;81885E|4C6B8B  |818B6B;
+                       BNE .not00                           ;81885C|D003    |818861;
+                       JMP.W fCase0of0976                   ;81885E|4C6B8B  |818B6B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818861:
+               .not00:
                        CMP.B #$01                           ;818861|C901    |      ;
-                       BNE CODE_818868                      ;818863|D003    |818868;
-                       JMP.W CODE_818BA5                    ;818865|4CA58B  |818BA5;
+                       BNE .not01                           ;818863|D003    |818868;
+                       JMP.W fCase1of0976                   ;818865|4CA58B  |818BA5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818868:
+               .not01:
                        CMP.B #$02                           ;818868|C902    |      ;
-                       BNE CODE_81886F                      ;81886A|D003    |81886F;
-                       JMP.W CODE_819049                    ;81886C|4C4990  |819049;
+                       BNE .not02                           ;81886A|D003    |81886F;
+                       JMP.W fCase2of0976                   ;81886C|4C4990  |819049;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81886F:
+               .not02:
                        CMP.B #$03                           ;81886F|C903    |      ;
-                       BNE CODE_818876                      ;818871|D003    |818876;
-                       JMP.W CODE_819379                    ;818873|4C7993  |819379;
+                       BNE .not03                           ;818871|D003    |818876;
+                       JMP.W fCase3of0976                   ;818873|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818876:
+               .not03:
                        CMP.B #$04                           ;818876|C904    |      ;
-                       BNE CODE_81887D                      ;818878|D003    |81887D;
-                       JMP.W CODE_81968F                    ;81887A|4C8F96  |81968F;
+                       BNE .not04                           ;818878|D003    |81887D;
+                       JMP.W fCase4of0976                   ;81887A|4C8F96  |81968F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81887D:
+               .not04:
                        CMP.B #$05                           ;81887D|C905    |      ;
-                       BNE CODE_818884                      ;81887F|D003    |818884;
-                       JMP.W CODE_818F2A                    ;818881|4C2A8F  |818F2A;
+                       BNE .not05                           ;81887F|D003    |818884;
+                       JMP.W fCase5of0976                   ;818881|4C2A8F  |818F2A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818884:
+               .not05:
                        CMP.B #$06                           ;818884|C906    |      ;
-                       BNE CODE_81888B                      ;818886|D003    |81888B;
-                       JMP.W CODE_818F5A                    ;818888|4C5A8F  |818F5A;
+                       BNE .not06                           ;818886|D003    |81888B;
+                       JMP.W fCase6of0976                   ;818888|4C5A8F  |818F5A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81888B:
+               .not06:
                        CMP.B #$07                           ;81888B|C907    |      ;
-                       BNE CODE_818892                      ;81888D|D003    |818892;
-                       JMP.W CODE_819695                    ;81888F|4C9596  |819695;
+                       BNE .not07                           ;81888D|D003    |818892;
+                       JMP.W fCase7of0976                   ;81888F|4C9596  |819695;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818892:
+               .not07:
                        CMP.B #$08                           ;818892|C908    |      ;
-                       BNE CODE_818899                      ;818894|D003    |818899;
+                       BNE .return                          ;818894|D003    |818899;
                        JMP.W CODE_819021                    ;818896|4C2190  |819021;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818899:
+              .return:
                        RTS                                  ;818899|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81889A:
+      fUnknown_81889A:
                        SEP #$20                             ;81889A|E220    |      ;
                        REP #$10                             ;81889C|C210    |      ;
                        LDA.W $0976                          ;81889E|AD7609  |000976;
@@ -1224,7 +1398,7 @@
                        RTS                                  ;8188BB|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8188BC:
+      fUnknown_8188BC:
                        SEP #$20                             ;8188BC|E220    |      ;
                        REP #$10                             ;8188BE|C210    |      ;
                        LDA.W $0976                          ;8188C0|AD7609  |000976;
@@ -1235,7 +1409,7 @@
           CODE_8188C8:
                        CMP.B #$02                           ;8188C8|C902    |      ;
                        BNE CODE_8188CF                      ;8188CA|D003    |8188CF;
-                       JMP.W CODE_819049                    ;8188CC|4C4990  |819049;
+                       JMP.W fCase2of0976                   ;8188CC|4C4990  |819049;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_8188CF:
@@ -1247,7 +1421,7 @@
           CODE_8188D6:
                        CMP.B #$04                           ;8188D6|C904    |      ;
                        BNE CODE_8188DD                      ;8188D8|D003    |8188DD;
-                       JMP.W CODE_81968F                    ;8188DA|4C8F96  |81968F;
+                       JMP.W fCase4of0976                   ;8188DA|4C8F96  |81968F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_8188DD:
@@ -1260,7 +1434,7 @@
                        RTS                                  ;8188E4|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8188E5:
+      fUnknown_8188E5:
                        SEP #$20                             ;8188E5|E220    |      ;
                        REP #$10                             ;8188E7|C210    |      ;
                        LDA.W $0976                          ;8188E9|AD7609  |000976;
@@ -1271,37 +1445,37 @@
           CODE_8188F1:
                        CMP.B #$02                           ;8188F1|C902    |      ;
                        BNE CODE_8188F8                      ;8188F3|D003    |8188F8;
-                       JMP.W CODE_819049                    ;8188F5|4C4990  |819049;
+                       JMP.W fCase2of0976                   ;8188F5|4C4990  |819049;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_8188F8:
                        CMP.B #$03                           ;8188F8|C903    |      ;
                        BNE CODE_8188FF                      ;8188FA|D003    |8188FF;
-                       JMP.W CODE_819379                    ;8188FC|4C7993  |819379;
+                       JMP.W fCase3of0976                   ;8188FC|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_8188FF:
                        CMP.B #$04                           ;8188FF|C904    |      ;
                        BNE CODE_818906                      ;818901|D003    |818906;
-                       JMP.W CODE_81968F                    ;818903|4C8F96  |81968F;
+                       JMP.W fCase4of0976                   ;818903|4C8F96  |81968F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818906:
                        CMP.B #$05                           ;818906|C905    |      ;
                        BNE CODE_81890D                      ;818908|D003    |81890D;
-                       JMP.W CODE_818F2A                    ;81890A|4C2A8F  |818F2A;
+                       JMP.W fCase5of0976                   ;81890A|4C2A8F  |818F2A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_81890D:
                        CMP.B #$06                           ;81890D|C906    |      ;
                        BNE CODE_818914                      ;81890F|D003    |818914;
-                       JMP.W CODE_818F5A                    ;818911|4C5A8F  |818F5A;
+                       JMP.W fCase6of0976                   ;818911|4C5A8F  |818F5A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818914:
                        CMP.B #$07                           ;818914|C907    |      ;
                        BNE CODE_81891B                      ;818916|D003    |81891B;
-                       JMP.W CODE_819695                    ;818918|4C9596  |819695;
+                       JMP.W fCase7of0976                   ;818918|4C9596  |819695;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_81891B:
@@ -1314,7 +1488,7 @@
                        RTS                                  ;818922|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818923:
+     fItemHandlerMain:
                        SEP #$20                             ;818923|E220    |      ;
                        REP #$10                             ;818925|C210    |      ;
                        LDA.W $0976                          ;818927|AD7609  |000976;
@@ -1341,7 +1515,7 @@
                        LDA.B #$02                           ;818941|A902    |      ;
                        STA.W $019A                          ;818943|8D9A01  |00019A;
                        SEP #$20                             ;818946|E220    |      ;
-                       LDA.W $0984                          ;818948|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818948|AD8409  |000984;
                        CMP.B #$44                           ;81894B|C944    |      ;
                        BCS CODE_818957                      ;81894D|B008    |818957;
                        SEC                                  ;81894F|38      |      ;
@@ -1356,7 +1530,7 @@
                        REP #$10                             ;818959|C210    |      ;
                        LDA.B #$00                           ;81895B|A900    |      ;
                        XBA                                  ;81895D|EB      |      ;
-                       LDA.W $0984                          ;81895E|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81895E|AD8409  |000984;
                        SEC                                  ;818961|38      |      ;
                        SBC.B #$44                           ;818962|E944    |      ;
                                                             ;      |        |      ;
@@ -1374,7 +1548,7 @@
                        SEP #$20                             ;818974|E220    |      ;
                        LDA.B #$00                           ;818976|A900    |      ;
                        STA.W $0191                          ;818978|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81897B|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81897B|225F9383|83935F;
                        SEP #$20                             ;81897F|E220    |      ;
                        LDA.B #$01                           ;818981|A901    |      ;
                        STA.W $0976                          ;818983|8D7609  |000976;
@@ -1397,7 +1571,7 @@
                                                             ;      |        |      ;
           CODE_81899D:
                        SEP #$20                             ;81899D|E220    |      ;
-                       LDA.W $0984                          ;81899F|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81899F|AD8409  |000984;
                        CMP.B #$44                           ;8189A2|C944    |      ;
                        BCS CODE_8189AE                      ;8189A4|B008    |8189AE;
                        SEC                                  ;8189A6|38      |      ;
@@ -1412,7 +1586,7 @@
                        REP #$10                             ;8189B0|C210    |      ;
                        LDA.B #$00                           ;8189B2|A900    |      ;
                        XBA                                  ;8189B4|EB      |      ;
-                       LDA.W $0984                          ;8189B5|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8189B5|AD8409  |000984;
                        SEC                                  ;8189B8|38      |      ;
                        SBC.B #$44                           ;8189B9|E944    |      ;
                                                             ;      |        |      ;
@@ -1450,7 +1624,7 @@
                        LDA.B #$02                           ;8189ED|A902    |      ;
                        STA.W $019A                          ;8189EF|8D9A01  |00019A;
                        SEP #$20                             ;8189F2|E220    |      ;
-                       LDA.W $0984                          ;8189F4|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8189F4|AD8409  |000984;
                        CMP.B #$44                           ;8189F7|C944    |      ;
                        BCS CODE_818A03                      ;8189F9|B008    |818A03;
                        SEC                                  ;8189FB|38      |      ;
@@ -1465,7 +1639,7 @@
                        REP #$10                             ;818A05|C210    |      ;
                        LDA.B #$00                           ;818A07|A900    |      ;
                        XBA                                  ;818A09|EB      |      ;
-                       LDA.W $0984                          ;818A0A|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818A0A|AD8409  |000984;
                        SEC                                  ;818A0D|38      |      ;
                        SBC.B #$44                           ;818A0E|E944    |      ;
                                                             ;      |        |      ;
@@ -1486,7 +1660,7 @@
                        SEP #$20                             ;818A26|E220    |      ;
                        LDA.B #$00                           ;818A28|A900    |      ;
                        STA.W $0191                          ;818A2A|8D9101  |000191;
-                       JSL.L DialogRelated                  ;818A2D|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;818A2D|225F9383|83935F;
                        REP #$20                             ;818A31|C220    |      ;
                        LDA.B $80                            ;818A33|A580    |000080;
                        BEQ CODE_818A3A                      ;818A35|F003    |818A3A;
@@ -1512,7 +1686,7 @@
                        LDA.B #$02                           ;818A50|A902    |      ;
                        STA.W $019A                          ;818A52|8D9A01  |00019A;
                        SEP #$20                             ;818A55|E220    |      ;
-                       LDA.W $0984                          ;818A57|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818A57|AD8409  |000984;
                        CMP.B #$44                           ;818A5A|C944    |      ;
                        BCS CODE_818A66                      ;818A5C|B008    |818A66;
                        SEC                                  ;818A5E|38      |      ;
@@ -1527,7 +1701,7 @@
                        REP #$10                             ;818A68|C210    |      ;
                        LDA.B #$00                           ;818A6A|A900    |      ;
                        XBA                                  ;818A6C|EB      |      ;
-                       LDA.W $0984                          ;818A6D|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818A6D|AD8409  |000984;
                        SEC                                  ;818A70|38      |      ;
                        SBC.B #$44                           ;818A71|E944    |      ;
                                                             ;      |        |      ;
@@ -1547,7 +1721,7 @@
                        SEP #$20                             ;818A87|E220    |      ;
                        LDA.B #$00                           ;818A89|A900    |      ;
                        STA.W $0191                          ;818A8B|8D9101  |000191;
-                       JSL.L DialogRelated                  ;818A8E|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;818A8E|225F9383|83935F;
                        BRA CODE_818AA0                      ;818A92|800C    |818AA0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1563,7 +1737,7 @@
                        REP #$20                             ;818AA0|C220    |      ;
                        LDA.W $0978                          ;818AA2|AD7809  |000978;
                        STA.B $A5                            ;818AA5|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818AA7|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;818AA7|22A28185|8581A2;
                        REP #$30                             ;818AAB|C230    |      ;
                        LDA.W #$0000                         ;818AAD|A90000  |      ;
                        STA.B $D4                            ;818AB0|85D4    |0000D4;
@@ -1572,16 +1746,16 @@
                        EOR.W #$FFFF                         ;818AB7|49FFFF  |      ;
                        AND.B $D2                            ;818ABA|25D2    |0000D2;
                        STA.B $D2                            ;818ABC|85D2    |0000D2;
-                       JSL.L CODE_81A4F1                    ;818ABE|22F1A481|81A4F1;
+                       JSL.L fUnknown_81A4F1                ;818ABE|22F1A481|81A4F1;
                        SEP #$20                             ;818AC2|E220    |      ;
                        STZ.W $091D                          ;818AC4|9C1D09  |00091D;
                        REP #$20                             ;818AC7|C220    |      ;
                        LDA.W #$0001                         ;818AC9|A90100  |      ;
                        LDX.W #$0006                         ;818ACC|A20600  |      ;
                        LDY.W #$0006                         ;818ACF|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;818AD2|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;818AD2|224ED181|81D14E;
                        SEP #$20                             ;818AD6|E220    |      ;
-                       LDA.W $0984                          ;818AD8|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818AD8|AD8409  |000984;
                        CMP.B #$44                           ;818ADB|C944    |      ;
                        BCS CODE_818AE7                      ;818ADD|B008    |818AE7;
                        SEC                                  ;818ADF|38      |      ;
@@ -1596,7 +1770,7 @@
                        REP #$10                             ;818AE9|C210    |      ;
                        LDA.B #$00                           ;818AEB|A900    |      ;
                        XBA                                  ;818AED|EB      |      ;
-                       LDA.W $0984                          ;818AEE|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818AEE|AD8409  |000984;
                        SEC                                  ;818AF1|38      |      ;
                        SBC.B #$44                           ;818AF2|E944    |      ;
                                                             ;      |        |      ;
@@ -1618,7 +1792,7 @@
                        XBA                                  ;818B0C|EB      |      ;
                        LDX.W $0985                          ;818B0D|AE8509  |000985;
                        LDY.W $0987                          ;818B10|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;818B13|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;818B13|2288A681|81A688;
                        BRA CODE_818B6A                      ;818B17|8051    |818B6A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1631,7 +1805,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818B25:
-                       LDA.W $0984                          ;818B25|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818B25|AD8409  |000984;
                        CMP.B #$49                           ;818B28|C949    |      ;
                        BEQ CODE_818B63                      ;818B2A|F037    |818B63;
                        CMP.B #$56                           ;818B2C|C956    |      ;
@@ -1645,7 +1819,7 @@
                        REP #$20                             ;818B3C|C220    |      ;
                        LDA.W $0978                          ;818B3E|AD7809  |000978;
                        STA.B $A5                            ;818B41|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818B43|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;818B43|22A28185|8581A2;
                        REP #$30                             ;818B47|C230    |      ;
                        LDA.W #$0000                         ;818B49|A90000  |      ;
                        STA.B $D4                            ;818B4C|85D4    |0000D4;
@@ -1654,7 +1828,7 @@
                        EOR.W #$FFFF                         ;818B53|49FFFF  |      ;
                        AND.B $D2                            ;818B56|25D2    |0000D2;
                        STA.B $D2                            ;818B58|85D2    |0000D2;
-                       JSL.L CODE_81A4F1                    ;818B5A|22F1A481|81A4F1;
+                       JSL.L fUnknown_81A4F1                ;818B5A|22F1A481|81A4F1;
                        SEP #$20                             ;818B5E|E220    |      ;
                        STZ.W $091D                          ;818B60|9C1D09  |00091D;
                                                             ;      |        |      ;
@@ -1667,14 +1841,14 @@
                        RTS                                  ;818B6A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818B6B:
+         fCase0of0976:
                        REP #$30                             ;818B6B|C230    |      ;
                        LDY.W #$0001                         ;818B6D|A00100  |      ;
-                       JSL.L CODE_8180B7                    ;818B70|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;818B70|22B78081|8180B7;
                        SEP #$20                             ;818B74|E220    |      ;
                        LDA.B #$00                           ;818B76|A900    |      ;
                        XBA                                  ;818B78|EB      |      ;
-                       LDA.W $0984                          ;818B79|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818B79|AD8409  |000984;
                        DEC A                                ;818B7C|3A      |      ;
                        REP #$20                             ;818B7D|C220    |      ;
                        STA.B $7E                            ;818B7F|857E    |00007E;
@@ -1689,14 +1863,14 @@
                        STA.W $019A                          ;818B8F|8D9A01  |00019A;
                        LDA.B #$00                           ;818B92|A900    |      ;
                        STA.W $0191                          ;818B94|8D9101  |000191;
-                       JSL.L DialogRelated                  ;818B97|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;818B97|225F9383|83935F;
                        SEP #$20                             ;818B9B|E220    |      ;
                        LDA.B #$01                           ;818B9D|A901    |      ;
                        STA.W $0976                          ;818B9F|8D7609  |000976;
                        JMP.W CODE_818C23                    ;818BA2|4C238C  |818C23;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818BA5:
+         fCase1of0976:
                        SEP #$20                             ;818BA5|E220    |      ;
                        LDA.W $019A                          ;818BA7|AD9A01  |00019A;
                        CMP.B #$02                           ;818BAA|C902    |      ;
@@ -1722,14 +1896,14 @@
                        REP #$20                             ;818BCC|C220    |      ;
                        LDA.W $0978                          ;818BCE|AD7809  |000978;
                        STA.B $A5                            ;818BD1|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818BD3|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;818BD7|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;818BD3|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;818BD7|22F1A481|81A4F1;
                        SEP #$20                             ;818BDB|E220    |      ;
                        STZ.W $091D                          ;818BDD|9C1D09  |00091D;
                        SEP #$20                             ;818BE0|E220    |      ;
                        LDA.B #$00                           ;818BE2|A900    |      ;
                        XBA                                  ;818BE4|EB      |      ;
-                       LDA.W $0984                          ;818BE5|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818BE5|AD8409  |000984;
                        DEC A                                ;818BE8|3A      |      ;
                        REP #$20                             ;818BE9|C220    |      ;
                        STA.B $7E                            ;818BEB|857E    |00007E;
@@ -1769,11 +1943,11 @@
           CODE_818C24:
                        REP #$20                             ;818C24|C220    |      ;
                        LDA.B nPlayerPosX                    ;818C26|A5D6    |0000D6;
-                       STA.W $0980                          ;818C28|8D8009  |000980;
+                       STA.W nUnknownX                      ;818C28|8D8009  |000980;
                        LDA.B nPlayerPosY                    ;818C2B|A5D8    |0000D8;
                        INC A                                ;818C2D|1A      |      ;
                        INC A                                ;818C2E|1A      |      ;
-                       STA.W $0982                          ;818C2F|8D8209  |000982;
+                       STA.W nUnknownY                      ;818C2F|8D8209  |000982;
                        REP #$30                             ;818C32|C230    |      ;
                        LDA.B $D4                            ;818C34|A5D4    |0000D4;
                        CMP.W #$0003                         ;818C36|C90300  |      ;
@@ -1784,7 +1958,7 @@
           CODE_818C3E:
                        REP #$30                             ;818C3E|C230    |      ;
                        LDY.W #$0001                         ;818C40|A00100  |      ;
-                       JSL.L CODE_8180B7                    ;818C43|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;818C43|22B78081|8180B7;
                        SEP #$20                             ;818C47|E220    |      ;
                        LDA.W $0974                          ;818C49|AD7409  |000974;
                        AND.B #$FB                           ;818C4C|29FB    |      ;
@@ -1799,7 +1973,7 @@
                        AND.B #$04                           ;818C5A|2904    |      ;
                        BNE CODE_818C71                      ;818C5C|D013    |818C71;
                        LDY.W #$000B                         ;818C5E|A00B00  |      ;
-                       JSL.L CODE_8180B7                    ;818C61|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;818C61|22B78081|8180B7;
                        SEP #$20                             ;818C65|E220    |      ;
                        LDA.W $0974                          ;818C67|AD7409  |000974;
                        ORA.B #$04                           ;818C6A|0904    |      ;
@@ -1830,7 +2004,7 @@
                        LDA.W #$0001                         ;818C93|A90100  |      ;
                        LDX.W #$0006                         ;818C96|A20600  |      ;
                        LDY.W #$0006                         ;818C99|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;818C9C|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;818C9C|224ED181|81D14E;
                        REP #$30                             ;818CA0|C230    |      ;
                        LDX.W $0985                          ;818CA2|AE8509  |000985;
                        LDY.W $0987                          ;818CA5|AC8709  |000987;
@@ -1886,7 +2060,7 @@
                        CLC                                  ;818D1C|18      |      ;
                        ADC.B $DA                            ;818D1D|65DA    |0000DA;
                        TAY                                  ;818D1F|A8      |      ;
-                       JSL.L CODE_8180B7                    ;818D20|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;818D20|22B78081|8180B7;
                        SEP #$20                             ;818D24|E220    |      ;
                        LDA.B #$03                           ;818D26|A903    |      ;
                        STA.W $0976                          ;818D28|8D7609  |000976;
@@ -1905,7 +2079,7 @@
                        LDA.W #$0001                         ;818D3A|A90100  |      ;
                        LDX.W #$0006                         ;818D3D|A20600  |      ;
                        LDY.W #$0006                         ;818D40|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;818D43|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;818D43|224ED181|81D14E;
                        REP #$30                             ;818D47|C230    |      ;
                        LDX.W $0985                          ;818D49|AE8509  |000985;
                        LDY.W $0987                          ;818D4C|AC8709  |000987;
@@ -1954,11 +2128,11 @@
                        LDA.W #$0001                         ;818DAD|A90100  |      ;
                        LDX.W #$0006                         ;818DB0|A20600  |      ;
                        LDY.W #$0006                         ;818DB3|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;818DB6|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;818DB6|224ED181|81D14E;
                        SEP #$20                             ;818DBA|E220    |      ;
                        LDA.B #$00                           ;818DBC|A900    |      ;
                        XBA                                  ;818DBE|EB      |      ;
-                       LDA.W $0984                          ;818DBF|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818DBF|AD8409  |000984;
                        REP #$20                             ;818DC2|C220    |      ;
                        ASL A                                ;818DC4|0A      |      ;
                        TAX                                  ;818DC5|AA      |      ;
@@ -1966,12 +2140,12 @@
                        LDA.L nShippingProfitMoneyTable,X    ;818DC8|BFDE9F81|819FDE;
                        LDX.W $0985                          ;818DCC|AE8509  |000985;
                        LDY.W $0987                          ;818DCF|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;818DD2|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;818DD2|2288A681|81A688;
                        REP #$20                             ;818DD6|C220    |      ;
                        LDA.W $0978                          ;818DD8|AD7809  |000978;
                        STA.B $A5                            ;818DDB|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818DDD|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;818DE1|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;818DDD|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;818DE1|22F1A481|81A4F1;
                        SEP #$20                             ;818DE5|E220    |      ;
                        STZ.W $091D                          ;818DE7|9C1D09  |00091D;
                        BRA CODE_818E1A                      ;818DEA|802E    |818E1A;
@@ -1982,12 +2156,12 @@
                        ASL A                                ;818DEE|0A      |      ;
                        ASL A                                ;818DEF|0A      |      ;
                        TAX                                  ;818DF0|AA      |      ;
-                       LDA.L nUnknown_0980_32b_ValuesTable,X;818DF1|BF63A381|81A363;
-                       STA.W $0980                          ;818DF5|8D8009  |000980;
+                       LDA.L nUnknownXYTable,X              ;818DF1|BF63A381|81A363;
+                       STA.W nUnknownX                      ;818DF5|8D8009  |000980;
                        INX                                  ;818DF8|E8      |      ;
                        INX                                  ;818DF9|E8      |      ;
-                       LDA.L nUnknown_0980_32b_ValuesTable,X;818DFA|BF63A381|81A363;
-                       STA.W $0982                          ;818DFE|8D8209  |000982;
+                       LDA.L nUnknownXYTable,X              ;818DFA|BF63A381|81A363;
+                       STA.W nUnknownY                      ;818DFE|8D8209  |000982;
                        LDA.W #$00CA                         ;818E01|A9CA00  |      ;
                        STA.W $097A                          ;818E04|8D7A09  |00097A;
                        SEP #$20                             ;818E07|E220    |      ;
@@ -1999,7 +2173,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818E16:
-                       JSL.L CODE_81A4F1                    ;818E16|22F1A481|81A4F1;
+                       JSL.L fUnknown_81A4F1                ;818E16|22F1A481|81A4F1;
                                                             ;      |        |      ;
           CODE_818E1A:
                        RTS                                  ;818E1A|60      |      ;
@@ -2056,11 +2230,11 @@
                        REP #$30                             ;818E81|C230    |      ;
                        LDA.W $0978                          ;818E83|AD7809  |000978;
                        STA.B $A5                            ;818E86|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818E88|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;818E8C|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;818E88|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;818E8C|22F1A481|81A4F1;
                        SEP #$20                             ;818E90|E220    |      ;
                        STZ.W $091D                          ;818E92|9C1D09  |00091D;
-                       JMP.W CODE_8196AE                    ;818E95|4CAE96  |8196AE;
+                       JMP.W $96AE                          ;818E95|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818E98:
@@ -2070,7 +2244,7 @@
                        LDA.W #$0001                         ;818E9F|A90100  |      ;
                        LDX.W #$0006                         ;818EA2|A20600  |      ;
                        LDY.W #$0006                         ;818EA5|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;818EA8|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;818EA8|224ED181|81D14E;
                        REP #$30                             ;818EAC|C230    |      ;
                        LDX.W $0985                          ;818EAE|AE8509  |000985;
                        LDY.W $0987                          ;818EB1|AC8709  |000987;
@@ -2083,19 +2257,19 @@
                        BEQ CODE_818ECC                      ;818EC3|F007    |818ECC;
                        CMP.B #$28                           ;818EC5|C928    |      ;
                        BEQ CODE_818EFB                      ;818EC7|F032    |818EFB;
-                       JMP.W CODE_819379                    ;818EC9|4C7993  |819379;
+                       JMP.W fCase3of0976                   ;818EC9|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818ECC:
                        CPX.W #$00E2                         ;818ECC|E0E200  |      ;
                        BCS CODE_818ED4                      ;818ECF|B003    |818ED4;
-                       JMP.W CODE_819379                    ;818ED1|4C7993  |819379;
+                       JMP.W fCase3of0976                   ;818ED1|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818ED4:
                        CPX.W #$00EF                         ;818ED4|E0EF00  |      ;
                        BCC CODE_818EDC                      ;818ED7|9003    |818EDC;
-                       JMP.W CODE_819379                    ;818ED9|4C7993  |819379;
+                       JMP.W fCase3of0976                   ;818ED9|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818EDC:
@@ -2118,13 +2292,13 @@
           CODE_818EFB:
                        CPX.W #$00E2                         ;818EFB|E0E200  |      ;
                        BCS CODE_818F03                      ;818EFE|B003    |818F03;
-                       JMP.W CODE_819379                    ;818F00|4C7993  |819379;
+                       JMP.W fCase3of0976                   ;818F00|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818F03:
                        CPX.W #$00EF                         ;818F03|E0EF00  |      ;
                        BCC CODE_818F0B                      ;818F06|9003    |818F0B;
-                       JMP.W CODE_819379                    ;818F08|4C7993  |819379;
+                       JMP.W fCase3of0976                   ;818F08|4C7993  |819379;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_818F0B:
@@ -2144,13 +2318,13 @@
                        JMP.W CODE_818DAB                    ;818F27|4CAB8D  |818DAB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818F2A:
+         fCase5of0976:
                        SEP #$20                             ;818F2A|E220    |      ;
                        LDA.B #$02                           ;818F2C|A902    |      ;
                        STA.W $019A                          ;818F2E|8D9A01  |00019A;
                        LDA.B #$00                           ;818F31|A900    |      ;
                        XBA                                  ;818F33|EB      |      ;
-                       LDA.W $0984                          ;818F34|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818F34|AD8409  |000984;
                        REP #$20                             ;818F37|C220    |      ;
                        STA.B $7E                            ;818F39|857E    |00007E;
                        ASL A                                ;818F3B|0A      |      ;
@@ -2162,14 +2336,14 @@
                        SEP #$20                             ;818F45|E220    |      ;
                        LDA.B #$00                           ;818F47|A900    |      ;
                        STA.W $0191                          ;818F49|8D9101  |000191;
-                       JSL.L DialogRelated                  ;818F4C|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;818F4C|225F9383|83935F;
                        SEP #$20                             ;818F50|E220    |      ;
                        LDA.B #$06                           ;818F52|A906    |      ;
                        STA.W $0976                          ;818F54|8D7609  |000976;
                        JMP.W CODE_81900F                    ;818F57|4C0F90  |81900F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_818F5A:
+         fCase6of0976:
                        SEP #$20                             ;818F5A|E220    |      ;
                        LDA.W $019A                          ;818F5C|AD9A01  |00019A;
                        CMP.B #$02                           ;818F5F|C902    |      ;
@@ -2186,7 +2360,7 @@
           CODE_818F6E:
                        LDA.B #$00                           ;818F6E|A900    |      ;
                        XBA                                  ;818F70|EB      |      ;
-                       LDA.W $0984                          ;818F71|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818F71|AD8409  |000984;
                        REP #$20                             ;818F74|C220    |      ;
                        STA.B $7E                            ;818F76|857E    |00007E;
                        ASL A                                ;818F78|0A      |      ;
@@ -2202,16 +2376,16 @@
                        LDX.W #$02FA                         ;818F8D|A2FA02  |      ;
                        LDA.B #$00                           ;818F90|A900    |      ;
                        STA.W $0191                          ;818F92|8D9101  |000191;
-                       JSL.L DialogRelated                  ;818F95|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;818F95|225F9383|83935F;
                        REP #$20                             ;818F99|C220    |      ;
                        LDA.W $0978                          ;818F9B|AD7809  |000978;
                        STA.B $A5                            ;818F9E|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;818FA0|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;818FA4|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;818FA0|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;818FA4|22F1A481|81A4F1;
                        SEP #$20                             ;818FA8|E220    |      ;
                        LDA.B #$00                           ;818FAA|A900    |      ;
                        XBA                                  ;818FAC|EB      |      ;
-                       LDA.W $0984                          ;818FAD|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;818FAD|AD8409  |000984;
                        REP #$20                             ;818FB0|C220    |      ;
                        STA.B $7E                            ;818FB2|857E    |00007E;
                        ASL A                                ;818FB4|0A      |      ;
@@ -2241,16 +2415,16 @@
                        LDX.W #$0303                         ;818FDE|A20303  |      ;
                        LDA.B #$00                           ;818FE1|A900    |      ;
                        STA.W $0191                          ;818FE3|8D9101  |000191;
-                       JSL.L DialogRelated                  ;818FE6|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;818FE6|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_818FEA:
                        REP #$20                             ;818FEA|C220    |      ;
                        LDY.W #$0001                         ;818FEC|A00100  |      ;
-                       JSL.L CODE_8180B7                    ;818FEF|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;818FEF|22B78081|8180B7;
                        LDA.W $090B                          ;818FF3|AD0B09  |00090B;
-                       STA.W $0980                          ;818FF6|8D8009  |000980;
+                       STA.W nUnknownX                      ;818FF6|8D8009  |000980;
                        LDA.W $090D                          ;818FF9|AD0D09  |00090D;
-                       STA.W $0982                          ;818FFC|8D8209  |000982;
+                       STA.W nUnknownY                      ;818FFC|8D8209  |000982;
                        SEP #$20                             ;818FFF|E220    |      ;
                        LDA.B #$02                           ;819001|A902    |      ;
                        STA.W $0976                          ;819003|8D7609  |000976;
@@ -2266,7 +2440,7 @@
           CODE_819010:
                        REP #$30                             ;819010|C230    |      ;
                        LDY.W #$0001                         ;819012|A00100  |      ;
-                       JSL.L CODE_8180B7                    ;819015|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819015|22B78081|8180B7;
                        SEP #$20                             ;819019|E220    |      ;
                        LDA.B #$02                           ;81901B|A902    |      ;
                        STA.W $0976                          ;81901D|8D7609  |000976;
@@ -2277,8 +2451,8 @@
                        REP #$30                             ;819021|C230    |      ;
                        LDA.W $0978                          ;819023|AD7809  |000978;
                        STA.B $A5                            ;819026|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;819028|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;81902C|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;819028|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;81902C|22F1A481|81A4F1;
                        SEP #$20                             ;819030|E220    |      ;
                        STZ.W $091D                          ;819032|9C1D09  |00091D;
                        REP #$30                             ;819035|C230    |      ;
@@ -2292,14 +2466,14 @@
                        RTS                                  ;819048|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_819049:
+         fCase2of0976:
                        REP #$20                             ;819049|C220    |      ;
                        LDA.B nPlayerPosX                    ;81904B|A5D6    |0000D6;
-                       STA.W $0980                          ;81904D|8D8009  |000980;
+                       STA.W nUnknownX                      ;81904D|8D8009  |000980;
                        LDA.B nPlayerPosY                    ;819050|A5D8    |0000D8;
                        INC A                                ;819052|1A      |      ;
                        INC A                                ;819053|1A      |      ;
-                       STA.W $0982                          ;819054|8D8209  |000982;
+                       STA.W nUnknownY                      ;819054|8D8209  |000982;
                        REP #$30                             ;819057|C230    |      ;
                        LDA.B $D4                            ;819059|A5D4    |0000D4;
                        CMP.W #$0003                         ;81905B|C90300  |      ;
@@ -2310,7 +2484,7 @@
           CODE_819063:
                        REP #$30                             ;819063|C230    |      ;
                        LDY.W #$0001                         ;819065|A00100  |      ;
-                       JSL.L CODE_8180B7                    ;819068|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819068|22B78081|8180B7;
                        SEP #$20                             ;81906C|E220    |      ;
                        LDA.W $0974                          ;81906E|AD7409  |000974;
                        AND.B #$FB                           ;819071|29FB    |      ;
@@ -2325,7 +2499,7 @@
                        AND.B #$04                           ;81907F|2904    |      ;
                        BNE CODE_819096                      ;819081|D013    |819096;
                        LDY.W #$000B                         ;819083|A00B00  |      ;
-                       JSL.L CODE_8180B7                    ;819086|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819086|22B78081|8180B7;
                        SEP #$20                             ;81908A|E220    |      ;
                        LDA.W $0974                          ;81908C|AD7409  |000974;
                        ORA.B #$04                           ;81908F|0904    |      ;
@@ -2409,7 +2583,7 @@
                        LDA.W #$0001                         ;81910E|A90100  |      ;
                        LDX.W #$0000                         ;819111|A20000  |      ;
                        LDY.W #$0000                         ;819114|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;819117|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;819117|224ED181|81D14E;
                        REP #$20                             ;81911B|C220    |      ;
                        LDA.W #$0000                         ;81911D|A90000  |      ;
                        LDX.W $0985                          ;819120|AE8509  |000985;
@@ -2424,7 +2598,7 @@
                        SEP #$20                             ;819132|E220    |      ;
                        LDA.B #$00                           ;819134|A900    |      ;
                        XBA                                  ;819136|EB      |      ;
-                       LDA.W $0984                          ;819137|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;819137|AD8409  |000984;
                        REP #$20                             ;81913A|C220    |      ;
                        STA.B $7E                            ;81913C|857E    |00007E;
                        ASL A                                ;81913E|0A      |      ;
@@ -2439,11 +2613,11 @@
           CODE_81914C:
                        REP #$20                             ;81914C|C220    |      ;
                        LDA.W $0985                          ;81914E|AD8509  |000985;
-                       STA.W $0980                          ;819151|8D8009  |000980;
+                       STA.W nUnknownX                      ;819151|8D8009  |000980;
                        LDA.W $0987                          ;819154|AD8709  |000987;
-                       STA.W $0982                          ;819157|8D8209  |000982;
+                       STA.W nUnknownY                      ;819157|8D8209  |000982;
                        LDY.W #$0000                         ;81915A|A00000  |      ;
-                       JSL.L CODE_8180B7                    ;81915D|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;81915D|22B78081|8180B7;
                        SEP #$20                             ;819161|E220    |      ;
                        LDA.B #$05                           ;819163|A905    |      ;
                        STA.W $0976                          ;819165|8D7609  |000976;
@@ -2464,7 +2638,7 @@
                        CLC                                  ;819183|18      |      ;
                        ADC.B $DA                            ;819184|65DA    |0000DA;
                        TAY                                  ;819186|A8      |      ;
-                       JSL.L CODE_8180B7                    ;819187|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819187|22B78081|8180B7;
                        SEP #$20                             ;81918B|E220    |      ;
                        LDA.B #$03                           ;81918D|A903    |      ;
                        STA.W $0976                          ;81918F|8D7609  |000976;
@@ -2476,23 +2650,23 @@
                        LDA.W #$0001                         ;819197|A90100  |      ;
                        LDX.W #$0000                         ;81919A|A20000  |      ;
                        LDY.W #$0000                         ;81919D|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;8191A0|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8191A0|224ED181|81D14E;
                        REP #$20                             ;8191A4|C220    |      ;
                        LDA.W $0985                          ;8191A6|AD8509  |000985;
-                       STA.W $0980                          ;8191A9|8D8009  |000980;
+                       STA.W nUnknownX                      ;8191A9|8D8009  |000980;
                        LDA.W $0987                          ;8191AC|AD8709  |000987;
-                       STA.W $0982                          ;8191AF|8D8209  |000982;
+                       STA.W nUnknownY                      ;8191AF|8D8209  |000982;
                        LDY.W #$0000                         ;8191B2|A00000  |      ;
-                       JSL.L CODE_8180B7                    ;8191B5|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;8191B5|22B78081|8180B7;
                        REP #$30                             ;8191B9|C230    |      ;
                        LDA.L $7F1F5C                        ;8191BB|AF5C1F7F|7F1F5C;
                        AND.W #$0010                         ;8191BF|291000  |      ;
-                       BEQ CODE_819220                      ;8191C2|F05C    |819220;
+                       BEQ $5C                              ;8191C2|F05C    |819220;
                        SEP #$20                             ;8191C4|E220    |      ;
                        REP #$10                             ;8191C6|C210    |      ;
                        LDA.B #$00                           ;8191C8|A900    |      ;
                        XBA                                  ;8191CA|EB      |      ;
-                       LDA.W $0984                          ;8191CB|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8191CB|AD8409  |000984;
                        REP #$20                             ;8191CE|C220    |      ;
                        ASL A                                ;8191D0|0A      |      ;
                        TAX                                  ;8191D1|AA      |      ;
@@ -2500,13 +2674,13 @@
                        SEP #$20                             ;8191D3|E220    |      ;
                        LDA.L nShippingProfitMoneyTable,X    ;8191D5|BFDE9F81|819FDE;
                        BNE AddProfit                        ;8191D9|D003    |8191DE;
-                       JMP.W CODE_819220                    ;8191DB|4C2092  |819220;
+                       JMP.W $9220                          ;8191DB|4C2092  |819220;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
             AddProfit:
                        LDA.L nCurrentTimeID                 ;8191DE|AF1C1F7F|7F1F1C;
                        CMP.B #$11                           ;8191E2|C911    |      ;
-                       BCS CODE_819220                      ;8191E4|B03A    |819220;
+                       BCS $3A                              ;8191E4|B03A    |819220;
                        SEP #$20                             ;8191E6|E220    |      ;
                        LDA.B #$00                           ;8191E8|A900    |      ;
                        XBA                                  ;8191EA|EB      |      ;
@@ -2527,8 +2701,6 @@
                        LDA.L $7F1F5C                        ;819215|AF5C1F7F|7F1F5C;
                        ORA.W #$0040                         ;819219|094000  |      ;
                        STA.L $7F1F5C                        ;81921C|8F5C1F7F|7F1F5C;
-                                                            ;      |        |      ;
-          CODE_819220:
                        SEP #$20                             ;819220|E220    |      ;
                        LDA.B #$08                           ;819222|A908    |      ;
                        STA.W $0976                          ;819224|8D7609  |000976;
@@ -2540,11 +2712,11 @@
           CODE_819228:
                        REP #$20                             ;819228|C220    |      ;
                        LDA.B nPlayerPosX                    ;81922A|A5D6    |0000D6;
-                       STA.W $0980                          ;81922C|8D8009  |000980;
+                       STA.W nUnknownX                      ;81922C|8D8009  |000980;
                        LDA.B nPlayerPosY                    ;81922F|A5D8    |0000D8;
                        INC A                                ;819231|1A      |      ;
                        INC A                                ;819232|1A      |      ;
-                       STA.W $0982                          ;819233|8D8209  |000982;
+                       STA.W nUnknownY                      ;819233|8D8209  |000982;
                        REP #$30                             ;819236|C230    |      ;
                        LDA.B $D4                            ;819238|A5D4    |0000D4;
                        CMP.W #$0003                         ;81923A|C90300  |      ;
@@ -2555,7 +2727,7 @@
           CODE_819242:
                        REP #$30                             ;819242|C230    |      ;
                        LDY.W #$0001                         ;819244|A00100  |      ;
-                       JSL.L CODE_8180B7                    ;819247|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819247|22B78081|8180B7;
                        SEP #$20                             ;81924B|E220    |      ;
                        LDA.W $0974                          ;81924D|AD7409  |000974;
                        AND.B #$FB                           ;819250|29FB    |      ;
@@ -2570,7 +2742,7 @@
                        AND.B #$04                           ;81925E|2904    |      ;
                        BNE CODE_819275                      ;819260|D013    |819275;
                        LDY.W #$000B                         ;819262|A00B00  |      ;
-                       JSL.L CODE_8180B7                    ;819265|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819265|22B78081|8180B7;
                        SEP #$20                             ;819269|E220    |      ;
                        LDA.W $0974                          ;81926B|AD7409  |000974;
                        ORA.B #$04                           ;81926E|0904    |      ;
@@ -2619,7 +2791,7 @@
                        LDA.W #$0000                         ;8192BA|A90000  |      ;
                        LDX.W #$0007                         ;8192BD|A20700  |      ;
                        LDY.W #$0007                         ;8192C0|A00700  |      ;
-                       JSL.L CODE_81D14E                    ;8192C3|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8192C3|224ED181|81D14E;
                        REP #$20                             ;8192C7|C220    |      ;
                        LDA.W #$0002                         ;8192C9|A90200  |      ;
                        LDX.W $0985                          ;8192CC|AE8509  |000985;
@@ -2642,7 +2814,7 @@
                        LDA.W #$0001                         ;8192E9|A90100  |      ;
                        LDX.W #$000A                         ;8192EC|A20A00  |      ;
                        LDY.W #$000A                         ;8192EF|A00A00  |      ;
-                       JSL.L CODE_81D14E                    ;8192F2|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8192F2|224ED181|81D14E;
                        REP #$20                             ;8192F6|C220    |      ;
                        LDA.W #$0002                         ;8192F8|A90200  |      ;
                        LDX.W $0985                          ;8192FB|AE8509  |000985;
@@ -2665,7 +2837,7 @@
                        LDA.W #$0001                         ;819318|A90100  |      ;
                        LDX.W #$0000                         ;81931B|A20000  |      ;
                        LDY.W #$0000                         ;81931E|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;819321|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;819321|224ED181|81D14E;
                        REP #$20                             ;819325|C220    |      ;
                        LDA.W #$0002                         ;819327|A90200  |      ;
                        LDX.W $0985                          ;81932A|AE8509  |000985;
@@ -2703,7 +2875,7 @@
                        CLC                                  ;81935E|18      |      ;
                        ADC.B $DA                            ;81935F|65DA    |0000DA;
                        TAY                                  ;819361|A8      |      ;
-                       JSL.L CODE_8180B7                    ;819362|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819362|22B78081|8180B7;
                        SEP #$20                             ;819366|E220    |      ;
                        LDA.B #$03                           ;819368|A903    |      ;
                        STA.W $0976                          ;81936A|8D7609  |000976;
@@ -2721,7 +2893,7 @@
                        RTS                                  ;819378|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_819379:
+         fCase3of0976:
                        SEP #$20                             ;819379|E220    |      ;
                        REP #$10                             ;81937B|C210    |      ;
                        LDA.B $22                            ;81937D|A522    |000022;
@@ -2751,7 +2923,7 @@
                        LDA.W #$0002                         ;819399|A90200  |      ;
                        LDX.W #$0000                         ;81939C|A20000  |      ;
                        LDY.W #$0000                         ;81939F|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;8193A2|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8193A2|224ED181|81D14E;
                        REP #$20                             ;8193A6|C220    |      ;
                        LDA.W #$0000                         ;8193A8|A90000  |      ;
                        LDX.W $0985                          ;8193AB|AE8509  |000985;
@@ -2771,7 +2943,7 @@
                        REP #$10                             ;8193C1|C210    |      ;
                        LDA.B #$00                           ;8193C3|A900    |      ;
                        XBA                                  ;8193C5|EB      |      ;
-                       LDA.W $0984                          ;8193C6|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;8193C6|AD8409  |000984;
                        REP #$20                             ;8193C9|C220    |      ;
                        ASL A                                ;8193CB|0A      |      ;
                        TAX                                  ;8193CC|AA      |      ;
@@ -2807,7 +2979,7 @@
                        REP #$20                             ;81940E|C220    |      ;
                        LDA.W $0978                          ;819410|AD7809  |000978;
                        STA.B $A5                            ;819413|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;819415|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;819415|22A28185|8581A2;
                        SEP #$20                             ;819419|E220    |      ;
                        LDA.B $22                            ;81941B|A522    |000022;
                        CMP.B #$27                           ;81941D|C927    |      ;
@@ -2835,7 +3007,7 @@
                        STA.B $D2                            ;819445|85D2    |0000D2;
                        SEP #$20                             ;819447|E220    |      ;
                        STZ.W $091D                          ;819449|9C1D09  |00091D;
-                       JMP.W CODE_8196AE                    ;81944C|4CAE96  |8196AE;
+                       JMP.W $96AE                          ;81944C|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_81944F:
@@ -2852,7 +3024,7 @@
                        STA.B $D2                            ;819469|85D2    |0000D2;
                        SEP #$20                             ;81946B|E220    |      ;
                        STZ.W $091D                          ;81946D|9C1D09  |00091D;
-                       JMP.W CODE_8196AE                    ;819470|4CAE96  |8196AE;
+                       JMP.W $96AE                          ;819470|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_819473:
@@ -2869,7 +3041,7 @@
                        STA.B $D2                            ;81948D|85D2    |0000D2;
                        SEP #$20                             ;81948F|E220    |      ;
                        STZ.W $091D                          ;819491|9C1D09  |00091D;
-                       JMP.W CODE_8196AE                    ;819494|4CAE96  |8196AE;
+                       JMP.W $96AE                          ;819494|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_819497:
@@ -2893,7 +3065,7 @@
                        LDA.W #$0001                         ;8194B0|A90100  |      ;
                        LDX.W #$0000                         ;8194B3|A20000  |      ;
                        LDY.W #$0000                         ;8194B6|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;8194B9|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8194B9|224ED181|81D14E;
                        REP #$20                             ;8194BD|C220    |      ;
                        LDA.W #$0000                         ;8194BF|A90000  |      ;
                        LDX.W $0985                          ;8194C2|AE8509  |000985;
@@ -2933,18 +3105,18 @@
                        LDA.W #$00A1                         ;819512|A9A100  |      ;
                        LDX.W #$00E0                         ;819515|A2E000  |      ;
                        LDY.W #$00B0                         ;819518|A0B000  |      ;
-                       JSL.L CODE_82B03A                    ;81951B|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;81951B|223AB082|82B03A;
                        REP #$30                             ;81951F|C230    |      ;
                        LDA.W $0978                          ;819521|AD7809  |000978;
                        STA.B $A5                            ;819524|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;819526|22A28185|8581A2;
-                       JSL.L CODE_81A4F1                    ;81952A|22F1A481|81A4F1;
+                       JSL.L fUnknown_8581A2                ;819526|22A28185|8581A2;
+                       JSL.L fUnknown_81A4F1                ;81952A|22F1A481|81A4F1;
                        SEP #$20                             ;81952E|E220    |      ;
                        STZ.W $091D                          ;819530|9C1D09  |00091D;
                        REP #$30                             ;819533|C230    |      ;
                        LDA.W #$0005                         ;819535|A90500  |      ;
                        JSL.L CODE_83B282                    ;819538|2282B283|83B282;
-                       JMP.W CODE_8196AE                    ;81953C|4CAE96  |8196AE;
+                       JMP.W $96AE                          ;81953C|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_81953F:
@@ -2969,7 +3141,7 @@
                        LDA.W #$0001                         ;819559|A90100  |      ;
                        LDX.W #$0006                         ;81955C|A20600  |      ;
                        LDY.W #$0006                         ;81955F|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;819562|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;819562|224ED181|81D14E;
                        REP #$30                             ;819566|C230    |      ;
                        LDX.W $0985                          ;819568|AE8509  |000985;
                        LDY.W $0987                          ;81956B|AC8709  |000987;
@@ -2998,7 +3170,7 @@
                        LDA.W #$0001                         ;819592|A90100  |      ;
                        LDX.W #$0006                         ;819595|A20600  |      ;
                        LDY.W #$0006                         ;819598|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;81959B|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;81959B|224ED181|81D14E;
                        REP #$30                             ;81959F|C230    |      ;
                        LDX.W $0985                          ;8195A1|AE8509  |000985;
                        LDY.W $0987                          ;8195A4|AC8709  |000987;
@@ -3081,12 +3253,12 @@
                        ASL A                                ;819633|0A      |      ;
                        ASL A                                ;819634|0A      |      ;
                        TAX                                  ;819635|AA      |      ;
-                       LDA.L nUnknown_0980_32b_ValuesTable,X;819636|BF63A381|81A363;
-                       STA.W $0980                          ;81963A|8D8009  |000980;
+                       LDA.L nUnknownXYTable,X              ;819636|BF63A381|81A363;
+                       STA.W nUnknownX                      ;81963A|8D8009  |000980;
                        INX                                  ;81963D|E8      |      ;
                        INX                                  ;81963E|E8      |      ;
-                       LDA.L nUnknown_0980_32b_ValuesTable,X;81963F|BF63A381|81A363;
-                       STA.W $0982                          ;819643|8D8209  |000982;
+                       LDA.L nUnknownXYTable,X              ;81963F|BF63A381|81A363;
+                       STA.W nUnknownY                      ;819643|8D8209  |000982;
                        LDA.W #$00CA                         ;819646|A9CA00  |      ;
                        STA.W $097A                          ;819649|8D7A09  |00097A;
                        SEP #$20                             ;81964C|E220    |      ;
@@ -3094,7 +3266,7 @@
                        SEP #$20                             ;819651|E220    |      ;
                        LDA.B #$04                           ;819653|A904    |      ;
                        STA.W $0976                          ;819655|8D7609  |000976;
-                       JMP.W CODE_8196AE                    ;819658|4CAE96  |8196AE;
+                       JMP.W $96AE                          ;819658|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_81965B:
@@ -3103,46 +3275,44 @@
                        STZ.W $091D                          ;81965F|9C1D09  |00091D;
                        REP #$20                             ;819662|C220    |      ;
                        LDY.W #$000A                         ;819664|A00A00  |      ;
-                       JSL.L CODE_8180B7                    ;819667|22B78081|8180B7;
+                       JSL.L fUnknown_8180B7                ;819667|22B78081|8180B7;
                        REP #$20                             ;81966B|C220    |      ;
                        LDA.W #$0002                         ;81966D|A90200  |      ;
                        LDX.W #$0000                         ;819670|A20000  |      ;
                        LDY.W #$0000                         ;819673|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;819676|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;819676|224ED181|81D14E;
                        LDA.W $0985                          ;81967A|AD8509  |000985;
-                       STA.W $0980                          ;81967D|8D8009  |000980;
+                       STA.W nUnknownX                      ;81967D|8D8009  |000980;
                        LDA.W $0987                          ;819680|AD8709  |000987;
-                       STA.W $0982                          ;819683|8D8209  |000982;
+                       STA.W nUnknownY                      ;819683|8D8209  |000982;
                        SEP #$20                             ;819686|E220    |      ;
                        LDA.B #$04                           ;819688|A904    |      ;
                        STA.W $0976                          ;81968A|8D7609  |000976;
-                       BRA CODE_8196AE                      ;81968D|801F    |8196AE;
+                       BRA $1F                              ;81968D|801F    |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81968F:
-                       JSL.L CODE_81A4F1                    ;81968F|22F1A481|81A4F1;
-                       BRA CODE_8196AE                      ;819693|8019    |8196AE;
+         fCase4of0976:
+                       JSL.L fUnknown_81A4F1                ;81968F|22F1A481|81A4F1;
+                       BRA $19                              ;819693|8019    |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_819695:
+         fCase7of0976:
                        REP #$30                             ;819695|C230    |      ;
                        LDA.B $CF                            ;819697|A5CF    |0000CF;
-                       BNE CODE_8196AE                      ;819699|D013    |8196AE;
+                       BNE $13                              ;819699|D013    |8196AE;
                        SEP #$20                             ;81969B|E220    |      ;
                        LDA.B $D1                            ;81969D|A5D1    |0000D1;
-                       BNE CODE_8196AE                      ;81969F|D00D    |8196AE;
-                       JSL.L CODE_81A4F1                    ;8196A1|22F1A481|81A4F1;
+                       BNE $0D                              ;81969F|D00D    |8196AE;
+                       JSL.L fUnknown_81A4F1                ;8196A1|22F1A481|81A4F1;
                        REP #$30                             ;8196A5|C230    |      ;
                        LDA.B $D2                            ;8196A7|A5D2    |0000D2;
                        ORA.W #$0001                         ;8196A9|090100  |      ;
                        STA.B $D2                            ;8196AC|85D2    |0000D2;
-                                                            ;      |        |      ;
-          CODE_8196AE:
                        RTS                                  ;8196AE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-         PTR24_8196AF:
-                       dl EMPTY_FFFFFF                      ;8196AF|        |FFFFFF;
+        pTable_8196AF:
+                       dl EMPTY_FFFFFF                      ;8196AF|        |FFFFFF; 91 * ptr24
                        dl DATA16_819876                     ;8196B2|        |819876;
                        dl DATA16_81989A                     ;8196B5|        |81989A;
                        dl DATA16_8198BE                     ;8196B8|        |8198BE;
@@ -3234,30 +3404,98 @@
                        dl DATA16_819BD6                     ;8197BA|        |819BD6;
                        dl DATA16_819BFA                     ;8197BD|        |819BFA;
                                                             ;      |        |      ;
-         DATA8_8197C0:
-                       db $FF,$FF,$FE,$80,$02,$81,$06,$81   ;8197C0|        |      ;
-                       db $0A,$81,$0E,$81,$12,$81,$16,$81   ;8197C8|        |      ;
-                       db $1A,$81,$1E,$81,$22,$81,$1E,$81   ;8197D0|        |      ;
-                       db $1E,$81,$26,$81,$2A,$81,$2E,$81   ;8197D8|        |      ;
-                       db $32,$81,$4A,$81,$62,$81,$7A,$81   ;8197E0|        |      ;
-                       db $92,$81,$96,$81,$9A,$81,$9E,$81   ;8197E8|        |      ;
-                       db $A2,$81,$A6,$81,$AA,$81,$AE,$81   ;8197F0|        |      ;
-                       db $C8,$81,$E2,$81,$FC,$81,$3E,$82   ;8197F8|        |      ;
-                       db $80,$82,$C2,$82,$FE,$82,$B6,$83   ;819800|        |      ;
-                       db $B7,$83,$BB,$83,$BF,$83,$C3,$83   ;819808|        |      ;
-                       db $C4,$83,$C5,$83,$C9,$83,$D1,$83   ;819810|        |      ;
-                       db $D9,$83,$E1,$83,$E9,$83,$F1,$83   ;819818|        |      ;
-                       db $F9,$83,$01,$84,$09,$84,$11,$84   ;819820|        |      ;
-                       db $19,$84,$21,$84,$29,$84,$31,$84   ;819828|        |      ;
-                       db $39,$84,$41,$84,$49,$84,$51,$84   ;819830|        |      ;
-                       db $59,$84,$61,$84,$69,$84,$71,$84   ;819838|        |      ;
-                       db $79,$84,$81,$84,$89,$84,$91,$84   ;819840|        |      ;
-                       db $99,$84,$D5,$84,$11,$85,$4D,$85   ;819848|        |      ;
-                       db $89,$85,$C5,$85,$DF,$85,$F6,$85   ;819850|        |      ;
-                       db $0D,$86,$24,$86,$5B,$86,$92,$86   ;819858|        |      ;
-                       db $C9,$86,$00,$87,$37,$87,$4E,$87   ;819860|        |      ;
-                       db $65,$87,$81,$87,$9D,$87,$2E,$81   ;819868|        |      ;
-                       db $B7,$87,$BB,$87,$BF,$87           ;819870|        |      ;
+  pItemHoldSubrutines:
+                       dw EMPTY_81FFFF                      ;8197C0|        |81FFFF; 91 * ptr16
+                       dw subItemCarried_Mushroom           ;8197C2|        |8180FE; 01
+                       dw subItemCarried_PoisonMushroom     ;8197C4|        |818102; 02
+                       dw subItemCarried_WildGrape          ;8197C6|        |818106; 03
+                       dw subItemCarried_BerryStrongSmell   ;8197C8|        |81810A; 04
+                       dw subItemCarried_MoonFlower         ;8197CA|        |81810E; 05
+                       dw subItemCarried_Cake               ;8197CC|        |818112; 06
+                       dw subItemCarried_Fish               ;8197CE|        |818116; 07
+                       dw subItemCarried_PowerBerry         ;8197D0|        |81811A; 08
+                       dw subItemCarried_Bush               ;8197D2|        |81811E; 09
+                       dw subItemCarried_Bush2              ;8197D4|        |818122; 0A
+                       dw subItemCarried_Bush               ;8197D6|        |81811E; 0B
+                       dw subItemCarried_Bush               ;8197D8|        |81811E; 0C
+                       dw subItemCarried_0x0D               ;8197DA|        |818126; 0D
+                       dw subItemCarried_0x0E               ;8197DC|        |81812A; 0E
+                       dw subItemCarried_0x57               ;8197DE|        |81812E; 0F
+                       dw subItemCarried_Corn               ;8197E0|        |818132; 10
+                       dw subItemCarried_Tomato             ;8197E2|        |81814A; 11
+                       dw subItemCarried_Potato             ;8197E4|        |818162; 12
+                       dw subItemCarried_Turnip             ;8197E6|        |81817A; 13
+                       dw subItemCarried_Egg                ;8197E8|        |818192; 14
+                       dw subItemCarried_SmallMilk          ;8197EA|        |818196; 15
+                       dw subItemCarried_MediumMilk         ;8197EC|        |81819A; 16
+                       dw subItemCarried_LargeMilk          ;8197EE|        |81819E; 17
+                       dw subItemCarried_Herb               ;8197F0|        |8181A2; 18
+                       dw subItemCarried_Flower             ;8197F2|        |8181A6; 19
+                       dw subItemCarried_Feed               ;8197F4|        |8181AA; 1A
+                       dw subItemCarried_GreenPerfume       ;8197F6|        |8181AE; 1B
+                       dw subItemCarried_RedPerfume         ;8197F8|        |8181C8; 1C
+                       dw subItemCarried_BluePerfume        ;8197FA|        |8181E2; 1D
+                       dw subItemCarried_RedEgg             ;8197FC|        |8181FC; 1E
+                       dw subItemCarried_LightPurpleEgg     ;8197FE|        |81823E; 1F
+                       dw subItemCarried_BlueEgg            ;819800|        |818280; 20
+                       dw subItemCarried_PurpleEgg          ;819802|        |8182C2; 21
+                       dw subItemCarried_GreenEgg           ;819804|        |8182FE; 22
+                       dw subItemCarried_YellowEgg          ;819806|        |8183B6; 23
+                       dw subItemCarried_ChickenWindMeasured;819808|        |8183B7; 24
+                       dw subItemCarried_Chicken            ;81980A|        |8183BB; 25
+                       dw subItemCarried_Chick              ;81980C|        |8183BF; 26
+                       dw subItemCarried_0x27               ;81980E|        |8183C3; 27
+                       dw subItemCarried_0x28               ;819810|        |8183C4; 28
+                       dw subItemCarried_Mole               ;819812|        |8183C5; 29
+                       dw subItemCarried_0x2A               ;819814|        |8183C9; 2A
+                       dw subItemCarried_0x2B               ;819816|        |8183D1; 2B
+                       dw subItemCarried_0x2C               ;819818|        |8183D9; 2C
+                       dw subItemCarried_0x2D               ;81981A|        |8183E1; 2D
+                       dw subItemCarried_0x2E               ;81981C|        |8183E9; 2E
+                       dw subItemCarried_0x2F               ;81981E|        |8183F1; 2F
+                       dw subItemCarried_0x30               ;819820|        |8183F9; 30
+                       dw subItemCarried_0x31               ;819822|        |818401; 31
+                       dw subItemCarried_0x32               ;819824|        |818409; 32
+                       dw subItemCarried_0x33               ;819826|        |818411; 33
+                       dw subItemCarried_0x34               ;819828|        |818419; 34
+                       dw subItemCarried_0x35               ;81982A|        |818421; 35
+                       dw subItemCarried_0x36               ;81982C|        |818429; 36
+                       dw subItemCarried_0x37               ;81982E|        |818431; 37
+                       dw subItemCarried_0x38               ;819830|        |818439; 38
+                       dw subItemCarried_0x39               ;819832|        |818441; 39
+                       dw subItemCarried_0x3A               ;819834|        |818449; 3A
+                       dw subItemCarried_0x3B               ;819836|        |818451; 3B
+                       dw subItemCarried_0x3C               ;819838|        |818459; 3C
+                       dw subItemCarried_0x3D               ;81983A|        |818461; 3D
+                       dw subItemCarried_0x3E               ;81983C|        |818469; 3E
+                       dw subItemCarried_0x3F               ;81983E|        |818471; 3F
+                       dw subItemCarried_0x40               ;819840|        |818479; 40
+                       dw subItemCarried_0x41               ;819842|        |818481; 41
+                       dw subItemCarried_0x42               ;819844|        |818489; 42
+                       dw subItemCarried_0x43               ;819846|        |818491; 43
+                       dw subItemCarried_0x44               ;819848|        |818499; 44
+                       dw subItemCarried_0x45               ;81984A|        |8184D5; 45
+                       dw subItemCarried_0x46               ;81984C|        |818511; 46
+                       dw subItemCarried_0x47               ;81984E|        |81854D; 47
+                       dw subItemCarried_0x48               ;819850|        |818589; 48
+                       dw subItemCarried_0x49               ;819852|        |8185C5; 49
+                       dw subItemCarried_0x4A               ;819854|        |8185DF; 4A
+                       dw subItemCarried_0x4B               ;819856|        |8185F6; 4B
+                       dw subItemCarried_0x4C               ;819858|        |81860D; 4C
+                       dw subItemCarried_0x4D               ;81985A|        |818624; 4D
+                       dw subItemCarried_0x4E               ;81985C|        |81865B; 4E
+                       dw subItemCarried_0x4F               ;81985E|        |818692; 4F
+                       dw subItemCarried_0x50               ;819860|        |8186C9; 50
+                       dw subItemCarried_0x51               ;819862|        |818700; 51
+                       dw subItemCarried_0x52               ;819864|        |818737; 52
+                       dw subItemCarried_0x53               ;819866|        |81874E; 53
+                       dw subItemCarried_0x54               ;819868|        |818765; 54
+                       dw subItemCarried_0x55               ;81986A|        |818781; 55
+                       dw subItemCarried_0x56               ;81986C|        |81879D; 56
+                       dw subItemCarried_0x57               ;81986E|        |81812E; 57
+                       dw subItemCarried_0x58               ;819870|        |8187B7; 58
+                       dw subItemCarried_0x59               ;819872|        |8187BB; 59
+                       dw subItemCarried_0x5A               ;819874|        |8187BF; 5A
                                                             ;      |        |      ;
         DATA16_819876:
                        dw $00F6                             ;819876|        |      ;
@@ -3831,11 +4069,11 @@ nUnknownDialogIndex_81A1A5:
                        db $00,$00,$00,$00,$00,$00,$00,$01   ;81A358|        |      ;
                        db $00,$00,$00                       ;81A360|        |      ;
                                                             ;      |        |      ;
-nUnknown_0980_32b_ValuesTable:
-                       dd $02080218,$00D201A8               ;81A363|        |      ; 32b
-                       dd $00F202E8,$02520318               ;81A36B|        |      ;
-                       dd $032200E8,$03720298               ;81A373|        |      ;
-                       dd $017002B0,$02500068               ;81A37B|        |      ;
+      nUnknownXYTable:
+                       dw $0218,$0208,$01A8,$00D2           ;81A363|        |      ; n16 x, n16 y
+                       dw $02E8,$00F2,$0318,$0252           ;81A36B|        |      ;
+                       dw $00E8,$0322,$0298,$0372           ;81A373|        |      ;
+                       dw $02B0,$0170,$0068,$0250           ;81A37B|        |      ;
                                                             ;      |        |      ;
           CODE_81A383:
                        REP #$30                             ;81A383|C230    |      ;
@@ -3868,7 +4106,7 @@ nUnknown_0980_32b_ValuesTable:
                        STA.W $0976                          ;81A3B6|8D7609  |000976;
                        LDY.W #$0003                         ;81A3B9|A00300  |      ;
                        LDA.B [$07],Y                        ;81A3BC|B707    |000007;
-                       STA.W $0984                          ;81A3BE|8D8409  |000984;
+                       STA.W nHeldItemId                    ;81A3BE|8D8409  |000984;
                        REP #$20                             ;81A3C1|C220    |      ;
                        LDY.W #$0004                         ;81A3C3|A00400  |      ;
                        LDA.B [$07],Y                        ;81A3C6|B707    |000007;
@@ -3885,10 +4123,10 @@ nUnknown_0980_32b_ValuesTable:
                        STA.W $097E                          ;81A3E2|8D7E09  |00097E;
                        LDY.W #$000C                         ;81A3E5|A00C00  |      ;
                        LDA.B [$07],Y                        ;81A3E8|B707    |000007;
-                       STA.W $0980                          ;81A3EA|8D8009  |000980;
+                       STA.W nUnknownX                      ;81A3EA|8D8009  |000980;
                        LDY.W #$000E                         ;81A3ED|A00E00  |      ;
                        LDA.B [$07],Y                        ;81A3F0|B707    |000007;
-                       STA.W $0982                          ;81A3F2|8D8209  |000982;
+                       STA.W nUnknownY                      ;81A3F2|8D8209  |000982;
                        JSL.L CODE_8581CB                    ;81A3F5|22CB8185|8581CB;
                        REP #$20                             ;81A3F9|C220    |      ;
                        LDA.B $A7                            ;81A3FB|A5A7    |0000A7;
@@ -3915,12 +4153,12 @@ nUnknown_0980_32b_ValuesTable:
                        REP #$20                             ;81A419|C220    |      ;
                        LDA.W $0978                          ;81A41B|AD7809  |000978;
                        STA.B $A5                            ;81A41E|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;81A420|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;81A420|22A28185|8581A2;
                        SEP #$20                             ;81A424|E220    |      ;
                        LDA.W $0974                          ;81A426|AD7409  |000974;
                        AND.B #$02                           ;81A429|2902    |      ;
                        BEQ CODE_81A431                      ;81A42B|F004    |81A431;
-                       JSL.L CODE_81A4F1                    ;81A42D|22F1A481|81A4F1;
+                       JSL.L fUnknown_81A4F1                ;81A42D|22F1A481|81A4F1;
                                                             ;      |        |      ;
           CODE_81A431:
                        SEP #$20                             ;81A431|E220    |      ;
@@ -3942,7 +4180,7 @@ nUnknown_0980_32b_ValuesTable:
                        LDA.W $0976                          ;81A454|AD7609  |000976;
                        STA.B [$07],Y                        ;81A457|9707    |000007;
                        LDY.W #$0003                         ;81A459|A00300  |      ;
-                       LDA.W $0984                          ;81A45C|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81A45C|AD8409  |000984;
                        STA.B [$07],Y                        ;81A45F|9707    |000007;
                        REP #$20                             ;81A461|C220    |      ;
                        LDY.W #$0004                         ;81A463|A00400  |      ;
@@ -3960,11 +4198,11 @@ nUnknown_0980_32b_ValuesTable:
                        STA.B [$07],Y                        ;81A483|9707    |000007;
                        STA.B $9F                            ;81A485|859F    |00009F;
                        LDY.W #$000C                         ;81A487|A00C00  |      ;
-                       LDA.W $0980                          ;81A48A|AD8009  |000980;
+                       LDA.W nUnknownX                      ;81A48A|AD8009  |000980;
                        STA.B [$07],Y                        ;81A48D|9707    |000007;
                        STA.B $9B                            ;81A48F|859B    |00009B;
                        LDY.W #$000E                         ;81A491|A00E00  |      ;
-                       LDA.W $0982                          ;81A494|AD8209  |000982;
+                       LDA.W nUnknownY                      ;81A494|AD8209  |000982;
                        STA.B [$07],Y                        ;81A497|9707    |000007;
                        STA.B $9D                            ;81A499|859D    |00009D;
                        JSL.L CODE_8580B9                    ;81A49B|22B98085|8580B9;
@@ -4018,7 +4256,7 @@ nUnknown_0980_32b_ValuesTable:
                        RTL                                  ;81A4F0|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81A4F1:
+      fUnknown_81A4F1:
                        SEP #$20                             ;81A4F1|E220    |      ;
                        REP #$10                             ;81A4F3|C210    |      ;
                        LDY.W #$0000                         ;81A4F5|A00000  |      ;
@@ -4028,7 +4266,7 @@ nUnknown_0980_32b_ValuesTable:
                        RTL                                  ;81A4FF|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81A500:
+      fUnknown_81A500:
                        REP #$30                             ;81A500|C230    |      ;
                        LDA.W #$B4E6                         ;81A502|A9E6B4  |      ;
                        STA.B $07                            ;81A505|8507    |000007;
@@ -4067,7 +4305,7 @@ nUnknown_0980_32b_ValuesTable:
                        LDA.W $0976                          ;81A53F|AD7609  |000976;
                        STA.B [$07],Y                        ;81A542|9707    |000007;
                        LDY.W #$0003                         ;81A544|A00300  |      ;
-                       LDA.W $0984                          ;81A547|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81A547|AD8409  |000984;
                        STA.B [$07],Y                        ;81A54A|9707    |000007;
                        REP #$20                             ;81A54C|C220    |      ;
                        LDY.W #$0006                         ;81A54E|A00600  |      ;
@@ -4081,11 +4319,11 @@ nUnknown_0980_32b_ValuesTable:
                        STA.B [$07],Y                        ;81A563|9707    |000007;
                        STA.B $9F                            ;81A565|859F    |00009F;
                        LDY.W #$000C                         ;81A567|A00C00  |      ;
-                       LDA.W $0980                          ;81A56A|AD8009  |000980;
+                       LDA.W nUnknownX                      ;81A56A|AD8009  |000980;
                        STA.B [$07],Y                        ;81A56D|9707    |000007;
                        STA.B $9B                            ;81A56F|859B    |00009B;
                        LDY.W #$000E                         ;81A571|A00E00  |      ;
-                       LDA.W $0982                          ;81A574|AD8209  |000982;
+                       LDA.W nUnknownY                      ;81A574|AD8209  |000982;
                        STA.B [$07],Y                        ;81A577|9707    |000007;
                        STA.B $9D                            ;81A579|859D    |00009D;
                        STZ.B $A3                            ;81A57B|64A3    |0000A3;
@@ -4099,7 +4337,7 @@ nUnknown_0980_32b_ValuesTable:
                                                             ;      |        |      ;
          PTR16_81A58B:
                        dw EMPTY_81FFFF                      ;81A58B|        |81FFFF;
-                       dw CODE_81809A                       ;81A58D|        |81809A;
+                       dw subUnknown_81809A                 ;81A58D|        |81809A;
                                                             ;      |        |      ;
           CODE_81A58F:
                        SEP #$20                             ;81A58F|E220    |      ;
@@ -4213,7 +4451,7 @@ nUnknown_0980_32b_ValuesTable:
                        PLY                                  ;81A646|7A      |      ;
                        PLX                                  ;81A647|FA      |      ;
                        PLA                                  ;81A648|68      |      ;
-                       JSL.L CODE_81A688                    ;81A649|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81A649|2288A681|81A688;
                        REP #$30                             ;81A64D|C230    |      ;
                        LDA.B $CF                            ;81A64F|A5CF    |0000CF;
                        CLC                                  ;81A651|18      |      ;
@@ -4258,7 +4496,7 @@ nUnknown_0980_32b_ValuesTable:
                        BRA CODE_81A629                      ;81A686|80A1    |81A629;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81A688:
+      fUnknown_81A688:
                        REP #$30                             ;81A688|C230    |      ;
                        CMP.W #$0000                         ;81A68A|C90000  |      ;
                        BNE CODE_81A692                      ;81A68D|D003    |81A692;
@@ -4762,7 +5000,7 @@ nUnknown_0980_32b_ValuesTable:
                        LDA.L nToolsRelatedTable,X           ;81A9A0|BF0FBE81|81BE0F;
                        PLY                                  ;81A9A4|7A      |      ;
                        PLX                                  ;81A9A5|FA      |      ;
-                       JSL.L CODE_81A688                    ;81A9A6|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81A9A6|2288A681|81A688;
                        JSL.L fStartProgrammedDMA            ;81A9AA|22F08A80|808AF0;
                                                             ;      |        |      ;
           CODE_81A9AE:
@@ -5253,7 +5491,7 @@ nUnknown_0980_32b_ValuesTable:
                        LDA.W #$00D7                         ;81ACFD|A9D700  |      ;
                        LDX.W #$0090                         ;81AD00|A29000  |      ;
                        LDY.W #$0050                         ;81AD03|A05000  |      ;
-                       JSL.L CODE_82B03A                    ;81AD06|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;81AD06|223AB082|82B03A;
                                                             ;      |        |      ;
           CODE_81AD0A:
                        REP #$30                             ;81AD0A|C230    |      ;
@@ -5292,7 +5530,7 @@ nUnknown_0980_32b_ValuesTable:
                        LDA.W #$00D7                         ;81AD54|A9D700  |      ;
                        LDX.W #$0090                         ;81AD57|A29000  |      ;
                        LDY.W #$0050                         ;81AD5A|A05000  |      ;
-                       JSL.L CODE_82B03A                    ;81AD5D|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;81AD5D|223AB082|82B03A;
                                                             ;      |        |      ;
           CODE_81AD61:
                        REP #$30                             ;81AD61|C230    |      ;
@@ -5331,7 +5569,7 @@ nUnknown_0980_32b_ValuesTable:
                        LDA.W #$00D7                         ;81ADAB|A9D700  |      ;
                        LDX.W #$0140                         ;81ADAE|A24001  |      ;
                        LDY.W #$0060                         ;81ADB1|A06000  |      ;
-                       JSL.L CODE_82B03A                    ;81ADB4|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;81ADB4|223AB082|82B03A;
                                                             ;      |        |      ;
           CODE_81ADB8:
                        REP #$30                             ;81ADB8|C230    |      ;
@@ -7998,7 +8236,7 @@ nUnknown_0980_32b_ValuesTable:
                        STA.W $019A                          ;81C4BE|8D9A01  |00019A;
                        LDA.B #$00                           ;81C4C1|A900    |      ;
                        STA.W $0191                          ;81C4C3|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81C4C6|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81C4C6|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_81C4CA:
                        JSR.W CODE_81CFE6                    ;81C4CA|20E6CF  |81CFE6;
@@ -8747,7 +8985,7 @@ nUnknown_0980_32b_ValuesTable:
                        CLC                                  ;81C9AD|18      |      ;
                        ADC.B $DA                            ;81C9AE|65DA    |0000DA;
                        STA.W $0901                          ;81C9B0|8D0109  |000901;
-                       JSL.L CODE_818000                    ;81C9B3|22008081|818000;
+                       JSL.L fUnknown_818000                ;81C9B3|22008081|818000;
                                                             ;      |        |      ;
           CODE_81C9B7:
                        JSR.W CODE_81CFE6                    ;81C9B7|20E6CF  |81CFE6;
@@ -8834,7 +9072,7 @@ nUnknown_0980_32b_ValuesTable:
                        SEP #$20                             ;81CA4F|E220    |      ;
                        LDA.B #$00                           ;81CA51|A900    |      ;
                        XBA                                  ;81CA53|EB      |      ;
-                       LDA.W $0984                          ;81CA54|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81CA54|AD8409  |000984;
                        REP #$20                             ;81CA57|C220    |      ;
                        CLC                                  ;81CA59|18      |      ;
                        ADC.W #$0033                         ;81CA5A|693300  |      ;
@@ -8851,10 +9089,10 @@ nUnknown_0980_32b_ValuesTable:
                                                             ;      |        |      ;
           CODE_81CA70:
                        SEP #$20                             ;81CA70|E220    |      ;
-                       LDA.W $0984                          ;81CA72|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81CA72|AD8409  |000984;
                        CMP.B #$02                           ;81CA75|C902    |      ;
                        BEQ CODE_81CA96                      ;81CA77|F01D    |81CA96;
-                       LDA.W $0984                          ;81CA79|AD8409  |000984;
+                       LDA.W nHeldItemId                    ;81CA79|AD8409  |000984;
                        CMP.B #$08                           ;81CA7C|C908    |      ;
                        BEQ IncrementPowerBerryEatenRoutine  ;81CA7E|F02B    |81CAAB;
                        REP #$30                             ;81CA80|C230    |      ;
@@ -9888,7 +10126,7 @@ IncrementPowerBerryEatenRoutine:
                        RTL                                  ;81D14D|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81D14E:
+      fUnknown_81D14E:
                        REP #$30                             ;81D14E|C230    |      ;
                        ASL A                                ;81D150|0A      |      ;
                        ASL A                                ;81D151|0A      |      ;
@@ -10428,7 +10666,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81D778|8D9A01  |00019A;
                        LDA.B #$00                           ;81D77B|A900    |      ;
                        STA.W $0191                          ;81D77D|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81D780|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81D780|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_81D784:
                        SEP #$20                             ;81D784|E220    |      ;
@@ -10509,7 +10747,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81D807|E220    |      ;
                        LDA.B #$00                           ;81D809|A900    |      ;
                        STA.W $0191                          ;81D80B|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81D80E|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81D80E|225F9383|83935F;
                        SEP #$20                             ;81D812|E220    |      ;
                        INC.W $096F                          ;81D814|EE6F09  |00096F;
                        JMP.W CODE_81D96B                    ;81D817|4C6BD9  |81D96B;
@@ -10542,7 +10780,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81D846|E220    |      ;
                        LDA.B #$00                           ;81D848|A900    |      ;
                        STA.W $0191                          ;81D84A|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81D84D|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81D84D|225F9383|83935F;
                        SEP #$20                             ;81D851|E220    |      ;
                        INC.W $096F                          ;81D853|EE6F09  |00096F;
                        JMP.W CODE_81D96B                    ;81D856|4C6BD9  |81D96B;
@@ -10791,7 +11029,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81DA31|8D9A01  |00019A;
                        LDA.B #$00                           ;81DA34|A900    |      ;
                        STA.W $0191                          ;81DA36|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DA39|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DA39|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_81DA3D:
                        SEP #$20                             ;81DA3D|E220    |      ;
@@ -10888,7 +11126,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81DAE7|8D9A01  |00019A;
                        LDA.B #$00                           ;81DAEA|A900    |      ;
                        STA.W $0191                          ;81DAEC|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DAEF|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DAEF|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_81DAF3:
                        SEP #$20                             ;81DAF3|E220    |      ;
@@ -11047,7 +11285,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81DBDB|8EAD09  |0009AD;
                        LDY.W #$01A0                         ;81DBDE|A0A001  |      ;
                        STY.W $09AF                          ;81DBE1|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81DBE4|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81DBE4|2288A681|81A688;
                        REP #$30                             ;81DBE8|C230    |      ;
                        LDA.W #$0000                         ;81DBEA|A90000  |      ;
                        JMP.W CODE_81F556                    ;81DBED|4C56F5  |81F556;
@@ -11065,7 +11303,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0371                         ;81DC02|A27103  |      ;
                        LDA.B #$00                           ;81DC05|A900    |      ;
                        STA.W $0191                          ;81DC07|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DC0A|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DC0A|225F9383|83935F;
                        SEP #$20                             ;81DC0E|E220    |      ;
                        INC.W $096F                          ;81DC10|EE6F09  |00096F;
                        JMP.W CODE_81DC56                    ;81DC13|4C56DC  |81DC56;
@@ -11099,7 +11337,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81DC3E|8D9A01  |00019A;
                        LDA.B #$00                           ;81DC41|A900    |      ;
                        STA.W $0191                          ;81DC43|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DC46|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DC46|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_81DC4A:
                        REP #$30                             ;81DC4A|C230    |      ;
@@ -11152,7 +11390,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0023                         ;81DC70|A22300  |      ;
                        LDA.B #$00                           ;81DC73|A900    |      ;
                        STA.W $0191                          ;81DC75|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DC78|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DC78|225F9383|83935F;
                        SEP #$20                             ;81DC7C|E220    |      ;
                        INC.W $096F                          ;81DC7E|EE6F09  |00096F;
                        JMP.W CODE_81DCCD                    ;81DC81|4CCDDC  |81DCCD;
@@ -11185,7 +11423,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81DCAC|8D9A01  |00019A;
                        LDA.B #$00                           ;81DCAF|A900    |      ;
                        STA.W $0191                          ;81DCB1|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DCB4|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DCB4|225F9383|83935F;
                        REP #$20                             ;81DCB8|C220    |      ;
                        LDA.W #$FFFF                         ;81DCBA|A9FFFF  |      ;
                        JSL.L CODE_83B282                    ;81DCBD|2282B283|83B282;
@@ -11333,7 +11571,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0023                         ;81DDBE|A22300  |      ;
                        LDA.B #$00                           ;81DDC1|A900    |      ;
                        STA.W $0191                          ;81DDC3|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DDC6|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DDC6|225F9383|83935F;
                        SEP #$20                             ;81DDCA|E220    |      ;
                        INC.W $096F                          ;81DDCC|EE6F09  |00096F;
                        JMP.W CODE_81DE1B                    ;81DDCF|4C1BDE  |81DE1B;
@@ -11366,7 +11604,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81DDFA|8D9A01  |00019A;
                        LDA.B #$00                           ;81DDFD|A900    |      ;
                        STA.W $0191                          ;81DDFF|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DE02|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DE02|225F9383|83935F;
                        REP #$20                             ;81DE06|C220    |      ;
                        LDA.W #$FFFF                         ;81DE08|A9FFFF  |      ;
                        JSL.L CODE_83B282                    ;81DE0B|2282B283|83B282;
@@ -11418,7 +11656,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0305                         ;81DE54|A20503  |      ;
                        LDA.B #$00                           ;81DE57|A900    |      ;
                        STA.W $0191                          ;81DE59|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DE5C|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DE5C|225F9383|83935F;
                        SEP #$20                             ;81DE60|E220    |      ;
                        INC.W $096F                          ;81DE62|EE6F09  |00096F;
                        JMP.W CODE_81E221                    ;81DE65|4C21E2  |81E221;
@@ -11431,7 +11669,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$03D0                         ;81DE6F|A2D003  |      ;
                        LDA.B #$00                           ;81DE72|A900    |      ;
                        STA.W $0191                          ;81DE74|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DE77|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DE77|225F9383|83935F;
                        REP #$30                             ;81DE7B|C230    |      ;
                        LDA.W #$0040                         ;81DE7D|A94000  |      ;
                        EOR.W #$FFFF                         ;81DE80|49FFFF  |      ;
@@ -11492,7 +11730,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0307                         ;81DEDB|A20703  |      ;
                        LDA.B #$00                           ;81DEDE|A900    |      ;
                        STA.W $0191                          ;81DEE0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DEE3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DEE3|225F9383|83935F;
                        SEP #$20                             ;81DEE7|E220    |      ;
                        LDA.B #$02                           ;81DEE9|A902    |      ;
                        STA.W $096F                          ;81DEEB|8D6F09  |00096F;
@@ -11506,7 +11744,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$03B6                         ;81DEF8|A2B603  |      ;
                        LDA.B #$00                           ;81DEFB|A900    |      ;
                        STA.W $0191                          ;81DEFD|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DF00|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DF00|225F9383|83935F;
                        REP #$30                             ;81DF04|C230    |      ;
                        LDA.W #$0040                         ;81DF06|A94000  |      ;
                        EOR.W #$FFFF                         ;81DF09|49FFFF  |      ;
@@ -11534,7 +11772,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$030A                         ;81DF32|A20A03  |      ;
                        LDA.B #$00                           ;81DF35|A900    |      ;
                        STA.W $0191                          ;81DF37|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DF3A|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DF3A|225F9383|83935F;
                        SEP #$20                             ;81DF3E|E220    |      ;
                        LDA.B #$03                           ;81DF40|A903    |      ;
                        STA.W $096F                          ;81DF42|8D6F09  |00096F;
@@ -11548,7 +11786,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$03B6                         ;81DF4F|A2B603  |      ;
                        LDA.B #$00                           ;81DF52|A900    |      ;
                        STA.W $0191                          ;81DF54|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DF57|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DF57|225F9383|83935F;
                        REP #$30                             ;81DF5B|C230    |      ;
                        LDA.W #$0040                         ;81DF5D|A94000  |      ;
                        EOR.W #$FFFF                         ;81DF60|49FFFF  |      ;
@@ -11564,7 +11802,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$030B                         ;81DF71|A20B03  |      ;
                        LDA.B #$00                           ;81DF74|A900    |      ;
                        STA.W $0191                          ;81DF76|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DF79|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DF79|225F9383|83935F;
                        REP #$30                             ;81DF7D|C230    |      ;
                        LDA.W #$0040                         ;81DF7F|A94000  |      ;
                        EOR.W #$FFFF                         ;81DF82|49FFFF  |      ;
@@ -11584,7 +11822,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$030B                         ;81DFA0|A20B03  |      ;
                        LDA.B #$00                           ;81DFA3|A900    |      ;
                        STA.W $0191                          ;81DFA5|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81DFA8|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81DFA8|225F9383|83935F;
                        REP #$30                             ;81DFAC|C230    |      ;
                        LDA.W #$0040                         ;81DFAE|A94000  |      ;
                        EOR.W #$FFFF                         ;81DFB1|49FFFF  |      ;
@@ -11645,7 +11883,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0306                         ;81E013|A20603  |      ;
                        LDA.B #$00                           ;81E016|A900    |      ;
                        STA.W $0191                          ;81E018|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E01B|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E01B|225F9383|83935F;
                        REP #$30                             ;81E01F|C230    |      ;
                        LDA.W #$0040                         ;81E021|A94000  |      ;
                        EOR.W #$FFFF                         ;81E024|49FFFF  |      ;
@@ -11661,7 +11899,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$03B7                         ;81E035|A2B703  |      ;
                        LDA.B #$00                           ;81E038|A900    |      ;
                        STA.W $0191                          ;81E03A|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E03D|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E03D|225F9383|83935F;
                        REP #$30                             ;81E041|C230    |      ;
                        LDA.W #$0040                         ;81E043|A94000  |      ;
                        EOR.W #$FFFF                         ;81E046|49FFFF  |      ;
@@ -11687,7 +11925,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0304                         ;81E06F|A20403  |      ;
                        LDA.B #$00                           ;81E072|A900    |      ;
                        STA.W $0191                          ;81E074|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E077|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E077|225F9383|83935F;
                        REP #$30                             ;81E07B|C230    |      ;
                        LDA.W #$0040                         ;81E07D|A94000  |      ;
                        EOR.W #$FFFF                         ;81E080|49FFFF  |      ;
@@ -11703,7 +11941,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0308                         ;81E091|A20803  |      ;
                        LDA.B #$00                           ;81E094|A900    |      ;
                        STA.W $0191                          ;81E096|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E099|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E099|225F9383|83935F;
                        REP #$30                             ;81E09D|C230    |      ;
                        LDA.W #$0040                         ;81E09F|A94000  |      ;
                        EOR.W #$FFFF                         ;81E0A2|49FFFF  |      ;
@@ -11730,7 +11968,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0303                         ;81E0D4|A20303  |      ;
                        LDA.B #$00                           ;81E0D7|A900    |      ;
                        STA.W $0191                          ;81E0D9|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E0DC|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E0DC|225F9383|83935F;
                        REP #$30                             ;81E0E0|C230    |      ;
                        LDA.W #$0040                         ;81E0E2|A94000  |      ;
                        EOR.W #$FFFF                         ;81E0E5|49FFFF  |      ;
@@ -11791,7 +12029,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0306                         ;81E13D|A20603  |      ;
                        LDA.B #$00                           ;81E140|A900    |      ;
                        STA.W $0191                          ;81E142|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E145|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E145|225F9383|83935F;
                        REP #$20                             ;81E149|C220    |      ;
                        REP #$30                             ;81E14B|C230    |      ;
                        LDA.W #$0040                         ;81E14D|A94000  |      ;
@@ -11808,7 +12046,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$03B7                         ;81E161|A2B703  |      ;
                        LDA.B #$00                           ;81E164|A900    |      ;
                        STA.W $0191                          ;81E166|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E169|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E169|225F9383|83935F;
                        REP #$30                             ;81E16D|C230    |      ;
                        LDA.W #$0040                         ;81E16F|A94000  |      ;
                        EOR.W #$FFFF                         ;81E172|49FFFF  |      ;
@@ -11834,7 +12072,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0304                         ;81E19B|A20403  |      ;
                        LDA.B #$00                           ;81E19E|A900    |      ;
                        STA.W $0191                          ;81E1A0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E1A3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E1A3|225F9383|83935F;
                        REP #$30                             ;81E1A7|C230    |      ;
                        LDA.W #$0040                         ;81E1A9|A94000  |      ;
                        EOR.W #$FFFF                         ;81E1AC|49FFFF  |      ;
@@ -11850,7 +12088,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0311                         ;81E1BC|A21103  |      ;
                        LDA.B #$00                           ;81E1BF|A900    |      ;
                        STA.W $0191                          ;81E1C1|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E1C4|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E1C4|225F9383|83935F;
                        REP #$30                             ;81E1C8|C230    |      ;
                        LDA.W #$0040                         ;81E1CA|A94000  |      ;
                        EOR.W #$FFFF                         ;81E1CD|49FFFF  |      ;
@@ -11880,7 +12118,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0303                         ;81E207|A20303  |      ;
                        LDA.B #$00                           ;81E20A|A900    |      ;
                        STA.W $0191                          ;81E20C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E20F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E20F|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_81E213:
                        REP #$30                             ;81E213|C230    |      ;
@@ -12004,7 +12242,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0023                         ;81E2EB|A22300  |      ;
                        LDA.B #$00                           ;81E2EE|A900    |      ;
                        STA.W $0191                          ;81E2F0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E2F3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E2F3|225F9383|83935F;
                        SEP #$20                             ;81E2F7|E220    |      ;
                        INC.W $096F                          ;81E2F9|EE6F09  |00096F;
                        JMP.W CODE_81E348                    ;81E2FC|4C48E3  |81E348;
@@ -12037,7 +12275,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81E327|8D9A01  |00019A;
                        LDA.B #$00                           ;81E32A|A900    |      ;
                        STA.W $0191                          ;81E32C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E32F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E32F|225F9383|83935F;
                        REP #$20                             ;81E333|C220    |      ;
                        LDA.W #$FFFF                         ;81E335|A9FFFF  |      ;
                        JSL.L CODE_83B282                    ;81E338|2282B283|83B282;
@@ -12103,7 +12341,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0023                         ;81E3A6|A22300  |      ;
                        LDA.B #$00                           ;81E3A9|A900    |      ;
                        STA.W $0191                          ;81E3AB|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E3AE|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E3AE|225F9383|83935F;
                        SEP #$20                             ;81E3B2|E220    |      ;
                        INC.W $096F                          ;81E3B4|EE6F09  |00096F;
                        JMP.W CODE_81E403                    ;81E3B7|4C03E4  |81E403;
@@ -12136,7 +12374,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81E3E2|8D9A01  |00019A;
                        LDA.B #$00                           ;81E3E5|A900    |      ;
                        STA.W $0191                          ;81E3E7|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E3EA|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E3EA|225F9383|83935F;
                        REP #$20                             ;81E3EE|C220    |      ;
                        LDA.W #$FFFF                         ;81E3F0|A9FFFF  |      ;
                        JSL.L CODE_83B282                    ;81E3F3|2282B283|83B282;
@@ -12324,7 +12562,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0023                         ;81E53E|A22300  |      ;
                        LDA.B #$00                           ;81E541|A900    |      ;
                        STA.W $0191                          ;81E543|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E546|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E546|225F9383|83935F;
                        SEP #$20                             ;81E54A|E220    |      ;
                        INC.W $096F                          ;81E54C|EE6F09  |00096F;
                        JMP.W CODE_81E59B                    ;81E54F|4C9BE5  |81E59B;
@@ -12357,7 +12595,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81E57A|8D9A01  |00019A;
                        LDA.B #$00                           ;81E57D|A900    |      ;
                        STA.W $0191                          ;81E57F|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E582|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E582|225F9383|83935F;
                        REP #$20                             ;81E586|C220    |      ;
                        LDA.W #$FFFF                         ;81E588|A9FFFF  |      ;
                        JSL.L CODE_83B282                    ;81E58B|2282B283|83B282;
@@ -12385,7 +12623,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$045F                         ;81E5AE|A25F04  |      ;
                        LDA.B #$00                           ;81E5B1|A900    |      ;
                        STA.W $0191                          ;81E5B3|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E5B6|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E5B6|225F9383|83935F;
                        SEP #$20                             ;81E5BA|E220    |      ;
                        INC.W $096F                          ;81E5BC|EE6F09  |00096F;
                        JMP.W CODE_81E69F                    ;81E5BF|4C9FE6  |81E69F;
@@ -12429,7 +12667,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0460                         ;81E5FC|A26004  |      ;
                        LDA.B #$00                           ;81E5FF|A900    |      ;
                        STA.W $0191                          ;81E601|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E604|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E604|225F9383|83935F;
                        REP #$30                             ;81E608|C230    |      ;
                        LDA.W #$0040                         ;81E60A|A94000  |      ;
                        EOR.W #$FFFF                         ;81E60D|49FFFF  |      ;
@@ -12445,7 +12683,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0462                         ;81E61E|A26204  |      ;
                        LDA.B #$00                           ;81E621|A900    |      ;
                        STA.W $0191                          ;81E623|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E626|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E626|225F9383|83935F;
                        REP #$30                             ;81E62A|C230    |      ;
                        LDA.W #$0040                         ;81E62C|A94000  |      ;
                        EOR.W #$FFFF                         ;81E62F|49FFFF  |      ;
@@ -12461,7 +12699,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0464                         ;81E640|A26404  |      ;
                        LDA.B #$00                           ;81E643|A900    |      ;
                        STA.W $0191                          ;81E645|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E648|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E648|225F9383|83935F;
                        REP #$30                             ;81E64C|C230    |      ;
                        LDA.W #$0040                         ;81E64E|A94000  |      ;
                        EOR.W #$FFFF                         ;81E651|49FFFF  |      ;
@@ -12477,7 +12715,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0461                         ;81E662|A26104  |      ;
                        LDA.B #$00                           ;81E665|A900    |      ;
                        STA.W $0191                          ;81E667|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E66A|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E66A|225F9383|83935F;
                        REP #$30                             ;81E66E|C230    |      ;
                        LDA.W #$0040                         ;81E670|A94000  |      ;
                        EOR.W #$FFFF                         ;81E673|49FFFF  |      ;
@@ -12493,7 +12731,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0463                         ;81E684|A26304  |      ;
                        LDA.B #$00                           ;81E687|A900    |      ;
                        STA.W $0191                          ;81E689|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E68C|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E68C|225F9383|83935F;
                        REP #$30                             ;81E690|C230    |      ;
                        LDA.W #$0040                         ;81E692|A94000  |      ;
                        EOR.W #$FFFF                         ;81E695|49FFFF  |      ;
@@ -12597,7 +12835,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81E74D|8D9A01  |00019A;
                        LDA.B #$00                           ;81E750|A900    |      ;
                        STA.W $0191                          ;81E752|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E755|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E755|225F9383|83935F;
                        SEP #$20                             ;81E759|E220    |      ;
                        LDA.B #$02                           ;81E75B|A902    |      ;
                        STA.W $096F                          ;81E75D|8D6F09  |00096F;
@@ -12796,7 +13034,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81E8AC|E220    |      ;
                        LDA.B #$00                           ;81E8AE|A900    |      ;
                        STA.W $0191                          ;81E8B0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E8B3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E8B3|225F9383|83935F;
                        SEP #$20                             ;81E8B7|E220    |      ;
                        LDA.B #$02                           ;81E8B9|A902    |      ;
                        STA.W $096F                          ;81E8BB|8D6F09  |00096F;
@@ -12808,7 +13046,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81E8C4|E220    |      ;
                        LDA.B #$00                           ;81E8C6|A900    |      ;
                        STA.W $0191                          ;81E8C8|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E8CB|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E8CB|225F9383|83935F;
                        SEP #$20                             ;81E8CF|E220    |      ;
                        LDA.B #$05                           ;81E8D1|A905    |      ;
                        STA.W $096F                          ;81E8D3|8D6F09  |00096F;
@@ -12820,7 +13058,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81E8DC|E220    |      ;
                        LDA.B #$00                           ;81E8DE|A900    |      ;
                        STA.W $0191                          ;81E8E0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E8E3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E8E3|225F9383|83935F;
                        SEP #$20                             ;81E8E7|E220    |      ;
                        LDA.B #$05                           ;81E8E9|A905    |      ;
                        STA.W $096F                          ;81E8EB|8D6F09  |00096F;
@@ -12835,7 +13073,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81E8FA|8D9A01  |00019A;
                        LDA.B #$00                           ;81E8FD|A900    |      ;
                        STA.W $0191                          ;81E8FF|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E902|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E902|225F9383|83935F;
                        SEP #$20                             ;81E906|E220    |      ;
                        LDA.B #$05                           ;81E908|A905    |      ;
                        STA.W $096F                          ;81E90A|8D6F09  |00096F;
@@ -12860,7 +13098,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$030F                         ;81E92A|A20F03  |      ;
                        LDA.B #$00                           ;81E92D|A900    |      ;
                        STA.W $0191                          ;81E92F|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E932|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E932|225F9383|83935F;
                        SEP #$20                             ;81E936|E220    |      ;
                        LDA.B #$03                           ;81E938|A903    |      ;
                        STA.W $096F                          ;81E93A|8D6F09  |00096F;
@@ -12874,7 +13112,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0309                         ;81E947|A20903  |      ;
                        LDA.B #$00                           ;81E94A|A900    |      ;
                        STA.W $0191                          ;81E94C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81E94F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81E94F|225F9383|83935F;
                        SEP #$20                             ;81E953|E220    |      ;
                        LDA.B #$05                           ;81E955|A905    |      ;
                        STA.W $096F                          ;81E957|8D6F09  |00096F;
@@ -13045,7 +13283,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81EAA4|8D9A01  |00019A;
                        LDA.B #$00                           ;81EAA7|A900    |      ;
                        STA.W $0191                          ;81EAA9|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81EAAC|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81EAAC|225F9383|83935F;
                        SEP #$20                             ;81EAB0|E220    |      ;
                        LDA.B #$08                           ;81EAB2|A908    |      ;
                        STA.W $096F                          ;81EAB4|8D6F09  |00096F;
@@ -13070,7 +13308,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$014B                         ;81EAD4|A24B01  |      ;
                        LDA.B #$00                           ;81EAD7|A900    |      ;
                        STA.W $0191                          ;81EAD9|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81EADC|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81EADC|225F9383|83935F;
                        SEP #$20                             ;81EAE0|E220    |      ;
                        LDA.B #$09                           ;81EAE2|A909    |      ;
                        STA.W $096F                          ;81EAE4|8D6F09  |00096F;
@@ -13086,7 +13324,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
                        BRK #$8D                             ;81EAF5|008D    |      ;
                        STA.B ($01),Y                        ;81EAF7|9101    |000001;
-                       JSL.L DialogRelated                  ;81EAF9|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81EAF9|225F9383|83935F;
                        SEP #$20                             ;81EAFD|E220    |      ;
                        LDA.B #$0A                           ;81EAFF|A90A    |      ;
                        STA.W $096F                          ;81EB01|8D6F09  |00096F;
@@ -13317,7 +13555,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81EC9E|8D9A01  |00019A;
                        LDA.B #$00                           ;81ECA1|A900    |      ;
                        STA.W $0191                          ;81ECA3|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81ECA6|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81ECA6|225F9383|83935F;
                        SEP #$20                             ;81ECAA|E220    |      ;
                        LDA.B #$02                           ;81ECAC|A902    |      ;
                        STA.W $096F                          ;81ECAE|8D6F09  |00096F;
@@ -13332,7 +13570,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81ECBD|8D9A01  |00019A;
                        LDA.B #$00                           ;81ECC0|A900    |      ;
                        STA.W $0191                          ;81ECC2|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81ECC5|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81ECC5|225F9383|83935F;
                        SEP #$20                             ;81ECC9|E220    |      ;
                        LDA.B #$05                           ;81ECCB|A905    |      ;
                        STA.W $096F                          ;81ECCD|8D6F09  |00096F;
@@ -13357,7 +13595,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$030F                         ;81ECED|A20F03  |      ;
                        LDA.B #$00                           ;81ECF0|A900    |      ;
                        STA.W $0191                          ;81ECF2|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81ECF5|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81ECF5|225F9383|83935F;
                        SEP #$20                             ;81ECF9|E220    |      ;
                        LDA.B #$03                           ;81ECFB|A903    |      ;
                        STA.W $096F                          ;81ECFD|8D6F09  |00096F;
@@ -13371,7 +13609,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0309                         ;81ED0A|A20903  |      ;
                        LDA.B #$00                           ;81ED0D|A900    |      ;
                        STA.W $0191                          ;81ED0F|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81ED12|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81ED12|225F9383|83935F;
                        SEP #$20                             ;81ED16|E220    |      ;
                        LDA.B #$05                           ;81ED18|A905    |      ;
                        STA.W $096F                          ;81ED1A|8D6F09  |00096F;
@@ -13542,7 +13780,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81EE67|8D9A01  |00019A;
                        LDA.B #$00                           ;81EE6A|A900    |      ;
                        STA.W $0191                          ;81EE6C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81EE6F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81EE6F|225F9383|83935F;
                        SEP #$20                             ;81EE73|E220    |      ;
                        LDA.B #$08                           ;81EE75|A908    |      ;
                        STA.W $096F                          ;81EE77|8D6F09  |00096F;
@@ -13567,7 +13805,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$014A                         ;81EE97|A24A01  |      ;
                        LDA.B #$00                           ;81EE9A|A900    |      ;
                        STA.W $0191                          ;81EE9C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81EE9F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81EE9F|225F9383|83935F;
                        SEP #$20                             ;81EEA3|E220    |      ;
                        LDA.B #$09                           ;81EEA5|A909    |      ;
                        STA.W $096F                          ;81EEA7|8D6F09  |00096F;
@@ -13581,7 +13819,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$014C                         ;81EEB4|A24C01  |      ;
                        LDA.B #$00                           ;81EEB7|A900    |      ;
                        STA.W $0191                          ;81EEB9|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81EEBC|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81EEBC|225F9383|83935F;
                        SEP #$20                             ;81EEC0|E220    |      ;
                        LDA.B #$0A                           ;81EEC2|A90A    |      ;
                        STA.W $096F                          ;81EEC4|8D6F09  |00096F;
@@ -13757,7 +13995,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81F01A|8D9A01  |00019A;
                        LDA.B #$00                           ;81F01D|A900    |      ;
                        STA.W $0191                          ;81F01F|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F022|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F022|225F9383|83935F;
                        SEP #$20                             ;81F026|E220    |      ;
                        LDA.B #$03                           ;81F028|A903    |      ;
                        STA.W $096F                          ;81F02A|8D6F09  |00096F;
@@ -13850,7 +14088,7 @@ nWeatherDialogIndexesTable:
           CODE_81F0BF:
                        LDA.B #$00                           ;81F0BF|A900    |      ;
                        STA.W $0191                          ;81F0C1|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F0C4|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F0C4|225F9383|83935F;
                        SEP #$20                             ;81F0C8|E220    |      ;
                        LDA.B #$02                           ;81F0CA|A902    |      ;
                        STA.W $096F                          ;81F0CC|8D6F09  |00096F;
@@ -13973,7 +14211,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81F19B|8D9A01  |00019A;
                        LDA.B #$00                           ;81F19E|A900    |      ;
                        STA.W $0191                          ;81F1A0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F1A3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F1A3|225F9383|83935F;
                        SEP #$20                             ;81F1A7|E220    |      ;
                        LDA.B #$03                           ;81F1A9|A903    |      ;
                        STA.W $096F                          ;81F1AB|8D6F09  |00096F;
@@ -13987,7 +14225,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0137                         ;81F1B8|A23701  |      ;
                        LDA.B #$00                           ;81F1BB|A900    |      ;
                        STA.W $0191                          ;81F1BD|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F1C0|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F1C0|225F9383|83935F;
                        SEP #$20                             ;81F1C4|E220    |      ;
                        LDA.B #$01                           ;81F1C6|A901    |      ;
                        STA.W $096F                          ;81F1C8|8D6F09  |00096F;
@@ -14089,7 +14327,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0135                         ;81F279|A23501  |      ;
                        LDA.B #$00                           ;81F27C|A900    |      ;
                        STA.W $0191                          ;81F27E|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F281|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F281|225F9383|83935F;
                        SEP #$20                             ;81F285|E220    |      ;
                        LDA.B #$01                           ;81F287|A901    |      ;
                        STA.W $096F                          ;81F289|8D6F09  |00096F;
@@ -14109,7 +14347,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0304                         ;81F2A8|A20403  |      ;
                        LDA.B #$00                           ;81F2AB|A900    |      ;
                        STA.W $0191                          ;81F2AD|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F2B0|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F2B0|225F9383|83935F;
                        SEP #$20                             ;81F2B4|E220    |      ;
                        LDA.B #$01                           ;81F2B6|A901    |      ;
                        STA.W $096F                          ;81F2B8|8D6F09  |00096F;
@@ -14123,7 +14361,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0136                         ;81F2C4|A23601  |      ;
                        LDA.B #$00                           ;81F2C7|A900    |      ;
                        STA.W $0191                          ;81F2C9|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F2CC|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F2CC|225F9383|83935F;
                        SEP #$20                             ;81F2D0|E220    |      ;
                        LDA.B #$01                           ;81F2D2|A901    |      ;
                        STA.W $096F                          ;81F2D4|8D6F09  |00096F;
@@ -14187,7 +14425,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81F332|8D9A01  |00019A;
                        LDA.B #$00                           ;81F335|A900    |      ;
                        STA.W $0191                          ;81F337|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F33A|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F33A|225F9383|83935F;
                        SEP #$20                             ;81F33E|E220    |      ;
                        LDA.B #$01                           ;81F340|A901    |      ;
                        STA.W $096F                          ;81F342|8D6F09  |00096F;
@@ -14221,7 +14459,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$025C                         ;81F37E|A25C02  |      ;
                        LDA.B #$00                           ;81F381|A900    |      ;
                        STA.W $0191                          ;81F383|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F386|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F386|225F9383|83935F;
                        SEP #$20                             ;81F38A|E220    |      ;
                        LDA.B #$03                           ;81F38C|A903    |      ;
                        STA.W $096F                          ;81F38E|8D6F09  |00096F;
@@ -14316,7 +14554,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0300                         ;81F436|A20003  |      ;
                        LDA.B #$00                           ;81F439|A900    |      ;
                        STA.W $0191                          ;81F43B|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F43E|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F43E|225F9383|83935F;
                        SEP #$20                             ;81F442|E220    |      ;
                        LDA.B #$01                           ;81F444|A901    |      ;
                        STA.W $096F                          ;81F446|8D6F09  |00096F;
@@ -14372,7 +14610,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F498|8EAD09  |0009AD;
                        LDY.W #$0030                         ;81F49B|A03000  |      ;
                        STY.W $09AF                          ;81F49E|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F4A1|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F4A1|2288A681|81A688;
                        REP #$30                             ;81F4A5|C230    |      ;
                        LDA.W #$0001                         ;81F4A7|A90100  |      ;
                        JMP.W CODE_81F556                    ;81F4AA|4C56F5  |81F556;
@@ -14385,7 +14623,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F4B5|8EAD09  |0009AD;
                        LDY.W #$0090                         ;81F4B8|A09000  |      ;
                        STY.W $09AF                          ;81F4BB|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F4BE|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F4BE|2288A681|81A688;
                        REP #$30                             ;81F4C2|C230    |      ;
                        LDA.W #$0002                         ;81F4C4|A90200  |      ;
                        JMP.W CODE_81F556                    ;81F4C7|4C56F5  |81F556;
@@ -14398,7 +14636,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F4D2|8EAD09  |0009AD;
                        LDY.W #$0050                         ;81F4D5|A05000  |      ;
                        STY.W $09AF                          ;81F4D8|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F4DB|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F4DB|2288A681|81A688;
                        REP #$30                             ;81F4DF|C230    |      ;
                        LDA.W #$0003                         ;81F4E1|A90300  |      ;
                        BRA CODE_81F556                      ;81F4E4|8070    |81F556;
@@ -14411,7 +14649,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F4EE|8EAD09  |0009AD;
                        LDY.W #$0030                         ;81F4F1|A03000  |      ;
                        STY.W $09AF                          ;81F4F4|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F4F7|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F4F7|2288A681|81A688;
                        REP #$30                             ;81F4FB|C230    |      ;
                        LDA.W #$0004                         ;81F4FD|A90400  |      ;
                        BRA CODE_81F556                      ;81F500|8054    |81F556;
@@ -14424,7 +14662,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F50A|8EAD09  |0009AD;
                        LDY.W #$02C0                         ;81F50D|A0C002  |      ;
                        STY.W $09AF                          ;81F510|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F513|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F513|2288A681|81A688;
                        REP #$30                             ;81F517|C230    |      ;
                        LDA.W #$0005                         ;81F519|A90500  |      ;
                        BRA CODE_81F556                      ;81F51C|8038    |81F556;
@@ -14437,7 +14675,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F526|8EAD09  |0009AD;
                        LDY.W #$0250                         ;81F529|A05002  |      ;
                        STY.W $09AF                          ;81F52C|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F52F|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F52F|2288A681|81A688;
                        REP #$30                             ;81F533|C230    |      ;
                        LDA.W #$0006                         ;81F535|A90600  |      ;
                        BRA CODE_81F556                      ;81F538|801C    |81F556;
@@ -14450,7 +14688,7 @@ nWeatherDialogIndexesTable:
                        STX.W $09AD                          ;81F542|8EAD09  |0009AD;
                        LDY.W #$0330                         ;81F545|A03003  |      ;
                        STY.W $09AF                          ;81F548|8CAF09  |0009AF;
-                       JSL.L CODE_81A688                    ;81F54B|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;81F54B|2288A681|81A688;
                        REP #$30                             ;81F54F|C230    |      ;
                        LDA.W #$0007                         ;81F551|A90700  |      ;
                        BRA CODE_81F556                      ;81F554|8000    |81F556;
@@ -14495,7 +14733,7 @@ nWeatherDialogIndexesTable:
                        LDA.W #$00A1                         ;81F596|A9A100  |      ;
                        LDX.W $09AD                          ;81F599|AEAD09  |0009AD;
                        LDY.W $09AF                          ;81F59C|ACAF09  |0009AF;
-                       JSL.L CODE_82B03A                    ;81F59F|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;81F59F|223AB082|82B03A;
                        REP #$30                             ;81F5A3|C230    |      ;
                        LDA.W #$0040                         ;81F5A5|A94000  |      ;
                        EOR.W #$FFFF                         ;81F5A8|49FFFF  |      ;
@@ -14534,7 +14772,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$024B                         ;81F5D7|A24B02  |      ;
                        LDA.B #$00                           ;81F5DA|A900    |      ;
                        STA.W $0191                          ;81F5DC|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F5DF|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F5DF|225F9383|83935F;
                        SEP #$20                             ;81F5E3|E220    |      ;
                        INC.W $096F                          ;81F5E5|EE6F09  |00096F;
                        JMP.W CODE_81F6D6                    ;81F5E8|4CD6F6  |81F6D6;
@@ -14568,7 +14806,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$024C                         ;81F61D|A24C02  |      ;
                        LDA.B #$00                           ;81F620|A900    |      ;
                        STA.W $0191                          ;81F622|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F625|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F625|225F9383|83935F;
                        SEP #$20                             ;81F629|E220    |      ;
                        LDA.B #$02                           ;81F62B|A902    |      ;
                        STA.W $096F                          ;81F62D|8D6F09  |00096F;
@@ -14582,7 +14820,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$024D                         ;81F63A|A24D02  |      ;
                        LDA.B #$00                           ;81F63D|A900    |      ;
                        STA.W $0191                          ;81F63F|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F642|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F642|225F9383|83935F;
                        SEP #$20                             ;81F646|E220    |      ;
                        LDA.B #$03                           ;81F648|A903    |      ;
                        STA.W $096F                          ;81F64A|8D6F09  |00096F;
@@ -14596,7 +14834,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0213                         ;81F657|A21302  |      ;
                        LDA.B #$00                           ;81F65A|A900    |      ;
                        STA.W $0191                          ;81F65C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F65F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F65F|225F9383|83935F;
                        SEP #$20                             ;81F663|E220    |      ;
                        LDA.B #$03                           ;81F665|A903    |      ;
                        STA.W $096F                          ;81F667|8D6F09  |00096F;
@@ -14690,7 +14928,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$024A                         ;81F6FE|A24A02  |      ;
                        LDA.B #$00                           ;81F701|A900    |      ;
                        STA.W $0191                          ;81F703|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F706|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F706|225F9383|83935F;
                        SEP #$20                             ;81F70A|E220    |      ;
                        INC.W $096F                          ;81F70C|EE6F09  |00096F;
                        JMP.W CODE_81F7FE                    ;81F70F|4CFEF7  |81F7FE;
@@ -14724,7 +14962,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$024C                         ;81F744|A24C02  |      ;
                        LDA.B #$00                           ;81F747|A900    |      ;
                        STA.W $0191                          ;81F749|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F74C|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F74C|225F9383|83935F;
                        SEP #$20                             ;81F750|E220    |      ;
                        LDA.B #$02                           ;81F752|A902    |      ;
                        STA.W $096F                          ;81F754|8D6F09  |00096F;
@@ -14738,7 +14976,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$024D                         ;81F761|A24D02  |      ;
                        LDA.B #$00                           ;81F764|A900    |      ;
                        STA.W $0191                          ;81F766|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F769|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F769|225F9383|83935F;
                        SEP #$20                             ;81F76D|E220    |      ;
                        LDA.B #$03                           ;81F76F|A903    |      ;
                        STA.W $096F                          ;81F771|8D6F09  |00096F;
@@ -14752,7 +14990,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0213                         ;81F77E|A21302  |      ;
                        LDA.B #$00                           ;81F781|A900    |      ;
                        STA.W $0191                          ;81F783|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F786|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F786|225F9383|83935F;
                        SEP #$20                             ;81F78A|E220    |      ;
                        LDA.B #$03                           ;81F78C|A903    |      ;
                        STA.W $096F                          ;81F78E|8D6F09  |00096F;
@@ -14823,7 +15061,7 @@ nWeatherDialogIndexesTable:
                        LDA.W #$0001                         ;81F805|A90100  |      ;
                        LDX.W #$0000                         ;81F808|A20000  |      ;
                        LDY.W #$0000                         ;81F80B|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;81F80E|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;81F80E|224ED181|81D14E;
                        SEP #$20                             ;81F812|E220    |      ;
                        LDA.B #$14                           ;81F814|A914    |      ;
                        STA.W $091D                          ;81F816|8D1D09  |00091D;
@@ -14893,7 +15131,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0455                         ;81F87C|A25504  |      ;
                        LDA.B #$00                           ;81F87F|A900    |      ;
                        STA.W $0191                          ;81F881|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F884|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F884|225F9383|83935F;
                        SEP #$20                             ;81F888|E220    |      ;
                        INC.W $096F                          ;81F88A|EE6F09  |00096F;
                        JMP.W CODE_81F91E                    ;81F88D|4C1EF9  |81F91E;
@@ -14931,7 +15169,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0456                         ;81F8BF|A25604  |      ;
                        LDA.B #$00                           ;81F8C2|A900    |      ;
                        STA.W $0191                          ;81F8C4|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F8C7|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F8C7|225F9383|83935F;
                        REP #$30                             ;81F8CB|C230    |      ;
                        LDA.W #$0040                         ;81F8CD|A94000  |      ;
                        EOR.W #$FFFF                         ;81F8D0|49FFFF  |      ;
@@ -14947,7 +15185,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0457                         ;81F8E1|A25704  |      ;
                        LDA.B #$00                           ;81F8E4|A900    |      ;
                        STA.W $0191                          ;81F8E6|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F8E9|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F8E9|225F9383|83935F;
                        REP #$30                             ;81F8ED|C230    |      ;
                        LDA.W #$0040                         ;81F8EF|A94000  |      ;
                        EOR.W #$FFFF                         ;81F8F2|49FFFF  |      ;
@@ -14963,7 +15201,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0458                         ;81F903|A25804  |      ;
                        LDA.B #$00                           ;81F906|A900    |      ;
                        STA.W $0191                          ;81F908|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F90B|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F90B|225F9383|83935F;
                        REP #$30                             ;81F90F|C230    |      ;
                        LDA.W #$0040                         ;81F911|A94000  |      ;
                        EOR.W #$FFFF                         ;81F914|49FFFF  |      ;
@@ -15005,7 +15243,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$0459                         ;81F954|A25904  |      ;
                        LDA.B #$00                           ;81F957|A900    |      ;
                        STA.W $0191                          ;81F959|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F95C|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F95C|225F9383|83935F;
                        SEP #$20                             ;81F960|E220    |      ;
                        INC.W $096F                          ;81F962|EE6F09  |00096F;
                        JMP.W CODE_81FA45                    ;81F965|4C45FA  |81FA45;
@@ -15049,7 +15287,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$045A                         ;81F9A2|A25A04  |      ;
                        LDA.B #$00                           ;81F9A5|A900    |      ;
                        STA.W $0191                          ;81F9A7|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F9AA|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F9AA|225F9383|83935F;
                        REP #$30                             ;81F9AE|C230    |      ;
                        LDA.W #$0040                         ;81F9B0|A94000  |      ;
                        EOR.W #$FFFF                         ;81F9B3|49FFFF  |      ;
@@ -15065,7 +15303,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$045B                         ;81F9C4|A25B04  |      ;
                        LDA.B #$00                           ;81F9C7|A900    |      ;
                        STA.W $0191                          ;81F9C9|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F9CC|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F9CC|225F9383|83935F;
                        REP #$30                             ;81F9D0|C230    |      ;
                        LDA.W #$0040                         ;81F9D2|A94000  |      ;
                        EOR.W #$FFFF                         ;81F9D5|49FFFF  |      ;
@@ -15081,7 +15319,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$045C                         ;81F9E6|A25C04  |      ;
                        LDA.B #$00                           ;81F9E9|A900    |      ;
                        STA.W $0191                          ;81F9EB|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81F9EE|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81F9EE|225F9383|83935F;
                        REP #$30                             ;81F9F2|C230    |      ;
                        LDA.W #$0040                         ;81F9F4|A94000  |      ;
                        EOR.W #$FFFF                         ;81F9F7|49FFFF  |      ;
@@ -15097,7 +15335,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$045D                         ;81FA08|A25D04  |      ;
                        LDA.B #$00                           ;81FA0B|A900    |      ;
                        STA.W $0191                          ;81FA0D|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81FA10|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81FA10|225F9383|83935F;
                        REP #$30                             ;81FA14|C230    |      ;
                        LDA.W #$0040                         ;81FA16|A94000  |      ;
                        EOR.W #$FFFF                         ;81FA19|49FFFF  |      ;
@@ -15113,7 +15351,7 @@ nWeatherDialogIndexesTable:
                        LDX.W #$045E                         ;81FA2A|A25E04  |      ;
                        LDA.B #$00                           ;81FA2D|A900    |      ;
                        STA.W $0191                          ;81FA2F|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81FA32|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81FA32|225F9383|83935F;
                        REP #$30                             ;81FA36|C230    |      ;
                        LDA.W #$0040                         ;81FA38|A94000  |      ;
                        EOR.W #$FFFF                         ;81FA3B|49FFFF  |      ;
@@ -15175,7 +15413,7 @@ nWeatherDialogIndexesTable:
                        STA.W $019A                          ;81FA9B|8D9A01  |00019A;
                        LDA.B #$00                           ;81FA9E|A900    |      ;
                        STA.W $0191                          ;81FAA0|8D9101  |000191;
-                       JSL.L DialogRelated                  ;81FAA3|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;81FAA3|225F9383|83935F;
                        REP #$30                             ;81FAA7|C230    |      ;
                        LDA.W #$0040                         ;81FAA9|A94000  |      ;
                        EOR.W #$FFFF                         ;81FAAC|49FFFF  |      ;

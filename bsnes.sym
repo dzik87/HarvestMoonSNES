@@ -60,6 +60,9 @@
 00:08F9 sSecondChildNameLong+4
 00:08FB sSecondChildNameLong+6
 00:0973 nTimeState
+00:0980 nUnknownX
+00:0982 nUnknownY
+00:0984 nHeldItemId
 00:2100 SNES_INIDISP
 00:2101 SNES_OBSEL
 00:2102 SNES_OAMADDL
@@ -849,18 +852,202 @@
 80:FFEA Native_NMI
 80:FFF4 Native_IRQ
 80:FFFE Emulation_RESET
+81:8000 fUnknown_818000
+81:8072 .label1
+81:8099 .return
+81:809A subUnknown_81809A
+81:80B7 fUnknown_8180B7
+81:80FE subItemCarried_Mushroom
+81:8102 subItemCarried_PoisonMushroom
+81:8106 subItemCarried_WildGrape
+81:810A subItemCarried_BerryStrongSmell
+81:810E subItemCarried_MoonFlower
+81:8112 subItemCarried_Cake
+81:8116 subItemCarried_Fish
+81:811A subItemCarried_PowerBerry
+81:811E subItemCarried_Bush
+81:8122 subItemCarried_Bush2
+81:8126 subItemCarried_0x0D
+81:812A subItemCarried_0x0E
+81:812E subItemCarried_0x57
+81:8132 subItemCarried_Corn
+81:8149 .return
+81:814A subItemCarried_Tomato
+81:8161 .return
+81:8162 subItemCarried_Potato
+81:8179 .return
+81:817A subItemCarried_Turnip
+81:8191 .return
+81:8192 subItemCarried_Egg
+81:8196 subItemCarried_SmallMilk
+81:819A subItemCarried_MediumMilk
+81:819E subItemCarried_LargeMilk
+81:81A2 subItemCarried_Herb
+81:81A6 subItemCarried_Flower
+81:81AA subItemCarried_Feed
+81:81AE subItemCarried_GreenPerfume
+81:81C7 .return
+81:81C8 subItemCarried_RedPerfume
+81:81E1 .return
+81:81E2 subItemCarried_BluePerfume
+81:81FB .return
+81:81FC subItemCarried_RedEgg
+81:820A .label1
+81:821D .label3
+81:822C .label2
+81:823D .return
+81:823E subItemCarried_LightPurpleEgg
+81:824C .label1
+81:825F .label3
+81:826E .label2
+81:827F .return
+81:8280 subItemCarried_BlueEgg
+81:828E .label1
+81:82A1 .label3
+81:82B0 .label2
+81:82C1 .return
+81:82C2 subItemCarried_PurpleEgg
+81:82E0 .label2
+81:82EF .label1
+81:82FE subItemCarried_GreenEgg
+81:8328 .label1
+81:8337 fEggFestivalUnknown_818337
+81:835E fEggFestivalUnknown_81835E
+81:836C fEggFestivalUnknown_81836C
+81:83B6 subItemCarried_YellowEgg
+81:83B7 subItemCarried_ChickenWindMeasured
+81:83BB subItemCarried_Chicken
+81:83BF subItemCarried_Chick
+81:83C3 subItemCarried_0x27
+81:83C4 subItemCarried_0x28
+81:83C5 subItemCarried_Mole
+81:83C9 subItemCarried_0x2A
+81:83D1 subItemCarried_0x2B
+81:83D9 subItemCarried_0x2C
+81:83E1 subItemCarried_0x2D
+81:83E9 subItemCarried_0x2E
+81:83F1 subItemCarried_0x2F
+81:83F9 subItemCarried_0x30
+81:8401 subItemCarried_0x31
+81:8409 subItemCarried_0x32
+81:8411 subItemCarried_0x33
+81:8419 subItemCarried_0x34
+81:8421 subItemCarried_0x35
+81:8429 subItemCarried_0x36
+81:8431 subItemCarried_0x37
+81:8439 subItemCarried_0x38
+81:8441 subItemCarried_0x39
+81:8449 subItemCarried_0x3A
+81:8451 subItemCarried_0x3B
+81:8459 subItemCarried_0x3C
+81:8461 subItemCarried_0x3D
+81:8469 subItemCarried_0x3E
+81:8471 subItemCarried_0x3F
+81:8479 subItemCarried_0x40
+81:8481 subItemCarried_0x41
+81:8489 subItemCarried_0x42
+81:8491 subItemCarried_0x43
+81:8499 subItemCarried_0x44
+81:84BB .skip1
+81:84C7 .skip2
+81:84D4 .return
+81:84D5 subItemCarried_0x45
+81:84F7 .skip1
+81:8503 .skip2
+81:8510 .return
+81:8511 subItemCarried_0x46
+81:8533 .skip1
+81:853F .skip2
+81:854C .return
+81:854D subItemCarried_0x47
+81:856F .skip1
+81:857B .skip2
+81:8588 .return
+81:8589 subItemCarried_0x48
+81:85AB .jump1
+81:85B7 .jump2
+81:85C4 .return
+81:85C5 subItemCarried_0x49
+81:85DE .return
+81:85DF subItemCarried_0x4A
+81:85F5 .return
+81:85F6 subItemCarried_0x4B
+81:860C .return
+81:860D subItemCarried_0x4C
+81:8623 .return
+81:8624 subItemCarried_0x4D
+81:864E .jump
+81:865A .return
+81:865B subItemCarried_0x4E
+81:8685 .jump
+81:8691 .return
+81:8692 subItemCarried_0x4F
+81:86BC .jump
+81:86C8 .return
+81:86C9 subItemCarried_0x50
+81:86F3 .jump
+81:86FF .return
+81:8700 subItemCarried_0x51
+81:872A .jump
+81:8736 .return
+81:8737 subItemCarried_0x52
+81:874D .return
+81:874E subItemCarried_0x53
+81:8764 .return
+81:8765 subItemCarried_0x54
+81:8780 .return
+81:8781 subItemCarried_0x55
+81:879C .return
+81:879D subItemCarried_0x56
+81:87B6 .return
+81:87B7 subItemCarried_0x58
+81:87BB subItemCarried_0x59
+81:87BF subItemCarried_0x5A
+81:87C3 fUnknown_8187C3
+81:87D2 .skip
+81:883A fUnknown_81883A
+81:8846 .skip
+81:8854 .return
+81:8855 fUnknown_818855
+81:8861 .not00
+81:8868 .not01
+81:886F .not02
+81:8876 .not03
+81:887D .not04
+81:8884 .not05
+81:888B .not06
+81:8892 .not07
+81:8899 .return
+81:889A fUnknown_81889A
+81:88BC fUnknown_8188BC
+81:88E5 fUnknown_8188E5
+81:8923 fItemHandlerMain
+81:8B6B fCase0of0976
+81:8BA5 fCase1of0976
+81:8F2A fCase5of0976
+81:8F5A fCase6of0976
+81:9049 fCase2of0976
 81:91DE AddProfit
+81:9379 fCase3of0976
+81:968F fCase4of0976
+81:9695 fCase7of0976
+81:96AF pTable_8196AF
+81:97C0 pItemHoldSubrutines
 81:9FC6 nUnknownDialogIndex_819FC6
 81:9FDE nShippingProfitMoneyTable
 81:A094 nUnknownDialogIndex_81A094
 81:A1A5 nUnknownDialogIndex_81A1A5
-81:A363 nUnknown_0980_32b_ValuesTable
+81:A363 nUnknownXYTable
+81:A4F1 fUnknown_81A4F1
+81:A500 fUnknown_81A500
+81:A688 fUnknown_81A688
 81:AC49 nPowerBerryTable
 81:B363 Table_81B363
 81:B963 pTable_81B963
 81:BE0F nToolsRelatedTable
 81:BF97 Table_81BF97
 81:CAAB IncrementPowerBerryEatenRoutine
+81:D14E fUnknown_81D14E
 81:D1E8 Table_81D1E8
 81:D210 nSpriteIndexTable
 81:D510 nWeatherDialogIndexesTable
@@ -873,7 +1060,7 @@
 82:82EE NotLastSeason
 82:82F6 NotLastDayOfMonth
 82:837C NewDay
-82:878E DeadEnd
+82:878E fDeadEnd_82878E
 82:89D6 WriteSeasonWeekdayAndDayOrdinal
 82:8A9B .first
 82:8AA2 .nd
@@ -903,6 +1090,7 @@
 82:ACFE Table_82ACFE
 82:AD06 Table_82AD06
 82:B02A Table_82B02A
+82:B03A fUnknown_82B03A
 82:B174 pMapTable
 82:B294 pTable_82B294
 82:CFB4 nUnkownItemOnHandTable
@@ -929,7 +1117,8 @@
 83:90EF Table_8390EF
 83:927F Table_83927F
 83:92B1 Table_8392B1
-83:935F DialogRelated
+83:935F fDialogRelated_83935F
+83:93C5 .label1
 83:944D Table_83944D
 83:9467 Table_839467
 83:947D Table_83947D
@@ -992,6 +1181,7 @@
 84:C014 Table_84C014
 84:C7B6 Table_84C7B6
 84:D15A Padding_840000
+85:81A2 fUnknown_8581A2
 85:8627 Table_858627
 85:8637 Table_858637
 85:8BD0 Table_858BD0
@@ -2703,8 +2893,6 @@ BB:BDF8 Padding_BB0000
 80:EF11 DATA24_80EF11
 80:EF1C DATA24_80EF1C
 80:FFFF PTR16_80FFFF
-81:96AF PTR24_8196AF
-81:97C0 DATA8_8197C0
 81:9876 DATA16_819876
 81:989A DATA16_81989A
 81:98BE DATA16_8198BE
@@ -5537,34 +5725,34 @@ FF:FFFF EMPTY_FFFFFF
 
 [comments]
 00:0042 ptr24 * 16
-00:00D6 16b
-00:00D8 16b
-00:017D 16b (used when we change map)
-00:017F 16b (used when we change map)
-00:0183 16b, Current dialog index
-00:0881 8b * 4
+00:00D6 n16
+00:00D8 n16
+00:017D n16 (used when we change map)
+00:017F n16 (used when we change map)
+00:0183 n16, Current dialog index
+00:0881 4 * s8
 00:0882 2
 00:0883 3
 00:0884 4
-00:0885 4 * 8b
+00:0885 4 * s8
 00:0886 2
 00:0887 3
 00:0888 4
-00:0899 8b * 4
+00:0899 4 * s8
 00:089A 2
 00:089B 3
 00:089C 4
-00:089D 8b * 4
+00:089D 4 * s8
 00:089E 2
 00:089F 3
 00:08A0 4
-00:08B3 18b * 6
+00:08B3 6 * s8
 00:08B5 2
 00:08B7 3
 00:08B9 4
 00:08BB 5
 00:08BD 6
-00:08BF 16b * 9
+00:08BF 9 * s16
 00:08C1 2
 00:08C3 3
 00:08C5 4
@@ -5573,54 +5761,57 @@ FF:FFFF EMPTY_FFFFFF
 00:08CB 7
 00:08CD 8
 00:08CF 9
-00:08D1 16b * 2
+00:08D1 2 * s16
 00:08D3 2
-00:08D5 16b * 4
+00:08D5 4 * s16
 00:08D7 2
 00:08D9 3
 00:08DB 4
-00:08DD 16b * 4
+00:08DD 4 * s16
 00:08DF 2
 00:08E1 3
 00:08E3 4
-00:08E5 16b * 4
+00:08E5 4 * s16
 00:08E7 2
 00:08E9 3
 00:08EB 4
-00:08ED 16b * 4
+00:08ED 4 * s16
 00:08EF 2
 00:08F1 3
 00:08F3 4
-00:08F5 16b * 4
+00:08F5 4 * s16
 00:08F7 2
 00:08F9 3
 00:08FB 4
-00:0973 16b, 00 - stop, 01- run, 02 - skip to next day
+00:0973 n16, 00 - stop, 01- run, 02 - skip to next day
+00:0980 n16
+00:0982 n16
+00:0984 n16
 00:C1C6 pointer to 16bytes * 10
 00:C286 pointer to 8bytes * 10
-7F:1F00 32b
-7F:1F04 24b
-7F:1F07 24bit value
-7F:1F18 8b, 00 - 1st Year, 01 - 2nd Year, 03 - 3rd Year
-7F:1F19 8b
-7F:1F1A 8b
-7F:1F1B 8b
-7F:1F1C 8b
-7F:1F36 range 00h-0Ah, (ammount of flowers in garden)
-7F:1F37 16b
-7F:1F39 16b
-7F:1F3D 4 * 16b
+7F:1F00 strSheedItems
+7F:1F04 n24
+7F:1F07 n24
+7F:1F18 n8, 00 - 1st Year, 01 - 2nd Year, 03 - 3rd Year
+7F:1F19 n8
+7F:1F1A n8
+7F:1F1B n8
+7F:1F1C n8
+7F:1F36 n8 range 00h-0Ah, (ammount of flowers in garden)
+7F:1F37 n16
+7F:1F39 n16
+7F:1F3D 4 * s16
 7F:1F3E 2
 7F:1F3F 3
 7F:1F40 4
-7F:1F41 8b * 4
+7F:1F41 4 * s8
 7F:1F42 2
 7F:1F43 3
 7F:1F44 4
-7F:1F4A 16b
-7F:1F4C 16b
-7F:1F4E 16b
-7F:1F50 16b
+7F:1F4A n16
+7F:1F4C n16
+7F:1F4E n16
+7F:1F50 n16
 7F:1F56 range 00h-64h
 7F:1F69 00 - No, 01 - Yes
 80:865D A: nCount
@@ -5641,10 +5832,13 @@ FF:FFFF EMPTY_FFFFFF
 80:B6F5 b16 nTransitionDestination, b16, b16 nDestX, b16 nDestY
 80:BB5C 16b, 16b, 16b nPalleteIndex ; 60 entries
 80:BEEC ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16
+81:817A X = 26
+81:96AF 91 * ptr24
+81:97C0 91 * ptr16
 81:9FDE 16b
 81:A094 16b ; Unknown size - does not line up with next table
 81:A1A5 16b nDialogIndex, 16b, 16b, 16b, 16b, 16b ; terminated with $FFFF ; 
-81:A363 32b
+81:A363 n16 x, n16 y
 81:AC49 16b, 16b / 32b (not sure about this size) * 0A
 81:B363 16b, 32b
 81:B963 if last 16b are $FFFF = end if $FFFE then it follows with prt24 (looping same data again)

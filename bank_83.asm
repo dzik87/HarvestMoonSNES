@@ -2401,7 +2401,7 @@
                        RTL                                  ;83935E|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-        DialogRelated:
+fDialogRelated_83935F:
                        REP #$30                             ;83935F|C230    |      ; X: nDialogIndex
                        STX.W nDialogIndex                   ;839361|8E8301  |000183;
                        LDA.W #$5000                         ;839364|A90050  |      ;
@@ -2434,18 +2434,18 @@
                        STA.B $03                            ;8393A6|8503    |000003;
                        SEP #$20                             ;8393A8|E220    |      ;
                        LDA.W $0191                          ;8393AA|AD9101  |000191;
-                       BNE CODE_8393C5                      ;8393AD|D016    |8393C5;
+                       BNE .label1                          ;8393AD|D016    |8393C5;
                        LDA.B #$01                           ;8393AF|A901    |      ;
                        STA.W $0191                          ;8393B1|8D9101  |000191;
                        REP #$20                             ;8393B4|C220    |      ;
                        LDA.W $090D                          ;8393B6|AD0D09  |00090D;
                        CMP.W #$0081                         ;8393B9|C98100  |      ;
-                       BCS CODE_8393C5                      ;8393BC|B007    |8393C5;
+                       BCS .label1                          ;8393BC|B007    |8393C5;
                        SEP #$20                             ;8393BE|E220    |      ;
                        LDA.B #$02                           ;8393C0|A902    |      ;
                        STA.W $0191                          ;8393C2|8D9101  |000191;
                                                             ;      |        |      ;
-          CODE_8393C5:
+              .label1:
                        SEP #$20                             ;8393C5|E220    |      ;
                        LDA.B #$00                           ;8393C7|A900    |      ;
                        XBA                                  ;8393C9|EB      |      ;
