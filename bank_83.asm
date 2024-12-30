@@ -337,9 +337,9 @@
                        INC.B ptrUnknown0x72                 ;838241|E672    |000072;
                        AND.W #$00FF                         ;838243|29FF00  |      ;
                        SEP #$20                             ;838246|E220    |      ;
-                       STA.B [$75]                          ;838248|8775    |000075;
+                       STA.B [ptrUnknown0x75]               ;838248|8775    |000075;
                        REP #$30                             ;83824A|C230    |      ;
-                       INC.B $75                            ;83824C|E675    |000075;
+                       INC.B ptrUnknown0x75                 ;83824C|E675    |000075;
                        DEC.B $7E                            ;83824E|C67E    |00007E;
                        BEQ CODE_8382C2                      ;838250|F070    |8382C2;
                        LDX.B $84                            ;838252|A684    |000084;
@@ -382,9 +382,9 @@
                        LDA.L $7F0000,X                      ;83828F|BF00007F|7F0000;
                        AND.W #$00FF                         ;838293|29FF00  |      ;
                        SEP #$20                             ;838296|E220    |      ;
-                       STA.B [$75]                          ;838298|8775    |000075;
+                       STA.B [ptrUnknown0x75]               ;838298|8775    |000075;
                        REP #$30                             ;83829A|C230    |      ;
-                       INC.B $75                            ;83829C|E675    |000075;
+                       INC.B ptrUnknown0x75                 ;83829C|E675    |000075;
                        DEC.B $7E                            ;83829E|C67E    |00007E;
                        BEQ CODE_8382C2                      ;8382A0|F020    |8382C2;
                        LDX.B $84                            ;8382A2|A684    |000084;
@@ -647,7 +647,7 @@
                        BNE CODE_838479                      ;83847C|D0FB    |838479;
                                                             ;      |        |      ;
           CODE_83847E:
-                       LDA.B [$0A],Y                        ;83847E|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;83847E|B70A    |00000A;
                        INY                                  ;838480|C8      |      ;
                        XBA                                  ;838481|EB      |      ;
                        LDA.B #$00                           ;838482|A900    |      ;
@@ -656,7 +656,7 @@
                                                             ;      |        |      ;
           CODE_838486:
                        XBA                                  ;838486|EB      |      ;
-                       LDA.B [$0A],Y                        ;838487|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838487|B70A    |00000A;
                        INY                                  ;838489|C8      |      ;
                        XBA                                  ;83848A|EB      |      ;
                                                             ;      |        |      ;
@@ -759,10 +759,10 @@
                        LDY.W #$0000                         ;838538|A00000  |      ;
                        REP #$20                             ;83853B|C220    |      ;
                        LDA.W #$D120                         ;83853D|A920D1  |      ;
-                       STA.B $0A                            ;838540|850A    |00000A;
+                       STA.B ptrUnknown0x0A                 ;838540|850A    |00000A;
                        SEP #$20                             ;838542|E220    |      ;
                        LDA.B #$B2                           ;838544|A9B2    |      ;
-                       STA.B $0C                            ;838546|850C    |00000C;
+                       STA.B ptrUnknown0x0A+2               ;838546|850C    |00000C;
                        REP #$20                             ;838548|C220    |      ;
                        LDA.B $80                            ;83854A|A580    |000080;
                        TAX                                  ;83854C|AA      |      ;
@@ -777,13 +777,13 @@
                        LDA.B #$01                           ;83855B|A901    |      ;
                        CMP.W SNES_APUIO3                    ;83855D|CD4321  |002143;
                        BNE CODE_83854D                      ;838560|D0EB    |83854D;
-                       LDA.B [$0A],Y                        ;838562|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838562|B70A    |00000A;
                        STA.W SNES_APUIO0                    ;838564|8D4021  |002140;
                        INY                                  ;838567|C8      |      ;
-                       LDA.B [$0A],Y                        ;838568|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838568|B70A    |00000A;
                        STA.W SNES_APUIO1                    ;83856A|8D4121  |002141;
                        INY                                  ;83856D|C8      |      ;
-                       LDA.B [$0A],Y                        ;83856E|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;83856E|B70A    |00000A;
                        STA.W SNES_APUIO2                    ;838570|8D4221  |002142;
                        INY                                  ;838573|C8      |      ;
                        DEX                                  ;838574|CA      |      ;
@@ -968,12 +968,12 @@
                        BNE CODE_8386B8                      ;8386BD|D0F9    |8386B8;
                        REP #$20                             ;8386BF|C220    |      ;
                        LDA.L Table_8390EF,X                 ;8386C1|BFEF9083|8390EF; read ptr at offset 7
-                       STA.B $0A                            ;8386C5|850A    |00000A; store 16b to $0A
+                       STA.B ptrUnknown0x0A                 ;8386C5|850A    |00000A; store 16b to $0A
                        INX                                  ;8386C7|E8      |      ;
                        INX                                  ;8386C8|E8      |      ;
                        SEP #$20                             ;8386C9|E220    |      ;
                        LDA.L Table_8390EF,X                 ;8386CB|BFEF9083|8390EF;
-                       STA.B $0C                            ;8386CF|850C    |00000C; store 8b to $0C
+                       STA.B ptrUnknown0x0A+2               ;8386CF|850C    |00000C; store 8b to $0C
                        LDA.B #$00                           ;8386D1|A900    |      ;
                        XBA                                  ;8386D3|EB      |      ;
                        LDA.B $94                            ;8386D4|A594    |000094;
@@ -1032,13 +1032,13 @@
                        BNE CODE_838730                      ;838735|D0F9    |838730;
                                                             ;      |        |      ;
           CODE_838737:
-                       LDA.B [$0A],Y                        ;838737|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838737|B70A    |00000A;
                        STA.W SNES_APUIO0                    ;838739|8D4021  |002140;
                        INY                                  ;83873C|C8      |      ;
-                       LDA.B [$0A],Y                        ;83873D|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;83873D|B70A    |00000A;
                        STA.W SNES_APUIO1                    ;83873F|8D4121  |002141;
                        INY                                  ;838742|C8      |      ;
-                       LDA.B [$0A],Y                        ;838743|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838743|B70A    |00000A;
                        STA.W SNES_APUIO2                    ;838745|8D4221  |002142;
                        INY                                  ;838748|C8      |      ;
                        DEX                                  ;838749|CA      |      ;
@@ -1281,12 +1281,12 @@
                        BNE CODE_8388F0                      ;8388F5|D0F9    |8388F0;
                        REP #$20                             ;8388F7|C220    |      ;
                        LDA.L Table_8390EF,X                 ;8388F9|BFEF9083|8390EF;
-                       STA.B $0A                            ;8388FD|850A    |00000A;
+                       STA.B ptrUnknown0x0A                 ;8388FD|850A    |00000A;
                        INX                                  ;8388FF|E8      |      ;
                        INX                                  ;838900|E8      |      ;
                        SEP #$20                             ;838901|E220    |      ;
                        LDA.L Table_8390EF,X                 ;838903|BFEF9083|8390EF;
-                       STA.B $0C                            ;838907|850C    |00000C;
+                       STA.B ptrUnknown0x0A+2               ;838907|850C    |00000C;
                        LDA.B #$00                           ;838909|A900    |      ;
                        XBA                                  ;83890B|EB      |      ;
                        LDA.B $94                            ;83890C|A594    |000094;
@@ -1345,13 +1345,13 @@
                        BNE CODE_838968                      ;83896D|D0F9    |838968;
                                                             ;      |        |      ;
           CODE_83896F:
-                       LDA.B [$0A],Y                        ;83896F|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;83896F|B70A    |00000A;
                        STA.W SNES_APUIO0                    ;838971|8D4021  |002140;
                        INY                                  ;838974|C8      |      ;
-                       LDA.B [$0A],Y                        ;838975|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838975|B70A    |00000A;
                        STA.W SNES_APUIO1                    ;838977|8D4121  |002141;
                        INY                                  ;83897A|C8      |      ;
-                       LDA.B [$0A],Y                        ;83897B|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;83897B|B70A    |00000A;
                        STA.W SNES_APUIO2                    ;83897D|8D4221  |002142;
                        INY                                  ;838980|C8      |      ;
                        DEX                                  ;838981|CA      |      ;
@@ -1520,12 +1520,12 @@
                        JSL.L CODE_838000                    ;838A95|22008083|838000;
                        TAX                                  ;838A99|AA      |      ;
                        LDA.L Table_838F83,X                 ;838A9A|BF838F83|838F83;
-                       STA.B $0A                            ;838A9E|850A    |00000A;
+                       STA.B ptrUnknown0x0A                 ;838A9E|850A    |00000A;
                        INX                                  ;838AA0|E8      |      ;
                        INX                                  ;838AA1|E8      |      ;
                        SEP #$20                             ;838AA2|E220    |      ;
                        LDA.L Table_838F83,X                 ;838AA4|BF838F83|838F83;
-                       STA.B $0C                            ;838AA8|850C    |00000C;
+                       STA.B ptrUnknown0x0A+2               ;838AA8|850C    |00000C;
                        REP #$20                             ;838AAA|C220    |      ;
                        LDA.B $80                            ;838AAC|A580    |000080;
                        TAX                                  ;838AAE|AA      |      ;
@@ -1544,13 +1544,13 @@
                        LDA.B #$01                           ;838AC2|A901    |      ;
                        CMP.W SNES_APUIO3                    ;838AC4|CD4321  |002143;
                        BNE CODE_838AB4                      ;838AC7|D0EB    |838AB4;
-                       LDA.B [$0A],Y                        ;838AC9|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838AC9|B70A    |00000A;
                        STA.W SNES_APUIO0                    ;838ACB|8D4021  |002140;
                        INY                                  ;838ACE|C8      |      ;
-                       LDA.B [$0A],Y                        ;838ACF|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838ACF|B70A    |00000A;
                        STA.W SNES_APUIO1                    ;838AD1|8D4121  |002141;
                        INY                                  ;838AD4|C8      |      ;
-                       LDA.B [$0A],Y                        ;838AD5|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838AD5|B70A    |00000A;
                        STA.W SNES_APUIO2                    ;838AD7|8D4221  |002142;
                        INY                                  ;838ADA|C8      |      ;
                        DEX                                  ;838ADB|CA      |      ;
@@ -1732,12 +1732,12 @@
                        BNE CODE_838C24                      ;838C29|D0F9    |838C24;
                        REP #$20                             ;838C2B|C220    |      ;
                        LDA.L Table_8390EF,X                 ;838C2D|BFEF9083|8390EF;
-                       STA.B $0A                            ;838C31|850A    |00000A;
+                       STA.B ptrUnknown0x0A                 ;838C31|850A    |00000A;
                        INX                                  ;838C33|E8      |      ;
                        INX                                  ;838C34|E8      |      ;
                        SEP #$20                             ;838C35|E220    |      ;
                        LDA.L Table_8390EF,X                 ;838C37|BFEF9083|8390EF;
-                       STA.B $0C                            ;838C3B|850C    |00000C;
+                       STA.B ptrUnknown0x0A+2               ;838C3B|850C    |00000C;
                        LDA.B #$00                           ;838C3D|A900    |      ;
                        XBA                                  ;838C3F|EB      |      ;
                        LDA.B $94                            ;838C40|A594    |000094;
@@ -1797,13 +1797,13 @@
                                                             ;      |        |      ;
           CODE_838CA3:
                        SEP #$20                             ;838CA3|E220    |      ;
-                       LDA.B [$0A],Y                        ;838CA5|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838CA5|B70A    |00000A;
                        STA.W SNES_APUIO0                    ;838CA7|8D4021  |002140;
                        INY                                  ;838CAA|C8      |      ;
-                       LDA.B [$0A],Y                        ;838CAB|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838CAB|B70A    |00000A;
                        STA.W SNES_APUIO1                    ;838CAD|8D4121  |002141;
                        INY                                  ;838CB0|C8      |      ;
-                       LDA.B [$0A],Y                        ;838CB1|B70A    |00000A;
+                       LDA.B [ptrUnknown0x0A],Y             ;838CB1|B70A    |00000A;
                        STA.W SNES_APUIO2                    ;838CB3|8D4221  |002142;
                        INY                                  ;838CB6|C8      |      ;
                        DEX                                  ;838CB7|CA      |      ;
@@ -2331,12 +2331,12 @@
                        LDA.W #$CB05                         ;8392BF|A905CB  |      ;
                        STA.B ptrUnknown0x72                 ;8392C2|8572    |000072;
                        LDA.W #$2000                         ;8392C4|A90020  |      ;
-                       STA.B $75                            ;8392C7|8575    |000075;
+                       STA.B ptrUnknown0x75                 ;8392C7|8575    |000075;
                        SEP #$20                             ;8392C9|E220    |      ;
                        LDA.B #$A5                           ;8392CB|A9A5    |      ;
                        STA.B ptrUnknown0x72+2               ;8392CD|8574    |000074;
                        LDA.B #$7E                           ;8392CF|A97E    |      ;
-                       STA.B $77                            ;8392D1|8577    |000077;
+                       STA.B ptrUnknown0x75+2               ;8392D1|8577    |000077;
                        JSL.L fDecompressTilemap             ;8392D3|22F88183|8381F8;
                        SEP #$20                             ;8392D7|E220    |      ;
                        LDA.B #$00                           ;8392D9|A900    |      ;
@@ -2426,12 +2426,12 @@ fDialogRelated_83935F:
                        ADC.W nDialogIndex                   ;839394|6D8301  |000183;
                        TAX                                  ;839397|AA      |      ;
                        LDA.L pDialogTable,X                 ;839398|BFF69B83|839BF6;
-                       STA.B $01                            ;83939C|8501    |000001;
+                       STA.B ptrUnknown0x01                 ;83939C|8501    |000001;
                        INX                                  ;83939E|E8      |      ;
                        INX                                  ;83939F|E8      |      ;
                        SEP #$20                             ;8393A0|E220    |      ;
                        LDA.L pDialogTable,X                 ;8393A2|BFF69B83|839BF6;
-                       STA.B $03                            ;8393A6|8503    |000003;
+                       STA.B ptrUnknown0x01+2               ;8393A6|8503    |000003;
                        SEP #$20                             ;8393A8|E220    |      ;
                        LDA.W $0191                          ;8393AA|AD9101  |000191;
                        BNE .label1                          ;8393AD|D016    |8393C5;
@@ -2645,7 +2645,7 @@ fDialogRelated_83935F:
                        LDA.W $0187                          ;839540|AD8701  |000187;
                        ASL A                                ;839543|0A      |      ;
                        TAY                                  ;839544|A8      |      ;
-                       LDA.B [$01],Y                        ;839545|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;839545|B701    |000001;
                        CMP.W #$00A2                         ;839547|C9A200  |      ;
                        BNE .not00A2                         ;83954A|D003    |83954F;
                        JMP.W .textNextScreenHandler         ;83954C|4CF195  |8395F1;
@@ -2682,7 +2682,7 @@ fDialogRelated_83935F:
                        BNE .label3                          ;839576|D06F    |8395E7;
                        STZ.W $0189                          ;839578|9C8901  |000189;
                        REP #$20                             ;83957B|C220    |      ;
-                       LDA.B [$01],Y                        ;83957D|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;83957D|B701    |000001;
                        CMP.W #$FFFD                         ;83957F|C9FDFF  |      ;
                        BNE .notFFFD                         ;839582|D003    |839587;
                        JMP.W .textFFFDHandler               ;839584|4CA196  |8396A1;
@@ -2690,7 +2690,7 @@ fDialogRelated_83935F:
                                                             ;      |        |      ;
              .notFFFD:
                        REP #$30                             ;839587|C230    |      ;
-                       LDA.B [$01],Y                        ;839589|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;839589|B701    |000001;
                        SEP #$10                             ;83958B|E210    |      ;
                        LDX.B #$01                           ;83958D|A201    |      ;
                        CMP.W #$00BC                         ;83958F|C9BC00  |      ;
@@ -2786,12 +2786,12 @@ fDialogRelated_83935F:
                        INY                                  ;83962F|C8      |      ;
                        INY                                  ;839630|C8      |      ;
                        SEP #$20                             ;839631|E220    |      ;
-                       LDA.B [$01],Y                        ;839633|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;839633|B701    |000001;
                        STA.W $018C                          ;839635|8D8C01  |00018C;
                        REP #$20                             ;839638|C220    |      ;
                        INY                                  ;83963A|C8      |      ;
                        INY                                  ;83963B|C8      |      ;
-                       LDA.B [$01],Y                        ;83963C|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;83963C|B701    |000001;
                        DEC A                                ;83963E|3A      |      ;
                        ASL A                                ;83963F|0A      |      ;
                        ASL A                                ;839640|0A      |      ;
@@ -2856,7 +2856,7 @@ fDialogRelated_83935F:
                        INY                                  ;8396AF|C8      |      ;
                        INY                                  ;8396B0|C8      |      ;
                        SEP #$20                             ;8396B1|E220    |      ;
-                       LDA.B [$01],Y                        ;8396B3|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;8396B3|B701    |000001;
                        STA.W $018C                          ;8396B5|8D8C01  |00018C;
                        DEC A                                ;8396B8|3A      |      ;
                        STA.W $018D                          ;8396B9|8D8D01  |00018D;
@@ -2868,7 +2868,7 @@ fDialogRelated_83935F:
                        CLC                                  ;8396C2|18      |      ;
                        ADC.W #$0004                         ;8396C3|690400  |      ;
                        TAY                                  ;8396C6|A8      |      ;
-                       LDA.B [$01],Y                        ;8396C7|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;8396C7|B701    |000001;
                        DEC A                                ;8396C9|3A      |      ;
                        ASL A                                ;8396CA|0A      |      ;
                        ASL A                                ;8396CB|0A      |      ;
@@ -2923,7 +2923,7 @@ fDialogRelated_83935F:
                        INY                                  ;83972A|C8      |      ;
                        INY                                  ;83972B|C8      |      ;
                        SEP #$20                             ;83972C|E220    |      ;
-                       LDA.B [$01],Y                        ;83972E|B701    |000001;
+                       LDA.B [ptrUnknown0x01],Y             ;83972E|B701    |000001;
                        DEC A                                ;839730|3A      |      ;
                        STA.W $018E                          ;839731|8D8E01  |00018E;
                        SEP #$20                             ;839734|E220    |      ;
@@ -4942,9 +4942,9 @@ fSetDefaultValuesForVariables:
                        STZ.W $019A                          ;83AC00|9C9A01  |00019A;
                        STZ.B $28                            ;83AC03|6428    |000028;
                        REP #$20                             ;83AC05|C220    |      ;
-                       STZ.B $04                            ;83AC07|6404    |000004;
+                       STZ.B ptrUnknown0x04                 ;83AC07|6404    |000004;
                        SEP #$20                             ;83AC09|E220    |      ;
-                       STZ.B $06                            ;83AC0B|6406    |000006;
+                       STZ.B ptrUnknown0x04+2               ;83AC0B|6406    |000006;
                        REP #$20                             ;83AC0D|C220    |      ;
                        STZ.B ptrUnknown0x42                 ;83AC0F|6442    |000042;
                        STZ.B $45                            ;83AC11|6445    |000045;
@@ -4970,9 +4970,9 @@ fSetDefaultValuesForVariables:
                        STZ.W $087A                          ;83AC42|9C7A08  |00087A;
                        STZ.W nTimeState                     ;83AC45|9C7309  |000973;
                        REP #$20                             ;83AC48|C220    |      ;
-                       STZ.B $CF                            ;83AC4A|64CF    |0000CF;
+                       STZ.B ptrUnknown0xCF                 ;83AC4A|64CF    |0000CF;
                        SEP #$20                             ;83AC4C|E220    |      ;
-                       STZ.B $D1                            ;83AC4E|64D1    |0000D1;
+                       STZ.B ptrUnknown0xCF+2               ;83AC4E|64D1    |0000D1;
                        STZ.W $098A                          ;83AC50|9C8A09  |00098A;
                        STZ.W $0972                          ;83AC53|9C7209  |000972;
                        REP #$20                             ;83AC56|C220    |      ;
@@ -5175,17 +5175,17 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83AE08:
                        REP #$30                             ;83AE08|C230    |      ;
-                       LDA.B $CC                            ;83AE0A|A5CC    |0000CC;
+                       LDA.B ptrUnknown0xCC                 ;83AE0A|A5CC    |0000CC;
                        PHA                                  ;83AE0C|48      |      ;
                        SEP #$20                             ;83AE0D|E220    |      ;
-                       LDA.B $CE                            ;83AE0F|A5CE    |0000CE;
+                       LDA.B ptrUnknown0xCC+2               ;83AE0F|A5CE    |0000CE;
                        PHA                                  ;83AE11|48      |      ;
                        REP #$20                             ;83AE12|C220    |      ;
                        LDA.W #$B586                         ;83AE14|A986B5  |      ;
-                       STA.B $CC                            ;83AE17|85CC    |0000CC;
+                       STA.B ptrUnknown0xCC                 ;83AE17|85CC    |0000CC;
                        SEP #$20                             ;83AE19|E220    |      ;
                        LDA.B #$7E                           ;83AE1B|A97E    |      ;
-                       STA.B $CE                            ;83AE1D|85CE    |0000CE;
+                       STA.B ptrUnknown0xCC+2               ;83AE1D|85CE    |0000CE;
                        REP #$20                             ;83AE1F|C220    |      ;
                        STZ.B $8C                            ;83AE21|648C    |00008C;
                        LDX.W #$0000                         ;83AE23|A20000  |      ;
@@ -5195,11 +5195,11 @@ fSetDefaultValuesForVariables:
                        REP #$10                             ;83AE28|C210    |      ;
                        LDY.W #$000C                         ;83AE2A|A00C00  |      ;
                        LDA.B #$00                           ;83AE2D|A900    |      ;
-                       STA.B [$CC],Y                        ;83AE2F|97CC    |0000CC;
+                       STA.B [ptrUnknown0xCC],Y             ;83AE2F|97CC    |0000CC;
                        SEP #$20                             ;83AE31|E220    |      ;
                        REP #$10                             ;83AE33|C210    |      ;
                        LDY.W #$0000                         ;83AE35|A00000  |      ;
-                       LDA.B [$CC],Y                        ;83AE38|B7CC    |0000CC;
+                       LDA.B [ptrUnknown0xCC],Y             ;83AE38|B7CC    |0000CC;
                        BNE CODE_83AE3F                      ;83AE3A|D003    |83AE3F;
                        JMP.W CODE_83AE81                    ;83AE3C|4C81AE  |83AE81;
                                                             ;      |        |      ;
@@ -5209,13 +5209,13 @@ fSetDefaultValuesForVariables:
                        LDA.B $80                            ;83AE41|A580    |000080;
                        SEC                                  ;83AE43|38      |      ;
                        LDY.W #$001A                         ;83AE44|A01A00  |      ;
-                       SBC.B [$CC],Y                        ;83AE47|F7CC    |0000CC;
+                       SBC.B [ptrUnknown0xCC],Y             ;83AE47|F7CC    |0000CC;
                        CMP.W #$0019                         ;83AE49|C91900  |      ;
                        BCS CODE_83AE81                      ;83AE4C|B033    |83AE81;
                        LDA.B $82                            ;83AE4E|A582    |000082;
                        SEC                                  ;83AE50|38      |      ;
                        LDY.W #$001C                         ;83AE51|A01C00  |      ;
-                       SBC.B [$CC],Y                        ;83AE54|F7CC    |0000CC;
+                       SBC.B [ptrUnknown0xCC],Y             ;83AE54|F7CC    |0000CC;
                        CMP.W #$0019                         ;83AE56|C91900  |      ;
                        BCS CODE_83AE81                      ;83AE59|B026    |83AE81;
                        LDA.B $8C                            ;83AE5B|A58C    |00008C;
@@ -5224,11 +5224,11 @@ fSetDefaultValuesForVariables:
                        REP #$10                             ;83AE61|C210    |      ;
                        LDY.W #$000C                         ;83AE63|A00C00  |      ;
                        LDA.B #$01                           ;83AE66|A901    |      ;
-                       STA.B [$CC],Y                        ;83AE68|97CC    |0000CC;
+                       STA.B [ptrUnknown0xCC],Y             ;83AE68|97CC    |0000CC;
                        SEP #$20                             ;83AE6A|E220    |      ;
                        REP #$10                             ;83AE6C|C210    |      ;
                        LDY.W #$0000                         ;83AE6E|A00000  |      ;
-                       LDA.B [$CC],Y                        ;83AE71|B7CC    |0000CC;
+                       LDA.B [ptrUnknown0xCC],Y             ;83AE71|B7CC    |0000CC;
                        AND.B #$02                           ;83AE73|2902    |      ;
                        BEQ CODE_83AE7A                      ;83AE75|F003    |83AE7A;
                        JMP.W CODE_83AE81                    ;83AE77|4C81AE  |83AE81;
@@ -5241,10 +5241,10 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83AE81:
                        REP #$20                             ;83AE81|C220    |      ;
-                       LDA.B $CC                            ;83AE83|A5CC    |0000CC;
+                       LDA.B ptrUnknown0xCC                 ;83AE83|A5CC    |0000CC;
                        CLC                                  ;83AE85|18      |      ;
                        ADC.W #$0040                         ;83AE86|694000  |      ;
-                       STA.B $CC                            ;83AE89|85CC    |0000CC;
+                       STA.B ptrUnknown0xCC                 ;83AE89|85CC    |0000CC;
                        INX                                  ;83AE8B|E8      |      ;
                        CPX.W #$0031                         ;83AE8C|E03100  |      ;
                        BEQ CODE_83AE94                      ;83AE8F|F003    |83AE94;
@@ -5256,10 +5256,10 @@ fSetDefaultValuesForVariables:
                        BNE CODE_83AEAD                      ;83AE96|D015    |83AEAD;
                        SEP #$20                             ;83AE98|E220    |      ;
                        PLA                                  ;83AE9A|68      |      ;
-                       STA.B $CE                            ;83AE9B|85CE    |0000CE;
+                       STA.B ptrUnknown0xCC+2               ;83AE9B|85CE    |0000CE;
                        REP #$20                             ;83AE9D|C220    |      ;
                        PLA                                  ;83AE9F|68      |      ;
-                       STA.B $CC                            ;83AEA0|85CC    |0000CC;
+                       STA.B ptrUnknown0xCC                 ;83AEA0|85CC    |0000CC;
                                                             ;      |        |      ;
           CODE_83AEA2:
                        REP #$30                             ;83AEA2|C230    |      ;
@@ -5272,10 +5272,10 @@ fSetDefaultValuesForVariables:
           CODE_83AEAD:
                        SEP #$20                             ;83AEAD|E220    |      ;
                        PLA                                  ;83AEAF|68      |      ;
-                       STA.B $CE                            ;83AEB0|85CE    |0000CE;
+                       STA.B ptrUnknown0xCC+2               ;83AEB0|85CE    |0000CE;
                        REP #$20                             ;83AEB2|C220    |      ;
                        PLA                                  ;83AEB4|68      |      ;
-                       STA.B $CC                            ;83AEB5|85CC    |0000CC;
+                       STA.B ptrUnknown0xCC                 ;83AEB5|85CC    |0000CC;
                        REP #$20                             ;83AEB7|C220    |      ;
                        LDX.W #$0000                         ;83AEB9|A20000  |      ;
                        LDY.W #$0000                         ;83AEBC|A00000  |      ;
@@ -5796,24 +5796,24 @@ fSetDefaultValuesForVariables:
                        LDA.L nMoney                         ;83B1CB|AF041F7F|7F1F04;
                        CLC                                  ;83B1CF|18      |      ;
                        ADC.B ptrUnknown0x72                 ;83B1D0|6572    |000072;
-                       STA.B $75                            ;83B1D2|8575    |000075;
+                       STA.B ptrUnknown0x75                 ;83B1D2|8575    |000075;
                        SEP #$20                             ;83B1D4|E220    |      ;
                        LDA.L nMoney+2                       ;83B1D6|AF061F7F|7F1F06;
                        ADC.B ptrUnknown0x72+2               ;83B1DA|6574    |000074;
-                       STA.B $77                            ;83B1DC|8577    |000077;
+                       STA.B ptrUnknown0x75+2               ;83B1DC|8577    |000077;
                        BMI CODE_83B206                      ;83B1DE|3026    |83B206;
                        REP #$20                             ;83B1E0|C220    |      ;
-                       LDA.B $75                            ;83B1E2|A575    |000075;
+                       LDA.B ptrUnknown0x75                 ;83B1E2|A575    |000075;
                        CMP.W #$423F                         ;83B1E4|C93F42  |      ;
                        SEP #$20                             ;83B1E7|E220    |      ;
-                       LDA.B $77                            ;83B1E9|A577    |000077;
+                       LDA.B ptrUnknown0x75+2               ;83B1E9|A577    |000077;
                        SBC.B #$0F                           ;83B1EB|E90F    |      ;
                        BCS CODE_83B20D                      ;83B1ED|B01E    |83B20D;
                        REP #$20                             ;83B1EF|C220    |      ;
-                       LDA.B $75                            ;83B1F1|A575    |000075;
+                       LDA.B ptrUnknown0x75                 ;83B1F1|A575    |000075;
                        STA.L nMoney                         ;83B1F3|8F041F7F|7F1F04;
                        SEP #$20                             ;83B1F7|E220    |      ;
-                       LDA.B $77                            ;83B1F9|A577    |000077;
+                       LDA.B ptrUnknown0x75+2               ;83B1F9|A577    |000077;
                        STA.L nMoney+2                       ;83B1FB|8F061F7F|7F1F06;
                        REP #$20                             ;83B1FF|C220    |      ;
                        LDA.W #$0000                         ;83B201|A90000  |      ;
@@ -6294,17 +6294,17 @@ fSetDefaultValuesForVariables:
                        BNE CODE_83B65B                      ;83B666|D0F3    |83B65B;
                        REP #$20                             ;83B668|C220    |      ;
                        LDA.B ptrUnknown0x72                 ;83B66A|A572    |000072;
-                       STA.B $75                            ;83B66C|8575    |000075;
+                       STA.B ptrUnknown0x75                 ;83B66C|8575    |000075;
                        SEP #$20                             ;83B66E|E220    |      ;
                        LDA.B ptrUnknown0x72+2               ;83B670|A574    |000074;
-                       STA.B $77                            ;83B672|8577    |000077;
+                       STA.B ptrUnknown0x75+2               ;83B672|8577    |000077;
                        JSL.L CODE_82A65A                    ;83B674|225AA682|82A65A;
                        SEP #$20                             ;83B678|E220    |      ;
                        LDY.W #$01C0                         ;83B67A|A0C001  |      ;
                        LDX.W #$00C0                         ;83B67D|A2C000  |      ;
                                                             ;      |        |      ;
           CODE_83B680:
-                       LDA.B [$75],Y                        ;83B680|B775    |000075;
+                       LDA.B [ptrUnknown0x75],Y             ;83B680|B775    |000075;
                        STA.L $7EA4E6,X                      ;83B682|9FE6A47E|7EA4E6;
                        INY                                  ;83B686|C8      |      ;
                        INX                                  ;83B687|E8      |      ;
@@ -7982,7 +7982,7 @@ fSetDefaultValuesForVariables:
                        REP #$10                             ;83C3A0|C210    |      ;
                        LDY.W #$0000                         ;83C3A2|A00000  |      ;
                        LDA.B #$03                           ;83C3A5|A903    |      ;
-                       STA.B [$CC],Y                        ;83C3A7|97CC    |0000CC;
+                       STA.B [ptrUnknown0xCC],Y             ;83C3A7|97CC    |0000CC;
                        BRA CODE_83C401                      ;83C3A9|8056    |83C401;
                                                             ;      |        |      ;
                                                             ;      |        |      ;

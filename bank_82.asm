@@ -7787,7 +7787,7 @@ nUnkownItemOnHandTable:
                        JSL.L fZeroAll42Pointers             ;82D2FB|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D2FF|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D303|220F8285|85820F;
-                       JSL.L CODE_81A4C7                    ;82D307|22C7A481|81A4C7;
+                       JSL.L fUnknown_81A4C7                ;82D307|22C7A481|81A4C7;
                        JSL.L CODE_848000                    ;82D30B|22008084|848000;
                        JSL.L CODE_82A65A                    ;82D30F|225AA682|82A65A;
                        REP #$20                             ;82D313|C220    |      ;
@@ -7825,7 +7825,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_80900C                ;82D368|220C9080|80900C;
                        JSL.L fUnknown_808E69                ;82D36C|22698E80|808E69;
                        JSL.L CODE_84C034                    ;82D370|2234C084|84C034;
-                       JSL.L CODE_81A383                    ;82D374|2283A381|81A383;
+                       JSL.L fUnknown_81A383                ;82D374|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;82D378|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;82D37C|22B39580|8095B3;
                        JSL.L CODE_84816F                    ;82D380|226F8184|84816F;
@@ -7973,7 +7973,7 @@ nUnkownItemOnHandTable:
                        JSL.L fZeroAll42Pointers             ;82D4FC|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D500|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D504|220F8285|85820F;
-                       JSL.L CODE_81A4C7                    ;82D508|22C7A481|81A4C7;
+                       JSL.L fUnknown_81A4C7                ;82D508|22C7A481|81A4C7;
                        JSL.L CODE_848000                    ;82D50C|22008084|848000;
                        JSL.L CODE_82A65A                    ;82D510|225AA682|82A65A;
                        REP #$20                             ;82D514|C220    |      ;
@@ -8223,7 +8223,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_80900C                ;82D6EA|220C9080|80900C;
                        JSL.L fUnknown_808E69                ;82D6EE|22698E80|808E69;
                        JSL.L CODE_84C034                    ;82D6F2|2234C084|84C034;
-                       JSL.L CODE_81A383                    ;82D6F6|2283A381|81A383;
+                       JSL.L fUnknown_81A383                ;82D6F6|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;82D6FA|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;82D6FE|22B39580|8095B3;
                        JSL.L CODE_84816F                    ;82D702|226F8184|84816F;
@@ -8455,7 +8455,7 @@ nUnkownItemOnHandTable:
                        JSL.L fZeroAll42Pointers             ;82D8BA|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D8BE|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D8C2|220F8285|85820F;
-                       JSL.L CODE_81A4C7                    ;82D8C6|22C7A481|81A4C7;
+                       JSL.L fUnknown_81A4C7                ;82D8C6|22C7A481|81A4C7;
                        JSL.L CODE_848000                    ;82D8CA|22008084|848000;
                        REP #$20                             ;82D8CE|C220    |      ;
                        REP #$30                             ;82D8D0|C230    |      ;
@@ -8513,7 +8513,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_80900C                ;82D95C|220C9080|80900C;
                        JSL.L fUnknown_808E69                ;82D960|22698E80|808E69;
                        JSL.L CODE_84C034                    ;82D964|2234C084|84C034;
-                       JSL.L CODE_81A383                    ;82D968|2283A381|81A383;
+                       JSL.L fUnknown_81A383                ;82D968|2283A381|81A383;
                        JSL.L CODE_81BFB7                    ;82D96C|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;82D970|22B39580|8095B3;
                        JSL.L CODE_84816F                    ;82D974|226F8184|84816F;
@@ -8568,7 +8568,7 @@ nUnkownItemOnHandTable:
                        JSL.L fZeroAll42Pointers             ;82D9E4|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82D9E8|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82D9EC|220F8285|85820F;
-                       JSL.L CODE_81A4C7                    ;82D9F0|22C7A481|81A4C7;
+                       JSL.L fUnknown_81A4C7                ;82D9F0|22C7A481|81A4C7;
                        JSL.L CODE_848000                    ;82D9F4|22008084|848000;
                        SEP #$20                             ;82D9F8|E220    |      ;
                        LDA.B #$5B                           ;82D9FA|A95B    |      ;
@@ -8715,7 +8715,7 @@ nUnkownItemOnHandTable:
                        JSL.L fZeroAll42Pointers             ;82DB29|22AB8F80|808FAB;
                        JSL.L CODE_858ED7                    ;82DB2D|22D78E85|858ED7;
                        JSL.L CODE_85820F                    ;82DB31|220F8285|85820F;
-                       JSL.L CODE_81A4C7                    ;82DB35|22C7A481|81A4C7;
+                       JSL.L fUnknown_81A4C7                ;82DB35|22C7A481|81A4C7;
                        JSL.L CODE_848000                    ;82DB39|22008084|848000;
                        REP #$20                             ;82DB3D|C220    |      ;
                        STZ.B nPlayerPosX                    ;82DB3F|64D6    |0000D6;
@@ -10249,7 +10249,7 @@ nUnkownItemOnHandTable:
                        STA.B ptrUnknown0x72+2               ;82E8AA|8574    |000074;
                        JSL.L fUnkown_808A33                 ;82E8AC|22338A80|808A33;
                        JSL.L fStartProgrammedDMA            ;82E8B0|22F08A80|808AF0;
-                       JSL.L CODE_81A4C7                    ;82E8B4|22C7A481|81A4C7;
+                       JSL.L fUnknown_81A4C7                ;82E8B4|22C7A481|81A4C7;
                        REP #$20                             ;82E8B8|C220    |      ;
                        LDA.W #$0219                         ;82E8BA|A91902  |      ;
                        STA.B $A1                            ;82E8BD|85A1    |0000A1;
@@ -10264,7 +10264,7 @@ nUnkownItemOnHandTable:
                        STA.B $9D                            ;82E8D5|859D    |00009D;
                        STA.W $099D                          ;82E8D7|8D9D09  |00099D;
                        STZ.B $A3                            ;82E8DA|64A3    |0000A3;
-                       JSL.L CODE_858000                    ;82E8DC|22008085|858000;
+                       JSL.L fUnknown_858000                ;82E8DC|22008085|858000;
                        REP #$20                             ;82E8E0|C220    |      ;
                        LDA.B $A5                            ;82E8E2|A5A5    |0000A5;
                        STA.W $0995                          ;82E8E4|8D9509  |000995;
@@ -10358,7 +10358,7 @@ nUnkownItemOnHandTable:
                        STA.B $9D                            ;82E9AF|859D    |00009D;
                        LDA.W $0995                          ;82E9B1|AD9509  |000995;
                        STA.B $A5                            ;82E9B4|85A5    |0000A5;
-                       JSL.L CODE_8580B9                    ;82E9B6|22B98085|8580B9;
+                       JSL.L fUnknown_8580B9                ;82E9B6|22B98085|8580B9;
                        JSL.L CODE_8582C7                    ;82E9BA|22C78285|8582C7;
                        JSL.L CODE_858CB2                    ;82E9BE|22B28C85|858CB2;
                        JSL.L CODE_8583E0                    ;82E9C2|22E08385|8583E0;

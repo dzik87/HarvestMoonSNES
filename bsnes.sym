@@ -1,10 +1,28 @@
 [labels]
+00:0001 ptrUnknown0x01
+00:0003 ptrUnknown0x01+2
+00:0004 ptrUnknown0x04
+00:0006 ptrUnknown0x04+2
+00:0007 ptrUnknown0x07
+00:0009 ptrUnknown0x07+2
+00:000A ptrUnknown0x0A
+00:000C ptrUnknown0x0A+2
 00:000D ptrUnknown0x0D
 00:000F ptrUnknown0x0D+2
 00:0042 ptrUnknown0x42
 00:0044 ptrUnknown0x42+2
 00:0072 ptrUnknown0x72
 00:0074 ptrUnknown0x72+2
+00:0075 ptrUnknown0x75
+00:0077 ptrUnknown0x75+2
+00:0078 ptrUnknown0x78
+00:007A ptrUnknown0x78+2
+00:00C9 ptrUnknown0xC9
+00:00CB ptrUnknown0xC9+2
+00:00CC ptrUnknown0xCC
+00:00CE ptrUnknown0xCC+2
+00:00CF ptrUnknown0xCF
+00:00D1 ptrUnknown0xCF+2
 00:00D6 nPlayerPosX
 00:00D8 nPlayerPosY
 00:017D nDestinationX
@@ -1192,8 +1210,22 @@
 81:A2AD nItemCarriedIndexFor0x0D
 81:A308 nItemCarriedTable_81A308
 81:A363 nUnknownXYTable
+81:A383 fUnknown_81A383
+81:A393 .loop
+81:A39F +
+81:A405 +
+81:A417 +
+81:A419 .allOther
+81:A431 .caseFFFF
+81:A4B2 .caseFFFD
+81:A4C6 +
+81:A4C7 fUnknown_81A4C7
+81:A4D7 -
 81:A4F1 fUnknown_81A4F1
 81:A500 fUnknown_81A500
+81:A510 -
+81:A528 .deadEnd
+81:A52A +
 81:A5E1 fUnknown_81A5E1
 81:A688 fUnknown_81A688
 81:AC49 nPowerBerryTable
@@ -1342,6 +1374,9 @@
 84:C014 Table_84C014
 84:C7B6 Table_84C7B6
 84:D15A Padding_840000
+85:8000 fUnknown_858000
+85:80B9 fUnknown_8580B9
+85:8100 fUnknown_858100
 85:81A2 fUnknown_8581A2
 85:81CB fUnknown_8581CB
 85:8627 Table_858627
@@ -5884,9 +5919,18 @@ FF:FFFF EMPTY_FFFFFF
 
 
 [comments]
+00:0001 ptr24
+00:0004 ptr24
+00:0007 ptr24
+00:000A ptr24
 00:000D ptr24
 00:0042 16 * ptr24
-00:0072 ptr24 - in post cases
+00:0072 ptr24
+00:0075 ptr24
+00:0078 ptr24
+00:00C9 ptr24
+00:00CC prt24
+00:00CF ptr24
 00:00D6 n16
 00:00D8 n16
 00:017D n16 (used when we change map)
@@ -6002,6 +6046,7 @@ FF:FFFF EMPTY_FFFFFF
 81:A1A5 16b nDialogIndex, 16b, 16b, 16b, 16b, 16b ; terminated with $FFFF ; 
 81:A2AD n8
 81:A363 n16 x, n16 y
+81:A528 infinite loop ? why ?
 81:AC49 16b, 16b / 32b (not sure about this size) * 0A
 81:B363 16b, 32b
 81:B963 if last 16b are $FFFF = end if $FFFE then it follows with prt24 (looping same data again)
