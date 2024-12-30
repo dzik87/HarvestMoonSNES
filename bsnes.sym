@@ -1442,15 +1442,53 @@
 84:C7B6 Table_84C7B6
 84:D15A Padding_840000
 85:8000 fUnknown_858000
+85:8013 .label1
+85:801B .label2
+85:802F .label3
+85:8046 .label4
+85:807D .label5
+85:808C .label6
+85:80B8 fReturn_8580B8
 85:80B9 fUnknown_8580B9
+85:80CC .label1
+85:80D4 .label2
+85:80FF .return
 85:8100 fUnknown_858100
+85:8115 .label1
+85:811D .label2
+85:8168 .label3
+85:8177 .label4
 85:81A2 fUnknown_8581A2
+85:81B8 +
 85:81CB fUnknown_8581CB
+85:81F6 +
+85:8206 .label1
+85:8209 .label2
 85:820F fUnknown_85820F
+85:8224 .label1
+85:822C .label2
+85:8237 .loop
+85:82BF .exit
 85:82C7 fUnknown_8582C7
+85:82CD .loop1
+85:82D4 .loop2
+85:82E7 .label1
+85:82FB .label2
+85:8303 .label3
+85:831F .loop3
+85:832A .label4
+85:8349 .label5
+85:8362 .label6
+85:8371 .label7
+85:8376 .return
+85:8377 fUnknown_858377
 85:83E0 fUnknown_8583E0
 85:8627 Table_858627
 85:8637 Table_858637
+85:8647 fUnknown_858647
+85:8AE5 fUnknown_858AE5
+85:8B41 fUnknown_858B41
+85:8B7B fUnknown_858B7B
 85:8BD0 Table_858BD0
 85:8BE0 Table_858BE0
 85:8C7F Table_858C7F
@@ -6156,6 +6194,9 @@ FF:FFFF EMPTY_FFFFFF
 83:C995 A: nIndex, return ptr24 $72
 83:C9A7 A: nIndex, return ptr24 $72
 83:CA10 16b, 16b
+85:82CD outer loop
+85:82D4 inner loop
+85:831F sub inner loop
 94:9843 Each glyph is 0x10 long
 80:BD9C ? * [16b, 16b, 16b]
 81:BA3E unkown size
