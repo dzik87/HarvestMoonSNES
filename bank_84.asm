@@ -35,7 +35,7 @@
                        LDY.W #$0012                         ;848033|A01200  |      ;
                        LDA.B [$CC],Y                        ;848036|B7CC    |0000CC;
                        STA.B $A5                            ;848038|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;84803A|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;84803A|22A28185|8581A2;
                        RTL                                  ;84803E|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -420,7 +420,7 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_84830A:
-                       JSL.L CODE_8581A2                    ;84830A|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;84830A|22A28185|8581A2;
                                                             ;      |        |      ;
           CODE_84830E:
                        REP #$30                             ;84830E|C230    |      ;
@@ -2265,7 +2265,7 @@
                        SEP #$20                             ;849011|E220    |      ;
                        LDA.B #$02                           ;849013|A902    |      ;
                        STA.W $019A                          ;849015|8D9A01  |00019A;
-                       JSL.L DialogRelated                  ;849018|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;849018|225F9383|83935F;
                        REP #$30                             ;84901C|C230    |      ;
                        LDA.B $C9                            ;84901E|A5C9    |0000C9;
                        CLC                                  ;849020|18      |      ;
@@ -2301,7 +2301,7 @@
                        SEP #$20                             ;849056|E220    |      ;
                        LDA.B #$02                           ;849058|A902    |      ;
                        STA.W $019A                          ;84905A|8D9A01  |00019A;
-                       JSL.L DialogRelated                  ;84905D|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;84905D|225F9383|83935F;
                        REP #$30                             ;849061|C230    |      ;
                        LDA.B $C9                            ;849063|A5C9    |0000C9;
                        CLC                                  ;849065|18      |      ;
@@ -2765,7 +2765,7 @@
                        LDY.W #$0012                         ;8493B1|A01200  |      ;
                        LDA.B [$CC],Y                        ;8493B4|B7CC    |0000CC;
                        STA.B $A5                            ;8493B6|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;8493B8|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;8493B8|22A28185|8581A2;
                        REP #$20                             ;8493BC|C220    |      ;
                        LDA.B $72                            ;8493BE|A572    |000072;
                        STA.B $CC                            ;8493C0|85CC    |0000CC;
@@ -3964,7 +3964,7 @@
                        STA.W $0191                          ;849C6A|8D9101  |000191;
                        LDA.B #$02                           ;849C6D|A902    |      ;
                        STA.W $019A                          ;849C6F|8D9A01  |00019A;
-                       JSL.L DialogRelated                  ;849C72|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;849C72|225F9383|83935F;
                        SEP #$20                             ;849C76|E220    |      ;
                        REP #$10                             ;849C78|C210    |      ;
                        LDY.W #$0001                         ;849C7A|A00100  |      ;
@@ -7294,7 +7294,7 @@
                        LDY.W #$0012                         ;84B359|A01200  |      ;
                        LDA.B [$CC],Y                        ;84B35C|B7CC    |0000CC;
                        STA.B $A5                            ;84B35E|85A5    |0000A5;
-                       JSL.L CODE_8581A2                    ;84B360|22A28185|8581A2;
+                       JSL.L fUnknown_8581A2                ;84B360|22A28185|8581A2;
                        RTS                                  ;84B364|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8272,7 +8272,7 @@
                        PLX                                  ;84BA48|FA      |      ;
                        SEP #$20                             ;84BA49|E220    |      ;
                        PLA                                  ;84BA4B|68      |      ;
-                       JSL.L CODE_82B03A                    ;84BA4C|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;84BA4C|223AB082|82B03A;
                        RTS                                  ;84BA50|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8937,7 +8937,7 @@
                        SEP #$20                             ;84BEFD|E220    |      ;
                        LDA.B #$06                           ;84BEFF|A906    |      ;
                        STA.W $019A                          ;84BF01|8D9A01  |00019A;
-                       JSL.L DialogRelated                  ;84BF04|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;84BF04|225F9383|83935F;
                        REP #$30                             ;84BF08|C230    |      ;
                        LDA.B $C9                            ;84BF0A|A5C9    |0000C9;
                        CLC                                  ;84BF0C|18      |      ;
@@ -9930,7 +9930,7 @@
                        SEP #$20                             ;84C5BD|E220    |      ;
                        LDA.B #$00                           ;84C5BF|A900    |      ;
                        STA.W $0191                          ;84C5C1|8D9101  |000191;
-                       JSL.L DialogRelated                  ;84C5C4|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;84C5C4|225F9383|83935F;
                                                             ;      |        |      ;
           CODE_84C5C8:
                        REP #$20                             ;84C5C8|C220    |      ;
@@ -10604,7 +10604,7 @@
                        LDA.W #$0000                         ;84CA29|A90000  |      ;
                        LDX.W #$0007                         ;84CA2C|A20700  |      ;
                        LDY.W #$0007                         ;84CA2F|A00700  |      ;
-                       JSL.L CODE_81D14E                    ;84CA32|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;84CA32|224ED181|81D14E;
                        REP #$30                             ;84CA36|C230    |      ;
                        LDX.W $0985                          ;84CA38|AE8509  |000985;
                        LDY.W $0987                          ;84CA3B|AC8709  |000987;
@@ -10701,7 +10701,7 @@
                        LDA.W #$0000                         ;84CAD5|A90000  |      ;
                        LDX.W #$0007                         ;84CAD8|A20700  |      ;
                        LDY.W #$0007                         ;84CADB|A00700  |      ;
-                       JSL.L CODE_81D14E                    ;84CADE|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;84CADE|224ED181|81D14E;
                        REP #$30                             ;84CAE2|C230    |      ;
                        LDX.W $0985                          ;84CAE4|AE8509  |000985;
                        LDY.W $0987                          ;84CAE7|AC8709  |000987;
@@ -10723,7 +10723,7 @@
                        LDA.W #$0000                         ;84CB00|A90000  |      ;
                        LDX.W #$0007                         ;84CB03|A20700  |      ;
                        LDY.W #$0007                         ;84CB06|A00700  |      ;
-                       JSL.L CODE_81D14E                    ;84CB09|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;84CB09|224ED181|81D14E;
                        REP #$30                             ;84CB0D|C230    |      ;
                        LDX.W $0985                          ;84CB0F|AE8509  |000985;
                        LDY.W $0987                          ;84CB12|AC8709  |000987;
@@ -10763,7 +10763,7 @@
                        LDA.W #$0000                         ;84CB50|A90000  |      ;
                        LDX.W #$0007                         ;84CB53|A20700  |      ;
                        LDY.W #$0007                         ;84CB56|A00700  |      ;
-                       JSL.L CODE_81D14E                    ;84CB59|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;84CB59|224ED181|81D14E;
                        REP #$20                             ;84CB5D|C220    |      ;
                        LDA.W #$0002                         ;84CB5F|A90200  |      ;
                        LDX.W $0985                          ;84CB62|AE8509  |000985;
@@ -10786,7 +10786,7 @@
                        LDA.W #$0001                         ;84CB7F|A90100  |      ;
                        LDX.W #$000A                         ;84CB82|A20A00  |      ;
                        LDY.W #$000A                         ;84CB85|A00A00  |      ;
-                       JSL.L CODE_81D14E                    ;84CB88|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;84CB88|224ED181|81D14E;
                        REP #$20                             ;84CB8C|C220    |      ;
                        LDA.W #$0002                         ;84CB8E|A90200  |      ;
                        LDX.W $0985                          ;84CB91|AE8509  |000985;
@@ -10809,7 +10809,7 @@
                        LDA.W #$0001                         ;84CBAE|A90100  |      ;
                        LDX.W #$0000                         ;84CBB1|A20000  |      ;
                        LDY.W #$0000                         ;84CBB4|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;84CBB7|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;84CBB7|224ED181|81D14E;
                        REP #$20                             ;84CBBB|C220    |      ;
                        LDA.W #$0002                         ;84CBBD|A90200  |      ;
                        LDX.W $0985                          ;84CBC0|AE8509  |000985;

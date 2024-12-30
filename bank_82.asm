@@ -227,7 +227,7 @@
                        SEP #$20                             ;828198|E220    |      ;
                        LDA.B #$00                           ;82819A|A900    |      ;
                        STA.W $0191                          ;82819C|8D9101  |000191;
-                       JSL.L DialogRelated                  ;82819F|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;82819F|225F9383|83935F;
                        REP #$20                             ;8281A3|C220    |      ;
                        LDA.W #$0006                         ;8281A5|A90600  |      ;
                        LDX.W #$0000                         ;8281A8|A20000  |      ;
@@ -868,8 +868,8 @@ NewYearPrepareArgumentsAXY:
                        RTL                                  ;82878D|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-              DeadEnd:
-                       BRA DeadEnd                          ;82878E|80FE    |82878E;
+      fDeadEnd_82878E:
+                       BRA fDeadEnd_82878E                  ;82878E|80FE    |82878E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_828790:
@@ -2247,7 +2247,7 @@ ToolAnimationNoAction:
                        LDA.W #$0001                         ;82927F|A90100  |      ;
                        LDX.W #$0000                         ;829282|A20000  |      ;
                        LDY.W #$0000                         ;829285|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;829288|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;829288|224ED181|81D14E;
                        REP #$20                             ;82928C|C220    |      ;
                        LDX.W $0985                          ;82928E|AE8509  |000985;
                        LDY.W $0987                          ;829291|AC8709  |000987;
@@ -2263,7 +2263,7 @@ ToolAnimationNoAction:
                        LDA.W #$0001                         ;8292A2|A90100  |      ;
                        LDX.W #$0000                         ;8292A5|A20000  |      ;
                        LDY.W #$0000                         ;8292A8|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;8292AB|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8292AB|224ED181|81D14E;
                        REP #$20                             ;8292AF|C220    |      ;
                        LDX.W $0985                          ;8292B1|AE8509  |000985;
                        LDY.W $0987                          ;8292B4|AC8709  |000987;
@@ -2276,7 +2276,7 @@ ToolAnimationNoAction:
                        INC A                                ;8292BE|1A      |      ;
                        LDX.W #$0000                         ;8292BF|A20000  |      ;
                        LDY.W #$0000                         ;8292C2|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;8292C5|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;8292C5|224ED181|81D14E;
                        REP #$20                             ;8292C9|C220    |      ;
                        LDX.W $0985                          ;8292CB|AE8509  |000985;
                        LDY.W $0987                          ;8292CE|AC8709  |000987;
@@ -2380,12 +2380,12 @@ ToolAnimationNoAction:
                        LDA.W #$0052                         ;829388|A95200  |      ;
                        LDX.W $0985                          ;82938B|AE8509  |000985;
                        LDY.W $0987                          ;82938E|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829391|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829391|2288A681|81A688;
                        REP #$20                             ;829395|C220    |      ;
                        LDA.W $0985                          ;829397|AD8509  |000985;
-                       STA.W $0980                          ;82939A|8D8009  |000980;
+                       STA.W nUnknownX                      ;82939A|8D8009  |000980;
                        LDA.W $0987                          ;82939D|AD8709  |000987;
-                       STA.W $0982                          ;8293A0|8D8209  |000982;
+                       STA.W nUnknownY                      ;8293A0|8D8209  |000982;
                        REP #$30                             ;8293A3|C230    |      ;
                        LDA.W #$00C1                         ;8293A5|A9C100  |      ;
                        STA.W $097A                          ;8293A8|8D7A09  |00097A;
@@ -2398,19 +2398,19 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;8293BA|8D7509  |000975;
                        LDA.B #$00                           ;8293BD|A900    |      ;
                        STA.W $0976                          ;8293BF|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;8293C2|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;8293C2|2200A581|81A500;
                        BRA CODE_829403                      ;8293C6|803B    |829403;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_8293C8:
                        LDX.W $0985                          ;8293C8|AE8509  |000985;
                        LDY.W $0987                          ;8293CB|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;8293CE|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;8293CE|2288A681|81A688;
                        REP #$20                             ;8293D2|C220    |      ;
                        LDA.W $0985                          ;8293D4|AD8509  |000985;
-                       STA.W $0980                          ;8293D7|8D8009  |000980;
+                       STA.W nUnknownX                      ;8293D7|8D8009  |000980;
                        LDA.W $0987                          ;8293DA|AD8709  |000987;
-                       STA.W $0982                          ;8293DD|8D8209  |000982;
+                       STA.W nUnknownY                      ;8293DD|8D8209  |000982;
                        REP #$30                             ;8293E0|C230    |      ;
                        LDA.W #$00B7                         ;8293E2|A9B700  |      ;
                        STA.W $097A                          ;8293E5|8D7A09  |00097A;
@@ -2423,7 +2423,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;8293F7|8D7509  |000975;
                        LDA.B #$00                           ;8293FA|A900    |      ;
                        STA.W $0976                          ;8293FC|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;8293FF|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;8293FF|2200A581|81A500;
                                                             ;      |        |      ;
           CODE_829403:
                        SEP #$20                             ;829403|E220    |      ;
@@ -2476,7 +2476,7 @@ ToolAnimationNoAction:
                        LDA.W #$0017                         ;82946C|A91700  |      ;
                        LDX.W $0985                          ;82946F|AE8509  |000985;
                        LDY.W $0987                          ;829472|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829475|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829475|2288A681|81A688;
                        SEP #$20                             ;829479|E220    |      ;
                        LDA.L nCurrentSeasonID               ;82947B|AF191F7F|7F1F19;
                        CMP.B #$02                           ;82947F|C902    |      ;
@@ -2649,12 +2649,12 @@ ToolAnimationNoAction:
           CODE_8295F5:
                        LDX.W $0985                          ;8295F5|AE8509  |000985;
                        LDY.W $0987                          ;8295F8|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;8295FB|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;8295FB|2288A681|81A688;
                        REP #$20                             ;8295FF|C220    |      ;
                        LDA.W $0985                          ;829601|AD8509  |000985;
-                       STA.W $0980                          ;829604|8D8009  |000980;
+                       STA.W nUnknownX                      ;829604|8D8009  |000980;
                        LDA.W $0987                          ;829607|AD8709  |000987;
-                       STA.W $0982                          ;82960A|8D8209  |000982;
+                       STA.W nUnknownY                      ;82960A|8D8209  |000982;
                        REP #$30                             ;82960D|C230    |      ;
                        LDA.W #$00C8                         ;82960F|A9C800  |      ;
                        STA.W $097A                          ;829612|8D7A09  |00097A;
@@ -2667,7 +2667,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;829624|8D7509  |000975;
                        LDA.B #$00                           ;829627|A900    |      ;
                        STA.W $0976                          ;829629|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82962C|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82962C|2200A581|81A500;
                        JMP.W CODE_82972F                    ;829630|4C2F97  |82972F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2676,7 +2676,7 @@ ToolAnimationNoAction:
                        LDA.W #$000E                         ;829635|A90E00  |      ;
                        LDX.W $0985                          ;829638|AE8509  |000985;
                        LDY.W $0987                          ;82963B|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82963E|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82963E|2288A681|81A688;
                        JMP.W CODE_82972F                    ;829642|4C2F97  |82972F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2741,16 +2741,16 @@ ToolAnimationNoAction:
           CODE_8296B9:
                        LDX.W $0985                          ;8296B9|AE8509  |000985;
                        LDY.W $0987                          ;8296BC|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;8296BF|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;8296BF|2288A681|81A688;
                        REP #$20                             ;8296C3|C220    |      ;
                        LDA.W $0985                          ;8296C5|AD8509  |000985;
                        CLC                                  ;8296C8|18      |      ;
                        ADC.W #$0008                         ;8296C9|690800  |      ;
-                       STA.W $0980                          ;8296CC|8D8009  |000980;
+                       STA.W nUnknownX                      ;8296CC|8D8009  |000980;
                        LDA.W $0987                          ;8296CF|AD8709  |000987;
                        CLC                                  ;8296D2|18      |      ;
                        ADC.W #$0008                         ;8296D3|690800  |      ;
-                       STA.W $0982                          ;8296D6|8D8209  |000982;
+                       STA.W nUnknownY                      ;8296D6|8D8209  |000982;
                        REP #$30                             ;8296D9|C230    |      ;
                        LDA.W #$00C9                         ;8296DB|A9C900  |      ;
                        STA.W $097A                          ;8296DE|8D7A09  |00097A;
@@ -2763,16 +2763,16 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;8296F0|8D7509  |000975;
                        LDA.B #$00                           ;8296F3|A900    |      ;
                        STA.W $0976                          ;8296F5|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;8296F8|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;8296F8|2200A581|81A500;
                        BRA CODE_82972F                      ;8296FC|8031    |82972F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_8296FE:
                        REP #$20                             ;8296FE|C220    |      ;
                        LDA.W $0985                          ;829700|AD8509  |000985;
-                       STA.W $0980                          ;829703|8D8009  |000980;
+                       STA.W nUnknownX                      ;829703|8D8009  |000980;
                        LDA.W $0987                          ;829706|AD8709  |000987;
-                       STA.W $0982                          ;829709|8D8209  |000982;
+                       STA.W nUnknownY                      ;829709|8D8209  |000982;
                        REP #$30                             ;82970C|C230    |      ;
                        LDA.W #$00CB                         ;82970E|A9CB00  |      ;
                        STA.W $097A                          ;829711|8D7A09  |00097A;
@@ -2785,7 +2785,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;829723|8D7509  |000975;
                        LDA.B #$00                           ;829726|A900    |      ;
                        STA.W $0976                          ;829728|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82972B|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82972B|2200A581|81A500;
                                                             ;      |        |      ;
           CODE_82972F:
                        REP #$30                             ;82972F|C230    |      ;
@@ -2983,16 +2983,16 @@ ToolAnimationNoAction:
                        REP #$30                             ;8298C8|C230    |      ;
                        LDX.W $0985                          ;8298CA|AE8509  |000985;
                        LDY.W $0987                          ;8298CD|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;8298D0|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;8298D0|2288A681|81A688;
                        REP #$20                             ;8298D4|C220    |      ;
                        LDA.W $0985                          ;8298D6|AD8509  |000985;
                        CLC                                  ;8298D9|18      |      ;
                        ADC.W #$0008                         ;8298DA|690800  |      ;
-                       STA.W $0980                          ;8298DD|8D8009  |000980;
+                       STA.W nUnknownX                      ;8298DD|8D8009  |000980;
                        LDA.W $0987                          ;8298E0|AD8709  |000987;
                        CLC                                  ;8298E3|18      |      ;
                        ADC.W #$0008                         ;8298E4|690800  |      ;
-                       STA.W $0982                          ;8298E7|8D8209  |000982;
+                       STA.W nUnknownY                      ;8298E7|8D8209  |000982;
                        REP #$30                             ;8298EA|C230    |      ;
                        LDA.W #$00B8                         ;8298EC|A9B800  |      ;
                        STA.W $097A                          ;8298EF|8D7A09  |00097A;
@@ -3005,7 +3005,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;829901|8D7509  |000975;
                        LDA.B #$00                           ;829904|A900    |      ;
                        STA.W $0976                          ;829906|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;829909|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;829909|2200A581|81A500;
                        REP #$20                             ;82990D|C220    |      ;
                        LDA.W #$0006                         ;82990F|A90600  |      ;
                        JSL.L CODE_83B224                    ;829912|2224B283|83B224;
@@ -3015,9 +3015,9 @@ ToolAnimationNoAction:
           CODE_829918:
                        REP #$20                             ;829918|C220    |      ;
                        LDA.W $0985                          ;82991A|AD8509  |000985;
-                       STA.W $0980                          ;82991D|8D8009  |000980;
+                       STA.W nUnknownX                      ;82991D|8D8009  |000980;
                        LDA.W $0987                          ;829920|AD8709  |000987;
-                       STA.W $0982                          ;829923|8D8209  |000982;
+                       STA.W nUnknownY                      ;829923|8D8209  |000982;
                        REP #$30                             ;829926|C230    |      ;
                        LDA.W #$00CB                         ;829928|A9CB00  |      ;
                        STA.W $097A                          ;82992B|8D7A09  |00097A;
@@ -3030,7 +3030,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;82993D|8D7509  |000975;
                        LDA.B #$00                           ;829940|A900    |      ;
                        STA.W $0976                          ;829942|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;829945|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;829945|2200A581|81A500;
                        BRA CODE_829989                      ;829949|803E    |829989;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -3094,7 +3094,7 @@ ToolAnimationNoAction:
                        TXA                                  ;8299BF|8A      |      ;
                        LDX.W $0985                          ;8299C0|AE8509  |000985;
                        LDY.W $0987                          ;8299C3|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;8299C6|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;8299C6|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_8299CA:
                        SEP #$20                             ;8299CA|E220    |      ;
@@ -3148,7 +3148,7 @@ ToolAnimationNoAction:
                        TXA                                  ;829A1E|8A      |      ;
                        LDX.W $0985                          ;829A1F|AE8509  |000985;
                        LDY.W $0987                          ;829A22|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829A25|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829A25|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_829A29:
                        SEP #$20                             ;829A29|E220    |      ;
@@ -3201,7 +3201,7 @@ ToolAnimationNoAction:
                        TXA                                  ;829A7B|8A      |      ;
                        LDX.W $0985                          ;829A7C|AE8509  |000985;
                        LDY.W $0987                          ;829A7F|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829A82|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829A82|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_829A86:
                        SEP #$20                             ;829A86|E220    |      ;
@@ -3254,7 +3254,7 @@ ToolAnimationNoAction:
                        TXA                                  ;829AD8|8A      |      ;
                        LDX.W $0985                          ;829AD9|AE8509  |000985;
                        LDY.W $0987                          ;829ADC|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829ADF|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829ADF|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_829AE3:
                        SEP #$20                             ;829AE3|E220    |      ;
@@ -3352,7 +3352,7 @@ ToolAnimationNoAction:
                        TXA                                  ;829B92|8A      |      ;
                        LDX.W $0985                          ;829B93|AE8509  |000985;
                        LDY.W $0987                          ;829B96|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829B99|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829B99|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_829B9D:
                        SEP #$20                             ;829B9D|E220    |      ;
@@ -3414,7 +3414,7 @@ ToolAnimationNoAction:
                        LDA.W #$0059                         ;829C00|A95900  |      ;
                        LDX.W #$0080                         ;829C03|A28000  |      ;
                        LDY.W #$0130                         ;829C06|A03001  |      ;
-                       JSL.L CODE_81A688                    ;829C09|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829C09|2288A681|81A688;
                        REP #$30                             ;829C0D|C230    |      ;
                        LDA.L MarriedGirlID                  ;829C0F|AF661F7F|7F1F66;
                        ORA.W #$0200                         ;829C13|090002  |      ;
@@ -3437,7 +3437,7 @@ ToolAnimationNoAction:
                        LDA.W #$0058                         ;829C34|A95800  |      ;
                        LDX.W #$0060                         ;829C37|A26000  |      ;
                        LDY.W #$0130                         ;829C3A|A03001  |      ;
-                       JSL.L CODE_81A688                    ;829C3D|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829C3D|2288A681|81A688;
                        REP #$30                             ;829C41|C230    |      ;
                        LDA.L MarriedGirlID                  ;829C43|AF661F7F|7F1F66;
                        ORA.W #$0400                         ;829C47|090004  |      ;
@@ -3456,7 +3456,7 @@ ToolAnimationNoAction:
                        LDA.W #$005A                         ;829C64|A95A00  |      ;
                        LDX.W #$0090                         ;829C67|A29000  |      ;
                        LDY.W #$0130                         ;829C6A|A03001  |      ;
-                       JSL.L CODE_81A688                    ;829C6D|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829C6D|2288A681|81A688;
                        REP #$30                             ;829C71|C230    |      ;
                        LDA.L MarriedGirlID                  ;829C73|AF661F7F|7F1F66;
                        ORA.W #$0800                         ;829C77|090008  |      ;
@@ -3475,7 +3475,7 @@ ToolAnimationNoAction:
                        LDA.W #$005C                         ;829C94|A95C00  |      ;
                        LDX.W #$00B0                         ;829C97|A2B000  |      ;
                        LDY.W #$0130                         ;829C9A|A03001  |      ;
-                       JSL.L CODE_81A688                    ;829C9D|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829C9D|2288A681|81A688;
                        REP #$30                             ;829CA1|C230    |      ;
                        LDA.L MarriedGirlID                  ;829CA3|AF661F7F|7F1F66;
                        ORA.W #$1000                         ;829CA7|090010  |      ;
@@ -3541,7 +3541,7 @@ ToolAnimationNoAction:
                        SEP #$20                             ;829D0D|E220    |      ;
                        LDX.W $0985                          ;829D0F|AE8509  |000985;
                        LDY.W $0987                          ;829D12|AC8709  |000987;
-                       JSL.L CODE_82B03A                    ;829D15|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;829D15|223AB082|82B03A;
                        REP #$20                             ;829D19|C220    |      ;
                        PLA                                  ;829D1B|68      |      ;
                        ASL A                                ;829D1C|0A      |      ;
@@ -3554,7 +3554,7 @@ ToolAnimationNoAction:
                        REP #$20                             ;829D26|C220    |      ;
                        LDX.W $0985                          ;829D28|AE8509  |000985;
                        LDY.W $0987                          ;829D2B|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829D2E|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829D2E|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_829D32:
                        REP #$30                             ;829D32|C230    |      ;
@@ -3630,12 +3630,12 @@ ToolAnimationNoAction:
                        LDA.W #$0052                         ;829DA6|A95200  |      ;
                        LDX.W $0985                          ;829DA9|AE8509  |000985;
                        LDY.W $0987                          ;829DAC|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829DAF|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829DAF|2288A681|81A688;
                        REP #$20                             ;829DB3|C220    |      ;
                        LDA.W $0985                          ;829DB5|AD8509  |000985;
-                       STA.W $0980                          ;829DB8|8D8009  |000980;
+                       STA.W nUnknownX                      ;829DB8|8D8009  |000980;
                        LDA.W $0987                          ;829DBB|AD8709  |000987;
-                       STA.W $0982                          ;829DBE|8D8209  |000982;
+                       STA.W nUnknownY                      ;829DBE|8D8209  |000982;
                        REP #$30                             ;829DC1|C230    |      ;
                        LDA.W #$00C1                         ;829DC3|A9C100  |      ;
                        STA.W $097A                          ;829DC6|8D7A09  |00097A;
@@ -3648,19 +3648,19 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;829DD8|8D7509  |000975;
                        LDA.B #$00                           ;829DDB|A900    |      ;
                        STA.W $0976                          ;829DDD|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;829DE0|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;829DE0|2200A581|81A500;
                        BRA CODE_829E21                      ;829DE4|803B    |829E21;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_829DE6:
                        LDX.W $0985                          ;829DE6|AE8509  |000985;
                        LDY.W $0987                          ;829DE9|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829DEC|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829DEC|2288A681|81A688;
                        REP #$20                             ;829DF0|C220    |      ;
                        LDA.W $0985                          ;829DF2|AD8509  |000985;
-                       STA.W $0980                          ;829DF5|8D8009  |000980;
+                       STA.W nUnknownX                      ;829DF5|8D8009  |000980;
                        LDA.W $0987                          ;829DF8|AD8709  |000987;
-                       STA.W $0982                          ;829DFB|8D8209  |000982;
+                       STA.W nUnknownY                      ;829DFB|8D8209  |000982;
                        REP #$30                             ;829DFE|C230    |      ;
                        LDA.W #$00B7                         ;829E00|A9B700  |      ;
                        STA.W $097A                          ;829E03|8D7A09  |00097A;
@@ -3673,7 +3673,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;829E15|8D7509  |000975;
                        LDA.B #$00                           ;829E18|A900    |      ;
                        STA.W $0976                          ;829E1A|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;829E1D|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;829E1D|2200A581|81A500;
                                                             ;      |        |      ;
           CODE_829E21:
                        SEP #$20                             ;829E21|E220    |      ;
@@ -3739,7 +3739,7 @@ ToolAnimationNoAction:
                        LDA.W #$0017                         ;829EA2|A91700  |      ;
                        LDX.W $0985                          ;829EA5|AE8509  |000985;
                        LDY.W $0987                          ;829EA8|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;829EAB|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;829EAB|2288A681|81A688;
                        SEP #$20                             ;829EAF|E220    |      ;
                        LDA.L nCurrentSeasonID               ;829EB1|AF191F7F|7F1F19;
                        CMP.B #$02                           ;829EB5|C902    |      ;
@@ -3927,12 +3927,12 @@ ToolAnimationNoAction:
           CODE_82A03D:
                        LDX.W $0985                          ;82A03D|AE8509  |000985;
                        LDY.W $0987                          ;82A040|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A043|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A043|2288A681|81A688;
                        REP #$20                             ;82A047|C220    |      ;
                        LDA.W $0985                          ;82A049|AD8509  |000985;
-                       STA.W $0980                          ;82A04C|8D8009  |000980;
+                       STA.W nUnknownX                      ;82A04C|8D8009  |000980;
                        LDA.W $0987                          ;82A04F|AD8709  |000987;
-                       STA.W $0982                          ;82A052|8D8209  |000982;
+                       STA.W nUnknownY                      ;82A052|8D8209  |000982;
                        REP #$30                             ;82A055|C230    |      ;
                        LDA.W #$00C8                         ;82A057|A9C800  |      ;
                        STA.W $097A                          ;82A05A|8D7A09  |00097A;
@@ -3945,7 +3945,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;82A06C|8D7509  |000975;
                        LDA.B #$00                           ;82A06F|A900    |      ;
                        STA.W $0976                          ;82A071|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82A074|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82A074|2200A581|81A500;
                        JMP.W CODE_82A131                    ;82A078|4C31A1  |82A131;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -3954,7 +3954,7 @@ ToolAnimationNoAction:
                        LDA.W #$000E                         ;82A07D|A90E00  |      ;
                        LDX.W $0985                          ;82A080|AE8509  |000985;
                        LDY.W $0987                          ;82A083|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A086|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A086|2288A681|81A688;
                        JMP.W CODE_82A131                    ;82A08A|4C31A1  |82A131;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -4008,16 +4008,16 @@ ToolAnimationNoAction:
           CODE_82A0EE:
                        LDX.W $0985                          ;82A0EE|AE8509  |000985;
                        LDY.W $0987                          ;82A0F1|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A0F4|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A0F4|2288A681|81A688;
                        REP #$20                             ;82A0F8|C220    |      ;
                        LDA.W $0985                          ;82A0FA|AD8509  |000985;
                        CLC                                  ;82A0FD|18      |      ;
                        ADC.W #$0008                         ;82A0FE|690800  |      ;
-                       STA.W $0980                          ;82A101|8D8009  |000980;
+                       STA.W nUnknownX                      ;82A101|8D8009  |000980;
                        LDA.W $0987                          ;82A104|AD8709  |000987;
                        CLC                                  ;82A107|18      |      ;
                        ADC.W #$0008                         ;82A108|690800  |      ;
-                       STA.W $0982                          ;82A10B|8D8209  |000982;
+                       STA.W nUnknownY                      ;82A10B|8D8209  |000982;
                        REP #$30                             ;82A10E|C230    |      ;
                        LDA.W #$00C9                         ;82A110|A9C900  |      ;
                        STA.W $097A                          ;82A113|8D7A09  |00097A;
@@ -4030,7 +4030,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;82A125|8D7509  |000975;
                        LDA.B #$00                           ;82A128|A900    |      ;
                        STA.W $0976                          ;82A12A|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82A12D|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82A12D|2200A581|81A500;
                                                             ;      |        |      ;
           CODE_82A131:
                        REP #$30                             ;82A131|C230    |      ;
@@ -4209,16 +4209,16 @@ ToolAnimationNoAction:
                        REP #$30                             ;82A2A9|C230    |      ;
                        LDX.W $0985                          ;82A2AB|AE8509  |000985;
                        LDY.W $0987                          ;82A2AE|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A2B1|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A2B1|2288A681|81A688;
                        REP #$20                             ;82A2B5|C220    |      ;
                        LDA.W $0985                          ;82A2B7|AD8509  |000985;
                        CLC                                  ;82A2BA|18      |      ;
                        ADC.W #$0008                         ;82A2BB|690800  |      ;
-                       STA.W $0980                          ;82A2BE|8D8009  |000980;
+                       STA.W nUnknownX                      ;82A2BE|8D8009  |000980;
                        LDA.W $0987                          ;82A2C1|AD8709  |000987;
                        CLC                                  ;82A2C4|18      |      ;
                        ADC.W #$0008                         ;82A2C5|690800  |      ;
-                       STA.W $0982                          ;82A2C8|8D8209  |000982;
+                       STA.W nUnknownY                      ;82A2C8|8D8209  |000982;
                        REP #$30                             ;82A2CB|C230    |      ;
                        LDA.W #$00B8                         ;82A2CD|A9B800  |      ;
                        STA.W $097A                          ;82A2D0|8D7A09  |00097A;
@@ -4231,7 +4231,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;82A2E2|8D7509  |000975;
                        LDA.B #$00                           ;82A2E5|A900    |      ;
                        STA.W $0976                          ;82A2E7|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82A2EA|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82A2EA|2200A581|81A500;
                        REP #$20                             ;82A2EE|C220    |      ;
                        LDA.W #$0006                         ;82A2F0|A90600  |      ;
                        JSL.L CODE_83B224                    ;82A2F3|2224B283|83B224;
@@ -4273,7 +4273,7 @@ ToolAnimationNoAction:
                        SEP #$20                             ;82A332|E220    |      ;
                        LDX.W $0985                          ;82A334|AE8509  |000985;
                        LDY.W $0987                          ;82A337|AC8709  |000987;
-                       JSL.L CODE_82B03A                    ;82A33A|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;82A33A|223AB082|82B03A;
                        REP #$20                             ;82A33E|C220    |      ;
                        PLA                                  ;82A340|68      |      ;
                        ASL A                                ;82A341|0A      |      ;
@@ -4286,7 +4286,7 @@ ToolAnimationNoAction:
                        REP #$20                             ;82A34B|C220    |      ;
                        LDX.W $0985                          ;82A34D|AE8509  |000985;
                        LDY.W $0987                          ;82A350|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A353|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A353|2288A681|81A688;
                                                             ;      |        |      ;
           CODE_82A357:
                        SEP #$20                             ;82A357|E220    |      ;
@@ -4345,7 +4345,7 @@ ToolAnimationNoAction:
                        LDA.W #$0001                         ;82A3BE|A90100  |      ;
                        LDX.W #$0000                         ;82A3C1|A20000  |      ;
                        LDY.W #$0000                         ;82A3C4|A00000  |      ;
-                       JSL.L CODE_81D14E                    ;82A3C7|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;82A3C7|224ED181|81D14E;
                        REP #$30                             ;82A3CB|C230    |      ;
                        LDX.W $0985                          ;82A3CD|AE8509  |000985;
                        LDY.W $0987                          ;82A3D0|AC8709  |000987;
@@ -4391,7 +4391,7 @@ ToolAnimationNoAction:
                        LDA.W #$0001                         ;82A420|A90100  |      ;
                        LDX.W #$0006                         ;82A423|A20600  |      ;
                        LDY.W #$0006                         ;82A426|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;82A429|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;82A429|224ED181|81D14E;
                        REP #$30                             ;82A42D|C230    |      ;
                        LDX.W $0985                          ;82A42F|AE8509  |000985;
                        LDY.W $0987                          ;82A432|AC8709  |000987;
@@ -4418,16 +4418,16 @@ ToolAnimationNoAction:
                        LDA.W #$0099                         ;82A464|A99900  |      ;
                        LDX.W $0985                          ;82A467|AE8509  |000985;
                        LDY.W $0987                          ;82A46A|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A46D|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A46D|2288A681|81A688;
                        BRA CODE_82A4A4                      ;82A471|8031    |82A4A4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82A473:
                        REP #$20                             ;82A473|C220    |      ;
                        LDA.W $0985                          ;82A475|AD8509  |000985;
-                       STA.W $0980                          ;82A478|8D8009  |000980;
+                       STA.W nUnknownX                      ;82A478|8D8009  |000980;
                        LDA.W $0987                          ;82A47B|AD8709  |000987;
-                       STA.W $0982                          ;82A47E|8D8209  |000982;
+                       STA.W nUnknownY                      ;82A47E|8D8209  |000982;
                        REP #$30                             ;82A481|C230    |      ;
                        LDA.W #$00C4                         ;82A483|A9C400  |      ;
                        STA.W $097A                          ;82A486|8D7A09  |00097A;
@@ -4440,7 +4440,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;82A498|8D7509  |000975;
                        LDA.B #$00                           ;82A49B|A900    |      ;
                        STA.W $0976                          ;82A49D|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82A4A0|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82A4A0|2200A581|81A500;
                                                             ;      |        |      ;
           CODE_82A4A4:
                        SEP #$20                             ;82A4A4|E220    |      ;
@@ -4470,7 +4470,7 @@ ToolAnimationNoAction:
                        LDA.W #$0001                         ;82A4CE|A90100  |      ;
                        LDX.W #$0006                         ;82A4D1|A20600  |      ;
                        LDY.W #$0006                         ;82A4D4|A00600  |      ;
-                       JSL.L CODE_81D14E                    ;82A4D7|224ED181|81D14E;
+                       JSL.L fUnknown_81D14E                ;82A4D7|224ED181|81D14E;
                        REP #$30                             ;82A4DB|C230    |      ;
                        LDX.W $0985                          ;82A4DD|AE8509  |000985;
                        LDY.W $0987                          ;82A4E0|AC8709  |000987;
@@ -4497,16 +4497,16 @@ ToolAnimationNoAction:
                        LDA.W #$0099                         ;82A512|A99900  |      ;
                        LDX.W $0985                          ;82A515|AE8509  |000985;
                        LDY.W $0987                          ;82A518|AC8709  |000987;
-                       JSL.L CODE_81A688                    ;82A51B|2288A681|81A688;
+                       JSL.L fUnknown_81A688                ;82A51B|2288A681|81A688;
                        BRA CODE_82A552                      ;82A51F|8031    |82A552;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_82A521:
                        REP #$20                             ;82A521|C220    |      ;
                        LDA.W $0985                          ;82A523|AD8509  |000985;
-                       STA.W $0980                          ;82A526|8D8009  |000980;
+                       STA.W nUnknownX                      ;82A526|8D8009  |000980;
                        LDA.W $0987                          ;82A529|AD8709  |000987;
-                       STA.W $0982                          ;82A52C|8D8209  |000982;
+                       STA.W nUnknownY                      ;82A52C|8D8209  |000982;
                        REP #$30                             ;82A52F|C230    |      ;
                        LDA.W #$00C4                         ;82A531|A9C400  |      ;
                        STA.W $097A                          ;82A534|8D7A09  |00097A;
@@ -4519,7 +4519,7 @@ ToolAnimationNoAction:
                        STA.W $0975                          ;82A546|8D7509  |000975;
                        LDA.B #$00                           ;82A549|A900    |      ;
                        STA.W $0976                          ;82A54B|8D7609  |000976;
-                       JSL.L CODE_81A500                    ;82A54E|2200A581|81A500;
+                       JSL.L fUnknown_81A500                ;82A54E|2200A581|81A500;
                                                             ;      |        |      ;
           CODE_82A552:
                        SEP #$20                             ;82A552|E220    |      ;
@@ -6013,7 +6013,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.B $93                            ;82AE90|A593    |000093;
                        REP #$20                             ;82AE92|C220    |      ;
                        TAX                                  ;82AE94|AA      |      ;
-                       JSL.L DialogRelated                  ;82AE95|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;82AE95|225F9383|83935F;
                        BRA CODE_82AEE5                      ;82AE99|804A    |82AEE5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6031,7 +6031,7 @@ IncreaseRanchDevelopmentRate:
                        STA.W $019A                          ;82AEAA|8D9A01  |00019A;
                        LDA.B #$00                           ;82AEAD|A900    |      ;
                        STA.W $0191                          ;82AEAF|8D9101  |000191;
-                       JSL.L DialogRelated                  ;82AEB2|225F9383|83935F;
+                       JSL.L fDialogRelated_83935F          ;82AEB2|225F9383|83935F;
                        BRA CODE_82AEE5                      ;82AEB6|802D    |82AEE5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6282,7 +6282,7 @@ IncreaseRanchDevelopmentRate:
                        db $09,$02,$07,$01,$07,$04,$07,$04   ;82B02A|        |      ;
                        db $09,$03,$08,$02,$09,$06,$08,$05   ;82B032|        |      ;
                                                             ;      |        |      ;
-          CODE_82B03A:
+      fUnknown_82B03A:
                        SEP #$20                             ;82B03A|E220    |      ;
                        REP #$10                             ;82B03C|C210    |      ;
                        PHA                                  ;82B03E|48      |      ;
@@ -6431,7 +6431,7 @@ IncreaseRanchDevelopmentRate:
                        TAY                                  ;82B10C|A8      |      ;
                        SEP #$20                             ;82B10D|E220    |      ;
                        PLA                                  ;82B10F|68      |      ;
-                       JSL.L CODE_82B03A                    ;82B110|223AB082|82B03A;
+                       JSL.L fUnknown_82B03A                ;82B110|223AB082|82B03A;
                        REP #$30                             ;82B114|C230    |      ;
                        PLY                                  ;82B116|7A      |      ;
                        PLX                                  ;82B117|FA      |      ;
