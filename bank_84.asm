@@ -4156,7 +4156,7 @@
           CODE_849DBE:
                        SEP #$20                             ;849DBE|E220    |      ;
                        REP #$10                             ;849DC0|C210    |      ;
-                       LDA.W $0921                          ;849DC2|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;849DC2|AD2109  |000921;
                        BNE CODE_849DCA                      ;849DC5|D003    |849DCA;
                        JMP.W CODE_84A0B9                    ;849DC7|4CB9A0  |84A0B9;
                                                             ;      |        |      ;
@@ -4252,7 +4252,7 @@
                                                             ;      |        |      ;
           CODE_849E4E:
                        REP #$30                             ;849E4E|C230    |      ;
-                       LDA.L $7F1F64                        ;849E50|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;849E50|AF641F7F|7F1F64;
                        AND.W #$0004                         ;849E54|290400  |      ;
                        BEQ CODE_849E5C                      ;849E57|F003    |849E5C;
                        JMP.W CODE_84A0B9                    ;849E59|4CB9A0  |84A0B9;
@@ -4260,7 +4260,7 @@
                                                             ;      |        |      ;
           CODE_849E5C:
                        SEP #$20                             ;849E5C|E220    |      ;
-                       LDA.L $7F1F0A                        ;849E5E|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;849E5E|AF0A1F7F|7F1F0A;
                        CMP.B #$0C                           ;849E62|C90C    |      ;
                        BNE CODE_849E69                      ;849E64|D003    |849E69;
                        JMP.W CODE_84A0B9                    ;849E66|4CB9A0  |84A0B9;
@@ -4268,9 +4268,9 @@
                                                             ;      |        |      ;
           CODE_849E69:
                        REP #$20                             ;849E69|C220    |      ;
-                       LDA.L $7F1F64                        ;849E6B|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;849E6B|AF641F7F|7F1F64;
                        ORA.W #$0004                         ;849E6F|090400  |      ;
-                       STA.L $7F1F64                        ;849E72|8F641F7F|7F1F64;
+                       STA.L nHouseSize                     ;849E72|8F641F7F|7F1F64;
                        SEP #$20                             ;849E76|E220    |      ;
                        LDY.W #$0000                         ;849E78|A00000  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;849E7B|B772    |000072;
@@ -4289,9 +4289,9 @@
                        STA.B [ptrUnknown0x72],Y             ;849E9A|9772    |000072;
                        STA.L $7F1F12                        ;849E9C|8F121F7F|7F1F12;
                        SEP #$20                             ;849EA0|E220    |      ;
-                       LDA.L $7F1F0A                        ;849EA2|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;849EA2|AF0A1F7F|7F1F0A;
                        INC A                                ;849EA6|1A      |      ;
-                       STA.L $7F1F0A                        ;849EA7|8F0A1F7F|7F1F0A;
+                       STA.L nOwnedCows                     ;849EA7|8F0A1F7F|7F1F0A;
                        JMP.W CODE_849FD0                    ;849EAB|4CD09F  |849FD0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6822,9 +6822,9 @@
                        ORA.W #$0800                         ;84AFE1|090008  |      ;
                        STA.B $D2                            ;84AFE4|85D2    |0000D2;
                        REP #$30                             ;84AFE6|C230    |      ;
-                       LDA.L $7F1F52                        ;84AFE8|AF521F7F|7F1F52;
+                       LDA.L nDogHugs                       ;84AFE8|AF521F7F|7F1F52;
                        INC A                                ;84AFEC|1A      |      ;
-                       STA.L $7F1F52                        ;84AFED|8F521F7F|7F1F52;
+                       STA.L nDogHugs                       ;84AFED|8F521F7F|7F1F52;
                        JMP.W CODE_84B25C                    ;84AFF1|4C5CB2  |84B25C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8426,7 +8426,7 @@
                        SEP #$20                             ;84BB65|E220    |      ;
                        LDA.B #$00                           ;84BB67|A900    |      ;
                        XBA                                  ;84BB69|EB      |      ;
-                       LDA.W $0921                          ;84BB6A|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;84BB6A|AD2109  |000921;
                        BEQ CODE_84BB9E                      ;84BB6D|F02F    |84BB9E;
                        REP #$20                             ;84BB6F|C220    |      ;
                        ASL A                                ;84BB71|0A      |      ;
@@ -8451,14 +8451,14 @@
                        LDA.L sShedItems,X                   ;84BB91|BF001F7F|7F1F00;
                        ORA.B $92                            ;84BB95|0592    |000092;
                        STA.L sShedItems,X                   ;84BB97|9F001F7F|7F1F00;
-                       STZ.W $0921                          ;84BB9B|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;84BB9B|9C2109  |000921;
                                                             ;      |        |      ;
           CODE_84BB9E:
                        SEP #$20                             ;84BB9E|E220    |      ;
                        REP #$10                             ;84BBA0|C210    |      ;
                        LDA.B #$00                           ;84BBA2|A900    |      ;
                        XBA                                  ;84BBA4|EB      |      ;
-                       LDA.W $0923                          ;84BBA5|AD2309  |000923;
+                       LDA.W nToolSecond                    ;84BBA5|AD2309  |000923;
                        BEQ CODE_84BBD9                      ;84BBA8|F02F    |84BBD9;
                        REP #$20                             ;84BBAA|C220    |      ;
                        ASL A                                ;84BBAC|0A      |      ;
@@ -8483,7 +8483,7 @@
                        LDA.L sShedItems,X                   ;84BBCC|BF001F7F|7F1F00;
                        ORA.B $92                            ;84BBD0|0592    |000092;
                        STA.L sShedItems,X                   ;84BBD2|9F001F7F|7F1F00;
-                       STZ.W $0923                          ;84BBD6|9C2309  |000923;
+                       STZ.W nToolSecond                    ;84BBD6|9C2309  |000923;
                                                             ;      |        |      ;
           CODE_84BBD9:
                        RTS                                  ;84BBD9|60      |      ;
@@ -9016,7 +9016,7 @@
                        ADC.W #$0001                         ;84BF88|690100  |      ;
                        STA.B ptrUnknown0xC9                 ;84BF8B|85C9    |0000C9;
                        SEP #$20                             ;84BF8D|E220    |      ;
-                       LDA.W $0921                          ;84BF8F|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;84BF8F|AD2109  |000921;
                        BEQ CODE_84BF9F                      ;84BF92|F00B    |84BF9F;
                        REP #$30                             ;84BF94|C230    |      ;
                        LDA.W #$000A                         ;84BF96|A90A00  |      ;
@@ -11107,7 +11107,7 @@
                        AND.W #$8000                         ;84CDC5|290080  |      ;
                        BNE CODE_84CDDC                      ;84CDC8|D012    |84CDDC;
                        SEP #$20                             ;84CDCA|E220    |      ;
-                       LDA.W $0921                          ;84CDCC|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;84CDCC|AD2109  |000921;
                        BEQ CODE_84CDDC                      ;84CDCF|F00B    |84CDDC;
                        REP #$30                             ;84CDD1|C230    |      ;
                        LDA.W #$000A                         ;84CDD3|A90A00  |      ;

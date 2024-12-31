@@ -1,4 +1,5 @@
 [labels]
+00:0000 pChickenData
 00:0001 ptrUnknown0x01
 00:0003 ptrUnknown0x01+2
 00:0004 ptrUnknown0x04
@@ -81,10 +82,28 @@
 00:08F7 sSecondChildNameLong+2
 00:08F9 sSecondChildNameLong+4
 00:08FB sSecondChildNameLong+6
+00:0917 nPlayerStamina
+00:0918 nPlayerEnergy
+00:0921 nToolEquipped
+00:0923 nToolSecond
+00:0926 nAmountLeft_Water
+00:0927 nAmountLeft_GrassSeeds
+00:0928 nAmountLeft_CornSeeds
+00:0929 nAmountLeft_TomatoSeeds
+00:092A nAmountLeft_PotatoSeeds
+00:092B nAmountLeft_TurnipSeeds
+00:092C nAmountLeft_CowFood
+00:092D nAmountLeft_ChickenFood
+00:0930 nPlacedCowFeed
+00:0931 nPLacedChickenFeed
+00:0932 sPlacedCowFeed
+00:0934 sPlacedChickenFeed
+00:096D nHitCounter
 00:0973 nTimeState
 00:0980 nUnknownX
 00:0982 nUnknownY
 00:0984 nCarriedItemId
+00:098C nWeatherForecast
 00:2100 SNES_INIDISP
 00:2101 SNES_OBSEL
 00:2102 SNES_OAMADDL
@@ -276,11 +295,6 @@
 00:4378 SNES_A2A7L
 00:4379 SNES_A2A7H
 00:437A SNES_NTLR7
-00:C1C6 pCowData
-00:C286 pChickenData
-7E:0917 nPlayersStamina
-7E:0918 nPlayersEnergy
-7E:098C nWeatherForecastID
 7F:1F00 sShedItems
 7F:1F01 sShedItems+1
 7F:1F02 sShedItems+2
@@ -289,12 +303,22 @@
 7F:1F06 nMoney+2
 7F:1F07 nShippingProfit
 7F:1F09 nShippingProfit+2
+7F:1F0A nOwnedCows
+7F:1F0B nOwnedChickens
+7F:1F0C nStoredWood
+7F:1F10 nStoredFeed
 7F:1F18 nCurrentYearID
 7F:1F19 nCurrentSeasonID
 7F:1F1A nCurrentWeekdayID
 7F:1F1B nCurrentDay
 7F:1F1C nCurrentTimeID
-7F:1F36 PowerBerryEaten
+7F:1F1F nLove_Maria
+7F:1F21 nLove_Ann
+7F:1F23 nLove_Nina
+7F:1F25 nLove_Ellen
+7F:1F27 nLove_Eve
+7F:1F33 nPlayerHappines
+7F:1F36 nPowerBerryEaten
 7F:1F37 nFirstChildAge
 7F:1F39 nSecondChildAge
 7F:1F3B PrengacyFlag
@@ -310,7 +334,10 @@
 7F:1F4C nStatShippedTomatoes
 7F:1F4E nStatShippedTurnips
 7F:1F50 nStatShippedPotatoes
-7F:1F56 RanchDevelopmentRate
+7F:1F52 nDogHugs
+7F:1F54 nRanchMasteringRate
+7F:1F56 nRanchDevelopmentRate
+7F:1F64 nHouseSize
 7F:1F66 MarriedGirlID
 7F:1F69 PlayerHasHorse
 80:8000 fUnknown_808000
@@ -1265,8 +1292,162 @@
 81:A910 .label3
 81:A949 +
 81:A94A fUnknown_81A94A
-81:A9E5 fUnknown_81A9E5
+81:A956 +
+81:A96E .label2
+81:A979 .label3
+81:A982 .label4
+81:A9AE .label5
+81:A9E4 .return
+81:A9E5 fItemSubrutineHandler_81A9E5
+81:A9F6 pItemSubrutines_81A9F6
+81:AAB6 fItemSub81A9F6_0x00to0x03
+81:AADA .label1
+81:AAFE .label2
+81:AB26 .label3
+81:AB4C .label4
+81:AB58 .powerberry
+81:AB94 .ann
+81:ABB8 .nina
+81:ABDC .ellen
+81:AC00 .eve
+81:AC24 .label10
+81:AC48 .return
 81:AC49 nPowerBerryTable
+81:AC71 fItemSub81A9F6_0x04to0x07
+81:AC78 fItemSub81A9F6_0x08
+81:AC79 fItemSub81A9F6_0x09
+81:AC7A fItemSub81A9F6_0x0A
+81:AC7B fItemSub81A9F6_0x0B
+81:AC7C fItemSub81A9F6_0x0C
+81:AC7D fItemSub81A9F6_0x0D
+81:AC7E fItemSub81A9F6_0x0E
+81:AC7F fItemSub81A9F6_0x0F
+81:AC80 fItemSub81A9F6_0x10to0x13
+81:AC92 .loop
+81:ACB6 .return
+81:ACB7 +
+81:ACCB fItemSub81A9F6_0x14
+81:ACCC fItemSub81A9F6_0x15
+81:ACE3 +
+81:AD0A +
+81:AD22 +
+81:AD23 fItemSub81A9F6_0x16
+81:AD3A +
+81:AD61 +
+81:AD79 +
+81:AD7A fItemSub81A9F6_0x17
+81:AD91 +
+81:ADB8 +
+81:ADD0 +
+81:ADD1 fItemSub81A9F6_0x18
+81:ADD2 fItemSub81A9F6_0x19
+81:ADD3 fItemSub81A9F6_0x1A
+81:ADD4 fItemSub81A9F6_0x1B
+81:ADD5 fItemSub81A9F6_0x1C
+81:ADE3 +
+81:ADF0 .label1
+81:AE0C .label2
+81:AE19 .loop
+81:AE35 +
+81:AE4F .exit
+81:AE5B +
+81:AE69 .return
+81:AE6A fItemSub81A9F6_0x1D
+81:AE6B fItemSub81A9F6_0x1E
+81:AE6C fItemSub81A9F6_0x1F
+81:AE6D fItemSub81A9F6_0x20
+81:AE6E fItemSub81A9F6_0x21
+81:AE6F fItemSub81A9F6_0x22
+81:AE7D .paint
+81:AEA6 .milker
+81:AEC4 .brush
+81:AEE2 .goldSickle
+81:AF0B .goldPlow
+81:AF34 .goldHammer
+81:AF5D .goldAxe
+81:AF86 .sprinkler
+81:AFB0 .continue
+81:AFBE .return
+81:AFBF fItemSub81A9F6_0x23
+81:AFC0 fItemSub81A9F6_0x24
+81:AFCE +
+81:AFE2 .miraclePotion
+81:B008 .cowMedicine
+81:B026 .chickenFeed
+81:B044 .cowFeed
+81:B062 .return
+81:B063 fItemSub81A9F6_0x25
+81:B064 fItemSub81A9F6_0x26
+81:B069 .loop
+81:B08E +
+81:B0A7 .return
+81:B0A8 fItemSub81A9F6_0x27
+81:B0BB .loop
+81:B0E3 +
+81:B121 fItemSub81A9F6_0x28
+81:B136 -
+81:B15E +
+81:B16C -
+81:B195 +
+81:B1CF fItemSub81A9F6_0x29
+81:B21E fItemSub81A9F6_0x2A
+81:B22C +
+81:B260 .return
+81:B261 fItemSub81A9F6_0x2B
+81:B262 fItemSub81A9F6_0x2C
+81:B263 fItemSub81A9F6_0x2D
+81:B264 fItemSub81A9F6_0x2E
+81:B265 fItemSub81A9F6_0x2F
+81:B266 fItemSub81A9F6_0x30
+81:B267 fItemSub81A9F6_0x31
+81:B268 fItemSub81A9F6_0x32
+81:B269 fItemSub81A9F6_0x33
+81:B26A fItemSub81A9F6_0x34
+81:B26B fItemSub81A9F6_0x35
+81:B26C fItemSub81A9F6_0x36
+81:B26D fItemSub81A9F6_0x37
+81:B292 .return
+81:B293 fItemSub81A9F6_0x38
+81:B294 fItemSub81A9F6_0x39
+81:B295 fItemSub81A9F6_0x3A
+81:B296 fItemSub81A9F6_0x3B
+81:B297 fItemSub81A9F6_0x3C
+81:B298 fItemSub81A9F6_0x3D
+81:B299 fItemSub81A9F6_0x3E
+81:B29A fItemSub81A9F6_0x3F
+81:B29B fItemSub81A9F6_0x40
+81:B29C fItemSub81A9F6_0x41
+81:B29D fItemSub81A9F6_0x42
+81:B29E fItemSub81A9F6_0x43
+81:B29F fItemSub81A9F6_0x44
+81:B2A0 fItemSub81A9F6_0x45
+81:B2A1 fItemSub81A9F6_0x46
+81:B2A2 fItemSub81A9F6_0x47
+81:B2A3 fItemSub81A9F6_0x48
+81:B2A4 fItemSub81A9F6_0x49
+81:B2A5 fItemSub81A9F6_0x4A
+81:B2A6 fItemSub81A9F6_0x4B
+81:B2A7 fItemSub81A9F6_0x4C
+81:B2A8 fItemSub81A9F6_0x4D
+81:B2A9 fItemSub81A9F6_0x4E
+81:B2AA fItemSub81A9F6_0x4F
+81:B2AB fItemSub81A9F6_0x50
+81:B2AC fItemSub81A9F6_0x51
+81:B2AD fItemSub81A9F6_0x52
+81:B2AE fItemSub81A9F6_0x53
+81:B2AF fItemSub81A9F6_0x54
+81:B2B0 fItemSub81A9F6_0x55
+81:B2B1 fItemSub81A9F6_0x56
+81:B2B2 fItemSub81A9F6_0x57
+81:B2B3 fItemSub81A9F6_0x58
+81:B2B4 fItemSub81A9F6_0x59
+81:B2B5 fItemSub81A9F6_0x5A
+81:B2B6 fItemSub81A9F6_0x5B
+81:B2B7 fItemSub81A9F6_0x5C
+81:B2B8 fItemSub81A9F6_0x5D
+81:B2B9 fItemSub81A9F6_0x5E
+81:B2BA fItemSub81A9F6_0x5F
+81:B2BB fUnknown_81B2BB
 81:B363 Table_81B363
 81:B963 pTable_81B963
 81:BE0F nCarriedItemTable_81BE0F
@@ -1328,6 +1509,7 @@
 82:B02A Table_82B02A
 82:B03A fUnknown_82B03A
 82:B060 fUnknown_82B060
+82:B0A7 fUnknown_82B0A7
 82:B174 pMapTable
 82:B294 pPointer0x0DTable
 82:CFB4 nUnkownItemOnHandTable
@@ -3326,7 +3508,6 @@ BB:BDF8 Padding_BB0000
 81:9F90 DATA16_819F90
 81:9FA2 DATA16_819FA2
 81:A58B PTR16_81A58B
-81:A9F6 PTR16_81A9F6
 81:B0ED DATA32_81B0ED
 81:B19F DATA32_81B19F
 81:BA3E DATA8_81BA3E
@@ -6089,6 +6270,7 @@ FF:FFFF EMPTY_FFFFFF
 
 
 [comments]
+00:0000 pointer to 8bytes * 10
 00:0001 ptr24
 00:0004 ptr24
 00:0007 ptr24
@@ -6159,20 +6341,43 @@ FF:FFFF EMPTY_FFFFFF
 00:08F7 2
 00:08F9 3
 00:08FB 4
+00:0917 n8 MaxHP
+00:0918 n8 HP
+00:0926 n8
+00:0927 n8
+00:0928 n8
+00:0929 n8
+00:092A n8
+00:092B n8
+00:092C n8
+00:092D n8
+00:0930 n8
+00:0931 n8
+00:0932 16bit
+00:0934 16bit
+00:096D n8 (used for example to break wood or stones)
 00:0973 n16, 00 - stop, 01- run, 02 - skip to next day
 00:0980 n16
 00:0982 n16
 00:0984 n16
-00:C1C6 pointer to 16bytes * 10
-00:C286 pointer to 8bytes * 10
 7F:1F00 strSheedItems
 7F:1F04 n24
 7F:1F07 n24
+7F:1F0A n8
+7F:1F0B n8
+7F:1F0C n16
+7F:1F10 n16
 7F:1F18 n8, 00 - 1st Year, 01 - 2nd Year, 03 - 3rd Year
 7F:1F19 n8
 7F:1F1A n8
 7F:1F1B n8
 7F:1F1C n8
+7F:1F1F n16
+7F:1F21 n16
+7F:1F23 n16
+7F:1F25 n16
+7F:1F27 n16
+7F:1F33 n16
 7F:1F36 n8 range 00h-0Ah, (ammount of flowers in garden)
 7F:1F37 n16
 7F:1F39 n16
@@ -6188,7 +6393,10 @@ FF:FFFF EMPTY_FFFFFF
 7F:1F4C n16
 7F:1F4E n16
 7F:1F50 n16
-7F:1F56 range 00h-64h
+7F:1F52 n16
+7F:1F54 n16
+7F:1F56 n8 (0-100%)
+7F:1F64 n8
 7F:1F69 00 - No, 01 - Yes
 80:865D A: nCount
 80:87CE $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
@@ -6219,9 +6427,15 @@ FF:FFFF EMPTY_FFFFFF
 81:A2AD n8
 81:A363 n16 x, n16 y
 81:A528 infinite loop ? why ?
+81:A7CE A: nArg1, X: nArg2, Y: nArg3
+81:A801 A: nIndex
+81:A83A A: nIndex
 81:A8C0 outer loop
 81:A8C4 inner loop
+81:A9E5 $22: nItemId
+81:A9F6 5F * ptr24
 81:AC49 16b, 16b / 32b (not sure about this size) * 0A
+81:B2BB A: nArg, X: nArg, Y: nArg
 81:B363 16b, 32b
 81:B963 if last 16b are $FFFF = end if $FFFE then it follows with prt24 (looping same data again)
 81:BE0F 16b, 16b, 16b, 16b
@@ -6242,6 +6456,7 @@ FF:FFFF EMPTY_FFFFFF
 82:A571 16b
 82:A713 A - arg1, X - arg2, Y - arg3
 82:AD06 Season index based
+82:B060 A: nArg1, X: nArg2, Y: nArg3
 82:CFB4 8b, 8b, 8b, 8b - season subindexed
 83:8F83 ptr24, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?
 83:90EF b8?, b8?, b8?, b8?, b8?, b8?, b8?, ptr24

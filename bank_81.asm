@@ -753,23 +753,23 @@ subItemCarried_Chicken:
                        ORA.B #$08                           ;8184A9|0908    |      ;
                        STA.L sShedItems+1                   ;8184AB|8F011F7F|7F1F01;
                        SEP #$20                             ;8184AF|E220    |      ;
-                       LDA.W $0921                          ;8184B1|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;8184B1|AD2109  |000921;
                        CMP.B #$0C                           ;8184B4|C90C    |      ;
                        BNE +                                ;8184B6|D003    |8184BB;
-                       STZ.W $0921                          ;8184B8|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;8184B8|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8184BB|E220    |      ;
-                       LDA.W $0923                          ;8184BD|AD2309  |000923;
+                       LDA.W nToolSecond                    ;8184BD|AD2309  |000923;
                        CMP.B #$0C                           ;8184C0|C90C    |      ;
                        BNE +                                ;8184C2|D003    |8184C7;
-                       STZ.W $0923                          ;8184C4|9C2309  |000923;
+                       STZ.W nToolSecond                    ;8184C4|9C2309  |000923;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8184C7|E220    |      ;
-                       LDA.W $0927                          ;8184C9|AD2709  |000927;
+                       LDA.W nAmountLeft_GrassSeeds         ;8184C9|AD2709  |000927;
                        CMP.B #$FF                           ;8184CC|C9FF    |      ;
                        BEQ ++                               ;8184CE|F004    |8184D4;
                        INC A                                ;8184D0|1A      |      ;
-                       STA.W $0927                          ;8184D1|8D2709  |000927;
+                       STA.W nAmountLeft_GrassSeeds         ;8184D1|8D2709  |000927;
                                                             ;      |        |      ;
                     ++ RTS                                  ;8184D4|60      |      ;
                                                             ;      |        |      ;
@@ -784,23 +784,23 @@ subItemCarried_Chicken:
                        ORA.B #$10                           ;8184E5|0910    |      ;
                        STA.L sShedItems                     ;8184E7|8F001F7F|7F1F00;
                        SEP #$20                             ;8184EB|E220    |      ;
-                       LDA.W $0921                          ;8184ED|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;8184ED|AD2109  |000921;
                        CMP.B #$05                           ;8184F0|C905    |      ;
                        BNE +                                ;8184F2|D003    |8184F7;
-                       STZ.W $0921                          ;8184F4|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;8184F4|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8184F7|E220    |      ;
-                       LDA.W $0923                          ;8184F9|AD2309  |000923;
+                       LDA.W nToolSecond                    ;8184F9|AD2309  |000923;
                        CMP.B #$05                           ;8184FC|C905    |      ;
                        BNE +                                ;8184FE|D003    |818503;
-                       STZ.W $0923                          ;818500|9C2309  |000923;
+                       STZ.W nToolSecond                    ;818500|9C2309  |000923;
                                                             ;      |        |      ;
                      + SEP #$20                             ;818503|E220    |      ;
-                       LDA.W $0928                          ;818505|AD2809  |000928;
+                       LDA.W nAmountLeft_CornSeeds          ;818505|AD2809  |000928;
                        CMP.B #$FF                           ;818508|C9FF    |      ;
                        BEQ ++                               ;81850A|F004    |818510;
                        INC A                                ;81850C|1A      |      ;
-                       STA.W $0928                          ;81850D|8D2809  |000928;
+                       STA.W nAmountLeft_CornSeeds          ;81850D|8D2809  |000928;
                                                             ;      |        |      ;
                     ++ RTS                                  ;818510|60      |      ;
                                                             ;      |        |      ;
@@ -815,23 +815,23 @@ subItemCarried_Chicken:
                        ORA.B #$20                           ;818521|0920    |      ;
                        STA.L sShedItems                     ;818523|8F001F7F|7F1F00;
                        SEP #$20                             ;818527|E220    |      ;
-                       LDA.W $0921                          ;818529|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;818529|AD2109  |000921;
                        CMP.B #$06                           ;81852C|C906    |      ;
                        BNE +                                ;81852E|D003    |818533;
-                       STZ.W $0921                          ;818530|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;818530|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;818533|E220    |      ;
-                       LDA.W $0923                          ;818535|AD2309  |000923;
+                       LDA.W nToolSecond                    ;818535|AD2309  |000923;
                        CMP.B #$06                           ;818538|C906    |      ;
                        BNE +                                ;81853A|D003    |81853F;
-                       STZ.W $0923                          ;81853C|9C2309  |000923;
+                       STZ.W nToolSecond                    ;81853C|9C2309  |000923;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81853F|E220    |      ;
-                       LDA.W $0929                          ;818541|AD2909  |000929;
+                       LDA.W nAmountLeft_TomatoSeeds        ;818541|AD2909  |000929;
                        CMP.B #$FF                           ;818544|C9FF    |      ;
                        BEQ ++                               ;818546|F004    |81854C;
                        INC A                                ;818548|1A      |      ;
-                       STA.W $0929                          ;818549|8D2909  |000929;
+                       STA.W nAmountLeft_TomatoSeeds        ;818549|8D2909  |000929;
                                                             ;      |        |      ;
                     ++ RTS                                  ;81854C|60      |      ;
                                                             ;      |        |      ;
@@ -846,23 +846,23 @@ subItemCarried_Chicken:
                        ORA.B #$40                           ;81855D|0940    |      ;
                        STA.L sShedItems                     ;81855F|8F001F7F|7F1F00;
                        SEP #$20                             ;818563|E220    |      ;
-                       LDA.W $0921                          ;818565|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;818565|AD2109  |000921;
                        CMP.B #$07                           ;818568|C907    |      ;
                        BNE +                                ;81856A|D003    |81856F;
-                       STZ.W $0921                          ;81856C|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;81856C|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81856F|E220    |      ;
-                       LDA.W $0923                          ;818571|AD2309  |000923;
+                       LDA.W nToolSecond                    ;818571|AD2309  |000923;
                        CMP.B #$07                           ;818574|C907    |      ;
                        BNE +                                ;818576|D003    |81857B;
-                       STZ.W $0923                          ;818578|9C2309  |000923;
+                       STZ.W nToolSecond                    ;818578|9C2309  |000923;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81857B|E220    |      ;
-                       LDA.W $092A                          ;81857D|AD2A09  |00092A;
+                       LDA.W nAmountLeft_PotatoSeeds        ;81857D|AD2A09  |00092A;
                        CMP.B #$FF                           ;818580|C9FF    |      ;
                        BEQ ++                               ;818582|F004    |818588;
                        INC A                                ;818584|1A      |      ;
-                       STA.W $092A                          ;818585|8D2A09  |00092A;
+                       STA.W nAmountLeft_PotatoSeeds        ;818585|8D2A09  |00092A;
                                                             ;      |        |      ;
                     ++ RTS                                  ;818588|60      |      ;
                                                             ;      |        |      ;
@@ -877,23 +877,23 @@ subItemCarried_Chicken:
                        ORA.B #$80                           ;818599|0980    |      ;
                        STA.L sShedItems                     ;81859B|8F001F7F|7F1F00;
                        SEP #$20                             ;81859F|E220    |      ;
-                       LDA.W $0921                          ;8185A1|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;8185A1|AD2109  |000921;
                        CMP.B #$08                           ;8185A4|C908    |      ;
                        BNE +                                ;8185A6|D003    |8185AB;
-                       STZ.W $0921                          ;8185A8|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;8185A8|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8185AB|E220    |      ;
-                       LDA.W $0923                          ;8185AD|AD2309  |000923;
+                       LDA.W nToolSecond                    ;8185AD|AD2309  |000923;
                        CMP.B #$08                           ;8185B0|C908    |      ;
                        BNE +                                ;8185B2|D003    |8185B7;
-                       STZ.W $0923                          ;8185B4|9C2309  |000923;
+                       STZ.W nToolSecond                    ;8185B4|9C2309  |000923;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8185B7|E220    |      ;
-                       LDA.W $092B                          ;8185B9|AD2B09  |00092B;
+                       LDA.W nAmountLeft_TurnipSeeds        ;8185B9|AD2B09  |00092B;
                        CMP.B #$FF                           ;8185BC|C9FF    |      ;
                        BEQ ++                               ;8185BE|F004    |8185C4;
                        INC A                                ;8185C0|1A      |      ;
-                       STA.W $092B                          ;8185C1|8D2B09  |00092B;
+                       STA.W nAmountLeft_TurnipSeeds        ;8185C1|8D2B09  |00092B;
                                                             ;      |        |      ;
                     ++ RTS                                  ;8185C4|60      |      ;
                                                             ;      |        |      ;
@@ -964,16 +964,16 @@ subItemCarried_Chicken:
                        LDA.L sShedItems                     ;81863A|AF001F7F|7F1F00;
                        AND.B #$FE                           ;81863E|29FE    |      ;
                        STA.L sShedItems                     ;818640|8F001F7F|7F1F00;
-                       LDA.W $0921                          ;818644|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;818644|AD2109  |000921;
                        CMP.B #$01                           ;818647|C901    |      ;
                        BNE +                                ;818649|D003    |81864E;
-                       STZ.W $0921                          ;81864B|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;81864B|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81864E|E220    |      ;
-                       LDA.W $0923                          ;818650|AD2309  |000923;
+                       LDA.W nToolSecond                    ;818650|AD2309  |000923;
                        CMP.B #$01                           ;818653|C901    |      ;
                        BNE ++                               ;818655|D003    |81865A;
-                       STZ.W $0923                          ;818657|9C2309  |000923;
+                       STZ.W nToolSecond                    ;818657|9C2309  |000923;
                                                             ;      |        |      ;
                     ++ RTS                                  ;81865A|60      |      ;
                                                             ;      |        |      ;
@@ -990,16 +990,16 @@ subItemCarried_Chicken:
                        LDA.L sShedItems                     ;818671|AF001F7F|7F1F00;
                        AND.B #$FD                           ;818675|29FD    |      ;
                        STA.L sShedItems                     ;818677|8F001F7F|7F1F00;
-                       LDA.W $0921                          ;81867B|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81867B|AD2109  |000921;
                        CMP.B #$02                           ;81867E|C902    |      ;
                        BNE +                                ;818680|D003    |818685;
-                       STZ.W $0921                          ;818682|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;818682|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;818685|E220    |      ;
-                       LDA.W $0923                          ;818687|AD2309  |000923;
+                       LDA.W nToolSecond                    ;818687|AD2309  |000923;
                        CMP.B #$02                           ;81868A|C902    |      ;
                        BNE ++                               ;81868C|D003    |818691;
-                       STZ.W $0923                          ;81868E|9C2309  |000923;
+                       STZ.W nToolSecond                    ;81868E|9C2309  |000923;
                                                             ;      |        |      ;
                     ++ RTS                                  ;818691|60      |      ;
                                                             ;      |        |      ;
@@ -1016,16 +1016,16 @@ subItemCarried_Chicken:
                        LDA.L sShedItems                     ;8186A8|AF001F7F|7F1F00;
                        AND.B #$FB                           ;8186AC|29FB    |      ;
                        STA.L sShedItems                     ;8186AE|8F001F7F|7F1F00;
-                       LDA.W $0921                          ;8186B2|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;8186B2|AD2109  |000921;
                        CMP.B #$03                           ;8186B5|C903    |      ;
                        BNE +                                ;8186B7|D003    |8186BC;
-                       STZ.W $0921                          ;8186B9|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;8186B9|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8186BC|E220    |      ;
-                       LDA.W $0923                          ;8186BE|AD2309  |000923;
+                       LDA.W nToolSecond                    ;8186BE|AD2309  |000923;
                        CMP.B #$03                           ;8186C1|C903    |      ;
                        BNE ++                               ;8186C3|D003    |8186C8;
-                       STZ.W $0923                          ;8186C5|9C2309  |000923;
+                       STZ.W nToolSecond                    ;8186C5|9C2309  |000923;
                                                             ;      |        |      ;
                     ++ RTS                                  ;8186C8|60      |      ;
                                                             ;      |        |      ;
@@ -1042,16 +1042,16 @@ subItemCarried_Chicken:
                        LDA.L sShedItems                     ;8186DF|AF001F7F|7F1F00;
                        AND.B #$F7                           ;8186E3|29F7    |      ;
                        STA.L sShedItems                     ;8186E5|8F001F7F|7F1F00;
-                       LDA.W $0921                          ;8186E9|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;8186E9|AD2109  |000921;
                        CMP.B #$04                           ;8186EC|C904    |      ;
                        BNE +                                ;8186EE|D003    |8186F3;
-                       STZ.W $0921                          ;8186F0|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;8186F0|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8186F3|E220    |      ;
-                       LDA.W $0923                          ;8186F5|AD2309  |000923;
+                       LDA.W nToolSecond                    ;8186F5|AD2309  |000923;
                        CMP.B #$04                           ;8186F8|C904    |      ;
                        BNE ++                               ;8186FA|D003    |8186FF;
-                       STZ.W $0923                          ;8186FC|9C2309  |000923;
+                       STZ.W nToolSecond                    ;8186FC|9C2309  |000923;
                                                             ;      |        |      ;
                     ++ RTS                                  ;8186FF|60      |      ;
                                                             ;      |        |      ;
@@ -1068,16 +1068,16 @@ subItemCarried_Chicken:
                        LDA.L sShedItems+1                   ;818716|AF011F7F|7F1F01;
                        AND.B #$7F                           ;81871A|297F    |      ;
                        STA.L sShedItems+1                   ;81871C|8F011F7F|7F1F01;
-                       LDA.W $0921                          ;818720|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;818720|AD2109  |000921;
                        CMP.B #$10                           ;818723|C910    |      ;
                        BNE +                                ;818725|D003    |81872A;
-                       STZ.W $0921                          ;818727|9C2109  |000921;
+                       STZ.W nToolEquipped                  ;818727|9C2109  |000921;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81872A|E220    |      ;
-                       LDA.W $0923                          ;81872C|AD2309  |000923;
+                       LDA.W nToolSecond                    ;81872C|AD2309  |000923;
                        CMP.B #$10                           ;81872F|C910    |      ;
                        BNE ++                               ;818731|D003    |818736;
-                       STZ.W $0923                          ;818733|9C2309  |000923;
+                       STZ.W nToolSecond                    ;818733|9C2309  |000923;
                                                             ;      |        |      ;
                     ++ RTS                                  ;818736|60      |      ;
                                                             ;      |        |      ;
@@ -1118,7 +1118,7 @@ subItemCarried_Chicken:
                        ORA.B #$01                           ;818775|0901    |      ;
                        STA.L sShedItems+3                   ;818777|8F031F7F|7F1F03;
                        LDA.B #$0C                           ;81877B|A90C    |      ;
-                       STA.W $092D                          ;81877D|8D2D09  |00092D;
+                       STA.W nAmountLeft_ChickenFood        ;81877D|8D2D09  |00092D;
                                                             ;      |        |      ;
                      + RTS                                  ;818780|60      |      ;
                                                             ;      |        |      ;
@@ -1133,7 +1133,7 @@ subItemCarried_Chicken:
                        ORA.B #$02                           ;818791|0902    |      ;
                        STA.L sShedItems+3                   ;818793|8F031F7F|7F1F03;
                        LDA.B #$0C                           ;818797|A90C    |      ;
-                       STA.W $092C                          ;818799|8D2C09  |00092C;
+                       STA.W nAmountLeft_CowFood            ;818799|8D2C09  |00092C;
                                                             ;      |        |      ;
                      + RTS                                  ;81879C|60      |      ;
                                                             ;      |        |      ;
@@ -1171,10 +1171,10 @@ subItemCarried_Chicken:
       fUnknown_8187C3:
                        SEP #$20                             ;8187C3|E220    |      ;
                        REP #$10                             ;8187C5|C210    |      ;
-                       LDA.W $0923                          ;8187C7|AD2309  |000923;
+                       LDA.W nToolSecond                    ;8187C7|AD2309  |000923;
                        BNE +                                ;8187CA|D006    |8187D2;
-                       LDA.W $0921                          ;8187CC|AD2109  |000921;
-                       STA.W $0923                          ;8187CF|8D2309  |000923;
+                       LDA.W nToolEquipped                  ;8187CC|AD2109  |000921;
+                       STA.W nToolSecond                    ;8187CF|8D2309  |000923;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8187D2|E220    |      ;
                        LDA.B #$00                           ;8187D4|A900    |      ;
@@ -1182,7 +1182,7 @@ subItemCarried_Chicken:
                        LDA.W nCarriedItemId                 ;8187D7|AD8409  |000984;
                        SEC                                  ;8187DA|38      |      ;
                        SBC.B #$29                           ;8187DB|E929    |      ;
-                       STA.W $0921                          ;8187DD|8D2109  |000921;
+                       STA.W nToolEquipped                  ;8187DD|8D2109  |000921;
                        REP #$20                             ;8187E0|C220    |      ;
                        ASL A                                ;8187E2|0A      |      ;
                        ASL A                                ;8187E3|0A      |      ;
@@ -2178,12 +2178,12 @@ subItemCarried_Chicken:
                        ASL A                                ;818EE3|0A      |      ;
                        TAX                                  ;818EE4|AA      |      ;
                        LDA.L nCowFeedFlagsTable,X           ;818EE5|BF71A582|82A571;
-                       ORA.W $0932                          ;818EE9|0D3209  |000932;
-                       STA.W $0932                          ;818EEC|8D3209  |000932;
+                       ORA.W sPlacedCowFeed                 ;818EE9|0D3209  |000932;
+                       STA.W sPlacedCowFeed                 ;818EEC|8D3209  |000932;
                        SEP #$20                             ;818EEF|E220    |      ;
-                       LDA.W $0930                          ;818EF1|AD3009  |000930;
+                       LDA.W nPlacedCowFeed                 ;818EF1|AD3009  |000930;
                        INC A                                ;818EF4|1A      |      ;
-                       STA.W $0930                          ;818EF5|8D3009  |000930;
+                       STA.W nPlacedCowFeed                 ;818EF5|8D3009  |000930;
                        JMP.W fUnknown_818DAB                ;818EF8|4CAB8D  |818DAB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2205,12 +2205,12 @@ subItemCarried_Chicken:
                        ASL A                                ;818F12|0A      |      ;
                        TAX                                  ;818F13|AA      |      ;
                        LDA.L nCowFeedFlagsTable,X           ;818F14|BF71A582|82A571;
-                       ORA.W $0934                          ;818F18|0D3409  |000934;
-                       STA.W $0934                          ;818F1B|8D3409  |000934;
+                       ORA.W sPlacedChickenFeed             ;818F18|0D3409  |000934;
+                       STA.W sPlacedChickenFeed             ;818F1B|8D3409  |000934;
                        SEP #$20                             ;818F1E|E220    |      ;
-                       LDA.W $0931                          ;818F20|AD3109  |000931;
+                       LDA.W nPLacedChickenFeed             ;818F20|AD3109  |000931;
                        INC A                                ;818F23|1A      |      ;
-                       STA.W $0931                          ;818F24|8D3109  |000931;
+                       STA.W nPLacedChickenFeed             ;818F24|8D3109  |000931;
                        JMP.W fUnknown_818DAB                ;818F27|4CAB8D  |818DAB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -4543,7 +4543,7 @@ nItemCarriedTable_81A308:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_81A7CE:
-                       REP #$30                             ;81A7CE|C230    |      ;
+                       REP #$30                             ;81A7CE|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
                        PHY                                  ;81A7D0|5A      |      ;
                        PHX                                  ;81A7D1|DA      |      ;
                        PHA                                  ;81A7D2|48      |      ;
@@ -4575,7 +4575,7 @@ nItemCarriedTable_81A308:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_81A801:
-                       REP #$30                             ;81A801|C230    |      ;
+                       REP #$30                             ;81A801|C230    |      ; A: nIndex
                        STA.B $7E                            ;81A803|857E    |00007E;
                        ASL A                                ;81A805|0A      |      ;
                        ASL A                                ;81A806|0A      |      ;
@@ -4609,7 +4609,7 @@ nItemCarriedTable_81A308:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_81A83A:
-                       REP #$30                             ;81A83A|C230    |      ;
+                       REP #$30                             ;81A83A|C230    |      ; A: nIndex
                        PHA                                  ;81A83C|48      |      ;
                        TXA                                  ;81A83D|8A      |      ;
                        LSR A                                ;81A83E|4A      |      ;
@@ -4781,45 +4781,44 @@ nItemCarriedTable_81A308:
       fUnknown_81A94A:
                        SEP #$20                             ;81A94A|E220    |      ;
                        REP #$10                             ;81A94C|C210    |      ;
-                       LDA.W $0923                          ;81A94E|AD2309  |000923;
-                       BNE CODE_81A956                      ;81A951|D003    |81A956;
-                       JMP.W CODE_81A9E4                    ;81A953|4CE4A9  |81A9E4;
+                       LDA.W nToolSecond                    ;81A94E|AD2309  |000923;
+                       BNE +                                ;81A951|D003    |81A956;
+                       JMP.W .return                        ;81A953|4CE4A9  |81A9E4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81A956:
-                       LDA.W $0921                          ;81A956|AD2109  |000921;
-                       BEQ CODE_81A9AE                      ;81A959|F053    |81A9AE;
+                     + LDA.W nToolEquipped                  ;81A956|AD2109  |000921;
+                       BEQ .label5                          ;81A959|F053    |81A9AE;
                        CMP.B #$19                           ;81A95B|C919    |      ;
-                       BCC CODE_81A979                      ;81A95D|901A    |81A979;
+                       BCC .label3                          ;81A95D|901A    |81A979;
                        CMP.B #$19                           ;81A95F|C919    |      ;
-                       BEQ CODE_81A96E                      ;81A961|F00B    |81A96E;
+                       BEQ .label2                          ;81A961|F00B    |81A96E;
                        SEP #$20                             ;81A963|E220    |      ;
                        LDA.W $0022                          ;81A965|AD2200  |000022;
                        CMP.B #$27                           ;81A968|C927    |      ;
-                       BNE CODE_81A9AE                      ;81A96A|D042    |81A9AE;
-                       BRA CODE_81A982                      ;81A96C|8014    |81A982;
+                       BNE .label5                          ;81A96A|D042    |81A9AE;
+                       BRA .label4                          ;81A96C|8014    |81A982;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81A96E:
+              .label2:
                        SEP #$20                             ;81A96E|E220    |      ;
                        LDA.W $0022                          ;81A970|AD2200  |000022;
                        CMP.B #$28                           ;81A973|C928    |      ;
-                       BNE CODE_81A9AE                      ;81A975|D037    |81A9AE;
-                       BRA CODE_81A982                      ;81A977|8009    |81A982;
+                       BNE .label5                          ;81A975|D037    |81A9AE;
+                       BRA .label4                          ;81A977|8009    |81A982;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81A979:
+              .label3:
                        SEP #$20                             ;81A979|E220    |      ;
                        LDA.W $0022                          ;81A97B|AD2200  |000022;
                        CMP.B #$26                           ;81A97E|C926    |      ;
-                       BNE CODE_81A9AE                      ;81A980|D02C    |81A9AE;
+                       BNE .label5                          ;81A980|D02C    |81A9AE;
                                                             ;      |        |      ;
-          CODE_81A982:
+              .label4:
                        SEP #$20                             ;81A982|E220    |      ;
                        REP #$10                             ;81A984|C210    |      ;
                        LDA.B #$00                           ;81A986|A900    |      ;
                        XBA                                  ;81A988|EB      |      ;
-                       LDA.W $0921                          ;81A989|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81A989|AD2109  |000921;
                        REP #$20                             ;81A98C|C220    |      ;
                        ASL A                                ;81A98E|0A      |      ;
                        ASL A                                ;81A98F|0A      |      ;
@@ -4839,12 +4838,12 @@ nItemCarriedTable_81A308:
                        JSL.L fUnknown_81A688                ;81A9A6|2288A681|81A688;
                        JSL.L fStartProgrammedDMA            ;81A9AA|22F08A80|808AF0;
                                                             ;      |        |      ;
-          CODE_81A9AE:
+              .label5:
                        SEP #$20                             ;81A9AE|E220    |      ;
                        REP #$10                             ;81A9B0|C210    |      ;
                        LDA.B #$00                           ;81A9B2|A900    |      ;
                        XBA                                  ;81A9B4|EB      |      ;
-                       LDA.W $0921                          ;81A9B5|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81A9B5|AD2109  |000921;
                        REP #$20                             ;81A9B8|C220    |      ;
                        ASL A                                ;81A9BA|0A      |      ;
                        ASL A                                ;81A9BB|0A      |      ;
@@ -4871,12 +4870,12 @@ nItemCarriedTable_81A308:
                        ORA.B $92                            ;81A9DE|0592    |000092;
                        STA.L sShedItems,X                   ;81A9E0|9F001F7F|7F1F00;
                                                             ;      |        |      ;
-          CODE_81A9E4:
+              .return:
                        RTL                                  ;81A9E4|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_81A9E5:
-                       SEP #$20                             ;81A9E5|E220    |      ;
+fItemSubrutineHandler_81A9E5:
+                       SEP #$20                             ;81A9E5|E220    |      ; $22: nItemId
                        REP #$10                             ;81A9E7|C210    |      ;
                        LDA.B #$00                           ;81A9E9|A900    |      ;
                        XBA                                  ;81A9EB|EB      |      ;
@@ -4884,113 +4883,113 @@ nItemCarriedTable_81A308:
                        REP #$20                             ;81A9EE|C220    |      ;
                        ASL A                                ;81A9F0|0A      |      ;
                        TAX                                  ;81A9F1|AA      |      ;
-                       JSR.W (PTR16_81A9F6,X)               ;81A9F2|FCF6A9  |81A9F6;
+                       JSR.W (pItemSubrutines_81A9F6,X)     ;81A9F2|FCF6A9  |81A9F6;
                        RTL                                  ;81A9F5|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-         PTR16_81A9F6:
-                       dw CODE_81AAB6                       ;81A9F6|        |81AAB6;
-                       dw CODE_81AAB6                       ;81A9F8|        |81AAB6;
-                       dw CODE_81AAB6                       ;81A9FA|        |81AAB6;
-                       dw CODE_81AAB6                       ;81A9FC|        |81AAB6;
-                       dw CODE_81AC71                       ;81A9FE|        |81AC71;
-                       dw CODE_81AC71                       ;81AA00|        |81AC71;
-                       dw CODE_81AC71                       ;81AA02|        |81AC71;
-                       dw CODE_81AC71                       ;81AA04|        |81AC71;
-                       dw CODE_81AC78                       ;81AA06|        |81AC78;
-                       dw CODE_81AC79                       ;81AA08|        |81AC79;
-                       dw CODE_81AC7A                       ;81AA0A|        |81AC7A;
-                       dw CODE_81AC7B                       ;81AA0C|        |81AC7B;
-                       dw CODE_81AC7C                       ;81AA0E|        |81AC7C;
-                       dw CODE_81AC7D                       ;81AA10|        |81AC7D;
-                       dw CODE_81AC7E                       ;81AA12|        |81AC7E;
-                       dw CODE_81AC7F                       ;81AA14|        |81AC7F;
-                       dw CODE_81AC80                       ;81AA16|        |81AC80;
-                       dw CODE_81AC80                       ;81AA18|        |81AC80;
-                       dw CODE_81AC80                       ;81AA1A|        |81AC80;
-                       dw CODE_81AC80                       ;81AA1C|        |81AC80;
-                       dw CODE_81ACCB                       ;81AA1E|        |81ACCB;
-                       dw CODE_81ACCC                       ;81AA20|        |81ACCC;
-                       dw CODE_81AD23                       ;81AA22|        |81AD23;
-                       dw CODE_81AD7A                       ;81AA24|        |81AD7A;
-                       dw CODE_81ADD1                       ;81AA26|        |81ADD1;
-                       dw CODE_81ADD2                       ;81AA28|        |81ADD2;
-                       dw CODE_81ADD3                       ;81AA2A|        |81ADD3;
-                       dw CODE_81ADD4                       ;81AA2C|        |81ADD4;
-                       dw CODE_81ADD5                       ;81AA2E|        |81ADD5;
-                       dw CODE_81AE6A                       ;81AA30|        |81AE6A;
-                       dw CODE_81AE6B                       ;81AA32|        |81AE6B;
-                       dw CODE_81AE6C                       ;81AA34|        |81AE6C;
-                       dw CODE_81AE6D                       ;81AA36|        |81AE6D;
-                       dw CODE_81AE6E                       ;81AA38|        |81AE6E;
-                       dw CODE_81AE6F                       ;81AA3A|        |81AE6F;
-                       dw CODE_81AFBF                       ;81AA3C|        |81AFBF;
-                       dw CODE_81AFC0                       ;81AA3E|        |81AFC0;
-                       dw CODE_81B063                       ;81AA40|        |81B063;
-                       dw CODE_81B064                       ;81AA42|        |81B064;
-                       dw CODE_81B0A8                       ;81AA44|        |81B0A8;
-                       dw CODE_81B121                       ;81AA46|        |81B121;
-                       dw CODE_81B1CF                       ;81AA48|        |81B1CF;
-                       dw CODE_81B21E                       ;81AA4A|        |81B21E;
-                       dw CODE_81B261                       ;81AA4C|        |81B261;
-                       dw CODE_81B262                       ;81AA4E|        |81B262;
-                       dw CODE_81B263                       ;81AA50|        |81B263;
-                       dw CODE_81B264                       ;81AA52|        |81B264;
-                       dw CODE_81B265                       ;81AA54|        |81B265;
-                       dw CODE_81B266                       ;81AA56|        |81B266;
-                       dw CODE_81B267                       ;81AA58|        |81B267;
-                       dw CODE_81B268                       ;81AA5A|        |81B268;
-                       dw CODE_81B269                       ;81AA5C|        |81B269;
-                       dw CODE_81B26A                       ;81AA5E|        |81B26A;
-                       dw CODE_81B26B                       ;81AA60|        |81B26B;
-                       dw CODE_81B26C                       ;81AA62|        |81B26C;
-                       dw CODE_81B26D                       ;81AA64|        |81B26D;
-                       dw CODE_81B293                       ;81AA66|        |81B293;
-                       dw CODE_81B294                       ;81AA68|        |81B294;
-                       dw CODE_81B295                       ;81AA6A|        |81B295;
-                       dw CODE_81B296                       ;81AA6C|        |81B296;
-                       dw CODE_81B297                       ;81AA6E|        |81B297;
-                       dw CODE_81B298                       ;81AA70|        |81B298;
-                       dw CODE_81B299                       ;81AA72|        |81B299;
-                       dw CODE_81B29A                       ;81AA74|        |81B29A;
-                       dw CODE_81B29B                       ;81AA76|        |81B29B;
-                       dw CODE_81B29C                       ;81AA78|        |81B29C;
-                       dw CODE_81B29D                       ;81AA7A|        |81B29D;
-                       dw CODE_81B29E                       ;81AA7C|        |81B29E;
-                       dw CODE_81B29F                       ;81AA7E|        |81B29F;
-                       dw CODE_81B2A0                       ;81AA80|        |81B2A0;
-                       dw CODE_81B2A1                       ;81AA82|        |81B2A1;
-                       dw CODE_81B2A2                       ;81AA84|        |81B2A2;
-                       dw CODE_81B2A3                       ;81AA86|        |81B2A3;
-                       dw CODE_81B2A4                       ;81AA88|        |81B2A4;
-                       dw CODE_81B2A5                       ;81AA8A|        |81B2A5;
-                       dw CODE_81B2A6                       ;81AA8C|        |81B2A6;
-                       dw CODE_81B2A7                       ;81AA8E|        |81B2A7;
-                       dw CODE_81B2A8                       ;81AA90|        |81B2A8;
-                       dw CODE_81B2A9                       ;81AA92|        |81B2A9;
-                       dw CODE_81B2AA                       ;81AA94|        |81B2AA;
-                       dw CODE_81B2AB                       ;81AA96|        |81B2AB;
-                       dw CODE_81B2AC                       ;81AA98|        |81B2AC;
-                       dw CODE_81B2AD                       ;81AA9A|        |81B2AD;
-                       dw CODE_81B2AE                       ;81AA9C|        |81B2AE;
-                       dw CODE_81B2AF                       ;81AA9E|        |81B2AF;
-                       dw CODE_81B2B0                       ;81AAA0|        |81B2B0;
-                       dw CODE_81B2B1                       ;81AAA2|        |81B2B1;
-                       dw CODE_81B2B2                       ;81AAA4|        |81B2B2;
-                       dw CODE_81B2B3                       ;81AAA6|        |81B2B3;
-                       dw CODE_81B2B4                       ;81AAA8|        |81B2B4;
-                       dw CODE_81B2B5                       ;81AAAA|        |81B2B5;
-                       dw CODE_81B2B6                       ;81AAAC|        |81B2B6;
-                       dw CODE_81B2B7                       ;81AAAE|        |81B2B7;
-                       dw CODE_81B2B8                       ;81AAB0|        |81B2B8;
-                       dw CODE_81B2B9                       ;81AAB2|        |81B2B9;
-                       dw CODE_81B2BA                       ;81AAB4|        |81B2BA;
+pItemSubrutines_81A9F6:
+                       dw fItemSub81A9F6_0x00to0x03         ;81A9F6|        |81AAB6; 5F * ptr24
+                       dw fItemSub81A9F6_0x00to0x03         ;81A9F8|        |81AAB6;
+                       dw fItemSub81A9F6_0x00to0x03         ;81A9FA|        |81AAB6;
+                       dw fItemSub81A9F6_0x00to0x03         ;81A9FC|        |81AAB6;
+                       dw fItemSub81A9F6_0x04to0x07         ;81A9FE|        |81AC71;
+                       dw fItemSub81A9F6_0x04to0x07         ;81AA00|        |81AC71;
+                       dw fItemSub81A9F6_0x04to0x07         ;81AA02|        |81AC71;
+                       dw fItemSub81A9F6_0x04to0x07         ;81AA04|        |81AC71;
+                       dw fItemSub81A9F6_0x08               ;81AA06|        |81AC78;
+                       dw fItemSub81A9F6_0x09               ;81AA08|        |81AC79;
+                       dw fItemSub81A9F6_0x0A               ;81AA0A|        |81AC7A;
+                       dw fItemSub81A9F6_0x0B               ;81AA0C|        |81AC7B;
+                       dw fItemSub81A9F6_0x0C               ;81AA0E|        |81AC7C;
+                       dw fItemSub81A9F6_0x0D               ;81AA10|        |81AC7D;
+                       dw fItemSub81A9F6_0x0E               ;81AA12|        |81AC7E;
+                       dw fItemSub81A9F6_0x0F               ;81AA14|        |81AC7F;
+                       dw fItemSub81A9F6_0x10to0x13         ;81AA16|        |81AC80;
+                       dw fItemSub81A9F6_0x10to0x13         ;81AA18|        |81AC80;
+                       dw fItemSub81A9F6_0x10to0x13         ;81AA1A|        |81AC80;
+                       dw fItemSub81A9F6_0x10to0x13         ;81AA1C|        |81AC80;
+                       dw fItemSub81A9F6_0x14               ;81AA1E|        |81ACCB;
+                       dw fItemSub81A9F6_0x15               ;81AA20|        |81ACCC;
+                       dw fItemSub81A9F6_0x16               ;81AA22|        |81AD23;
+                       dw fItemSub81A9F6_0x17               ;81AA24|        |81AD7A;
+                       dw fItemSub81A9F6_0x18               ;81AA26|        |81ADD1;
+                       dw fItemSub81A9F6_0x19               ;81AA28|        |81ADD2;
+                       dw fItemSub81A9F6_0x1A               ;81AA2A|        |81ADD3;
+                       dw fItemSub81A9F6_0x1B               ;81AA2C|        |81ADD4;
+                       dw fItemSub81A9F6_0x1C               ;81AA2E|        |81ADD5;
+                       dw fItemSub81A9F6_0x1D               ;81AA30|        |81AE6A;
+                       dw fItemSub81A9F6_0x1E               ;81AA32|        |81AE6B;
+                       dw fItemSub81A9F6_0x1F               ;81AA34|        |81AE6C;
+                       dw fItemSub81A9F6_0x20               ;81AA36|        |81AE6D;
+                       dw fItemSub81A9F6_0x21               ;81AA38|        |81AE6E;
+                       dw fItemSub81A9F6_0x22               ;81AA3A|        |81AE6F;
+                       dw fItemSub81A9F6_0x23               ;81AA3C|        |81AFBF;
+                       dw fItemSub81A9F6_0x24               ;81AA3E|        |81AFC0;
+                       dw fItemSub81A9F6_0x25               ;81AA40|        |81B063;
+                       dw fItemSub81A9F6_0x26               ;81AA42|        |81B064;
+                       dw fItemSub81A9F6_0x27               ;81AA44|        |81B0A8;
+                       dw fItemSub81A9F6_0x28               ;81AA46|        |81B121;
+                       dw fItemSub81A9F6_0x29               ;81AA48|        |81B1CF;
+                       dw fItemSub81A9F6_0x2A               ;81AA4A|        |81B21E;
+                       dw fItemSub81A9F6_0x2B               ;81AA4C|        |81B261;
+                       dw fItemSub81A9F6_0x2C               ;81AA4E|        |81B262;
+                       dw fItemSub81A9F6_0x2D               ;81AA50|        |81B263;
+                       dw fItemSub81A9F6_0x2E               ;81AA52|        |81B264;
+                       dw fItemSub81A9F6_0x2F               ;81AA54|        |81B265;
+                       dw fItemSub81A9F6_0x30               ;81AA56|        |81B266;
+                       dw fItemSub81A9F6_0x31               ;81AA58|        |81B267;
+                       dw fItemSub81A9F6_0x32               ;81AA5A|        |81B268;
+                       dw fItemSub81A9F6_0x33               ;81AA5C|        |81B269;
+                       dw fItemSub81A9F6_0x34               ;81AA5E|        |81B26A;
+                       dw fItemSub81A9F6_0x35               ;81AA60|        |81B26B;
+                       dw fItemSub81A9F6_0x36               ;81AA62|        |81B26C;
+                       dw fItemSub81A9F6_0x37               ;81AA64|        |81B26D;
+                       dw fItemSub81A9F6_0x38               ;81AA66|        |81B293;
+                       dw fItemSub81A9F6_0x39               ;81AA68|        |81B294;
+                       dw fItemSub81A9F6_0x3A               ;81AA6A|        |81B295;
+                       dw fItemSub81A9F6_0x3B               ;81AA6C|        |81B296;
+                       dw fItemSub81A9F6_0x3C               ;81AA6E|        |81B297;
+                       dw fItemSub81A9F6_0x3D               ;81AA70|        |81B298;
+                       dw fItemSub81A9F6_0x3E               ;81AA72|        |81B299;
+                       dw fItemSub81A9F6_0x3F               ;81AA74|        |81B29A;
+                       dw fItemSub81A9F6_0x40               ;81AA76|        |81B29B;
+                       dw fItemSub81A9F6_0x41               ;81AA78|        |81B29C;
+                       dw fItemSub81A9F6_0x42               ;81AA7A|        |81B29D;
+                       dw fItemSub81A9F6_0x43               ;81AA7C|        |81B29E;
+                       dw fItemSub81A9F6_0x44               ;81AA7E|        |81B29F;
+                       dw fItemSub81A9F6_0x45               ;81AA80|        |81B2A0;
+                       dw fItemSub81A9F6_0x46               ;81AA82|        |81B2A1;
+                       dw fItemSub81A9F6_0x47               ;81AA84|        |81B2A2;
+                       dw fItemSub81A9F6_0x48               ;81AA86|        |81B2A3;
+                       dw fItemSub81A9F6_0x49               ;81AA88|        |81B2A4;
+                       dw fItemSub81A9F6_0x4A               ;81AA8A|        |81B2A5;
+                       dw fItemSub81A9F6_0x4B               ;81AA8C|        |81B2A6;
+                       dw fItemSub81A9F6_0x4C               ;81AA8E|        |81B2A7;
+                       dw fItemSub81A9F6_0x4D               ;81AA90|        |81B2A8;
+                       dw fItemSub81A9F6_0x4E               ;81AA92|        |81B2A9;
+                       dw fItemSub81A9F6_0x4F               ;81AA94|        |81B2AA;
+                       dw fItemSub81A9F6_0x50               ;81AA96|        |81B2AB;
+                       dw fItemSub81A9F6_0x51               ;81AA98|        |81B2AC;
+                       dw fItemSub81A9F6_0x52               ;81AA9A|        |81B2AD;
+                       dw fItemSub81A9F6_0x53               ;81AA9C|        |81B2AE;
+                       dw fItemSub81A9F6_0x54               ;81AA9E|        |81B2AF;
+                       dw fItemSub81A9F6_0x55               ;81AAA0|        |81B2B0;
+                       dw fItemSub81A9F6_0x56               ;81AAA2|        |81B2B1;
+                       dw fItemSub81A9F6_0x57               ;81AAA4|        |81B2B2;
+                       dw fItemSub81A9F6_0x58               ;81AAA6|        |81B2B3;
+                       dw fItemSub81A9F6_0x59               ;81AAA8|        |81B2B4;
+                       dw fItemSub81A9F6_0x5A               ;81AAAA|        |81B2B5;
+                       dw fItemSub81A9F6_0x5B               ;81AAAC|        |81B2B6;
+                       dw fItemSub81A9F6_0x5C               ;81AAAE|        |81B2B7;
+                       dw fItemSub81A9F6_0x5D               ;81AAB0|        |81B2B8;
+                       dw fItemSub81A9F6_0x5E               ;81AAB2|        |81B2B9;
+                       dw fItemSub81A9F6_0x5F               ;81AAB4|        |81B2BA;
                                                             ;      |        |      ;
-          CODE_81AAB6:
+fItemSub81A9F6_0x00to0x03:
                        REP #$30                             ;81AAB6|C230    |      ;
-                       LDA.L $7F1F64                        ;81AAB8|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81AAB8|AF641F7F|7F1F64;
                        AND.W #$0002                         ;81AABC|290200  |      ;
-                       BEQ CODE_81AADA                      ;81AABF|F019    |81AADA;
+                       BEQ .label1                          ;81AABF|F019    |81AADA;
                        LDA.W #$0060                         ;81AAC1|A96000  |      ;
                        LDX.W #$0310                         ;81AAC4|A21003  |      ;
                        LDY.W #$0360                         ;81AAC7|A06003  |      ;
@@ -5002,13 +5001,13 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AAD3|7A      |      ;
                        PLX                                  ;81AAD4|FA      |      ;
                        PLA                                  ;81AAD5|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AAD6|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81AAD6|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81AADA:
+              .label1:
                        REP #$30                             ;81AADA|C230    |      ;
-                       LDA.L $7F1F64                        ;81AADC|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81AADC|AF641F7F|7F1F64;
                        AND.W #$0001                         ;81AAE0|290100  |      ;
-                       BEQ CODE_81AAFE                      ;81AAE3|F019    |81AAFE;
+                       BEQ .label2                          ;81AAE3|F019    |81AAFE;
                        LDA.W #$005F                         ;81AAE5|A95F00  |      ;
                        LDX.W #$0240                         ;81AAE8|A24002  |      ;
                        LDY.W #$02F0                         ;81AAEB|A0F002  |      ;
@@ -5020,13 +5019,13 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AAF7|7A      |      ;
                        PLX                                  ;81AAF8|FA      |      ;
                        PLA                                  ;81AAF9|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AAFA|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81AAFA|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81AAFE:
+              .label2:
                        REP #$30                             ;81AAFE|C230    |      ;
-                       LDA.L $7F1F64                        ;81AB00|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81AB00|AF641F7F|7F1F64;
                        AND.W #$0080                         ;81AB04|298000  |      ;
-                       BEQ CODE_81AB26                      ;81AB07|F01D    |81AB26;
+                       BEQ .label3                          ;81AB07|F01D    |81AB26;
                        REP #$30                             ;81AB09|C230    |      ;
                        LDA.W #$0054                         ;81AB0B|A95400  |      ;
                        LDX.W #$0060                         ;81AB0E|A26000  |      ;
@@ -5039,15 +5038,15 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AB1D|7A      |      ;
                        PLX                                  ;81AB1E|FA      |      ;
                        PLA                                  ;81AB1F|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AB20|22A7B082|82B0A7;
-                       BRA CODE_81AB4C                      ;81AB24|8026    |81AB4C;
+                       JSL.L fUnknown_82B0A7                ;81AB20|22A7B082|82B0A7;
+                       BRA .label4                          ;81AB24|8026    |81AB4C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AB26:
+              .label3:
                        REP #$30                             ;81AB26|C230    |      ;
-                       LDA.L $7F1F64                        ;81AB28|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81AB28|AF641F7F|7F1F64;
                        AND.W #$0040                         ;81AB2C|294000  |      ;
-                       BEQ CODE_81AB4C                      ;81AB2F|F01B    |81AB4C;
+                       BEQ .label4                          ;81AB2F|F01B    |81AB4C;
                        REP #$30                             ;81AB31|C230    |      ;
                        LDA.W #$0053                         ;81AB33|A95300  |      ;
                        LDX.W #$0060                         ;81AB36|A26000  |      ;
@@ -5060,16 +5059,16 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AB45|7A      |      ;
                        PLX                                  ;81AB46|FA      |      ;
                        PLA                                  ;81AB47|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AB48|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81AB48|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81AB4C:
+              .label4:
                        SEP #$20                             ;81AB4C|E220    |      ;
                        REP #$10                             ;81AB4E|C210    |      ;
-                       LDA.L PowerBerryEaten                ;81AB50|AF361F7F|7F1F36;
-                       BEQ CODE_81AB94                      ;81AB54|F03E    |81AB94;
+                       LDA.L nPowerBerryEaten               ;81AB50|AF361F7F|7F1F36;
+                       BEQ .ann                             ;81AB54|F03E    |81AB94;
                        LDA.B #$00                           ;81AB56|A900    |      ;
                                                             ;      |        |      ;
-          CODE_81AB58:
+          .powerberry:
                        SEP #$20                             ;81AB58|E220    |      ;
                        REP #$10                             ;81AB5A|C210    |      ;
                        PHA                                  ;81AB5C|48      |      ;
@@ -5096,20 +5095,20 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AB7F|7A      |      ;
                        PLX                                  ;81AB80|FA      |      ;
                        PLA                                  ;81AB81|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AB82|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81AB82|22A7B082|82B0A7;
                        SEP #$20                             ;81AB86|E220    |      ;
                        REP #$10                             ;81AB88|C210    |      ;
                        PLA                                  ;81AB8A|68      |      ;
                        CLC                                  ;81AB8B|18      |      ;
                        ADC.B #$01                           ;81AB8C|6901    |      ;
-                       CMP.L PowerBerryEaten                ;81AB8E|CF361F7F|7F1F36;
-                       BNE CODE_81AB58                      ;81AB92|D0C4    |81AB58;
+                       CMP.L nPowerBerryEaten               ;81AB8E|CF361F7F|7F1F36;
+                       BNE .powerberry                      ;81AB92|D0C4    |81AB58;
                                                             ;      |        |      ;
-          CODE_81AB94:
+                 .ann:
                        REP #$30                             ;81AB94|C230    |      ;
                        LDA.L MarriedGirlID                  ;81AB96|AF661F7F|7F1F66;
                        AND.W #$0200                         ;81AB9A|290002  |      ;
-                       BEQ CODE_81ABB8                      ;81AB9D|F019    |81ABB8;
+                       BEQ .nina                            ;81AB9D|F019    |81ABB8;
                        LDA.W #$0059                         ;81AB9F|A95900  |      ;
                        LDX.W #$0080                         ;81ABA2|A28000  |      ;
                        LDY.W #$0130                         ;81ABA5|A03001  |      ;
@@ -5121,13 +5120,13 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81ABB1|7A      |      ;
                        PLX                                  ;81ABB2|FA      |      ;
                        PLA                                  ;81ABB3|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81ABB4|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81ABB4|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81ABB8:
+                .nina:
                        REP #$30                             ;81ABB8|C230    |      ;
                        LDA.L MarriedGirlID                  ;81ABBA|AF661F7F|7F1F66;
                        AND.W #$0400                         ;81ABBE|290004  |      ;
-                       BEQ CODE_81ABDC                      ;81ABC1|F019    |81ABDC;
+                       BEQ .ellen                           ;81ABC1|F019    |81ABDC;
                        LDA.W #$0058                         ;81ABC3|A95800  |      ;
                        LDX.W #$0060                         ;81ABC6|A26000  |      ;
                        LDY.W #$0130                         ;81ABC9|A03001  |      ;
@@ -5139,13 +5138,13 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81ABD5|7A      |      ;
                        PLX                                  ;81ABD6|FA      |      ;
                        PLA                                  ;81ABD7|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81ABD8|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81ABD8|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81ABDC:
+               .ellen:
                        REP #$30                             ;81ABDC|C230    |      ;
                        LDA.L MarriedGirlID                  ;81ABDE|AF661F7F|7F1F66;
                        AND.W #$0800                         ;81ABE2|290008  |      ;
-                       BEQ CODE_81AC00                      ;81ABE5|F019    |81AC00;
+                       BEQ .eve                             ;81ABE5|F019    |81AC00;
                        LDA.W #$005A                         ;81ABE7|A95A00  |      ;
                        LDX.W #$0090                         ;81ABEA|A29000  |      ;
                        LDY.W #$0130                         ;81ABED|A03001  |      ;
@@ -5157,13 +5156,13 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81ABF9|7A      |      ;
                        PLX                                  ;81ABFA|FA      |      ;
                        PLA                                  ;81ABFB|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81ABFC|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81ABFC|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81AC00:
+                 .eve:
                        REP #$30                             ;81AC00|C230    |      ;
                        LDA.L MarriedGirlID                  ;81AC02|AF661F7F|7F1F66;
                        AND.W #$1000                         ;81AC06|290010  |      ;
-                       BEQ CODE_81AC24                      ;81AC09|F019    |81AC24;
+                       BEQ .label10                         ;81AC09|F019    |81AC24;
                        LDA.W #$005C                         ;81AC0B|A95C00  |      ;
                        LDX.W #$00B0                         ;81AC0E|A2B000  |      ;
                        LDY.W #$0130                         ;81AC11|A03001  |      ;
@@ -5175,13 +5174,13 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AC1D|7A      |      ;
                        PLX                                  ;81AC1E|FA      |      ;
                        PLA                                  ;81AC1F|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AC20|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81AC20|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81AC24:
+             .label10:
                        REP #$30                             ;81AC24|C230    |      ;
                        LDA.L $7F1F68                        ;81AC26|AF681F7F|7F1F68;
                        AND.W #$1000                         ;81AC2A|290010  |      ;
-                       BEQ CODE_81AC48                      ;81AC2D|F019    |81AC48;
+                       BEQ .return                          ;81AC2D|F019    |81AC48;
                        LDA.W #$00F5                         ;81AC2F|A9F500  |      ;
                        LDX.W #$0120                         ;81AC32|A22001  |      ;
                        LDY.W #$0140                         ;81AC35|A04001  |      ;
@@ -5193,9 +5192,9 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81AC41|7A      |      ;
                        PLX                                  ;81AC42|FA      |      ;
                        PLA                                  ;81AC43|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81AC44|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81AC44|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81AC48:
+              .return:
                        RTS                                  ;81AC48|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -5206,7 +5205,7 @@ nItemCarriedTable_81A308:
                        dw $0190,$0060,$01A0,$0060           ;81AC61|        |      ;
                        dw $01B0,$0060,$01C0,$0060           ;81AC69|        |      ;
                                                             ;      |        |      ;
-          CODE_81AC71:
+fItemSub81A9F6_0x04to0x07:
                        RTS                                  ;81AC71|60      |      ;
                                                             ;      |        |      ;
                        RTS                                  ;81AC72|60      |      ;
@@ -5222,52 +5221,52 @@ nItemCarriedTable_81A308:
                        RTS                                  ;81AC77|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC78:
+  fItemSub81A9F6_0x08:
                        RTS                                  ;81AC78|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC79:
+  fItemSub81A9F6_0x09:
                        RTS                                  ;81AC79|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC7A:
+  fItemSub81A9F6_0x0A:
                        RTS                                  ;81AC7A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC7B:
+  fItemSub81A9F6_0x0B:
                        RTS                                  ;81AC7B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC7C:
+  fItemSub81A9F6_0x0C:
                        RTS                                  ;81AC7C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC7D:
+  fItemSub81A9F6_0x0D:
                        RTS                                  ;81AC7D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC7E:
+  fItemSub81A9F6_0x0E:
                        RTS                                  ;81AC7E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC7F:
+  fItemSub81A9F6_0x0F:
                        RTS                                  ;81AC7F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AC80:
+fItemSub81A9F6_0x10to0x13:
                        REP #$30                             ;81AC80|C230    |      ;
                        LDA.W $0196                          ;81AC82|AD9601  |000196;
                        AND.W #$0002                         ;81AC85|290200  |      ;
-                       BNE CODE_81ACB7                      ;81AC88|D02D    |81ACB7;
+                       BNE +                                ;81AC88|D02D    |81ACB7;
                        LDA.W $0196                          ;81AC8A|AD9601  |000196;
                        AND.W #$0008                         ;81AC8D|290800  |      ;
-                       BNE CODE_81ACB7                      ;81AC90|D025    |81ACB7;
+                       BNE +                                ;81AC90|D025    |81ACB7;
                                                             ;      |        |      ;
-          CODE_81AC92:
+                .loop:
                        REP #$30                             ;81AC92|C230    |      ;
-                       LDA.L $7F1F64                        ;81AC94|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81AC94|AF641F7F|7F1F64;
                        AND.W #$0002                         ;81AC98|290200  |      ;
-                       BEQ CODE_81ACB6                      ;81AC9B|F019    |81ACB6;
+                       BEQ .return                          ;81AC9B|F019    |81ACB6;
                        LDA.W #$00E1                         ;81AC9D|A9E100  |      ;
                        LDX.W #$0170                         ;81ACA0|A27001  |      ;
                        LDY.W #$0270                         ;81ACA3|A07002  |      ;
@@ -5279,19 +5278,18 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81ACAF|7A      |      ;
                        PLX                                  ;81ACB0|FA      |      ;
                        PLA                                  ;81ACB1|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81ACB2|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81ACB2|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81ACB6:
+              .return:
                        RTS                                  ;81ACB6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ACB7:
-                       REP #$30                             ;81ACB7|C230    |      ;
+                     + REP #$30                             ;81ACB7|C230    |      ;
                        LDA.W #$00E2                         ;81ACB9|A9E200  |      ;
                        LDX.W #$0180                         ;81ACBC|A28001  |      ;
                        LDY.W #$0020                         ;81ACBF|A02000  |      ;
                        JSL.L fUnknown_81A7CE                ;81ACC2|22CEA781|81A7CE;
-                       BRA CODE_81AC92                      ;81ACC6|80CA    |81AC92;
+                       BRA .loop                            ;81ACC6|80CA    |81AC92;
                                                             ;      |        |      ;
                        RTS                                  ;81ACC8|60      |      ;
                                                             ;      |        |      ;
@@ -5300,25 +5298,24 @@ nItemCarriedTable_81A308:
                        RTS                                  ;81ACCA|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ACCB:
+  fItemSub81A9F6_0x14:
                        RTS                                  ;81ACCB|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ACCC:
+  fItemSub81A9F6_0x15:
                        REP #$30                             ;81ACCC|C230    |      ;
                        LDA.W $0196                          ;81ACCE|AD9601  |000196;
                        AND.W #$0010                         ;81ACD1|291000  |      ;
-                       BEQ CODE_81ACE3                      ;81ACD4|F00D    |81ACE3;
+                       BEQ +                                ;81ACD4|F00D    |81ACE3;
                        LDA.W #$00EE                         ;81ACD6|A9EE00  |      ;
                        LDX.W #$0070                         ;81ACD9|A27000  |      ;
                        LDY.W #$00C0                         ;81ACDC|A0C000  |      ;
                        JSL.L fUnknown_81A7CE                ;81ACDF|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81ACE3:
-                       REP #$30                             ;81ACE3|C230    |      ;
+                     + REP #$30                             ;81ACE3|C230    |      ;
                        LDA.L $7F1F6C                        ;81ACE5|AF6C1F7F|7F1F6C;
                        AND.W #$1000                         ;81ACE9|290010  |      ;
-                       BEQ CODE_81AD0A                      ;81ACEC|F01C    |81AD0A;
+                       BEQ +                                ;81ACEC|F01C    |81AD0A;
                        LDA.W #$00FD                         ;81ACEE|A9FD00  |      ;
                        LDX.W #$0090                         ;81ACF1|A29000  |      ;
                        LDY.W #$0040                         ;81ACF4|A04000  |      ;
@@ -5329,35 +5326,32 @@ nItemCarriedTable_81A308:
                        LDY.W #$0050                         ;81AD03|A05000  |      ;
                        JSL.L fUnknown_82B03A                ;81AD06|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_81AD0A:
-                       REP #$30                             ;81AD0A|C230    |      ;
+                     + REP #$30                             ;81AD0A|C230    |      ;
                        LDA.L $7F1F6E                        ;81AD0C|AF6E1F7F|7F1F6E;
                        AND.W #$4000                         ;81AD10|290040  |      ;
-                       BEQ CODE_81AD22                      ;81AD13|F00D    |81AD22;
+                       BEQ +                                ;81AD13|F00D    |81AD22;
                        LDA.W #$00FE                         ;81AD15|A9FE00  |      ;
                        LDX.W #$00A0                         ;81AD18|A2A000  |      ;
                        LDY.W #$0030                         ;81AD1B|A03000  |      ;
                        JSL.L fUnknown_81A7CE                ;81AD1E|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81AD22:
-                       RTS                                  ;81AD22|60      |      ;
+                     + RTS                                  ;81AD22|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AD23:
+  fItemSub81A9F6_0x16:
                        REP #$30                             ;81AD23|C230    |      ;
                        LDA.W $0196                          ;81AD25|AD9601  |000196;
                        AND.W #$0010                         ;81AD28|291000  |      ;
-                       BEQ CODE_81AD3A                      ;81AD2B|F00D    |81AD3A;
+                       BEQ +                                ;81AD2B|F00D    |81AD3A;
                        LDA.W #$00EE                         ;81AD2D|A9EE00  |      ;
                        LDX.W #$0070                         ;81AD30|A27000  |      ;
                        LDY.W #$00C0                         ;81AD33|A0C000  |      ;
                        JSL.L fUnknown_81A7CE                ;81AD36|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81AD3A:
-                       REP #$30                             ;81AD3A|C230    |      ;
+                     + REP #$30                             ;81AD3A|C230    |      ;
                        LDA.L $7F1F6C                        ;81AD3C|AF6C1F7F|7F1F6C;
                        AND.W #$1000                         ;81AD40|290010  |      ;
-                       BEQ CODE_81AD61                      ;81AD43|F01C    |81AD61;
+                       BEQ +                                ;81AD43|F01C    |81AD61;
                        LDA.W #$00FD                         ;81AD45|A9FD00  |      ;
                        LDX.W #$0090                         ;81AD48|A29000  |      ;
                        LDY.W #$0040                         ;81AD4B|A04000  |      ;
@@ -5368,35 +5362,32 @@ nItemCarriedTable_81A308:
                        LDY.W #$0050                         ;81AD5A|A05000  |      ;
                        JSL.L fUnknown_82B03A                ;81AD5D|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_81AD61:
-                       REP #$30                             ;81AD61|C230    |      ;
+                     + REP #$30                             ;81AD61|C230    |      ;
                        LDA.L $7F1F6E                        ;81AD63|AF6E1F7F|7F1F6E;
                        AND.W #$4000                         ;81AD67|290040  |      ;
-                       BEQ CODE_81AD79                      ;81AD6A|F00D    |81AD79;
+                       BEQ +                                ;81AD6A|F00D    |81AD79;
                        LDA.W #$00FE                         ;81AD6C|A9FE00  |      ;
                        LDX.W #$00A0                         ;81AD6F|A2A000  |      ;
                        LDY.W #$0030                         ;81AD72|A03000  |      ;
                        JSL.L fUnknown_81A7CE                ;81AD75|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81AD79:
-                       RTS                                  ;81AD79|60      |      ;
+                     + RTS                                  ;81AD79|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AD7A:
+  fItemSub81A9F6_0x17:
                        REP #$30                             ;81AD7A|C230    |      ;
                        LDA.W $0196                          ;81AD7C|AD9601  |000196;
                        AND.W #$0010                         ;81AD7F|291000  |      ;
-                       BEQ CODE_81AD91                      ;81AD82|F00D    |81AD91;
+                       BEQ +                                ;81AD82|F00D    |81AD91;
                        LDA.W #$00EE                         ;81AD84|A9EE00  |      ;
                        LDX.W #$0070                         ;81AD87|A27000  |      ;
                        LDY.W #$00C0                         ;81AD8A|A0C000  |      ;
                        JSL.L fUnknown_81A7CE                ;81AD8D|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81AD91:
-                       REP #$30                             ;81AD91|C230    |      ;
+                     + REP #$30                             ;81AD91|C230    |      ;
                        LDA.L $7F1F6C                        ;81AD93|AF6C1F7F|7F1F6C;
                        AND.W #$1000                         ;81AD97|290010  |      ;
-                       BEQ CODE_81ADB8                      ;81AD9A|F01C    |81ADB8;
+                       BEQ +                                ;81AD9A|F01C    |81ADB8;
                        LDA.W #$00FD                         ;81AD9C|A9FD00  |      ;
                        LDX.W #$0140                         ;81AD9F|A24001  |      ;
                        LDY.W #$0050                         ;81ADA2|A05000  |      ;
@@ -5407,52 +5398,49 @@ nItemCarriedTable_81A308:
                        LDY.W #$0060                         ;81ADB1|A06000  |      ;
                        JSL.L fUnknown_82B03A                ;81ADB4|223AB082|82B03A;
                                                             ;      |        |      ;
-          CODE_81ADB8:
-                       REP #$30                             ;81ADB8|C230    |      ;
+                     + REP #$30                             ;81ADB8|C230    |      ;
                        LDA.L $7F1F6E                        ;81ADBA|AF6E1F7F|7F1F6E;
                        AND.W #$4000                         ;81ADBE|290040  |      ;
-                       BEQ CODE_81ADD0                      ;81ADC1|F00D    |81ADD0;
+                       BEQ +                                ;81ADC1|F00D    |81ADD0;
                        LDA.W #$00FE                         ;81ADC3|A9FE00  |      ;
                        LDX.W #$0150                         ;81ADC6|A25001  |      ;
                        LDY.W #$0040                         ;81ADC9|A04000  |      ;
                        JSL.L fUnknown_81A7CE                ;81ADCC|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81ADD0:
-                       RTS                                  ;81ADD0|60      |      ;
+                     + RTS                                  ;81ADD0|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ADD1:
+  fItemSub81A9F6_0x18:
                        RTS                                  ;81ADD1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ADD2:
+  fItemSub81A9F6_0x19:
                        RTS                                  ;81ADD2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ADD3:
+  fItemSub81A9F6_0x1A:
                        RTS                                  ;81ADD3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ADD4:
+  fItemSub81A9F6_0x1B:
                        RTS                                  ;81ADD4|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ADD5:
+  fItemSub81A9F6_0x1C:
                        REP #$30                             ;81ADD5|C230    |      ;
                        LDA.L $7F1F68                        ;81ADD7|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81ADDB|290100  |      ;
-                       BNE CODE_81ADE3                      ;81ADDE|D003    |81ADE3;
-                       JMP.W CODE_81AE69                    ;81ADE0|4C69AE  |81AE69;
+                       BNE +                                ;81ADDE|D003    |81ADE3;
+                       JMP.W .return                        ;81ADE0|4C69AE  |81AE69;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ADE3:
-                       SEP #$20                             ;81ADE3|E220    |      ;
+                     + SEP #$20                             ;81ADE3|E220    |      ;
                        LDA.L nCurrentSeasonID               ;81ADE5|AF191F7F|7F1F19;
                        CMP.B #$01                           ;81ADE9|C901    |      ;
-                       BNE CODE_81AE0C                      ;81ADEB|D01F    |81AE0C;
+                       BNE .label2                          ;81ADEB|D01F    |81AE0C;
                        LDY.W #$0000                         ;81ADED|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_81ADF0:
+              .label1:
                        PHY                                  ;81ADF0|5A      |      ;
                        REP #$20                             ;81ADF1|C220    |      ;
                        TYA                                  ;81ADF3|98      |      ;
@@ -5462,21 +5450,21 @@ nItemCarriedTable_81A308:
                        INC A                                ;81ADF9|1A      |      ;
                        LDX.W #$0001                         ;81ADFA|A20100  |      ;
                        LDY.W #$0002                         ;81ADFD|A00200  |      ;
-                       JSR.W CODE_81B2BB                    ;81AE00|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AE00|20BBB2  |81B2BB;
                        REP #$30                             ;81AE03|C230    |      ;
                        PLY                                  ;81AE05|7A      |      ;
                        INY                                  ;81AE06|C8      |      ;
                        CPY.W #$0002                         ;81AE07|C00200  |      ;
-                       BNE CODE_81ADF0                      ;81AE0A|D0E4    |81ADF0;
+                       BNE .label1                          ;81AE0A|D0E4    |81ADF0;
                                                             ;      |        |      ;
-          CODE_81AE0C:
+              .label2:
                        SEP #$20                             ;81AE0C|E220    |      ;
                        REP #$10                             ;81AE0E|C210    |      ;
                        LDA.L nCurrentSeasonID               ;81AE10|AF191F7F|7F1F19;
-                       BNE CODE_81AE35                      ;81AE14|D01F    |81AE35;
+                       BNE +                                ;81AE14|D01F    |81AE35;
                        LDY.W #$0002                         ;81AE16|A00200  |      ;
                                                             ;      |        |      ;
-          CODE_81AE19:
+                .loop:
                        PHY                                  ;81AE19|5A      |      ;
                        REP #$20                             ;81AE1A|C220    |      ;
                        TYA                                  ;81AE1C|98      |      ;
@@ -5486,332 +5474,330 @@ nItemCarriedTable_81A308:
                        INC A                                ;81AE22|1A      |      ;
                        LDX.W #$0001                         ;81AE23|A20100  |      ;
                        LDY.W #$0002                         ;81AE26|A00200  |      ;
-                       JSR.W CODE_81B2BB                    ;81AE29|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AE29|20BBB2  |81B2BB;
                        REP #$30                             ;81AE2C|C230    |      ;
                        PLY                                  ;81AE2E|7A      |      ;
                        INY                                  ;81AE2F|C8      |      ;
                        CPY.W #$0004                         ;81AE30|C00400  |      ;
-                       BNE CODE_81AE19                      ;81AE33|D0E4    |81AE19;
+                       BNE .loop                            ;81AE33|D0E4    |81AE19;
                                                             ;      |        |      ;
-          CODE_81AE35:
-                       SEP #$20                             ;81AE35|E220    |      ;
+                     + SEP #$20                             ;81AE35|E220    |      ;
                        REP #$10                             ;81AE37|C210    |      ;
                        LDA.L nCurrentSeasonID               ;81AE39|AF191F7F|7F1F19;
                        CMP.B #$02                           ;81AE3D|C902    |      ;
-                       BCS CODE_81AE4F                      ;81AE3F|B00E    |81AE4F;
+                       BCS .exit                            ;81AE3F|B00E    |81AE4F;
                        REP #$20                             ;81AE41|C220    |      ;
                        LDA.W #$0005                         ;81AE43|A90500  |      ;
                        LDX.W #$0001                         ;81AE46|A20100  |      ;
                        LDY.W #$0002                         ;81AE49|A00200  |      ;
-                       JSR.W CODE_81B2BB                    ;81AE4C|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AE4C|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AE4F:
+                .exit:
                        SEP #$20                             ;81AE4F|E220    |      ;
                        LDA.L nCurrentSeasonID               ;81AE51|AF191F7F|7F1F19;
                        CMP.B #$02                           ;81AE55|C902    |      ;
-                       BCC CODE_81AE5B                      ;81AE57|9002    |81AE5B;
-                       BRA CODE_81AE69                      ;81AE59|800E    |81AE69;
+                       BCC +                                ;81AE57|9002    |81AE5B;
+                       BRA .return                          ;81AE59|800E    |81AE69;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE5B:
-                       REP #$30                             ;81AE5B|C230    |      ;
+                     + REP #$30                             ;81AE5B|C230    |      ;
                        LDA.W #$0006                         ;81AE5D|A90600  |      ;
                        LDX.W #$0001                         ;81AE60|A20100  |      ;
                        LDY.W #$0000                         ;81AE63|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AE66|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AE66|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AE69:
+              .return:
                        RTS                                  ;81AE69|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE6A:
+  fItemSub81A9F6_0x1D:
                        RTS                                  ;81AE6A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE6B:
+  fItemSub81A9F6_0x1E:
                        RTS                                  ;81AE6B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE6C:
+  fItemSub81A9F6_0x1F:
                        RTS                                  ;81AE6C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE6D:
+  fItemSub81A9F6_0x20:
                        RTS                                  ;81AE6D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE6E:
+  fItemSub81A9F6_0x21:
                        RTS                                  ;81AE6E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE6F:
+  fItemSub81A9F6_0x22:
                        REP #$30                             ;81AE6F|C230    |      ;
                        LDA.L $7F1F68                        ;81AE71|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81AE75|290100  |      ;
-                       BNE CODE_81AE7D                      ;81AE78|D003    |81AE7D;
-                       JMP.W CODE_81AFBE                    ;81AE7A|4CBEAF  |81AFBE;
+                       BNE .paint                           ;81AE78|D003    |81AE7D;
+                       JMP.W .return                        ;81AE7A|4CBEAF  |81AFBE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AE7D:
+               .paint:
                        SEP #$20                             ;81AE7D|E220    |      ;
-                       LDA.W $0921                          ;81AE7F|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AE7F|AD2109  |000921;
                        CMP.B #$0D                           ;81AE82|C90D    |      ;
-                       BEQ CODE_81AEA6                      ;81AE84|F020    |81AEA6;
-                       LDA.W $0923                          ;81AE86|AD2309  |000923;
+                       BEQ .milker                          ;81AE84|F020    |81AEA6;
+                       LDA.W nToolSecond                    ;81AE86|AD2309  |000923;
                        CMP.B #$0D                           ;81AE89|C90D    |      ;
-                       BEQ CODE_81AEA6                      ;81AE8B|F019    |81AEA6;
+                       BEQ .milker                          ;81AE8B|F019    |81AEA6;
                        REP #$30                             ;81AE8D|C230    |      ;
-                       LDA.L $7F1F64                        ;81AE8F|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81AE8F|AF641F7F|7F1F64;
                        AND.W #$0080                         ;81AE93|298000  |      ;
-                       BEQ CODE_81AEA6                      ;81AE96|F00E    |81AEA6;
+                       BEQ .milker                          ;81AE96|F00E    |81AEA6;
                        REP #$20                             ;81AE98|C220    |      ;
                        LDA.W #$0001                         ;81AE9A|A90100  |      ;
                        LDX.W #$0002                         ;81AE9D|A20200  |      ;
                        LDY.W #$0000                         ;81AEA0|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AEA3|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AEA3|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AEA6:
+              .milker:
                        SEP #$20                             ;81AEA6|E220    |      ;
-                       LDA.W $0921                          ;81AEA8|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AEA8|AD2109  |000921;
                        CMP.B #$0E                           ;81AEAB|C90E    |      ;
-                       BEQ CODE_81AEC4                      ;81AEAD|F015    |81AEC4;
-                       LDA.W $0923                          ;81AEAF|AD2309  |000923;
+                       BEQ .brush                           ;81AEAD|F015    |81AEC4;
+                       LDA.W nToolSecond                    ;81AEAF|AD2309  |000923;
                        CMP.B #$0E                           ;81AEB2|C90E    |      ;
-                       BEQ CODE_81AEC4                      ;81AEB4|F00E    |81AEC4;
+                       BEQ .brush                           ;81AEB4|F00E    |81AEC4;
                        REP #$20                             ;81AEB6|C220    |      ;
                        LDA.W #$0002                         ;81AEB8|A90200  |      ;
                        LDX.W #$0002                         ;81AEBB|A20200  |      ;
                        LDY.W #$0000                         ;81AEBE|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AEC1|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AEC1|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AEC4:
+               .brush:
                        SEP #$20                             ;81AEC4|E220    |      ;
-                       LDA.W $0921                          ;81AEC6|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AEC6|AD2109  |000921;
                        CMP.B #$0F                           ;81AEC9|C90F    |      ;
-                       BEQ CODE_81AEE2                      ;81AECB|F015    |81AEE2;
-                       LDA.W $0923                          ;81AECD|AD2309  |000923;
+                       BEQ .goldSickle                      ;81AECB|F015    |81AEE2;
+                       LDA.W nToolSecond                    ;81AECD|AD2309  |000923;
                        CMP.B #$0F                           ;81AED0|C90F    |      ;
-                       BEQ CODE_81AEE2                      ;81AED2|F00E    |81AEE2;
+                       BEQ .goldSickle                      ;81AED2|F00E    |81AEE2;
                        REP #$20                             ;81AED4|C220    |      ;
                        LDA.W #$0003                         ;81AED6|A90300  |      ;
                        LDX.W #$0002                         ;81AED9|A20200  |      ;
                        LDY.W #$0000                         ;81AEDC|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AEDF|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AEDF|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AEE2:
+          .goldSickle:
                        SEP #$20                             ;81AEE2|E220    |      ;
-                       LDA.W $0921                          ;81AEE4|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AEE4|AD2109  |000921;
                        CMP.B #$11                           ;81AEE7|C911    |      ;
-                       BEQ CODE_81AF0B                      ;81AEE9|F020    |81AF0B;
-                       LDA.W $0923                          ;81AEEB|AD2309  |000923;
+                       BEQ .goldPlow                        ;81AEE9|F020    |81AF0B;
+                       LDA.W nToolSecond                    ;81AEEB|AD2309  |000923;
                        CMP.B #$11                           ;81AEEE|C911    |      ;
-                       BEQ CODE_81AF0B                      ;81AEF0|F019    |81AF0B;
+                       BEQ .goldPlow                        ;81AEF0|F019    |81AF0B;
                        REP #$30                             ;81AEF2|C230    |      ;
                        LDA.L $7F1F6A                        ;81AEF4|AF6A1F7F|7F1F6A;
                        AND.W #$0001                         ;81AEF8|290100  |      ;
-                       BEQ CODE_81AF0B                      ;81AEFB|F00E    |81AF0B;
+                       BEQ .goldPlow                        ;81AEFB|F00E    |81AF0B;
                        REP #$20                             ;81AEFD|C220    |      ;
                        LDA.W #$0004                         ;81AEFF|A90400  |      ;
                        LDX.W #$0002                         ;81AF02|A20200  |      ;
                        LDY.W #$0000                         ;81AF05|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AF08|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AF08|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AF0B:
+            .goldPlow:
                        SEP #$20                             ;81AF0B|E220    |      ;
-                       LDA.W $0921                          ;81AF0D|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AF0D|AD2109  |000921;
                        CMP.B #$12                           ;81AF10|C912    |      ;
-                       BEQ CODE_81AF34                      ;81AF12|F020    |81AF34;
-                       LDA.W $0923                          ;81AF14|AD2309  |000923;
+                       BEQ .goldHammer                      ;81AF12|F020    |81AF34;
+                       LDA.W nToolSecond                    ;81AF14|AD2309  |000923;
                        CMP.B #$12                           ;81AF17|C912    |      ;
-                       BEQ CODE_81AF34                      ;81AF19|F019    |81AF34;
+                       BEQ .goldHammer                      ;81AF19|F019    |81AF34;
                        REP #$30                             ;81AF1B|C230    |      ;
                        LDA.L $7F1F6A                        ;81AF1D|AF6A1F7F|7F1F6A;
                        AND.W #$0002                         ;81AF21|290200  |      ;
-                       BEQ CODE_81AF34                      ;81AF24|F00E    |81AF34;
+                       BEQ .goldHammer                      ;81AF24|F00E    |81AF34;
                        REP #$20                             ;81AF26|C220    |      ;
                        LDA.W #$0005                         ;81AF28|A90500  |      ;
                        LDX.W #$0002                         ;81AF2B|A20200  |      ;
                        LDY.W #$0000                         ;81AF2E|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AF31|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AF31|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AF34:
+          .goldHammer:
                        SEP #$20                             ;81AF34|E220    |      ;
-                       LDA.W $0921                          ;81AF36|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AF36|AD2109  |000921;
                        CMP.B #$13                           ;81AF39|C913    |      ;
-                       BEQ CODE_81AF5D                      ;81AF3B|F020    |81AF5D;
-                       LDA.W $0923                          ;81AF3D|AD2309  |000923;
+                       BEQ .goldAxe                         ;81AF3B|F020    |81AF5D;
+                       LDA.W nToolSecond                    ;81AF3D|AD2309  |000923;
                        CMP.B #$13                           ;81AF40|C913    |      ;
-                       BEQ CODE_81AF5D                      ;81AF42|F019    |81AF5D;
+                       BEQ .goldAxe                         ;81AF42|F019    |81AF5D;
                        REP #$30                             ;81AF44|C230    |      ;
                        LDA.L $7F1F6A                        ;81AF46|AF6A1F7F|7F1F6A;
                        AND.W #$0004                         ;81AF4A|290400  |      ;
-                       BEQ CODE_81AF5D                      ;81AF4D|F00E    |81AF5D;
+                       BEQ .goldAxe                         ;81AF4D|F00E    |81AF5D;
                        REP #$20                             ;81AF4F|C220    |      ;
                        LDA.W #$0006                         ;81AF51|A90600  |      ;
                        LDX.W #$0002                         ;81AF54|A20200  |      ;
                        LDY.W #$0000                         ;81AF57|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AF5A|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AF5A|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AF5D:
+             .goldAxe:
                        SEP #$20                             ;81AF5D|E220    |      ;
-                       LDA.W $0921                          ;81AF5F|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AF5F|AD2109  |000921;
                        CMP.B #$14                           ;81AF62|C914    |      ;
-                       BEQ CODE_81AF86                      ;81AF64|F020    |81AF86;
-                       LDA.W $0923                          ;81AF66|AD2309  |000923;
+                       BEQ .sprinkler                       ;81AF64|F020    |81AF86;
+                       LDA.W nToolSecond                    ;81AF66|AD2309  |000923;
                        CMP.B #$14                           ;81AF69|C914    |      ;
-                       BEQ CODE_81AF86                      ;81AF6B|F019    |81AF86;
+                       BEQ .sprinkler                       ;81AF6B|F019    |81AF86;
                        REP #$30                             ;81AF6D|C230    |      ;
                        LDA.L $7F1F6A                        ;81AF6F|AF6A1F7F|7F1F6A;
                        AND.W #$0008                         ;81AF73|290800  |      ;
-                       BEQ CODE_81AF86                      ;81AF76|F00E    |81AF86;
+                       BEQ .sprinkler                       ;81AF76|F00E    |81AF86;
                        REP #$20                             ;81AF78|C220    |      ;
                        LDA.W #$0007                         ;81AF7A|A90700  |      ;
                        LDX.W #$0002                         ;81AF7D|A20200  |      ;
                        LDY.W #$0000                         ;81AF80|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AF83|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AF83|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AF86:
+           .sprinkler:
                        SEP #$20                             ;81AF86|E220    |      ;
-                       LDA.W $0921                          ;81AF88|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81AF88|AD2109  |000921;
                        CMP.B #$15                           ;81AF8B|C915    |      ;
-                       BEQ CODE_81AFBE                      ;81AF8D|F02F    |81AFBE;
-                       LDA.W $0923                          ;81AF8F|AD2309  |000923;
+                       BEQ .return                          ;81AF8D|F02F    |81AFBE;
+                       LDA.W nToolSecond                    ;81AF8F|AD2309  |000923;
                        CMP.B #$15                           ;81AF92|C915    |      ;
-                       BEQ CODE_81AFBE                      ;81AF94|F028    |81AFBE;
+                       BEQ .return                          ;81AF94|F028    |81AFBE;
                        LDA.L nCurrentYearID                 ;81AF96|AF181F7F|7F1F18;
                        CMP.B #$01                           ;81AF9A|C901    |      ;
-                       BCS CODE_81AFB0                      ;81AF9C|B012    |81AFB0;
+                       BCS .continue                        ;81AF9C|B012    |81AFB0;
                        LDA.L nCurrentSeasonID               ;81AF9E|AF191F7F|7F1F19;
-                       BEQ CODE_81AFBE                      ;81AFA2|F01A    |81AFBE;
+                       BEQ .return                          ;81AFA2|F01A    |81AFBE;
                        CMP.B #$02                           ;81AFA4|C902    |      ;
-                       BCS CODE_81AFB0                      ;81AFA6|B008    |81AFB0;
+                       BCS .continue                        ;81AFA6|B008    |81AFB0;
                        LDA.L nCurrentDay                    ;81AFA8|AF1B1F7F|7F1F1B;
                        CMP.B #$14                           ;81AFAC|C914    |      ;
-                       BCC CODE_81AFBE                      ;81AFAE|900E    |81AFBE;
+                       BCC .return                          ;81AFAE|900E    |81AFBE;
                                                             ;      |        |      ;
-          CODE_81AFB0:
+            .continue:
                        REP #$20                             ;81AFB0|C220    |      ;
                        LDA.W #$0008                         ;81AFB2|A90800  |      ;
                        LDX.W #$0002                         ;81AFB5|A20200  |      ;
                        LDY.W #$0000                         ;81AFB8|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81AFBB|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81AFBB|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81AFBE:
+              .return:
                        RTS                                  ;81AFBE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AFBF:
+  fItemSub81A9F6_0x23:
                        RTS                                  ;81AFBF|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AFC0:
+  fItemSub81A9F6_0x24:
                        REP #$30                             ;81AFC0|C230    |      ;
                        LDA.L $7F1F68                        ;81AFC2|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81AFC6|290100  |      ;
-                       BNE CODE_81AFCE                      ;81AFC9|D003    |81AFCE;
-                       JMP.W CODE_81B062                    ;81AFCB|4C62B0  |81B062;
+                       BNE +                                ;81AFC9|D003    |81AFCE;
+                       JMP.W .return                        ;81AFCB|4C62B0  |81B062;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81AFCE:
-                       REP #$20                             ;81AFCE|C220    |      ;
-                       LDA.L $7F1F64                        ;81AFD0|AF641F7F|7F1F64;
+                     + REP #$20                             ;81AFCE|C220    |      ;
+                       LDA.L nHouseSize                     ;81AFD0|AF641F7F|7F1F64;
                        AND.W #$0004                         ;81AFD4|290400  |      ;
-                       BNE CODE_81B008                      ;81AFD7|D02F    |81B008;
+                       BNE .cowMedicine                     ;81AFD7|D02F    |81B008;
                        LDA.L $7F1F6E                        ;81AFD9|AF6E1F7F|7F1F6E;
                        AND.W #$1000                         ;81AFDD|290010  |      ;
-                       BEQ CODE_81B008                      ;81AFE0|F026    |81B008;
+                       BEQ .cowMedicine                     ;81AFE0|F026    |81B008;
+                                                            ;      |        |      ;
+       .miraclePotion:
                        SEP #$20                             ;81AFE2|E220    |      ;
-                       LDA.L $7F1F0A                        ;81AFE4|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81AFE4|AF0A1F7F|7F1F0A;
                        CMP.B #$0C                           ;81AFE8|C90C    |      ;
-                       BEQ CODE_81B008                      ;81AFEA|F01C    |81B008;
-                       LDA.W $0921                          ;81AFEC|AD2109  |000921;
-                       CMP.B #$0A                           ;81AFEF|C90A    |      ;
-                       BEQ CODE_81B008                      ;81AFF1|F015    |81B008;
-                       LDA.W $0923                          ;81AFF3|AD2309  |000923;
+                       BEQ .cowMedicine                     ;81AFEA|F01C    |81B008;
+                       LDA.W nToolEquipped                  ;81AFEC|AD2109  |000921;
+                       CMP.B #$0A                           ;81AFEF|C90A    |      ; Miracle Potion
+                       BEQ .cowMedicine                     ;81AFF1|F015    |81B008;
+                       LDA.W nToolSecond                    ;81AFF3|AD2309  |000923;
                        CMP.B #$0A                           ;81AFF6|C90A    |      ;
-                       BEQ CODE_81B008                      ;81AFF8|F00E    |81B008;
+                       BEQ .cowMedicine                     ;81AFF8|F00E    |81B008;
                        REP #$30                             ;81AFFA|C230    |      ;
                        LDA.W #$0001                         ;81AFFC|A90100  |      ;
                        LDX.W #$0003                         ;81AFFF|A20300  |      ;
                        LDY.W #$0000                         ;81B002|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81B005|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B005|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81B008:
+         .cowMedicine:
                        SEP #$20                             ;81B008|E220    |      ;
-                       LDA.W $0921                          ;81B00A|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81B00A|AD2109  |000921;
                        CMP.B #$09                           ;81B00D|C909    |      ;
-                       BEQ CODE_81B026                      ;81B00F|F015    |81B026;
-                       LDA.W $0923                          ;81B011|AD2309  |000923;
+                       BEQ .chickenFeed                     ;81B00F|F015    |81B026;
+                       LDA.W nToolSecond                    ;81B011|AD2309  |000923;
                        CMP.B #$09                           ;81B014|C909    |      ;
-                       BEQ CODE_81B026                      ;81B016|F00E    |81B026;
+                       BEQ .chickenFeed                     ;81B016|F00E    |81B026;
                        REP #$30                             ;81B018|C230    |      ;
                        LDA.W #$0002                         ;81B01A|A90200  |      ;
                        LDX.W #$0003                         ;81B01D|A20300  |      ;
                        LDY.W #$0000                         ;81B020|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81B023|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B023|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81B026:
+         .chickenFeed:
                        SEP #$20                             ;81B026|E220    |      ;
-                       LDA.W $0921                          ;81B028|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81B028|AD2109  |000921;
                        CMP.B #$19                           ;81B02B|C919    |      ;
-                       BEQ CODE_81B044                      ;81B02D|F015    |81B044;
-                       LDA.W $0923                          ;81B02F|AD2309  |000923;
+                       BEQ .cowFeed                         ;81B02D|F015    |81B044;
+                       LDA.W nToolSecond                    ;81B02F|AD2309  |000923;
                        CMP.B #$19                           ;81B032|C919    |      ;
-                       BEQ CODE_81B044                      ;81B034|F00E    |81B044;
+                       BEQ .cowFeed                         ;81B034|F00E    |81B044;
                        REP #$30                             ;81B036|C230    |      ;
                        LDA.W #$0003                         ;81B038|A90300  |      ;
                        LDX.W #$0003                         ;81B03B|A20300  |      ;
                        LDY.W #$0000                         ;81B03E|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81B041|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B041|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81B044:
+             .cowFeed:
                        SEP #$20                             ;81B044|E220    |      ;
-                       LDA.W $0921                          ;81B046|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81B046|AD2109  |000921;
                        CMP.B #$1A                           ;81B049|C91A    |      ;
-                       BEQ CODE_81B062                      ;81B04B|F015    |81B062;
-                       LDA.W $0923                          ;81B04D|AD2309  |000923;
+                       BEQ .return                          ;81B04B|F015    |81B062;
+                       LDA.W nToolSecond                    ;81B04D|AD2309  |000923;
                        CMP.B #$1A                           ;81B050|C91A    |      ;
-                       BEQ CODE_81B062                      ;81B052|F00E    |81B062;
+                       BEQ .return                          ;81B052|F00E    |81B062;
                        REP #$30                             ;81B054|C230    |      ;
                        LDA.W #$0004                         ;81B056|A90400  |      ;
                        LDX.W #$0003                         ;81B059|A20300  |      ;
                        LDY.W #$0000                         ;81B05C|A00000  |      ;
-                       JSR.W CODE_81B2BB                    ;81B05F|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B05F|20BBB2  |81B2BB;
                                                             ;      |        |      ;
-          CODE_81B062:
+              .return:
                        RTS                                  ;81B062|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B063:
+  fItemSub81A9F6_0x25:
                        RTS                                  ;81B063|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B064:
+  fItemSub81A9F6_0x26:
                        REP #$30                             ;81B064|C230    |      ;
                        LDY.W #$0000                         ;81B066|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_81B069:
+                .loop:
                        REP #$30                             ;81B069|C230    |      ;
                        PHY                                  ;81B06B|5A      |      ;
                        TYA                                  ;81B06C|98      |      ;
                        INC A                                ;81B06D|1A      |      ;
                        LDX.W #$0000                         ;81B06E|A20000  |      ;
                        LDY.W #$0001                         ;81B071|A00100  |      ;
-                       JSR.W CODE_81B2BB                    ;81B074|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B074|20BBB2  |81B2BB;
                        REP #$30                             ;81B077|C230    |      ;
                        PLY                                  ;81B079|7A      |      ;
                        INY                                  ;81B07A|C8      |      ;
                        CPY.W #$0018                         ;81B07B|C01800  |      ;
-                       BNE CODE_81B069                      ;81B07E|D0E9    |81B069;
+                       BNE .loop                            ;81B07E|D0E9    |81B069;
                        REP #$30                             ;81B080|C230    |      ;
                        LDA.L $7F1F68                        ;81B082|AF681F7F|7F1F68;
                        AND.W #$2000                         ;81B086|290020  |      ;
-                       BNE CODE_81B08E                      ;81B089|D003    |81B08E;
-                       JMP.W CODE_81B0A7                    ;81B08B|4CA7B0  |81B0A7;
+                       BNE +                                ;81B089|D003    |81B08E;
+                       JMP.W .return                        ;81B08B|4CA7B0  |81B0A7;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B08E:
-                       LDA.W #$00F0                         ;81B08E|A9F000  |      ;
+                     + LDA.W #$00F0                         ;81B08E|A9F000  |      ;
                        LDX.W #$0070                         ;81B091|A27000  |      ;
                        LDY.W #$0020                         ;81B094|A02000  |      ;
                        PHA                                  ;81B097|48      |      ;
@@ -5822,30 +5808,30 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81B0A0|7A      |      ;
                        PLX                                  ;81B0A1|FA      |      ;
                        PLA                                  ;81B0A2|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81B0A3|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81B0A3|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81B0A7:
+              .return:
                        RTS                                  ;81B0A7|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B0A8:
+  fItemSub81A9F6_0x27:
                        REP #$30                             ;81B0A8|C230    |      ;
                        LDA.W #$001A                         ;81B0AA|A91A00  |      ;
                        LDX.W #$0000                         ;81B0AD|A20000  |      ;
                        LDY.W #$0001                         ;81B0B0|A00100  |      ;
-                       JSR.W CODE_81B2BB                    ;81B0B3|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B0B3|20BBB2  |81B2BB;
                        REP #$30                             ;81B0B6|C230    |      ;
                        LDY.W #$0000                         ;81B0B8|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_81B0BB:
+                .loop:
                        REP #$30                             ;81B0BB|C230    |      ;
                        PHY                                  ;81B0BD|5A      |      ;
                        TYA                                  ;81B0BE|98      |      ;
                        ASL A                                ;81B0BF|0A      |      ;
                        TAX                                  ;81B0C0|AA      |      ;
                        LDA.L nCowFeedFlagsTable,X           ;81B0C1|BF71A582|82A571;
-                       AND.W $0932                          ;81B0C5|2D3209  |000932;
-                       BEQ CODE_81B0E3                      ;81B0C8|F019    |81B0E3;
+                       AND.W sPlacedCowFeed                 ;81B0C5|2D3209  |000932;
+                       BEQ +                                ;81B0C8|F019    |81B0E3;
                        TYA                                  ;81B0CA|98      |      ;
                        ASL A                                ;81B0CB|0A      |      ;
                        ASL A                                ;81B0CC|0A      |      ;
@@ -5861,12 +5847,11 @@ nItemCarriedTable_81A308:
                        PLX                                  ;81B0DE|FA      |      ;
                        JSL.L fUnknown_81A7CE                ;81B0DF|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81B0E3:
-                       REP #$30                             ;81B0E3|C230    |      ;
+                     + REP #$30                             ;81B0E3|C230    |      ;
                        PLY                                  ;81B0E5|7A      |      ;
                        INY                                  ;81B0E6|C8      |      ;
                        CPY.W #$000D                         ;81B0E7|C00D00  |      ;
-                       BNE CODE_81B0BB                      ;81B0EA|D0CF    |81B0BB;
+                       BNE .loop                            ;81B0EA|D0CF    |81B0BB;
                        RTS                                  ;81B0EC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -5879,25 +5864,24 @@ nItemCarriedTable_81A308:
                        dd $00780058,$00580058               ;81B115|        |      ;
                        dd $016800C8                         ;81B11D|        |      ;
                                                             ;      |        |      ;
-          CODE_81B121:
+  fItemSub81A9F6_0x28:
                        REP #$30                             ;81B121|C230    |      ;
                        LDA.W #$0019                         ;81B123|A91900  |      ;
                        LDX.W #$0000                         ;81B126|A20000  |      ;
                        LDY.W #$0001                         ;81B129|A00100  |      ;
-                       JSR.W CODE_81B2BB                    ;81B12C|20BBB2  |81B2BB;
+                       JSR.W fUnknown_81B2BB                ;81B12C|20BBB2  |81B2BB;
                        REP #$30                             ;81B12F|C230    |      ;
                        REP #$30                             ;81B131|C230    |      ;
                        LDY.W #$0000                         ;81B133|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_81B136:
-                       REP #$30                             ;81B136|C230    |      ;
+                     - REP #$30                             ;81B136|C230    |      ;
                        PHY                                  ;81B138|5A      |      ;
                        TYA                                  ;81B139|98      |      ;
                        ASL A                                ;81B13A|0A      |      ;
                        TAX                                  ;81B13B|AA      |      ;
                        LDA.L nCowFeedFlagsTable,X           ;81B13C|BF71A582|82A571;
-                       AND.W $0934                          ;81B140|2D3409  |000934;
-                       BEQ CODE_81B15E                      ;81B143|F019    |81B15E;
+                       AND.W sPlacedChickenFeed             ;81B140|2D3409  |000934;
+                       BEQ +                                ;81B143|F019    |81B15E;
                        TYA                                  ;81B145|98      |      ;
                        ASL A                                ;81B146|0A      |      ;
                        ASL A                                ;81B147|0A      |      ;
@@ -5913,24 +5897,22 @@ nItemCarriedTable_81A308:
                        PLX                                  ;81B159|FA      |      ;
                        JSL.L fUnknown_81A7CE                ;81B15A|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81B15E:
-                       REP #$30                             ;81B15E|C230    |      ;
+                     + REP #$30                             ;81B15E|C230    |      ;
                        PLY                                  ;81B160|7A      |      ;
                        INY                                  ;81B161|C8      |      ;
                        CPY.W #$000C                         ;81B162|C00C00  |      ;
-                       BNE CODE_81B136                      ;81B165|D0CF    |81B136;
+                       BNE -                                ;81B165|D0CF    |81B136;
                        REP #$30                             ;81B167|C230    |      ;
                        LDY.W #$0000                         ;81B169|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_81B16C:
-                       REP #$30                             ;81B16C|C230    |      ;
+                     - REP #$30                             ;81B16C|C230    |      ;
                        PHY                                  ;81B16E|5A      |      ;
                        TYA                                  ;81B16F|98      |      ;
                        ASL A                                ;81B170|0A      |      ;
                        TAX                                  ;81B171|AA      |      ;
                        LDA.L Table_81BF97,X                 ;81B172|BF97BF81|81BF97;
                        AND.L $7F1F45                        ;81B176|2F451F7F|7F1F45;
-                       BEQ CODE_81B195                      ;81B17A|F019    |81B195;
+                       BEQ +                                ;81B17A|F019    |81B195;
                        TYA                                  ;81B17C|98      |      ;
                        ASL A                                ;81B17D|0A      |      ;
                        ASL A                                ;81B17E|0A      |      ;
@@ -5946,12 +5928,11 @@ nItemCarriedTable_81A308:
                        PLX                                  ;81B190|FA      |      ;
                        JSL.L fUnknown_81A7CE                ;81B191|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81B195:
-                       REP #$30                             ;81B195|C230    |      ;
+                     + REP #$30                             ;81B195|C230    |      ;
                        PLY                                  ;81B197|7A      |      ;
                        INY                                  ;81B198|C8      |      ;
                        CPY.W #$000D                         ;81B199|C00D00  |      ;
-                       BNE CODE_81B16C                      ;81B19C|D0CE    |81B16C;
+                       BNE -                                ;81B19C|D0CE    |81B16C;
                        RTS                                  ;81B19E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -5963,7 +5944,7 @@ nItemCarriedTable_81A308:
                        dd $002000A0,$002000B0               ;81B1BF|        |      ;
                        dd $002000C0,$002000D0               ;81B1C7|        |      ;
                                                             ;      |        |      ;
-          CODE_81B1CF:
+  fItemSub81A9F6_0x29:
                        REP #$30                             ;81B1CF|C230    |      ;
                        LDA.L $7F1F6C                        ;81B1D1|AF6C1F7F|7F1F6C;
                        AND.W #$0011                         ;81B1D5|291100  |      ;
@@ -6008,16 +5989,15 @@ nItemCarriedTable_81A308:
                        RTS                                  ;81B21D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B21E:
+  fItemSub81A9F6_0x2A:
                        REP #$30                             ;81B21E|C230    |      ;
-                       LDA.L $7F1F64                        ;81B220|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81B220|AF641F7F|7F1F64;
                        AND.W #$0002                         ;81B224|290200  |      ;
-                       BNE CODE_81B22C                      ;81B227|D003    |81B22C;
-                       JMP.W CODE_81B260                    ;81B229|4C60B2  |81B260;
+                       BNE +                                ;81B227|D003    |81B22C;
+                       JMP.W .return                        ;81B229|4C60B2  |81B260;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B22C:
-                       LDA.W #$00EF                         ;81B22C|A9EF00  |      ;
+                     + LDA.W #$00EF                         ;81B22C|A9EF00  |      ;
                        LDX.W #$0030                         ;81B22F|A23000  |      ;
                        LDY.W #$0180                         ;81B232|A08001  |      ;
                        PHA                                  ;81B235|48      |      ;
@@ -6028,7 +6008,7 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81B23E|7A      |      ;
                        PLX                                  ;81B23F|FA      |      ;
                        PLA                                  ;81B240|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81B241|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81B241|22A7B082|82B0A7;
                        REP #$30                             ;81B245|C230    |      ;
                        LDA.W #$00EF                         ;81B247|A9EF00  |      ;
                        LDX.W #$0020                         ;81B24A|A22000  |      ;
@@ -6041,65 +6021,65 @@ nItemCarriedTable_81A308:
                        PLY                                  ;81B259|7A      |      ;
                        PLX                                  ;81B25A|FA      |      ;
                        PLA                                  ;81B25B|68      |      ;
-                       JSL.L CODE_82B0A7                    ;81B25C|22A7B082|82B0A7;
+                       JSL.L fUnknown_82B0A7                ;81B25C|22A7B082|82B0A7;
                                                             ;      |        |      ;
-          CODE_81B260:
+              .return:
                        RTS                                  ;81B260|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B261:
+  fItemSub81A9F6_0x2B:
                        RTS                                  ;81B261|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B262:
+  fItemSub81A9F6_0x2C:
                        RTS                                  ;81B262|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B263:
+  fItemSub81A9F6_0x2D:
                        RTS                                  ;81B263|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B264:
+  fItemSub81A9F6_0x2E:
                        RTS                                  ;81B264|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B265:
+  fItemSub81A9F6_0x2F:
                        RTS                                  ;81B265|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B266:
+  fItemSub81A9F6_0x30:
                        RTS                                  ;81B266|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B267:
+  fItemSub81A9F6_0x31:
                        RTS                                  ;81B267|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B268:
+  fItemSub81A9F6_0x32:
                        RTS                                  ;81B268|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B269:
+  fItemSub81A9F6_0x33:
                        RTS                                  ;81B269|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B26A:
+  fItemSub81A9F6_0x34:
                        RTS                                  ;81B26A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B26B:
+  fItemSub81A9F6_0x35:
                        RTS                                  ;81B26B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B26C:
+  fItemSub81A9F6_0x36:
                        RTS                                  ;81B26C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B26D:
+  fItemSub81A9F6_0x37:
                        REP #$30                             ;81B26D|C230    |      ;
                        LDA.L $7F1F5A                        ;81B26F|AF5A1F7F|7F1F5A;
                        AND.W #$0001                         ;81B273|290100  |      ;
-                       BNE CODE_81B292                      ;81B276|D01A    |81B292;
+                       BNE .return                          ;81B276|D01A    |81B292;
                        LDA.L $7F1F5A                        ;81B278|AF5A1F7F|7F1F5A;
                        ORA.W #$0001                         ;81B27C|090100  |      ;
                        STA.L $7F1F5A                        ;81B27F|8F5A1F7F|7F1F5A;
@@ -6109,172 +6089,172 @@ nItemCarriedTable_81A308:
                        LDY.W #$0110                         ;81B28B|A01001  |      ;
                        JSL.L fUnknown_81A7CE                ;81B28E|22CEA781|81A7CE;
                                                             ;      |        |      ;
-          CODE_81B292:
+              .return:
                        RTS                                  ;81B292|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B293:
+  fItemSub81A9F6_0x38:
                        RTS                                  ;81B293|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B294:
+  fItemSub81A9F6_0x39:
                        RTS                                  ;81B294|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B295:
+  fItemSub81A9F6_0x3A:
                        RTS                                  ;81B295|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B296:
+  fItemSub81A9F6_0x3B:
                        RTS                                  ;81B296|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B297:
+  fItemSub81A9F6_0x3C:
                        RTS                                  ;81B297|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B298:
+  fItemSub81A9F6_0x3D:
                        RTS                                  ;81B298|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B299:
+  fItemSub81A9F6_0x3E:
                        RTS                                  ;81B299|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B29A:
+  fItemSub81A9F6_0x3F:
                        RTS                                  ;81B29A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B29B:
+  fItemSub81A9F6_0x40:
                        RTS                                  ;81B29B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B29C:
+  fItemSub81A9F6_0x41:
                        RTS                                  ;81B29C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B29D:
+  fItemSub81A9F6_0x42:
                        RTS                                  ;81B29D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B29E:
+  fItemSub81A9F6_0x43:
                        RTS                                  ;81B29E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B29F:
+  fItemSub81A9F6_0x44:
                        RTS                                  ;81B29F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A0:
+  fItemSub81A9F6_0x45:
                        RTS                                  ;81B2A0|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A1:
+  fItemSub81A9F6_0x46:
                        RTS                                  ;81B2A1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A2:
+  fItemSub81A9F6_0x47:
                        RTS                                  ;81B2A2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A3:
+  fItemSub81A9F6_0x48:
                        RTS                                  ;81B2A3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A4:
+  fItemSub81A9F6_0x49:
                        RTS                                  ;81B2A4|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A5:
+  fItemSub81A9F6_0x4A:
                        RTS                                  ;81B2A5|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A6:
+  fItemSub81A9F6_0x4B:
                        RTS                                  ;81B2A6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A7:
+  fItemSub81A9F6_0x4C:
                        RTS                                  ;81B2A7|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A8:
+  fItemSub81A9F6_0x4D:
                        RTS                                  ;81B2A8|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2A9:
+  fItemSub81A9F6_0x4E:
                        RTS                                  ;81B2A9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2AA:
+  fItemSub81A9F6_0x4F:
                        RTS                                  ;81B2AA|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2AB:
+  fItemSub81A9F6_0x50:
                        RTS                                  ;81B2AB|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2AC:
+  fItemSub81A9F6_0x51:
                        RTS                                  ;81B2AC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2AD:
+  fItemSub81A9F6_0x52:
                        RTS                                  ;81B2AD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2AE:
+  fItemSub81A9F6_0x53:
                        RTS                                  ;81B2AE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2AF:
+  fItemSub81A9F6_0x54:
                        RTS                                  ;81B2AF|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B0:
+  fItemSub81A9F6_0x55:
                        RTS                                  ;81B2B0|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B1:
+  fItemSub81A9F6_0x56:
                        RTS                                  ;81B2B1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B2:
+  fItemSub81A9F6_0x57:
                        RTS                                  ;81B2B2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B3:
+  fItemSub81A9F6_0x58:
                        RTS                                  ;81B2B3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B4:
+  fItemSub81A9F6_0x59:
                        RTS                                  ;81B2B4|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B5:
+  fItemSub81A9F6_0x5A:
                        RTS                                  ;81B2B5|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B6:
+  fItemSub81A9F6_0x5B:
                        RTS                                  ;81B2B6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B7:
+  fItemSub81A9F6_0x5C:
                        RTS                                  ;81B2B7|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B8:
+  fItemSub81A9F6_0x5D:
                        RTS                                  ;81B2B8|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2B9:
+  fItemSub81A9F6_0x5E:
                        RTS                                  ;81B2B9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2BA:
+  fItemSub81A9F6_0x5F:
                        RTS                                  ;81B2BA|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81B2BB:
-                       REP #$30                             ;81B2BB|C230    |      ;
+      fUnknown_81B2BB:
+                       REP #$30                             ;81B2BB|C230    |      ; A: nArg, X: nArg, Y: nArg
                        PHY                                  ;81B2BD|5A      |      ;
                        PHA                                  ;81B2BE|48      |      ;
                        CPX.W #$0000                         ;81B2BF|E00000  |      ;
@@ -7506,7 +7486,7 @@ nCarriedItemTable_81BE0F:
                        REP #$10                             ;81C07A|C210    |      ;
                        LDA.B #$00                           ;81C07C|A900    |      ;
                        XBA                                  ;81C07E|EB      |      ;
-                       LDA.W $0923                          ;81C07F|AD2309  |000923;
+                       LDA.W nToolSecond                    ;81C07F|AD2309  |000923;
                        CLC                                  ;81C082|18      |      ;
                        ADC.B #$90                           ;81C083|6990    |      ;
                        REP #$20                             ;81C085|C220    |      ;
@@ -7522,12 +7502,12 @@ nCarriedItemTable_81BE0F:
                        LDA.W #$0000                         ;81C099|A90000  |      ;
                        STA.B $D4                            ;81C09C|85D4    |0000D4;
                        SEP #$20                             ;81C09E|E220    |      ;
-                       LDA.W $0921                          ;81C0A0|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81C0A0|AD2109  |000921;
                        PHA                                  ;81C0A3|48      |      ;
-                       LDA.W $0923                          ;81C0A4|AD2309  |000923;
-                       STA.W $0921                          ;81C0A7|8D2109  |000921;
+                       LDA.W nToolSecond                    ;81C0A4|AD2309  |000923;
+                       STA.W nToolEquipped                  ;81C0A7|8D2109  |000921;
                        PLA                                  ;81C0AA|68      |      ;
-                       STA.W $0923                          ;81C0AB|8D2309  |000923;
+                       STA.W nToolSecond                    ;81C0AB|8D2309  |000923;
                        JSL.L fUnknown_828FF3                ;81C0AE|22F38F82|828FF3;
                                                             ;      |        |      ;
           CODE_81C0B2:
@@ -7910,7 +7890,7 @@ nCarriedItemTable_81BE0F:
                        REP #$10                             ;81C3AE|C210    |      ;
                        LDA.B #$00                           ;81C3B0|A900    |      ;
                        XBA                                  ;81C3B2|EB      |      ;
-                       LDA.W $0921                          ;81C3B3|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81C3B3|AD2109  |000921;
                        CLC                                  ;81C3B6|18      |      ;
                        ADC.B #$90                           ;81C3B7|6990    |      ;
                        REP #$20                             ;81C3B9|C220    |      ;
@@ -8451,7 +8431,7 @@ nCarriedItemTable_81BE0F:
                        STA.B $D4                            ;81C72A|85D4    |0000D4;
                        SEP #$20                             ;81C72C|E220    |      ;
                        REP #$10                             ;81C72E|C210    |      ;
-                       STZ.W $096D                          ;81C730|9C6D09  |00096D;
+                       STZ.W nHitCounter                    ;81C730|9C6D09  |00096D;
                        JMP.W CODE_81C00E                    ;81C733|4C0EC0  |81C00E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8608,7 +8588,7 @@ nCarriedItemTable_81BE0F:
                        STA.B $D4                            ;81C82F|85D4    |0000D4;
                        SEP #$20                             ;81C831|E220    |      ;
                        REP #$10                             ;81C833|C210    |      ;
-                       STZ.W $096D                          ;81C835|9C6D09  |00096D;
+                       STZ.W nHitCounter                    ;81C835|9C6D09  |00096D;
                        JMP.W CODE_81C00E                    ;81C838|4C0EC0  |81C00E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8631,7 +8611,7 @@ nCarriedItemTable_81BE0F:
                        STA.B $D4                            ;81C85F|85D4    |0000D4;
                        SEP #$20                             ;81C861|E220    |      ;
                        REP #$10                             ;81C863|C210    |      ;
-                       STZ.W $096D                          ;81C865|9C6D09  |00096D;
+                       STZ.W nHitCounter                    ;81C865|9C6D09  |00096D;
                        JMP.W CODE_81C00E                    ;81C868|4C0EC0  |81C00E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8956,17 +8936,17 @@ nCarriedItemTable_81BE0F:
                                                             ;      |        |      ;
 IncrementPowerBerryEatenRoutine:
                        SEP #$20                             ;81CAAB|E220    |      ;
-                       LDA.L PowerBerryEaten                ;81CAAD|AF361F7F|7F1F36;
+                       LDA.L nPowerBerryEaten               ;81CAAD|AF361F7F|7F1F36;
                        INC A                                ;81CAB1|1A      |      ;
-                       STA.L PowerBerryEaten                ;81CAB2|8F361F7F|7F1F36;
+                       STA.L nPowerBerryEaten               ;81CAB2|8F361F7F|7F1F36;
                        REP #$20                             ;81CAB6|C220    |      ;
                        LDA.W #$000A                         ;81CAB8|A90A00  |      ;
                        JSL.L CODE_83B282                    ;81CABB|2282B283|83B282;
                        SEP #$20                             ;81CABF|E220    |      ;
-                       LDA.W $0917                          ;81CAC1|AD1709  |000917;
+                       LDA.W nPlayerStamina                 ;81CAC1|AD1709  |000917;
                        CLC                                  ;81CAC4|18      |      ;
                        ADC.B #$0A                           ;81CAC5|690A    |      ;
-                       STA.W $0917                          ;81CAC7|8D1709  |000917;
+                       STA.W nPlayerStamina                 ;81CAC7|8D1709  |000917;
                        REP #$30                             ;81CACA|C230    |      ;
                        LDA.W #$0000                         ;81CACC|A90000  |      ;
                        STA.B $D4                            ;81CACF|85D4    |0000D4;
@@ -9840,11 +9820,11 @@ IncrementPowerBerryEatenRoutine:
                        SEP #$20                             ;81D083|E220    |      ;
                        LDA.B #$00                           ;81D085|A900    |      ;
                        XBA                                  ;81D087|EB      |      ;
-                       LDA.W $0917                          ;81D088|AD1709  |000917;
+                       LDA.W nPlayerStamina                 ;81D088|AD1709  |000917;
                        REP #$20                             ;81D08B|C220    |      ;
                        STA.B $7E                            ;81D08D|857E    |00007E;
                        SEP #$20                             ;81D08F|E220    |      ;
-                       LDA.W $0918                          ;81D091|AD1809  |000918;
+                       LDA.W nPlayerEnergy                  ;81D091|AD1809  |000918;
                        REP #$20                             ;81D094|C220    |      ;
                        CLC                                  ;81D096|18      |      ;
                        ADC.B $82                            ;81D097|6582    |000082;
@@ -9864,7 +9844,7 @@ IncrementPowerBerryEatenRoutine:
                                                             ;      |        |      ;
           CODE_81D0B3:
                        SEP #$20                             ;81D0B3|E220    |      ;
-                       STZ.W $0918                          ;81D0B5|9C1809  |000918;
+                       STZ.W nPlayerEnergy                  ;81D0B5|9C1809  |000918;
                        REP #$30                             ;81D0B8|C230    |      ;
                        LDA.B $D2                            ;81D0BA|A5D2    |0000D2;
                        ORA.W #$0008                         ;81D0BC|090800  |      ;
@@ -9880,8 +9860,8 @@ IncrementPowerBerryEatenRoutine:
                                                             ;      |        |      ;
           CODE_81D0D2:
                        SEP #$20                             ;81D0D2|E220    |      ;
-                       LDA.W $0917                          ;81D0D4|AD1709  |000917;
-                       STA.W $0918                          ;81D0D7|8D1809  |000918;
+                       LDA.W nPlayerStamina                 ;81D0D4|AD1709  |000917;
+                       STA.W nPlayerEnergy                  ;81D0D7|8D1809  |000918;
                        REP #$30                             ;81D0DA|C230    |      ;
                        LDA.W #$0008                         ;81D0DC|A90800  |      ;
                        EOR.W #$FFFF                         ;81D0DF|49FFFF  |      ;
@@ -9892,21 +9872,21 @@ IncrementPowerBerryEatenRoutine:
                                                             ;      |        |      ;
           CODE_81D0E8:
                        SEP #$20                             ;81D0E8|E220    |      ;
-                       LDA.W $0918                          ;81D0EA|AD1809  |000918;
+                       LDA.W nPlayerEnergy                  ;81D0EA|AD1809  |000918;
                        CLC                                  ;81D0ED|18      |      ;
                        ADC.B $92                            ;81D0EE|6592    |000092;
-                       STA.W $0918                          ;81D0F0|8D1809  |000918;
+                       STA.W nPlayerEnergy                  ;81D0F0|8D1809  |000918;
                                                             ;      |        |      ;
           CODE_81D0F3:
                        SEP #$30                             ;81D0F3|E230    |      ;
                        LDA.B $92                            ;81D0F5|A592    |000092;
                        BMI CODE_81D10F                      ;81D0F7|3016    |81D10F;
                        LDY.B #$00                           ;81D0F9|A000    |      ;
-                       LDA.W $0917                          ;81D0FB|AD1709  |000917;
+                       LDA.W nPlayerStamina                 ;81D0FB|AD1709  |000917;
                                                             ;      |        |      ;
           CODE_81D0FE:
                        LSR A                                ;81D0FE|4A      |      ;
-                       CMP.W $0918                          ;81D0FF|CD1809  |000918;
+                       CMP.W nPlayerEnergy                  ;81D0FF|CD1809  |000918;
                        BEQ CODE_81D109                      ;81D102|F005    |81D109;
                        BCC CODE_81D109                      ;81D104|9003    |81D109;
                        INY                                  ;81D106|C8      |      ;
@@ -9925,7 +9905,7 @@ IncrementPowerBerryEatenRoutine:
                        CMP.B #$03                           ;81D114|C903    |      ;
                        BEQ CODE_81D14B                      ;81D116|F033    |81D14B;
                        LDY.B #$00                           ;81D118|A000    |      ;
-                       LDA.W $0917                          ;81D11A|AD1709  |000917;
+                       LDA.W nPlayerStamina                 ;81D11A|AD1709  |000917;
                                                             ;      |        |      ;
           CODE_81D11D:
                        LSR A                                ;81D11D|4A      |      ;
@@ -9936,7 +9916,7 @@ IncrementPowerBerryEatenRoutine:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_81D126:
-                       CMP.W $0918                          ;81D126|CD1809  |000918;
+                       CMP.W nPlayerEnergy                  ;81D126|CD1809  |000918;
                        BCS CODE_81D12D                      ;81D129|B002    |81D12D;
                        BRA CODE_81D14B                      ;81D12B|801E    |81D14B;
                                                             ;      |        |      ;
@@ -11248,7 +11228,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81DC98:
                        REP #$20                             ;81DC98|C220    |      ;
-                       LDA.L $7F1F1F                        ;81DC9A|AF1F1F7F|7F1F1F;
+                       LDA.L nLove_Maria                    ;81DC9A|AF1F1F7F|7F1F1F;
                        JSR.W CODE_81D1C5                    ;81DC9E|20C5D1  |81D1C5;
                        REP #$30                             ;81DCA1|C230    |      ;
                        CLC                                  ;81DCA3|18      |      ;
@@ -11429,7 +11409,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81DDE6:
                        REP #$20                             ;81DDE6|C220    |      ;
-                       LDA.L $7F1F23                        ;81DDE8|AF231F7F|7F1F23;
+                       LDA.L nLove_Nina                     ;81DDE8|AF231F7F|7F1F23;
                        JSR.W CODE_81D1C5                    ;81DDEC|20C5D1  |81D1C5;
                        REP #$30                             ;81DDEF|C230    |      ;
                        CLC                                  ;81DDF1|18      |      ;
@@ -11553,7 +11533,7 @@ nWeatherDialogIndexesTable:
                        AND.W #$0020                         ;81DEC2|292000  |      ;
                        BNE CODE_81DEF1                      ;81DEC5|D02A    |81DEF1;
                        SEP #$20                             ;81DEC7|E220    |      ;
-                       LDA.L $7F1F0A                        ;81DEC9|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81DEC9|AF0A1F7F|7F1F0A;
                        CMP.B #$0C                           ;81DECD|C90C    |      ;
                        BNE CODE_81DED4                      ;81DECF|D003    |81DED4;
                        JMP.W CODE_81E02E                    ;81DED1|4C2EE0  |81E02E;
@@ -11595,7 +11575,7 @@ nWeatherDialogIndexesTable:
                        AND.W #$0020                         ;81DF19|292000  |      ;
                        BNE CODE_81DF48                      ;81DF1C|D02A    |81DF48;
                        SEP #$20                             ;81DF1E|E220    |      ;
-                       LDA.L $7F1F0B                        ;81DF20|AF0B1F7F|7F1F0B;
+                       LDA.L nOwnedChickens                 ;81DF20|AF0B1F7F|7F1F0B;
                        CMP.B #$0C                           ;81DF24|C90C    |      ;
                        BNE CODE_81DF2B                      ;81DF26|D003    |81DF2B;
                        JMP.W CODE_81E15A                    ;81DF28|4C5AE1  |81E15A;
@@ -11689,7 +11669,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81DFDC|E220    |      ;
                        LDA.B #$00                           ;81DFDE|A900    |      ;
                        XBA                                  ;81DFE0|EB      |      ;
-                       LDA.L $7F1F0B                        ;81DFE1|AF0B1F7F|7F1F0B;
+                       LDA.L nOwnedChickens                 ;81DFE1|AF0B1F7F|7F1F0B;
                        REP #$20                             ;81DFE5|C220    |      ;
                        ASL A                                ;81DFE7|0A      |      ;
                        ASL A                                ;81DFE8|0A      |      ;
@@ -11699,7 +11679,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81DFED|E220    |      ;
                        LDA.B #$00                           ;81DFEF|A900    |      ;
                        XBA                                  ;81DFF1|EB      |      ;
-                       LDA.L $7F1F0A                        ;81DFF2|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81DFF2|AF0A1F7F|7F1F0A;
                        REP #$20                             ;81DFF6|C220    |      ;
                        INC A                                ;81DFF8|1A      |      ;
                        ASL A                                ;81DFF9|0A      |      ;
@@ -11788,9 +11768,9 @@ nWeatherDialogIndexesTable:
                        ORA.W #$0022                         ;81E0AF|092200  |      ;
                        STA.L $7F1F5A                        ;81E0B2|8F5A1F7F|7F1F5A;
                        SEP #$20                             ;81E0B6|E220    |      ;
-                       LDA.L $7F1F0A                        ;81E0B8|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81E0B8|AF0A1F7F|7F1F0A;
                        INC A                                ;81E0BC|1A      |      ;
-                       STA.L $7F1F0A                        ;81E0BD|8F0A1F7F|7F1F0A;
+                       STA.L nOwnedCows                     ;81E0BD|8F0A1F7F|7F1F0A;
                        REP #$20                             ;81E0C1|C220    |      ;
                        LDA.W #$0014                         ;81E0C3|A91400  |      ;
                        JSL.L CODE_83B282                    ;81E0C6|2282B283|83B282;
@@ -11831,7 +11811,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81E103|E220    |      ;
                        LDA.B #$00                           ;81E105|A900    |      ;
                        XBA                                  ;81E107|EB      |      ;
-                       LDA.L $7F1F0B                        ;81E108|AF0B1F7F|7F1F0B;
+                       LDA.L nOwnedChickens                 ;81E108|AF0B1F7F|7F1F0B;
                        REP #$20                             ;81E10C|C220    |      ;
                        INC A                                ;81E10E|1A      |      ;
                        ASL A                                ;81E10F|0A      |      ;
@@ -11842,7 +11822,7 @@ nWeatherDialogIndexesTable:
                        SEP #$20                             ;81E115|E220    |      ;
                        LDA.B #$00                           ;81E117|A900    |      ;
                        XBA                                  ;81E119|EB      |      ;
-                       LDA.L $7F1F0A                        ;81E11A|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81E11A|AF0A1F7F|7F1F0A;
                        REP #$20                             ;81E11E|C220    |      ;
                        ASL A                                ;81E120|0A      |      ;
                        ASL A                                ;81E121|0A      |      ;
@@ -11938,9 +11918,9 @@ nWeatherDialogIndexesTable:
                        ORA.W #$0020                         ;81E1E3|092000  |      ;
                        STA.L $7F1F5A                        ;81E1E6|8F5A1F7F|7F1F5A;
                        SEP #$20                             ;81E1EA|E220    |      ;
-                       LDA.L $7F1F0B                        ;81E1EC|AF0B1F7F|7F1F0B;
+                       LDA.L nOwnedChickens                 ;81E1EC|AF0B1F7F|7F1F0B;
                        INC A                                ;81E1F0|1A      |      ;
-                       STA.L $7F1F0B                        ;81E1F1|8F0B1F7F|7F1F0B;
+                       STA.L nOwnedChickens                 ;81E1F1|8F0B1F7F|7F1F0B;
                        REP #$20                             ;81E1F5|C220    |      ;
                        LDA.W #$000A                         ;81E1F7|A90A00  |      ;
                        JSL.L CODE_83B282                    ;81E1FA|2282B283|83B282;
@@ -12100,7 +12080,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81E313:
                        REP #$20                             ;81E313|C220    |      ;
-                       LDA.L $7F1F25                        ;81E315|AF251F7F|7F1F25;
+                       LDA.L nLove_Ellen                    ;81E315|AF251F7F|7F1F25;
                        JSR.W CODE_81D1C5                    ;81E319|20C5D1  |81D1C5;
                        REP #$30                             ;81E31C|C230    |      ;
                        CLC                                  ;81E31E|18      |      ;
@@ -12199,7 +12179,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81E3CE:
                        REP #$20                             ;81E3CE|C220    |      ;
-                       LDA.L $7F1F21                        ;81E3D0|AF211F7F|7F1F21;
+                       LDA.L nLove_Ann                      ;81E3D0|AF211F7F|7F1F21;
                        JSR.W CODE_81D1C5                    ;81E3D4|20C5D1  |81D1C5;
                        REP #$30                             ;81E3D7|C230    |      ;
                        CLC                                  ;81E3D9|18      |      ;
@@ -12420,7 +12400,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81E566:
                        REP #$20                             ;81E566|C220    |      ;
-                       LDA.L $7F1F27                        ;81E568|AF271F7F|7F1F27;
+                       LDA.L nLove_Eve                      ;81E568|AF271F7F|7F1F27;
                        JSR.W CODE_81D1C5                    ;81E56C|20C5D1  |81D1C5;
                        REP #$30                             ;81E56F|C230    |      ;
                        CLC                                  ;81E571|18      |      ;
@@ -12660,7 +12640,7 @@ nWeatherDialogIndexesTable:
                        LDA.L sShedItems+1                   ;81E737|AF011F7F|7F1F01;
                        AND.B #$04                           ;81E73B|2904    |      ;
                        BNE CODE_81E749                      ;81E73D|D00A    |81E749;
-                       LDA.W $0921                          ;81E73F|AD2109  |000921;
+                       LDA.W nToolEquipped                  ;81E73F|AD2109  |000921;
                        CMP.B #$0B                           ;81E742|C90B    |      ;
                        BEQ CODE_81E749                      ;81E744|F003    |81E749;
                        LDX.W #$010E                         ;81E746|A20E01  |      ;
@@ -12999,9 +12979,9 @@ nWeatherDialogIndexesTable:
                        LDA.B #$00                           ;81E9BD|A900    |      ;
                        STA.B [ptrUnknown0x72],Y             ;81E9BF|9772    |000072;
                        SEP #$20                             ;81E9C1|E220    |      ;
-                       LDA.L $7F1F0A                        ;81E9C3|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81E9C3|AF0A1F7F|7F1F0A;
                        DEC A                                ;81E9C7|3A      |      ;
-                       STA.L $7F1F0A                        ;81E9C8|8F0A1F7F|7F1F0A;
+                       STA.L nOwnedCows                     ;81E9C8|8F0A1F7F|7F1F0A;
                        SEP #$20                             ;81E9CC|E220    |      ;
                        LDA.B #$04                           ;81E9CE|A904    |      ;
                        STA.W $096F                          ;81E9D0|8D6F09  |00096F;
@@ -13203,9 +13183,9 @@ nWeatherDialogIndexesTable:
                        LDA.B #$00                           ;81EB53|A900    |      ;
                        STA.B [ptrUnknown0x72],Y             ;81EB55|9772    |000072;
                        SEP #$20                             ;81EB57|E220    |      ;
-                       LDA.L $7F1F0A                        ;81EB59|AF0A1F7F|7F1F0A;
+                       LDA.L nOwnedCows                     ;81EB59|AF0A1F7F|7F1F0A;
                        DEC A                                ;81EB5D|3A      |      ;
-                       STA.L $7F1F0A                        ;81EB5E|8F0A1F7F|7F1F0A;
+                       STA.L nOwnedCows                     ;81EB5E|8F0A1F7F|7F1F0A;
                        SEP #$20                             ;81EB62|E220    |      ;
                        LDA.B #$04                           ;81EB64|A904    |      ;
                        STA.W $096F                          ;81EB66|8D6F09  |00096F;
@@ -13495,9 +13475,9 @@ nWeatherDialogIndexesTable:
                        LDA.B #$00                           ;81ED80|A900    |      ;
                        STA.B [ptrUnknown0x72],Y             ;81ED82|9772    |000072;
                        SEP #$20                             ;81ED84|E220    |      ;
-                       LDA.L $7F1F0B                        ;81ED86|AF0B1F7F|7F1F0B;
+                       LDA.L nOwnedChickens                 ;81ED86|AF0B1F7F|7F1F0B;
                        DEC A                                ;81ED8A|3A      |      ;
-                       STA.L $7F1F0B                        ;81ED8B|8F0B1F7F|7F1F0B;
+                       STA.L nOwnedChickens                 ;81ED8B|8F0B1F7F|7F1F0B;
                        SEP #$20                             ;81ED8F|E220    |      ;
                        LDA.B #$04                           ;81ED91|A904    |      ;
                        STA.W $096F                          ;81ED93|8D6F09  |00096F;
@@ -13698,9 +13678,9 @@ nWeatherDialogIndexesTable:
                        LDA.B #$00                           ;81EF16|A900    |      ;
                        STA.B [ptrUnknown0x72],Y             ;81EF18|9772    |000072;
                        SEP #$20                             ;81EF1A|E220    |      ;
-                       LDA.L $7F1F0B                        ;81EF1C|AF0B1F7F|7F1F0B;
+                       LDA.L nOwnedChickens                 ;81EF1C|AF0B1F7F|7F1F0B;
                        DEC A                                ;81EF20|3A      |      ;
-                       STA.L $7F1F0B                        ;81EF21|8F0B1F7F|7F1F0B;
+                       STA.L nOwnedChickens                 ;81EF21|8F0B1F7F|7F1F0B;
                        SEP #$20                             ;81EF25|E220    |      ;
                        LDA.B #$04                           ;81EF27|A904    |      ;
                        STA.W $096F                          ;81EF29|8D6F09  |00096F;
@@ -14026,7 +14006,7 @@ nWeatherDialogIndexesTable:
                        CMP.W #$00FA                         ;81F174|C9FA00  |      ;
                        BEQ CODE_81F189                      ;81F177|F010    |81F189;
                        REP #$20                             ;81F179|C220    |      ;
-                       LDA.L $7F1F0C                        ;81F17B|AF0C1F7F|7F1F0C;
+                       LDA.L nStoredWood                    ;81F17B|AF0C1F7F|7F1F0C;
                        CMP.W #$01F4                         ;81F17F|C9F401  |      ;
                        BCC CODE_81F1B1                      ;81F182|902D    |81F1B1;
                        LDX.W #$013B                         ;81F184|A23B01  |      ;
@@ -14035,7 +14015,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81F189:
                        REP #$20                             ;81F189|C220    |      ;
-                       LDA.L $7F1F0C                        ;81F18B|AF0C1F7F|7F1F0C;
+                       LDA.L nStoredWood                    ;81F18B|AF0C1F7F|7F1F0C;
                        CMP.W #$00FA                         ;81F18F|C9FA00  |      ;
                        BCC CODE_81F1B1                      ;81F192|901D    |81F1B1;
                        LDX.W #$0134                         ;81F194|A23401  |      ;
@@ -14236,7 +14216,7 @@ nWeatherDialogIndexesTable:
           CODE_81F302:
                        STZ.W $0970                          ;81F302|9C7009  |000970;
                        REP #$20                             ;81F305|C220    |      ;
-                       LDA.L $7F1F64                        ;81F307|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81F307|AF641F7F|7F1F64;
                        AND.W #$0080                         ;81F30B|298000  |      ;
                        BNE CODE_81F320                      ;81F30E|D010    |81F320;
                        REP #$30                             ;81F310|C230    |      ;
@@ -14277,7 +14257,7 @@ nWeatherDialogIndexesTable:
                                                             ;      |        |      ;
           CODE_81F354:
                        REP #$20                             ;81F354|C220    |      ;
-                       LDA.L $7F1F64                        ;81F356|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;81F356|AF641F7F|7F1F64;
                        AND.W #$0080                         ;81F35A|298000  |      ;
                        BNE CODE_81F393                      ;81F35D|D034    |81F393;
                        SEP #$20                             ;81F35F|E220    |      ;
