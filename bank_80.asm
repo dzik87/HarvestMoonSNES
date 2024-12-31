@@ -54,7 +54,7 @@
                                                             ;      |        |      ;
             fGameLoop:
                        SEP #$20                             ;808083|E220    |      ;
-                       LDA.B $00                            ;808085|A500    |000000;
+                       LDA.B pChickenData                   ;808085|A500    |000000;
                        BEQ fGameLoop                        ;808087|F0FA    |808083;
                        REP #$20                             ;808089|C220    |      ;
                        LDA.W #$1800                         ;80808B|A90018  |      ;
@@ -81,7 +81,7 @@
                        JSL.L fUnknown_858CB2                ;8080CF|22B28C85|858CB2;
                        JSL.L fUnknown_8583E0                ;8080D3|22E08385|8583E0;
                        SEP #$20                             ;8080D7|E220    |      ;
-                       STZ.B $00                            ;8080D9|6400    |000000;
+                       STZ.B pChickenData                   ;8080D9|6400    |000000;
                        JMP.W fGameLoop                      ;8080DB|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -216,13 +216,13 @@
                        LDA.W sTempNameVariable+3            ;80821A|AD8808  |000888;
                        STA.B [ptrUnknown0x72],Y             ;80821D|9772    |000072;
                        REP #$20                             ;80821F|C220    |      ;
-                       LDA.L $7F1F64                        ;808221|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;808221|AF641F7F|7F1F64;
                        AND.W #$FFFB                         ;808225|29FBFF  |      ;
-                       STA.L $7F1F64                        ;808228|8F641F7F|7F1F64;
+                       STA.L nHouseSize                     ;808228|8F641F7F|7F1F64;
                        REP #$20                             ;80822C|C220    |      ;
-                       LDA.L $7F1F64                        ;80822E|AF641F7F|7F1F64;
+                       LDA.L nHouseSize                     ;80822E|AF641F7F|7F1F64;
                        AND.W #$FFF7                         ;808232|29F7FF  |      ;
-                       STA.L $7F1F64                        ;808235|8F641F7F|7F1F64;
+                       STA.L nHouseSize                     ;808235|8F641F7F|7F1F64;
                        REP #$20                             ;808239|C220    |      ;
                        LDA.W $0196                          ;80823B|AD9601  |000196;
                        ORA.W #$4000                         ;80823E|090040  |      ;
@@ -560,7 +560,7 @@
                        LDX.W #$0000                         ;8085A2|A20000  |      ;
                        LDA.W #$0000                         ;8085A5|A90000  |      ;
                                                             ;      |        |      ;
-                     - STA.W $0000,X                        ;8085A8|9D0000  |000000;
+                     - STA.W pChickenData,X                 ;8085A8|9D0000  |000000;
                        INX                                  ;8085AB|E8      |      ;
                        INX                                  ;8085AC|E8      |      ;
                        CPX.W #$2000                         ;8085AD|E00020  |      ;
@@ -629,9 +629,9 @@
                        LDA.B #$A1                           ;80864B|A9A1    |      ;
                        STA.L SNES_NMITIMEN                  ;80864D|8F004200|004200;
                        CLI                                  ;808651|58      |      ;
-                       STZ.B $00                            ;808652|6400    |000000;
+                       STZ.B pChickenData                   ;808652|6400    |000000;
                                                             ;      |        |      ;
-                     - LDA.B $00                            ;808654|A500    |000000;
+                     - LDA.B pChickenData                   ;808654|A500    |000000;
                        BEQ -                                ;808656|F0FC    |808654;
                        REP #$20                             ;808658|C220    |      ;
                        PLA                                  ;80865A|68      |      ;
@@ -648,9 +648,9 @@
                        LDA.B #$A1                           ;808663|A9A1    |      ;
                        STA.L SNES_NMITIMEN                  ;808665|8F004200|004200;
                        CLI                                  ;808669|58      |      ;
-                       STZ.B $00                            ;80866A|6400    |000000;
+                       STZ.B pChickenData                   ;80866A|6400    |000000;
                                                             ;      |        |      ;
-                     - LDA.B $00                            ;80866C|A500    |000000;
+                     - LDA.B pChickenData                   ;80866C|A500    |000000;
                        BEQ -                                ;80866E|F0FC    |80866C;
                        REP #$20                             ;808670|C220    |      ;
                        PLA                                  ;808672|68      |      ;
@@ -708,7 +708,7 @@
            fUpdateGFX:
                        PHP                                  ;8086B1|08      |      ;
                        SEP #$20                             ;8086B2|E220    |      ;
-                       LDA.B $00                            ;8086B4|A500    |000000;
+                       LDA.B pChickenData                   ;8086B4|A500    |000000;
                        BNE +                                ;8086B6|D019    |8086D1;
                        JSL.L fStartProgrammedDMA            ;8086B8|22F08A80|808AF0;
                        SEP #$20                             ;8086BC|E220    |      ;
@@ -749,7 +749,7 @@
                        STA.W SNES_BG3VOFS                   ;80871F|8D1221  |002112;
                        SEP #$20                             ;808722|E220    |      ;
                        LDA.B #$01                           ;808724|A901    |      ;
-                       STA.B $00                            ;808726|8500    |000000;
+                       STA.B pChickenData                   ;808726|8500    |000000;
                        PLP                                  ;808728|28      |      ;
                        RTS                                  ;808729|60      |      ;
                                                             ;      |        |      ;
@@ -771,7 +771,7 @@
                        LDA.W $0130                          ;80873D|AD3001  |000130;
                        STA.W $0132                          ;808740|8D3201  |000132;
                        SEP #$20                             ;808743|E220    |      ;
-                       LDA.B $00                            ;808745|A500    |000000;
+                       LDA.B pChickenData                   ;808745|A500    |000000;
                        BEQ .label1                          ;808747|F00E    |808757;
                        LDA.W SNES_JOY1L                     ;808749|AD1842  |004218;
                        STA.W $012E                          ;80874C|8D2E01  |00012E;
@@ -3275,7 +3275,7 @@ fSubrutinesExecute_809553:
                        JSL.L fUnknown_858CB2                ;809A1A|22B28C85|858CB2;
                        JSL.L fUnknown_8583E0                ;809A1E|22E08385|8583E0;
                        SEP #$20                             ;809A22|E220    |      ;
-                       STZ.B $00                            ;809A24|6400    |000000;
+                       STZ.B pChickenData                   ;809A24|6400    |000000;
                        JSL.L fWaitForNextNMI                ;809A26|22458680|808645;
                        REP #$20                             ;809A2A|C220    |      ;
                        LDA.W #$1800                         ;809A2C|A90018  |      ;
@@ -3286,7 +3286,7 @@ fSubrutinesExecute_809553:
                        JSL.L fUnknown_858CB2                ;809A3D|22B28C85|858CB2;
                        JSL.L fUnknown_8583E0                ;809A41|22E08385|8583E0;
                        SEP #$20                             ;809A45|E220    |      ;
-                       STZ.B $00                            ;809A47|6400    |000000;
+                       STZ.B pChickenData                   ;809A47|6400    |000000;
                        JSL.L fWaitForNextNMI                ;809A49|22458680|808645;
                        JSL.L fResetForceBlank               ;809A4D|221E8E80|808E1E;
                        SEP #$20                             ;809A51|E220    |      ;
@@ -5482,7 +5482,7 @@ fWriteMapGraphicsPointer:
                        LDA.L $7F1F5E                        ;80A917|AF5E1F7F|7F1F5E;
                        AND.W #$0002                         ;80A91B|290200  |      ;
                        BNE .label11                         ;80A91E|D004    |80A924;
-                       JSL.L fUnknown_81A9E5                ;80A920|22E5A981|81A9E5;
+                       JSL.L fItemSubrutineHandler_81A9E5   ;80A920|22E5A981|81A9E5;
                                                             ;      |        |      ;
              .label11:
                        REP #$20                             ;80A924|C220    |      ;
