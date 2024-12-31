@@ -377,7 +377,7 @@
                 .exit:
                        REP #$20                             ;8582BF|C220    |      ;
                        STZ.B $DC                            ;8582C1|64DC    |0000DC;
-                       JSR.W fUnknown_858647                ;8582C3|204786  |858647;
+                       JSR.W fFill7EA000withF0and7EA200with00;8582C3|204786  |858647;
                        RTL                                  ;8582C6|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -509,24 +509,24 @@
                        LDY.W #$0000                         ;858397|A00000  |      ;
                        LDX.W #$0000                         ;85839A|A20000  |      ;
                                                             ;      |        |      ;
-          CODE_85839D:
+                .loop:
                        REP #$20                             ;85839D|C220    |      ;
                        PHX                                  ;85839F|DA      |      ;
                        CPY.W $0905                          ;8583A0|CC0509  |000905;
-                       BEQ CODE_8583C8                      ;8583A3|F023    |8583C8;
+                       BEQ .label2                          ;8583A3|F023    |8583C8;
                        LDA.W $01A6,X                        ;8583A5|BDA601  |0001A6;
                        CMP.B $A9                            ;8583A8|C5A9    |0000A9;
-                       BCC CODE_8583BA                      ;8583AA|900E    |8583BA;
+                       BCC .label1                          ;8583AA|900E    |8583BA;
                        LDX.B $AD                            ;8583AC|A6AD    |0000AD;
                        TYA                                  ;8583AE|98      |      ;
                        SEP #$20                             ;8583AF|E220    |      ;
                        STA.W $084C,X                        ;8583B1|9D4C08  |00084C;
                        REP #$20                             ;8583B4|C220    |      ;
                        INC.B $AD                            ;8583B6|E6AD    |0000AD;
-                       BRA CODE_8583C8                      ;8583B8|800E    |8583C8;
+                       BRA .label2                          ;8583B8|800E    |8583C8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8583BA:
+              .label1:
                        REP #$20                             ;8583BA|C220    |      ;
                        LDX.B $AF                            ;8583BC|A6AF    |0000AF;
                        TYA                                  ;8583BE|98      |      ;
@@ -535,7 +535,7 @@
                        REP #$20                             ;8583C4|C220    |      ;
                        DEC.B $AF                            ;8583C6|C6AF    |0000AF;
                                                             ;      |        |      ;
-          CODE_8583C8:
+              .label2:
                        REP #$20                             ;8583C8|C220    |      ;
                        PLA                                  ;8583CA|68      |      ;
                        CLC                                  ;8583CB|18      |      ;
@@ -543,11 +543,13 @@
                        TAX                                  ;8583CF|AA      |      ;
                        INY                                  ;8583D0|C8      |      ;
                        CPY.B $DC                            ;8583D1|C4DC    |0000DC;
-                       BNE CODE_85839D                      ;8583D3|D0C8    |85839D;
+                       BNE .loop                            ;8583D3|D0C8    |85839D;
                        LDX.B $AD                            ;8583D5|A6AD    |0000AD;
                        LDA.W $0905                          ;8583D7|AD0509  |000905;
                        SEP #$20                             ;8583DA|E220    |      ;
                        STA.W $084C,X                        ;8583DC|9D4C08  |00084C;
+                                                            ;      |        |      ;
+              .return:
                        RTS                                  ;8583DF|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -556,23 +558,23 @@
                        REP #$20                             ;8583E2|C220    |      ;
                        LDA.B $A1                            ;8583E4|A5A1    |0000A1;
                        CMP.W #$0262                         ;8583E6|C96202  |      ;
-                       BCS CODE_8583F5                      ;8583E9|B00A    |8583F5;
+                       BCS .label1                          ;8583E9|B00A    |8583F5;
                        SEP #$20                             ;8583EB|E220    |      ;
                        LDA.B #$86                           ;8583ED|A986    |      ;
                        STA.B ptrUnknown0x75+2               ;8583EF|8577    |000077;
                        STA.B ptrUnknown0x78+2               ;8583F1|857A    |00007A;
-                       BRA CODE_8583FD                      ;8583F3|8008    |8583FD;
+                       BRA .label2                          ;8583F3|8008    |8583FD;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8583F5:
+              .label1:
                        SEP #$20                             ;8583F5|E220    |      ;
                        LDA.B #$87                           ;8583F7|A987    |      ;
                        STA.B ptrUnknown0x75+2               ;8583F9|8577    |000077;
                        STA.B ptrUnknown0x78+2               ;8583FB|857A    |00007A;
                                                             ;      |        |      ;
-          CODE_8583FD:
+              .label2:
                        REP #$30                             ;8583FD|C230    |      ;
-                       JSR.W CODE_858896                    ;8583FF|209688  |858896;
+                       JSR.W fFill7EA000withF0and7EA200with00Ex;8583FF|209688  |858896;
                        JSR.W fUnknown_858377                ;858402|207783  |858377;
                        REP #$30                             ;858405|C230    |      ;
                        SEP #$20                             ;858407|E220    |      ;
@@ -589,12 +591,12 @@
                        STA.B $AF                            ;85841E|85AF    |0000AF;
                        LDY.B $AB                            ;858420|A4AB    |0000AB;
                                                             ;      |        |      ;
-          CODE_858422:
+              .label3:
                        LDX.B $A9                            ;858422|A6A9    |0000A9;
                        LDA.W $019C,X                        ;858424|BD9C01  |00019C;
-                       BNE CODE_858444                      ;858427|D01B    |858444;
+                       BNE .exit                            ;858427|D01B    |858444;
                                                             ;      |        |      ;
-          CODE_858429:
+              .label4:
                        INY                                  ;858429|C8      |      ;
                        TYX                                  ;85842A|BB      |      ;
                        SEP #$20                             ;85842B|E220    |      ;
@@ -607,30 +609,30 @@
                        LDA.L Table_858BE0,X                 ;858437|BFE08B85|858BE0;
                        STA.B $A9                            ;85843B|85A9    |0000A9;
                        CPY.B $DC                            ;85843D|C4DC    |0000DC;
-                       BNE CODE_858422                      ;85843F|D0E1    |858422;
-                       JMP.W CODE_8585F4                    ;858441|4CF485  |8585F4;
+                       BNE .label3                          ;85843F|D0E1    |858422;
+                       JMP.W fUnknown_8585F4                ;858441|4CF485  |8585F4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858444:
+                .exit:
                        STY.B $AB                            ;858444|84AB    |0000AB;
                        LDX.B $A9                            ;858446|A6A9    |0000A9;
                        LDA.W $019E,X                        ;858448|BD9E01  |00019E;
                        CMP.W #$0262                         ;85844B|C96202  |      ;
-                       BCS CODE_85845A                      ;85844E|B00A    |85845A;
+                       BCS .label5                          ;85844E|B00A    |85845A;
                        SEP #$20                             ;858450|E220    |      ;
                        LDA.B #$86                           ;858452|A986    |      ;
                        STA.B ptrUnknown0x75+2               ;858454|8577    |000077;
                        STA.B ptrUnknown0x78+2               ;858456|857A    |00007A;
-                       BRA CODE_858462                      ;858458|8008    |858462;
+                       BRA .label6                          ;858458|8008    |858462;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_85845A:
+              .label5:
                        SEP #$20                             ;85845A|E220    |      ;
                        LDA.B #$87                           ;85845C|A987    |      ;
                        STA.B ptrUnknown0x75+2               ;85845E|8577    |000077;
                        STA.B ptrUnknown0x78+2               ;858460|857A    |00007A;
                                                             ;      |        |      ;
-          CODE_858462:
+              .label6:
                        REP #$20                             ;858462|C220    |      ;
                        LDA.W $01AC,X                        ;858464|BDAC01  |0001AC;
                        STA.B ptrUnknown0x78                 ;858467|8578    |000078;
@@ -664,43 +666,43 @@
                        SBC.W #$0001                         ;85849E|E90100  |      ;
                        STA.B ptrUnknown0x75                 ;8584A1|8575    |000075;
                                                             ;      |        |      ;
-          CODE_8584A3:
+              .label7:
                        LDY.B $AB                            ;8584A3|A4AB    |0000AB;
                        LDA.B $AD                            ;8584A5|A5AD    |0000AD;
-                       BNE CODE_8584AC                      ;8584A7|D003    |8584AC;
-                       JMP.W CODE_858429                    ;8584A9|4C2984  |858429;
+                       BNE .label8                          ;8584A7|D003    |8584AC;
+                       JMP.W .label4                        ;8584A9|4C2984  |858429;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8584AC:
+              .label8:
                        LDX.B ptrUnknown0x75                 ;8584AC|A675    |000075;
                        SEP #$20                             ;8584AE|E220    |      ;
                        LDA.W $01B0,X                        ;8584B0|BDB001  |0001B0;
                        CMP.B #$FF                           ;8584B3|C9FF    |      ;
-                       BNE CODE_8584BA                      ;8584B5|D003    |8584BA;
-                       JMP.W CODE_8585E3                    ;8584B7|4CE385  |8585E3;
+                       BNE .label9                          ;8584B5|D003    |8584BA;
+                       JMP.W .label18                       ;8584B7|4CE385  |8585E3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8584BA:
+              .label9:
                        REP #$20                             ;8584BA|C220    |      ;
                        LDY.W #$0002                         ;8584BC|A00200  |      ;
                        SEP #$20                             ;8584BF|E220    |      ;
                        LDA.B [ptrUnknown0x78],Y             ;8584C1|B778    |000078;
                        SEP #$20                             ;8584C3|E220    |      ;
                        CMP.B #$00                           ;8584C5|C900    |      ;
-                       BMI CODE_8584CE                      ;8584C7|3005    |8584CE;
+                       BMI .label10                         ;8584C7|3005    |8584CE;
                        XBA                                  ;8584C9|EB      |      ;
                        LDA.B #$00                           ;8584CA|A900    |      ;
-                       BRA CODE_8584D1                      ;8584CC|8003    |8584D1;
+                       BRA .label11                         ;8584CC|8003    |8584D1;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8584CE:
+             .label10:
                        XBA                                  ;8584CE|EB      |      ;
                        LDA.B #$FF                           ;8584CF|A9FF    |      ;
                                                             ;      |        |      ;
-          CODE_8584D1:
+             .label11:
                        XBA                                  ;8584D1|EB      |      ;
                        REP #$20                             ;8584D2|C220    |      ;
-                       JSR.W CODE_858BB0                    ;8584D4|20B08B  |858BB0;
+                       JSR.W fUnknown_858BB0                ;8584D4|20B08B  |858BB0;
                        CLC                                  ;8584D7|18      |      ;
                        ADC.B $9B                            ;8584D8|659B    |00009B;
                        SEC                                  ;8584DA|38      |      ;
@@ -711,20 +713,20 @@
                        LDA.B [ptrUnknown0x78],Y             ;8584E2|B778    |000078;
                        SEP #$20                             ;8584E4|E220    |      ;
                        CMP.B #$00                           ;8584E6|C900    |      ;
-                       BMI CODE_8584EF                      ;8584E8|3005    |8584EF;
+                       BMI .label12                         ;8584E8|3005    |8584EF;
                        XBA                                  ;8584EA|EB      |      ;
                        LDA.B #$00                           ;8584EB|A900    |      ;
-                       BRA CODE_8584F2                      ;8584ED|8003    |8584F2;
+                       BRA .label13                         ;8584ED|8003    |8584F2;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8584EF:
+             .label12:
                        XBA                                  ;8584EF|EB      |      ;
                        LDA.B #$FF                           ;8584F0|A9FF    |      ;
                                                             ;      |        |      ;
-          CODE_8584F2:
+             .label13:
                        XBA                                  ;8584F2|EB      |      ;
                        REP #$20                             ;8584F3|C220    |      ;
-                       JSR.W CODE_858BBC                    ;8584F5|20BC8B  |858BBC;
+                       JSR.W fUnknown_858BBC                ;8584F5|20BC8B  |858BBC;
                        CLC                                  ;8584F8|18      |      ;
                        ADC.B $9D                            ;8584F9|659D    |00009D;
                        SEC                                  ;8584FB|38      |      ;
@@ -750,7 +752,7 @@
                        STA.B $C3                            ;85851F|85C3    |0000C3;
                        LDA.B $BF                            ;858521|A5BF    |0000BF;
                        CMP.W #$0100                         ;858523|C90001  |      ;
-                       BCC CODE_858537                      ;858526|900F    |858537;
+                       BCC .label14                         ;858526|900F    |858537;
                        LDA.B $7E                            ;858528|A57E    |00007E;
                        AND.W #$FFFC                         ;85852A|29FCFF  |      ;
                        LSR A                                ;85852D|4A      |      ;
@@ -759,27 +761,27 @@
                        ORA.B $C3                            ;858533|05C3    |0000C3;
                        STA.B $C3                            ;858535|85C3    |0000C3;
                                                             ;      |        |      ;
-          CODE_858537:
+             .label14:
                        REP #$20                             ;858537|C220    |      ;
                        LDA.B $BF                            ;858539|A5BF    |0000BF;
                        CMP.W #$0100                         ;85853B|C90001  |      ;
-                       BCC CODE_858548                      ;85853E|9008    |858548;
+                       BCC .label15                         ;85853E|9008    |858548;
                        CMP.W #$FFF0                         ;858540|C9F0FF  |      ;
-                       BCS CODE_858548                      ;858543|B003    |858548;
-                       JMP.W CODE_8585D9                    ;858545|4CD985  |8585D9;
+                       BCS .label15                         ;858543|B003    |858548;
+                       JMP.W .label17                       ;858545|4CD985  |8585D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858548:
+             .label15:
                        REP #$20                             ;858548|C220    |      ;
                        LDA.B $C1                            ;85854A|A5C1    |0000C1;
                        CMP.W #$00F0                         ;85854C|C9F000  |      ;
-                       BCC CODE_858559                      ;85854F|9008    |858559;
+                       BCC .label16                         ;85854F|9008    |858559;
                        CMP.W #$FFF0                         ;858551|C9F0FF  |      ;
-                       BCS CODE_858559                      ;858554|B003    |858559;
-                       JMP.W CODE_8585D9                    ;858556|4CD985  |8585D9;
+                       BCS .label16                         ;858554|B003    |858559;
+                       JMP.W .label17                       ;858556|4CD985  |8585D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858559:
+             .label16:
                        REP #$30                             ;858559|C230    |      ;
                        LDX.B $AF                            ;85855B|A6AF    |0000AF;
                        LDA.B $BF                            ;85855D|A5BF    |0000BF;
@@ -842,28 +844,28 @@
                        ADC.W #$0004                         ;8585D4|690400  |      ;
                        STA.B $AF                            ;8585D7|85AF    |0000AF;
                                                             ;      |        |      ;
-          CODE_8585D9:
+             .label17:
                        LDA.B ptrUnknown0x78                 ;8585D9|A578    |000078;
                        SEC                                  ;8585DB|38      |      ;
                        SBC.W #$0005                         ;8585DC|E90500  |      ;
                        STA.B ptrUnknown0x78                 ;8585DF|8578    |000078;
-                       BRA CODE_8585ED                      ;8585E1|800A    |8585ED;
+                       BRA .label19                         ;8585E1|800A    |8585ED;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8585E3:
+             .label18:
                        REP #$20                             ;8585E3|C220    |      ;
                        LDA.B ptrUnknown0x78                 ;8585E5|A578    |000078;
                        SEC                                  ;8585E7|38      |      ;
                        SBC.W #$0005                         ;8585E8|E90500  |      ;
                        STA.B ptrUnknown0x78                 ;8585EB|8578    |000078;
                                                             ;      |        |      ;
-          CODE_8585ED:
+             .label19:
                        DEC.B ptrUnknown0x75                 ;8585ED|C675    |000075;
                        DEC.B $AD                            ;8585EF|C6AD    |0000AD;
-                       JMP.W CODE_8584A3                    ;8585F1|4CA384  |8584A3;
+                       JMP.W .label7                        ;8585F1|4CA384  |8584A3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8585F4:
+      fUnknown_8585F4:
                        REP #$30                             ;8585F4|C230    |      ;
                        LDA.B $AF                            ;8585F6|A5AF    |0000AF;
                        STA.W $084A                          ;8585F8|8D4A08  |00084A;
@@ -895,7 +897,7 @@
                        dw $FFFC,$FFF3,$FFCF,$FF3F           ;858637|        |      ;
                        dw $FCFF,$F3FF,$CFFF,$3FFF           ;85863F|        |      ;
                                                             ;      |        |      ;
-      fUnknown_858647:
+fFill7EA000withF0and7EA200with00:
                        REP #$30                             ;858647|C230    |      ;
                        LDA.W #$F0F0                         ;858649|A9F0F0  |      ;
                        STA.L $7EA000                        ;85864C|8F00A07E|7EA000;
@@ -1048,7 +1050,7 @@
                        RTS                                  ;858895|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858896:
+fFill7EA000withF0and7EA200with00Ex:
                        REP #$30                             ;858896|C230    |      ;
                        LDA.W #$F0F0                         ;858898|A9F0F0  |      ;
                        STA.L $7EA000                        ;85889B|8F00A07E|7EA000;
@@ -1221,21 +1223,20 @@
                        ADC.W #$0014                         ;858B05|691400  |      ;
                        STA.B $AF                            ;858B08|85AF    |0000AF;
                                                             ;      |        |      ;
-          CODE_858B0A:
+                .loop:
                        LDA.B $AD                            ;858B0A|A5AD    |0000AD;
-                       BNE CODE_858B10                      ;858B0C|D002    |858B10;
-                       BRA CODE_858B3C                      ;858B0E|802C    |858B3C;
+                       BNE +                                ;858B0C|D002    |858B10;
+                       BRA .exit                            ;858B0E|802C    |858B3C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858B10:
-                       LDA.B [ptrUnknown0x78],Y             ;858B10|B778    |000078;
+                     + LDA.B [ptrUnknown0x78],Y             ;858B10|B778    |000078;
                        STA.B $B3                            ;858B12|85B3    |0000B3;
                        LDA.B $AF                            ;858B14|A5AF    |0000AF;
                        STA.B $B5                            ;858B16|85B5    |0000B5;
                        REP #$30                             ;858B18|C230    |      ;
                        PHX                                  ;858B1A|DA      |      ;
                        PHY                                  ;858B1B|5A      |      ;
-                       JSR.W CODE_858C30                    ;858B1C|20308C  |858C30;
+                       JSR.W fUnknown_858C30                ;858B1C|20308C  |858C30;
                        REP #$30                             ;858B1F|C230    |      ;
                        PLY                                  ;858B21|7A      |      ;
                        PLX                                  ;858B22|FA      |      ;
@@ -1251,10 +1252,10 @@
                        ADC.W #$0005                         ;858B34|690500  |      ;
                        TAY                                  ;858B37|A8      |      ;
                        DEC.B $AD                            ;858B38|C6AD    |0000AD;
-                       BRA CODE_858B0A                      ;858B3A|80CE    |858B0A;
+                       BRA .loop                            ;858B3A|80CE    |858B0A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858B3C:
+                .exit:
                        REP #$30                             ;858B3C|C230    |      ;
                        LDX.B $A9                            ;858B3E|A6A9    |0000A9;
                        RTS                                  ;858B40|60      |      ;
@@ -1271,31 +1272,30 @@
                        TAY                                  ;858B4F|A8      |      ;
                        SEP #$20                             ;858B50|E220    |      ;
                                                             ;      |        |      ;
-          CODE_858B52:
+                .loop:
                        CPY.W #$0000                         ;858B52|C00000  |      ;
-                       BEQ CODE_858B76                      ;858B55|F01F    |858B76;
+                       BEQ .exit                            ;858B55|F01F    |858B76;
                        LDA.W $01B0,X                        ;858B57|BDB001  |0001B0;
                        CMP.B #$FF                           ;858B5A|C9FF    |      ;
-                       BEQ CODE_858B72                      ;858B5C|F014    |858B72;
+                       BEQ +                                ;858B5C|F014    |858B72;
                        STA.B $B3                            ;858B5E|85B3    |0000B3;
                        STZ.B $B4                            ;858B60|64B4    |0000B4;
                        LDA.B #$FF                           ;858B62|A9FF    |      ;
                        STA.W $01B0,X                        ;858B64|9DB001  |0001B0;
                        PHY                                  ;858B67|5A      |      ;
                        PHX                                  ;858B68|DA      |      ;
-                       JSR.W CODE_858C9F                    ;858B69|209F8C  |858C9F;
+                       JSR.W fUnknown_858C9F                ;858B69|209F8C  |858C9F;
                        SEP #$20                             ;858B6C|E220    |      ;
                        REP #$10                             ;858B6E|C210    |      ;
                        PLX                                  ;858B70|FA      |      ;
                        PLY                                  ;858B71|7A      |      ;
                                                             ;      |        |      ;
-          CODE_858B72:
-                       INX                                  ;858B72|E8      |      ;
+                     + INX                                  ;858B72|E8      |      ;
                        DEY                                  ;858B73|88      |      ;
-                       BRA CODE_858B52                      ;858B74|80DC    |858B52;
+                       BRA .loop                            ;858B74|80DC    |858B52;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858B76:
+                .exit:
                        REP #$30                             ;858B76|C230    |      ;
                        LDX.B $A9                            ;858B78|A6A9    |0000A9;
                        RTS                                  ;858B7A|60      |      ;
@@ -1312,50 +1312,50 @@
                        TAY                                  ;858B89|A8      |      ;
                        SEP #$20                             ;858B8A|E220    |      ;
                                                             ;      |        |      ;
-          CODE_858B8C:
+                .loop:
                        CPY.W #$0000                         ;858B8C|C00000  |      ;
-                       BEQ CODE_858BA8                      ;858B8F|F017    |858BA8;
+                       BEQ .label2                          ;858B8F|F017    |858BA8;
                        LDA.W $01B0,X                        ;858B91|BDB001  |0001B0;
                        CMP.B #$FF                           ;858B94|C9FF    |      ;
-                       BEQ CODE_858B9C                      ;858B96|F004    |858B9C;
+                       BEQ .label1                          ;858B96|F004    |858B9C;
                        INX                                  ;858B98|E8      |      ;
                        DEY                                  ;858B99|88      |      ;
-                       BRA CODE_858B8C                      ;858B9A|80F0    |858B8C;
+                       BRA .loop                            ;858B9A|80F0    |858B8C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858B9C:
+              .label1:
                        REP #$30                             ;858B9C|C230    |      ;
                        INC.W $0740                          ;858B9E|EE4007  |000740;
                        LDA.W #$FFFF                         ;858BA1|A9FFFF  |      ;
                        STA.B $AF                            ;858BA4|85AF    |0000AF;
-                       BRA CODE_858BAF                      ;858BA6|8007    |858BAF;
+                       BRA .return                          ;858BA6|8007    |858BAF;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858BA8:
+              .label2:
                        REP #$30                             ;858BA8|C230    |      ;
                        LDA.W #$0000                         ;858BAA|A90000  |      ;
                        STA.B $AF                            ;858BAD|85AF    |0000AF;
                                                             ;      |        |      ;
-          CODE_858BAF:
+              .return:
                        RTS                                  ;858BAF|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858BB0:
+      fUnknown_858BB0:
                        REP #$30                             ;858BB0|C230    |      ;
                        PHA                                  ;858BB2|48      |      ;
                        LDA.B $9F                            ;858BB3|A59F    |00009F;
                        AND.W #$0040                         ;858BB5|294000  |      ;
-                       BEQ CODE_858BCE                      ;858BB8|F014    |858BCE;
-                       BRA CODE_858BC4                      ;858BBA|8008    |858BC4;
+                       BEQ fReturnWithPullA_858BCE          ;858BB8|F014    |858BCE;
+                       BRA fUnknown_858BC4                  ;858BBA|8008    |858BC4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858BBC:
+      fUnknown_858BBC:
                        PHA                                  ;858BBC|48      |      ;
                        LDA.B $9F                            ;858BBD|A59F    |00009F;
                        AND.W #$0080                         ;858BBF|298000  |      ;
-                       BEQ CODE_858BCE                      ;858BC2|F00A    |858BCE;
+                       BEQ fReturnWithPullA_858BCE          ;858BC2|F00A    |858BCE;
                                                             ;      |        |      ;
-          CODE_858BC4:
+      fUnknown_858BC4:
                        PLA                                  ;858BC4|68      |      ;
                        EOR.W #$FFFF                         ;858BC5|49FFFF  |      ;
                        INC A                                ;858BC8|1A      |      ;
@@ -1364,7 +1364,7 @@
                        RTS                                  ;858BCD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858BCE:
+fReturnWithPullA_858BCE:
                        PLA                                  ;858BCE|68      |      ;
                        RTS                                  ;858BCF|60      |      ;
                                                             ;      |        |      ;
@@ -1385,7 +1385,7 @@
                        dw $0480,$04A4,$04C8,$04EC           ;858C20|        |      ;
                        dw $0540,$0534,$0558,$057C           ;858C28|        |      ;
                                                             ;      |        |      ;
-          CODE_858C30:
+      fUnknown_858C30:
                        REP #$30                             ;858C30|C230    |      ;
                        SEP #$20                             ;858C32|E220    |      ;
                        LDX.B $B3                            ;858C34|A6B3    |0000B3;
@@ -1398,19 +1398,19 @@
                        ASL A                                ;858C41|0A      |      ;
                        TAX                                  ;858C42|AA      |      ;
                        CPY.W #$00FF                         ;858C43|C0FF00  |      ;
-                       BNE CODE_858C72                      ;858C46|D02A    |858C72;
+                       BNE .label2                          ;858C46|D02A    |858C72;
                        REP #$20                             ;858C48|C220    |      ;
                        LDA.B $BD                            ;858C4A|A5BD    |0000BD;
                        TAX                                  ;858C4C|AA      |      ;
                        CLC                                  ;858C4D|18      |      ;
                        ADC.W #$0004                         ;858C4E|690400  |      ;
                        CMP.W #$0100                         ;858C51|C90001  |      ;
-                       BNE CODE_858C59                      ;858C54|D003    |858C59;
+                       BNE .label1                          ;858C54|D003    |858C59;
                        LDA.W #$0000                         ;858C56|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_858C59:
+              .label1:
                        CMP.B $BB                            ;858C59|C5BB    |0000BB;
-                       BEQ CODE_858C59                      ;858C5B|F0FC    |858C59;
+                       BEQ .label1                          ;858C5B|F0FC    |858C59;
                        STA.B $BD                            ;858C5D|85BD    |0000BD;
                        LDA.B $B3                            ;858C5F|A5B3    |0000B3;
                        STA.L $7EA220,X                      ;858C61|9F20A27E|7EA220;
@@ -1421,7 +1421,7 @@
                        BRA CODE_858C7E                      ;858C70|800C    |858C7E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858C72:
+              .label2:
                        LDA.L $7EA320,X                      ;858C72|BF20A37E|7EA320;
                        INC A                                ;858C76|1A      |      ;
                        STA.L $7EA320,X                      ;858C77|9F20A37E|7EA320;
@@ -1438,16 +1438,15 @@
                        dw $0100,$0200,$0400,$0800           ;858C8F|        |      ;
                        dw $1000,$2000,$4000,$8000           ;858C97|        |      ;
                                                             ;      |        |      ;
-          CODE_858C9F:
+      fUnknown_858C9F:
                        REP #$30                             ;858C9F|C230    |      ;
                        LDA.B $B3                            ;858CA1|A5B3    |0000B3;
                        ASL A                                ;858CA3|0A      |      ;
                        ASL A                                ;858CA4|0A      |      ;
                        TAX                                  ;858CA5|AA      |      ;
                                                             ;      |        |      ;
-          CODE_858CA6:
-                       LDA.L $7EA320,X                      ;858CA6|BF20A37E|7EA320;
-                       BEQ CODE_858CA6                      ;858CAA|F0FA    |858CA6;
+                     - LDA.L $7EA320,X                      ;858CA6|BF20A37E|7EA320;
+                       BEQ -                                ;858CAA|F0FA    |858CA6;
                        DEC A                                ;858CAC|3A      |      ;
                        STA.L $7EA320,X                      ;858CAD|9F20A37E|7EA320;
                        RTS                                  ;858CB1|60      |      ;
@@ -1460,22 +1459,20 @@
                        REP #$30                             ;858CB8|C230    |      ;
                        STZ.B $BF                            ;858CBA|64BF    |0000BF;
                                                             ;      |        |      ;
-          CODE_858CBC:
+                .loop:
                        LDA.B $BD                            ;858CBC|A5BD    |0000BD;
                        CMP.B $BB                            ;858CBE|C5BB    |0000BB;
-                       BNE CODE_858CC5                      ;858CC0|D003    |858CC5;
-                       JMP.W CODE_858E28                    ;858CC2|4C288E  |858E28;
+                       BNE +                                ;858CC0|D003    |858CC5;
+                       JMP.W .exit                          ;858CC2|4C288E  |858E28;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858CC5:
-                       LDA.B $C7                            ;858CC5|A5C7    |0000C7;
+                     + LDA.B $C7                            ;858CC5|A5C7    |0000C7;
                        CMP.W #$0100                         ;858CC7|C90001  |      ;
-                       BCS CODE_858CCF                      ;858CCA|B003    |858CCF;
-                       JMP.W CODE_858E28                    ;858CCC|4C288E  |858E28;
+                       BCS +                                ;858CCA|B003    |858CCF;
+                       JMP.W .exit                          ;858CCC|4C288E  |858E28;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858CCF:
-                       LDX.B $BB                            ;858CCF|A6BB    |0000BB;
+                     + LDX.B $BB                            ;858CCF|A6BB    |0000BB;
                        LDA.L $7EA220,X                      ;858CD1|BF20A27E|7EA220;
                        STA.B $C1                            ;858CD5|85C1    |0000C1;
                        LDA.L $7EA222,X                      ;858CD7|BF22A27E|7EA222;
@@ -1488,58 +1485,57 @@
                        CLC                                  ;858CE7|18      |      ;
                        ADC.W #$0004                         ;858CE8|690400  |      ;
                        CMP.W #$0100                         ;858CEB|C90001  |      ;
-                       BNE CODE_858CF3                      ;858CEE|D003    |858CF3;
+                       BNE +                                ;858CEE|D003    |858CF3;
                        LDA.W #$0000                         ;858CF0|A90000  |      ;
                                                             ;      |        |      ;
-          CODE_858CF3:
-                       STA.B $BB                            ;858CF3|85BB    |0000BB;
+                     + STA.B $BB                            ;858CF3|85BB    |0000BB;
                        LDA.W $0848                          ;858CF5|AD4808  |000848;
                        AND.W #$003F                         ;858CF8|293F00  |      ;
                        INC A                                ;858CFB|1A      |      ;
                        STA.W $0848                          ;858CFC|8D4808  |000848;
                        LDA.W $0846                          ;858CFF|AD4608  |000846;
                        CMP.W #$0040                         ;858D02|C94000  |      ;
-                       BEQ CODE_858D12                      ;858D05|F00B    |858D12;
+                       BEQ .label5                          ;858D05|F00B    |858D12;
                        STA.B $C5                            ;858D07|85C5    |0000C5;
                        ASL A                                ;858D09|0A      |      ;
                        ASL A                                ;858D0A|0A      |      ;
                        STA.B $C3                            ;858D0B|85C3    |0000C3;
                        INC.W $0846                          ;858D0D|EE4608  |000846;
-                       BRA CODE_858D38                      ;858D10|8026    |858D38;
+                       BRA .label8                          ;858D10|8026    |858D38;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858D12:
+              .label5:
                        LDY.W #$0000                         ;858D12|A00000  |      ;
                        LDA.W $0848                          ;858D15|AD4808  |000848;
                        ASL A                                ;858D18|0A      |      ;
                        ASL A                                ;858D19|0A      |      ;
                                                             ;      |        |      ;
-          CODE_858D1A:
+           .innerloop:
                        TAX                                  ;858D1A|AA      |      ;
                        LDA.L $7EA320,X                      ;858D1B|BF20A37E|7EA320;
-                       BEQ CODE_858D31                      ;858D1F|F010    |858D31;
+                       BEQ .innerexit                       ;858D1F|F010    |858D31;
                        TXA                                  ;858D21|8A      |      ;
                        CLC                                  ;858D22|18      |      ;
                        ADC.W #$0004                         ;858D23|690400  |      ;
                        AND.W #$00FF                         ;858D26|29FF00  |      ;
                        INY                                  ;858D29|C8      |      ;
                        CPY.W #$0040                         ;858D2A|C04000  |      ;
-                       BNE CODE_858D1A                      ;858D2D|D0EB    |858D1A;
+                       BNE .innerloop                       ;858D2D|D0EB    |858D1A;
                                                             ;      |        |      ;
-       DeadEnd_858D2F:
-                       BRA DeadEnd_858D2F                   ;858D2F|80FE    |858D2F;
+             .deadend:
+                       BRA .deadend                         ;858D2F|80FE    |858D2F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858D31:
+           .innerexit:
                        STX.B $C3                            ;858D31|86C3    |0000C3;
                        TXA                                  ;858D33|8A      |      ;
                        LSR A                                ;858D34|4A      |      ;
                        LSR A                                ;858D35|4A      |      ;
                        STA.B $C5                            ;858D36|85C5    |0000C5;
                                                             ;      |        |      ;
-          CODE_858D38:
+              .label8:
                        LDA.B $C3                            ;858D38|A5C3    |0000C3;
-                       BMI CODE_858D38                      ;858D3A|30FC    |858D38;
+                       BMI .label8                          ;858D3A|30FC    |858D38;
                        LDA.B $C5                            ;858D3C|A5C5    |0000C5;
                        SEP #$20                             ;858D3E|E220    |      ;
                        STA.B [ptrUnknown0x78]               ;858D40|8778    |000078;
@@ -1551,7 +1547,7 @@
                        STA.L $7EA320,X                      ;858D4D|9F20A37E|7EA320;
                        LDA.L $7EA322,X                      ;858D51|BF22A37E|7EA322;
                        CMP.W #$FFFF                         ;858D55|C9FFFF  |      ;
-                       BEQ CODE_858D65                      ;858D58|F00B    |858D65;
+                       BEQ .label9                          ;858D58|F00B    |858D65;
                        PHX                                  ;858D5A|DA      |      ;
                        TAX                                  ;858D5B|AA      |      ;
                        SEP #$20                             ;858D5C|E220    |      ;
@@ -1559,7 +1555,7 @@
                        STA.L $7F0F00,X                      ;858D60|9F000F7F|7F0F00;
                        PLX                                  ;858D64|FA      |      ;
                                                             ;      |        |      ;
-          CODE_858D65:
+              .label9:
                        REP #$20                             ;858D65|C220    |      ;
                        LDA.B $C1                            ;858D67|A5C1    |0000C1;
                        STA.L $7EA322,X                      ;858D69|9F22A37E|7EA322;
@@ -1658,31 +1654,29 @@
                        CLC                                  ;858E1A|18      |      ;
                        ADC.W #$0006                         ;858E1B|690600  |      ;
                                                             ;      |        |      ;
-          CODE_858E1E:
-                       CMP.W #$00C0                         ;858E1E|C9C000  |      ;
-                       BEQ CODE_858E1E                      ;858E21|F0FB    |858E1E;
+                     - CMP.W #$00C0                         ;858E1E|C9C000  |      ;
+                       BEQ -                                ;858E21|F0FB    |858E1E;
                        STA.B $BF                            ;858E23|85BF    |0000BF;
-                       JMP.W CODE_858CBC                    ;858E25|4CBC8C  |858CBC;
+                       JMP.W .loop                          ;858E25|4CBC8C  |858CBC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858E28:
+                .exit:
                        SEP #$20                             ;858E28|E220    |      ;
                        LDA.B $BB                            ;858E2A|A5BB    |0000BB;
                        CMP.B $BD                            ;858E2C|C5BD    |0000BD;
-                       BCS CODE_858E37                      ;858E2E|B007    |858E37;
+                       BCS .handle0xBD                      ;858E2E|B007    |858E37;
                        LDA.B $BD                            ;858E30|A5BD    |0000BD;
                        SEC                                  ;858E32|38      |      ;
                        SBC.B $BB                            ;858E33|E5BB    |0000BB;
-                       BRA CODE_858E3C                      ;858E35|8005    |858E3C;
+                       BRA +                                ;858E35|8005    |858E3C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858E37:
+          .handle0xBD:
                        LDA.B $BB                            ;858E37|A5BB    |0000BB;
                        SEC                                  ;858E39|38      |      ;
                        SBC.B $BD                            ;858E3A|E5BD    |0000BD;
                                                             ;      |        |      ;
-          CODE_858E3C:
-                       LSR A                                ;858E3C|4A      |      ;
+                     + LSR A                                ;858E3C|4A      |      ;
                        LSR A                                ;858E3D|4A      |      ;
                        STA.W $0742                          ;858E3E|8D4207  |000742;
                        STZ.W $0743                          ;858E41|9C4307  |000743;
@@ -1706,11 +1700,11 @@
                        LDX.W #$0000                         ;858E6A|A20000  |      ;
                        STX.B $BF                            ;858E6D|86BF    |0000BF;
                                                             ;      |        |      ;
-          CODE_858E6F:
+                .loop:
                        LDX.B $BF                            ;858E6F|A6BF    |0000BF;
                        LDA.L $7EA420,X                      ;858E71|BF20A47E|7EA420;
                        CMP.W #$FFFF                         ;858E75|C9FFFF  |      ;
-                       BEQ CODE_858ED6                      ;858E78|F05C    |858ED6;
+                       BEQ .return                          ;858E78|F05C    |858ED6;
                        LDA.L $7EA424,X                      ;858E7A|BF24A47E|7EA424;
                        STA.W SNES_VMADDL                    ;858E7E|8D1621  |002116;
                        LDA.L $7EA420,X                      ;858E81|BF20A47E|7EA420;
@@ -1744,10 +1738,10 @@
                        CLC                                  ;858ECE|18      |      ;
                        ADC.W #$0006                         ;858ECF|690600  |      ;
                        STA.B $BF                            ;858ED2|85BF    |0000BF;
-                       BRA CODE_858E6F                      ;858ED4|8099    |858E6F;
+                       BRA .loop                            ;858ED4|8099    |858E6F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_858ED6:
+              .return:
                        RTL                                  ;858ED6|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1760,8 +1754,7 @@
                        LDX.W #$0000                         ;858EE4|A20000  |      ;
                        LDY.W #$0000                         ;858EE7|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_858EEA:
-                       LDA.W #$0000                         ;858EEA|A90000  |      ;
+                     - LDA.W #$0000                         ;858EEA|A90000  |      ; loop
                        STA.L $7EA320,X                      ;858EED|9F20A37E|7EA320;
                        LDA.W #$FFFF                         ;858EF1|A9FFFF  |      ;
                        STA.L $7EA322,X                      ;858EF4|9F22A37E|7EA322;
@@ -1772,17 +1765,16 @@
                        INX                                  ;858EFF|E8      |      ;
                        INY                                  ;858F00|C8      |      ;
                        CPY.W #$0040                         ;858F01|C04000  |      ;
-                       BNE CODE_858EEA                      ;858F04|D0E4    |858EEA;
+                       BNE -                                ;858F04|D0E4    |858EEA;
                        REP #$30                             ;858F06|C230    |      ;
                        LDX.W #$0000                         ;858F08|A20000  |      ;
                        LDA.W #$FFFF                         ;858F0B|A9FFFF  |      ;
                                                             ;      |        |      ;
-          CODE_858F0E:
-                       STA.L $7F0F00,X                      ;858F0E|9F000F7F|7F0F00;
+                     - STA.L $7F0F00,X                      ;858F0E|9F000F7F|7F0F00; loop
                        INX                                  ;858F12|E8      |      ;
                        INX                                  ;858F13|E8      |      ;
                        CPX.W #$1000                         ;858F14|E00010  |      ;
-                       BNE CODE_858F0E                      ;858F17|D0F5    |858F0E;
+                       BNE -                                ;858F17|D0F5    |858F0E;
                        STZ.W $0846                          ;858F19|9C4608  |000846;
                        STZ.W $0848                          ;858F1C|9C4808  |000848;
                        RTL                                  ;858F1F|6B      |      ;
