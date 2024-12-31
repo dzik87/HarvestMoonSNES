@@ -1,5 +1,4 @@
 [labels]
-00:0000 pChickenData
 00:0001 ptrUnknown0x01
 00:0003 ptrUnknown0x01+2
 00:0004 ptrUnknown0x04
@@ -6270,7 +6269,6 @@ FF:FFFF EMPTY_FFFFFF
 
 
 [comments]
-00:0000 pointer to 8bytes * 10
 00:0001 ptr24
 00:0004 ptr24
 00:0007 ptr24

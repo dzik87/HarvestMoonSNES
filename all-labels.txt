@@ -1,4 +1,3 @@
-;!^!-UNUSED-!                        pChickenData = $000000; !^ pointer to 8bytes * 10 ^!;      |        |      ;
 ;!^!-UNUSED-!                        ptrUnknown0x01 = $000001; !^ ptr24 ^!;      |        |      ;
 ;!^!-UNUSED-!                        ptrUnknown0x01+2 = $000003           ;      |        |      ;
 ;!^!-UNUSED-!                        ptrUnknown0x04 = $000004; !^ ptr24 ^!;      |        |      ;
