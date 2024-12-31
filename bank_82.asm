@@ -7813,7 +7813,7 @@ nUnkownItemOnHandTable:
                        REP #$20                             ;82D347|C220    |      ;
                        STZ.B $90                            ;82D349|6490    |000090;
                        SEP #$20                             ;82D34B|E220    |      ;
-                       LDA.B pChickenData                   ;82D34D|A500    |000000;
+                       LDA.B $00                            ;82D34D|A500    |000000;
                        BEQ CODE_82D347                      ;82D34F|F0F6    |82D347;
                        REP #$20                             ;82D351|C220    |      ;
                        LDA.W #$1800                         ;82D353|A90018  |      ;
@@ -7838,7 +7838,7 @@ nUnkownItemOnHandTable:
                        AND.W #$0004                         ;82D39A|290400  |      ;
                        BNE CODE_82D3A6                      ;82D39D|D007    |82D3A6;
                        SEP #$20                             ;82D39F|E220    |      ;
-                       STZ.B pChickenData                   ;82D3A1|6400    |000000;
+                       STZ.B $00                            ;82D3A1|6400    |000000;
                        JMP.W CODE_82D347                    ;82D3A3|4C47D3  |82D347;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8211,7 +8211,7 @@ nUnkownItemOnHandTable:
                        REP #$20                             ;82D6C9|C220    |      ;
                        STZ.B $90                            ;82D6CB|6490    |000090;
                        SEP #$20                             ;82D6CD|E220    |      ;
-                       LDA.B pChickenData                   ;82D6CF|A500    |000000;
+                       LDA.B $00                            ;82D6CF|A500    |000000;
                        BEQ CODE_82D6C9                      ;82D6D1|F0F6    |82D6C9;
                        REP #$20                             ;82D6D3|C220    |      ;
                        LDA.W #$1800                         ;82D6D5|A90018  |      ;
@@ -8239,7 +8239,7 @@ nUnkownItemOnHandTable:
                        AND.W #$0080                         ;82D725|298000  |      ;
                        BNE CODE_82D731                      ;82D728|D007    |82D731;
                        SEP #$20                             ;82D72A|E220    |      ;
-                       STZ.B pChickenData                   ;82D72C|6400    |000000;
+                       STZ.B $00                            ;82D72C|6400    |000000;
                        JMP.W CODE_82D6C9                    ;82D72E|4CC9D6  |82D6C9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8342,7 +8342,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82D80D:
                        SEP #$20                             ;82D80D|E220    |      ;
-                       LDA.B pChickenData                   ;82D80F|A500    |000000;
+                       LDA.B $00                            ;82D80F|A500    |000000;
                        BEQ CODE_82D80D                      ;82D811|F0FA    |82D80D;
                        JSL.L fUnknown_808E69                ;82D813|22698E80|808E69;
                        JSL.L fUnknown_84C034                ;82D817|2234C084|84C034;
@@ -8410,7 +8410,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82D871:
                        SEP #$20                             ;82D871|E220    |      ;
-                       STZ.B pChickenData                   ;82D873|6400    |000000;
+                       STZ.B $00                            ;82D873|6400    |000000;
                        REP #$20                             ;82D875|C220    |      ;
                        LDA.B $90                            ;82D877|A590    |000090;
                        CMP.W #$0258                         ;82D879|C95802  |      ;
@@ -8501,7 +8501,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82D93F:
                        SEP #$20                             ;82D93F|E220    |      ;
-                       LDA.B pChickenData                   ;82D941|A500    |000000;
+                       LDA.B $00                            ;82D941|A500    |000000;
                        BEQ CODE_82D93F                      ;82D943|F0FA    |82D93F;
                        REP #$20                             ;82D945|C220    |      ;
                        LDA.W #$1800                         ;82D947|A90018  |      ;
@@ -8526,7 +8526,7 @@ nUnkownItemOnHandTable:
                        AND.W #$0004                         ;82D98E|290400  |      ;
                        BNE CODE_82D9B3                      ;82D991|D020    |82D9B3;
                        SEP #$20                             ;82D993|E220    |      ;
-                       STZ.B pChickenData                   ;82D995|6400    |000000;
+                       STZ.B $00                            ;82D995|6400    |000000;
                        JMP.W CODE_82D93F                    ;82D997|4C3FD9  |82D93F;
                                                             ;      |        |      ;
                        PLY                                  ;82D99A|7A      |      ;
@@ -9384,7 +9384,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82E0EB:
                        SEP #$20                             ;82E0EB|E220    |      ;
-                       LDA.B pChickenData                   ;82E0ED|A500    |000000;
+                       LDA.B $00                            ;82E0ED|A500    |000000;
                        BEQ CODE_82E0EB                      ;82E0EF|F0FA    |82E0EB;
                        REP #$20                             ;82E0F1|C220    |      ;
                        LDA.W #$1800                         ;82E0F3|A90018  |      ;
@@ -9524,7 +9524,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82E1E9:
                        SEP #$20                             ;82E1E9|E220    |      ;
-                       STZ.B pChickenData                   ;82E1EB|6400    |000000;
+                       STZ.B $00                            ;82E1EB|6400    |000000;
                        JML.L CODE_82E0EB                    ;82E1ED|5CEBE082|82E0EB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -9668,7 +9668,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82E337:
                        SEP #$20                             ;82E337|E220    |      ;
-                       LDA.B pChickenData                   ;82E339|A500    |000000;
+                       LDA.B $00                            ;82E339|A500    |000000;
                        BEQ CODE_82E337                      ;82E33B|F0FA    |82E337;
                        REP #$20                             ;82E33D|C220    |      ;
                        LDA.W #$1800                         ;82E33F|A90018  |      ;
@@ -9774,7 +9774,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82E3FD:
                        SEP #$20                             ;82E3FD|E220    |      ;
-                       STZ.B pChickenData                   ;82E3FF|6400    |000000;
+                       STZ.B $00                            ;82E3FF|6400    |000000;
                        JML.L CODE_82E337                    ;82E401|5C37E382|82E337;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10315,7 +10315,7 @@ nUnkownItemOnHandTable:
                                                             ;      |        |      ;
           CODE_82E95F:
                        SEP #$20                             ;82E95F|E220    |      ;
-                       LDA.B pChickenData                   ;82E961|A500    |000000;
+                       LDA.B $00                            ;82E961|A500    |000000;
                        BEQ CODE_82E95F                      ;82E963|F0FA    |82E95F;
                        REP #$20                             ;82E965|C220    |      ;
                        LDA.W #$1800                         ;82E967|A90018  |      ;
@@ -10363,7 +10363,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_858CB2                ;82E9BE|22B28C85|858CB2;
                        JSL.L fUnknown_8583E0                ;82E9C2|22E08385|8583E0;
                        SEP #$20                             ;82E9C6|E220    |      ;
-                       STZ.B pChickenData                   ;82E9C8|6400    |000000;
+                       STZ.B $00                            ;82E9C8|6400    |000000;
                        JML.L CODE_82E95F                    ;82E9CA|5C5FE982|82E95F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;

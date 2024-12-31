@@ -1,5 +1,4 @@
 SnesAddressHex,SnesAddress,Name,Comment,UsedStatus
-$000000,0,pChickenData,pointer to 8bytes * 10,UNUSED
 $000001,1,ptrUnknown0x01,ptr24,UNUSED
 $000003,3,ptrUnknown0x01+2,,UNUSED
 $000004,4,ptrUnknown0x04,ptr24,UNUSED

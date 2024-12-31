@@ -5087,7 +5087,7 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83AD85:
                        SEP #$20                             ;83AD85|E220    |      ;
-                       STZ.B pChickenData                   ;83AD87|6400    |000000;
+                       STZ.B $00                            ;83AD87|6400    |000000;
                        STZ.W $0148                          ;83AD89|9C4801  |000148;
                        JSL.L fWaitForNextNMI                ;83AD8C|22458680|808645;
                        RTL                                  ;83AD90|6B      |      ;
