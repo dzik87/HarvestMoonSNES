@@ -1,7 +1,7 @@
                        ptrUnknown0x01 = $000001; !^ ptr24 ^!;      |        |      ;
 ;                       ptrUnknown0x01+2 = $000003           ;      |        |      ;
-                       ptrUnknown0x04 = $000004; !^ ptr24 ^!;      |        |      ;
-;                       ptrUnknown0x04+2 = $000006           ;      |        |      ;
+                       ptrPaletteNext = $000004; !^ ptr24 ^!;      |        |      ;
+;                       ptrPaletteNext+2 = $000006           ;      |        |      ;
                        ptrUnknown0x07 = $000007; !^ ptr24 ^!;      |        |      ;
 ;                       ptrUnknown0x07+2 = $000009           ;      |        |      ;
                        ptrUnknown0x0A = $00000A; !^ ptr24 ^!;      |        |      ;
@@ -24,6 +24,9 @@
 ;                       ptrUnknown0xCF+2 = $0000D1           ;      |        |      ;
                        nPlayerPosX = $0000D6; !^ n16 ^!     ;      |        |      ;
                        nPlayerPosY = $0000D8; !^ n16 ^!     ;      |        |      ;
+                       nPaletteCountdown = $00017A; !^ n8 ^!;      |        |      ;
+                       nPaletteNextIndex = $00017B; !^ n8 ^!;      |        |      ;
+                       nPaletteNextHourIndex = $00017C; !^ n8 ^!;      |        |      ;
                        nDestinationX = $00017D; !^ n16 (used when we change map) ^!;      |        |      ;
                        nDestinationY = $00017F; !^ n16 (used when we change map) ^!;      |        |      ;
                        nDialogIndex = $000183; !^ n16, Current dialog index ^!;      |        |      ;
@@ -97,6 +100,9 @@
                        sPlacedCowFeed = $000932; !^ 16bit ^!;      |        |      ;
                        sPlacedChickenFeed = $000934; !^ 16bit ^!;      |        |      ;
                        nHitCounter = $00096D; !^ n8 (used for example to break wood or stones) ^!;      |        |      ;
+                       nJumpTable81D593Index = $00096E; !^ n8 ^!;      |        |      ;
+                       nJumpTable81D593Arg1 = $00096F; !^ n8 ^!;      |        |      ;
+                       nJumpTable81D593Arg2 = $000970; !^ n8 ^!;      |        |      ;
                        nTimeState = $000973; !^ n16, 00 - stop, 01- run, 02 - skip to next day ^!;      |        |      ;
                        nUnknownX = $000980; !^ n16 ^!       ;      |        |      ;
                        nUnknownY = $000982; !^ n16 ^!       ;      |        |      ;
@@ -112,6 +118,7 @@
                        SNES_BG1SC = $002107                 ;      |        |      ;
                        SNES_BG2SC = $002108                 ;      |        |      ;
                        SNES_BG3SC = $002109                 ;      |        |      ;
+                       SNES_BG4SC = $00210A                 ;      |        |      ;
                        SNES_BG12NBA = $00210B               ;      |        |      ;
                        SNES_BG34NBA = $00210C               ;      |        |      ;
                        SNES_BG1HOFS = $00210D               ;      |        |      ;
