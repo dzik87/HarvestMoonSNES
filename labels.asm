@@ -107,7 +107,10 @@
                        nUnknownX = $000980; !^ n16 ^!       ;      |        |      ;
                        nUnknownY = $000982; !^ n16 ^!       ;      |        |      ;
                        nCarriedItemId = $000984; !^ n16 ^!  ;      |        |      ;
+                       nTileInFrontOfPlayerX = $000985; !^ n16 ^!;      |        |      ;
+                       nTileInFrontOfPlayerY = $000987; !^ n16 ^!;      |        |      ;
                        nWeatherForecast = $00098C           ;      |        |      ;
+                       nWeatherForecast8281FD = $000990; !^ n8 ^!;      |        |      ;
                        SNES_INIDISP = $002100               ;      |        |      ;
                        SNES_OBSEL = $002101                 ;      |        |      ;
                        SNES_OAMADDL = $002102               ;      |        |      ;

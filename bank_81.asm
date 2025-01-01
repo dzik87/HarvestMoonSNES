@@ -50,8 +50,8 @@
                        LDA.B #$00                           ;818063|A900    |      ;
                        XBA                                  ;818065|EB      |      ;
                        LDA.B [ptrUnknown0x0D],Y             ;818066|B70D    |00000D;
-                       LDX.W $0985                          ;818068|AE8509  |000985;
-                       LDY.W $0987                          ;81806B|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;818068|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;81806B|AC8709  |000987;
                        JSL.L fUnknown_81A688                ;81806E|2288A681|81A688;
                                                             ;      |        |      ;
                      + SEP #$20                             ;818072|E220    |      ;
@@ -70,7 +70,7 @@
                        STA.W $0114                          ;81808D|8D1401  |000114;
                        LDA.B #$06                           ;818090|A906    |      ;
                        STA.W $0115                          ;818092|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;818095|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;818095|22328383|838332;
                                                             ;      |        |      ;
                      + RTL                                  ;818099|6B      |      ;
                                                             ;      |        |      ;
@@ -1517,7 +1517,7 @@ subItemCarried_Chicken:
                        SEP #$20                             ;8189D2|E220    |      ;
                        LDA.L nUnknownDialogIndex_81A1A5,X   ;8189D4|BFA5A181|81A1A5;
                        STA.B ptrUnknown0x72+2               ;8189D8|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;8189DA|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;8189DA|22C9B183|83B1C9;
                        REP #$20                             ;8189DE|C220    |      ;
                        BEQ .zero0x80                        ;8189E0|F007    |8189E9;
                        LDA.W #$0004                         ;8189E2|A90400  |      ;
@@ -1698,8 +1698,8 @@ subItemCarried_Chicken:
                        XBA                                  ;818B09|EB      |      ;
                        LDA.B #$00                           ;818B0A|A900    |      ;
                        XBA                                  ;818B0C|EB      |      ;
-                       LDX.W $0985                          ;818B0D|AE8509  |000985;
-                       LDY.W $0987                          ;818B10|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;818B0D|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;818B10|AC8709  |000987;
                        JSL.L fUnknown_81A688                ;818B13|2288A681|81A688;
                        BRA fReturn_818B6A                   ;818B17|8051    |818B6A;
                                                             ;      |        |      ;
@@ -1910,8 +1910,8 @@ subItemCarried_Chicken:
                        LDY.W #$0006                         ;818C99|A00600  |      ;
                        JSL.L fUnknown_81D14E                ;818C9C|224ED181|81D14E;
                        REP #$30                             ;818CA0|C230    |      ;
-                       LDX.W $0985                          ;818CA2|AE8509  |000985;
-                       LDY.W $0987                          ;818CA5|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;818CA2|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;818CA5|AC8709  |000987;
                        LDA.W #$0002                         ;818CA8|A90200  |      ;
                        JSL.L fUnknown_82AC61                ;818CAB|2261AC82|82AC61;
                        REP #$30                             ;818CAF|C230    |      ;
@@ -1985,8 +1985,8 @@ subItemCarried_Chicken:
                        LDY.W #$0006                         ;818D40|A00600  |      ;
                        JSL.L fUnknown_81D14E                ;818D43|224ED181|81D14E;
                        REP #$30                             ;818D47|C230    |      ;
-                       LDX.W $0985                          ;818D49|AE8509  |000985;
-                       LDY.W $0987                          ;818D4C|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;818D49|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;818D4C|AC8709  |000987;
                        LDA.W #$0002                         ;818D4F|A90200  |      ;
                        JSL.L fUnknown_82AC61                ;818D52|2261AC82|82AC61;
                        REP #$30                             ;818D56|C230    |      ;
@@ -2041,8 +2041,8 @@ subItemCarried_Chicken:
                        TAX                                  ;818DC5|AA      |      ;
                        SEP #$20                             ;818DC6|E220    |      ;
                        LDA.L nShippingProfitMoneyTable,X    ;818DC8|BFDE9F81|819FDE;
-                       LDX.W $0985                          ;818DCC|AE8509  |000985;
-                       LDY.W $0987                          ;818DCF|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;818DCC|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;818DCF|AC8709  |000987;
                        JSL.L fUnknown_81A688                ;818DD2|2288A681|81A688;
                        REP #$20                             ;818DD6|C220    |      ;
                        LDA.W $0978                          ;818DD8|AD7809  |000978;
@@ -2104,10 +2104,10 @@ subItemCarried_Chicken:
                        STA.B [ptrUnknown0x72],Y             ;818E43|9772    |000072;
                        REP #$20                             ;818E45|C220    |      ;
                        LDY.W #$0004                         ;818E47|A00400  |      ;
-                       LDA.W $0985                          ;818E4A|AD8509  |000985;
+                       LDA.W nTileInFrontOfPlayerX          ;818E4A|AD8509  |000985;
                        STA.B [ptrUnknown0x72],Y             ;818E4D|9772    |000072;
                        LDY.W #$0006                         ;818E4F|A00600  |      ;
-                       LDA.W $0987                          ;818E52|AD8709  |000987;
+                       LDA.W nTileInFrontOfPlayerY          ;818E52|AD8709  |000987;
                        STA.B [ptrUnknown0x72],Y             ;818E55|9772    |000072;
                                                             ;      |        |      ;
                      + REP #$30                             ;818E57|C230    |      ;
@@ -2147,8 +2147,8 @@ subItemCarried_Chicken:
                        LDY.W #$0006                         ;818EA5|A00600  |      ;
                        JSL.L fUnknown_81D14E                ;818EA8|224ED181|81D14E;
                        REP #$30                             ;818EAC|C230    |      ;
-                       LDX.W $0985                          ;818EAE|AE8509  |000985;
-                       LDY.W $0987                          ;818EB1|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;818EAE|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;818EB1|AC8709  |000987;
                        LDA.W #$0000                         ;818EB4|A90000  |      ;
                        JSL.L fUnknown_82AC61                ;818EB7|2261AC82|82AC61;
                        SEP #$20                             ;818EBB|E220    |      ;
@@ -2296,7 +2296,7 @@ subItemCarried_Chicken:
                        STA.B ptrUnknown0x72                 ;818FC6|8572    |000072;
                        SEP #$20                             ;818FC8|E220    |      ;
                        STZ.B ptrUnknown0x72+2               ;818FCA|6474    |000074;
-                       JSL.L fUnknown_83B1C9                ;818FCC|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;818FCC|22C9B183|83B1C9;
                        SEP #$20                             ;818FD0|E220    |      ;
                        STZ.W $091D                          ;818FD2|9C1D09  |00091D;
                        BRA fReturn_81900F                   ;818FD5|8038    |81900F;
@@ -2472,8 +2472,8 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_81D14E                ;819117|224ED181|81D14E;
                        REP #$20                             ;81911B|C220    |      ;
                        LDA.W #$0000                         ;81911D|A90000  |      ;
-                       LDX.W $0985                          ;819120|AE8509  |000985;
-                       LDY.W $0987                          ;819123|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;819120|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;819123|AC8709  |000987;
                        JSL.L fUnknown_82AC61                ;819126|2261AC82|82AC61;
                        CPX.W #$00F0                         ;81912A|E0F000  |      ;
                        BEQ +                                ;81912D|F003    |819132;
@@ -2496,9 +2496,9 @@ subItemCarried_Chicken:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + REP #$20                             ;81914C|C220    |      ;
-                       LDA.W $0985                          ;81914E|AD8509  |000985;
+                       LDA.W nTileInFrontOfPlayerX          ;81914E|AD8509  |000985;
                        STA.W nUnknownX                      ;819151|8D8009  |000980;
-                       LDA.W $0987                          ;819154|AD8709  |000987;
+                       LDA.W nTileInFrontOfPlayerY          ;819154|AD8709  |000987;
                        STA.W nUnknownY                      ;819157|8D8209  |000982;
                        LDY.W #$0000                         ;81915A|A00000  |      ;
                        JSL.L fUnknown_8180B7                ;81915D|22B78081|8180B7;
@@ -2536,9 +2536,9 @@ subItemCarried_Chicken:
                        LDY.W #$0000                         ;81919D|A00000  |      ;
                        JSL.L fUnknown_81D14E                ;8191A0|224ED181|81D14E;
                        REP #$20                             ;8191A4|C220    |      ;
-                       LDA.W $0985                          ;8191A6|AD8509  |000985;
+                       LDA.W nTileInFrontOfPlayerX          ;8191A6|AD8509  |000985;
                        STA.W nUnknownX                      ;8191A9|8D8009  |000980;
-                       LDA.W $0987                          ;8191AC|AD8709  |000987;
+                       LDA.W nTileInFrontOfPlayerY          ;8191AC|AD8709  |000987;
                        STA.W nUnknownY                      ;8191AF|8D8209  |000982;
                        LDY.W #$0000                         ;8191B2|A00000  |      ;
                        JSL.L fUnknown_8180B7                ;8191B5|22B78081|8180B7;
@@ -2678,8 +2678,8 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_81D14E                ;8192C3|224ED181|81D14E;
                        REP #$20                             ;8192C7|C220    |      ;
                        LDA.W #$0002                         ;8192C9|A90200  |      ;
-                       LDX.W $0985                          ;8192CC|AE8509  |000985;
-                       LDY.W $0987                          ;8192CF|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;8192CC|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;8192CF|AC8709  |000987;
                        JSL.L fUnknown_82AC61                ;8192D2|2261AC82|82AC61;
                        SEP #$20                             ;8192D6|E220    |      ;
                        AND.B #$1F                           ;8192D8|291F    |      ;
@@ -2699,8 +2699,8 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_81D14E                ;8192F2|224ED181|81D14E;
                        REP #$20                             ;8192F6|C220    |      ;
                        LDA.W #$0002                         ;8192F8|A90200  |      ;
-                       LDX.W $0985                          ;8192FB|AE8509  |000985;
-                       LDY.W $0987                          ;8192FE|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;8192FB|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;8192FE|AC8709  |000987;
                        JSL.L fUnknown_82AC61                ;819301|2261AC82|82AC61;
                        SEP #$20                             ;819305|E220    |      ;
                        AND.B #$1F                           ;819307|291F    |      ;
@@ -2720,8 +2720,8 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_81D14E                ;819321|224ED181|81D14E;
                        REP #$20                             ;819325|C220    |      ;
                        LDA.W #$0002                         ;819327|A90200  |      ;
-                       LDX.W $0985                          ;81932A|AE8509  |000985;
-                       LDY.W $0987                          ;81932D|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;81932A|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;81932D|AC8709  |000987;
                        JSL.L fUnknown_82AC61                ;819330|2261AC82|82AC61;
                        SEP #$20                             ;819334|E220    |      ;
                        AND.B #$1F                           ;819336|291F    |      ;
@@ -2799,8 +2799,8 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_81D14E                ;8193A2|224ED181|81D14E;
                        REP #$20                             ;8193A6|C220    |      ;
                        LDA.W #$0000                         ;8193A8|A90000  |      ;
-                       LDX.W $0985                          ;8193AB|AE8509  |000985;
-                       LDY.W $0987                          ;8193AE|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;8193AB|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;8193AE|AC8709  |000987;
                        JSL.L fUnknown_82AC61                ;8193B1|2261AC82|82AC61;
                        CPX.W #$00F2                         ;8193B5|E0F200  |      ;
                        BEQ +                                ;8193B8|F003    |8193BD;
@@ -2933,8 +2933,8 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_81D14E                ;8194B9|224ED181|81D14E;
                        REP #$20                             ;8194BD|C220    |      ;
                        LDA.W #$0000                         ;8194BF|A90000  |      ;
-                       LDX.W $0985                          ;8194C2|AE8509  |000985;
-                       LDY.W $0987                          ;8194C5|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;8194C2|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;8194C5|AC8709  |000987;
                        JSL.L fUnknown_82AC61                ;8194C8|2261AC82|82AC61;
                        CPX.W #$00F7                         ;8194CC|E0F700  |      ;
                        BEQ +                                ;8194CF|F003    |8194D4;
@@ -3004,8 +3004,8 @@ subItemCarried_Chicken:
                        LDY.W #$0006                         ;81955F|A00600  |      ;
                        JSL.L fUnknown_81D14E                ;819562|224ED181|81D14E;
                        REP #$30                             ;819566|C230    |      ;
-                       LDX.W $0985                          ;819568|AE8509  |000985;
-                       LDY.W $0987                          ;81956B|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;819568|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;81956B|AC8709  |000987;
                        LDA.W #$0002                         ;81956E|A90200  |      ;
                        JSL.L fUnknown_82AC61                ;819571|2261AC82|82AC61;
                        REP #$30                             ;819575|C230    |      ;
@@ -3031,8 +3031,8 @@ subItemCarried_Chicken:
                        LDY.W #$0006                         ;819598|A00600  |      ;
                        JSL.L fUnknown_81D14E                ;81959B|224ED181|81D14E;
                        REP #$30                             ;81959F|C230    |      ;
-                       LDX.W $0985                          ;8195A1|AE8509  |000985;
-                       LDY.W $0987                          ;8195A4|AC8709  |000987;
+                       LDX.W nTileInFrontOfPlayerX          ;8195A1|AE8509  |000985;
+                       LDY.W nTileInFrontOfPlayerY          ;8195A4|AC8709  |000987;
                        LDA.W #$0002                         ;8195A7|A90200  |      ;
                        JSL.L fUnknown_82AC61                ;8195AA|2261AC82|82AC61;
                        REP #$30                             ;8195AE|C230    |      ;
@@ -3133,9 +3133,9 @@ subItemCarried_Chicken:
                        LDX.W #$0000                         ;819670|A20000  |      ;
                        LDY.W #$0000                         ;819673|A00000  |      ;
                        JSL.L fUnknown_81D14E                ;819676|224ED181|81D14E;
-                       LDA.W $0985                          ;81967A|AD8509  |000985;
+                       LDA.W nTileInFrontOfPlayerX          ;81967A|AD8509  |000985;
                        STA.W nUnknownX                      ;81967D|8D8009  |000980;
-                       LDA.W $0987                          ;819680|AD8709  |000987;
+                       LDA.W nTileInFrontOfPlayerY          ;819680|AD8709  |000987;
                        STA.W nUnknownY                      ;819683|8D8209  |000982;
                        SEP #$20                             ;819686|E220    |      ;
                        LDA.B #$04                           ;819688|A904    |      ;
@@ -7636,9 +7636,9 @@ fSubrutuneExecute_81BFD3:
                        STA.B $D4                            ;81C1C0|85D4    |0000D4;
                        REP #$30                             ;81C1C2|C230    |      ;
                        LDA.L $7F1F2C                        ;81C1C4|AF2C1F7F|7F1F2C;
-                       STA.W $0985                          ;81C1C8|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;81C1C8|8D8509  |000985;
                        LDA.L $7F1F2E                        ;81C1CB|AF2E1F7F|7F1F2E;
-                       STA.W $0987                          ;81C1CF|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;81C1CF|8D8709  |000987;
                        LDA.W #$0016                         ;81C1D2|A91600  |      ;
                        LDX.W #$0000                         ;81C1D5|A20000  |      ;
                        LDY.W #$0012                         ;81C1D8|A01200  |      ;
@@ -8110,7 +8110,7 @@ fSubrutuneExecute_81BFD3:
                        LDA.W $0915                          ;81C536|AD1509  |000915;
                        CMP.W #$FFFF                         ;81C539|C9FFFF  |      ;
                        BNE +                                ;81C53C|D004    |81C542;
-                       JSL.L fUnknown_829260                ;81C53E|22609282|829260;
+                       JSL.L fToolUsedUnknown_829260        ;81C53E|22609282|829260;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81C542|E220    |      ;
                        LDA.W $091B                          ;81C544|AD1B09  |00091B;
@@ -8548,7 +8548,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $0114                          ;81C81B|8D1401  |000114;
                        LDA.B #$06                           ;81C81E|A906    |      ;
                        STA.W $0115                          ;81C820|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;81C823|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81C823|22328383|838332;
                                                             ;      |        |      ;
        fHelper_81C827:
                        JSR.W fUnknown_81CB77                ;81C827|2077CB  |81CB77;
@@ -8629,7 +8629,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $0114                          ;81C8B3|8D1401  |000114;
                        LDA.B #$06                           ;81C8B6|A906    |      ;
                        STA.W $0115                          ;81C8B8|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;81C8BB|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81C8BB|22328383|838332;
                        SEP #$20                             ;81C8BF|E220    |      ;
                        STZ.W $0971                          ;81C8C1|9C7109  |000971;
                        BRA .label4                          ;81C8C4|805D    |81C923;
@@ -8647,7 +8647,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $0114                          ;81C8D7|8D1401  |000114;
                        LDA.B #$06                           ;81C8DA|A906    |      ;
                        STA.W $0115                          ;81C8DC|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;81C8DF|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81C8DF|22328383|838332;
                        BRA .label4                          ;81C8E3|803E    |81C923;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8663,7 +8663,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $0114                          ;81C8F6|8D1401  |000114;
                        LDA.B #$06                           ;81C8F9|A906    |      ;
                        STA.W $0115                          ;81C8FB|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;81C8FE|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81C8FE|22328383|838332;
                        BRA .label4                          ;81C902|801F    |81C923;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8679,7 +8679,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $0114                          ;81C915|8D1401  |000114;
                        LDA.B #$06                           ;81C918|A906    |      ;
                        STA.W $0115                          ;81C91A|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;81C91D|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81C91D|22328383|838332;
                        BRA .label6                          ;81C921|8026    |81C949;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8813,7 +8813,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $0114                          ;81CA07|8D1401  |000114;
                        LDA.B #$06                           ;81CA0A|A906    |      ;
                        STA.W $0115                          ;81CA0C|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;81CA0F|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81CA0F|22328383|838332;
                                                             ;      |        |      ;
               .label1:
                        JSR.W fUnknown_81CFE6                ;81CA13|20E6CF  |81CFE6;
@@ -9865,9 +9865,9 @@ fSubrutuneExecute_81BFD3:
                        STX.B $80                            ;81D156|8680    |000080;
                        STY.B $82                            ;81D158|8482    |000082;
                        LDA.B nPlayerPosX                    ;81D15A|A5D6    |0000D6;
-                       STA.W $0985                          ;81D15C|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;81D15C|8D8509  |000985;
                        LDA.B nPlayerPosY                    ;81D15F|A5D8    |0000D8;
-                       STA.W $0987                          ;81D161|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;81D161|8D8709  |000987;
                        LDA.B $DA                            ;81D164|A5DA    |0000DA;
                        CMP.W #$0000                         ;81D166|C90000  |      ;
                        BNE .label1                          ;81D169|D00C    |81D177;
@@ -9875,7 +9875,7 @@ fSubrutuneExecute_81BFD3:
                        CLC                                  ;81D16D|18      |      ;
                        ADC.B $7E                            ;81D16E|657E    |00007E;
                        ADC.B $82                            ;81D170|6582    |000082;
-                       STA.W $0987                          ;81D172|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;81D172|8D8709  |000987;
                        BRA .return                          ;81D175|802C    |81D1A3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -9886,7 +9886,7 @@ fSubrutuneExecute_81BFD3:
                        SEC                                  ;81D17E|38      |      ;
                        SBC.B $7E                            ;81D17F|E57E    |00007E;
                        SBC.B $82                            ;81D181|E582    |000082;
-                       STA.W $0987                          ;81D183|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;81D183|8D8709  |000987;
                        BRA .return                          ;81D186|801B    |81D1A3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -9897,7 +9897,7 @@ fSubrutuneExecute_81BFD3:
                        CLC                                  ;81D18F|18      |      ;
                        ADC.B $7E                            ;81D190|657E    |00007E;
                        ADC.B $80                            ;81D192|6580    |000080;
-                       STA.W $0985                          ;81D194|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;81D194|8D8509  |000985;
                        BRA .return                          ;81D197|800A    |81D1A3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -9906,34 +9906,34 @@ fSubrutuneExecute_81BFD3:
                        SEC                                  ;81D19B|38      |      ;
                        SBC.B $7E                            ;81D19C|E57E    |00007E;
                        SBC.B $80                            ;81D19E|E580    |000080;
-                       STA.W $0985                          ;81D1A0|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;81D1A0|8D8509  |000985;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;81D1A3|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_81D1A4:
-                       REP #$30                             ;81D1A4|C230    |      ;
+fFindTileCoordsInFrontOfPLayer:
+                       REP #$30                             ;81D1A4|C230    |      ; X: nArg1, Y: nArg2
                        TXA                                  ;81D1A6|8A      |      ;
                        ASL A                                ;81D1A7|0A      |      ;
                        ASL A                                ;81D1A8|0A      |      ;
                        ASL A                                ;81D1A9|0A      |      ;
                        ASL A                                ;81D1AA|0A      |      ;
-                       STA.B $7E                            ;81D1AB|857E    |00007E;
+                       STA.B $7E                            ;81D1AB|857E    |00007E; X * 16 -> $7E
                        TYA                                  ;81D1AD|98      |      ;
                        ASL A                                ;81D1AE|0A      |      ;
                        ASL A                                ;81D1AF|0A      |      ;
                        ASL A                                ;81D1B0|0A      |      ;
-                       ASL A                                ;81D1B1|0A      |      ;
+                       ASL A                                ;81D1B1|0A      |      ; Y * 16 -> $80
                        STA.B $80                            ;81D1B2|8580    |000080;
                        LDA.B nPlayerPosX                    ;81D1B4|A5D6    |0000D6;
                        CLC                                  ;81D1B6|18      |      ;
                        ADC.B $7E                            ;81D1B7|657E    |00007E;
-                       STA.W $0985                          ;81D1B9|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;81D1B9|8D8509  |000985;
                        LDA.B nPlayerPosY                    ;81D1BC|A5D8    |0000D8;
                        CLC                                  ;81D1BE|18      |      ;
                        ADC.B $80                            ;81D1BF|6580    |000080;
-                       STA.W $0987                          ;81D1C1|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;81D1C1|8D8709  |000987;
                        RTL                                  ;81D1C4|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10245,11 +10245,11 @@ subUnknown81D593_0x03:
                        REP #$20                             ;81D68D|C220    |      ;
                        TAX                                  ;81D68F|AA      |      ;
                        SEP #$20                             ;81D690|E220    |      ;
-                       LDA.L Table_80B8CD,X                 ;81D692|BFCDB880|80B8CD;
+                       LDA.L nToolSoundData_80B8CD,X        ;81D692|BFCDB880|80B8CD;
                        INC A                                ;81D696|1A      |      ;
                        STA.W $0103                          ;81D697|8D0301  |000103;
                        JSL.L fUnknown_83833E                ;81D69A|223E8383|83833E;
-                       JSL.L fUnknown_838332                ;81D69E|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;81D69E|22328383|838332;
                        REP #$20                             ;81D6A2|C220    |      ;
                        LDA.L $7F1F5A                        ;81D6A4|AF5A1F7F|7F1F5A;
                        ORA.W #$0010                         ;81D6A8|091000  |      ;
@@ -10372,7 +10372,7 @@ subUnknown81D593_0x0F:
                        SEP #$20                             ;81D752|E220    |      ;
                        LDA.B #$00                           ;81D754|A900    |      ;
                        XBA                                  ;81D756|EB      |      ;
-                       LDA.W $0990                          ;81D757|AD9009  |000990;
+                       LDA.W nWeatherForecast8281FD         ;81D757|AD9009  |000990;
                        ASL A                                ;81D75A|0A      |      ;
                        ASL A                                ;81D75B|0A      |      ;
                        ASL A                                ;81D75C|0A      |      ;
@@ -10397,7 +10397,7 @@ subUnknown81D593_0x0F:
                      + SEP #$20                             ;81D784|E220    |      ;
                        LDA.B #$00                           ;81D786|A900    |      ;
                        XBA                                  ;81D788|EB      |      ;
-                       LDA.W $0990                          ;81D789|AD9009  |000990;
+                       LDA.W nWeatherForecast8281FD         ;81D789|AD9009  |000990;
                        INC A                                ;81D78C|1A      |      ;
                        REP #$20                             ;81D78D|C220    |      ;
                        JSL.L fUnknown_81A5E1                ;81D78F|22E1A581|81A5E1;
@@ -10723,7 +10723,7 @@ subUnknown81D593_0x12:
                        SEP #$20                             ;81DA0B|E220    |      ;
                        LDA.B #$00                           ;81DA0D|A900    |      ;
                        XBA                                  ;81DA0F|EB      |      ;
-                       LDA.W $0990                          ;81DA10|AD9009  |000990;
+                       LDA.W nWeatherForecast8281FD         ;81DA10|AD9009  |000990;
                        ASL A                                ;81DA13|0A      |      ;
                        ASL A                                ;81DA14|0A      |      ;
                        ASL A                                ;81DA15|0A      |      ;
@@ -10748,7 +10748,7 @@ subUnknown81D593_0x12:
                      + SEP #$20                             ;81DA3D|E220    |      ;
                        LDA.B #$00                           ;81DA3F|A900    |      ;
                        XBA                                  ;81DA41|EB      |      ;
-                       LDA.W $0990                          ;81DA42|AD9009  |000990;
+                       LDA.W nWeatherForecast8281FD         ;81DA42|AD9009  |000990;
                        INC A                                ;81DA45|1A      |      ;
                        REP #$20                             ;81DA46|C220    |      ;
                        CLC                                  ;81DA48|18      |      ;
@@ -10817,7 +10817,7 @@ subUnknown81D593_0x13:
                        SEP #$20                             ;81DAC1|E220    |      ;
                        LDA.B #$00                           ;81DAC3|A900    |      ;
                        XBA                                  ;81DAC5|EB      |      ;
-                       LDA.W $0990                          ;81DAC6|AD9009  |000990;
+                       LDA.W nWeatherForecast8281FD         ;81DAC6|AD9009  |000990;
                        ASL A                                ;81DAC9|0A      |      ;
                        ASL A                                ;81DACA|0A      |      ;
                        ASL A                                ;81DACB|0A      |      ;
@@ -10842,7 +10842,7 @@ subUnknown81D593_0x13:
                      + SEP #$20                             ;81DAF3|E220    |      ;
                        LDA.B #$00                           ;81DAF5|A900    |      ;
                        XBA                                  ;81DAF7|EB      |      ;
-                       LDA.W $0990                          ;81DAF8|AD9009  |000990;
+                       LDA.W nWeatherForecast8281FD         ;81DAF8|AD9009  |000990;
                        INC A                                ;81DAFB|1A      |      ;
                        REP #$20                             ;81DAFC|C220    |      ;
                        CLC                                  ;81DAFE|18      |      ;
@@ -11605,7 +11605,7 @@ subUnknown81D593_0x2E:
                        SEP #$20                             ;81E057|E220    |      ;
                        LDA.B #$FF                           ;81E059|A9FF    |      ;
                        STA.B ptrUnknown0x72+2               ;81E05B|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81E05D|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81E05D|22C9B183|83B1C9;
                        REP #$20                             ;81E061|C220    |      ;
                        CMP.W #$0000                         ;81E063|C90000  |      ;
                        BEQ +                                ;81E066|F022    |81E08A;
@@ -11748,7 +11748,7 @@ subUnknown81D593_0x2E:
                        SEP #$20                             ;81E183|E220    |      ;
                        LDA.B #$FF                           ;81E185|A9FF    |      ;
                        STA.B ptrUnknown0x72+2               ;81E187|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81E189|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81E189|22C9B183|83B1C9;
                        REP #$20                             ;81E18D|C220    |      ;
                        CMP.W #$0000                         ;81E18F|C90000  |      ;
                        BEQ +                                ;81E192|F021    |81E1B5;
@@ -12792,7 +12792,7 @@ subUnknown81D593_0x43:
                        SEP #$20                             ;81E971|E220    |      ;
                        LDA.L $7F1F17                        ;81E973|AF171F7F|7F1F17;
                        STA.B ptrUnknown0x72+2               ;81E977|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81E979|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81E979|22C9B183|83B1C9;
                        REP #$20                             ;81E97D|C220    |      ;
                        LDA.W #$0007                         ;81E97F|A90700  |      ;
                        JSL.L fUnknown_848020                ;81E982|22208084|848020;
@@ -13261,7 +13261,7 @@ subUnknown81D593_0x44:
                        SEP #$20                             ;81ED34|E220    |      ;
                        LDA.L $7F1F17                        ;81ED36|AF171F7F|7F1F17;
                        STA.B ptrUnknown0x72+2               ;81ED3A|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81ED3C|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81ED3C|22C9B183|83B1C9;
                        REP #$20                             ;81ED40|C220    |      ;
                        LDA.W #$0007                         ;81ED42|A90700  |      ;
                        JSL.L fUnknown_848020                ;81ED45|22208084|848020;
@@ -13494,10 +13494,10 @@ subUnknown81D593_0x44:
                        REP #$30                             ;81EF2F|C230    |      ;
                        LDY.W #$0004                         ;81EF31|A00400  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;81EF34|B772    |000072;
-                       STA.W $0985                          ;81EF36|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;81EF36|8D8509  |000985;
                        LDY.W #$0006                         ;81EF39|A00600  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;81EF3C|B772    |000072;
-                       STA.W $0987                          ;81EF3E|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;81EF3E|8D8709  |000987;
                        LDA.W #$0010                         ;81EF41|A91000  |      ;
                        LDX.W #$0000                         ;81EF44|A20000  |      ;
                        LDY.W #$001F                         ;81EF47|A01F00  |      ;
@@ -13900,7 +13900,7 @@ subUnknown81D593_0x47:
                        SEP #$20                             ;81F239|E220    |      ;
                        LDA.B #$FF                           ;81F23B|A9FF    |      ;
                        STA.B ptrUnknown0x72+2               ;81F23D|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81F23F|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81F23F|22C9B183|83B1C9;
                        REP #$20                             ;81F243|C220    |      ;
                        CMP.W #$0000                         ;81F245|C90000  |      ;
                        BNE .label3                          ;81F248|D057    |81F2A1;
@@ -13914,7 +13914,7 @@ subUnknown81D593_0x47:
                        SEP #$20                             ;81F253|E220    |      ;
                        LDA.B #$FF                           ;81F255|A9FF    |      ;
                        STA.B ptrUnknown0x72+2               ;81F257|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81F259|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81F259|22C9B183|83B1C9;
                        REP #$20                             ;81F25D|C220    |      ;
                        CMP.W #$0000                         ;81F25F|C90000  |      ;
                        BNE .label3                          ;81F262|D03D    |81F2A1;
@@ -14385,7 +14385,7 @@ subUnknown81D593_0x51:
                        SEP #$20                             ;81F605|E220    |      ;
                        LDA.B #$FF                           ;81F607|A9FF    |      ;
                        STA.B ptrUnknown0x72+2               ;81F609|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81F60B|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81F60B|22C9B183|83B1C9;
                        REP #$20                             ;81F60F|C220    |      ;
                        CMP.W #$0000                         ;81F611|C90000  |      ;
                        BNE .label2                          ;81F614|D03A    |81F650;
@@ -14537,7 +14537,7 @@ subUnknown81D593_0x52:
                        SEP #$20                             ;81F72C|E220    |      ;
                        LDA.B #$FF                           ;81F72E|A9FF    |      ;
                        STA.B ptrUnknown0x72+2               ;81F730|8574    |000074;
-                       JSL.L fUnknown_83B1C9                ;81F732|22C9B183|83B1C9;
+                       JSL.L fAddProfitToCurrentMoney       ;81F732|22C9B183|83B1C9;
                        REP #$20                             ;81F736|C220    |      ;
                        CMP.W #$0000                         ;81F738|C90000  |      ;
                        BNE .label2                          ;81F73B|D03A    |81F777;
@@ -14659,7 +14659,7 @@ subUnknown81D593_0x53:
                        AND.B $D2                            ;81F828|25D2    |0000D2;
                        STA.B $D2                            ;81F82A|85D2    |0000D2;
                        REP #$30                             ;81F82C|C230    |      ;
-                       LDA.W $0985                          ;81F82E|AD8509  |000985;
+                       LDA.W nTileInFrontOfPlayerX          ;81F82E|AD8509  |000985;
                        LSR A                                ;81F831|4A      |      ;
                        LSR A                                ;81F832|4A      |      ;
                        LSR A                                ;81F833|4A      |      ;

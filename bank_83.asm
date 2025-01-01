@@ -449,11 +449,11 @@
                        REP #$20                             ;838314|C220    |      ;
                        TAX                                  ;838316|AA      |      ;
                        SEP #$20                             ;838317|E220    |      ;
-                       LDA.L Table_80B8CD,X                 ;838319|BFCDB880|80B8CD;
+                       LDA.L nToolSoundData_80B8CD,X        ;838319|BFCDB880|80B8CD;
                        INC A                                ;83831D|1A      |      ;
                        STA.W $0103                          ;83831E|8D0301  |000103;
                        JSL.L fUnknown_83833E                ;838321|223E8383|83833E;
-                       JSL.L fUnknown_838332                ;838325|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;838325|22328383|838332;
                        REP #$30                             ;838329|C230    |      ;
                        PLY                                  ;83832B|7A      |      ;
                        TYA                                  ;83832C|98      |      ;
@@ -461,11 +461,11 @@
                        RTL                                  ;838331|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_838332:
+     fStore0Ainto0116:
                        SEP #$20                             ;838332|E220    |      ;
                        LDA.B #$0A                           ;838334|A90A    |      ;
                        STA.W $0116                          ;838336|8D1601  |000116;
-                       JSL.L CODE_838DDF                    ;838339|22DF8D83|838DDF;
+                       JSL.L fUnknown_838DDF                ;838339|22DF8D83|838DDF;
                        RTL                                  ;83833D|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -568,7 +568,7 @@
                        REP #$20                             ;8383F0|C220    |      ;
                        TAX                                  ;8383F2|AA      |      ;
                        SEP #$20                             ;8383F3|E220    |      ;
-                       LDA.L Table_80B8CD,X                 ;8383F5|BFCDB880|80B8CD;
+                       LDA.L nToolSoundData_80B8CD,X        ;8383F5|BFCDB880|80B8CD;
                        STA.W $0103                          ;8383F9|8D0301  |000103;
                        JSL.L fUnknown_83833E                ;8383FC|223E8383|83833E;
                                                             ;      |        |      ;
@@ -1968,7 +1968,7 @@
                        RTL                                  ;838DDE|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838DDF:
+      fUnknown_838DDF:
                        JSR.W fUnknown_838EE4                ;838DDF|20E48E  |838EE4;
                        BNE CODE_838E31                      ;838DE2|D04D    |838E31;
                        SEP #$20                             ;838DE4|E220    |      ;
@@ -2714,7 +2714,7 @@
                        STA.W $0114                          ;8395B1|8D1401  |000114;
                        LDA.B #$06                           ;8395B4|A906    |      ;
                        STA.W $0115                          ;8395B6|8D1501  |000115;
-                       JSL.L fUnknown_838332                ;8395B9|22328383|838332;
+                       JSL.L fStore0Ainto0116               ;8395B9|22328383|838332;
                        SEP #$20                             ;8395BD|E220    |      ;
                        LDA.W $019B                          ;8395BF|AD9B01  |00019B;
                        ORA.B #$02                           ;8395C2|0902    |      ;
@@ -4958,7 +4958,7 @@ fSetDefaultValuesForVariables:
                        SEP #$20                             ;83AC26|E220    |      ;
                        LDA.B #$00                           ;83AC28|A900    |      ;
                        STA.L nShippingProfit+2              ;83AC2A|8F091F7F|7F1F09;
-                       JSL.L WriteSeasonWeekdayAndDayOrdinal;83AC2E|22D68982|8289D6;
+                       JSL.L fWriteSeasonWeekdayAndDayOrdinal;83AC2E|22D68982|8289D6;
                        SEP #$20                             ;83AC32|E220    |      ;
                        STZ.W nBreakHitCounter               ;83AC34|9C6D09  |00096D;
                        REP #$20                             ;83AC37|C220    |      ;
@@ -5041,7 +5041,7 @@ fSetDefaultValuesForVariables:
                        SEP #$20                             ;83AD0A|E220    |      ;
                        STZ.W $0925                          ;83AD0C|9C2509  |000925;
                        SEP #$20                             ;83AD0F|E220    |      ;
-                       STZ.W $0990                          ;83AD11|9C9009  |000990;
+                       STZ.W nWeatherForecast8281FD         ;83AD11|9C9009  |000990;
                        SEP #$20                             ;83AD14|E220    |      ;
                        STZ.W $091D                          ;83AD16|9C1D09  |00091D;
                        STZ.W $091E                          ;83AD19|9C1E09  |00091E;
@@ -5790,8 +5790,8 @@ fSetDefaultValuesForVariables:
                        RTS                                  ;83B1C8|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_83B1C9:
-                       REP #$30                             ;83B1C9|C230    |      ;
+fAddProfitToCurrentMoney:
+                       REP #$30                             ;83B1C9|C230    |      ; $72: nProfit24
                        LDA.L nMoney                         ;83B1CB|AF041F7F|7F1F04;
                        CLC                                  ;83B1CF|18      |      ;
                        ADC.B ptrUnknown0x72                 ;83B1D0|6572    |000072;
@@ -6312,7 +6312,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83B68D|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83B68E:
+      fUnknown_83B68E:
                        REP #$30                             ;83B68E|C230    |      ;
                        PHA                                  ;83B690|48      |      ;
                        LDA.W #$0000                         ;83B691|A90000  |      ;
@@ -6957,7 +6957,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83BC59|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83BC5A:
+      fUnknown_83BC5A:
                        REP #$30                             ;83BC5A|C230    |      ;
                        LDA.L $7F1F60                        ;83BC5C|AF601F7F|7F1F60;
                        AND.W #$0001                         ;83BC60|290100  |      ;
@@ -7961,10 +7961,10 @@ fSetDefaultValuesForVariables:
                        REP #$20                             ;83C370|C220    |      ;
                        LDY.W #$0004                         ;83C372|A00400  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C375|B772    |000072;
-                       STA.W $0985                          ;83C377|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83C377|8D8509  |000985;
                        LDY.W #$0006                         ;83C37A|A00600  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C37D|B772    |000072;
-                       STA.W $0987                          ;83C37F|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83C37F|8D8709  |000987;
                        SEP #$20                             ;83C382|E220    |      ;
                        LDY.W #$0000                         ;83C384|A00000  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C387|B772    |000072;
@@ -8089,12 +8089,12 @@ fSetDefaultValuesForVariables:
                        TAX                                  ;83C452|AA      |      ;
                        LDY.W #$0008                         ;83C453|A00800  |      ;
                        LDA.L Table_83CA44,X                 ;83C456|BF44CA83|83CA44;
-                       STA.W $0985                          ;83C45A|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83C45A|8D8509  |000985;
                        INX                                  ;83C45D|E8      |      ;
                        INX                                  ;83C45E|E8      |      ;
                        LDY.W #$000A                         ;83C45F|A00A00  |      ;
                        LDA.L Table_83CA44,X                 ;83C462|BF44CA83|83CA44;
-                       STA.W $0987                          ;83C466|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83C466|8D8709  |000987;
                        PLX                                  ;83C469|FA      |      ;
                        JMP.W CODE_83C52E                    ;83C46A|4C2EC5  |83C52E;
                                                             ;      |        |      ;
@@ -8232,10 +8232,10 @@ fSetDefaultValuesForVariables:
                        REP #$20                             ;83C51C|C220    |      ;
                        LDY.W #$0008                         ;83C51E|A00800  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C521|B772    |000072;
-                       STA.W $0985                          ;83C523|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83C523|8D8509  |000985;
                        LDY.W #$000A                         ;83C526|A00A00  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C529|B772    |000072;
-                       STA.W $0987                          ;83C52B|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83C52B|8D8709  |000987;
                                                             ;      |        |      ;
           CODE_83C52E:
                        SEP #$20                             ;83C52E|E220    |      ;
@@ -8544,9 +8544,9 @@ fSetDefaultValuesForVariables:
           CODE_83C709:
                        REP #$30                             ;83C709|C230    |      ;
                        LDA.L $7F1F2C                        ;83C70B|AF2C1F7F|7F1F2C;
-                       STA.W $0985                          ;83C70F|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83C70F|8D8509  |000985;
                        LDA.L $7F1F2E                        ;83C712|AF2E1F7F|7F1F2E;
-                       STA.W $0987                          ;83C716|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83C716|8D8709  |000987;
                        LDA.W #$0016                         ;83C719|A91600  |      ;
                        LDX.W #$0000                         ;83C71C|A20000  |      ;
                        LDY.W #$0011                         ;83C71F|A01100  |      ;
@@ -8676,9 +8676,9 @@ fSetDefaultValuesForVariables:
           CODE_83C7D7:
                        REP #$30                             ;83C7D7|C230    |      ;
                        LDA.W #$0110                         ;83C7D9|A91001  |      ;
-                       STA.W $0985                          ;83C7DC|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83C7DC|8D8509  |000985;
                        LDA.W #$0140                         ;83C7DF|A94001  |      ;
-                       STA.W $0987                          ;83C7E2|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83C7E2|8D8709  |000987;
                        LDY.W #$0013                         ;83C7E5|A01300  |      ;
                        SEP #$20                             ;83C7E8|E220    |      ;
                        LDA.L $7F1F32                        ;83C7EA|AF321F7F|7F1F32;
@@ -11542,9 +11542,9 @@ subUnknown83CAA9_0x15:
                        AND.W #$4000                         ;83DF29|290040  |      ;
                        BNE CODE_83DF47                      ;83DF2C|D019    |83DF47;
                        LDA.W #$009C                         ;83DF2E|A99C00  |      ;
-                       STA.W $0985                          ;83DF31|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83DF31|8D8509  |000985;
                        LDA.W #$0090                         ;83DF34|A99000  |      ;
-                       STA.W $0987                          ;83DF37|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83DF37|8D8709  |000987;
                        LDA.W #$0010                         ;83DF3A|A91000  |      ;
                        LDX.W #$0000                         ;83DF3D|A20000  |      ;
                        LDY.W #$001F                         ;83DF40|A01F00  |      ;
@@ -12194,9 +12194,9 @@ subUnknown83CAA9_0x29:
                        AND.W #$0040                         ;83E4D1|294000  |      ;
                        BNE CODE_83E4EF                      ;83E4D4|D019    |83E4EF;
                        LDA.W #$00E0                         ;83E4D6|A9E000  |      ;
-                       STA.W $0985                          ;83E4D9|8D8509  |000985;
+                       STA.W nTileInFrontOfPlayerX          ;83E4D9|8D8509  |000985;
                        LDA.W #$0180                         ;83E4DC|A98001  |      ;
-                       STA.W $0987                          ;83E4DF|8D8709  |000987;
+                       STA.W nTileInFrontOfPlayerY          ;83E4DF|8D8709  |000987;
                        LDA.W #$0010                         ;83E4E2|A91000  |      ;
                        LDX.W #$0000                         ;83E4E5|A20000  |      ;
                        LDY.W #$001F                         ;83E4E8|A01F00  |      ;
