@@ -434,7 +434,7 @@
                        RTL                                  ;8382FD|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8382FE:
+      fUnknown_8382FE:
                        SEP #$20                             ;8382FE|E220    |      ;
                        REP #$10                             ;838300|C210    |      ;
                        STA.W $0114                          ;838302|8D1401  |000114;
@@ -2401,7 +2401,7 @@
                        RTL                                  ;83935E|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fDialogRelated_83935F:
+          fLoadDialog:
                        REP #$30                             ;83935F|C230    |      ; X: nDialogIndex
                        STX.W nDialogIndex                   ;839361|8E8301  |000183;
                        LDA.W #$5000                         ;839364|A90050  |      ;
@@ -2426,27 +2426,26 @@ fDialogRelated_83935F:
                        ADC.W nDialogIndex                   ;839394|6D8301  |000183;
                        TAX                                  ;839397|AA      |      ;
                        LDA.L pDialogTable,X                 ;839398|BFF69B83|839BF6;
-                       STA.B ptrUnknown0x01                 ;83939C|8501    |000001;
+                       STA.B ptrCurrentDialog               ;83939C|8501    |000001;
                        INX                                  ;83939E|E8      |      ;
                        INX                                  ;83939F|E8      |      ;
                        SEP #$20                             ;8393A0|E220    |      ;
                        LDA.L pDialogTable,X                 ;8393A2|BFF69B83|839BF6;
-                       STA.B ptrUnknown0x01+2               ;8393A6|8503    |000003;
+                       STA.B ptrCurrentDialog+2             ;8393A6|8503    |000003;
                        SEP #$20                             ;8393A8|E220    |      ;
                        LDA.W $0191                          ;8393AA|AD9101  |000191;
-                       BNE .label1                          ;8393AD|D016    |8393C5;
+                       BNE +                                ;8393AD|D016    |8393C5;
                        LDA.B #$01                           ;8393AF|A901    |      ;
                        STA.W $0191                          ;8393B1|8D9101  |000191;
                        REP #$20                             ;8393B4|C220    |      ;
                        LDA.W $090D                          ;8393B6|AD0D09  |00090D;
                        CMP.W #$0081                         ;8393B9|C98100  |      ;
-                       BCS .label1                          ;8393BC|B007    |8393C5;
+                       BCS +                                ;8393BC|B007    |8393C5;
                        SEP #$20                             ;8393BE|E220    |      ;
                        LDA.B #$02                           ;8393C0|A902    |      ;
                        STA.W $0191                          ;8393C2|8D9101  |000191;
                                                             ;      |        |      ;
-              .label1:
-                       SEP #$20                             ;8393C5|E220    |      ;
+                     + SEP #$20                             ;8393C5|E220    |      ;
                        LDA.B #$00                           ;8393C7|A900    |      ;
                        XBA                                  ;8393C9|EB      |      ;
                        LDA.W $0191                          ;8393CA|AD9101  |000191;
@@ -2475,7 +2474,7 @@ fDialogRelated_83935F:
                        RTL                                  ;8393F8|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_8393F9:
+      fUnknown_8393F9:
                        SEP #$20                             ;8393F9|E220    |      ;
                        REP #$10                             ;8393FB|C210    |      ;
                        STZ.W $019B                          ;8393FD|9C9B01  |00019B;
@@ -2645,7 +2644,7 @@ fDialogRelated_83935F:
                        LDA.W $0187                          ;839540|AD8701  |000187;
                        ASL A                                ;839543|0A      |      ;
                        TAY                                  ;839544|A8      |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;839545|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;839545|B701    |000001;
                        CMP.W #$00A2                         ;839547|C9A200  |      ;
                        BNE .not00A2                         ;83954A|D003    |83954F;
                        JMP.W .textNextScreenHandler         ;83954C|4CF195  |8395F1;
@@ -2682,7 +2681,7 @@ fDialogRelated_83935F:
                        BNE .label3                          ;839576|D06F    |8395E7;
                        STZ.W $0189                          ;839578|9C8901  |000189;
                        REP #$20                             ;83957B|C220    |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;83957D|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;83957D|B701    |000001;
                        CMP.W #$FFFD                         ;83957F|C9FDFF  |      ;
                        BNE .notFFFD                         ;839582|D003    |839587;
                        JMP.W .textFFFDHandler               ;839584|4CA196  |8396A1;
@@ -2690,7 +2689,7 @@ fDialogRelated_83935F:
                                                             ;      |        |      ;
              .notFFFD:
                        REP #$30                             ;839587|C230    |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;839589|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;839589|B701    |000001;
                        SEP #$10                             ;83958B|E210    |      ;
                        LDX.B #$01                           ;83958D|A201    |      ;
                        CMP.W #$00BC                         ;83958F|C9BC00  |      ;
@@ -2786,12 +2785,12 @@ fDialogRelated_83935F:
                        INY                                  ;83962F|C8      |      ;
                        INY                                  ;839630|C8      |      ;
                        SEP #$20                             ;839631|E220    |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;839633|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;839633|B701    |000001;
                        STA.W $018C                          ;839635|8D8C01  |00018C;
                        REP #$20                             ;839638|C220    |      ;
                        INY                                  ;83963A|C8      |      ;
                        INY                                  ;83963B|C8      |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;83963C|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;83963C|B701    |000001;
                        DEC A                                ;83963E|3A      |      ;
                        ASL A                                ;83963F|0A      |      ;
                        ASL A                                ;839640|0A      |      ;
@@ -2856,7 +2855,7 @@ fDialogRelated_83935F:
                        INY                                  ;8396AF|C8      |      ;
                        INY                                  ;8396B0|C8      |      ;
                        SEP #$20                             ;8396B1|E220    |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;8396B3|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;8396B3|B701    |000001;
                        STA.W $018C                          ;8396B5|8D8C01  |00018C;
                        DEC A                                ;8396B8|3A      |      ;
                        STA.W $018D                          ;8396B9|8D8D01  |00018D;
@@ -2868,7 +2867,7 @@ fDialogRelated_83935F:
                        CLC                                  ;8396C2|18      |      ;
                        ADC.W #$0004                         ;8396C3|690400  |      ;
                        TAY                                  ;8396C6|A8      |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;8396C7|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;8396C7|B701    |000001;
                        DEC A                                ;8396C9|3A      |      ;
                        ASL A                                ;8396CA|0A      |      ;
                        ASL A                                ;8396CB|0A      |      ;
@@ -2923,7 +2922,7 @@ fDialogRelated_83935F:
                        INY                                  ;83972A|C8      |      ;
                        INY                                  ;83972B|C8      |      ;
                        SEP #$20                             ;83972C|E220    |      ;
-                       LDA.B [ptrUnknown0x01],Y             ;83972E|B701    |000001;
+                       LDA.B [ptrCurrentDialog],Y           ;83972E|B701    |000001;
                        DEC A                                ;839730|3A      |      ;
                        STA.W $018E                          ;839731|8D8E01  |00018E;
                        SEP #$20                             ;839734|E220    |      ;
@@ -4794,7 +4793,7 @@ fSetDefaultValuesForVariables:
                        STA.L nStoredFeed                    ;83AA4E|8F101F7F|7F1F10;
                        STZ.W $0196                          ;83AA52|9C9601  |000196;
                        LDA.W #$0000                         ;83AA55|A90000  |      ;
-                       STA.L $7F1F29                        ;83AA58|8F291F7F|7F1F29;
+                       STA.L nPlantedGrass                  ;83AA58|8F291F7F|7F1F29;
                        LDA.W #$0000                         ;83AA5C|A90000  |      ;
                        STA.L nLove_Maria                    ;83AA5F|8F1F1F7F|7F1F1F;
                        LDA.W #$0000                         ;83AA63|A90000  |      ;
@@ -5078,12 +5077,12 @@ fSetDefaultValuesForVariables:
                        STZ.W $0880                          ;83AD69|9C8008  |000880;
                        REP #$30                             ;83AD6C|C230    |      ;
                        LDA.W #$00FA                         ;83AD6E|A9FA00  |      ;
-                       STA.L $7F1F0E                        ;83AD71|8F0E1F7F|7F1F0E;
+                       STA.L nReqWoodForExpansion           ;83AD71|8F0E1F7F|7F1F0E;
                        LDA.L nHouseSize                     ;83AD75|AF641F7F|7F1F64;
                        AND.W #$0040                         ;83AD79|294000  |      ;
                        BEQ CODE_83AD85                      ;83AD7C|F007    |83AD85;
                        LDA.W #$01F4                         ;83AD7E|A9F401  |      ;
-                       STA.L $7F1F0E                        ;83AD81|8F0E1F7F|7F1F0E;
+                       STA.L nReqWoodForExpansion           ;83AD81|8F0E1F7F|7F1F0E;
                                                             ;      |        |      ;
           CODE_83AD85:
                        SEP #$20                             ;83AD85|E220    |      ;
@@ -5870,7 +5869,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83B252|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83B253:
+      fUnknown_83B253:
                        REP #$30                             ;83B253|C230    |      ;
                        STA.B $7E                            ;83B255|857E    |00007E;
                        LDA.L nStoredFeed                    ;83B257|AF101F7F|7F1F10;
@@ -6043,7 +6042,7 @@ fSetDefaultValuesForVariables:
                        STA.W $0196                          ;83B3D2|8D9601  |000196;
                        LDY.W #$0046                         ;83B3D5|A04600  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B3D8|B772    |000072;
-                       STA.L $7F1F29                        ;83B3DA|8F291F7F|7F1F29;
+                       STA.L nPlantedGrass                  ;83B3DA|8F291F7F|7F1F29;
                        LDY.W #$0048                         ;83B3DE|A04800  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B3E1|B772    |000072;
                        STA.L nLove_Maria                    ;83B3E3|8F1F1F7F|7F1F1F;
@@ -6276,7 +6275,7 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83B646:
                        LDA.B [ptrUnknown0x72],Y             ;83B646|B772    |000072;
-                       STA.L $7EC286,X                      ;83B648|9F86C27E|7EC286;
+                       STA.L sChickenDataAddress,X          ;83B648|9F86C27E|7EC286;
                        INY                                  ;83B64C|C8      |      ;
                        INX                                  ;83B64D|E8      |      ;
                        CPX.W #$0068                         ;83B64E|E06800  |      ;
@@ -6287,7 +6286,7 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83B65B:
                        LDA.B [ptrUnknown0x72],Y             ;83B65B|B772    |000072;
-                       STA.L $7EC1C6,X                      ;83B65D|9FC6C17E|7EC1C6;
+                       STA.L sCowDataAddress,X              ;83B65D|9FC6C17E|7EC1C6;
                        INY                                  ;83B661|C8      |      ;
                        INX                                  ;83B662|E8      |      ;
                        CPX.W #$00C0                         ;83B663|E0C000  |      ;
@@ -6426,7 +6425,7 @@ fSetDefaultValuesForVariables:
                        LDA.W $0196                          ;83B7AE|AD9601  |000196;
                        STA.B [ptrUnknown0x72],Y             ;83B7B1|9772    |000072;
                        LDY.W #$0046                         ;83B7B3|A04600  |      ;
-                       LDA.L $7F1F29                        ;83B7B6|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrass                  ;83B7B6|AF291F7F|7F1F29;
                        STA.B [ptrUnknown0x72],Y             ;83B7BA|9772    |000072;
                        LDY.W #$0048                         ;83B7BC|A04800  |      ;
                        LDA.L nLove_Maria                    ;83B7BF|AF1F1F7F|7F1F1F;
@@ -6594,7 +6593,7 @@ fSetDefaultValuesForVariables:
                        LDX.W #$0000                         ;83B990|A20000  |      ;
                                                             ;      |        |      ;
           CODE_83B993:
-                       LDA.L $7EC286,X                      ;83B993|BF86C27E|7EC286;
+                       LDA.L sChickenDataAddress,X          ;83B993|BF86C27E|7EC286;
                        STA.B [ptrUnknown0x72],Y             ;83B997|9772    |000072;
                        INY                                  ;83B999|C8      |      ;
                        INX                                  ;83B99A|E8      |      ;
@@ -6605,7 +6604,7 @@ fSetDefaultValuesForVariables:
                        LDX.W #$0000                         ;83B9A5|A20000  |      ;
                                                             ;      |        |      ;
           CODE_83B9A8:
-                       LDA.L $7EC1C6,X                      ;83B9A8|BFC6C17E|7EC1C6;
+                       LDA.L sCowDataAddress,X              ;83B9A8|BFC6C17E|7EC1C6;
                        STA.B [ptrUnknown0x72],Y             ;83B9AC|9772    |000072;
                        INY                                  ;83B9AE|C8      |      ;
                        INX                                  ;83B9AF|E8      |      ;
@@ -6974,7 +6973,7 @@ fSetDefaultValuesForVariables:
                        PHX                                  ;83BC6D|DA      |      ;
                        PHX                                  ;83BC6E|DA      |      ;
                        TXA                                  ;83BC6F|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83BC70|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83BC70|22A7C983|83C9A7;
                        SEP #$20                             ;83BC74|E220    |      ;
                        REP #$10                             ;83BC76|C210    |      ;
                        PLX                                  ;83BC78|FA      |      ;
@@ -7227,7 +7226,7 @@ fSetDefaultValuesForVariables:
                        PHX                                  ;83BE5D|DA      |      ;
                        PHX                                  ;83BE5E|DA      |      ;
                        TXA                                  ;83BE5F|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83BE60|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83BE60|22A7C983|83C9A7;
                        SEP #$20                             ;83BE64|E220    |      ;
                        REP #$10                             ;83BE66|C210    |      ;
                        PLX                                  ;83BE68|FA      |      ;
@@ -8050,7 +8049,7 @@ fSetDefaultValuesForVariables:
                        PHX                                  ;83C412|DA      |      ;
                        PHX                                  ;83C413|DA      |      ;
                        TXA                                  ;83C414|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83C415|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83C415|22A7C983|83C9A7;
                        SEP #$20                             ;83C419|E220    |      ;
                        REP #$10                             ;83C41B|C210    |      ;
                        PLX                                  ;83C41D|FA      |      ;
@@ -8699,7 +8698,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83C806|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83C807:
+      fUnknown_83C807:
                        REP #$30                             ;83C807|C230    |      ;
                        STA.B $7E                            ;83C809|857E    |00007E;
                        LDX.W #$0000                         ;83C80B|A20000  |      ;
@@ -8830,7 +8829,7 @@ fSetDefaultValuesForVariables:
                        REP #$30                             ;83C8E3|C230    |      ;
                        PHX                                  ;83C8E5|DA      |      ;
                        TXA                                  ;83C8E6|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83C8E7|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83C8E7|22A7C983|83C9A7;
                        SEP #$20                             ;83C8EB|E220    |      ;
                        REP #$10                             ;83C8ED|C210    |      ;
                        PLX                                  ;83C8EF|FA      |      ;
@@ -8936,7 +8935,7 @@ fGetChickenDataPointer:
                        RTL                                  ;83C9A6|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-       fGetCowPointer:
+   fGetCowDataPointer:
                        REP #$30                             ;83C9A7|C230    |      ; A: nIndex, return ptr24 $72
                        ASL A                                ;83C9A9|0A      |      ;
                        ASL A                                ;83C9AA|0A      |      ;
@@ -8986,7 +8985,7 @@ fGetChickenDataPointer:
                        PHY                                  ;83C9ED|5A      |      ;
                        PHX                                  ;83C9EE|DA      |      ;
                        TXA                                  ;83C9EF|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83C9F0|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83C9F0|22A7C983|83C9A7;
                        SEP #$20                             ;83C9F4|E220    |      ;
                        REP #$10                             ;83C9F6|C210    |      ;
                        PLX                                  ;83C9F8|FA      |      ;
@@ -11646,13 +11645,13 @@ fGetChickenDataPointer:
                        LDA.B #$22                           ;83E030|A922    |      ;
                        LDX.W #$0007                         ;83E032|A20700  |      ;
                        LDY.W #$0014                         ;83E035|A01400  |      ;
-                       JSL.L CODE_8382FE                    ;83E038|22FE8283|8382FE;
+                       JSL.L fUnknown_8382FE                ;83E038|22FE8283|8382FE;
                        SEP #$20                             ;83E03C|E220    |      ;
                        REP #$10                             ;83E03E|C210    |      ;
                        LDA.B #$22                           ;83E040|A922    |      ;
                        LDX.W #$0007                         ;83E042|A20700  |      ;
                        LDY.W #$001E                         ;83E045|A01E00  |      ;
-                       JSL.L CODE_8382FE                    ;83E048|22FE8283|8382FE;
+                       JSL.L fUnknown_8382FE                ;83E048|22FE8283|8382FE;
                                                             ;      |        |      ;
           CODE_83E04C:
                        REP #$30                             ;83E04C|C230    |      ;
@@ -11664,7 +11663,7 @@ fGetChickenDataPointer:
                        LDA.B #$20                           ;83E05B|A920    |      ;
                        LDX.W #$0007                         ;83E05D|A20700  |      ;
                        LDY.W #$003C                         ;83E060|A03C00  |      ;
-                       JSL.L CODE_8382FE                    ;83E063|22FE8283|8382FE;
+                       JSL.L fUnknown_8382FE                ;83E063|22FE8283|8382FE;
                        REP #$30                             ;83E067|C230    |      ;
                        LDA.L $7F1F6E                        ;83E069|AF6E1F7F|7F1F6E;
                        AND.W #$FFDF                         ;83E06D|29DFFF  |      ;
@@ -11735,7 +11734,7 @@ fGetChickenDataPointer:
                        XBA                                  ;83E0F7|EB      |      ;
                        LDA.W $0937                          ;83E0F8|AD3709  |000937;
                        REP #$20                             ;83E0FB|C220    |      ;
-                       JSL.L fGetCowPointer                 ;83E0FD|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83E0FD|22A7C983|83C9A7;
                        SEP #$20                             ;83E101|E220    |      ;
                        REP #$10                             ;83E103|C210    |      ;
                        LDA.B #$00                           ;83E105|A900    |      ;
@@ -14243,7 +14242,7 @@ fGetChickenDataPointer:
                        REP #$30                             ;83F466|C230    |      ;
                        PHX                                  ;83F468|DA      |      ;
                        TXA                                  ;83F469|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83F46A|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83F46A|22A7C983|83C9A7;
                        SEP #$20                             ;83F46E|E220    |      ;
                        REP #$10                             ;83F470|C210    |      ;
                        LDY.W #$0000                         ;83F472|A00000  |      ;
@@ -14329,7 +14328,7 @@ fGetChickenDataPointer:
                        REP #$30                             ;83F51A|C230    |      ;
                        PHX                                  ;83F51C|DA      |      ;
                        TXA                                  ;83F51D|8A      |      ;
-                       JSL.L fGetCowPointer                 ;83F51E|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;83F51E|22A7C983|83C9A7;
                        SEP #$20                             ;83F522|E220    |      ;
                        REP #$10                             ;83F524|C210    |      ;
                        LDY.W #$0000                         ;83F526|A00000  |      ;

@@ -551,7 +551,7 @@ fEggFestivalUnknown_81836C:
                        LDX.W #$038D                         ;8183A9|A28D03  |      ;
                        LDA.B #$00                           ;8183AC|A900    |      ;
                        STA.W $0191                          ;8183AE|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;8183B1|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;8183B1|225F9383|83935F;
                        RTS                                  ;8183B5|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1459,7 +1459,7 @@ subItemCarried_Chicken:
                        SEP #$20                             ;818974|E220    |      ;
                        LDA.B #$00                           ;818976|A900    |      ;
                        STA.W $0191                          ;818978|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81897B|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81897B|225F9383|83935F;
                        SEP #$20                             ;81897F|E220    |      ;
                        LDA.B #$01                           ;818981|A901    |      ;
                        STA.W $0976                          ;818983|8D7609  |000976;
@@ -1569,7 +1569,7 @@ subItemCarried_Chicken:
                        SEP #$20                             ;818A26|E220    |      ;
                        LDA.B #$00                           ;818A28|A900    |      ;
                        STA.W $0191                          ;818A2A|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;818A2D|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;818A2D|225F9383|83935F;
                        REP #$20                             ;818A31|C220    |      ;
                        LDA.B $80                            ;818A33|A580    |000080;
                        BEQ +                                ;818A35|F003    |818A3A;
@@ -1629,7 +1629,7 @@ subItemCarried_Chicken:
                        SEP #$20                             ;818A87|E220    |      ;
                        LDA.B #$00                           ;818A89|A900    |      ;
                        STA.W $0191                          ;818A8B|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;818A8E|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;818A8E|225F9383|83935F;
                        BRA fUnknown_818AA0                  ;818A92|800C    |818AA0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1769,7 +1769,7 @@ subItemCarried_Chicken:
                        STA.W $019A                          ;818B8F|8D9A01  |00019A;
                        LDA.B #$00                           ;818B92|A900    |      ;
                        STA.W $0191                          ;818B94|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;818B97|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;818B97|225F9383|83935F;
                        SEP #$20                             ;818B9B|E220    |      ;
                        LDA.B #$01                           ;818B9D|A901    |      ;
                        STA.W $0976                          ;818B9F|8D7609  |000976;
@@ -2232,7 +2232,7 @@ subItemCarried_Chicken:
                        SEP #$20                             ;818F45|E220    |      ;
                        LDA.B #$00                           ;818F47|A900    |      ;
                        STA.W $0191                          ;818F49|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;818F4C|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;818F4C|225F9383|83935F;
                        SEP #$20                             ;818F50|E220    |      ;
                        LDA.B #$06                           ;818F52|A906    |      ;
                        STA.W $0976                          ;818F54|8D7609  |000976;
@@ -2270,7 +2270,7 @@ subItemCarried_Chicken:
                        LDX.W #$02FA                         ;818F8D|A2FA02  |      ;
                        LDA.B #$00                           ;818F90|A900    |      ;
                        STA.W $0191                          ;818F92|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;818F95|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;818F95|225F9383|83935F;
                        REP #$20                             ;818F99|C220    |      ;
                        LDA.W $0978                          ;818F9B|AD7809  |000978;
                        STA.B $A5                            ;818F9E|85A5    |0000A5;
@@ -2309,7 +2309,7 @@ subItemCarried_Chicken:
                        LDX.W #$0303                         ;818FDE|A20303  |      ;
                        LDA.B #$00                           ;818FE1|A900    |      ;
                        STA.W $0191                          ;818FE3|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;818FE6|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;818FE6|225F9383|83935F;
                                                             ;      |        |      ;
       fUnknown_818FEA:
                        REP #$20                             ;818FEA|C220    |      ;
@@ -2960,7 +2960,7 @@ subItemCarried_Chicken:
                        STA.B [ptrUnknown0xCC],Y             ;8194FA|97CC    |0000CC;
                        REP #$20                             ;8194FC|C220    |      ;
                        LDA.W #$0000                         ;8194FE|A90000  |      ;
-                       JSL.L CODE_83C807                    ;819501|2207C883|83C807;
+                       JSL.L fUnknown_83C807                ;819501|2207C883|83C807;
                        REP #$30                             ;819505|C230    |      ;
                        LDA.L $7F1F6E                        ;819507|AF6E1F7F|7F1F6E;
                        ORA.W #$2000                         ;81950B|090020  |      ;
@@ -4688,16 +4688,15 @@ nItemCarriedTable_81A308:
                        STZ.B $90                            ;81A8BB|6490    |000090;
                        LDY.W #$0000                         ;81A8BD|A00000  |      ;
                                                             ;      |        |      ;
-                    -- PHY                                  ;81A8C0|5A      |      ; outer loop
+                   --- PHY                                  ;81A8C0|5A      |      ; outer loop
                        LDA.W #$0000                         ;81A8C1|A90000  |      ;
                                                             ;      |        |      ;
-                     - PHA                                  ;81A8C4|48      |      ; inner loop
+                    -- PHA                                  ;81A8C4|48      |      ; inner loop
                        LDY.W #$0000                         ;81A8C5|A00000  |      ;
                        LDX.W #$0000                         ;81A8C8|A20000  |      ;
                        STZ.B $90                            ;81A8CB|6490    |000090;
                                                             ;      |        |      ;
-          CODE_81A8CD:
-                       LDA.B [ptrUnknown0x72],Y             ;81A8CD|B772    |000072;
+                     - LDA.B [ptrUnknown0x72],Y             ;81A8CD|B772    |000072;
                        PHY                                  ;81A8CF|5A      |      ;
                        TXY                                  ;81A8D0|9B      |      ;
                        STA.B [ptrUnknown0x75],Y             ;81A8D1|9775    |000075;
@@ -4743,7 +4742,7 @@ nItemCarriedTable_81A308:
                                                             ;      |        |      ;
               .label3:
                        CPX.B $80                            ;81A910|E480    |000080;
-                       BNE CODE_81A8CD                      ;81A912|D0B9    |81A8CD;
+                       BNE -                                ;81A912|D0B9    |81A8CD;
                        LDA.B ptrUnknown0x72                 ;81A914|A572    |000072;
                        CLC                                  ;81A916|18      |      ;
                        ADC.W #$0040                         ;81A917|694000  |      ;
@@ -4755,7 +4754,7 @@ nItemCarriedTable_81A308:
                        PLA                                  ;81A923|68      |      ;
                        INC A                                ;81A924|1A      |      ;
                        CMP.W #$0002                         ;81A925|C90200  |      ;
-                       BNE -                                ;81A928|D09A    |81A8C4;
+                       BNE --                               ;81A928|D09A    |81A8C4;
                        REP #$20                             ;81A92A|C220    |      ;
                        LDA.B ptrUnknown0x78                 ;81A92C|A578    |000078;
                        CLC                                  ;81A92E|18      |      ;
@@ -4772,7 +4771,7 @@ nItemCarriedTable_81A308:
                        INY                                  ;81A941|C8      |      ;
                        CPY.B $82                            ;81A942|C482    |000082;
                        BEQ +                                ;81A944|F003    |81A949;
-                       JMP.W --                             ;81A946|4CC0A8  |81A8C0;
+                       JMP.W ---                            ;81A946|4CC0A8  |81A8C0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + RTL                                  ;81A949|6B      |      ;
@@ -5948,7 +5947,7 @@ fItemSub81A9F6_0x10to0x13:
                        REP #$30                             ;81B1CF|C230    |      ;
                        LDA.L $7F1F6C                        ;81B1D1|AF6C1F7F|7F1F6C;
                        AND.W #$0011                         ;81B1D5|291100  |      ;
-                       BEQ CODE_81B21D                      ;81B1D8|F043    |81B21D;
+                       BEQ .return                          ;81B1D8|F043    |81B21D;
                        LDA.W #$00E4                         ;81B1DA|A9E400  |      ;
                        LDX.W #$0070                         ;81B1DD|A27000  |      ;
                        LDY.W #$0160                         ;81B1E0|A06001  |      ;
@@ -5985,7 +5984,7 @@ fItemSub81A9F6_0x10to0x13:
                        PLX                                  ;81B21B|FA      |      ;
                        PLA                                  ;81B21C|68      |      ;
                                                             ;      |        |      ;
-          CODE_81B21D:
+              .return:
                        RTS                                  ;81B21D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8043,7 +8042,7 @@ fSubrutuneExecute_81BFD3:
                        STA.W $019A                          ;81C4BE|8D9A01  |00019A;
                        LDA.B #$00                           ;81C4C1|A900    |      ;
                        STA.W $0191                          ;81C4C3|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81C4C6|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81C4C6|225F9383|83935F;
                                                             ;      |        |      ;
             .continue:
                        JSR.W fUnknown_81CFE6                ;81C4CA|20E6CF  |81CFE6;
@@ -10393,7 +10392,7 @@ subUnknown81D593_0x0F:
                        STA.W $019A                          ;81D778|8D9A01  |00019A;
                        LDA.B #$00                           ;81D77B|A900    |      ;
                        STA.W $0191                          ;81D77D|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81D780|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81D780|225F9383|83935F;
                                                             ;      |        |      ;
                      + SEP #$20                             ;81D784|E220    |      ;
                        LDA.B #$00                           ;81D786|A900    |      ;
@@ -10471,7 +10470,7 @@ subUnknown81D593_0x10:
                        SEP #$20                             ;81D807|E220    |      ;
                        LDA.B #$00                           ;81D809|A900    |      ;
                        STA.W $0191                          ;81D80B|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81D80E|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81D80E|225F9383|83935F;
                        SEP #$20                             ;81D812|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81D814|EE6F09  |00096F;
                        JMP.W .justReturn                    ;81D817|4C6BD9  |81D96B;
@@ -10502,7 +10501,7 @@ subUnknown81D593_0x10:
                        SEP #$20                             ;81D846|E220    |      ;
                        LDA.B #$00                           ;81D848|A900    |      ;
                        STA.W $0191                          ;81D84A|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81D84D|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81D84D|225F9383|83935F;
                        SEP #$20                             ;81D851|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81D853|EE6F09  |00096F;
                        JMP.W .justReturn                    ;81D856|4C6BD9  |81D96B;
@@ -10652,7 +10651,7 @@ subUnknown81D593_0x11:
                        REP #$10                             ;81D97B|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81D97D|AD6F09  |00096F;
                        CMP.B #$01                           ;81D980|C901    |      ;
-                       BEQ CODE_81D9B4                      ;81D982|F030    |81D9B4;
+                       BEQ +                                ;81D982|F030    |81D9B4;
                        REP #$30                             ;81D984|C230    |      ;
                        LDA.B $D2                            ;81D986|A5D2    |0000D2;
                        ORA.W #$0080                         ;81D988|098000  |      ;
@@ -10670,13 +10669,12 @@ subUnknown81D593_0x11:
                        INC.W nJumpTable81D593Arg2           ;81D9A5|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81D9A8|AD7009  |000970;
                        CMP.B #$20                           ;81D9AB|C920    |      ;
-                       BNE CODE_81D9CB                      ;81D9AD|D01C    |81D9CB;
+                       BNE .return                          ;81D9AD|D01C    |81D9CB;
                        INC.W nJumpTable81D593Arg1           ;81D9AF|EE6F09  |00096F;
-                       BRA CODE_81D9CB                      ;81D9B2|8017    |81D9CB;
+                       BRA .return                          ;81D9B2|8017    |81D9CB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81D9B4:
-                       REP #$20                             ;81D9B4|C220    |      ;
+                     + REP #$20                             ;81D9B4|C220    |      ;
                        LDA.W #$00C2                         ;81D9B6|A9C200  |      ;
                        STA.W $0878                          ;81D9B9|8D7808  |000878;
                        STA.W $087A                          ;81D9BC|8D7A08  |00087A;
@@ -10686,7 +10684,7 @@ subUnknown81D593_0x11:
                        AND.B $D2                            ;81D9C7|25D2    |0000D2;
                        STA.B $D2                            ;81D9C9|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81D9CB:
+              .return:
                        RTS                                  ;81D9CB|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10695,9 +10693,9 @@ subUnknown81D593_0x12:
                        REP #$10                             ;81D9CE|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81D9D0|AD6F09  |00096F;
                        CMP.B #$01                           ;81D9D3|C901    |      ;
-                       BEQ CODE_81D9FD                      ;81D9D5|F026    |81D9FD;
+                       BEQ .case1                           ;81D9D5|F026    |81D9FD;
                        CMP.B #$02                           ;81D9D7|C902    |      ;
-                       BEQ CODE_81DA57                      ;81D9D9|F07C    |81DA57;
+                       BEQ .case2                           ;81D9D9|F07C    |81DA57;
                        REP #$30                             ;81D9DB|C230    |      ;
                        LDA.B $D2                            ;81D9DD|A5D2    |0000D2;
                        ORA.W #$0100                         ;81D9DF|090001  |      ;
@@ -10705,25 +10703,23 @@ subUnknown81D593_0x12:
                        REP #$20                             ;81D9E4|C220    |      ;
                        LDA.W $0196                          ;81D9E6|AD9601  |000196;
                        AND.W #$0010                         ;81D9E9|291000  |      ;
-                       BNE CODE_81D9F5                      ;81D9EC|D007    |81D9F5;
+                       BNE +                                ;81D9EC|D007    |81D9F5;
                        LDA.W #$0027                         ;81D9EE|A92700  |      ;
                        JSL.L fUnknown_81A5E1                ;81D9F1|22E1A581|81A5E1;
                                                             ;      |        |      ;
-          CODE_81D9F5:
-                       SEP #$20                             ;81D9F5|E220    |      ;
+                     + SEP #$20                             ;81D9F5|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81D9F7|EE6F09  |00096F;
-                       JMP.W CODE_81DA81                    ;81D9FA|4C81DA  |81DA81;
+                       JMP.W .return                        ;81D9FA|4C81DA  |81DA81;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81D9FD:
+               .case1:
                        REP #$20                             ;81D9FD|C220    |      ;
                        LDA.W ptrUnknown0xCF                 ;81D9FF|ADCF00  |0000CF;
-                       BEQ CODE_81DA07                      ;81DA02|F003    |81DA07;
-                       JMP.W CODE_81DA81                    ;81DA04|4C81DA  |81DA81;
+                       BEQ +                                ;81DA02|F003    |81DA07;
+                       JMP.W .return                        ;81DA04|4C81DA  |81DA81;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DA07:
-                       JSL.L fUnknown_8281C0                ;81DA07|22C08182|8281C0;
+                     + JSL.L fUnknown_8281C0                ;81DA07|22C08182|8281C0;
                        SEP #$20                             ;81DA0B|E220    |      ;
                        LDA.B #$00                           ;81DA0D|A900    |      ;
                        XBA                                  ;81DA0F|EB      |      ;
@@ -10740,17 +10736,16 @@ subUnknown81D593_0x12:
                        TAX                                  ;81DA22|AA      |      ;
                        LDA.L nWeatherDialogIndexesTable,X   ;81DA23|BF10D581|81D510;
                        CMP.W #$FFFF                         ;81DA27|C9FFFF  |      ;
-                       BEQ CODE_81DA3D                      ;81DA2A|F011    |81DA3D;
+                       BEQ +                                ;81DA2A|F011    |81DA3D;
                        TAX                                  ;81DA2C|AA      |      ;
                        SEP #$20                             ;81DA2D|E220    |      ;
                        LDA.B #$02                           ;81DA2F|A902    |      ;
                        STA.W $019A                          ;81DA31|8D9A01  |00019A;
                        LDA.B #$00                           ;81DA34|A900    |      ;
                        STA.W $0191                          ;81DA36|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DA39|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DA39|225F9383|83935F;
                                                             ;      |        |      ;
-          CODE_81DA3D:
-                       SEP #$20                             ;81DA3D|E220    |      ;
+                     + SEP #$20                             ;81DA3D|E220    |      ;
                        LDA.B #$00                           ;81DA3F|A900    |      ;
                        XBA                                  ;81DA41|EB      |      ;
                        LDA.W $0990                          ;81DA42|AD9009  |000990;
@@ -10761,14 +10756,14 @@ subUnknown81D593_0x12:
                        JSL.L fUnknown_81A5E1                ;81DA4C|22E1A581|81A5E1;
                        SEP #$20                             ;81DA50|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DA52|EE6F09  |00096F;
-                       BRA CODE_81DA81                      ;81DA55|802A    |81DA81;
+                       BRA .return                          ;81DA55|802A    |81DA81;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DA57:
+               .case2:
                        SEP #$20                             ;81DA57|E220    |      ;
                        LDA.W $019A                          ;81DA59|AD9A01  |00019A;
                        CMP.B #$02                           ;81DA5C|C902    |      ;
-                       BEQ CODE_81DA81                      ;81DA5E|F021    |81DA81;
+                       BEQ .return                          ;81DA5E|F021    |81DA81;
                        REP #$20                             ;81DA60|C220    |      ;
                        LDA.W #$0047                         ;81DA62|A94700  |      ;
                        JSL.L fUnknown_81A5E1                ;81DA65|22E1A581|81A5E1;
@@ -10783,7 +10778,7 @@ subUnknown81D593_0x12:
                        AND.B $D2                            ;81DA7D|25D2    |0000D2;
                        STA.B $D2                            ;81DA7F|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81DA81:
+              .return:
                        RTS                                  ;81DA81|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10792,9 +10787,9 @@ subUnknown81D593_0x13:
                        REP #$10                             ;81DA84|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81DA86|AD6F09  |00096F;
                        CMP.B #$01                           ;81DA89|C901    |      ;
-                       BEQ CODE_81DAB3                      ;81DA8B|F026    |81DAB3;
+                       BEQ .case1                           ;81DA8B|F026    |81DAB3;
                        CMP.B #$02                           ;81DA8D|C902    |      ;
-                       BEQ CODE_81DB0D                      ;81DA8F|F07C    |81DB0D;
+                       BEQ .case2                           ;81DA8F|F07C    |81DB0D;
                        REP #$30                             ;81DA91|C230    |      ;
                        LDA.B $D2                            ;81DA93|A5D2    |0000D2;
                        ORA.W #$0100                         ;81DA95|090001  |      ;
@@ -10802,25 +10797,23 @@ subUnknown81D593_0x13:
                        REP #$20                             ;81DA9A|C220    |      ;
                        LDA.W $0196                          ;81DA9C|AD9601  |000196;
                        AND.W #$0010                         ;81DA9F|291000  |      ;
-                       BNE CODE_81DAAB                      ;81DAA2|D007    |81DAAB;
+                       BNE +                                ;81DAA2|D007    |81DAAB;
                        LDA.W #$0034                         ;81DAA4|A93400  |      ;
                        JSL.L fUnknown_81A5E1                ;81DAA7|22E1A581|81A5E1;
                                                             ;      |        |      ;
-          CODE_81DAAB:
-                       SEP #$20                             ;81DAAB|E220    |      ;
+                     + SEP #$20                             ;81DAAB|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DAAD|EE6F09  |00096F;
-                       JMP.W CODE_81DB37                    ;81DAB0|4C37DB  |81DB37;
+                       JMP.W .return                        ;81DAB0|4C37DB  |81DB37;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DAB3:
+               .case1:
                        REP #$20                             ;81DAB3|C220    |      ;
                        LDA.W ptrUnknown0xCF                 ;81DAB5|ADCF00  |0000CF;
-                       BEQ CODE_81DABD                      ;81DAB8|F003    |81DABD;
-                       JMP.W CODE_81DB37                    ;81DABA|4C37DB  |81DB37;
+                       BEQ +                                ;81DAB8|F003    |81DABD;
+                       JMP.W .return                        ;81DABA|4C37DB  |81DB37;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DABD:
-                       JSL.L fUnknown_8281C0                ;81DABD|22C08182|8281C0;
+                     + JSL.L fUnknown_8281C0                ;81DABD|22C08182|8281C0;
                        SEP #$20                             ;81DAC1|E220    |      ;
                        LDA.B #$00                           ;81DAC3|A900    |      ;
                        XBA                                  ;81DAC5|EB      |      ;
@@ -10837,17 +10830,16 @@ subUnknown81D593_0x13:
                        TAX                                  ;81DAD8|AA      |      ;
                        LDA.L nWeatherDialogIndexesTable,X   ;81DAD9|BF10D581|81D510;
                        CMP.W #$FFFF                         ;81DADD|C9FFFF  |      ;
-                       BEQ CODE_81DAF3                      ;81DAE0|F011    |81DAF3;
+                       BEQ +                                ;81DAE0|F011    |81DAF3;
                        TAX                                  ;81DAE2|AA      |      ;
                        SEP #$20                             ;81DAE3|E220    |      ;
                        LDA.B #$02                           ;81DAE5|A902    |      ;
                        STA.W $019A                          ;81DAE7|8D9A01  |00019A;
                        LDA.B #$00                           ;81DAEA|A900    |      ;
                        STA.W $0191                          ;81DAEC|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DAEF|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DAEF|225F9383|83935F;
                                                             ;      |        |      ;
-          CODE_81DAF3:
-                       SEP #$20                             ;81DAF3|E220    |      ;
+                     + SEP #$20                             ;81DAF3|E220    |      ;
                        LDA.B #$00                           ;81DAF5|A900    |      ;
                        XBA                                  ;81DAF7|EB      |      ;
                        LDA.W $0990                          ;81DAF8|AD9009  |000990;
@@ -10858,14 +10850,14 @@ subUnknown81D593_0x13:
                        JSL.L fUnknown_81A5E1                ;81DB02|22E1A581|81A5E1;
                        SEP #$20                             ;81DB06|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DB08|EE6F09  |00096F;
-                       BRA CODE_81DB37                      ;81DB0B|802A    |81DB37;
+                       BRA .return                          ;81DB0B|802A    |81DB37;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DB0D:
+               .case2:
                        SEP #$20                             ;81DB0D|E220    |      ;
                        LDA.W $019A                          ;81DB0F|AD9A01  |00019A;
                        CMP.B #$02                           ;81DB12|C902    |      ;
-                       BEQ CODE_81DB37                      ;81DB14|F021    |81DB37;
+                       BEQ .return                          ;81DB14|F021    |81DB37;
                        REP #$20                             ;81DB16|C220    |      ;
                        LDA.W #$0048                         ;81DB18|A94800  |      ;
                        JSL.L fUnknown_81A5E1                ;81DB1B|22E1A581|81A5E1;
@@ -10880,7 +10872,7 @@ subUnknown81D593_0x13:
                        AND.B $D2                            ;81DB33|25D2    |0000D2;
                        STA.B $D2                            ;81DB35|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81DB37:
+              .return:
                        RTS                                  ;81DB37|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10889,16 +10881,16 @@ subUnknown81D593_0x14:
                        REP #$10                             ;81DB3A|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81DB3C|AD6F09  |00096F;
                        CMP.B #$01                           ;81DB3F|C901    |      ;
-                       BEQ CODE_81DB53                      ;81DB41|F010    |81DB53;
+                       BEQ .case1                           ;81DB41|F010    |81DB53;
                        CMP.B #$02                           ;81DB43|C902    |      ;
-                       BEQ CODE_81DB6F                      ;81DB45|F028    |81DB6F;
+                       BEQ .case2                           ;81DB45|F028    |81DB6F;
                        CMP.B #$03                           ;81DB47|C903    |      ;
-                       BEQ CODE_81DB92                      ;81DB49|F047    |81DB92;
+                       BEQ .case3                           ;81DB49|F047    |81DB92;
                        SEP #$20                             ;81DB4B|E220    |      ;
                        STZ.W $018A                          ;81DB4D|9C8A01  |00018A;
                        INC.W nJumpTable81D593Arg1           ;81DB50|EE6F09  |00096F;
                                                             ;      |        |      ;
-          CODE_81DB53:
+               .case1:
                        REP #$20                             ;81DB53|C220    |      ;
                        STZ.W $0142                          ;81DB55|9C4201  |000142;
                        SEP #$20                             ;81DB58|E220    |      ;
@@ -10909,49 +10901,48 @@ subUnknown81D593_0x14:
                        STA.W $019B                          ;81DB64|8D9B01  |00019B;
                        INC.W nJumpTable81D593Arg1           ;81DB67|EE6F09  |00096F;
                        STZ.W $018B                          ;81DB6A|9C8B01  |00018B;
-                       BRA CODE_81DBA0                      ;81DB6D|8031    |81DBA0;
+                       BRA .return                          ;81DB6D|8031    |81DBA0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DB6F:
+               .case2:
                        SEP #$20                             ;81DB6F|E220    |      ;
                        LDA.W $019A                          ;81DB71|AD9A01  |00019A;
                        CMP.B #$03                           ;81DB74|C903    |      ;
-                       BEQ CODE_81DBA0                      ;81DB76|F028    |81DBA0;
+                       BEQ .return                          ;81DB76|F028    |81DBA0;
                        LDA.W $019A                          ;81DB78|AD9A01  |00019A;
                        CMP.B #$02                           ;81DB7B|C902    |      ;
-                       BNE CODE_81DB84                      ;81DB7D|D005    |81DB84;
+                       BNE +                                ;81DB7D|D005    |81DB84;
                        INC.W nJumpTable81D593Arg1           ;81DB7F|EE6F09  |00096F;
-                       BRA CODE_81DBA0                      ;81DB82|801C    |81DBA0;
+                       BRA .return                          ;81DB82|801C    |81DBA0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DB84:
-                       REP #$30                             ;81DB84|C230    |      ;
+                     + REP #$30                             ;81DB84|C230    |      ;
                        LDA.W #$0040                         ;81DB86|A94000  |      ;
                        EOR.W #$FFFF                         ;81DB89|49FFFF  |      ;
                        AND.B $D2                            ;81DB8C|25D2    |0000D2;
                        STA.B $D2                            ;81DB8E|85D2    |0000D2;
-                       BRA CODE_81DBA0                      ;81DB90|800E    |81DBA0;
+                       BRA .return                          ;81DB90|800E    |81DBA0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DB92:
+               .case3:
                        SEP #$20                             ;81DB92|E220    |      ;
                        LDA.W $019A                          ;81DB94|AD9A01  |00019A;
                        CMP.B #$02                           ;81DB97|C902    |      ;
-                       BEQ CODE_81DBA0                      ;81DB99|F005    |81DBA0;
+                       BEQ .return                          ;81DB99|F005    |81DBA0;
                        LDA.B #$01                           ;81DB9B|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81DB9D|8D6F09  |00096F;
                                                             ;      |        |      ;
-          CODE_81DBA0:
+              .return:
                        RTS                                  ;81DBA0|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x15:
                        REP #$20                             ;81DBA1|C220    |      ;
                        LDA.W #$FFFF                         ;81DBA3|A9FFFF  |      ;
-                       JSL.L CODE_83B253                    ;81DBA6|2253B283|83B253;
+                       JSL.L fUnknown_83B253                ;81DBA6|2253B283|83B253;
                        REP #$20                             ;81DBAA|C220    |      ;
                        CMP.W #$0001                         ;81DBAC|C90100  |      ;
-                       BEQ CODE_81DBBF                      ;81DBAF|F00E    |81DBBF;
+                       BEQ +                                ;81DBAF|F00E    |81DBBF;
                        SEP #$20                             ;81DBB1|E220    |      ;
                        LDA.B #$1A                           ;81DBB3|A91A    |      ;
                        STA.W $091D                          ;81DBB5|8D1D09  |00091D;
@@ -10959,8 +10950,7 @@ subUnknown81D593_0x15:
                        LDA.W #$0004                         ;81DBBA|A90400  |      ;
                        STA.B $D4                            ;81DBBD|85D4    |0000D4;
                                                             ;      |        |      ;
-          CODE_81DBBF:
-                       REP #$30                             ;81DBBF|C230    |      ;
+                     + REP #$30                             ;81DBBF|C230    |      ;
                        LDA.W #$0040                         ;81DBC1|A94000  |      ;
                        EOR.W #$FFFF                         ;81DBC4|49FFFF  |      ;
                        AND.B $D2                            ;81DBC7|25D2    |0000D2;
@@ -11006,7 +10996,7 @@ subUnknown81D593_0x1D:
                        JSL.L fUnknown_81A688                ;81DBE4|2288A681|81A688;
                        REP #$30                             ;81DBE8|C230    |      ;
                        LDA.W #$0000                         ;81DBEA|A90000  |      ;
-                       JMP.W CODE_81F556                    ;81DBED|4C56F5  |81F556;
+                       JMP.W fUnknown_81F556                ;81DBED|4C56F5  |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x1E:
@@ -11014,35 +11004,33 @@ subUnknown81D593_0x1E:
                        REP #$10                             ;81DBF2|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81DBF4|AD6F09  |00096F;
                        CMP.B #$01                           ;81DBF7|C901    |      ;
-                       BEQ CODE_81DC16                      ;81DBF9|F01B    |81DC16;
+                       BEQ .case1                           ;81DBF9|F01B    |81DC16;
                        SEP #$20                             ;81DBFB|E220    |      ;
                        LDA.B #$02                           ;81DBFD|A902    |      ;
                        STA.W $019A                          ;81DBFF|8D9A01  |00019A;
                        LDX.W #$0371                         ;81DC02|A27103  |      ;
                        LDA.B #$00                           ;81DC05|A900    |      ;
                        STA.W $0191                          ;81DC07|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DC0A|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DC0A|225F9383|83935F;
                        SEP #$20                             ;81DC0E|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DC10|EE6F09  |00096F;
-                       JMP.W CODE_81DC56                    ;81DC13|4C56DC  |81DC56;
+                       JMP.W .return                        ;81DC13|4C56DC  |81DC56;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DC16:
+               .case1:
                        SEP #$20                             ;81DC16|E220    |      ;
                        LDA.W $019A                          ;81DC18|AD9A01  |00019A;
                        CMP.B #$02                           ;81DC1B|C902    |      ;
-                       BNE CODE_81DC22                      ;81DC1D|D003    |81DC22;
-                       JMP.W CODE_81DC56                    ;81DC1F|4C56DC  |81DC56;
+                       BNE +                                ;81DC1D|D003    |81DC22;
+                       JMP.W .return                        ;81DC1F|4C56DC  |81DC56;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DC22:
-                       LDA.W $018F                          ;81DC22|AD8F01  |00018F;
-                       BEQ CODE_81DC2A                      ;81DC25|F003    |81DC2A;
-                       JMP.W CODE_81DC4A                    ;81DC27|4C4ADC  |81DC4A;
+                     + LDA.W $018F                          ;81DC22|AD8F01  |00018F;
+                       BEQ +                                ;81DC25|F003    |81DC2A;
+                       JMP.W .exit                          ;81DC27|4C4ADC  |81DC4A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DC2A:
-                       SEP #$20                             ;81DC2A|E220    |      ;
+                     + SEP #$20                             ;81DC2A|E220    |      ;
                        LDA.B #$00                           ;81DC2C|A900    |      ;
                        XBA                                  ;81DC2E|EB      |      ;
                        LDA.L nCurrentSeasonID               ;81DC2F|AF191F7F|7F1F19;
@@ -11055,16 +11043,16 @@ subUnknown81D593_0x1E:
                        STA.W $019A                          ;81DC3E|8D9A01  |00019A;
                        LDA.B #$00                           ;81DC41|A900    |      ;
                        STA.W $0191                          ;81DC43|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DC46|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DC46|225F9383|83935F;
                                                             ;      |        |      ;
-          CODE_81DC4A:
+                .exit:
                        REP #$30                             ;81DC4A|C230    |      ;
                        LDA.W #$0040                         ;81DC4C|A94000  |      ;
                        EOR.W #$FFFF                         ;81DC4F|49FFFF  |      ;
                        AND.B $D2                            ;81DC52|25D2    |0000D2;
                        STA.B $D2                            ;81DC54|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81DC56:
+              .return:
                        RTS                                  ;81DC56|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11101,35 +11089,33 @@ subUnknown81D593_0x26:
                        REP #$10                             ;81DC60|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81DC62|AD6F09  |00096F;
                        CMP.B #$01                           ;81DC65|C901    |      ;
-                       BEQ CODE_81DC84                      ;81DC67|F01B    |81DC84;
+                       BEQ .case1                           ;81DC67|F01B    |81DC84;
                        SEP #$20                             ;81DC69|E220    |      ;
                        LDA.B #$02                           ;81DC6B|A902    |      ;
                        STA.W $019A                          ;81DC6D|8D9A01  |00019A;
                        LDX.W #$0023                         ;81DC70|A22300  |      ;
                        LDA.B #$00                           ;81DC73|A900    |      ;
                        STA.W $0191                          ;81DC75|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DC78|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DC78|225F9383|83935F;
                        SEP #$20                             ;81DC7C|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DC7E|EE6F09  |00096F;
-                       JMP.W CODE_81DCCD                    ;81DC81|4CCDDC  |81DCCD;
+                       JMP.W .return                        ;81DC81|4CCDDC  |81DCCD;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DC84:
+               .case1:
                        SEP #$20                             ;81DC84|E220    |      ;
                        LDA.W $019A                          ;81DC86|AD9A01  |00019A;
                        CMP.B #$02                           ;81DC89|C902    |      ;
-                       BNE CODE_81DC90                      ;81DC8B|D003    |81DC90;
-                       JMP.W CODE_81DCCD                    ;81DC8D|4CCDDC  |81DCCD;
+                       BNE +                                ;81DC8B|D003    |81DC90;
+                       JMP.W .return                        ;81DC8D|4CCDDC  |81DCCD;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DC90:
-                       LDA.W $018F                          ;81DC90|AD8F01  |00018F;
-                       BEQ CODE_81DC98                      ;81DC93|F003    |81DC98;
-                       JMP.W fUnknown_81DCC1                ;81DC95|4CC1DC  |81DCC1;
+                     + LDA.W $018F                          ;81DC90|AD8F01  |00018F;
+                       BEQ +                                ;81DC93|F003    |81DC98;
+                       JMP.W .exit                          ;81DC95|4CC1DC  |81DCC1;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DC98:
-                       REP #$20                             ;81DC98|C220    |      ;
+                     + REP #$20                             ;81DC98|C220    |      ;
                        LDA.L nLove_Maria                    ;81DC9A|AF1F1F7F|7F1F1F;
                        JSR.W fUnknown_81D1C5                ;81DC9E|20C5D1  |81D1C5;
                        REP #$30                             ;81DCA1|C230    |      ;
@@ -11141,19 +11127,19 @@ subUnknown81D593_0x26:
                        STA.W $019A                          ;81DCAC|8D9A01  |00019A;
                        LDA.B #$00                           ;81DCAF|A900    |      ;
                        STA.W $0191                          ;81DCB1|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DCB4|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DCB4|225F9383|83935F;
                        REP #$20                             ;81DCB8|C220    |      ;
                        LDA.W #$FFFF                         ;81DCBA|A9FFFF  |      ;
                        JSL.L fUnknown_83B282                ;81DCBD|2282B283|83B282;
                                                             ;      |        |      ;
-      fUnknown_81DCC1:
+                .exit:
                        REP #$30                             ;81DCC1|C230    |      ;
                        LDA.W #$0040                         ;81DCC3|A94000  |      ;
                        EOR.W #$FFFF                         ;81DCC6|49FFFF  |      ;
                        AND.B $D2                            ;81DCC9|25D2    |0000D2;
                        STA.B $D2                            ;81DCCB|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81DCCD:
+              .return:
                        RTS                                  ;81DCCD|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11282,35 +11268,33 @@ subUnknown81D593_0x2D:
                        REP #$10                             ;81DDAE|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81DDB0|AD6F09  |00096F;
                        CMP.B #$01                           ;81DDB3|C901    |      ;
-                       BEQ CODE_81DDD2                      ;81DDB5|F01B    |81DDD2;
+                       BEQ .case1                           ;81DDB5|F01B    |81DDD2;
                        SEP #$20                             ;81DDB7|E220    |      ;
                        LDA.B #$02                           ;81DDB9|A902    |      ;
                        STA.W $019A                          ;81DDBB|8D9A01  |00019A;
                        LDX.W #$0023                         ;81DDBE|A22300  |      ;
                        LDA.B #$00                           ;81DDC1|A900    |      ;
                        STA.W $0191                          ;81DDC3|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DDC6|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DDC6|225F9383|83935F;
                        SEP #$20                             ;81DDCA|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DDCC|EE6F09  |00096F;
-                       JMP.W CODE_81DE1B                    ;81DDCF|4C1BDE  |81DE1B;
+                       JMP.W .return                        ;81DDCF|4C1BDE  |81DE1B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DDD2:
+               .case1:
                        SEP #$20                             ;81DDD2|E220    |      ;
                        LDA.W $019A                          ;81DDD4|AD9A01  |00019A;
                        CMP.B #$02                           ;81DDD7|C902    |      ;
-                       BNE CODE_81DDDE                      ;81DDD9|D003    |81DDDE;
-                       JMP.W CODE_81DE1B                    ;81DDDB|4C1BDE  |81DE1B;
+                       BNE +                                ;81DDD9|D003    |81DDDE;
+                       JMP.W .return                        ;81DDDB|4C1BDE  |81DE1B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DDDE:
-                       LDA.W $018F                          ;81DDDE|AD8F01  |00018F;
-                       BEQ CODE_81DDE6                      ;81DDE1|F003    |81DDE6;
-                       JMP.W CODE_81DE0F                    ;81DDE3|4C0FDE  |81DE0F;
+                     + LDA.W $018F                          ;81DDDE|AD8F01  |00018F;
+                       BEQ +                                ;81DDE1|F003    |81DDE6;
+                       JMP.W .exit                          ;81DDE3|4C0FDE  |81DE0F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DDE6:
-                       REP #$20                             ;81DDE6|C220    |      ;
+                     + REP #$20                             ;81DDE6|C220    |      ;
                        LDA.L nLove_Nina                     ;81DDE8|AF231F7F|7F1F23;
                        JSR.W fUnknown_81D1C5                ;81DDEC|20C5D1  |81D1C5;
                        REP #$30                             ;81DDEF|C230    |      ;
@@ -11322,19 +11306,19 @@ subUnknown81D593_0x2D:
                        STA.W $019A                          ;81DDFA|8D9A01  |00019A;
                        LDA.B #$00                           ;81DDFD|A900    |      ;
                        STA.W $0191                          ;81DDFF|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DE02|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DE02|225F9383|83935F;
                        REP #$20                             ;81DE06|C220    |      ;
                        LDA.W #$FFFF                         ;81DE08|A9FFFF  |      ;
                        JSL.L fUnknown_83B282                ;81DE0B|2282B283|83B282;
                                                             ;      |        |      ;
-          CODE_81DE0F:
+                .exit:
                        REP #$30                             ;81DE0F|C230    |      ;
                        LDA.W #$0040                         ;81DE11|A94000  |      ;
                        EOR.W #$FFFF                         ;81DE14|49FFFF  |      ;
                        AND.B $D2                            ;81DE17|25D2    |0000D2;
                        STA.B $D2                            ;81DE19|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81DE1B:
+              .return:
                        RTS                                  ;81DE1B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11343,184 +11327,174 @@ subUnknown81D593_0x2E:
                        REP #$10                             ;81DE1E|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81DE20|AD6F09  |00096F;
                        CMP.B #$01                           ;81DE23|C901    |      ;
-                       BEQ CODE_81DE8A                      ;81DE25|F063    |81DE8A;
+                       BEQ .case1                           ;81DE25|F063    |81DE8A;
                        CMP.B #$02                           ;81DE27|C902    |      ;
-                       BNE CODE_81DE2E                      ;81DE29|D003    |81DE2E;
-                       JMP.W CODE_81DFC8                    ;81DE2B|4CC8DF  |81DFC8;
+                       BNE .checks                          ;81DE29|D003    |81DE2E;
+                       JMP.W .case2                         ;81DE2B|4CC8DF  |81DFC8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DE2E:
+              .checks:
                        CMP.B #$03                           ;81DE2E|C903    |      ;
-                       BNE CODE_81DE35                      ;81DE30|D003    |81DE35;
-                       JMP.W CODE_81E0EF                    ;81DE32|4CEFE0  |81E0EF;
+                       BNE +                                ;81DE30|D003    |81DE35;
+                       JMP.W .case3                         ;81DE32|4CEFE0  |81E0EF;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DE35:
-                       REP #$30                             ;81DE35|C230    |      ;
+                     + REP #$30                             ;81DE35|C230    |      ;
                        LDA.L $7F1F68                        ;81DE37|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81DE3B|290100  |      ;
-                       BNE CODE_81DE43                      ;81DE3E|D003    |81DE43;
-                       JMP.W CODE_81E213                    ;81DE40|4C13E2  |81E213;
+                       BNE +                                ;81DE3E|D003    |81DE43;
+                       JMP.W .break                         ;81DE40|4C13E2  |81E213;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DE43:
-                       REP #$20                             ;81DE43|C220    |      ;
+                     + REP #$20                             ;81DE43|C220    |      ;
                        LDA.W $0196                          ;81DE45|AD9601  |000196;
                        AND.W #$000A                         ;81DE48|290A00  |      ;
-                       BNE CODE_81DE68                      ;81DE4B|D01B    |81DE68;
+                       BNE +                                ;81DE4B|D01B    |81DE68;
                        SEP #$20                             ;81DE4D|E220    |      ;
                        LDA.B #$02                           ;81DE4F|A902    |      ;
                        STA.W $019A                          ;81DE51|8D9A01  |00019A;
                        LDX.W #$0305                         ;81DE54|A20503  |      ;
                        LDA.B #$00                           ;81DE57|A900    |      ;
                        STA.W $0191                          ;81DE59|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DE5C|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DE5C|225F9383|83935F;
                        SEP #$20                             ;81DE60|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81DE62|EE6F09  |00096F;
-                       JMP.W CODE_81E221                    ;81DE65|4C21E2  |81E221;
+                       JMP.W .return                        ;81DE65|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DE68:
-                       SEP #$20                             ;81DE68|E220    |      ;
+                     + SEP #$20                             ;81DE68|E220    |      ;
                        LDA.B #$02                           ;81DE6A|A902    |      ;
                        STA.W $019A                          ;81DE6C|8D9A01  |00019A;
                        LDX.W #$03D0                         ;81DE6F|A2D003  |      ;
                        LDA.B #$00                           ;81DE72|A900    |      ;
                        STA.W $0191                          ;81DE74|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DE77|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DE77|225F9383|83935F;
                        REP #$30                             ;81DE7B|C230    |      ;
                        LDA.W #$0040                         ;81DE7D|A94000  |      ;
                        EOR.W #$FFFF                         ;81DE80|49FFFF  |      ;
                        AND.B $D2                            ;81DE83|25D2    |0000D2;
                        STA.B $D2                            ;81DE85|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81DE87|4C21E2  |81E221;
+                       JMP.W .return                        ;81DE87|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DE8A:
+               .case1:
                        REP #$30                             ;81DE8A|C230    |      ;
                        LDA.W $0124                          ;81DE8C|AD2401  |000124;
                        BIT.W #$8000                         ;81DE8F|890080  |      ;
-                       BEQ CODE_81DE97                      ;81DE92|F003    |81DE97;
-                       JMP.W CODE_81E222                    ;81DE94|4C22E2  |81E222;
+                       BEQ +                                ;81DE92|F003    |81DE97;
+                       JMP.W .return2                       ;81DE94|4C22E2  |81E222;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DE97:
-                       SEP #$20                             ;81DE97|E220    |      ;
+                     + SEP #$20                             ;81DE97|E220    |      ;
                        LDA.W $019A                          ;81DE99|AD9A01  |00019A;
                        CMP.B #$02                           ;81DE9C|C902    |      ;
-                       BNE CODE_81DEA3                      ;81DE9E|D003    |81DEA3;
-                       JMP.W CODE_81E221                    ;81DEA0|4C21E2  |81E221;
+                       BNE +                                ;81DE9E|D003    |81DEA3;
+                       JMP.W .return                        ;81DEA0|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DEA3:
-                       LDA.W $018F                          ;81DEA3|AD8F01  |00018F;
+                     + LDA.W $018F                          ;81DEA3|AD8F01  |00018F;
                        CMP.B #$00                           ;81DEA6|C900    |      ;
-                       BEQ CODE_81DEBC                      ;81DEA8|F012    |81DEBC;
+                       BEQ .cowCheck                        ;81DEA8|F012    |81DEBC;
                        CMP.B #$01                           ;81DEAA|C901    |      ;
-                       BEQ CODE_81DF13                      ;81DEAC|F065    |81DF13;
+                       BEQ .chickenCheck                    ;81DEAC|F065    |81DF13;
                        CMP.B #$02                           ;81DEAE|C902    |      ;
-                       BNE CODE_81DEB5                      ;81DEB0|D003    |81DEB5;
-                       JMP.W CODE_81DF6A                    ;81DEB2|4C6ADF  |81DF6A;
+                       BNE +                                ;81DEB0|D003    |81DEB5;
+                       JMP.W .label02                       ;81DEB2|4C6ADF  |81DF6A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DEB5:
-                       CMP.B #$03                           ;81DEB5|C903    |      ;
-                       BNE CODE_81DEBC                      ;81DEB7|D003    |81DEBC;
-                       JMP.W CODE_81DF99                    ;81DEB9|4C99DF  |81DF99;
+                     + CMP.B #$03                           ;81DEB5|C903    |      ;
+                       BNE .cowCheck                        ;81DEB7|D003    |81DEBC;
+                       JMP.W .label04                       ;81DEB9|4C99DF  |81DF99;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DEBC:
+            .cowCheck:
                        REP #$20                             ;81DEBC|C220    |      ;
                        LDA.L $7F1F5A                        ;81DEBE|AF5A1F7F|7F1F5A;
                        AND.W #$0020                         ;81DEC2|292000  |      ;
-                       BNE CODE_81DEF1                      ;81DEC5|D02A    |81DEF1;
+                       BNE ++                               ;81DEC5|D02A    |81DEF1;
                        SEP #$20                             ;81DEC7|E220    |      ;
                        LDA.L nOwnedCows                     ;81DEC9|AF0A1F7F|7F1F0A;
                        CMP.B #$0C                           ;81DECD|C90C    |      ;
-                       BNE CODE_81DED4                      ;81DECF|D003    |81DED4;
-                       JMP.W CODE_81E02E                    ;81DED1|4C2EE0  |81E02E;
+                       BNE +                                ;81DECF|D003    |81DED4;
+                       JMP.W .haveMaxCows                   ;81DED1|4C2EE0  |81E02E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DED4:
-                       SEP #$20                             ;81DED4|E220    |      ;
+                     + SEP #$20                             ;81DED4|E220    |      ;
                        LDA.B #$02                           ;81DED6|A902    |      ;
                        STA.W $019A                          ;81DED8|8D9A01  |00019A;
                        LDX.W #$0307                         ;81DEDB|A20703  |      ;
                        LDA.B #$00                           ;81DEDE|A900    |      ;
                        STA.W $0191                          ;81DEE0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DEE3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DEE3|225F9383|83935F;
                        SEP #$20                             ;81DEE7|E220    |      ;
                        LDA.B #$02                           ;81DEE9|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81DEEB|8D6F09  |00096F;
-                       JMP.W CODE_81E221                    ;81DEEE|4C21E2  |81E221;
+                       JMP.W .return                        ;81DEEE|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DEF1:
-                       SEP #$20                             ;81DEF1|E220    |      ;
+                    ++ SEP #$20                             ;81DEF1|E220    |      ;
                        LDA.B #$02                           ;81DEF3|A902    |      ;
                        STA.W $019A                          ;81DEF5|8D9A01  |00019A;
                        LDX.W #$03B6                         ;81DEF8|A2B603  |      ;
                        LDA.B #$00                           ;81DEFB|A900    |      ;
                        STA.W $0191                          ;81DEFD|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DF00|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DF00|225F9383|83935F;
                        REP #$30                             ;81DF04|C230    |      ;
                        LDA.W #$0040                         ;81DF06|A94000  |      ;
                        EOR.W #$FFFF                         ;81DF09|49FFFF  |      ;
                        AND.B $D2                            ;81DF0C|25D2    |0000D2;
                        STA.B $D2                            ;81DF0E|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81DF10|4C21E2  |81E221;
+                       JMP.W .return                        ;81DF10|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DF13:
+        .chickenCheck:
                        REP #$20                             ;81DF13|C220    |      ;
                        LDA.L $7F1F5A                        ;81DF15|AF5A1F7F|7F1F5A;
                        AND.W #$0020                         ;81DF19|292000  |      ;
-                       BNE CODE_81DF48                      ;81DF1C|D02A    |81DF48;
+                       BNE ++                               ;81DF1C|D02A    |81DF48;
                        SEP #$20                             ;81DF1E|E220    |      ;
                        LDA.L nOwnedChickens                 ;81DF20|AF0B1F7F|7F1F0B;
                        CMP.B #$0C                           ;81DF24|C90C    |      ;
-                       BNE CODE_81DF2B                      ;81DF26|D003    |81DF2B;
-                       JMP.W CODE_81E15A                    ;81DF28|4C5AE1  |81E15A;
+                       BNE +                                ;81DF26|D003    |81DF2B;
+                       JMP.W .haveMaxChickens               ;81DF28|4C5AE1  |81E15A;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DF2B:
-                       SEP #$20                             ;81DF2B|E220    |      ;
+                     + SEP #$20                             ;81DF2B|E220    |      ;
                        LDA.B #$02                           ;81DF2D|A902    |      ;
                        STA.W $019A                          ;81DF2F|8D9A01  |00019A;
                        LDX.W #$030A                         ;81DF32|A20A03  |      ;
                        LDA.B #$00                           ;81DF35|A900    |      ;
                        STA.W $0191                          ;81DF37|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DF3A|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DF3A|225F9383|83935F;
                        SEP #$20                             ;81DF3E|E220    |      ;
                        LDA.B #$03                           ;81DF40|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81DF42|8D6F09  |00096F;
-                       JMP.W CODE_81E221                    ;81DF45|4C21E2  |81E221;
+                       JMP.W .return                        ;81DF45|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DF48:
-                       SEP #$20                             ;81DF48|E220    |      ;
+                    ++ SEP #$20                             ;81DF48|E220    |      ;
                        LDA.B #$02                           ;81DF4A|A902    |      ;
                        STA.W $019A                          ;81DF4C|8D9A01  |00019A;
                        LDX.W #$03B6                         ;81DF4F|A2B603  |      ;
                        LDA.B #$00                           ;81DF52|A900    |      ;
                        STA.W $0191                          ;81DF54|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DF57|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DF57|225F9383|83935F;
                        REP #$30                             ;81DF5B|C230    |      ;
                        LDA.W #$0040                         ;81DF5D|A94000  |      ;
                        EOR.W #$FFFF                         ;81DF60|49FFFF  |      ;
                        AND.B $D2                            ;81DF63|25D2    |0000D2;
                        STA.B $D2                            ;81DF65|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81DF67|4C21E2  |81E221;
+                       JMP.W .return                        ;81DF67|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DF6A:
+             .label02:
                        SEP #$20                             ;81DF6A|E220    |      ;
                        LDA.B #$02                           ;81DF6C|A902    |      ;
                        STA.W $019A                          ;81DF6E|8D9A01  |00019A;
                        LDX.W #$030B                         ;81DF71|A20B03  |      ;
                        LDA.B #$00                           ;81DF74|A900    |      ;
                        STA.W $0191                          ;81DF76|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DF79|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DF79|225F9383|83935F;
                        REP #$30                             ;81DF7D|C230    |      ;
                        LDA.W #$0040                         ;81DF7F|A94000  |      ;
                        EOR.W #$FFFF                         ;81DF82|49FFFF  |      ;
@@ -11530,17 +11504,17 @@ subUnknown81D593_0x2E:
                        LDA.L $7F1F5A                        ;81DF8B|AF5A1F7F|7F1F5A;
                        ORA.W #$0008                         ;81DF8F|090800  |      ;
                        STA.L $7F1F5A                        ;81DF92|8F5A1F7F|7F1F5A;
-                       JMP.W CODE_81E221                    ;81DF96|4C21E2  |81E221;
+                       JMP.W .return                        ;81DF96|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DF99:
+             .label04:
                        SEP #$20                             ;81DF99|E220    |      ;
                        LDA.B #$02                           ;81DF9B|A902    |      ;
                        STA.W $019A                          ;81DF9D|8D9A01  |00019A;
                        LDX.W #$030B                         ;81DFA0|A20B03  |      ;
                        LDA.B #$00                           ;81DFA3|A900    |      ;
                        STA.W $0191                          ;81DFA5|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81DFA8|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81DFA8|225F9383|83935F;
                        REP #$30                             ;81DFAC|C230    |      ;
                        LDA.W #$0040                         ;81DFAE|A94000  |      ;
                        EOR.W #$FFFF                         ;81DFB1|49FFFF  |      ;
@@ -11550,25 +11524,23 @@ subUnknown81D593_0x2E:
                        LDA.L $7F1F5A                        ;81DFBA|AF5A1F7F|7F1F5A;
                        ORA.W #$0004                         ;81DFBE|090400  |      ;
                        STA.L $7F1F5A                        ;81DFC1|8F5A1F7F|7F1F5A;
-                       JMP.W CODE_81E221                    ;81DFC5|4C21E2  |81E221;
+                       JMP.W .return                        ;81DFC5|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DFC8:
+               .case2:
                        SEP #$20                             ;81DFC8|E220    |      ;
                        LDA.W $019A                          ;81DFCA|AD9A01  |00019A;
                        CMP.B #$02                           ;81DFCD|C902    |      ;
-                       BNE CODE_81DFD4                      ;81DFCF|D003    |81DFD4;
-                       JMP.W CODE_81E221                    ;81DFD1|4C21E2  |81E221;
+                       BNE +                                ;81DFCF|D003    |81DFD4;
+                       JMP.W .return                        ;81DFD1|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DFD4:
-                       LDA.W $018F                          ;81DFD4|AD8F01  |00018F;
-                       BEQ CODE_81DFDC                      ;81DFD7|F003    |81DFDC;
-                       JMP.W CODE_81E0CD                    ;81DFD9|4CCDE0  |81E0CD;
+                     + LDA.W $018F                          ;81DFD4|AD8F01  |00018F;
+                       BEQ +                                ;81DFD7|F003    |81DFDC;
+                       JMP.W .label23                       ;81DFD9|4CCDE0  |81E0CD;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81DFDC:
-                       SEP #$20                             ;81DFDC|E220    |      ;
+                     + SEP #$20                             ;81DFDC|E220    |      ;
                        LDA.B #$00                           ;81DFDE|A900    |      ;
                        XBA                                  ;81DFE0|EB      |      ;
                        LDA.L nOwnedChickens                 ;81DFE1|AF0B1F7F|7F1F0B;
@@ -11592,41 +11564,41 @@ subUnknown81D593_0x2E:
                        CLC                                  ;81DFFF|18      |      ;
                        ADC.B $7E                            ;81E000|657E    |00007E;
                        STA.B $7E                            ;81E002|857E    |00007E;
-                       LDA.L $7F1F29                        ;81E004|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrass                  ;81E004|AF291F7F|7F1F29;
                        CMP.B $7E                            ;81E008|C57E    |00007E;
-                       BCS CODE_81E050                      ;81E00A|B044    |81E050;
+                       BCS .label21                         ;81E00A|B044    |81E050;
                        SEP #$20                             ;81E00C|E220    |      ;
                        LDA.B #$02                           ;81E00E|A902    |      ;
                        STA.W $019A                          ;81E010|8D9A01  |00019A;
                        LDX.W #$0306                         ;81E013|A20603  |      ;
                        LDA.B #$00                           ;81E016|A900    |      ;
                        STA.W $0191                          ;81E018|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E01B|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E01B|225F9383|83935F;
                        REP #$30                             ;81E01F|C230    |      ;
                        LDA.W #$0040                         ;81E021|A94000  |      ;
                        EOR.W #$FFFF                         ;81E024|49FFFF  |      ;
                        AND.B $D2                            ;81E027|25D2    |0000D2;
                        STA.B $D2                            ;81E029|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81E02B|4C21E2  |81E221;
+                       JMP.W .return                        ;81E02B|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E02E:
+         .haveMaxCows:
                        SEP #$20                             ;81E02E|E220    |      ;
                        LDA.B #$02                           ;81E030|A902    |      ;
                        STA.W $019A                          ;81E032|8D9A01  |00019A;
                        LDX.W #$03B7                         ;81E035|A2B703  |      ;
                        LDA.B #$00                           ;81E038|A900    |      ;
                        STA.W $0191                          ;81E03A|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E03D|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E03D|225F9383|83935F;
                        REP #$30                             ;81E041|C230    |      ;
                        LDA.W #$0040                         ;81E043|A94000  |      ;
                        EOR.W #$FFFF                         ;81E046|49FFFF  |      ;
                        AND.B $D2                            ;81E049|25D2    |0000D2;
                        STA.B $D2                            ;81E04B|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81E04D|4C21E2  |81E221;
+                       JMP.W .return                        ;81E04D|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E050:
+             .label21:
                        REP #$20                             ;81E050|C220    |      ;
                        LDA.W #$FE0C                         ;81E052|A90CFE  |      ;
                        STA.B ptrUnknown0x72                 ;81E055|8572    |000072;
@@ -11636,30 +11608,29 @@ subUnknown81D593_0x2E:
                        JSL.L fUnknown_83B1C9                ;81E05D|22C9B183|83B1C9;
                        REP #$20                             ;81E061|C220    |      ;
                        CMP.W #$0000                         ;81E063|C90000  |      ;
-                       BEQ CODE_81E08A                      ;81E066|F022    |81E08A;
+                       BEQ +                                ;81E066|F022    |81E08A;
                        SEP #$20                             ;81E068|E220    |      ;
                        LDA.B #$02                           ;81E06A|A902    |      ;
                        STA.W $019A                          ;81E06C|8D9A01  |00019A;
                        LDX.W #$0304                         ;81E06F|A20403  |      ;
                        LDA.B #$00                           ;81E072|A900    |      ;
                        STA.W $0191                          ;81E074|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E077|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E077|225F9383|83935F;
                        REP #$30                             ;81E07B|C230    |      ;
                        LDA.W #$0040                         ;81E07D|A94000  |      ;
                        EOR.W #$FFFF                         ;81E080|49FFFF  |      ;
                        AND.B $D2                            ;81E083|25D2    |0000D2;
                        STA.B $D2                            ;81E085|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81E087|4C21E2  |81E221;
+                       JMP.W .return                        ;81E087|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E08A:
-                       SEP #$20                             ;81E08A|E220    |      ;
+                     + SEP #$20                             ;81E08A|E220    |      ;
                        LDA.B #$02                           ;81E08C|A902    |      ;
                        STA.W $019A                          ;81E08E|8D9A01  |00019A;
                        LDX.W #$0308                         ;81E091|A20803  |      ;
                        LDA.B #$00                           ;81E094|A900    |      ;
                        STA.W $0191                          ;81E096|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E099|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E099|225F9383|83935F;
                        REP #$30                             ;81E09D|C230    |      ;
                        LDA.W #$0040                         ;81E09F|A94000  |      ;
                        EOR.W #$FFFF                         ;81E0A2|49FFFF  |      ;
@@ -11676,41 +11647,39 @@ subUnknown81D593_0x2E:
                        REP #$20                             ;81E0C1|C220    |      ;
                        LDA.W #$0014                         ;81E0C3|A91400  |      ;
                        JSL.L fUnknown_83B282                ;81E0C6|2282B283|83B282;
-                       JMP.W CODE_81E221                    ;81E0CA|4C21E2  |81E221;
+                       JMP.W .return                        ;81E0CA|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E0CD:
+             .label23:
                        SEP #$20                             ;81E0CD|E220    |      ;
                        LDA.B #$02                           ;81E0CF|A902    |      ;
                        STA.W $019A                          ;81E0D1|8D9A01  |00019A;
                        LDX.W #$0303                         ;81E0D4|A20303  |      ;
                        LDA.B #$00                           ;81E0D7|A900    |      ;
                        STA.W $0191                          ;81E0D9|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E0DC|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E0DC|225F9383|83935F;
                        REP #$30                             ;81E0E0|C230    |      ;
                        LDA.W #$0040                         ;81E0E2|A94000  |      ;
                        EOR.W #$FFFF                         ;81E0E5|49FFFF  |      ;
                        AND.B $D2                            ;81E0E8|25D2    |0000D2;
                        STA.B $D2                            ;81E0EA|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81E0EC|4C21E2  |81E221;
+                       JMP.W .return                        ;81E0EC|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E0EF:
+               .case3:
                        SEP #$20                             ;81E0EF|E220    |      ;
                        LDA.W $019A                          ;81E0F1|AD9A01  |00019A;
                        CMP.B #$02                           ;81E0F4|C902    |      ;
-                       BNE CODE_81E0FB                      ;81E0F6|D003    |81E0FB;
-                       JMP.W CODE_81E221                    ;81E0F8|4C21E2  |81E221;
+                       BNE +                                ;81E0F6|D003    |81E0FB;
+                       JMP.W .return                        ;81E0F8|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E0FB:
-                       LDA.W $018F                          ;81E0FB|AD8F01  |00018F;
-                       BEQ CODE_81E103                      ;81E0FE|F003    |81E103;
-                       JMP.W CODE_81E200                    ;81E100|4C00E2  |81E200;
+                     + LDA.W $018F                          ;81E0FB|AD8F01  |00018F;
+                       BEQ +                                ;81E0FE|F003    |81E103;
+                       JMP.W .label31                       ;81E100|4C00E2  |81E200;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E103:
-                       SEP #$20                             ;81E103|E220    |      ;
+                     + SEP #$20                             ;81E103|E220    |      ;
                        LDA.B #$00                           ;81E105|A900    |      ;
                        XBA                                  ;81E107|EB      |      ;
                        LDA.L nOwnedChickens                 ;81E108|AF0B1F7F|7F1F0B;
@@ -11734,46 +11703,45 @@ subUnknown81D593_0x2E:
                        CLC                                  ;81E126|18      |      ;
                        ADC.B $7E                            ;81E127|657E    |00007E;
                        STA.B $7E                            ;81E129|857E    |00007E;
-                       LDA.L $7F1F29                        ;81E12B|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrass                  ;81E12B|AF291F7F|7F1F29;
                        CMP.B $7E                            ;81E12F|C57E    |00007E;
-                       BCC CODE_81E136                      ;81E131|9003    |81E136;
-                       JMP.W CODE_81E17C                    ;81E133|4C7CE1  |81E17C;
+                       BCC +                                ;81E131|9003    |81E136;
+                       JMP.W .label29                       ;81E133|4C7CE1  |81E17C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E136:
-                       SEP #$20                             ;81E136|E220    |      ;
+                     + SEP #$20                             ;81E136|E220    |      ;
                        LDA.B #$02                           ;81E138|A902    |      ;
                        STA.W $019A                          ;81E13A|8D9A01  |00019A;
                        LDX.W #$0306                         ;81E13D|A20603  |      ;
                        LDA.B #$00                           ;81E140|A900    |      ;
                        STA.W $0191                          ;81E142|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E145|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E145|225F9383|83935F;
                        REP #$20                             ;81E149|C220    |      ;
                        REP #$30                             ;81E14B|C230    |      ;
                        LDA.W #$0040                         ;81E14D|A94000  |      ;
                        EOR.W #$FFFF                         ;81E150|49FFFF  |      ;
                        AND.B $D2                            ;81E153|25D2    |0000D2;
                        STA.B $D2                            ;81E155|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81E157|4C21E2  |81E221;
+                       JMP.W .return                        ;81E157|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E15A:
+     .haveMaxChickens:
                        SEP #$20                             ;81E15A|E220    |      ;
                        LDA.B #$02                           ;81E15C|A902    |      ;
                        STA.W $019A                          ;81E15E|8D9A01  |00019A;
                        LDX.W #$03B7                         ;81E161|A2B703  |      ;
                        LDA.B #$00                           ;81E164|A900    |      ;
                        STA.W $0191                          ;81E166|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E169|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E169|225F9383|83935F;
                        REP #$30                             ;81E16D|C230    |      ;
                        LDA.W #$0040                         ;81E16F|A94000  |      ;
                        EOR.W #$FFFF                         ;81E172|49FFFF  |      ;
                        AND.B $D2                            ;81E175|25D2    |0000D2;
                        STA.B $D2                            ;81E177|85D2    |0000D2;
-                       JMP.W CODE_81E221                    ;81E179|4C21E2  |81E221;
+                       JMP.W .return                        ;81E179|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E17C:
+             .label29:
                        REP #$20                             ;81E17C|C220    |      ;
                        LDA.W #$FF9C                         ;81E17E|A99CFF  |      ;
                        STA.B ptrUnknown0x72                 ;81E181|8572    |000072;
@@ -11783,30 +11751,29 @@ subUnknown81D593_0x2E:
                        JSL.L fUnknown_83B1C9                ;81E189|22C9B183|83B1C9;
                        REP #$20                             ;81E18D|C220    |      ;
                        CMP.W #$0000                         ;81E18F|C90000  |      ;
-                       BEQ CODE_81E1B5                      ;81E192|F021    |81E1B5;
+                       BEQ +                                ;81E192|F021    |81E1B5;
                        SEP #$20                             ;81E194|E220    |      ;
                        LDA.B #$02                           ;81E196|A902    |      ;
                        STA.W $019A                          ;81E198|8D9A01  |00019A;
                        LDX.W #$0304                         ;81E19B|A20403  |      ;
                        LDA.B #$00                           ;81E19E|A900    |      ;
                        STA.W $0191                          ;81E1A0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E1A3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E1A3|225F9383|83935F;
                        REP #$30                             ;81E1A7|C230    |      ;
                        LDA.W #$0040                         ;81E1A9|A94000  |      ;
                        EOR.W #$FFFF                         ;81E1AC|49FFFF  |      ;
                        AND.B $D2                            ;81E1AF|25D2    |0000D2;
                        STA.B $D2                            ;81E1B1|85D2    |0000D2;
-                       BRA CODE_81E221                      ;81E1B3|806C    |81E221;
+                       BRA .return                          ;81E1B3|806C    |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E1B5:
-                       SEP #$20                             ;81E1B5|E220    |      ;
+                     + SEP #$20                             ;81E1B5|E220    |      ;
                        LDA.B #$02                           ;81E1B7|A902    |      ;
                        STA.W $019A                          ;81E1B9|8D9A01  |00019A;
                        LDX.W #$0311                         ;81E1BC|A21103  |      ;
                        LDA.B #$00                           ;81E1BF|A900    |      ;
                        STA.W $0191                          ;81E1C1|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E1C4|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E1C4|225F9383|83935F;
                        REP #$30                             ;81E1C8|C230    |      ;
                        LDA.W #$0040                         ;81E1CA|A94000  |      ;
                        EOR.W #$FFFF                         ;81E1CD|49FFFF  |      ;
@@ -11814,7 +11781,7 @@ subUnknown81D593_0x2E:
                        STA.B $D2                            ;81E1D2|85D2    |0000D2;
                        REP #$20                             ;81E1D4|C220    |      ;
                        LDA.W #$0002                         ;81E1D6|A90200  |      ;
-                       JSL.L CODE_83C807                    ;81E1D9|2207C883|83C807;
+                       JSL.L fUnknown_83C807                ;81E1D9|2207C883|83C807;
                        REP #$20                             ;81E1DD|C220    |      ;
                        LDA.L $7F1F5A                        ;81E1DF|AF5A1F7F|7F1F5A;
                        ORA.W #$0020                         ;81E1E3|092000  |      ;
@@ -11826,33 +11793,33 @@ subUnknown81D593_0x2E:
                        REP #$20                             ;81E1F5|C220    |      ;
                        LDA.W #$000A                         ;81E1F7|A90A00  |      ;
                        JSL.L fUnknown_83B282                ;81E1FA|2282B283|83B282;
-                       BRA CODE_81E221                      ;81E1FE|8021    |81E221;
+                       BRA .return                          ;81E1FE|8021    |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E200:
+             .label31:
                        SEP #$20                             ;81E200|E220    |      ;
                        LDA.B #$02                           ;81E202|A902    |      ;
                        STA.W $019A                          ;81E204|8D9A01  |00019A;
                        LDX.W #$0303                         ;81E207|A20303  |      ;
                        LDA.B #$00                           ;81E20A|A900    |      ;
                        STA.W $0191                          ;81E20C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E20F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E20F|225F9383|83935F;
                                                             ;      |        |      ;
-          CODE_81E213:
+               .break:
                        REP #$30                             ;81E213|C230    |      ;
                        LDA.W #$0040                         ;81E215|A94000  |      ;
                        EOR.W #$FFFF                         ;81E218|49FFFF  |      ;
                        AND.B $D2                            ;81E21B|25D2    |0000D2;
                        STA.B $D2                            ;81E21D|85D2    |0000D2;
-                       BRA CODE_81E221                      ;81E21F|8000    |81E221;
+                       BRA .return                          ;81E21F|8000    |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E221:
+              .return:
                        RTS                                  ;81E221|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E222:
-                       JSL.L CODE_8393F9                    ;81E222|22F99383|8393F9;
+             .return2:
+                       JSL.L fUnknown_8393F9                ;81E222|22F99383|8393F9;
                        SEP #$20                             ;81E226|E220    |      ;
                        LDA.B #$01                           ;81E228|A901    |      ;
                        STA.W $019A                          ;81E22A|8D9A01  |00019A;
@@ -11953,35 +11920,32 @@ subUnknown81D593_0x33:
                        REP #$10                             ;81E2DB|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81E2DD|AD6F09  |00096F;
                        CMP.B #$01                           ;81E2E0|C901    |      ;
-                       BEQ CODE_81E2FF                      ;81E2E2|F01B    |81E2FF;
+                       BEQ +                                ;81E2E2|F01B    |81E2FF;
                        SEP #$20                             ;81E2E4|E220    |      ;
                        LDA.B #$02                           ;81E2E6|A902    |      ;
                        STA.W $019A                          ;81E2E8|8D9A01  |00019A;
                        LDX.W #$0023                         ;81E2EB|A22300  |      ;
                        LDA.B #$00                           ;81E2EE|A900    |      ;
                        STA.W $0191                          ;81E2F0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E2F3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E2F3|225F9383|83935F;
                        SEP #$20                             ;81E2F7|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81E2F9|EE6F09  |00096F;
-                       JMP.W CODE_81E348                    ;81E2FC|4C48E3  |81E348;
+                       JMP.W .justReturn                    ;81E2FC|4C48E3  |81E348;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E2FF:
-                       SEP #$20                             ;81E2FF|E220    |      ;
+                     + SEP #$20                             ;81E2FF|E220    |      ;
                        LDA.W $019A                          ;81E301|AD9A01  |00019A;
                        CMP.B #$02                           ;81E304|C902    |      ;
-                       BNE CODE_81E30B                      ;81E306|D003    |81E30B;
-                       JMP.W CODE_81E348                    ;81E308|4C48E3  |81E348;
+                       BNE +                                ;81E306|D003    |81E30B;
+                       JMP.W .justReturn                    ;81E308|4C48E3  |81E348;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E30B:
-                       LDA.W $018F                          ;81E30B|AD8F01  |00018F;
-                       BEQ CODE_81E313                      ;81E30E|F003    |81E313;
-                       JMP.W CODE_81E33C                    ;81E310|4C3CE3  |81E33C;
+                     + LDA.W $018F                          ;81E30B|AD8F01  |00018F;
+                       BEQ +                                ;81E30E|F003    |81E313;
+                       JMP.W .return                        ;81E310|4C3CE3  |81E33C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E313:
-                       REP #$20                             ;81E313|C220    |      ;
+                     + REP #$20                             ;81E313|C220    |      ;
                        LDA.L nLove_Ellen                    ;81E315|AF251F7F|7F1F25;
                        JSR.W fUnknown_81D1C5                ;81E319|20C5D1  |81D1C5;
                        REP #$30                             ;81E31C|C230    |      ;
@@ -11993,19 +11957,19 @@ subUnknown81D593_0x33:
                        STA.W $019A                          ;81E327|8D9A01  |00019A;
                        LDA.B #$00                           ;81E32A|A900    |      ;
                        STA.W $0191                          ;81E32C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E32F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E32F|225F9383|83935F;
                        REP #$20                             ;81E333|C220    |      ;
                        LDA.W #$FFFF                         ;81E335|A9FFFF  |      ;
                        JSL.L fUnknown_83B282                ;81E338|2282B283|83B282;
                                                             ;      |        |      ;
-          CODE_81E33C:
+              .return:
                        REP #$30                             ;81E33C|C230    |      ;
                        LDA.W #$0040                         ;81E33E|A94000  |      ;
                        EOR.W #$FFFF                         ;81E341|49FFFF  |      ;
                        AND.B $D2                            ;81E344|25D2    |0000D2;
                        STA.B $D2                            ;81E346|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81E348:
+          .justReturn:
                        RTS                                  ;81E348|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12035,7 +11999,7 @@ subUnknown81D593_0x35:
                        LDA.B #$24                           ;81E372|A924    |      ;
                        LDX.W #$0007                         ;81E374|A20700  |      ;
                        LDY.W #$0078                         ;81E377|A07800  |      ;
-                       JSL.L CODE_8382FE                    ;81E37A|22FE8283|8382FE;
+                       JSL.L fUnknown_8382FE                ;81E37A|22FE8283|8382FE;
                        SEP #$20                             ;81E37E|E220    |      ;
                        STZ.W $0119                          ;81E380|9C1901  |000119;
                        JSL.L fUnknown_828FF3                ;81E383|22F38F82|828FF3;
@@ -12052,35 +12016,32 @@ subUnknown81D593_0x36:
                        REP #$10                             ;81E396|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81E398|AD6F09  |00096F;
                        CMP.B #$01                           ;81E39B|C901    |      ;
-                       BEQ CODE_81E3BA                      ;81E39D|F01B    |81E3BA;
+                       BEQ +                                ;81E39D|F01B    |81E3BA;
                        SEP #$20                             ;81E39F|E220    |      ;
                        LDA.B #$02                           ;81E3A1|A902    |      ;
                        STA.W $019A                          ;81E3A3|8D9A01  |00019A;
                        LDX.W #$0023                         ;81E3A6|A22300  |      ;
                        LDA.B #$00                           ;81E3A9|A900    |      ;
                        STA.W $0191                          ;81E3AB|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E3AE|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E3AE|225F9383|83935F;
                        SEP #$20                             ;81E3B2|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81E3B4|EE6F09  |00096F;
-                       JMP.W CODE_81E403                    ;81E3B7|4C03E4  |81E403;
+                       JMP.W .return                        ;81E3B7|4C03E4  |81E403;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E3BA:
-                       SEP #$20                             ;81E3BA|E220    |      ;
+                     + SEP #$20                             ;81E3BA|E220    |      ;
                        LDA.W $019A                          ;81E3BC|AD9A01  |00019A;
                        CMP.B #$02                           ;81E3BF|C902    |      ;
-                       BNE CODE_81E3C6                      ;81E3C1|D003    |81E3C6;
-                       JMP.W CODE_81E403                    ;81E3C3|4C03E4  |81E403;
+                       BNE +                                ;81E3C1|D003    |81E3C6;
+                       JMP.W .return                        ;81E3C3|4C03E4  |81E403;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E3C6:
-                       LDA.W $018F                          ;81E3C6|AD8F01  |00018F;
-                       BEQ CODE_81E3CE                      ;81E3C9|F003    |81E3CE;
-                       JMP.W CODE_81E3F7                    ;81E3CB|4CF7E3  |81E3F7;
+                     + LDA.W $018F                          ;81E3C6|AD8F01  |00018F;
+                       BEQ +                                ;81E3C9|F003    |81E3CE;
+                       JMP.W .exit                          ;81E3CB|4CF7E3  |81E3F7;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E3CE:
-                       REP #$20                             ;81E3CE|C220    |      ;
+                     + REP #$20                             ;81E3CE|C220    |      ;
                        LDA.L nLove_Ann                      ;81E3D0|AF211F7F|7F1F21;
                        JSR.W fUnknown_81D1C5                ;81E3D4|20C5D1  |81D1C5;
                        REP #$30                             ;81E3D7|C230    |      ;
@@ -12092,19 +12053,19 @@ subUnknown81D593_0x36:
                        STA.W $019A                          ;81E3E2|8D9A01  |00019A;
                        LDA.B #$00                           ;81E3E5|A900    |      ;
                        STA.W $0191                          ;81E3E7|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E3EA|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E3EA|225F9383|83935F;
                        REP #$20                             ;81E3EE|C220    |      ;
                        LDA.W #$FFFF                         ;81E3F0|A9FFFF  |      ;
                        JSL.L fUnknown_83B282                ;81E3F3|2282B283|83B282;
                                                             ;      |        |      ;
-          CODE_81E3F7:
+                .exit:
                        REP #$30                             ;81E3F7|C230    |      ;
                        LDA.W #$0040                         ;81E3F9|A94000  |      ;
                        EOR.W #$FFFF                         ;81E3FC|49FFFF  |      ;
                        AND.B $D2                            ;81E3FF|25D2    |0000D2;
                        STA.B $D2                            ;81E401|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81E403:
+              .return:
                        RTS                                  ;81E403|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12273,35 +12234,32 @@ subUnknown81D593_0x3F:
                        REP #$10                             ;81E52E|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81E530|AD6F09  |00096F;
                        CMP.B #$01                           ;81E533|C901    |      ;
-                       BEQ CODE_81E552                      ;81E535|F01B    |81E552;
+                       BEQ +                                ;81E535|F01B    |81E552;
                        SEP #$20                             ;81E537|E220    |      ;
                        LDA.B #$02                           ;81E539|A902    |      ;
                        STA.W $019A                          ;81E53B|8D9A01  |00019A;
                        LDX.W #$0023                         ;81E53E|A22300  |      ;
                        LDA.B #$00                           ;81E541|A900    |      ;
                        STA.W $0191                          ;81E543|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E546|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E546|225F9383|83935F;
                        SEP #$20                             ;81E54A|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81E54C|EE6F09  |00096F;
-                       JMP.W CODE_81E59B                    ;81E54F|4C9BE5  |81E59B;
+                       JMP.W .return                        ;81E54F|4C9BE5  |81E59B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E552:
-                       SEP #$20                             ;81E552|E220    |      ;
+                     + SEP #$20                             ;81E552|E220    |      ;
                        LDA.W $019A                          ;81E554|AD9A01  |00019A;
                        CMP.B #$02                           ;81E557|C902    |      ;
-                       BNE CODE_81E55E                      ;81E559|D003    |81E55E;
-                       JMP.W CODE_81E59B                    ;81E55B|4C9BE5  |81E59B;
+                       BNE +                                ;81E559|D003    |81E55E;
+                       JMP.W .return                        ;81E55B|4C9BE5  |81E59B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E55E:
-                       LDA.W $018F                          ;81E55E|AD8F01  |00018F;
-                       BEQ CODE_81E566                      ;81E561|F003    |81E566;
-                       JMP.W CODE_81E58F                    ;81E563|4C8FE5  |81E58F;
+                     + LDA.W $018F                          ;81E55E|AD8F01  |00018F;
+                       BEQ +                                ;81E561|F003    |81E566;
+                       JMP.W .exit                          ;81E563|4C8FE5  |81E58F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E566:
-                       REP #$20                             ;81E566|C220    |      ;
+                     + REP #$20                             ;81E566|C220    |      ;
                        LDA.L nLove_Eve                      ;81E568|AF271F7F|7F1F27;
                        JSR.W fUnknown_81D1C5                ;81E56C|20C5D1  |81D1C5;
                        REP #$30                             ;81E56F|C230    |      ;
@@ -12313,19 +12271,19 @@ subUnknown81D593_0x3F:
                        STA.W $019A                          ;81E57A|8D9A01  |00019A;
                        LDA.B #$00                           ;81E57D|A900    |      ;
                        STA.W $0191                          ;81E57F|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E582|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E582|225F9383|83935F;
                        REP #$20                             ;81E586|C220    |      ;
                        LDA.W #$FFFF                         ;81E588|A9FFFF  |      ;
                        JSL.L fUnknown_83B282                ;81E58B|2282B283|83B282;
                                                             ;      |        |      ;
-          CODE_81E58F:
+                .exit:
                        REP #$30                             ;81E58F|C230    |      ;
                        LDA.W #$0040                         ;81E591|A94000  |      ;
                        EOR.W #$FFFF                         ;81E594|49FFFF  |      ;
                        AND.B $D2                            ;81E597|25D2    |0000D2;
                        STA.B $D2                            ;81E599|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81E59B:
+              .return:
                        RTS                                  ;81E59B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12334,136 +12292,134 @@ subUnknown81D593_0x40:
                        REP #$10                             ;81E59E|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81E5A0|AD6F09  |00096F;
                        CMP.B #$01                           ;81E5A3|C901    |      ;
-                       BEQ CODE_81E5C2                      ;81E5A5|F01B    |81E5C2;
+                       BEQ .check                           ;81E5A5|F01B    |81E5C2;
                        SEP #$20                             ;81E5A7|E220    |      ;
                        LDA.B #$02                           ;81E5A9|A902    |      ;
                        STA.W $019A                          ;81E5AB|8D9A01  |00019A;
                        LDX.W #$045F                         ;81E5AE|A25F04  |      ;
                        LDA.B #$00                           ;81E5B1|A900    |      ;
                        STA.W $0191                          ;81E5B3|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E5B6|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E5B6|225F9383|83935F;
                        SEP #$20                             ;81E5BA|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81E5BC|EE6F09  |00096F;
-                       JMP.W CODE_81E69F                    ;81E5BF|4C9FE6  |81E69F;
+                       JMP.W .justReturn                    ;81E5BF|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E5C2:
+               .check:
                        REP #$30                             ;81E5C2|C230    |      ;
                        LDA.W $0124                          ;81E5C4|AD2401  |000124;
                        BIT.W #$8000                         ;81E5C7|890080  |      ;
-                       BEQ CODE_81E5CF                      ;81E5CA|F003    |81E5CF;
-                       JMP.W CODE_81E6A0                    ;81E5CC|4CA0E6  |81E6A0;
+                       BEQ +                                ;81E5CA|F003    |81E5CF;
+                       JMP.W .return                        ;81E5CC|4CA0E6  |81E6A0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E5CF:
-                       SEP #$20                             ;81E5CF|E220    |      ;
+                     + SEP #$20                             ;81E5CF|E220    |      ;
                        LDA.W $019A                          ;81E5D1|AD9A01  |00019A;
                        CMP.B #$02                           ;81E5D4|C902    |      ;
-                       BNE CODE_81E5DB                      ;81E5D6|D003    |81E5DB;
-                       JMP.W CODE_81E69F                    ;81E5D8|4C9FE6  |81E69F;
+                       BNE +                                ;81E5D6|D003    |81E5DB;
+                       JMP.W .justReturn                    ;81E5D8|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E5DB:
-                       LDA.W $018F                          ;81E5DB|AD8F01  |00018F;
+                     + LDA.W $018F                          ;81E5DB|AD8F01  |00018F;
                        CMP.B #$00                           ;81E5DE|C900    |      ;
-                       BEQ CODE_81E5F5                      ;81E5E0|F013    |81E5F5;
+                       BEQ .case0                           ;81E5E0|F013    |81E5F5;
                        CMP.B #$01                           ;81E5E2|C901    |      ;
-                       BEQ CODE_81E617                      ;81E5E4|F031    |81E617;
+                       BEQ .case1                           ;81E5E4|F031    |81E617;
                        CMP.B #$02                           ;81E5E6|C902    |      ;
-                       BEQ CODE_81E639                      ;81E5E8|F04F    |81E639;
+                       BEQ .case2                           ;81E5E8|F04F    |81E639;
                        CMP.B #$03                           ;81E5EA|C903    |      ;
-                       BEQ CODE_81E65B                      ;81E5EC|F06D    |81E65B;
+                       BEQ .case3                           ;81E5EC|F06D    |81E65B;
                        CMP.B #$04                           ;81E5EE|C904    |      ;
-                       BNE CODE_81E5F5                      ;81E5F0|D003    |81E5F5;
-                       JMP.W CODE_81E67D                    ;81E5F2|4C7DE6  |81E67D;
+                       BNE .case0                           ;81E5F0|D003    |81E5F5;
+                       JMP.W .case4                         ;81E5F2|4C7DE6  |81E67D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E5F5:
+               .case0:
                        SEP #$20                             ;81E5F5|E220    |      ;
                        LDA.B #$02                           ;81E5F7|A902    |      ;
                        STA.W $019A                          ;81E5F9|8D9A01  |00019A;
                        LDX.W #$0460                         ;81E5FC|A26004  |      ;
                        LDA.B #$00                           ;81E5FF|A900    |      ;
                        STA.W $0191                          ;81E601|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E604|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E604|225F9383|83935F;
                        REP #$30                             ;81E608|C230    |      ;
                        LDA.W #$0040                         ;81E60A|A94000  |      ;
                        EOR.W #$FFFF                         ;81E60D|49FFFF  |      ;
                        AND.B $D2                            ;81E610|25D2    |0000D2;
                        STA.B $D2                            ;81E612|85D2    |0000D2;
-                       JMP.W CODE_81E69F                    ;81E614|4C9FE6  |81E69F;
+                       JMP.W .justReturn                    ;81E614|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E617:
+               .case1:
                        SEP #$20                             ;81E617|E220    |      ;
                        LDA.B #$02                           ;81E619|A902    |      ;
                        STA.W $019A                          ;81E61B|8D9A01  |00019A;
                        LDX.W #$0462                         ;81E61E|A26204  |      ;
                        LDA.B #$00                           ;81E621|A900    |      ;
                        STA.W $0191                          ;81E623|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E626|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E626|225F9383|83935F;
                        REP #$30                             ;81E62A|C230    |      ;
                        LDA.W #$0040                         ;81E62C|A94000  |      ;
                        EOR.W #$FFFF                         ;81E62F|49FFFF  |      ;
                        AND.B $D2                            ;81E632|25D2    |0000D2;
                        STA.B $D2                            ;81E634|85D2    |0000D2;
-                       JMP.W CODE_81E69F                    ;81E636|4C9FE6  |81E69F;
+                       JMP.W .justReturn                    ;81E636|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E639:
+               .case2:
                        SEP #$20                             ;81E639|E220    |      ;
                        LDA.B #$02                           ;81E63B|A902    |      ;
                        STA.W $019A                          ;81E63D|8D9A01  |00019A;
                        LDX.W #$0464                         ;81E640|A26404  |      ;
                        LDA.B #$00                           ;81E643|A900    |      ;
                        STA.W $0191                          ;81E645|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E648|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E648|225F9383|83935F;
                        REP #$30                             ;81E64C|C230    |      ;
                        LDA.W #$0040                         ;81E64E|A94000  |      ;
                        EOR.W #$FFFF                         ;81E651|49FFFF  |      ;
                        AND.B $D2                            ;81E654|25D2    |0000D2;
                        STA.B $D2                            ;81E656|85D2    |0000D2;
-                       JMP.W CODE_81E69F                    ;81E658|4C9FE6  |81E69F;
+                       JMP.W .justReturn                    ;81E658|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E65B:
+               .case3:
                        SEP #$20                             ;81E65B|E220    |      ;
                        LDA.B #$02                           ;81E65D|A902    |      ;
                        STA.W $019A                          ;81E65F|8D9A01  |00019A;
                        LDX.W #$0461                         ;81E662|A26104  |      ;
                        LDA.B #$00                           ;81E665|A900    |      ;
                        STA.W $0191                          ;81E667|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E66A|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E66A|225F9383|83935F;
                        REP #$30                             ;81E66E|C230    |      ;
                        LDA.W #$0040                         ;81E670|A94000  |      ;
                        EOR.W #$FFFF                         ;81E673|49FFFF  |      ;
                        AND.B $D2                            ;81E676|25D2    |0000D2;
                        STA.B $D2                            ;81E678|85D2    |0000D2;
-                       JMP.W CODE_81E69F                    ;81E67A|4C9FE6  |81E69F;
+                       JMP.W .justReturn                    ;81E67A|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E67D:
+               .case4:
                        SEP #$20                             ;81E67D|E220    |      ;
                        LDA.B #$02                           ;81E67F|A902    |      ;
                        STA.W $019A                          ;81E681|8D9A01  |00019A;
                        LDX.W #$0463                         ;81E684|A26304  |      ;
                        LDA.B #$00                           ;81E687|A900    |      ;
                        STA.W $0191                          ;81E689|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E68C|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E68C|225F9383|83935F;
                        REP #$30                             ;81E690|C230    |      ;
                        LDA.W #$0040                         ;81E692|A94000  |      ;
                        EOR.W #$FFFF                         ;81E695|49FFFF  |      ;
                        AND.B $D2                            ;81E698|25D2    |0000D2;
                        STA.B $D2                            ;81E69A|85D2    |0000D2;
-                       JMP.W CODE_81E69F                    ;81E69C|4C9FE6  |81E69F;
+                       JMP.W .justReturn                    ;81E69C|4C9FE6  |81E69F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E69F:
+          .justReturn:
                        RTS                                  ;81E69F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E6A0:
-                       JSL.L CODE_8393F9                    ;81E6A0|22F99383|8393F9;
+              .return:
+                       JSL.L fUnknown_8393F9                ;81E6A0|22F99383|8393F9;
                        SEP #$20                             ;81E6A4|E220    |      ;
                        LDA.B #$01                           ;81E6A6|A901    |      ;
                        STA.W $019A                          ;81E6A8|8D9A01  |00019A;
@@ -12504,15 +12460,15 @@ subUnknown81D593_0x42:
                        REP #$10                             ;81E6EC|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81E6EE|AD6F09  |00096F;
                        CMP.B #$01                           ;81E6F1|C901    |      ;
-                       BEQ CODE_81E732                      ;81E6F3|F03D    |81E732;
+                       BEQ .case1                           ;81E6F3|F03D    |81E732;
                        CMP.B #$02                           ;81E6F5|C902    |      ;
-                       BEQ CODE_81E762                      ;81E6F7|F069    |81E762;
+                       BEQ .case2                           ;81E6F7|F069    |81E762;
                        CMP.B #$03                           ;81E6F9|C903    |      ;
-                       BNE CODE_81E700                      ;81E6FB|D003    |81E700;
-                       JMP.W CODE_81E791                    ;81E6FD|4C91E7  |81E791;
+                       BNE .default                         ;81E6FB|D003    |81E700;
+                       JMP.W .case3                         ;81E6FD|4C91E7  |81E791;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E700:
+             .default:
                        REP #$30                             ;81E700|C230    |      ;
                        LDA.B $D2                            ;81E702|A5D2    |0000D2;
                        ORA.W #$0080                         ;81E704|098000  |      ;
@@ -12530,46 +12486,44 @@ subUnknown81D593_0x42:
                        INC.W nJumpTable81D593Arg2           ;81E721|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81E724|AD7009  |000970;
                        CMP.B #$20                           ;81E727|C920    |      ;
-                       BNE CODE_81E79D                      ;81E729|D072    |81E79D;
+                       BNE .return                          ;81E729|D072    |81E79D;
                        LDA.B #$01                           ;81E72B|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E72D|8D6F09  |00096F;
-                       BRA CODE_81E79D                      ;81E730|806B    |81E79D;
+                       BRA .return                          ;81E730|806B    |81E79D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E732:
+               .case1:
                        SEP #$20                             ;81E732|E220    |      ;
                        LDX.W #$030C                         ;81E734|A20C03  |      ;
                        LDA.L sShedItems+1                   ;81E737|AF011F7F|7F1F01;
                        AND.B #$04                           ;81E73B|2904    |      ;
-                       BNE CODE_81E749                      ;81E73D|D00A    |81E749;
+                       BNE +                                ;81E73D|D00A    |81E749;
                        LDA.W nToolEquipped                  ;81E73F|AD2109  |000921;
                        CMP.B #$0B                           ;81E742|C90B    |      ;
-                       BEQ CODE_81E749                      ;81E744|F003    |81E749;
+                       BEQ +                                ;81E744|F003    |81E749;
                        LDX.W #$010E                         ;81E746|A20E01  |      ;
                                                             ;      |        |      ;
-          CODE_81E749:
-                       SEP #$20                             ;81E749|E220    |      ;
+                     + SEP #$20                             ;81E749|E220    |      ;
                        LDA.B #$02                           ;81E74B|A902    |      ;
                        STA.W $019A                          ;81E74D|8D9A01  |00019A;
                        LDA.B #$00                           ;81E750|A900    |      ;
                        STA.W $0191                          ;81E752|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E755|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E755|225F9383|83935F;
                        SEP #$20                             ;81E759|E220    |      ;
                        LDA.B #$02                           ;81E75B|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E75D|8D6F09  |00096F;
-                       BRA CODE_81E79D                      ;81E760|803B    |81E79D;
+                       BRA .return                          ;81E760|803B    |81E79D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E762:
+               .case2:
                        SEP #$20                             ;81E762|E220    |      ;
                        LDA.W $019A                          ;81E764|AD9A01  |00019A;
                        CMP.B #$02                           ;81E767|C902    |      ;
-                       BNE CODE_81E76E                      ;81E769|D003    |81E76E;
-                       JMP.W CODE_81E79D                    ;81E76B|4C9DE7  |81E79D;
+                       BNE +                                ;81E769|D003    |81E76E;
+                       JMP.W .return                        ;81E76B|4C9DE7  |81E79D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E76E:
-                       SEP #$20                             ;81E76E|E220    |      ;
+                     + SEP #$20                             ;81E76E|E220    |      ;
                        LDA.B #$03                           ;81E770|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E772|8D6F09  |00096F;
                        LDA.B #$01                           ;81E775|A901    |      ;
@@ -12581,17 +12535,17 @@ subUnknown81D593_0x42:
                        LDA.W $0196                          ;81E786|AD9601  |000196;
                        ORA.W #$2000                         ;81E789|090020  |      ;
                        STA.W $0196                          ;81E78C|8D9601  |000196;
-                       BRA CODE_81E79D                      ;81E78F|800C    |81E79D;
+                       BRA .return                          ;81E78F|800C    |81E79D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E791:
+               .case3:
                        REP #$30                             ;81E791|C230    |      ;
                        LDA.W #$0040                         ;81E793|A94000  |      ;
                        EOR.W #$FFFF                         ;81E796|49FFFF  |      ;
                        AND.B $D2                            ;81E799|25D2    |0000D2;
                        STA.B $D2                            ;81E79B|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81E79D:
+              .return:
                        RTS                                  ;81E79D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12600,71 +12554,61 @@ subUnknown81D593_0x43:
                        REP #$10                             ;81E7A0|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81E7A2|AD6F09  |00096F;
                        CMP.B #$01                           ;81E7A5|C901    |      ;
-                       BNE CODE_81E7AC                      ;81E7A7|D003    |81E7AC;
-                       JMP.W CODE_81E866                    ;81E7A9|4C66E8  |81E866;
+                       BNE +                                ;81E7A7|D003    |81E7AC;
+                       JMP.W .case1                         ;81E7A9|4C66E8  |81E866;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7AC:
-                       CMP.B #$02                           ;81E7AC|C902    |      ;
-                       BNE CODE_81E7B3                      ;81E7AE|D003    |81E7B3;
-                       JMP.W CODE_81E910                    ;81E7B0|4C10E9  |81E910;
+                     + CMP.B #$02                           ;81E7AC|C902    |      ;
+                       BNE +                                ;81E7AE|D003    |81E7B3;
+                       JMP.W .case2                         ;81E7B0|4C10E9  |81E910;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7B3:
-                       CMP.B #$03                           ;81E7B3|C903    |      ;
-                       BNE CODE_81E7BA                      ;81E7B5|D003    |81E7BA;
-                       JMP.W CODE_81E95D                    ;81E7B7|4C5DE9  |81E95D;
+                     + CMP.B #$03                           ;81E7B3|C903    |      ;
+                       BNE +                                ;81E7B5|D003    |81E7BA;
+                       JMP.W .case3                         ;81E7B7|4C5DE9  |81E95D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7BA:
-                       CMP.B #$04                           ;81E7BA|C904    |      ;
-                       BNE CODE_81E7C1                      ;81E7BC|D003    |81E7C1;
-                       JMP.W CODE_81E9E2                    ;81E7BE|4CE2E9  |81E9E2;
+                     + CMP.B #$04                           ;81E7BA|C904    |      ;
+                       BNE +                                ;81E7BC|D003    |81E7C1;
+                       JMP.W .case4                         ;81E7BE|4CE2E9  |81E9E2;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7C1:
-                       CMP.B #$05                           ;81E7C1|C905    |      ;
-                       BNE CODE_81E7C8                      ;81E7C3|D003    |81E7C8;
-                       JMP.W CODE_81EA11                    ;81E7C5|4C11EA  |81EA11;
+                     + CMP.B #$05                           ;81E7C1|C905    |      ;
+                       BNE +                                ;81E7C3|D003    |81E7C8;
+                       JMP.W .case5                         ;81E7C5|4C11EA  |81EA11;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7C8:
-                       CMP.B #$06                           ;81E7C8|C906    |      ;
-                       BNE CODE_81E7CF                      ;81E7CA|D003    |81E7CF;
-                       JMP.W CODE_81EA42                    ;81E7CC|4C42EA  |81EA42;
+                     + CMP.B #$06                           ;81E7C8|C906    |      ;
+                       BNE +                                ;81E7CA|D003    |81E7CF;
+                       JMP.W .case6                         ;81E7CC|4C42EA  |81EA42;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7CF:
-                       CMP.B #$07                           ;81E7CF|C907    |      ;
-                       BNE CODE_81E7D6                      ;81E7D1|D003    |81E7D6;
-                       JMP.W CODE_81EA8E                    ;81E7D3|4C8EEA  |81EA8E;
+                     + CMP.B #$07                           ;81E7CF|C907    |      ;
+                       BNE +                                ;81E7D1|D003    |81E7D6;
+                       JMP.W .case7                         ;81E7D3|4C8EEA  |81EA8E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7D6:
-                       CMP.B #$08                           ;81E7D6|C908    |      ;
-                       BNE CODE_81E7DD                      ;81E7D8|D003    |81E7DD;
-                       JMP.W CODE_81EABA                    ;81E7DA|4CBAEA  |81EABA;
+                     + CMP.B #$08                           ;81E7D6|C908    |      ;
+                       BNE +                                ;81E7D8|D003    |81E7DD;
+                       JMP.W .case8                         ;81E7DA|4CBAEA  |81EABA;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7DD:
-                       CMP.B #$09                           ;81E7DD|C909    |      ;
-                       BNE CODE_81E7E4                      ;81E7DF|D003    |81E7E4;
-                       JMP.W CODE_81EB07                    ;81E7E1|4C07EB  |81EB07;
+                     + CMP.B #$09                           ;81E7DD|C909    |      ;
+                       BNE +                                ;81E7DF|D003    |81E7E4;
+                       JMP.W .case9                         ;81E7E1|4C07EB  |81EB07;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7E4:
-                       CMP.B #$0A                           ;81E7E4|C90A    |      ;
-                       BNE CODE_81E7EB                      ;81E7E6|D003    |81E7EB;
-                       JMP.W CODE_81EB8F                    ;81E7E8|4C8FEB  |81EB8F;
+                     + CMP.B #$0A                           ;81E7E4|C90A    |      ;
+                       BNE +                                ;81E7E6|D003    |81E7EB;
+                       JMP.W .caseA                         ;81E7E8|4C8FEB  |81EB8F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7EB:
-                       CMP.B #$0B                           ;81E7EB|C90B    |      ;
-                       BNE CODE_81E7F2                      ;81E7ED|D003    |81E7F2;
-                       JMP.W CODE_81EBBF                    ;81E7EF|4CBFEB  |81EBBF;
+                     + CMP.B #$0B                           ;81E7EB|C90B    |      ;
+                       BNE .checks                          ;81E7ED|D003    |81E7F2;
+                       JMP.W .caseB                         ;81E7EF|4CBFEB  |81EBBF;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E7F2:
+              .checks:
                        SEP #$20                             ;81E7F2|E220    |      ;
                        LDA.B #$00                           ;81E7F4|A900    |      ;
                        XBA                                  ;81E7F6|EB      |      ;
@@ -12672,22 +12616,22 @@ subUnknown81D593_0x43:
                        SEC                                  ;81E7FA|38      |      ;
                        SBC.B #$18                           ;81E7FB|E918    |      ;
                        REP #$20                             ;81E7FD|C220    |      ;
-                       JSL.L fGetCowPointer                 ;81E7FF|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;81E7FF|22A7C983|83C9A7;
                        SEP #$20                             ;81E803|E220    |      ;
                        LDY.W #$0000                         ;81E805|A00000  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;81E808|B772    |000072;
                        AND.B #$06                           ;81E80A|2906    |      ;
-                       BNE CODE_81E84D                      ;81E80C|D03F    |81E84D;
+                       BNE .failCheck                       ;81E80C|D03F    |81E84D;
                        LDA.B [ptrUnknown0x72],Y             ;81E80E|B772    |000072;
                        AND.B #$70                           ;81E810|2970    |      ;
-                       BNE CODE_81E84D                      ;81E812|D039    |81E84D;
+                       BNE .failCheck                       ;81E812|D039    |81E84D;
                        SEP #$20                             ;81E814|E220    |      ;
                        LDA.L nCurrentYearID                 ;81E816|AF181F7F|7F1F18;
-                       BEQ CODE_81E84D                      ;81E81A|F031    |81E84D;
+                       BEQ .failCheck                       ;81E81A|F031    |81E84D;
                        REP #$30                             ;81E81C|C230    |      ;
                        LDA.L MarriedGirlID                  ;81E81E|AF661F7F|7F1F66;
                        AND.W #$8000                         ;81E822|290080  |      ;
-                       BNE CODE_81E84D                      ;81E825|D026    |81E84D;
+                       BNE .failCheck                       ;81E825|D026    |81E84D;
                        REP #$20                             ;81E827|C220    |      ;
                        LDA.L MarriedGirlID                  ;81E829|AF661F7F|7F1F66;
                        ORA.W #$8000                         ;81E82D|090080  |      ;
@@ -12700,10 +12644,10 @@ subUnknown81D593_0x43:
                        SEP #$20                             ;81E843|E220    |      ;
                        LDA.B #$07                           ;81E845|A907    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E847|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E84A|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E84A|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E84D:
+           .failCheck:
                        REP #$20                             ;81E84D|C220    |      ;
                        LDA.W #$0007                         ;81E84F|A90700  |      ;
                        LDX.W #$0000                         ;81E852|A20000  |      ;
@@ -12712,23 +12656,22 @@ subUnknown81D593_0x43:
                        SEP #$20                             ;81E85C|E220    |      ;
                        LDA.B #$01                           ;81E85E|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E860|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E863|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E863|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E866:
+               .case1:
                        SEP #$20                             ;81E866|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81E868|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81E86B|AD7009  |000970;
                        CMP.B #$40                           ;81E86E|C940    |      ;
-                       BEQ CODE_81E875                      ;81E870|F003    |81E875;
-                       JMP.W CODE_81EBD4                    ;81E872|4CD4EB  |81EBD4;
+                       BEQ +                                ;81E870|F003    |81E875;
+                       JMP.W .return                        ;81E872|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E875:
-                       REP #$20                             ;81E875|C220    |      ;
+                     + REP #$20                             ;81E875|C220    |      ;
                        LDA.L $7F1F60                        ;81E877|AF601F7F|7F1F60;
                        AND.W #$2000                         ;81E87B|290020  |      ;
-                       BNE CODE_81E8F1                      ;81E87E|D071    |81E8F1;
+                       BNE .label17                         ;81E87E|D071    |81E8F1;
                        SEP #$20                             ;81E880|E220    |      ;
                        LDA.B #$02                           ;81E882|A902    |      ;
                        STA.W $019A                          ;81E884|8D9A01  |00019A;
@@ -12739,114 +12682,111 @@ subUnknown81D593_0x43:
                        SEC                                  ;81E88F|38      |      ;
                        SBC.B #$18                           ;81E890|E918    |      ;
                        REP #$20                             ;81E892|C220    |      ;
-                       JSL.L fGetCowPointer                 ;81E894|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;81E894|22A7C983|83C9A7;
                        SEP #$20                             ;81E898|E220    |      ;
                        LDY.W #$0000                         ;81E89A|A00000  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;81E89D|B772    |000072;
                        AND.B #$06                           ;81E89F|2906    |      ;
-                       BNE CODE_81E8C1                      ;81E8A1|D01E    |81E8C1;
+                       BNE .label15                         ;81E8A1|D01E    |81E8C1;
                        LDA.B [ptrUnknown0x72],Y             ;81E8A3|B772    |000072;
                        AND.B #$70                           ;81E8A5|2970    |      ;
-                       BNE CODE_81E8D9                      ;81E8A7|D030    |81E8D9;
+                       BNE .label16                         ;81E8A7|D030    |81E8D9;
                        LDX.W #$030E                         ;81E8A9|A20E03  |      ;
                        SEP #$20                             ;81E8AC|E220    |      ;
                        LDA.B #$00                           ;81E8AE|A900    |      ;
                        STA.W $0191                          ;81E8B0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E8B3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E8B3|225F9383|83935F;
                        SEP #$20                             ;81E8B7|E220    |      ;
                        LDA.B #$02                           ;81E8B9|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E8BB|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E8BE|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E8BE|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E8C1:
-                       LDX.W #$0310                         ;81E8C1|A21003  |      ;
+             .label15:
+                       LDX.W #$0310                         ;81E8C1|A21003  |      ; TEXT_B9C65A
                        SEP #$20                             ;81E8C4|E220    |      ;
                        LDA.B #$00                           ;81E8C6|A900    |      ;
                        STA.W $0191                          ;81E8C8|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E8CB|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E8CB|225F9383|83935F;
                        SEP #$20                             ;81E8CF|E220    |      ;
                        LDA.B #$05                           ;81E8D1|A905    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E8D3|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E8D6|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E8D6|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E8D9:
-                       LDX.W #$030D                         ;81E8D9|A20D03  |      ;
+             .label16:
+                       LDX.W #$030D                         ;81E8D9|A20D03  |      ; TEXT_B9C3EA
                        SEP #$20                             ;81E8DC|E220    |      ;
                        LDA.B #$00                           ;81E8DE|A900    |      ;
                        STA.W $0191                          ;81E8E0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E8E3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E8E3|225F9383|83935F;
                        SEP #$20                             ;81E8E7|E220    |      ;
                        LDA.B #$05                           ;81E8E9|A905    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E8EB|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E8EE|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E8EE|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E8F1:
-                       REP #$30                             ;81E8F1|C230    |      ;
+             .label17:
+                       REP #$30                             ;81E8F1|C230    |      ; TEXT_BBB4B6
                        LDX.W #$0487                         ;81E8F3|A28704  |      ;
                        SEP #$20                             ;81E8F6|E220    |      ;
                        LDA.B #$02                           ;81E8F8|A902    |      ;
                        STA.W $019A                          ;81E8FA|8D9A01  |00019A;
                        LDA.B #$00                           ;81E8FD|A900    |      ;
                        STA.W $0191                          ;81E8FF|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E902|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E902|225F9383|83935F;
                        SEP #$20                             ;81E906|E220    |      ;
                        LDA.B #$05                           ;81E908|A905    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E90A|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E90D|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E90D|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E910:
+               .case2:
                        SEP #$20                             ;81E910|E220    |      ;
                        LDA.W $019A                          ;81E912|AD9A01  |00019A;
                        CMP.B #$02                           ;81E915|C902    |      ;
-                       BNE CODE_81E91C                      ;81E917|D003    |81E91C;
-                       JMP.W CODE_81EBD4                    ;81E919|4CD4EB  |81EBD4;
+                       BNE +                                ;81E917|D003    |81E91C;
+                       JMP.W .return                        ;81E919|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E91C:
-                       SEP #$20                             ;81E91C|E220    |      ;
+                     + SEP #$20                             ;81E91C|E220    |      ;
                        LDA.W $018F                          ;81E91E|AD8F01  |00018F;
-                       BNE CODE_81E940                      ;81E921|D01D    |81E940;
+                       BNE +                                ;81E921|D01D    |81E940;
                        SEP #$20                             ;81E923|E220    |      ;
                        LDA.B #$02                           ;81E925|A902    |      ;
                        STA.W $019A                          ;81E927|8D9A01  |00019A;
                        LDX.W #$030F                         ;81E92A|A20F03  |      ;
                        LDA.B #$00                           ;81E92D|A900    |      ;
                        STA.W $0191                          ;81E92F|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E932|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E932|225F9383|83935F;
                        SEP #$20                             ;81E936|E220    |      ;
                        LDA.B #$03                           ;81E938|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E93A|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E93D|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E93D|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E940:
-                       SEP #$20                             ;81E940|E220    |      ;
+                     + SEP #$20                             ;81E940|E220    |      ;
                        LDA.B #$02                           ;81E942|A902    |      ;
                        STA.W $019A                          ;81E944|8D9A01  |00019A;
                        LDX.W #$0309                         ;81E947|A20903  |      ;
                        LDA.B #$00                           ;81E94A|A900    |      ;
                        STA.W $0191                          ;81E94C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81E94F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81E94F|225F9383|83935F;
                        SEP #$20                             ;81E953|E220    |      ;
                        LDA.B #$05                           ;81E955|A905    |      ;
                        STA.W nJumpTable81D593Arg1           ;81E957|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81E95A|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E95A|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E95D:
+               .case3:
                        SEP #$20                             ;81E95D|E220    |      ;
                        LDA.W $019A                          ;81E95F|AD9A01  |00019A;
                        CMP.B #$02                           ;81E962|C902    |      ;
-                       BNE CODE_81E969                      ;81E964|D003    |81E969;
-                       JMP.W CODE_81EBD4                    ;81E966|4CD4EB  |81EBD4;
+                       BNE +                                ;81E964|D003    |81E969;
+                       JMP.W .return                        ;81E966|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E969:
-                       REP #$20                             ;81E969|C220    |      ;
+                     + REP #$20                             ;81E969|C220    |      ;
                        LDA.L $7F1F15                        ;81E96B|AF151F7F|7F1F15;
                        STA.B ptrUnknown0x72                 ;81E96F|8572    |000072;
                        SEP #$20                             ;81E971|E220    |      ;
@@ -12867,7 +12807,7 @@ subUnknown81D593_0x43:
                        LDA.W $09A0                          ;81E99A|ADA009  |0009A0;
                        LDX.W #$0000                         ;81E99D|A20000  |      ;
                        LDY.W #$0022                         ;81E9A0|A02200  |      ;
-                       JSL.L CODE_84803F                    ;81E9A3|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81E9A3|223F8084|84803F;
                        SEP #$20                             ;81E9A7|E220    |      ;
                        LDA.B #$00                           ;81E9A9|A900    |      ;
                        XBA                                  ;81E9AB|EB      |      ;
@@ -12875,7 +12815,7 @@ subUnknown81D593_0x43:
                        SEC                                  ;81E9AF|38      |      ;
                        SBC.B #$18                           ;81E9B0|E918    |      ;
                        REP #$20                             ;81E9B2|C220    |      ;
-                       JSL.L fGetCowPointer                 ;81E9B4|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;81E9B4|22A7C983|83C9A7;
                        SEP #$20                             ;81E9B8|E220    |      ;
                        LDY.W #$0000                         ;81E9BA|A00000  |      ;
                        LDA.B #$00                           ;81E9BD|A900    |      ;
@@ -12891,46 +12831,43 @@ subUnknown81D593_0x43:
                        REP #$20                             ;81E9D6|C220    |      ;
                        LDA.W #$FFCE                         ;81E9D8|A9CEFF  |      ;
                        JSL.L fUnknown_83B282                ;81E9DB|2282B283|83B282;
-                       JMP.W CODE_81EBD4                    ;81E9DF|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81E9DF|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E9E2:
+               .case4:
                        SEP #$20                             ;81E9E2|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81E9E4|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81E9E7|AD7009  |000970;
                        CMP.B #$42                           ;81E9EA|C942    |      ;
-                       BEQ CODE_81E9F1                      ;81E9EC|F003    |81E9F1;
-                       JMP.W CODE_81EBD4                    ;81E9EE|4CD4EB  |81EBD4;
+                       BEQ +                                ;81E9EC|F003    |81E9F1;
+                       JMP.W .return                        ;81E9EE|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81E9F1:
-                       STZ.W nJumpTable81D593Arg2           ;81E9F1|9C7009  |000970;
+                     + STZ.W nJumpTable81D593Arg2           ;81E9F1|9C7009  |000970;
                        REP #$20                             ;81E9F4|C220    |      ;
                        LDA.L $7F1F60                        ;81E9F6|AF601F7F|7F1F60;
                        AND.W #$2000                         ;81E9FA|290020  |      ;
-                       BEQ CODE_81EA02                      ;81E9FD|F003    |81EA02;
-                       JMP.W CODE_81E84D                    ;81E9FF|4C4DE8  |81E84D;
+                       BEQ +                                ;81E9FD|F003    |81EA02;
+                       JMP.W .failCheck                     ;81E9FF|4C4DE8  |81E84D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA02:
-                       REP #$30                             ;81EA02|C230    |      ;
+                     + REP #$30                             ;81EA02|C230    |      ;
                        LDA.W #$0040                         ;81EA04|A94000  |      ;
                        EOR.W #$FFFF                         ;81EA07|49FFFF  |      ;
                        AND.B $D2                            ;81EA0A|25D2    |0000D2;
                        STA.B $D2                            ;81EA0C|85D2    |0000D2;
-                       JMP.W CODE_81EBD4                    ;81EA0E|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EA0E|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA11:
+               .case5:
                        SEP #$20                             ;81EA11|E220    |      ;
                        LDA.W $019A                          ;81EA13|AD9A01  |00019A;
                        CMP.B #$02                           ;81EA16|C902    |      ;
-                       BNE CODE_81EA1D                      ;81EA18|D003    |81EA1D;
-                       JMP.W CODE_81EBD4                    ;81EA1A|4CD4EB  |81EBD4;
+                       BNE +                                ;81EA18|D003    |81EA1D;
+                       JMP.W .return                        ;81EA1A|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA1D:
-                       REP #$20                             ;81EA1D|C220    |      ;
+                     + REP #$20                             ;81EA1D|C220    |      ;
                        LDA.W #$0007                         ;81EA1F|A90700  |      ;
                        JSL.L fUnknown_848020                ;81EA22|22208084|848020;
                        REP #$20                             ;81EA26|C220    |      ;
@@ -12942,20 +12879,19 @@ subUnknown81D593_0x43:
                        LDA.B #$06                           ;81EA37|A906    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EA39|8D6F09  |00096F;
                        STZ.W nJumpTable81D593Arg2           ;81EA3C|9C7009  |000970;
-                       JMP.W CODE_81EBD4                    ;81EA3F|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EA3F|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA42:
+               .case6:
                        SEP #$20                             ;81EA42|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EA44|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EA47|AD7009  |000970;
                        CMP.B #$40                           ;81EA4A|C940    |      ;
-                       BEQ CODE_81EA51                      ;81EA4C|F003    |81EA51;
-                       JMP.W CODE_81EBD4                    ;81EA4E|4CD4EB  |81EBD4;
+                       BEQ +                                ;81EA4C|F003    |81EA51;
+                       JMP.W .return                        ;81EA4E|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA51:
-                       REP #$30                             ;81EA51|C230    |      ;
+                     + REP #$30                             ;81EA51|C230    |      ;
                        LDA.W #$0040                         ;81EA53|A94000  |      ;
                        EOR.W #$FFFF                         ;81EA56|49FFFF  |      ;
                        AND.B $D2                            ;81EA59|25D2    |0000D2;
@@ -12963,12 +12899,11 @@ subUnknown81D593_0x43:
                        REP #$20                             ;81EA5D|C220    |      ;
                        LDA.L $7F1F60                        ;81EA5F|AF601F7F|7F1F60;
                        AND.W #$2000                         ;81EA63|290020  |      ;
-                       BEQ CODE_81EA6B                      ;81EA66|F003    |81EA6B;
-                       JMP.W CODE_81EBD4                    ;81EA68|4CD4EB  |81EBD4;
+                       BEQ +                                ;81EA66|F003    |81EA6B;
+                       JMP.W .return                        ;81EA68|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA6B:
-                       SEP #$20                             ;81EA6B|E220    |      ;
+                     + SEP #$20                             ;81EA6B|E220    |      ;
                        LDA.B #$00                           ;81EA6D|A900    |      ;
                        XBA                                  ;81EA6F|EB      |      ;
                        LDA.W $09A0                          ;81EA70|ADA009  |0009A0;
@@ -12982,82 +12917,77 @@ subUnknown81D593_0x43:
                        REP #$10                             ;81EA84|C210    |      ;
                        LDY.W #$0001                         ;81EA86|A00100  |      ;
                        STA.B [ptrUnknown0xCC],Y             ;81EA89|97CC    |0000CC;
-                       JMP.W CODE_81EBD4                    ;81EA8B|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EA8B|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA8E:
+               .case7:
                        SEP #$20                             ;81EA8E|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EA90|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EA93|AD7009  |000970;
                        CMP.B #$42                           ;81EA96|C942    |      ;
-                       BEQ CODE_81EA9D                      ;81EA98|F003    |81EA9D;
-                       JMP.W CODE_81EBD4                    ;81EA9A|4CD4EB  |81EBD4;
+                       BEQ +                                ;81EA98|F003    |81EA9D;
+                       JMP.W .return                        ;81EA9A|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EA9D:
-                       LDX.W #$0149                         ;81EA9D|A24901  |      ;
+                     + LDX.W #$0149                         ;81EA9D|A24901  |      ;
                        SEP #$20                             ;81EAA0|E220    |      ;
                        LDA.B #$02                           ;81EAA2|A902    |      ;
                        STA.W $019A                          ;81EAA4|8D9A01  |00019A;
                        LDA.B #$00                           ;81EAA7|A900    |      ;
                        STA.W $0191                          ;81EAA9|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81EAAC|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81EAAC|225F9383|83935F;
                        SEP #$20                             ;81EAB0|E220    |      ;
                        LDA.B #$08                           ;81EAB2|A908    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EAB4|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81EAB7|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EAB7|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EABA:
+               .case8:
                        SEP #$20                             ;81EABA|E220    |      ;
                        LDA.W $019A                          ;81EABC|AD9A01  |00019A;
                        CMP.B #$02                           ;81EABF|C902    |      ;
-                       BNE CODE_81EAC6                      ;81EAC1|D003    |81EAC6;
-                       JMP.W CODE_81EBD4                    ;81EAC3|4CD4EB  |81EBD4;
+                       BNE +                                ;81EAC1|D003    |81EAC6;
+                       JMP.W .return                        ;81EAC3|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EAC6:
-                       SEP #$20                             ;81EAC6|E220    |      ;
+                     + SEP #$20                             ;81EAC6|E220    |      ;
                        LDA.W $018F                          ;81EAC8|AD8F01  |00018F;
-                       BNE CODE_81EAEA                      ;81EACB|D01D    |81EAEA;
+                       BNE +                                ;81EACB|D01D    |81EAEA;
                        SEP #$20                             ;81EACD|E220    |      ;
                        LDA.B #$02                           ;81EACF|A902    |      ;
                        STA.W $019A                          ;81EAD1|8D9A01  |00019A;
                        LDX.W #$014B                         ;81EAD4|A24B01  |      ;
                        LDA.B #$00                           ;81EAD7|A900    |      ;
                        STA.W $0191                          ;81EAD9|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81EADC|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81EADC|225F9383|83935F;
                        SEP #$20                             ;81EAE0|E220    |      ;
                        LDA.B #$09                           ;81EAE2|A909    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EAE4|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81EAE7|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EAE7|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EAEA:
-                       SEP #$20                             ;81EAEA|E220    |      ;
-                       LDA.W #$8D02                         ;81EAEC|A9028D  |      ;
-                       TXS                                  ;81EAEF|9A      |      ;
-                       ORA.B ($A2,X)                        ;81EAF0|01A2    |0000A2;
-                       JMP.W LOOSE_OP_81A901                ;81EAF2|4C01A9  |81A901;
-                                                            ;      |        |      ;
-                       db $00,$8D,$91,$01                   ;81EAF5|        |      ;
-                       JSL.L fDialogRelated_83935F          ;81EAF9|225F9383|83935F;
+                     + SEP #$20                             ;81EAEA|E220    |      ;
+                       LDA.B #$02                           ;81EAEC|A902    |      ;
+                       STA.W $019A                          ;81EAEE|8D9A01  |00019A;
+                       LDX.W #$014C                         ;81EAF1|A24C01  |      ;
+                       LDA.B #$00                           ;81EAF4|A900    |      ;
+                       STA.W $0191                          ;81EAF6|8D9101  |000191;
+                       JSL.L fLoadDialog                    ;81EAF9|225F9383|83935F;
                        SEP #$20                             ;81EAFD|E220    |      ;
                        LDA.B #$0A                           ;81EAFF|A90A    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EB01|8D6F09  |00096F;
-                       JMP.W CODE_81EBD4                    ;81EB04|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EB04|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EB07:
+               .case9:
                        SEP #$20                             ;81EB07|E220    |      ;
                        LDA.W $019A                          ;81EB09|AD9A01  |00019A;
                        CMP.B #$02                           ;81EB0C|C902    |      ;
-                       BNE CODE_81EB13                      ;81EB0E|D003    |81EB13;
-                       JMP.W CODE_81EBD4                    ;81EB10|4CD4EB  |81EBD4;
+                       BNE +                                ;81EB0E|D003    |81EB13;
+                       JMP.W .return                        ;81EB10|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EB13:
-                       REP #$20                             ;81EB13|C220    |      ;
+                     + REP #$20                             ;81EB13|C220    |      ;
                        LDA.W #$0008                         ;81EB15|A90800  |      ;
                        JSL.L fUnknown_848020                ;81EB18|22208084|848020;
                        REP #$20                             ;81EB1C|C220    |      ;
@@ -13071,7 +13001,7 @@ subUnknown81D593_0x43:
                        LDA.W $09A0                          ;81EB30|ADA009  |0009A0;
                        LDX.W #$0000                         ;81EB33|A20000  |      ;
                        LDY.W #$0022                         ;81EB36|A02200  |      ;
-                       JSL.L CODE_84803F                    ;81EB39|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81EB39|223F8084|84803F;
                        SEP #$20                             ;81EB3D|E220    |      ;
                        LDA.B #$00                           ;81EB3F|A900    |      ;
                        XBA                                  ;81EB41|EB      |      ;
@@ -13079,7 +13009,7 @@ subUnknown81D593_0x43:
                        SEC                                  ;81EB45|38      |      ;
                        SBC.B #$18                           ;81EB46|E918    |      ;
                        REP #$20                             ;81EB48|C220    |      ;
-                       JSL.L fGetCowPointer                 ;81EB4A|22A7C983|83C9A7;
+                       JSL.L fGetCowDataPointer             ;81EB4A|22A7C983|83C9A7;
                        SEP #$20                             ;81EB4E|E220    |      ;
                        LDY.W #$0000                         ;81EB50|A00000  |      ;
                        LDA.B #$00                           ;81EB53|A900    |      ;
@@ -13102,19 +13032,18 @@ subUnknown81D593_0x43:
                        LDA.L $7F1F60                        ;81EB81|AF601F7F|7F1F60;
                        ORA.W #$2000                         ;81EB85|090020  |      ;
                        STA.L $7F1F60                        ;81EB88|8F601F7F|7F1F60;
-                       JMP.W CODE_81EBD4                    ;81EB8C|4CD4EB  |81EBD4;
+                       JMP.W .return                        ;81EB8C|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EB8F:
+               .caseA:
                        SEP #$20                             ;81EB8F|E220    |      ;
                        LDA.W $019A                          ;81EB91|AD9A01  |00019A;
                        CMP.B #$02                           ;81EB94|C902    |      ;
-                       BNE CODE_81EB9B                      ;81EB96|D003    |81EB9B;
-                       JMP.W CODE_81EBD4                    ;81EB98|4CD4EB  |81EBD4;
+                       BNE +                                ;81EB96|D003    |81EB9B;
+                       JMP.W .return                        ;81EB98|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EB9B:
-                       REP #$20                             ;81EB9B|C220    |      ;
+                     + REP #$20                             ;81EB9B|C220    |      ;
                        LDA.W #$0008                         ;81EB9D|A90800  |      ;
                        JSL.L fUnknown_848020                ;81EBA0|22208084|848020;
                        REP #$20                             ;81EBA4|C220    |      ;
@@ -13126,24 +13055,23 @@ subUnknown81D593_0x43:
                        LDA.B #$0B                           ;81EBB5|A90B    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EBB7|8D6F09  |00096F;
                        STZ.W nJumpTable81D593Arg2           ;81EBBA|9C7009  |000970;
-                       BRA CODE_81EBD4                      ;81EBBD|8015    |81EBD4;
+                       BRA .return                          ;81EBBD|8015    |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBBF:
+               .caseB:
                        SEP #$20                             ;81EBBF|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EBC1|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EBC4|AD7009  |000970;
                        CMP.B #$42                           ;81EBC7|C942    |      ;
-                       BEQ CODE_81EBCE                      ;81EBC9|F003    |81EBCE;
-                       JMP.W CODE_81EBD4                    ;81EBCB|4CD4EB  |81EBD4;
+                       BEQ +                                ;81EBC9|F003    |81EBCE;
+                       JMP.W .return                        ;81EBCB|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBCE:
-                       STZ.W nJumpTable81D593Arg2           ;81EBCE|9C7009  |000970;
-                       JMP.W CODE_81E84D                    ;81EBD1|4C4DE8  |81E84D;
+                     + STZ.W nJumpTable81D593Arg2           ;81EBCE|9C7009  |000970;
+                       JMP.W .failCheck                     ;81EBD1|4C4DE8  |81E84D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBD4:
+              .return:
                        RTS                                  ;81EBD4|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13152,79 +13080,69 @@ subUnknown81D593_0x44:
                        REP #$10                             ;81EBD7|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81EBD9|AD6F09  |00096F;
                        CMP.B #$01                           ;81EBDC|C901    |      ;
-                       BNE CODE_81EBE3                      ;81EBDE|D003    |81EBE3;
-                       JMP.W CODE_81EC7D                    ;81EBE0|4C7DEC  |81EC7D;
+                       BNE +                                ;81EBDE|D003    |81EBE3;
+                       JMP.W .case1                         ;81EBE0|4C7DEC  |81EC7D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBE3:
-                       CMP.B #$02                           ;81EBE3|C902    |      ;
-                       BNE CODE_81EBEA                      ;81EBE5|D003    |81EBEA;
-                       JMP.W CODE_81ECD3                    ;81EBE7|4CD3EC  |81ECD3;
+                     + CMP.B #$02                           ;81EBE3|C902    |      ;
+                       BNE +                                ;81EBE5|D003    |81EBEA;
+                       JMP.W .case2                         ;81EBE7|4CD3EC  |81ECD3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBEA:
-                       CMP.B #$03                           ;81EBEA|C903    |      ;
-                       BNE CODE_81EBF1                      ;81EBEC|D003    |81EBF1;
-                       JMP.W CODE_81ED20                    ;81EBEE|4C20ED  |81ED20;
+                     + CMP.B #$03                           ;81EBEA|C903    |      ;
+                       BNE +                                ;81EBEC|D003    |81EBF1;
+                       JMP.W .case3                         ;81EBEE|4C20ED  |81ED20;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBF1:
-                       CMP.B #$04                           ;81EBF1|C904    |      ;
-                       BNE CODE_81EBF8                      ;81EBF3|D003    |81EBF8;
-                       JMP.W CODE_81EDA5                    ;81EBF5|4CA5ED  |81EDA5;
+                     + CMP.B #$04                           ;81EBF1|C904    |      ;
+                       BNE +                                ;81EBF3|D003    |81EBF8;
+                       JMP.W .case4                         ;81EBF5|4CA5ED  |81EDA5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBF8:
-                       CMP.B #$05                           ;81EBF8|C905    |      ;
-                       BNE CODE_81EBFF                      ;81EBFA|D003    |81EBFF;
-                       JMP.W CODE_81EDD4                    ;81EBFC|4CD4ED  |81EDD4;
+                     + CMP.B #$05                           ;81EBF8|C905    |      ;
+                       BNE +                                ;81EBFA|D003    |81EBFF;
+                       JMP.W .case5                         ;81EBFC|4CD4ED  |81EDD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EBFF:
-                       CMP.B #$06                           ;81EBFF|C906    |      ;
-                       BNE CODE_81EC06                      ;81EC01|D003    |81EC06;
-                       JMP.W CODE_81EE05                    ;81EC03|4C05EE  |81EE05;
+                     + CMP.B #$06                           ;81EBFF|C906    |      ;
+                       BNE +                                ;81EC01|D003    |81EC06;
+                       JMP.W .case6                         ;81EC03|4C05EE  |81EE05;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC06:
-                       CMP.B #$07                           ;81EC06|C907    |      ;
-                       BNE CODE_81EC0D                      ;81EC08|D003    |81EC0D;
-                       JMP.W CODE_81EE51                    ;81EC0A|4C51EE  |81EE51;
+                     + CMP.B #$07                           ;81EC06|C907    |      ;
+                       BNE +                                ;81EC08|D003    |81EC0D;
+                       JMP.W .case7                         ;81EC0A|4C51EE  |81EE51;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC0D:
-                       CMP.B #$08                           ;81EC0D|C908    |      ;
-                       BNE CODE_81EC14                      ;81EC0F|D003    |81EC14;
-                       JMP.W CODE_81EE7D                    ;81EC11|4C7DEE  |81EE7D;
+                     + CMP.B #$08                           ;81EC0D|C908    |      ;
+                       BNE +                                ;81EC0F|D003    |81EC14;
+                       JMP.W .case8                         ;81EC11|4C7DEE  |81EE7D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC14:
-                       CMP.B #$09                           ;81EC14|C909    |      ;
-                       BNE CODE_81EC1B                      ;81EC16|D003    |81EC1B;
-                       JMP.W CODE_81EECA                    ;81EC18|4CCAEE  |81EECA;
+                     + CMP.B #$09                           ;81EC14|C909    |      ;
+                       BNE +                                ;81EC16|D003    |81EC1B;
+                       JMP.W .case9                         ;81EC18|4CCAEE  |81EECA;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC1B:
-                       CMP.B #$0A                           ;81EC1B|C90A    |      ;
-                       BNE CODE_81EC22                      ;81EC1D|D003    |81EC22;
-                       JMP.W CODE_81EF67                    ;81EC1F|4C67EF  |81EF67;
+                     + CMP.B #$0A                           ;81EC1B|C90A    |      ;
+                       BNE +                                ;81EC1D|D003    |81EC22;
+                       JMP.W .caseA                         ;81EC1F|4C67EF  |81EF67;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC22:
-                       CMP.B #$0B                           ;81EC22|C90B    |      ;
-                       BNE CODE_81EC29                      ;81EC24|D003    |81EC29;
-                       JMP.W CODE_81EF97                    ;81EC26|4C97EF  |81EF97;
+                     + CMP.B #$0B                           ;81EC22|C90B    |      ;
+                       BNE .checks                          ;81EC24|D003    |81EC29;
+                       JMP.W .caseB                         ;81EC26|4C97EF  |81EF97;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC29:
+              .checks:
                        SEP #$20                             ;81EC29|E220    |      ;
                        LDA.L nCurrentSeasonID               ;81EC2B|AF191F7F|7F1F19;
                        CMP.B #$02                           ;81EC2F|C902    |      ;
-                       BNE CODE_81EC64                      ;81EC31|D031    |81EC64;
+                       BNE .loop                            ;81EC31|D031    |81EC64;
                        REP #$30                             ;81EC33|C230    |      ;
                        LDA.L MarriedGirlID                  ;81EC35|AF661F7F|7F1F66;
                        AND.W #$4000                         ;81EC39|290040  |      ;
-                       BNE CODE_81EC64                      ;81EC3C|D026    |81EC64;
+                       BNE .loop                            ;81EC3C|D026    |81EC64;
                        REP #$20                             ;81EC3E|C220    |      ;
                        LDA.L MarriedGirlID                  ;81EC40|AF661F7F|7F1F66;
                        ORA.W #$4000                         ;81EC44|090040  |      ;
@@ -13237,10 +13155,10 @@ subUnknown81D593_0x44:
                        SEP #$20                             ;81EC5A|E220    |      ;
                        LDA.B #$07                           ;81EC5C|A907    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EC5E|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81EC61|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EC61|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC64:
+                .loop:
                        REP #$20                             ;81EC64|C220    |      ;
                        LDA.W #$0007                         ;81EC66|A90700  |      ;
                        LDX.W #$0000                         ;81EC69|A20000  |      ;
@@ -13249,100 +13167,95 @@ subUnknown81D593_0x44:
                        SEP #$20                             ;81EC73|E220    |      ;
                        LDA.B #$01                           ;81EC75|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EC77|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81EC7A|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EC7A|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC7D:
+               .case1:
                        SEP #$20                             ;81EC7D|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EC7F|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EC82|AD7009  |000970;
                        CMP.B #$42                           ;81EC85|C942    |      ;
-                       BEQ CODE_81EC8C                      ;81EC87|F003    |81EC8C;
-                       JMP.W CODE_81EFAC                    ;81EC89|4CACEF  |81EFAC;
+                       BEQ +                                ;81EC87|F003    |81EC8C;
+                       JMP.W .return                        ;81EC89|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EC8C:
-                       REP #$20                             ;81EC8C|C220    |      ;
+                     + REP #$20                             ;81EC8C|C220    |      ;
                        LDA.L $7F1F60                        ;81EC8E|AF601F7F|7F1F60;
                        AND.W #$1000                         ;81EC92|290010  |      ;
-                       BNE CODE_81ECB4                      ;81EC95|D01D    |81ECB4;
+                       BNE +                                ;81EC95|D01D    |81ECB4;
                        LDX.W #$030E                         ;81EC97|A20E03  |      ;
                        SEP #$20                             ;81EC9A|E220    |      ;
                        LDA.B #$02                           ;81EC9C|A902    |      ;
                        STA.W $019A                          ;81EC9E|8D9A01  |00019A;
                        LDA.B #$00                           ;81ECA1|A900    |      ;
                        STA.W $0191                          ;81ECA3|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81ECA6|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81ECA6|225F9383|83935F;
                        SEP #$20                             ;81ECAA|E220    |      ;
                        LDA.B #$02                           ;81ECAC|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81ECAE|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81ECB1|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81ECB1|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ECB4:
-                       REP #$30                             ;81ECB4|C230    |      ;
+                     + REP #$30                             ;81ECB4|C230    |      ;
                        LDX.W #$0487                         ;81ECB6|A28704  |      ;
                        SEP #$20                             ;81ECB9|E220    |      ;
                        LDA.B #$02                           ;81ECBB|A902    |      ;
                        STA.W $019A                          ;81ECBD|8D9A01  |00019A;
                        LDA.B #$00                           ;81ECC0|A900    |      ;
                        STA.W $0191                          ;81ECC2|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81ECC5|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81ECC5|225F9383|83935F;
                        SEP #$20                             ;81ECC9|E220    |      ;
                        LDA.B #$05                           ;81ECCB|A905    |      ;
                        STA.W nJumpTable81D593Arg1           ;81ECCD|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81ECD0|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81ECD0|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ECD3:
+               .case2:
                        SEP #$20                             ;81ECD3|E220    |      ;
                        LDA.W $019A                          ;81ECD5|AD9A01  |00019A;
                        CMP.B #$02                           ;81ECD8|C902    |      ;
-                       BNE CODE_81ECDF                      ;81ECDA|D003    |81ECDF;
-                       JMP.W CODE_81EFAC                    ;81ECDC|4CACEF  |81EFAC;
+                       BNE +                                ;81ECDA|D003    |81ECDF;
+                       JMP.W .return                        ;81ECDC|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ECDF:
-                       SEP #$20                             ;81ECDF|E220    |      ;
+                     + SEP #$20                             ;81ECDF|E220    |      ;
                        LDA.W $018F                          ;81ECE1|AD8F01  |00018F;
-                       BNE CODE_81ED03                      ;81ECE4|D01D    |81ED03;
+                       BNE +                                ;81ECE4|D01D    |81ED03;
                        SEP #$20                             ;81ECE6|E220    |      ;
                        LDA.B #$02                           ;81ECE8|A902    |      ;
                        STA.W $019A                          ;81ECEA|8D9A01  |00019A;
                        LDX.W #$030F                         ;81ECED|A20F03  |      ;
                        LDA.B #$00                           ;81ECF0|A900    |      ;
                        STA.W $0191                          ;81ECF2|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81ECF5|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81ECF5|225F9383|83935F;
                        SEP #$20                             ;81ECF9|E220    |      ;
                        LDA.B #$03                           ;81ECFB|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81ECFD|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81ED00|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81ED00|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ED03:
-                       SEP #$20                             ;81ED03|E220    |      ;
+                     + SEP #$20                             ;81ED03|E220    |      ;
                        LDA.B #$02                           ;81ED05|A902    |      ;
                        STA.W $019A                          ;81ED07|8D9A01  |00019A;
                        LDX.W #$0309                         ;81ED0A|A20903  |      ;
                        LDA.B #$00                           ;81ED0D|A900    |      ;
                        STA.W $0191                          ;81ED0F|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81ED12|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81ED12|225F9383|83935F;
                        SEP #$20                             ;81ED16|E220    |      ;
                        LDA.B #$05                           ;81ED18|A905    |      ;
                        STA.W nJumpTable81D593Arg1           ;81ED1A|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81ED1D|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81ED1D|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ED20:
+               .case3:
                        SEP #$20                             ;81ED20|E220    |      ;
                        LDA.W $019A                          ;81ED22|AD9A01  |00019A;
                        CMP.B #$02                           ;81ED25|C902    |      ;
-                       BNE CODE_81ED2C                      ;81ED27|D003    |81ED2C;
-                       JMP.W CODE_81EFAC                    ;81ED29|4CACEF  |81EFAC;
+                       BNE +                                ;81ED27|D003    |81ED2C;
+                       JMP.W .return                        ;81ED29|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81ED2C:
-                       REP #$20                             ;81ED2C|C220    |      ;
+                     + REP #$20                             ;81ED2C|C220    |      ;
                        LDA.L $7F1F15                        ;81ED2E|AF151F7F|7F1F15;
                        STA.B ptrUnknown0x72                 ;81ED32|8572    |000072;
                        SEP #$20                             ;81ED34|E220    |      ;
@@ -13363,7 +13276,7 @@ subUnknown81D593_0x44:
                        LDA.W $09A1                          ;81ED5D|ADA109  |0009A1;
                        LDX.W #$0000                         ;81ED60|A20000  |      ;
                        LDY.W #$0024                         ;81ED63|A02400  |      ;
-                       JSL.L CODE_84803F                    ;81ED66|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81ED66|223F8084|84803F;
                        SEP #$20                             ;81ED6A|E220    |      ;
                        LDA.B #$00                           ;81ED6C|A900    |      ;
                        XBA                                  ;81ED6E|EB      |      ;
@@ -13387,46 +13300,43 @@ subUnknown81D593_0x44:
                        REP #$20                             ;81ED99|C220    |      ;
                        LDA.W #$FFEC                         ;81ED9B|A9ECFF  |      ;
                        JSL.L fUnknown_83B282                ;81ED9E|2282B283|83B282;
-                       JMP.W CODE_81EFAC                    ;81EDA2|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EDA2|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EDA5:
+               .case4:
                        SEP #$20                             ;81EDA5|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EDA7|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EDAA|AD7009  |000970;
                        CMP.B #$42                           ;81EDAD|C942    |      ;
-                       BEQ CODE_81EDB4                      ;81EDAF|F003    |81EDB4;
-                       JMP.W CODE_81EFAC                    ;81EDB1|4CACEF  |81EFAC;
+                       BEQ +                                ;81EDAF|F003    |81EDB4;
+                       JMP.W .return                        ;81EDB1|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EDB4:
-                       STZ.W nJumpTable81D593Arg2           ;81EDB4|9C7009  |000970;
+                     + STZ.W nJumpTable81D593Arg2           ;81EDB4|9C7009  |000970;
                        REP #$20                             ;81EDB7|C220    |      ;
                        LDA.L $7F1F60                        ;81EDB9|AF601F7F|7F1F60;
                        AND.W #$1000                         ;81EDBD|290010  |      ;
-                       BEQ CODE_81EDC5                      ;81EDC0|F003    |81EDC5;
-                       JMP.W CODE_81EC64                    ;81EDC2|4C64EC  |81EC64;
+                       BEQ +                                ;81EDC0|F003    |81EDC5;
+                       JMP.W .loop                          ;81EDC2|4C64EC  |81EC64;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EDC5:
-                       REP #$30                             ;81EDC5|C230    |      ;
+                     + REP #$30                             ;81EDC5|C230    |      ;
                        LDA.W #$0040                         ;81EDC7|A94000  |      ;
                        EOR.W #$FFFF                         ;81EDCA|49FFFF  |      ;
                        AND.B $D2                            ;81EDCD|25D2    |0000D2;
                        STA.B $D2                            ;81EDCF|85D2    |0000D2;
-                       JMP.W CODE_81EFAC                    ;81EDD1|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EDD1|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EDD4:
+               .case5:
                        SEP #$20                             ;81EDD4|E220    |      ;
                        LDA.W $019A                          ;81EDD6|AD9A01  |00019A;
                        CMP.B #$02                           ;81EDD9|C902    |      ;
-                       BNE CODE_81EDE0                      ;81EDDB|D003    |81EDE0;
-                       JMP.W CODE_81EFAC                    ;81EDDD|4CACEF  |81EFAC;
+                       BNE +                                ;81EDDB|D003    |81EDE0;
+                       JMP.W .return                        ;81EDDD|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EDE0:
-                       REP #$20                             ;81EDE0|C220    |      ;
+                     + REP #$20                             ;81EDE0|C220    |      ;
                        LDA.W #$0007                         ;81EDE2|A90700  |      ;
                        JSL.L fUnknown_848020                ;81EDE5|22208084|848020;
                        REP #$20                             ;81EDE9|C220    |      ;
@@ -13438,20 +13348,19 @@ subUnknown81D593_0x44:
                        LDA.B #$06                           ;81EDFA|A906    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EDFC|8D6F09  |00096F;
                        STZ.W nJumpTable81D593Arg2           ;81EDFF|9C7009  |000970;
-                       JMP.W CODE_81EFAC                    ;81EE02|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EE02|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE05:
+               .case6:
                        SEP #$20                             ;81EE05|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EE07|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EE0A|AD7009  |000970;
                        CMP.B #$42                           ;81EE0D|C942    |      ;
-                       BEQ CODE_81EE14                      ;81EE0F|F003    |81EE14;
-                       JMP.W CODE_81EFAC                    ;81EE11|4CACEF  |81EFAC;
+                       BEQ +                                ;81EE0F|F003    |81EE14;
+                       JMP.W .return                        ;81EE11|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE14:
-                       REP #$30                             ;81EE14|C230    |      ;
+                     + REP #$30                             ;81EE14|C230    |      ;
                        LDA.W #$0040                         ;81EE16|A94000  |      ;
                        EOR.W #$FFFF                         ;81EE19|49FFFF  |      ;
                        AND.B $D2                            ;81EE1C|25D2    |0000D2;
@@ -13459,12 +13368,11 @@ subUnknown81D593_0x44:
                        REP #$20                             ;81EE20|C220    |      ;
                        LDA.L $7F1F60                        ;81EE22|AF601F7F|7F1F60;
                        AND.W #$1000                         ;81EE26|290010  |      ;
-                       BEQ CODE_81EE2E                      ;81EE29|F003    |81EE2E;
-                       JMP.W CODE_81EFAC                    ;81EE2B|4CACEF  |81EFAC;
+                       BEQ +                                ;81EE29|F003    |81EE2E;
+                       JMP.W .return                        ;81EE2B|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE2E:
-                       SEP #$20                             ;81EE2E|E220    |      ;
+                     + SEP #$20                             ;81EE2E|E220    |      ;
                        LDA.B #$00                           ;81EE30|A900    |      ;
                        XBA                                  ;81EE32|EB      |      ;
                        LDA.W $09A1                          ;81EE33|ADA109  |0009A1;
@@ -13478,81 +13386,77 @@ subUnknown81D593_0x44:
                        REP #$10                             ;81EE47|C210    |      ;
                        LDY.W #$0001                         ;81EE49|A00100  |      ;
                        STA.B [ptrUnknown0xCC],Y             ;81EE4C|97CC    |0000CC;
-                       JMP.W CODE_81EFAC                    ;81EE4E|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EE4E|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE51:
+               .case7:
                        SEP #$20                             ;81EE51|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EE53|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EE56|AD7009  |000970;
                        CMP.B #$42                           ;81EE59|C942    |      ;
-                       BEQ CODE_81EE60                      ;81EE5B|F003    |81EE60;
-                       JMP.W CODE_81EFAC                    ;81EE5D|4CACEF  |81EFAC;
+                       BEQ +                                ;81EE5B|F003    |81EE60;
+                       JMP.W .return                        ;81EE5D|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE60:
-                       LDX.W #$0148                         ;81EE60|A24801  |      ;
+                     + LDX.W #$0148                         ;81EE60|A24801  |      ;
                        SEP #$20                             ;81EE63|E220    |      ;
                        LDA.B #$02                           ;81EE65|A902    |      ;
                        STA.W $019A                          ;81EE67|8D9A01  |00019A;
                        LDA.B #$00                           ;81EE6A|A900    |      ;
                        STA.W $0191                          ;81EE6C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81EE6F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81EE6F|225F9383|83935F;
                        SEP #$20                             ;81EE73|E220    |      ;
                        LDA.B #$08                           ;81EE75|A908    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EE77|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81EE7A|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EE7A|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE7D:
+               .case8:
                        SEP #$20                             ;81EE7D|E220    |      ;
                        LDA.W $019A                          ;81EE7F|AD9A01  |00019A;
                        CMP.B #$02                           ;81EE82|C902    |      ;
-                       BNE CODE_81EE89                      ;81EE84|D003    |81EE89;
-                       JMP.W CODE_81EFAC                    ;81EE86|4CACEF  |81EFAC;
+                       BNE +                                ;81EE84|D003    |81EE89;
+                       JMP.W .return                        ;81EE86|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EE89:
-                       SEP #$20                             ;81EE89|E220    |      ;
+                     + SEP #$20                             ;81EE89|E220    |      ;
                        LDA.W $018F                          ;81EE8B|AD8F01  |00018F;
-                       BNE CODE_81EEAD                      ;81EE8E|D01D    |81EEAD;
+                       BNE +                                ;81EE8E|D01D    |81EEAD;
                        SEP #$20                             ;81EE90|E220    |      ;
                        LDA.B #$02                           ;81EE92|A902    |      ;
                        STA.W $019A                          ;81EE94|8D9A01  |00019A;
                        LDX.W #$014A                         ;81EE97|A24A01  |      ;
                        LDA.B #$00                           ;81EE9A|A900    |      ;
                        STA.W $0191                          ;81EE9C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81EE9F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81EE9F|225F9383|83935F;
                        SEP #$20                             ;81EEA3|E220    |      ;
                        LDA.B #$09                           ;81EEA5|A909    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EEA7|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81EEAA|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EEAA|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EEAD:
-                       SEP #$20                             ;81EEAD|E220    |      ;
+                     + SEP #$20                             ;81EEAD|E220    |      ;
                        LDA.B #$02                           ;81EEAF|A902    |      ;
                        STA.W $019A                          ;81EEB1|8D9A01  |00019A;
                        LDX.W #$014C                         ;81EEB4|A24C01  |      ;
                        LDA.B #$00                           ;81EEB7|A900    |      ;
                        STA.W $0191                          ;81EEB9|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81EEBC|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81EEBC|225F9383|83935F;
                        SEP #$20                             ;81EEC0|E220    |      ;
                        LDA.B #$0A                           ;81EEC2|A90A    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EEC4|8D6F09  |00096F;
-                       JMP.W CODE_81EFAC                    ;81EEC7|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EEC7|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EECA:
+               .case9:
                        SEP #$20                             ;81EECA|E220    |      ;
                        LDA.W $019A                          ;81EECC|AD9A01  |00019A;
                        CMP.B #$02                           ;81EECF|C902    |      ;
-                       BNE CODE_81EED6                      ;81EED1|D003    |81EED6;
-                       JMP.W CODE_81EFAC                    ;81EED3|4CACEF  |81EFAC;
+                       BNE +                                ;81EED1|D003    |81EED6;
+                       JMP.W .return                        ;81EED3|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EED6:
-                       REP #$20                             ;81EED6|C220    |      ;
+                     + REP #$20                             ;81EED6|C220    |      ;
                        LDA.W #$0008                         ;81EED8|A90800  |      ;
                        JSL.L fUnknown_848020                ;81EEDB|22208084|848020;
                        REP #$20                             ;81EEDF|C220    |      ;
@@ -13566,7 +13470,7 @@ subUnknown81D593_0x44:
                        LDA.W $09A1                          ;81EEF3|ADA109  |0009A1;
                        LDX.W #$0000                         ;81EEF6|A20000  |      ;
                        LDY.W #$0024                         ;81EEF9|A02400  |      ;
-                       JSL.L CODE_84803F                    ;81EEFC|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81EEFC|223F8084|84803F;
                        SEP #$20                             ;81EF00|E220    |      ;
                        LDA.B #$00                           ;81EF02|A900    |      ;
                        XBA                                  ;81EF04|EB      |      ;
@@ -13605,19 +13509,18 @@ subUnknown81D593_0x44:
                        LDA.L $7F1F60                        ;81EF59|AF601F7F|7F1F60;
                        ORA.W #$1000                         ;81EF5D|090010  |      ;
                        STA.L $7F1F60                        ;81EF60|8F601F7F|7F1F60;
-                       JMP.W CODE_81EFAC                    ;81EF64|4CACEF  |81EFAC;
+                       JMP.W .return                        ;81EF64|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EF67:
+               .caseA:
                        SEP #$20                             ;81EF67|E220    |      ;
                        LDA.W $019A                          ;81EF69|AD9A01  |00019A;
                        CMP.B #$02                           ;81EF6C|C902    |      ;
-                       BNE CODE_81EF73                      ;81EF6E|D003    |81EF73;
-                       JMP.W CODE_81EFAC                    ;81EF70|4CACEF  |81EFAC;
+                       BNE +                                ;81EF6E|D003    |81EF73;
+                       JMP.W .return                        ;81EF70|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EF73:
-                       REP #$20                             ;81EF73|C220    |      ;
+                     + REP #$20                             ;81EF73|C220    |      ;
                        LDA.W #$0008                         ;81EF75|A90800  |      ;
                        JSL.L fUnknown_848020                ;81EF78|22208084|848020;
                        REP #$20                             ;81EF7C|C220    |      ;
@@ -13629,24 +13532,23 @@ subUnknown81D593_0x44:
                        LDA.B #$0B                           ;81EF8D|A90B    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EF8F|8D6F09  |00096F;
                        STZ.W nJumpTable81D593Arg2           ;81EF92|9C7009  |000970;
-                       BRA CODE_81EFAC                      ;81EF95|8015    |81EFAC;
+                       BRA .return                          ;81EF95|8015    |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EF97:
+               .caseB:
                        SEP #$20                             ;81EF97|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EF99|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EF9C|AD7009  |000970;
                        CMP.B #$42                           ;81EF9F|C942    |      ;
-                       BEQ CODE_81EFA6                      ;81EFA1|F003    |81EFA6;
-                       JMP.W CODE_81EFAC                    ;81EFA3|4CACEF  |81EFAC;
+                       BEQ +                                ;81EFA1|F003    |81EFA6;
+                       JMP.W .return                        ;81EFA3|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EFA6:
-                       STZ.W nJumpTable81D593Arg2           ;81EFA6|9C7009  |000970;
-                       JMP.W CODE_81EC64                    ;81EFA9|4C64EC  |81EC64;
+                     + STZ.W nJumpTable81D593Arg2           ;81EFA6|9C7009  |000970;
+                       JMP.W .loop                          ;81EFA9|4C64EC  |81EC64;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EFAC:
+              .return:
                        RTS                                  ;81EFAC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13655,33 +13557,32 @@ subUnknown81D593_0x45:
                        REP #$10                             ;81EFAF|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81EFB1|AD6F09  |00096F;
                        CMP.B #$01                           ;81EFB4|C901    |      ;
-                       BEQ CODE_81EFE1                      ;81EFB6|F029    |81EFE1;
+                       BEQ .case1                           ;81EFB6|F029    |81EFE1;
                        CMP.B #$02                           ;81EFB8|C902    |      ;
-                       BEQ CODE_81F013                      ;81EFBA|F057    |81F013;
+                       BEQ .case2                           ;81EFBA|F057    |81F013;
                        CMP.B #$03                           ;81EFBC|C903    |      ;
-                       BEQ CODE_81F02F                      ;81EFBE|F06F    |81F02F;
+                       BEQ .case3                           ;81EFBE|F06F    |81F02F;
                        CMP.B #$04                           ;81EFC0|C904    |      ;
-                       BNE CODE_81EFC7                      ;81EFC2|D003    |81EFC7;
-                       JMP.W CODE_81F054                    ;81EFC4|4C54F0  |81F054;
+                       BNE .checks                          ;81EFC2|D003    |81EFC7;
+                       JMP.W .case4                         ;81EFC4|4C54F0  |81F054;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EFC7:
+              .checks:
                        SEP #$20                             ;81EFC7|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81EFC9|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81EFCC|AD7009  |000970;
                        CMP.B #$08                           ;81EFCF|C908    |      ;
-                       BEQ CODE_81EFD6                      ;81EFD1|F003    |81EFD6;
-                       JMP.W CODE_81F060                    ;81EFD3|4C60F0  |81F060;
+                       BEQ +                                ;81EFD1|F003    |81EFD6;
+                       JMP.W .return                        ;81EFD3|4C60F0  |81F060;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EFD6:
-                       LDA.B #$01                           ;81EFD6|A901    |      ;
+                     + LDA.B #$01                           ;81EFD6|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81EFD8|8D6F09  |00096F;
                        STZ.W nJumpTable81D593Arg2           ;81EFDB|9C7009  |000970;
-                       JMP.W CODE_81F060                    ;81EFDE|4C60F0  |81F060;
+                       JMP.W .return                        ;81EFDE|4C60F0  |81F060;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81EFE1:
+               .case1:
                        REP #$30                             ;81EFE1|C230    |      ;
                        LDA.B $D2                            ;81EFE3|A5D2    |0000D2;
                        ORA.W #$0080                         ;81EFE5|098000  |      ;
@@ -13699,36 +13600,35 @@ subUnknown81D593_0x45:
                        INC.W nJumpTable81D593Arg2           ;81F002|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F005|AD7009  |000970;
                        CMP.B #$20                           ;81F008|C920    |      ;
-                       BNE CODE_81F060                      ;81F00A|D054    |81F060;
+                       BNE .return                          ;81F00A|D054    |81F060;
                        LDA.B #$02                           ;81F00C|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F00E|8D6F09  |00096F;
-                       BRA CODE_81F060                      ;81F011|804D    |81F060;
+                       BRA .return                          ;81F011|804D    |81F060;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F013:
+               .case2:
                        SEP #$20                             ;81F013|E220    |      ;
                        LDX.W #$0317                         ;81F015|A21703  |      ;
                        LDA.B #$02                           ;81F018|A902    |      ;
                        STA.W $019A                          ;81F01A|8D9A01  |00019A;
                        LDA.B #$00                           ;81F01D|A900    |      ;
                        STA.W $0191                          ;81F01F|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F022|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F022|225F9383|83935F;
                        SEP #$20                             ;81F026|E220    |      ;
                        LDA.B #$03                           ;81F028|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F02A|8D6F09  |00096F;
-                       BRA CODE_81F060                      ;81F02D|8031    |81F060;
+                       BRA .return                          ;81F02D|8031    |81F060;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F02F:
+               .case3:
                        SEP #$20                             ;81F02F|E220    |      ;
                        LDA.W $019A                          ;81F031|AD9A01  |00019A;
                        CMP.B #$02                           ;81F034|C902    |      ;
-                       BNE CODE_81F03B                      ;81F036|D003    |81F03B;
-                       JMP.W CODE_81F060                    ;81F038|4C60F0  |81F060;
+                       BNE +                                ;81F036|D003    |81F03B;
+                       JMP.W .return                        ;81F038|4C60F0  |81F060;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F03B:
-                       SEP #$20                             ;81F03B|E220    |      ;
+                     + SEP #$20                             ;81F03B|E220    |      ;
                        LDA.B #$04                           ;81F03D|A904    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F03F|8D6F09  |00096F;
                        LDA.B #$02                           ;81F042|A902    |      ;
@@ -13737,17 +13637,17 @@ subUnknown81D593_0x45:
                        LDA.W $0196                          ;81F049|AD9601  |000196;
                        ORA.W #$2000                         ;81F04C|090020  |      ;
                        STA.W $0196                          ;81F04F|8D9601  |000196;
-                       BRA CODE_81F060                      ;81F052|800C    |81F060;
+                       BRA .return                          ;81F052|800C    |81F060;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F054:
+               .case4:
                        REP #$30                             ;81F054|C230    |      ;
                        LDA.W #$0040                         ;81F056|A94000  |      ;
                        EOR.W #$FFFF                         ;81F059|49FFFF  |      ;
                        AND.B $D2                            ;81F05C|25D2    |0000D2;
                        STA.B $D2                            ;81F05E|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81F060:
+              .return:
                        RTS                                  ;81F060|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13756,20 +13656,18 @@ subUnknown81D593_0x46:
                        REP #$10                             ;81F063|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F065|AD6F09  |00096F;
                        CMP.B #$01                           ;81F068|C901    |      ;
-                       BEQ CODE_81F093                      ;81F06A|F027    |81F093;
+                       BEQ .case1                           ;81F06A|F027    |81F093;
                        CMP.B #$02                           ;81F06C|C902    |      ;
-                       BNE CODE_81F073                      ;81F06E|D003    |81F073;
-                       JMP.W CODE_81F0D2                    ;81F070|4CD2F0  |81F0D2;
+                       BNE +                                ;81F06E|D003    |81F073;
+                       JMP.W .case2                         ;81F070|4CD2F0  |81F0D2;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F073:
-                       CMP.B #$03                           ;81F073|C903    |      ;
-                       BNE CODE_81F07A                      ;81F075|D003    |81F07A;
-                       JMP.W CODE_81F103                    ;81F077|4C03F1  |81F103;
+                     + CMP.B #$03                           ;81F073|C903    |      ;
+                       BNE +                                ;81F075|D003    |81F07A;
+                       JMP.W .case3                         ;81F077|4C03F1  |81F103;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F07A:
-                       REP #$20                             ;81F07A|C220    |      ;
+                     + REP #$20                             ;81F07A|C220    |      ;
                        LDA.W #$0006                         ;81F07C|A90600  |      ;
                        LDX.W #$0000                         ;81F07F|A20000  |      ;
                        LDY.W #$0026                         ;81F082|A02600  |      ;
@@ -13777,51 +13675,48 @@ subUnknown81D593_0x46:
                        SEP #$20                             ;81F089|E220    |      ;
                        LDA.B #$01                           ;81F08B|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F08D|8D6F09  |00096F;
-                       JMP.W CODE_81F120                    ;81F090|4C20F1  |81F120;
+                       JMP.W .return                        ;81F090|4C20F1  |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F093:
+               .case1:
                        SEP #$20                             ;81F093|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F095|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F098|AD7009  |000970;
                        CMP.B #$42                           ;81F09B|C942    |      ;
-                       BEQ CODE_81F0A2                      ;81F09D|F003    |81F0A2;
-                       JMP.W CODE_81F120                    ;81F09F|4C20F1  |81F120;
+                       BEQ +                                ;81F09D|F003    |81F0A2;
+                       JMP.W .return                        ;81F09F|4C20F1  |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F0A2:
-                       SEP #$20                             ;81F0A2|E220    |      ;
+                     + SEP #$20                             ;81F0A2|E220    |      ;
                        LDA.B #$02                           ;81F0A4|A902    |      ;
                        STA.W $019A                          ;81F0A6|8D9A01  |00019A;
                        LDX.W #$031A                         ;81F0A9|A21A03  |      ;
                        REP #$20                             ;81F0AC|C220    |      ;
                        LDA.L nShippingProfit                ;81F0AE|AF071F7F|7F1F07;
-                       BNE CODE_81F0BF                      ;81F0B2|D00B    |81F0BF;
+                       BNE +                                ;81F0B2|D00B    |81F0BF;
                        SEP #$20                             ;81F0B4|E220    |      ;
                        LDA.L nShippingProfit+2              ;81F0B6|AF091F7F|7F1F09;
-                       BNE CODE_81F0BF                      ;81F0BA|D003    |81F0BF;
+                       BNE +                                ;81F0BA|D003    |81F0BF;
                        LDX.W #$031B                         ;81F0BC|A21B03  |      ;
                                                             ;      |        |      ;
-          CODE_81F0BF:
-                       LDA.B #$00                           ;81F0BF|A900    |      ;
+                     + LDA.B #$00                           ;81F0BF|A900    |      ;
                        STA.W $0191                          ;81F0C1|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F0C4|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F0C4|225F9383|83935F;
                        SEP #$20                             ;81F0C8|E220    |      ;
                        LDA.B #$02                           ;81F0CA|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F0CC|8D6F09  |00096F;
-                       JMP.W CODE_81F120                    ;81F0CF|4C20F1  |81F120;
+                       JMP.W .return                        ;81F0CF|4C20F1  |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F0D2:
+               .case2:
                        SEP #$20                             ;81F0D2|E220    |      ;
                        LDA.W $019A                          ;81F0D4|AD9A01  |00019A;
                        CMP.B #$02                           ;81F0D7|C902    |      ;
-                       BNE CODE_81F0DE                      ;81F0D9|D003    |81F0DE;
-                       JMP.W CODE_81F120                    ;81F0DB|4C20F1  |81F120;
+                       BNE +                                ;81F0D9|D003    |81F0DE;
+                       JMP.W .return                        ;81F0DB|4C20F1  |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F0DE:
-                       REP #$20                             ;81F0DE|C220    |      ;
+                     + REP #$20                             ;81F0DE|C220    |      ;
                        LDA.W #$0006                         ;81F0E0|A90600  |      ;
                        JSL.L fUnknown_848020                ;81F0E3|22208084|848020;
                        REP #$20                             ;81F0E7|C220    |      ;
@@ -13833,28 +13728,27 @@ subUnknown81D593_0x46:
                        LDA.B #$03                           ;81F0F8|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F0FA|8D6F09  |00096F;
                        STZ.W nJumpTable81D593Arg2           ;81F0FD|9C7009  |000970;
-                       JMP.W CODE_81F120                    ;81F100|4C20F1  |81F120;
+                       JMP.W .return                        ;81F100|4C20F1  |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F103:
+               .case3:
                        SEP #$20                             ;81F103|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F105|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F108|AD7009  |000970;
                        CMP.B #$42                           ;81F10B|C942    |      ;
-                       BEQ CODE_81F112                      ;81F10D|F003    |81F112;
-                       JMP.W CODE_81F120                    ;81F10F|4C20F1  |81F120;
+                       BEQ +                                ;81F10D|F003    |81F112;
+                       JMP.W .return                        ;81F10F|4C20F1  |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F112:
-                       REP #$30                             ;81F112|C230    |      ;
+                     + REP #$30                             ;81F112|C230    |      ;
                        LDA.W #$0040                         ;81F114|A94000  |      ;
                        EOR.W #$FFFF                         ;81F117|49FFFF  |      ;
                        AND.B $D2                            ;81F11A|25D2    |0000D2;
                        STA.B $D2                            ;81F11C|85D2    |0000D2;
-                       BRA CODE_81F120                      ;81F11E|8000    |81F120;
+                       BRA .return                          ;81F11E|8000    |81F120;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F120:
+              .return:
                        RTS                                  ;81F120|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13863,150 +13757,143 @@ subUnknown81D593_0x47:
                        REP #$10                             ;81F123|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F125|AD6F09  |00096F;
                        CMP.B #$01                           ;81F128|C901    |      ;
-                       BNE CODE_81F12F                      ;81F12A|D003    |81F12F;
-                       JMP.W CODE_81F1CE                    ;81F12C|4CCEF1  |81F1CE;
+                       BNE +                                ;81F12A|D003    |81F12F;
+                       JMP.W .case1                         ;81F12C|4CCEF1  |81F1CE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F12F:
-                       CMP.B #$02                           ;81F12F|C902    |      ;
-                       BNE CODE_81F136                      ;81F131|D003    |81F136;
-                       JMP.W CODE_81F1F3                    ;81F133|4CF3F1  |81F1F3;
+                     + CMP.B #$02                           ;81F12F|C902    |      ;
+                       BNE +                                ;81F131|D003    |81F136;
+                       JMP.W .case2                         ;81F133|4CF3F1  |81F1F3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F136:
-                       CMP.B #$03                           ;81F136|C903    |      ;
-                       BNE CODE_81F13D                      ;81F138|D003    |81F13D;
-                       JMP.W CODE_81F211                    ;81F13A|4C11F2  |81F211;
+                     + CMP.B #$03                           ;81F136|C903    |      ;
+                       BNE +                                ;81F138|D003    |81F13D;
+                       JMP.W .case3                         ;81F13A|4C11F2  |81F211;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F13D:
-                       SEP #$20                             ;81F13D|E220    |      ;
+                     + SEP #$20                             ;81F13D|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F13F|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F142|AD7009  |000970;
                        CMP.B #$20                           ;81F145|C920    |      ;
-                       BEQ CODE_81F14C                      ;81F147|F003    |81F14C;
-                       JMP.W CODE_81F2D9                    ;81F149|4CD9F2  |81F2D9;
+                       BEQ .checks                          ;81F147|F003    |81F14C;
+                       JMP.W .justReturn                    ;81F149|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F14C:
+              .checks:
                        SEP #$20                             ;81F14C|E220    |      ;
                        LDA.L nCurrentYearID                 ;81F14E|AF181F7F|7F1F18;
-                       BNE CODE_81F169                      ;81F152|D015    |81F169;
+                       BNE .year1andFall                    ;81F152|D015    |81F169;
                        LDA.L nCurrentSeasonID               ;81F154|AF191F7F|7F1F19;
                        CMP.B #$02                           ;81F158|C902    |      ;
-                       BCS CODE_81F169                      ;81F15A|B00D    |81F169;
+                       BCS .year1andFall                    ;81F15A|B00D    |81F169;
                        REP #$20                             ;81F15C|C220    |      ;
                        LDA.L $7F1F70                        ;81F15E|AF701F7F|7F1F70;
                        ORA.W #$0004                         ;81F162|090400  |      ;
                        STA.L $7F1F70                        ;81F165|8F701F7F|7F1F70;
                                                             ;      |        |      ;
-          CODE_81F169:
-                       SEP #$20                             ;81F169|E220    |      ;
+        .year1andFall:
+                       SEP #$20                             ;81F169|E220    |      ; If we expand house in year 1 before Fall we get clock
                        STZ.W nJumpTable81D593Arg2           ;81F16B|9C7009  |000970;
                        REP #$20                             ;81F16E|C220    |      ;
-                       LDA.L $7F1F0E                        ;81F170|AF0E1F7F|7F1F0E;
+                       LDA.L nReqWoodForExpansion           ;81F170|AF0E1F7F|7F1F0E;
                        CMP.W #$00FA                         ;81F174|C9FA00  |      ;
-                       BEQ CODE_81F189                      ;81F177|F010    |81F189;
+                       BEQ .firstUpgrade                    ;81F177|F010    |81F189;
                        REP #$20                             ;81F179|C220    |      ;
                        LDA.L nStoredWood                    ;81F17B|AF0C1F7F|7F1F0C;
                        CMP.W #$01F4                         ;81F17F|C9F401  |      ;
-                       BCC CODE_81F1B1                      ;81F182|902D    |81F1B1;
+                       BCC .upgrade                         ;81F182|902D    |81F1B1;
                        LDX.W #$013B                         ;81F184|A23B01  |      ;
-                       BRA CODE_81F197                      ;81F187|800E    |81F197;
+                       BRA .notEnoughWood                   ;81F187|800E    |81F197;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F189:
+        .firstUpgrade:
                        REP #$20                             ;81F189|C220    |      ;
                        LDA.L nStoredWood                    ;81F18B|AF0C1F7F|7F1F0C;
                        CMP.W #$00FA                         ;81F18F|C9FA00  |      ;
-                       BCC CODE_81F1B1                      ;81F192|901D    |81F1B1;
+                       BCC .upgrade                         ;81F192|901D    |81F1B1;
                        LDX.W #$0134                         ;81F194|A23401  |      ;
                                                             ;      |        |      ;
-          CODE_81F197:
+       .notEnoughWood:
                        SEP #$20                             ;81F197|E220    |      ;
                        LDA.B #$02                           ;81F199|A902    |      ;
                        STA.W $019A                          ;81F19B|8D9A01  |00019A;
                        LDA.B #$00                           ;81F19E|A900    |      ;
                        STA.W $0191                          ;81F1A0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F1A3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F1A3|225F9383|83935F;
                        SEP #$20                             ;81F1A7|E220    |      ;
                        LDA.B #$03                           ;81F1A9|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F1AB|8D6F09  |00096F;
-                       JMP.W CODE_81F2D9                    ;81F1AE|4CD9F2  |81F2D9;
+                       JMP.W .justReturn                    ;81F1AE|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F1B1:
+             .upgrade:
                        SEP #$20                             ;81F1B1|E220    |      ;
                        LDA.B #$02                           ;81F1B3|A902    |      ;
                        STA.W $019A                          ;81F1B5|8D9A01  |00019A;
                        LDX.W #$0137                         ;81F1B8|A23701  |      ;
                        LDA.B #$00                           ;81F1BB|A900    |      ;
                        STA.W $0191                          ;81F1BD|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F1C0|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F1C0|225F9383|83935F;
                        SEP #$20                             ;81F1C4|E220    |      ;
                        LDA.B #$01                           ;81F1C6|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F1C8|8D6F09  |00096F;
-                       JMP.W CODE_81F2D9                    ;81F1CB|4CD9F2  |81F2D9;
+                       JMP.W .justReturn                    ;81F1CB|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F1CE:
+               .case1:
                        SEP #$20                             ;81F1CE|E220    |      ;
                        LDA.W $019A                          ;81F1D0|AD9A01  |00019A;
                        CMP.B #$02                           ;81F1D3|C902    |      ;
-                       BNE CODE_81F1DA                      ;81F1D5|D003    |81F1DA;
-                       JMP.W CODE_81F2D9                    ;81F1D7|4CD9F2  |81F2D9;
+                       BNE +                                ;81F1D5|D003    |81F1DA;
+                       JMP.W .justReturn                    ;81F1D7|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F1DA:
-                       REP #$20                             ;81F1DA|C220    |      ;
+                     + REP #$20                             ;81F1DA|C220    |      ;
                        LDA.W #$0009                         ;81F1DC|A90900  |      ;
                        LDX.W #$0000                         ;81F1DF|A20000  |      ;
                        LDY.W #$002D                         ;81F1E2|A02D00  |      ;
-                       JSL.L CODE_84803F                    ;81F1E5|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81F1E5|223F8084|84803F;
                        SEP #$20                             ;81F1E9|E220    |      ;
                        LDA.B #$02                           ;81F1EB|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F1ED|8D6F09  |00096F;
-                       JMP.W CODE_81F2D9                    ;81F1F0|4CD9F2  |81F2D9;
+                       JMP.W .justReturn                    ;81F1F0|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F1F3:
+               .case2:
                        SEP #$20                             ;81F1F3|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F1F5|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F1F8|AD7009  |000970;
                        CMP.B #$C6                           ;81F1FB|C9C6    |      ;
-                       BEQ CODE_81F202                      ;81F1FD|F003    |81F202;
-                       JMP.W CODE_81F2D9                    ;81F1FF|4CD9F2  |81F2D9;
+                       BEQ +                                ;81F1FD|F003    |81F202;
+                       JMP.W .justReturn                    ;81F1FF|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F202:
-                       REP #$30                             ;81F202|C230    |      ;
+                     + REP #$30                             ;81F202|C230    |      ;
                        LDA.W #$0040                         ;81F204|A94000  |      ;
                        EOR.W #$FFFF                         ;81F207|49FFFF  |      ;
                        AND.B $D2                            ;81F20A|25D2    |0000D2;
                        STA.B $D2                            ;81F20C|85D2    |0000D2;
-                       JMP.W CODE_81F2D9                    ;81F20E|4CD9F2  |81F2D9;
+                       JMP.W .justReturn                    ;81F20E|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F211:
+               .case3:
                        SEP #$20                             ;81F211|E220    |      ;
                        LDA.W $019A                          ;81F213|AD9A01  |00019A;
                        CMP.B #$02                           ;81F216|C902    |      ;
-                       BNE CODE_81F21D                      ;81F218|D003    |81F21D;
-                       JMP.W CODE_81F2D9                    ;81F21A|4CD9F2  |81F2D9;
+                       BNE +                                ;81F218|D003    |81F21D;
+                       JMP.W .justReturn                    ;81F21A|4CD9F2  |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F21D:
-                       SEP #$20                             ;81F21D|E220    |      ;
+                     + SEP #$20                             ;81F21D|E220    |      ;
                        LDA.W $018F                          ;81F21F|AD8F01  |00018F;
-                       BEQ CODE_81F227                      ;81F222|F003    |81F227;
-                       JMP.W CODE_81F2BD                    ;81F224|4CBDF2  |81F2BD;
+                       BEQ +                                ;81F222|F003    |81F227;
+                       JMP.W .return                        ;81F224|4CBDF2  |81F2BD;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F227:
-                       REP #$30                             ;81F227|C230    |      ;
-                       LDA.L $7F1F0E                        ;81F229|AF0E1F7F|7F1F0E;
+                     + REP #$30                             ;81F227|C230    |      ;
+                       LDA.L nReqWoodForExpansion           ;81F229|AF0E1F7F|7F1F0E;
                        CMP.W #$00FA                         ;81F22D|C9FA00  |      ;
-                       BEQ CODE_81F24C                      ;81F230|F01A    |81F24C;
+                       BEQ .label1                          ;81F230|F01A    |81F24C;
                        REP #$20                             ;81F232|C220    |      ;
                        LDA.W #$FC18                         ;81F234|A918FC  |      ;
                        STA.B ptrUnknown0x72                 ;81F237|8572    |000072;
@@ -14016,11 +13903,11 @@ subUnknown81D593_0x47:
                        JSL.L fUnknown_83B1C9                ;81F23F|22C9B183|83B1C9;
                        REP #$20                             ;81F243|C220    |      ;
                        CMP.W #$0000                         ;81F245|C90000  |      ;
-                       BNE CODE_81F2A1                      ;81F248|D057    |81F2A1;
-                       BRA CODE_81F264                      ;81F24A|8018    |81F264;
+                       BNE .label3                          ;81F248|D057    |81F2A1;
+                       BRA .label2                          ;81F24A|8018    |81F264;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F24C:
+              .label1:
                        REP #$20                             ;81F24C|C220    |      ;
                        LDA.W #$FE0C                         ;81F24E|A90CFE  |      ;
                        STA.B ptrUnknown0x72                 ;81F251|8572    |000072;
@@ -14030,11 +13917,11 @@ subUnknown81D593_0x47:
                        JSL.L fUnknown_83B1C9                ;81F259|22C9B183|83B1C9;
                        REP #$20                             ;81F25D|C220    |      ;
                        CMP.W #$0000                         ;81F25F|C90000  |      ;
-                       BNE CODE_81F2A1                      ;81F262|D03D    |81F2A1;
+                       BNE .label3                          ;81F262|D03D    |81F2A1;
                                                             ;      |        |      ;
-          CODE_81F264:
+              .label2:
                        REP #$30                             ;81F264|C230    |      ;
-                       LDA.L $7F1F0E                        ;81F266|AF0E1F7F|7F1F0E;
+                       LDA.L nReqWoodForExpansion           ;81F266|AF0E1F7F|7F1F0E;
                        EOR.W #$FFFF                         ;81F26A|49FFFF  |      ;
                        INC A                                ;81F26D|1A      |      ;
                        JSL.L fUnknown_83B224                ;81F26E|2224B283|83B224;
@@ -14044,7 +13931,7 @@ subUnknown81D593_0x47:
                        LDX.W #$0135                         ;81F279|A23501  |      ;
                        LDA.B #$00                           ;81F27C|A900    |      ;
                        STA.W $0191                          ;81F27E|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F281|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F281|225F9383|83935F;
                        SEP #$20                             ;81F285|E220    |      ;
                        LDA.B #$01                           ;81F287|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F289|8D6F09  |00096F;
@@ -14054,38 +13941,38 @@ subUnknown81D593_0x47:
                        LDA.L MarriedGirlID                  ;81F294|AF661F7F|7F1F66;
                        ORA.W #$0080                         ;81F298|098000  |      ;
                        STA.L MarriedGirlID                  ;81F29B|8F661F7F|7F1F66;
-                       BRA CODE_81F2D9                      ;81F29F|8038    |81F2D9;
+                       BRA .justReturn                      ;81F29F|8038    |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F2A1:
+              .label3:
                        SEP #$20                             ;81F2A1|E220    |      ;
                        LDA.B #$02                           ;81F2A3|A902    |      ;
                        STA.W $019A                          ;81F2A5|8D9A01  |00019A;
                        LDX.W #$0304                         ;81F2A8|A20403  |      ;
                        LDA.B #$00                           ;81F2AB|A900    |      ;
                        STA.W $0191                          ;81F2AD|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F2B0|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F2B0|225F9383|83935F;
                        SEP #$20                             ;81F2B4|E220    |      ;
                        LDA.B #$01                           ;81F2B6|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F2B8|8D6F09  |00096F;
-                       BRA CODE_81F2D9                      ;81F2BB|801C    |81F2D9;
+                       BRA .justReturn                      ;81F2BB|801C    |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F2BD:
+              .return:
                        SEP #$20                             ;81F2BD|E220    |      ;
                        LDA.B #$02                           ;81F2BF|A902    |      ;
                        STA.W $019A                          ;81F2C1|8D9A01  |00019A;
                        LDX.W #$0136                         ;81F2C4|A23601  |      ;
                        LDA.B #$00                           ;81F2C7|A900    |      ;
                        STA.W $0191                          ;81F2C9|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F2CC|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F2CC|225F9383|83935F;
                        SEP #$20                             ;81F2D0|E220    |      ;
                        LDA.B #$01                           ;81F2D2|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F2D4|8D6F09  |00096F;
-                       BRA CODE_81F2D9                      ;81F2D7|8000    |81F2D9;
+                       BRA .justReturn                      ;81F2D7|8000    |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F2D9:
+          .justReturn:
                        RTS                                  ;81F2D9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -14094,79 +13981,75 @@ subUnknown81D593_0x48:
                        REP #$10                             ;81F2DC|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F2DE|AD6F09  |00096F;
                        CMP.B #$01                           ;81F2E1|C901    |      ;
-                       BEQ CODE_81F348                      ;81F2E3|F063    |81F348;
+                       BEQ .case1                           ;81F2E3|F063    |81F348;
                        CMP.B #$02                           ;81F2E5|C902    |      ;
-                       BNE CODE_81F2EC                      ;81F2E7|D003    |81F2EC;
-                       JMP.W CODE_81F3BB                    ;81F2E9|4CBBF3  |81F3BB;
+                       BNE +                                ;81F2E7|D003    |81F2EC;
+                       JMP.W .case2                         ;81F2E9|4CBBF3  |81F3BB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F2EC:
-                       CMP.B #$03                           ;81F2EC|C903    |      ;
-                       BNE CODE_81F2F3                      ;81F2EE|D003    |81F2F3;
-                       JMP.W CODE_81F3D9                    ;81F2F0|4CD9F3  |81F3D9;
+                     + CMP.B #$03                           ;81F2EC|C903    |      ;
+                       BNE +                                ;81F2EE|D003    |81F2F3;
+                       JMP.W .case3                         ;81F2F0|4CD9F3  |81F3D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F2F3:
-                       SEP #$20                             ;81F2F3|E220    |      ;
+                     + SEP #$20                             ;81F2F3|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F2F5|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F2F8|AD7009  |000970;
                        CMP.B #$20                           ;81F2FB|C920    |      ;
-                       BEQ CODE_81F302                      ;81F2FD|F003    |81F302;
-                       JMP.W CODE_81F40D                    ;81F2FF|4C0DF4  |81F40D;
+                       BEQ +                                ;81F2FD|F003    |81F302;
+                       JMP.W .return                        ;81F2FF|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F302:
-                       STZ.W nJumpTable81D593Arg2           ;81F302|9C7009  |000970;
+                     + STZ.W nJumpTable81D593Arg2           ;81F302|9C7009  |000970;
                        REP #$20                             ;81F305|C220    |      ;
                        LDA.L nHouseSize                     ;81F307|AF641F7F|7F1F64;
                        AND.W #$0080                         ;81F30B|298000  |      ;
-                       BNE CODE_81F320                      ;81F30E|D010    |81F320;
+                       BNE .label1                          ;81F30E|D010    |81F320;
                        REP #$30                             ;81F310|C230    |      ;
                        LDA.W #$0032                         ;81F312|A93200  |      ;
                        JSL.L fUnknown_83B282                ;81F315|2282B283|83B282;
                        REP #$30                             ;81F319|C230    |      ;
                        LDX.W #$013D                         ;81F31B|A23D01  |      ;
-                       BRA CODE_81F32E                      ;81F31E|800E    |81F32E;
+                       BRA .label2                          ;81F31E|800E    |81F32E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F320:
+              .label1:
                        REP #$30                             ;81F320|C230    |      ;
                        LDA.W #$0064                         ;81F322|A96400  |      ;
                        JSL.L fUnknown_83B282                ;81F325|2282B283|83B282;
                        REP #$30                             ;81F329|C230    |      ;
                        LDX.W #$0140                         ;81F32B|A24001  |      ;
                                                             ;      |        |      ;
-          CODE_81F32E:
+              .label2:
                        SEP #$20                             ;81F32E|E220    |      ;
                        LDA.B #$02                           ;81F330|A902    |      ;
                        STA.W $019A                          ;81F332|8D9A01  |00019A;
                        LDA.B #$00                           ;81F335|A900    |      ;
                        STA.W $0191                          ;81F337|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F33A|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F33A|225F9383|83935F;
                        SEP #$20                             ;81F33E|E220    |      ;
                        LDA.B #$01                           ;81F340|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F342|8D6F09  |00096F;
-                       JMP.W CODE_81F40D                    ;81F345|4C0DF4  |81F40D;
+                       JMP.W .return                        ;81F345|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F348:
+               .case1:
                        SEP #$20                             ;81F348|E220    |      ;
                        LDA.W $019A                          ;81F34A|AD9A01  |00019A;
                        CMP.B #$02                           ;81F34D|C902    |      ;
-                       BNE CODE_81F354                      ;81F34F|D003    |81F354;
-                       JMP.W CODE_81F40D                    ;81F351|4C0DF4  |81F40D;
+                       BNE +                                ;81F34F|D003    |81F354;
+                       JMP.W .return                        ;81F351|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F354:
-                       REP #$20                             ;81F354|C220    |      ;
+                     + REP #$20                             ;81F354|C220    |      ;
                        LDA.L nHouseSize                     ;81F356|AF641F7F|7F1F64;
                        AND.W #$0080                         ;81F35A|298000  |      ;
-                       BNE CODE_81F393                      ;81F35D|D034    |81F393;
+                       BNE +                                ;81F35D|D034    |81F393;
                        SEP #$20                             ;81F35F|E220    |      ;
                        REP #$20                             ;81F361|C220    |      ;
                        LDA.L $7F1F70                        ;81F363|AF701F7F|7F1F70;
                        AND.W #$0004                         ;81F367|290400  |      ;
-                       BEQ CODE_81F393                      ;81F36A|F027    |81F393;
+                       BEQ +                                ;81F36A|F027    |81F393;
                        LDA.L $7F1F6E                        ;81F36C|AF6E1F7F|7F1F6E;
                        ORA.W #$4000                         ;81F370|090040  |      ;
                        STA.L $7F1F6E                        ;81F373|8F6E1F7F|7F1F6E;
@@ -14176,74 +14059,71 @@ subUnknown81D593_0x48:
                        LDX.W #$025C                         ;81F37E|A25C02  |      ;
                        LDA.B #$00                           ;81F381|A900    |      ;
                        STA.W $0191                          ;81F383|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F386|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F386|225F9383|83935F;
                        SEP #$20                             ;81F38A|E220    |      ;
                        LDA.B #$03                           ;81F38C|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F38E|8D6F09  |00096F;
-                       BRA CODE_81F40D                      ;81F391|807A    |81F40D;
+                       BRA .return                          ;81F391|807A    |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F393:
-                       REP #$20                             ;81F393|C220    |      ;
+                     + REP #$20                             ;81F393|C220    |      ;
                        LDA.W #$0009                         ;81F395|A90900  |      ;
                        LDX.W #$0000                         ;81F398|A20000  |      ;
                        LDY.W #$0038                         ;81F39B|A03800  |      ;
-                       JSL.L CODE_84803F                    ;81F39E|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81F39E|223F8084|84803F;
                        REP #$20                             ;81F3A2|C220    |      ;
                        LDA.W #$000A                         ;81F3A4|A90A00  |      ;
                        LDX.W #$0000                         ;81F3A7|A20000  |      ;
                        LDY.W #$0039                         ;81F3AA|A03900  |      ;
-                       JSL.L CODE_84803F                    ;81F3AD|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81F3AD|223F8084|84803F;
                        SEP #$20                             ;81F3B1|E220    |      ;
                        LDA.B #$02                           ;81F3B3|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F3B5|8D6F09  |00096F;
-                       JMP.W CODE_81F40D                    ;81F3B8|4C0DF4  |81F40D;
+                       JMP.W .return                        ;81F3B8|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F3BB:
+               .case2:
                        SEP #$20                             ;81F3BB|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F3BD|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F3C0|AD7009  |000970;
                        CMP.B #$C6                           ;81F3C3|C9C6    |      ;
-                       BEQ CODE_81F3CA                      ;81F3C5|F003    |81F3CA;
-                       JMP.W CODE_81F40D                    ;81F3C7|4C0DF4  |81F40D;
+                       BEQ +                                ;81F3C5|F003    |81F3CA;
+                       JMP.W .return                        ;81F3C7|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F3CA:
-                       REP #$30                             ;81F3CA|C230    |      ;
+                     + REP #$30                             ;81F3CA|C230    |      ;
                        LDA.W #$0040                         ;81F3CC|A94000  |      ;
                        EOR.W #$FFFF                         ;81F3CF|49FFFF  |      ;
                        AND.B $D2                            ;81F3D2|25D2    |0000D2;
                        STA.B $D2                            ;81F3D4|85D2    |0000D2;
-                       JMP.W CODE_81F40D                    ;81F3D6|4C0DF4  |81F40D;
+                       JMP.W .return                        ;81F3D6|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F3D9:
+               .case3:
                        SEP #$20                             ;81F3D9|E220    |      ;
                        LDA.W $019A                          ;81F3DB|AD9A01  |00019A;
                        CMP.B #$02                           ;81F3DE|C902    |      ;
-                       BNE CODE_81F3E5                      ;81F3E0|D003    |81F3E5;
-                       JMP.W CODE_81F40D                    ;81F3E2|4C0DF4  |81F40D;
+                       BNE +                                ;81F3E0|D003    |81F3E5;
+                       JMP.W .return                        ;81F3E2|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F3E5:
-                       REP #$20                             ;81F3E5|C220    |      ;
+                     + REP #$20                             ;81F3E5|C220    |      ;
                        LDA.W #$0009                         ;81F3E7|A90900  |      ;
                        LDX.W #$0000                         ;81F3EA|A20000  |      ;
                        LDY.W #$0038                         ;81F3ED|A03800  |      ;
-                       JSL.L CODE_84803F                    ;81F3F0|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81F3F0|223F8084|84803F;
                        REP #$20                             ;81F3F4|C220    |      ;
                        LDA.W #$000A                         ;81F3F6|A90A00  |      ;
                        LDX.W #$0000                         ;81F3F9|A20000  |      ;
                        LDY.W #$0039                         ;81F3FC|A03900  |      ;
-                       JSL.L CODE_84803F                    ;81F3FF|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81F3FF|223F8084|84803F;
                        SEP #$20                             ;81F403|E220    |      ;
                        LDA.B #$02                           ;81F405|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F407|8D6F09  |00096F;
-                       JMP.W CODE_81F40D                    ;81F40A|4C0DF4  |81F40D;
+                       JMP.W .return                        ;81F40A|4C0DF4  |81F40D;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F40D:
+              .return:
                        RTS                                  ;81F40D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -14252,71 +14132,68 @@ subUnknown81D593_0x49:
                        REP #$10                             ;81F410|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F412|AD6F09  |00096F;
                        CMP.B #$01                           ;81F415|C901    |      ;
-                       BEQ CODE_81F44C                      ;81F417|F033    |81F44C;
+                       BEQ .case1                           ;81F417|F033    |81F44C;
                        CMP.B #$02                           ;81F419|C902    |      ;
-                       BEQ CODE_81F471                      ;81F41B|F054    |81F471;
+                       BEQ .case2                           ;81F41B|F054    |81F471;
                        SEP #$20                             ;81F41D|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F41F|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F422|AD7009  |000970;
                        CMP.B #$20                           ;81F425|C920    |      ;
-                       BEQ CODE_81F42C                      ;81F427|F003    |81F42C;
-                       JMP.W CODE_81F48F                    ;81F429|4C8FF4  |81F48F;
+                       BEQ +                                ;81F427|F003    |81F42C;
+                       JMP.W .return                        ;81F429|4C8FF4  |81F48F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F42C:
-                       STZ.W nJumpTable81D593Arg2           ;81F42C|9C7009  |000970;
+                     + STZ.W nJumpTable81D593Arg2           ;81F42C|9C7009  |000970;
                        SEP #$20                             ;81F42F|E220    |      ;
                        LDA.B #$02                           ;81F431|A902    |      ;
                        STA.W $019A                          ;81F433|8D9A01  |00019A;
                        LDX.W #$0300                         ;81F436|A20003  |      ;
                        LDA.B #$00                           ;81F439|A900    |      ;
                        STA.W $0191                          ;81F43B|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F43E|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F43E|225F9383|83935F;
                        SEP #$20                             ;81F442|E220    |      ;
                        LDA.B #$01                           ;81F444|A901    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F446|8D6F09  |00096F;
-                       JMP.W CODE_81F48F                    ;81F449|4C8FF4  |81F48F;
+                       JMP.W .return                        ;81F449|4C8FF4  |81F48F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F44C:
+               .case1:
                        SEP #$20                             ;81F44C|E220    |      ;
                        LDA.W $019A                          ;81F44E|AD9A01  |00019A;
                        CMP.B #$02                           ;81F451|C902    |      ;
-                       BNE CODE_81F458                      ;81F453|D003    |81F458;
-                       JMP.W CODE_81F48F                    ;81F455|4C8FF4  |81F48F;
+                       BNE +                                ;81F453|D003    |81F458;
+                       JMP.W .return                        ;81F455|4C8FF4  |81F48F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F458:
-                       REP #$20                             ;81F458|C220    |      ;
+                     + REP #$20                             ;81F458|C220    |      ;
                        LDA.W #$000B                         ;81F45A|A90B00  |      ;
                        LDX.W #$0000                         ;81F45D|A20000  |      ;
                        LDY.W #$001E                         ;81F460|A01E00  |      ;
-                       JSL.L CODE_84803F                    ;81F463|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;81F463|223F8084|84803F;
                        SEP #$20                             ;81F467|E220    |      ;
                        LDA.B #$02                           ;81F469|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F46B|8D6F09  |00096F;
-                       JMP.W CODE_81F48F                    ;81F46E|4C8FF4  |81F48F;
+                       JMP.W .return                        ;81F46E|4C8FF4  |81F48F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F471:
+               .case2:
                        SEP #$20                             ;81F471|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F473|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F476|AD7009  |000970;
                        CMP.B #$C6                           ;81F479|C9C6    |      ;
-                       BEQ CODE_81F480                      ;81F47B|F003    |81F480;
-                       JMP.W CODE_81F48F                    ;81F47D|4C8FF4  |81F48F;
+                       BEQ +                                ;81F47B|F003    |81F480;
+                       JMP.W .return                        ;81F47D|4C8FF4  |81F48F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F480:
-                       REP #$30                             ;81F480|C230    |      ;
+                     + REP #$30                             ;81F480|C230    |      ;
                        LDA.W #$0040                         ;81F482|A94000  |      ;
                        EOR.W #$FFFF                         ;81F485|49FFFF  |      ;
                        AND.B $D2                            ;81F488|25D2    |0000D2;
                        STA.B $D2                            ;81F48A|85D2    |0000D2;
-                       JMP.W CODE_81F48F                    ;81F48C|4C8FF4  |81F48F;
+                       JMP.W .return                        ;81F48C|4C8FF4  |81F48F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F48F:
+              .return:
                        RTS                                  ;81F48F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -14330,7 +14207,7 @@ subUnknown81D593_0x4A:
                        JSL.L fUnknown_81A688                ;81F4A1|2288A681|81A688;
                        REP #$30                             ;81F4A5|C230    |      ;
                        LDA.W #$0001                         ;81F4A7|A90100  |      ;
-                       JMP.W CODE_81F556                    ;81F4AA|4C56F5  |81F556;
+                       JMP.W fUnknown_81F556                ;81F4AA|4C56F5  |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x4B:
@@ -14343,7 +14220,7 @@ subUnknown81D593_0x4B:
                        JSL.L fUnknown_81A688                ;81F4BE|2288A681|81A688;
                        REP #$30                             ;81F4C2|C230    |      ;
                        LDA.W #$0002                         ;81F4C4|A90200  |      ;
-                       JMP.W CODE_81F556                    ;81F4C7|4C56F5  |81F556;
+                       JMP.W fUnknown_81F556                ;81F4C7|4C56F5  |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x4C:
@@ -14356,7 +14233,7 @@ subUnknown81D593_0x4C:
                        JSL.L fUnknown_81A688                ;81F4DB|2288A681|81A688;
                        REP #$30                             ;81F4DF|C230    |      ;
                        LDA.W #$0003                         ;81F4E1|A90300  |      ;
-                       BRA CODE_81F556                      ;81F4E4|8070    |81F556;
+                       BRA fUnknown_81F556                  ;81F4E4|8070    |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x4D:
@@ -14369,7 +14246,7 @@ subUnknown81D593_0x4D:
                        JSL.L fUnknown_81A688                ;81F4F7|2288A681|81A688;
                        REP #$30                             ;81F4FB|C230    |      ;
                        LDA.W #$0004                         ;81F4FD|A90400  |      ;
-                       BRA CODE_81F556                      ;81F500|8054    |81F556;
+                       BRA fUnknown_81F556                  ;81F500|8054    |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x4E:
@@ -14382,7 +14259,7 @@ subUnknown81D593_0x4E:
                        JSL.L fUnknown_81A688                ;81F513|2288A681|81A688;
                        REP #$30                             ;81F517|C230    |      ;
                        LDA.W #$0005                         ;81F519|A90500  |      ;
-                       BRA CODE_81F556                      ;81F51C|8038    |81F556;
+                       BRA fUnknown_81F556                  ;81F51C|8038    |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x4F:
@@ -14395,7 +14272,7 @@ subUnknown81D593_0x4F:
                        JSL.L fUnknown_81A688                ;81F52F|2288A681|81A688;
                        REP #$30                             ;81F533|C230    |      ;
                        LDA.W #$0006                         ;81F535|A90600  |      ;
-                       BRA CODE_81F556                      ;81F538|801C    |81F556;
+                       BRA fUnknown_81F556                  ;81F538|801C    |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x50:
@@ -14408,15 +14285,15 @@ subUnknown81D593_0x50:
                        JSL.L fUnknown_81A688                ;81F54B|2288A681|81A688;
                        REP #$30                             ;81F54F|C230    |      ;
                        LDA.W #$0007                         ;81F551|A90700  |      ;
-                       BRA CODE_81F556                      ;81F554|8000    |81F556;
+                       BRA fUnknown_81F556                  ;81F554|8000    |81F556;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F556:
+      fUnknown_81F556:
                        REP #$30                             ;81F556|C230    |      ;
                        TAX                                  ;81F558|AA      |      ;
                        SEP #$20                             ;81F559|E220    |      ;
                        LDA.W $09A4,X                        ;81F55B|BDA409  |0009A4;
-                       BEQ CODE_81F594                      ;81F55E|F034    |81F594;
+                       BEQ +                                ;81F55E|F034    |81F594;
                        TXY                                  ;81F560|9B      |      ;
                        XBA                                  ;81F561|EB      |      ;
                        LDA.B #$00                           ;81F562|A900    |      ;
@@ -14427,7 +14304,7 @@ subUnknown81D593_0x50:
                        TAX                                  ;81F569|AA      |      ;
                        LDA.L DATA16_81FAB4,X                ;81F56A|BFB4FA81|81FAB4;
                        AND.L $7F1F78                        ;81F56E|2F781F7F|7F1F78;
-                       BNE CODE_81F594                      ;81F572|D020    |81F594;
+                       BNE +                                ;81F572|D020    |81F594;
                        TYX                                  ;81F574|BB      |      ;
                        SEP #$20                             ;81F575|E220    |      ;
                        LDA.W $09A4,X                        ;81F577|BDA409  |0009A4;
@@ -14445,8 +14322,7 @@ subUnknown81D593_0x50:
                        RTS                                  ;81F593|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F594:
-                       REP #$30                             ;81F594|C230    |      ;
+                     + REP #$30                             ;81F594|C230    |      ;
                        LDA.W #$00A1                         ;81F596|A9A100  |      ;
                        LDX.W $09AD                          ;81F599|AEAD09  |0009AD;
                        LDY.W $09AF                          ;81F59C|ACAF09  |0009AF;
@@ -14464,49 +14340,45 @@ subUnknown81D593_0x51:
                        REP #$10                             ;81F5B2|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F5B4|AD6F09  |00096F;
                        CMP.B #$01                           ;81F5B7|C901    |      ;
-                       BEQ CODE_81F5EB                      ;81F5B9|F030    |81F5EB;
+                       BEQ .case1                           ;81F5B9|F030    |81F5EB;
                        CMP.B #$02                           ;81F5BB|C902    |      ;
-                       BNE CODE_81F5C2                      ;81F5BD|D003    |81F5C2;
-                       JMP.W CODE_81F66C                    ;81F5BF|4C6CF6  |81F66C;
+                       BNE +                                ;81F5BD|D003    |81F5C2;
+                       JMP.W .case2                         ;81F5BF|4C6CF6  |81F66C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F5C2:
-                       CMP.B #$03                           ;81F5C2|C903    |      ;
-                       BNE CODE_81F5C9                      ;81F5C4|D003    |81F5C9;
-                       JMP.W CODE_81F69E                    ;81F5C6|4C9EF6  |81F69E;
+                     + CMP.B #$03                           ;81F5C2|C903    |      ;
+                       BNE +                                ;81F5C4|D003    |81F5C9;
+                       JMP.W .case3                         ;81F5C6|4C9EF6  |81F69E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F5C9:
-                       CMP.B #$04                           ;81F5C9|C904    |      ;
-                       BNE CODE_81F5D0                      ;81F5CB|D003    |81F5D0;
-                       JMP.W CODE_81F6B5                    ;81F5CD|4CB5F6  |81F6B5;
+                     + CMP.B #$04                           ;81F5C9|C904    |      ;
+                       BNE +                                ;81F5CB|D003    |81F5D0;
+                       JMP.W .case4                         ;81F5CD|4CB5F6  |81F6B5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F5D0:
-                       SEP #$20                             ;81F5D0|E220    |      ;
+                     + SEP #$20                             ;81F5D0|E220    |      ;
                        LDA.B #$02                           ;81F5D2|A902    |      ;
                        STA.W $019A                          ;81F5D4|8D9A01  |00019A;
                        LDX.W #$024B                         ;81F5D7|A24B02  |      ;
                        LDA.B #$00                           ;81F5DA|A900    |      ;
                        STA.W $0191                          ;81F5DC|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F5DF|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F5DF|225F9383|83935F;
                        SEP #$20                             ;81F5E3|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81F5E5|EE6F09  |00096F;
-                       JMP.W CODE_81F6D6                    ;81F5E8|4CD6F6  |81F6D6;
+                       JMP.W AAAAAAAAAAAAAAAAAA             ;81F5E8|4CD6F6  |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F5EB:
+               .case1:
                        SEP #$20                             ;81F5EB|E220    |      ;
                        LDA.W $019A                          ;81F5ED|AD9A01  |00019A;
                        CMP.B #$02                           ;81F5F0|C902    |      ;
-                       BNE CODE_81F5F7                      ;81F5F2|D003    |81F5F7;
-                       JMP.W CODE_81F6D6                    ;81F5F4|4CD6F6  |81F6D6;
+                       BNE +                                ;81F5F2|D003    |81F5F7;
+                       JMP.W AAAAAAAAAAAAAAAAAA             ;81F5F4|4CD6F6  |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F5F7:
-                       SEP #$20                             ;81F5F7|E220    |      ;
+                     + SEP #$20                             ;81F5F7|E220    |      ;
                        LDA.W $018F                          ;81F5F9|AD8F01  |00018F;
-                       BNE CODE_81F633                      ;81F5FC|D035    |81F633;
+                       BNE .label1                          ;81F5FC|D035    |81F633;
                        REP #$20                             ;81F5FE|C220    |      ;
                        LDA.W #$FFEC                         ;81F600|A9ECFF  |      ;
                        STA.B ptrUnknown0x72                 ;81F603|8572    |000072;
@@ -14516,53 +14388,53 @@ subUnknown81D593_0x51:
                        JSL.L fUnknown_83B1C9                ;81F60B|22C9B183|83B1C9;
                        REP #$20                             ;81F60F|C220    |      ;
                        CMP.W #$0000                         ;81F611|C90000  |      ;
-                       BNE CODE_81F650                      ;81F614|D03A    |81F650;
+                       BNE .label2                          ;81F614|D03A    |81F650;
                        SEP #$20                             ;81F616|E220    |      ;
                        LDA.B #$02                           ;81F618|A902    |      ;
                        STA.W $019A                          ;81F61A|8D9A01  |00019A;
                        LDX.W #$024C                         ;81F61D|A24C02  |      ;
                        LDA.B #$00                           ;81F620|A900    |      ;
                        STA.W $0191                          ;81F622|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F625|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F625|225F9383|83935F;
                        SEP #$20                             ;81F629|E220    |      ;
                        LDA.B #$02                           ;81F62B|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F62D|8D6F09  |00096F;
-                       JMP.W CODE_81F6D6                    ;81F630|4CD6F6  |81F6D6;
+                       JMP.W AAAAAAAAAAAAAAAAAA             ;81F630|4CD6F6  |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F633:
+              .label1:
                        SEP #$20                             ;81F633|E220    |      ;
                        LDA.B #$02                           ;81F635|A902    |      ;
                        STA.W $019A                          ;81F637|8D9A01  |00019A;
                        LDX.W #$024D                         ;81F63A|A24D02  |      ;
                        LDA.B #$00                           ;81F63D|A900    |      ;
                        STA.W $0191                          ;81F63F|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F642|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F642|225F9383|83935F;
                        SEP #$20                             ;81F646|E220    |      ;
                        LDA.B #$03                           ;81F648|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F64A|8D6F09  |00096F;
-                       JMP.W CODE_81F6D6                    ;81F64D|4CD6F6  |81F6D6;
+                       JMP.W AAAAAAAAAAAAAAAAAA             ;81F64D|4CD6F6  |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F650:
+              .label2:
                        SEP #$20                             ;81F650|E220    |      ;
                        LDA.B #$02                           ;81F652|A902    |      ;
                        STA.W $019A                          ;81F654|8D9A01  |00019A;
                        LDX.W #$0213                         ;81F657|A21302  |      ;
                        LDA.B #$00                           ;81F65A|A900    |      ;
                        STA.W $0191                          ;81F65C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F65F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F65F|225F9383|83935F;
                        SEP #$20                             ;81F663|E220    |      ;
                        LDA.B #$03                           ;81F665|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F667|8D6F09  |00096F;
-                       BRA CODE_81F6D6                      ;81F66A|806A    |81F6D6;
+                       BRA AAAAAAAAAAAAAAAAAA               ;81F66A|806A    |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F66C:
+               .case2:
                        SEP #$20                             ;81F66C|E220    |      ;
                        LDA.W $019A                          ;81F66E|AD9A01  |00019A;
                        CMP.B #$02                           ;81F671|C902    |      ;
-                       BEQ CODE_81F6D6                      ;81F673|F061    |81F6D6;
+                       BEQ AAAAAAAAAAAAAAAAAA               ;81F673|F061    |81F6D6;
                        REP #$20                             ;81F675|C220    |      ;
                        REP #$30                             ;81F677|C230    |      ;
                        LDA.W #$0019                         ;81F679|A91900  |      ;
@@ -14578,28 +14450,28 @@ subUnknown81D593_0x51:
                        STZ.W nJumpTable81D593Arg2           ;81F694|9C7009  |000970;
                        LDA.B #$04                           ;81F697|A904    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F699|8D6F09  |00096F;
-                       BRA CODE_81F6D6                      ;81F69C|8038    |81F6D6;
+                       BRA AAAAAAAAAAAAAAAAAA               ;81F69C|8038    |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F69E:
+               .case3:
                        SEP #$20                             ;81F69E|E220    |      ;
                        LDA.W $019A                          ;81F6A0|AD9A01  |00019A;
                        CMP.B #$02                           ;81F6A3|C902    |      ;
-                       BEQ CODE_81F6D6                      ;81F6A5|F02F    |81F6D6;
+                       BEQ AAAAAAAAAAAAAAAAAA               ;81F6A5|F02F    |81F6D6;
                        REP #$30                             ;81F6A7|C230    |      ;
                        LDA.W #$0040                         ;81F6A9|A94000  |      ;
                        EOR.W #$FFFF                         ;81F6AC|49FFFF  |      ;
                        AND.B $D2                            ;81F6AF|25D2    |0000D2;
                        STA.B $D2                            ;81F6B1|85D2    |0000D2;
-                       BRA CODE_81F6D6                      ;81F6B3|8021    |81F6D6;
+                       BRA AAAAAAAAAAAAAAAAAA               ;81F6B3|8021    |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F6B5:
+               .case4:
                        SEP #$20                             ;81F6B5|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F6B7|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F6BA|AD7009  |000970;
                        CMP.B #$64                           ;81F6BD|C964    |      ;
-                       BNE CODE_81F6D6                      ;81F6BF|D015    |81F6D6;
+                       BNE AAAAAAAAAAAAAAAAAA               ;81F6BF|D015    |81F6D6;
                        REP #$30                             ;81F6C1|C230    |      ;
                        LDA.W #$0040                         ;81F6C3|A94000  |      ;
                        EOR.W #$FFFF                         ;81F6C6|49FFFF  |      ;
@@ -14608,11 +14480,11 @@ subUnknown81D593_0x51:
                        REP #$30                             ;81F6CD|C230    |      ;
                        LDA.W #$0000                         ;81F6CF|A90000  |      ;
                        STA.B $D4                            ;81F6D2|85D4    |0000D4;
-                       BRA CODE_81F6D6                      ;81F6D4|8000    |81F6D6;
+                       BRA AAAAAAAAAAAAAAAAAA               ;81F6D4|8000    |81F6D6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F6D6:
-                       RTS                                  ;81F6D6|60      |      ;
+   AAAAAAAAAAAAAAAAAA:
+                       RTS                                  ;81F6D6|60      |      ; FIX ME here: 0x81F791
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x52:
@@ -14620,49 +14492,45 @@ subUnknown81D593_0x52:
                        REP #$10                             ;81F6D9|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F6DB|AD6F09  |00096F;
                        CMP.B #$01                           ;81F6DE|C901    |      ;
-                       BEQ CODE_81F712                      ;81F6E0|F030    |81F712;
+                       BEQ .case1                           ;81F6E0|F030    |81F712;
                        CMP.B #$02                           ;81F6E2|C902    |      ;
-                       BNE CODE_81F6E9                      ;81F6E4|D003    |81F6E9;
-                       JMP.W CODE_81F794                    ;81F6E6|4C94F7  |81F794;
+                       BNE +                                ;81F6E4|D003    |81F6E9;
+                       JMP.W .case2                         ;81F6E6|4C94F7  |81F794;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F6E9:
-                       CMP.B #$03                           ;81F6E9|C903    |      ;
-                       BNE CODE_81F6F0                      ;81F6EB|D003    |81F6F0;
-                       JMP.W CODE_81F7C6                    ;81F6ED|4CC6F7  |81F7C6;
+                     + CMP.B #$03                           ;81F6E9|C903    |      ;
+                       BNE +                                ;81F6EB|D003    |81F6F0;
+                       JMP.W .case3                         ;81F6ED|4CC6F7  |81F7C6;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F6F0:
-                       CMP.B #$04                           ;81F6F0|C904    |      ;
-                       BNE CODE_81F6F7                      ;81F6F2|D003    |81F6F7;
-                       JMP.W CODE_81F7DD                    ;81F6F4|4CDDF7  |81F7DD;
+                     + CMP.B #$04                           ;81F6F0|C904    |      ;
+                       BNE +                                ;81F6F2|D003    |81F6F7;
+                       JMP.W .case4                         ;81F6F4|4CDDF7  |81F7DD;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F6F7:
-                       SEP #$20                             ;81F6F7|E220    |      ;
+                     + SEP #$20                             ;81F6F7|E220    |      ;
                        LDA.B #$02                           ;81F6F9|A902    |      ;
                        STA.W $019A                          ;81F6FB|8D9A01  |00019A;
                        LDX.W #$024A                         ;81F6FE|A24A02  |      ;
                        LDA.B #$00                           ;81F701|A900    |      ;
                        STA.W $0191                          ;81F703|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F706|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F706|225F9383|83935F;
                        SEP #$20                             ;81F70A|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81F70C|EE6F09  |00096F;
-                       JMP.W CODE_81F7FE                    ;81F70F|4CFEF7  |81F7FE;
+                       JMP.W .return                        ;81F70F|4CFEF7  |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F712:
+               .case1:
                        SEP #$20                             ;81F712|E220    |      ;
                        LDA.W $019A                          ;81F714|AD9A01  |00019A;
                        CMP.B #$02                           ;81F717|C902    |      ;
-                       BNE CODE_81F71E                      ;81F719|D003    |81F71E;
-                       JMP.W CODE_81F7FE                    ;81F71B|4CFEF7  |81F7FE;
+                       BNE +                                ;81F719|D003    |81F71E;
+                       JMP.W .return                        ;81F71B|4CFEF7  |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F71E:
-                       SEP #$20                             ;81F71E|E220    |      ;
+                     + SEP #$20                             ;81F71E|E220    |      ;
                        LDA.W $018F                          ;81F720|AD8F01  |00018F;
-                       BNE CODE_81F75A                      ;81F723|D035    |81F75A;
+                       BNE .label1                          ;81F723|D035    |81F75A;
                        REP #$20                             ;81F725|C220    |      ;
                        LDA.W #$FFE2                         ;81F727|A9E2FF  |      ;
                        STA.B ptrUnknown0x72                 ;81F72A|8572    |000072;
@@ -14672,53 +14540,53 @@ subUnknown81D593_0x52:
                        JSL.L fUnknown_83B1C9                ;81F732|22C9B183|83B1C9;
                        REP #$20                             ;81F736|C220    |      ;
                        CMP.W #$0000                         ;81F738|C90000  |      ;
-                       BNE CODE_81F777                      ;81F73B|D03A    |81F777;
+                       BNE .label2                          ;81F73B|D03A    |81F777;
                        SEP #$20                             ;81F73D|E220    |      ;
                        LDA.B #$02                           ;81F73F|A902    |      ;
                        STA.W $019A                          ;81F741|8D9A01  |00019A;
                        LDX.W #$024C                         ;81F744|A24C02  |      ;
                        LDA.B #$00                           ;81F747|A900    |      ;
                        STA.W $0191                          ;81F749|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F74C|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F74C|225F9383|83935F;
                        SEP #$20                             ;81F750|E220    |      ;
                        LDA.B #$02                           ;81F752|A902    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F754|8D6F09  |00096F;
-                       JMP.W CODE_81F7FE                    ;81F757|4CFEF7  |81F7FE;
+                       JMP.W .return                        ;81F757|4CFEF7  |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F75A:
+              .label1:
                        SEP #$20                             ;81F75A|E220    |      ;
                        LDA.B #$02                           ;81F75C|A902    |      ;
                        STA.W $019A                          ;81F75E|8D9A01  |00019A;
                        LDX.W #$024D                         ;81F761|A24D02  |      ;
                        LDA.B #$00                           ;81F764|A900    |      ;
                        STA.W $0191                          ;81F766|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F769|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F769|225F9383|83935F;
                        SEP #$20                             ;81F76D|E220    |      ;
                        LDA.B #$03                           ;81F76F|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F771|8D6F09  |00096F;
-                       JMP.W CODE_81F7FE                    ;81F774|4CFEF7  |81F7FE;
+                       JMP.W .return                        ;81F774|4CFEF7  |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F777:
+              .label2:
                        SEP #$20                             ;81F777|E220    |      ;
                        LDA.B #$02                           ;81F779|A902    |      ;
                        STA.W $019A                          ;81F77B|8D9A01  |00019A;
                        LDX.W #$0213                         ;81F77E|A21302  |      ;
                        LDA.B #$00                           ;81F781|A900    |      ;
                        STA.W $0191                          ;81F783|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F786|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F786|225F9383|83935F;
                        SEP #$20                             ;81F78A|E220    |      ;
                        LDA.B #$03                           ;81F78C|A903    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F78E|8D6F09  |00096F;
-                       JMP.W CODE_81F6D6                    ;81F791|4CD6F6  |81F6D6;
+                       JMP.W AAAAAAAAAAAAAAAAAA             ;81F791|4CD6F6  |81F6D6; BUG - should be JMP.W $F7FE ( aka .return in this function rather than previous one since we are out of function scope)
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F794:
+               .case2:
                        SEP #$20                             ;81F794|E220    |      ;
                        LDA.W $019A                          ;81F796|AD9A01  |00019A;
                        CMP.B #$02                           ;81F799|C902    |      ;
-                       BEQ CODE_81F7FE                      ;81F79B|F061    |81F7FE;
+                       BEQ .return                          ;81F79B|F061    |81F7FE;
                        REP #$20                             ;81F79D|C220    |      ;
                        REP #$30                             ;81F79F|C230    |      ;
                        LDA.W #$0019                         ;81F7A1|A91900  |      ;
@@ -14734,28 +14602,28 @@ subUnknown81D593_0x52:
                        STZ.W nJumpTable81D593Arg2           ;81F7BC|9C7009  |000970;
                        LDA.B #$04                           ;81F7BF|A904    |      ;
                        STA.W nJumpTable81D593Arg1           ;81F7C1|8D6F09  |00096F;
-                       BRA CODE_81F7FE                      ;81F7C4|8038    |81F7FE;
+                       BRA .return                          ;81F7C4|8038    |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F7C6:
+               .case3:
                        SEP #$20                             ;81F7C6|E220    |      ;
                        LDA.W $019A                          ;81F7C8|AD9A01  |00019A;
                        CMP.B #$02                           ;81F7CB|C902    |      ;
-                       BEQ CODE_81F7FE                      ;81F7CD|F02F    |81F7FE;
+                       BEQ .return                          ;81F7CD|F02F    |81F7FE;
                        REP #$30                             ;81F7CF|C230    |      ;
                        LDA.W #$0040                         ;81F7D1|A94000  |      ;
                        EOR.W #$FFFF                         ;81F7D4|49FFFF  |      ;
                        AND.B $D2                            ;81F7D7|25D2    |0000D2;
                        STA.B $D2                            ;81F7D9|85D2    |0000D2;
-                       BRA CODE_81F7FE                      ;81F7DB|8021    |81F7FE;
+                       BRA .return                          ;81F7DB|8021    |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F7DD:
+               .case4:
                        SEP #$20                             ;81F7DD|E220    |      ;
                        INC.W nJumpTable81D593Arg2           ;81F7DF|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81F7E2|AD7009  |000970;
                        CMP.B #$64                           ;81F7E5|C964    |      ;
-                       BNE CODE_81F7FE                      ;81F7E7|D015    |81F7FE;
+                       BNE .return                          ;81F7E7|D015    |81F7FE;
                        REP #$30                             ;81F7E9|C230    |      ;
                        LDA.W #$0040                         ;81F7EB|A94000  |      ;
                        EOR.W #$FFFF                         ;81F7EE|49FFFF  |      ;
@@ -14764,10 +14632,10 @@ subUnknown81D593_0x52:
                        REP #$30                             ;81F7F5|C230    |      ;
                        LDA.W #$0000                         ;81F7F7|A90000  |      ;
                        STA.B $D4                            ;81F7FA|85D4    |0000D4;
-                       BRA CODE_81F7FE                      ;81F7FC|8000    |81F7FE;
+                       BRA .return                          ;81F7FC|8000    |81F7FE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F7FE:
+              .return:
                        RTS                                  ;81F7FE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -14803,7 +14671,7 @@ subUnknown81D593_0x53:
                        STA.B $7E                            ;81F839|857E    |00007E;
                        LDY.W #$0000                         ;81F83B|A00000  |      ;
                                                             ;      |        |      ;
-          CODE_81F83E:
+                .loop:
                        REP #$30                             ;81F83E|C230    |      ;
                        TYA                                  ;81F840|98      |      ;
                        ASL A                                ;81F841|0A      |      ;
@@ -14813,26 +14681,25 @@ subUnknown81D593_0x53:
                        SEC                                  ;81F848|38      |      ;
                        SBC.W #$0008                         ;81F849|E90800  |      ;
                        CMP.B $7E                            ;81F84C|C57E    |00007E;
-                       BEQ CODE_81F858                      ;81F84E|F008    |81F858;
+                       BEQ +                                ;81F84E|F008    |81F858;
                        INY                                  ;81F850|C8      |      ;
                        CPY.W #$000D                         ;81F851|C00D00  |      ;
-                       BNE CODE_81F83E                      ;81F854|D0E8    |81F83E;
+                       BNE .loop                            ;81F854|D0E8    |81F83E;
                                                             ;      |        |      ;
-          CODE_81F856:
-                       BRA CODE_81F856                      ;81F856|80FE    |81F856;
+            .deadloop:
+                       BRA .deadloop                        ;81F856|80FE    |81F856;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F858:
-                       TYA                                  ;81F858|98      |      ;
+                     + TYA                                  ;81F858|98      |      ;
                        ASL A                                ;81F859|0A      |      ;
                        TAX                                  ;81F85A|AA      |      ;
                        LDA.L DATA16_81FAD4,X                ;81F85B|BFD4FA81|81FAD4;
                        AND.L $7F1F45                        ;81F85F|2F451F7F|7F1F45;
                        STA.L $7F1F45                        ;81F863|8F451F7F|7F1F45;
-                       BRA CODE_81F869                      ;81F867|8000    |81F869;
+                       BRA .return                          ;81F867|8000    |81F869;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F869:
+              .return:
                        RTS                                  ;81F869|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -14841,98 +14708,96 @@ subUnknown81D593_0x54:
                        REP #$10                             ;81F86C|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F86E|AD6F09  |00096F;
                        CMP.B #$01                           ;81F871|C901    |      ;
-                       BEQ CODE_81F890                      ;81F873|F01B    |81F890;
+                       BEQ .checks                          ;81F873|F01B    |81F890;
                        SEP #$20                             ;81F875|E220    |      ;
                        LDA.B #$02                           ;81F877|A902    |      ;
                        STA.W $019A                          ;81F879|8D9A01  |00019A;
                        LDX.W #$0455                         ;81F87C|A25504  |      ;
                        LDA.B #$00                           ;81F87F|A900    |      ;
                        STA.W $0191                          ;81F881|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F884|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F884|225F9383|83935F;
                        SEP #$20                             ;81F888|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81F88A|EE6F09  |00096F;
-                       JMP.W CODE_81F91E                    ;81F88D|4C1EF9  |81F91E;
+                       JMP.W .justReturn                    ;81F88D|4C1EF9  |81F91E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F890:
+              .checks:
                        REP #$30                             ;81F890|C230    |      ;
                        LDA.W $0124                          ;81F892|AD2401  |000124;
                        BIT.W #$8000                         ;81F895|890080  |      ;
-                       BEQ CODE_81F89D                      ;81F898|F003    |81F89D;
-                       JMP.W CODE_81F91F                    ;81F89A|4C1FF9  |81F91F;
+                       BEQ +                                ;81F898|F003    |81F89D;
+                       JMP.W .return                        ;81F89A|4C1FF9  |81F91F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F89D:
-                       SEP #$20                             ;81F89D|E220    |      ;
+                     + SEP #$20                             ;81F89D|E220    |      ;
                        LDA.W $019A                          ;81F89F|AD9A01  |00019A;
                        CMP.B #$02                           ;81F8A2|C902    |      ;
-                       BNE CODE_81F8A9                      ;81F8A4|D003    |81F8A9;
-                       JMP.W CODE_81F91E                    ;81F8A6|4C1EF9  |81F91E;
+                       BNE +                                ;81F8A4|D003    |81F8A9;
+                       JMP.W .justReturn                    ;81F8A6|4C1EF9  |81F91E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F8A9:
-                       LDA.W $018F                          ;81F8A9|AD8F01  |00018F;
+                     + LDA.W $018F                          ;81F8A9|AD8F01  |00018F;
                        CMP.B #$00                           ;81F8AC|C900    |      ;
-                       BEQ CODE_81F8B8                      ;81F8AE|F008    |81F8B8;
+                       BEQ .case0                           ;81F8AE|F008    |81F8B8;
                        CMP.B #$01                           ;81F8B0|C901    |      ;
-                       BEQ CODE_81F8DA                      ;81F8B2|F026    |81F8DA;
+                       BEQ .case1                           ;81F8B2|F026    |81F8DA;
                        CMP.B #$02                           ;81F8B4|C902    |      ;
-                       BEQ CODE_81F8FC                      ;81F8B6|F044    |81F8FC;
+                       BEQ .case2                           ;81F8B6|F044    |81F8FC;
                                                             ;      |        |      ;
-          CODE_81F8B8:
+               .case0:
                        SEP #$20                             ;81F8B8|E220    |      ;
                        LDA.B #$02                           ;81F8BA|A902    |      ;
                        STA.W $019A                          ;81F8BC|8D9A01  |00019A;
                        LDX.W #$0456                         ;81F8BF|A25604  |      ;
                        LDA.B #$00                           ;81F8C2|A900    |      ;
                        STA.W $0191                          ;81F8C4|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F8C7|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F8C7|225F9383|83935F;
                        REP #$30                             ;81F8CB|C230    |      ;
                        LDA.W #$0040                         ;81F8CD|A94000  |      ;
                        EOR.W #$FFFF                         ;81F8D0|49FFFF  |      ;
                        AND.B $D2                            ;81F8D3|25D2    |0000D2;
                        STA.B $D2                            ;81F8D5|85D2    |0000D2;
-                       JMP.W CODE_81F91E                    ;81F8D7|4C1EF9  |81F91E;
+                       JMP.W .justReturn                    ;81F8D7|4C1EF9  |81F91E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F8DA:
+               .case1:
                        SEP #$20                             ;81F8DA|E220    |      ;
                        LDA.B #$02                           ;81F8DC|A902    |      ;
                        STA.W $019A                          ;81F8DE|8D9A01  |00019A;
                        LDX.W #$0457                         ;81F8E1|A25704  |      ;
                        LDA.B #$00                           ;81F8E4|A900    |      ;
                        STA.W $0191                          ;81F8E6|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F8E9|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F8E9|225F9383|83935F;
                        REP #$30                             ;81F8ED|C230    |      ;
                        LDA.W #$0040                         ;81F8EF|A94000  |      ;
                        EOR.W #$FFFF                         ;81F8F2|49FFFF  |      ;
                        AND.B $D2                            ;81F8F5|25D2    |0000D2;
                        STA.B $D2                            ;81F8F7|85D2    |0000D2;
-                       JMP.W CODE_81F91E                    ;81F8F9|4C1EF9  |81F91E;
+                       JMP.W .justReturn                    ;81F8F9|4C1EF9  |81F91E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F8FC:
+               .case2:
                        SEP #$20                             ;81F8FC|E220    |      ;
                        LDA.B #$02                           ;81F8FE|A902    |      ;
                        STA.W $019A                          ;81F900|8D9A01  |00019A;
                        LDX.W #$0458                         ;81F903|A25804  |      ;
                        LDA.B #$00                           ;81F906|A900    |      ;
                        STA.W $0191                          ;81F908|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F90B|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F90B|225F9383|83935F;
                        REP #$30                             ;81F90F|C230    |      ;
                        LDA.W #$0040                         ;81F911|A94000  |      ;
                        EOR.W #$FFFF                         ;81F914|49FFFF  |      ;
                        AND.B $D2                            ;81F917|25D2    |0000D2;
                        STA.B $D2                            ;81F919|85D2    |0000D2;
-                       JMP.W CODE_81F91E                    ;81F91B|4C1EF9  |81F91E;
+                       JMP.W .justReturn                    ;81F91B|4C1EF9  |81F91E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F91E:
+          .justReturn:
                        RTS                                  ;81F91E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F91F:
-                       JSL.L CODE_8393F9                    ;81F91F|22F99383|8393F9;
+              .return:
+                       JSL.L fUnknown_8393F9                ;81F91F|22F99383|8393F9;
                        SEP #$20                             ;81F923|E220    |      ;
                        LDA.B #$01                           ;81F925|A901    |      ;
                        STA.W $019A                          ;81F927|8D9A01  |00019A;
@@ -14953,136 +14818,134 @@ subUnknown81D593_0x55:
                        REP #$10                             ;81F944|C210    |      ;
                        LDA.W nJumpTable81D593Arg1           ;81F946|AD6F09  |00096F;
                        CMP.B #$01                           ;81F949|C901    |      ;
-                       BEQ CODE_81F968                      ;81F94B|F01B    |81F968;
+                       BEQ .checks                          ;81F94B|F01B    |81F968;
                        SEP #$20                             ;81F94D|E220    |      ;
                        LDA.B #$02                           ;81F94F|A902    |      ;
                        STA.W $019A                          ;81F951|8D9A01  |00019A;
                        LDX.W #$0459                         ;81F954|A25904  |      ;
                        LDA.B #$00                           ;81F957|A900    |      ;
                        STA.W $0191                          ;81F959|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F95C|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F95C|225F9383|83935F;
                        SEP #$20                             ;81F960|E220    |      ;
                        INC.W nJumpTable81D593Arg1           ;81F962|EE6F09  |00096F;
-                       JMP.W CODE_81FA45                    ;81F965|4C45FA  |81FA45;
+                       JMP.W .justReturn                    ;81F965|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F968:
+              .checks:
                        REP #$30                             ;81F968|C230    |      ;
                        LDA.W $0124                          ;81F96A|AD2401  |000124;
                        BIT.W #$8000                         ;81F96D|890080  |      ;
-                       BEQ CODE_81F975                      ;81F970|F003    |81F975;
-                       JMP.W CODE_81FA46                    ;81F972|4C46FA  |81FA46;
+                       BEQ +                                ;81F970|F003    |81F975;
+                       JMP.W .return                        ;81F972|4C46FA  |81FA46;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F975:
-                       SEP #$20                             ;81F975|E220    |      ;
+                     + SEP #$20                             ;81F975|E220    |      ;
                        LDA.W $019A                          ;81F977|AD9A01  |00019A;
                        CMP.B #$02                           ;81F97A|C902    |      ;
-                       BNE CODE_81F981                      ;81F97C|D003    |81F981;
-                       JMP.W CODE_81FA45                    ;81F97E|4C45FA  |81FA45;
+                       BNE +                                ;81F97C|D003    |81F981;
+                       JMP.W .justReturn                    ;81F97E|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F981:
-                       LDA.W $018F                          ;81F981|AD8F01  |00018F;
+                     + LDA.W $018F                          ;81F981|AD8F01  |00018F;
                        CMP.B #$00                           ;81F984|C900    |      ;
-                       BEQ CODE_81F99B                      ;81F986|F013    |81F99B;
+                       BEQ .case0                           ;81F986|F013    |81F99B;
                        CMP.B #$01                           ;81F988|C901    |      ;
-                       BEQ CODE_81F9BD                      ;81F98A|F031    |81F9BD;
+                       BEQ .case1                           ;81F98A|F031    |81F9BD;
                        CMP.B #$02                           ;81F98C|C902    |      ;
-                       BEQ CODE_81F9DF                      ;81F98E|F04F    |81F9DF;
+                       BEQ .case2                           ;81F98E|F04F    |81F9DF;
                        CMP.B #$03                           ;81F990|C903    |      ;
-                       BEQ CODE_81FA01                      ;81F992|F06D    |81FA01;
+                       BEQ .case3                           ;81F992|F06D    |81FA01;
                        CMP.B #$04                           ;81F994|C904    |      ;
-                       BNE CODE_81F99B                      ;81F996|D003    |81F99B;
-                       JMP.W CODE_81FA23                    ;81F998|4C23FA  |81FA23;
+                       BNE .case0                           ;81F996|D003    |81F99B;
+                       JMP.W .case4                         ;81F998|4C23FA  |81FA23;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F99B:
+               .case0:
                        SEP #$20                             ;81F99B|E220    |      ;
                        LDA.B #$02                           ;81F99D|A902    |      ;
                        STA.W $019A                          ;81F99F|8D9A01  |00019A;
                        LDX.W #$045A                         ;81F9A2|A25A04  |      ;
                        LDA.B #$00                           ;81F9A5|A900    |      ;
                        STA.W $0191                          ;81F9A7|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F9AA|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F9AA|225F9383|83935F;
                        REP #$30                             ;81F9AE|C230    |      ;
                        LDA.W #$0040                         ;81F9B0|A94000  |      ;
                        EOR.W #$FFFF                         ;81F9B3|49FFFF  |      ;
                        AND.B $D2                            ;81F9B6|25D2    |0000D2;
                        STA.B $D2                            ;81F9B8|85D2    |0000D2;
-                       JMP.W CODE_81FA45                    ;81F9BA|4C45FA  |81FA45;
+                       JMP.W .justReturn                    ;81F9BA|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F9BD:
+               .case1:
                        SEP #$20                             ;81F9BD|E220    |      ;
                        LDA.B #$02                           ;81F9BF|A902    |      ;
                        STA.W $019A                          ;81F9C1|8D9A01  |00019A;
                        LDX.W #$045B                         ;81F9C4|A25B04  |      ;
                        LDA.B #$00                           ;81F9C7|A900    |      ;
                        STA.W $0191                          ;81F9C9|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F9CC|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F9CC|225F9383|83935F;
                        REP #$30                             ;81F9D0|C230    |      ;
                        LDA.W #$0040                         ;81F9D2|A94000  |      ;
                        EOR.W #$FFFF                         ;81F9D5|49FFFF  |      ;
                        AND.B $D2                            ;81F9D8|25D2    |0000D2;
                        STA.B $D2                            ;81F9DA|85D2    |0000D2;
-                       JMP.W CODE_81FA45                    ;81F9DC|4C45FA  |81FA45;
+                       JMP.W .justReturn                    ;81F9DC|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81F9DF:
+               .case2:
                        SEP #$20                             ;81F9DF|E220    |      ;
                        LDA.B #$02                           ;81F9E1|A902    |      ;
                        STA.W $019A                          ;81F9E3|8D9A01  |00019A;
                        LDX.W #$045C                         ;81F9E6|A25C04  |      ;
                        LDA.B #$00                           ;81F9E9|A900    |      ;
                        STA.W $0191                          ;81F9EB|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81F9EE|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81F9EE|225F9383|83935F;
                        REP #$30                             ;81F9F2|C230    |      ;
                        LDA.W #$0040                         ;81F9F4|A94000  |      ;
                        EOR.W #$FFFF                         ;81F9F7|49FFFF  |      ;
                        AND.B $D2                            ;81F9FA|25D2    |0000D2;
                        STA.B $D2                            ;81F9FC|85D2    |0000D2;
-                       JMP.W CODE_81FA45                    ;81F9FE|4C45FA  |81FA45;
+                       JMP.W .justReturn                    ;81F9FE|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81FA01:
+               .case3:
                        SEP #$20                             ;81FA01|E220    |      ;
                        LDA.B #$02                           ;81FA03|A902    |      ;
                        STA.W $019A                          ;81FA05|8D9A01  |00019A;
                        LDX.W #$045D                         ;81FA08|A25D04  |      ;
                        LDA.B #$00                           ;81FA0B|A900    |      ;
                        STA.W $0191                          ;81FA0D|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81FA10|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81FA10|225F9383|83935F;
                        REP #$30                             ;81FA14|C230    |      ;
                        LDA.W #$0040                         ;81FA16|A94000  |      ;
                        EOR.W #$FFFF                         ;81FA19|49FFFF  |      ;
                        AND.B $D2                            ;81FA1C|25D2    |0000D2;
                        STA.B $D2                            ;81FA1E|85D2    |0000D2;
-                       JMP.W CODE_81FA45                    ;81FA20|4C45FA  |81FA45;
+                       JMP.W .justReturn                    ;81FA20|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81FA23:
+               .case4:
                        SEP #$20                             ;81FA23|E220    |      ;
                        LDA.B #$02                           ;81FA25|A902    |      ;
                        STA.W $019A                          ;81FA27|8D9A01  |00019A;
                        LDX.W #$045E                         ;81FA2A|A25E04  |      ;
                        LDA.B #$00                           ;81FA2D|A900    |      ;
                        STA.W $0191                          ;81FA2F|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81FA32|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81FA32|225F9383|83935F;
                        REP #$30                             ;81FA36|C230    |      ;
                        LDA.W #$0040                         ;81FA38|A94000  |      ;
                        EOR.W #$FFFF                         ;81FA3B|49FFFF  |      ;
                        AND.B $D2                            ;81FA3E|25D2    |0000D2;
                        STA.B $D2                            ;81FA40|85D2    |0000D2;
-                       JMP.W CODE_81FA45                    ;81FA42|4C45FA  |81FA45;
+                       JMP.W .justReturn                    ;81FA42|4C45FA  |81FA45;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81FA45:
+          .justReturn:
                        RTS                                  ;81FA45|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_81FA46:
-                       JSL.L CODE_8393F9                    ;81FA46|22F99383|8393F9;
+              .return:
+                       JSL.L fUnknown_8393F9                ;81FA46|22F99383|8393F9;
                        SEP #$20                             ;81FA4A|E220    |      ;
                        LDA.B #$01                           ;81FA4C|A901    |      ;
                        STA.W $019A                          ;81FA4E|8D9A01  |00019A;
@@ -15104,15 +14967,14 @@ subUnknown81D593_0x56:
                        INC.W nJumpTable81D593Arg2           ;81FA6D|EE7009  |000970;
                        LDA.W nJumpTable81D593Arg2           ;81FA70|AD7009  |000970;
                        CMP.B #$02                           ;81FA73|C902    |      ;
-                       BNE CODE_81FA83                      ;81FA75|D00C    |81FA83;
+                       BNE +                                ;81FA75|D00C    |81FA83;
                        REP #$30                             ;81FA77|C230    |      ;
                        LDA.W #$0040                         ;81FA79|A94000  |      ;
                        EOR.W #$FFFF                         ;81FA7C|49FFFF  |      ;
                        AND.B $D2                            ;81FA7F|25D2    |0000D2;
                        STA.B $D2                            ;81FA81|85D2    |0000D2;
                                                             ;      |        |      ;
-          CODE_81FA83:
-                       RTS                                  ;81FA83|60      |      ;
+                     + RTS                                  ;81FA83|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 subUnknown81D593_0x57:
@@ -15120,17 +14982,16 @@ subUnknown81D593_0x57:
                        LDX.W #$0491                         ;81FA86|A29104  |      ;
                        LDA.L MarriedGirlID                  ;81FA89|AF661F7F|7F1F66;
                        AND.W #$0002                         ;81FA8D|290200  |      ;
-                       BNE CODE_81FA95                      ;81FA90|D003    |81FA95;
+                       BNE +                                ;81FA90|D003    |81FA95;
                        LDX.W #$0246                         ;81FA92|A24602  |      ;
                                                             ;      |        |      ;
-          CODE_81FA95:
-                       SEP #$20                             ;81FA95|E220    |      ;
+                     + SEP #$20                             ;81FA95|E220    |      ;
                        REP #$10                             ;81FA97|C210    |      ;
                        LDA.B #$02                           ;81FA99|A902    |      ;
                        STA.W $019A                          ;81FA9B|8D9A01  |00019A;
                        LDA.B #$00                           ;81FA9E|A900    |      ;
                        STA.W $0191                          ;81FAA0|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;81FAA3|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;81FAA3|225F9383|83935F;
                        REP #$30                             ;81FAA7|C230    |      ;
                        LDA.W #$0040                         ;81FAA9|A94000  |      ;
                        EOR.W #$FFFF                         ;81FAAC|49FFFF  |      ;

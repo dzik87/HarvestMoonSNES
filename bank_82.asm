@@ -227,12 +227,12 @@
                        SEP #$20                             ;828198|E220    |      ;
                        LDA.B #$00                           ;82819A|A900    |      ;
                        STA.W $0191                          ;82819C|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;82819F|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;82819F|225F9383|83935F;
                        REP #$20                             ;8281A3|C220    |      ;
                        LDA.W #$0006                         ;8281A5|A90600  |      ;
                        LDX.W #$0000                         ;8281A8|A20000  |      ;
                        LDY.W #$0027                         ;8281AB|A02700  |      ;
-                       JSL.L CODE_84803F                    ;8281AE|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;8281AE|223F8084|84803F;
                        REP #$20                             ;8281B2|C220    |      ;
                        LDA.L $7F1F5A                        ;8281B4|AF5A1F7F|7F1F5A;
                        AND.W #$FBFF                         ;8281B8|29FFFB  |      ;
@@ -570,7 +570,7 @@ NewYearPrepareArgumentsAXY:
                        STA.L MarriedGirlID                  ;8284A5|8F661F7F|7F1F66;
                        REP #$20                             ;8284A9|C220    |      ;
                        LDA.W #$01F4                         ;8284AB|A9F401  |      ;
-                       STA.L $7F1F0E                        ;8284AE|8F0E1F7F|7F1F0E;
+                       STA.L nReqWoodForExpansion           ;8284AE|8F0E1F7F|7F1F0E;
                        LDA.L MarriedGirlID                  ;8284B2|AF661F7F|7F1F66;
                        AND.W #$FF7F                         ;8284B6|297FFF  |      ;
                        STA.L MarriedGirlID                  ;8284B9|8F661F7F|7F1F66;
@@ -2371,7 +2371,7 @@ ToolAnimationNoAction:
           CODE_829374:
                        REP #$20                             ;829374|C220    |      ;
                        LDA.W #$0001                         ;829376|A90100  |      ;
-                       JSL.L CODE_83B253                    ;829379|2253B283|83B253;
+                       JSL.L fUnknown_83B253                ;829379|2253B283|83B253;
                        REP #$20                             ;82937D|C220    |      ;
                        LDA.W $092E                          ;82937F|AD2E09  |00092E;
                        DEC A                                ;829382|3A      |      ;
@@ -2815,7 +2815,7 @@ ToolAnimationNoAction:
                        LDA.W #$0015                         ;82975F|A91500  |      ;
                        LDX.W #$0000                         ;829762|A20000  |      ;
                        LDY.W #$0016                         ;829765|A01600  |      ;
-                       JSL.L CODE_84803F                    ;829768|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;829768|223F8084|84803F;
                        SEP #$20                             ;82976C|E220    |      ;
                        LDA.B #$04                           ;82976E|A904    |      ;
                        JSL.L fRollRNG                       ;829770|22F98980|8089F9;
@@ -3342,9 +3342,9 @@ ToolAnimationNoAction:
                        CMP.B #$02                           ;829B7E|C902    |      ;
                        BCS CODE_829B90                      ;829B80|B00E    |829B90;
                        REP #$20                             ;829B82|C220    |      ;
-                       LDA.L $7F1F29                        ;829B84|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrass                  ;829B84|AF291F7F|7F1F29;
                        INC A                                ;829B88|1A      |      ;
-                       STA.L $7F1F29                        ;829B89|8F291F7F|7F1F29;
+                       STA.L nPlantedGrass                  ;829B89|8F291F7F|7F1F29;
                        LDX.W #$001E                         ;829B8D|A21E00  |      ;
                                                             ;      |        |      ;
           CODE_829B90:
@@ -3621,7 +3621,7 @@ ToolAnimationNoAction:
           CODE_829D92:
                        REP #$20                             ;829D92|C220    |      ;
                        LDA.W #$0001                         ;829D94|A90100  |      ;
-                       JSL.L CODE_83B253                    ;829D97|2253B283|83B253;
+                       JSL.L fUnknown_83B253                ;829D97|2253B283|83B253;
                        REP #$20                             ;829D9B|C220    |      ;
                        LDA.W $092E                          ;829D9D|AD2E09  |00092E;
                        DEC A                                ;829DA0|3A      |      ;
@@ -4060,7 +4060,7 @@ ToolAnimationNoAction:
                        LDA.W #$0015                         ;82A161|A91500  |      ;
                        LDX.W #$0000                         ;82A164|A20000  |      ;
                        LDY.W #$0016                         ;82A167|A01600  |      ;
-                       JSL.L CODE_84803F                    ;82A16A|223F8084|84803F;
+                       JSL.L fUnknown_84803F                ;82A16A|223F8084|84803F;
                        SEP #$20                             ;82A16E|E220    |      ;
                        LDA.B #$04                           ;82A170|A904    |      ;
                        JSL.L fRollRNG                       ;82A172|22F98980|8089F9;
@@ -4875,10 +4875,10 @@ NewYearStoreIntoA86_X88_Y8A:
                        LDA.B #$02                           ;82A798|A902    |      ;
                        STA.L $7EA4E6,X                      ;82A79A|9FE6A47E|7EA4E6;
                        REP #$20                             ;82A79E|C220    |      ;
-                       LDA.L $7F1F29                        ;82A7A0|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrass                  ;82A7A0|AF291F7F|7F1F29;
                        BEQ CODE_82A7F0                      ;82A7A4|F04A    |82A7F0;
                        DEC A                                ;82A7A6|3A      |      ;
-                       STA.L $7F1F29                        ;82A7A7|8F291F7F|7F1F29;
+                       STA.L nPlantedGrass                  ;82A7A7|8F291F7F|7F1F29;
                        BRA CODE_82A7F0                      ;82A7AB|8043    |82A7F0;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6013,7 +6013,7 @@ IncreaseRanchDevelopmentRate:
                        LDA.B $93                            ;82AE90|A593    |000093;
                        REP #$20                             ;82AE92|C220    |      ;
                        TAX                                  ;82AE94|AA      |      ;
-                       JSL.L fDialogRelated_83935F          ;82AE95|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;82AE95|225F9383|83935F;
                        BRA CODE_82AEE5                      ;82AE99|804A    |82AEE5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -6031,7 +6031,7 @@ IncreaseRanchDevelopmentRate:
                        STA.W $019A                          ;82AEAA|8D9A01  |00019A;
                        LDA.B #$00                           ;82AEAD|A900    |      ;
                        STA.W $0191                          ;82AEAF|8D9101  |000191;
-                       JSL.L fDialogRelated_83935F          ;82AEB2|225F9383|83935F;
+                       JSL.L fLoadDialog                    ;82AEB2|225F9383|83935F;
                        BRA CODE_82AEE5                      ;82AEB6|802D    |82AEE5;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -7849,7 +7849,7 @@ nUnkownItemOnHandTable:
           CODE_82D3AB:
                        SEP #$20                             ;82D3AB|E220    |      ;
                        LDA.B #$00                           ;82D3AD|A900    |      ;
-                       STA.L $7EC286,X                      ;82D3AF|9F86C27E|7EC286;
+                       STA.L sChickenDataAddress,X          ;82D3AF|9F86C27E|7EC286;
                        INX                                  ;82D3B3|E8      |      ;
                        CPX.W #$0008                         ;82D3B4|E00800  |      ;
                        BNE CODE_82D3AB                      ;82D3B7|D0F2    |82D3AB;
@@ -8250,7 +8250,7 @@ nUnkownItemOnHandTable:
           CODE_82D736:
                        SEP #$20                             ;82D736|E220    |      ;
                        LDA.B #$00                           ;82D738|A900    |      ;
-                       STA.L $7EC286,X                      ;82D73A|9F86C27E|7EC286;
+                       STA.L sChickenDataAddress,X          ;82D73A|9F86C27E|7EC286;
                        INX                                  ;82D73E|E8      |      ;
                        CPX.W #$0008                         ;82D73F|E00800  |      ;
                        BNE CODE_82D736                      ;82D742|D0F2    |82D736;
