@@ -75,7 +75,7 @@
                      + RTL                                  ;818099|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    subUnknown_81809A:
+subUnknown81A58B_0x01:
                        SEP #$20                             ;81809A|E220    |      ;
                        REP #$10                             ;81809C|C210    |      ;
                        LDA.B #$00                           ;81809E|A900    |      ;
@@ -2208,9 +2208,9 @@ subItemCarried_Chicken:
                        ORA.W sPlacedChickenFeed             ;818F18|0D3409  |000934;
                        STA.W sPlacedChickenFeed             ;818F1B|8D3409  |000934;
                        SEP #$20                             ;818F1E|E220    |      ;
-                       LDA.W nPLacedChickenFeed             ;818F20|AD3109  |000931;
+                       LDA.W nPlacedChickenFeed             ;818F20|AD3109  |000931;
                        INC A                                ;818F23|1A      |      ;
-                       STA.W nPLacedChickenFeed             ;818F24|8D3109  |000931;
+                       STA.W nPlacedChickenFeed             ;818F24|8D3109  |000931;
                        JMP.W fUnknown_818DAB                ;818F27|4CAB8D  |818DAB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -3084,7 +3084,7 @@ subItemCarried_Chicken:
                        CMP.B #$11                           ;819601|C911    |      ;
                        BCS +                                ;819603|B027    |81962C;
                        REP #$30                             ;819605|C230    |      ;
-                       LDA.L MarriedGirlID                  ;819607|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;819607|AF661F7F|7F1F66;
                        AND.W #$2000                         ;81960B|290020  |      ;
                        BNE +                                ;81960E|D01C    |81962C;
                        REP #$30                             ;819610|C230    |      ;
@@ -3093,9 +3093,9 @@ subItemCarried_Chicken:
                        LDY.W #$0000                         ;819618|A00000  |      ;
                        JSL.L fUnknown_848097                ;81961B|22978084|848097;
                        REP #$30                             ;81961F|C230    |      ;
-                       LDA.L MarriedGirlID                  ;819621|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;819621|AF661F7F|7F1F66;
                        ORA.W #$2000                         ;819625|090020  |      ;
-                       STA.L MarriedGirlID                  ;819628|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;819628|8F661F7F|7F1F66;
                                                             ;      |        |      ;
                      + REP #$30                             ;81962C|C230    |      ;
                        LDA.W #$0006                         ;81962E|A90600  |      ;
@@ -4022,7 +4022,7 @@ nItemCarriedTable_81A308:
                        TAX                                  ;81A43E|AA      |      ;
                        CPX.W #$0000                         ;81A43F|E00000  |      ;
                        BEQ .caseFFFD                        ;81A442|F06E    |81A4B2;
-                       JSR.W (PTR16_81A58B,X)               ;81A444|FC8BA5  |81A58B;
+                       JSR.W (pSubrutineTable_81A58B,X)     ;81A444|FC8BA5  |81A58B;
                        SEP #$20                             ;81A447|E220    |      ;
                        LDY.W #$0000                         ;81A449|A00000  |      ;
                        LDA.W $0974                          ;81A44C|AD7409  |000974;
@@ -4182,9 +4182,9 @@ nItemCarriedTable_81A308:
                        RTL                                  ;81A58A|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-         PTR16_81A58B:
+pSubrutineTable_81A58B:
                        dw EMPTY_81FFFF                      ;81A58B|        |81FFFF;
-                       dw subUnknown_81809A                 ;81A58D|        |81809A;
+                       dw subUnknown81A58B_0x01             ;81A58D|        |81809A;
                                                             ;      |        |      ;
       fUnknown_81A58F:
                        SEP #$20                             ;81A58F|E220    |      ;
@@ -5064,7 +5064,7 @@ fItemSub81A9F6_0x00to0x03:
                        SEP #$20                             ;81AB4C|E220    |      ;
                        REP #$10                             ;81AB4E|C210    |      ;
                        LDA.L nPowerBerryEaten               ;81AB50|AF361F7F|7F1F36;
-                       BEQ .ann                             ;81AB54|F03E    |81AB94;
+                       BEQ .label5                          ;81AB54|F03E    |81AB94;
                        LDA.B #$00                           ;81AB56|A900    |      ;
                                                             ;      |        |      ;
           .powerberry:
@@ -5103,11 +5103,11 @@ fItemSub81A9F6_0x00to0x03:
                        CMP.L nPowerBerryEaten               ;81AB8E|CF361F7F|7F1F36;
                        BNE .powerberry                      ;81AB92|D0C4    |81AB58;
                                                             ;      |        |      ;
-                 .ann:
+              .label5:
                        REP #$30                             ;81AB94|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81AB96|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81AB96|AF661F7F|7F1F66;
                        AND.W #$0200                         ;81AB9A|290002  |      ;
-                       BEQ .nina                            ;81AB9D|F019    |81ABB8;
+                       BEQ .label6                          ;81AB9D|F019    |81ABB8;
                        LDA.W #$0059                         ;81AB9F|A95900  |      ;
                        LDX.W #$0080                         ;81ABA2|A28000  |      ;
                        LDY.W #$0130                         ;81ABA5|A03001  |      ;
@@ -5121,11 +5121,11 @@ fItemSub81A9F6_0x00to0x03:
                        PLA                                  ;81ABB3|68      |      ;
                        JSL.L fUnknown_82B0A7                ;81ABB4|22A7B082|82B0A7;
                                                             ;      |        |      ;
-                .nina:
+              .label6:
                        REP #$30                             ;81ABB8|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81ABBA|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81ABBA|AF661F7F|7F1F66;
                        AND.W #$0400                         ;81ABBE|290004  |      ;
-                       BEQ .ellen                           ;81ABC1|F019    |81ABDC;
+                       BEQ .label7                          ;81ABC1|F019    |81ABDC;
                        LDA.W #$0058                         ;81ABC3|A95800  |      ;
                        LDX.W #$0060                         ;81ABC6|A26000  |      ;
                        LDY.W #$0130                         ;81ABC9|A03001  |      ;
@@ -5139,11 +5139,11 @@ fItemSub81A9F6_0x00to0x03:
                        PLA                                  ;81ABD7|68      |      ;
                        JSL.L fUnknown_82B0A7                ;81ABD8|22A7B082|82B0A7;
                                                             ;      |        |      ;
-               .ellen:
+              .label7:
                        REP #$30                             ;81ABDC|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81ABDE|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81ABDE|AF661F7F|7F1F66;
                        AND.W #$0800                         ;81ABE2|290008  |      ;
-                       BEQ .eve                             ;81ABE5|F019    |81AC00;
+                       BEQ .label8                          ;81ABE5|F019    |81AC00;
                        LDA.W #$005A                         ;81ABE7|A95A00  |      ;
                        LDX.W #$0090                         ;81ABEA|A29000  |      ;
                        LDY.W #$0130                         ;81ABED|A03001  |      ;
@@ -5157,9 +5157,9 @@ fItemSub81A9F6_0x00to0x03:
                        PLA                                  ;81ABFB|68      |      ;
                        JSL.L fUnknown_82B0A7                ;81ABFC|22A7B082|82B0A7;
                                                             ;      |        |      ;
-                 .eve:
+              .label8:
                        REP #$30                             ;81AC00|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81AC02|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81AC02|AF661F7F|7F1F66;
                        AND.W #$1000                         ;81AC06|290010  |      ;
                        BEQ .label10                         ;81AC09|F019    |81AC24;
                        LDA.W #$005C                         ;81AC0B|A95C00  |      ;
@@ -5177,7 +5177,7 @@ fItemSub81A9F6_0x00to0x03:
                                                             ;      |        |      ;
              .label10:
                        REP #$30                             ;81AC24|C230    |      ;
-                       LDA.L $7F1F68                        ;81AC26|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;81AC26|AF681F7F|7F1F68;
                        AND.W #$1000                         ;81AC2A|290010  |      ;
                        BEQ .return                          ;81AC2D|F019    |81AC48;
                        LDA.W #$00F5                         ;81AC2F|A9F500  |      ;
@@ -5427,7 +5427,7 @@ fItemSub81A9F6_0x10to0x13:
                                                             ;      |        |      ;
   fItemSub81A9F6_0x1C:
                        REP #$30                             ;81ADD5|C230    |      ;
-                       LDA.L $7F1F68                        ;81ADD7|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;81ADD7|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81ADDB|290100  |      ;
                        BNE +                                ;81ADDE|D003    |81ADE3;
                        JMP.W .return                        ;81ADE0|4C69AE  |81AE69;
@@ -5531,7 +5531,7 @@ fItemSub81A9F6_0x10to0x13:
                                                             ;      |        |      ;
   fItemSub81A9F6_0x22:
                        REP #$30                             ;81AE6F|C230    |      ;
-                       LDA.L $7F1F68                        ;81AE71|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;81AE71|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81AE75|290100  |      ;
                        BNE .paint                           ;81AE78|D003    |81AE7D;
                        JMP.W .return                        ;81AE7A|4CBEAF  |81AFBE;
@@ -5691,7 +5691,7 @@ fItemSub81A9F6_0x10to0x13:
                                                             ;      |        |      ;
   fItemSub81A9F6_0x24:
                        REP #$30                             ;81AFC0|C230    |      ;
-                       LDA.L $7F1F68                        ;81AFC2|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;81AFC2|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81AFC6|290100  |      ;
                        BNE +                                ;81AFC9|D003    |81AFCE;
                        JMP.W .return                        ;81AFCB|4C62B0  |81B062;
@@ -5790,7 +5790,7 @@ fItemSub81A9F6_0x10to0x13:
                        CPY.W #$0018                         ;81B07B|C01800  |      ;
                        BNE .loop                            ;81B07E|D0E9    |81B069;
                        REP #$30                             ;81B080|C230    |      ;
-                       LDA.L $7F1F68                        ;81B082|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;81B082|AF681F7F|7F1F68;
                        AND.W #$2000                         ;81B086|290020  |      ;
                        BNE +                                ;81B089|D003    |81B08E;
                        JMP.W .return                        ;81B08B|4CA7B0  |81B0A7;
@@ -7999,19 +7999,19 @@ fSubrutuneExecute_81BFD3:
                                                             ;      |        |      ;
                 .05pm:
                        REP #$30                             ;81C46D|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81C46F|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81C46F|AF661F7F|7F1F66;
                        AND.W #$0001                         ;81C473|290100  |      ;
                        BNE .marriedCheck                    ;81C476|D02A    |81C4A2;
-                       LDA.L MarriedGirlID                  ;81C478|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81C478|AF661F7F|7F1F66;
                        AND.W #$0002                         ;81C47C|290200  |      ;
                        BNE .marriedCheck                    ;81C47F|D021    |81C4A2;
-                       LDA.L MarriedGirlID                  ;81C481|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81C481|AF661F7F|7F1F66;
                        AND.W #$0004                         ;81C485|290400  |      ;
                        BNE .marriedCheck                    ;81C488|D018    |81C4A2;
-                       LDA.L MarriedGirlID                  ;81C48A|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81C48A|AF661F7F|7F1F66;
                        AND.W #$0008                         ;81C48E|290800  |      ;
                        BNE .marriedCheck                    ;81C491|D00F    |81C4A2;
-                       LDA.L MarriedGirlID                  ;81C493|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81C493|AF661F7F|7F1F66;
                        AND.W #$0010                         ;81C497|291000  |      ;
                        BNE .marriedCheck                    ;81C49A|D006    |81C4A2;
                        LDX.W #$0476                         ;81C49C|A27604  |      ;
@@ -8407,7 +8407,7 @@ fSubrutuneExecute_81BFD3:
                        STA.B $D4                            ;81C72A|85D4    |0000D4;
                        SEP #$20                             ;81C72C|E220    |      ;
                        REP #$10                             ;81C72E|C210    |      ;
-                       STZ.W nHitCounter                    ;81C730|9C6D09  |00096D;
+                       STZ.W nBreakHitCounter               ;81C730|9C6D09  |00096D;
                        JMP.W subUnkown81C027_0x19           ;81C733|4C0EC0  |81C00E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8559,7 +8559,7 @@ fSubrutuneExecute_81BFD3:
                        STA.B $D4                            ;81C82F|85D4    |0000D4;
                        SEP #$20                             ;81C831|E220    |      ;
                        REP #$10                             ;81C833|C210    |      ;
-                       STZ.W nHitCounter                    ;81C835|9C6D09  |00096D;
+                       STZ.W nBreakHitCounter               ;81C835|9C6D09  |00096D;
                        JMP.W subUnkown81C027_0x19           ;81C838|4C0EC0  |81C00E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8582,7 +8582,7 @@ fSubrutuneExecute_81BFD3:
                        STA.B $D4                            ;81C85F|85D4    |0000D4;
                        SEP #$20                             ;81C861|E220    |      ;
                        REP #$10                             ;81C863|C210    |      ;
-                       STZ.W nHitCounter                    ;81C865|9C6D09  |00096D;
+                       STZ.W nBreakHitCounter               ;81C865|9C6D09  |00096D;
                        JMP.W subUnkown81C027_0x19           ;81C868|4C0EC0  |81C00E;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10095,7 +10095,7 @@ nWeatherDialogIndexesTable:
                        ASL A                                ;81D57A|0A      |      ;
                        REP #$20                             ;81D57B|C220    |      ;
                        TAX                                  ;81D57D|AA      |      ;
-                       JSR.W (pJumpTable_81D593,X)          ;81D57E|FC93D5  |81D593;
+                       JSR.W (pSubrutineTable_81D593,X)     ;81D57E|FC93D5  |81D593;
                        SEP #$20                             ;81D581|E220    |      ;
                        STZ.W $0925                          ;81D583|9C2509  |000925;
                        LDA.W nTimeState                     ;81D586|AD7309  |000973;
@@ -10108,7 +10108,7 @@ nWeatherDialogIndexesTable:
                        JMP.W fSubrutuneExecute_81BFD3       ;81D590|4CD3BF  |81BFD3;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    pJumpTable_81D593:
+pSubrutineTable_81D593:
                        dw subUnknown81D593_0x00             ;81D593|        |81D643; 0x58 * [ptr16]
                        dw subUnknown81D593_0x01             ;81D595|        |81D644;
                        dw subUnknown81D593_0x02             ;81D597|        |81D66F;
@@ -10531,19 +10531,19 @@ subUnknown81D593_0x10:
                                                             ;      |        |      ;
                .case3:
                        REP #$30                             ;81D87F|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81D881|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81D881|AF661F7F|7F1F66;
                        AND.W #$0001                         ;81D885|290100  |      ; Married with Maria
                        BNE .marriedCheck                    ;81D888|D073    |81D8FD;
-                       LDA.L MarriedGirlID                  ;81D88A|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81D88A|AF661F7F|7F1F66;
                        AND.W #$0002                         ;81D88E|290200  |      ; Married with Ann
                        BNE .marriedCheck                    ;81D891|D06A    |81D8FD;
-                       LDA.L MarriedGirlID                  ;81D893|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81D893|AF661F7F|7F1F66;
                        AND.W #$0004                         ;81D897|290400  |      ; Married with Nina
                        BNE .marriedCheck                    ;81D89A|D061    |81D8FD;
-                       LDA.L MarriedGirlID                  ;81D89C|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81D89C|AF661F7F|7F1F66;
                        AND.W #$0008                         ;81D8A0|290800  |      ; Married with Ellen
                        BNE .marriedCheck                    ;81D8A3|D058    |81D8FD;
-                       LDA.L MarriedGirlID                  ;81D8A5|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81D8A5|AF661F7F|7F1F66;
                        AND.W #$0010                         ;81D8A9|291000  |      ; Married with Eve
                        BNE .marriedCheck                    ;81D8AC|D04F    |81D8FD;
                        REP #$30                             ;81D8AE|C230    |      ;
@@ -11340,7 +11340,7 @@ subUnknown81D593_0x2E:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + REP #$30                             ;81DE35|C230    |      ;
-                       LDA.L $7F1F68                        ;81DE37|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;81DE37|AF681F7F|7F1F68;
                        AND.W #$0001                         ;81DE3B|290100  |      ;
                        BNE +                                ;81DE3E|D003    |81DE43;
                        JMP.W .break                         ;81DE40|4C13E2  |81E213;
@@ -11564,7 +11564,7 @@ subUnknown81D593_0x2E:
                        CLC                                  ;81DFFF|18      |      ;
                        ADC.B $7E                            ;81E000|657E    |00007E;
                        STA.B $7E                            ;81E002|857E    |00007E;
-                       LDA.L nPlantedGrass                  ;81E004|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrassCount             ;81E004|AF291F7F|7F1F29;
                        CMP.B $7E                            ;81E008|C57E    |00007E;
                        BCS .label21                         ;81E00A|B044    |81E050;
                        SEP #$20                             ;81E00C|E220    |      ;
@@ -11703,7 +11703,7 @@ subUnknown81D593_0x2E:
                        CLC                                  ;81E126|18      |      ;
                        ADC.B $7E                            ;81E127|657E    |00007E;
                        STA.B $7E                            ;81E129|857E    |00007E;
-                       LDA.L nPlantedGrass                  ;81E12B|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrassCount             ;81E12B|AF291F7F|7F1F29;
                        CMP.B $7E                            ;81E12F|C57E    |00007E;
                        BCC +                                ;81E131|9003    |81E136;
                        JMP.W .label29                       ;81E133|4C7CE1  |81E17C;
@@ -12629,13 +12629,13 @@ subUnknown81D593_0x43:
                        LDA.L nCurrentYearID                 ;81E816|AF181F7F|7F1F18;
                        BEQ .failCheck                       ;81E81A|F031    |81E84D;
                        REP #$30                             ;81E81C|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81E81E|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81E81E|AF661F7F|7F1F66;
                        AND.W #$8000                         ;81E822|290080  |      ;
                        BNE .failCheck                       ;81E825|D026    |81E84D;
                        REP #$20                             ;81E827|C220    |      ;
-                       LDA.L MarriedGirlID                  ;81E829|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81E829|AF661F7F|7F1F66;
                        ORA.W #$8000                         ;81E82D|090080  |      ;
-                       STA.L MarriedGirlID                  ;81E830|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;81E830|8F661F7F|7F1F66;
                        REP #$20                             ;81E834|C220    |      ;
                        LDA.W #$0008                         ;81E836|A90800  |      ;
                        LDX.W #$0000                         ;81E839|A20000  |      ;
@@ -13140,13 +13140,13 @@ subUnknown81D593_0x44:
                        CMP.B #$02                           ;81EC2F|C902    |      ;
                        BNE .loop                            ;81EC31|D031    |81EC64;
                        REP #$30                             ;81EC33|C230    |      ;
-                       LDA.L MarriedGirlID                  ;81EC35|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81EC35|AF661F7F|7F1F66;
                        AND.W #$4000                         ;81EC39|290040  |      ;
                        BNE .loop                            ;81EC3C|D026    |81EC64;
                        REP #$20                             ;81EC3E|C220    |      ;
-                       LDA.L MarriedGirlID                  ;81EC40|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81EC40|AF661F7F|7F1F66;
                        ORA.W #$4000                         ;81EC44|090040  |      ;
-                       STA.L MarriedGirlID                  ;81EC47|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;81EC47|8F661F7F|7F1F66;
                        REP #$20                             ;81EC4B|C220    |      ;
                        LDA.W #$0008                         ;81EC4D|A90800  |      ;
                        LDX.W #$0000                         ;81EC50|A20000  |      ;
@@ -13938,9 +13938,9 @@ subUnknown81D593_0x47:
                        LDA.B #$00                           ;81F28C|A900    |      ;
                        STA.L $7F1F35                        ;81F28E|8F351F7F|7F1F35;
                        REP #$20                             ;81F292|C220    |      ;
-                       LDA.L MarriedGirlID                  ;81F294|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81F294|AF661F7F|7F1F66;
                        ORA.W #$0080                         ;81F298|098000  |      ;
-                       STA.L MarriedGirlID                  ;81F29B|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;81F29B|8F661F7F|7F1F66;
                        BRA .justReturn                      ;81F29F|8038    |81F2D9;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -14980,7 +14980,7 @@ subUnknown81D593_0x56:
 subUnknown81D593_0x57:
                        REP #$30                             ;81FA84|C230    |      ;
                        LDX.W #$0491                         ;81FA86|A29104  |      ;
-                       LDA.L MarriedGirlID                  ;81FA89|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;81FA89|AF661F7F|7F1F66;
                        AND.W #$0002                         ;81FA8D|290200  |      ;
                        BNE +                                ;81FA90|D003    |81FA95;
                        LDX.W #$0246                         ;81FA92|A24602  |      ;

@@ -97,10 +97,10 @@
 00:092C nAmountLeft_CowFood
 00:092D nAmountLeft_ChickenFood
 00:0930 nPlacedCowFeed
-00:0931 nPLacedChickenFeed
+00:0931 nPlacedChickenFeed
 00:0932 sPlacedCowFeed
 00:0934 sPlacedChickenFeed
-00:096D nHitCounter
+00:096D nBreakHitCounter
 00:096E nJumpTable81D593Index
 00:096F nJumpTable81D593Arg1
 00:0970 nJumpTable81D593Arg2
@@ -326,8 +326,8 @@
 7F:1F23 nLove_Nina
 7F:1F25 nLove_Ellen
 7F:1F27 nLove_Eve
-7F:1F29 nPlantedGrass
-7F:1F33 nPlayerHappines
+7F:1F29 nPlantedGrassCount
+7F:1F33 nPlayerHappiness
 7F:1F36 nPowerBerryEaten
 7F:1F37 nFirstChildAge
 7F:1F39 nSecondChildAge
@@ -348,8 +348,8 @@
 7F:1F54 nRanchMasteringRate
 7F:1F56 nRanchDevelopmentRate
 7F:1F64 nHouseSize
-7F:1F66 MarriedGirlID
-7F:1F69 PlayerHasHorse
+7F:1F66 nPlayerFlags
+7F:1F68 nPlayerFlags+2
 80:8000 fUnknown_808000
 80:8083 fGameLoop
 80:809B +
@@ -854,7 +854,7 @@
 80:BB5C sPALETTE_TimeBasedTable
 80:BDFC sMarriedGirlTable_80BDFC
 80:BE44 nPalleteRelatedTable
-80:BEEC pSubrutinesTable
+80:BEEC pSubrutineTable_80BEEC
 80:C36C subUnknown_80C36C
 80:C3D9 subUnknown_80C3D9
 80:C446 subUnknown_80C446
@@ -917,7 +917,7 @@
 81:8000 fUnknown_818000
 81:8072 +
 81:8099 +
-81:809A subUnknown_81809A
+81:809A subUnknown81A58B_0x01
 81:80B7 fUnknown_8180B7
 81:80FE subItemCarried_Mushroom
 81:8102 subItemCarried_PoisonMushroom
@@ -1266,6 +1266,7 @@
 81:A510 -
 81:A528 .deadEnd
 81:A52A +
+81:A58B pSubrutineTable_81A58B
 81:A58F fUnknown_81A58F
 81:A5A9 +
 81:A5D1 +
@@ -1317,10 +1318,10 @@
 81:AB26 .label3
 81:AB4C .label4
 81:AB58 .powerberry
-81:AB94 .ann
-81:ABB8 .nina
-81:ABDC .ellen
-81:AC00 .eve
+81:AB94 .label5
+81:ABB8 .label6
+81:ABDC .label7
+81:AC00 .label8
 81:AC24 .label10
 81:AC48 .return
 81:AC49 nPowerBerryTable
@@ -1737,7 +1738,7 @@
 81:D510 nWeatherDialogIndexesTable
 81:D570 fUnknown_81D570
 81:D590 .skipToNextDay
-81:D593 pJumpTable_81D593
+81:D593 pSubrutineTable_81D593
 81:D643 subUnknown81D593_0x00
 81:D644 subUnknown81D593_0x01
 81:D662 +
@@ -2141,13 +2142,33 @@
 81:FA95 +
 81:FAF4 Padding810000
 82:8000 fUnknown_828000
+82:800E +
+82:8018 +
+82:8026 +
+82:806F +
+82:808C .continue
+82:80A9 .return
 82:80AA fUnknown_8280AA
-82:8140 SellHandler
+82:80B9 +
+82:80CD +
+82:80D7 +
+82:80DF +
+82:80E7 +
+82:80EF +
+82:80F7 +
+82:80FF +
+82:8107 +
+82:8111 +
+82:8130 .return
+82:8131 fUnknown_828131
+82:8140 .sellingTime
+82:8165 fUnknown_828165
+82:81BF fReturn_8281BF
 82:81C0 fUnknown_8281C0
 82:81FD Table_8281FD
-82:8270 NewYearPrepareArgumentsAXY
-82:8298 Table_828298
-82:82AC NextDayHandler
+82:8270 fGetAXYArgs_828270
+82:8298 nArgumentsTable_828298
+82:82AC fNextDayHandler
 82:82EE NotLastSeason
 82:82F6 NotLastDayOfMonth
 82:837C NewDay
@@ -2171,15 +2192,71 @@
 82:8FB1 fUnknown_828FB1
 82:8FF3 fUnknown_828FF3
 82:9054 Table_829054
-82:90DD ToolAnimationNoAction
-82:90DE ToolAnimationSickle
-82:90EC ToolAnimationHoe
-82:90FA ToolAnimationHammer
+82:90DD subToolAnimation_NoAction
+82:90DE subToolAnimation_Sickle
+82:90EC subToolAnimation_Hoe
+82:90FA subToolAnimation_Hammer
+82:9108 subToolAnimation_0x04
+82:9116 subToolAnimation_0x05
+82:9121 subToolAnimation_0x06
+82:912C subToolAnimation_0x07
+82:9137 subToolAnimation_0x08
+82:9142 subToolAnimation_0x09
+82:9150 subToolAnimation_0x0A
+82:915E subToolAnimation_0x0B
+82:9179 subToolAnimation_0x0C
+82:9184 subToolAnimation_0x0D
+82:918D subToolAnimation_0x0E
+82:919B subToolAnimation_0x0F
+82:91A9 subToolAnimation_0x10
+82:91E8 subToolAnimation_0x11
+82:91F1 subToolAnimation_0x12
+82:91FD subToolAnimation_0x13
+82:9209 subToolAnimation_0x14
+82:9215 subToolAnimation_0x15
+82:921E subToolAnimation_0x16
+82:922A subToolAnimation_0x17
+82:9236 subToolAnimation_0x18
+82:923F subToolAnimation_0x19
+82:924B subToolAnimation_0x1A
+82:9257 subToolAnimation_0x1B
 82:9260 fUnknown_829260
+82:927D fUnknown_82927D
+82:92A0 fUnknown_8292A0
+82:92BC fUnknown_8292BC
+82:92D6 fUnknown_8292D6
 82:92FA Table_8292FA
+82:931E subToolUsed82A5C3_0x00
+82:9328 subToolUsed82A5C3_0x01
+82:9460 subToolUsed82A5C3_0x02
+82:95C0 subToolUsed82A5C3_0x03
+82:97BD subToolUsed82A5C3_0x04
+82:9999 subToolUsed82A5C3_0x05
+82:99F8 subToolUsed82A5C3_0x06
+82:9A57 subToolUsed82A5C3_0x07
+82:9AB4 subToolUsed82A5C3_0x08
+82:9B11 subToolUsed82A5C3_0x09
+82:9B31 subToolUsed82A5C3_0x0A
+82:9B51 subToolUsed82A5C3_0x0B
+82:9B61 subToolUsed82A5C3_0x0C
+82:9BCB subToolUsed82A5C3_0x0D
+82:9CC0 subToolUsed82A5C3_0x0E
+82:9CC8 subToolUsed82A5C3_0x0F
+82:9CD8 subToolUsed82A5C3_0x10
+82:9D42 subToolUsed82A5C3_0x11
+82:9E8E subToolUsed82A5C3_0x12
+82:A005 subToolUsed82A5C3_0x13
+82:A1BF subToolUsed82A5C3_0x14
+82:A307 subToolUsed82A5C3_0x15
+82:A377 subToolUsed82A5C3_0x16
+82:A3AA subToolUsed82A5C3_0x17
+82:A3FD subToolUsed82A5C3_0x18
+82:A414 subToolUsed82A5C3_0x19
+82:A4C2 subToolUsed82A5C3_0x1A
+82:A570 subToolUsed82A5C3_0x1B
 82:A571 nCowFeedFlagsTable
 82:A58B pToolAnimationTable
-82:A5C3 Tool_Used_Table
+82:A5C3 pToolUsedTable_82A5C3
 82:A5FB fUnknown_82A5FB
 82:A682 fUnknown_82A682
 82:A713 NewYearStoreIntoA86_X88_Y8A
@@ -2192,13 +2269,17 @@
 82:B03A fUnknown_82B03A
 82:B060 fUnknown_82B060
 82:B0A7 fUnknown_82B0A7
+82:B13C fUnknown_82B13C
 82:B174 pMapTable
 82:B294 pPointer0x0DTable
 82:CFB4 nUnkownItemOnHandTable
 82:D75E fUnknown_82D75E
+82:E405 fUnknown_82E405
 82:E666 Table_82E666
 82:E73E Table_82E73E
+82:E742 fUnknown_82E742
 82:E80C fUnknown_82E80C
+82:EA15 fUnknown_82EA15
 82:EB49 Table_82EB49
 82:EB4B Table_82EB4B
 82:EB4D Table_82EB4D
@@ -2210,6 +2291,8 @@
 82:F288 Table_82F288
 82:F298 nYearIdTable_82F298
 82:F301 Padding820000
+83:8000 fUnknown_838000
+83:8067 fUnknown_838067
 83:8082 fUnknown_838082
 83:8138 fRNG
 83:81F8 fDecompressTilemap
@@ -2225,6 +2308,9 @@
 83:8598 fUnknown_838598
 83:8A1A zero104memory
 83:8E32 fUnknown_838E32
+83:8E8B fUnknown_838E8B
+83:8EC9 fUnknown_838EC9
+83:8EE4 fUnknown_838EE4
 83:8EFF Table_838EFF
 83:8F4F Table_838F4F
 83:8F83 Table_838F83
@@ -2238,6 +2324,7 @@
 83:944D Table_83944D
 83:9467 Table_839467
 83:947D Table_83947D
+83:9495 fUnknown_839495
 83:951C fReadText
 83:952A .label1
 83:9534 .label2
@@ -2279,6 +2366,7 @@
 83:ABF0 fUnknown_83ABF0
 83:AD91 fUnknown_83AD91
 83:AF37 fUnknown_83AF37
+83:B0F6 fUnknown_83B0F6
 83:B1C9 fUnknown_83B1C9
 83:B224 fUnknown_83B224
 83:B253 fUnknown_83B253
@@ -2299,7 +2387,45 @@
 83:CA44 Table_83CA44
 83:CA78 Table_83CA78
 83:CA98 fUnknown_83CA98
+83:CAA9 pSubrutineTable_83CAA9
+83:CB69 subUnknown83CAA9_0x00
+83:D2E0 subUnknown83CAA9_0x04
+83:D4D7 subUnknown83CAA9_0x18
+83:D5E7 subUnknown83CAA9_0x1A
+83:D613 subUnknown83CAA9_0x1B
+83:D74E subUnknown83CAA9_0x1C
+83:D818 subUnknown83CAA9_0x1D
+83:D844 subUnknown83CAA9_0x22
+83:D929 subUnknown83CAA9_0x23
+83:D955 subUnknown83CAA9_0x20
+83:DA1F subUnknown83CAA9_0x21
+83:DA4B subUnknown83CAA9_0x25
+83:DAED subUnknown83CAA9_0x24
+83:DB8F subUnknown83CAA9_0x1E
+83:DC1E subUnknown83CAA9_0x1F
+83:DC4A subUnknown83CAA9_0x10
+83:DD95 subUnknown83CAA9_0x2B
+83:DE64 subUnknown83CAA9_0x2A
+83:DE9B subUnknown83CAA9_0x27
+83:DED3 subUnknown83CAA9_0x15
+83:E407 subUnknown83CAA9_0x0C
+83:E4CB subUnknown83CAA9_0x29
+83:E586 subUnknown83CAA9_0x31
+83:E5A2 subUnknown83CAA9_0x2C
+83:E5B4 subUnknown83CAA9_0x28
+83:E5CD subUnknown83CAA9_0x2D
+83:E5DF subUnknown83CAA9_0x08
+83:E5F1 subUnknown83CAA9_0x09
+83:E603 subUnknown83CAA9_0x0A
+83:E632 subUnknown83CAA9_0x39
+83:E661 subUnknown83CAA9_0x14
+83:E690 subUnknown83CAA9_0x3A
+83:E6B2 subUnknown83CAA9_0x0B
+83:E6C4 subUnknown83CAA9_0x26
+83:E74C subUnknown83CAA9_0x3B
 83:E74D Table_83E74D
+83:E76D subUnknown83CAA9_0x3C
+83:EBA6 subUnknown83CAA9_0x3D
 83:F5AF Padding_830000
 84:8000 fUnknown_848000
 84:8020 fUnknown_848020
@@ -2307,11 +2433,105 @@
 84:8097 fUnknown_848097
 84:80F8 fUnknown_8480F8
 84:816F fUnknown_84816F
+84:8249 fUnknown_848249
+84:8286 fUnknown_848286
+84:8331 fUnknown_848331
+84:83CC fUnknown_8483CC
 84:887C fUnknown_84887C
-84:94CD Table_8494CD
+84:88D4 fUnknown_8488D4
+84:8961 fUnknown_848961
+84:89BB subUnknown849419_0x00
+84:89E3 subUnknown849419_0x01
+84:8A0D subUnknown849419_0x02
+84:8A39 subUnknown849419_0x03
+84:8A58 subUnknown849419_0x04
+84:8A65 subUnknown849419_0x05
+84:8A94 subUnknown849419_0x06
+84:8ABF subUnknown849419_0x07
+84:8AE7 subUnknown849419_0x08
+84:8B08 subUnknown849419_0x09
+84:8B83 subUnknown849419_0x0A
+84:8BAC subUnknown849419_0x0B
+84:8BDC subUnknown849419_0x0C
+84:8C22 subUnknown849419_0x0D
+84:8CA8 subUnknown849419_0x0E
+84:8CB9 subUnknown849419_0x0F
+84:8CE2 subUnknown849419_0x10
+84:8CFD subUnknown849419_0x11
+84:8D13 subUnknown849419_0x12
+84:8D24 subUnknown849419_0x13
+84:8D44 subUnknown849419_0x14
+84:8DA5 subUnknown849419_0x15
+84:8DFB subUnknown849419_0x16
+84:8E68 subUnknown849419_0x17
+84:8E90 subUnknown849419_0x18
+84:8EC9 subUnknown849419_0x19
+84:8F0A subUnknown849419_0x1A
+84:8F9B subUnknown849419_0x1B
+84:8FEF subUnknown849419_0x1C
+84:9034 subUnknown849419_0x1D
+84:9079 subUnknown849419_0x1E
+84:919D subUnknown849419_0x20
+84:91D2 subUnknown849419_0x21
+84:923F subUnknown849419_0x22
+84:9306 subUnknown849419_0x23
+84:9356 subUnknown849419_0x24
+84:9375 subUnknown849419_0x25
+84:93C9 subUnknown849419_0x26
+84:9419 pSubrutinesTable_849419
+84:94CD pppTable_8494CD
 84:94D3 Table_8494D3
 84:94F3 Table_8494F3
+84:9513 subUnknown849419_0x29
+84:9553 subUnknown849419_0x2A
+84:957D subUnknown849419_0x2B
+84:95E8 subUnknown849419_0x2C
+84:9633 subUnknown849419_0x2D
+84:9777 subUnknown849419_0x2E
+84:9810 subUnknown849419_0x2F
+84:9857 subUnknown849419_0x30
+84:9AD4 subUnknown849419_0x31
+84:A90F subUnknown849419_0x32
+84:A94C subUnknown849419_0x33
+84:AA5D subUnknown849419_0x34
+84:AB27 subUnknown849419_0x35
+84:AF06 subUnknown849419_0x36
+84:B34B subUnknown849419_0x37
+84:B365 subUnknown849419_0x38
+84:B389 subUnknown849419_0x39
+84:B427 subUnknown849419_0x3A
 84:B4D2 Table_84B4D2
+84:B4DC subUnknown849419_0x3B
+84:B503 subUnknown849419_0x3C
+84:B52D subUnknown849419_0x3D
+84:B556 subUnknown849419_0x3E
+84:B57B subUnknown849419_0x3F
+84:B58F subUnknown849419_0x40
+84:B5A9 subUnknown849419_0x41
+84:B602 subUnknown849419_0x42
+84:B666 subUnknown849419_0x43
+84:B6BC subUnknown849419_0x44
+84:B72D subUnknown849419_0x45
+84:B79A subUnknown849419_0x46
+84:B84C subUnknown849419_0x47
+84:B889 subUnknown849419_0x48
+84:B8D9 subUnknown849419_0x49
+84:B93C subUnknown849419_0x4A
+84:BA10 subUnknown849419_0x4B
+84:BA51 subUnknown849419_0x4C
+84:BA72 subUnknown849419_0x4D
+84:BB31 subUnknown849419_0x4E
+84:BB4B subUnknown849419_0x4F
+84:BBDA subUnknown849419_0x50
+84:BC9C subUnknown849419_0x51
+84:BD44 subUnknown849419_0x52
+84:BE0D subUnknown849419_0x53
+84:BED6 subUnknown849419_0x54
+84:BF20 subUnknown849419_0x55
+84:BF81 subUnknown849419_0x56
+84:BFA0 subUnknown849419_0x57
+84:BFBF subUnknown849419_0x58
+84:C000 subUnknown849419_0x59
 84:C014 Table_84C014
 84:C034 fUnknown_84C034
 84:C7B6 Table_84C7B6
@@ -4200,7 +4420,6 @@ BB:BDF8 Padding_BB0000
 81:9F7E DATA16_819F7E
 81:9F90 DATA16_819F90
 81:9FA2 DATA16_819FA2
-81:A58B PTR16_81A58B
 81:B0ED DATA32_81B0ED
 81:B19F DATA32_81B19F
 81:BA3E DATA8_81BA3E
@@ -4290,8 +4509,6 @@ BB:BDF8 Padding_BB0000
 83:ADA6 PTR16_83ADA6
 83:AECA PTR16_83AECA
 83:AF3E PTR16_83AF3E
-83:CAA9 PTR16_83CAA9
-84:9419 PTR16_849419
 86:8544 PTR16_868544
 86:8552 PTR16_868552
 86:8560 PTR16_868560
@@ -7097,7 +7314,8 @@ FF:FFFF EMPTY_FFFFFF
 7F:1F54 n16
 7F:1F56 n8 (0-100%)
 7F:1F64 n8
-7F:1F69 00 - No, 01 - Yes
+7F:1F66 32bits - ???wwwww ???????? (w - wife)
+7F:1F68 ???????? ????????
 80:865D A: nCount
 80:87CE $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
 80:880A $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
@@ -7116,7 +7334,7 @@ FF:FFFF EMPTY_FFFFFF
 80:AB3C Graphic Preset
 80:B6F5 ? * [b16 nTransitionDestination, b16, b16 nDestX, b16 nDestY]
 80:BB5C 60 * [16b, 16b, 16b nPalleteIndex]
-80:BDFC 6 * [16b, 16b, 16b] - index by married gitl id 0-5
+80:BDFC 0x06 * [16b, 16b, 16b, 16b, 16b, 16b] - index by married gitl id 0-5
 80:BEEC ? * [ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16]
 81:817A X = 26
 81:96AF 91 * ptr24
@@ -7152,7 +7370,7 @@ FF:FFFF EMPTY_FFFFFF
 81:F169 If we expand house in year 1 before Fall we get clock
 81:F6D6 FIX ME here: 0x81F791
 82:81FD 8b
-82:8298 8b argA, 8b argX, 8b argY, 8b unused
+82:8298 0x05 * [8b argA, 8b argX, 8b argY, 8b unused]
 82:8AD9 string[16] - for each Season
 82:8B19 string[32] - for each Weekday
 82:8BF9 string[2] - st, nd, rd, th
@@ -7163,6 +7381,8 @@ FF:FFFF EMPTY_FFFFFF
 82:8EC2 Season index based
 82:92FA Not sure about its size
 82:A571 16b
+82:A58B 0x1C * ptr16
+82:A5C3 0x1C * ptr16
 82:A713 A - arg1, X - arg2, Y - arg3
 82:AD06 Season index based
 82:B060 A: nArg1, X: nArg2, Y: nArg3
@@ -7180,6 +7400,8 @@ FF:FFFF EMPTY_FFFFFF
 83:C995 A: nIndex, return ptr24 $72
 83:C9A7 A: nIndex, return ptr24 $72
 83:CA10 16b, 16b
+83:CAA9 0x60 * [ptr16]
+84:9419 0x60 * [ptr16]
 85:82CD outer loop
 85:82D4 inner loop
 85:831F sub inner loop
