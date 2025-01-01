@@ -96,10 +96,10 @@
                        nAmountLeft_CowFood = $00092C; !^ n8 ^!;      |        |      ;
                        nAmountLeft_ChickenFood = $00092D; !^ n8 ^!;      |        |      ;
                        nPlacedCowFeed = $000930; !^ n8 ^!   ;      |        |      ;
-                       nPLacedChickenFeed = $000931; !^ n8 ^!;      |        |      ;
+                       nPlacedChickenFeed = $000931; !^ n8 ^!;      |        |      ;
                        sPlacedCowFeed = $000932; !^ 16bit ^!;      |        |      ;
                        sPlacedChickenFeed = $000934; !^ 16bit ^!;      |        |      ;
-                       nHitCounter = $00096D; !^ n8 (used for example to break wood or stones) ^!;      |        |      ;
+                       nBreakHitCounter = $00096D; !^ n8 (used for example to break wood or stones) ^!;      |        |      ;
                        nJumpTable81D593Index = $00096E; !^ n8 ^!;      |        |      ;
                        nJumpTable81D593Arg1 = $00096F; !^ n8 ^!;      |        |      ;
                        nJumpTable81D593Arg2 = $000970; !^ n8 ^!;      |        |      ;
@@ -325,8 +325,8 @@
                        nLove_Nina = $7F1F23; !^ n16 ^!      ;      |        |      ;
                        nLove_Ellen = $7F1F25; !^ n16 ^!     ;      |        |      ;
                        nLove_Eve = $7F1F27; !^ n16 ^!       ;      |        |      ;
-                       nPlantedGrass = $7F1F29; !^ n16 ^!   ;      |        |      ;
-                       nPlayerHappines = $7F1F33; !^ n16 ^! ;      |        |      ;
+                       nPlantedGrassCount = $7F1F29; !^ n16 ^!;      |        |      ;
+                       nPlayerHappiness = $7F1F33; !^ n16 ^!;      |        |      ;
                        nPowerBerryEaten = $7F1F36; !^ n8 range 00h-0Ah, (ammount of flowers in garden) ^!;      |        |      ;
                        nFirstChildAge = $7F1F37; !^ n16 ^!  ;      |        |      ;
                        nSecondChildAge = $7F1F39; !^ n16 ^! ;      |        |      ;
@@ -347,8 +347,9 @@
                        nRanchMasteringRate = $7F1F54; !^ n16 ^!;      |        |      ;
                        nRanchDevelopmentRate = $7F1F56; !^ n8 (0-100%) ^!;      |        |      ;
                        nHouseSize = $7F1F64; !^ n8 ^!       ;      |        |      ;
-                       MarriedGirlID = $7F1F66              ;      |        |      ;
-                       PlayerHasHorse = $7F1F69; !^ 00 - No, 01 - Yes ^!;      |        |      ;
+                       nPlayerFlags = $7F1F66; !^ 32bits - ???wwwww ???????? (w - wife) ^!;      |        |      ;
+;                       nPlayerFlags+2 = $7F1F68; !^ ???????? ???????? ^!;      |        |      ;
+                       ;      |        |      ;
                        ;      |        |      ;
                        Table_858C8E = $858C8E               ;      |        |      ;
                        PTR16_80FFFF = $80FFFF               ;      |        |      ;

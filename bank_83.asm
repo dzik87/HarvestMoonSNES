@@ -2,7 +2,7 @@
                        ORG $838000                          ;      |        |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838000:
+      fUnknown_838000:
                        PHP                                  ;838000|08      |      ;
                        REP #$30                             ;838001|C230    |      ;
                        STA.W $011C                          ;838003|8D1C01  |00011C;
@@ -13,7 +13,7 @@
                        STA.W $011A                          ;838011|8D1A01  |00011A;
                        LDA.B $7E                            ;838014|A57E    |00007E;
                        STA.W $011B                          ;838016|8D1B01  |00011B;
-                       JSR.W CODE_838067                    ;838019|206780  |838067;
+                       JSR.W fUnknown_838067                ;838019|206780  |838067;
                        REP #$20                             ;83801C|C220    |      ;
                        STA.W $011E                          ;83801E|8D1E01  |00011E;
                        LDA.W $011C                          ;838021|AD1C01  |00011C;
@@ -22,7 +22,7 @@
                        SEP #$20                             ;838029|E220    |      ;
                        XBA                                  ;83802B|EB      |      ;
                        STA.W $011A                          ;83802C|8D1A01  |00011A;
-                       JSR.W CODE_838067                    ;83802F|206780  |838067;
+                       JSR.W fUnknown_838067                ;83802F|206780  |838067;
                        REP #$20                             ;838032|C220    |      ;
                        AND.W #$00FF                         ;838034|29FF00  |      ;
                        XBA                                  ;838037|EB      |      ;
@@ -37,7 +37,7 @@
                        STA.W $011B                          ;838045|8D1B01  |00011B;
                        LDA.W $011C                          ;838048|AD1C01  |00011C;
                        STA.W $011A                          ;83804B|8D1A01  |00011A;
-                       JSR.W CODE_838067                    ;83804E|206780  |838067;
+                       JSR.W fUnknown_838067                ;83804E|206780  |838067;
                        REP #$20                             ;838051|C220    |      ;
                        AND.W #$00FF                         ;838053|29FF00  |      ;
                        XBA                                  ;838056|EB      |      ;
@@ -53,7 +53,7 @@
                        RTL                                  ;838066|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838067:
+      fUnknown_838067:
                        SEP #$20                             ;838067|E220    |      ;
                        LDA.W $011A                          ;838069|AD1A01  |00011A;
                        STA.L SNES_WRMPYA                    ;83806C|8F024200|004202;
@@ -711,7 +711,7 @@
                        REP #$10                             ;8384D5|C210    |      ;
                        LDA.B #$01                           ;8384D7|A901    |      ;
                        STA.B $92                            ;8384D9|8592    |000092;
-                       JSR.W CODE_838E8B                    ;8384DB|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;8384DB|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_8384DE:
                        SEP #$20                             ;8384DE|E220    |      ;
@@ -825,7 +825,7 @@
                        SEP #$20                             ;8385B0|E220    |      ;
                        LDA.B #$02                           ;8385B2|A902    |      ;
                        STA.B $92                            ;8385B4|8592    |000092;
-                       JSR.W CODE_838E8B                    ;8385B6|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;8385B6|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_8385B9:
                        SEP #$20                             ;8385B9|E220    |      ;
@@ -844,7 +844,7 @@
                        REP #$20                             ;8385D4|C220    |      ;
                        STA.B $7E                            ;8385D6|857E    |00007E;
                        LDA.W #$000A                         ;8385D8|A90A00  |      ;
-                       JSL.L CODE_838000                    ;8385DB|22008083|838000;
+                       JSL.L fUnknown_838000                ;8385DB|22008083|838000;
                        TAX                                  ;8385DF|AA      |      ;
                        SEP #$20                             ;8385E0|E220    |      ;
                        LDA.B $94                            ;8385E2|A594    |000094;
@@ -1101,7 +1101,7 @@
                        REP #$20                             ;8387AB|C220    |      ;
                        STA.B $7E                            ;8387AD|857E    |00007E;
                        LDA.W #$000E                         ;8387AF|A90E00  |      ;
-                       JSL.L CODE_838000                    ;8387B2|22008083|838000;
+                       JSL.L fUnknown_838000                ;8387B2|22008083|838000;
                        TAX                                  ;8387B6|AA      |      ;
                        INX                                  ;8387B7|E8      |      ;
                        INX                                  ;8387B8|E8      |      ;
@@ -1137,7 +1137,7 @@
                        SEP #$20                             ;8387E7|E220    |      ;
                        LDA.B #$03                           ;8387E9|A903    |      ;
                        STA.B $92                            ;8387EB|8592    |000092;
-                       JSR.W CODE_838E8B                    ;8387ED|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;8387ED|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_8387F0:
                        SEP #$20                             ;8387F0|E220    |      ;
@@ -1157,7 +1157,7 @@
                        REP #$20                             ;83880C|C220    |      ;
                        STA.B $7E                            ;83880E|857E    |00007E;
                        LDA.W #$000A                         ;838810|A90A00  |      ;
-                       JSL.L CODE_838000                    ;838813|22008083|838000;
+                       JSL.L fUnknown_838000                ;838813|22008083|838000;
                        TAX                                  ;838817|AA      |      ;
                        SEP #$20                             ;838818|E220    |      ;
                        LDA.B $94                            ;83881A|A594    |000094;
@@ -1406,14 +1406,14 @@
           CODE_8389CC:
                        LDA.B $94                            ;8389CC|A594    |000094;
                        BNE CODE_8389D5                      ;8389CE|D005    |8389D5;
-                       JSR.W CODE_838EC9                    ;8389D0|20C98E  |838EC9;
+                       JSR.W fUnknown_838EC9                ;8389D0|20C98E  |838EC9;
                        BNE CODE_8389CC                      ;8389D3|D0F7    |8389CC;
                                                             ;      |        |      ;
           CODE_8389D5:
                        REP #$10                             ;8389D5|C210    |      ;
                        LDA.B #$04                           ;8389D7|A904    |      ;
                        STA.B $92                            ;8389D9|8592    |000092;
-                       JSR.W CODE_838E8B                    ;8389DB|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;8389DB|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_8389DE:
                        SEP #$20                             ;8389DE|E220    |      ;
@@ -1463,7 +1463,7 @@
                        REP #$10                             ;838A28|C210    |      ;
                        LDA.B #$05                           ;838A2A|A905    |      ;
                        STA.B $92                            ;838A2C|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838A2E|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838A2E|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_838A31:
                        SEP #$20                             ;838A31|E220    |      ;
@@ -1517,7 +1517,7 @@
                        REP #$20                             ;838A8E|C220    |      ;
                        STA.B $7E                            ;838A90|857E    |00007E;
                        LDA.W #$000E                         ;838A92|A90E00  |      ;
-                       JSL.L CODE_838000                    ;838A95|22008083|838000;
+                       JSL.L fUnknown_838000                ;838A95|22008083|838000;
                        TAX                                  ;838A99|AA      |      ;
                        LDA.L Table_838F83,X                 ;838A9A|BF838F83|838F83;
                        STA.B ptrUnknown0x0A                 ;838A9E|850A    |00000A;
@@ -1579,7 +1579,7 @@
                        LDX.W #$0000                         ;838B03|A20000  |      ;
                        LDA.B #$03                           ;838B06|A903    |      ;
                        STA.B $92                            ;838B08|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838B0A|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838B0A|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_838B0D:
                        SEP #$20                             ;838B0D|E220    |      ;
@@ -1608,7 +1608,7 @@
                        REP #$20                             ;838B40|C220    |      ;
                        STA.B $7E                            ;838B42|857E    |00007E;
                        LDA.W #$000A                         ;838B44|A90A00  |      ;
-                       JSL.L CODE_838000                    ;838B47|22008083|838000;
+                       JSL.L fUnknown_838000                ;838B47|22008083|838000;
                        TAX                                  ;838B4B|AA      |      ;
                        SEP #$20                             ;838B4C|E220    |      ;
                        LDA.B $94                            ;838B4E|A594    |000094;
@@ -1878,12 +1878,12 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_838D39:
-                       JSR.W CODE_838EC9                    ;838D39|20C98E  |838EC9;
+                       JSR.W fUnknown_838EC9                ;838D39|20C98E  |838EC9;
                        BNE CODE_838D39                      ;838D3C|D0FB    |838D39;
                        SEP #$20                             ;838D3E|E220    |      ;
                        LDA.B #$08                           ;838D40|A908    |      ;
                        STA.B $92                            ;838D42|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838D44|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838D44|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_838D47:
                        SEP #$20                             ;838D47|E220    |      ;
@@ -1923,12 +1923,12 @@
                                                             ;      |        |      ;
           CODE_838D8B:
                        SEP #$20                             ;838D8B|E220    |      ;
-                       JSR.W CODE_838EC9                    ;838D8D|20C98E  |838EC9;
+                       JSR.W fUnknown_838EC9                ;838D8D|20C98E  |838EC9;
                        BEQ CODE_838DDE                      ;838D90|F04C    |838DDE;
                        SEP #$20                             ;838D92|E220    |      ;
                        LDA.B #$09                           ;838D94|A909    |      ;
                        STA.B $92                            ;838D96|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838D98|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838D98|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_838D9B:
                        SEP #$20                             ;838D9B|E220    |      ;
@@ -1969,12 +1969,12 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_838DDF:
-                       JSR.W CODE_838EE4                    ;838DDF|20E48E  |838EE4;
+                       JSR.W fUnknown_838EE4                ;838DDF|20E48E  |838EE4;
                        BNE CODE_838E31                      ;838DE2|D04D    |838E31;
                        SEP #$20                             ;838DE4|E220    |      ;
                        LDA.B #$0A                           ;838DE6|A90A    |      ;
                        STA.B $92                            ;838DE8|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838DEA|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838DEA|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_838DED:
                        SEP #$20                             ;838DED|E220    |      ;
@@ -2017,7 +2017,7 @@
                        REP #$10                             ;838E36|C210    |      ;
                        LDA.B #$0B                           ;838E38|A90B    |      ;
                        STA.B $92                            ;838E3A|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838E3C|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838E3C|208B8E  |838E8B;
                                                             ;      |        |      ;
           CODE_838E3F:
                        SEP #$20                             ;838E3F|E220    |      ;
@@ -2057,17 +2057,17 @@
                        REP #$10                             ;838E81|C210    |      ;
                        LDA.B #$0C                           ;838E83|A90C    |      ;
                        STA.B $92                            ;838E85|8592    |000092;
-                       JSR.W CODE_838E8B                    ;838E87|208B8E  |838E8B;
+                       JSR.W fUnknown_838E8B                ;838E87|208B8E  |838E8B;
                        RTL                                  ;838E8A|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838E8B:
+      fUnknown_838E8B:
                        SEP #$20                             ;838E8B|E220    |      ;
                        LDA.W SNES_APUIO3                    ;838E8D|AD4321  |002143;
                        STA.B $93                            ;838E90|8593    |000093;
                        LDA.W SNES_APUIO3                    ;838E92|AD4321  |002143;
                        CMP.B $93                            ;838E95|C593    |000093;
-                       BNE CODE_838E8B                      ;838E97|D0F2    |838E8B;
+                       BNE fUnknown_838E8B                  ;838E97|D0F2    |838E8B;
                                                             ;      |        |      ;
           CODE_838E99:
                        LDA.B #$01                           ;838E99|A901    |      ;
@@ -2099,31 +2099,31 @@
                        RTS                                  ;838EC8|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838EC9:
+      fUnknown_838EC9:
                        SEP #$20                             ;838EC9|E220    |      ;
                        LDA.W SNES_APUIO3                    ;838ECB|AD4321  |002143;
                        STA.B $93                            ;838ECE|8593    |000093;
                        LDA.W SNES_APUIO3                    ;838ED0|AD4321  |002143;
                        CMP.B $93                            ;838ED3|C593    |000093;
-                       BNE CODE_838EC9                      ;838ED5|D0F2    |838EC9;
+                       BNE fUnknown_838EC9                  ;838ED5|D0F2    |838EC9;
                        LDA.B #$01                           ;838ED7|A901    |      ;
                        CMP.W SNES_APUIO3                    ;838ED9|CD4321  |002143;
-                       BNE CODE_838EC9                      ;838EDC|D0EB    |838EC9;
+                       BNE fUnknown_838EC9                  ;838EDC|D0EB    |838EC9;
                        LDA.W SNES_APUIO0                    ;838EDE|AD4021  |002140;
                        AND.B #$11                           ;838EE1|2911    |      ;
                        RTS                                  ;838EE3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838EE4:
+      fUnknown_838EE4:
                        SEP #$20                             ;838EE4|E220    |      ;
                        LDA.W SNES_APUIO3                    ;838EE6|AD4321  |002143;
                        STA.B $93                            ;838EE9|8593    |000093;
                        LDA.W SNES_APUIO3                    ;838EEB|AD4321  |002143;
                        CMP.B $93                            ;838EEE|C593    |000093;
-                       BNE CODE_838EE4                      ;838EF0|D0F2    |838EE4;
+                       BNE fUnknown_838EE4                  ;838EF0|D0F2    |838EE4;
                        LDA.B #$01                           ;838EF2|A901    |      ;
                        CMP.W SNES_APUIO3                    ;838EF4|CD4321  |002143;
-                       BNE CODE_838EE4                      ;838EF7|D0EB    |838EE4;
+                       BNE fUnknown_838EE4                  ;838EF7|D0EB    |838EE4;
                        LDA.W SNES_APUIO0                    ;838EF9|AD4021  |002140;
                        AND.B #$10                           ;838EFC|2910    |      ;
                        RTS                                  ;838EFE|60      |      ;
@@ -2518,7 +2518,7 @@
                                                             ;      |        |      ;
           CODE_839447:
                        REP #$30                             ;839447|C230    |      ;
-                       JSR.W CODE_839495                    ;839449|209594  |839495;
+                       JSR.W fUnknown_839495                ;839449|209594  |839495;
                        RTL                                  ;83944C|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2538,7 +2538,7 @@
                        db $88,$71,$C8,$71,$08,$72,$48,$72   ;839485|        |      ;
                        db $88,$72,$C8,$72,$08,$73,$90,$70   ;83948D|        |      ;
                                                             ;      |        |      ;
-          CODE_839495:
+      fUnknown_839495:
                        REP #$30                             ;839495|C230    |      ;
                        STA.B $7E                            ;839497|857E    |00007E;
                        LDA.W $018B                          ;839499|AD8B01  |00018B;
@@ -4793,7 +4793,7 @@ fSetDefaultValuesForVariables:
                        STA.L nStoredFeed                    ;83AA4E|8F101F7F|7F1F10;
                        STZ.W $0196                          ;83AA52|9C9601  |000196;
                        LDA.W #$0000                         ;83AA55|A90000  |      ;
-                       STA.L nPlantedGrass                  ;83AA58|8F291F7F|7F1F29;
+                       STA.L nPlantedGrassCount             ;83AA58|8F291F7F|7F1F29;
                        LDA.W #$0000                         ;83AA5C|A90000  |      ;
                        STA.L nLove_Maria                    ;83AA5F|8F1F1F7F|7F1F1F;
                        LDA.W #$0000                         ;83AA63|A90000  |      ;
@@ -4807,9 +4807,9 @@ fSetDefaultValuesForVariables:
                        LDA.W #$0000                         ;83AA7F|A90000  |      ;
                        STA.L nHouseSize                     ;83AA82|8F641F7F|7F1F64;
                        LDA.W #$0000                         ;83AA86|A90000  |      ;
-                       STA.L MarriedGirlID                  ;83AA89|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;83AA89|8F661F7F|7F1F66;
                        LDA.W #$0000                         ;83AA8D|A90000  |      ;
-                       STA.L $7F1F68                        ;83AA90|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83AA90|8F681F7F|7F1F68;
                        LDA.W #$0000                         ;83AA94|A90000  |      ;
                        STA.L $7F1F6A                        ;83AA97|8F6A1F7F|7F1F6A;
                        LDA.W #$0000                         ;83AA9B|A90000  |      ;
@@ -4817,7 +4817,7 @@ fSetDefaultValuesForVariables:
                        LDA.W #$0000                         ;83AAA2|A90000  |      ;
                        STA.L $7F1F2E                        ;83AAA5|8F2E1F7F|7F1F2E;
                        LDA.W #$0000                         ;83AAA9|A90000  |      ;
-                       STA.L nPlayerHappines                ;83AAAC|8F331F7F|7F1F33;
+                       STA.L nPlayerHappiness               ;83AAAC|8F331F7F|7F1F33;
                        LDA.W #$0000                         ;83AAB0|A90000  |      ;
                        STA.L $7F1F45                        ;83AAB3|8F451F7F|7F1F45;
                        LDA.W #$0000                         ;83AAB7|A90000  |      ;
@@ -4960,7 +4960,7 @@ fSetDefaultValuesForVariables:
                        STA.L nShippingProfit+2              ;83AC2A|8F091F7F|7F1F09;
                        JSL.L WriteSeasonWeekdayAndDayOrdinal;83AC2E|22D68982|8289D6;
                        SEP #$20                             ;83AC32|E220    |      ;
-                       STZ.W nHitCounter                    ;83AC34|9C6D09  |00096D;
+                       STZ.W nBreakHitCounter               ;83AC34|9C6D09  |00096D;
                        REP #$20                             ;83AC37|C220    |      ;
                        STZ.B $D2                            ;83AC39|64D2    |0000D2;
                        STZ.B $E9                            ;83AC3B|64E9    |0000E9;
@@ -5061,7 +5061,7 @@ fSetDefaultValuesForVariables:
                        STZ.W $0117                          ;83AD40|9C1701  |000117;
                        SEP #$20                             ;83AD43|E220    |      ;
                        STZ.W nPlacedCowFeed                 ;83AD45|9C3009  |000930;
-                       STZ.W nPLacedChickenFeed             ;83AD48|9C3109  |000931;
+                       STZ.W nPlacedChickenFeed             ;83AD48|9C3109  |000931;
                        REP #$20                             ;83AD4B|C220    |      ;
                        STZ.W sPlacedCowFeed                 ;83AD4D|9C3209  |000932;
                        STZ.W sPlacedChickenFeed             ;83AD50|9C3409  |000934;
@@ -5394,7 +5394,7 @@ fSetDefaultValuesForVariables:
                        PHA                                  ;83AF57|48      |      ;
                        TAY                                  ;83AF58|A8      |      ;
                        LDA.W #$0000                         ;83AF59|A90000  |      ;
-                       JSR.W CODE_83B0F6                    ;83AF5C|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83AF5C|20F6B0  |83B0F6;
                        REP #$20                             ;83AF5F|C220    |      ;
                        PLY                                  ;83AF61|7A      |      ;
                        PHA                                  ;83AF62|48      |      ;
@@ -5405,7 +5405,7 @@ fSetDefaultValuesForVariables:
                        ADC.W #$0006                         ;83AF69|690600  |      ;
                        TAX                                  ;83AF6C|AA      |      ;
                        LDA.W #$0001                         ;83AF6D|A90100  |      ;
-                       JSR.W CODE_83B0F6                    ;83AF70|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83AF70|20F6B0  |83B0F6;
                        REP #$20                             ;83AF73|C220    |      ;
                        STA.B $7E                            ;83AF75|857E    |00007E;
                        PLY                                  ;83AF77|7A      |      ;
@@ -5458,7 +5458,7 @@ fSetDefaultValuesForVariables:
                        PHA                                  ;83AFBF|48      |      ;
                        TAY                                  ;83AFC0|A8      |      ;
                        LDA.W #$0000                         ;83AFC1|A90000  |      ;
-                       JSR.W CODE_83B0F6                    ;83AFC4|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83AFC4|20F6B0  |83B0F6;
                        REP #$20                             ;83AFC7|C220    |      ;
                        PLY                                  ;83AFC9|7A      |      ;
                        PHA                                  ;83AFCA|48      |      ;
@@ -5469,7 +5469,7 @@ fSetDefaultValuesForVariables:
                        ADC.W #$0006                         ;83AFD1|690600  |      ;
                        TAX                                  ;83AFD4|AA      |      ;
                        LDA.W #$0001                         ;83AFD5|A90100  |      ;
-                       JSR.W CODE_83B0F6                    ;83AFD8|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83AFD8|20F6B0  |83B0F6;
                        REP #$20                             ;83AFDB|C220    |      ;
                        STA.B $7E                            ;83AFDD|857E    |00007E;
                        PLY                                  ;83AFDF|7A      |      ;
@@ -5522,7 +5522,7 @@ fSetDefaultValuesForVariables:
                        SBC.W #$0006                         ;83B025|E90600  |      ;
                        TAY                                  ;83B028|A8      |      ;
                        LDA.W #$0000                         ;83B029|A90000  |      ;
-                       JSR.W CODE_83B0F6                    ;83B02C|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83B02C|20F6B0  |83B0F6;
                        REP #$20                             ;83B02F|C220    |      ;
                        PLX                                  ;83B031|FA      |      ;
                        PHA                                  ;83B032|48      |      ;
@@ -5533,7 +5533,7 @@ fSetDefaultValuesForVariables:
                        ADC.W #$0006                         ;83B039|690600  |      ;
                        TAY                                  ;83B03C|A8      |      ;
                        LDA.W #$0001                         ;83B03D|A90100  |      ;
-                       JSR.W CODE_83B0F6                    ;83B040|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83B040|20F6B0  |83B0F6;
                        REP #$20                             ;83B043|C220    |      ;
                        STA.B $7E                            ;83B045|857E    |00007E;
                        PLX                                  ;83B047|FA      |      ;
@@ -5586,7 +5586,7 @@ fSetDefaultValuesForVariables:
                        SBC.W #$0006                         ;83B08B|E90600  |      ;
                        TAY                                  ;83B08E|A8      |      ;
                        LDA.W #$0000                         ;83B08F|A90000  |      ;
-                       JSR.W CODE_83B0F6                    ;83B092|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83B092|20F6B0  |83B0F6;
                        REP #$20                             ;83B095|C220    |      ;
                        PLX                                  ;83B097|FA      |      ;
                        PHA                                  ;83B098|48      |      ;
@@ -5597,7 +5597,7 @@ fSetDefaultValuesForVariables:
                        ADC.W #$0006                         ;83B09F|690600  |      ;
                        TAY                                  ;83B0A2|A8      |      ;
                        LDA.W #$0001                         ;83B0A3|A90100  |      ;
-                       JSR.W CODE_83B0F6                    ;83B0A6|20F6B0  |83B0F6;
+                       JSR.W fUnknown_83B0F6                ;83B0A6|20F6B0  |83B0F6;
                        REP #$20                             ;83B0A9|C220    |      ;
                        STA.B $7E                            ;83B0AB|857E    |00007E;
                        PLX                                  ;83B0AD|FA      |      ;
@@ -5651,7 +5651,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83B0F5|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83B0F6:
+      fUnknown_83B0F6:
                        REP #$30                             ;83B0F6|C230    |      ;
                        PHA                                  ;83B0F8|48      |      ;
                        STX.B $86                            ;83B0F9|8686    |000086;
@@ -5902,13 +5902,13 @@ fSetDefaultValuesForVariables:
       fUnknown_83B282:
                        REP #$30                             ;83B282|C230    |      ;
                        STA.B $7E                            ;83B284|857E    |00007E;
-                       LDA.L nPlayerHappines                ;83B286|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83B286|AF331F7F|7F1F33;
                        CLC                                  ;83B28A|18      |      ;
                        ADC.B $7E                            ;83B28B|657E    |00007E;
                        BMI CODE_83B29D                      ;83B28D|300E    |83B29D;
                        CMP.W #$03E7                         ;83B28F|C9E703  |      ;
                        BCS CODE_83B2A4                      ;83B292|B010    |83B2A4;
-                       STA.L nPlayerHappines                ;83B294|8F331F7F|7F1F33;
+                       STA.L nPlayerHappiness               ;83B294|8F331F7F|7F1F33;
                        LDA.W #$0000                         ;83B298|A90000  |      ;
                        BRA CODE_83B2B0                      ;83B29B|8013    |83B2B0;
                                                             ;      |        |      ;
@@ -5922,7 +5922,7 @@ fSetDefaultValuesForVariables:
           CODE_83B2A4:
                        REP #$20                             ;83B2A4|C220    |      ;
                        LDA.W #$03E7                         ;83B2A6|A9E703  |      ;
-                       STA.L nPlayerHappines                ;83B2A9|8F331F7F|7F1F33;
+                       STA.L nPlayerHappiness               ;83B2A9|8F331F7F|7F1F33;
                        LDA.W #$0000                         ;83B2AD|A90000  |      ;
                                                             ;      |        |      ;
           CODE_83B2B0:
@@ -6042,7 +6042,7 @@ fSetDefaultValuesForVariables:
                        STA.W $0196                          ;83B3D2|8D9601  |000196;
                        LDY.W #$0046                         ;83B3D5|A04600  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B3D8|B772    |000072;
-                       STA.L nPlantedGrass                  ;83B3DA|8F291F7F|7F1F29;
+                       STA.L nPlantedGrassCount             ;83B3DA|8F291F7F|7F1F29;
                        LDY.W #$0048                         ;83B3DE|A04800  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B3E1|B772    |000072;
                        STA.L nLove_Maria                    ;83B3E3|8F1F1F7F|7F1F1F;
@@ -6063,10 +6063,10 @@ fSetDefaultValuesForVariables:
                        STA.L nHouseSize                     ;83B410|8F641F7F|7F1F64;
                        LDY.W #$0062                         ;83B414|A06200  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B417|B772    |000072;
-                       STA.L MarriedGirlID                  ;83B419|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;83B419|8F661F7F|7F1F66;
                        LDY.W #$0064                         ;83B41D|A06400  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B420|B772    |000072;
-                       STA.L $7F1F68                        ;83B422|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83B422|8F681F7F|7F1F68;
                        LDY.W #$0066                         ;83B426|A06600  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B429|B772    |000072;
                        STA.L $7F1F6A                        ;83B42B|8F6A1F7F|7F1F6A;
@@ -6078,7 +6078,7 @@ fSetDefaultValuesForVariables:
                        STA.L $7F1F2E                        ;83B43D|8F2E1F7F|7F1F2E;
                        LDY.W #$006C                         ;83B441|A06C00  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B444|B772    |000072;
-                       STA.L nPlayerHappines                ;83B446|8F331F7F|7F1F33;
+                       STA.L nPlayerHappiness               ;83B446|8F331F7F|7F1F33;
                        LDY.W #$006E                         ;83B44A|A06E00  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B44D|B772    |000072;
                        STA.L $7F1F45                        ;83B44F|8F451F7F|7F1F45;
@@ -6425,7 +6425,7 @@ fSetDefaultValuesForVariables:
                        LDA.W $0196                          ;83B7AE|AD9601  |000196;
                        STA.B [ptrUnknown0x72],Y             ;83B7B1|9772    |000072;
                        LDY.W #$0046                         ;83B7B3|A04600  |      ;
-                       LDA.L nPlantedGrass                  ;83B7B6|AF291F7F|7F1F29;
+                       LDA.L nPlantedGrassCount             ;83B7B6|AF291F7F|7F1F29;
                        STA.B [ptrUnknown0x72],Y             ;83B7BA|9772    |000072;
                        LDY.W #$0048                         ;83B7BC|A04800  |      ;
                        LDA.L nLove_Maria                    ;83B7BF|AF1F1F7F|7F1F1F;
@@ -6446,10 +6446,10 @@ fSetDefaultValuesForVariables:
                        LDA.L nHouseSize                     ;83B7EC|AF641F7F|7F1F64;
                        STA.B [ptrUnknown0x72],Y             ;83B7F0|9772    |000072;
                        LDY.W #$0062                         ;83B7F2|A06200  |      ;
-                       LDA.L MarriedGirlID                  ;83B7F5|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83B7F5|AF661F7F|7F1F66;
                        STA.B [ptrUnknown0x72],Y             ;83B7F9|9772    |000072;
                        LDY.W #$0064                         ;83B7FB|A06400  |      ;
-                       LDA.L $7F1F68                        ;83B7FE|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83B7FE|AF681F7F|7F1F68;
                        STA.B [ptrUnknown0x72],Y             ;83B802|9772    |000072;
                        LDY.W #$0066                         ;83B804|A06600  |      ;
                        LDA.L $7F1F6A                        ;83B807|AF6A1F7F|7F1F6A;
@@ -6461,7 +6461,7 @@ fSetDefaultValuesForVariables:
                        LDA.L $7F1F2E                        ;83B819|AF2E1F7F|7F1F2E;
                        STA.B [ptrUnknown0x72],Y             ;83B81D|9772    |000072;
                        LDY.W #$006C                         ;83B81F|A06C00  |      ;
-                       LDA.L nPlayerHappines                ;83B822|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83B822|AF331F7F|7F1F33;
                        STA.B [ptrUnknown0x72],Y             ;83B826|9772    |000072;
                        LDY.W #$006E                         ;83B828|A06E00  |      ;
                        LDA.L $7F1F45                        ;83B82B|AF451F7F|7F1F45;
@@ -7534,10 +7534,10 @@ fSetDefaultValuesForVariables:
                        CMP.B #$28                           ;83C099|C928    |      ;
                        BNE CODE_83C0AB                      ;83C09B|D00E    |83C0AB;
                        SEP #$20                             ;83C09D|E220    |      ;
-                       LDA.W nPLacedChickenFeed             ;83C09F|AD3109  |000931;
+                       LDA.W nPlacedChickenFeed             ;83C09F|AD3109  |000931;
                        BEQ CODE_83C0CF                      ;83C0A2|F02B    |83C0CF;
                        DEC A                                ;83C0A4|3A      |      ;
-                       STA.W nPLacedChickenFeed             ;83C0A5|8D3109  |000931;
+                       STA.W nPlacedChickenFeed             ;83C0A5|8D3109  |000931;
                        JMP.W CODE_83C119                    ;83C0A8|4C19C1  |83C119;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -7786,7 +7786,7 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83C27B:
                        REP #$30                             ;83C27B|C230    |      ;
-                       LDA.L $7F1F68                        ;83C27D|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83C27D|AF681F7F|7F1F68;
                        AND.W #$0100                         ;83C281|290001  |      ;
                        BEQ CODE_83C295                      ;83C284|F00F    |83C295;
                        SEP #$20                             ;83C286|E220    |      ;
@@ -8406,7 +8406,7 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83C649:
                        REP #$30                             ;83C649|C230    |      ;
-                       LDA.L $7F1F68                        ;83C64B|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83C64B|AF681F7F|7F1F68;
                        AND.W #$0080                         ;83C64F|298000  |      ;
                        BNE CODE_83C657                      ;83C652|D003    |83C657;
                        JMP.W CODE_83C734                    ;83C654|4C34C7  |83C734;
@@ -8559,7 +8559,7 @@ fSetDefaultValuesForVariables:
                                                             ;      |        |      ;
           CODE_83C734:
                        REP #$30                             ;83C734|C230    |      ;
-                       LDA.L $7F1F68                        ;83C736|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83C736|AF681F7F|7F1F68;
                        AND.W #$0100                         ;83C73A|290001  |      ;
                        BNE CODE_83C742                      ;83C73D|D003    |83C742;
                        JMP.W CODE_83C806                    ;83C73F|4C06C8  |83C806;
@@ -9039,120 +9039,120 @@ fGetChickenDataPointer:
                        REP #$20                             ;83CAA1|C220    |      ;
                        ASL A                                ;83CAA3|0A      |      ;
                        TAX                                  ;83CAA4|AA      |      ;
-                       JSR.W (PTR16_83CAA9,X)               ;83CAA5|FCA9CA  |83CAA9;
+                       JSR.W (pSubrutineTable_83CAA9,X)     ;83CAA5|FCA9CA  |83CAA9;
                        RTL                                  ;83CAA8|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-         PTR16_83CAA9:
-                       dw CODE_83CB69                       ;83CAA9|        |83CB69;
-                       dw CODE_83CB69                       ;83CAAB|        |83CB69;
-                       dw CODE_83CB69                       ;83CAAD|        |83CB69;
-                       dw CODE_83CB69                       ;83CAAF|        |83CB69;
-                       dw CODE_83D2E0                       ;83CAB1|        |83D2E0;
-                       dw CODE_83D2E0                       ;83CAB3|        |83D2E0;
-                       dw CODE_83D2E0                       ;83CAB5|        |83D2E0;
-                       dw CODE_83D2E0                       ;83CAB7|        |83D2E0;
-                       dw CODE_83E5DF                       ;83CAB9|        |83E5DF;
-                       dw CODE_83E5F1                       ;83CABB|        |83E5F1;
-                       dw CODE_83E603                       ;83CABD|        |83E603;
-                       dw CODE_83E6B2                       ;83CABF|        |83E6B2;
-                       dw CODE_83E407                       ;83CAC1|        |83E407;
-                       dw CODE_83E407                       ;83CAC3|        |83E407;
-                       dw CODE_83E407                       ;83CAC5|        |83E407;
-                       dw CODE_83E407                       ;83CAC7|        |83E407;
-                       dw CODE_83DC4A                       ;83CAC9|        |83DC4A;
-                       dw CODE_83DC4A                       ;83CACB|        |83DC4A;
-                       dw CODE_83DC4A                       ;83CACD|        |83DC4A;
-                       dw CODE_83DC4A                       ;83CACF|        |83DC4A;
-                       dw CODE_83E661                       ;83CAD1|        |83E661;
-                       dw CODE_83DED3                       ;83CAD3|        |83DED3;
-                       dw CODE_83DED3                       ;83CAD5|        |83DED3;
-                       dw CODE_83DED3                       ;83CAD7|        |83DED3;
-                       dw CODE_83D4D7                       ;83CAD9|        |83D4D7;
-                       dw CODE_83D4D7                       ;83CADB|        |83D4D7;
-                       dw CODE_83D5E7                       ;83CADD|        |83D5E7;
-                       dw CODE_83D613                       ;83CADF|        |83D613;
-                       dw CODE_83D74E                       ;83CAE1|        |83D74E;
-                       dw CODE_83D818                       ;83CAE3|        |83D818;
-                       dw CODE_83DB8F                       ;83CAE5|        |83DB8F;
-                       dw CODE_83DC1E                       ;83CAE7|        |83DC1E;
-                       dw CODE_83D955                       ;83CAE9|        |83D955;
-                       dw CODE_83DA1F                       ;83CAEB|        |83DA1F;
-                       dw CODE_83D844                       ;83CAED|        |83D844;
-                       dw CODE_83D929                       ;83CAEF|        |83D929;
-                       dw CODE_83DAED                       ;83CAF1|        |83DAED;
-                       dw CODE_83DA4B                       ;83CAF3|        |83DA4B;
-                       dw CODE_83E6C4                       ;83CAF5|        |83E6C4;
-                       dw CODE_83DE9B                       ;83CAF7|        |83DE9B;
-                       dw CODE_83E5B4                       ;83CAF9|        |83E5B4;
-                       dw CODE_83E4CB                       ;83CAFB|        |83E4CB;
-                       dw CODE_83DE64                       ;83CAFD|        |83DE64;
-                       dw CODE_83DD95                       ;83CAFF|        |83DD95;
-                       dw CODE_83E5A2                       ;83CB01|        |83E5A2;
-                       dw CODE_83E5CD                       ;83CB03|        |83E5CD;
-                       dw CODE_83E5CD                       ;83CB05|        |83E5CD;
-                       dw CODE_83E5CD                       ;83CB07|        |83E5CD;
-                       dw CODE_83E5CD                       ;83CB09|        |83E5CD;
-                       dw CODE_83E586                       ;83CB0B|        |83E586;
-                       dw CODE_83E586                       ;83CB0D|        |83E586;
-                       dw CODE_83E586                       ;83CB0F|        |83E586;
-                       dw CODE_83E586                       ;83CB11|        |83E586;
-                       dw CODE_83E586                       ;83CB13|        |83E586;
-                       dw CODE_83E586                       ;83CB15|        |83E586;
-                       dw CODE_83E586                       ;83CB17|        |83E586;
-                       dw CODE_83E586                       ;83CB19|        |83E586;
-                       dw CODE_83E632                       ;83CB1B|        |83E632;
-                       dw CODE_83E690                       ;83CB1D|        |83E690;
-                       dw CODE_83E74C                       ;83CB1F|        |83E74C;
-                       dw CODE_83E76D                       ;83CB21|        |83E76D;
-                       dw CODE_83EBA6                       ;83CB23|        |83EBA6;
-                       dw CODE_83E74C                       ;83CB25|        |83E74C;
-                       dw CODE_83E74C                       ;83CB27|        |83E74C;
-                       dw CODE_83E74C                       ;83CB29|        |83E74C;
-                       dw CODE_83E74C                       ;83CB2B|        |83E74C;
-                       dw CODE_83E74C                       ;83CB2D|        |83E74C;
-                       dw CODE_83E74C                       ;83CB2F|        |83E74C;
-                       dw CODE_83E74C                       ;83CB31|        |83E74C;
-                       dw CODE_83E74C                       ;83CB33|        |83E74C;
-                       dw CODE_83E74C                       ;83CB35|        |83E74C;
-                       dw CODE_83E74C                       ;83CB37|        |83E74C;
-                       dw CODE_83E74C                       ;83CB39|        |83E74C;
-                       dw CODE_83E74C                       ;83CB3B|        |83E74C;
-                       dw CODE_83E74C                       ;83CB3D|        |83E74C;
-                       dw CODE_83EBA6                       ;83CB3F|        |83EBA6;
-                       dw CODE_83E74C                       ;83CB41|        |83E74C;
-                       dw CODE_83E74C                       ;83CB43|        |83E74C;
-                       dw CODE_83E74C                       ;83CB45|        |83E74C;
-                       dw CODE_83E74C                       ;83CB47|        |83E74C;
-                       dw CODE_83E74C                       ;83CB49|        |83E74C;
-                       dw CODE_83E74C                       ;83CB4B|        |83E74C;
-                       dw CODE_83E74C                       ;83CB4D|        |83E74C;
-                       dw CODE_83E74C                       ;83CB4F|        |83E74C;
-                       dw CODE_83E74C                       ;83CB51|        |83E74C;
-                       dw CODE_83E74C                       ;83CB53|        |83E74C;
-                       dw CODE_83E74C                       ;83CB55|        |83E74C;
-                       dw CODE_83E74C                       ;83CB57|        |83E74C;
-                       dw CODE_83E74C                       ;83CB59|        |83E74C;
-                       dw CODE_83E74C                       ;83CB5B|        |83E74C;
-                       dw CODE_83E74C                       ;83CB5D|        |83E74C;
-                       dw CODE_83E74C                       ;83CB5F|        |83E74C;
-                       dw CODE_83E74C                       ;83CB61|        |83E74C;
-                       dw CODE_83E74C                       ;83CB63|        |83E74C;
-                       dw CODE_83E74C                       ;83CB65|        |83E74C;
-                       dw CODE_83E74C                       ;83CB67|        |83E74C;
+pSubrutineTable_83CAA9:
+                       dw subUnknown83CAA9_0x00             ;83CAA9|        |83CB69; 0x60 * [ptr16]
+                       dw subUnknown83CAA9_0x00             ;83CAAB|        |83CB69;
+                       dw subUnknown83CAA9_0x00             ;83CAAD|        |83CB69;
+                       dw subUnknown83CAA9_0x00             ;83CAAF|        |83CB69;
+                       dw subUnknown83CAA9_0x04             ;83CAB1|        |83D2E0;
+                       dw subUnknown83CAA9_0x04             ;83CAB3|        |83D2E0;
+                       dw subUnknown83CAA9_0x04             ;83CAB5|        |83D2E0;
+                       dw subUnknown83CAA9_0x04             ;83CAB7|        |83D2E0;
+                       dw subUnknown83CAA9_0x08             ;83CAB9|        |83E5DF;
+                       dw subUnknown83CAA9_0x09             ;83CABB|        |83E5F1;
+                       dw subUnknown83CAA9_0x0A             ;83CABD|        |83E603;
+                       dw subUnknown83CAA9_0x0B             ;83CABF|        |83E6B2;
+                       dw subUnknown83CAA9_0x0C             ;83CAC1|        |83E407;
+                       dw subUnknown83CAA9_0x0C             ;83CAC3|        |83E407;
+                       dw subUnknown83CAA9_0x0C             ;83CAC5|        |83E407;
+                       dw subUnknown83CAA9_0x0C             ;83CAC7|        |83E407;
+                       dw subUnknown83CAA9_0x10             ;83CAC9|        |83DC4A;
+                       dw subUnknown83CAA9_0x10             ;83CACB|        |83DC4A;
+                       dw subUnknown83CAA9_0x10             ;83CACD|        |83DC4A;
+                       dw subUnknown83CAA9_0x10             ;83CACF|        |83DC4A;
+                       dw subUnknown83CAA9_0x14             ;83CAD1|        |83E661;
+                       dw subUnknown83CAA9_0x15             ;83CAD3|        |83DED3;
+                       dw subUnknown83CAA9_0x15             ;83CAD5|        |83DED3;
+                       dw subUnknown83CAA9_0x15             ;83CAD7|        |83DED3;
+                       dw subUnknown83CAA9_0x18             ;83CAD9|        |83D4D7;
+                       dw subUnknown83CAA9_0x18             ;83CADB|        |83D4D7;
+                       dw subUnknown83CAA9_0x1A             ;83CADD|        |83D5E7;
+                       dw subUnknown83CAA9_0x1B             ;83CADF|        |83D613;
+                       dw subUnknown83CAA9_0x1C             ;83CAE1|        |83D74E;
+                       dw subUnknown83CAA9_0x1D             ;83CAE3|        |83D818;
+                       dw subUnknown83CAA9_0x1E             ;83CAE5|        |83DB8F;
+                       dw subUnknown83CAA9_0x1F             ;83CAE7|        |83DC1E;
+                       dw subUnknown83CAA9_0x20             ;83CAE9|        |83D955;
+                       dw subUnknown83CAA9_0x21             ;83CAEB|        |83DA1F;
+                       dw subUnknown83CAA9_0x22             ;83CAED|        |83D844;
+                       dw subUnknown83CAA9_0x23             ;83CAEF|        |83D929;
+                       dw subUnknown83CAA9_0x24             ;83CAF1|        |83DAED;
+                       dw subUnknown83CAA9_0x25             ;83CAF3|        |83DA4B;
+                       dw subUnknown83CAA9_0x26             ;83CAF5|        |83E6C4;
+                       dw subUnknown83CAA9_0x27             ;83CAF7|        |83DE9B;
+                       dw subUnknown83CAA9_0x28             ;83CAF9|        |83E5B4;
+                       dw subUnknown83CAA9_0x29             ;83CAFB|        |83E4CB;
+                       dw subUnknown83CAA9_0x2A             ;83CAFD|        |83DE64;
+                       dw subUnknown83CAA9_0x2B             ;83CAFF|        |83DD95;
+                       dw subUnknown83CAA9_0x2C             ;83CB01|        |83E5A2;
+                       dw subUnknown83CAA9_0x2D             ;83CB03|        |83E5CD;
+                       dw subUnknown83CAA9_0x2D             ;83CB05|        |83E5CD;
+                       dw subUnknown83CAA9_0x2D             ;83CB07|        |83E5CD;
+                       dw subUnknown83CAA9_0x2D             ;83CB09|        |83E5CD;
+                       dw subUnknown83CAA9_0x31             ;83CB0B|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB0D|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB0F|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB11|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB13|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB15|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB17|        |83E586;
+                       dw subUnknown83CAA9_0x31             ;83CB19|        |83E586;
+                       dw subUnknown83CAA9_0x39             ;83CB1B|        |83E632;
+                       dw subUnknown83CAA9_0x3A             ;83CB1D|        |83E690;
+                       dw subUnknown83CAA9_0x3B             ;83CB1F|        |83E74C;
+                       dw subUnknown83CAA9_0x3C             ;83CB21|        |83E76D;
+                       dw subUnknown83CAA9_0x3D             ;83CB23|        |83EBA6;
+                       dw subUnknown83CAA9_0x3B             ;83CB25|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB27|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB29|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB2B|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB2D|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB2F|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB31|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB33|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB35|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB37|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB39|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB3B|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB3D|        |83E74C;
+                       dw subUnknown83CAA9_0x3D             ;83CB3F|        |83EBA6;
+                       dw subUnknown83CAA9_0x3B             ;83CB41|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB43|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB45|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB47|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB49|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB4B|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB4D|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB4F|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB51|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB53|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB55|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB57|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB59|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB5B|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB5D|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB5F|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB61|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB63|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB65|        |83E74C;
+                       dw subUnknown83CAA9_0x3B             ;83CB67|        |83E74C;
                                                             ;      |        |      ;
-          CODE_83CB69:
+subUnknown83CAA9_0x00:
                        REP #$30                             ;83CB69|C230    |      ;
                        LDA.L $7F1F6E                        ;83CB6B|AF6E1F7F|7F1F6E;
                        AND.W #$0002                         ;83CB6F|290200  |      ;
                        BNE CODE_83CBC4                      ;83CB72|D050    |83CBC4;
-                       LDA.L MarriedGirlID                  ;83CB74|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CB74|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83CB78|290100  |      ;
                        BNE CODE_83CB91                      ;83CB7B|D014    |83CB91;
-                       LDA.L MarriedGirlID                  ;83CB7D|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CB7D|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83CB81|290400  |      ;
                        BNE CODE_83CBA2                      ;83CB84|D01C    |83CBA2;
-                       LDA.L MarriedGirlID                  ;83CB86|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CB86|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83CB8A|290800  |      ;
                        BNE CODE_83CBB3                      ;83CB8D|D024    |83CBB3;
                        BRA CODE_83CBC4                      ;83CB8F|8033    |83CBC4;
@@ -9222,35 +9222,35 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83CC17:
-                       LDA.L MarriedGirlID                  ;83CC17|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CC17|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83CC1B|290100  |      ;
                        BEQ CODE_83CC23                      ;83CC1E|F003    |83CC23;
                        JMP.W CODE_83CE5B                    ;83CC20|4C5BCE  |83CE5B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83CC23:
-                       LDA.L MarriedGirlID                  ;83CC23|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CC23|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83CC27|290200  |      ;
                        BEQ CODE_83CC2F                      ;83CC2A|F003    |83CC2F;
                        JMP.W CODE_83CE5B                    ;83CC2C|4C5BCE  |83CE5B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83CC2F:
-                       LDA.L MarriedGirlID                  ;83CC2F|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CC2F|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83CC33|290400  |      ;
                        BEQ CODE_83CC3B                      ;83CC36|F003    |83CC3B;
                        JMP.W CODE_83CE5B                    ;83CC38|4C5BCE  |83CE5B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83CC3B:
-                       LDA.L MarriedGirlID                  ;83CC3B|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CC3B|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83CC3F|290800  |      ;
                        BEQ CODE_83CC47                      ;83CC42|F003    |83CC47;
                        JMP.W CODE_83CE5B                    ;83CC44|4C5BCE  |83CE5B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83CC47:
-                       LDA.L MarriedGirlID                  ;83CC47|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CC47|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83CC4B|291000  |      ;
                        BEQ CODE_83CC53                      ;83CC4E|F003    |83CC53;
                        JMP.W CODE_83CE5B                    ;83CC50|4C5BCE  |83CE5B;
@@ -9307,10 +9307,10 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83CC9A:
                        REP #$20                             ;83CC9A|C220    |      ;
-                       LDA.L MarriedGirlID                  ;83CC9C|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CC9C|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83CCA0|290100  |      ;
                        BNE CODE_83CCE9                      ;83CCA3|D044    |83CCE9;
-                       LDA.L MarriedGirlID                  ;83CCA5|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CCA5|AF661F7F|7F1F66;
                        AND.W #$0080                         ;83CCA9|298000  |      ;
                        BNE CODE_83CCE9                      ;83CCAC|D03B    |83CCE9;
                        LDA.L $7F1F6A                        ;83CCAE|AF6A1F7F|7F1F6A;
@@ -9340,7 +9340,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6A                        ;83CCEB|AF6A1F7F|7F1F6A;
                        AND.W #$1000                         ;83CCEF|290010  |      ;
                        BNE CODE_83CD38                      ;83CCF2|D044    |83CD38;
-                       LDA.L MarriedGirlID                  ;83CCF4|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CCF4|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83CCF8|290200  |      ;
                        BNE CODE_83CD38                      ;83CCFB|D03B    |83CD38;
                        LDA.L $7F1F6A                        ;83CCFD|AF6A1F7F|7F1F6A;
@@ -9373,7 +9373,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6A                        ;83CD43|AF6A1F7F|7F1F6A;
                        AND.W #$4000                         ;83CD47|290040  |      ;
                        BNE CODE_83CD90                      ;83CD4A|D044    |83CD90;
-                       LDA.L MarriedGirlID                  ;83CD4C|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CD4C|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83CD50|290400  |      ;
                        BNE CODE_83CD90                      ;83CD53|D03B    |83CD90;
                        LDA.L $7F1F6C                        ;83CD55|AF6C1F7F|7F1F6C;
@@ -9409,7 +9409,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6C                        ;83CDA4|AF6C1F7F|7F1F6C;
                        AND.W #$0001                         ;83CDA8|290100  |      ;
                        BNE CODE_83CDF1                      ;83CDAB|D044    |83CDF1;
-                       LDA.L MarriedGirlID                  ;83CDAD|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CDAD|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83CDB1|290800  |      ;
                        BNE CODE_83CDF1                      ;83CDB4|D03B    |83CDF1;
                        LDA.L $7F1F6C                        ;83CDB6|AF6C1F7F|7F1F6C;
@@ -9448,7 +9448,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6C                        ;83CE0E|AF6C1F7F|7F1F6C;
                        AND.W #$0004                         ;83CE12|290400  |      ;
                        BNE CODE_83CE5B                      ;83CE15|D044    |83CE5B;
-                       LDA.L MarriedGirlID                  ;83CE17|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CE17|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83CE1B|291000  |      ;
                        BNE CODE_83CE5B                      ;83CE1E|D03B    |83CE5B;
                        LDA.L $7F1F6C                        ;83CE20|AF6C1F7F|7F1F6C;
@@ -9500,7 +9500,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83CE93:
                        REP #$30                             ;83CE93|C230    |      ;
-                       LDA.L $7F1F68                        ;83CE95|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83CE95|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83CE99|290100  |      ;
                        BNE CODE_83CEAE                      ;83CE9C|D010    |83CEAE;
                        REP #$30                             ;83CE9E|C230    |      ;
@@ -9513,7 +9513,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83CEAE:
                        REP #$30                             ;83CEAE|C230    |      ;
-                       LDA.L $7F1F68                        ;83CEB0|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83CEB0|AF681F7F|7F1F68;
                        AND.W #$0020                         ;83CEB4|292000  |      ;
                        BNE CODE_83CEDD                      ;83CEB7|D024    |83CEDD;
                        REP #$30                             ;83CEB9|C230    |      ;
@@ -9522,9 +9522,9 @@ fGetChickenDataPointer:
                        LDY.W #$0000                         ;83CEC1|A00000  |      ;
                        JSL.L fUnknown_848097                ;83CEC4|22978084|848097;
                        REP #$20                             ;83CEC8|C220    |      ;
-                       LDA.L $7F1F68                        ;83CECA|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83CECA|AF681F7F|7F1F68;
                        ORA.W #$0020                         ;83CECE|092000  |      ;
-                       STA.L $7F1F68                        ;83CED1|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83CED1|8F681F7F|7F1F68;
                        SEP #$20                             ;83CED5|E220    |      ;
                        LDA.B #$03                           ;83CED7|A903    |      ;
                        STA.W $099F                          ;83CED9|8D9F09  |00099F;
@@ -9533,7 +9533,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83CEDD:
                        REP #$30                             ;83CEDD|C230    |      ;
-                       LDA.L $7F1F68                        ;83CEDF|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83CEDF|AF681F7F|7F1F68;
                        AND.W #$0080                         ;83CEE3|298000  |      ;
                        BNE CODE_83CF10                      ;83CEE6|D028    |83CF10;
                        REP #$30                             ;83CEE8|C230    |      ;
@@ -9654,7 +9654,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83CFF8:
                        REP #$30                             ;83CFF8|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83CFFA|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83CFFA|AF661F7F|7F1F66;
                        AND.W #$0040                         ;83CFFE|294000  |      ;
                        BEQ CODE_83D03D                      ;83D001|F03A    |83D03D;
                        REP #$20                             ;83D003|C220    |      ;
@@ -9675,15 +9675,15 @@ fGetChickenDataPointer:
                        LDA.W #$0000                         ;83D02A|A90000  |      ;
                        STA.B $D4                            ;83D02D|85D4    |0000D4;
                        REP #$20                             ;83D02F|C220    |      ;
-                       LDA.L MarriedGirlID                  ;83D031|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D031|AF661F7F|7F1F66;
                        AND.W #$FFBF                         ;83D035|29BFFF  |      ;
-                       STA.L MarriedGirlID                  ;83D038|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;83D038|8F661F7F|7F1F66;
                        RTS                                  ;83D03C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83D03D:
                        REP #$30                             ;83D03D|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D03F|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D03F|AF661F7F|7F1F66;
                        AND.W #$0080                         ;83D043|298000  |      ;
                        BEQ CODE_83D060                      ;83D046|F018    |83D060;
                        SEP #$20                             ;83D048|E220    |      ;
@@ -9699,12 +9699,12 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D060:
                        REP #$30                             ;83D060|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D062|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D062|AF661F7F|7F1F66;
                        AND.W #$0100                         ;83D066|290001  |      ;
                        BEQ CODE_83D0B2                      ;83D069|F047    |83D0B2;
-                       LDA.L MarriedGirlID                  ;83D06B|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D06B|AF661F7F|7F1F66;
                        AND.W #$FEFF                         ;83D06F|29FFFE  |      ;
-                       STA.L MarriedGirlID                  ;83D072|8F661F7F|7F1F66;
+                       STA.L nPlayerFlags                   ;83D072|8F661F7F|7F1F66;
                        REP #$30                             ;83D076|C230    |      ;
                        LDA.W #$0009                         ;83D078|A90900  |      ;
                        LDX.W #$0000                         ;83D07B|A20000  |      ;
@@ -9787,7 +9787,7 @@ fGetChickenDataPointer:
                        ADC.B #$FF                           ;83D137|69FF    |      ;
                        BMI CODE_83D163                      ;83D139|3028    |83D163;
                        REP #$30                             ;83D13B|C230    |      ;
-                       LDA.L $7F1F68                        ;83D13D|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D13D|AF681F7F|7F1F68;
                        AND.W #$0400                         ;83D141|290004  |      ;
                        BNE CODE_83D163                      ;83D144|D01D    |83D163;
                        REP #$30                             ;83D146|C230    |      ;
@@ -9796,9 +9796,9 @@ fGetChickenDataPointer:
                        LDY.W #$0000                         ;83D14E|A00000  |      ;
                        JSL.L fUnknown_848097                ;83D151|22978084|848097;
                        REP #$20                             ;83D155|C220    |      ;
-                       LDA.L $7F1F68                        ;83D157|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D157|AF681F7F|7F1F68;
                        ORA.W #$0400                         ;83D15B|090004  |      ;
-                       STA.L $7F1F68                        ;83D15E|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83D15E|8F681F7F|7F1F68;
                        RTS                                  ;83D162|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -9832,12 +9832,12 @@ fGetChickenDataPointer:
                        AND.W #$00C0                         ;83D1A3|29C000  |      ;
                        BEQ CODE_83D1CE                      ;83D1A6|F026    |83D1CE;
                        REP #$30                             ;83D1A8|C230    |      ;
-                       LDA.L $7F1F68                        ;83D1AA|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D1AA|AF681F7F|7F1F68;
                        AND.W #$4000                         ;83D1AE|290040  |      ;
                        BNE CODE_83D1CE                      ;83D1B1|D01B    |83D1CE;
-                       LDA.L $7F1F68                        ;83D1B3|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D1B3|AF681F7F|7F1F68;
                        ORA.W #$4000                         ;83D1B7|090040  |      ;
-                       STA.L $7F1F68                        ;83D1BA|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83D1BA|8F681F7F|7F1F68;
                        REP #$30                             ;83D1BE|C230    |      ;
                        LDA.W #$0000                         ;83D1C0|A90000  |      ;
                        LDX.W #$0016                         ;83D1C3|A21600  |      ;
@@ -9878,7 +9878,7 @@ fGetChickenDataPointer:
                        AND.W #$00C0                         ;83D208|29C000  |      ;
                        BEQ CODE_83D23E                      ;83D20B|F031    |83D23E;
                        REP #$30                             ;83D20D|C230    |      ;
-                       LDA.L $7F1F68                        ;83D20F|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D20F|AF681F7F|7F1F68;
                        AND.W #$2000                         ;83D213|290020  |      ;
                        BEQ CODE_83D23E                      ;83D216|F026    |83D23E;
                        REP #$30                             ;83D218|C230    |      ;
@@ -9966,7 +9966,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83D2DF|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D2E0:
+subUnknown83CAA9_0x04:
                        REP #$30                             ;83D2E0|C230    |      ;
                        LDA.L $7F1F60                        ;83D2E2|AF601F7F|7F1F60;
                        AND.W #$0400                         ;83D2E6|290004  |      ;
@@ -10143,7 +10143,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D452:
                        REP #$30                             ;83D452|C230    |      ;
-                       LDA.L $7F1F68                        ;83D454|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D454|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D458|290100  |      ;
                        BNE CODE_83D46D                      ;83D45B|D010    |83D46D;
                        REP #$30                             ;83D45D|C230    |      ;
@@ -10206,9 +10206,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D4D6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D4D7:
+subUnknown83CAA9_0x18:
                        REP #$30                             ;83D4D7|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D4D9|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D4D9|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83D4DD|290100  |      ;
                        BNE CODE_83D4E4                      ;83D4E0|D002    |83D4E4;
                        BRA CODE_83D4FF                      ;83D4E2|801B    |83D4FF;
@@ -10249,7 +10249,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D52B:
                        REP #$30                             ;83D52B|C230    |      ;
-                       LDA.L $7F1F68                        ;83D52D|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D52D|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D531|290100  |      ;
                        BNE CODE_83D546                      ;83D534|D010    |83D546;
                        REP #$30                             ;83D536|C230    |      ;
@@ -10342,9 +10342,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D5E6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D5E7:
+subUnknown83CAA9_0x1A:
                        REP #$30                             ;83D5E7|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D5E9|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D5E9|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83D5ED|290100  |      ;
                        BNE CODE_83D5F5                      ;83D5F0|D003    |83D5F5;
                        JMP.W CODE_83D4FF                    ;83D5F2|4CFFD4  |83D4FF;
@@ -10367,7 +10367,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83D612|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D613:
+subUnknown83CAA9_0x1B:
                        SEP #$20                             ;83D613|E220    |      ;
                        REP #$10                             ;83D615|C210    |      ;
                        LDA.L nCurrentSeasonID               ;83D617|AF191F7F|7F1F19;
@@ -10410,7 +10410,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D66E:
                        REP #$30                             ;83D66E|C230    |      ;
-                       LDA.L $7F1F68                        ;83D670|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D670|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D674|290100  |      ;
                        BNE CODE_83D689                      ;83D677|D010    |83D689;
                        REP #$30                             ;83D679|C230    |      ;
@@ -10453,7 +10453,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83D6C1:
-                       LDA.L $7F1F68                        ;83D6C1|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D6C1|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D6C5|290100  |      ;
                        BEQ CODE_83D6ED                      ;83D6C8|F023    |83D6ED;
                        LDA.W $0196                          ;83D6CA|AD9601  |000196;
@@ -10530,9 +10530,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D74D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D74E:
+subUnknown83CAA9_0x1C:
                        REP #$30                             ;83D74E|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D750|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D750|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83D754|290400  |      ;
                        BNE CODE_83D75B                      ;83D757|D002    |83D75B;
                        BRA CODE_83D776                      ;83D759|801B    |83D776;
@@ -10553,7 +10553,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D776:
                        REP #$30                             ;83D776|C230    |      ;
-                       LDA.L $7F1F68                        ;83D778|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D778|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D77C|290100  |      ;
                        BNE CODE_83D791                      ;83D77F|D010    |83D791;
                        REP #$30                             ;83D781|C230    |      ;
@@ -10633,9 +10633,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D817|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D818:
+subUnknown83CAA9_0x1D:
                        REP #$30                             ;83D818|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D81A|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D81A|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83D81E|290400  |      ;
                        BNE CODE_83D826                      ;83D821|D003    |83D826;
                        JMP.W CODE_83D776                    ;83D823|4C76D7  |83D776;
@@ -10658,9 +10658,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D843|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D844:
+subUnknown83CAA9_0x22:
                        REP #$30                             ;83D844|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D846|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D846|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83D84A|290200  |      ;
                        BNE CODE_83D851                      ;83D84D|D002    |83D851;
                        BRA CODE_83D86C                      ;83D84F|801B    |83D86C;
@@ -10694,7 +10694,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D887:
                        REP #$30                             ;83D887|C230    |      ;
-                       LDA.L $7F1F68                        ;83D889|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D889|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D88D|290100  |      ;
                        BNE CODE_83D8A2                      ;83D890|D010    |83D8A2;
                        REP #$30                             ;83D892|C230    |      ;
@@ -10774,9 +10774,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D928|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D929:
+subUnknown83CAA9_0x23:
                        REP #$30                             ;83D929|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D92B|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D92B|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83D92F|290200  |      ;
                        BNE CODE_83D937                      ;83D932|D003    |83D937;
                        JMP.W CODE_83D86C                    ;83D934|4C6CD8  |83D86C;
@@ -10799,9 +10799,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83D954|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83D955:
+subUnknown83CAA9_0x20:
                        REP #$30                             ;83D955|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83D957|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83D957|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83D95B|290800  |      ;
                        BNE CODE_83D962                      ;83D95E|D002    |83D962;
                        BRA CODE_83D97D                      ;83D960|801B    |83D97D;
@@ -10822,7 +10822,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83D97D:
                        REP #$30                             ;83D97D|C230    |      ;
-                       LDA.L $7F1F68                        ;83D97F|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83D97F|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83D983|290100  |      ;
                        BNE CODE_83D998                      ;83D986|D010    |83D998;
                        REP #$30                             ;83D988|C230    |      ;
@@ -10902,9 +10902,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DA1E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DA1F:
+subUnknown83CAA9_0x21:
                        REP #$30                             ;83DA1F|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83DA21|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83DA21|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83DA25|290800  |      ;
                        BNE CODE_83DA2D                      ;83DA28|D003    |83DA2D;
                        JMP.W CODE_83D97D                    ;83DA2A|4C7DD9  |83D97D;
@@ -10927,9 +10927,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DA4A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DA4B:
+subUnknown83CAA9_0x25:
                        REP #$30                             ;83DA4B|C230    |      ;
-                       LDA.L $7F1F68                        ;83DA4D|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DA4D|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83DA51|290100  |      ;
                        BNE CODE_83DA66                      ;83DA54|D010    |83DA66;
                        REP #$30                             ;83DA56|C230    |      ;
@@ -11009,9 +11009,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DAEC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DAED:
+subUnknown83CAA9_0x24:
                        REP #$30                             ;83DAED|C230    |      ;
-                       LDA.L $7F1F68                        ;83DAEF|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DAEF|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83DAF3|290100  |      ;
                        BNE CODE_83DB08                      ;83DAF6|D010    |83DB08;
                        REP #$30                             ;83DAF8|C230    |      ;
@@ -11091,9 +11091,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DB8E|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DB8F:
+subUnknown83CAA9_0x1E:
                        REP #$30                             ;83DB8F|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83DB91|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83DB91|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83DB95|291000  |      ;
                        BNE CODE_83DB9C                      ;83DB98|D002    |83DB9C;
                        BRA CODE_83DBB7                      ;83DB9A|801B    |83DBB7;
@@ -11135,7 +11135,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83DBE6:
                        REP #$30                             ;83DBE6|C230    |      ;
-                       LDA.L $7F1F68                        ;83DBE8|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DBE8|AF681F7F|7F1F68;
                        AND.W #$0002                         ;83DBEC|290200  |      ;
                        BNE CODE_83DC0E                      ;83DBEF|D01D    |83DC0E;
                        REP #$30                             ;83DBF1|C230    |      ;
@@ -11144,9 +11144,9 @@ fGetChickenDataPointer:
                        LDY.W #$0007                         ;83DBF9|A00700  |      ;
                        JSL.L fUnknown_848097                ;83DBFC|22978084|848097;
                        REP #$30                             ;83DC00|C230    |      ;
-                       LDA.L $7F1F68                        ;83DC02|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DC02|AF681F7F|7F1F68;
                        ORA.W #$0002                         ;83DC06|090200  |      ;
-                       STA.L $7F1F68                        ;83DC09|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83DC09|8F681F7F|7F1F68;
                        RTS                                  ;83DC0D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11159,9 +11159,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DC1D|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DC1E:
+subUnknown83CAA9_0x1F:
                        REP #$30                             ;83DC1E|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83DC20|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83DC20|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83DC24|291000  |      ;
                        BNE CODE_83DC2C                      ;83DC27|D003    |83DC2C;
                        JMP.W CODE_83DBB7                    ;83DC29|4CB7DB  |83DBB7;
@@ -11184,9 +11184,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DC49|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DC4A:
+subUnknown83CAA9_0x10:
                        REP #$30                             ;83DC4A|C230    |      ;
-                       LDA.L $7F1F68                        ;83DC4C|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DC4C|AF681F7F|7F1F68;
                        AND.W #$0004                         ;83DC50|290400  |      ;
                        BNE CODE_83DC72                      ;83DC53|D01D    |83DC72;
                        REP #$30                             ;83DC55|C230    |      ;
@@ -11195,9 +11195,9 @@ fGetChickenDataPointer:
                        LDY.W #$0009                         ;83DC5D|A00900  |      ;
                        JSL.L fUnknown_848097                ;83DC60|22978084|848097;
                        REP #$20                             ;83DC64|C220    |      ;
-                       LDA.L $7F1F68                        ;83DC66|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DC66|AF681F7F|7F1F68;
                        ORA.W #$0004                         ;83DC6A|090400  |      ;
-                       STA.L $7F1F68                        ;83DC6D|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83DC6D|8F681F7F|7F1F68;
                        RTS                                  ;83DC71|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11341,7 +11341,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83DD94|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DD95:
+subUnknown83CAA9_0x2B:
                        REP #$30                             ;83DD95|C230    |      ;
                        LDA.L $7F1F6A                        ;83DD97|AF6A1F7F|7F1F6A;
                        AND.W #$2000                         ;83DD9B|290020  |      ;
@@ -11359,7 +11359,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83DDB9:
                        REP #$30                             ;83DDB9|C230    |      ;
-                       LDA.L $7F1F68                        ;83DDBB|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DDBB|AF681F7F|7F1F68;
                        AND.W #$0008                         ;83DDBF|290800  |      ;
                        BNE CODE_83DE0A                      ;83DDC2|D046    |83DE0A;
                        SEP #$20                             ;83DDC4|E220    |      ;
@@ -11381,17 +11381,17 @@ fGetChickenDataPointer:
                        LDY.W #$000A                         ;83DDE8|A00A00  |      ;
                        JSL.L fUnknown_848097                ;83DDEB|22978084|848097;
                        REP #$20                             ;83DDEF|C220    |      ;
-                       LDA.L $7F1F68                        ;83DDF1|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DDF1|AF681F7F|7F1F68;
                        ORA.W #$0008                         ;83DDF5|090800  |      ;
-                       STA.L $7F1F68                        ;83DDF8|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83DDF8|8F681F7F|7F1F68;
                        RTS                                  ;83DDFC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83DDFD:
                        REP #$20                             ;83DDFD|C220    |      ;
-                       LDA.L $7F1F68                        ;83DDFF|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DDFF|AF681F7F|7F1F68;
                        ORA.W #$0008                         ;83DE03|090800  |      ;
-                       STA.L $7F1F68                        ;83DE06|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83DE06|8F681F7F|7F1F68;
                                                             ;      |        |      ;
           CODE_83DE0A:
                        REP #$30                             ;83DE0A|C230    |      ;
@@ -11439,9 +11439,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83DE63|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DE64:
+subUnknown83CAA9_0x2A:
                        REP #$30                             ;83DE64|C230    |      ;
-                       LDA.L $7F1F68                        ;83DE66|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83DE66|AF681F7F|7F1F68;
                        AND.W #$2000                         ;83DE6A|290020  |      ;
                        BNE CODE_83DE7F                      ;83DE6D|D010    |83DE7F;
                        REP #$30                             ;83DE6F|C230    |      ;
@@ -11469,7 +11469,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83DE9A|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DE9B:
+subUnknown83CAA9_0x27:
                        REP #$20                             ;83DE9B|C220    |      ;
                        LDA.L nHouseSize                     ;83DE9D|AF641F7F|7F1F64;
                        AND.W #$0008                         ;83DEA1|290800  |      ;
@@ -11496,7 +11496,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83DED2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83DED3:
+subUnknown83CAA9_0x15:
                        SEP #$20                             ;83DED3|E220    |      ;
                        REP #$10                             ;83DED5|C210    |      ;
                        LDA.L nCurrentYearID                 ;83DED7|AF181F7F|7F1F18;
@@ -11767,19 +11767,19 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83E144:
                        REP #$30                             ;83E144|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83E146|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E146|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83E14A|290100  |      ;
                        BNE CODE_83E176                      ;83E14D|D027    |83E176;
-                       LDA.L MarriedGirlID                  ;83E14F|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E14F|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83E153|290200  |      ;
                        BNE CODE_83E186                      ;83E156|D02E    |83E186;
-                       LDA.L MarriedGirlID                  ;83E158|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E158|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83E15C|290400  |      ;
                        BNE CODE_83E193                      ;83E15F|D032    |83E193;
-                       LDA.L MarriedGirlID                  ;83E161|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E161|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83E165|290800  |      ;
                        BNE CODE_83E1A0                      ;83E168|D036    |83E1A0;
-                       LDA.L MarriedGirlID                  ;83E16A|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E16A|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83E16E|291000  |      ;
                        BNE CODE_83E1AD                      ;83E171|D03A    |83E1AD;
                        JMP.W CODE_83E2C6                    ;83E173|4CC6E2  |83E2C6;
@@ -11869,31 +11869,31 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83E21D|AF6E1F7F|7F1F6E;
                        AND.W #$0002                         ;83E221|290200  |      ;
                        BNE CODE_83E262                      ;83E224|D03C    |83E262;
-                       LDA.L MarriedGirlID                  ;83E226|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E226|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83E22A|290100  |      ;
                        BNE CODE_83E271                      ;83E22D|D042    |83E271;
-                       LDA.L MarriedGirlID                  ;83E22F|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E22F|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83E233|290200  |      ;
                        BEQ CODE_83E23B                      ;83E236|F003    |83E23B;
                        JMP.W CODE_83E282                    ;83E238|4C82E2  |83E282;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83E23B:
-                       LDA.L MarriedGirlID                  ;83E23B|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E23B|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83E23F|290400  |      ;
                        BEQ CODE_83E247                      ;83E242|F003    |83E247;
                        JMP.W CODE_83E293                    ;83E244|4C93E2  |83E293;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83E247:
-                       LDA.L MarriedGirlID                  ;83E247|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E247|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83E24B|290800  |      ;
                        BEQ CODE_83E253                      ;83E24E|F003    |83E253;
                        JMP.W CODE_83E2A4                    ;83E250|4CA4E2  |83E2A4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83E253:
-                       LDA.L MarriedGirlID                  ;83E253|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E253|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83E257|291000  |      ;
                        BEQ CODE_83E25F                      ;83E25A|F003    |83E25F;
                        JMP.W CODE_83E2B5                    ;83E25C|4CB5E2  |83E2B5;
@@ -11989,7 +11989,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F60                        ;83E30E|AF601F7F|7F1F60;
                        AND.W #$0020                         ;83E312|292000  |      ;
                        BNE CODE_83E330                      ;83E315|D019    |83E330;
-                       LDA.L $7F1F68                        ;83E317|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E317|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83E31B|290100  |      ;
                        BNE CODE_83E340                      ;83E31E|D020    |83E340;
                        REP #$30                             ;83E320|C230    |      ;
@@ -12100,7 +12100,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E406|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E407:
+subUnknown83CAA9_0x0C:
                        REP #$30                             ;83E407|C230    |      ;
                        LDA.L $7F1F5C                        ;83E409|AF5C1F7F|7F1F5C;
                        AND.W #$FF7F                         ;83E40D|297FFF  |      ;
@@ -12111,10 +12111,10 @@ fGetChickenDataPointer:
                        LDY.W #$0015                         ;83E41C|A01500  |      ;
                        JSL.L fUnknown_848097                ;83E41F|22978084|848097;
                        REP #$20                             ;83E423|C220    |      ;
-                       LDA.L $7F1F68                        ;83E425|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E425|AF681F7F|7F1F68;
                        AND.W #$0001                         ;83E429|290100  |      ;
                        BNE CODE_83E464                      ;83E42C|D036    |83E464;
-                       LDA.L $7F1F68                        ;83E42E|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E42E|AF681F7F|7F1F68;
                        AND.W #$0010                         ;83E432|291000  |      ;
                        BNE CODE_83E454                      ;83E435|D01D    |83E454;
                        REP #$30                             ;83E437|C230    |      ;
@@ -12123,9 +12123,9 @@ fGetChickenDataPointer:
                        LDY.W #$0001                         ;83E43F|A00100  |      ;
                        JSL.L fUnknown_848097                ;83E442|22978084|848097;
                        REP #$20                             ;83E446|C220    |      ;
-                       LDA.L $7F1F68                        ;83E448|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E448|AF681F7F|7F1F68;
                        ORA.W #$0010                         ;83E44C|091000  |      ;
-                       STA.L $7F1F68                        ;83E44F|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83E44F|8F681F7F|7F1F68;
                        RTS                                  ;83E453|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12150,7 +12150,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83E478:
                        REP #$20                             ;83E478|C220    |      ;
-                       LDA.L $7F1F68                        ;83E47A|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E47A|AF681F7F|7F1F68;
                        AND.W #$0040                         ;83E47E|294000  |      ;
                        BNE CODE_83E4A7                      ;83E481|D024    |83E4A7;
                        REP #$30                             ;83E483|C230    |      ;
@@ -12159,9 +12159,9 @@ fGetChickenDataPointer:
                        LDY.W #$0000                         ;83E48B|A00000  |      ;
                        JSL.L fUnknown_848097                ;83E48E|22978084|848097;
                        REP #$20                             ;83E492|C220    |      ;
-                       LDA.L $7F1F68                        ;83E494|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E494|AF681F7F|7F1F68;
                        ORA.W #$0040                         ;83E498|094000  |      ;
-                       STA.L $7F1F68                        ;83E49B|8F681F7F|7F1F68;
+                       STA.L nPlayerFlags+2                 ;83E49B|8F681F7F|7F1F68;
                        SEP #$20                             ;83E49F|E220    |      ;
                        LDA.B #$04                           ;83E4A1|A904    |      ;
                        STA.W $099F                          ;83E4A3|8D9F09  |00099F;
@@ -12170,7 +12170,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83E4A7:
                        REP #$30                             ;83E4A7|C230    |      ;
-                       LDA.L $7F1F68                        ;83E4A9|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E4A9|AF681F7F|7F1F68;
                        AND.W #$0100                         ;83E4AD|290001  |      ;
                        BNE CODE_83E4CA                      ;83E4B0|D018    |83E4CA;
                        REP #$30                             ;83E4B2|C230    |      ;
@@ -12188,7 +12188,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E4CA|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E4CB:
+subUnknown83CAA9_0x29:
                        REP #$30                             ;83E4CB|C230    |      ;
                        LDA.L $7F1F6A                        ;83E4CD|AF6A1F7F|7F1F6A;
                        AND.W #$0040                         ;83E4D1|294000  |      ;
@@ -12277,9 +12277,9 @@ fGetChickenDataPointer:
                        RTS                                  ;83E585|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E586:
+subUnknown83CAA9_0x31:
                        REP #$30                             ;83E586|C230    |      ;
-                       LDA.L $7F1F68                        ;83E588|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;83E588|AF681F7F|7F1F68;
                        AND.W #$0200                         ;83E58C|290002  |      ;
                        BEQ CODE_83E5A1                      ;83E58F|F010    |83E5A1;
                        REP #$30                             ;83E591|C230    |      ;
@@ -12294,7 +12294,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E5A1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E5A2:
+subUnknown83CAA9_0x2C:
                        REP #$30                             ;83E5A2|C230    |      ;
                        REP #$30                             ;83E5A4|C230    |      ;
                        LDA.W #$0000                         ;83E5A6|A90000  |      ;
@@ -12304,7 +12304,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E5B3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E5B4:
+subUnknown83CAA9_0x28:
                        REP #$30                             ;83E5B4|C230    |      ;
                        LDA.L $7F1F6A                        ;83E5B6|AF6A1F7F|7F1F6A;
                        AND.W #$4000                         ;83E5BA|290040  |      ;
@@ -12318,7 +12318,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E5CC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E5CD:
+subUnknown83CAA9_0x2D:
                        REP #$30                             ;83E5CD|C230    |      ;
                        REP #$30                             ;83E5CF|C230    |      ;
                        LDA.W #$0000                         ;83E5D1|A90000  |      ;
@@ -12328,7 +12328,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E5DE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E5DF:
+subUnknown83CAA9_0x08:
                        REP #$30                             ;83E5DF|C230    |      ;
                        REP #$30                             ;83E5E1|C230    |      ;
                        LDA.W #$0000                         ;83E5E3|A90000  |      ;
@@ -12338,7 +12338,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E5F0|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E5F1:
+subUnknown83CAA9_0x09:
                        REP #$30                             ;83E5F1|C230    |      ;
                        REP #$30                             ;83E5F3|C230    |      ;
                        LDA.W #$0000                         ;83E5F5|A90000  |      ;
@@ -12348,7 +12348,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E602|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E603:
+subUnknown83CAA9_0x0A:
                        SEP #$20                             ;83E603|E220    |      ;
                        REP #$10                             ;83E605|C210    |      ;
                        LDA.L nCurrentSeasonID               ;83E607|AF191F7F|7F1F19;
@@ -12371,7 +12371,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E631|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E632:
+subUnknown83CAA9_0x39:
                        SEP #$20                             ;83E632|E220    |      ;
                        REP #$10                             ;83E634|C210    |      ;
                        LDA.L nCurrentSeasonID               ;83E636|AF191F7F|7F1F19;
@@ -12394,7 +12394,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E660|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E661:
+subUnknown83CAA9_0x14:
                        SEP #$20                             ;83E661|E220    |      ;
                        REP #$10                             ;83E663|C210    |      ;
                        LDA.L nCurrentSeasonID               ;83E665|AF191F7F|7F1F19;
@@ -12417,7 +12417,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E68F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E690:
+subUnknown83CAA9_0x3A:
                        SEP #$20                             ;83E690|E220    |      ;
                        REP #$10                             ;83E692|C210    |      ;
                        LDA.L nCurrentSeasonID               ;83E694|AF191F7F|7F1F19;
@@ -12435,7 +12435,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E6B1|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E6B2:
+subUnknown83CAA9_0x0B:
                        REP #$30                             ;83E6B2|C230    |      ;
                        REP #$30                             ;83E6B4|C230    |      ;
                        LDA.W #$0000                         ;83E6B6|A90000  |      ;
@@ -12445,15 +12445,15 @@ fGetChickenDataPointer:
                        RTS                                  ;83E6C3|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E6C4:
+subUnknown83CAA9_0x26:
                        REP #$30                             ;83E6C4|C230    |      ;
                        LDA.L $7F1F6E                        ;83E6C6|AF6E1F7F|7F1F6E;
                        AND.W #$0002                         ;83E6CA|290200  |      ;
                        BNE CODE_83E705                      ;83E6CD|D036    |83E705;
-                       LDA.L MarriedGirlID                  ;83E6CF|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E6CF|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83E6D3|290200  |      ;
                        BNE CODE_83E6E3                      ;83E6D6|D00B    |83E6E3;
-                       LDA.L MarriedGirlID                  ;83E6D8|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83E6D8|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83E6DC|291000  |      ;
                        BNE CODE_83E6F4                      ;83E6DF|D013    |83E6F4;
                        BRA CODE_83E705                      ;83E6E1|8022    |83E705;
@@ -12509,7 +12509,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83E74B|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83E74C:
+subUnknown83CAA9_0x3B:
                        RTS                                  ;83E74C|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12519,7 +12519,7 @@ fGetChickenDataPointer:
                        dw $0100,$0200,$0400,$0800           ;83E75D|        |      ;
                        dw $1000,$2000,$4000,$8000           ;83E765|        |      ;
                                                             ;      |        |      ;
-          CODE_83E76D:
+subUnknown83CAA9_0x3C:
                        SEP #$20                             ;83E76D|E220    |      ;
                        REP #$10                             ;83E76F|C210    |      ;
                        SEP #$20                             ;83E771|E220    |      ;
@@ -13120,7 +13120,7 @@ fGetChickenDataPointer:
                        RTS                                  ;83EBA5|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83EBA6:
+subUnknown83CAA9_0x3D:
                        SEP #$20                             ;83EBA6|E220    |      ;
                        REP #$10                             ;83EBA8|C210    |      ;
                        SEP #$20                             ;83EBAA|E220    |      ;
@@ -13397,10 +13397,10 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83ED1E:
                        REP #$30                             ;83ED1E|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83ED20|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83ED20|AF661F7F|7F1F66;
                        AND.W #$001F                         ;83ED24|291F00  |      ;
                        BNE CODE_83ED5A                      ;83ED27|D031    |83ED5A;
-                       LDA.L nPlayerHappines                ;83ED29|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83ED29|AF331F7F|7F1F33;
                        CMP.W #$0064                         ;83ED2D|C96400  |      ;
                        BCS CODE_83ED5A                      ;83ED30|B028    |83ED5A;
                        SEP #$20                             ;83ED32|E220    |      ;
@@ -13558,10 +13558,10 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EE82:
                        REP #$30                             ;83EE82|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EE84|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EE84|AF661F7F|7F1F66;
                        AND.W #$001F                         ;83EE88|291F00  |      ;
                        BNE CODE_83EEAE                      ;83EE8B|D021    |83EEAE;
-                       LDA.L nPlayerHappines                ;83EE8D|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83EE8D|AF331F7F|7F1F33;
                        CMP.W #$0064                         ;83EE91|C96400  |      ;
                        BCC CODE_83EEAE                      ;83EE94|9018    |83EEAE;
                        REP #$30                             ;83EE96|C230    |      ;
@@ -13577,10 +13577,10 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EEAE:
                        REP #$30                             ;83EEAE|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EEB0|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EEB0|AF661F7F|7F1F66;
                        AND.W #$001F                         ;83EEB4|291F00  |      ;
                        BNE CODE_83EEDA                      ;83EEB7|D021    |83EEDA;
-                       LDA.L nPlayerHappines                ;83EEB9|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83EEB9|AF331F7F|7F1F33;
                        CMP.W #$0320                         ;83EEBD|C92003  |      ;
                        BCC CODE_83EEDA                      ;83EEC0|9018    |83EEDA;
                        REP #$30                             ;83EEC2|C230    |      ;
@@ -13596,7 +13596,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EEDA:
                        REP #$30                             ;83EEDA|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EEDC|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EEDC|AF661F7F|7F1F66;
                        AND.W #$0001                         ;83EEE0|290100  |      ;
                        BEQ CODE_83EF15                      ;83EEE3|F030    |83EF15;
                        REP #$30                             ;83EEE5|C230    |      ;
@@ -13624,7 +13624,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EF15:
                        REP #$30                             ;83EF15|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EF17|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EF17|AF661F7F|7F1F66;
                        AND.W #$0002                         ;83EF1B|290200  |      ;
                        BEQ CODE_83EF50                      ;83EF1E|F030    |83EF50;
                        REP #$30                             ;83EF20|C230    |      ;
@@ -13652,7 +13652,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EF50:
                        REP #$30                             ;83EF50|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EF52|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EF52|AF661F7F|7F1F66;
                        AND.W #$0004                         ;83EF56|290400  |      ;
                        BEQ CODE_83EF8B                      ;83EF59|F030    |83EF8B;
                        REP #$30                             ;83EF5B|C230    |      ;
@@ -13680,7 +13680,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EF8B:
                        REP #$30                             ;83EF8B|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EF8D|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EF8D|AF661F7F|7F1F66;
                        AND.W #$0008                         ;83EF91|290800  |      ;
                        BEQ CODE_83EFC6                      ;83EF94|F030    |83EFC6;
                        REP #$30                             ;83EF96|C230    |      ;
@@ -13708,7 +13708,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EFC6:
                        REP #$30                             ;83EFC6|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EFC8|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EFC8|AF661F7F|7F1F66;
                        AND.W #$0010                         ;83EFCC|291000  |      ;
                        BEQ CODE_83EFE9                      ;83EFCF|F018    |83EFE9;
                        REP #$30                             ;83EFD1|C230    |      ;
@@ -13724,10 +13724,10 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83EFE9:
                        REP #$30                             ;83EFE9|C230    |      ;
-                       LDA.L MarriedGirlID                  ;83EFEB|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83EFEB|AF661F7F|7F1F66;
                        AND.W #$001F                         ;83EFEF|291F00  |      ;
                        BNE CODE_83F02F                      ;83EFF2|D03B    |83F02F;
-                       LDA.L nPlayerHappines                ;83EFF4|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83EFF4|AF331F7F|7F1F33;
                        CMP.W #$00C8                         ;83EFF8|C9C800  |      ;
                        BCC CODE_83F02F                      ;83EFFB|9032    |83F02F;
                        LDA.L nLove_Maria                    ;83EFFD|AF1F1F7F|7F1F1F;
@@ -13786,7 +13786,7 @@ fGetChickenDataPointer:
                        LDA.L $7F1F6E                        ;83F077|AF6E1F7F|7F1F6E;
                        AND.W #$0008                         ;83F07B|290800  |      ;
                        BEQ CODE_83F0E3                      ;83F07E|F063    |83F0E3;
-                       LDA.L nPlayerHappines                ;83F080|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83F080|AF331F7F|7F1F33;
                        CMP.W #$0384                         ;83F084|C98403  |      ;
                        BCC CODE_83F0E3                      ;83F087|905A    |83F0E3;
                        SEP #$20                             ;83F089|E220    |      ;
@@ -14150,7 +14150,7 @@ fGetChickenDataPointer:
                        ADC.L nRanchMasteringRate            ;83F394|6F541F7F|7F1F54;
                        STA.L nRanchMasteringRate            ;83F398|8F541F7F|7F1F54;
                        REP #$20                             ;83F39C|C220    |      ;
-                       LDA.L nPlayerHappines                ;83F39E|AF331F7F|7F1F33;
+                       LDA.L nPlayerHappiness               ;83F39E|AF331F7F|7F1F33;
                        LSR A                                ;83F3A2|4A      |      ;
                        LSR A                                ;83F3A3|4A      |      ;
                        LSR A                                ;83F3A4|4A      |      ;
@@ -14200,7 +14200,7 @@ fGetChickenDataPointer:
                                                             ;      |        |      ;
           CODE_83F40C:
                        REP #$20                             ;83F40C|C220    |      ;
-                       LDA.L MarriedGirlID                  ;83F40E|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;83F40E|AF661F7F|7F1F66;
                        AND.W #$001F                         ;83F412|291F00  |      ;
                        BEQ CODE_83F423                      ;83F415|F00C    |83F423;
                        LDA.L nRanchMasteringRate            ;83F417|AF541F7F|7F1F54;
@@ -14379,7 +14379,7 @@ fGetChickenDataPointer:
                        LDA.L nRanchDevelopmentRate          ;83F582|AF561F7F|7F1F56;
                        STA.B $7E                            ;83F586|857E    |00007E;
                        LDA.W #$000A                         ;83F588|A90A00  |      ;
-                       JSL.L CODE_838000                    ;83F58B|22008083|838000;
+                       JSL.L fUnknown_838000                ;83F58B|22008083|838000;
                        REP #$30                             ;83F58F|C230    |      ;
                        STA.B $7E                            ;83F591|857E    |00007E;
                        LDA.W #$0127                         ;83F593|A92701  |      ;

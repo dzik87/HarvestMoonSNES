@@ -39,7 +39,7 @@
                        JSL.L fUnknown_828EC6                ;80805A|22C68E82|828EC6;
                        JSL.L fUnknown_8096D3                ;80805E|22D39680|8096D3;
                        REP #$20                             ;808062|C220    |      ;
-                       LDA.L $7F1F68                        ;808064|AF681F7F|7F1F68;
+                       LDA.L nPlayerFlags+2                 ;808064|AF681F7F|7F1F68;
                        AND.W #$0001                         ;808068|290100  |      ;
                        BEQ fGameLoop                        ;80806B|F016    |808083;
                        SEP #$20                             ;80806D|E220    |      ;
@@ -2549,19 +2549,19 @@ fUnknownEndAt6PM_809329:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
     .checkMarriedGirl:
-                       LDA.L MarriedGirlID                  ;80946B|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;80946B|AF661F7F|7F1F66;
                        AND.W #$0001                         ;80946F|290100  |      ;
                        BNE .marriedMaria                    ;809472|D026    |80949A;
-                       LDA.L MarriedGirlID                  ;809474|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;809474|AF661F7F|7F1F66;
                        AND.W #$0002                         ;809478|290200  |      ;
                        BNE .marriedAnn                      ;80947B|D024    |8094A1;
-                       LDA.L MarriedGirlID                  ;80947D|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;80947D|AF661F7F|7F1F66;
                        AND.W #$0004                         ;809481|290400  |      ;
                        BNE .marriedNina                     ;809484|D022    |8094A8;
-                       LDA.L MarriedGirlID                  ;809486|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;809486|AF661F7F|7F1F66;
                        AND.W #$0008                         ;80948A|290800  |      ;
                        BNE .marriedEllen                    ;80948D|D020    |8094AF;
-                       LDA.L MarriedGirlID                  ;80948F|AF661F7F|7F1F66;
+                       LDA.L nPlayerFlags                   ;80948F|AF661F7F|7F1F66;
                        AND.W #$0010                         ;809493|291000  |      ;
                        BNE .marriedEve                      ;809496|D01E    |8094B6;
                        BRA .return                          ;809498|8066    |809500;
@@ -2715,7 +2715,7 @@ fSubrutinesExecute_809553:
                        CLC                                  ;809587|18      |      ;
                        ADC.W #$000A                         ;809588|690A00  |      ;
                        TAX                                  ;80958B|AA      |      ;
-                       LDA.W pSubrutinesTable,X             ;80958C|BDECBE  |80BEEC;
+                       LDA.W pSubrutineTable_80BEEC,X       ;80958C|BDECBE  |80BEEC;
                        CMP.W #$FFFF                         ;80958F|C9FFFF  |      ;
                        BEQ .load                            ;809592|F00A    |80959E;
                        SEP #$20                             ;809594|E220    |      ;
@@ -2730,10 +2730,10 @@ fSubrutinesExecute_809553:
                        ADC.B $7E                            ;8095A3|657E    |00007E;
                        ASL A                                ;8095A5|0A      |      ;
                        TAX                                  ;8095A6|AA      |      ;
-                       LDA.W pSubrutinesTable,X             ;8095A7|BDECBE  |80BEEC;
+                       LDA.W pSubrutineTable_80BEEC,X       ;8095A7|BDECBE  |80BEEC;
                        CMP.W #$FFFF                         ;8095AA|C9FFFF  |      ;
                        BEQ +                                ;8095AD|F003    |8095B2;
-                       JSR.W (pSubrutinesTable,X)           ;8095AF|FCECBE  |80BEEC;
+                       JSR.W (pSubrutineTable_80BEEC,X)     ;8095AF|FCECBE  |80BEEC;
                                                             ;      |        |      ;
                      + RTL                                  ;8095B2|6B      |      ;
                                                             ;      |        |      ;
@@ -7417,7 +7417,7 @@ sPALETTE_TimeBasedTable:
                        db $2A,$11,$85,$08                   ;80BDF8|        |      ;
                                                             ;      |        |      ;
 sMarriedGirlTable_80BDFC:
-                       dw $0000,$0000,$0000,$7A29           ;80BDFC|        |      ; 6 * [16b, 16b, 16b] - index by married gitl id 0-5
+                       dw $0000,$0000,$0000,$7A29           ;80BDFC|        |      ; 0x06 * [16b, 16b, 16b, 16b, 16b, 16b] - index by married gitl id 0-5
                        dw $5DA0,$4100,$031F,$01DF           ;80BE04|        |      ;
                        dw $00F8,$731F,$625E,$41B9           ;80BE0C|        |      ;
                        dw $1A56,$0DB0,$1D2D,$53FF           ;80BE14|        |      ;
@@ -7450,7 +7450,7 @@ sMarriedGirlTable_80BDFC:
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BEDC|        |      ;
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BEE4|        |      ;
                                                             ;      |        |      ;
-     pSubrutinesTable:
+pSubrutineTable_80BEEC:
                        dw subUnknown_80C36C                 ;80BEEC|        |80C36C; ? * [ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16]
                        dw subUnknown_80C36C                 ;80BEEE|        |80C36C;
                        dw subUnknown_80C3D9                 ;80BEF0|        |80C3D9;
