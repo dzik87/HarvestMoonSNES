@@ -108,7 +108,10 @@
 00:0980 nUnknownX
 00:0982 nUnknownY
 00:0984 nCarriedItemId
+00:0985 nTileInFrontOfPlayerX
+00:0987 nTileInFrontOfPlayerY
 00:098C nWeatherForecast
+00:0990 nWeatherForecast8281FD
 00:2100 SNES_INIDISP
 00:2101 SNES_OBSEL
 00:2102 SNES_OAMADDL
@@ -845,7 +848,7 @@
 80:B6B1 sMenuScreenBackgrounds
 80:B6D3 sMenuCharacters
 80:B6F5 aScreenTransitionTable
-80:B8CD Table_80B8CD
+80:B8CD nToolSoundData_80B8CD
 80:B9D7 DATA_80B9D7
 80:B9DC DATA_80B9DC
 80:B9EA DATA_80B9EA
@@ -1728,7 +1731,7 @@
 81:D188 .label2
 81:D199 .label3
 81:D1A3 .return
-81:D1A4 fUnknown_81D1A4
+81:D1A4 fFindTileCoordsInFrontOfPLayer
 81:D1C5 fUnknown_81D1C5
 81:D1CC .loop
 81:D1DC .label1
@@ -2163,17 +2166,75 @@
 82:8131 fUnknown_828131
 82:8140 .sellingTime
 82:8165 fUnknown_828165
+82:817C +
 82:81BF fReturn_8281BF
 82:81C0 fUnknown_8281C0
-82:81FD Table_8281FD
+82:81EA .label1
+82:81F3 .label2
+82:81FC .return
+82:81FD nWeatherForecastTable_8281FD
+82:8209 fUnknown_828209
+82:8233 .return
+82:8234 .label1
+82:8242 .label2
+82:8250 .label3
+82:825E .label4
+82:8260 .label5
 82:8270 fGetAXYArgs_828270
 82:8298 nArgumentsTable_828298
 82:82AC fNextDayHandler
-82:82EE NotLastSeason
-82:82F6 NotLastDayOfMonth
-82:837C NewDay
-82:878E fDeadEnd_82878E
-82:89D6 WriteSeasonWeekdayAndDayOrdinal
+82:82BD +
+82:82EE .notLastSeason
+82:82F6 .notLastDayOfMonth
+82:834E +
+82:8367 +
+82:837C +
+82:8482 +
+82:84D5 .label1
+82:84E2 .label2
+82:8503 +
+82:8525 +
+82:8551 .label3
+82:855D .label4
+82:8569 .label5
+82:857F .label6
+82:85A9 +
+82:85E2 +
+82:861B +
+82:8654 +
+82:868D +
+82:86C6 +
+82:86E8 +
+82:86FD +
+82:8712 +
+82:8733 +
+82:878D .return
+82:878E .deadEnd
+82:8790 fUnknown_828790
+82:87CD .marriedCheck
+82:87F4 +
+82:881D +
+82:8829 +
+82:882C .marriedToMaria
+82:8843 +
+82:8846 .skip
+82:8854 +
+82:8857 .marriedToAnn
+82:886E +
+82:887C .marriedToNina
+82:8893 +
+82:88A1 .marriedToEllen
+82:88B7 +
+82:88C4 .marriedToEve
+82:88DA +
+82:88E7 .label0
+82:8911 .checkFirstChildAge
+82:8927 .canHaveSecondChild
+82:8958 .label3
+82:897E .label4
+82:89AF .label5
+82:89D5 .return
+82:89D6 fWriteSeasonWeekdayAndDayOrdinal
 82:8A9B .first
 82:8AA2 .nd
 82:8AA9 .rd
@@ -2181,86 +2242,167 @@
 82:8AD9 sSeasonNameTable
 82:8B19 sWeekdayNameTable
 82:8BF9 sDayOrdinalTable
-82:8CED Table_828CED
-82:8CF9 SpecialEvents
+82:8C09 fWeatherForecast_828C09
+82:8C2F +
+82:8C32 .weatherSunny
+82:8C3F +
+82:8C4B .weatherRainy
+82:8C64 +
+82:8C72 .weatherSnowy
+82:8C88 +
+82:8C96 .weatherHurricane
+82:8CA4 .weather04
+82:8CC8 .weather05
+82:8CEC .return
+82:8CED nWeatherTable_828CED
+82:8CF9 fWeatherSpecialEvents
+82:8D0E +
+82:8D18 .harvestFestival
+82:8D34 .eggHuntFestival
+82:8D41 +
+82:8D4B .thanksgivingFestival
+82:8D58 +
+82:8D6A .starNightFestival
+82:8D7E .newYearFestival
+82:8D92 .label1
+82:8D9D .thirdYear
+82:8DAB +
+82:8DCA +
+82:8DD5 .sunday
+82:8DDF .label2
+82:8E16 .label3
+82:8E20 .label4
+82:8E50 .label5
+82:8E64 .label6
+82:8E87 .label7
+82:8EAA .return
+82:8EB1 .justReturn
 82:8EB2 Event_Summer30thDay
 82:8EB6 Event_Unknown1
 82:8EBA Event_Unknown2
 82:8EBE Event_Summer29thDay
 82:8EC2 Event_Winter7thDay
 82:8EC6 fUnknown_828EC6
+82:8ED4 .loop
+82:8EE0 +
+82:8EE7 .someoneLovesMeMuch
+82:8F0C .label3
+82:8F2D .label4
+82:8F4E .label5
+82:8F6F .label6
+82:8F90 .label7
 82:8FB1 fUnknown_828FB1
+82:8FF2 .return
 82:8FF3 fUnknown_828FF3
-82:9054 Table_829054
-82:90DD subToolAnimation_NoAction
-82:90DE subToolAnimation_Sickle
-82:90EC subToolAnimation_Hoe
-82:90FA subToolAnimation_Hammer
-82:9108 subToolAnimation_0x04
-82:9116 subToolAnimation_0x05
-82:9121 subToolAnimation_0x06
-82:912C subToolAnimation_0x07
-82:9137 subToolAnimation_0x08
-82:9142 subToolAnimation_0x09
-82:9150 subToolAnimation_0x0A
-82:915E subToolAnimation_0x0B
-82:9179 subToolAnimation_0x0C
-82:9184 subToolAnimation_0x0D
-82:918D subToolAnimation_0x0E
-82:919B subToolAnimation_0x0F
-82:91A9 subToolAnimation_0x10
-82:91E8 subToolAnimation_0x11
-82:91F1 subToolAnimation_0x12
-82:91FD subToolAnimation_0x13
-82:9209 subToolAnimation_0x14
-82:9215 subToolAnimation_0x15
-82:921E subToolAnimation_0x16
-82:922A subToolAnimation_0x17
-82:9236 subToolAnimation_0x18
-82:923F subToolAnimation_0x19
-82:924B subToolAnimation_0x1A
-82:9257 subToolAnimation_0x1B
-82:9260 fUnknown_829260
+82:9038 +
+82:904B .return
+82:9054 nToolSoundData_829054
+82:90A8 fToolAnimation_8290A8
+82:90B8 +
+82:90CD .label1
+82:90DC .return
+82:90DD subToolAnimation82A58B_Empty
+82:90DE subToolAnimation82A58B_Sickle
+82:90EC subToolAnimation82A58B_Plow
+82:90FA subToolAnimation82A58B_Hammer
+82:9108 subToolAnimation82A58B_Axe
+82:9116 subToolAnimation82A58B_CornSeedBag
+82:9121 subToolAnimation82A58B_TomatoSeedBag
+82:912C subToolAnimation82A58B_PotatoSeedBag
+82:9137 subToolAnimation82A58B_TurnipSeedBag
+82:9142 subToolAnimation82A58B_CowMedicine
+82:9150 subToolAnimation82A58B_MiraclePotion
+82:915E subToolAnimation82A58B_Bell
+82:9179 subToolAnimation82A58B_GrassSeedBag
+82:9184 subToolAnimation82A58B_Paint
+82:918D subToolAnimation82A58B_Milker
+82:919B subToolAnimation82A58B_Brush
+82:91A9 subToolAnimation82A58B_WateringCan
+82:91C8 .haveWater
+82:91D5 .label2
+82:91E8 subToolAnimation82A58B_GoldenSickle
+82:91F1 subToolAnimation82A58B_GoldenPlow
+82:91FD subToolAnimation82A58B_GoldenHammer
+82:9209 subToolAnimation82A58B_GoldenAxe
+82:9215 subToolAnimation82A58B_Sprinkler
+82:921E subToolAnimation82A58B_BeanstalkSeed
+82:922A subToolAnimation82A58B_BlueDiamond
+82:9236 subToolAnimation82A58B_BlueFeather
+82:923F subToolAnimation82A58B_ChickenFood
+82:924B subToolAnimation82A58B_CowFood
+82:9257 subToolAnimation82A58B_0x1B
+82:9260 fToolUsedUnknown_829260
 82:927D fUnknown_82927D
 82:92A0 fUnknown_8292A0
 82:92BC fUnknown_8292BC
 82:92D6 fUnknown_8292D6
-82:92FA Table_8292FA
-82:931E subToolUsed82A5C3_0x00
-82:9328 subToolUsed82A5C3_0x01
-82:9460 subToolUsed82A5C3_0x02
-82:95C0 subToolUsed82A5C3_0x03
-82:97BD subToolUsed82A5C3_0x04
-82:9999 subToolUsed82A5C3_0x05
-82:99F8 subToolUsed82A5C3_0x06
-82:9A57 subToolUsed82A5C3_0x07
-82:9AB4 subToolUsed82A5C3_0x08
-82:9B11 subToolUsed82A5C3_0x09
-82:9B31 subToolUsed82A5C3_0x0A
-82:9B51 subToolUsed82A5C3_0x0B
-82:9B61 subToolUsed82A5C3_0x0C
-82:9BCB subToolUsed82A5C3_0x0D
-82:9CC0 subToolUsed82A5C3_0x0E
-82:9CC8 subToolUsed82A5C3_0x0F
-82:9CD8 subToolUsed82A5C3_0x10
-82:9D42 subToolUsed82A5C3_0x11
-82:9E8E subToolUsed82A5C3_0x12
-82:A005 subToolUsed82A5C3_0x13
-82:A1BF subToolUsed82A5C3_0x14
-82:A307 subToolUsed82A5C3_0x15
-82:A377 subToolUsed82A5C3_0x16
-82:A3AA subToolUsed82A5C3_0x17
-82:A3FD subToolUsed82A5C3_0x18
-82:A414 subToolUsed82A5C3_0x19
-82:A4C2 subToolUsed82A5C3_0x1A
+82:92FA nFindTileArgsTable_8292FA
+82:931E subToolUsed82A5C3_Empty
+82:9328 subToolUsed82A5C3_Sickle
+82:9332 +
+82:933F +
+82:9352 +
+82:935A .label1
+82:936C .label2
+82:9374 .label3
+82:93C8 .label4
+82:9403 .label5
+82:9450 .return
+82:9460 subToolUsed82A5C3_Plow
+82:946A +
+82:94C5 .label1
+82:9511 .luckCheck
+82:954A .normalDestroy
+82:9589 .label2
+82:959F .label3
+82:95B0 .return
+82:95C0 subToolUsed82A5C3_Hammer
+82:95CA +
+82:95E9 .label1
+82:95F0 .label2
+82:95F5 .label3
+82:9633 .label4
+82:9645 .label5
+82:9655 .label6
+82:96A5 .label7
+82:96B4 .label8
+82:96B9 .label9
+82:96FE .label10
+82:972F .label11
+82:973F .label12
+82:97BD subToolUsed82A5C3_Axe
+82:9999 subToolUsed82A5C3_CornSeedBag
+82:99F8 subToolUsed82A5C3_TomatoSeedBag
+82:9A57 subToolUsed82A5C3_PotatoSeedBag
+82:9AB4 subToolUsed82A5C3_TurnipSeedBag
+82:9B11 subToolUsed82A5C3_CowMedicine
+82:9B31 subToolUsed82A5C3_MiraclePotion
+82:9B51 subToolUsed82A5C3_Bell
+82:9B61 subToolUsed82A5C3_GrassSeedBag
+82:9BCB subToolUsed82A5C3_Paint
+82:9CC0 subToolUsed82A5C3_Milker
+82:9CC8 subToolUsed82A5C3_Brush
+82:9CD8 subToolUsed82A5C3_WateringCan
+82:9D42 subToolUsed82A5C3_GoldenSickle
+82:9E8E subToolUsed82A5C3_GoldenPlow
+82:A005 subToolUsed82A5C3_GolderHammer
+82:A1BF subToolUsed82A5C3_GoldenAxe
+82:A307 subToolUsed82A5C3_Sprinkler
+82:A377 subToolUsed82A5C3_BeanstalkSeed
+82:A3AA subToolUsed82A5C3_BlueDiamond
+82:A3FD subToolUsed82A5C3_BlueFeather
+82:A414 subToolUsed82A5C3_ChickenFeed
+82:A4C2 subToolUsed82A5C3_CowFeed
 82:A570 subToolUsed82A5C3_0x1B
 82:A571 nCowFeedFlagsTable
-82:A58B pToolAnimationTable
+82:A58B pToolAnimationTable_82A58B
 82:A5C3 pToolUsedTable_82A5C3
 82:A5FB fUnknown_82A5FB
 82:A682 fUnknown_82A682
-82:A713 NewYearStoreIntoA86_X88_Y8A
+82:A713 fSaveArgsTo86and8A
+82:A811 fUnknown_82A811
 82:AA45 IncreaseRanchDevelopmentRate
+82:AA71 fUnknown_82AA71
 82:AC61 fUnknown_82AC61
 82:ACFE Table_82ACFE
 82:AD06 Table_82AD06
@@ -2297,7 +2439,7 @@
 83:8138 fRNG
 83:81F8 fDecompressTilemap
 83:82FE fUnknown_8382FE
-83:8332 fUnknown_838332
+83:8332 fStore0Ainto0116
 83:833E fUnknown_83833E
 83:8380 fUnknown_838380
 83:83A4 fUnknown_8383A4
@@ -2307,6 +2449,7 @@
 83:84D3 fUnknown_8384D3
 83:8598 fUnknown_838598
 83:8A1A zero104memory
+83:8DDF fUnknown_838DDF
 83:8E32 fUnknown_838E32
 83:8E8B fUnknown_838E8B
 83:8EC9 fUnknown_838EC9
@@ -2367,12 +2510,14 @@
 83:AD91 fUnknown_83AD91
 83:AF37 fUnknown_83AF37
 83:B0F6 fUnknown_83B0F6
-83:B1C9 fUnknown_83B1C9
+83:B1C9 fAddProfitToCurrentMoney
 83:B224 fUnknown_83B224
 83:B253 fUnknown_83B253
 83:B282 fUnknown_83B282
 83:B2B1 DefineVariables
+83:B68E fUnknown_83B68E
 83:BAD4 fUnknown_83BAD4
+83:BC5A fUnknown_83BC5A
 83:C296 fUnknown_83C296
 83:C807 fUnknown_83C807
 83:C8DC fAddNewCow
@@ -7273,6 +7418,9 @@ FF:FFFF EMPTY_FFFFFF
 00:0980 n16
 00:0982 n16
 00:0984 n16
+00:0985 n16
+00:0987 n16
+00:0990 n8
 7E:C1C6 0x0C * sChickenData (8 bytes)
 7E:C286 0x0C * sCowData (16 bytes)
 7F:1F00 strSheedItems
@@ -7333,6 +7481,7 @@ FF:FFFF EMPTY_FFFFFF
 80:A7AE $22: nIndex, Y: nFieldOffset, return A: nValue, $18: pMapGraphics
 80:AB3C Graphic Preset
 80:B6F5 ? * [b16 nTransitionDestination, b16, b16 nDestX, b16 nDestY]
+80:B8CD 0x0D * [n16]
 80:BB5C 60 * [16b, 16b, 16b nPalleteIndex]
 80:BDFC 0x06 * [16b, 16b, 16b, 16b, 16b, 16b] - index by married gitl id 0-5
 80:BEEC ? * [ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16]
@@ -7360,6 +7509,7 @@ FF:FFFF EMPTY_FFFFFF
 81:BF97 16 * [n16]
 81:BFD3 A: nFunctionIndex
 81:C027 0x1C * [ptr16]
+81:D1A4 X: nArg1, Y: nArg2
 81:D1C5 A: nArg1
 81:D1E8 0x0A * [16b, 16b]
 81:D510 0x0C * [n16 nSpring, n16 nSummer, n16 nFall, n16 nWinter]
@@ -7370,16 +7520,19 @@ FF:FFFF EMPTY_FFFFFF
 81:F169 If we expand house in year 1 before Fall we get clock
 81:F6D6 FIX ME here: 0x81F791
 82:81FD 8b
+82:8270 A: nIndex
 82:8298 0x05 * [8b argA, 8b argX, 8b argY, 8b unused]
 82:8AD9 string[16] - for each Season
 82:8B19 string[32] - for each Weekday
 82:8BF9 string[2] - st, nd, rd, th
+82:8CED [n16 nSunny, n16 nRainy, n16 nSnowy, n16 nHurricane, n16 nWeather4, n16 nWeather5]
 82:8EB2 Season index based
 82:8EB6 Season index based
 82:8EBA Season index based
 82:8EBE Season index based
 82:8EC2 Season index based
-82:92FA Not sure about its size
+82:9054 1C * [n24]
+82:92FA 0x09 * [n16 nRegX, n16 nRegY]
 82:A571 16b
 82:A58B 0x1C * ptr16
 82:A5C3 0x1C * ptr16
@@ -7396,6 +7549,7 @@ FF:FFFF EMPTY_FFFFFF
 83:98D6 24b * 6 (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
 83:98EE ptr28 pData, b8 nSize
 83:9AAE ptr28 pData, b8 nSize
+83:B1C9 $72: nProfit24
 83:C8DC A: nAddType (0 - bought, 1 - born), return result in A
 83:C995 A: nIndex, return ptr24 $72
 83:C9A7 A: nIndex, return ptr24 $72
