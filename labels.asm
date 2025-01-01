@@ -1,5 +1,5 @@
-                       ptrUnknown0x01 = $000001; !^ ptr24 ^!;      |        |      ;
-;                       ptrUnknown0x01+2 = $000003           ;      |        |      ;
+                       ptrCurrentDialog = $000001; !^ ptr24 ^!;      |        |      ;
+;                       ptrCurrentDialog+2 = $000003         ;      |        |      ;
                        ptrPaletteNext = $000004; !^ ptr24 ^!;      |        |      ;
 ;                       ptrPaletteNext+2 = $000006           ;      |        |      ;
                        ptrUnknown0x07 = $000007; !^ ptr24 ^!;      |        |      ;
@@ -300,6 +300,8 @@
                        SNES_A2A7L = $004378                 ;      |        |      ;
                        SNES_A2A7H = $004379                 ;      |        |      ;
                        SNES_NTLR7 = $00437A                 ;      |        |      ;
+                       sCowDataAddress = $7EC1C6; !^ 0x0C * sChickenData (8 bytes) ^!;      |        |      ;
+                       sChickenDataAddress = $7EC286; !^ 0x0C * sCowData (16 bytes) ^!;      |        |      ;
                        sShedItems = $7F1F00; !^ strSheedItems ^!;      |        |      ;
 ;                       sShedItems+1 = $7F1F01               ;      |        |      ;
 ;                       sShedItems+2 = $7F1F02               ;      |        |      ;
@@ -311,6 +313,7 @@
                        nOwnedCows = $7F1F0A; !^ n8 ^!       ;      |        |      ;
                        nOwnedChickens = $7F1F0B; !^ n8 ^!   ;      |        |      ;
                        nStoredWood = $7F1F0C; !^ n16 ^!     ;      |        |      ;
+                       nReqWoodForExpansion = $7F1F0E; !^ n16 ^!;      |        |      ;
                        nStoredFeed = $7F1F10; !^ n16 ^!     ;      |        |      ;
                        nCurrentYearID = $7F1F18; !^ n8, 00 - 1st Year, 01 - 2nd Year, 03 - 3rd Year ^!;      |        |      ;
                        nCurrentSeasonID = $7F1F19; !^ n8 ^! ;      |        |      ;
@@ -322,6 +325,7 @@
                        nLove_Nina = $7F1F23; !^ n16 ^!      ;      |        |      ;
                        nLove_Ellen = $7F1F25; !^ n16 ^!     ;      |        |      ;
                        nLove_Eve = $7F1F27; !^ n16 ^!       ;      |        |      ;
+                       nPlantedGrass = $7F1F29; !^ n16 ^!   ;      |        |      ;
                        nPlayerHappines = $7F1F33; !^ n16 ^! ;      |        |      ;
                        nPowerBerryEaten = $7F1F36; !^ n8 range 00h-0Ah, (ammount of flowers in garden) ^!;      |        |      ;
                        nFirstChildAge = $7F1F37; !^ n16 ^!  ;      |        |      ;
@@ -348,7 +352,6 @@
                        ;      |        |      ;
                        Table_858C8E = $858C8E               ;      |        |      ;
                        PTR16_80FFFF = $80FFFF               ;      |        |      ;
-                       LOOSE_OP_81A901 = $81A901            ;      |        |      ;
                        DATA16_9282CB = $9282CB              ;      |        |      ;
                        DATA16_92BB03 = $92BB03              ;      |        |      ;
                        DATA16_92D3AB = $92D3AB              ;      |        |      ;
