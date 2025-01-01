@@ -452,7 +452,7 @@
                        LDA.L Table_80B8CD,X                 ;838319|BFCDB880|80B8CD;
                        INC A                                ;83831D|1A      |      ;
                        STA.W $0103                          ;83831E|8D0301  |000103;
-                       JSL.L CODE_83833E                    ;838321|223E8383|83833E;
+                       JSL.L fUnknown_83833E                ;838321|223E8383|83833E;
                        JSL.L fUnknown_838332                ;838325|22328383|838332;
                        REP #$30                             ;838329|C230    |      ;
                        PLY                                  ;83832B|7A      |      ;
@@ -469,7 +469,7 @@
                        RTL                                  ;83833D|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83833E:
+      fUnknown_83833E:
                        SEP #$20                             ;83833E|E220    |      ;
                        LDA.B #$00                           ;838340|A900    |      ;
                        XBA                                  ;838342|EB      |      ;
@@ -570,7 +570,7 @@
                        SEP #$20                             ;8383F3|E220    |      ;
                        LDA.L Table_80B8CD,X                 ;8383F5|BFCDB880|80B8CD;
                        STA.W $0103                          ;8383F9|8D0301  |000103;
-                       JSL.L CODE_83833E                    ;8383FC|223E8383|83833E;
+                       JSL.L fUnknown_83833E                ;8383FC|223E8383|83833E;
                                                             ;      |        |      ;
           CODE_838400:
                        RTL                                  ;838400|6B      |      ;
@@ -4942,9 +4942,9 @@ fSetDefaultValuesForVariables:
                        STZ.W $019A                          ;83AC00|9C9A01  |00019A;
                        STZ.B $28                            ;83AC03|6428    |000028;
                        REP #$20                             ;83AC05|C220    |      ;
-                       STZ.B ptrUnknown0x04                 ;83AC07|6404    |000004;
+                       STZ.B ptrPaletteNext                 ;83AC07|6404    |000004;
                        SEP #$20                             ;83AC09|E220    |      ;
-                       STZ.B ptrUnknown0x04+2               ;83AC0B|6406    |000006;
+                       STZ.B ptrPaletteNext+2               ;83AC0B|6406    |000006;
                        REP #$20                             ;83AC0D|C220    |      ;
                        STZ.B ptrUnknown0x42                 ;83AC0F|6442    |000042;
                        STZ.B $45                            ;83AC11|6445    |000045;
@@ -5369,7 +5369,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83AF36|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83AF37:
+      fUnknown_83AF37:
                        REP #$30                             ;83AF37|C230    |      ;
                        ASL A                                ;83AF39|0A      |      ;
                        TAX                                  ;83AF3A|AA      |      ;
@@ -5840,7 +5840,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83B223|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83B224:
+      fUnknown_83B224:
                        REP #$30                             ;83B224|C230    |      ;
                        STA.B $7E                            ;83B226|857E    |00007E;
                        LDA.L nStoredWood                    ;83B228|AF0C1F7F|7F1F0C;
@@ -5900,7 +5900,7 @@ fSetDefaultValuesForVariables:
                        RTL                                  ;83B281|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83B282:
+      fUnknown_83B282:
                        REP #$30                             ;83B282|C230    |      ;
                        STA.B $7E                            ;83B284|857E    |00007E;
                        LDA.L nPlayerHappines                ;83B286|AF331F7F|7F1F33;
@@ -7126,7 +7126,7 @@ fSetDefaultValuesForVariables:
                        JSL.L CODE_84A5D4                    ;83BD91|22D4A584|84A5D4;
                        REP #$30                             ;83BD95|C230    |      ;
                        LDA.W #$FFE2                         ;83BD97|A9E2FF  |      ;
-                       JSL.L CODE_83B282                    ;83BD9A|2282B283|83B282;
+                       JSL.L fUnknown_83B282                ;83BD9A|2282B283|83B282;
                                                             ;      |        |      ;
           CODE_83BD9E:
                        SEP #$20                             ;83BD9E|E220    |      ;
@@ -7517,7 +7517,7 @@ fSetDefaultValuesForVariables:
                        STA.L nOwnedChickens                 ;83C077|8F0B1F7F|7F1F0B;
                        REP #$30                             ;83C07B|C230    |      ;
                        LDA.W #$FFE2                         ;83C07D|A9E2FF  |      ;
-                       JSL.L CODE_83B282                    ;83C080|2282B283|83B282;
+                       JSL.L fUnknown_83B282                ;83C080|2282B283|83B282;
                                                             ;      |        |      ;
           CODE_83C084:
                        SEP #$20                             ;83C084|E220    |      ;
@@ -8894,7 +8894,7 @@ fSetDefaultValuesForVariables:
                        STA.B [ptrUnknown0x72],Y             ;83C962|9772    |000072;
                        REP #$30                             ;83C964|C230    |      ;
                        LDA.W #$0046                         ;83C966|A94600  |      ;
-                       JSL.L CODE_83B282                    ;83C969|2282B283|83B282;
+                       JSL.L fUnknown_83B282                ;83C969|2282B283|83B282;
                        REP #$30                             ;83C96D|C230    |      ;
                                                             ;      |        |      ;
               .label5:
@@ -9486,9 +9486,9 @@ fGetChickenDataPointer:
                        JSL.L fUnknown_848097                ;83CE71|22978084|848097;
                        SEP #$20                             ;83CE75|E220    |      ;
                        LDA.B #$42                           ;83CE77|A942    |      ;
-                       STA.W $096E                          ;83CE79|8D6E09  |00096E;
-                       STZ.W $096F                          ;83CE7C|9C6F09  |00096F;
-                       STZ.W $0970                          ;83CE7F|9C7009  |000970;
+                       STA.W nJumpTable81D593Index          ;83CE79|8D6E09  |00096E;
+                       STZ.W nJumpTable81D593Arg1           ;83CE7C|9C6F09  |00096F;
+                       STZ.W nJumpTable81D593Arg2           ;83CE7F|9C7009  |000970;
                        REP #$30                             ;83CE82|C230    |      ;
                        LDA.B $D2                            ;83CE84|A5D2    |0000D2;
                        ORA.W #$0040                         ;83CE86|094000  |      ;
@@ -9665,9 +9665,9 @@ fGetChickenDataPointer:
                        JSL.L fUnknown_848097                ;83D00E|22978084|848097;
                        SEP #$20                             ;83D012|E220    |      ;
                        LDA.B #$47                           ;83D014|A947    |      ;
-                       STA.W $096E                          ;83D016|8D6E09  |00096E;
-                       STZ.W $096F                          ;83D019|9C6F09  |00096F;
-                       STZ.W $0970                          ;83D01C|9C7009  |000970;
+                       STA.W nJumpTable81D593Index          ;83D016|8D6E09  |00096E;
+                       STZ.W nJumpTable81D593Arg1           ;83D019|9C6F09  |00096F;
+                       STZ.W nJumpTable81D593Arg2           ;83D01C|9C7009  |000970;
                        REP #$30                             ;83D01F|C230    |      ;
                        LDA.B $D2                            ;83D021|A5D2    |0000D2;
                        ORA.W #$0040                         ;83D023|094000  |      ;
@@ -9718,9 +9718,9 @@ fGetChickenDataPointer:
                        JSL.L fUnknown_848097                ;83D090|22978084|848097;
                        SEP #$20                             ;83D094|E220    |      ;
                        LDA.B #$48                           ;83D096|A948    |      ;
-                       STA.W $096E                          ;83D098|8D6E09  |00096E;
-                       STZ.W $096F                          ;83D09B|9C6F09  |00096F;
-                       STZ.W $0970                          ;83D09E|9C7009  |000970;
+                       STA.W nJumpTable81D593Index          ;83D098|8D6E09  |00096E;
+                       STZ.W nJumpTable81D593Arg1           ;83D09B|9C6F09  |00096F;
+                       STZ.W nJumpTable81D593Arg2           ;83D09E|9C7009  |000970;
                        REP #$30                             ;83D0A1|C230    |      ;
                        LDA.B $D2                            ;83D0A3|A5D2    |0000D2;
                        ORA.W #$0040                         ;83D0A5|094000  |      ;
@@ -9750,9 +9750,9 @@ fGetChickenDataPointer:
                        JSL.L fUnknown_848097                ;83D0DD|22978084|848097;
                        SEP #$20                             ;83D0E1|E220    |      ;
                        LDA.B #$49                           ;83D0E3|A949    |      ;
-                       STA.W $096E                          ;83D0E5|8D6E09  |00096E;
-                       STZ.W $096F                          ;83D0E8|9C6F09  |00096F;
-                       STZ.W $0970                          ;83D0EB|9C7009  |000970;
+                       STA.W nJumpTable81D593Index          ;83D0E5|8D6E09  |00096E;
+                       STZ.W nJumpTable81D593Arg1           ;83D0E8|9C6F09  |00096F;
+                       STZ.W nJumpTable81D593Arg2           ;83D0EB|9C7009  |000970;
                        REP #$30                             ;83D0EE|C230    |      ;
                        LDA.B $D2                            ;83D0F0|A5D2    |0000D2;
                        ORA.W #$0040                         ;83D0F2|094000  |      ;
@@ -9959,7 +9959,7 @@ fGetChickenDataPointer:
                        JSL.L fUnknown_848097                ;83D2D1|22978084|848097;
                        REP #$30                             ;83D2D5|C230    |      ;
                        LDA.W #$0002                         ;83D2D7|A90200  |      ;
-                       JSL.L CODE_83B282                    ;83D2DA|2282B283|83B282;
+                       JSL.L fUnknown_83B282                ;83D2DA|2282B283|83B282;
                        RTS                                  ;83D2DE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11482,9 +11482,9 @@ fGetChickenDataPointer:
                        JSL.L fUnknown_848097                ;83DEB1|22978084|848097;
                        SEP #$20                             ;83DEB5|E220    |      ;
                        LDA.B #$45                           ;83DEB7|A945    |      ;
-                       STA.W $096E                          ;83DEB9|8D6E09  |00096E;
-                       STZ.W $096F                          ;83DEBC|9C6F09  |00096F;
-                       STZ.W $0970                          ;83DEBF|9C7009  |000970;
+                       STA.W nJumpTable81D593Index          ;83DEB9|8D6E09  |00096E;
+                       STZ.W nJumpTable81D593Arg1           ;83DEBC|9C6F09  |00096F;
+                       STZ.W nJumpTable81D593Arg2           ;83DEBF|9C7009  |000970;
                        REP #$30                             ;83DEC2|C230    |      ;
                        LDA.B $D2                            ;83DEC4|A5D2    |0000D2;
                        ORA.W #$0040                         ;83DEC6|094000  |      ;

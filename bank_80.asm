@@ -479,7 +479,7 @@
                        STZ.W SNES_BG1SC                     ;8084B3|9C0721  |002107;
                        STZ.W SNES_BG2SC                     ;8084B6|9C0821  |002108;
                        STZ.W SNES_BG3SC                     ;8084B9|9C0921  |002109;
-                       STZ.W $210A                          ;8084BC|9C0A21  |00210A;
+                       STZ.W SNES_BG4SC                     ;8084BC|9C0A21  |00210A;
                        STZ.W SNES_BG12NBA                   ;8084BF|9C0B21  |00210B;
                        STZ.W SNES_BG34NBA                   ;8084C2|9C0C21  |00210C;
                        STZ.W SNES_BG1HOFS                   ;8084C5|9C0D21  |00210D;
@@ -1469,7 +1469,7 @@ fManageGraphicsPresets:
                        STA.L $8019E7                        ;808CC8|8FE71980|8019E7;
                        LDA.L Table_BG4SC_Presets,X          ;808CCC|BF7B8B80|808B7B;
                        STA.L $8019BD                        ;808CD0|8FBD1980|8019BD;
-                       STA.L $00210A                        ;808CD4|8F0A2100|00210A;
+                       STA.L SNES_BG4SC                     ;808CD4|8F0A2100|00210A;
                        AND.B #$FC                           ;808CD8|29FC    |      ;
                        STA.L $8019E9                        ;808CDA|8FE91980|8019E9;
                        LDA.L Table_BG12NBA_Presets,X        ;808CDE|BF868B80|808B86;
@@ -1851,8 +1851,8 @@ fZero42PointersFromIndex:
       fUnknown_808FC7:
                        SEP #$20                             ;808FC7|E220    |      ;
                        REP #$10                             ;808FC9|C210    |      ;
-                       STA.W $017C                          ;808FCB|8D7C01  |00017C;
-                       STZ.W $017A                          ;808FCE|9C7A01  |00017A;
+                       STA.W nPaletteNextHourIndex          ;808FCB|8D7C01  |00017C;
+                       STZ.W nPaletteCountdown              ;808FCE|9C7A01  |00017A;
                        XBA                                  ;808FD1|EB      |      ;
                        LDA.B #$00                           ;808FD2|A900    |      ;
                        XBA                                  ;808FD4|EB      |      ;
@@ -1864,10 +1864,10 @@ fZero42PointersFromIndex:
                        BCC .label1                          ;808FE1|900F    |808FF2;
                        REP #$20                             ;808FE3|C220    |      ;
                        LDA.W #$0B00                         ;808FE5|A9000B  |      ;
-                       STA.B ptrUnknown0x04                 ;808FE8|8504    |000004;
+                       STA.B ptrPaletteNext                 ;808FE8|8504    |000004;
                        SEP #$20                             ;808FEA|E220    |      ;
                        LDA.B #$7F                           ;808FEC|A97F    |      ;
-                       STA.B ptrUnknown0x04+2               ;808FEE|8506    |000006;
+                       STA.B ptrPaletteNext+2               ;808FEE|8506    |000006;
                        BRA .return                          ;808FF0|8019    |80900B;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -1879,12 +1879,12 @@ fZero42PointersFromIndex:
                        ADC.B $7E                            ;808FF8|657E    |00007E;
                        TAX                                  ;808FFA|AA      |      ;
                        LDA.L pPaletteTable,X                ;808FFB|BFFDB980|80B9FD;
-                       STA.B ptrUnknown0x04                 ;808FFF|8504    |000004;
+                       STA.B ptrPaletteNext                 ;808FFF|8504    |000004;
                        INX                                  ;809001|E8      |      ;
                        INX                                  ;809002|E8      |      ;
                        SEP #$20                             ;809003|E220    |      ;
                        LDA.L pPaletteTable,X                ;809005|BFFDB980|80B9FD;
-                       STA.B ptrUnknown0x04+2               ;809009|8506    |000006;
+                       STA.B ptrPaletteNext+2               ;809009|8506    |000006;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;80900B|6B      |      ;
@@ -1900,24 +1900,24 @@ fZero42PointersFromIndex:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + REP #$20                             ;80901A|C220    |      ;
-                       LDA.B ptrUnknown0x04                 ;80901C|A504    |000004;
+                       LDA.B ptrPaletteNext                 ;80901C|A504    |000004;
                        BNE +                                ;80901E|D009    |809029;
                        SEP #$20                             ;809020|E220    |      ;
-                       LDA.B ptrUnknown0x04+2               ;809022|A506    |000006;
+                       LDA.B ptrPaletteNext+2               ;809022|A506    |000006;
                        BNE +                                ;809024|D003    |809029;
                        JMP.W .return                        ;809026|4C5691  |809156;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + SEP #$20                             ;809029|E220    |      ;
-                       LDA.W $017A                          ;80902B|AD7A01  |00017A;
+                       LDA.W nPaletteCountdown              ;80902B|AD7A01  |00017A;
                        INC A                                ;80902E|1A      |      ;
-                       STA.W $017A                          ;80902F|8D7A01  |00017A;
+                       STA.W nPaletteCountdown              ;80902F|8D7A01  |00017A;
                        CMP.B #$20                           ;809032|C920    |      ;
                        BEQ +                                ;809034|F003    |809039;
                        JMP.W .return                        ;809036|4C5691  |809156;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-                     + STZ.W $017A                          ;809039|9C7A01  |00017A;
+                     + STZ.W nPaletteCountdown              ;809039|9C7A01  |00017A;
                        REP #$20                             ;80903C|C220    |      ;
                        LDA.W #$0100                         ;80903E|A90001  |      ;
                        STA.B $84                            ;809041|8584    |000084;
@@ -1950,7 +1950,7 @@ fZero42PointersFromIndex:
                        LDA.L $7F0D00,X                      ;809077|BF000D7F|7F0D00;
                        AND.W #$001F                         ;80907B|291F00  |      ;
                        STA.B $7E                            ;80907E|857E    |00007E;
-                       LDA.B [ptrUnknown0x04],Y             ;809080|B704    |000004;
+                       LDA.B [ptrPaletteNext],Y             ;809080|B704    |000004;
                        AND.W #$001F                         ;809082|291F00  |      ;
                        CMP.B $7E                            ;809085|C57E    |00007E;
                        BEQ .label3                          ;809087|F00E    |809097;
@@ -1977,7 +1977,7 @@ fZero42PointersFromIndex:
                        LSR A                                ;8090A3|4A      |      ;
                        LSR A                                ;8090A4|4A      |      ;
                        STA.B $80                            ;8090A5|8580    |000080;
-                       LDA.B [ptrUnknown0x04],Y             ;8090A7|B704    |000004;
+                       LDA.B [ptrPaletteNext],Y             ;8090A7|B704    |000004;
                        AND.W #$03E0                         ;8090A9|29E003  |      ;
                        LSR A                                ;8090AC|4A      |      ;
                        LSR A                                ;8090AD|4A      |      ;
@@ -2014,7 +2014,7 @@ fZero42PointersFromIndex:
                        LSR A                                ;8090D4|4A      |      ;
                        LSR A                                ;8090D5|4A      |      ;
                        STA.B $82                            ;8090D6|8582    |000082;
-                       LDA.B [ptrUnknown0x04],Y             ;8090D8|B704    |000004;
+                       LDA.B [ptrPaletteNext],Y             ;8090D8|B704    |000004;
                        AND.W #$7C00                         ;8090DA|29007C  |      ;
                        LSR A                                ;8090DD|4A      |      ;
                        LSR A                                ;8090DE|4A      |      ;
@@ -2095,19 +2095,19 @@ fZero42PointersFromIndex:
                                                             ;      |        |      ;
               .label7:
                        REP #$20                             ;809157|C220    |      ;
-                       STZ.B ptrUnknown0x04                 ;809159|6404    |000004;
+                       STZ.B ptrPaletteNext                 ;809159|6404    |000004;
                        SEP #$20                             ;80915B|E220    |      ;
-                       STZ.B ptrUnknown0x04+2               ;80915D|6406    |000006;
-                       LDA.W $017C                          ;80915F|AD7C01  |00017C;
-                       STA.W $017B                          ;809162|8D7B01  |00017B;
+                       STZ.B ptrPaletteNext+2               ;80915D|6406    |000006;
+                       LDA.W nPaletteNextHourIndex          ;80915F|AD7C01  |00017C;
+                       STA.W nPaletteNextIndex              ;809162|8D7B01  |00017B;
                        RTL                                  ;809165|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
          fZero04and06:
                        REP #$30                             ;809166|C230    |      ;
-                       STZ.B ptrUnknown0x04                 ;809168|6404    |000004;
+                       STZ.B ptrPaletteNext                 ;809168|6404    |000004;
                        SEP #$20                             ;80916A|E220    |      ;
-                       STZ.B ptrUnknown0x04+2               ;80916C|6406    |000006;
+                       STZ.B ptrPaletteNext+2               ;80916C|6406    |000006;
                        RTL                                  ;80916E|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2367,7 +2367,7 @@ fLoadNextPalleteOnTime:
                        LDA.B #$00                           ;809318|A900    |      ;
                        XBA                                  ;80931A|EB      |      ;
                        LDA.L sPALETTE_TimeBasedTable,X      ;80931B|BF5CBB80|80BB5C;
-                       STA.W $017B                          ;80931F|8D7B01  |00017B;
+                       STA.W nPaletteNextIndex              ;80931F|8D7B01  |00017B;
                        REP #$20                             ;809322|C220    |      ;
                        JSL.L fCopyPalleteFromIndex1         ;809324|22CF9180|8091CF;
                        RTL                                  ;809328|6B      |      ;
@@ -2668,7 +2668,7 @@ fTimePalleteRelated_809501:
                        LDA.B #$00                           ;809537|A900    |      ;
                        XBA                                  ;809539|EB      |      ;
                        LDA.L sPALETTE_TimeBasedTable,X      ;80953A|BF5CBB80|80BB5C;
-                       CMP.W $017B                          ;80953E|CD7B01  |00017B;
+                       CMP.W nPaletteNextIndex              ;80953E|CD7B01  |00017B;
                        BEQ +                                ;809541|F00F    |809552;
                        CMP.B #$FF                           ;809543|C9FF    |      ;
                        BEQ +                                ;809545|F00B    |809552;
@@ -2676,7 +2676,7 @@ fTimePalleteRelated_809501:
                        JSL.L fUnknown_808FC7                ;809548|22C78F80|808FC7;
                        SEP #$20                             ;80954C|E220    |      ;
                        PLA                                  ;80954E|68      |      ;
-                       STA.W $017B                          ;80954F|8D7B01  |00017B;
+                       STA.W nPaletteNextIndex              ;80954F|8D7B01  |00017B;
                                                             ;      |        |      ;
                      + RTL                                  ;809552|6B      |      ;
                                                             ;      |        |      ;
