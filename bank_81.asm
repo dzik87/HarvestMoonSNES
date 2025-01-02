@@ -49,7 +49,7 @@
                        SEP #$20                             ;818061|E220    |      ;
                        LDA.B #$00                           ;818063|A900    |      ;
                        XBA                                  ;818065|EB      |      ;
-                       LDA.B [ptrUnknown0x0D],Y             ;818066|B70D    |00000D;
+                       LDA.B [ptrSelectedTileMap],Y         ;818066|B70D    |00000D;
                        LDX.W nTileInFrontOfPlayerX          ;818068|AE8509  |000985;
                        LDY.W nTileInFrontOfPlayerY          ;81806B|AC8709  |000987;
                        JSL.L fUnknown_81A688                ;81806E|2288A681|81A688;
@@ -1819,7 +1819,7 @@ subItemCarried_Chicken:
                        INX                                  ;818BF3|E8      |      ;
                        SEP #$20                             ;818BF4|E220    |      ;
                        LDA.L nUnknownDialogIndex_819FC6,X   ;818BF6|BFC69F81|819FC6;
-                       JSL.L fUnknown_81D061                ;818BFA|2261D081|81D061;
+                       JSL.L fPlayerEnergyHandler_81D061    ;818BFA|2261D081|81D061;
                        REP #$30                             ;818BFE|C230    |      ;
                        LDA.W #$0002                         ;818C00|A90200  |      ;
                        EOR.W #$FFFF                         ;818C03|49FFFF  |      ;
@@ -2096,7 +2096,7 @@ subItemCarried_Chicken:
                        JSL.L fGetChickenDataPointer         ;818E2F|2295C983|83C995;
                        SEP #$20                             ;818E33|E220    |      ;
                        LDY.W #$0001                         ;818E35|A00100  |      ;
-                       LDA.B $22                            ;818E38|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;818E38|A522    |000022;
                        STA.B [ptrUnknown0x72],Y             ;818E3A|9772    |000072;
                        LDY.W #$0000                         ;818E3C|A00000  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;818E3F|B772    |000072;
@@ -2153,7 +2153,7 @@ subItemCarried_Chicken:
                        JSL.L fUnknown_82AC61                ;818EB7|2261AC82|82AC61;
                        SEP #$20                             ;818EBB|E220    |      ;
                        REP #$10                             ;818EBD|C210    |      ;
-                       LDA.B $22                            ;818EBF|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;818EBF|A522    |000022;
                        CMP.B #$27                           ;818EC1|C927    |      ;
                        BEQ +                                ;818EC3|F007    |818ECC;
                        CMP.B #$28                           ;818EC5|C928    |      ;
@@ -2436,7 +2436,7 @@ subItemCarried_Chicken:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + SEP #$20                             ;8190D9|E220    |      ;
-                       LDA.B $22                            ;8190DB|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;8190DB|A522    |000022;
                        CMP.B #$04                           ;8190DD|C904    |      ;
                        BCS +                                ;8190DF|B003    |8190E4;
                        JMP.W fUnknown_81917E                ;8190E1|4C7E91  |81917E;
@@ -2772,7 +2772,7 @@ subItemCarried_Chicken:
       fUnknown_819379:
                        SEP #$20                             ;819379|E220    |      ;
                        REP #$10                             ;81937B|C210    |      ;
-                       LDA.B $22                            ;81937D|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;81937D|A522    |000022;
                        CMP.B #$04                           ;81937F|C904    |      ;
                        BCS +                                ;819381|B003    |819386;
                        JMP.W fUnknown_819397                ;819383|4C9793  |819397;
@@ -2850,7 +2850,7 @@ subItemCarried_Chicken:
                        STA.B $A5                            ;819413|85A5    |0000A5;
                        JSL.L fUnknown_8581A2                ;819415|22A28185|8581A2;
                        SEP #$20                             ;819419|E220    |      ;
-                       LDA.B $22                            ;81941B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;81941B|A522    |000022;
                        CMP.B #$27                           ;81941D|C927    |      ;
                        BNE +                                ;81941F|D003    |819424;
                        JMP.W fUnknown_81944F                ;819421|4C4F94  |81944F;
@@ -2920,7 +2920,7 @@ subItemCarried_Chicken:
                        JMP.W fUnknown_81953F                ;8194A2|4C3F95  |81953F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-                     + LDA.B $22                            ;8194A5|A522    |000022;
+                     + LDA.B nSelectedTilemapId             ;8194A5|A522    |000022;
                        CMP.B #$28                           ;8194A7|C928    |      ;
                        BEQ +                                ;8194A9|F003    |8194AE;
                        JMP.W fUnknown_81953F                ;8194AB|4C3F95  |81953F;
@@ -2978,14 +2978,14 @@ subItemCarried_Chicken:
                        STZ.W $091D                          ;819530|9C1D09  |00091D;
                        REP #$30                             ;819533|C230    |      ;
                        LDA.W #$0005                         ;819535|A90500  |      ;
-                       JSL.L fUnknown_83B282                ;819538|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;819538|2282B283|83B282;
                        JMP.W fReturn_8196AE                 ;81953C|4CAE96  |8196AE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_81953F:
                        SEP #$20                             ;81953F|E220    |      ;
                        REP #$10                             ;819541|C210    |      ;
-                       LDA.B $22                            ;819543|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;819543|A522    |000022;
                        CMP.B #$04                           ;819545|C904    |      ;
                        BCC fUnknown_819590                  ;819547|9047    |819590;
                        CMP.B #$10                           ;819549|C910    |      ;
@@ -4192,7 +4192,7 @@ pSubrutineTable_81A58B:
                        LDA.L nCurrentSeasonID               ;81A593|AF191F7F|7F1F19;
                        CMP.B #$03                           ;81A597|C903    |      ;
                        BNE .return                          ;81A599|D045    |81A5E0;
-                       LDA.B $22                            ;81A59B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;81A59B|A522    |000022;
                        CMP.B #$04                           ;81A59D|C904    |      ;
                        BCC +                                ;81A59F|9008    |81A5A9;
                        CMP.B #$10                           ;81A5A1|C910    |      ;
@@ -4269,7 +4269,7 @@ pSubrutineTable_81A58B:
                                                             ;      |        |      ;
                      + CMP.W #$FFFE                         ;81A621|C9FEFF  |      ;
                        BNE .loop                            ;81A624|D003    |81A629;
-                       JMP.W .readFFFEPoointer              ;81A626|4C67A6  |81A667;
+                       JMP.W .readFFFEPointer               ;81A626|4C67A6  |81A667;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                 .loop:
@@ -4318,7 +4318,7 @@ pSubrutineTable_81A58B:
                        BRA .return                          ;81A665|80F5    |81A65C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-    .readFFFEPoointer:
+     .readFFFEPointer:
                        REP #$30                             ;81A667|C230    |      ;
                        LDY.W #$0000                         ;81A669|A00000  |      ;
                        INY                                  ;81A66C|C8      |      ;
@@ -4340,7 +4340,7 @@ pSubrutineTable_81A58B:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_81A688:
-                       REP #$30                             ;81A688|C230    |      ;
+                       REP #$30                             ;81A688|C230    |      ; A: nArg1, X: nTileX, Y: nTileY
                        CMP.W #$0000                         ;81A68A|C90000  |      ;
                        BNE +                                ;81A68D|D003    |81A692;
                        JMP.W .return                        ;81A68F|4CC0A6  |81A6C0;
@@ -4498,7 +4498,7 @@ pSubrutineTable_81A58B:
                        TAX                                  ;81A77F|AA      |      ;
                        REP #$20                             ;81A780|C220    |      ;
                        LDA.W #$0080                         ;81A782|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;81A785|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;81A785|22338A80|808A33;
                        REP #$20                             ;81A789|C220    |      ;
                        LDA.B ptrUnknown0x72                 ;81A78B|A572    |000072;
                        CLC                                  ;81A78D|18      |      ;
@@ -4526,7 +4526,7 @@ pSubrutineTable_81A58B:
                        TAX                                  ;81A7AE|AA      |      ;
                        REP #$20                             ;81A7AF|C220    |      ;
                        LDA.W #$0080                         ;81A7B1|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;81A7B4|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;81A7B4|22338A80|808A33;
                        REP #$20                             ;81A7B8|C220    |      ;
                        LDA.B ptrUnknown0x75                 ;81A7BA|A575    |000075;
                        CLC                                  ;81A7BC|18      |      ;
@@ -4792,7 +4792,7 @@ pSubrutineTable_81A58B:
                        CMP.B #$19                           ;81A95F|C919    |      ;
                        BEQ .label2                          ;81A961|F00B    |81A96E;
                        SEP #$20                             ;81A963|E220    |      ;
-                       LDA.W $0022                          ;81A965|AD2200  |000022;
+                       LDA.W nSelectedTilemapId             ;81A965|AD2200  |000022;
                        CMP.B #$27                           ;81A968|C927    |      ;
                        BNE .label5                          ;81A96A|D042    |81A9AE;
                        BRA .label4                          ;81A96C|8014    |81A982;
@@ -4800,7 +4800,7 @@ pSubrutineTable_81A58B:
                                                             ;      |        |      ;
               .label2:
                        SEP #$20                             ;81A96E|E220    |      ;
-                       LDA.W $0022                          ;81A970|AD2200  |000022;
+                       LDA.W nSelectedTilemapId             ;81A970|AD2200  |000022;
                        CMP.B #$28                           ;81A973|C928    |      ;
                        BNE .label5                          ;81A975|D037    |81A9AE;
                        BRA .label4                          ;81A977|8009    |81A982;
@@ -4808,7 +4808,7 @@ pSubrutineTable_81A58B:
                                                             ;      |        |      ;
               .label3:
                        SEP #$20                             ;81A979|E220    |      ;
-                       LDA.W $0022                          ;81A97B|AD2200  |000022;
+                       LDA.W nSelectedTilemapId             ;81A97B|AD2200  |000022;
                        CMP.B #$26                           ;81A97E|C926    |      ;
                        BNE .label5                          ;81A980|D02C    |81A9AE;
                                                             ;      |        |      ;
@@ -4878,7 +4878,7 @@ fItemSubrutineHandler_81A9E5:
                        REP #$10                             ;81A9E7|C210    |      ;
                        LDA.B #$00                           ;81A9E9|A900    |      ;
                        XBA                                  ;81A9EB|EB      |      ;
-                       LDA.B $22                            ;81A9EC|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;81A9EC|A522    |000022;
                        REP #$20                             ;81A9EE|C220    |      ;
                        ASL A                                ;81A9F0|0A      |      ;
                        TAX                                  ;81A9F1|AA      |      ;
@@ -7800,7 +7800,7 @@ pUnknownSubrutineTable_81C027:
                        JSL.L fUnknown_848097                ;81C30E|22978084|848097;
                        REP #$20                             ;81C312|C220    |      ;
                        LDA.W #$0002                         ;81C314|A90200  |      ;
-                       JSL.L fUnknown_83B282                ;81C317|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81C317|2282B283|83B282;
                        JMP.W .exit                          ;81C31B|4C30C3  |81C330;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -8903,7 +8903,7 @@ pUnknownSubrutineTable_81C027:
                        STA.L nPowerBerryEaten               ;81CAB2|8F361F7F|7F1F36;
                        REP #$20                             ;81CAB6|C220    |      ;
                        LDA.W #$000A                         ;81CAB8|A90A00  |      ;
-                       JSL.L fUnknown_83B282                ;81CABB|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81CABB|2282B283|83B282;
                        SEP #$20                             ;81CABF|E220    |      ;
                        LDA.W nPlayerStamina                 ;81CAC1|AD1709  |000917;
                        CLC                                  ;81CAC4|18      |      ;
@@ -8918,14 +8918,14 @@ pUnknownSubrutineTable_81C027:
                        AND.B $D2                            ;81CAD9|25D2    |0000D2;
                        STA.B $D2                            ;81CADB|85D2    |0000D2;
                        SEP #$20                             ;81CADD|E220    |      ;
-                       LDA.B $22                            ;81CADF|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;81CADF|A522    |000022;
                        CMP.B #$15                           ;81CAE1|C915    |      ;
                        BEQ .label1                          ;81CAE3|F01D    |81CB02;
                        CMP.B #$16                           ;81CAE5|C916    |      ;
                        BEQ .label1                          ;81CAE7|F019    |81CB02;
                        CMP.B #$17                           ;81CAE9|C917    |      ;
                        BEQ .label1                          ;81CAEB|F015    |81CB02;
-                       LDA.B $22                            ;81CAED|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;81CAED|A522    |000022;
                        CMP.B #$29                           ;81CAEF|C929    |      ;
                        BNE .exit                            ;81CAF1|D01E    |81CB11;
                        REP #$30                             ;81CAF3|C230    |      ;
@@ -9707,8 +9707,8 @@ pUnknownSubrutineTable_81C027:
                        RTS                                  ;81D060|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_81D061:
-                       SEP #$20                             ;81D061|E220    |      ;
+fPlayerEnergyHandler_81D061:
+                       SEP #$20                             ;81D061|E220    |      ; A: nArg
                        REP #$10                             ;81D063|C210    |      ;
                        STA.B $92                            ;81D065|8592    |000092;
                        STA.B $82                            ;81D067|8582    |000082;
@@ -11546,7 +11546,7 @@ subPlayerInteraction81D593_0x26:
                        JSL.L fLoadDialog                    ;81DCB4|225F9383|83935F;
                        REP #$20                             ;81DCB8|C220    |      ;
                        LDA.W #$FFFF                         ;81DCBA|A9FFFF  |      ;
-                       JSL.L fUnknown_83B282                ;81DCBD|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81DCBD|2282B283|83B282;
                                                             ;      |        |      ;
                 .exit:
                        REP #$30                             ;81DCC1|C230    |      ;
@@ -11725,7 +11725,7 @@ subPlayerInteraction81D593_0x2D:
                        JSL.L fLoadDialog                    ;81DE02|225F9383|83935F;
                        REP #$20                             ;81DE06|C220    |      ;
                        LDA.W #$FFFF                         ;81DE08|A9FFFF  |      ;
-                       JSL.L fUnknown_83B282                ;81DE0B|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81DE0B|2282B283|83B282;
                                                             ;      |        |      ;
                 .exit:
                        REP #$30                             ;81DE0F|C230    |      ;
@@ -12062,7 +12062,7 @@ subPlayerInteraction81D593_0x2E:
                        STA.L nOwnedCows                     ;81E0BD|8F0A1F7F|7F1F0A;
                        REP #$20                             ;81E0C1|C220    |      ;
                        LDA.W #$0014                         ;81E0C3|A91400  |      ;
-                       JSL.L fUnknown_83B282                ;81E0C6|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81E0C6|2282B283|83B282;
                        JMP.W .return                        ;81E0CA|4C21E2  |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12208,7 +12208,7 @@ subPlayerInteraction81D593_0x2E:
                        STA.L nOwnedChickens                 ;81E1F1|8F0B1F7F|7F1F0B;
                        REP #$20                             ;81E1F5|C220    |      ;
                        LDA.W #$000A                         ;81E1F7|A90A00  |      ;
-                       JSL.L fUnknown_83B282                ;81E1FA|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81E1FA|2282B283|83B282;
                        BRA .return                          ;81E1FE|8021    |81E221;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12376,7 +12376,7 @@ subPlayerInteraction81D593_0x33:
                        JSL.L fLoadDialog                    ;81E32F|225F9383|83935F;
                        REP #$20                             ;81E333|C220    |      ;
                        LDA.W #$FFFF                         ;81E335|A9FFFF  |      ;
-                       JSL.L fUnknown_83B282                ;81E338|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81E338|2282B283|83B282;
                                                             ;      |        |      ;
               .return:
                        REP #$30                             ;81E33C|C230    |      ;
@@ -12472,7 +12472,7 @@ subPlayerInteraction81D593_0x36:
                        JSL.L fLoadDialog                    ;81E3EA|225F9383|83935F;
                        REP #$20                             ;81E3EE|C220    |      ;
                        LDA.W #$FFFF                         ;81E3F0|A9FFFF  |      ;
-                       JSL.L fUnknown_83B282                ;81E3F3|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81E3F3|2282B283|83B282;
                                                             ;      |        |      ;
                 .exit:
                        REP #$30                             ;81E3F7|C230    |      ;
@@ -12690,7 +12690,7 @@ subPlayerInteraction81D593_0x3F:
                        JSL.L fLoadDialog                    ;81E582|225F9383|83935F;
                        REP #$20                             ;81E586|C220    |      ;
                        LDA.W #$FFFF                         ;81E588|A9FFFF  |      ;
-                       JSL.L fUnknown_83B282                ;81E58B|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81E58B|2282B283|83B282;
                                                             ;      |        |      ;
                 .exit:
                        REP #$30                             ;81E58F|C230    |      ;
@@ -12867,7 +12867,7 @@ subPlayerInteraction81D593_0x41:
                        STA.B $D2                            ;81E6DF|85D2    |0000D2;
                        SEP #$20                             ;81E6E1|E220    |      ;
                        LDA.B #$0C                           ;81E6E3|A90C    |      ;
-                       JSL.L fUnknown_81D061                ;81E6E5|2261D081|81D061;
+                       JSL.L fPlayerEnergyHandler_81D061    ;81E6E5|2261D081|81D061;
                        RTS                                  ;81E6E9|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13203,10 +13203,10 @@ subPlayerInteraction81D593_0x43:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + REP #$20                             ;81E969|C220    |      ;
-                       LDA.L $7F1F15                        ;81E96B|AF151F7F|7F1F15;
+                       LDA.L nUnknown7F1F15                 ;81E96B|AF151F7F|7F1F15;
                        STA.B ptrUnknown0x72                 ;81E96F|8572    |000072;
                        SEP #$20                             ;81E971|E220    |      ;
-                       LDA.L $7F1F17                        ;81E973|AF171F7F|7F1F17;
+                       LDA.L nUnknown7F1F15+2               ;81E973|AF171F7F|7F1F17;
                        STA.B ptrUnknown0x72+2               ;81E977|8574    |000074;
                        JSL.L fAddProfitToCurrentMoney       ;81E979|22C9B183|83B1C9;
                        REP #$20                             ;81E97D|C220    |      ;
@@ -13246,7 +13246,7 @@ subPlayerInteraction81D593_0x43:
                        STZ.W nPlayerInteractionArg2         ;81E9D3|9C7009  |000970;
                        REP #$20                             ;81E9D6|C220    |      ;
                        LDA.W #$FFCE                         ;81E9D8|A9CEFF  |      ;
-                       JSL.L fUnknown_83B282                ;81E9DB|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81E9DB|2282B283|83B282;
                        JMP.W .return                        ;81E9DF|4CD4EB  |81EBD4;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13443,7 +13443,7 @@ subPlayerInteraction81D593_0x43:
                        STA.L sShedItems+2                   ;81EB72|8F021F7F|7F1F02;
                        REP #$20                             ;81EB76|C220    |      ;
                        LDA.W #$FFCE                         ;81EB78|A9CEFF  |      ;
-                       JSL.L fUnknown_83B282                ;81EB7B|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81EB7B|2282B283|83B282;
                        REP #$20                             ;81EB7F|C220    |      ;
                        LDA.L $7F1F60                        ;81EB81|AF601F7F|7F1F60;
                        ORA.W #$2000                         ;81EB85|090020  |      ;
@@ -13672,10 +13672,10 @@ subPlayerInteraction81D593_0x44:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
                      + REP #$20                             ;81ED2C|C220    |      ;
-                       LDA.L $7F1F15                        ;81ED2E|AF151F7F|7F1F15;
+                       LDA.L nUnknown7F1F15                 ;81ED2E|AF151F7F|7F1F15;
                        STA.B ptrUnknown0x72                 ;81ED32|8572    |000072;
                        SEP #$20                             ;81ED34|E220    |      ;
-                       LDA.L $7F1F17                        ;81ED36|AF171F7F|7F1F17;
+                       LDA.L nUnknown7F1F15+2               ;81ED36|AF171F7F|7F1F17;
                        STA.B ptrUnknown0x72+2               ;81ED3A|8574    |000074;
                        JSL.L fAddProfitToCurrentMoney       ;81ED3C|22C9B183|83B1C9;
                        REP #$20                             ;81ED40|C220    |      ;
@@ -13715,7 +13715,7 @@ subPlayerInteraction81D593_0x44:
                        STZ.W nPlayerInteractionArg2         ;81ED96|9C7009  |000970;
                        REP #$20                             ;81ED99|C220    |      ;
                        LDA.W #$FFEC                         ;81ED9B|A9ECFF  |      ;
-                       JSL.L fUnknown_83B282                ;81ED9E|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81ED9E|2282B283|83B282;
                        JMP.W .return                        ;81EDA2|4CACEF  |81EFAC;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -13920,7 +13920,7 @@ subPlayerInteraction81D593_0x44:
                        JSL.L fUnknown_8480F8                ;81EF4A|22F88084|8480F8;
                        REP #$30                             ;81EF4E|C230    |      ;
                        LDA.W #$FFEC                         ;81EF50|A9ECFF  |      ;
-                       JSL.L fUnknown_83B282                ;81EF53|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81EF53|2282B283|83B282;
                        REP #$20                             ;81EF57|C220    |      ;
                        LDA.L $7F1F60                        ;81EF59|AF601F7F|7F1F60;
                        ORA.W #$1000                         ;81EF5D|090010  |      ;
@@ -14423,7 +14423,7 @@ subPlayerInteraction81D593_0x48:
                        BNE .label1                          ;81F30E|D010    |81F320;
                        REP #$30                             ;81F310|C230    |      ;
                        LDA.W #$0032                         ;81F312|A93200  |      ;
-                       JSL.L fUnknown_83B282                ;81F315|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81F315|2282B283|83B282;
                        REP #$30                             ;81F319|C230    |      ;
                        LDX.W #$013D                         ;81F31B|A23D01  |      ;
                        BRA .label2                          ;81F31E|800E    |81F32E;
@@ -14432,7 +14432,7 @@ subPlayerInteraction81D593_0x48:
               .label1:
                        REP #$30                             ;81F320|C230    |      ;
                        LDA.W #$0064                         ;81F322|A96400  |      ;
-                       JSL.L fUnknown_83B282                ;81F325|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81F325|2282B283|83B282;
                        REP #$30                             ;81F329|C230    |      ;
                        LDX.W #$0140                         ;81F32B|A24001  |      ;
                                                             ;      |        |      ;
@@ -14861,7 +14861,7 @@ subPlayerInteraction81D593_0x51:
                        JSR.W fUnknown_81CFE6                ;81F686|20E6CF  |81CFE6;
                        REP #$30                             ;81F689|C230    |      ;
                        LDA.W #$0001                         ;81F68B|A90100  |      ;
-                       JSL.L fUnknown_83B282                ;81F68E|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81F68E|2282B283|83B282;
                        SEP #$20                             ;81F692|E220    |      ;
                        STZ.W nPlayerInteractionArg2         ;81F694|9C7009  |000970;
                        LDA.B #$04                           ;81F697|A904    |      ;
@@ -15013,7 +15013,7 @@ subPlayerInteraction81D593_0x52:
                        JSR.W fUnknown_81CFE6                ;81F7AE|20E6CF  |81CFE6;
                        REP #$30                             ;81F7B1|C230    |      ;
                        LDA.W #$0003                         ;81F7B3|A90300  |      ;
-                       JSL.L fUnknown_83B282                ;81F7B6|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;81F7B6|2282B283|83B282;
                        SEP #$20                             ;81F7BA|E220    |      ;
                        STZ.W nPlayerInteractionArg2         ;81F7BC|9C7009  |000970;
                        LDA.B #$04                           ;81F7BF|A904    |      ;

@@ -6,8 +6,11 @@
 ;                       ptrUnknown0x07+2 = $000009           ;      |        |      ;
                        ptrUnknown0x0A = $00000A; !^ ptr24 ^!;      |        |      ;
 ;                       ptrUnknown0x0A+2 = $00000C           ;      |        |      ;
-                       ptrUnknown0x0D = $00000D; !^ ptr24 ^!;      |        |      ;
-;                       ptrUnknown0x0D+2 = $00000F           ;      |        |      ;
+                       ptrSelectedTileMap = $00000D; !^ ptr24 ^!;      |        |      ;
+;                       ptrSelectedTileMap+2 = $00000F       ;      |        |      ;
+                       pTileMapData = $000018               ;      |        |      ;
+;                       pTileMapData+2 = $00001A             ;      |        |      ;
+                       nSelectedTilemapId = $000022; !^ n8 ^!;      |        |      ;
                        ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!;      |        |      ;
 ;                       ptrUnknown0x42+2 = $000044           ;      |        |      ;
                        ptrUnknown0x72 = $000072; !^ ptr24 ^!;      |        |      ;
@@ -303,8 +306,12 @@
                        SNES_A2A7L = $004378                 ;      |        |      ;
                        SNES_A2A7H = $004379                 ;      |        |      ;
                        SNES_NTLR7 = $00437A                 ;      |        |      ;
+                       sSelectedTilemap = $7EA4E6; !^ sTileMap (0x1000) ^!;      |        |      ;
                        sCowDataAddress = $7EC1C6; !^ 0x0C * sChickenData (8 bytes) ^!;      |        |      ;
                        sChickenDataAddress = $7EC286; !^ 0x0C * sCowData (16 bytes) ^!;      |        |      ;
+                       sPalette_7F0900 = $7F0900; !^ sPalette (0x200) ^!;      |        |      ;
+                       sPalette_7F0B00 = $7F0B00; !^ sPalette (0x200) ^!;      |        |      ;
+                       sPalette_7F0D00 = $7F0D00; !^ sPalette (0x200) ^!;      |        |      ;
                        sShedItems = $7F1F00; !^ strSheedItems ^!;      |        |      ;
 ;                       sShedItems+1 = $7F1F01               ;      |        |      ;
 ;                       sShedItems+2 = $7F1F02               ;      |        |      ;
@@ -318,6 +325,9 @@
                        nStoredWood = $7F1F0C; !^ n16 ^!     ;      |        |      ;
                        nReqWoodForExpansion = $7F1F0E; !^ n16 ^!;      |        |      ;
                        nStoredFeed = $7F1F10; !^ n16 ^!     ;      |        |      ;
+                       nUnknown7F1F12 = $7F1F12; !^ n8 ^!   ;      |        |      ;
+                       nUnknown7F1F15 = $7F1F15; !^ n24 ^!  ;      |        |      ;
+;                       nUnknown7F1F15+2 = $7F1F17           ;      |        |      ;
                        nCurrentYearID = $7F1F18; !^ n8, 00 - 1st Year, 01 - 2nd Year, 03 - 3rd Year ^!;      |        |      ;
                        nCurrentSeasonID = $7F1F19; !^ n8 ^! ;      |        |      ;
                        nCurrentWeekdayID = $7F1F1A; !^ n8 ^!;      |        |      ;
@@ -333,7 +343,7 @@
                        nPowerBerryEaten = $7F1F36; !^ n8 range 00h-0Ah, (ammount of flowers in garden) ^!;      |        |      ;
                        nFirstChildAge = $7F1F37; !^ n16 ^!  ;      |        |      ;
                        nSecondChildAge = $7F1F39; !^ n16 ^! ;      |        |      ;
-                       PrengacyFlag = $7F1F3B               ;      |        |      ;
+                       nPrengacyFlag = $7F1F3B; !^ n16 ? ^! ;      |        |      ;
                        sFirstChildNameShort = $7F1F3D; !^ 4 * s16 ^!;      |        |      ;
 ;                       sFirstChildNameShort+1 = $7F1F3E; !^ 2 ^!;      |        |      ;
 ;                       sFirstChildNameShort+2 = $7F1F3F; !^ 3 ^!;      |        |      ;
@@ -352,6 +362,8 @@
                        nHouseSize = $7F1F64; !^ n8 ^!       ;      |        |      ;
                        nPlayerFlags = $7F1F66; !^ 32bits - ???wwwww ???????? (w - wife) ^!;      |        |      ;
 ;                       nPlayerFlags+2 = $7F1F68; !^ ???????? ???????? ^!;      |        |      ;
+                       nUnknown800917 = $800917; !^ n8 ^!   ;      |        |      ;
+                       nUnknown8009B5 = $8009B5; !^ n8 ^!   ;      |        |      ;
                        ;      |        |      ;
                        ;      |        |      ;
                        Table_858C8E = $858C8E               ;      |        |      ;

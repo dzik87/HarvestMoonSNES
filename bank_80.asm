@@ -6,7 +6,7 @@
                        REP #$30                             ;808000|C230    |      ;
                        SEP #$20                             ;808002|E220    |      ;
                        LDA.B #$15                           ;808004|A915    |      ;
-                       STA.B $22                            ;808006|8522    |000022;
+                       STA.B nSelectedTilemapId             ;808006|8522    |000022;
                        JSL.L fUnknown_8095DE                ;808008|22DE9580|8095DE;
                        JSL.L fUnknown_838401                ;80800C|22018483|838401;
                        SEP #$20                             ;808010|E220    |      ;
@@ -1138,7 +1138,7 @@ fZero1000bytesFromVRAM:
                        RTL                                  ;808A32|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_808A33:
+fLoadPaletteToControler:
                        REP #$30                             ;808A33|C230    |      ;
                        PHA                                  ;808A35|48      |      ;
                        TXA                                  ;808A36|8A      |      ;
@@ -1601,7 +1601,7 @@ fManageGraphicsPresets:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_808E48:
-                       SEP #$30                             ;808E48|E230    |      ; A, X nIndex, Y, $72: ptr24
+                       SEP #$30                             ;808E48|E230    |      ; A: nValue1, X nIndex, Y: nValue2, Y, $72: ptr24
                        STA.W $015A,X                        ;808E4A|9D5A01  |00015A;
                        TYA                                  ;808E4D|98      |      ;
                        STA.W $016A,X                        ;808E4E|9D6A01  |00016A;
@@ -1758,7 +1758,7 @@ fManageGraphicsPresets:
                        SEP #$20                             ;808F47|E220    |      ;
                        LDA.B #$7F                           ;808F49|A97F    |      ;
                        STA.B ptrUnknown0x72+2               ;808F4B|8574    |000074;
-                       JSL.L fUnknown_808A33                ;808F4D|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;808F4D|22338A80|808A33;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;808F51|6B      |      ;
@@ -1947,7 +1947,7 @@ fZero42PointersFromIndex:
                                                             ;      |        |      ;
                      + TYX                                  ;809074|BB      |      ;
                        REP #$20                             ;809075|C220    |      ;
-                       LDA.L $7F0D00,X                      ;809077|BF000D7F|7F0D00;
+                       LDA.L sPalette_7F0D00,X              ;809077|BF000D7F|7F0D00;
                        AND.W #$001F                         ;80907B|291F00  |      ;
                        STA.B $7E                            ;80907E|857E    |00007E;
                        LDA.B [ptrPaletteNext],Y             ;809080|B704    |000004;
@@ -1969,7 +1969,7 @@ fZero42PointersFromIndex:
                                                             ;      |        |      ;
               .label3:
                        REP #$20                             ;809097|C220    |      ;
-                       LDA.L $7F0D00,X                      ;809099|BF000D7F|7F0D00;
+                       LDA.L sPalette_7F0D00,X              ;809099|BF000D7F|7F0D00;
                        AND.W #$03E0                         ;80909D|29E003  |      ;
                        LSR A                                ;8090A0|4A      |      ;
                        LSR A                                ;8090A1|4A      |      ;
@@ -2001,7 +2001,7 @@ fZero42PointersFromIndex:
                                                             ;      |        |      ;
               .label4:
                        REP #$20                             ;8090C3|C220    |      ;
-                       LDA.L $7F0D00,X                      ;8090C5|BF000D7F|7F0D00;
+                       LDA.L sPalette_7F0D00,X              ;8090C5|BF000D7F|7F0D00;
                        AND.W #$7C00                         ;8090C9|29007C  |      ;
                        LSR A                                ;8090CC|4A      |      ;
                        LSR A                                ;8090CD|4A      |      ;
@@ -2061,8 +2061,8 @@ fZero42PointersFromIndex:
                        LDA.B $7E                            ;809119|A57E    |00007E;
                        ORA.B $80                            ;80911B|0580    |000080;
                        ORA.B $82                            ;80911D|0582    |000082;
-                       STA.L $7F0900,X                      ;80911F|9F00097F|7F0900;
-                       STA.L $7F0D00,X                      ;809123|9F000D7F|7F0D00;
+                       STA.L sPalette_7F0900,X              ;80911F|9F00097F|7F0900;
+                       STA.L sPalette_7F0D00,X              ;809123|9F000D7F|7F0D00;
                        INY                                  ;809127|C8      |      ;
                        INY                                  ;809128|C8      |      ;
                        CPY.B $84                            ;809129|C484    |000084;
@@ -2087,7 +2087,7 @@ fZero42PointersFromIndex:
                        SEP #$20                             ;80914C|E220    |      ;
                        LDA.B #$7F                           ;80914E|A97F    |      ;
                        STA.B ptrUnknown0x72+2               ;809150|8574    |000074;
-                       JSL.L fUnknown_808A33                ;809152|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;809152|22338A80|808A33;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;809156|6B      |      ;
@@ -2132,21 +2132,21 @@ fZero42PointersFromIndex:
                        BNE .label1                          ;809188|D00A    |809194;
                        REP #$20                             ;80918A|C220    |      ;
                        LDA.B $82                            ;80918C|A582    |000082;
-                       STA.L $7F0900,X                      ;80918E|9F00097F|7F0900;
+                       STA.L sPalette_7F0900,X              ;80918E|9F00097F|7F0900;
                        BRA .return                          ;809192|8008    |80919C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
               .label1:
                        REP #$20                             ;809194|C220    |      ;
                        LDA.B $82                            ;809196|A582    |000082;
-                       STA.L $7F0B00,X                      ;809198|9F000B7F|7F0B00;
+                       STA.L sPalette_7F0B00,X              ;809198|9F000B7F|7F0B00;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;80919C|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fModifyPallete_900andD00:
-                       REP #$30                             ;80919D|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetindex (32Y+2X)
+       fModifyPalette:
+                       REP #$30                             ;80919D|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetIndex (32Y+2X)
                        STA.B $82                            ;80919F|8582    |000082;
                        STY.B $7E                            ;8091A1|847E    |00007E;
                        TXA                                  ;8091A3|8A      |      ;
@@ -2166,43 +2166,43 @@ fModifyPallete_900andD00:
                        BNE .label1                          ;8091B6|D00E    |8091C6;
                        REP #$20                             ;8091B8|C220    |      ;
                        LDA.B $82                            ;8091BA|A582    |000082;
-                       STA.L $7F0900,X                      ;8091BC|9F00097F|7F0900;
-                       STA.L $7F0D00,X                      ;8091C0|9F000D7F|7F0D00;
+                       STA.L sPalette_7F0900,X              ;8091BC|9F00097F|7F0900;
+                       STA.L sPalette_7F0D00,X              ;8091C0|9F000D7F|7F0D00;
                        BRA .return                          ;8091C4|8008    |8091CE;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
               .label1:
                        REP #$20                             ;8091C6|C220    |      ;
                        LDA.B $82                            ;8091C8|A582    |000082;
-                       STA.L $7F0B00,X                      ;8091CA|9F000B7F|7F0B00;
+                       STA.L sPalette_7F0B00,X              ;8091CA|9F000B7F|7F0B00;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;8091CE|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fCopyPalleteFromIndex1:
+fLoadPaletteFirstHalf:
                        REP #$30                             ;8091CF|C230    |      ; A: nIndex
                        STA.B $7E                            ;8091D1|857E    |00007E;
                        ASL A                                ;8091D3|0A      |      ;
                        CLC                                  ;8091D4|18      |      ;
                        ADC.B $7E                            ;8091D5|657E    |00007E;
                        TAX                                  ;8091D7|AA      |      ;
-                       LDA.L pPaletteTable,X                ;8091D8|BFFDB980|80B9FD;
+                       LDA.L pPaletteTable,X                ;8091D8|BFFDB980|80B9FD; X = nIndex * 3
                        STA.B ptrUnknown0x72                 ;8091DC|8572    |000072;
                        INX                                  ;8091DE|E8      |      ;
                        INX                                  ;8091DF|E8      |      ;
                        SEP #$20                             ;8091E0|E220    |      ;
-                       LDA.L pPaletteTable,X                ;8091E2|BFFDB980|80B9FD;
+                       LDA.L pPaletteTable,X                ;8091E2|BFFDB980|80B9FD; X = X + 2
                        STA.B ptrUnknown0x72+2               ;8091E6|8574    |000074;
                        REP #$20                             ;8091E8|C220    |      ;
                        LDA.W #$0100                         ;8091EA|A90001  |      ;
-                       STA.B $7E                            ;8091ED|857E    |00007E;
+                       STA.B $7E                            ;8091ED|857E    |00007E; $7E = 0x100
                        LDX.W #$0000                         ;8091EF|A20000  |      ;
                        LDY.W #$0000                         ;8091F2|A00000  |      ;
                                                             ;      |        |      ;
-                     - LDA.B [ptrUnknown0x72],Y             ;8091F5|B772    |000072;
-                       STA.L $7F0900,X                      ;8091F7|9F00097F|7F0900;
-                       STA.L $7F0D00,X                      ;8091FB|9F000D7F|7F0D00;
+                     - LDA.B [ptrUnknown0x72],Y             ;8091F5|B772    |000072; Y = 0x0000 - 0x009F
+                       STA.L sPalette_7F0900,X              ;8091F7|9F00097F|7F0900; X = 0x0000 - 0x009F
+                       STA.L sPalette_7F0D00,X              ;8091FB|9F000D7F|7F0D00; Y = 0x0000 - 0x009F
                        INY                                  ;8091FF|C8      |      ;
                        INY                                  ;809200|C8      |      ;
                        INX                                  ;809201|E8      |      ;
@@ -2212,29 +2212,29 @@ fCopyPalleteFromIndex1:
                        RTL                                  ;809207|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fCopyPalleteFromIndex2:
+fLoadPaletteSecondHalf:
                        REP #$30                             ;809208|C230    |      ; A: nIndex
                        STA.B $7E                            ;80920A|857E    |00007E;
                        ASL A                                ;80920C|0A      |      ;
                        CLC                                  ;80920D|18      |      ;
                        ADC.B $7E                            ;80920E|657E    |00007E;
                        TAX                                  ;809210|AA      |      ;
-                       LDA.L pPaletteTable,X                ;809211|BFFDB980|80B9FD;
+                       LDA.L pPaletteTable,X                ;809211|BFFDB980|80B9FD; X = nIndex * 3
                        STA.B ptrUnknown0x72                 ;809215|8572    |000072;
                        INX                                  ;809217|E8      |      ;
                        INX                                  ;809218|E8      |      ;
                        SEP #$20                             ;809219|E220    |      ;
-                       LDA.L pPaletteTable,X                ;80921B|BFFDB980|80B9FD;
+                       LDA.L pPaletteTable,X                ;80921B|BFFDB980|80B9FD; X = X + 2
                        STA.B ptrUnknown0x72+2               ;80921F|8574    |000074;
                        REP #$20                             ;809221|C220    |      ;
                        LDA.W #$0100                         ;809223|A90001  |      ;
-                       STA.B $7E                            ;809226|857E    |00007E;
+                       STA.B $7E                            ;809226|857E    |00007E; $7E = 0x100
                        LDX.W #$0100                         ;809228|A20001  |      ;
                        LDY.W #$0000                         ;80922B|A00000  |      ;
                                                             ;      |        |      ;
-                     - LDA.B [ptrUnknown0x72],Y             ;80922E|B772    |000072;
-                       STA.L $7F0900,X                      ;809230|9F00097F|7F0900;
-                       STA.L $7F0D00,X                      ;809234|9F000D7F|7F0D00;
+                     - LDA.B [ptrUnknown0x72],Y             ;80922E|B772    |000072; Y = 0x0000 - 0x009F
+                       STA.L sPalette_7F0900,X              ;809230|9F00097F|7F0900; X = 0x0100 - 0x019F
+                       STA.L sPalette_7F0D00,X              ;809234|9F000D7F|7F0D00; X = 0x0100 - 0x019F
                        INY                                  ;809238|C8      |      ;
                        INY                                  ;809239|C8      |      ;
                        INX                                  ;80923A|E8      |      ;
@@ -2244,14 +2244,14 @@ fCopyPalleteFromIndex2:
                        RTL                                  ;809240|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-     fLoadTimePallete:
+fLoadTilemapPalleteIndex4:
                        SEP #$20                             ;809241|E220    |      ;
                        REP #$10                             ;809243|C210    |      ;
                        LDA.B #$00                           ;809245|A900    |      ;
-                       XBA                                  ;809247|EB      |      ;
-                       LDA.B $22                            ;809248|A522    |000022;
+                       XBA                                  ;809247|EB      |      ; A <-> B
+                       LDA.B nSelectedTilemapId             ;809248|A522    |000022;
                        REP #$20                             ;80924A|C220    |      ;
-                       STA.B $80                            ;80924C|8580    |000080;
+                       STA.B $80                            ;80924C|8580    |000080; $80 = nSelectedTilemapId
                        ASL A                                ;80924E|0A      |      ;
                        ASL A                                ;80924F|0A      |      ;
                        CLC                                  ;809250|18      |      ;
@@ -2261,20 +2261,20 @@ fCopyPalleteFromIndex2:
                        TAX                                  ;809258|AA      |      ;
                        SEP #$20                             ;809259|E220    |      ;
                        LDA.B #$00                           ;80925B|A900    |      ;
-                       XBA                                  ;80925D|EB      |      ;
-                       LDA.L sPALETTE_TimeBasedTable,X      ;80925E|BF5CBB80|80BB5C;
+                       XBA                                  ;80925D|EB      |      ; A <-> B
+                       LDA.L sTilemapPalettes_80BB5C,X      ;80925E|BF5CBB80|80BB5C; X = nSelectedTilemapId * 6 + 4
                        REP #$20                             ;809262|C220    |      ;
                        STA.B $7E                            ;809264|857E    |00007E;
                        ASL A                                ;809266|0A      |      ;
                        CLC                                  ;809267|18      |      ;
                        ADC.B $7E                            ;809268|657E    |00007E;
                        TAX                                  ;80926A|AA      |      ;
-                       LDA.L pPaletteTable,X                ;80926B|BFFDB980|80B9FD;
+                       LDA.L pPaletteTable,X                ;80926B|BFFDB980|80B9FD; X = nPalettedIndex * 3
                        STA.B ptrUnknown0x72                 ;80926F|8572    |000072;
                        INX                                  ;809271|E8      |      ;
                        INX                                  ;809272|E8      |      ;
                        SEP #$20                             ;809273|E220    |      ;
-                       LDA.L pPaletteTable,X                ;809275|BFFDB980|80B9FD;
+                       LDA.L pPaletteTable,X                ;809275|BFFDB980|80B9FD; X = X + 2
                        STA.B ptrUnknown0x72+2               ;809279|8574    |000074;
                        REP #$20                             ;80927B|C220    |      ;
                        LDA.W #$0100                         ;80927D|A90001  |      ;
@@ -2283,7 +2283,7 @@ fCopyPalleteFromIndex2:
                        LDY.W #$0000                         ;809285|A00000  |      ;
                                                             ;      |        |      ;
                      - LDA.B [ptrUnknown0x72],Y             ;809288|B772    |000072;
-                       STA.L $7F0B00,X                      ;80928A|9F000B7F|7F0B00;
+                       STA.L sPalette_7F0B00,X              ;80928A|9F000B7F|7F0B00;
                        INY                                  ;80928E|C8      |      ;
                        INY                                  ;80928F|C8      |      ;
                        INX                                  ;809290|E8      |      ;
@@ -2293,11 +2293,11 @@ fCopyPalleteFromIndex2:
                        SEP #$20                             ;809296|E220    |      ;
                        LDA.B #$00                           ;809298|A900    |      ;
                        XBA                                  ;80929A|EB      |      ;
-                       LDA.B $22                            ;80929B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80929B|A522    |000022;
                        ASL A                                ;80929D|0A      |      ;
                        TAX                                  ;80929E|AA      |      ;
                        INX                                  ;80929F|E8      |      ;
-                       LDA.W nPalleteRelatedTable,X         ;8092A0|BD44BE  |80BE44;
+                       LDA.W nPalleteIndexes_80BE44,X       ;8092A0|BD44BE  |80BE44;
                        REP #$20                             ;8092A3|C220    |      ;
                        STA.B $7E                            ;8092A5|857E    |00007E;
                        ASL A                                ;8092A7|0A      |      ;
@@ -2318,7 +2318,7 @@ fCopyPalleteFromIndex2:
                        LDY.W #$0000                         ;8092C6|A00000  |      ;
                                                             ;      |        |      ;
                      - LDA.B [ptrUnknown0x72],Y             ;8092C9|B772    |000072;
-                       STA.L $7F0B00,X                      ;8092CB|9F000B7F|7F0B00;
+                       STA.L sPalette_7F0B00,X              ;8092CB|9F000B7F|7F0B00;
                        INY                                  ;8092CF|C8      |      ;
                        INY                                  ;8092D0|C8      |      ;
                        INX                                  ;8092D1|E8      |      ;
@@ -2332,28 +2332,28 @@ fCopyPalleteFromIndex2:
                        RTL                                  ;8092E1|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fLoadNextPalleteOnTime:
+     fLoadTimePallete:
                        SEP #$20                             ;8092E2|E220    |      ;
                        REP #$10                             ;8092E4|C210    |      ;
-                       LDX.W #$0000                         ;8092E6|A20000  |      ;
+                       LDX.W #$0000                         ;8092E6|A20000  |      ; X = 0
                        LDA.L nCurrentTimeID                 ;8092E9|AF1C1F7F|7F1F1C;
                        CMP.B #$07                           ;8092ED|C907    |      ;
                        BCC +                                ;8092EF|9010    |809301;
-                       INX                                  ;8092F1|E8      |      ;
+                       INX                                  ;8092F1|E8      |      ; X = 1
                        CMP.B #$0F                           ;8092F2|C90F    |      ;
                        BCC +                                ;8092F4|900B    |809301;
-                       INX                                  ;8092F6|E8      |      ;
+                       INX                                  ;8092F6|E8      |      ; X = 2
                        CMP.B #$11                           ;8092F7|C911    |      ;
                        BCC +                                ;8092F9|9006    |809301;
-                       INX                                  ;8092FB|E8      |      ;
+                       INX                                  ;8092FB|E8      |      ; X = 3
                        CMP.B #$12                           ;8092FC|C912    |      ;
                        BCC +                                ;8092FE|9001    |809301;
-                       INX                                  ;809300|E8      |      ;
+                       INX                                  ;809300|E8      |      ; X = 4
                                                             ;      |        |      ;
-                     + STX.B $7E                            ;809301|867E    |00007E;
-                       LDA.B #$00                           ;809303|A900    |      ;
-                       XBA                                  ;809305|EB      |      ;
-                       LDA.B $22                            ;809306|A522    |000022;
+                     + STX.B $7E                            ;809301|867E    |00007E; $7E = X
+                       LDA.B #$00                           ;809303|A900    |      ; A = 0
+                       XBA                                  ;809305|EB      |      ; A <-> B
+                       LDA.B nSelectedTilemapId             ;809306|A522    |000022;
                        REP #$20                             ;809308|C220    |      ;
                        STA.B $80                            ;80930A|8580    |000080;
                        ASL A                                ;80930C|0A      |      ;
@@ -2366,10 +2366,10 @@ fLoadNextPalleteOnTime:
                        SEP #$20                             ;809316|E220    |      ;
                        LDA.B #$00                           ;809318|A900    |      ;
                        XBA                                  ;80931A|EB      |      ;
-                       LDA.L sPALETTE_TimeBasedTable,X      ;80931B|BF5CBB80|80BB5C;
+                       LDA.L sTilemapPalettes_80BB5C,X      ;80931B|BF5CBB80|80BB5C; X = nSelectedTilemapId * 6 + X
                        STA.W nPaletteNextIndex              ;80931F|8D7B01  |00017B;
                        REP #$20                             ;809322|C220    |      ;
-                       JSL.L fCopyPalleteFromIndex1         ;809324|22CF9180|8091CF;
+                       JSL.L fLoadPaletteFirstHalf          ;809324|22CF9180|8091CF;
                        RTL                                  ;809328|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2387,7 +2387,7 @@ fUnknownEndAt6PM_809329:
                        SEP #$20                             ;809346|E220    |      ;
                        LDA.B #$00                           ;809348|A900    |      ;
                        XBA                                  ;80934A|EB      |      ;
-                       LDA.B $22                            ;80934B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80934B|A522    |000022;
                        ASL A                                ;80934D|0A      |      ;
                        TAX                                  ;80934E|AA      |      ;
                        LDA.L nCurrentTimeID                 ;80934F|AF1C1F7F|7F1F1C;
@@ -2398,9 +2398,9 @@ fUnknownEndAt6PM_809329:
              .time6PM:
                        SEP #$20                             ;809358|E220    |      ;
                        REP #$10                             ;80935A|C210    |      ;
-                       LDA.W nPalleteRelatedTable,X         ;80935C|BD44BE  |80BE44;
+                       LDA.W nPalleteIndexes_80BE44,X       ;80935C|BD44BE  |80BE44;
                        REP #$20                             ;80935F|C220    |      ;
-                       JSL.L fCopyPalleteFromIndex2         ;809361|22089280|809208;
+                       JSL.L fLoadPaletteSecondHalf         ;809361|22089280|809208;
                        SEP #$20                             ;809365|E220    |      ;
                        STZ.B $92                            ;809367|6492    |000092;
                        JSL.L fUnknown_8093A4                ;809369|22A49380|8093A4;
@@ -2410,7 +2410,7 @@ fUnknownEndAt6PM_809329:
           .notAnd0080:
                        REP #$30                             ;80936E|C230    |      ;
                        LDA.W #$0071                         ;809370|A97100  |      ;
-                       JSL.L fCopyPalleteFromIndex2         ;809373|22089280|809208;
+                       JSL.L fLoadPaletteSecondHalf         ;809373|22089280|809208;
                        SEP #$20                             ;809377|E220    |      ;
                        STZ.B $92                            ;809379|6492    |000092;
                        JSL.L fUnknown_8093A4                ;80937B|22A49380|8093A4;
@@ -2420,7 +2420,7 @@ fUnknownEndAt6PM_809329:
           .notAnd0100:
                        REP #$30                             ;809380|C230    |      ;
                        LDA.W #$0072                         ;809382|A97200  |      ;
-                       JSL.L fCopyPalleteFromIndex2         ;809385|22089280|809208;
+                       JSL.L fLoadPaletteSecondHalf         ;809385|22089280|809208;
                        SEP #$20                             ;809389|E220    |      ;
                        STZ.B $92                            ;80938B|6492    |000092;
                        JSL.L fUnknown_8093A4                ;80938D|22A49380|8093A4;
@@ -2430,7 +2430,7 @@ fUnknownEndAt6PM_809329:
           .notAnd0200:
                        REP #$30                             ;809392|C230    |      ;
                        LDA.W #$0073                         ;809394|A97300  |      ;
-                       JSL.L fCopyPalleteFromIndex2         ;809397|22089280|809208;
+                       JSL.L fLoadPaletteSecondHalf         ;809397|22089280|809208;
                        SEP #$20                             ;80939B|E220    |      ;
                        STZ.B $92                            ;80939D|6492    |000092;
                        JSL.L fUnknown_8093A4                ;80939F|22A49380|8093A4;
@@ -2446,7 +2446,7 @@ fUnknownEndAt6PM_809329:
                        LDA.L nCurrentTimeID                 ;8093AE|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;8093B2|C912    |      ;
                        BCC .label2                          ;8093B4|9011    |8093C7;
-                       LDA.B $22                            ;8093B6|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;8093B6|A522    |000022;
                        CMP.B #$31                           ;8093B8|C931    |      ;
                        BCS .label1                          ;8093BA|B004    |8093C0;
                        CMP.B #$15                           ;8093BC|C915    |      ;
@@ -2461,7 +2461,7 @@ fUnknownEndAt6PM_809329:
                        SEP #$20                             ;8093C7|E220    |      ;
                        LDA.B #$00                           ;8093C9|A900    |      ;
                        XBA                                  ;8093CB|EB      |      ;
-                       LDA.W $0022                          ;8093CC|AD2200  |000022;
+                       LDA.W nSelectedTilemapId             ;8093CC|AD2200  |000022;
                        CMP.B #$04                           ;8093CF|C904    |      ;
                        BCS .label3                          ;8093D1|B00C    |8093DF;
                                                             ;      |        |      ;
@@ -2499,27 +2499,27 @@ fUnknownEndAt6PM_809329:
                        ASL A                                ;809403|0A      |      ;
                        TAX                                  ;809404|AA      |      ;
                        PHX                                  ;809405|DA      |      ;
-                       LDA.L DATA16_80BD9C,X                ;809406|BF9CBD80|80BD9C;
+                       LDA.L nPaletteOverwrite_80BD9C,X     ;809406|BF9CBD80|80BD9C;
                        LDX.W #$000A                         ;80940A|A20A00  |      ;
                        LDY.W #$000F                         ;80940D|A00F00  |      ;
-                       JSL.L fModifyPallete_900andD00       ;809410|229D9180|80919D;
+                       JSL.L fModifyPalette                 ;809410|229D9180|80919D;
                        REP #$30                             ;809414|C230    |      ;
                        PLX                                  ;809416|FA      |      ;
                        INX                                  ;809417|E8      |      ;
                        INX                                  ;809418|E8      |      ;
                        PHX                                  ;809419|DA      |      ;
-                       LDA.L DATA16_80BD9C,X                ;80941A|BF9CBD80|80BD9C;
+                       LDA.L nPaletteOverwrite_80BD9C,X     ;80941A|BF9CBD80|80BD9C;
                        LDX.W #$000B                         ;80941E|A20B00  |      ;
                        LDY.W #$000F                         ;809421|A00F00  |      ;
-                       JSL.L fModifyPallete_900andD00       ;809424|229D9180|80919D;
+                       JSL.L fModifyPalette                 ;809424|229D9180|80919D;
                        REP #$30                             ;809428|C230    |      ;
                        PLX                                  ;80942A|FA      |      ;
                        INX                                  ;80942B|E8      |      ;
                        INX                                  ;80942C|E8      |      ;
-                       LDA.L DATA16_80BD9C,X                ;80942D|BF9CBD80|80BD9C;
+                       LDA.L nPaletteOverwrite_80BD9C,X     ;80942D|BF9CBD80|80BD9C;
                        LDX.W #$000C                         ;809431|A20C00  |      ;
                        LDY.W #$000F                         ;809434|A00F00  |      ;
-                       JSL.L fModifyPallete_900andD00       ;809437|229D9180|80919D;
+                       JSL.L fModifyPalette                 ;809437|229D9180|80919D;
                        REP #$30                             ;80943B|C230    |      ;
                        STZ.B $7E                            ;80943D|647E    |00007E;
                        SEP #$20                             ;80943F|E220    |      ;
@@ -2528,7 +2528,7 @@ fUnknownEndAt6PM_809329:
                        LDA.L nCurrentTimeID                 ;809445|AF1C1F7F|7F1F1C;
                        CMP.B #$12                           ;809449|C912    |      ;
                        BCC .checkPregnacy                   ;80944B|9013    |809460;
-                       LDA.B $22                            ;80944D|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80944D|A522    |000022;
                        CMP.B #$31                           ;80944F|C931    |      ;
                        BCS .label4                          ;809451|B004    |809457;
                        CMP.B #$15                           ;809453|C915    |      ;
@@ -2543,7 +2543,7 @@ fUnknownEndAt6PM_809329:
                                                             ;      |        |      ;
        .checkPregnacy:
                        REP #$30                             ;809460|C230    |      ;
-                       LDA.L PrengacyFlag                   ;809462|AF3B1F7F|7F1F3B;
+                       LDA.L nPrengacyFlag                  ;809462|AF3B1F7F|7F1F3B;
                        BNE .checkMarriedGirl                ;809466|D003    |80946B;
                        JMP.W .return                        ;809468|4C0095  |809500;
                                                             ;      |        |      ;
@@ -2610,7 +2610,7 @@ fUnknownEndAt6PM_809329:
                        LDA.L sMarriedGirlTable_80BDFC,X     ;8094CB|BFFCBD80|80BDFC;
                        LDX.W #$0008                         ;8094CF|A20800  |      ;
                        LDY.W #$000B                         ;8094D2|A00B00  |      ;
-                       JSL.L fModifyPallete_900andD00       ;8094D5|229D9180|80919D;
+                       JSL.L fModifyPalette                 ;8094D5|229D9180|80919D;
                        REP #$30                             ;8094D9|C230    |      ;
                        PLX                                  ;8094DB|FA      |      ;
                        INX                                  ;8094DC|E8      |      ;
@@ -2619,7 +2619,7 @@ fUnknownEndAt6PM_809329:
                        LDA.L sMarriedGirlTable_80BDFC,X     ;8094DF|BFFCBD80|80BDFC;
                        LDX.W #$0009                         ;8094E3|A20900  |      ;
                        LDY.W #$000B                         ;8094E6|A00B00  |      ;
-                       JSL.L fModifyPallete_900andD00       ;8094E9|229D9180|80919D;
+                       JSL.L fModifyPalette                 ;8094E9|229D9180|80919D;
                        REP #$30                             ;8094ED|C230    |      ;
                        PLX                                  ;8094EF|FA      |      ;
                        INX                                  ;8094F0|E8      |      ;
@@ -2627,7 +2627,7 @@ fUnknownEndAt6PM_809329:
                        LDA.L sMarriedGirlTable_80BDFC,X     ;8094F2|BFFCBD80|80BDFC;
                        LDX.W #$000A                         ;8094F6|A20A00  |      ;
                        LDY.W #$000B                         ;8094F9|A00B00  |      ;
-                       JSL.L fModifyPallete_900andD00       ;8094FC|229D9180|80919D;
+                       JSL.L fModifyPalette                 ;8094FC|229D9180|80919D;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;809500|6B      |      ;
@@ -2654,7 +2654,7 @@ fTimePalleteRelated_809501:
                      + STX.B $7E                            ;809520|867E    |00007E;
                        LDA.B #$00                           ;809522|A900    |      ;
                        XBA                                  ;809524|EB      |      ;
-                       LDA.B $22                            ;809525|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809525|A522    |000022;
                        REP #$20                             ;809527|C220    |      ;
                        STA.B $80                            ;809529|8580    |000080;
                        ASL A                                ;80952B|0A      |      ;
@@ -2667,7 +2667,7 @@ fTimePalleteRelated_809501:
                        SEP #$20                             ;809535|E220    |      ;
                        LDA.B #$00                           ;809537|A900    |      ;
                        XBA                                  ;809539|EB      |      ;
-                       LDA.L sPALETTE_TimeBasedTable,X      ;80953A|BF5CBB80|80BB5C;
+                       LDA.L sTilemapPalettes_80BB5C,X      ;80953A|BF5CBB80|80BB5C;
                        CMP.W nPaletteNextIndex              ;80953E|CD7B01  |00017B;
                        BEQ +                                ;809541|F00F    |809552;
                        CMP.B #$FF                           ;809543|C9FF    |      ;
@@ -2702,7 +2702,7 @@ fSubrutinesExecute_809553:
                      + STX.B $7E                            ;809572|867E    |00007E;
                        LDA.B #$00                           ;809574|A900    |      ;
                        XBA                                  ;809576|EB      |      ;
-                       LDA.B $22                            ;809577|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809577|A522    |000022;
                        REP #$20                             ;809579|C220    |      ;
                        STA.B $80                            ;80957B|8580    |000080;
                        ASL A                                ;80957D|0A      |      ;
@@ -2765,7 +2765,7 @@ fSubrutinesExecute_809553:
       fUnknown_8095DE:
                        SEP #$20                             ;8095DE|E220    |      ;
                        REP #$10                             ;8095E0|C210    |      ;
-                       LDA.B $22                            ;8095E2|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;8095E2|A522    |000022;
                        CMP.B #$1E                           ;8095E4|C91E    |      ;
                        BEQ fUnknown_8095F5                  ;8095E6|F00D    |8095F5;
                        SEP #$20                             ;8095E8|E220    |      ;
@@ -2782,22 +2782,22 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;8095FC|C220    |      ;
                        LDA.W $0196                          ;8095FE|AD9601  |000196;
                        AND.W #$0010                         ;809601|291000  |      ;
-                       BNE .label6                          ;809604|D059    |80965F;
+                       BNE .return                          ;809604|D059    |80965F;
                        LDA.W $0196                          ;809606|AD9601  |000196;
                        AND.W #$0002                         ;809609|290200  |      ;
-                       BNE .label3                          ;80960C|D02B    |809639;
+                       BNE .label1                          ;80960C|D02B    |809639;
                                                             ;      |        |      ;
-              .label2:
+             .default:
                        SEP #$20                             ;80960E|E220    |      ;
                        LDA.B #$00                           ;809610|A900    |      ;
                        XBA                                  ;809612|EB      |      ;
-                       LDA.B $22                            ;809613|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809613|A522    |000022;
                        REP #$20                             ;809615|C220    |      ;
                        ASL A                                ;809617|0A      |      ;
                        TAX                                  ;809618|AA      |      ;
-                       LDA.L PTR16_80B8E7,X                 ;809619|BFE7B880|80B8E7;
+                       LDA.L nSeasonDataUnknown_80B8E7,X    ;809619|BFE7B880|80B8E7; X = A * 2
                        CMP.W #$FFFF                         ;80961D|C9FFFF  |      ;
-                       BEQ .return                          ;809620|F046    |809668;
+                       BEQ .justReturn                      ;809620|F046    |809668;
                        STA.B $7E                            ;809622|857E    |00007E;
                        SEP #$20                             ;809624|E220    |      ;
                        LDA.B #$00                           ;809626|A900    |      ;
@@ -2806,45 +2806,45 @@ fSubrutinesExecute_809553:
                        REP #$20                             ;80962D|C220    |      ;
                        TAY                                  ;80962F|A8      |      ;
                        SEP #$20                             ;809630|E220    |      ;
-                       LDA.B ($7E),Y                        ;809632|B17E    |00007E;
+                       LDA.B ($7E),Y                        ;809632|B17E    |00007E; Y = SeasonId
                        STA.W $0110                          ;809634|8D1001  |000110;
-                       BRA .return                          ;809637|802F    |809668;
+                       BRA .justReturn                      ;809637|802F    |809668;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-              .label3:
+              .label1:
                        SEP #$20                             ;809639|E220    |      ;
-                       LDA.B $22                            ;80963B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80963B|A522    |000022;
                        CMP.B #$5B                           ;80963D|C95B    |      ;
-                       BCS .label2                          ;80963F|B0CD    |80960E;
+                       BCS .default                         ;80963F|B0CD    |80960E;
                        CMP.B #$57                           ;809641|C957    |      ;
-                       BCS .return                          ;809643|B023    |809668;
+                       BCS .justReturn                      ;809643|B023    |809668;
                        CMP.B #$31                           ;809645|C931    |      ;
-                       BCS .label4                          ;809647|B004    |80964D;
+                       BCS ..case31                         ;809647|B004    |80964D;
                        CMP.B #$15                           ;809649|C915    |      ;
-                       BCS .label5                          ;80964B|B009    |809656;
+                       BCS ..case15                         ;80964B|B009    |809656;
                                                             ;      |        |      ;
-              .label4:
+             ..case31:
                        SEP #$20                             ;80964D|E220    |      ;
                        LDA.B #$13                           ;80964F|A913    |      ;
                        STA.W $0110                          ;809651|8D1001  |000110;
-                       BRA .return                          ;809654|8012    |809668;
+                       BRA .justReturn                      ;809654|8012    |809668;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-              .label5:
+             ..case15:
                        SEP #$20                             ;809656|E220    |      ;
                        LDA.B #$14                           ;809658|A914    |      ;
                        STA.W $0110                          ;80965A|8D1001  |000110;
-                       BRA .return                          ;80965D|8009    |809668;
-                                                            ;      |        |      ;
-                                                            ;      |        |      ;
-              .label6:
-                       SEP #$20                             ;80965F|E220    |      ;
-                       LDA.B #$16                           ;809661|A916    |      ;
-                       STA.W $0110                          ;809663|8D1001  |000110;
-                       BRA .return                          ;809666|8000    |809668;
+                       BRA .justReturn                      ;80965D|8009    |809668;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
               .return:
+                       SEP #$20                             ;80965F|E220    |      ;
+                       LDA.B #$16                           ;809661|A916    |      ;
+                       STA.W $0110                          ;809663|8D1001  |000110;
+                       BRA .justReturn                      ;809666|8000    |809668;
+                                                            ;      |        |      ;
+                                                            ;      |        |      ;
+          .justReturn:
                        RTL                                  ;809668|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2879,7 +2879,7 @@ fSubrutinesExecute_809553:
               .label2:
                        SEP #$20                             ;80969C|E220    |      ;
                        LDA.W $098B                          ;80969E|AD8B09  |00098B;
-                       STA.B $22                            ;8096A1|8522    |000022;
+                       STA.B nSelectedTilemapId             ;8096A1|8522    |000022;
                        JSL.L fUnknown_8095DE                ;8096A3|22DE9580|8095DE;
                        JSL.L fUnknown_838401                ;8096A7|22018483|838401;
                                                             ;      |        |      ;
@@ -2926,7 +2926,7 @@ fSubrutinesExecute_809553:
                        JSL.L fUnknown_848000                ;80970F|22008084|848000;
                        SEP #$20                             ;809713|E220    |      ;
                        LDA.W $098B                          ;809715|AD8B09  |00098B;
-                       STA.B $22                            ;809718|8522    |000022;
+                       STA.B nSelectedTilemapId             ;809718|8522    |000022;
                        JSL.L fUnknown_83CA98                ;80971A|2298CA83|83CA98;
                        JSL.L fUnknown_84816F                ;80971E|226F8184|84816F;
                        SEP #$20                             ;809722|E220    |      ;
@@ -2940,13 +2940,13 @@ fSubrutinesExecute_809553:
       fUnknown_80972C:
                        SEP #$20                             ;80972C|E220    |      ;
                        REP #$10                             ;80972E|C210    |      ;
-                       STA.B $22                            ;809730|8522    |000022;
+                       STA.B nSelectedTilemapId             ;809730|8522    |000022;
                        PHA                                  ;809732|48      |      ;
                        SEP #$20                             ;809733|E220    |      ;
                        STZ.W nTimeState                     ;809735|9C7309  |000973;
                        REP #$30                             ;809738|C230    |      ;
                        LDY.W #$0001                         ;80973A|A00100  |      ;
-                       JSL.L fWriteMapGraphicsPointer       ;80973D|22AEA780|80A7AE;
+                       JSL.L fGetTileMapPointerAndPresetId  ;80973D|22AEA780|80A7AE;
                        SEP #$20                             ;809741|E220    |      ;
                        PHA                                  ;809743|48      |      ;
                        AND.B #$20                           ;809744|2920    |      ;
@@ -2992,8 +2992,8 @@ fSubrutinesExecute_809553:
                        BEQ .label5                          ;80978B|F079    |809806;
                        SEP #$20                             ;80978D|E220    |      ;
                        LDA.B #$57                           ;80978F|A957    |      ;
-                       STA.B $22                            ;809791|8522    |000022;
-                       JSL.L nUnknown_80A7C6                ;809793|22C6A780|80A7C6;
+                       STA.B nSelectedTilemapId             ;809791|8522    |000022;
+                       JSL.L fTileMap_80A7C6                ;809793|22C6A780|80A7C6;
                        REP #$20                             ;809797|C220    |      ;
                        SEP #$10                             ;809799|E210    |      ;
                        LDA.W #$B9D7                         ;80979B|A9D7B9  |      ;
@@ -3059,8 +3059,8 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
               .label6:
                        LDA.B #$58                           ;80981D|A958    |      ;
-                       STA.B $22                            ;80981F|8522    |000022;
-                       JSL.L nUnknown_80A7C6                ;809821|22C6A780|80A7C6;
+                       STA.B nSelectedTilemapId             ;80981F|8522    |000022;
+                       JSL.L fTileMap_80A7C6                ;809821|22C6A780|80A7C6;
                        JMP.W .label8                        ;809825|4CA898  |8098A8;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -3071,8 +3071,8 @@ fSubrutinesExecute_809553:
                        BEQ .label8                          ;809830|F076    |8098A8;
                        SEP #$20                             ;809832|E220    |      ;
                        LDA.B #$59                           ;809834|A959    |      ;
-                       STA.B $22                            ;809836|8522    |000022;
-                       JSL.L nUnknown_80A7C6                ;809838|22C6A780|80A7C6;
+                       STA.B nSelectedTilemapId             ;809836|8522    |000022;
+                       JSL.L fTileMap_80A7C6                ;809838|22C6A780|80A7C6;
                        REP #$20                             ;80983C|C220    |      ;
                        SEP #$10                             ;80983E|E210    |      ;
                        LDA.W #$B9EA                         ;809840|A9EAB9  |      ;
@@ -3126,13 +3126,13 @@ fSubrutinesExecute_809553:
                        JSL.L fUnknown_8392BB                ;8098A8|22BB9283|8392BB;
                        SEP #$20                             ;8098AC|E220    |      ;
                        PLA                                  ;8098AE|68      |      ;
-                       STA.B $22                            ;8098AF|8522    |000022;
-                       JSL.L fUnknown_82A5FB                ;8098B1|22FBA582|82A5FB;
-                       JSL.L nUnknown_80A7C6                ;8098B5|22C6A780|80A7C6;
-                       JSL.L fLoadNextPalleteOnTime         ;8098B9|22E29280|8092E2;
+                       STA.B nSelectedTilemapId             ;8098AF|8522    |000022;
+                       JSL.L fTileMapUnknown_82A5FB         ;8098B1|22FBA582|82A5FB;
+                       JSL.L fTileMap_80A7C6                ;8098B5|22C6A780|80A7C6;
+                       JSL.L fLoadTimePallete               ;8098B9|22E29280|8092E2;
                        JSL.L fUnknownEndAt6PM_809329        ;8098BD|22299380|809329;
                        JSL.L fSubrutinesExecute_809553      ;8098C1|22539580|809553;
-                       JSL.L fLoadTimePallete               ;8098C5|22419280|809241;
+                       JSL.L fLoadTilemapPalleteIndex4      ;8098C5|22419280|809241;
                        JSL.L fUnknown_808E69                ;8098C9|22698E80|808E69;
                        SEP #$20                             ;8098CD|E220    |      ;
                        REP #$10                             ;8098CF|C210    |      ;
@@ -3148,7 +3148,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;8098E6|E220    |      ;
                        LDA.B #$7F                           ;8098E8|A97F    |      ;
                        STA.B ptrUnknown0x72+2               ;8098EA|8574    |000074;
-                       JSL.L fUnknown_808A33                ;8098EC|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;8098EC|22338A80|808A33;
                        JSL.L fUnknown_808AB2                ;8098F0|22B28A80|808AB2;
                        REP #$30                             ;8098F4|C230    |      ;
                        STZ.B $1E                            ;8098F6|641E    |00001E;
@@ -3157,7 +3157,7 @@ fSubrutinesExecute_809553:
                        LDA.B $F7                            ;8098FD|A5F7    |0000F7;
                        STA.W $0142                          ;8098FF|8D4201  |000142;
                        SEP #$20                             ;809902|E220    |      ;
-                       LDA.B $22                            ;809904|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809904|A522    |000022;
                        CMP.B #$26                           ;809906|C926    |      ;
                        BNE .label9                          ;809908|D008    |809912;
                        REP #$20                             ;80990A|C220    |      ;
@@ -3356,7 +3356,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;809AB9|E220    |      ;
                        LDA.B #$00                           ;809ABB|A900    |      ;
                        XBA                                  ;809ABD|EB      |      ;
-                       LDA.B [ptrUnknown0x0D],Y             ;809ABE|B70D    |00000D;
+                       LDA.B [ptrSelectedTileMap],Y         ;809ABE|B70D    |00000D;
                        REP #$20                             ;809AC0|C220    |      ;
                        ASL A                                ;809AC2|0A      |      ;
                        ASL A                                ;809AC3|0A      |      ;
@@ -3401,7 +3401,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;809B02|E220    |      ;
                        LDA.B #$00                           ;809B04|A900    |      ;
                        XBA                                  ;809B06|EB      |      ;
-                       LDA.B [ptrUnknown0x0D],Y             ;809B07|B70D    |00000D;
+                       LDA.B [ptrSelectedTileMap],Y         ;809B07|B70D    |00000D;
                        REP #$20                             ;809B09|C220    |      ;
                        ASL A                                ;809B0B|0A      |      ;
                        ASL A                                ;809B0C|0A      |      ;
@@ -3464,7 +3464,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label13:
                        SEP #$20                             ;809B7D|E220    |      ;
-                       LDA.B $22                            ;809B7F|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809B7F|A522    |000022;
                        CMP.B #$0B                           ;809B81|C90B    |      ;
                        BNE .label14                         ;809B83|D003    |809B88;
                        JMP.W .label21                       ;809B85|4C149C  |809C14;
@@ -3652,17 +3652,17 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label29:
                        SEP #$20                             ;809CD3|E220    |      ;
-                       LDA.W $0022                          ;809CD5|AD2200  |000022;
+                       LDA.W nSelectedTilemapId             ;809CD5|AD2200  |000022;
                        CMP.B #$04                           ;809CD8|C904    |      ;
                        BCS .label30                         ;809CDA|B004    |809CE0;
-                       JSL.L fUnknown_82A682                ;809CDC|2282A682|82A682;
+                       JSL.L fTileMapUnknown_82A682         ;809CDC|2282A682|82A682;
                                                             ;      |        |      ;
              .label30:
                        SEP #$20                             ;809CE0|E220    |      ;
-                       LDA.B $22                            ;809CE2|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809CE2|A522    |000022;
                        CMP.B #$0C                           ;809CE4|C90C    |      ;
                        BCC .label31                         ;809CE6|9017    |809CFF;
-                       LDA.B $22                            ;809CE8|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809CE8|A522    |000022;
                        CMP.B #$10                           ;809CEA|C910    |      ;
                        BCS .label31                         ;809CEC|B011    |809CFF;
                        LDA.L nCurrentTimeID                 ;809CEE|AF1C1F7F|7F1F1C;
@@ -3685,7 +3685,7 @@ fSubrutinesExecute_809553:
               .caseD0:
                        SEP #$20                             ;809D0B|E220    |      ;
                        REP #$10                             ;809D0D|C210    |      ;
-                       LDA.B $22                            ;809D0F|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809D0F|A522    |000022;
                        CMP.B #$04                           ;809D11|C904    |      ;
                        BCS .label33                         ;809D13|B003    |809D18;
                        JMP.W .return2                       ;809D15|4CBB9E  |809EBB;
@@ -3693,7 +3693,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label33:
                        SEP #$20                             ;809D18|E220    |      ;
-                       LDA.B $22                            ;809D1A|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809D1A|A522    |000022;
                        CMP.B #$10                           ;809D1C|C910    |      ;
                        BCS .label34                         ;809D1E|B003    |809D23;
                        JMP.W .return2                       ;809D20|4CBB9E  |809EBB;
@@ -4043,7 +4043,7 @@ fSubrutinesExecute_809553:
       fUnknown_809F61:
                        SEP #$20                             ;809F61|E220    |      ;
                        REP #$10                             ;809F63|C210    |      ;
-                       LDA.B $22                            ;809F65|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;809F65|A522    |000022;
                        CMP.B #$26                           ;809F67|C926    |      ;
                        BNE .label1                          ;809F69|D003    |809F6E;
                        JMP.W .return                        ;809F6B|4CAAA0  |80A0AA;
@@ -4557,7 +4557,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A2AC|8574    |000074;
                        REP #$20                             ;80A2AE|C220    |      ;
                        LDA.W #$0080                         ;80A2B0|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;80A2B3|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A2B3|22338A80|808A33;
                        SEP #$20                             ;80A2B7|E220    |      ;
                        LDA.B #$01                           ;80A2B9|A901    |      ;
                        STA.B $27                            ;80A2BB|8527    |000027;
@@ -4577,11 +4577,11 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A2D9|8574    |000074;
                        REP #$20                             ;80A2DB|C220    |      ;
                        LDA.W #$0080                         ;80A2DD|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;80A2E0|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A2E0|22338A80|808A33;
                        REP #$30                             ;80A2E4|C230    |      ;
                        LDA.B $16                            ;80A2E6|A516    |000016;
                        CLC                                  ;80A2E8|18      |      ;
-                       ADC.B $1A                            ;80A2E9|651A    |00001A;
+                       ADC.B pTileMapData+2                 ;80A2E9|651A    |00001A;
                        STA.B $16                            ;80A2EB|8516    |000016;
                        LDA.B $14                            ;80A2ED|A514    |000014;
                        CLC                                  ;80A2EF|18      |      ;
@@ -4771,7 +4771,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A425|8574    |000074;
                        REP #$20                             ;80A427|C220    |      ;
                        LDA.W #$0080                         ;80A429|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;80A42C|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A42C|22338A80|808A33;
                        SEP #$20                             ;80A430|E220    |      ;
                        LDA.B #$01                           ;80A432|A901    |      ;
                        STA.B $27                            ;80A434|8527    |000027;
@@ -4791,11 +4791,11 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A452|8574    |000074;
                        REP #$20                             ;80A454|C220    |      ;
                        LDA.W #$0080                         ;80A456|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;80A459|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A459|22338A80|808A33;
                        REP #$30                             ;80A45D|C230    |      ;
                        LDA.B $16                            ;80A45F|A516    |000016;
                        SEC                                  ;80A461|38      |      ;
-                       SBC.B $1A                            ;80A462|E51A    |00001A;
+                       SBC.B pTileMapData+2                 ;80A462|E51A    |00001A;
                        STA.B $16                            ;80A464|8516    |000016;
                        LDA.B $14                            ;80A466|A514    |000014;
                        SEC                                  ;80A468|38      |      ;
@@ -4998,7 +4998,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A5BA|8574    |000074;
                        REP #$20                             ;80A5BC|C220    |      ;
                        LDA.W #$0081                         ;80A5BE|A98100  |      ;
-                       JSL.L fUnknown_808A33                ;80A5C1|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A5C1|22338A80|808A33;
                        SEP #$20                             ;80A5C5|E220    |      ;
                        LDA.B #$01                           ;80A5C7|A901    |      ;
                        STA.B $27                            ;80A5C9|8527    |000027;
@@ -5018,7 +5018,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A5E7|8574    |000074;
                        REP #$20                             ;80A5E9|C220    |      ;
                        LDA.W #$0081                         ;80A5EB|A98100  |      ;
-                       JSL.L fUnknown_808A33                ;80A5EE|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A5EE|22338A80|808A33;
                        REP #$30                             ;80A5F2|C230    |      ;
                        LDA.B $12                            ;80A5F4|A512    |000012;
                        CLC                                  ;80A5F6|18      |      ;
@@ -5227,7 +5227,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A751|8574    |000074;
                        REP #$20                             ;80A753|C220    |      ;
                        LDA.W #$0081                         ;80A755|A98100  |      ;
-                       JSL.L fUnknown_808A33                ;80A758|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A758|22338A80|808A33;
                        SEP #$20                             ;80A75C|E220    |      ;
                        LDA.B #$01                           ;80A75E|A901    |      ;
                        STA.B $27                            ;80A760|8527    |000027;
@@ -5247,7 +5247,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A77E|8574    |000074;
                        REP #$20                             ;80A780|C220    |      ;
                        LDA.W #$0081                         ;80A782|A98100  |      ;
-                       JSL.L fUnknown_808A33                ;80A785|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A785|22338A80|808A33;
                        REP #$30                             ;80A789|C230    |      ;
                        LDA.B $12                            ;80A78B|A512    |000012;
                        SEC                                  ;80A78D|38      |      ;
@@ -5272,44 +5272,44 @@ fSubrutinesExecute_809553:
                        RTL                                  ;80A7AD|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fWriteMapGraphicsPointer:
-                       SEP #$20                             ;80A7AE|E220    |      ; $22: nIndex, Y: nFieldOffset, return A: nValue, $18: pMapGraphics
+fGetTileMapPointerAndPresetId:
+                       SEP #$20                             ;80A7AE|E220    |      ; $22: nIndex, Y: nFieldOffset, return A: nPresetId, $18: pTileMap
                        REP #$10                             ;80A7B0|C210    |      ;
                        LDA.B #$00                           ;80A7B2|A900    |      ;
                        XBA                                  ;80A7B4|EB      |      ;
-                       LDA.B $22                            ;80A7B5|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A7B5|A522    |000022;
                        REP #$20                             ;80A7B7|C220    |      ;
                        ASL A                                ;80A7B9|0A      |      ;
                        TAX                                  ;80A7BA|AA      |      ;
                        LDA.L pMapGraphicsTable,X            ;80A7BB|BF7CAA80|80AA7C;
-                       STA.B $18                            ;80A7BF|8518    |000018;
+                       STA.B pTileMapData                   ;80A7BF|8518    |000018;
                        SEP #$20                             ;80A7C1|E220    |      ;
-                       LDA.B ($18),Y                        ;80A7C3|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A7C3|B118    |000018;
                        RTL                                  ;80A7C5|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      nUnknown_80A7C6:
+      fTileMap_80A7C6:
                        SEP #$20                             ;80A7C6|E220    |      ;
                        REP #$10                             ;80A7C8|C210    |      ;
                        LDA.B #$00                           ;80A7CA|A900    |      ;
                        XBA                                  ;80A7CC|EB      |      ;
-                       LDA.B $22                            ;80A7CD|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A7CD|A522    |000022;
                        REP #$20                             ;80A7CF|C220    |      ;
                        ASL A                                ;80A7D1|0A      |      ;
                        TAX                                  ;80A7D2|AA      |      ;
                        LDA.L pMapGraphicsTable,X            ;80A7D3|BF7CAA80|80AA7C;
-                       STA.B $18                            ;80A7D7|8518    |000018;
+                       STA.B pTileMapData                   ;80A7D7|8518    |000018;
                        SEP #$20                             ;80A7D9|E220    |      ;
                        LDY.W #$0000                         ;80A7DB|A00000  |      ;
-                       LDA.B $22                            ;80A7DE|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A7DE|A522    |000022;
                        CMP.B #$57                           ;80A7E0|C957    |      ;
                        BCS .label2                          ;80A7E2|B02E    |80A812;
-                       LDA.B ($18),Y                        ;80A7E4|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A7E4|B118    |000018;
                        STA.W $0195                          ;80A7E6|8D9501  |000195;
                        JSL.L fManageGraphicsPresets         ;80A7E9|22598C80|808C59;
                        REP #$30                             ;80A7ED|C230    |      ;
                        INY                                  ;80A7EF|C8      |      ;
-                       LDA.B ($18),Y                        ;80A7F0|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A7F0|B118    |000018;
                        ORA.W $0196                          ;80A7F2|0D9601  |000196;
                        STA.W $0196                          ;80A7F5|8D9601  |000196;
                        REP #$20                             ;80A7F8|C220    |      ;
@@ -5328,10 +5328,10 @@ fWriteMapGraphicsPointer:
                                                             ;      |        |      ;
               .label2:
                        SEP #$20                             ;80A812|E220    |      ;
-                       LDA.B ($18),Y                        ;80A814|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A814|B118    |000018;
                        STA.W $0181                          ;80A816|8D8101  |000181;
                        INY                                  ;80A819|C8      |      ;
-                       LDA.B ($18),Y                        ;80A81A|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A81A|B118    |000018;
                        STA.W $0182                          ;80A81C|8D8201  |000182;
                        CMP.B #$03                           ;80A81F|C903    |      ;
                        BCC .label3                          ;80A821|900B    |80A82E;
@@ -5343,29 +5343,29 @@ fWriteMapGraphicsPointer:
               .label3:
                        SEP #$20                             ;80A82E|E220    |      ;
                        INY                                  ;80A830|C8      |      ;
-                       LDA.B ($18),Y                        ;80A831|B118    |000018; nNumberOfTilemaps
+                       LDA.B (pTileMapData),Y               ;80A831|B118    |000018; nNumberOfTilemaps
                        STA.B $92                            ;80A833|8592    |000092;
                        INY                                  ;80A835|C8      |      ;
-                       LDA.B ($18),Y                        ;80A836|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A836|B118    |000018;
                        STA.B $93                            ;80A838|8593    |000093; nNumberOfCharactermaps
                        INY                                  ;80A83A|C8      |      ;
-                       LDA.B $22                            ;80A83B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A83B|A522    |000022;
                        CMP.B #$57                           ;80A83D|C957    |      ;
                        BCS .label4                          ;80A83F|B01A    |80A85B;
                        REP #$20                             ;80A841|C220    |      ;
-                       LDA.B ($18),Y                        ;80A843|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A843|B118    |000018;
                        STA.B $ED                            ;80A845|85ED    |0000ED;
                        INY                                  ;80A847|C8      |      ;
                        INY                                  ;80A848|C8      |      ;
-                       LDA.B ($18),Y                        ;80A849|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A849|B118    |000018;
                        STA.B $F1                            ;80A84B|85F1    |0000F1;
                        INY                                  ;80A84D|C8      |      ;
                        INY                                  ;80A84E|C8      |      ;
-                       LDA.B ($18),Y                        ;80A84F|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A84F|B118    |000018;
                        STA.B $EF                            ;80A851|85EF    |0000EF;
                        INY                                  ;80A853|C8      |      ;
                        INY                                  ;80A854|C8      |      ;
-                       LDA.B ($18),Y                        ;80A855|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A855|B118    |000018;
                        STA.B $F3                            ;80A857|85F3    |0000F3;
                        INY                                  ;80A859|C8      |      ;
                        INY                                  ;80A85A|C8      |      ;
@@ -5377,16 +5377,16 @@ fWriteMapGraphicsPointer:
                                                             ;      |        |      ;
             .tilemaps:
                        REP #$20                             ;80A861|C220    |      ;
-                       LDA.B ($18),Y                        ;80A863|B118    |000018; nDestinationAddress
+                       LDA.B (pTileMapData),Y               ;80A863|B118    |000018; nDestinationAddress
                        PHA                                  ;80A865|48      |      ;
                        INY                                  ;80A866|C8      |      ;
                        INY                                  ;80A867|C8      |      ;
-                       LDA.B ($18),Y                        ;80A868|B118    |000018; pCompressedMap
+                       LDA.B (pTileMapData),Y               ;80A868|B118    |000018; pCompressedMap
                        STA.B ptrUnknown0x72                 ;80A86A|8572    |000072;
                        INY                                  ;80A86C|C8      |      ;
                        INY                                  ;80A86D|C8      |      ;
                        SEP #$20                             ;80A86E|E220    |      ;
-                       LDA.B ($18),Y                        ;80A870|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A870|B118    |000018;
                        STA.B ptrUnknown0x72+2               ;80A872|8574    |000074;
                        REP #$20                             ;80A874|C220    |      ;
                        INY                                  ;80A876|C8      |      ;
@@ -5415,7 +5415,7 @@ fWriteMapGraphicsPointer:
                        STA.B ptrUnknown0x72+2               ;80A8A3|8574    |000074;
                        REP #$20                             ;80A8A5|C220    |      ;
                        LDA.W #$0080                         ;80A8A7|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;80A8AA|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80A8AA|22338A80|808A33;
                        JSL.L fUnknown_808AB2                ;80A8AE|22B28A80|808AB2;
                        REP #$30                             ;80A8B2|C230    |      ;
                        PLY                                  ;80A8B4|7A      |      ;
@@ -5427,16 +5427,16 @@ fWriteMapGraphicsPointer:
                                                             ;      |        |      ;
        .charactermaps:
                        REP #$30                             ;80A8BE|C230    |      ;
-                       LDA.B ($18),Y                        ;80A8C0|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A8C0|B118    |000018;
                        STA.B $8A                            ;80A8C2|858A    |00008A;
                        INY                                  ;80A8C4|C8      |      ;
                        INY                                  ;80A8C5|C8      |      ;
-                       LDA.B ($18),Y                        ;80A8C6|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A8C6|B118    |000018;
                        STA.B ptrUnknown0x72                 ;80A8C8|8572    |000072;
                        INY                                  ;80A8CA|C8      |      ;
                        INY                                  ;80A8CB|C8      |      ;
                        SEP #$20                             ;80A8CC|E220    |      ;
-                       LDA.B ($18),Y                        ;80A8CE|B118    |000018;
+                       LDA.B (pTileMapData),Y               ;80A8CE|B118    |000018;
                        STA.B ptrUnknown0x72+2               ;80A8D0|8574    |000074;
                        REP #$20                             ;80A8D2|C220    |      ;
                        INY                                  ;80A8D4|C8      |      ;
@@ -5468,7 +5468,7 @@ fWriteMapGraphicsPointer:
                                                             ;      |        |      ;
               .label9:
                        SEP #$20                             ;80A901|E220    |      ;
-                       LDA.B $22                            ;80A903|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A903|A522    |000022;
                        CMP.B #$04                           ;80A905|C904    |      ;
                        BCS .label10                         ;80A907|B004    |80A90D;
                        JSL.L fUnknown_82AF00                ;80A909|2200AF82|82AF00;
@@ -5508,7 +5508,7 @@ fWriteMapGraphicsPointer:
                        ASL A                                ;80A94E|0A      |      ;
                        TAX                                  ;80A94F|AA      |      ;
                        LDA.L nTable_80AA68,X                ;80A950|BF68AA80|80AA68;
-                       STA.B $1A                            ;80A954|851A    |00001A;
+                       STA.B pTileMapData+2                 ;80A954|851A    |00001A;
                        SEC                                  ;80A956|38      |      ;
                        SBC.W #$0040                         ;80A957|E94000  |      ;
                        STA.B $80                            ;80A95A|8580    |000080;
@@ -5540,7 +5540,7 @@ fWriteMapGraphicsPointer:
                        ADC.W #$0400                         ;80A989|690004  |      ;
                        TAX                                  ;80A98C|AA      |      ;
                        SEP #$20                             ;80A98D|E220    |      ;
-                       LDA.B $22                            ;80A98F|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A98F|A522    |000022;
                        CMP.B #$5B                           ;80A991|C95B    |      ;
                        BCS .label14                         ;80A993|B007    |80A99C;
                        LDY.B $8A                            ;80A995|A48A    |00008A;
@@ -5567,7 +5567,7 @@ fWriteMapGraphicsPointer:
                        CMP.W #$0020                         ;80A9B6|C92000  |      ;
                        BNE .label13                         ;80A9B9|D0BC    |80A977;
                        SEP #$20                             ;80A9BB|E220    |      ;
-                       LDA.B $22                            ;80A9BD|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A9BD|A522    |000022;
                        CMP.B #$5B                           ;80A9BF|C95B    |      ;
                        BCS .label16                         ;80A9C1|B007    |80A9CA;
                        LDY.B $8A                            ;80A9C3|A48A    |00008A;
@@ -5600,7 +5600,7 @@ fWriteMapGraphicsPointer:
                                                             ;      |        |      ;
             .continue:
                        SEP #$20                             ;80A9ED|E220    |      ;
-                       LDA.B $22                            ;80A9EF|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;80A9EF|A522    |000022;
                        CMP.B #$57                           ;80A9F1|C957    |      ;
                        BCS .return                          ;80A9F3|B042    |80AA37;
                        SEP #$20                             ;80A9F5|E220    |      ;
@@ -5660,7 +5660,7 @@ fWriteMapGraphicsPointer:
                        STA.B ptrUnknown0x72+2               ;80AA54|8574    |000074;
                        REP #$20                             ;80AA56|C220    |      ;
                        LDA.W #$0080                         ;80AA58|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;80AA5B|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;80AA5B|22338A80|808A33;
                        JSL.L fUnknown_808AB2                ;80AA5F|22B28A80|808AB2;
                        REP #$30                             ;80AA63|C230    |      ;
                        PLY                                  ;80AA65|7A      |      ;
@@ -5677,7 +5677,7 @@ fWriteMapGraphicsPointer:
                        dw $4000                             ;80AA7A|        |      ;
                                                             ;      |        |      ;
     pMapGraphicsTable:
-                       dw sFarmSpringMap                    ;80AA7C|        |80AB3C;
+                       dw sFarmSpringMap                    ;80AA7C|        |80AB3C; 0x60 * [ptr16]
                        dw sFarmSummerMap                    ;80AA7E|        |80AB5F;
                        dw sFarmFallMap                      ;80AA80|        |80AB82;
                        dw sFarmWinterMap                    ;80AA82|        |80ABA5;
@@ -7054,68 +7054,68 @@ nToolSoundData_80B8CD:
                        dw $0303,$0104,$0301,$0101           ;80B8DD|        |      ;
                        dw $0201                             ;80B8E5|        |      ;
                                                             ;      |        |      ;
-         PTR16_80B8E7:
-                       dw DATA8_80B9A7                      ;80B8E7|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B8E9|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B8EB|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B8ED|        |80B9A7;
-                       dw DATA8_80B9AB                      ;80B8EF|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B8F1|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B8F3|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B8F5|        |80B9AB;
-                       dw DATA8_80B9B3                      ;80B8F7|        |80B9B3;
-                       dw DATA8_80B9B3                      ;80B8F9|        |80B9B3;
-                       dw DATA8_80B9B7                      ;80B8FB|        |80B9B7;
-                       dw DATA8_80B9BB                      ;80B8FD|        |80B9BB;
-                       dw DATA8_80B9A7                      ;80B8FF|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B901|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B903|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B905|        |80B9A7;
-                       dw DATA8_80B9AF                      ;80B907|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B909|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B90B|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B90D|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B90F|        |80B9AF;
-                       dw DATA8_80B9A7                      ;80B911|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B913|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B915|        |80B9A7;
-                       dw DATA8_80B9AB                      ;80B917|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B919|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B91B|        |80B9AB;
-                       dw DATA8_80B9BF                      ;80B91D|        |80B9BF;
-                       dw DATA8_80B9AB                      ;80B91F|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B921|        |80B9AB;
-                       dw DATA8_80B9D3                      ;80B923|        |80B9D3;
-                       dw DATA8_80B9AB                      ;80B925|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B927|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B929|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B92B|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B92D|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B92F|        |80B9AB;
-                       dw DATA8_80B9AB                      ;80B931|        |80B9AB;
-                       dw DATA8_80B9A7                      ;80B933|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B935|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B937|        |80B9A7;
+nSeasonDataUnknown_80B8E7:
+                       dw nDataUnknown80B8E7_0x00           ;80B8E7|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B8E9|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B8EB|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B8ED|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x01           ;80B8EF|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B8F1|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B8F3|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B8F5|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x03           ;80B8F7|        |80B9B3;
+                       dw nDataUnknown80B8E7_0x03           ;80B8F9|        |80B9B3;
+                       dw nDataUnknown80B8E7_0x04           ;80B8FB|        |80B9B7;
+                       dw nDataUnknown80B8E7_0x05           ;80B8FD|        |80B9BB;
+                       dw nDataUnknown80B8E7_0x00           ;80B8FF|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B901|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B903|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B905|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x02           ;80B907|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B909|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B90B|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B90D|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B90F|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x00           ;80B911|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B913|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B915|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x01           ;80B917|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B919|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B91B|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x06           ;80B91D|        |80B9BF;
+                       dw nDataUnknown80B8E7_0x01           ;80B91F|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B921|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x0B           ;80B923|        |80B9D3;
+                       dw nDataUnknown80B8E7_0x01           ;80B925|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B927|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B929|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B92B|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B92D|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B92F|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x01           ;80B931|        |80B9AB;
+                       dw nDataUnknown80B8E7_0x00           ;80B933|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B935|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B937|        |80B9A7;
                        dw PTR16_80FFFF                      ;80B939|        |80FFFF;
-                       dw DATA8_80B9C3                      ;80B93B|        |80B9C3;
-                       dw DATA8_80B9AF                      ;80B93D|        |80B9AF;
-                       dw DATA8_80B9C7                      ;80B93F|        |80B9C7;
-                       dw DATA8_80B9A7                      ;80B941|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B943|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B945|        |80B9A7;
-                       dw DATA8_80B9A7                      ;80B947|        |80B9A7;
-                       dw DATA8_80B9AF                      ;80B949|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B94B|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B94D|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B94F|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B951|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B953|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B955|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B957|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B959|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B95B|        |80B9AF;
-                       dw DATA8_80B9AF                      ;80B95D|        |80B9AF;
-                       dw DATA8_80B9CF                      ;80B95F|        |80B9CF;
+                       dw nDataUnknown80B8E7_0x07           ;80B93B|        |80B9C3;
+                       dw nDataUnknown80B8E7_0x02           ;80B93D|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x08           ;80B93F|        |80B9C7;
+                       dw nDataUnknown80B8E7_0x00           ;80B941|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B943|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B945|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x00           ;80B947|        |80B9A7;
+                       dw nDataUnknown80B8E7_0x02           ;80B949|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B94B|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B94D|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B94F|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B951|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B953|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B955|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B957|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B959|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B95B|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x02           ;80B95D|        |80B9AF;
+                       dw nDataUnknown80B8E7_0x0A           ;80B95F|        |80B9CF;
                        dw PTR16_80FFFF                      ;80B961|        |80FFFF;
                        dw PTR16_80FFFF                      ;80B963|        |80FFFF;
                        dw PTR16_80FFFF                      ;80B965|        |80FFFF;
@@ -7146,46 +7146,46 @@ nToolSoundData_80B8CD:
                        dw PTR16_80FFFF                      ;80B997|        |80FFFF;
                        dw PTR16_80FFFF                      ;80B999|        |80FFFF;
                        dw PTR16_80FFFF                      ;80B99B|        |80FFFF;
-                       dw DATA8_80B9CF                      ;80B99D|        |80B9CF;
-                       dw DATA8_80B9CB                      ;80B99F|        |80B9CB;
+                       dw nDataUnknown80B8E7_0x0A           ;80B99D|        |80B9CF;
+                       dw nDataUnknown80B8E7_0x09           ;80B99F|        |80B9CB;
                        dw PTR16_80FFFF                      ;80B9A1|        |80FFFF;
-                       dw DATA8_80B9C7                      ;80B9A3|        |80B9C7;
-                       dw DATA8_80B9C7                      ;80B9A5|        |80B9C7;
+                       dw nDataUnknown80B8E7_0x08           ;80B9A3|        |80B9C7;
+                       dw nDataUnknown80B8E7_0x08           ;80B9A5|        |80B9C7;
                                                             ;      |        |      ;
-         DATA8_80B9A7:
+nDataUnknown80B8E7_0x00:
                        db $01,$02,$07,$04                   ;80B9A7|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9AB:
+nDataUnknown80B8E7_0x01:
                        db $05,$05,$05,$05                   ;80B9AB|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9AF:
+nDataUnknown80B8E7_0x02:
                        db $06,$06,$06,$06                   ;80B9AF|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9B3:
+nDataUnknown80B8E7_0x03:
                        db $03,$03,$03,$03                   ;80B9B3|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9B7:
+nDataUnknown80B8E7_0x04:
                        db $0E,$0E,$0E,$0E                   ;80B9B7|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9BB:
+nDataUnknown80B8E7_0x05:
                        db $0D,$0D,$0D,$0D                   ;80B9BB|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9BF:
+nDataUnknown80B8E7_0x06:
                        db $09,$09,$09,$09                   ;80B9BF|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9C3:
+nDataUnknown80B8E7_0x07:
                        db $0F,$0F,$0F,$0F                   ;80B9C3|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9C7:
+nDataUnknown80B8E7_0x08:
                        db $0A,$0A,$0A,$0A                   ;80B9C7|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9CB:
+nDataUnknown80B8E7_0x09:
                        db $0B,$0B,$0B,$0B                   ;80B9CB|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9CF:
+nDataUnknown80B8E7_0x0A:
                        db $12,$12,$12,$12                   ;80B9CF|        |      ;
                                                             ;      |        |      ;
-         DATA8_80B9D3:
+nDataUnknown80B8E7_0x0B:
                        db $08,$08,$08,$08                   ;80B9D3|        |      ;
                                                             ;      |        |      ;
           DATA_80B9D7:
@@ -7209,199 +7209,199 @@ nToolSoundData_80B8CD:
                        dl DATA_80B9EF                       ;80B9FA|        |80B9EF;
                                                             ;      |        |      ;
         pPaletteTable:
-                       dl PALETTE_A89400                    ;80B9FD|        |A89400;
-                       dl PALETTE_A89600                    ;80BA00|        |A89600;
-                       dl PALETTE_A89800                    ;80BA03|        |A89800;
-                       dl PALETTE_A88A00                    ;80BA06|        |A88A00;
-                       dl PALETTE_A88C00                    ;80BA09|        |A88C00;
-                       dl PALETTE_A88E00                    ;80BA0C|        |A88E00;
-                       dl PALETTE_A89000                    ;80BA0F|        |A89000;
-                       dl PALETTE_A89200                    ;80BA12|        |A89200;
-                       dl PALETTE_A88000                    ;80BA15|        |A88000;
-                       dl PALETTE_A88200                    ;80BA18|        |A88200;
-                       dl PALETTE_A88400                    ;80BA1B|        |A88400;
-                       dl PALETTE_A88600                    ;80BA1E|        |A88600;
-                       dl PALETTE_A88800                    ;80BA21|        |A88800;
-                       dl PALETTE_A89A00                    ;80BA24|        |A89A00;
-                       dl PALETTE_A89C00                    ;80BA27|        |A89C00;
-                       dl PALETTE_A89E00                    ;80BA2A|        |A89E00;
-                       dl PALETTE_A8A000                    ;80BA2D|        |A8A000;
-                       dl PALETTE_A8A200                    ;80BA30|        |A8A200;
-                       dl PALETTE_A8F400                    ;80BA33|        |A8F400;
-                       dl PALETTE_A8F800                    ;80BA36|        |A8F800;
-                       dl PALETTE_A8FA00                    ;80BA39|        |A8FA00;
-                       dl PALETTE_A8FC00                    ;80BA3C|        |A8FC00;
-                       dl PALETTE_A8BA00                    ;80BA3F|        |A8BA00;
-                       dl PALETTE_A8BC00                    ;80BA42|        |A8BC00;
-                       dl PALETTE_A8BE00                    ;80BA45|        |A8BE00;
-                       dl PALETTE_A8C000                    ;80BA48|        |A8C000;
-                       dl PALETTE_A8C200                    ;80BA4B|        |A8C200;
-                       dl PALETTE_A8C600                    ;80BA4E|        |A8C600;
-                       dl PALETTE_A8C800                    ;80BA51|        |A8C800;
-                       dl PALETTE_A8CA00                    ;80BA54|        |A8CA00;
-                       dl PALETTE_A98000                    ;80BA57|        |A98000;
-                       dl PALETTE_A98200                    ;80BA5A|        |A98200;
-                       dl PALETTE_A98400                    ;80BA5D|        |A98400;
-                       dl PALETTE_A98600                    ;80BA60|        |A98600;
-                       dl PALETTE_A8F600                    ;80BA63|        |A8F600;
-                       dl PALETTE_A8C400                    ;80BA66|        |A8C400;
-                       dl PALETTE_A98A00                    ;80BA69|        |A98A00;
-                       dl PALETTE_A98800                    ;80BA6C|        |A98800;
-                       dl PALETTE_A8FE00                    ;80BA6F|        |A8FE00;
-                       dl PALETTE_A8CC00                    ;80BA72|        |A8CC00;
-                       dl PALETTE_A8CE00                    ;80BA75|        |A8CE00;
-                       dl PALETTE_A8D000                    ;80BA78|        |A8D000;
-                       dl PALETTE_A8D200                    ;80BA7B|        |A8D200;
-                       dl PALETTE_A8D400                    ;80BA7E|        |A8D400;
-                       dl PALETTE_A8EA00                    ;80BA81|        |A8EA00;
-                       dl PALETTE_A8EC00                    ;80BA84|        |A8EC00;
-                       dl PALETTE_A8EE00                    ;80BA87|        |A8EE00;
-                       dl PALETTE_A8F000                    ;80BA8A|        |A8F000;
-                       dl PALETTE_A8F200                    ;80BA8D|        |A8F200;
-                       dl PALETTE_A8D600                    ;80BA90|        |A8D600;
-                       dl PALETTE_A8D800                    ;80BA93|        |A8D800;
-                       dl PALETTE_A8DA00                    ;80BA96|        |A8DA00;
-                       dl PALETTE_A8DC00                    ;80BA99|        |A8DC00;
-                       dl PALETTE_A8DE00                    ;80BA9C|        |A8DE00;
-                       dl PALETTE_A8E000                    ;80BA9F|        |A8E000;
-                       dl PALETTE_A8E200                    ;80BAA2|        |A8E200;
-                       dl PALETTE_A8E400                    ;80BAA5|        |A8E400;
-                       dl PALETTE_A8E600                    ;80BAA8|        |A8E600;
-                       dl PALETTE_A8E800                    ;80BAAB|        |A8E800;
-                       dl PALETTE_A9C800                    ;80BAAE|        |A9C800;
-                       dl PALETTE_A9CA00                    ;80BAB1|        |A9CA00;
-                       dl PALETTE_A9CC00                    ;80BAB4|        |A9CC00;
-                       dl PALETTE_A9CE00                    ;80BAB7|        |A9CE00;
-                       dl PALETTE_A9B800                    ;80BABA|        |A9B800;
-                       dl PALETTE_A9BA00                    ;80BABD|        |A9BA00;
-                       dl PALETTE_A9BC00                    ;80BAC0|        |A9BC00;
-                       dl PALETTE_A9BE00                    ;80BAC3|        |A9BE00;
-                       dl PALETTE_A9C000                    ;80BAC6|        |A9C000;
-                       dl PALETTE_A9C200                    ;80BAC9|        |A9C200;
-                       dl PALETTE_A9C400                    ;80BACC|        |A9C400;
-                       dl PALETTE_A9C600                    ;80BACF|        |A9C600;
-                       dl PALETTE_A9D000                    ;80BAD2|        |A9D000;
-                       dl PALETTE_A9D200                    ;80BAD5|        |A9D200;
-                       dl PALETTE_A9D400                    ;80BAD8|        |A9D400;
-                       dl PALETTE_A9D600                    ;80BADB|        |A9D600;
-                       dl PALETTE_A8A600                    ;80BADE|        |A8A600;
-                       dl PALETTE_A8A800                    ;80BAE1|        |A8A800;
-                       dl PALETTE_A8AA00                    ;80BAE4|        |A8AA00;
-                       dl PALETTE_A8AC00                    ;80BAE7|        |A8AC00;
-                       dl PALETTE_A8AE00                    ;80BAEA|        |A8AE00;
-                       dl PALETTE_A8B000                    ;80BAED|        |A8B000;
-                       dl PALETTE_A8B200                    ;80BAF0|        |A8B200;
-                       dl PALETTE_A8B400                    ;80BAF3|        |A8B400;
-                       dl PALETTE_A8B600                    ;80BAF6|        |A8B600;
-                       dl PALETTE_A8B800                    ;80BAF9|        |A8B800;
-                       dl PALETTE_A98E00                    ;80BAFC|        |A98E00;
-                       dl PALETTE_A9B600                    ;80BAFF|        |A9B600;
-                       dl PALETTE_A8A400                    ;80BB02|        |A8A400;
-                       dl PALETTE_A99200                    ;80BB05|        |A99200;
-                       dl PALETTE_A99000                    ;80BB08|        |A99000;
-                       dl PALETTE_A9A600                    ;80BB0B|        |A9A600;
-                       dl PALETTE_A9A800                    ;80BB0E|        |A9A800;
-                       dl PALETTE_A9AA00                    ;80BB11|        |A9AA00;
-                       dl PALETTE_A9AC00                    ;80BB14|        |A9AC00;
-                       dl PALETTE_A99C00                    ;80BB17|        |A99C00;
-                       dl PALETTE_A99E00                    ;80BB1A|        |A99E00;
-                       dl PALETTE_A9A000                    ;80BB1D|        |A9A000;
-                       dl PALETTE_A9A200                    ;80BB20|        |A9A200;
-                       dl PALETTE_A99400                    ;80BB23|        |A99400;
-                       dl PALETTE_A99600                    ;80BB26|        |A99600;
-                       dl PALETTE_A99800                    ;80BB29|        |A99800;
-                       dl PALETTE_A99A00                    ;80BB2C|        |A99A00;
-                       dl PALETTE_A9AE00                    ;80BB2F|        |A9AE00;
-                       dl PALETTE_A9B000                    ;80BB32|        |A9B000;
-                       dl PALETTE_A9B200                    ;80BB35|        |A9B200;
-                       dl PALETTE_A9B400                    ;80BB38|        |A9B400;
-                       dl PALETTE_A9A400                    ;80BB3B|        |A9A400;
-                       dl PALETTE_A9DE00                    ;80BB3E|        |A9DE00;
-                       dl PALETTE_A9E000                    ;80BB41|        |A9E000;
-                       dl PALETTE_A9D800                    ;80BB44|        |A9D800;
-                       dl PALETTE_A9DA00                    ;80BB47|        |A9DA00;
-                       dl PALETTE_A98C00                    ;80BB4A|        |A98C00;
-                       dl PALETTE_A9DC00                    ;80BB4D|        |A9DC00;
-                       dl PALETTE_A9E200                    ;80BB50|        |A9E200;
-                       dl PALETTE_A9E400                    ;80BB53|        |A9E400;
-                       dl PALETTE_A9E600                    ;80BB56|        |A9E600;
-                       dl PALETTE_A9E800                    ;80BB59|        |A9E800;
+                       dl sPalette_0x0A                     ;80B9FD|        |A89400; 0x75 * [ptr24]
+                       dl sPalette_0x0B                     ;80BA00|        |A89600;
+                       dl sPalette_0x0C                     ;80BA03|        |A89800;
+                       dl sPalette_0x05                     ;80BA06|        |A88A00;
+                       dl sPalette_0x06                     ;80BA09|        |A88C00;
+                       dl sPalette_0x07                     ;80BA0C|        |A88E00;
+                       dl sPalette_0x08                     ;80BA0F|        |A89000;
+                       dl sPalette_0x09                     ;80BA12|        |A89200;
+                       dl sPalette_0x00                     ;80BA15|        |A88000;
+                       dl sPalette_0x01                     ;80BA18|        |A88200;
+                       dl sPalette_0x02                     ;80BA1B|        |A88400;
+                       dl sPalette_0x03                     ;80BA1E|        |A88600;
+                       dl sPalette_0x04                     ;80BA21|        |A88800;
+                       dl sPalette_0x0D                     ;80BA24|        |A89A00;
+                       dl sPalette_0x0E                     ;80BA27|        |A89C00;
+                       dl sPalette_0x0F                     ;80BA2A|        |A89E00;
+                       dl sPalette_0x10                     ;80BA2D|        |A8A000;
+                       dl sPalette_0x11                     ;80BA30|        |A8A200;
+                       dl sPalette_0x3A                     ;80BA33|        |A8F400;
+                       dl sPalette_0x3C                     ;80BA36|        |A8F800;
+                       dl sPalette_0x3D                     ;80BA39|        |A8FA00;
+                       dl sPalette_0x3E                     ;80BA3C|        |A8FC00;
+                       dl sPalette_0x1D                     ;80BA3F|        |A8BA00;
+                       dl sPalette_0x1E                     ;80BA42|        |A8BC00;
+                       dl sPalette_0x1F                     ;80BA45|        |A8BE00;
+                       dl sPalette_0x20                     ;80BA48|        |A8C000;
+                       dl sPalette_0x21                     ;80BA4B|        |A8C200;
+                       dl sPalette_0x23                     ;80BA4E|        |A8C600;
+                       dl sPalette_0x24                     ;80BA51|        |A8C800;
+                       dl sPalette_0x25                     ;80BA54|        |A8CA00;
+                       dl sPalette_0x40                     ;80BA57|        |A98000;
+                       dl sPalette_0x41                     ;80BA5A|        |A98200;
+                       dl sPalette_0x42                     ;80BA5D|        |A98400;
+                       dl sPalette_0x43                     ;80BA60|        |A98600;
+                       dl sPalette_0x3B                     ;80BA63|        |A8F600;
+                       dl sPalette_0x22                     ;80BA66|        |A8C400;
+                       dl sPalette_0x45                     ;80BA69|        |A98A00;
+                       dl sPalette_0x44                     ;80BA6C|        |A98800;
+                       dl sPalette_0x3F                     ;80BA6F|        |A8FE00;
+                       dl sPalette_0x26                     ;80BA72|        |A8CC00;
+                       dl sPalette_0x27                     ;80BA75|        |A8CE00;
+                       dl sPalette_0x28                     ;80BA78|        |A8D000;
+                       dl sPalette_0x29                     ;80BA7B|        |A8D200;
+                       dl sPalette_0x2A                     ;80BA7E|        |A8D400;
+                       dl sPalette_0x35                     ;80BA81|        |A8EA00;
+                       dl sPalette_0x36                     ;80BA84|        |A8EC00;
+                       dl sPalette_0x37                     ;80BA87|        |A8EE00;
+                       dl sPalette_0x38                     ;80BA8A|        |A8F000;
+                       dl sPalette_0x39                     ;80BA8D|        |A8F200;
+                       dl sPalette_0x2B                     ;80BA90|        |A8D600;
+                       dl sPalette_0x2C                     ;80BA93|        |A8D800;
+                       dl sPalette_0x2D                     ;80BA96|        |A8DA00;
+                       dl sPalette_0x2E                     ;80BA99|        |A8DC00;
+                       dl sPalette_0x2F                     ;80BA9C|        |A8DE00;
+                       dl sPalette_0x30                     ;80BA9F|        |A8E000;
+                       dl sPalette_0x31                     ;80BAA2|        |A8E200;
+                       dl sPalette_0x32                     ;80BAA5|        |A8E400;
+                       dl sPalette_0x33                     ;80BAA8|        |A8E600;
+                       dl sPalette_0x34                     ;80BAAB|        |A8E800;
+                       dl sPalette_0x64                     ;80BAAE|        |A9C800;
+                       dl sPalette_0x65                     ;80BAB1|        |A9CA00;
+                       dl sPalette_0x66                     ;80BAB4|        |A9CC00;
+                       dl sPalette_0x67                     ;80BAB7|        |A9CE00;
+                       dl sPalette_0x5C                     ;80BABA|        |A9B800;
+                       dl sPalette_0x5D                     ;80BABD|        |A9BA00;
+                       dl sPalette_0x5E                     ;80BAC0|        |A9BC00;
+                       dl sPalette_0x5F                     ;80BAC3|        |A9BE00;
+                       dl sPalette_0x60                     ;80BAC6|        |A9C000;
+                       dl sPalette_0x61                     ;80BAC9|        |A9C200;
+                       dl sPalette_0x62                     ;80BACC|        |A9C400;
+                       dl sPalette_0x63                     ;80BACF|        |A9C600;
+                       dl sPalette_0x68                     ;80BAD2|        |A9D000;
+                       dl sPalette_0x69                     ;80BAD5|        |A9D200;
+                       dl sPalette_0x6A                     ;80BAD8|        |A9D400;
+                       dl sPalette_0x6B                     ;80BADB|        |A9D600;
+                       dl sPalette_0x13                     ;80BADE|        |A8A600;
+                       dl sPalette_0x14                     ;80BAE1|        |A8A800;
+                       dl sPalette_0x15                     ;80BAE4|        |A8AA00;
+                       dl sPalette_0x16                     ;80BAE7|        |A8AC00;
+                       dl sPalette_0x17                     ;80BAEA|        |A8AE00;
+                       dl sPalette_0x18                     ;80BAED|        |A8B000;
+                       dl sPalette_0x19                     ;80BAF0|        |A8B200;
+                       dl sPalette_0x1A                     ;80BAF3|        |A8B400;
+                       dl sPalette_0x1B                     ;80BAF6|        |A8B600;
+                       dl sPalette_0x1C                     ;80BAF9|        |A8B800;
+                       dl sPalette_0x47                     ;80BAFC|        |A98E00;
+                       dl sPalette_0x5B                     ;80BAFF|        |A9B600;
+                       dl sPalette_0x12                     ;80BB02|        |A8A400;
+                       dl sPalette_0x49                     ;80BB05|        |A99200;
+                       dl sPalette_0x48                     ;80BB08|        |A99000;
+                       dl sPalette_0x53                     ;80BB0B|        |A9A600;
+                       dl sPalette_0x54                     ;80BB0E|        |A9A800;
+                       dl sPalette_0x55                     ;80BB11|        |A9AA00;
+                       dl sPalette_0x56                     ;80BB14|        |A9AC00;
+                       dl sPalette_0x4E                     ;80BB17|        |A99C00;
+                       dl sPalette_0x4F                     ;80BB1A|        |A99E00;
+                       dl sPalette_0x50                     ;80BB1D|        |A9A000;
+                       dl sPalette_0x51                     ;80BB20|        |A9A200;
+                       dl sPalette_0x4A                     ;80BB23|        |A99400;
+                       dl sPalette_0x4B                     ;80BB26|        |A99600;
+                       dl sPalette_0x4C                     ;80BB29|        |A99800;
+                       dl sPalette_0x4D                     ;80BB2C|        |A99A00;
+                       dl sPalette_0x57                     ;80BB2F|        |A9AE00;
+                       dl sPalette_0x58                     ;80BB32|        |A9B000;
+                       dl sPalette_0x59                     ;80BB35|        |A9B200;
+                       dl sPalette_0x5A                     ;80BB38|        |A9B400;
+                       dl sPalette_0x52                     ;80BB3B|        |A9A400;
+                       dl sPalette_0x6F                     ;80BB3E|        |A9DE00;
+                       dl sPalette_0x70                     ;80BB41|        |A9E000;
+                       dl sPalette_0x6C                     ;80BB44|        |A9D800;
+                       dl sPalette_0x6D                     ;80BB47|        |A9DA00;
+                       dl sPalette_0x46                     ;80BB4A|        |A98C00;
+                       dl sPalette_0x6E                     ;80BB4D|        |A9DC00;
+                       dl sPalette_0x71                     ;80BB50|        |A9E200;
+                       dl sPalette_0x72                     ;80BB53|        |A9E400;
+                       dl sPalette_0x73                     ;80BB56|        |A9E600;
+                       dl sPalette_0x74                     ;80BB59|        |A9E800;
                                                             ;      |        |      ;
-sPALETTE_TimeBasedTable:
-                       dw $0100,$0602,$FF07,$0403           ;80BB5C|        |      ; 60 * [16b, 16b, 16b nPalleteIndex]
-                       dw $0605,$FF07,$0908,$0B0A           ;80BB64|        |      ;
-                       dw $FF0C,$0E0D,$100F,$FF11           ;80BB6C|        |      ;
-                       dw $12FF,$1413,$FF15,$16FF           ;80BB74|        |      ;
-                       dw $1817,$FF19,$1AFF,$1C1B           ;80BB7C|        |      ;
-                       dw $FF1D,$1EFF,$201F,$FF21           ;80BB84|        |      ;
-                       dw $22FF,$FF22,$FFFF,$23FF           ;80BB8C|        |      ;
-                       dw $FF23,$FFFF,$FFFF,$24FF           ;80BB94|        |      ;
-                       dw $FF25,$26FF,$FFFF,$FFFF           ;80BB9C|        |      ;
-                       dw $2827,$2A29,$FF2B,$2D2C           ;80BBA4|        |      ;
-                       dw $2F2E,$FF30,$3231,$3433           ;80BBAC|        |      ;
-                       dw $FF35,$3736,$3938,$FF3A           ;80BBB4|        |      ;
-                       dw $3BFF,$3D3C,$FF3E,$3FFF           ;80BBBC|        |      ;
-                       dw $4140,$FF42,$43FF,$4544           ;80BBC4|        |      ;
-                       dw $FF46,$47FF,$4948,$FF4A           ;80BBCC|        |      ;
-                       dw $FFFF,$FFFF,$FF4A,$4B4B           ;80BBD4|        |      ;
-                       dw $4B4B,$4C4B,$4B4B,$4B4B           ;80BBDC|        |      ;
-                       dw $4C4B,$4B4B,$4B4B,$4C4B           ;80BBE4|        |      ;
-                       dw $4DFF,$FF4D,$FFFF,$4DFF           ;80BBEC|        |      ;
-                       dw $FF4D,$FFFF,$4DFF,$FF4D           ;80BBF4|        |      ;
-                       dw $FFFF,$4EFF,$FF4E,$FFFF           ;80BBFC|        |      ;
-                       dw $4FFF,$FF4F,$FFFF,$4FFF           ;80BC04|        |      ;
-                       dw $FF4F,$FFFF,$FFFF,$50FF           ;80BC0C|        |      ;
-                       dw $FF50,$FFFF,$50FF,$FF50           ;80BC14|        |      ;
-                       dw $51FF,$FF51,$FFFF,$51FF           ;80BC1C|        |      ;
-                       dw $FF51,$FFFF,$52FF,$FF52           ;80BC24|        |      ;
-                       dw $FFFF,$52FF,$FF52,$FFFF           ;80BC2C|        |      ;
-                       dw $53FF,$FF53,$FFFF,$54FF           ;80BC34|        |      ;
-                       dw $FF54,$FFFF,$5555,$5555           ;80BC3C|        |      ;
-                       dw $FF55,$5656,$5656,$FF56           ;80BC44|        |      ;
-                       dw $5656,$5656,$FF56,$57FF           ;80BC4C|        |      ;
-                       dw $5757,$FF57,$5757,$5757           ;80BC54|        |      ;
-                       dw $FF57,$58FF,$FF58,$FFFF           ;80BC5C|        |      ;
-                       dw $59FF,$FFFF,$FFFF,$12FF           ;80BC64|        |      ;
-                       dw $FFFF,$FFFF,$16FF,$FFFF           ;80BC6C|        |      ;
-                       dw $FFFF,$1AFF,$FFFF,$FFFF           ;80BC74|        |      ;
-                       dw $1EFF,$FFFF,$FFFF,$5AFF           ;80BC7C|        |      ;
-                       dw $5C5B,$FF5D,$5EFF,$605F           ;80BC84|        |      ;
-                       dw $FF61,$62FF,$6463,$FF65           ;80BC8C|        |      ;
-                       dw $66FF,$6867,$FF69,$5AFF           ;80BC94|        |      ;
-                       dw $5C5B,$FF5D,$5EFF,$605F           ;80BC9C|        |      ;
-                       dw $FF61,$62FF,$6463,$FF65           ;80BCA4|        |      ;
-                       dw $66FF,$6867,$FF69,$FFFF           ;80BCAC|        |      ;
-                       dw $FFFF,$FF69,$6A69,$6A6A           ;80BCB4|        |      ;
-                       dw $FF6A,$5AFF,$5C5B,$FF5D           ;80BCBC|        |      ;
-                       dw $FF28,$FFFF,$FFFF,$FF04           ;80BCC4|        |      ;
-                       dw $FFFF,$FFFF,$FF04,$FFFF           ;80BCCC|        |      ;
-                       dw $FFFF,$FF04,$FFFF,$FFFF           ;80BCD4|        |      ;
-                       dw $FF04,$FFFF,$FFFF,$FF04           ;80BCDC|        |      ;
-                       dw $FFFF,$FFFF,$FF16,$FFFF           ;80BCE4|        |      ;
-                       dw $FFFF,$FF04,$FFFF,$FFFF           ;80BCEC|        |      ;
-                       dw $FF04,$FFFF,$FFFF,$FF04           ;80BCF4|        |      ;
-                       dw $FFFF,$FFFF,$FF04,$FFFF           ;80BCFC|        |      ;
-                       dw $FFFF,$FF04,$FFFF,$FFFF           ;80BD04|        |      ;
-                       dw $FF3F,$FFFF,$FFFF,$FF04           ;80BD0C|        |      ;
-                       dw $FFFF,$FFFF,$FF04,$FFFF           ;80BD14|        |      ;
-                       dw $FFFF,$FF70,$FFFF,$FFFF           ;80BD1C|        |      ;
-                       dw $FF70,$FFFF,$FFFF,$FF70           ;80BD24|        |      ;
-                       dw $FFFF,$FFFF,$FF70,$FFFF           ;80BD2C|        |      ;
-                       dw $FFFF,$FF70,$FFFF,$FFFF           ;80BD34|        |      ;
-                       dw $FF70,$FFFF,$FFFF,$FF70           ;80BD3C|        |      ;
-                       dw $FFFF,$FFFF,$FF70,$FFFF           ;80BD44|        |      ;
-                       dw $FFFF,$FF70,$FFFF,$FFFF           ;80BD4C|        |      ;
-                       dw $FF70,$FFFF,$FFFF,$FF70           ;80BD54|        |      ;
-                       dw $FFFF,$FFFF,$FF70,$FFFF           ;80BD5C|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD64|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD6C|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD74|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD7C|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD84|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD8C|        |      ;
-                       dw $FFFF,$FFFF,$FFFF,$FFFF           ;80BD94|        |      ;
+sTilemapPalettes_80BB5C:
+                       db $00,$01,$02,$06,$07,$FF,$03,$04   ;80BB5C|        |      ; 0x60 * [n8 nPaletteIndex0, n8 nPaletteIndex1, n8 nPaletteIndex2, n8 nPaletteIndex3, n8 nPaletteIndex4, n8 nPaletteIndex5]
+                       db $05,$06,$07,$FF,$08,$09,$0A,$0B   ;80BB64|        |      ;
+                       db $0C,$FF,$0D,$0E,$0F,$10,$11,$FF   ;80BB6C|        |      ;
+                       db $FF,$12,$13,$14,$15,$FF,$FF,$16   ;80BB74|        |      ;
+                       db $17,$18,$19,$FF,$FF,$1A,$1B,$1C   ;80BB7C|        |      ;
+                       db $1D,$FF,$FF,$1E,$1F,$20,$21,$FF   ;80BB84|        |      ;
+                       db $FF,$22,$22,$FF,$FF,$FF,$FF,$23   ;80BB8C|        |      ;
+                       db $23,$FF,$FF,$FF,$FF,$FF,$FF,$24   ;80BB94|        |      ;
+                       db $25,$FF,$FF,$26,$FF,$FF,$FF,$FF   ;80BB9C|        |      ;
+                       db $27,$28,$29,$2A,$2B,$FF,$2C,$2D   ;80BBA4|        |      ;
+                       db $2E,$2F,$30,$FF,$31,$32,$33,$34   ;80BBAC|        |      ;
+                       db $35,$FF,$36,$37,$38,$39,$3A,$FF   ;80BBB4|        |      ;
+                       db $FF,$3B,$3C,$3D,$3E,$FF,$FF,$3F   ;80BBBC|        |      ;
+                       db $40,$41,$42,$FF,$FF,$43,$44,$45   ;80BBC4|        |      ;
+                       db $46,$FF,$FF,$47,$48,$49,$4A,$FF   ;80BBCC|        |      ;
+                       db $FF,$FF,$FF,$FF,$4A,$FF,$4B,$4B   ;80BBD4|        |      ;
+                       db $4B,$4B,$4B,$4C,$4B,$4B,$4B,$4B   ;80BBDC|        |      ;
+                       db $4B,$4C,$4B,$4B,$4B,$4B,$4B,$4C   ;80BBE4|        |      ;
+                       db $FF,$4D,$4D,$FF,$FF,$FF,$FF,$4D   ;80BBEC|        |      ;
+                       db $4D,$FF,$FF,$FF,$FF,$4D,$4D,$FF   ;80BBF4|        |      ;
+                       db $FF,$FF,$FF,$4E,$4E,$FF,$FF,$FF   ;80BBFC|        |      ;
+                       db $FF,$4F,$4F,$FF,$FF,$FF,$FF,$4F   ;80BC04|        |      ;
+                       db $4F,$FF,$FF,$FF,$FF,$FF,$FF,$50   ;80BC0C|        |      ;
+                       db $50,$FF,$FF,$FF,$FF,$50,$50,$FF   ;80BC14|        |      ;
+                       db $FF,$51,$51,$FF,$FF,$FF,$FF,$51   ;80BC1C|        |      ;
+                       db $51,$FF,$FF,$FF,$FF,$52,$52,$FF   ;80BC24|        |      ;
+                       db $FF,$FF,$FF,$52,$52,$FF,$FF,$FF   ;80BC2C|        |      ;
+                       db $FF,$53,$53,$FF,$FF,$FF,$FF,$54   ;80BC34|        |      ;
+                       db $54,$FF,$FF,$FF,$55,$55,$55,$55   ;80BC3C|        |      ;
+                       db $55,$FF,$56,$56,$56,$56,$56,$FF   ;80BC44|        |      ;
+                       db $56,$56,$56,$56,$56,$FF,$FF,$57   ;80BC4C|        |      ;
+                       db $57,$57,$57,$FF,$57,$57,$57,$57   ;80BC54|        |      ;
+                       db $57,$FF,$FF,$58,$58,$FF,$FF,$FF   ;80BC5C|        |      ;
+                       db $FF,$59,$FF,$FF,$FF,$FF,$FF,$12   ;80BC64|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$16,$FF,$FF   ;80BC6C|        |      ;
+                       db $FF,$FF,$FF,$1A,$FF,$FF,$FF,$FF   ;80BC74|        |      ;
+                       db $FF,$1E,$FF,$FF,$FF,$FF,$FF,$5A   ;80BC7C|        |      ;
+                       db $5B,$5C,$5D,$FF,$FF,$5E,$5F,$60   ;80BC84|        |      ;
+                       db $61,$FF,$FF,$62,$63,$64,$65,$FF   ;80BC8C|        |      ;
+                       db $FF,$66,$67,$68,$69,$FF,$FF,$5A   ;80BC94|        |      ;
+                       db $5B,$5C,$5D,$FF,$FF,$5E,$5F,$60   ;80BC9C|        |      ;
+                       db $61,$FF,$FF,$62,$63,$64,$65,$FF   ;80BCA4|        |      ;
+                       db $FF,$66,$67,$68,$69,$FF,$FF,$FF   ;80BCAC|        |      ;
+                       db $FF,$FF,$69,$FF,$69,$6A,$6A,$6A   ;80BCB4|        |      ;
+                       db $6A,$FF,$FF,$5A,$5B,$5C,$5D,$FF   ;80BCBC|        |      ;
+                       db $28,$FF,$FF,$FF,$FF,$FF,$04,$FF   ;80BCC4|        |      ;
+                       db $FF,$FF,$FF,$FF,$04,$FF,$FF,$FF   ;80BCCC|        |      ;
+                       db $FF,$FF,$04,$FF,$FF,$FF,$FF,$FF   ;80BCD4|        |      ;
+                       db $04,$FF,$FF,$FF,$FF,$FF,$04,$FF   ;80BCDC|        |      ;
+                       db $FF,$FF,$FF,$FF,$16,$FF,$FF,$FF   ;80BCE4|        |      ;
+                       db $FF,$FF,$04,$FF,$FF,$FF,$FF,$FF   ;80BCEC|        |      ;
+                       db $04,$FF,$FF,$FF,$FF,$FF,$04,$FF   ;80BCF4|        |      ;
+                       db $FF,$FF,$FF,$FF,$04,$FF,$FF,$FF   ;80BCFC|        |      ;
+                       db $FF,$FF,$04,$FF,$FF,$FF,$FF,$FF   ;80BD04|        |      ;
+                       db $3F,$FF,$FF,$FF,$FF,$FF,$04,$FF   ;80BD0C|        |      ;
+                       db $FF,$FF,$FF,$FF,$04,$FF,$FF,$FF   ;80BD14|        |      ;
+                       db $FF,$FF,$70,$FF,$FF,$FF,$FF,$FF   ;80BD1C|        |      ;
+                       db $70,$FF,$FF,$FF,$FF,$FF,$70,$FF   ;80BD24|        |      ;
+                       db $FF,$FF,$FF,$FF,$70,$FF,$FF,$FF   ;80BD2C|        |      ;
+                       db $FF,$FF,$70,$FF,$FF,$FF,$FF,$FF   ;80BD34|        |      ;
+                       db $70,$FF,$FF,$FF,$FF,$FF,$70,$FF   ;80BD3C|        |      ;
+                       db $FF,$FF,$FF,$FF,$70,$FF,$FF,$FF   ;80BD44|        |      ;
+                       db $FF,$FF,$70,$FF,$FF,$FF,$FF,$FF   ;80BD4C|        |      ;
+                       db $70,$FF,$FF,$FF,$FF,$FF,$70,$FF   ;80BD54|        |      ;
+                       db $FF,$FF,$FF,$FF,$70,$FF,$FF,$FF   ;80BD5C|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD64|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD6C|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD74|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD7C|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD84|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD8C|        |      ;
+                       db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BD94|        |      ;
                                                             ;      |        |      ;
-        DATA16_80BD9C:
+nPaletteOverwrite_80BD9C:
                        dw $3BF8,$26D0,$0946,$238C           ;80BD9C|        |      ; ? * [16b, 16b, 16b]
                        dw $1648,$0124                       ;80BDA4|        |      ;
                        db $D7,$22,$71,$01,$A9,$0C,$8C,$23   ;80BDA8|        |      ;
@@ -7427,8 +7427,8 @@ sMarriedGirlTable_80BDFC:
                        dw $55F9,$3114,$098F,$1D2B           ;80BE34|        |      ;
                        dw $1509,$0AFC,$027B,$0192           ;80BE3C|        |      ;
                                                             ;      |        |      ;
- nPalleteRelatedTable:
-                       db $6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C   ;80BE44|        |      ;
+nPalleteIndexes_80BE44:
+                       db $6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C   ;80BE44|        |      ; ? * [n8 nPaletteIndex]
                        db $6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C   ;80BE4C|        |      ;
                        db $6B,$6B,$6B,$6B,$6B,$6C,$6B,$6B   ;80BE54|        |      ;
                        db $6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C   ;80BE5C|        |      ;
