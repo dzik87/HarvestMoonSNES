@@ -232,7 +232,7 @@
                        REP #$20                             ;838181|C220    |      ;
                        LDA.W #$0080                         ;838183|A98000  |      ;
                        PHX                                  ;838186|DA      |      ;
-                       JSL.L fUnknown_808A33                ;838187|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;838187|22338A80|808A33;
                        SEP #$20                             ;83818B|E220    |      ;
                        LDA.B #$07                           ;83818D|A907    |      ;
                        STA.B $27                            ;83818F|8527    |000027;
@@ -254,7 +254,7 @@
                        STA.B ptrUnknown0x72                 ;8381AB|8572    |000072;
                        REP #$20                             ;8381AD|C220    |      ;
                        LDA.W #$0080                         ;8381AF|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;8381B2|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;8381B2|22338A80|808A33;
                        RTL                                  ;8381B6|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -269,7 +269,7 @@
                        REP #$20                             ;8381C6|C220    |      ;
                        LDA.W #$0080                         ;8381C8|A98000  |      ;
                        PHX                                  ;8381CB|DA      |      ;
-                       JSL.L fUnknown_808A33                ;8381CC|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;8381CC|22338A80|808A33;
                        SEP #$20                             ;8381D0|E220    |      ;
                        LDA.B #$07                           ;8381D2|A907    |      ;
                        STA.B $27                            ;8381D4|8527    |000027;
@@ -288,7 +288,7 @@
                        ADC.W #$0004                         ;8381EB|690400  |      ;
                        STA.B ptrUnknown0x72                 ;8381EE|8572    |000072;
                        LDA.W #$0080                         ;8381F0|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;8381F3|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;8381F3|22338A80|808A33;
                        RTL                                  ;8381F7|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -428,7 +428,7 @@
                        JSL.L fWaitForManyNMI                ;8382EA|225D8680|80865D;
                        SEP #$20                             ;8382EE|E220    |      ;
                        LDA.W $098B                          ;8382F0|AD8B09  |00098B;
-                       STA.B $22                            ;8382F3|8522    |000022;
+                       STA.B nSelectedTilemapId             ;8382F3|8522    |000022;
                        JSL.L fUnknown_8095DE                ;8382F5|22DE9580|8095DE;
                        JSL.L fUnknown_838401                ;8382F9|22018483|838401;
                        RTL                                  ;8382FD|6B      |      ;
@@ -2353,7 +2353,7 @@
                        STA.B ptrUnknown0x72+2               ;8392F2|8574    |000074;
                        REP #$20                             ;8392F4|C220    |      ;
                        LDA.W #$0080                         ;8392F6|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;8392F9|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;8392F9|22338A80|808A33;
                        JSL.L fUnknown_808AB2                ;8392FD|22B28A80|808AB2;
                        SEP #$20                             ;839301|E220    |      ;
                        LDA.B #$00                           ;839303|A900    |      ;
@@ -2371,7 +2371,7 @@
                        STA.B ptrUnknown0x72+2               ;83931D|8574    |000074;
                        REP #$20                             ;83931F|C220    |      ;
                        LDA.W #$0080                         ;839321|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;839324|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;839324|22338A80|808A33;
                        JSL.L fUnknown_808AB2                ;839328|22B28A80|808AB2;
                        RTL                                  ;83932C|6B      |      ;
                                                             ;      |        |      ;
@@ -2393,7 +2393,7 @@
                        STA.B ptrUnknown0x72+2               ;839349|8574    |000074;
                        REP #$20                             ;83934B|C220    |      ;
                        LDA.W #$0080                         ;83934D|A98000  |      ;
-                       JSL.L fUnknown_808A33                ;839350|22338A80|808A33;
+                       JSL.L fLoadPaletteToControler        ;839350|22338A80|808A33;
                        SEP #$20                             ;839354|E220    |      ;
                        LDA.B #$07                           ;839356|A907    |      ;
                        STA.B $27                            ;839358|8527    |000027;
@@ -3148,29 +3148,29 @@
                                                             ;      |        |      ;
                                                             ;      |        |      ;
      pFontGlyphsTable:
-                       dl GFX_949843                        ;8398AE|        |949843; Letters graphics pointers
+                       dl sFontGlyphs_0x00                  ;8398AE|        |949843; 0x09 * [ptr24]
                        dl GFX_94A843                        ;8398B1|        |94A843;
-                       dl GFX_94B843                        ;8398B4|        |94B843;
-                       dl GFX_94C843                        ;8398B7|        |94C843;
-                       dl GFX_94D843                        ;8398BA|        |94D843;
-                       dl GFX_94E843                        ;8398BD|        |94E843;
-                       dl GFX_958000                        ;8398C0|        |958000;
-                       dl GFX_959000                        ;8398C3|        |959000;
-                       dl GFX_95A000                        ;8398C6|        |95A000;
-                       dl GFX_95B000                        ;8398C9|        |95B000;
+                       dl sFontGlyphs_0x01                  ;8398B4|        |94B843;
+                       dl sFontGlyphs_0x02                  ;8398B7|        |94C843;
+                       dl sFontGlyphs_0x03                  ;8398BA|        |94D843;
+                       dl sFontGlyphs_0x04                  ;8398BD|        |94E843;
+                       dl sFontGlyphs_0x05                  ;8398C0|        |958000;
+                       dl sFontGlyphs_0x06                  ;8398C3|        |959000;
+                       dl sFontGlyphs_0x07                  ;8398C6|        |95A000;
+                       dl sFontGlyphs_0x08                  ;8398C9|        |95B000;
                                                             ;      |        |      ;
        nTextFFFETable:
-                       dw $5010,$5170,$5350,$5108           ;8398CC|        |      ; 16b * 5 (stored at $185)
+                       dw $5010,$5170,$5350,$5108           ;8398CC|        |      ; 0x05 * [n16] (stored at $185)
                        dw $5268                             ;8398D4|        |      ;
                                                             ;      |        |      ;
     pTextAmmountTable:
-                       dl $000001,$00000A,$000064           ;8398D6|        |      ; 24b * 6 (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
+                       dl $000001,$00000A,$000064           ;8398D6|        |      ; 0x06 * [n24/ptr24] (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
                        dl $0003E8,$002710,$0186A0           ;8398DF|        |      ;
                        dl $0F4240                           ;8398E8|        |      ;
                        dl DATA16_989680                     ;8398EB|        |989680;
                                                             ;      |        |      ;
 sTextFFFCPointerTable:
-                       dl $7F1F04                           ;8398EE|        |7F1F04; ptr28 pData, b8 nSize
+                       dl $7F1F04                           ;8398EE|        |7F1F04; 0x70 * [ptr28 pData, n8 nSize]
                        db $03                               ;8398F1|        |      ;
                        dl $7F1F0A                           ;8398F2|        |7F1F0A;
                        db $01                               ;8398F5|        |      ;
@@ -3396,7 +3396,7 @@ sTextFFFCPointerTable:
                        db $02                               ;839AAD|        |      ;
                                                             ;      |        |      ;
 sTextFFFDPointerTable:
-                       dl $8008DD                           ;839AAE|        |8008DD; ptr28 pData, b8 nSize
+                       dl $8008DD                           ;839AAE|        |8008DD; 0x52 * [ptr28 pData, n8 nSize]
                        db $08                               ;839AB1|        |      ;
                        dl $8008E5                           ;839AB2|        |8008E5;
                        db $08                               ;839AB5|        |      ;
@@ -4768,7 +4768,7 @@ fSetDefaultValuesForVariables:
                        STZ.W nToolEquipped                  ;83AA05|9C2109  |000921;
                        STZ.W nAmountLeft_Water              ;83AA08|9C2609  |000926;
                        LDA.B #$00                           ;83AA0B|A900    |      ;
-                       STA.L $7F1F12                        ;83AA0D|8F121F7F|7F1F12;
+                       STA.L nUnknown7F1F12                 ;83AA0D|8F121F7F|7F1F12;
                        LDA.B #$00                           ;83AA11|A900    |      ;
                        STA.L $7F1F2B                        ;83AA13|8F2B1F7F|7F1F2B;
                        LDA.B #$00                           ;83AA17|A900    |      ;
@@ -4829,7 +4829,7 @@ fSetDefaultValuesForVariables:
                        LDA.W #$0000                         ;83AACC|A90000  |      ;
                        STA.L $7F1F72                        ;83AACF|8F721F7F|7F1F72;
                        LDA.W #$0000                         ;83AAD3|A90000  |      ;
-                       STA.L PrengacyFlag                   ;83AAD6|8F3B1F7F|7F1F3B;
+                       STA.L nPrengacyFlag                  ;83AAD6|8F3B1F7F|7F1F3B;
                        LDA.W #$0000                         ;83AADA|A90000  |      ;
                        STA.L nFirstChildAge                 ;83AADD|8F371F7F|7F1F37;
                        LDA.W #$0000                         ;83AAE1|A90000  |      ;
@@ -4927,7 +4927,7 @@ fSetDefaultValuesForVariables:
                        STA.W sHorseNameLong+2               ;83ABE2|8DE708  |0008E7;
                        STA.W sHorseNameLong+4               ;83ABE5|8DE908  |0008E9;
                        STA.W sHorseNameLong+6               ;83ABE8|8DEB08  |0008EB;
-                       JSL.L CODE_82A65A                    ;83ABEB|225AA682|82A65A;
+                       JSL.L fTileMapUnknown_82A65A         ;83ABEB|225AA682|82A65A;
                        RTL                                  ;83ABEF|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -5899,8 +5899,8 @@ fAddProfitToCurrentMoney:
                        RTL                                  ;83B281|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_83B282:
-                       REP #$30                             ;83B282|C230    |      ;
+fIncreaseHappiness_83B282:
+                       REP #$30                             ;83B282|C230    |      ; A: nHappinessAdd
                        STA.B $7E                            ;83B284|857E    |00007E;
                        LDA.L nPlayerHappiness               ;83B286|AF331F7F|7F1F33;
                        CLC                                  ;83B28A|18      |      ;
@@ -6002,7 +6002,7 @@ fAddProfitToCurrentMoney:
                        STA.W nAmountLeft_Water              ;83B35F|8D2609  |000926;
                        LDY.W #$0011                         ;83B362|A01100  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B365|B772    |000072;
-                       STA.L $7F1F12                        ;83B367|8F121F7F|7F1F12;
+                       STA.L nUnknown7F1F12                 ;83B367|8F121F7F|7F1F12;
                        LDY.W #$0012                         ;83B36B|A01200  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B36E|B772    |000072;
                        STA.L $7F1F2B                        ;83B370|8F2B1F7F|7F1F2B;
@@ -6096,7 +6096,7 @@ fAddProfitToCurrentMoney:
                        STA.L $7F1F72                        ;83B473|8F721F7F|7F1F72;
                        LDY.W #$0078                         ;83B477|A07800  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B47A|B772    |000072;
-                       STA.L PrengacyFlag                   ;83B47C|8F3B1F7F|7F1F3B;
+                       STA.L nPrengacyFlag                  ;83B47C|8F3B1F7F|7F1F3B;
                        LDY.W #$007A                         ;83B480|A07A00  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83B483|B772    |000072;
                        STA.L nFirstChildAge                 ;83B485|8F371F7F|7F1F37;
@@ -6297,14 +6297,14 @@ fAddProfitToCurrentMoney:
                        SEP #$20                             ;83B66E|E220    |      ;
                        LDA.B ptrUnknown0x72+2               ;83B670|A574    |000074;
                        STA.B ptrUnknown0x75+2               ;83B672|8577    |000077;
-                       JSL.L CODE_82A65A                    ;83B674|225AA682|82A65A;
+                       JSL.L fTileMapUnknown_82A65A         ;83B674|225AA682|82A65A;
                        SEP #$20                             ;83B678|E220    |      ;
                        LDY.W #$01C0                         ;83B67A|A0C001  |      ;
                        LDX.W #$00C0                         ;83B67D|A2C000  |      ;
                                                             ;      |        |      ;
           CODE_83B680:
                        LDA.B [ptrUnknown0x75],Y             ;83B680|B775    |000075;
-                       STA.L $7EA4E6,X                      ;83B682|9FE6A47E|7EA4E6;
+                       STA.L sSelectedTilemap,X             ;83B682|9FE6A47E|7EA4E6;
                        INY                                  ;83B686|C8      |      ;
                        INX                                  ;83B687|E8      |      ;
                        CPX.W #$0F00                         ;83B688|E0000F  |      ;
@@ -6385,7 +6385,7 @@ fAddProfitToCurrentMoney:
                        LDA.W nAmountLeft_Water              ;83B73B|AD2609  |000926;
                        STA.B [ptrUnknown0x72],Y             ;83B73E|9772    |000072;
                        LDY.W #$0011                         ;83B740|A01100  |      ;
-                       LDA.L $7F1F12                        ;83B743|AF121F7F|7F1F12;
+                       LDA.L nUnknown7F1F12                 ;83B743|AF121F7F|7F1F12;
                        STA.B [ptrUnknown0x72],Y             ;83B747|9772    |000072;
                        LDY.W #$0012                         ;83B749|A01200  |      ;
                        LDA.L $7F1F2B                        ;83B74C|AF2B1F7F|7F1F2B;
@@ -6479,7 +6479,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F72                        ;83B84F|AF721F7F|7F1F72;
                        STA.B [ptrUnknown0x72],Y             ;83B853|9772    |000072;
                        LDY.W #$0078                         ;83B855|A07800  |      ;
-                       LDA.L PrengacyFlag                   ;83B858|AF3B1F7F|7F1F3B;
+                       LDA.L nPrengacyFlag                  ;83B858|AF3B1F7F|7F1F3B;
                        STA.B [ptrUnknown0x72],Y             ;83B85C|9772    |000072;
                        LDY.W #$007A                         ;83B85E|A07A00  |      ;
                        LDA.L nFirstChildAge                 ;83B861|AF371F7F|7F1F37;
@@ -6615,7 +6615,7 @@ fAddProfitToCurrentMoney:
                        LDX.W #$00C0                         ;83B9BA|A2C000  |      ;
                                                             ;      |        |      ;
           CODE_83B9BD:
-                       LDA.L $7EA4E6,X                      ;83B9BD|BFE6A47E|7EA4E6;
+                       LDA.L sSelectedTilemap,X             ;83B9BD|BFE6A47E|7EA4E6;
                        STA.B [ptrUnknown0x72],Y             ;83B9C1|9772    |000072;
                        INY                                  ;83B9C3|C8      |      ;
                        INX                                  ;83B9C4|E8      |      ;
@@ -6694,7 +6694,7 @@ fAddProfitToCurrentMoney:
                        RTL                                  ;83BA44|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_83BA45:
+      fUnknown_83BA45:
                        REP #$30                             ;83BA45|C230    |      ;
                        PHA                                  ;83BA47|48      |      ;
                        LDA.W #$0000                         ;83BA48|A90000  |      ;
@@ -7036,7 +7036,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83BCDA|B772    |000072;
                        CMP.B #$04                           ;83BCDC|C904    |      ;
                        BCS CODE_83BD10                      ;83BCDE|B030    |83BD10;
-                       JSL.L CODE_82A9A0                    ;83BCE0|22A0A982|82A9A0;
+                       JSL.L fUnknown_82A9A0                ;83BCE0|22A0A982|82A9A0;
                        REP #$20                             ;83BCE4|C220    |      ;
                        LDA.W $092E                          ;83BCE6|AD2E09  |00092E;
                        BEQ CODE_83BD10                      ;83BCE9|F025    |83BD10;
@@ -7059,7 +7059,7 @@ fAddProfitToCurrentMoney:
           CODE_83BD10:
                        REP #$20                             ;83BD10|C220    |      ;
                        LDA.W #$FFF8                         ;83BD12|A9F8FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BD15|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BD15|22D4A584|84A5D4;
                        REP #$30                             ;83BD19|C230    |      ;
                        LDY.W #$0004                         ;83BD1B|A00400  |      ;
                        BRA CODE_83BD50                      ;83BD1E|8030    |83BD50;
@@ -7068,7 +7068,7 @@ fAddProfitToCurrentMoney:
           CODE_83BD20:
                        REP #$20                             ;83BD20|C220    |      ;
                        LDA.W #$FFF0                         ;83BD22|A9F0FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BD25|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BD25|22D4A584|84A5D4;
                        REP #$30                             ;83BD29|C230    |      ;
                        LDY.W #$0002                         ;83BD2B|A00200  |      ;
                        BRA CODE_83BD50                      ;83BD2E|8020    |83BD50;
@@ -7077,7 +7077,7 @@ fAddProfitToCurrentMoney:
           CODE_83BD30:
                        REP #$20                             ;83BD30|C220    |      ;
                        LDA.W #$FFE8                         ;83BD32|A9E8FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BD35|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BD35|22D4A584|84A5D4;
                        REP #$30                             ;83BD39|C230    |      ;
                        LDY.W #$0002                         ;83BD3B|A00200  |      ;
                        BRA CODE_83BD50                      ;83BD3E|8010    |83BD50;
@@ -7086,7 +7086,7 @@ fAddProfitToCurrentMoney:
           CODE_83BD40:
                        REP #$20                             ;83BD40|C220    |      ;
                        LDA.W #$FFF8                         ;83BD42|A9F8FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BD45|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BD45|22D4A584|84A5D4;
                        REP #$30                             ;83BD49|C230    |      ;
                        LDY.W #$0008                         ;83BD4B|A00800  |      ;
                        BRA CODE_83BD50                      ;83BD4E|8000    |83BD50;
@@ -7122,10 +7122,10 @@ fAddProfitToCurrentMoney:
                        STA.B [ptrUnknown0x72],Y             ;83BD8A|9772    |000072;
                        REP #$20                             ;83BD8C|C220    |      ;
                        LDA.W #$FFF4                         ;83BD8E|A9F4FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BD91|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BD91|22D4A584|84A5D4;
                        REP #$30                             ;83BD95|C230    |      ;
                        LDA.W #$FFE2                         ;83BD97|A9E2FF  |      ;
-                       JSL.L fUnknown_83B282                ;83BD9A|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;83BD9A|2282B283|83B282;
                                                             ;      |        |      ;
           CODE_83BD9E:
                        SEP #$20                             ;83BD9E|E220    |      ;
@@ -7149,7 +7149,7 @@ fAddProfitToCurrentMoney:
                        BNE CODE_83BDD6                      ;83BDC9|D00B    |83BDD6;
                        REP #$20                             ;83BDCB|C220    |      ;
                        LDA.W #$FFF8                         ;83BDCD|A9F8FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BDD0|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BDD0|22D4A584|84A5D4;
                        BRA CODE_83BDEB                      ;83BDD4|8015    |83BDEB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -7192,7 +7192,7 @@ fAddProfitToCurrentMoney:
                        STA.B [ptrUnknown0x72],Y             ;83BE21|9772    |000072;
                        REP #$20                             ;83BE23|C220    |      ;
                        LDA.W #$FFE2                         ;83BE25|A9E2FF  |      ;
-                       JSL.L CODE_84A5D4                    ;83BE28|22D4A584|84A5D4;
+                       JSL.L fUnknown_84A5D4                ;83BE28|22D4A584|84A5D4;
                        BRA CODE_83BE3F                      ;83BE2C|8011    |83BE3F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -7203,7 +7203,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83BE35|B772    |000072;
                        CMP.B #$04                           ;83BE37|C904    |      ;
                        BCS CODE_83BE3F                      ;83BE39|B004    |83BE3F;
-                       JSL.L CODE_82A9A0                    ;83BE3B|22A0A982|82A9A0;
+                       JSL.L fUnknown_82A9A0                ;83BE3B|22A0A982|82A9A0;
                                                             ;      |        |      ;
           CODE_83BE3F:
                        REP #$30                             ;83BE3F|C230    |      ;
@@ -7415,9 +7415,9 @@ fAddProfitToCurrentMoney:
                        BEQ CODE_83BFCC                      ;83BFBC|F00E    |83BFCC;
                        DEC A                                ;83BFBE|3A      |      ;
                        STA.B [ptrUnknown0x72],Y             ;83BFBF|9772    |000072;
-                       LDA.L $7F1F12                        ;83BFC1|AF121F7F|7F1F12;
+                       LDA.L nUnknown7F1F12                 ;83BFC1|AF121F7F|7F1F12;
                        DEC A                                ;83BFC5|3A      |      ;
-                       STA.L $7F1F12                        ;83BFC6|8F121F7F|7F1F12;
+                       STA.L nUnknown7F1F12                 ;83BFC6|8F121F7F|7F1F12;
                        BNE CODE_83C01A                      ;83BFCA|D04E    |83C01A;
                                                             ;      |        |      ;
           CODE_83BFCC:
@@ -7516,7 +7516,7 @@ fAddProfitToCurrentMoney:
                        STA.L nOwnedChickens                 ;83C077|8F0B1F7F|7F1F0B;
                        REP #$30                             ;83C07B|C230    |      ;
                        LDA.W #$FFE2                         ;83C07D|A9E2FF  |      ;
-                       JSL.L fUnknown_83B282                ;83C080|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;83C080|2282B283|83B282;
                                                             ;      |        |      ;
           CODE_83C084:
                        SEP #$20                             ;83C084|E220    |      ;
@@ -7548,7 +7548,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C0B2|B772    |000072;
                        CMP.B #$04                           ;83C0B4|C904    |      ;
                        BCS CODE_83C0CF                      ;83C0B6|B017    |83C0CF;
-                       JSL.L CODE_82A9A0                    ;83C0B8|22A0A982|82A9A0;
+                       JSL.L fUnknown_82A9A0                ;83C0B8|22A0A982|82A9A0;
                        REP #$20                             ;83C0BC|C220    |      ;
                        LDA.W $092E                          ;83C0BE|AD2E09  |00092E;
                        BEQ CODE_83C0CF                      ;83C0C1|F00C    |83C0CF;
@@ -7834,7 +7834,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C2C6|B772    |000072;
                        CMP.B #$04                           ;83C2C8|C904    |      ;
                        BCS CODE_83C2D8                      ;83C2CA|B00C    |83C2D8;
-                       LDA.B $22                            ;83C2CC|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C2CC|A522    |000022;
                        CMP.B #$04                           ;83C2CE|C904    |      ;
                        BCC CODE_83C2D5                      ;83C2D0|9003    |83C2D5;
                        JMP.W CODE_83C401                    ;83C2D2|4C01C4  |83C401;
@@ -7850,7 +7850,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C2DD|B772    |000072;
                        CMP.B #$08                           ;83C2DF|C908    |      ;
                        BCS CODE_83C2F5                      ;83C2E1|B012    |83C2F5;
-                       LDA.B $22                            ;83C2E3|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C2E3|A522    |000022;
                        CMP.B #$04                           ;83C2E5|C904    |      ;
                        BCS CODE_83C2EC                      ;83C2E7|B003    |83C2EC;
                        JMP.W CODE_83C401                    ;83C2E9|4C01C4  |83C401;
@@ -7872,7 +7872,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C2FA|B772    |000072;
                        CMP.B #$10                           ;83C2FC|C910    |      ;
                        BCS CODE_83C312                      ;83C2FE|B012    |83C312;
-                       LDA.B $22                            ;83C300|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C300|A522    |000022;
                        CMP.B #$0C                           ;83C302|C90C    |      ;
                        BCS CODE_83C309                      ;83C304|B003    |83C309;
                        JMP.W CODE_83C401                    ;83C306|4C01C4  |83C401;
@@ -7894,7 +7894,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C317|B772    |000072;
                        CMP.B #$14                           ;83C319|C914    |      ;
                        BCS CODE_83C32F                      ;83C31B|B012    |83C32F;
-                       LDA.B $22                            ;83C31D|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C31D|A522    |000022;
                        CMP.B #$10                           ;83C31F|C910    |      ;
                        BCS CODE_83C326                      ;83C321|B003    |83C326;
                        JMP.W CODE_83C401                    ;83C323|4C01C4  |83C401;
@@ -7916,7 +7916,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C334|B772    |000072;
                        CMP.B #$18                           ;83C336|C918    |      ;
                        BCS CODE_83C34C                      ;83C338|B012    |83C34C;
-                       LDA.B $22                            ;83C33A|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C33A|A522    |000022;
                        CMP.B #$15                           ;83C33C|C915    |      ;
                        BCS CODE_83C343                      ;83C33E|B003    |83C343;
                        JMP.W CODE_83C401                    ;83C340|4C01C4  |83C401;
@@ -7938,7 +7938,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C351|B772    |000072;
                        CMP.B #$31                           ;83C353|C931    |      ;
                        BCC CODE_83C362                      ;83C355|900B    |83C362;
-                       LDA.B $22                            ;83C357|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C357|A522    |000022;
                        CMP.B #$31                           ;83C359|C931    |      ;
                        BCS CODE_83C360                      ;83C35B|B003    |83C360;
                        JMP.W CODE_83C401                    ;83C35D|4C01C4  |83C401;
@@ -7952,7 +7952,7 @@ fAddProfitToCurrentMoney:
                        SEP #$20                             ;83C362|E220    |      ;
                        LDY.W #$0001                         ;83C364|A00100  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C367|B772    |000072;
-                       CMP.B $22                            ;83C369|C522    |000022;
+                       CMP.B nSelectedTilemapId             ;83C369|C522    |000022;
                        BEQ CODE_83C370                      ;83C36B|F003    |83C370;
                        JMP.W CODE_83C401                    ;83C36D|4C01C4  |83C401;
                                                             ;      |        |      ;
@@ -8062,7 +8062,7 @@ fAddProfitToCurrentMoney:
                                                             ;      |        |      ;
           CODE_83C42A:
                        SEP #$20                             ;83C42A|E220    |      ;
-                       LDA.B $22                            ;83C42C|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C42C|A522    |000022;
                        CMP.B #$27                           ;83C42E|C927    |      ;
                        BNE CODE_83C46D                      ;83C430|D03B    |83C46D;
                        LDY.W #$0002                         ;83C432|A00200  |      ;
@@ -8105,7 +8105,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C472|B772    |000072;
                        CMP.B #$04                           ;83C474|C904    |      ;
                        BCS CODE_83C484                      ;83C476|B00C    |83C484;
-                       LDA.B $22                            ;83C478|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C478|A522    |000022;
                        CMP.B #$04                           ;83C47A|C904    |      ;
                        BCC CODE_83C481                      ;83C47C|9003    |83C481;
                        JMP.W CODE_83C63D                    ;83C47E|4C3DC6  |83C63D;
@@ -8121,7 +8121,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C489|B772    |000072;
                        CMP.B #$08                           ;83C48B|C908    |      ;
                        BCS CODE_83C4A1                      ;83C48D|B012    |83C4A1;
-                       LDA.B $22                            ;83C48F|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C48F|A522    |000022;
                        CMP.B #$04                           ;83C491|C904    |      ;
                        BCS CODE_83C498                      ;83C493|B003    |83C498;
                        JMP.W CODE_83C63D                    ;83C495|4C3DC6  |83C63D;
@@ -8143,7 +8143,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C4A6|B772    |000072;
                        CMP.B #$10                           ;83C4A8|C910    |      ;
                        BCS CODE_83C4BE                      ;83C4AA|B012    |83C4BE;
-                       LDA.B $22                            ;83C4AC|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C4AC|A522    |000022;
                        CMP.B #$0C                           ;83C4AE|C90C    |      ;
                        BCS CODE_83C4B5                      ;83C4B0|B003    |83C4B5;
                        JMP.W CODE_83C63D                    ;83C4B2|4C3DC6  |83C63D;
@@ -8165,7 +8165,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C4C3|B772    |000072;
                        CMP.B #$14                           ;83C4C5|C914    |      ;
                        BCS CODE_83C4DB                      ;83C4C7|B012    |83C4DB;
-                       LDA.B $22                            ;83C4C9|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C4C9|A522    |000022;
                        CMP.B #$10                           ;83C4CB|C910    |      ;
                        BCS CODE_83C4D2                      ;83C4CD|B003    |83C4D2;
                        JMP.W CODE_83C63D                    ;83C4CF|4C3DC6  |83C63D;
@@ -8187,7 +8187,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C4E0|B772    |000072;
                        CMP.B #$18                           ;83C4E2|C918    |      ;
                        BCS CODE_83C4F8                      ;83C4E4|B012    |83C4F8;
-                       LDA.B $22                            ;83C4E6|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C4E6|A522    |000022;
                        CMP.B #$15                           ;83C4E8|C915    |      ;
                        BCS CODE_83C4EF                      ;83C4EA|B003    |83C4EF;
                        JMP.W CODE_83C63D                    ;83C4EC|4C3DC6  |83C63D;
@@ -8209,7 +8209,7 @@ fAddProfitToCurrentMoney:
                        LDA.B [ptrUnknown0x72],Y             ;83C4FD|B772    |000072;
                        CMP.B #$31                           ;83C4FF|C931    |      ;
                        BCC CODE_83C50E                      ;83C501|900B    |83C50E;
-                       LDA.B $22                            ;83C503|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C503|A522    |000022;
                        CMP.B #$31                           ;83C505|C931    |      ;
                        BCS CODE_83C50C                      ;83C507|B003    |83C50C;
                        JMP.W CODE_83C63D                    ;83C509|4C3DC6  |83C63D;
@@ -8223,7 +8223,7 @@ fAddProfitToCurrentMoney:
                        SEP #$20                             ;83C50E|E220    |      ;
                        LDY.W #$0002                         ;83C510|A00200  |      ;
                        LDA.B [ptrUnknown0x72],Y             ;83C513|B772    |000072;
-                       CMP.B $22                            ;83C515|C522    |000022;
+                       CMP.B nSelectedTilemapId             ;83C515|C522    |000022;
                        BEQ CODE_83C51C                      ;83C517|F003    |83C51C;
                        JMP.W CODE_83C63D                    ;83C519|4C3DC6  |83C63D;
                                                             ;      |        |      ;
@@ -8424,7 +8424,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F30                        ;83C663|AF301F7F|7F1F30;
                        CMP.B #$04                           ;83C667|C904    |      ;
                        BCS CODE_83C677                      ;83C669|B00C    |83C677;
-                       LDA.B $22                            ;83C66B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C66B|A522    |000022;
                        CMP.B #$04                           ;83C66D|C904    |      ;
                        BCC CODE_83C674                      ;83C66F|9003    |83C674;
                        JMP.W CODE_83C734                    ;83C671|4C34C7  |83C734;
@@ -8439,7 +8439,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F30                        ;83C679|AF301F7F|7F1F30;
                        CMP.B #$08                           ;83C67D|C908    |      ;
                        BCS CODE_83C693                      ;83C67F|B012    |83C693;
-                       LDA.B $22                            ;83C681|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C681|A522    |000022;
                        CMP.B #$04                           ;83C683|C904    |      ;
                        BCS CODE_83C68A                      ;83C685|B003    |83C68A;
                        JMP.W CODE_83C734                    ;83C687|4C34C7  |83C734;
@@ -8460,7 +8460,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F30                        ;83C695|AF301F7F|7F1F30;
                        CMP.B #$10                           ;83C699|C910    |      ;
                        BCS CODE_83C6AF                      ;83C69B|B012    |83C6AF;
-                       LDA.B $22                            ;83C69D|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C69D|A522    |000022;
                        CMP.B #$0C                           ;83C69F|C90C    |      ;
                        BCS CODE_83C6A6                      ;83C6A1|B003    |83C6A6;
                        JMP.W CODE_83C734                    ;83C6A3|4C34C7  |83C734;
@@ -8481,7 +8481,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F30                        ;83C6B1|AF301F7F|7F1F30;
                        CMP.B #$14                           ;83C6B5|C914    |      ;
                        BCS CODE_83C6CB                      ;83C6B7|B012    |83C6CB;
-                       LDA.B $22                            ;83C6B9|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C6B9|A522    |000022;
                        CMP.B #$10                           ;83C6BB|C910    |      ;
                        BCS CODE_83C6C2                      ;83C6BD|B003    |83C6C2;
                        JMP.W CODE_83C734                    ;83C6BF|4C34C7  |83C734;
@@ -8502,7 +8502,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F30                        ;83C6CD|AF301F7F|7F1F30;
                        CMP.B #$18                           ;83C6D1|C918    |      ;
                        BCS CODE_83C6E7                      ;83C6D3|B012    |83C6E7;
-                       LDA.B $22                            ;83C6D5|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C6D5|A522    |000022;
                        CMP.B #$15                           ;83C6D7|C915    |      ;
                        BCS CODE_83C6DE                      ;83C6D9|B003    |83C6DE;
                        JMP.W CODE_83C734                    ;83C6DB|4C34C7  |83C734;
@@ -8523,7 +8523,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F30                        ;83C6E9|AF301F7F|7F1F30;
                        CMP.B #$31                           ;83C6ED|C931    |      ;
                        BCC CODE_83C6FC                      ;83C6EF|900B    |83C6FC;
-                       LDA.B $22                            ;83C6F1|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C6F1|A522    |000022;
                        CMP.B #$31                           ;83C6F3|C931    |      ;
                        BCS CODE_83C6FA                      ;83C6F5|B003    |83C6FA;
                        JMP.W CODE_83C734                    ;83C6F7|4C34C7  |83C734;
@@ -8536,7 +8536,7 @@ fAddProfitToCurrentMoney:
           CODE_83C6FC:
                        SEP #$20                             ;83C6FC|E220    |      ;
                        LDA.L $7F1F30                        ;83C6FE|AF301F7F|7F1F30;
-                       CMP.B $22                            ;83C702|C522    |000022;
+                       CMP.B nSelectedTilemapId             ;83C702|C522    |000022;
                        BEQ CODE_83C709                      ;83C704|F003    |83C709;
                        JMP.W CODE_83C734                    ;83C706|4C34C7  |83C734;
                                                             ;      |        |      ;
@@ -8577,7 +8577,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F31                        ;83C74E|AF311F7F|7F1F31;
                        CMP.B #$04                           ;83C752|C904    |      ;
                        BCS CODE_83C761                      ;83C754|B00B    |83C761;
-                       LDA.B $22                            ;83C756|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C756|A522    |000022;
                        CMP.B #$04                           ;83C758|C904    |      ;
                        BCC CODE_83C75F                      ;83C75A|9003    |83C75F;
                        JMP.W CODE_83C806                    ;83C75C|4C06C8  |83C806;
@@ -8592,7 +8592,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F31                        ;83C763|AF311F7F|7F1F31;
                        CMP.B #$08                           ;83C767|C908    |      ;
                        BCS CODE_83C77D                      ;83C769|B012    |83C77D;
-                       LDA.B $22                            ;83C76B|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C76B|A522    |000022;
                        CMP.B #$04                           ;83C76D|C904    |      ;
                        BCS CODE_83C774                      ;83C76F|B003    |83C774;
                        JMP.W CODE_83C806                    ;83C771|4C06C8  |83C806;
@@ -8613,7 +8613,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F31                        ;83C77F|AF311F7F|7F1F31;
                        CMP.B #$10                           ;83C783|C910    |      ;
                        BCS CODE_83C799                      ;83C785|B012    |83C799;
-                       LDA.B $22                            ;83C787|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C787|A522    |000022;
                        CMP.B #$0C                           ;83C789|C90C    |      ;
                        BCS CODE_83C790                      ;83C78B|B003    |83C790;
                        JMP.W CODE_83C806                    ;83C78D|4C06C8  |83C806;
@@ -8634,7 +8634,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F31                        ;83C79B|AF311F7F|7F1F31;
                        CMP.B #$14                           ;83C79F|C914    |      ;
                        BCS CODE_83C7B5                      ;83C7A1|B012    |83C7B5;
-                       LDA.B $22                            ;83C7A3|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C7A3|A522    |000022;
                        CMP.B #$10                           ;83C7A5|C910    |      ;
                        BCS CODE_83C7AC                      ;83C7A7|B003    |83C7AC;
                        JMP.W CODE_83C806                    ;83C7A9|4C06C8  |83C806;
@@ -8655,7 +8655,7 @@ fAddProfitToCurrentMoney:
                        LDA.L $7F1F31                        ;83C7B7|AF311F7F|7F1F31;
                        CMP.B #$31                           ;83C7BB|C931    |      ;
                        BCC CODE_83C7CA                      ;83C7BD|900B    |83C7CA;
-                       LDA.B $22                            ;83C7BF|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83C7BF|A522    |000022;
                        CMP.B #$31                           ;83C7C1|C931    |      ;
                        BCS CODE_83C7C8                      ;83C7C3|B003    |83C7C8;
                        JMP.W CODE_83C806                    ;83C7C5|4C06C8  |83C806;
@@ -8668,7 +8668,7 @@ fAddProfitToCurrentMoney:
           CODE_83C7CA:
                        SEP #$20                             ;83C7CA|E220    |      ;
                        LDA.L $7F1F31                        ;83C7CC|AF311F7F|7F1F31;
-                       CMP.B $22                            ;83C7D0|C522    |000022;
+                       CMP.B nSelectedTilemapId             ;83C7D0|C522    |000022;
                        BEQ CODE_83C7D7                      ;83C7D2|F003    |83C7D7;
                        JMP.W CODE_83C806                    ;83C7D4|4C06C8  |83C806;
                                                             ;      |        |      ;
@@ -8893,7 +8893,7 @@ fAddProfitToCurrentMoney:
                        STA.B [ptrUnknown0x72],Y             ;83C962|9772    |000072;
                        REP #$30                             ;83C964|C230    |      ;
                        LDA.W #$0046                         ;83C966|A94600  |      ;
-                       JSL.L fUnknown_83B282                ;83C969|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;83C969|2282B283|83B282;
                        REP #$30                             ;83C96D|C230    |      ;
                                                             ;      |        |      ;
               .label5:
@@ -9035,7 +9035,7 @@ fGetChickenDataPointer:
                        REP #$10                             ;83CA9A|C210    |      ;
                        LDA.B #$00                           ;83CA9C|A900    |      ;
                        XBA                                  ;83CA9E|EB      |      ;
-                       LDA.B $22                            ;83CA9F|A522    |000022;
+                       LDA.B nSelectedTilemapId             ;83CA9F|A522    |000022;
                        REP #$20                             ;83CAA1|C220    |      ;
                        ASL A                                ;83CAA3|0A      |      ;
                        TAX                                  ;83CAA4|AA      |      ;
@@ -9958,7 +9958,7 @@ subUnknown83CAA9_0x00:
                        JSL.L fUnknown_848097                ;83D2D1|22978084|848097;
                        REP #$30                             ;83D2D5|C230    |      ;
                        LDA.W #$0002                         ;83D2D7|A90200  |      ;
-                       JSL.L fUnknown_83B282                ;83D2DA|2282B283|83B282;
+                       JSL.L fIncreaseHappiness_83B282      ;83D2DA|2282B283|83B282;
                        RTS                                  ;83D2DE|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11570,55 +11570,55 @@ subUnknown83CAA9_0x15:
                        LDA.B #$02                           ;83DF6C|A902    |      ;
                        LDX.W #$0240                         ;83DF6E|A24002  |      ;
                        LDY.W #$02C0                         ;83DF71|A0C002  |      ;
-                       JSL.L CODE_82B049                    ;83DF74|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DF74|2249B082|82B049;
                        SEP #$20                             ;83DF78|E220    |      ;
                        REP #$10                             ;83DF7A|C210    |      ;
                        LDA.B #$02                           ;83DF7C|A902    |      ;
                        LDX.W #$0250                         ;83DF7E|A25002  |      ;
                        LDY.W #$02C0                         ;83DF81|A0C002  |      ;
-                       JSL.L CODE_82B049                    ;83DF84|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DF84|2249B082|82B049;
                        SEP #$20                             ;83DF88|E220    |      ;
                        REP #$10                             ;83DF8A|C210    |      ;
                        LDA.B #$02                           ;83DF8C|A902    |      ;
                        LDX.W #$0260                         ;83DF8E|A26002  |      ;
                        LDY.W #$02C0                         ;83DF91|A0C002  |      ;
-                       JSL.L CODE_82B049                    ;83DF94|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DF94|2249B082|82B049;
                        SEP #$20                             ;83DF98|E220    |      ;
                        REP #$10                             ;83DF9A|C210    |      ;
                        LDA.B #$02                           ;83DF9C|A902    |      ;
                        LDX.W #$0240                         ;83DF9E|A24002  |      ;
                        LDY.W #$02D0                         ;83DFA1|A0D002  |      ;
-                       JSL.L CODE_82B049                    ;83DFA4|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DFA4|2249B082|82B049;
                        SEP #$20                             ;83DFA8|E220    |      ;
                        REP #$10                             ;83DFAA|C210    |      ;
                        LDA.B #$02                           ;83DFAC|A902    |      ;
                        LDX.W #$0250                         ;83DFAE|A25002  |      ;
                        LDY.W #$02D0                         ;83DFB1|A0D002  |      ;
-                       JSL.L CODE_82B049                    ;83DFB4|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DFB4|2249B082|82B049;
                        SEP #$20                             ;83DFB8|E220    |      ;
                        REP #$10                             ;83DFBA|C210    |      ;
                        LDA.B #$02                           ;83DFBC|A902    |      ;
                        LDX.W #$0260                         ;83DFBE|A26002  |      ;
                        LDY.W #$02D0                         ;83DFC1|A0D002  |      ;
-                       JSL.L CODE_82B049                    ;83DFC4|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DFC4|2249B082|82B049;
                        SEP #$20                             ;83DFC8|E220    |      ;
                        REP #$10                             ;83DFCA|C210    |      ;
                        LDA.B #$02                           ;83DFCC|A902    |      ;
                        LDX.W #$0240                         ;83DFCE|A24002  |      ;
                        LDY.W #$02E0                         ;83DFD1|A0E002  |      ;
-                       JSL.L CODE_82B049                    ;83DFD4|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DFD4|2249B082|82B049;
                        SEP #$20                             ;83DFD8|E220    |      ;
                        REP #$10                             ;83DFDA|C210    |      ;
                        LDA.B #$02                           ;83DFDC|A902    |      ;
                        LDX.W #$0250                         ;83DFDE|A25002  |      ;
                        LDY.W #$02E0                         ;83DFE1|A0E002  |      ;
-                       JSL.L CODE_82B049                    ;83DFE4|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DFE4|2249B082|82B049;
                        SEP #$20                             ;83DFE8|E220    |      ;
                        REP #$10                             ;83DFEA|C210    |      ;
                        LDA.B #$02                           ;83DFEC|A902    |      ;
                        LDX.W #$0260                         ;83DFEE|A26002  |      ;
                        LDY.W #$02E0                         ;83DFF1|A0E002  |      ;
-                       JSL.L CODE_82B049                    ;83DFF4|2249B082|82B049;
+                       JSL.L fUnknown_82B049                ;83DFF4|2249B082|82B049;
                                                             ;      |        |      ;
           CODE_83DFF8:
                        REP #$30                             ;83DFF8|C230    |      ;
@@ -14374,7 +14374,7 @@ subUnknown83CAA9_0x3D:
                        INX                                  ;83F576|E8      |      ;
                        CPX.W #$000C                         ;83F577|E00C00  |      ;
                        BNE CODE_83F51A                      ;83F57A|D09E    |83F51A;
-                       JSL.L CODE_82AA0C                    ;83F57C|220CAA82|82AA0C;
+                       JSL.L fUnknown_82AA0C                ;83F57C|220CAA82|82AA0C;
                        REP #$30                             ;83F580|C230    |      ;
                        LDA.L nRanchDevelopmentRate          ;83F582|AF561F7F|7F1F56;
                        STA.B $7E                            ;83F586|857E    |00007E;
