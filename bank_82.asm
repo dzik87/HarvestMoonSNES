@@ -1851,7 +1851,7 @@ fWeatherSpecialEvents:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 nToolSoundData_829054:
-                       dl $000000,$121406,$0F1106           ;829054|        |      ; 1C * [n24]
+                       dl $000000,$121406,$0F1106           ;829054|        |      ; 0x1C * [n24]
                        dl $171706,$151106,$1B1B06           ;82905D|        |      ;
                        dl $1B1B06,$1B1B06,$1B1B06           ;829066|        |      ;
                        dl $000006,$000006,$190006           ;82906F|        |      ;
@@ -1862,7 +1862,7 @@ nToolSoundData_829054:
                        dl $000000,$000000,$000000           ;82909C|        |      ;
                        dl $000000                           ;8290A5|        |      ;
                                                             ;      |        |      ;
-fToolAnimation_8290A8:
+fToolAnimationSubrutineExecute:
                        SEP #$20                             ;8290A8|E220    |      ;
                        REP #$10                             ;8290AA|C210    |      ;
                        REP #$30                             ;8290AC|C230    |      ;
@@ -2172,7 +2172,7 @@ subToolAnimation82A58B_0x1B:
                        RTS                                  ;82925F|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fToolUsedUnknown_829260:
+fToolUsedSubrituneExecute:
                        SEP #$20                             ;829260|E220    |      ;
                        REP #$10                             ;829262|C210    |      ;
                        LDA.B #$00                           ;829264|A900    |      ;
@@ -4491,7 +4491,7 @@ subToolUsed82A5C3_0x1B:
                        dw $1000                             ;82A589|        |      ;
                                                             ;      |        |      ;
 pToolAnimationTable_82A58B:
-                       dw subToolAnimation82A58B_Empty      ;82A58B|        |8290DD; 0x1C * ptr16
+                       dw subToolAnimation82A58B_Empty      ;82A58B|        |8290DD; 0x1C * [ptr16]
                        dw subToolAnimation82A58B_Sickle     ;82A58D|        |8290DE;
                        dw subToolAnimation82A58B_Plow       ;82A58F|        |8290EC;
                        dw subToolAnimation82A58B_Hammer     ;82A591|        |8290FA;
@@ -4521,7 +4521,7 @@ pToolAnimationTable_82A58B:
                        dw subToolAnimation82A58B_0x1B       ;82A5C1|        |829257;
                                                             ;      |        |      ;
 pToolUsedTable_82A5C3:
-                       dw subToolUsed82A5C3_Empty           ;82A5C3|        |82931E; 0x1C * ptr16
+                       dw subToolUsed82A5C3_Empty           ;82A5C3|        |82931E; 0x1C * [ptr16]
                        dw subToolUsed82A5C3_Sickle          ;82A5C5|        |829328;
                        dw subToolUsed82A5C3_Plow            ;82A5C7|        |829460;
                        dw subToolUsed82A5C3_Hammer          ;82A5C9|        |8295C0;
@@ -5993,9 +5993,9 @@ IncreaseRanchDevelopmentRate:
                        BEQ CODE_82AEE5                      ;82AEC7|F01C    |82AEE5;
                        DEY                                  ;82AEC9|88      |      ;
                        LDA.B [ptrUnknown0x0D],Y             ;82AECA|B70D    |00000D;
-                       STA.W nJumpTable81D593Index          ;82AECC|8D6E09  |00096E;
-                       STZ.W nJumpTable81D593Arg1           ;82AECF|9C6F09  |00096F;
-                       STZ.W nJumpTable81D593Arg2           ;82AED2|9C7009  |000970;
+                       STA.W nPlayerInteractionIndex        ;82AECC|8D6E09  |00096E;
+                       STZ.W nPlayerInteractionArg1         ;82AECF|9C6F09  |00096F;
+                       STZ.W nPlayerInteractionArg2         ;82AED2|9C7009  |000970;
                        REP #$30                             ;82AED5|C230    |      ;
                        LDA.B $D2                            ;82AED7|A5D2    |0000D2;
                        ORA.W #$0040                         ;82AED9|094000  |      ;
@@ -7767,7 +7767,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_808E69                ;82D36C|22698E80|808E69;
                        JSL.L fUnknown_84C034                ;82D370|2234C084|84C034;
                        JSL.L fUnknown_81A383                ;82D374|2283A381|81A383;
-                       JSL.L fUnknown_81BFB7                ;82D378|22B7BF81|81BFB7;
+                       JSL.L fUnknownSubrutineHandler_81BFB7;82D378|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;82D37C|22B39580|8095B3;
                        JSL.L fUnknown_84816F                ;82D380|226F8184|84816F;
                        JSL.L fUnknown_81A600                ;82D384|2200A681|81A600;
@@ -8165,7 +8165,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_808E69                ;82D6EE|22698E80|808E69;
                        JSL.L fUnknown_84C034                ;82D6F2|2234C084|84C034;
                        JSL.L fUnknown_81A383                ;82D6F6|2283A381|81A383;
-                       JSL.L fUnknown_81BFB7                ;82D6FA|22B7BF81|81BFB7;
+                       JSL.L fUnknownSubrutineHandler_81BFB7;82D6FA|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;82D6FE|22B39580|8095B3;
                        JSL.L fUnknown_84816F                ;82D702|226F8184|84816F;
                        JSL.L fUnknown_81A600                ;82D706|2200A681|81A600;
@@ -8455,7 +8455,7 @@ nUnkownItemOnHandTable:
                        JSL.L fUnknown_808E69                ;82D960|22698E80|808E69;
                        JSL.L fUnknown_84C034                ;82D964|2234C084|84C034;
                        JSL.L fUnknown_81A383                ;82D968|2283A381|81A383;
-                       JSL.L fUnknown_81BFB7                ;82D96C|22B7BF81|81BFB7;
+                       JSL.L fUnknownSubrutineHandler_81BFB7;82D96C|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;82D970|22B39580|8095B3;
                        JSL.L fUnknown_84816F                ;82D974|226F8184|84816F;
                        JSL.L fUnknown_81A600                ;82D978|2200A681|81A600;

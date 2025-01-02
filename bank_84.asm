@@ -2440,9 +2440,9 @@ subUnknown849419_0x1E:
                        STA.B [ptrUnknown0xCC],Y             ;849158|97CC    |0000CC;
                        SEP #$20                             ;84915A|E220    |      ;
                        LDA.B #$56                           ;84915C|A956    |      ;
-                       STA.W nJumpTable81D593Index          ;84915E|8D6E09  |00096E;
-                       STZ.W nJumpTable81D593Arg1           ;849161|9C6F09  |00096F;
-                       STZ.W nJumpTable81D593Arg2           ;849164|9C7009  |000970;
+                       STA.W nPlayerInteractionIndex        ;84915E|8D6E09  |00096E;
+                       STZ.W nPlayerInteractionArg1         ;849161|9C6F09  |00096F;
+                       STZ.W nPlayerInteractionArg2         ;849164|9C7009  |000970;
                        REP #$30                             ;849167|C230    |      ;
                        LDA.B $D2                            ;849169|A5D2    |0000D2;
                        ORA.W #$0040                         ;84916B|094000  |      ;
@@ -3221,9 +3221,9 @@ subUnknown849419_0x2D:
                        STA.B [ptrUnknown0xCC],Y             ;849732|97CC    |0000CC;
                        SEP #$20                             ;849734|E220    |      ;
                        LDA.B #$56                           ;849736|A956    |      ;
-                       STA.W nJumpTable81D593Index          ;849738|8D6E09  |00096E;
-                       STZ.W nJumpTable81D593Arg1           ;84973B|9C6F09  |00096F;
-                       STZ.W nJumpTable81D593Arg2           ;84973E|9C7009  |000970;
+                       STA.W nPlayerInteractionIndex        ;849738|8D6E09  |00096E;
+                       STZ.W nPlayerInteractionArg1         ;84973B|9C6F09  |00096F;
+                       STZ.W nPlayerInteractionArg2         ;84973E|9C7009  |000970;
                        REP #$30                             ;849741|C230    |      ;
                        LDA.B $D2                            ;849743|A5D2    |0000D2;
                        ORA.W #$0040                         ;849745|094000  |      ;
@@ -3694,9 +3694,9 @@ subUnknown849419_0x30:
                        STA.W $09A1                          ;849A92|8DA109  |0009A1;
                        SEP #$20                             ;849A95|E220    |      ;
                        LDA.B #$44                           ;849A97|A944    |      ;
-                       STA.W nJumpTable81D593Index          ;849A99|8D6E09  |00096E;
-                       STZ.W nJumpTable81D593Arg1           ;849A9C|9C6F09  |00096F;
-                       STZ.W nJumpTable81D593Arg2           ;849A9F|9C7009  |000970;
+                       STA.W nPlayerInteractionIndex        ;849A99|8D6E09  |00096E;
+                       STZ.W nPlayerInteractionArg1         ;849A9C|9C6F09  |00096F;
+                       STZ.W nPlayerInteractionArg2         ;849A9F|9C7009  |000970;
                        REP #$30                             ;849AA2|C230    |      ;
                        LDA.B $D2                            ;849AA4|A5D2    |0000D2;
                        ORA.W #$0040                         ;849AA6|094000  |      ;
@@ -5229,9 +5229,9 @@ subUnknown849419_0x31:
                        STA.W $09A0                          ;84A4FE|8DA009  |0009A0;
                        SEP #$20                             ;84A501|E220    |      ;
                        LDA.B #$43                           ;84A503|A943    |      ;
-                       STA.W nJumpTable81D593Index          ;84A505|8D6E09  |00096E;
-                       STZ.W nJumpTable81D593Arg1           ;84A508|9C6F09  |00096F;
-                       STZ.W nJumpTable81D593Arg2           ;84A50B|9C7009  |000970;
+                       STA.W nPlayerInteractionIndex        ;84A505|8D6E09  |00096E;
+                       STZ.W nPlayerInteractionArg1         ;84A508|9C6F09  |00096F;
+                       STZ.W nPlayerInteractionArg2         ;84A50B|9C7009  |000970;
                        REP #$30                             ;84A50E|C230    |      ;
                        LDA.B $D2                            ;84A510|A5D2    |0000D2;
                        ORA.W #$0040                         ;84A512|094000  |      ;
@@ -9019,7 +9019,7 @@ subUnknown849419_0x56:
                        REP #$30                             ;84BF94|C230    |      ;
                        LDA.W #$000A                         ;84BF96|A90A00  |      ;
                        STA.B $D4                            ;84BF99|85D4    |0000D4;
-                       JSL.L fToolAnimation_8290A8          ;84BF9B|22A89082|8290A8;
+                       JSL.L fToolAnimationSubrutineExecute ;84BF9B|22A89082|8290A8;
                                                             ;      |        |      ;
           CODE_84BF9F:
                        RTS                                  ;84BF9F|60      |      ;
@@ -11110,7 +11110,7 @@ subUnknown849419_0x59:
                        REP #$30                             ;84CDD1|C230    |      ;
                        LDA.W #$000A                         ;84CDD3|A90A00  |      ;
                        STA.B $D4                            ;84CDD6|85D4    |0000D4;
-                       JSL.L fToolAnimation_8290A8          ;84CDD8|22A89082|8290A8;
+                       JSL.L fToolAnimationSubrutineExecute ;84CDD8|22A89082|8290A8;
                                                             ;      |        |      ;
           CODE_84CDDC:
                        RTL                                  ;84CDDC|6B      |      ;

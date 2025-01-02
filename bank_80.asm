@@ -73,7 +73,7 @@
                        JSL.L fUnknown_808E69                ;8080AF|22698E80|808E69;
                        JSL.L fUnknown_84C034                ;8080B3|2234C084|84C034;
                        JSL.L fUnknown_81A383                ;8080B7|2283A381|81A383;
-                       JSL.L fUnknown_81BFB7                ;8080BB|22B7BF81|81BFB7;
+                       JSL.L fUnknownSubrutineHandler_81BFB7;8080BB|22B7BF81|81BFB7;
                        JSL.L fUnknown_8095B3                ;8080BF|22B39580|8095B3;
                        JSL.L fUnknown_84816F                ;8080C3|226F8184|84816F;
                        JSL.L fUnknown_81A600                ;8080C7|2200A681|81A600;
@@ -3247,7 +3247,7 @@ fSubrutinesExecute_809553:
                                                             ;      |        |      ;
              .label12:
                        JSL.L fUnknown_81CFA0                ;8099CD|22A0CF81|81CFA0;
-                       JSL.L fUnknown_81BFB7                ;8099D1|22B7BF81|81BFB7;
+                       JSL.L fUnknownSubrutineHandler_81BFB7;8099D1|22B7BF81|81BFB7;
                        REP #$30                             ;8099D5|C230    |      ;
                        LDA.L $7F1F5E                        ;8099D7|AF5E1F7F|7F1F5E;
                        AND.W #$0002                         ;8099DB|290200  |      ;
