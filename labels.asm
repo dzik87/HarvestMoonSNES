@@ -100,9 +100,9 @@
                        sPlacedCowFeed = $000932; !^ 16bit ^!;      |        |      ;
                        sPlacedChickenFeed = $000934; !^ 16bit ^!;      |        |      ;
                        nBreakHitCounter = $00096D; !^ n8 (used for example to break wood or stones) ^!;      |        |      ;
-                       nJumpTable81D593Index = $00096E; !^ n8 ^!;      |        |      ;
-                       nJumpTable81D593Arg1 = $00096F; !^ n8 ^!;      |        |      ;
-                       nJumpTable81D593Arg2 = $000970; !^ n8 ^!;      |        |      ;
+                       nPlayerInteractionIndex = $00096E; !^ n8 ^!;      |        |      ;
+                       nPlayerInteractionArg1 = $00096F; !^ n8 ^!;      |        |      ;
+                       nPlayerInteractionArg2 = $000970; !^ n8 ^!;      |        |      ;
                        nTimeState = $000973; !^ n16, 00 - stop, 01- run, 02 - skip to next day ^!;      |        |      ;
                        nUnknownX = $000980; !^ n16 ^!       ;      |        |      ;
                        nUnknownY = $000982; !^ n16 ^!       ;      |        |      ;
