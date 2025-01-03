@@ -3808,6 +3808,7 @@
 ;!^!-USED-!     Padding_AA0000 = $AA8000
 ;!^!-USED-!     Padding_AB0000 = $AB8000
 ;!^!-USED-!     Padding_AC0000 = $AC8000
+;!^!-USED-!     sAudioTrack_AD8000 = $AD8000
 ;!^!-USED-!     sAudioTrack_AD8FD6 = $AD8FD6
 ;!^!-USED-!     sAudioTrack_AD92C2 = $AD92C2
 ;!^!-USED-!     sAudioTrack_AD9578 = $AD9578

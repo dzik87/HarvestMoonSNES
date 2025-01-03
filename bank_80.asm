@@ -595,7 +595,7 @@ fInterrupt_808428:
     LDA.W #$8000                                               ;8085F2|A90080  |      ;
     STA.B ptrAudioData                                         ;8085F5|850A    |00000A;
     LDA.W #$00AD                                               ;8085F7|A9AD00  |      ;
-    STA.B ptrAudioData+2                                       ;8085FA|850C    |00000C;
+    STA.B ptrAudioData+2                                       ;8085FA|850C    |00000C; prtAudioData = 0xAD8000
     JSL.L fUnknown_83843D                                      ;8085FC|223D8483|83843D;
     SEP #$20                                                   ;808600|E220    |      ;
     LDA.B #$00                                                 ;808602|A900    |      ;
