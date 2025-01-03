@@ -2,7 +2,7 @@
     ORG $A68000
  
  
-Data_A68000:
+sCompressedCharactermap_A68000:
     dw $0800,$0000,$15FF,$1585,$0505,$0605                     ;A68000|        |      ;
     dw $FE05,$E1DE,$0811,$0812,$0802,$E603                     ;A6800C|        |      ;
     dw $E0ED,$4811,$E1E2,$E1E2,$09AE,$39AF                     ;A68018|        |      ;
@@ -143,7 +143,7 @@ Data_A68000:
     dw $D13E,$43A2,$5915,$0002,$015A,$DFDE                     ;A6866C|        |      ;
     dw $FF00,$FF22,$F744                                       ;A68678|        |      ;
  
-DATA16_A6867E:
+sCompressedCharactermap_A6867E:
     dw $0800,$0000,$16FF,$1605,$C285,$C309                     ;A6867E|        |      ;
     dw $DE09,$F1E2,$0505,$0506,$F9E2,$0A2E                     ;A6868A|        |      ;
     dw $2FFF,$160A,$16C5,$D205,$BB09,$09D3                     ;A68696|        |      ;
@@ -186,7 +186,7 @@ DATA16_A6867E:
     dw $3E41,$5CD5,$5A21,$0001,$09DA,$DFE6                     ;A68852|        |      ;
     dw $FF08,$FF2A,$EF4C                                       ;A6885E|        |      ;
  
-DATA16_A68864:
+sCompressedCharactermap_A68864:
     dw $0800,$0000,$14FF,$B049,$1C49,$1709                     ;A68864|        |      ;
     dw $FF09,$0914,$092A,$4914,$0928,$2FFF                     ;A68870|        |      ;
     dw $EB09,$0C89,$2189,$FF12,$1222,$1223                     ;A6887C|        |      ;
@@ -365,7 +365,7 @@ DATA16_A68864:
     dw $DEE5,$00D9,$2912,$FF06,$EF28,$2952                     ;A69098|        |      ;
     dw $F546                                                   ;A690A4|        |      ;
  
-DATA16_A690A6:
+sCompressedCharactermap_A690A6:
     dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A690A6|        |      ;
     dw $651F,$871F,$A91F,$CB1F,$001F,$1FED                     ;A690B2|        |      ;
     dw $3F0F,$3F31,$3F53,$3F75,$3F97,$3FB9                     ;A690BE|        |      ;
@@ -459,7 +459,7 @@ DATA16_A690A6:
     dw $FBDF,$1DDF,$3FFF,$00FF,$FF61,$FF83                     ;A694DE|        |      ;
     dw $FFA5,$F3C7                                             ;A694EA|        |      ;
  
-DATA16_A694EE:
+sCompressedCharactermap_A694EE:
     dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A694EE|        |      ;
     dw $651F,$871F,$A91F,$CB1F,$001F,$1FED                     ;A694FA|        |      ;
     dw $3F0F,$3F31,$3F53,$3F75,$3F97,$3FB9                     ;A69506|        |      ;
@@ -561,7 +561,7 @@ DATA16_A694EE:
     dw $F8DF,$1ADF,$00FF,$FF3C,$FF5E,$FF80                     ;A69986|        |      ;
     dw $FFA2,$F6C4                                             ;A69992|        |      ;
  
-DATA16_A69996:
+sCompressedCharactermap_A69996:
     dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A69996|        |      ;
     dw $651F,$871F,$A91F,$CB1F,$001F,$1FED                     ;A699A2|        |      ;
     dw $3F0F,$3F31,$3F53,$3F75,$3F97,$3FB9                     ;A699AE|        |      ;

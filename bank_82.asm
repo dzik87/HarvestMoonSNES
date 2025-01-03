@@ -238,10 +238,10 @@ fUnknown_8281C0:
     LDA.L nWeatherForecastTable_8281FD,X                       ;8281CF|BFFD8182|8281FD;
     STA.W nWeatherForecast8281FD                               ;8281D3|8D9009  |000990;
     REP #$20                                                   ;8281D6|C220    |      ;
-    LDA.W $0196                                                ;8281D8|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;8281D8|AD9601  |000196;
     AND.W #$0010                                               ;8281DB|291000  |      ;
     BNE .label1                                                ;8281DE|D00A    |8281EA;
-    LDA.W $0196                                                ;8281E0|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;8281E0|AD9601  |000196;
     AND.W #$0200                                               ;8281E3|290002  |      ;
     BNE .label2                                                ;8281E6|D00B    |8281F3;
     BRA .return                                                ;8281E8|8012    |8281FC;
@@ -270,19 +270,19 @@ nWeatherForecastTable_8281FD:
  
 fUnknown_828209:
     REP #$30                                                   ;828209|C230    |      ;
-    LDA.W $0196                                                ;82820B|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82820B|AD9601  |000196;
     AND.W #$0002                                               ;82820E|290200  |      ;
     BNE .label1                                                ;828211|D021    |828234;
-    LDA.W $0196                                                ;828213|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;828213|AD9601  |000196;
     AND.W #$0008                                               ;828216|290800  |      ;
     BNE .label2                                                ;828219|D027    |828242;
-    LDA.W $0196                                                ;82821B|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82821B|AD9601  |000196;
     AND.W #$0010                                               ;82821E|291000  |      ;
     BNE .label3                                                ;828221|D02D    |828250;
-    LDA.W $0196                                                ;828223|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;828223|AD9601  |000196;
     AND.W #$0100                                               ;828226|290001  |      ;
     BNE .label4                                                ;828229|D033    |82825E;
-    LDA.W $0196                                                ;82822B|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82822B|AD9601  |000196;
     AND.W #$0200                                               ;82822E|290002  |      ;
     BNE .label5                                                ;828231|D02D    |828260;
  
@@ -419,7 +419,7 @@ fNextDayHandler:
     AND.W #$FFFD                                               ;828332|29FDFF  |      ;
     STA.L $7F1F70                                              ;828335|8F701F7F|7F1F70;
     REP #$30                                                   ;828339|C230    |      ;
-    LDA.W $0196                                                ;82833B|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82833B|AD9601  |000196;
     AND.W #$0010                                               ;82833E|291000  |      ;
     BEQ +                                                      ;828341|F00B    |82834E;
     LDA.L nHouseSize                                           ;828343|AF641F7F|7F1F64;
@@ -428,7 +428,7 @@ fNextDayHandler:
  
   + JSL.L fWeatherForecast_828C09                              ;82834E|22098C82|828C09;
     REP #$30                                                   ;828352|C230    |      ;
-    LDA.W $0196                                                ;828354|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;828354|AD9601  |000196;
     AND.W #$0200                                               ;828357|290002  |      ;
     BEQ +                                                      ;82835A|F00B    |828367;
     LDA.L nHouseSize                                           ;82835C|AF641F7F|7F1F64;
@@ -436,7 +436,7 @@ fNextDayHandler:
     STA.L nHouseSize                                           ;828363|8F641F7F|7F1F64;
  
   + REP #$30                                                   ;828367|C230    |      ;
-    LDA.W $0196                                                ;828369|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;828369|AD9601  |000196;
     AND.W #$0100                                               ;82836C|290001  |      ;
     BEQ +                                                      ;82836F|F00B    |82837C;
     LDA.L $7F1F70                                              ;828371|AF701F7F|7F1F70;
@@ -763,7 +763,7 @@ fNextDayHandler:
     STA.L sShedItems+2                                         ;8286E4|8F021F7F|7F1F02;
  
   + REP #$30                                                   ;8286E8|C230    |      ;
-    LDA.W $0196                                                ;8286EA|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;8286EA|AD9601  |000196;
     AND.W #$0010                                               ;8286ED|291000  |      ;
     BEQ +                                                      ;8286F0|F00B    |8286FD;
     LDA.L $7F1F60                                              ;8286F2|AF601F7F|7F1F60;
@@ -1260,7 +1260,7 @@ sDayOrdinalTable:
  
 fWeatherForecast_828C09:
     REP #$30                                                   ;828C09|C230    |      ;
-    STZ.W $0196                                                ;828C0B|9C9601  |000196;
+    STZ.W nCurrentMapdata0196                                  ;828C0B|9C9601  |000196;
     SEP #$20                                                   ;828C0E|E220    |      ;
     LDA.B #$00                                                 ;828C10|A900    |      ;
     XBA                                                        ;828C12|EB      |      ;
@@ -1292,7 +1292,7 @@ fWeatherForecast_828C09:
  
   + REP #$20                                                   ;828C3F|C220    |      ;
     LDA.L nWeatherTable_828CED                                 ;828C41|AFED8C82|828CED;
-    STA.W $0196                                                ;828C45|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828C45|8D9601  |000196;
     JMP.W .return                                              ;828C48|4CEC8C  |828CEC;
  
  
@@ -1304,14 +1304,14 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828C55|C220    |      ;
     LDX.W #$0004                                               ;828C57|A20400  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C5A|BFED8C82|828CED;
-    STA.W $0196                                                ;828C5E|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828C5E|8D9601  |000196;
     JMP.W .return                                              ;828C61|4CEC8C  |828CEC;
  
  
   + REP #$20                                                   ;828C64|C220    |      ;
     LDX.W #$0002                                               ;828C66|A20200  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C69|BFED8C82|828CED;
-    STA.W $0196                                                ;828C6D|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828C6D|8D9601  |000196;
     BRA .return                                                ;828C70|807A    |828CEC;
  
  
@@ -1322,14 +1322,14 @@ fWeatherForecast_828C09:
     LDX.W #$0002                                               ;828C7A|A20200  |      ;
     REP #$20                                                   ;828C7D|C220    |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C7F|BFED8C82|828CED;
-    STA.W $0196                                                ;828C83|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828C83|8D9601  |000196;
     BRA .return                                                ;828C86|8064    |828CEC;
  
  
   + REP #$20                                                   ;828C88|C220    |      ;
     LDX.W #$0004                                               ;828C8A|A20400  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C8D|BFED8C82|828CED;
-    STA.W $0196                                                ;828C91|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828C91|8D9601  |000196;
     BRA .return                                                ;828C94|8056    |828CEC;
  
  
@@ -1337,7 +1337,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828C96|C220    |      ;
     LDX.W #$0006                                               ;828C98|A20600  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C9B|BFED8C82|828CED;
-    STA.W $0196                                                ;828C9F|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828C9F|8D9601  |000196;
     BRA .return                                                ;828CA2|8048    |828CEC;
  
  
@@ -1345,7 +1345,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828CA4|C220    |      ;
     LDX.W #$0008                                               ;828CA6|A20800  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CA9|BFED8C82|828CED;
-    STA.W $0196                                                ;828CAD|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828CAD|8D9601  |000196;
     LDA.L nHouseSize                                           ;828CB0|AF641F7F|7F1F64;
     ORA.W #$0002                                               ;828CB4|090200  |      ;
     STA.L nHouseSize                                           ;828CB7|8F641F7F|7F1F64;
@@ -1359,7 +1359,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828CC8|C220    |      ;
     LDX.W #$000A                                               ;828CCA|A20A00  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CCD|BFED8C82|828CED;
-    STA.W $0196                                                ;828CD1|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;828CD1|8D9601  |000196;
     LDA.L nHouseSize                                           ;828CD4|AF641F7F|7F1F64;
     ORA.W #$0001                                               ;828CD8|090100  |      ;
     STA.L nHouseSize                                           ;828CDB|8F641F7F|7F1F64;
@@ -2959,7 +2959,7 @@ subToolUsed82A5C3_Axe:
     CPX.W #$00F4                                               ;829957|E0F400  |      ;
     BNE .return                                                ;82995A|D02D    |829989;
     REP #$30                                                   ;82995C|C230    |      ;
-    LDA.W $0196                                                ;82995E|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82995E|AD9601  |000196;
     AND.W #$001A                                               ;829961|291A00  |      ;
     BNE .return                                                ;829964|D023    |829989;
     LDA.L $7F1F6A                                              ;829966|AF6A1F7F|7F1F6A;
@@ -4492,22 +4492,22 @@ fTileMapUnknown_82A5FB:
     SEP #$20                                                   ;82A5FB|E220    |      ;
     REP #$10                                                   ;82A5FD|C210    |      ;
     LDA.B #$00                                                 ;82A5FF|A900    |      ;
-    XBA                                                        ;82A601|EB      |      ;
+    XBA                                                        ;82A601|EB      |      ; B <-> A
     LDA.B nSelectedTilemapId                                   ;82A602|A522    |000022;
     CMP.B #$04                                                 ;82A604|C904    |      ;
-    BCS .not04                                                 ;82A606|B013    |82A61B;
+    BCS .notFarm                                               ;82A606|B013    |82A61B;
     REP #$20                                                   ;82A608|C220    |      ;
     LDA.W #$A4E6                                               ;82A60A|A9E6A4  |      ;
     STA.B ptrUnknown0x72                                       ;82A60D|8572    |000072;
     SEP #$20                                                   ;82A60F|E220    |      ;
     LDA.B #$7E                                                 ;82A611|A97E    |      ;
-    STA.B ptrUnknown0x72+2                                     ;82A613|8574    |000074;
+    STA.B ptrUnknown0x72+2                                     ;82A613|8574    |000074; $72 = 0x7EA4E6
     LDX.W #$0000                                               ;82A615|A20000  |      ;
     PHX                                                        ;82A618|DA      |      ;
     BRA .label2                                                ;82A619|801A    |82A635;
  
  
-.not04:
+.notFarm:
     SEP #$20                                                   ;82A61B|E220    |      ;
     ASL A                                                      ;82A61D|0A      |      ;
     CLC                                                        ;82A61E|18      |      ;
@@ -4538,7 +4538,7 @@ fTileMapUnknown_82A5FB:
  
   - TYX                                                        ;82A64D|BB      |      ; copy data
     LDA.B [ptrUnknown0x72],Y                                   ;82A64E|B772    |000072;
-    STA.W $09B6,X                                              ;82A650|9DB609  |0009B6;
+    STA.W sCurrentMapTilemap,X                                 ;82A650|9DB609  |0009B6;
     INY                                                        ;82A653|C8      |      ;
     CPY.W #$1000                                               ;82A654|C00010  |      ;
     BNE -                                                      ;82A657|D0F4    |82A64D;
@@ -4560,7 +4560,7 @@ fTileMapUnknown_82A65A:
  
   - TYX                                                        ;82A674|BB      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;82A675|B772    |000072;
-    STA.L sSelectedTilemap,X                                   ;82A677|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A677|9FE6A47E|7EA4E6;
     INY                                                        ;82A67B|C8      |      ;
     CPY.W #$1000                                               ;82A67C|C00010  |      ;
     BNE -                                                      ;82A67F|D0F3    |82A674;
@@ -4580,7 +4580,7 @@ fTileMapUnknown_82A682:
 .loop:
     TYX                                                        ;82A694|BB      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;82A695|B772    |000072;
-    STA.L sSelectedTilemap,X                                   ;82A697|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A697|9FE6A47E|7EA4E6;
     INY                                                        ;82A69B|C8      |      ;
     CPY.W #$1000                                               ;82A69C|C00010  |      ;
     BNE .loop                                                  ;82A69F|D0F3    |82A694;
@@ -4594,7 +4594,7 @@ fUnknown_82A6A2:
     CMP.B #$03                                                 ;82A6AA|C903    |      ;
     BNE .return                                                ;82A6AC|D064    |82A712;
     LDA.B #$04                                                 ;82A6AE|A904    |      ;
-    STA.W $0181                                                ;82A6B0|8D8101  |000181;
+    STA.W nCurrentMapdata0181                                  ;82A6B0|8D8101  |000181;
     REP #$20                                                   ;82A6B3|C220    |      ;
     LDY.W #$0000                                               ;82A6B5|A00000  |      ;
  
@@ -4608,7 +4608,7 @@ fUnknown_82A6A2:
     STY.B $84                                                  ;82A6BF|8484    |000084;
     JSR.W fUnknown_82B13C                                      ;82A6C1|203CB1  |82B13C;
     SEP #$20                                                   ;82A6C4|E220    |      ;
-    LDA.L sSelectedTilemap,X                                   ;82A6C6|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A6C6|BFE6A47E|7EA4E6;
     BNE +                                                      ;82A6CA|D003    |82A6CF;
     JMP.W .label7                                              ;82A6CC|4CF2A6  |82A6F2;
  
@@ -4628,14 +4628,14 @@ fUnknown_82A6A2:
 .label5:
     SEP #$20                                                   ;82A6E0|E220    |      ;
     LDA.B #$7A                                                 ;82A6E2|A97A    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A6E4|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A6E4|9FE6A47E|7EA4E6;
     BRA .label7                                                ;82A6E8|8008    |82A6F2;
  
  
 .label6:
     SEP #$20                                                   ;82A6EA|E220    |      ;
     LDA.B #$07                                                 ;82A6EC|A907    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A6EE|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A6EE|9FE6A47E|7EA4E6;
  
 .label7:
     REP #$30                                                   ;82A6F2|C230    |      ;
@@ -4671,7 +4671,7 @@ fUnknown_82A713:
     STY.B $8A                                                  ;82A719|848A    |00008A;
     SEP #$20                                                   ;82A71B|E220    |      ;
     LDA.B #$04                                                 ;82A71D|A904    |      ;
-    STA.W $0181                                                ;82A71F|8D8101  |000181;
+    STA.W nCurrentMapdata0181                                  ;82A71F|8D8101  |000181;
     REP #$20                                                   ;82A722|C220    |      ;
     LDY.W #$0000                                               ;82A724|A00000  |      ;
  
@@ -4685,7 +4685,7 @@ fUnknown_82A713:
     STY.B $84                                                  ;82A72E|8484    |000084;
     JSR.W fUnknown_82B13C                                      ;82A730|203CB1  |82B13C;
     SEP #$20                                                   ;82A733|E220    |      ;
-    LDA.L sSelectedTilemap,X                                   ;82A735|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A735|BFE6A47E|7EA4E6;
     CMP.B #$A0                                                 ;82A739|C9A0    |      ;
     BCC +                                                      ;82A73B|9003    |82A740;
     JMP.W .label7                                              ;82A73D|4CF0A7  |82A7F0;
@@ -4724,7 +4724,7 @@ fUnknown_82A713:
     CMP.B #$00                                                 ;82A771|C900    |      ;
     BNE .label7                                                ;82A773|D07B    |82A7F0;
     LDA.B #$06                                                 ;82A775|A906    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A777|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A777|9FE6A47E|7EA4E6;
     BRA .label7                                                ;82A77B|8073    |82A7F0;
  
  
@@ -4745,7 +4745,7 @@ fUnknown_82A713:
     CMP.B #$00                                                 ;82A794|C900    |      ;
     BNE .label7                                                ;82A796|D058    |82A7F0;
     LDA.B #$02                                                 ;82A798|A902    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A79A|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A79A|9FE6A47E|7EA4E6;
     REP #$20                                                   ;82A79E|C220    |      ;
     LDA.L nPlantedGrassCount                                   ;82A7A0|AF291F7F|7F1F29;
     BEQ .label7                                                ;82A7A4|F04A    |82A7F0;
@@ -4774,7 +4774,7 @@ fUnknown_82A713:
     CMP.B #$00                                                 ;82A7C8|C900    |      ;
     BNE .label7                                                ;82A7CA|D024    |82A7F0;
     LDA.B #$02                                                 ;82A7CC|A902    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A7CE|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A7CE|9FE6A47E|7EA4E6;
     BRA .label7                                                ;82A7D2|801C    |82A7F0;
  
  
@@ -4790,7 +4790,7 @@ fUnknown_82A713:
     CMP.B #$00                                                 ;82A7E4|C900    |      ;
     BNE .label7                                                ;82A7E6|D008    |82A7F0;
     LDA.B #$02                                                 ;82A7E8|A902    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A7EA|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A7EA|9FE6A47E|7EA4E6;
     BRA .label7                                                ;82A7EE|8000    |82A7F0;
  
  
@@ -4824,7 +4824,7 @@ fUnknown_82A811:
     SEP #$20                                                   ;82A811|E220    |      ;
     REP #$10                                                   ;82A813|C210    |      ;
     LDA.B #$04                                                 ;82A815|A904    |      ;
-    STA.W $0181                                                ;82A817|8D8101  |000181;
+    STA.W nCurrentMapdata0181                                  ;82A817|8D8101  |000181;
     REP #$20                                                   ;82A81A|C220    |      ;
     LDY.W #$0000                                               ;82A81C|A00000  |      ;
  
@@ -4838,7 +4838,7 @@ fUnknown_82A811:
     STY.B $84                                                  ;82A826|8484    |000084;
     JSR.W fUnknown_82B13C                                      ;82A828|203CB1  |82B13C;
     SEP #$20                                                   ;82A82B|E220    |      ;
-    LDA.L sSelectedTilemap,X                                   ;82A82D|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A82D|BFE6A47E|7EA4E6;
     BNE +                                                      ;82A831|D003    |82A836;
     JMP.W .label9                                              ;82A833|4C69A9  |82A969;
  
@@ -4921,7 +4921,7 @@ fUnknown_82A811:
  
 .label1:
     REP #$20                                                   ;82A8A4|C220    |      ;
-    LDA.W $0196                                                ;82A8A6|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82A8A6|AD9601  |000196;
     AND.W #$0002                                               ;82A8A9|290200  |      ;
     BEQ +                                                      ;82A8AC|F003    |82A8B1;
     JMP.W .label6                                              ;82A8AE|4C06A9  |82A906;
@@ -4932,23 +4932,23 @@ fUnknown_82A811:
  
 .label2:
     REP #$20                                                   ;82A8B4|C220    |      ;
-    LDA.W $0196                                                ;82A8B6|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82A8B6|AD9601  |000196;
     AND.W #$0002                                               ;82A8B9|290200  |      ;
     BEQ +                                                      ;82A8BC|F003    |82A8C1;
     JMP.W .label9                                              ;82A8BE|4C69A9  |82A969;
  
  
   + SEP #$20                                                   ;82A8C1|E220    |      ;
-    LDA.L sSelectedTilemap,X                                   ;82A8C3|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A8C3|BFE6A47E|7EA4E6;
     DEC A                                                      ;82A8C7|3A      |      ;
-    STA.L sSelectedTilemap,X                                   ;82A8C8|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A8C8|9FE6A47E|7EA4E6;
     JMP.W .label9                                              ;82A8CC|4C69A9  |82A969;
  
  
 .label3:
     SEP #$20                                                   ;82A8CF|E220    |      ;
     LDA.B #$73                                                 ;82A8D1|A973    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A8D3|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A8D3|9FE6A47E|7EA4E6;
     JMP.W .label9                                              ;82A8D7|4C69A9  |82A969;
  
  
@@ -4957,9 +4957,9 @@ fUnknown_82A811:
     LDA.L nCurrentSeasonID                                     ;82A8DC|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;82A8E0|C902    |      ;
     BNE .label5                                                ;82A8E2|D00C    |82A8F0;
-    LDA.L sSelectedTilemap,X                                   ;82A8E4|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A8E4|BFE6A47E|7EA4E6;
     DEC A                                                      ;82A8E8|3A      |      ;
-    STA.L sSelectedTilemap,X                                   ;82A8E9|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A8E9|9FE6A47E|7EA4E6;
     JMP.W .label9                                              ;82A8ED|4C69A9  |82A969;
  
  
@@ -4968,9 +4968,9 @@ fUnknown_82A811:
     LDA.L nCurrentSeasonID                                     ;82A8F2|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;82A8F6|C903    |      ;
     BEQ .label9                                                ;82A8F8|F06F    |82A969;
-    LDA.L sSelectedTilemap,X                                   ;82A8FA|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A8FA|BFE6A47E|7EA4E6;
     INC A                                                      ;82A8FE|1A      |      ;
-    STA.L sSelectedTilemap,X                                   ;82A8FF|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A8FF|9FE6A47E|7EA4E6;
     JMP.W .label1                                              ;82A903|4CA4A8  |82A8A4;
  
  
@@ -4979,9 +4979,9 @@ fUnknown_82A811:
     LDA.L nCurrentSeasonID                                     ;82A908|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;82A90C|C903    |      ;
     BEQ .label9                                                ;82A90E|F059    |82A969;
-    LDA.L sSelectedTilemap,X                                   ;82A910|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A910|BFE6A47E|7EA4E6;
     INC A                                                      ;82A914|1A      |      ;
-    STA.L sSelectedTilemap,X                                   ;82A915|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A915|9FE6A47E|7EA4E6;
     BRA .label9                                                ;82A919|804E    |82A969;
  
  
@@ -5004,7 +5004,7 @@ fUnknown_82A811:
     CMP.B #$00                                                 ;82A93D|C900    |      ;
     BNE .label9                                                ;82A93F|D028    |82A969;
     LDA.B #$03                                                 ;82A941|A903    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A943|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A943|9FE6A47E|7EA4E6;
     BRA .label9                                                ;82A947|8020    |82A969;
  
  
@@ -5014,9 +5014,9 @@ fUnknown_82A811:
     JSL.L fRollRNG                                             ;82A94D|22F98980|8089F9;
     BNE .label9                                                ;82A951|D016    |82A969;
     REP #$20                                                   ;82A953|C220    |      ;
-    LDA.W $0196                                                ;82A955|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82A955|AD9601  |000196;
     ORA.W #$0400                                               ;82A958|090004  |      ;
-    STA.W $0196                                                ;82A95B|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;82A95B|8D9601  |000196;
     LDA.L $7F1F6E                                              ;82A95E|AF6E1F7F|7F1F6E;
     ORA.W #$0200                                               ;82A962|090002  |      ;
     STA.L $7F1F6E                                              ;82A965|8F6E1F7F|7F1F6E;
@@ -5060,7 +5060,7 @@ fUnknown_82A9A0:
     SEP #$20                                                   ;82A9A0|E220    |      ;
     REP #$10                                                   ;82A9A2|C210    |      ;
     LDA.B #$04                                                 ;82A9A4|A904    |      ;
-    STA.W $0181                                                ;82A9A6|8D8101  |000181;
+    STA.W nCurrentMapdata0181                                  ;82A9A6|8D8101  |000181;
     REP #$20                                                   ;82A9A9|C220    |      ;
     STZ.W $092E                                                ;82A9AB|9C2E09  |00092E;
     LDY.W #$0000                                               ;82A9AE|A00000  |      ;
@@ -5075,7 +5075,7 @@ fUnknown_82A9A0:
     STY.B $84                                                  ;82A9B8|8484    |000084;
     JSR.W fUnknown_82B13C                                      ;82A9BA|203CB1  |82B13C;
     SEP #$20                                                   ;82A9BD|E220    |      ;
-    LDA.L sSelectedTilemap,X                                   ;82A9BF|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82A9BF|BFE6A47E|7EA4E6;
     CMP.B #$76                                                 ;82A9C3|C976    |      ;
     BEQ .label13                                               ;82A9C5|F00E    |82A9D5;
     CMP.B #$77                                                 ;82A9C7|C977    |      ;
@@ -5090,7 +5090,7 @@ fUnknown_82A9A0:
 .label13:
     SEP #$20                                                   ;82A9D5|E220    |      ;
     LDA.B #$7A                                                 ;82A9D7|A97A    |      ;
-    STA.L sSelectedTilemap,X                                   ;82A9D9|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82A9D9|9FE6A47E|7EA4E6;
     REP #$20                                                   ;82A9DD|C220    |      ;
     LDA.W $092E                                                ;82A9DF|AD2E09  |00092E;
     INC A                                                      ;82A9E2|1A      |      ;
@@ -5128,7 +5128,7 @@ fUnknown_82AA0C:
     SEP #$20                                                   ;82AA0C|E220    |      ;
     REP #$10                                                   ;82AA0E|C210    |      ;
     LDA.B #$04                                                 ;82AA10|A904    |      ;
-    STA.W $0181                                                ;82AA12|8D8101  |000181;
+    STA.W nCurrentMapdata0181                                  ;82AA12|8D8101  |000181;
     REP #$20                                                   ;82AA15|C220    |      ;
     LDA.W #$0000                                               ;82AA17|A90000  |      ;
     STA.L nRanchDevelopmentRate                                ;82AA1A|8F561F7F|7F1F56;
@@ -5144,7 +5144,7 @@ fUnknown_82AA0C:
     STY.B $84                                                  ;82AA28|8484    |000084;
     JSR.W fUnknown_82B13C                                      ;82AA2A|203CB1  |82B13C;
     SEP #$20                                                   ;82AA2D|E220    |      ;
-    LDA.L sSelectedTilemap,X                                   ;82AA2F|BFE6A47E|7EA4E6;
+    LDA.L sFarmTilemap,X                                       ;82AA2F|BFE6A47E|7EA4E6;
     CMP.B #$A0                                                 ;82AA33|C9A0    |      ;
     BCS .label18                                               ;82AA35|B019    |82AA50;
     CMP.B #$05                                                 ;82AA37|C905    |      ;
@@ -5803,7 +5803,7 @@ fUnknown_82AD0E:
     AND.B #$80                                                 ;82AE71|2980    |      ;
     BEQ .justReturn                                            ;82AE73|F070    |82AEE5;
     REP #$20                                                   ;82AE75|C220    |      ;
-    LDA.W $0196                                                ;82AE77|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82AE77|AD9601  |000196;
     AND.W #$0010                                               ;82AE7A|291000  |      ;
     BEQ .justReturn                                            ;82AE7D|F066    |82AEE5;
     BRA .label2                                                ;82AE7F|8000    |82AE81;
@@ -5904,7 +5904,7 @@ fUnknown_82AF00:
     JSR.W fUnknown_82B13C                                      ;82AF0E|203CB1  |82B13C;
     SEP #$20                                                   ;82AF11|E220    |      ;
     REP #$10                                                   ;82AF13|C210    |      ;
-    LDA.W $09B6,X                                              ;82AF15|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AF15|BDB609  |0009B6;
     BNE +                                                      ;82AF18|D003    |82AF1D;
     JMP.W .caseA0                                              ;82AF1A|4C09B0  |82B009;
  
@@ -5933,7 +5933,7 @@ fUnknown_82AF00:
     TAX                                                        ;82AF3C|AA      |      ;
     SEP #$20                                                   ;82AF3D|E220    |      ;
     REP #$10                                                   ;82AF3F|C210    |      ;
-    LDA.W $09B6,X                                              ;82AF41|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AF41|BDB609  |0009B6;
     PLX                                                        ;82AF44|FA      |      ;
     CMP.B #$73                                                 ;82AF45|C973    |      ;
     BCC +                                                      ;82AF47|900D    |82AF56;
@@ -5952,7 +5952,7 @@ fUnknown_82AF00:
     TAX                                                        ;82AF5E|AA      |      ;
     SEP #$20                                                   ;82AF5F|E220    |      ;
     REP #$10                                                   ;82AF61|C210    |      ;
-    LDA.W $09B6,X                                              ;82AF63|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AF63|BDB609  |0009B6;
     PLX                                                        ;82AF66|FA      |      ;
     CMP.B #$73                                                 ;82AF67|C973    |      ;
     BCC +                                                      ;82AF69|900D    |82AF78;
@@ -5971,7 +5971,7 @@ fUnknown_82AF00:
     TAX                                                        ;82AF80|AA      |      ;
     SEP #$20                                                   ;82AF81|E220    |      ;
     REP #$10                                                   ;82AF83|C210    |      ;
-    LDA.W $09B6,X                                              ;82AF85|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AF85|BDB609  |0009B6;
     PLX                                                        ;82AF88|FA      |      ;
     CMP.B #$73                                                 ;82AF89|C973    |      ;
     BCC +                                                      ;82AF8B|900D    |82AF9A;
@@ -5990,7 +5990,7 @@ fUnknown_82AF00:
     TAX                                                        ;82AFA2|AA      |      ;
     SEP #$20                                                   ;82AFA3|E220    |      ;
     REP #$10                                                   ;82AFA5|C210    |      ;
-    LDA.W $09B6,X                                              ;82AFA7|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AFA7|BDB609  |0009B6;
     PLX                                                        ;82AFAA|FA      |      ;
     CMP.B #$73                                                 ;82AFAB|C973    |      ;
     BCC +                                                      ;82AFAD|900D    |82AFBC;
@@ -6013,7 +6013,7 @@ fUnknown_82AF00:
     SEP #$20                                                   ;82AFCC|E220    |      ;
     LDA.B #$00                                                 ;82AFCE|A900    |      ;
     XBA                                                        ;82AFD0|EB      |      ;
-    LDA.W $09B6,X                                              ;82AFD1|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AFD1|BDB609  |0009B6;
     REP #$20                                                   ;82AFD4|C220    |      ;
     ASL A                                                      ;82AFD6|0A      |      ;
     ASL A                                                      ;82AFD7|0A      |      ;
@@ -6032,7 +6032,7 @@ fUnknown_82AF00:
     REP #$10                                                   ;82AFE7|C210    |      ;
     LDA.B #$00                                                 ;82AFE9|A900    |      ;
     XBA                                                        ;82AFEB|EB      |      ;
-    LDA.W $09B6,X                                              ;82AFEC|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82AFEC|BDB609  |0009B6;
     REP #$20                                                   ;82AFEF|C220    |      ;
     ASL A                                                      ;82AFF1|0A      |      ;
     ASL A                                                      ;82AFF2|0A      |      ;
@@ -6086,7 +6086,7 @@ fUnknown_82B03A:
     JSR.W fUnknown_82B13C                                      ;82B03F|203CB1  |82B13C;
     SEP #$20                                                   ;82B042|E220    |      ;
     PLA                                                        ;82B044|68      |      ;
-    STA.W $09B6,X                                              ;82B045|9DB609  |0009B6;
+    STA.W sCurrentMapTilemap,X                                 ;82B045|9DB609  |0009B6;
     RTL                                                        ;82B048|6B      |      ;
  
  
@@ -6095,13 +6095,13 @@ fUnknown_82B049:
     REP #$10                                                   ;82B04B|C210    |      ;
     PHA                                                        ;82B04D|48      |      ;
     LDA.B #$04                                                 ;82B04E|A904    |      ;
-    STA.W $0181                                                ;82B050|8D8101  |000181;
+    STA.W nCurrentMapdata0181                                  ;82B050|8D8101  |000181;
     PLA                                                        ;82B053|68      |      ;
     PHA                                                        ;82B054|48      |      ;
     JSR.W fUnknown_82B13C                                      ;82B055|203CB1  |82B13C;
     SEP #$20                                                   ;82B058|E220    |      ;
     PLA                                                        ;82B05A|68      |      ;
-    STA.L sSelectedTilemap,X                                   ;82B05B|9FE6A47E|7EA4E6;
+    STA.L sFarmTilemap,X                                       ;82B05B|9FE6A47E|7EA4E6;
     RTL                                                        ;82B05F|6B      |      ;
  
  
@@ -6142,7 +6142,7 @@ fUnknown_82B060:
     SEP #$20                                                   ;82B091|E220    |      ;
     REP #$10                                                   ;82B093|C210    |      ;
     LDA.B $99                                                  ;82B095|A599    |000099;
-    STA.W $09B6,X                                              ;82B097|9DB609  |0009B6;
+    STA.W sCurrentMapTilemap,X                                 ;82B097|9DB609  |0009B6;
     PLX                                                        ;82B09A|FA      |      ;
     INX                                                        ;82B09B|E8      |      ;
     CPX.B $86                                                  ;82B09C|E486    |000086;
@@ -6242,7 +6242,7 @@ fUnknown_82B124:
     REP #$30                                                   ;82B124|C230    |      ;
     JSR.W fUnknown_82B13C                                      ;82B126|203CB1  |82B13C;
     SEP #$20                                                   ;82B129|E220    |      ;
-    LDA.W $09B6,X                                              ;82B12B|BDB609  |0009B6;
+    LDA.W sCurrentMapTilemap,X                                 ;82B12B|BDB609  |0009B6;
     RTL                                                        ;82B12E|6B      |      ;
  
  
@@ -6269,7 +6269,7 @@ fUnknown_82B13C:
     AND.W #$FFF0                                               ;82B146|29F0FF  |      ;
     STA.B $80                                                  ;82B149|8580    |000080;
     SEP #$20                                                   ;82B14B|E220    |      ;
-    LDA.W $0181                                                ;82B14D|AD8101  |000181;
+    LDA.W nCurrentMapdata0181                                  ;82B14D|AD8101  |000181;
     CMP.B #$01                                                 ;82B150|C901    |      ;
     BEQ +                                                      ;82B152|F017    |82B16B;
     REP #$20                                                   ;82B154|C220    |      ;
@@ -6277,7 +6277,7 @@ fUnknown_82B13C:
     ASL A                                                      ;82B158|0A      |      ;
     STA.B $80                                                  ;82B159|8580    |000080;
     SEP #$20                                                   ;82B15B|E220    |      ;
-    LDA.W $0181                                                ;82B15D|AD8101  |000181;
+    LDA.W nCurrentMapdata0181                                  ;82B15D|AD8101  |000181;
     CMP.B #$02                                                 ;82B160|C902    |      ;
     BEQ +                                                      ;82B162|F007    |82B16B;
     REP #$20                                                   ;82B164|C220    |      ;
@@ -6294,80 +6294,80 @@ fUnknown_82B13C:
  
  
 pTileMap1Table:
-    dl sTileMap1_0x01                                          ;82B174|        |A78000; 0x60 * [ptr24]
-    dl sTileMap1_0x01                                          ;82B177|        |A78000;
-    dl sTileMap1_0x01                                          ;82B17A|        |A78000;
-    dl sTileMap1_0x01                                          ;82B17D|        |A78000;
-    dl sTileMap1_0x07                                          ;82B180|        |A79600;
-    dl sTileMap1_0x07                                          ;82B183|        |A79600;
-    dl sTileMap1_0x07                                          ;82B186|        |A79600;
-    dl sTileMap1_0x07                                          ;82B189|        |A79600;
-    dl sTileMap1_0x1E                                          ;82B18C|        |A7F000;
-    dl sTileMap1_0x1C                                          ;82B18F|        |A7DC00;
-    dl sTileMap1_0x1B                                          ;82B192|        |A7D800;
-    dl sTileMap1_0x1D                                          ;82B195|        |A7E000;
-    dl sTileMap1_0x05                                          ;82B198|        |A79400;
-    dl sTileMap1_0x05                                          ;82B19B|        |A79400;
-    dl sTileMap1_0x05                                          ;82B19E|        |A79400;
-    dl sTileMap1_0x05                                          ;82B1A1|        |A79400;
-    dl sTileMap1_0x09                                          ;82B1A4|        |A7A600;
-    dl sTileMap1_0x09                                          ;82B1A7|        |A7A600;
-    dl sTileMap1_0x09                                          ;82B1AA|        |A7A600;
-    dl sTileMap1_0x09                                          ;82B1AD|        |A7A600;
-    dl sTileMap1_0x1F                                          ;82B1B0|        |A7F400;
-    dl sTileMap1_0x02                                          ;82B1B3|        |A79000;
-    dl sTileMap1_0x03                                          ;82B1B6|        |A79100;
-    dl sTileMap1_0x04                                          ;82B1B9|        |A79200;
-    dl sTileMap1_0x11                                          ;82B1BC|        |A7C300;
-    dl sTileMap1_0x11                                          ;82B1BF|        |A7C300;
-    dl sTileMap1_0x11                                          ;82B1C2|        |A7C300;
-    dl sTileMap1_0x12                                          ;82B1C5|        |A7C700;
-    dl sTileMap1_0x13                                          ;82B1C8|        |A7C900;
-    dl sTileMap1_0x13                                          ;82B1CB|        |A7C900;
-    dl sTileMap1_0x14                                          ;82B1CE|        |A7CB00;
-    dl sTileMap1_0x14                                          ;82B1D1|        |A7CB00;
-    dl sTileMap1_0x15                                          ;82B1D4|        |A7CD00;
-    dl sTileMap1_0x15                                          ;82B1D7|        |A7CD00;
-    dl sTileMap1_0x16                                          ;82B1DA|        |A7CF00;
-    dl sTileMap1_0x16                                          ;82B1DD|        |A7CF00;
-    dl sTileMap1_0x18                                          ;82B1E0|        |A7D100;
-    dl sTileMap1_0x19                                          ;82B1E3|        |A7D200;
-    dl sTileMap1_0x06                                          ;82B1E6|        |A79500;
-    dl sTileMap1_0x0B                                          ;82B1E9|        |A7B600;
-    dl sTileMap1_0x0C                                          ;82B1EC|        |A7B800;
-    dl sTileMap1_0x0E                                          ;82B1EF|        |A7BC00;
-    dl sTileMap1_0x0D                                          ;82B1F2|        |A7B900;
-    dl sTileMap1_0x0F                                          ;82B1F5|        |A7C000;
-    dl sTileMap1_0x1A                                          ;82B1F8|        |A7D300;
+    dl sTileMap1_0x00                                          ;82B174|        |A78000; 0x60 * [ptr24]
+    dl sTileMap1_0x00                                          ;82B177|        |A78000;
+    dl sTileMap1_0x00                                          ;82B17A|        |A78000;
+    dl sTileMap1_0x00                                          ;82B17D|        |A78000;
+    dl sTileMap1_0x06                                          ;82B180|        |A79600;
+    dl sTileMap1_0x06                                          ;82B183|        |A79600;
+    dl sTileMap1_0x06                                          ;82B186|        |A79600;
+    dl sTileMap1_0x06                                          ;82B189|        |A79600;
+    dl sTileMap1_0x1D                                          ;82B18C|        |A7F000;
+    dl sTileMap1_0x1B                                          ;82B18F|        |A7DC00;
+    dl sTileMap1_0x1A                                          ;82B192|        |A7D800;
+    dl sTileMap1_0x1C                                          ;82B195|        |A7E000;
+    dl sTileMap1_0x04                                          ;82B198|        |A79400;
+    dl sTileMap1_0x04                                          ;82B19B|        |A79400;
+    dl sTileMap1_0x04                                          ;82B19E|        |A79400;
+    dl sTileMap1_0x04                                          ;82B1A1|        |A79400;
+    dl sTileMap1_0x08                                          ;82B1A4|        |A7A600;
+    dl sTileMap1_0x08                                          ;82B1A7|        |A7A600;
+    dl sTileMap1_0x08                                          ;82B1AA|        |A7A600;
+    dl sTileMap1_0x08                                          ;82B1AD|        |A7A600;
+    dl sTileMap1_0x1E                                          ;82B1B0|        |A7F400;
+    dl sTileMap1_0x01                                          ;82B1B3|        |A79000;
+    dl sTileMap1_0x02                                          ;82B1B6|        |A79100;
+    dl sTileMap1_0x03                                          ;82B1B9|        |A79200;
+    dl sTileMap1_0x10                                          ;82B1BC|        |A7C300;
+    dl sTileMap1_0x10                                          ;82B1BF|        |A7C300;
+    dl sTileMap1_0x10                                          ;82B1C2|        |A7C300;
+    dl sTileMap1_0x11                                          ;82B1C5|        |A7C700;
+    dl sTileMap1_0x12                                          ;82B1C8|        |A7C900;
+    dl sTileMap1_0x12                                          ;82B1CB|        |A7C900;
+    dl sTileMap1_0x13                                          ;82B1CE|        |A7CB00;
+    dl sTileMap1_0x13                                          ;82B1D1|        |A7CB00;
+    dl sTileMap1_0x14                                          ;82B1D4|        |A7CD00;
+    dl sTileMap1_0x14                                          ;82B1D7|        |A7CD00;
+    dl sTileMap1_0x15                                          ;82B1DA|        |A7CF00;
+    dl sTileMap1_0x15                                          ;82B1DD|        |A7CF00;
+    dl sTileMap1_0x17                                          ;82B1E0|        |A7D100;
+    dl sTileMap1_0x18                                          ;82B1E3|        |A7D200;
+    dl sTileMap1_0x05                                          ;82B1E6|        |A79500;
+    dl sTileMap1_0x0A                                          ;82B1E9|        |A7B600;
+    dl sTileMap1_0x0B                                          ;82B1EC|        |A7B800;
+    dl sTileMap1_0x0D                                          ;82B1EF|        |A7BC00;
+    dl sTileMap1_0x0C                                          ;82B1F2|        |A7B900;
+    dl sTileMap1_0x0E                                          ;82B1F5|        |A7C000;
+    dl sTileMap1_0x19                                          ;82B1F8|        |A7D300;
     dl EMPTY_FFFFFF                                            ;82B1FB|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B1FE|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B201|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B204|        |FFFFFF;
-    dl sTileMap1_0x10                                          ;82B207|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B20A|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B20D|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B210|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B213|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B216|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B219|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B21C|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B21F|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B222|        |A7C100;
-    dl sTileMap1_0x10                                          ;82B225|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B207|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B20A|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B20D|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B210|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B213|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B216|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B219|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B21C|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B21F|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B222|        |A7C100;
+    dl sTileMap1_0x0F                                          ;82B225|        |A7C100;
     dl EMPTY_FFFFFF                                            ;82B228|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B22B|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B22E|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B231|        |FFFFFF;
-    dl sTileMap1_0x20                                          ;82B234|        |A7F700;
+    dl sTileMap1_0x1F                                          ;82B234|        |A7F700;
     dl EMPTY_FFFFFF                                            ;82B237|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B23A|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B23D|        |FFFFFF;
-    dl sTileMap1_0x21                                          ;82B240|        |A7F800;
-    dl sTileMap1_0x22                                          ;82B243|        |A7F900;
-    dl sTileMap1_0x23                                          ;82B246|        |A7FA00;
-    dl sTileMap1_0x25                                          ;82B249|        |A7FB00;
+    dl sTileMap1_0x20                                          ;82B240|        |A7F800;
+    dl sTileMap1_0x21                                          ;82B243|        |A7F900;
+    dl sTileMap1_0x22                                          ;82B246|        |A7FA00;
+    dl sTileMap1_0x23                                          ;82B249|        |A7FB00;
     dl EMPTY_FFFFFF                                            ;82B24C|        |FFFFFF;
-    dl sTileMap1_0x26                                          ;82B24F|        |A7FC00;
+    dl sTileMap1_0x24                                          ;82B24F|        |A7FC00;
     dl EMPTY_FFFFFF                                            ;82B252|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B255|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B258|        |FFFFFF;
@@ -8166,7 +8166,7 @@ fUnknown_82DAF5:
     STZ.B nPlayerPosY                                          ;82DB41|64D8    |0000D8;
     STZ.W nDestinationX                                        ;82DB43|9C7D01  |00017D;
     STZ.W nDestinationY                                        ;82DB46|9C7F01  |00017F;
-    STZ.W $0196                                                ;82DB49|9C9601  |000196;
+    STZ.W nCurrentMapdata0196                                  ;82DB49|9C9601  |000196;
     SEP #$20                                                   ;82DB4C|E220    |      ;
     LDA.B #$5B                                                 ;82DB4E|A95B    |      ;
     STA.B nSelectedTilemapId                                   ;82DB50|8522    |000022;
@@ -8223,7 +8223,7 @@ fUnknown_82DBB2:
     STZ.B nPlayerPosY                                          ;82DBC4|64D8    |0000D8;
     STZ.W nDestinationX                                        ;82DBC6|9C7D01  |00017D;
     STZ.W nDestinationY                                        ;82DBC9|9C7F01  |00017F;
-    STZ.W $0196                                                ;82DBCC|9C9601  |000196;
+    STZ.W nCurrentMapdata0196                                  ;82DBCC|9C9601  |000196;
     JSL.L fTileMap_80A7C6                                      ;82DBCF|22C6A780|80A7C6;
     JSL.L fUnknown_83841F                                      ;82DBD3|221F8483|83841F;
     JSL.L fUnknown_8383A4                                      ;82DBD7|22A48383|8383A4;
@@ -8616,7 +8616,7 @@ fUnknown_82DEC5:
     STZ.B nPlayerPosY                                          ;82DF05|64D8    |0000D8;
     STZ.W nDestinationX                                        ;82DF07|9C7D01  |00017D;
     STZ.W nDestinationY                                        ;82DF0A|9C7F01  |00017F;
-    STZ.W $0196                                                ;82DF0D|9C9601  |000196;
+    STZ.W nCurrentMapdata0196                                  ;82DF0D|9C9601  |000196;
     SEP #$20                                                   ;82DF10|E220    |      ;
     LDA.B #$5B                                                 ;82DF12|A95B    |      ;
     STA.B nSelectedTilemapId                                   ;82DF14|8522    |000022;
@@ -9612,9 +9612,9 @@ fNamePrompt:
     JSL.L fUnknown_858ED7                                      ;82E838|22D78E85|858ED7;
     JSL.L fUnknown_85820F                                      ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
-    LDA.W $0196                                                ;82E842|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;82E842|AD9601  |000196;
     STA.W $0198                                                ;82E845|8D9801  |000198;
-    STZ.W $0196                                                ;82E848|9C9601  |000196;
+    STZ.W nCurrentMapdata0196                                  ;82E848|9C9601  |000196;
     STZ.W $0905                                                ;82E84B|9C0509  |000905;
     SEP #$20                                                   ;82E84E|E220    |      ;
     LDA.B #$05                                                 ;82E850|A905    |      ;
@@ -9775,7 +9775,7 @@ fNamePrompt:
 .nameHandler:
     REP #$20                                                   ;82E9CE|C220    |      ;
     LDA.W $0198                                                ;82E9D0|AD9801  |000198;
-    STA.W $0196                                                ;82E9D3|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
     LDA.W nNameDestinationId                                   ;82E9D8|AD9F09  |00099F;
     CMP.B #$00                                                 ;82E9DB|C900    |      ;

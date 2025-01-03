@@ -2,7 +2,7 @@
     ORG $A58000
  
  
-Data_A58000:
+sCompressedCharactermap_A58000:
     dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A58000|        |      ;
     dw $651F,$871F,$A91F,$C11F,$C114,$E204                     ;A5800C|        |      ;
     dw $E600,$D51F,$E317,$051F,$AC3C,$8C07                     ;A58018|        |      ;
@@ -294,7 +294,7 @@ Data_A58000:
     dw $28FF,$4AFF,$6CFF,$8EFF,$B0FF,$00FF                     ;A58D80|        |      ;
     dw $E7D2                                                   ;A58D8C|        |      ;
  
-DATA16_A58D8E:
+sCompressedCharactermap_A58D8E:
     dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A58D8E|        |      ;
     dw $651F,$871F,$A91F,$CB1F,$701F,$1FED                     ;A58D9A|        |      ;
     dw $3F0F,$3F31,$394E,$02EE,$71EF,$E334                     ;A58DA6|        |      ;
@@ -605,7 +605,7 @@ DATA16_A58D8E:
     dw $8C31,$7EDF,$A0DF,$C2DF,$B6D9,$90EF                     ;A59BF2|        |      ;
     dw $183B,$FF5E,$F190,$3590,$03D5                           ;A59BFE|        |      ;
  
-DATA16_A59C08:
+sCompressedCharactermap_A59C08:
     dw $1000,$0000,$DDE2,$20EA,$FFEA,$E2F0                     ;A59C08|        |      ;
     dw $F4D4,$21EE,$EEEF,$1F2B,$ED21,$D321                     ;A59C14|        |      ;
     dw $FEF5,$FF21,$6B3A,$2600,$026B,$21FF                     ;A59C20|        |      ;
@@ -833,7 +833,7 @@ DATA16_A59C08:
     dw $DE00,$0A1D,$1221,$A231,$1E45,$4A3D                     ;A5A688|        |      ;
     dw $CA21,$F85F,$007F,$7FFE,$9F3C,$41DE                     ;A5A694|        |      ;
  
-DATA16_A5A6A0:
+sCompressedCharactermap_A5A6A0:
     dw $1800,$0000,$0CFB,$DE08,$82EB,$8308                     ;A5A6A0|        |      ;
     dw $6608,$08FF,$0867,$0886,$0887,$F843                     ;A5A6AC|        |      ;
     dw $FFF9,$ECDF,$E3DE,$0876,$0877,$3C96                     ;A5A6B8|        |      ;
@@ -1041,7 +1041,7 @@ DATA16_A5A6A0:
     dw $B6E3,$00C1,$E306,$ED54,$C3E0,$EF3A                     ;A5B030|        |      ;
     dw $E52C,$F34C,$F5BE                                       ;A5B03C|        |      ;
  
-DATA16_A5B042:
+sCompressedCharactermap_A5B042:
     dw $1000,$0000,$5603,$DE10,$00FF,$221F                     ;A5B042|        |      ;
     dw $441F,$661F,$881F,$001F,$1FAA,$1FCC                     ;A5B04E|        |      ;
     dw $1FEE,$3F10,$3F32,$3F54,$3F76,$3F98                     ;A5B05A|        |      ;
@@ -1432,7 +1432,7 @@ DATA16_A5BD8A:
     dw $8520,$4F0A,$26E0,$1EE1,$26E1,$00E1                     ;A5C246|        |      ;
     dw $E146,$E152,$E126                                       ;A5C252|        |      ;
  
-DATA16_A5C258:
+sCompressedCharactermap_A5C258:
     dw $0800,$0000,$01FF,$4308,$5210,$5308                     ;A5C258|        |      ;
     dw $FC08,$FFE2,$F1F8,$4801,$0801,$1063                     ;A5C264|        |      ;
     dw $628F,$6308,$2208,$381F,$1C11,$B501                     ;A5C270|        |      ;
@@ -1673,7 +1673,7 @@ DATA16_A5C258:
     dw $B4DF,$D6DF,$00DF,$DFF8,$FF1A,$FF3C                     ;A5CD74|        |      ;
     dw $FF5E,$FF80,$FFA2,$F5C4                                 ;A5CD80|        |      ;
  
-DATA16_A5CD88:
+sCompressedCharactermap_A5CD88:
     dw $2000,$0000,$0003,$DE0C,$00FF,$221F                     ;A5CD88|        |      ;
     dw $441F,$661F,$881F,$001F,$1FAA,$1FCC                     ;A5CD94|        |      ;
     dw $1FEE,$3F10,$3F32,$3F54,$3F76,$3F98                     ;A5CDA0|        |      ;
@@ -1820,7 +1820,7 @@ DATA16_A5CD88:
     dw $F5DF,$17DF,$39FF,$5BFF,$7DFF,$00FF                     ;A5D43C|        |      ;
     dw $FF9F,$F8BB                                             ;A5D448|        |      ;
  
-DATA16_A5D44C:
+sCompressedCharactermap_A5D44C:
     dw $2000,$0000,$80FF,$B10B,$B28B,$B38B                     ;A5D44C|        |      ;
     dw $FF8B,$8B94,$8B95,$8B96,$8B97,$8CBF                     ;A5D458|        |      ;
     dw $8D8B,$808B,$F20B,$E4F3,$0BFF,$0BE5                     ;A5D464|        |      ;
@@ -1929,8 +1929,8 @@ DATA16_A5D44C:
     dw $3BD4,$FDDF,$1FDF,$45FF,$00DF,$FF63                     ;A5D938|        |      ;
     dw $FF85,$FFA7,$EEB9                                       ;A5D944|        |      ;
  
-DATA16_A5D94A:
-    dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A5D94A|        |      ;
+sCompressedCharactermap_A5D94A:
+    dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A5D94A|        |      ; HarvestMoon logo
     dw $651F,$871F,$A91F,$BD1F,$8110,$DE1C                     ;A5D956|        |      ;
     dw $DB04,$C70D,$181F,$3A3F,$DD3F,$7E0A                     ;A5D962|        |      ;
     dw $1FDF,$1F7F,$1F6E,$1DF0,$1E0E,$0FE3                     ;A5D96E|        |      ;
@@ -2043,8 +2043,8 @@ DATA16_A5D94A:
     dw $DFCC,$DFEE,$FF10,$FF32,$FF54,$FF76                     ;A5DE72|        |      ;
     dw $FF98,$FFBA,$0001                                       ;A5DE7E|        |      ;
  
-DATA16_A5DE84:
-    dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A5DE84|        |      ;
+sCompressedCharactermap_A5DE84:
+    dw $2000,$0000,$BC00,$FFFF,$21FF,$431F                     ;A5DE84|        |      ; Natsume logo
     dw $651F,$871F,$A91F,$CB1F,$001F,$1FED                     ;A5DE90|        |      ;
     dw $3F0F,$3F31,$3F53,$3F75,$3F97,$3FB9                     ;A5DE9C|        |      ;
     dw $3FDB,$FD00,$1F3F,$415F,$635F,$855F                     ;A5DEA8|        |      ;
@@ -2201,7 +2201,7 @@ DATA16_A5DE84:
     dw $6F85,$E0A7,$C51A,$C50A,$5E01,$8EA1                     ;A5E5BC|        |      ;
     dw $E120,$0122,$F1C6                                       ;A5E5C8|        |      ;
  
-DATA16_A5E5CE:
+sCompressedCharactermap_A5E5CE:
     dw $0800,$0000,$6EFF,$1405,$0105,$0205                     ;A5E5CE|        |      ;
     dw $FF05,$0505,$0506,$8515,$0515,$4DFF                     ;A5E5DA|        |      ;
     dw $6E45,$1085,$1136,$E736,$3612,$F313                     ;A5E5E6|        |      ;
@@ -2514,7 +2514,7 @@ DATA16_A5E5CE:
     dw $1AE0,$0AC5,$BEC5,$9F80,$1E8C,$00E1                     ;A5F44A|        |      ;
     dw $D5C6,$0156                                             ;A5F456|        |      ;
  
-DATA16_A5F45A:
+sCompressedCharactermap_A5F45A:
     dw $0800,$0000,$1403,$DE16,$00FF,$221F                     ;A5F45A|        |      ;
     dw $441F,$661F,$881F,$C01F,$1FAA,$1FCC                     ;A5F466|        |      ;
     dw $1FEE,$3F10,$3F32,$3148,$455C,$66BF                     ;A5F472|        |      ;
@@ -2623,7 +2623,7 @@ DATA16_A5F45A:
     dw $E15E,$AD62,$6E3C,$80FF,$3E23,$3F0A                     ;A5F946|        |      ;
     dw $9E0A,$A2E1,$00AD,$FFAE,$23C0                           ;A5F952|        |      ;
  
-DATA16_A5F95C:
+sCompressedCharactermap_A5F95C:
     dw $0800,$0000,$61F3,$DE05,$F0FF,$71ED                     ;A5F95C|        |      ;
     dw $E8C5,$FF05,$C5E8,$4570,$45DC,$4558                     ;A5F968|        |      ;
     dw $E9CF,$E905,$1E85,$301F,$E80B,$FF85                     ;A5F974|        |      ;
@@ -2678,7 +2678,7 @@ DATA16_A5F95C:
     dw $A6E0,$37E7,$E6B5,$E1A2,$E3A2,$E7B8                     ;A5FBC0|        |      ;
     dw $E59E                                                   ;A5FBCC|        |      ;
  
-DATA16_A5FBCE:
+sCompressedCharactermap_A5FBCE:
     dw $0800,$0000,$05FF,$0605,$1605,$1605                     ;A5FBCE|        |      ;
     dw $3C85,$E1DE,$E5DE,$0A2E,$0A2F,$E1F2                     ;A5FBDA|        |      ;
     dw $E1DE,$2CFF,$2D12,$1512,$2605,$E705                     ;A5FBE6|        |      ;

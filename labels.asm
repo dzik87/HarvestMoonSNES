@@ -3,7 +3,7 @@
     ptrUnknown0x07 = $000007; !^ ptr24 ^!
     ptrUnknown0x0A = $00000A; !^ ptr24 ^!
     ptrSelectedTileMap = $00000D; !^ ptr24 ^!
-    pTileMapData = $000018
+    pCurrentTileMapData = $000018; !^ ptr24 ^!
     nSelectedTilemapId = $000022; !^ n8 ^!
     ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
@@ -19,7 +19,11 @@
     nPaletteNextHourIndex = $00017C; !^ n8 ^!
     nDestinationX = $00017D; !^ n16 (used when we change map) ^!
     nDestinationY = $00017F; !^ n16 (used when we change map) ^!
+    nCurrentMapdata0181 = $000181; !^ n8 (offset 0x03) ^!
+    nCurrentMapdata0182 = $000182; !^ n8 (offset 0x04) ^!
     nDialogIndex = $000183; !^ n16, Current dialog index ^!
+    nCurrentMapdataPresetId = $000195; !^ n8 (oofset 0x00) ^!
+    nCurrentMapdata0196 = $000196; !^ n16 (offset 0x01) ^!
     sPlayerNameShort = $000881; !^ 4 * s8 ^!
     sTempNameVariable = $000885; !^ 4 * s8 ^!
     sDogNameShort = $000899; !^ 4 * s8 ^!
@@ -67,6 +71,7 @@
     nMenuPoxY = $00099D; !^ n16 ^!
     nNameDestinationId = $00099F; !^ n8 ^!
     nUnknown9B5 = $0009B5; !^ n8 ^!
+    sCurrentMapTilemap = $0009B6; !^ sTileMap (0x1000) ^!
     SNES_INIDISP = $002100
     SNES_OBSEL = $002101
     SNES_OAMADDL = $002102
@@ -259,7 +264,7 @@
     SNES_A2A7L = $004378
     SNES_A2A7H = $004379
     SNES_NTLR7 = $00437A
-    sSelectedTilemap = $7EA4E6; !^ sTileMap (0x1000) ^!
+    sFarmTilemap = $7EA4E6; !^ sTileMap (0x1000) ^!
     sCowDataAddress = $7EC1C6; !^ 0x0C * sChickenData (8 bytes) ^!
     sChickenDataAddress = $7EC286; !^ 0x0C * sCowData (16 bytes) ^!
     sPalette_7F0900 = $7F0900; !^ sPalette (0x200) ^!
@@ -304,7 +309,40 @@
     nPlayerFlags = $7F1F66; !^ 32bits - ???wwwww ???????? (w - wife) ^!
  
  
+ 
+ 
+ 
+ 
     Table_858C8E = $858C8E
+    sCompressedCharactermap_A48A2D = $A48A2D
+    sCompressedCharactermap_A49745 = $A49745
+    sCompressedCharactermap_A4A597 = $A4A597
+    sCompressedCharactermap_A4AA99 = $A4AA99
+    sCompressedCharactermap_A4AE95 = $A4AE95
+    sCompressedCharactermap_A4B3D1 = $A4B3D1
+    sCompressedCharactermap_A4BCC1 = $A4BCC1
+    sCompressedCharactermap_A4C065 = $A4C065
+    sCompressedCharactermap_A4CFAB = $A4CFAB
+    sCompressedCharactermap_A4D379 = $A4D379
+    sCompressedCharactermap_A58327 = $A58327
+    sCompressedCharactermap_A58B49 = $A58B49
+    sCompressedCharactermap_A5970F = $A5970F
+    sCompressedCharactermap_A59E0B = $A59E0B
+    sCompressedCharactermap_A5A3D5 = $A5A3D5
+    sCompressedCharactermap_A5AD17 = $A5AD17
+    sCompressedCharactermap_A5B361 = $A5B361
+    sCompressedCharactermap_A5B63B = $A5B63B
+    sCompressedCharactermap_A5B943 = $A5B943
+    sCompressedCharactermap_A5C4CD = $A5C4CD
+    sCompressedCharactermap_A5C955 = $A5C955
+    sCompressedCharactermap_A5E253 = $A5E253
+    sCompressedCharactermap_A5E977 = $A5E977
+    sCompressedCharactermap_A5ECFB = $A5ECFB
+    sCompressedCharactermap_A5F059 = $A5F059
+    sCompressedCharactermap_A5F671 = $A5F671
+    sCompressedCharactermap_A68229 = $A68229
+    sCompressedCharactermap_A68433 = $A68433
+    sCompressedCharactermap_A68DCF = $A68DCF
     PTR16_80FFFF = $80FFFF
     DATA16_9282CB = $9282CB
     DATA16_92BB03 = $92BB03
@@ -345,33 +383,4 @@
     DATA16_9FEF97 = $9FEF97
     DATA16_A088E9 = $A088E9
     DATA16_A0CAAF = $A0CAAF
-    DATA16_A48A2D = $A48A2D
-    DATA16_A49745 = $A49745
-    DATA16_A4A597 = $A4A597
-    DATA16_A4AA99 = $A4AA99
-    DATA16_A4AE95 = $A4AE95
-    DATA16_A4B3D1 = $A4B3D1
-    DATA16_A4BCC1 = $A4BCC1
-    DATA16_A4C065 = $A4C065
-    DATA16_A4CFAB = $A4CFAB
-    DATA16_A4D379 = $A4D379
-    DATA16_A58327 = $A58327
-    DATA16_A58B49 = $A58B49
-    DATA16_A5970F = $A5970F
-    DATA16_A59E0B = $A59E0B
-    DATA16_A5A3D5 = $A5A3D5
-    DATA16_A5AD17 = $A5AD17
-    DATA16_A5B361 = $A5B361
-    DATA16_A5B63B = $A5B63B
-    DATA16_A5B943 = $A5B943
-    DATA16_A5C4CD = $A5C4CD
-    DATA16_A5C955 = $A5C955
-    DATA16_A5E253 = $A5E253
-    DATA16_A5E977 = $A5E977
-    DATA16_A5ECFB = $A5ECFB
-    DATA16_A5F059 = $A5F059
-    DATA16_A5F671 = $A5F671
-    DATA16_A68229 = $A68229
-    DATA16_A68433 = $A68433
-    DATA16_A68DCF = $A68DCF
     EMPTY_FFFFFF = $FFFFFF
