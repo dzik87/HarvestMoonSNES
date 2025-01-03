@@ -2,8 +2,8 @@
     ORG $A48000
  
  
-Data_A48000:
-    dw $1000,$0000,$80FB,$DE23,$83E1,$8823                     ;A48000|        |      ;
+sCompressedCharactermap_A48000:
+    dw $1000,$0000,$80FB,$DE23,$83E1,$8823                     ;A48000|        |      ; Rain overlay
     dw $8923,$23FB,$DF8A,$A4E0,$A523,$A623                     ;A4800C|        |      ;
     dw $232F,$23A7,$DFAC,$AEE0,$E2DF,$FBE0                     ;A48018|        |      ;
     dw $90DD,$E0DF,$2392,$DF93,$99E0,$5D23                     ;A48024|        |      ;
@@ -40,7 +40,7 @@ Data_A48000:
     dw $90DF,$A09D,$D2DF,$E49F,$16DF,$28BF                     ;A48198|        |      ;
     dw $5AFF,$00BF,$FF6C,$7FAE,$3BC0                           ;A481A4|        |      ;
  
-DATA16_A481AE:
+sCompressedCharactermap_A481AE:
     dw $1800,$0000,$01E3,$DE24,$00FF,$081F                     ;A481AE|        |      ;
     dw $0203,$0324,$24F3,$1F04,$071F,$640B                     ;A481BA|        |      ;
     dw $641A,$FF19,$1844,$1044,$1104,$1204                     ;A481C6|        |      ;
@@ -441,7 +441,7 @@ DATA16_A481AE:
     dw $DDD5,$00DF,$DFFF,$FF21,$FF43,$FF65                     ;A4944A|        |      ;
     dw $FF87,$FFA9,$0E25                                       ;A49456|        |      ;
  
-DATA16_A4945C:
+sCompressedCharactermap_A4945C:
     dw $0800,$0000,$03C3,$DE28,$00FF,$221F                     ;A4945C|        |      ;
     dw $3C1F,$0115,$EF24,$6401,$2402,$1362                     ;A49468|        |      ;
     dw $04D8,$F1D9,$6204,$6215,$5E01,$BA01                     ;A49474|        |      ;
@@ -596,7 +596,7 @@ DATA16_A4945C:
     dw $CADF,$ECDF,$0EDF,$30FF,$52FF,$18FF                     ;A49B70|        |      ;
     dw $FF74,$FF96,$FFB8,$2803                                 ;A49B7C|        |      ;
  
-DATA16_A49B84:
+sCompressedCharactermap_A49B84:
     dw $0800,$0000,$03C3,$DE28,$00FF,$221F                     ;A49B84|        |      ;
     dw $401F,$0119,$EF24,$6401,$2402,$0F66                     ;A49B90|        |      ;
     dw $04D8,$E1D9,$6604,$6611,$6201,$4001                     ;A49B9C|        |      ;
@@ -655,7 +655,7 @@ DATA16_A49B84:
     dw $C9B4,$D600,$E009,$02DF,$24FF,$46FF                     ;A49E18|        |      ;
     dw $68FF,$8AFF,$ACFF,$00FF,$EBCE                           ;A49E24|        |      ;
  
-DATA16_A49E2E:
+sCompressedCharactermap_A49E2E:
     dw $2000,$0000,$11C3,$DE24,$00FF,$221F                     ;A49E2E|        |      ;
     dw $401F,$1019,$EFA4,$E410,$2433,$0766                     ;A49E3A|        |      ;
     dw $2892,$0793,$9424,$6628,$7809,$620F                     ;A49E46|        |      ;
@@ -1227,7 +1227,7 @@ DATA16_A49E2E:
     dw $0045,$1F3C,$DFFE,$FF20,$FF42,$FF64                     ;A4B8CE|        |      ;
     dw $FF86,$FFA8,$EFCA                                       ;A4B8DA|        |      ;
  
-DATA16_A4B8E0:
+sCompressedCharactermap_A4B8E0:
     dw $1000,$0000,$18C3,$DE05,$00FF,$221F                     ;A4B8E0|        |      ;
     dw $3C1F,$1215,$EF65,$2512,$A501,$0D62                     ;A4B8EC|        |      ;
     dw $2911,$C718,$1125,$6269,$620F,$5E0B                     ;A4B8F8|        |      ;
@@ -1464,8 +1464,8 @@ DATA16_A4B8E0:
     dw $BB00,$07C3,$DF1B,$03DF,$211F,$47FF                     ;A4C3CC|        |      ;
     dw $671F,$0BFF,$00FF,$FFA9,$EC4F                           ;A4C3D8|        |      ;
  
-DATA16_A4C3E2:
-    dw $1000,$0000,$BCF0,$FFFF,$21FF,$411F                     ;A4C3E2|        |      ;
+sCompressedCharactermap_A4C3E2:
+    dw $1000,$0000,$BCF0,$FFFF,$21FF,$411F                     ;A4C3E2|        |      ; Clouds overlay
     dw $A01C,$A000,$FF9D,$9D23,$A063,$90E3                     ;A4C3EE|        |      ;
     dw $9EE3,$67C6,$0000,$62E0,$7600,$801F                     ;A4C3FA|        |      ;
     dw $8006,$EFA3,$639A,$2392,$07A6,$E3A7                     ;A4C406|        |      ;
@@ -1509,7 +1509,7 @@ DATA16_A4C3E2:
     dw $02DF,$24FF,$46FF,$68FF,$8AFF,$ACFF                     ;A4C5CE|        |      ;
     dw $00FF,$ECCE                                             ;A4C5DA|        |      ;
  
-DATA16_A4C5DE:
+sCompressedCharactermap_A4C5DE:
     dw $2000,$0000,$70FF,$E805,$E805,$7145                     ;A4C5DE|        |      ;
     dw $8385,$0561,$FFE6,$1F08,$1F2A,$0D3C                     ;A4C5EA|        |      ;
     dw $E0DE,$FF45,$85E8,$05E8,$05E9,$85E9                     ;A4C5F6|        |      ;
@@ -1994,7 +1994,7 @@ DATA16_A4C5DE:
     dw $DFF0,$1218,$34FF,$58FF,$452C,$E968                     ;A4DC6A|        |      ;
     dw $89DF,$ABFF,$00FF,$EC4F                                 ;A4DC76|        |      ;
  
-DATA16_A4DC7E:
+sCompressedCharactermap_A4DC7E:
     dw $8000,$0000,$ED03,$DE85,$00FF,$221F                     ;A4DC7E|        |      ;
     dw $441F,$661F,$721F,$FF07,$45FA,$094C                     ;A4DC8A|        |      ;
     dw $094D,$894E,$3FCF,$0009,$9E04,$BC1F                     ;A4DC96|        |      ;

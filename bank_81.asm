@@ -2459,7 +2459,7 @@ fUnknown_8190AA:
  
  
   + REP #$20                                                   ;8190FF|C220    |      ;
-    LDA.W $0196                                                ;819101|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;819101|AD9601  |000196;
     AND.W #$0002                                               ;819104|290200  |      ;
     BEQ +                                                      ;819107|F003    |81910C;
     JMP.W fUnknown_81917E                                      ;819109|4C7E91  |81917E;
@@ -4518,7 +4518,7 @@ fUnknown_81A83A:
     LDA.W #$0040                                               ;81A854|A94000  |      ;
     STA.B $88                                                  ;81A857|8588    |000088;
     SEP #$20                                                   ;81A859|E220    |      ;
-    LDA.W $0181                                                ;81A85B|AD8101  |000181;
+    LDA.W nCurrentMapdata0181                                  ;81A85B|AD8101  |000181;
     CMP.B #$01                                                 ;81A85E|C901    |      ;
     BEQ +                                                      ;81A860|F01B    |81A87D;
     REP #$20                                                   ;81A862|C220    |      ;
@@ -4527,7 +4527,7 @@ fUnknown_81A83A:
     STA.B $80                                                  ;81A867|8580    |000080;
     ASL.B $88                                                  ;81A869|0688    |000088;
     SEP #$20                                                   ;81A86B|E220    |      ;
-    LDA.W $0181                                                ;81A86D|AD8101  |000181;
+    LDA.W nCurrentMapdata0181                                  ;81A86D|AD8101  |000181;
     CMP.B #$02                                                 ;81A870|C902    |      ;
     BEQ +                                                      ;81A872|F009    |81A87D;
     REP #$20                                                   ;81A874|C220    |      ;
@@ -5136,10 +5136,10 @@ fItemSub81A9F6_0x0F:
  
 fItemSub81A9F6_0x10to0x13:
     REP #$30                                                   ;81AC80|C230    |      ;
-    LDA.W $0196                                                ;81AC82|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81AC82|AD9601  |000196;
     AND.W #$0002                                               ;81AC85|290200  |      ;
     BNE +                                                      ;81AC88|D02D    |81ACB7;
-    LDA.W $0196                                                ;81AC8A|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81AC8A|AD9601  |000196;
     AND.W #$0008                                               ;81AC8D|290800  |      ;
     BNE +                                                      ;81AC90|D025    |81ACB7;
  
@@ -5185,7 +5185,7 @@ fItemSub81A9F6_0x14:
  
 fItemSub81A9F6_0x15:
     REP #$30                                                   ;81ACCC|C230    |      ;
-    LDA.W $0196                                                ;81ACCE|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81ACCE|AD9601  |000196;
     AND.W #$0010                                               ;81ACD1|291000  |      ;
     BEQ +                                                      ;81ACD4|F00D    |81ACE3;
     LDA.W #$00EE                                               ;81ACD6|A9EE00  |      ;
@@ -5221,7 +5221,7 @@ fItemSub81A9F6_0x15:
  
 fItemSub81A9F6_0x16:
     REP #$30                                                   ;81AD23|C230    |      ;
-    LDA.W $0196                                                ;81AD25|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81AD25|AD9601  |000196;
     AND.W #$0010                                               ;81AD28|291000  |      ;
     BEQ +                                                      ;81AD2B|F00D    |81AD3A;
     LDA.W #$00EE                                               ;81AD2D|A9EE00  |      ;
@@ -5257,7 +5257,7 @@ fItemSub81A9F6_0x16:
  
 fItemSub81A9F6_0x17:
     REP #$30                                                   ;81AD7A|C230    |      ;
-    LDA.W $0196                                                ;81AD7C|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81AD7C|AD9601  |000196;
     AND.W #$0010                                               ;81AD7F|291000  |      ;
     BEQ +                                                      ;81AD82|F00D    |81AD91;
     LDA.W #$00EE                                               ;81AD84|A9EE00  |      ;
@@ -10619,7 +10619,7 @@ subPlayerInteraction81D593_0x0F:
     ORA.W #$0100                                               ;81D729|090001  |      ;
     STA.B $D2                                                  ;81D72C|85D2    |0000D2;
     REP #$20                                                   ;81D72E|C220    |      ;
-    LDA.W $0196                                                ;81D730|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81D730|AD9601  |000196;
     AND.W #$0010                                               ;81D733|291000  |      ;
     BNE +                                                      ;81D736|D007    |81D73F;
     LDA.W #$0000                                               ;81D738|A90000  |      ;
@@ -10967,7 +10967,7 @@ subPlayerInteraction81D593_0x12:
     ORA.W #$0100                                               ;81D9DF|090001  |      ;
     STA.B $D2                                                  ;81D9E2|85D2    |0000D2;
     REP #$20                                                   ;81D9E4|C220    |      ;
-    LDA.W $0196                                                ;81D9E6|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81D9E6|AD9601  |000196;
     AND.W #$0010                                               ;81D9E9|291000  |      ;
     BNE +                                                      ;81D9EC|D007    |81D9F5;
     LDA.W #$0027                                               ;81D9EE|A92700  |      ;
@@ -11061,7 +11061,7 @@ subPlayerInteraction81D593_0x13:
     ORA.W #$0100                                               ;81DA95|090001  |      ;
     STA.B $D2                                                  ;81DA98|85D2    |0000D2;
     REP #$20                                                   ;81DA9A|C220    |      ;
-    LDA.W $0196                                                ;81DA9C|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81DA9C|AD9601  |000196;
     AND.W #$0010                                               ;81DA9F|291000  |      ;
     BNE +                                                      ;81DAA2|D007    |81DAAB;
     LDA.W #$0034                                               ;81DAA4|A93400  |      ;
@@ -11613,7 +11613,7 @@ subPlayerInteraction81D593_0x2E:
  
  
   + REP #$20                                                   ;81DE43|C220    |      ;
-    LDA.W $0196                                                ;81DE45|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81DE45|AD9601  |000196;
     AND.W #$000A                                               ;81DE48|290A00  |      ;
     BNE +                                                      ;81DE4B|D01B    |81DE68;
     SEP #$20                                                   ;81DE4D|E220    |      ;
@@ -12798,9 +12798,9 @@ subPlayerInteraction81D593_0x42:
     ORA.B #$04                                                 ;81E77E|0904    |      ;
     STA.L sShedItems+1                                         ;81E780|8F011F7F|7F1F01;
     REP #$20                                                   ;81E784|C220    |      ;
-    LDA.W $0196                                                ;81E786|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81E786|AD9601  |000196;
     ORA.W #$2000                                               ;81E789|090020  |      ;
-    STA.W $0196                                                ;81E78C|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;81E78C|8D9601  |000196;
     BRA .return                                                ;81E78F|800C    |81E79D;
  
  
@@ -13900,9 +13900,9 @@ subPlayerInteraction81D593_0x45:
     LDA.B #$02                                                 ;81F042|A902    |      ;
     STA.W nNameDestinationId                                   ;81F044|8D9F09  |00099F;
     REP #$20                                                   ;81F047|C220    |      ;
-    LDA.W $0196                                                ;81F049|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;81F049|AD9601  |000196;
     ORA.W #$2000                                               ;81F04C|090020  |      ;
-    STA.W $0196                                                ;81F04F|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;81F04F|8D9601  |000196;
     BRA .return                                                ;81F052|800C    |81F060;
  
  

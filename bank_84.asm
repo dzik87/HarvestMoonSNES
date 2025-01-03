@@ -1372,9 +1372,9 @@ subUnknown849419_0x01:
     LDA.L $7F1F5C                                              ;8489F8|AF5C1F7F|7F1F5C;
     AND.W #$FFFE                                               ;8489FC|29FEFF  |      ;
     STA.L $7F1F5C                                              ;8489FF|8F5C1F7F|7F1F5C;
-    LDA.W $0196                                                ;848A03|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
-    STA.W $0196                                                ;848A09|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;848A09|8D9601  |000196;
     RTS                                                        ;848A0C|60      |      ;
  
  
@@ -1393,9 +1393,9 @@ subUnknown849419_0x02:
     ORA.W #$0001                                               ;848A26|090100  |      ;
     STA.L $7F1F5C                                              ;848A29|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;848A2D|C230    |      ;
-    LDA.W $0196                                                ;848A2F|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;848A2F|AD9601  |000196;
     AND.W #$FFDF                                               ;848A32|29DFFF  |      ;
-    STA.W $0196                                                ;848A35|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;848A35|8D9601  |000196;
     RTS                                                        ;848A38|60      |      ;
  
  
@@ -7454,9 +7454,9 @@ subUnknown849419_0x3C:
     LDA.B #$15                                                 ;84B511|A915    |      ;
     STA.W $098B                                                ;84B513|8D8B09  |00098B;
     REP #$30                                                   ;84B516|C230    |      ;
-    LDA.W $0196                                                ;84B518|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
-    STA.W $0196                                                ;84B51E|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;84B51E|8D9601  |000196;
     LDA.L $7F1F60                                              ;84B521|AF601F7F|7F1F60;
     ORA.W #$0020                                               ;84B525|092000  |      ;
     STA.L $7F1F60                                              ;84B528|8F601F7F|7F1F60;
@@ -7479,9 +7479,9 @@ subUnknown849419_0x3D:
     ADC.W #$0001                                               ;84B545|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B548|85C9    |0000C9;
     REP #$30                                                   ;84B54A|C230    |      ;
-    LDA.W $0196                                                ;84B54C|AD9601  |000196;
+    LDA.W nCurrentMapdata0196                                  ;84B54C|AD9601  |000196;
     ORA.W #$4000                                               ;84B54F|090040  |      ;
-    STA.W $0196                                                ;84B552|8D9601  |000196;
+    STA.W nCurrentMapdata0196                                  ;84B552|8D9601  |000196;
     RTS                                                        ;84B555|60      |      ;
  
  

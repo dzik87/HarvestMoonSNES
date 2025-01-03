@@ -2,7 +2,7 @@
     ORG $A38000
  
  
-DATA16_A38000:
+sCompressedCharactermap_A38000:
     dw $85ED,$85ED,$85ED,$85ED,$85ED,$85ED                     ;A38000|        |      ;
     dw $85ED,$85ED,$85ED,$85ED,$85ED,$85ED                     ;A3800C|        |      ;
     dw $85ED,$85ED,$85ED,$85ED,$85ED,$85ED                     ;A38018|        |      ;
