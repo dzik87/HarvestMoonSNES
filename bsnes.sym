@@ -2999,6 +2999,10 @@
 83:B253 fUnknown_83B253
 83:B282 fIncreaseHappiness_83B282
 83:B2B1 fLoadGameMaybe
+83:B2D2 .loadSave
+83:B646 -
+83:B65B -
+83:B680 -
 83:B68E fUnknown_83B68E
 83:BA45 fUnknown_83BA45
 83:BAD4 fUnknown_83BAD4
@@ -3243,6 +3247,7 @@
 84:9A5F +
 84:9A6D +
 84:9AD4 subUnknown849419_0x31
+84:A5D4 fUnknown_84A5D4
 84:A90F subUnknown849419_0x32
 84:A94C subUnknown849419_0x33
 84:AA5D subUnknown849419_0x34
@@ -8189,6 +8194,7 @@ FF:FFFF EMPTY_FFFFFF
 83:AEC3 A: nIndex
 83:B1C9 $72: nProfit24
 83:B282 A: nHappinessAdd
+83:B2B1 A: nSaveIndex
 83:C8DC A: nAddType (0 - bought, 1 - born), return result in A
 83:C995 A: nIndex, return ptr24 $72
 83:C9A7 A: nIndex, return ptr24 $72

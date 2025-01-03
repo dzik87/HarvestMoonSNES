@@ -3902,7 +3902,7 @@ CODE_849C86:
     STA.B [ptrUnknown0x72],Y                                   ;849C8D|9772    |000072;
     REP #$20                                                   ;849C8F|C220    |      ;
     LDA.W #$0001                                               ;849C91|A90100  |      ;
-    JSL.L CODE_84A5D4                                          ;849C94|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;849C94|22D4A584|84A5D4;
     SEP #$20                                                   ;849C98|E220    |      ;
     REP #$10                                                   ;849C9A|C210    |      ;
     LDY.W #$0000                                               ;849C9C|A00000  |      ;
@@ -4203,7 +4203,7 @@ CODE_849E69:
     STA.B [ptrUnknown0x72],Y                                   ;849E88|9772    |000072;
     REP #$20                                                   ;849E8A|C220    |      ;
     LDA.W #$000A                                               ;849E8C|A90A00  |      ;
-    JSL.L CODE_84A5D4                                          ;849E8F|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;849E8F|22D4A584|84A5D4;
     SEP #$20                                                   ;849E93|E220    |      ;
     LDY.W #$0003                                               ;849E95|A00300  |      ;
     LDA.B #$15                                                 ;849E98|A915    |      ;
@@ -4233,7 +4233,7 @@ CODE_849EBE:
     STA.B [ptrUnknown0x72],Y                                   ;849EC5|9772    |000072;
     REP #$20                                                   ;849EC7|C220    |      ;
     LDA.W #$0003                                               ;849EC9|A90300  |      ;
-    JSL.L CODE_84A5D4                                          ;849ECC|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;849ECC|22D4A584|84A5D4;
     SEP #$20                                                   ;849ED0|E220    |      ;
     REP #$10                                                   ;849ED2|C210    |      ;
     LDY.W #$0000                                               ;849ED4|A00000  |      ;
@@ -5249,7 +5249,7 @@ CODE_84A595:
     JMP.W CODE_84A46E                                          ;84A5D1|4C6EA4  |84A46E;
  
  
-CODE_84A5D4:
+fUnknown_84A5D4:
     REP #$30                                                   ;84A5D4|C230    |      ;
     STA.B $7E                                                  ;84A5D6|857E    |00007E;
     LDA.W #$0000                                               ;84A5D8|A90000  |      ;
