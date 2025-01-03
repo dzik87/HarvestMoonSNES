@@ -121,6 +121,7 @@
 00:099B nMenuPosX
 00:099D nMenuPoxY
 00:099F nNameDestinationId
+00:09B5 nUnknown9B5
 00:2100 SNES_INIDISP
 00:2101 SNES_OBSEL
 00:2102 SNES_OAMADDL
@@ -369,8 +370,6 @@
 7F:1F64 nHouseSize
 7F:1F66 nPlayerFlags
 7F:1F68 nPlayerFlags+2
-80:0917 nUnknown800917
-80:09B5 nUnknown8009B5
 80:8000 fGameStart
 80:8083 fMainGameLoop
 80:809B +
@@ -8018,6 +8017,7 @@ FF:FFFF EMPTY_FFFFFF
 00:099B n16
 00:099D n16
 00:099F n8
+00:09B5 n8
 7E:A4E6 sTileMap (0x1000)
 7E:C1C6 0x0C * sChickenData (8 bytes)
 7E:C286 0x0C * sCowData (16 bytes)
@@ -8068,8 +8068,6 @@ FF:FFFF EMPTY_FFFFFF
 7F:1F64 n8
 7F:1F66 32bits - ???wwwww ???????? (w - wife)
 7F:1F68 ???????? ????????
-80:0917 n8
-80:09B5 n8
 80:865D A: nCount
 80:87CE $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
 80:880A $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
