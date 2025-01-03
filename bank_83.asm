@@ -5884,7 +5884,7 @@ CODE_83B2B0:
  
  
 fLoadGameMaybe:
-    REP #$30                                                   ;83B2B1|C230    |      ;
+    REP #$30                                                   ;83B2B1|C230    |      ; A: nSaveIndex
     PHA                                                        ;83B2B3|48      |      ;
     LDA.W #$0000                                               ;83B2B4|A90000  |      ;
     STA.B ptrUnknown0x72                                       ;83B2B7|8572    |000072;
@@ -5894,14 +5894,14 @@ fLoadGameMaybe:
     REP #$20                                                   ;83B2BF|C220    |      ;
     PLA                                                        ;83B2C1|68      |      ;
     CMP.W #$0000                                               ;83B2C2|C90000  |      ;
-    BEQ CODE_83B2D2                                            ;83B2C5|F00B    |83B2D2;
+    BEQ .loadSave                                              ;83B2C5|F00B    |83B2D2;
     LDA.W #$1000                                               ;83B2C7|A90010  |      ;
     STA.B ptrUnknown0x72                                       ;83B2CA|8572    |000072;
     SEP #$20                                                   ;83B2CC|E220    |      ;
     LDA.B #$70                                                 ;83B2CE|A970    |      ;
     STA.B ptrUnknown0x72+2                                     ;83B2D0|8574    |000074;
  
-CODE_83B2D2:
+.loadSave:
     SEP #$20                                                   ;83B2D2|E220    |      ;
     LDY.W #$0000                                               ;83B2D4|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B2D7|B772    |000072;
@@ -6227,24 +6227,22 @@ CODE_83B2D2:
     LDY.W #$0098                                               ;83B640|A09800  |      ;
     LDX.W #$0000                                               ;83B643|A20000  |      ;
  
-CODE_83B646:
-    LDA.B [ptrUnknown0x72],Y                                   ;83B646|B772    |000072;
+  - LDA.B [ptrUnknown0x72],Y                                   ;83B646|B772    |000072;
     STA.L sChickenDataAddress,X                                ;83B648|9F86C27E|7EC286;
     INY                                                        ;83B64C|C8      |      ;
     INX                                                        ;83B64D|E8      |      ;
     CPX.W #$0068                                               ;83B64E|E06800  |      ;
-    BNE CODE_83B646                                            ;83B651|D0F3    |83B646;
+    BNE -                                                      ;83B651|D0F3    |83B646;
     SEP #$20                                                   ;83B653|E220    |      ;
     LDY.W #$0100                                               ;83B655|A00001  |      ;
     LDX.W #$0000                                               ;83B658|A20000  |      ;
  
-CODE_83B65B:
-    LDA.B [ptrUnknown0x72],Y                                   ;83B65B|B772    |000072;
+  - LDA.B [ptrUnknown0x72],Y                                   ;83B65B|B772    |000072;
     STA.L sCowDataAddress,X                                    ;83B65D|9FC6C17E|7EC1C6;
     INY                                                        ;83B661|C8      |      ;
     INX                                                        ;83B662|E8      |      ;
     CPX.W #$00C0                                               ;83B663|E0C000  |      ;
-    BNE CODE_83B65B                                            ;83B666|D0F3    |83B65B;
+    BNE -                                                      ;83B666|D0F3    |83B65B;
     REP #$20                                                   ;83B668|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;83B66A|A572    |000072;
     STA.B ptrUnknown0x75                                       ;83B66C|8575    |000075;
@@ -6256,13 +6254,12 @@ CODE_83B65B:
     LDY.W #$01C0                                               ;83B67A|A0C001  |      ;
     LDX.W #$00C0                                               ;83B67D|A2C000  |      ;
  
-CODE_83B680:
-    LDA.B [ptrUnknown0x75],Y                                   ;83B680|B775    |000075;
+  - LDA.B [ptrUnknown0x75],Y                                   ;83B680|B775    |000075;
     STA.L sSelectedTilemap,X                                   ;83B682|9FE6A47E|7EA4E6;
     INY                                                        ;83B686|C8      |      ;
     INX                                                        ;83B687|E8      |      ;
     CPX.W #$0F00                                               ;83B688|E0000F  |      ;
-    BNE CODE_83B680                                            ;83B68B|D0F3    |83B680;
+    BNE -                                                      ;83B68B|D0F3    |83B680;
     RTL                                                        ;83B68D|6B      |      ;
  
  
@@ -7013,7 +7010,7 @@ CODE_83BCD3:
 CODE_83BD10:
     REP #$20                                                   ;83BD10|C220    |      ;
     LDA.W #$FFF8                                               ;83BD12|A9F8FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BD15|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD15|22D4A584|84A5D4;
     REP #$30                                                   ;83BD19|C230    |      ;
     LDY.W #$0004                                               ;83BD1B|A00400  |      ;
     BRA CODE_83BD50                                            ;83BD1E|8030    |83BD50;
@@ -7022,7 +7019,7 @@ CODE_83BD10:
 CODE_83BD20:
     REP #$20                                                   ;83BD20|C220    |      ;
     LDA.W #$FFF0                                               ;83BD22|A9F0FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BD25|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD25|22D4A584|84A5D4;
     REP #$30                                                   ;83BD29|C230    |      ;
     LDY.W #$0002                                               ;83BD2B|A00200  |      ;
     BRA CODE_83BD50                                            ;83BD2E|8020    |83BD50;
@@ -7031,7 +7028,7 @@ CODE_83BD20:
 CODE_83BD30:
     REP #$20                                                   ;83BD30|C220    |      ;
     LDA.W #$FFE8                                               ;83BD32|A9E8FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BD35|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD35|22D4A584|84A5D4;
     REP #$30                                                   ;83BD39|C230    |      ;
     LDY.W #$0002                                               ;83BD3B|A00200  |      ;
     BRA CODE_83BD50                                            ;83BD3E|8010    |83BD50;
@@ -7040,7 +7037,7 @@ CODE_83BD30:
 CODE_83BD40:
     REP #$20                                                   ;83BD40|C220    |      ;
     LDA.W #$FFF8                                               ;83BD42|A9F8FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BD45|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD45|22D4A584|84A5D4;
     REP #$30                                                   ;83BD49|C230    |      ;
     LDY.W #$0008                                               ;83BD4B|A00800  |      ;
     BRA CODE_83BD50                                            ;83BD4E|8000    |83BD50;
@@ -7076,7 +7073,7 @@ CODE_83BD50:
     STA.B [ptrUnknown0x72],Y                                   ;83BD8A|9772    |000072;
     REP #$20                                                   ;83BD8C|C220    |      ;
     LDA.W #$FFF4                                               ;83BD8E|A9F4FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BD91|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD91|22D4A584|84A5D4;
     REP #$30                                                   ;83BD95|C230    |      ;
     LDA.W #$FFE2                                               ;83BD97|A9E2FF  |      ;
     JSL.L fIncreaseHappiness_83B282                            ;83BD9A|2282B283|83B282;
@@ -7103,7 +7100,7 @@ CODE_83BD9E:
     BNE CODE_83BDD6                                            ;83BDC9|D00B    |83BDD6;
     REP #$20                                                   ;83BDCB|C220    |      ;
     LDA.W #$FFF8                                               ;83BDCD|A9F8FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BDD0|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BDD0|22D4A584|84A5D4;
     BRA CODE_83BDEB                                            ;83BDD4|8015    |83BDEB;
  
  
@@ -7146,7 +7143,7 @@ CODE_83BDEB:
     STA.B [ptrUnknown0x72],Y                                   ;83BE21|9772    |000072;
     REP #$20                                                   ;83BE23|C220    |      ;
     LDA.W #$FFE2                                               ;83BE25|A9E2FF  |      ;
-    JSL.L CODE_84A5D4                                          ;83BE28|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BE28|22D4A584|84A5D4;
     BRA CODE_83BE3F                                            ;83BE2C|8011    |83BE3F;
  
  
