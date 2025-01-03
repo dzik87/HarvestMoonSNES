@@ -212,7 +212,7 @@
                        RTL                                  ;838165|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-          CODE_838166:
+fSystemTransferGlyphToMemory:
                        REP #$30                             ;838166|C230    |      ;
                        ASL A                                ;838168|0A      |      ;
                        ASL A                                ;838169|0A      |      ;
@@ -232,7 +232,7 @@
                        REP #$20                             ;838181|C220    |      ;
                        LDA.W #$0080                         ;838183|A98000  |      ;
                        PHX                                  ;838186|DA      |      ;
-                       JSL.L fLoadPaletteToControler        ;838187|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;838187|22338A80|808A33;
                        SEP #$20                             ;83818B|E220    |      ;
                        LDA.B #$07                           ;83818D|A907    |      ;
                        STA.B $27                            ;83818F|8527    |000027;
@@ -254,7 +254,7 @@
                        STA.B ptrUnknown0x72                 ;8381AB|8572    |000072;
                        REP #$20                             ;8381AD|C220    |      ;
                        LDA.W #$0080                         ;8381AF|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;8381B2|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;8381B2|22338A80|808A33;
                        RTL                                  ;8381B6|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -269,7 +269,7 @@
                        REP #$20                             ;8381C6|C220    |      ;
                        LDA.W #$0080                         ;8381C8|A98000  |      ;
                        PHX                                  ;8381CB|DA      |      ;
-                       JSL.L fLoadPaletteToControler        ;8381CC|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;8381CC|22338A80|808A33;
                        SEP #$20                             ;8381D0|E220    |      ;
                        LDA.B #$07                           ;8381D2|A907    |      ;
                        STA.B $27                            ;8381D4|8527    |000027;
@@ -288,7 +288,7 @@
                        ADC.W #$0004                         ;8381EB|690400  |      ;
                        STA.B ptrUnknown0x72                 ;8381EE|8572    |000072;
                        LDA.W #$0080                         ;8381F0|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;8381F3|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;8381F3|22338A80|808A33;
                        RTL                                  ;8381F7|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2353,8 +2353,8 @@
                        STA.B ptrUnknown0x72+2               ;8392F2|8574    |000074;
                        REP #$20                             ;8392F4|C220    |      ;
                        LDA.W #$0080                         ;8392F6|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;8392F9|22338A80|808A33;
-                       JSL.L fUnknown_808AB2                ;8392FD|22B28A80|808AB2;
+                       JSL.L fSystemTransferData            ;8392F9|22338A80|808A33;
+                       JSL.L fSystemUnknown_808AB2          ;8392FD|22B28A80|808AB2;
                        SEP #$20                             ;839301|E220    |      ;
                        LDA.B #$00                           ;839303|A900    |      ;
                        STA.B $27                            ;839305|8527    |000027;
@@ -2371,8 +2371,8 @@
                        STA.B ptrUnknown0x72+2               ;83931D|8574    |000074;
                        REP #$20                             ;83931F|C220    |      ;
                        LDA.W #$0080                         ;839321|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;839324|22338A80|808A33;
-                       JSL.L fUnknown_808AB2                ;839328|22B28A80|808AB2;
+                       JSL.L fSystemTransferData            ;839324|22338A80|808A33;
+                       JSL.L fSystemUnknown_808AB2          ;839328|22B28A80|808AB2;
                        RTL                                  ;83932C|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2393,7 +2393,7 @@
                        STA.B ptrUnknown0x72+2               ;839349|8574    |000074;
                        REP #$20                             ;83934B|C220    |      ;
                        LDA.W #$0080                         ;83934D|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;839350|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;839350|22338A80|808A33;
                        SEP #$20                             ;839354|E220    |      ;
                        LDA.B #$07                           ;839356|A907    |      ;
                        STA.B $27                            ;839358|8527    |000027;
@@ -2707,7 +2707,7 @@
                                                             ;      |        |      ;
               .label5:
                        STX.W $0190                          ;8395A4|8E9001  |000190;
-                       JSL.L fUnknown_839823                ;8395A7|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;8395A7|22239883|839823;
                        SEP #$20                             ;8395AB|E220    |      ;
                        REP #$10                             ;8395AD|C210    |      ;
                        LDA.B #$03                           ;8395AF|A903    |      ;
@@ -2893,7 +2893,7 @@
                        TAY                                  ;8396F3|A8      |      ;
                        LDA.B [ptrUnknown0x72],Y             ;8396F4|B772    |000072;
                        LDX.W #$0001                         ;8396F6|A20100  |      ;
-                       JSL.L fUnknown_839823                ;8396F9|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;8396F9|22239883|839823;
                        SEP #$20                             ;8396FD|E220    |      ;
                        LDA.B #$01                           ;8396FF|A901    |      ;
                        STA.W $0190                          ;839701|8D9001  |000190;
@@ -2969,7 +2969,7 @@
                        REP #$30                             ;839783|C230    |      ;
                        LDX.W #$0001                         ;839785|A20100  |      ;
                        LDA.B $7E                            ;839788|A57E    |00007E;
-                       JSL.L fUnknown_839823                ;83978A|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;83978A|22239883|839823;
                        BRA CODE_83979C                      ;83978E|800C    |83979C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -2977,7 +2977,7 @@
                        REP #$30                             ;839790|C230    |      ;
                        LDX.W #$0001                         ;839792|A20100  |      ;
                        LDA.W #$00B1                         ;839795|A9B100  |      ;
-                       JSL.L fUnknown_839823                ;839798|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;839798|22239883|839823;
                                                             ;      |        |      ;
           CODE_83979C:
                        SEP #$20                             ;83979C|E220    |      ;
@@ -3050,14 +3050,14 @@
                        CLC                                  ;839818|18      |      ;
                        ADC.B $7E                            ;839819|657E    |00007E;
                        LDX.W #$0000                         ;83981B|A20000  |      ;
-                       JSL.L fUnknown_839823                ;83981E|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;83981E|22239883|839823;
                                                             ;      |        |      ;
           CODE_839822:
                        RTL                                  ;839822|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_839823:
-                       REP #$30                             ;839823|C230    |      ;
+ fSystemTransferGlyph:
+                       REP #$30                             ;839823|C230    |      ; A: nLetterCode
                        LDX.W #$0000                         ;839825|A20000  |      ;
                        PHX                                  ;839828|DA      |      ;
                        JSR.W fGetGlyphPointer               ;839829|206298  |839862;
@@ -3065,7 +3065,7 @@
                        PLX                                  ;83982E|FA      |      ;
                        TXA                                  ;83982F|8A      |      ;
                        LDX.W $0185                          ;839830|AE8501  |000185;
-                       JSL.L CODE_838166                    ;839833|22668183|838166;
+                       JSL.L fSystemTransferGlyphToMemory   ;839833|22668183|838166;
                        RTL                                  ;839837|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -4982,9 +4982,9 @@ fSetDefaultValuesForVariables:
                        SEP #$20                             ;83AC62|E220    |      ;
                        STZ.W $0919                          ;83AC64|9C1909  |000919;
                        REP #$20                             ;83AC67|C220    |      ;
-                       STZ.W $0991                          ;83AC69|9C9109  |000991;
+                       STZ.W nMenuIndex                     ;83AC69|9C9109  |000991;
                        SEP #$20                             ;83AC6C|E220    |      ;
-                       STZ.W $0993                          ;83AC6E|9C9309  |000993;
+                       STZ.W nMenuTableSelector             ;83AC6E|9C9309  |000993;
                        STZ.W $0994                          ;83AC71|9C9409  |000994;
                        STZ.W $018B                          ;83AC74|9C8B01  |00018B;
                        SEP #$20                             ;83AC77|E220    |      ;
@@ -5929,7 +5929,7 @@ fIncreaseHappiness_83B282:
                        RTL                                  ;83B2B0|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      DefineVariables:
+       fLoadGameMaybe:
                        REP #$30                             ;83B2B1|C230    |      ;
                        PHA                                  ;83B2B3|48      |      ;
                        LDA.W #$0000                         ;83B2B4|A90000  |      ;
@@ -9527,7 +9527,7 @@ subUnknown83CAA9_0x00:
                        STA.L nPlayerFlags+2                 ;83CED1|8F681F7F|7F1F68;
                        SEP #$20                             ;83CED5|E220    |      ;
                        LDA.B #$03                           ;83CED7|A903    |      ;
-                       STA.W $099F                          ;83CED9|8D9F09  |00099F;
+                       STA.W nNameDestinationId             ;83CED9|8D9F09  |00099F;
                        RTS                                  ;83CEDC|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -11700,14 +11700,14 @@ subUnknown83CAA9_0x15:
                        BNE CODE_83E0C3                      ;83E0B9|D008    |83E0C3;
                        SEP #$20                             ;83E0BB|E220    |      ;
                        LDA.B #$05                           ;83E0BD|A905    |      ;
-                       STA.W $099F                          ;83E0BF|8D9F09  |00099F;
+                       STA.W nNameDestinationId             ;83E0BF|8D9F09  |00099F;
                        RTS                                  ;83E0C2|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           CODE_83E0C3:
                        SEP #$20                             ;83E0C3|E220    |      ;
                        LDA.B #$06                           ;83E0C5|A906    |      ;
-                       STA.W $099F                          ;83E0C7|8D9F09  |00099F;
+                       STA.W nNameDestinationId             ;83E0C7|8D9F09  |00099F;
                        RTS                                  ;83E0CA|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -12164,7 +12164,7 @@ subUnknown83CAA9_0x0C:
                        STA.L nPlayerFlags+2                 ;83E49B|8F681F7F|7F1F68;
                        SEP #$20                             ;83E49F|E220    |      ;
                        LDA.B #$04                           ;83E4A1|A904    |      ;
-                       STA.W $099F                          ;83E4A3|8D9F09  |00099F;
+                       STA.W nNameDestinationId             ;83E4A3|8D9F09  |00099F;
                        RTS                                  ;83E4A6|60      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;

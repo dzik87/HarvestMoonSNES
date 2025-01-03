@@ -114,6 +114,11 @@
                        nTileInFrontOfPlayerY = $000987; !^ n16 ^!;      |        |      ;
                        nWeatherForecast = $00098C           ;      |        |      ;
                        nWeatherForecast8281FD = $000990; !^ n8 ^!;      |        |      ;
+                       nMenuIndex = $000991; !^ n16 ^!      ;      |        |      ;
+                       nMenuTableSelector = $000993; !^ n8 ^!;      |        |      ;
+                       nMenuData0x00 = $00099B; !^ n16 ^!   ;      |        |      ;
+                       nMenuData0x01 = $00099D; !^ n16 ^!   ;      |        |      ;
+                       nNameDestinationId = $00099F; !^ n8 ^!;      |        |      ;
                        SNES_INIDISP = $002100               ;      |        |      ;
                        SNES_OBSEL = $002101                 ;      |        |      ;
                        SNES_OAMADDL = $002102               ;      |        |      ;
