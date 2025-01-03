@@ -202,14 +202,13 @@ fUnknown_828165:
     LDX.W #$031A                                               ;828182|A21A03  |      ;
     REP #$20                                                   ;828185|C220    |      ;
     LDA.L nShippingProfit                                      ;828187|AF071F7F|7F1F07;
-    BNE CODE_828198                                            ;82818B|D00B    |828198;
+    BNE +                                                      ;82818B|D00B    |828198;
     SEP #$20                                                   ;82818D|E220    |      ;
     LDA.L nShippingProfit+2                                    ;82818F|AF091F7F|7F1F09;
-    BNE CODE_828198                                            ;828193|D003    |828198;
+    BNE +                                                      ;828193|D003    |828198;
     LDX.W #$031B                                               ;828195|A21B03  |      ;
  
-CODE_828198:
-    SEP #$20                                                   ;828198|E220    |      ;
+  + SEP #$20                                                   ;828198|E220    |      ;
     LDA.B #$00                                                 ;82819A|A900    |      ;
     STA.W $0191                                                ;82819C|8D9101  |000191;
     JSL.L fLoadDialog                                          ;82819F|225F9383|83935F;
@@ -2037,7 +2036,7 @@ subToolAnimation82A58B_WateringCan:
     CLC                                                        ;8291C0|18      |      ;
     ADC.B $DA                                                  ;8291C1|65DA    |0000DA;
     STA.W $0901                                                ;8291C3|8D0109  |000901;
-    BRA CODE_8291E7                                            ;8291C6|801F    |8291E7;
+    BRA .return                                                ;8291C6|801F    |8291E7;
  
  
 .haveWater:
@@ -2046,7 +2045,7 @@ subToolAnimation82A58B_WateringCan:
     CLC                                                        ;8291CD|18      |      ;
     ADC.B $DA                                                  ;8291CE|65DA    |0000DA;
     STA.W $0901                                                ;8291D0|8D0109  |000901;
-    BRA CODE_8291E7                                            ;8291D3|8012    |8291E7;
+    BRA .return                                                ;8291D3|8012    |8291E7;
  
  
 .label2:
@@ -2059,7 +2058,7 @@ subToolAnimation82A58B_WateringCan:
     LDA.B #$14                                                 ;8291E2|A914    |      ;
     STA.W nAmountLeft_Water                                    ;8291E4|8D2609  |000926;
  
-CODE_8291E7:
+.return:
     RTS                                                        ;8291E7|60      |      ;
  
  
@@ -2771,22 +2770,20 @@ subToolUsed82A5C3_Hammer:
 subToolUsed82A5C3_Axe:
     REP #$30                                                   ;8297BD|C230    |      ;
     JSR.W fWaterTileUnknown_8292A0                             ;8297BF|20A092  |8292A0;
-    BNE CODE_8297C7                                            ;8297C2|D003    |8297C7;
-    JMP.W CODE_82994B                                          ;8297C4|4C4B99  |82994B;
+    BNE +                                                      ;8297C2|D003    |8297C7;
+    JMP.W .label7                                              ;8297C4|4C4B99  |82994B;
  
  
-CODE_8297C7:
-    SEP #$20                                                   ;8297C7|E220    |      ;
+  + SEP #$20                                                   ;8297C7|E220    |      ;
     LDA.W nBreakHitCounter                                     ;8297C9|AD6D09  |00096D;
     INC A                                                      ;8297CC|1A      |      ;
     STA.W nBreakHitCounter                                     ;8297CD|8D6D09  |00096D;
     CMP.B #$06                                                 ;8297D0|C906    |      ;
-    BEQ CODE_8297D7                                            ;8297D2|F003    |8297D7;
-    JMP.W CODE_829918                                          ;8297D4|4C1899  |829918;
+    BEQ +                                                      ;8297D2|F003    |8297D7;
+    JMP.W .label6                                              ;8297D4|4C1899  |829918;
  
  
-CODE_8297D7:
-    STZ.W nBreakHitCounter                                     ;8297D7|9C6D09  |00096D;
+  + STZ.W nBreakHitCounter                                     ;8297D7|9C6D09  |00096D;
     REP #$20                                                   ;8297DA|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;8297DC|AD8509  |000985;
     SEC                                                        ;8297DF|38      |      ;
@@ -2797,26 +2794,24 @@ CODE_8297D7:
     SBC.W #$0010                                               ;8297EA|E91000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;8297ED|8D8709  |000987;
     CPX.W #$000C                                               ;8297F0|E00C00  |      ;
-    BEQ CODE_829849                                            ;8297F3|F054    |829849;
+    BEQ .label1                                                ;8297F3|F054    |829849;
     CPX.W #$0014                                               ;8297F5|E01400  |      ;
-    BNE CODE_8297FD                                            ;8297F8|D003    |8297FD;
-    JMP.W CODE_8298BC                                          ;8297FA|4CBC98  |8298BC;
+    BNE +                                                      ;8297F8|D003    |8297FD;
+    JMP.W .label3                                              ;8297FA|4CBC98  |8298BC;
  
  
-CODE_8297FD:
-    LDA.W nTileInFrontOfPlayerX                                ;8297FD|AD8509  |000985;
+  + LDA.W nTileInFrontOfPlayerX                                ;8297FD|AD8509  |000985;
     CLC                                                        ;829800|18      |      ;
     ADC.W #$0010                                               ;829801|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;829804|8D8509  |000985;
     CPX.W #$000B                                               ;829807|E00B00  |      ;
-    BEQ CODE_829849                                            ;82980A|F03D    |829849;
+    BEQ .label1                                                ;82980A|F03D    |829849;
     CPX.W #$0013                                               ;82980C|E01300  |      ;
-    BNE CODE_829814                                            ;82980F|D003    |829814;
-    JMP.W CODE_8298BC                                          ;829811|4CBC98  |8298BC;
+    BNE +                                                      ;82980F|D003    |829814;
+    JMP.W .label3                                              ;829811|4CBC98  |8298BC;
  
  
-CODE_829814:
-    LDA.W nTileInFrontOfPlayerX                                ;829814|AD8509  |000985;
+  + LDA.W nTileInFrontOfPlayerX                                ;829814|AD8509  |000985;
     SEC                                                        ;829817|38      |      ;
     SBC.W #$0010                                               ;829818|E91000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82981B|8D8509  |000985;
@@ -2825,39 +2820,38 @@ CODE_829814:
     ADC.W #$0010                                               ;829822|691000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;829825|8D8709  |000987;
     CPX.W #$000A                                               ;829828|E00A00  |      ;
-    BEQ CODE_829849                                            ;82982B|F01C    |829849;
+    BEQ .label1                                                ;82982B|F01C    |829849;
     CPX.W #$0012                                               ;82982D|E01200  |      ;
-    BNE CODE_829835                                            ;829830|D003    |829835;
-    JMP.W CODE_8298BC                                          ;829832|4CBC98  |8298BC;
+    BNE +                                                      ;829830|D003    |829835;
+    JMP.W .label3                                              ;829832|4CBC98  |8298BC;
  
  
-CODE_829835:
-    LDA.W nTileInFrontOfPlayerX                                ;829835|AD8509  |000985;
+  + LDA.W nTileInFrontOfPlayerX                                ;829835|AD8509  |000985;
     CLC                                                        ;829838|18      |      ;
     ADC.W #$0010                                               ;829839|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82983C|8D8509  |000985;
     CPX.W #$0009                                               ;82983F|E00900  |      ;
-    BEQ CODE_829849                                            ;829842|F005    |829849;
+    BEQ .label1                                                ;829842|F005    |829849;
     CPX.W #$0011                                               ;829844|E01100  |      ;
-    BEQ CODE_8298BC                                            ;829847|F073    |8298BC;
+    BEQ .label3                                                ;829847|F073    |8298BC;
  
-CODE_829849:
+.label1:
     SEP #$20                                                   ;829849|E220    |      ;
     LDA.B nSelectedTilemapId                                   ;82984B|A522    |000022;
     CMP.B #$04                                                 ;82984D|C904    |      ;
-    BCC CODE_8298C3                                            ;82984F|9072    |8298C3;
+    BCC .label4                                                ;82984F|9072    |8298C3;
     REP #$20                                                   ;829851|C220    |      ;
     LDA.L $7F1F60                                              ;829853|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829857|290800  |      ;
-    BNE CODE_8298B5                                            ;82985A|D059    |8298B5;
+    BNE .label2                                                ;82985A|D059    |8298B5;
     SEP #$20                                                   ;82985C|E220    |      ;
     LDA.B #$10                                                 ;82985E|A910    |      ;
     JSL.L fRollRNG                                             ;829860|22F98980|8089F9;
-    BNE CODE_8298B5                                            ;829864|D04F    |8298B5;
+    BNE .label2                                                ;829864|D04F    |8298B5;
     REP #$30                                                   ;829866|C230    |      ;
     LDA.L nHouseSize                                           ;829868|AF641F7F|7F1F64;
     AND.W #$0400                                               ;82986C|290004  |      ;
-    BNE CODE_8298B5                                            ;82986F|D044    |8298B5;
+    BNE .label2                                                ;82986F|D044    |8298B5;
     LDA.L nHouseSize                                           ;829871|AF641F7F|7F1F64;
     ORA.W #$0400                                               ;829875|090004  |      ;
     STA.L nHouseSize                                           ;829878|8F641F7F|7F1F64;
@@ -2884,23 +2878,23 @@ CODE_829849:
     SBC.W #$0008                                               ;8298AF|E90800  |      ;
     STA.W nTileInFrontOfPlayerY                                ;8298B2|8D8709  |000987;
  
-CODE_8298B5:
+.label2:
     REP #$30                                                   ;8298B5|C230    |      ;
     LDA.W #$00DF                                               ;8298B7|A9DF00  |      ;
-    BRA CODE_8298C8                                            ;8298BA|800C    |8298C8;
+    BRA .label5                                                ;8298BA|800C    |8298C8;
  
  
-CODE_8298BC:
+.label3:
     REP #$30                                                   ;8298BC|C230    |      ;
     LDA.W #$00E0                                               ;8298BE|A9E000  |      ;
-    BRA CODE_8298C8                                            ;8298C1|8005    |8298C8;
+    BRA .label5                                                ;8298C1|8005    |8298C8;
  
  
-CODE_8298C3:
+.label4:
     REP #$30                                                   ;8298C3|C230    |      ;
     LDA.W #$000D                                               ;8298C5|A90D00  |      ;
  
-CODE_8298C8:
+.label5:
     REP #$30                                                   ;8298C8|C230    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;8298CA|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8298CD|AC8709  |000987;
@@ -2930,10 +2924,10 @@ CODE_8298C8:
     REP #$20                                                   ;82990D|C220    |      ;
     LDA.W #$0006                                               ;82990F|A90600  |      ;
     JSL.L fUnknown_83B224                                      ;829912|2224B283|83B224;
-    BRA CODE_829989                                            ;829916|8071    |829989;
+    BRA .return                                                ;829916|8071    |829989;
  
  
-CODE_829918:
+.label6:
     REP #$20                                                   ;829918|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82991A|AD8509  |000985;
     STA.W nUnknownX                                            ;82991D|8D8009  |000980;
@@ -2952,25 +2946,25 @@ CODE_829918:
     LDA.B #$00                                                 ;829940|A900    |      ;
     STA.W $0976                                                ;829942|8D7609  |000976;
     JSL.L fUnknown_81A500                                      ;829945|2200A581|81A500;
-    BRA CODE_829989                                            ;829949|803E    |829989;
+    BRA .return                                                ;829949|803E    |829989;
  
  
-CODE_82994B:
+.label7:
     SEP #$20                                                   ;82994B|E220    |      ;
     LDA.B nSelectedTilemapId                                   ;82994D|A522    |000022;
     CMP.B #$10                                                 ;82994F|C910    |      ;
-    BCC CODE_829989                                            ;829951|9036    |829989;
+    BCC .return                                                ;829951|9036    |829989;
     CMP.B #$14                                                 ;829953|C914    |      ;
-    BCS CODE_829989                                            ;829955|B032    |829989;
+    BCS .return                                                ;829955|B032    |829989;
     CPX.W #$00F4                                               ;829957|E0F400  |      ;
-    BNE CODE_829989                                            ;82995A|D02D    |829989;
+    BNE .return                                                ;82995A|D02D    |829989;
     REP #$30                                                   ;82995C|C230    |      ;
     LDA.W $0196                                                ;82995E|AD9601  |000196;
     AND.W #$001A                                               ;829961|291A00  |      ;
-    BNE CODE_829989                                            ;829964|D023    |829989;
+    BNE .return                                                ;829964|D023    |829989;
     LDA.L $7F1F6A                                              ;829966|AF6A1F7F|7F1F6A;
     AND.W #$0020                                               ;82996A|292000  |      ;
-    BNE CODE_829989                                            ;82996D|D01A    |829989;
+    BNE .return                                                ;82996D|D01A    |829989;
     LDA.L $7F1F6A                                              ;82996F|AF6A1F7F|7F1F6A;
     ORA.W #$0020                                               ;829973|092000  |      ;
     STA.L $7F1F6A                                              ;829976|8F6A1F7F|7F1F6A;
@@ -2980,7 +2974,7 @@ CODE_82994B:
     LDY.W #$0000                                               ;829982|A00000  |      ;
     JSL.L fUnknown_848097                                      ;829985|22978084|848097;
  
-CODE_829989:
+.return:
     REP #$30                                                   ;829989|C230    |      ;
     LDA.W #$0000                                               ;82998B|A90000  |      ;
     STA.B $D4                                                  ;82998E|85D4    |0000D4;
@@ -9226,8 +9220,7 @@ fUnknown_82E405:
     STA.B $82                                                  ;82E423|8582    |000082;
     LDX.W #$0000                                               ;82E425|A20000  |      ;
  
-CODE_82E428:
-    REP #$20                                                   ;82E428|C220    |      ;
+  - REP #$20                                                   ;82E428|C220    |      ;
     PHX                                                        ;82E42A|DA      |      ;
     LDA.B $82                                                  ;82E42B|A582    |000082;
     STA.L $800185                                              ;82E42D|8F850180|800185;
@@ -9246,7 +9239,7 @@ CODE_82E428:
     PLX                                                        ;82E44E|FA      |      ;
     INX                                                        ;82E44F|E8      |      ;
     CPX.W #$0004                                               ;82E450|E00400  |      ;
-    BNE CODE_82E428                                            ;82E453|D0D3    |82E428;
+    BNE -                                                      ;82E453|D0D3    |82E428;
     REP #$30                                                   ;82E455|C230    |      ;
     PLX                                                        ;82E457|FA      |      ;
     INX                                                        ;82E458|E8      |      ;

@@ -2200,6 +2200,7 @@
 82:8140 .sellingTime
 82:8165 fUnknown_828165
 82:817C +
+82:8198 +
 82:81BF fReturn_8281BF
 82:81C0 fUnknown_8281C0
 82:81EA .label1
@@ -2353,6 +2354,7 @@
 82:91A9 subToolAnimation82A58B_WateringCan
 82:91C8 .haveWater
 82:91D5 .label2
+82:91E7 .return
 82:91E8 subToolAnimation82A58B_GoldenSickle
 82:91F1 subToolAnimation82A58B_GoldenPlow
 82:91FD subToolAnimation82A58B_GoldenHammer
@@ -2404,6 +2406,19 @@
 82:972F .label11
 82:973F .label12
 82:97BD subToolUsed82A5C3_Axe
+82:97C7 +
+82:97D7 +
+82:97FD +
+82:9814 +
+82:9835 +
+82:9849 .label1
+82:98B5 .label2
+82:98BC .label3
+82:98C3 .label4
+82:98C8 .label5
+82:9918 .label6
+82:994B .label7
+82:9989 .return
 82:9999 subToolUsed82A5C3_CornSeedBag
 82:99AB +
 82:99BD +
@@ -2820,6 +2835,7 @@
 82:E3FD +
 82:E405 fUnknown_82E405
 82:E41A +
+82:E428 -
 82:E5E7 fUnknown_82E5E7
 82:E5F5 --
 82:E608 +
