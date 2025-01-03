@@ -643,7 +643,7 @@ CODE_838479:
     BNE CODE_838479                                            ;83847C|D0FB    |838479;
  
 CODE_83847E:
-    LDA.B [ptrUnknown0x0A],Y                                   ;83847E|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;83847E|B70A    |00000A;
     INY                                                        ;838480|C8      |      ;
     XBA                                                        ;838481|EB      |      ;
     LDA.B #$00                                                 ;838482|A900    |      ;
@@ -652,7 +652,7 @@ CODE_83847E:
  
 CODE_838486:
     XBA                                                        ;838486|EB      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838487|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838487|B70A    |00000A;
     INY                                                        ;838489|C8      |      ;
     XBA                                                        ;83848A|EB      |      ;
  
@@ -755,10 +755,10 @@ CODE_83851E:
     LDY.W #$0000                                               ;838538|A00000  |      ;
     REP #$20                                                   ;83853B|C220    |      ;
     LDA.W #$D120                                               ;83853D|A920D1  |      ;
-    STA.B ptrUnknown0x0A                                       ;838540|850A    |00000A;
+    STA.B ptrAudioData                                         ;838540|850A    |00000A;
     SEP #$20                                                   ;838542|E220    |      ;
     LDA.B #$B2                                                 ;838544|A9B2    |      ;
-    STA.B ptrUnknown0x0A+2                                     ;838546|850C    |00000C;
+    STA.B ptrAudioData+2                                       ;838546|850C    |00000C;
     REP #$20                                                   ;838548|C220    |      ;
     LDA.B $80                                                  ;83854A|A580    |000080;
     TAX                                                        ;83854C|AA      |      ;
@@ -773,13 +773,13 @@ CODE_83854D:
     LDA.B #$01                                                 ;83855B|A901    |      ;
     CMP.W SNES_APUIO3                                          ;83855D|CD4321  |002143;
     BNE CODE_83854D                                            ;838560|D0EB    |83854D;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838562|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838562|B70A    |00000A;
     STA.W SNES_APUIO0                                          ;838564|8D4021  |002140;
     INY                                                        ;838567|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838568|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838568|B70A    |00000A;
     STA.W SNES_APUIO1                                          ;83856A|8D4121  |002141;
     INY                                                        ;83856D|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;83856E|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;83856E|B70A    |00000A;
     STA.W SNES_APUIO2                                          ;838570|8D4221  |002142;
     INY                                                        ;838573|C8      |      ;
     DEX                                                        ;838574|CA      |      ;
@@ -964,12 +964,12 @@ CODE_8386B8:
     BNE CODE_8386B8                                            ;8386BD|D0F9    |8386B8;
     REP #$20                                                   ;8386BF|C220    |      ;
     LDA.L Table_8390EF,X                                       ;8386C1|BFEF9083|8390EF; read ptr at offset 7
-    STA.B ptrUnknown0x0A                                       ;8386C5|850A    |00000A; store 16b to $0A
+    STA.B ptrAudioData                                         ;8386C5|850A    |00000A; store 16b to $0A
     INX                                                        ;8386C7|E8      |      ;
     INX                                                        ;8386C8|E8      |      ;
     SEP #$20                                                   ;8386C9|E220    |      ;
     LDA.L Table_8390EF,X                                       ;8386CB|BFEF9083|8390EF;
-    STA.B ptrUnknown0x0A+2                                     ;8386CF|850C    |00000C; store 8b to $0C
+    STA.B ptrAudioData+2                                       ;8386CF|850C    |00000C; store 8b to $0C
     LDA.B #$00                                                 ;8386D1|A900    |      ;
     XBA                                                        ;8386D3|EB      |      ;
     LDA.B $94                                                  ;8386D4|A594    |000094;
@@ -1028,13 +1028,13 @@ CODE_838730:
     BNE CODE_838730                                            ;838735|D0F9    |838730;
  
 CODE_838737:
-    LDA.B [ptrUnknown0x0A],Y                                   ;838737|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838737|B70A    |00000A;
     STA.W SNES_APUIO0                                          ;838739|8D4021  |002140;
     INY                                                        ;83873C|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;83873D|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;83873D|B70A    |00000A;
     STA.W SNES_APUIO1                                          ;83873F|8D4121  |002141;
     INY                                                        ;838742|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838743|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838743|B70A    |00000A;
     STA.W SNES_APUIO2                                          ;838745|8D4221  |002142;
     INY                                                        ;838748|C8      |      ;
     DEX                                                        ;838749|CA      |      ;
@@ -1277,12 +1277,12 @@ CODE_8388F0:
     BNE CODE_8388F0                                            ;8388F5|D0F9    |8388F0;
     REP #$20                                                   ;8388F7|C220    |      ;
     LDA.L Table_8390EF,X                                       ;8388F9|BFEF9083|8390EF;
-    STA.B ptrUnknown0x0A                                       ;8388FD|850A    |00000A;
+    STA.B ptrAudioData                                         ;8388FD|850A    |00000A;
     INX                                                        ;8388FF|E8      |      ;
     INX                                                        ;838900|E8      |      ;
     SEP #$20                                                   ;838901|E220    |      ;
     LDA.L Table_8390EF,X                                       ;838903|BFEF9083|8390EF;
-    STA.B ptrUnknown0x0A+2                                     ;838907|850C    |00000C;
+    STA.B ptrAudioData+2                                       ;838907|850C    |00000C;
     LDA.B #$00                                                 ;838909|A900    |      ;
     XBA                                                        ;83890B|EB      |      ;
     LDA.B $94                                                  ;83890C|A594    |000094;
@@ -1341,13 +1341,13 @@ CODE_838968:
     BNE CODE_838968                                            ;83896D|D0F9    |838968;
  
 CODE_83896F:
-    LDA.B [ptrUnknown0x0A],Y                                   ;83896F|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;83896F|B70A    |00000A;
     STA.W SNES_APUIO0                                          ;838971|8D4021  |002140;
     INY                                                        ;838974|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838975|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838975|B70A    |00000A;
     STA.W SNES_APUIO1                                          ;838977|8D4121  |002141;
     INY                                                        ;83897A|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;83897B|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;83897B|B70A    |00000A;
     STA.W SNES_APUIO2                                          ;83897D|8D4221  |002142;
     INY                                                        ;838980|C8      |      ;
     DEX                                                        ;838981|CA      |      ;
@@ -1516,12 +1516,12 @@ CODE_838A83:
     JSL.L fUnknown_838000                                      ;838A95|22008083|838000;
     TAX                                                        ;838A99|AA      |      ;
     LDA.L Table_838F83,X                                       ;838A9A|BF838F83|838F83;
-    STA.B ptrUnknown0x0A                                       ;838A9E|850A    |00000A;
+    STA.B ptrAudioData                                         ;838A9E|850A    |00000A;
     INX                                                        ;838AA0|E8      |      ;
     INX                                                        ;838AA1|E8      |      ;
     SEP #$20                                                   ;838AA2|E220    |      ;
     LDA.L Table_838F83,X                                       ;838AA4|BF838F83|838F83;
-    STA.B ptrUnknown0x0A+2                                     ;838AA8|850C    |00000C;
+    STA.B ptrAudioData+2                                       ;838AA8|850C    |00000C;
     REP #$20                                                   ;838AAA|C220    |      ;
     LDA.B $80                                                  ;838AAC|A580    |000080;
     TAX                                                        ;838AAE|AA      |      ;
@@ -1540,13 +1540,13 @@ CODE_838AB4:
     LDA.B #$01                                                 ;838AC2|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838AC4|CD4321  |002143;
     BNE CODE_838AB4                                            ;838AC7|D0EB    |838AB4;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838AC9|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838AC9|B70A    |00000A;
     STA.W SNES_APUIO0                                          ;838ACB|8D4021  |002140;
     INY                                                        ;838ACE|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838ACF|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838ACF|B70A    |00000A;
     STA.W SNES_APUIO1                                          ;838AD1|8D4121  |002141;
     INY                                                        ;838AD4|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838AD5|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838AD5|B70A    |00000A;
     STA.W SNES_APUIO2                                          ;838AD7|8D4221  |002142;
     INY                                                        ;838ADA|C8      |      ;
     DEX                                                        ;838ADB|CA      |      ;
@@ -1728,12 +1728,12 @@ CODE_838C24:
     BNE CODE_838C24                                            ;838C29|D0F9    |838C24;
     REP #$20                                                   ;838C2B|C220    |      ;
     LDA.L Table_8390EF,X                                       ;838C2D|BFEF9083|8390EF;
-    STA.B ptrUnknown0x0A                                       ;838C31|850A    |00000A;
+    STA.B ptrAudioData                                         ;838C31|850A    |00000A;
     INX                                                        ;838C33|E8      |      ;
     INX                                                        ;838C34|E8      |      ;
     SEP #$20                                                   ;838C35|E220    |      ;
     LDA.L Table_8390EF,X                                       ;838C37|BFEF9083|8390EF;
-    STA.B ptrUnknown0x0A+2                                     ;838C3B|850C    |00000C;
+    STA.B ptrAudioData+2                                       ;838C3B|850C    |00000C;
     LDA.B #$00                                                 ;838C3D|A900    |      ;
     XBA                                                        ;838C3F|EB      |      ;
     LDA.B $94                                                  ;838C40|A594    |000094;
@@ -1793,13 +1793,13 @@ CODE_838C9C:
  
 CODE_838CA3:
     SEP #$20                                                   ;838CA3|E220    |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838CA5|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838CA5|B70A    |00000A;
     STA.W SNES_APUIO0                                          ;838CA7|8D4021  |002140;
     INY                                                        ;838CAA|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838CAB|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838CAB|B70A    |00000A;
     STA.W SNES_APUIO1                                          ;838CAD|8D4121  |002141;
     INY                                                        ;838CB0|C8      |      ;
-    LDA.B [ptrUnknown0x0A],Y                                   ;838CB1|B70A    |00000A;
+    LDA.B [ptrAudioData],Y                                     ;838CB1|B70A    |00000A;
     STA.W SNES_APUIO2                                          ;838CB3|8D4221  |002142;
     INY                                                        ;838CB6|C8      |      ;
     DEX                                                        ;838CB7|CA      |      ;
@@ -2201,7 +2201,7 @@ Table_8390EF:
     db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390F9|        |      ;
     dl DATA8_ADC5E9                                            ;839100|        |ADC5E9;
     db $76,$02,$FF,$E0,$B8,$06,$B0                             ;839103|        |      ;
-    dl Data_AE8000                                             ;83910A|        |AE8000;
+    dl DATA8_AE8000                                            ;83910A|        |AE8000;
     db $DF,$05,$FF,$E3,$B8,$01,$E0                             ;83910D|        |      ;
     dl DATA8_ADD6A9                                            ;839114|        |ADD6A9;
     db $3E,$07,$FF,$EF,$B8,$05,$F0                             ;839117|        |      ;
@@ -2215,7 +2215,7 @@ Table_8390EF:
     db $50,$19,$FF,$E0,$B8,$05,$A0                             ;83913F|        |      ;
     dl DATA8_AECE10                                            ;839146|        |AECE10;
     db $D8,$12,$86,$EB,$B8,$04,$00                             ;839149|        |      ;
-    dl Data_AF8000                                             ;839150|        |AF8000;
+    dl DATA8_AF8000                                            ;839150|        |AF8000;
     db $A3,$02,$FF,$EE,$B8,$03,$F0                             ;839153|        |      ;
     dl DATA8_AEE760                                            ;83915A|        |AEE760;
     db $B6,$0D,$FF,$E0,$B8,$03,$50                             ;83915D|        |      ;
@@ -2235,7 +2235,7 @@ Table_8390EF:
     db $3F,$1B,$FF,$E0,$B8,$03,$C0                             ;8391A3|        |      ;
     dl DATA8_AFD830                                            ;8391AA|        |AFD830;
     db $02,$25,$FF,$E0,$B8,$07,$A0                             ;8391AD|        |      ;
-    dl Data_B08000                                             ;8391B4|        |B08000;
+    dl DATA8_B08000                                            ;8391B4|        |B08000;
     db $1B,$00,$FF,$E0,$B8,$00,$90                             ;8391B7|        |      ;
     dl DATA8_AFF370                                            ;8391BE|        |AFF370;
     db $3E,$19,$FF,$E9,$B8,$01,$E0                             ;8391C1|        |      ;
@@ -2253,7 +2253,7 @@ Table_8390EF:
     db $8A,$0F,$FF,$E0,$B8,$01,$50                             ;8391FD|        |      ;
     dl DATA8_B0E380                                            ;839204|        |B0E380;
     db $46,$0E,$FF,$E0,$B8,$07,$A0                             ;839207|        |      ;
-    dl Data_B18000                                             ;83920E|        |B18000;
+    dl DATA8_B18000                                            ;83920E|        |B18000;
     db $67,$3E,$FF,$E0,$B8,$05,$40                             ;839211|        |      ;
     dl DATA8_B18E50                                            ;839218|        |B18E50;
     db $8A,$0F,$FF,$E0,$B8,$01,$C0                             ;83921B|        |      ;
@@ -2269,7 +2269,7 @@ Table_8390EF:
     db $BC,$07,$FF,$E0,$B8,$01,$10                             ;83924D|        |      ;
     dl DATA8_B29F30                                            ;839254|        |B29F30;
     db $71,$13,$FF,$E0,$B8,$01,$A0                             ;839257|        |      ;
-    dl Data_B28000                                             ;83925E|        |B28000;
+    dl DATA8_B28000                                            ;83925E|        |B28000;
     db $01,$02,$FF,$E9,$B8,$01,$E0                             ;839261|        |      ;
     dl DATA8_B2A6F0                                            ;839268|        |B2A6F0;
     db $BC,$07,$FF,$E0,$B8,$01,$00                             ;83926B|        |      ;
@@ -3124,7 +3124,7 @@ nTextFFFETable:
 pTextAmmountTable:
     dl $000001,$00000A,$000064,$0003E8                         ;8398D6|        |      ; 0x06 * [n24/ptr24] (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
     dl $002710,$0186A0,$0F4240                                 ;8398E2|        |      ;
-    dl DATA16_989680                                           ;8398EB|        |989680;
+    dl GFX_989680                                              ;8398EB|        |989680;
  
 sTextFFFCPointerTable:
     dl $7F1F04                                                 ;8398EE|        |7F1F04; 0x70 * [ptr28 pData, n8 nSize]
