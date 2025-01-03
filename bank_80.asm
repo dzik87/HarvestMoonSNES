@@ -5874,7 +5874,7 @@ sHarvestFestivalMap:
     dw $3000                                                   ;80AC8B|        |      ;
     dl sCompressedTilemap_988000                               ;80AC8D|        |988000;
     dw $4000                                                   ;80AC90|        |      ;
-    dl GFX_98AEDB                                              ;80AC92|        |98AEDB;
+    dl sCompressedTilemap_98AEDB                               ;80AC92|        |98AEDB;
     dw $6000                                                   ;80AC95|        |      ;
     dl sCompressedCharactermap_A4C5DE                          ;80AC97|        |A4C5DE;
  
@@ -5973,7 +5973,7 @@ sMountainFallMap:
     dw $0000,$0200,$0000,$0200,$2000                           ;80AD91|        |      ;
     dl sCompressedTilemap_9D991C                               ;80AD9B|        |9D991C;
     dw $3000                                                   ;80AD9E|        |      ;
-    dl GFX_9DB15E                                              ;80ADA0|        |9DB15E;
+    dl sCompressedTilemap_9DB15E                               ;80ADA0|        |9DB15E;
     dw $4000                                                   ;80ADA3|        |      ;
     dl sCompressedTilemap_9DCE31                               ;80ADA5|        |9DCE31;
     dw $6000                                                   ;80ADA8|        |      ;
