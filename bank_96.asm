@@ -2,7 +2,7 @@
     ORG $968000
  
  
-Data_968000:
+DATA16_968000:
     dw $2000,$0000,$DDDA,$FFFD,$FCFD,$0FE8                     ;968000|        |      ;
     dw $0B1E,$01F3,$2E36,$230B,$3ECF,$F00B                     ;96800C|        |      ;
     dw $4E80,$BC0B,$FEFF,$FBDD,$9F9F,$97BB                     ;968018|        |      ;

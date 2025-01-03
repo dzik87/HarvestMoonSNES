@@ -5755,7 +5755,7 @@ sFarmSpringMap:
     dw $0000,$0300,$0000,$0300,$2000                           ;80AB43|        |      ; OBJ_clamp_left
     dl DATA16_92D3AB                                           ;80AB4D|        |92D3AB; Compressed Location 1
     dw $3000                                                   ;80AB50|        |      ; Destination in VRAM 2
-    dl Data_938000                                             ;80AB52|        |938000; Compressed Location 2
+    dl DATA16_938000                                           ;80AB52|        |938000; Compressed Location 2
     dw $4000                                                   ;80AB55|        |      ; Destination in VRAM 3
     dl DATA16_939E8E                                           ;80AB57|        |939E8E; Compressed Location 3
     dw $6000                                                   ;80AB5A|        |      ; Destination in VRAM
@@ -5768,7 +5768,7 @@ sFarmSummerMap:
     dw $0000,$0300,$0000,$0300,$2000                           ;80AB66|        |      ;
     dl DATA16_92D3AB                                           ;80AB70|        |92D3AB;
     dw $3000                                                   ;80AB73|        |      ;
-    dl Data_938000                                             ;80AB75|        |938000;
+    dl DATA16_938000                                           ;80AB75|        |938000;
     dw $4000                                                   ;80AB78|        |      ;
     dl DATA16_939E8E                                           ;80AB7A|        |939E8E;
     dw $6000                                                   ;80AB7D|        |      ;
@@ -5846,7 +5846,7 @@ sTownWinterMap:
     dw $0000,$0200,$0000,$0300,$2000                           ;80AC38|        |      ;
     dl DATA16_99DCBD                                           ;80AC42|        |99DCBD;
     dw $3000                                                   ;80AC45|        |      ;
-    dl Data_9A8000                                             ;80AC47|        |9A8000;
+    dl DATA16_9A8000                                           ;80AC47|        |9A8000;
     dw $4000                                                   ;80AC4A|        |      ;
     dl DATA16_9A9921                                           ;80AC4C|        |9A9921;
     dw $6000                                                   ;80AC4F|        |      ;
@@ -5885,7 +5885,7 @@ sStarNightFestivalSquareMap:
     dw $0000,$0100,$0000,$0100,$2000                           ;80ACA1|        |      ;
     dl DATA16_99DCBD                                           ;80ACAB|        |99DCBD;
     dw $3000                                                   ;80ACAE|        |      ;
-    dl Data_9A8000                                             ;80ACB0|        |9A8000;
+    dl DATA16_9A8000                                           ;80ACB0|        |9A8000;
     dw $4000                                                   ;80ACB3|        |      ;
     dl DATA16_9AAEAB                                           ;80ACB5|        |9AAEAB;
     dw $6000                                                   ;80ACB8|        |      ;
@@ -5947,9 +5947,9 @@ sMountainSpring:
     dw $0000,$0200,$0000,$0200,$2000                           ;80AD4B|        |      ;
     dl DATA16_9DE7CE                                           ;80AD55|        |9DE7CE;
     dw $3000                                                   ;80AD58|        |      ;
-    dl Data_9E8000                                             ;80AD5A|        |9E8000;
+    dl DATA16_9E8000                                           ;80AD5A|        |9E8000;
     dw $4000                                                   ;80AD5D|        |      ;
-    dl Data_9D8000                                             ;80AD5F|        |9D8000;
+    dl DATA16_9D8000                                           ;80AD5F|        |9D8000;
     dw $6000                                                   ;80AD62|        |      ;
     dl sCompressedCharactermap_A28000                          ;80AD64|        |A28000;
  
@@ -5962,7 +5962,7 @@ sMountainSummerMap:
     dw $3000                                                   ;80AD7B|        |      ;
     dl DATA16_9CE37D                                           ;80AD7D|        |9CE37D;
     dw $4000                                                   ;80AD80|        |      ;
-    dl Data_9D8000                                             ;80AD82|        |9D8000;
+    dl DATA16_9D8000                                           ;80AD82|        |9D8000;
     dw $6000                                                   ;80AD85|        |      ;
     dl sCompressedCharactermap_A28000                          ;80AD87|        |A28000;
  
@@ -6010,7 +6010,7 @@ sHouseMap:
     dw $0000                                                   ;80ADF4|        |      ;
     db $01,$01,$02,$01                                         ;80ADF6|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80ADFA|        |      ;
-    dl Data_958000                                             ;80AE04|        |95C000;
+    dl DATA16_95C000                                           ;80AE04|        |95C000;
     dw $3000                                                   ;80AE07|        |      ;
     dl DATA16_95D6E2                                           ;80AE09|        |95D6E2;
     dw $6000                                                   ;80AE0C|        |      ;
@@ -6021,7 +6021,7 @@ sHouseUpgrade1Map:
     dw $0000                                                   ;80AE12|        |      ;
     db $01,$01,$02,$01                                         ;80AE14|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AE18|        |      ;
-    dl Data_958000                                             ;80AE22|        |95C000;
+    dl DATA16_95C000                                           ;80AE22|        |95C000;
     dw $3000                                                   ;80AE25|        |      ;
     dl DATA16_95D6E2                                           ;80AE27|        |95D6E2;
     dw $6000                                                   ;80AE2A|        |      ;
@@ -6032,7 +6032,7 @@ sHouseUpgrade2Map:
     dw $0000                                                   ;80AE30|        |      ;
     db $02,$01,$02,$01                                         ;80AE32|        |      ;
     dw $0000,$00A0,$0000,$0000,$2000                           ;80AE36|        |      ;
-    dl Data_958000                                             ;80AE40|        |95C000;
+    dl DATA16_95C000                                           ;80AE40|        |95C000;
     dw $3000                                                   ;80AE43|        |      ;
     dl DATA16_95D6E2                                           ;80AE45|        |95D6E2;
     dw $6000                                                   ;80AE48|        |      ;
@@ -6070,7 +6070,7 @@ sChurchMap:
     dw $0000                                                   ;80AE99|        |      ;
     db $01,$02,$01,$01                                         ;80AE9B|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80AE9F|        |      ;
-    dl Data_968000                                             ;80AEA9|        |968000;
+    dl DATA16_968000                                           ;80AEA9|        |968000;
     dw $6000                                                   ;80AEAC|        |      ;
     dl sCompressedCharactermap_A4A597                          ;80AEAE|        |A4A597;
  
@@ -6151,7 +6151,7 @@ sAnimalShopMap:
     dw $0000                                                   ;80AF7A|        |      ;
     db $01,$01,$01,$01                                         ;80AF7C|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AF80|        |      ;
-    dl Data_978000                                             ;80AF8A|        |978000;
+    dl DATA16_978000                                           ;80AF8A|        |978000;
     dw $6000                                                   ;80AF8D|        |      ;
     dl sCompressedCharactermap_A4BCC1                          ;80AF8F|        |A4BCC1;
  
@@ -6171,7 +6171,7 @@ sToolShedMap:
     dw $0000,$0000,$0000,$0000,$2000                           ;80AFB2|        |      ;
     dl DATA16_9AE02D                                           ;80AFBC|        |9AE02D;
     dw $3000                                                   ;80AFBF|        |      ;
-    dl Data_9B8000                                             ;80AFC1|        |9B8000;
+    dl DATA16_9B8000                                           ;80AFC1|        |9B8000;
     dw $7000                                                   ;80AFC4|        |      ;
     dl sCompressedCharactermap_A59C08                          ;80AFC6|        |A59C08;
     dw $6000                                                   ;80AFC9|        |      ;
@@ -6277,7 +6277,7 @@ sMap_80B0CD:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B0D4|        |      ;
     dl DATA16_99DCBD                                           ;80B0DE|        |99DCBD;
     dw $3000                                                   ;80B0E1|        |      ;
-    dl Data_9A8000                                             ;80B0E3|        |9A8000;
+    dl DATA16_9A8000                                           ;80B0E3|        |9A8000;
     dw $4000                                                   ;80B0E6|        |      ;
     dl DATA16_9A9921                                           ;80B0E8|        |9A9921;
     dw $6000                                                   ;80B0EB|        |      ;
@@ -6290,7 +6290,7 @@ sSummitSpringMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B0F7|        |      ;
     dl DATA16_9BB76D                                           ;80B101|        |9BB76D;
     dw $3000                                                   ;80B104|        |      ;
-    dl Data_9C8000                                             ;80B106|        |9C8000;
+    dl DATA16_9C8000                                           ;80B106|        |9C8000;
     dw $6000                                                   ;80B109|        |      ;
     dl sCompressedCharactermap_A5B943                          ;80B10B|        |A5B943;
     dw $7000                                                   ;80B10E|        |      ;
@@ -6303,7 +6303,7 @@ sSummitSummerMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B11A|        |      ;
     dl DATA16_9BB76D                                           ;80B124|        |9BB76D;
     dw $3000                                                   ;80B127|        |      ;
-    dl Data_9C8000                                             ;80B129|        |9C8000;
+    dl DATA16_9C8000                                           ;80B129|        |9C8000;
     dw $6000                                                   ;80B12C|        |      ;
     dl sCompressedCharactermap_A5B943                          ;80B12E|        |A5B943;
     dw $7000                                                   ;80B131|        |      ;
@@ -6316,7 +6316,7 @@ sSummitFallMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B13D|        |      ;
     dl DATA16_9BB76D                                           ;80B147|        |9BB76D;
     dw $3000                                                   ;80B14A|        |      ;
-    dl Data_9C8000                                             ;80B14C|        |9C8000;
+    dl DATA16_9C8000                                           ;80B14C|        |9C8000;
     dw $6000                                                   ;80B14F|        |      ;
     dl sCompressedCharactermap_A5B943                          ;80B151|        |A5B943;
     dw $7000                                                   ;80B154|        |      ;
@@ -6342,7 +6342,7 @@ sMap_80B17C:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B183|        |      ;
     dl DATA16_9BB76D                                           ;80B18D|        |9BB76D;
     dw $3000                                                   ;80B190|        |      ;
-    dl Data_9C8000                                             ;80B192|        |9C8000;
+    dl DATA16_9C8000                                           ;80B192|        |9C8000;
     dw $6000                                                   ;80B195|        |      ;
     dl sCompressedCharactermap_A5B943                          ;80B197|        |A5B943;
     dw $7000                                                   ;80B19A|        |      ;
@@ -6355,7 +6355,7 @@ sMap_80B19F:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1A6|        |      ;
     dl DATA16_9BB76D                                           ;80B1B0|        |9BB76D;
     dw $3000                                                   ;80B1B3|        |      ;
-    dl Data_9C8000                                             ;80B1B5|        |9C8000;
+    dl DATA16_9C8000                                           ;80B1B5|        |9C8000;
     dw $6000                                                   ;80B1B8|        |      ;
     dl sCompressedCharactermap_A5B943                          ;80B1BA|        |A5B943;
     dw $7000                                                   ;80B1BD|        |      ;
@@ -6368,7 +6368,7 @@ sMap_80B1C2:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1C9|        |      ;
     dl DATA16_9BB76D                                           ;80B1D3|        |9BB76D;
     dw $3000                                                   ;80B1D6|        |      ;
-    dl Data_9C8000                                             ;80B1D8|        |9C8000;
+    dl DATA16_9C8000                                           ;80B1D8|        |9C8000;
     dw $7000                                                   ;80B1DB|        |      ;
     dl sCompressedCharactermap_A5B042                          ;80B1DD|        |A5B042;
     dw $6000                                                   ;80B1E0|        |      ;
@@ -6407,7 +6407,7 @@ sNewYearsFestivalMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B232|        |      ;
     dl DATA16_9BB76D                                           ;80B23C|        |9BB76D;
     dw $3000                                                   ;80B23F|        |      ;
-    dl Data_9C8000                                             ;80B241|        |9C8000;
+    dl DATA16_9C8000                                           ;80B241|        |9C8000;
     dw $6000                                                   ;80B244|        |      ;
     dl sCompressedCharactermap_A5B943                          ;80B246|        |A5B943;
     dw $7000                                                   ;80B249|        |      ;
@@ -6420,7 +6420,7 @@ sMap_80B24E:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B255|        |      ;
     dl DATA16_9BB76D                                           ;80B25F|        |9BB76D;
     dw $3000                                                   ;80B262|        |      ;
-    dl Data_9C8000                                             ;80B264|        |9C8000;
+    dl DATA16_9C8000                                           ;80B264|        |9C8000;
     dw $6000                                                   ;80B267|        |      ;
     dl DATA16_A5BD8A                                           ;80B269|        |A5BD8A;
     dw $7000                                                   ;80B26C|        |      ;
@@ -6442,7 +6442,7 @@ sMap_80B28A:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B291|        |      ;
     dl DATA16_92D3AB                                           ;80B29B|        |92D3AB;
     dw $3000                                                   ;80B29E|        |      ;
-    dl Data_938000                                             ;80B2A0|        |938000;
+    dl DATA16_938000                                           ;80B2A0|        |938000;
     dw $4000                                                   ;80B2A3|        |      ;
     dl DATA16_939E8E                                           ;80B2A5|        |939E8E;
     dw $6000                                                   ;80B2A8|        |      ;
@@ -6455,7 +6455,7 @@ sMap_80B2AD:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B2B4|        |      ;
     dl DATA16_92D3AB                                           ;80B2BE|        |92D3AB;
     dw $3000                                                   ;80B2C1|        |      ;
-    dl Data_938000                                             ;80B2C3|        |938000;
+    dl DATA16_938000                                           ;80B2C3|        |938000;
     dw $4000                                                   ;80B2C6|        |      ;
     dl DATA16_939E8E                                           ;80B2C8|        |939E8E;
     dw $6000                                                   ;80B2CB|        |      ;
@@ -6468,7 +6468,7 @@ sMap_80B2D0:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B2D7|        |      ;
     dl DATA16_92D3AB                                           ;80B2E1|        |92D3AB;
     dw $3000                                                   ;80B2E4|        |      ;
-    dl Data_938000                                             ;80B2E6|        |938000;
+    dl DATA16_938000                                           ;80B2E6|        |938000;
     dw $4000                                                   ;80B2E9|        |      ;
     dl DATA16_939E8E                                           ;80B2EB|        |939E8E;
     dw $6000                                                   ;80B2EE|        |      ;
@@ -6481,7 +6481,7 @@ sMap_80B2F3:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B2FA|        |      ;
     dl DATA16_92D3AB                                           ;80B304|        |92D3AB;
     dw $3000                                                   ;80B307|        |      ;
-    dl Data_938000                                             ;80B309|        |938000;
+    dl DATA16_938000                                           ;80B309|        |938000;
     dw $4000                                                   ;80B30C|        |      ;
     dl DATA16_939E8E                                           ;80B30E|        |939E8E;
     dw $6000                                                   ;80B311|        |      ;
@@ -6494,7 +6494,7 @@ sMap_80B316:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B31D|        |      ;
     dl DATA16_92D3AB                                           ;80B327|        |92D3AB;
     dw $3000                                                   ;80B32A|        |      ;
-    dl Data_938000                                             ;80B32C|        |938000;
+    dl DATA16_938000                                           ;80B32C|        |938000;
     dw $4000                                                   ;80B32F|        |      ;
     dl DATA16_939E8E                                           ;80B331|        |939E8E;
     dw $6000                                                   ;80B334|        |      ;
@@ -6520,7 +6520,7 @@ sMap_80B35C:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B363|        |      ;
     dl DATA16_92D3AB                                           ;80B36D|        |92D3AB;
     dw $3000                                                   ;80B370|        |      ;
-    dl Data_938000                                             ;80B372|        |938000;
+    dl DATA16_938000                                           ;80B372|        |938000;
     dw $4000                                                   ;80B375|        |      ;
     dl DATA16_939E8E                                           ;80B377|        |939E8E;
     dw $6000                                                   ;80B37A|        |      ;
@@ -6533,7 +6533,7 @@ sMap_80B37F:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B386|        |      ;
     dl DATA16_92D3AB                                           ;80B390|        |92D3AB;
     dw $3000                                                   ;80B393|        |      ;
-    dl Data_938000                                             ;80B395|        |938000;
+    dl DATA16_938000                                           ;80B395|        |938000;
     dw $4000                                                   ;80B398|        |      ;
     dl DATA16_939E8E                                           ;80B39A|        |939E8E;
     dw $6000                                                   ;80B39D|        |      ;
@@ -6546,7 +6546,7 @@ sMap_80B3A2:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B3A9|        |      ;
     dl DATA16_92D3AB                                           ;80B3B3|        |92D3AB;
     dw $3000                                                   ;80B3B6|        |      ;
-    dl Data_938000                                             ;80B3B8|        |938000;
+    dl DATA16_938000                                           ;80B3B8|        |938000;
     dw $4000                                                   ;80B3BB|        |      ;
     dl DATA16_939E8E                                           ;80B3BD|        |939E8E;
     dw $6000                                                   ;80B3C0|        |      ;
@@ -6559,7 +6559,7 @@ sMap_80B3C5:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B3CC|        |      ;
     dl DATA16_92D3AB                                           ;80B3D6|        |92D3AB;
     dw $3000                                                   ;80B3D9|        |      ;
-    dl Data_938000                                             ;80B3DB|        |938000;
+    dl DATA16_938000                                           ;80B3DB|        |938000;
     dw $4000                                                   ;80B3DE|        |      ;
     dl DATA16_939E8E                                           ;80B3E0|        |939E8E;
     dw $6000                                                   ;80B3E3|        |      ;
@@ -6572,7 +6572,7 @@ sMap_80B3E8:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B3EF|        |      ;
     dl DATA16_92D3AB                                           ;80B3F9|        |92D3AB;
     dw $3000                                                   ;80B3FC|        |      ;
-    dl Data_938000                                             ;80B3FE|        |938000;
+    dl DATA16_938000                                           ;80B3FE|        |938000;
     dw $4000                                                   ;80B401|        |      ;
     dl DATA16_939E8E                                           ;80B403|        |939E8E;
     dw $6000                                                   ;80B406|        |      ;
@@ -6587,7 +6587,7 @@ sMap_80B40B:
     dw $3000                                                   ;80B41F|        |      ;
     dl DATA16_9CE37D                                           ;80B421|        |9CE37D;
     dw $4000                                                   ;80B424|        |      ;
-    dl Data_9D8000                                             ;80B426|        |9D8000;
+    dl DATA16_9D8000                                           ;80B426|        |9D8000;
     dw $6000                                                   ;80B429|        |      ;
     dl sCompressedCharactermap_A68864                          ;80B42B|        |A68864;
  
@@ -6598,7 +6598,7 @@ sMap_80B42E:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B435|        |      ;
     dl DATA16_92D3AB                                           ;80B43F|        |92D3AB;
     dw $3000                                                   ;80B442|        |      ;
-    dl Data_938000                                             ;80B444|        |938000;
+    dl DATA16_938000                                           ;80B444|        |938000;
     dw $4000                                                   ;80B447|        |      ;
     dl DATA16_939E8E                                           ;80B449|        |939E8E;
     dw $6000                                                   ;80B44C|        |      ;
@@ -6611,7 +6611,7 @@ sMap_80B451:
     dw $0000,$0000,$0000,$0000,$2000                           ;80B458|        |      ;
     dl DATA16_92D3AB                                           ;80B462|        |92D3AB;
     dw $3000                                                   ;80B465|        |      ;
-    dl Data_938000                                             ;80B467|        |938000;
+    dl DATA16_938000                                           ;80B467|        |938000;
     dw $4000                                                   ;80B46A|        |      ;
     dl DATA16_939E8E                                           ;80B46C|        |939E8E;
     dw $6000                                                   ;80B46F|        |      ;
