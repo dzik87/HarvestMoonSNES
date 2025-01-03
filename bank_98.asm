@@ -1009,7 +1009,7 @@ sCompressedTilemap_989A52:
     db $FD,$F8,$BA,$10,$55,$1F,$10,$BA,$30,$D5,$D0,$CA         ;98AECE|        |      ;
     db $B1                                                     ;98AEDA|        |      ;
  
-GFX_98AEDB:
+sCompressedTilemap_98AEDB:
     db $00,$20,$00,$00,$FE,$DD,$E1,$C6,$00,$A9,$00,$C1         ;98AEDB|        |      ;
     db $00,$A2,$EF,$00,$A4,$00,$CF,$DD,$EF,$1F,$48,$78         ;98AEE7|        |      ;
     db $FF,$4D,$7E,$DF,$E7,$C4,$FA,$D5,$FB,$FF,$CC,$EB         ;98AEF3|        |      ;

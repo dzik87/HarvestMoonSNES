@@ -6006,7 +6006,7 @@ fUnknown_82AF00:
     LDA.B $86                                                  ;82AFBF|A586    |000086;
     TAX                                                        ;82AFC1|AA      |      ;
     SEP #$20                                                   ;82AFC2|E220    |      ;
-    LDA.L Table_82B02A,X                                       ;82AFC4|BF2AB082|82B02A;
+    LDA.L .unknownData,X                                       ;82AFC4|BF2AB082|82B02A;
     DEC A                                                      ;82AFC8|3A      |      ;
     STA.B $94                                                  ;82AFC9|8594    |000094;
     PLX                                                        ;82AFCB|FA      |      ;
@@ -6075,7 +6075,7 @@ fUnknown_82AF00:
     RTL                                                        ;82B029|6B      |      ;
  
  
-Table_82B02A:
+.unknownData:
     db $09,$02,$07,$01,$07,$04,$07,$04,$09,$03,$08,$02         ;82B02A|        |      ;
     db $09,$06,$08,$05                                         ;82B036|        |      ;
  

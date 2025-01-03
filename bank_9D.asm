@@ -1060,7 +1060,7 @@ sCompressedTilemap_9D991C:
     db $B5,$BC,$BF,$FF,$DF,$21,$FF,$43,$FF,$65,$FF,$87         ;9DB14C|        |      ;
     db $FF,$00,$A9,$FF,$BC,$EF                                 ;9DB158|        |      ;
  
-GFX_9DB15E:
+sCompressedTilemap_9DB15E:
     db $00,$20,$00,$00,$F4,$BC,$FF,$EC,$EB,$FF,$0D,$0C         ;9DB15E|        |      ;
     db $0F,$0A,$1F,$14,$FF,$3F,$2C,$7B,$59,$D4,$91,$7C         ;9DB16A|        |      ;
     db $43,$FF,$E0,$C7,$72,$4F,$F0,$01,$E4,$01,$FF,$CC         ;9DB176|        |      ;

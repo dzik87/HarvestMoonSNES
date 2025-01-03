@@ -846,7 +846,7 @@ CODE_8385B9:
     LDA.B $94                                                  ;8385E2|A594    |000094;
     STA.W SNES_APUIO0                                          ;8385E4|8D4021  |002140;
     REP #$20                                                   ;8385E7|C220    |      ;
-    LDA.L Table_8390EF,X                                       ;8385E9|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;8385E9|BFEF9083|8390EF;
     SEP #$20                                                   ;8385ED|E220    |      ;
     STA.W SNES_APUIO1                                          ;8385EF|8D4121  |002141;
     XBA                                                        ;8385F2|EB      |      ;
@@ -884,13 +884,13 @@ CODE_838625:
     LDA.B #$01                                                 ;838625|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838627|CD4321  |002143;
     BNE CODE_838625                                            ;83862A|D0F9    |838625;
-    LDA.L Table_8390EF,X                                       ;83862C|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;83862C|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;838630|8D4021  |002140;
     INX                                                        ;838633|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;838634|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838634|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838638|8D4121  |002141;
     INX                                                        ;83863B|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;83863C|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;83863C|BFEF9083|8390EF;
     STA.W SNES_APUIO2                                          ;838640|8D4221  |002142;
     LDA.B #$02                                                 ;838643|A902    |      ;
     STA.W SNES_APUIO3                                          ;838645|8D4321  |002143;
@@ -924,10 +924,10 @@ CODE_838671:
     LDA.B #$01                                                 ;838671|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838673|CD4321  |002143;
     BNE CODE_838671                                            ;838676|D0F9    |838671;
-    LDA.L Table_8390EF,X                                       ;838678|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838678|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;83867C|8D4021  |002140;
     INX                                                        ;83867F|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;838680|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838680|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838684|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838687|9C4221  |002142;
     LDA.B #$02                                                 ;83868A|A902    |      ;
@@ -963,12 +963,12 @@ CODE_8386B8:
     CMP.W SNES_APUIO3                                          ;8386BA|CD4321  |002143;
     BNE CODE_8386B8                                            ;8386BD|D0F9    |8386B8;
     REP #$20                                                   ;8386BF|C220    |      ;
-    LDA.L Table_8390EF,X                                       ;8386C1|BFEF9083|8390EF; read ptr at offset 7
+    LDA.L sAudioData2_8390EF,X                                 ;8386C1|BFEF9083|8390EF; read ptr at offset 7
     STA.B ptrAudioData                                         ;8386C5|850A    |00000A; store 16b to $0A
     INX                                                        ;8386C7|E8      |      ;
     INX                                                        ;8386C8|E8      |      ;
     SEP #$20                                                   ;8386C9|E220    |      ;
-    LDA.L Table_8390EF,X                                       ;8386CB|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;8386CB|BFEF9083|8390EF;
     STA.B ptrAudioData+2                                       ;8386CF|850C    |00000C; store 8b to $0C
     LDA.B #$00                                                 ;8386D1|A900    |      ;
     XBA                                                        ;8386D3|EB      |      ;
@@ -976,7 +976,7 @@ CODE_8386B8:
     ASL A                                                      ;8386D6|0A      |      ;
     REP #$20                                                   ;8386D7|C220    |      ;
     TAX                                                        ;8386D9|AA      |      ;
-    LDA.L Table_838EFF,X                                       ;8386DA|BFFF8E83|838EFF;
+    LDA.L aAudioRelatedData_838EFF,X                           ;8386DA|BFFF8E83|838EFF;
     STA.B $7E                                                  ;8386DE|857E    |00007E;
     LDA.W #$0003                                               ;8386E0|A90300  |      ;
     STA.B $80                                                  ;8386E3|8580    |000080;
@@ -1108,7 +1108,7 @@ CODE_838799:
  
 CODE_8387C0:
     SEP #$20                                                   ;8387C0|E220    |      ;
-    LDA.L Table_838F83,X                                       ;8387C2|BF838F83|838F83;
+    LDA.L sAudioData1_838F83,X                                 ;8387C2|BF838F83|838F83;
     STA.B $94                                                  ;8387C6|8594    |000094;
     BNE CODE_8387DA                                            ;8387C8|D010    |8387DA;
     REP #$20                                                   ;8387CA|C220    |      ;
@@ -1159,7 +1159,7 @@ CODE_8387F0:
     LDA.B $94                                                  ;83881A|A594    |000094;
     STA.W SNES_APUIO0                                          ;83881C|8D4021  |002140;
     REP #$20                                                   ;83881F|C220    |      ;
-    LDA.L Table_8390EF,X                                       ;838821|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838821|BFEF9083|8390EF;
     SEP #$20                                                   ;838825|E220    |      ;
     STA.W SNES_APUIO1                                          ;838827|8D4121  |002141;
     XBA                                                        ;83882A|EB      |      ;
@@ -1197,13 +1197,13 @@ CODE_83885D:
     LDA.B #$01                                                 ;83885D|A901    |      ;
     CMP.W SNES_APUIO3                                          ;83885F|CD4321  |002143;
     BNE CODE_83885D                                            ;838862|D0F9    |83885D;
-    LDA.L Table_8390EF,X                                       ;838864|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838864|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;838868|8D4021  |002140;
     INX                                                        ;83886B|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;83886C|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;83886C|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838870|8D4121  |002141;
     INX                                                        ;838873|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;838874|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838874|BFEF9083|8390EF;
     STA.W SNES_APUIO2                                          ;838878|8D4221  |002142;
     LDA.B #$02                                                 ;83887B|A902    |      ;
     STA.W SNES_APUIO3                                          ;83887D|8D4321  |002143;
@@ -1237,10 +1237,10 @@ CODE_8388A9:
     LDA.B #$01                                                 ;8388A9|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8388AB|CD4321  |002143;
     BNE CODE_8388A9                                            ;8388AE|D0F9    |8388A9;
-    LDA.L Table_8390EF,X                                       ;8388B0|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;8388B0|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;8388B4|8D4021  |002140;
     INX                                                        ;8388B7|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;8388B8|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;8388B8|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;8388BC|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;8388BF|9C4221  |002142;
     LDA.B #$02                                                 ;8388C2|A902    |      ;
@@ -1276,12 +1276,12 @@ CODE_8388F0:
     CMP.W SNES_APUIO3                                          ;8388F2|CD4321  |002143;
     BNE CODE_8388F0                                            ;8388F5|D0F9    |8388F0;
     REP #$20                                                   ;8388F7|C220    |      ;
-    LDA.L Table_8390EF,X                                       ;8388F9|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;8388F9|BFEF9083|8390EF;
     STA.B ptrAudioData                                         ;8388FD|850A    |00000A;
     INX                                                        ;8388FF|E8      |      ;
     INX                                                        ;838900|E8      |      ;
     SEP #$20                                                   ;838901|E220    |      ;
-    LDA.L Table_8390EF,X                                       ;838903|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838903|BFEF9083|8390EF;
     STA.B ptrAudioData+2                                       ;838907|850C    |00000C;
     LDA.B #$00                                                 ;838909|A900    |      ;
     XBA                                                        ;83890B|EB      |      ;
@@ -1289,7 +1289,7 @@ CODE_8388F0:
     ASL A                                                      ;83890E|0A      |      ;
     REP #$20                                                   ;83890F|C220    |      ;
     TAX                                                        ;838911|AA      |      ;
-    LDA.L Table_838EFF,X                                       ;838912|BFFF8E83|838EFF;
+    LDA.L aAudioRelatedData_838EFF,X                           ;838912|BFFF8E83|838EFF;
     STA.B $7E                                                  ;838916|857E    |00007E;
     LDA.W #$0003                                               ;838918|A90300  |      ;
     STA.B $80                                                  ;83891B|8580    |000080;
@@ -1477,7 +1477,7 @@ CODE_838A31:
     ASL A                                                      ;838A4C|0A      |      ;
     REP #$20                                                   ;838A4D|C220    |      ;
     TAX                                                        ;838A4F|AA      |      ;
-    LDA.L Table_838F4F,X                                       ;838A50|BF4F8F83|838F4F;
+    LDA.L aAudioRelatedData_838F4F,X                           ;838A50|BF4F8F83|838F4F;
     STA.B $7E                                                  ;838A54|857E    |00007E;
     LDA.W #$0003                                               ;838A56|A90300  |      ;
     STA.B $80                                                  ;838A59|8580    |000080;
@@ -1515,12 +1515,12 @@ CODE_838A83:
     LDA.W #$000E                                               ;838A92|A90E00  |      ;
     JSL.L fUnknown_838000                                      ;838A95|22008083|838000;
     TAX                                                        ;838A99|AA      |      ;
-    LDA.L Table_838F83,X                                       ;838A9A|BF838F83|838F83;
+    LDA.L sAudioData1_838F83,X                                 ;838A9A|BF838F83|838F83;
     STA.B ptrAudioData                                         ;838A9E|850A    |00000A;
     INX                                                        ;838AA0|E8      |      ;
     INX                                                        ;838AA1|E8      |      ;
     SEP #$20                                                   ;838AA2|E220    |      ;
-    LDA.L Table_838F83,X                                       ;838AA4|BF838F83|838F83;
+    LDA.L sAudioData1_838F83,X                                 ;838AA4|BF838F83|838F83;
     STA.B ptrAudioData+2                                       ;838AA8|850C    |00000C;
     REP #$20                                                   ;838AAA|C220    |      ;
     LDA.B $80                                                  ;838AAC|A580    |000080;
@@ -1610,7 +1610,7 @@ CODE_838B0D:
     LDA.B $94                                                  ;838B4E|A594    |000094;
     STA.W SNES_APUIO0                                          ;838B50|8D4021  |002140;
     REP #$20                                                   ;838B53|C220    |      ;
-    LDA.L Table_8390EF,X                                       ;838B55|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838B55|BFEF9083|8390EF;
     SEP #$20                                                   ;838B59|E220    |      ;
     STA.W SNES_APUIO1                                          ;838B5B|8D4121  |002141;
     XBA                                                        ;838B5E|EB      |      ;
@@ -1648,13 +1648,13 @@ CODE_838B91:
     LDA.B #$01                                                 ;838B91|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838B93|CD4321  |002143;
     BNE CODE_838B91                                            ;838B96|D0F9    |838B91;
-    LDA.L Table_8390EF,X                                       ;838B98|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838B98|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;838B9C|8D4021  |002140;
     INX                                                        ;838B9F|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;838BA0|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838BA0|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838BA4|8D4121  |002141;
     INX                                                        ;838BA7|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;838BA8|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838BA8|BFEF9083|8390EF;
     STA.W SNES_APUIO2                                          ;838BAC|8D4221  |002142;
     LDA.B #$02                                                 ;838BAF|A902    |      ;
     STA.W SNES_APUIO3                                          ;838BB1|8D4321  |002143;
@@ -1688,10 +1688,10 @@ CODE_838BDD:
     LDA.B #$01                                                 ;838BDD|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838BDF|CD4321  |002143;
     BNE CODE_838BDD                                            ;838BE2|D0F9    |838BDD;
-    LDA.L Table_8390EF,X                                       ;838BE4|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838BE4|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;838BE8|8D4021  |002140;
     INX                                                        ;838BEB|E8      |      ;
-    LDA.L Table_8390EF,X                                       ;838BEC|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838BEC|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838BF0|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838BF3|9C4221  |002142;
     LDA.B #$02                                                 ;838BF6|A902    |      ;
@@ -1727,12 +1727,12 @@ CODE_838C24:
     CMP.W SNES_APUIO3                                          ;838C26|CD4321  |002143;
     BNE CODE_838C24                                            ;838C29|D0F9    |838C24;
     REP #$20                                                   ;838C2B|C220    |      ;
-    LDA.L Table_8390EF,X                                       ;838C2D|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838C2D|BFEF9083|8390EF;
     STA.B ptrAudioData                                         ;838C31|850A    |00000A;
     INX                                                        ;838C33|E8      |      ;
     INX                                                        ;838C34|E8      |      ;
     SEP #$20                                                   ;838C35|E220    |      ;
-    LDA.L Table_8390EF,X                                       ;838C37|BFEF9083|8390EF;
+    LDA.L sAudioData2_8390EF,X                                 ;838C37|BFEF9083|8390EF;
     STA.B ptrAudioData+2                                       ;838C3B|850C    |00000C;
     LDA.B #$00                                                 ;838C3D|A900    |      ;
     XBA                                                        ;838C3F|EB      |      ;
@@ -1740,7 +1740,7 @@ CODE_838C24:
     ASL A                                                      ;838C42|0A      |      ;
     REP #$20                                                   ;838C43|C220    |      ;
     TAX                                                        ;838C45|AA      |      ;
-    LDA.L Table_838EFF,X                                       ;838C46|BFFF8E83|838EFF;
+    LDA.L aAudioRelatedData_838EFF,X                           ;838C46|BFFF8E83|838EFF;
     STA.B $7E                                                  ;838C4A|857E    |00007E;
     LDA.W #$0003                                               ;838C4C|A90300  |      ;
     STA.B $80                                                  ;838C4F|8580    |000080;
@@ -2125,7 +2125,7 @@ fUnknown_838EE4:
     RTS                                                        ;838EFE|60      |      ;
  
  
-Table_838EFF:
+aAudioRelatedData_838EFF:
     dw $10C0,$10C0,$2EE0,$0BB0,$0780,$0D10                     ;838EFF|        |      ;
     dw $0040,$1F30,$1950,$1300,$02D0,$1B80                     ;838F0B|        |      ;
     dw $0340,$0670,$0DA0,$1240,$0FA0,$07D0                     ;838F17|        |      ;
@@ -2134,148 +2134,148 @@ Table_838EFF:
     dw $0F90,$0BB0,$0BB0,$0BB0,$0BB0,$07C0                     ;838F3B|        |      ;
     dw $1380,$0340,$07C0,$1F30                                 ;838F47|        |      ;
  
-Table_838F4F:
+aAudioRelatedData_838F4F:
     dw $02EC,$02EC,$0272,$03AB,$02B6,$0443                     ;838F4F|        |      ;
     dw $0399,$02AD,$01F6,$0260,$019A,$018E                     ;838F5B|        |      ;
     dw $01D1,$0293,$023D,$02F2,$0435,$0113                     ;838F67|        |      ;
     dw $04B7,$007A,$0080,$00DB,$011E,$00B0                     ;838F73|        |      ;
     dw $005C,$00BC                                             ;838F7F|        |      ;
  
-Table_838F83:
-    dl DATA8_AD8FD6                                            ;838F83|        |AD8FD6; ptr24, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?
+sAudioData1_838F83:
+    dl sAudioTrack_AD8FD6                                      ;838F83|        |AD8FD6; 0x1A * [ptr24, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
     db $07,$03,$01,$0C,$05,$26,$24,$00,$00,$00,$00             ;838F86|        |      ;
-    dl DATA8_AD8FD6                                            ;838F91|        |AD8FD6;
+    dl sAudioTrack_AD8FD6                                      ;838F91|        |AD8FD6;
     db $07,$03,$01,$0C,$00,$00,$00,$00,$00,$00,$00             ;838F94|        |      ;
-    dl DATA8_ADB44A                                            ;838F9F|        |ADB44A;
+    dl sAudioTrack_ADB44A                                      ;838F9F|        |ADB44A;
     db $01,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;838FA2|        |      ;
-    dl DATA8_AD9FFD                                            ;838FAD|        |AD9FFD;
+    dl sAudioTrack_AD9FFD                                      ;838FAD|        |AD9FFD;
     db $03,$07,$01,$16,$05,$00,$00,$00,$00,$00,$00             ;838FB0|        |      ;
-    dl DATA8_AD92C2                                            ;838FBB|        |AD92C2;
+    dl sAudioTrack_AD92C2                                      ;838FBB|        |AD92C2;
     db $03,$07,$01,$00,$00,$00,$00,$00,$00,$00,$00             ;838FBE|        |      ;
-    dl DATA8_AD9AA7                                            ;838FC9|        |AD9AA7;
+    dl sAudioTrack_AD9AA7                                      ;838FC9|        |AD9AA7;
     db $05,$01,$07,$00,$00,$00,$00,$00,$00,$00,$00             ;838FCC|        |      ;
-    dl DATA8_ADAC0E                                            ;838FD7|        |ADAC0E;
+    dl sAudioTrack_ADAC0E                                      ;838FD7|        |ADAC0E;
     db $03,$07,$01,$00,$00,$00,$00,$00,$00,$00,$00             ;838FDA|        |      ;
-    dl DATA8_ADAFA7                                            ;838FE5|        |ADAFA7;
+    dl sAudioTrack_ADAFA7                                      ;838FE5|        |ADAFA7;
     db $01,$04,$0C,$08,$00,$00,$00,$00,$00,$00,$00             ;838FE8|        |      ;
-    dl DATA8_ADB254                                            ;838FF3|        |ADB254;
+    dl sAudioTrack_ADB254                                      ;838FF3|        |ADB254;
     db $01,$07,$16,$00,$00,$00,$00,$00,$00,$00,$00             ;838FF6|        |      ;
-    dl DATA8_ADA9AE                                            ;839001|        |ADA9AE;
+    dl sAudioTrack_ADA9AE                                      ;839001|        |ADA9AE;
     db $02,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;839004|        |      ;
-    dl DATA8_ADBE06                                            ;83900F|        |ADBE06;
+    dl sAudioTrack_ADBE06                                      ;83900F|        |ADBE06;
     db $05,$07,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;839012|        |      ;
-    dl DATA8_ADBFA0                                            ;83901D|        |ADBFA0;
+    dl sAudioTrack_ADBFA0                                      ;83901D|        |ADBFA0;
     db $05,$01,$07,$00,$00,$00,$00,$00,$00,$00,$00             ;839020|        |      ;
-    dl DATA8_ADA3A8                                            ;83902B|        |ADA3A8;
+    dl sAudioTrack_ADA3A8                                      ;83902B|        |ADA3A8;
     db $05,$07,$01,$00,$00,$00,$00,$00,$00,$00,$00             ;83902E|        |      ;
-    dl DATA8_ADB6BC                                            ;839039|        |ADB6BC;
+    dl sAudioTrack_ADB6BC                                      ;839039|        |ADB6BC;
     db $05,$01,$08,$00,$00,$00,$00,$00,$00,$00,$00             ;83903C|        |      ;
-    dl DATA8_AD986A                                            ;839047|        |AD986A;
+    dl sAudioTrack_AD986A                                      ;839047|        |AD986A;
     db $05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;83904A|        |      ;
-    dl DATA8_AD9578                                            ;839055|        |AD9578;
+    dl sAudioTrack_AD9578                                      ;839055|        |AD9578;
     db $05,$0B,$01,$08,$00,$00,$00,$00,$00,$00,$00             ;839058|        |      ;
-    dl DATA8_ADA579                                            ;839063|        |ADA579;
+    dl sAudioTrack_ADA579                                      ;839063|        |ADA579;
     db $05,$01,$0C,$00,$00,$00,$00,$00,$00,$00,$00             ;839066|        |      ;
-    dl DATA8_AD9EEA                                            ;839071|        |AD9EEA;
+    dl sAudioTrack_AD9EEA                                      ;839071|        |AD9EEA;
     db $05,$03,$07,$00,$00,$00,$00,$00,$00,$00,$00             ;839074|        |      ;
-    dl DATA8_ADB94F                                            ;83907F|        |ADB94F;
+    dl sAudioTrack_ADB94F                                      ;83907F|        |ADB94F;
     db $04,$03,$07,$0B,$00,$00,$00,$00,$00,$00,$00             ;839082|        |      ;
-    dl DATA8_ADC12E                                            ;83908D|        |ADC12E;
+    dl sAudioTrack_ADC12E                                      ;83908D|        |ADC12E;
     db $0D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;839090|        |      ;
-    dl DATA8_ADC1A8                                            ;83909B|        |ADC1A8;
+    dl sAudioTrack_ADC1A8                                      ;83909B|        |ADC1A8;
     db $0D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;83909E|        |      ;
-    dl DATA8_ADC228                                            ;8390A9|        |ADC228;
+    dl sAudioTrack_ADC228                                      ;8390A9|        |ADC228;
     db $15,$0D,$18,$00,$00,$00,$00,$00,$00,$00,$00             ;8390AC|        |      ;
-    dl DATA8_ADC303                                            ;8390B7|        |ADC303;
+    dl sAudioTrack_ADC303                                      ;8390B7|        |ADC303;
     db $10,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390BA|        |      ;
-    dl DATA8_ADC421                                            ;8390C5|        |ADC421;
+    dl sAudioTrack_ADC421                                      ;8390C5|        |ADC421;
     db $1D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390C8|        |      ;
-    dl DATA8_ADC4D1                                            ;8390D3|        |ADC4D1;
+    dl sAudioTrack_ADC4D1                                      ;8390D3|        |ADC4D1;
     db $1D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390D6|        |      ;
-    dl DATA8_ADC52D                                            ;8390E1|        |ADC52D;
+    dl sAudioTrack_ADC52D                                      ;8390E1|        |ADC52D;
     db $13,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390E4|        |      ;
  
-Table_8390EF:
-    db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390EF|        |      ; b8?, b8?, b8?, b8?, b8?, b8?, b8?, ptr24
-    dl DATA8_ADC5E9                                            ;8390F6|        |ADC5E9;
+sAudioData2_8390EF:
+    db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390EF|        |      ; 0x28 * [n8, n8, n8, n8, n8, n8, n8, ptr24]
+    dl sAudioTrack_ADC5E9                                      ;8390F6|        |ADC5E9;
     db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390F9|        |      ;
-    dl DATA8_ADC5E9                                            ;839100|        |ADC5E9;
+    dl sAudioTrack_ADC5E9                                      ;839100|        |ADC5E9;
     db $76,$02,$FF,$E0,$B8,$06,$B0                             ;839103|        |      ;
-    dl DATA8_AE8000                                            ;83910A|        |AE8000;
+    dl sAudioTrack_AE8000                                      ;83910A|        |AE8000;
     db $DF,$05,$FF,$E3,$B8,$01,$E0                             ;83910D|        |      ;
-    dl DATA8_ADD6A9                                            ;839114|        |ADD6A9;
+    dl sAudioTrack_ADD6A9                                      ;839114|        |ADD6A9;
     db $3E,$07,$FF,$EF,$B8,$05,$F0                             ;839117|        |      ;
-    dl DATA8_ADE259                                            ;83911E|        |ADE259;
+    dl sAudioTrack_ADE259                                      ;83911E|        |ADE259;
     db $F2,$07,$FF,$EB,$B8,$03,$E0                             ;839121|        |      ;
-    dl DATA8_ADE9D9                                            ;839128|        |ADE9D9;
+    dl sAudioTrack_ADE9D9                                      ;839128|        |ADE9D9;
     db $1B,$00,$FF,$E0,$B8,$04,$00                             ;83912B|        |      ;
-    dl DATA8_ADF6E9                                            ;839132|        |ADF6E9;
+    dl sAudioTrack_ADF6E9                                      ;839132|        |ADF6E9;
     db $0C,$06,$FF,$E0,$B8,$05,$A0                             ;839135|        |      ;
-    dl DATA8_AEAEE0                                            ;83913C|        |AEAEE0;
+    dl sAudioTrack_AEAEE0                                      ;83913C|        |AEAEE0;
     db $50,$19,$FF,$E0,$B8,$05,$A0                             ;83913F|        |      ;
-    dl DATA8_AECE10                                            ;839146|        |AECE10;
+    dl sAudioTrack_AECE10                                      ;839146|        |AECE10;
     db $D8,$12,$86,$EB,$B8,$04,$00                             ;839149|        |      ;
-    dl DATA8_AF8000                                            ;839150|        |AF8000;
+    dl sAudioTrack_AF8000                                      ;839150|        |AF8000;
     db $A3,$02,$FF,$EE,$B8,$03,$F0                             ;839153|        |      ;
-    dl DATA8_AEE760                                            ;83915A|        |AEE760;
+    dl sAudioTrack_AEE760                                      ;83915A|        |AEE760;
     db $B6,$0D,$FF,$E0,$B8,$03,$50                             ;83915D|        |      ;
-    dl DATA8_AF9300                                            ;839164|        |AF9300;
+    dl sAudioTrack_AF9300                                      ;839164|        |AF9300;
     db $01,$02,$FF,$E9,$B8,$01,$E0                             ;839167|        |      ;
-    dl DATA8_AEEA30                                            ;83916E|        |AEEA30;
+    dl sAudioTrack_AEEA30                                      ;83916E|        |AEEA30;
     db $1B,$00,$FF,$E0,$B8,$01,$30                             ;839171|        |      ;
-    dl DATA8_ADF729                                            ;839178|        |ADF729;
+    dl sAudioTrack_ADF729                                      ;839178|        |ADF729;
     db $9B,$0D,$FF,$E0,$B8,$07,$A0                             ;83917B|        |      ;
-    dl DATA8_AEED70                                            ;839182|        |AEED70;
+    dl sAudioTrack_AEED70                                      ;839182|        |AEED70;
     db $1B,$00,$FF,$E0,$B8,$00,$D0                             ;839185|        |      ;
-    dl DATA8_AFAE80                                            ;83918C|        |AFAE80;
+    dl sAudioTrack_AFAE80                                      ;83918C|        |AFAE80;
     db $D1,$04,$FF,$E0,$B8,$00,$B0                             ;83918F|        |      ;
-    dl DATA8_AFC0C0                                            ;839196|        |AFC0C0;
+    dl sAudioTrack_AFC0C0                                      ;839196|        |AFC0C0;
     db $1B,$00,$FF,$E0,$B8,$00,$50                             ;839199|        |      ;
-    dl DATA8_AFD060                                            ;8391A0|        |AFD060;
+    dl sAudioTrack_AFD060                                      ;8391A0|        |AFD060;
     db $3F,$1B,$FF,$E0,$B8,$03,$C0                             ;8391A3|        |      ;
-    dl DATA8_AFD830                                            ;8391AA|        |AFD830;
+    dl sAudioTrack_AFD830                                      ;8391AA|        |AFD830;
     db $02,$25,$FF,$E0,$B8,$07,$A0                             ;8391AD|        |      ;
-    dl DATA8_B08000                                            ;8391B4|        |B08000;
+    dl sAudioTrack_B08000                                      ;8391B4|        |B08000;
     db $1B,$00,$FF,$E0,$B8,$00,$90                             ;8391B7|        |      ;
-    dl DATA8_AFF370                                            ;8391BE|        |AFF370;
+    dl sAudioTrack_AFF370                                      ;8391BE|        |AFF370;
     db $3E,$19,$FF,$E9,$B8,$01,$E0                             ;8391C1|        |      ;
-    dl DATA8_B09F30                                            ;8391C8|        |B09F30;
+    dl sAudioTrack_B09F30                                      ;8391C8|        |B09F30;
     db $2C,$07,$FF,$E0,$B8,$07,$A0                             ;8391CB|        |      ;
-    dl DATA8_B0B870                                            ;8391D2|        |B0B870;
+    dl sAudioTrack_B0B870                                      ;8391D2|        |B0B870;
     db $D5,$03,$FF,$E0,$B8,$04,$20                             ;8391D5|        |      ;
-    dl DATA8_B0BFA0                                            ;8391DC|        |B0BFA0;
+    dl sAudioTrack_B0BFA0                                      ;8391DC|        |B0BFA0;
     db $71,$13,$FF,$E0,$B8,$05,$20                             ;8391DF|        |      ;
-    dl DATA8_B0C380                                            ;8391E6|        |B0C380;
+    dl sAudioTrack_B0C380                                      ;8391E6|        |B0C380;
     db $DA,$04,$FF,$E0,$B8,$07,$A0                             ;8391E9|        |      ;
-    dl DATA8_AFFA20                                            ;8391F0|        |AFFA20;
+    dl sAudioTrack_AFFA20                                      ;8391F0|        |AFFA20;
     db $72,$0C,$FF,$E0,$B8,$07,$A0                             ;8391F3|        |      ;
-    dl DATA8_B0D700                                            ;8391FA|        |B0D700;
+    dl sAudioTrack_B0D700                                      ;8391FA|        |B0D700;
     db $8A,$0F,$FF,$E0,$B8,$01,$50                             ;8391FD|        |      ;
-    dl DATA8_B0E380                                            ;839204|        |B0E380;
+    dl sAudioTrack_B0E380                                      ;839204|        |B0E380;
     db $46,$0E,$FF,$E0,$B8,$07,$A0                             ;839207|        |      ;
-    dl DATA8_B18000                                            ;83920E|        |B18000;
+    dl sAudioTrack_B18000                                      ;83920E|        |B18000;
     db $67,$3E,$FF,$E0,$B8,$05,$40                             ;839211|        |      ;
-    dl DATA8_B18E50                                            ;839218|        |B18E50;
+    dl sAudioTrack_B18E50                                      ;839218|        |B18E50;
     db $8A,$0F,$FF,$E0,$B8,$01,$C0                             ;83921B|        |      ;
-    dl DATA8_B1CCC0                                            ;839222|        |B1CCC0;
+    dl sAudioTrack_B1CCC0                                      ;839222|        |B1CCC0;
     db $A3,$0B,$FF,$E0,$B8,$01,$10                             ;839225|        |      ;
-    dl DATA8_B1DC50                                            ;83922C|        |B1DC50;
+    dl sAudioTrack_B1DC50                                      ;83922C|        |B1DC50;
     db $A3,$0B,$FF,$E0,$B8,$00,$B0                             ;83922F|        |      ;
-    dl DATA8_B1E800                                            ;839236|        |B1E800;
+    dl sAudioTrack_B1E800                                      ;839236|        |B1E800;
     db $A3,$0B,$FF,$E0,$B8,$02,$90                             ;839239|        |      ;
-    dl DATA8_B1F3B0                                            ;839240|        |B1F3B0;
+    dl sAudioTrack_B1F3B0                                      ;839240|        |B1F3B0;
     db $12,$00,$FF,$E0,$B8,$00,$20                             ;839243|        |      ;
-    dl DATA8_B29380                                            ;83924A|        |B29380;
+    dl sAudioTrack_B29380                                      ;83924A|        |B29380;
     db $BC,$07,$FF,$E0,$B8,$01,$10                             ;83924D|        |      ;
-    dl DATA8_B29F30                                            ;839254|        |B29F30;
+    dl sAudioTrack_B29F30                                      ;839254|        |B29F30;
     db $71,$13,$FF,$E0,$B8,$01,$A0                             ;839257|        |      ;
-    dl DATA8_B28000                                            ;83925E|        |B28000;
+    dl sAudioTrack_B28000                                      ;83925E|        |B28000;
     db $01,$02,$FF,$E9,$B8,$01,$E0                             ;839261|        |      ;
-    dl DATA8_B2A6F0                                            ;839268|        |B2A6F0;
+    dl sAudioTrack_B2A6F0                                      ;839268|        |B2A6F0;
     db $BC,$07,$FF,$E0,$B8,$01,$00                             ;83926B|        |      ;
-    dl DATA8_B2AA30                                            ;839272|        |B2AA30;
+    dl sAudioTrack_B2AA30                                      ;839272|        |B2AA30;
     db $26,$1F,$FF,$E0,$B8,$01,$E0                             ;839275|        |      ;
-    dl DATA8_B2B1F0                                            ;83927C|        |B2B1F0;
+    dl sAudioTrack_B2B1F0                                      ;83927C|        |B2B1F0;
  
 Table_83927F:
     dw $0000,$0500,$0000,$0000,$0000,$0000                     ;83927F|        |      ;
