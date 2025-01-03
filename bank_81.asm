@@ -4498,7 +4498,7 @@ pSubrutineTable_81A58B:
                        TAX                                  ;81A77F|AA      |      ;
                        REP #$20                             ;81A780|C220    |      ;
                        LDA.W #$0080                         ;81A782|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;81A785|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;81A785|22338A80|808A33;
                        REP #$20                             ;81A789|C220    |      ;
                        LDA.B ptrUnknown0x72                 ;81A78B|A572    |000072;
                        CLC                                  ;81A78D|18      |      ;
@@ -4526,7 +4526,7 @@ pSubrutineTable_81A58B:
                        TAX                                  ;81A7AE|AA      |      ;
                        REP #$20                             ;81A7AF|C220    |      ;
                        LDA.W #$0080                         ;81A7B1|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;81A7B4|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;81A7B4|22338A80|808A33;
                        REP #$20                             ;81A7B8|C220    |      ;
                        LDA.B ptrUnknown0x75                 ;81A7BA|A575    |000075;
                        CLC                                  ;81A7BC|18      |      ;
@@ -4835,7 +4835,7 @@ pSubrutineTable_81A58B:
                        PLY                                  ;81A9A4|7A      |      ;
                        PLX                                  ;81A9A5|FA      |      ;
                        JSL.L fUnknown_81A688                ;81A9A6|2288A681|81A688;
-                       JSL.L fStartProgrammedDMA            ;81A9AA|22F08A80|808AF0;
+                       JSL.L fSystemStartProgrammedDMA      ;81A9AA|22F08A80|808AF0;
                                                             ;      |        |      ;
               .label5:
                        SEP #$20                             ;81A9AE|E220    |      ;
@@ -12943,7 +12943,7 @@ subPlayerInteraction81D593_0x42:
                        LDA.B #$03                           ;81E770|A903    |      ;
                        STA.W nPlayerInteractionArg1         ;81E772|8D6F09  |00096F;
                        LDA.B #$01                           ;81E775|A901    |      ;
-                       STA.W $099F                          ;81E777|8D9F09  |00099F;
+                       STA.W nNameDestinationId             ;81E777|8D9F09  |00099F;
                        LDA.L sShedItems+1                   ;81E77A|AF011F7F|7F1F01;
                        ORA.B #$04                           ;81E77E|0904    |      ;
                        STA.L sShedItems+1                   ;81E780|8F011F7F|7F1F01;
@@ -14048,7 +14048,7 @@ subPlayerInteraction81D593_0x45:
                        LDA.B #$04                           ;81F03D|A904    |      ;
                        STA.W nPlayerInteractionArg1         ;81F03F|8D6F09  |00096F;
                        LDA.B #$02                           ;81F042|A902    |      ;
-                       STA.W $099F                          ;81F044|8D9F09  |00099F;
+                       STA.W nNameDestinationId             ;81F044|8D9F09  |00099F;
                        REP #$20                             ;81F047|C220    |      ;
                        LDA.W $0196                          ;81F049|AD9601  |000196;
                        ORA.W #$2000                         ;81F04C|090020  |      ;

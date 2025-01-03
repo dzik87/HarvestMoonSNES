@@ -2,7 +2,7 @@
                        ORG $808000                          ;      |        |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_808000:
+           fGameStart:
                        REP #$30                             ;808000|C230    |      ;
                        SEP #$20                             ;808002|E220    |      ;
                        LDA.B #$15                           ;808004|A915    |      ;
@@ -17,7 +17,7 @@
                        LDA.B #$01                           ;80801A|A901    |      ;
                        STA.B $94                            ;80801C|8594    |000094;
                        JSL.L fScreenFadeout                 ;80801E|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;808022|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;808022|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;808026|22468880|808846;
                        JSL.L fZeroCGRAM                     ;80802A|22808980|808980;
                        JSL.L fUnknown_83ABF0                ;80802E|22F0AB83|83ABF0;
@@ -41,7 +41,7 @@
                        REP #$20                             ;808062|C220    |      ;
                        LDA.L nPlayerFlags+2                 ;808064|AF681F7F|7F1F68;
                        AND.W #$0001                         ;808068|290100  |      ;
-                       BEQ fGameLoop                        ;80806B|F016    |808083;
+                       BEQ fMainGameLoop                    ;80806B|F016    |808083;
                        SEP #$20                             ;80806D|E220    |      ;
                        LDA.B #$03                           ;80806F|A903    |      ;
                        JSL.L fRollRNG                       ;808071|22F98980|8089F9;
@@ -52,10 +52,10 @@
                        ORA.W #$0004                         ;80807E|090400  |      ;
                        STA.B $D2                            ;808081|85D2    |0000D2;
                                                             ;      |        |      ;
-            fGameLoop:
+        fMainGameLoop:
                        SEP #$20                             ;808083|E220    |      ;
                        LDA.B $00                            ;808085|A500    |000000;
-                       BEQ fGameLoop                        ;808087|F0FA    |808083;
+                       BEQ fMainGameLoop                    ;808087|F0FA    |808083;
                        REP #$20                             ;808089|C220    |      ;
                        LDA.W #$1800                         ;80808B|A90018  |      ;
                        STA.B $C7                            ;80808E|85C7    |0000C7;
@@ -82,7 +82,7 @@
                        JSL.L fUnknown_8583E0                ;8080D3|22E08385|8583E0;
                        SEP #$20                             ;8080D7|E220    |      ;
                        STZ.B $00                            ;8080D9|6400    |000000;
-                       JMP.W fGameLoop                      ;8080DB|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;8080DB|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fUnknown_8080DE:
@@ -90,7 +90,7 @@
                        LDA.W $0196                          ;8080E0|AD9601  |000196;
                        AND.W #$DFFF                         ;8080E3|29FFDF  |      ;
                        STA.W $0196                          ;8080E6|8D9601  |000196;
-                       JML.L fUnknown_82E80C                ;8080E9|5C0CE882|82E80C;
+                       JML.L fNamePrompt                    ;8080E9|5C0CE882|82E80C;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
        fSetPlayerName:
@@ -103,7 +103,7 @@
                        LDA.B #$01                           ;8080F9|A901    |      ;
                        STA.B $94                            ;8080FB|8594    |000094;
                        JSL.L fScreenFadeout                 ;8080FD|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;808101|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;808101|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;808105|22468880|808846;
                        JSL.L fZeroCGRAM                     ;808109|22808980|808980;
                        SEP #$20                             ;80810D|E220    |      ;
@@ -137,7 +137,7 @@
                        SEP #$20                             ;808155|E220    |      ;
                        LDA.B #$01                           ;808157|A901    |      ;
                        STA.W $019A                          ;808159|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;80815C|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;80815C|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
     fSetBoughtCowName:
@@ -150,7 +150,7 @@
                        LDA.B #$01                           ;80816B|A901    |      ;
                        STA.B $94                            ;80816D|8594    |000094;
                        JSL.L fScreenFadeout                 ;80816F|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;808173|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;808173|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;808177|22468880|808846;
                        JSL.L fZeroCGRAM                     ;80817B|22808980|808980;
                        REP #$20                             ;80817F|C220    |      ;
@@ -182,7 +182,7 @@
                        SEP #$20                             ;8081C8|E220    |      ;
                        LDA.B #$01                           ;8081CA|A901    |      ;
                        STA.W $019A                          ;8081CC|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;8081CF|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;8081CF|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
       fSetBornCowName:
@@ -195,7 +195,7 @@
                        LDA.B #$01                           ;8081DE|A901    |      ;
                        STA.B $94                            ;8081E0|8594    |000094;
                        JSL.L fScreenFadeout                 ;8081E2|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;8081E6|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;8081E6|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;8081EA|22468880|808846;
                        JSL.L fZeroCGRAM                     ;8081EE|22808980|808980;
                        REP #$20                             ;8081F2|C220    |      ;
@@ -232,7 +232,7 @@
                        SEP #$20                             ;80824A|E220    |      ;
                        LDA.B #$01                           ;80824C|A901    |      ;
                        STA.W $019A                          ;80824E|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;808251|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;808251|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
           fSetDogName:
@@ -245,7 +245,7 @@
                        LDA.B #$01                           ;808260|A901    |      ;
                        STA.B $94                            ;808262|8594    |000094;
                        JSL.L fScreenFadeout                 ;808264|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;808268|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;808268|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;80826C|22468880|808846;
                        JSL.L fZeroCGRAM                     ;808270|22808980|808980;
                        SEP #$20                             ;808274|E220    |      ;
@@ -279,7 +279,7 @@
                        SEP #$20                             ;8082BC|E220    |      ;
                        LDA.B #$01                           ;8082BE|A901    |      ;
                        STA.W $019A                          ;8082C0|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;8082C3|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;8082C3|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
         fSetHorseName:
@@ -292,7 +292,7 @@
                        LDA.B #$01                           ;8082D2|A901    |      ;
                        STA.B $94                            ;8082D4|8594    |000094;
                        JSL.L fScreenFadeout                 ;8082D6|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;8082DA|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;8082DA|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;8082DE|22468880|808846;
                        JSL.L fZeroCGRAM                     ;8082E2|22808980|808980;
                        SEP #$20                             ;8082E6|E220    |      ;
@@ -326,7 +326,7 @@
                        SEP #$20                             ;80832E|E220    |      ;
                        LDA.B #$01                           ;808330|A901    |      ;
                        STA.W $019A                          ;808332|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;808335|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;808335|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
    fSetFirstChildName:
@@ -339,7 +339,7 @@
                        LDA.B #$01                           ;808344|A901    |      ;
                        STA.B $94                            ;808346|8594    |000094;
                        JSL.L fScreenFadeout                 ;808348|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;80834C|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;80834C|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;808350|22468880|808846;
                        JSL.L fZeroCGRAM                     ;808354|22808980|808980;
                        SEP #$20                             ;808358|E220    |      ;
@@ -373,7 +373,7 @@
                        SEP #$20                             ;8083A4|E220    |      ;
                        LDA.B #$01                           ;8083A6|A901    |      ;
                        STA.W $019A                          ;8083A8|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;8083AB|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;8083AB|4C8380  |808083;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
   fSetSecondChildName:
@@ -386,7 +386,7 @@
                        LDA.B #$01                           ;8083BA|A901    |      ;
                        STA.B $94                            ;8083BC|8594    |000094;
                        JSL.L fScreenFadeout                 ;8083BE|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;8083C2|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;8083C2|220F8E80|808E0F;
                        JSL.L fZeroVRAM                      ;8083C6|22468880|808846;
                        JSL.L fZeroCGRAM                     ;8083CA|22808980|808980;
                        SEP #$20                             ;8083CE|E220    |      ;
@@ -420,7 +420,7 @@
                        SEP #$20                             ;80841A|E220    |      ;
                        LDA.B #$01                           ;80841C|A901    |      ;
                        STA.W $019A                          ;80841E|8D9A01  |00019A;
-                       JMP.W fGameLoop                      ;808421|4C8380  |808083;
+                       JMP.W fMainGameLoop                  ;808421|4C8380  |808083;
                                                             ;      |        |      ;
                        dw $0000,$00F0                       ;808424|        |      ;
                                                             ;      |        |      ;
@@ -710,7 +710,7 @@
                        SEP #$20                             ;8086B2|E220    |      ;
                        LDA.B $00                            ;8086B4|A500    |000000;
                        BNE +                                ;8086B6|D019    |8086D1;
-                       JSL.L fStartProgrammedDMA            ;8086B8|22F08A80|808AF0;
+                       JSL.L fSystemStartProgrammedDMA      ;8086B8|22F08A80|808AF0;
                        SEP #$20                             ;8086BC|E220    |      ;
                        LDA.B $9A                            ;8086BE|A59A    |00009A;
                        STA.W SNES_MDMAEN                    ;8086C0|8D0B42  |00420B;
@@ -1138,8 +1138,8 @@ fZero1000bytesFromVRAM:
                        RTL                                  ;808A32|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-fLoadPaletteToControler:
-                       REP #$30                             ;808A33|C230    |      ;
+  fSystemTransferData:
+                       REP #$30                             ;808A33|C230    |      ; A: nArg1, X: nArg2
                        PHA                                  ;808A35|48      |      ;
                        TXA                                  ;808A36|8A      |      ;
                        PHA                                  ;808A37|48      |      ;
@@ -1221,7 +1221,7 @@ fLoadPaletteToControler:
                        RTL                                  ;808AB1|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-      fUnknown_808AB2:
+fSystemUnknown_808AB2:
                        SEP #$30                             ;808AB2|E230    |      ;
                        LDA.B $27                            ;808AB4|A527    |000027;
                        PHA                                  ;808AB6|48      |      ;
@@ -1265,7 +1265,7 @@ fLoadPaletteToControler:
                        RTL                                  ;808AEF|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-  fStartProgrammedDMA:
+fSystemStartProgrammedDMA:
                        SEP #$30                             ;808AF0|E230    |      ;
                        LDX.B #$00                           ;808AF2|A200    |      ;
                                                             ;      |        |      ;
@@ -1424,7 +1424,7 @@ fInitializeScreenStatus:
                        STZ.B $24                            ;808C51|6424    |000024;
                        REP #$20                             ;808C53|C220    |      ;
                        PLP                                  ;808C55|28      |      ;
-                       JMP.W fSetForceBlank                 ;808C56|4C0F8E  |808E0F;
+                       JMP.W fSystemSetForceBlank           ;808C56|4C0F8E  |808E0F;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
 fManageGraphicsPresets:
@@ -1561,7 +1561,7 @@ fManageGraphicsPresets:
                        RTL                                  ;808E0E|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-       fSetForceBlank:
+ fSystemSetForceBlank:
                        PHP                                  ;808E0F|08      |      ;
                        SEP #$20                             ;808E10|E220    |      ;
                        LDA.B $24                            ;808E12|A524    |000024;
@@ -1572,7 +1572,7 @@ fManageGraphicsPresets:
                        RTL                                  ;808E1D|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
-     fResetForceBlank:
+fSystemResetForceBlank:
                        PHP                                  ;808E1E|08      |      ;
                        SEP #$20                             ;808E1F|E220    |      ;
                        LDA.B $24                            ;808E21|A524    |000024;
@@ -1758,7 +1758,7 @@ fManageGraphicsPresets:
                        SEP #$20                             ;808F47|E220    |      ;
                        LDA.B #$7F                           ;808F49|A97F    |      ;
                        STA.B ptrUnknown0x72+2               ;808F4B|8574    |000074;
-                       JSL.L fLoadPaletteToControler        ;808F4D|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;808F4D|22338A80|808A33;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;808F51|6B      |      ;
@@ -2087,7 +2087,7 @@ fZero42PointersFromIndex:
                        SEP #$20                             ;80914C|E220    |      ;
                        LDA.B #$7F                           ;80914E|A97F    |      ;
                        STA.B ptrUnknown0x72+2               ;809150|8574    |000074;
-                       JSL.L fLoadPaletteToControler        ;809152|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;809152|22338A80|808A33;
                                                             ;      |        |      ;
               .return:
                        RTL                                  ;809156|6B      |      ;
@@ -2901,7 +2901,7 @@ fSubrutinesExecute_809553:
                        LDA.B #$01                           ;8096C7|A901    |      ;
                        STA.B $94                            ;8096C9|8594    |000094;
                        JSL.L fScreenFadeout                 ;8096CB|220A8880|80880A;
-                       JSL.L fSetForceBlank                 ;8096CF|220F8E80|808E0F;
+                       JSL.L fSystemSetForceBlank           ;8096CF|220F8E80|808E0F;
                                                             ;      |        |      ;
       fUnknown_8096D3:
                        REP #$30                             ;8096D3|C230    |      ;
@@ -3148,8 +3148,8 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;8098E6|E220    |      ;
                        LDA.B #$7F                           ;8098E8|A97F    |      ;
                        STA.B ptrUnknown0x72+2               ;8098EA|8574    |000074;
-                       JSL.L fLoadPaletteToControler        ;8098EC|22338A80|808A33;
-                       JSL.L fUnknown_808AB2                ;8098F0|22B28A80|808AB2;
+                       JSL.L fSystemTransferData            ;8098EC|22338A80|808A33;
+                       JSL.L fSystemUnknown_808AB2          ;8098F0|22B28A80|808AB2;
                        REP #$30                             ;8098F4|C230    |      ;
                        STZ.B $1E                            ;8098F6|641E    |00001E;
                        LDA.B $F5                            ;8098F8|A5F5    |0000F5;
@@ -3288,7 +3288,7 @@ fSubrutinesExecute_809553:
                        SEP #$20                             ;809A45|E220    |      ;
                        STZ.B $00                            ;809A47|6400    |000000;
                        JSL.L fWaitForNextNMI                ;809A49|22458680|808645;
-                       JSL.L fResetForceBlank               ;809A4D|221E8E80|808E1E;
+                       JSL.L fSystemResetForceBlank         ;809A4D|221E8E80|808E1E;
                        SEP #$20                             ;809A51|E220    |      ;
                        LDA.B #$03                           ;809A53|A903    |      ;
                        STA.B $92                            ;809A55|8592    |000092;
@@ -4557,7 +4557,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A2AC|8574    |000074;
                        REP #$20                             ;80A2AE|C220    |      ;
                        LDA.W #$0080                         ;80A2B0|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A2B3|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A2B3|22338A80|808A33;
                        SEP #$20                             ;80A2B7|E220    |      ;
                        LDA.B #$01                           ;80A2B9|A901    |      ;
                        STA.B $27                            ;80A2BB|8527    |000027;
@@ -4577,7 +4577,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A2D9|8574    |000074;
                        REP #$20                             ;80A2DB|C220    |      ;
                        LDA.W #$0080                         ;80A2DD|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A2E0|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A2E0|22338A80|808A33;
                        REP #$30                             ;80A2E4|C230    |      ;
                        LDA.B $16                            ;80A2E6|A516    |000016;
                        CLC                                  ;80A2E8|18      |      ;
@@ -4771,7 +4771,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A425|8574    |000074;
                        REP #$20                             ;80A427|C220    |      ;
                        LDA.W #$0080                         ;80A429|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A42C|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A42C|22338A80|808A33;
                        SEP #$20                             ;80A430|E220    |      ;
                        LDA.B #$01                           ;80A432|A901    |      ;
                        STA.B $27                            ;80A434|8527    |000027;
@@ -4791,7 +4791,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A452|8574    |000074;
                        REP #$20                             ;80A454|C220    |      ;
                        LDA.W #$0080                         ;80A456|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A459|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A459|22338A80|808A33;
                        REP #$30                             ;80A45D|C230    |      ;
                        LDA.B $16                            ;80A45F|A516    |000016;
                        SEC                                  ;80A461|38      |      ;
@@ -4998,7 +4998,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A5BA|8574    |000074;
                        REP #$20                             ;80A5BC|C220    |      ;
                        LDA.W #$0081                         ;80A5BE|A98100  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A5C1|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A5C1|22338A80|808A33;
                        SEP #$20                             ;80A5C5|E220    |      ;
                        LDA.B #$01                           ;80A5C7|A901    |      ;
                        STA.B $27                            ;80A5C9|8527    |000027;
@@ -5018,7 +5018,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A5E7|8574    |000074;
                        REP #$20                             ;80A5E9|C220    |      ;
                        LDA.W #$0081                         ;80A5EB|A98100  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A5EE|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A5EE|22338A80|808A33;
                        REP #$30                             ;80A5F2|C230    |      ;
                        LDA.B $12                            ;80A5F4|A512    |000012;
                        CLC                                  ;80A5F6|18      |      ;
@@ -5227,7 +5227,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A751|8574    |000074;
                        REP #$20                             ;80A753|C220    |      ;
                        LDA.W #$0081                         ;80A755|A98100  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A758|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A758|22338A80|808A33;
                        SEP #$20                             ;80A75C|E220    |      ;
                        LDA.B #$01                           ;80A75E|A901    |      ;
                        STA.B $27                            ;80A760|8527    |000027;
@@ -5247,7 +5247,7 @@ fSubrutinesExecute_809553:
                        STA.B ptrUnknown0x72+2               ;80A77E|8574    |000074;
                        REP #$20                             ;80A780|C220    |      ;
                        LDA.W #$0081                         ;80A782|A98100  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A785|22338A80|808A33;
+                       JSL.L fSystemTransferData            ;80A785|22338A80|808A33;
                        REP #$30                             ;80A789|C230    |      ;
                        LDA.B $12                            ;80A78B|A512    |000012;
                        SEC                                  ;80A78D|38      |      ;
@@ -5415,8 +5415,8 @@ fGetTileMapPointerAndPresetId:
                        STA.B ptrUnknown0x72+2               ;80A8A3|8574    |000074;
                        REP #$20                             ;80A8A5|C220    |      ;
                        LDA.W #$0080                         ;80A8A7|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;80A8AA|22338A80|808A33;
-                       JSL.L fUnknown_808AB2                ;80A8AE|22B28A80|808AB2;
+                       JSL.L fSystemTransferData            ;80A8AA|22338A80|808A33;
+                       JSL.L fSystemUnknown_808AB2          ;80A8AE|22B28A80|808AB2;
                        REP #$30                             ;80A8B2|C230    |      ;
                        PLY                                  ;80A8B4|7A      |      ;
                        SEP #$20                             ;80A8B5|E220    |      ;
@@ -5618,7 +5618,7 @@ fGetTileMapPointerAndPresetId:
                        STA.B nPlayerPosX                    ;80AA09|85D6    |0000D6;
                        JSL.L fUnknown_809EBC                ;80AA0B|22BC9E80|809EBC;
                        JSL.L fUnknown_80A11C                ;80AA0F|221CA180|80A11C;
-                       JSL.L fStartProgrammedDMA            ;80AA13|22F08A80|808AF0;
+                       JSL.L fSystemStartProgrammedDMA      ;80AA13|22F08A80|808AF0;
                        BRA .destinationX                    ;80AA17|80E2    |80A9FB;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -5633,7 +5633,7 @@ fGetTileMapPointerAndPresetId:
                        STA.B nPlayerPosY                    ;80AA27|85D8    |0000D8;
                        JSL.L fUnknown_809EBC                ;80AA29|22BC9E80|809EBC;
                        JSL.L fUnknown_80A0AB                ;80AA2D|22ABA080|80A0AB;
-                       JSL.L fStartProgrammedDMA            ;80AA31|22F08A80|808AF0;
+                       JSL.L fSystemStartProgrammedDMA      ;80AA31|22F08A80|808AF0;
                        BRA .destinationY                    ;80AA35|80E2    |80AA19;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -5660,8 +5660,8 @@ fGetTileMapPointerAndPresetId:
                        STA.B ptrUnknown0x72+2               ;80AA54|8574    |000074;
                        REP #$20                             ;80AA56|C220    |      ;
                        LDA.W #$0080                         ;80AA58|A98000  |      ;
-                       JSL.L fLoadPaletteToControler        ;80AA5B|22338A80|808A33;
-                       JSL.L fUnknown_808AB2                ;80AA5F|22B28A80|808AB2;
+                       JSL.L fSystemTransferData            ;80AA5B|22338A80|808A33;
+                       JSL.L fSystemUnknown_808AB2          ;80AA5F|22B28A80|808AB2;
                        REP #$30                             ;80AA63|C230    |      ;
                        PLY                                  ;80AA65|7A      |      ;
                        PLX                                  ;80AA66|FA      |      ;

@@ -9285,12 +9285,12 @@ subUnknown849419_0x59:
           CODE_84C157:
                        SEP #$20                             ;84C157|E220    |      ;
                        LDA.B #$00                           ;84C159|A900    |      ;
-                       STA.W $0993                          ;84C15B|8D9309  |000993;
+                       STA.W nMenuTableSelector             ;84C15B|8D9309  |000993;
                        REP #$20                             ;84C15E|C220    |      ;
                        STZ.W $013C                          ;84C160|9C3C01  |00013C;
                        STZ.W $013E                          ;84C163|9C3E01  |00013E;
                        REP #$20                             ;84C166|C220    |      ;
-                       STZ.W $0991                          ;84C168|9C9109  |000991;
+                       STZ.W nMenuIndex                     ;84C168|9C9109  |000991;
                        SEP #$20                             ;84C16B|E220    |      ;
                        REP #$10                             ;84C16D|C210    |      ;
                        LDA.B #$01                           ;84C16F|A901    |      ;
@@ -9304,13 +9304,13 @@ subUnknown849419_0x59:
           CODE_84C17E:
                        SEP #$20                             ;84C17E|E220    |      ;
                        LDA.B #$01                           ;84C180|A901    |      ;
-                       STA.W $0993                          ;84C182|8D9309  |000993;
+                       STA.W nMenuTableSelector             ;84C182|8D9309  |000993;
                        REP #$20                             ;84C185|C220    |      ;
                        LDA.W #$0100                         ;84C187|A90001  |      ;
                        STA.W $013C                          ;84C18A|8D3C01  |00013C;
                        STZ.W $013E                          ;84C18D|9C3E01  |00013E;
                        REP #$20                             ;84C190|C220    |      ;
-                       STZ.W $0991                          ;84C192|9C9109  |000991;
+                       STZ.W nMenuIndex                     ;84C192|9C9109  |000991;
                        SEP #$20                             ;84C195|E220    |      ;
                        REP #$10                             ;84C197|C210    |      ;
                        LDA.B #$01                           ;84C199|A901    |      ;
@@ -9324,13 +9324,13 @@ subUnknown849419_0x59:
           CODE_84C1A8:
                        SEP #$20                             ;84C1A8|E220    |      ;
                        LDA.B #$02                           ;84C1AA|A902    |      ;
-                       STA.W $0993                          ;84C1AC|8D9309  |000993;
+                       STA.W nMenuTableSelector             ;84C1AC|8D9309  |000993;
                        REP #$20                             ;84C1AF|C220    |      ;
                        STZ.W $013C                          ;84C1B1|9C3C01  |00013C;
                        LDA.W #$0100                         ;84C1B4|A90001  |      ;
                        STA.W $013E                          ;84C1B7|8D3E01  |00013E;
                        REP #$20                             ;84C1BA|C220    |      ;
-                       STZ.W $0991                          ;84C1BC|9C9109  |000991;
+                       STZ.W nMenuIndex                     ;84C1BC|9C9109  |000991;
                        SEP #$20                             ;84C1BF|E220    |      ;
                        REP #$10                             ;84C1C1|C210    |      ;
                        LDA.B #$01                           ;84C1C3|A901    |      ;
@@ -9346,7 +9346,7 @@ subUnknown849419_0x59:
                        LDA.W $0994                          ;84C1D4|AD9409  |000994;
                        BEQ CODE_84C1F1                      ;84C1D7|F018    |84C1F1;
                        LDA.B #$03                           ;84C1D9|A903    |      ;
-                       STA.W $0993                          ;84C1DB|8D9309  |000993;
+                       STA.W nMenuTableSelector             ;84C1DB|8D9309  |000993;
                        SEP #$20                             ;84C1DE|E220    |      ;
                        REP #$10                             ;84C1E0|C210    |      ;
                        LDA.B #$01                           ;84C1E2|A901    |      ;
@@ -9373,7 +9373,7 @@ subUnknown849419_0x59:
                        LDA.W #$0000                         ;84C206|A90000  |      ;
                        JSL.L fUnknown_82EBAC                ;84C209|22ACEB82|82EBAC;
                        REP #$20                             ;84C20D|C220    |      ;
-                       STA.W $0991                          ;84C20F|8D9109  |000991;
+                       STA.W nMenuIndex                     ;84C20F|8D9109  |000991;
                        SEP #$20                             ;84C212|E220    |      ;
                        REP #$10                             ;84C214|C210    |      ;
                        LDA.B #$03                           ;84C216|A903    |      ;
@@ -9389,7 +9389,7 @@ subUnknown849419_0x59:
                        LDA.W #$0001                         ;84C227|A90100  |      ;
                        JSL.L fUnknown_82EBAC                ;84C22A|22ACEB82|82EBAC;
                        REP #$20                             ;84C22E|C220    |      ;
-                       STA.W $0991                          ;84C230|8D9109  |000991;
+                       STA.W nMenuIndex                     ;84C230|8D9109  |000991;
                        SEP #$20                             ;84C233|E220    |      ;
                        REP #$10                             ;84C235|C210    |      ;
                        LDA.B #$03                           ;84C237|A903    |      ;
@@ -9405,7 +9405,7 @@ subUnknown849419_0x59:
                        LDA.W #$0002                         ;84C248|A90200  |      ;
                        JSL.L fUnknown_82EBAC                ;84C24B|22ACEB82|82EBAC;
                        REP #$20                             ;84C24F|C220    |      ;
-                       STA.W $0991                          ;84C251|8D9109  |000991;
+                       STA.W nMenuIndex                     ;84C251|8D9109  |000991;
                        SEP #$20                             ;84C254|E220    |      ;
                        REP #$10                             ;84C256|C210    |      ;
                        LDA.B #$03                           ;84C258|A903    |      ;
@@ -9421,7 +9421,7 @@ subUnknown849419_0x59:
                        LDA.W #$0003                         ;84C269|A90300  |      ;
                        JSL.L fUnknown_82EBAC                ;84C26C|22ACEB82|82EBAC;
                        REP #$20                             ;84C270|C220    |      ;
-                       STA.W $0991                          ;84C272|8D9109  |000991;
+                       STA.W nMenuIndex                     ;84C272|8D9109  |000991;
                        SEP #$20                             ;84C275|E220    |      ;
                        REP #$10                             ;84C277|C210    |      ;
                        LDA.B #$03                           ;84C279|A903    |      ;
@@ -11459,7 +11459,7 @@ subUnknown849419_0x59:
                        REP #$30                             ;84CFFC|C230    |      ;
                        LDX.W #$0001                         ;84CFFE|A20100  |      ;
                        LDA.W #$00B1                         ;84D001|A9B100  |      ;
-                       JSL.L fUnknown_839823                ;84D004|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;84D004|22239883|839823;
                        SEP #$20                             ;84D008|E220    |      ;
                        LDA.W $018F                          ;84D00A|AD8F01  |00018F;
                        CMP.B #$03                           ;84D00D|C903    |      ;
@@ -11508,7 +11508,7 @@ subUnknown849419_0x59:
                        REP #$30                             ;84D04C|C230    |      ;
                        LDX.W #$0001                         ;84D04E|A20100  |      ;
                        LDA.W #$00B1                         ;84D051|A9B100  |      ;
-                       JSL.L fUnknown_839823                ;84D054|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;84D054|22239883|839823;
                        SEP #$20                             ;84D058|E220    |      ;
                        LDA.W $018F                          ;84D05A|AD8F01  |00018F;
                        BEQ CODE_84D069                      ;84D05D|F00A    |84D069;
@@ -11564,7 +11564,7 @@ subUnknown849419_0x59:
                        REP #$30                             ;84D0B0|C230    |      ;
                        LDX.W #$0001                         ;84D0B2|A20100  |      ;
                        LDA.W #$00B1                         ;84D0B5|A9B100  |      ;
-                       JSL.L fUnknown_839823                ;84D0B8|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;84D0B8|22239883|839823;
                        SEP #$20                             ;84D0BC|E220    |      ;
                        LDA.W $018F                          ;84D0BE|AD8F01  |00018F;
                        CMP.B #$02                           ;84D0C1|C902    |      ;
@@ -11619,7 +11619,7 @@ subUnknown849419_0x59:
                        REP #$30                             ;84D116|C230    |      ;
                        LDX.W #$0001                         ;84D118|A20100  |      ;
                        LDA.W #$00B1                         ;84D11B|A9B100  |      ;
-                       JSL.L fUnknown_839823                ;84D11E|22239883|839823;
+                       JSL.L fSystemTransferGlyph           ;84D11E|22239883|839823;
                        SEP #$20                             ;84D122|E220    |      ;
                        LDA.W $018F                          ;84D124|AD8F01  |00018F;
                        CMP.B #$02                           ;84D127|C902    |      ;

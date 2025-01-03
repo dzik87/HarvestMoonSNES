@@ -115,6 +115,11 @@
 00:0987 nTileInFrontOfPlayerY
 00:098C nWeatherForecast
 00:0990 nWeatherForecast8281FD
+00:0991 nMenuIndex
+00:0993 nMenuTableSelector
+00:099B nMenuData0x00
+00:099D nMenuData0x01
+00:099F nNameDestinationId
 00:2100 SNES_INIDISP
 00:2101 SNES_OBSEL
 00:2102 SNES_OAMADDL
@@ -365,8 +370,8 @@
 7F:1F68 nPlayerFlags+2
 80:0917 nUnknown800917
 80:09B5 nUnknown8009B5
-80:8000 fUnknown_808000
-80:8083 fGameLoop
+80:8000 fGameStart
+80:8083 fMainGameLoop
 80:809B +
 80:80DE fUnknown_8080DE
 80:80ED fSetPlayerName
@@ -417,14 +422,14 @@
 80:89F9 fRollRNG
 80:8A23 -
 80:8A31 +
-80:8A33 fLoadPaletteToControler
+80:8A33 fSystemTransferData
 80:8A6B .label1
 80:8A6E .label2
 80:8AA0 fUnknown_808AA0
-80:8AB2 fUnknown_808AB2
+80:8AB2 fSystemUnknown_808AB2
 80:8AD5 .label1
 80:8ADE .label2
-80:8AF0 fStartProgrammedDMA
+80:8AF0 fSystemStartProgrammedDMA
 80:8AF4 -
 80:8B1C .label2
 80:8B25 .label3
@@ -458,8 +463,8 @@
 80:8C59 fManageGraphicsPresets
 80:8D24 -
 80:8D3B +
-80:8E0F fSetForceBlank
-80:8E1E fResetForceBlank
+80:8E0F fSystemSetForceBlank
+80:8E1E fSystemResetForceBlank
 80:8E2D fSetBrightness
 80:8E36 +
 80:8E48 fUnknown_808E48
@@ -2748,6 +2753,7 @@
 82:D869 +
 82:D871 fUnknown_82D871
 82:D881 +
+82:D883 fUnknown_82D883
 82:D886 -
 82:D8B0 fUnknown_82D8B0
 82:D93F -
@@ -2786,7 +2792,7 @@
 82:E045 +
 82:E07F fUnknown_82E07F
 82:E0B5 fUnknown_82E0B5
-82:E0EB -
+82:E0EB fUnknown_82E0EB
 82:E10A +
 82:E115 +
 82:E127 +
@@ -2795,37 +2801,92 @@
 82:E17D +
 82:E187 .label1
 82:E1BD fUnknown_82E1BD
+82:E1D1 .label1
+82:E1D5 +
+82:E1E1 +
+82:E1E9 +
 82:E1F1 fUnknown_82E1F1
+82:E27D +
+82:E2B7 .label1
+82:E2ED .label2
+82:E337 fUnknown_82E337
+82:E356 +
+82:E361 +
+82:E39B fUnknown_82E39B
+82:E3D1 fUnknown_82E3D1
+82:E3E5 .label1
+82:E3E9 +
+82:E3F5 +
+82:E3FD +
 82:E405 fUnknown_82E405
-82:E666 Table_82E666
-82:E73E Table_82E73E
+82:E41A +
+82:E5E7 fUnknown_82E5E7
+82:E5F5 --
+82:E608 +
+82:E60D -
+82:E666 nSystemTranferData_82E666
+82:E6D2 nSystemTranferData_82E6D2
+82:E73E aSystemTransferArgument
 82:E742 fUnknown_82E742
-82:E80C fUnknown_82E80C
+82:E747 --
+82:E764 -
+82:E7E8 .justReturn
+82:E7E9 fLoadAndStartGame
+82:E7F9 fStartNewGame
+82:E801 fUnreached_82E801
+82:E80C fNamePrompt
+82:E95F -
+82:E97F +
+82:E997 .continue
+82:E99B +
+82:E9CE .nameHandler
+82:E9E3 +
+82:E9EB +
+82:E9F3 +
+82:E9FB +
+82:EA03 +
+82:EA0B +
+82:EA13 +
 82:EA15 fUnknown_82EA15
+82:EA39 +
+82:EA4D .label1
+82:EA56 .label2
+82:EA5F .return
 82:EA60 fUnknown_82EA60
 82:EA80 fUnknown_82EA80
+82:EA8B -
 82:EAB4 fUnknown_82EAB4
-82:EB49 Table_82EB49
-82:EB4B Table_82EB4B
-82:EB4D Table_82EB4D
-82:EB55 Table_82EB55
-82:EB57 fUnknown_82EB57
+82:EAD1 -
+82:EB49 nUnknown_82EB49
+82:EB4B nUnknown_82EB4B
+82:EB4D aUnknown_82EB4D
+82:EB55 nUnknown82EB55
+82:EB57 fMenuUnknown_82EB57
+82:EB7C +
+82:EB89 .load
 82:EBAC fUnknown_82EBAC
-82:EBF8 NameGridPositions
-82:F258 Table_82F258
-82:F268 Table_82F268
-82:F278 Table_82F278
-82:F288 Table_82F288
+82:EBD2 +
+82:EBDF .load
+82:EBF8 aMenuData_82EBF8
+82:EE30 aMenuData_82EE30
+82:F0D0 aMenuData_82F0D0
+82:F258 aUnknown_82F258
+82:F268 aUnknown_82F268
+82:F278 aUnknown_82F278
+82:F288 aUnknown_82F288
 82:F298 nYearIdTable_82F298
-82:F2A4 nUnknown_82F2A4
-82:F2B5 nUnknown_82F2B5
-82:F2C9 nUnknown_82F2C9
-82:F2DA nUnknown_82F2DA
+82:F2A4 aUnknown_82F2A4
+82:F2B5 aUnknown_82F2B5
+82:F2C9 aUnknown_82F2C9
+82:F2DA aUnknown_82F2DA
+82:F2E2 aUnknown_82F2E2
+82:F2F9 aUnknown_82F2F9
 82:F301 Padding820000
 83:8000 fUnknown_838000
 83:8067 fUnknown_838067
 83:8082 fUnknown_838082
 83:8138 fRNG
+83:8166 fSystemTransferGlyphToMemory
 83:81F8 fDecompressTilemap
 83:82FE fUnknown_8382FE
 83:8332 fStore0Ainto0116
@@ -2885,7 +2946,7 @@
 83:9752 .textFFFFHandler
 83:975F fUnknownText_83975F
 83:97A6 fUnknown_8397A6
-83:9823 fUnknown_839823
+83:9823 fSystemTransferGlyph
 83:9838 fUnknownText_839838
 83:9862 fGetGlyphPointer
 83:98AE pFontGlyphsTable
@@ -2903,7 +2964,7 @@
 83:B224 fUnknown_83B224
 83:B253 fUnknown_83B253
 83:B282 fIncreaseHappiness_83B282
-83:B2B1 DefineVariables
+83:B2B1 fLoadGameMaybe
 83:B68E fUnknown_83B68E
 83:BA45 fUnknown_83BA45
 83:BAD4 fUnknown_83BAD4
@@ -5063,6 +5124,8 @@ BB:BDF8 Padding_BB0000
 81:BDFD DATA8_81BDFD
 81:BE06 DATA8_81BE06
 81:FFFF EMPTY_81FFFF
+82:F2AD DATA24_82F2AD
+82:F2C1 DATA24_82F2C1
 83:ADA6 PTR16_83ADA6
 83:AECA PTR16_83AECA
 83:AF3E PTR16_83AF3E
@@ -7794,6 +7857,11 @@ FF:FFFF EMPTY_FFFFFF
 00:0985 n16
 00:0987 n16
 00:0990 n8
+00:0991 n16
+00:0993 n8
+00:099B n16
+00:099D n16
+00:099F n8
 7E:A4E6 sTileMap (0x1000)
 7E:C1C6 0x0C * sChickenData (8 bytes)
 7E:C286 0x0C * sCowData (16 bytes)
@@ -7851,6 +7919,7 @@ FF:FFFF EMPTY_FFFFFF
 80:880A $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
 80:89BC A: nOffset
 80:89F9 A: nMaxValue, return nResult A
+80:8A33 A: nArg1, X: nArg2
 80:8E2D A: nBrightness
 80:8E48 A: nValue1, X nIndex, Y: nValue2, Y, $72: ptr24
 80:8F82 A: nIndex
@@ -7939,9 +8008,24 @@ FF:FFFF EMPTY_FFFFFF
 82:B174 0x60 * [ptr24]
 82:B294 0x60 * [ptr24]
 82:CFB4 8b, 8b, 8b, 8b - season subindexed
+82:D1C0 GIGASTART
+82:E5E7 A: nArg1, Y: nArg2
+82:E666 0x03 * [0x24 bytes]
+82:E6D2 0x03 * [0x24 bytes]
+82:E73E 0x02 * [n16, n16]
+82:EA5F BIGEND
+82:EB49 n16
+82:EB4B n16
+82:EB4D 0x04 * [n16]
+82:EB55 n16
+82:EBAC A: nArg
+82:EBF8 0x47 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
+82:EE30 0x54 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
+82:F0D0 0x31 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
 83:8F83 ptr24, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?
 83:90EF b8?, b8?, b8?, b8?, b8?, b8?, b8?, ptr24
 83:935F X: nDialogIndex
+83:9823 A: nLetterCode
 83:9862 A: nLetterCode, return $72: ptr24 pGlyph
 83:98AE 0x09 * [ptr24]
 83:98CC 0x05 * [n16] (stored at $185)
