@@ -10018,13 +10018,13 @@ aSystemTransferArgument:
                        STA.W $0997                          ;82E8BF|8D9709  |000997;
                        LDA.W #$0000                         ;82E8C2|A90000  |      ;
                        STA.B $9F                            ;82E8C5|859F    |00009F;
-                       STA.W $0999                          ;82E8C7|8D9909  |000999;
+                       STA.W nMenuFlip                      ;82E8C7|8D9909  |000999;
                        LDA.W #$0028                         ;82E8CA|A92800  |      ;
                        STA.B $9B                            ;82E8CD|859B    |00009B;
-                       STA.W nMenuData0x00                  ;82E8CF|8D9B09  |00099B;
+                       STA.W nMenuPosX                      ;82E8CF|8D9B09  |00099B;
                        LDA.W #$0044                         ;82E8D2|A94400  |      ;
                        STA.B $9D                            ;82E8D5|859D    |00009D;
-                       STA.W nMenuData0x01                  ;82E8D7|8D9D09  |00099D;
+                       STA.W nMenuPoxY                      ;82E8D7|8D9D09  |00099D;
                        STZ.B $A3                            ;82E8DA|64A3    |0000A3;
                        JSL.L fUnknown_858000                ;82E8DC|22008085|858000;
                        REP #$20                             ;82E8E0|C220    |      ;
@@ -10109,11 +10109,11 @@ aSystemTransferArgument:
                      + REP #$20                             ;82E99B|C220    |      ;
                        LDA.W $0997                          ;82E99D|AD9709  |000997;
                        STA.B $A1                            ;82E9A0|85A1    |0000A1;
-                       LDA.W $0999                          ;82E9A2|AD9909  |000999;
+                       LDA.W nMenuFlip                      ;82E9A2|AD9909  |000999;
                        STA.B $9F                            ;82E9A5|859F    |00009F;
-                       LDA.W nMenuData0x00                  ;82E9A7|AD9B09  |00099B;
+                       LDA.W nMenuPosX                      ;82E9A7|AD9B09  |00099B;
                        STA.B $9B                            ;82E9AA|859B    |00009B;
-                       LDA.W nMenuData0x01                  ;82E9AC|AD9D09  |00099D;
+                       LDA.W nMenuPoxY                      ;82E9AC|AD9D09  |00099D;
                        STA.B $9D                            ;82E9AF|859D    |00009D;
                        LDA.W $0995                          ;82E9B1|AD9509  |000995;
                        STA.B $A5                            ;82E9B4|85A5    |0000A5;
@@ -10380,14 +10380,14 @@ aSystemTransferArgument:
                        XBA                                  ;82EB96|EB      |      ; B = 0
                        LDA.B [ptrUnknown0x72],Y             ;82EB97|B772    |000072; Y = $0991 * 8
                        REP #$20                             ;82EB99|C220    |      ;
-                       STA.W nMenuData0x00                  ;82EB9B|8D9B09  |00099B;
+                       STA.W nMenuPosX                      ;82EB9B|8D9B09  |00099B;
                        INY                                  ;82EB9E|C8      |      ; Y++
                        SEP #$20                             ;82EB9F|E220    |      ;
                        LDA.B #$00                           ;82EBA1|A900    |      ;
                        XBA                                  ;82EBA3|EB      |      ; B = 0
                        LDA.B [ptrUnknown0x72],Y             ;82EBA4|B772    |000072;
                        REP #$20                             ;82EBA6|C220    |      ;
-                       STA.W nMenuData0x01                  ;82EBA8|8D9D09  |00099D;
+                       STA.W nMenuPoxY                      ;82EBA8|8D9D09  |00099D;
                        RTL                                  ;82EBAB|6B      |      ;
                                                             ;      |        |      ;
                                                             ;      |        |      ;
@@ -10440,7 +10440,7 @@ aSystemTransferArgument:
                                                             ;      |        |      ;
                                                             ;      |        |      ;
      aMenuData_82EBF8:
-                       db $28,$44,$05,$1F,$01,$28,$1A,$00   ;82EBF8|        |      ; 0x47 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
+                       db $28,$44,$05,$1F,$01,$28,$1A,$00   ;82EBF8|        |      ; 0x47 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
                        db $38,$44,$06,$20,$02,$00,$1B,$00   ;82EC00|        |      ;
                        db $48,$44,$07,$21,$03,$01,$1C,$00   ;82EC08|        |      ;
                        db $58,$44,$08,$22,$04,$02,$1D,$00   ;82EC10|        |      ;
@@ -10513,7 +10513,7 @@ aSystemTransferArgument:
                        db $C0,$C4,$28,$45,$45,$45,$00,$04   ;82EE28|        |      ;
                                                             ;      |        |      ;
      aMenuData_82EE30:
-                       db $28,$44,$05,$28,$01,$31,$50,$00   ;82EE30|        |      ; 0x54 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
+                       db $28,$44,$05,$28,$01,$31,$50,$00   ;82EE30|        |      ; 0x54 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
                        db $38,$44,$06,$29,$02,$00,$51,$00   ;82EE38|        |      ;
                        db $48,$44,$07,$2A,$03,$01,$52,$00   ;82EE40|        |      ;
                        db $58,$44,$08,$2B,$04,$02,$53,$00   ;82EE48|        |      ;
@@ -10599,7 +10599,7 @@ aSystemTransferArgument:
                        db $C0,$C4,$31,$52,$28,$2C,$00,$04   ;82F0C8|        |      ;
                                                             ;      |        |      ;
      aMenuData_82F0D0:
-                       db $28,$44,$05,$23,$01,$04,$C6,$00   ;82F0D0|        |      ; 0x31 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
+                       db $28,$44,$05,$23,$01,$04,$C6,$00   ;82F0D0|        |      ; 0x31 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
                        db $38,$44,$06,$24,$02,$00,$C7,$00   ;82F0D8|        |      ;
                        db $48,$44,$07,$25,$03,$01,$C8,$00   ;82F0E0|        |      ;
                        db $58,$44,$08,$26,$04,$02,$C9,$00   ;82F0E8|        |      ;

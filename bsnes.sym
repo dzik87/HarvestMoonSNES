@@ -117,8 +117,9 @@
 00:0990 nWeatherForecast8281FD
 00:0991 nMenuIndex
 00:0993 nMenuTableSelector
-00:099B nMenuData0x00
-00:099D nMenuData0x01
+00:0999 nMenuFlip
+00:099B nMenuPosX
+00:099D nMenuPoxY
 00:099F nNameDestinationId
 00:2100 SNES_INIDISP
 00:2101 SNES_OBSEL
@@ -2887,7 +2888,9 @@
 83:8082 fUnknown_838082
 83:8138 fRNG
 83:8166 fSystemTransferGlyphToMemory
+83:81B7 fUnknown_8381B7
 83:81F8 fDecompressTilemap
+83:82C6 fUnknown_8382C6
 83:82FE fUnknown_8382FE
 83:8332 fStore0Ainto0116
 83:833E fUnknown_83833E
@@ -2898,7 +2901,13 @@
 83:843D fUnknown_83843D
 83:84D3 fUnknown_8384D3
 83:8598 fUnknown_838598
+83:878C fUnknown_83878C
+83:89C7 fUnknown_8389C7
 83:8A1A zero104memory
+83:8A26 fUnknown_838A26
+83:8AFF fUnknown_838AFF
+83:8D39 fUnknown_838D39
+83:8D8B fUnknown_838D8B
 83:8DDF fUnknown_838DDF
 83:8E32 fUnknown_838E32
 83:8E8B fUnknown_838E8B
@@ -2911,6 +2920,7 @@
 83:927F Table_83927F
 83:92B1 Table_8392B1
 83:92BB fUnknown_8392BB
+83:932D fUnknown_83932D
 83:935F fLoadDialog
 83:93C5 +
 83:93F9 fUnknown_8393F9
@@ -2918,6 +2928,7 @@
 83:9467 Table_839467
 83:947D Table_83947D
 83:9495 fUnknown_839495
+83:94D7 fUnknown_8394D7
 83:951C fReadText
 83:952A .label1
 83:9534 .label2
@@ -2958,7 +2969,31 @@
 83:A9BE fSetDefaultValuesForVariables
 83:ABF0 fUnknown_83ABF0
 83:AD91 fUnknown_83AD91
+83:AEC3 fUnknown_83AEC3
+83:AECA .aJumpTable
+83:AED2 .case00
+83:AEDF .case01
+83:AEEC .case02
+83:AEF9 .case03
+83:AF06 .continue
+83:AF2D +
+83:AF36 .return
 83:AF37 fUnknown_83AF37
+83:AF3E .aJumpTable
+83:AF46 .case00
+83:AF88 +
+83:AFA2 +
+83:AFAE .case01
+83:AFF0 +
+83:B00A +
+83:B016 .case03
+83:B058 +
+83:B071 +
+83:B07C .case04
+83:B0BD +
+83:B0D6 +
+83:B0E1 .return
+83:B0E6 fUnreached_83B0E6
 83:B0F6 fUnknown_83B0F6
 83:B1C9 fAddProfitToCurrentMoney
 83:B224 fUnknown_83B224
@@ -3024,15 +3059,81 @@
 83:EBA6 subUnknown83CAA9_0x3D
 83:F5AF Padding_830000
 84:8000 fUnknown_848000
+84:8005 -
 84:8020 fUnknown_848020
 84:803F fUnknown_84803F
 84:8097 fUnknown_848097
 84:80F8 fUnknown_8480F8
 84:816F fUnknown_84816F
+84:817D +
+84:8184 +
+84:8190 +
+84:81AA --
+84:81C3 -
+84:81DA +
+84:81DF .label4
+84:81E7 +
+84:8209 .label6
+84:821A .return
 84:8249 fUnknown_848249
 84:8286 fUnknown_848286
+84:829B +
+84:82DF .label1
+84:82F0 .label2
+84:830A .label3
+84:830E .return
 84:8331 fUnknown_848331
+84:8343 +
+84:8385 +
+84:838B .label1
+84:839F +
+84:83A5 .label2
+84:83CB .return
 84:83CC fUnknown_8483CC
+84:83DC +
+84:83EF +
+84:840E +
+84:8415 +
+84:841C +
+84:8423 .default
+84:842E +
+84:8435 +
+84:843C +
+84:8443 +
+84:8446 .label2
+84:8456 +
+84:8470 .label3
+84:849C +
+84:849F .label4
+84:84CB +
+84:84CE .label5
+84:84FA +
+84:84FD .label6
+84:8529 +
+84:852C .case01
+84:8565 .label7
+84:858E .case02
+84:85C7 .label8
+84:85F0 .case04
+84:8629 .label9
+84:8652 .case08
+84:868B .label10
+84:86B3 .label11
+84:86F4 .label12
+84:871D .label13
+84:8730 .label14
+84:8749 .label15
+84:876D +
+84:8772 .label16
+84:8786 +
+84:878B .label17
+84:87CB +
+84:87E3 .label18
+84:87FD .label19
+84:8816 .justReturn
+84:8817 .return
+84:8854 .label20
+84:8868 .label21
 84:887C fUnknown_84887C
 84:8895 fUnknown_848895
 84:88D4 fUnknown_8488D4
@@ -3050,6 +3151,7 @@
 84:8B83 subUnknown849419_0x0A
 84:8BAC subUnknown849419_0x0B
 84:8BDC subUnknown849419_0x0C
+84:8C0A +
 84:8C22 subUnknown849419_0x0D
 84:8CA8 subUnknown849419_0x0E
 84:8CB9 subUnknown849419_0x0F
@@ -3058,18 +3160,35 @@
 84:8D13 subUnknown849419_0x12
 84:8D24 subUnknown849419_0x13
 84:8D44 subUnknown849419_0x14
+84:8D9A +
 84:8DA5 subUnknown849419_0x15
+84:8DF0 +
 84:8DFB subUnknown849419_0x16
+84:8E5D +
 84:8E68 subUnknown849419_0x17
 84:8E90 subUnknown849419_0x18
+84:8EBE +
 84:8EC9 subUnknown849419_0x19
 84:8F0A subUnknown849419_0x1A
 84:8F9B subUnknown849419_0x1B
 84:8FEF subUnknown849419_0x1C
 84:9034 subUnknown849419_0x1D
 84:9079 subUnknown849419_0x1E
+84:9095 +
+84:90A1 +
+84:90AD +
+84:90B9 +
+84:90C5 +
+84:90D1 +
+84:90DD +
+84:90EA .continue
+84:9185 .return
 84:919D subUnknown849419_0x20
+84:91C7 +
 84:91D2 subUnknown849419_0x21
+84:920B +
+84:9232 +
+84:9238 .return
 84:923F subUnknown849419_0x22
 84:9306 subUnknown849419_0x23
 84:9356 subUnknown849419_0x24
@@ -3077,18 +3196,54 @@
 84:93C9 subUnknown849419_0x26
 84:9419 pSubrutinesTable_849419
 84:94CD pppTable_8494CD
-84:94D3 Table_8494D3
-84:94F3 Table_8494F3
+84:94D3 aSetMask_8494D3
+84:94F3 aResetMask_8494F3
 84:9513 subUnknown849419_0x29
 84:9553 subUnknown849419_0x2A
 84:957D subUnknown849419_0x2B
 84:95E8 subUnknown849419_0x2C
 84:9633 subUnknown849419_0x2D
+84:964F +
+84:965B +
+84:9667 +
+84:9673 +
+84:967F +
+84:968B +
+84:9697 +
+84:96A4 +
+84:96B0 +
+84:96C4 .continue
+84:975F .return
 84:9777 subUnknown849419_0x2E
 84:9810 subUnknown849419_0x2F
 84:9857 subUnknown849419_0x30
+84:98A1 .loop
+84:98B1 +
+84:98BD +
+84:98C5 +
+84:98CD +
+84:98D5 +
+84:98DF +
+84:98E9 +
+84:98F5 +
+84:9902 +
+84:990E +
+84:9918 +
+84:9922 +
+84:992C +
+84:993A +
+84:9943 +
+84:9991 +
+84:99AB +
+84:99B9 +
+84:99C8 .label1
+84:99F8 +
+84:9A23 +
+84:9A41 .label2
+84:9A4F .label3
+84:9A5F +
+84:9A6D +
 84:9AD4 subUnknown849419_0x31
-84:A5D4 fUnknown_84A5D4
 84:A90F subUnknown849419_0x32
 84:A94C subUnknown849419_0x33
 84:AA5D subUnknown849419_0x34
@@ -3133,6 +3288,7 @@
 84:C014 Table_84C014
 84:C034 fUnknown_84C034
 84:C7B6 Table_84C7B6
+84:C7D6 fUnknown_84C7D6
 84:CD16 fUnknown_84CD16
 84:D15A Padding_840000
 85:8000 fUnknown_858000
@@ -3175,7 +3331,7 @@
 85:8362 .label6
 85:8371 .label7
 85:8376 .return
-85:8377 fUnknown_858377
+85:8377 subUnknown_858377
 85:839D .loop
 85:83BA .label1
 85:83C8 .label2
@@ -3204,52 +3360,53 @@
 85:85F4 fUnknown_8585F4
 85:8627 Table_858627
 85:8637 Table_858637
-85:8647 fFill7EA000withF0and7EA200with00
-85:8896 fFill7EA000withF0and7EA200with00Ex
-85:8AE5 fUnknown_858AE5
+85:8647 subUnknown_858647
+85:8896 subUnknown_858896
+85:8AE5 subUnknown_858AE5
 85:8B0A .loop
 85:8B10 +
 85:8B3C .exit
-85:8B41 fUnknown_858B41
+85:8B41 subUnknown_858B41
 85:8B52 .loop
 85:8B72 +
 85:8B76 .exit
-85:8B7B fUnknown_858B7B
+85:8B7B subUnknown_858B7B
 85:8B8C .loop
 85:8B9C .label1
 85:8BA8 .label2
 85:8BAF .return
-85:8BB0 fUnknown_858BB0
-85:8BBC fUnknown_858BBC
+85:8BB0 subUnknown_858BB0
+85:8BBC subUnknown_858BBC
 85:8BC4 fUnknown_858BC4
 85:8BCE fReturnWithPullA_858BCE
 85:8BD0 Table_858BD0
 85:8BE0 Table_858BE0
-85:8C30 fUnknown_858C30
+85:8C30 subUnknown_858C30
 85:8C59 .label1
 85:8C72 .label2
+85:8C7E .return
 85:8C7F Table_858C7F
 85:8C8E Table_858C8E
-85:8C9F fUnknown_858C9F
+85:8C9F subUnknown_858C9F
 85:8CA6 -
 85:8CB2 fUnknown_858CB2
-85:8CBC .loop
+85:8CBC --
 85:8CC5 +
 85:8CCF +
 85:8CF3 +
-85:8D12 .label5
-85:8D1A .innerloop
+85:8D12 +
+85:8D1A -
 85:8D2F .deadend
-85:8D31 .innerexit
-85:8D38 .label8
-85:8D65 .label9
+85:8D31 +
+85:8D38 .continue
+85:8D65 +
 85:8E1E -
-85:8E28 .exit
-85:8E37 .handle0xBD
+85:8E28 .return
+85:8E37 .equal
 85:8E3C +
-85:8E47 Table_858E47
+85:8E47 aUnknown_858E47
 85:8E57 fUnknown_858E57
-85:8E6F .loop
+85:8E6F -
 85:8ED6 .return
 85:8ED7 fUnknown_858ED7
 85:8EEA -
@@ -5127,8 +5284,6 @@ BB:BDF8 Padding_BB0000
 82:F2AD DATA24_82F2AD
 82:F2C1 DATA24_82F2C1
 83:ADA6 PTR16_83ADA6
-83:AECA PTR16_83AECA
-83:AF3E PTR16_83AF3E
 86:8544 PTR16_868544
 86:8552 PTR16_868552
 86:8560 PTR16_868560
@@ -7859,6 +8014,7 @@ FF:FFFF EMPTY_FFFFFF
 00:0990 n8
 00:0991 n16
 00:0993 n8
+00:0999 n16
 00:099B n16
 00:099D n16
 00:099F n8
@@ -8019,9 +8175,9 @@ FF:FFFF EMPTY_FFFFFF
 82:EB4D 0x04 * [n16]
 82:EB55 n16
 82:EBAC A: nArg
-82:EBF8 0x47 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
-82:EE30 0x54 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
-82:F0D0 0x31 * [n8, n8, n8?, n8?, n8, n8?, n8?, n8?]
+82:EBF8 0x47 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
+82:EE30 0x54 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
+82:F0D0 0x31 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
 83:8F83 ptr24, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?, b8?
 83:90EF b8?, b8?, b8?, b8?, b8?, b8?, b8?, ptr24
 83:935F X: nDialogIndex
@@ -8032,6 +8188,7 @@ FF:FFFF EMPTY_FFFFFF
 83:98D6 0x06 * [n24/ptr24] (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
 83:98EE 0x70 * [ptr28 pData, n8 nSize]
 83:9AAE 0x52 * [ptr28 pData, n8 nSize]
+83:AEC3 A: nIndex
 83:B1C9 $72: nProfit24
 83:B282 A: nHappinessAdd
 83:C8DC A: nAddType (0 - bought, 1 - born), return result in A
@@ -8040,9 +8197,11 @@ FF:FFFF EMPTY_FFFFFF
 83:CA10 16b, 16b
 83:CAA9 0x60 * [ptr16]
 84:9419 0x60 * [ptr16]
+84:9AD4 ANOTHER SPAGHETTI
 85:82CD outer loop
 85:82D4 inner loop
 85:831F sub inner loop
+85:8E47 0x08 * [n16]
 85:8EEA loop
 85:8F0E loop
 94:9843 Each glyph is 0x10 long

@@ -116,8 +116,9 @@
                        nWeatherForecast8281FD = $000990; !^ n8 ^!;      |        |      ;
                        nMenuIndex = $000991; !^ n16 ^!      ;      |        |      ;
                        nMenuTableSelector = $000993; !^ n8 ^!;      |        |      ;
-                       nMenuData0x00 = $00099B; !^ n16 ^!   ;      |        |      ;
-                       nMenuData0x01 = $00099D; !^ n16 ^!   ;      |        |      ;
+                       nMenuFlip = $000999; !^ n16 ^!       ;      |        |      ;
+                       nMenuPosX = $00099B; !^ n16 ^!       ;      |        |      ;
+                       nMenuPoxY = $00099D; !^ n16 ^!       ;      |        |      ;
                        nNameDestinationId = $00099F; !^ n8 ^!;      |        |      ;
                        SNES_INIDISP = $002100               ;      |        |      ;
                        SNES_OBSEL = $002101                 ;      |        |      ;
