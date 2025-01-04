@@ -1956,7 +1956,7 @@ fUnknown_818C24:
     LDA.W #$0010                                               ;818D07|A91000  |      ;
     STA.B $E3                                                  ;818D0A|85E3    |0000E3;
     LDA.B $DA                                                  ;818D0C|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;818D0E|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;818D0E|2291AD83|83AD91;
     CMP.W #$0000                                               ;818D12|C90000  |      ;
     BNE .label7                                                ;818D15|D017    |818D2E;
     REP #$30                                                   ;818D17|C230    |      ;
@@ -2093,7 +2093,7 @@ fUnknown_818E1B:
     LDA.W $0920                                                ;818E29|AD2009  |000920;
     SEC                                                        ;818E2C|38      |      ;
     SBC.B #$24                                                 ;818E2D|E924    |      ;
-    JSL.L fGetChickenDataPointer                               ;818E2F|2295C983|83C995;
+    JSL.L fEngineGetChickenData                                ;818E2F|2295C983|83C995;
     SEP #$20                                                   ;818E33|E220    |      ;
     LDY.W #$0001                                               ;818E35|A00100  |      ;
     LDA.B nSelectedTilemapId                                   ;818E38|A522    |000022;
@@ -2428,7 +2428,7 @@ fUnknown_8190AA:
     LDA.W #$0010                                               ;8190C4|A91000  |      ;
     STA.B $E3                                                  ;8190C7|85E3    |0000E3;
     LDA.B $DA                                                  ;8190C9|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;8190CB|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;8190CB|2291AD83|83AD91;
     REP #$30                                                   ;8190CF|C230    |      ;
     CMP.W #$0000                                               ;8190D1|C90000  |      ;
     BEQ +                                                      ;8190D4|F003    |8190D9;
@@ -2664,7 +2664,7 @@ fUnknown_819289:
     LDA.W #$0010                                               ;8192A3|A91000  |      ;
     STA.B $E3                                                  ;8192A6|85E3    |0000E3;
     LDA.B $DA                                                  ;8192A8|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;8192AA|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;8192AA|2291AD83|83AD91;
     REP #$30                                                   ;8192AE|C230    |      ;
     CMP.W #$0000                                               ;8192B0|C90000  |      ;
     BEQ +                                                      ;8192B3|F003    |8192B8;
@@ -2960,7 +2960,7 @@ fUnknown_819497:
     STA.B [ptrUnknown0xCC],Y                                   ;8194FA|97CC    |0000CC;
     REP #$20                                                   ;8194FC|C220    |      ;
     LDA.W #$0000                                               ;8194FE|A90000  |      ;
-    JSL.L fUnknown_83C807                                      ;819501|2207C883|83C807;
+    JSL.L fEngineAddChicken                                    ;819501|2207C883|83C807;
     REP #$30                                                   ;819505|C230    |      ;
     LDA.L $7F1F6E                                              ;819507|AF6E1F7F|7F1F6E;
     ORA.W #$2000                                               ;81950B|090020  |      ;
@@ -5796,11 +5796,11 @@ fItemSub81A9F6_0x28:
     ASL A                                                      ;81B17D|0A      |      ;
     ASL A                                                      ;81B17E|0A      |      ;
     TAX                                                        ;81B17F|AA      |      ;
-    LDA.L Table_83CA10,X                                       ;81B180|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;81B180|BF10CA83|83CA10;
     PHA                                                        ;81B184|48      |      ;
     INX                                                        ;81B185|E8      |      ;
     INX                                                        ;81B186|E8      |      ;
-    LDA.L Table_83CA10,X                                       ;81B187|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;81B187|BF10CA83|83CA10;
     PHA                                                        ;81B18B|48      |      ;
     LDA.W #$00F1                                               ;81B18C|A9F100  |      ;
     PLY                                                        ;81B18F|7A      |      ;
@@ -8923,7 +8923,7 @@ fUnknown_81CB77:
     STZ.B $E3                                                  ;81CBE1|64E3    |0000E3;
     REP #$20                                                   ;81CBE3|C220    |      ;
     LDA.B $DA                                                  ;81CBE5|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;81CBE7|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;81CBE7|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CBEB|C90000  |      ;
     BEQ +                                                      ;81CBEE|F003    |81CBF3;
     JMP.W .return1                                             ;81CBF0|4C53CE  |81CE53;
@@ -8931,7 +8931,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CBF3|C220    |      ;
     LDA.B $DA                                                  ;81CBF5|A5DA    |0000DA;
-    JSL.L fUnknown_83AF37                                      ;81CBF7|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;81CBF7|2237AF83|83AF37;
     REP #$30                                                   ;81CBFB|C230    |      ;
     STY.B n16TempVar1                                          ;81CBFD|847E    |00007E;
     CMP.W #$0001                                               ;81CBFF|C90100  |      ;
@@ -9014,7 +9014,7 @@ fUnknown_81CB77:
     STZ.B $E3                                                  ;81CC85|64E3    |0000E3;
     REP #$20                                                   ;81CC87|C220    |      ;
     LDA.B $DA                                                  ;81CC89|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;81CC8B|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;81CC8B|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CC8F|C90000  |      ;
     BEQ +                                                      ;81CC92|F003    |81CC97;
     JMP.W .return1                                             ;81CC94|4C53CE  |81CE53;
@@ -9022,7 +9022,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CC97|C220    |      ;
     LDA.B $DA                                                  ;81CC99|A5DA    |0000DA;
-    JSL.L fUnknown_83AF37                                      ;81CC9B|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;81CC9B|2237AF83|83AF37;
     REP #$30                                                   ;81CC9F|C230    |      ;
     STY.B n16TempVar1                                          ;81CCA1|847E    |00007E;
     CMP.W #$0001                                               ;81CCA3|C90100  |      ;
@@ -9105,7 +9105,7 @@ fUnknown_81CB77:
     STZ.B $E3                                                  ;81CD29|64E3    |0000E3;
     REP #$20                                                   ;81CD2B|C220    |      ;
     LDA.B $DA                                                  ;81CD2D|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;81CD2F|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;81CD2F|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CD33|C90000  |      ;
     BEQ +                                                      ;81CD36|F003    |81CD3B;
     JMP.W .return1                                             ;81CD38|4C53CE  |81CE53;
@@ -9113,7 +9113,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CD3B|C220    |      ;
     LDA.B $DA                                                  ;81CD3D|A5DA    |0000DA;
-    JSL.L fUnknown_83AF37                                      ;81CD3F|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;81CD3F|2237AF83|83AF37;
     REP #$30                                                   ;81CD43|C230    |      ;
     STX.B n16TempVar1                                          ;81CD45|867E    |00007E;
     CMP.W #$0001                                               ;81CD47|C90100  |      ;
@@ -9196,7 +9196,7 @@ fUnknown_81CB77:
     STZ.B $E3                                                  ;81CDCD|64E3    |0000E3;
     REP #$20                                                   ;81CDCF|C220    |      ;
     LDA.B $DA                                                  ;81CDD1|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;81CDD3|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;81CDD3|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CDD7|C90000  |      ;
     BEQ +                                                      ;81CDDA|F003    |81CDDF;
     JMP.W .return1                                             ;81CDDC|4C53CE  |81CE53;
@@ -9204,7 +9204,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CDDF|C220    |      ;
     LDA.B $DA                                                  ;81CDE1|A5DA    |0000DA;
-    JSL.L fUnknown_83AF37                                      ;81CDE3|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;81CDE3|2237AF83|83AF37;
     REP #$30                                                   ;81CDE7|C230    |      ;
     STX.B n16TempVar1                                          ;81CDE9|867E    |00007E;
     CMP.W #$0001                                               ;81CDEB|C90100  |      ;
@@ -12047,7 +12047,7 @@ subPlayerInteraction81D593_0x2E:
     STA.B $D2                                                  ;81E1D2|85D2    |0000D2;
     REP #$20                                                   ;81E1D4|C220    |      ;
     LDA.W #$0002                                               ;81E1D6|A90200  |      ;
-    JSL.L fUnknown_83C807                                      ;81E1D9|2207C883|83C807;
+    JSL.L fEngineAddChicken                                    ;81E1D9|2207C883|83C807;
     REP #$20                                                   ;81E1DD|C220    |      ;
     LDA.L $7F1F5A                                              ;81E1DF|AF5A1F7F|7F1F5A;
     ORA.W #$0020                                               ;81E1E3|092000  |      ;
@@ -12882,7 +12882,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81E7FA|38      |      ;
     SBC.B #$18                                                 ;81E7FB|E918    |      ;
     REP #$20                                                   ;81E7FD|C220    |      ;
-    JSL.L fGetCowDataPointer                                   ;81E7FF|22A7C983|83C9A7;
+    JSL.L fEngineGetCowData                                    ;81E7FF|22A7C983|83C9A7;
     SEP #$20                                                   ;81E803|E220    |      ;
     LDY.W #$0000                                               ;81E805|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;81E808|B772    |000072;
@@ -12948,7 +12948,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81E88F|38      |      ;
     SBC.B #$18                                                 ;81E890|E918    |      ;
     REP #$20                                                   ;81E892|C220    |      ;
-    JSL.L fGetCowDataPointer                                   ;81E894|22A7C983|83C9A7;
+    JSL.L fEngineGetCowData                                    ;81E894|22A7C983|83C9A7;
     SEP #$20                                                   ;81E898|E220    |      ;
     LDY.W #$0000                                               ;81E89A|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;81E89D|B772    |000072;
@@ -13081,7 +13081,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81E9AF|38      |      ;
     SBC.B #$18                                                 ;81E9B0|E918    |      ;
     REP #$20                                                   ;81E9B2|C220    |      ;
-    JSL.L fGetCowDataPointer                                   ;81E9B4|22A7C983|83C9A7;
+    JSL.L fEngineGetCowData                                    ;81E9B4|22A7C983|83C9A7;
     SEP #$20                                                   ;81E9B8|E220    |      ;
     LDY.W #$0000                                               ;81E9BA|A00000  |      ;
     LDA.B #$00                                                 ;81E9BD|A900    |      ;
@@ -13275,7 +13275,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81EB45|38      |      ;
     SBC.B #$18                                                 ;81EB46|E918    |      ;
     REP #$20                                                   ;81EB48|C220    |      ;
-    JSL.L fGetCowDataPointer                                   ;81EB4A|22A7C983|83C9A7;
+    JSL.L fEngineGetCowData                                    ;81EB4A|22A7C983|83C9A7;
     SEP #$20                                                   ;81EB4E|E220    |      ;
     LDY.W #$0000                                               ;81EB50|A00000  |      ;
     LDA.B #$00                                                 ;81EB53|A900    |      ;
@@ -13550,7 +13550,7 @@ subPlayerInteraction81D593_0x44:
     SEC                                                        ;81ED72|38      |      ;
     SBC.B #$24                                                 ;81ED73|E924    |      ;
     REP #$20                                                   ;81ED75|C220    |      ;
-    JSL.L fGetChickenDataPointer                               ;81ED77|2295C983|83C995;
+    JSL.L fEngineGetChickenData                                ;81ED77|2295C983|83C995;
     SEP #$20                                                   ;81ED7B|E220    |      ;
     LDY.W #$0000                                               ;81ED7D|A00000  |      ;
     LDA.B #$00                                                 ;81ED80|A900    |      ;
@@ -13744,7 +13744,7 @@ subPlayerInteraction81D593_0x44:
     SEC                                                        ;81EF08|38      |      ;
     SBC.B #$24                                                 ;81EF09|E924    |      ;
     REP #$20                                                   ;81EF0B|C220    |      ;
-    JSL.L fGetChickenDataPointer                               ;81EF0D|2295C983|83C995;
+    JSL.L fEngineGetChickenData                                ;81EF0D|2295C983|83C995;
     SEP #$20                                                   ;81EF11|E220    |      ;
     LDY.W #$0000                                               ;81EF13|A00000  |      ;
     LDA.B #$00                                                 ;81EF16|A900    |      ;
@@ -14943,7 +14943,7 @@ subPlayerInteraction81D593_0x53:
     ASL A                                                      ;81F841|0A      |      ;
     ASL A                                                      ;81F842|0A      |      ;
     TAX                                                        ;81F843|AA      |      ;
-    LDA.L Table_83CA10,X                                       ;81F844|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;81F844|BF10CA83|83CA10;
     SEC                                                        ;81F848|38      |      ;
     SBC.W #$0008                                               ;81F849|E90800  |      ;
     CMP.B n16TempVar1                                          ;81F84C|C57E    |00007E;

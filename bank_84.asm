@@ -219,7 +219,7 @@ fUnknown_84816F:
     JMP.W .return                                              ;84818D|4C1A82  |84821A;
  
  
-  + JSL.L fGetRandomNumber_838138                              ;848190|22388183|838138;
+  + JSL.L fGetRandomNumber                                     ;848190|22388183|838138;
     SEP #$20                                                   ;848194|E220    |      ;
     STA.B $DE                                                  ;848196|85DE    |0000DE;
     REP #$20                                                   ;848198|C220    |      ;
@@ -1054,7 +1054,7 @@ fUnknown_8483CC:
     LDY.W #$0002                                               ;8487A7|A00200  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8487AA|B7CC    |0000CC;
     REP #$20                                                   ;8487AC|C220    |      ;
-    JSL.L fUnknown_83AF37                                      ;8487AE|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;8487AE|2237AF83|83AF37;
     REP #$20                                                   ;8487B2|C220    |      ;
     PHA                                                        ;8487B4|48      |      ;
     LDA.B $E9                                                  ;8487B5|A5E9    |0000E9;
@@ -1103,7 +1103,7 @@ fUnknown_8483CC:
     LDY.W #$0002                                               ;848806|A00200  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848809|B7CC    |0000CC;
     REP #$20                                                   ;84880B|C220    |      ;
-    JSL.L fUnknown_83AEC3                                      ;84880D|22C3AE83|83AEC3;
+    JSL.L fEngineUnknown_83AEC3                                ;84880D|22C3AE83|83AEC3;
     CMP.W #$0000                                               ;848811|C90000  |      ;
     BNE .return                                                ;848814|D001    |848817;
  
@@ -3327,7 +3327,7 @@ subUnknown849419_0x30:
     LDA.B #$00                                                 ;849870|A900    |      ;
     XBA                                                        ;849872|EB      |      ;
     REP #$20                                                   ;849873|C220    |      ;
-    JSL.L fGetChickenDataPointer                               ;849875|2295C983|83C995;
+    JSL.L fEngineGetChickenData                                ;849875|2295C983|83C995;
     REP #$30                                                   ;849879|C230    |      ;
     LDY.W #$001A                                               ;84987B|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84987E|B7CC    |0000CC;
@@ -3661,7 +3661,7 @@ subUnknown849419_0x31:
     LDA.B #$00                                                 ;849AED|A900    |      ;
     XBA                                                        ;849AEF|EB      |      ;
     REP #$20                                                   ;849AF0|C220    |      ;
-    JSL.L fGetCowDataPointer                                   ;849AF2|22A7C983|83C9A7;
+    JSL.L fEngineGetCowData                                    ;849AF2|22A7C983|83C9A7;
     REP #$30                                                   ;849AF6|C230    |      ;
     LDY.W #$001A                                               ;849AF8|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;849AFB|B7CC    |0000CC;
@@ -5212,10 +5212,10 @@ CODE_84A540:
     STA.B [ptrUnknown0x72],Y                                   ;84A57C|9772    |000072;
     REP #$20                                                   ;84A57E|C220    |      ;
     LDY.W #$0008                                               ;84A580|A00800  |      ;
-    LDA.L Table_83CA44,X                                       ;84A583|BF44CA83|83CA44;
+    LDA.L aEngineAddCowData,X                                  ;84A583|BF44CA83|83CA44;
     STA.B [ptrUnknown0x72],Y                                   ;84A587|9772    |000072;
     LDY.W #$000A                                               ;84A589|A00A00  |      ;
-    LDA.L Table_83CA44,X                                       ;84A58C|BF44CA83|83CA44;
+    LDA.L aEngineAddCowData,X                                  ;84A58C|BF44CA83|83CA44;
     STA.B [ptrUnknown0x72],Y                                   ;84A590|9772    |000072;
     JMP.W CODE_84A46E                                          ;84A592|4C6EA4  |84A46E;
  
@@ -6249,7 +6249,7 @@ CODE_84AC6B:
     STZ.B $E5                                                  ;84AC7A|64E5    |0000E5;
     STZ.B $E7                                                  ;84AC7C|64E7    |0000E7;
     LDA.W $0913                                                ;84AC7E|AD1309  |000913;
-    JSL.L fUnknown_83AF37                                      ;84AC81|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;84AC81|2237AF83|83AF37;
     REP #$30                                                   ;84AC85|C230    |      ;
     BEQ CODE_84AC8C                                            ;84AC87|F003    |84AC8C;
     JMP.W CODE_84ACEE                                          ;84AC89|4CEEAC  |84ACEE;
@@ -6278,7 +6278,7 @@ CODE_84ACA8:
     LDA.W #$0020                                               ;84ACAA|A92000  |      ;
     STA.B $E3                                                  ;84ACAD|85E3    |0000E3;
     LDA.W $0913                                                ;84ACAF|AD1309  |000913;
-    JSL.L fUnknown_83AD91                                      ;84ACB2|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;84ACB2|2291AD83|83AD91;
     REP #$30                                                   ;84ACB6|C230    |      ;
     CMP.W #$0000                                               ;84ACB8|C90000  |      ;
     BEQ CODE_84ACC0                                            ;84ACBB|F003    |84ACC0;
@@ -8442,7 +8442,7 @@ CODE_84BC06:
     SBC.B #$24                                                 ;84BC11|E924    |      ;
     REP #$20                                                   ;84BC13|C220    |      ;
     PHA                                                        ;84BC15|48      |      ;
-    JSL.L fGetChickenDataPointer                               ;84BC16|2295C983|83C995;
+    JSL.L fEngineGetChickenData                                ;84BC16|2295C983|83C995;
     SEP #$20                                                   ;84BC1A|E220    |      ;
     LDY.W #$0001                                               ;84BC1C|A00100  |      ;
     LDA.B #$28                                                 ;84BC1F|A928    |      ;
@@ -8457,14 +8457,14 @@ CODE_84BC06:
     ASL A                                                      ;84BC30|0A      |      ;
     TAX                                                        ;84BC31|AA      |      ;
     LDY.W #$0004                                               ;84BC32|A00400  |      ;
-    LDA.L Table_83CA10,X                                       ;84BC35|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;84BC35|BF10CA83|83CA10;
     CLC                                                        ;84BC39|18      |      ;
     ADC.W #$0010                                               ;84BC3A|691000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84BC3D|9772    |000072;
     INX                                                        ;84BC3F|E8      |      ;
     INX                                                        ;84BC40|E8      |      ;
     LDY.W #$0006                                               ;84BC41|A00600  |      ;
-    LDA.L Table_83CA10,X                                       ;84BC44|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;84BC44|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BC48|9772    |000072;
     SEP #$20                                                   ;84BC4A|E220    |      ;
     STZ.W $091D                                                ;84BC4C|9C1D09  |00091D;
@@ -8544,7 +8544,7 @@ CODE_84BCC4:
     SBC.B #$24                                                 ;84BCCF|E924    |      ;
     REP #$20                                                   ;84BCD1|C220    |      ;
     PHA                                                        ;84BCD3|48      |      ;
-    JSL.L fGetChickenDataPointer                               ;84BCD4|2295C983|83C995;
+    JSL.L fEngineGetChickenData                                ;84BCD4|2295C983|83C995;
     SEP #$20                                                   ;84BCD8|E220    |      ;
     LDY.W #$0001                                               ;84BCDA|A00100  |      ;
     LDA.B #$28                                                 ;84BCDD|A928    |      ;
@@ -8559,14 +8559,14 @@ CODE_84BCC4:
     ASL A                                                      ;84BCEE|0A      |      ;
     TAX                                                        ;84BCEF|AA      |      ;
     LDY.W #$0004                                               ;84BCF0|A00400  |      ;
-    LDA.L Table_83CA10,X                                       ;84BCF3|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;84BCF3|BF10CA83|83CA10;
     CLC                                                        ;84BCF7|18      |      ;
     ADC.W #$0010                                               ;84BCF8|691000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84BCFB|9772    |000072;
     INX                                                        ;84BCFD|E8      |      ;
     INX                                                        ;84BCFE|E8      |      ;
     LDY.W #$0006                                               ;84BCFF|A00600  |      ;
-    LDA.L Table_83CA10,X                                       ;84BD02|BF10CA83|83CA10;
+    LDA.L aEngineAddChickenData,X                              ;84BD02|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BD06|9772    |000072;
     SEP #$20                                                   ;84BD08|E220    |      ;
     STZ.W $091D                                                ;84BD0A|9C1D09  |00091D;
@@ -10558,14 +10558,14 @@ CODE_84CA66:
     STZ.B $E5                                                  ;84CA72|64E5    |0000E5;
     STZ.B $E7                                                  ;84CA74|64E7    |0000E7;
     LDA.B $DA                                                  ;84CA76|A5DA    |0000DA;
-    JSL.L fUnknown_83AF37                                      ;84CA78|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;84CA78|2237AF83|83AF37;
     REP #$30                                                   ;84CA7C|C230    |      ;
     BNE CODE_84CA9D                                            ;84CA7E|D01D    |84CA9D;
     REP #$20                                                   ;84CA80|C220    |      ;
     LDA.W #$0020                                               ;84CA82|A92000  |      ;
     STA.B $E3                                                  ;84CA85|85E3    |0000E3;
     LDA.B $DA                                                  ;84CA87|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;84CA89|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;84CA89|2291AD83|83AD91;
     REP #$30                                                   ;84CA8D|C230    |      ;
     CMP.W #$0000                                               ;84CA8F|C90000  |      ;
     BNE CODE_84CA9D                                            ;84CA92|D009    |84CA9D;
@@ -10669,7 +10669,7 @@ CODE_84CB2B:
     LDA.W #$0010                                               ;84CB39|A91000  |      ;
     STA.B $E3                                                  ;84CB3C|85E3    |0000E3;
     LDA.B $DA                                                  ;84CB3E|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;84CB40|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;84CB40|2291AD83|83AD91;
     REP #$30                                                   ;84CB44|C230    |      ;
     CMP.W #$0000                                               ;84CB46|C90000  |      ;
     BEQ CODE_84CB4E                                            ;84CB49|F003    |84CB4E;
@@ -10923,7 +10923,7 @@ fUnknown_84CD16:
     STZ.B $E5                                                  ;84CD25|64E5    |0000E5;
     STZ.B $E7                                                  ;84CD27|64E7    |0000E7;
     LDA.W $0911                                                ;84CD29|AD1109  |000911;
-    JSL.L fUnknown_83AF37                                      ;84CD2C|2237AF83|83AF37;
+    JSL.L fEngineUnknown_83AF37                                ;84CD2C|2237AF83|83AF37;
     REP #$30                                                   ;84CD30|C230    |      ;
     BEQ CODE_84CD37                                            ;84CD32|F003    |84CD37;
     JMP.W CODE_84CD71                                          ;84CD34|4C71CD  |84CD71;
@@ -10952,7 +10952,7 @@ CODE_84CD53:
     LDA.W #$0010                                               ;84CD55|A91000  |      ;
     STA.B $E3                                                  ;84CD58|85E3    |0000E3;
     LDA.W $0911                                                ;84CD5A|AD1109  |000911;
-    JSL.L fUnknown_83AD91                                      ;84CD5D|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;84CD5D|2291AD83|83AD91;
     REP #$30                                                   ;84CD61|C230    |      ;
     CMP.W #$0000                                               ;84CD63|C90000  |      ;
     BEQ CODE_84CD6B                                            ;84CD66|F003    |84CD6B;
