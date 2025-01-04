@@ -454,7 +454,7 @@ fNextDayHandler:
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
     JSL.L fUnknown_82A811                                      ;828398|2211A882|82A811;
     JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
-    JSL.L fEngineUnknown_83BC5A                                ;8283A0|225ABC83|83BC5A;
+    JSL.L fEngineCowUnknown_83BC5A                             ;8283A0|225ABC83|83BC5A;
     JSL.L fWeatherSpecialEvents                                ;8283A4|22F98C82|828CF9;
     JSL.L fUnknown_828EC6                                      ;8283A8|22C68E82|828EC6;
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
@@ -868,7 +868,7 @@ fUnknown_828790:
     STA.B n16TempVar1                                          ;8287D8|857E    |00007E;
     LDA.W #$0078                                               ;8287DA|A97800  |      ;
     STA.B n16TempVar2                                          ;8287DD|8580    |000080;
-    JSL.L fSystemDivide_838082                                 ;8287DF|22828083|838082;
+    JSL.L fSystemDivide                                        ;8287DF|22828083|838082;
     REP #$30                                                   ;8287E3|C230    |      ;
     LDA.B n16TempVar1                                          ;8287E5|A57E    |00007E;
     BNE +                                                      ;8287E7|D00B    |8287F4;
@@ -1052,7 +1052,7 @@ fUnknown_828790:
     STA.B n16TempVar1                                          ;828962|857E    |00007E;
     LDA.W #$0078                                               ;828964|A97800  |      ;
     STA.B n16TempVar2                                          ;828967|8580    |000080;
-    JSL.L fSystemDivide_838082                                 ;828969|22828083|838082;
+    JSL.L fSystemDivide                                        ;828969|22828083|838082;
     REP #$30                                                   ;82896D|C230    |      ;
     LDA.B n16TempVar1                                          ;82896F|A57E    |00007E;
     BNE .label4                                                ;828971|D00B    |82897E;
@@ -1088,7 +1088,7 @@ fUnknown_828790:
     STA.B n16TempVar1                                          ;8289B9|857E    |00007E;
     LDA.W #$0078                                               ;8289BB|A97800  |      ;
     STA.B n16TempVar2                                          ;8289BE|8580    |000080;
-    JSL.L fSystemDivide_838082                                 ;8289C0|22828083|838082;
+    JSL.L fSystemDivide                                        ;8289C0|22828083|838082;
     REP #$30                                                   ;8289C4|C230    |      ;
     LDA.B n16TempVar1                                          ;8289C6|A57E    |00007E;
     BNE .return                                                ;8289C8|D00B    |8289D5;
@@ -4997,7 +4997,7 @@ fUnknown_82A811:
     BNE .label9                                                ;82A92F|D038    |82A969;
     REP #$10                                                   ;82A931|C210    |      ;
     PHX                                                        ;82A933|DA      |      ;
-    JSL.L fGetRandomNumber_838138                              ;82A934|22388183|838138;
+    JSL.L fGetRandomNumber                                     ;82A934|22388183|838138;
     SEP #$20                                                   ;82A938|E220    |      ;
     REP #$10                                                   ;82A93A|C210    |      ;
     PLX                                                        ;82A93C|FA      |      ;
@@ -5885,7 +5885,7 @@ fUnknown_82AD0E:
     LDA.W #$0010                                               ;82AEF4|A91000  |      ;
     STA.B $E3                                                  ;82AEF7|85E3    |0000E3;
     LDA.B $DA                                                  ;82AEF9|A5DA    |0000DA;
-    JSL.L fUnknown_83AD91                                      ;82AEFB|2291AD83|83AD91;
+    JSL.L fEngineUnknown_83AD91                                ;82AEFB|2291AD83|83AD91;
     RTL                                                        ;82AEFF|6B      |      ;
  
  
@@ -9581,7 +9581,7 @@ fLoadAndStartGame:
  
  
 fStartNewGame:
-    JSL.L fSetDefaultValuesForVariables                        ;82E7F9|22BEA983|83A9BE;
+    JSL.L fEngineSetDefaultValues                              ;82E7F9|22BEA983|83A9BE;
     JML.L fGameStart                                           ;82E7FD|5C008080|808000;
  
  

@@ -20,7 +20,7 @@ fGameStart:
     JSL.L fSystemSetForceBlank                                 ;808022|220F8E80|808E0F;
     JSL.L fZeroVRAM                                            ;808026|22468880|808846;
     JSL.L fZeroCGRAM                                           ;80802A|22808980|808980;
-    JSL.L fUnknown_83ABF0                                      ;80802E|22F0AB83|83ABF0;
+    JSL.L fEngineUnknown_83ABF0                                ;80802E|22F0AB83|83ABF0;
     JSL.L fUnknown_8095DE                                      ;808032|22DE9580|8095DE;
     REP #$20                                                   ;808036|C220    |      ;
     LDA.W #$0100                                               ;808038|A90001  |      ;
@@ -155,7 +155,7 @@ fSetBoughtCowName:
     JSL.L fZeroCGRAM                                           ;80817B|22808980|808980;
     REP #$20                                                   ;80817F|C220    |      ;
     LDA.W #$0000                                               ;808181|A90000  |      ;
-    JSL.L fAddNewCow                                           ;808184|22DCC883|83C8DC;
+    JSL.L fEngineAddCow                                        ;808184|22DCC883|83C8DC;
     SEP #$20                                                   ;808188|E220    |      ;
     REP #$10                                                   ;80818A|C210    |      ;
     LDY.W #$000C                                               ;80818C|A00C00  |      ;
@@ -200,7 +200,7 @@ fSetBornCowName:
     JSL.L fZeroCGRAM                                           ;8081EE|22808980|808980;
     REP #$20                                                   ;8081F2|C220    |      ;
     LDA.W #$0001                                               ;8081F4|A90100  |      ;
-    JSL.L fAddNewCow                                           ;8081F7|22DCC883|83C8DC;
+    JSL.L fEngineAddCow                                        ;8081F7|22DCC883|83C8DC;
     SEP #$20                                                   ;8081FB|E220    |      ;
     REP #$10                                                   ;8081FD|C210    |      ;
     LDY.W #$000C                                               ;8081FF|A00C00  |      ;
@@ -608,7 +608,7 @@ fInterrupt_808428:
     JSL.L fZeroCGRAM                                           ;80861C|22808980|808980;
     JSL.L fUnknown_858ED7                                      ;808620|22D78E85|858ED7;
     JSL.L fUnknown_85820F                                      ;808624|220F8285|85820F;
-    JSL.L fEngineUnknown_83BAD4                                ;808628|22D4BA83|83BAD4;
+    JSL.L fEngineSaveUnknown_83BAD4                            ;808628|22D4BA83|83BAD4;
     SEP #$20                                                   ;80862C|E220    |      ;
     REP #$10                                                   ;80862E|C210    |      ;
     LDA.B #$80                                                 ;808630|A980    |      ;
@@ -721,7 +721,7 @@ fUpdateGFX:
     STZ.W SNES_MDMAEN                                          ;8086CE|9C0B42  |00420B;
  
   + JSR.W fReadJoypad                                          ;8086D1|202B87  |80872B;
-    JSL.L fGetRandomNumber_838138                              ;8086D4|22388183|838138;
+    JSL.L fGetRandomNumber                                     ;8086D4|22388183|838138;
     SEP #$20                                                   ;8086D8|E220    |      ;
     LDA.W $013C                                                ;8086DA|AD3C01  |00013C;
     STA.W SNES_BG1HOFS                                         ;8086DD|8D0D21  |00210D;
@@ -1112,10 +1112,10 @@ fRollRNG:
     STA.B n16TempVar1                                          ;808A05|857E    |00007E;
     LDA.B $92                                                  ;808A07|A592    |000092;
     STA.B n16TempVar2                                          ;808A09|8580    |000080;
-    JSL.L fSystemDivide_838082                                 ;808A0B|22828083|838082;
+    JSL.L fSystemDivide                                        ;808A0B|22828083|838082;
     SEP #$20                                                   ;808A0F|E220    |      ;
     STA.B $93                                                  ;808A11|8593    |000093;
-    JSL.L fGetRandomNumber_838138                              ;808A13|22388183|838138;
+    JSL.L fGetRandomNumber                                     ;808A13|22388183|838138;
     SEP #$30                                                   ;808A17|E230    |      ;
     STA.B $94                                                  ;808A19|8594    |000094;
     PLA                                                        ;808A1B|68      |      ;
@@ -2903,7 +2903,7 @@ fUnknown_8096D3:
     SEP #$20                                                   ;809713|E220    |      ;
     LDA.W $098B                                                ;809715|AD8B09  |00098B;
     STA.B nSelectedTilemapId                                   ;809718|8522    |000022;
-    JSL.L fUnknown_83CA98                                      ;80971A|2298CA83|83CA98;
+    JSL.L fEngineMapSubrutines                                 ;80971A|2298CA83|83CA98;
     JSL.L fUnknown_84816F                                      ;80971E|226F8184|84816F;
     SEP #$20                                                   ;809722|E220    |      ;
     LDA.W $098B                                                ;809724|AD8B09  |00098B;
@@ -3228,7 +3228,7 @@ fUnknown_80972C:
     LDA.L $7F1F5E                                              ;8099D7|AF5E1F7F|7F1F5E;
     AND.W #$0002                                               ;8099DB|290200  |      ;
     BNE .label13                                               ;8099DE|D004    |8099E4;
-    JSL.L fUnknown_83C296                                      ;8099E0|2296C283|83C296;
+    JSL.L fEngineChichenUnknown_83C296                         ;8099E0|2296C283|83C296;
  
 .label13:
     REP #$30                                                   ;8099E4|C230    |      ;
