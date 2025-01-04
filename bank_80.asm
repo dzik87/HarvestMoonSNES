@@ -1109,7 +1109,7 @@ fRollRNG:
     STZ.B $93                                                  ;8089FE|6493    |000093;
     REP #$20                                                   ;808A00|C220    |      ;
     LDA.W #$00FF                                               ;808A02|A9FF00  |      ;
-    STA.B $7E                                                  ;808A05|857E    |00007E;
+    STA.B nTempVar1                                            ;808A05|857E    |00007E;
     LDA.B $92                                                  ;808A07|A592    |000092;
     STA.B $80                                                  ;808A09|8580    |000080;
     JSL.L fUnknown_838082                                      ;808A0B|22828083|838082;
@@ -1139,7 +1139,7 @@ fRollRNG:
  
  
 fSystemTransferData:
-    REP #$30                                                   ;808A33|C230    |      ; A: nArg1, X: nArg2, $72: ptr24
+    REP #$30                                                   ;808A33|C230    |      ; A: nArg1, X: nArg2, $72: ptr24Destination
     PHA                                                        ;808A35|48      |      ; A -> stack1
     TXA                                                        ;808A36|8A      |      ;
     PHA                                                        ;808A37|48      |      ; X -> stack2
@@ -1569,7 +1569,7 @@ fSetBrightness:
   + STA.L $80007E                                              ;808E36|8F7E0080|80007E;
     LDA.B $24                                                  ;808E3A|A524    |000024;
     AND.B #$80                                                 ;808E3C|2980    |      ;
-    ORA.B $7E                                                  ;808E3E|057E    |00007E;
+    ORA.B nTempVar1                                            ;808E3E|057E    |00007E;
     STA.B $24                                                  ;808E40|8524    |000024;
     STA.L SNES_INIDISP                                         ;808E42|8F002100|002100;
     PLP                                                        ;808E46|28      |      ;
@@ -1584,10 +1584,10 @@ fUnknown_808E48:
     STZ.W $014A,X                                              ;808E51|9E4A01  |00014A;
     REP #$20                                                   ;808E54|C220    |      ;
     TXA                                                        ;808E56|8A      |      ;
-    STA.B $7E                                                  ;808E57|857E    |00007E;
+    STA.B nTempVar1                                            ;808E57|857E    |00007E;
     ASL A                                                      ;808E59|0A      |      ;
     CLC                                                        ;808E5A|18      |      ;
-    ADC.B $7E                                                  ;808E5B|657E    |00007E; X * 3
+    ADC.B nTempVar1                                            ;808E5B|657E    |00007E; X * 3
     TAX                                                        ;808E5D|AA      |      ;
     LDA.B ptrUnknown0x72                                       ;808E5E|A572    |000072;
     STA.B ptrUnknown0x42,X                                     ;808E60|9542    |000042; $72 -> $42
@@ -1612,10 +1612,10 @@ fUnknown_808E69:
 .label1:
     REP #$20                                                   ;808E81|C220    |      ;
     TYA                                                        ;808E83|98      |      ;
-    STA.B $7E                                                  ;808E84|857E    |00007E;
+    STA.B nTempVar1                                            ;808E84|857E    |00007E;
     ASL A                                                      ;808E86|0A      |      ;
     CLC                                                        ;808E87|18      |      ;
-    ADC.B $7E                                                  ;808E88|657E    |00007E;
+    ADC.B nTempVar1                                            ;808E88|657E    |00007E;
     TAX                                                        ;808E8A|AA      |      ;
     LDA.B ptrUnknown0x42,X                                     ;808E8B|B542    |000042;
     BNE .label2                                                ;808E8D|D00E    |808E9D;
@@ -1690,10 +1690,10 @@ fUnknown_808E69:
     REP #$20                                                   ;808EFE|C220    |      ;
     PLY                                                        ;808F00|7A      |      ;
     TYA                                                        ;808F01|98      |      ;
-    STA.B $7E                                                  ;808F02|857E    |00007E;
+    STA.B nTempVar1                                            ;808F02|857E    |00007E;
     ASL A                                                      ;808F04|0A      |      ;
     CLC                                                        ;808F05|18      |      ;
-    ADC.B $7E                                                  ;808F06|657E    |00007E;
+    ADC.B nTempVar1                                            ;808F06|657E    |00007E;
     TAX                                                        ;808F08|AA      |      ;
     LDA.B ptrUnknown0x42,X                                     ;808F09|B542    |000042;
     CLC                                                        ;808F0B|18      |      ;
@@ -1707,10 +1707,10 @@ fUnknown_808E69:
 .label6:
     REP #$20                                                   ;808F19|C220    |      ;
     TYA                                                        ;808F1B|98      |      ;
-    STA.B $7E                                                  ;808F1C|857E    |00007E;
+    STA.B nTempVar1                                            ;808F1C|857E    |00007E;
     ASL A                                                      ;808F1E|0A      |      ;
     CLC                                                        ;808F1F|18      |      ;
-    ADC.B $7E                                                  ;808F20|657E    |00007E;
+    ADC.B nTempVar1                                            ;808F20|657E    |00007E;
     TAX                                                        ;808F22|AA      |      ;
     INY                                                        ;808F23|C8      |      ;
     CPY.W #$0010                                               ;808F24|C01000  |      ;
@@ -1774,10 +1774,10 @@ fUnknown_808E69:
  
 fZero42PointerAtIndex:
     REP #$30                                                   ;808F82|C230    |      ; A: nIndex
-    STA.B $7E                                                  ;808F84|857E    |00007E;
+    STA.B nTempVar1                                            ;808F84|857E    |00007E;
     ASL A                                                      ;808F86|0A      |      ;
     CLC                                                        ;808F87|18      |      ;
-    ADC.B $7E                                                  ;808F88|657E    |00007E;
+    ADC.B nTempVar1                                            ;808F88|657E    |00007E;
     TAX                                                        ;808F8A|AA      |      ;
     STZ.B ptrUnknown0x42,X                                     ;808F8B|7442    |000042;
     SEP #$20                                                   ;808F8D|E220    |      ;
@@ -1790,10 +1790,10 @@ fZero42PointersFromIndex:
  
   - REP #$20                                                   ;808F94|C220    |      ;
     TYA                                                        ;808F96|98      |      ;
-    STA.B $7E                                                  ;808F97|857E    |00007E;
+    STA.B nTempVar1                                            ;808F97|857E    |00007E;
     ASL A                                                      ;808F99|0A      |      ;
     CLC                                                        ;808F9A|18      |      ;
-    ADC.B $7E                                                  ;808F9B|657E    |00007E;
+    ADC.B nTempVar1                                            ;808F9B|657E    |00007E;
     TAX                                                        ;808F9D|AA      |      ;
     STZ.B ptrUnknown0x42,X                                     ;808F9E|7442    |000042;
     SEP #$20                                                   ;808FA0|E220    |      ;
@@ -1810,10 +1810,10 @@ fZeroAll42Pointers:
  
   - REP #$20                                                   ;808FB0|C220    |      ;
     TYA                                                        ;808FB2|98      |      ;
-    STA.B $7E                                                  ;808FB3|857E    |00007E;
+    STA.B nTempVar1                                            ;808FB3|857E    |00007E;
     ASL A                                                      ;808FB5|0A      |      ;
     CLC                                                        ;808FB6|18      |      ;
-    ADC.B $7E                                                  ;808FB7|657E    |00007E;
+    ADC.B nTempVar1                                            ;808FB7|657E    |00007E;
     TAX                                                        ;808FB9|AA      |      ;
     STZ.B ptrUnknown0x42,X                                     ;808FBA|7442    |000042;
     SEP #$20                                                   ;808FBC|E220    |      ;
@@ -1833,7 +1833,7 @@ fUnknown_808FC7:
     LDA.B #$00                                                 ;808FD2|A900    |      ;
     XBA                                                        ;808FD4|EB      |      ;
     REP #$20                                                   ;808FD5|C220    |      ;
-    STA.B $7E                                                  ;808FD7|857E    |00007E;
+    STA.B nTempVar1                                            ;808FD7|857E    |00007E;
     SEP #$20                                                   ;808FD9|E220    |      ;
     LDA.L nCurrentTimeID                                       ;808FDB|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;808FDF|C912    |      ;
@@ -1849,10 +1849,10 @@ fUnknown_808FC7:
  
 .label1:
     REP #$20                                                   ;808FF2|C220    |      ;
-    LDA.B $7E                                                  ;808FF4|A57E    |00007E;
+    LDA.B nTempVar1                                            ;808FF4|A57E    |00007E;
     ASL A                                                      ;808FF6|0A      |      ;
     CLC                                                        ;808FF7|18      |      ;
-    ADC.B $7E                                                  ;808FF8|657E    |00007E;
+    ADC.B nTempVar1                                            ;808FF8|657E    |00007E;
     TAX                                                        ;808FFA|AA      |      ;
     LDA.L pPaletteTable,X                                      ;808FFB|BFFDB980|80B9FD;
     STA.B ptrPaletteNext                                       ;808FFF|8504    |000004;
@@ -1925,18 +1925,18 @@ fUnknown_80900C:
     REP #$20                                                   ;809075|C220    |      ;
     LDA.L sPalette_7F0D00,X                                    ;809077|BF000D7F|7F0D00;
     AND.W #$001F                                               ;80907B|291F00  |      ;
-    STA.B $7E                                                  ;80907E|857E    |00007E;
+    STA.B nTempVar1                                            ;80907E|857E    |00007E;
     LDA.B [ptrPaletteNext],Y                                   ;809080|B704    |000004;
     AND.W #$001F                                               ;809082|291F00  |      ;
-    CMP.B $7E                                                  ;809085|C57E    |00007E;
+    CMP.B nTempVar1                                            ;809085|C57E    |00007E;
     BEQ .label3                                                ;809087|F00E    |809097;
     BCS .inc7E                                                 ;809089|B004    |80908F;
-    DEC.B $7E                                                  ;80908B|C67E    |00007E;
+    DEC.B nTempVar1                                            ;80908B|C67E    |00007E;
     BRA .store01to92                                           ;80908D|8002    |809091;
  
  
 .inc7E:
-    INC.B $7E                                                  ;80908F|E67E    |00007E;
+    INC.B nTempVar1                                            ;80908F|E67E    |00007E;
  
 .store01to92:
     SEP #$20                                                   ;809091|E220    |      ;
@@ -2034,7 +2034,7 @@ fUnknown_80900C:
     ASL.B $82                                                  ;809113|0682    |000082;
     ASL.B $82                                                  ;809115|0682    |000082;
     ASL.B $82                                                  ;809117|0682    |000082;
-    LDA.B $7E                                                  ;809119|A57E    |00007E;
+    LDA.B nTempVar1                                            ;809119|A57E    |00007E;
     ORA.B $80                                                  ;80911B|0580    |000080;
     ORA.B $82                                                  ;80911D|0582    |000082;
     STA.L sPalette_7F0900,X                                    ;80911F|9F00097F|7F0900;
@@ -2090,11 +2090,11 @@ fZero04and06:
 fModifyPallete_900:
     REP #$30                                                   ;80916F|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetindex (32Y+2X)
     STA.B $82                                                  ;809171|8582    |000082;
-    STY.B $7E                                                  ;809173|847E    |00007E;
+    STY.B nTempVar1                                            ;809173|847E    |00007E;
     TXA                                                        ;809175|8A      |      ;
     ASL A                                                      ;809176|0A      |      ;
     STA.B $80                                                  ;809177|8580    |000080;
-    LDA.B $7E                                                  ;809179|A57E    |00007E;
+    LDA.B nTempVar1                                            ;809179|A57E    |00007E;
     ASL A                                                      ;80917B|0A      |      ;
     ASL A                                                      ;80917C|0A      |      ;
     ASL A                                                      ;80917D|0A      |      ;
@@ -2124,11 +2124,11 @@ fModifyPallete_900:
 fModifyPalette:
     REP #$30                                                   ;80919D|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetIndex (32Y+2X)
     STA.B $82                                                  ;80919F|8582    |000082;
-    STY.B $7E                                                  ;8091A1|847E    |00007E;
+    STY.B nTempVar1                                            ;8091A1|847E    |00007E;
     TXA                                                        ;8091A3|8A      |      ;
     ASL A                                                      ;8091A4|0A      |      ;
     STA.B $80                                                  ;8091A5|8580    |000080;
-    LDA.B $7E                                                  ;8091A7|A57E    |00007E;
+    LDA.B nTempVar1                                            ;8091A7|A57E    |00007E;
     ASL A                                                      ;8091A9|0A      |      ;
     ASL A                                                      ;8091AA|0A      |      ;
     ASL A                                                      ;8091AB|0A      |      ;
@@ -2158,10 +2158,10 @@ fModifyPalette:
  
 fLoadPaletteFirstHalf:
     REP #$30                                                   ;8091CF|C230    |      ; A: nIndex
-    STA.B $7E                                                  ;8091D1|857E    |00007E;
+    STA.B nTempVar1                                            ;8091D1|857E    |00007E;
     ASL A                                                      ;8091D3|0A      |      ;
     CLC                                                        ;8091D4|18      |      ;
-    ADC.B $7E                                                  ;8091D5|657E    |00007E;
+    ADC.B nTempVar1                                            ;8091D5|657E    |00007E;
     TAX                                                        ;8091D7|AA      |      ;
     LDA.L pPaletteTable,X                                      ;8091D8|BFFDB980|80B9FD; X = nIndex * 3
     STA.B ptrUnknown0x72                                       ;8091DC|8572    |000072;
@@ -2172,7 +2172,7 @@ fLoadPaletteFirstHalf:
     STA.B ptrUnknown0x72+2                                     ;8091E6|8574    |000074;
     REP #$20                                                   ;8091E8|C220    |      ;
     LDA.W #$0100                                               ;8091EA|A90001  |      ;
-    STA.B $7E                                                  ;8091ED|857E    |00007E; $7E = 0x100
+    STA.B nTempVar1                                            ;8091ED|857E    |00007E; $7E = 0x100
     LDX.W #$0000                                               ;8091EF|A20000  |      ;
     LDY.W #$0000                                               ;8091F2|A00000  |      ;
  
@@ -2183,17 +2183,17 @@ fLoadPaletteFirstHalf:
     INY                                                        ;809200|C8      |      ;
     INX                                                        ;809201|E8      |      ;
     INX                                                        ;809202|E8      |      ;
-    CPY.B $7E                                                  ;809203|C47E    |00007E;
+    CPY.B nTempVar1                                            ;809203|C47E    |00007E;
     BNE -                                                      ;809205|D0EE    |8091F5;
     RTL                                                        ;809207|6B      |      ;
  
  
 fLoadPaletteSecondHalf:
     REP #$30                                                   ;809208|C230    |      ; A: nIndex
-    STA.B $7E                                                  ;80920A|857E    |00007E;
+    STA.B nTempVar1                                            ;80920A|857E    |00007E;
     ASL A                                                      ;80920C|0A      |      ;
     CLC                                                        ;80920D|18      |      ;
-    ADC.B $7E                                                  ;80920E|657E    |00007E;
+    ADC.B nTempVar1                                            ;80920E|657E    |00007E;
     TAX                                                        ;809210|AA      |      ;
     LDA.L pPaletteTable,X                                      ;809211|BFFDB980|80B9FD; X = nIndex * 3
     STA.B ptrUnknown0x72                                       ;809215|8572    |000072;
@@ -2204,7 +2204,7 @@ fLoadPaletteSecondHalf:
     STA.B ptrUnknown0x72+2                                     ;80921F|8574    |000074;
     REP #$20                                                   ;809221|C220    |      ;
     LDA.W #$0100                                               ;809223|A90001  |      ;
-    STA.B $7E                                                  ;809226|857E    |00007E; $7E = 0x100
+    STA.B nTempVar1                                            ;809226|857E    |00007E; $7E = 0x100
     LDX.W #$0100                                               ;809228|A20001  |      ;
     LDY.W #$0000                                               ;80922B|A00000  |      ;
  
@@ -2215,7 +2215,7 @@ fLoadPaletteSecondHalf:
     INY                                                        ;809239|C8      |      ;
     INX                                                        ;80923A|E8      |      ;
     INX                                                        ;80923B|E8      |      ;
-    CPY.B $7E                                                  ;80923C|C47E    |00007E;
+    CPY.B nTempVar1                                            ;80923C|C47E    |00007E;
     BNE -                                                      ;80923E|D0EE    |80922E;
     RTL                                                        ;809240|6B      |      ;
  
@@ -2240,10 +2240,10 @@ fLoadTilemapPalleteIndex4:
     XBA                                                        ;80925D|EB      |      ; A <-> B
     LDA.L sTilemapPalettes_80BB5C,X                            ;80925E|BF5CBB80|80BB5C; X = nSelectedTilemapId * 6 + 4
     REP #$20                                                   ;809262|C220    |      ;
-    STA.B $7E                                                  ;809264|857E    |00007E;
+    STA.B nTempVar1                                            ;809264|857E    |00007E;
     ASL A                                                      ;809266|0A      |      ;
     CLC                                                        ;809267|18      |      ;
-    ADC.B $7E                                                  ;809268|657E    |00007E;
+    ADC.B nTempVar1                                            ;809268|657E    |00007E;
     TAX                                                        ;80926A|AA      |      ;
     LDA.L pPaletteTable,X                                      ;80926B|BFFDB980|80B9FD; X = nPalettedIndex * 3
     STA.B ptrUnknown0x72                                       ;80926F|8572    |000072;
@@ -2254,7 +2254,7 @@ fLoadTilemapPalleteIndex4:
     STA.B ptrUnknown0x72+2                                     ;809279|8574    |000074;
     REP #$20                                                   ;80927B|C220    |      ;
     LDA.W #$0100                                               ;80927D|A90001  |      ;
-    STA.B $7E                                                  ;809280|857E    |00007E;
+    STA.B nTempVar1                                            ;809280|857E    |00007E;
     LDX.W #$0000                                               ;809282|A20000  |      ;
     LDY.W #$0000                                               ;809285|A00000  |      ;
  
@@ -2264,7 +2264,7 @@ fLoadTilemapPalleteIndex4:
     INY                                                        ;80928F|C8      |      ;
     INX                                                        ;809290|E8      |      ;
     INX                                                        ;809291|E8      |      ;
-    CPY.B $7E                                                  ;809292|C47E    |00007E;
+    CPY.B nTempVar1                                            ;809292|C47E    |00007E;
     BNE -                                                      ;809294|D0F2    |809288;
     SEP #$20                                                   ;809296|E220    |      ;
     LDA.B #$00                                                 ;809298|A900    |      ;
@@ -2275,10 +2275,10 @@ fLoadTilemapPalleteIndex4:
     INX                                                        ;80929F|E8      |      ;
     LDA.W nPalleteIndexes_80BE44,X                             ;8092A0|BD44BE  |80BE44;
     REP #$20                                                   ;8092A3|C220    |      ;
-    STA.B $7E                                                  ;8092A5|857E    |00007E;
+    STA.B nTempVar1                                            ;8092A5|857E    |00007E;
     ASL A                                                      ;8092A7|0A      |      ;
     CLC                                                        ;8092A8|18      |      ;
-    ADC.B $7E                                                  ;8092A9|657E    |00007E;
+    ADC.B nTempVar1                                            ;8092A9|657E    |00007E;
     TAX                                                        ;8092AB|AA      |      ;
     LDA.L pPaletteTable,X                                      ;8092AC|BFFDB980|80B9FD;
     STA.B ptrUnknown0x72                                       ;8092B0|8572    |000072;
@@ -2289,7 +2289,7 @@ fLoadTilemapPalleteIndex4:
     STA.B ptrUnknown0x72+2                                     ;8092BA|8574    |000074;
     REP #$20                                                   ;8092BC|C220    |      ;
     LDA.W #$0100                                               ;8092BE|A90001  |      ;
-    STA.B $7E                                                  ;8092C1|857E    |00007E;
+    STA.B nTempVar1                                            ;8092C1|857E    |00007E;
     LDX.W #$0100                                               ;8092C3|A20001  |      ;
     LDY.W #$0000                                               ;8092C6|A00000  |      ;
  
@@ -2299,7 +2299,7 @@ fLoadTilemapPalleteIndex4:
     INY                                                        ;8092D0|C8      |      ;
     INX                                                        ;8092D1|E8      |      ;
     INX                                                        ;8092D2|E8      |      ;
-    CPY.B $7E                                                  ;8092D3|C47E    |00007E;
+    CPY.B nTempVar1                                            ;8092D3|C47E    |00007E;
     BNE -                                                      ;8092D5|D0F2    |8092C9;
     SEP #$20                                                   ;8092D7|E220    |      ;
     LDA.B #$01                                                 ;8092D9|A901    |      ;
@@ -2326,7 +2326,7 @@ fLoadTimePallete:
     BCC +                                                      ;8092FE|9001    |809301;
     INX                                                        ;809300|E8      |      ; X = 4
  
-  + STX.B $7E                                                  ;809301|867E    |00007E; $7E = X
+  + STX.B nTempVar1                                            ;809301|867E    |00007E; $7E = X
     LDA.B #$00                                                 ;809303|A900    |      ; A = 0
     XBA                                                        ;809305|EB      |      ; A <-> B
     LDA.B nSelectedTilemapId                                   ;809306|A522    |000022;
@@ -2337,7 +2337,7 @@ fLoadTimePallete:
     CLC                                                        ;80930E|18      |      ;
     ADC.B $80                                                  ;80930F|6580    |000080;
     ADC.B $80                                                  ;809311|6580    |000080;
-    ADC.B $7E                                                  ;809313|657E    |00007E;
+    ADC.B nTempVar1                                            ;809313|657E    |00007E;
     TAX                                                        ;809315|AA      |      ;
     SEP #$20                                                   ;809316|E220    |      ;
     LDA.B #$00                                                 ;809318|A900    |      ;
@@ -2415,7 +2415,7 @@ fUnknownEndAt6PM_809329:
  
 fUnknown_8093A4:
     REP #$30                                                   ;8093A4|C230    |      ;
-    STZ.B $7E                                                  ;8093A6|647E    |00007E;
+    STZ.B nTempVar1                                            ;8093A6|647E    |00007E;
     SEP #$20                                                   ;8093A8|E220    |      ;
     LDA.B $92                                                  ;8093AA|A592    |000092;
     BNE .label1                                                ;8093AC|D012    |8093C0;
@@ -2431,7 +2431,7 @@ fUnknown_8093A4:
 .label1:
     REP #$20                                                   ;8093C0|C220    |      ;
     LDA.W #$0004                                               ;8093C2|A90400  |      ;
-    STA.B $7E                                                  ;8093C5|857E    |00007E;
+    STA.B nTempVar1                                            ;8093C5|857E    |00007E;
  
 .label2:
     SEP #$20                                                   ;8093C7|E220    |      ;
@@ -2466,7 +2466,7 @@ fUnknown_8093A4:
     XBA                                                        ;8093F5|EB      |      ;
     LDA.B $82                                                  ;8093F6|A582    |000082;
     CLC                                                        ;8093F8|18      |      ;
-    ADC.B $7E                                                  ;8093F9|657E    |00007E;
+    ADC.B nTempVar1                                            ;8093F9|657E    |00007E;
     STA.B $80                                                  ;8093FB|8580    |000080;
     REP #$20                                                   ;8093FD|C220    |      ;
     ASL A                                                      ;8093FF|0A      |      ;
@@ -2497,7 +2497,7 @@ fUnknown_8093A4:
     LDY.W #$000F                                               ;809434|A00F00  |      ;
     JSL.L fModifyPalette                                       ;809437|229D9180|80919D;
     REP #$30                                                   ;80943B|C230    |      ;
-    STZ.B $7E                                                  ;80943D|647E    |00007E;
+    STZ.B nTempVar1                                            ;80943D|647E    |00007E;
     SEP #$20                                                   ;80943F|E220    |      ;
     LDA.B $92                                                  ;809441|A592    |000092;
     BNE .label4                                                ;809443|D012    |809457;
@@ -2513,7 +2513,7 @@ fUnknown_8093A4:
 .label4:
     REP #$20                                                   ;809457|C220    |      ;
     LDA.W #$0006                                               ;809459|A90600  |      ;
-    STA.B $7E                                                  ;80945C|857E    |00007E;
+    STA.B nTempVar1                                            ;80945C|857E    |00007E;
     BRA .checkPregnacy                                         ;80945E|8000    |809460;
  
  
@@ -2575,7 +2575,7 @@ fUnknown_8093A4:
  
   + REP #$30                                                   ;8094BD|C230    |      ;
     CLC                                                        ;8094BF|18      |      ;
-    ADC.B $7E                                                  ;8094C0|657E    |00007E;
+    ADC.B nTempVar1                                            ;8094C0|657E    |00007E;
     STA.B $80                                                  ;8094C2|8580    |000080;
     ASL A                                                      ;8094C4|0A      |      ;
     CLC                                                        ;8094C5|18      |      ;
@@ -2627,7 +2627,7 @@ fTimePalleteRelated_809501:
     BCC +                                                      ;80951D|9001    |809520;
     INX                                                        ;80951F|E8      |      ;
  
-  + STX.B $7E                                                  ;809520|867E    |00007E;
+  + STX.B nTempVar1                                            ;809520|867E    |00007E;
     LDA.B #$00                                                 ;809522|A900    |      ;
     XBA                                                        ;809524|EB      |      ;
     LDA.B nSelectedTilemapId                                   ;809525|A522    |000022;
@@ -2638,7 +2638,7 @@ fTimePalleteRelated_809501:
     CLC                                                        ;80952D|18      |      ;
     ADC.B $80                                                  ;80952E|6580    |000080;
     ADC.B $80                                                  ;809530|6580    |000080;
-    ADC.B $7E                                                  ;809532|657E    |00007E;
+    ADC.B nTempVar1                                            ;809532|657E    |00007E;
     TAX                                                        ;809534|AA      |      ;
     SEP #$20                                                   ;809535|E220    |      ;
     LDA.B #$00                                                 ;809537|A900    |      ;
@@ -2675,7 +2675,7 @@ fSubrutinesExecute_809553:
     BCC +                                                      ;80956F|9001    |809572;
     INX                                                        ;809571|E8      |      ;
  
-  + STX.B $7E                                                  ;809572|867E    |00007E;
+  + STX.B nTempVar1                                            ;809572|867E    |00007E;
     LDA.B #$00                                                 ;809574|A900    |      ;
     XBA                                                        ;809576|EB      |      ;
     LDA.B nSelectedTilemapId                                   ;809577|A522    |000022;
@@ -2703,7 +2703,7 @@ fSubrutinesExecute_809553:
     REP #$20                                                   ;80959E|C220    |      ;
     LDA.B $80                                                  ;8095A0|A580    |000080;
     CLC                                                        ;8095A2|18      |      ;
-    ADC.B $7E                                                  ;8095A3|657E    |00007E;
+    ADC.B nTempVar1                                            ;8095A3|657E    |00007E;
     ASL A                                                      ;8095A5|0A      |      ;
     TAX                                                        ;8095A6|AA      |      ;
     LDA.W pSubrutineTable_80BEEC,X                             ;8095A7|BDECBE  |80BEEC;
@@ -2774,7 +2774,7 @@ fUnknown_8095F5:
     LDA.L nSeasonDataUnknown_80B8E7,X                          ;809619|BFE7B880|80B8E7; X = A * 2
     CMP.W #$FFFF                                               ;80961D|C9FFFF  |      ;
     BEQ .justReturn                                            ;809620|F046    |809668;
-    STA.B $7E                                                  ;809622|857E    |00007E;
+    STA.B nTempVar1                                            ;809622|857E    |00007E;
     SEP #$20                                                   ;809624|E220    |      ;
     LDA.B #$00                                                 ;809626|A900    |      ;
     XBA                                                        ;809628|EB      |      ;
@@ -2782,7 +2782,7 @@ fUnknown_8095F5:
     REP #$20                                                   ;80962D|C220    |      ;
     TAY                                                        ;80962F|A8      |      ;
     SEP #$20                                                   ;809630|E220    |      ;
-    LDA.B ($7E),Y                                              ;809632|B17E    |00007E; Y = SeasonId
+    LDA.B (nTempVar1),Y                                        ;809632|B17E    |00007E; Y = SeasonId
     STA.W $0110                                                ;809634|8D1001  |000110;
     BRA .justReturn                                            ;809637|802F    |809668;
  
@@ -4382,7 +4382,7 @@ fUnknown_80A18D:
  
  
 .cmp0020:
-    STZ.B $7E                                                  ;80A1B1|647E    |00007E;
+    STZ.B nTempVar1                                            ;80A1B1|647E    |00007E;
     STZ.B $80                                                  ;80A1B3|6480    |000080;
     STZ.B $82                                                  ;80A1B5|6482    |000082;
     STZ.B $84                                                  ;80A1B7|6484    |000084;
@@ -4393,7 +4393,7 @@ fUnknown_80A18D:
     LDA.B $12                                                  ;80A1BB|A512    |000012;
     SEC                                                        ;80A1BD|38      |      ;
     SBC.W #$0020                                               ;80A1BE|E92000  |      ;
-    STA.B $7E                                                  ;80A1C1|857E    |00007E;
+    STA.B nTempVar1                                            ;80A1C1|857E    |00007E;
     STA.B $80                                                  ;80A1C3|8580    |000080;
     STZ.B $82                                                  ;80A1C5|6482    |000082;
     STZ.B $84                                                  ;80A1C7|6484    |000084;
@@ -4404,7 +4404,7 @@ fUnknown_80A18D:
     LDA.B $12                                                  ;80A1CB|A512    |000012;
     SEC                                                        ;80A1CD|38      |      ;
     SBC.W #$0020                                               ;80A1CE|E92000  |      ;
-    STA.B $7E                                                  ;80A1D1|857E    |00007E;
+    STA.B nTempVar1                                            ;80A1D1|857E    |00007E;
     STA.B $80                                                  ;80A1D3|8580    |000080;
     STZ.B $82                                                  ;80A1D5|6482    |000082;
     STZ.B $84                                                  ;80A1D7|6484    |000084;
@@ -4413,7 +4413,7 @@ fUnknown_80A18D:
  
 .cmp0080:
     LDA.W #$0080                                               ;80A1DB|A98000  |      ;
-    STA.B $7E                                                  ;80A1DE|857E    |00007E;
+    STA.B nTempVar1                                            ;80A1DE|857E    |00007E;
     STZ.B $80                                                  ;80A1E0|6480    |000080;
     LDA.B $12                                                  ;80A1E2|A512    |000012;
     SEC                                                        ;80A1E4|38      |      ;
@@ -4425,7 +4425,7 @@ fUnknown_80A18D:
  
 .cmp00A0:
     LDA.W #$0080                                               ;80A1EE|A98000  |      ;
-    STA.B $7E                                                  ;80A1F1|857E    |00007E;
+    STA.B nTempVar1                                            ;80A1F1|857E    |00007E;
     STZ.B $80                                                  ;80A1F3|6480    |000080;
     LDA.B $12                                                  ;80A1F5|A512    |000012;
     SEC                                                        ;80A1F7|38      |      ;
@@ -4439,7 +4439,7 @@ fUnknown_80A18D:
     LDA.B $12                                                  ;80A201|A512    |000012;
     SEC                                                        ;80A203|38      |      ;
     SBC.W #$0020                                               ;80A204|E92000  |      ;
-    STA.B $7E                                                  ;80A207|857E    |00007E;
+    STA.B nTempVar1                                            ;80A207|857E    |00007E;
     LDA.B $12                                                  ;80A209|A512    |000012;
     SEC                                                        ;80A20B|38      |      ;
     SBC.W #$00A0                                               ;80A20C|E9A000  |      ;
@@ -4478,10 +4478,10 @@ fUnknown_80A18D:
     CMP.W #$0040                                               ;80A243|C94000  |      ;
     BNE .label2                                                ;80A246|D00A    |80A252;
     STZ.B $80                                                  ;80A248|6480    |000080;
-    LDA.B $7E                                                  ;80A24A|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A24A|A57E    |00007E;
     CLC                                                        ;80A24C|18      |      ;
     ADC.W #$0040                                               ;80A24D|694000  |      ;
-    STA.B $7E                                                  ;80A250|857E    |00007E;
+    STA.B nTempVar1                                            ;80A250|857E    |00007E;
  
 .label2:
     LDA.B $84                                                  ;80A252|A584    |000084;
@@ -4494,7 +4494,7 @@ fUnknown_80A18D:
     STA.B $82                                                  ;80A261|8582    |000082;
  
 .label3:
-    LDY.B $7E                                                  ;80A263|A47E    |00007E;
+    LDY.B nTempVar1                                            ;80A263|A47E    |00007E;
     LDX.B $80                                                  ;80A265|A680    |000080;
     LDA.B [ptrUnknown0x72],Y                                   ;80A267|B772    |000072;
     STA.W $0746,X                                              ;80A269|9D4607  |000746;
@@ -4502,8 +4502,8 @@ fUnknown_80A18D:
     LDX.B $84                                                  ;80A26E|A684    |000084;
     LDA.B [ptrUnknown0x75],Y                                   ;80A270|B775    |000075;
     STA.W $07C6,X                                              ;80A272|9DC607  |0007C6;
-    INC.B $7E                                                  ;80A275|E67E    |00007E;
-    INC.B $7E                                                  ;80A277|E67E    |00007E;
+    INC.B nTempVar1                                            ;80A275|E67E    |00007E;
+    INC.B nTempVar1                                            ;80A277|E67E    |00007E;
     INC.B $80                                                  ;80A279|E680    |000080;
     INC.B $80                                                  ;80A27B|E680    |000080;
     INC.B $82                                                  ;80A27D|E682    |000082;
@@ -4597,7 +4597,7 @@ fUnknown_80A308:
  
  
 .case0020:
-    STZ.B $7E                                                  ;80A32C|647E    |00007E;
+    STZ.B nTempVar1                                            ;80A32C|647E    |00007E;
     STZ.B $80                                                  ;80A32E|6480    |000080;
     STZ.B $82                                                  ;80A330|6482    |000082;
     STZ.B $84                                                  ;80A332|6484    |000084;
@@ -4608,7 +4608,7 @@ fUnknown_80A308:
     LDA.B $12                                                  ;80A336|A512    |000012;
     SEC                                                        ;80A338|38      |      ;
     SBC.W #$0020                                               ;80A339|E92000  |      ;
-    STA.B $7E                                                  ;80A33C|857E    |00007E;
+    STA.B nTempVar1                                            ;80A33C|857E    |00007E;
     STA.B $80                                                  ;80A33E|8580    |000080;
     STZ.B $82                                                  ;80A340|6482    |000082;
     STZ.B $84                                                  ;80A342|6484    |000084;
@@ -4619,7 +4619,7 @@ fUnknown_80A308:
     LDA.B $12                                                  ;80A346|A512    |000012;
     SEC                                                        ;80A348|38      |      ;
     SBC.W #$0020                                               ;80A349|E92000  |      ;
-    STA.B $7E                                                  ;80A34C|857E    |00007E;
+    STA.B nTempVar1                                            ;80A34C|857E    |00007E;
     STA.B $80                                                  ;80A34E|8580    |000080;
     STZ.B $82                                                  ;80A350|6482    |000082;
     STZ.B $84                                                  ;80A352|6484    |000084;
@@ -4628,7 +4628,7 @@ fUnknown_80A308:
  
 .case0080:
     LDA.W #$0080                                               ;80A356|A98000  |      ;
-    STA.B $7E                                                  ;80A359|857E    |00007E;
+    STA.B nTempVar1                                            ;80A359|857E    |00007E;
     STZ.B $80                                                  ;80A35B|6480    |000080;
     LDA.B $12                                                  ;80A35D|A512    |000012;
     SEC                                                        ;80A35F|38      |      ;
@@ -4640,7 +4640,7 @@ fUnknown_80A308:
  
 .case00A0:
     LDA.W #$0080                                               ;80A369|A98000  |      ;
-    STA.B $7E                                                  ;80A36C|857E    |00007E;
+    STA.B nTempVar1                                            ;80A36C|857E    |00007E;
     STZ.B $80                                                  ;80A36E|6480    |000080;
     LDA.B $12                                                  ;80A370|A512    |000012;
     SEC                                                        ;80A372|38      |      ;
@@ -4654,7 +4654,7 @@ fUnknown_80A308:
     LDA.B $12                                                  ;80A37C|A512    |000012;
     SEC                                                        ;80A37E|38      |      ;
     SBC.W #$0020                                               ;80A37F|E92000  |      ;
-    STA.B $7E                                                  ;80A382|857E    |00007E;
+    STA.B nTempVar1                                            ;80A382|857E    |00007E;
     LDA.B $12                                                  ;80A384|A512    |000012;
     SEC                                                        ;80A386|38      |      ;
     SBC.W #$00A0                                               ;80A387|E9A000  |      ;
@@ -4692,10 +4692,10 @@ fUnknown_80A308:
     CMP.W #$0040                                               ;80A3BC|C94000  |      ;
     BNE .label2                                                ;80A3BF|D00A    |80A3CB;
     STZ.B $80                                                  ;80A3C1|6480    |000080;
-    LDA.B $7E                                                  ;80A3C3|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A3C3|A57E    |00007E;
     CLC                                                        ;80A3C5|18      |      ;
     ADC.W #$0040                                               ;80A3C6|694000  |      ;
-    STA.B $7E                                                  ;80A3C9|857E    |00007E;
+    STA.B nTempVar1                                            ;80A3C9|857E    |00007E;
  
 .label2:
     LDA.B $84                                                  ;80A3CB|A584    |000084;
@@ -4708,7 +4708,7 @@ fUnknown_80A308:
     STA.B $82                                                  ;80A3DA|8582    |000082;
  
 .label3:
-    LDY.B $7E                                                  ;80A3DC|A47E    |00007E;
+    LDY.B nTempVar1                                            ;80A3DC|A47E    |00007E;
     LDX.B $80                                                  ;80A3DE|A680    |000080;
     LDA.B [ptrUnknown0x72],Y                                   ;80A3E0|B772    |000072;
     STA.W $0746,X                                              ;80A3E2|9D4607  |000746;
@@ -4716,8 +4716,8 @@ fUnknown_80A308:
     LDX.B $84                                                  ;80A3E7|A684    |000084;
     LDA.B [ptrUnknown0x75],Y                                   ;80A3E9|B775    |000075;
     STA.W $07C6,X                                              ;80A3EB|9DC607  |0007C6;
-    INC.B $7E                                                  ;80A3EE|E67E    |00007E;
-    INC.B $7E                                                  ;80A3F0|E67E    |00007E;
+    INC.B nTempVar1                                            ;80A3EE|E67E    |00007E;
+    INC.B nTempVar1                                            ;80A3F0|E67E    |00007E;
     INC.B $80                                                  ;80A3F2|E680    |000080;
     INC.B $80                                                  ;80A3F4|E680    |000080;
     INC.B $82                                                  ;80A3F6|E682    |000082;
@@ -4811,7 +4811,7 @@ fUnknown_80A481:
  
  
 .case0100:
-    STZ.B $7E                                                  ;80A4A6|647E    |00007E;
+    STZ.B nTempVar1                                            ;80A4A6|647E    |00007E;
     STZ.B $80                                                  ;80A4A8|6480    |000080;
     STZ.B $82                                                  ;80A4AA|6482    |000082;
     STZ.B $84                                                  ;80A4AC|6484    |000084;
@@ -4822,7 +4822,7 @@ fUnknown_80A481:
     LDA.B $16                                                  ;80A4B1|A516    |000016;
     SEC                                                        ;80A4B3|38      |      ;
     SBC.W #$1000                                               ;80A4B4|E90010  |      ;
-    STA.B $7E                                                  ;80A4B7|857E    |00007E;
+    STA.B nTempVar1                                            ;80A4B7|857E    |00007E;
     XBA                                                        ;80A4B9|EB      |      ;
     AND.W #$001F                                               ;80A4BA|291F00  |      ;
     ASL A                                                      ;80A4BD|0A      |      ;
@@ -4836,7 +4836,7 @@ fUnknown_80A481:
     LDA.B $16                                                  ;80A4C6|A516    |000016;
     SEC                                                        ;80A4C8|38      |      ;
     SBC.W #$1000                                               ;80A4C9|E90010  |      ;
-    STA.B $7E                                                  ;80A4CC|857E    |00007E;
+    STA.B nTempVar1                                            ;80A4CC|857E    |00007E;
     XBA                                                        ;80A4CE|EB      |      ;
     AND.W #$001F                                               ;80A4CF|291F00  |      ;
     ASL A                                                      ;80A4D2|0A      |      ;
@@ -4848,7 +4848,7 @@ fUnknown_80A481:
  
 .case0400:
     LDA.W #$4000                                               ;80A4DB|A90040  |      ;
-    STA.B $7E                                                  ;80A4DE|857E    |00007E;
+    STA.B nTempVar1                                            ;80A4DE|857E    |00007E;
     STZ.B $80                                                  ;80A4E0|6480    |000080;
     LDA.B $16                                                  ;80A4E2|A516    |000016;
     SEC                                                        ;80A4E4|38      |      ;
@@ -4863,7 +4863,7 @@ fUnknown_80A481:
  
 .case0500:
     LDA.W #$4000                                               ;80A4F3|A90040  |      ;
-    STA.B $7E                                                  ;80A4F6|857E    |00007E;
+    STA.B nTempVar1                                            ;80A4F6|857E    |00007E;
     STZ.B $80                                                  ;80A4F8|6480    |000080;
     LDA.B $16                                                  ;80A4FA|A516    |000016;
     SEC                                                        ;80A4FC|38      |      ;
@@ -4880,7 +4880,7 @@ fUnknown_80A481:
     LDA.B $16                                                  ;80A50B|A516    |000016;
     SEC                                                        ;80A50D|38      |      ;
     SBC.W #$1000                                               ;80A50E|E90010  |      ;
-    STA.B $7E                                                  ;80A511|857E    |00007E;
+    STA.B nTempVar1                                            ;80A511|857E    |00007E;
     LDA.B $16                                                  ;80A513|A516    |000016;
     SEC                                                        ;80A515|38      |      ;
     SBC.W #$5000                                               ;80A516|E90050  |      ;
@@ -4915,10 +4915,10 @@ fUnknown_80A481:
     CMP.W #$0040                                               ;80A549|C94000  |      ;
     BNE .label2                                                ;80A54C|D00A    |80A558;
     STZ.B $80                                                  ;80A54E|6480    |000080;
-    LDA.B $7E                                                  ;80A550|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A550|A57E    |00007E;
     CLC                                                        ;80A552|18      |      ;
     ADC.W #$2000                                               ;80A553|690020  |      ;
-    STA.B $7E                                                  ;80A556|857E    |00007E;
+    STA.B nTempVar1                                            ;80A556|857E    |00007E;
  
 .label2:
     LDA.B $84                                                  ;80A558|A584    |000084;
@@ -4931,7 +4931,7 @@ fUnknown_80A481:
     STA.B $82                                                  ;80A567|8582    |000082;
  
 .label3:
-    LDY.B $7E                                                  ;80A569|A47E    |00007E;
+    LDY.B nTempVar1                                            ;80A569|A47E    |00007E;
     LDX.B $80                                                  ;80A56B|A680    |000080;
     LDA.B [ptrUnknown0x72],Y                                   ;80A56D|B772    |000072;
     STA.W $0746,X                                              ;80A56F|9D4607  |000746;
@@ -4939,10 +4939,10 @@ fUnknown_80A481:
     LDX.B $84                                                  ;80A574|A684    |000084;
     LDA.B [ptrUnknown0x75],Y                                   ;80A576|B775    |000075;
     STA.W $07C6,X                                              ;80A578|9DC607  |0007C6;
-    LDA.B $7E                                                  ;80A57B|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A57B|A57E    |00007E;
     CLC                                                        ;80A57D|18      |      ;
     ADC.W #$0100                                               ;80A57E|690001  |      ;
-    STA.B $7E                                                  ;80A581|857E    |00007E;
+    STA.B nTempVar1                                            ;80A581|857E    |00007E;
     INC.B $80                                                  ;80A583|E680    |000080;
     INC.B $80                                                  ;80A585|E680    |000080;
     LDA.B $82                                                  ;80A587|A582    |000082;
@@ -5038,7 +5038,7 @@ fUnknown_80A617:
  
  
 .case1000:
-    STZ.B $7E                                                  ;80A63C|647E    |00007E;
+    STZ.B nTempVar1                                            ;80A63C|647E    |00007E;
     STZ.B $80                                                  ;80A63E|6480    |000080;
     STZ.B $82                                                  ;80A640|6482    |000082;
     STZ.B $84                                                  ;80A642|6484    |000084;
@@ -5049,7 +5049,7 @@ fUnknown_80A617:
     LDA.B $16                                                  ;80A646|A516    |000016;
     SEC                                                        ;80A648|38      |      ;
     SBC.W #$1000                                               ;80A649|E90010  |      ;
-    STA.B $7E                                                  ;80A64C|857E    |00007E;
+    STA.B nTempVar1                                            ;80A64C|857E    |00007E;
     XBA                                                        ;80A64E|EB      |      ;
     AND.W #$001F                                               ;80A64F|291F00  |      ;
     ASL A                                                      ;80A652|0A      |      ;
@@ -5063,7 +5063,7 @@ fUnknown_80A617:
     LDA.B $16                                                  ;80A65B|A516    |000016;
     SEC                                                        ;80A65D|38      |      ;
     SBC.W #$1000                                               ;80A65E|E90010  |      ;
-    STA.B $7E                                                  ;80A661|857E    |00007E;
+    STA.B nTempVar1                                            ;80A661|857E    |00007E;
     XBA                                                        ;80A663|EB      |      ;
     AND.W #$001F                                               ;80A664|291F00  |      ;
     ASL A                                                      ;80A667|0A      |      ;
@@ -5075,7 +5075,7 @@ fUnknown_80A617:
  
 .case4000:
     LDA.W #$4000                                               ;80A670|A90040  |      ;
-    STA.B $7E                                                  ;80A673|857E    |00007E;
+    STA.B nTempVar1                                            ;80A673|857E    |00007E;
     STZ.B $80                                                  ;80A675|6480    |000080;
     LDA.B $16                                                  ;80A677|A516    |000016;
     SEC                                                        ;80A679|38      |      ;
@@ -5090,7 +5090,7 @@ fUnknown_80A617:
  
 .case5000:
     LDA.W #$4000                                               ;80A688|A90040  |      ;
-    STA.B $7E                                                  ;80A68B|857E    |00007E;
+    STA.B nTempVar1                                            ;80A68B|857E    |00007E;
     STZ.B $80                                                  ;80A68D|6480    |000080;
     LDA.B $16                                                  ;80A68F|A516    |000016;
     SEC                                                        ;80A691|38      |      ;
@@ -5107,7 +5107,7 @@ fUnknown_80A617:
     LDA.B $16                                                  ;80A6A0|A516    |000016;
     SEC                                                        ;80A6A2|38      |      ;
     SBC.W #$1000                                               ;80A6A3|E90010  |      ;
-    STA.B $7E                                                  ;80A6A6|857E    |00007E;
+    STA.B nTempVar1                                            ;80A6A6|857E    |00007E;
     LDA.B $16                                                  ;80A6A8|A516    |000016;
     SEC                                                        ;80A6AA|38      |      ;
     SBC.W #$5000                                               ;80A6AB|E90050  |      ;
@@ -5144,10 +5144,10 @@ fUnknown_80A617:
     CMP.W #$0040                                               ;80A6E0|C94000  |      ;
     BNE .label2                                                ;80A6E3|D00A    |80A6EF;
     STZ.B $80                                                  ;80A6E5|6480    |000080;
-    LDA.B $7E                                                  ;80A6E7|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A6E7|A57E    |00007E;
     CLC                                                        ;80A6E9|18      |      ;
     ADC.W #$2000                                               ;80A6EA|690020  |      ;
-    STA.B $7E                                                  ;80A6ED|857E    |00007E;
+    STA.B nTempVar1                                            ;80A6ED|857E    |00007E;
  
 .label2:
     LDA.B $84                                                  ;80A6EF|A584    |000084;
@@ -5160,7 +5160,7 @@ fUnknown_80A617:
     STA.B $82                                                  ;80A6FE|8582    |000082;
  
 .label3:
-    LDY.B $7E                                                  ;80A700|A47E    |00007E;
+    LDY.B nTempVar1                                            ;80A700|A47E    |00007E;
     LDX.B $80                                                  ;80A702|A680    |000080;
     LDA.B [ptrUnknown0x72],Y                                   ;80A704|B772    |000072;
     STA.W $0746,X                                              ;80A706|9D4607  |000746;
@@ -5168,10 +5168,10 @@ fUnknown_80A617:
     LDX.B $84                                                  ;80A70B|A684    |000084;
     LDA.B [ptrUnknown0x75],Y                                   ;80A70D|B775    |000075;
     STA.W $07C6,X                                              ;80A70F|9DC607  |0007C6;
-    LDA.B $7E                                                  ;80A712|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A712|A57E    |00007E;
     CLC                                                        ;80A714|18      |      ;
     ADC.W #$0100                                               ;80A715|690001  |      ;
-    STA.B $7E                                                  ;80A718|857E    |00007E;
+    STA.B nTempVar1                                            ;80A718|857E    |00007E;
     INC.B $80                                                  ;80A71A|E680    |000080;
     INC.B $80                                                  ;80A71C|E680    |000080;
     LDA.B $82                                                  ;80A71E|A582    |000082;
@@ -5492,7 +5492,7 @@ fTileMap_80A7C6:
     STA.B $1C                                                  ;80A960|851C    |00001C;
     REP #$20                                                   ;80A962|C220    |      ;
     LDA.W #$0000                                               ;80A964|A90000  |      ;
-    STA.B $7E                                                  ;80A967|857E    |00007E;
+    STA.B nTempVar1                                            ;80A967|857E    |00007E;
     LDX.B $8A                                                  ;80A969|A68A    |00008A;
     LDY.W #$0040                                               ;80A96B|A04000  |      ;
     LDA.W #$0000                                               ;80A96E|A90000  |      ;
@@ -5507,10 +5507,10 @@ fTileMap_80A7C6:
     PHA                                                        ;80A979|48      |      ;
     JSR.W fUnknown_80AA38                                      ;80A97A|2038AA  |80AA38;
     REP #$30                                                   ;80A97D|C230    |      ;
-    LDA.B $7E                                                  ;80A97F|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A97F|A57E    |00007E;
     CLC                                                        ;80A981|18      |      ;
     ADC.W #$0040                                               ;80A982|694000  |      ;
-    STA.B $7E                                                  ;80A985|857E    |00007E;
+    STA.B nTempVar1                                            ;80A985|857E    |00007E;
     TXA                                                        ;80A987|8A      |      ;
     CLC                                                        ;80A988|18      |      ;
     ADC.W #$0400                                               ;80A989|690004  |      ;
@@ -5529,10 +5529,10 @@ fTileMap_80A7C6:
  
 .label15:
     REP #$30                                                   ;80A9A2|C230    |      ;
-    LDA.B $7E                                                  ;80A9A4|A57E    |00007E;
+    LDA.B nTempVar1                                            ;80A9A4|A57E    |00007E;
     CLC                                                        ;80A9A6|18      |      ;
     ADC.B $80                                                  ;80A9A7|6580    |000080;
-    STA.B $7E                                                  ;80A9A9|857E    |00007E;
+    STA.B nTempVar1                                            ;80A9A9|857E    |00007E;
     TXA                                                        ;80A9AB|8A      |      ;
     SEC                                                        ;80A9AC|38      |      ;
     SBC.W #$03E0                                               ;80A9AD|E9E003  |      ;
@@ -5629,7 +5629,7 @@ fUnknown_80AA38:
     REP #$20                                                   ;80AA46|C220    |      ;
     LDA.W #$2000                                               ;80AA48|A90020  |      ;
     CLC                                                        ;80AA4B|18      |      ;
-    ADC.B $7E                                                  ;80AA4C|657E    |00007E;
+    ADC.B nTempVar1                                            ;80AA4C|657E    |00007E;
     STA.B ptrUnknown0x72                                       ;80AA4E|8572    |000072;
     SEP #$20                                                   ;80AA50|E220    |      ;
     LDA.B #$7E                                                 ;80AA52|A97E    |      ;
