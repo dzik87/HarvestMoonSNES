@@ -505,7 +505,7 @@ subUnknown_858377:
     DEC A                                                      ;85838F|3A      |      ;
     STA.B ptrUnkown0xAD+2                                      ;858390|85AF    |0000AF;
     LDA.W #$FFFF                                               ;858392|A9FFFF  |      ;
-    STA.B $7E                                                  ;858395|857E    |00007E;
+    STA.B nTempVar1                                            ;858395|857E    |00007E;
     LDY.W #$0000                                               ;858397|A00000  |      ;
     LDX.W #$0000                                               ;85839A|A20000  |      ;
  
@@ -650,11 +650,11 @@ fUnknown_8583E0:
     INC.B ptrUnknown0x78                                       ;858483|E678    |000078;
     LDA.B ptrUnkown0xAD                                        ;858485|A5AD    |0000AD;
     DEC A                                                      ;858487|3A      |      ;
-    STA.B $7E                                                  ;858488|857E    |00007E;
+    STA.B nTempVar1                                            ;858488|857E    |00007E;
     ASL A                                                      ;85848A|0A      |      ;
     STA.B $80                                                  ;85848B|8580    |000080;
     CLC                                                        ;85848D|18      |      ;
-    ADC.B $7E                                                  ;85848E|657E    |00007E;
+    ADC.B nTempVar1                                            ;85848E|657E    |00007E;
     ADC.B $80                                                  ;858490|6580    |000080;
     ADC.B ptrUnknown0x78                                       ;858492|6578    |000078;
     STA.B ptrUnknown0x78                                       ;858494|8578    |000078;
@@ -736,7 +736,7 @@ fUnknown_8583E0:
     REP #$30                                                   ;858502|C230    |      ;
     LDA.B ptrUnkown0xAD+2                                      ;858504|A5AF    |0000AF;
     AND.W #$FFE0                                               ;858506|29E0FF  |      ;
-    STA.B $7E                                                  ;858509|857E    |00007E;
+    STA.B nTempVar1                                            ;858509|857E    |00007E;
     LSR A                                                      ;85850B|4A      |      ;
     LSR A                                                      ;85850C|4A      |      ;
     LSR A                                                      ;85850D|4A      |      ;
@@ -744,8 +744,8 @@ fUnknown_8583E0:
     STA.B $80                                                  ;85850F|8580    |000080;
     LDA.B ptrUnkown0xAD+2                                      ;858511|A5AF    |0000AF;
     SEC                                                        ;858513|38      |      ;
-    SBC.B $7E                                                  ;858514|E57E    |00007E;
-    STA.B $7E                                                  ;858516|857E    |00007E;
+    SBC.B nTempVar1                                            ;858514|E57E    |00007E;
+    STA.B nTempVar1                                            ;858516|857E    |00007E;
     LDA.B $80                                                  ;858518|A580    |000080;
     TAX                                                        ;85851A|AA      |      ;
     LDA.L $7EA200,X                                            ;85851B|BF00A27E|7EA200;
@@ -753,7 +753,7 @@ fUnknown_8583E0:
     LDA.B $BF                                                  ;858521|A5BF    |0000BF;
     CMP.W #$0100                                               ;858523|C90001  |      ;
     BCC .label14                                               ;858526|900F    |858537;
-    LDA.B $7E                                                  ;858528|A57E    |00007E;
+    LDA.B nTempVar1                                            ;858528|A57E    |00007E;
     AND.W #$FFFC                                               ;85852A|29FCFF  |      ;
     LSR A                                                      ;85852D|4A      |      ;
     TAX                                                        ;85852E|AA      |      ;
@@ -1559,7 +1559,7 @@ fUnknown_858CB2:
     REP #$20                                                   ;858D79|C220    |      ;
     LDA.B $C1                                                  ;858D7B|A5C1    |0000C1;
     AND.W #$FFC0                                               ;858D7D|29C0FF  |      ;
-    STA.B $7E                                                  ;858D80|857E    |00007E;
+    STA.B nTempVar1                                            ;858D80|857E    |00007E;
     LSR A                                                      ;858D82|4A      |      ;
     LSR A                                                      ;858D83|4A      |      ;
     LSR A                                                      ;858D84|4A      |      ;
@@ -1569,22 +1569,22 @@ fUnknown_858CB2:
     STA.B $C3                                                  ;858D88|85C3    |0000C3;
     LDA.B $C1                                                  ;858D8A|A5C1    |0000C1;
     SEC                                                        ;858D8C|38      |      ;
-    SBC.B $7E                                                  ;858D8D|E57E    |00007E;
+    SBC.B nTempVar1                                            ;858D8D|E57E    |00007E;
     STA.B $C1                                                  ;858D8F|85C1    |0000C1;
     LDA.B $C3                                                  ;858D91|A5C3    |0000C3;
     LSR A                                                      ;858D93|4A      |      ;
     LSR A                                                      ;858D94|4A      |      ;
-    STA.B $7E                                                  ;858D95|857E    |00007E;
+    STA.B nTempVar1                                            ;858D95|857E    |00007E;
     CLC                                                        ;858D97|18      |      ;
     ADC.W #$0088                                               ;858D98|698800  |      ;
     STA.B $C5                                                  ;858D9B|85C5    |0000C5;
-    LDA.B $7E                                                  ;858D9D|A57E    |00007E;
+    LDA.B nTempVar1                                            ;858D9D|A57E    |00007E;
     ASL A                                                      ;858D9F|0A      |      ;
     ASL A                                                      ;858DA0|0A      |      ;
-    STA.B $7E                                                  ;858DA1|857E    |00007E;
+    STA.B nTempVar1                                            ;858DA1|857E    |00007E;
     LDA.B $C3                                                  ;858DA3|A5C3    |0000C3;
     SEC                                                        ;858DA5|38      |      ;
-    SBC.B $7E                                                  ;858DA6|E57E    |00007E;
+    SBC.B nTempVar1                                            ;858DA6|E57E    |00007E;
     STA.B $C3                                                  ;858DA8|85C3    |0000C3;
     LDA.B $C3                                                  ;858DAA|A5C3    |0000C3;
     ASL A                                                      ;858DAC|0A      |      ;

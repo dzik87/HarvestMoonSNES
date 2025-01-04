@@ -9,6 +9,7 @@
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
     ptrUnknown0x75 = $000075; !^ ptr24 ^!
     ptrUnknown0x78 = $000078; !^ ptr24 ^!
+    nTempVar1 = $00007E
     ptrUnkown0xAD = $0000AD; !^ ptr24 ^!
     ptrBank86_87Data = $0000B3; !^ ptr24 ^!
     ptrUnknown0xC9 = $0000C9; !^ ptr24 ^!
@@ -16,6 +17,9 @@
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
     nPlayerPosX = $0000D6; !^ n16 ^!
     nPlayerPosY = $0000D8; !^ n16 ^!
+    nSoundRegisterValue0 = $000114
+    nSoundRegisterValue1 = $000115
+    nSoundRegisterValue2 = $000116
     nPaletteCountdown = $00017A; !^ n8 ^!
     nPaletteNextIndex = $00017B; !^ n8 ^!
     nPaletteNextHourIndex = $00017C; !^ n8 ^!
