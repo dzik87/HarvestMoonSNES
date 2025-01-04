@@ -67,10 +67,10 @@ fUnknown_818000:
     SEP #$20                                                   ;818087|E220    |      ;
     REP #$10                                                   ;818089|C210    |      ;
     LDA.B #$08                                                 ;81808B|A908    |      ;
-    STA.W nSoundRegisterValue0                                 ;81808D|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81808D|8D1401  |000114;
     LDA.B #$06                                                 ;818090|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;818092|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;818095|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;818092|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;818095|22328383|838332;
  
   + RTL                                                        ;818099|6B      |      ;
  
@@ -98,10 +98,10 @@ fUnknown_8180B7:
     XBA                                                        ;8180BD|EB      |      ;
     LDA.W nCarriedItemId                                       ;8180BE|AD8409  |000984;
     REP #$20                                                   ;8180C1|C220    |      ;
-    STA.B nTempVar1                                            ;8180C3|857E    |00007E;
+    STA.B n16TempVar1                                          ;8180C3|857E    |00007E;
     ASL A                                                      ;8180C5|0A      |      ;
     CLC                                                        ;8180C6|18      |      ;
-    ADC.B nTempVar1                                            ;8180C7|657E    |00007E;
+    ADC.B n16TempVar1                                          ;8180C7|657E    |00007E;
     TAX                                                        ;8180C9|AA      |      ;
     LDA.L pItemCarriedTable_8196AF,X                           ;8180CA|BFAF9681|8196AF;
     STA.B ptrUnknown0x72                                       ;8180CE|8572    |000072;
@@ -112,10 +112,10 @@ fUnknown_8180B7:
     STA.B ptrUnknown0x72+2                                     ;8180D8|8574    |000074;
     REP #$30                                                   ;8180DA|C230    |      ;
     TYA                                                        ;8180DC|98      |      ;
-    STA.B nTempVar1                                            ;8180DD|857E    |00007E;
+    STA.B n16TempVar1                                          ;8180DD|857E    |00007E;
     ASL A                                                      ;8180DF|0A      |      ;
     CLC                                                        ;8180E0|18      |      ;
-    ADC.B nTempVar1                                            ;8180E1|657E    |00007E;
+    ADC.B n16TempVar1                                          ;8180E1|657E    |00007E;
     TAY                                                        ;8180E3|A8      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;8180E4|B772    |000072;
     STA.W $097A                                                ;8180E6|8D7A09  |00097A;
@@ -551,7 +551,7 @@ fEggFestivalUnknown_81836C:
     LDX.W #$038D                                               ;8183A9|A28D03  |      ;
     LDA.B #$00                                                 ;8183AC|A900    |      ;
     STA.W $0191                                                ;8183AE|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;8183B1|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;8183B1|225F9383|83935F;
     RTS                                                        ;8183B5|60      |      ;
  
  
@@ -1447,10 +1447,10 @@ fUnknown_81893F:
  
 .label2:
     REP #$20                                                   ;818964|C220    |      ;
-    STA.B nTempVar1                                            ;818966|857E    |00007E;
+    STA.B n16TempVar1                                          ;818966|857E    |00007E;
     ASL A                                                      ;818968|0A      |      ;
     CLC                                                        ;818969|18      |      ;
-    ADC.B nTempVar1                                            ;81896A|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81896A|657E    |00007E;
     ASL A                                                      ;81896C|0A      |      ;
     ASL A                                                      ;81896D|0A      |      ;
     TAX                                                        ;81896E|AA      |      ;
@@ -1459,7 +1459,7 @@ fUnknown_81893F:
     SEP #$20                                                   ;818974|E220    |      ;
     LDA.B #$00                                                 ;818976|A900    |      ;
     STA.W $0191                                                ;818978|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81897B|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81897B|225F9383|83935F;
     SEP #$20                                                   ;81897F|E220    |      ;
     LDA.B #$01                                                 ;818981|A901    |      ;
     STA.W $0976                                                ;818983|8D7609  |000976;
@@ -1501,10 +1501,10 @@ fUnknown_818989:
  
 .label2:
     REP #$20                                                   ;8189BB|C220    |      ;
-    STA.B nTempVar1                                            ;8189BD|857E    |00007E;
+    STA.B n16TempVar1                                          ;8189BD|857E    |00007E;
     ASL A                                                      ;8189BF|0A      |      ;
     CLC                                                        ;8189C0|18      |      ;
-    ADC.B nTempVar1                                            ;8189C1|657E    |00007E;
+    ADC.B n16TempVar1                                          ;8189C1|657E    |00007E;
     ASL A                                                      ;8189C3|0A      |      ;
     ASL A                                                      ;8189C4|0A      |      ;
     CLC                                                        ;8189C5|18      |      ;
@@ -1521,12 +1521,12 @@ fUnknown_818989:
     REP #$20                                                   ;8189DE|C220    |      ;
     BEQ .zero0x80                                              ;8189E0|F007    |8189E9;
     LDA.W #$0004                                               ;8189E2|A90400  |      ;
-    STA.B $80                                                  ;8189E5|8580    |000080;
+    STA.B n16TempVar2                                          ;8189E5|8580    |000080;
     BRA .label3                                                ;8189E7|8002    |8189EB;
  
  
 .zero0x80:
-    STZ.B $80                                                  ;8189E9|6480    |000080;
+    STZ.B n16TempVar2                                          ;8189E9|6480    |000080;
  
 .label3:
     SEP #$20                                                   ;8189EB|E220    |      ;
@@ -1554,24 +1554,24 @@ fUnknown_818989:
  
 .label5:
     REP #$20                                                   ;818A10|C220    |      ;
-    STA.B nTempVar1                                            ;818A12|857E    |00007E;
+    STA.B n16TempVar1                                          ;818A12|857E    |00007E;
     ASL A                                                      ;818A14|0A      |      ;
     CLC                                                        ;818A15|18      |      ;
-    ADC.B nTempVar1                                            ;818A16|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818A16|657E    |00007E;
     ASL A                                                      ;818A18|0A      |      ;
     ASL A                                                      ;818A19|0A      |      ;
     CLC                                                        ;818A1A|18      |      ;
     ADC.W #$0002                                               ;818A1B|690200  |      ;
-    ADC.B $80                                                  ;818A1E|6580    |000080;
+    ADC.B n16TempVar2                                          ;818A1E|6580    |000080;
     TAX                                                        ;818A20|AA      |      ;
     LDA.L nUnknownDialogIndex_81A1A5,X                         ;818A21|BFA5A181|81A1A5;
     TAX                                                        ;818A25|AA      |      ;
     SEP #$20                                                   ;818A26|E220    |      ;
     LDA.B #$00                                                 ;818A28|A900    |      ;
     STA.W $0191                                                ;818A2A|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;818A2D|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;818A2D|225F9383|83935F;
     REP #$20                                                   ;818A31|C220    |      ;
-    LDA.B $80                                                  ;818A33|A580    |000080;
+    LDA.B n16TempVar2                                          ;818A33|A580    |000080;
     BEQ +                                                      ;818A35|F003    |818A3A;
     JMP.W fUnknown_818A44                                      ;818A37|4C448A  |818A44;
  
@@ -1615,10 +1615,10 @@ fUnknown_818A4E:
  
 .label2:
     REP #$20                                                   ;818A73|C220    |      ;
-    STA.B nTempVar1                                            ;818A75|857E    |00007E;
+    STA.B n16TempVar1                                          ;818A75|857E    |00007E;
     ASL A                                                      ;818A77|0A      |      ;
     CLC                                                        ;818A78|18      |      ;
-    ADC.B nTempVar1                                            ;818A79|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818A79|657E    |00007E;
     ASL A                                                      ;818A7B|0A      |      ;
     ASL A                                                      ;818A7C|0A      |      ;
     CLC                                                        ;818A7D|18      |      ;
@@ -1629,7 +1629,7 @@ fUnknown_818A4E:
     SEP #$20                                                   ;818A87|E220    |      ;
     LDA.B #$00                                                 ;818A89|A900    |      ;
     STA.W $0191                                                ;818A8B|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;818A8E|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;818A8E|225F9383|83935F;
     BRA fUnknown_818AA0                                        ;818A92|800C    |818AA0;
  
  
@@ -1684,10 +1684,10 @@ fUnknown_818AA0:
  
 .label3:
     REP #$20                                                   ;818AF4|C220    |      ;
-    STA.B nTempVar1                                            ;818AF6|857E    |00007E;
+    STA.B n16TempVar1                                          ;818AF6|857E    |00007E;
     ASL A                                                      ;818AF8|0A      |      ;
     CLC                                                        ;818AF9|18      |      ;
-    ADC.B nTempVar1                                            ;818AFA|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818AFA|657E    |00007E;
     ASL A                                                      ;818AFC|0A      |      ;
     ASL A                                                      ;818AFD|0A      |      ;
     CLC                                                        ;818AFE|18      |      ;
@@ -1757,10 +1757,10 @@ fUnknown_818B6B:
     LDA.W nCarriedItemId                                       ;818B79|AD8409  |000984;
     DEC A                                                      ;818B7C|3A      |      ;
     REP #$20                                                   ;818B7D|C220    |      ;
-    STA.B nTempVar1                                            ;818B7F|857E    |00007E;
+    STA.B n16TempVar1                                          ;818B7F|857E    |00007E;
     ASL A                                                      ;818B81|0A      |      ;
     CLC                                                        ;818B82|18      |      ;
-    ADC.B nTempVar1                                            ;818B83|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818B83|657E    |00007E;
     TAX                                                        ;818B85|AA      |      ;
     LDA.L nUnknownDialogIndex_819FC6,X                         ;818B86|BFC69F81|819FC6;
     TAX                                                        ;818B8A|AA      |      ;
@@ -1769,7 +1769,7 @@ fUnknown_818B6B:
     STA.W $019A                                                ;818B8F|8D9A01  |00019A;
     LDA.B #$00                                                 ;818B92|A900    |      ;
     STA.W $0191                                                ;818B94|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;818B97|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;818B97|225F9383|83935F;
     SEP #$20                                                   ;818B9B|E220    |      ;
     LDA.B #$01                                                 ;818B9D|A901    |      ;
     STA.W $0976                                                ;818B9F|8D7609  |000976;
@@ -1810,10 +1810,10 @@ fUnknown_818BA5:
     LDA.W nCarriedItemId                                       ;818BE5|AD8409  |000984;
     DEC A                                                      ;818BE8|3A      |      ;
     REP #$20                                                   ;818BE9|C220    |      ;
-    STA.B nTempVar1                                            ;818BEB|857E    |00007E;
+    STA.B n16TempVar1                                          ;818BEB|857E    |00007E;
     ASL A                                                      ;818BED|0A      |      ;
     CLC                                                        ;818BEE|18      |      ;
-    ADC.B nTempVar1                                            ;818BEF|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818BEF|657E    |00007E;
     TAX                                                        ;818BF1|AA      |      ;
     INX                                                        ;818BF2|E8      |      ;
     INX                                                        ;818BF3|E8      |      ;
@@ -2222,17 +2222,17 @@ fUnknown_818F2A:
     XBA                                                        ;818F33|EB      |      ;
     LDA.W nCarriedItemId                                       ;818F34|AD8409  |000984;
     REP #$20                                                   ;818F37|C220    |      ;
-    STA.B nTempVar1                                            ;818F39|857E    |00007E;
+    STA.B n16TempVar1                                          ;818F39|857E    |00007E;
     ASL A                                                      ;818F3B|0A      |      ;
     CLC                                                        ;818F3C|18      |      ;
-    ADC.B nTempVar1                                            ;818F3D|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818F3D|657E    |00007E;
     TAX                                                        ;818F3F|AA      |      ;
     LDA.L nUnknownDialogIndex_81A094,X                         ;818F40|BF94A081|81A094;
     TAX                                                        ;818F44|AA      |      ;
     SEP #$20                                                   ;818F45|E220    |      ;
     LDA.B #$00                                                 ;818F47|A900    |      ;
     STA.W $0191                                                ;818F49|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;818F4C|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;818F4C|225F9383|83935F;
     SEP #$20                                                   ;818F50|E220    |      ;
     LDA.B #$06                                                 ;818F52|A906    |      ;
     STA.W $0976                                                ;818F54|8D7609  |000976;
@@ -2256,10 +2256,10 @@ fUnknown_818F5A:
     XBA                                                        ;818F70|EB      |      ;
     LDA.W nCarriedItemId                                       ;818F71|AD8409  |000984;
     REP #$20                                                   ;818F74|C220    |      ;
-    STA.B nTempVar1                                            ;818F76|857E    |00007E;
+    STA.B n16TempVar1                                          ;818F76|857E    |00007E;
     ASL A                                                      ;818F78|0A      |      ;
     CLC                                                        ;818F79|18      |      ;
-    ADC.B nTempVar1                                            ;818F7A|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818F7A|657E    |00007E;
     TAX                                                        ;818F7C|AA      |      ;
     LDA.L nUnknownDialogIndex_81A094,X                         ;818F7D|BF94A081|81A094;
     CMP.W #$0313                                               ;818F81|C91303  |      ;
@@ -2270,7 +2270,7 @@ fUnknown_818F5A:
     LDX.W #$02FA                                               ;818F8D|A2FA02  |      ;
     LDA.B #$00                                                 ;818F90|A900    |      ;
     STA.W $0191                                                ;818F92|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;818F95|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;818F95|225F9383|83935F;
     REP #$20                                                   ;818F99|C220    |      ;
     LDA.W $0978                                                ;818F9B|AD7809  |000978;
     STA.B $A5                                                  ;818F9E|85A5    |0000A5;
@@ -2281,10 +2281,10 @@ fUnknown_818F5A:
     XBA                                                        ;818FAC|EB      |      ;
     LDA.W nCarriedItemId                                       ;818FAD|AD8409  |000984;
     REP #$20                                                   ;818FB0|C220    |      ;
-    STA.B nTempVar1                                            ;818FB2|857E    |00007E;
+    STA.B n16TempVar1                                          ;818FB2|857E    |00007E;
     ASL A                                                      ;818FB4|0A      |      ;
     CLC                                                        ;818FB5|18      |      ;
-    ADC.B nTempVar1                                            ;818FB6|657E    |00007E;
+    ADC.B n16TempVar1                                          ;818FB6|657E    |00007E;
     TAX                                                        ;818FB8|AA      |      ;
     INX                                                        ;818FB9|E8      |      ;
     INX                                                        ;818FBA|E8      |      ;
@@ -2309,7 +2309,7 @@ fUnknown_818FD7:
     LDX.W #$0303                                               ;818FDE|A20303  |      ;
     LDA.B #$00                                                 ;818FE1|A900    |      ;
     STA.W $0191                                                ;818FE3|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;818FE6|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;818FE6|225F9383|83935F;
  
 fUnknown_818FEA:
     REP #$20                                                   ;818FEA|C220    |      ;
@@ -2485,10 +2485,10 @@ fUnknown_8190AA:
     XBA                                                        ;819136|EB      |      ;
     LDA.W nCarriedItemId                                       ;819137|AD8409  |000984;
     REP #$20                                                   ;81913A|C220    |      ;
-    STA.B nTempVar1                                            ;81913C|857E    |00007E;
+    STA.B n16TempVar1                                          ;81913C|857E    |00007E;
     ASL A                                                      ;81913E|0A      |      ;
     CLC                                                        ;81913F|18      |      ;
-    ADC.B nTempVar1                                            ;819140|657E    |00007E;
+    ADC.B n16TempVar1                                          ;819140|657E    |00007E;
     TAX                                                        ;819142|AA      |      ;
     LDA.L nUnknownDialogIndex_81A094,X                         ;819143|BF94A081|81A094;
     BNE +                                                      ;819147|D003    |81914C;
@@ -4113,10 +4113,10 @@ fUnknown_81A58F:
  
 fUnknown_81A5E1:
     REP #$30                                                   ;81A5E1|C230    |      ;
-    STA.B nTempVar1                                            ;81A5E3|857E    |00007E;
+    STA.B n16TempVar1                                          ;81A5E3|857E    |00007E;
     ASL A                                                      ;81A5E5|0A      |      ;
     CLC                                                        ;81A5E6|18      |      ;
-    ADC.B nTempVar1                                            ;81A5E7|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81A5E7|657E    |00007E;
     TAX                                                        ;81A5E9|AA      |      ;
     LDA.L pTable_81B963,X                                      ;81A5EA|BF63B981|81B963;
     STA.B ptrUnknown0xCF                                       ;81A5EE|85CF    |0000CF;
@@ -4247,7 +4247,7 @@ fUnknown_81A688:
     REP #$30                                                   ;81A6AC|C230    |      ;
     PLX                                                        ;81A6AE|FA      |      ;
     PLY                                                        ;81A6AF|7A      |      ;
-    LDA.B $80                                                  ;81A6B0|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A6B0|A580    |000080;
     STA.B $86                                                  ;81A6B2|8586    |000086;
     LDA.B $82                                                  ;81A6B4|A582    |000082;
     STA.B $88                                                  ;81A6B6|8588    |000088;
@@ -4267,16 +4267,16 @@ fUnknown_81A6C1:
     LSR A                                                      ;81A6C6|4A      |      ;
     LSR A                                                      ;81A6C7|4A      |      ;
     LSR A                                                      ;81A6C8|4A      |      ;
-    STA.B nTempVar1                                            ;81A6C9|857E    |00007E;
+    STA.B n16TempVar1                                          ;81A6C9|857E    |00007E;
     TYA                                                        ;81A6CB|98      |      ;
     LSR A                                                      ;81A6CC|4A      |      ;
     LSR A                                                      ;81A6CD|4A      |      ;
     LSR A                                                      ;81A6CE|4A      |      ;
     LSR A                                                      ;81A6CF|4A      |      ;
-    STA.B $80                                                  ;81A6D0|8580    |000080;
+    STA.B n16TempVar2                                          ;81A6D0|8580    |000080;
     LDA.W #$6000                                               ;81A6D2|A90060  |      ;
     STA.B $86                                                  ;81A6D5|8586    |000086;
-    LDA.B nTempVar1                                            ;81A6D7|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;81A6D7|A57E    |00007E;
     CMP.W #$0020                                               ;81A6D9|C92000  |      ;
     BCC +                                                      ;81A6DC|9004    |81A6E2;
     SEC                                                        ;81A6DE|38      |      ;
@@ -4286,7 +4286,7 @@ fUnknown_81A6C1:
     CLC                                                        ;81A6E3|18      |      ;
     ADC.B $86                                                  ;81A6E4|6586    |000086;
     STA.B $86                                                  ;81A6E6|8586    |000086;
-    LDA.B nTempVar1                                            ;81A6E8|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;81A6E8|A57E    |00007E;
     CMP.W #$0010                                               ;81A6EA|C91000  |      ;
     BCC .label2                                                ;81A6ED|9012    |81A701;
     CMP.W #$0020                                               ;81A6EF|C92000  |      ;
@@ -4301,7 +4301,7 @@ fUnknown_81A6C1:
     STA.B $86                                                  ;81A6FF|8586    |000086;
  
 .label2:
-    LDA.B $80                                                  ;81A701|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A701|A580    |000080;
     CMP.W #$0020                                               ;81A703|C92000  |      ;
     BCC .label3                                                ;81A706|9004    |81A70C;
     SEC                                                        ;81A708|38      |      ;
@@ -4317,7 +4317,7 @@ fUnknown_81A6C1:
     CLC                                                        ;81A712|18      |      ;
     ADC.B $86                                                  ;81A713|6586    |000086;
     STA.B $86                                                  ;81A715|8586    |000086;
-    LDA.B $80                                                  ;81A717|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A717|A580    |000080;
     CMP.W #$0010                                               ;81A719|C91000  |      ;
     BCC .label5                                                ;81A71C|9012    |81A730;
     CMP.W #$0020                                               ;81A71E|C92000  |      ;
@@ -4344,16 +4344,16 @@ fUnknown_81A6C1:
     PLA                                                        ;81A743|68      |      ;
     JSL.L fUnknown_81A801                                      ;81A744|2201A881|81A801;
     REP #$20                                                   ;81A748|C220    |      ;
-    LDA.B $80                                                  ;81A74A|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A74A|A580    |000080;
     ASL A                                                      ;81A74C|0A      |      ;
     ASL A                                                      ;81A74D|0A      |      ;
-    STA.B $80                                                  ;81A74E|8580    |000080;
+    STA.B n16TempVar2                                          ;81A74E|8580    |000080;
     LDA.B $82                                                  ;81A750|A582    |000082;
     ASL A                                                      ;81A752|0A      |      ;
     STA.B $82                                                  ;81A753|8582    |000082;
     LDA.B ptrUnknown0x72                                       ;81A755|A572    |000072;
     CLC                                                        ;81A757|18      |      ;
-    ADC.B nTempVar1                                            ;81A758|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81A758|657E    |00007E;
     STA.B ptrUnknown0x72                                       ;81A75A|8572    |000072;
     STA.B ptrUnknown0x75                                       ;81A75C|8575    |000075;
     SEP #$20                                                   ;81A75E|E220    |      ;
@@ -4369,7 +4369,7 @@ fUnknown_81A6C1:
     LDA.B #$18                                                 ;81A76E|A918    |      ;
     STA.B $29                                                  ;81A770|8529    |000029;
     REP #$20                                                   ;81A772|C220    |      ;
-    LDY.B $80                                                  ;81A774|A480    |000080;
+    LDY.B n16TempVar2                                          ;81A774|A480    |000080;
     TXA                                                        ;81A776|8A      |      ;
     ASL A                                                      ;81A777|0A      |      ;
     ASL A                                                      ;81A778|0A      |      ;
@@ -4397,7 +4397,7 @@ fUnknown_81A6C1:
     LDA.B #$18                                                 ;81A79D|A918    |      ;
     STA.B $29                                                  ;81A79F|8529    |000029;
     REP #$20                                                   ;81A7A1|C220    |      ;
-    LDY.B $80                                                  ;81A7A3|A480    |000080;
+    LDY.B n16TempVar2                                          ;81A7A3|A480    |000080;
     TXA                                                        ;81A7A5|8A      |      ;
     ASL A                                                      ;81A7A6|0A      |      ;
     ASL A                                                      ;81A7A7|0A      |      ;
@@ -4413,7 +4413,7 @@ fUnknown_81A6C1:
     REP #$20                                                   ;81A7B8|C220    |      ;
     LDA.B ptrUnknown0x75                                       ;81A7BA|A575    |000075;
     CLC                                                        ;81A7BC|18      |      ;
-    ADC.B $80                                                  ;81A7BD|6580    |000080;
+    ADC.B n16TempVar2                                          ;81A7BD|6580    |000080;
     STA.B ptrUnknown0x75                                       ;81A7BF|8575    |000075;
     STA.B ptrUnknown0x72                                       ;81A7C1|8572    |000072;
     SEP #$20                                                   ;81A7C3|E220    |      ;
@@ -4445,7 +4445,7 @@ fUnknown_81A7CE:
     REP #$30                                                   ;81A7EA|C230    |      ;
     PLX                                                        ;81A7EC|FA      |      ;
     PLY                                                        ;81A7ED|7A      |      ;
-    LDA.B $80                                                  ;81A7EE|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A7EE|A580    |000080;
     STA.B $86                                                  ;81A7F0|8586    |000086;
     LDA.B $82                                                  ;81A7F2|A582    |000082;
     STA.B $88                                                  ;81A7F4|8588    |000088;
@@ -4459,15 +4459,15 @@ fUnknown_81A7CE:
  
 fUnknown_81A801:
     REP #$30                                                   ;81A801|C230    |      ; A: nIndex
-    STA.B nTempVar1                                            ;81A803|857E    |00007E;
+    STA.B n16TempVar1                                          ;81A803|857E    |00007E;
     ASL A                                                      ;81A805|0A      |      ;
     ASL A                                                      ;81A806|0A      |      ;
     CLC                                                        ;81A807|18      |      ;
-    ADC.B nTempVar1                                            ;81A808|657E    |00007E;
-    ADC.B nTempVar1                                            ;81A80A|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81A808|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81A80A|657E    |00007E;
     TAX                                                        ;81A80C|AA      |      ;
     LDA.L Table_81B363,X                                       ;81A80D|BF63B381|81B363;
-    STA.B nTempVar1                                            ;81A811|857E    |00007E;
+    STA.B n16TempVar1                                          ;81A811|857E    |00007E;
     INX                                                        ;81A813|E8      |      ;
     INX                                                        ;81A814|E8      |      ;
     SEP #$20                                                   ;81A815|E220    |      ;
@@ -4484,7 +4484,7 @@ fUnknown_81A801:
     LDA.B #$00                                                 ;81A82B|A900    |      ;
     XBA                                                        ;81A82D|EB      |      ;
     REP #$20                                                   ;81A82E|C220    |      ;
-    STA.B $80                                                  ;81A830|8580    |000080;
+    STA.B n16TempVar2                                          ;81A830|8580    |000080;
     INX                                                        ;81A832|E8      |      ;
     LDA.L Table_81B363,X                                       ;81A833|BF63B381|81B363;
     STA.B $84                                                  ;81A837|8584    |000084;
@@ -4501,7 +4501,7 @@ fUnknown_81A83A:
     LSR A                                                      ;81A841|4A      |      ;
     ASL A                                                      ;81A842|0A      |      ;
     ASL A                                                      ;81A843|0A      |      ;
-    STA.B nTempVar1                                            ;81A844|857E    |00007E;
+    STA.B n16TempVar1                                          ;81A844|857E    |00007E;
     TYA                                                        ;81A846|98      |      ;
     LSR A                                                      ;81A847|4A      |      ;
     LSR A                                                      ;81A848|4A      |      ;
@@ -4514,7 +4514,7 @@ fUnknown_81A83A:
     ASL A                                                      ;81A84F|0A      |      ;
     ASL A                                                      ;81A850|0A      |      ;
     ASL A                                                      ;81A851|0A      |      ;
-    STA.B $80                                                  ;81A852|8580    |000080;
+    STA.B n16TempVar2                                          ;81A852|8580    |000080;
     LDA.W #$0040                                               ;81A854|A94000  |      ;
     STA.B $88                                                  ;81A857|8588    |000088;
     SEP #$20                                                   ;81A859|E220    |      ;
@@ -4522,36 +4522,36 @@ fUnknown_81A83A:
     CMP.B #$01                                                 ;81A85E|C901    |      ;
     BEQ +                                                      ;81A860|F01B    |81A87D;
     REP #$20                                                   ;81A862|C220    |      ;
-    LDA.B $80                                                  ;81A864|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A864|A580    |000080;
     ASL A                                                      ;81A866|0A      |      ;
-    STA.B $80                                                  ;81A867|8580    |000080;
+    STA.B n16TempVar2                                          ;81A867|8580    |000080;
     ASL.B $88                                                  ;81A869|0688    |000088;
     SEP #$20                                                   ;81A86B|E220    |      ;
     LDA.W nCurrentMapdata0181                                  ;81A86D|AD8101  |000181;
     CMP.B #$02                                                 ;81A870|C902    |      ;
     BEQ +                                                      ;81A872|F009    |81A87D;
     REP #$20                                                   ;81A874|C220    |      ;
-    LDA.B $80                                                  ;81A876|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A876|A580    |000080;
     ASL A                                                      ;81A878|0A      |      ;
-    STA.B $80                                                  ;81A879|8580    |000080;
+    STA.B n16TempVar2                                          ;81A879|8580    |000080;
     ASL.B $88                                                  ;81A87B|0688    |000088;
  
   + REP #$30                                                   ;81A87D|C230    |      ;
-    LDA.B nTempVar1                                            ;81A87F|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;81A87F|A57E    |00007E;
     CLC                                                        ;81A881|18      |      ;
-    ADC.B $80                                                  ;81A882|6580    |000080;
+    ADC.B n16TempVar2                                          ;81A882|6580    |000080;
     STA.B $86                                                  ;81A884|8586    |000086;
     PLA                                                        ;81A886|68      |      ;
     JSL.L fUnknown_81A801                                      ;81A887|2201A881|81A801;
     REP #$20                                                   ;81A88B|C220    |      ;
-    LDA.B $80                                                  ;81A88D|A580    |000080;
+    LDA.B n16TempVar2                                          ;81A88D|A580    |000080;
     ASL A                                                      ;81A88F|0A      |      ;
     ASL A                                                      ;81A890|0A      |      ;
-    STA.B $80                                                  ;81A891|8580    |000080;
+    STA.B n16TempVar2                                          ;81A891|8580    |000080;
     REP #$20                                                   ;81A893|C220    |      ;
     LDA.W #$A096                                               ;81A895|A996A0  |      ;
     CLC                                                        ;81A898|18      |      ;
-    ADC.B nTempVar1                                            ;81A899|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81A899|657E    |00007E;
     STA.B ptrUnknown0x72                                       ;81A89B|8572    |000072;
     STA.B ptrUnknown0x78                                       ;81A89D|8578    |000078;
     SEP #$20                                                   ;81A89F|E220    |      ;
@@ -4594,7 +4594,7 @@ fUnknown_81A83A:
     BNE .label1                                                ;81A8DD|D010    |81A8EF;
     INC.B $90                                                  ;81A8DF|E690    |000090;
     INC.B $90                                                  ;81A8E1|E690    |000090;
-    LDA.B nTempVar1                                            ;81A8E3|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;81A8E3|A57E    |00007E;
     CLC                                                        ;81A8E5|18      |      ;
     ADC.B $90                                                  ;81A8E6|6590    |000090;
     AND.W #$0040                                               ;81A8E8|294000  |      ;
@@ -4605,7 +4605,7 @@ fUnknown_81A83A:
 .label1:
     INC.B $90                                                  ;81A8EF|E690    |000090;
     INC.B $90                                                  ;81A8F1|E690    |000090;
-    LDA.B nTempVar1                                            ;81A8F3|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;81A8F3|A57E    |00007E;
     CLC                                                        ;81A8F5|18      |      ;
     ADC.B $90                                                  ;81A8F6|6590    |000090;
     AND.W #$0040                                               ;81A8F8|294000  |      ;
@@ -4624,7 +4624,7 @@ fUnknown_81A83A:
     TAY                                                        ;81A90F|A8      |      ;
  
 .label3:
-    CPX.B $80                                                  ;81A910|E480    |000080;
+    CPX.B n16TempVar2                                          ;81A910|E480    |000080;
     BNE -                                                      ;81A912|D0B9    |81A8CD;
     LDA.B ptrUnknown0x72                                       ;81A914|A572    |000072;
     CLC                                                        ;81A916|18      |      ;
@@ -4641,15 +4641,15 @@ fUnknown_81A83A:
     REP #$20                                                   ;81A92A|C220    |      ;
     LDA.B ptrUnknown0x78                                       ;81A92C|A578    |000078;
     CLC                                                        ;81A92E|18      |      ;
-    ADC.B $80                                                  ;81A92F|6580    |000080;
+    ADC.B n16TempVar2                                          ;81A92F|6580    |000080;
     ADC.B $8E                                                  ;81A931|658E    |00008E;
     STA.B ptrUnknown0x78                                       ;81A933|8578    |000078;
     STA.B ptrUnknown0x72                                       ;81A935|8572    |000072;
     STZ.B $8E                                                  ;81A937|648E    |00008E;
-    LDA.B nTempVar1                                            ;81A939|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;81A939|A57E    |00007E;
     CLC                                                        ;81A93B|18      |      ;
     ADC.B $90                                                  ;81A93C|6590    |000090;
-    STA.B nTempVar1                                            ;81A93E|857E    |00007E;
+    STA.B n16TempVar1                                          ;81A93E|857E    |00007E;
     PLY                                                        ;81A940|7A      |      ;
     INY                                                        ;81A941|C8      |      ;
     CPY.B $82                                                  ;81A942|C482    |000082;
@@ -7897,7 +7897,7 @@ subUnkown81C027_0x0C:
     STA.W $019A                                                ;81C4BE|8D9A01  |00019A;
     LDA.B #$00                                                 ;81C4C1|A900    |      ;
     STA.W $0191                                                ;81C4C3|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81C4C6|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81C4C6|225F9383|83935F;
  
 .continue:
     JSR.W fUnknown_81CFE6                                      ;81C4CA|20E6CF  |81CFE6;
@@ -8400,10 +8400,10 @@ fUnknown_81C806:
     SEP #$20                                                   ;81C815|E220    |      ;
     REP #$10                                                   ;81C817|C210    |      ;
     LDA.B #$05                                                 ;81C819|A905    |      ;
-    STA.W nSoundRegisterValue0                                 ;81C81B|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81C81B|8D1401  |000114;
     LDA.B #$06                                                 ;81C81E|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81C820|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81C823|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;81C820|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;81C823|22328383|838332;
  
 fHelper_81C827:
     JSR.W fUnknown_81CB77                                      ;81C827|2077CB  |81CB77;
@@ -8481,10 +8481,10 @@ subUnkown81C027_0x03:
     SEP #$20                                                   ;81C8AD|E220    |      ;
     REP #$10                                                   ;81C8AF|C210    |      ;
     LDA.B #$06                                                 ;81C8B1|A906    |      ;
-    STA.W nSoundRegisterValue0                                 ;81C8B3|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81C8B3|8D1401  |000114;
     LDA.B #$06                                                 ;81C8B6|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81C8B8|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81C8BB|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;81C8B8|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;81C8BB|22328383|838332;
     SEP #$20                                                   ;81C8BF|E220    |      ;
     STZ.W $0971                                                ;81C8C1|9C7109  |000971;
     BRA .label4                                                ;81C8C4|805D    |81C923;
@@ -8499,10 +8499,10 @@ subUnkown81C027_0x03:
     SEP #$20                                                   ;81C8D1|E220    |      ;
     REP #$10                                                   ;81C8D3|C210    |      ;
     LDA.B #$06                                                 ;81C8D5|A906    |      ;
-    STA.W nSoundRegisterValue0                                 ;81C8D7|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81C8D7|8D1401  |000114;
     LDA.B #$06                                                 ;81C8DA|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81C8DC|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81C8DF|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;81C8DC|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;81C8DF|22328383|838332;
     BRA .label4                                                ;81C8E3|803E    |81C923;
  
  
@@ -8515,10 +8515,10 @@ subUnkown81C027_0x03:
     SEP #$20                                                   ;81C8F0|E220    |      ;
     REP #$10                                                   ;81C8F2|C210    |      ;
     LDA.B #$06                                                 ;81C8F4|A906    |      ;
-    STA.W nSoundRegisterValue0                                 ;81C8F6|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81C8F6|8D1401  |000114;
     LDA.B #$06                                                 ;81C8F9|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81C8FB|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81C8FE|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;81C8FB|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;81C8FE|22328383|838332;
     BRA .label4                                                ;81C902|801F    |81C923;
  
  
@@ -8531,10 +8531,10 @@ subUnkown81C027_0x03:
     SEP #$20                                                   ;81C90F|E220    |      ;
     REP #$10                                                   ;81C911|C210    |      ;
     LDA.B #$06                                                 ;81C913|A906    |      ;
-    STA.W nSoundRegisterValue0                                 ;81C915|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81C915|8D1401  |000114;
     LDA.B #$06                                                 ;81C918|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81C91A|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81C91D|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;81C91A|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;81C91D|22328383|838332;
     BRA .label6                                                ;81C921|8026    |81C949;
  
  
@@ -8665,10 +8665,10 @@ subUnkown81C027_0x05:
     SEP #$20                                                   ;81CA01|E220    |      ;
     REP #$10                                                   ;81CA03|C210    |      ;
     LDA.B #$07                                                 ;81CA05|A907    |      ;
-    STA.W nSoundRegisterValue0                                 ;81CA07|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81CA07|8D1401  |000114;
     LDA.B #$06                                                 ;81CA0A|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81CA0C|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81CA0F|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;81CA0C|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;81CA0F|22328383|838332;
  
 .label1:
     JSR.W fUnknown_81CFE6                                      ;81CA13|20E6CF  |81CFE6;
@@ -8933,7 +8933,7 @@ fUnknown_81CB77:
     LDA.B $DA                                                  ;81CBF5|A5DA    |0000DA;
     JSL.L fUnknown_83AF37                                      ;81CBF7|2237AF83|83AF37;
     REP #$30                                                   ;81CBFB|C230    |      ;
-    STY.B nTempVar1                                            ;81CBFD|847E    |00007E;
+    STY.B n16TempVar1                                          ;81CBFD|847E    |00007E;
     CMP.W #$0001                                               ;81CBFF|C90100  |      ;
     BNE +                                                      ;81CC02|D003    |81CC07;
     JMP.W .sub1                                                ;81CC04|4C58CE  |81CE58;
@@ -8957,10 +8957,10 @@ fUnknown_81CB77:
     JMP.W .return1                                             ;81CC24|4C53CE  |81CE53;
  
  
-  + STY.B nTempVar1                                            ;81CC27|847E    |00007E;
+  + STY.B n16TempVar1                                          ;81CC27|847E    |00007E;
     LDA.B $1E                                                  ;81CC29|A51E    |00001E;
     SEC                                                        ;81CC2B|38      |      ;
-    SBC.B nTempVar1                                            ;81CC2C|E57E    |00007E;
+    SBC.B n16TempVar1                                          ;81CC2C|E57E    |00007E;
     STA.B $1E                                                  ;81CC2E|851E    |00001E;
  
 .addY:
@@ -9024,7 +9024,7 @@ fUnknown_81CB77:
     LDA.B $DA                                                  ;81CC99|A5DA    |0000DA;
     JSL.L fUnknown_83AF37                                      ;81CC9B|2237AF83|83AF37;
     REP #$30                                                   ;81CC9F|C230    |      ;
-    STY.B nTempVar1                                            ;81CCA1|847E    |00007E;
+    STY.B n16TempVar1                                          ;81CCA1|847E    |00007E;
     CMP.W #$0001                                               ;81CCA3|C90100  |      ;
     BNE +                                                      ;81CCA6|D003    |81CCAB;
     JMP.W .sub3                                                ;81CCA8|4CAACE  |81CEAA;
@@ -9048,10 +9048,10 @@ fUnknown_81CB77:
     JMP.W .return1                                             ;81CCC8|4C53CE  |81CE53;
  
  
-  + STY.B nTempVar1                                            ;81CCCB|847E    |00007E;
+  + STY.B n16TempVar1                                          ;81CCCB|847E    |00007E;
     LDA.B $1E                                                  ;81CCCD|A51E    |00001E;
     SEC                                                        ;81CCCF|38      |      ;
-    SBC.B nTempVar1                                            ;81CCD0|E57E    |00007E;
+    SBC.B n16TempVar1                                          ;81CCD0|E57E    |00007E;
     STA.B $1E                                                  ;81CCD2|851E    |00001E;
  
 .subY:
@@ -9115,7 +9115,7 @@ fUnknown_81CB77:
     LDA.B $DA                                                  ;81CD3D|A5DA    |0000DA;
     JSL.L fUnknown_83AF37                                      ;81CD3F|2237AF83|83AF37;
     REP #$30                                                   ;81CD43|C230    |      ;
-    STX.B nTempVar1                                            ;81CD45|867E    |00007E;
+    STX.B n16TempVar1                                          ;81CD45|867E    |00007E;
     CMP.W #$0001                                               ;81CD47|C90100  |      ;
     BNE +                                                      ;81CD4A|D003    |81CD4F;
     JMP.W .sub5                                                ;81CD4C|4CFCCE  |81CEFC;
@@ -9139,10 +9139,10 @@ fUnknown_81CB77:
     JMP.W .return1                                             ;81CD6C|4C53CE  |81CE53;
  
  
-  + STX.B nTempVar1                                            ;81CD6F|867E    |00007E;
+  + STX.B n16TempVar1                                          ;81CD6F|867E    |00007E;
     LDA.B $1E                                                  ;81CD71|A51E    |00001E;
     SEC                                                        ;81CD73|38      |      ;
-    SBC.B nTempVar1                                            ;81CD74|E57E    |00007E;
+    SBC.B n16TempVar1                                          ;81CD74|E57E    |00007E;
     STA.B $1E                                                  ;81CD76|851E    |00001E;
  
 .addX:
@@ -9206,7 +9206,7 @@ fUnknown_81CB77:
     LDA.B $DA                                                  ;81CDE1|A5DA    |0000DA;
     JSL.L fUnknown_83AF37                                      ;81CDE3|2237AF83|83AF37;
     REP #$30                                                   ;81CDE7|C230    |      ;
-    STX.B nTempVar1                                            ;81CDE9|867E    |00007E;
+    STX.B n16TempVar1                                          ;81CDE9|867E    |00007E;
     CMP.W #$0001                                               ;81CDEB|C90100  |      ;
     BNE +                                                      ;81CDEE|D003    |81CDF3;
     JMP.W .sub7                                                ;81CDF0|4C4ECF  |81CF4E;
@@ -9230,10 +9230,10 @@ fUnknown_81CB77:
     JMP.W .return1                                             ;81CE10|4C53CE  |81CE53;
  
  
-  + STX.B nTempVar1                                            ;81CE13|867E    |00007E;
+  + STX.B n16TempVar1                                          ;81CE13|867E    |00007E;
     LDA.B $1E                                                  ;81CE15|A51E    |00001E;
     SEC                                                        ;81CE17|38      |      ;
-    SBC.B nTempVar1                                            ;81CE18|E57E    |00007E;
+    SBC.B n16TempVar1                                          ;81CE18|E57E    |00007E;
     STA.B $1E                                                  ;81CE1A|851E    |00001E;
  
 .subX:
@@ -9460,10 +9460,10 @@ fUnknown_81CFA0:
     REP #$30                                                   ;81CFA0|C230    |      ;
     LDA.W $0901                                                ;81CFA2|AD0109  |000901;
     STA.W $0903                                                ;81CFA5|8D0309  |000903;
-    STA.B nTempVar1                                            ;81CFA8|857E    |00007E;
+    STA.B n16TempVar1                                          ;81CFA8|857E    |00007E;
     ASL A                                                      ;81CFAA|0A      |      ;
     CLC                                                        ;81CFAB|18      |      ;
-    ADC.B nTempVar1                                            ;81CFAC|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81CFAC|657E    |00007E;
     TAX                                                        ;81CFAE|AA      |      ;
     LDA.L nSpriteIndexTable,X                                  ;81CFAF|BF10D281|81D210;
     STA.B $A1                                                  ;81CFB3|85A1    |0000A1;
@@ -9511,10 +9511,10 @@ fUnknown_81CFE6:
     CMP.W $0903                                                ;81D003|CD0309  |000903;
     BEQ .exit                                                  ;81D006|F031    |81D039;
     STA.W $0903                                                ;81D008|8D0309  |000903;
-    STA.B nTempVar1                                            ;81D00B|857E    |00007E;
+    STA.B n16TempVar1                                          ;81D00B|857E    |00007E;
     ASL A                                                      ;81D00D|0A      |      ;
     CLC                                                        ;81D00E|18      |      ;
-    ADC.B nTempVar1                                            ;81D00F|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81D00F|657E    |00007E;
     TAX                                                        ;81D011|AA      |      ;
     LDA.L nSpriteIndexTable,X                                  ;81D012|BF10D281|81D210;
     STA.B $A1                                                  ;81D016|85A1    |0000A1;
@@ -9590,17 +9590,17 @@ fPlayerEnergyHandler_81D061:
     XBA                                                        ;81D087|EB      |      ;
     LDA.W nPlayerStamina                                       ;81D088|AD1709  |000917;
     REP #$20                                                   ;81D08B|C220    |      ;
-    STA.B nTempVar1                                            ;81D08D|857E    |00007E;
+    STA.B n16TempVar1                                          ;81D08D|857E    |00007E;
     SEP #$20                                                   ;81D08F|E220    |      ;
     LDA.W nPlayerEnergy                                        ;81D091|AD1809  |000918;
     REP #$20                                                   ;81D094|C220    |      ;
     CLC                                                        ;81D096|18      |      ;
     ADC.B $82                                                  ;81D097|6582    |000082;
-    STA.B $80                                                  ;81D099|8580    |000080;
-    LDA.B $80                                                  ;81D09B|A580    |000080;
+    STA.B n16TempVar2                                          ;81D099|8580    |000080;
+    LDA.B n16TempVar2                                          ;81D09B|A580    |000080;
     BEQ .label3                                                ;81D09D|F014    |81D0B3;
     BMI .label3                                                ;81D09F|3012    |81D0B3;
-    CMP.B nTempVar1                                            ;81D0A1|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;81D0A1|C57E    |00007E;
     BCS .label4                                                ;81D0A3|B02D    |81D0D2;
     REP #$30                                                   ;81D0A5|C230    |      ;
     LDA.W #$0008                                               ;81D0A7|A90800  |      ;
@@ -9716,8 +9716,8 @@ fUnknown_81D14E:
     ASL A                                                      ;81D151|0A      |      ;
     ASL A                                                      ;81D152|0A      |      ;
     ASL A                                                      ;81D153|0A      |      ;
-    STA.B nTempVar1                                            ;81D154|857E    |00007E;
-    STX.B $80                                                  ;81D156|8680    |000080;
+    STA.B n16TempVar1                                          ;81D154|857E    |00007E;
+    STX.B n16TempVar2                                          ;81D156|8680    |000080;
     STY.B $82                                                  ;81D158|8482    |000082;
     LDA.B nPlayerPosX                                          ;81D15A|A5D6    |0000D6;
     STA.W nTileInFrontOfPlayerX                                ;81D15C|8D8509  |000985;
@@ -9728,7 +9728,7 @@ fUnknown_81D14E:
     BNE .label1                                                ;81D169|D00C    |81D177;
     LDA.B nPlayerPosY                                          ;81D16B|A5D8    |0000D8;
     CLC                                                        ;81D16D|18      |      ;
-    ADC.B nTempVar1                                            ;81D16E|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81D16E|657E    |00007E;
     ADC.B $82                                                  ;81D170|6582    |000082;
     STA.W nTileInFrontOfPlayerY                                ;81D172|8D8709  |000987;
     BRA .return                                                ;81D175|802C    |81D1A3;
@@ -9739,7 +9739,7 @@ fUnknown_81D14E:
     BNE .label2                                                ;81D17A|D00C    |81D188;
     LDA.B nPlayerPosY                                          ;81D17C|A5D8    |0000D8;
     SEC                                                        ;81D17E|38      |      ;
-    SBC.B nTempVar1                                            ;81D17F|E57E    |00007E;
+    SBC.B n16TempVar1                                          ;81D17F|E57E    |00007E;
     SBC.B $82                                                  ;81D181|E582    |000082;
     STA.W nTileInFrontOfPlayerY                                ;81D183|8D8709  |000987;
     BRA .return                                                ;81D186|801B    |81D1A3;
@@ -9750,8 +9750,8 @@ fUnknown_81D14E:
     BNE .label3                                                ;81D18B|D00C    |81D199;
     LDA.B nPlayerPosX                                          ;81D18D|A5D6    |0000D6;
     CLC                                                        ;81D18F|18      |      ;
-    ADC.B nTempVar1                                            ;81D190|657E    |00007E;
-    ADC.B $80                                                  ;81D192|6580    |000080;
+    ADC.B n16TempVar1                                          ;81D190|657E    |00007E;
+    ADC.B n16TempVar2                                          ;81D192|6580    |000080;
     STA.W nTileInFrontOfPlayerX                                ;81D194|8D8509  |000985;
     BRA .return                                                ;81D197|800A    |81D1A3;
  
@@ -9759,8 +9759,8 @@ fUnknown_81D14E:
 .label3:
     LDA.B nPlayerPosX                                          ;81D199|A5D6    |0000D6;
     SEC                                                        ;81D19B|38      |      ;
-    SBC.B nTempVar1                                            ;81D19C|E57E    |00007E;
-    SBC.B $80                                                  ;81D19E|E580    |000080;
+    SBC.B n16TempVar1                                          ;81D19C|E57E    |00007E;
+    SBC.B n16TempVar2                                          ;81D19E|E580    |000080;
     STA.W nTileInFrontOfPlayerX                                ;81D1A0|8D8509  |000985;
  
 .return:
@@ -9774,27 +9774,27 @@ fFindTileCoordsInFrontOfPLayer:
     ASL A                                                      ;81D1A8|0A      |      ;
     ASL A                                                      ;81D1A9|0A      |      ;
     ASL A                                                      ;81D1AA|0A      |      ;
-    STA.B nTempVar1                                            ;81D1AB|857E    |00007E; X * 16 -> $7E
+    STA.B n16TempVar1                                          ;81D1AB|857E    |00007E; X * 16 -> $7E
     TYA                                                        ;81D1AD|98      |      ;
     ASL A                                                      ;81D1AE|0A      |      ;
     ASL A                                                      ;81D1AF|0A      |      ;
     ASL A                                                      ;81D1B0|0A      |      ;
     ASL A                                                      ;81D1B1|0A      |      ; Y * 16 -> $80
-    STA.B $80                                                  ;81D1B2|8580    |000080;
+    STA.B n16TempVar2                                          ;81D1B2|8580    |000080;
     LDA.B nPlayerPosX                                          ;81D1B4|A5D6    |0000D6;
     CLC                                                        ;81D1B6|18      |      ;
-    ADC.B nTempVar1                                            ;81D1B7|657E    |00007E;
+    ADC.B n16TempVar1                                          ;81D1B7|657E    |00007E;
     STA.W nTileInFrontOfPlayerX                                ;81D1B9|8D8509  |000985;
     LDA.B nPlayerPosY                                          ;81D1BC|A5D8    |0000D8;
     CLC                                                        ;81D1BE|18      |      ;
-    ADC.B $80                                                  ;81D1BF|6580    |000080;
+    ADC.B n16TempVar2                                          ;81D1BF|6580    |000080;
     STA.W nTileInFrontOfPlayerY                                ;81D1C1|8D8709  |000987;
     RTL                                                        ;81D1C4|6B      |      ;
  
  
 fUnknown_81D1C5:
     REP #$30                                                   ;81D1C5|C230    |      ; A: nArg1
-    STA.B nTempVar1                                            ;81D1C7|857E    |00007E;
+    STA.B n16TempVar1                                          ;81D1C7|857E    |00007E;
     LDY.W #$0000                                               ;81D1C9|A00000  |      ;
  
 .loop:
@@ -9805,7 +9805,7 @@ fUnknown_81D1C5:
     INC A                                                      ;81D1D0|1A      |      ;
     TAX                                                        ;81D1D1|AA      |      ;
     LDA.L Table_81D1E8,X                                       ;81D1D2|BFE8D181|81D1E8; read second n16 until it equals to value in $7E
-    CMP.B nTempVar1                                            ;81D1D6|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;81D1D6|C57E    |00007E;
     BCC .label1                                                ;81D1D8|9002    |81D1DC;
     BRA .return                                                ;81D1DA|8008    |81D1E4;
  
@@ -10502,9 +10502,9 @@ subPlayerInteraction81D593_0x03:
     BEQ +                                                      ;81D679|F044    |81D6BF;
     SEP #$20                                                   ;81D67B|E220    |      ;
     LDA.B #$19                                                 ;81D67D|A919    |      ;
-    STA.W nSoundRegisterValue0                                 ;81D67F|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;81D67F|8D1401  |000114;
     LDA.B #$06                                                 ;81D682|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;81D684|8D1501  |000115;
+    STA.W nAudioRegisterValue1                                 ;81D684|8D1501  |000115;
     LDA.B #$00                                                 ;81D687|A900    |      ;
     XBA                                                        ;81D689|EB      |      ;
     LDA.W $0118                                                ;81D68A|AD1801  |000118;
@@ -10513,9 +10513,9 @@ subPlayerInteraction81D593_0x03:
     SEP #$20                                                   ;81D690|E220    |      ;
     LDA.L nToolSoundData_80B8CD,X                              ;81D692|BFCDB880|80B8CD;
     INC A                                                      ;81D696|1A      |      ;
-    STA.W $0103                                                ;81D697|8D0301  |000103;
-    JSL.L fUnknown_83833E                                      ;81D69A|223E8383|83833E;
-    JSL.L fSoundSeSoundRegister2to0A                           ;81D69E|22328383|838332;
+    STA.W nAudioUnk104Index                                    ;81D697|8D0301  |000103;
+    JSL.L fAudioUnknown_83833E                                 ;81D69A|223E8383|83833E;
+    JSL.L fAudioSetRegister2to0A                               ;81D69E|22328383|838332;
     REP #$20                                                   ;81D6A2|C220    |      ;
     LDA.L $7F1F5A                                              ;81D6A4|AF5A1F7F|7F1F5A;
     ORA.W #$0010                                               ;81D6A8|091000  |      ;
@@ -10658,7 +10658,7 @@ subPlayerInteraction81D593_0x0F:
     STA.W $019A                                                ;81D778|8D9A01  |00019A;
     LDA.B #$00                                                 ;81D77B|A900    |      ;
     STA.W $0191                                                ;81D77D|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81D780|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81D780|225F9383|83935F;
  
   + SEP #$20                                                   ;81D784|E220    |      ;
     LDA.B #$00                                                 ;81D786|A900    |      ;
@@ -10736,7 +10736,7 @@ subPlayerInteraction81D593_0x10:
     SEP #$20                                                   ;81D807|E220    |      ;
     LDA.B #$00                                                 ;81D809|A900    |      ;
     STA.W $0191                                                ;81D80B|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81D80E|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81D80E|225F9383|83935F;
     SEP #$20                                                   ;81D812|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D814|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81D817|4C6BD9  |81D96B;
@@ -10767,7 +10767,7 @@ subPlayerInteraction81D593_0x10:
     SEP #$20                                                   ;81D846|E220    |      ;
     LDA.B #$00                                                 ;81D848|A900    |      ;
     STA.W $0191                                                ;81D84A|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81D84D|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81D84D|225F9383|83935F;
     SEP #$20                                                   ;81D851|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D853|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81D856|4C6BD9  |81D96B;
@@ -11009,7 +11009,7 @@ subPlayerInteraction81D593_0x12:
     STA.W $019A                                                ;81DA31|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DA34|A900    |      ;
     STA.W $0191                                                ;81DA36|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DA39|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DA39|225F9383|83935F;
  
   + SEP #$20                                                   ;81DA3D|E220    |      ;
     LDA.B #$00                                                 ;81DA3F|A900    |      ;
@@ -11103,7 +11103,7 @@ subPlayerInteraction81D593_0x13:
     STA.W $019A                                                ;81DAE7|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DAEA|A900    |      ;
     STA.W $0191                                                ;81DAEC|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DAEF|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DAEF|225F9383|83935F;
  
   + SEP #$20                                                   ;81DAF3|E220    |      ;
     LDA.B #$00                                                 ;81DAF5|A900    |      ;
@@ -11277,7 +11277,7 @@ subPlayerInteraction81D593_0x1E:
     LDX.W #$0371                                               ;81DC02|A27103  |      ;
     LDA.B #$00                                                 ;81DC05|A900    |      ;
     STA.W $0191                                                ;81DC07|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DC0A|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DC0A|225F9383|83935F;
     SEP #$20                                                   ;81DC0E|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DC10|EE6F09  |00096F;
     JMP.W .return                                              ;81DC13|4C56DC  |81DC56;
@@ -11309,7 +11309,7 @@ subPlayerInteraction81D593_0x1E:
     STA.W $019A                                                ;81DC3E|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DC41|A900    |      ;
     STA.W $0191                                                ;81DC43|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DC46|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DC46|225F9383|83935F;
  
 .exit:
     REP #$30                                                   ;81DC4A|C230    |      ;
@@ -11362,7 +11362,7 @@ subPlayerInteraction81D593_0x26:
     LDX.W #$0023                                               ;81DC70|A22300  |      ;
     LDA.B #$00                                                 ;81DC73|A900    |      ;
     STA.W $0191                                                ;81DC75|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DC78|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DC78|225F9383|83935F;
     SEP #$20                                                   ;81DC7C|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DC7E|EE6F09  |00096F;
     JMP.W .return                                              ;81DC81|4CCDDC  |81DCCD;
@@ -11393,7 +11393,7 @@ subPlayerInteraction81D593_0x26:
     STA.W $019A                                                ;81DCAC|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DCAF|A900    |      ;
     STA.W $0191                                                ;81DCB1|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DCB4|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DCB4|225F9383|83935F;
     REP #$20                                                   ;81DCB8|C220    |      ;
     LDA.W #$FFFF                                               ;81DCBA|A9FFFF  |      ;
     JSL.L fIncreaseHappiness_83B282                            ;81DCBD|2282B283|83B282;
@@ -11541,7 +11541,7 @@ subPlayerInteraction81D593_0x2D:
     LDX.W #$0023                                               ;81DDBE|A22300  |      ;
     LDA.B #$00                                                 ;81DDC1|A900    |      ;
     STA.W $0191                                                ;81DDC3|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DDC6|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DDC6|225F9383|83935F;
     SEP #$20                                                   ;81DDCA|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DDCC|EE6F09  |00096F;
     JMP.W .return                                              ;81DDCF|4C1BDE  |81DE1B;
@@ -11572,7 +11572,7 @@ subPlayerInteraction81D593_0x2D:
     STA.W $019A                                                ;81DDFA|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DDFD|A900    |      ;
     STA.W $0191                                                ;81DDFF|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DE02|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DE02|225F9383|83935F;
     REP #$20                                                   ;81DE06|C220    |      ;
     LDA.W #$FFFF                                               ;81DE08|A9FFFF  |      ;
     JSL.L fIncreaseHappiness_83B282                            ;81DE0B|2282B283|83B282;
@@ -11622,7 +11622,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0305                                               ;81DE54|A20503  |      ;
     LDA.B #$00                                                 ;81DE57|A900    |      ;
     STA.W $0191                                                ;81DE59|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DE5C|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DE5C|225F9383|83935F;
     SEP #$20                                                   ;81DE60|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DE62|EE6F09  |00096F;
     JMP.W .return                                              ;81DE65|4C21E2  |81E221;
@@ -11634,7 +11634,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03D0                                               ;81DE6F|A2D003  |      ;
     LDA.B #$00                                                 ;81DE72|A900    |      ;
     STA.W $0191                                                ;81DE74|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DE77|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DE77|225F9383|83935F;
     REP #$30                                                   ;81DE7B|C230    |      ;
     LDA.W #$0040                                               ;81DE7D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DE80|49FFFF  |      ;
@@ -11691,7 +11691,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0307                                               ;81DEDB|A20703  |      ;
     LDA.B #$00                                                 ;81DEDE|A900    |      ;
     STA.W $0191                                                ;81DEE0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DEE3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DEE3|225F9383|83935F;
     SEP #$20                                                   ;81DEE7|E220    |      ;
     LDA.B #$02                                                 ;81DEE9|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81DEEB|8D6F09  |00096F;
@@ -11704,7 +11704,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B6                                               ;81DEF8|A2B603  |      ;
     LDA.B #$00                                                 ;81DEFB|A900    |      ;
     STA.W $0191                                                ;81DEFD|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DF00|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DF00|225F9383|83935F;
     REP #$30                                                   ;81DF04|C230    |      ;
     LDA.W #$0040                                               ;81DF06|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF09|49FFFF  |      ;
@@ -11731,7 +11731,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$030A                                               ;81DF32|A20A03  |      ;
     LDA.B #$00                                                 ;81DF35|A900    |      ;
     STA.W $0191                                                ;81DF37|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DF3A|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DF3A|225F9383|83935F;
     SEP #$20                                                   ;81DF3E|E220    |      ;
     LDA.B #$03                                                 ;81DF40|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81DF42|8D6F09  |00096F;
@@ -11744,7 +11744,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B6                                               ;81DF4F|A2B603  |      ;
     LDA.B #$00                                                 ;81DF52|A900    |      ;
     STA.W $0191                                                ;81DF54|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DF57|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DF57|225F9383|83935F;
     REP #$30                                                   ;81DF5B|C230    |      ;
     LDA.W #$0040                                               ;81DF5D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF60|49FFFF  |      ;
@@ -11760,7 +11760,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$030B                                               ;81DF71|A20B03  |      ;
     LDA.B #$00                                                 ;81DF74|A900    |      ;
     STA.W $0191                                                ;81DF76|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DF79|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DF79|225F9383|83935F;
     REP #$30                                                   ;81DF7D|C230    |      ;
     LDA.W #$0040                                               ;81DF7F|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF82|49FFFF  |      ;
@@ -11780,7 +11780,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$030B                                               ;81DFA0|A20B03  |      ;
     LDA.B #$00                                                 ;81DFA3|A900    |      ;
     STA.W $0191                                                ;81DFA5|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81DFA8|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81DFA8|225F9383|83935F;
     REP #$30                                                   ;81DFAC|C230    |      ;
     LDA.W #$0040                                               ;81DFAE|A94000  |      ;
     EOR.W #$FFFF                                               ;81DFB1|49FFFF  |      ;
@@ -11815,7 +11815,7 @@ subPlayerInteraction81D593_0x2E:
     ASL A                                                      ;81DFE8|0A      |      ;
     ASL A                                                      ;81DFE9|0A      |      ;
     ASL A                                                      ;81DFEA|0A      |      ;
-    STA.B nTempVar1                                            ;81DFEB|857E    |00007E;
+    STA.B n16TempVar1                                          ;81DFEB|857E    |00007E;
     SEP #$20                                                   ;81DFED|E220    |      ;
     LDA.B #$00                                                 ;81DFEF|A900    |      ;
     XBA                                                        ;81DFF1|EB      |      ;
@@ -11826,12 +11826,12 @@ subPlayerInteraction81D593_0x2E:
     ASL A                                                      ;81DFFA|0A      |      ;
     ASL A                                                      ;81DFFB|0A      |      ;
     ASL A                                                      ;81DFFC|0A      |      ;
-    STA.B $80                                                  ;81DFFD|8580    |000080;
+    STA.B n16TempVar2                                          ;81DFFD|8580    |000080;
     CLC                                                        ;81DFFF|18      |      ;
-    ADC.B nTempVar1                                            ;81E000|657E    |00007E;
-    STA.B nTempVar1                                            ;81E002|857E    |00007E;
+    ADC.B n16TempVar1                                          ;81E000|657E    |00007E;
+    STA.B n16TempVar1                                          ;81E002|857E    |00007E;
     LDA.L nPlantedGrassCount                                   ;81E004|AF291F7F|7F1F29;
-    CMP.B nTempVar1                                            ;81E008|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;81E008|C57E    |00007E;
     BCS .label21                                               ;81E00A|B044    |81E050;
     SEP #$20                                                   ;81E00C|E220    |      ;
     LDA.B #$02                                                 ;81E00E|A902    |      ;
@@ -11839,7 +11839,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0306                                               ;81E013|A20603  |      ;
     LDA.B #$00                                                 ;81E016|A900    |      ;
     STA.W $0191                                                ;81E018|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E01B|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E01B|225F9383|83935F;
     REP #$30                                                   ;81E01F|C230    |      ;
     LDA.W #$0040                                               ;81E021|A94000  |      ;
     EOR.W #$FFFF                                               ;81E024|49FFFF  |      ;
@@ -11855,7 +11855,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B7                                               ;81E035|A2B703  |      ;
     LDA.B #$00                                                 ;81E038|A900    |      ;
     STA.W $0191                                                ;81E03A|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E03D|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E03D|225F9383|83935F;
     REP #$30                                                   ;81E041|C230    |      ;
     LDA.W #$0040                                               ;81E043|A94000  |      ;
     EOR.W #$FFFF                                               ;81E046|49FFFF  |      ;
@@ -11881,7 +11881,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0304                                               ;81E06F|A20403  |      ;
     LDA.B #$00                                                 ;81E072|A900    |      ;
     STA.W $0191                                                ;81E074|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E077|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E077|225F9383|83935F;
     REP #$30                                                   ;81E07B|C230    |      ;
     LDA.W #$0040                                               ;81E07D|A94000  |      ;
     EOR.W #$FFFF                                               ;81E080|49FFFF  |      ;
@@ -11896,7 +11896,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0308                                               ;81E091|A20803  |      ;
     LDA.B #$00                                                 ;81E094|A900    |      ;
     STA.W $0191                                                ;81E096|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E099|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E099|225F9383|83935F;
     REP #$30                                                   ;81E09D|C230    |      ;
     LDA.W #$0040                                               ;81E09F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E0A2|49FFFF  |      ;
@@ -11923,7 +11923,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0303                                               ;81E0D4|A20303  |      ;
     LDA.B #$00                                                 ;81E0D7|A900    |      ;
     STA.W $0191                                                ;81E0D9|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E0DC|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E0DC|225F9383|83935F;
     REP #$30                                                   ;81E0E0|C230    |      ;
     LDA.W #$0040                                               ;81E0E2|A94000  |      ;
     EOR.W #$FFFF                                               ;81E0E5|49FFFF  |      ;
@@ -11955,7 +11955,7 @@ subPlayerInteraction81D593_0x2E:
     ASL A                                                      ;81E110|0A      |      ;
     ASL A                                                      ;81E111|0A      |      ;
     ASL A                                                      ;81E112|0A      |      ;
-    STA.B nTempVar1                                            ;81E113|857E    |00007E;
+    STA.B n16TempVar1                                          ;81E113|857E    |00007E;
     SEP #$20                                                   ;81E115|E220    |      ;
     LDA.B #$00                                                 ;81E117|A900    |      ;
     XBA                                                        ;81E119|EB      |      ;
@@ -11965,12 +11965,12 @@ subPlayerInteraction81D593_0x2E:
     ASL A                                                      ;81E121|0A      |      ;
     ASL A                                                      ;81E122|0A      |      ;
     ASL A                                                      ;81E123|0A      |      ;
-    STA.B $80                                                  ;81E124|8580    |000080;
+    STA.B n16TempVar2                                          ;81E124|8580    |000080;
     CLC                                                        ;81E126|18      |      ;
-    ADC.B nTempVar1                                            ;81E127|657E    |00007E;
-    STA.B nTempVar1                                            ;81E129|857E    |00007E;
+    ADC.B n16TempVar1                                          ;81E127|657E    |00007E;
+    STA.B n16TempVar1                                          ;81E129|857E    |00007E;
     LDA.L nPlantedGrassCount                                   ;81E12B|AF291F7F|7F1F29;
-    CMP.B nTempVar1                                            ;81E12F|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;81E12F|C57E    |00007E;
     BCC +                                                      ;81E131|9003    |81E136;
     JMP.W .label29                                             ;81E133|4C7CE1  |81E17C;
  
@@ -11981,7 +11981,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0306                                               ;81E13D|A20603  |      ;
     LDA.B #$00                                                 ;81E140|A900    |      ;
     STA.W $0191                                                ;81E142|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E145|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E145|225F9383|83935F;
     REP #$20                                                   ;81E149|C220    |      ;
     REP #$30                                                   ;81E14B|C230    |      ;
     LDA.W #$0040                                               ;81E14D|A94000  |      ;
@@ -11998,7 +11998,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B7                                               ;81E161|A2B703  |      ;
     LDA.B #$00                                                 ;81E164|A900    |      ;
     STA.W $0191                                                ;81E166|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E169|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E169|225F9383|83935F;
     REP #$30                                                   ;81E16D|C230    |      ;
     LDA.W #$0040                                               ;81E16F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E172|49FFFF  |      ;
@@ -12024,7 +12024,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0304                                               ;81E19B|A20403  |      ;
     LDA.B #$00                                                 ;81E19E|A900    |      ;
     STA.W $0191                                                ;81E1A0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E1A3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E1A3|225F9383|83935F;
     REP #$30                                                   ;81E1A7|C230    |      ;
     LDA.W #$0040                                               ;81E1A9|A94000  |      ;
     EOR.W #$FFFF                                               ;81E1AC|49FFFF  |      ;
@@ -12039,7 +12039,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0311                                               ;81E1BC|A21103  |      ;
     LDA.B #$00                                                 ;81E1BF|A900    |      ;
     STA.W $0191                                                ;81E1C1|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E1C4|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E1C4|225F9383|83935F;
     REP #$30                                                   ;81E1C8|C230    |      ;
     LDA.W #$0040                                               ;81E1CA|A94000  |      ;
     EOR.W #$FFFF                                               ;81E1CD|49FFFF  |      ;
@@ -12069,7 +12069,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0303                                               ;81E207|A20303  |      ;
     LDA.B #$00                                                 ;81E20A|A900    |      ;
     STA.W $0191                                                ;81E20C|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E20F|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E20F|225F9383|83935F;
  
 .break:
     REP #$30                                                   ;81E213|C230    |      ;
@@ -12085,7 +12085,7 @@ subPlayerInteraction81D593_0x2E:
  
  
 .return2:
-    JSL.L fUnknown_8393F9                                      ;81E222|22F99383|8393F9;
+    JSL.L fTextUnknown_8393F9                                  ;81E222|22F99383|8393F9;
     SEP #$20                                                   ;81E226|E220    |      ;
     LDA.B #$01                                                 ;81E228|A901    |      ;
     STA.W $019A                                                ;81E22A|8D9A01  |00019A;
@@ -12193,7 +12193,7 @@ subPlayerInteraction81D593_0x33:
     LDX.W #$0023                                               ;81E2EB|A22300  |      ;
     LDA.B #$00                                                 ;81E2EE|A900    |      ;
     STA.W $0191                                                ;81E2F0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E2F3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E2F3|225F9383|83935F;
     SEP #$20                                                   ;81E2F7|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E2F9|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81E2FC|4C48E3  |81E348;
@@ -12223,7 +12223,7 @@ subPlayerInteraction81D593_0x33:
     STA.W $019A                                                ;81E327|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E32A|A900    |      ;
     STA.W $0191                                                ;81E32C|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E32F|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E32F|225F9383|83935F;
     REP #$20                                                   ;81E333|C220    |      ;
     LDA.W #$FFFF                                               ;81E335|A9FFFF  |      ;
     JSL.L fIncreaseHappiness_83B282                            ;81E338|2282B283|83B282;
@@ -12265,7 +12265,7 @@ subPlayerInteraction81D593_0x35:
     LDA.B #$24                                                 ;81E372|A924    |      ;
     LDX.W #$0007                                               ;81E374|A20700  |      ;
     LDY.W #$0078                                               ;81E377|A07800  |      ;
-    JSL.L fUnknown_8382FE                                      ;81E37A|22FE8283|8382FE;
+    JSL.L fAudioUnknown_8382FE                                 ;81E37A|22FE8283|8382FE;
     SEP #$20                                                   ;81E37E|E220    |      ;
     STZ.W $0119                                                ;81E380|9C1901  |000119;
     JSL.L fUnknown_828FF3                                      ;81E383|22F38F82|828FF3;
@@ -12289,7 +12289,7 @@ subPlayerInteraction81D593_0x36:
     LDX.W #$0023                                               ;81E3A6|A22300  |      ;
     LDA.B #$00                                                 ;81E3A9|A900    |      ;
     STA.W $0191                                                ;81E3AB|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E3AE|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E3AE|225F9383|83935F;
     SEP #$20                                                   ;81E3B2|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E3B4|EE6F09  |00096F;
     JMP.W .return                                              ;81E3B7|4C03E4  |81E403;
@@ -12319,7 +12319,7 @@ subPlayerInteraction81D593_0x36:
     STA.W $019A                                                ;81E3E2|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E3E5|A900    |      ;
     STA.W $0191                                                ;81E3E7|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E3EA|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E3EA|225F9383|83935F;
     REP #$20                                                   ;81E3EE|C220    |      ;
     LDA.W #$FFFF                                               ;81E3F0|A9FFFF  |      ;
     JSL.L fIncreaseHappiness_83B282                            ;81E3F3|2282B283|83B282;
@@ -12507,7 +12507,7 @@ subPlayerInteraction81D593_0x3F:
     LDX.W #$0023                                               ;81E53E|A22300  |      ;
     LDA.B #$00                                                 ;81E541|A900    |      ;
     STA.W $0191                                                ;81E543|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E546|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E546|225F9383|83935F;
     SEP #$20                                                   ;81E54A|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E54C|EE6F09  |00096F;
     JMP.W .return                                              ;81E54F|4C9BE5  |81E59B;
@@ -12537,7 +12537,7 @@ subPlayerInteraction81D593_0x3F:
     STA.W $019A                                                ;81E57A|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E57D|A900    |      ;
     STA.W $0191                                                ;81E57F|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E582|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E582|225F9383|83935F;
     REP #$20                                                   ;81E586|C220    |      ;
     LDA.W #$FFFF                                               ;81E588|A9FFFF  |      ;
     JSL.L fIncreaseHappiness_83B282                            ;81E58B|2282B283|83B282;
@@ -12565,7 +12565,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$045F                                               ;81E5AE|A25F04  |      ;
     LDA.B #$00                                                 ;81E5B1|A900    |      ;
     STA.W $0191                                                ;81E5B3|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E5B6|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E5B6|225F9383|83935F;
     SEP #$20                                                   ;81E5BA|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E5BC|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81E5BF|4C9FE6  |81E69F;
@@ -12607,7 +12607,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0460                                               ;81E5FC|A26004  |      ;
     LDA.B #$00                                                 ;81E5FF|A900    |      ;
     STA.W $0191                                                ;81E601|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E604|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E604|225F9383|83935F;
     REP #$30                                                   ;81E608|C230    |      ;
     LDA.W #$0040                                               ;81E60A|A94000  |      ;
     EOR.W #$FFFF                                               ;81E60D|49FFFF  |      ;
@@ -12623,7 +12623,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0462                                               ;81E61E|A26204  |      ;
     LDA.B #$00                                                 ;81E621|A900    |      ;
     STA.W $0191                                                ;81E623|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E626|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E626|225F9383|83935F;
     REP #$30                                                   ;81E62A|C230    |      ;
     LDA.W #$0040                                               ;81E62C|A94000  |      ;
     EOR.W #$FFFF                                               ;81E62F|49FFFF  |      ;
@@ -12639,7 +12639,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0464                                               ;81E640|A26404  |      ;
     LDA.B #$00                                                 ;81E643|A900    |      ;
     STA.W $0191                                                ;81E645|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E648|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E648|225F9383|83935F;
     REP #$30                                                   ;81E64C|C230    |      ;
     LDA.W #$0040                                               ;81E64E|A94000  |      ;
     EOR.W #$FFFF                                               ;81E651|49FFFF  |      ;
@@ -12655,7 +12655,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0461                                               ;81E662|A26104  |      ;
     LDA.B #$00                                                 ;81E665|A900    |      ;
     STA.W $0191                                                ;81E667|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E66A|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E66A|225F9383|83935F;
     REP #$30                                                   ;81E66E|C230    |      ;
     LDA.W #$0040                                               ;81E670|A94000  |      ;
     EOR.W #$FFFF                                               ;81E673|49FFFF  |      ;
@@ -12671,7 +12671,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0463                                               ;81E684|A26304  |      ;
     LDA.B #$00                                                 ;81E687|A900    |      ;
     STA.W $0191                                                ;81E689|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E68C|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E68C|225F9383|83935F;
     REP #$30                                                   ;81E690|C230    |      ;
     LDA.W #$0040                                               ;81E692|A94000  |      ;
     EOR.W #$FFFF                                               ;81E695|49FFFF  |      ;
@@ -12685,7 +12685,7 @@ subPlayerInteraction81D593_0x40:
  
  
 .return:
-    JSL.L fUnknown_8393F9                                      ;81E6A0|22F99383|8393F9;
+    JSL.L fTextUnknown_8393F9                                  ;81E6A0|22F99383|8393F9;
     SEP #$20                                                   ;81E6A4|E220    |      ;
     LDA.B #$01                                                 ;81E6A6|A901    |      ;
     STA.W $019A                                                ;81E6A8|8D9A01  |00019A;
@@ -12774,7 +12774,7 @@ subPlayerInteraction81D593_0x42:
     STA.W $019A                                                ;81E74D|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E750|A900    |      ;
     STA.W $0191                                                ;81E752|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E755|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E755|225F9383|83935F;
     SEP #$20                                                   ;81E759|E220    |      ;
     LDA.B #$02                                                 ;81E75B|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81E75D|8D6F09  |00096F;
@@ -12961,7 +12961,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E8AC|E220    |      ;
     LDA.B #$00                                                 ;81E8AE|A900    |      ;
     STA.W $0191                                                ;81E8B0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E8B3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E8B3|225F9383|83935F;
     SEP #$20                                                   ;81E8B7|E220    |      ;
     LDA.B #$02                                                 ;81E8B9|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81E8BB|8D6F09  |00096F;
@@ -12973,7 +12973,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E8C4|E220    |      ;
     LDA.B #$00                                                 ;81E8C6|A900    |      ;
     STA.W $0191                                                ;81E8C8|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E8CB|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E8CB|225F9383|83935F;
     SEP #$20                                                   ;81E8CF|E220    |      ;
     LDA.B #$05                                                 ;81E8D1|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E8D3|8D6F09  |00096F;
@@ -12985,7 +12985,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E8DC|E220    |      ;
     LDA.B #$00                                                 ;81E8DE|A900    |      ;
     STA.W $0191                                                ;81E8E0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E8E3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E8E3|225F9383|83935F;
     SEP #$20                                                   ;81E8E7|E220    |      ;
     LDA.B #$05                                                 ;81E8E9|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E8EB|8D6F09  |00096F;
@@ -13000,7 +13000,7 @@ subPlayerInteraction81D593_0x43:
     STA.W $019A                                                ;81E8FA|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E8FD|A900    |      ;
     STA.W $0191                                                ;81E8FF|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E902|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E902|225F9383|83935F;
     SEP #$20                                                   ;81E906|E220    |      ;
     LDA.B #$05                                                 ;81E908|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E90A|8D6F09  |00096F;
@@ -13024,7 +13024,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$030F                                               ;81E92A|A20F03  |      ;
     LDA.B #$00                                                 ;81E92D|A900    |      ;
     STA.W $0191                                                ;81E92F|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E932|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E932|225F9383|83935F;
     SEP #$20                                                   ;81E936|E220    |      ;
     LDA.B #$03                                                 ;81E938|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81E93A|8D6F09  |00096F;
@@ -13037,7 +13037,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$0309                                               ;81E947|A20903  |      ;
     LDA.B #$00                                                 ;81E94A|A900    |      ;
     STA.W $0191                                                ;81E94C|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81E94F|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81E94F|225F9383|83935F;
     SEP #$20                                                   ;81E953|E220    |      ;
     LDA.B #$05                                                 ;81E955|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E957|8D6F09  |00096F;
@@ -13201,7 +13201,7 @@ subPlayerInteraction81D593_0x43:
     STA.W $019A                                                ;81EAA4|8D9A01  |00019A;
     LDA.B #$00                                                 ;81EAA7|A900    |      ;
     STA.W $0191                                                ;81EAA9|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81EAAC|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81EAAC|225F9383|83935F;
     SEP #$20                                                   ;81EAB0|E220    |      ;
     LDA.B #$08                                                 ;81EAB2|A908    |      ;
     STA.W nPlayerInteractionArg1                               ;81EAB4|8D6F09  |00096F;
@@ -13225,7 +13225,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$014B                                               ;81EAD4|A24B01  |      ;
     LDA.B #$00                                                 ;81EAD7|A900    |      ;
     STA.W $0191                                                ;81EAD9|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81EADC|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81EADC|225F9383|83935F;
     SEP #$20                                                   ;81EAE0|E220    |      ;
     LDA.B #$09                                                 ;81EAE2|A909    |      ;
     STA.W nPlayerInteractionArg1                               ;81EAE4|8D6F09  |00096F;
@@ -13238,7 +13238,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$014C                                               ;81EAF1|A24C01  |      ;
     LDA.B #$00                                                 ;81EAF4|A900    |      ;
     STA.W $0191                                                ;81EAF6|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81EAF9|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81EAF9|225F9383|83935F;
     SEP #$20                                                   ;81EAFD|E220    |      ;
     LDA.B #$0A                                                 ;81EAFF|A90A    |      ;
     STA.W nPlayerInteractionArg1                               ;81EB01|8D6F09  |00096F;
@@ -13455,7 +13455,7 @@ subPlayerInteraction81D593_0x44:
     STA.W $019A                                                ;81EC9E|8D9A01  |00019A;
     LDA.B #$00                                                 ;81ECA1|A900    |      ;
     STA.W $0191                                                ;81ECA3|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81ECA6|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81ECA6|225F9383|83935F;
     SEP #$20                                                   ;81ECAA|E220    |      ;
     LDA.B #$02                                                 ;81ECAC|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81ECAE|8D6F09  |00096F;
@@ -13469,7 +13469,7 @@ subPlayerInteraction81D593_0x44:
     STA.W $019A                                                ;81ECBD|8D9A01  |00019A;
     LDA.B #$00                                                 ;81ECC0|A900    |      ;
     STA.W $0191                                                ;81ECC2|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81ECC5|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81ECC5|225F9383|83935F;
     SEP #$20                                                   ;81ECC9|E220    |      ;
     LDA.B #$05                                                 ;81ECCB|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81ECCD|8D6F09  |00096F;
@@ -13493,7 +13493,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$030F                                               ;81ECED|A20F03  |      ;
     LDA.B #$00                                                 ;81ECF0|A900    |      ;
     STA.W $0191                                                ;81ECF2|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81ECF5|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81ECF5|225F9383|83935F;
     SEP #$20                                                   ;81ECF9|E220    |      ;
     LDA.B #$03                                                 ;81ECFB|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81ECFD|8D6F09  |00096F;
@@ -13506,7 +13506,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$0309                                               ;81ED0A|A20903  |      ;
     LDA.B #$00                                                 ;81ED0D|A900    |      ;
     STA.W $0191                                                ;81ED0F|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81ED12|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81ED12|225F9383|83935F;
     SEP #$20                                                   ;81ED16|E220    |      ;
     LDA.B #$05                                                 ;81ED18|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81ED1A|8D6F09  |00096F;
@@ -13670,7 +13670,7 @@ subPlayerInteraction81D593_0x44:
     STA.W $019A                                                ;81EE67|8D9A01  |00019A;
     LDA.B #$00                                                 ;81EE6A|A900    |      ;
     STA.W $0191                                                ;81EE6C|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81EE6F|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81EE6F|225F9383|83935F;
     SEP #$20                                                   ;81EE73|E220    |      ;
     LDA.B #$08                                                 ;81EE75|A908    |      ;
     STA.W nPlayerInteractionArg1                               ;81EE77|8D6F09  |00096F;
@@ -13694,7 +13694,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$014A                                               ;81EE97|A24A01  |      ;
     LDA.B #$00                                                 ;81EE9A|A900    |      ;
     STA.W $0191                                                ;81EE9C|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81EE9F|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81EE9F|225F9383|83935F;
     SEP #$20                                                   ;81EEA3|E220    |      ;
     LDA.B #$09                                                 ;81EEA5|A909    |      ;
     STA.W nPlayerInteractionArg1                               ;81EEA7|8D6F09  |00096F;
@@ -13707,7 +13707,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$014C                                               ;81EEB4|A24C01  |      ;
     LDA.B #$00                                                 ;81EEB7|A900    |      ;
     STA.W $0191                                                ;81EEB9|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81EEBC|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81EEBC|225F9383|83935F;
     SEP #$20                                                   ;81EEC0|E220    |      ;
     LDA.B #$0A                                                 ;81EEC2|A90A    |      ;
     STA.W nPlayerInteractionArg1                               ;81EEC4|8D6F09  |00096F;
@@ -13879,7 +13879,7 @@ subPlayerInteraction81D593_0x45:
     STA.W $019A                                                ;81F01A|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F01D|A900    |      ;
     STA.W $0191                                                ;81F01F|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F022|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F022|225F9383|83935F;
     SEP #$20                                                   ;81F026|E220    |      ;
     LDA.B #$03                                                 ;81F028|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F02A|8D6F09  |00096F;
@@ -13967,7 +13967,7 @@ subPlayerInteraction81D593_0x46:
  
   + LDA.B #$00                                                 ;81F0BF|A900    |      ;
     STA.W $0191                                                ;81F0C1|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F0C4|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F0C4|225F9383|83935F;
     SEP #$20                                                   ;81F0C8|E220    |      ;
     LDA.B #$02                                                 ;81F0CA|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F0CC|8D6F09  |00096F;
@@ -14085,7 +14085,7 @@ subPlayerInteraction81D593_0x47:
     STA.W $019A                                                ;81F19B|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F19E|A900    |      ;
     STA.W $0191                                                ;81F1A0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F1A3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F1A3|225F9383|83935F;
     SEP #$20                                                   ;81F1A7|E220    |      ;
     LDA.B #$03                                                 ;81F1A9|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F1AB|8D6F09  |00096F;
@@ -14099,7 +14099,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0137                                               ;81F1B8|A23701  |      ;
     LDA.B #$00                                                 ;81F1BB|A900    |      ;
     STA.W $0191                                                ;81F1BD|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F1C0|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F1C0|225F9383|83935F;
     SEP #$20                                                   ;81F1C4|E220    |      ;
     LDA.B #$01                                                 ;81F1C6|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F1C8|8D6F09  |00096F;
@@ -14197,7 +14197,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0135                                               ;81F279|A23501  |      ;
     LDA.B #$00                                                 ;81F27C|A900    |      ;
     STA.W $0191                                                ;81F27E|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F281|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F281|225F9383|83935F;
     SEP #$20                                                   ;81F285|E220    |      ;
     LDA.B #$01                                                 ;81F287|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F289|8D6F09  |00096F;
@@ -14217,7 +14217,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0304                                               ;81F2A8|A20403  |      ;
     LDA.B #$00                                                 ;81F2AB|A900    |      ;
     STA.W $0191                                                ;81F2AD|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F2B0|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F2B0|225F9383|83935F;
     SEP #$20                                                   ;81F2B4|E220    |      ;
     LDA.B #$01                                                 ;81F2B6|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F2B8|8D6F09  |00096F;
@@ -14231,7 +14231,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0136                                               ;81F2C4|A23601  |      ;
     LDA.B #$00                                                 ;81F2C7|A900    |      ;
     STA.W $0191                                                ;81F2C9|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F2CC|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F2CC|225F9383|83935F;
     SEP #$20                                                   ;81F2D0|E220    |      ;
     LDA.B #$01                                                 ;81F2D2|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F2D4|8D6F09  |00096F;
@@ -14292,7 +14292,7 @@ subPlayerInteraction81D593_0x48:
     STA.W $019A                                                ;81F332|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F335|A900    |      ;
     STA.W $0191                                                ;81F337|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F33A|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F33A|225F9383|83935F;
     SEP #$20                                                   ;81F33E|E220    |      ;
     LDA.B #$01                                                 ;81F340|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F342|8D6F09  |00096F;
@@ -14325,7 +14325,7 @@ subPlayerInteraction81D593_0x48:
     LDX.W #$025C                                               ;81F37E|A25C02  |      ;
     LDA.B #$00                                                 ;81F381|A900    |      ;
     STA.W $0191                                                ;81F383|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F386|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F386|225F9383|83935F;
     SEP #$20                                                   ;81F38A|E220    |      ;
     LDA.B #$03                                                 ;81F38C|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F38E|8D6F09  |00096F;
@@ -14416,7 +14416,7 @@ subPlayerInteraction81D593_0x49:
     LDX.W #$0300                                               ;81F436|A20003  |      ;
     LDA.B #$00                                                 ;81F439|A900    |      ;
     STA.W $0191                                                ;81F43B|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F43E|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F43E|225F9383|83935F;
     SEP #$20                                                   ;81F442|E220    |      ;
     LDA.B #$01                                                 ;81F444|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F446|8D6F09  |00096F;
@@ -14628,10 +14628,10 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$024B                                               ;81F5D7|A24B02  |      ;
     LDA.B #$00                                                 ;81F5DA|A900    |      ;
     STA.W $0191                                                ;81F5DC|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F5DF|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F5DF|225F9383|83935F;
     SEP #$20                                                   ;81F5E3|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F5E5|EE6F09  |00096F;
-    JMP.W AAAAAAAAAAAAAAAAAA                                   ;81F5E8|4CD6F6  |81F6D6;
+    JMP.W fReturn_81F6D6                                       ;81F5E8|4CD6F6  |81F6D6;
  
  
 .case1:
@@ -14639,7 +14639,7 @@ subPlayerInteraction81D593_0x51:
     LDA.W $019A                                                ;81F5ED|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F5F0|C902    |      ;
     BNE +                                                      ;81F5F2|D003    |81F5F7;
-    JMP.W AAAAAAAAAAAAAAAAAA                                   ;81F5F4|4CD6F6  |81F6D6;
+    JMP.W fReturn_81F6D6                                       ;81F5F4|4CD6F6  |81F6D6;
  
  
   + SEP #$20                                                   ;81F5F7|E220    |      ;
@@ -14661,11 +14661,11 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$024C                                               ;81F61D|A24C02  |      ;
     LDA.B #$00                                                 ;81F620|A900    |      ;
     STA.W $0191                                                ;81F622|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F625|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F625|225F9383|83935F;
     SEP #$20                                                   ;81F629|E220    |      ;
     LDA.B #$02                                                 ;81F62B|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F62D|8D6F09  |00096F;
-    JMP.W AAAAAAAAAAAAAAAAAA                                   ;81F630|4CD6F6  |81F6D6;
+    JMP.W fReturn_81F6D6                                       ;81F630|4CD6F6  |81F6D6;
  
  
 .label1:
@@ -14675,11 +14675,11 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$024D                                               ;81F63A|A24D02  |      ;
     LDA.B #$00                                                 ;81F63D|A900    |      ;
     STA.W $0191                                                ;81F63F|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F642|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F642|225F9383|83935F;
     SEP #$20                                                   ;81F646|E220    |      ;
     LDA.B #$03                                                 ;81F648|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F64A|8D6F09  |00096F;
-    JMP.W AAAAAAAAAAAAAAAAAA                                   ;81F64D|4CD6F6  |81F6D6;
+    JMP.W fReturn_81F6D6                                       ;81F64D|4CD6F6  |81F6D6;
  
  
 .label2:
@@ -14689,18 +14689,18 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$0213                                               ;81F657|A21302  |      ;
     LDA.B #$00                                                 ;81F65A|A900    |      ;
     STA.W $0191                                                ;81F65C|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F65F|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F65F|225F9383|83935F;
     SEP #$20                                                   ;81F663|E220    |      ;
     LDA.B #$03                                                 ;81F665|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F667|8D6F09  |00096F;
-    BRA AAAAAAAAAAAAAAAAAA                                     ;81F66A|806A    |81F6D6;
+    BRA fReturn_81F6D6                                         ;81F66A|806A    |81F6D6;
  
  
 .case2:
     SEP #$20                                                   ;81F66C|E220    |      ;
     LDA.W $019A                                                ;81F66E|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F671|C902    |      ;
-    BEQ AAAAAAAAAAAAAAAAAA                                     ;81F673|F061    |81F6D6;
+    BEQ fReturn_81F6D6                                         ;81F673|F061    |81F6D6;
     REP #$20                                                   ;81F675|C220    |      ;
     REP #$30                                                   ;81F677|C230    |      ;
     LDA.W #$0019                                               ;81F679|A91900  |      ;
@@ -14716,20 +14716,20 @@ subPlayerInteraction81D593_0x51:
     STZ.W nPlayerInteractionArg2                               ;81F694|9C7009  |000970;
     LDA.B #$04                                                 ;81F697|A904    |      ;
     STA.W nPlayerInteractionArg1                               ;81F699|8D6F09  |00096F;
-    BRA AAAAAAAAAAAAAAAAAA                                     ;81F69C|8038    |81F6D6;
+    BRA fReturn_81F6D6                                         ;81F69C|8038    |81F6D6;
  
  
 .case3:
     SEP #$20                                                   ;81F69E|E220    |      ;
     LDA.W $019A                                                ;81F6A0|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F6A3|C902    |      ;
-    BEQ AAAAAAAAAAAAAAAAAA                                     ;81F6A5|F02F    |81F6D6;
+    BEQ fReturn_81F6D6                                         ;81F6A5|F02F    |81F6D6;
     REP #$30                                                   ;81F6A7|C230    |      ;
     LDA.W #$0040                                               ;81F6A9|A94000  |      ;
     EOR.W #$FFFF                                               ;81F6AC|49FFFF  |      ;
     AND.B $D2                                                  ;81F6AF|25D2    |0000D2;
     STA.B $D2                                                  ;81F6B1|85D2    |0000D2;
-    BRA AAAAAAAAAAAAAAAAAA                                     ;81F6B3|8021    |81F6D6;
+    BRA fReturn_81F6D6                                         ;81F6B3|8021    |81F6D6;
  
  
 .case4:
@@ -14737,7 +14737,7 @@ subPlayerInteraction81D593_0x51:
     INC.W nPlayerInteractionArg2                               ;81F6B7|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81F6BA|AD7009  |000970;
     CMP.B #$64                                                 ;81F6BD|C964    |      ;
-    BNE AAAAAAAAAAAAAAAAAA                                     ;81F6BF|D015    |81F6D6;
+    BNE fReturn_81F6D6                                         ;81F6BF|D015    |81F6D6;
     REP #$30                                                   ;81F6C1|C230    |      ;
     LDA.W #$0040                                               ;81F6C3|A94000  |      ;
     EOR.W #$FFFF                                               ;81F6C6|49FFFF  |      ;
@@ -14746,11 +14746,11 @@ subPlayerInteraction81D593_0x51:
     REP #$30                                                   ;81F6CD|C230    |      ;
     LDA.W #$0000                                               ;81F6CF|A90000  |      ;
     STA.B $D4                                                  ;81F6D2|85D4    |0000D4;
-    BRA AAAAAAAAAAAAAAAAAA                                     ;81F6D4|8000    |81F6D6;
+    BRA fReturn_81F6D6                                         ;81F6D4|8000    |81F6D6;
  
  
-AAAAAAAAAAAAAAAAAA:
-    RTS                                                        ;81F6D6|60      |      ; FIX ME here: 0x81F791
+fReturn_81F6D6:
+    RTS                                                        ;81F6D6|60      |      ;
  
  
 subPlayerInteraction81D593_0x52:
@@ -14780,7 +14780,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$024A                                               ;81F6FE|A24A02  |      ;
     LDA.B #$00                                                 ;81F701|A900    |      ;
     STA.W $0191                                                ;81F703|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F706|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F706|225F9383|83935F;
     SEP #$20                                                   ;81F70A|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F70C|EE6F09  |00096F;
     JMP.W .return                                              ;81F70F|4CFEF7  |81F7FE;
@@ -14813,7 +14813,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$024C                                               ;81F744|A24C02  |      ;
     LDA.B #$00                                                 ;81F747|A900    |      ;
     STA.W $0191                                                ;81F749|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F74C|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F74C|225F9383|83935F;
     SEP #$20                                                   ;81F750|E220    |      ;
     LDA.B #$02                                                 ;81F752|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F754|8D6F09  |00096F;
@@ -14827,7 +14827,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$024D                                               ;81F761|A24D02  |      ;
     LDA.B #$00                                                 ;81F764|A900    |      ;
     STA.W $0191                                                ;81F766|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F769|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F769|225F9383|83935F;
     SEP #$20                                                   ;81F76D|E220    |      ;
     LDA.B #$03                                                 ;81F76F|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F771|8D6F09  |00096F;
@@ -14841,11 +14841,11 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$0213                                               ;81F77E|A21302  |      ;
     LDA.B #$00                                                 ;81F781|A900    |      ;
     STA.W $0191                                                ;81F783|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F786|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F786|225F9383|83935F;
     SEP #$20                                                   ;81F78A|E220    |      ;
     LDA.B #$03                                                 ;81F78C|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F78E|8D6F09  |00096F;
-    JMP.W AAAAAAAAAAAAAAAAAA                                   ;81F791|4CD6F6  |81F6D6; BUG - should be JMP.W $F7FE ( aka .return in this function rather than previous one since we are out of function scope)
+    JMP.W fReturn_81F6D6                                       ;81F791|4CD6F6  |81F6D6; BUG - should be .return in this function rather than previous one since we are out of function scope
  
  
 .case2:
@@ -14934,7 +14934,7 @@ subPlayerInteraction81D593_0x53:
     ASL A                                                      ;81F836|0A      |      ;
     ASL A                                                      ;81F837|0A      |      ;
     ASL A                                                      ;81F838|0A      |      ;
-    STA.B nTempVar1                                            ;81F839|857E    |00007E;
+    STA.B n16TempVar1                                          ;81F839|857E    |00007E;
     LDY.W #$0000                                               ;81F83B|A00000  |      ;
  
 .loop:
@@ -14946,7 +14946,7 @@ subPlayerInteraction81D593_0x53:
     LDA.L Table_83CA10,X                                       ;81F844|BF10CA83|83CA10;
     SEC                                                        ;81F848|38      |      ;
     SBC.W #$0008                                               ;81F849|E90800  |      ;
-    CMP.B nTempVar1                                            ;81F84C|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;81F84C|C57E    |00007E;
     BEQ +                                                      ;81F84E|F008    |81F858;
     INY                                                        ;81F850|C8      |      ;
     CPY.W #$000D                                               ;81F851|C00D00  |      ;
@@ -14981,7 +14981,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0455                                               ;81F87C|A25504  |      ;
     LDA.B #$00                                                 ;81F87F|A900    |      ;
     STA.W $0191                                                ;81F881|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F884|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F884|225F9383|83935F;
     SEP #$20                                                   ;81F888|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F88A|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81F88D|4C1EF9  |81F91E;
@@ -15017,7 +15017,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0456                                               ;81F8BF|A25604  |      ;
     LDA.B #$00                                                 ;81F8C2|A900    |      ;
     STA.W $0191                                                ;81F8C4|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F8C7|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F8C7|225F9383|83935F;
     REP #$30                                                   ;81F8CB|C230    |      ;
     LDA.W #$0040                                               ;81F8CD|A94000  |      ;
     EOR.W #$FFFF                                               ;81F8D0|49FFFF  |      ;
@@ -15033,7 +15033,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0457                                               ;81F8E1|A25704  |      ;
     LDA.B #$00                                                 ;81F8E4|A900    |      ;
     STA.W $0191                                                ;81F8E6|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F8E9|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F8E9|225F9383|83935F;
     REP #$30                                                   ;81F8ED|C230    |      ;
     LDA.W #$0040                                               ;81F8EF|A94000  |      ;
     EOR.W #$FFFF                                               ;81F8F2|49FFFF  |      ;
@@ -15049,7 +15049,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0458                                               ;81F903|A25804  |      ;
     LDA.B #$00                                                 ;81F906|A900    |      ;
     STA.W $0191                                                ;81F908|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F90B|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F90B|225F9383|83935F;
     REP #$30                                                   ;81F90F|C230    |      ;
     LDA.W #$0040                                               ;81F911|A94000  |      ;
     EOR.W #$FFFF                                               ;81F914|49FFFF  |      ;
@@ -15063,7 +15063,7 @@ subPlayerInteraction81D593_0x54:
  
  
 .return:
-    JSL.L fUnknown_8393F9                                      ;81F91F|22F99383|8393F9;
+    JSL.L fTextUnknown_8393F9                                  ;81F91F|22F99383|8393F9;
     SEP #$20                                                   ;81F923|E220    |      ;
     LDA.B #$01                                                 ;81F925|A901    |      ;
     STA.W $019A                                                ;81F927|8D9A01  |00019A;
@@ -15091,7 +15091,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$0459                                               ;81F954|A25904  |      ;
     LDA.B #$00                                                 ;81F957|A900    |      ;
     STA.W $0191                                                ;81F959|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F95C|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F95C|225F9383|83935F;
     SEP #$20                                                   ;81F960|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F962|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81F965|4C45FA  |81FA45;
@@ -15133,7 +15133,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045A                                               ;81F9A2|A25A04  |      ;
     LDA.B #$00                                                 ;81F9A5|A900    |      ;
     STA.W $0191                                                ;81F9A7|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F9AA|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F9AA|225F9383|83935F;
     REP #$30                                                   ;81F9AE|C230    |      ;
     LDA.W #$0040                                               ;81F9B0|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9B3|49FFFF  |      ;
@@ -15149,7 +15149,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045B                                               ;81F9C4|A25B04  |      ;
     LDA.B #$00                                                 ;81F9C7|A900    |      ;
     STA.W $0191                                                ;81F9C9|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F9CC|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F9CC|225F9383|83935F;
     REP #$30                                                   ;81F9D0|C230    |      ;
     LDA.W #$0040                                               ;81F9D2|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9D5|49FFFF  |      ;
@@ -15165,7 +15165,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045C                                               ;81F9E6|A25C04  |      ;
     LDA.B #$00                                                 ;81F9E9|A900    |      ;
     STA.W $0191                                                ;81F9EB|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81F9EE|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81F9EE|225F9383|83935F;
     REP #$30                                                   ;81F9F2|C230    |      ;
     LDA.W #$0040                                               ;81F9F4|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9F7|49FFFF  |      ;
@@ -15181,7 +15181,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045D                                               ;81FA08|A25D04  |      ;
     LDA.B #$00                                                 ;81FA0B|A900    |      ;
     STA.W $0191                                                ;81FA0D|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81FA10|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81FA10|225F9383|83935F;
     REP #$30                                                   ;81FA14|C230    |      ;
     LDA.W #$0040                                               ;81FA16|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA19|49FFFF  |      ;
@@ -15197,7 +15197,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045E                                               ;81FA2A|A25E04  |      ;
     LDA.B #$00                                                 ;81FA2D|A900    |      ;
     STA.W $0191                                                ;81FA2F|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81FA32|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81FA32|225F9383|83935F;
     REP #$30                                                   ;81FA36|C230    |      ;
     LDA.W #$0040                                               ;81FA38|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA3B|49FFFF  |      ;
@@ -15211,7 +15211,7 @@ subPlayerInteraction81D593_0x55:
  
  
 .return:
-    JSL.L fUnknown_8393F9                                      ;81FA46|22F99383|8393F9;
+    JSL.L fTextUnknown_8393F9                                  ;81FA46|22F99383|8393F9;
     SEP #$20                                                   ;81FA4A|E220    |      ;
     LDA.B #$01                                                 ;81FA4C|A901    |      ;
     STA.W $019A                                                ;81FA4E|8D9A01  |00019A;
@@ -15257,7 +15257,7 @@ subPlayerInteraction81D593_0x57:
     STA.W $019A                                                ;81FA9B|8D9A01  |00019A;
     LDA.B #$00                                                 ;81FA9E|A900    |      ;
     STA.W $0191                                                ;81FAA0|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;81FAA3|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;81FAA3|225F9383|83935F;
     REP #$30                                                   ;81FAA7|C230    |      ;
     LDA.W #$0040                                               ;81FAA9|A94000  |      ;
     EOR.W #$FFFF                                               ;81FAAC|49FFFF  |      ;
