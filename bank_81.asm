@@ -1222,7 +1222,7 @@ fUnknown_8187C3:
     JSL.L fUnknown_81A4F1                                      ;81882C|22F1A481|81A4F1;
     SEP #$20                                                   ;818830|E220    |      ;
     STZ.W $091D                                                ;818832|9C1D09  |00091D;
-    JSL.L fUnknown_828FF3                                      ;818835|22F38F82|828FF3;
+    JSL.L fToolSoundUnknown_828FF3                             ;818835|22F38F82|828FF3;
     RTS                                                        ;818839|60      |      ;
  
  
@@ -7357,7 +7357,7 @@ subUnkown81C027_0x1C:
     STA.W nToolEquipped                                        ;81C0A7|8D2109  |000921;
     PLA                                                        ;81C0AA|68      |      ;
     STA.W nToolSecond                                          ;81C0AB|8D2309  |000923;
-    JSL.L fUnknown_828FF3                                      ;81C0AE|22F38F82|828FF3;
+    JSL.L fToolSoundUnknown_828FF3                             ;81C0AE|22F38F82|828FF3;
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81C0B2|4C02C0  |81C002;
@@ -7973,7 +7973,7 @@ subUnkown81C027_0x0A:
     STA.W $091B                                                ;81C548|8D1B09  |00091B;
     CMP.B #$18                                                 ;81C54B|C918    |      ;
     BNE .exit                                                  ;81C54D|D004    |81C553;
-    JSL.L fUnknown_828FB1                                      ;81C54F|22B18F82|828FB1;
+    JSL.L fToolSoundUnknown_828FB1                             ;81C54F|22B18F82|828FB1;
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81C553|4C02C0  |81C002;
@@ -10540,7 +10540,7 @@ subPlayerInteraction81D593_0x03:
     STA.B $D2                                                  ;81D6D5|85D2    |0000D2;
     SEP #$20                                                   ;81D6D7|E220    |      ;
     STZ.W $0119                                                ;81D6D9|9C1901  |000119;
-    JSL.L fUnknown_828FF3                                      ;81D6DC|22F38F82|828FF3;
+    JSL.L fToolSoundUnknown_828FF3                             ;81D6DC|22F38F82|828FF3;
  
 .return:
     RTS                                                        ;81D6E0|60      |      ;
@@ -12268,7 +12268,7 @@ subPlayerInteraction81D593_0x35:
     JSL.L fAudioUnknown_8382FE                                 ;81E37A|22FE8283|8382FE;
     SEP #$20                                                   ;81E37E|E220    |      ;
     STZ.W $0119                                                ;81E380|9C1901  |000119;
-    JSL.L fUnknown_828FF3                                      ;81E383|22F38F82|828FF3;
+    JSL.L fToolSoundUnknown_828FF3                             ;81E383|22F38F82|828FF3;
     REP #$30                                                   ;81E387|C230    |      ;
     LDA.W #$0040                                               ;81E389|A94000  |      ;
     EOR.W #$FFFF                                               ;81E38C|49FFFF  |      ;

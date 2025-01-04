@@ -1112,27 +1112,27 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;8289E5|0A      |      ;
     ASL A                                                      ;8289E6|0A      |      ; * 16
     TAX                                                        ;8289E7|AA      |      ;
-    LDA.L sSeasonNameTable,X                                   ;8289E8|BFD98A82|828AD9;
+    LDA.L aSeasonString,X                                      ;8289E8|BFD98A82|828AD9;
     STA.W sSeasonName                                          ;8289EC|8DB308  |0008B3;
     INX                                                        ;8289EF|E8      |      ;
     INX                                                        ;8289F0|E8      |      ;
-    LDA.L sSeasonNameTable,X                                   ;8289F1|BFD98A82|828AD9;
+    LDA.L aSeasonString,X                                      ;8289F1|BFD98A82|828AD9;
     STA.W sSeasonName+2                                        ;8289F5|8DB508  |0008B5;
     INX                                                        ;8289F8|E8      |      ;
     INX                                                        ;8289F9|E8      |      ;
-    LDA.L sSeasonNameTable,X                                   ;8289FA|BFD98A82|828AD9;
+    LDA.L aSeasonString,X                                      ;8289FA|BFD98A82|828AD9;
     STA.W sSeasonName+4                                        ;8289FE|8DB708  |0008B7;
     INX                                                        ;828A01|E8      |      ;
     INX                                                        ;828A02|E8      |      ;
-    LDA.L sSeasonNameTable,X                                   ;828A03|BFD98A82|828AD9;
+    LDA.L aSeasonString,X                                      ;828A03|BFD98A82|828AD9;
     STA.W sSeasonName+6                                        ;828A07|8DB908  |0008B9;
     INX                                                        ;828A0A|E8      |      ;
     INX                                                        ;828A0B|E8      |      ;
-    LDA.L sSeasonNameTable,X                                   ;828A0C|BFD98A82|828AD9;
+    LDA.L aSeasonString,X                                      ;828A0C|BFD98A82|828AD9;
     STA.W sSeasonName+8                                        ;828A10|8DBB08  |0008BB;
     INX                                                        ;828A13|E8      |      ;
     INX                                                        ;828A14|E8      |      ;
-    LDA.L sSeasonNameTable,X                                   ;828A15|BFD98A82|828AD9;
+    LDA.L aSeasonString,X                                      ;828A15|BFD98A82|828AD9;
     STA.W sSeasonName+10                                       ;828A19|8DBD08  |0008BD;
     SEP #$20                                                   ;828A1C|E220    |      ;
     LDA.B #$00                                                 ;828A1E|A900    |      ;
@@ -1145,39 +1145,39 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;828A2A|0A      |      ;
     ASL A                                                      ;828A2B|0A      |      ;
     TAX                                                        ;828A2C|AA      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A2D|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A2D|BF198B82|828B19;
     STA.W sWeekdayName                                         ;828A31|8DBF08  |0008BF;
     INX                                                        ;828A34|E8      |      ;
     INX                                                        ;828A35|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A36|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A36|BF198B82|828B19;
     STA.W sWeekdayName+2                                       ;828A3A|8DC108  |0008C1;
     INX                                                        ;828A3D|E8      |      ;
     INX                                                        ;828A3E|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A3F|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A3F|BF198B82|828B19;
     STA.W sWeekdayName+4                                       ;828A43|8DC308  |0008C3;
     INX                                                        ;828A46|E8      |      ;
     INX                                                        ;828A47|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A48|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A48|BF198B82|828B19;
     STA.W sWeekdayName+6                                       ;828A4C|8DC508  |0008C5;
     INX                                                        ;828A4F|E8      |      ;
     INX                                                        ;828A50|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A51|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A51|BF198B82|828B19;
     STA.W sWeekdayName+8                                       ;828A55|8DC708  |0008C7;
     INX                                                        ;828A58|E8      |      ;
     INX                                                        ;828A59|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A5A|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A5A|BF198B82|828B19;
     STA.W sWeekdayName+10                                      ;828A5E|8DC908  |0008C9;
     INX                                                        ;828A61|E8      |      ;
     INX                                                        ;828A62|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A63|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A63|BF198B82|828B19;
     STA.W sWeekdayName+12                                      ;828A67|8DCB08  |0008CB;
     INX                                                        ;828A6A|E8      |      ;
     INX                                                        ;828A6B|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A6C|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A6C|BF198B82|828B19;
     STA.W sWeekdayName+14                                      ;828A70|8DCD08  |0008CD;
     INX                                                        ;828A73|E8      |      ;
     INX                                                        ;828A74|E8      |      ;
-    LDA.L sWeekdayNameTable,X                                  ;828A75|BF198B82|828B19;
+    LDA.L aWeekdayString,X                                     ;828A75|BF198B82|828B19;
     STA.W sWeekdayName+16                                      ;828A79|8DCF08  |0008CF;
     SEP #$20                                                   ;828A7C|E220    |      ;
     LDA.B #$00                                                 ;828A7E|A900    |      ;
@@ -1214,27 +1214,29 @@ fWriteSeasonWeekdayAndDayOrdinal:
  
 .loadordinal:
     REP #$30                                                   ;828AB0|C230    |      ;
-    LDA.L sDayOrdinalTable,X                                   ;828AB2|BFF98B82|828BF9;
+    LDA.L aDayOrdinalString,X                                  ;828AB2|BFF98B82|828BF9;
     STA.W sNumberOrdinal                                       ;828AB6|8DD108  |0008D1;
     INX                                                        ;828AB9|E8      |      ;
     INX                                                        ;828ABA|E8      |      ;
-    LDA.L sDayOrdinalTable,X                                   ;828ABB|BFF98B82|828BF9;
+    LDA.L aDayOrdinalString,X                                  ;828ABB|BFF98B82|828BF9;
     STA.W sNumberOrdinal+2                                     ;828ABF|8DD308  |0008D3;
     RTL                                                        ;828AC2|6B      |      ;
  
-    db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01         ;828AC3|        |      ; Marked as data because I have no idea what it is
+ 
+aUnused_828AC3:
+    db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01         ;828AC3|        |      ;
     db $78,$02,$6C,$01,$AA,$01,$38,$01,$E4,$00                 ;828ACF|        |      ;
  
-sSeasonNameTable:
-    dw $002C,$000F,$0011,$0008,$000D,$0006                     ;828AD9|        |      ; string[16] - for each Season
+aSeasonString:
+    dw $002C,$000F,$0011,$0008,$000D,$0006                     ;828AD9|        |      ; 0x04 * [string[16]]
     dw $0000,$0000,$002C,$0014,$000C,$000C                     ;828AE5|        |      ;
     dw $0004,$0011,$0000,$0000,$001F,$0000                     ;828AF1|        |      ;
     dw $000B,$000B,$00B1,$00B1,$0000,$0000                     ;828AFD|        |      ;
     dw $0030,$0008,$000D,$0013,$0004,$0011                     ;828B09|        |      ;
     dw $0000,$0000                                             ;828B15|        |      ;
  
-sWeekdayNameTable:
-    dw $002C,$0014,$000D,$0003,$0000,$0018                     ;828B19|        |      ; string[32] - for each Weekday
+aWeekdayString:
+    dw $002C,$0014,$000D,$0003,$0000,$0018                     ;828B19|        |      ; 0x07 * [string[32]]
     dw $00B1,$00B1,$00B1,$0000,$0000,$0000                     ;828B25|        |      ;
     dw $0000,$0000,$0000,$0000,$0026,$000E                     ;828B31|        |      ;
     dw $000D,$0003,$0000,$0018,$00B1,$00B1                     ;828B3D|        |      ;
@@ -1254,8 +1256,8 @@ sWeekdayNameTable:
     dw $0000,$0018,$00B1,$0000,$0000,$0000                     ;828BE5|        |      ;
     dw $0000,$0000,$0000,$0000                                 ;828BF1|        |      ;
  
-sDayOrdinalTable:
-    dw $0012,$0013,$000D,$0003,$0011,$0003                     ;828BF9|        |      ; string[2] - st, nd, rd, th
+aDayOrdinalString:
+    dw $0012,$0013,$000D,$0003,$0011,$0003                     ;828BF9|        |      ; 0x04 * [string[2]] - (st, nd, rd, th)
     dw $0013,$0007                                             ;828C05|        |      ;
  
 fWeatherForecast_828C09:
@@ -1485,7 +1487,7 @@ fWeatherSpecialEvents:
     REP #$20                                                   ;828DBC|C220    |      ;
     TAX                                                        ;828DBE|AA      |      ;
     SEP #$20                                                   ;828DBF|E220    |      ;
-    LDA.L Event_Winter7thDay,X                                 ;828DC1|BFC28E82|828EC2;
+    LDA.L .e_Winter7thDay,X                                    ;828DC1|BFC28E82|828EC2;
     BNE +                                                      ;828DC5|D003    |828DCA;
     JMP.W .label6                                              ;828DC7|4C648E  |828E64;
  
@@ -1521,7 +1523,7 @@ fWeatherSpecialEvents:
     REP #$20                                                   ;828E03|C220    |      ;
     TAX                                                        ;828E05|AA      |      ;
     SEP #$20                                                   ;828E06|E220    |      ;
-    LDA.L Event_Summer29thDay,X                                ;828E08|BFBE8E82|828EBE;
+    LDA.L .e_Summer29thDay,X                                   ;828E08|BFBE8E82|828EBE;
     BEQ .label4                                                ;828E0C|F012    |828E20;
     JSL.L fRollRNG                                             ;828E0E|22F98980|8089F9;
     SEP #$20                                                   ;828E12|E220    |      ;
@@ -1548,7 +1550,7 @@ fWeatherSpecialEvents:
     SEP #$20                                                   ;828E36|E220    |      ;
     LDA.B #$00                                                 ;828E38|A900    |      ;
     XBA                                                        ;828E3A|EB      |      ;
-    LDA.L Event_Summer30thDay,X                                ;828E3B|BFB28E82|828EB2;
+    LDA.L .e_Summer30thDay,X                                   ;828E3B|BFB28E82|828EB2;
     BEQ .label6                                                ;828E3F|F023    |828E64;
     REP #$30                                                   ;828E41|C230    |      ;
     TAY                                                        ;828E43|A8      |      ;
@@ -1579,7 +1581,7 @@ fWeatherSpecialEvents:
     REP #$20                                                   ;828E6D|C220    |      ;
     TAX                                                        ;828E6F|AA      |      ; Move A toX
     SEP #$20                                                   ;828E70|E220    |      ;
-    LDA.L Event_Unknown1,X                                     ;828E72|BFB68E82|828EB6;
+    LDA.L .e_Unknown1,X                                        ;828E72|BFB68E82|828EB6;
     BEQ .label7                                                ;828E76|F00F    |828E87;
     JSL.L fRollRNG                                             ;828E78|22F98980|8089F9;
     SEP #$20                                                   ;828E7C|E220    |      ;
@@ -1597,7 +1599,7 @@ fWeatherSpecialEvents:
     REP #$20                                                   ;828E90|C220    |      ;
     TAX                                                        ;828E92|AA      |      ;
     SEP #$20                                                   ;828E93|E220    |      ;
-    LDA.L Event_Unknown2,X                                     ;828E95|BFBA8E82|828EBA;
+    LDA.L .e_Unknown2,X                                        ;828E95|BFBA8E82|828EBA;
     BEQ .return                                                ;828E99|F00F    |828EAA;
     JSL.L fRollRNG                                             ;828E9B|22F98980|8089F9;
     SEP #$20                                                   ;828E9F|E220    |      ;
@@ -1616,19 +1618,19 @@ fWeatherSpecialEvents:
     RTL                                                        ;828EB1|6B      |      ;
  
  
-Event_Summer30thDay:
+.e_Summer30thDay:
     db $00,$1E,$00,$00                                         ;828EB2|        |      ; Season index based
  
-Event_Unknown1:
+.e_Unknown1:
     db $06,$0A,$0A,$00                                         ;828EB6|        |      ; Season index based
  
-Event_Unknown2:
+.e_Unknown2:
     db $00,$00,$00,$03                                         ;828EBA|        |      ; Season index based
  
-Event_Summer29thDay:
+.e_Summer29thDay:
     db $00,$1E,$00,$00                                         ;828EBE|        |      ; Season index based
  
-Event_Winter7thDay:
+.e_Winter7thDay:
     db $00,$00,$00,$08                                         ;828EC2|        |      ; Season index based
  
 fUnknown_828EC6:
@@ -1746,7 +1748,7 @@ fUnknown_828EC6:
     RTL                                                        ;828FB0|6B      |      ;
  
  
-fUnknown_828FB1:
+fToolSoundUnknown_828FB1:
     SEP #$20                                                   ;828FB1|E220    |      ;
     LDA.B #$00                                                 ;828FB3|A900    |      ; A = 0
     XBA                                                        ;828FB5|EB      |      ; A <-> B
@@ -1784,7 +1786,7 @@ fUnknown_828FB1:
     RTL                                                        ;828FF2|6B      |      ;
  
  
-fUnknown_828FF3:
+fToolSoundUnknown_828FF3:
     SEP #$20                                                   ;828FF3|E220    |      ;
     LDA.B #$00                                                 ;828FF5|A900    |      ;
     XBA                                                        ;828FF7|EB      |      ;
