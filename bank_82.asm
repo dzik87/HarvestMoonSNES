@@ -454,7 +454,7 @@ fNextDayHandler:
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
     JSL.L fUnknown_82A811                                      ;828398|2211A882|82A811;
     JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
-    JSL.L fUnknown_83BC5A                                      ;8283A0|225ABC83|83BC5A;
+    JSL.L fEngineUnknown_83BC5A                                ;8283A0|225ABC83|83BC5A;
     JSL.L fWeatherSpecialEvents                                ;8283A4|22F98C82|828CF9;
     JSL.L fUnknown_828EC6                                      ;8283A8|22C68E82|828EC6;
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
@@ -488,7 +488,7 @@ fNextDayHandler:
     SEP #$20                                                   ;8283F3|E220    |      ;
     LDA.L nShippingProfit+2                                    ;8283F5|AF091F7F|7F1F09;
     STA.B ptrUnknown0x72+2                                     ;8283F9|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;8283FB|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;8283FB|22C9B183|83B1C9;
     REP #$20                                                   ;8283FF|C220    |      ;
     LDA.W #$0000                                               ;828401|A90000  |      ;
     STA.L nShippingProfit                                      ;828404|8F071F7F|7F1F07; zero profit
@@ -778,7 +778,7 @@ fNextDayHandler:
     LDA.B #$00                                                 ;828708|A900    |      ;
     XBA                                                        ;82870A|EB      |      ;
     LDA.W $098E                                                ;82870B|AD8E09  |00098E;
-    JSL.L fUnknown_83B68E                                      ;82870E|228EB683|83B68E;
+    JSL.L fEngineSaveGame                                      ;82870E|228EB683|83B68E;
  
   + REP #$20                                                   ;828712|C220    |      ;
     LDA.W $0124                                                ;828714|AD2401  |000124;
@@ -1040,7 +1040,7 @@ fUnknown_828790:
     STA.L $7F1F6E                                              ;828949|8F6E1F7F|7F1F6E;
     REP #$20                                                   ;82894D|C220    |      ;
     LDA.W #$0032                                               ;82894F|A93200  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;828952|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;828952|2282B283|83B282;
     BRA .return                                                ;828956|807D    |8289D5;
  
  
@@ -1076,7 +1076,7 @@ fUnknown_828790:
     STA.L $7F1F6E                                              ;8289A0|8F6E1F7F|7F1F6E;
     REP #$20                                                   ;8289A4|C220    |      ;
     LDA.W #$0064                                               ;8289A6|A96400  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;8289A9|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;8289A9|2282B283|83B282;
     BRA .return                                                ;8289AD|8026    |8289D5;
  
  
@@ -2293,7 +2293,7 @@ subToolUsed82A5C3_Sickle:
 .label3:
     REP #$20                                                   ;829374|C220    |      ;
     LDA.W #$0001                                               ;829376|A90100  |      ;
-    JSL.L fUnknown_83B253                                      ;829379|2253B283|83B253;
+    JSL.L fEngineAddFeed                                       ;829379|2253B283|83B253;
     REP #$20                                                   ;82937D|C220    |      ;
     LDA.W $092E                                                ;82937F|AD2E09  |00092E;
     DEC A                                                      ;829382|3A      |      ;
@@ -2370,7 +2370,7 @@ subToolUsed82A5C3_Sickle:
     JSL.L fUnknown_8480F8                                      ;829436|22F88084|8480F8;
     REP #$30                                                   ;82943A|C230    |      ;
     LDA.W #$0002                                               ;82943C|A90200  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;82943F|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;82943F|2282B283|83B282;
     REP #$20                                                   ;829443|C220    |      ;
     LDA.L $7F1F5A                                              ;829445|AF5A1F7F|7F1F5A;
     ORA.W #$2000                                               ;829449|090020  |      ;
@@ -2453,7 +2453,7 @@ subToolUsed82A5C3_Plow:
     SEP #$20                                                   ;829504|E220    |      ;
     LDA.B #$00                                                 ;829506|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829508|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;82950A|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;82950A|22C9B183|83B1C9;
     JMP.W .return                                              ;82950E|4CB095  |8295B0;
  
  
@@ -2477,7 +2477,7 @@ subToolUsed82A5C3_Plow:
     SEP #$20                                                   ;82953E|E220    |      ;
     LDA.B #$00                                                 ;829540|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829542|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;829544|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;829544|22C9B183|83B1C9;
     BRA .return                                                ;829548|8066    |8295B0;
  
  
@@ -2923,7 +2923,7 @@ subToolUsed82A5C3_Axe:
     JSL.L fUnknown_81A500                                      ;829909|2200A581|81A500;
     REP #$20                                                   ;82990D|C220    |      ;
     LDA.W #$0006                                               ;82990F|A90600  |      ;
-    JSL.L fUnknown_83B224                                      ;829912|2224B283|83B224;
+    JSL.L fEngineAddWood                                       ;829912|2224B283|83B224;
     BRA .return                                                ;829916|8071    |829989;
  
  
@@ -3306,7 +3306,7 @@ subToolUsed82A5C3_Paint:
  
  
   + LDA.W #$000A                                               ;829BF7|A90A00  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;829BFA|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;829BFA|2282B283|83B282;
     REP #$20                                                   ;829BFE|C220    |      ;
     LDA.W #$0059                                               ;829C00|A95900  |      ;
     LDX.W #$0080                                               ;829C03|A28000  |      ;
@@ -3328,7 +3328,7 @@ subToolUsed82A5C3_Paint:
  
  
   + LDA.W #$000A                                               ;829C2B|A90A00  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;829C2E|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;829C2E|2282B283|83B282;
     REP #$20                                                   ;829C32|C220    |      ;
     LDA.W #$0058                                               ;829C34|A95800  |      ;
     LDX.W #$0060                                               ;829C37|A26000  |      ;
@@ -3347,7 +3347,7 @@ subToolUsed82A5C3_Paint:
     AND.W #$0800                                               ;829C56|290008  |      ;
     BNE .return                                                ;829C59|D055    |829CB0;
     LDA.W #$000A                                               ;829C5B|A90A00  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;829C5E|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;829C5E|2282B283|83B282;
     REP #$20                                                   ;829C62|C220    |      ;
     LDA.W #$005A                                               ;829C64|A95A00  |      ;
     LDX.W #$0090                                               ;829C67|A29000  |      ;
@@ -3366,7 +3366,7 @@ subToolUsed82A5C3_Paint:
     AND.W #$1000                                               ;829C86|290010  |      ;
     BNE .return                                                ;829C89|D025    |829CB0;
     LDA.W #$000A                                               ;829C8B|A90A00  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;829C8E|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;829C8E|2282B283|83B282;
     REP #$20                                                   ;829C92|C220    |      ;
     LDA.W #$005C                                               ;829C94|A95C00  |      ;
     LDX.W #$00B0                                               ;829C97|A2B000  |      ;
@@ -3513,7 +3513,7 @@ subToolUsed82A5C3_GoldenSickle:
 .label3:
     REP #$20                                                   ;829D92|C220    |      ;
     LDA.W #$0001                                               ;829D94|A90100  |      ;
-    JSL.L fUnknown_83B253                                      ;829D97|2253B283|83B253;
+    JSL.L fEngineAddFeed                                       ;829D97|2253B283|83B253;
     REP #$20                                                   ;829D9B|C220    |      ;
     LDA.W $092E                                                ;829D9D|AD2E09  |00092E;
     DEC A                                                      ;829DA0|3A      |      ;
@@ -3590,7 +3590,7 @@ subToolUsed82A5C3_GoldenSickle:
     JSL.L fUnknown_8480F8                                      ;829E54|22F88084|8480F8;
     REP #$30                                                   ;829E58|C230    |      ;
     LDA.W #$0002                                               ;829E5A|A90200  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;829E5D|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;829E5D|2282B283|83B282;
     REP #$20                                                   ;829E61|C220    |      ;
     LDA.L $7F1F5A                                              ;829E63|AF5A1F7F|7F1F5A;
     ORA.W #$2000                                               ;829E67|090020  |      ;
@@ -3685,7 +3685,7 @@ subToolUsed82A5C3_GoldenPlow:
     SEP #$20                                                   ;829F37|E220    |      ;
     LDA.B #$00                                                 ;829F39|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829F3B|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;829F3D|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;829F3D|22C9B183|83B1C9;
     JMP.W .label6                                              ;829F41|4CE39F  |829FE3;
  
  
@@ -3709,7 +3709,7 @@ subToolUsed82A5C3_GoldenPlow:
     SEP #$20                                                   ;829F71|E220    |      ;
     LDA.B #$00                                                 ;829F73|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829F75|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;829F77|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;829F77|22C9B183|83B1C9;
     BRA .label6                                                ;829F7B|8066    |829FE3;
  
  
@@ -4119,7 +4119,7 @@ subToolUsed82A5C3_GoldenAxe:
     JSL.L fUnknown_81A500                                      ;82A2EA|2200A581|81A500;
     REP #$20                                                   ;82A2EE|C220    |      ;
     LDA.W #$0006                                               ;82A2F0|A90600  |      ;
-    JSL.L fUnknown_83B224                                      ;82A2F3|2224B283|83B224;
+    JSL.L fEngineAddWood                                       ;82A2F3|2224B283|83B224;
  
 .return:
     REP #$30                                                   ;82A2F7|C230    |      ;
@@ -8729,7 +8729,7 @@ fUnknown_82DF92:
     LDA.B #$00                                                 ;82E029|A900    |      ;
     XBA                                                        ;82E02B|EB      |      ;
     LDA.W $098E                                                ;82E02C|AD8E09  |00098E;
-    JSL.L fUnknown_83BA45                                      ;82E02F|2245BA83|83BA45;
+    JSL.L fEngineSaveUnknown_83BA45                            ;82E02F|2245BA83|83BA45;
     REP #$30                                                   ;82E033|C230    |      ;
     CPX.W #$0000                                               ;82E035|E00000  |      ;
     BEQ +                                                      ;82E038|F000    |82E03A;
@@ -8838,7 +8838,7 @@ fUnknown_82E0EB:
  
   + REP #$20                                                   ;82E115|C220    |      ;
     LDA.W #$0000                                               ;82E117|A90000  |      ;
-    JSL.L fUnknown_83BA45                                      ;82E11A|2245BA83|83BA45;
+    JSL.L fEngineSaveUnknown_83BA45                            ;82E11A|2245BA83|83BA45;
     REP #$30                                                   ;82E11E|C230    |      ;
     CPX.W #$0000                                               ;82E120|E00000  |      ;
     BEQ +                                                      ;82E123|F002    |82E127;
@@ -8882,7 +8882,7 @@ fUnknown_82E0EB:
 fUnknown_82E16B:
     REP #$20                                                   ;82E16B|C220    |      ;
     LDA.W #$0001                                               ;82E16D|A90100  |      ;
-    JSL.L fUnknown_83BA45                                      ;82E170|2245BA83|83BA45;
+    JSL.L fEngineSaveUnknown_83BA45                            ;82E170|2245BA83|83BA45;
     REP #$30                                                   ;82E174|C230    |      ;
     CPX.W #$0000                                               ;82E176|E00000  |      ;
     BEQ +                                                      ;82E179|F002    |82E17D;
@@ -9202,7 +9202,7 @@ fUnknown_82E405:
     REP #$30                                                   ;82E405|C230    |      ;
     PHA                                                        ;82E407|48      |      ;
     PHY                                                        ;82E408|5A      |      ;
-    JSL.L fUnknown_83BA45                                      ;82E409|2245BA83|83BA45;
+    JSL.L fEngineSaveUnknown_83BA45                            ;82E409|2245BA83|83BA45;
     REP #$30                                                   ;82E40D|C230    |      ;
     PLY                                                        ;82E40F|7A      |      ;
     PLA                                                        ;82E410|68      |      ;
@@ -9576,7 +9576,7 @@ fLoadAndStartGame:
     LDA.B #$00                                                 ;82E7EB|A900    |      ;
     XBA                                                        ;82E7ED|EB      |      ;
     LDA.W $098E                                                ;82E7EE|AD8E09  |00098E;
-    JSL.L fLoadGameMaybe                                       ;82E7F1|22B1B283|83B2B1;
+    JSL.L fEngineLoadGame                                      ;82E7F1|22B1B283|83B2B1;
     JML.L fGameStart                                           ;82E7F5|5C008080|808000;
  
  

@@ -3606,10 +3606,10 @@ subUnknown849419_0x30:
     STA.L $7F1F5A                                              ;849A74|8F5A1F7F|7F1F5A;
     REP #$20                                                   ;849A78|C220    |      ;
     LDA.W #$0032                                               ;849A7A|A93200  |      ;
-    STA.L nUnknown7F1F15                                       ;849A7D|8F151F7F|7F1F15;
+    STA.L nGameUnk7F1F15                                       ;849A7D|8F151F7F|7F1F15;
     SEP #$20                                                   ;849A81|E220    |      ;
     LDA.B #$00                                                 ;849A83|A900    |      ;
-    STA.L nUnknown7F1F15+2                                     ;849A85|8F171F7F|7F1F17;
+    STA.L nGameUnk7F1F15+2                                     ;849A85|8F171F7F|7F1F17;
     SEP #$20                                                   ;849A89|E220    |      ;
     REP #$10                                                   ;849A8B|C210    |      ;
     LDY.W #$003F                                               ;849A8D|A03F00  |      ;
@@ -4208,7 +4208,7 @@ CODE_849E69:
     LDY.W #$0003                                               ;849E95|A00300  |      ;
     LDA.B #$15                                                 ;849E98|A915    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849E9A|9772    |000072;
-    STA.L nUnknown7F1F12                                       ;849E9C|8F121F7F|7F1F12;
+    STA.L nGameUnk7F1F12                                       ;849E9C|8F121F7F|7F1F12;
     SEP #$20                                                   ;849EA0|E220    |      ;
     LDA.L nOwnedCows                                           ;849EA2|AF0A1F7F|7F1F0A;
     INC A                                                      ;849EA6|1A      |      ;
@@ -5116,10 +5116,10 @@ CODE_84A4A6:
     STA.L $7F1F5A                                              ;84A4AD|8F5A1F7F|7F1F5A;
     REP #$20                                                   ;84A4B1|C220    |      ;
     LDA.W #$01F4                                               ;84A4B3|A9F401  |      ;
-    STA.L nUnknown7F1F15                                       ;84A4B6|8F151F7F|7F1F15;
+    STA.L nGameUnk7F1F15                                       ;84A4B6|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4BA|E220    |      ;
     LDA.B #$00                                                 ;84A4BC|A900    |      ;
-    STA.L nUnknown7F1F15+2                                     ;84A4BE|8F171F7F|7F1F17;
+    STA.L nGameUnk7F1F15+2                                     ;84A4BE|8F171F7F|7F1F17;
     SEP #$20                                                   ;84A4C2|E220    |      ;
     LDY.W #$0004                                               ;84A4C4|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84A4C7|B772    |000072;
@@ -5129,20 +5129,20 @@ CODE_84A4A6:
     BCC CODE_84A4E4                                            ;84A4CF|9013    |84A4E4;
     REP #$20                                                   ;84A4D1|C220    |      ;
     LDA.W #$03E8                                               ;84A4D3|A9E803  |      ;
-    STA.L nUnknown7F1F15                                       ;84A4D6|8F151F7F|7F1F15;
+    STA.L nGameUnk7F1F15                                       ;84A4D6|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4DA|E220    |      ;
     LDA.B #$00                                                 ;84A4DC|A900    |      ;
-    STA.L nUnknown7F1F15+2                                     ;84A4DE|8F171F7F|7F1F17;
+    STA.L nGameUnk7F1F15+2                                     ;84A4DE|8F171F7F|7F1F17;
     BRA CODE_84A4F5                                            ;84A4E2|8011    |84A4F5;
  
  
 CODE_84A4E4:
     REP #$20                                                   ;84A4E4|C220    |      ;
     LDA.W #$0320                                               ;84A4E6|A92003  |      ;
-    STA.L nUnknown7F1F15                                       ;84A4E9|8F151F7F|7F1F15;
+    STA.L nGameUnk7F1F15                                       ;84A4E9|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4ED|E220    |      ;
     LDA.B #$00                                                 ;84A4EF|A900    |      ;
-    STA.L nUnknown7F1F15+2                                     ;84A4F1|8F171F7F|7F1F17;
+    STA.L nGameUnk7F1F15+2                                     ;84A4F1|8F171F7F|7F1F17;
  
 CODE_84A4F5:
     SEP #$20                                                   ;84A4F5|E220    |      ;
@@ -7624,7 +7624,7 @@ subUnknown849419_0x42:
     CLC                                                        ;84B648|18      |      ;
     ADC.W #$0001                                               ;84B649|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B64C|85C9    |0000C9;
-    JSL.L fAddProfitToCurrentMoney                             ;84B64E|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;84B64E|22C9B183|83B1C9;
     REP #$20                                                   ;84B652|C220    |      ;
     BEQ CODE_84B665                                            ;84B654|F00F    |84B665;
     LDA.W #$0000                                               ;84B656|A90000  |      ;
@@ -9578,7 +9578,7 @@ CODE_84C3E9:
     LDA.B #$00                                                 ;84C3EB|A900    |      ;
     XBA                                                        ;84C3ED|EB      |      ;
     LDA.W $098E                                                ;84C3EE|AD8E09  |00098E;
-    JSL.L fUnknown_83BA45                                      ;84C3F1|2245BA83|83BA45;
+    JSL.L fEngineSaveUnknown_83BA45                            ;84C3F1|2245BA83|83BA45;
     REP #$30                                                   ;84C3F5|C230    |      ;
     CPX.W #$0000                                               ;84C3F7|E00000  |      ;
     BEQ CODE_84C415                                            ;84C3FA|F019    |84C415;

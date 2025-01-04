@@ -297,8 +297,8 @@
     nStoredWood = $7F1F0C; !^ n16 ^!
     nReqWoodForExpansion = $7F1F0E; !^ n16 ^!
     nStoredFeed = $7F1F10; !^ n16 ^!
-    nUnknown7F1F12 = $7F1F12; !^ n8 ^!
-    nUnknown7F1F15 = $7F1F15; !^ n24 ^!
+    nGameUnk7F1F12 = $7F1F12; !^ n8 ^!
+    nGameUnk7F1F15 = $7F1F15; !^ n24 ^!
     nCurrentYearID = $7F1F18; !^ n8, 00 - 1st Year, 01 - 2nd Year, 03 - 3rd Year ^!
     nCurrentSeasonID = $7F1F19; !^ n8 ^!
     nCurrentWeekdayID = $7F1F1A; !^ n8 ^!
