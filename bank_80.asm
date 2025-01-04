@@ -3237,7 +3237,7 @@ fUnknown_80972C:
     JSL.L fAudioUnknown_83841F                                 ;8099EB|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;8099EF|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;8099F3|22808383|838380;
-    JSL.L fUnknown_828FF3                                      ;8099F7|22F38F82|828FF3;
+    JSL.L fToolSoundUnknown_828FF3                             ;8099F7|22F38F82|828FF3;
     SEP #$20                                                   ;8099FB|E220    |      ;
     LDA.W nAudioUnk110                                         ;8099FD|AD1001  |000110;
     STA.W $0117                                                ;809A00|8D1701  |000117;

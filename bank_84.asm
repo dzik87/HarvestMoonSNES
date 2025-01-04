@@ -3023,7 +3023,7 @@ subUnknown849419_0x2C:
     JSL.L fAudioUnknown_8382FE                                 ;84961B|22FE8283|8382FE;
     SEP #$20                                                   ;84961F|E220    |      ;
     STZ.W $0119                                                ;849621|9C1901  |000119;
-    JSL.L fUnknown_828FF3                                      ;849624|22F38F82|828FF3;
+    JSL.L fToolSoundUnknown_828FF3                             ;849624|22F38F82|828FF3;
     REP #$30                                                   ;849628|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84962A|A5C9    |0000C9;
     CLC                                                        ;84962C|18      |      ;
@@ -5089,7 +5089,7 @@ CODE_84A47C:
     LDY.W #$000C                                               ;84A480|A00C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84A483|B7CC    |0000CC;
     BEQ CODE_84A48A                                            ;84A485|F003    |84A48A;
-    JMP.W CODE_84A607                                          ;84A487|4C07A6  |84A607;
+    JMP.W fUnknown_84A607                                      ;84A487|4C07A6  |84A607;
  
  
 CODE_84A48A:
@@ -5261,31 +5261,31 @@ fUnknown_84A5D4:
     LDA.B n16TempVar2                                          ;84A5E6|A580    |000080;
     CLC                                                        ;84A5E8|18      |      ;
     ADC.B n16TempVar1                                          ;84A5E9|657E    |00007E;
-    BMI CODE_84A5F8                                            ;84A5EB|300B    |84A5F8;
+    BMI .label1                                                ;84A5EB|300B    |84A5F8;
     CMP.W #$0100                                               ;84A5ED|C90001  |      ;
-    BCS CODE_84A600                                            ;84A5F0|B00E    |84A600;
+    BCS .label2                                                ;84A5F0|B00E    |84A600;
     SEP #$20                                                   ;84A5F2|E220    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84A5F4|9772    |000072;
-    BRA CODE_84A606                                            ;84A5F6|800E    |84A606;
+    BRA .return                                                ;84A5F6|800E    |84A606;
  
  
-CODE_84A5F8:
+.label1:
     SEP #$20                                                   ;84A5F8|E220    |      ;
     LDA.B #$00                                                 ;84A5FA|A900    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84A5FC|9772    |000072;
-    BRA CODE_84A606                                            ;84A5FE|8006    |84A606;
+    BRA .return                                                ;84A5FE|8006    |84A606;
  
  
-CODE_84A600:
+.label2:
     SEP #$20                                                   ;84A600|E220    |      ;
     LDA.B #$FF                                                 ;84A602|A9FF    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84A604|9772    |000072;
  
-CODE_84A606:
+.return:
     RTL                                                        ;84A606|6B      |      ;
  
  
-CODE_84A607:
+fUnknown_84A607:
     SEP #$20                                                   ;84A607|E220    |      ;
     REP #$10                                                   ;84A609|C210    |      ;
     LDY.W #$0001                                               ;84A60B|A00100  |      ;

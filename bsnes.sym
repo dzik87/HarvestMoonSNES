@@ -2300,9 +2300,10 @@
 82:8AA2 .nd
 82:8AA9 .rd
 82:8AB0 .loadordinal
-82:8AD9 sSeasonNameTable
-82:8B19 sWeekdayNameTable
-82:8BF9 sDayOrdinalTable
+82:8AC3 aUnused_828AC3
+82:8AD9 aSeasonString
+82:8B19 aWeekdayString
+82:8BF9 aDayOrdinalString
 82:8C09 fWeatherForecast_828C09
 82:8C2F +
 82:8C32 .weatherSunny
@@ -2338,11 +2339,11 @@
 82:8E87 .label7
 82:8EAA .return
 82:8EB1 .justReturn
-82:8EB2 Event_Summer30thDay
-82:8EB6 Event_Unknown1
-82:8EBA Event_Unknown2
-82:8EBE Event_Summer29thDay
-82:8EC2 Event_Winter7thDay
+82:8EB2 .e_Summer30thDay
+82:8EB6 .e_Unknown1
+82:8EBA .e_Unknown2
+82:8EBE .e_Summer29thDay
+82:8EC2 .e_Winter7thDay
 82:8EC6 fUnknown_828EC6
 82:8ED4 .loop
 82:8EE0 +
@@ -2352,9 +2353,9 @@
 82:8F4E .label5
 82:8F6F .label6
 82:8F90 .label7
-82:8FB1 fUnknown_828FB1
+82:8FB1 fToolSoundUnknown_828FB1
 82:8FF2 .return
-82:8FF3 fUnknown_828FF3
+82:8FF3 fToolSoundUnknown_828FF3
 82:9038 +
 82:904B .return
 82:9054 nToolSoundData_829054
@@ -3695,6 +3696,10 @@
 84:9A6D +
 84:9AD4 subUnknown849419_0x31
 84:A5D4 fUnknown_84A5D4
+84:A5F8 .label1
+84:A600 .label2
+84:A606 .return
+84:A607 fUnknown_84A607
 84:A90F subUnknown849419_0x32
 84:A94C subUnknown849419_0x33
 84:AA5D subUnknown849419_0x34
@@ -8611,9 +8616,9 @@ FF:FFFF EMPTY_FFFFFF
 82:81FD 8b
 82:8270 A: nIndex
 82:8298 0x05 * [8b argA, 8b argX, 8b argY, 8b unused]
-82:8AD9 string[16] - for each Season
-82:8B19 string[32] - for each Weekday
-82:8BF9 string[2] - st, nd, rd, th
+82:8AD9 0x04 * [string[16]]
+82:8B19 0x07 * [string[32]]
+82:8BF9 0x04 * [string[2]] - (st, nd, rd, th)
 82:8CED [n16 nSunny, n16 nRainy, n16 nSnowy, n16 nHurricane, n16 nWeather4, n16 nWeather5]
 82:8EB2 Season index based
 82:8EB6 Season index based
