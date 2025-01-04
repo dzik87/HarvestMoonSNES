@@ -7799,7 +7799,7 @@ fUnknown_82D75E:
     REP #$20                                                   ;82D804|C220    |      ;
     STZ.B $90                                                  ;82D806|6490    |000090;
     LDA.W #$0001                                               ;82D808|A90100  |      ;
-    STA.B $AF                                                  ;82D80B|85AF    |0000AF;
+    STA.B ptrUnkown0xAD+2                                      ;82D80B|85AF    |0000AF;
  
 fUnknown_82D80D:
     SEP #$20                                                   ;82D80D|E220    |      ;

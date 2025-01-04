@@ -1022,7 +1022,7 @@ fUnused_8088C3:
     STA.W SNES_A1T4H                                           ;808942|8D4343  |004343;
     LDA.B #$7E                                                 ;808945|A97E    |      ;
     STA.W SNES_A1B4                                            ;808947|8D4443  |004344;
-    LDX.B $AF                                                  ;80894A|A6AF    |0000AF;
+    LDX.B ptrUnkown0xAD+2                                      ;80894A|A6AF    |0000AF;
     STX.W SNES_DAS4L                                           ;80894C|8E4543  |004345;
     LDA.B #$10                                                 ;80894F|A910    |      ;
     STA.W SNES_MDMAEN                                          ;808951|8D0B42  |00420B;
@@ -1139,19 +1139,19 @@ fRollRNG:
  
  
 fSystemTransferData:
-    REP #$30                                                   ;808A33|C230    |      ; A: nArg1, X: nArg2
-    PHA                                                        ;808A35|48      |      ;
+    REP #$30                                                   ;808A33|C230    |      ; A: nArg1, X: nArg2, $72: ptr24
+    PHA                                                        ;808A35|48      |      ; A -> stack1
     TXA                                                        ;808A36|8A      |      ;
-    PHA                                                        ;808A37|48      |      ;
+    PHA                                                        ;808A37|48      |      ; X -> stack2
     SEP #$20                                                   ;808A38|E220    |      ;
     LDA.B #$00                                                 ;808A3A|A900    |      ;
-    XBA                                                        ;808A3C|EB      |      ;
+    XBA                                                        ;808A3C|EB      |      ; B = 0x00
     LDA.B $27                                                  ;808A3D|A527    |000027;
     ASL A                                                      ;808A3F|0A      |      ;
     TAX                                                        ;808A40|AA      |      ;
     REP #$20                                                   ;808A41|C220    |      ;
     PLA                                                        ;808A43|68      |      ;
-    STA.B $32,X                                                ;808A44|9532    |000032;
+    STA.B $32,X                                                ;808A44|9532    |000032; X = $27 * 2
     TXA                                                        ;808A46|8A      |      ;
     LSR A                                                      ;808A47|4A      |      ;
     TAX                                                        ;808A48|AA      |      ;

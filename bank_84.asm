@@ -9844,7 +9844,7 @@ CODE_84C5B4:
     REP #$20                                                   ;84C5B4|C220    |      ;
     ASL A                                                      ;84C5B6|0A      |      ;
     TAX                                                        ;84C5B7|AA      |      ;
-    LDA.L Table_839467,X                                       ;84C5B8|BF679483|839467;
+    LDA.L aDialogPointerIndexes_839467,X                       ;84C5B8|BF679483|839467;
     TAX                                                        ;84C5BC|AA      |      ;
     SEP #$20                                                   ;84C5BD|E220    |      ;
     LDA.B #$00                                                 ;84C5BF|A900    |      ;
@@ -11301,9 +11301,9 @@ CODE_84CF62:
 CODE_84CF6D:
     JSL.L fUnknown_83932D                                      ;84CF6D|222D9383|83932D;
     REP #$20                                                   ;84CF71|C220    |      ;
-    LDA.W $0187                                                ;84CF73|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;84CF73|AD8701  |000187;
     INC A                                                      ;84CF76|1A      |      ;
-    STA.W $0187                                                ;84CF77|8D8701  |000187;
+    STA.W nCurrentTextIndex                                    ;84CF77|8D8701  |000187;
     LDA.W #$5000                                               ;84CF7A|A90050  |      ;
     CLC                                                        ;84CF7D|18      |      ;
     ADC.W #$0010                                               ;84CF7E|691000  |      ;

@@ -20,6 +20,11 @@
 00:0077 ptrUnknown0x75+2
 00:0078 ptrUnknown0x78
 00:007A ptrUnknown0x78+2
+00:00AD ptrUnkown0xAD
+00:00AE ptrUnkown0xAD+1
+00:00AF ptrUnkown0xAD+2
+00:00B3 ptrBank86_87Data
+00:00B5 ptrBank86_87Data+2
 00:00C9 ptrUnknown0xC9
 00:00CB ptrUnknown0xC9+2
 00:00CC ptrUnknown0xCC
@@ -35,7 +40,8 @@
 00:017F nDestinationY
 00:0181 nCurrentMapdata0181
 00:0182 nCurrentMapdata0182
-00:0183 nDialogIndex
+00:0183 nCurrentDialogPointerIndex
+00:0187 nCurrentTextIndex
 00:0195 nCurrentMapdataPresetId
 00:0196 nCurrentMapdata0196
 00:0881 sPlayerNameShort
@@ -2950,48 +2956,65 @@
 83:935F fLoadDialog
 83:93C5 +
 83:93F9 fUnknown_8393F9
+83:9447 fUnknown_839447
 83:944D Table_83944D
-83:9467 Table_839467
-83:947D Table_83947D
+83:9457 aUnknown_839457
+83:945F aUnknown_83945F
+83:9467 aDialogPointerIndexes_839467
+83:947D aUnknown_83947D
 83:9495 fUnknown_839495
+83:94B0 +
+83:94C4 +
+83:94CD .return
 83:94D7 fUnknown_8394D7
+83:94EA +
+83:950A +
+83:9517 .return
 83:951C fReadText
-83:952A .label1
-83:9534 .label2
-83:954F .not00A2
-83:9557 .not00B1
-83:955F .notFFFC
-83:9567 .notFFFE
-83:956F .notFFFF
+83:952A +
+83:9534 .getCurrentLetter
+83:954F +
+83:9557 +
+83:955F +
+83:9567 +
+83:956F +
 83:9587 .notFFFD
 83:959D .label4
 83:95A4 .label5
 83:95C9 .label12
 83:95D9 .label6
-83:95E7 .label3
-83:95F0 .return
+83:95E7 .return
+83:95F0 .justReturn
 83:95F1 .textNextScreenHandler
 83:960D .textSpaceHandler
 83:9621 .textFFFCHandler
-83:966E .label8
+83:966E -
 83:967A .label7
-83:969E .label9
+83:969E +
 83:96A1 .textFFFDHandler
-83:96BC .label10
-83:9716 .label11
+83:96BC +
+83:9716 +
 83:9719 .textFFFEHandler
 83:9752 .textFFFFHandler
-83:975F fUnknownText_83975F
+83:975F fTextNextScreenHandler_83975F
+83:977A +
+83:9790 .noSign
+83:979C .return
 83:97A6 fUnknown_8397A6
+83:97CB -
+83:97E5 +
+83:9810 +
+83:9822 .return
 83:9823 fSystemTransferGlyph
 83:9838 fUnknownText_839838
+83:9861 .return
 83:9862 fGetGlyphPointer
 83:98AE psFontGlyphs
 83:98CC nTextFFFETable
 83:98D6 pTextAmmountTable
 83:98EE sTextFFFCPointerTable
 83:9AAE sTextFFFDPointerTable
-83:9BF6 psDialog
+83:9BF6 ptrDialog
 83:A9BE fSetDefaultValuesForVariables
 83:ABF0 fUnknown_83ABF0
 83:AD91 fUnknown_83AD91
@@ -3443,7 +3466,7 @@
 85:8EEA -
 85:8F0E -
 85:8F20 Padding_850000
-86:8000 Data_868000
+86:8000 aMultiplicantValue_868000
 86:8080 pTable_868080
 86:E140 Padding_860000
 87:8000 Data_878000
@@ -7569,8 +7592,6 @@ BB:BDF8 Padding_BB0000
 87:B899 DATA8_87B899
 87:B89F DATA8_87B89F
 98:9680 GFX_989680
-A3:E210 GFX_A3E210
-A3:F810 GFX_A3F810
 B3:8CC8 DATA8_B38CC8
 B3:8CD0 DATA8_B38CD0
 B3:8CDE DATA8_B38CDE
@@ -7956,6 +7977,8 @@ FF:FFFF EMPTY_FFFFFF
 00:0072 ptr24
 00:0075 ptr24
 00:0078 ptr24
+00:00AD ptr24
+00:00B3 ptr24
 00:00C9 ptr24
 00:00CC prt24
 00:00CF ptr24
@@ -7968,7 +7991,8 @@ FF:FFFF EMPTY_FFFFFF
 00:017F n16 (used when we change map)
 00:0181 n8 (offset 0x03)
 00:0182 n8 (offset 0x04)
-00:0183 n16, Current dialog index
+00:0183 n16, ptrDialog index
+00:0187 n16, ptrCurrentDialog index (to get one letter)
 00:0195 n8 (oofset 0x00)
 00:0196 n16 (offset 0x01)
 00:0881 4 * s8
@@ -8112,7 +8136,7 @@ FF:FFFF EMPTY_FFFFFF
 80:880A $92: nStartBrightness, $93: nFramesPerStep, $94: nTargetBrighntess
 80:89BC A: nOffset
 80:89F9 A: nMaxValue, return nResult A
-80:8A33 A: nArg1, X: nArg2
+80:8A33 A: nArg1, X: nArg2, $72: ptr24
 80:8E2D A: nBrightness
 80:8E48 A: nValue1, X nIndex, Y: nValue2, Y, $72: ptr24
 80:8F82 A: nIndex
@@ -8220,9 +8244,12 @@ FF:FFFF EMPTY_FFFFFF
 82:EBF8 0x47 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
 82:EE30 0x54 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
 82:F0D0 0x31 * [n8 nPosX, n8 nPosY, n8?, n8?, n8, n8?, n8?, n8?]
-83:8F83 0x1A * [ptr24, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
-83:90EF 0x28 * [n8, n8, n8, n8, n8, n8, n8, ptr24]
-83:935F X: nDialogIndex
+83:81B7 X: nArg1, $72: ptr24
+83:8F83 0x1A * [ptr24 pAudioTrack, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
+83:90EF 0x28 * [n8, n8, n8, n8, n8, n8, n8, ptr24 pAudioTrack]
+83:935F X: nDialogPointerIndex
+83:9467 0x0B * [n16 nDialogPointerIndex]
+83:975F A: nArg
 83:9823 A: nLetterCode
 83:9862 A: nLetterCode, return $72: ptr24 pGlyph
 83:98AE 0x0A * [ptr24]
@@ -8248,6 +8275,7 @@ FF:FFFF EMPTY_FFFFFF
 85:8E47 0x08 * [n16]
 85:8EEA loop
 85:8F0E loop
+86:8000 0x40 * [n16 nMiltiplicant]
 94:9843 Each glyph is 0x10 long
 A4:8000 Rain overlay
 A4:C3E2 Clouds overlay
@@ -8256,3 +8284,7 @@ A5:C955 Snow overlay
 A5:D94A HarvestMoon logo
 A5:DE84 Natsume logo
 81:BA3E FFFF ends, FFFE followed by ptr24 (loops)
+86:A4B9 0x00
+86:A4DA 0x01
+86:A4FB 0x02
+87:99CC 0x01

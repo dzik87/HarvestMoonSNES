@@ -9,6 +9,8 @@
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
     ptrUnknown0x75 = $000075; !^ ptr24 ^!
     ptrUnknown0x78 = $000078; !^ ptr24 ^!
+    ptrUnkown0xAD = $0000AD; !^ ptr24 ^!
+    ptrBank86_87Data = $0000B3; !^ ptr24 ^!
     ptrUnknown0xC9 = $0000C9; !^ ptr24 ^!
     ptrUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
@@ -21,7 +23,8 @@
     nDestinationY = $00017F; !^ n16 (used when we change map) ^!
     nCurrentMapdata0181 = $000181; !^ n8 (offset 0x03) ^!
     nCurrentMapdata0182 = $000182; !^ n8 (offset 0x04) ^!
-    nDialogIndex = $000183; !^ n16, Current dialog index ^!
+    nCurrentDialogPointerIndex = $000183; !^ n16, ptrDialog index ^!
+    nCurrentTextIndex = $000187; !^ n16, ptrCurrentDialog index (to get one letter) ^!
     nCurrentMapdataPresetId = $000195; !^ n8 (oofset 0x00) ^!
     nCurrentMapdata0196 = $000196; !^ n16 (offset 0x01) ^!
     sPlayerNameShort = $000881; !^ 4 * s8 ^!
