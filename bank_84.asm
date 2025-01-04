@@ -42,8 +42,8 @@ fUnknown_84803F:
     REP #$30                                                   ;84803F|C230    |      ;
     JSL.L fUnknown_84887C                                      ;848041|227C8884|84887C;
     REP #$30                                                   ;848045|C230    |      ;
-    STX.B nTempVar1                                            ;848047|867E    |00007E;
-    STY.B $80                                                  ;848049|8480    |000080;
+    STX.B n16TempVar1                                          ;848047|867E    |00007E;
+    STY.B n16TempVar2                                          ;848049|8480    |000080;
     LDX.W #$0000                                               ;84804B|A20000  |      ;
     LDA.L pppTable_8494CD,X                                    ;84804E|BFCD9484|8494CD;
     STA.B ptrUnknown0x75                                       ;848052|8575    |000075;
@@ -53,10 +53,10 @@ fUnknown_84803F:
     LDA.L pppTable_8494CD,X                                    ;848058|BFCD9484|8494CD;
     STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077;
     REP #$20                                                   ;84805E|C220    |      ;
-    LDA.B nTempVar1                                            ;848060|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;848060|A57E    |00007E;
     ASL A                                                      ;848062|0A      |      ;
     CLC                                                        ;848063|18      |      ;
-    ADC.B nTempVar1                                            ;848064|657E    |00007E;
+    ADC.B n16TempVar1                                          ;848064|657E    |00007E;
     TAY                                                        ;848066|A8      |      ;
     LDA.B [ptrUnknown0x75],Y                                   ;848067|B775    |000075;
     STA.B ptrUnknown0x78                                       ;848069|8578    |000078;
@@ -66,7 +66,7 @@ fUnknown_84803F:
     LDA.B [ptrUnknown0x75],Y                                   ;84806F|B775    |000075;
     STA.B ptrUnknown0x78+2                                     ;848071|857A    |00007A;
     REP #$20                                                   ;848073|C220    |      ;
-    LDA.B $80                                                  ;848075|A580    |000080;
+    LDA.B n16TempVar2                                          ;848075|A580    |000080;
     ASL A                                                      ;848077|0A      |      ;
     TAY                                                        ;848078|A8      |      ;
     LDA.B [ptrUnknown0x78],Y                                   ;848079|B778    |000078;
@@ -90,8 +90,8 @@ fUnknown_848097:
     PHA                                                        ;848099|48      |      ;
     JSL.L fUnknown_84887C                                      ;84809A|227C8884|84887C;
     REP #$30                                                   ;84809E|C230    |      ;
-    STX.B nTempVar1                                            ;8480A0|867E    |00007E;
-    STY.B $80                                                  ;8480A2|8480    |000080;
+    STX.B n16TempVar1                                          ;8480A0|867E    |00007E;
+    STY.B n16TempVar2                                          ;8480A2|8480    |000080;
     LDX.W #$0000                                               ;8480A4|A20000  |      ;
     LDA.L pppTable_8494CD,X                                    ;8480A7|BFCD9484|8494CD;
     STA.B ptrUnknown0x72                                       ;8480AB|8572    |000072;
@@ -101,10 +101,10 @@ fUnknown_848097:
     LDA.L pppTable_8494CD,X                                    ;8480B1|BFCD9484|8494CD;
     STA.B ptrUnknown0x72+2                                     ;8480B5|8574    |000074;
     REP #$20                                                   ;8480B7|C220    |      ;
-    LDA.B nTempVar1                                            ;8480B9|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;8480B9|A57E    |00007E;
     ASL A                                                      ;8480BB|0A      |      ;
     CLC                                                        ;8480BC|18      |      ;
-    ADC.B nTempVar1                                            ;8480BD|657E    |00007E;
+    ADC.B n16TempVar1                                          ;8480BD|657E    |00007E;
     TAY                                                        ;8480BF|A8      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;8480C0|B772    |000072;
     STA.B ptrUnknown0xC9                                       ;8480C2|85C9    |0000C9;
@@ -114,7 +114,7 @@ fUnknown_848097:
     LDA.B [ptrUnknown0x72],Y                                   ;8480C8|B772    |000072;
     STA.B ptrUnknown0xC9+2                                     ;8480CA|85CB    |0000CB;
     REP #$20                                                   ;8480CC|C220    |      ;
-    LDA.B $80                                                  ;8480CE|A580    |000080;
+    LDA.B n16TempVar2                                          ;8480CE|A580    |000080;
     ASL A                                                      ;8480D0|0A      |      ;
     TAY                                                        ;8480D1|A8      |      ;
     LDA.B [ptrUnknown0xC9],Y                                   ;8480D2|B7C9    |0000C9;
@@ -142,8 +142,8 @@ fUnknown_8480F8:
     PHA                                                        ;8480FA|48      |      ;
     JSL.L fUnknown_84887C                                      ;8480FB|227C8884|84887C;
     REP #$30                                                   ;8480FF|C230    |      ;
-    STX.B nTempVar1                                            ;848101|867E    |00007E;
-    STY.B $80                                                  ;848103|8480    |000080;
+    STX.B n16TempVar1                                          ;848101|867E    |00007E;
+    STY.B n16TempVar2                                          ;848103|8480    |000080;
     LDX.W #$0000                                               ;848105|A20000  |      ;
     LDA.L pppTable_8494CD,X                                    ;848108|BFCD9484|8494CD;
     STA.B ptrUnknown0x72                                       ;84810C|8572    |000072;
@@ -153,10 +153,10 @@ fUnknown_8480F8:
     LDA.L pppTable_8494CD,X                                    ;848112|BFCD9484|8494CD;
     STA.B ptrUnknown0x72+2                                     ;848116|8574    |000074;
     REP #$20                                                   ;848118|C220    |      ;
-    LDA.B nTempVar1                                            ;84811A|A57E    |00007E;
+    LDA.B n16TempVar1                                          ;84811A|A57E    |00007E;
     ASL A                                                      ;84811C|0A      |      ;
     CLC                                                        ;84811D|18      |      ;
-    ADC.B nTempVar1                                            ;84811E|657E    |00007E;
+    ADC.B n16TempVar1                                          ;84811E|657E    |00007E;
     TAY                                                        ;848120|A8      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;848121|B772    |000072;
     STA.B ptrUnknown0xC9                                       ;848123|85C9    |0000C9;
@@ -166,7 +166,7 @@ fUnknown_8480F8:
     LDA.B [ptrUnknown0x72],Y                                   ;848129|B772    |000072;
     STA.B ptrUnknown0xC9+2                                     ;84812B|85CB    |0000CB;
     REP #$20                                                   ;84812D|C220    |      ;
-    LDA.B $80                                                  ;84812F|A580    |000080;
+    LDA.B n16TempVar2                                          ;84812F|A580    |000080;
     ASL A                                                      ;848131|0A      |      ;
     TAY                                                        ;848132|A8      |      ;
     LDA.B [ptrUnknown0xC9],Y                                   ;848133|B7C9    |0000C9;
@@ -219,7 +219,7 @@ fUnknown_84816F:
     JMP.W .return                                              ;84818D|4C1A82  |84821A;
  
  
-  + JSL.L fRNG                                                 ;848190|22388183|838138;
+  + JSL.L fGetRandomNumber_838138                              ;848190|22388183|838138;
     SEP #$20                                                   ;848194|E220    |      ;
     STA.B $DE                                                  ;848196|85DE    |0000DE;
     REP #$20                                                   ;848198|C220    |      ;
@@ -400,11 +400,11 @@ fUnknown_848286:
     REP #$30                                                   ;8482F0|C230    |      ;
     LDY.W #$0016                                               ;8482F2|A01600  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8482F5|B7CC    |0000CC;
-    STA.B nTempVar1                                            ;8482F7|857E    |00007E;
+    STA.B n16TempVar1                                          ;8482F7|857E    |00007E;
     REP #$30                                                   ;8482F9|C230    |      ;
     LDY.W #$0018                                               ;8482FB|A01800  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8482FE|B7CC    |0000CC;
-    CMP.B nTempVar1                                            ;848300|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;848300|C57E    |00007E;
     BEQ .return                                                ;848302|F00A    |84830E;
     JSL.L fUnknown_858100                                      ;848304|22008185|858100;
     BRA .return                                                ;848308|8004    |84830E;
@@ -482,7 +482,7 @@ fUnknown_848331:
  
 .label1:
     REP #$20                                                   ;84838B|C220    |      ;
-    STA.B nTempVar1                                            ;84838D|857E    |00007E;
+    STA.B n16TempVar1                                          ;84838D|857E    |00007E;
     LDA.W #$0000                                               ;84838F|A90000  |      ;
     SEP #$20                                                   ;848392|E220    |      ;
     REP #$10                                                   ;848394|C210    |      ;
@@ -499,12 +499,12 @@ fUnknown_848331:
  
 .label2:
     REP #$20                                                   ;8483A5|C220    |      ;
-    STA.B $80                                                  ;8483A7|8580    |000080;
+    STA.B n16TempVar2                                          ;8483A7|8580    |000080;
     REP #$30                                                   ;8483A9|C230    |      ;
     LDY.W #$001A                                               ;8483AB|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8483AE|B7CC    |0000CC;
     CLC                                                        ;8483B0|18      |      ;
-    ADC.B nTempVar1                                            ;8483B1|657E    |00007E;
+    ADC.B n16TempVar1                                          ;8483B1|657E    |00007E;
     REP #$30                                                   ;8483B3|C230    |      ;
     LDY.W #$001A                                               ;8483B5|A01A00  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;8483B8|97CC    |0000CC;
@@ -512,7 +512,7 @@ fUnknown_848331:
     LDY.W #$001C                                               ;8483BC|A01C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8483BF|B7CC    |0000CC;
     CLC                                                        ;8483C1|18      |      ;
-    ADC.B $80                                                  ;8483C2|6580    |000080;
+    ADC.B n16TempVar2                                          ;8483C2|6580    |000080;
     REP #$30                                                   ;8483C4|C230    |      ;
     LDY.W #$001C                                               ;8483C6|A01C00  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;8483C9|97CC    |0000CC;
@@ -629,17 +629,17 @@ fUnknown_8483CC:
     LDY.W #$000A                                               ;848479|A00A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84847C|B7CC    |0000CC;
     REP #$20                                                   ;84847E|C220    |      ;
-    STA.B nTempVar1                                            ;848480|857E    |00007E;
+    STA.B n16TempVar1                                          ;848480|857E    |00007E;
     REP #$30                                                   ;848482|C230    |      ;
     LDY.W #$001C                                               ;848484|A01C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848487|B7CC    |0000CC;
-    STA.B $80                                                  ;848489|8580    |000080;
+    STA.B n16TempVar2                                          ;848489|8580    |000080;
     REP #$30                                                   ;84848B|C230    |      ;
     LDY.W #$0020                                               ;84848D|A02000  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848490|B7CC    |0000CC;
     CLC                                                        ;848492|18      |      ;
-    ADC.B nTempVar1                                            ;848493|657E    |00007E;
-    CMP.B $80                                                  ;848495|C580    |000080;
+    ADC.B n16TempVar1                                          ;848493|657E    |00007E;
+    CMP.B n16TempVar2                                          ;848495|C580    |000080;
     BCS +                                                      ;848497|B003    |84849C;
     JMP.W .label11                                             ;848499|4CB386  |8486B3;
  
@@ -655,17 +655,17 @@ fUnknown_8483CC:
     LDY.W #$000A                                               ;8484A8|A00A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8484AB|B7CC    |0000CC;
     REP #$20                                                   ;8484AD|C220    |      ;
-    STA.B nTempVar1                                            ;8484AF|857E    |00007E;
+    STA.B n16TempVar1                                          ;8484AF|857E    |00007E;
     REP #$30                                                   ;8484B1|C230    |      ;
     LDY.W #$001C                                               ;8484B3|A01C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8484B6|B7CC    |0000CC;
-    STA.B $80                                                  ;8484B8|8580    |000080;
+    STA.B n16TempVar2                                          ;8484B8|8580    |000080;
     REP #$30                                                   ;8484BA|C230    |      ;
     LDY.W #$0020                                               ;8484BC|A02000  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8484BF|B7CC    |0000CC;
     SEC                                                        ;8484C1|38      |      ;
-    SBC.B nTempVar1                                            ;8484C2|E57E    |00007E;
-    CMP.B $80                                                  ;8484C4|C580    |000080;
+    SBC.B n16TempVar1                                          ;8484C2|E57E    |00007E;
+    CMP.B n16TempVar2                                          ;8484C4|C580    |000080;
     BCC +                                                      ;8484C6|9003    |8484CB;
     JMP.W .label11                                             ;8484C8|4CB386  |8486B3;
  
@@ -681,17 +681,17 @@ fUnknown_8483CC:
     LDY.W #$0009                                               ;8484D7|A00900  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8484DA|B7CC    |0000CC;
     REP #$20                                                   ;8484DC|C220    |      ;
-    STA.B nTempVar1                                            ;8484DE|857E    |00007E;
+    STA.B n16TempVar1                                          ;8484DE|857E    |00007E;
     REP #$30                                                   ;8484E0|C230    |      ;
     LDY.W #$001A                                               ;8484E2|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8484E5|B7CC    |0000CC;
-    STA.B $80                                                  ;8484E7|8580    |000080;
+    STA.B n16TempVar2                                          ;8484E7|8580    |000080;
     REP #$30                                                   ;8484E9|C230    |      ;
     LDY.W #$001E                                               ;8484EB|A01E00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8484EE|B7CC    |0000CC;
     CLC                                                        ;8484F0|18      |      ;
-    ADC.B nTempVar1                                            ;8484F1|657E    |00007E;
-    CMP.B $80                                                  ;8484F3|C580    |000080;
+    ADC.B n16TempVar1                                          ;8484F1|657E    |00007E;
+    CMP.B n16TempVar2                                          ;8484F3|C580    |000080;
     BCS +                                                      ;8484F5|B003    |8484FA;
     JMP.W .label11                                             ;8484F7|4CB386  |8486B3;
  
@@ -707,17 +707,17 @@ fUnknown_8483CC:
     LDY.W #$0009                                               ;848506|A00900  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848509|B7CC    |0000CC;
     REP #$20                                                   ;84850B|C220    |      ;
-    STA.B nTempVar1                                            ;84850D|857E    |00007E;
+    STA.B n16TempVar1                                          ;84850D|857E    |00007E;
     REP #$30                                                   ;84850F|C230    |      ;
     LDY.W #$001A                                               ;848511|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848514|B7CC    |0000CC;
-    STA.B $80                                                  ;848516|8580    |000080;
+    STA.B n16TempVar2                                          ;848516|8580    |000080;
     REP #$30                                                   ;848518|C230    |      ;
     LDY.W #$001E                                               ;84851A|A01E00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84851D|B7CC    |0000CC;
     SEC                                                        ;84851F|38      |      ;
-    SBC.B nTempVar1                                            ;848520|E57E    |00007E;
-    CMP.B $80                                                  ;848522|C580    |000080;
+    SBC.B n16TempVar1                                          ;848520|E57E    |00007E;
+    CMP.B n16TempVar2                                          ;848522|C580    |000080;
     BCC +                                                      ;848524|9003    |848529;
     JMP.W .label11                                             ;848526|4CB386  |8486B3;
  
@@ -739,17 +739,17 @@ fUnknown_8483CC:
     LDY.W #$000A                                               ;848542|A00A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848545|B7CC    |0000CC;
     REP #$20                                                   ;848547|C220    |      ;
-    STA.B nTempVar1                                            ;848549|857E    |00007E;
+    STA.B n16TempVar1                                          ;848549|857E    |00007E;
     REP #$30                                                   ;84854B|C230    |      ;
     LDY.W #$001C                                               ;84854D|A01C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848550|B7CC    |0000CC;
-    STA.B $80                                                  ;848552|8580    |000080;
+    STA.B n16TempVar2                                          ;848552|8580    |000080;
     REP #$30                                                   ;848554|C230    |      ;
     LDY.W #$0020                                               ;848556|A02000  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848559|B7CC    |0000CC;
     CLC                                                        ;84855B|18      |      ;
-    ADC.B nTempVar1                                            ;84855C|657E    |00007E;
-    CMP.B $80                                                  ;84855E|C580    |000080;
+    ADC.B n16TempVar1                                          ;84855C|657E    |00007E;
+    CMP.B n16TempVar2                                          ;84855E|C580    |000080;
     BCS .label7                                                ;848560|B003    |848565;
     JMP.W .label11                                             ;848562|4CB386  |8486B3;
  
@@ -788,17 +788,17 @@ fUnknown_8483CC:
     LDY.W #$000A                                               ;8485A4|A00A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8485A7|B7CC    |0000CC;
     REP #$20                                                   ;8485A9|C220    |      ;
-    STA.B nTempVar1                                            ;8485AB|857E    |00007E;
+    STA.B n16TempVar1                                          ;8485AB|857E    |00007E;
     REP #$30                                                   ;8485AD|C230    |      ;
     LDY.W #$001C                                               ;8485AF|A01C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8485B2|B7CC    |0000CC;
-    STA.B $80                                                  ;8485B4|8580    |000080;
+    STA.B n16TempVar2                                          ;8485B4|8580    |000080;
     REP #$30                                                   ;8485B6|C230    |      ;
     LDY.W #$0020                                               ;8485B8|A02000  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8485BB|B7CC    |0000CC;
     SEC                                                        ;8485BD|38      |      ;
-    SBC.B nTempVar1                                            ;8485BE|E57E    |00007E;
-    CMP.B $80                                                  ;8485C0|C580    |000080;
+    SBC.B n16TempVar1                                          ;8485BE|E57E    |00007E;
+    CMP.B n16TempVar2                                          ;8485C0|C580    |000080;
     BCC .label8                                                ;8485C2|9003    |8485C7;
     JMP.W .label11                                             ;8485C4|4CB386  |8486B3;
  
@@ -837,17 +837,17 @@ fUnknown_8483CC:
     LDY.W #$0009                                               ;848606|A00900  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848609|B7CC    |0000CC;
     REP #$20                                                   ;84860B|C220    |      ;
-    STA.B nTempVar1                                            ;84860D|857E    |00007E;
+    STA.B n16TempVar1                                          ;84860D|857E    |00007E;
     REP #$30                                                   ;84860F|C230    |      ;
     LDY.W #$001A                                               ;848611|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848614|B7CC    |0000CC;
-    STA.B $80                                                  ;848616|8580    |000080;
+    STA.B n16TempVar2                                          ;848616|8580    |000080;
     REP #$30                                                   ;848618|C230    |      ;
     LDY.W #$001E                                               ;84861A|A01E00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84861D|B7CC    |0000CC;
     CLC                                                        ;84861F|18      |      ;
-    ADC.B nTempVar1                                            ;848620|657E    |00007E;
-    CMP.B $80                                                  ;848622|C580    |000080;
+    ADC.B n16TempVar1                                          ;848620|657E    |00007E;
+    CMP.B n16TempVar2                                          ;848622|C580    |000080;
     BCS .label9                                                ;848624|B003    |848629;
     JMP.W .label11                                             ;848626|4CB386  |8486B3;
  
@@ -886,17 +886,17 @@ fUnknown_8483CC:
     LDY.W #$0009                                               ;848668|A00900  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84866B|B7CC    |0000CC;
     REP #$20                                                   ;84866D|C220    |      ;
-    STA.B nTempVar1                                            ;84866F|857E    |00007E;
+    STA.B n16TempVar1                                          ;84866F|857E    |00007E;
     REP #$30                                                   ;848671|C230    |      ;
     LDY.W #$001A                                               ;848673|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848676|B7CC    |0000CC;
-    STA.B $80                                                  ;848678|8580    |000080;
+    STA.B n16TempVar2                                          ;848678|8580    |000080;
     REP #$30                                                   ;84867A|C230    |      ;
     LDY.W #$001E                                               ;84867C|A01E00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84867F|B7CC    |0000CC;
     SEC                                                        ;848681|38      |      ;
-    SBC.B nTempVar1                                            ;848682|E57E    |00007E;
-    CMP.B $80                                                  ;848684|C580    |000080;
+    SBC.B n16TempVar1                                          ;848682|E57E    |00007E;
+    CMP.B n16TempVar2                                          ;848684|C580    |000080;
     BCC .label10                                               ;848686|9003    |84868B;
     JMP.W .label11                                             ;848688|4CB386  |8486B3;
  
@@ -1174,10 +1174,10 @@ fUnknown_84887C:
     ASL A                                                      ;848881|0A      |      ;
     ASL A                                                      ;848882|0A      |      ;
     ASL A                                                      ;848883|0A      |      ;
-    STA.B nTempVar1                                            ;848884|857E    |00007E;
+    STA.B n16TempVar1                                          ;848884|857E    |00007E;
     LDA.W #$B586                                               ;848886|A986B5  |      ;
     CLC                                                        ;848889|18      |      ;
-    ADC.B nTempVar1                                            ;84888A|657E    |00007E;
+    ADC.B n16TempVar1                                          ;84888A|657E    |00007E;
     STA.B ptrUnknown0xCC                                       ;84888C|85CC    |0000CC;
     SEP #$20                                                   ;84888E|E220    |      ;
     LDA.B #$7E                                                 ;848890|A97E    |      ;
@@ -1195,10 +1195,10 @@ fUnknown_848895:
     LDY.W #$0002                                               ;8488A0|A00200  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8488A3|B7CC    |0000CC;
     REP #$20                                                   ;8488A5|C220    |      ;
-    STA.B nTempVar1                                            ;8488A7|857E    |00007E;
+    STA.B n16TempVar1                                          ;8488A7|857E    |00007E;
     ASL A                                                      ;8488A9|0A      |      ;
     CLC                                                        ;8488AA|18      |      ;
-    ADC.B nTempVar1                                            ;8488AB|657E    |00007E;
+    ADC.B n16TempVar1                                          ;8488AB|657E    |00007E;
     TAY                                                        ;8488AD|A8      |      ;
     REP #$20                                                   ;8488AE|C220    |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;8488B0|B772    |000072;
@@ -1344,7 +1344,7 @@ subUnknown849419_0x00:
     STA.B ptrUnknown0xC9                                       ;8489C5|85C9    |0000C9;
     SEP #$20                                                   ;8489C7|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;8489C9|A7C9    |0000C9;
-    STA.W $0110                                                ;8489CB|8D1001  |000110;
+    STA.W nAudioUnk110                                         ;8489CB|8D1001  |000110;
     REP #$30                                                   ;8489CE|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;8489D0|A5C9    |0000C9;
     CLC                                                        ;8489D2|18      |      ;
@@ -1745,7 +1745,7 @@ subUnknown849419_0x0E:
     CLC                                                        ;848CAE|18      |      ;
     ADC.W #$0002                                               ;848CAF|690200  |      ;
     STA.B ptrUnknown0xC9                                       ;848CB2|85C9    |0000C9;
-    JSL.L fUnknown_838401                                      ;848CB4|22018483|838401;
+    JSL.L fAudioUnknown_838401                                 ;848CB4|22018483|838401;
     RTS                                                        ;848CB8|60      |      ;
  
  
@@ -1864,7 +1864,7 @@ subUnknown849419_0x14:
     ASL A                                                      ;848D79|0A      |      ;
     TAX                                                        ;848D7A|AA      |      ;
     LDA.L aSetMask_8494D3,X                                    ;848D7B|BFD39484|8494D3;
-    STA.B nTempVar1                                            ;848D7F|857E    |00007E;
+    STA.B n16TempVar1                                          ;848D7F|857E    |00007E;
     REP #$30                                                   ;848D81|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848D83|A5C9    |0000C9;
     CLC                                                        ;848D85|18      |      ;
@@ -1872,7 +1872,7 @@ subUnknown849419_0x14:
     STA.B ptrUnknown0xC9                                       ;848D89|85C9    |0000C9;
     REP #$20                                                   ;848D8B|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848D8D|A772    |000072;
-    AND.B nTempVar1                                            ;848D8F|257E    |00007E;
+    AND.B n16TempVar1                                          ;848D8F|257E    |00007E;
     BEQ +                                                      ;848D91|F007    |848D9A;
     REP #$20                                                   ;848D93|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;848D95|A7C9    |0000C9;
@@ -2231,7 +2231,7 @@ subUnknown849419_0x1C:
     SEP #$20                                                   ;849011|E220    |      ;
     LDA.B #$02                                                 ;849013|A902    |      ;
     STA.W $019A                                                ;849015|8D9A01  |00019A;
-    JSL.L fLoadDialog                                          ;849018|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;849018|225F9383|83935F;
     REP #$30                                                   ;84901C|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84901E|A5C9    |0000C9;
     CLC                                                        ;849020|18      |      ;
@@ -2267,7 +2267,7 @@ subUnknown849419_0x1D:
     SEP #$20                                                   ;849056|E220    |      ;
     LDA.B #$02                                                 ;849058|A902    |      ;
     STA.W $019A                                                ;84905A|8D9A01  |00019A;
-    JSL.L fLoadDialog                                          ;84905D|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;84905D|225F9383|83935F;
     REP #$30                                                   ;849061|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;849063|A5C9    |0000C9;
     CLC                                                        ;849065|18      |      ;
@@ -2498,7 +2498,7 @@ subUnknown849419_0x21:
     XBA                                                        ;84920A|EB      |      ;
  
   + REP #$20                                                   ;84920B|C220    |      ;
-    STA.B nTempVar1                                            ;84920D|857E    |00007E;
+    STA.B n16TempVar1                                          ;84920D|857E    |00007E;
     REP #$30                                                   ;84920F|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;849211|A5C9    |0000C9;
     CLC                                                        ;849213|18      |      ;
@@ -2510,7 +2510,7 @@ subUnknown849419_0x21:
     LDA.B [ptrUnknown0x72]                                     ;84921E|A772    |000072;
     REP #$20                                                   ;849220|C220    |      ;
     CLC                                                        ;849222|18      |      ;
-    ADC.B nTempVar1                                            ;849223|657E    |00007E;
+    ADC.B n16TempVar1                                          ;849223|657E    |00007E;
     BMI +                                                      ;849225|300B    |849232;
     CMP.W #$00FF                                               ;849227|C9FF00  |      ;
     BCC .return                                                ;84922A|900C    |849238;
@@ -2657,10 +2657,10 @@ subUnknown849419_0x23:
     ASL A                                                      ;84933B|0A      |      ;
     TAX                                                        ;84933C|AA      |      ;
     LDA.L aSetMask_8494D3,X                                    ;84933D|BFD39484|8494D3;
-    STA.B nTempVar1                                            ;849341|857E    |00007E;
+    STA.B n16TempVar1                                          ;849341|857E    |00007E;
     REP #$20                                                   ;849343|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;849345|A772    |000072;
-    ORA.B nTempVar1                                            ;849347|057E    |00007E;
+    ORA.B n16TempVar1                                          ;849347|057E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;849349|8772    |000072;
     REP #$30                                                   ;84934B|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84934D|A5C9    |0000C9;
@@ -2762,10 +2762,10 @@ subUnknown849419_0x26:
     ASL A                                                      ;8493FE|0A      |      ;
     TAX                                                        ;8493FF|AA      |      ;
     LDA.L aResetMask_8494F3,X                                  ;849400|BFF39484|8494F3;
-    STA.B nTempVar1                                            ;849404|857E    |00007E;
+    STA.B n16TempVar1                                          ;849404|857E    |00007E;
     REP #$20                                                   ;849406|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;849408|A772    |000072;
-    AND.B nTempVar1                                            ;84940A|257E    |00007E;
+    AND.B n16TempVar1                                          ;84940A|257E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;84940C|8772    |000072;
     REP #$30                                                   ;84940E|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;849410|A5C9    |0000C9;
@@ -3020,7 +3020,7 @@ subUnknown849419_0x2C:
     PLX                                                        ;849617|FA      |      ;
     SEP #$20                                                   ;849618|E220    |      ;
     PLA                                                        ;84961A|68      |      ;
-    JSL.L fUnknown_8382FE                                      ;84961B|22FE8283|8382FE;
+    JSL.L fAudioUnknown_8382FE                                 ;84961B|22FE8283|8382FE;
     SEP #$20                                                   ;84961F|E220    |      ;
     STZ.W $0119                                                ;849621|9C1901  |000119;
     JSL.L fUnknown_828FF3                                      ;849624|22F38F82|828FF3;
@@ -3885,7 +3885,7 @@ CODE_849C64:
     STA.W $0191                                                ;849C6A|8D9101  |000191;
     LDA.B #$02                                                 ;849C6D|A902    |      ;
     STA.W $019A                                                ;849C6F|8D9A01  |00019A;
-    JSL.L fLoadDialog                                          ;849C72|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;849C72|225F9383|83935F;
     SEP #$20                                                   ;849C76|E220    |      ;
     REP #$10                                                   ;849C78|C210    |      ;
     LDY.W #$0001                                               ;849C7A|A00100  |      ;
@@ -4296,7 +4296,7 @@ CODE_849F1B:
 CODE_849F24:
     REP #$30                                                   ;849F24|C230    |      ;
     LDA.W #$000A                                               ;849F26|A90A00  |      ;
-    STA.B nTempVar1                                            ;849F29|857E    |00007E;
+    STA.B n16TempVar1                                          ;849F29|857E    |00007E;
     SEP #$20                                                   ;849F2B|E220    |      ;
     REP #$10                                                   ;849F2D|C210    |      ;
     LDY.W #$0002                                               ;849F2F|A00200  |      ;
@@ -4306,14 +4306,14 @@ CODE_849F24:
     BEQ CODE_849F81                                            ;849F38|F047    |849F81;
     REP #$20                                                   ;849F3A|C220    |      ;
     LDA.W #$000B                                               ;849F3C|A90B00  |      ;
-    STA.B nTempVar1                                            ;849F3F|857E    |00007E;
+    STA.B n16TempVar1                                          ;849F3F|857E    |00007E;
     BRA CODE_849F81                                            ;849F41|803E    |849F81;
  
  
 CODE_849F43:
     REP #$30                                                   ;849F43|C230    |      ;
     LDA.W #$0068                                               ;849F45|A96800  |      ;
-    STA.B nTempVar1                                            ;849F48|857E    |00007E;
+    STA.B n16TempVar1                                          ;849F48|857E    |00007E;
     SEP #$20                                                   ;849F4A|E220    |      ;
     REP #$10                                                   ;849F4C|C210    |      ;
     LDY.W #$0002                                               ;849F4E|A00200  |      ;
@@ -4323,14 +4323,14 @@ CODE_849F43:
     BEQ CODE_849F81                                            ;849F57|F028    |849F81;
     REP #$20                                                   ;849F59|C220    |      ;
     LDA.W #$0069                                               ;849F5B|A96900  |      ;
-    STA.B nTempVar1                                            ;849F5E|857E    |00007E;
+    STA.B n16TempVar1                                          ;849F5E|857E    |00007E;
     BRA CODE_849F81                                            ;849F60|801F    |849F81;
  
  
 CODE_849F62:
     REP #$30                                                   ;849F62|C230    |      ;
     LDA.W #$006A                                               ;849F64|A96A00  |      ;
-    STA.B nTempVar1                                            ;849F67|857E    |00007E;
+    STA.B n16TempVar1                                          ;849F67|857E    |00007E;
     SEP #$20                                                   ;849F69|E220    |      ;
     REP #$10                                                   ;849F6B|C210    |      ;
     LDY.W #$0002                                               ;849F6D|A00200  |      ;
@@ -4340,7 +4340,7 @@ CODE_849F62:
     BEQ CODE_849F81                                            ;849F76|F009    |849F81;
     REP #$20                                                   ;849F78|C220    |      ;
     LDA.W #$006B                                               ;849F7A|A96B00  |      ;
-    STA.B nTempVar1                                            ;849F7D|857E    |00007E;
+    STA.B n16TempVar1                                          ;849F7D|857E    |00007E;
     BRA CODE_849F81                                            ;849F7F|8000    |849F81;
  
  
@@ -4362,7 +4362,7 @@ CODE_849F91:
     LDY.W #$003F                                               ;849F9A|A03F00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;849F9D|B7CC    |0000CC;
     LDX.W #$0000                                               ;849F9F|A20000  |      ;
-    LDY.B nTempVar1                                            ;849FA2|A47E    |00007E;
+    LDY.B n16TempVar1                                          ;849FA2|A47E    |00007E;
     JSL.L fUnknown_84803F                                      ;849FA4|223F8084|84803F;
     SEP #$20                                                   ;849FA8|E220    |      ;
     LDY.W #$0005                                               ;849FAA|A00500  |      ;
@@ -5251,16 +5251,16 @@ CODE_84A595:
  
 fUnknown_84A5D4:
     REP #$30                                                   ;84A5D4|C230    |      ;
-    STA.B nTempVar1                                            ;84A5D6|857E    |00007E;
+    STA.B n16TempVar1                                          ;84A5D6|857E    |00007E;
     LDA.W #$0000                                               ;84A5D8|A90000  |      ;
     SEP #$20                                                   ;84A5DB|E220    |      ;
     LDY.W #$0004                                               ;84A5DD|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84A5E0|B772    |000072;
     REP #$20                                                   ;84A5E2|C220    |      ;
-    STA.B $80                                                  ;84A5E4|8580    |000080;
-    LDA.B $80                                                  ;84A5E6|A580    |000080;
+    STA.B n16TempVar2                                          ;84A5E4|8580    |000080;
+    LDA.B n16TempVar2                                          ;84A5E6|A580    |000080;
     CLC                                                        ;84A5E8|18      |      ;
-    ADC.B nTempVar1                                            ;84A5E9|657E    |00007E;
+    ADC.B n16TempVar1                                          ;84A5E9|657E    |00007E;
     BMI CODE_84A5F8                                            ;84A5EB|300B    |84A5F8;
     CMP.W #$0100                                               ;84A5ED|C90001  |      ;
     BCS CODE_84A600                                            ;84A5F0|B00E    |84A600;
@@ -5633,7 +5633,7 @@ CODE_84A84A:
     LDA.B [ptrUnknown0xCC],Y                                   ;84A855|B7CC    |0000CC;
     SEC                                                        ;84A857|38      |      ;
     SBC.B nPlayerPosX                                          ;84A858|E5D6    |0000D6;
-    STA.B nTempVar1                                            ;84A85A|857E    |00007E;
+    STA.B n16TempVar1                                          ;84A85A|857E    |00007E;
     BMI CODE_84A860                                            ;84A85C|3002    |84A860;
     BRA CODE_84A86D                                            ;84A85E|800D    |84A86D;
  
@@ -5642,7 +5642,7 @@ CODE_84A860:
     REP #$20                                                   ;84A860|C220    |      ;
     EOR.W #$FFFF                                               ;84A862|49FFFF  |      ;
     INC A                                                      ;84A865|1A      |      ;
-    STA.B nTempVar1                                            ;84A866|857E    |00007E;
+    STA.B n16TempVar1                                          ;84A866|857E    |00007E;
     LDA.W #$0001                                               ;84A868|A90100  |      ;
     STA.B $82                                                  ;84A86B|8582    |000082;
  
@@ -5652,7 +5652,7 @@ CODE_84A86D:
     LDA.B [ptrUnknown0xCC],Y                                   ;84A872|B7CC    |0000CC;
     SEC                                                        ;84A874|38      |      ;
     SBC.B nPlayerPosY                                          ;84A875|E5D8    |0000D8;
-    STA.B $80                                                  ;84A877|8580    |000080;
+    STA.B n16TempVar2                                          ;84A877|8580    |000080;
     BMI CODE_84A87D                                            ;84A879|3002    |84A87D;
     BRA CODE_84A88A                                            ;84A87B|800D    |84A88A;
  
@@ -5661,7 +5661,7 @@ CODE_84A87D:
     REP #$20                                                   ;84A87D|C220    |      ;
     EOR.W #$FFFF                                               ;84A87F|49FFFF  |      ;
     INC A                                                      ;84A882|1A      |      ;
-    STA.B $80                                                  ;84A883|8580    |000080;
+    STA.B n16TempVar2                                          ;84A883|8580    |000080;
     LDA.W #$0001                                               ;84A885|A90100  |      ;
     STA.B $84                                                  ;84A888|8584    |000084;
  
@@ -5673,8 +5673,8 @@ CODE_84A88A:
     LDY.W #$0008                                               ;84A892|A00800  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84A895|97CC    |0000CC;
     REP #$20                                                   ;84A897|C220    |      ;
-    LDA.B $80                                                  ;84A899|A580    |000080;
-    CMP.B nTempVar1                                            ;84A89B|C57E    |00007E;
+    LDA.B n16TempVar2                                          ;84A899|A580    |000080;
+    CMP.B n16TempVar1                                          ;84A89B|C57E    |00007E;
     BCS CODE_84A8B2                                            ;84A89D|B013    |84A8B2;
     SEP #$20                                                   ;84A89F|E220    |      ;
     LDY.W #$0000                                               ;84A8A1|A00000  |      ;
@@ -6520,7 +6520,7 @@ CODE_84AE69:
     LDA.B [ptrUnknown0xCC],Y                                   ;84AE74|B7CC    |0000CC;
     SEC                                                        ;84AE76|38      |      ;
     SBC.B nPlayerPosX                                          ;84AE77|E5D6    |0000D6;
-    STA.B nTempVar1                                            ;84AE79|857E    |00007E;
+    STA.B n16TempVar1                                          ;84AE79|857E    |00007E;
     BMI CODE_84AE7F                                            ;84AE7B|3002    |84AE7F;
     BRA CODE_84AE8C                                            ;84AE7D|800D    |84AE8C;
  
@@ -6529,7 +6529,7 @@ CODE_84AE7F:
     REP #$20                                                   ;84AE7F|C220    |      ;
     EOR.W #$FFFF                                               ;84AE81|49FFFF  |      ;
     INC A                                                      ;84AE84|1A      |      ;
-    STA.B nTempVar1                                            ;84AE85|857E    |00007E;
+    STA.B n16TempVar1                                          ;84AE85|857E    |00007E;
     LDA.W #$0001                                               ;84AE87|A90100  |      ;
     STA.B $82                                                  ;84AE8A|8582    |000082;
  
@@ -6539,7 +6539,7 @@ CODE_84AE8C:
     LDA.B [ptrUnknown0xCC],Y                                   ;84AE91|B7CC    |0000CC;
     SEC                                                        ;84AE93|38      |      ;
     SBC.B nPlayerPosY                                          ;84AE94|E5D8    |0000D8;
-    STA.B $80                                                  ;84AE96|8580    |000080;
+    STA.B n16TempVar2                                          ;84AE96|8580    |000080;
     BMI CODE_84AE9C                                            ;84AE98|3002    |84AE9C;
     BRA CODE_84AEA9                                            ;84AE9A|800D    |84AEA9;
  
@@ -6548,7 +6548,7 @@ CODE_84AE9C:
     REP #$20                                                   ;84AE9C|C220    |      ;
     EOR.W #$FFFF                                               ;84AE9E|49FFFF  |      ;
     INC A                                                      ;84AEA1|1A      |      ;
-    STA.B $80                                                  ;84AEA2|8580    |000080;
+    STA.B n16TempVar2                                          ;84AEA2|8580    |000080;
     LDA.W #$0001                                               ;84AEA4|A90100  |      ;
     STA.B $84                                                  ;84AEA7|8584    |000084;
  
@@ -6560,8 +6560,8 @@ CODE_84AEA9:
     LDY.W #$0008                                               ;84AEB1|A00800  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84AEB4|97CC    |0000CC;
     REP #$20                                                   ;84AEB6|C220    |      ;
-    LDA.B $80                                                  ;84AEB8|A580    |000080;
-    CMP.B nTempVar1                                            ;84AEBA|C57E    |00007E;
+    LDA.B n16TempVar2                                          ;84AEB8|A580    |000080;
+    CMP.B n16TempVar1                                          ;84AEBA|C57E    |00007E;
     BCS CODE_84AEC6                                            ;84AEBC|B008    |84AEC6;
     REP #$20                                                   ;84AEBE|C220    |      ;
     LDA.B $82                                                  ;84AEC0|A582    |000082;
@@ -7112,7 +7112,7 @@ CODE_84B278:
     LDA.B [ptrUnknown0xCC],Y                                   ;84B2B9|B7CC    |0000CC;
     SEC                                                        ;84B2BB|38      |      ;
     SBC.B nPlayerPosX                                          ;84B2BC|E5D6    |0000D6;
-    STA.B nTempVar1                                            ;84B2BE|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B2BE|857E    |00007E;
     BMI CODE_84B2C4                                            ;84B2C0|3002    |84B2C4;
     BRA CODE_84B2D1                                            ;84B2C2|800D    |84B2D1;
  
@@ -7121,7 +7121,7 @@ CODE_84B2C4:
     REP #$20                                                   ;84B2C4|C220    |      ;
     EOR.W #$FFFF                                               ;84B2C6|49FFFF  |      ;
     INC A                                                      ;84B2C9|1A      |      ;
-    STA.B nTempVar1                                            ;84B2CA|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B2CA|857E    |00007E;
     LDA.W #$0001                                               ;84B2CC|A90100  |      ;
     STA.B $82                                                  ;84B2CF|8582    |000082;
  
@@ -7131,7 +7131,7 @@ CODE_84B2D1:
     LDA.B [ptrUnknown0xCC],Y                                   ;84B2D6|B7CC    |0000CC;
     SEC                                                        ;84B2D8|38      |      ;
     SBC.B nPlayerPosY                                          ;84B2D9|E5D8    |0000D8;
-    STA.B $80                                                  ;84B2DB|8580    |000080;
+    STA.B n16TempVar2                                          ;84B2DB|8580    |000080;
     BMI CODE_84B2E1                                            ;84B2DD|3002    |84B2E1;
     BRA CODE_84B2EE                                            ;84B2DF|800D    |84B2EE;
  
@@ -7140,7 +7140,7 @@ CODE_84B2E1:
     REP #$20                                                   ;84B2E1|C220    |      ;
     EOR.W #$FFFF                                               ;84B2E3|49FFFF  |      ;
     INC A                                                      ;84B2E6|1A      |      ;
-    STA.B $80                                                  ;84B2E7|8580    |000080;
+    STA.B n16TempVar2                                          ;84B2E7|8580    |000080;
     LDA.W #$0001                                               ;84B2E9|A90100  |      ;
     STA.B $84                                                  ;84B2EC|8584    |000084;
  
@@ -7152,8 +7152,8 @@ CODE_84B2EE:
     LDY.W #$0008                                               ;84B2F6|A00800  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84B2F9|97CC    |0000CC;
     REP #$20                                                   ;84B2FB|C220    |      ;
-    LDA.B $80                                                  ;84B2FD|A580    |000080;
-    CMP.B nTempVar1                                            ;84B2FF|C57E    |00007E;
+    LDA.B n16TempVar2                                          ;84B2FD|A580    |000080;
+    CMP.B n16TempVar1                                          ;84B2FF|C57E    |00007E;
     BCS CODE_84B30B                                            ;84B301|B008    |84B30B;
     REP #$20                                                   ;84B303|C220    |      ;
     LDA.B $82                                                  ;84B305|A582    |000082;
@@ -7558,7 +7558,7 @@ subUnknown849419_0x41:
     STA.B ptrUnknown0xC9                                       ;84B5D3|85C9    |0000C9;
     REP #$20                                                   ;84B5D5|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B5D7|A7C9    |0000C9;
-    STA.B nTempVar1                                            ;84B5D9|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B5D9|857E    |00007E;
     REP #$30                                                   ;84B5DB|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B5DD|A5C9    |0000C9;
     CLC                                                        ;84B5DF|18      |      ;
@@ -7566,7 +7566,7 @@ subUnknown849419_0x41:
     STA.B ptrUnknown0xC9                                       ;84B5E3|85C9    |0000C9;
     LDA.B [ptrUnknown0x72]                                     ;84B5E5|A772    |000072;
     CLC                                                        ;84B5E7|18      |      ;
-    ADC.B nTempVar1                                            ;84B5E8|657E    |00007E;
+    ADC.B n16TempVar1                                          ;84B5E8|657E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;84B5EA|8772    |000072;
     BMI CODE_84B5FA                                            ;84B5EC|300C    |84B5FA;
     CMP.W #$03E7                                               ;84B5EE|C9E703  |      ;
@@ -7662,7 +7662,7 @@ subUnknown849419_0x43:
     STA.B ptrUnknown0xC9                                       ;84B690|85C9    |0000C9;
     REP #$20                                                   ;84B692|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B694|A7C9    |0000C9;
-    STA.B nTempVar1                                            ;84B696|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B696|857E    |00007E;
     REP #$30                                                   ;84B698|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B69A|A5C9    |0000C9;
     CLC                                                        ;84B69C|18      |      ;
@@ -7670,7 +7670,7 @@ subUnknown849419_0x43:
     STA.B ptrUnknown0xC9                                       ;84B6A0|85C9    |0000C9;
     REP #$20                                                   ;84B6A2|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B6A4|A772    |000072;
-    CMP.B nTempVar1                                            ;84B6A6|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;84B6A6|C57E    |00007E;
     BNE CODE_84B6B1                                            ;84B6A8|D007    |84B6B1;
     REP #$20                                                   ;84B6AA|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B6AC|A7C9    |0000C9;
@@ -7712,7 +7712,7 @@ subUnknown849419_0x44:
     STA.B ptrUnknown0xC9                                       ;84B6E6|85C9    |0000C9;
     REP #$20                                                   ;84B6E8|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B6EA|A7C9    |0000C9;
-    STA.B nTempVar1                                            ;84B6EC|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B6EC|857E    |00007E;
     REP #$30                                                   ;84B6EE|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B6F0|A5C9    |0000C9;
     CLC                                                        ;84B6F2|18      |      ;
@@ -7720,7 +7720,7 @@ subUnknown849419_0x44:
     STA.B ptrUnknown0xC9                                       ;84B6F6|85C9    |0000C9;
     SEP #$20                                                   ;84B6F8|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B6FA|A7C9    |0000C9;
-    STA.B $80                                                  ;84B6FC|8580    |000080;
+    STA.B n16TempVar2                                          ;84B6FC|8580    |000080;
     REP #$30                                                   ;84B6FE|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B700|A5C9    |0000C9;
     CLC                                                        ;84B702|18      |      ;
@@ -7728,12 +7728,12 @@ subUnknown849419_0x44:
     STA.B ptrUnknown0xC9                                       ;84B706|85C9    |0000C9;
     REP #$20                                                   ;84B708|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B70A|A772    |000072;
-    CMP.B nTempVar1                                            ;84B70C|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;84B70C|C57E    |00007E;
     BNE CODE_84B722                                            ;84B70E|D012    |84B722;
     SEP #$20                                                   ;84B710|E220    |      ;
     LDY.W #$0002                                               ;84B712|A00200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84B715|B772    |000072;
-    CMP.B $80                                                  ;84B717|C580    |000080;
+    CMP.B n16TempVar2                                          ;84B717|C580    |000080;
     BNE CODE_84B722                                            ;84B719|D007    |84B722;
     REP #$20                                                   ;84B71B|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B71D|A7C9    |0000C9;
@@ -7775,7 +7775,7 @@ subUnknown849419_0x45:
     STA.B ptrUnknown0xC9                                       ;84B757|85C9    |0000C9;
     REP #$20                                                   ;84B759|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B75B|A7C9    |0000C9;
-    STA.B nTempVar1                                            ;84B75D|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B75D|857E    |00007E;
     REP #$30                                                   ;84B75F|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B761|A5C9    |0000C9;
     CLC                                                        ;84B763|18      |      ;
@@ -7784,7 +7784,7 @@ subUnknown849419_0x45:
     REP #$20                                                   ;84B769|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B76B|A7C9    |0000C9;
     INC A                                                      ;84B76D|1A      |      ;
-    STA.B $80                                                  ;84B76E|8580    |000080;
+    STA.B n16TempVar2                                          ;84B76E|8580    |000080;
     REP #$30                                                   ;84B770|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B772|A5C9    |0000C9;
     CLC                                                        ;84B774|18      |      ;
@@ -7792,10 +7792,10 @@ subUnknown849419_0x45:
     STA.B ptrUnknown0xC9                                       ;84B778|85C9    |0000C9;
     REP #$20                                                   ;84B77A|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B77C|A772    |000072;
-    CMP.B nTempVar1                                            ;84B77E|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;84B77E|C57E    |00007E;
     BCC CODE_84B78F                                            ;84B780|900D    |84B78F;
     LDA.B [ptrUnknown0x72]                                     ;84B782|A772    |000072;
-    CMP.B $80                                                  ;84B784|C580    |000080;
+    CMP.B n16TempVar2                                          ;84B784|C580    |000080;
     BCS CODE_84B78F                                            ;84B786|B007    |84B78F;
     REP #$20                                                   ;84B788|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B78A|A7C9    |0000C9;
@@ -7837,7 +7837,7 @@ subUnknown849419_0x46:
     STA.B ptrUnknown0xC9                                       ;84B7C4|85C9    |0000C9;
     REP #$20                                                   ;84B7C6|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B7C8|A7C9    |0000C9;
-    STA.B nTempVar1                                            ;84B7CA|857E    |00007E;
+    STA.B n16TempVar1                                          ;84B7CA|857E    |00007E;
     REP #$30                                                   ;84B7CC|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B7CE|A5C9    |0000C9;
     CLC                                                        ;84B7D0|18      |      ;
@@ -7845,7 +7845,7 @@ subUnknown849419_0x46:
     STA.B ptrUnknown0xC9                                       ;84B7D4|85C9    |0000C9;
     SEP #$20                                                   ;84B7D6|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B7D8|A7C9    |0000C9;
-    STA.B $80                                                  ;84B7DA|8580    |000080;
+    STA.B n16TempVar2                                          ;84B7DA|8580    |000080;
     REP #$30                                                   ;84B7DC|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B7DE|A5C9    |0000C9;
     CLC                                                        ;84B7E0|18      |      ;
@@ -7878,11 +7878,11 @@ subUnknown849419_0x46:
     STA.B $84                                                  ;84B816|8584    |000084;
     REP #$20                                                   ;84B818|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B81A|A772    |000072;
-    CMP.B nTempVar1                                            ;84B81C|C57E    |00007E;
+    CMP.B n16TempVar1                                          ;84B81C|C57E    |00007E;
     SEP #$20                                                   ;84B81E|E220    |      ;
     LDY.W #$0002                                               ;84B820|A00200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84B823|B772    |000072;
-    SBC.B $80                                                  ;84B825|E580    |000080;
+    SBC.B n16TempVar2                                          ;84B825|E580    |000080;
     BCC CODE_84B841                                            ;84B827|9018    |84B841;
     REP #$20                                                   ;84B829|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B82B|A772    |000072;
@@ -8857,7 +8857,7 @@ subUnknown849419_0x54:
     SEP #$20                                                   ;84BEFD|E220    |      ;
     LDA.B #$06                                                 ;84BEFF|A906    |      ;
     STA.W $019A                                                ;84BF01|8D9A01  |00019A;
-    JSL.L fLoadDialog                                          ;84BF04|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;84BF04|225F9383|83935F;
     REP #$30                                                   ;84BF08|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84BF0A|A5C9    |0000C9;
     CLC                                                        ;84BF0C|18      |      ;
@@ -8903,7 +8903,7 @@ subUnknown849419_0x55:
     ASL A                                                      ;84BF55|0A      |      ;
     TAX                                                        ;84BF56|AA      |      ;
     LDA.L Table_84C014,X                                       ;84BF57|BF14C084|84C014;
-    STA.B nTempVar1                                            ;84BF5B|857E    |00007E;
+    STA.B n16TempVar1                                          ;84BF5B|857E    |00007E;
     REP #$30                                                   ;84BF5D|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84BF5F|A5C9    |0000C9;
     CLC                                                        ;84BF61|18      |      ;
@@ -8911,7 +8911,7 @@ subUnknown849419_0x55:
     STA.B ptrUnknown0xC9                                       ;84BF65|85C9    |0000C9;
     REP #$20                                                   ;84BF67|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84BF69|A772    |000072;
-    AND.B nTempVar1                                            ;84BF6B|257E    |00007E;
+    AND.B n16TempVar1                                          ;84BF6B|257E    |00007E;
     BNE CODE_84BF76                                            ;84BF6D|D007    |84BF76;
     REP #$20                                                   ;84BF6F|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84BF71|A7C9    |0000C9;
@@ -9141,10 +9141,10 @@ CODE_84C0DB:
     SEP #$20                                                   ;84C0DB|E220    |      ;
     REP #$10                                                   ;84C0DD|C210    |      ;
     LDA.B #$02                                                 ;84C0DF|A902    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C0E1|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C0E1|8D1401  |000114;
     LDA.B #$06                                                 ;84C0E4|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C0E6|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C0E9|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C0E6|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C0E9|22328383|838332;
     RTL                                                        ;84C0ED|6B      |      ;
  
  
@@ -9196,10 +9196,10 @@ CODE_84C144:
     SEP #$20                                                   ;84C144|E220    |      ;
     REP #$10                                                   ;84C146|C210    |      ;
     LDA.B #$01                                                 ;84C148|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C14A|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C14A|8D1401  |000114;
     LDA.B #$06                                                 ;84C14D|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C14F|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C152|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C14F|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C152|22328383|838332;
     RTL                                                        ;84C156|6B      |      ;
  
  
@@ -9215,10 +9215,10 @@ CODE_84C157:
     SEP #$20                                                   ;84C16B|E220    |      ;
     REP #$10                                                   ;84C16D|C210    |      ;
     LDA.B #$01                                                 ;84C16F|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C171|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C171|8D1401  |000114;
     LDA.B #$06                                                 ;84C174|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C176|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C179|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C176|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C179|22328383|838332;
     RTL                                                        ;84C17D|6B      |      ;
  
  
@@ -9235,10 +9235,10 @@ CODE_84C17E:
     SEP #$20                                                   ;84C195|E220    |      ;
     REP #$10                                                   ;84C197|C210    |      ;
     LDA.B #$01                                                 ;84C199|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C19B|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C19B|8D1401  |000114;
     LDA.B #$06                                                 ;84C19E|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C1A0|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C1A3|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C1A0|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C1A3|22328383|838332;
     RTL                                                        ;84C1A7|6B      |      ;
  
  
@@ -9255,10 +9255,10 @@ CODE_84C1A8:
     SEP #$20                                                   ;84C1BF|E220    |      ;
     REP #$10                                                   ;84C1C1|C210    |      ;
     LDA.B #$01                                                 ;84C1C3|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C1C5|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C1C5|8D1401  |000114;
     LDA.B #$06                                                 ;84C1C8|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C1CA|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C1CD|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C1CA|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C1CD|22328383|838332;
     RTL                                                        ;84C1D1|6B      |      ;
  
  
@@ -9271,10 +9271,10 @@ CODE_84C1D2:
     SEP #$20                                                   ;84C1DE|E220    |      ;
     REP #$10                                                   ;84C1E0|C210    |      ;
     LDA.B #$01                                                 ;84C1E2|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C1E4|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C1E4|8D1401  |000114;
     LDA.B #$06                                                 ;84C1E7|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C1E9|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C1EC|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C1E9|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C1EC|22328383|838332;
     RTL                                                        ;84C1F0|6B      |      ;
  
  
@@ -9282,10 +9282,10 @@ CODE_84C1F1:
     SEP #$20                                                   ;84C1F1|E220    |      ;
     REP #$10                                                   ;84C1F3|C210    |      ;
     LDA.B #$02                                                 ;84C1F5|A902    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C1F7|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C1F7|8D1401  |000114;
     LDA.B #$06                                                 ;84C1FA|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C1FC|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C1FF|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C1FC|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C1FF|22328383|838332;
     RTL                                                        ;84C203|6B      |      ;
  
  
@@ -9298,10 +9298,10 @@ CODE_84C204:
     SEP #$20                                                   ;84C212|E220    |      ;
     REP #$10                                                   ;84C214|C210    |      ;
     LDA.B #$03                                                 ;84C216|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C218|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C218|8D1401  |000114;
     LDA.B #$06                                                 ;84C21B|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C21D|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C220|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C21D|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C220|22328383|838332;
     RTL                                                        ;84C224|6B      |      ;
  
  
@@ -9314,10 +9314,10 @@ CODE_84C225:
     SEP #$20                                                   ;84C233|E220    |      ;
     REP #$10                                                   ;84C235|C210    |      ;
     LDA.B #$03                                                 ;84C237|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C239|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C239|8D1401  |000114;
     LDA.B #$06                                                 ;84C23C|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C23E|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C241|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C23E|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C241|22328383|838332;
     RTL                                                        ;84C245|6B      |      ;
  
  
@@ -9330,10 +9330,10 @@ CODE_84C246:
     SEP #$20                                                   ;84C254|E220    |      ;
     REP #$10                                                   ;84C256|C210    |      ;
     LDA.B #$03                                                 ;84C258|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C25A|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C25A|8D1401  |000114;
     LDA.B #$06                                                 ;84C25D|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C25F|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C262|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C25F|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C262|22328383|838332;
     RTL                                                        ;84C266|6B      |      ;
  
  
@@ -9346,10 +9346,10 @@ CODE_84C267:
     SEP #$20                                                   ;84C275|E220    |      ;
     REP #$10                                                   ;84C277|C210    |      ;
     LDA.B #$03                                                 ;84C279|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C27B|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C27B|8D1401  |000114;
     LDA.B #$06                                                 ;84C27E|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C280|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C283|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C280|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C283|22328383|838332;
     RTL                                                        ;84C287|6B      |      ;
  
  
@@ -9420,10 +9420,10 @@ CODE_84C2D8:
     SEP #$20                                                   ;84C2DE|E220    |      ;
     REP #$10                                                   ;84C2E0|C210    |      ;
     LDA.B #$03                                                 ;84C2E2|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C2E4|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C2E4|8D1401  |000114;
     LDA.B #$06                                                 ;84C2E7|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C2E9|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C2EC|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C2E9|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C2EC|22328383|838332;
     REP #$20                                                   ;84C2F0|C220    |      ;
     LDA.L $7F1F5C                                              ;84C2F2|AF5C1F7F|7F1F5C;
     ORA.W #$0004                                               ;84C2F6|090400  |      ;
@@ -9474,10 +9474,10 @@ CODE_84C32D:
     SEP #$20                                                   ;84C33B|E220    |      ;
     REP #$10                                                   ;84C33D|C210    |      ;
     LDA.B #$03                                                 ;84C33F|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C341|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C341|8D1401  |000114;
     LDA.B #$06                                                 ;84C344|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C346|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C349|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C346|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C349|22328383|838332;
     RTL                                                        ;84C34D|6B      |      ;
  
  
@@ -9488,10 +9488,10 @@ CODE_84C34E:
     SEP #$20                                                   ;84C354|E220    |      ;
     REP #$10                                                   ;84C356|C210    |      ;
     LDA.B #$03                                                 ;84C358|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C35A|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C35A|8D1401  |000114;
     LDA.B #$06                                                 ;84C35D|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C35F|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C362|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C35F|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C362|22328383|838332;
     RTL                                                        ;84C366|6B      |      ;
  
  
@@ -9502,10 +9502,10 @@ CODE_84C367:
     SEP #$20                                                   ;84C36D|E220    |      ;
     REP #$10                                                   ;84C36F|C210    |      ;
     LDA.B #$01                                                 ;84C371|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C373|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C373|8D1401  |000114;
     LDA.B #$06                                                 ;84C376|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C378|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C37B|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C378|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C37B|22328383|838332;
     RTL                                                        ;84C37F|6B      |      ;
  
  
@@ -9552,10 +9552,10 @@ CODE_84C3AF:
     SEP #$20                                                   ;84C3BD|E220    |      ;
     REP #$10                                                   ;84C3BF|C210    |      ;
     LDA.B #$03                                                 ;84C3C1|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C3C3|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C3C3|8D1401  |000114;
     LDA.B #$06                                                 ;84C3C6|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C3C8|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C3CB|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C3C8|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C3CB|22328383|838332;
     RTL                                                        ;84C3CF|6B      |      ;
  
  
@@ -9566,10 +9566,10 @@ CODE_84C3D0:
     SEP #$20                                                   ;84C3D6|E220    |      ;
     REP #$10                                                   ;84C3D8|C210    |      ;
     LDA.B #$03                                                 ;84C3DA|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C3DC|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C3DC|8D1401  |000114;
     LDA.B #$06                                                 ;84C3DF|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C3E1|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C3E4|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C3E1|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C3E4|22328383|838332;
     RTL                                                        ;84C3E8|6B      |      ;
  
  
@@ -9588,10 +9588,10 @@ CODE_84C3E9:
     SEP #$20                                                   ;84C402|E220    |      ;
     REP #$10                                                   ;84C404|C210    |      ;
     LDA.B #$01                                                 ;84C406|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C408|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C408|8D1401  |000114;
     LDA.B #$06                                                 ;84C40B|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C40D|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C410|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C40D|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C410|22328383|838332;
     RTL                                                        ;84C414|6B      |      ;
  
  
@@ -9599,10 +9599,10 @@ CODE_84C415:
     SEP #$20                                                   ;84C415|E220    |      ;
     REP #$10                                                   ;84C417|C210    |      ;
     LDA.B #$02                                                 ;84C419|A902    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C41B|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C41B|8D1401  |000114;
     LDA.B #$06                                                 ;84C41E|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C420|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C423|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C420|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C423|22328383|838332;
     RTL                                                        ;84C427|6B      |      ;
  
  
@@ -9628,10 +9628,10 @@ CODE_84C43F:
     SEP #$20                                                   ;84C445|E220    |      ;
     REP #$10                                                   ;84C447|C210    |      ;
     LDA.B #$03                                                 ;84C449|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C44B|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C44B|8D1401  |000114;
     LDA.B #$06                                                 ;84C44E|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C450|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C453|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C450|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C453|22328383|838332;
     RTL                                                        ;84C457|6B      |      ;
  
  
@@ -9675,10 +9675,10 @@ CODE_84C47C:
     SEP #$20                                                   ;84C491|E220    |      ;
     REP #$10                                                   ;84C493|C210    |      ;
     LDA.B #$03                                                 ;84C495|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C497|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C497|8D1401  |000114;
     LDA.B #$06                                                 ;84C49A|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C49C|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C49F|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C49C|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C49F|22328383|838332;
     RTL                                                        ;84C4A3|6B      |      ;
  
  
@@ -9692,10 +9692,10 @@ CODE_84C4A4:
     SEP #$20                                                   ;84C4B1|E220    |      ;
     REP #$10                                                   ;84C4B3|C210    |      ;
     LDA.B #$03                                                 ;84C4B5|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C4B7|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C4B7|8D1401  |000114;
     LDA.B #$06                                                 ;84C4BA|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C4BC|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C4BF|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C4BC|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C4BF|22328383|838332;
     RTL                                                        ;84C4C3|6B      |      ;
  
  
@@ -9712,10 +9712,10 @@ CODE_84C4C4:
     SEP #$20                                                   ;84C4D7|E220    |      ;
     REP #$10                                                   ;84C4D9|C210    |      ;
     LDA.B #$03                                                 ;84C4DB|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C4DD|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C4DD|8D1401  |000114;
     LDA.B #$06                                                 ;84C4E0|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C4E2|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C4E5|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C4E2|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C4E5|22328383|838332;
     RTL                                                        ;84C4E9|6B      |      ;
  
  
@@ -9730,10 +9730,10 @@ CODE_84C4EA:
     SEP #$20                                                   ;84C4F9|E220    |      ;
     REP #$10                                                   ;84C4FB|C210    |      ;
     LDA.B #$03                                                 ;84C4FD|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C4FF|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C4FF|8D1401  |000114;
     LDA.B #$06                                                 ;84C502|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C504|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C507|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C504|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C507|22328383|838332;
     RTL                                                        ;84C50B|6B      |      ;
  
  
@@ -9766,10 +9766,10 @@ CODE_84C52D:
     SEP #$20                                                   ;84C52D|E220    |      ;
     REP #$10                                                   ;84C52F|C210    |      ;
     LDA.B #$01                                                 ;84C531|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C533|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C533|8D1401  |000114;
     LDA.B #$06                                                 ;84C536|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C538|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C53B|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C538|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C53B|22328383|838332;
     RTL                                                        ;84C53F|6B      |      ;
  
  
@@ -9817,10 +9817,10 @@ CODE_84C57A:
     SEP #$20                                                   ;84C57A|E220    |      ;
     REP #$10                                                   ;84C57C|C210    |      ;
     LDA.B #$01                                                 ;84C57E|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C580|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C580|8D1401  |000114;
     LDA.B #$06                                                 ;84C583|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C585|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C588|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C585|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C588|22328383|838332;
     SEP #$20                                                   ;84C58C|E220    |      ;
     STZ.W $019B                                                ;84C58E|9C9B01  |00019B;
     SEP #$20                                                   ;84C591|E220    |      ;
@@ -9836,7 +9836,7 @@ CODE_84C57A:
     STA.W $019A                                                ;84C5A6|8D9A01  |00019A;
     REP #$20                                                   ;84C5A9|C220    |      ;
     LDA.W #$0001                                               ;84C5AB|A90100  |      ;
-    JSL.L fUnknown_8394D7                                      ;84C5AE|22D79483|8394D7;
+    JSL.L fTextUnknown_8394D7                                  ;84C5AE|22D79483|8394D7;
     BRA CODE_84C5C8                                            ;84C5B2|8014    |84C5C8;
  
  
@@ -9844,12 +9844,12 @@ CODE_84C5B4:
     REP #$20                                                   ;84C5B4|C220    |      ;
     ASL A                                                      ;84C5B6|0A      |      ;
     TAX                                                        ;84C5B7|AA      |      ;
-    LDA.L aDialogPointerIndexes_839467,X                       ;84C5B8|BF679483|839467;
+    LDA.L aTextDialogPointerIndexes_839467,X                   ;84C5B8|BF679483|839467;
     TAX                                                        ;84C5BC|AA      |      ;
     SEP #$20                                                   ;84C5BD|E220    |      ;
     LDA.B #$00                                                 ;84C5BF|A900    |      ;
     STA.W $0191                                                ;84C5C1|8D9101  |000191;
-    JSL.L fLoadDialog                                          ;84C5C4|225F9383|83935F;
+    JSL.L fTextLoadDialog                                      ;84C5C4|225F9383|83935F;
  
 CODE_84C5C8:
     REP #$20                                                   ;84C5C8|C220    |      ;
@@ -9862,17 +9862,17 @@ CODE_84C5D1:
     SEP #$20                                                   ;84C5D1|E220    |      ;
     REP #$10                                                   ;84C5D3|C210    |      ;
     LDA.B #$03                                                 ;84C5D5|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C5D7|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C5D7|8D1401  |000114;
     LDA.B #$06                                                 ;84C5DA|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C5DC|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C5DF|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C5DC|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C5DF|22328383|838332;
     SEP #$20                                                   ;84C5E3|E220    |      ;
     LDA.W $018A                                                ;84C5E5|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C5E8|C90B    |      ;
     BCS CODE_84C611                                            ;84C5EA|B025    |84C611;
     REP #$20                                                   ;84C5EC|C220    |      ;
     LDA.W #$0001                                               ;84C5EE|A90100  |      ;
-    JSL.L fUnknown_8394D7                                      ;84C5F1|22D79483|8394D7;
+    JSL.L fTextUnknown_8394D7                                  ;84C5F1|22D79483|8394D7;
     SEP #$20                                                   ;84C5F5|E220    |      ;
     LDA.W $018A                                                ;84C5F7|AD8A01  |00018A;
     CMP.B #$0A                                                 ;84C5FA|C90A    |      ;
@@ -9897,17 +9897,17 @@ CODE_84C612:
     SEP #$20                                                   ;84C612|E220    |      ;
     REP #$10                                                   ;84C614|C210    |      ;
     LDA.B #$03                                                 ;84C616|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C618|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C618|8D1401  |000114;
     LDA.B #$06                                                 ;84C61B|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C61D|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C620|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C61D|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C620|22328383|838332;
     SEP #$20                                                   ;84C624|E220    |      ;
     LDA.W $018A                                                ;84C626|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C629|C90B    |      ;
     BCS CODE_84C650                                            ;84C62B|B023    |84C650;
     REP #$20                                                   ;84C62D|C220    |      ;
     LDA.W #$0001                                               ;84C62F|A90100  |      ;
-    JSL.L fUnknown_8394D7                                      ;84C632|22D79483|8394D7;
+    JSL.L fTextUnknown_8394D7                                  ;84C632|22D79483|8394D7;
     SEP #$20                                                   ;84C636|E220    |      ;
     LDA.W $018A                                                ;84C638|AD8A01  |00018A;
     BNE CODE_84C644                                            ;84C63B|D007    |84C644;
@@ -9931,17 +9931,17 @@ CODE_84C651:
     SEP #$20                                                   ;84C651|E220    |      ;
     REP #$10                                                   ;84C653|C210    |      ;
     LDA.B #$03                                                 ;84C655|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C657|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C657|8D1401  |000114;
     LDA.B #$06                                                 ;84C65A|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C65C|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C65F|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C65C|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C65F|22328383|838332;
     SEP #$20                                                   ;84C663|E220    |      ;
     LDA.W $018A                                                ;84C665|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C668|C90B    |      ;
     BCS CODE_84C683                                            ;84C66A|B017    |84C683;
     REP #$20                                                   ;84C66C|C220    |      ;
     LDA.W #$0001                                               ;84C66E|A90100  |      ;
-    JSL.L fUnknown_8394D7                                      ;84C671|22D79483|8394D7;
+    JSL.L fTextUnknown_8394D7                                  ;84C671|22D79483|8394D7;
     SEP #$20                                                   ;84C675|E220    |      ;
     LDA.W $018A                                                ;84C677|AD8A01  |00018A;
     CLC                                                        ;84C67A|18      |      ;
@@ -9957,17 +9957,17 @@ CODE_84C684:
     SEP #$20                                                   ;84C684|E220    |      ;
     REP #$10                                                   ;84C686|C210    |      ;
     LDA.B #$03                                                 ;84C688|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84C68A|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84C68A|8D1401  |000114;
     LDA.B #$06                                                 ;84C68D|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84C68F|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84C692|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84C68F|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84C692|22328383|838332;
     SEP #$20                                                   ;84C696|E220    |      ;
     LDA.W $018A                                                ;84C698|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C69B|C90B    |      ;
     BCC CODE_84C6B6                                            ;84C69D|9017    |84C6B6;
     REP #$20                                                   ;84C69F|C220    |      ;
     LDA.W #$0001                                               ;84C6A1|A90100  |      ;
-    JSL.L fUnknown_8394D7                                      ;84C6A4|22D79483|8394D7;
+    JSL.L fTextUnknown_8394D7                                  ;84C6A4|22D79483|8394D7;
     SEP #$20                                                   ;84C6A8|E220    |      ;
     LDA.W $018A                                                ;84C6AA|AD8A01  |00018A;
     SEC                                                        ;84C6AD|38      |      ;
@@ -11221,7 +11221,7 @@ CODE_84CED2:
     CMP.W #$0078                                               ;84CEE6|C97800  |      ;
     BNE CODE_84CF04                                            ;84CEE9|D019    |84CF04;
     STZ.W $09B1                                                ;84CEEB|9CB109  |0009B1;
-    JSL.L fUnknown_8393F9                                      ;84CEEE|22F99383|8393F9;
+    JSL.L fTextUnknown_8393F9                                  ;84CEEE|22F99383|8393F9;
     SEP #$20                                                   ;84CEF2|E220    |      ;
     LDA.B #$01                                                 ;84CEF4|A901    |      ;
     STA.W $019A                                                ;84CEF6|8D9A01  |00019A;
@@ -11279,7 +11279,7 @@ CODE_84CF40:
  
  
 CODE_84CF4B:
-    JSL.L fUnknown_8393F9                                      ;84CF4B|22F99383|8393F9;
+    JSL.L fTextUnknown_8393F9                                  ;84CF4B|22F99383|8393F9;
     SEP #$20                                                   ;84CF4F|E220    |      ;
     LDA.B #$01                                                 ;84CF51|A901    |      ;
     STA.W $019A                                                ;84CF53|8D9A01  |00019A;
@@ -11299,7 +11299,7 @@ CODE_84CF62:
  
  
 CODE_84CF6D:
-    JSL.L fUnknown_83932D                                      ;84CF6D|222D9383|83932D;
+    JSL.L fTextUnknown_83932D                                  ;84CF6D|222D9383|83932D;
     REP #$20                                                   ;84CF71|C220    |      ;
     LDA.W nCurrentTextIndex                                    ;84CF73|AD8701  |000187;
     INC A                                                      ;84CF76|1A      |      ;
@@ -11357,11 +11357,11 @@ CODE_84CFCC:
     SEP #$20                                                   ;84CFCC|E220    |      ;
     REP #$10                                                   ;84CFCE|C210    |      ;
     LDA.B #$01                                                 ;84CFD0|A901    |      ;
-    STA.W nSoundRegisterValue0                                 ;84CFD2|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84CFD2|8D1401  |000114;
     LDA.B #$06                                                 ;84CFD5|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84CFD7|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84CFDA|22328383|838332;
-    JSL.L fUnknown_8393F9                                      ;84CFDE|22F99383|8393F9;
+    STA.W nAudioRegisterValue1                                 ;84CFD7|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84CFDA|22328383|838332;
+    JSL.L fTextUnknown_8393F9                                  ;84CFDE|22F99383|8393F9;
     SEP #$20                                                   ;84CFE2|E220    |      ;
     LDA.B #$01                                                 ;84CFE4|A901    |      ;
     STA.W $019A                                                ;84CFE6|8D9A01  |00019A;
@@ -11372,14 +11372,14 @@ CODE_84CFEA:
     SEP #$20                                                   ;84CFEA|E220    |      ;
     REP #$10                                                   ;84CFEC|C210    |      ;
     LDA.B #$03                                                 ;84CFEE|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84CFF0|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84CFF0|8D1401  |000114;
     LDA.B #$06                                                 ;84CFF3|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84CFF5|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84CFF8|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84CFF5|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84CFF8|22328383|838332;
     REP #$30                                                   ;84CFFC|C230    |      ;
     LDX.W #$0001                                               ;84CFFE|A20100  |      ;
     LDA.W #$00B1                                               ;84D001|A9B100  |      ;
-    JSL.L fSystemTransferGlyph                                 ;84D004|22239883|839823;
+    JSL.L fTextTransferGlyph                                   ;84D004|22239883|839823;
     SEP #$20                                                   ;84D008|E220    |      ;
     LDA.W $018F                                                ;84D00A|AD8F01  |00018F;
     CMP.B #$03                                                 ;84D00D|C903    |      ;
@@ -11421,14 +11421,14 @@ CODE_84D03A:
     SEP #$20                                                   ;84D03A|E220    |      ;
     REP #$10                                                   ;84D03C|C210    |      ;
     LDA.B #$03                                                 ;84D03E|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84D040|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84D040|8D1401  |000114;
     LDA.B #$06                                                 ;84D043|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84D045|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84D048|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84D045|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84D048|22328383|838332;
     REP #$30                                                   ;84D04C|C230    |      ;
     LDX.W #$0001                                               ;84D04E|A20100  |      ;
     LDA.W #$00B1                                               ;84D051|A9B100  |      ;
-    JSL.L fSystemTransferGlyph                                 ;84D054|22239883|839823;
+    JSL.L fTextTransferGlyph                                   ;84D054|22239883|839823;
     SEP #$20                                                   ;84D058|E220    |      ;
     LDA.W $018F                                                ;84D05A|AD8F01  |00018F;
     BEQ CODE_84D069                                            ;84D05D|F00A    |84D069;
@@ -11470,10 +11470,10 @@ CODE_84D08E:
     SEP #$20                                                   ;84D08E|E220    |      ;
     REP #$10                                                   ;84D090|C210    |      ;
     LDA.B #$03                                                 ;84D092|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84D094|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84D094|8D1401  |000114;
     LDA.B #$06                                                 ;84D097|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84D099|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84D09C|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84D099|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84D09C|22328383|838332;
     SEP #$20                                                   ;84D0A0|E220    |      ;
     LDA.W $018E                                                ;84D0A2|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0A5|C903    |      ;
@@ -11484,7 +11484,7 @@ CODE_84D08E:
     REP #$30                                                   ;84D0B0|C230    |      ;
     LDX.W #$0001                                               ;84D0B2|A20100  |      ;
     LDA.W #$00B1                                               ;84D0B5|A9B100  |      ;
-    JSL.L fSystemTransferGlyph                                 ;84D0B8|22239883|839823;
+    JSL.L fTextTransferGlyph                                   ;84D0B8|22239883|839823;
     SEP #$20                                                   ;84D0BC|E220    |      ;
     LDA.W $018F                                                ;84D0BE|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0C1|C902    |      ;
@@ -11525,10 +11525,10 @@ CODE_84D0F4:
     SEP #$20                                                   ;84D0F4|E220    |      ;
     REP #$10                                                   ;84D0F6|C210    |      ;
     LDA.B #$03                                                 ;84D0F8|A903    |      ;
-    STA.W nSoundRegisterValue0                                 ;84D0FA|8D1401  |000114;
+    STA.W nAudioRegisterValue0                                 ;84D0FA|8D1401  |000114;
     LDA.B #$06                                                 ;84D0FD|A906    |      ;
-    STA.W nSoundRegisterValue1                                 ;84D0FF|8D1501  |000115;
-    JSL.L fSoundSeSoundRegister2to0A                           ;84D102|22328383|838332;
+    STA.W nAudioRegisterValue1                                 ;84D0FF|8D1501  |000115;
+    JSL.L fAudioSetRegister2to0A                               ;84D102|22328383|838332;
     SEP #$20                                                   ;84D106|E220    |      ;
     LDA.W $018E                                                ;84D108|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D10B|C903    |      ;
@@ -11539,7 +11539,7 @@ CODE_84D0F4:
     REP #$30                                                   ;84D116|C230    |      ;
     LDX.W #$0001                                               ;84D118|A20100  |      ;
     LDA.W #$00B1                                               ;84D11B|A9B100  |      ;
-    JSL.L fSystemTransferGlyph                                 ;84D11E|22239883|839823;
+    JSL.L fTextTransferGlyph                                   ;84D11E|22239883|839823;
     SEP #$20                                                   ;84D122|E220    |      ;
     LDA.W $018F                                                ;84D124|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D127|C902    |      ;
