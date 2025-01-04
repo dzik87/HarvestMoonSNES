@@ -259,34 +259,34 @@ fSystemTransferGlyphToMemory:
  
  
 fUnknown_8381B7:
-    SEP #$20                                                   ;8381B7|E220    |      ;
+    SEP #$20                                                   ;8381B7|E220    |      ; X: nArg1, $72: ptr24
     REP #$10                                                   ;8381B9|C210    |      ;
     LDA.B #$06                                                 ;8381BB|A906    |      ;
-    STA.B $27                                                  ;8381BD|8527    |000027;
+    STA.B $27                                                  ;8381BD|8527    |000027; $27 = 0x06
     LDA.B #$18                                                 ;8381BF|A918    |      ;
-    STA.B $29                                                  ;8381C1|8529    |000029;
-    LDY.W #$0004                                               ;8381C3|A00400  |      ;
+    STA.B $29                                                  ;8381C1|8529    |000029; $29 = 0x18
+    LDY.W #$0004                                               ;8381C3|A00400  |      ; Y = 0x04
     REP #$20                                                   ;8381C6|C220    |      ;
-    LDA.W #$0080                                               ;8381C8|A98000  |      ;
-    PHX                                                        ;8381CB|DA      |      ;
+    LDA.W #$0080                                               ;8381C8|A98000  |      ; A = 0x80
+    PHX                                                        ;8381CB|DA      |      ; X -> stack1
     JSL.L fSystemTransferData                                  ;8381CC|22338A80|808A33;
     SEP #$20                                                   ;8381D0|E220    |      ;
     LDA.B #$07                                                 ;8381D2|A907    |      ;
-    STA.B $27                                                  ;8381D4|8527    |000027;
+    STA.B $27                                                  ;8381D4|8527    |000027; $27 = 0x07
     LDA.B #$18                                                 ;8381D6|A918    |      ;
-    STA.B $29                                                  ;8381D8|8529    |000029;
+    STA.B $29                                                  ;8381D8|8529    |000029; $29 = 0x18
     REP #$30                                                   ;8381DA|C230    |      ;
     PLX                                                        ;8381DC|FA      |      ;
     TXA                                                        ;8381DD|8A      |      ;
     CLC                                                        ;8381DE|18      |      ;
     ADC.W #$0020                                               ;8381DF|692000  |      ;
-    TAX                                                        ;8381E2|AA      |      ;
+    TAX                                                        ;8381E2|AA      |      ; X = nArg1 + 0x20
     LDY.W #$0004                                               ;8381E3|A00400  |      ;
     REP #$20                                                   ;8381E6|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;8381E8|A572    |000072;
     CLC                                                        ;8381EA|18      |      ;
     ADC.W #$0004                                               ;8381EB|690400  |      ;
-    STA.B ptrUnknown0x72                                       ;8381EE|8572    |000072;
+    STA.B ptrUnknown0x72                                       ;8381EE|8572    |000072; $72 += 0x04
     LDA.W #$0080                                               ;8381F0|A98000  |      ;
     JSL.L fSystemTransferData                                  ;8381F3|22338A80|808A33;
     RTL                                                        ;8381F7|6B      |      ;
@@ -2142,7 +2142,7 @@ aAudioRelatedData_838F4F:
     dw $005C,$00BC                                             ;838F7F|        |      ;
  
 sAudioData1_838F83:
-    dl sAudioTrack_AD8FD6                                      ;838F83|        |AD8FD6; 0x1A * [ptr24, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
+    dl sAudioTrack_AD8FD6                                      ;838F83|        |AD8FD6; 0x1A * [ptr24 pAudioTrack, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
     db $07,$03,$01,$0C,$05,$26,$24,$00,$00,$00,$00             ;838F86|        |      ;
     dl sAudioTrack_AD8FD6                                      ;838F91|        |AD8FD6;
     db $07,$03,$01,$0C,$00,$00,$00,$00,$00,$00,$00             ;838F94|        |      ;
@@ -2196,7 +2196,7 @@ sAudioData1_838F83:
     db $13,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390E4|        |      ;
  
 sAudioData2_8390EF:
-    db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390EF|        |      ; 0x28 * [n8, n8, n8, n8, n8, n8, n8, ptr24]
+    db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390EF|        |      ; 0x28 * [n8, n8, n8, n8, n8, n8, n8, ptr24 pAudioTrack]
     dl sAudioTrack_ADC5E9                                      ;8390F6|        |ADC5E9;
     db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390F9|        |      ;
     dl sAudioTrack_ADC5E9                                      ;839100|        |ADC5E9;
@@ -2364,13 +2364,13 @@ fUnknown_83932D:
  
  
 fLoadDialog:
-    REP #$30                                                   ;83935F|C230    |      ; X: nDialogIndex
-    STX.W nDialogIndex                                         ;839361|8E8301  |000183;
+    REP #$30                                                   ;83935F|C230    |      ; X: nDialogPointerIndex
+    STX.W nCurrentDialogPointerIndex                           ;839361|8E8301  |000183;
     LDA.W #$5000                                               ;839364|A90050  |      ;
     CLC                                                        ;839367|18      |      ;
     ADC.W #$0010                                               ;839368|691000  |      ;
     STA.W $0185                                                ;83936B|8D8501  |000185;
-    STZ.W $0187                                                ;83936E|9C8701  |000187;
+    STZ.W nCurrentTextIndex                                    ;83936E|9C8701  |000187;
     SEP #$20                                                   ;839371|E220    |      ;
     LDA.W $019B                                                ;839373|AD9B01  |00019B;
     ORA.B #$01                                                 ;839376|0901    |      ;
@@ -2382,17 +2382,17 @@ fLoadDialog:
     STZ.W $018F                                                ;839387|9C8F01  |00018F;
     STZ.W $0190                                                ;83938A|9C9001  |000190;
     REP #$20                                                   ;83938D|C220    |      ;
-    LDA.W nDialogIndex                                         ;83938F|AD8301  |000183;
+    LDA.W nCurrentDialogPointerIndex                           ;83938F|AD8301  |000183;
     ASL A                                                      ;839392|0A      |      ;
     CLC                                                        ;839393|18      |      ;
-    ADC.W nDialogIndex                                         ;839394|6D8301  |000183;
+    ADC.W nCurrentDialogPointerIndex                           ;839394|6D8301  |000183;
     TAX                                                        ;839397|AA      |      ;
-    LDA.L psDialog,X                                           ;839398|BFF69B83|839BF6;
+    LDA.L ptrDialog,X                                          ;839398|BFF69B83|839BF6;
     STA.B ptrCurrentDialog                                     ;83939C|8501    |000001;
     INX                                                        ;83939E|E8      |      ;
     INX                                                        ;83939F|E8      |      ;
     SEP #$20                                                   ;8393A0|E220    |      ;
-    LDA.L psDialog,X                                           ;8393A2|BFF69B83|839BF6;
+    LDA.L ptrDialog,X                                          ;8393A2|BFF69B83|839BF6;
     STA.B ptrCurrentDialog+2                                   ;8393A6|8503    |000003;
     SEP #$20                                                   ;8393A8|E220    |      ;
     LDA.W $0191                                                ;8393AA|AD9101  |000191;
@@ -2478,24 +2478,28 @@ CODE_839439:
     RTL                                                        ;839446|6B      |      ;
  
  
-CODE_839447:
+fUnknown_839447:
     REP #$30                                                   ;839447|C230    |      ;
     JSR.W fUnknown_839495                                      ;839449|209594  |839495;
     RTL                                                        ;83944C|6B      |      ;
  
  
 Table_83944D:
-    db $10,$50,$70,$51,$50,$53,$70,$50,$50,$52,$A0,$21         ;83944D|        |      ;
-    db $A1,$21,$B0,$21,$B1,$21,$A2,$21,$A3,$21,$B2,$21         ;839459|        |      ;
-    db $B3,$21                                                 ;839465|        |      ;
+    db $10,$50,$70,$51,$50,$53,$70,$50,$50,$52                 ;83944D|        |      ;
  
-Table_839467:
-    db $0F,$00,$10,$00,$11,$00,$12,$00,$13,$00,$14,$00         ;839467|        |      ;
-    db $15,$00,$16,$00,$17,$00,$18,$00,$19,$00                 ;839473|        |      ;
+aUnknown_839457:
+    dw $21A0,$21A1,$21B0,$21B1                                 ;839457|        |      ;
  
-Table_83947D:
-    db $88,$70,$C8,$70,$08,$71,$48,$71,$88,$71,$C8,$71         ;83947D|        |      ;
-    db $08,$72,$48,$72,$88,$72,$C8,$72,$08,$73,$90,$70         ;839489|        |      ;
+aUnknown_83945F:
+    dw $21A2,$21A3,$21B2,$21B3                                 ;83945F|        |      ;
+ 
+aDialogPointerIndexes_839467:
+    dw $000F,$0010,$0011,$0012,$0013,$0014                     ;839467|        |      ; 0x0B * [n16 nDialogPointerIndex]
+    dw $0015,$0016,$0017,$0018,$0019                           ;839473|        |      ;
+ 
+aUnknown_83947D:
+    dw $7088,$70C8,$7108,$7148,$7188,$71C8                     ;83947D|        |      ;
+    dw $7208,$7248,$7288,$72C8,$7308,$7090                     ;839489|        |      ;
  
 fUnknown_839495:
     REP #$30                                                   ;839495|C230    |      ;
@@ -2503,30 +2507,28 @@ fUnknown_839495:
     LDA.W $018B                                                ;839499|AD8B01  |00018B;
     AND.W #$007F                                               ;83949C|297F00  |      ;
     CMP.W #$0014                                               ;83949F|C91400  |      ;
-    BNE CODE_8394B0                                            ;8394A2|D00C    |8394B0;
+    BNE +                                                      ;8394A2|D00C    |8394B0;
     SEP #$20                                                   ;8394A4|E220    |      ;
     LDA.W $018B                                                ;8394A6|AD8B01  |00018B;
     AND.B #$80                                                 ;8394A9|2980    |      ;
     EOR.B #$80                                                 ;8394AB|4980    |      ;
     STA.W $018B                                                ;8394AD|8D8B01  |00018B;
  
-CODE_8394B0:
-    SEP #$20                                                   ;8394B0|E220    |      ;
+  + SEP #$20                                                   ;8394B0|E220    |      ;
     LDA.W $018B                                                ;8394B2|AD8B01  |00018B;
     AND.B #$80                                                 ;8394B5|2980    |      ;
-    BNE CODE_8394C4                                            ;8394B7|D00B    |8394C4;
+    BNE +                                                      ;8394B7|D00B    |8394C4;
     REP #$20                                                   ;8394B9|C220    |      ;
     LDA.W #$0000                                               ;8394BB|A90000  |      ;
     JSL.L fUnknown_8394D7                                      ;8394BE|22D79483|8394D7;
-    BRA CODE_8394CD                                            ;8394C2|8009    |8394CD;
+    BRA .return                                                ;8394C2|8009    |8394CD;
  
  
-CODE_8394C4:
-    REP #$20                                                   ;8394C4|C220    |      ;
+  + REP #$20                                                   ;8394C4|C220    |      ;
     LDA.W #$0001                                               ;8394C6|A90100  |      ;
     JSL.L fUnknown_8394D7                                      ;8394C9|22D79483|8394D7;
  
-CODE_8394CD:
+.return:
     SEP #$20                                                   ;8394CD|E220    |      ;
     LDA.W $018B                                                ;8394CF|AD8B01  |00018B;
     INC A                                                      ;8394D2|1A      |      ;
@@ -2543,37 +2545,35 @@ fUnknown_8394D7:
     XBA                                                        ;8394E0|EB      |      ;
     LDA.W $018A                                                ;8394E1|AD8A01  |00018A;
     CMP.B #$0B                                                 ;8394E4|C90B    |      ;
-    BCC CODE_8394EA                                            ;8394E6|9002    |8394EA;
+    BCC +                                                      ;8394E6|9002    |8394EA;
     LDA.B #$0B                                                 ;8394E8|A90B    |      ;
  
-CODE_8394EA:
-    REP #$20                                                   ;8394EA|C220    |      ;
+  + REP #$20                                                   ;8394EA|C220    |      ;
     ASL A                                                      ;8394EC|0A      |      ;
     TAX                                                        ;8394ED|AA      |      ;
-    LDA.L Table_83947D,X                                       ;8394EE|BF7D9483|83947D;
+    LDA.L aUnknown_83947D,X                                    ;8394EE|BF7D9483|83947D;
     TAX                                                        ;8394F2|AA      |      ;
     REP #$20                                                   ;8394F3|C220    |      ;
     PLA                                                        ;8394F5|68      |      ;
     CMP.W #$0001                                               ;8394F6|C90100  |      ;
-    BEQ CODE_83950A                                            ;8394F9|F00F    |83950A;
+    BEQ +                                                      ;8394F9|F00F    |83950A;
     REP #$20                                                   ;8394FB|C220    |      ;
     LDA.W #$9457                                               ;8394FD|A95794  |      ;
     STA.B ptrUnknown0x72                                       ;839500|8572    |000072;
     SEP #$20                                                   ;839502|E220    |      ;
     LDA.B #$83                                                 ;839504|A983    |      ;
-    STA.B ptrUnknown0x72+2                                     ;839506|8574    |000074;
-    BRA CODE_839517                                            ;839508|800D    |839517;
+    STA.B ptrUnknown0x72+2                                     ;839506|8574    |000074; $72 = 0x839457
+    BRA .return                                                ;839508|800D    |839517;
  
  
-CODE_83950A:
-    REP #$20                                                   ;83950A|C220    |      ;
+  + REP #$20                                                   ;83950A|C220    |      ;
     LDA.W #$945F                                               ;83950C|A95F94  |      ;
     STA.B ptrUnknown0x72                                       ;83950F|8572    |000072;
     SEP #$20                                                   ;839511|E220    |      ;
     LDA.B #$83                                                 ;839513|A983    |      ;
-    STA.B ptrUnknown0x72+2                                     ;839515|8574    |000074;
+    STA.B ptrUnknown0x72+2                                     ;839515|8574    |000074; $72 = 0x83945F
  
-CODE_839517:
+.return:
     JSL.L fUnknown_8381B7                                      ;839517|22B78183|8381B7;
     RTL                                                        ;83951B|6B      |      ;
  
@@ -2583,61 +2583,55 @@ fReadText:
     REP #$10                                                   ;83951E|C210    |      ;
     LDA.W $019B                                                ;839520|AD9B01  |00019B;
     AND.B #$20                                                 ;839523|2920    |      ;
-    BEQ .label1                                                ;839525|F003    |83952A;
-    JMP.W CODE_839447                                          ;839527|4C4794  |839447;
+    BEQ +                                                      ;839525|F003    |83952A;
+    JMP.W fUnknown_839447                                      ;839527|4C4794  |839447;
  
  
-.label1:
-    LDA.W $019B                                                ;83952A|AD9B01  |00019B;
+  + LDA.W $019B                                                ;83952A|AD9B01  |00019B;
     AND.B #$01                                                 ;83952D|2901    |      ;
-    BNE .label2                                                ;83952F|D003    |839534;
-    JMP.W .return                                              ;839531|4CF095  |8395F0;
+    BNE .getCurrentLetter                                      ;83952F|D003    |839534;
+    JMP.W .justReturn                                          ;839531|4CF095  |8395F0;
  
  
-.label2:
+.getCurrentLetter:
     SEP #$20                                                   ;839534|E220    |      ;
     LDA.W $019B                                                ;839536|AD9B01  |00019B;
     AND.B #$FD                                                 ;839539|29FD    |      ;
     STA.W $019B                                                ;83953B|8D9B01  |00019B;
     REP #$20                                                   ;83953E|C220    |      ;
-    LDA.W $0187                                                ;839540|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;839540|AD8701  |000187; A = nCurrentTextIndex
     ASL A                                                      ;839543|0A      |      ;
     TAY                                                        ;839544|A8      |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;839545|B701    |000001;
+    LDA.B [ptrCurrentDialog],Y                                 ;839545|B701    |000001; Y = nCurrentTextIndex * 2
     CMP.W #$00A2                                               ;839547|C9A200  |      ;
-    BNE .not00A2                                               ;83954A|D003    |83954F;
+    BNE +                                                      ;83954A|D003    |83954F;
     JMP.W .textNextScreenHandler                               ;83954C|4CF195  |8395F1;
  
  
-.not00A2:
-    CMP.W #$00B1                                               ;83954F|C9B100  |      ;
-    BNE .not00B1                                               ;839552|D003    |839557;
+  + CMP.W #$00B1                                               ;83954F|C9B100  |      ;
+    BNE +                                                      ;839552|D003    |839557;
     JMP.W .textSpaceHandler                                    ;839554|4C0D96  |83960D;
  
  
-.not00B1:
-    CMP.W #$FFFC                                               ;839557|C9FCFF  |      ;
-    BNE .notFFFC                                               ;83955A|D003    |83955F;
+  + CMP.W #$FFFC                                               ;839557|C9FCFF  |      ;
+    BNE +                                                      ;83955A|D003    |83955F;
     JMP.W .textFFFCHandler                                     ;83955C|4C2196  |839621;
  
  
-.notFFFC:
-    CMP.W #$FFFE                                               ;83955F|C9FEFF  |      ;
-    BNE .notFFFE                                               ;839562|D003    |839567;
+  + CMP.W #$FFFE                                               ;83955F|C9FEFF  |      ;
+    BNE +                                                      ;839562|D003    |839567;
     JMP.W .textFFFEHandler                                     ;839564|4C1997  |839719;
  
  
-.notFFFE:
-    CMP.W #$FFFF                                               ;839567|C9FFFF  |      ;
-    BNE .notFFFF                                               ;83956A|D003    |83956F;
+  + CMP.W #$FFFF                                               ;839567|C9FFFF  |      ;
+    BNE +                                                      ;83956A|D003    |83956F;
     JMP.W .textFFFFHandler                                     ;83956C|4C5297  |839752;
  
  
-.notFFFF:
-    SEP #$20                                                   ;83956F|E220    |      ;
+  + SEP #$20                                                   ;83956F|E220    |      ;
     LDA.W $0189                                                ;839571|AD8901  |000189;
     CMP.B #$04                                                 ;839574|C904    |      ;
-    BNE .label3                                                ;839576|D06F    |8395E7;
+    BNE .return                                                ;839576|D06F    |8395E7;
     STZ.W $0189                                                ;839578|9C8901  |000189;
     REP #$20                                                   ;83957B|C220    |      ;
     LDA.B [ptrCurrentDialog],Y                                 ;83957D|B701    |000001;
@@ -2685,9 +2679,9 @@ fReadText:
     LDA.W $018C                                                ;8395CB|AD8C01  |00018C;
     BNE .label6                                                ;8395CE|D009    |8395D9;
     REP #$20                                                   ;8395D0|C220    |      ;
-    LDA.W $0187                                                ;8395D2|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;8395D2|AD8701  |000187;
     INC A                                                      ;8395D5|1A      |      ;
-    STA.W $0187                                                ;8395D6|8D8701  |000187;
+    STA.W nCurrentTextIndex                                    ;8395D6|8D8701  |000187;
  
 .label6:
     SEP #$20                                                   ;8395D9|E220    |      ;
@@ -2698,13 +2692,13 @@ fReadText:
     TAX                                                        ;8395E3|AA      |      ;
     JSR.W fUnknownText_839838                                  ;8395E4|203898  |839838;
  
-.label3:
+.return:
     SEP #$20                                                   ;8395E7|E220    |      ;
     LDA.W $0189                                                ;8395E9|AD8901  |000189;
     INC A                                                      ;8395EC|1A      |      ;
     STA.W $0189                                                ;8395ED|8D8901  |000189;
  
-.return:
+.justReturn:
     RTL                                                        ;8395F0|6B      |      ;
  
  
@@ -2715,22 +2709,22 @@ fReadText:
     STA.W $019B                                                ;8395F8|8D9B01  |00019B;
     REP #$20                                                   ;8395FB|C220    |      ;
     LDA.W #$5528                                               ;8395FD|A92855  |      ;
-    STA.W $0185                                                ;839600|8D8501  |000185;
+    STA.W $0185                                                ;839600|8D8501  |000185; $0185 = 0x5528
     REP #$20                                                   ;839603|C220    |      ;
-    LDA.W #$00A2                                               ;839605|A9A200  |      ;
-    JSR.W fUnknownText_83975F                                  ;839608|205F97  |83975F;
-    BRA .return                                                ;83960B|80E3    |8395F0;
+    LDA.W #$00A2                                               ;839605|A9A200  |      ; A = 0xA2
+    JSR.W fTextNextScreenHandler_83975F                        ;839608|205F97  |83975F;
+    BRA .justReturn                                            ;83960B|80E3    |8395F0;
  
  
 .textSpaceHandler:
     REP #$20                                                   ;83960D|C220    |      ;
-    LDA.W $0187                                                ;83960F|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;83960F|AD8701  |000187;
     INC A                                                      ;839612|1A      |      ;
-    STA.W $0187                                                ;839613|8D8701  |000187;
+    STA.W nCurrentTextIndex                                    ;839613|8D8701  |000187; nCurrentTextIndex++
     REP #$30                                                   ;839616|C230    |      ;
     LDX.W #$0001                                               ;839618|A20100  |      ;
     JSR.W fUnknownText_839838                                  ;83961B|203898  |839838;
-    JMP.W .label2                                              ;83961E|4C3495  |839534;
+    JMP.W .getCurrentLetter                                    ;83961E|4C3495  |839534;
  
  
 .textFFFCHandler:
@@ -2738,7 +2732,7 @@ fReadText:
     LDA.W $018C                                                ;839623|AD8C01  |00018C;
     BNE .label7                                                ;839626|D052    |83967A;
     REP #$20                                                   ;839628|C220    |      ;
-    LDA.W $0187                                                ;83962A|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;83962A|AD8701  |000187;
     ASL A                                                      ;83962D|0A      |      ;
     TAY                                                        ;83962E|A8      |      ;
     INY                                                        ;83962F|C8      |      ;
@@ -2772,15 +2766,14 @@ fReadText:
     LDY.W #$0000                                               ;839668|A00000  |      ;
     LDX.W #$0000                                               ;83966B|A20000  |      ;
  
-.label8:
-    PHA                                                        ;83966E|48      |      ;
+  - PHA                                                        ;83966E|48      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83966F|B772    |000072;
     STA.W $0192,X                                              ;839671|9D9201  |000192;
     INY                                                        ;839674|C8      |      ;
     INX                                                        ;839675|E8      |      ;
     PLA                                                        ;839676|68      |      ;
     DEC A                                                      ;839677|3A      |      ;
-    BNE .label8                                                ;839678|D0F4    |83966E;
+    BNE -                                                      ;839678|D0F4    |83966E;
  
 .label7:
     SEP #$20                                                   ;83967A|E220    |      ;
@@ -2793,22 +2786,21 @@ fReadText:
     SEP #$20                                                   ;83968C|E220    |      ;
     STZ.W $0189                                                ;83968E|9C8901  |000189;
     LDA.W $018C                                                ;839691|AD8C01  |00018C;
-    BNE .label9                                                ;839694|D008    |83969E;
-    LDA.W $0187                                                ;839696|AD8701  |000187;
+    BNE +                                                      ;839694|D008    |83969E;
+    LDA.W nCurrentTextIndex                                    ;839696|AD8701  |000187;
     INC A                                                      ;839699|1A      |      ;
     INC A                                                      ;83969A|1A      |      ;
-    STA.W $0187                                                ;83969B|8D8701  |000187;
+    STA.W nCurrentTextIndex                                    ;83969B|8D8701  |000187;
  
-.label9:
-    JMP.W .label12                                             ;83969E|4CC995  |8395C9;
+  + JMP.W .label12                                             ;83969E|4CC995  |8395C9;
  
  
 .textFFFDHandler:
     SEP #$20                                                   ;8396A1|E220    |      ;
     LDA.W $018C                                                ;8396A3|AD8C01  |00018C;
-    BNE .label10                                               ;8396A6|D014    |8396BC;
+    BNE +                                                      ;8396A6|D014    |8396BC;
     REP #$20                                                   ;8396A8|C220    |      ;
-    LDA.W $0187                                                ;8396AA|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;8396AA|AD8701  |000187;
     ASL A                                                      ;8396AD|0A      |      ;
     TAY                                                        ;8396AE|A8      |      ;
     INY                                                        ;8396AF|C8      |      ;
@@ -2819,9 +2811,8 @@ fReadText:
     DEC A                                                      ;8396B8|3A      |      ;
     STA.W $018D                                                ;8396B9|8D8D01  |00018D;
  
-.label10:
-    REP #$20                                                   ;8396BC|C220    |      ;
-    LDA.W $0187                                                ;8396BE|AD8701  |000187;
+  + REP #$20                                                   ;8396BC|C220    |      ;
+    LDA.W nCurrentTextIndex                                    ;8396BE|AD8701  |000187;
     ASL A                                                      ;8396C1|0A      |      ;
     CLC                                                        ;8396C2|18      |      ;
     ADC.W #$0004                                               ;8396C3|690400  |      ;
@@ -2859,14 +2850,13 @@ fReadText:
     SEP #$20                                                   ;839704|E220    |      ;
     STZ.W $0189                                                ;839706|9C8901  |000189;
     LDA.W $018C                                                ;839709|AD8C01  |00018C;
-    BNE .label11                                               ;83970C|D008    |839716;
-    LDA.W $0187                                                ;83970E|AD8701  |000187;
+    BNE +                                                      ;83970C|D008    |839716;
+    LDA.W nCurrentTextIndex                                    ;83970E|AD8701  |000187;
     INC A                                                      ;839711|1A      |      ;
     INC A                                                      ;839712|1A      |      ;
-    STA.W $0187                                                ;839713|8D8701  |000187;
+    STA.W nCurrentTextIndex                                    ;839713|8D8701  |000187;
  
-.label11:
-    JMP.W .label12                                             ;839716|4CC995  |8395C9;
+  + JMP.W .label12                                             ;839716|4CC995  |8395C9;
  
  
 .textFFFEHandler:
@@ -2875,7 +2865,7 @@ fReadText:
     ORA.B #$10                                                 ;83971E|0910    |      ;
     STA.W $019B                                                ;839720|8D9B01  |00019B;
     REP #$20                                                   ;839723|C220    |      ;
-    LDA.W $0187                                                ;839725|AD8701  |000187;
+    LDA.W nCurrentTextIndex                                    ;839725|AD8701  |000187;
     ASL A                                                      ;839728|0A      |      ;
     TAY                                                        ;839729|A8      |      ;
     INY                                                        ;83972A|C8      |      ;
@@ -2895,8 +2885,8 @@ fReadText:
     STA.W $0185                                                ;839744|8D8501  |000185;
     REP #$20                                                   ;839747|C220    |      ;
     LDA.W #$0275                                               ;839749|A97502  |      ;
-    JSR.W fUnknownText_83975F                                  ;83974C|205F97  |83975F;
-    JMP.W .return                                              ;83974F|4CF095  |8395F0;
+    JSR.W fTextNextScreenHandler_83975F                        ;83974C|205F97  |83975F;
+    JMP.W .justReturn                                          ;83974F|4CF095  |8395F0;
  
  
 .textFFFFHandler:
@@ -2904,41 +2894,40 @@ fReadText:
     LDA.W $019B                                                ;839754|AD9B01  |00019B;
     ORA.B #$04                                                 ;839757|0904    |      ;
     STA.W $019B                                                ;839759|8D9B01  |00019B;
-    JMP.W .return                                              ;83975C|4CF095  |8395F0;
+    JMP.W .justReturn                                          ;83975C|4CF095  |8395F0;
  
  
-fUnknownText_83975F:
-    REP #$20                                                   ;83975F|C220    |      ;
+fTextNextScreenHandler_83975F:
+    REP #$20                                                   ;83975F|C220    |      ; A: nArg
     STA.B $7E                                                  ;839761|857E    |00007E;
     LDA.W $018B                                                ;839763|AD8B01  |00018B;
     AND.W #$007F                                               ;839766|297F00  |      ;
     CMP.W #$0014                                               ;839769|C91400  |      ;
-    BNE CODE_83977A                                            ;83976C|D00C    |83977A;
+    BNE +                                                      ;83976C|D00C    |83977A;
     SEP #$20                                                   ;83976E|E220    |      ;
     LDA.W $018B                                                ;839770|AD8B01  |00018B;
     AND.B #$80                                                 ;839773|2980    |      ;
     EOR.B #$80                                                 ;839775|4980    |      ;
     STA.W $018B                                                ;839777|8D8B01  |00018B;
  
-CODE_83977A:
-    SEP #$20                                                   ;83977A|E220    |      ;
+  + SEP #$20                                                   ;83977A|E220    |      ;
     LDA.W $018B                                                ;83977C|AD8B01  |00018B;
     AND.B #$80                                                 ;83977F|2980    |      ;
-    BNE CODE_839790                                            ;839781|D00D    |839790;
+    BNE .noSign                                                ;839781|D00D    |839790;
     REP #$30                                                   ;839783|C230    |      ;
     LDX.W #$0001                                               ;839785|A20100  |      ;
     LDA.B $7E                                                  ;839788|A57E    |00007E;
     JSL.L fSystemTransferGlyph                                 ;83978A|22239883|839823;
-    BRA CODE_83979C                                            ;83978E|800C    |83979C;
+    BRA .return                                                ;83978E|800C    |83979C;
  
  
-CODE_839790:
+.noSign:
     REP #$30                                                   ;839790|C230    |      ;
     LDX.W #$0001                                               ;839792|A20100  |      ;
     LDA.W #$00B1                                               ;839795|A9B100  |      ;
     JSL.L fSystemTransferGlyph                                 ;839798|22239883|839823;
  
-CODE_83979C:
+.return:
     SEP #$20                                                   ;83979C|E220    |      ;
     LDA.W $018B                                                ;83979E|AD8B01  |00018B;
     INC A                                                      ;8397A1|1A      |      ;
@@ -2966,8 +2955,7 @@ fUnknown_8397A6:
     STA.B $80                                                  ;8397C6|8580    |000080;
     LDX.W #$0000                                               ;8397C8|A20000  |      ;
  
-CODE_8397CB:
-    REP #$20                                                   ;8397CB|C220    |      ;
+  - REP #$20                                                   ;8397CB|C220    |      ;
     LDA.W $0192                                                ;8397CD|AD9201  |000192;
     SEC                                                        ;8397D0|38      |      ;
     SBC.B $7E                                                  ;8397D1|E57E    |00007E;
@@ -2976,13 +2964,12 @@ CODE_8397CB:
     LDA.W $0194                                                ;8397D8|AD9401  |000194;
     SBC.B $80                                                  ;8397DB|E580    |000080;
     STA.W $0194                                                ;8397DD|8D9401  |000194;
-    BMI CODE_8397E5                                            ;8397E0|3003    |8397E5;
+    BMI +                                                      ;8397E0|3003    |8397E5;
     INX                                                        ;8397E2|E8      |      ;
-    BRA CODE_8397CB                                            ;8397E3|80E6    |8397CB;
+    BRA -                                                      ;8397E3|80E6    |8397CB;
  
  
-CODE_8397E5:
-    REP #$20                                                   ;8397E5|C220    |      ;
+  + REP #$20                                                   ;8397E5|C220    |      ;
     LDA.W $0192                                                ;8397E7|AD9201  |000192;
     CLC                                                        ;8397EA|18      |      ;
     ADC.B $7E                                                  ;8397EB|657E    |00007E;
@@ -2994,15 +2981,14 @@ CODE_8397E5:
     SEP #$20                                                   ;8397FA|E220    |      ;
     LDA.W $019B                                                ;8397FC|AD9B01  |00019B;
     AND.B #$80                                                 ;8397FF|2980    |      ;
-    BNE CODE_839810                                            ;839801|D00D    |839810;
+    BNE +                                                      ;839801|D00D    |839810;
     CPX.W #$0000                                               ;839803|E00000  |      ;
-    BEQ CODE_839822                                            ;839806|F01A    |839822;
+    BEQ .return                                                ;839806|F01A    |839822;
     LDA.W $019B                                                ;839808|AD9B01  |00019B;
     ORA.B #$80                                                 ;83980B|0980    |      ;
     STA.W $019B                                                ;83980D|8D9B01  |00019B;
  
-CODE_839810:
-    REP #$30                                                   ;839810|C230    |      ;
+  + REP #$30                                                   ;839810|C230    |      ;
     TXA                                                        ;839812|8A      |      ;
     STA.B $7E                                                  ;839813|857E    |00007E;
     LDA.W #$00BC                                               ;839815|A9BC00  |      ;
@@ -3011,7 +2997,7 @@ CODE_839810:
     LDX.W #$0000                                               ;83981B|A20000  |      ;
     JSL.L fSystemTransferGlyph                                 ;83981E|22239883|839823;
  
-CODE_839822:
+.return:
     RTL                                                        ;839822|6B      |      ;
  
  
@@ -3030,26 +3016,26 @@ fSystemTransferGlyph:
  
 fUnknownText_839838:
     REP #$30                                                   ;839838|C230    |      ;
-    LDX.W #$0000                                               ;83983A|A20000  |      ;
-    TXA                                                        ;83983D|8A      |      ;
+    LDX.W #$0000                                               ;83983A|A20000  |      ; X = 0
+    TXA                                                        ;83983D|8A      |      ; X -> A
     ASL A                                                      ;83983E|0A      |      ;
     ASL A                                                      ;83983F|0A      |      ;
     ASL A                                                      ;839840|0A      |      ;
     ADC.W #$0008                                               ;839841|690800  |      ;
-    STA.B $80                                                  ;839844|8580    |000080;
+    STA.B $80                                                  ;839844|8580    |000080; $80 = A * 8 + 8
     LDA.W $0185                                                ;839846|AD8501  |000185;
     CLC                                                        ;839849|18      |      ;
     ADC.B $80                                                  ;83984A|6580    |000080;
-    STA.W $0185                                                ;83984C|8D8501  |000185;
+    STA.W $0185                                                ;83984C|8D8501  |000185; $0185 += A * 8 + 8
     AND.W #$00FF                                               ;83984F|29FF00  |      ;
     CMP.W #$0080                                               ;839852|C98000  |      ;
-    BNE CODE_839861                                            ;839855|D00A    |839861;
+    BNE .return                                                ;839855|D00A    |839861;
     LDA.W $0185                                                ;839857|AD8501  |000185;
     CLC                                                        ;83985A|18      |      ;
     ADC.W #$0080                                               ;83985B|698000  |      ;
     STA.W $0185                                                ;83985E|8D8501  |000185;
  
-CODE_839861:
+.return:
     RTS                                                        ;839861|60      |      ;
  
  
@@ -3518,7 +3504,7 @@ sTextFFFDPointerTable:
     dl $8008D5                                                 ;839BF2|        |8008D5;
     db $08                                                     ;839BF5|        |      ;
  
-psDialog:
+ptrDialog:
     dl sDialogEN_0x0000                                        ;839BF6|        |B68000; 0x0498 * [ptr24]
     dl sDialogEN_0x0001                                        ;839BF9|        |B680D8;
     dl sDialogEN_0x0002                                        ;839BFC|        |B6816C;
@@ -4890,9 +4876,9 @@ fSetDefaultValuesForVariables:
  
 fUnknown_83ABF0:
     REP #$30                                                   ;83ABF0|C230    |      ;
-    STZ.W nDialogIndex                                         ;83ABF2|9C8301  |000183;
+    STZ.W nCurrentDialogPointerIndex                           ;83ABF2|9C8301  |000183;
     STZ.W $0185                                                ;83ABF5|9C8501  |000185;
-    STZ.W $0187                                                ;83ABF8|9C8701  |000187;
+    STZ.W nCurrentTextIndex                                    ;83ABF8|9C8701  |000187;
     SEP #$20                                                   ;83ABFB|E220    |      ;
     STZ.W $019B                                                ;83ABFD|9C9B01  |00019B;
     STZ.W $019A                                                ;83AC00|9C9A01  |00019A;
