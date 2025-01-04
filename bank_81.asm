@@ -1517,7 +1517,7 @@ fUnknown_818989:
     SEP #$20                                                   ;8189D2|E220    |      ;
     LDA.L nUnknownDialogIndex_81A1A5,X                         ;8189D4|BFA5A181|81A1A5;
     STA.B ptrUnknown0x72+2                                     ;8189D8|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;8189DA|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;8189DA|22C9B183|83B1C9;
     REP #$20                                                   ;8189DE|C220    |      ;
     BEQ .zero0x80                                              ;8189E0|F007    |8189E9;
     LDA.W #$0004                                               ;8189E2|A90400  |      ;
@@ -2296,7 +2296,7 @@ fUnknown_818F5A:
     STA.B ptrUnknown0x72                                       ;818FC6|8572    |000072;
     SEP #$20                                                   ;818FC8|E220    |      ;
     STZ.B ptrUnknown0x72+2                                     ;818FCA|6474    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;818FCC|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;818FCC|22C9B183|83B1C9;
     SEP #$20                                                   ;818FD0|E220    |      ;
     STZ.W $091D                                                ;818FD2|9C1D09  |00091D;
     BRA fReturn_81900F                                         ;818FD5|8038    |81900F;
@@ -2978,7 +2978,7 @@ fUnknown_819497:
     STZ.W $091D                                                ;819530|9C1D09  |00091D;
     REP #$30                                                   ;819533|C230    |      ;
     LDA.W #$0005                                               ;819535|A90500  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;819538|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;819538|2282B283|83B282;
     JMP.W fReturn_8196AE                                       ;81953C|4CAE96  |8196AE;
  
  
@@ -7655,7 +7655,7 @@ subUnkown81C027_0x13:
     JSL.L fUnknown_848097                                      ;81C30E|22978084|848097;
     REP #$20                                                   ;81C312|C220    |      ;
     LDA.W #$0002                                               ;81C314|A90200  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81C317|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81C317|2282B283|83B282;
     JMP.W .exit                                                ;81C31B|4C30C3  |81C330;
  
  
@@ -8758,7 +8758,7 @@ subUnkown81C027_0x08:
     STA.L nPowerBerryEaten                                     ;81CAB2|8F361F7F|7F1F36;
     REP #$20                                                   ;81CAB6|C220    |      ;
     LDA.W #$000A                                               ;81CAB8|A90A00  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81CABB|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81CABB|2282B283|83B282;
     SEP #$20                                                   ;81CABF|E220    |      ;
     LDA.W nPlayerStamina                                       ;81CAC1|AD1709  |000917;
     CLC                                                        ;81CAC4|18      |      ;
@@ -10471,7 +10471,7 @@ subPlayerInteraction81D593_0x00:
 subPlayerInteraction81D593_0x01:
     REP #$20                                                   ;81D644|C220    |      ;
     LDA.W #$FFFE                                               ;81D646|A9FEFF  |      ;
-    JSL.L fUnknown_83B224                                      ;81D649|2224B283|83B224;
+    JSL.L fEngineAddWood                                       ;81D649|2224B283|83B224;
     REP #$20                                                   ;81D64D|C220    |      ;
     CMP.W #$0001                                               ;81D64F|C90100  |      ;
     BEQ +                                                      ;81D652|F00E    |81D662;
@@ -11205,7 +11205,7 @@ subPlayerInteraction81D593_0x14:
 subPlayerInteraction81D593_0x15:
     REP #$20                                                   ;81DBA1|C220    |      ;
     LDA.W #$FFFF                                               ;81DBA3|A9FFFF  |      ;
-    JSL.L fUnknown_83B253                                      ;81DBA6|2253B283|83B253;
+    JSL.L fEngineAddFeed                                       ;81DBA6|2253B283|83B253;
     REP #$20                                                   ;81DBAA|C220    |      ;
     CMP.W #$0001                                               ;81DBAC|C90100  |      ;
     BEQ +                                                      ;81DBAF|F00E    |81DBBF;
@@ -11396,7 +11396,7 @@ subPlayerInteraction81D593_0x26:
     JSL.L fTextLoadDialog                                      ;81DCB4|225F9383|83935F;
     REP #$20                                                   ;81DCB8|C220    |      ;
     LDA.W #$FFFF                                               ;81DCBA|A9FFFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81DCBD|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81DCBD|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81DCC1|C230    |      ;
@@ -11575,7 +11575,7 @@ subPlayerInteraction81D593_0x2D:
     JSL.L fTextLoadDialog                                      ;81DE02|225F9383|83935F;
     REP #$20                                                   ;81DE06|C220    |      ;
     LDA.W #$FFFF                                               ;81DE08|A9FFFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81DE0B|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81DE0B|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81DE0F|C230    |      ;
@@ -11871,7 +11871,7 @@ subPlayerInteraction81D593_0x2E:
     SEP #$20                                                   ;81E057|E220    |      ;
     LDA.B #$FF                                                 ;81E059|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81E05B|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81E05D|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81E05D|22C9B183|83B1C9;
     REP #$20                                                   ;81E061|C220    |      ;
     CMP.W #$0000                                               ;81E063|C90000  |      ;
     BEQ +                                                      ;81E066|F022    |81E08A;
@@ -11912,7 +11912,7 @@ subPlayerInteraction81D593_0x2E:
     STA.L nOwnedCows                                           ;81E0BD|8F0A1F7F|7F1F0A;
     REP #$20                                                   ;81E0C1|C220    |      ;
     LDA.W #$0014                                               ;81E0C3|A91400  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81E0C6|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81E0C6|2282B283|83B282;
     JMP.W .return                                              ;81E0CA|4C21E2  |81E221;
  
  
@@ -12014,7 +12014,7 @@ subPlayerInteraction81D593_0x2E:
     SEP #$20                                                   ;81E183|E220    |      ;
     LDA.B #$FF                                                 ;81E185|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81E187|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81E189|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81E189|22C9B183|83B1C9;
     REP #$20                                                   ;81E18D|C220    |      ;
     CMP.W #$0000                                               ;81E18F|C90000  |      ;
     BEQ +                                                      ;81E192|F021    |81E1B5;
@@ -12058,7 +12058,7 @@ subPlayerInteraction81D593_0x2E:
     STA.L nOwnedChickens                                       ;81E1F1|8F0B1F7F|7F1F0B;
     REP #$20                                                   ;81E1F5|C220    |      ;
     LDA.W #$000A                                               ;81E1F7|A90A00  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81E1FA|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81E1FA|2282B283|83B282;
     BRA .return                                                ;81E1FE|8021    |81E221;
  
  
@@ -12226,7 +12226,7 @@ subPlayerInteraction81D593_0x33:
     JSL.L fTextLoadDialog                                      ;81E32F|225F9383|83935F;
     REP #$20                                                   ;81E333|C220    |      ;
     LDA.W #$FFFF                                               ;81E335|A9FFFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81E338|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81E338|2282B283|83B282;
  
 .return:
     REP #$30                                                   ;81E33C|C230    |      ;
@@ -12322,7 +12322,7 @@ subPlayerInteraction81D593_0x36:
     JSL.L fTextLoadDialog                                      ;81E3EA|225F9383|83935F;
     REP #$20                                                   ;81E3EE|C220    |      ;
     LDA.W #$FFFF                                               ;81E3F0|A9FFFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81E3F3|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81E3F3|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81E3F7|C230    |      ;
@@ -12540,7 +12540,7 @@ subPlayerInteraction81D593_0x3F:
     JSL.L fTextLoadDialog                                      ;81E582|225F9383|83935F;
     REP #$20                                                   ;81E586|C220    |      ;
     LDA.W #$FFFF                                               ;81E588|A9FFFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81E58B|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81E58B|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81E58F|C230    |      ;
@@ -13053,12 +13053,12 @@ subPlayerInteraction81D593_0x43:
  
  
   + REP #$20                                                   ;81E969|C220    |      ;
-    LDA.L nUnknown7F1F15                                       ;81E96B|AF151F7F|7F1F15;
+    LDA.L nGameUnk7F1F15                                       ;81E96B|AF151F7F|7F1F15;
     STA.B ptrUnknown0x72                                       ;81E96F|8572    |000072;
     SEP #$20                                                   ;81E971|E220    |      ;
-    LDA.L nUnknown7F1F15+2                                     ;81E973|AF171F7F|7F1F17;
+    LDA.L nGameUnk7F1F15+2                                     ;81E973|AF171F7F|7F1F17;
     STA.B ptrUnknown0x72+2                                     ;81E977|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81E979|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81E979|22C9B183|83B1C9;
     REP #$20                                                   ;81E97D|C220    |      ;
     LDA.W #$0007                                               ;81E97F|A90700  |      ;
     JSL.L fUnknown_848020                                      ;81E982|22208084|848020;
@@ -13096,7 +13096,7 @@ subPlayerInteraction81D593_0x43:
     STZ.W nPlayerInteractionArg2                               ;81E9D3|9C7009  |000970;
     REP #$20                                                   ;81E9D6|C220    |      ;
     LDA.W #$FFCE                                               ;81E9D8|A9CEFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81E9DB|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81E9DB|2282B283|83B282;
     JMP.W .return                                              ;81E9DF|4CD4EB  |81EBD4;
  
  
@@ -13293,7 +13293,7 @@ subPlayerInteraction81D593_0x43:
     STA.L sShedItems+2                                         ;81EB72|8F021F7F|7F1F02;
     REP #$20                                                   ;81EB76|C220    |      ;
     LDA.W #$FFCE                                               ;81EB78|A9CEFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81EB7B|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81EB7B|2282B283|83B282;
     REP #$20                                                   ;81EB7F|C220    |      ;
     LDA.L $7F1F60                                              ;81EB81|AF601F7F|7F1F60;
     ORA.W #$2000                                               ;81EB85|090020  |      ;
@@ -13522,12 +13522,12 @@ subPlayerInteraction81D593_0x44:
  
  
   + REP #$20                                                   ;81ED2C|C220    |      ;
-    LDA.L nUnknown7F1F15                                       ;81ED2E|AF151F7F|7F1F15;
+    LDA.L nGameUnk7F1F15                                       ;81ED2E|AF151F7F|7F1F15;
     STA.B ptrUnknown0x72                                       ;81ED32|8572    |000072;
     SEP #$20                                                   ;81ED34|E220    |      ;
-    LDA.L nUnknown7F1F15+2                                     ;81ED36|AF171F7F|7F1F17;
+    LDA.L nGameUnk7F1F15+2                                     ;81ED36|AF171F7F|7F1F17;
     STA.B ptrUnknown0x72+2                                     ;81ED3A|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81ED3C|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81ED3C|22C9B183|83B1C9;
     REP #$20                                                   ;81ED40|C220    |      ;
     LDA.W #$0007                                               ;81ED42|A90700  |      ;
     JSL.L fUnknown_848020                                      ;81ED45|22208084|848020;
@@ -13565,7 +13565,7 @@ subPlayerInteraction81D593_0x44:
     STZ.W nPlayerInteractionArg2                               ;81ED96|9C7009  |000970;
     REP #$20                                                   ;81ED99|C220    |      ;
     LDA.W #$FFEC                                               ;81ED9B|A9ECFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81ED9E|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81ED9E|2282B283|83B282;
     JMP.W .return                                              ;81EDA2|4CACEF  |81EFAC;
  
  
@@ -13770,7 +13770,7 @@ subPlayerInteraction81D593_0x44:
     JSL.L fUnknown_8480F8                                      ;81EF4A|22F88084|8480F8;
     REP #$30                                                   ;81EF4E|C230    |      ;
     LDA.W #$FFEC                                               ;81EF50|A9ECFF  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81EF53|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81EF53|2282B283|83B282;
     REP #$20                                                   ;81EF57|C220    |      ;
     LDA.L $7F1F60                                              ;81EF59|AF601F7F|7F1F60;
     ORA.W #$1000                                               ;81EF5D|090010  |      ;
@@ -14166,7 +14166,7 @@ subPlayerInteraction81D593_0x47:
     SEP #$20                                                   ;81F239|E220    |      ;
     LDA.B #$FF                                                 ;81F23B|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F23D|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81F23F|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81F23F|22C9B183|83B1C9;
     REP #$20                                                   ;81F243|C220    |      ;
     CMP.W #$0000                                               ;81F245|C90000  |      ;
     BNE .label3                                                ;81F248|D057    |81F2A1;
@@ -14180,7 +14180,7 @@ subPlayerInteraction81D593_0x47:
     SEP #$20                                                   ;81F253|E220    |      ;
     LDA.B #$FF                                                 ;81F255|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F257|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81F259|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81F259|22C9B183|83B1C9;
     REP #$20                                                   ;81F25D|C220    |      ;
     CMP.W #$0000                                               ;81F25F|C90000  |      ;
     BNE .label3                                                ;81F262|D03D    |81F2A1;
@@ -14190,7 +14190,7 @@ subPlayerInteraction81D593_0x47:
     LDA.L nReqWoodForExpansion                                 ;81F266|AF0E1F7F|7F1F0E;
     EOR.W #$FFFF                                               ;81F26A|49FFFF  |      ;
     INC A                                                      ;81F26D|1A      |      ;
-    JSL.L fUnknown_83B224                                      ;81F26E|2224B283|83B224;
+    JSL.L fEngineAddWood                                       ;81F26E|2224B283|83B224;
     SEP #$20                                                   ;81F272|E220    |      ;
     LDA.B #$02                                                 ;81F274|A902    |      ;
     STA.W $019A                                                ;81F276|8D9A01  |00019A;
@@ -14273,7 +14273,7 @@ subPlayerInteraction81D593_0x48:
     BNE .label1                                                ;81F30E|D010    |81F320;
     REP #$30                                                   ;81F310|C230    |      ;
     LDA.W #$0032                                               ;81F312|A93200  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81F315|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81F315|2282B283|83B282;
     REP #$30                                                   ;81F319|C230    |      ;
     LDX.W #$013D                                               ;81F31B|A23D01  |      ;
     BRA .label2                                                ;81F31E|800E    |81F32E;
@@ -14282,7 +14282,7 @@ subPlayerInteraction81D593_0x48:
 .label1:
     REP #$30                                                   ;81F320|C230    |      ;
     LDA.W #$0064                                               ;81F322|A96400  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81F325|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81F325|2282B283|83B282;
     REP #$30                                                   ;81F329|C230    |      ;
     LDX.W #$0140                                               ;81F32B|A24001  |      ;
  
@@ -14651,7 +14651,7 @@ subPlayerInteraction81D593_0x51:
     SEP #$20                                                   ;81F605|E220    |      ;
     LDA.B #$FF                                                 ;81F607|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F609|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81F60B|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81F60B|22C9B183|83B1C9;
     REP #$20                                                   ;81F60F|C220    |      ;
     CMP.W #$0000                                               ;81F611|C90000  |      ;
     BNE .label2                                                ;81F614|D03A    |81F650;
@@ -14711,7 +14711,7 @@ subPlayerInteraction81D593_0x51:
     JSR.W fUnknown_81CFE6                                      ;81F686|20E6CF  |81CFE6;
     REP #$30                                                   ;81F689|C230    |      ;
     LDA.W #$0001                                               ;81F68B|A90100  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81F68E|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81F68E|2282B283|83B282;
     SEP #$20                                                   ;81F692|E220    |      ;
     STZ.W nPlayerInteractionArg2                               ;81F694|9C7009  |000970;
     LDA.B #$04                                                 ;81F697|A904    |      ;
@@ -14803,7 +14803,7 @@ subPlayerInteraction81D593_0x52:
     SEP #$20                                                   ;81F72C|E220    |      ;
     LDA.B #$FF                                                 ;81F72E|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F730|8574    |000074;
-    JSL.L fAddProfitToCurrentMoney                             ;81F732|22C9B183|83B1C9;
+    JSL.L fEngineAddProfit                                     ;81F732|22C9B183|83B1C9;
     REP #$20                                                   ;81F736|C220    |      ;
     CMP.W #$0000                                               ;81F738|C90000  |      ;
     BNE .label2                                                ;81F73B|D03A    |81F777;
@@ -14863,7 +14863,7 @@ subPlayerInteraction81D593_0x52:
     JSR.W fUnknown_81CFE6                                      ;81F7AE|20E6CF  |81CFE6;
     REP #$30                                                   ;81F7B1|C230    |      ;
     LDA.W #$0003                                               ;81F7B3|A90300  |      ;
-    JSL.L fIncreaseHappiness_83B282                            ;81F7B6|2282B283|83B282;
+    JSL.L fEngineAddHappiness                                  ;81F7B6|2282B283|83B282;
     SEP #$20                                                   ;81F7BA|E220    |      ;
     STZ.W nPlayerInteractionArg2                               ;81F7BC|9C7009  |000970;
     LDA.B #$04                                                 ;81F7BF|A904    |      ;

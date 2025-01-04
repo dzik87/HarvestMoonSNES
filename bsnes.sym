@@ -360,9 +360,9 @@
 7F:1F0C nStoredWood
 7F:1F0E nReqWoodForExpansion
 7F:1F10 nStoredFeed
-7F:1F12 nUnknown7F1F12
-7F:1F15 nUnknown7F1F15
-7F:1F17 nUnknown7F1F15+2
+7F:1F12 nGameUnk7F1F12
+7F:1F15 nGameUnk7F1F15
+7F:1F17 nGameUnk7F1F15+2
 7F:1F18 nCurrentYearID
 7F:1F19 nCurrentSeasonID
 7F:1F1A nCurrentWeekdayID
@@ -3176,45 +3176,164 @@
 83:A9BE fSetDefaultValuesForVariables
 83:ABF0 fUnknown_83ABF0
 83:AD91 fUnknown_83AD91
+83:ADA0 +
+83:ADA6 .jumpTable
+83:ADAE .case0
+83:ADC4 .case1
+83:ADDB .case3
+83:ADF1 .case4
+83:AE08 .label1
+83:AE26 .loop
+83:AE3F +
+83:AE7A +
+83:AE81 .label2
+83:AE94 +
+83:AEA2 .label3
+83:AEAD .return
+83:AEC2 .justReturn
 83:AEC3 fUnknown_83AEC3
 83:AECA .aJumpTable
-83:AED2 .case00
-83:AEDF .case01
-83:AEEC .case02
-83:AEF9 .case03
+83:AED2 .case0
+83:AEDF .case1
+83:AEEC .case2
+83:AEF9 .case3
 83:AF06 .continue
-83:AF2D +
-83:AF36 .return
+83:AF2D .return
+83:AF36 .jusReturn
 83:AF37 fUnknown_83AF37
 83:AF3E .aJumpTable
-83:AF46 .case00
+83:AF46 .case0
 83:AF88 +
 83:AFA2 +
-83:AFAE .case01
+83:AFAE .case1
 83:AFF0 +
 83:B00A +
-83:B016 .case03
+83:B016 .case2
 83:B058 +
 83:B071 +
-83:B07C .case04
+83:B07C .case3
 83:B0BD +
 83:B0D6 +
 83:B0E1 .return
-83:B0E6 fUnreached_83B0E6
+83:B0E6 fUnused_83B0E6
 83:B0F6 fUnknown_83B0F6
-83:B1C9 fAddProfitToCurrentMoney
-83:B224 fUnknown_83B224
-83:B253 fUnknown_83B253
-83:B282 fIncreaseHappiness_83B282
-83:B2B1 fLoadGameMaybe
-83:B2D2 .loadSave
+83:B12C .label1
+83:B12E +
+83:B139 +
+83:B15D +
+83:B16A .label2
+83:B175 +
+83:B17E .label3
+83:B189 +
+83:B192 .label4
+83:B19D +
+83:B1A6 .label5
+83:B1B1 +
+83:B1BA .return1
+83:B1C1 .return0
+83:B1C8 .justReturn
+83:B1C9 fEngineAddProfit
+83:B206 .ok
+83:B20D .max
+83:B223 .return
+83:B224 fEngineAddWood
+83:B23F .ok
+83:B246 .max
+83:B252 .return
+83:B253 fEngineAddFeed
+83:B26E .ok
+83:B275 .max
+83:B281 .return
+83:B282 fEngineAddHappiness
+83:B29D .ok
+83:B2A4 .max
+83:B2B0 .return
+83:B2B1 fEngineLoadGame
+83:B2D2 +
 83:B646 -
 83:B65B -
 83:B680 -
-83:B68E fUnknown_83B68E
-83:BA45 fUnknown_83BA45
-83:BAD4 fUnknown_83BAD4
-83:BC5A fUnknown_83BC5A
+83:B68E fEngineSaveGame
+83:B6B0 +
+83:B993 -
+83:B9A8 -
+83:B9BD -
+83:B9E2 -
+83:BA1A .label1
+83:BA20 .label2
+83:BA3E .return
+83:BA44 .justReturn
+83:BA45 fEngineSaveUnknown_83BA45
+83:BA66 +
+83:BAD3 .return
+83:BAD4 fEngineUnknown_83BAD4
+83:BB39 -
+83:BB61 .label1
+83:BB69 -
+83:BB97 .label2
+83:BBE8 -
+83:BC19 .label3
+83:BC21 -
+83:BC59 .justReturn
+83:BC5A fEngineUnknown_83BC5A
+83:BC68 +
+83:BC6B .cow
+83:BC85 +
+83:BC93 +
+83:BC9F +
+83:BCC2 .label1
+83:BCD3 .label2
+83:BD10 .label3
+83:BD20 .label4
+83:BD30 .label5
+83:BD40 .label6
+83:BD50 .label7
+83:BD9E .label8
+83:BDD6 .label9
+83:BDEB .label10
+83:BE2E .label11
+83:BE3F .label12
+83:BE4B .label13
+83:BE5B .label14
+83:BE75 +
+83:BE9F +
+83:BEB1 .label15
+83:BECF +
+83:BEF5 .label16
+83:BF1A +
+83:BF26 .label17
+83:BF42 .label18
+83:BF4F +
+83:BF5B +
+83:BF87 .label19
+83:BFAA .label20
+83:BFCC .label21
+83:C00E .label22
+83:C018 .label23
+83:C01A .chicken
+83:C026 +
+83:C034 +
+83:C044 .label24
+83:C05E .label25
+83:C084 .label26
+83:C092 +
+83:C0AB .label27
+83:C0CF +
+83:C0E5 .label28
+83:C119 .label29
+83:C125 .label38
+83:C12A .label30
+83:C144 +
+83:C163 +
+83:C1AB .label32
+83:C1DC .label37
+83:C1E8 +
+83:C1FF .label33
+83:C219 +
+83:C258 .label34
+83:C26F .label35
+83:C27B .label36
+83:C295 .justReturn
 83:C296 fUnknown_83C296
 83:C807 fUnknown_83C807
 83:C8DC fAddNewCow
@@ -5677,7 +5796,6 @@ BB:BDF8 Padding_BB0000
 81:FFFF EMPTY_81FFFF
 82:F2AD DATA24_82F2AD
 82:F2C1 DATA24_82F2C1
-83:ADA6 PTR16_83ADA6
 86:8544 PTR16_868544
 86:8552 PTR16_868552
 86:8560 PTR16_868560
@@ -8431,10 +8549,25 @@ FF:FFFF EMPTY_FFFFFF
 83:98EE 0x70 * [ptr28 pData, n8 nSize]
 83:9AAE 0x52 * [ptr28 pData, n8 nSize]
 83:9BF6 0x0498 * [ptr24]
+83:AD91 A: nIndex
 83:AEC3 A: nIndex
-83:B1C9 $72: nProfit24
-83:B282 A: nHappinessAdd
-83:B2B1 A: nSaveIndex
+83:B0F6 return A: nStatus
+83:B1C9 $72: nProfit24, return A: nStatus
+83:B224 A: nWood, return A: nStatus
+83:B253 A: nFeed, return A: nStatus
+83:B282 A: nHappiness, return A: nStatus
+83:B2B1 A: nSaveSlot
+83:B646 loop chicken data
+83:B65B loop cow data
+83:B680 loop farm tilemap
+83:B68E A: nSaveSlot, return A: nStatus
+83:B993 loop chickendata
+83:B9A8 loop cowdata
+83:B9BD loop farm tilemap
+83:B9E2 calculate checksum
+83:BA45 A: nSaveSlot, return A: nStatus
+83:BB69 zero loop
+83:BC21 zero loop
 83:C8DC A: nAddType (0 - bought, 1 - born), return result in A
 83:C995 A: nIndex, return ptr24 $72
 83:C9A7 A: nIndex, return ptr24 $72

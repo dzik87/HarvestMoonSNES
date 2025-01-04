@@ -608,7 +608,7 @@ fInterrupt_808428:
     JSL.L fZeroCGRAM                                           ;80861C|22808980|808980;
     JSL.L fUnknown_858ED7                                      ;808620|22D78E85|858ED7;
     JSL.L fUnknown_85820F                                      ;808624|220F8285|85820F;
-    JSL.L fUnknown_83BAD4                                      ;808628|22D4BA83|83BAD4;
+    JSL.L fEngineUnknown_83BAD4                                ;808628|22D4BA83|83BAD4;
     SEP #$20                                                   ;80862C|E220    |      ;
     REP #$10                                                   ;80862E|C210    |      ;
     LDA.B #$80                                                 ;808630|A980    |      ;
