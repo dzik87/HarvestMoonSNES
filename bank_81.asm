@@ -2127,7 +2127,7 @@ fUnknown_818E1B:
     XBA                                                        ;818E76|EB      |      ;
     LDA.W $0920                                                ;818E77|AD2009  |000920;
     LDX.W #$0000                                               ;818E7A|A20000  |      ;
-    JSL.L fUnknown_8480F8                                      ;818E7D|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;818E7D|22F88084|8480F8;
     REP #$30                                                   ;818E81|C230    |      ;
     LDA.W $0978                                                ;818E83|AD7809  |000978;
     STA.B $A5                                                  ;818E86|85A5    |0000A5;
@@ -2952,7 +2952,7 @@ fUnknown_819497:
     LDA.W #$0014                                               ;8194E4|A91400  |      ;
     LDX.W #$0000                                               ;8194E7|A20000  |      ;
     LDY.W #$0000                                               ;8194EA|A00000  |      ;
-    JSL.L fUnknown_8480F8                                      ;8194ED|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;8194ED|22F88084|8480F8;
     SEP #$20                                                   ;8194F1|E220    |      ;
     REP #$10                                                   ;8194F3|C210    |      ;
     LDY.W #$0000                                               ;8194F5|A00000  |      ;
@@ -3091,7 +3091,7 @@ fUnknown_8195F4:
     LDA.W #$0000                                               ;819612|A90000  |      ;
     LDX.W #$0010                                               ;819615|A21000  |      ;
     LDY.W #$0000                                               ;819618|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;81961B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81961B|22978084|848097;
     REP #$30                                                   ;81961F|C230    |      ;
     LDA.L nPlayerFlags                                         ;819621|AF661F7F|7F1F66;
     ORA.W #$2000                                               ;819625|090020  |      ;
@@ -7386,7 +7386,7 @@ subUnkown81C027_0x1A:
     LDA.W #$0014                                               ;81C0E3|A91400  |      ;
     LDX.W #$0045                                               ;81C0E6|A24500  |      ;
     LDY.W #$0000                                               ;81C0E9|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;81C0EC|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81C0EC|22978084|848097;
     BRA .label2                                                ;81C0F0|800F    |81C101;
  
  
@@ -7395,7 +7395,7 @@ subUnkown81C027_0x1A:
     LDA.W #$0015                                               ;81C0F4|A91500  |      ;
     LDX.W #$0045                                               ;81C0F7|A24500  |      ;
     LDY.W #$0003                                               ;81C0FA|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;81C0FD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81C0FD|22978084|848097;
  
 .label2:
     REP #$30                                                   ;81C101|C230    |      ;
@@ -7497,7 +7497,7 @@ subUnkown81C027_0x16:
     LDA.W #$0016                                               ;81C1D2|A91600  |      ;
     LDX.W #$0000                                               ;81C1D5|A20000  |      ;
     LDY.W #$0012                                               ;81C1D8|A01200  |      ;
-    JSL.L fUnknown_8480F8                                      ;81C1DB|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;81C1DB|22F88084|8480F8;
     REP #$20                                                   ;81C1DF|C220    |      ;
     LDA.W #$0001                                               ;81C1E1|A90100  |      ;
     STA.L $7F1F58                                              ;81C1E4|8F581F7F|7F1F58;
@@ -7622,7 +7622,7 @@ subUnkown81C027_0x13:
     STA.B $D4                                                  ;81C2C3|85D4    |0000D4;
     REP #$20                                                   ;81C2C5|C220    |      ;
     LDA.W #$0014                                               ;81C2C7|A91400  |      ;
-    JSL.L fUnknown_84887C                                      ;81C2CA|227C8884|84887C;
+    JSL.L fSubUnk1Unknown_84887C                               ;81C2CA|227C8884|84887C;
     SEP #$20                                                   ;81C2CE|E220    |      ;
     REP #$10                                                   ;81C2D0|C210    |      ;
     LDY.W #$0000                                               ;81C2D2|A00000  |      ;
@@ -7630,7 +7630,7 @@ subUnkown81C027_0x13:
     BEQ .label1                                                ;81C2D7|F009    |81C2E2;
     REP #$30                                                   ;81C2D9|C230    |      ;
     LDA.W #$0014                                               ;81C2DB|A91400  |      ;
-    JSL.L fUnknown_848020                                      ;81C2DE|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81C2DE|22208084|848020;
  
 .label1:
     REP #$30                                                   ;81C2E2|C230    |      ;
@@ -7643,7 +7643,7 @@ subUnkown81C027_0x13:
     LDA.W #$0014                                               ;81C2F3|A91400  |      ;
     LDX.W #$0000                                               ;81C2F6|A20000  |      ;
     LDY.W #$0033                                               ;81C2F9|A03300  |      ;
-    JSL.L fUnknown_848097                                      ;81C2FC|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81C2FC|22978084|848097;
     JMP.W .exit                                                ;81C300|4C30C3  |81C330;
  
  
@@ -7652,7 +7652,7 @@ subUnkown81C027_0x13:
     LDA.W #$0014                                               ;81C305|A91400  |      ;
     LDX.W #$0000                                               ;81C308|A20000  |      ;
     LDY.W #$0035                                               ;81C30B|A03500  |      ;
-    JSL.L fUnknown_848097                                      ;81C30E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81C30E|22978084|848097;
     REP #$20                                                   ;81C312|C220    |      ;
     LDA.W #$0002                                               ;81C314|A90200  |      ;
     JSL.L fEngineAddHappiness                                  ;81C317|2282B283|83B282;
@@ -7664,7 +7664,7 @@ subUnkown81C027_0x13:
     LDA.W #$0014                                               ;81C320|A91400  |      ;
     LDX.W #$0000                                               ;81C323|A20000  |      ;
     LDY.W #$0034                                               ;81C326|A03400  |      ;
-    JSL.L fUnknown_848097                                      ;81C329|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81C329|22978084|848097;
     JMP.W .exit                                                ;81C32D|4C30C3  |81C330;
  
  
@@ -12906,7 +12906,7 @@ subPlayerInteraction81D593_0x43:
     LDA.W #$0008                                               ;81E836|A90800  |      ;
     LDX.W #$0000                                               ;81E839|A20000  |      ;
     LDY.W #$007C                                               ;81E83C|A07C00  |      ;
-    JSL.L fUnknown_848097                                      ;81E83F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81E83F|22978084|848097;
     SEP #$20                                                   ;81E843|E220    |      ;
     LDA.B #$07                                                 ;81E845|A907    |      ;
     STA.W nPlayerInteractionArg1                               ;81E847|8D6F09  |00096F;
@@ -12918,7 +12918,7 @@ subPlayerInteraction81D593_0x43:
     LDA.W #$0007                                               ;81E84F|A90700  |      ;
     LDX.W #$0000                                               ;81E852|A20000  |      ;
     LDY.W #$0021                                               ;81E855|A02100  |      ;
-    JSL.L fUnknown_848097                                      ;81E858|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81E858|22978084|848097;
     SEP #$20                                                   ;81E85C|E220    |      ;
     LDA.B #$01                                                 ;81E85E|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81E860|8D6F09  |00096F;
@@ -13061,19 +13061,19 @@ subPlayerInteraction81D593_0x43:
     JSL.L fEngineAddProfit                                     ;81E979|22C9B183|83B1C9;
     REP #$20                                                   ;81E97D|C220    |      ;
     LDA.W #$0007                                               ;81E97F|A90700  |      ;
-    JSL.L fUnknown_848020                                      ;81E982|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81E982|22208084|848020;
     REP #$20                                                   ;81E986|C220    |      ;
     LDA.W #$0007                                               ;81E988|A90700  |      ;
     LDX.W #$0000                                               ;81E98B|A20000  |      ;
     LDY.W #$0023                                               ;81E98E|A02300  |      ;
-    JSL.L fUnknown_848097                                      ;81E991|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81E991|22978084|848097;
     SEP #$20                                                   ;81E995|E220    |      ;
     LDA.B #$00                                                 ;81E997|A900    |      ;
     XBA                                                        ;81E999|EB      |      ;
     LDA.W $09A0                                                ;81E99A|ADA009  |0009A0;
     LDX.W #$0000                                               ;81E99D|A20000  |      ;
     LDY.W #$0022                                               ;81E9A0|A02200  |      ;
-    JSL.L fUnknown_84803F                                      ;81E9A3|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81E9A3|223F8084|84803F;
     SEP #$20                                                   ;81E9A7|E220    |      ;
     LDA.B #$00                                                 ;81E9A9|A900    |      ;
     XBA                                                        ;81E9AB|EB      |      ;
@@ -13135,12 +13135,12 @@ subPlayerInteraction81D593_0x43:
  
   + REP #$20                                                   ;81EA1D|C220    |      ;
     LDA.W #$0007                                               ;81EA1F|A90700  |      ;
-    JSL.L fUnknown_848020                                      ;81EA22|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81EA22|22208084|848020;
     REP #$20                                                   ;81EA26|C220    |      ;
     LDA.W #$0007                                               ;81EA28|A90700  |      ;
     LDX.W #$0000                                               ;81EA2B|A20000  |      ;
     LDY.W #$0023                                               ;81EA2E|A02300  |      ;
-    JSL.L fUnknown_848097                                      ;81EA31|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EA31|22978084|848097;
     SEP #$20                                                   ;81EA35|E220    |      ;
     LDA.B #$06                                                 ;81EA37|A906    |      ;
     STA.W nPlayerInteractionArg1                               ;81EA39|8D6F09  |00096F;
@@ -13173,7 +13173,7 @@ subPlayerInteraction81D593_0x43:
     LDA.B #$00                                                 ;81EA6D|A900    |      ;
     XBA                                                        ;81EA6F|EB      |      ;
     LDA.W $09A0                                                ;81EA70|ADA009  |0009A0;
-    JSL.L fUnknown_84887C                                      ;81EA73|227C8884|84887C;
+    JSL.L fSubUnk1Unknown_84887C                               ;81EA73|227C8884|84887C;
     SEP #$20                                                   ;81EA77|E220    |      ;
     REP #$10                                                   ;81EA79|C210    |      ;
     LDY.W #$0001                                               ;81EA7B|A00100  |      ;
@@ -13255,19 +13255,19 @@ subPlayerInteraction81D593_0x43:
  
   + REP #$20                                                   ;81EB13|C220    |      ;
     LDA.W #$0008                                               ;81EB15|A90800  |      ;
-    JSL.L fUnknown_848020                                      ;81EB18|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81EB18|22208084|848020;
     REP #$20                                                   ;81EB1C|C220    |      ;
     LDA.W #$0008                                               ;81EB1E|A90800  |      ;
     LDX.W #$0000                                               ;81EB21|A20000  |      ;
     LDY.W #$007D                                               ;81EB24|A07D00  |      ;
-    JSL.L fUnknown_848097                                      ;81EB27|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EB27|22978084|848097;
     SEP #$20                                                   ;81EB2B|E220    |      ;
     LDA.B #$00                                                 ;81EB2D|A900    |      ;
     XBA                                                        ;81EB2F|EB      |      ;
     LDA.W $09A0                                                ;81EB30|ADA009  |0009A0;
     LDX.W #$0000                                               ;81EB33|A20000  |      ;
     LDY.W #$0022                                               ;81EB36|A02200  |      ;
-    JSL.L fUnknown_84803F                                      ;81EB39|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81EB39|223F8084|84803F;
     SEP #$20                                                   ;81EB3D|E220    |      ;
     LDA.B #$00                                                 ;81EB3F|A900    |      ;
     XBA                                                        ;81EB41|EB      |      ;
@@ -13311,12 +13311,12 @@ subPlayerInteraction81D593_0x43:
  
   + REP #$20                                                   ;81EB9B|C220    |      ;
     LDA.W #$0008                                               ;81EB9D|A90800  |      ;
-    JSL.L fUnknown_848020                                      ;81EBA0|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81EBA0|22208084|848020;
     REP #$20                                                   ;81EBA4|C220    |      ;
     LDA.W #$0008                                               ;81EBA6|A90800  |      ;
     LDX.W #$0000                                               ;81EBA9|A20000  |      ;
     LDY.W #$007D                                               ;81EBAC|A07D00  |      ;
-    JSL.L fUnknown_848097                                      ;81EBAF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EBAF|22978084|848097;
     SEP #$20                                                   ;81EBB3|E220    |      ;
     LDA.B #$0B                                                 ;81EBB5|A90B    |      ;
     STA.W nPlayerInteractionArg1                               ;81EBB7|8D6F09  |00096F;
@@ -13417,7 +13417,7 @@ subPlayerInteraction81D593_0x44:
     LDA.W #$0008                                               ;81EC4D|A90800  |      ;
     LDX.W #$0000                                               ;81EC50|A20000  |      ;
     LDY.W #$007C                                               ;81EC53|A07C00  |      ;
-    JSL.L fUnknown_848097                                      ;81EC56|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EC56|22978084|848097;
     SEP #$20                                                   ;81EC5A|E220    |      ;
     LDA.B #$07                                                 ;81EC5C|A907    |      ;
     STA.W nPlayerInteractionArg1                               ;81EC5E|8D6F09  |00096F;
@@ -13429,7 +13429,7 @@ subPlayerInteraction81D593_0x44:
     LDA.W #$0007                                               ;81EC66|A90700  |      ;
     LDX.W #$0000                                               ;81EC69|A20000  |      ;
     LDY.W #$0021                                               ;81EC6C|A02100  |      ;
-    JSL.L fUnknown_848097                                      ;81EC6F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EC6F|22978084|848097;
     SEP #$20                                                   ;81EC73|E220    |      ;
     LDA.B #$01                                                 ;81EC75|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81EC77|8D6F09  |00096F;
@@ -13530,19 +13530,19 @@ subPlayerInteraction81D593_0x44:
     JSL.L fEngineAddProfit                                     ;81ED3C|22C9B183|83B1C9;
     REP #$20                                                   ;81ED40|C220    |      ;
     LDA.W #$0007                                               ;81ED42|A90700  |      ;
-    JSL.L fUnknown_848020                                      ;81ED45|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81ED45|22208084|848020;
     REP #$20                                                   ;81ED49|C220    |      ;
     LDA.W #$0007                                               ;81ED4B|A90700  |      ;
     LDX.W #$0000                                               ;81ED4E|A20000  |      ;
     LDY.W #$0023                                               ;81ED51|A02300  |      ;
-    JSL.L fUnknown_848097                                      ;81ED54|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81ED54|22978084|848097;
     SEP #$20                                                   ;81ED58|E220    |      ;
     LDA.B #$00                                                 ;81ED5A|A900    |      ;
     XBA                                                        ;81ED5C|EB      |      ;
     LDA.W $09A1                                                ;81ED5D|ADA109  |0009A1;
     LDX.W #$0000                                               ;81ED60|A20000  |      ;
     LDY.W #$0024                                               ;81ED63|A02400  |      ;
-    JSL.L fUnknown_84803F                                      ;81ED66|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81ED66|223F8084|84803F;
     SEP #$20                                                   ;81ED6A|E220    |      ;
     LDA.B #$00                                                 ;81ED6C|A900    |      ;
     XBA                                                        ;81ED6E|EB      |      ;
@@ -13604,12 +13604,12 @@ subPlayerInteraction81D593_0x44:
  
   + REP #$20                                                   ;81EDE0|C220    |      ;
     LDA.W #$0007                                               ;81EDE2|A90700  |      ;
-    JSL.L fUnknown_848020                                      ;81EDE5|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81EDE5|22208084|848020;
     REP #$20                                                   ;81EDE9|C220    |      ;
     LDA.W #$0007                                               ;81EDEB|A90700  |      ;
     LDX.W #$0000                                               ;81EDEE|A20000  |      ;
     LDY.W #$0023                                               ;81EDF1|A02300  |      ;
-    JSL.L fUnknown_848097                                      ;81EDF4|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EDF4|22978084|848097;
     SEP #$20                                                   ;81EDF8|E220    |      ;
     LDA.B #$06                                                 ;81EDFA|A906    |      ;
     STA.W nPlayerInteractionArg1                               ;81EDFC|8D6F09  |00096F;
@@ -13642,7 +13642,7 @@ subPlayerInteraction81D593_0x44:
     LDA.B #$00                                                 ;81EE30|A900    |      ;
     XBA                                                        ;81EE32|EB      |      ;
     LDA.W $09A1                                                ;81EE33|ADA109  |0009A1;
-    JSL.L fUnknown_84887C                                      ;81EE36|227C8884|84887C;
+    JSL.L fSubUnk1Unknown_84887C                               ;81EE36|227C8884|84887C;
     SEP #$20                                                   ;81EE3A|E220    |      ;
     REP #$10                                                   ;81EE3C|C210    |      ;
     LDY.W #$0001                                               ;81EE3E|A00100  |      ;
@@ -13724,19 +13724,19 @@ subPlayerInteraction81D593_0x44:
  
   + REP #$20                                                   ;81EED6|C220    |      ;
     LDA.W #$0008                                               ;81EED8|A90800  |      ;
-    JSL.L fUnknown_848020                                      ;81EEDB|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81EEDB|22208084|848020;
     REP #$20                                                   ;81EEDF|C220    |      ;
     LDA.W #$0008                                               ;81EEE1|A90800  |      ;
     LDX.W #$0000                                               ;81EEE4|A20000  |      ;
     LDY.W #$007D                                               ;81EEE7|A07D00  |      ;
-    JSL.L fUnknown_848097                                      ;81EEEA|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EEEA|22978084|848097;
     SEP #$20                                                   ;81EEEE|E220    |      ;
     LDA.B #$00                                                 ;81EEF0|A900    |      ;
     XBA                                                        ;81EEF2|EB      |      ;
     LDA.W $09A1                                                ;81EEF3|ADA109  |0009A1;
     LDX.W #$0000                                               ;81EEF6|A20000  |      ;
     LDY.W #$0024                                               ;81EEF9|A02400  |      ;
-    JSL.L fUnknown_84803F                                      ;81EEFC|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81EEFC|223F8084|84803F;
     SEP #$20                                                   ;81EF00|E220    |      ;
     LDA.B #$00                                                 ;81EF02|A900    |      ;
     XBA                                                        ;81EF04|EB      |      ;
@@ -13767,7 +13767,7 @@ subPlayerInteraction81D593_0x44:
     LDA.W #$0010                                               ;81EF41|A91000  |      ;
     LDX.W #$0000                                               ;81EF44|A20000  |      ;
     LDY.W #$001F                                               ;81EF47|A01F00  |      ;
-    JSL.L fUnknown_8480F8                                      ;81EF4A|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;81EF4A|22F88084|8480F8;
     REP #$30                                                   ;81EF4E|C230    |      ;
     LDA.W #$FFEC                                               ;81EF50|A9ECFF  |      ;
     JSL.L fEngineAddHappiness                                  ;81EF53|2282B283|83B282;
@@ -13788,12 +13788,12 @@ subPlayerInteraction81D593_0x44:
  
   + REP #$20                                                   ;81EF73|C220    |      ;
     LDA.W #$0008                                               ;81EF75|A90800  |      ;
-    JSL.L fUnknown_848020                                      ;81EF78|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81EF78|22208084|848020;
     REP #$20                                                   ;81EF7C|C220    |      ;
     LDA.W #$0008                                               ;81EF7E|A90800  |      ;
     LDX.W #$0000                                               ;81EF81|A20000  |      ;
     LDY.W #$007D                                               ;81EF84|A07D00  |      ;
-    JSL.L fUnknown_848097                                      ;81EF87|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81EF87|22978084|848097;
     SEP #$20                                                   ;81EF8B|E220    |      ;
     LDA.B #$0B                                                 ;81EF8D|A90B    |      ;
     STA.W nPlayerInteractionArg1                               ;81EF8F|8D6F09  |00096F;
@@ -13937,7 +13937,7 @@ subPlayerInteraction81D593_0x46:
     LDA.W #$0006                                               ;81F07C|A90600  |      ;
     LDX.W #$0000                                               ;81F07F|A20000  |      ;
     LDY.W #$0026                                               ;81F082|A02600  |      ;
-    JSL.L fUnknown_848097                                      ;81F085|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81F085|22978084|848097;
     SEP #$20                                                   ;81F089|E220    |      ;
     LDA.B #$01                                                 ;81F08B|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F08D|8D6F09  |00096F;
@@ -13984,12 +13984,12 @@ subPlayerInteraction81D593_0x46:
  
   + REP #$20                                                   ;81F0DE|C220    |      ;
     LDA.W #$0006                                               ;81F0E0|A90600  |      ;
-    JSL.L fUnknown_848020                                      ;81F0E3|22208084|848020;
+    JSL.L fSubUnk1Unknown_848020                               ;81F0E3|22208084|848020;
     REP #$20                                                   ;81F0E7|C220    |      ;
     LDA.W #$0006                                               ;81F0E9|A90600  |      ;
     LDX.W #$0000                                               ;81F0EC|A20000  |      ;
     LDY.W #$0027                                               ;81F0EF|A02700  |      ;
-    JSL.L fUnknown_848097                                      ;81F0F2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;81F0F2|22978084|848097;
     SEP #$20                                                   ;81F0F6|E220    |      ;
     LDA.B #$03                                                 ;81F0F8|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F0FA|8D6F09  |00096F;
@@ -14118,7 +14118,7 @@ subPlayerInteraction81D593_0x47:
     LDA.W #$0009                                               ;81F1DC|A90900  |      ;
     LDX.W #$0000                                               ;81F1DF|A20000  |      ;
     LDY.W #$002D                                               ;81F1E2|A02D00  |      ;
-    JSL.L fUnknown_84803F                                      ;81F1E5|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81F1E5|223F8084|84803F;
     SEP #$20                                                   ;81F1E9|E220    |      ;
     LDA.B #$02                                                 ;81F1EB|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F1ED|8D6F09  |00096F;
@@ -14336,12 +14336,12 @@ subPlayerInteraction81D593_0x48:
     LDA.W #$0009                                               ;81F395|A90900  |      ;
     LDX.W #$0000                                               ;81F398|A20000  |      ;
     LDY.W #$0038                                               ;81F39B|A03800  |      ;
-    JSL.L fUnknown_84803F                                      ;81F39E|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81F39E|223F8084|84803F;
     REP #$20                                                   ;81F3A2|C220    |      ;
     LDA.W #$000A                                               ;81F3A4|A90A00  |      ;
     LDX.W #$0000                                               ;81F3A7|A20000  |      ;
     LDY.W #$0039                                               ;81F3AA|A03900  |      ;
-    JSL.L fUnknown_84803F                                      ;81F3AD|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81F3AD|223F8084|84803F;
     SEP #$20                                                   ;81F3B1|E220    |      ;
     LDA.B #$02                                                 ;81F3B3|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F3B5|8D6F09  |00096F;
@@ -14377,12 +14377,12 @@ subPlayerInteraction81D593_0x48:
     LDA.W #$0009                                               ;81F3E7|A90900  |      ;
     LDX.W #$0000                                               ;81F3EA|A20000  |      ;
     LDY.W #$0038                                               ;81F3ED|A03800  |      ;
-    JSL.L fUnknown_84803F                                      ;81F3F0|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81F3F0|223F8084|84803F;
     REP #$20                                                   ;81F3F4|C220    |      ;
     LDA.W #$000A                                               ;81F3F6|A90A00  |      ;
     LDX.W #$0000                                               ;81F3F9|A20000  |      ;
     LDY.W #$0039                                               ;81F3FC|A03900  |      ;
-    JSL.L fUnknown_84803F                                      ;81F3FF|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81F3FF|223F8084|84803F;
     SEP #$20                                                   ;81F403|E220    |      ;
     LDA.B #$02                                                 ;81F405|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F407|8D6F09  |00096F;
@@ -14435,7 +14435,7 @@ subPlayerInteraction81D593_0x49:
     LDA.W #$000B                                               ;81F45A|A90B00  |      ;
     LDX.W #$0000                                               ;81F45D|A20000  |      ;
     LDY.W #$001E                                               ;81F460|A01E00  |      ;
-    JSL.L fUnknown_84803F                                      ;81F463|223F8084|84803F;
+    JSL.L fSubUnk1Unknown_84803F                               ;81F463|223F8084|84803F;
     SEP #$20                                                   ;81F467|E220    |      ;
     LDA.B #$02                                                 ;81F469|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F46B|8D6F09  |00096F;
@@ -14750,7 +14750,7 @@ subPlayerInteraction81D593_0x51:
  
  
 fReturn_81F6D6:
-    RTS                                                        ;81F6D6|60      |      ;
+    RTS                                                        ;81F6D6|60      |      ; FIXME: I want to be .return
  
  
 subPlayerInteraction81D593_0x52:
