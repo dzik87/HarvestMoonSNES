@@ -71,7 +71,7 @@ fMainGameLoop:
     JSL.L fTextReadText                                        ;8080A7|221C9583|83951C;
     JSL.L fUnknown_80900C                                      ;8080AB|220C9080|80900C;
     JSL.L fUnknown_808E69                                      ;8080AF|22698E80|808E69;
-    JSL.L fUnknown_84C034                                      ;8080B3|2234C084|84C034;
+    JSL.L fUnknown019A_Handler                                 ;8080B3|2234C084|84C034;
     JSL.L fUnknown_81A383                                      ;8080B7|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;8080BB|22B7BF81|81BFB7;
     JSL.L fUnknown_8095B3                                      ;8080BF|22B39580|8095B3;
@@ -797,7 +797,7 @@ fReadJoypad:
     EOR.W $0126                                                ;808776|4D2601  |000126;
     AND.W $0124                                                ;808779|2D2401  |000124;
     STA.W $0128                                                ;80877C|8D2801  |000128;
-    STA.W $012C                                                ;80877F|8D2C01  |00012C;
+    STA.W nUnknownFlags012C                                    ;80877F|8D2C01  |00012C;
     LDA.W SNES_JOY1L                                           ;808782|AD1842  |004218;
     EOR.W $0126                                                ;808785|4D2601  |000126;
     AND.W $0126                                                ;808788|2D2601  |000126;
@@ -831,7 +831,7 @@ fReadJoypad:
 .label5:
     REP #$20                                                   ;8087BE|C220    |      ;
     LDA.W $0124                                                ;8087C0|AD2401  |000124;
-    STA.W $012C                                                ;8087C3|8D2C01  |00012C;
+    STA.W nUnknownFlags012C                                    ;8087C3|8D2C01  |00012C;
     SEP #$20                                                   ;8087C6|E220    |      ;
     LDA.B #$19                                                 ;8087C8|A919    |      ;
     STA.B $23                                                  ;8087CA|8523    |000023;
@@ -3163,7 +3163,7 @@ fUnknown_80972C:
     AND.B $D2                                                  ;809948|25D2    |0000D2;
     STA.B $D2                                                  ;80994A|85D2    |0000D2;
     REP #$20                                                   ;80994C|C220    |      ;
-    STZ.W $08FD                                                ;80994E|9CFD08  |0008FD;
+    STZ.W nUnknownFlags08FD                                    ;80994E|9CFD08  |0008FD;
     STZ.W $08FF                                                ;809951|9CFF08  |0008FF;
     REP #$30                                                   ;809954|C230    |      ;
     LDA.W #$1000                                               ;809956|A90010  |      ;
@@ -3233,7 +3233,7 @@ fUnknown_80972C:
 .label13:
     REP #$30                                                   ;8099E4|C230    |      ;
     LDA.W #$0000                                               ;8099E6|A90000  |      ;
-    STA.B $D4                                                  ;8099E9|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;8099E9|85D4    |0000D4;
     JSL.L fAudioUnknown_83841F                                 ;8099EB|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;8099EF|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;8099F3|22808383|838380;
@@ -3348,7 +3348,7 @@ fUnknown_809A64:
 .label7:
     REP #$30                                                   ;809AD3|C230    |      ;
     LDA.W #$0000                                               ;809AD5|A90000  |      ;
-    STA.B $D4                                                  ;809AD8|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;809AD8|85D4    |0000D4;
     REP #$30                                                   ;809ADA|C230    |      ;
     LDA.B $D2                                                  ;809ADC|A5D2    |0000D2;
     ORA.W #$0080                                               ;809ADE|098000  |      ;
@@ -3578,7 +3578,7 @@ fUnknown_809A64:
     STA.W $098A                                                ;809C71|8D8A09  |00098A;
     REP #$30                                                   ;809C74|C230    |      ;
     LDA.W #$0001                                               ;809C76|A90100  |      ;
-    STA.B $D4                                                  ;809C79|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;809C79|85D4    |0000D4;
     REP #$20                                                   ;809C7B|C220    |      ;
     LDA.B $DA                                                  ;809C7D|A5DA    |0000DA;
     CMP.W #$0000                                               ;809C7F|C90000  |      ;
@@ -3780,7 +3780,7 @@ fUnknown_809A64:
  
 .label48:
     REP #$30                                                   ;809DC3|C230    |      ;
-    LDA.B $D4                                                  ;809DC5|A5D4    |0000D4;
+    LDA.B nPlayerAction                                        ;809DC5|A5D4    |0000D4;
     CMP.W #$0010                                               ;809DC7|C91000  |      ;
     BNE .label49                                               ;809DCA|D003    |809DCF;
     JMP.W .return2                                             ;809DCC|4CBB9E  |809EBB;
@@ -3788,7 +3788,7 @@ fUnknown_809A64:
  
 .label49:
     REP #$30                                                   ;809DCF|C230    |      ;
-    LDA.B $D4                                                  ;809DD1|A5D4    |0000D4;
+    LDA.B nPlayerAction                                        ;809DD1|A5D4    |0000D4;
     CMP.W #$0011                                               ;809DD3|C91100  |      ;
     BNE .label50                                               ;809DD6|D003    |809DDB;
     JMP.W .return2                                             ;809DD8|4CBB9E  |809EBB;
@@ -3796,7 +3796,7 @@ fUnknown_809A64:
  
 .label50:
     REP #$30                                                   ;809DDB|C230    |      ;
-    LDA.B $D4                                                  ;809DDD|A5D4    |0000D4;
+    LDA.B nPlayerAction                                        ;809DDD|A5D4    |0000D4;
     CMP.W #$0012                                               ;809DDF|C91200  |      ;
     BNE .label51                                               ;809DE2|D003    |809DE7;
     JMP.W .return2                                             ;809DE4|4CBB9E  |809EBB;
@@ -3804,7 +3804,7 @@ fUnknown_809A64:
  
 .label51:
     REP #$30                                                   ;809DE7|C230    |      ;
-    LDA.B $D4                                                  ;809DE9|A5D4    |0000D4;
+    LDA.B nPlayerAction                                        ;809DE9|A5D4    |0000D4;
     CMP.W #$0013                                               ;809DEB|C91300  |      ;
     BNE .label52                                               ;809DEE|D003    |809DF3;
     JMP.W .return2                                             ;809DF0|4CBB9E  |809EBB;
@@ -3813,7 +3813,7 @@ fUnknown_809A64:
 .label52:
     REP #$30                                                   ;809DF3|C230    |      ;
     LDA.W #$000F                                               ;809DF5|A90F00  |      ;
-    STA.B $D4                                                  ;809DF8|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;809DF8|85D4    |0000D4;
     JMP.W .return2                                             ;809DFA|4CBB9E  |809EBB;
  
  

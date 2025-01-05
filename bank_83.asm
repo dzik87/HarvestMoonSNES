@@ -4832,7 +4832,7 @@ fEngineUnknown_83ABF0:
     STZ.W nMenuIndex                                           ;83AC69|9C9109  |000991;
     SEP #$20                                                   ;83AC6C|E220    |      ;
     STZ.W nMenuTableSelector                                   ;83AC6E|9C9309  |000993;
-    STZ.W $0994                                                ;83AC71|9C9409  |000994;
+    STZ.W nNameEntryIndex                                      ;83AC71|9C9409  |000994;
     STZ.W $018B                                                ;83AC74|9C8B01  |00018B;
     SEP #$20                                                   ;83AC77|E220    |      ;
     LDA.B #$06                                                 ;83AC79|A906    |      ;
@@ -4867,7 +4867,7 @@ fEngineUnknown_83ABF0:
     STA.B $D2                                                  ;83ACD5|85D2    |0000D2;
     REP #$30                                                   ;83ACD7|C230    |      ;
     LDA.W #$0000                                               ;83ACD9|A90000  |      ;
-    STA.B $D4                                                  ;83ACDC|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83ACDC|85D4    |0000D4;
     REP #$30                                                   ;83ACDE|C230    |      ;
     LDA.W #$0000                                               ;83ACE0|A90000  |      ;
     STA.B $DA                                                  ;83ACE3|85DA    |0000DA;
@@ -9224,7 +9224,7 @@ CODE_83CE5B:
     STA.B $D2                                                  ;83CE89|85D2    |0000D2;
     REP #$30                                                   ;83CE8B|C230    |      ;
     LDA.W #$0000                                               ;83CE8D|A90000  |      ;
-    STA.B $D4                                                  ;83CE90|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83CE90|85D4    |0000D4;
     RTS                                                        ;83CE92|60      |      ;
  
  
@@ -9403,7 +9403,7 @@ CODE_83CFF8:
     STA.B $D2                                                  ;83D026|85D2    |0000D2;
     REP #$30                                                   ;83D028|C230    |      ;
     LDA.W #$0000                                               ;83D02A|A90000  |      ;
-    STA.B $D4                                                  ;83D02D|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83D02D|85D4    |0000D4;
     REP #$20                                                   ;83D02F|C220    |      ;
     LDA.L nPlayerFlags                                         ;83D031|AF661F7F|7F1F66;
     AND.W #$FFBF                                               ;83D035|29BFFF  |      ;
@@ -9456,7 +9456,7 @@ CODE_83D060:
     STA.B $D2                                                  ;83D0A8|85D2    |0000D2;
     REP #$30                                                   ;83D0AA|C230    |      ;
     LDA.W #$0000                                               ;83D0AC|A90000  |      ;
-    STA.B $D4                                                  ;83D0AF|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83D0AF|85D4    |0000D4;
     RTS                                                        ;83D0B1|60      |      ;
  
  
@@ -9488,7 +9488,7 @@ CODE_83D0B2:
     STA.B $D2                                                  ;83D0F5|85D2    |0000D2;
     REP #$30                                                   ;83D0F7|C230    |      ;
     LDA.W #$0000                                               ;83D0F9|A90000  |      ;
-    STA.B $D4                                                  ;83D0FC|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83D0FC|85D4    |0000D4;
     RTS                                                        ;83D0FE|60      |      ;
  
  
@@ -9769,7 +9769,7 @@ CODE_83D369:
     TYX                                                        ;83D36E|BB      |      ;
     STY.B $84                                                  ;83D36F|8484    |000084;
     LDA.W $09A4,X                                              ;83D371|BDA409  |0009A4;
-    STA.B $95                                                  ;83D374|8595    |000095;
+    STA.B nUnknown0095                                         ;83D374|8595    |000095;
     SEP #$20                                                   ;83D376|E220    |      ;
     LDA.B #$08                                                 ;83D378|A908    |      ;
     JSL.L fRollRNG                                             ;83D37A|22F98980|8089F9;
@@ -9785,7 +9785,7 @@ CODE_83D369:
     LDA.W $09A4,X                                              ;83D38D|BDA409  |0009A4;
     LDX.B $84                                                  ;83D390|A684    |000084;
     STA.W $09A4,X                                              ;83D392|9DA409  |0009A4;
-    LDA.B $95                                                  ;83D395|A595    |000095;
+    LDA.B nUnknown0095                                         ;83D395|A595    |000095;
     LDX.B $86                                                  ;83D397|A686    |000086;
     STA.W $09A4,X                                              ;83D399|9DA409  |0009A4;
     PLY                                                        ;83D39C|7A      |      ;
@@ -11220,7 +11220,7 @@ subEngineMap_0x27:
     STA.B $D2                                                  ;83DEC9|85D2    |0000D2;
     REP #$30                                                   ;83DECB|C230    |      ;
     LDA.W #$0000                                               ;83DECD|A90000  |      ;
-    STA.B $D4                                                  ;83DED0|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83DED0|85D4    |0000D4;
  
 CODE_83DED2:
     RTS                                                        ;83DED2|60      |      ;
@@ -12261,7 +12261,7 @@ subEngineMap_0x3C:
     REP #$20                                                   ;83E785|C220    |      ;
     STZ.W $0915                                                ;83E787|9C1509  |000915;
     STZ.B $D2                                                  ;83E78A|64D2    |0000D2;
-    STZ.B $D4                                                  ;83E78C|64D4    |0000D4;
+    STZ.B nPlayerAction                                        ;83E78C|64D4    |0000D4;
     SEP #$20                                                   ;83E78E|E220    |      ;
     LDA.W nPlayerStamina                                       ;83E790|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83E793|8D1809  |000918;
@@ -12272,7 +12272,7 @@ subEngineMap_0x3C:
     STA.B $D2                                                  ;83E7A0|85D2    |0000D2;
     REP #$30                                                   ;83E7A2|C230    |      ;
     LDA.W #$0000                                               ;83E7A4|A90000  |      ;
-    STA.B $D4                                                  ;83E7A7|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83E7A7|85D4    |0000D4;
     REP #$30                                                   ;83E7A9|C230    |      ;
     LDA.W #$0000                                               ;83E7AB|A90000  |      ;
     STA.B $DA                                                  ;83E7AE|85DA    |0000DA;
@@ -12862,7 +12862,7 @@ subEngineMap_0x3D:
     REP #$20                                                   ;83EBBE|C220    |      ;
     STZ.W $0915                                                ;83EBC0|9C1509  |000915;
     STZ.B $D2                                                  ;83EBC3|64D2    |0000D2;
-    STZ.B $D4                                                  ;83EBC5|64D4    |0000D4;
+    STZ.B nPlayerAction                                        ;83EBC5|64D4    |0000D4;
     SEP #$20                                                   ;83EBC7|E220    |      ;
     LDA.W nPlayerStamina                                       ;83EBC9|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83EBCC|8D1809  |000918;
@@ -12873,7 +12873,7 @@ subEngineMap_0x3D:
     STA.B $D2                                                  ;83EBD9|85D2    |0000D2;
     REP #$30                                                   ;83EBDB|C230    |      ;
     LDA.W #$0000                                               ;83EBDD|A90000  |      ;
-    STA.B $D4                                                  ;83EBE0|85D4    |0000D4;
+    STA.B nPlayerAction                                        ;83EBE0|85D4    |0000D4;
     REP #$30                                                   ;83EBE2|C230    |      ;
     LDA.W #$0000                                               ;83EBE4|A90000  |      ;
     STA.B $DA                                                  ;83EBE7|85DA    |0000DA;

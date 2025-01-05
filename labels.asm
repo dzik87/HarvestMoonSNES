@@ -11,11 +11,13 @@
     ptrUnknown0x78 = $000078; !^ ptr24 ^!
     n16TempVar1 = $00007E
     n16TempVar2 = $000080
+    nUnknown0095 = $000095; !^ n8 ^!
     ptrUnkown0xAD = $0000AD; !^ ptr24 ^!
     ptrBank86_87Data = $0000B3; !^ ptr24 ^!
     ptrUnknown0xC9 = $0000C9; !^ ptr24 ^!
     ptrUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
+    nPlayerAction = $0000D4; !^ n16 ^!
     nPlayerPosX = $0000D6; !^ n16 ^!
     nPlayerPosY = $0000D8; !^ n16 ^!
     nRandomTempVar1 = $000100
@@ -32,6 +34,7 @@
     nAudioRegisterValue0 = $000114; !^ n8 ^!
     nAudioRegisterValue1 = $000115; !^ n8 ^!
     nAudioRegisterValue2 = $000116; !^ n8 ^!
+    nUnknownFlags012C = $00012C; !^ n16 ^!
     nPaletteCountdown = $00017A; !^ n8 ^!
     nPaletteNextIndex = $00017B; !^ n8 ^!
     nPaletteNextHourIndex = $00017C; !^ n8 ^!
@@ -55,6 +58,7 @@
     sHorseNameLong = $0008E5; !^ 4 * s16 ^!
     sFirstChildNameLong = $0008ED; !^ 4 * s16 ^!
     sSecondChildNameLong = $0008F5; !^ 4 * s16 ^!
+    nUnknownFlags08FD = $0008FD; !^ n16 ^!
     nPlayerStamina = $000917; !^ n8 MaxHP ^!
     nPlayerEnergy = $000918; !^ n8 HP ^!
     nToolEquipped = $000921
@@ -82,9 +86,11 @@
     nTileInFrontOfPlayerX = $000985; !^ n16 ^!
     nTileInFrontOfPlayerY = $000987; !^ n16 ^!
     nWeatherForecast = $00098C
+    nUnknownFlags09D = $00098D; !^ n8 ^!
     nWeatherForecast8281FD = $000990; !^ n8 ^!
     nMenuIndex = $000991; !^ n16 ^!
     nMenuTableSelector = $000993; !^ n8 ^!
+    nNameEntryIndex = $000994; !^ n16 (we have max 4 letter names - this holds currently used tempname index) ^!
     nMenuFlip = $000999; !^ n16 ^!
     nMenuPosX = $00099B; !^ n16 ^!
     nMenuPoxY = $00099D; !^ n16 ^!
