@@ -75,7 +75,7 @@ fMainGameLoop:
     JSL.L fUnknown_81A383                                      ;8080B7|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;8080BB|22B7BF81|81BFB7;
     JSL.L fUnknown_8095B3                                      ;8080BF|22B39580|8095B3;
-    JSL.L fUnknown_84816F                                      ;8080C3|226F8184|84816F;
+    JSL.L fSubUnk1Unknown_84816F                               ;8080C3|226F8184|84816F;
     JSL.L fUnknown_81A600                                      ;8080C7|2200A681|81A600;
     JSL.L fUnknown_8582C7                                      ;8080CB|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;8080CF|22B28C85|858CB2;
@@ -1112,7 +1112,7 @@ fRollRNG:
     STA.B n16TempVar1                                          ;808A05|857E    |00007E;
     LDA.B $92                                                  ;808A07|A592    |000092;
     STA.B n16TempVar2                                          ;808A09|8580    |000080;
-    JSL.L fSystemDivide                                        ;808A0B|22828083|838082;
+    JSL.L fMathDivide                                          ;808A0B|22828083|838082;
     SEP #$20                                                   ;808A0F|E220    |      ;
     STA.B $93                                                  ;808A11|8593    |000093;
     JSL.L fGetRandomNumber                                     ;808A13|22388183|838138;
@@ -2899,12 +2899,12 @@ fUnknown_8096D3:
     JSL.L fUnknown_858ED7                                      ;809703|22D78E85|858ED7;
     JSL.L fUnknown_85820F                                      ;809707|220F8285|85820F;
     JSL.L fUnknown_81A4C7                                      ;80970B|22C7A481|81A4C7;
-    JSL.L fUnknown_848000                                      ;80970F|22008084|848000;
+    JSL.L fSubUnk1Unknown_848000                               ;80970F|22008084|848000;
     SEP #$20                                                   ;809713|E220    |      ;
     LDA.W $098B                                                ;809715|AD8B09  |00098B;
     STA.B nSelectedTilemapId                                   ;809718|8522    |000022;
     JSL.L fEngineMapSubrutines                                 ;80971A|2298CA83|83CA98;
-    JSL.L fUnknown_84816F                                      ;80971E|226F8184|84816F;
+    JSL.L fSubUnk1Unknown_84816F                               ;80971E|226F8184|84816F;
     SEP #$20                                                   ;809722|E220    |      ;
     LDA.W $098B                                                ;809724|AD8B09  |00098B;
     JSL.L fUnknown_80972C                                      ;809727|222C9780|80972C;
@@ -3246,7 +3246,7 @@ fUnknown_80972C:
     LDA.W #$1800                                               ;809A09|A90018  |      ;
     STA.B $C7                                                  ;809A0C|85C7    |0000C7;
     JSL.L fUnknown_81A383                                      ;809A0E|2283A381|81A383;
-    JSL.L fUnknown_84816F                                      ;809A12|226F8184|84816F;
+    JSL.L fSubUnk1Unknown_84816F                               ;809A12|226F8184|84816F;
     JSL.L fUnknown_8582C7                                      ;809A16|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;809A1A|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;809A1E|22E08385|8583E0;
@@ -3257,7 +3257,7 @@ fUnknown_80972C:
     LDA.W #$1800                                               ;809A2C|A90018  |      ;
     STA.B $C7                                                  ;809A2F|85C7    |0000C7;
     JSL.L fUnknown_81A383                                      ;809A31|2283A381|81A383;
-    JSL.L fUnknown_84816F                                      ;809A35|226F8184|84816F;
+    JSL.L fSubUnk1Unknown_84816F                               ;809A35|226F8184|84816F;
     JSL.L fUnknown_8582C7                                      ;809A39|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;809A3D|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;809A41|22E08385|8583E0;
@@ -3848,7 +3848,7 @@ fUnknown_809A64:
     LDA.W #$0011                                               ;809E30|A91100  |      ;
     LDX.W #$002C                                               ;809E33|A22C00  |      ;
     LDY.W #$0000                                               ;809E36|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;809E39|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;809E39|22978084|848097;
     BRA .return2                                               ;809E3D|807C    |809EBB;
  
  
@@ -3876,7 +3876,7 @@ fUnknown_809A64:
     LDA.W #$0013                                               ;809E6E|A91300  |      ;
     LDX.W #$002B                                               ;809E71|A22B00  |      ;
     LDY.W #$0000                                               ;809E74|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;809E77|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;809E77|22978084|848097;
     BRA .return2                                               ;809E7B|803E    |809EBB;
  
  
@@ -3904,7 +3904,7 @@ fUnknown_809A64:
     LDA.W #$0012                                               ;809EAC|A91200  |      ;
     LDX.W #$002A                                               ;809EAF|A22A00  |      ;
     LDY.W #$0000                                               ;809EB2|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;809EB5|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;809EB5|22978084|848097;
     BRA .return2                                               ;809EB9|8000    |809EBB;
  
  

@@ -2,7 +2,7 @@
     ORG $838000
  
  
-fUnknown_838000:
+fMathUnknown_838000:
     PHP                                                        ;838000|08      |      ;
     REP #$30                                                   ;838001|C230    |      ;
     STA.W $011C                                                ;838003|8D1C01  |00011C;
@@ -13,7 +13,7 @@ fUnknown_838000:
     STA.W $011A                                                ;838011|8D1A01  |00011A;
     LDA.B n16TempVar1                                          ;838014|A57E    |00007E;
     STA.W $011B                                                ;838016|8D1B01  |00011B;
-    JSR.W fSystemMultiply                                      ;838019|206780  |838067;
+    JSR.W fMathMultiply                                        ;838019|206780  |838067;
     REP #$20                                                   ;83801C|C220    |      ;
     STA.W $011E                                                ;83801E|8D1E01  |00011E;
     LDA.W $011C                                                ;838021|AD1C01  |00011C;
@@ -22,7 +22,7 @@ fUnknown_838000:
     SEP #$20                                                   ;838029|E220    |      ;
     XBA                                                        ;83802B|EB      |      ;
     STA.W $011A                                                ;83802C|8D1A01  |00011A;
-    JSR.W fSystemMultiply                                      ;83802F|206780  |838067;
+    JSR.W fMathMultiply                                        ;83802F|206780  |838067;
     REP #$20                                                   ;838032|C220    |      ;
     AND.W #$00FF                                               ;838034|29FF00  |      ;
     XBA                                                        ;838037|EB      |      ;
@@ -36,7 +36,7 @@ fUnknown_838000:
     STA.W $011B                                                ;838045|8D1B01  |00011B;
     LDA.W $011C                                                ;838048|AD1C01  |00011C;
     STA.W $011A                                                ;83804B|8D1A01  |00011A;
-    JSR.W fSystemMultiply                                      ;83804E|206780  |838067;
+    JSR.W fMathMultiply                                        ;83804E|206780  |838067;
     REP #$20                                                   ;838051|C220    |      ;
     AND.W #$00FF                                               ;838053|29FF00  |      ;
     XBA                                                        ;838056|EB      |      ;
@@ -51,7 +51,7 @@ fUnknown_838000:
     RTL                                                        ;838066|6B      |      ;
  
  
-fSystemMultiply:
+fMathMultiply:
     SEP #$20                                                   ;838067|E220    |      ; $011A: nA, $011B, return A = $011A * $011B
     LDA.W $011A                                                ;838069|AD1A01  |00011A;
     STA.L SNES_WRMPYA                                          ;83806C|8F024200|004202;
@@ -66,7 +66,7 @@ fSystemMultiply:
     RTS                                                        ;838081|60      |      ;
  
  
-fSystemDivide:
+fMathDivide:
     REP #$30                                                   ;838082|C230    |      ;
     LDY.W #$0000                                               ;838084|A00000  |      ;
     LDA.B n16TempVar2                                          ;838087|A580    |000080;
@@ -554,7 +554,7 @@ fAudioUnknown_8383A4:
     JSL.L fAudioUnknown_83833E                                 ;8383FC|223E8383|83833E;
  
 fAudioReturn_838400:
-    RTL                                                        ;838400|6B      |      ;
+    RTL                                                        ;838400|6B      |      ; FIXME: I want to be .return
  
  
 fAudioUnknown_838401:
@@ -701,7 +701,7 @@ fAudioUnknown_8384D3:
     STA.B n16TempVar1                                          ;8384F8|857E    |00007E;
     LDA.W #$0003                                               ;8384FA|A90300  |      ;
     STA.B n16TempVar2                                          ;8384FD|8580    |000080;
-    JSL.L fSystemDivide                                        ;8384FF|22828083|838082;
+    JSL.L fMathDivide                                          ;8384FF|22828083|838082;
     STA.B n16TempVar2                                          ;838503|8580    |000080;
     LDA.B n16TempVar1                                          ;838505|A57E    |00007E;
     BEQ +                                                      ;838507|F002    |83850B;
@@ -815,7 +815,7 @@ fAudioUnknown_838598:
     REP #$20                                                   ;8385D4|C220    |      ;
     STA.B n16TempVar1                                          ;8385D6|857E    |00007E;
     LDA.W #$000A                                               ;8385D8|A90A00  |      ;
-    JSL.L fUnknown_838000                                      ;8385DB|22008083|838000;
+    JSL.L fMathUnknown_838000                                  ;8385DB|22008083|838000;
     TAX                                                        ;8385DF|AA      |      ;
     SEP #$20                                                   ;8385E0|E220    |      ;
     LDA.B $94                                                  ;8385E2|A594    |000094;
@@ -946,7 +946,7 @@ fAudioUnknown_838598:
     STA.B n16TempVar1                                          ;8386DE|857E    |00007E;
     LDA.W #$0003                                               ;8386E0|A90300  |      ;
     STA.B n16TempVar2                                          ;8386E3|8580    |000080;
-    JSL.L fSystemDivide                                        ;8386E5|22828083|838082;
+    JSL.L fMathDivide                                          ;8386E5|22828083|838082;
     STA.B n16TempVar2                                          ;8386E9|8580    |000080;
     LDA.B n16TempVar1                                          ;8386EB|A57E    |00007E;
     BEQ +                                                      ;8386ED|F002    |8386F1;
@@ -1056,7 +1056,7 @@ fAudioUnknown_83878C:
     REP #$20                                                   ;8387AB|C220    |      ;
     STA.B n16TempVar1                                          ;8387AD|857E    |00007E;
     LDA.W #$000E                                               ;8387AF|A90E00  |      ;
-    JSL.L fUnknown_838000                                      ;8387B2|22008083|838000;
+    JSL.L fMathUnknown_838000                                  ;8387B2|22008083|838000;
     TAX                                                        ;8387B6|AA      |      ;
     INX                                                        ;8387B7|E8      |      ;
     INX                                                        ;8387B8|E8      |      ;
@@ -1112,7 +1112,7 @@ fAudioUnknown_83878C:
     REP #$20                                                   ;83880C|C220    |      ;
     STA.B n16TempVar1                                          ;83880E|857E    |00007E;
     LDA.W #$000A                                               ;838810|A90A00  |      ;
-    JSL.L fUnknown_838000                                      ;838813|22008083|838000;
+    JSL.L fMathUnknown_838000                                  ;838813|22008083|838000;
     TAX                                                        ;838817|AA      |      ;
     SEP #$20                                                   ;838818|E220    |      ;
     LDA.B $94                                                  ;83881A|A594    |000094;
@@ -1243,7 +1243,7 @@ fAudioUnknown_83878C:
     STA.B n16TempVar1                                          ;838916|857E    |00007E;
     LDA.W #$0003                                               ;838918|A90300  |      ;
     STA.B n16TempVar2                                          ;83891B|8580    |000080;
-    JSL.L fSystemDivide                                        ;83891D|22828083|838082;
+    JSL.L fMathDivide                                          ;83891D|22828083|838082;
     STA.B n16TempVar2                                          ;838921|8580    |000080;
     LDA.B n16TempVar1                                          ;838923|A57E    |00007E;
     BEQ +                                                      ;838925|F002    |838929;
@@ -1422,7 +1422,7 @@ fAudioUnknown_838A26:
     STA.B n16TempVar1                                          ;838A54|857E    |00007E;
     LDA.W #$0003                                               ;838A56|A90300  |      ;
     STA.B n16TempVar2                                          ;838A59|8580    |000080;
-    JSL.L fSystemDivide                                        ;838A5B|22828083|838082;
+    JSL.L fMathDivide                                          ;838A5B|22828083|838082;
     STA.B n16TempVar2                                          ;838A5F|8580    |000080;
     LDA.B n16TempVar1                                          ;838A61|A57E    |00007E;
     BEQ +                                                      ;838A63|F002    |838A67;
@@ -1451,7 +1451,7 @@ fAudioUnknown_838A26:
     REP #$20                                                   ;838A8E|C220    |      ;
     STA.B n16TempVar1                                          ;838A90|857E    |00007E;
     LDA.W #$000E                                               ;838A92|A90E00  |      ;
-    JSL.L fUnknown_838000                                      ;838A95|22008083|838000;
+    JSL.L fMathUnknown_838000                                  ;838A95|22008083|838000;
     TAX                                                        ;838A99|AA      |      ;
     LDA.L sAudioData1_838F83,X                                 ;838A9A|BF838F83|838F83;
     STA.B ptrAudioData                                         ;838A9E|850A    |00000A;
@@ -1541,7 +1541,7 @@ fAudioUnknown_838AFF:
     REP #$20                                                   ;838B40|C220    |      ;
     STA.B n16TempVar1                                          ;838B42|857E    |00007E;
     LDA.W #$000A                                               ;838B44|A90A00  |      ;
-    JSL.L fUnknown_838000                                      ;838B47|22008083|838000;
+    JSL.L fMathUnknown_838000                                  ;838B47|22008083|838000;
     TAX                                                        ;838B4B|AA      |      ;
     SEP #$20                                                   ;838B4C|E220    |      ;
     LDA.B $94                                                  ;838B4E|A594    |000094;
@@ -1672,7 +1672,7 @@ fAudioUnknown_838AFF:
     STA.B n16TempVar1                                          ;838C4A|857E    |00007E;
     LDA.W #$0003                                               ;838C4C|A90300  |      ;
     STA.B n16TempVar2                                          ;838C4F|8580    |000080;
-    JSL.L fSystemDivide                                        ;838C51|22828083|838082;
+    JSL.L fMathDivide                                          ;838C51|22828083|838082;
     STA.B n16TempVar2                                          ;838C55|8580    |000080;
     LDA.B n16TempVar1                                          ;838C57|A57E    |00007E;
     BEQ +                                                      ;838C59|F002    |838C5D;
@@ -6870,7 +6870,7 @@ fEngineCowUnknown_83BC5A:
 .label3:
     REP #$20                                                   ;83BD10|C220    |      ;
     LDA.W #$FFF8                                               ;83BD12|A9F8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD15|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BD15|22D4A584|84A5D4;
     REP #$30                                                   ;83BD19|C230    |      ;
     LDY.W #$0004                                               ;83BD1B|A00400  |      ;
     BRA .label7                                                ;83BD1E|8030    |83BD50;
@@ -6879,7 +6879,7 @@ fEngineCowUnknown_83BC5A:
 .label4:
     REP #$20                                                   ;83BD20|C220    |      ;
     LDA.W #$FFF0                                               ;83BD22|A9F0FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD25|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BD25|22D4A584|84A5D4;
     REP #$30                                                   ;83BD29|C230    |      ;
     LDY.W #$0002                                               ;83BD2B|A00200  |      ;
     BRA .label7                                                ;83BD2E|8020    |83BD50;
@@ -6888,7 +6888,7 @@ fEngineCowUnknown_83BC5A:
 .label5:
     REP #$20                                                   ;83BD30|C220    |      ;
     LDA.W #$FFE8                                               ;83BD32|A9E8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD35|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BD35|22D4A584|84A5D4;
     REP #$30                                                   ;83BD39|C230    |      ;
     LDY.W #$0002                                               ;83BD3B|A00200  |      ;
     BRA .label7                                                ;83BD3E|8010    |83BD50;
@@ -6897,7 +6897,7 @@ fEngineCowUnknown_83BC5A:
 .label6:
     REP #$20                                                   ;83BD40|C220    |      ;
     LDA.W #$FFF8                                               ;83BD42|A9F8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD45|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BD45|22D4A584|84A5D4;
     REP #$30                                                   ;83BD49|C230    |      ;
     LDY.W #$0008                                               ;83BD4B|A00800  |      ;
     BRA .label7                                                ;83BD4E|8000    |83BD50;
@@ -6933,7 +6933,7 @@ fEngineCowUnknown_83BC5A:
     STA.B [ptrUnknown0x72],Y                                   ;83BD8A|9772    |000072;
     REP #$20                                                   ;83BD8C|C220    |      ;
     LDA.W #$FFF4                                               ;83BD8E|A9F4FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD91|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BD91|22D4A584|84A5D4;
     REP #$30                                                   ;83BD95|C230    |      ;
     LDA.W #$FFE2                                               ;83BD97|A9E2FF  |      ;
     JSL.L fEngineAddHappiness                                  ;83BD9A|2282B283|83B282;
@@ -6960,7 +6960,7 @@ fEngineCowUnknown_83BC5A:
     BNE .label9                                                ;83BDC9|D00B    |83BDD6;
     REP #$20                                                   ;83BDCB|C220    |      ;
     LDA.W #$FFF8                                               ;83BDCD|A9F8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BDD0|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BDD0|22D4A584|84A5D4;
     BRA .label10                                               ;83BDD4|8015    |83BDEB;
  
  
@@ -7003,7 +7003,7 @@ fEngineCowUnknown_83BC5A:
     STA.B [ptrUnknown0x72],Y                                   ;83BE21|9772    |000072;
     REP #$20                                                   ;83BE23|C220    |      ;
     LDA.W #$FFE2                                               ;83BE25|A9E2FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BE28|22D4A584|84A5D4;
+    JSL.L fSubUnk1Unknown_84A5D4                               ;83BE28|22D4A584|84A5D4;
     BRA .label12                                               ;83BE2C|8011    |83BE3F;
  
  
@@ -7762,7 +7762,7 @@ fEngineChichenUnknown_83C296:
     ADC.W #$0024                                               ;83C391|692400  |      ;
     LDX.W #$0000                                               ;83C394|A20000  |      ;
     LDY.W #$0000                                               ;83C397|A00000  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C39A|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C39A|22F88084|8480F8;
     SEP #$20                                                   ;83C39E|E220    |      ;
     REP #$10                                                   ;83C3A0|C210    |      ;
     LDY.W #$0000                                               ;83C3A2|A00000  |      ;
@@ -7783,7 +7783,7 @@ fEngineChichenUnknown_83C296:
     ADC.W #$0024                                               ;83C3BA|692400  |      ;
     LDX.W #$0000                                               ;83C3BD|A20000  |      ;
     LDY.W #$0001                                               ;83C3C0|A00100  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C3C3|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C3C3|22F88084|8480F8;
     BRA .label12                                               ;83C3C7|8038    |83C401;
  
  
@@ -7799,7 +7799,7 @@ fEngineChichenUnknown_83C296:
     ADC.W #$0024                                               ;83C3D8|692400  |      ;
     LDX.W #$0000                                               ;83C3DB|A20000  |      ;
     LDY.W #$0002                                               ;83C3DE|A00200  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C3E1|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C3E1|22F88084|8480F8;
     REP #$30                                                   ;83C3E5|C230    |      ;
     PLA                                                        ;83C3E7|68      |      ;
     PHA                                                        ;83C3E8|48      |      ;
@@ -7816,7 +7816,7 @@ fEngineChichenUnknown_83C296:
     ADC.W #$0024                                               ;83C3F4|692400  |      ;
     LDX.W #$0000                                               ;83C3F7|A20000  |      ;
     LDY.W #$005F                                               ;83C3FA|A05F00  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C3FD|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C3FD|22F88084|8480F8;
  
 .label12:
     REP #$30                                                   ;83C401|C230    |      ;
@@ -8037,7 +8037,7 @@ fEngineChichenUnknown_83C296:
     CLC                                                        ;83C55B|18      |      ;
     ADC.W #$0018                                               ;83C55C|691800  |      ;
     LDX.W #$0000                                               ;83C55F|A20000  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C562|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C562|22F88084|8480F8;
     REP #$30                                                   ;83C566|C230    |      ;
     PLA                                                        ;83C568|68      |      ;
     PHA                                                        ;83C569|48      |      ;
@@ -8075,7 +8075,7 @@ fEngineChichenUnknown_83C296:
     CLC                                                        ;83C59F|18      |      ;
     ADC.W #$0018                                               ;83C5A0|691800  |      ;
     LDX.W #$0000                                               ;83C5A3|A20000  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C5A6|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C5A6|22F88084|8480F8;
     REP #$30                                                   ;83C5AA|C230    |      ;
     PLA                                                        ;83C5AC|68      |      ;
     PHA                                                        ;83C5AD|48      |      ;
@@ -8153,7 +8153,7 @@ fEngineChichenUnknown_83C296:
     CLC                                                        ;83C627|18      |      ;
     ADC.W #$0018                                               ;83C628|691800  |      ;
     LDX.W #$0000                                               ;83C62B|A20000  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C62E|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C62E|22F88084|8480F8;
     REP #$30                                                   ;83C632|C230    |      ;
     PLA                                                        ;83C634|68      |      ;
     PHA                                                        ;83C635|48      |      ;
@@ -8305,7 +8305,7 @@ fEngineChichenUnknown_83C296:
     LDA.W #$0016                                               ;83C719|A91600  |      ;
     LDX.W #$0000                                               ;83C71C|A20000  |      ;
     LDY.W #$0011                                               ;83C71F|A01100  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C722|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C722|22F88084|8480F8;
     REP #$20                                                   ;83C726|C220    |      ;
     LDA.W #$0001                                               ;83C728|A90100  |      ;
     STA.L $7F1F58                                              ;83C72B|8F581F7F|7F1F58;
@@ -8434,7 +8434,7 @@ fEngineChichenUnknown_83C296:
   + REP #$30                                                   ;83C7F5|C230    |      ;
     LDA.W #$0017                                               ;83C7F7|A91700  |      ;
     LDX.W #$0000                                               ;83C7FA|A20000  |      ;
-    JSL.L fUnknown_8480F8                                      ;83C7FD|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83C7FD|22F88084|8480F8;
     SEP #$20                                                   ;83C801|E220    |      ;
     STZ.W $0939                                                ;83C803|9C3909  |000939;
  
@@ -8893,7 +8893,7 @@ CODE_83CB91:
     LDA.W #$0013                                               ;83CB93|A91300  |      ;
     LDX.W #$0044                                               ;83CB96|A24400  |      ;
     LDY.W #$0000                                               ;83CB99|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CB9C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CB9C|22978084|848097;
     BRA CODE_83CBC4                                            ;83CBA0|8022    |83CBC4;
  
  
@@ -8902,7 +8902,7 @@ CODE_83CBA2:
     LDA.W #$0013                                               ;83CBA4|A91300  |      ;
     LDX.W #$0044                                               ;83CBA7|A24400  |      ;
     LDY.W #$0002                                               ;83CBAA|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83CBAD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CBAD|22978084|848097;
     BRA CODE_83CBC4                                            ;83CBB1|8011    |83CBC4;
  
  
@@ -8911,7 +8911,7 @@ CODE_83CBB3:
     LDA.W #$0013                                               ;83CBB5|A91300  |      ;
     LDX.W #$0044                                               ;83CBB8|A24400  |      ;
     LDY.W #$0003                                               ;83CBBB|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83CBBE|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CBBE|22978084|848097;
     BRA CODE_83CBC4                                            ;83CBC2|8000    |83CBC4;
  
  
@@ -8927,7 +8927,7 @@ CODE_83CBC4:
     LDA.W #$0014                                               ;83CBDA|A91400  |      ;
     LDX.W #$0045                                               ;83CBDD|A24500  |      ;
     LDY.W #$0001                                               ;83CBE0|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83CBE3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CBE3|22978084|848097;
  
 CODE_83CBE7:
     REP #$30                                                   ;83CBE7|C230    |      ;
@@ -8941,7 +8941,7 @@ CODE_83CBE7:
     LDA.W #$0015                                               ;83CBFD|A91500  |      ;
     LDX.W #$0045                                               ;83CC00|A24500  |      ;
     LDY.W #$0004                                               ;83CC03|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83CC06|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CC06|22978084|848097;
  
 CODE_83CC0A:
     REP #$30                                                   ;83CC0A|C230    |      ;
@@ -9059,7 +9059,7 @@ CODE_83CC9A:
     LDA.W #$0000                                               ;83CCD6|A90000  |      ;
     LDX.W #$0019                                               ;83CCD9|A21900  |      ;
     LDY.W #$0000                                               ;83CCDC|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CCDF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CCDF|22978084|848097;
     SEP #$20                                                   ;83CCE3|E220    |      ;
     STZ.W $09A3                                                ;83CCE5|9CA309  |0009A3;
     RTS                                                        ;83CCE8|60      |      ;
@@ -9089,7 +9089,7 @@ CODE_83CCE9:
     LDA.W #$0000                                               ;83CD25|A90000  |      ;
     LDX.W #$001A                                               ;83CD28|A21A00  |      ;
     LDY.W #$0000                                               ;83CD2B|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CD2E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CD2E|22978084|848097;
     SEP #$20                                                   ;83CD32|E220    |      ;
     STZ.W $09A3                                                ;83CD34|9CA309  |0009A3;
     RTS                                                        ;83CD37|60      |      ;
@@ -9122,7 +9122,7 @@ CODE_83CD38:
     LDA.W #$0000                                               ;83CD7D|A90000  |      ;
     LDX.W #$001B                                               ;83CD80|A21B00  |      ;
     LDY.W #$0000                                               ;83CD83|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CD86|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CD86|22978084|848097;
     SEP #$20                                                   ;83CD8A|E220    |      ;
     STZ.W $09A3                                                ;83CD8C|9CA309  |0009A3;
     RTS                                                        ;83CD8F|60      |      ;
@@ -9158,7 +9158,7 @@ CODE_83CD90:
     LDA.W #$0000                                               ;83CDDE|A90000  |      ;
     LDX.W #$001C                                               ;83CDE1|A21C00  |      ;
     LDY.W #$0000                                               ;83CDE4|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CDE7|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CDE7|22978084|848097;
     SEP #$20                                                   ;83CDEB|E220    |      ;
     STZ.W $09A3                                                ;83CDED|9CA309  |0009A3;
     RTS                                                        ;83CDF0|60      |      ;
@@ -9197,7 +9197,7 @@ CODE_83CDF1:
     LDA.W #$0000                                               ;83CE48|A90000  |      ;
     LDX.W #$001D                                               ;83CE4B|A21D00  |      ;
     LDY.W #$0000                                               ;83CE4E|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CE51|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CE51|22978084|848097;
     SEP #$20                                                   ;83CE55|E220    |      ;
     STZ.W $09A3                                                ;83CE57|9CA309  |0009A3;
     RTS                                                        ;83CE5A|60      |      ;
@@ -9212,7 +9212,7 @@ CODE_83CE5B:
     LDA.W #$0007                                               ;83CE68|A90700  |      ;
     LDX.W #$0000                                               ;83CE6B|A20000  |      ;
     LDY.W #$0020                                               ;83CE6E|A02000  |      ;
-    JSL.L fUnknown_848097                                      ;83CE71|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CE71|22978084|848097;
     SEP #$20                                                   ;83CE75|E220    |      ;
     LDA.B #$42                                                 ;83CE77|A942    |      ;
     STA.W nPlayerInteractionIndex                              ;83CE79|8D6E09  |00096E;
@@ -9237,7 +9237,7 @@ CODE_83CE93:
     LDA.W #$0000                                               ;83CEA0|A90000  |      ;
     LDX.W #$000A                                               ;83CEA3|A20A00  |      ;
     LDY.W #$0002                                               ;83CEA6|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83CEA9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CEA9|22978084|848097;
     RTS                                                        ;83CEAD|60      |      ;
  
  
@@ -9250,7 +9250,7 @@ CODE_83CEAE:
     LDA.W #$0000                                               ;83CEBB|A90000  |      ;
     LDX.W #$000C                                               ;83CEBE|A20C00  |      ;
     LDY.W #$0000                                               ;83CEC1|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CEC4|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CEC4|22978084|848097;
     REP #$20                                                   ;83CEC8|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83CECA|AF681F7F|7F1F68;
     ORA.W #$0020                                               ;83CECE|092000  |      ;
@@ -9270,7 +9270,7 @@ CODE_83CEDD:
     LDA.W #$0000                                               ;83CEEA|A90000  |      ;
     LDX.W #$000C                                               ;83CEED|A20C00  |      ;
     LDY.W #$0001                                               ;83CEF0|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83CEF3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CEF3|22978084|848097;
     REP #$20                                                   ;83CEF7|C220    |      ;
     LDA.W #$0078                                               ;83CEF9|A97800  |      ;
     STA.L $7F1F2C                                              ;83CEFC|8F2C1F7F|7F1F2C;
@@ -9303,7 +9303,7 @@ CODE_83CF32:
     LDA.W #$0006                                               ;83CF34|A90600  |      ;
     LDX.W #$0024                                               ;83CF37|A22400  |      ;
     LDY.W #$0000                                               ;83CF3A|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83CF3D|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CF3D|22978084|848097;
     RTS                                                        ;83CF41|60      |      ;
  
  
@@ -9324,7 +9324,7 @@ CODE_83CF42:
     LDA.W #$0006                                               ;83CF65|A90600  |      ;
     LDX.W #$0024                                               ;83CF68|A22400  |      ;
     LDY.W #$0002                                               ;83CF6B|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83CF6E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CF6E|22978084|848097;
     RTS                                                        ;83CF72|60      |      ;
  
  
@@ -9345,7 +9345,7 @@ CODE_83CF73:
     LDA.W #$0006                                               ;83CF96|A90600  |      ;
     LDX.W #$0024                                               ;83CF99|A22400  |      ;
     LDY.W #$0003                                               ;83CF9C|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83CF9F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CF9F|22978084|848097;
     RTS                                                        ;83CFA3|60      |      ;
  
  
@@ -9378,7 +9378,7 @@ CODE_83CFA4:
     LDA.W #$000B                                               ;83CFEA|A90B00  |      ;
     LDX.W #$0024                                               ;83CFED|A22400  |      ;
     LDY.W #$0001                                               ;83CFF0|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83CFF3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83CFF3|22978084|848097;
     RTS                                                        ;83CFF7|60      |      ;
  
  
@@ -9391,7 +9391,7 @@ CODE_83CFF8:
     LDA.W #$0009                                               ;83D005|A90900  |      ;
     LDX.W #$0000                                               ;83D008|A20000  |      ;
     LDY.W #$002C                                               ;83D00B|A02C00  |      ;
-    JSL.L fUnknown_848097                                      ;83D00E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D00E|22978084|848097;
     SEP #$20                                                   ;83D012|E220    |      ;
     LDA.B #$47                                                 ;83D014|A947    |      ;
     STA.W nPlayerInteractionIndex                              ;83D016|8D6E09  |00096E;
@@ -9423,7 +9423,7 @@ CODE_83D03D:
     LDA.W #$0000                                               ;83D052|A90000  |      ;
     LDX.W #$0000                                               ;83D055|A20000  |      ;
     LDY.W #$002E                                               ;83D058|A02E00  |      ;
-    JSL.L fUnknown_848097                                      ;83D05B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D05B|22978084|848097;
     RTS                                                        ;83D05F|60      |      ;
  
  
@@ -9439,12 +9439,12 @@ CODE_83D060:
     LDA.W #$0009                                               ;83D078|A90900  |      ;
     LDX.W #$0000                                               ;83D07B|A20000  |      ;
     LDY.W #$0036                                               ;83D07E|A03600  |      ;
-    JSL.L fUnknown_848097                                      ;83D081|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D081|22978084|848097;
     REP #$30                                                   ;83D085|C230    |      ;
     LDA.W #$000A                                               ;83D087|A90A00  |      ;
     LDX.W #$0000                                               ;83D08A|A20000  |      ;
     LDY.W #$0037                                               ;83D08D|A03700  |      ;
-    JSL.L fUnknown_848097                                      ;83D090|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D090|22978084|848097;
     SEP #$20                                                   ;83D094|E220    |      ;
     LDA.B #$48                                                 ;83D096|A948    |      ;
     STA.W nPlayerInteractionIndex                              ;83D098|8D6E09  |00096E;
@@ -9476,7 +9476,7 @@ CODE_83D0B2:
     LDA.W #$000B                                               ;83D0D4|A90B00  |      ;
     LDX.W #$0000                                               ;83D0D7|A20000  |      ;
     LDY.W #$001D                                               ;83D0DA|A01D00  |      ;
-    JSL.L fUnknown_848097                                      ;83D0DD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D0DD|22978084|848097;
     SEP #$20                                                   ;83D0E1|E220    |      ;
     LDA.B #$49                                                 ;83D0E3|A949    |      ;
     STA.W nPlayerInteractionIndex                              ;83D0E5|8D6E09  |00096E;
@@ -9524,7 +9524,7 @@ CODE_83D0FF:
     LDA.W #$0000                                               ;83D148|A90000  |      ;
     LDX.W #$0013                                               ;83D14B|A21300  |      ;
     LDY.W #$0000                                               ;83D14E|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D151|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D151|22978084|848097;
     REP #$20                                                   ;83D155|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83D157|AF681F7F|7F1F68;
     ORA.W #$0400                                               ;83D15B|090004  |      ;
@@ -9572,7 +9572,7 @@ CODE_83D175:
     LDA.W #$0000                                               ;83D1C0|A90000  |      ;
     LDX.W #$0016                                               ;83D1C3|A21600  |      ;
     LDY.W #$0000                                               ;83D1C6|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D1C9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D1C9|22978084|848097;
     RTS                                                        ;83D1CD|60      |      ;
  
  
@@ -9622,7 +9622,7 @@ CODE_83D1F8:
     LDA.W #$0000                                               ;83D230|A90000  |      ;
     LDX.W #$0018                                               ;83D233|A21800  |      ;
     LDY.W #$0000                                               ;83D236|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D239|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D239|22978084|848097;
     RTS                                                        ;83D23D|60      |      ;
  
  
@@ -9661,7 +9661,7 @@ CODE_83D28E:
     LDA.W #$0000                                               ;83D290|A90000  |      ;
     LDX.W #$0029                                               ;83D293|A22900  |      ;
     LDY.W #$0000                                               ;83D296|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D299|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D299|22978084|848097;
     RTS                                                        ;83D29D|60      |      ;
  
  
@@ -9685,7 +9685,7 @@ CODE_83D29E:
     LDA.W #$0000                                               ;83D2C8|A90000  |      ;
     LDX.W #$0023                                               ;83D2CB|A22300  |      ;
     LDY.W #$0000                                               ;83D2CE|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D2D1|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D2D1|22978084|848097;
     REP #$30                                                   ;83D2D5|C230    |      ;
     LDA.W #$0002                                               ;83D2D7|A90200  |      ;
     JSL.L fEngineAddHappiness                                  ;83D2DA|2282B283|83B282;
@@ -9708,7 +9708,7 @@ subEngineMap_0x04:
     LDA.W #$0000                                               ;83D2F6|A90000  |      ;
     LDX.W #$0014                                               ;83D2F9|A21400  |      ;
     LDY.W #$0003                                               ;83D2FC|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D2FF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D2FF|22978084|848097;
     RTS                                                        ;83D303|60      |      ;
  
  
@@ -9740,7 +9740,7 @@ CODE_83D329:
     LDA.W #$0015                                               ;83D32B|A91500  |      ;
     LDX.W #$0000                                               ;83D32E|A20000  |      ;
     LDY.W #$007E                                               ;83D331|A07E00  |      ;
-    JSL.L fUnknown_848097                                      ;83D334|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D334|22978084|848097;
     REP #$20                                                   ;83D338|C220    |      ;
     STZ.B n16TempVar1                                          ;83D33A|647E    |00007E;
     SEP #$20                                                   ;83D33C|E220    |      ;
@@ -9798,7 +9798,7 @@ CODE_83D369:
     LDA.W #$0000                                               ;83D3AA|A90000  |      ;
     LDX.W #$0028                                               ;83D3AD|A22800  |      ;
     LDY.W #$0002                                               ;83D3B0|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D3B3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D3B3|22978084|848097;
     RTS                                                        ;83D3B7|60      |      ;
  
  
@@ -9817,7 +9817,7 @@ CODE_83D3B8:
     LDA.W #$0000                                               ;83D3D4|A90000  |      ;
     LDX.W #$000E                                               ;83D3D7|A20E00  |      ;
     LDY.W #$0000                                               ;83D3DA|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D3DD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D3DD|22978084|848097;
     RTS                                                        ;83D3E1|60      |      ;
  
  
@@ -9837,7 +9837,7 @@ CODE_83D3E2:
     LDA.W #$0000                                               ;83D400|A90000  |      ;
     LDX.W #$0026                                               ;83D403|A22600  |      ;
     LDY.W #$0000                                               ;83D406|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D409|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D409|22978084|848097;
     RTS                                                        ;83D40D|60      |      ;
  
  
@@ -9857,7 +9857,7 @@ CODE_83D40E:
     LDA.W #$0000                                               ;83D42C|A90000  |      ;
     LDX.W #$0027                                               ;83D42F|A22700  |      ;
     LDY.W #$0000                                               ;83D432|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D435|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D435|22978084|848097;
     RTS                                                        ;83D439|60      |      ;
  
  
@@ -9869,7 +9869,7 @@ CODE_83D43A:
     LDA.W #$0015                                               ;83D445|A91500  |      ;
     LDX.W #$0000                                               ;83D448|A20000  |      ;
     LDY.W #$007E                                               ;83D44B|A07E00  |      ;
-    JSL.L fUnknown_848097                                      ;83D44E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D44E|22978084|848097;
  
 CODE_83D452:
     REP #$30                                                   ;83D452|C230    |      ;
@@ -9880,7 +9880,7 @@ CODE_83D452:
     LDA.W #$0000                                               ;83D45F|A90000  |      ;
     LDX.W #$000B                                               ;83D462|A20B00  |      ;
     LDY.W #$0000                                               ;83D465|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D468|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D468|22978084|848097;
     RTS                                                        ;83D46C|60      |      ;
  
  
@@ -9912,7 +9912,7 @@ CODE_83D46D:
     LDA.W #$0000                                               ;83D4A9|A90000  |      ;
     LDX.W #$0001                                               ;83D4AC|A20100  |      ;
     LDY.W #$0000                                               ;83D4AF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D4B2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D4B2|22978084|848097;
  
 CODE_83D4B6:
     RTS                                                        ;83D4B6|60      |      ;
@@ -9923,7 +9923,7 @@ CODE_83D4B7:
     LDA.W #$0000                                               ;83D4B9|A90000  |      ;
     LDX.W #$0003                                               ;83D4BC|A20300  |      ;
     LDY.W #$0000                                               ;83D4BF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D4C2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D4C2|22978084|848097;
     RTS                                                        ;83D4C6|60      |      ;
  
  
@@ -9932,7 +9932,7 @@ CODE_83D4C7:
     LDA.W #$0000                                               ;83D4C9|A90000  |      ;
     LDX.W #$0002                                               ;83D4CC|A20200  |      ;
     LDY.W #$0000                                               ;83D4CF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D4D2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D4D2|22978084|848097;
     RTS                                                        ;83D4D6|60      |      ;
  
  
@@ -9953,7 +9953,7 @@ CODE_83D4E4:
     LDA.W #$0000                                               ;83D4F1|A90000  |      ;
     LDX.W #$0022                                               ;83D4F4|A22200  |      ;
     LDY.W #$0003                                               ;83D4F7|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D4FA|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D4FA|22978084|848097;
     RTS                                                        ;83D4FE|60      |      ;
  
  
@@ -9973,7 +9973,7 @@ CODE_83D4FF:
     LDA.W #$0000                                               ;83D51D|A90000  |      ;
     LDX.W #$0027                                               ;83D520|A22700  |      ;
     LDY.W #$0003                                               ;83D523|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D526|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D526|22978084|848097;
     RTS                                                        ;83D52A|60      |      ;
  
  
@@ -9986,7 +9986,7 @@ CODE_83D52B:
     LDA.W #$0000                                               ;83D538|A90000  |      ;
     LDX.W #$000B                                               ;83D53B|A20B00  |      ;
     LDY.W #$0001                                               ;83D53E|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D541|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D541|22978084|848097;
     RTS                                                        ;83D545|60      |      ;
  
  
@@ -10023,7 +10023,7 @@ CODE_83D587:
     LDA.W #$0000                                               ;83D589|A90000  |      ;
     LDX.W #$0001                                               ;83D58C|A20100  |      ;
     LDY.W #$0001                                               ;83D58F|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D592|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D592|22978084|848097;
     RTS                                                        ;83D596|60      |      ;
  
  
@@ -10032,7 +10032,7 @@ CODE_83D597:
     LDA.W #$0000                                               ;83D599|A90000  |      ;
     LDX.W #$0002                                               ;83D59C|A20200  |      ;
     LDY.W #$0001                                               ;83D59F|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D5A2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D5A2|22978084|848097;
     RTS                                                        ;83D5A6|60      |      ;
  
  
@@ -10041,7 +10041,7 @@ CODE_83D5A7:
     LDA.W #$0000                                               ;83D5A9|A90000  |      ;
     LDX.W #$0004                                               ;83D5AC|A20400  |      ;
     LDY.W #$0000                                               ;83D5AF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D5B2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D5B2|22978084|848097;
     RTS                                                        ;83D5B6|60      |      ;
  
  
@@ -10050,7 +10050,7 @@ CODE_83D5B7:
     LDA.W #$0000                                               ;83D5B9|A90000  |      ;
     LDX.W #$0007                                               ;83D5BC|A20700  |      ;
     LDY.W #$0000                                               ;83D5BF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D5C2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D5C2|22978084|848097;
     RTS                                                        ;83D5C6|60      |      ;
  
  
@@ -10059,7 +10059,7 @@ CODE_83D5C7:
     LDA.W #$0000                                               ;83D5C9|A90000  |      ;
     LDX.W #$0006                                               ;83D5CC|A20600  |      ;
     LDY.W #$0000                                               ;83D5CF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D5D2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D5D2|22978084|848097;
     RTS                                                        ;83D5D6|60      |      ;
  
  
@@ -10068,7 +10068,7 @@ CODE_83D5D7:
     LDA.W #$0000                                               ;83D5D9|A90000  |      ;
     LDX.W #$0008                                               ;83D5DC|A20800  |      ;
     LDY.W #$0000                                               ;83D5DF|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83D5E2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D5E2|22978084|848097;
     RTS                                                        ;83D5E6|60      |      ;
  
  
@@ -10093,7 +10093,7 @@ CODE_83D603:
     LDA.W #$0000                                               ;83D605|A90000  |      ;
     LDX.W #$0022                                               ;83D608|A22200  |      ;
     LDY.W #$0004                                               ;83D60B|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83D60E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D60E|22978084|848097;
     RTS                                                        ;83D612|60      |      ;
  
  
@@ -10113,7 +10113,7 @@ subEngineMap_0x1B:
     LDA.W #$0000                                               ;83D631|A90000  |      ;
     LDX.W #$0027                                               ;83D634|A22700  |      ;
     LDY.W #$0002                                               ;83D637|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D63A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D63A|22978084|848097;
     RTS                                                        ;83D63E|60      |      ;
  
  
@@ -10134,7 +10134,7 @@ CODE_83D63F:
     LDA.W #$0000                                               ;83D660|A90000  |      ;
     LDX.W #$000F                                               ;83D663|A20F00  |      ;
     LDY.W #$0002                                               ;83D666|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D669|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D669|22978084|848097;
     RTS                                                        ;83D66D|60      |      ;
  
  
@@ -10147,7 +10147,7 @@ CODE_83D66E:
     LDA.W #$0000                                               ;83D67B|A90000  |      ;
     LDX.W #$000B                                               ;83D67E|A20B00  |      ;
     LDY.W #$000C                                               ;83D681|A00C00  |      ;
-    JSL.L fUnknown_848097                                      ;83D684|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D684|22978084|848097;
     RTS                                                        ;83D688|60      |      ;
  
  
@@ -10200,7 +10200,7 @@ CODE_83D6DE:
     LDA.W #$0000                                               ;83D6E0|A90000  |      ;
     LDX.W #$0001                                               ;83D6E3|A20100  |      ;
     LDY.W #$0002                                               ;83D6E6|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D6E9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D6E9|22978084|848097;
  
 CODE_83D6ED:
     RTS                                                        ;83D6ED|60      |      ;
@@ -10211,7 +10211,7 @@ CODE_83D6EE:
     LDA.W #$0000                                               ;83D6F0|A90000  |      ;
     LDX.W #$0003                                               ;83D6F3|A20300  |      ;
     LDY.W #$0001                                               ;83D6F6|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D6F9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D6F9|22978084|848097;
     RTS                                                        ;83D6FD|60      |      ;
  
  
@@ -10220,7 +10220,7 @@ CODE_83D6FE:
     LDA.W #$0000                                               ;83D700|A90000  |      ;
     LDX.W #$0002                                               ;83D703|A20200  |      ;
     LDY.W #$0002                                               ;83D706|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D709|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D709|22978084|848097;
     RTS                                                        ;83D70D|60      |      ;
  
  
@@ -10229,7 +10229,7 @@ CODE_83D70E:
     LDA.W #$0000                                               ;83D710|A90000  |      ;
     LDX.W #$0004                                               ;83D713|A20400  |      ;
     LDY.W #$0001                                               ;83D716|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D719|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D719|22978084|848097;
     RTS                                                        ;83D71D|60      |      ;
  
  
@@ -10238,7 +10238,7 @@ CODE_83D71E:
     LDA.W #$0000                                               ;83D720|A90000  |      ;
     LDX.W #$0007                                               ;83D723|A20700  |      ;
     LDY.W #$0001                                               ;83D726|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D729|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D729|22978084|848097;
     RTS                                                        ;83D72D|60      |      ;
  
  
@@ -10247,7 +10247,7 @@ CODE_83D72E:
     LDA.W #$0000                                               ;83D730|A90000  |      ;
     LDX.W #$0006                                               ;83D733|A20600  |      ;
     LDY.W #$0001                                               ;83D736|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D739|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D739|22978084|848097;
     RTS                                                        ;83D73D|60      |      ;
  
  
@@ -10256,7 +10256,7 @@ CODE_83D73E:
     LDA.W #$0000                                               ;83D740|A90000  |      ;
     LDX.W #$0008                                               ;83D743|A20800  |      ;
     LDY.W #$0001                                               ;83D746|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D749|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D749|22978084|848097;
     RTS                                                        ;83D74D|60      |      ;
  
  
@@ -10277,7 +10277,7 @@ CODE_83D75B:
     LDA.W #$0000                                               ;83D768|A90000  |      ;
     LDX.W #$0022                                               ;83D76B|A22200  |      ;
     LDY.W #$0007                                               ;83D76E|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83D771|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D771|22978084|848097;
     RTS                                                        ;83D775|60      |      ;
  
  
@@ -10290,7 +10290,7 @@ CODE_83D776:
     LDA.W #$0000                                               ;83D783|A90000  |      ;
     LDX.W #$000B                                               ;83D786|A20B00  |      ;
     LDY.W #$0003                                               ;83D789|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D78C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D78C|22978084|848097;
     RTS                                                        ;83D790|60      |      ;
  
  
@@ -10323,7 +10323,7 @@ CODE_83D7C8:
     LDA.W #$0000                                               ;83D7CA|A90000  |      ;
     LDX.W #$0001                                               ;83D7CD|A20100  |      ;
     LDY.W #$0003                                               ;83D7D0|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D7D3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D7D3|22978084|848097;
     RTS                                                        ;83D7D7|60      |      ;
  
  
@@ -10332,7 +10332,7 @@ CODE_83D7D8:
     LDA.W #$0000                                               ;83D7DA|A90000  |      ;
     LDX.W #$0004                                               ;83D7DD|A20400  |      ;
     LDY.W #$0002                                               ;83D7E0|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D7E3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D7E3|22978084|848097;
     RTS                                                        ;83D7E7|60      |      ;
  
  
@@ -10341,7 +10341,7 @@ CODE_83D7E8:
     LDA.W #$0000                                               ;83D7EA|A90000  |      ;
     LDX.W #$0007                                               ;83D7ED|A20700  |      ;
     LDY.W #$0002                                               ;83D7F0|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D7F3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D7F3|22978084|848097;
     RTS                                                        ;83D7F7|60      |      ;
  
  
@@ -10350,7 +10350,7 @@ CODE_83D7F8:
     LDA.W #$0000                                               ;83D7FA|A90000  |      ;
     LDX.W #$0006                                               ;83D7FD|A20600  |      ;
     LDY.W #$0002                                               ;83D800|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D803|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D803|22978084|848097;
     RTS                                                        ;83D807|60      |      ;
  
  
@@ -10359,7 +10359,7 @@ CODE_83D808:
     LDA.W #$0000                                               ;83D80A|A90000  |      ;
     LDX.W #$0008                                               ;83D80D|A20800  |      ;
     LDY.W #$0002                                               ;83D810|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D813|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D813|22978084|848097;
     RTS                                                        ;83D817|60      |      ;
  
  
@@ -10384,7 +10384,7 @@ CODE_83D834:
     LDA.W #$0000                                               ;83D836|A90000  |      ;
     LDX.W #$0022                                               ;83D839|A22200  |      ;
     LDY.W #$0008                                               ;83D83C|A00800  |      ;
-    JSL.L fUnknown_848097                                      ;83D83F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D83F|22978084|848097;
     RTS                                                        ;83D843|60      |      ;
  
  
@@ -10405,7 +10405,7 @@ CODE_83D851:
     LDA.W #$0000                                               ;83D85E|A90000  |      ;
     LDX.W #$0022                                               ;83D861|A22200  |      ;
     LDY.W #$0005                                               ;83D864|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83D867|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D867|22978084|848097;
     RTS                                                        ;83D86B|60      |      ;
  
  
@@ -10418,7 +10418,7 @@ CODE_83D86C:
     LDA.W #$0000                                               ;83D879|A90000  |      ;
     LDX.W #$001A                                               ;83D87C|A21A00  |      ;
     LDY.W #$0001                                               ;83D87F|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83D882|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D882|22978084|848097;
     RTS                                                        ;83D886|60      |      ;
  
  
@@ -10431,7 +10431,7 @@ CODE_83D887:
     LDA.W #$0000                                               ;83D894|A90000  |      ;
     LDX.W #$000B                                               ;83D897|A20B00  |      ;
     LDY.W #$0002                                               ;83D89A|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83D89D|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D89D|22978084|848097;
     RTS                                                        ;83D8A1|60      |      ;
  
  
@@ -10464,7 +10464,7 @@ CODE_83D8D9:
     LDA.W #$0000                                               ;83D8DB|A90000  |      ;
     LDX.W #$0001                                               ;83D8DE|A20100  |      ;
     LDY.W #$0004                                               ;83D8E1|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83D8E4|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D8E4|22978084|848097;
     RTS                                                        ;83D8E8|60      |      ;
  
  
@@ -10473,7 +10473,7 @@ CODE_83D8E9:
     LDA.W #$0000                                               ;83D8EB|A90000  |      ;
     LDX.W #$0004                                               ;83D8EE|A20400  |      ;
     LDY.W #$0003                                               ;83D8F1|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D8F4|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D8F4|22978084|848097;
     RTS                                                        ;83D8F8|60      |      ;
  
  
@@ -10482,7 +10482,7 @@ CODE_83D8F9:
     LDA.W #$0000                                               ;83D8FB|A90000  |      ;
     LDX.W #$0007                                               ;83D8FE|A20700  |      ;
     LDY.W #$0003                                               ;83D901|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D904|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D904|22978084|848097;
     RTS                                                        ;83D908|60      |      ;
  
  
@@ -10491,7 +10491,7 @@ CODE_83D909:
     LDA.W #$0000                                               ;83D90B|A90000  |      ;
     LDX.W #$0006                                               ;83D90E|A20600  |      ;
     LDY.W #$0003                                               ;83D911|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D914|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D914|22978084|848097;
     RTS                                                        ;83D918|60      |      ;
  
  
@@ -10500,7 +10500,7 @@ CODE_83D919:
     LDA.W #$0000                                               ;83D91B|A90000  |      ;
     LDX.W #$0008                                               ;83D91E|A20800  |      ;
     LDY.W #$0003                                               ;83D921|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83D924|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D924|22978084|848097;
     RTS                                                        ;83D928|60      |      ;
  
  
@@ -10525,7 +10525,7 @@ CODE_83D945:
     LDA.W #$0000                                               ;83D947|A90000  |      ;
     LDX.W #$0022                                               ;83D94A|A22200  |      ;
     LDY.W #$0006                                               ;83D94D|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83D950|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D950|22978084|848097;
     RTS                                                        ;83D954|60      |      ;
  
  
@@ -10546,7 +10546,7 @@ CODE_83D962:
     LDA.W #$0000                                               ;83D96F|A90000  |      ;
     LDX.W #$0022                                               ;83D972|A22200  |      ;
     LDY.W #$0009                                               ;83D975|A00900  |      ;
-    JSL.L fUnknown_848097                                      ;83D978|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D978|22978084|848097;
     RTS                                                        ;83D97C|60      |      ;
  
  
@@ -10559,7 +10559,7 @@ CODE_83D97D:
     LDA.W #$0000                                               ;83D98A|A90000  |      ;
     LDX.W #$000B                                               ;83D98D|A20B00  |      ;
     LDY.W #$0004                                               ;83D990|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83D993|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D993|22978084|848097;
     RTS                                                        ;83D997|60      |      ;
  
  
@@ -10592,7 +10592,7 @@ CODE_83D9CF:
     LDA.W #$0000                                               ;83D9D1|A90000  |      ;
     LDX.W #$0001                                               ;83D9D4|A20100  |      ;
     LDY.W #$0005                                               ;83D9D7|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83D9DA|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D9DA|22978084|848097;
     RTS                                                        ;83D9DE|60      |      ;
  
  
@@ -10601,7 +10601,7 @@ CODE_83D9DF:
     LDA.W #$0000                                               ;83D9E1|A90000  |      ;
     LDX.W #$0004                                               ;83D9E4|A20400  |      ;
     LDY.W #$0004                                               ;83D9E7|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83D9EA|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D9EA|22978084|848097;
     RTS                                                        ;83D9EE|60      |      ;
  
  
@@ -10610,7 +10610,7 @@ CODE_83D9EF:
     LDA.W #$0000                                               ;83D9F1|A90000  |      ;
     LDX.W #$0007                                               ;83D9F4|A20700  |      ;
     LDY.W #$0004                                               ;83D9F7|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83D9FA|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83D9FA|22978084|848097;
     RTS                                                        ;83D9FE|60      |      ;
  
  
@@ -10619,7 +10619,7 @@ CODE_83D9FF:
     LDA.W #$0000                                               ;83DA01|A90000  |      ;
     LDX.W #$0006                                               ;83DA04|A20600  |      ;
     LDY.W #$0004                                               ;83DA07|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83DA0A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DA0A|22978084|848097;
     RTS                                                        ;83DA0E|60      |      ;
  
  
@@ -10628,7 +10628,7 @@ CODE_83DA0F:
     LDA.W #$0000                                               ;83DA11|A90000  |      ;
     LDX.W #$0008                                               ;83DA14|A20800  |      ;
     LDY.W #$0004                                               ;83DA17|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83DA1A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DA1A|22978084|848097;
     RTS                                                        ;83DA1E|60      |      ;
  
  
@@ -10653,7 +10653,7 @@ CODE_83DA3B:
     LDA.W #$0000                                               ;83DA3D|A90000  |      ;
     LDX.W #$0022                                               ;83DA40|A22200  |      ;
     LDY.W #$000A                                               ;83DA43|A00A00  |      ;
-    JSL.L fUnknown_848097                                      ;83DA46|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DA46|22978084|848097;
     RTS                                                        ;83DA4A|60      |      ;
  
  
@@ -10666,7 +10666,7 @@ subEngineMap_0x25:
     LDA.W #$0000                                               ;83DA58|A90000  |      ;
     LDX.W #$000B                                               ;83DA5B|A20B00  |      ;
     LDY.W #$0005                                               ;83DA5E|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83DA61|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DA61|22978084|848097;
     RTS                                                        ;83DA65|60      |      ;
  
  
@@ -10699,7 +10699,7 @@ CODE_83DA9D:
     LDA.W #$0000                                               ;83DA9F|A90000  |      ;
     LDX.W #$0001                                               ;83DAA2|A20100  |      ;
     LDY.W #$0006                                               ;83DAA5|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83DAA8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DAA8|22978084|848097;
     RTS                                                        ;83DAAC|60      |      ;
  
  
@@ -10708,7 +10708,7 @@ CODE_83DAAD:
     LDA.W #$0000                                               ;83DAAF|A90000  |      ;
     LDX.W #$0004                                               ;83DAB2|A20400  |      ;
     LDY.W #$0005                                               ;83DAB5|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83DAB8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DAB8|22978084|848097;
     RTS                                                        ;83DABC|60      |      ;
  
  
@@ -10717,7 +10717,7 @@ CODE_83DABD:
     LDA.W #$0000                                               ;83DABF|A90000  |      ;
     LDX.W #$0007                                               ;83DAC2|A20700  |      ;
     LDY.W #$0005                                               ;83DAC5|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83DAC8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DAC8|22978084|848097;
     RTS                                                        ;83DACC|60      |      ;
  
  
@@ -10726,7 +10726,7 @@ CODE_83DACD:
     LDA.W #$0000                                               ;83DACF|A90000  |      ;
     LDX.W #$0006                                               ;83DAD2|A20600  |      ;
     LDY.W #$0005                                               ;83DAD5|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83DAD8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DAD8|22978084|848097;
     RTS                                                        ;83DADC|60      |      ;
  
  
@@ -10735,7 +10735,7 @@ CODE_83DADD:
     LDA.W #$0000                                               ;83DADF|A90000  |      ;
     LDX.W #$0008                                               ;83DAE2|A20800  |      ;
     LDY.W #$0005                                               ;83DAE5|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83DAE8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DAE8|22978084|848097;
     RTS                                                        ;83DAEC|60      |      ;
  
  
@@ -10748,7 +10748,7 @@ subEngineMap_0x24:
     LDA.W #$0000                                               ;83DAFA|A90000  |      ;
     LDX.W #$000B                                               ;83DAFD|A20B00  |      ;
     LDY.W #$0006                                               ;83DB00|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83DB03|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DB03|22978084|848097;
     RTS                                                        ;83DB07|60      |      ;
  
  
@@ -10781,7 +10781,7 @@ CODE_83DB3F:
     LDA.W #$0000                                               ;83DB41|A90000  |      ;
     LDX.W #$0001                                               ;83DB44|A20100  |      ;
     LDY.W #$0007                                               ;83DB47|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83DB4A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DB4A|22978084|848097;
     RTS                                                        ;83DB4E|60      |      ;
  
  
@@ -10790,7 +10790,7 @@ CODE_83DB4F:
     LDA.W #$0000                                               ;83DB51|A90000  |      ;
     LDX.W #$0004                                               ;83DB54|A20400  |      ;
     LDY.W #$0006                                               ;83DB57|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83DB5A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DB5A|22978084|848097;
     RTS                                                        ;83DB5E|60      |      ;
  
  
@@ -10799,7 +10799,7 @@ CODE_83DB5F:
     LDA.W #$0000                                               ;83DB61|A90000  |      ;
     LDX.W #$0007                                               ;83DB64|A20700  |      ;
     LDY.W #$0006                                               ;83DB67|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83DB6A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DB6A|22978084|848097;
     RTS                                                        ;83DB6E|60      |      ;
  
  
@@ -10808,7 +10808,7 @@ CODE_83DB6F:
     LDA.W #$0000                                               ;83DB71|A90000  |      ;
     LDX.W #$0006                                               ;83DB74|A20600  |      ;
     LDY.W #$0006                                               ;83DB77|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83DB7A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DB7A|22978084|848097;
     RTS                                                        ;83DB7E|60      |      ;
  
  
@@ -10817,7 +10817,7 @@ CODE_83DB7F:
     LDA.W #$0000                                               ;83DB81|A90000  |      ;
     LDX.W #$0008                                               ;83DB84|A20800  |      ;
     LDY.W #$0006                                               ;83DB87|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83DB8A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DB8A|22978084|848097;
     RTS                                                        ;83DB8E|60      |      ;
  
  
@@ -10838,7 +10838,7 @@ CODE_83DB9C:
     LDA.W #$0000                                               ;83DBA9|A90000  |      ;
     LDX.W #$0022                                               ;83DBAC|A22200  |      ;
     LDY.W #$000B                                               ;83DBAF|A00B00  |      ;
-    JSL.L fUnknown_848097                                      ;83DBB2|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DBB2|22978084|848097;
     RTS                                                        ;83DBB6|60      |      ;
  
  
@@ -10859,7 +10859,7 @@ CODE_83DBB7:
     LDA.W #$0000                                               ;83DBD8|A90000  |      ;
     LDX.W #$000F                                               ;83DBDB|A20F00  |      ;
     LDY.W #$0003                                               ;83DBDE|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83DBE1|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DBE1|22978084|848097;
     RTS                                                        ;83DBE5|60      |      ;
  
  
@@ -10872,7 +10872,7 @@ CODE_83DBE6:
     LDA.W #$0000                                               ;83DBF3|A90000  |      ;
     LDX.W #$000B                                               ;83DBF6|A20B00  |      ;
     LDY.W #$0007                                               ;83DBF9|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83DBFC|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DBFC|22978084|848097;
     REP #$30                                                   ;83DC00|C230    |      ;
     LDA.L nPlayerFlags+2                                       ;83DC02|AF681F7F|7F1F68;
     ORA.W #$0002                                               ;83DC06|090200  |      ;
@@ -10885,7 +10885,7 @@ CODE_83DC0E:
     LDA.W #$0000                                               ;83DC10|A90000  |      ;
     LDX.W #$0005                                               ;83DC13|A20500  |      ;
     LDY.W #$0000                                               ;83DC16|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83DC19|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DC19|22978084|848097;
     RTS                                                        ;83DC1D|60      |      ;
  
  
@@ -10910,7 +10910,7 @@ CODE_83DC3A:
     LDA.W #$0000                                               ;83DC3C|A90000  |      ;
     LDX.W #$0022                                               ;83DC3F|A22200  |      ;
     LDY.W #$000C                                               ;83DC42|A00C00  |      ;
-    JSL.L fUnknown_848097                                      ;83DC45|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DC45|22978084|848097;
     RTS                                                        ;83DC49|60      |      ;
  
  
@@ -10923,7 +10923,7 @@ subEngineMap_0x10:
     LDA.W #$0000                                               ;83DC57|A90000  |      ;
     LDX.W #$000B                                               ;83DC5A|A20B00  |      ;
     LDY.W #$0009                                               ;83DC5D|A00900  |      ;
-    JSL.L fUnknown_848097                                      ;83DC60|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DC60|22978084|848097;
     REP #$20                                                   ;83DC64|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83DC66|AF681F7F|7F1F68;
     ORA.W #$0004                                               ;83DC6A|090400  |      ;
@@ -10940,7 +10940,7 @@ CODE_83DC72:
     LDA.W #$0000                                               ;83DC7F|A90000  |      ;
     LDX.W #$001D                                               ;83DC82|A21D00  |      ;
     LDY.W #$0003                                               ;83DC85|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83DC88|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DC88|22978084|848097;
     RTS                                                        ;83DC8C|60      |      ;
  
  
@@ -10953,7 +10953,7 @@ CODE_83DC8D:
     LDA.W #$0000                                               ;83DC9A|A90000  |      ;
     LDX.W #$001D                                               ;83DC9D|A21D00  |      ;
     LDY.W #$0001                                               ;83DCA0|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83DCA3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DCA3|22978084|848097;
     RTS                                                        ;83DCA7|60      |      ;
  
  
@@ -10969,7 +10969,7 @@ CODE_83DCA8:
     LDA.W #$0009                                               ;83DCBE|A90900  |      ;
     LDX.W #$001C                                               ;83DCC1|A21C00  |      ;
     LDY.W #$0001                                               ;83DCC4|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83DCC7|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DCC7|22978084|848097;
     BRA CODE_83DD3F                                            ;83DCCB|8072    |83DD3F;
  
  
@@ -10978,7 +10978,7 @@ CODE_83DCCD:
     LDA.W #$0009                                               ;83DCCF|A90900  |      ;
     LDX.W #$001C                                               ;83DCD2|A21C00  |      ;
     LDY.W #$0002                                               ;83DCD5|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83DCD8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DCD8|22978084|848097;
     JMP.W CODE_83DD74                                          ;83DCDC|4C74DD  |83DD74;
  
  
@@ -11023,7 +11023,7 @@ CODE_83DD0F:
     LDA.W #$0009                                               ;83DD30|A90900  |      ;
     LDX.W #$0021                                               ;83DD33|A22100  |      ;
     LDY.W #$0000                                               ;83DD36|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83DD39|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DD39|22978084|848097;
     BRA CODE_83DD3F                                            ;83DD3D|8000    |83DD3F;
  
  
@@ -11047,7 +11047,7 @@ CODE_83DD3F:
     LDA.W #$0000                                               ;83DD67|A90000  |      ;
     LDX.W #$0001                                               ;83DD6A|A20100  |      ;
     LDY.W #$0008                                               ;83DD6D|A00800  |      ;
-    JSL.L fUnknown_848097                                      ;83DD70|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DD70|22978084|848097;
  
 CODE_83DD74:
     RTS                                                        ;83DD74|60      |      ;
@@ -11058,7 +11058,7 @@ CODE_83DD75:
     LDA.W #$0000                                               ;83DD77|A90000  |      ;
     LDX.W #$0003                                               ;83DD7A|A20300  |      ;
     LDY.W #$0002                                               ;83DD7D|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83DD80|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DD80|22978084|848097;
     RTS                                                        ;83DD84|60      |      ;
  
  
@@ -11067,7 +11067,7 @@ CODE_83DD85:
     LDA.W #$0000                                               ;83DD87|A90000  |      ;
     LDX.W #$0002                                               ;83DD8A|A20200  |      ;
     LDY.W #$0003                                               ;83DD8D|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83DD90|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DD90|22978084|848097;
     RTS                                                        ;83DD94|60      |      ;
  
  
@@ -11083,7 +11083,7 @@ subEngineMap_0x2B:
     LDA.W #$0000                                               ;83DDAB|A90000  |      ;
     LDX.W #$0019                                               ;83DDAE|A21900  |      ;
     LDY.W #$0001                                               ;83DDB1|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83DDB4|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DDB4|22978084|848097;
     RTS                                                        ;83DDB8|60      |      ;
  
  
@@ -11109,7 +11109,7 @@ CODE_83DDE0:
     LDA.W #$0000                                               ;83DDE2|A90000  |      ;
     LDX.W #$000B                                               ;83DDE5|A20B00  |      ;
     LDY.W #$000A                                               ;83DDE8|A00A00  |      ;
-    JSL.L fUnknown_848097                                      ;83DDEB|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DDEB|22978084|848097;
     REP #$20                                                   ;83DDEF|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83DDF1|AF681F7F|7F1F68;
     ORA.W #$0008                                               ;83DDF5|090800  |      ;
@@ -11138,7 +11138,7 @@ CODE_83DE0A:
     LDA.W #$0000                                               ;83DE26|A90000  |      ;
     LDX.W #$0001                                               ;83DE29|A20100  |      ;
     LDY.W #$0009                                               ;83DE2C|A00900  |      ;
-    JSL.L fUnknown_848097                                      ;83DE2F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DE2F|22978084|848097;
     RTS                                                        ;83DE33|60      |      ;
  
  
@@ -11147,7 +11147,7 @@ CODE_83DE34:
     LDA.W #$0000                                               ;83DE36|A90000  |      ;
     LDX.W #$0004                                               ;83DE39|A20400  |      ;
     LDY.W #$0007                                               ;83DE3C|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83DE3F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DE3F|22978084|848097;
     RTS                                                        ;83DE43|60      |      ;
  
  
@@ -11156,7 +11156,7 @@ CODE_83DE44:
     LDA.W #$0000                                               ;83DE46|A90000  |      ;
     LDX.W #$0007                                               ;83DE49|A20700  |      ;
     LDY.W #$0007                                               ;83DE4C|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83DE4F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DE4F|22978084|848097;
     RTS                                                        ;83DE53|60      |      ;
  
  
@@ -11165,7 +11165,7 @@ CODE_83DE54:
     LDA.W #$0000                                               ;83DE56|A90000  |      ;
     LDX.W #$0008                                               ;83DE59|A20800  |      ;
     LDY.W #$0007                                               ;83DE5C|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83DE5F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DE5F|22978084|848097;
     RTS                                                        ;83DE63|60      |      ;
  
  
@@ -11178,7 +11178,7 @@ subEngineMap_0x2A:
     LDA.W #$0000                                               ;83DE71|A90000  |      ;
     LDX.W #$0015                                               ;83DE74|A21500  |      ;
     LDY.W #$0000                                               ;83DE77|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83DE7A|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DE7A|22978084|848097;
     RTS                                                        ;83DE7E|60      |      ;
  
  
@@ -11191,7 +11191,7 @@ CODE_83DE7F:
     LDA.W #$0000                                               ;83DE8C|A90000  |      ;
     LDX.W #$0001                                               ;83DE8F|A20100  |      ;
     LDY.W #$000A                                               ;83DE92|A00A00  |      ;
-    JSL.L fUnknown_848097                                      ;83DE95|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DE95|22978084|848097;
     RTS                                                        ;83DE99|60      |      ;
  
  
@@ -11208,7 +11208,7 @@ subEngineMap_0x27:
     LDA.W #$0015                                               ;83DEA8|A91500  |      ;
     LDX.W #$0000                                               ;83DEAB|A20000  |      ;
     LDY.W #$0025                                               ;83DEAE|A02500  |      ;
-    JSL.L fUnknown_848097                                      ;83DEB1|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83DEB1|22978084|848097;
     SEP #$20                                                   ;83DEB5|E220    |      ;
     LDA.B #$45                                                 ;83DEB7|A945    |      ;
     STA.W nPlayerInteractionIndex                              ;83DEB9|8D6E09  |00096E;
@@ -11278,7 +11278,7 @@ CODE_83DF1A:
     LDA.W #$0010                                               ;83DF3A|A91000  |      ;
     LDX.W #$0000                                               ;83DF3D|A20000  |      ;
     LDY.W #$001F                                               ;83DF40|A01F00  |      ;
-    JSL.L fUnknown_8480F8                                      ;83DF43|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83DF43|22F88084|8480F8;
  
 CODE_83DF47:
     REP #$30                                                   ;83DF47|C230    |      ;
@@ -11414,7 +11414,7 @@ CODE_83E074:
     LDA.W #$0000                                               ;83E093|A90000  |      ;
     LDX.W #$001F                                               ;83E096|A21F00  |      ;
     LDY.W #$0000                                               ;83E099|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E09C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E09C|22978084|848097;
     RTS                                                        ;83E0A0|60      |      ;
  
  
@@ -11423,7 +11423,7 @@ CODE_83E0A1:
     LDA.W #$0000                                               ;83E0A3|A90000  |      ;
     LDX.W #$001F                                               ;83E0A6|A21F00  |      ;
     LDY.W #$0001                                               ;83E0A9|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E0AC|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E0AC|22978084|848097;
     REP #$20                                                   ;83E0B0|C220    |      ;
     LDA.L nFirstChildAge                                       ;83E0B2|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E0B6|C93C00  |      ;
@@ -11446,7 +11446,7 @@ CODE_83E0CB:
     LDA.W #$0000                                               ;83E0CD|A90000  |      ;
     LDX.W #$001F                                               ;83E0D0|A21F00  |      ;
     LDY.W #$0002                                               ;83E0D3|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83E0D6|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E0D6|22978084|848097;
     RTS                                                        ;83E0DA|60      |      ;
  
  
@@ -11491,7 +11491,7 @@ CODE_83E0DB:
     LDA.W #$0000                                               ;83E136|A90000  |      ;
     LDX.W #$0020                                               ;83E139|A22000  |      ;
     LDY.W #$0000                                               ;83E13C|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E13F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E13F|22978084|848097;
     RTS                                                        ;83E143|60      |      ;
  
  
@@ -11580,7 +11580,7 @@ CODE_83E1BA:
     LDA.W #$0000                                               ;83E1E8|A90000  |      ;
     LDX.W #$0022                                               ;83E1EB|A22200  |      ;
     LDY.W #$0000                                               ;83E1EE|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E1F1|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E1F1|22978084|848097;
     REP #$30                                                   ;83E1F5|C230    |      ;
     LDA.L $7F1F6E                                              ;83E1F7|AF6E1F7F|7F1F6E;
     ORA.W #$0003                                               ;83E1FB|090300  |      ;
@@ -11646,7 +11646,7 @@ CODE_83E271:
     LDA.W #$0013                                               ;83E273|A91300  |      ;
     LDX.W #$0043                                               ;83E276|A24300  |      ;
     LDY.W #$0000                                               ;83E279|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E27C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E27C|22978084|848097;
     BRA CODE_83E2C6                                            ;83E280|8044    |83E2C6;
  
  
@@ -11655,7 +11655,7 @@ CODE_83E282:
     LDA.W #$0013                                               ;83E284|A91300  |      ;
     LDX.W #$0043                                               ;83E287|A24300  |      ;
     LDY.W #$0001                                               ;83E28A|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E28D|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E28D|22978084|848097;
     BRA CODE_83E2C6                                            ;83E291|8033    |83E2C6;
  
  
@@ -11664,7 +11664,7 @@ CODE_83E293:
     LDA.W #$0013                                               ;83E295|A91300  |      ;
     LDX.W #$0043                                               ;83E298|A24300  |      ;
     LDY.W #$0002                                               ;83E29B|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83E29E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E29E|22978084|848097;
     BRA CODE_83E2C6                                            ;83E2A2|8022    |83E2C6;
  
  
@@ -11673,7 +11673,7 @@ CODE_83E2A4:
     LDA.W #$0013                                               ;83E2A6|A91300  |      ;
     LDX.W #$0043                                               ;83E2A9|A24300  |      ;
     LDY.W #$0003                                               ;83E2AC|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83E2AF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E2AF|22978084|848097;
     BRA CODE_83E2C6                                            ;83E2B3|8011    |83E2C6;
  
  
@@ -11682,7 +11682,7 @@ CODE_83E2B5:
     LDA.W #$0013                                               ;83E2B7|A91300  |      ;
     LDX.W #$0043                                               ;83E2BA|A24300  |      ;
     LDY.W #$0004                                               ;83E2BD|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83E2C0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E2C0|22978084|848097;
     BRA CODE_83E2C6                                            ;83E2C4|8000    |83E2C6;
  
  
@@ -11698,7 +11698,7 @@ CODE_83E2C6:
     LDA.W #$0014                                               ;83E2DC|A91400  |      ;
     LDX.W #$0045                                               ;83E2DF|A24500  |      ;
     LDY.W #$0000                                               ;83E2E2|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E2E5|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E2E5|22978084|848097;
  
 CODE_83E2E9:
     REP #$30                                                   ;83E2E9|C230    |      ;
@@ -11712,7 +11712,7 @@ CODE_83E2E9:
     LDA.W #$0015                                               ;83E2FF|A91500  |      ;
     LDX.W #$0045                                               ;83E302|A24500  |      ;
     LDY.W #$0003                                               ;83E305|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83E308|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E308|22978084|848097;
  
 CODE_83E30C:
     REP #$30                                                   ;83E30C|C230    |      ;
@@ -11726,7 +11726,7 @@ CODE_83E30C:
     LDA.W #$0000                                               ;83E322|A90000  |      ;
     LDX.W #$000A                                               ;83E325|A20A00  |      ;
     LDY.W #$0000                                               ;83E328|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E32B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E32B|22978084|848097;
     RTS                                                        ;83E32F|60      |      ;
  
  
@@ -11735,7 +11735,7 @@ CODE_83E330:
     LDA.W #$0000                                               ;83E332|A90000  |      ;
     LDX.W #$000A                                               ;83E335|A20A00  |      ;
     LDY.W #$0003                                               ;83E338|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83E33B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E33B|22978084|848097;
     RTS                                                        ;83E33F|60      |      ;
  
  
@@ -11762,7 +11762,7 @@ CODE_83E340:
     LDA.W #$0000                                               ;83E372|A90000  |      ;
     LDX.W #$000A                                               ;83E375|A20A00  |      ;
     LDY.W #$0004                                               ;83E378|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83E37B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E37B|22978084|848097;
     RTS                                                        ;83E37F|60      |      ;
  
  
@@ -11789,7 +11789,7 @@ CODE_83E380:
     LDA.W #$0000                                               ;83E3B2|A90000  |      ;
     LDX.W #$000A                                               ;83E3B5|A20A00  |      ;
     LDY.W #$0005                                               ;83E3B8|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83E3BB|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E3BB|22978084|848097;
     RTS                                                        ;83E3BF|60      |      ;
  
  
@@ -11805,7 +11805,7 @@ CODE_83E3C0:
     LDA.W #$0000                                               ;83E3D4|A90000  |      ;
     LDX.W #$0028                                               ;83E3D7|A22800  |      ;
     LDY.W #$0000                                               ;83E3DA|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E3DD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E3DD|22978084|848097;
     RTS                                                        ;83E3E1|60      |      ;
  
  
@@ -11822,7 +11822,7 @@ CODE_83E3E2:
     LDA.W #$0000                                               ;83E3F8|A90000  |      ;
     LDX.W #$000F                                               ;83E3FB|A20F00  |      ;
     LDY.W #$0000                                               ;83E3FE|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E401|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E401|22978084|848097;
     RTS                                                        ;83E405|60      |      ;
  
  
@@ -11839,7 +11839,7 @@ subEngineMap_0x0C:
     LDA.W #$0015                                               ;83E416|A91500  |      ;
     LDX.W #$0000                                               ;83E419|A20000  |      ;
     LDY.W #$0015                                               ;83E41C|A01500  |      ;
-    JSL.L fUnknown_848097                                      ;83E41F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E41F|22978084|848097;
     REP #$20                                                   ;83E423|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83E425|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83E429|290100  |      ;
@@ -11851,7 +11851,7 @@ subEngineMap_0x0C:
     LDA.W #$0000                                               ;83E439|A90000  |      ;
     LDX.W #$000A                                               ;83E43C|A20A00  |      ;
     LDY.W #$0001                                               ;83E43F|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E442|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E442|22978084|848097;
     REP #$20                                                   ;83E446|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83E448|AF681F7F|7F1F68;
     ORA.W #$0010                                               ;83E44C|091000  |      ;
@@ -11864,7 +11864,7 @@ CODE_83E454:
     LDA.W #$0000                                               ;83E456|A90000  |      ;
     LDX.W #$000B                                               ;83E459|A20B00  |      ;
     LDY.W #$000B                                               ;83E45C|A00B00  |      ;
-    JSL.L fUnknown_848097                                      ;83E45F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E45F|22978084|848097;
     RTS                                                        ;83E463|60      |      ;
  
  
@@ -11887,7 +11887,7 @@ CODE_83E478:
     LDA.W #$0000                                               ;83E485|A90000  |      ;
     LDX.W #$000D                                               ;83E488|A20D00  |      ;
     LDY.W #$0000                                               ;83E48B|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E48E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E48E|22978084|848097;
     REP #$20                                                   ;83E492|C220    |      ;
     LDA.L nPlayerFlags+2                                       ;83E494|AF681F7F|7F1F68;
     ORA.W #$0040                                               ;83E498|094000  |      ;
@@ -11907,7 +11907,7 @@ CODE_83E4A7:
     LDA.W #$0000                                               ;83E4B4|A90000  |      ;
     LDX.W #$000D                                               ;83E4B7|A20D00  |      ;
     LDY.W #$0001                                               ;83E4BA|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E4BD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E4BD|22978084|848097;
     SEP #$20                                                   ;83E4C1|E220    |      ;
     LDA.B #$00                                                 ;83E4C3|A900    |      ;
     STA.L $7F1F31                                              ;83E4C5|8F311F7F|7F1F31;
@@ -11930,7 +11930,7 @@ subEngineMap_0x29:
     LDA.W #$0010                                               ;83E4E2|A91000  |      ;
     LDX.W #$0000                                               ;83E4E5|A20000  |      ;
     LDY.W #$001F                                               ;83E4E8|A01F00  |      ;
-    JSL.L fUnknown_8480F8                                      ;83E4EB|22F88084|8480F8;
+    JSL.L fSubUnk1Unknown_8480F8                               ;83E4EB|22F88084|8480F8;
  
 CODE_83E4EF:
     REP #$30                                                   ;83E4EF|C230    |      ;
@@ -11973,7 +11973,7 @@ CODE_83E535:
     LDA.W #$0000                                               ;83E542|A90000  |      ;
     LDX.W #$001D                                               ;83E545|A21D00  |      ;
     LDY.W #$0002                                               ;83E548|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83E54B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E54B|22978084|848097;
     RTS                                                        ;83E54F|60      |      ;
  
  
@@ -11986,7 +11986,7 @@ CODE_83E550:
     LDA.W #$0000                                               ;83E55D|A90000  |      ;
     LDX.W #$001B                                               ;83E560|A21B00  |      ;
     LDY.W #$0001                                               ;83E563|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E566|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E566|22978084|848097;
     RTS                                                        ;83E56A|60      |      ;
  
  
@@ -11999,7 +11999,7 @@ CODE_83E56B:
     LDA.W #$0000                                               ;83E577|A90000  |      ;
     LDX.W #$0002                                               ;83E57A|A20200  |      ;
     LDY.W #$0004                                               ;83E57D|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83E580|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E580|22978084|848097;
     RTS                                                        ;83E584|60      |      ;
  
  
@@ -12016,7 +12016,7 @@ subEngineMap_0x31:
     LDA.W #$0000                                               ;83E593|A90000  |      ;
     LDX.W #$0014                                               ;83E596|A21400  |      ;
     LDY.W #$0001                                               ;83E599|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E59C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E59C|22978084|848097;
     RTS                                                        ;83E5A0|60      |      ;
  
  
@@ -12030,7 +12030,7 @@ subEngineMap_0x2C:
     LDA.W #$0000                                               ;83E5A6|A90000  |      ;
     LDX.W #$0014                                               ;83E5A9|A21400  |      ;
     LDY.W #$0002                                               ;83E5AC|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83E5AF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E5AF|22978084|848097;
     RTS                                                        ;83E5B3|60      |      ;
  
  
@@ -12042,7 +12042,7 @@ subEngineMap_0x28:
     LDA.W #$0015                                               ;83E5BF|A91500  |      ;
     LDX.W #$0000                                               ;83E5C2|A20000  |      ;
     LDY.W #$007F                                               ;83E5C5|A07F00  |      ;
-    JSL.L fUnknown_848097                                      ;83E5C8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E5C8|22978084|848097;
  
 CODE_83E5CC:
     RTS                                                        ;83E5CC|60      |      ;
@@ -12054,7 +12054,7 @@ subEngineMap_0x2D:
     LDA.W #$0000                                               ;83E5D1|A90000  |      ;
     LDX.W #$001E                                               ;83E5D4|A21E00  |      ;
     LDY.W #$0000                                               ;83E5D7|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83E5DA|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E5DA|22978084|848097;
     RTS                                                        ;83E5DE|60      |      ;
  
  
@@ -12064,7 +12064,7 @@ subEngineMap_0x08:
     LDA.W #$0000                                               ;83E5E3|A90000  |      ;
     LDX.W #$000E                                               ;83E5E6|A20E00  |      ;
     LDY.W #$0001                                               ;83E5E9|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E5EC|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E5EC|22978084|848097;
     RTS                                                        ;83E5F0|60      |      ;
  
  
@@ -12074,7 +12074,7 @@ subEngineMap_0x09:
     LDA.W #$0000                                               ;83E5F5|A90000  |      ;
     LDX.W #$0026                                               ;83E5F8|A22600  |      ;
     LDY.W #$0001                                               ;83E5FB|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E5FE|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E5FE|22978084|848097;
     RTS                                                        ;83E602|60      |      ;
  
  
@@ -12095,7 +12095,7 @@ subEngineMap_0x0A:
     LDA.W #$0000                                               ;83E624|A90000  |      ;
     LDX.W #$000F                                               ;83E627|A20F00  |      ;
     LDY.W #$0001                                               ;83E62A|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E62D|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E62D|22978084|848097;
  
 CODE_83E631:
     RTS                                                        ;83E631|60      |      ;
@@ -12118,7 +12118,7 @@ subEngineMap_0x39:
     LDA.W #$0000                                               ;83E653|A90000  |      ;
     LDX.W #$000F                                               ;83E656|A20F00  |      ;
     LDY.W #$0004                                               ;83E659|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83E65C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E65C|22978084|848097;
  
 CODE_83E660:
     RTS                                                        ;83E660|60      |      ;
@@ -12141,7 +12141,7 @@ subEngineMap_0x14:
     LDA.W #$0000                                               ;83E682|A90000  |      ;
     LDX.W #$000F                                               ;83E685|A20F00  |      ;
     LDY.W #$0005                                               ;83E688|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83E68B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E68B|22978084|848097;
  
 CODE_83E68F:
     RTS                                                        ;83E68F|60      |      ;
@@ -12159,7 +12159,7 @@ subEngineMap_0x3A:
     LDA.W #$0000                                               ;83E6A4|A90000  |      ;
     LDX.W #$0028                                               ;83E6A7|A22800  |      ;
     LDY.W #$0001                                               ;83E6AA|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E6AD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E6AD|22978084|848097;
  
 CODE_83E6B1:
     RTS                                                        ;83E6B1|60      |      ;
@@ -12171,7 +12171,7 @@ subEngineMap_0x0B:
     LDA.W #$0000                                               ;83E6B6|A90000  |      ;
     LDX.W #$0028                                               ;83E6B9|A22800  |      ;
     LDY.W #$0003                                               ;83E6BC|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83E6BF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E6BF|22978084|848097;
     RTS                                                        ;83E6C3|60      |      ;
  
  
@@ -12194,7 +12194,7 @@ CODE_83E6E3:
     LDA.W #$0013                                               ;83E6E5|A91300  |      ;
     LDX.W #$0044                                               ;83E6E8|A24400  |      ;
     LDY.W #$0001                                               ;83E6EB|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E6EE|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E6EE|22978084|848097;
     BRA CODE_83E705                                            ;83E6F2|8011    |83E705;
  
  
@@ -12203,7 +12203,7 @@ CODE_83E6F4:
     LDA.W #$0013                                               ;83E6F6|A91300  |      ;
     LDX.W #$0044                                               ;83E6F9|A24400  |      ;
     LDY.W #$0004                                               ;83E6FC|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83E6FF|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E6FF|22978084|848097;
     BRA CODE_83E705                                            ;83E703|8000    |83E705;
  
  
@@ -12219,7 +12219,7 @@ CODE_83E705:
     LDA.W #$0014                                               ;83E71B|A91400  |      ;
     LDX.W #$0045                                               ;83E71E|A24500  |      ;
     LDY.W #$0002                                               ;83E721|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83E724|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E724|22978084|848097;
  
 CODE_83E728:
     REP #$30                                                   ;83E728|C230    |      ;
@@ -12233,7 +12233,7 @@ CODE_83E728:
     LDA.W #$0015                                               ;83E73E|A91500  |      ;
     LDX.W #$0045                                               ;83E741|A24500  |      ;
     LDY.W #$0005                                               ;83E744|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83E747|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E747|22978084|848097;
  
 CODE_83E74B:
     RTS                                                        ;83E74B|60      |      ;
@@ -12480,7 +12480,7 @@ CODE_83E8AD:
     LDA.W #$0000                                               ;83E8AF|A90000  |      ;
     LDX.W #$0047                                               ;83E8B2|A24700  |      ;
     LDY.W #$0001                                               ;83E8B5|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83E8B8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E8B8|22978084|848097;
     SEP #$20                                                   ;83E8BC|E220    |      ;
     LDA.B #$01                                                 ;83E8BE|A901    |      ;
     STA.L $7F1F49                                              ;83E8C0|8F491F7F|7F1F49;
@@ -12492,7 +12492,7 @@ CODE_83E8C5:
     LDA.W #$0000                                               ;83E8C7|A90000  |      ;
     LDX.W #$0047                                               ;83E8CA|A24700  |      ;
     LDY.W #$0002                                               ;83E8CD|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83E8D0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E8D0|22978084|848097;
     SEP #$20                                                   ;83E8D4|E220    |      ;
     LDA.B #$02                                                 ;83E8D6|A902    |      ;
     STA.L $7F1F49                                              ;83E8D8|8F491F7F|7F1F49;
@@ -12504,7 +12504,7 @@ CODE_83E8DD:
     LDA.W #$0000                                               ;83E8DF|A90000  |      ;
     LDX.W #$0047                                               ;83E8E2|A24700  |      ;
     LDY.W #$0003                                               ;83E8E5|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83E8E8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E8E8|22978084|848097;
     SEP #$20                                                   ;83E8EC|E220    |      ;
     LDA.B #$03                                                 ;83E8EE|A903    |      ;
     STA.L $7F1F49                                              ;83E8F0|8F491F7F|7F1F49;
@@ -12516,7 +12516,7 @@ CODE_83E8F5:
     LDA.W #$0000                                               ;83E8F7|A90000  |      ;
     LDX.W #$0047                                               ;83E8FA|A24700  |      ;
     LDY.W #$0004                                               ;83E8FD|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83E900|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E900|22978084|848097;
     SEP #$20                                                   ;83E904|E220    |      ;
     LDA.B #$04                                                 ;83E906|A904    |      ;
     STA.L $7F1F49                                              ;83E908|8F491F7F|7F1F49;
@@ -12528,7 +12528,7 @@ CODE_83E90D:
     LDA.W #$0000                                               ;83E90F|A90000  |      ;
     LDX.W #$0047                                               ;83E912|A24700  |      ;
     LDY.W #$0005                                               ;83E915|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83E918|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E918|22978084|848097;
     SEP #$20                                                   ;83E91C|E220    |      ;
     LDA.B #$05                                                 ;83E91E|A905    |      ;
     STA.L $7F1F49                                              ;83E920|8F491F7F|7F1F49;
@@ -12540,7 +12540,7 @@ CODE_83E925:
     LDA.W #$0000                                               ;83E927|A90000  |      ;
     LDX.W #$0047                                               ;83E92A|A24700  |      ;
     LDY.W #$0006                                               ;83E92D|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83E930|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E930|22978084|848097;
     SEP #$20                                                   ;83E934|E220    |      ;
     LDA.B #$06                                                 ;83E936|A906    |      ;
     STA.L $7F1F49                                              ;83E938|8F491F7F|7F1F49;
@@ -12552,7 +12552,7 @@ CODE_83E93D:
     LDA.W #$0000                                               ;83E93F|A90000  |      ;
     LDX.W #$0047                                               ;83E942|A24700  |      ;
     LDY.W #$0007                                               ;83E945|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83E948|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E948|22978084|848097;
     SEP #$20                                                   ;83E94C|E220    |      ;
     LDA.B #$07                                                 ;83E94E|A907    |      ;
     STA.L $7F1F49                                              ;83E950|8F491F7F|7F1F49;
@@ -12575,7 +12575,7 @@ CODE_83E955:
     LDA.W #$0000                                               ;83E977|A90000  |      ;
     LDX.W #$0047                                               ;83E97A|A24700  |      ;
     LDY.W #$0008                                               ;83E97D|A00800  |      ;
-    JSL.L fUnknown_848097                                      ;83E980|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E980|22978084|848097;
     SEP #$20                                                   ;83E984|E220    |      ;
     LDA.B #$08                                                 ;83E986|A908    |      ;
     STA.L $7F1F49                                              ;83E988|8F491F7F|7F1F49;
@@ -12587,7 +12587,7 @@ CODE_83E98D:
     LDA.W #$0000                                               ;83E98F|A90000  |      ;
     LDX.W #$0047                                               ;83E992|A24700  |      ;
     LDY.W #$0009                                               ;83E995|A00900  |      ;
-    JSL.L fUnknown_848097                                      ;83E998|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E998|22978084|848097;
     SEP #$20                                                   ;83E99C|E220    |      ;
     LDA.B #$09                                                 ;83E99E|A909    |      ;
     STA.L $7F1F49                                              ;83E9A0|8F491F7F|7F1F49;
@@ -12599,7 +12599,7 @@ CODE_83E9A5:
     LDA.W #$0000                                               ;83E9A7|A90000  |      ;
     LDX.W #$0047                                               ;83E9AA|A24700  |      ;
     LDY.W #$000A                                               ;83E9AD|A00A00  |      ;
-    JSL.L fUnknown_848097                                      ;83E9B0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E9B0|22978084|848097;
     SEP #$20                                                   ;83E9B4|E220    |      ;
     LDA.B #$0A                                                 ;83E9B6|A90A    |      ;
     STA.L $7F1F49                                              ;83E9B8|8F491F7F|7F1F49;
@@ -12611,7 +12611,7 @@ CODE_83E9BD:
     LDA.W #$0000                                               ;83E9BF|A90000  |      ;
     LDX.W #$0047                                               ;83E9C2|A24700  |      ;
     LDY.W #$000B                                               ;83E9C5|A00B00  |      ;
-    JSL.L fUnknown_848097                                      ;83E9C8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E9C8|22978084|848097;
     SEP #$20                                                   ;83E9CC|E220    |      ;
     LDA.B #$0B                                                 ;83E9CE|A90B    |      ;
     STA.L $7F1F49                                              ;83E9D0|8F491F7F|7F1F49;
@@ -12623,7 +12623,7 @@ CODE_83E9D5:
     LDA.W #$0000                                               ;83E9D7|A90000  |      ;
     LDX.W #$0047                                               ;83E9DA|A24700  |      ;
     LDY.W #$000C                                               ;83E9DD|A00C00  |      ;
-    JSL.L fUnknown_848097                                      ;83E9E0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E9E0|22978084|848097;
     SEP #$20                                                   ;83E9E4|E220    |      ;
     LDA.B #$0C                                                 ;83E9E6|A90C    |      ;
     STA.L $7F1F49                                              ;83E9E8|8F491F7F|7F1F49;
@@ -12635,7 +12635,7 @@ CODE_83E9ED:
     LDA.W #$0000                                               ;83E9EF|A90000  |      ;
     LDX.W #$0047                                               ;83E9F2|A24700  |      ;
     LDY.W #$000D                                               ;83E9F5|A00D00  |      ;
-    JSL.L fUnknown_848097                                      ;83E9F8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83E9F8|22978084|848097;
     SEP #$20                                                   ;83E9FC|E220    |      ;
     LDA.B #$0D                                                 ;83E9FE|A90D    |      ;
     STA.L $7F1F49                                              ;83EA00|8F491F7F|7F1F49;
@@ -12658,7 +12658,7 @@ CODE_83EA05:
     LDA.W #$0000                                               ;83EA27|A90000  |      ;
     LDX.W #$0047                                               ;83EA2A|A24700  |      ;
     LDY.W #$000E                                               ;83EA2D|A00E00  |      ;
-    JSL.L fUnknown_848097                                      ;83EA30|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EA30|22978084|848097;
     SEP #$20                                                   ;83EA34|E220    |      ;
     LDA.B #$0E                                                 ;83EA36|A90E    |      ;
     STA.L $7F1F49                                              ;83EA38|8F491F7F|7F1F49;
@@ -12670,7 +12670,7 @@ CODE_83EA3D:
     LDA.W #$0000                                               ;83EA3F|A90000  |      ;
     LDX.W #$0047                                               ;83EA42|A24700  |      ;
     LDY.W #$000F                                               ;83EA45|A00F00  |      ;
-    JSL.L fUnknown_848097                                      ;83EA48|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EA48|22978084|848097;
     SEP #$20                                                   ;83EA4C|E220    |      ;
     LDA.B #$0F                                                 ;83EA4E|A90F    |      ;
     STA.L $7F1F49                                              ;83EA50|8F491F7F|7F1F49;
@@ -12682,7 +12682,7 @@ CODE_83EA55:
     LDA.W #$0000                                               ;83EA57|A90000  |      ;
     LDX.W #$0047                                               ;83EA5A|A24700  |      ;
     LDY.W #$0010                                               ;83EA5D|A01000  |      ;
-    JSL.L fUnknown_848097                                      ;83EA60|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EA60|22978084|848097;
     SEP #$20                                                   ;83EA64|E220    |      ;
     LDA.B #$10                                                 ;83EA66|A910    |      ;
     STA.L $7F1F49                                              ;83EA68|8F491F7F|7F1F49;
@@ -12694,7 +12694,7 @@ CODE_83EA6D:
     LDA.W #$0000                                               ;83EA6F|A90000  |      ;
     LDX.W #$0047                                               ;83EA72|A24700  |      ;
     LDY.W #$0011                                               ;83EA75|A01100  |      ;
-    JSL.L fUnknown_848097                                      ;83EA78|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EA78|22978084|848097;
     SEP #$20                                                   ;83EA7C|E220    |      ;
     LDA.B #$11                                                 ;83EA7E|A911    |      ;
     STA.L $7F1F49                                              ;83EA80|8F491F7F|7F1F49;
@@ -12706,7 +12706,7 @@ CODE_83EA85:
     LDA.W #$0000                                               ;83EA87|A90000  |      ;
     LDX.W #$0047                                               ;83EA8A|A24700  |      ;
     LDY.W #$0012                                               ;83EA8D|A01200  |      ;
-    JSL.L fUnknown_848097                                      ;83EA90|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EA90|22978084|848097;
     SEP #$20                                                   ;83EA94|E220    |      ;
     LDA.B #$12                                                 ;83EA96|A912    |      ;
     STA.L $7F1F49                                              ;83EA98|8F491F7F|7F1F49;
@@ -12718,7 +12718,7 @@ CODE_83EA9D:
     LDA.W #$0000                                               ;83EA9F|A90000  |      ;
     LDX.W #$0047                                               ;83EAA2|A24700  |      ;
     LDY.W #$0013                                               ;83EAA5|A01300  |      ;
-    JSL.L fUnknown_848097                                      ;83EAA8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EAA8|22978084|848097;
     SEP #$20                                                   ;83EAAC|E220    |      ;
     LDA.B #$13                                                 ;83EAAE|A913    |      ;
     STA.L $7F1F49                                              ;83EAB0|8F491F7F|7F1F49;
@@ -12730,7 +12730,7 @@ CODE_83EAB5:
     LDA.W #$0000                                               ;83EAB7|A90000  |      ;
     LDX.W #$0047                                               ;83EABA|A24700  |      ;
     LDY.W #$0014                                               ;83EABD|A01400  |      ;
-    JSL.L fUnknown_848097                                      ;83EAC0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EAC0|22978084|848097;
     SEP #$20                                                   ;83EAC4|E220    |      ;
     LDA.B #$14                                                 ;83EAC6|A914    |      ;
     STA.L $7F1F49                                              ;83EAC8|8F491F7F|7F1F49;
@@ -12742,7 +12742,7 @@ CODE_83EACD:
     LDA.W #$0000                                               ;83EACF|A90000  |      ;
     LDX.W #$0047                                               ;83EAD2|A24700  |      ;
     LDY.W #$0015                                               ;83EAD5|A01500  |      ;
-    JSL.L fUnknown_848097                                      ;83EAD8|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EAD8|22978084|848097;
     SEP #$20                                                   ;83EADC|E220    |      ;
     LDA.B #$15                                                 ;83EADE|A915    |      ;
     STA.L $7F1F49                                              ;83EAE0|8F491F7F|7F1F49;
@@ -12754,7 +12754,7 @@ CODE_83EAE5:
     LDA.W #$0000                                               ;83EAE7|A90000  |      ;
     LDX.W #$0047                                               ;83EAEA|A24700  |      ;
     LDY.W #$0016                                               ;83EAED|A01600  |      ;
-    JSL.L fUnknown_848097                                      ;83EAF0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EAF0|22978084|848097;
     SEP #$20                                                   ;83EAF4|E220    |      ;
     LDA.B #$16                                                 ;83EAF6|A916    |      ;
     STA.L $7F1F49                                              ;83EAF8|8F491F7F|7F1F49;
@@ -12766,7 +12766,7 @@ CODE_83EAFD:
     LDA.W #$0000                                               ;83EAFF|A90000  |      ;
     LDX.W #$0047                                               ;83EB02|A24700  |      ;
     LDY.W #$0017                                               ;83EB05|A01700  |      ;
-    JSL.L fUnknown_848097                                      ;83EB08|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB08|22978084|848097;
     SEP #$20                                                   ;83EB0C|E220    |      ;
     LDA.B #$17                                                 ;83EB0E|A917    |      ;
     STA.L $7F1F49                                              ;83EB10|8F491F7F|7F1F49;
@@ -12778,7 +12778,7 @@ CODE_83EB15:
     LDA.W #$0000                                               ;83EB17|A90000  |      ;
     LDX.W #$0047                                               ;83EB1A|A24700  |      ;
     LDY.W #$0018                                               ;83EB1D|A01800  |      ;
-    JSL.L fUnknown_848097                                      ;83EB20|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB20|22978084|848097;
     SEP #$20                                                   ;83EB24|E220    |      ;
     LDA.B #$18                                                 ;83EB26|A918    |      ;
     STA.L $7F1F49                                              ;83EB28|8F491F7F|7F1F49;
@@ -12790,7 +12790,7 @@ CODE_83EB2D:
     LDA.W #$0000                                               ;83EB2F|A90000  |      ;
     LDX.W #$0047                                               ;83EB32|A24700  |      ;
     LDY.W #$0019                                               ;83EB35|A01900  |      ;
-    JSL.L fUnknown_848097                                      ;83EB38|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB38|22978084|848097;
     SEP #$20                                                   ;83EB3C|E220    |      ;
     LDA.B #$19                                                 ;83EB3E|A919    |      ;
     STA.L $7F1F49                                              ;83EB40|8F491F7F|7F1F49;
@@ -12802,7 +12802,7 @@ CODE_83EB45:
     LDA.W #$0000                                               ;83EB47|A90000  |      ;
     LDX.W #$0047                                               ;83EB4A|A24700  |      ;
     LDY.W #$001A                                               ;83EB4D|A01A00  |      ;
-    JSL.L fUnknown_848097                                      ;83EB50|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB50|22978084|848097;
     SEP #$20                                                   ;83EB54|E220    |      ;
     LDA.B #$1A                                                 ;83EB56|A91A    |      ;
     STA.L $7F1F49                                              ;83EB58|8F491F7F|7F1F49;
@@ -12814,7 +12814,7 @@ CODE_83EB5D:
     LDA.W #$0000                                               ;83EB5F|A90000  |      ;
     LDX.W #$0047                                               ;83EB62|A24700  |      ;
     LDY.W #$001B                                               ;83EB65|A01B00  |      ;
-    JSL.L fUnknown_848097                                      ;83EB68|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB68|22978084|848097;
     SEP #$20                                                   ;83EB6C|E220    |      ;
     LDA.B #$1B                                                 ;83EB6E|A91B    |      ;
     STA.L $7F1F49                                              ;83EB70|8F491F7F|7F1F49;
@@ -12826,7 +12826,7 @@ CODE_83EB75:
     LDA.W #$0000                                               ;83EB77|A90000  |      ;
     LDX.W #$0047                                               ;83EB7A|A24700  |      ;
     LDY.W #$001C                                               ;83EB7D|A01C00  |      ;
-    JSL.L fUnknown_848097                                      ;83EB80|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB80|22978084|848097;
     SEP #$20                                                   ;83EB84|E220    |      ;
     LDA.B #$1C                                                 ;83EB86|A91C    |      ;
     STA.L $7F1F49                                              ;83EB88|8F491F7F|7F1F49;
@@ -12838,7 +12838,7 @@ CODE_83EB8D:
     LDA.W #$0000                                               ;83EB8F|A90000  |      ;
     LDX.W #$0047                                               ;83EB92|A24700  |      ;
     LDY.W #$001D                                               ;83EB95|A01D00  |      ;
-    JSL.L fUnknown_848097                                      ;83EB98|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EB98|22978084|848097;
     SEP #$20                                                   ;83EB9C|E220    |      ;
     LDA.B #$1D                                                 ;83EB9E|A91D    |      ;
     STA.L $7F1F49                                              ;83EBA0|8F491F7F|7F1F49;
@@ -13142,7 +13142,7 @@ CODE_83ED1E:
     LDA.W #$0000                                               ;83ED44|A90000  |      ;
     LDX.W #$002F                                               ;83ED47|A22F00  |      ;
     LDY.W #$0000                                               ;83ED4A|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83ED4D|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83ED4D|22978084|848097;
     SEP #$20                                                   ;83ED51|E220    |      ;
     LDA.B #$14                                                 ;83ED53|A914    |      ;
     STA.L $7F1F47                                              ;83ED55|8F471F7F|7F1F47;
@@ -13163,7 +13163,7 @@ CODE_83ED5A:
     LDA.W #$0000                                               ;83ED75|A90000  |      ;
     LDX.W #$0030                                               ;83ED78|A23000  |      ;
     LDY.W #$0000                                               ;83ED7B|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83ED7E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83ED7E|22978084|848097;
     SEP #$20                                                   ;83ED82|E220    |      ;
     LDA.B #$02                                                 ;83ED84|A902    |      ;
     STA.L $7F1F47                                              ;83ED86|8F471F7F|7F1F47;
@@ -13181,7 +13181,7 @@ CODE_83ED8B:
     LDA.W #$0000                                               ;83ED9B|A90000  |      ;
     LDX.W #$0031                                               ;83ED9E|A23100  |      ;
     LDY.W #$0000                                               ;83EDA1|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EDA4|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EDA4|22978084|848097;
     SEP #$20                                                   ;83EDA8|E220    |      ;
     LDA.B #$03                                                 ;83EDAA|A903    |      ;
     STA.L $7F1F47                                              ;83EDAC|8F471F7F|7F1F47;
@@ -13197,7 +13197,7 @@ CODE_83EDB1:
     LDA.W #$0000                                               ;83EDBD|A90000  |      ;
     LDX.W #$0032                                               ;83EDC0|A23200  |      ;
     LDY.W #$0000                                               ;83EDC3|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EDC6|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EDC6|22978084|848097;
     SEP #$20                                                   ;83EDCA|E220    |      ;
     LDA.B #$04                                                 ;83EDCC|A904    |      ;
     STA.L $7F1F47                                              ;83EDCE|8F471F7F|7F1F47;
@@ -13214,7 +13214,7 @@ CODE_83EDD3:
     LDA.W #$0000                                               ;83EDE0|A90000  |      ;
     LDX.W #$0033                                               ;83EDE3|A23300  |      ;
     LDY.W #$0000                                               ;83EDE6|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EDE9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EDE9|22978084|848097;
     SEP #$20                                                   ;83EDED|E220    |      ;
     LDA.B #$05                                                 ;83EDEF|A905    |      ;
     STA.L $7F1F47                                              ;83EDF1|8F471F7F|7F1F47;
@@ -13230,7 +13230,7 @@ CODE_83EDF6:
     LDA.W #$0000                                               ;83EE03|A90000  |      ;
     LDX.W #$0034                                               ;83EE06|A23400  |      ;
     LDY.W #$0000                                               ;83EE09|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EE0C|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EE0C|22978084|848097;
     SEP #$20                                                   ;83EE10|E220    |      ;
     LDA.B #$06                                                 ;83EE12|A906    |      ;
     STA.L $7F1F47                                              ;83EE14|8F471F7F|7F1F47;
@@ -13246,7 +13246,7 @@ CODE_83EE19:
     LDA.W #$0000                                               ;83EE26|A90000  |      ;
     LDX.W #$0035                                               ;83EE29|A23500  |      ;
     LDY.W #$0000                                               ;83EE2C|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EE2F|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EE2F|22978084|848097;
     SEP #$20                                                   ;83EE33|E220    |      ;
     LDA.B #$07                                                 ;83EE35|A907    |      ;
     STA.L $7F1F47                                              ;83EE37|8F471F7F|7F1F47;
@@ -13262,7 +13262,7 @@ CODE_83EE3C:
     LDA.W #$0000                                               ;83EE49|A90000  |      ;
     LDX.W #$0037                                               ;83EE4C|A23700  |      ;
     LDY.W #$0000                                               ;83EE4F|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EE52|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EE52|22978084|848097;
     SEP #$20                                                   ;83EE56|E220    |      ;
     LDA.B #$08                                                 ;83EE58|A908    |      ;
     STA.L $7F1F47                                              ;83EE5A|8F471F7F|7F1F47;
@@ -13278,7 +13278,7 @@ CODE_83EE5F:
     LDA.W #$0000                                               ;83EE6C|A90000  |      ;
     LDX.W #$0036                                               ;83EE6F|A23600  |      ;
     LDY.W #$0000                                               ;83EE72|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EE75|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EE75|22978084|848097;
     SEP #$20                                                   ;83EE79|E220    |      ;
     LDA.B #$09                                                 ;83EE7B|A909    |      ;
     STA.L $7F1F47                                              ;83EE7D|8F471F7F|7F1F47;
@@ -13297,7 +13297,7 @@ CODE_83EE82:
     LDA.W #$0000                                               ;83EE98|A90000  |      ;
     LDX.W #$0038                                               ;83EE9B|A23800  |      ;
     LDY.W #$0000                                               ;83EE9E|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EEA1|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EEA1|22978084|848097;
     SEP #$20                                                   ;83EEA5|E220    |      ;
     LDA.B #$0A                                                 ;83EEA7|A90A    |      ;
     STA.L $7F1F47                                              ;83EEA9|8F471F7F|7F1F47;
@@ -13316,7 +13316,7 @@ CODE_83EEAE:
     LDA.W #$0000                                               ;83EEC4|A90000  |      ;
     LDX.W #$0039                                               ;83EEC7|A23900  |      ;
     LDY.W #$0000                                               ;83EECA|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EECD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EECD|22978084|848097;
     SEP #$20                                                   ;83EED1|E220    |      ;
     LDA.B #$0B                                                 ;83EED3|A90B    |      ;
     STA.L $7F1F47                                              ;83EED5|8F471F7F|7F1F47;
@@ -13332,7 +13332,7 @@ CODE_83EEDA:
     LDA.W #$0000                                               ;83EEE7|A90000  |      ;
     LDX.W #$003A                                               ;83EEEA|A23A00  |      ;
     LDY.W #$0000                                               ;83EEED|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EEF0|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EEF0|22978084|848097;
     SEP #$20                                                   ;83EEF4|E220    |      ;
     LDA.B #$21                                                 ;83EEF6|A921    |      ;
     STA.L $7F1F47                                              ;83EEF8|8F471F7F|7F1F47;
@@ -13344,7 +13344,7 @@ CODE_83EEFD:
     LDA.W #$0000                                               ;83EEFF|A90000  |      ;
     LDX.W #$003A                                               ;83EF02|A23A00  |      ;
     LDY.W #$0001                                               ;83EF05|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83EF08|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EF08|22978084|848097;
     SEP #$20                                                   ;83EF0C|E220    |      ;
     LDA.B #$0C                                                 ;83EF0E|A90C    |      ;
     STA.L $7F1F47                                              ;83EF10|8F471F7F|7F1F47;
@@ -13360,7 +13360,7 @@ CODE_83EF15:
     LDA.W #$0000                                               ;83EF22|A90000  |      ;
     LDX.W #$003B                                               ;83EF25|A23B00  |      ;
     LDY.W #$0000                                               ;83EF28|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EF2B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EF2B|22978084|848097;
     SEP #$20                                                   ;83EF2F|E220    |      ;
     LDA.B #$22                                                 ;83EF31|A922    |      ;
     STA.L $7F1F47                                              ;83EF33|8F471F7F|7F1F47;
@@ -13372,7 +13372,7 @@ CODE_83EF38:
     LDA.W #$0000                                               ;83EF3A|A90000  |      ;
     LDX.W #$003B                                               ;83EF3D|A23B00  |      ;
     LDY.W #$0001                                               ;83EF40|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83EF43|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EF43|22978084|848097;
     SEP #$20                                                   ;83EF47|E220    |      ;
     LDA.B #$0D                                                 ;83EF49|A90D    |      ;
     STA.L $7F1F47                                              ;83EF4B|8F471F7F|7F1F47;
@@ -13388,7 +13388,7 @@ CODE_83EF50:
     LDA.W #$0000                                               ;83EF5D|A90000  |      ;
     LDX.W #$003C                                               ;83EF60|A23C00  |      ;
     LDY.W #$0000                                               ;83EF63|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EF66|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EF66|22978084|848097;
     SEP #$20                                                   ;83EF6A|E220    |      ;
     LDA.B #$23                                                 ;83EF6C|A923    |      ;
     STA.L $7F1F47                                              ;83EF6E|8F471F7F|7F1F47;
@@ -13400,7 +13400,7 @@ CODE_83EF73:
     LDA.W #$0000                                               ;83EF75|A90000  |      ;
     LDX.W #$003C                                               ;83EF78|A23C00  |      ;
     LDY.W #$0001                                               ;83EF7B|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83EF7E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EF7E|22978084|848097;
     SEP #$20                                                   ;83EF82|E220    |      ;
     LDA.B #$0E                                                 ;83EF84|A90E    |      ;
     STA.L $7F1F47                                              ;83EF86|8F471F7F|7F1F47;
@@ -13416,7 +13416,7 @@ CODE_83EF8B:
     LDA.W #$0000                                               ;83EF98|A90000  |      ;
     LDX.W #$003D                                               ;83EF9B|A23D00  |      ;
     LDY.W #$0000                                               ;83EF9E|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EFA1|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EFA1|22978084|848097;
     SEP #$20                                                   ;83EFA5|E220    |      ;
     LDA.B #$24                                                 ;83EFA7|A924    |      ;
     STA.L $7F1F47                                              ;83EFA9|8F471F7F|7F1F47;
@@ -13428,7 +13428,7 @@ CODE_83EFAE:
     LDA.W #$0000                                               ;83EFB0|A90000  |      ;
     LDX.W #$003D                                               ;83EFB3|A23D00  |      ;
     LDY.W #$0001                                               ;83EFB6|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83EFB9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EFB9|22978084|848097;
     SEP #$20                                                   ;83EFBD|E220    |      ;
     LDA.B #$0F                                                 ;83EFBF|A90F    |      ;
     STA.L $7F1F47                                              ;83EFC1|8F471F7F|7F1F47;
@@ -13444,7 +13444,7 @@ CODE_83EFC6:
     LDA.W #$0000                                               ;83EFD3|A90000  |      ;
     LDX.W #$003E                                               ;83EFD6|A23E00  |      ;
     LDY.W #$0000                                               ;83EFD9|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83EFDC|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83EFDC|22978084|848097;
     SEP #$20                                                   ;83EFE0|E220    |      ;
     LDA.B #$10                                                 ;83EFE2|A910    |      ;
     STA.L $7F1F47                                              ;83EFE4|8F471F7F|7F1F47;
@@ -13471,7 +13471,7 @@ CODE_83EFE9:
     LDA.W #$0000                                               ;83F019|A90000  |      ;
     LDX.W #$003F                                               ;83F01C|A23F00  |      ;
     LDY.W #$0000                                               ;83F01F|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83F022|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F022|22978084|848097;
     SEP #$20                                                   ;83F026|E220    |      ;
     LDA.B #$11                                                 ;83F028|A911    |      ;
     STA.L $7F1F47                                              ;83F02A|8F471F7F|7F1F47;
@@ -13487,7 +13487,7 @@ CODE_83F02F:
     LDA.W #$0000                                               ;83F03C|A90000  |      ;
     LDX.W #$0040                                               ;83F03F|A24000  |      ;
     LDY.W #$0000                                               ;83F042|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83F045|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F045|22978084|848097;
     SEP #$20                                                   ;83F049|E220    |      ;
     LDA.B #$12                                                 ;83F04B|A912    |      ;
     STA.L $7F1F47                                              ;83F04D|8F471F7F|7F1F47;
@@ -13503,7 +13503,7 @@ CODE_83F052:
     LDA.W #$0000                                               ;83F05F|A90000  |      ;
     LDX.W #$0041                                               ;83F062|A24100  |      ;
     LDY.W #$0000                                               ;83F065|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83F068|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F068|22978084|848097;
     SEP #$20                                                   ;83F06C|E220    |      ;
     LDA.B #$13                                                 ;83F06E|A913    |      ;
     STA.L $7F1F47                                              ;83F070|8F471F7F|7F1F47;
@@ -13542,7 +13542,7 @@ CODE_83F075:
     LDA.W #$0000                                               ;83F0C0|A90000  |      ;
     LDX.W #$0042                                               ;83F0C3|A24200  |      ;
     LDY.W #$0000                                               ;83F0C6|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83F0C9|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F0C9|22978084|848097;
     SEP #$20                                                   ;83F0CD|E220    |      ;
     LDA.B #$14                                                 ;83F0CF|A914    |      ;
     STA.L $7F1F47                                              ;83F0D1|8F471F7F|7F1F47;
@@ -13588,7 +13588,7 @@ CODE_83F126:
     LDA.W #$0000                                               ;83F128|A90000  |      ;
     LDX.W #$0046                                               ;83F12B|A24600  |      ;
     LDY.W #$0000                                               ;83F12E|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83F131|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F131|22978084|848097;
     SEP #$20                                                   ;83F135|E220    |      ;
     LDA.B #$15                                                 ;83F137|A915    |      ;
     STA.L $7F1F47                                              ;83F139|8F471F7F|7F1F47;
@@ -13604,7 +13604,7 @@ CODE_83F14B:
     LDA.W #$0000                                               ;83F14D|A90000  |      ;
     LDX.W #$0046                                               ;83F150|A24600  |      ;
     LDY.W #$0001                                               ;83F153|A00100  |      ;
-    JSL.L fUnknown_848097                                      ;83F156|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F156|22978084|848097;
     SEP #$20                                                   ;83F15A|E220    |      ;
     LDA.B #$16                                                 ;83F15C|A916    |      ;
     STA.L $7F1F47                                              ;83F15E|8F471F7F|7F1F47;
@@ -13616,7 +13616,7 @@ CODE_83F163:
     LDA.W #$0000                                               ;83F165|A90000  |      ;
     LDX.W #$0046                                               ;83F168|A24600  |      ;
     LDY.W #$0002                                               ;83F16B|A00200  |      ;
-    JSL.L fUnknown_848097                                      ;83F16E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F16E|22978084|848097;
     SEP #$20                                                   ;83F172|E220    |      ;
     LDA.B #$17                                                 ;83F174|A917    |      ;
     STA.L $7F1F47                                              ;83F176|8F471F7F|7F1F47;
@@ -13628,7 +13628,7 @@ CODE_83F17B:
     LDA.W #$0000                                               ;83F17D|A90000  |      ;
     LDX.W #$0046                                               ;83F180|A24600  |      ;
     LDY.W #$0003                                               ;83F183|A00300  |      ;
-    JSL.L fUnknown_848097                                      ;83F186|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F186|22978084|848097;
     SEP #$20                                                   ;83F18A|E220    |      ;
     LDA.B #$18                                                 ;83F18C|A918    |      ;
     STA.L $7F1F47                                              ;83F18E|8F471F7F|7F1F47;
@@ -13640,7 +13640,7 @@ CODE_83F193:
     LDA.W #$0000                                               ;83F195|A90000  |      ;
     LDX.W #$0046                                               ;83F198|A24600  |      ;
     LDY.W #$0004                                               ;83F19B|A00400  |      ;
-    JSL.L fUnknown_848097                                      ;83F19E|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F19E|22978084|848097;
     SEP #$20                                                   ;83F1A2|E220    |      ;
     LDA.B #$19                                                 ;83F1A4|A919    |      ;
     STA.L $7F1F47                                              ;83F1A6|8F471F7F|7F1F47;
@@ -13652,7 +13652,7 @@ CODE_83F1AB:
     LDA.W #$0000                                               ;83F1AD|A90000  |      ;
     LDX.W #$0046                                               ;83F1B0|A24600  |      ;
     LDY.W #$0005                                               ;83F1B3|A00500  |      ;
-    JSL.L fUnknown_848097                                      ;83F1B6|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F1B6|22978084|848097;
     SEP #$20                                                   ;83F1BA|E220    |      ;
     LDA.B #$1A                                                 ;83F1BC|A91A    |      ;
     STA.L $7F1F47                                              ;83F1BE|8F471F7F|7F1F47;
@@ -13664,7 +13664,7 @@ CODE_83F1C3:
     LDA.W #$0000                                               ;83F1C5|A90000  |      ;
     LDX.W #$0046                                               ;83F1C8|A24600  |      ;
     LDY.W #$0006                                               ;83F1CB|A00600  |      ;
-    JSL.L fUnknown_848097                                      ;83F1CE|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F1CE|22978084|848097;
     SEP #$20                                                   ;83F1D2|E220    |      ;
     LDA.B #$1B                                                 ;83F1D4|A91B    |      ;
     STA.L $7F1F47                                              ;83F1D6|8F471F7F|7F1F47;
@@ -13676,7 +13676,7 @@ CODE_83F1DB:
     LDA.W #$0000                                               ;83F1DD|A90000  |      ;
     LDX.W #$0046                                               ;83F1E0|A24600  |      ;
     LDY.W #$0007                                               ;83F1E3|A00700  |      ;
-    JSL.L fUnknown_848097                                      ;83F1E6|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F1E6|22978084|848097;
     SEP #$20                                                   ;83F1EA|E220    |      ;
     LDA.B #$20                                                 ;83F1EC|A920    |      ;
     STA.L $7F1F47                                              ;83F1EE|8F471F7F|7F1F47;
@@ -13692,7 +13692,7 @@ CODE_83F200:
     LDA.W #$0000                                               ;83F202|A90000  |      ;
     LDX.W #$0046                                               ;83F205|A24600  |      ;
     LDY.W #$0008                                               ;83F208|A00800  |      ;
-    JSL.L fUnknown_848097                                      ;83F20B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F20B|22978084|848097;
     SEP #$20                                                   ;83F20F|E220    |      ;
     LDA.B #$1D                                                 ;83F211|A91D    |      ;
     STA.L $7F1F47                                              ;83F213|8F471F7F|7F1F47;
@@ -13704,7 +13704,7 @@ CODE_83F218:
     LDA.W #$0000                                               ;83F21A|A90000  |      ;
     LDX.W #$0046                                               ;83F21D|A24600  |      ;
     LDY.W #$0009                                               ;83F220|A00900  |      ;
-    JSL.L fUnknown_848097                                      ;83F223|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F223|22978084|848097;
     SEP #$20                                                   ;83F227|E220    |      ;
     LDA.B #$1E                                                 ;83F229|A91E    |      ;
     STA.L $7F1F47                                              ;83F22B|8F471F7F|7F1F47;
@@ -13716,7 +13716,7 @@ CODE_83F230:
     LDA.W #$0000                                               ;83F232|A90000  |      ;
     LDX.W #$0046                                               ;83F235|A24600  |      ;
     LDY.W #$000A                                               ;83F238|A00A00  |      ;
-    JSL.L fUnknown_848097                                      ;83F23B|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F23B|22978084|848097;
     SEP #$20                                                   ;83F23F|E220    |      ;
     LDA.B #$1F                                                 ;83F241|A91F    |      ;
     STA.L $7F1F47                                              ;83F243|8F471F7F|7F1F47;
@@ -13728,7 +13728,7 @@ CODE_83F248:
     LDA.W #$0000                                               ;83F24A|A90000  |      ;
     LDX.W #$0046                                               ;83F24D|A24600  |      ;
     LDY.W #$000B                                               ;83F250|A00B00  |      ;
-    JSL.L fUnknown_848097                                      ;83F253|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F253|22978084|848097;
     SEP #$20                                                   ;83F257|E220    |      ;
     LDA.B #$20                                                 ;83F259|A920    |      ;
     STA.L $7F1F47                                              ;83F25B|8F471F7F|7F1F47;
@@ -14013,7 +14013,7 @@ CODE_83F4B2:
     LDA.W #$0000                                               ;83F4B4|A90000  |      ;
     LDX.W #$0046                                               ;83F4B7|A24600  |      ;
     LDY.W #$000C                                               ;83F4BA|A00C00  |      ;
-    JSL.L fUnknown_848097                                      ;83F4BD|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F4BD|22978084|848097;
     SEP #$20                                                   ;83F4C1|E220    |      ;
     LDA.B #$25                                                 ;83F4C3|A925    |      ;
     STA.L $7F1F47                                              ;83F4C5|8F471F7F|7F1F47;
@@ -14033,7 +14033,7 @@ CODE_83F4D8:
     LDA.W #$0000                                               ;83F4DA|A90000  |      ;
     LDX.W #$002E                                               ;83F4DD|A22E00  |      ;
     LDY.W #$0000                                               ;83F4E0|A00000  |      ;
-    JSL.L fUnknown_848097                                      ;83F4E3|22978084|848097;
+    JSL.L fSubUnk1Unknown_848097                               ;83F4E3|22978084|848097;
     REP #$30                                                   ;83F4E7|C230    |      ;
     STZ.W nCurrentMapdata0196                                  ;83F4E9|9C9601  |000196;
     LDA.L $7F1F5E                                              ;83F4EC|AF5E1F7F|7F1F5E;
@@ -14108,12 +14108,12 @@ CODE_83F573:
     LDA.L nRanchDevelopmentRate                                ;83F582|AF561F7F|7F1F56;
     STA.B n16TempVar1                                          ;83F586|857E    |00007E;
     LDA.W #$000A                                               ;83F588|A90A00  |      ;
-    JSL.L fUnknown_838000                                      ;83F58B|22008083|838000;
+    JSL.L fMathUnknown_838000                                  ;83F58B|22008083|838000;
     REP #$30                                                   ;83F58F|C230    |      ;
     STA.B n16TempVar1                                          ;83F591|857E    |00007E;
     LDA.W #$0127                                               ;83F593|A92701  |      ;
     STA.B n16TempVar2                                          ;83F596|8580    |000080;
-    JSL.L fSystemDivide                                        ;83F598|22828083|838082;
+    JSL.L fMathDivide                                          ;83F598|22828083|838082;
     REP #$30                                                   ;83F59C|C230    |      ;
     STA.L nRanchDevelopmentRate                                ;83F59E|8F561F7F|7F1F56;
     CMP.W #$0064                                               ;83F5A2|C96400  |      ;
