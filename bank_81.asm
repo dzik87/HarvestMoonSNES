@@ -551,7 +551,7 @@ fEggFestivalUnknown_81836C:
     LDX.W #$038D                                               ;8183A9|A28D03  |      ;
     LDA.B #$00                                                 ;8183AC|A900    |      ;
     STA.W $0191                                                ;8183AE|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;8183B1|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;8183B1|225F9383|83935F;
     RTS                                                        ;8183B5|60      |      ;
  
  
@@ -1459,7 +1459,7 @@ fUnknown_81893F:
     SEP #$20                                                   ;818974|E220    |      ;
     LDA.B #$00                                                 ;818976|A900    |      ;
     STA.W $0191                                                ;818978|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81897B|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81897B|225F9383|83935F;
     SEP #$20                                                   ;81897F|E220    |      ;
     LDA.B #$01                                                 ;818981|A901    |      ;
     STA.W $0976                                                ;818983|8D7609  |000976;
@@ -1569,7 +1569,7 @@ fUnknown_818989:
     SEP #$20                                                   ;818A26|E220    |      ;
     LDA.B #$00                                                 ;818A28|A900    |      ;
     STA.W $0191                                                ;818A2A|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;818A2D|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;818A2D|225F9383|83935F;
     REP #$20                                                   ;818A31|C220    |      ;
     LDA.B n16TempVar2                                          ;818A33|A580    |000080;
     BEQ +                                                      ;818A35|F003    |818A3A;
@@ -1629,7 +1629,7 @@ fUnknown_818A4E:
     SEP #$20                                                   ;818A87|E220    |      ;
     LDA.B #$00                                                 ;818A89|A900    |      ;
     STA.W $0191                                                ;818A8B|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;818A8E|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;818A8E|225F9383|83935F;
     BRA fUnknown_818AA0                                        ;818A92|800C    |818AA0;
  
  
@@ -1769,7 +1769,7 @@ fUnknown_818B6B:
     STA.W $019A                                                ;818B8F|8D9A01  |00019A;
     LDA.B #$00                                                 ;818B92|A900    |      ;
     STA.W $0191                                                ;818B94|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;818B97|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;818B97|225F9383|83935F;
     SEP #$20                                                   ;818B9B|E220    |      ;
     LDA.B #$01                                                 ;818B9D|A901    |      ;
     STA.W $0976                                                ;818B9F|8D7609  |000976;
@@ -2232,7 +2232,7 @@ fUnknown_818F2A:
     SEP #$20                                                   ;818F45|E220    |      ;
     LDA.B #$00                                                 ;818F47|A900    |      ;
     STA.W $0191                                                ;818F49|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;818F4C|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;818F4C|225F9383|83935F;
     SEP #$20                                                   ;818F50|E220    |      ;
     LDA.B #$06                                                 ;818F52|A906    |      ;
     STA.W $0976                                                ;818F54|8D7609  |000976;
@@ -2270,7 +2270,7 @@ fUnknown_818F5A:
     LDX.W #$02FA                                               ;818F8D|A2FA02  |      ;
     LDA.B #$00                                                 ;818F90|A900    |      ;
     STA.W $0191                                                ;818F92|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;818F95|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;818F95|225F9383|83935F;
     REP #$20                                                   ;818F99|C220    |      ;
     LDA.W $0978                                                ;818F9B|AD7809  |000978;
     STA.B $A5                                                  ;818F9E|85A5    |0000A5;
@@ -2309,7 +2309,7 @@ fUnknown_818FD7:
     LDX.W #$0303                                               ;818FDE|A20303  |      ;
     LDA.B #$00                                                 ;818FE1|A900    |      ;
     STA.W $0191                                                ;818FE3|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;818FE6|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;818FE6|225F9383|83935F;
  
 fUnknown_818FEA:
     REP #$20                                                   ;818FEA|C220    |      ;
@@ -4381,7 +4381,7 @@ fUnknown_81A6C1:
     TAX                                                        ;81A77F|AA      |      ;
     REP #$20                                                   ;81A780|C220    |      ;
     LDA.W #$0080                                               ;81A782|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;81A785|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;81A785|22338A80|808A33;
     REP #$20                                                   ;81A789|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;81A78B|A572    |000072;
     CLC                                                        ;81A78D|18      |      ;
@@ -4409,7 +4409,7 @@ fUnknown_81A6C1:
     TAX                                                        ;81A7AE|AA      |      ;
     REP #$20                                                   ;81A7AF|C220    |      ;
     LDA.W #$0080                                               ;81A7B1|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;81A7B4|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;81A7B4|22338A80|808A33;
     REP #$20                                                   ;81A7B8|C220    |      ;
     LDA.B ptrUnknown0x75                                       ;81A7BA|A575    |000075;
     CLC                                                        ;81A7BC|18      |      ;
@@ -4718,7 +4718,7 @@ fUnknown_81A94A:
     PLY                                                        ;81A9A4|7A      |      ;
     PLX                                                        ;81A9A5|FA      |      ;
     JSL.L fUnknown_81A688                                      ;81A9A6|2288A681|81A688;
-    JSL.L fSystem_StartTransfer                                ;81A9AA|22F08A80|808AF0;
+    JSL.L fCore_StartTransfer                                  ;81A9AA|22F08A80|808AF0;
  
 .label5:
     SEP #$20                                                   ;81A9AE|E220    |      ;
@@ -7575,11 +7575,11 @@ subUnkown81C027_0x11:
     REP #$30                                                   ;81C263|C230    |      ;
     SEP #$20                                                   ;81C265|E220    |      ;
     LDA.B #$FF                                                 ;81C267|A9FF    |      ;
-    JSL.L fGetRandomNumberRanged                               ;81C269|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;81C269|22F98980|8089F9;
     BNE +                                                      ;81C26D|D011    |81C280;
     SEP #$20                                                   ;81C26F|E220    |      ;
     LDA.B #$04                                                 ;81C271|A904    |      ;
-    JSL.L fGetRandomNumberRanged                               ;81C273|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;81C273|22F98980|8089F9;
     BNE +                                                      ;81C277|D007    |81C280;
     REP #$30                                                   ;81C279|C230    |      ;
     LDA.W #$0012                                               ;81C27B|A91200  |      ;
@@ -7897,7 +7897,7 @@ subUnkown81C027_0x0C:
     STA.W $019A                                                ;81C4BE|8D9A01  |00019A;
     LDA.B #$00                                                 ;81C4C1|A900    |      ;
     STA.W $0191                                                ;81C4C3|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81C4C6|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81C4C6|225F9383|83935F;
  
 .continue:
     JSR.W fUnknown_81CFE6                                      ;81C4CA|20E6CF  |81CFE6;
@@ -8016,7 +8016,7 @@ fUnknown_81C556:
     STA.W $0901                                                ;81C598|8D0109  |000901;
     SEP #$20                                                   ;81C59B|E220    |      ;
     LDA.B #$02                                                 ;81C59D|A902    |      ;
-    JSL.L fGetRandomNumberRanged                               ;81C59F|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;81C59F|22F98980|8089F9;
     SEP #$20                                                   ;81C5A3|E220    |      ;
     XBA                                                        ;81C5A5|EB      |      ;
     LDA.B #$00                                                 ;81C5A6|A900    |      ;
@@ -10658,7 +10658,7 @@ subPlayerInteraction81D593_0x0F:
     STA.W $019A                                                ;81D778|8D9A01  |00019A;
     LDA.B #$00                                                 ;81D77B|A900    |      ;
     STA.W $0191                                                ;81D77D|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81D780|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81D780|225F9383|83935F;
  
   + SEP #$20                                                   ;81D784|E220    |      ;
     LDA.B #$00                                                 ;81D786|A900    |      ;
@@ -10736,7 +10736,7 @@ subPlayerInteraction81D593_0x10:
     SEP #$20                                                   ;81D807|E220    |      ;
     LDA.B #$00                                                 ;81D809|A900    |      ;
     STA.W $0191                                                ;81D80B|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81D80E|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81D80E|225F9383|83935F;
     SEP #$20                                                   ;81D812|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D814|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81D817|4C6BD9  |81D96B;
@@ -10767,7 +10767,7 @@ subPlayerInteraction81D593_0x10:
     SEP #$20                                                   ;81D846|E220    |      ;
     LDA.B #$00                                                 ;81D848|A900    |      ;
     STA.W $0191                                                ;81D84A|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81D84D|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81D84D|225F9383|83935F;
     SEP #$20                                                   ;81D851|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D853|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81D856|4C6BD9  |81D96B;
@@ -11009,7 +11009,7 @@ subPlayerInteraction81D593_0x12:
     STA.W $019A                                                ;81DA31|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DA34|A900    |      ;
     STA.W $0191                                                ;81DA36|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DA39|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DA39|225F9383|83935F;
  
   + SEP #$20                                                   ;81DA3D|E220    |      ;
     LDA.B #$00                                                 ;81DA3F|A900    |      ;
@@ -11103,7 +11103,7 @@ subPlayerInteraction81D593_0x13:
     STA.W $019A                                                ;81DAE7|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DAEA|A900    |      ;
     STA.W $0191                                                ;81DAEC|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DAEF|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DAEF|225F9383|83935F;
  
   + SEP #$20                                                   ;81DAF3|E220    |      ;
     LDA.B #$00                                                 ;81DAF5|A900    |      ;
@@ -11277,7 +11277,7 @@ subPlayerInteraction81D593_0x1E:
     LDX.W #$0371                                               ;81DC02|A27103  |      ;
     LDA.B #$00                                                 ;81DC05|A900    |      ;
     STA.W $0191                                                ;81DC07|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DC0A|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DC0A|225F9383|83935F;
     SEP #$20                                                   ;81DC0E|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DC10|EE6F09  |00096F;
     JMP.W .return                                              ;81DC13|4C56DC  |81DC56;
@@ -11309,7 +11309,7 @@ subPlayerInteraction81D593_0x1E:
     STA.W $019A                                                ;81DC3E|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DC41|A900    |      ;
     STA.W $0191                                                ;81DC43|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DC46|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DC46|225F9383|83935F;
  
 .exit:
     REP #$30                                                   ;81DC4A|C230    |      ;
@@ -11362,7 +11362,7 @@ subPlayerInteraction81D593_0x26:
     LDX.W #$0023                                               ;81DC70|A22300  |      ;
     LDA.B #$00                                                 ;81DC73|A900    |      ;
     STA.W $0191                                                ;81DC75|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DC78|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DC78|225F9383|83935F;
     SEP #$20                                                   ;81DC7C|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DC7E|EE6F09  |00096F;
     JMP.W .return                                              ;81DC81|4CCDDC  |81DCCD;
@@ -11393,7 +11393,7 @@ subPlayerInteraction81D593_0x26:
     STA.W $019A                                                ;81DCAC|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DCAF|A900    |      ;
     STA.W $0191                                                ;81DCB1|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DCB4|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DCB4|225F9383|83935F;
     REP #$20                                                   ;81DCB8|C220    |      ;
     LDA.W #$FFFF                                               ;81DCBA|A9FFFF  |      ;
     JSL.L fEngineAddHappiness                                  ;81DCBD|2282B283|83B282;
@@ -11541,7 +11541,7 @@ subPlayerInteraction81D593_0x2D:
     LDX.W #$0023                                               ;81DDBE|A22300  |      ;
     LDA.B #$00                                                 ;81DDC1|A900    |      ;
     STA.W $0191                                                ;81DDC3|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DDC6|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DDC6|225F9383|83935F;
     SEP #$20                                                   ;81DDCA|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DDCC|EE6F09  |00096F;
     JMP.W .return                                              ;81DDCF|4C1BDE  |81DE1B;
@@ -11572,7 +11572,7 @@ subPlayerInteraction81D593_0x2D:
     STA.W $019A                                                ;81DDFA|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DDFD|A900    |      ;
     STA.W $0191                                                ;81DDFF|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DE02|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DE02|225F9383|83935F;
     REP #$20                                                   ;81DE06|C220    |      ;
     LDA.W #$FFFF                                               ;81DE08|A9FFFF  |      ;
     JSL.L fEngineAddHappiness                                  ;81DE0B|2282B283|83B282;
@@ -11622,7 +11622,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0305                                               ;81DE54|A20503  |      ;
     LDA.B #$00                                                 ;81DE57|A900    |      ;
     STA.W $0191                                                ;81DE59|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DE5C|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DE5C|225F9383|83935F;
     SEP #$20                                                   ;81DE60|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DE62|EE6F09  |00096F;
     JMP.W .return                                              ;81DE65|4C21E2  |81E221;
@@ -11634,7 +11634,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03D0                                               ;81DE6F|A2D003  |      ;
     LDA.B #$00                                                 ;81DE72|A900    |      ;
     STA.W $0191                                                ;81DE74|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DE77|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DE77|225F9383|83935F;
     REP #$30                                                   ;81DE7B|C230    |      ;
     LDA.W #$0040                                               ;81DE7D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DE80|49FFFF  |      ;
@@ -11691,7 +11691,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0307                                               ;81DEDB|A20703  |      ;
     LDA.B #$00                                                 ;81DEDE|A900    |      ;
     STA.W $0191                                                ;81DEE0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DEE3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DEE3|225F9383|83935F;
     SEP #$20                                                   ;81DEE7|E220    |      ;
     LDA.B #$02                                                 ;81DEE9|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81DEEB|8D6F09  |00096F;
@@ -11704,7 +11704,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B6                                               ;81DEF8|A2B603  |      ;
     LDA.B #$00                                                 ;81DEFB|A900    |      ;
     STA.W $0191                                                ;81DEFD|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DF00|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DF00|225F9383|83935F;
     REP #$30                                                   ;81DF04|C230    |      ;
     LDA.W #$0040                                               ;81DF06|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF09|49FFFF  |      ;
@@ -11731,7 +11731,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$030A                                               ;81DF32|A20A03  |      ;
     LDA.B #$00                                                 ;81DF35|A900    |      ;
     STA.W $0191                                                ;81DF37|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DF3A|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DF3A|225F9383|83935F;
     SEP #$20                                                   ;81DF3E|E220    |      ;
     LDA.B #$03                                                 ;81DF40|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81DF42|8D6F09  |00096F;
@@ -11744,7 +11744,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B6                                               ;81DF4F|A2B603  |      ;
     LDA.B #$00                                                 ;81DF52|A900    |      ;
     STA.W $0191                                                ;81DF54|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DF57|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DF57|225F9383|83935F;
     REP #$30                                                   ;81DF5B|C230    |      ;
     LDA.W #$0040                                               ;81DF5D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF60|49FFFF  |      ;
@@ -11760,7 +11760,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$030B                                               ;81DF71|A20B03  |      ;
     LDA.B #$00                                                 ;81DF74|A900    |      ;
     STA.W $0191                                                ;81DF76|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DF79|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DF79|225F9383|83935F;
     REP #$30                                                   ;81DF7D|C230    |      ;
     LDA.W #$0040                                               ;81DF7F|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF82|49FFFF  |      ;
@@ -11780,7 +11780,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$030B                                               ;81DFA0|A20B03  |      ;
     LDA.B #$00                                                 ;81DFA3|A900    |      ;
     STA.W $0191                                                ;81DFA5|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81DFA8|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81DFA8|225F9383|83935F;
     REP #$30                                                   ;81DFAC|C230    |      ;
     LDA.W #$0040                                               ;81DFAE|A94000  |      ;
     EOR.W #$FFFF                                               ;81DFB1|49FFFF  |      ;
@@ -11839,7 +11839,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0306                                               ;81E013|A20603  |      ;
     LDA.B #$00                                                 ;81E016|A900    |      ;
     STA.W $0191                                                ;81E018|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E01B|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E01B|225F9383|83935F;
     REP #$30                                                   ;81E01F|C230    |      ;
     LDA.W #$0040                                               ;81E021|A94000  |      ;
     EOR.W #$FFFF                                               ;81E024|49FFFF  |      ;
@@ -11855,7 +11855,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B7                                               ;81E035|A2B703  |      ;
     LDA.B #$00                                                 ;81E038|A900    |      ;
     STA.W $0191                                                ;81E03A|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E03D|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E03D|225F9383|83935F;
     REP #$30                                                   ;81E041|C230    |      ;
     LDA.W #$0040                                               ;81E043|A94000  |      ;
     EOR.W #$FFFF                                               ;81E046|49FFFF  |      ;
@@ -11881,7 +11881,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0304                                               ;81E06F|A20403  |      ;
     LDA.B #$00                                                 ;81E072|A900    |      ;
     STA.W $0191                                                ;81E074|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E077|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E077|225F9383|83935F;
     REP #$30                                                   ;81E07B|C230    |      ;
     LDA.W #$0040                                               ;81E07D|A94000  |      ;
     EOR.W #$FFFF                                               ;81E080|49FFFF  |      ;
@@ -11896,7 +11896,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0308                                               ;81E091|A20803  |      ;
     LDA.B #$00                                                 ;81E094|A900    |      ;
     STA.W $0191                                                ;81E096|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E099|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E099|225F9383|83935F;
     REP #$30                                                   ;81E09D|C230    |      ;
     LDA.W #$0040                                               ;81E09F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E0A2|49FFFF  |      ;
@@ -11923,7 +11923,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0303                                               ;81E0D4|A20303  |      ;
     LDA.B #$00                                                 ;81E0D7|A900    |      ;
     STA.W $0191                                                ;81E0D9|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E0DC|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E0DC|225F9383|83935F;
     REP #$30                                                   ;81E0E0|C230    |      ;
     LDA.W #$0040                                               ;81E0E2|A94000  |      ;
     EOR.W #$FFFF                                               ;81E0E5|49FFFF  |      ;
@@ -11981,7 +11981,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0306                                               ;81E13D|A20603  |      ;
     LDA.B #$00                                                 ;81E140|A900    |      ;
     STA.W $0191                                                ;81E142|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E145|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E145|225F9383|83935F;
     REP #$20                                                   ;81E149|C220    |      ;
     REP #$30                                                   ;81E14B|C230    |      ;
     LDA.W #$0040                                               ;81E14D|A94000  |      ;
@@ -11998,7 +11998,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$03B7                                               ;81E161|A2B703  |      ;
     LDA.B #$00                                                 ;81E164|A900    |      ;
     STA.W $0191                                                ;81E166|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E169|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E169|225F9383|83935F;
     REP #$30                                                   ;81E16D|C230    |      ;
     LDA.W #$0040                                               ;81E16F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E172|49FFFF  |      ;
@@ -12024,7 +12024,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0304                                               ;81E19B|A20403  |      ;
     LDA.B #$00                                                 ;81E19E|A900    |      ;
     STA.W $0191                                                ;81E1A0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E1A3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E1A3|225F9383|83935F;
     REP #$30                                                   ;81E1A7|C230    |      ;
     LDA.W #$0040                                               ;81E1A9|A94000  |      ;
     EOR.W #$FFFF                                               ;81E1AC|49FFFF  |      ;
@@ -12039,7 +12039,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0311                                               ;81E1BC|A21103  |      ;
     LDA.B #$00                                                 ;81E1BF|A900    |      ;
     STA.W $0191                                                ;81E1C1|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E1C4|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E1C4|225F9383|83935F;
     REP #$30                                                   ;81E1C8|C230    |      ;
     LDA.W #$0040                                               ;81E1CA|A94000  |      ;
     EOR.W #$FFFF                                               ;81E1CD|49FFFF  |      ;
@@ -12069,7 +12069,7 @@ subPlayerInteraction81D593_0x2E:
     LDX.W #$0303                                               ;81E207|A20303  |      ;
     LDA.B #$00                                                 ;81E20A|A900    |      ;
     STA.W $0191                                                ;81E20C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E20F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E20F|225F9383|83935F;
  
 .break:
     REP #$30                                                   ;81E213|C230    |      ;
@@ -12085,7 +12085,7 @@ subPlayerInteraction81D593_0x2E:
  
  
 .return2:
-    JSL.L fTextUnknown_8393F9                                  ;81E222|22F99383|8393F9;
+    JSL.L fDialog_Unknown_8393F9                               ;81E222|22F99383|8393F9;
     SEP #$20                                                   ;81E226|E220    |      ;
     LDA.B #$01                                                 ;81E228|A901    |      ;
     STA.W $019A                                                ;81E22A|8D9A01  |00019A;
@@ -12193,7 +12193,7 @@ subPlayerInteraction81D593_0x33:
     LDX.W #$0023                                               ;81E2EB|A22300  |      ;
     LDA.B #$00                                                 ;81E2EE|A900    |      ;
     STA.W $0191                                                ;81E2F0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E2F3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E2F3|225F9383|83935F;
     SEP #$20                                                   ;81E2F7|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E2F9|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81E2FC|4C48E3  |81E348;
@@ -12223,7 +12223,7 @@ subPlayerInteraction81D593_0x33:
     STA.W $019A                                                ;81E327|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E32A|A900    |      ;
     STA.W $0191                                                ;81E32C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E32F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E32F|225F9383|83935F;
     REP #$20                                                   ;81E333|C220    |      ;
     LDA.W #$FFFF                                               ;81E335|A9FFFF  |      ;
     JSL.L fEngineAddHappiness                                  ;81E338|2282B283|83B282;
@@ -12289,7 +12289,7 @@ subPlayerInteraction81D593_0x36:
     LDX.W #$0023                                               ;81E3A6|A22300  |      ;
     LDA.B #$00                                                 ;81E3A9|A900    |      ;
     STA.W $0191                                                ;81E3AB|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E3AE|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E3AE|225F9383|83935F;
     SEP #$20                                                   ;81E3B2|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E3B4|EE6F09  |00096F;
     JMP.W .return                                              ;81E3B7|4C03E4  |81E403;
@@ -12319,7 +12319,7 @@ subPlayerInteraction81D593_0x36:
     STA.W $019A                                                ;81E3E2|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E3E5|A900    |      ;
     STA.W $0191                                                ;81E3E7|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E3EA|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E3EA|225F9383|83935F;
     REP #$20                                                   ;81E3EE|C220    |      ;
     LDA.W #$FFFF                                               ;81E3F0|A9FFFF  |      ;
     JSL.L fEngineAddHappiness                                  ;81E3F3|2282B283|83B282;
@@ -12507,7 +12507,7 @@ subPlayerInteraction81D593_0x3F:
     LDX.W #$0023                                               ;81E53E|A22300  |      ;
     LDA.B #$00                                                 ;81E541|A900    |      ;
     STA.W $0191                                                ;81E543|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E546|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E546|225F9383|83935F;
     SEP #$20                                                   ;81E54A|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E54C|EE6F09  |00096F;
     JMP.W .return                                              ;81E54F|4C9BE5  |81E59B;
@@ -12537,7 +12537,7 @@ subPlayerInteraction81D593_0x3F:
     STA.W $019A                                                ;81E57A|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E57D|A900    |      ;
     STA.W $0191                                                ;81E57F|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E582|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E582|225F9383|83935F;
     REP #$20                                                   ;81E586|C220    |      ;
     LDA.W #$FFFF                                               ;81E588|A9FFFF  |      ;
     JSL.L fEngineAddHappiness                                  ;81E58B|2282B283|83B282;
@@ -12565,7 +12565,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$045F                                               ;81E5AE|A25F04  |      ;
     LDA.B #$00                                                 ;81E5B1|A900    |      ;
     STA.W $0191                                                ;81E5B3|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E5B6|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E5B6|225F9383|83935F;
     SEP #$20                                                   ;81E5BA|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E5BC|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81E5BF|4C9FE6  |81E69F;
@@ -12607,7 +12607,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0460                                               ;81E5FC|A26004  |      ;
     LDA.B #$00                                                 ;81E5FF|A900    |      ;
     STA.W $0191                                                ;81E601|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E604|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E604|225F9383|83935F;
     REP #$30                                                   ;81E608|C230    |      ;
     LDA.W #$0040                                               ;81E60A|A94000  |      ;
     EOR.W #$FFFF                                               ;81E60D|49FFFF  |      ;
@@ -12623,7 +12623,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0462                                               ;81E61E|A26204  |      ;
     LDA.B #$00                                                 ;81E621|A900    |      ;
     STA.W $0191                                                ;81E623|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E626|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E626|225F9383|83935F;
     REP #$30                                                   ;81E62A|C230    |      ;
     LDA.W #$0040                                               ;81E62C|A94000  |      ;
     EOR.W #$FFFF                                               ;81E62F|49FFFF  |      ;
@@ -12639,7 +12639,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0464                                               ;81E640|A26404  |      ;
     LDA.B #$00                                                 ;81E643|A900    |      ;
     STA.W $0191                                                ;81E645|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E648|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E648|225F9383|83935F;
     REP #$30                                                   ;81E64C|C230    |      ;
     LDA.W #$0040                                               ;81E64E|A94000  |      ;
     EOR.W #$FFFF                                               ;81E651|49FFFF  |      ;
@@ -12655,7 +12655,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0461                                               ;81E662|A26104  |      ;
     LDA.B #$00                                                 ;81E665|A900    |      ;
     STA.W $0191                                                ;81E667|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E66A|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E66A|225F9383|83935F;
     REP #$30                                                   ;81E66E|C230    |      ;
     LDA.W #$0040                                               ;81E670|A94000  |      ;
     EOR.W #$FFFF                                               ;81E673|49FFFF  |      ;
@@ -12671,7 +12671,7 @@ subPlayerInteraction81D593_0x40:
     LDX.W #$0463                                               ;81E684|A26304  |      ;
     LDA.B #$00                                                 ;81E687|A900    |      ;
     STA.W $0191                                                ;81E689|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E68C|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E68C|225F9383|83935F;
     REP #$30                                                   ;81E690|C230    |      ;
     LDA.W #$0040                                               ;81E692|A94000  |      ;
     EOR.W #$FFFF                                               ;81E695|49FFFF  |      ;
@@ -12685,7 +12685,7 @@ subPlayerInteraction81D593_0x40:
  
  
 .return:
-    JSL.L fTextUnknown_8393F9                                  ;81E6A0|22F99383|8393F9;
+    JSL.L fDialog_Unknown_8393F9                               ;81E6A0|22F99383|8393F9;
     SEP #$20                                                   ;81E6A4|E220    |      ;
     LDA.B #$01                                                 ;81E6A6|A901    |      ;
     STA.W $019A                                                ;81E6A8|8D9A01  |00019A;
@@ -12774,7 +12774,7 @@ subPlayerInteraction81D593_0x42:
     STA.W $019A                                                ;81E74D|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E750|A900    |      ;
     STA.W $0191                                                ;81E752|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E755|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E755|225F9383|83935F;
     SEP #$20                                                   ;81E759|E220    |      ;
     LDA.B #$02                                                 ;81E75B|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81E75D|8D6F09  |00096F;
@@ -12961,7 +12961,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E8AC|E220    |      ;
     LDA.B #$00                                                 ;81E8AE|A900    |      ;
     STA.W $0191                                                ;81E8B0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E8B3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E8B3|225F9383|83935F;
     SEP #$20                                                   ;81E8B7|E220    |      ;
     LDA.B #$02                                                 ;81E8B9|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81E8BB|8D6F09  |00096F;
@@ -12973,7 +12973,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E8C4|E220    |      ;
     LDA.B #$00                                                 ;81E8C6|A900    |      ;
     STA.W $0191                                                ;81E8C8|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E8CB|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E8CB|225F9383|83935F;
     SEP #$20                                                   ;81E8CF|E220    |      ;
     LDA.B #$05                                                 ;81E8D1|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E8D3|8D6F09  |00096F;
@@ -12985,7 +12985,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E8DC|E220    |      ;
     LDA.B #$00                                                 ;81E8DE|A900    |      ;
     STA.W $0191                                                ;81E8E0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E8E3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E8E3|225F9383|83935F;
     SEP #$20                                                   ;81E8E7|E220    |      ;
     LDA.B #$05                                                 ;81E8E9|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E8EB|8D6F09  |00096F;
@@ -13000,7 +13000,7 @@ subPlayerInteraction81D593_0x43:
     STA.W $019A                                                ;81E8FA|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E8FD|A900    |      ;
     STA.W $0191                                                ;81E8FF|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E902|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E902|225F9383|83935F;
     SEP #$20                                                   ;81E906|E220    |      ;
     LDA.B #$05                                                 ;81E908|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E90A|8D6F09  |00096F;
@@ -13024,7 +13024,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$030F                                               ;81E92A|A20F03  |      ;
     LDA.B #$00                                                 ;81E92D|A900    |      ;
     STA.W $0191                                                ;81E92F|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E932|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E932|225F9383|83935F;
     SEP #$20                                                   ;81E936|E220    |      ;
     LDA.B #$03                                                 ;81E938|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81E93A|8D6F09  |00096F;
@@ -13037,7 +13037,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$0309                                               ;81E947|A20903  |      ;
     LDA.B #$00                                                 ;81E94A|A900    |      ;
     STA.W $0191                                                ;81E94C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81E94F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81E94F|225F9383|83935F;
     SEP #$20                                                   ;81E953|E220    |      ;
     LDA.B #$05                                                 ;81E955|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81E957|8D6F09  |00096F;
@@ -13201,7 +13201,7 @@ subPlayerInteraction81D593_0x43:
     STA.W $019A                                                ;81EAA4|8D9A01  |00019A;
     LDA.B #$00                                                 ;81EAA7|A900    |      ;
     STA.W $0191                                                ;81EAA9|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81EAAC|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81EAAC|225F9383|83935F;
     SEP #$20                                                   ;81EAB0|E220    |      ;
     LDA.B #$08                                                 ;81EAB2|A908    |      ;
     STA.W nPlayerInteractionArg1                               ;81EAB4|8D6F09  |00096F;
@@ -13225,7 +13225,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$014B                                               ;81EAD4|A24B01  |      ;
     LDA.B #$00                                                 ;81EAD7|A900    |      ;
     STA.W $0191                                                ;81EAD9|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81EADC|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81EADC|225F9383|83935F;
     SEP #$20                                                   ;81EAE0|E220    |      ;
     LDA.B #$09                                                 ;81EAE2|A909    |      ;
     STA.W nPlayerInteractionArg1                               ;81EAE4|8D6F09  |00096F;
@@ -13238,7 +13238,7 @@ subPlayerInteraction81D593_0x43:
     LDX.W #$014C                                               ;81EAF1|A24C01  |      ;
     LDA.B #$00                                                 ;81EAF4|A900    |      ;
     STA.W $0191                                                ;81EAF6|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81EAF9|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81EAF9|225F9383|83935F;
     SEP #$20                                                   ;81EAFD|E220    |      ;
     LDA.B #$0A                                                 ;81EAFF|A90A    |      ;
     STA.W nPlayerInteractionArg1                               ;81EB01|8D6F09  |00096F;
@@ -13455,7 +13455,7 @@ subPlayerInteraction81D593_0x44:
     STA.W $019A                                                ;81EC9E|8D9A01  |00019A;
     LDA.B #$00                                                 ;81ECA1|A900    |      ;
     STA.W $0191                                                ;81ECA3|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81ECA6|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81ECA6|225F9383|83935F;
     SEP #$20                                                   ;81ECAA|E220    |      ;
     LDA.B #$02                                                 ;81ECAC|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81ECAE|8D6F09  |00096F;
@@ -13469,7 +13469,7 @@ subPlayerInteraction81D593_0x44:
     STA.W $019A                                                ;81ECBD|8D9A01  |00019A;
     LDA.B #$00                                                 ;81ECC0|A900    |      ;
     STA.W $0191                                                ;81ECC2|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81ECC5|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81ECC5|225F9383|83935F;
     SEP #$20                                                   ;81ECC9|E220    |      ;
     LDA.B #$05                                                 ;81ECCB|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81ECCD|8D6F09  |00096F;
@@ -13493,7 +13493,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$030F                                               ;81ECED|A20F03  |      ;
     LDA.B #$00                                                 ;81ECF0|A900    |      ;
     STA.W $0191                                                ;81ECF2|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81ECF5|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81ECF5|225F9383|83935F;
     SEP #$20                                                   ;81ECF9|E220    |      ;
     LDA.B #$03                                                 ;81ECFB|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81ECFD|8D6F09  |00096F;
@@ -13506,7 +13506,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$0309                                               ;81ED0A|A20903  |      ;
     LDA.B #$00                                                 ;81ED0D|A900    |      ;
     STA.W $0191                                                ;81ED0F|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81ED12|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81ED12|225F9383|83935F;
     SEP #$20                                                   ;81ED16|E220    |      ;
     LDA.B #$05                                                 ;81ED18|A905    |      ;
     STA.W nPlayerInteractionArg1                               ;81ED1A|8D6F09  |00096F;
@@ -13670,7 +13670,7 @@ subPlayerInteraction81D593_0x44:
     STA.W $019A                                                ;81EE67|8D9A01  |00019A;
     LDA.B #$00                                                 ;81EE6A|A900    |      ;
     STA.W $0191                                                ;81EE6C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81EE6F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81EE6F|225F9383|83935F;
     SEP #$20                                                   ;81EE73|E220    |      ;
     LDA.B #$08                                                 ;81EE75|A908    |      ;
     STA.W nPlayerInteractionArg1                               ;81EE77|8D6F09  |00096F;
@@ -13694,7 +13694,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$014A                                               ;81EE97|A24A01  |      ;
     LDA.B #$00                                                 ;81EE9A|A900    |      ;
     STA.W $0191                                                ;81EE9C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81EE9F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81EE9F|225F9383|83935F;
     SEP #$20                                                   ;81EEA3|E220    |      ;
     LDA.B #$09                                                 ;81EEA5|A909    |      ;
     STA.W nPlayerInteractionArg1                               ;81EEA7|8D6F09  |00096F;
@@ -13707,7 +13707,7 @@ subPlayerInteraction81D593_0x44:
     LDX.W #$014C                                               ;81EEB4|A24C01  |      ;
     LDA.B #$00                                                 ;81EEB7|A900    |      ;
     STA.W $0191                                                ;81EEB9|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81EEBC|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81EEBC|225F9383|83935F;
     SEP #$20                                                   ;81EEC0|E220    |      ;
     LDA.B #$0A                                                 ;81EEC2|A90A    |      ;
     STA.W nPlayerInteractionArg1                               ;81EEC4|8D6F09  |00096F;
@@ -13879,7 +13879,7 @@ subPlayerInteraction81D593_0x45:
     STA.W $019A                                                ;81F01A|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F01D|A900    |      ;
     STA.W $0191                                                ;81F01F|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F022|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F022|225F9383|83935F;
     SEP #$20                                                   ;81F026|E220    |      ;
     LDA.B #$03                                                 ;81F028|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F02A|8D6F09  |00096F;
@@ -13967,7 +13967,7 @@ subPlayerInteraction81D593_0x46:
  
   + LDA.B #$00                                                 ;81F0BF|A900    |      ;
     STA.W $0191                                                ;81F0C1|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F0C4|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F0C4|225F9383|83935F;
     SEP #$20                                                   ;81F0C8|E220    |      ;
     LDA.B #$02                                                 ;81F0CA|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F0CC|8D6F09  |00096F;
@@ -14085,7 +14085,7 @@ subPlayerInteraction81D593_0x47:
     STA.W $019A                                                ;81F19B|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F19E|A900    |      ;
     STA.W $0191                                                ;81F1A0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F1A3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F1A3|225F9383|83935F;
     SEP #$20                                                   ;81F1A7|E220    |      ;
     LDA.B #$03                                                 ;81F1A9|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F1AB|8D6F09  |00096F;
@@ -14099,7 +14099,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0137                                               ;81F1B8|A23701  |      ;
     LDA.B #$00                                                 ;81F1BB|A900    |      ;
     STA.W $0191                                                ;81F1BD|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F1C0|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F1C0|225F9383|83935F;
     SEP #$20                                                   ;81F1C4|E220    |      ;
     LDA.B #$01                                                 ;81F1C6|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F1C8|8D6F09  |00096F;
@@ -14197,7 +14197,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0135                                               ;81F279|A23501  |      ;
     LDA.B #$00                                                 ;81F27C|A900    |      ;
     STA.W $0191                                                ;81F27E|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F281|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F281|225F9383|83935F;
     SEP #$20                                                   ;81F285|E220    |      ;
     LDA.B #$01                                                 ;81F287|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F289|8D6F09  |00096F;
@@ -14217,7 +14217,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0304                                               ;81F2A8|A20403  |      ;
     LDA.B #$00                                                 ;81F2AB|A900    |      ;
     STA.W $0191                                                ;81F2AD|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F2B0|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F2B0|225F9383|83935F;
     SEP #$20                                                   ;81F2B4|E220    |      ;
     LDA.B #$01                                                 ;81F2B6|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F2B8|8D6F09  |00096F;
@@ -14231,7 +14231,7 @@ subPlayerInteraction81D593_0x47:
     LDX.W #$0136                                               ;81F2C4|A23601  |      ;
     LDA.B #$00                                                 ;81F2C7|A900    |      ;
     STA.W $0191                                                ;81F2C9|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F2CC|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F2CC|225F9383|83935F;
     SEP #$20                                                   ;81F2D0|E220    |      ;
     LDA.B #$01                                                 ;81F2D2|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F2D4|8D6F09  |00096F;
@@ -14292,7 +14292,7 @@ subPlayerInteraction81D593_0x48:
     STA.W $019A                                                ;81F332|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F335|A900    |      ;
     STA.W $0191                                                ;81F337|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F33A|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F33A|225F9383|83935F;
     SEP #$20                                                   ;81F33E|E220    |      ;
     LDA.B #$01                                                 ;81F340|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F342|8D6F09  |00096F;
@@ -14325,7 +14325,7 @@ subPlayerInteraction81D593_0x48:
     LDX.W #$025C                                               ;81F37E|A25C02  |      ;
     LDA.B #$00                                                 ;81F381|A900    |      ;
     STA.W $0191                                                ;81F383|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F386|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F386|225F9383|83935F;
     SEP #$20                                                   ;81F38A|E220    |      ;
     LDA.B #$03                                                 ;81F38C|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F38E|8D6F09  |00096F;
@@ -14416,7 +14416,7 @@ subPlayerInteraction81D593_0x49:
     LDX.W #$0300                                               ;81F436|A20003  |      ;
     LDA.B #$00                                                 ;81F439|A900    |      ;
     STA.W $0191                                                ;81F43B|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F43E|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F43E|225F9383|83935F;
     SEP #$20                                                   ;81F442|E220    |      ;
     LDA.B #$01                                                 ;81F444|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81F446|8D6F09  |00096F;
@@ -14628,7 +14628,7 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$024B                                               ;81F5D7|A24B02  |      ;
     LDA.B #$00                                                 ;81F5DA|A900    |      ;
     STA.W $0191                                                ;81F5DC|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F5DF|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F5DF|225F9383|83935F;
     SEP #$20                                                   ;81F5E3|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F5E5|EE6F09  |00096F;
     JMP.W fReturn_81F6D6                                       ;81F5E8|4CD6F6  |81F6D6;
@@ -14661,7 +14661,7 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$024C                                               ;81F61D|A24C02  |      ;
     LDA.B #$00                                                 ;81F620|A900    |      ;
     STA.W $0191                                                ;81F622|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F625|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F625|225F9383|83935F;
     SEP #$20                                                   ;81F629|E220    |      ;
     LDA.B #$02                                                 ;81F62B|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F62D|8D6F09  |00096F;
@@ -14675,7 +14675,7 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$024D                                               ;81F63A|A24D02  |      ;
     LDA.B #$00                                                 ;81F63D|A900    |      ;
     STA.W $0191                                                ;81F63F|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F642|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F642|225F9383|83935F;
     SEP #$20                                                   ;81F646|E220    |      ;
     LDA.B #$03                                                 ;81F648|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F64A|8D6F09  |00096F;
@@ -14689,7 +14689,7 @@ subPlayerInteraction81D593_0x51:
     LDX.W #$0213                                               ;81F657|A21302  |      ;
     LDA.B #$00                                                 ;81F65A|A900    |      ;
     STA.W $0191                                                ;81F65C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F65F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F65F|225F9383|83935F;
     SEP #$20                                                   ;81F663|E220    |      ;
     LDA.B #$03                                                 ;81F665|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F667|8D6F09  |00096F;
@@ -14780,7 +14780,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$024A                                               ;81F6FE|A24A02  |      ;
     LDA.B #$00                                                 ;81F701|A900    |      ;
     STA.W $0191                                                ;81F703|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F706|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F706|225F9383|83935F;
     SEP #$20                                                   ;81F70A|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F70C|EE6F09  |00096F;
     JMP.W .return                                              ;81F70F|4CFEF7  |81F7FE;
@@ -14813,7 +14813,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$024C                                               ;81F744|A24C02  |      ;
     LDA.B #$00                                                 ;81F747|A900    |      ;
     STA.W $0191                                                ;81F749|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F74C|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F74C|225F9383|83935F;
     SEP #$20                                                   ;81F750|E220    |      ;
     LDA.B #$02                                                 ;81F752|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F754|8D6F09  |00096F;
@@ -14827,7 +14827,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$024D                                               ;81F761|A24D02  |      ;
     LDA.B #$00                                                 ;81F764|A900    |      ;
     STA.W $0191                                                ;81F766|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F769|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F769|225F9383|83935F;
     SEP #$20                                                   ;81F76D|E220    |      ;
     LDA.B #$03                                                 ;81F76F|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F771|8D6F09  |00096F;
@@ -14841,7 +14841,7 @@ subPlayerInteraction81D593_0x52:
     LDX.W #$0213                                               ;81F77E|A21302  |      ;
     LDA.B #$00                                                 ;81F781|A900    |      ;
     STA.W $0191                                                ;81F783|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F786|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F786|225F9383|83935F;
     SEP #$20                                                   ;81F78A|E220    |      ;
     LDA.B #$03                                                 ;81F78C|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F78E|8D6F09  |00096F;
@@ -14981,7 +14981,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0455                                               ;81F87C|A25504  |      ;
     LDA.B #$00                                                 ;81F87F|A900    |      ;
     STA.W $0191                                                ;81F881|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F884|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F884|225F9383|83935F;
     SEP #$20                                                   ;81F888|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F88A|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81F88D|4C1EF9  |81F91E;
@@ -15017,7 +15017,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0456                                               ;81F8BF|A25604  |      ;
     LDA.B #$00                                                 ;81F8C2|A900    |      ;
     STA.W $0191                                                ;81F8C4|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F8C7|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F8C7|225F9383|83935F;
     REP #$30                                                   ;81F8CB|C230    |      ;
     LDA.W #$0040                                               ;81F8CD|A94000  |      ;
     EOR.W #$FFFF                                               ;81F8D0|49FFFF  |      ;
@@ -15033,7 +15033,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0457                                               ;81F8E1|A25704  |      ;
     LDA.B #$00                                                 ;81F8E4|A900    |      ;
     STA.W $0191                                                ;81F8E6|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F8E9|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F8E9|225F9383|83935F;
     REP #$30                                                   ;81F8ED|C230    |      ;
     LDA.W #$0040                                               ;81F8EF|A94000  |      ;
     EOR.W #$FFFF                                               ;81F8F2|49FFFF  |      ;
@@ -15049,7 +15049,7 @@ subPlayerInteraction81D593_0x54:
     LDX.W #$0458                                               ;81F903|A25804  |      ;
     LDA.B #$00                                                 ;81F906|A900    |      ;
     STA.W $0191                                                ;81F908|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F90B|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F90B|225F9383|83935F;
     REP #$30                                                   ;81F90F|C230    |      ;
     LDA.W #$0040                                               ;81F911|A94000  |      ;
     EOR.W #$FFFF                                               ;81F914|49FFFF  |      ;
@@ -15063,7 +15063,7 @@ subPlayerInteraction81D593_0x54:
  
  
 .return:
-    JSL.L fTextUnknown_8393F9                                  ;81F91F|22F99383|8393F9;
+    JSL.L fDialog_Unknown_8393F9                               ;81F91F|22F99383|8393F9;
     SEP #$20                                                   ;81F923|E220    |      ;
     LDA.B #$01                                                 ;81F925|A901    |      ;
     STA.W $019A                                                ;81F927|8D9A01  |00019A;
@@ -15091,7 +15091,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$0459                                               ;81F954|A25904  |      ;
     LDA.B #$00                                                 ;81F957|A900    |      ;
     STA.W $0191                                                ;81F959|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F95C|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F95C|225F9383|83935F;
     SEP #$20                                                   ;81F960|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F962|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81F965|4C45FA  |81FA45;
@@ -15133,7 +15133,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045A                                               ;81F9A2|A25A04  |      ;
     LDA.B #$00                                                 ;81F9A5|A900    |      ;
     STA.W $0191                                                ;81F9A7|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F9AA|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F9AA|225F9383|83935F;
     REP #$30                                                   ;81F9AE|C230    |      ;
     LDA.W #$0040                                               ;81F9B0|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9B3|49FFFF  |      ;
@@ -15149,7 +15149,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045B                                               ;81F9C4|A25B04  |      ;
     LDA.B #$00                                                 ;81F9C7|A900    |      ;
     STA.W $0191                                                ;81F9C9|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F9CC|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F9CC|225F9383|83935F;
     REP #$30                                                   ;81F9D0|C230    |      ;
     LDA.W #$0040                                               ;81F9D2|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9D5|49FFFF  |      ;
@@ -15165,7 +15165,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045C                                               ;81F9E6|A25C04  |      ;
     LDA.B #$00                                                 ;81F9E9|A900    |      ;
     STA.W $0191                                                ;81F9EB|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81F9EE|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81F9EE|225F9383|83935F;
     REP #$30                                                   ;81F9F2|C230    |      ;
     LDA.W #$0040                                               ;81F9F4|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9F7|49FFFF  |      ;
@@ -15181,7 +15181,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045D                                               ;81FA08|A25D04  |      ;
     LDA.B #$00                                                 ;81FA0B|A900    |      ;
     STA.W $0191                                                ;81FA0D|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81FA10|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81FA10|225F9383|83935F;
     REP #$30                                                   ;81FA14|C230    |      ;
     LDA.W #$0040                                               ;81FA16|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA19|49FFFF  |      ;
@@ -15197,7 +15197,7 @@ subPlayerInteraction81D593_0x55:
     LDX.W #$045E                                               ;81FA2A|A25E04  |      ;
     LDA.B #$00                                                 ;81FA2D|A900    |      ;
     STA.W $0191                                                ;81FA2F|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81FA32|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81FA32|225F9383|83935F;
     REP #$30                                                   ;81FA36|C230    |      ;
     LDA.W #$0040                                               ;81FA38|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA3B|49FFFF  |      ;
@@ -15211,7 +15211,7 @@ subPlayerInteraction81D593_0x55:
  
  
 .return:
-    JSL.L fTextUnknown_8393F9                                  ;81FA46|22F99383|8393F9;
+    JSL.L fDialog_Unknown_8393F9                               ;81FA46|22F99383|8393F9;
     SEP #$20                                                   ;81FA4A|E220    |      ;
     LDA.B #$01                                                 ;81FA4C|A901    |      ;
     STA.W $019A                                                ;81FA4E|8D9A01  |00019A;
@@ -15257,7 +15257,7 @@ subPlayerInteraction81D593_0x57:
     STA.W $019A                                                ;81FA9B|8D9A01  |00019A;
     LDA.B #$00                                                 ;81FA9E|A900    |      ;
     STA.W $0191                                                ;81FAA0|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;81FAA3|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;81FAA3|225F9383|83935F;
     REP #$30                                                   ;81FAA7|C230    |      ;
     LDA.W #$0040                                               ;81FAA9|A94000  |      ;
     EOR.W #$FFFF                                               ;81FAAC|49FFFF  |      ;
