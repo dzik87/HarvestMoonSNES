@@ -220,7 +220,7 @@ fGraphicsTransferData:
     REP #$20                                                   ;838181|C220    |      ;
     LDA.W #$0080                                               ;838183|A98000  |      ; A = 0x80
     PHX                                                        ;838186|DA      |      ; X -> stack1
-    JSL.L fSystem_PrepareTransfer                              ;838187|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;838187|22338A80|808A33;
     SEP #$20                                                   ;83818B|E220    |      ;
     LDA.B #$07                                                 ;83818D|A907    |      ;
     STA.B $27                                                  ;83818F|8527    |000027; $27 = 0x07
@@ -242,7 +242,7 @@ fGraphicsTransferData:
     STA.B ptrUnknown0x72                                       ;8381AB|8572    |000072;
     REP #$20                                                   ;8381AD|C220    |      ;
     LDA.W #$0080                                               ;8381AF|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;8381B2|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;8381B2|22338A80|808A33;
     RTL                                                        ;8381B6|6B      |      ;
  
  
@@ -257,7 +257,7 @@ fGraphicsUnknown_8381B7:
     REP #$20                                                   ;8381C6|C220    |      ;
     LDA.W #$0080                                               ;8381C8|A98000  |      ; A = 0x80
     PHX                                                        ;8381CB|DA      |      ; X -> stack1
-    JSL.L fSystem_PrepareTransfer                              ;8381CC|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;8381CC|22338A80|808A33;
     SEP #$20                                                   ;8381D0|E220    |      ;
     LDA.B #$07                                                 ;8381D2|A907    |      ;
     STA.B $27                                                  ;8381D4|8527    |000027; $27 = 0x07
@@ -276,7 +276,7 @@ fGraphicsUnknown_8381B7:
     ADC.W #$0004                                               ;8381EB|690400  |      ;
     STA.B ptrUnknown0x72                                       ;8381EE|8572    |000072; $72 += 0x04
     LDA.W #$0080                                               ;8381F0|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;8381F3|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;8381F3|22338A80|808A33;
     RTL                                                        ;8381F7|6B      |      ;
  
  
@@ -409,7 +409,7 @@ fAudioUnknown_8382C6:
     STA.W $0117                                                ;8382E2|8D1701  |000117;
     REP #$30                                                   ;8382E5|C230    |      ;
     LDA.W #$00B4                                               ;8382E7|A9B400  |      ;
-    JSL.L fWaitForNMITimes                                     ;8382EA|225D8680|80865D;
+    JSL.L fCore_WaitForNMITimes                                ;8382EA|225D8680|80865D;
     SEP #$20                                                   ;8382EE|E220    |      ;
     LDA.W $098B                                                ;8382F0|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;8382F3|8522    |000022;
@@ -441,7 +441,7 @@ fAudioUnknown_8382FE:
     REP #$30                                                   ;838329|C230    |      ;
     PLY                                                        ;83832B|7A      |      ;
     TYA                                                        ;83832C|98      |      ;
-    JSL.L fWaitForNMITimes                                     ;83832D|225D8680|80865D;
+    JSL.L fCore_WaitForNMITimes                                ;83832D|225D8680|80865D;
     RTL                                                        ;838331|6B      |      ;
  
  
@@ -468,7 +468,7 @@ fAudioUnknown_83833E:
     INC A                                                      ;838353|1A      |      ;
     SEP #$20                                                   ;838354|E220    |      ;
     JSL.L fAudioUnknown_8389C7                                 ;838356|22C78983|8389C7;
-    JSL.L fWaitForNextNMI                                      ;83835A|22458680|808645;
+    JSL.L fCore_WaitForNextNMI                                 ;83835A|22458680|808645;
  
   + SEP #$20                                                   ;83835E|E220    |      ;
     LDA.B #$00                                                 ;838360|A900    |      ;
@@ -2193,7 +2193,7 @@ aAudioUnknown_83927F:
 aAudioUnknown_8392B1:
     db $17,$18,$19,$1A,$15,$06,$0A,$00,$00,$00                 ;8392B1|        |      ;
  
-fTextUnknown_8392BB:
+fDialog_Unknown_8392BB:
     REP #$30                                                   ;8392BB|C230    |      ;
     REP #$20                                                   ;8392BD|C220    |      ;
     LDA.W #$CB05                                               ;8392BF|A905CB  |      ;
@@ -2221,8 +2221,8 @@ fTextUnknown_8392BB:
     STA.B ptrUnknown0x72+2                                     ;8392F2|8574    |000074;
     REP #$20                                                   ;8392F4|C220    |      ;
     LDA.W #$0080                                               ;8392F6|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;8392F9|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;8392FD|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;8392F9|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;8392FD|22B28A80|808AB2;
     SEP #$20                                                   ;839301|E220    |      ;
     LDA.B #$00                                                 ;839303|A900    |      ;
     STA.B $27                                                  ;839305|8527    |000027;
@@ -2239,12 +2239,12 @@ fTextUnknown_8392BB:
     STA.B ptrUnknown0x72+2                                     ;83931D|8574    |000074;
     REP #$20                                                   ;83931F|C220    |      ;
     LDA.W #$0080                                               ;839321|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;839324|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;839328|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;839324|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;839328|22B28A80|808AB2;
     RTL                                                        ;83932C|6B      |      ;
  
  
-fTextUnknown_83932D:
+fDialog_Unknown_83932D:
     SEP #$20                                                   ;83932D|E220    |      ;
     LDA.B #$06                                                 ;83932F|A906    |      ;
     STA.B $27                                                  ;839331|8527    |000027;
@@ -2261,15 +2261,15 @@ fTextUnknown_83932D:
     STA.B ptrUnknown0x72+2                                     ;839349|8574    |000074;
     REP #$20                                                   ;83934B|C220    |      ;
     LDA.W #$0080                                               ;83934D|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;839350|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;839350|22338A80|808A33;
     SEP #$20                                                   ;839354|E220    |      ;
     LDA.B #$07                                                 ;839356|A907    |      ;
     STA.B $27                                                  ;839358|8527    |000027;
-    JSL.L fSystem_RemoveTransfer                               ;83935A|22A08A80|808AA0;
+    JSL.L fCore_RemoveTransfer                                 ;83935A|22A08A80|808AA0;
     RTL                                                        ;83935E|6B      |      ;
  
  
-fTextLoadDialog:
+fDialog_DialogHandler:
     REP #$30                                                   ;83935F|C230    |      ; X: nDialogPointerIndex
     STX.W nCurrentDialogPointerIndex                           ;839361|8E8301  |000183;
     LDA.W #$5000                                               ;839364|A90050  |      ;
@@ -2293,12 +2293,12 @@ fTextLoadDialog:
     CLC                                                        ;839393|18      |      ;
     ADC.W nCurrentDialogPointerIndex                           ;839394|6D8301  |000183;
     TAX                                                        ;839397|AA      |      ;
-    LDA.L aTextDialogPointers,X                                ;839398|BFF69B83|839BF6;
+    LDA.L aDialogPointers,X                                    ;839398|BFF69B83|839BF6;
     STA.B ptrCurrentDialog                                     ;83939C|8501    |000001;
     INX                                                        ;83939E|E8      |      ;
     INX                                                        ;83939F|E8      |      ;
     SEP #$20                                                   ;8393A0|E220    |      ;
-    LDA.L aTextDialogPointers,X                                ;8393A2|BFF69B83|839BF6;
+    LDA.L aDialogPointers,X                                    ;8393A2|BFF69B83|839BF6;
     STA.B ptrCurrentDialog+2                                   ;8393A6|8503    |000003;
     SEP #$20                                                   ;8393A8|E220    |      ;
     LDA.W $0191                                                ;8393AA|AD9101  |000191;
@@ -2342,7 +2342,7 @@ fTextLoadDialog:
     RTL                                                        ;8393F8|6B      |      ;
  
  
-fTextUnknown_8393F9:
+fDialog_Unknown_8393F9:
     SEP #$20                                                   ;8393F9|E220    |      ;
     REP #$10                                                   ;8393FB|C210    |      ;
     STZ.W $019B                                                ;8393FD|9C9B01  |00019B;
@@ -2366,7 +2366,7 @@ fTextUnknown_8393F9:
     CLC                                                        ;83941B|18      |      ;
     ADC.B n16TempVar1                                          ;83941C|657E    |00007E;
     STA.W $0146                                                ;83941E|8D4601  |000146;
-    JSL.L fTextUnknown_83932D                                  ;839421|222D9383|83932D;
+    JSL.L fDialog_Unknown_83932D                               ;839421|222D9383|83932D;
     REP #$20                                                   ;839425|C220    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;839427|AD9601  |000196;
     AND.W #$0020                                               ;83942A|292000  |      ;
@@ -2383,30 +2383,30 @@ fTextUnknown_8393F9:
     RTL                                                        ;839446|6B      |      ;
  
  
-fTextUnknown_839447:
+fDialog_Unknown_839447:
     REP #$30                                                   ;839447|C230    |      ;
-    JSR.W fTextUnknown_839495                                  ;839449|209594  |839495;
+    JSR.W fDialog_Unknown_839495                               ;839449|209594  |839495;
     RTL                                                        ;83944C|6B      |      ;
  
  
-aTextUnknown_83944D:
+aDialogUnknown_83944D:
     db $10,$50,$70,$51,$50,$53,$70,$50,$50,$52                 ;83944D|        |      ;
  
-aTextUnknown_839457:
+aDialogUnknown_839457:
     dw $21A0,$21A1,$21B0,$21B1                                 ;839457|        |      ;
  
-aTextUnknown_83945F:
+aDialogUnknown_83945F:
     dw $21A2,$21A3,$21B2,$21B3                                 ;83945F|        |      ;
  
-aTextDialogPointerIndexes_839467:
+aDialogDialogPointerIndexes_839467:
     dw $000F,$0010,$0011,$0012,$0013,$0014                     ;839467|        |      ; 0x0B * [n16 nDialogPointerIndex]
     dw $0015,$0016,$0017,$0018,$0019                           ;839473|        |      ;
  
-aTextUnknown_83947D:
+aDialogUnknown_83947D:
     dw $7088,$70C8,$7108,$7148,$7188,$71C8                     ;83947D|        |      ;
     dw $7208,$7248,$7288,$72C8,$7308,$7090                     ;839489|        |      ;
  
-fTextUnknown_839495:
+fDialog_Unknown_839495:
     REP #$30                                                   ;839495|C230    |      ;
     STA.B n16TempVar1                                          ;839497|857E    |00007E;
     LDA.W $018B                                                ;839499|AD8B01  |00018B;
@@ -2425,13 +2425,13 @@ fTextUnknown_839495:
     BNE +                                                      ;8394B7|D00B    |8394C4;
     REP #$20                                                   ;8394B9|C220    |      ;
     LDA.W #$0000                                               ;8394BB|A90000  |      ;
-    JSL.L fTextUnknown_8394D7                                  ;8394BE|22D79483|8394D7;
+    JSL.L fDialog_Unknown_8394D7                               ;8394BE|22D79483|8394D7;
     BRA .return                                                ;8394C2|8009    |8394CD;
  
  
   + REP #$20                                                   ;8394C4|C220    |      ;
     LDA.W #$0001                                               ;8394C6|A90100  |      ;
-    JSL.L fTextUnknown_8394D7                                  ;8394C9|22D79483|8394D7;
+    JSL.L fDialog_Unknown_8394D7                               ;8394C9|22D79483|8394D7;
  
 .return:
     SEP #$20                                                   ;8394CD|E220    |      ;
@@ -2441,7 +2441,7 @@ fTextUnknown_839495:
     RTS                                                        ;8394D6|60      |      ;
  
  
-fTextUnknown_8394D7:
+fDialog_Unknown_8394D7:
     REP #$30                                                   ;8394D7|C230    |      ;
     PHA                                                        ;8394D9|48      |      ;
     SEP #$20                                                   ;8394DA|E220    |      ;
@@ -2456,7 +2456,7 @@ fTextUnknown_8394D7:
   + REP #$20                                                   ;8394EA|C220    |      ;
     ASL A                                                      ;8394EC|0A      |      ;
     TAX                                                        ;8394ED|AA      |      ;
-    LDA.L aTextUnknown_83947D,X                                ;8394EE|BF7D9483|83947D;
+    LDA.L aDialogUnknown_83947D,X                              ;8394EE|BF7D9483|83947D;
     TAX                                                        ;8394F2|AA      |      ;
     REP #$20                                                   ;8394F3|C220    |      ;
     PLA                                                        ;8394F5|68      |      ;
@@ -2483,13 +2483,13 @@ fTextUnknown_8394D7:
     RTL                                                        ;83951B|6B      |      ;
  
  
-fGameEngine_DialogHandler:
+fDialog_IterateText:
     SEP #$20                                                   ;83951C|E220    |      ;
     REP #$10                                                   ;83951E|C210    |      ;
     LDA.W $019B                                                ;839520|AD9B01  |00019B;
     AND.B #$20                                                 ;839523|2920    |      ;
     BEQ +                                                      ;839525|F003    |83952A;
-    JMP.W fTextUnknown_839447                                  ;839527|4C4794  |839447;
+    JMP.W fDialog_Unknown_839447                               ;839527|4C4794  |839447;
  
  
   + LDA.W $019B                                                ;83952A|AD9B01  |00019B;
@@ -2564,7 +2564,7 @@ fGameEngine_DialogHandler:
  
 .label5:
     STX.W $0190                                                ;8395A4|8E9001  |000190;
-    JSL.L fTextTransferGlyph                                   ;8395A7|22239883|839823;
+    JSL.L fDialog_TransferGlyph                                ;8395A7|22239883|839823;
     SEP #$20                                                   ;8395AB|E220    |      ;
     REP #$10                                                   ;8395AD|C210    |      ;
     LDA.B #$03                                                 ;8395AF|A903    |      ;
@@ -2594,7 +2594,7 @@ fGameEngine_DialogHandler:
     LDA.W $0190                                                ;8395DE|AD9001  |000190;
     REP #$30                                                   ;8395E1|C230    |      ;
     TAX                                                        ;8395E3|AA      |      ;
-    JSR.W fTextUnknown_839838                                  ;8395E4|203898  |839838;
+    JSR.W fDialog_Unknown839838                                ;8395E4|203898  |839838;
  
 .return:
     SEP #$20                                                   ;8395E7|E220    |      ;
@@ -2616,7 +2616,7 @@ fGameEngine_DialogHandler:
     STA.W $0185                                                ;839600|8D8501  |000185; $0185 = 0x5528
     REP #$20                                                   ;839603|C220    |      ;
     LDA.W #$00A2                                               ;839605|A9A200  |      ; A = 0xA2
-    JSR.W fTextNextScreenHandler_83975F                        ;839608|205F97  |83975F;
+    JSR.W fDialog_NextScreenHandler                            ;839608|205F97  |83975F;
     BRA .justReturn                                            ;83960B|80E3    |8395F0;
  
  
@@ -2627,7 +2627,7 @@ fGameEngine_DialogHandler:
     STA.W nCurrentTextIndex                                    ;839613|8D8701  |000187; nCurrentTextIndex++
     REP #$30                                                   ;839616|C230    |      ;
     LDX.W #$0001                                               ;839618|A20100  |      ;
-    JSR.W fTextUnknown_839838                                  ;83961B|203898  |839838;
+    JSR.W fDialog_Unknown839838                                ;83961B|203898  |839838;
     JMP.W .getCurrentLetter                                    ;83961E|4C3495  |839534;
  
  
@@ -2684,7 +2684,7 @@ fGameEngine_DialogHandler:
     LDA.W $018C                                                ;83967C|AD8C01  |00018C;
     DEC A                                                      ;83967F|3A      |      ;
     STA.W $018C                                                ;839680|8D8C01  |00018C;
-    JSL.L fTextUnknown_8397A6                                  ;839683|22A69783|8397A6;
+    JSL.L fDialog_Unknown_8397A6                               ;839683|22A69783|8397A6;
     SEP #$20                                                   ;839687|E220    |      ;
     STZ.W $0190                                                ;839689|9C9001  |000190;
     SEP #$20                                                   ;83968C|E220    |      ;
@@ -2747,7 +2747,7 @@ fGameEngine_DialogHandler:
     TAY                                                        ;8396F3|A8      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;8396F4|B772    |000072;
     LDX.W #$0001                                               ;8396F6|A20100  |      ;
-    JSL.L fTextTransferGlyph                                   ;8396F9|22239883|839823;
+    JSL.L fDialog_TransferGlyph                                ;8396F9|22239883|839823;
     SEP #$20                                                   ;8396FD|E220    |      ;
     LDA.B #$01                                                 ;8396FF|A901    |      ;
     STA.W $0190                                                ;839701|8D9001  |000190;
@@ -2789,7 +2789,7 @@ fGameEngine_DialogHandler:
     STA.W $0185                                                ;839744|8D8501  |000185;
     REP #$20                                                   ;839747|C220    |      ;
     LDA.W #$0275                                               ;839749|A97502  |      ;
-    JSR.W fTextNextScreenHandler_83975F                        ;83974C|205F97  |83975F;
+    JSR.W fDialog_NextScreenHandler                            ;83974C|205F97  |83975F;
     JMP.W .justReturn                                          ;83974F|4CF095  |8395F0;
  
  
@@ -2801,7 +2801,7 @@ fGameEngine_DialogHandler:
     JMP.W .justReturn                                          ;83975C|4CF095  |8395F0;
  
  
-fTextNextScreenHandler_83975F:
+fDialog_NextScreenHandler:
     REP #$20                                                   ;83975F|C220    |      ; A: nLetterCode
     STA.B n16TempVar1                                          ;839761|857E    |00007E;
     LDA.W $018B                                                ;839763|AD8B01  |00018B;
@@ -2821,7 +2821,7 @@ fTextNextScreenHandler_83975F:
     REP #$30                                                   ;839783|C230    |      ;
     LDX.W #$0001                                               ;839785|A20100  |      ;
     LDA.B n16TempVar1                                          ;839788|A57E    |00007E;
-    JSL.L fTextTransferGlyph                                   ;83978A|22239883|839823;
+    JSL.L fDialog_TransferGlyph                                ;83978A|22239883|839823;
     BRA .return                                                ;83978E|800C    |83979C;
  
  
@@ -2829,7 +2829,7 @@ fTextNextScreenHandler_83975F:
     REP #$30                                                   ;839790|C230    |      ;
     LDX.W #$0001                                               ;839792|A20100  |      ;
     LDA.W #$00B1                                               ;839795|A9B100  |      ;
-    JSL.L fTextTransferGlyph                                   ;839798|22239883|839823;
+    JSL.L fDialog_TransferGlyph                                ;839798|22239883|839823;
  
 .return:
     SEP #$20                                                   ;83979C|E220    |      ;
@@ -2839,7 +2839,7 @@ fTextNextScreenHandler_83975F:
     RTS                                                        ;8397A5|60      |      ;
  
  
-fTextUnknown_8397A6:
+fDialog_Unknown_8397A6:
     SEP #$20                                                   ;8397A6|E220    |      ;
     REP #$10                                                   ;8397A8|C210    |      ;
     LDA.B #$00                                                 ;8397AA|A900    |      ;
@@ -2899,17 +2899,17 @@ fTextUnknown_8397A6:
     CLC                                                        ;839818|18      |      ;
     ADC.B n16TempVar1                                          ;839819|657E    |00007E;
     LDX.W #$0000                                               ;83981B|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;83981E|22239883|839823;
+    JSL.L fDialog_TransferGlyph                                ;83981E|22239883|839823;
  
 .return:
     RTL                                                        ;839822|6B      |      ;
  
  
-fTextTransferGlyph:
+fDialog_TransferGlyph:
     REP #$30                                                   ;839823|C230    |      ; A: nLetterCode
     LDX.W #$0000                                               ;839825|A20000  |      ;
     PHX                                                        ;839828|DA      |      ;
-    JSR.W fTextGetGlyphPointer                                 ;839829|206298  |839862;
+    JSR.W fDialog_GetGlyphPointer                              ;839829|206298  |839862;
     REP #$30                                                   ;83982C|C230    |      ;
     PLX                                                        ;83982E|FA      |      ;
     TXA                                                        ;83982F|8A      |      ;
@@ -2918,7 +2918,7 @@ fTextTransferGlyph:
     RTL                                                        ;839837|6B      |      ;
  
  
-fTextUnknown_839838:
+fDialog_Unknown839838:
     REP #$30                                                   ;839838|C230    |      ;
     LDX.W #$0000                                               ;83983A|A20000  |      ; X = 0
     TXA                                                        ;83983D|8A      |      ; X -> A
@@ -2943,7 +2943,7 @@ fTextUnknown_839838:
     RTS                                                        ;839861|60      |      ;
  
  
-fTextGetGlyphPointer:
+fDialog_GetGlyphPointer:
     REP #$30                                                   ;839862|C230    |      ; A: nLetterCode, return $72: ptr24 pGlyph
     STA.B n16TempVar1                                          ;839864|857E    |00007E;
     LSR A                                                      ;839866|4A      |      ;
@@ -2957,12 +2957,12 @@ fTextGetGlyphPointer:
     CLC                                                        ;83986F|18      |      ;
     ADC.B n16TempVar2                                          ;839870|6580    |000080;
     TAX                                                        ;839872|AA      |      ; Store pTable index into X
-    LDA.L aTextGlyphsPointers,X                                ;839873|BFAE9883|8398AE;
+    LDA.L aLetterGlyphsPointers,X                              ;839873|BFAE9883|8398AE;
     STA.B ptrUnknown0x72                                       ;839877|8572    |000072;
     INX                                                        ;839879|E8      |      ;
     INX                                                        ;83987A|E8      |      ;
     SEP #$20                                                   ;83987B|E220    |      ;
-    LDA.L aTextGlyphsPointers,X                                ;83987D|BFAE9883|8398AE;
+    LDA.L aLetterGlyphsPointers,X                              ;83987D|BFAE9883|8398AE;
     STA.B ptrUnknown0x72+2                                     ;839881|8574    |000074;
     REP #$20                                                   ;839883|C220    |      ;
     LDA.B n16TempVar1                                          ;839885|A57E    |00007E;
@@ -2996,7 +2996,7 @@ fTextGetGlyphPointer:
     RTS                                                        ;8398AD|60      |      ;
  
  
-aTextGlyphsPointers:
+aLetterGlyphsPointers:
     dl sFontGlyphs_0x00                                        ;8398AE|        |949843; 0x0A * [ptr24]
     dl sFontGlyphs_0x01                                        ;8398B1|        |94A843;
     dl sFontGlyphs_0x02                                        ;8398B4|        |94B843;
@@ -3408,7 +3408,7 @@ aTextDataTableFFFD:
     dl $8008D5                                                 ;839BF2|        |8008D5;
     db $08                                                     ;839BF5|        |      ;
  
-aTextDialogPointers:
+aDialogPointers:
     dl sDialogEN_0x0000                                        ;839BF6|        |B68000; 0x0498 * [ptr24]
     dl sDialogEN_0x0001                                        ;839BF9|        |B680D8;
     dl sDialogEN_0x0002                                        ;839BFC|        |B6816C;
@@ -4934,7 +4934,7 @@ fGameEngine_FirstNight:
   + SEP #$20                                                   ;83AD85|E220    |      ;
     STZ.B $00                                                  ;83AD87|6400    |000000;
     STZ.W $0148                                                ;83AD89|9C4801  |000148;
-    JSL.L fWaitForNextNMI                                      ;83AD8C|22458680|808645;
+    JSL.L fCore_WaitForNextNMI                                 ;83AD8C|22458680|808645;
     RTL                                                        ;83AD90|6B      |      ;
  
  
@@ -6906,7 +6906,7 @@ fEngineCowUnknown_83BC5A:
 .label7:
     REP #$30                                                   ;83BD50|C230    |      ;
     TYA                                                        ;83BD52|98      |      ;
-    JSL.L fGetRandomNumberRanged                               ;83BD53|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;83BD53|22F98980|8089F9;
     BNE .label8                                                ;83BD57|D045    |83BD9E;
     SEP #$20                                                   ;83BD59|E220    |      ;
     REP #$10                                                   ;83BD5B|C210    |      ;
@@ -6956,7 +6956,7 @@ fEngineCowUnknown_83BC5A:
     BEQ .label12                                               ;83BDBF|F07E    |83BE3F;
     SEP #$20                                                   ;83BDC1|E220    |      ;
     LDA.B #$10                                                 ;83BDC3|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;83BDC5|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;83BDC5|22F98980|8089F9;
     BNE .label9                                                ;83BDC9|D00B    |83BDD6;
     REP #$20                                                   ;83BDCB|C220    |      ;
     LDA.W #$FFF8                                               ;83BDCD|A9F8FF  |      ;
@@ -9679,7 +9679,7 @@ CODE_83D29E:
     LDA.L $7F1F1E                                              ;83D2B8|AF1E1F7F|7F1F1E;
     BNE CODE_83D2DF                                            ;83D2BC|D021    |83D2DF;
     LDA.B #$08                                                 ;83D2BE|A908    |      ;
-    JSL.L fGetRandomNumberRanged                               ;83D2C0|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;83D2C0|22F98980|8089F9;
     BNE CODE_83D2DF                                            ;83D2C4|D019    |83D2DF;
     REP #$30                                                   ;83D2C6|C230    |      ;
     LDA.W #$0000                                               ;83D2C8|A90000  |      ;
@@ -9772,7 +9772,7 @@ CODE_83D369:
     STA.B nUnknown0095                                         ;83D374|8595    |000095;
     SEP #$20                                                   ;83D376|E220    |      ;
     LDA.B #$08                                                 ;83D378|A908    |      ;
-    JSL.L fGetRandomNumberRanged                               ;83D37A|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;83D37A|22F98980|8089F9;
     SEP #$20                                                   ;83D37E|E220    |      ;
     REP #$10                                                   ;83D380|C210    |      ;
     XBA                                                        ;83D382|EB      |      ;

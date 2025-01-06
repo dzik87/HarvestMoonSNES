@@ -21,7 +21,7 @@ fGame_TimeHandler:
     LDA.L $7F1F5A                                              ;82801A|AF5A1F7F|7F1F5A;
     AND.W #$0400                                               ;82801E|290004  |      ;
     BEQ +                                                      ;828021|F003    |828026;
-    JMP.W fUnknown_828165                                      ;828023|4C6581  |828165;
+    JMP.W fEvents_ShippingSceneDialog                          ;828023|4C6581  |828165;
  
  
   + SEP #$20                                                   ;828026|E220    |      ;
@@ -45,7 +45,7 @@ fGame_TimeHandler:
     INC A                                                      ;828056|1A      |      ;
     STA.L nCurrentTimeID                                       ;828057|8F1C1F7F|7F1F1C;
     JSL.L fUnknown_8280AA                                      ;82805B|22AA8082|8280AA;
-    JSL.L fUnknown_828131                                      ;82805F|22318182|828131;
+    JSL.L fEvents_ShippingScene                                ;82805F|22318182|828131;
     SEP #$20                                                   ;828063|E220    |      ;
     LDA.L nCurrentTimeID                                       ;828065|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;828069|C912    |      ;
@@ -75,7 +75,7 @@ fGame_TimeHandler:
     CMP.W nPaletteNextIndex                                    ;828099|CD7B01  |00017B;
     BEQ .return                                                ;82809C|F00B    |8280A9;
     LDY.W #$0004                                               ;82809E|A00400  |      ;
-    JSL.L fZero42PointersFromIndex                             ;8280A1|22928F80|808F92;
+    JSL.L fCore_Zero0x42PtrFromIndex                           ;8280A1|22928F80|808F92;
     JSL.L fSubrutinesExecute_809553                            ;8280A5|22539580|809553;
  
 .return:
@@ -145,7 +145,7 @@ fUnknown_8280AA:
  
   + SEP #$20                                                   ;828111|E220    |      ;
     LDA.B #$03                                                 ;828113|A903    |      ;
-    JSL.L fGetRandomNumberRanged                               ;828115|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;828115|22F98980|8089F9;
     SEP #$20                                                   ;828119|E220    |      ;
     STA.W $0924                                                ;82811B|8D2409  |000924;
     REP #$30                                                   ;82811E|C230    |      ;
@@ -161,19 +161,19 @@ fUnknown_8280AA:
     RTL                                                        ;828130|6B      |      ;
  
  
-fUnknown_828131:
+fEvents_ShippingScene:
     SEP #$20                                                   ;828131|E220    |      ;
     REP #$10                                                   ;828133|C210    |      ;
     LDA.L nCurrentTimeID                                       ;828135|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;828139|C911    |      ; Check hour for selling stuff
     BEQ .sellingTime                                           ;82813B|F003    |828140;
-    JMP.W fReturn_8281BF                                       ;82813D|4CBF81  |8281BF;
+    JMP.W fEvents_ShippingSceneReturn                          ;82813D|4CBF81  |8281BF;
  
  
 .sellingTime:
     LDA.B nMapEngine_DestinationId                             ;828140|A522    |000022;
     CMP.B #$04                                                 ;828142|C904    |      ;
-    BCS fReturn_8281BF                                         ;828144|B079    |8281BF;
+    BCS fEvents_ShippingSceneReturn                            ;828144|B079    |8281BF;
     LDA.B #$00                                                 ;828146|A900    |      ;
     STA.W $019A                                                ;828148|8D9A01  |00019A;
     REP #$20                                                   ;82814B|C220    |      ;
@@ -185,16 +185,16 @@ fUnknown_828131:
     LDY.W #$0026                                               ;82815E|A02600  |      ;
     JSL.L fSubUnk1Unknown_848097                               ;828161|22978084|848097;
  
-fUnknown_828165:
+fEvents_ShippingSceneDialog:
     REP #$20                                                   ;828165|C220    |      ;
     LDA.L $7F1F5A                                              ;828167|AF5A1F7F|7F1F5A;
     AND.W #$0800                                               ;82816B|290008  |      ;
-    BEQ fReturn_8281BF                                         ;82816E|F04F    |8281BF;
+    BEQ fEvents_ShippingSceneReturn                            ;82816E|F04F    |8281BF;
     REP #$30                                                   ;828170|C230    |      ;
     LDA.B $D2                                                  ;828172|A5D2    |0000D2;
     AND.W #$0040                                               ;828174|294000  |      ;
     BEQ +                                                      ;828177|F003    |82817C;
-    JMP.W fReturn_8281BF                                       ;828179|4CBF81  |8281BF;
+    JMP.W fEvents_ShippingSceneReturn                          ;828179|4CBF81  |8281BF;
  
  
   + LDA.W #$0002                                               ;82817C|A90200  |      ;
@@ -211,7 +211,7 @@ fUnknown_828165:
   + SEP #$20                                                   ;828198|E220    |      ;
     LDA.B #$00                                                 ;82819A|A900    |      ;
     STA.W $0191                                                ;82819C|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;82819F|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;82819F|225F9383|83935F;
     REP #$20                                                   ;8281A3|C220    |      ;
     LDA.W #$0006                                               ;8281A5|A90600  |      ;
     LDX.W #$0000                                               ;8281A8|A20000  |      ;
@@ -222,7 +222,7 @@ fUnknown_828165:
     AND.W #$FBFF                                               ;8281B8|29FFFB  |      ;
     STA.L $7F1F5A                                              ;8281BB|8F5A1F7F|7F1F5A;
  
-fReturn_8281BF:
+fEvents_ShippingSceneReturn:
     RTL                                                        ;8281BF|6B      |      ;
  
  
@@ -406,8 +406,8 @@ fNextDayHandler:
     STA.B $93                                                  ;82830D|8593    |000093;
     LDA.B #$01                                                 ;82830F|A901    |      ;
     STA.B $94                                                  ;828311|8594    |000094;
-    JSL.L fScreenFadeout                                       ;828313|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;828317|220F8E80|808E0F;
+    JSL.L fCore_ScreenFadeout                                  ;828313|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;828317|220F8E80|808E0F;
     SEP #$20                                                   ;82831B|E220    |      ;
     LDA.B #$0F                                                 ;82831D|A90F    |      ;
     STA.B nMapEngine_DestinationId                             ;82831F|8522    |000022;
@@ -821,7 +821,7 @@ fNextDayHandler:
     BNE .return                                                ;828775|D016    |82878D;
     SEP #$20                                                   ;828777|E220    |      ;
     LDA.B #$03                                                 ;828779|A903    |      ;
-    JSL.L fGetRandomNumberRanged                               ;82877B|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82877B|22F98980|8089F9;
     SEP #$20                                                   ;82877F|E220    |      ;
     STA.W $0924                                                ;828781|8D2409  |000924;
     REP #$30                                                   ;828784|C230    |      ;
@@ -1492,7 +1492,7 @@ fWeatherSpecialEvents:
     JMP.W .label6                                              ;828DC7|4C648E  |828E64;
  
  
-  + JSL.L fGetRandomNumberRanged                               ;828DCA|22F98980|8089F9;
+  + JSL.L fCore_GetRandomNumber                                ;828DCA|22F98980|8089F9;
     SEP #$20                                                   ;828DCE|E220    |      ;
     BEQ .sunday                                                ;828DD0|F003    |828DD5;
     JMP.W .label6                                              ;828DD2|4C648E  |828E64;
@@ -1525,7 +1525,7 @@ fWeatherSpecialEvents:
     SEP #$20                                                   ;828E06|E220    |      ;
     LDA.L .e_Summer29thDay,X                                   ;828E08|BFBE8E82|828EBE;
     BEQ .label4                                                ;828E0C|F012    |828E20;
-    JSL.L fGetRandomNumberRanged                               ;828E0E|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;828E0E|22F98980|8089F9;
     SEP #$20                                                   ;828E12|E220    |      ;
     BNE .label4                                                ;828E14|D00A    |828E20;
  
@@ -1565,7 +1565,7 @@ fWeatherSpecialEvents:
     REP #$30                                                   ;828E50|C230    |      ;
     TYA                                                        ;828E52|98      |      ;
     SEP #$20                                                   ;828E53|E220    |      ;
-    JSL.L fGetRandomNumberRanged                               ;828E55|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;828E55|22F98980|8089F9;
     SEP #$20                                                   ;828E59|E220    |      ;
     BNE .label6                                                ;828E5B|D007    |828E64;
     LDA.B #$03                                                 ;828E5D|A903    |      ;
@@ -1583,7 +1583,7 @@ fWeatherSpecialEvents:
     SEP #$20                                                   ;828E70|E220    |      ;
     LDA.L .e_Unknown1,X                                        ;828E72|BFB68E82|828EB6;
     BEQ .label7                                                ;828E76|F00F    |828E87;
-    JSL.L fGetRandomNumberRanged                               ;828E78|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;828E78|22F98980|8089F9;
     SEP #$20                                                   ;828E7C|E220    |      ;
     BNE .label7                                                ;828E7E|D007    |828E87;
     LDA.B #$01                                                 ;828E80|A901    |      ;
@@ -1601,7 +1601,7 @@ fWeatherSpecialEvents:
     SEP #$20                                                   ;828E93|E220    |      ;
     LDA.L .e_Unknown2,X                                        ;828E95|BFBA8E82|828EBA;
     BEQ .return                                                ;828E99|F00F    |828EAA;
-    JSL.L fGetRandomNumberRanged                               ;828E9B|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;828E9B|22F98980|8089F9;
     SEP #$20                                                   ;828E9F|E220    |      ;
     BNE .return                                                ;828EA1|D007    |828EAA;
     LDA.B #$02                                                 ;828EA3|A902    |      ;
@@ -2363,7 +2363,7 @@ subToolUsed82A5C3_Sickle:
     BNE .return                                                ;82941F|D02F    |829450;
     SEP #$20                                                   ;829421|E220    |      ;
     LDA.B #$10                                                 ;829423|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829425|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829425|22F98980|8089F9;
     BNE .return                                                ;829429|D025    |829450;
     REP #$30                                                   ;82942B|C230    |      ;
     LDA.W #$0012                                               ;82942D|A91200  |      ;
@@ -2413,7 +2413,7 @@ subToolUsed82A5C3_Plow:
     BNE .label1                                                ;829495|D02E    |8294C5;
     SEP #$20                                                   ;829497|E220    |      ;
     LDA.B #$20                                                 ;829499|A920    |      ;
-    JSL.L fGetRandomNumberRanged                               ;82949B|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82949B|22F98980|8089F9;
     BNE .label1                                                ;82949F|D024    |8294C5;
     REP #$30                                                   ;8294A1|C230    |      ;
     LDA.W #$0011                                               ;8294A3|A91100  |      ;
@@ -2439,7 +2439,7 @@ subToolUsed82A5C3_Plow:
     BNE .normalDestroy                                         ;8294D7|D071    |82954A;
     SEP #$20                                                   ;8294D9|E220    |      ;
     LDA.B #$10                                                 ;8294DB|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;8294DD|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;8294DD|22F98980|8089F9;
     BNE .luckCheck                                             ;8294E1|D02E    |829511;
     REP #$30                                                   ;8294E3|C230    |      ;
     LDA.L $7F1F5C                                              ;8294E5|AF5C1F7F|7F1F5C;
@@ -2462,7 +2462,7 @@ subToolUsed82A5C3_Plow:
 .luckCheck:
     SEP #$20                                                   ;829511|E220    |      ;
     LDA.B #$10                                                 ;829513|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829515|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829515|22F98980|8089F9;
     BNE .normalDestroy                                         ;829519|D02F    |82954A;
     REP #$30                                                   ;82951B|C230    |      ;
     LDA.L $7F1F5C                                              ;82951D|AF5C1F7F|7F1F5C;
@@ -2486,7 +2486,7 @@ subToolUsed82A5C3_Plow:
 .normalDestroy:
     SEP #$20                                                   ;82954A|E220    |      ;
     LDA.B #$40                                                 ;82954C|A940    |      ;
-    JSL.L fGetRandomNumberRanged                               ;82954E|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82954E|22F98980|8089F9;
     BNE .return                                                ;829552|D05C    |8295B0;
     REP #$30                                                   ;829554|C230    |      ;
     LDA.L $7F1F60                                              ;829556|AF601F7F|7F1F60;
@@ -2740,7 +2740,7 @@ subToolUsed82A5C3_Hammer:
     JSL.L fSubUnk1Unknown_84803F                               ;829768|223F8084|84803F;
     SEP #$20                                                   ;82976C|E220    |      ;
     LDA.B #$04                                                 ;82976E|A904    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829770|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829770|22F98980|8089F9;
     BNE .label11                                               ;829774|D0B9    |82972F;
     REP #$30                                                   ;829776|C230    |      ;
     LDA.L nHouseSize                                           ;829778|AF641F7F|7F1F64;
@@ -2848,7 +2848,7 @@ subToolUsed82A5C3_Axe:
     BNE .label2                                                ;82985A|D059    |8298B5;
     SEP #$20                                                   ;82985C|E220    |      ;
     LDA.B #$10                                                 ;82985E|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829860|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829860|22F98980|8089F9;
     BNE .label2                                                ;829864|D04F    |8298B5;
     REP #$30                                                   ;829866|C230    |      ;
     LDA.L nHouseSize                                           ;829868|AF641F7F|7F1F64;
@@ -3583,7 +3583,7 @@ subToolUsed82A5C3_GoldenSickle:
     BNE .label6                                                ;829E3D|D02F    |829E6E;
     SEP #$20                                                   ;829E3F|E220    |      ;
     LDA.B #$10                                                 ;829E41|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829E43|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829E43|22F98980|8089F9;
     BNE .label6                                                ;829E47|D025    |829E6E;
     REP #$30                                                   ;829E49|C230    |      ;
     LDA.W #$0012                                               ;829E4B|A91200  |      ;
@@ -3647,7 +3647,7 @@ subToolUsed82A5C3_GoldenPlow:
     BNE .label1                                                ;829ECD|D029    |829EF8;
     SEP #$20                                                   ;829ECF|E220    |      ;
     LDA.B #$20                                                 ;829ED1|A920    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829ED3|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829ED3|22F98980|8089F9;
     BNE .label1                                                ;829ED7|D01F    |829EF8;
     REP #$30                                                   ;829ED9|C230    |      ;
     LDA.W #$0011                                               ;829EDB|A91100  |      ;
@@ -3671,7 +3671,7 @@ subToolUsed82A5C3_GoldenPlow:
     BNE .label3                                                ;829F0A|D071    |829F7D;
     SEP #$20                                                   ;829F0C|E220    |      ;
     LDA.B #$10                                                 ;829F0E|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829F10|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829F10|22F98980|8089F9;
     BNE .label2                                                ;829F14|D02E    |829F44;
     REP #$30                                                   ;829F16|C230    |      ;
     LDA.L $7F1F5C                                              ;829F18|AF5C1F7F|7F1F5C;
@@ -3694,7 +3694,7 @@ subToolUsed82A5C3_GoldenPlow:
 .label2:
     SEP #$20                                                   ;829F44|E220    |      ;
     LDA.B #$10                                                 ;829F46|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829F48|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829F48|22F98980|8089F9;
     BNE .label3                                                ;829F4C|D02F    |829F7D;
     REP #$30                                                   ;829F4E|C230    |      ;
     LDA.L $7F1F5C                                              ;829F50|AF5C1F7F|7F1F5C;
@@ -3718,7 +3718,7 @@ subToolUsed82A5C3_GoldenPlow:
 .label3:
     SEP #$20                                                   ;829F7D|E220    |      ;
     LDA.B #$40                                                 ;829F7F|A940    |      ;
-    JSL.L fGetRandomNumberRanged                               ;829F81|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829F81|22F98980|8089F9;
     BNE .label6                                                ;829F85|D05C    |829FE3;
     REP #$30                                                   ;829F87|C230    |      ;
     LDA.L $7F1F60                                              ;829F89|AF601F7F|7F1F60;
@@ -3954,7 +3954,7 @@ subToolUsed82A5C3_GolderHammer:
     JSL.L fSubUnk1Unknown_84803F                               ;82A16A|223F8084|84803F;
     SEP #$20                                                   ;82A16E|E220    |      ;
     LDA.B #$04                                                 ;82A170|A904    |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A172|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A172|22F98980|8089F9;
     BNE .loop                                                  ;82A176|D0B9    |82A131;
     REP #$30                                                   ;82A178|C230    |      ;
     LDA.L nHouseSize                                           ;82A17A|AF641F7F|7F1F64;
@@ -4045,7 +4045,7 @@ subToolUsed82A5C3_GoldenAxe:
     BCC .label3                                                ;82A23B|9067    |82A2A4;
     SEP #$20                                                   ;82A23D|E220    |      ;
     LDA.B #$10                                                 ;82A23F|A910    |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A241|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A241|22F98980|8089F9;
     BNE .label4                                                ;82A245|D04F    |82A296;
     REP #$30                                                   ;82A247|C230    |      ;
     LDA.L nHouseSize                                           ;82A249|AF641F7F|7F1F64;
@@ -4719,7 +4719,7 @@ fObjectMap_Unknown82A713:
  
  
   + PHX                                                        ;82A767|DA      |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A768|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A768|22F98980|8089F9;
     SEP #$20                                                   ;82A76C|E220    |      ;
     REP #$10                                                   ;82A76E|C210    |      ;
     PLX                                                        ;82A770|FA      |      ;
@@ -4740,7 +4740,7 @@ fObjectMap_Unknown82A713:
     LDA.B $88                                                  ;82A786|A588    |000088;
     BEQ .label7                                                ;82A788|F066    |82A7F0;
     PHX                                                        ;82A78A|DA      |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A78B|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A78B|22F98980|8089F9;
     SEP #$20                                                   ;82A78F|E220    |      ;
     REP #$10                                                   ;82A791|C210    |      ;
     PLX                                                        ;82A793|FA      |      ;
@@ -4769,7 +4769,7 @@ fObjectMap_Unknown82A713:
     LDA.B $88                                                  ;82A7BA|A588    |000088;
     BEQ .label7                                                ;82A7BC|F032    |82A7F0;
     PHX                                                        ;82A7BE|DA      |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A7BF|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A7BF|22F98980|8089F9;
     SEP #$20                                                   ;82A7C3|E220    |      ;
     REP #$10                                                   ;82A7C5|C210    |      ;
     PLX                                                        ;82A7C7|FA      |      ;
@@ -4785,7 +4785,7 @@ fObjectMap_Unknown82A713:
     LDA.B $8A                                                  ;82A7D6|A58A    |00008A;
     BEQ .label7                                                ;82A7D8|F016    |82A7F0;
     PHX                                                        ;82A7DA|DA      |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A7DB|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A7DB|22F98980|8089F9;
     SEP #$20                                                   ;82A7DF|E220    |      ;
     REP #$10                                                   ;82A7E1|C210    |      ;
     PLX                                                        ;82A7E3|FA      |      ;
@@ -5013,7 +5013,7 @@ fObjectMap_Unknown82A811:
 .label8:
     SEP #$20                                                   ;82A949|E220    |      ;
     LDA.B #$08                                                 ;82A94B|A908    |      ;
-    JSL.L fGetRandomNumberRanged                               ;82A94D|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;82A94D|22F98980|8089F9;
     BNE .label9                                                ;82A951|D016    |82A969;
     REP #$20                                                   ;82A953|C220    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;82A955|AD9601  |000196;
@@ -5816,7 +5816,7 @@ fUnknown_82AD0E:
     LDA.B $93                                                  ;82AE90|A593    |000093;
     REP #$20                                                   ;82AE92|C220    |      ;
     TAX                                                        ;82AE94|AA      |      ;
-    JSL.L fTextLoadDialog                                      ;82AE95|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;82AE95|225F9383|83935F;
     BRA .justReturn                                            ;82AE99|804A    |82AEE5;
  
  
@@ -5834,7 +5834,7 @@ fUnknown_82AD0E:
     STA.W $019A                                                ;82AEAA|8D9A01  |00019A;
     LDA.B #$00                                                 ;82AEAD|A900    |      ;
     STA.W $0191                                                ;82AEAF|8D9101  |000191;
-    JSL.L fTextLoadDialog                                      ;82AEB2|225F9383|83935F;
+    JSL.L fDialog_DialogHandler                                ;82AEB2|225F9383|83935F;
     BRA .justReturn                                            ;82AEB6|802D    |82AEE5;
  
  
@@ -7156,7 +7156,7 @@ fUnknown_82D1C0:
     STA.B $93                                                  ;82D1CA|8593    |000093;
     LDA.B #$01                                                 ;82D1CC|A901    |      ;
     STA.B $94                                                  ;82D1CE|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82D1D0|220A8880|80880A;
+    JSL.L fCore_ScreenFadeout                                  ;82D1D0|220A8880|80880A;
     SEP #$20                                                   ;82D1D4|E220    |      ;
     LDA.B #$06                                                 ;82D1D6|A906    |      ;
     STA.L nCurrentTimeID                                       ;82D1D8|8F1C1F7F|7F1F1C;
@@ -7256,9 +7256,9 @@ fUnknown_82D1C0:
     LDA.L $7F1F5C                                              ;82D2E8|AF5C1F7F|7F1F5C;
     AND.W #$FFFB                                               ;82D2EC|29FBFF  |      ;
     STA.L $7F1F5C                                              ;82D2EF|8F5C1F7F|7F1F5C;
-    JSL.L fZeroVRAM                                            ;82D2F3|22468880|808846;
-    JSL.L fZeroCGRAM                                           ;82D2F7|22808980|808980;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82D2FB|22AB8F80|808FAB;
+    JSL.L fCore_ZeroVRAM                                       ;82D2F3|22468880|808846;
+    JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
+    JSL.L fCore_Zero0x42Ptr                                    ;82D2FB|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D2FF|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82D303|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D307|22C7A481|81A4C7;
@@ -7294,9 +7294,9 @@ fUnknown_82D1C0:
     JSL.L fAudioEngine_MapChangeHandler                        ;82D358|22719680|809671;
     JSL.L fUnknown_809A64                                      ;82D35C|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D360|22008082|828000;
-    JSL.L fGameEngine_DialogHandler                            ;82D364|221C9583|83951C;
+    JSL.L fDialog_IterateText                                  ;82D364|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D368|220C9080|80900C;
-    JSL.L fUnknown_808E69                                      ;82D36C|22698E80|808E69;
+    JSL.L fCore_Unknown808E69                                  ;82D36C|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D370|2234C084|84C034;
     JSL.L fUnknown_81A383                                      ;82D374|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D378|22B7BF81|81BFB7;
@@ -7341,7 +7341,7 @@ fUnknown_82D3C7:
     STA.B $93                                                  ;82D3D1|8593    |000093;
     LDA.B #$01                                                 ;82D3D3|A901    |      ;
     STA.B $94                                                  ;82D3D5|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82D3D7|220A8880|80880A;
+    JSL.L fCore_ScreenFadeout                                  ;82D3D7|220A8880|80880A;
     SEP #$20                                                   ;82D3DB|E220    |      ;
     LDA.B #$06                                                 ;82D3DD|A906    |      ;
     STA.L nCurrentTimeID                                       ;82D3DF|8F1C1F7F|7F1F1C;
@@ -7439,9 +7439,9 @@ fUnknown_82D3C7:
     LDA.L $7F1F5C                                              ;82D4E9|AF5C1F7F|7F1F5C;
     AND.W #$FFFB                                               ;82D4ED|29FBFF  |      ;
     STA.L $7F1F5C                                              ;82D4F0|8F5C1F7F|7F1F5C;
-    JSL.L fZeroVRAM                                            ;82D4F4|22468880|808846;
-    JSL.L fZeroCGRAM                                           ;82D4F8|22808980|808980;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82D4FC|22AB8F80|808FAB;
+    JSL.L fCore_ZeroVRAM                                       ;82D4F4|22468880|808846;
+    JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;
+    JSL.L fCore_Zero0x42Ptr                                    ;82D4FC|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D500|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82D504|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D508|22C7A481|81A4C7;
@@ -7678,9 +7678,9 @@ fUnknown_82D6AC:
     JSL.L fAudioEngine_MapChangeHandler                        ;82D6DA|22719680|809671;
     JSL.L fUnknown_809A64                                      ;82D6DE|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D6E2|22008082|828000;
-    JSL.L fGameEngine_DialogHandler                            ;82D6E6|221C9583|83951C;
+    JSL.L fDialog_IterateText                                  ;82D6E6|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D6EA|220C9080|80900C;
-    JSL.L fUnknown_808E69                                      ;82D6EE|22698E80|808E69;
+    JSL.L fCore_Unknown808E69                                  ;82D6EE|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D6F2|2234C084|84C034;
     JSL.L fUnknown_81A383                                      ;82D6F6|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D6FA|22B7BF81|81BFB7;
@@ -7749,13 +7749,13 @@ fUnknown_82D75E:
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D78A|225AA682|82A65A;
     SEP #$20                                                   ;82D78E|E220    |      ;
     LDA.B #$03                                                 ;82D790|A903    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82D792|22598C80|808C59;
-    JSL.L fSystem_SetForceBlank                                ;82D796|220F8E80|808E0F;
-    JSL.L fZeroVRAM                                            ;82D79A|22468880|808846;
+    JSL.L fCore_ManageGraphicsPresets                          ;82D792|22598C80|808C59;
+    JSL.L fCore_SetForceBlank                                  ;82D796|220F8E80|808E0F;
+    JSL.L fCore_ZeroVRAM                                       ;82D79A|22468880|808846;
     SEP #$20                                                   ;82D79E|E220    |      ;
     LDA.B #$5D                                                 ;82D7A0|A95D    |      ;
     STA.B nMapEngine_DestinationId                             ;82D7A2|8522    |000022;
-    JSL.L fTileMap_LoadDestination                             ;82D7A4|22C6A780|80A7C6;
+    JSL.L fTileMap_MapChangeHandler                            ;82D7A4|22C6A780|80A7C6;
     REP #$20                                                   ;82D7A8|C220    |      ;
     LDA.W #$006E                                               ;82D7AA|A96E00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82D7AD|22CF9180|8091CF;
@@ -7773,15 +7773,15 @@ fUnknown_82D75E:
     SEP #$20                                                   ;82D7CA|E220    |      ;
     LDA.B #$A9                                                 ;82D7CC|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82D7CE|8574    |000074;
-    JSL.L fSystem_PrepareTransfer                              ;82D7D0|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82D7D4|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82D7D0|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82D7D4|22B28A80|808AB2;
     REP #$20                                                   ;82D7D8|C220    |      ;
     STZ.W $013C                                                ;82D7DA|9C3C01  |00013C;
     STZ.W $013E                                                ;82D7DD|9C3E01  |00013E;
     STZ.W $0140                                                ;82D7E0|9C4001  |000140;
     STZ.W $0142                                                ;82D7E3|9C4201  |000142;
-    JSL.L fSystem_ResetForceBlank                              ;82D7E6|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82D7EA|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82D7E6|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82D7EA|22458680|808645;
     SEP #$20                                                   ;82D7EE|E220    |      ;
     LDA.B #$03                                                 ;82D7F0|A903    |      ;
     STA.B $92                                                  ;82D7F2|8592    |000092;
@@ -7789,7 +7789,7 @@ fUnknown_82D75E:
     STA.B $93                                                  ;82D7F6|8593    |000093;
     LDA.B #$0F                                                 ;82D7F8|A90F    |      ;
     STA.B $94                                                  ;82D7FA|8594    |000094;
-    JSL.L fScreenFadein                                        ;82D7FC|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82D7FC|22CE8780|8087CE;
     SEP #$20                                                   ;82D800|E220    |      ;
     STZ.B $97                                                  ;82D802|6497    |000097;
     REP #$20                                                   ;82D804|C220    |      ;
@@ -7801,7 +7801,7 @@ fUnknown_82D80D:
     SEP #$20                                                   ;82D80D|E220    |      ;
     LDA.B $00                                                  ;82D80F|A500    |000000;
     BEQ fUnknown_82D80D                                        ;82D811|F0FA    |82D80D;
-    JSL.L fUnknown_808E69                                      ;82D813|22698E80|808E69;
+    JSL.L fCore_Unknown808E69                                  ;82D813|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D817|2234C084|84C034;
     SEP #$20                                                   ;82D81B|E220    |      ;
     LDA.B nUnknown0095                                         ;82D81D|A595    |000095;
@@ -7873,7 +7873,7 @@ fUnknown_82D883:
     LDY.W #$0000                                               ;82D883|A00000  |      ;
  
   - PHY                                                        ;82D886|5A      |      ;
-    JSL.L fWaitForNextNMI                                      ;82D887|22458680|808645;
+    JSL.L fCore_WaitForNextNMI                                 ;82D887|22458680|808645;
     REP #$30                                                   ;82D88B|C230    |      ;
     PLY                                                        ;82D88D|7A      |      ;
     INY                                                        ;82D88E|C8      |      ;
@@ -7886,7 +7886,7 @@ fUnknown_82D883:
     STA.B $93                                                  ;82D89C|8593    |000093;
     LDA.B #$01                                                 ;82D89E|A901    |      ;
     STA.B $94                                                  ;82D8A0|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82D8A2|220A8880|80880A;
+    JSL.L fCore_ScreenFadeout                                  ;82D8A2|220A8880|80880A;
     SEP #$20                                                   ;82D8A6|E220    |      ;
     LDA.B #$01                                                 ;82D8A8|A901    |      ;
     STA.B nUnknown0095                                         ;82D8AA|8595    |000095;
@@ -7896,9 +7896,9 @@ fUnknown_82D883:
  
 fUnknown_82D8B0:
     REP #$30                                                   ;82D8B0|C230    |      ;
-    JSL.L fZeroVRAM                                            ;82D8B2|22468880|808846;
-    JSL.L fZeroCGRAM                                           ;82D8B6|22808980|808980;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82D8BA|22AB8F80|808FAB;
+    JSL.L fCore_ZeroVRAM                                       ;82D8B2|22468880|808846;
+    JSL.L fCore_ZeroCGRAM                                      ;82D8B6|22808980|808980;
+    JSL.L fCore_Zero0x42Ptr                                    ;82D8BA|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D8BE|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82D8C2|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D8C6|22C7A481|81A4C7;
@@ -7954,9 +7954,9 @@ fUnknown_82D8B0:
     JSL.L fAudioEngine_MapChangeHandler                        ;82D94C|22719680|809671;
     JSL.L fUnknown_809A64                                      ;82D950|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D954|22008082|828000;
-    JSL.L fGameEngine_DialogHandler                            ;82D958|221C9583|83951C;
+    JSL.L fDialog_IterateText                                  ;82D958|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D95C|220C9080|80900C;
-    JSL.L fUnknown_808E69                                      ;82D960|22698E80|808E69;
+    JSL.L fCore_Unknown808E69                                  ;82D960|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D964|2234C084|84C034;
     JSL.L fUnknown_81A383                                      ;82D968|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D96C|22B7BF81|81BFB7;
@@ -7985,7 +7985,7 @@ fUnknown_82D8B0:
     STA.B $93                                                  ;82D9A9|8593    |000093;
     LDA.B #$01                                                 ;82D9AB|A901    |      ;
     STA.B $94                                                  ;82D9AD|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82D9AF|220A8880|80880A;
+    JSL.L fCore_ScreenFadeout                                  ;82D9AF|220A8880|80880A;
  
   + SEP #$20                                                   ;82D9B3|E220    |      ;
     LDA.B nUnknown0095                                         ;82D9B5|A595    |000095;
@@ -8001,14 +8001,14 @@ fUnknown_82D8B0:
     STA.B $93                                                  ;82D9C6|8593    |000093;
     LDA.B #$01                                                 ;82D9C8|A901    |      ;
     STA.B $94                                                  ;82D9CA|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82D9CC|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82D9D0|220F8E80|808E0F;
+    JSL.L fCore_ScreenFadeout                                  ;82D9CC|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82D9D0|220F8E80|808E0F;
     SEP #$20                                                   ;82D9D4|E220    |      ;
     LDA.B #$03                                                 ;82D9D6|A903    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82D9D8|22598C80|808C59;
-    JSL.L fZeroVRAM                                            ;82D9DC|22468880|808846;
-    JSL.L fZeroCGRAM                                           ;82D9E0|22808980|808980;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82D9E4|22AB8F80|808FAB;
+    JSL.L fCore_ManageGraphicsPresets                          ;82D9D8|22598C80|808C59;
+    JSL.L fCore_ZeroVRAM                                       ;82D9DC|22468880|808846;
+    JSL.L fCore_ZeroCGRAM                                      ;82D9E0|22808980|808980;
+    JSL.L fCore_Zero0x42Ptr                                    ;82D9E4|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D9E8|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82D9EC|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D9F0|22C7A481|81A4C7;
@@ -8016,7 +8016,7 @@ fUnknown_82D8B0:
     SEP #$20                                                   ;82D9F8|E220    |      ;
     LDA.B #$5B                                                 ;82D9FA|A95B    |      ;
     STA.B nMapEngine_DestinationId                             ;82D9FC|8522    |000022;
-    JSL.L fTileMap_LoadDestination                             ;82D9FE|22C6A780|80A7C6;
+    JSL.L fTileMap_MapChangeHandler                            ;82D9FE|22C6A780|80A7C6;
     REP #$20                                                   ;82DA02|C220    |      ;
     LDA.W #$006D                                               ;82DA04|A96D00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DA07|22CF9180|8091CF;
@@ -8034,8 +8034,8 @@ fUnknown_82D8B0:
     SEP #$20                                                   ;82DA24|E220    |      ;
     LDA.B #$A9                                                 ;82DA26|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82DA28|8574    |000074; A9D8000 -> $72 (sPalette_0x6C)
-    JSL.L fSystem_PrepareTransfer                              ;82DA2A|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82DA2E|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82DA2A|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82DA2E|22B28A80|808AB2;
     REP #$20                                                   ;82DA32|C220    |      ;
     LDA.W #$0100                                               ;82DA34|A90001  |      ;
     STA.W $013C                                                ;82DA37|8D3C01  |00013C;
@@ -8052,8 +8052,8 @@ fUnknown_82D8B0:
     SEP #$20                                                   ;82DA5C|E220    |      ;
     LDA.W nAudioMusicTrackId                                   ;82DA5E|AD1001  |000110;
     STA.W $0117                                                ;82DA61|8D1701  |000117;
-    JSL.L fSystem_ResetForceBlank                              ;82DA64|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82DA68|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82DA64|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82DA68|22458680|808645;
     SEP #$20                                                   ;82DA6C|E220    |      ;
     LDA.B #$01                                                 ;82DA6E|A901    |      ;
     STA.B $92                                                  ;82DA70|8592    |000092;
@@ -8061,7 +8061,7 @@ fUnknown_82D8B0:
     STA.B $93                                                  ;82DA74|8593    |000093;
     LDA.B #$0F                                                 ;82DA76|A90F    |      ;
     STA.B $94                                                  ;82DA78|8594    |000094;
-    JSL.L fScreenFadein                                        ;82DA7A|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82DA7A|22CE8780|8087CE;
     SEP #$20                                                   ;82DA7E|E220    |      ;
     LDA.B #$02                                                 ;82DA80|A902    |      ;
     STA.B nUnknown0095                                         ;82DA82|8595    |000095;
@@ -8145,14 +8145,14 @@ fUnknown_82DAF5:
     STA.B $93                                                  ;82DB0B|8593    |000093;
     LDA.B #$01                                                 ;82DB0D|A901    |      ;
     STA.B $94                                                  ;82DB0F|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82DB11|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82DB15|220F8E80|808E0F;
+    JSL.L fCore_ScreenFadeout                                  ;82DB11|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82DB15|220F8E80|808E0F;
     SEP #$20                                                   ;82DB19|E220    |      ;
     LDA.B #$03                                                 ;82DB1B|A903    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82DB1D|22598C80|808C59;
-    JSL.L fZeroVRAM                                            ;82DB21|22468880|808846;
-    JSL.L fZeroCGRAM                                           ;82DB25|22808980|808980;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82DB29|22AB8F80|808FAB;
+    JSL.L fCore_ManageGraphicsPresets                          ;82DB1D|22598C80|808C59;
+    JSL.L fCore_ZeroVRAM                                       ;82DB21|22468880|808846;
+    JSL.L fCore_ZeroCGRAM                                      ;82DB25|22808980|808980;
+    JSL.L fCore_Zero0x42Ptr                                    ;82DB29|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82DB2D|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82DB31|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82DB35|22C7A481|81A4C7;
@@ -8166,7 +8166,7 @@ fUnknown_82DAF5:
     SEP #$20                                                   ;82DB4C|E220    |      ;
     LDA.B #$5B                                                 ;82DB4E|A95B    |      ;
     STA.B nMapEngine_DestinationId                             ;82DB50|8522    |000022;
-    JSL.L fTileMap_LoadDestination                             ;82DB52|22C6A780|80A7C6;
+    JSL.L fTileMap_MapChangeHandler                            ;82DB52|22C6A780|80A7C6;
     REP #$20                                                   ;82DB56|C220    |      ;
     LDA.W #$006D                                               ;82DB58|A96D00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DB5B|22CF9180|8091CF;
@@ -8184,8 +8184,8 @@ fUnknown_82DAF5:
     SEP #$20                                                   ;82DB78|E220    |      ;
     LDA.B #$A9                                                 ;82DB7A|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82DB7C|8574    |000074; A9D800 -> $72 (sPalette_0x6C)
-    JSL.L fSystem_PrepareTransfer                              ;82DB7E|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82DB82|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82DB7E|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82DB82|22B28A80|808AB2;
     SEP #$20                                                   ;82DB86|E220    |      ;
     LDA.B #$5C                                                 ;82DB88|A95C    |      ;
     STA.B nMapEngine_DestinationId                             ;82DB8A|8522    |000022;
@@ -8205,8 +8205,8 @@ fUnknown_82DB8E:
     STA.B $93                                                  ;82DBA4|8593    |000093;
     LDA.B #$01                                                 ;82DBA6|A901    |      ;
     STA.B $94                                                  ;82DBA8|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82DBAA|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82DBAE|220F8E80|808E0F;
+    JSL.L fCore_ScreenFadeout                                  ;82DBAA|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82DBAE|220F8E80|808E0F;
  
 fUnknown_82DBB2:
     REP #$20                                                   ;82DBB2|C220    |      ;
@@ -8220,15 +8220,15 @@ fUnknown_82DBB2:
     STZ.W nMapEngine_DestinationX                              ;82DBC6|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DBC9|9C7F01  |00017F;
     STZ.W nMapEngine_CurrentMapId                              ;82DBCC|9C9601  |000196;
-    JSL.L fTileMap_LoadDestination                             ;82DBCF|22C6A780|80A7C6;
+    JSL.L fTileMap_MapChangeHandler                            ;82DBCF|22C6A780|80A7C6;
     JSL.L fAudioUnknown_83841F                                 ;82DBD3|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82DBD7|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;82DBDB|22808383|838380;
     SEP #$20                                                   ;82DBDF|E220    |      ;
     LDA.W nAudioMusicTrackId                                   ;82DBE1|AD1001  |000110;
     STA.W $0117                                                ;82DBE4|8D1701  |000117;
-    JSL.L fSystem_ResetForceBlank                              ;82DBE7|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82DBEB|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82DBE7|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82DBEB|22458680|808645;
     SEP #$20                                                   ;82DBEF|E220    |      ;
     LDA.B #$01                                                 ;82DBF1|A901    |      ;
     STA.B $92                                                  ;82DBF3|8592    |000092;
@@ -8236,7 +8236,7 @@ fUnknown_82DBB2:
     STA.B $93                                                  ;82DBF7|8593    |000093;
     LDA.B #$0F                                                 ;82DBF9|A90F    |      ;
     STA.B $94                                                  ;82DBFB|8594    |000094;
-    JSL.L fScreenFadein                                        ;82DBFD|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82DBFD|22CE8780|8087CE;
     SEP #$20                                                   ;82DC01|E220    |      ;
     LDA.B #$04                                                 ;82DC03|A904    |      ;
     STA.B nUnknown0095                                         ;82DC05|8595    |000095;
@@ -8267,7 +8267,7 @@ fUnknown_82DC0D:
     JML.L fUnknown_82D871                                      ;82DC2E|5C71D882|82D871;
  
  
-  + JSL.L fSystem_Zero0x42Ptr                                  ;82DC32|22AB8F80|808FAB;
+  + JSL.L fCore_Zero0x42Ptr                                    ;82DC32|22AB8F80|808FAB;
     REP #$20                                                   ;82DC36|C220    |      ;
     SEP #$10                                                   ;82DC38|E210    |      ;
     LDA.W #$F2A4                                               ;82DC3A|A9A4F2  |      ;
@@ -8279,7 +8279,7 @@ fUnknown_82DC0D:
     LDA.B #$0A                                                 ;82DC47|A90A    |      ;
     LDX.B #$04                                                 ;82DC49|A204    |      ;
     LDY.B #$07                                                 ;82DC4B|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DC4D|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC4D|22488E80|808E48;
     REP #$20                                                   ;82DC51|C220    |      ;
     SEP #$10                                                   ;82DC53|E210    |      ;
     LDA.W #$F2B5                                               ;82DC55|A9B5F2  |      ;
@@ -8291,7 +8291,7 @@ fUnknown_82DC0D:
     LDA.B #$0B                                                 ;82DC62|A90B    |      ;
     LDX.B #$05                                                 ;82DC64|A205    |      ;
     LDY.B #$07                                                 ;82DC66|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DC68|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC68|22488E80|808E48;
     SEP #$20                                                   ;82DC6C|E220    |      ;
     LDA.W nUnknownFlags09D                                     ;82DC6E|AD8D09  |00098D;
     CMP.B #$01                                                 ;82DC71|C901    |      ;
@@ -8315,7 +8315,7 @@ fUnknown_82DC0D:
     LDA.B #$0D                                                 ;82DC92|A90D    |      ;
     LDX.B #$06                                                 ;82DC94|A206    |      ;
     LDY.B #$07                                                 ;82DC96|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DC98|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC98|22488E80|808E48;
     REP #$20                                                   ;82DC9C|C220    |      ;
     SEP #$10                                                   ;82DC9E|E210    |      ;
     LDA.W #$F2DA                                               ;82DCA0|A9DAF2  |      ;
@@ -8327,7 +8327,7 @@ fUnknown_82DC0D:
     LDA.B #$0F                                                 ;82DCAD|A90F    |      ;
     LDX.B #$07                                                 ;82DCAF|A207    |      ;
     LDY.B #$07                                                 ;82DCB1|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DCB3|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCB3|22488E80|808E48;
     REP #$20                                                   ;82DCB7|C220    |      ;
     SEP #$10                                                   ;82DCB9|E210    |      ;
     LDA.W #$F2DA                                               ;82DCBB|A9DAF2  |      ;
@@ -8339,7 +8339,7 @@ fUnknown_82DC0D:
     LDA.B #$09                                                 ;82DCC8|A909    |      ;
     LDX.B #$08                                                 ;82DCCA|A208    |      ;
     LDY.B #$02                                                 ;82DCCC|A002    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DCCE|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCCE|22488E80|808E48;
     JML.L +                                                    ;82DCD2|5C80DD82|82DD80;
  
  
@@ -8355,7 +8355,7 @@ fUnknown_82DC0D:
     LDA.B #$0D                                                 ;82DCE7|A90D    |      ;
     LDX.B #$06                                                 ;82DCE9|A206    |      ;
     LDY.B #$07                                                 ;82DCEB|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DCED|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCED|22488E80|808E48;
     REP #$20                                                   ;82DCF1|C220    |      ;
     SEP #$10                                                   ;82DCF3|E210    |      ;
     LDA.W #$F2C9                                               ;82DCF5|A9C9F2  |      ;
@@ -8367,7 +8367,7 @@ fUnknown_82DC0D:
     LDA.B #$0F                                                 ;82DD02|A90F    |      ;
     LDX.B #$07                                                 ;82DD04|A207    |      ;
     LDY.B #$07                                                 ;82DD06|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DD08|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD08|22488E80|808E48;
     REP #$20                                                   ;82DD0C|C220    |      ;
     SEP #$10                                                   ;82DD0E|E210    |      ;
     LDA.W #$F2DA                                               ;82DD10|A9DAF2  |      ;
@@ -8379,7 +8379,7 @@ fUnknown_82DC0D:
     LDA.B #$09                                                 ;82DD1D|A909    |      ;
     LDX.B #$08                                                 ;82DD1F|A208    |      ;
     LDY.B #$02                                                 ;82DD21|A002    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DD23|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD23|22488E80|808E48;
     JML.L +                                                    ;82DD27|5C80DD82|82DD80;
  
  
@@ -8395,7 +8395,7 @@ fUnknown_82DC0D:
     LDA.B #$0D                                                 ;82DD3C|A90D    |      ;
     LDX.B #$06                                                 ;82DD3E|A206    |      ;
     LDY.B #$07                                                 ;82DD40|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DD42|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD42|22488E80|808E48;
     REP #$20                                                   ;82DD46|C220    |      ;
     SEP #$10                                                   ;82DD48|E210    |      ;
     LDA.W #$F2DA                                               ;82DD4A|A9DAF2  |      ;
@@ -8407,7 +8407,7 @@ fUnknown_82DC0D:
     LDA.B #$0F                                                 ;82DD57|A90F    |      ;
     LDX.B #$07                                                 ;82DD59|A207    |      ;
     LDY.B #$07                                                 ;82DD5B|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DD5D|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD5D|22488E80|808E48;
     REP #$20                                                   ;82DD61|C220    |      ;
     SEP #$10                                                   ;82DD63|E210    |      ;
     LDA.W #$F2C9                                               ;82DD65|A9C9F2  |      ;
@@ -8419,7 +8419,7 @@ fUnknown_82DC0D:
     LDA.B #$09                                                 ;82DD72|A909    |      ;
     LDX.B #$08                                                 ;82DD74|A208    |      ;
     LDY.B #$02                                                 ;82DD76|A002    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DD78|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD78|22488E80|808E48;
     JML.L +                                                    ;82DD7C|5C80DD82|82DD80;
  
  
@@ -8470,7 +8470,7 @@ fUnknown_82DD8C:
     LDA.B #$0D                                                 ;82DDCF|A90D    |      ;
     LDX.B #$06                                                 ;82DDD1|A206    |      ;
     LDY.B #$07                                                 ;82DDD3|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DDD5|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DDD5|22488E80|808E48;
     REP #$20                                                   ;82DDD9|C220    |      ;
     SEP #$10                                                   ;82DDDB|E210    |      ;
     LDA.W #$F2DA                                               ;82DDDD|A9DAF2  |      ;
@@ -8482,7 +8482,7 @@ fUnknown_82DD8C:
     LDA.B #$0F                                                 ;82DDEA|A90F    |      ;
     LDX.B #$07                                                 ;82DDEC|A207    |      ;
     LDY.B #$07                                                 ;82DDEE|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DDF0|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DDF0|22488E80|808E48;
     REP #$20                                                   ;82DDF4|C220    |      ;
     SEP #$10                                                   ;82DDF6|E210    |      ;
     LDA.W #$F2DA                                               ;82DDF8|A9DAF2  |      ;
@@ -8494,7 +8494,7 @@ fUnknown_82DD8C:
     LDA.B #$09                                                 ;82DE05|A909    |      ;
     LDX.B #$08                                                 ;82DE07|A208    |      ;
     LDY.B #$02                                                 ;82DE09|A002    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DE0B|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE0B|22488E80|808E48;
     JML.L .return                                              ;82DE0F|5CBDDE82|82DEBD;
  
  
@@ -8510,7 +8510,7 @@ fUnknown_82DD8C:
     LDA.B #$0D                                                 ;82DE24|A90D    |      ;
     LDX.B #$06                                                 ;82DE26|A206    |      ;
     LDY.B #$07                                                 ;82DE28|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DE2A|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE2A|22488E80|808E48;
     REP #$20                                                   ;82DE2E|C220    |      ;
     SEP #$10                                                   ;82DE30|E210    |      ;
     LDA.W #$F2C9                                               ;82DE32|A9C9F2  |      ;
@@ -8522,7 +8522,7 @@ fUnknown_82DD8C:
     LDA.B #$0F                                                 ;82DE3F|A90F    |      ;
     LDX.B #$07                                                 ;82DE41|A207    |      ;
     LDY.B #$07                                                 ;82DE43|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DE45|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE45|22488E80|808E48;
     REP #$20                                                   ;82DE49|C220    |      ;
     SEP #$10                                                   ;82DE4B|E210    |      ;
     LDA.W #$F2DA                                               ;82DE4D|A9DAF2  |      ;
@@ -8534,7 +8534,7 @@ fUnknown_82DD8C:
     LDA.B #$09                                                 ;82DE5A|A909    |      ;
     LDX.B #$08                                                 ;82DE5C|A208    |      ;
     LDY.B #$02                                                 ;82DE5E|A002    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DE60|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE60|22488E80|808E48;
     JML.L .return                                              ;82DE64|5CBDDE82|82DEBD;
  
  
@@ -8550,7 +8550,7 @@ fUnknown_82DD8C:
     LDA.B #$0D                                                 ;82DE79|A90D    |      ;
     LDX.B #$06                                                 ;82DE7B|A206    |      ;
     LDY.B #$07                                                 ;82DE7D|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DE7F|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE7F|22488E80|808E48;
     REP #$20                                                   ;82DE83|C220    |      ;
     SEP #$10                                                   ;82DE85|E210    |      ;
     LDA.W #$F2DA                                               ;82DE87|A9DAF2  |      ;
@@ -8562,7 +8562,7 @@ fUnknown_82DD8C:
     LDA.B #$0F                                                 ;82DE94|A90F    |      ;
     LDX.B #$07                                                 ;82DE96|A207    |      ;
     LDY.B #$07                                                 ;82DE98|A007    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DE9A|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE9A|22488E80|808E48;
     REP #$20                                                   ;82DE9E|C220    |      ;
     SEP #$10                                                   ;82DEA0|E210    |      ;
     LDA.W #$F2C9                                               ;82DEA2|A9C9F2  |      ;
@@ -8574,7 +8574,7 @@ fUnknown_82DD8C:
     LDA.B #$09                                                 ;82DEAF|A909    |      ;
     LDX.B #$08                                                 ;82DEB1|A208    |      ;
     LDY.B #$02                                                 ;82DEB3|A002    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82DEB5|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DEB5|22488E80|808E48;
     JML.L .return                                              ;82DEB9|5CBDDE82|82DEBD;
  
  
@@ -8597,12 +8597,12 @@ fUnknown_82DEC5:
     STA.B $93                                                  ;82DEDB|8593    |000093;
     LDA.B #$01                                                 ;82DEDD|A901    |      ;
     STA.B $94                                                  ;82DEDF|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82DEE1|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82DEE5|220F8E80|808E0F;
-    JSL.L fZeroVRAM                                            ;82DEE9|22468880|808846;
+    JSL.L fCore_ScreenFadeout                                  ;82DEE1|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82DEE5|220F8E80|808E0F;
+    JSL.L fCore_ZeroVRAM                                       ;82DEE9|22468880|808846;
     SEP #$20                                                   ;82DEED|E220    |      ;
     LDA.B #$03                                                 ;82DEEF|A903    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82DEF1|22598C80|808C59;
+    JSL.L fCore_ManageGraphicsPresets                          ;82DEF1|22598C80|808C59;
     REP #$20                                                   ;82DEF5|C220    |      ;
     STZ.W $013C                                                ;82DEF7|9C3C01  |00013C;
     STZ.W $013E                                                ;82DEFA|9C3E01  |00013E;
@@ -8616,11 +8616,11 @@ fUnknown_82DEC5:
     SEP #$20                                                   ;82DF10|E220    |      ;
     LDA.B #$5B                                                 ;82DF12|A95B    |      ;
     STA.B nMapEngine_DestinationId                             ;82DF14|8522    |000022;
-    JSL.L fTileMap_LoadDestination                             ;82DF16|22C6A780|80A7C6;
+    JSL.L fTileMap_MapChangeHandler                            ;82DF16|22C6A780|80A7C6;
     SEP #$20                                                   ;82DF1A|E220    |      ;
     LDA.B #$5C                                                 ;82DF1C|A95C    |      ;
     STA.B nMapEngine_DestinationId                             ;82DF1E|8522    |000022;
-    JSL.L fTileMap_LoadDestination                             ;82DF20|22C6A780|80A7C6;
+    JSL.L fTileMap_MapChangeHandler                            ;82DF20|22C6A780|80A7C6;
     REP #$20                                                   ;82DF24|C220    |      ;
     LDA.W #$006D                                               ;82DF26|A96D00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DF29|22CF9180|8091CF;
@@ -8638,16 +8638,16 @@ fUnknown_82DEC5:
     SEP #$20                                                   ;82DF46|E220    |      ;
     LDA.B #$A9                                                 ;82DF48|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82DF4A|8574    |000074;
-    JSL.L fSystem_PrepareTransfer                              ;82DF4C|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82DF50|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82DF4C|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82DF50|22B28A80|808AB2;
     JSL.L fAudioUnknown_83841F                                 ;82DF54|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82DF58|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;82DF5C|22808383|838380;
     SEP #$20                                                   ;82DF60|E220    |      ;
     LDA.W nAudioMusicTrackId                                   ;82DF62|AD1001  |000110;
     STA.W $0117                                                ;82DF65|8D1701  |000117;
-    JSL.L fSystem_ResetForceBlank                              ;82DF68|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82DF6C|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82DF68|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82DF6C|22458680|808645;
     SEP #$20                                                   ;82DF70|E220    |      ;
     LDA.B #$01                                                 ;82DF72|A901    |      ;
     STA.B $92                                                  ;82DF74|8592    |000092;
@@ -8655,7 +8655,7 @@ fUnknown_82DEC5:
     STA.B $93                                                  ;82DF78|8593    |000093;
     LDA.B #$0F                                                 ;82DF7A|A90F    |      ;
     STA.B $94                                                  ;82DF7C|8594    |000094;
-    JSL.L fScreenFadein                                        ;82DF7E|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82DF7E|22CE8780|8087CE;
     SEP #$20                                                   ;82DF82|E220    |      ;
     LDA.B #$04                                                 ;82DF84|A904    |      ;
     STA.B nUnknown0095                                         ;82DF86|8595    |000095;
@@ -8678,13 +8678,13 @@ fUnknown_82DF92:
     STA.B $93                                                  ;82DFA8|8593    |000093;
     LDA.B #$01                                                 ;82DFAA|A901    |      ;
     STA.B $94                                                  ;82DFAC|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82DFAE|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82DFB2|220F8E80|808E0F;
-    JSL.L fZeroVRAM                                            ;82DFB6|22468880|808846;
+    JSL.L fCore_ScreenFadeout                                  ;82DFAE|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82DFB2|220F8E80|808E0F;
+    JSL.L fCore_ZeroVRAM                                       ;82DFB6|22468880|808846;
     SEP #$20                                                   ;82DFBA|E220    |      ;
     LDA.B #$04                                                 ;82DFBC|A904    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82DFBE|22598C80|808C59;
-    JSL.L fTileMap_LoadDestination                             ;82DFC2|22C6A780|80A7C6;
+    JSL.L fCore_ManageGraphicsPresets                          ;82DFBE|22598C80|808C59;
+    JSL.L fTileMap_MapChangeHandler                            ;82DFC2|22C6A780|80A7C6;
     REP #$20                                                   ;82DFC6|C220    |      ;
     LDA.W #$006F                                               ;82DFC8|A96F00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DFCB|22CF9180|8091CF;
@@ -8702,8 +8702,8 @@ fUnknown_82DF92:
     SEP #$20                                                   ;82DFE8|E220    |      ;
     LDA.B #$A9                                                 ;82DFEA|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82DFEC|8574    |000074;
-    JSL.L fSystem_PrepareTransfer                              ;82DFEE|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82DFF2|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82DFEE|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82DFF2|22B28A80|808AB2;
     JSR.W fUnknown_82E742                                      ;82DFF6|2042E7  |82E742;
     REP #$30                                                   ;82DFF9|C230    |      ;
     LDA.W #$0000                                               ;82DFFB|A90000  |      ;
@@ -8713,7 +8713,7 @@ fUnknown_82DF92:
     LDA.W #$0001                                               ;82E006|A90100  |      ;
     LDY.W #$0000                                               ;82E009|A00000  |      ;
     JSR.W fUnknown_82E405                                      ;82E00C|2005E4  |82E405;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82E00F|22AB8F80|808FAB;
+    JSL.L fCore_Zero0x42Ptr                                    ;82E00F|22AB8F80|808FAB;
     REP #$20                                                   ;82E013|C220    |      ;
     STZ.W $013C                                                ;82E015|9C3C01  |00013C;
     STZ.W $013E                                                ;82E018|9C3E01  |00013E;
@@ -8747,7 +8747,7 @@ fUnknown_82DF92:
     LDA.B #$06                                                 ;82E056|A906    |      ;
     LDX.B #$04                                                 ;82E058|A204    |      ;
     LDY.B #$00                                                 ;82E05A|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E05C|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E05C|22488E80|808E48;
     REP #$20                                                   ;82E060|C220    |      ;
     SEP #$10                                                   ;82E062|E210    |      ;
     LDA.W #$F2F9                                               ;82E064|A9F9F2  |      ;
@@ -8759,7 +8759,7 @@ fUnknown_82DF92:
     LDA.B #$06                                                 ;82E071|A906    |      ;
     LDX.B #$05                                                 ;82E073|A205    |      ;
     LDY.B #$01                                                 ;82E075|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E077|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E077|22488E80|808E48;
     JML.L fUnknown_82E0B5                                      ;82E07B|5CB5E082|82E0B5;
  
  
@@ -8775,7 +8775,7 @@ fUnknown_82E07F:
     LDA.B #$06                                                 ;82E090|A906    |      ;
     LDX.B #$04                                                 ;82E092|A204    |      ;
     LDY.B #$00                                                 ;82E094|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E096|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E096|22488E80|808E48;
     REP #$20                                                   ;82E09A|C220    |      ;
     SEP #$10                                                   ;82E09C|E210    |      ;
     LDA.W #$F2E2                                               ;82E09E|A9E2F2  |      ;
@@ -8787,7 +8787,7 @@ fUnknown_82E07F:
     LDA.B #$06                                                 ;82E0AB|A906    |      ;
     LDX.B #$05                                                 ;82E0AD|A205    |      ;
     LDY.B #$01                                                 ;82E0AF|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E0B1|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E0B1|22488E80|808E48;
  
 fUnknown_82E0B5:
     JSL.L fAudioUnknown_83841F                                 ;82E0B5|221F8483|83841F;
@@ -8796,8 +8796,8 @@ fUnknown_82E0B5:
     SEP #$20                                                   ;82E0C1|E220    |      ;
     LDA.W nAudioMusicTrackId                                   ;82E0C3|AD1001  |000110;
     STA.W $0117                                                ;82E0C6|8D1701  |000117;
-    JSL.L fSystem_ResetForceBlank                              ;82E0C9|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82E0CD|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82E0C9|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82E0CD|22458680|808645;
     SEP #$20                                                   ;82E0D1|E220    |      ;
     LDA.B #$03                                                 ;82E0D3|A903    |      ;
     STA.B $92                                                  ;82E0D5|8592    |000092;
@@ -8805,7 +8805,7 @@ fUnknown_82E0B5:
     STA.B $93                                                  ;82E0D9|8593    |000093;
     LDA.B #$0F                                                 ;82E0DB|A90F    |      ;
     STA.B $94                                                  ;82E0DD|8594    |000094;
-    JSL.L fScreenFadein                                        ;82E0DF|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82E0DF|22CE8780|8087CE;
     SEP #$20                                                   ;82E0E3|E220    |      ;
     STZ.B $94                                                  ;82E0E5|6494    |000094;
     STZ.B $96                                                  ;82E0E7|6496    |000096;
@@ -8818,7 +8818,7 @@ fUnknown_82E0EB:
     REP #$20                                                   ;82E0F1|C220    |      ;
     LDA.W #$1800                                               ;82E0F3|A90018  |      ;
     STA.B $C7                                                  ;82E0F6|85C7    |0000C7;
-    JSL.L fUnknown_808E69                                      ;82E0F8|22698E80|808E69;
+    JSL.L fCore_Unknown808E69                                  ;82E0F8|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82E0FC|2234C084|84C034;
     SEP #$20                                                   ;82E100|E220    |      ;
     LDA.B $97                                                  ;82E102|A597    |000097;
@@ -8859,7 +8859,7 @@ fUnknown_82E0EB:
     LDA.B #$06                                                 ;82E142|A906    |      ;
     LDX.B #$04                                                 ;82E144|A204    |      ;
     LDY.B #$00                                                 ;82E146|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E148|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E148|22488E80|808E48;
     REP #$20                                                   ;82E14C|C220    |      ;
     SEP #$10                                                   ;82E14E|E210    |      ;
     LDA.W #$F2F9                                               ;82E150|A9F9F2  |      ;
@@ -8871,7 +8871,7 @@ fUnknown_82E0EB:
     LDA.B #$06                                                 ;82E15D|A906    |      ;
     LDX.B #$05                                                 ;82E15F|A205    |      ;
     LDY.B #$01                                                 ;82E161|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E163|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E163|22488E80|808E48;
     JML.L fUnknown_82E1BD                                      ;82E167|5CBDE182|82E1BD;
  
  
@@ -8903,7 +8903,7 @@ fUnknown_82E16B:
     LDA.B #$06                                                 ;82E198|A906    |      ;
     LDX.B #$04                                                 ;82E19A|A204    |      ;
     LDY.B #$00                                                 ;82E19C|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E19E|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E19E|22488E80|808E48;
     REP #$20                                                   ;82E1A2|C220    |      ;
     SEP #$10                                                   ;82E1A4|E210    |      ;
     LDA.W #$F2E2                                               ;82E1A6|A9E2F2  |      ;
@@ -8915,7 +8915,7 @@ fUnknown_82E16B:
     LDA.B #$06                                                 ;82E1B3|A906    |      ;
     LDX.B #$05                                                 ;82E1B5|A205    |      ;
     LDY.B #$01                                                 ;82E1B7|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E1B9|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E1B9|22488E80|808E48;
  
 fUnknown_82E1BD:
     SEP #$20                                                   ;82E1BD|E220    |      ;
@@ -8963,13 +8963,13 @@ fUnknown_82E1F1:
     STA.B $93                                                  ;82E207|8593    |000093;
     LDA.B #$01                                                 ;82E209|A901    |      ;
     STA.B $94                                                  ;82E20B|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82E20D|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82E211|220F8E80|808E0F;
-    JSL.L fZeroVRAM                                            ;82E215|22468880|808846;
+    JSL.L fCore_ScreenFadeout                                  ;82E20D|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82E211|220F8E80|808E0F;
+    JSL.L fCore_ZeroVRAM                                       ;82E215|22468880|808846;
     SEP #$20                                                   ;82E219|E220    |      ;
     LDA.B #$04                                                 ;82E21B|A904    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82E21D|22598C80|808C59;
-    JSL.L fTileMap_LoadDestination                             ;82E221|22C6A780|80A7C6;
+    JSL.L fCore_ManageGraphicsPresets                          ;82E21D|22598C80|808C59;
+    JSL.L fTileMap_MapChangeHandler                            ;82E221|22C6A780|80A7C6;
     REP #$20                                                   ;82E225|C220    |      ;
     LDA.W #$006F                                               ;82E227|A96F00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82E22A|22CF9180|8091CF;
@@ -8987,8 +8987,8 @@ fUnknown_82E1F1:
     SEP #$20                                                   ;82E247|E220    |      ;
     LDA.B #$A9                                                 ;82E249|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82E24B|8574    |000074;
-    JSL.L fSystem_PrepareTransfer                              ;82E24D|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82E251|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82E24D|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82E251|22B28A80|808AB2;
     JSR.W fUnknown_82E742                                      ;82E255|2042E7  |82E742;
     REP #$30                                                   ;82E258|C230    |      ;
     LDA.W #$0000                                               ;82E25A|A90000  |      ;
@@ -8998,7 +8998,7 @@ fUnknown_82E1F1:
     LDA.W #$0001                                               ;82E265|A90100  |      ;
     LDY.W #$0001                                               ;82E268|A00100  |      ;
     JSR.W fUnknown_82E405                                      ;82E26B|2005E4  |82E405;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82E26E|22AB8F80|808FAB;
+    JSL.L fCore_Zero0x42Ptr                                    ;82E26E|22AB8F80|808FAB;
     SEP #$20                                                   ;82E272|E220    |      ;
     LDA.W $098E                                                ;82E274|AD8E09  |00098E;
     BEQ +                                                      ;82E277|F004    |82E27D;
@@ -9016,7 +9016,7 @@ fUnknown_82E1F1:
     LDA.B #$06                                                 ;82E28E|A906    |      ;
     LDX.B #$04                                                 ;82E290|A204    |      ;
     LDY.B #$00                                                 ;82E292|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E294|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E294|22488E80|808E48;
     REP #$20                                                   ;82E298|C220    |      ;
     SEP #$10                                                   ;82E29A|E210    |      ;
     LDA.W #$F2F9                                               ;82E29C|A9F9F2  |      ;
@@ -9028,7 +9028,7 @@ fUnknown_82E1F1:
     LDA.B #$06                                                 ;82E2A9|A906    |      ;
     LDX.B #$05                                                 ;82E2AB|A205    |      ;
     LDY.B #$01                                                 ;82E2AD|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E2AF|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2AF|22488E80|808E48;
     JML.L .label2                                              ;82E2B3|5CEDE282|82E2ED;
  
  
@@ -9044,7 +9044,7 @@ fUnknown_82E1F1:
     LDA.B #$06                                                 ;82E2C8|A906    |      ;
     LDX.B #$04                                                 ;82E2CA|A204    |      ;
     LDY.B #$00                                                 ;82E2CC|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E2CE|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2CE|22488E80|808E48;
     REP #$20                                                   ;82E2D2|C220    |      ;
     SEP #$10                                                   ;82E2D4|E210    |      ;
     LDA.W #$F2E2                                               ;82E2D6|A9E2F2  |      ;
@@ -9056,7 +9056,7 @@ fUnknown_82E1F1:
     LDA.B #$06                                                 ;82E2E3|A906    |      ;
     LDX.B #$05                                                 ;82E2E5|A205    |      ;
     LDY.B #$01                                                 ;82E2E7|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E2E9|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2E9|22488E80|808E48;
  
 .label2:
     REP #$20                                                   ;82E2ED|C220    |      ;
@@ -9072,8 +9072,8 @@ fUnknown_82E1F1:
     SEP #$20                                                   ;82E30D|E220    |      ;
     LDA.W nAudioMusicTrackId                                   ;82E30F|AD1001  |000110;
     STA.W $0117                                                ;82E312|8D1701  |000117;
-    JSL.L fSystem_ResetForceBlank                              ;82E315|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82E319|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82E315|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82E319|22458680|808645;
     SEP #$20                                                   ;82E31D|E220    |      ;
     LDA.B #$03                                                 ;82E31F|A903    |      ;
     STA.B $92                                                  ;82E321|8592    |000092;
@@ -9081,7 +9081,7 @@ fUnknown_82E1F1:
     STA.B $93                                                  ;82E325|8593    |000093;
     LDA.B #$0F                                                 ;82E327|A90F    |      ;
     STA.B $94                                                  ;82E329|8594    |000094;
-    JSL.L fScreenFadein                                        ;82E32B|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82E32B|22CE8780|8087CE;
     SEP #$20                                                   ;82E32F|E220    |      ;
     STZ.B $94                                                  ;82E331|6494    |000094;
     STZ.B $96                                                  ;82E333|6496    |000096;
@@ -9094,7 +9094,7 @@ fUnknown_82E337:
     REP #$20                                                   ;82E33D|C220    |      ;
     LDA.W #$1800                                               ;82E33F|A90018  |      ;
     STA.B $C7                                                  ;82E342|85C7    |0000C7;
-    JSL.L fUnknown_808E69                                      ;82E344|22698E80|808E69;
+    JSL.L fCore_Unknown808E69                                  ;82E344|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82E348|2234C084|84C034;
     SEP #$20                                                   ;82E34C|E220    |      ;
     LDA.B $97                                                  ;82E34E|A597    |000097;
@@ -9119,7 +9119,7 @@ fUnknown_82E337:
     LDA.B #$06                                                 ;82E372|A906    |      ;
     LDX.B #$04                                                 ;82E374|A204    |      ;
     LDY.B #$00                                                 ;82E376|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E378|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E378|22488E80|808E48;
     REP #$20                                                   ;82E37C|C220    |      ;
     SEP #$10                                                   ;82E37E|E210    |      ;
     LDA.W #$F2F9                                               ;82E380|A9F9F2  |      ;
@@ -9131,7 +9131,7 @@ fUnknown_82E337:
     LDA.B #$06                                                 ;82E38D|A906    |      ;
     LDX.B #$05                                                 ;82E38F|A205    |      ;
     LDY.B #$01                                                 ;82E391|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E393|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E393|22488E80|808E48;
     JML.L fUnknown_82E3D1                                      ;82E397|5CD1E382|82E3D1;
  
  
@@ -9147,7 +9147,7 @@ fUnknown_82E39B:
     LDA.B #$06                                                 ;82E3AC|A906    |      ;
     LDX.B #$04                                                 ;82E3AE|A204    |      ;
     LDY.B #$00                                                 ;82E3B0|A000    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E3B2|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3B2|22488E80|808E48;
     REP #$20                                                   ;82E3B6|C220    |      ;
     SEP #$10                                                   ;82E3B8|E210    |      ;
     LDA.W #$F2E2                                               ;82E3BA|A9E2F2  |      ;
@@ -9159,7 +9159,7 @@ fUnknown_82E39B:
     LDA.B #$06                                                 ;82E3C7|A906    |      ;
     LDX.B #$05                                                 ;82E3C9|A205    |      ;
     LDY.B #$01                                                 ;82E3CB|A001    |      ;
-    JSL.L fSystem_Store72To42AtIndex                           ;82E3CD|22488E80|808E48;
+    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3CD|22488E80|808E48;
  
 fUnknown_82E3D1:
     SEP #$20                                                   ;82E3D1|E220    |      ;
@@ -9225,8 +9225,8 @@ fUnknown_82E405:
     XBA                                                        ;82E435|EB      |      ;
     LDA.W sPlayerNameShort,X                                   ;82E436|BD8108  |000881;
     LDX.W #$0000                                               ;82E439|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E43C|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E440|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E43C|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E440|22F08A80|808AF0;
     REP #$30                                                   ;82E444|C230    |      ;
     LDA.B $82                                                  ;82E446|A582    |000082;
     CLC                                                        ;82E448|18      |      ;
@@ -9255,8 +9255,8 @@ fUnknown_82E405:
     LDA.W $019B                                                ;82E479|AD9B01  |00019B;
     AND.B #$7F                                                 ;82E47C|297F    |      ;
     STA.W $019B                                                ;82E47E|8D9B01  |00019B;
-    JSL.L fTextUnknown_8397A6                                  ;82E481|22A69783|8397A6;
-    JSL.L fSystem_StartTransfer                                ;82E485|22F08A80|808AF0;
+    JSL.L fDialog_Unknown_8397A6                               ;82E481|22A69783|8397A6;
+    JSL.L fCore_StartTransfer                                  ;82E485|22F08A80|808AF0;
     REP #$30                                                   ;82E489|C230    |      ;
     LDA.L $800185                                              ;82E48B|AF850180|800185;
     CLC                                                        ;82E48F|18      |      ;
@@ -9272,8 +9272,8 @@ fUnknown_82E405:
     TAX                                                        ;82E4A6|AA      |      ;
     LDA.L sYearOrdinal_82F298,X                                ;82E4A7|BF98F282|82F298;
     LDX.W #$0000                                               ;82E4AB|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E4AE|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E4B2|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E4AE|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E4B2|22F08A80|808AF0;
     REP #$30                                                   ;82E4B6|C230    |      ;
     LDA.L $800185                                              ;82E4B8|AF850180|800185;
     CLC                                                        ;82E4BC|18      |      ;
@@ -9291,8 +9291,8 @@ fUnknown_82E405:
     TAX                                                        ;82E4D7|AA      |      ;
     LDA.L sYearOrdinal_82F298,X                                ;82E4D8|BF98F282|82F298;
     LDX.W #$0000                                               ;82E4DC|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E4DF|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E4E3|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E4DF|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E4E3|22F08A80|808AF0;
     REP #$30                                                   ;82E4E7|C230    |      ;
     PLX                                                        ;82E4E9|FA      |      ;
     INX                                                        ;82E4EA|E8      |      ;
@@ -9311,8 +9311,8 @@ fUnknown_82E405:
     LDA.W $019B                                                ;82E50A|AD9B01  |00019B;
     AND.B #$7F                                                 ;82E50D|297F    |      ;
     STA.W $019B                                                ;82E50F|8D9B01  |00019B;
-    JSL.L fTextUnknown_8397A6                                  ;82E512|22A69783|8397A6;
-    JSL.L fSystem_StartTransfer                                ;82E516|22F08A80|808AF0;
+    JSL.L fDialog_Unknown_8397A6                               ;82E512|22A69783|8397A6;
+    JSL.L fCore_StartTransfer                                  ;82E516|22F08A80|808AF0;
     REP #$30                                                   ;82E51A|C230    |      ;
     PLX                                                        ;82E51C|FA      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E51D|BF78F282|82F278;
@@ -9323,8 +9323,8 @@ fUnknown_82E405:
     SEP #$20                                                   ;82E52A|E220    |      ;
     LDA.B #$00                                                 ;82E52C|A900    |      ;
     STA.W $018C                                                ;82E52E|8D8C01  |00018C;
-    JSL.L fTextUnknown_8397A6                                  ;82E531|22A69783|8397A6;
-    JSL.L fSystem_StartTransfer                                ;82E535|22F08A80|808AF0;
+    JSL.L fDialog_Unknown_8397A6                               ;82E531|22A69783|8397A6;
+    JSL.L fCore_StartTransfer                                  ;82E535|22F08A80|808AF0;
     REP #$30                                                   ;82E539|C230    |      ;
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;82E53B|22D68982|8289D6;
     REP #$20                                                   ;82E53F|C220    |      ;
@@ -9335,8 +9335,8 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E548|8F850180|800185;
     LDA.W sSeasonName                                          ;82E54C|ADB308  |0008B3;
     LDX.W #$0000                                               ;82E54F|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E552|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E556|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E552|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E556|22F08A80|808AF0;
     REP #$30                                                   ;82E55A|C230    |      ;
     LDA.L $800185                                              ;82E55C|AF850180|800185;
     CLC                                                        ;82E560|18      |      ;
@@ -9344,8 +9344,8 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E564|8F850180|800185;
     LDA.W sSeasonName+2                                        ;82E568|ADB508  |0008B5;
     LDX.W #$0000                                               ;82E56B|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E56E|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E572|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E56E|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E572|22F08A80|808AF0;
     REP #$30                                                   ;82E576|C230    |      ;
     LDA.L $800185                                              ;82E578|AF850180|800185;
     CLC                                                        ;82E57C|18      |      ;
@@ -9353,8 +9353,8 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E580|8F850180|800185;
     LDA.W sSeasonName+4                                        ;82E584|ADB708  |0008B7;
     LDX.W #$0000                                               ;82E587|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E58A|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E58E|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E58A|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E58E|22F08A80|808AF0;
     REP #$30                                                   ;82E592|C230    |      ;
     LDA.L $800185                                              ;82E594|AF850180|800185;
     CLC                                                        ;82E598|18      |      ;
@@ -9362,8 +9362,8 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E59C|8F850180|800185;
     LDA.W sSeasonName+6                                        ;82E5A0|ADB908  |0008B9;
     LDX.W #$0000                                               ;82E5A3|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E5A6|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E5AA|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E5A6|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E5AA|22F08A80|808AF0;
     REP #$30                                                   ;82E5AE|C230    |      ;
     LDA.L $800185                                              ;82E5B0|AF850180|800185;
     CLC                                                        ;82E5B4|18      |      ;
@@ -9371,8 +9371,8 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E5B8|8F850180|800185;
     LDA.W sSeasonName+8                                        ;82E5BC|ADBB08  |0008BB;
     LDX.W #$0000                                               ;82E5BF|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E5C2|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E5C6|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E5C2|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E5C6|22F08A80|808AF0;
     REP #$30                                                   ;82E5CA|C230    |      ;
     LDA.L $800185                                              ;82E5CC|AF850180|800185;
     CLC                                                        ;82E5D0|18      |      ;
@@ -9380,8 +9380,8 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E5D4|8F850180|800185;
     LDA.W sSeasonName+10                                       ;82E5D8|ADBD08  |0008BD;
     LDX.W #$0000                                               ;82E5DB|A20000  |      ;
-    JSL.L fTextTransferGlyph                                   ;82E5DE|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82E5E2|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82E5DE|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82E5E2|22F08A80|808AF0;
     RTS                                                        ;82E5E6|60      |      ; GIGAEND
  
  
@@ -9426,8 +9426,8 @@ fUnknown_82E5E7:
     LDA.B #$80                                                 ;82E62C|A980    |      ; A = nTableValue
     PHY                                                        ;82E62E|5A      |      ; Y -> stack2
     PHX                                                        ;82E62F|DA      |      ; nTableValue -> stack3
-    JSL.L fSystem_PrepareTransfer                              ;82E630|22338A80|808A33;
-    JSL.L fSystem_StartPreparedTransfer                        ;82E634|22B28A80|808AB2;
+    JSL.L fCore_PrepareTransfer                                ;82E630|22338A80|808A33;
+    JSL.L fCore_StartPreparedTransfer                          ;82E634|22B28A80|808AB2;
     REP #$30                                                   ;82E638|C230    |      ;
     PLX                                                        ;82E63A|FA      |      ; X = nTableValue
     PLY                                                        ;82E63B|7A      |      ; Y = stack2
@@ -9516,7 +9516,7 @@ fUnknown_82E742:
     STA.B ptrUnknown0x72+2                                     ;82E780|8574    |000074; 80007E -> $72
     REP #$20                                                   ;82E782|C220    |      ;
     LDA.W #$0080                                               ;82E784|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;82E787|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;82E787|22338A80|808A33;
     SEP #$20                                                   ;82E78B|E220    |      ;
     LDA.B #$01                                                 ;82E78D|A901    |      ;
     STA.B $27                                                  ;82E78F|8527    |000027;
@@ -9536,8 +9536,8 @@ fUnknown_82E742:
     STA.B ptrUnknown0x72+2                                     ;82E7AB|8574    |000074;
     REP #$20                                                   ;82E7AD|C220    |      ;
     LDA.W #$0080                                               ;82E7AF|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;82E7B2|22338A80|808A33;
-    JSL.L fSystem_StartTransfer                                ;82E7B6|22F08A80|808AF0;
+    JSL.L fCore_PrepareTransfer                                ;82E7B2|22338A80|808A33;
+    JSL.L fCore_StartTransfer                                  ;82E7B6|22F08A80|808AF0;
     REP #$30                                                   ;82E7BA|C230    |      ;
     INC.B n16TempVar1                                          ;82E7BC|E67E    |00007E;
     INC.B n16TempVar1                                          ;82E7BE|E67E    |00007E;
@@ -9601,10 +9601,10 @@ fScreen_NameInput:
     STA.B $93                                                  ;82E822|8593    |000093;
     LDA.B #$01                                                 ;82E824|A901    |      ;
     STA.B $94                                                  ;82E826|8594    |000094;
-    JSL.L fScreenFadeout                                       ;82E828|220A8880|80880A;
-    JSL.L fSystem_SetForceBlank                                ;82E82C|220F8E80|808E0F;
-    JSL.L fZeroVRAM                                            ;82E830|22468880|808846;
-    JSL.L fSystem_Zero0x42Ptr                                  ;82E834|22AB8F80|808FAB;
+    JSL.L fCore_ScreenFadeout                                  ;82E828|220A8880|80880A;
+    JSL.L fCore_SetForceBlank                                  ;82E82C|220F8E80|808E0F;
+    JSL.L fCore_ZeroVRAM                                       ;82E830|22468880|808846;
+    JSL.L fCore_Zero0x42Ptr                                    ;82E834|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82E838|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
@@ -9617,8 +9617,8 @@ fScreen_NameInput:
     STA.W $019A                                                ;82E852|8D9A01  |00019A;
     SEP #$20                                                   ;82E855|E220    |      ;
     LDA.B #$04                                                 ;82E857|A904    |      ;
-    JSL.L fSystem_ManageGraphicsPresets                        ;82E859|22598C80|808C59;
-    JSL.L fTileMap_LoadDestination                             ;82E85D|22C6A780|80A7C6;
+    JSL.L fCore_ManageGraphicsPresets                          ;82E859|22598C80|808C59;
+    JSL.L fTileMap_MapChangeHandler                            ;82E85D|22C6A780|80A7C6;
     REP #$20                                                   ;82E861|C220    |      ;
     LDA.W #$006F                                               ;82E863|A96F00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82E866|22CF9180|8091CF;
@@ -9636,7 +9636,7 @@ fScreen_NameInput:
     SEP #$20                                                   ;82E883|E220    |      ;
     LDA.B #$A9                                                 ;82E885|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82E887|8574    |000074;
-    JSL.L fSystem_PrepareTransfer                              ;82E889|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;82E889|22338A80|808A33;
     SEP #$20                                                   ;82E88D|E220    |      ;
     REP #$10                                                   ;82E88F|C210    |      ;
     LDA.B #$01                                                 ;82E891|A901    |      ;
@@ -9651,8 +9651,8 @@ fScreen_NameInput:
     SEP #$20                                                   ;82E8A6|E220    |      ;
     LDA.B #$A9                                                 ;82E8A8|A9A9    |      ;
     STA.B ptrUnknown0x72+2                                     ;82E8AA|8574    |000074;
-    JSL.L fSystem_PrepareTransfer                              ;82E8AC|22338A80|808A33;
-    JSL.L fSystem_StartTransfer                                ;82E8B0|22F08A80|808AF0;
+    JSL.L fCore_PrepareTransfer                                ;82E8AC|22338A80|808A33;
+    JSL.L fCore_StartTransfer                                  ;82E8B0|22F08A80|808AF0;
     JSL.L fUnknown_Zero07Ptr                                   ;82E8B4|22C7A481|81A4C7;
     REP #$20                                                   ;82E8B8|C220    |      ;
     LDA.W #$0219                                               ;82E8BA|A91902  |      ;
@@ -9687,8 +9687,8 @@ fScreen_NameInput:
     SEP #$20                                                   ;82E90F|E220    |      ;
     LDA.W nAudioMusicTrackId                                   ;82E911|AD1001  |000110;
     STA.W $0117                                                ;82E914|8D1701  |000117;
-    JSL.L fSystem_ResetForceBlank                              ;82E917|221E8E80|808E1E;
-    JSL.L fWaitForNextNMI                                      ;82E91B|22458680|808645;
+    JSL.L fCore_ResetForceBlank                                ;82E917|221E8E80|808E1E;
+    JSL.L fCore_WaitForNextNMI                                 ;82E91B|22458680|808645;
     SEP #$20                                                   ;82E91F|E220    |      ;
     LDA.B #$03                                                 ;82E921|A903    |      ;
     STA.B $92                                                  ;82E923|8592    |000092;
@@ -9696,7 +9696,7 @@ fScreen_NameInput:
     STA.B $93                                                  ;82E927|8593    |000093;
     LDA.B #$0F                                                 ;82E929|A90F    |      ;
     STA.B $94                                                  ;82E92B|8594    |000094;
-    JSL.L fScreenFadein                                        ;82E92D|22CE8780|8087CE;
+    JSL.L fCore_ScreenFadein                                   ;82E92D|22CE8780|8087CE;
     REP #$20                                                   ;82E931|C220    |      ;
     STZ.W nMenuIndex                                           ;82E933|9C9109  |000991;
     SEP #$20                                                   ;82E936|E220    |      ;
@@ -9868,7 +9868,7 @@ fTextUnknown_82EA60:
     STA.L $800185                                              ;82EA73|8F850180|800185;
     PLA                                                        ;82EA77|68      |      ; A = nLetterCode
     LDX.W #$0001                                               ;82EA78|A20100  |      ;
-    JSL.L fTextTransferGlyph                                   ;82EA7B|22239883|839823;
+    JSL.L fDialog_TransferGlyph                                ;82EA7B|22239883|839823;
     RTL                                                        ;82EA7F|6B      |      ;
  
  
@@ -9884,8 +9884,8 @@ fUnknown_82EA80:
     STA.L $800185                                              ;82EA90|8F850180|800185;
     LDA.W #$00A8                                               ;82EA94|A9A800  |      ; nLetterCode
     LDX.W #$0001                                               ;82EA97|A20100  |      ;
-    JSL.L fTextTransferGlyph                                   ;82EA9A|22239883|839823;
-    JSL.L fSystem_StartTransfer                                ;82EA9E|22F08A80|808AF0;
+    JSL.L fDialog_TransferGlyph                                ;82EA9A|22239883|839823;
+    JSL.L fCore_StartTransfer                                  ;82EA9E|22F08A80|808AF0;
     REP #$30                                                   ;82EAA2|C230    |      ;
     LDA.B $82                                                  ;82EAA4|A582    |000082;
     CLC                                                        ;82EAA6|18      |      ;
@@ -9929,7 +9929,7 @@ fUnknown_82EAB4:
     STA.B ptrUnknown0x72+2                                     ;82EAEC|8574    |000074; 80007E -> $72
     REP #$20                                                   ;82EAEE|C220    |      ;
     LDA.W #$0080                                               ;82EAF0|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;82EAF3|22338A80|808A33;
+    JSL.L fCore_PrepareTransfer                                ;82EAF3|22338A80|808A33;
     SEP #$20                                                   ;82EAF7|E220    |      ;
     LDA.B #$01                                                 ;82EAF9|A901    |      ;
     STA.B $27                                                  ;82EAFB|8527    |000027;
@@ -9949,8 +9949,8 @@ fUnknown_82EAB4:
     STA.B ptrUnknown0x72+2                                     ;82EB17|8574    |000074;
     REP #$20                                                   ;82EB19|C220    |      ;
     LDA.W #$0080                                               ;82EB1B|A98000  |      ;
-    JSL.L fSystem_PrepareTransfer                              ;82EB1E|22338A80|808A33;
-    JSL.L fSystem_StartTransfer                                ;82EB22|22F08A80|808AF0;
+    JSL.L fCore_PrepareTransfer                                ;82EB1E|22338A80|808A33;
+    JSL.L fCore_StartTransfer                                  ;82EB22|22F08A80|808AF0;
     REP #$30                                                   ;82EB26|C230    |      ;
     INC.B n16TempVar1                                          ;82EB28|E67E    |00007E;
     INC.B n16TempVar1                                          ;82EB2A|E67E    |00007E;
