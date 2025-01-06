@@ -2,7 +2,7 @@
     ORG $848000
  
  
-fSubUnk1Unknown_848000:
+fSubUnk1_ZeroCCPtr:
     REP #$30                                                   ;848000|C230    |      ;
     LDX.W #$0000                                               ;848002|A20000  |      ;
  
@@ -1344,7 +1344,7 @@ subUnknown849419_0x00:
     STA.B ptrUnknown0xC9                                       ;8489C5|85C9    |0000C9;
     SEP #$20                                                   ;8489C7|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;8489C9|A7C9    |0000C9;
-    STA.W nAudioUnk110                                         ;8489CB|8D1001  |000110;
+    STA.W nAudioMusicTrackId                                   ;8489CB|8D1001  |000110;
     REP #$30                                                   ;8489CE|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;8489D0|A5C9    |0000C9;
     CLC                                                        ;8489D2|18      |      ;
@@ -1372,9 +1372,9 @@ subUnknown849419_0x01:
     LDA.L $7F1F5C                                              ;8489F8|AF5C1F7F|7F1F5C;
     AND.W #$FFFE                                               ;8489FC|29FEFF  |      ;
     STA.L $7F1F5C                                              ;8489FF|8F5C1F7F|7F1F5C;
-    LDA.W nCurrentMapdata0196                                  ;848A03|AD9601  |000196;
+    LDA.W nMapEngine_CurrentMapId                              ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
-    STA.W nCurrentMapdata0196                                  ;848A09|8D9601  |000196;
+    STA.W nMapEngine_CurrentMapId                              ;848A09|8D9601  |000196;
     RTS                                                        ;848A0C|60      |      ;
  
  
@@ -1393,9 +1393,9 @@ subUnknown849419_0x02:
     ORA.W #$0001                                               ;848A26|090100  |      ;
     STA.L $7F1F5C                                              ;848A29|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;848A2D|C230    |      ;
-    LDA.W nCurrentMapdata0196                                  ;848A2F|AD9601  |000196;
+    LDA.W nMapEngine_CurrentMapId                              ;848A2F|AD9601  |000196;
     AND.W #$FFDF                                               ;848A32|29DFFF  |      ;
-    STA.W nCurrentMapdata0196                                  ;848A35|8D9601  |000196;
+    STA.W nMapEngine_CurrentMapId                              ;848A35|8D9601  |000196;
     RTS                                                        ;848A38|60      |      ;
  
  
@@ -1435,7 +1435,7 @@ subUnknown849419_0x05:
     ADC.W #$0001                                               ;848A6C|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;848A6F|85C9    |0000C9;
     LDA.B [ptrUnknown0xC9]                                     ;848A71|A7C9    |0000C9;
-    STA.W nDestinationX                                        ;848A73|8D7D01  |00017D;
+    STA.W nMapEngine_DestinationX                              ;848A73|8D7D01  |00017D;
     STA.B nPlayerPosX                                          ;848A76|85D6    |0000D6;
     REP #$30                                                   ;848A78|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848A7A|A5C9    |0000C9;
@@ -1443,7 +1443,7 @@ subUnknown849419_0x05:
     ADC.W #$0002                                               ;848A7D|690200  |      ;
     STA.B ptrUnknown0xC9                                       ;848A80|85C9    |0000C9;
     LDA.B [ptrUnknown0xC9]                                     ;848A82|A7C9    |0000C9;
-    STA.W nDestinationY                                        ;848A84|8D7F01  |00017F;
+    STA.W nMapEngine_DestinationY                              ;848A84|8D7F01  |00017F;
     STA.B nPlayerPosY                                          ;848A87|85D8    |0000D8;
     REP #$30                                                   ;848A89|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848A8B|A5C9    |0000C9;
@@ -2007,7 +2007,7 @@ subUnknown849419_0x17:
     STA.B ptrUnknown0xC9                                       ;848E72|85C9    |0000C9;
     SEP #$20                                                   ;848E74|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;848E76|A7C9    |0000C9;
-    JSL.L fRollRNG                                             ;848E78|22F98980|8089F9;
+    JSL.L fGetRandomNumberRanged                               ;848E78|22F98980|8089F9;
     SEP #$20                                                   ;848E7C|E220    |      ;
     REP #$10                                                   ;848E7E|C210    |      ;
     LDY.W #$000D                                               ;848E80|A00D00  |      ;
@@ -2679,7 +2679,7 @@ subUnknown849419_0x24:
     STA.B ptrUnknown0xC9                                       ;849360|85C9    |0000C9;
     SEP #$20                                                   ;849362|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;849364|A7C9    |0000C9;
-    JSL.L fUnknown_808FC7                                      ;849366|22C78F80|808FC7;
+    JSL.L fPalette_Unknown808FC7                               ;849366|22C78F80|808FC7;
     REP #$30                                                   ;84936A|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84936C|A5C9    |0000C9;
     CLC                                                        ;84936E|18      |      ;
@@ -2890,7 +2890,7 @@ subUnknown849419_0x29:
     STA.B ptrUnknown0xC9                                       ;84951D|85C9    |0000C9;
     REP #$20                                                   ;84951F|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;849521|A7C9    |0000C9;
-    STA.W $087C                                                ;849523|8D7C08  |00087C;
+    STA.W nMapScrool_SpeedX                                    ;849523|8D7C08  |00087C;
     REP #$30                                                   ;849526|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;849528|A5C9    |0000C9;
     CLC                                                        ;84952A|18      |      ;
@@ -2898,7 +2898,7 @@ subUnknown849419_0x29:
     STA.B ptrUnknown0xC9                                       ;84952E|85C9    |0000C9;
     REP #$20                                                   ;849530|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;849532|A7C9    |0000C9;
-    STA.W $087E                                                ;849534|8D7E08  |00087E;
+    STA.W nMapScrool_SpeedY                                    ;849534|8D7E08  |00087E;
     REP #$30                                                   ;849537|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;849539|A5C9    |0000C9;
     CLC                                                        ;84953B|18      |      ;
@@ -2906,7 +2906,7 @@ subUnknown849419_0x29:
     STA.B ptrUnknown0xC9                                       ;84953F|85C9    |0000C9;
     SEP #$20                                                   ;849541|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;849543|A7C9    |0000C9;
-    STA.W $0880                                                ;849545|8D8008  |000880;
+    STA.W nMapScrool_Timer                                     ;849545|8D8008  |000880;
     REP #$30                                                   ;849548|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84954A|A5C9    |0000C9;
     CLC                                                        ;84954C|18      |      ;
@@ -3673,7 +3673,7 @@ subUnknown849419_0x31:
     LDY.W #$000A                                               ;849B09|A00A00  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849B0C|9772    |000072;
     SEP #$20                                                   ;849B0E|E220    |      ;
-    LDA.B nSelectedTilemapId                                   ;849B10|A522    |000022;
+    LDA.B nMapEngine_DestinationId                             ;849B10|A522    |000022;
     CMP.B #$27                                                 ;849B12|C927    |      ;
     BNE CODE_849B26                                            ;849B14|D010    |849B26;
     SEP #$20                                                   ;849B16|E220    |      ;
@@ -3687,7 +3687,7 @@ subUnknown849419_0x31:
  
 CODE_849B26:
     SEP #$20                                                   ;849B26|E220    |      ;
-    LDA.B nSelectedTilemapId                                   ;849B28|A522    |000022;
+    LDA.B nMapEngine_DestinationId                             ;849B28|A522    |000022;
     CMP.B #$04                                                 ;849B2A|C904    |      ;
     BCS CODE_849B45                                            ;849B2C|B017    |849B45;
     SEP #$20                                                   ;849B2E|E220    |      ;
@@ -6245,7 +6245,7 @@ subUnknown849419_0x35:
     LDA.W #$0020                                               ;84ACAA|A92000  |      ;
     STA.B $E3                                                  ;84ACAD|85E3    |0000E3;
     LDA.W $0913                                                ;84ACAF|AD1309  |000913;
-    JSL.L fEngineUnknown_83AD91                                ;84ACB2|2291AD83|83AD91;
+    JSL.L fGameEngine_Unknown83AD91                            ;84ACB2|2291AD83|83AD91;
     REP #$30                                                   ;84ACB6|C230    |      ;
     CMP.W #$0000                                               ;84ACB8|C90000  |      ;
     BEQ +                                                      ;84ACBB|F003    |84ACC0;
@@ -7387,9 +7387,9 @@ subUnknown849419_0x3C:
     LDA.B #$15                                                 ;84B511|A915    |      ;
     STA.W $098B                                                ;84B513|8D8B09  |00098B;
     REP #$30                                                   ;84B516|C230    |      ;
-    LDA.W nCurrentMapdata0196                                  ;84B518|AD9601  |000196;
+    LDA.W nMapEngine_CurrentMapId                              ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
-    STA.W nCurrentMapdata0196                                  ;84B51E|8D9601  |000196;
+    STA.W nMapEngine_CurrentMapId                              ;84B51E|8D9601  |000196;
     LDA.L $7F1F60                                              ;84B521|AF601F7F|7F1F60;
     ORA.W #$0020                                               ;84B525|092000  |      ;
     STA.L $7F1F60                                              ;84B528|8F601F7F|7F1F60;
@@ -7412,9 +7412,9 @@ subUnknown849419_0x3D:
     ADC.W #$0001                                               ;84B545|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B548|85C9    |0000C9;
     REP #$30                                                   ;84B54A|C230    |      ;
-    LDA.W nCurrentMapdata0196                                  ;84B54C|AD9601  |000196;
+    LDA.W nMapEngine_CurrentMapId                              ;84B54C|AD9601  |000196;
     ORA.W #$4000                                               ;84B54F|090040  |      ;
-    STA.W nCurrentMapdata0196                                  ;84B552|8D9601  |000196;
+    STA.W nMapEngine_CurrentMapId                              ;84B552|8D9601  |000196;
     RTS                                                        ;84B555|60      |      ;
  
  
@@ -8919,86 +8919,86 @@ aCheckFlags_84C014:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;84C020|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;84C02C|        |      ;
  
-fUnknown019A_Handler:
+fInput_Handler:
     SEP #$20                                                   ;84C034|E220    |      ;
     REP #$10                                                   ;84C036|C210    |      ;
     LDA.W $019A                                                ;84C038|AD9A01  |00019A;
     CMP.B #$01                                                 ;84C03B|C901    |      ;
     BNE +                                                      ;84C03D|D003    |84C042;
-    JMP.W fUnkown019A_case01                                   ;84C03F|4CB7C6  |84C6B7;
+    JMP.W fInput_Handler_case01                                ;84C03F|4CB7C6  |84C6B7;
  
  
   + CMP.B #$02                                                 ;84C042|C902    |      ;
     BNE +                                                      ;84C044|D003    |84C049;
-    JMP.W fUnkown019A_case02                                   ;84C046|4C05CF  |84CF05;
+    JMP.W fInput_Handler_case02                                ;84C046|4C05CF  |84CF05;
  
  
   + CMP.B #$03                                                 ;84C049|C903    |      ;
     BNE +                                                      ;84C04B|D003    |84C050;
-    JMP.W fUnkown019A_case03                                   ;84C04D|4C40C5  |84C540;
+    JMP.W fInput_Handler_case03                                ;84C04D|4C40C5  |84C540;
  
  
   + CMP.B #$04                                                 ;84C050|C904    |      ;
     BNE +                                                      ;84C052|D003    |84C057;
-    JMP.W fUnkown019A_case04                                   ;84C054|4C88C2  |84C288;
+    JMP.W fInput_Handler_case04                                ;84C054|4C88C2  |84C288;
  
  
   + CMP.B #$05                                                 ;84C057|C905    |      ;
     BNE +                                                      ;84C059|D003    |84C05E;
-    JMP.W fUnkown019A_NameInput                                ;84C05B|4C66C0  |84C066;
+    JMP.W fInput_NameInput                                     ;84C05B|4C66C0  |84C066;
  
  
   + CMP.B #$06                                                 ;84C05E|C906    |      ;
     BNE +                                                      ;84C060|D003    |84C065;
-    JMP.W fUnkown019A_case06                                   ;84C062|4CD2CE  |84CED2;
+    JMP.W fInput_Handler_case06                                ;84C062|4CD2CE  |84CED2;
  
  
   + RTL                                                        ;84C065|6B      |      ;
  
  
-fUnkown019A_NameInput:
+fInput_NameInput:
     REP #$30                                                   ;84C066|C230    |      ;
     LDA.W nUnknownFlags012C                                    ;84C068|AD2C01  |00012C;
     BIT.W #$0400                                               ;84C06B|890004  |      ;
     BEQ +                                                      ;84C06E|F003    |84C073;
-    JMP.W fUnknown_84C204                                      ;84C070|4C04C2  |84C204;
+    JMP.W fInput_Unknown84C204                                 ;84C070|4C04C2  |84C204;
  
  
   + LDA.W nUnknownFlags012C                                    ;84C073|AD2C01  |00012C;
     BIT.W #$0800                                               ;84C076|890008  |      ;
     BEQ +                                                      ;84C079|F003    |84C07E;
-    JMP.W fUnknown_84C225                                      ;84C07B|4C25C2  |84C225;
+    JMP.W fInput_Unknown84C225                                 ;84C07B|4C25C2  |84C225;
  
  
   + LDA.W nUnknownFlags012C                                    ;84C07E|AD2C01  |00012C;
     BIT.W #$0100                                               ;84C081|890001  |      ;
     BEQ +                                                      ;84C084|F003    |84C089;
-    JMP.W fUnknown_84C246                                      ;84C086|4C46C2  |84C246;
+    JMP.W fInput_Unknown84C246                                 ;84C086|4C46C2  |84C246;
  
  
   + LDA.W nUnknownFlags012C                                    ;84C089|AD2C01  |00012C;
     BIT.W #$0200                                               ;84C08C|890002  |      ;
     BEQ +                                                      ;84C08F|F003    |84C094;
-    JMP.W fUnknown_84C267                                      ;84C091|4C67C2  |84C267;
+    JMP.W fInput_Unknown84C267                                 ;84C091|4C67C2  |84C267;
  
  
   + LDA.W $0128                                                ;84C094|AD2801  |000128;
     BIT.W #$8000                                               ;84C097|890080  |      ;
     BEQ +                                                      ;84C09A|F003    |84C09F;
-    JMP.W fUnknown_84C0AB                                      ;84C09C|4CABC0  |84C0AB;
+    JMP.W fInput_Unknown84C0AB                                 ;84C09C|4CABC0  |84C0AB;
  
  
   + LDA.W $0128                                                ;84C09F|AD2801  |000128;
     BIT.W #$0080                                               ;84C0A2|898000  |      ;
     BEQ .return                                                ;84C0A5|F003    |84C0AA;
-    JMP.W fUnknown_84C0EE                                      ;84C0A7|4CEEC0  |84C0EE;
+    JMP.W fInput_Unknown84C0EE                                 ;84C0A7|4CEEC0  |84C0EE;
  
  
 .return:
     RTL                                                        ;84C0AA|6B      |      ;
  
  
-fUnknown_84C0AB:
+fInput_Unknown84C0AB:
     SEP #$20                                                   ;84C0AB|E220    |      ;
     LDA.W nNameEntryIndex                                      ;84C0AD|AD9409  |000994;
     BEQ .label2                                                ;84C0B0|F029    |84C0DB;
@@ -9035,23 +9035,23 @@ fUnknown_84C0AB:
     RTL                                                        ;84C0ED|6B      |      ;
  
  
-fUnknown_84C0EE:
+fInput_Unknown84C0EE:
     REP #$20                                                   ;84C0EE|C220    |      ;
     LDA.W #$0005                                               ;84C0F0|A90500  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C0F3|22ACEB82|82EBAC;
     REP #$20                                                   ;84C0F7|C220    |      ;
     CMP.W #$0001                                               ;84C0F9|C90100  |      ;
-    BEQ fUnknown_84C157                                        ;84C0FC|F059    |84C157;
+    BEQ fInput_Unknown84C157                                   ;84C0FC|F059    |84C157;
     CMP.W #$0002                                               ;84C0FE|C90200  |      ;
-    BEQ fUnknown_84C17E                                        ;84C101|F07B    |84C17E;
+    BEQ fInput_Unknown84C17E                                   ;84C101|F07B    |84C17E;
     CMP.W #$0003                                               ;84C103|C90300  |      ;
     BNE +                                                      ;84C106|D003    |84C10B;
-    JMP.W fUnknown_84C1A8                                      ;84C108|4CA8C1  |84C1A8;
+    JMP.W fInput_Unknown84C1A8                                 ;84C108|4CA8C1  |84C1A8;
  
  
   + CMP.W #$0004                                               ;84C10B|C90400  |      ;
     BNE +                                                      ;84C10E|D003    |84C113;
-    JMP.W fUnknown_84C1D2                                      ;84C110|4CD2C1  |84C1D2;
+    JMP.W fInput_Unknown84C1D2                                 ;84C110|4CD2C1  |84C1D2;
  
  
   + SEP #$20                                                   ;84C113|E220    |      ;
@@ -9088,7 +9088,7 @@ fUnknown_84C0EE:
     RTL                                                        ;84C156|6B      |      ;
  
  
-fUnknown_84C157:
+fInput_Unknown84C157:
     SEP #$20                                                   ;84C157|E220    |      ;
     LDA.B #$00                                                 ;84C159|A900    |      ;
     STA.W nMenuTableSelector                                   ;84C15B|8D9309  |000993;
@@ -9107,7 +9107,7 @@ fUnknown_84C157:
     RTL                                                        ;84C17D|6B      |      ;
  
  
-fUnknown_84C17E:
+fInput_Unknown84C17E:
     SEP #$20                                                   ;84C17E|E220    |      ;
     LDA.B #$01                                                 ;84C180|A901    |      ;
     STA.W nMenuTableSelector                                   ;84C182|8D9309  |000993;
@@ -9127,7 +9127,7 @@ fUnknown_84C17E:
     RTL                                                        ;84C1A7|6B      |      ;
  
  
-fUnknown_84C1A8:
+fInput_Unknown84C1A8:
     SEP #$20                                                   ;84C1A8|E220    |      ;
     LDA.B #$02                                                 ;84C1AA|A902    |      ;
     STA.W nMenuTableSelector                                   ;84C1AC|8D9309  |000993;
@@ -9147,7 +9147,7 @@ fUnknown_84C1A8:
     RTL                                                        ;84C1D1|6B      |      ;
  
  
-fUnknown_84C1D2:
+fInput_Unknown84C1D2:
     SEP #$20                                                   ;84C1D2|E220    |      ;
     LDA.W nNameEntryIndex                                      ;84C1D4|AD9409  |000994;
     BEQ +                                                      ;84C1D7|F018    |84C1F1;
@@ -9173,7 +9173,7 @@ fUnknown_84C1D2:
     RTL                                                        ;84C203|6B      |      ;
  
  
-fUnknown_84C204:
+fInput_Unknown84C204:
     REP #$20                                                   ;84C204|C220    |      ;
     LDA.W #$0000                                               ;84C206|A90000  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C209|22ACEB82|82EBAC;
@@ -9189,7 +9189,7 @@ fUnknown_84C204:
     RTL                                                        ;84C224|6B      |      ;
  
  
-fUnknown_84C225:
+fInput_Unknown84C225:
     REP #$20                                                   ;84C225|C220    |      ;
     LDA.W #$0001                                               ;84C227|A90100  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C22A|22ACEB82|82EBAC;
@@ -9205,7 +9205,7 @@ fUnknown_84C225:
     RTL                                                        ;84C245|6B      |      ;
  
  
-fUnknown_84C246:
+fInput_Unknown84C246:
     REP #$20                                                   ;84C246|C220    |      ;
     LDA.W #$0002                                               ;84C248|A90200  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C24B|22ACEB82|82EBAC;
@@ -9221,7 +9221,7 @@ fUnknown_84C246:
     RTL                                                        ;84C266|6B      |      ;
  
  
-fUnknown_84C267:
+fInput_Unknown84C267:
     REP #$20                                                   ;84C267|C220    |      ;
     LDA.W #$0003                                               ;84C269|A90300  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C26C|22ACEB82|82EBAC;
@@ -9237,45 +9237,45 @@ fUnknown_84C267:
     RTL                                                        ;84C287|6B      |      ;
  
  
-fUnkown019A_case04:
+fInput_Handler_case04:
     SEP #$20                                                   ;84C288|E220    |      ;
     LDA.B nUnknown0095                                         ;84C28A|A595    |000095;
     CMP.B #$01                                                 ;84C28C|C901    |      ;
     BNE +                                                      ;84C28E|D003    |84C293;
-    JMP.W fUnknown_84C2B4                                      ;84C290|4CB4C2  |84C2B4;
+    JMP.W fInput_Unknown84C2B4                                 ;84C290|4CB4C2  |84C2B4;
  
  
   + CMP.B #$02                                                 ;84C293|C902    |      ;
     BNE +                                                      ;84C295|D003    |84C29A;
-    JMP.W fUnknown_84C428                                      ;84C297|4C28C4  |84C428;
+    JMP.W fInput_Unknown84C428                                 ;84C297|4C28C4  |84C428;
  
  
   + CMP.B #$03                                                 ;84C29A|C903    |      ;
     BNE +                                                      ;84C29C|D003    |84C2A1;
-    JMP.W fUnknown_84C428                                      ;84C29E|4C28C4  |84C428;
+    JMP.W fInput_Unknown84C428                                 ;84C29E|4C28C4  |84C428;
  
  
   + CMP.B #$05                                                 ;84C2A1|C905    |      ;
     BNE +                                                      ;84C2A3|D003    |84C2A8;
-    JMP.W fUnknown_84C458                                      ;84C2A5|4C58C4  |84C458;
+    JMP.W fInput_Unknown84C458                                 ;84C2A5|4C58C4  |84C458;
  
  
   + CMP.B #$07                                                 ;84C2A8|C907    |      ;
-    BEQ fUnknown_84C2FE                                        ;84C2AA|F052    |84C2FE;
+    BEQ fInput_Unknown84C2FE                                   ;84C2AA|F052    |84C2FE;
     CMP.B #$08                                                 ;84C2AC|C908    |      ;
     BNE +                                                      ;84C2AE|D003    |84C2B3;
-    JMP.W fUnkown_84C380                                       ;84C2B0|4C80C3  |84C380;
+    JMP.W fInput_Unkown84C380                                  ;84C2B0|4C80C3  |84C380;
  
  
   + RTL                                                        ;84C2B3|6B      |      ;
  
  
-fUnknown_84C2B4:
+fInput_Unknown84C2B4:
     REP #$30                                                   ;84C2B4|C230    |      ;
     LDA.B nPlayerAction                                        ;84C2B6|A5D4    |0000D4;
     CMP.W #$0003                                               ;84C2B8|C90300  |      ;
     BEQ +                                                      ;84C2BB|F004    |84C2C1;
-    JSL.L fUnknown_84C7D6                                      ;84C2BD|22D6C784|84C7D6;
+    JSL.L fInput_Unknown84C7D6                                 ;84C2BD|22D6C784|84C7D6;
  
   + REP #$30                                                   ;84C2C1|C230    |      ;
     LDA.L $7F1F5A                                              ;84C2C3|AF5A1F7F|7F1F5A;
@@ -9308,7 +9308,7 @@ fUnknown_84C2B4:
     RTL                                                        ;84C2FD|6B      |      ;
  
  
-fUnknown_84C2FE:
+fInput_Unknown84C2FE:
     REP #$30                                                   ;84C2FE|C230    |      ;
     LDA.W $0128                                                ;84C300|AD2801  |000128;
     BIT.W #$0400                                               ;84C303|890004  |      ;
@@ -9383,7 +9383,7 @@ fUnknown_84C2FE:
     RTL                                                        ;84C37F|6B      |      ;
  
  
-fUnkown_84C380:
+fInput_Unkown84C380:
     REP #$30                                                   ;84C380|C230    |      ;
     LDA.W $0128                                                ;84C382|AD2801  |000128;
     BIT.W #$0400                                               ;84C385|890004  |      ;
@@ -9476,7 +9476,7 @@ fUnkown_84C380:
     RTL                                                        ;84C427|6B      |      ;
  
  
-fUnknown_84C428:
+fInput_Unknown84C428:
     REP #$30                                                   ;84C428|C230    |      ;
     LDA.L $7F1F5A                                              ;84C42A|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84C42E|290080  |      ;
@@ -9505,7 +9505,7 @@ fUnknown_84C428:
     RTL                                                        ;84C457|6B      |      ;
  
  
-fUnknown_84C458:
+fInput_Unknown84C458:
     REP #$30                                                   ;84C458|C230    |      ;
     LDA.W $0128                                                ;84C45A|AD2801  |000128;
     BIT.W #$0400                                               ;84C45D|890004  |      ;
@@ -9637,42 +9637,42 @@ fUnknown_84C458:
     RTL                                                        ;84C53F|6B      |      ;
  
  
-fUnkown019A_case03:
+fInput_Handler_case03:
     REP #$30                                                   ;84C540|C230    |      ;
     LDA.W nUnknownFlags012C                                    ;84C542|AD2C01  |00012C;
     BIT.W #$0400                                               ;84C545|890004  |      ;
     BEQ +                                                      ;84C548|F003    |84C54D;
-    JMP.W fUnknown_84C5D1                                      ;84C54A|4CD1C5  |84C5D1;
+    JMP.W fInput_Unknown84C5D1                                 ;84C54A|4CD1C5  |84C5D1;
  
  
   + LDA.W nUnknownFlags012C                                    ;84C54D|AD2C01  |00012C;
     BIT.W #$0800                                               ;84C550|890008  |      ;
     BEQ +                                                      ;84C553|F003    |84C558;
-    JMP.W fUnknown_84C612                                      ;84C555|4C12C6  |84C612;
+    JMP.W fInput_Unknown84C612                                 ;84C555|4C12C6  |84C612;
  
  
   + LDA.W nUnknownFlags012C                                    ;84C558|AD2C01  |00012C;
     BIT.W #$0100                                               ;84C55B|890001  |      ;
     BEQ +                                                      ;84C55E|F003    |84C563;
-    JMP.W fUnknown_84C651                                      ;84C560|4C51C6  |84C651;
+    JMP.W fInput_Unknown84C651                                 ;84C560|4C51C6  |84C651;
  
  
   + LDA.W nUnknownFlags012C                                    ;84C563|AD2C01  |00012C;
     BIT.W #$0200                                               ;84C566|890002  |      ;
     BEQ +                                                      ;84C569|F003    |84C56E;
-    JMP.W fUnknown_84C684                                      ;84C56B|4C84C6  |84C684;
+    JMP.W fInput_Unknown84C684                                 ;84C56B|4C84C6  |84C684;
  
  
   + LDA.W $0128                                                ;84C56E|AD2801  |000128;
     BIT.W #$0080                                               ;84C571|898000  |      ;
     BEQ +                                                      ;84C574|F003    |84C579;
-    JMP.W fUnknown_84C57A                                      ;84C576|4C7AC5  |84C57A;
+    JMP.W fInput_Unknown84C57A                                 ;84C576|4C7AC5  |84C57A;
  
  
   + RTL                                                        ;84C579|6B      |      ;
  
  
-fUnknown_84C57A:
+fInput_Unknown84C57A:
     SEP #$20                                                   ;84C57A|E220    |      ;
     REP #$10                                                   ;84C57C|C210    |      ;
     LDA.B #$01                                                 ;84C57E|A901    |      ;
@@ -9716,7 +9716,7 @@ fUnknown_84C57A:
     RTL                                                        ;84C5D0|6B      |      ;
  
  
-fUnknown_84C5D1:
+fInput_Unknown84C5D1:
     SEP #$20                                                   ;84C5D1|E220    |      ;
     REP #$10                                                   ;84C5D3|C210    |      ;
     LDA.B #$03                                                 ;84C5D5|A903    |      ;
@@ -9750,7 +9750,7 @@ fUnknown_84C5D1:
     RTL                                                        ;84C611|6B      |      ;
  
  
-fUnknown_84C612:
+fInput_Unknown84C612:
     SEP #$20                                                   ;84C612|E220    |      ;
     REP #$10                                                   ;84C614|C210    |      ;
     LDA.B #$03                                                 ;84C616|A903    |      ;
@@ -9783,7 +9783,7 @@ fUnknown_84C612:
     RTL                                                        ;84C650|6B      |      ;
  
  
-fUnknown_84C651:
+fInput_Unknown84C651:
     SEP #$20                                                   ;84C651|E220    |      ;
     REP #$10                                                   ;84C653|C210    |      ;
     LDA.B #$03                                                 ;84C655|A903    |      ;
@@ -9809,7 +9809,7 @@ fUnknown_84C651:
     RTL                                                        ;84C683|6B      |      ;
  
  
-fUnknown_84C684:
+fInput_Unknown84C684:
     SEP #$20                                                   ;84C684|E220    |      ;
     REP #$10                                                   ;84C686|C210    |      ;
     LDA.B #$03                                                 ;84C688|A903    |      ;
@@ -9835,152 +9835,152 @@ fUnknown_84C684:
     RTL                                                        ;84C6B6|6B      |      ;
  
  
-fUnkown019A_case01:
+fInput_Handler_case01:
     REP #$30                                                   ;84C6B7|C230    |      ;
     LDA.B $D2                                                  ;84C6B9|A5D2    |0000D2;
     AND.W #$00C4                                               ;84C6BB|29C400  |      ;
     BEQ +                                                      ;84C6BE|F003    |84C6C3;
-    JMP.W fReturn_84C7B5                                       ;84C6C0|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C6C0|4CB5C7  |84C7B5;
  
  
   + LDA.B nPlayerAction                                        ;84C6C3|A5D4    |0000D4;
     CMP.W #$0003                                               ;84C6C5|C90300  |      ;
     BNE +                                                      ;84C6C8|D003    |84C6CD;
-    JMP.W fReturn_84C7B5                                       ;84C6CA|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C6CA|4CB5C7  |84C7B5;
  
  
   + LDA.L $7F1F5C                                              ;84C6CD|AF5C1F7F|7F1F5C;
     AND.W #$0020                                               ;84C6D1|292000  |      ;
     BEQ +                                                      ;84C6D4|F003    |84C6D9;
-    JMP.W fReturn_84C7B5                                       ;84C6D6|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C6D6|4CB5C7  |84C7B5;
  
  
   + REP #$30                                                   ;84C6D9|C230    |      ;
     LDA.B $D2                                                  ;84C6DB|A5D2    |0000D2;
     AND.W #$1000                                               ;84C6DD|290010  |      ;
     BEQ +                                                      ;84C6E0|F003    |84C6E5;
-    JMP.W fUnknown_84C7D6                                      ;84C6E2|4CD6C7  |84C7D6;
+    JMP.W fInput_Unknown84C7D6                                 ;84C6E2|4CD6C7  |84C7D6;
  
  
   + REP #$30                                                   ;84C6E5|C230    |      ;
     LDA.B $D2                                                  ;84C6E7|A5D2    |0000D2;
     AND.W #$4000                                               ;84C6E9|290040  |      ;
     BNE +                                                      ;84C6EC|D003    |84C6F1;
-    JMP.W fReturn_84C7B5                                       ;84C6EE|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C6EE|4CB5C7  |84C7B5;
  
  
   + REP #$30                                                   ;84C6F1|C230    |      ;
     LDA.B nPlayerAction                                        ;84C6F3|A5D4    |0000D4;
     CMP.W #$0011                                               ;84C6F5|C91100  |      ;
     BNE +                                                      ;84C6F8|D003    |84C6FD;
-    JMP.W fUnknown_84C7AA                                      ;84C6FA|4CAAC7  |84C7AA;
+    JMP.W fInput_Unknown84C7AA                                 ;84C6FA|4CAAC7  |84C7AA;
  
  
   + CMP.W #$0012                                               ;84C6FD|C91200  |      ;
     BNE +                                                      ;84C700|D003    |84C705;
-    JMP.W fUnknown_84C7AA                                      ;84C702|4CAAC7  |84C7AA;
+    JMP.W fInput_Unknown84C7AA                                 ;84C702|4CAAC7  |84C7AA;
  
  
   + SEP #$20                                                   ;84C705|E220    |      ;
     LDX.B nPlayerAction                                        ;84C707|A6D4    |0000D4;
     LDA.L aLoopupTable_84C7B6,X                                ;84C709|BFB6C784|84C7B6;
     BEQ +                                                      ;84C70D|F003    |84C712;
-    JMP.W fReturn_84C7B5                                       ;84C70F|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C70F|4CB5C7  |84C7B5;
  
  
   + REP #$30                                                   ;84C712|C230    |      ;
-    LDA.W $0124                                                ;84C714|AD2401  |000124;
+    LDA.W fInputController1_current                            ;84C714|AD2401  |000124;
     BIT.W #$0400                                               ;84C717|890004  |      ;
     BEQ +                                                      ;84C71A|F003    |84C71F;
-    JMP.W fUnknown_84C935                                      ;84C71C|4C35C9  |84C935;
+    JMP.W fInput_Unknown84C935                                 ;84C71C|4C35C9  |84C935;
  
  
-  + LDA.W $0124                                                ;84C71F|AD2401  |000124;
+  + LDA.W fInputController1_current                            ;84C71F|AD2401  |000124;
     BIT.W #$0800                                               ;84C722|890008  |      ;
     BEQ +                                                      ;84C725|F003    |84C72A;
-    JMP.W fUnknown_84C96F                                      ;84C727|4C6FC9  |84C96F;
+    JMP.W fInput_Unknown84C96F                                 ;84C727|4C6FC9  |84C96F;
  
  
-  + LDA.W $0124                                                ;84C72A|AD2401  |000124;
+  + LDA.W fInputController1_current                            ;84C72A|AD2401  |000124;
     BIT.W #$0100                                               ;84C72D|890001  |      ;
     BEQ +                                                      ;84C730|F003    |84C735;
-    JMP.W fUnknown_84C9A9                                      ;84C732|4CA9C9  |84C9A9;
+    JMP.W fInput_Unknown84C9A9                                 ;84C732|4CA9C9  |84C9A9;
  
  
-  + LDA.W $0124                                                ;84C735|AD2401  |000124;
+  + LDA.W fInputController1_current                            ;84C735|AD2401  |000124;
     BIT.W #$0200                                               ;84C738|890002  |      ;
-    BEQ fUnknown_84C740                                        ;84C73B|F003    |84C740;
-    JMP.W fUnknown_84C9E3                                      ;84C73D|4CE3C9  |84C9E3;
+    BEQ fInput_Unknown84C740                                   ;84C73B|F003    |84C740;
+    JMP.W fInput_Unknown84C9E3                                 ;84C73D|4CE3C9  |84C9E3;
  
  
-fUnknown_84C740:
+fInput_Unknown84C740:
     REP #$30                                                   ;84C740|C230    |      ;
     LDA.B $D2                                                  ;84C742|A5D2    |0000D2;
     AND.W #$1000                                               ;84C744|290010  |      ;
     BEQ +                                                      ;84C747|F003    |84C74C;
-    JMP.W fUnknown08FD_case0200                                ;84C749|4C04C8  |84C804;
+    JMP.W fInput_Unknown08FD_case0200                          ;84C749|4C04C8  |84C804;
  
  
   + REP #$30                                                   ;84C74C|C230    |      ;
     LDA.B nPlayerAction                                        ;84C74E|A5D4    |0000D4;
     CMP.W #$000F                                               ;84C750|C90F00  |      ;
     BNE +                                                      ;84C753|D003    |84C758;
-    JMP.W fUnknown_84C7AA                                      ;84C755|4CAAC7  |84C7AA;
+    JMP.W fInput_Unknown84C7AA                                 ;84C755|4CAAC7  |84C7AA;
  
  
   + REP #$20                                                   ;84C758|C220    |      ;
     LDA.W $0128                                                ;84C75A|AD2801  |000128;
     BIT.W #$0080                                               ;84C75D|898000  |      ;
     BEQ +                                                      ;84C760|F003    |84C765;
-    JMP.W fUnknown_84CAA5                                      ;84C762|4CA5CA  |84CAA5;
+    JMP.W fInput_Unknown84CAA5                                 ;84C762|4CA5CA  |84CAA5;
  
  
   + REP #$30                                                   ;84C765|C230    |      ;
     LDA.B $D2                                                  ;84C767|A5D2    |0000D2;
     AND.W #$0020                                               ;84C769|292000  |      ;
     BEQ +                                                      ;84C76C|F003    |84C771;
-    JMP.W fReturn_84C7B5                                       ;84C76E|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C76E|4CB5C7  |84C7B5;
  
  
   + REP #$20                                                   ;84C771|C220    |      ;
-    LDA.W $0124                                                ;84C773|AD2401  |000124;
+    LDA.W fInputController1_current                            ;84C773|AD2401  |000124;
     BIT.W #$8000                                               ;84C776|890080  |      ;
     BEQ +                                                      ;84C779|F003    |84C77E;
-    JMP.W fUnknown_84CA1D                                      ;84C77B|4C1DCA  |84CA1D;
+    JMP.W fInput_Unknown84CA1D                                 ;84C77B|4C1DCA  |84CA1D;
  
  
   + LDA.W $0128                                                ;84C77E|AD2801  |000128;
     BIT.W #$2000                                               ;84C781|890020  |      ;
     BEQ +                                                      ;84C784|F003    |84C789;
-    JMP.W fSetPlayerAction0x0C                                 ;84C786|4C7ACE  |84CE7A;
+    JMP.W fInput_SetPlayerAction0x0C                           ;84C786|4C7ACE  |84CE7A;
  
  
   + LDA.W $0128                                                ;84C789|AD2801  |000128;
     BIT.W #$0040                                               ;84C78C|894000  |      ;
     BEQ +                                                      ;84C78F|F003    |84C794;
-    JMP.W fSetPlayerAction0x1C                                 ;84C791|4CA6CE  |84CEA6;
+    JMP.W fInput_SetPlayerAction0x1C                           ;84C791|4CA6CE  |84CEA6;
  
  
   + LDA.W $0128                                                ;84C794|AD2801  |000128;
     BIT.W #$0010                                               ;84C797|891000  |      ;
     BEQ +                                                      ;84C79A|F003    |84C79F;
-    JMP.W fSetPlayerAction0x0D                                 ;84C79C|4C0CCE  |84CE0C;
+    JMP.W fInput_SetPlayerAction0x0D                           ;84C79C|4C0CCE  |84CE0C;
  
  
   + LDA.W $0128                                                ;84C79F|AD2801  |000128;
     BIT.W #$0020                                               ;84C7A2|892000  |      ;
-    BEQ fUnknown_84C7AA                                        ;84C7A5|F003    |84C7AA;
-    JMP.W fSetPlayerAction0x1B                                 ;84C7A7|4C43CE  |84CE43;
+    BEQ fInput_Unknown84C7AA                                   ;84C7A5|F003    |84C7AA;
+    JMP.W fInput_SetPlayerAction0x1B                           ;84C7A7|4C43CE  |84CE43;
  
  
-fUnknown_84C7AA:
+fInput_Unknown84C7AA:
     LDA.W $0128                                                ;84C7AA|AD2801  |000128;
     BIT.W #$4000                                               ;84C7AD|890040  |      ;
-    BEQ fReturn_84C7B5                                         ;84C7B0|F003    |84C7B5;
-    JMP.W fUnknown_84CD77                                      ;84C7B2|4C77CD  |84CD77;
+    BEQ fInput_Return84C7B5                                    ;84C7B0|F003    |84C7B5;
+    JMP.W fInput_Unknown84CD77                                 ;84C7B2|4C77CD  |84CD77;
  
  
-fReturn_84C7B5:
+fInput_Return84C7B5:
     RTL                                                        ;84C7B5|6B      |      ;
  
  
@@ -9989,79 +9989,79 @@ aLoopupTable_84C7B6:
     db $01,$01,$00,$00,$01,$00,$00,$01,$01,$01,$01,$01         ;84C7C2|        |      ;
     db $01,$00,$01,$01,$01,$00,$00,$00                         ;84C7CE|        |      ;
  
-fUnknown_84C7D6:
+fInput_Unknown84C7D6:
     REP #$30                                                   ;84C7D6|C230    |      ;
     LDA.W nUnknownFlags08FD                                    ;84C7D8|ADFD08  |0008FD;
     BIT.W #$0400                                               ;84C7DB|890004  |      ;
     BEQ +                                                      ;84C7DE|F003    |84C7E3;
-    JMP.W fUnknown_84C935                                      ;84C7E0|4C35C9  |84C935;
+    JMP.W fInput_Unknown84C935                                 ;84C7E0|4C35C9  |84C935;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C7E3|ADFD08  |0008FD;
     BIT.W #$0800                                               ;84C7E6|890008  |      ;
     BEQ +                                                      ;84C7E9|F003    |84C7EE;
-    JMP.W fUnknown_84C96F                                      ;84C7EB|4C6FC9  |84C96F;
+    JMP.W fInput_Unknown84C96F                                 ;84C7EB|4C6FC9  |84C96F;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C7EE|ADFD08  |0008FD;
     BIT.W #$0100                                               ;84C7F1|890001  |      ;
     BEQ +                                                      ;84C7F4|F003    |84C7F9;
-    JMP.W fUnknown_84C9A9                                      ;84C7F6|4CA9C9  |84C9A9;
+    JMP.W fInput_Unknown84C9A9                                 ;84C7F6|4CA9C9  |84C9A9;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C7F9|ADFD08  |0008FD;
     BIT.W #$0200                                               ;84C7FC|890002  |      ;
-    BEQ fUnknown08FD_case0200                                  ;84C7FF|F003    |84C804;
-    JMP.W fUnknown_84C9E3                                      ;84C801|4CE3C9  |84C9E3;
+    BEQ fInput_Unknown08FD_case0200                            ;84C7FF|F003    |84C804;
+    JMP.W fInput_Unknown84C9E3                                 ;84C801|4CE3C9  |84C9E3;
  
  
-fUnknown08FD_case0200:
+fInput_Unknown08FD_case0200:
     LDA.W nUnknownFlags08FD                                    ;84C804|ADFD08  |0008FD;
     BIT.W #$0080                                               ;84C807|898000  |      ;
     BEQ +                                                      ;84C80A|F003    |84C80F;
-    JMP.W fUnknown_84CAA5                                      ;84C80C|4CA5CA  |84CAA5;
+    JMP.W fInput_Unknown84CAA5                                 ;84C80C|4CA5CA  |84CAA5;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C80F|ADFD08  |0008FD;
     BIT.W #$8000                                               ;84C812|890080  |      ;
     BEQ +                                                      ;84C815|F003    |84C81A;
-    JMP.W fUnknown_84CA1D                                      ;84C817|4C1DCA  |84CA1D;
+    JMP.W fInput_Unknown84CA1D                                 ;84C817|4C1DCA  |84CA1D;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C81A|ADFD08  |0008FD;
     BIT.W #$2000                                               ;84C81D|890020  |      ;
     BEQ +                                                      ;84C820|F003    |84C825;
-    JMP.W fSetPlayerAction0x0C                                 ;84C822|4C7ACE  |84CE7A;
+    JMP.W fInput_SetPlayerAction0x0C                           ;84C822|4C7ACE  |84CE7A;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C825|ADFD08  |0008FD;
     BIT.W #$0040                                               ;84C828|894000  |      ;
     BEQ +                                                      ;84C82B|F003    |84C830;
-    JMP.W fSetPlayerAction0x1C                                 ;84C82D|4CA6CE  |84CEA6;
+    JMP.W fInput_SetPlayerAction0x1C                           ;84C82D|4CA6CE  |84CEA6;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C830|ADFD08  |0008FD;
     BIT.W #$0010                                               ;84C833|891000  |      ;
     BEQ +                                                      ;84C836|F003    |84C83B;
-    JMP.W fSetPlayerAction0x0D                                 ;84C838|4C0CCE  |84CE0C;
+    JMP.W fInput_SetPlayerAction0x0D                           ;84C838|4C0CCE  |84CE0C;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C83B|ADFD08  |0008FD;
     BIT.W #$0020                                               ;84C83E|892000  |      ;
     BEQ +                                                      ;84C841|F003    |84C846;
-    JMP.W fSetPlayerAction0x1B                                 ;84C843|4C43CE  |84CE43;
+    JMP.W fInput_SetPlayerAction0x1B                           ;84C843|4C43CE  |84CE43;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C846|ADFD08  |0008FD;
     BIT.W #$4000                                               ;84C849|890040  |      ;
     BEQ +                                                      ;84C84C|F003    |84C851;
-    JMP.W fUnknown_84CD77                                      ;84C84E|4C77CD  |84CD77;
+    JMP.W fInput_Unknown84CD77                                 ;84C84E|4C77CD  |84CD77;
  
  
   + RTL                                                        ;84C851|6B      |      ;
  
  
-fUnused_84C852:
+fInput_Unused84C852:
     REP #$30                                                   ;84C852|C230    |      ;
     LDA.W $012A                                                ;84C854|AD2A01  |00012A;
     BIT.W #$0080                                               ;84C857|898000  |      ;
@@ -10069,16 +10069,16 @@ fUnused_84C852:
     JMP.W .return                                              ;84C85C|4C2BC9  |84C92B;
  
  
-  + LDA.W $0124                                                ;84C85F|AD2401  |000124;
+  + LDA.W fInputController1_current                            ;84C85F|AD2401  |000124;
     BIT.W #$0400                                               ;84C862|890004  |      ;
     BNE .label1                                                ;84C865|D023    |84C88A;
-    LDA.W $0124                                                ;84C867|AD2401  |000124;
+    LDA.W fInputController1_current                            ;84C867|AD2401  |000124;
     BIT.W #$0800                                               ;84C86A|890008  |      ;
     BNE .label2                                                ;84C86D|D03E    |84C8AD;
-    LDA.W $0124                                                ;84C86F|AD2401  |000124;
+    LDA.W fInputController1_current                            ;84C86F|AD2401  |000124;
     BIT.W #$0100                                               ;84C872|890001  |      ;
     BNE .label3                                                ;84C875|D059    |84C8D0;
-    LDA.W $0124                                                ;84C877|AD2401  |000124;
+    LDA.W fInputController1_current                            ;84C877|AD2401  |000124;
     BIT.W #$0200                                               ;84C87A|890002  |      ;
     BEQ +                                                      ;84C87D|F003    |84C882;
     JMP.W .label4                                              ;84C87F|4CF3C8  |84C8F3;
@@ -10197,7 +10197,7 @@ fUnused_84C852:
     JMP.W .justReturn                                          ;84C932|4C89C8  |84C889;
  
  
-fUnknown_84C935:
+fInput_Unknown84C935:
     REP #$30                                                   ;84C935|C230    |      ;
     LDA.W #$0001                                               ;84C937|A90100  |      ;
     STA.B nPlayerAction                                        ;84C93A|85D4    |0000D4;
@@ -10207,29 +10207,29 @@ fUnknown_84C935:
     REP #$30                                                   ;84C943|C230    |      ;
     LDA.W #$0000                                               ;84C945|A90000  |      ;
     STA.W $0911                                                ;84C948|8D1109  |000911;
-    JMP.W fUnknown_84C740                                      ;84C94B|4C40C7  |84C740;
+    JMP.W fInput_Unknown84C740                                 ;84C94B|4C40C7  |84C740;
  
     REP #$30                                                   ;84C94E|C230    |      ;
     LDA.W $0911                                                ;84C950|AD1109  |000911;
     CMP.W #$0001                                               ;84C953|C90100  |      ;
     BNE +                                                      ;84C956|D003    |84C95B;
-    JMP.W fUnknown_84C95E                                      ;84C958|4C5EC9  |84C95E;
+    JMP.W fInput_Unknown84C95E                                 ;84C958|4C5EC9  |84C95E;
  
  
-  + JMP.W fReturn_84C7B5                                       ;84C95B|4CB5C7  |84C7B5;
+  + JMP.W fInput_Return84C7B5                                  ;84C95B|4CB5C7  |84C7B5;
  
  
-fUnknown_84C95E:
+fInput_Unknown84C95E:
     REP #$30                                                   ;84C95E|C230    |      ;
     LDA.W #$0001                                               ;84C960|A90100  |      ;
     STA.B nPlayerAction                                        ;84C963|85D4    |0000D4;
     REP #$30                                                   ;84C965|C230    |      ;
     LDA.W #$0001                                               ;84C967|A90100  |      ;
     STA.B $DA                                                  ;84C96A|85DA    |0000DA;
-    JMP.W fReturn_84C7B5                                       ;84C96C|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C96C|4CB5C7  |84C7B5;
  
  
-fUnknown_84C96F:
+fInput_Unknown84C96F:
     REP #$30                                                   ;84C96F|C230    |      ;
     LDA.W #$0001                                               ;84C971|A90100  |      ;
     STA.B nPlayerAction                                        ;84C974|85D4    |0000D4;
@@ -10239,29 +10239,29 @@ fUnknown_84C96F:
     REP #$30                                                   ;84C97D|C230    |      ;
     LDA.W #$0001                                               ;84C97F|A90100  |      ;
     STA.W $0911                                                ;84C982|8D1109  |000911;
-    JMP.W fUnknown_84C740                                      ;84C985|4C40C7  |84C740;
+    JMP.W fInput_Unknown84C740                                 ;84C985|4C40C7  |84C740;
  
     REP #$30                                                   ;84C988|C230    |      ;
     LDA.W $0911                                                ;84C98A|AD1109  |000911;
     CMP.W #$0000                                               ;84C98D|C90000  |      ;
     BNE +                                                      ;84C990|D003    |84C995;
-    JMP.W fUnknown_84C998                                      ;84C992|4C98C9  |84C998;
+    JMP.W fInput_Unknown84C998                                 ;84C992|4C98C9  |84C998;
  
  
-  + JMP.W fUnknown_84C740                                      ;84C995|4C40C7  |84C740;
+  + JMP.W fInput_Unknown84C740                                 ;84C995|4C40C7  |84C740;
  
  
-fUnknown_84C998:
+fInput_Unknown84C998:
     REP #$30                                                   ;84C998|C230    |      ;
     LDA.W #$0001                                               ;84C99A|A90100  |      ;
     STA.B nPlayerAction                                        ;84C99D|85D4    |0000D4;
     REP #$30                                                   ;84C99F|C230    |      ;
     LDA.W #$0000                                               ;84C9A1|A90000  |      ;
     STA.B $DA                                                  ;84C9A4|85DA    |0000DA;
-    JMP.W fReturn_84C7B5                                       ;84C9A6|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C9A6|4CB5C7  |84C7B5;
  
  
-fUnknown_84C9A9:
+fInput_Unknown84C9A9:
     REP #$30                                                   ;84C9A9|C230    |      ;
     LDA.W #$0001                                               ;84C9AB|A90100  |      ;
     STA.B nPlayerAction                                        ;84C9AE|85D4    |0000D4;
@@ -10271,29 +10271,29 @@ fUnknown_84C9A9:
     REP #$30                                                   ;84C9B7|C230    |      ;
     LDA.W #$0002                                               ;84C9B9|A90200  |      ;
     STA.W $0911                                                ;84C9BC|8D1109  |000911;
-    JMP.W fUnknown_84C740                                      ;84C9BF|4C40C7  |84C740;
+    JMP.W fInput_Unknown84C740                                 ;84C9BF|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9C2|C230    |      ;
     LDA.W $0911                                                ;84C9C4|AD1109  |000911;
     CMP.W #$0003                                               ;84C9C7|C90300  |      ;
     BNE +                                                      ;84C9CA|D003    |84C9CF;
-    JMP.W fUnknown_84C9D2                                      ;84C9CC|4CD2C9  |84C9D2;
+    JMP.W fInput_Unknown84C9D2                                 ;84C9CC|4CD2C9  |84C9D2;
  
  
-  + JMP.W fUnknown_84C740                                      ;84C9CF|4C40C7  |84C740;
+  + JMP.W fInput_Unknown84C740                                 ;84C9CF|4C40C7  |84C740;
  
  
-fUnknown_84C9D2:
+fInput_Unknown84C9D2:
     REP #$30                                                   ;84C9D2|C230    |      ;
     LDA.W #$0001                                               ;84C9D4|A90100  |      ;
     STA.B nPlayerAction                                        ;84C9D7|85D4    |0000D4;
     REP #$30                                                   ;84C9D9|C230    |      ;
     LDA.W #$0003                                               ;84C9DB|A90300  |      ;
     STA.B $DA                                                  ;84C9DE|85DA    |0000DA;
-    JMP.W fReturn_84C7B5                                       ;84C9E0|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84C9E0|4CB5C7  |84C7B5;
  
  
-fUnknown_84C9E3:
+fInput_Unknown84C9E3:
     REP #$30                                                   ;84C9E3|C230    |      ;
     LDA.W #$0001                                               ;84C9E5|A90100  |      ;
     STA.B nPlayerAction                                        ;84C9E8|85D4    |0000D4;
@@ -10303,29 +10303,29 @@ fUnknown_84C9E3:
     REP #$30                                                   ;84C9F1|C230    |      ;
     LDA.W #$0003                                               ;84C9F3|A90300  |      ;
     STA.W $0911                                                ;84C9F6|8D1109  |000911;
-    JMP.W fUnknown_84C740                                      ;84C9F9|4C40C7  |84C740;
+    JMP.W fInput_Unknown84C740                                 ;84C9F9|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9FC|C230    |      ;
     LDA.W $0911                                                ;84C9FE|AD1109  |000911;
     CMP.W #$0002                                               ;84CA01|C90200  |      ;
     BNE +                                                      ;84CA04|D003    |84CA09;
-    JMP.W fUnknown_84CA0C                                      ;84CA06|4C0CCA  |84CA0C;
+    JMP.W fInput_Unknown84CA0C                                 ;84CA06|4C0CCA  |84CA0C;
  
  
-  + JMP.W fUnknown_84C740                                      ;84CA09|4C40C7  |84C740;
+  + JMP.W fInput_Unknown84C740                                 ;84CA09|4C40C7  |84C740;
  
  
-fUnknown_84CA0C:
+fInput_Unknown84CA0C:
     REP #$30                                                   ;84CA0C|C230    |      ;
     LDA.W #$0001                                               ;84CA0E|A90100  |      ;
     STA.B nPlayerAction                                        ;84CA11|85D4    |0000D4;
     REP #$30                                                   ;84CA13|C230    |      ;
     LDA.W #$0002                                               ;84CA15|A90200  |      ;
     STA.B $DA                                                  ;84CA18|85DA    |0000DA;
-    JMP.W fReturn_84C7B5                                       ;84CA1A|4CB5C7  |84C7B5;
+    JMP.W fInput_Return84C7B5                                  ;84CA1A|4CB5C7  |84C7B5;
  
  
-fUnknown_84CA1D:
+fInput_Unknown84CA1D:
     REP #$30                                                   ;84CA1D|C230    |      ;
     LDA.B $D2                                                  ;84CA1F|A5D2    |0000D2;
     AND.W #$0800                                               ;84CA21|290008  |      ;
@@ -10379,7 +10379,7 @@ fUnknown_84CA1D:
     LDA.W #$0020                                               ;84CA82|A92000  |      ;
     STA.B $E3                                                  ;84CA85|85E3    |0000E3;
     LDA.B $DA                                                  ;84CA87|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AD91                                ;84CA89|2291AD83|83AD91;
+    JSL.L fGameEngine_Unknown83AD91                            ;84CA89|2291AD83|83AD91;
     REP #$30                                                   ;84CA8D|C230    |      ;
     CMP.W #$0000                                               ;84CA8F|C90000  |      ;
     BNE .return                                                ;84CA92|D009    |84CA9D;
@@ -10398,7 +10398,7 @@ fUnknown_84CA1D:
     RTL                                                        ;84CAA4|6B      |      ;
  
  
-fUnknown_84CAA5:
+fInput_Unknown84CAA5:
     REP #$30                                                   ;84CAA5|C230    |      ;
     LDA.B $D2                                                  ;84CAA7|A5D2    |0000D2;
     AND.W #$0800                                               ;84CAA9|290008  |      ;
@@ -10479,7 +10479,7 @@ fUnknown_84CAA5:
     LDA.W #$0010                                               ;84CB39|A91000  |      ;
     STA.B $E3                                                  ;84CB3C|85E3    |0000E3;
     LDA.B $DA                                                  ;84CB3E|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AD91                                ;84CB40|2291AD83|83AD91;
+    JSL.L fGameEngine_Unknown83AD91                            ;84CB40|2291AD83|83AD91;
     REP #$30                                                   ;84CB44|C230    |      ;
     CMP.W #$0000                                               ;84CB46|C90000  |      ;
     BEQ +                                                      ;84CB49|F003    |84CB4E;
@@ -10567,7 +10567,7 @@ fUnknown_84CAA5:
     LDA.W nTileInFrontOfPlayerY                                ;84CBF8|AD8709  |000987;
     STA.L $7F1F2E                                              ;84CBFB|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84CBFF|E220    |      ;
-    LDA.B nSelectedTilemapId                                   ;84CC01|A522    |000022;
+    LDA.B nMapEngine_DestinationId                             ;84CC01|A522    |000022;
     STA.L $7F1F30                                              ;84CC03|8F301F7F|7F1F30;
     REP #$30                                                   ;84CC07|C230    |      ;
     LDA.W #$0016                                               ;84CC09|A91600  |      ;
@@ -10611,7 +10611,7 @@ fUnknown_84CAA5:
     REP #$30                                                   ;84CC40|C230    |      ;
     LDA.W #$0002                                               ;84CC42|A90200  |      ;
     STA.W $0911                                                ;84CC45|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CC48|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CC48|2216CD84|84CD16;
     REP #$30                                                   ;84CC4C|C230    |      ;
     BNE +                                                      ;84CC4E|D003    |84CC53;
     JMP.W .label9                                              ;84CC50|4CE8CC  |84CCE8;
@@ -10619,7 +10619,7 @@ fUnknown_84CAA5:
  
   + LDA.W #$0003                                               ;84CC53|A90300  |      ;
     STA.W $0911                                                ;84CC56|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CC59|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CC59|2216CD84|84CD16;
     REP #$30                                                   ;84CC5D|C230    |      ;
     BNE +                                                      ;84CC5F|D003    |84CC64;
     JMP.W .label9                                              ;84CC61|4CE8CC  |84CCE8;
@@ -10635,12 +10635,12 @@ fUnknown_84CAA5:
     REP #$30                                                   ;84CC6F|C230    |      ;
     LDA.W #$0003                                               ;84CC71|A90300  |      ;
     STA.W $0911                                                ;84CC74|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CC77|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CC77|2216CD84|84CD16;
     REP #$30                                                   ;84CC7B|C230    |      ;
     BEQ .label9                                                ;84CC7D|F069    |84CCE8;
     LDA.W #$0002                                               ;84CC7F|A90200  |      ;
     STA.W $0911                                                ;84CC82|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CC85|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CC85|2216CD84|84CD16;
     REP #$30                                                   ;84CC89|C230    |      ;
     BEQ .label9                                                ;84CC8B|F05B    |84CCE8;
     LDA.W #$0001                                               ;84CC8D|A90100  |      ;
@@ -10653,12 +10653,12 @@ fUnknown_84CAA5:
     REP #$30                                                   ;84CC98|C230    |      ;
     LDA.W #$0000                                               ;84CC9A|A90000  |      ;
     STA.W $0911                                                ;84CC9D|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CCA0|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CCA0|2216CD84|84CD16;
     REP #$30                                                   ;84CCA4|C230    |      ;
     BEQ .label9                                                ;84CCA6|F040    |84CCE8;
     LDA.W #$0001                                               ;84CCA8|A90100  |      ;
     STA.W $0911                                                ;84CCAB|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CCAE|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CCAE|2216CD84|84CD16;
     REP #$30                                                   ;84CCB2|C230    |      ;
     BEQ .label9                                                ;84CCB4|F032    |84CCE8;
     LDA.W #$0002                                               ;84CCB6|A90200  |      ;
@@ -10671,12 +10671,12 @@ fUnknown_84CAA5:
     REP #$30                                                   ;84CCC0|C230    |      ;
     LDA.W #$0000                                               ;84CCC2|A90000  |      ;
     STA.W $0911                                                ;84CCC5|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CCC8|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CCC8|2216CD84|84CD16;
     REP #$30                                                   ;84CCCC|C230    |      ;
     BEQ .label9                                                ;84CCCE|F018    |84CCE8;
     LDA.W #$0001                                               ;84CCD0|A90100  |      ;
     STA.W $0911                                                ;84CCD3|8D1109  |000911;
-    JSL.L fUnknown_84CD16                                      ;84CCD6|2216CD84|84CD16;
+    JSL.L fInput_Unknown84CD16                                 ;84CCD6|2216CD84|84CD16;
     REP #$30                                                   ;84CCDA|C230    |      ;
     BEQ .label9                                                ;84CCDC|F00A    |84CCE8;
     LDA.W #$0003                                               ;84CCDE|A90300  |      ;
@@ -10708,7 +10708,7 @@ fUnknown_84CAA5:
     RTL                                                        ;84CD15|6B      |      ;
  
  
-fUnknown_84CD16:
+fInput_Unknown84CD16:
     REP #$30                                                   ;84CD16|C230    |      ;
     LDA.W #$0010                                               ;84CD18|A91000  |      ;
     STA.B $E3                                                  ;84CD1B|85E3    |0000E3;
@@ -10745,7 +10745,7 @@ fUnknown_84CD16:
     LDA.W #$0010                                               ;84CD55|A91000  |      ;
     STA.B $E3                                                  ;84CD58|85E3    |0000E3;
     LDA.W $0911                                                ;84CD5A|AD1109  |000911;
-    JSL.L fEngineUnknown_83AD91                                ;84CD5D|2291AD83|83AD91;
+    JSL.L fGameEngine_Unknown83AD91                            ;84CD5D|2291AD83|83AD91;
     REP #$30                                                   ;84CD61|C230    |      ;
     CMP.W #$0000                                               ;84CD63|C90000  |      ;
     BEQ +                                                      ;84CD66|F003    |84CD6B;
@@ -10763,87 +10763,87 @@ fUnknown_84CD16:
     RTL                                                        ;84CD76|6B      |      ;
  
  
-fUnknown_84CD77:
+fInput_Unknown84CD77:
     REP #$30                                                   ;84CD77|C230    |      ;
     LDA.B $D2                                                  ;84CD79|A5D2    |0000D2;
     AND.W #$0002                                               ;84CD7B|290200  |      ;
     BEQ +                                                      ;84CD7E|F003    |84CD83;
-    JMP.W fReturn_84CDDC                                       ;84CD80|4CDCCD  |84CDDC;
+    JMP.W fInput_Return84CDDC                                  ;84CD80|4CDCCD  |84CDDC;
  
  
   + REP #$30                                                   ;84CD83|C230    |      ;
     LDA.B $D2                                                  ;84CD85|A5D2    |0000D2;
     AND.W #$0010                                               ;84CD87|291000  |      ;
     BEQ +                                                      ;84CD8A|F003    |84CD8F;
-    JMP.W fReturn_84CDDC                                       ;84CD8C|4CDCCD  |84CDDC;
+    JMP.W fInput_Return84CDDC                                  ;84CD8C|4CDCCD  |84CDDC;
  
  
   + REP #$30                                                   ;84CD8F|C230    |      ;
     LDA.B $D2                                                  ;84CD91|A5D2    |0000D2;
     AND.W #$0800                                               ;84CD93|290008  |      ;
     BEQ +                                                      ;84CD96|F003    |84CD9B;
-    JMP.W fReturn_84CDDC                                       ;84CD98|4CDCCD  |84CDDC;
+    JMP.W fInput_Return84CDDC                                  ;84CD98|4CDCCD  |84CDDC;
  
  
   + REP #$30                                                   ;84CD9B|C230    |      ;
     LDA.B nPlayerAction                                        ;84CD9D|A5D4    |0000D4;
     CMP.W #$000F                                               ;84CD9F|C90F00  |      ;
     BNE +                                                      ;84CDA2|D003    |84CDA7;
-    JMP.W fSetPlayerAction0x10                                 ;84CDA4|4CDDCD  |84CDDD;
+    JMP.W fInput_SetPlayerAction0x10                           ;84CDA4|4CDDCD  |84CDDD;
  
  
   + REP #$30                                                   ;84CDA7|C230    |      ;
     LDA.B nPlayerAction                                        ;84CDA9|A5D4    |0000D4;
     CMP.W #$0011                                               ;84CDAB|C91100  |      ;
     BNE +                                                      ;84CDAE|D003    |84CDB3;
-    JMP.W fSetPlayerAction0x0F                                 ;84CDB0|4CE5CD  |84CDE5;
+    JMP.W fInput_SetPlayerAction0x0F                           ;84CDB0|4CE5CD  |84CDE5;
  
  
   + REP #$30                                                   ;84CDB3|C230    |      ;
     LDA.B nPlayerAction                                        ;84CDB5|A5D4    |0000D4;
     CMP.W #$0012                                               ;84CDB7|C91200  |      ;
-    BNE fSetPlayerAction0x0A                                   ;84CDBA|D003    |84CDBF;
-    JMP.W fSetPlayerAction0x13                                 ;84CDBC|4CEDCD  |84CDED;
+    BNE fInput_SetPlayerAction0x0A                             ;84CDBA|D003    |84CDBF;
+    JMP.W fInput_SetPlayerAction0x13                           ;84CDBC|4CEDCD  |84CDED;
  
  
-fSetPlayerAction0x0A:
+fInput_SetPlayerAction0x0A:
     REP #$20                                                   ;84CDBF|C220    |      ;
     LDA.L $7F1F60                                              ;84CDC1|AF601F7F|7F1F60;
     AND.W #$8000                                               ;84CDC5|290080  |      ;
-    BNE fReturn_84CDDC                                         ;84CDC8|D012    |84CDDC;
+    BNE fInput_Return84CDDC                                    ;84CDC8|D012    |84CDDC;
     SEP #$20                                                   ;84CDCA|E220    |      ;
     LDA.W nToolEquipped                                        ;84CDCC|AD2109  |000921;
-    BEQ fReturn_84CDDC                                         ;84CDCF|F00B    |84CDDC;
+    BEQ fInput_Return84CDDC                                    ;84CDCF|F00B    |84CDDC;
     REP #$30                                                   ;84CDD1|C230    |      ;
     LDA.W #$000A                                               ;84CDD3|A90A00  |      ;
     STA.B nPlayerAction                                        ;84CDD6|85D4    |0000D4;
     JSL.L fToolAnimationSubrutineExecute                       ;84CDD8|22A89082|8290A8;
  
-fReturn_84CDDC:
+fInput_Return84CDDC:
     RTL                                                        ;84CDDC|6B      |      ;
  
  
-fSetPlayerAction0x10:
+fInput_SetPlayerAction0x10:
     REP #$30                                                   ;84CDDD|C230    |      ;
     LDA.W #$0010                                               ;84CDDF|A91000  |      ;
     STA.B nPlayerAction                                        ;84CDE2|85D4    |0000D4;
     RTL                                                        ;84CDE4|6B      |      ;
  
  
-fSetPlayerAction0x0F:
+fInput_SetPlayerAction0x0F:
     REP #$30                                                   ;84CDE5|C230    |      ;
     LDA.W #$000F                                               ;84CDE7|A90F00  |      ;
     STA.B nPlayerAction                                        ;84CDEA|85D4    |0000D4;
     RTL                                                        ;84CDEC|6B      |      ;
  
  
-fSetPlayerAction0x13:
+fInput_SetPlayerAction0x13:
     REP #$30                                                   ;84CDED|C230    |      ;
     LDA.W #$0013                                               ;84CDEF|A91300  |      ;
     STA.B nPlayerAction                                        ;84CDF2|85D4    |0000D4;
     SEP #$20                                                   ;84CDF4|E220    |      ;
     LDA.B #$03                                                 ;84CDF6|A903    |      ;
-    JSL.L fRollRNG                                             ;84CDF8|22F98980|8089F9;
+    JSL.L fGetRandomNumberRanged                               ;84CDF8|22F98980|8089F9;
     SEP #$20                                                   ;84CDFC|E220    |      ;
     XBA                                                        ;84CDFE|EB      |      ;
     LDA.B #$00                                                 ;84CDFF|A900    |      ;
@@ -10855,7 +10855,7 @@ fSetPlayerAction0x13:
     RTL                                                        ;84CE0B|6B      |      ;
  
  
-fSetPlayerAction0x0D:
+fInput_SetPlayerAction0x0D:
     REP #$30                                                   ;84CE0C|C230    |      ;
     LDA.B $D2                                                  ;84CE0E|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE10|290200  |      ;
@@ -10889,7 +10889,7 @@ fSetPlayerAction0x0D:
     RTL                                                        ;84CE42|6B      |      ;
  
  
-fSetPlayerAction0x1B:
+fInput_SetPlayerAction0x1B:
     REP #$30                                                   ;84CE43|C230    |      ;
     LDA.B $D2                                                  ;84CE45|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE47|290200  |      ;
@@ -10923,7 +10923,7 @@ fSetPlayerAction0x1B:
     RTL                                                        ;84CE79|6B      |      ;
  
  
-fSetPlayerAction0x0C:
+fInput_SetPlayerAction0x0C:
     REP #$30                                                   ;84CE7A|C230    |      ;
     LDA.B $D2                                                  ;84CE7C|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE7E|290200  |      ;
@@ -10956,7 +10956,7 @@ CODE_84CEA5:
     RTL                                                        ;84CEA5|6B      |      ;
  
  
-fSetPlayerAction0x1C:
+fInput_SetPlayerAction0x1C:
     REP #$30                                                   ;84CEA6|C230    |      ;
     LDA.B $D2                                                  ;84CEA8|A5D2    |0000D2;
     AND.W #$0002                                               ;84CEAA|290200  |      ;
@@ -10989,7 +10989,7 @@ CODE_84CED1:
     RTL                                                        ;84CED1|6B      |      ;
  
  
-fUnkown019A_case06:
+fInput_Handler_case06:
     SEP #$20                                                   ;84CED2|E220    |      ;
     REP #$10                                                   ;84CED4|C210    |      ;
     LDA.W $019B                                                ;84CED6|AD9B01  |00019B;
@@ -11015,43 +11015,43 @@ CODE_84CF04:
     RTL                                                        ;84CF04|6B      |      ;
  
  
-fUnkown019A_case02:
+fInput_Handler_case02:
     SEP #$20                                                   ;84CF05|E220    |      ;
     REP #$10                                                   ;84CF07|C210    |      ;
     LDA.W $019B                                                ;84CF09|AD9B01  |00019B;
     AND.B #$02                                                 ;84CF0C|2902    |      ;
-    BNE fUnknown_84CF2D                                        ;84CF0E|D01D    |84CF2D;
+    BNE fInput_Unknown84CF2D                                   ;84CF0E|D01D    |84CF2D;
     LDA.W $019B                                                ;84CF10|AD9B01  |00019B;
     AND.B #$04                                                 ;84CF13|2904    |      ;
-    BNE fUnknown_84CF40                                        ;84CF15|D029    |84CF40;
+    BNE fInput_Unknown84CF40                                   ;84CF15|D029    |84CF40;
     LDA.W $019B                                                ;84CF17|AD9B01  |00019B;
     AND.B #$08                                                 ;84CF1A|2908    |      ;
-    BNE fUnknown_84CF62                                        ;84CF1C|D044    |84CF62;
+    BNE fInput_Unknown84CF62                                   ;84CF1C|D044    |84CF62;
     LDA.W $019B                                                ;84CF1E|AD9B01  |00019B;
     AND.B #$10                                                 ;84CF21|2910    |      ;
-    BNE fUnknown_84CF95                                        ;84CF23|D070    |84CF95;
+    BNE fInput_Unknown84CF95                                   ;84CF23|D070    |84CF95;
     LDA.W $019B                                                ;84CF25|AD9B01  |00019B;
     AND.B #$20                                                 ;84CF28|2920    |      ;
-    BNE fUnknown_84CF40                                        ;84CF2A|D014    |84CF40;
+    BNE fInput_Unknown84CF40                                   ;84CF2A|D014    |84CF40;
     RTL                                                        ;84CF2C|6B      |      ;
  
  
-fUnknown_84CF2D:
+fInput_Unknown84CF2D:
     REP #$30                                                   ;84CF2D|C230    |      ;
-    LDA.W $0124                                                ;84CF2F|AD2401  |000124;
+    LDA.W fInputController1_current                            ;84CF2F|AD2401  |000124;
     BIT.W #$0080                                               ;84CF32|898000  |      ;
-    BNE fUnknown_84CF38                                        ;84CF35|D001    |84CF38;
+    BNE fInput_Unknown84CF38                                   ;84CF35|D001    |84CF38;
     RTL                                                        ;84CF37|6B      |      ;
  
  
-fUnknown_84CF38:
+fInput_Unknown84CF38:
     SEP #$20                                                   ;84CF38|E220    |      ;
     LDA.B #$04                                                 ;84CF3A|A904    |      ;
     STA.W $0189                                                ;84CF3C|8D8901  |000189;
     RTL                                                        ;84CF3F|6B      |      ;
  
  
-fUnknown_84CF40:
+fInput_Unknown84CF40:
     REP #$30                                                   ;84CF40|C230    |      ;
     LDA.W $0128                                                ;84CF42|AD2801  |000128;
     BIT.W #$0080                                               ;84CF45|898000  |      ;
@@ -11070,7 +11070,7 @@ fUnknown_84CF40:
     RTL                                                        ;84CF61|6B      |      ;
  
  
-fUnknown_84CF62:
+fInput_Unknown84CF62:
     REP #$30                                                   ;84CF62|C230    |      ;
     LDA.W $0128                                                ;84CF64|AD2801  |000128;
     BIT.W #$0080                                               ;84CF67|898000  |      ;
@@ -11096,39 +11096,39 @@ fUnknown_84CF62:
     RTL                                                        ;84CF94|6B      |      ;
  
  
-fUnknown_84CF95:
+fInput_Unknown84CF95:
     REP #$30                                                   ;84CF95|C230    |      ;
     LDA.W $0128                                                ;84CF97|AD2801  |000128;
     BIT.W #$0400                                               ;84CF9A|890004  |      ;
-    BNE fUnknown_84CFEA                                        ;84CF9D|D04B    |84CFEA;
+    BNE fInput_Unknown84CFEA                                   ;84CF9D|D04B    |84CFEA;
     LDA.W $0128                                                ;84CF9F|AD2801  |000128;
     BIT.W #$0800                                               ;84CFA2|890008  |      ;
     BEQ +                                                      ;84CFA5|F003    |84CFAA;
-    JMP.W fUnknown_84D03A                                      ;84CFA7|4C3AD0  |84D03A;
+    JMP.W fInput_Unknown84D03A                                 ;84CFA7|4C3AD0  |84D03A;
  
  
   + LDA.W $0128                                                ;84CFAA|AD2801  |000128;
     BIT.W #$0100                                               ;84CFAD|890001  |      ;
     BEQ +                                                      ;84CFB0|F003    |84CFB5;
-    JMP.W fUnknown_84D08E                                      ;84CFB2|4C8ED0  |84D08E;
+    JMP.W fInput_Unknown84D08E                                 ;84CFB2|4C8ED0  |84D08E;
  
  
   + LDA.W $0128                                                ;84CFB5|AD2801  |000128;
     BIT.W #$0200                                               ;84CFB8|890002  |      ;
     BEQ +                                                      ;84CFBB|F003    |84CFC0;
-    JMP.W fUnknown_84D0F4                                      ;84CFBD|4CF4D0  |84D0F4;
+    JMP.W fInput_Unknown84D0F4                                 ;84CFBD|4CF4D0  |84D0F4;
  
  
   + LDA.W $0128                                                ;84CFC0|AD2801  |000128;
     BIT.W #$0080                                               ;84CFC3|898000  |      ;
     BEQ +                                                      ;84CFC6|F003    |84CFCB;
-    JMP.W fUnknown_84CFCC                                      ;84CFC8|4CCCCF  |84CFCC;
+    JMP.W fInput_Unknown84CFCC                                 ;84CFC8|4CCCCF  |84CFCC;
  
  
   + RTL                                                        ;84CFCB|6B      |      ;
  
  
-fUnknown_84CFCC:
+fInput_Unknown84CFCC:
     SEP #$20                                                   ;84CFCC|E220    |      ;
     REP #$10                                                   ;84CFCE|C210    |      ;
     LDA.B #$01                                                 ;84CFD0|A901    |      ;
@@ -11143,7 +11143,7 @@ fUnknown_84CFCC:
     RTL                                                        ;84CFE9|6B      |      ;
  
  
-fUnknown_84CFEA:
+fInput_Unknown84CFEA:
     SEP #$20                                                   ;84CFEA|E220    |      ;
     REP #$10                                                   ;84CFEC|C210    |      ;
     LDA.B #$03                                                 ;84CFEE|A903    |      ;
@@ -11163,7 +11163,7 @@ fUnknown_84CFEA:
     BEQ .label2                                                ;84D014|F01A    |84D030;
     INC A                                                      ;84D016|1A      |      ;
     STA.W $018F                                                ;84D017|8D8F01  |00018F;
-    BRA fUnknown_84D036                                        ;84D01A|801A    |84D036;
+    BRA fInput_Unknown84D036                                   ;84D01A|801A    |84D036;
  
  
 .label1:
@@ -11173,25 +11173,25 @@ fUnknown_84CFEA:
     BEQ +                                                      ;84D023|F006    |84D02B;
     INC A                                                      ;84D025|1A      |      ;
     STA.W $018F                                                ;84D026|8D8F01  |00018F;
-    BRA fUnknown_84D036                                        ;84D029|800B    |84D036;
+    BRA fInput_Unknown84D036                                   ;84D029|800B    |84D036;
  
  
   + STZ.W $018F                                                ;84D02B|9C8F01  |00018F;
-    BRA fUnknown_84D036                                        ;84D02E|8006    |84D036;
+    BRA fInput_Unknown84D036                                   ;84D02E|8006    |84D036;
  
  
 .label2:
     DEC A                                                      ;84D030|3A      |      ;
     STA.W $018F                                                ;84D031|8D8F01  |00018F;
-    BRA fUnknown_84D036                                        ;84D034|8000    |84D036;
+    BRA fInput_Unknown84D036                                   ;84D034|8000    |84D036;
  
  
-fUnknown_84D036:
+fInput_Unknown84D036:
     STZ.W $018B                                                ;84D036|9C8B01  |00018B;
     RTL                                                        ;84D039|6B      |      ;
  
  
-fUnknown_84D03A:
+fInput_Unknown84D03A:
     SEP #$20                                                   ;84D03A|E220    |      ;
     REP #$10                                                   ;84D03C|C210    |      ;
     LDA.B #$03                                                 ;84D03E|A903    |      ;
@@ -11210,7 +11210,7 @@ fUnknown_84D03A:
     BEQ .label2                                                ;84D061|F019    |84D07C;
     DEC A                                                      ;84D063|3A      |      ;
     STA.W $018F                                                ;84D064|8D8F01  |00018F;
-    BRA fUnknown_84D036                                        ;84D067|80CD    |84D036;
+    BRA fInput_Unknown84D036                                   ;84D067|80CD    |84D036;
  
  
 .label1:
@@ -11239,7 +11239,7 @@ fUnknown_84D03A:
     RTL                                                        ;84D08D|6B      |      ;
  
  
-fUnknown_84D08E:
+fInput_Unknown84D08E:
     SEP #$20                                                   ;84D08E|E220    |      ;
     REP #$10                                                   ;84D090|C210    |      ;
     LDA.B #$03                                                 ;84D092|A903    |      ;
@@ -11292,7 +11292,7 @@ fUnknown_84D08E:
     RTL                                                        ;84D0F3|6B      |      ;
  
  
-fUnknown_84D0F4:
+fInput_Unknown84D0F4:
     SEP #$20                                                   ;84D0F4|E220    |      ;
     REP #$10                                                   ;84D0F6|C210    |      ;
     LDA.B #$03                                                 ;84D0F8|A903    |      ;

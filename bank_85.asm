@@ -302,26 +302,26 @@ fUnknown_8581CB:
     RTL                                                        ;85820E|6B      |      ;
  
  
-fUnknown_85820F:
+fUnknown_ZeroUnknown_85820F:
     REP #$30                                                   ;85820F|C230    |      ;
     REP #$20                                                   ;858211|C220    |      ;
     LDA.B $A1                                                  ;858213|A5A1    |0000A1;
     CMP.W #$0262                                               ;858215|C96202  |      ;
-    BCS .label1                                                ;858218|B00A    |858224;
+    BCS .bank87                                                ;858218|B00A    |858224;
     SEP #$20                                                   ;85821A|E220    |      ;
     LDA.B #$86                                                 ;85821C|A986    |      ;
     STA.B ptrUnknown0x75+2                                     ;85821E|8577    |000077;
     STA.B ptrUnknown0x78+2                                     ;858220|857A    |00007A;
-    BRA .label2                                                ;858222|8008    |85822C;
+    BRA .continue                                              ;858222|8008    |85822C;
  
  
-.label1:
+.bank87:
     SEP #$20                                                   ;858224|E220    |      ;
     LDA.B #$87                                                 ;858226|A987    |      ;
     STA.B ptrUnknown0x75+2                                     ;858228|8577    |000077;
     STA.B ptrUnknown0x78+2                                     ;85822A|857A    |00007A;
  
-.label2:
+.continue:
     REP #$30                                                   ;85822C|C230    |      ;
     LDA.W #$0000                                               ;85822E|A90000  |      ;
     STA.W $0086                                                ;858231|8D8600  |000086;
@@ -1739,7 +1739,7 @@ fUnknown_858E57:
     RTL                                                        ;858ED6|6B      |      ;
  
  
-fUnknown_858ED7:
+fUnknown_Zero7EA220:
     REP #$30                                                   ;858ED7|C230    |      ;
     LDA.W #$FFFF                                               ;858ED9|A9FFFF  |      ;
     STA.L $7EA420                                              ;858EDC|8F20A47E|7EA420;

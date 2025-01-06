@@ -2,7 +2,7 @@
     ORG $A78000
  
  
-sTileMap1_0x00:
+sObjectMap_DefaultFarm:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A78000|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7800C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A78018|        |      ;
@@ -346,7 +346,7 @@ sTileMap1_0x00:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A78FF0|        |      ;
     dw $A1A1,$A1A1                                             ;A78FFC|        |      ;
  
-sTileMap1_0x01:
+sObjectMap_0x01:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A79000|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7900C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A79018|        |      ;
@@ -370,7 +370,7 @@ sTileMap1_0x01:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A790F0|        |      ;
     dw $A1A1,$A1A1                                             ;A790FC|        |      ;
  
-sTileMap1_0x02:
+sObjectMap_0x02:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A79100|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7910C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A79118|        |      ;
@@ -394,7 +394,7 @@ sTileMap1_0x02:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A791F0|        |      ;
     dw $A1A1,$A1A1                                             ;A791FC|        |      ;
  
-sTileMap1_0x03:
+sObjectMap_0x03:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A79200|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7920C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A79218|        |      ;
@@ -439,7 +439,7 @@ sTileMap1_0x03:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A793EC|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1                                 ;A793F8|        |      ;
  
-sTileMap1_0x04:
+sObjectMap_0x04:
     dw $A0A1,$A0A1,$A0A0,$C6C6,$C6C6,$A1A1                     ;A79400|        |      ;
     dw $A0A0,$A1A1,$A1A1,$A0A1,$A1A1,$FFA2                     ;A7940C|        |      ;
     dw $A3FF,$A1A1,$A0A0,$A0A0,$A1A0,$A1A1                     ;A79418|        |      ;
@@ -463,7 +463,7 @@ sTileMap1_0x04:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A794F0|        |      ;
     dw $A1A1,$A1A1                                             ;A794FC|        |      ;
  
-sTileMap1_0x05:
+sObjectMap_0x05:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A79500|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A1A1,$A1A1,$A1A1                     ;A7950C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A0A0,$A0A0,$A1A1                     ;A79518|        |      ;
@@ -487,7 +487,7 @@ sTileMap1_0x05:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A795F0|        |      ;
     dw $A0A0,$A0A0                                             ;A795FC|        |      ;
  
-sTileMap1_0x06:
+sObjectMap_0x06:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A79600|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7960C|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A79618|        |      ;
@@ -703,7 +703,7 @@ sTileMap1_0x06:
     dw $0000,$0000,$0000,$0000,$0000,$0000                     ;A79FF0|        |      ;
     dw $0000,$0000                                             ;A79FFC|        |      ;
  
-sTileMap1_0x07:
+sObjectMap_0x07:
     dw $A1A1,$A0A0,$A1A1,$A1A1,$A0A1,$A0A0                     ;A7A000|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7A00C|        |      ;
     dw $A0A0,$A0A0,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7A018|        |      ;
@@ -833,7 +833,7 @@ sTileMap1_0x07:
     dw $A0A0,$A0A0,$A0A0,$A1A1,$0000,$0000                     ;A7A5E8|        |      ;
     dw $0000,$0000,$0000,$0000,$0000,$0000                     ;A7A5F4|        |      ;
  
-sTileMap1_0x08:
+sObjectMap_0x08:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7A600|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7A60C|        |      ;
     dw $A0C4,$A1A1,$A7A7,$A7A7,$A7A7,$A7A7                     ;A7A618|        |      ;
@@ -1049,7 +1049,7 @@ sTileMap1_0x08:
     dw $1212,$1212,$1212,$1212,$1212,$1212                     ;A7AFF0|        |      ;
     dw $1212,$1212                                             ;A7AFFC|        |      ;
  
-sTileMap1_0x09:
+sObjectMap_0x09:
     dw $A0A1,$A5A5,$A0A8,$A0A0,$A8A8,$A8A8                     ;A7B000|        |      ;
     dw $35A0,$A8A0,$A0A8,$A0A0,$A0A0,$A1A0                     ;A7B00C|        |      ;
     dw $A0A1,$A0A0,$A0A0,$A1A0,$A8A8,$A0F9                     ;A7B018|        |      ;
@@ -1179,7 +1179,7 @@ sTileMap1_0x09:
     dw $1212,$1212,$1212,$1212,$1212,$1212                     ;A7B5E8|        |      ;
     dw $1212,$1212,$1212,$1212,$1212,$1212                     ;A7B5F4|        |      ;
  
-sTileMap1_0x0A:
+sObjectMap_0x0A:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B600|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B60C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B618|        |      ;
@@ -1224,7 +1224,7 @@ sTileMap1_0x0A:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B7EC|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1                                 ;A7B7F8|        |      ;
  
-sTileMap1_0x0B:
+sObjectMap_0x0B:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B800|        |      ;
     dw $A1A1,$A1A1,$A3A2,$A4A4,$A4A4,$A4A4                     ;A7B80C|        |      ;
     dw $A4A4,$A4A4,$A4A4,$A3A2,$A3A2,$E3E2                     ;A7B818|        |      ;
@@ -1248,7 +1248,7 @@ sTileMap1_0x0B:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B8F0|        |      ;
     dw $A1A1,$A1A1                                             ;A7B8FC|        |      ;
  
-sTileMap1_0x0C:
+sObjectMap_0x0C:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B900|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B90C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7B918|        |      ;
@@ -1314,7 +1314,7 @@ sTileMap1_0x0C:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7BBE8|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7BBF4|        |      ;
  
-sTileMap1_0x0D:
+sObjectMap_0x0D:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7BC00|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7BC0C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7BC18|        |      ;
@@ -1402,7 +1402,7 @@ sTileMap1_0x0D:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7BFF0|        |      ;
     dw $A1A1,$A1A1                                             ;A7BFFC|        |      ;
  
-sTileMap1_0x0E:
+sObjectMap_0x0E:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C000|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C00C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C018|        |      ;
@@ -1426,7 +1426,7 @@ sTileMap1_0x0E:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C0F0|        |      ;
     dw $A1A1,$A1A1                                             ;A7C0FC|        |      ;
  
-sTileMap1_0x0F:
+sObjectMap_0x0F:
     dw $0000,$0000,$0000,$0000,$0000,$0000                     ;A7C100|        |      ;
     dw $0000,$0000,$0000,$0000,$0000,$0000                     ;A7C10C|        |      ;
     dw $0000,$0000,$0000,$0000,$0000,$0000                     ;A7C118|        |      ;
@@ -1471,7 +1471,7 @@ sTileMap1_0x0F:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A0A1                     ;A7C2EC|        |      ;
     dw $A1A0,$A1A1,$A1A1,$A1A1                                 ;A7C2F8|        |      ;
  
-sTileMap1_0x10:
+sObjectMap_0x10:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C300|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C30C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C318|        |      ;
@@ -1559,7 +1559,7 @@ sTileMap1_0x10:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C6F0|        |      ;
     dw $A1A1,$A1A1                                             ;A7C6FC|        |      ;
  
-sTileMap1_0x11:
+sObjectMap_0x11:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C700|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C70C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C718|        |      ;
@@ -1604,7 +1604,7 @@ sTileMap1_0x11:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C8EC|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1                                 ;A7C8F8|        |      ;
  
-sTileMap1_0x12:
+sObjectMap_0x12:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C900|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C90C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7C918|        |      ;
@@ -1649,7 +1649,7 @@ sTileMap1_0x12:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CAEC|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1                                 ;A7CAF8|        |      ;
  
-sTileMap1_0x13:
+sObjectMap_0x13:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CB00|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CB0C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CB18|        |      ;
@@ -1694,7 +1694,7 @@ sTileMap1_0x13:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CCEC|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1                                 ;A7CCF8|        |      ;
  
-sTileMap1_0x14:
+sObjectMap_0x14:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CD00|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CD0C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CD18|        |      ;
@@ -1739,7 +1739,7 @@ sTileMap1_0x14:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CEEC|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1                                 ;A7CEF8|        |      ;
  
-sTileMap1_0x15:
+sObjectMap_0x15:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CF00|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CF0C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CF18|        |      ;
@@ -1763,7 +1763,7 @@ sTileMap1_0x15:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7CFF0|        |      ;
     dw $A1A1,$A1A1                                             ;A7CFFC|        |      ;
  
-sTileMap1_0x16:
+sObjectMap_0x16:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D000|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D00C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D018|        |      ;
@@ -1787,7 +1787,7 @@ sTileMap1_0x16:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D0F0|        |      ;
     dw $A1A1,$A1A1                                             ;A7D0FC|        |      ;
  
-sTileMap1_0x17:
+sObjectMap_0x17:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D100|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D10C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D118|        |      ;
@@ -1811,7 +1811,7 @@ sTileMap1_0x17:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D1F0|        |      ;
     dw $A1A1,$A1A1                                             ;A7D1FC|        |      ;
  
-sTileMap1_0x18:
+sObjectMap_0x18:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D200|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D20C|        |      ;
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D218|        |      ;
@@ -1835,7 +1835,7 @@ sTileMap1_0x18:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7D2F0|        |      ;
     dw $A1A1,$A1A1                                             ;A7D2FC|        |      ;
  
-sTileMap1_0x19:
+sObjectMap_0x19:
     dw $1010,$1010,$A1A1,$A0A0,$A0A0,$A0A0                     ;A7D300|        |      ;
     dw $A0A0,$A0A0,$1010,$A110,$A1A1,$A0A0                     ;A7D30C|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A1A1,$A1A1                     ;A7D318|        |      ;
@@ -1944,7 +1944,7 @@ sTileMap1_0x19:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A0A1                     ;A7D7EC|        |      ;
     dw $A1A0,$A1A1,$A1A1,$A1A1                                 ;A7D7F8|        |      ;
  
-sTileMap1_0x1A:
+sObjectMap_0x1A:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7D800|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7D80C|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7D818|        |      ;
@@ -2032,7 +2032,7 @@ sTileMap1_0x1A:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7DBF0|        |      ;
     dw $A0A0,$A0A0                                             ;A7DBFC|        |      ;
  
-sTileMap1_0x1B:
+sObjectMap_0x1B:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7DC00|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7DC0C|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7DC18|        |      ;
@@ -2120,7 +2120,7 @@ sTileMap1_0x1B:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7DFF0|        |      ;
     dw $A0A0,$A0A0                                             ;A7DFFC|        |      ;
  
-sTileMap1_0x1C:
+sObjectMap_0x1C:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7E000|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7E00C|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7E018|        |      ;
@@ -2464,7 +2464,7 @@ sTileMap1_0x1C:
     dw $0000,$0000,$0000,$0000,$0000,$0000                     ;A7EFF0|        |      ;
     dw $0000,$0000                                             ;A7EFFC|        |      ;
  
-sTileMap1_0x1D:
+sObjectMap_0x1D:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7F000|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7F00C|        |      ;
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7F018|        |      ;
@@ -2552,7 +2552,7 @@ sTileMap1_0x1D:
     dw $A0A0,$A0A0,$A0A0,$A0A0,$A0A0,$A0A0                     ;A7F3F0|        |      ;
     dw $A0A0,$A0A0                                             ;A7F3FC|        |      ;
  
-sTileMap1_0x1E:
+sObjectMap_0x1E:
     dw $A1A1,$A1A1,$A1A1,$A1A1,$A1A1,$A1A1                     ;A7F400|        |      ;
     dw $A1A1,$A1A1,$A0A1,$A8A8,$A0A0,$A8A8                     ;A7F40C|        |      ;
     dw $A0A8,$35A0,$A0A0,$A1A0,$A0A1,$A8A0                     ;A7F418|        |      ;
@@ -2618,7 +2618,7 @@ sTileMap1_0x1E:
     dw $A1A1,$A1A1,$F3F3,$0000,$0000,$0000                     ;A7F6E8|        |      ;
     dw $0000,$F6F6,$F6F6,$F6F6,$F6F6,$F6F6                     ;A7F6F4|        |      ;
  
-sTileMap1_0x1F:
+sObjectMap_0x1F:
     dw $A801,$A001,$A1A1,$A1A1,$01A1,$7373                     ;A7F700|        |      ;
     dw $0173,$0101,$A801,$A001,$A1A1,$A1A1                     ;A7F70C|        |      ;
     dw $01A1,$7373,$7373,$0301,$A801,$A001                     ;A7F718|        |      ;
@@ -2642,7 +2642,7 @@ sTileMap1_0x1F:
     dw $0101,$0101,$0101,$0101,$0101,$0101                     ;A7F7F0|        |      ;
     dw $0101,$0303                                             ;A7F7FC|        |      ;
  
-sTileMap1_0x20:
+sObjectMap_0x20:
     dw $0101,$A001,$A0A0,$0101,$0146,$4646                     ;A7F800|        |      ;
     dw $4C01,$0101,$0101,$A001,$A0A0,$0101                     ;A7F80C|        |      ;
     dw $0146,$4652,$4C01,$0101,$F9A1,$A3A1                     ;A7F818|        |      ;
@@ -2666,7 +2666,7 @@ sTileMap1_0x20:
     dw $0101,$0101,$0101,$0101,$0101,$0101                     ;A7F8F0|        |      ;
     dw $0101,$0101                                             ;A7F8FC|        |      ;
  
-sTileMap1_0x21:
+sObjectMap_0x21:
     dw $A8FF,$A8A8,$A8A8,$A8A8,$A6A8,$0101                     ;A7F900|        |      ;
     dw $2A2A,$2A01,$A8A8,$A8A8,$A8A8,$F2D0                     ;A7F90C|        |      ;
     dw $A6F2,$0101,$2A2A,$2A01,$A6A6,$A8A8                     ;A7F918|        |      ;
@@ -2690,7 +2690,7 @@ sTileMap1_0x21:
     dw $05A8,$0101,$0101,$0101,$0101,$0101                     ;A7F9F0|        |      ;
     dw $0101,$0101                                             ;A7F9FC|        |      ;
  
-sTileMap1_0x22:
+sObjectMap_0x22:
     dw $0101,$6060,$5A01,$0160,$605A,$6001                     ;A7FA00|        |      ;
     dw $0160,$0301,$0101,$6060,$5A01,$0160                     ;A7FA0C|        |      ;
     dw $605A,$6001,$0160,$0A09,$0101,$605A                     ;A7FA18|        |      ;
@@ -2714,7 +2714,7 @@ sTileMap1_0x22:
     dw $0101,$0101,$0101,$0101,$0101,$0101                     ;A7FAF0|        |      ;
     dw $0101,$0303                                             ;A7FAFC|        |      ;
  
-sTileMap1_0x23:
+sObjectMap_0x23:
     dw $6E01,$6E6E,$6E6E,$016E,$6E6E,$6E6E                     ;A7FB00|        |      ;
     dw $6E6E,$0301,$6E01,$6E6E,$6E6E,$016E                     ;A7FB0C|        |      ;
     dw $6E6E,$6E6E,$6E6E,$0301,$0101,$0101                     ;A7FB18|        |      ;
@@ -2738,7 +2738,7 @@ sTileMap1_0x23:
     dw $0101,$0101,$0101,$0101,$0101,$0101                     ;A7FBF0|        |      ;
     dw $0101,$0303                                             ;A7FBFC|        |      ;
  
-sTileMap1_0x24:
+sObjectMap_0x24:
     dw $0105,$A601,$A0A0,$A0A0,$A0A0,$F1A0                     ;A7FC00|        |      ;
     dw $A0F1,$A801,$0105,$A601,$A1A1,$A1A1                     ;A7FC0C|        |      ;
     dw $A1A1,$01A1,$0101,$A0A0,$0105,$A601                     ;A7FC18|        |      ;
