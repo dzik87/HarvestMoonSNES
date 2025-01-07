@@ -454,9 +454,9 @@ fNextDayHandler:
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
     JSL.L fObjectMap_Unknown82A811                             ;828398|2211A882|82A811;
     JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
-    JSL.L fEngineCowUnknown_83BC5A                             ;8283A0|225ABC83|83BC5A;
+    JSL.L fGameEngine_AnimalsUnknown83BC5A                     ;8283A0|225ABC83|83BC5A;
     JSL.L fWeatherSpecialEvents                                ;8283A4|22F98C82|828CF9;
-    JSL.L fUnknown_828EC6                                      ;8283A8|22C68E82|828EC6;
+    JSL.L fCore_FindBestLove                                   ;8283A8|22C68E82|828EC6;
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
     STZ.W $0915                                                ;8283B2|9C1509  |000915;
@@ -488,7 +488,7 @@ fNextDayHandler:
     SEP #$20                                                   ;8283F3|E220    |      ;
     LDA.L nShippingProfit+2                                    ;8283F5|AF091F7F|7F1F09;
     STA.B ptrUnknown0x72+2                                     ;8283F9|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;8283FB|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;8283FB|22C9B183|83B1C9;
     REP #$20                                                   ;8283FF|C220    |      ;
     LDA.W #$0000                                               ;828401|A90000  |      ;
     STA.L nShippingProfit                                      ;828404|8F071F7F|7F1F07; zero profit
@@ -778,7 +778,7 @@ fNextDayHandler:
     LDA.B #$00                                                 ;828708|A900    |      ;
     XBA                                                        ;82870A|EB      |      ;
     LDA.W $098E                                                ;82870B|AD8E09  |00098E;
-    JSL.L fEngineSaveGame                                      ;82870E|228EB683|83B68E;
+    JSL.L fGameEngine_SaveGame                                 ;82870E|228EB683|83B68E;
  
   + REP #$20                                                   ;828712|C220    |      ;
     LDA.W fInputController1_current                            ;828714|AD2401  |000124;
@@ -1040,7 +1040,7 @@ fUnknown_828790:
     STA.L $7F1F6E                                              ;828949|8F6E1F7F|7F1F6E;
     REP #$20                                                   ;82894D|C220    |      ;
     LDA.W #$0032                                               ;82894F|A93200  |      ;
-    JSL.L fEngineAddHappiness                                  ;828952|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;828952|2282B283|83B282;
     BRA .return                                                ;828956|807D    |8289D5;
  
  
@@ -1076,7 +1076,7 @@ fUnknown_828790:
     STA.L $7F1F6E                                              ;8289A0|8F6E1F7F|7F1F6E;
     REP #$20                                                   ;8289A4|C220    |      ;
     LDA.W #$0064                                               ;8289A6|A96400  |      ;
-    JSL.L fEngineAddHappiness                                  ;8289A9|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;8289A9|2282B283|83B282;
     BRA .return                                                ;8289AD|8026    |8289D5;
  
  
@@ -1633,7 +1633,7 @@ fWeatherSpecialEvents:
 .e_Winter7thDay:
     db $00,$00,$00,$08                                         ;828EC2|        |      ; Season index based
  
-fUnknown_828EC6:
+fCore_FindBestLove:
     REP #$30                                                   ;828EC6|C230    |      ;
     LDY.W #$0000                                               ;828EC8|A00000  |      ;
     LDA.L nLove_Maria                                          ;828ECB|AF1F1F7F|7F1F1F;
@@ -1748,7 +1748,7 @@ fUnknown_828EC6:
     RTL                                                        ;828FB0|6B      |      ;
  
  
-fToolSoundUnknown_828FB1:
+fToolUsed_SoundUnknown828FB1:
     SEP #$20                                                   ;828FB1|E220    |      ;
     LDA.B #$00                                                 ;828FB3|A900    |      ; A = 0
     XBA                                                        ;828FB5|EB      |      ; A <-> B
@@ -1786,7 +1786,7 @@ fToolSoundUnknown_828FB1:
     RTL                                                        ;828FF2|6B      |      ;
  
  
-fToolSoundUnknown_828FF3:
+fToolUsed_SoundUnknown828FF3:
     SEP #$20                                                   ;828FF3|E220    |      ;
     LDA.B #$00                                                 ;828FF5|A900    |      ;
     XBA                                                        ;828FF7|EB      |      ;
@@ -1845,7 +1845,7 @@ nToolSoundData_829054:
     db $06,$11,$16,$07,$28,$28,$00,$00,$00,$00,$00,$00         ;829090|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;82909C|        |      ;
  
-fToolAnimationSubrutineExecute:
+fToolUsed_AnimationSubrutines:
     SEP #$20                                                   ;8290A8|E220    |      ;
     REP #$10                                                   ;8290AA|C210    |      ;
     REP #$30                                                   ;8290AC|C230    |      ;
@@ -1863,7 +1863,7 @@ fToolAnimationSubrutineExecute:
     LDA.W nToolEquipped                                        ;8290C3|AD2109  |000921;
     ASL A                                                      ;8290C6|0A      |      ;
     TAX                                                        ;8290C7|AA      |      ;
-    JSR.W (pToolAnimationTable_82A58B,X)                       ;8290C8|FC8BA5  |82A58B;
+    JSR.W (aToolUsed_AnimationTable,X)                         ;8290C8|FC8BA5  |82A58B;
     BRA .return                                                ;8290CB|800F    |8290DC;
  
  
@@ -2163,7 +2163,7 @@ fToolUsedSubrituneExecute:
     LDA.W nToolEquipped                                        ;829267|AD2109  |000921;
     ASL A                                                      ;82926A|0A      |      ;
     TAX                                                        ;82926B|AA      |      ;
-    JSR.W (pToolUsedTable_82A5C3,X)                            ;82926C|FCC3A5  |82A5C3;
+    JSR.W (aToolUsed_Table82A5C3,X)                            ;82926C|FCC3A5  |82A5C3;
     REP #$20                                                   ;82926F|C220    |      ;
     LDA.L $7F1F5A                                              ;829271|AF5A1F7F|7F1F5A;
     ORA.W #$0040                                               ;829275|094000  |      ;
@@ -2295,7 +2295,7 @@ subToolUsed82A5C3_Sickle:
 .label3:
     REP #$20                                                   ;829374|C220    |      ;
     LDA.W #$0001                                               ;829376|A90100  |      ;
-    JSL.L fEngineAddFeed                                       ;829379|2253B283|83B253;
+    JSL.L fGameEngine_AddFeed                                  ;829379|2253B283|83B253;
     REP #$20                                                   ;82937D|C220    |      ;
     LDA.W $092E                                                ;82937F|AD2E09  |00092E;
     DEC A                                                      ;829382|3A      |      ;
@@ -2372,7 +2372,7 @@ subToolUsed82A5C3_Sickle:
     JSL.L fSubUnk1Unknown_8480F8                               ;829436|22F88084|8480F8;
     REP #$30                                                   ;82943A|C230    |      ;
     LDA.W #$0002                                               ;82943C|A90200  |      ;
-    JSL.L fEngineAddHappiness                                  ;82943F|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;82943F|2282B283|83B282;
     REP #$20                                                   ;829443|C220    |      ;
     LDA.L $7F1F5A                                              ;829445|AF5A1F7F|7F1F5A;
     ORA.W #$2000                                               ;829449|090020  |      ;
@@ -2455,7 +2455,7 @@ subToolUsed82A5C3_Plow:
     SEP #$20                                                   ;829504|E220    |      ;
     LDA.B #$00                                                 ;829506|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829508|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;82950A|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;82950A|22C9B183|83B1C9;
     JMP.W .return                                              ;82950E|4CB095  |8295B0;
  
  
@@ -2479,7 +2479,7 @@ subToolUsed82A5C3_Plow:
     SEP #$20                                                   ;82953E|E220    |      ;
     LDA.B #$00                                                 ;829540|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829542|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;829544|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;829544|22C9B183|83B1C9;
     BRA .return                                                ;829548|8066    |8295B0;
  
  
@@ -2925,7 +2925,7 @@ subToolUsed82A5C3_Axe:
     JSL.L fUnknown_81A500                                      ;829909|2200A581|81A500;
     REP #$20                                                   ;82990D|C220    |      ;
     LDA.W #$0006                                               ;82990F|A90600  |      ;
-    JSL.L fEngineAddWood                                       ;829912|2224B283|83B224;
+    JSL.L fGameEngine_AddWood                                  ;829912|2224B283|83B224;
     BRA .return                                                ;829916|8071    |829989;
  
  
@@ -3308,7 +3308,7 @@ subToolUsed82A5C3_Paint:
  
  
   + LDA.W #$000A                                               ;829BF7|A90A00  |      ;
-    JSL.L fEngineAddHappiness                                  ;829BFA|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;829BFA|2282B283|83B282;
     REP #$20                                                   ;829BFE|C220    |      ;
     LDA.W #$0059                                               ;829C00|A95900  |      ;
     LDX.W #$0080                                               ;829C03|A28000  |      ;
@@ -3330,7 +3330,7 @@ subToolUsed82A5C3_Paint:
  
  
   + LDA.W #$000A                                               ;829C2B|A90A00  |      ;
-    JSL.L fEngineAddHappiness                                  ;829C2E|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;829C2E|2282B283|83B282;
     REP #$20                                                   ;829C32|C220    |      ;
     LDA.W #$0058                                               ;829C34|A95800  |      ;
     LDX.W #$0060                                               ;829C37|A26000  |      ;
@@ -3349,7 +3349,7 @@ subToolUsed82A5C3_Paint:
     AND.W #$0800                                               ;829C56|290008  |      ;
     BNE .return                                                ;829C59|D055    |829CB0;
     LDA.W #$000A                                               ;829C5B|A90A00  |      ;
-    JSL.L fEngineAddHappiness                                  ;829C5E|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;829C5E|2282B283|83B282;
     REP #$20                                                   ;829C62|C220    |      ;
     LDA.W #$005A                                               ;829C64|A95A00  |      ;
     LDX.W #$0090                                               ;829C67|A29000  |      ;
@@ -3368,7 +3368,7 @@ subToolUsed82A5C3_Paint:
     AND.W #$1000                                               ;829C86|290010  |      ;
     BNE .return                                                ;829C89|D025    |829CB0;
     LDA.W #$000A                                               ;829C8B|A90A00  |      ;
-    JSL.L fEngineAddHappiness                                  ;829C8E|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;829C8E|2282B283|83B282;
     REP #$20                                                   ;829C92|C220    |      ;
     LDA.W #$005C                                               ;829C94|A95C00  |      ;
     LDX.W #$00B0                                               ;829C97|A2B000  |      ;
@@ -3515,7 +3515,7 @@ subToolUsed82A5C3_GoldenSickle:
 .label3:
     REP #$20                                                   ;829D92|C220    |      ;
     LDA.W #$0001                                               ;829D94|A90100  |      ;
-    JSL.L fEngineAddFeed                                       ;829D97|2253B283|83B253;
+    JSL.L fGameEngine_AddFeed                                  ;829D97|2253B283|83B253;
     REP #$20                                                   ;829D9B|C220    |      ;
     LDA.W $092E                                                ;829D9D|AD2E09  |00092E;
     DEC A                                                      ;829DA0|3A      |      ;
@@ -3592,7 +3592,7 @@ subToolUsed82A5C3_GoldenSickle:
     JSL.L fSubUnk1Unknown_8480F8                               ;829E54|22F88084|8480F8;
     REP #$30                                                   ;829E58|C230    |      ;
     LDA.W #$0002                                               ;829E5A|A90200  |      ;
-    JSL.L fEngineAddHappiness                                  ;829E5D|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;829E5D|2282B283|83B282;
     REP #$20                                                   ;829E61|C220    |      ;
     LDA.L $7F1F5A                                              ;829E63|AF5A1F7F|7F1F5A;
     ORA.W #$2000                                               ;829E67|090020  |      ;
@@ -3687,7 +3687,7 @@ subToolUsed82A5C3_GoldenPlow:
     SEP #$20                                                   ;829F37|E220    |      ;
     LDA.B #$00                                                 ;829F39|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829F3B|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;829F3D|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;829F3D|22C9B183|83B1C9;
     JMP.W .label6                                              ;829F41|4CE39F  |829FE3;
  
  
@@ -3711,7 +3711,7 @@ subToolUsed82A5C3_GoldenPlow:
     SEP #$20                                                   ;829F71|E220    |      ;
     LDA.B #$00                                                 ;829F73|A900    |      ;
     STA.B ptrUnknown0x72+2                                     ;829F75|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;829F77|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;829F77|22C9B183|83B1C9;
     BRA .label6                                                ;829F7B|8066    |829FE3;
  
  
@@ -4121,7 +4121,7 @@ subToolUsed82A5C3_GoldenAxe:
     JSL.L fUnknown_81A500                                      ;82A2EA|2200A581|81A500;
     REP #$20                                                   ;82A2EE|C220    |      ;
     LDA.W #$0006                                               ;82A2F0|A90600  |      ;
-    JSL.L fEngineAddWood                                       ;82A2F3|2224B283|83B224;
+    JSL.L fGameEngine_AddWood                                  ;82A2F3|2224B283|83B224;
  
 .return:
     REP #$30                                                   ;82A2F7|C230    |      ;
@@ -4430,7 +4430,7 @@ nCowFeedFlagsTable:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;82A57D|        |      ;
     dw $1000                                                   ;82A589|        |      ;
  
-pToolAnimationTable_82A58B:
+aToolUsed_AnimationTable:
     dw subToolAnimation82A58B_Empty                            ;82A58B|        |8290DD; 0x1C * [ptr16]
     dw subToolAnimation82A58B_Sickle                           ;82A58D|        |8290DE;
     dw subToolAnimation82A58B_Plow                             ;82A58F|        |8290EC;
@@ -4460,7 +4460,7 @@ pToolAnimationTable_82A58B:
     dw subToolAnimation82A58B_CowFood                          ;82A5BF|        |82924B;
     dw subToolAnimation82A58B_0x1B                             ;82A5C1|        |829257;
  
-pToolUsedTable_82A5C3:
+aToolUsed_Table82A5C3:
     dw subToolUsed82A5C3_Empty                                 ;82A5C3|        |82931E; 0x1C * [ptr16]
     dw subToolUsed82A5C3_Sickle                                ;82A5C5|        |829328;
     dw subToolUsed82A5C3_Plow                                  ;82A5C7|        |829460;
@@ -4589,7 +4589,7 @@ fObjectMap_LoadFarm:
     RTL                                                        ;82A6A1|6B      |      ;
  
  
-fObjectMap_Unknown82A6A2:
+fObjectMap_CurrentMapToFarmMap:
     SEP #$20                                                   ;82A6A2|E220    |      ;
     REP #$10                                                   ;82A6A4|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;82A6A6|AF191F7F|7F1F19;
@@ -4606,9 +4606,9 @@ fObjectMap_Unknown82A6A2:
 .continue:
     PHY                                                        ;82A6BB|5A      |      ;
     PHX                                                        ;82A6BC|DA      |      ;
-    STX.B $82                                                  ;82A6BD|8682    |000082;
+    STX.B n16TempVar3                                          ;82A6BD|8682    |000082;
     STY.B $84                                                  ;82A6BF|8484    |000084;
-    JSR.W fUnknown_82B13C                                      ;82A6C1|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A6C1|203CB1  |82B13C;
     SEP #$20                                                   ;82A6C4|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A6C6|BFE6A47E|7EA4E6;
     BNE +                                                      ;82A6CA|D003    |82A6CF;
@@ -4677,15 +4677,13 @@ fObjectMap_Unknown82A713:
     REP #$20                                                   ;82A722|C220    |      ;
     LDY.W #$0000                                               ;82A724|A00000  |      ;
  
-.loop:
-    LDX.W #$0000                                               ;82A727|A20000  |      ;
+ -- LDX.W #$0000                                               ;82A727|A20000  |      ;
  
-.continue:
-    PHY                                                        ;82A72A|5A      |      ;
+  - PHY                                                        ;82A72A|5A      |      ;
     PHX                                                        ;82A72B|DA      |      ;
-    STX.B $82                                                  ;82A72C|8682    |000082;
+    STX.B n16TempVar3                                          ;82A72C|8682    |000082;
     STY.B $84                                                  ;82A72E|8484    |000084;
-    JSR.W fUnknown_82B13C                                      ;82A730|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A730|203CB1  |82B13C;
     SEP #$20                                                   ;82A733|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A735|BFE6A47E|7EA4E6;
     CMP.B #$A0                                                 ;82A739|C9A0    |      ;
@@ -4806,7 +4804,7 @@ fObjectMap_Unknown82A713:
     TAX                                                        ;82A7F9|AA      |      ;
     CPX.W #$0400                                               ;82A7FA|E00004  |      ;
     BEQ +                                                      ;82A7FD|F003    |82A802;
-    JMP.W .continue                                            ;82A7FF|4C2AA7  |82A72A;
+    JMP.W -                                                    ;82A7FF|4C2AA7  |82A72A;
  
  
   + TYA                                                        ;82A802|98      |      ;
@@ -4815,7 +4813,7 @@ fObjectMap_Unknown82A713:
     TAY                                                        ;82A807|A8      |      ;
     CPY.W #$0400                                               ;82A808|C00004  |      ;
     BEQ .return                                                ;82A80B|F003    |82A810;
-    JMP.W .loop                                                ;82A80D|4C27A7  |82A727;
+    JMP.W --                                                   ;82A80D|4C27A7  |82A727;
  
  
 .return:
@@ -4836,9 +4834,9 @@ fObjectMap_Unknown82A811:
 .continue:
     PHY                                                        ;82A822|5A      |      ;
     PHX                                                        ;82A823|DA      |      ;
-    STX.B $82                                                  ;82A824|8682    |000082;
+    STX.B n16TempVar3                                          ;82A824|8682    |000082;
     STY.B $84                                                  ;82A826|8484    |000084;
-    JSR.W fUnknown_82B13C                                      ;82A828|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A828|203CB1  |82B13C;
     SEP #$20                                                   ;82A82B|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A82D|BFE6A47E|7EA4E6;
     BNE +                                                      ;82A831|D003    |82A836;
@@ -5052,7 +5050,7 @@ fObjectMap_Unknown82A811:
     LDA.L nCurrentDay                                          ;82A993|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;82A997|C901    |      ;
     BNE .justReturn                                            ;82A999|D004    |82A99F;
-    JSL.L fObjectMap_Unknown82A6A2                             ;82A99B|22A2A682|82A6A2;
+    JSL.L fObjectMap_CurrentMapToFarmMap                       ;82A99B|22A2A682|82A6A2;
  
 .justReturn:
     RTL                                                        ;82A99F|6B      |      ;
@@ -5071,9 +5069,9 @@ fObjectMap_Unknown82A9A0:
  
   - PHY                                                        ;82A9B4|5A      |      ;
     PHX                                                        ;82A9B5|DA      |      ;
-    STX.B $82                                                  ;82A9B6|8682    |000082;
+    STX.B n16TempVar3                                          ;82A9B6|8682    |000082;
     STY.B $84                                                  ;82A9B8|8484    |000084;
-    JSR.W fUnknown_82B13C                                      ;82A9BA|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A9BA|203CB1  |82B13C;
     SEP #$20                                                   ;82A9BD|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A9BF|BFE6A47E|7EA4E6;
     CMP.B #$76                                                 ;82A9C3|C976    |      ;
@@ -5137,9 +5135,9 @@ fObjectMap_CalculateRanchDev:
  
   - PHY                                                        ;82AA24|5A      |      ;
     PHX                                                        ;82AA25|DA      |      ;
-    STX.B $82                                                  ;82AA26|8682    |000082;
+    STX.B n16TempVar3                                          ;82AA26|8682    |000082;
     STY.B $84                                                  ;82AA28|8484    |000084;
-    JSR.W fUnknown_82B13C                                      ;82AA2A|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82AA2A|203CB1  |82B13C;
     SEP #$20                                                   ;82AA2D|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82AA2F|BFE6A47E|7EA4E6;
     CMP.B #$A0                                                 ;82AA33|C9A0    |      ;
@@ -5478,8 +5476,8 @@ fSound_GetToolSound:
  
  
 fUnknown_82AC61:
-    REP #$30                                                   ;82AC61|C230    |      ;
-    STA.B $82                                                  ;82AC63|8582    |000082;
+    REP #$30                                                   ;82AC61|C230    |      ; A: nArg1, X: nPosX, Y: nPosY
+    STA.B n16TempVar3                                          ;82AC63|8582    |000082;
     REP #$20                                                   ;82AC65|C220    |      ;
     LDA.L $7F1F5C                                              ;82AC67|AF5C1F7F|7F1F5C;
     AND.W #$0008                                               ;82AC6B|290800  |      ;
@@ -5487,7 +5485,7 @@ fUnknown_82AC61:
     JMP.W .return                                              ;82AC70|4CF5AC  |82ACF5;
  
  
-  + JSL.L fUnknown_82B124                                      ;82AC73|2224B182|82B124;
+  + JSL.L fObjectEngine_GetObjectAtCoords                      ;82AC73|2224B182|82B124;
     SEP #$20                                                   ;82AC77|E220    |      ;
     XBA                                                        ;82AC79|EB      |      ;
     LDA.B #$00                                                 ;82AC7A|A900    |      ;
@@ -5535,7 +5533,7 @@ fUnknown_82AC61:
     PLX                                                        ;82ACC2|FA      |      ;
     ASL A                                                      ;82ACC3|0A      |      ;
     ASL A                                                      ;82ACC4|0A      |      ;
-    ADC.B $82                                                  ;82ACC5|6582    |000082;
+    ADC.B n16TempVar3                                          ;82ACC5|6582    |000082;
     TAY                                                        ;82ACC7|A8      |      ;
     LDA.B [ptrSelectedTileMap],Y                               ;82ACC8|B70D    |00000D;
     BRA .justReturn                                            ;82ACCA|8031    |82ACFD;
@@ -5554,7 +5552,7 @@ fUnknown_82AC61:
     PLX                                                        ;82ACDC|FA      |      ;
     ASL A                                                      ;82ACDD|0A      |      ;
     ASL A                                                      ;82ACDE|0A      |      ;
-    ADC.B $82                                                  ;82ACDF|6582    |000082;
+    ADC.B n16TempVar3                                          ;82ACDF|6582    |000082;
     TAY                                                        ;82ACE1|A8      |      ;
     LDA.B [ptrSelectedTileMap],Y                               ;82ACE2|B70D    |00000D;
     LDX.W #$0000                                               ;82ACE4|A20000  |      ;
@@ -5895,9 +5893,9 @@ fUnknown_82AF00:
 .continue:
     PHY                                                        ;82AF08|5A      |      ;
     PHX                                                        ;82AF09|DA      |      ;
-    STX.B $82                                                  ;82AF0A|8682    |000082;
+    STX.B n16TempVar3                                          ;82AF0A|8682    |000082;
     STY.B $84                                                  ;82AF0C|8484    |000084;
-    JSR.W fUnknown_82B13C                                      ;82AF0E|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82AF0E|203CB1  |82B13C;
     SEP #$20                                                   ;82AF11|E220    |      ;
     REP #$10                                                   ;82AF13|C210    |      ;
     LDA.W sCurrentObjectMap,X                                  ;82AF15|BDB609  |0009B6;
@@ -6041,7 +6039,7 @@ fUnknown_82AF00:
     REP #$20                                                   ;82AFFD|C220    |      ;
  
   + REP #$30                                                   ;82AFFF|C230    |      ;
-    LDX.B $82                                                  ;82B001|A682    |000082;
+    LDX.B n16TempVar3                                          ;82B001|A682    |000082;
     LDY.B $84                                                  ;82B003|A484    |000084;
     JSL.L fUnknown_81A83A                                      ;82B005|223AA881|81A83A;
  
@@ -6079,7 +6077,7 @@ fUnknown_82B03A:
     SEP #$20                                                   ;82B03A|E220    |      ;
     REP #$10                                                   ;82B03C|C210    |      ;
     PHA                                                        ;82B03E|48      |      ;
-    JSR.W fUnknown_82B13C                                      ;82B03F|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B03F|203CB1  |82B13C;
     SEP #$20                                                   ;82B042|E220    |      ;
     PLA                                                        ;82B044|68      |      ;
     STA.W sCurrentObjectMap,X                                  ;82B045|9DB609  |0009B6;
@@ -6094,7 +6092,7 @@ fUnknown_82B049:
     STA.W nCurrentMapdata0181                                  ;82B050|8D8101  |000181;
     PLA                                                        ;82B053|68      |      ;
     PHA                                                        ;82B054|48      |      ;
-    JSR.W fUnknown_82B13C                                      ;82B055|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B055|203CB1  |82B13C;
     SEP #$20                                                   ;82B058|E220    |      ;
     PLA                                                        ;82B05A|68      |      ;
     STA.L sFarmTilemap,X                                       ;82B05B|9FE6A47E|7EA4E6;
@@ -6105,7 +6103,7 @@ fUnknown_82B060:
     SEP #$20                                                   ;82B060|E220    |      ; A: nArg1, X: nArg2, Y: nArg3
     REP #$10                                                   ;82B062|C210    |      ;
     STA.B $99                                                  ;82B064|8599    |000099;
-    STX.B $82                                                  ;82B066|8682    |000082;
+    STX.B n16TempVar3                                          ;82B066|8682    |000082;
     STY.B $84                                                  ;82B068|8484    |000084;
     LDY.W #$0000                                               ;82B06A|A00000  |      ;
  
@@ -6126,7 +6124,7 @@ fUnknown_82B060:
     ASL A                                                      ;82B07D|0A      |      ;
     STA.B $90                                                  ;82B07E|8590    |000090;
     REP #$30                                                   ;82B080|C230    |      ;
-    LDA.B $82                                                  ;82B082|A582    |000082;
+    LDA.B n16TempVar3                                          ;82B082|A582    |000082;
     CLC                                                        ;82B084|18      |      ;
     ADC.B $8E                                                  ;82B085|658E    |00008E;
     TAX                                                        ;82B087|AA      |      ;
@@ -6134,7 +6132,7 @@ fUnknown_82B060:
     CLC                                                        ;82B08A|18      |      ;
     ADC.B $90                                                  ;82B08B|6590    |000090;
     TAY                                                        ;82B08D|A8      |      ;
-    JSR.W fUnknown_82B13C                                      ;82B08E|203CB1  |82B13C;
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B08E|203CB1  |82B13C;
     SEP #$20                                                   ;82B091|E220    |      ;
     REP #$10                                                   ;82B093|C210    |      ;
     LDA.B $99                                                  ;82B095|A599    |000099;
@@ -6182,10 +6180,10 @@ fUnknown_82B0A7:
     CLC                                                        ;82B0D6|18      |      ;
     ADC.B $86                                                  ;82B0D7|6586    |000086;
     STA.B $86                                                  ;82B0D9|8586    |000086;
-    LDA.B $82                                                  ;82B0DB|A582    |000082;
+    LDA.B n16TempVar3                                          ;82B0DB|A582    |000082;
     STA.B $84                                                  ;82B0DD|8584    |000084;
     LDA.B n16TempVar2                                          ;82B0DF|A580    |000080;
-    STA.B $82                                                  ;82B0E1|8582    |000082;
+    STA.B n16TempVar3                                          ;82B0E1|8582    |000082;
     LDY.W #$0000                                               ;82B0E3|A00000  |      ;
  
  -- PHY                                                        ;82B0E6|5A      |      ;
@@ -6225,7 +6223,7 @@ fUnknown_82B0A7:
     PLY                                                        ;82B116|7A      |      ;
     PLX                                                        ;82B117|FA      |      ;
     INX                                                        ;82B118|E8      |      ;
-    CPX.B $82                                                  ;82B119|E482    |000082;
+    CPX.B n16TempVar3                                          ;82B119|E482    |000082;
     BNE -                                                      ;82B11B|D0CD    |82B0EA;
     PLY                                                        ;82B11D|7A      |      ;
     INY                                                        ;82B11E|C8      |      ;
@@ -6234,9 +6232,9 @@ fUnknown_82B0A7:
     RTL                                                        ;82B123|6B      |      ;
  
  
-fUnknown_82B124:
-    REP #$30                                                   ;82B124|C230    |      ;
-    JSR.W fUnknown_82B13C                                      ;82B126|203CB1  |82B13C;
+fObjectEngine_GetObjectAtCoords:
+    REP #$30                                                   ;82B124|C230    |      ; X: nPosX, Y: nPosY, return A: nObject
+    JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B126|203CB1  |82B13C;
     SEP #$20                                                   ;82B129|E220    |      ;
     LDA.W sCurrentObjectMap,X                                  ;82B12B|BDB609  |0009B6;
     RTL                                                        ;82B12E|6B      |      ;
@@ -6253,14 +6251,14 @@ fUnknown_82B12F:
     RTL                                                        ;82B13B|6B      |      ;
  
  
-fUnknown_82B13C:
-    REP #$30                                                   ;82B13C|C230    |      ; X: nArg1, Y: nArg2, return A: nReturn
+fObjectEngine_ConvertCoordsToOffset:
+    REP #$30                                                   ;82B13C|C230    |      ; X: nPosX, Y: nPosY, return X: nOffsetIndex
     TXA                                                        ;82B13E|8A      |      ;
     LSR A                                                      ;82B13F|4A      |      ;
     LSR A                                                      ;82B140|4A      |      ;
     LSR A                                                      ;82B141|4A      |      ;
     LSR A                                                      ;82B142|4A      |      ;
-    STA.B n16TempVar1                                          ;82B143|857E    |00007E;
+    STA.B n16TempVar1                                          ;82B143|857E    |00007E; n16TempVar1 = nPosX * 16
     TYA                                                        ;82B145|98      |      ;
     AND.W #$FFF0                                               ;82B146|29F0FF  |      ;
     STA.B n16TempVar2                                          ;82B149|8580    |000080;
@@ -8725,7 +8723,7 @@ fUnknown_82DF92:
     LDA.B #$00                                                 ;82E029|A900    |      ;
     XBA                                                        ;82E02B|EB      |      ;
     LDA.W $098E                                                ;82E02C|AD8E09  |00098E;
-    JSL.L fEngineSaveUnknown_83BA45                            ;82E02F|2245BA83|83BA45;
+    JSL.L fGameEngine_LoadContinue                             ;82E02F|2245BA83|83BA45;
     REP #$30                                                   ;82E033|C230    |      ;
     CPX.W #$0000                                               ;82E035|E00000  |      ;
     BEQ +                                                      ;82E038|F000    |82E03A;
@@ -8834,7 +8832,7 @@ fUnknown_82E0EB:
  
   + REP #$20                                                   ;82E115|C220    |      ;
     LDA.W #$0000                                               ;82E117|A90000  |      ;
-    JSL.L fEngineSaveUnknown_83BA45                            ;82E11A|2245BA83|83BA45;
+    JSL.L fGameEngine_LoadContinue                             ;82E11A|2245BA83|83BA45;
     REP #$30                                                   ;82E11E|C230    |      ;
     CPX.W #$0000                                               ;82E120|E00000  |      ;
     BEQ +                                                      ;82E123|F002    |82E127;
@@ -8878,7 +8876,7 @@ fUnknown_82E0EB:
 fUnknown_82E16B:
     REP #$20                                                   ;82E16B|C220    |      ;
     LDA.W #$0001                                               ;82E16D|A90100  |      ;
-    JSL.L fEngineSaveUnknown_83BA45                            ;82E170|2245BA83|83BA45;
+    JSL.L fGameEngine_LoadContinue                             ;82E170|2245BA83|83BA45;
     REP #$30                                                   ;82E174|C230    |      ;
     CPX.W #$0000                                               ;82E176|E00000  |      ;
     BEQ +                                                      ;82E179|F002    |82E17D;
@@ -9198,7 +9196,7 @@ fUnknown_82E405:
     REP #$30                                                   ;82E405|C230    |      ;
     PHA                                                        ;82E407|48      |      ;
     PHY                                                        ;82E408|5A      |      ;
-    JSL.L fEngineSaveUnknown_83BA45                            ;82E409|2245BA83|83BA45;
+    JSL.L fGameEngine_LoadContinue                             ;82E409|2245BA83|83BA45;
     REP #$30                                                   ;82E40D|C230    |      ;
     PLY                                                        ;82E40F|7A      |      ;
     PLA                                                        ;82E410|68      |      ;
@@ -9213,12 +9211,12 @@ fUnknown_82E405:
     TAX                                                        ;82E41D|AA      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E41E|BF78F282|82F278;
     PHX                                                        ;82E422|DA      |      ;
-    STA.B $82                                                  ;82E423|8582    |000082;
+    STA.B n16TempVar3                                          ;82E423|8582    |000082;
     LDX.W #$0000                                               ;82E425|A20000  |      ;
  
   - REP #$20                                                   ;82E428|C220    |      ;
     PHX                                                        ;82E42A|DA      |      ;
-    LDA.B $82                                                  ;82E42B|A582    |000082;
+    LDA.B n16TempVar3                                          ;82E42B|A582    |000082;
     STA.L $800185                                              ;82E42D|8F850180|800185;
     SEP #$20                                                   ;82E431|E220    |      ;
     LDA.B #$00                                                 ;82E433|A900    |      ;
@@ -9228,10 +9226,10 @@ fUnknown_82E405:
     JSL.L fDialog_TransferGlyph                                ;82E43C|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E440|22F08A80|808AF0;
     REP #$30                                                   ;82E444|C230    |      ;
-    LDA.B $82                                                  ;82E446|A582    |000082;
+    LDA.B n16TempVar3                                          ;82E446|A582    |000082;
     CLC                                                        ;82E448|18      |      ;
     ADC.W #$0008                                               ;82E449|690800  |      ;
-    STA.B $82                                                  ;82E44C|8582    |000082;
+    STA.B n16TempVar3                                          ;82E44C|8582    |000082;
     PLX                                                        ;82E44E|FA      |      ;
     INX                                                        ;82E44F|E8      |      ;
     CPX.W #$0004                                               ;82E450|E00400  |      ;
@@ -9391,7 +9389,7 @@ fUnknown_82E5E7:
     TAX                                                        ;82E5EA|AA      |      ;
     LDA.L aSystemTransferArgument,X                            ;82E5EB|BF3EE782|82E73E; X = A * 2
     STA.B n16TempVar2                                          ;82E5EF|8580    |000080; $80 = nTableValue (0x10E8 / 0x1228)
-    STZ.B $82                                                  ;82E5F1|6482    |000082; $82 = 0
+    STZ.B n16TempVar3                                          ;82E5F1|6482    |000082; $82 = 0
     STY.B $84                                                  ;82E5F3|8484    |000084; $84 = nArg2
  
  -- REP #$30                                                   ;82E5F5|C230    |      ;
@@ -9448,9 +9446,9 @@ fUnknown_82E5E7:
     CLC                                                        ;82E655|18      |      ;
     ADC.W #$0400                                               ;82E656|690004  |      ;
     STA.B n16TempVar2                                          ;82E659|8580    |000080;
-    LDA.B $82                                                  ;82E65B|A582    |000082;
+    LDA.B n16TempVar3                                          ;82E65B|A582    |000082;
     INC A                                                      ;82E65D|1A      |      ;
-    STA.B $82                                                  ;82E65E|8582    |000082;
+    STA.B n16TempVar3                                          ;82E65E|8582    |000082;
     CMP.W #$0002                                               ;82E660|C90200  |      ;
     BNE --                                                     ;82E663|D090    |82E5F5;
     RTS                                                        ;82E665|60      |      ;
@@ -9492,7 +9490,7 @@ fUnknown_82E742:
     STA.B n16TempVar2                                          ;82E750|8580    |000080;
     CLC                                                        ;82E752|18      |      ;
     ADC.W #$000F                                               ;82E753|690F00  |      ;
-    STA.B $82                                                  ;82E756|8582    |000082;
+    STA.B n16TempVar3                                          ;82E756|8582    |000082;
     INC A                                                      ;82E758|1A      |      ;
     STA.B $84                                                  ;82E759|8584    |000084;
     LDA.L aUnknown_82F258,X                                    ;82E75B|BF58F282|82F258;
@@ -9543,8 +9541,8 @@ fUnknown_82E742:
     INC.B n16TempVar1                                          ;82E7BE|E67E    |00007E;
     INC.B n16TempVar2                                          ;82E7C0|E680    |000080;
     INC.B n16TempVar2                                          ;82E7C2|E680    |000080;
-    INC.B $82                                                  ;82E7C4|E682    |000082;
-    INC.B $82                                                  ;82E7C6|E682    |000082;
+    INC.B n16TempVar3                                          ;82E7C4|E682    |000082;
+    INC.B n16TempVar3                                          ;82E7C6|E682    |000082;
     INC.B $84                                                  ;82E7C8|E684    |000084;
     INC.B $84                                                  ;82E7CA|E684    |000084;
     INC.B $86                                                  ;82E7CC|E686    |000086;
@@ -9572,7 +9570,7 @@ fLoadAndStartGame:
     LDA.B #$00                                                 ;82E7EB|A900    |      ;
     XBA                                                        ;82E7ED|EB      |      ;
     LDA.W $098E                                                ;82E7EE|AD8E09  |00098E;
-    JSL.L fEngineLoadGame                                      ;82E7F1|22B1B283|83B2B1;
+    JSL.L fGameEngine_LoadGame                                 ;82E7F1|22B1B283|83B2B1;
     JML.L fCore_GameStart                                      ;82E7F5|5C008080|808000;
  
  
@@ -9875,22 +9873,22 @@ fTextUnknown_82EA60:
 fUnknown_82EA80:
     REP #$20                                                   ;82EA80|C220    |      ;
     LDA.L aUnknown_82EB4D                                      ;82EA82|AF4DEB82|82EB4D;
-    STA.B $82                                                  ;82EA86|8582    |000082;
+    STA.B n16TempVar3                                          ;82EA86|8582    |000082;
     LDX.W #$0000                                               ;82EA88|A20000  |      ;
  
   - REP #$20                                                   ;82EA8B|C220    |      ;
     PHX                                                        ;82EA8D|DA      |      ;
-    LDA.B $82                                                  ;82EA8E|A582    |000082;
+    LDA.B n16TempVar3                                          ;82EA8E|A582    |000082;
     STA.L $800185                                              ;82EA90|8F850180|800185;
     LDA.W #$00A8                                               ;82EA94|A9A800  |      ; nLetterCode
     LDX.W #$0001                                               ;82EA97|A20100  |      ;
     JSL.L fDialog_TransferGlyph                                ;82EA9A|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82EA9E|22F08A80|808AF0;
     REP #$30                                                   ;82EAA2|C230    |      ;
-    LDA.B $82                                                  ;82EAA4|A582    |000082;
+    LDA.B n16TempVar3                                          ;82EAA4|A582    |000082;
     CLC                                                        ;82EAA6|18      |      ;
     ADC.W #$0010                                               ;82EAA7|691000  |      ;
-    STA.B $82                                                  ;82EAAA|8582    |000082;
+    STA.B n16TempVar3                                          ;82EAAA|8582    |000082;
     PLX                                                        ;82EAAC|FA      |      ;
     INX                                                        ;82EAAD|E8      |      ;
     CPX.W #$0004                                               ;82EAAE|E00400  |      ;
@@ -9906,7 +9904,7 @@ fUnknown_82EAB4:
     STA.B n16TempVar2                                          ;82EABD|8580    |000080;
     CLC                                                        ;82EABF|18      |      ;
     ADC.W #$000F                                               ;82EAC0|690F00  |      ;
-    STA.B $82                                                  ;82EAC3|8582    |000082;
+    STA.B n16TempVar3                                          ;82EAC3|8582    |000082;
     INC A                                                      ;82EAC5|1A      |      ;
     STA.B $84                                                  ;82EAC6|8584    |000084;
     LDA.L nUnknown_82EB49                                      ;82EAC8|AF49EB82|82EB49;
@@ -9956,8 +9954,8 @@ fUnknown_82EAB4:
     INC.B n16TempVar1                                          ;82EB2A|E67E    |00007E;
     INC.B n16TempVar2                                          ;82EB2C|E680    |000080;
     INC.B n16TempVar2                                          ;82EB2E|E680    |000080;
-    INC.B $82                                                  ;82EB30|E682    |000082;
-    INC.B $82                                                  ;82EB32|E682    |000082;
+    INC.B n16TempVar3                                          ;82EB30|E682    |000082;
+    INC.B n16TempVar3                                          ;82EB32|E682    |000082;
     INC.B $84                                                  ;82EB34|E684    |000084;
     INC.B $84                                                  ;82EB36|E684    |000084;
     INC.B $86                                                  ;82EB38|E686    |000086;

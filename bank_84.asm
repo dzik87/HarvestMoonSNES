@@ -1054,7 +1054,7 @@ fSubUnk1Unknown_8483CC:
     LDY.W #$0002                                               ;8487A7|A00200  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8487AA|B7CC    |0000CC;
     REP #$20                                                   ;8487AC|C220    |      ;
-    JSL.L fEngineUnknown_83AF37                                ;8487AE|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;8487AE|2237AF83|83AF37;
     REP #$20                                                   ;8487B2|C220    |      ;
     PHA                                                        ;8487B4|48      |      ;
     LDA.B $E9                                                  ;8487B5|A5E9    |0000E9;
@@ -1103,7 +1103,7 @@ fSubUnk1Unknown_8483CC:
     LDY.W #$0002                                               ;848806|A00200  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848809|B7CC    |0000CC;
     REP #$20                                                   ;84880B|C220    |      ;
-    JSL.L fEngineUnknown_83AEC3                                ;84880D|22C3AE83|83AEC3;
+    JSL.L fGameEngine_Unknown83AEC3                            ;84880D|22C3AE83|83AEC3;
     CMP.W #$0000                                               ;848811|C90000  |      ;
     BNE .return                                                ;848814|D001    |848817;
  
@@ -3023,7 +3023,7 @@ subUnknown849419_0x2C:
     JSL.L fAudioUnknown_8382FE                                 ;84961B|22FE8283|8382FE;
     SEP #$20                                                   ;84961F|E220    |      ;
     STZ.W $0119                                                ;849621|9C1901  |000119;
-    JSL.L fToolSoundUnknown_828FF3                             ;849624|22F38F82|828FF3;
+    JSL.L fToolUsed_SoundUnknown828FF3                         ;849624|22F38F82|828FF3;
     REP #$30                                                   ;849628|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84962A|A5C9    |0000C9;
     CLC                                                        ;84962C|18      |      ;
@@ -3327,7 +3327,7 @@ subUnknown849419_0x30:
     LDA.B #$00                                                 ;849870|A900    |      ;
     XBA                                                        ;849872|EB      |      ;
     REP #$20                                                   ;849873|C220    |      ;
-    JSL.L fEngineGetChickenData                                ;849875|2295C983|83C995;
+    JSL.L fGameEngine_GetChickenData                           ;849875|2295C983|83C995;
     REP #$30                                                   ;849879|C230    |      ;
     LDY.W #$001A                                               ;84987B|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84987E|B7CC    |0000CC;
@@ -3661,7 +3661,7 @@ subUnknown849419_0x31:
     LDA.B #$00                                                 ;849AED|A900    |      ;
     XBA                                                        ;849AEF|EB      |      ;
     REP #$20                                                   ;849AF0|C220    |      ;
-    JSL.L fEngineGetCowData                                    ;849AF2|22A7C983|83C9A7;
+    JSL.L fGameEngine_GetCowData                               ;849AF2|22A7C983|83C9A7;
     REP #$30                                                   ;849AF6|C230    |      ;
     LDY.W #$001A                                               ;849AF8|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;849AFB|B7CC    |0000CC;
@@ -5212,10 +5212,10 @@ CODE_84A540:
     STA.B [ptrUnknown0x72],Y                                   ;84A57C|9772    |000072;
     REP #$20                                                   ;84A57E|C220    |      ;
     LDY.W #$0008                                               ;84A580|A00800  |      ;
-    LDA.L aEngineAddCowData,X                                  ;84A583|BF44CA83|83CA44;
+    LDA.L aGameEngine_AddCowData,X                             ;84A583|BF44CA83|83CA44;
     STA.B [ptrUnknown0x72],Y                                   ;84A587|9772    |000072;
     LDY.W #$000A                                               ;84A589|A00A00  |      ;
-    LDA.L aEngineAddCowData,X                                  ;84A58C|BF44CA83|83CA44;
+    LDA.L aGameEngine_AddCowData,X                             ;84A58C|BF44CA83|83CA44;
     STA.B [ptrUnknown0x72],Y                                   ;84A590|9772    |000072;
     JMP.W CODE_84A46E                                          ;84A592|4C6EA4  |84A46E;
  
@@ -5626,7 +5626,7 @@ CODE_84A81D:
  
 CODE_84A84A:
     REP #$30                                                   ;84A84A|C230    |      ;
-    STZ.B $82                                                  ;84A84C|6482    |000082;
+    STZ.B n16TempVar3                                          ;84A84C|6482    |000082;
     STZ.B $84                                                  ;84A84E|6484    |000084;
     REP #$30                                                   ;84A850|C230    |      ;
     LDY.W #$001A                                               ;84A852|A01A00  |      ;
@@ -5644,7 +5644,7 @@ CODE_84A860:
     INC A                                                      ;84A865|1A      |      ;
     STA.B n16TempVar1                                          ;84A866|857E    |00007E;
     LDA.W #$0001                                               ;84A868|A90100  |      ;
-    STA.B $82                                                  ;84A86B|8582    |000082;
+    STA.B n16TempVar3                                          ;84A86B|8582    |000082;
  
 CODE_84A86D:
     REP #$30                                                   ;84A86D|C230    |      ;
@@ -5682,7 +5682,7 @@ CODE_84A88A:
     AND.B #$10                                                 ;84A8A6|2910    |      ;
     BNE CODE_84A8C7                                            ;84A8A8|D01D    |84A8C7;
     REP #$20                                                   ;84A8AA|C220    |      ;
-    LDA.B $82                                                  ;84A8AC|A582    |000082;
+    LDA.B n16TempVar3                                          ;84A8AC|A582    |000082;
     BEQ CODE_84A901                                            ;84A8AE|F051    |84A901;
     BRA CODE_84A8F3                                            ;84A8B0|8041    |84A8F3;
  
@@ -5702,7 +5702,7 @@ CODE_84A8B2:
  
 CODE_84A8C7:
     REP #$20                                                   ;84A8C7|C220    |      ;
-    LDA.B $82                                                  ;84A8C9|A582    |000082;
+    LDA.B n16TempVar3                                          ;84A8C9|A582    |000082;
     BEQ CODE_84A8F3                                            ;84A8CB|F026    |84A8F3;
     BRA CODE_84A901                                            ;84A8CD|8032    |84A901;
  
@@ -6219,7 +6219,7 @@ subUnknown849419_0x35:
     STZ.B $E5                                                  ;84AC7A|64E5    |0000E5;
     STZ.B $E7                                                  ;84AC7C|64E7    |0000E7;
     LDA.W $0913                                                ;84AC7E|AD1309  |000913;
-    JSL.L fEngineUnknown_83AF37                                ;84AC81|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;84AC81|2237AF83|83AF37;
     REP #$30                                                   ;84AC85|C230    |      ;
     BEQ +                                                      ;84AC87|F003    |84AC8C;
     JMP.W .label2                                              ;84AC89|4CEEAC  |84ACEE;
@@ -6474,7 +6474,7 @@ subUnknown849419_0x35:
  
 .label12:
     REP #$30                                                   ;84AE69|C230    |      ;
-    STZ.B $82                                                  ;84AE6B|6482    |000082;
+    STZ.B n16TempVar3                                          ;84AE6B|6482    |000082;
     STZ.B $84                                                  ;84AE6D|6484    |000084;
     REP #$30                                                   ;84AE6F|C230    |      ;
     LDY.W #$001A                                               ;84AE71|A01A00  |      ;
@@ -6491,7 +6491,7 @@ subUnknown849419_0x35:
     INC A                                                      ;84AE84|1A      |      ;
     STA.B n16TempVar1                                          ;84AE85|857E    |00007E;
     LDA.W #$0001                                               ;84AE87|A90100  |      ;
-    STA.B $82                                                  ;84AE8A|8582    |000082;
+    STA.B n16TempVar3                                          ;84AE8A|8582    |000082;
  
 .label13:
     REP #$30                                                   ;84AE8C|C230    |      ;
@@ -6523,7 +6523,7 @@ subUnknown849419_0x35:
     CMP.B n16TempVar1                                          ;84AEBA|C57E    |00007E;
     BCS .label15                                               ;84AEBC|B008    |84AEC6;
     REP #$20                                                   ;84AEBE|C220    |      ;
-    LDA.B $82                                                  ;84AEC0|A582    |000082;
+    LDA.B n16TempVar3                                          ;84AEC0|A582    |000082;
     BEQ .label19                                               ;84AEC2|F034    |84AEF8;
     BRA .label18                                               ;84AEC4|8024    |84AEEA;
  
@@ -7046,7 +7046,7 @@ subUnknown849419_0x36:
     LDY.W #$003F                                               ;84B2A7|A03F00  |      ;
     JSL.L fSubUnk1Unknown_84803F                               ;84B2AA|223F8084|84803F;
     REP #$30                                                   ;84B2AE|C230    |      ;
-    STZ.B $82                                                  ;84B2B0|6482    |000082;
+    STZ.B n16TempVar3                                          ;84B2B0|6482    |000082;
     STZ.B $84                                                  ;84B2B2|6484    |000084;
     REP #$30                                                   ;84B2B4|C230    |      ;
     LDY.W #$001A                                               ;84B2B6|A01A00  |      ;
@@ -7063,7 +7063,7 @@ subUnknown849419_0x36:
     INC A                                                      ;84B2C9|1A      |      ;
     STA.B n16TempVar1                                          ;84B2CA|857E    |00007E;
     LDA.W #$0001                                               ;84B2CC|A90100  |      ;
-    STA.B $82                                                  ;84B2CF|8582    |000082;
+    STA.B n16TempVar3                                          ;84B2CF|8582    |000082;
  
 .label26:
     REP #$30                                                   ;84B2D1|C230    |      ;
@@ -7095,7 +7095,7 @@ subUnknown849419_0x36:
     CMP.B n16TempVar1                                          ;84B2FF|C57E    |00007E;
     BCS .label28                                               ;84B301|B008    |84B30B;
     REP #$20                                                   ;84B303|C220    |      ;
-    LDA.B $82                                                  ;84B305|A582    |000082;
+    LDA.B n16TempVar3                                          ;84B305|A582    |000082;
     BEQ .label31                                               ;84B307|F034    |84B33D;
     BRA .label30                                               ;84B309|8024    |84B32F;
  
@@ -7557,7 +7557,7 @@ subUnknown849419_0x42:
     CLC                                                        ;84B648|18      |      ;
     ADC.W #$0001                                               ;84B649|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B64C|85C9    |0000C9;
-    JSL.L fEngineAddProfit                                     ;84B64E|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;84B64E|22C9B183|83B1C9;
     REP #$20                                                   ;84B652|C220    |      ;
     BEQ .justReturn                                            ;84B654|F00F    |84B665;
     LDA.W #$0000                                               ;84B656|A90000  |      ;
@@ -7783,7 +7783,7 @@ subUnknown849419_0x46:
     STA.B ptrUnknown0xC9                                       ;84B7E4|85C9    |0000C9;
     REP #$20                                                   ;84B7E6|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;84B7E8|A7C9    |0000C9;
-    STA.B $82                                                  ;84B7EA|8582    |000082;
+    STA.B n16TempVar3                                          ;84B7EA|8582    |000082;
     REP #$30                                                   ;84B7EC|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;84B7EE|A5C9    |0000C9;
     CLC                                                        ;84B7F0|18      |      ;
@@ -7798,10 +7798,10 @@ subUnknown849419_0x46:
     ADC.W #$0001                                               ;84B801|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B804|85C9    |0000C9;
     REP #$20                                                   ;84B806|C220    |      ;
-    LDA.B $82                                                  ;84B808|A582    |000082;
+    LDA.B n16TempVar3                                          ;84B808|A582    |000082;
     CLC                                                        ;84B80A|18      |      ;
     ADC.W #$0001                                               ;84B80B|690100  |      ;
-    STA.B $82                                                  ;84B80E|8582    |000082;
+    STA.B n16TempVar3                                          ;84B80E|8582    |000082;
     SEP #$20                                                   ;84B810|E220    |      ;
     LDA.B $84                                                  ;84B812|A584    |000084;
     ADC.B #$00                                                 ;84B814|6900    |      ;
@@ -7816,7 +7816,7 @@ subUnknown849419_0x46:
     BCC +                                                      ;84B827|9018    |84B841;
     REP #$20                                                   ;84B829|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B82B|A772    |000072;
-    CMP.B $82                                                  ;84B82D|C582    |000082;
+    CMP.B n16TempVar3                                          ;84B82D|C582    |000082;
     SEP #$20                                                   ;84B82F|E220    |      ;
     LDY.W #$0002                                               ;84B831|A00200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84B834|B772    |000072;
@@ -8358,7 +8358,7 @@ subUnknown849419_0x50:
     SBC.B #$24                                                 ;84BC11|E924    |      ;
     REP #$20                                                   ;84BC13|C220    |      ;
     PHA                                                        ;84BC15|48      |      ;
-    JSL.L fEngineGetChickenData                                ;84BC16|2295C983|83C995;
+    JSL.L fGameEngine_GetChickenData                           ;84BC16|2295C983|83C995;
     SEP #$20                                                   ;84BC1A|E220    |      ;
     LDY.W #$0001                                               ;84BC1C|A00100  |      ;
     LDA.B #$28                                                 ;84BC1F|A928    |      ;
@@ -8373,14 +8373,14 @@ subUnknown849419_0x50:
     ASL A                                                      ;84BC30|0A      |      ;
     TAX                                                        ;84BC31|AA      |      ;
     LDY.W #$0004                                               ;84BC32|A00400  |      ;
-    LDA.L aEngineAddChickenData,X                              ;84BC35|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;84BC35|BF10CA83|83CA10;
     CLC                                                        ;84BC39|18      |      ;
     ADC.W #$0010                                               ;84BC3A|691000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84BC3D|9772    |000072;
     INX                                                        ;84BC3F|E8      |      ;
     INX                                                        ;84BC40|E8      |      ;
     LDY.W #$0006                                               ;84BC41|A00600  |      ;
-    LDA.L aEngineAddChickenData,X                              ;84BC44|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;84BC44|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BC48|9772    |000072;
     SEP #$20                                                   ;84BC4A|E220    |      ;
     STZ.W $091D                                                ;84BC4C|9C1D09  |00091D;
@@ -8459,7 +8459,7 @@ subUnknown849419_0x51:
     SBC.B #$24                                                 ;84BCCF|E924    |      ;
     REP #$20                                                   ;84BCD1|C220    |      ;
     PHA                                                        ;84BCD3|48      |      ;
-    JSL.L fEngineGetChickenData                                ;84BCD4|2295C983|83C995;
+    JSL.L fGameEngine_GetChickenData                           ;84BCD4|2295C983|83C995;
     SEP #$20                                                   ;84BCD8|E220    |      ;
     LDY.W #$0001                                               ;84BCDA|A00100  |      ;
     LDA.B #$28                                                 ;84BCDD|A928    |      ;
@@ -8474,14 +8474,14 @@ subUnknown849419_0x51:
     ASL A                                                      ;84BCEE|0A      |      ;
     TAX                                                        ;84BCEF|AA      |      ;
     LDY.W #$0004                                               ;84BCF0|A00400  |      ;
-    LDA.L aEngineAddChickenData,X                              ;84BCF3|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;84BCF3|BF10CA83|83CA10;
     CLC                                                        ;84BCF7|18      |      ;
     ADC.W #$0010                                               ;84BCF8|691000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84BCFB|9772    |000072;
     INX                                                        ;84BCFD|E8      |      ;
     INX                                                        ;84BCFE|E8      |      ;
     LDY.W #$0006                                               ;84BCFF|A00600  |      ;
-    LDA.L aEngineAddChickenData,X                              ;84BD02|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;84BD02|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BD06|9772    |000072;
     SEP #$20                                                   ;84BD08|E220    |      ;
     STZ.W $091D                                                ;84BD0A|9C1D09  |00091D;
@@ -8839,7 +8839,7 @@ subUnknown849419_0x56:
     REP #$30                                                   ;84BF94|C230    |      ;
     LDA.W #$000A                                               ;84BF96|A90A00  |      ;
     STA.B nPlayerAction                                        ;84BF99|85D4    |0000D4;
-    JSL.L fToolAnimationSubrutineExecute                       ;84BF9B|22A89082|8290A8;
+    JSL.L fToolUsed_AnimationSubrutines                        ;84BF9B|22A89082|8290A8;
  
 .return:
     RTS                                                        ;84BF9F|60      |      ;
@@ -9449,7 +9449,7 @@ fInput_Unkown84C380:
     LDA.B #$00                                                 ;84C3EB|A900    |      ;
     XBA                                                        ;84C3ED|EB      |      ;
     LDA.W $098E                                                ;84C3EE|AD8E09  |00098E;
-    JSL.L fEngineSaveUnknown_83BA45                            ;84C3F1|2245BA83|83BA45;
+    JSL.L fGameEngine_LoadContinue                             ;84C3F1|2245BA83|83BA45;
     REP #$30                                                   ;84C3F5|C230    |      ;
     CPX.W #$0000                                               ;84C3F7|E00000  |      ;
     BEQ +                                                      ;84C3FA|F019    |84C415;
@@ -10372,7 +10372,7 @@ fInput_Unknown84CA1D:
     STZ.B $E5                                                  ;84CA72|64E5    |0000E5;
     STZ.B $E7                                                  ;84CA74|64E7    |0000E7;
     LDA.B $DA                                                  ;84CA76|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AF37                                ;84CA78|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;84CA78|2237AF83|83AF37;
     REP #$30                                                   ;84CA7C|C230    |      ;
     BNE .return                                                ;84CA7E|D01D    |84CA9D;
     REP #$20                                                   ;84CA80|C220    |      ;
@@ -10719,7 +10719,7 @@ fInput_Unknown84CD16:
     STZ.B $E5                                                  ;84CD25|64E5    |0000E5;
     STZ.B $E7                                                  ;84CD27|64E7    |0000E7;
     LDA.W $0911                                                ;84CD29|AD1109  |000911;
-    JSL.L fEngineUnknown_83AF37                                ;84CD2C|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;84CD2C|2237AF83|83AF37;
     REP #$30                                                   ;84CD30|C230    |      ;
     BEQ +                                                      ;84CD32|F003    |84CD37;
     JMP.W .return                                              ;84CD34|4C71CD  |84CD71;
@@ -10817,7 +10817,7 @@ fInput_SetPlayerAction0x0A:
     REP #$30                                                   ;84CDD1|C230    |      ;
     LDA.W #$000A                                               ;84CDD3|A90A00  |      ;
     STA.B nPlayerAction                                        ;84CDD6|85D4    |0000D4;
-    JSL.L fToolAnimationSubrutineExecute                       ;84CDD8|22A89082|8290A8;
+    JSL.L fToolUsed_AnimationSubrutines                        ;84CDD8|22A89082|8290A8;
  
 fInput_Return84CDDC:
     RTL                                                        ;84CDDC|6B      |      ;
