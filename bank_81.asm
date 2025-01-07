@@ -132,7 +132,7 @@ fUnknown_8180B7:
     ASL A                                                      ;8180F7|0A      |      ;
     ASL A                                                      ;8180F8|0A      |      ;
     ASL A                                                      ;8180F9|0A      |      ;
-    STA.W $097E                                                ;8180FA|8D7E09  |00097E;
+    STA.W $097E                                                ;8180FA|8D7E09  |00097E; A * 64
     RTL                                                        ;8180FD|6B      |      ;
  
  
@@ -348,7 +348,7 @@ subItemCarried_RedEgg:
     LDA.W $09AC                                                ;818213|ADAC09  |0009AC;
     CMP.B #$01                                                 ;818216|C901    |      ;
     BEQ +                                                      ;818218|F003    |81821D;
-    JMP.W fEggFestivalUnknown_81836C                           ;81821A|4C6C83  |81836C;
+    JMP.W fEggFestivalUnknown_WrongEgg                         ;81821A|4C6C83  |81836C;
  
  
   + REP #$30                                                   ;81821D|C230    |      ;
@@ -384,7 +384,7 @@ subItemCarried_LightPurpleEgg:
     LDA.W $09AC                                                ;818255|ADAC09  |0009AC;
     CMP.B #$02                                                 ;818258|C902    |      ;
     BEQ +                                                      ;81825A|F003    |81825F;
-    JMP.W fEggFestivalUnknown_81836C                           ;81825C|4C6C83  |81836C;
+    JMP.W fEggFestivalUnknown_WrongEgg                         ;81825C|4C6C83  |81836C;
  
  
   + REP #$30                                                   ;81825F|C230    |      ;
@@ -421,7 +421,7 @@ subItemCarried_BlueEgg:
     LDA.W $09AC                                                ;818297|ADAC09  |0009AC;
     CMP.B #$03                                                 ;81829A|C903    |      ;
     BEQ +                                                      ;81829C|F003    |8182A1;
-    JMP.W fEggFestivalUnknown_81836C                           ;81829E|4C6C83  |81836C;
+    JMP.W fEggFestivalUnknown_WrongEgg                         ;81829E|4C6C83  |81836C;
  
  
   + REP #$30                                                   ;8182A1|C230    |      ;
@@ -454,7 +454,7 @@ subItemCarried_PurpleEgg:
     LDA.W $09AC                                                ;8182D6|ADAC09  |0009AC;
     CMP.B #$04                                                 ;8182D9|C904    |      ;
     BEQ +                                                      ;8182DB|F003    |8182E0;
-    JMP.W fEggFestivalUnknown_81836C                           ;8182DD|4C6C83  |81836C;
+    JMP.W fEggFestivalUnknown_WrongEgg                         ;8182DD|4C6C83  |81836C;
  
  
   + REP #$30                                                   ;8182E0|C230    |      ;
@@ -483,7 +483,7 @@ subItemCarried_GreenEgg:
     BNE +                                                      ;818310|D016    |818328;
     LDA.W $09AC                                                ;818312|ADAC09  |0009AC;
     CMP.B #$05                                                 ;818315|C905    |      ;
-    BNE fEggFestivalUnknown_81836C                             ;818317|D053    |81836C;
+    BNE fEggFestivalUnknown_WrongEgg                           ;818317|D053    |81836C;
     REP #$30                                                   ;818319|C230    |      ;
     LDA.W #$00A1                                               ;81831B|A9A100  |      ;
     LDX.W $09AD                                                ;81831E|AEAD09  |0009AD;
@@ -524,7 +524,7 @@ fEggFestivalUnknown_81835E:
     RTS                                                        ;81836B|60      |      ;
  
  
-fEggFestivalUnknown_81836C:
+fEggFestivalUnknown_WrongEgg:
     REP #$30                                                   ;81836C|C230    |      ;
     LDA.W #$00FC                                               ;81836E|A9FC00  |      ;
     LDX.W $09AD                                                ;818371|AEAD09  |0009AD;
@@ -1222,7 +1222,7 @@ fUnknown_8187C3:
     JSL.L fUnknown_81A4F1                                      ;81882C|22F1A481|81A4F1;
     SEP #$20                                                   ;818830|E220    |      ;
     STZ.W $091D                                                ;818832|9C1D09  |00091D;
-    JSL.L fToolSoundUnknown_828FF3                             ;818835|22F38F82|828FF3;
+    JSL.L fToolUsed_SoundUnknown828FF3                         ;818835|22F38F82|828FF3;
     RTS                                                        ;818839|60      |      ;
  
  
@@ -1252,12 +1252,12 @@ fUnknown_818855:
     REP #$10                                                   ;818857|C210    |      ;
     LDA.W $0976                                                ;818859|AD7609  |000976;
     BNE +                                                      ;81885C|D003    |818861;
-    JMP.W fUnknown_818B6B                                      ;81885E|4C6B8B  |818B6B;
+    JMP.W fItemFound_Unknown818B6B                             ;81885E|4C6B8B  |818B6B;
  
  
   + CMP.B #$01                                                 ;818861|C901    |      ;
     BNE +                                                      ;818863|D003    |818868;
-    JMP.W fUnknown_818BA5                                      ;818865|4CA58B  |818BA5;
+    JMP.W fItemFound_Consume                                   ;818865|4CA58B  |818BA5;
  
  
   + CMP.B #$02                                                 ;818868|C902    |      ;
@@ -1277,12 +1277,12 @@ fUnknown_818855:
  
   + CMP.B #$05                                                 ;81887D|C905    |      ;
     BNE +                                                      ;81887F|D003    |818884;
-    JMP.W fUnknown_818F2A                                      ;818881|4C2A8F  |818F2A;
+    JMP.W fItemSell_Unknown818F2A                              ;818881|4C2A8F  |818F2A;
  
  
   + CMP.B #$06                                                 ;818884|C906    |      ;
     BNE +                                                      ;818886|D003    |81888B;
-    JMP.W fUnknown_818F5A                                      ;818888|4C5A8F  |818F5A;
+    JMP.W fItemSell_Unknown818F5A                              ;818888|4C5A8F  |818F5A;
  
  
   + CMP.B #$07                                                 ;81888B|C907    |      ;
@@ -1380,12 +1380,12 @@ fUnknown_8188E5:
  
   + CMP.B #$05                                                 ;818906|C905    |      ;
     BNE +                                                      ;818908|D003    |81890D;
-    JMP.W fUnknown_818F2A                                      ;81890A|4C2A8F  |818F2A;
+    JMP.W fItemSell_Unknown818F2A                              ;81890A|4C2A8F  |818F2A;
  
  
   + CMP.B #$06                                                 ;81890D|C906    |      ;
     BNE +                                                      ;81890F|D003    |818914;
-    JMP.W fUnknown_818F5A                                      ;818911|4C5A8F  |818F5A;
+    JMP.W fItemSell_Unknown818F5A                              ;818911|4C5A8F  |818F5A;
  
  
   + CMP.B #$07                                                 ;818914|C907    |      ;
@@ -1405,9 +1405,9 @@ fUnknown_818923:
     SEP #$20                                                   ;818923|E220    |      ;
     REP #$10                                                   ;818925|C210    |      ;
     LDA.W $0976                                                ;818927|AD7609  |000976;
-    BEQ fUnknown_81893F                                        ;81892A|F013    |81893F;
+    BEQ fItemBuy_Unknown81893F                                 ;81892A|F013    |81893F;
     CMP.B #$01                                                 ;81892C|C901    |      ;
-    BEQ fUnknown_818989                                        ;81892E|F059    |818989;
+    BEQ fItemBuy_Unknown818989                                 ;81892E|F059    |818989;
     CMP.B #$02                                                 ;818930|C902    |      ;
     BNE +                                                      ;818932|D003    |818937;
     JMP.W fUnknown_818A94                                      ;818934|4C948A  |818A94;
@@ -1421,7 +1421,7 @@ fUnknown_818923:
   + RTS                                                        ;81893E|60      |      ;
  
  
-fUnknown_81893F:
+fItemBuy_Unknown81893F:
     SEP #$20                                                   ;81893F|E220    |      ;
     LDA.B #$02                                                 ;818941|A902    |      ;
     STA.W $019A                                                ;818943|8D9A01  |00019A;
@@ -1454,7 +1454,7 @@ fUnknown_81893F:
     ASL A                                                      ;81896C|0A      |      ;
     ASL A                                                      ;81896D|0A      |      ;
     TAX                                                        ;81896E|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A1A5,X                         ;81896F|BFA5A181|81A1A5;
+    LDA.L aDialogsData_BuyItems,X                              ;81896F|BFA5A181|81A1A5;
     TAX                                                        ;818973|AA      |      ;
     SEP #$20                                                   ;818974|E220    |      ;
     LDA.B #$00                                                 ;818976|A900    |      ;
@@ -1466,7 +1466,7 @@ fUnknown_81893F:
     JMP.W fReturn_818B6A                                       ;818986|4C6A8B  |818B6A;
  
  
-fUnknown_818989:
+fItemBuy_Unknown818989:
     SEP #$20                                                   ;818989|E220    |      ;
     LDA.W $019A                                                ;81898B|AD9A01  |00019A;
     CMP.B #$02                                                 ;81898E|C902    |      ;
@@ -1476,7 +1476,7 @@ fUnknown_818989:
  
   + LDA.W $018F                                                ;818995|AD8F01  |00018F;
     BEQ +                                                      ;818998|F003    |81899D;
-    JMP.W fUnknown_818A4E                                      ;81899A|4C4E8A  |818A4E;
+    JMP.W fItemBuy_Unknown818A4E                               ;81899A|4C4E8A  |818A4E;
  
  
   + SEP #$20                                                   ;81899D|E220    |      ;
@@ -1510,14 +1510,14 @@ fUnknown_818989:
     CLC                                                        ;8189C5|18      |      ;
     ADC.W #$0009                                               ;8189C6|690900  |      ;
     TAX                                                        ;8189C9|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A1A5,X                         ;8189CA|BFA5A181|81A1A5;
+    LDA.L aDialogsData_BuyItems,X                              ;8189CA|BFA5A181|81A1A5;
     STA.B ptrUnknown0x72                                       ;8189CE|8572    |000072;
     INX                                                        ;8189D0|E8      |      ;
     INX                                                        ;8189D1|E8      |      ;
     SEP #$20                                                   ;8189D2|E220    |      ;
-    LDA.L nUnknownDialogIndex_81A1A5,X                         ;8189D4|BFA5A181|81A1A5;
+    LDA.L aDialogsData_BuyItems,X                              ;8189D4|BFA5A181|81A1A5;
     STA.B ptrUnknown0x72+2                                     ;8189D8|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;8189DA|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;8189DA|22C9B183|83B1C9;
     REP #$20                                                   ;8189DE|C220    |      ;
     BEQ .zero0x80                                              ;8189E0|F007    |8189E9;
     LDA.W #$0004                                               ;8189E2|A90400  |      ;
@@ -1564,7 +1564,7 @@ fUnknown_818989:
     ADC.W #$0002                                               ;818A1B|690200  |      ;
     ADC.B n16TempVar2                                          ;818A1E|6580    |000080;
     TAX                                                        ;818A20|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A1A5,X                         ;818A21|BFA5A181|81A1A5;
+    LDA.L aDialogsData_BuyItems,X                              ;818A21|BFA5A181|81A1A5;
     TAX                                                        ;818A25|AA      |      ;
     SEP #$20                                                   ;818A26|E220    |      ;
     LDA.B #$00                                                 ;818A28|A900    |      ;
@@ -1589,7 +1589,7 @@ fUnknown_818A44:
     JMP.W fReturn_818B6A                                       ;818A4B|4C6A8B  |818B6A;
  
  
-fUnknown_818A4E:
+fItemBuy_Unknown818A4E:
     SEP #$20                                                   ;818A4E|E220    |      ;
     LDA.B #$02                                                 ;818A50|A902    |      ;
     STA.W $019A                                                ;818A52|8D9A01  |00019A;
@@ -1624,24 +1624,24 @@ fUnknown_818A4E:
     CLC                                                        ;818A7D|18      |      ;
     ADC.W #$0004                                               ;818A7E|690400  |      ;
     TAX                                                        ;818A81|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A1A5,X                         ;818A82|BFA5A181|81A1A5;
+    LDA.L aDialogsData_BuyItems,X                              ;818A82|BFA5A181|81A1A5;
     TAX                                                        ;818A86|AA      |      ;
     SEP #$20                                                   ;818A87|E220    |      ;
     LDA.B #$00                                                 ;818A89|A900    |      ;
     STA.W $0191                                                ;818A8B|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818A8E|225F9383|83935F;
-    BRA fUnknown_818AA0                                        ;818A92|800C    |818AA0;
+    BRA fItemBuy_Unknown818AA0                                 ;818A92|800C    |818AA0;
  
  
 fUnknown_818A94:
     SEP #$20                                                   ;818A94|E220    |      ;
     LDA.W $019A                                                ;818A96|AD9A01  |00019A;
     CMP.B #$02                                                 ;818A99|C902    |      ;
-    BNE fUnknown_818AA0                                        ;818A9B|D003    |818AA0;
+    BNE fItemBuy_Unknown818AA0                                 ;818A9B|D003    |818AA0;
     JMP.W fReturn_818B6A                                       ;818A9D|4C6A8B  |818B6A;
  
  
-fUnknown_818AA0:
+fItemBuy_Unknown818AA0:
     REP #$20                                                   ;818AA0|C220    |      ;
     LDA.W $0978                                                ;818AA2|AD7809  |000978;
     STA.B $A5                                                  ;818AA5|85A5    |0000A5;
@@ -1694,7 +1694,7 @@ fUnknown_818AA0:
     ADC.W #$0008                                               ;818AFF|690800  |      ;
     TAX                                                        ;818B02|AA      |      ;
     SEP #$20                                                   ;818B03|E220    |      ;
-    LDA.L nUnknownDialogIndex_81A1A5,X                         ;818B05|BFA5A181|81A1A5;
+    LDA.L aDialogsData_BuyItems,X                              ;818B05|BFA5A181|81A1A5;
     XBA                                                        ;818B09|EB      |      ;
     LDA.B #$00                                                 ;818B0A|A900    |      ;
     XBA                                                        ;818B0C|EB      |      ;
@@ -1747,7 +1747,7 @@ fReturn_818B6A:
     RTS                                                        ;818B6A|60      |      ;
  
  
-fUnknown_818B6B:
+fItemFound_Unknown818B6B:
     REP #$30                                                   ;818B6B|C230    |      ;
     LDY.W #$0001                                               ;818B6D|A00100  |      ;
     JSL.L fUnknown_8180B7                                      ;818B70|22B78081|8180B7;
@@ -1761,8 +1761,8 @@ fUnknown_818B6B:
     ASL A                                                      ;818B81|0A      |      ;
     CLC                                                        ;818B82|18      |      ;
     ADC.B n16TempVar1                                          ;818B83|657E    |00007E;
-    TAX                                                        ;818B85|AA      |      ;
-    LDA.L nUnknownDialogIndex_819FC6,X                         ;818B86|BFC69F81|819FC6;
+    TAX                                                        ;818B85|AA      |      ; X = (nCarriedItem - 1) * 3
+    LDA.L aDialogData_FoundItem,X                              ;818B86|BFC69F81|819FC6;
     TAX                                                        ;818B8A|AA      |      ;
     SEP #$20                                                   ;818B8B|E220    |      ;
     LDA.B #$02                                                 ;818B8D|A902    |      ;
@@ -1776,7 +1776,7 @@ fUnknown_818B6B:
     JMP.W fReturn_818C23                                       ;818BA2|4C238C  |818C23;
  
  
-fUnknown_818BA5:
+fItemFound_Consume:
     SEP #$20                                                   ;818BA5|E220    |      ;
     LDA.W $019A                                                ;818BA7|AD9A01  |00019A;
     CMP.B #$02                                                 ;818BAA|C902    |      ;
@@ -1818,7 +1818,7 @@ fUnknown_818BA5:
     INX                                                        ;818BF2|E8      |      ;
     INX                                                        ;818BF3|E8      |      ;
     SEP #$20                                                   ;818BF4|E220    |      ;
-    LDA.L nUnknownDialogIndex_819FC6,X                         ;818BF6|BFC69F81|819FC6;
+    LDA.L aDialogData_FoundItem,X                              ;818BF6|BFC69F81|819FC6;
     JSL.L fPlayerEnergyHandler_81D061                          ;818BFA|2261D081|81D061;
     REP #$30                                                   ;818BFE|C230    |      ;
     LDA.W #$0002                                               ;818C00|A90200  |      ;
@@ -1991,13 +1991,13 @@ fUnknown_818D38:
     JSL.L fUnknown_82AC61                                      ;818D52|2261AC82|82AC61;
     REP #$30                                                   ;818D56|C230    |      ;
     CPX.W #$0001                                               ;818D58|E00100  |      ;
-    BEQ fUnknown_818DAB                                        ;818D5B|F04E    |818DAB;
+    BEQ fItemShipped_Unknown818DAB                             ;818D5B|F04E    |818DAB;
     CPX.W #$0002                                               ;818D5D|E00200  |      ;
-    BEQ fUnknown_818DAB                                        ;818D60|F049    |818DAB;
+    BEQ fItemShipped_Unknown818DAB                             ;818D60|F049    |818DAB;
     CPX.W #$0007                                               ;818D62|E00700  |      ;
-    BEQ fUnknown_818DAB                                        ;818D65|F044    |818DAB;
+    BEQ fItemShipped_Unknown818DAB                             ;818D65|F044    |818DAB;
     CPX.W #$0008                                               ;818D67|E00800  |      ;
-    BEQ fUnknown_818DAB                                        ;818D6A|F03F    |818DAB;
+    BEQ fItemShipped_Unknown818DAB                             ;818D6A|F03F    |818DAB;
     REP #$20                                                   ;818D6C|C220    |      ;
     LDA.W #$0000                                               ;818D6E|A90000  |      ;
     CPX.W #$00F0                                               ;818D71|E0F000  |      ;
@@ -2026,7 +2026,7 @@ fUnknown_818D38:
     JMP.W fReturn_818E1A                                       ;818DA8|4C1A8E  |818E1A;
  
  
-fUnknown_818DAB:
+fItemShipped_Unknown818DAB:
     REP #$20                                                   ;818DAB|C220    |      ;
     LDA.W #$0001                                               ;818DAD|A90100  |      ;
     LDX.W #$0006                                               ;818DB0|A20600  |      ;
@@ -2040,7 +2040,7 @@ fUnknown_818DAB:
     ASL A                                                      ;818DC4|0A      |      ;
     TAX                                                        ;818DC5|AA      |      ;
     SEP #$20                                                   ;818DC6|E220    |      ;
-    LDA.L nShippingProfitMoneyTable,X                          ;818DC8|BFDE9F81|819FDE;
+    LDA.L aDialogData_ShippingProfit,X                         ;818DC8|BFDE9F81|819FDE;
     LDX.W nTileInFrontOfPlayerX                                ;818DCC|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;818DCF|AC8709  |000987;
     JSL.L fUnknown_81A688                                      ;818DD2|2288A681|81A688;
@@ -2093,7 +2093,7 @@ fUnknown_818E1B:
     LDA.W $0920                                                ;818E29|AD2009  |000920;
     SEC                                                        ;818E2C|38      |      ;
     SBC.B #$24                                                 ;818E2D|E924    |      ;
-    JSL.L fEngineGetChickenData                                ;818E2F|2295C983|83C995;
+    JSL.L fGameEngine_GetChickenData                           ;818E2F|2295C983|83C995;
     SEP #$20                                                   ;818E33|E220    |      ;
     LDY.W #$0001                                               ;818E35|A00100  |      ;
     LDA.B nMapEngine_DestinationId                             ;818E38|A522    |000022;
@@ -2184,7 +2184,7 @@ fUnknown_818E98:
     LDA.W nPlacedCowFeed                                       ;818EF1|AD3009  |000930;
     INC A                                                      ;818EF4|1A      |      ;
     STA.W nPlacedCowFeed                                       ;818EF5|8D3009  |000930;
-    JMP.W fUnknown_818DAB                                      ;818EF8|4CAB8D  |818DAB;
+    JMP.W fItemShipped_Unknown818DAB                           ;818EF8|4CAB8D  |818DAB;
  
  
 .skip:
@@ -2211,10 +2211,10 @@ fUnknown_818E98:
     LDA.W nPlacedChickenFeed                                   ;818F20|AD3109  |000931;
     INC A                                                      ;818F23|1A      |      ;
     STA.W nPlacedChickenFeed                                   ;818F24|8D3109  |000931;
-    JMP.W fUnknown_818DAB                                      ;818F27|4CAB8D  |818DAB;
+    JMP.W fItemShipped_Unknown818DAB                           ;818F27|4CAB8D  |818DAB;
  
  
-fUnknown_818F2A:
+fItemSell_Unknown818F2A:
     SEP #$20                                                   ;818F2A|E220    |      ;
     LDA.B #$02                                                 ;818F2C|A902    |      ;
     STA.W $019A                                                ;818F2E|8D9A01  |00019A;
@@ -2227,7 +2227,7 @@ fUnknown_818F2A:
     CLC                                                        ;818F3C|18      |      ;
     ADC.B n16TempVar1                                          ;818F3D|657E    |00007E;
     TAX                                                        ;818F3F|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A094,X                         ;818F40|BF94A081|81A094;
+    LDA.L aDialogData_SellItems,X                              ;818F40|BF94A081|81A094;
     TAX                                                        ;818F44|AA      |      ;
     SEP #$20                                                   ;818F45|E220    |      ;
     LDA.B #$00                                                 ;818F47|A900    |      ;
@@ -2239,7 +2239,7 @@ fUnknown_818F2A:
     JMP.W fReturn_81900F                                       ;818F57|4C0F90  |81900F;
  
  
-fUnknown_818F5A:
+fItemSell_Unknown818F5A:
     SEP #$20                                                   ;818F5A|E220    |      ;
     LDA.W $019A                                                ;818F5C|AD9A01  |00019A;
     CMP.B #$02                                                 ;818F5F|C902    |      ;
@@ -2261,8 +2261,8 @@ fUnknown_818F5A:
     CLC                                                        ;818F79|18      |      ;
     ADC.B n16TempVar1                                          ;818F7A|657E    |00007E;
     TAX                                                        ;818F7C|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A094,X                         ;818F7D|BF94A081|81A094;
-    CMP.W #$0313                                               ;818F81|C91303  |      ;
+    LDA.L aDialogData_SellItems,X                              ;818F7D|BF94A081|81A094;
+    CMP.W #$0313                                               ;818F81|C91303  |      ; Sorry but we can't accept that
     BEQ fUnknown_818FEA                                        ;818F84|F064    |818FEA;
     SEP #$20                                                   ;818F86|E220    |      ;
     LDA.B #$02                                                 ;818F88|A902    |      ;
@@ -2291,12 +2291,12 @@ fUnknown_818F5A:
     SEP #$20                                                   ;818FBB|E220    |      ;
     LDA.B #$00                                                 ;818FBD|A900    |      ;
     XBA                                                        ;818FBF|EB      |      ;
-    LDA.L nUnknownDialogIndex_81A094,X                         ;818FC0|BF94A081|81A094;
+    LDA.L aDialogData_SellItems,X                              ;818FC0|BF94A081|81A094;
     REP #$20                                                   ;818FC4|C220    |      ;
     STA.B ptrUnknown0x72                                       ;818FC6|8572    |000072;
     SEP #$20                                                   ;818FC8|E220    |      ;
     STZ.B ptrUnknown0x72+2                                     ;818FCA|6474    |000074;
-    JSL.L fEngineAddProfit                                     ;818FCC|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;818FCC|22C9B183|83B1C9;
     SEP #$20                                                   ;818FD0|E220    |      ;
     STZ.W $091D                                                ;818FD2|9C1D09  |00091D;
     BRA fReturn_81900F                                         ;818FD5|8038    |81900F;
@@ -2383,7 +2383,7 @@ fUnknown_819063:
     LDA.W $0974                                                ;81906E|AD7409  |000974;
     AND.B #$FB                                                 ;819071|29FB    |      ;
     STA.W $0974                                                ;819073|8D7409  |000974;
-    BRA fUnknown_8190AA                                        ;819076|8032    |8190AA;
+    BRA fItemSell_Unknown8190AA                                ;819076|8032    |8190AA;
  
  
 fUnknown_819078:
@@ -2398,7 +2398,7 @@ fUnknown_819078:
     LDA.W $0974                                                ;81908C|AD7409  |000974;
     ORA.B #$04                                                 ;81908F|0904    |      ;
     STA.W $0974                                                ;819091|8D7409  |000974;
-    BRA fUnknown_8190AA                                        ;819094|8014    |8190AA;
+    BRA fItemSell_Unknown8190AA                                ;819094|8014    |8190AA;
  
  
   + REP #$20                                                   ;819096|C220    |      ;
@@ -2410,7 +2410,7 @@ fUnknown_819078:
     CMP.W #$FFFF                                               ;8190A5|C9FFFF  |      ;
     BEQ fUnknown_819063                                        ;8190A8|F0B9    |819063;
  
-fUnknown_8190AA:
+fItemSell_Unknown8190AA:
     REP #$30                                                   ;8190AA|C230    |      ;
     LDA.B nPlayerAction                                        ;8190AC|A5D4    |0000D4;
     CMP.W #$0005                                               ;8190AE|C90500  |      ;
@@ -2432,7 +2432,7 @@ fUnknown_8190AA:
     REP #$30                                                   ;8190CF|C230    |      ;
     CMP.W #$0000                                               ;8190D1|C90000  |      ;
     BEQ +                                                      ;8190D4|F003    |8190D9;
-    JMP.W fUnknown_819195                                      ;8190D6|4C9591  |819195;
+    JMP.W fItemShipped_Unknown819195                           ;8190D6|4C9591  |819195;
  
  
   + SEP #$20                                                   ;8190D9|E220    |      ;
@@ -2490,7 +2490,7 @@ fUnknown_8190AA:
     CLC                                                        ;81913F|18      |      ;
     ADC.B n16TempVar1                                          ;819140|657E    |00007E;
     TAX                                                        ;819142|AA      |      ;
-    LDA.L nUnknownDialogIndex_81A094,X                         ;819143|BF94A081|81A094;
+    LDA.L aDialogData_SellItems,X                              ;819143|BF94A081|81A094;
     BNE +                                                      ;819147|D003    |81914C;
     JMP.W fUnknown_81917E                                      ;819149|4C7E91  |81917E;
  
@@ -2529,7 +2529,7 @@ fUnknown_81917E:
     JMP.W fReturn_819227                                       ;819192|4C2792  |819227;
  
  
-fUnknown_819195:
+fItemShipped_Unknown819195:
     REP #$20                                                   ;819195|C220    |      ;
     LDA.W #$0001                                               ;819197|A90100  |      ;
     LDX.W #$0000                                               ;81919A|A20000  |      ;
@@ -2556,19 +2556,19 @@ fUnknown_819195:
     TAX                                                        ;8191D1|AA      |      ;
     INX                                                        ;8191D2|E8      |      ;
     SEP #$20                                                   ;8191D3|E220    |      ;
-    LDA.L nShippingProfitMoneyTable,X                          ;8191D5|BFDE9F81|819FDE;
-    BNE fAddProfit_8191DE                                      ;8191D9|D003    |8191DE;
+    LDA.L aDialogData_ShippingProfit,X                         ;8191D5|BFDE9F81|819FDE;
+    BNE fItemShipped_AddProfit                                 ;8191D9|D003    |8191DE;
     JMP.W fUnknown_819220                                      ;8191DB|4C2092  |819220;
  
  
-fAddProfit_8191DE:
+fItemShipped_AddProfit:
     LDA.L nCurrentTimeID                                       ;8191DE|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;8191E2|C911    |      ;
     BCS fUnknown_819220                                        ;8191E4|B03A    |819220;
     SEP #$20                                                   ;8191E6|E220    |      ;
     LDA.B #$00                                                 ;8191E8|A900    |      ;
     XBA                                                        ;8191EA|EB      |      ;
-    LDA.L nShippingProfitMoneyTable,X                          ;8191EB|BFDE9F81|819FDE;
+    LDA.L aDialogData_ShippingProfit,X                         ;8191EB|BFDE9F81|819FDE;
     REP #$20                                                   ;8191EF|C220    |      ;
     CLC                                                        ;8191F1|18      |      ;
     ADC.L nShippingProfit                                      ;8191F2|6F071F7F|7F1F07;
@@ -2775,23 +2775,23 @@ fUnknown_819379:
     LDA.B nMapEngine_DestinationId                             ;81937D|A522    |000022;
     CMP.B #$04                                                 ;81937F|C904    |      ;
     BCS +                                                      ;819381|B003    |819386;
-    JMP.W fUnknown_819397                                      ;819383|4C9793  |819397;
+    JMP.W fItemShipped_Unknown819397                           ;819383|4C9793  |819397;
  
  
   + CMP.B #$27                                                 ;819386|C927    |      ;
     BNE +                                                      ;819388|D003    |81938D;
-    JMP.W fUnknown_819397                                      ;81938A|4C9793  |819397;
+    JMP.W fItemShipped_Unknown819397                           ;81938A|4C9793  |819397;
  
  
   + CMP.B #$28                                                 ;81938D|C928    |      ;
     BNE +                                                      ;81938F|D003    |819394;
-    JMP.W fUnknown_819397                                      ;819391|4C9793  |819397;
+    JMP.W fItemShipped_Unknown819397                           ;819391|4C9793  |819397;
  
  
   + JMP.W fUnknown_819497                                      ;819394|4C9794  |819497;
  
  
-fUnknown_819397:
+fItemShipped_Unknown819397:
     REP #$20                                                   ;819397|C220    |      ;
     LDA.W #$0002                                               ;819399|A90200  |      ;
     LDX.W #$0000                                               ;81939C|A20000  |      ;
@@ -2820,7 +2820,7 @@ fUnknown_819397:
     TAX                                                        ;8193CC|AA      |      ;
     INX                                                        ;8193CD|E8      |      ;
     SEP #$20                                                   ;8193CE|E220    |      ;
-    LDA.L nShippingProfitMoneyTable,X                          ;8193D0|BFDE9F81|819FDE;
+    LDA.L aDialogData_ShippingProfit,X                         ;8193D0|BFDE9F81|819FDE;
     BNE +                                                      ;8193D4|D003    |8193D9;
     JMP.W fUnknown_819497                                      ;8193D6|4C9794  |819497;
  
@@ -2831,7 +2831,7 @@ fUnknown_819397:
     SEP #$20                                                   ;8193E1|E220    |      ;
     LDA.B #$00                                                 ;8193E3|A900    |      ;
     XBA                                                        ;8193E5|EB      |      ;
-    LDA.L nShippingProfitMoneyTable,X                          ;8193E6|BFDE9F81|819FDE;
+    LDA.L aDialogData_ShippingProfit,X                         ;8193E6|BFDE9F81|819FDE;
     REP #$20                                                   ;8193EA|C220    |      ;
     CLC                                                        ;8193EC|18      |      ;
     ADC.L nShippingProfit                                      ;8193ED|6F071F7F|7F1F07;
@@ -2960,7 +2960,7 @@ fUnknown_819497:
     STA.B [ptrUnknown0xCC],Y                                   ;8194FA|97CC    |0000CC;
     REP #$20                                                   ;8194FC|C220    |      ;
     LDA.W #$0000                                               ;8194FE|A90000  |      ;
-    JSL.L fEngineAddChicken                                    ;819501|2207C883|83C807;
+    JSL.L fGameEngine_AddChicken                               ;819501|2207C883|83C807;
     REP #$30                                                   ;819505|C230    |      ;
     LDA.L $7F1F6E                                              ;819507|AF6E1F7F|7F1F6E;
     ORA.W #$2000                                               ;81950B|090020  |      ;
@@ -2978,7 +2978,7 @@ fUnknown_819497:
     STZ.W $091D                                                ;819530|9C1D09  |00091D;
     REP #$30                                                   ;819533|C230    |      ;
     LDA.W #$0005                                               ;819535|A90500  |      ;
-    JSL.L fEngineAddHappiness                                  ;819538|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;819538|2282B283|83B282;
     JMP.W fReturn_8196AE                                       ;81953C|4CAE96  |8196AE;
  
  
@@ -3166,100 +3166,100 @@ fReturn_8196AE:
  
  
 pItemCarriedTable_8196AF:
-    dl EMPTY_FFFFFF                                            ;8196AF|        |FFFFFF; 91 * ptr24
-    dl DATA16_819876                                           ;8196B2|        |819876;
-    dl DATA16_81989A                                           ;8196B5|        |81989A;
-    dl DATA16_8198BE                                           ;8196B8|        |8198BE;
-    dl DATA16_8198E2                                           ;8196BB|        |8198E2;
-    dl DATA16_819906                                           ;8196BE|        |819906;
-    dl DATA16_81992A                                           ;8196C1|        |81992A;
-    dl DATA16_81994E                                           ;8196C4|        |81994E;
-    dl DATA16_819972                                           ;8196C7|        |819972;
-    dl DATA16_819996                                           ;8196CA|        |819996;
-    dl DATA16_8199BA                                           ;8196CD|        |8199BA;
-    dl DATA16_819996                                           ;8196D0|        |819996;
-    dl DATA16_819996                                           ;8196D3|        |819996;
-    dl DATA16_8199DE                                           ;8196D6|        |8199DE;
-    dl DATA16_819A02                                           ;8196D9|        |819A02;
-    dl DATA16_819A26                                           ;8196DC|        |819A26;
-    dl DATA16_819A4A                                           ;8196DF|        |819A4A;
-    dl DATA16_819A6E                                           ;8196E2|        |819A6E;
-    dl DATA16_819A92                                           ;8196E5|        |819A92;
-    dl DATA16_819AB6                                           ;8196E8|        |819AB6;
-    dl DATA16_819ADA                                           ;8196EB|        |819ADA;
-    dl DATA16_819AFE                                           ;8196EE|        |819AFE;
-    dl DATA16_819B22                                           ;8196F1|        |819B22;
-    dl DATA16_819B46                                           ;8196F4|        |819B46;
-    dl DATA16_819B6A                                           ;8196F7|        |819B6A;
-    dl DATA16_819FA2                                           ;8196FA|        |819FA2;
-    dl DATA16_819B8E                                           ;8196FD|        |819B8E;
-    dl DATA16_819BB2                                           ;819700|        |819BB2;
-    dl DATA16_819BD6                                           ;819703|        |819BD6;
-    dl DATA16_819BFA                                           ;819706|        |819BFA;
-    dl DATA16_819C1E                                           ;819709|        |819C1E;
-    dl DATA16_819C42                                           ;81970C|        |819C42;
-    dl DATA16_819C66                                           ;81970F|        |819C66;
-    dl DATA16_819C8A                                           ;819712|        |819C8A;
-    dl DATA16_819CAE                                           ;819715|        |819CAE;
-    dl DATA16_819CD2                                           ;819718|        |819CD2;
-    dl DATA16_819CF6                                           ;81971B|        |819CF6;
-    dl DATA16_819D1A                                           ;81971E|        |819D1A;
-    dl DATA16_819D3E                                           ;819721|        |819D3E;
-    dl DATA16_819D62                                           ;819724|        |819D62;
-    dl DATA16_819D86                                           ;819727|        |819D86;
-    dl DATA16_819DAA                                           ;81972A|        |819DAA;
-    dl DATA16_819DCE                                           ;81972D|        |819DCE;
-    dl DATA16_819DE0                                           ;819730|        |819DE0;
-    dl DATA16_819DF2                                           ;819733|        |819DF2;
-    dl DATA16_819E04                                           ;819736|        |819E04;
-    dl DATA16_819E16                                           ;819739|        |819E16;
-    dl DATA16_819E28                                           ;81973C|        |819E28;
-    dl DATA16_819E3A                                           ;81973F|        |819E3A;
-    dl DATA16_819E4C                                           ;819742|        |819E4C;
-    dl DATA16_819E5E                                           ;819745|        |819E5E;
-    dl DATA16_819E70                                           ;819748|        |819E70;
-    dl DATA16_819E82                                           ;81974B|        |819E82;
-    dl DATA16_819E94                                           ;81974E|        |819E94;
-    dl DATA16_819EA6                                           ;819751|        |819EA6;
-    dl DATA16_819EB8                                           ;819754|        |819EB8;
-    dl DATA16_819ECA                                           ;819757|        |819ECA;
-    dl DATA16_819EDC                                           ;81975A|        |819EDC;
-    dl DATA16_819EEE                                           ;81975D|        |819EEE;
-    dl DATA16_819F00                                           ;819760|        |819F00;
-    dl DATA16_819F12                                           ;819763|        |819F12;
-    dl DATA16_819F24                                           ;819766|        |819F24;
-    dl DATA16_819F36                                           ;819769|        |819F36;
-    dl DATA16_819F48                                           ;81976C|        |819F48;
-    dl DATA16_819F5A                                           ;81976F|        |819F5A;
-    dl DATA16_819F6C                                           ;819772|        |819F6C;
-    dl DATA16_819F7E                                           ;819775|        |819F7E;
-    dl DATA16_819F90                                           ;819778|        |819F90;
-    dl DATA16_819E94                                           ;81977B|        |819E94;
-    dl DATA16_819E16                                           ;81977E|        |819E16;
-    dl DATA16_819E28                                           ;819781|        |819E28;
-    dl DATA16_819E3A                                           ;819784|        |819E3A;
-    dl DATA16_819E4C                                           ;819787|        |819E4C;
-    dl DATA16_819FA2                                           ;81978A|        |819FA2;
-    dl DATA16_819EA6                                           ;81978D|        |819EA6;
-    dl DATA16_819EB8                                           ;819790|        |819EB8;
-    dl DATA16_819ECA                                           ;819793|        |819ECA;
-    dl DATA16_819EEE                                           ;819796|        |819EEE;
-    dl DATA16_819F00                                           ;819799|        |819F00;
-    dl DATA16_819F12                                           ;81979C|        |819F12;
-    dl DATA16_819F24                                           ;81979F|        |819F24;
-    dl DATA16_819F36                                           ;8197A2|        |819F36;
-    dl DATA16_819E5E                                           ;8197A5|        |819E5E;
-    dl DATA16_819E70                                           ;8197A8|        |819E70;
-    dl DATA16_819F7E                                           ;8197AB|        |819F7E;
-    dl DATA16_819F90                                           ;8197AE|        |819F90;
-    dl DATA16_81992A                                           ;8197B1|        |81992A;
-    dl DATA16_819A26                                           ;8197B4|        |819A26;
-    dl DATA16_819BB2                                           ;8197B7|        |819BB2;
-    dl DATA16_819BD6                                           ;8197BA|        |819BD6;
-    dl DATA16_819BFA                                           ;8197BD|        |819BFA;
+    dl EMPTY_FFFFFF                                            ;8196AF|        |FFFFFF; 0x5B * [ptr24]
+    dl DATA24_819876                                           ;8196B2|        |819876;
+    dl DATA24_81989A                                           ;8196B5|        |81989A;
+    dl DATA24_8198BE                                           ;8196B8|        |8198BE;
+    dl DATA24_8198E2                                           ;8196BB|        |8198E2;
+    dl DATA24_819906                                           ;8196BE|        |819906;
+    dl DATA24_81992A                                           ;8196C1|        |81992A;
+    dl DATA24_81994E                                           ;8196C4|        |81994E;
+    dl DATA24_819972                                           ;8196C7|        |819972;
+    dl DATA24_819996                                           ;8196CA|        |819996;
+    dl DATA24_8199BA                                           ;8196CD|        |8199BA;
+    dl DATA24_819996                                           ;8196D0|        |819996;
+    dl DATA24_819996                                           ;8196D3|        |819996;
+    dl DATA24_8199DE                                           ;8196D6|        |8199DE;
+    dl DATA24_819A02                                           ;8196D9|        |819A02;
+    dl DATA24_819A26                                           ;8196DC|        |819A26;
+    dl DATA24_819A4A                                           ;8196DF|        |819A4A;
+    dl DATA24_819A6E                                           ;8196E2|        |819A6E;
+    dl DATA24_819A92                                           ;8196E5|        |819A92;
+    dl DATA24_819AB6                                           ;8196E8|        |819AB6;
+    dl DATA24_819ADA                                           ;8196EB|        |819ADA;
+    dl DATA24_819AFE                                           ;8196EE|        |819AFE;
+    dl DATA24_819B22                                           ;8196F1|        |819B22;
+    dl DATA24_819B46                                           ;8196F4|        |819B46;
+    dl DATA24_819B6A                                           ;8196F7|        |819B6A;
+    dl DATA24_819FA2                                           ;8196FA|        |819FA2;
+    dl DATA24_819B8E                                           ;8196FD|        |819B8E;
+    dl DATA24_819BB2                                           ;819700|        |819BB2;
+    dl DATA24_819BD6                                           ;819703|        |819BD6;
+    dl DATA24_819BFA                                           ;819706|        |819BFA;
+    dl DATA24_819C1E                                           ;819709|        |819C1E;
+    dl DATA24_819C42                                           ;81970C|        |819C42;
+    dl DATA24_819C66                                           ;81970F|        |819C66;
+    dl DATA24_819C8A                                           ;819712|        |819C8A;
+    dl DATA24_819CAE                                           ;819715|        |819CAE;
+    dl DATA24_819CD2                                           ;819718|        |819CD2;
+    dl DATA24_819CF6                                           ;81971B|        |819CF6;
+    dl DATA24_819D1A                                           ;81971E|        |819D1A;
+    dl DATA24_819D3E                                           ;819721|        |819D3E;
+    dl DATA24_819D62                                           ;819724|        |819D62;
+    dl DATA24_819D86                                           ;819727|        |819D86;
+    dl DATA24_819DAA                                           ;81972A|        |819DAA;
+    dl DATA24_819DCE                                           ;81972D|        |819DCE;
+    dl DATA24_819DE0                                           ;819730|        |819DE0;
+    dl DATA24_819DF2                                           ;819733|        |819DF2;
+    dl DATA24_819E04                                           ;819736|        |819E04;
+    dl DATA24_819E16                                           ;819739|        |819E16;
+    dl DATA24_819E28                                           ;81973C|        |819E28;
+    dl DATA24_819E3A                                           ;81973F|        |819E3A;
+    dl DATA24_819E4C                                           ;819742|        |819E4C;
+    dl DATA24_819E5E                                           ;819745|        |819E5E;
+    dl DATA24_819E70                                           ;819748|        |819E70;
+    dl DATA24_819E82                                           ;81974B|        |819E82;
+    dl DATA24_819E94                                           ;81974E|        |819E94;
+    dl DATA24_819EA6                                           ;819751|        |819EA6;
+    dl DATA24_819EB8                                           ;819754|        |819EB8;
+    dl DATA24_819ECA                                           ;819757|        |819ECA;
+    dl DATA24_819EDC                                           ;81975A|        |819EDC;
+    dl DATA24_819EEE                                           ;81975D|        |819EEE;
+    dl DATA24_819F00                                           ;819760|        |819F00;
+    dl DATA24_819F12                                           ;819763|        |819F12;
+    dl DATA24_819F24                                           ;819766|        |819F24;
+    dl DATA24_819F36                                           ;819769|        |819F36;
+    dl DATA24_819F48                                           ;81976C|        |819F48;
+    dl DATA24_819F5A                                           ;81976F|        |819F5A;
+    dl DATA24_819F6C                                           ;819772|        |819F6C;
+    dl DATA24_819F7E                                           ;819775|        |819F7E;
+    dl DATA24_819F90                                           ;819778|        |819F90;
+    dl DATA24_819E94                                           ;81977B|        |819E94;
+    dl DATA24_819E16                                           ;81977E|        |819E16;
+    dl DATA24_819E28                                           ;819781|        |819E28;
+    dl DATA24_819E3A                                           ;819784|        |819E3A;
+    dl DATA24_819E4C                                           ;819787|        |819E4C;
+    dl DATA24_819FA2                                           ;81978A|        |819FA2;
+    dl DATA24_819EA6                                           ;81978D|        |819EA6;
+    dl DATA24_819EB8                                           ;819790|        |819EB8;
+    dl DATA24_819ECA                                           ;819793|        |819ECA;
+    dl DATA24_819EEE                                           ;819796|        |819EEE;
+    dl DATA24_819F00                                           ;819799|        |819F00;
+    dl DATA24_819F12                                           ;81979C|        |819F12;
+    dl DATA24_819F24                                           ;81979F|        |819F24;
+    dl DATA24_819F36                                           ;8197A2|        |819F36;
+    dl DATA24_819E5E                                           ;8197A5|        |819E5E;
+    dl DATA24_819E70                                           ;8197A8|        |819E70;
+    dl DATA24_819F7E                                           ;8197AB|        |819F7E;
+    dl DATA24_819F90                                           ;8197AE|        |819F90;
+    dl DATA24_81992A                                           ;8197B1|        |81992A;
+    dl DATA24_819A26                                           ;8197B4|        |819A26;
+    dl DATA24_819BB2                                           ;8197B7|        |819BB2;
+    dl DATA24_819BD6                                           ;8197BA|        |819BD6;
+    dl DATA24_819BFA                                           ;8197BD|        |819BFA;
  
 pItemCarriedSubrutines:
-    dw EMPTY_81FFFF                                            ;8197C0|        |81FFFF; 91 * ptr16
+    dw EMPTY_81FFFF                                            ;8197C0|        |81FFFF; 0x5B * [ptr16]
     dw subItemCarried_Mushroom                                 ;8197C2|        |8180FE; 01
     dw subItemCarried_PoisonMushroom                           ;8197C4|        |818102; 02
     dw subItemCarried_WildGrape                                ;8197C6|        |818106; 03
@@ -3351,444 +3351,660 @@ pItemCarriedSubrutines:
     dw subItemCarried_0x59                                     ;819872|        |8187BB; 59
     dw subItemCarried_0x5A                                     ;819874|        |8187BF; 5A
  
-DATA16_819876:
-    dw $00F6                                                   ;819876|        |      ;
-    db $00,$A2,$03,$00,$9C,$03,$00,$9D,$03,$00,$9E,$03         ;819878|        |      ;
-    db $01,$9E,$03,$00,$9F,$03,$00,$A0,$03,$00,$A1,$03         ;819884|        |      ;
-    db $01,$A1,$03,$00,$06,$01,$00,$A3,$03,$00                 ;819890|        |      ;
- 
-DATA16_81989A:
-    dw $00F7                                                   ;81989A|        |      ;
-    db $00,$AA,$03,$00,$A4,$03,$00,$A5,$03,$00,$A6,$03         ;81989C|        |      ;
-    db $01,$A6,$03,$00,$A7,$03,$00,$A8,$03,$00,$A9,$03         ;8198A8|        |      ;
-    db $01,$A9,$03,$00,$07,$01,$00,$AB,$03,$00                 ;8198B4|        |      ;
- 
-DATA16_8198BE:
-    dw $00F4                                                   ;8198BE|        |      ;
-    db $00,$92,$03,$00,$8C,$03,$00,$8D,$03,$00,$8E,$03         ;8198C0|        |      ;
-    db $01,$8E,$03,$00,$8F,$03,$00,$90,$03,$00,$91,$03         ;8198CC|        |      ;
-    db $01,$91,$03,$00,$04,$01,$00,$93,$03,$00                 ;8198D8|        |      ;
- 
-DATA16_8198E2:
-    dw $00F5                                                   ;8198E2|        |      ;
-    db $00,$9A,$03,$00,$94,$03,$00,$95,$03,$00,$96,$03         ;8198E4|        |      ;
-    db $01,$96,$03,$00,$97,$03,$00,$98,$03,$00,$99,$03         ;8198F0|        |      ;
-    db $01,$99,$03,$00,$05,$01,$00,$9B,$03,$00                 ;8198FC|        |      ;
- 
-DATA16_819906:
-    dw $00F8                                                   ;819906|        |      ;
-    db $00,$B2,$03,$00,$AC,$03,$00,$AD,$03,$00,$AE,$03         ;819908|        |      ;
-    db $01,$AE,$03,$00,$AF,$03,$00,$B0,$03,$00,$B1,$03         ;819914|        |      ;
-    db $01,$B1,$03,$00,$08,$01,$00,$B3,$03,$00                 ;819920|        |      ;
- 
-DATA16_81992A:
-    dw $00F9                                                   ;81992A|        |      ;
-    db $00,$BA,$03,$00,$B4,$03,$00,$B5,$03,$00,$B6,$03         ;81992C|        |      ;
-    db $01,$B6,$03,$00,$B7,$03,$00,$B8,$03,$00,$B9,$03         ;819938|        |      ;
-    db $01,$B9,$03,$00,$09,$01,$00,$BB,$03,$00                 ;819944|        |      ;
- 
-DATA16_81994E:
-    dw $00BB                                                   ;81994E|        |      ;
-    db $00,$2C,$04,$00,$26,$04,$00,$27,$04,$00,$28,$04         ;819950|        |      ;
-    db $01,$28,$04,$00,$29,$04,$00,$2A,$04,$00,$2B,$04         ;81995C|        |      ;
-    db $01,$2B,$04,$00,$BA,$00,$00,$2D,$04,$00                 ;819968|        |      ;
- 
-DATA16_819972:
-    dw $0000                                                   ;819972|        |      ;
-    db $00,$0C,$04,$00,$09,$04,$00,$0A,$04,$00,$0B,$04         ;819974|        |      ;
-    db $01,$0B,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;819980|        |      ;
-    db $01,$00,$00,$00,$0D,$04,$00,$00,$00,$00                 ;81998C|        |      ;
- 
-DATA16_819996:
-    dw $00E8                                                   ;819996|        |      ;
-    db $00,$29,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01         ;819998|        |      ;
-    db $01,$25,$01,$00,$26,$01,$00,$27,$01,$00,$28,$01         ;8199A4|        |      ;
-    db $01,$28,$01,$00,$B7,$00,$00,$2A,$01,$00                 ;8199B0|        |      ;
- 
-DATA16_8199BA:
-    dw $00E9                                                   ;8199BA|        |      ;
-    db $00,$31,$01,$00,$2B,$01,$00,$2C,$01,$00,$2D,$01         ;8199BC|        |      ;
-    db $01,$2D,$01,$00,$2E,$01,$00,$2F,$01,$00,$30,$01         ;8199C8|        |      ;
-    db $01,$30,$01,$00,$B7,$00,$00,$32,$01,$00                 ;8199D4|        |      ;
- 
-DATA16_8199DE:
-    dw $00EA                                                   ;8199DE|        |      ;
-    db $00,$21,$01,$00,$1B,$01,$00,$1C,$01,$00,$1D,$01         ;8199E0|        |      ;
-    db $01,$1D,$01,$00,$1E,$01,$00,$1F,$01,$00,$20,$01         ;8199EC|        |      ;
-    db $01,$20,$01,$00,$C8,$00,$00,$22,$01,$00                 ;8199F8|        |      ;
- 
-DATA16_819A02:
-    dw $00EB                                                   ;819A02|        |      ;
-    db $00,$39,$01,$00,$33,$01,$00,$34,$01,$00,$35,$01         ;819A04|        |      ;
-    db $01,$35,$01,$00,$36,$01,$00,$37,$01,$00,$38,$01         ;819A10|        |      ;
-    db $01,$38,$01,$00,$C8,$00,$00,$3A,$01,$00                 ;819A1C|        |      ;
- 
-DATA16_819A26:
-    dw $00E7                                                   ;819A26|        |      ;
-    db $00,$41,$01,$00,$3B,$01,$00,$3C,$01,$00,$3D,$01         ;819A28|        |      ;
-    db $01,$3D,$01,$00,$3E,$01,$00,$3F,$01,$00,$40,$01         ;819A34|        |      ;
-    db $01,$40,$01,$00,$00,$00,$00,$42,$01,$00                 ;819A40|        |      ;
- 
-DATA16_819A4A:
-    dw $00EC                                                   ;819A4A|        |      ;
-    db $00,$58,$03,$00,$52,$03,$00,$53,$03,$00,$54,$03         ;819A4C|        |      ;
-    db $01,$54,$03,$00,$55,$03,$00,$56,$03,$00,$57,$03         ;819A58|        |      ;
-    db $01,$57,$03,$00,$FC,$00,$00,$59,$03,$00                 ;819A64|        |      ;
- 
-DATA16_819A6E:
-    dw $00ED                                                   ;819A6E|        |      ;
-    db $00,$60,$03,$00,$5A,$03,$00,$5B,$03,$00,$5C,$03         ;819A70|        |      ;
-    db $01,$5C,$03,$00,$5D,$03,$00,$5E,$03,$00,$5F,$03         ;819A7C|        |      ;
-    db $01,$5F,$03,$00,$FD,$00,$00,$61,$03,$00                 ;819A88|        |      ;
- 
-DATA16_819A92:
-    dw $00EF                                                   ;819A92|        |      ;
-    db $00,$70,$03,$00,$6A,$03,$00,$6B,$03,$00,$6C,$03         ;819A94|        |      ;
-    db $01,$6C,$03,$00,$6D,$03,$00,$6E,$03,$00,$6F,$03         ;819AA0|        |      ;
-    db $01,$6F,$03,$00,$FF,$00,$00,$71,$03,$00                 ;819AAC|        |      ;
- 
-DATA16_819AB6:
-    dw $00EE                                                   ;819AB6|        |      ;
-    db $00,$68,$03,$00,$62,$03,$00,$63,$03,$00,$64,$03         ;819AB8|        |      ;
-    db $01,$64,$03,$00,$65,$03,$00,$66,$03,$00,$67,$03         ;819AC4|        |      ;
-    db $01,$67,$03,$00,$FE,$00,$00,$69,$03,$00                 ;819AD0|        |      ;
- 
-DATA16_819ADA:
-    dw $00F3                                                   ;819ADA|        |      ;
-    db $00,$8A,$03,$00,$84,$03,$00,$85,$03,$00,$86,$03         ;819ADC|        |      ;
-    db $01,$86,$03,$00,$87,$03,$00,$88,$03,$00,$89,$03         ;819AE8|        |      ;
-    db $01,$89,$03,$00,$03,$01,$00,$8B,$03,$00                 ;819AF4|        |      ;
- 
-DATA16_819AFE:
-    dw $00F2                                                   ;819AFE|        |      ;
-    db $00,$82,$03,$00,$7E,$03,$00,$7E,$03,$00,$7E,$03         ;819B00|        |      ;
-    db $01,$7E,$03,$00,$7F,$03,$00,$80,$03,$00,$81,$03         ;819B0C|        |      ;
-    db $01,$81,$03,$00,$02,$01,$00,$83,$03,$00                 ;819B18|        |      ;
- 
-DATA16_819B22:
-    dw $00F1                                                   ;819B22|        |      ;
-    db $00,$7C,$03,$00,$78,$03,$00,$78,$03,$00,$78,$03         ;819B24|        |      ;
-    db $01,$78,$03,$00,$79,$03,$00,$7A,$03,$00,$7B,$03         ;819B30|        |      ;
-    db $01,$7B,$03,$00,$01,$01,$00,$7D,$03,$00                 ;819B3C|        |      ;
- 
-DATA16_819B46:
-    dw $00F0                                                   ;819B46|        |      ;
-    db $00,$76,$03,$00,$72,$03,$00,$72,$03,$00,$72,$03         ;819B48|        |      ;
-    db $01,$72,$03,$00,$73,$03,$00,$74,$03,$00,$75,$03         ;819B54|        |      ;
-    db $01,$75,$03,$00,$00,$01,$00,$77,$03,$00                 ;819B60|        |      ;
- 
-DATA16_819B6A:
-    dw $00FA                                                   ;819B6A|        |      ;
-    db $00,$C2,$03,$00,$BC,$03,$00,$BD,$03,$00,$BE,$03         ;819B6C|        |      ;
-    db $01,$BE,$03,$00,$BF,$03,$00,$C0,$03,$00,$C1,$03         ;819B78|        |      ;
-    db $01,$C1,$03,$00,$0A,$01,$00,$C3,$03,$00                 ;819B84|        |      ;
- 
-DATA16_819B8E:
-    dw $00C3                                                   ;819B8E|        |      ;
-    db $00,$34,$04,$00,$2E,$04,$00,$2F,$04,$00,$30,$04         ;819B90|        |      ;
-    db $01,$30,$04,$00,$31,$04,$00,$32,$04,$00,$33,$04         ;819B9C|        |      ;
-    db $01,$33,$04,$00,$C4,$00,$00,$35,$04,$00                 ;819BA8|        |      ;
- 
-DATA16_819BB2:
-    dw $010B                                                   ;819BB2|        |      ;
-    db $00,$D0,$03,$00,$CC,$03,$00,$CC,$03,$00,$CC,$03         ;819BB4|        |      ;
-    db $01,$CC,$03,$00,$CD,$03,$00,$CE,$03,$00,$CF,$03         ;819BC0|        |      ;
-    db $01,$CF,$03,$00,$13,$01,$00,$00,$00,$00                 ;819BCC|        |      ;
- 
-DATA16_819BD6:
-    dw $010C                                                   ;819BD6|        |      ;
-    db $00,$D8,$03,$00,$D4,$03,$00,$D4,$03,$00,$D4,$03         ;819BD8|        |      ;
-    db $01,$D4,$03,$00,$D5,$03,$00,$D6,$03,$00,$D7,$03         ;819BE4|        |      ;
-    db $01,$D7,$03,$00,$14,$01,$00,$00,$00,$00                 ;819BF0|        |      ;
- 
-DATA16_819BFA:
-    dw $010D                                                   ;819BFA|        |      ;
-    db $00,$E0,$03,$00,$DC,$03,$00,$DC,$03,$00,$DC,$03         ;819BFC|        |      ;
-    db $01,$DC,$03,$00,$DD,$03,$00,$DE,$03,$00,$DF,$03         ;819C08|        |      ;
-    db $01,$DF,$03,$00,$15,$01,$00,$00,$00,$00                 ;819C14|        |      ;
- 
-DATA16_819C1E:
-    dw $010E                                                   ;819C1E|        |      ;
-    db $00,$E7,$03,$00,$E1,$03,$00,$E2,$03,$00,$E3,$03         ;819C20|        |      ;
-    db $01,$E3,$03,$00,$E4,$03,$00,$E5,$03,$00,$E6,$03         ;819C2C|        |      ;
-    db $01,$E6,$03,$00,$03,$01,$00,$E8,$03,$00                 ;819C38|        |      ;
- 
-DATA16_819C42:
-    dw $010F                                                   ;819C42|        |      ;
-    db $00,$EF,$03,$00,$E9,$03,$00,$EA,$03,$00,$EB,$03         ;819C44|        |      ;
-    db $01,$EB,$03,$00,$EC,$03,$00,$ED,$03,$00,$EE,$03         ;819C50|        |      ;
-    db $01,$EE,$03,$00,$03,$01,$00,$F0,$03,$00                 ;819C5C|        |      ;
- 
-DATA16_819C66:
-    dw $0110                                                   ;819C66|        |      ;
-    db $00,$F7,$03,$00,$F1,$03,$00,$F2,$03,$00,$F3,$03         ;819C68|        |      ;
-    db $01,$F3,$03,$00,$F4,$03,$00,$F5,$03,$00,$F6,$03         ;819C74|        |      ;
-    db $01,$F6,$03,$00,$03,$01,$00,$F8,$03,$00                 ;819C80|        |      ;
- 
-DATA16_819C8A:
-    dw $0111                                                   ;819C8A|        |      ;
-    db $00,$FF,$03,$00,$F9,$03,$00,$FA,$03,$00,$FB,$03         ;819C8C|        |      ;
-    db $01,$FB,$03,$00,$FC,$03,$00,$FD,$03,$00,$FE,$03         ;819C98|        |      ;
-    db $01,$FE,$03,$00,$03,$01,$00,$00,$04,$00                 ;819CA4|        |      ;
- 
-DATA16_819CAE:
-    dw $0112                                                   ;819CAE|        |      ;
-    db $00,$07,$04,$00,$01,$04,$00,$02,$04,$00,$03,$04         ;819CB0|        |      ;
-    db $01,$03,$04,$00,$04,$04,$00,$05,$04,$00,$06,$04         ;819CBC|        |      ;
-    db $01,$06,$04,$00,$03,$01,$00,$08,$04,$00                 ;819CC8|        |      ;
- 
-DATA16_819CD2:
-    dw $03D3                                                   ;819CD2|        |      ;
-    db $00,$D2,$03,$00,$D1,$03,$00,$D1,$03,$00,$D1,$03         ;819CD4|        |      ;
-    db $01,$D1,$03,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;819CE0|        |      ;
-    db $01,$00,$00,$00,$00,$00,$00,$00,$00,$00                 ;819CEC|        |      ;
- 
-DATA16_819CF6:
-    dw $0117                                                   ;819CF6|        |      ;
-    db $00,$BD,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;819CF8|        |      ;
-    db $01,$00,$00,$00,$00,$00,$00,$BC,$00,$00,$00,$00         ;819D04|        |      ;
-    db $01,$00,$00,$00,$00,$00,$00,$00,$00,$00                 ;819D10|        |      ;
- 
-DATA16_819D1A:
-    dw $0212                                                   ;819D1A|        |      ;
-    db $00,$14,$04,$00,$0E,$04,$00,$0F,$04,$00,$10,$04         ;819D1C|        |      ;
-    db $01,$10,$04,$00,$11,$04,$00,$12,$04,$00,$13,$04         ;819D28|        |      ;
-    db $01,$13,$04,$00,$00,$00,$00,$15,$04,$00                 ;819D34|        |      ;
- 
-DATA16_819D3E:
-    dw $0217                                                   ;819D3E|        |      ;
-    db $00,$1C,$04,$00,$16,$04,$00,$17,$04,$00,$18,$04         ;819D40|        |      ;
-    db $01,$18,$04,$00,$19,$04,$00,$1A,$04,$00,$1B,$04         ;819D4C|        |      ;
-    db $01,$1B,$04,$00,$00,$00,$00,$1D,$04,$00                 ;819D58|        |      ;
- 
-DATA16_819D62:
-    dw $01D9                                                   ;819D62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;819D64|        |      ;
-    db $01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;819D70|        |      ;
-    db $01,$00,$00,$00,$00,$00,$00,$00,$00,$00                 ;819D7C|        |      ;
- 
-DATA16_819D86:
-    dw $00E5                                                   ;819D86|        |      ;
-    db $00,$26,$01,$00,$20,$01,$00,$21,$01,$00,$22,$01         ;819D88|        |      ;
-    db $01,$22,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01         ;819D94|        |      ;
-    db $01,$25,$01,$00,$B4,$00,$00,$27,$01,$00                 ;819DA0|        |      ;
- 
-DATA16_819DAA:
-    dw $0326                                                   ;819DAA|        |      ;
-    db $00,$24,$04,$00,$1E,$04,$00,$1F,$04,$00,$20,$04         ;819DAC|        |      ;
-    db $01,$20,$04,$00,$21,$04,$00,$22,$04,$00,$23,$04         ;819DB8|        |      ;
-    db $01,$23,$04,$00,$00,$00,$00,$25,$04,$00                 ;819DC4|        |      ;
- 
-DATA16_819DCE:
-    dw $00D8                                                   ;819DCE|        |      ;
-    db $00,$D8,$00,$00,$67,$01,$00,$68,$01,$00,$69,$01         ;819DD0|        |      ;
-    db $01,$69,$01,$00                                         ;819DDC|        |      ;
- 
-DATA16_819DE0:
-    dw $00D9                                                   ;819DE0|        |      ;
-    db $00,$D9,$00,$00,$6A,$01,$00,$6B,$01,$00,$6C,$01         ;819DE2|        |      ;
-    db $01,$6C,$01,$00                                         ;819DEE|        |      ;
- 
-DATA16_819DF2:
-    dw $00DA                                                   ;819DF2|        |      ;
-    db $00,$DA,$00,$00,$6D,$01,$00,$6E,$01,$00,$6F,$01         ;819DF4|        |      ;
-    db $01,$6F,$01,$00                                         ;819E00|        |      ;
- 
-DATA16_819E04:
-    dw $00DB                                                   ;819E04|        |      ;
-    db $00,$DB,$00,$00,$70,$01,$00,$71,$01,$00,$72,$01         ;819E06|        |      ;
-    db $01,$72,$01,$00                                         ;819E12|        |      ;
- 
-DATA16_819E16:
-    dw $00D0                                                   ;819E16|        |      ;
-    db $00,$D0,$00,$00,$4F,$01,$00,$50,$01,$00,$51,$01         ;819E18|        |      ;
-    db $01,$51,$01,$00                                         ;819E24|        |      ;
- 
-DATA16_819E28:
-    dw $00D1                                                   ;819E28|        |      ;
-    db $00,$D1,$00,$00,$52,$01,$00,$53,$01,$00,$54,$01         ;819E2A|        |      ;
-    db $01,$54,$01,$00                                         ;819E36|        |      ;
- 
-DATA16_819E3A:
-    dw $00D2                                                   ;819E3A|        |      ;
-    db $00,$D2,$00,$00,$55,$01,$00,$56,$01,$00,$57,$01         ;819E3C|        |      ;
-    db $01,$57,$01,$00                                         ;819E48|        |      ;
- 
-DATA16_819E4C:
-    dw $00D3                                                   ;819E4C|        |      ;
-    db $00,$D3,$00,$00,$58,$01,$00,$59,$01,$00,$5A,$01         ;819E4E|        |      ;
-    db $01,$5A,$01,$00                                         ;819E5A|        |      ;
- 
-DATA16_819E5E:
-    dw $00CC                                                   ;819E5E|        |      ;
-    db $00,$CC,$00,$00,$43,$01,$00,$44,$01,$00,$45,$01         ;819E60|        |      ;
-    db $01,$45,$01,$00                                         ;819E6C|        |      ;
- 
-DATA16_819E70:
-    dw $00CD                                                   ;819E70|        |      ;
-    db $00,$CD,$00,$00,$46,$01,$00,$47,$01,$00,$48,$01         ;819E72|        |      ;
-    db $01,$48,$01,$00                                         ;819E7E|        |      ;
- 
-DATA16_819E82:
-    dw $00CE                                                   ;819E82|        |      ;
-    db $00,$CE,$00,$00,$49,$01,$00,$4A,$01,$00,$4B,$01         ;819E84|        |      ;
-    db $01,$4B,$01,$00                                         ;819E90|        |      ;
- 
-DATA16_819E94:
-    dw $00CF                                                   ;819E94|        |      ;
-    db $00,$CF,$00,$00,$4C,$01,$00,$4D,$01,$00,$4E,$01         ;819E96|        |      ;
-    db $01,$4E,$01,$00                                         ;819EA2|        |      ;
- 
-DATA16_819EA6:
-    dw $00D4                                                   ;819EA6|        |      ;
-    db $00,$D4,$00,$00,$5B,$01,$00,$5C,$01,$00,$5D,$01         ;819EA8|        |      ;
-    db $01,$5D,$01,$00                                         ;819EB4|        |      ;
- 
-DATA16_819EB8:
-    dw $00D5                                                   ;819EB8|        |      ;
-    db $00,$D5,$00,$00,$5E,$01,$00,$5F,$01,$00,$60,$01         ;819EBA|        |      ;
-    db $01,$60,$01,$00                                         ;819EC6|        |      ;
- 
-DATA16_819ECA:
-    dw $00D6                                                   ;819ECA|        |      ;
-    db $00,$D6,$00,$00,$61,$01,$00,$62,$01,$00,$63,$01         ;819ECC|        |      ;
-    db $01,$63,$01,$00                                         ;819ED8|        |      ;
- 
-DATA16_819EDC:
-    dw $00D7                                                   ;819EDC|        |      ;
-    db $00,$D7,$00,$00,$64,$01,$00,$65,$01,$00,$66,$01         ;819EDE|        |      ;
-    db $01,$66,$01,$00                                         ;819EEA|        |      ;
- 
-DATA16_819EEE:
-    dw $00E0                                                   ;819EEE|        |      ;
-    db $00,$E0,$00,$00,$7C,$01,$00,$7D,$01,$00,$7E,$01         ;819EF0|        |      ;
-    db $01,$7E,$01,$00                                         ;819EFC|        |      ;
- 
-DATA16_819F00:
-    dw $00E1                                                   ;819F00|        |      ;
-    db $00,$E1,$00,$00,$7F,$01,$00,$80,$01,$00,$81,$01         ;819F02|        |      ;
-    db $01,$81,$01,$00                                         ;819F0E|        |      ;
- 
-DATA16_819F12:
-    dw $00E3                                                   ;819F12|        |      ;
-    db $00,$E3,$00,$00,$85,$01,$00,$86,$01,$00,$87,$01         ;819F14|        |      ;
-    db $01,$87,$01,$00                                         ;819F20|        |      ;
- 
-DATA16_819F24:
-    dw $00E2                                                   ;819F24|        |      ;
-    db $00,$E2,$00,$00,$82,$01,$00,$83,$01,$00,$84,$01         ;819F26|        |      ;
-    db $01,$84,$01,$00                                         ;819F32|        |      ;
- 
-DATA16_819F36:
-    dw $00DF                                                   ;819F36|        |      ;
-    db $00,$DF,$00,$00,$79,$01,$00,$7A,$01,$00,$7B,$01         ;819F38|        |      ;
-    db $01,$7B,$01,$00                                         ;819F44|        |      ;
- 
-DATA16_819F48:
-    dw $00E4                                                   ;819F48|        |      ;
-    db $00,$E4,$00,$00,$89,$01,$00,$89,$01,$00,$89,$01         ;819F4A|        |      ;
-    db $01,$89,$01,$00                                         ;819F56|        |      ;
- 
-DATA16_819F5A:
-    dw $00E5                                                   ;819F5A|        |      ;
-    db $00,$E5,$00,$00,$8A,$01,$00,$8A,$01,$00,$8A,$01         ;819F5C|        |      ;
-    db $01,$8A,$01,$00                                         ;819F68|        |      ;
- 
-DATA16_819F6C:
-    dw $00DC                                                   ;819F6C|        |      ;
-    db $00,$DC,$00,$00,$88,$01,$00,$88,$01,$00,$88,$01         ;819F6E|        |      ;
-    db $01,$88,$01,$00                                         ;819F7A|        |      ;
- 
-DATA16_819F7E:
-    dw $00DE                                                   ;819F7E|        |      ;
-    db $00,$DE,$00,$00,$76,$01,$00,$77,$01,$00,$78,$01         ;819F80|        |      ;
-    db $01,$78,$01,$00                                         ;819F8C|        |      ;
- 
-DATA16_819F90:
-    dw $00DD                                                   ;819F90|        |      ;
-    db $00,$DD,$00,$00,$73,$01,$00,$74,$01,$00,$75,$01         ;819F92|        |      ;
-    db $01,$75,$01,$00                                         ;819F9E|        |      ;
- 
-DATA16_819FA2:
-    dw $00FB                                                   ;819FA2|        |      ;
-    db $00,$CA,$03,$00,$C4,$03,$00,$C5,$03,$00,$C6,$03         ;819FA4|        |      ;
-    db $01,$C6,$03,$00,$C7,$03,$00,$C8,$03,$00,$C9,$03         ;819FB0|        |      ;
-    db $01,$C9,$03,$00,$0A,$01,$00,$CB,$03,$00                 ;819FBC|        |      ;
- 
-nUnknownDialogIndex_819FC6:
-    dw $0366,$670A,$F603,$0368,$690A,$0A03                     ;819FC6|        |      ;
-    dw $036A,$6B32,$3203,$036C,$6D0A,$0A03                     ;819FD2|        |      ;
- 
-nShippingProfitMoneyTable:
-    dw $0000,$0F00,$1400,$0F00,$1400,$3C00                     ;819FDE|        |      ; 16b
-    dw $0000,$1E00,$0000,$0000,$0000,$0000                     ;819FEA|        |      ;
-    dw $0000,$0010,$0010,$0014,$0C00,$0A00                     ;819FF6|        |      ;
-    dw $0800,$0600,$0500,$0F00,$1900,$2300                     ;81A002|        |      ;
-    dw $1400,$0000,$0099,$0000,$0000,$0000                     ;81A00E|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A01A|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A026|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A032|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A03E|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A04A|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A056|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A062|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A06E|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A07A|        |      ;
-    dw $0000,$0000,$0000,$0014,$0000,$0000                     ;81A086|        |      ;
-    dw $0000                                                   ;81A092|        |      ;
- 
-nUnknownDialogIndex_81A094:
-    dw $0000,$5800,$1403,$0359,$5B1E,$1403                     ;81A094|        |      ; 16b ; Unknown size - does not line up with next table
-    dw $035C,$5D1E,$3C03,$0313,$5E00,$1E03                     ;81A0A0|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A0AC|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A0B8|        |      ;
-    dw $0353,$5418,$1403,$0355,$5610,$0C03                     ;81A0C4|        |      ;
-    dw $0357,$500A,$1403,$0351,$521E,$2803                     ;81A0D0|        |      ;
-    dw $035A,$1314,$0003,$0000,$0000,$0000                     ;81A0DC|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A0E8|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A0F4|        |      ;
-    dw $0000,$1300,$0003,$0313,$0000,$0000                     ;81A100|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A10C|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A118|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A124|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A130|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A13C|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A148|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A154|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A160|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A16C|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A178|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A184|        |      ;
-    dw $0000,$0000,$0000,$0000,$0000,$0000                     ;81A190|        |      ;
-    dw $0000,$0000,$0000,$0000                                 ;81A19C|        |      ;
+DATA24_819876:
+    dl $0000F6                                                 ;819876|        |      ;
+    db $A2,$03,$00,$9C,$03,$00,$9D,$03,$00,$9E,$03,$01         ;819879|        |      ;
+    db $9E,$03,$00,$9F,$03,$00,$A0,$03,$00,$A1,$03,$01         ;819885|        |      ;
+    db $A1,$03,$00,$06,$01,$00,$A3,$03,$00                     ;819891|        |      ;
+ 
+DATA24_81989A:
+    dl $0000F7                                                 ;81989A|        |      ;
+    db $AA,$03,$00,$A4,$03,$00,$A5,$03,$00,$A6,$03,$01         ;81989D|        |      ;
+    db $A6,$03,$00,$A7,$03,$00,$A8,$03,$00,$A9,$03,$01         ;8198A9|        |      ;
+    db $A9,$03,$00,$07,$01,$00,$AB,$03,$00                     ;8198B5|        |      ;
+ 
+DATA24_8198BE:
+    dl $0000F4                                                 ;8198BE|        |      ;
+    db $92,$03,$00,$8C,$03,$00,$8D,$03,$00,$8E,$03,$01         ;8198C1|        |      ;
+    db $8E,$03,$00,$8F,$03,$00,$90,$03,$00,$91,$03,$01         ;8198CD|        |      ;
+    db $91,$03,$00,$04,$01,$00,$93,$03,$00                     ;8198D9|        |      ;
+ 
+DATA24_8198E2:
+    dl $0000F5                                                 ;8198E2|        |      ;
+    db $9A,$03,$00,$94,$03,$00,$95,$03,$00,$96,$03,$01         ;8198E5|        |      ;
+    db $96,$03,$00,$97,$03,$00,$98,$03,$00,$99,$03,$01         ;8198F1|        |      ;
+    db $99,$03,$00,$05,$01,$00,$9B,$03,$00                     ;8198FD|        |      ;
+ 
+DATA24_819906:
+    dl $0000F8                                                 ;819906|        |      ;
+    db $B2,$03,$00,$AC,$03,$00,$AD,$03,$00,$AE,$03,$01         ;819909|        |      ;
+    db $AE,$03,$00,$AF,$03,$00,$B0,$03,$00,$B1,$03,$01         ;819915|        |      ;
+    db $B1,$03,$00,$08,$01,$00,$B3,$03,$00                     ;819921|        |      ;
+ 
+DATA24_81992A:
+    dl $0000F9                                                 ;81992A|        |      ;
+    db $BA,$03,$00,$B4,$03,$00,$B5,$03,$00,$B6,$03,$01         ;81992D|        |      ;
+    db $B6,$03,$00,$B7,$03,$00,$B8,$03,$00,$B9,$03,$01         ;819939|        |      ;
+    db $B9,$03,$00,$09,$01,$00,$BB,$03,$00                     ;819945|        |      ;
+ 
+DATA24_81994E:
+    dl $0000BB                                                 ;81994E|        |      ;
+    db $2C,$04,$00,$26,$04,$00,$27,$04,$00,$28,$04,$01         ;819951|        |      ;
+    db $28,$04,$00,$29,$04,$00,$2A,$04,$00,$2B,$04,$01         ;81995D|        |      ;
+    db $2B,$04,$00,$BA,$00,$00,$2D,$04,$00                     ;819969|        |      ;
+ 
+DATA24_819972:
+    dl $000000                                                 ;819972|        |      ;
+    db $0C,$04,$00,$09,$04,$00,$0A,$04,$00,$0B,$04,$01         ;819975|        |      ;
+    db $0B,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819981|        |      ;
+    db $00,$00,$00,$0D,$04,$00,$00,$00,$00                     ;81998D|        |      ;
+ 
+DATA24_819996:
+    dl $0000E8                                                 ;819996|        |      ;
+    db $29,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01,$01         ;819999|        |      ;
+    db $25,$01,$00,$26,$01,$00,$27,$01,$00,$28,$01,$01         ;8199A5|        |      ;
+    db $28,$01,$00,$B7,$00,$00,$2A,$01,$00                     ;8199B1|        |      ;
+ 
+DATA24_8199BA:
+    dl $0000E9                                                 ;8199BA|        |      ;
+    db $31,$01,$00,$2B,$01,$00,$2C,$01,$00,$2D,$01,$01         ;8199BD|        |      ;
+    db $2D,$01,$00,$2E,$01,$00,$2F,$01,$00,$30,$01,$01         ;8199C9|        |      ;
+    db $30,$01,$00,$B7,$00,$00,$32,$01,$00                     ;8199D5|        |      ;
+ 
+DATA24_8199DE:
+    dl $0000EA                                                 ;8199DE|        |      ;
+    db $21,$01,$00,$1B,$01,$00,$1C,$01,$00,$1D,$01,$01         ;8199E1|        |      ;
+    db $1D,$01,$00,$1E,$01,$00,$1F,$01,$00,$20,$01,$01         ;8199ED|        |      ;
+    db $20,$01,$00,$C8,$00,$00,$22,$01,$00                     ;8199F9|        |      ;
+ 
+DATA24_819A02:
+    dl $0000EB                                                 ;819A02|        |      ;
+    db $39,$01,$00,$33,$01,$00,$34,$01,$00,$35,$01,$01         ;819A05|        |      ;
+    db $35,$01,$00,$36,$01,$00,$37,$01,$00,$38,$01,$01         ;819A11|        |      ;
+    db $38,$01,$00,$C8,$00,$00,$3A,$01,$00                     ;819A1D|        |      ;
+ 
+DATA24_819A26:
+    dl $0000E7                                                 ;819A26|        |      ;
+    db $41,$01,$00,$3B,$01,$00,$3C,$01,$00,$3D,$01,$01         ;819A29|        |      ;
+    db $3D,$01,$00,$3E,$01,$00,$3F,$01,$00,$40,$01,$01         ;819A35|        |      ;
+    db $40,$01,$00,$00,$00,$00,$42,$01,$00                     ;819A41|        |      ;
+ 
+DATA24_819A4A:
+    dl $0000EC                                                 ;819A4A|        |      ;
+    db $58,$03,$00,$52,$03,$00,$53,$03,$00,$54,$03,$01         ;819A4D|        |      ;
+    db $54,$03,$00,$55,$03,$00,$56,$03,$00,$57,$03,$01         ;819A59|        |      ;
+    db $57,$03,$00,$FC,$00,$00,$59,$03,$00                     ;819A65|        |      ;
+ 
+DATA24_819A6E:
+    dl $0000ED                                                 ;819A6E|        |      ;
+    db $60,$03,$00,$5A,$03,$00,$5B,$03,$00,$5C,$03,$01         ;819A71|        |      ;
+    db $5C,$03,$00,$5D,$03,$00,$5E,$03,$00,$5F,$03,$01         ;819A7D|        |      ;
+    db $5F,$03,$00,$FD,$00,$00,$61,$03,$00                     ;819A89|        |      ;
+ 
+DATA24_819A92:
+    dl $0000EF                                                 ;819A92|        |      ;
+    db $70,$03,$00,$6A,$03,$00,$6B,$03,$00,$6C,$03,$01         ;819A95|        |      ;
+    db $6C,$03,$00,$6D,$03,$00,$6E,$03,$00,$6F,$03,$01         ;819AA1|        |      ;
+    db $6F,$03,$00,$FF,$00,$00,$71,$03,$00                     ;819AAD|        |      ;
+ 
+DATA24_819AB6:
+    dl $0000EE                                                 ;819AB6|        |      ;
+    db $68,$03,$00,$62,$03,$00,$63,$03,$00,$64,$03,$01         ;819AB9|        |      ;
+    db $64,$03,$00,$65,$03,$00,$66,$03,$00,$67,$03,$01         ;819AC5|        |      ;
+    db $67,$03,$00,$FE,$00,$00,$69,$03,$00                     ;819AD1|        |      ;
+ 
+DATA24_819ADA:
+    dl $0000F3                                                 ;819ADA|        |      ;
+    db $8A,$03,$00,$84,$03,$00,$85,$03,$00,$86,$03,$01         ;819ADD|        |      ;
+    db $86,$03,$00,$87,$03,$00,$88,$03,$00,$89,$03,$01         ;819AE9|        |      ;
+    db $89,$03,$00,$03,$01,$00,$8B,$03,$00                     ;819AF5|        |      ;
+ 
+DATA24_819AFE:
+    dl $0000F2                                                 ;819AFE|        |      ;
+    db $82,$03,$00,$7E,$03,$00,$7E,$03,$00,$7E,$03,$01         ;819B01|        |      ;
+    db $7E,$03,$00,$7F,$03,$00,$80,$03,$00,$81,$03,$01         ;819B0D|        |      ;
+    db $81,$03,$00,$02,$01,$00,$83,$03,$00                     ;819B19|        |      ;
+ 
+DATA24_819B22:
+    dl $0000F1                                                 ;819B22|        |      ;
+    db $7C,$03,$00,$78,$03,$00,$78,$03,$00,$78,$03,$01         ;819B25|        |      ;
+    db $78,$03,$00,$79,$03,$00,$7A,$03,$00,$7B,$03,$01         ;819B31|        |      ;
+    db $7B,$03,$00,$01,$01,$00,$7D,$03,$00                     ;819B3D|        |      ;
+ 
+DATA24_819B46:
+    dl $0000F0                                                 ;819B46|        |      ;
+    db $76,$03,$00,$72,$03,$00,$72,$03,$00,$72,$03,$01         ;819B49|        |      ;
+    db $72,$03,$00,$73,$03,$00,$74,$03,$00,$75,$03,$01         ;819B55|        |      ;
+    db $75,$03,$00,$00,$01,$00,$77,$03,$00                     ;819B61|        |      ;
+ 
+DATA24_819B6A:
+    dl $0000FA                                                 ;819B6A|        |      ;
+    db $C2,$03,$00,$BC,$03,$00,$BD,$03,$00,$BE,$03,$01         ;819B6D|        |      ;
+    db $BE,$03,$00,$BF,$03,$00,$C0,$03,$00,$C1,$03,$01         ;819B79|        |      ;
+    db $C1,$03,$00,$0A,$01,$00,$C3,$03,$00                     ;819B85|        |      ;
+ 
+DATA24_819B8E:
+    dl $0000C3                                                 ;819B8E|        |      ;
+    db $34,$04,$00,$2E,$04,$00,$2F,$04,$00,$30,$04,$01         ;819B91|        |      ;
+    db $30,$04,$00,$31,$04,$00,$32,$04,$00,$33,$04,$01         ;819B9D|        |      ;
+    db $33,$04,$00,$C4,$00,$00,$35,$04,$00                     ;819BA9|        |      ;
+ 
+DATA24_819BB2:
+    dl $00010B                                                 ;819BB2|        |      ;
+    db $D0,$03,$00,$CC,$03,$00,$CC,$03,$00,$CC,$03,$01         ;819BB5|        |      ;
+    db $CC,$03,$00,$CD,$03,$00,$CE,$03,$00,$CF,$03,$01         ;819BC1|        |      ;
+    db $CF,$03,$00,$13,$01,$00,$00,$00,$00                     ;819BCD|        |      ;
+ 
+DATA24_819BD6:
+    dl $00010C                                                 ;819BD6|        |      ;
+    db $D8,$03,$00,$D4,$03,$00,$D4,$03,$00,$D4,$03,$01         ;819BD9|        |      ;
+    db $D4,$03,$00,$D5,$03,$00,$D6,$03,$00,$D7,$03,$01         ;819BE5|        |      ;
+    db $D7,$03,$00,$14,$01,$00,$00,$00,$00                     ;819BF1|        |      ;
+ 
+DATA24_819BFA:
+    dl $00010D                                                 ;819BFA|        |      ;
+    db $E0,$03,$00,$DC,$03,$00,$DC,$03,$00,$DC,$03,$01         ;819BFD|        |      ;
+    db $DC,$03,$00,$DD,$03,$00,$DE,$03,$00,$DF,$03,$01         ;819C09|        |      ;
+    db $DF,$03,$00,$15,$01,$00,$00,$00,$00                     ;819C15|        |      ;
+ 
+DATA24_819C1E:
+    dl $00010E                                                 ;819C1E|        |      ;
+    db $E7,$03,$00,$E1,$03,$00,$E2,$03,$00,$E3,$03,$01         ;819C21|        |      ;
+    db $E3,$03,$00,$E4,$03,$00,$E5,$03,$00,$E6,$03,$01         ;819C2D|        |      ;
+    db $E6,$03,$00,$03,$01,$00,$E8,$03,$00                     ;819C39|        |      ;
+ 
+DATA24_819C42:
+    dl $00010F                                                 ;819C42|        |      ;
+    db $EF,$03,$00,$E9,$03,$00,$EA,$03,$00,$EB,$03,$01         ;819C45|        |      ;
+    db $EB,$03,$00,$EC,$03,$00,$ED,$03,$00,$EE,$03,$01         ;819C51|        |      ;
+    db $EE,$03,$00,$03,$01,$00,$F0,$03,$00                     ;819C5D|        |      ;
+ 
+DATA24_819C66:
+    dl $000110                                                 ;819C66|        |      ;
+    db $F7,$03,$00,$F1,$03,$00,$F2,$03,$00,$F3,$03,$01         ;819C69|        |      ;
+    db $F3,$03,$00,$F4,$03,$00,$F5,$03,$00,$F6,$03,$01         ;819C75|        |      ;
+    db $F6,$03,$00,$03,$01,$00,$F8,$03,$00                     ;819C81|        |      ;
+ 
+DATA24_819C8A:
+    dl $000111                                                 ;819C8A|        |      ;
+    db $FF,$03,$00,$F9,$03,$00,$FA,$03,$00,$FB,$03,$01         ;819C8D|        |      ;
+    db $FB,$03,$00,$FC,$03,$00,$FD,$03,$00,$FE,$03,$01         ;819C99|        |      ;
+    db $FE,$03,$00,$03,$01,$00,$00,$04,$00                     ;819CA5|        |      ;
+ 
+DATA24_819CAE:
+    dl $000112                                                 ;819CAE|        |      ;
+    db $07,$04,$00,$01,$04,$00,$02,$04,$00,$03,$04,$01         ;819CB1|        |      ;
+    db $03,$04,$00,$04,$04,$00,$05,$04,$00,$06,$04,$01         ;819CBD|        |      ;
+    db $06,$04,$00,$03,$01,$00,$08,$04,$00                     ;819CC9|        |      ;
+ 
+DATA24_819CD2:
+    dl $0003D3                                                 ;819CD2|        |      ;
+    db $D2,$03,$00,$D1,$03,$00,$D1,$03,$00,$D1,$03,$01         ;819CD5|        |      ;
+    db $D1,$03,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819CE1|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;819CED|        |      ;
+ 
+DATA24_819CF6:
+    dl $000117                                                 ;819CF6|        |      ;
+    db $BD,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819CF9|        |      ;
+    db $00,$00,$00,$00,$00,$00,$BC,$00,$00,$00,$00,$01         ;819D05|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;819D11|        |      ;
+ 
+DATA24_819D1A:
+    dl $000212                                                 ;819D1A|        |      ;
+    db $14,$04,$00,$0E,$04,$00,$0F,$04,$00,$10,$04,$01         ;819D1D|        |      ;
+    db $10,$04,$00,$11,$04,$00,$12,$04,$00,$13,$04,$01         ;819D29|        |      ;
+    db $13,$04,$00,$00,$00,$00,$15,$04,$00                     ;819D35|        |      ;
+ 
+DATA24_819D3E:
+    dl $000217                                                 ;819D3E|        |      ;
+    db $1C,$04,$00,$16,$04,$00,$17,$04,$00,$18,$04,$01         ;819D41|        |      ;
+    db $18,$04,$00,$19,$04,$00,$1A,$04,$00,$1B,$04,$01         ;819D4D|        |      ;
+    db $1B,$04,$00,$00,$00,$00,$1D,$04,$00                     ;819D59|        |      ;
+ 
+DATA24_819D62:
+    dl $0001D9                                                 ;819D62|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819D65|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819D71|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;819D7D|        |      ;
+ 
+DATA24_819D86:
+    dl $0000E5                                                 ;819D86|        |      ;
+    db $26,$01,$00,$20,$01,$00,$21,$01,$00,$22,$01,$01         ;819D89|        |      ;
+    db $22,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01,$01         ;819D95|        |      ;
+    db $25,$01,$00,$B4,$00,$00,$27,$01,$00                     ;819DA1|        |      ;
+ 
+DATA24_819DAA:
+    dl $000326                                                 ;819DAA|        |      ;
+    db $24,$04,$00,$1E,$04,$00,$1F,$04,$00,$20,$04,$01         ;819DAD|        |      ;
+    db $20,$04,$00,$21,$04,$00,$22,$04,$00,$23,$04,$01         ;819DB9|        |      ;
+    db $23,$04,$00,$00,$00,$00,$25,$04,$00                     ;819DC5|        |      ;
+ 
+DATA24_819DCE:
+    dl $0000D8                                                 ;819DCE|        |      ;
+    db $D8,$00,$00,$67,$01,$00,$68,$01,$00,$69,$01,$01         ;819DD1|        |      ;
+    db $69,$01,$00                                             ;819DDD|        |      ;
+ 
+DATA24_819DE0:
+    dl $0000D9                                                 ;819DE0|        |      ;
+    db $D9,$00,$00,$6A,$01,$00,$6B,$01,$00,$6C,$01,$01         ;819DE3|        |      ;
+    db $6C,$01,$00                                             ;819DEF|        |      ;
+ 
+DATA24_819DF2:
+    dl $0000DA                                                 ;819DF2|        |      ;
+    db $DA,$00,$00,$6D,$01,$00,$6E,$01,$00,$6F,$01,$01         ;819DF5|        |      ;
+    db $6F,$01,$00                                             ;819E01|        |      ;
+ 
+DATA24_819E04:
+    dl $0000DB                                                 ;819E04|        |      ;
+    db $DB,$00,$00,$70,$01,$00,$71,$01,$00,$72,$01,$01         ;819E07|        |      ;
+    db $72,$01,$00                                             ;819E13|        |      ;
+ 
+DATA24_819E16:
+    dl $0000D0                                                 ;819E16|        |      ;
+    db $D0,$00,$00,$4F,$01,$00,$50,$01,$00,$51,$01,$01         ;819E19|        |      ;
+    db $51,$01,$00                                             ;819E25|        |      ;
+ 
+DATA24_819E28:
+    dl $0000D1                                                 ;819E28|        |      ;
+    db $D1,$00,$00,$52,$01,$00,$53,$01,$00,$54,$01,$01         ;819E2B|        |      ;
+    db $54,$01,$00                                             ;819E37|        |      ;
+ 
+DATA24_819E3A:
+    dl $0000D2                                                 ;819E3A|        |      ;
+    db $D2,$00,$00,$55,$01,$00,$56,$01,$00,$57,$01,$01         ;819E3D|        |      ;
+    db $57,$01,$00                                             ;819E49|        |      ;
+ 
+DATA24_819E4C:
+    dl $0000D3                                                 ;819E4C|        |      ;
+    db $D3,$00,$00,$58,$01,$00,$59,$01,$00,$5A,$01,$01         ;819E4F|        |      ;
+    db $5A,$01,$00                                             ;819E5B|        |      ;
+ 
+DATA24_819E5E:
+    dl $0000CC                                                 ;819E5E|        |      ;
+    db $CC,$00,$00,$43,$01,$00,$44,$01,$00,$45,$01,$01         ;819E61|        |      ;
+    db $45,$01,$00                                             ;819E6D|        |      ;
+ 
+DATA24_819E70:
+    dl $0000CD                                                 ;819E70|        |      ;
+    db $CD,$00,$00,$46,$01,$00,$47,$01,$00,$48,$01,$01         ;819E73|        |      ;
+    db $48,$01,$00                                             ;819E7F|        |      ;
+ 
+DATA24_819E82:
+    dl $0000CE                                                 ;819E82|        |      ;
+    db $CE,$00,$00,$49,$01,$00,$4A,$01,$00,$4B,$01,$01         ;819E85|        |      ;
+    db $4B,$01,$00                                             ;819E91|        |      ;
+ 
+DATA24_819E94:
+    dl $0000CF                                                 ;819E94|        |      ;
+    db $CF,$00,$00,$4C,$01,$00,$4D,$01,$00,$4E,$01,$01         ;819E97|        |      ;
+    db $4E,$01,$00                                             ;819EA3|        |      ;
+ 
+DATA24_819EA6:
+    dl $0000D4                                                 ;819EA6|        |      ;
+    db $D4,$00,$00,$5B,$01,$00,$5C,$01,$00,$5D,$01,$01         ;819EA9|        |      ;
+    db $5D,$01,$00                                             ;819EB5|        |      ;
+ 
+DATA24_819EB8:
+    dl $0000D5                                                 ;819EB8|        |      ;
+    db $D5,$00,$00,$5E,$01,$00,$5F,$01,$00,$60,$01,$01         ;819EBB|        |      ;
+    db $60,$01,$00                                             ;819EC7|        |      ;
+ 
+DATA24_819ECA:
+    dl $0000D6                                                 ;819ECA|        |      ;
+    db $D6,$00,$00,$61,$01,$00,$62,$01,$00,$63,$01,$01         ;819ECD|        |      ;
+    db $63,$01,$00                                             ;819ED9|        |      ;
+ 
+DATA24_819EDC:
+    dl $0000D7                                                 ;819EDC|        |      ;
+    db $D7,$00,$00,$64,$01,$00,$65,$01,$00,$66,$01,$01         ;819EDF|        |      ;
+    db $66,$01,$00                                             ;819EEB|        |      ;
+ 
+DATA24_819EEE:
+    dl $0000E0                                                 ;819EEE|        |      ;
+    db $E0,$00,$00,$7C,$01,$00,$7D,$01,$00,$7E,$01,$01         ;819EF1|        |      ;
+    db $7E,$01,$00                                             ;819EFD|        |      ;
+ 
+DATA24_819F00:
+    dl $0000E1                                                 ;819F00|        |      ;
+    db $E1,$00,$00,$7F,$01,$00,$80,$01,$00,$81,$01,$01         ;819F03|        |      ;
+    db $81,$01,$00                                             ;819F0F|        |      ;
+ 
+DATA24_819F12:
+    dl $0000E3                                                 ;819F12|        |      ;
+    db $E3,$00,$00,$85,$01,$00,$86,$01,$00,$87,$01,$01         ;819F15|        |      ;
+    db $87,$01,$00                                             ;819F21|        |      ;
+ 
+DATA24_819F24:
+    dl $0000E2                                                 ;819F24|        |      ;
+    db $E2,$00,$00,$82,$01,$00,$83,$01,$00,$84,$01,$01         ;819F27|        |      ;
+    db $84,$01,$00                                             ;819F33|        |      ;
+ 
+DATA24_819F36:
+    dl $0000DF                                                 ;819F36|        |      ;
+    db $DF,$00,$00,$79,$01,$00,$7A,$01,$00,$7B,$01,$01         ;819F39|        |      ;
+    db $7B,$01,$00                                             ;819F45|        |      ;
+ 
+DATA24_819F48:
+    dl $0000E4                                                 ;819F48|        |      ;
+    db $E4,$00,$00,$89,$01,$00,$89,$01,$00,$89,$01,$01         ;819F4B|        |      ;
+    db $89,$01,$00                                             ;819F57|        |      ;
+ 
+DATA24_819F5A:
+    dl $0000E5                                                 ;819F5A|        |      ;
+    db $E5,$00,$00,$8A,$01,$00,$8A,$01,$00,$8A,$01,$01         ;819F5D|        |      ;
+    db $8A,$01,$00                                             ;819F69|        |      ;
+ 
+DATA24_819F6C:
+    dl $0000DC                                                 ;819F6C|        |      ;
+    db $DC,$00,$00,$88,$01,$00,$88,$01,$00,$88,$01,$01         ;819F6F|        |      ;
+    db $88,$01,$00                                             ;819F7B|        |      ;
+ 
+DATA24_819F7E:
+    dl $0000DE                                                 ;819F7E|        |      ;
+    db $DE,$00,$00,$76,$01,$00,$77,$01,$00,$78,$01,$01         ;819F81|        |      ;
+    db $78,$01,$00                                             ;819F8D|        |      ;
+ 
+DATA24_819F90:
+    dl $0000DD                                                 ;819F90|        |      ;
+    db $DD,$00,$00,$73,$01,$00,$74,$01,$00,$75,$01,$01         ;819F93|        |      ;
+    db $75,$01,$00                                             ;819F9F|        |      ;
+ 
+DATA24_819FA2:
+    dl $0000FB                                                 ;819FA2|        |      ;
+    db $CA,$03,$00,$C4,$03,$00,$C5,$03,$00,$C6,$03,$01         ;819FA5|        |      ;
+    db $C6,$03,$00,$C7,$03,$00,$C8,$03,$00,$C9,$03,$01         ;819FB1|        |      ;
+    db $C9,$03,$00,$0A,$01,$00,$CB,$03,$00                     ;819FBD|        |      ;
+ 
+aDialogData_FoundItem:
+    dw $0366                                                   ;819FC6|        |      ; 0x08 * [n16 nDialogId, n8 nEnergyIncrease] ; Mushroom
+    db $0A                                                     ;819FC8|        |      ;
+    dw $0367                                                   ;819FC9|        |      ; Poisonous mushroom
+    db $F6                                                     ;819FCB|        |      ;
+    dw $0368                                                   ;819FCC|        |      ; Berry of wild grape
+    db $0A                                                     ;819FCE|        |      ;
+    dw $0369                                                   ;819FCF|        |      ; Tropical fruit
+    db $0A                                                     ;819FD1|        |      ;
+    dw $036A                                                   ;819FD2|        |      ; Berry of Fullmoon Plant
+    db $32                                                     ;819FD4|        |      ;
+    dw $036B                                                   ;819FD5|        |      ; Cake
+    db $32                                                     ;819FD7|        |      ;
+    dw $036C                                                   ;819FD8|        |      ; Fish
+    db $0A                                                     ;819FDA|        |      ;
+    dw $036D                                                   ;819FDB|        |      ; Power berry
+    db $0A                                                     ;819FDD|        |      ;
+ 
+aDialogData_ShippingProfit:
+    db $00,$00,$00,$0F,$00,$14,$00,$0F,$00,$14,$00,$3C         ;819FDE|        |      ; 0x5B * [n8 nUnk, n8 nProfit]
+    db $00,$00,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00         ;819FEA|        |      ;
+    db $00,$00,$10,$00,$10,$00,$14,$00,$00,$0C,$00,$0A         ;819FF6|        |      ;
+    db $00,$08,$00,$06,$00,$05,$00,$0F,$00,$19,$00,$23         ;81A002|        |      ;
+    db $00,$14,$00,$00,$99,$00,$00,$00,$00,$00,$00,$00         ;81A00E|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A01A|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A026|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A032|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A03E|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A04A|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A056|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A062|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A06E|        |      ;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A07A|        |      ;
+    db $00,$00,$00,$00,$00,$00,$14,$00,$00,$00,$00,$00         ;81A086|        |      ;
+    db $00,$00                                                 ;81A092|        |      ;
+ 
+aDialogData_SellItems:
+    dw $0000                                                   ;81A094|        |      ; 0x5B * [n16 nDialogId, n8 nProfit]
+    db $00                                                     ;81A096|        |      ;
+    dw $0358                                                   ;81A097|        |      ; Mushroom
+    db $14                                                     ;81A099|        |      ;
+    dw $0359                                                   ;81A09A|        |      ; Poisonous mushroom
+    db $1E                                                     ;81A09C|        |      ;
+    dw $035B                                                   ;81A09D|        |      ; Berry of wild grape
+    db $14                                                     ;81A09F|        |      ;
+    dw $035C                                                   ;81A0A0|        |      ; Tropical fruit
+    db $1E                                                     ;81A0A2|        |      ;
+    dw $035D                                                   ;81A0A3|        |      ; Berry of Fullmoon Plant
+    db $3C                                                     ;81A0A5|        |      ;
+    dw $0313                                                   ;81A0A6|        |      ; Cake
+    db $00                                                     ;81A0A8|        |      ;
+    dw $035E                                                   ;81A0A9|        |      ; Fish
+    db $1E                                                     ;81A0AB|        |      ;
+    dw $0000                                                   ;81A0AC|        |      ; Power berry
+    db $00                                                     ;81A0AE|        |      ;
+    dw $0000                                                   ;81A0AF|        |      ;
+    db $00                                                     ;81A0B1|        |      ;
+    dw $0000                                                   ;81A0B2|        |      ;
+    db $00                                                     ;81A0B4|        |      ;
+    dw $0000                                                   ;81A0B5|        |      ;
+    db $00                                                     ;81A0B7|        |      ;
+    dw $0000                                                   ;81A0B8|        |      ;
+    db $00                                                     ;81A0BA|        |      ;
+    dw $0000                                                   ;81A0BB|        |      ;
+    db $00                                                     ;81A0BD|        |      ;
+    dw $0000                                                   ;81A0BE|        |      ;
+    db $00                                                     ;81A0C0|        |      ;
+    dw $0000                                                   ;81A0C1|        |      ;
+    db $00                                                     ;81A0C3|        |      ;
+    dw $0353                                                   ;81A0C4|        |      ; Corn
+    db $18                                                     ;81A0C6|        |      ;
+    dw $0354                                                   ;81A0C7|        |      ; Tomato
+    db $14                                                     ;81A0C9|        |      ;
+    dw $0355                                                   ;81A0CA|        |      ; Potato
+    db $10                                                     ;81A0CC|        |      ;
+    dw $0356                                                   ;81A0CD|        |      ; Turnip
+    db $0C                                                     ;81A0CF|        |      ;
+    dw $0357                                                   ;81A0D0|        |      ; Egg
+    db $0A                                                     ;81A0D2|        |      ;
+    dw $0350                                                   ;81A0D3|        |      ; Small milk
+    db $14                                                     ;81A0D5|        |      ;
+    dw $0351                                                   ;81A0D6|        |      ; Medium milk
+    db $1E                                                     ;81A0D8|        |      ;
+    dw $0352                                                   ;81A0D9|        |      ; Large milk
+    db $28                                                     ;81A0DB|        |      ;
+    dw $035A                                                   ;81A0DC|        |      ; Herb
+    db $14                                                     ;81A0DE|        |      ;
+    dw $0313                                                   ;81A0DF|        |      ; Flower
+    db $00                                                     ;81A0E1|        |      ;
+    dw $0000                                                   ;81A0E2|        |      ;
+    db $00                                                     ;81A0E4|        |      ;
+    dw $0000                                                   ;81A0E5|        |      ;
+    db $00                                                     ;81A0E7|        |      ;
+    dw $0000                                                   ;81A0E8|        |      ;
+    db $00                                                     ;81A0EA|        |      ;
+    dw $0000                                                   ;81A0EB|        |      ;
+    db $00                                                     ;81A0ED|        |      ;
+    dw $0000                                                   ;81A0EE|        |      ;
+    db $00                                                     ;81A0F0|        |      ;
+    dw $0000                                                   ;81A0F1|        |      ;
+    db $00                                                     ;81A0F3|        |      ;
+    dw $0000                                                   ;81A0F4|        |      ;
+    db $00                                                     ;81A0F6|        |      ;
+    dw $0000                                                   ;81A0F7|        |      ;
+    db $00                                                     ;81A0F9|        |      ;
+    dw $0000                                                   ;81A0FA|        |      ;
+    db $00                                                     ;81A0FC|        |      ;
+    dw $0000                                                   ;81A0FD|        |      ;
+    db $00                                                     ;81A0FF|        |      ;
+    dw $0000                                                   ;81A100|        |      ;
+    db $00                                                     ;81A102|        |      ;
+    dw $0313                                                   ;81A103|        |      ;
+    db $00                                                     ;81A105|        |      ;
+    dw $0313                                                   ;81A106|        |      ;
+    db $00                                                     ;81A108|        |      ;
+    dw $0000                                                   ;81A109|        |      ;
+    db $00                                                     ;81A10B|        |      ;
+    dw $0000                                                   ;81A10C|        |      ;
+    db $00                                                     ;81A10E|        |      ;
+    dw $0000                                                   ;81A10F|        |      ;
+    db $00                                                     ;81A111|        |      ;
+    dw $0000                                                   ;81A112|        |      ;
+    db $00                                                     ;81A114|        |      ;
+    dw $0000                                                   ;81A115|        |      ;
+    db $00                                                     ;81A117|        |      ;
+    dw $0000                                                   ;81A118|        |      ;
+    db $00                                                     ;81A11A|        |      ;
+    dw $0000                                                   ;81A11B|        |      ;
+    db $00                                                     ;81A11D|        |      ;
+    dw $0000                                                   ;81A11E|        |      ;
+    db $00                                                     ;81A120|        |      ;
+    dw $0000                                                   ;81A121|        |      ;
+    db $00                                                     ;81A123|        |      ;
+    dw $0000                                                   ;81A124|        |      ;
+    db $00                                                     ;81A126|        |      ;
+    dw $0000                                                   ;81A127|        |      ;
+    db $00                                                     ;81A129|        |      ;
+    dw $0000                                                   ;81A12A|        |      ;
+    db $00                                                     ;81A12C|        |      ;
+    dw $0000                                                   ;81A12D|        |      ;
+    db $00                                                     ;81A12F|        |      ;
+    dw $0000                                                   ;81A130|        |      ;
+    db $00                                                     ;81A132|        |      ;
+    dw $0000                                                   ;81A133|        |      ;
+    db $00                                                     ;81A135|        |      ;
+    dw $0000                                                   ;81A136|        |      ;
+    db $00                                                     ;81A138|        |      ;
+    dw $0000                                                   ;81A139|        |      ;
+    db $00                                                     ;81A13B|        |      ;
+    dw $0000                                                   ;81A13C|        |      ;
+    db $00                                                     ;81A13E|        |      ;
+    dw $0000                                                   ;81A13F|        |      ;
+    db $00                                                     ;81A141|        |      ;
+    dw $0000                                                   ;81A142|        |      ;
+    db $00                                                     ;81A144|        |      ;
+    dw $0000                                                   ;81A145|        |      ;
+    db $00                                                     ;81A147|        |      ;
+    dw $0000                                                   ;81A148|        |      ;
+    db $00                                                     ;81A14A|        |      ;
+    dw $0000                                                   ;81A14B|        |      ;
+    db $00                                                     ;81A14D|        |      ;
+    dw $0000                                                   ;81A14E|        |      ;
+    db $00                                                     ;81A150|        |      ;
+    dw $0000                                                   ;81A151|        |      ;
+    db $00                                                     ;81A153|        |      ;
+    dw $0000                                                   ;81A154|        |      ;
+    db $00                                                     ;81A156|        |      ;
+    dw $0000                                                   ;81A157|        |      ;
+    db $00                                                     ;81A159|        |      ;
+    dw $0000                                                   ;81A15A|        |      ;
+    db $00                                                     ;81A15C|        |      ;
+    dw $0000                                                   ;81A15D|        |      ;
+    db $00                                                     ;81A15F|        |      ;
+    dw $0000                                                   ;81A160|        |      ;
+    db $00                                                     ;81A162|        |      ;
+    dw $0000                                                   ;81A163|        |      ;
+    db $00                                                     ;81A165|        |      ;
+    dw $0000                                                   ;81A166|        |      ;
+    db $00                                                     ;81A168|        |      ;
+    dw $0000                                                   ;81A169|        |      ;
+    db $00                                                     ;81A16B|        |      ;
+    dw $0000                                                   ;81A16C|        |      ;
+    db $00                                                     ;81A16E|        |      ;
+    dw $0000                                                   ;81A16F|        |      ;
+    db $00                                                     ;81A171|        |      ;
+    dw $0000                                                   ;81A172|        |      ;
+    db $00                                                     ;81A174|        |      ;
+    dw $0000                                                   ;81A175|        |      ;
+    db $00                                                     ;81A177|        |      ;
+    dw $0000                                                   ;81A178|        |      ;
+    db $00                                                     ;81A17A|        |      ;
+    dw $0000                                                   ;81A17B|        |      ;
+    db $00                                                     ;81A17D|        |      ;
+    dw $0000                                                   ;81A17E|        |      ;
+    db $00                                                     ;81A180|        |      ;
+    dw $0000                                                   ;81A181|        |      ;
+    db $00                                                     ;81A183|        |      ;
+    dw $0000                                                   ;81A184|        |      ;
+    db $00                                                     ;81A186|        |      ;
+    dw $0000                                                   ;81A187|        |      ;
+    db $00                                                     ;81A189|        |      ;
+    dw $0000                                                   ;81A18A|        |      ;
+    db $00                                                     ;81A18C|        |      ;
+    dw $0000                                                   ;81A18D|        |      ;
+    db $00                                                     ;81A18F|        |      ;
+    dw $0000                                                   ;81A190|        |      ;
+    db $00                                                     ;81A192|        |      ;
+    dw $0000                                                   ;81A193|        |      ;
+    db $00                                                     ;81A195|        |      ;
+    dw $0000                                                   ;81A196|        |      ;
+    db $00                                                     ;81A198|        |      ;
+    dw $0000                                                   ;81A199|        |      ;
+    db $00                                                     ;81A19B|        |      ;
+    dw $0000                                                   ;81A19C|        |      ;
+    db $00                                                     ;81A19E|        |      ;
+    dw $0000                                                   ;81A19F|        |      ;
+    db $00                                                     ;81A1A1|        |      ;
+    dw $0000                                                   ;81A1A2|        |      ;
     db $00                                                     ;81A1A4|        |      ;
  
-nUnknownDialogIndex_81A1A5:
-    dw $02F6,$02F7,$0211,$02F9,$CEBB,$FFFF                     ;81A1A5|        |      ; 16b nDialogIndex, 16b, 16b, 16b, 16b, 16b ; terminated with $FFFF ;
-    dw $033F,$02F7,$0211,$02F9,$E2B7,$FFFF                     ;81A1B1|        |      ;
-    dw $033C,$02F7,$0211,$02F9,$E2B8,$FFFF                     ;81A1BD|        |      ;
-    dw $033D,$02F7,$0211,$02F9,$ECB9,$FFFF                     ;81A1C9|        |      ;
-    dw $033E,$02F7,$0211,$02F9,$ECBA,$FFFF                     ;81A1D5|        |      ;
-    dw $0340,$02F8,$0211,$02F9,$E2BC,$FFFF                     ;81A1E1|        |      ;
-    dw $02FC,$02FD,$02FE,$02FF,$6AD1,$FFFF                     ;81A1ED|        |      ;
-    dw $0312,$02FD,$02FE,$02FF,$4CD0,$FFFF                     ;81A1F9|        |      ;
-    dw $0314,$02FD,$02FE,$02FF,$B0CF,$FFFF                     ;81A205|        |      ;
-    dw $0344,$02FD,$02FE,$02FF,$38CA,$FFFF                     ;81A211|        |      ;
-    dw $0345,$02FD,$02FE,$02FF,$38CB,$FFFF                     ;81A21D|        |      ;
-    dw $0346,$02FD,$02FE,$02FF,$38CC,$FFFF                     ;81A229|        |      ;
-    dw $0347,$02FD,$02FE,$02FF,$38CD,$FFFF                     ;81A235|        |      ;
-    dw $0343,$02FD,$02FE,$02FF,$38CE,$FFFF                     ;81A241|        |      ;
-    dw $0301,$0302,$0303,$0304,$9CD7,$FFFF                     ;81A24D|        |      ;
-    dw $033B,$0302,$0303,$0304,$70D6,$FFFE                     ;81A259|        |      ;
-    dw $0342,$0308,$0303,$0304,$E2D9,$FFFF                     ;81A265|        |      ;
-    dw $0341,$0308,$0303,$0304,$C4D8,$FFFF                     ;81A271|        |      ;
-    dw $0348,$0349,$034A,$02FF,$CEC5,$FFFF                     ;81A27D|        |      ;
-    dw $020E,$0210,$0211,$02F9,$9CF8,$FFFF                     ;81A289|        |      ;
-    dw $020D,$0210,$0211,$02F9,$9CF7,$FFFF                     ;81A295|        |      ;
-    dw $020F,$0210,$0211,$02F9,$9CF9,$FFFF                     ;81A2A1|        |      ;
+aDialogsData_BuyItems:
+    dw $02F6,$02F7,$0211,$02F9                                 ;81A1A5|        |      ; 0x16 *[n16 nDescriptionDialogId, n16 nAnswer1DialogId (yes), n16 nAnswer2DialogId (no), n16 nTooPoorDialogId, n8 nUnknown, n24 nCost]; Grass seeds
+    db $BB                                                     ;81A1AD|        |      ;
+    dl $FFFFCE                                                 ;81A1AE|        |      ;
+    dw $033F,$02F7,$0211,$02F9                                 ;81A1B1|        |      ; Corn seeds
+    db $B7                                                     ;81A1B9|        |      ;
+    dl $FFFFE2                                                 ;81A1BA|        |      ;
+    dw $033C,$02F7,$0211,$02F9                                 ;81A1BD|        |      ; Tomato seeds
+    db $B8                                                     ;81A1C5|        |      ;
+    dl $FFFFE2                                                 ;81A1C6|        |      ;
+    dw $033D,$02F7,$0211,$02F9                                 ;81A1C9|        |      ; Potato seeds
+    db $B9                                                     ;81A1D1|        |      ;
+    dl $FFFFEC                                                 ;81A1D2|        |      ;
+    dw $033E,$02F7,$0211,$02F9                                 ;81A1D5|        |      ; Turnip seeds
+    db $BA                                                     ;81A1DD|        |      ;
+    dl $FFFFEC                                                 ;81A1DE|        |      ;
+    dw $0340,$02F8,$0211,$02F9                                 ;81A1E1|        |      ; Flower
+    db $BC                                                     ;81A1E9|        |      ;
+    dl $FFFFE2                                                 ;81A1EA|        |      ;
+    dw $02FC,$02FD,$02FE,$02FF                                 ;81A1ED|        |      ; Paint
+    db $D1                                                     ;81A1F5|        |      ;
+    dl $FFFF6A                                                 ;81A1F6|        |      ;
+    dw $0312,$02FD,$02FE,$02FF                                 ;81A1F9|        |      ; Milker
+    db $D0                                                     ;81A201|        |      ;
+    dl $FFFF4C                                                 ;81A202|        |      ;
+    dw $0314,$02FD,$02FE,$02FF                                 ;81A205|        |      ; Brush
+    db $CF                                                     ;81A20D|        |      ;
+    dl $FFFFB0                                                 ;81A20E|        |      ;
+    dw $0344,$02FD,$02FE,$02FF                                 ;81A211|        |      ; Super sickle
+    db $CA                                                     ;81A219|        |      ;
+    dl $FFFF38                                                 ;81A21A|        |      ;
+    dw $0345,$02FD,$02FE,$02FF                                 ;81A21D|        |      ; Super hoe
+    db $CB                                                     ;81A225|        |      ;
+    dl $FFFF38                                                 ;81A226|        |      ;
+    dw $0346,$02FD,$02FE,$02FF                                 ;81A229|        |      ; Super hammer
+    db $CC                                                     ;81A231|        |      ;
+    dl $FFFF38                                                 ;81A232|        |      ;
+    dw $0347,$02FD,$02FE,$02FF                                 ;81A235|        |      ; Super axe
+    db $CD                                                     ;81A23D|        |      ;
+    dl $FFFF38                                                 ;81A23E|        |      ;
+    dw $0343,$02FD,$02FE,$02FF                                 ;81A241|        |      ; Sprinkler
+    db $CE                                                     ;81A249|        |      ;
+    dl $FFFF38                                                 ;81A24A|        |      ;
+    dw $0301,$0302,$0303,$0304                                 ;81A24D|        |      ; Cow medicine
+    db $D7                                                     ;81A255|        |      ;
+    dl $FFFF9C                                                 ;81A256|        |      ;
+    dw $033B,$0302,$0303,$0304                                 ;81A259|        |      ; Miracle potion
+    db $D6                                                     ;81A261|        |      ;
+    dl $FFFE70                                                 ;81A262|        |      ;
+    dw $0342,$0308,$0303,$0304                                 ;81A265|        |      ; Chicken feed
+    db $D9                                                     ;81A26D|        |      ;
+    dl $FFFFE2                                                 ;81A26E|        |      ;
+    dw $0341,$0308,$0303,$0304                                 ;81A271|        |      ; Cow feed
+    db $D8                                                     ;81A279|        |      ;
+    dl $FFFFC4                                                 ;81A27A|        |      ;
+    dw $0348,$0349,$034A,$02FF                                 ;81A27D|        |      ; Cake
+    db $C5                                                     ;81A285|        |      ;
+    dl $FFFFCE                                                 ;81A286|        |      ;
+    dw $020E,$0210,$0211,$02F9                                 ;81A289|        |      ; Lilac fragrance
+    db $F8                                                     ;81A291|        |      ;
+    dl $FFFF9C                                                 ;81A292|        |      ;
+    dw $020D,$0210,$0211,$02F9                                 ;81A295|        |      ; Rose fragrance
+    db $F7                                                     ;81A29D|        |      ;
+    dl $FFFF9C                                                 ;81A29E|        |      ;
+    dw $020F,$0210,$0211,$02F9                                 ;81A2A1|        |      ; Violet fragrance
+    db $F9                                                     ;81A2A9|        |      ;
+    dl $FFFF9C                                                 ;81A2AA|        |      ;
  
 nItemCarriedIndexForTilemap:
-    db $00,$01,$01,$01,$01,$03,$00,$00,$00,$02,$02,$02         ;81A2AD|        |      ; n8
+    db $00,$01,$01,$01,$01,$03,$00,$00,$00,$02,$02,$02         ;81A2AD|        |      ; 0x5B * [n8]
     db $01,$02,$02,$02,$4C,$32,$07,$07,$2E,$00,$00,$00         ;81A2B9|        |      ;
     db $20,$01,$00,$12,$12,$12,$00,$00,$00,$00,$00,$00         ;81A2C5|        |      ;
     db $00,$00,$00,$00,$00,$00,$2A,$2B,$2B,$2D,$2A,$2B         ;81A2D1|        |      ;
@@ -3798,7 +4014,7 @@ nItemCarriedIndexForTilemap:
     db $22,$22,$22,$00,$12,$12,$12                             ;81A301|        |      ;
  
 nSoundItemCarriedTable_81A308:
-    db $00,$01,$01,$01,$01,$01,$00,$00,$01,$01,$01,$01         ;81A308|        |      ;
+    db $00,$01,$01,$01,$01,$01,$00,$00,$01,$01,$01,$01         ;81A308|        |      ; 0x5B * [n8]
     db $01,$01,$01,$01,$01,$01,$01,$01,$00,$00,$00,$00         ;81A314|        |      ;
     db $01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A320|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A32C|        |      ;
@@ -4085,8 +4301,8 @@ fUnknown_81A58F:
  
   + REP #$30                                                   ;81A5A9|C230    |      ;
     LDA.W #$0000                                               ;81A5AB|A90000  |      ;
-    LDX.W $0907                                                ;81A5AE|AE0709  |000907;
-    LDY.W $0909                                                ;81A5B1|AC0909  |000909;
+    LDX.W nPlayerPosXCopy                                      ;81A5AE|AE0709  |000907;
+    LDY.W nPlayerPosYCopy                                      ;81A5B1|AC0909  |000909;
     JSL.L fUnknown_82AC61                                      ;81A5B4|2261AC82|82AC61;
     REP #$30                                                   ;81A5B8|C230    |      ;
     TXA                                                        ;81A5BA|8A      |      ;
@@ -4103,8 +4319,8 @@ fUnknown_81A58F:
  
   + REP #$30                                                   ;81A5D1|C230    |      ;
     LDA.W #$0011                                               ;81A5D3|A91100  |      ;
-    LDX.W $0907                                                ;81A5D6|AE0709  |000907;
-    LDY.W $0909                                                ;81A5D9|AC0909  |000909;
+    LDX.W nPlayerPosXCopy                                      ;81A5D6|AE0709  |000907;
+    LDY.W nPlayerPosYCopy                                      ;81A5D9|AC0909  |000909;
     JSL.L fUnknown_81A6C1                                      ;81A5DC|22C1A681|81A6C1;
  
 .return:
@@ -4249,7 +4465,7 @@ fUnknown_81A688:
     PLY                                                        ;81A6AF|7A      |      ;
     LDA.B n16TempVar2                                          ;81A6B0|A580    |000080;
     STA.B $86                                                  ;81A6B2|8586    |000086;
-    LDA.B $82                                                  ;81A6B4|A582    |000082;
+    LDA.B n16TempVar3                                          ;81A6B4|A582    |000082;
     STA.B $88                                                  ;81A6B6|8588    |000088;
     LDA.B $84                                                  ;81A6B8|A584    |000084;
     BEQ .return                                                ;81A6BA|F004    |81A6C0;
@@ -4348,9 +4564,9 @@ fUnknown_81A6C1:
     ASL A                                                      ;81A74C|0A      |      ;
     ASL A                                                      ;81A74D|0A      |      ;
     STA.B n16TempVar2                                          ;81A74E|8580    |000080;
-    LDA.B $82                                                  ;81A750|A582    |000082;
+    LDA.B n16TempVar3                                          ;81A750|A582    |000082;
     ASL A                                                      ;81A752|0A      |      ;
-    STA.B $82                                                  ;81A753|8582    |000082;
+    STA.B n16TempVar3                                          ;81A753|8582    |000082;
     LDA.B ptrUnknown0x72                                       ;81A755|A572    |000072;
     CLC                                                        ;81A757|18      |      ;
     ADC.B n16TempVar1                                          ;81A758|657E    |00007E;
@@ -4420,7 +4636,7 @@ fUnknown_81A6C1:
     STZ.B $92                                                  ;81A7C5|6492    |000092;
     PLX                                                        ;81A7C7|FA      |      ;
     INX                                                        ;81A7C8|E8      |      ;
-    CPX.B $82                                                  ;81A7C9|E482    |000082;
+    CPX.B n16TempVar3                                          ;81A7C9|E482    |000082;
     BNE .loop                                                  ;81A7CB|D09A    |81A767;
     RTL                                                        ;81A7CD|6B      |      ;
  
@@ -4447,7 +4663,7 @@ fUnknown_81A7CE:
     PLY                                                        ;81A7ED|7A      |      ;
     LDA.B n16TempVar2                                          ;81A7EE|A580    |000080;
     STA.B $86                                                  ;81A7F0|8586    |000086;
-    LDA.B $82                                                  ;81A7F2|A582    |000082;
+    LDA.B n16TempVar3                                          ;81A7F2|A582    |000082;
     STA.B $88                                                  ;81A7F4|8588    |000088;
     LDA.B $84                                                  ;81A7F6|A584    |000084;
     BEQ +                                                      ;81A7F8|F006    |81A800;
@@ -4476,7 +4692,7 @@ fUnknown_81A801:
     LDA.B #$00                                                 ;81A81C|A900    |      ;
     XBA                                                        ;81A81E|EB      |      ;
     REP #$20                                                   ;81A81F|C220    |      ;
-    STA.B $82                                                  ;81A821|8582    |000082;
+    STA.B n16TempVar3                                          ;81A821|8582    |000082;
     INX                                                        ;81A823|E8      |      ;
     SEP #$20                                                   ;81A824|E220    |      ;
     LDA.L Table_81B363,X                                       ;81A826|BF63B381|81B363;
@@ -4652,7 +4868,7 @@ fUnknown_81A83A:
     STA.B n16TempVar1                                          ;81A93E|857E    |00007E;
     PLY                                                        ;81A940|7A      |      ;
     INY                                                        ;81A941|C8      |      ;
-    CPY.B $82                                                  ;81A942|C482    |000082;
+    CPY.B n16TempVar3                                          ;81A942|C482    |000082;
     BEQ +                                                      ;81A944|F003    |81A949;
     JMP.W ---                                                  ;81A946|4CC0A8  |81A8C0;
  
@@ -5796,11 +6012,11 @@ fItemSub81A9F6_0x28:
     ASL A                                                      ;81B17D|0A      |      ;
     ASL A                                                      ;81B17E|0A      |      ;
     TAX                                                        ;81B17F|AA      |      ;
-    LDA.L aEngineAddChickenData,X                              ;81B180|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;81B180|BF10CA83|83CA10;
     PHA                                                        ;81B184|48      |      ;
     INX                                                        ;81B185|E8      |      ;
     INX                                                        ;81B186|E8      |      ;
-    LDA.L aEngineAddChickenData,X                              ;81B187|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;81B187|BF10CA83|83CA10;
     PHA                                                        ;81B18B|48      |      ;
     LDA.W #$00F1                                               ;81B18C|A9F100  |      ;
     PLY                                                        ;81B18F|7A      |      ;
@@ -7300,7 +7516,7 @@ pUnknownSubrutineTable_81C027:
     dw subUnkown81C027_0x09                                    ;81C039|        |81CB5E;
     dw subUnkown81C027_0x0A                                    ;81C03B|        |81C51A;
     dw subUnkown81C027_0x0B                                    ;81C03D|        |81C4EC;
-    dw subUnkown81C027_0x0C                                    ;81C03F|        |81C395;
+    dw subUnkown81C027_SelectDialog                            ;81C03F|        |81C395;
     dw subUnkown81C027_0x0D                                    ;81C041|        |81C364;
     dw subUnkown81C027_0x00                                    ;81C043|        |81BFDC;
     dw subUnkown81C027_0x0F                                    ;81C045|        |81C232;
@@ -7357,7 +7573,7 @@ subUnkown81C027_0x1C:
     STA.W nToolEquipped                                        ;81C0A7|8D2109  |000921;
     PLA                                                        ;81C0AA|68      |      ;
     STA.W nToolSecond                                          ;81C0AB|8D2309  |000923;
-    JSL.L fToolSoundUnknown_828FF3                             ;81C0AE|22F38F82|828FF3;
+    JSL.L fToolUsed_SoundUnknown828FF3                         ;81C0AE|22F38F82|828FF3;
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81C0B2|4C02C0  |81C002;
@@ -7655,7 +7871,7 @@ subUnkown81C027_0x13:
     JSL.L fSubUnk1Unknown_848097                               ;81C30E|22978084|848097;
     REP #$20                                                   ;81C312|C220    |      ;
     LDA.W #$0002                                               ;81C314|A90200  |      ;
-    JSL.L fEngineAddHappiness                                  ;81C317|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81C317|2282B283|83B282;
     JMP.W .exit                                                ;81C31B|4C30C3  |81C330;
  
  
@@ -7720,7 +7936,7 @@ subUnkown81C027_0x0D:
     JMP.W fUnknown_81C002                                      ;81C392|4C02C0  |81C002;
  
  
-subUnkown81C027_0x0C:
+subUnkown81C027_SelectDialog:
     REP #$30                                                   ;81C395|C230    |      ;
     REP #$30                                                   ;81C397|C230    |      ;
     LDA.B $D2                                                  ;81C399|A5D2    |0000D2;
@@ -7973,7 +8189,7 @@ subUnkown81C027_0x0A:
     STA.W $091B                                                ;81C548|8D1B09  |00091B;
     CMP.B #$18                                                 ;81C54B|C918    |      ;
     BNE .exit                                                  ;81C54D|D004    |81C553;
-    JSL.L fToolSoundUnknown_828FB1                             ;81C54F|22B18F82|828FB1;
+    JSL.L fToolUsed_SoundUnknown828FB1                         ;81C54F|22B18F82|828FB1;
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81C553|4C02C0  |81C002;
@@ -8758,7 +8974,7 @@ subUnkown81C027_0x08:
     STA.L nPowerBerryEaten                                     ;81CAB2|8F361F7F|7F1F36;
     REP #$20                                                   ;81CAB6|C220    |      ;
     LDA.W #$000A                                               ;81CAB8|A90A00  |      ;
-    JSL.L fEngineAddHappiness                                  ;81CABB|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81CABB|2282B283|83B282;
     SEP #$20                                                   ;81CABF|E220    |      ;
     LDA.W nPlayerStamina                                       ;81CAC1|AD1709  |000917;
     CLC                                                        ;81CAC4|18      |      ;
@@ -8931,7 +9147,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CBF3|C220    |      ;
     LDA.B $DA                                                  ;81CBF5|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AF37                                ;81CBF7|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;81CBF7|2237AF83|83AF37;
     REP #$30                                                   ;81CBFB|C230    |      ;
     STY.B n16TempVar1                                          ;81CBFD|847E    |00007E;
     CMP.W #$0001                                               ;81CBFF|C90100  |      ;
@@ -9022,7 +9238,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CC97|C220    |      ;
     LDA.B $DA                                                  ;81CC99|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AF37                                ;81CC9B|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;81CC9B|2237AF83|83AF37;
     REP #$30                                                   ;81CC9F|C230    |      ;
     STY.B n16TempVar1                                          ;81CCA1|847E    |00007E;
     CMP.W #$0001                                               ;81CCA3|C90100  |      ;
@@ -9113,7 +9329,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CD3B|C220    |      ;
     LDA.B $DA                                                  ;81CD3D|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AF37                                ;81CD3F|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;81CD3F|2237AF83|83AF37;
     REP #$30                                                   ;81CD43|C230    |      ;
     STX.B n16TempVar1                                          ;81CD45|867E    |00007E;
     CMP.W #$0001                                               ;81CD47|C90100  |      ;
@@ -9204,7 +9420,7 @@ fUnknown_81CB77:
  
   + REP #$20                                                   ;81CDDF|C220    |      ;
     LDA.B $DA                                                  ;81CDE1|A5DA    |0000DA;
-    JSL.L fEngineUnknown_83AF37                                ;81CDE3|2237AF83|83AF37;
+    JSL.L fGameEngine_Unknown83AF37                            ;81CDE3|2237AF83|83AF37;
     REP #$30                                                   ;81CDE7|C230    |      ;
     STX.B n16TempVar1                                          ;81CDE9|867E    |00007E;
     CMP.W #$0001                                               ;81CDEB|C90100  |      ;
@@ -9256,9 +9472,9 @@ fUnknown_81CB77:
     JSL.L fUnknown_81A58F                                      ;81CE3D|228FA581|81A58F;
     REP #$20                                                   ;81CE41|C220    |      ;
     LDA.B nPlayerPosX                                          ;81CE43|A5D6    |0000D6;
-    STA.W $0907                                                ;81CE45|8D0709  |000907;
+    STA.W nPlayerPosXCopy                                      ;81CE45|8D0709  |000907;
     LDA.B nPlayerPosY                                          ;81CE48|A5D8    |0000D8;
-    STA.W $0909                                                ;81CE4A|8D0909  |000909;
+    STA.W nPlayerPosYCopy                                      ;81CE4A|8D0909  |000909;
     SEP #$20                                                   ;81CE4D|E220    |      ;
     STZ.W $0919                                                ;81CE4F|9C1909  |000919;
  
@@ -9566,7 +9782,7 @@ fPlayerEnergyHandler_81D061:
     SEP #$20                                                   ;81D061|E220    |      ; A: nArg
     REP #$10                                                   ;81D063|C210    |      ;
     STA.B $92                                                  ;81D065|8592    |000092;
-    STA.B $82                                                  ;81D067|8582    |000082;
+    STA.B n16TempVar3                                          ;81D067|8582    |000082;
     STZ.B $83                                                  ;81D069|6483    |000083;
     BMI .label1                                                ;81D06B|3002    |81D06F;
     BRA .label2                                                ;81D06D|8006    |81D075;
@@ -9595,7 +9811,7 @@ fPlayerEnergyHandler_81D061:
     LDA.W nPlayerEnergy                                        ;81D091|AD1809  |000918;
     REP #$20                                                   ;81D094|C220    |      ;
     CLC                                                        ;81D096|18      |      ;
-    ADC.B $82                                                  ;81D097|6582    |000082;
+    ADC.B n16TempVar3                                          ;81D097|6582    |000082;
     STA.B n16TempVar2                                          ;81D099|8580    |000080;
     LDA.B n16TempVar2                                          ;81D09B|A580    |000080;
     BEQ .label3                                                ;81D09D|F014    |81D0B3;
@@ -9718,7 +9934,7 @@ fUnknown_81D14E:
     ASL A                                                      ;81D153|0A      |      ;
     STA.B n16TempVar1                                          ;81D154|857E    |00007E;
     STX.B n16TempVar2                                          ;81D156|8680    |000080;
-    STY.B $82                                                  ;81D158|8482    |000082;
+    STY.B n16TempVar3                                          ;81D158|8482    |000082;
     LDA.B nPlayerPosX                                          ;81D15A|A5D6    |0000D6;
     STA.W nTileInFrontOfPlayerX                                ;81D15C|8D8509  |000985;
     LDA.B nPlayerPosY                                          ;81D15F|A5D8    |0000D8;
@@ -9729,7 +9945,7 @@ fUnknown_81D14E:
     LDA.B nPlayerPosY                                          ;81D16B|A5D8    |0000D8;
     CLC                                                        ;81D16D|18      |      ;
     ADC.B n16TempVar1                                          ;81D16E|657E    |00007E;
-    ADC.B $82                                                  ;81D170|6582    |000082;
+    ADC.B n16TempVar3                                          ;81D170|6582    |000082;
     STA.W nTileInFrontOfPlayerY                                ;81D172|8D8709  |000987;
     BRA .return                                                ;81D175|802C    |81D1A3;
  
@@ -9740,7 +9956,7 @@ fUnknown_81D14E:
     LDA.B nPlayerPosY                                          ;81D17C|A5D8    |0000D8;
     SEC                                                        ;81D17E|38      |      ;
     SBC.B n16TempVar1                                          ;81D17F|E57E    |00007E;
-    SBC.B $82                                                  ;81D181|E582    |000082;
+    SBC.B n16TempVar3                                          ;81D181|E582    |000082;
     STA.W nTileInFrontOfPlayerY                                ;81D183|8D8709  |000987;
     BRA .return                                                ;81D186|801B    |81D1A3;
  
@@ -9792,28 +10008,27 @@ fFindTileCoordsInFrontOfPLayer:
     RTL                                                        ;81D1C4|6B      |      ;
  
  
-fUnknown_81D1C5:
+fLove_ScaleToHearts:
     REP #$30                                                   ;81D1C5|C230    |      ; A: nArg1
     STA.B n16TempVar1                                          ;81D1C7|857E    |00007E;
-    LDY.W #$0000                                               ;81D1C9|A00000  |      ;
+    LDY.W #$0000                                               ;81D1C9|A00000  |      ; i = 0
  
 .loop:
-    TYA                                                        ;81D1CC|98      |      ;
+    TYA                                                        ;81D1CC|98      |      ; A = i
     ASL A                                                      ;81D1CD|0A      |      ;
     ASL A                                                      ;81D1CE|0A      |      ;
     INC A                                                      ;81D1CF|1A      |      ;
     INC A                                                      ;81D1D0|1A      |      ;
-    TAX                                                        ;81D1D1|AA      |      ;
-    LDA.L Table_81D1E8,X                                       ;81D1D2|BFE8D181|81D1E8; read second n16 until it equals to value in $7E
+    TAX                                                        ;81D1D1|AA      |      ; X = i * 4 + 2
+    LDA.L .loveData0,X                                         ;81D1D2|BFE8D181|81D1E8;
     CMP.B n16TempVar1                                          ;81D1D6|C57E    |00007E;
-    BCC .label1                                                ;81D1D8|9002    |81D1DC;
+    BCC +                                                      ;81D1D8|9002    |81D1DC;
     BRA .return                                                ;81D1DA|8008    |81D1E4;
  
  
-.label1:
-    REP #$30                                                   ;81D1DC|C230    |      ;
+  + REP #$30                                                   ;81D1DC|C230    |      ;
     INY                                                        ;81D1DE|C8      |      ;
-    CPY.W #$000A                                               ;81D1DF|C00A00  |      ; break if counter is equal to 0x0A
+    CPY.W #$000A                                               ;81D1DF|C00A00  |      ;
     BNE .loop                                                  ;81D1E2|D0E8    |81D1CC;
  
 .return:
@@ -9822,10 +10037,34 @@ fUnknown_81D1C5:
     RTS                                                        ;81D1E7|60      |      ;
  
  
-Table_81D1E8:
-    dw $0000,$0031,$0032,$0077,$0078,$00C7                     ;81D1E8|        |      ; 0x0A * [16b, 16b]
-    dw $00C8,$00F9,$00FA,$012B,$012C,$018F                     ;81D1F4|        |      ;
-    dw $0190,$01F3,$01F4,$0257,$0258,$031F                     ;81D200|        |      ;
+.loveData0:
+    dw $0000,$0031                                             ;81D1E8|        |      ; 0x0A * [n16, n16]
+ 
+.loveData1:
+    dw $0032,$0077                                             ;81D1EC|        |      ;
+ 
+.loveData2:
+    dw $0078,$00C7                                             ;81D1F0|        |      ;
+ 
+.loveData3:
+    dw $00C8,$00F9                                             ;81D1F4|        |      ;
+ 
+.loveData4:
+    dw $00FA,$012B                                             ;81D1F8|        |      ;
+ 
+.loveData5:
+    dw $012C,$018F                                             ;81D1FC|        |      ;
+ 
+.loveData6:
+    dw $0190,$01F3                                             ;81D200|        |      ;
+ 
+.loveData7:
+    dw $01F4,$0257                                             ;81D204|        |      ;
+ 
+.loveData8:
+    dw $0258,$031F                                             ;81D208|        |      ;
+ 
+.loveData9:
     dw $0320,$03E7                                             ;81D20C|        |      ;
  
 nSpriteIndexTable:
@@ -10391,7 +10630,7 @@ pPlayerInteractionTable:
     dw subPlayerInteraction81D593_0x0D                         ;81D5AD|        |81D714;
     dw subPlayerInteraction81D593_0x0E                         ;81D5AF|        |81D715;
     dw subPlayerInteraction81D593_0x0F                         ;81D5B1|        |81D716;
-    dw subPlayerInteraction81D593_0x10                         ;81D5B3|        |81D7C5;
+    dw subPlayerInteraction81D593_PlayerDiary                  ;81D5B3|        |81D7C5;
     dw subPlayerInteraction81D593_0x11                         ;81D5B5|        |81D979;
     dw subPlayerInteraction81D593_0x12                         ;81D5B7|        |81D9CC;
     dw subPlayerInteraction81D593_0x13                         ;81D5B9|        |81DA82;
@@ -10413,23 +10652,23 @@ pPlayerInteractionTable:
     dw subPlayerInteraction81D593_0x23                         ;81D5D9|        |81DC5B;
     dw subPlayerInteraction81D593_0x24                         ;81D5DB|        |81DC5C;
     dw subPlayerInteraction81D593_0x25                         ;81D5DD|        |81DC5D;
-    dw subPlayerInteraction81D593_0x26                         ;81D5DF|        |81DC5E;
+    dw subPlayerInteraction81D593_MariasDiary                  ;81D5DF|        |81DC5E;
     dw subPlayerInteraction81D593_0x27                         ;81D5E1|        |81DCCE;
     dw subPlayerInteraction81D593_0x28                         ;81D5E3|        |81DCF3;
     dw subPlayerInteraction81D593_0x29                         ;81D5E5|        |81DD18;
     dw subPlayerInteraction81D593_0x2A                         ;81D5E7|        |81DD3D;
     dw subPlayerInteraction81D593_0x2B                         ;81D5E9|        |81DD62;
     dw subPlayerInteraction81D593_0x2C                         ;81D5EB|        |81DD87;
-    dw subPlayerInteraction81D593_0x2D                         ;81D5ED|        |81DDAC;
-    dw subPlayerInteraction81D593_0x2E                         ;81D5EF|        |81DE1C;
+    dw subPlayerInteraction81D593_NinasDiary                   ;81D5ED|        |81DDAC;
+    dw subPlayerInteraction81D593_AnimalNPC                    ;81D5EF|        |81DE1C;
     dw subPlayerInteraction81D593_0x2F                         ;81D5F1|        |81E245;
     dw subPlayerInteraction81D593_0x30                         ;81D5F3|        |81E26A;
     dw subPlayerInteraction81D593_0x31                         ;81D5F5|        |81E28F;
     dw subPlayerInteraction81D593_0x32                         ;81D5F7|        |81E2B4;
-    dw subPlayerInteraction81D593_0x33                         ;81D5F9|        |81E2D9;
+    dw subPlayerInteraction81D593_EllensDiary                  ;81D5F9|        |81E2D9;
     dw subPlayerInteraction81D593_0x34                         ;81D5FB|        |81E349;
     dw subPlayerInteraction81D593_0x35                         ;81D5FD|        |81E36E;
-    dw subPlayerInteraction81D593_0x36                         ;81D5FF|        |81E394;
+    dw subPlayerInteraction81D593_AnnsDiary                    ;81D5FF|        |81E394;
     dw subPlayerInteraction81D593_0x37                         ;81D601|        |81E404;
     dw subPlayerInteraction81D593_0x38                         ;81D603|        |81E429;
     dw subPlayerInteraction81D593_0x39                         ;81D605|        |81E44E;
@@ -10438,7 +10677,7 @@ pPlayerInteractionTable:
     dw subPlayerInteraction81D593_0x3C                         ;81D60B|        |81E4BD;
     dw subPlayerInteraction81D593_0x3D                         ;81D60D|        |81E4E2;
     dw subPlayerInteraction81D593_0x3E                         ;81D60F|        |81E507;
-    dw subPlayerInteraction81D593_0x3F                         ;81D611|        |81E52C;
+    dw subPlayerInteraction81D593_EvesDiary                    ;81D611|        |81E52C;
     dw subPlayerInteraction81D593_0x40                         ;81D613|        |81E59C;
     dw subPlayerInteraction81D593_0x41                         ;81D615|        |81E6C3;
     dw subPlayerInteraction81D593_0x42                         ;81D617|        |81E6EA;
@@ -10459,8 +10698,8 @@ pPlayerInteractionTable:
     dw subPlayerInteraction81D593_0x51                         ;81D635|        |81F5B0;
     dw subPlayerInteraction81D593_0x52                         ;81D637|        |81F6D7;
     dw subPlayerInteraction81D593_0x53                         ;81D639|        |81F7FF;
-    dw subPlayerInteraction81D593_0x54                         ;81D63B|        |81F86A;
-    dw subPlayerInteraction81D593_0x55                         ;81D63D|        |81F942;
+    dw subPlayerInteraction81D593_FloristNotebook              ;81D63B|        |81F86A;
+    dw subPlayerInteraction81D593_AnimalNotebook               ;81D63D|        |81F942;
     dw subPlayerInteraction81D593_0x56                         ;81D63F|        |81FA69;
     dw subPlayerInteraction81D593_0x57                         ;81D641|        |81FA84;
  
@@ -10471,7 +10710,7 @@ subPlayerInteraction81D593_0x00:
 subPlayerInteraction81D593_0x01:
     REP #$20                                                   ;81D644|C220    |      ;
     LDA.W #$FFFE                                               ;81D646|A9FEFF  |      ;
-    JSL.L fEngineAddWood                                       ;81D649|2224B283|83B224;
+    JSL.L fGameEngine_AddWood                                  ;81D649|2224B283|83B224;
     REP #$20                                                   ;81D64D|C220    |      ;
     CMP.W #$0001                                               ;81D64F|C90100  |      ;
     BEQ +                                                      ;81D652|F00E    |81D662;
@@ -10540,7 +10779,7 @@ subPlayerInteraction81D593_0x03:
     STA.B $D2                                                  ;81D6D5|85D2    |0000D2;
     SEP #$20                                                   ;81D6D7|E220    |      ;
     STZ.W $0119                                                ;81D6D9|9C1901  |000119;
-    JSL.L fToolSoundUnknown_828FF3                             ;81D6DC|22F38F82|828FF3;
+    JSL.L fToolUsed_SoundUnknown828FF3                         ;81D6DC|22F38F82|828FF3;
  
 .return:
     RTS                                                        ;81D6E0|60      |      ;
@@ -10695,7 +10934,7 @@ subPlayerInteraction81D593_0x0F:
     RTS                                                        ;81D7C4|60      |      ;
  
  
-subPlayerInteraction81D593_0x10:
+subPlayerInteraction81D593_PlayerDiary:
     REP #$30                                                   ;81D7C5|C230    |      ;
     LDA.L $7F1F6E                                              ;81D7C7|AF6E1F7F|7F1F6E;
     AND.W #$0010                                               ;81D7CB|291000  |      ;
@@ -11205,7 +11444,7 @@ subPlayerInteraction81D593_0x14:
 subPlayerInteraction81D593_0x15:
     REP #$20                                                   ;81DBA1|C220    |      ;
     LDA.W #$FFFF                                               ;81DBA3|A9FFFF  |      ;
-    JSL.L fEngineAddFeed                                       ;81DBA6|2253B283|83B253;
+    JSL.L fGameEngine_AddFeed                                  ;81DBA6|2253B283|83B253;
     REP #$20                                                   ;81DBAA|C220    |      ;
     CMP.W #$0001                                               ;81DBAC|C90100  |      ;
     BEQ +                                                      ;81DBAF|F00E    |81DBBF;
@@ -11350,7 +11589,7 @@ subPlayerInteraction81D593_0x25:
     RTS                                                        ;81DC5D|60      |      ;
  
  
-subPlayerInteraction81D593_0x26:
+subPlayerInteraction81D593_MariasDiary:
     SEP #$20                                                   ;81DC5E|E220    |      ;
     REP #$10                                                   ;81DC60|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81DC62|AD6F09  |00096F;
@@ -11383,10 +11622,10 @@ subPlayerInteraction81D593_0x26:
  
   + REP #$20                                                   ;81DC98|C220    |      ;
     LDA.L nLove_Maria                                          ;81DC9A|AF1F1F7F|7F1F1F;
-    JSR.W fUnknown_81D1C5                                      ;81DC9E|20C5D1  |81D1C5;
+    JSR.W fLove_ScaleToHearts                                  ;81DC9E|20C5D1  |81D1C5;
     REP #$30                                                   ;81DCA1|C230    |      ;
     CLC                                                        ;81DCA3|18      |      ;
-    ADC.W #$03A6                                               ;81DCA4|69A603  |      ;
+    ADC.W #$03A6                                               ;81DCA4|69A603  |      ; 0x03A6 + nLoveScale = nDiaryLoveDialog
     TAX                                                        ;81DCA7|AA      |      ;
     SEP #$20                                                   ;81DCA8|E220    |      ;
     LDA.B #$02                                                 ;81DCAA|A902    |      ;
@@ -11395,8 +11634,8 @@ subPlayerInteraction81D593_0x26:
     STA.W $0191                                                ;81DCB1|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DCB4|225F9383|83935F;
     REP #$20                                                   ;81DCB8|C220    |      ;
-    LDA.W #$FFFF                                               ;81DCBA|A9FFFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81DCBD|2282B283|83B282;
+    LDA.W #$FFFF                                               ;81DCBA|A9FFFF  |      ; -1
+    JSL.L fGameEngine_AddHappiness                             ;81DCBD|2282B283|83B282; Reading girls diary decrease happiness
  
 .exit:
     REP #$30                                                   ;81DCC1|C230    |      ;
@@ -11529,7 +11768,7 @@ subPlayerInteraction81D593_0x2C:
     RTS                                                        ;81DDAB|60      |      ;
  
  
-subPlayerInteraction81D593_0x2D:
+subPlayerInteraction81D593_NinasDiary:
     SEP #$20                                                   ;81DDAC|E220    |      ;
     REP #$10                                                   ;81DDAE|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81DDB0|AD6F09  |00096F;
@@ -11562,7 +11801,7 @@ subPlayerInteraction81D593_0x2D:
  
   + REP #$20                                                   ;81DDE6|C220    |      ;
     LDA.L nLove_Nina                                           ;81DDE8|AF231F7F|7F1F23;
-    JSR.W fUnknown_81D1C5                                      ;81DDEC|20C5D1  |81D1C5;
+    JSR.W fLove_ScaleToHearts                                  ;81DDEC|20C5D1  |81D1C5;
     REP #$30                                                   ;81DDEF|C230    |      ;
     CLC                                                        ;81DDF1|18      |      ;
     ADC.W #$03A6                                               ;81DDF2|69A603  |      ;
@@ -11575,7 +11814,7 @@ subPlayerInteraction81D593_0x2D:
     JSL.L fDialog_DialogHandler                                ;81DE02|225F9383|83935F;
     REP #$20                                                   ;81DE06|C220    |      ;
     LDA.W #$FFFF                                               ;81DE08|A9FFFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81DE0B|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81DE0B|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81DE0F|C230    |      ;
@@ -11588,7 +11827,7 @@ subPlayerInteraction81D593_0x2D:
     RTS                                                        ;81DE1B|60      |      ;
  
  
-subPlayerInteraction81D593_0x2E:
+subPlayerInteraction81D593_AnimalNPC:
     SEP #$20                                                   ;81DE1C|E220    |      ;
     REP #$10                                                   ;81DE1E|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81DE20|AD6F09  |00096F;
@@ -11615,7 +11854,7 @@ subPlayerInteraction81D593_0x2E:
   + REP #$20                                                   ;81DE43|C220    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;81DE45|AD9601  |000196;
     AND.W #$000A                                               ;81DE48|290A00  |      ;
-    BNE +                                                      ;81DE4B|D01B    |81DE68;
+    BNE .cantSellAnimal                                        ;81DE4B|D01B    |81DE68;
     SEP #$20                                                   ;81DE4D|E220    |      ;
     LDA.B #$02                                                 ;81DE4F|A902    |      ;
     STA.W $019A                                                ;81DE51|8D9A01  |00019A;
@@ -11628,7 +11867,8 @@ subPlayerInteraction81D593_0x2E:
     JMP.W .return                                              ;81DE65|4C21E2  |81E221;
  
  
-  + SEP #$20                                                   ;81DE68|E220    |      ;
+.cantSellAnimal:
+    SEP #$20                                                   ;81DE68|E220    |      ;
     LDA.B #$02                                                 ;81DE6A|A902    |      ;
     STA.W $019A                                                ;81DE6C|8D9A01  |00019A;
     LDX.W #$03D0                                               ;81DE6F|A2D003  |      ;
@@ -11681,11 +11921,12 @@ subPlayerInteraction81D593_0x2E:
     SEP #$20                                                   ;81DEC7|E220    |      ;
     LDA.L nOwnedCows                                           ;81DEC9|AF0A1F7F|7F1F0A;
     CMP.B #$0C                                                 ;81DECD|C90C    |      ;
-    BNE +                                                      ;81DECF|D003    |81DED4;
+    BNE .askBuyCow                                             ;81DECF|D003    |81DED4;
     JMP.W .haveMaxCows                                         ;81DED1|4C2EE0  |81E02E;
  
  
-  + SEP #$20                                                   ;81DED4|E220    |      ;
+.askBuyCow:
+    SEP #$20                                                   ;81DED4|E220    |      ;
     LDA.B #$02                                                 ;81DED6|A902    |      ;
     STA.W $019A                                                ;81DED8|8D9A01  |00019A;
     LDX.W #$0307                                               ;81DEDB|A20703  |      ;
@@ -11871,7 +12112,7 @@ subPlayerInteraction81D593_0x2E:
     SEP #$20                                                   ;81E057|E220    |      ;
     LDA.B #$FF                                                 ;81E059|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81E05B|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81E05D|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81E05D|22C9B183|83B1C9;
     REP #$20                                                   ;81E061|C220    |      ;
     CMP.W #$0000                                               ;81E063|C90000  |      ;
     BEQ +                                                      ;81E066|F022    |81E08A;
@@ -11912,7 +12153,7 @@ subPlayerInteraction81D593_0x2E:
     STA.L nOwnedCows                                           ;81E0BD|8F0A1F7F|7F1F0A;
     REP #$20                                                   ;81E0C1|C220    |      ;
     LDA.W #$0014                                               ;81E0C3|A91400  |      ;
-    JSL.L fEngineAddHappiness                                  ;81E0C6|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81E0C6|2282B283|83B282;
     JMP.W .return                                              ;81E0CA|4C21E2  |81E221;
  
  
@@ -12014,7 +12255,7 @@ subPlayerInteraction81D593_0x2E:
     SEP #$20                                                   ;81E183|E220    |      ;
     LDA.B #$FF                                                 ;81E185|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81E187|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81E189|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81E189|22C9B183|83B1C9;
     REP #$20                                                   ;81E18D|C220    |      ;
     CMP.W #$0000                                               ;81E18F|C90000  |      ;
     BEQ +                                                      ;81E192|F021    |81E1B5;
@@ -12047,7 +12288,7 @@ subPlayerInteraction81D593_0x2E:
     STA.B $D2                                                  ;81E1D2|85D2    |0000D2;
     REP #$20                                                   ;81E1D4|C220    |      ;
     LDA.W #$0002                                               ;81E1D6|A90200  |      ;
-    JSL.L fEngineAddChicken                                    ;81E1D9|2207C883|83C807;
+    JSL.L fGameEngine_AddChicken                               ;81E1D9|2207C883|83C807;
     REP #$20                                                   ;81E1DD|C220    |      ;
     LDA.L $7F1F5A                                              ;81E1DF|AF5A1F7F|7F1F5A;
     ORA.W #$0020                                               ;81E1E3|092000  |      ;
@@ -12058,7 +12299,7 @@ subPlayerInteraction81D593_0x2E:
     STA.L nOwnedChickens                                       ;81E1F1|8F0B1F7F|7F1F0B;
     REP #$20                                                   ;81E1F5|C220    |      ;
     LDA.W #$000A                                               ;81E1F7|A90A00  |      ;
-    JSL.L fEngineAddHappiness                                  ;81E1FA|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81E1FA|2282B283|83B282;
     BRA .return                                                ;81E1FE|8021    |81E221;
  
  
@@ -12181,7 +12422,7 @@ subPlayerInteraction81D593_0x32:
     RTS                                                        ;81E2D8|60      |      ;
  
  
-subPlayerInteraction81D593_0x33:
+subPlayerInteraction81D593_EllensDiary:
     SEP #$20                                                   ;81E2D9|E220    |      ;
     REP #$10                                                   ;81E2DB|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81E2DD|AD6F09  |00096F;
@@ -12213,7 +12454,7 @@ subPlayerInteraction81D593_0x33:
  
   + REP #$20                                                   ;81E313|C220    |      ;
     LDA.L nLove_Ellen                                          ;81E315|AF251F7F|7F1F25;
-    JSR.W fUnknown_81D1C5                                      ;81E319|20C5D1  |81D1C5;
+    JSR.W fLove_ScaleToHearts                                  ;81E319|20C5D1  |81D1C5;
     REP #$30                                                   ;81E31C|C230    |      ;
     CLC                                                        ;81E31E|18      |      ;
     ADC.W #$03A6                                               ;81E31F|69A603  |      ;
@@ -12226,7 +12467,7 @@ subPlayerInteraction81D593_0x33:
     JSL.L fDialog_DialogHandler                                ;81E32F|225F9383|83935F;
     REP #$20                                                   ;81E333|C220    |      ;
     LDA.W #$FFFF                                               ;81E335|A9FFFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81E338|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81E338|2282B283|83B282;
  
 .return:
     REP #$30                                                   ;81E33C|C230    |      ;
@@ -12268,7 +12509,7 @@ subPlayerInteraction81D593_0x35:
     JSL.L fAudioUnknown_8382FE                                 ;81E37A|22FE8283|8382FE;
     SEP #$20                                                   ;81E37E|E220    |      ;
     STZ.W $0119                                                ;81E380|9C1901  |000119;
-    JSL.L fToolSoundUnknown_828FF3                             ;81E383|22F38F82|828FF3;
+    JSL.L fToolUsed_SoundUnknown828FF3                         ;81E383|22F38F82|828FF3;
     REP #$30                                                   ;81E387|C230    |      ;
     LDA.W #$0040                                               ;81E389|A94000  |      ;
     EOR.W #$FFFF                                               ;81E38C|49FFFF  |      ;
@@ -12277,7 +12518,7 @@ subPlayerInteraction81D593_0x35:
     RTS                                                        ;81E393|60      |      ;
  
  
-subPlayerInteraction81D593_0x36:
+subPlayerInteraction81D593_AnnsDiary:
     SEP #$20                                                   ;81E394|E220    |      ;
     REP #$10                                                   ;81E396|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81E398|AD6F09  |00096F;
@@ -12309,7 +12550,7 @@ subPlayerInteraction81D593_0x36:
  
   + REP #$20                                                   ;81E3CE|C220    |      ;
     LDA.L nLove_Ann                                            ;81E3D0|AF211F7F|7F1F21;
-    JSR.W fUnknown_81D1C5                                      ;81E3D4|20C5D1  |81D1C5;
+    JSR.W fLove_ScaleToHearts                                  ;81E3D4|20C5D1  |81D1C5;
     REP #$30                                                   ;81E3D7|C230    |      ;
     CLC                                                        ;81E3D9|18      |      ;
     ADC.W #$03A6                                               ;81E3DA|69A603  |      ;
@@ -12322,7 +12563,7 @@ subPlayerInteraction81D593_0x36:
     JSL.L fDialog_DialogHandler                                ;81E3EA|225F9383|83935F;
     REP #$20                                                   ;81E3EE|C220    |      ;
     LDA.W #$FFFF                                               ;81E3F0|A9FFFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81E3F3|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81E3F3|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81E3F7|C230    |      ;
@@ -12495,7 +12736,7 @@ subPlayerInteraction81D593_0x3E:
     RTS                                                        ;81E52B|60      |      ;
  
  
-subPlayerInteraction81D593_0x3F:
+subPlayerInteraction81D593_EvesDiary:
     SEP #$20                                                   ;81E52C|E220    |      ;
     REP #$10                                                   ;81E52E|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81E530|AD6F09  |00096F;
@@ -12527,7 +12768,7 @@ subPlayerInteraction81D593_0x3F:
  
   + REP #$20                                                   ;81E566|C220    |      ;
     LDA.L nLove_Eve                                            ;81E568|AF271F7F|7F1F27;
-    JSR.W fUnknown_81D1C5                                      ;81E56C|20C5D1  |81D1C5;
+    JSR.W fLove_ScaleToHearts                                  ;81E56C|20C5D1  |81D1C5;
     REP #$30                                                   ;81E56F|C230    |      ;
     CLC                                                        ;81E571|18      |      ;
     ADC.W #$03A6                                               ;81E572|69A603  |      ;
@@ -12540,7 +12781,7 @@ subPlayerInteraction81D593_0x3F:
     JSL.L fDialog_DialogHandler                                ;81E582|225F9383|83935F;
     REP #$20                                                   ;81E586|C220    |      ;
     LDA.W #$FFFF                                               ;81E588|A9FFFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81E58B|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81E58B|2282B283|83B282;
  
 .exit:
     REP #$30                                                   ;81E58F|C230    |      ;
@@ -12882,7 +13123,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81E7FA|38      |      ;
     SBC.B #$18                                                 ;81E7FB|E918    |      ;
     REP #$20                                                   ;81E7FD|C220    |      ;
-    JSL.L fEngineGetCowData                                    ;81E7FF|22A7C983|83C9A7;
+    JSL.L fGameEngine_GetCowData                               ;81E7FF|22A7C983|83C9A7;
     SEP #$20                                                   ;81E803|E220    |      ;
     LDY.W #$0000                                               ;81E805|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;81E808|B772    |000072;
@@ -12948,7 +13189,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81E88F|38      |      ;
     SBC.B #$18                                                 ;81E890|E918    |      ;
     REP #$20                                                   ;81E892|C220    |      ;
-    JSL.L fEngineGetCowData                                    ;81E894|22A7C983|83C9A7;
+    JSL.L fGameEngine_GetCowData                               ;81E894|22A7C983|83C9A7;
     SEP #$20                                                   ;81E898|E220    |      ;
     LDY.W #$0000                                               ;81E89A|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;81E89D|B772    |000072;
@@ -13058,7 +13299,7 @@ subPlayerInteraction81D593_0x43:
     SEP #$20                                                   ;81E971|E220    |      ;
     LDA.L nGameUnk7F1F15+2                                     ;81E973|AF171F7F|7F1F17;
     STA.B ptrUnknown0x72+2                                     ;81E977|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81E979|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81E979|22C9B183|83B1C9;
     REP #$20                                                   ;81E97D|C220    |      ;
     LDA.W #$0007                                               ;81E97F|A90700  |      ;
     JSL.L fSubUnk1Unknown_848020                               ;81E982|22208084|848020;
@@ -13081,7 +13322,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81E9AF|38      |      ;
     SBC.B #$18                                                 ;81E9B0|E918    |      ;
     REP #$20                                                   ;81E9B2|C220    |      ;
-    JSL.L fEngineGetCowData                                    ;81E9B4|22A7C983|83C9A7;
+    JSL.L fGameEngine_GetCowData                               ;81E9B4|22A7C983|83C9A7;
     SEP #$20                                                   ;81E9B8|E220    |      ;
     LDY.W #$0000                                               ;81E9BA|A00000  |      ;
     LDA.B #$00                                                 ;81E9BD|A900    |      ;
@@ -13096,7 +13337,7 @@ subPlayerInteraction81D593_0x43:
     STZ.W nPlayerInteractionArg2                               ;81E9D3|9C7009  |000970;
     REP #$20                                                   ;81E9D6|C220    |      ;
     LDA.W #$FFCE                                               ;81E9D8|A9CEFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81E9DB|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81E9DB|2282B283|83B282;
     JMP.W .return                                              ;81E9DF|4CD4EB  |81EBD4;
  
  
@@ -13275,7 +13516,7 @@ subPlayerInteraction81D593_0x43:
     SEC                                                        ;81EB45|38      |      ;
     SBC.B #$18                                                 ;81EB46|E918    |      ;
     REP #$20                                                   ;81EB48|C220    |      ;
-    JSL.L fEngineGetCowData                                    ;81EB4A|22A7C983|83C9A7;
+    JSL.L fGameEngine_GetCowData                               ;81EB4A|22A7C983|83C9A7;
     SEP #$20                                                   ;81EB4E|E220    |      ;
     LDY.W #$0000                                               ;81EB50|A00000  |      ;
     LDA.B #$00                                                 ;81EB53|A900    |      ;
@@ -13293,7 +13534,7 @@ subPlayerInteraction81D593_0x43:
     STA.L sShedItems+2                                         ;81EB72|8F021F7F|7F1F02;
     REP #$20                                                   ;81EB76|C220    |      ;
     LDA.W #$FFCE                                               ;81EB78|A9CEFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81EB7B|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81EB7B|2282B283|83B282;
     REP #$20                                                   ;81EB7F|C220    |      ;
     LDA.L $7F1F60                                              ;81EB81|AF601F7F|7F1F60;
     ORA.W #$2000                                               ;81EB85|090020  |      ;
@@ -13527,7 +13768,7 @@ subPlayerInteraction81D593_0x44:
     SEP #$20                                                   ;81ED34|E220    |      ;
     LDA.L nGameUnk7F1F15+2                                     ;81ED36|AF171F7F|7F1F17;
     STA.B ptrUnknown0x72+2                                     ;81ED3A|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81ED3C|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81ED3C|22C9B183|83B1C9;
     REP #$20                                                   ;81ED40|C220    |      ;
     LDA.W #$0007                                               ;81ED42|A90700  |      ;
     JSL.L fSubUnk1Unknown_848020                               ;81ED45|22208084|848020;
@@ -13550,7 +13791,7 @@ subPlayerInteraction81D593_0x44:
     SEC                                                        ;81ED72|38      |      ;
     SBC.B #$24                                                 ;81ED73|E924    |      ;
     REP #$20                                                   ;81ED75|C220    |      ;
-    JSL.L fEngineGetChickenData                                ;81ED77|2295C983|83C995;
+    JSL.L fGameEngine_GetChickenData                           ;81ED77|2295C983|83C995;
     SEP #$20                                                   ;81ED7B|E220    |      ;
     LDY.W #$0000                                               ;81ED7D|A00000  |      ;
     LDA.B #$00                                                 ;81ED80|A900    |      ;
@@ -13565,7 +13806,7 @@ subPlayerInteraction81D593_0x44:
     STZ.W nPlayerInteractionArg2                               ;81ED96|9C7009  |000970;
     REP #$20                                                   ;81ED99|C220    |      ;
     LDA.W #$FFEC                                               ;81ED9B|A9ECFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81ED9E|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81ED9E|2282B283|83B282;
     JMP.W .return                                              ;81EDA2|4CACEF  |81EFAC;
  
  
@@ -13744,7 +13985,7 @@ subPlayerInteraction81D593_0x44:
     SEC                                                        ;81EF08|38      |      ;
     SBC.B #$24                                                 ;81EF09|E924    |      ;
     REP #$20                                                   ;81EF0B|C220    |      ;
-    JSL.L fEngineGetChickenData                                ;81EF0D|2295C983|83C995;
+    JSL.L fGameEngine_GetChickenData                           ;81EF0D|2295C983|83C995;
     SEP #$20                                                   ;81EF11|E220    |      ;
     LDY.W #$0000                                               ;81EF13|A00000  |      ;
     LDA.B #$00                                                 ;81EF16|A900    |      ;
@@ -13770,7 +14011,7 @@ subPlayerInteraction81D593_0x44:
     JSL.L fSubUnk1Unknown_8480F8                               ;81EF4A|22F88084|8480F8;
     REP #$30                                                   ;81EF4E|C230    |      ;
     LDA.W #$FFEC                                               ;81EF50|A9ECFF  |      ;
-    JSL.L fEngineAddHappiness                                  ;81EF53|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81EF53|2282B283|83B282;
     REP #$20                                                   ;81EF57|C220    |      ;
     LDA.L $7F1F60                                              ;81EF59|AF601F7F|7F1F60;
     ORA.W #$1000                                               ;81EF5D|090010  |      ;
@@ -14166,7 +14407,7 @@ subPlayerInteraction81D593_0x47:
     SEP #$20                                                   ;81F239|E220    |      ;
     LDA.B #$FF                                                 ;81F23B|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F23D|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81F23F|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81F23F|22C9B183|83B1C9;
     REP #$20                                                   ;81F243|C220    |      ;
     CMP.W #$0000                                               ;81F245|C90000  |      ;
     BNE .label3                                                ;81F248|D057    |81F2A1;
@@ -14180,7 +14421,7 @@ subPlayerInteraction81D593_0x47:
     SEP #$20                                                   ;81F253|E220    |      ;
     LDA.B #$FF                                                 ;81F255|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F257|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81F259|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81F259|22C9B183|83B1C9;
     REP #$20                                                   ;81F25D|C220    |      ;
     CMP.W #$0000                                               ;81F25F|C90000  |      ;
     BNE .label3                                                ;81F262|D03D    |81F2A1;
@@ -14190,7 +14431,7 @@ subPlayerInteraction81D593_0x47:
     LDA.L nReqWoodForExpansion                                 ;81F266|AF0E1F7F|7F1F0E;
     EOR.W #$FFFF                                               ;81F26A|49FFFF  |      ;
     INC A                                                      ;81F26D|1A      |      ;
-    JSL.L fEngineAddWood                                       ;81F26E|2224B283|83B224;
+    JSL.L fGameEngine_AddWood                                  ;81F26E|2224B283|83B224;
     SEP #$20                                                   ;81F272|E220    |      ;
     LDA.B #$02                                                 ;81F274|A902    |      ;
     STA.W $019A                                                ;81F276|8D9A01  |00019A;
@@ -14273,7 +14514,7 @@ subPlayerInteraction81D593_0x48:
     BNE .label1                                                ;81F30E|D010    |81F320;
     REP #$30                                                   ;81F310|C230    |      ;
     LDA.W #$0032                                               ;81F312|A93200  |      ;
-    JSL.L fEngineAddHappiness                                  ;81F315|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81F315|2282B283|83B282;
     REP #$30                                                   ;81F319|C230    |      ;
     LDX.W #$013D                                               ;81F31B|A23D01  |      ;
     BRA .label2                                                ;81F31E|800E    |81F32E;
@@ -14282,7 +14523,7 @@ subPlayerInteraction81D593_0x48:
 .label1:
     REP #$30                                                   ;81F320|C230    |      ;
     LDA.W #$0064                                               ;81F322|A96400  |      ;
-    JSL.L fEngineAddHappiness                                  ;81F325|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81F325|2282B283|83B282;
     REP #$30                                                   ;81F329|C230    |      ;
     LDX.W #$0140                                               ;81F32B|A24001  |      ;
  
@@ -14303,11 +14544,12 @@ subPlayerInteraction81D593_0x48:
     SEP #$20                                                   ;81F348|E220    |      ;
     LDA.W $019A                                                ;81F34A|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F34D|C902    |      ;
-    BNE +                                                      ;81F34F|D003    |81F354;
+    BNE .obtainClock                                           ;81F34F|D003    |81F354;
     JMP.W .return                                              ;81F351|4C0DF4  |81F40D;
  
  
-  + REP #$20                                                   ;81F354|C220    |      ;
+.obtainClock:
+    REP #$20                                                   ;81F354|C220    |      ;
     LDA.L nHouseSize                                           ;81F356|AF641F7F|7F1F64;
     AND.W #$0080                                               ;81F35A|298000  |      ;
     BNE +                                                      ;81F35D|D034    |81F393;
@@ -14651,7 +14893,7 @@ subPlayerInteraction81D593_0x51:
     SEP #$20                                                   ;81F605|E220    |      ;
     LDA.B #$FF                                                 ;81F607|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F609|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81F60B|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81F60B|22C9B183|83B1C9;
     REP #$20                                                   ;81F60F|C220    |      ;
     CMP.W #$0000                                               ;81F611|C90000  |      ;
     BNE .label2                                                ;81F614|D03A    |81F650;
@@ -14711,7 +14953,7 @@ subPlayerInteraction81D593_0x51:
     JSR.W fUnknown_81CFE6                                      ;81F686|20E6CF  |81CFE6;
     REP #$30                                                   ;81F689|C230    |      ;
     LDA.W #$0001                                               ;81F68B|A90100  |      ;
-    JSL.L fEngineAddHappiness                                  ;81F68E|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81F68E|2282B283|83B282;
     SEP #$20                                                   ;81F692|E220    |      ;
     STZ.W nPlayerInteractionArg2                               ;81F694|9C7009  |000970;
     LDA.B #$04                                                 ;81F697|A904    |      ;
@@ -14803,7 +15045,7 @@ subPlayerInteraction81D593_0x52:
     SEP #$20                                                   ;81F72C|E220    |      ;
     LDA.B #$FF                                                 ;81F72E|A9FF    |      ;
     STA.B ptrUnknown0x72+2                                     ;81F730|8574    |000074;
-    JSL.L fEngineAddProfit                                     ;81F732|22C9B183|83B1C9;
+    JSL.L fGameEngine_AddProfit                                ;81F732|22C9B183|83B1C9;
     REP #$20                                                   ;81F736|C220    |      ;
     CMP.W #$0000                                               ;81F738|C90000  |      ;
     BNE .label2                                                ;81F73B|D03A    |81F777;
@@ -14863,7 +15105,7 @@ subPlayerInteraction81D593_0x52:
     JSR.W fUnknown_81CFE6                                      ;81F7AE|20E6CF  |81CFE6;
     REP #$30                                                   ;81F7B1|C230    |      ;
     LDA.W #$0003                                               ;81F7B3|A90300  |      ;
-    JSL.L fEngineAddHappiness                                  ;81F7B6|2282B283|83B282;
+    JSL.L fGameEngine_AddHappiness                             ;81F7B6|2282B283|83B282;
     SEP #$20                                                   ;81F7BA|E220    |      ;
     STZ.W nPlayerInteractionArg2                               ;81F7BC|9C7009  |000970;
     LDA.B #$04                                                 ;81F7BF|A904    |      ;
@@ -14943,7 +15185,7 @@ subPlayerInteraction81D593_0x53:
     ASL A                                                      ;81F841|0A      |      ;
     ASL A                                                      ;81F842|0A      |      ;
     TAX                                                        ;81F843|AA      |      ;
-    LDA.L aEngineAddChickenData,X                              ;81F844|BF10CA83|83CA10;
+    LDA.L aGameEngine_AddChickenData,X                         ;81F844|BF10CA83|83CA10;
     SEC                                                        ;81F848|38      |      ;
     SBC.W #$0008                                               ;81F849|E90800  |      ;
     CMP.B n16TempVar1                                          ;81F84C|C57E    |00007E;
@@ -14969,7 +15211,7 @@ subPlayerInteraction81D593_0x53:
     RTS                                                        ;81F869|60      |      ;
  
  
-subPlayerInteraction81D593_0x54:
+subPlayerInteraction81D593_FloristNotebook:
     SEP #$20                                                   ;81F86A|E220    |      ;
     REP #$10                                                   ;81F86C|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F86E|AD6F09  |00096F;
@@ -15079,7 +15321,7 @@ subPlayerInteraction81D593_0x54:
     RTS                                                        ;81F941|60      |      ;
  
  
-subPlayerInteraction81D593_0x55:
+subPlayerInteraction81D593_AnimalNotebook:
     SEP #$20                                                   ;81F942|E220    |      ;
     REP #$10                                                   ;81F944|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F946|AD6F09  |00096F;
