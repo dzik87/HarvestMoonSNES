@@ -295,18 +295,18 @@ fSubUnk1Unknown_84816F:
  
 .return:
     REP #$20                                                   ;84821A|C220    |      ;
-    LDA.L $7F1F5A                                              ;84821C|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84821C|AF5A1F7F|7F1F5A;
     AND.W #$FE2F                                               ;848220|292FFE  |      ;
-    STA.L $7F1F5A                                              ;848223|8F5A1F7F|7F1F5A;
-    LDA.L $7F1F5C                                              ;848227|AF5C1F7F|7F1F5C;
+    STA.L nDailyFlags                                          ;848223|8F5A1F7F|7F1F5A;
+    LDA.L nDailyFlags+2                                        ;848227|AF5C1F7F|7F1F5C;
     AND.W #$FBFF                                               ;84822B|29FFFB  |      ;
-    STA.L $7F1F5C                                              ;84822E|8F5C1F7F|7F1F5C;
-    LDA.L $7F1F5E                                              ;848232|AF5E1F7F|7F1F5E;
+    STA.L nDailyFlags+2                                        ;84822E|8F5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+4                                        ;848232|AF5E1F7F|7F1F5E;
     AND.W #$FFBF                                               ;848236|29BFFF  |      ;
-    STA.L $7F1F5E                                              ;848239|8F5E1F7F|7F1F5E;
-    LDA.L $7F1F60                                              ;84823D|AF601F7F|7F1F60;
+    STA.L nDailyFlags+4                                        ;848239|8F5E1F7F|7F1F5E;
+    LDA.L nDailyFlags+6                                        ;84823D|AF601F7F|7F1F60;
     AND.W #$FFEF                                               ;848241|29EFFF  |      ;
-    STA.L $7F1F60                                              ;848244|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;848244|8F601F7F|7F1F60;
     RTL                                                        ;848248|6B      |      ;
  
  
@@ -533,10 +533,10 @@ fSubUnk1Unknown_8483CC:
  
   + LDY.W #$0006                                               ;8483DC|A00600  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8483DF|B7CC    |0000CC;
-    STA.B $92                                                  ;8483E1|8592    |000092;
+    STA.B nTilesetCount                                        ;8483E1|8592    |000092;
     LDY.W #$0005                                               ;8483E3|A00500  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;8483E6|B7CC    |0000CC;
-    CMP.B $92                                                  ;8483E8|C592    |000092;
+    CMP.B nTilesetCount                                        ;8483E8|C592    |000092;
     BEQ +                                                      ;8483EA|F003    |8483EF;
     JMP.W .justReturn                                          ;8483EC|4C1688  |848816;
  
@@ -1369,9 +1369,9 @@ subUnknown849419_0x01:
     LDA.B #$01                                                 ;8489F1|A901    |      ;
     STA.W nTimeState                                           ;8489F3|8D7309  |000973;
     REP #$20                                                   ;8489F6|C220    |      ;
-    LDA.L $7F1F5C                                              ;8489F8|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;8489F8|AF5C1F7F|7F1F5C;
     AND.W #$FFFE                                               ;8489FC|29FEFF  |      ;
-    STA.L $7F1F5C                                              ;8489FF|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;8489FF|8F5C1F7F|7F1F5C;
     LDA.W nMapEngine_CurrentMapId                              ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
     STA.W nMapEngine_CurrentMapId                              ;848A09|8D9601  |000196;
@@ -1389,9 +1389,9 @@ subUnknown849419_0x02:
     LDA.B #$00                                                 ;848A1B|A900    |      ;
     STA.W nTimeState                                           ;848A1D|8D7309  |000973;
     REP #$20                                                   ;848A20|C220    |      ;
-    LDA.L $7F1F5C                                              ;848A22|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;848A22|AF5C1F7F|7F1F5C;
     ORA.W #$0001                                               ;848A26|090100  |      ;
-    STA.L $7F1F5C                                              ;848A29|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;848A29|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;848A2D|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;848A2F|AD9601  |000196;
     AND.W #$FFDF                                               ;848A32|29DFFF  |      ;
@@ -1436,7 +1436,7 @@ subUnknown849419_0x05:
     STA.B ptrUnknown0xC9                                       ;848A6F|85C9    |0000C9;
     LDA.B [ptrUnknown0xC9]                                     ;848A71|A7C9    |0000C9;
     STA.W nMapEngine_DestinationX                              ;848A73|8D7D01  |00017D;
-    STA.B nPlayerPosX                                          ;848A76|85D6    |0000D6;
+    STA.B nPlayerDirection                                     ;848A76|85D6    |0000D6;
     REP #$30                                                   ;848A78|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848A7A|A5C9    |0000C9;
     CLC                                                        ;848A7C|18      |      ;
@@ -1510,8 +1510,8 @@ subUnknown849419_0x08:
     REP #$30                                                   ;848AF3|C230    |      ;
     LDA.W #$4000                                               ;848AF5|A90040  |      ;
     EOR.W #$FFFF                                               ;848AF8|49FFFF  |      ;
-    AND.B $D2                                                  ;848AFB|25D2    |0000D2;
-    STA.B $D2                                                  ;848AFD|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;848AFB|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;848AFD|85D2    |0000D2;
     REP #$20                                                   ;848AFF|C220    |      ;
     STZ.W nUnknownFlags08FD                                    ;848B01|9CFD08  |0008FD;
     STZ.W $08FF                                                ;848B04|9CFF08  |0008FF;
@@ -1596,7 +1596,7 @@ subUnknown849419_0x0A:
     STA.B ptrUnknown0xC9                                       ;848B97|85C9    |0000C9;
     SEP #$20                                                   ;848B99|E220    |      ;
     LDA.B #$03                                                 ;848B9B|A903    |      ;
-    STA.B $92                                                  ;848B9D|8592    |000092;
+    STA.B nTilesetCount                                        ;848B9D|8592    |000092;
     LDA.B #$03                                                 ;848B9F|A903    |      ;
     STA.B $93                                                  ;848BA1|8593    |000093;
     LDA.B #$0F                                                 ;848BA3|A90F    |      ;
@@ -1763,7 +1763,7 @@ subUnknown849419_0x0F:
     STA.B ptrUnknown0xC9                                       ;848CCD|85C9    |0000C9;
     SEP #$20                                                   ;848CCF|E220    |      ;
     LDA.B #$0F                                                 ;848CD1|A90F    |      ;
-    STA.B $92                                                  ;848CD3|8592    |000092;
+    STA.B nTilesetCount                                        ;848CD3|8592    |000092;
     LDA.B #$03                                                 ;848CD5|A903    |      ;
     STA.B $93                                                  ;848CD7|8593    |000093;
     LDA.B #$00                                                 ;848CD9|A900    |      ;
@@ -1796,9 +1796,9 @@ subUnknown849419_0x11:
     ADC.W #$0001                                               ;848D04|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;848D07|85C9    |0000C9;
     REP #$30                                                   ;848D09|C230    |      ;
-    LDA.B $D2                                                  ;848D0B|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;848D0B|A5D2    |0000D2;
     ORA.W #$4000                                               ;848D0D|090040  |      ;
-    STA.B $D2                                                  ;848D10|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;848D10|85D2    |0000D2;
     RTS                                                        ;848D12|60      |      ;
  
  
@@ -1913,7 +1913,7 @@ subUnknown849419_0x15:
     STA.B ptrUnknown0xC9                                       ;848DCF|85C9    |0000C9;
     SEP #$20                                                   ;848DD1|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;848DD3|A7C9    |0000C9;
-    STA.B $92                                                  ;848DD5|8592    |000092;
+    STA.B nTilesetCount                                        ;848DD5|8592    |000092;
     REP #$30                                                   ;848DD7|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848DD9|A5C9    |0000C9;
     CLC                                                        ;848DDB|18      |      ;
@@ -1921,7 +1921,7 @@ subUnknown849419_0x15:
     STA.B ptrUnknown0xC9                                       ;848DDF|85C9    |0000C9;
     SEP #$20                                                   ;848DE1|E220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848DE3|A772    |000072;
-    CMP.B $92                                                  ;848DE5|C592    |000092;
+    CMP.B nTilesetCount                                        ;848DE5|C592    |000092;
     BNE +                                                      ;848DE7|D007    |848DF0;
     REP #$20                                                   ;848DE9|C220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;848DEB|A7C9    |0000C9;
@@ -1962,7 +1962,7 @@ subUnknown849419_0x16:
     STA.B ptrUnknown0xC9                                       ;848E25|85C9    |0000C9;
     SEP #$20                                                   ;848E27|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;848E29|A7C9    |0000C9;
-    STA.B $92                                                  ;848E2B|8592    |000092;
+    STA.B nTilesetCount                                        ;848E2B|8592    |000092;
     REP #$30                                                   ;848E2D|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848E2F|A5C9    |0000C9;
     CLC                                                        ;848E31|18      |      ;
@@ -1979,7 +1979,7 @@ subUnknown849419_0x16:
     STA.B ptrUnknown0xC9                                       ;848E46|85C9    |0000C9;
     SEP #$20                                                   ;848E48|E220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848E4A|A772    |000072;
-    CMP.B $92                                                  ;848E4C|C592    |000092;
+    CMP.B nTilesetCount                                        ;848E4C|C592    |000092;
     BCC +                                                      ;848E4E|900D    |848E5D;
     LDA.B [ptrUnknown0x72]                                     ;848E50|A772    |000072;
     CMP.B $93                                                  ;848E52|C593    |000093;
@@ -2028,12 +2028,12 @@ subUnknown849419_0x18:
     ADC.W #$0001                                               ;848E97|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;848E9A|85C9    |0000C9;
     LDA.B [ptrUnknown0xC9]                                     ;848E9C|A7C9    |0000C9;
-    STA.B $92                                                  ;848E9E|8592    |000092;
+    STA.B nTilesetCount                                        ;848E9E|8592    |000092;
     SEP #$20                                                   ;848EA0|E220    |      ;
     REP #$10                                                   ;848EA2|C210    |      ;
     LDY.W #$000D                                               ;848EA4|A00D00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;848EA7|B7CC    |0000CC;
-    CMP.B $92                                                  ;848EA9|C592    |000092;
+    CMP.B nTilesetCount                                        ;848EA9|C592    |000092;
     BNE +                                                      ;848EAB|D011    |848EBE;
     REP #$30                                                   ;848EAD|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;848EAF|A5C9    |0000C9;
@@ -2086,9 +2086,9 @@ subUnknown849419_0x19:
     ADC.W #$0001                                               ;848EFB|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;848EFE|85C9    |0000C9;
     REP #$30                                                   ;848F00|C230    |      ;
-    LDA.B $D2                                                  ;848F02|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;848F02|A5D2    |0000D2;
     ORA.W #$2000                                               ;848F04|090020  |      ;
-    STA.B $D2                                                  ;848F07|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;848F07|85D2    |0000D2;
     RTS                                                        ;848F09|60      |      ;
  
  
@@ -2327,13 +2327,13 @@ subUnknown849419_0x1E:
  
  
   + REP #$20                                                   ;8490C5|C220    |      ;
-    LDA.B $D2                                                  ;8490C7|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;8490C7|A5D2    |0000D2;
     AND.W #$0004                                               ;8490C9|290400  |      ;
     BEQ +                                                      ;8490CC|F003    |8490D1;
     JMP.W .return                                              ;8490CE|4C8591  |849185;
  
  
-  + LDA.L $7F1F60                                              ;8490D1|AF601F7F|7F1F60;
+  + LDA.L nDailyFlags+6                                        ;8490D1|AF601F7F|7F1F60;
     AND.W #$0006                                               ;8490D5|290600  |      ;
     BEQ +                                                      ;8490D8|F003    |8490DD;
     JMP.W .return                                              ;8490DA|4C8591  |849185;
@@ -2403,9 +2403,9 @@ subUnknown849419_0x1E:
     STZ.W nPlayerInteractionArg1                               ;849161|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;849164|9C7009  |000970;
     REP #$30                                                   ;849167|C230    |      ;
-    LDA.B $D2                                                  ;849169|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849169|A5D2    |0000D2;
     ORA.W #$0040                                               ;84916B|094000  |      ;
-    STA.B $D2                                                  ;84916E|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84916E|85D2    |0000D2;
     REP #$30                                                   ;849170|C230    |      ;
     LDA.W #$0000                                               ;849172|A90000  |      ;
     STA.B nPlayerAction                                        ;849175|85D4    |0000D4;
@@ -2442,9 +2442,9 @@ subUnknown849419_0x20:
     STA.B ptrUnknown0xC9                                       ;8491A7|85C9    |0000C9;
     SEP #$20                                                   ;8491A9|E220    |      ;
     LDA.B [ptrUnknown0xC9]                                     ;8491AB|A7C9    |0000C9;
-    STA.B $92                                                  ;8491AD|8592    |000092;
+    STA.B nTilesetCount                                        ;8491AD|8592    |000092;
     LDA.W $018F                                                ;8491AF|AD8F01  |00018F;
-    CMP.B $92                                                  ;8491B2|C592    |000092;
+    CMP.B nTilesetCount                                        ;8491B2|C592    |000092;
     BNE +                                                      ;8491B4|D011    |8491C7;
     REP #$30                                                   ;8491B6|C230    |      ;
     LDA.B ptrUnknown0xC9                                       ;8491B8|A5C9    |0000C9;
@@ -3077,13 +3077,13 @@ subUnknown849419_0x2D:
  
  
   + REP #$20                                                   ;84967F|C220    |      ;
-    LDA.B $D2                                                  ;849681|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849681|A5D2    |0000D2;
     AND.W #$0004                                               ;849683|290400  |      ;
     BEQ +                                                      ;849686|F003    |84968B;
     JMP.W .return                                              ;849688|4C5F97  |84975F;
  
  
-  + LDA.L $7F1F60                                              ;84968B|AF601F7F|7F1F60;
+  + LDA.L nDailyFlags+6                                        ;84968B|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84968F|290600  |      ;
     BEQ +                                                      ;849692|F003    |849697;
     JMP.W .return                                              ;849694|4C5F97  |84975F;
@@ -3170,9 +3170,9 @@ subUnknown849419_0x2D:
     STZ.W nPlayerInteractionArg1                               ;84973B|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;84973E|9C7009  |000970;
     REP #$30                                                   ;849741|C230    |      ;
-    LDA.B $D2                                                  ;849743|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849743|A5D2    |0000D2;
     ORA.W #$0040                                               ;849745|094000  |      ;
-    STA.B $D2                                                  ;849748|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;849748|85D2    |0000D2;
     REP #$30                                                   ;84974A|C230    |      ;
     LDA.W #$0000                                               ;84974C|A90000  |      ;
     STA.B nPlayerAction                                        ;84974F|85D4    |0000D4;
@@ -3379,19 +3379,19 @@ subUnknown849419_0x30:
     JMP.W .label1                                              ;8498D2|4CC899  |8499C8;
  
  
-  + LDA.B $D2                                                  ;8498D5|A5D2    |0000D2;
+  + LDA.B nPlayerStateFlags                                    ;8498D5|A5D2    |0000D2;
     AND.W #$0004                                               ;8498D7|290400  |      ;
     BEQ +                                                      ;8498DA|F003    |8498DF;
     JMP.W .label1                                              ;8498DC|4CC899  |8499C8;
  
  
-  + LDA.B $D2                                                  ;8498DF|A5D2    |0000D2;
+  + LDA.B nPlayerStateFlags                                    ;8498DF|A5D2    |0000D2;
     AND.W #$0040                                               ;8498E1|294000  |      ;
     BEQ +                                                      ;8498E4|F003    |8498E9;
     JMP.W .label1                                              ;8498E6|4CC899  |8499C8;
  
  
-  + LDA.L $7F1F60                                              ;8498E9|AF601F7F|7F1F60;
+  + LDA.L nDailyFlags+6                                        ;8498E9|AF601F7F|7F1F60;
     AND.W #$0006                                               ;8498ED|290600  |      ;
     BEQ +                                                      ;8498F0|F003    |8498F5;
     JMP.W .label1                                              ;8498F2|4CC899  |8499C8;
@@ -3405,7 +3405,7 @@ subUnknown849419_0x30:
  
  
   + REP #$30                                                   ;849902|C230    |      ;
-    LDA.B $D2                                                  ;849904|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849904|A5D2    |0000D2;
     AND.W #$0800                                               ;849906|290008  |      ;
     BEQ +                                                      ;849909|F003    |84990E;
     JMP.W .label1                                              ;84990B|4CC899  |8499C8;
@@ -3595,15 +3595,15 @@ subUnknown849419_0x30:
  
  
   + REP #$20                                                   ;849A5F|C220    |      ;
-    LDA.L $7F1F5A                                              ;849A61|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;849A61|AF5A1F7F|7F1F5A;
     AND.W #$0008                                               ;849A65|290800  |      ;
     BNE +                                                      ;849A68|D003    |849A6D;
     JMP.W .loop                                                ;849A6A|4CA198  |8498A1;
  
  
-  + LDA.L $7F1F5A                                              ;849A6D|AF5A1F7F|7F1F5A;
+  + LDA.L nDailyFlags                                          ;849A6D|AF5A1F7F|7F1F5A;
     AND.W #$FFF7                                               ;849A71|29F7FF  |      ;
-    STA.L $7F1F5A                                              ;849A74|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;849A74|8F5A1F7F|7F1F5A;
     REP #$20                                                   ;849A78|C220    |      ;
     LDA.W #$0032                                               ;849A7A|A93200  |      ;
     STA.L nGameUnk7F1F15                                       ;849A7D|8F151F7F|7F1F15;
@@ -3621,9 +3621,9 @@ subUnknown849419_0x30:
     STZ.W nPlayerInteractionArg1                               ;849A9C|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;849A9F|9C7009  |000970;
     REP #$30                                                   ;849AA2|C230    |      ;
-    LDA.B $D2                                                  ;849AA4|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849AA4|A5D2    |0000D2;
     ORA.W #$0040                                               ;849AA6|094000  |      ;
-    STA.B $D2                                                  ;849AA9|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;849AA9|85D2    |0000D2;
     REP #$30                                                   ;849AAB|C230    |      ;
     LDA.W #$0000                                               ;849AAD|A90000  |      ;
     STA.B nPlayerAction                                        ;849AB0|85D4    |0000D4;
@@ -3749,21 +3749,21 @@ CODE_849B79:
  
 CODE_849B85:
     REP #$20                                                   ;849B85|C220    |      ;
-    LDA.B $D2                                                  ;849B87|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849B87|A5D2    |0000D2;
     AND.W #$0004                                               ;849B89|290400  |      ;
     BEQ CODE_849B91                                            ;849B8C|F003    |849B91;
     JMP.W CODE_84A0B9                                          ;849B8E|4CB9A0  |84A0B9;
  
  
 CODE_849B91:
-    LDA.B $D2                                                  ;849B91|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;849B91|A5D2    |0000D2;
     AND.W #$0040                                               ;849B93|294000  |      ;
     BEQ CODE_849B9B                                            ;849B96|F003    |849B9B;
     JMP.W CODE_84A0B9                                          ;849B98|4CB9A0  |84A0B9;
  
  
 CODE_849B9B:
-    LDA.L $7F1F60                                              ;849B9B|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;849B9B|AF601F7F|7F1F60;
     AND.W #$0006                                               ;849B9F|290600  |      ;
     BEQ CODE_849BA7                                            ;849BA2|F003    |849BA7;
     JMP.W CODE_84A0B9                                          ;849BA4|4CB9A0  |84A0B9;
@@ -3784,7 +3784,7 @@ CODE_849BA7:
  
 CODE_849BBF:
     REP #$20                                                   ;849BBF|C220    |      ;
-    LDA.L $7F1F5A                                              ;849BC1|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;849BC1|AF5A1F7F|7F1F5A;
     AND.W #$0100                                               ;849BC5|290001  |      ;
     BEQ CODE_849BCD                                            ;849BC8|F003    |849BCD;
     JMP.W CODE_849E4E                                          ;849BCA|4C4E9E  |849E4E;
@@ -3792,7 +3792,7 @@ CODE_849BBF:
  
 CODE_849BCD:
     REP #$20                                                   ;849BCD|C220    |      ;
-    LDA.L $7F1F5A                                              ;849BCF|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;849BCF|AF5A1F7F|7F1F5A;
     AND.W #$0080                                               ;849BD3|298000  |      ;
     BEQ CODE_849BDB                                            ;849BD6|F003    |849BDB;
     JMP.W CODE_849FBC                                          ;849BD8|4CBC9F  |849FBC;
@@ -3800,7 +3800,7 @@ CODE_849BCD:
  
 CODE_849BDB:
     REP #$20                                                   ;849BDB|C220    |      ;
-    LDA.L $7F1F5A                                              ;849BDD|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;849BDD|AF5A1F7F|7F1F5A;
     AND.W #$0040                                               ;849BE1|294000  |      ;
     BEQ CODE_849BE9                                            ;849BE4|F003    |849BE9;
     JMP.W CODE_849DBE                                          ;849BE6|4CBE9D  |849DBE;
@@ -4173,7 +4173,7 @@ CODE_849E44:
  
 CODE_849E4E:
     REP #$30                                                   ;849E4E|C230    |      ;
-    LDA.L nHouseSize                                           ;849E50|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;849E50|AF641F7F|7F1F64;
     AND.W #$0004                                               ;849E54|290400  |      ;
     BEQ CODE_849E5C                                            ;849E57|F003    |849E5C;
     JMP.W CODE_84A0B9                                          ;849E59|4CB9A0  |84A0B9;
@@ -4189,9 +4189,9 @@ CODE_849E5C:
  
 CODE_849E69:
     REP #$20                                                   ;849E69|C220    |      ;
-    LDA.L nHouseSize                                           ;849E6B|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;849E6B|AF641F7F|7F1F64;
     ORA.W #$0004                                               ;849E6F|090400  |      ;
-    STA.L nHouseSize                                           ;849E72|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;849E72|8F641F7F|7F1F64;
     SEP #$20                                                   ;849E76|E220    |      ;
     LDY.W #$0000                                               ;849E78|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E7B|B772    |000072;
@@ -4208,7 +4208,7 @@ CODE_849E69:
     LDY.W #$0003                                               ;849E95|A00300  |      ;
     LDA.B #$15                                                 ;849E98|A915    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849E9A|9772    |000072;
-    STA.L nGameUnk7F1F12                                       ;849E9C|8F121F7F|7F1F12;
+    STA.L nCowPregnacyDays                                     ;849E9C|8F121F7F|7F1F12;
     SEP #$20                                                   ;849EA0|E220    |      ;
     LDA.L nOwnedCows                                           ;849EA2|AF0A1F7F|7F1F0A;
     INC A                                                      ;849EA6|1A      |      ;
@@ -5077,7 +5077,7 @@ CODE_84A454:
  
 CODE_84A46E:
     REP #$30                                                   ;84A46E|C230    |      ;
-    LDA.L $7F1F5A                                              ;84A470|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84A470|AF5A1F7F|7F1F5A;
     AND.W #$0010                                               ;84A474|291000  |      ;
     BEQ CODE_84A47C                                            ;84A477|F003    |84A47C;
     JMP.W CODE_84A740                                          ;84A479|4C40A7  |84A740;
@@ -5104,16 +5104,16 @@ CODE_84A48A:
  
 CODE_84A498:
     REP #$30                                                   ;84A498|C230    |      ;
-    LDA.L $7F1F5A                                              ;84A49A|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84A49A|AF5A1F7F|7F1F5A;
     AND.W #$0004                                               ;84A49E|290400  |      ;
     BNE CODE_84A4A6                                            ;84A4A1|D003    |84A4A6;
     JMP.W CODE_849B45                                          ;84A4A3|4C459B  |849B45;
  
  
 CODE_84A4A6:
-    LDA.L $7F1F5A                                              ;84A4A6|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84A4A6|AF5A1F7F|7F1F5A;
     AND.W #$FFFB                                               ;84A4AA|29FBFF  |      ;
-    STA.L $7F1F5A                                              ;84A4AD|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;84A4AD|8F5A1F7F|7F1F5A;
     REP #$20                                                   ;84A4B1|C220    |      ;
     LDA.W #$01F4                                               ;84A4B3|A9F401  |      ;
     STA.L nGameUnk7F1F15                                       ;84A4B6|8F151F7F|7F1F15;
@@ -5156,9 +5156,9 @@ CODE_84A4F5:
     STZ.W nPlayerInteractionArg1                               ;84A508|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;84A50B|9C7009  |000970;
     REP #$30                                                   ;84A50E|C230    |      ;
-    LDA.B $D2                                                  ;84A510|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84A510|A5D2    |0000D2;
     ORA.W #$0040                                               ;84A512|094000  |      ;
-    STA.B $D2                                                  ;84A515|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84A515|85D2    |0000D2;
     REP #$30                                                   ;84A517|C230    |      ;
     LDA.W #$0000                                               ;84A519|A90000  |      ;
     STA.B nPlayerAction                                        ;84A51C|85D4    |0000D4;
@@ -5632,7 +5632,7 @@ CODE_84A84A:
     LDY.W #$001A                                               ;84A852|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84A855|B7CC    |0000CC;
     SEC                                                        ;84A857|38      |      ;
-    SBC.B nPlayerPosX                                          ;84A858|E5D6    |0000D6;
+    SBC.B nPlayerDirection                                     ;84A858|E5D6    |0000D6;
     STA.B n16TempVar1                                          ;84A85A|857E    |00007E;
     BMI CODE_84A860                                            ;84A85C|3002    |84A860;
     BRA CODE_84A86D                                            ;84A85E|800D    |84A86D;
@@ -5829,10 +5829,10 @@ subUnknown849419_0x33:
  
  
   + REP #$20                                                   ;84A998|C220    |      ;
-    LDA.B $D2                                                  ;84A99A|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84A99A|A5D2    |0000D2;
     AND.W #$0004                                               ;84A99C|290400  |      ;
     BNE .label1                                                ;84A99F|D07D    |84AA1E;
-    LDA.L $7F1F60                                              ;84A9A1|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84A9A1|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84A9A5|290600  |      ;
     BNE .label1                                                ;84A9A8|D074    |84AA1E;
     REP #$20                                                   ;84A9AA|C220    |      ;
@@ -5843,7 +5843,7 @@ subUnknown849419_0x33:
  
  
   + REP #$30                                                   ;84A9B7|C230    |      ;
-    LDA.B $D2                                                  ;84A9B9|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84A9B9|A5D2    |0000D2;
     AND.W #$0800                                               ;84A9BB|290008  |      ;
     BEQ +                                                      ;84A9BE|F003    |84A9C3;
     JMP.W .label1                                              ;84A9C0|4C1EAA  |84AA1E;
@@ -5976,10 +5976,10 @@ subUnknown849419_0x34:
  
  
   + REP #$20                                                   ;84AAA9|C220    |      ;
-    LDA.B $D2                                                  ;84AAAB|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84AAAB|A5D2    |0000D2;
     AND.W #$0004                                               ;84AAAD|290400  |      ;
     BNE .return                                                ;84AAB0|D067    |84AB19;
-    LDA.L $7F1F60                                              ;84AAB2|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84AAB2|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84AAB6|290600  |      ;
     BNE .return                                                ;84AAB9|D05E    |84AB19;
     REP #$20                                                   ;84AABB|C220    |      ;
@@ -6047,11 +6047,11 @@ subUnknown849419_0x35:
     ADC.W #$0001                                               ;84AB2E|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84AB31|85C9    |0000C9;
     REP #$20                                                   ;84AB33|C220    |      ;
-    LDA.L $7F1F5C                                              ;84AB35|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84AB35|AF5C1F7F|7F1F5C;
     AND.W #$FFEF                                               ;84AB39|29EFFF  |      ;
-    STA.L $7F1F5C                                              ;84AB3C|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84AB3C|8F5C1F7F|7F1F5C;
     SEP #$20                                                   ;84AB40|E220    |      ;
-    LDA.L $7F1F32                                              ;84AB42|AF321F7F|7F1F32;
+    LDA.L nHorseAge                                            ;84AB42|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;84AB46|C915    |      ;
     BEQ .label1                                                ;84AB48|F029    |84AB73;
     SEP #$20                                                   ;84AB4A|E220    |      ;
@@ -6076,7 +6076,7 @@ subUnknown849419_0x35:
  
 .label1:
     REP #$20                                                   ;84AB73|C220    |      ;
-    LDA.L $7F1F5C                                              ;84AB75|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84AB75|AF5C1F7F|7F1F5C;
     AND.W #$0040                                               ;84AB79|294000  |      ;
     BNE +                                                      ;84AB7C|D003    |84AB81;
     JMP.W .loop                                                ;84AB7E|4CDFAB  |84ABDF;
@@ -6130,19 +6130,19 @@ subUnknown849419_0x35:
 .break:
     JSL.L fSubUnk1Unknown_84803F                               ;84ABCE|223F8084|84803F;
     REP #$30                                                   ;84ABD2|C230    |      ;
-    LDA.L $7F1F5C                                              ;84ABD4|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84ABD4|AF5C1F7F|7F1F5C;
     AND.W #$FFBF                                               ;84ABD8|29BFFF  |      ;
-    STA.L $7F1F5C                                              ;84ABDB|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84ABDB|8F5C1F7F|7F1F5C;
  
 .loop:
     REP #$30                                                   ;84ABDF|C230    |      ;
-    LDA.L $7F1F5C                                              ;84ABE1|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84ABE1|AF5C1F7F|7F1F5C;
     AND.W #$0800                                               ;84ABE5|290008  |      ;
     BEQ +                                                      ;84ABE8|F003    |84ABED;
     JMP.W .label2                                              ;84ABEA|4CEEAC  |84ACEE;
  
  
-  + LDA.L $7F1F5C                                              ;84ABED|AF5C1F7F|7F1F5C;
+  + LDA.L nDailyFlags+2                                        ;84ABED|AF5C1F7F|7F1F5C;
     AND.W #$0020                                               ;84ABF1|292000  |      ;
     BEQ +                                                      ;84ABF4|F003    |84ABF9;
     JMP.W .label9                                              ;84ABF6|4CA4AD  |84ADA4;
@@ -6186,22 +6186,22 @@ subUnknown849419_0x35:
  
  
   + REP #$20                                                   ;84AC39|C220    |      ;
-    LDA.B $D2                                                  ;84AC3B|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84AC3B|A5D2    |0000D2;
     AND.W #$0004                                               ;84AC3D|290400  |      ;
     BEQ +                                                      ;84AC40|F003    |84AC45;
     JMP.W .label2                                              ;84AC42|4CEEAC  |84ACEE;
  
  
-  + LDA.L $7F1F60                                              ;84AC45|AF601F7F|7F1F60;
+  + LDA.L nDailyFlags+6                                        ;84AC45|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84AC49|290600  |      ;
     BEQ +                                                      ;84AC4C|F003    |84AC51;
     JMP.W .label2                                              ;84AC4E|4CEEAC  |84ACEE;
  
  
   + REP #$20                                                   ;84AC51|C220    |      ;
-    LDA.L $7F1F5C                                              ;84AC53|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84AC53|AF5C1F7F|7F1F5C;
     ORA.W #$0010                                               ;84AC57|091000  |      ;
-    STA.L $7F1F5C                                              ;84AC5A|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84AC5A|8F5C1F7F|7F1F5C;
     REP #$20                                                   ;84AC5E|C220    |      ;
     LDA.W $0128                                                ;84AC60|AD2801  |000128;
     BIT.W #$0080                                               ;84AC63|898000  |      ;
@@ -6212,7 +6212,7 @@ subUnknown849419_0x35:
   + REP #$30                                                   ;84AC6B|C230    |      ;
     LDA.W #$000D                                               ;84AC6D|A90D00  |      ;
     STA.B $E3                                                  ;84AC70|85E3    |0000E3;
-    LDA.B nPlayerPosX                                          ;84AC72|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;84AC72|A5D6    |0000D6;
     STA.B $DF                                                  ;84AC74|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84AC76|A5D8    |0000D8;
     STA.B $E1                                                  ;84AC78|85E1    |0000E1;
@@ -6253,14 +6253,14 @@ subUnknown849419_0x35:
  
  
   + REP #$30                                                   ;84ACC0|C230    |      ;
-    LDA.B $D2                                                  ;84ACC2|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84ACC2|A5D2    |0000D2;
     AND.W #$0002                                               ;84ACC4|290200  |      ;
     BEQ +                                                      ;84ACC7|F003    |84ACCC;
     JMP.W .label8                                              ;84ACC9|4C88AD  |84AD88;
  
  
   + REP #$30                                                   ;84ACCC|C230    |      ;
-    LDA.B $D2                                                  ;84ACCE|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84ACCE|A5D2    |0000D2;
     AND.W #$0800                                               ;84ACD0|290008  |      ;
     BEQ +                                                      ;84ACD3|F003    |84ACD8;
     JMP.W .label8                                              ;84ACD5|4C88AD  |84AD88;
@@ -6281,9 +6281,9 @@ subUnknown849419_0x35:
  
 .label2:
     REP #$30                                                   ;84ACEE|C230    |      ;
-    LDA.L $7F1F5C                                              ;84ACF0|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84ACF0|AF5C1F7F|7F1F5C;
     AND.W #$F7FF                                               ;84ACF4|29FFF7  |      ;
-    STA.L $7F1F5C                                              ;84ACF7|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84ACF7|8F5C1F7F|7F1F5C;
     SEP #$20                                                   ;84ACFB|E220    |      ;
     LDA.W $0939                                                ;84ACFD|AD3909  |000939;
     CMP.B #$78                                                 ;84AD00|C978    |      ;
@@ -6359,7 +6359,7 @@ subUnknown849419_0x35:
  
 .label8:
     REP #$30                                                   ;84AD88|C230    |      ;
-    LDA.L $7F1F5C                                              ;84AD8A|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84AD8A|AF5C1F7F|7F1F5C;
     AND.W #$0400                                               ;84AD8E|290004  |      ;
     BEQ .loop2                                                 ;84AD91|F003    |84AD96;
     JMP.W .label10                                             ;84AD93|4CF2AD  |84ADF2;
@@ -6377,13 +6377,13 @@ subUnknown849419_0x35:
  
 .label9:
     REP #$30                                                   ;84ADA4|C230    |      ;
-    LDA.B $D2                                                  ;84ADA6|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84ADA6|A5D2    |0000D2;
     ORA.W #$0010                                               ;84ADA8|091000  |      ;
-    STA.B $D2                                                  ;84ADAB|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84ADAB|85D2    |0000D2;
     REP #$20                                                   ;84ADAD|C220    |      ;
-    LDA.L $7F1F5C                                              ;84ADAF|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84ADAF|AF5C1F7F|7F1F5C;
     AND.W #$FFDF                                               ;84ADB3|29DFFF  |      ;
-    STA.L $7F1F5C                                              ;84ADB6|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84ADB6|8F5C1F7F|7F1F5C;
     SEP #$20                                                   ;84ADBA|E220    |      ;
     REP #$10                                                   ;84ADBC|C210    |      ;
     LDY.W #$0000                                               ;84ADBE|A00000  |      ;
@@ -6415,7 +6415,7 @@ subUnknown849419_0x35:
 .label10:
     SEP #$20                                                   ;84ADF2|E220    |      ;
     REP #$10                                                   ;84ADF4|C210    |      ;
-    LDA.L $7F1F32                                              ;84ADF6|AF321F7F|7F1F32;
+    LDA.L nHorseAge                                            ;84ADF6|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;84ADFA|C915    |      ;
     BEQ +                                                      ;84ADFC|F003    |84AE01;
     JMP.W .label11                                             ;84ADFE|4C35AE  |84AE35;
@@ -6480,7 +6480,7 @@ subUnknown849419_0x35:
     LDY.W #$001A                                               ;84AE71|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84AE74|B7CC    |0000CC;
     SEC                                                        ;84AE76|38      |      ;
-    SBC.B nPlayerPosX                                          ;84AE77|E5D6    |0000D6;
+    SBC.B nPlayerDirection                                     ;84AE77|E5D6    |0000D6;
     STA.B n16TempVar1                                          ;84AE79|857E    |00007E;
     BMI +                                                      ;84AE7B|3002    |84AE7F;
     BRA .label13                                               ;84AE7D|800D    |84AE8C;
@@ -6581,11 +6581,11 @@ subUnknown849419_0x36:
     REP #$30                                                   ;84AF12|C230    |      ;
     LDY.W #$001A                                               ;84AF14|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84AF17|B7CC    |0000CC;
-    STA.L $7F1F2C                                              ;84AF19|8F2C1F7F|7F1F2C;
+    STA.L nDogX                                                ;84AF19|8F2C1F7F|7F1F2C;
     REP #$30                                                   ;84AF1D|C230    |      ;
     LDY.W #$001C                                               ;84AF1F|A01C00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84AF22|B7CC    |0000CC;
-    STA.L $7F1F2E                                              ;84AF24|8F2E1F7F|7F1F2E;
+    STA.L nDogY                                                ;84AF24|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84AF28|E220    |      ;
     REP #$10                                                   ;84AF2A|C210    |      ;
     LDY.W #$000C                                               ;84AF2C|A00C00  |      ;
@@ -6624,13 +6624,13 @@ subUnknown849419_0x36:
  
  
   + REP #$20                                                   ;84AF68|C220    |      ;
-    LDA.B $D2                                                  ;84AF6A|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84AF6A|A5D2    |0000D2;
     AND.W #$0004                                               ;84AF6C|290400  |      ;
     BEQ +                                                      ;84AF6F|F003    |84AF74;
     JMP.W .label1                                              ;84AF71|4CF4AF  |84AFF4;
  
  
-  + LDA.L $7F1F60                                              ;84AF74|AF601F7F|7F1F60;
+  + LDA.L nDailyFlags+6                                        ;84AF74|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84AF78|290600  |      ;
     BNE .label1                                                ;84AF7B|D077    |84AFF4;
     REP #$20                                                   ;84AF7D|C220    |      ;
@@ -6647,13 +6647,13 @@ subUnknown849419_0x36:
  
  
   + REP #$30                                                   ;84AF94|C230    |      ;
-    LDA.B $D2                                                  ;84AF96|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84AF96|A5D2    |0000D2;
     AND.W #$0800                                               ;84AF98|290008  |      ;
     BEQ +                                                      ;84AF9B|F003    |84AFA0;
     JMP.W .label1                                              ;84AF9D|4CF4AF  |84AFF4;
  
  
-  + LDA.B $D2                                                  ;84AFA0|A5D2    |0000D2;
+  + LDA.B nPlayerStateFlags                                    ;84AFA0|A5D2    |0000D2;
     AND.W #$0010                                               ;84AFA2|291000  |      ;
     BEQ +                                                      ;84AFA5|F003    |84AFAA;
     JMP.W .label1                                              ;84AFA7|4CF4AF  |84AFF4;
@@ -6686,9 +6686,9 @@ subUnknown849419_0x36:
     LDY.W #$0001                                               ;84AFD8|A00100  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84AFDB|97CC    |0000CC;
     REP #$30                                                   ;84AFDD|C230    |      ;
-    LDA.B $D2                                                  ;84AFDF|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84AFDF|A5D2    |0000D2;
     ORA.W #$0800                                               ;84AFE1|090008  |      ;
-    STA.B $D2                                                  ;84AFE4|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84AFE4|85D2    |0000D2;
     REP #$30                                                   ;84AFE6|C230    |      ;
     LDA.L nDogHugs                                             ;84AFE8|AF521F7F|7F1F52;
     INC A                                                      ;84AFEC|1A      |      ;
@@ -7004,7 +7004,7 @@ subUnknown849419_0x36:
  
 .label24:
     REP #$30                                                   ;84B25C|C230    |      ;
-    LDA.L $7F1F60                                              ;84B25E|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84B25E|AF601F7F|7F1F60;
     AND.W #$0010                                               ;84B262|291000  |      ;
     BEQ .loop2                                                 ;84B265|F003    |84B26A;
     JMP.W .label25                                             ;84B267|4C78B2  |84B278;
@@ -7052,7 +7052,7 @@ subUnknown849419_0x36:
     LDY.W #$001A                                               ;84B2B6|A01A00  |      ;
     LDA.B [ptrUnknown0xCC],Y                                   ;84B2B9|B7CC    |0000CC;
     SEC                                                        ;84B2BB|38      |      ;
-    SBC.B nPlayerPosX                                          ;84B2BC|E5D6    |0000D6;
+    SBC.B nPlayerDirection                                     ;84B2BC|E5D6    |0000D6;
     STA.B n16TempVar1                                          ;84B2BE|857E    |00007E;
     BMI +                                                      ;84B2C0|3002    |84B2C4;
     BRA .label26                                               ;84B2C2|800D    |84B2D1;
@@ -7159,7 +7159,7 @@ subUnknown849419_0x37:
  
 subUnknown849419_0x38:
     REP #$30                                                   ;84B365|C230    |      ;
-    LDA.L $7F1F5A                                              ;84B367|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84B367|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84B36B|290080  |      ;
     BEQ +                                                      ;84B36E|F00B    |84B37B;
     REP #$30                                                   ;84B370|C230    |      ;
@@ -7182,7 +7182,7 @@ subUnknown849419_0x38:
 subUnknown849419_0x39:
     REP #$30                                                   ;84B389|C230    |      ;
     REP #$30                                                   ;84B38B|C230    |      ;
-    LDA.B $D2                                                  ;84B38D|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B38D|A5D2    |0000D2;
     AND.W #$1000                                               ;84B38F|290010  |      ;
     BEQ +                                                      ;84B392|F003    |84B397;
     JMP.W .label1                                              ;84B394|4CE8B3  |84B3E8;
@@ -7223,9 +7223,9 @@ subUnknown849419_0x39:
     ADC.W #$0001                                               ;84B3D9|690100  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84B3DC|97CC    |0000CC;
     REP #$30                                                   ;84B3DE|C230    |      ;
-    LDA.B $D2                                                  ;84B3E0|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B3E0|A5D2    |0000D2;
     ORA.W #$1000                                               ;84B3E2|090010  |      ;
-    STA.B $D2                                                  ;84B3E5|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84B3E5|85D2    |0000D2;
     RTS                                                        ;84B3E7|60      |      ;
  
  
@@ -7250,8 +7250,8 @@ subUnknown849419_0x39:
     REP #$30                                                   ;84B409|C230    |      ;
     LDA.W #$1000                                               ;84B40B|A90010  |      ;
     EOR.W #$FFFF                                               ;84B40E|49FFFF  |      ;
-    AND.B $D2                                                  ;84B411|25D2    |0000D2;
-    STA.B $D2                                                  ;84B413|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;84B411|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84B413|85D2    |0000D2;
     REP #$30                                                   ;84B415|C230    |      ;
     LDA.W #$0000                                               ;84B417|A90000  |      ;
     STA.B nPlayerAction                                        ;84B41A|85D4    |0000D4;
@@ -7266,7 +7266,7 @@ subUnknown849419_0x39:
 subUnknown849419_0x3A:
     REP #$30                                                   ;84B427|C230    |      ;
     REP #$30                                                   ;84B429|C230    |      ;
-    LDA.B $D2                                                  ;84B42B|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B42B|A5D2    |0000D2;
     AND.W #$1000                                               ;84B42D|290010  |      ;
     BEQ +                                                      ;84B430|F003    |84B435;
     JMP.W .label1                                              ;84B432|4C93B4  |84B493;
@@ -7311,9 +7311,9 @@ subUnknown849419_0x3A:
     ADC.W #$0001                                               ;84B484|690100  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84B487|97CC    |0000CC;
     REP #$30                                                   ;84B489|C230    |      ;
-    LDA.B $D2                                                  ;84B48B|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B48B|A5D2    |0000D2;
     ORA.W #$1000                                               ;84B48D|090010  |      ;
-    STA.B $D2                                                  ;84B490|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84B490|85D2    |0000D2;
     RTS                                                        ;84B492|60      |      ;
  
  
@@ -7338,8 +7338,8 @@ subUnknown849419_0x3A:
     REP #$30                                                   ;84B4B4|C230    |      ;
     LDA.W #$1000                                               ;84B4B6|A90010  |      ;
     EOR.W #$FFFF                                               ;84B4B9|49FFFF  |      ;
-    AND.B $D2                                                  ;84B4BC|25D2    |0000D2;
-    STA.B $D2                                                  ;84B4BE|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;84B4BC|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84B4BE|85D2    |0000D2;
     REP #$30                                                   ;84B4C0|C230    |      ;
     LDA.W #$0000                                               ;84B4C2|A90000  |      ;
     STA.B nPlayerAction                                        ;84B4C5|85D4    |0000D4;
@@ -7370,9 +7370,9 @@ subUnknown849419_0x3B:
     ADC.W #$0001                                               ;84B4F4|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B4F7|85C9    |0000C9;
     REP #$30                                                   ;84B4F9|C230    |      ;
-    LDA.B $D2                                                  ;84B4FB|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B4FB|A5D2    |0000D2;
     ORA.W #$0002                                               ;84B4FD|090200  |      ;
-    STA.B $D2                                                  ;84B500|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84B500|85D2    |0000D2;
     RTS                                                        ;84B502|60      |      ;
  
  
@@ -7390,9 +7390,9 @@ subUnknown849419_0x3C:
     LDA.W nMapEngine_CurrentMapId                              ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
     STA.W nMapEngine_CurrentMapId                              ;84B51E|8D9601  |000196;
-    LDA.L $7F1F60                                              ;84B521|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84B521|AF601F7F|7F1F60;
     ORA.W #$0020                                               ;84B525|092000  |      ;
-    STA.L $7F1F60                                              ;84B528|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;84B528|8F601F7F|7F1F60;
     RTS                                                        ;84B52C|60      |      ;
  
  
@@ -7460,9 +7460,9 @@ subUnknown849419_0x40:
     ADC.W #$0001                                               ;84B596|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84B599|85C9    |0000C9;
     REP #$20                                                   ;84B59B|C220    |      ;
-    LDA.L $7F1F5C                                              ;84B59D|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84B59D|AF5C1F7F|7F1F5C;
     ORA.W #$0008                                               ;84B5A1|090800  |      ;
-    STA.L $7F1F5C                                              ;84B5A4|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84B5A4|8F5C1F7F|7F1F5C;
     RTS                                                        ;84B5A8|60      |      ;
  
  
@@ -8007,10 +8007,10 @@ subUnknown849419_0x4A:
  
  
   + REP #$20                                                   ;84B988|C220    |      ;
-    LDA.B $D2                                                  ;84B98A|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B98A|A5D2    |0000D2;
     AND.W #$0004                                               ;84B98C|290400  |      ;
     BNE .return                                                ;84B98F|D071    |84BA02;
-    LDA.L $7F1F60                                              ;84B991|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84B991|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84B995|290600  |      ;
     BNE .return                                                ;84B998|D068    |84BA02;
     REP #$20                                                   ;84B99A|C220    |      ;
@@ -8021,7 +8021,7 @@ subUnknown849419_0x4A:
  
  
   + REP #$30                                                   ;84B9A7|C230    |      ;
-    LDA.B $D2                                                  ;84B9A9|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84B9A9|A5D2    |0000D2;
     AND.W #$0800                                               ;84B9AB|290008  |      ;
     BEQ +                                                      ;84B9AE|F003    |84B9B3;
     JMP.W .return                                              ;84B9B0|4C02BA  |84BA02;
@@ -8159,7 +8159,7 @@ subUnknown849419_0x4D:
  
  
   + REP #$20                                                   ;84BA9A|C220    |      ;
-    LDA.L $7F1F5E                                              ;84BA9C|AF5E1F7F|7F1F5E;
+    LDA.L nDailyFlags+4                                        ;84BA9C|AF5E1F7F|7F1F5E;
     AND.W #$0040                                               ;84BAA0|294000  |      ;
     BNE +                                                      ;84BAA3|D003    |84BAA8;
     JMP.W .return                                              ;84BAA5|4C26BB  |84BB26;
@@ -8241,9 +8241,9 @@ subUnknown849419_0x4E:
     ADC.W #$0001                                               ;84BB38|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84BB3B|85C9    |0000C9;
     REP #$20                                                   ;84BB3D|C220    |      ;
-    LDA.L $7F1F5C                                              ;84BB3F|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84BB3F|AF5C1F7F|7F1F5C;
     AND.W #$FFF7                                               ;84BB43|29F7FF  |      ;
-    STA.L $7F1F5C                                              ;84BB46|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84BB46|8F5C1F7F|7F1F5C;
     RTS                                                        ;84BB4A|60      |      ;
  
  
@@ -8255,9 +8255,9 @@ subUnknown849419_0x4F:
     ADC.W #$0001                                               ;84BB52|690100  |      ;
     STA.B ptrUnknown0xC9                                       ;84BB55|85C9    |0000C9;
     REP #$20                                                   ;84BB57|C220    |      ;
-    LDA.L $7F1F60                                              ;84BB59|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84BB59|AF601F7F|7F1F60;
     ORA.W #$8000                                               ;84BB5D|090080  |      ;
-    STA.L $7F1F60                                              ;84BB60|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;84BB60|8F601F7F|7F1F60;
     RTS                                                        ;84BB64|60      |      ;
  
     SEP #$20                                                   ;84BB65|E220    |      ;
@@ -8277,7 +8277,7 @@ subUnknown849419_0x4F:
     PHA                                                        ;84BB7F|48      |      ;
     INX                                                        ;84BB80|E8      |      ;
     LDA.L nCarriedItemTable_81BE0F,X                           ;84BB81|BF0FBE81|81BE0F;
-    STA.B $92                                                  ;84BB85|8592    |000092;
+    STA.B nTilesetCount                                        ;84BB85|8592    |000092;
     PLA                                                        ;84BB87|68      |      ;
     XBA                                                        ;84BB88|EB      |      ;
     LDA.B #$00                                                 ;84BB89|A900    |      ;
@@ -8286,7 +8286,7 @@ subUnknown849419_0x4F:
     TAX                                                        ;84BB8E|AA      |      ;
     SEP #$20                                                   ;84BB8F|E220    |      ;
     LDA.L sShedItems,X                                         ;84BB91|BF001F7F|7F1F00;
-    ORA.B $92                                                  ;84BB95|0592    |000092;
+    ORA.B nTilesetCount                                        ;84BB95|0592    |000092;
     STA.L sShedItems,X                                         ;84BB97|9F001F7F|7F1F00;
     STZ.W nToolEquipped                                        ;84BB9B|9C2109  |000921;
  
@@ -8308,7 +8308,7 @@ subUnknown849419_0x4F:
     PHA                                                        ;84BBBA|48      |      ;
     INX                                                        ;84BBBB|E8      |      ;
     LDA.L nCarriedItemTable_81BE0F,X                           ;84BBBC|BF0FBE81|81BE0F;
-    STA.B $92                                                  ;84BBC0|8592    |000092;
+    STA.B nTilesetCount                                        ;84BBC0|8592    |000092;
     PLA                                                        ;84BBC2|68      |      ;
     XBA                                                        ;84BBC3|EB      |      ;
     LDA.B #$00                                                 ;84BBC4|A900    |      ;
@@ -8317,7 +8317,7 @@ subUnknown849419_0x4F:
     TAX                                                        ;84BBC9|AA      |      ;
     SEP #$20                                                   ;84BBCA|E220    |      ;
     LDA.L sShedItems,X                                         ;84BBCC|BF001F7F|7F1F00;
-    ORA.B $92                                                  ;84BBD0|0592    |000092;
+    ORA.B nTilesetCount                                        ;84BBD0|0592    |000092;
     STA.L sShedItems,X                                         ;84BBD2|9F001F7F|7F1F00;
     STZ.W nToolSecond                                          ;84BBD6|9C2309  |000923;
  
@@ -8394,7 +8394,7 @@ subUnknown849419_0x50:
  
 .label2:
     REP #$30                                                   ;84BC5C|C230    |      ;
-    LDA.B $D2                                                  ;84BC5E|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84BC5E|A5D2    |0000D2;
     AND.W #$0800                                               ;84BC60|290008  |      ;
     BNE +                                                      ;84BC63|D003    |84BC68;
     JMP.W .return                                              ;84BC65|4C9BBC  |84BC9B;
@@ -8403,16 +8403,16 @@ subUnknown849419_0x50:
   + REP #$30                                                   ;84BC68|C230    |      ;
     LDA.W #$0800                                               ;84BC6A|A90008  |      ;
     EOR.W #$FFFF                                               ;84BC6D|49FFFF  |      ;
-    AND.B $D2                                                  ;84BC70|25D2    |0000D2;
-    STA.B $D2                                                  ;84BC72|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;84BC70|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84BC72|85D2    |0000D2;
     SEP #$20                                                   ;84BC74|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;84BC76|AF191F7F|7F1F19;
-    STA.L $7F1F30                                              ;84BC7A|8F301F7F|7F1F30;
+    STA.L nDogMapId                                            ;84BC7A|8F301F7F|7F1F30;
     REP #$30                                                   ;84BC7E|C230    |      ;
     LDA.W #$0078                                               ;84BC80|A97800  |      ;
-    STA.L $7F1F2C                                              ;84BC83|8F2C1F7F|7F1F2C;
+    STA.L nDogX                                                ;84BC83|8F2C1F7F|7F1F2C;
     LDA.W #$01A8                                               ;84BC87|A9A801  |      ;
-    STA.L $7F1F2E                                              ;84BC8A|8F2E1F7F|7F1F2E;
+    STA.L nDogY                                                ;84BC8A|8F2E1F7F|7F1F2E;
     REP #$30                                                   ;84BC8E|C230    |      ;
     LDA.W #$0000                                               ;84BC90|A90000  |      ;
     CLC                                                        ;84BC93|18      |      ;
@@ -8490,7 +8490,7 @@ subUnknown849419_0x51:
  
 .label3:
     REP #$30                                                   ;84BD0F|C230    |      ;
-    LDA.B $D2                                                  ;84BD11|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84BD11|A5D2    |0000D2;
     AND.W #$0800                                               ;84BD13|290008  |      ;
     BNE +                                                      ;84BD16|D003    |84BD1B;
     JMP.W .return                                              ;84BD18|4C43BD  |84BD43;
@@ -8499,16 +8499,16 @@ subUnknown849419_0x51:
   + REP #$30                                                   ;84BD1B|C230    |      ;
     LDA.W #$0800                                               ;84BD1D|A90008  |      ;
     EOR.W #$FFFF                                               ;84BD20|49FFFF  |      ;
-    AND.B $D2                                                  ;84BD23|25D2    |0000D2;
-    STA.B $D2                                                  ;84BD25|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;84BD23|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84BD25|85D2    |0000D2;
     SEP #$20                                                   ;84BD27|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;84BD29|AF191F7F|7F1F19;
-    STA.L $7F1F30                                              ;84BD2D|8F301F7F|7F1F30;
+    STA.L nDogMapId                                            ;84BD2D|8F301F7F|7F1F30;
     REP #$30                                                   ;84BD31|C230    |      ;
     LDA.W #$0078                                               ;84BD33|A97800  |      ;
-    STA.L $7F1F2C                                              ;84BD36|8F2C1F7F|7F1F2C;
+    STA.L nDogX                                                ;84BD36|8F2C1F7F|7F1F2C;
     LDA.W #$01A8                                               ;84BD3A|A9A801  |      ;
-    STA.L $7F1F2E                                              ;84BD3D|8F2E1F7F|7F1F2E;
+    STA.L nDogY                                                ;84BD3D|8F2E1F7F|7F1F2E;
     BRA .return                                                ;84BD41|8000    |84BD43;
  
  
@@ -8561,10 +8561,10 @@ subUnknown849419_0x52:
  
  
   + REP #$20                                                   ;84BD90|C220    |      ;
-    LDA.B $D2                                                  ;84BD92|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84BD92|A5D2    |0000D2;
     AND.W #$0004                                               ;84BD94|290400  |      ;
     BNE .return                                                ;84BD97|D066    |84BDFF;
-    LDA.L $7F1F60                                              ;84BD99|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84BD99|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84BD9D|290600  |      ;
     BNE .return                                                ;84BDA0|D05D    |84BDFF;
     REP #$20                                                   ;84BDA2|C220    |      ;
@@ -8575,7 +8575,7 @@ subUnknown849419_0x52:
  
  
   + REP #$30                                                   ;84BDAF|C230    |      ;
-    LDA.B $D2                                                  ;84BDB1|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84BDB1|A5D2    |0000D2;
     AND.W #$0800                                               ;84BDB3|290008  |      ;
     BEQ +                                                      ;84BDB6|F003    |84BDBB;
     JMP.W .return                                              ;84BDB8|4CFFBD  |84BDFF;
@@ -8608,9 +8608,9 @@ subUnknown849419_0x52:
     ADC.W #$0001                                               ;84BDEC|690100  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84BDEF|97CC    |0000CC;
     REP #$30                                                   ;84BDF1|C230    |      ;
-    LDA.L $7F1F60                                              ;84BDF3|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84BDF3|AF601F7F|7F1F60;
     ORA.W #$0002                                               ;84BDF7|090200  |      ;
-    STA.L $7F1F60                                              ;84BDFA|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;84BDFA|8F601F7F|7F1F60;
     RTS                                                        ;84BDFE|60      |      ;
  
  
@@ -8669,10 +8669,10 @@ subUnknown849419_0x53:
  
  
   + REP #$20                                                   ;84BE59|C220    |      ;
-    LDA.B $D2                                                  ;84BE5B|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84BE5B|A5D2    |0000D2;
     AND.W #$0004                                               ;84BE5D|290400  |      ;
     BNE .return                                                ;84BE60|D066    |84BEC8;
-    LDA.L $7F1F60                                              ;84BE62|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84BE62|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84BE66|290600  |      ;
     BNE .return                                                ;84BE69|D05D    |84BEC8;
     REP #$20                                                   ;84BE6B|C220    |      ;
@@ -8683,7 +8683,7 @@ subUnknown849419_0x53:
  
  
   + REP #$30                                                   ;84BE78|C230    |      ;
-    LDA.B $D2                                                  ;84BE7A|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84BE7A|A5D2    |0000D2;
     AND.W #$0800                                               ;84BE7C|290008  |      ;
     BEQ +                                                      ;84BE7F|F003    |84BE84;
     JMP.W .return                                              ;84BE81|4CC8BE  |84BEC8;
@@ -8716,9 +8716,9 @@ subUnknown849419_0x53:
     ADC.W #$0001                                               ;84BEB5|690100  |      ;
     STA.B [ptrUnknown0xCC],Y                                   ;84BEB8|97CC    |0000CC;
     REP #$30                                                   ;84BEBA|C230    |      ;
-    LDA.L $7F1F60                                              ;84BEBC|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84BEBC|AF601F7F|7F1F60;
     ORA.W #$0004                                               ;84BEC0|090400  |      ;
-    STA.L $7F1F60                                              ;84BEC3|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;84BEC3|8F601F7F|7F1F60;
     RTS                                                        ;84BEC7|60      |      ;
  
  
@@ -9278,7 +9278,7 @@ fInput_Unknown84C2B4:
     JSL.L fInput_Unknown84C7D6                                 ;84C2BD|22D6C784|84C7D6;
  
   + REP #$30                                                   ;84C2C1|C230    |      ;
-    LDA.L $7F1F5A                                              ;84C2C3|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84C2C3|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84C2C7|290080  |      ;
     BEQ .justReturn                                            ;84C2CA|F00B    |84C2D7;
     LDA.W $0128                                                ;84C2CC|AD2801  |000128;
@@ -9302,9 +9302,9 @@ fInput_Unknown84C2B4:
     STA.W nAudioRegisterValue1                                 ;84C2E9|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C2EC|22328383|838332;
     REP #$20                                                   ;84C2F0|C220    |      ;
-    LDA.L $7F1F5C                                              ;84C2F2|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;84C2F2|AF5C1F7F|7F1F5C;
     ORA.W #$0004                                               ;84C2F6|090400  |      ;
-    STA.L $7F1F5C                                              ;84C2F9|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;84C2F9|8F5C1F7F|7F1F5C;
     RTL                                                        ;84C2FD|6B      |      ;
  
  
@@ -9478,7 +9478,7 @@ fInput_Unkown84C380:
  
 fInput_Unknown84C428:
     REP #$30                                                   ;84C428|C230    |      ;
-    LDA.L $7F1F5A                                              ;84C42A|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;84C42A|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84C42E|290080  |      ;
     BEQ .justReturn                                            ;84C431|F00B    |84C43E;
     LDA.W $0128                                                ;84C433|AD2801  |000128;
@@ -9837,7 +9837,7 @@ fInput_Unknown84C684:
  
 fInput_Handler_case01:
     REP #$30                                                   ;84C6B7|C230    |      ;
-    LDA.B $D2                                                  ;84C6B9|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84C6B9|A5D2    |0000D2;
     AND.W #$00C4                                               ;84C6BB|29C400  |      ;
     BEQ +                                                      ;84C6BE|F003    |84C6C3;
     JMP.W fInput_Return84C7B5                                  ;84C6C0|4CB5C7  |84C7B5;
@@ -9849,21 +9849,21 @@ fInput_Handler_case01:
     JMP.W fInput_Return84C7B5                                  ;84C6CA|4CB5C7  |84C7B5;
  
  
-  + LDA.L $7F1F5C                                              ;84C6CD|AF5C1F7F|7F1F5C;
+  + LDA.L nDailyFlags+2                                        ;84C6CD|AF5C1F7F|7F1F5C;
     AND.W #$0020                                               ;84C6D1|292000  |      ;
     BEQ +                                                      ;84C6D4|F003    |84C6D9;
     JMP.W fInput_Return84C7B5                                  ;84C6D6|4CB5C7  |84C7B5;
  
  
   + REP #$30                                                   ;84C6D9|C230    |      ;
-    LDA.B $D2                                                  ;84C6DB|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84C6DB|A5D2    |0000D2;
     AND.W #$1000                                               ;84C6DD|290010  |      ;
     BEQ +                                                      ;84C6E0|F003    |84C6E5;
     JMP.W fInput_Unknown84C7D6                                 ;84C6E2|4CD6C7  |84C7D6;
  
  
   + REP #$30                                                   ;84C6E5|C230    |      ;
-    LDA.B $D2                                                  ;84C6E7|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84C6E7|A5D2    |0000D2;
     AND.W #$4000                                               ;84C6E9|290040  |      ;
     BNE +                                                      ;84C6EC|D003    |84C6F1;
     JMP.W fInput_Return84C7B5                                  ;84C6EE|4CB5C7  |84C7B5;
@@ -9915,7 +9915,7 @@ fInput_Handler_case01:
  
 fInput_Unknown84C740:
     REP #$30                                                   ;84C740|C230    |      ;
-    LDA.B $D2                                                  ;84C742|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84C742|A5D2    |0000D2;
     AND.W #$1000                                               ;84C744|290010  |      ;
     BEQ +                                                      ;84C747|F003    |84C74C;
     JMP.W fInput_Unknown08FD_case0200                          ;84C749|4C04C8  |84C804;
@@ -9936,7 +9936,7 @@ fInput_Unknown84C740:
  
  
   + REP #$30                                                   ;84C765|C230    |      ;
-    LDA.B $D2                                                  ;84C767|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84C767|A5D2    |0000D2;
     AND.W #$0020                                               ;84C769|292000  |      ;
     BEQ +                                                      ;84C76C|F003    |84C771;
     JMP.W fInput_Return84C7B5                                  ;84C76E|4CB5C7  |84C7B5;
@@ -10327,7 +10327,7 @@ fInput_Unknown84CA0C:
  
 fInput_Unknown84CA1D:
     REP #$30                                                   ;84CA1D|C230    |      ;
-    LDA.B $D2                                                  ;84CA1F|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CA1F|A5D2    |0000D2;
     AND.W #$0800                                               ;84CA21|290008  |      ;
     BEQ +                                                      ;84CA24|F003    |84CA29;
     JMP.W .return                                              ;84CA26|4C9DCA  |84CA9D;
@@ -10348,9 +10348,9 @@ fInput_Unknown84CA1D:
     AND.B #$20                                                 ;84CA4B|2920    |      ;
     BNE .label1                                                ;84CA4D|D010    |84CA5F;
     REP #$30                                                   ;84CA4F|C230    |      ;
-    LDA.B $D2                                                  ;84CA51|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CA51|A5D2    |0000D2;
     ORA.W #$0200                                               ;84CA53|090002  |      ;
-    STA.B $D2                                                  ;84CA56|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84CA56|85D2    |0000D2;
     REP #$20                                                   ;84CA58|C220    |      ;
     LDA.W #$0021                                               ;84CA5A|A92100  |      ;
     BRA .jump                                                  ;84CA5D|8007    |84CA66;
@@ -10365,7 +10365,7 @@ fInput_Unknown84CA1D:
 .jump:
     REP #$30                                                   ;84CA66|C230    |      ;
     STA.B $E3                                                  ;84CA68|85E3    |0000E3;
-    LDA.B nPlayerPosX                                          ;84CA6A|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;84CA6A|A5D6    |0000D6;
     STA.B $DF                                                  ;84CA6C|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84CA6E|A5D8    |0000D8;
     STA.B $E1                                                  ;84CA70|85E1    |0000E1;
@@ -10400,26 +10400,26 @@ fInput_Unknown84CA1D:
  
 fInput_Unknown84CAA5:
     REP #$30                                                   ;84CAA5|C230    |      ;
-    LDA.B $D2                                                  ;84CAA7|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CAA7|A5D2    |0000D2;
     AND.W #$0800                                               ;84CAA9|290008  |      ;
     BEQ +                                                      ;84CAAC|F003    |84CAB1;
     JMP.W .label3                                              ;84CAAE|4C2BCB  |84CB2B;
  
  
-  + LDA.B $D2                                                  ;84CAB1|A5D2    |0000D2;
+  + LDA.B nPlayerStateFlags                                    ;84CAB1|A5D2    |0000D2;
     AND.W #$0010                                               ;84CAB3|291000  |      ;
     BEQ +                                                      ;84CAB6|F003    |84CABB;
     JMP.W .label4                                              ;84CAB8|4C1CCC  |84CC1C;
  
  
-  + LDA.L $7F1F60                                              ;84CABB|AF601F7F|7F1F60;
+  + LDA.L nDailyFlags+6                                        ;84CABB|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84CABF|290600  |      ;
     BEQ +                                                      ;84CAC2|F003    |84CAC7;
     JMP.W .label2                                              ;84CAC4|4CFECA  |84CAFE;
  
  
   + REP #$30                                                   ;84CAC7|C230    |      ;
-    LDA.B $D2                                                  ;84CAC9|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CAC9|A5D2    |0000D2;
     AND.W #$0002                                               ;84CACB|290200  |      ;
     BEQ +                                                      ;84CACE|F003    |84CAD3;
     JMP.W .label1                                              ;84CAD0|4CF6CA  |84CAF6;
@@ -10470,7 +10470,7 @@ fInput_Unknown84CAA5:
  
 .label3:
     REP #$30                                                   ;84CB2B|C230    |      ;
-    LDA.B nPlayerPosX                                          ;84CB2D|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;84CB2D|A5D6    |0000D6;
     STA.B $DF                                                  ;84CB2F|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84CB31|A5D8    |0000D8;
     STA.B $E1                                                  ;84CB33|85E1    |0000E1;
@@ -10563,20 +10563,20 @@ fInput_Unknown84CAA5:
  
   + REP #$30                                                   ;84CBEF|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;84CBF1|AD8509  |000985;
-    STA.L $7F1F2C                                              ;84CBF4|8F2C1F7F|7F1F2C;
+    STA.L nDogX                                                ;84CBF4|8F2C1F7F|7F1F2C;
     LDA.W nTileInFrontOfPlayerY                                ;84CBF8|AD8709  |000987;
-    STA.L $7F1F2E                                              ;84CBFB|8F2E1F7F|7F1F2E;
+    STA.L nDogY                                                ;84CBFB|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84CBFF|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;84CC01|A522    |000022;
-    STA.L $7F1F30                                              ;84CC03|8F301F7F|7F1F30;
+    STA.L nDogMapId                                            ;84CC03|8F301F7F|7F1F30;
     REP #$30                                                   ;84CC07|C230    |      ;
     LDA.W #$0016                                               ;84CC09|A91600  |      ;
     STA.B nPlayerAction                                        ;84CC0C|85D4    |0000D4;
     REP #$30                                                   ;84CC0E|C230    |      ;
     LDA.W #$0800                                               ;84CC10|A90008  |      ;
     EOR.W #$FFFF                                               ;84CC13|49FFFF  |      ;
-    AND.B $D2                                                  ;84CC16|25D2    |0000D2;
-    STA.B $D2                                                  ;84CC18|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;84CC16|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;84CC18|85D2    |0000D2;
     RTL                                                        ;84CC1A|6B      |      ;
  
  
@@ -10690,7 +10690,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0018                                               ;84CCEA|A91800  |      ;
     STA.B nPlayerAction                                        ;84CCED|85D4    |0000D4;
     REP #$30                                                   ;84CCEF|C230    |      ;
-    LDA.B nPlayerPosX                                          ;84CCF1|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;84CCF1|A5D6    |0000D6;
     STA.W nTileInFrontOfPlayerX                                ;84CCF3|8D8509  |000985;
     LDA.B nPlayerPosY                                          ;84CCF6|A5D8    |0000D8;
     STA.W nTileInFrontOfPlayerY                                ;84CCF8|8D8709  |000987;
@@ -10712,7 +10712,7 @@ fInput_Unknown84CD16:
     REP #$30                                                   ;84CD16|C230    |      ;
     LDA.W #$0010                                               ;84CD18|A91000  |      ;
     STA.B $E3                                                  ;84CD1B|85E3    |0000E3;
-    LDA.B nPlayerPosX                                          ;84CD1D|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;84CD1D|A5D6    |0000D6;
     STA.B $DF                                                  ;84CD1F|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84CD21|A5D8    |0000D8;
     STA.B $E1                                                  ;84CD23|85E1    |0000E1;
@@ -10765,21 +10765,21 @@ fInput_Unknown84CD16:
  
 fInput_Unknown84CD77:
     REP #$30                                                   ;84CD77|C230    |      ;
-    LDA.B $D2                                                  ;84CD79|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CD79|A5D2    |0000D2;
     AND.W #$0002                                               ;84CD7B|290200  |      ;
     BEQ +                                                      ;84CD7E|F003    |84CD83;
     JMP.W fInput_Return84CDDC                                  ;84CD80|4CDCCD  |84CDDC;
  
  
   + REP #$30                                                   ;84CD83|C230    |      ;
-    LDA.B $D2                                                  ;84CD85|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CD85|A5D2    |0000D2;
     AND.W #$0010                                               ;84CD87|291000  |      ;
     BEQ +                                                      ;84CD8A|F003    |84CD8F;
     JMP.W fInput_Return84CDDC                                  ;84CD8C|4CDCCD  |84CDDC;
  
  
   + REP #$30                                                   ;84CD8F|C230    |      ;
-    LDA.B $D2                                                  ;84CD91|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CD91|A5D2    |0000D2;
     AND.W #$0800                                               ;84CD93|290008  |      ;
     BEQ +                                                      ;84CD96|F003    |84CD9B;
     JMP.W fInput_Return84CDDC                                  ;84CD98|4CDCCD  |84CDDC;
@@ -10808,7 +10808,7 @@ fInput_Unknown84CD77:
  
 fInput_SetPlayerAction0x0A:
     REP #$20                                                   ;84CDBF|C220    |      ;
-    LDA.L $7F1F60                                              ;84CDC1|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;84CDC1|AF601F7F|7F1F60;
     AND.W #$8000                                               ;84CDC5|290080  |      ;
     BNE fInput_Return84CDDC                                    ;84CDC8|D012    |84CDDC;
     SEP #$20                                                   ;84CDCA|E220    |      ;
@@ -10857,28 +10857,28 @@ fInput_SetPlayerAction0x13:
  
 fInput_SetPlayerAction0x0D:
     REP #$30                                                   ;84CE0C|C230    |      ;
-    LDA.B $D2                                                  ;84CE0E|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE0E|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE10|290200  |      ;
     BEQ +                                                      ;84CE13|F003    |84CE18;
     JMP.W .justReturn                                          ;84CE15|4C42CE  |84CE42;
  
  
   + REP #$30                                                   ;84CE18|C230    |      ;
-    LDA.B $D2                                                  ;84CE1A|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE1A|A5D2    |0000D2;
     AND.W #$0010                                               ;84CE1C|291000  |      ;
     BEQ +                                                      ;84CE1F|F003    |84CE24;
     JMP.W .justReturn                                          ;84CE21|4C42CE  |84CE42;
  
  
   + REP #$30                                                   ;84CE24|C230    |      ;
-    LDA.B $D2                                                  ;84CE26|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE26|A5D2    |0000D2;
     AND.W #$0800                                               ;84CE28|290008  |      ;
     BEQ +                                                      ;84CE2B|F003    |84CE30;
     JMP.W .justReturn                                          ;84CE2D|4C42CE  |84CE42;
  
  
   + REP #$30                                                   ;84CE30|C230    |      ;
-    LDA.L nPlayerFlags+2                                       ;84CE32|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;84CE32|AF681F7F|7F1F68;
     AND.W #$0100                                               ;84CE36|290001  |      ;
     BEQ .justReturn                                            ;84CE39|F007    |84CE42;
     REP #$30                                                   ;84CE3B|C230    |      ;
@@ -10891,28 +10891,28 @@ fInput_SetPlayerAction0x0D:
  
 fInput_SetPlayerAction0x1B:
     REP #$30                                                   ;84CE43|C230    |      ;
-    LDA.B $D2                                                  ;84CE45|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE45|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE47|290200  |      ;
     BEQ +                                                      ;84CE4A|F003    |84CE4F;
     JMP.W .justReturn                                          ;84CE4C|4C79CE  |84CE79;
  
  
   + REP #$30                                                   ;84CE4F|C230    |      ;
-    LDA.B $D2                                                  ;84CE51|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE51|A5D2    |0000D2;
     AND.W #$0010                                               ;84CE53|291000  |      ;
     BEQ +                                                      ;84CE56|F003    |84CE5B;
     JMP.W .justReturn                                          ;84CE58|4C79CE  |84CE79;
  
  
   + REP #$30                                                   ;84CE5B|C230    |      ;
-    LDA.B $D2                                                  ;84CE5D|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE5D|A5D2    |0000D2;
     AND.W #$0800                                               ;84CE5F|290008  |      ;
     BEQ +                                                      ;84CE62|F003    |84CE67;
     JMP.W .justReturn                                          ;84CE64|4C79CE  |84CE79;
  
  
   + REP #$30                                                   ;84CE67|C230    |      ;
-    LDA.L nPlayerFlags+2                                       ;84CE69|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;84CE69|AF681F7F|7F1F68;
     AND.W #$0080                                               ;84CE6D|298000  |      ;
     BEQ .justReturn                                            ;84CE70|F007    |84CE79;
     REP #$30                                                   ;84CE72|C230    |      ;
@@ -10925,7 +10925,7 @@ fInput_SetPlayerAction0x1B:
  
 fInput_SetPlayerAction0x0C:
     REP #$30                                                   ;84CE7A|C230    |      ;
-    LDA.B $D2                                                  ;84CE7C|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE7C|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE7E|290200  |      ;
     BEQ CODE_84CE86                                            ;84CE81|F003    |84CE86;
     JMP.W CODE_84CEA5                                          ;84CE83|4CA5CE  |84CEA5;
@@ -10933,7 +10933,7 @@ fInput_SetPlayerAction0x0C:
  
 CODE_84CE86:
     REP #$30                                                   ;84CE86|C230    |      ;
-    LDA.B $D2                                                  ;84CE88|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE88|A5D2    |0000D2;
     AND.W #$0010                                               ;84CE8A|291000  |      ;
     BEQ CODE_84CE92                                            ;84CE8D|F003    |84CE92;
     JMP.W CODE_84CEA5                                          ;84CE8F|4CA5CE  |84CEA5;
@@ -10941,7 +10941,7 @@ CODE_84CE86:
  
 CODE_84CE92:
     REP #$30                                                   ;84CE92|C230    |      ;
-    LDA.B $D2                                                  ;84CE94|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CE94|A5D2    |0000D2;
     AND.W #$0800                                               ;84CE96|290008  |      ;
     BEQ CODE_84CE9E                                            ;84CE99|F003    |84CE9E;
     JMP.W CODE_84CEA5                                          ;84CE9B|4CA5CE  |84CEA5;
@@ -10958,7 +10958,7 @@ CODE_84CEA5:
  
 fInput_SetPlayerAction0x1C:
     REP #$30                                                   ;84CEA6|C230    |      ;
-    LDA.B $D2                                                  ;84CEA8|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CEA8|A5D2    |0000D2;
     AND.W #$0002                                               ;84CEAA|290200  |      ;
     BEQ CODE_84CEB2                                            ;84CEAD|F003    |84CEB2;
     JMP.W CODE_84CED1                                          ;84CEAF|4CD1CE  |84CED1;
@@ -10966,7 +10966,7 @@ fInput_SetPlayerAction0x1C:
  
 CODE_84CEB2:
     REP #$30                                                   ;84CEB2|C230    |      ;
-    LDA.B $D2                                                  ;84CEB4|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CEB4|A5D2    |0000D2;
     AND.W #$0010                                               ;84CEB6|291000  |      ;
     BEQ CODE_84CEBE                                            ;84CEB9|F003    |84CEBE;
     JMP.W CODE_84CED1                                          ;84CEBB|4CD1CE  |84CED1;
@@ -10974,7 +10974,7 @@ CODE_84CEB2:
  
 CODE_84CEBE:
     REP #$30                                                   ;84CEBE|C230    |      ;
-    LDA.B $D2                                                  ;84CEC0|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;84CEC0|A5D2    |0000D2;
     AND.W #$0800                                               ;84CEC2|290008  |      ;
     BEQ CODE_84CECA                                            ;84CEC5|F003    |84CECA;
     JMP.W CODE_84CED1                                          ;84CEC7|4CD1CE  |84CED1;

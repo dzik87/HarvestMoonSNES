@@ -57,9 +57,9 @@ fUnknown_858000:
     LDA.B $A3                                                  ;858058|A5A3    |0000A3;
     STA.W $01A2,X                                              ;85805A|9DA201  |0001A2;
     LDA.B $9B                                                  ;85805D|A59B    |00009B;
-    STA.W $01A4,X                                              ;85805F|9DA401  |0001A4;
+    STA.W nSpritePositionX,X                                   ;85805F|9DA401  |0001A4;
     LDA.B $9D                                                  ;858062|A59D    |00009D;
-    STA.W $01A6,X                                              ;858064|9DA601  |0001A6;
+    STA.W nSpritePositionY,X                                   ;858064|9DA601  |0001A6;
     STX.B $A9                                                  ;858067|86A9    |0000A9;
     LDA.B $A1                                                  ;858069|A5A1    |0000A1;
     CMP.W #$0262                                               ;85806B|C96202  |      ;
@@ -138,9 +138,9 @@ fUnknown_8580B9:
     LDA.B $9F                                                  ;8580EB|A59F    |00009F;
     STA.W $01A0,X                                              ;8580ED|9DA001  |0001A0;
     LDA.B $9B                                                  ;8580F0|A59B    |00009B;
-    STA.W $01A4,X                                              ;8580F2|9DA401  |0001A4;
+    STA.W nSpritePositionX,X                                   ;8580F2|9DA401  |0001A4;
     LDA.B $9D                                                  ;8580F5|A59D    |00009D;
-    STA.W $01A6,X                                              ;8580F7|9DA601  |0001A6;
+    STA.W nSpritePositionY,X                                   ;8580F7|9DA601  |0001A6;
     LDA.W #$0000                                               ;8580FA|A90000  |      ;
     STA.B $A7                                                  ;8580FD|85A7    |0000A7;
  
@@ -188,9 +188,9 @@ fUnknown_858100:
     LDA.B $A3                                                  ;858143|A5A3    |0000A3;
     STA.W $01A2,X                                              ;858145|9DA201  |0001A2;
     LDA.B $9B                                                  ;858148|A59B    |00009B;
-    STA.W $01A4,X                                              ;85814A|9DA401  |0001A4;
+    STA.W nSpritePositionX,X                                   ;85814A|9DA401  |0001A4;
     LDA.B $9D                                                  ;85814D|A59D    |00009D;
-    STA.W $01A6,X                                              ;85814F|9DA601  |0001A6;
+    STA.W nSpritePositionY,X                                   ;85814F|9DA601  |0001A6;
     STX.B $A9                                                  ;858152|86A9    |0000A9;
     LDA.B $A1                                                  ;858154|A5A1    |0000A1;
     CMP.W #$0262                                               ;858156|C96202  |      ;
@@ -276,9 +276,9 @@ fUnknown_8581CB:
     STA.B $9F                                                  ;8581E5|859F    |00009F;
     LDA.W $01A2,X                                              ;8581E7|BDA201  |0001A2;
     STA.B $A3                                                  ;8581EA|85A3    |0000A3;
-    LDA.W $01A4,X                                              ;8581EC|BDA401  |0001A4;
+    LDA.W nSpritePositionX,X                                   ;8581EC|BDA401  |0001A4;
     STA.B $9B                                                  ;8581EF|859B    |00009B;
-    LDA.W $01A6,X                                              ;8581F1|BDA601  |0001A6;
+    LDA.W nSpritePositionY,X                                   ;8581F1|BDA601  |0001A6;
     STA.B $9D                                                  ;8581F4|859D    |00009D;
  
   + SEP #$20                                                   ;8581F6|E220    |      ;
@@ -338,9 +338,9 @@ fUnknown_ZeroUnknown_85820F:
     LDA.W #$0000                                               ;85824C|A90000  |      ;
     STA.W $01A2,X                                              ;85824F|9DA201  |0001A2;
     LDA.W #$0000                                               ;858252|A90000  |      ;
-    STA.W $01A4,X                                              ;858255|9DA401  |0001A4;
+    STA.W nSpritePositionX,X                                   ;858255|9DA401  |0001A4;
     LDA.W #$0000                                               ;858258|A90000  |      ;
-    STA.W $01A6,X                                              ;85825B|9DA601  |0001A6;
+    STA.W nSpritePositionY,X                                   ;85825B|9DA601  |0001A6;
     LDA.W #$0000                                               ;85825E|A90000  |      ;
     STA.W $01A8,X                                              ;858261|9DA801  |0001A8;
     LDA.W #$0000                                               ;858264|A90000  |      ;
@@ -501,7 +501,7 @@ fUnknown_858377:
     TAX                                                        ;85837D|AA      |      ;
     LDA.L Table_858BE0,X                                       ;85837E|BFE08B85|858BE0;
     TAX                                                        ;858382|AA      |      ;
-    LDA.W $01A6,X                                              ;858383|BDA601  |0001A6;
+    LDA.W nSpritePositionY,X                                   ;858383|BDA601  |0001A6;
     STA.B $A9                                                  ;858386|85A9    |0000A9;
     LDA.W #$0000                                               ;858388|A90000  |      ;
     STA.B ptrUnkown0xAD                                        ;85838B|85AD    |0000AD;
@@ -518,7 +518,7 @@ fUnknown_858377:
     PHX                                                        ;85839F|DA      |      ;
     CPY.W $0905                                                ;8583A0|CC0509  |000905;
     BEQ .label2                                                ;8583A3|F023    |8583C8;
-    LDA.W $01A6,X                                              ;8583A5|BDA601  |0001A6;
+    LDA.W nSpritePositionY,X                                   ;8583A5|BDA601  |0001A6;
     CMP.B $A9                                                  ;8583A8|C5A9    |0000A9;
     BCC .label1                                                ;8583AA|900E    |8583BA;
     LDX.B ptrUnkown0xAD                                        ;8583AC|A6AD    |0000AD;
@@ -642,9 +642,9 @@ fUnknown_8583E0:
     STA.B ptrUnknown0x78                                       ;858467|8578    |000078;
     LDA.W $01A0,X                                              ;858469|BDA001  |0001A0;
     STA.B $9F                                                  ;85846C|859F    |00009F;
-    LDA.W $01A4,X                                              ;85846E|BDA401  |0001A4;
+    LDA.W nSpritePositionX,X                                   ;85846E|BDA401  |0001A4;
     STA.B $9B                                                  ;858471|859B    |00009B;
-    LDA.W $01A6,X                                              ;858473|BDA601  |0001A6;
+    LDA.W nSpritePositionY,X                                   ;858473|BDA601  |0001A6;
     STA.B $9D                                                  ;858476|859D    |00009D;
     SEP #$20                                                   ;858478|E220    |      ;
     LDA.W $01AF,X                                              ;85847A|BDAF01  |0001AF;
@@ -710,7 +710,7 @@ fUnknown_8583E0:
     CLC                                                        ;8584D7|18      |      ;
     ADC.B $9B                                                  ;8584D8|659B    |00009B;
     SEC                                                        ;8584DA|38      |      ;
-    SBC.B $F5                                                  ;8584DB|E5F5    |0000F5;
+    SBC.B nCameraX                                             ;8584DB|E5F5    |0000F5;
     STA.B $BF                                                  ;8584DD|85BF    |0000BF;
     INY                                                        ;8584DF|C8      |      ;
     SEP #$20                                                   ;8584E0|E220    |      ;
@@ -734,7 +734,7 @@ fUnknown_8583E0:
     CLC                                                        ;8584F8|18      |      ;
     ADC.B $9D                                                  ;8584F9|659D    |00009D;
     SEC                                                        ;8584FB|38      |      ;
-    SBC.B $F7                                                  ;8584FC|E5F7    |0000F7;
+    SBC.B nCameraY                                             ;8584FC|E5F7    |0000F7;
     STA.B $C1                                                  ;8584FE|85C1    |0000C1;
     STY.B $C5                                                  ;858500|84C5    |0000C5;
     REP #$30                                                   ;858502|C230    |      ;
@@ -752,7 +752,7 @@ fUnknown_8583E0:
     STA.B n16TempVar1                                          ;858516|857E    |00007E;
     LDA.B n16TempVar2                                          ;858518|A580    |000080;
     TAX                                                        ;85851A|AA      |      ;
-    LDA.L $7EA200,X                                            ;85851B|BF00A27E|7EA200;
+    LDA.L DMASpriteOBJ2BitQueue,X                              ;85851B|BF00A27E|7EA200;
     STA.B $C3                                                  ;85851F|85C3    |0000C3;
     LDA.B $BF                                                  ;858521|A5BF    |0000BF;
     CMP.W #$0100                                               ;858523|C90001  |      ;
@@ -790,7 +790,7 @@ fUnknown_8583E0:
     LDX.B ptrUnkown0xAD+2                                      ;85855B|A6AF    |0000AF;
     LDA.B $BF                                                  ;85855D|A5BF    |0000BF;
     SEP #$20                                                   ;85855F|E220    |      ;
-    STA.L $7EA000,X                                            ;858561|9F00A07E|7EA000;
+    STA.L DMASpriteOBJQueue,X                                  ;858561|9F00A07E|7EA000;
     REP #$20                                                   ;858565|C220    |      ;
     LDA.B $C1                                                  ;858567|A5C1    |0000C1;
     SEP #$20                                                   ;858569|E220    |      ;
@@ -798,7 +798,7 @@ fUnknown_8583E0:
     REP #$20                                                   ;85856F|C220    |      ;
     LDX.B n16TempVar2                                          ;858571|A680    |000080;
     LDA.B $C3                                                  ;858573|A5C3    |0000C3;
-    STA.L $7EA200,X                                            ;858575|9F00A27E|7EA200;
+    STA.L DMASpriteOBJ2BitQueue,X                              ;858575|9F00A27E|7EA200;
     REP #$30                                                   ;858579|C230    |      ;
     LDX.B ptrUnkown0xAD+2                                      ;85857B|A6AF    |0000AF;
     LDY.B $C5                                                  ;85857D|A4C5    |0000C5;
@@ -904,7 +904,7 @@ Table_858637:
 fUnknown_858647:
     REP #$30                                                   ;858647|C230    |      ;
     LDA.W #$F0F0                                               ;858649|A9F0F0  |      ;
-    STA.L $7EA000                                              ;85864C|8F00A07E|7EA000;
+    STA.L DMASpriteOBJQueue                                    ;85864C|8F00A07E|7EA000;
     STA.L $7EA004                                              ;858650|8F04A07E|7EA004;
     STA.L $7EA008                                              ;858654|8F08A07E|7EA008;
     STA.L $7EA00C                                              ;858658|8F0CA07E|7EA00C;
@@ -1033,7 +1033,7 @@ fUnknown_858647:
     STA.L $7EA1F8                                              ;858844|8FF8A17E|7EA1F8;
     STA.L $7EA1FC                                              ;858848|8FFCA17E|7EA1FC;
     LDA.W #$0000                                               ;85884C|A90000  |      ;
-    STA.L $7EA200                                              ;85884F|8F00A27E|7EA200;
+    STA.L DMASpriteOBJ2BitQueue                                ;85884F|8F00A27E|7EA200;
     STA.L $7EA202                                              ;858853|8F02A27E|7EA202;
     STA.L $7EA204                                              ;858857|8F04A27E|7EA204;
     STA.L $7EA206                                              ;85885B|8F06A27E|7EA206;
@@ -1057,7 +1057,7 @@ fUnknown_858647:
 fUnknown_858896:
     REP #$30                                                   ;858896|C230    |      ;
     LDA.W #$F0F0                                               ;858898|A9F0F0  |      ;
-    STA.L $7EA000                                              ;85889B|8F00A07E|7EA000;
+    STA.L DMASpriteOBJQueue                                    ;85889B|8F00A07E|7EA000;
     STA.L $7EA004                                              ;85889F|8F04A07E|7EA004;
     STA.L $7EA008                                              ;8588A3|8F08A07E|7EA008;
     STA.L $7EA00C                                              ;8588A7|8F0CA07E|7EA00C;
@@ -1186,7 +1186,7 @@ fUnknown_858896:
     STA.L $7EA1F8                                              ;858A93|8FF8A17E|7EA1F8;
     STA.L $7EA1FC                                              ;858A97|8FFCA17E|7EA1FC;
     LDA.W #$0000                                               ;858A9B|A90000  |      ;
-    STA.L $7EA200                                              ;858A9E|8F00A27E|7EA200;
+    STA.L DMASpriteOBJ2BitQueue                                ;858A9E|8F00A27E|7EA200;
     STA.L $7EA202                                              ;858AA2|8F02A27E|7EA202;
     STA.L $7EA204                                              ;858AA6|8F04A27E|7EA204;
     STA.L $7EA206                                              ;858AAA|8F06A27E|7EA206;
@@ -1638,7 +1638,7 @@ fUnknown_858CB2:
     STA.B ptrUnknown0x75                                       ;858DFB|8575    |000075;
     LDX.B $BF                                                  ;858DFD|A6BF    |0000BF;
     LDA.B $C3                                                  ;858DFF|A5C3    |0000C3;
-    STA.L $7EA420,X                                            ;858E01|9F20A47E|7EA420;
+    STA.L DMAtoVRAMData,X                                      ;858E01|9F20A47E|7EA420;
     LDA.B $C5                                                  ;858E05|A5C5    |0000C5;
     STA.L $7EA422,X                                            ;858E07|9F22A47E|7EA422;
     LDA.B ptrUnknown0x75                                       ;858E0B|A575    |000075;
@@ -1696,12 +1696,12 @@ fUnknown_858E57:
     STX.B $BF                                                  ;858E6D|86BF    |0000BF;
  
   - LDX.B $BF                                                  ;858E6F|A6BF    |0000BF;
-    LDA.L $7EA420,X                                            ;858E71|BF20A47E|7EA420;
+    LDA.L DMAtoVRAMData,X                                      ;858E71|BF20A47E|7EA420;
     CMP.W #$FFFF                                               ;858E75|C9FFFF  |      ;
     BEQ .return                                                ;858E78|F05C    |858ED6;
     LDA.L $7EA424,X                                            ;858E7A|BF24A47E|7EA424;
     STA.W SNES_VMADDL                                          ;858E7E|8D1621  |002116;
-    LDA.L $7EA420,X                                            ;858E81|BF20A47E|7EA420;
+    LDA.L DMAtoVRAMData,X                                      ;858E81|BF20A47E|7EA420;
     STA.W SNES_A1T0L                                           ;858E85|8D0243  |004302;
     LDA.W #$0040                                               ;858E88|A94000  |      ;
     STA.W SNES_DAS0L                                           ;858E8B|8D0543  |004305;
@@ -1716,7 +1716,7 @@ fUnknown_858E57:
     CLC                                                        ;858EA4|18      |      ;
     ADC.W #$0100                                               ;858EA5|690001  |      ;
     STA.W SNES_VMADDL                                          ;858EA8|8D1621  |002116;
-    LDA.L $7EA420,X                                            ;858EAB|BF20A47E|7EA420;
+    LDA.L DMAtoVRAMData,X                                      ;858EAB|BF20A47E|7EA420;
     CLC                                                        ;858EAF|18      |      ;
     ADC.W #$0200                                               ;858EB0|690002  |      ;
     STA.W SNES_A1T0L                                           ;858EB3|8D0243  |004302;
@@ -1742,7 +1742,7 @@ fUnknown_858E57:
 fUnknown_Zero7EA220:
     REP #$30                                                   ;858ED7|C230    |      ;
     LDA.W #$FFFF                                               ;858ED9|A9FFFF  |      ;
-    STA.L $7EA420                                              ;858EDC|8F20A47E|7EA420;
+    STA.L DMAtoVRAMData                                        ;858EDC|8F20A47E|7EA420;
     STZ.B $BB                                                  ;858EE0|64BB    |0000BB;
     STZ.B $BD                                                  ;858EE2|64BD    |0000BD;
     LDX.W #$0000                                               ;858EE4|A20000  |      ;

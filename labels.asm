@@ -12,15 +12,19 @@
     n16TempVar1 = $00007E
     n16TempVar2 = $000080
     n16TempVar3 = $000082
+    nTilesetCount = $000092
     nUnknown0095 = $000095
     ptrUnkown0xAD = $0000AD
     ptrBank86_87Data = $0000B3
     ptrUnknown0xC9 = $0000C9
     ptrUnknown0xCC = $0000CC
     ptrUnknown0xCF = $0000CF
+    nPlayerStateFlags = $0000D2
     nPlayerAction = $0000D4
-    nPlayerPosX = $0000D6
+    nPlayerDirection = $0000D6
     nPlayerPosY = $0000D8
+    nCameraX = $0000F5
+    nCameraY = $0000F7
     nRandomTempVar1 = $000100
     nRandomTempVar2 = $000101
     nRandomTempVar3 = $000102
@@ -43,12 +47,14 @@
     nPaletteNextHourIndex = $00017C
     nMapEngine_DestinationX = $00017D
     nMapEngine_DestinationY = $00017F
-    nCurrentMapdata0181 = $000181
-    nCurrentMapdata0182 = $000182
+    nCurrentMapdata_RoomWidthMult = $000181
+    nCurrentMapdata_RoomHeightMult = $000182
     nCurrentDialogPointerIndex = $000183
     nCurrentTextIndex = $000187
     nCurrentMapdataPresetId = $000195
     nMapEngine_CurrentMapId = $000196
+    nSpritePositionX = $0001A4
+    nSpritePositionY = $0001A6
     nMapScrool_SpeedX = $00087C
     nMapScrool_SpeedY = $00087E
     nMapScrool_Timer = $000880
@@ -297,6 +303,9 @@
     SNES_A2A7L = $004378
     SNES_A2A7H = $004379
     SNES_NTLR7 = $00437A
+    DMASpriteOBJQueue = $7EA000
+    DMASpriteOBJ2BitQueue = $7EA200
+    DMAtoVRAMData = $7EA420
     sFarmTilemap = $7EA4E6
     sCowDataAddress = $7EC1C6
     sChickenDataAddress = $7EC286
@@ -311,7 +320,7 @@
     nStoredWood = $7F1F0C
     nReqWoodForExpansion = $7F1F0E
     nStoredFeed = $7F1F10
-    nGameUnk7F1F12 = $7F1F12
+    nCowPregnacyDays = $7F1F12
     nGameUnk7F1F15 = $7F1F15
     nCurrentYearID = $7F1F18
     nCurrentSeasonID = $7F1F19
@@ -324,13 +333,20 @@
     nLove_Ellen = $7F1F25
     nLove_Eve = $7F1F27
     nPlantedGrassCount = $7F1F29
+    nNewBornCowAffection = $7F1F2B
+    nDogX = $7F1F2C
+    nDogY = $7F1F2E
+    nDogMapId = $7F1F30
+    nHorseAge = $7F1F32
     nPlayerHappiness = $7F1F33
+    nConstructionDayCounter = $7F1F35
     nPowerBerryEaten = $7F1F36
     nFirstChildAge = $7F1F37
     nSecondChildAge = $7F1F39
-    nPrengacyFlag = $7F1F3B
+    nMarriedDaysCounter = $7F1F3B
     sFirstChildNameShort = $7F1F3D
     sSecondChildNameShort = $7F1F41
+    nEggInCoopFlags = $7F1F45
     nStatShippedCorns = $7F1F4A
     nStatShippedTomatoes = $7F1F4C
     nStatShippedTurnips = $7F1F4E
@@ -338,8 +354,8 @@
     nDogHugs = $7F1F52
     nRanchMasteringRate = $7F1F54
     nRanchDevelopmentRate = $7F1F56
-    nHouseSize = $7F1F64
-    nPlayerFlags = $7F1F66
+    nDailyFlags = $7F1F5A
+    nEventFlags = $7F1F64
  
  
  
