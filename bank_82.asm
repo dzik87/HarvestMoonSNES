@@ -475,7 +475,7 @@ fNextDayHandler:
     STA.B nPlayerAction                                        ;8283D2|85D4    |0000D4;
     REP #$30                                                   ;8283D4|C230    |      ;
     LDA.W #$0000                                               ;8283D6|A90000  |      ;
-    STA.B $DA                                                  ;8283D9|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;8283D9|85DA    |0000DA;
     REP #$30                                                   ;8283DB|C230    |      ;
     LDA.W #$0000                                               ;8283DD|A90000  |      ;
     STA.W $0911                                                ;8283E0|8D1109  |000911;
@@ -1888,7 +1888,7 @@ subToolAnimation82A58B_Sickle:
     REP #$30                                                   ;8290E0|C230    |      ;
     LDA.W #$0050                                               ;8290E2|A95000  |      ;
     CLC                                                        ;8290E5|18      |      ;
-    ADC.B $DA                                                  ;8290E6|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8290E6|65DA    |0000DA;
     STA.W $0901                                                ;8290E8|8D0109  |000901;
     RTS                                                        ;8290EB|60      |      ;
  
@@ -1898,7 +1898,7 @@ subToolAnimation82A58B_Plow:
     REP #$30                                                   ;8290EE|C230    |      ;
     LDA.W #$0054                                               ;8290F0|A95400  |      ;
     CLC                                                        ;8290F3|18      |      ;
-    ADC.B $DA                                                  ;8290F4|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8290F4|65DA    |0000DA;
     STA.W $0901                                                ;8290F6|8D0109  |000901;
     RTS                                                        ;8290F9|60      |      ;
  
@@ -1908,7 +1908,7 @@ subToolAnimation82A58B_Hammer:
     REP #$30                                                   ;8290FC|C230    |      ;
     LDA.W #$0058                                               ;8290FE|A95800  |      ;
     CLC                                                        ;829101|18      |      ;
-    ADC.B $DA                                                  ;829102|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829102|65DA    |0000DA;
     STA.W $0901                                                ;829104|8D0109  |000901;
     RTS                                                        ;829107|60      |      ;
  
@@ -1918,7 +1918,7 @@ subToolAnimation82A58B_Axe:
     REP #$30                                                   ;82910A|C230    |      ;
     LDA.W #$005C                                               ;82910C|A95C00  |      ;
     CLC                                                        ;82910F|18      |      ;
-    ADC.B $DA                                                  ;829110|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829110|65DA    |0000DA;
     STA.W $0901                                                ;829112|8D0109  |000901;
     RTS                                                        ;829115|60      |      ;
  
@@ -1960,7 +1960,7 @@ subToolAnimation82A58B_CowMedicine:
     REP #$30                                                   ;829144|C230    |      ;
     LDA.W #$00AC                                               ;829146|A9AC00  |      ;
     CLC                                                        ;829149|18      |      ;
-    ADC.B $DA                                                  ;82914A|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;82914A|65DA    |0000DA;
     STA.W $0901                                                ;82914C|8D0109  |000901;
     RTS                                                        ;82914F|60      |      ;
  
@@ -1970,7 +1970,7 @@ subToolAnimation82A58B_MiraclePotion:
     REP #$30                                                   ;829152|C230    |      ;
     LDA.W #$00AC                                               ;829154|A9AC00  |      ;
     CLC                                                        ;829157|18      |      ;
-    ADC.B $DA                                                  ;829158|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829158|65DA    |0000DA;
     STA.W $0901                                                ;82915A|8D0109  |000901;
     RTS                                                        ;82915D|60      |      ;
  
@@ -1980,7 +1980,7 @@ subToolAnimation82A58B_Bell:
     REP #$30                                                   ;829160|C230    |      ;
     LDA.W #$0060                                               ;829162|A96000  |      ;
     CLC                                                        ;829165|18      |      ;
-    ADC.B $DA                                                  ;829166|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829166|65DA    |0000DA;
     STA.W $0901                                                ;829168|8D0109  |000901;
     REP #$20                                                   ;82916B|C220    |      ;
     LDA.L nDailyFlags                                          ;82916D|AF5A1F7F|7F1F5A;
@@ -2009,7 +2009,7 @@ subToolAnimation82A58B_Milker:
     REP #$30                                                   ;82918F|C230    |      ;
     LDA.W #$0078                                               ;829191|A97800  |      ;
     CLC                                                        ;829194|18      |      ;
-    ADC.B $DA                                                  ;829195|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829195|65DA    |0000DA;
     STA.W $0901                                                ;829197|8D0109  |000901;
     RTS                                                        ;82919A|60      |      ;
  
@@ -2019,7 +2019,7 @@ subToolAnimation82A58B_Brush:
     REP #$30                                                   ;82919D|C230    |      ;
     LDA.W #$0064                                               ;82919F|A96400  |      ;
     CLC                                                        ;8291A2|18      |      ;
-    ADC.B $DA                                                  ;8291A3|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8291A3|65DA    |0000DA;
     STA.W $0901                                                ;8291A5|8D0109  |000901;
     RTS                                                        ;8291A8|60      |      ;
  
@@ -2036,7 +2036,7 @@ subToolAnimation82A58B_WateringCan:
     REP #$30                                                   ;8291BB|C230    |      ;
     LDA.W #$0068                                               ;8291BD|A96800  |      ;
     CLC                                                        ;8291C0|18      |      ;
-    ADC.B $DA                                                  ;8291C1|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8291C1|65DA    |0000DA;
     STA.W $0901                                                ;8291C3|8D0109  |000901;
     BRA .return                                                ;8291C6|801F    |8291E7;
  
@@ -2045,7 +2045,7 @@ subToolAnimation82A58B_WateringCan:
     REP #$30                                                   ;8291C8|C230    |      ;
     LDA.W #$006C                                               ;8291CA|A96C00  |      ;
     CLC                                                        ;8291CD|18      |      ;
-    ADC.B $DA                                                  ;8291CE|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8291CE|65DA    |0000DA;
     STA.W $0901                                                ;8291D0|8D0109  |000901;
     BRA .return                                                ;8291D3|8012    |8291E7;
  
@@ -2054,7 +2054,7 @@ subToolAnimation82A58B_WateringCan:
     REP #$30                                                   ;8291D5|C230    |      ;
     LDA.W #$0070                                               ;8291D7|A97000  |      ;
     CLC                                                        ;8291DA|18      |      ;
-    ADC.B $DA                                                  ;8291DB|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8291DB|65DA    |0000DA;
     STA.W $0901                                                ;8291DD|8D0109  |000901;
     SEP #$20                                                   ;8291E0|E220    |      ;
     LDA.B #$14                                                 ;8291E2|A914    |      ;
@@ -2075,7 +2075,7 @@ subToolAnimation82A58B_GoldenPlow:
     REP #$30                                                   ;8291F1|C230    |      ;
     LDA.W #$007C                                               ;8291F3|A97C00  |      ;
     CLC                                                        ;8291F6|18      |      ;
-    ADC.B $DA                                                  ;8291F7|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;8291F7|65DA    |0000DA;
     STA.W $0901                                                ;8291F9|8D0109  |000901;
     RTS                                                        ;8291FC|60      |      ;
  
@@ -2084,7 +2084,7 @@ subToolAnimation82A58B_GoldenHammer:
     REP #$30                                                   ;8291FD|C230    |      ;
     LDA.W #$0084                                               ;8291FF|A98400  |      ;
     CLC                                                        ;829202|18      |      ;
-    ADC.B $DA                                                  ;829203|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829203|65DA    |0000DA;
     STA.W $0901                                                ;829205|8D0109  |000901;
     RTS                                                        ;829208|60      |      ;
  
@@ -2093,7 +2093,7 @@ subToolAnimation82A58B_GoldenAxe:
     REP #$30                                                   ;829209|C230    |      ;
     LDA.W #$0080                                               ;82920B|A98000  |      ;
     CLC                                                        ;82920E|18      |      ;
-    ADC.B $DA                                                  ;82920F|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;82920F|65DA    |0000DA;
     STA.W $0901                                                ;829211|8D0109  |000901;
     RTS                                                        ;829214|60      |      ;
  
@@ -2109,7 +2109,7 @@ subToolAnimation82A58B_BeanstalkSeed:
     REP #$30                                                   ;82921E|C230    |      ;
     LDA.W #$00AC                                               ;829220|A9AC00  |      ;
     CLC                                                        ;829223|18      |      ;
-    ADC.B $DA                                                  ;829224|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829224|65DA    |0000DA;
     STA.W $0901                                                ;829226|8D0109  |000901;
     RTS                                                        ;829229|60      |      ;
  
@@ -2118,7 +2118,7 @@ subToolAnimation82A58B_BlueDiamond:
     REP #$30                                                   ;82922A|C230    |      ;
     LDA.W #$00AC                                               ;82922C|A9AC00  |      ;
     CLC                                                        ;82922F|18      |      ;
-    ADC.B $DA                                                  ;829230|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829230|65DA    |0000DA;
     STA.W $0901                                                ;829232|8D0109  |000901;
     RTS                                                        ;829235|60      |      ;
  
@@ -2134,7 +2134,7 @@ subToolAnimation82A58B_ChickenFood:
     REP #$30                                                   ;82923F|C230    |      ;
     LDA.W #$0074                                               ;829241|A97400  |      ;
     CLC                                                        ;829244|18      |      ;
-    ADC.B $DA                                                  ;829245|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829245|65DA    |0000DA;
     STA.W $0901                                                ;829247|8D0109  |000901;
     RTS                                                        ;82924A|60      |      ;
  
@@ -2143,7 +2143,7 @@ subToolAnimation82A58B_CowFood:
     REP #$30                                                   ;82924B|C230    |      ;
     LDA.W #$0074                                               ;82924D|A97400  |      ;
     CLC                                                        ;829250|18      |      ;
-    ADC.B $DA                                                  ;829251|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;829251|65DA    |0000DA;
     STA.W $0901                                                ;829253|8D0109  |000901;
     RTS                                                        ;829256|60      |      ;
  
@@ -2750,7 +2750,7 @@ subToolUsed82A5C3_Hammer:
     ORA.W #$0200                                               ;829785|090002  |      ;
     STA.L nEventFlags                                          ;829788|8F641F7F|7F1F64;
     REP #$30                                                   ;82978C|C230    |      ;
-    LDA.B nPlayerDirection                                     ;82978E|A5D6    |0000D6;
+    LDA.B nPlayerPosX                                          ;82978E|A5D6    |0000D6;
     CLC                                                        ;829790|18      |      ;
     ADC.W #$0010                                               ;829791|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;829794|8D8509  |000985;
@@ -3964,7 +3964,7 @@ subToolUsed82A5C3_GolderHammer:
     ORA.W #$0200                                               ;82A187|090002  |      ;
     STA.L nEventFlags                                          ;82A18A|8F641F7F|7F1F64;
     REP #$30                                                   ;82A18E|C230    |      ;
-    LDA.B nPlayerDirection                                     ;82A190|A5D6    |0000D6;
+    LDA.B nPlayerPosX                                          ;82A190|A5D6    |0000D6;
     CLC                                                        ;82A192|18      |      ;
     ADC.W #$0010                                               ;82A193|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82A196|8D8509  |000985;
@@ -5500,7 +5500,7 @@ fUnknown_82AC61:
     INC A                                                      ;82AC85|1A      |      ;
     INC A                                                      ;82AC86|1A      |      ;
     TAY                                                        ;82AC87|A8      |      ; Y = A * 7
-    LDA.B $DA                                                  ;82AC88|A5DA    |0000DA;
+    LDA.B nPlayerDirection                                     ;82AC88|A5DA    |0000DA;
     ASL A                                                      ;82AC8A|0A      |      ;
     TAX                                                        ;82AC8B|AA      |      ; X = $DA * 2
     LDA.L .data1,X                                             ;82AC8C|BFFEAC82|82ACFE;
@@ -5870,7 +5870,7 @@ fUnknown_82AD0E:
  
 .return:
     REP #$20                                                   ;82AEE6|C220    |      ;
-    LDA.B nPlayerDirection                                     ;82AEE8|A5D6    |0000D6;
+    LDA.B nPlayerPosX                                          ;82AEE8|A5D6    |0000D6;
     STA.B $DF                                                  ;82AEEA|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;82AEEC|A5D8    |0000D8;
     STA.B $E1                                                  ;82AEEE|85E1    |0000E1;
@@ -5878,7 +5878,7 @@ fUnknown_82AD0E:
     STZ.B $E7                                                  ;82AEF2|64E7    |0000E7;
     LDA.W #$0010                                               ;82AEF4|A91000  |      ;
     STA.B $E3                                                  ;82AEF7|85E3    |0000E3;
-    LDA.B $DA                                                  ;82AEF9|A5DA    |0000DA;
+    LDA.B nPlayerDirection                                     ;82AEF9|A5DA    |0000DA;
     JSL.L fGameEngine_Unknown83AD91                            ;82AEFB|2291AD83|83AD91;
     RTL                                                        ;82AEFF|6B      |      ;
  
@@ -7230,7 +7230,7 @@ fUnknown_82D1C0:
     STA.B nPlayerAction                                        ;82D2AB|85D4    |0000D4;
     REP #$30                                                   ;82D2AD|C230    |      ;
     LDA.W #$0000                                               ;82D2AF|A90000  |      ;
-    STA.B $DA                                                  ;82D2B2|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;82D2B2|85DA    |0000DA;
     REP #$30                                                   ;82D2B4|C230    |      ;
     LDA.W #$0000                                               ;82D2B6|A90000  |      ;
     STA.W $0911                                                ;82D2B9|8D1109  |000911;
@@ -7413,7 +7413,7 @@ fUnknown_82D3C7:
     STA.B nPlayerAction                                        ;82D4AC|85D4    |0000D4;
     REP #$30                                                   ;82D4AE|C230    |      ;
     LDA.W #$0000                                               ;82D4B0|A90000  |      ;
-    STA.B $DA                                                  ;82D4B3|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;82D4B3|85DA    |0000DA;
     REP #$30                                                   ;82D4B5|C230    |      ;
     LDA.W #$0000                                               ;82D4B7|A90000  |      ;
     STA.W $0911                                                ;82D4BA|8D1109  |000911;
@@ -7911,7 +7911,7 @@ fUnknown_82D8B0:
     STA.B nPlayerAction                                        ;82D8DE|85D4    |0000D4;
     REP #$30                                                   ;82D8E0|C230    |      ;
     LDA.W #$0000                                               ;82D8E2|A90000  |      ;
-    STA.B $DA                                                  ;82D8E5|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;82D8E5|85DA    |0000DA;
     REP #$30                                                   ;82D8E7|C230    |      ;
     LDA.W #$0000                                               ;82D8E9|A90000  |      ;
     STA.W $0911                                                ;82D8EC|8D1109  |000911;
@@ -8156,7 +8156,7 @@ fUnknown_82DAF5:
     JSL.L fUnknown_Zero07Ptr                                   ;82DB35|22C7A481|81A4C7;
     JSL.L fSubUnk1_ZeroCCPtr                                   ;82DB39|22008084|848000;
     REP #$20                                                   ;82DB3D|C220    |      ;
-    STZ.B nPlayerDirection                                     ;82DB3F|64D6    |0000D6;
+    STZ.B nPlayerPosX                                          ;82DB3F|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DB41|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DB43|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DB46|9C7F01  |00017F;
@@ -8213,7 +8213,7 @@ fUnknown_82DBB2:
     STZ.W $013E                                                ;82DBB9|9C3E01  |00013E;
     STZ.W $0140                                                ;82DBBC|9C4001  |000140;
     STZ.W $0142                                                ;82DBBF|9C4201  |000142;
-    STZ.B nPlayerDirection                                     ;82DBC2|64D6    |0000D6;
+    STZ.B nPlayerPosX                                          ;82DBC2|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DBC4|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DBC6|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DBC9|9C7F01  |00017F;
@@ -8606,7 +8606,7 @@ fUnknown_82DEC5:
     STZ.W $013E                                                ;82DEFA|9C3E01  |00013E;
     STZ.W $0140                                                ;82DEFD|9C4001  |000140;
     STZ.W $0142                                                ;82DF00|9C4201  |000142;
-    STZ.B nPlayerDirection                                     ;82DF03|64D6    |0000D6;
+    STZ.B nPlayerPosX                                          ;82DF03|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DF05|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DF07|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DF0A|9C7F01  |00017F;

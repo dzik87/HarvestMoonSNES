@@ -4822,7 +4822,7 @@ fGameEngine_FirstNight:
     STZ.W $098A                                                ;83AC50|9C8A09  |00098A;
     STZ.W $0972                                                ;83AC53|9C7209  |000972;
     REP #$20                                                   ;83AC56|C220    |      ;
-    STZ.B nPlayerDirection                                     ;83AC58|64D6    |0000D6;
+    STZ.B nPlayerPosX                                          ;83AC58|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;83AC5A|64D8    |0000D8;
     STZ.W nPlayerPosXCopy                                      ;83AC5C|9C0709  |000907;
     STZ.W nPlayerPosYCopy                                      ;83AC5F|9C0909  |000909;
@@ -4870,7 +4870,7 @@ fGameEngine_FirstNight:
     STA.B nPlayerAction                                        ;83ACDC|85D4    |0000D4;
     REP #$30                                                   ;83ACDE|C230    |      ;
     LDA.W #$0000                                               ;83ACE0|A90000  |      ;
-    STA.B $DA                                                  ;83ACE3|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;83ACE3|85DA    |0000DA;
     REP #$30                                                   ;83ACE5|C230    |      ;
     LDA.W #$0000                                               ;83ACE7|A90000  |      ;
     STA.W $0911                                                ;83ACEA|8D1109  |000911;
@@ -5182,7 +5182,7 @@ fGameEngine_Unknown83AEC3:
 .continue:
     LDA.B n16TempVar2                                          ;83AF06|A580    |000080;
     SEC                                                        ;83AF08|38      |      ;
-    SBC.B nPlayerDirection                                     ;83AF09|E5D6    |0000D6;
+    SBC.B nPlayerPosX                                          ;83AF09|E5D6    |0000D6;
     CLC                                                        ;83AF0B|18      |      ;
     ADC.W #$000C                                               ;83AF0C|690C00  |      ;
     CMP.W #$0019                                               ;83AF0F|C91900  |      ;
@@ -11961,7 +11961,7 @@ CODE_83E504:
     REP #$30                                                   ;83E52A|C230    |      ;
     LDA.W #$0000                                               ;83E52C|A90000  |      ;
     CLC                                                        ;83E52F|18      |      ;
-    ADC.B $DA                                                  ;83E530|65DA    |0000DA;
+    ADC.B nPlayerDirection                                     ;83E530|65DA    |0000DA;
     STA.W $0901                                                ;83E532|8D0109  |000901;
  
 CODE_83E535:
@@ -12275,7 +12275,7 @@ subEngineMap_0x3C:
     STA.B nPlayerAction                                        ;83E7A7|85D4    |0000D4;
     REP #$30                                                   ;83E7A9|C230    |      ;
     LDA.W #$0000                                               ;83E7AB|A90000  |      ;
-    STA.B $DA                                                  ;83E7AE|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;83E7AE|85DA    |0000DA;
     REP #$30                                                   ;83E7B0|C230    |      ;
     LDA.W #$0000                                               ;83E7B2|A90000  |      ;
     STA.W $0911                                                ;83E7B5|8D1109  |000911;
@@ -12876,7 +12876,7 @@ subEngineMap_0x3D:
     STA.B nPlayerAction                                        ;83EBE0|85D4    |0000D4;
     REP #$30                                                   ;83EBE2|C230    |      ;
     LDA.W #$0000                                               ;83EBE4|A90000  |      ;
-    STA.B $DA                                                  ;83EBE7|85DA    |0000DA;
+    STA.B nPlayerDirection                                     ;83EBE7|85DA    |0000DA;
     REP #$30                                                   ;83EBE9|C230    |      ;
     LDA.W #$0000                                               ;83EBEB|A90000  |      ;
     STA.W $0911                                                ;83EBEE|8D1109  |000911;
