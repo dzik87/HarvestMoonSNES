@@ -21,8 +21,9 @@
     ptrUnknown0xCF = $0000CF
     nPlayerStateFlags = $0000D2
     nPlayerAction = $0000D4
-    nPlayerDirection = $0000D6
+    nPlayerPosX = $0000D6
     nPlayerPosY = $0000D8
+    nPlayerDirection = $0000DA
     nCameraX = $0000F5
     nCameraY = $0000F7
     nRandomTempVar1 = $000100
