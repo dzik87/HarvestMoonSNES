@@ -18,7 +18,7 @@ fGame_TimeHandler:
  
  
   + REP #$20                                                   ;828018|C220    |      ;
-    LDA.L $7F1F5A                                              ;82801A|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;82801A|AF5A1F7F|7F1F5A;
     AND.W #$0400                                               ;82801E|290004  |      ;
     BEQ +                                                      ;828021|F003    |828026;
     JMP.W fEvents_ShippingSceneDialog                          ;828023|4C6581  |828165;
@@ -54,7 +54,7 @@ fGame_TimeHandler:
  
  
   + REP #$20                                                   ;82806F|C220    |      ;
-    LDA.L $7F1F5E                                              ;828071|AF5E1F7F|7F1F5E;
+    LDA.L nDailyFlags+4                                        ;828071|AF5E1F7F|7F1F5E;
     AND.W #$8000                                               ;828075|290080  |      ;
     BNE .continue                                              ;828078|D012    |82808C;
     SEP #$20                                                   ;82807A|E220    |      ;
@@ -95,7 +95,7 @@ fUnknown_8280AA:
     LDA.B #$14                                                 ;8280BB|A914    |      ;
     JSL.L fPlayerEnergyHandler_81D061                          ;8280BD|2261D081|81D061;
     REP #$20                                                   ;8280C1|C220    |      ;
-    LDA.B $D2                                                  ;8280C3|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;8280C3|A5D2    |0000D2;
     AND.W #$0430                                               ;8280C5|293004  |      ;
     BEQ +                                                      ;8280C8|F003    |8280CD;
     JMP.W .return                                              ;8280CA|4C3081  |828130;
@@ -137,7 +137,7 @@ fUnknown_8280AA:
     JMP.W .return                                              ;828104|4C3081  |828130;
  
  
-  + LDA.B $D2                                                  ;828107|A5D2    |0000D2;
+  + LDA.B nPlayerStateFlags                                    ;828107|A5D2    |0000D2;
     AND.W #$0800                                               ;828109|290008  |      ;
     BEQ +                                                      ;82810C|F003    |828111;
     JMP.W .return                                              ;82810E|4C3081  |828130;
@@ -149,13 +149,13 @@ fUnknown_8280AA:
     SEP #$20                                                   ;828119|E220    |      ;
     STA.W $0924                                                ;82811B|8D2409  |000924;
     REP #$30                                                   ;82811E|C230    |      ;
-    LDA.B $D2                                                  ;828120|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;828120|A5D2    |0000D2;
     ORA.W #$0004                                               ;828122|090400  |      ;
-    STA.B $D2                                                  ;828125|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;828125|85D2    |0000D2;
     REP #$30                                                   ;828127|C230    |      ;
-    LDA.B $D2                                                  ;828129|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;828129|A5D2    |0000D2;
     ORA.W #$0400                                               ;82812B|090004  |      ;
-    STA.B $D2                                                  ;82812E|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82812E|85D2    |0000D2;
  
 .return:
     RTL                                                        ;828130|6B      |      ;
@@ -177,9 +177,9 @@ fEvents_ShippingScene:
     LDA.B #$00                                                 ;828146|A900    |      ;
     STA.W $019A                                                ;828148|8D9A01  |00019A;
     REP #$20                                                   ;82814B|C220    |      ;
-    LDA.L $7F1F5A                                              ;82814D|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;82814D|AF5A1F7F|7F1F5A;
     ORA.W #$0400                                               ;828151|090004  |      ;
-    STA.L $7F1F5A                                              ;828154|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;828154|8F5A1F7F|7F1F5A;
     LDA.W #$0006                                               ;828158|A90600  |      ;
     LDX.W #$0000                                               ;82815B|A20000  |      ;
     LDY.W #$0026                                               ;82815E|A02600  |      ;
@@ -187,11 +187,11 @@ fEvents_ShippingScene:
  
 fEvents_ShippingSceneDialog:
     REP #$20                                                   ;828165|C220    |      ;
-    LDA.L $7F1F5A                                              ;828167|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;828167|AF5A1F7F|7F1F5A;
     AND.W #$0800                                               ;82816B|290008  |      ;
     BEQ fEvents_ShippingSceneReturn                            ;82816E|F04F    |8281BF;
     REP #$30                                                   ;828170|C230    |      ;
-    LDA.B $D2                                                  ;828172|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;828172|A5D2    |0000D2;
     AND.W #$0040                                               ;828174|294000  |      ;
     BEQ +                                                      ;828177|F003    |82817C;
     JMP.W fEvents_ShippingSceneReturn                          ;828179|4CBF81  |8281BF;
@@ -218,9 +218,9 @@ fEvents_ShippingSceneDialog:
     LDY.W #$0027                                               ;8281AB|A02700  |      ;
     JSL.L fSubUnk1Unknown_84803F                               ;8281AE|223F8084|84803F;
     REP #$20                                                   ;8281B2|C220    |      ;
-    LDA.L $7F1F5A                                              ;8281B4|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;8281B4|AF5A1F7F|7F1F5A;
     AND.W #$FBFF                                               ;8281B8|29FFFB  |      ;
-    STA.L $7F1F5A                                              ;8281BB|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;8281BB|8F5A1F7F|7F1F5A;
  
 fEvents_ShippingSceneReturn:
     RTL                                                        ;8281BF|6B      |      ;
@@ -401,7 +401,7 @@ fNextDayHandler:
     JSL.L fAudioUnknown_838401                                 ;828301|22018483|838401;
     SEP #$20                                                   ;828305|E220    |      ;
     LDA.B #$0F                                                 ;828307|A90F    |      ;
-    STA.B $92                                                  ;828309|8592    |000092;
+    STA.B nTilesetCount                                        ;828309|8592    |000092;
     LDA.B #$03                                                 ;82830B|A903    |      ;
     STA.B $93                                                  ;82830D|8593    |000093;
     LDA.B #$01                                                 ;82830F|A901    |      ;
@@ -412,36 +412,36 @@ fNextDayHandler:
     LDA.B #$0F                                                 ;82831D|A90F    |      ;
     STA.B nMapEngine_DestinationId                             ;82831F|8522    |000022;
     REP #$30                                                   ;828321|C230    |      ;
-    LDA.L nHouseSize                                           ;828323|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;828323|AF641F7F|7F1F64;
     AND.W #$FFCF                                               ;828327|29CFFF  |      ;
-    STA.L nHouseSize                                           ;82832A|8F641F7F|7F1F64;
-    LDA.L $7F1F70                                              ;82832E|AF701F7F|7F1F70;
+    STA.L nEventFlags                                          ;82832A|8F641F7F|7F1F64;
+    LDA.L nEventFlags+12                                       ;82832E|AF701F7F|7F1F70;
     AND.W #$FFFD                                               ;828332|29FDFF  |      ;
-    STA.L $7F1F70                                              ;828335|8F701F7F|7F1F70;
+    STA.L nEventFlags+12                                       ;828335|8F701F7F|7F1F70;
     REP #$30                                                   ;828339|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;82833B|AD9601  |000196;
     AND.W #$0010                                               ;82833E|291000  |      ;
     BEQ +                                                      ;828341|F00B    |82834E;
-    LDA.L nHouseSize                                           ;828343|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;828343|AF641F7F|7F1F64;
     ORA.W #$0020                                               ;828347|092000  |      ;
-    STA.L nHouseSize                                           ;82834A|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;82834A|8F641F7F|7F1F64;
  
   + JSL.L fWeatherForecast_828C09                              ;82834E|22098C82|828C09;
     REP #$30                                                   ;828352|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;828354|AD9601  |000196;
     AND.W #$0200                                               ;828357|290002  |      ;
     BEQ +                                                      ;82835A|F00B    |828367;
-    LDA.L nHouseSize                                           ;82835C|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82835C|AF641F7F|7F1F64;
     ORA.W #$0010                                               ;828360|091000  |      ;
-    STA.L nHouseSize                                           ;828363|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;828363|8F641F7F|7F1F64;
  
   + REP #$30                                                   ;828367|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;828369|AD9601  |000196;
     AND.W #$0100                                               ;82836C|290001  |      ;
     BEQ +                                                      ;82836F|F00B    |82837C;
-    LDA.L $7F1F70                                              ;828371|AF701F7F|7F1F70;
+    LDA.L nEventFlags+12                                       ;828371|AF701F7F|7F1F70;
     ORA.W #$0002                                               ;828375|090200  |      ;
-    STA.L $7F1F70                                              ;828378|8F701F7F|7F1F70;
+    STA.L nEventFlags+12                                       ;828378|8F701F7F|7F1F70;
  
   + JSL.L fAudioEngine_SelectMapMusic                          ;82837C|22F59580|8095F5;
     SEP #$20                                                   ;828380|E220    |      ;
@@ -460,16 +460,16 @@ fNextDayHandler:
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
     STZ.W $0915                                                ;8283B2|9C1509  |000915;
-    STZ.B $D2                                                  ;8283B5|64D2    |0000D2;
+    STZ.B nPlayerStateFlags                                    ;8283B5|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;8283B7|64D4    |0000D4;
     SEP #$20                                                   ;8283B9|E220    |      ;
     LDA.W nPlayerStamina                                       ;8283BB|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;8283BE|8D1809  |000918; Reset player energy to max available
     STZ.W $0925                                                ;8283C1|9C2509  |000925;
     REP #$30                                                   ;8283C4|C230    |      ;
-    LDA.B $D2                                                  ;8283C6|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;8283C6|A5D2    |0000D2;
     ORA.W #$0001                                               ;8283C8|090100  |      ;
-    STA.B $D2                                                  ;8283CB|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;8283CB|85D2    |0000D2;
     REP #$30                                                   ;8283CD|C230    |      ;
     LDA.W #$0000                                               ;8283CF|A90000  |      ;
     STA.B nPlayerAction                                        ;8283D2|85D4    |0000D4;
@@ -503,107 +503,107 @@ fNextDayHandler:
     STZ.W sPlacedChickenFeed                                   ;82841D|9C3409  |000934; zero chicken feed data
     REP #$20                                                   ;828420|C220    |      ;
     LDA.W #$0000                                               ;828422|A90000  |      ;
-    STA.L $7F1F5A                                              ;828425|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;828425|8F5A1F7F|7F1F5A;
     LDA.W #$0000                                               ;828429|A90000  |      ;
-    STA.L $7F1F5C                                              ;82842C|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;82842C|8F5C1F7F|7F1F5C;
     LDA.W #$0000                                               ;828430|A90000  |      ;
-    STA.L $7F1F5E                                              ;828433|8F5E1F7F|7F1F5E;
+    STA.L nDailyFlags+4                                        ;828433|8F5E1F7F|7F1F5E;
     LDA.W #$0000                                               ;828437|A90000  |      ;
-    STA.L $7F1F60                                              ;82843A|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;82843A|8F601F7F|7F1F60;
     LDA.W #$0000                                               ;82843E|A90000  |      ;
-    STA.L $7F1F62                                              ;828441|8F621F7F|7F1F62;
+    STA.L nDailyFlags+8                                        ;828441|8F621F7F|7F1F62;
     LDA.W #$0000                                               ;828445|A90000  |      ;
     STA.L $7F1F74                                              ;828448|8F741F7F|7F1F74;
     STA.L $7F1F76                                              ;82844C|8F761F7F|7F1F76;
     STA.L $7F1F78                                              ;828450|8F781F7F|7F1F78;
     REP #$20                                                   ;828454|C220    |      ;
-    LDA.L nPlayerFlags+2                                       ;828456|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;828456|AF681F7F|7F1F68;
     ORA.W #$0001                                               ;82845A|090100  |      ;
-    STA.L nPlayerFlags+2                                       ;82845D|8F681F7F|7F1F68;
-    LDA.L nPlayerFlags                                         ;828461|AF661F7F|7F1F66;
+    STA.L nEventFlags+4                                        ;82845D|8F681F7F|7F1F68;
+    LDA.L nEventFlags+2                                        ;828461|AF661F7F|7F1F66;
     AND.W #$0020                                               ;828465|292000  |      ;
     BEQ +                                                      ;828468|F018    |828482;
     REP #$20                                                   ;82846A|C220    |      ;
-    LDA.L nPlayerFlags                                         ;82846C|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;82846C|AF661F7F|7F1F66;
     AND.W #$FFDF                                               ;828470|29DFFF  |      ;
-    STA.L nPlayerFlags                                         ;828473|8F661F7F|7F1F66;
-    LDA.L nPlayerFlags                                         ;828477|AF661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;828473|8F661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;828477|AF661F7F|7F1F66;
     ORA.W #$0040                                               ;82847B|094000  |      ;
-    STA.L nPlayerFlags                                         ;82847E|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;82847E|8F661F7F|7F1F66;
  
   + REP #$20                                                   ;828482|C220    |      ;
-    LDA.L nPlayerFlags                                         ;828484|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;828484|AF661F7F|7F1F66;
     AND.W #$0080                                               ;828488|298000  |      ;
     BEQ .label2                                                ;82848B|F055    |8284E2;
     SEP #$20                                                   ;82848D|E220    |      ;
-    LDA.L $7F1F35                                              ;82848F|AF351F7F|7F1F35;
+    LDA.L nConstructionDayCounter                              ;82848F|AF351F7F|7F1F35;
     INC A                                                      ;828493|1A      |      ;
-    STA.L $7F1F35                                              ;828494|8F351F7F|7F1F35;
+    STA.L nConstructionDayCounter                              ;828494|8F351F7F|7F1F35;
     CMP.B #$04                                                 ;828498|C904    |      ;
     BNE .label2                                                ;82849A|D046    |8284E2;
     REP #$30                                                   ;82849C|C230    |      ;
-    LDA.L nPlayerFlags                                         ;82849E|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;82849E|AF661F7F|7F1F66;
     ORA.W #$0100                                               ;8284A2|090001  |      ;
-    STA.L nPlayerFlags                                         ;8284A5|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;8284A5|8F661F7F|7F1F66;
     REP #$20                                                   ;8284A9|C220    |      ;
     LDA.W #$01F4                                               ;8284AB|A9F401  |      ;
     STA.L nReqWoodForExpansion                                 ;8284AE|8F0E1F7F|7F1F0E;
-    LDA.L nPlayerFlags                                         ;8284B2|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8284B2|AF661F7F|7F1F66;
     AND.W #$FF7F                                               ;8284B6|297FFF  |      ;
-    STA.L nPlayerFlags                                         ;8284B9|8F661F7F|7F1F66;
-    LDA.L nHouseSize                                           ;8284BD|AF641F7F|7F1F64;
+    STA.L nEventFlags+2                                        ;8284B9|8F661F7F|7F1F66;
+    LDA.L nEventFlags                                          ;8284BD|AF641F7F|7F1F64;
     AND.W #$0040                                               ;8284C1|294000  |      ;
     BEQ .label1                                                ;8284C4|F00F    |8284D5;
     REP #$30                                                   ;8284C6|C230    |      ;
-    LDA.L nHouseSize                                           ;8284C8|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;8284C8|AF641F7F|7F1F64;
     ORA.W #$0080                                               ;8284CC|098000  |      ;
-    STA.L nHouseSize                                           ;8284CF|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;8284CF|8F641F7F|7F1F64;
     BRA .label2                                                ;8284D3|800D    |8284E2;
  
  
 .label1:
     REP #$30                                                   ;8284D5|C230    |      ;
-    LDA.L nHouseSize                                           ;8284D7|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;8284D7|AF641F7F|7F1F64;
     ORA.W #$0040                                               ;8284DB|094000  |      ;
-    STA.L nHouseSize                                           ;8284DE|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;8284DE|8F641F7F|7F1F64;
  
 .label2:
     REP #$30                                                   ;8284E2|C230    |      ;
-    LDA.L nPlayerFlags+2                                       ;8284E4|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;8284E4|AF681F7F|7F1F68;
     AND.W #$0800                                               ;8284E8|290008  |      ;
     BEQ +                                                      ;8284EB|F016    |828503;
-    LDA.L nPlayerFlags+2                                       ;8284ED|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;8284ED|AF681F7F|7F1F68;
     AND.W #$F7FF                                               ;8284F1|29FFF7  |      ;
-    STA.L nPlayerFlags+2                                       ;8284F4|8F681F7F|7F1F68;
-    LDA.L nPlayerFlags+2                                       ;8284F8|AF681F7F|7F1F68;
+    STA.L nEventFlags+4                                        ;8284F4|8F681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;8284F8|AF681F7F|7F1F68;
     ORA.W #$1000                                               ;8284FC|090010  |      ;
-    STA.L nPlayerFlags+2                                       ;8284FF|8F681F7F|7F1F68;
+    STA.L nEventFlags+4                                        ;8284FF|8F681F7F|7F1F68;
  
   + REP #$30                                                   ;828503|C230    |      ;
-    LDA.L nPlayerFlags+2                                       ;828505|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;828505|AF681F7F|7F1F68;
     AND.W #$8000                                               ;828509|290080  |      ;
     BEQ +                                                      ;82850C|F017    |828525;
-    LDA.L nPlayerFlags+2                                       ;82850E|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;82850E|AF681F7F|7F1F68;
     AND.W #$7FFF                                               ;828512|29FF7F  |      ;
-    STA.L nPlayerFlags+2                                       ;828515|8F681F7F|7F1F68;
+    STA.L nEventFlags+4                                        ;828515|8F681F7F|7F1F68;
     SEP #$20                                                   ;828519|E220    |      ;
     LDA.L sShedItems+2                                         ;82851B|AF021F7F|7F1F02;
     ORA.B #$04                                                 ;82851F|0904    |      ;
     STA.L sShedItems+2                                         ;828521|8F021F7F|7F1F02;
  
   + REP #$30                                                   ;828525|C230    |      ;
-    LDA.L $7F1F6A                                              ;828527|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828527|AF6A1F7F|7F1F6A;
     AND.W #$0080                                               ;82852B|298000  |      ;
     BEQ .label6                                                ;82852E|F04F    |82857F;
-    LDA.L $7F1F6A                                              ;828530|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828530|AF6A1F7F|7F1F6A;
     AND.W #$FF7F                                               ;828534|297FFF  |      ;
-    STA.L $7F1F6A                                              ;828537|8F6A1F7F|7F1F6A;
-    LDA.L $7F1F6A                                              ;82853B|AF6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;828537|8F6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;82853B|AF6A1F7F|7F1F6A;
     AND.W #$0100                                               ;82853F|290001  |      ;
     BNE .label3                                                ;828542|D00D    |828551;
-    LDA.L $7F1F6A                                              ;828544|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828544|AF6A1F7F|7F1F6A;
     ORA.W #$0102                                               ;828548|090201  |      ;
-    STA.L $7F1F6A                                              ;82854B|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;82854B|8F6A1F7F|7F1F6A;
     BRA .label6                                                ;82854F|802E    |82857F;
  
  
@@ -632,24 +632,24 @@ fNextDayHandler:
  
 .label6:
     REP #$30                                                   ;82857F|C230    |      ;
-    LDA.L $7F1F6A                                              ;828581|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828581|AF6A1F7F|7F1F6A;
     AND.W #$0400                                               ;828585|290004  |      ;
     BEQ +                                                      ;828588|F01F    |8285A9;
-    LDA.L $7F1F6A                                              ;82858A|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;82858A|AF6A1F7F|7F1F6A;
     AND.W #$0800                                               ;82858E|290008  |      ;
     BNE +                                                      ;828591|D016    |8285A9;
-    LDA.L $7F1F6A                                              ;828593|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828593|AF6A1F7F|7F1F6A;
     ORA.W #$0800                                               ;828597|090008  |      ;
-    STA.L $7F1F6A                                              ;82859A|8F6A1F7F|7F1F6A;
-    LDA.L $7F1F6A                                              ;82859E|AF6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;82859A|8F6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;82859E|AF6A1F7F|7F1F6A;
     AND.W #$FBFF                                               ;8285A2|29FFFB  |      ;
-    STA.L $7F1F6A                                              ;8285A5|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;8285A5|8F6A1F7F|7F1F6A;
  
   + REP #$30                                                   ;8285A9|C230    |      ;
-    LDA.L $7F1F6A                                              ;8285AB|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;8285AB|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;8285AF|290010  |      ;
     BEQ +                                                      ;8285B2|F02E    |8285E2;
-    LDA.L $7F1F6A                                              ;8285B4|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;8285B4|AF6A1F7F|7F1F6A;
     AND.W #$2000                                               ;8285B8|290020  |      ;
     BNE +                                                      ;8285BB|D025    |8285E2;
     SEP #$20                                                   ;8285BD|E220    |      ;
@@ -659,18 +659,18 @@ fNextDayHandler:
     CMP.B #$03                                                 ;8285C6|C903    |      ;
     BNE +                                                      ;8285C8|D018    |8285E2;
     REP #$20                                                   ;8285CA|C220    |      ;
-    LDA.L $7F1F6A                                              ;8285CC|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;8285CC|AF6A1F7F|7F1F6A;
     ORA.W #$2000                                               ;8285D0|090020  |      ;
-    STA.L $7F1F6A                                              ;8285D3|8F6A1F7F|7F1F6A;
-    LDA.L $7F1F6A                                              ;8285D7|AF6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;8285D3|8F6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;8285D7|AF6A1F7F|7F1F6A;
     AND.W #$EFFF                                               ;8285DB|29FFEF  |      ;
-    STA.L $7F1F6A                                              ;8285DE|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;8285DE|8F6A1F7F|7F1F6A;
  
   + REP #$30                                                   ;8285E2|C230    |      ;
-    LDA.L $7F1F6A                                              ;8285E4|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;8285E4|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;8285E8|290040  |      ;
     BEQ +                                                      ;8285EB|F02E    |82861B;
-    LDA.L $7F1F6A                                              ;8285ED|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;8285ED|AF6A1F7F|7F1F6A;
     AND.W #$8000                                               ;8285F1|290080  |      ;
     BNE +                                                      ;8285F4|D025    |82861B;
     SEP #$20                                                   ;8285F6|E220    |      ;
@@ -680,18 +680,18 @@ fNextDayHandler:
     CMP.B #$03                                                 ;8285FF|C903    |      ;
     BNE +                                                      ;828601|D018    |82861B;
     REP #$20                                                   ;828603|C220    |      ;
-    LDA.L $7F1F6A                                              ;828605|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828605|AF6A1F7F|7F1F6A;
     ORA.W #$8000                                               ;828609|090080  |      ;
-    STA.L $7F1F6A                                              ;82860C|8F6A1F7F|7F1F6A;
-    LDA.L $7F1F6A                                              ;828610|AF6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;82860C|8F6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;828610|AF6A1F7F|7F1F6A;
     AND.W #$BFFF                                               ;828614|29FFBF  |      ;
-    STA.L $7F1F6A                                              ;828617|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;828617|8F6A1F7F|7F1F6A;
  
   + REP #$30                                                   ;82861B|C230    |      ;
-    LDA.L $7F1F6C                                              ;82861D|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;82861D|AF6C1F7F|7F1F6C;
     AND.W #$0001                                               ;828621|290100  |      ;
     BEQ +                                                      ;828624|F02E    |828654;
-    LDA.L $7F1F6C                                              ;828626|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828626|AF6C1F7F|7F1F6C;
     AND.W #$0002                                               ;82862A|290200  |      ;
     BNE +                                                      ;82862D|D025    |828654;
     SEP #$20                                                   ;82862F|E220    |      ;
@@ -701,18 +701,18 @@ fNextDayHandler:
     CMP.B #$03                                                 ;828638|C903    |      ;
     BNE +                                                      ;82863A|D018    |828654;
     REP #$20                                                   ;82863C|C220    |      ;
-    LDA.L $7F1F6C                                              ;82863E|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;82863E|AF6C1F7F|7F1F6C;
     ORA.W #$0002                                               ;828642|090200  |      ;
-    STA.L $7F1F6C                                              ;828645|8F6C1F7F|7F1F6C;
-    LDA.L $7F1F6C                                              ;828649|AF6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;828645|8F6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828649|AF6C1F7F|7F1F6C;
     AND.W #$FFFE                                               ;82864D|29FEFF  |      ;
-    STA.L $7F1F6C                                              ;828650|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;828650|8F6C1F7F|7F1F6C;
  
   + REP #$30                                                   ;828654|C230    |      ;
-    LDA.L $7F1F6C                                              ;828656|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828656|AF6C1F7F|7F1F6C;
     AND.W #$0004                                               ;82865A|290400  |      ;
     BEQ +                                                      ;82865D|F02E    |82868D;
-    LDA.L $7F1F6C                                              ;82865F|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;82865F|AF6C1F7F|7F1F6C;
     AND.W #$0008                                               ;828663|290800  |      ;
     BNE +                                                      ;828666|D025    |82868D;
     SEP #$20                                                   ;828668|E220    |      ;
@@ -722,18 +722,18 @@ fNextDayHandler:
     CMP.B #$03                                                 ;828671|C903    |      ;
     BNE +                                                      ;828673|D018    |82868D;
     REP #$20                                                   ;828675|C220    |      ;
-    LDA.L $7F1F6C                                              ;828677|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828677|AF6C1F7F|7F1F6C;
     ORA.W #$0008                                               ;82867B|090800  |      ;
-    STA.L $7F1F6C                                              ;82867E|8F6C1F7F|7F1F6C;
-    LDA.L $7F1F6C                                              ;828682|AF6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;82867E|8F6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828682|AF6C1F7F|7F1F6C;
     AND.W #$FFFB                                               ;828686|29FBFF  |      ;
-    STA.L $7F1F6C                                              ;828689|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;828689|8F6C1F7F|7F1F6C;
  
   + REP #$30                                                   ;82868D|C230    |      ;
-    LDA.L $7F1F6C                                              ;82868F|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;82868F|AF6C1F7F|7F1F6C;
     AND.W #$0010                                               ;828693|291000  |      ;
     BEQ +                                                      ;828696|F02E    |8286C6;
-    LDA.L $7F1F6C                                              ;828698|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828698|AF6C1F7F|7F1F6C;
     AND.W #$0020                                               ;82869C|292000  |      ;
     BNE +                                                      ;82869F|D025    |8286C6;
     SEP #$20                                                   ;8286A1|E220    |      ;
@@ -743,20 +743,20 @@ fNextDayHandler:
     CMP.B #$03                                                 ;8286AA|C903    |      ;
     BNE +                                                      ;8286AC|D018    |8286C6;
     REP #$20                                                   ;8286AE|C220    |      ;
-    LDA.L $7F1F6C                                              ;8286B0|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;8286B0|AF6C1F7F|7F1F6C;
     ORA.W #$0020                                               ;8286B4|092000  |      ;
-    STA.L $7F1F6C                                              ;8286B7|8F6C1F7F|7F1F6C;
-    LDA.L $7F1F6C                                              ;8286BB|AF6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;8286B7|8F6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;8286BB|AF6C1F7F|7F1F6C;
     AND.W #$FFEF                                               ;8286BF|29EFFF  |      ;
-    STA.L $7F1F6C                                              ;8286C2|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;8286C2|8F6C1F7F|7F1F6C;
  
   + REP #$30                                                   ;8286C6|C230    |      ;
-    LDA.L $7F1F6E                                              ;8286C8|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;8286C8|AF6E1F7F|7F1F6E;
     AND.W #$8000                                               ;8286CC|290080  |      ;
     BEQ +                                                      ;8286CF|F017    |8286E8;
-    LDA.L $7F1F6E                                              ;8286D1|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;8286D1|AF6E1F7F|7F1F6E;
     AND.W #$7FFF                                               ;8286D5|29FF7F  |      ;
-    STA.L $7F1F6E                                              ;8286D8|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;8286D8|8F6E1F7F|7F1F6E;
     SEP #$20                                                   ;8286DC|E220    |      ;
     LDA.L sShedItems+2                                         ;8286DE|AF021F7F|7F1F02;
     ORA.B #$01                                                 ;8286E2|0901    |      ;
@@ -766,9 +766,9 @@ fNextDayHandler:
     LDA.W nMapEngine_CurrentMapId                              ;8286EA|AD9601  |000196;
     AND.W #$0010                                               ;8286ED|291000  |      ;
     BEQ +                                                      ;8286F0|F00B    |8286FD;
-    LDA.L $7F1F60                                              ;8286F2|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;8286F2|AF601F7F|7F1F60;
     ORA.W #$0001                                               ;8286F6|090100  |      ;
-    STA.L $7F1F60                                              ;8286F9|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;8286F9|8F601F7F|7F1F60;
  
   + SEP #$20                                                   ;8286FD|E220    |      ;
     LDA.W nTimeState                                           ;8286FF|AD7309  |000973;
@@ -800,8 +800,8 @@ fNextDayHandler:
     REP #$30                                                   ;82873D|C230    |      ;
     LDA.W #$0002                                               ;82873F|A90200  |      ;
     EOR.W #$FFFF                                               ;828742|49FFFF  |      ;
-    AND.B $D2                                                  ;828745|25D2    |0000D2;
-    STA.B $D2                                                  ;828747|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;828745|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;828747|85D2    |0000D2;
     REP #$30                                                   ;828749|C230    |      ;
     LDA.W #$0088                                               ;82874B|A98800  |      ;
     STA.W nMapEngine_DestinationX                              ;82874E|8D7D01  |00017D;
@@ -816,7 +816,7 @@ fNextDayHandler:
     LDA.B #$14                                                 ;828766|A914    |      ;
     JSL.L fPlayerEnergyHandler_81D061                          ;828768|2261D081|81D061;
     REP #$30                                                   ;82876C|C230    |      ;
-    LDA.L $7F1F5E                                              ;82876E|AF5E1F7F|7F1F5E;
+    LDA.L nDailyFlags+4                                        ;82876E|AF5E1F7F|7F1F5E;
     AND.W #$0004                                               ;828772|290400  |      ;
     BNE .return                                                ;828775|D016    |82878D;
     SEP #$20                                                   ;828777|E220    |      ;
@@ -825,9 +825,9 @@ fNextDayHandler:
     SEP #$20                                                   ;82877F|E220    |      ;
     STA.W $0924                                                ;828781|8D2409  |000924;
     REP #$30                                                   ;828784|C230    |      ;
-    LDA.B $D2                                                  ;828786|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;828786|A5D2    |0000D2;
     ORA.W #$0004                                               ;828788|090400  |      ;
-    STA.B $D2                                                  ;82878B|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82878B|85D2    |0000D2;
  
 .return:
     RTL                                                        ;82878D|6B      |      ;
@@ -839,22 +839,22 @@ fNextDayHandler:
  
 fUnknown_828790:
     REP #$30                                                   ;828790|C230    |      ;
-    LDA.L $7F1F6C                                              ;828792|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828792|AF6C1F7F|7F1F6C;
     AND.W #$FC7F                                               ;828796|297FFC  |      ;
-    STA.L $7F1F6C                                              ;828799|8F6C1F7F|7F1F6C;
-    LDA.L nPlayerFlags                                         ;82879D|AF661F7F|7F1F66;
+    STA.L nEventFlags+8                                        ;828799|8F6C1F7F|7F1F6C;
+    LDA.L nEventFlags+2                                        ;82879D|AF661F7F|7F1F66;
     AND.W #$0001                                               ;8287A1|290100  |      ;
     BNE .marriedCheck                                          ;8287A4|D027    |8287CD;
-    LDA.L nPlayerFlags                                         ;8287A6|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8287A6|AF661F7F|7F1F66;
     AND.W #$0002                                               ;8287AA|290200  |      ;
     BNE .marriedCheck                                          ;8287AD|D01E    |8287CD;
-    LDA.L nPlayerFlags                                         ;8287AF|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8287AF|AF661F7F|7F1F66;
     AND.W #$0004                                               ;8287B3|290400  |      ;
     BNE .marriedCheck                                          ;8287B6|D015    |8287CD;
-    LDA.L nPlayerFlags                                         ;8287B8|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8287B8|AF661F7F|7F1F66;
     AND.W #$0008                                               ;8287BC|290800  |      ;
     BNE .marriedCheck                                          ;8287BF|D00C    |8287CD;
-    LDA.L nPlayerFlags                                         ;8287C1|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8287C1|AF661F7F|7F1F66;
     AND.W #$0010                                               ;8287C5|291000  |      ;
     BNE .marriedCheck                                          ;8287C8|D003    |8287CD;
     JMP.W .return                                              ;8287CA|4CD589  |8289D5;
@@ -862,9 +862,9 @@ fUnknown_828790:
  
 .marriedCheck:
     REP #$30                                                   ;8287CD|C230    |      ;
-    LDA.L nPrengacyFlag                                        ;8287CF|AF3B1F7F|7F1F3B;
+    LDA.L nMarriedDaysCounter                                  ;8287CF|AF3B1F7F|7F1F3B;
     INC A                                                      ;8287D3|1A      |      ;
-    STA.L nPrengacyFlag                                        ;8287D4|8F3B1F7F|7F1F3B;
+    STA.L nMarriedDaysCounter                                  ;8287D4|8F3B1F7F|7F1F3B;
     STA.B n16TempVar1                                          ;8287D8|857E    |00007E;
     LDA.W #$0078                                               ;8287DA|A97800  |      ;
     STA.B n16TempVar2                                          ;8287DD|8580    |000080;
@@ -872,27 +872,27 @@ fUnknown_828790:
     REP #$30                                                   ;8287E3|C230    |      ;
     LDA.B n16TempVar1                                          ;8287E5|A57E    |00007E;
     BNE +                                                      ;8287E7|D00B    |8287F4;
-    LDA.L $7F1F6C                                              ;8287E9|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;8287E9|AF6C1F7F|7F1F6C;
     ORA.W #$0080                                               ;8287ED|098000  |      ;
-    STA.L $7F1F6C                                              ;8287F0|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;8287F0|8F6C1F7F|7F1F6C;
  
   + REP #$30                                                   ;8287F4|C230    |      ;
-    LDA.L nPlayerFlags                                         ;8287F6|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8287F6|AF661F7F|7F1F66;
     AND.W #$0001                                               ;8287FA|290100  |      ;
     BNE .marriedToMaria                                        ;8287FD|D02D    |82882C;
-    LDA.L nPlayerFlags                                         ;8287FF|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;8287FF|AF661F7F|7F1F66;
     AND.W #$0002                                               ;828803|290200  |      ;
     BNE .marriedToAnn                                          ;828806|D04F    |828857;
-    LDA.L nPlayerFlags                                         ;828808|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;828808|AF661F7F|7F1F66;
     AND.W #$0004                                               ;82880C|290400  |      ;
     BNE .marriedToNina                                         ;82880F|D06B    |82887C;
-    LDA.L nPlayerFlags                                         ;828811|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;828811|AF661F7F|7F1F66;
     AND.W #$0008                                               ;828815|290800  |      ;
     BEQ +                                                      ;828818|F003    |82881D;
     JMP.W .marriedToEllen                                      ;82881A|4CA188  |8288A1;
  
  
-  + LDA.L nPlayerFlags                                         ;82881D|AF661F7F|7F1F66;
+  + LDA.L nEventFlags+2                                        ;82881D|AF661F7F|7F1F66;
     AND.W #$0010                                               ;828821|291000  |      ;
     BEQ +                                                      ;828824|F003    |828829;
     JMP.W .marriedToEve                                        ;828826|4CC488  |8288C4;
@@ -903,7 +903,7 @@ fUnknown_828790:
  
 .marriedToMaria:
     REP #$30                                                   ;82882C|C230    |      ;
-    LDA.L $7F1F6E                                              ;82882E|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;82882E|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;828832|290400  |      ;
     BNE .skip                                                  ;828835|D00F    |828846;
     LDA.L nLove_Maria                                          ;828837|AF1F1F7F|7F1F1F;
@@ -928,7 +928,7 @@ fUnknown_828790:
  
 .marriedToAnn:
     REP #$30                                                   ;828857|C230    |      ;
-    LDA.L $7F1F6E                                              ;828859|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;828859|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;82885D|290400  |      ;
     BNE +                                                      ;828860|D00C    |82886E;
     LDA.L nLove_Ann                                            ;828862|AF211F7F|7F1F21;
@@ -946,7 +946,7 @@ fUnknown_828790:
  
 .marriedToNina:
     REP #$30                                                   ;82887C|C230    |      ;
-    LDA.L $7F1F6E                                              ;82887E|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;82887E|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;828882|290400  |      ;
     BNE +                                                      ;828885|D00C    |828893;
     LDA.L nLove_Nina                                           ;828887|AF231F7F|7F1F23;
@@ -964,7 +964,7 @@ fUnknown_828790:
  
 .marriedToEllen:
     REP #$30                                                   ;8288A1|C230    |      ;
-    LDA.L $7F1F6E                                              ;8288A3|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;8288A3|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;8288A7|290400  |      ;
     BNE +                                                      ;8288AA|D00B    |8288B7;
     LDA.L nLove_Ellen                                          ;8288AC|AF251F7F|7F1F25;
@@ -982,7 +982,7 @@ fUnknown_828790:
  
 .marriedToEve:
     REP #$30                                                   ;8288C4|C230    |      ;
-    LDA.L $7F1F6E                                              ;8288C6|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;8288C6|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;8288CA|290400  |      ;
     BNE +                                                      ;8288CD|D00B    |8288DA;
     LDA.L nLove_Eve                                            ;8288CF|AF271F7F|7F1F27;
@@ -1000,18 +1000,18 @@ fUnknown_828790:
  
 .label0:
     REP #$30                                                   ;8288E7|C230    |      ;
-    LDA.L nPrengacyFlag                                        ;8288E9|AF3B1F7F|7F1F3B;
+    LDA.L nMarriedDaysCounter                                  ;8288E9|AF3B1F7F|7F1F3B;
     CMP.W #$0014                                               ;8288ED|C91400  |      ;
     BCC .canHaveSecondChild                                    ;8288F0|9035    |828927;
-    LDA.L nHouseSize                                           ;8288F2|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;8288F2|AF641F7F|7F1F64;
     AND.W #$0080                                               ;8288F6|298000  |      ;
     BEQ .canHaveSecondChild                                    ;8288F9|F02C    |828927;
-    LDA.L $7F1F6E                                              ;8288FB|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;8288FB|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;8288FF|290400  |      ;
     BNE .checkFirstChildAge                                    ;828902|D00D    |828911;
-    LDA.L $7F1F6E                                              ;828904|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;828904|AF6E1F7F|7F1F6E;
     ORA.W #$0004                                               ;828908|090400  |      ;
-    STA.L $7F1F6E                                              ;82890B|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;82890B|8F6E1F7F|7F1F6E;
     BRA .canHaveSecondChild                                    ;82890F|8016    |828927;
  
  
@@ -1020,13 +1020,13 @@ fUnknown_828790:
     LDA.L nFirstChildAge                                       ;828913|AF371F7F|7F1F37;
     CMP.W #$005A                                               ;828917|C95A00  |      ;
     BCC .canHaveSecondChild                                    ;82891A|900B    |828927;
-    LDA.L $7F1F6E                                              ;82891C|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;82891C|AF6E1F7F|7F1F6E;
     ORA.W #$0008                                               ;828920|090800  |      ;
-    STA.L $7F1F6E                                              ;828923|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;828923|8F6E1F7F|7F1F6E;
  
 .canHaveSecondChild:
     REP #$30                                                   ;828927|C230    |      ;
-    LDA.L $7F1F6E                                              ;828929|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;828929|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;82892D|290400  |      ;
     BEQ .label4                                                ;828930|F04C    |82897E;
     LDA.L nFirstChildAge                                       ;828932|AF371F7F|7F1F37;
@@ -1035,9 +1035,9 @@ fUnknown_828790:
     CMP.W #$003C                                               ;82893B|C93C00  |      ;
     BCC .label4                                                ;82893E|903E    |82897E;
     BNE .label3                                                ;828940|D016    |828958;
-    LDA.L $7F1F6E                                              ;828942|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;828942|AF6E1F7F|7F1F6E;
     ORA.W #$0010                                               ;828946|091000  |      ;
-    STA.L $7F1F6E                                              ;828949|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;828949|8F6E1F7F|7F1F6E;
     REP #$20                                                   ;82894D|C220    |      ;
     LDA.W #$0032                                               ;82894F|A93200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;828952|2282B283|83B282;
@@ -1056,13 +1056,13 @@ fUnknown_828790:
     REP #$30                                                   ;82896D|C230    |      ;
     LDA.B n16TempVar1                                          ;82896F|A57E    |00007E;
     BNE .label4                                                ;828971|D00B    |82897E;
-    LDA.L $7F1F6C                                              ;828973|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828973|AF6C1F7F|7F1F6C;
     ORA.W #$0100                                               ;828977|090001  |      ;
-    STA.L $7F1F6C                                              ;82897A|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;82897A|8F6C1F7F|7F1F6C;
  
 .label4:
     REP #$30                                                   ;82897E|C230    |      ;
-    LDA.L $7F1F6E                                              ;828980|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;828980|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;828984|290800  |      ;
     BEQ .return                                                ;828987|F04C    |8289D5;
     LDA.L nSecondChildAge                                      ;828989|AF391F7F|7F1F39;
@@ -1071,9 +1071,9 @@ fUnknown_828790:
     CMP.W #$003C                                               ;828992|C93C00  |      ;
     BCC .return                                                ;828995|903E    |8289D5;
     BNE .label5                                                ;828997|D016    |8289AF;
-    LDA.L $7F1F6E                                              ;828999|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;828999|AF6E1F7F|7F1F6E;
     ORA.W #$0010                                               ;82899D|091000  |      ;
-    STA.L $7F1F6E                                              ;8289A0|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;8289A0|8F6E1F7F|7F1F6E;
     REP #$20                                                   ;8289A4|C220    |      ;
     LDA.W #$0064                                               ;8289A6|A96400  |      ;
     JSL.L fGameEngine_AddHappiness                             ;8289A9|2282B283|83B282;
@@ -1092,9 +1092,9 @@ fUnknown_828790:
     REP #$30                                                   ;8289C4|C230    |      ;
     LDA.B n16TempVar1                                          ;8289C6|A57E    |00007E;
     BNE .return                                                ;8289C8|D00B    |8289D5;
-    LDA.L $7F1F6C                                              ;8289CA|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;8289CA|AF6C1F7F|7F1F6C;
     ORA.W #$0200                                               ;8289CE|090002  |      ;
-    STA.L $7F1F6C                                              ;8289D1|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;8289D1|8F6C1F7F|7F1F6C;
  
 .return:
     RTL                                                        ;8289D5|6B      |      ;
@@ -1348,12 +1348,12 @@ fWeatherForecast_828C09:
     LDX.W #$0008                                               ;828CA6|A20800  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CA9|BFED8C82|828CED;
     STA.W nMapEngine_CurrentMapId                              ;828CAD|8D9601  |000196;
-    LDA.L nHouseSize                                           ;828CB0|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;828CB0|AF641F7F|7F1F64;
     ORA.W #$0002                                               ;828CB4|090200  |      ;
-    STA.L nHouseSize                                           ;828CB7|8F641F7F|7F1F64;
-    LDA.L $7F1F6E                                              ;828CBB|AF6E1F7F|7F1F6E;
+    STA.L nEventFlags                                          ;828CB7|8F641F7F|7F1F64;
+    LDA.L nEventFlags+10                                       ;828CBB|AF6E1F7F|7F1F6E;
     ORA.W #$0100                                               ;828CBF|090001  |      ;
-    STA.L $7F1F6E                                              ;828CC2|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;828CC2|8F6E1F7F|7F1F6E;
     BRA .return                                                ;828CC6|8024    |828CEC;
  
  
@@ -1362,12 +1362,12 @@ fWeatherForecast_828C09:
     LDX.W #$000A                                               ;828CCA|A20A00  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CCD|BFED8C82|828CED;
     STA.W nMapEngine_CurrentMapId                              ;828CD1|8D9601  |000196;
-    LDA.L nHouseSize                                           ;828CD4|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;828CD4|AF641F7F|7F1F64;
     ORA.W #$0001                                               ;828CD8|090100  |      ;
-    STA.L nHouseSize                                           ;828CDB|8F641F7F|7F1F64;
-    LDA.L $7F1F6E                                              ;828CDF|AF6E1F7F|7F1F6E;
+    STA.L nEventFlags                                          ;828CDB|8F641F7F|7F1F64;
+    LDA.L nEventFlags+10                                       ;828CDF|AF6E1F7F|7F1F6E;
     ORA.W #$0080                                               ;828CE3|098000  |      ;
-    STA.L $7F1F6E                                              ;828CE6|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;828CE6|8F6E1F7F|7F1F6E;
     BRA .return                                                ;828CEA|8000    |828CEC;
  
  
@@ -1471,7 +1471,7 @@ fWeatherSpecialEvents:
  
 .thirdYear:
     REP #$20                                                   ;828D9D|C220    |      ;
-    LDA.L nHouseSize                                           ;828D9F|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;828D9F|AF641F7F|7F1F64;
     AND.W #$0002                                               ;828DA3|290200  |      ;
     BEQ +                                                      ;828DA6|F003    |828DAB;
     JMP.W .label6                                              ;828DA8|4C648E  |828E64;
@@ -1510,7 +1510,7 @@ fWeatherSpecialEvents:
     LDA.L nCurrentYearID                                       ;828DE1|AF181F7F|7F1F18;
     BNE .label4                                                ;828DE5|D039    |828E20;
     REP #$20                                                   ;828DE7|C220    |      ;
-    LDA.L nHouseSize                                           ;828DE9|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;828DE9|AF641F7F|7F1F64;
     AND.W #$0001                                               ;828DED|290100  |      ;
     BNE .label4                                                ;828DF0|D02E    |828E20;
     SEP #$20                                                   ;828DF2|E220    |      ;
@@ -1554,7 +1554,7 @@ fWeatherSpecialEvents:
     BEQ .label6                                                ;828E3F|F023    |828E64;
     REP #$30                                                   ;828E41|C230    |      ;
     TAY                                                        ;828E43|A8      |      ;
-    LDA.L $7F1F6C                                              ;828E44|AF6C1F7F|7F1F6C;
+    LDA.L nEventFlags+8                                        ;828E44|AF6C1F7F|7F1F6C;
     AND.W #$1000                                               ;828E48|290010  |      ;
     BEQ .label5                                                ;828E4B|F003    |828E50;
     TYA                                                        ;828E4D|98      |      ;
@@ -1849,7 +1849,7 @@ fToolUsed_AnimationSubrutines:
     SEP #$20                                                   ;8290A8|E220    |      ;
     REP #$10                                                   ;8290AA|C210    |      ;
     REP #$30                                                   ;8290AC|C230    |      ;
-    LDA.B $D2                                                  ;8290AE|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;8290AE|A5D2    |0000D2;
     AND.W #$0008                                               ;8290B0|290800  |      ;
     BEQ +                                                      ;8290B3|F003    |8290B8;
     JMP.W .label1                                              ;8290B5|4CCD90  |8290CD;
@@ -1983,9 +1983,9 @@ subToolAnimation82A58B_Bell:
     ADC.B $DA                                                  ;829166|65DA    |0000DA;
     STA.W $0901                                                ;829168|8D0109  |000901;
     REP #$20                                                   ;82916B|C220    |      ;
-    LDA.L $7F1F5A                                              ;82916D|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;82916D|AF5A1F7F|7F1F5A;
     ORA.W #$0010                                               ;829171|091000  |      ;
-    STA.L $7F1F5A                                              ;829174|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;829174|8F5A1F7F|7F1F5A;
     RTS                                                        ;829178|60      |      ;
  
  
@@ -2165,9 +2165,9 @@ fToolUsedSubrituneExecute:
     TAX                                                        ;82926B|AA      |      ;
     JSR.W (aToolUsed_Table82A5C3,X)                            ;82926C|FCC3A5  |82A5C3;
     REP #$20                                                   ;82926F|C220    |      ;
-    LDA.L $7F1F5A                                              ;829271|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829271|AF5A1F7F|7F1F5A;
     ORA.W #$0040                                               ;829275|094000  |      ;
-    STA.L $7F1F5A                                              ;829278|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;829278|8F5A1F7F|7F1F5A;
     RTL                                                        ;82927C|6B      |      ;
  
  
@@ -2355,10 +2355,10 @@ subToolUsed82A5C3_Sickle:
     CMP.B #$01                                                 ;829409|C901    |      ;
     BNE .return                                                ;82940B|D043    |829450;
     REP #$20                                                   ;82940D|C220    |      ;
-    LDA.L $7F1F60                                              ;82940F|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;82940F|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829413|290800  |      ;
     BNE .return                                                ;829416|D038    |829450;
-    LDA.L $7F1F5A                                              ;829418|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829418|AF5A1F7F|7F1F5A;
     AND.W #$2000                                               ;82941C|290020  |      ;
     BNE .return                                                ;82941F|D02F    |829450;
     SEP #$20                                                   ;829421|E220    |      ;
@@ -2374,9 +2374,9 @@ subToolUsed82A5C3_Sickle:
     LDA.W #$0002                                               ;82943C|A90200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;82943F|2282B283|83B282;
     REP #$20                                                   ;829443|C220    |      ;
-    LDA.L $7F1F5A                                              ;829445|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829445|AF5A1F7F|7F1F5A;
     ORA.W #$2000                                               ;829449|090020  |      ;
-    STA.L $7F1F5A                                              ;82944C|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;82944C|8F5A1F7F|7F1F5A;
  
 .return:
     REP #$30                                                   ;829450|C230    |      ;
@@ -2405,10 +2405,10 @@ subToolUsed82A5C3_Plow:
     CMP.B #$02                                                 ;82947F|C902    |      ;
     BCS .label1                                                ;829481|B042    |8294C5;
     REP #$20                                                   ;829483|C220    |      ;
-    LDA.L $7F1F60                                              ;829485|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829485|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829489|290800  |      ;
     BNE .label1                                                ;82948C|D037    |8294C5;
-    LDA.L $7F1F5A                                              ;82948E|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;82948E|AF5A1F7F|7F1F5A;
     AND.W #$1000                                               ;829492|290010  |      ;
     BNE .label1                                                ;829495|D02E    |8294C5;
     SEP #$20                                                   ;829497|E220    |      ;
@@ -2423,18 +2423,18 @@ subToolUsed82A5C3_Plow:
     SEP #$20                                                   ;8294B0|E220    |      ;
     STZ.W $093A                                                ;8294B2|9C3A09  |00093A;
     REP #$20                                                   ;8294B5|C220    |      ;
-    LDA.L $7F1F5A                                              ;8294B7|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;8294B7|AF5A1F7F|7F1F5A;
     ORA.W #$1000                                               ;8294BB|090010  |      ;
-    STA.L $7F1F5A                                              ;8294BE|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;8294BE|8F5A1F7F|7F1F5A;
     JMP.W .return                                              ;8294C2|4CB095  |8295B0;
  
  
 .label1:
     REP #$30                                                   ;8294C5|C230    |      ;
-    LDA.L $7F1F60                                              ;8294C7|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;8294C7|AF601F7F|7F1F60;
     AND.W #$0008                                               ;8294CB|290800  |      ;
     BNE .normalDestroy                                         ;8294CE|D07A    |82954A;
-    LDA.L $7F1F5C                                              ;8294D0|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;8294D0|AF5C1F7F|7F1F5C;
     AND.W #$0200                                               ;8294D4|290002  |      ;
     BNE .normalDestroy                                         ;8294D7|D071    |82954A;
     SEP #$20                                                   ;8294D9|E220    |      ;
@@ -2442,9 +2442,9 @@ subToolUsed82A5C3_Plow:
     JSL.L fCore_GetRandomNumber                                ;8294DD|22F98980|8089F9;
     BNE .luckCheck                                             ;8294E1|D02E    |829511;
     REP #$30                                                   ;8294E3|C230    |      ;
-    LDA.L $7F1F5C                                              ;8294E5|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;8294E5|AF5C1F7F|7F1F5C;
     ORA.W #$0200                                               ;8294E9|090002  |      ;
-    STA.L $7F1F5C                                              ;8294EC|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;8294EC|8F5C1F7F|7F1F5C;
     LDA.W #$000F                                               ;8294F0|A90F00  |      ;
     LDX.W #$0000                                               ;8294F3|A20000  |      ;
     LDY.W #$003A                                               ;8294F6|A03A00  |      ;
@@ -2465,9 +2465,9 @@ subToolUsed82A5C3_Plow:
     JSL.L fCore_GetRandomNumber                                ;829515|22F98980|8089F9;
     BNE .normalDestroy                                         ;829519|D02F    |82954A;
     REP #$30                                                   ;82951B|C230    |      ;
-    LDA.L $7F1F5C                                              ;82951D|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82951D|AF5C1F7F|7F1F5C;
     ORA.W #$0200                                               ;829521|090002  |      ;
-    STA.L $7F1F5C                                              ;829524|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;829524|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;829528|C230    |      ;
     LDA.W #$000F                                               ;82952A|A90F00  |      ;
     LDX.W #$0000                                               ;82952D|A20000  |      ;
@@ -2489,32 +2489,32 @@ subToolUsed82A5C3_Plow:
     JSL.L fCore_GetRandomNumber                                ;82954E|22F98980|8089F9;
     BNE .return                                                ;829552|D05C    |8295B0;
     REP #$30                                                   ;829554|C230    |      ;
-    LDA.L $7F1F60                                              ;829556|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829556|AF601F7F|7F1F60;
     AND.W #$0008                                               ;82955A|290800  |      ;
     BNE .return                                                ;82955D|D051    |8295B0;
-    LDA.L $7F1F5C                                              ;82955F|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82955F|AF5C1F7F|7F1F5C;
     AND.W #$0100                                               ;829563|290001  |      ;
     BNE .return                                                ;829566|D048    |8295B0;
-    LDA.L $7F1F5C                                              ;829568|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829568|AF5C1F7F|7F1F5C;
     ORA.W #$0100                                               ;82956C|090001  |      ;
-    STA.L $7F1F5C                                              ;82956F|8F5C1F7F|7F1F5C;
-    LDA.L nHouseSize                                           ;829573|AF641F7F|7F1F64;
+    STA.L nDailyFlags+2                                        ;82956F|8F5C1F7F|7F1F5C;
+    LDA.L nEventFlags                                          ;829573|AF641F7F|7F1F64;
     AND.W #$0800                                               ;829577|290008  |      ;
     BNE .label2                                                ;82957A|D00D    |829589;
-    LDA.L nHouseSize                                           ;82957C|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82957C|AF641F7F|7F1F64;
     ORA.W #$0800                                               ;829580|090008  |      ;
-    STA.L nHouseSize                                           ;829583|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;829583|8F641F7F|7F1F64;
     BRA .label3                                                ;829587|8016    |82959F;
  
  
 .label2:
     REP #$30                                                   ;829589|C230    |      ;
-    LDA.L nHouseSize                                           ;82958B|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82958B|AF641F7F|7F1F64;
     AND.W #$1000                                               ;82958F|290010  |      ;
     BNE .return                                                ;829592|D01C    |8295B0;
-    LDA.L nHouseSize                                           ;829594|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829594|AF641F7F|7F1F64;
     ORA.W #$1000                                               ;829598|090010  |      ;
-    STA.L nHouseSize                                           ;82959B|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;82959B|8F641F7F|7F1F64;
  
 .label3:
     REP #$30                                                   ;82959F|C230    |      ;
@@ -2730,7 +2730,7 @@ subToolUsed82A5C3_Hammer:
     CPX.W #$00F8                                               ;82974D|E0F800  |      ;
     BNE .label11                                               ;829750|D0DD    |82972F;
     REP #$30                                                   ;829752|C230    |      ;
-    LDA.L $7F1F5C                                              ;829754|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829754|AF5C1F7F|7F1F5C;
     AND.W #$0080                                               ;829758|298000  |      ;
     BNE .label11                                               ;82975B|D0D2    |82972F;
     REP #$20                                                   ;82975D|C220    |      ;
@@ -2743,14 +2743,14 @@ subToolUsed82A5C3_Hammer:
     JSL.L fCore_GetRandomNumber                                ;829770|22F98980|8089F9;
     BNE .label11                                               ;829774|D0B9    |82972F;
     REP #$30                                                   ;829776|C230    |      ;
-    LDA.L nHouseSize                                           ;829778|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829778|AF641F7F|7F1F64;
     AND.W #$0200                                               ;82977C|290002  |      ;
     BNE .label11                                               ;82977F|D0AE    |82972F;
-    LDA.L nHouseSize                                           ;829781|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829781|AF641F7F|7F1F64;
     ORA.W #$0200                                               ;829785|090002  |      ;
-    STA.L nHouseSize                                           ;829788|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;829788|8F641F7F|7F1F64;
     REP #$30                                                   ;82978C|C230    |      ;
-    LDA.B nPlayerPosX                                          ;82978E|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;82978E|A5D6    |0000D6;
     CLC                                                        ;829790|18      |      ;
     ADC.W #$0010                                               ;829791|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;829794|8D8509  |000985;
@@ -2763,9 +2763,9 @@ subToolUsed82A5C3_Hammer:
     LDY.W #$001F                                               ;8297A6|A01F00  |      ;
     JSL.L fSubUnk1Unknown_8480F8                               ;8297A9|22F88084|8480F8;
     REP #$30                                                   ;8297AD|C230    |      ;
-    LDA.L $7F1F5C                                              ;8297AF|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;8297AF|AF5C1F7F|7F1F5C;
     ORA.W #$0080                                               ;8297B3|098000  |      ;
-    STA.L $7F1F5C                                              ;8297B6|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;8297B6|8F5C1F7F|7F1F5C;
     JMP.W .label11                                             ;8297BA|4C2F97  |82972F;
  
  
@@ -2843,7 +2843,7 @@ subToolUsed82A5C3_Axe:
     CMP.B #$04                                                 ;82984D|C904    |      ;
     BCC .label4                                                ;82984F|9072    |8298C3;
     REP #$20                                                   ;829851|C220    |      ;
-    LDA.L $7F1F60                                              ;829853|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829853|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829857|290800  |      ;
     BNE .label2                                                ;82985A|D059    |8298B5;
     SEP #$20                                                   ;82985C|E220    |      ;
@@ -2851,12 +2851,12 @@ subToolUsed82A5C3_Axe:
     JSL.L fCore_GetRandomNumber                                ;829860|22F98980|8089F9;
     BNE .label2                                                ;829864|D04F    |8298B5;
     REP #$30                                                   ;829866|C230    |      ;
-    LDA.L nHouseSize                                           ;829868|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829868|AF641F7F|7F1F64;
     AND.W #$0400                                               ;82986C|290004  |      ;
     BNE .label2                                                ;82986F|D044    |8298B5;
-    LDA.L nHouseSize                                           ;829871|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829871|AF641F7F|7F1F64;
     ORA.W #$0400                                               ;829875|090004  |      ;
-    STA.L nHouseSize                                           ;829878|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;829878|8F641F7F|7F1F64;
     REP #$30                                                   ;82987C|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82987E|AD8509  |000985;
     CLC                                                        ;829881|18      |      ;
@@ -2964,12 +2964,12 @@ subToolUsed82A5C3_Axe:
     LDA.W nMapEngine_CurrentMapId                              ;82995E|AD9601  |000196;
     AND.W #$001A                                               ;829961|291A00  |      ;
     BNE .return                                                ;829964|D023    |829989;
-    LDA.L $7F1F6A                                              ;829966|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;829966|AF6A1F7F|7F1F6A;
     AND.W #$0020                                               ;82996A|292000  |      ;
     BNE .return                                                ;82996D|D01A    |829989;
-    LDA.L $7F1F6A                                              ;82996F|AF6A1F7F|7F1F6A;
+    LDA.L nEventFlags+6                                        ;82996F|AF6A1F7F|7F1F6A;
     ORA.W #$0020                                               ;829973|092000  |      ;
-    STA.L $7F1F6A                                              ;829976|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;829976|8F6A1F7F|7F1F6A;
     REP #$30                                                   ;82997A|C230    |      ;
     LDA.W #$0000                                               ;82997C|A90000  |      ;
     LDX.W #$0017                                               ;82997F|A21700  |      ;
@@ -3197,9 +3197,9 @@ subToolUsed82A5C3_CowMedicine:
     LDA.B #$FF                                                 ;829B1D|A9FF    |      ;
     JSL.L fPlayerEnergyHandler_81D061                          ;829B1F|2261D081|81D061;
     REP #$20                                                   ;829B23|C220    |      ;
-    LDA.L $7F1F5A                                              ;829B25|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829B25|AF5A1F7F|7F1F5A;
     ORA.W #$0080                                               ;829B29|098000  |      ;
-    STA.L $7F1F5A                                              ;829B2C|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;829B2C|8F5A1F7F|7F1F5A;
     RTS                                                        ;829B30|60      |      ;
  
  
@@ -3212,9 +3212,9 @@ subToolUsed82A5C3_MiraclePotion:
     LDA.B #$FF                                                 ;829B3D|A9FF    |      ;
     JSL.L fPlayerEnergyHandler_81D061                          ;829B3F|2261D081|81D061;
     REP #$20                                                   ;829B43|C220    |      ;
-    LDA.L $7F1F5A                                              ;829B45|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829B45|AF5A1F7F|7F1F5A;
     ORA.W #$0100                                               ;829B49|090001  |      ;
-    STA.L $7F1F5A                                              ;829B4C|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;829B4C|8F5A1F7F|7F1F5A;
     RTS                                                        ;829B50|60      |      ;
  
  
@@ -3301,7 +3301,7 @@ subToolUsed82A5C3_Paint:
  
  
   + REP #$30                                                   ;829BE9|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829BEB|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829BEB|AF661F7F|7F1F66;
     AND.W #$0200                                               ;829BEF|290002  |      ;
     BEQ +                                                      ;829BF2|F003    |829BF7;
     JMP.W .return                                              ;829BF4|4CB09C  |829CB0;
@@ -3315,15 +3315,15 @@ subToolUsed82A5C3_Paint:
     LDY.W #$0130                                               ;829C06|A03001  |      ;
     JSL.L fUnknown_81A688                                      ;829C09|2288A681|81A688;
     REP #$30                                                   ;829C0D|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829C0F|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829C0F|AF661F7F|7F1F66;
     ORA.W #$0200                                               ;829C13|090002  |      ;
-    STA.L nPlayerFlags                                         ;829C16|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;829C16|8F661F7F|7F1F66;
     JMP.W .return                                              ;829C1A|4CB09C  |829CB0;
  
  
 .caseE2:
     REP #$30                                                   ;829C1D|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829C1F|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829C1F|AF661F7F|7F1F66;
     AND.W #$0400                                               ;829C23|290004  |      ;
     BEQ +                                                      ;829C26|F003    |829C2B;
     JMP.W .return                                              ;829C28|4CB09C  |829CB0;
@@ -3337,15 +3337,15 @@ subToolUsed82A5C3_Paint:
     LDY.W #$0130                                               ;829C3A|A03001  |      ;
     JSL.L fUnknown_81A688                                      ;829C3D|2288A681|81A688;
     REP #$30                                                   ;829C41|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829C43|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829C43|AF661F7F|7F1F66;
     ORA.W #$0400                                               ;829C47|090004  |      ;
-    STA.L nPlayerFlags                                         ;829C4A|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;829C4A|8F661F7F|7F1F66;
     BRA .return                                                ;829C4E|8060    |829CB0;
  
  
 .caseE3:
     REP #$30                                                   ;829C50|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829C52|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829C52|AF661F7F|7F1F66;
     AND.W #$0800                                               ;829C56|290008  |      ;
     BNE .return                                                ;829C59|D055    |829CB0;
     LDA.W #$000A                                               ;829C5B|A90A00  |      ;
@@ -3356,15 +3356,15 @@ subToolUsed82A5C3_Paint:
     LDY.W #$0130                                               ;829C6A|A03001  |      ;
     JSL.L fUnknown_81A688                                      ;829C6D|2288A681|81A688;
     REP #$30                                                   ;829C71|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829C73|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829C73|AF661F7F|7F1F66;
     ORA.W #$0800                                               ;829C77|090008  |      ;
-    STA.L nPlayerFlags                                         ;829C7A|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;829C7A|8F661F7F|7F1F66;
     BRA .return                                                ;829C7E|8030    |829CB0;
  
  
 .caseE4:
     REP #$30                                                   ;829C80|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829C82|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829C82|AF661F7F|7F1F66;
     AND.W #$1000                                               ;829C86|290010  |      ;
     BNE .return                                                ;829C89|D025    |829CB0;
     LDA.W #$000A                                               ;829C8B|A90A00  |      ;
@@ -3375,9 +3375,9 @@ subToolUsed82A5C3_Paint:
     LDY.W #$0130                                               ;829C9A|A03001  |      ;
     JSL.L fUnknown_81A688                                      ;829C9D|2288A681|81A688;
     REP #$30                                                   ;829CA1|C230    |      ;
-    LDA.L nPlayerFlags                                         ;829CA3|AF661F7F|7F1F66;
+    LDA.L nEventFlags+2                                        ;829CA3|AF661F7F|7F1F66;
     ORA.W #$1000                                               ;829CA7|090010  |      ;
-    STA.L nPlayerFlags                                         ;829CAA|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;829CAA|8F661F7F|7F1F66;
     BRA .return                                                ;829CAE|8000    |829CB0;
  
  
@@ -3575,10 +3575,10 @@ subToolUsed82A5C3_GoldenSickle:
     CMP.B #$01                                                 ;829E27|C901    |      ;
     BNE .label6                                                ;829E29|D043    |829E6E;
     REP #$20                                                   ;829E2B|C220    |      ;
-    LDA.L $7F1F60                                              ;829E2D|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829E2D|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829E31|290800  |      ;
     BNE .label6                                                ;829E34|D038    |829E6E;
-    LDA.L $7F1F5A                                              ;829E36|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829E36|AF5A1F7F|7F1F5A;
     AND.W #$2000                                               ;829E3A|290020  |      ;
     BNE .label6                                                ;829E3D|D02F    |829E6E;
     SEP #$20                                                   ;829E3F|E220    |      ;
@@ -3594,9 +3594,9 @@ subToolUsed82A5C3_GoldenSickle:
     LDA.W #$0002                                               ;829E5A|A90200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;829E5D|2282B283|83B282;
     REP #$20                                                   ;829E61|C220    |      ;
-    LDA.L $7F1F5A                                              ;829E63|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829E63|AF5A1F7F|7F1F5A;
     ORA.W #$2000                                               ;829E67|090020  |      ;
-    STA.L $7F1F5A                                              ;829E6A|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;829E6A|8F5A1F7F|7F1F5A;
  
 .label6:
     SEP #$20                                                   ;829E6E|E220    |      ;
@@ -3639,10 +3639,10 @@ subToolUsed82A5C3_GoldenPlow:
     BCS .label1                                                ;829EB7|B03F    |829EF8;
     REP #$20                                                   ;829EB9|C220    |      ;
     REP #$20                                                   ;829EBB|C220    |      ;
-    LDA.L $7F1F60                                              ;829EBD|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829EBD|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829EC1|290800  |      ;
     BNE .label1                                                ;829EC4|D032    |829EF8;
-    LDA.L $7F1F5A                                              ;829EC6|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829EC6|AF5A1F7F|7F1F5A;
     AND.W #$1000                                               ;829ECA|290010  |      ;
     BNE .label1                                                ;829ECD|D029    |829EF8;
     SEP #$20                                                   ;829ECF|E220    |      ;
@@ -3655,18 +3655,18 @@ subToolUsed82A5C3_GoldenPlow:
     LDY.W #$0030                                               ;829EE1|A03000  |      ;
     JSL.L fSubUnk1Unknown_8480F8                               ;829EE4|22F88084|8480F8;
     REP #$20                                                   ;829EE8|C220    |      ;
-    LDA.L $7F1F5A                                              ;829EEA|AF5A1F7F|7F1F5A;
+    LDA.L nDailyFlags                                          ;829EEA|AF5A1F7F|7F1F5A;
     ORA.W #$1000                                               ;829EEE|090010  |      ;
-    STA.L $7F1F5A                                              ;829EF1|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;829EF1|8F5A1F7F|7F1F5A;
     JMP.W .label6                                              ;829EF5|4CE39F  |829FE3;
  
  
 .label1:
     REP #$30                                                   ;829EF8|C230    |      ;
-    LDA.L $7F1F60                                              ;829EFA|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829EFA|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829EFE|290800  |      ;
     BNE .label3                                                ;829F01|D07A    |829F7D;
-    LDA.L $7F1F5C                                              ;829F03|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829F03|AF5C1F7F|7F1F5C;
     AND.W #$0200                                               ;829F07|290002  |      ;
     BNE .label3                                                ;829F0A|D071    |829F7D;
     SEP #$20                                                   ;829F0C|E220    |      ;
@@ -3674,9 +3674,9 @@ subToolUsed82A5C3_GoldenPlow:
     JSL.L fCore_GetRandomNumber                                ;829F10|22F98980|8089F9;
     BNE .label2                                                ;829F14|D02E    |829F44;
     REP #$30                                                   ;829F16|C230    |      ;
-    LDA.L $7F1F5C                                              ;829F18|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829F18|AF5C1F7F|7F1F5C;
     ORA.W #$0200                                               ;829F1C|090002  |      ;
-    STA.L $7F1F5C                                              ;829F1F|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;829F1F|8F5C1F7F|7F1F5C;
     LDA.W #$000F                                               ;829F23|A90F00  |      ;
     LDX.W #$0000                                               ;829F26|A20000  |      ;
     LDY.W #$003A                                               ;829F29|A03A00  |      ;
@@ -3697,9 +3697,9 @@ subToolUsed82A5C3_GoldenPlow:
     JSL.L fCore_GetRandomNumber                                ;829F48|22F98980|8089F9;
     BNE .label3                                                ;829F4C|D02F    |829F7D;
     REP #$30                                                   ;829F4E|C230    |      ;
-    LDA.L $7F1F5C                                              ;829F50|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829F50|AF5C1F7F|7F1F5C;
     ORA.W #$0200                                               ;829F54|090002  |      ;
-    STA.L $7F1F5C                                              ;829F57|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;829F57|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;829F5B|C230    |      ;
     LDA.W #$000F                                               ;829F5D|A90F00  |      ;
     LDX.W #$0000                                               ;829F60|A20000  |      ;
@@ -3721,32 +3721,32 @@ subToolUsed82A5C3_GoldenPlow:
     JSL.L fCore_GetRandomNumber                                ;829F81|22F98980|8089F9;
     BNE .label6                                                ;829F85|D05C    |829FE3;
     REP #$30                                                   ;829F87|C230    |      ;
-    LDA.L $7F1F60                                              ;829F89|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;829F89|AF601F7F|7F1F60;
     AND.W #$0008                                               ;829F8D|290800  |      ;
     BNE .label6                                                ;829F90|D051    |829FE3;
-    LDA.L $7F1F5C                                              ;829F92|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829F92|AF5C1F7F|7F1F5C;
     AND.W #$0100                                               ;829F96|290001  |      ;
     BNE .label6                                                ;829F99|D048    |829FE3;
-    LDA.L $7F1F5C                                              ;829F9B|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;829F9B|AF5C1F7F|7F1F5C;
     ORA.W #$0100                                               ;829F9F|090001  |      ;
-    STA.L $7F1F5C                                              ;829FA2|8F5C1F7F|7F1F5C;
-    LDA.L nHouseSize                                           ;829FA6|AF641F7F|7F1F64;
+    STA.L nDailyFlags+2                                        ;829FA2|8F5C1F7F|7F1F5C;
+    LDA.L nEventFlags                                          ;829FA6|AF641F7F|7F1F64;
     AND.W #$0800                                               ;829FAA|290008  |      ;
     BNE .label4                                                ;829FAD|D00D    |829FBC;
-    LDA.L nHouseSize                                           ;829FAF|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829FAF|AF641F7F|7F1F64;
     ORA.W #$0800                                               ;829FB3|090008  |      ;
-    STA.L nHouseSize                                           ;829FB6|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;829FB6|8F641F7F|7F1F64;
     BRA .label5                                                ;829FBA|8016    |829FD2;
  
  
 .label4:
     REP #$30                                                   ;829FBC|C230    |      ;
-    LDA.L nHouseSize                                           ;829FBE|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829FBE|AF641F7F|7F1F64;
     AND.W #$1000                                               ;829FC2|290010  |      ;
     BNE .label6                                                ;829FC5|D01C    |829FE3;
-    LDA.L nHouseSize                                           ;829FC7|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;829FC7|AF641F7F|7F1F64;
     ORA.W #$1000                                               ;829FCB|090010  |      ;
-    STA.L nHouseSize                                           ;829FCE|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;829FCE|8F641F7F|7F1F64;
  
 .label5:
     REP #$30                                                   ;829FD2|C230    |      ;
@@ -3944,7 +3944,7 @@ subToolUsed82A5C3_GolderHammer:
     CPX.W #$00F8                                               ;82A14F|E0F800  |      ;
     BNE .loop                                                  ;82A152|D0DD    |82A131;
     REP #$30                                                   ;82A154|C230    |      ;
-    LDA.L $7F1F5C                                              ;82A156|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82A156|AF5C1F7F|7F1F5C;
     AND.W #$0080                                               ;82A15A|298000  |      ;
     BNE .loop                                                  ;82A15D|D0D2    |82A131;
     REP #$20                                                   ;82A15F|C220    |      ;
@@ -3957,14 +3957,14 @@ subToolUsed82A5C3_GolderHammer:
     JSL.L fCore_GetRandomNumber                                ;82A172|22F98980|8089F9;
     BNE .loop                                                  ;82A176|D0B9    |82A131;
     REP #$30                                                   ;82A178|C230    |      ;
-    LDA.L nHouseSize                                           ;82A17A|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82A17A|AF641F7F|7F1F64;
     AND.W #$0200                                               ;82A17E|290002  |      ;
     BNE .loop                                                  ;82A181|D0AE    |82A131;
-    LDA.L nHouseSize                                           ;82A183|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82A183|AF641F7F|7F1F64;
     ORA.W #$0200                                               ;82A187|090002  |      ;
-    STA.L nHouseSize                                           ;82A18A|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;82A18A|8F641F7F|7F1F64;
     REP #$30                                                   ;82A18E|C230    |      ;
-    LDA.B nPlayerPosX                                          ;82A190|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;82A190|A5D6    |0000D6;
     CLC                                                        ;82A192|18      |      ;
     ADC.W #$0010                                               ;82A193|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82A196|8D8509  |000985;
@@ -3977,9 +3977,9 @@ subToolUsed82A5C3_GolderHammer:
     LDY.W #$001F                                               ;82A1A8|A01F00  |      ;
     JSL.L fSubUnk1Unknown_8480F8                               ;82A1AB|22F88084|8480F8;
     REP #$30                                                   ;82A1AF|C230    |      ;
-    LDA.L $7F1F5C                                              ;82A1B1|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82A1B1|AF5C1F7F|7F1F5C;
     ORA.W #$0080                                               ;82A1B5|098000  |      ;
-    STA.L $7F1F5C                                              ;82A1B8|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;82A1B8|8F5C1F7F|7F1F5C;
     JMP.W .loop                                                ;82A1BC|4C31A1  |82A131;
  
  
@@ -4048,12 +4048,12 @@ subToolUsed82A5C3_GoldenAxe:
     JSL.L fCore_GetRandomNumber                                ;82A241|22F98980|8089F9;
     BNE .label4                                                ;82A245|D04F    |82A296;
     REP #$30                                                   ;82A247|C230    |      ;
-    LDA.L nHouseSize                                           ;82A249|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82A249|AF641F7F|7F1F64;
     AND.W #$0400                                               ;82A24D|290004  |      ;
     BNE .label4                                                ;82A250|D044    |82A296;
-    LDA.L nHouseSize                                           ;82A252|AF641F7F|7F1F64;
+    LDA.L nEventFlags                                          ;82A252|AF641F7F|7F1F64;
     ORA.W #$0400                                               ;82A256|090004  |      ;
-    STA.L nHouseSize                                           ;82A259|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;82A259|8F641F7F|7F1F64;
     REP #$30                                                   ;82A25D|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A25F|AD8509  |000985;
     CLC                                                        ;82A262|18      |      ;
@@ -4203,9 +4203,9 @@ subToolUsed82A5C3_BeanstalkSeed:
     CMP.B #$31                                                 ;82A385|C931    |      ;
     BNE +                                                      ;82A387|D019    |82A3A2;
     REP #$30                                                   ;82A389|C230    |      ;
-    LDA.L nPlayerFlags+2                                       ;82A38B|AF681F7F|7F1F68;
+    LDA.L nEventFlags+4                                        ;82A38B|AF681F7F|7F1F68;
     ORA.W #$0200                                               ;82A38F|090002  |      ;
-    STA.L nPlayerFlags+2                                       ;82A392|8F681F7F|7F1F68;
+    STA.L nEventFlags+4                                        ;82A392|8F681F7F|7F1F68;
     LDA.W #$0042                                               ;82A396|A94200  |      ;
     JSL.L fUnknown_81A5E1                                      ;82A399|22E1A581|81A5E1;
     SEP #$20                                                   ;82A39D|E220    |      ;
@@ -4259,9 +4259,9 @@ subToolUsed82A5C3_BlueFeather:
     LDA.W #$0000                                               ;82A401|A90000  |      ;
     STA.B nPlayerAction                                        ;82A404|85D4    |0000D4;
     REP #$20                                                   ;82A406|C220    |      ;
-    LDA.L $7F1F5E                                              ;82A408|AF5E1F7F|7F1F5E;
+    LDA.L nDailyFlags+4                                        ;82A408|AF5E1F7F|7F1F5E;
     ORA.W #$0040                                               ;82A40C|094000  |      ;
-    STA.L $7F1F5E                                              ;82A40F|8F5E1F7F|7F1F5E;
+    STA.L nDailyFlags+4                                        ;82A40F|8F5E1F7F|7F1F5E;
     RTS                                                        ;82A413|60      |      ;
  
  
@@ -4596,7 +4596,7 @@ fObjectMap_CurrentMapToFarmMap:
     CMP.B #$03                                                 ;82A6AA|C903    |      ;
     BNE .return                                                ;82A6AC|D064    |82A712;
     LDA.B #$04                                                 ;82A6AE|A904    |      ;
-    STA.W nCurrentMapdata0181                                  ;82A6B0|8D8101  |000181;
+    STA.W nCurrentMapdata_RoomWidthMult                        ;82A6B0|8D8101  |000181;
     REP #$20                                                   ;82A6B3|C220    |      ;
     LDY.W #$0000                                               ;82A6B5|A00000  |      ;
  
@@ -4673,7 +4673,7 @@ fObjectMap_Unknown82A713:
     STY.B $8A                                                  ;82A719|848A    |00008A;
     SEP #$20                                                   ;82A71B|E220    |      ;
     LDA.B #$04                                                 ;82A71D|A904    |      ;
-    STA.W nCurrentMapdata0181                                  ;82A71F|8D8101  |000181;
+    STA.W nCurrentMapdata_RoomWidthMult                        ;82A71F|8D8101  |000181;
     REP #$20                                                   ;82A722|C220    |      ;
     LDY.W #$0000                                               ;82A724|A00000  |      ;
  
@@ -4824,7 +4824,7 @@ fObjectMap_Unknown82A811:
     SEP #$20                                                   ;82A811|E220    |      ;
     REP #$10                                                   ;82A813|C210    |      ;
     LDA.B #$04                                                 ;82A815|A904    |      ;
-    STA.W nCurrentMapdata0181                                  ;82A817|8D8101  |000181;
+    STA.W nCurrentMapdata_RoomWidthMult                        ;82A817|8D8101  |000181;
     REP #$20                                                   ;82A81A|C220    |      ;
     LDY.W #$0000                                               ;82A81C|A00000  |      ;
  
@@ -5017,9 +5017,9 @@ fObjectMap_Unknown82A811:
     LDA.W nMapEngine_CurrentMapId                              ;82A955|AD9601  |000196;
     ORA.W #$0400                                               ;82A958|090004  |      ;
     STA.W nMapEngine_CurrentMapId                              ;82A95B|8D9601  |000196;
-    LDA.L $7F1F6E                                              ;82A95E|AF6E1F7F|7F1F6E;
+    LDA.L nEventFlags+10                                       ;82A95E|AF6E1F7F|7F1F6E;
     ORA.W #$0200                                               ;82A962|090002  |      ;
-    STA.L $7F1F6E                                              ;82A965|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;82A965|8F6E1F7F|7F1F6E;
  
 .label9:
     REP #$30                                                   ;82A969|C230    |      ;
@@ -5060,7 +5060,7 @@ fObjectMap_Unknown82A9A0:
     SEP #$20                                                   ;82A9A0|E220    |      ;
     REP #$10                                                   ;82A9A2|C210    |      ;
     LDA.B #$04                                                 ;82A9A4|A904    |      ;
-    STA.W nCurrentMapdata0181                                  ;82A9A6|8D8101  |000181;
+    STA.W nCurrentMapdata_RoomWidthMult                        ;82A9A6|8D8101  |000181;
     REP #$20                                                   ;82A9A9|C220    |      ;
     STZ.W $092E                                                ;82A9AB|9C2E09  |00092E;
     LDY.W #$0000                                               ;82A9AE|A00000  |      ;
@@ -5125,7 +5125,7 @@ fObjectMap_CalculateRanchDev:
     SEP #$20                                                   ;82AA0C|E220    |      ;
     REP #$10                                                   ;82AA0E|C210    |      ;
     LDA.B #$04                                                 ;82AA10|A904    |      ;
-    STA.W nCurrentMapdata0181                                  ;82AA12|8D8101  |000181;
+    STA.W nCurrentMapdata_RoomWidthMult                        ;82AA12|8D8101  |000181;
     REP #$20                                                   ;82AA15|C220    |      ;
     LDA.W #$0000                                               ;82AA17|A90000  |      ;
     STA.L nRanchDevelopmentRate                                ;82AA1A|8F561F7F|7F1F56;
@@ -5479,7 +5479,7 @@ fUnknown_82AC61:
     REP #$30                                                   ;82AC61|C230    |      ; A: nArg1, X: nPosX, Y: nPosY
     STA.B n16TempVar3                                          ;82AC63|8582    |000082;
     REP #$20                                                   ;82AC65|C220    |      ;
-    LDA.L $7F1F5C                                              ;82AC67|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82AC67|AF5C1F7F|7F1F5C;
     AND.W #$0008                                               ;82AC6B|290800  |      ;
     BEQ +                                                      ;82AC6E|F003    |82AC73;
     JMP.W .return                                              ;82AC70|4CF5AC  |82ACF5;
@@ -5704,7 +5704,7 @@ fUnknown_82AD0E:
  
  
   + REP #$30                                                   ;82ADD1|C230    |      ;
-    LDA.B $D2                                                  ;82ADD3|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;82ADD3|A5D2    |0000D2;
     AND.W #$0020                                               ;82ADD5|292000  |      ;
     BEQ +                                                      ;82ADD8|F003    |82ADDD;
     JMP.W .justReturn                                          ;82ADDA|4CE5AE  |82AEE5;
@@ -5723,7 +5723,7 @@ fUnknown_82AD0E:
     LDA.B #$00                                                 ;82ADE8|A900    |      ;
     XBA                                                        ;82ADEA|EB      |      ;
     LDA.B [ptrSelectedTileMap],Y                               ;82ADEB|B70D    |00000D;
-    STA.B $92                                                  ;82ADED|8592    |000092;
+    STA.B nTilesetCount                                        ;82ADED|8592    |000092;
     INY                                                        ;82ADEF|C8      |      ;
     LDA.B [ptrSelectedTileMap],Y                               ;82ADF0|B70D    |00000D;
     STA.B $93                                                  ;82ADF2|8593    |000093;
@@ -5733,7 +5733,7 @@ fUnknown_82AD0E:
  
   + LDA.B #$00                                                 ;82ADF9|A900    |      ;
     XBA                                                        ;82ADFB|EB      |      ;
-    LDA.B $92                                                  ;82ADFC|A592    |000092;
+    LDA.B nTilesetCount                                        ;82ADFC|A592    |000092;
     REP #$20                                                   ;82ADFE|C220    |      ;
     ASL A                                                      ;82AE00|0A      |      ;
     ASL A                                                      ;82AE01|0A      |      ;
@@ -5857,9 +5857,9 @@ fUnknown_82AD0E:
     STZ.W nPlayerInteractionArg1                               ;82AECF|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;82AED2|9C7009  |000970;
     REP #$30                                                   ;82AED5|C230    |      ;
-    LDA.B $D2                                                  ;82AED7|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;82AED7|A5D2    |0000D2;
     ORA.W #$0040                                               ;82AED9|094000  |      ;
-    STA.B $D2                                                  ;82AEDC|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82AEDC|85D2    |0000D2;
     REP #$30                                                   ;82AEDE|C230    |      ;
     LDA.W #$0000                                               ;82AEE0|A90000  |      ;
     STA.B nPlayerAction                                        ;82AEE3|85D4    |0000D4;
@@ -5870,7 +5870,7 @@ fUnknown_82AD0E:
  
 .return:
     REP #$20                                                   ;82AEE6|C220    |      ;
-    LDA.B nPlayerPosX                                          ;82AEE8|A5D6    |0000D6;
+    LDA.B nPlayerDirection                                     ;82AEE8|A5D6    |0000D6;
     STA.B $DF                                                  ;82AEEA|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;82AEEC|A5D8    |0000D8;
     STA.B $E1                                                  ;82AEEE|85E1    |0000E1;
@@ -6089,7 +6089,7 @@ fUnknown_82B049:
     REP #$10                                                   ;82B04B|C210    |      ;
     PHA                                                        ;82B04D|48      |      ;
     LDA.B #$04                                                 ;82B04E|A904    |      ;
-    STA.W nCurrentMapdata0181                                  ;82B050|8D8101  |000181;
+    STA.W nCurrentMapdata_RoomWidthMult                        ;82B050|8D8101  |000181;
     PLA                                                        ;82B053|68      |      ;
     PHA                                                        ;82B054|48      |      ;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B055|203CB1  |82B13C;
@@ -6263,7 +6263,7 @@ fObjectEngine_ConvertCoordsToOffset:
     AND.W #$FFF0                                               ;82B146|29F0FF  |      ;
     STA.B n16TempVar2                                          ;82B149|8580    |000080;
     SEP #$20                                                   ;82B14B|E220    |      ;
-    LDA.W nCurrentMapdata0181                                  ;82B14D|AD8101  |000181;
+    LDA.W nCurrentMapdata_RoomWidthMult                        ;82B14D|AD8101  |000181;
     CMP.B #$01                                                 ;82B150|C901    |      ;
     BEQ +                                                      ;82B152|F017    |82B16B;
     REP #$20                                                   ;82B154|C220    |      ;
@@ -6271,7 +6271,7 @@ fObjectEngine_ConvertCoordsToOffset:
     ASL A                                                      ;82B158|0A      |      ;
     STA.B n16TempVar2                                          ;82B159|8580    |000080;
     SEP #$20                                                   ;82B15B|E220    |      ;
-    LDA.W nCurrentMapdata0181                                  ;82B15D|AD8101  |000181;
+    LDA.W nCurrentMapdata_RoomWidthMult                        ;82B15D|AD8101  |000181;
     CMP.B #$02                                                 ;82B160|C902    |      ;
     BEQ +                                                      ;82B162|F007    |82B16B;
     REP #$20                                                   ;82B164|C220    |      ;
@@ -7149,7 +7149,7 @@ fUnknown_82D1C0:
     SEP #$20                                                   ;82D1C0|E220    |      ; GIGASTART
     REP #$10                                                   ;82D1C2|C210    |      ;
     LDA.B #$0F                                                 ;82D1C4|A90F    |      ;
-    STA.B $92                                                  ;82D1C6|8592    |000092;
+    STA.B nTilesetCount                                        ;82D1C6|8592    |000092;
     LDA.B #$03                                                 ;82D1C8|A903    |      ;
     STA.B $93                                                  ;82D1CA|8593    |000093;
     LDA.B #$01                                                 ;82D1CC|A901    |      ;
@@ -7167,36 +7167,36 @@ fUnknown_82D1C0:
     STZ.B $94                                                  ;82D1EC|6494    |000094;
     REP #$20                                                   ;82D1EE|C220    |      ;
     LDA.W #$0000                                               ;82D1F0|A90000  |      ;
-    STA.L $7F1F5A                                              ;82D1F3|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;82D1F3|8F5A1F7F|7F1F5A;
     LDA.W #$0000                                               ;82D1F7|A90000  |      ;
-    STA.L $7F1F5C                                              ;82D1FA|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;82D1FA|8F5C1F7F|7F1F5C;
     LDA.W #$0000                                               ;82D1FE|A90000  |      ;
-    STA.L $7F1F5E                                              ;82D201|8F5E1F7F|7F1F5E;
+    STA.L nDailyFlags+4                                        ;82D201|8F5E1F7F|7F1F5E;
     LDA.W #$0000                                               ;82D205|A90000  |      ;
-    STA.L $7F1F60                                              ;82D208|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;82D208|8F601F7F|7F1F60;
     LDA.W #$0000                                               ;82D20C|A90000  |      ;
     STA.L $7F1F74                                              ;82D20F|8F741F7F|7F1F74;
     STA.L $7F1F76                                              ;82D213|8F761F7F|7F1F76;
     STA.L $7F1F78                                              ;82D217|8F781F7F|7F1F78;
     LDA.W #$0108                                               ;82D21B|A90801  |      ;
-    STA.L $7F1F60                                              ;82D21E|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;82D21E|8F601F7F|7F1F60;
     REP #$20                                                   ;82D222|C220    |      ;
     LDA.W #$0000                                               ;82D224|A90000  |      ;
-    STA.L nHouseSize                                           ;82D227|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;82D227|8F641F7F|7F1F64;
     LDA.W #$0000                                               ;82D22B|A90000  |      ;
-    STA.L nPlayerFlags                                         ;82D22E|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;82D22E|8F661F7F|7F1F66;
     LDA.W #$0000                                               ;82D232|A90000  |      ;
-    STA.L nPlayerFlags+2                                       ;82D235|8F681F7F|7F1F68;
+    STA.L nEventFlags+4                                        ;82D235|8F681F7F|7F1F68;
     LDA.W #$0000                                               ;82D239|A90000  |      ;
-    STA.L $7F1F6A                                              ;82D23C|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;82D23C|8F6A1F7F|7F1F6A;
     LDA.W #$0000                                               ;82D240|A90000  |      ;
-    STA.L $7F1F6C                                              ;82D243|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;82D243|8F6C1F7F|7F1F6C;
     LDA.W #$0000                                               ;82D247|A90000  |      ;
-    STA.L $7F1F6E                                              ;82D24A|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;82D24A|8F6E1F7F|7F1F6E;
     LDA.W #$0000                                               ;82D24E|A90000  |      ;
-    STA.L $7F1F70                                              ;82D251|8F701F7F|7F1F70;
+    STA.L nEventFlags+12                                       ;82D251|8F701F7F|7F1F70;
     LDA.W #$0000                                               ;82D255|A90000  |      ;
-    STA.L $7F1F72                                              ;82D258|8F721F7F|7F1F72;
+    STA.L nEventFlags+14                                       ;82D258|8F721F7F|7F1F72;
     SEP #$20                                                   ;82D25C|E220    |      ;
     LDA.B #$00                                                 ;82D25E|A900    |      ;
     STA.L $7F1F49                                              ;82D260|8F491F7F|7F1F49;
@@ -7218,13 +7218,13 @@ fUnknown_82D1C0:
     STA.W nAmountLeft_TomatoSeeds                              ;82D28F|8D2909  |000929;
     REP #$20                                                   ;82D292|C220    |      ;
     STZ.W $0915                                                ;82D294|9C1509  |000915;
-    STZ.B $D2                                                  ;82D297|64D2    |0000D2;
+    STZ.B nPlayerStateFlags                                    ;82D297|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;82D299|64D4    |0000D4;
     SEP #$20                                                   ;82D29B|E220    |      ;
     REP #$30                                                   ;82D29D|C230    |      ;
-    LDA.B $D2                                                  ;82D29F|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;82D29F|A5D2    |0000D2;
     ORA.W #$0001                                               ;82D2A1|090100  |      ;
-    STA.B $D2                                                  ;82D2A4|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82D2A4|85D2    |0000D2;
     REP #$30                                                   ;82D2A6|C230    |      ;
     LDA.W #$0000                                               ;82D2A8|A90000  |      ;
     STA.B nPlayerAction                                        ;82D2AB|85D4    |0000D4;
@@ -7246,14 +7246,14 @@ fUnknown_82D1C0:
     REP #$30                                                   ;82D2D4|C230    |      ;
     LDA.W #$0002                                               ;82D2D6|A90200  |      ;
     EOR.W #$FFFF                                               ;82D2D9|49FFFF  |      ;
-    AND.B $D2                                                  ;82D2DC|25D2    |0000D2;
-    STA.B $D2                                                  ;82D2DE|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;82D2DC|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82D2DE|85D2    |0000D2;
     REP #$30                                                   ;82D2E0|C230    |      ;
     STZ.W sPlacedCowFeed                                       ;82D2E2|9C3209  |000932;
     STZ.W sPlacedChickenFeed                                   ;82D2E5|9C3409  |000934;
-    LDA.L $7F1F5C                                              ;82D2E8|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82D2E8|AF5C1F7F|7F1F5C;
     AND.W #$FFFB                                               ;82D2EC|29FBFF  |      ;
-    STA.L $7F1F5C                                              ;82D2EF|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;82D2EF|8F5C1F7F|7F1F5C;
     JSL.L fCore_ZeroVRAM                                       ;82D2F3|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D2FB|22AB8F80|808FAB;
@@ -7305,7 +7305,7 @@ fUnknown_82D1C0:
     JSL.L fUnknown_858CB2                                      ;82D38C|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82D390|22E08385|8583E0;
     REP #$20                                                   ;82D394|C220    |      ;
-    LDA.L $7F1F5C                                              ;82D396|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82D396|AF5C1F7F|7F1F5C;
     AND.W #$0004                                               ;82D39A|290400  |      ;
     BNE +                                                      ;82D39D|D007    |82D3A6;
     SEP #$20                                                   ;82D39F|E220    |      ;
@@ -7334,7 +7334,7 @@ fUnknown_82D3C7:
     SEP #$20                                                   ;82D3C7|E220    |      ;
     REP #$10                                                   ;82D3C9|C210    |      ;
     LDA.B #$0F                                                 ;82D3CB|A90F    |      ;
-    STA.B $92                                                  ;82D3CD|8592    |000092;
+    STA.B nTilesetCount                                        ;82D3CD|8592    |000092;
     LDA.B #$03                                                 ;82D3CF|A903    |      ;
     STA.B $93                                                  ;82D3D1|8593    |000093;
     LDA.B #$01                                                 ;82D3D3|A901    |      ;
@@ -7352,36 +7352,36 @@ fUnknown_82D3C7:
     STZ.B $94                                                  ;82D3F3|6494    |000094;
     REP #$20                                                   ;82D3F5|C220    |      ;
     LDA.W #$0000                                               ;82D3F7|A90000  |      ;
-    STA.L $7F1F5A                                              ;82D3FA|8F5A1F7F|7F1F5A;
+    STA.L nDailyFlags                                          ;82D3FA|8F5A1F7F|7F1F5A;
     LDA.W #$0000                                               ;82D3FE|A90000  |      ;
-    STA.L $7F1F5C                                              ;82D401|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;82D401|8F5C1F7F|7F1F5C;
     LDA.W #$0000                                               ;82D405|A90000  |      ;
-    STA.L $7F1F5E                                              ;82D408|8F5E1F7F|7F1F5E;
+    STA.L nDailyFlags+4                                        ;82D408|8F5E1F7F|7F1F5E;
     LDA.W #$0000                                               ;82D40C|A90000  |      ;
-    STA.L $7F1F60                                              ;82D40F|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;82D40F|8F601F7F|7F1F60;
     LDA.W #$0000                                               ;82D413|A90000  |      ;
     STA.L $7F1F74                                              ;82D416|8F741F7F|7F1F74;
     STA.L $7F1F76                                              ;82D41A|8F761F7F|7F1F76;
     STA.L $7F1F78                                              ;82D41E|8F781F7F|7F1F78;
     LDA.W #$0008                                               ;82D422|A90800  |      ;
-    STA.L $7F1F60                                              ;82D425|8F601F7F|7F1F60;
+    STA.L nDailyFlags+6                                        ;82D425|8F601F7F|7F1F60;
     REP #$20                                                   ;82D429|C220    |      ;
     LDA.W #$0000                                               ;82D42B|A90000  |      ;
-    STA.L nHouseSize                                           ;82D42E|8F641F7F|7F1F64;
+    STA.L nEventFlags                                          ;82D42E|8F641F7F|7F1F64;
     LDA.W #$0000                                               ;82D432|A90000  |      ;
-    STA.L nPlayerFlags                                         ;82D435|8F661F7F|7F1F66;
+    STA.L nEventFlags+2                                        ;82D435|8F661F7F|7F1F66;
     LDA.W #$0000                                               ;82D439|A90000  |      ;
-    STA.L nPlayerFlags+2                                       ;82D43C|8F681F7F|7F1F68;
+    STA.L nEventFlags+4                                        ;82D43C|8F681F7F|7F1F68;
     LDA.W #$0000                                               ;82D440|A90000  |      ;
-    STA.L $7F1F6A                                              ;82D443|8F6A1F7F|7F1F6A;
+    STA.L nEventFlags+6                                        ;82D443|8F6A1F7F|7F1F6A;
     LDA.W #$0000                                               ;82D447|A90000  |      ;
-    STA.L $7F1F6C                                              ;82D44A|8F6C1F7F|7F1F6C;
+    STA.L nEventFlags+8                                        ;82D44A|8F6C1F7F|7F1F6C;
     LDA.W #$0000                                               ;82D44E|A90000  |      ;
-    STA.L $7F1F6E                                              ;82D451|8F6E1F7F|7F1F6E;
+    STA.L nEventFlags+10                                       ;82D451|8F6E1F7F|7F1F6E;
     LDA.W #$0000                                               ;82D455|A90000  |      ;
-    STA.L $7F1F70                                              ;82D458|8F701F7F|7F1F70;
+    STA.L nEventFlags+12                                       ;82D458|8F701F7F|7F1F70;
     LDA.W #$0000                                               ;82D45C|A90000  |      ;
-    STA.L $7F1F72                                              ;82D45F|8F721F7F|7F1F72;
+    STA.L nEventFlags+14                                       ;82D45F|8F721F7F|7F1F72;
     SEP #$20                                                   ;82D463|E220    |      ;
     LDA.B #$8F                                                 ;82D465|A98F    |      ;
     STA.L sShedItems                                           ;82D467|8F001F7F|7F1F00;
@@ -7401,13 +7401,13 @@ fUnknown_82D3C7:
     STZ.W $08FF                                                ;82D490|9CFF08  |0008FF;
     REP #$20                                                   ;82D493|C220    |      ;
     STZ.W $0915                                                ;82D495|9C1509  |000915;
-    STZ.B $D2                                                  ;82D498|64D2    |0000D2;
+    STZ.B nPlayerStateFlags                                    ;82D498|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;82D49A|64D4    |0000D4;
     SEP #$20                                                   ;82D49C|E220    |      ;
     REP #$30                                                   ;82D49E|C230    |      ;
-    LDA.B $D2                                                  ;82D4A0|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;82D4A0|A5D2    |0000D2;
     ORA.W #$0001                                               ;82D4A2|090100  |      ;
-    STA.B $D2                                                  ;82D4A5|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82D4A5|85D2    |0000D2;
     REP #$30                                                   ;82D4A7|C230    |      ;
     LDA.W #$0000                                               ;82D4A9|A90000  |      ;
     STA.B nPlayerAction                                        ;82D4AC|85D4    |0000D4;
@@ -7429,14 +7429,14 @@ fUnknown_82D3C7:
     REP #$30                                                   ;82D4D5|C230    |      ;
     LDA.W #$0002                                               ;82D4D7|A90200  |      ;
     EOR.W #$FFFF                                               ;82D4DA|49FFFF  |      ;
-    AND.B $D2                                                  ;82D4DD|25D2    |0000D2;
-    STA.B $D2                                                  ;82D4DF|85D2    |0000D2;
+    AND.B nPlayerStateFlags                                    ;82D4DD|25D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82D4DF|85D2    |0000D2;
     REP #$30                                                   ;82D4E1|C230    |      ;
     STZ.W sPlacedCowFeed                                       ;82D4E3|9C3209  |000932;
     STZ.W sPlacedChickenFeed                                   ;82D4E6|9C3409  |000934;
-    LDA.L $7F1F5C                                              ;82D4E9|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82D4E9|AF5C1F7F|7F1F5C;
     AND.W #$FFFB                                               ;82D4ED|29FBFF  |      ;
-    STA.L $7F1F5C                                              ;82D4F0|8F5C1F7F|7F1F5C;
+    STA.L nDailyFlags+2                                        ;82D4F0|8F5C1F7F|7F1F5C;
     JSL.L fCore_ZeroVRAM                                       ;82D4F4|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D4FC|22AB8F80|808FAB;
@@ -7689,10 +7689,10 @@ fUnknown_82D6AC:
     JSL.L fUnknown_858CB2                                      ;82D70E|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82D712|22E08385|8583E0;
     REP #$20                                                   ;82D716|C220    |      ;
-    LDA.L $7F1F5C                                              ;82D718|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82D718|AF5C1F7F|7F1F5C;
     AND.W #$0004                                               ;82D71C|290400  |      ;
     BNE fUnknown_82D731                                        ;82D71F|D010    |82D731;
-    LDA.L $7F1F60                                              ;82D721|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;82D721|AF601F7F|7F1F60;
     AND.W #$0080                                               ;82D725|298000  |      ;
     BNE fUnknown_82D731                                        ;82D728|D007    |82D731;
     SEP #$20                                                   ;82D72A|E220    |      ;
@@ -7733,7 +7733,7 @@ fUnknown_82D75E:
     SEP #$20                                                   ;82D767|E220    |      ;
     STZ.W nUnknownFlags09D                                     ;82D769|9C8D09  |00098D;
     REP #$20                                                   ;82D76C|C220    |      ;
-    LDA.L $7F1F60                                              ;82D76E|AF601F7F|7F1F60;
+    LDA.L nDailyFlags+6                                        ;82D76E|AF601F7F|7F1F60;
     AND.W #$0800                                               ;82D772|290008  |      ;
     BEQ +                                                      ;82D775|F007    |82D77E;
     SEP #$20                                                   ;82D777|E220    |      ;
@@ -7782,7 +7782,7 @@ fUnknown_82D75E:
     JSL.L fCore_WaitForNextNMI                                 ;82D7EA|22458680|808645;
     SEP #$20                                                   ;82D7EE|E220    |      ;
     LDA.B #$03                                                 ;82D7F0|A903    |      ;
-    STA.B $92                                                  ;82D7F2|8592    |000092;
+    STA.B nTilesetCount                                        ;82D7F2|8592    |000092;
     LDA.B #$03                                                 ;82D7F4|A903    |      ;
     STA.B $93                                                  ;82D7F6|8593    |000093;
     LDA.B #$0F                                                 ;82D7F8|A90F    |      ;
@@ -7879,7 +7879,7 @@ fUnknown_82D883:
     BNE -                                                      ;82D892|D0F2    |82D886;
     SEP #$20                                                   ;82D894|E220    |      ;
     LDA.B #$0F                                                 ;82D896|A90F    |      ;
-    STA.B $92                                                  ;82D898|8592    |000092;
+    STA.B nTilesetCount                                        ;82D898|8592    |000092;
     LDA.B #$03                                                 ;82D89A|A903    |      ;
     STA.B $93                                                  ;82D89C|8593    |000093;
     LDA.B #$01                                                 ;82D89E|A901    |      ;
@@ -7903,9 +7903,9 @@ fUnknown_82D8B0:
     JSL.L fSubUnk1_ZeroCCPtr                                   ;82D8CA|22008084|848000;
     REP #$20                                                   ;82D8CE|C220    |      ;
     REP #$30                                                   ;82D8D0|C230    |      ;
-    LDA.B $D2                                                  ;82D8D2|A5D2    |0000D2;
+    LDA.B nPlayerStateFlags                                    ;82D8D2|A5D2    |0000D2;
     ORA.W #$0001                                               ;82D8D4|090100  |      ;
-    STA.B $D2                                                  ;82D8D7|85D2    |0000D2;
+    STA.B nPlayerStateFlags                                    ;82D8D7|85D2    |0000D2;
     REP #$30                                                   ;82D8D9|C230    |      ;
     LDA.W #$0000                                               ;82D8DB|A90000  |      ;
     STA.B nPlayerAction                                        ;82D8DE|85D4    |0000D4;
@@ -7965,7 +7965,7 @@ fUnknown_82D8B0:
     JSL.L fUnknown_858CB2                                      ;82D980|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82D984|22E08385|8583E0;
     REP #$20                                                   ;82D988|C220    |      ;
-    LDA.L $7F1F5C                                              ;82D98A|AF5C1F7F|7F1F5C;
+    LDA.L nDailyFlags+2                                        ;82D98A|AF5C1F7F|7F1F5C;
     AND.W #$0004                                               ;82D98E|290400  |      ;
     BNE +                                                      ;82D991|D020    |82D9B3;
     SEP #$20                                                   ;82D993|E220    |      ;
@@ -7978,7 +7978,7 @@ fUnknown_82D8B0:
     BNE -                                                      ;82D99F|D09E    |82D93F;
     SEP #$20                                                   ;82D9A1|E220    |      ;
     LDA.B #$0F                                                 ;82D9A3|A90F    |      ;
-    STA.B $92                                                  ;82D9A5|8592    |000092;
+    STA.B nTilesetCount                                        ;82D9A5|8592    |000092;
     LDA.B #$03                                                 ;82D9A7|A903    |      ;
     STA.B $93                                                  ;82D9A9|8593    |000093;
     LDA.B #$01                                                 ;82D9AB|A901    |      ;
@@ -7994,7 +7994,7 @@ fUnknown_82D8B0:
  
   + SEP #$20                                                   ;82D9BE|E220    |      ;
     LDA.B #$0F                                                 ;82D9C0|A90F    |      ;
-    STA.B $92                                                  ;82D9C2|8592    |000092;
+    STA.B nTilesetCount                                        ;82D9C2|8592    |000092;
     LDA.B #$03                                                 ;82D9C4|A903    |      ;
     STA.B $93                                                  ;82D9C6|8593    |000093;
     LDA.B #$01                                                 ;82D9C8|A901    |      ;
@@ -8054,7 +8054,7 @@ fUnknown_82D8B0:
     JSL.L fCore_WaitForNextNMI                                 ;82DA68|22458680|808645;
     SEP #$20                                                   ;82DA6C|E220    |      ;
     LDA.B #$01                                                 ;82DA6E|A901    |      ;
-    STA.B $92                                                  ;82DA70|8592    |000092;
+    STA.B nTilesetCount                                        ;82DA70|8592    |000092;
     LDA.B #$06                                                 ;82DA72|A906    |      ;
     STA.B $93                                                  ;82DA74|8593    |000093;
     LDA.B #$0F                                                 ;82DA76|A90F    |      ;
@@ -8138,7 +8138,7 @@ fUnknown_82DAF5:
     JSL.L fAudioUnknown_838401                                 ;82DAFF|22018483|838401;
     SEP #$20                                                   ;82DB03|E220    |      ;
     LDA.B #$0F                                                 ;82DB05|A90F    |      ;
-    STA.B $92                                                  ;82DB07|8592    |000092;
+    STA.B nTilesetCount                                        ;82DB07|8592    |000092;
     LDA.B #$01                                                 ;82DB09|A901    |      ;
     STA.B $93                                                  ;82DB0B|8593    |000093;
     LDA.B #$01                                                 ;82DB0D|A901    |      ;
@@ -8156,7 +8156,7 @@ fUnknown_82DAF5:
     JSL.L fUnknown_Zero07Ptr                                   ;82DB35|22C7A481|81A4C7;
     JSL.L fSubUnk1_ZeroCCPtr                                   ;82DB39|22008084|848000;
     REP #$20                                                   ;82DB3D|C220    |      ;
-    STZ.B nPlayerPosX                                          ;82DB3F|64D6    |0000D6;
+    STZ.B nPlayerDirection                                     ;82DB3F|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DB41|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DB43|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DB46|9C7F01  |00017F;
@@ -8198,7 +8198,7 @@ fUnknown_82DB8E:
     JSL.L fAudioUnknown_838401                                 ;82DB98|22018483|838401;
     SEP #$20                                                   ;82DB9C|E220    |      ;
     LDA.B #$0F                                                 ;82DB9E|A90F    |      ;
-    STA.B $92                                                  ;82DBA0|8592    |000092;
+    STA.B nTilesetCount                                        ;82DBA0|8592    |000092;
     LDA.B #$01                                                 ;82DBA2|A901    |      ;
     STA.B $93                                                  ;82DBA4|8593    |000093;
     LDA.B #$01                                                 ;82DBA6|A901    |      ;
@@ -8213,7 +8213,7 @@ fUnknown_82DBB2:
     STZ.W $013E                                                ;82DBB9|9C3E01  |00013E;
     STZ.W $0140                                                ;82DBBC|9C4001  |000140;
     STZ.W $0142                                                ;82DBBF|9C4201  |000142;
-    STZ.B nPlayerPosX                                          ;82DBC2|64D6    |0000D6;
+    STZ.B nPlayerDirection                                     ;82DBC2|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DBC4|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DBC6|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DBC9|9C7F01  |00017F;
@@ -8229,7 +8229,7 @@ fUnknown_82DBB2:
     JSL.L fCore_WaitForNextNMI                                 ;82DBEB|22458680|808645;
     SEP #$20                                                   ;82DBEF|E220    |      ;
     LDA.B #$01                                                 ;82DBF1|A901    |      ;
-    STA.B $92                                                  ;82DBF3|8592    |000092;
+    STA.B nTilesetCount                                        ;82DBF3|8592    |000092;
     LDA.B #$01                                                 ;82DBF5|A901    |      ;
     STA.B $93                                                  ;82DBF7|8593    |000093;
     LDA.B #$0F                                                 ;82DBF9|A90F    |      ;
@@ -8590,7 +8590,7 @@ fUnknown_82DEC5:
     JSL.L fAudioUnknown_838401                                 ;82DECF|22018483|838401;
     SEP #$20                                                   ;82DED3|E220    |      ;
     LDA.B #$0F                                                 ;82DED5|A90F    |      ;
-    STA.B $92                                                  ;82DED7|8592    |000092;
+    STA.B nTilesetCount                                        ;82DED7|8592    |000092;
     LDA.B #$01                                                 ;82DED9|A901    |      ;
     STA.B $93                                                  ;82DEDB|8593    |000093;
     LDA.B #$01                                                 ;82DEDD|A901    |      ;
@@ -8606,7 +8606,7 @@ fUnknown_82DEC5:
     STZ.W $013E                                                ;82DEFA|9C3E01  |00013E;
     STZ.W $0140                                                ;82DEFD|9C4001  |000140;
     STZ.W $0142                                                ;82DF00|9C4201  |000142;
-    STZ.B nPlayerPosX                                          ;82DF03|64D6    |0000D6;
+    STZ.B nPlayerDirection                                     ;82DF03|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DF05|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DF07|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DF0A|9C7F01  |00017F;
@@ -8648,7 +8648,7 @@ fUnknown_82DEC5:
     JSL.L fCore_WaitForNextNMI                                 ;82DF6C|22458680|808645;
     SEP #$20                                                   ;82DF70|E220    |      ;
     LDA.B #$01                                                 ;82DF72|A901    |      ;
-    STA.B $92                                                  ;82DF74|8592    |000092;
+    STA.B nTilesetCount                                        ;82DF74|8592    |000092;
     LDA.B #$01                                                 ;82DF76|A901    |      ;
     STA.B $93                                                  ;82DF78|8593    |000093;
     LDA.B #$0F                                                 ;82DF7A|A90F    |      ;
@@ -8671,7 +8671,7 @@ fUnknown_82DF92:
     JSL.L fAudioUnknown_838401                                 ;82DF9C|22018483|838401;
     SEP #$20                                                   ;82DFA0|E220    |      ;
     LDA.B #$0F                                                 ;82DFA2|A90F    |      ;
-    STA.B $92                                                  ;82DFA4|8592    |000092;
+    STA.B nTilesetCount                                        ;82DFA4|8592    |000092;
     LDA.B #$03                                                 ;82DFA6|A903    |      ;
     STA.B $93                                                  ;82DFA8|8593    |000093;
     LDA.B #$01                                                 ;82DFAA|A901    |      ;
@@ -8798,7 +8798,7 @@ fUnknown_82E0B5:
     JSL.L fCore_WaitForNextNMI                                 ;82E0CD|22458680|808645;
     SEP #$20                                                   ;82E0D1|E220    |      ;
     LDA.B #$03                                                 ;82E0D3|A903    |      ;
-    STA.B $92                                                  ;82E0D5|8592    |000092;
+    STA.B nTilesetCount                                        ;82E0D5|8592    |000092;
     LDA.B #$03                                                 ;82E0D7|A903    |      ;
     STA.B $93                                                  ;82E0D9|8593    |000093;
     LDA.B #$0F                                                 ;82E0DB|A90F    |      ;
@@ -8956,7 +8956,7 @@ fUnknown_82E1F1:
     JSL.L fAudioUnknown_838401                                 ;82E1FB|22018483|838401;
     SEP #$20                                                   ;82E1FF|E220    |      ;
     LDA.B #$0F                                                 ;82E201|A90F    |      ;
-    STA.B $92                                                  ;82E203|8592    |000092;
+    STA.B nTilesetCount                                        ;82E203|8592    |000092;
     LDA.B #$03                                                 ;82E205|A903    |      ;
     STA.B $93                                                  ;82E207|8593    |000093;
     LDA.B #$01                                                 ;82E209|A901    |      ;
@@ -9074,7 +9074,7 @@ fUnknown_82E1F1:
     JSL.L fCore_WaitForNextNMI                                 ;82E319|22458680|808645;
     SEP #$20                                                   ;82E31D|E220    |      ;
     LDA.B #$03                                                 ;82E31F|A903    |      ;
-    STA.B $92                                                  ;82E321|8592    |000092;
+    STA.B nTilesetCount                                        ;82E321|8592    |000092;
     LDA.B #$03                                                 ;82E323|A903    |      ;
     STA.B $93                                                  ;82E325|8593    |000093;
     LDA.B #$0F                                                 ;82E327|A90F    |      ;
@@ -9594,7 +9594,7 @@ fScreen_NameInput:
     JSL.L fAudioUnknown_838401                                 ;82E816|22018483|838401;
     SEP #$20                                                   ;82E81A|E220    |      ;
     LDA.B #$0F                                                 ;82E81C|A90F    |      ;
-    STA.B $92                                                  ;82E81E|8592    |000092;
+    STA.B nTilesetCount                                        ;82E81E|8592    |000092;
     LDA.B #$03                                                 ;82E820|A903    |      ;
     STA.B $93                                                  ;82E822|8593    |000093;
     LDA.B #$01                                                 ;82E824|A901    |      ;
@@ -9689,7 +9689,7 @@ fScreen_NameInput:
     JSL.L fCore_WaitForNextNMI                                 ;82E91B|22458680|808645;
     SEP #$20                                                   ;82E91F|E220    |      ;
     LDA.B #$03                                                 ;82E921|A903    |      ;
-    STA.B $92                                                  ;82E923|8592    |000092;
+    STA.B nTilesetCount                                        ;82E923|8592    |000092;
     LDA.B #$03                                                 ;82E925|A903    |      ;
     STA.B $93                                                  ;82E927|8593    |000093;
     LDA.B #$0F                                                 ;82E929|A90F    |      ;
