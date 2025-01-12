@@ -128,7 +128,7 @@ fUnknown_8580B9:
     LDA.B $A5                                                  ;8580D6|A5A5    |0000A5;
     ASL A                                                      ;8580D8|0A      |      ;
     TAX                                                        ;8580D9|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;8580DA|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;8580DA|BFE08B85|858BE0;
     STA.B $A9                                                  ;8580DE|85A9    |0000A9;
     TAX                                                        ;8580E0|AA      |      ;
     LDA.W #$0001                                               ;8580E1|A90100  |      ;
@@ -172,7 +172,7 @@ fUnknown_858100:
     LDA.B $A5                                                  ;85811F|A5A5    |0000A5;
     ASL A                                                      ;858121|0A      |      ;
     TAX                                                        ;858122|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;858123|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;858123|BFE08B85|858BE0;
     STA.B $A9                                                  ;858127|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;858129|207B8B  |858B7B;
     LDA.B ptrUnknown0xAD+2                                     ;85812C|A5AF    |0000AF;
@@ -240,7 +240,7 @@ fUnknown_8581A2:
     LDA.B $A5                                                  ;8581A4|A5A5    |0000A5;
     ASL A                                                      ;8581A6|0A      |      ;
     TAX                                                        ;8581A7|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;8581A8|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;8581A8|BFE08B85|858BE0;
     STA.B $A9                                                  ;8581AC|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;8581AE|207B8B  |858B7B;
     LDA.B ptrUnknown0xAD+2                                     ;8581B1|A5AF    |0000AF;
@@ -265,7 +265,7 @@ fUnknown_8581CB:
     LDA.B $A5                                                  ;8581CD|A5A5    |0000A5;
     ASL A                                                      ;8581CF|0A      |      ;
     TAX                                                        ;8581D0|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;8581D1|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;8581D1|BFE08B85|858BE0;
     STA.B $A9                                                  ;8581D5|85A9    |0000A9;
     TAX                                                        ;8581D7|AA      |      ;
     LDA.W strcGameObject,X                                     ;8581D8|BD9C01  |00019C;
@@ -499,7 +499,7 @@ fUnknown_858377:
     LDA.W $0905                                                ;858379|AD0509  |000905;
     ASL A                                                      ;85837C|0A      |      ;
     TAX                                                        ;85837D|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;85837E|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;85837E|BFE08B85|858BE0;
     TAX                                                        ;858382|AA      |      ;
     LDA.W strcGameObject.positionY,X                           ;858383|BDA601  |0001A6;
     STA.B $A9                                                  ;858386|85A9    |0000A9;
@@ -588,7 +588,7 @@ fUnknown_8583E0:
     REP #$20                                                   ;85840F|C220    |      ;
     ASL A                                                      ;858411|0A      |      ;
     TAX                                                        ;858412|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;858413|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;858413|BFE08B85|858BE0;
     STA.B $A9                                                  ;858417|85A9    |0000A9;
     LDA.W #$0000                                               ;858419|A90000  |      ;
     STA.B $AB                                                  ;85841C|85AB    |0000AB;
@@ -610,7 +610,7 @@ fUnknown_8583E0:
     REP #$20                                                   ;858433|C220    |      ;
     ASL A                                                      ;858435|0A      |      ;
     TAX                                                        ;858436|AA      |      ;
-    LDA.L Table_858BE0,X                                       ;858437|BFE08B85|858BE0;
+    LDA.L aGameObjectIndexOffsets,X                            ;858437|BFE08B85|858BE0;
     STA.B $A9                                                  ;85843B|85A9    |0000A9;
     CPY.B $DC                                                  ;85843D|C4DC    |0000DC;
     BNE .label3                                                ;85843F|D0E1    |858422;
@@ -1377,7 +1377,7 @@ Table_858BD0:
     dw $0001,$0004,$0010,$0040,$0100,$0400                     ;858BD0|        |      ;
     dw $1000,$4000                                             ;858BDC|        |      ;
  
-Table_858BE0:
+aGameObjectIndexOffsets:
     dw $0000,$0024,$0048,$006C,$0090,$00B4                     ;858BE0|        |      ;
     dw $00D8,$00FC,$0120,$0144,$0168,$018C                     ;858BEC|        |      ;
     dw $01B0,$01D4,$01F8,$021C,$0240,$0264                     ;858BF8|        |      ;
