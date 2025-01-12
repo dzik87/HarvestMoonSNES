@@ -42,9 +42,6 @@
     nAudioRegisterValue0 = $000114; !^ n8 ^!
     nAudioRegisterValue1 = $000115; !^ n8 ^!
     nAudioRegisterValue2 = $000116; !^ n8 ^!
-    fInputController1_current = $000124; !^ n8 ^!
-    nUnknownFlags012C = $00012C; !^ n16 ^!
-    fInputController2_current = $000130; !^ n8 ^!
     nPaletteCountdown = $00017A; !^ n8 ^!
     nPaletteNextIndex = $00017B; !^ n8 ^!
     nPaletteNextHourIndex = $00017C; !^ n8 ^!

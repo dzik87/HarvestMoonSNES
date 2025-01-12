@@ -335,7 +335,7 @@ subItemCarried_BluePerfume:
  
 subItemCarried_RedEgg:
     REP #$30                                                   ;8181FC|C230    |      ;
-    LDA.L $7F1F74                                              ;8181FE|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;8181FE|AF741F7F|7F1F74;
     AND.W #$0020                                               ;818202|292000  |      ;
     BEQ +                                                      ;818205|F003    |81820A;
     JMP.W fEggFestivalUnknown_818337                           ;818207|4C3783  |818337;
@@ -371,7 +371,7 @@ subItemCarried_RedEgg:
  
 subItemCarried_LightPurpleEgg:
     REP #$30                                                   ;81823E|C230    |      ;
-    LDA.L $7F1F74                                              ;818240|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;818240|AF741F7F|7F1F74;
     AND.W #$0020                                               ;818244|292000  |      ;
     BEQ +                                                      ;818247|F003    |81824C;
     JMP.W fEggFestivalUnknown_818337                           ;818249|4C3783  |818337;
@@ -408,7 +408,7 @@ subItemCarried_LightPurpleEgg:
  
 subItemCarried_BlueEgg:
     REP #$30                                                   ;818280|C230    |      ;
-    LDA.L $7F1F74                                              ;818282|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;818282|AF741F7F|7F1F74;
     AND.W #$0020                                               ;818286|292000  |      ;
     BEQ +                                                      ;818289|F003    |81828E;
     JMP.W fEggFestivalUnknown_818337                           ;81828B|4C3783  |818337;
@@ -444,7 +444,7 @@ subItemCarried_BlueEgg:
  
 subItemCarried_PurpleEgg:
     REP #$30                                                   ;8182C2|C230    |      ;
-    LDA.L $7F1F74                                              ;8182C4|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;8182C4|AF741F7F|7F1F74;
     AND.W #$0020                                               ;8182C8|292000  |      ;
     BNE fEggFestivalUnknown_818337                             ;8182CB|D06A    |818337;
     SEP #$20                                                   ;8182CD|E220    |      ;
@@ -474,7 +474,7 @@ subItemCarried_PurpleEgg:
  
 subItemCarried_GreenEgg:
     REP #$30                                                   ;8182FE|C230    |      ;
-    LDA.L $7F1F74                                              ;818300|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;818300|AF741F7F|7F1F74;
     AND.W #$0020                                               ;818304|292000  |      ;
     BNE fEggFestivalUnknown_818337                             ;818307|D02E    |818337;
     SEP #$20                                                   ;818309|E220    |      ;
@@ -518,9 +518,9 @@ fEggFestivalUnknown_818337:
  
 fEggFestivalUnknown_81835E:
     REP #$30                                                   ;81835E|C230    |      ;
-    LDA.L $7F1F74                                              ;818360|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;818360|AF741F7F|7F1F74;
     ORA.W #$0040                                               ;818364|094000  |      ;
-    STA.L $7F1F74                                              ;818367|8F741F7F|7F1F74;
+    STA.L strcUnknownFlags.flags1                              ;818367|8F741F7F|7F1F74;
     RTS                                                        ;81836B|60      |      ;
  
  
@@ -11950,7 +11950,7 @@ subPlayerInteraction81D593_AnimalNPC:
  
 .case1:
     REP #$30                                                   ;81DE8A|C230    |      ;
-    LDA.W fInputController1_current                            ;81DE8C|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;81DE8C|AD2401  |000124;
     BIT.W #$8000                                               ;81DE8F|890080  |      ;
     BEQ +                                                      ;81DE92|F003    |81DE97;
     JMP.W .return2                                             ;81DE94|4C22E2  |81E222;
@@ -12396,9 +12396,9 @@ subPlayerInteraction81D593_AnimalNPC:
     LDA.B #$01                                                 ;81E228|A901    |      ;
     STA.W $019A                                                ;81E22A|8D9A01  |00019A;
     REP #$20                                                   ;81E22D|C220    |      ;
-    LDA.W $0128                                                ;81E22F|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;81E22F|AD2801  |000128;
     AND.W #$FF7F                                               ;81E232|297FFF  |      ;
-    STA.W $0128                                                ;81E235|8D2801  |000128;
+    STA.W strcJoypad1.newInput                                 ;81E235|8D2801  |000128;
     REP #$30                                                   ;81E238|C230    |      ;
     LDA.W #$0040                                               ;81E23A|A94000  |      ;
     EOR.W #$FFFF                                               ;81E23D|49FFFF  |      ;
@@ -12879,7 +12879,7 @@ subPlayerInteraction81D593_0x40:
  
 .check:
     REP #$30                                                   ;81E5C2|C230    |      ;
-    LDA.W fInputController1_current                            ;81E5C4|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;81E5C4|AD2401  |000124;
     BIT.W #$8000                                               ;81E5C7|890080  |      ;
     BEQ +                                                      ;81E5CA|F003    |81E5CF;
     JMP.W .return                                              ;81E5CC|4CA0E6  |81E6A0;
@@ -12996,9 +12996,9 @@ subPlayerInteraction81D593_0x40:
     LDA.B #$01                                                 ;81E6A6|A901    |      ;
     STA.W $019A                                                ;81E6A8|8D9A01  |00019A;
     REP #$20                                                   ;81E6AB|C220    |      ;
-    LDA.W $0128                                                ;81E6AD|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;81E6AD|AD2801  |000128;
     AND.W #$FF7F                                               ;81E6B0|297FFF  |      ;
-    STA.W $0128                                                ;81E6B3|8D2801  |000128;
+    STA.W strcJoypad1.newInput                                 ;81E6B3|8D2801  |000128;
     REP #$30                                                   ;81E6B6|C230    |      ;
     LDA.W #$0040                                               ;81E6B8|A94000  |      ;
     EOR.W #$FFFF                                               ;81E6BB|49FFFF  |      ;
@@ -14876,7 +14876,7 @@ subPlayerInteraction81D593_Return:
     ASL A                                                      ;81F568|0A      |      ;
     TAX                                                        ;81F569|AA      |      ;
     LDA.L nSetBitTable_81FAB4,X                                ;81F56A|BFB4FA81|81FAB4;
-    AND.L $7F1F78                                              ;81F56E|2F781F7F|7F1F78;
+    AND.L strcUnknownFlags.flags3                              ;81F56E|2F781F7F|7F1F78;
     BNE +                                                      ;81F572|D020    |81F594;
     TYX                                                        ;81F574|BB      |      ;
     SEP #$20                                                   ;81F575|E220    |      ;
@@ -15296,7 +15296,7 @@ subPlayerInteraction81D593_FloristNotebook:
  
 .checks:
     REP #$30                                                   ;81F890|C230    |      ;
-    LDA.W fInputController1_current                            ;81F892|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;81F892|AD2401  |000124;
     BIT.W #$8000                                               ;81F895|890080  |      ;
     BEQ +                                                      ;81F898|F003    |81F89D;
     JMP.W .return                                              ;81F89A|4C1FF9  |81F91F;
@@ -15375,9 +15375,9 @@ subPlayerInteraction81D593_FloristNotebook:
     LDA.B #$01                                                 ;81F925|A901    |      ;
     STA.W $019A                                                ;81F927|8D9A01  |00019A;
     REP #$20                                                   ;81F92A|C220    |      ;
-    LDA.W $0128                                                ;81F92C|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;81F92C|AD2801  |000128;
     AND.W #$FF7F                                               ;81F92F|297FFF  |      ;
-    STA.W $0128                                                ;81F932|8D2801  |000128;
+    STA.W strcJoypad1.newInput                                 ;81F932|8D2801  |000128;
     REP #$30                                                   ;81F935|C230    |      ;
     LDA.W #$0040                                               ;81F937|A94000  |      ;
     EOR.W #$FFFF                                               ;81F93A|49FFFF  |      ;
@@ -15406,7 +15406,7 @@ subPlayerInteraction81D593_AnimalNotebook:
  
 .checks:
     REP #$30                                                   ;81F968|C230    |      ;
-    LDA.W fInputController1_current                            ;81F96A|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;81F96A|AD2401  |000124;
     BIT.W #$8000                                               ;81F96D|890080  |      ;
     BEQ +                                                      ;81F970|F003    |81F975;
     JMP.W .return                                              ;81F972|4C46FA  |81FA46;
@@ -15523,9 +15523,9 @@ subPlayerInteraction81D593_AnimalNotebook:
     LDA.B #$01                                                 ;81FA4C|A901    |      ;
     STA.W $019A                                                ;81FA4E|8D9A01  |00019A;
     REP #$20                                                   ;81FA51|C220    |      ;
-    LDA.W $0128                                                ;81FA53|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;81FA53|AD2801  |000128;
     AND.W #$FF7F                                               ;81FA56|297FFF  |      ;
-    STA.W $0128                                                ;81FA59|8D2801  |000128;
+    STA.W strcJoypad1.newInput                                 ;81FA59|8D2801  |000128;
     REP #$30                                                   ;81FA5C|C230    |      ;
     LDA.W #$0040                                               ;81FA5E|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA61|49FFFF  |      ;
