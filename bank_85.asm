@@ -175,7 +175,7 @@ fUnknown_858100:
     LDA.L Table_858BE0,X                                       ;858123|BFE08B85|858BE0;
     STA.B $A9                                                  ;858127|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;858129|207B8B  |858B7B;
-    LDA.B ptrUnkown0xAD+2                                      ;85812C|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;85812C|A5AF    |0000AF;
     BNE fReturn_8580B8                                         ;85812E|D088    |8580B8; BUG - should be .return in this function rather than previous one since we are out of function scope
     JSR.W fUnknown_858B41                                      ;858130|20418B  |858B41;
     REP #$30                                                   ;858133|C230    |      ;
@@ -243,7 +243,7 @@ fUnknown_8581A2:
     LDA.L Table_858BE0,X                                       ;8581A8|BFE08B85|858BE0;
     STA.B $A9                                                  ;8581AC|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;8581AE|207B8B  |858B7B;
-    LDA.B ptrUnkown0xAD+2                                      ;8581B1|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;8581B1|A5AF    |0000AF;
     BEQ +                                                      ;8581B3|F003    |8581B8;
     JMP.W fReturn_8580B8                                       ;8581B5|4CB880  |8580B8; BUG - should be .return in this function rather than JUMP to other RTL
  
@@ -431,7 +431,7 @@ fUnknown_8582C7:
     BNE .label5                                                ;858308|D03F    |858349;
     REP #$20                                                   ;85830A|C220    |      ;
     JSR.W fUnknown_858B7B                                      ;85830C|207B8B  |858B7B;
-    LDA.B ptrUnkown0xAD+2                                      ;85830F|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;85830F|A5AF    |0000AF;
     BNE .loop2                                                 ;858311|D0C1    |8582D4;
     JSR.W fUnknown_858B41                                      ;858313|20418B  |858B41;
     REP #$30                                                   ;858316|C230    |      ;
@@ -504,10 +504,10 @@ fUnknown_858377:
     LDA.W nSpritePositionY,X                                   ;858383|BDA601  |0001A6;
     STA.B $A9                                                  ;858386|85A9    |0000A9;
     LDA.W #$0000                                               ;858388|A90000  |      ;
-    STA.B ptrUnkown0xAD                                        ;85838B|85AD    |0000AD;
+    STA.B ptrUnknown0xAD                                       ;85838B|85AD    |0000AD;
     LDA.B $DC                                                  ;85838D|A5DC    |0000DC;
     DEC A                                                      ;85838F|3A      |      ;
-    STA.B ptrUnkown0xAD+2                                      ;858390|85AF    |0000AF;
+    STA.B ptrUnknown0xAD+2                                     ;858390|85AF    |0000AF;
     LDA.W #$FFFF                                               ;858392|A9FFFF  |      ;
     STA.B n16TempVar1                                          ;858395|857E    |00007E;
     LDY.W #$0000                                               ;858397|A00000  |      ;
@@ -521,23 +521,23 @@ fUnknown_858377:
     LDA.W nSpritePositionY,X                                   ;8583A5|BDA601  |0001A6;
     CMP.B $A9                                                  ;8583A8|C5A9    |0000A9;
     BCC .label1                                                ;8583AA|900E    |8583BA;
-    LDX.B ptrUnkown0xAD                                        ;8583AC|A6AD    |0000AD;
+    LDX.B ptrUnknown0xAD                                       ;8583AC|A6AD    |0000AD;
     TYA                                                        ;8583AE|98      |      ;
     SEP #$20                                                   ;8583AF|E220    |      ;
     STA.W $084C,X                                              ;8583B1|9D4C08  |00084C;
     REP #$20                                                   ;8583B4|C220    |      ;
-    INC.B ptrUnkown0xAD                                        ;8583B6|E6AD    |0000AD;
+    INC.B ptrUnknown0xAD                                       ;8583B6|E6AD    |0000AD;
     BRA .label2                                                ;8583B8|800E    |8583C8;
  
  
 .label1:
     REP #$20                                                   ;8583BA|C220    |      ;
-    LDX.B ptrUnkown0xAD+2                                      ;8583BC|A6AF    |0000AF;
+    LDX.B ptrUnknown0xAD+2                                     ;8583BC|A6AF    |0000AF;
     TYA                                                        ;8583BE|98      |      ;
     SEP #$20                                                   ;8583BF|E220    |      ;
     STA.W $084C,X                                              ;8583C1|9D4C08  |00084C;
     REP #$20                                                   ;8583C4|C220    |      ;
-    DEC.B ptrUnkown0xAD+2                                      ;8583C6|C6AF    |0000AF;
+    DEC.B ptrUnknown0xAD+2                                     ;8583C6|C6AF    |0000AF;
  
 .label2:
     REP #$20                                                   ;8583C8|C220    |      ;
@@ -548,7 +548,7 @@ fUnknown_858377:
     INY                                                        ;8583D0|C8      |      ;
     CPY.B $DC                                                  ;8583D1|C4DC    |0000DC;
     BNE .loop                                                  ;8583D3|D0C8    |85839D;
-    LDX.B ptrUnkown0xAD                                        ;8583D5|A6AD    |0000AD;
+    LDX.B ptrUnknown0xAD                                       ;8583D5|A6AD    |0000AD;
     LDA.W $0905                                                ;8583D7|AD0509  |000905;
     SEP #$20                                                   ;8583DA|E220    |      ;
     STA.W $084C,X                                              ;8583DC|9D4C08  |00084C;
@@ -592,7 +592,7 @@ fUnknown_8583E0:
     STA.B $A9                                                  ;858417|85A9    |0000A9;
     LDA.W #$0000                                               ;858419|A90000  |      ;
     STA.B $AB                                                  ;85841C|85AB    |0000AB;
-    STA.B ptrUnkown0xAD+2                                      ;85841E|85AF    |0000AF;
+    STA.B ptrUnknown0xAD+2                                     ;85841E|85AF    |0000AF;
     LDY.B $AB                                                  ;858420|A4AB    |0000AB;
  
 .label3:
@@ -648,11 +648,11 @@ fUnknown_8583E0:
     STA.B $9D                                                  ;858476|859D    |00009D;
     SEP #$20                                                   ;858478|E220    |      ;
     LDA.W $01AF,X                                              ;85847A|BDAF01  |0001AF;
-    STA.B ptrUnkown0xAD                                        ;85847D|85AD    |0000AD;
-    STZ.B ptrUnkown0xAD+1                                      ;85847F|64AE    |0000AE;
+    STA.B ptrUnknown0xAD                                       ;85847D|85AD    |0000AD;
+    STZ.B ptrUnknown0xAD+1                                     ;85847F|64AE    |0000AE;
     REP #$20                                                   ;858481|C220    |      ;
     INC.B ptrUnknown0x78                                       ;858483|E678    |000078;
-    LDA.B ptrUnkown0xAD                                        ;858485|A5AD    |0000AD;
+    LDA.B ptrUnknown0xAD                                       ;858485|A5AD    |0000AD;
     DEC A                                                      ;858487|3A      |      ;
     STA.B n16TempVar1                                          ;858488|857E    |00007E;
     ASL A                                                      ;85848A|0A      |      ;
@@ -665,14 +665,14 @@ fUnknown_8583E0:
     LDA.B $A9                                                  ;858496|A5A9    |0000A9;
     STA.B ptrUnknown0x75                                       ;858498|8575    |000075;
     CLC                                                        ;85849A|18      |      ;
-    ADC.B ptrUnkown0xAD                                        ;85849B|65AD    |0000AD;
+    ADC.B ptrUnknown0xAD                                       ;85849B|65AD    |0000AD;
     SEC                                                        ;85849D|38      |      ;
     SBC.W #$0001                                               ;85849E|E90100  |      ;
     STA.B ptrUnknown0x75                                       ;8584A1|8575    |000075;
  
 .label7:
     LDY.B $AB                                                  ;8584A3|A4AB    |0000AB;
-    LDA.B ptrUnkown0xAD                                        ;8584A5|A5AD    |0000AD;
+    LDA.B ptrUnknown0xAD                                       ;8584A5|A5AD    |0000AD;
     BNE .label8                                                ;8584A7|D003    |8584AC;
     JMP.W .label4                                              ;8584A9|4C2984  |858429;
  
@@ -738,7 +738,7 @@ fUnknown_8583E0:
     STA.B $C1                                                  ;8584FE|85C1    |0000C1;
     STY.B $C5                                                  ;858500|84C5    |0000C5;
     REP #$30                                                   ;858502|C230    |      ;
-    LDA.B ptrUnkown0xAD+2                                      ;858504|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;858504|A5AF    |0000AF;
     AND.W #$FFE0                                               ;858506|29E0FF  |      ;
     STA.B n16TempVar1                                          ;858509|857E    |00007E;
     LSR A                                                      ;85850B|4A      |      ;
@@ -746,7 +746,7 @@ fUnknown_8583E0:
     LSR A                                                      ;85850D|4A      |      ;
     LSR A                                                      ;85850E|4A      |      ;
     STA.B n16TempVar2                                          ;85850F|8580    |000080;
-    LDA.B ptrUnkown0xAD+2                                      ;858511|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;858511|A5AF    |0000AF;
     SEC                                                        ;858513|38      |      ;
     SBC.B n16TempVar1                                          ;858514|E57E    |00007E;
     STA.B n16TempVar1                                          ;858516|857E    |00007E;
@@ -787,7 +787,7 @@ fUnknown_8583E0:
  
 .label16:
     REP #$30                                                   ;858559|C230    |      ;
-    LDX.B ptrUnkown0xAD+2                                      ;85855B|A6AF    |0000AF;
+    LDX.B ptrUnknown0xAD+2                                     ;85855B|A6AF    |0000AF;
     LDA.B $BF                                                  ;85855D|A5BF    |0000BF;
     SEP #$20                                                   ;85855F|E220    |      ;
     STA.L DMASpriteOBJQueue,X                                  ;858561|9F00A07E|7EA000;
@@ -800,7 +800,7 @@ fUnknown_8583E0:
     LDA.B $C3                                                  ;858573|A5C3    |0000C3;
     STA.L DMASpriteOBJ2BitQueue,X                              ;858575|9F00A27E|7EA200;
     REP #$30                                                   ;858579|C230    |      ;
-    LDX.B ptrUnkown0xAD+2                                      ;85857B|A6AF    |0000AF;
+    LDX.B ptrUnknown0xAD+2                                     ;85857B|A6AF    |0000AF;
     LDY.B $C5                                                  ;85857D|A4C5    |0000C5;
     INY                                                        ;85857F|C8      |      ;
     SEP #$20                                                   ;858580|E220    |      ;
@@ -840,13 +840,13 @@ fUnknown_8583E0:
     TAX                                                        ;8585C2|AA      |      ;
     LDA.L aMultiplicantValue_868000,X                          ;8585C3|BF008086|868000;
     SEP #$20                                                   ;8585C7|E220    |      ;
-    LDX.B ptrUnkown0xAD+2                                      ;8585C9|A6AF    |0000AF;
+    LDX.B ptrUnknown0xAD+2                                     ;8585C9|A6AF    |0000AF;
     STA.L $7EA002,X                                            ;8585CB|9F02A07E|7EA002;
     REP #$20                                                   ;8585CF|C220    |      ;
-    LDA.B ptrUnkown0xAD+2                                      ;8585D1|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;8585D1|A5AF    |0000AF;
     CLC                                                        ;8585D3|18      |      ;
     ADC.W #$0004                                               ;8585D4|690400  |      ;
-    STA.B ptrUnkown0xAD+2                                      ;8585D7|85AF    |0000AF;
+    STA.B ptrUnknown0xAD+2                                     ;8585D7|85AF    |0000AF;
  
 .label17:
     LDA.B ptrUnknown0x78                                       ;8585D9|A578    |000078;
@@ -865,13 +865,13 @@ fUnknown_8583E0:
  
 .label19:
     DEC.B ptrUnknown0x75                                       ;8585ED|C675    |000075;
-    DEC.B ptrUnkown0xAD                                        ;8585EF|C6AD    |0000AD;
+    DEC.B ptrUnknown0xAD                                       ;8585EF|C6AD    |0000AD;
     JMP.W .label7                                              ;8585F1|4CA384  |8584A3;
  
  
 fUnknown_8585F4:
     REP #$30                                                   ;8585F4|C230    |      ;
-    LDA.B ptrUnkown0xAD+2                                      ;8585F6|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;8585F6|A5AF    |0000AF;
     STA.W $084A                                                ;8585F8|8D4A08  |00084A;
     SEP #$20                                                   ;8585FB|E220    |      ;
     LDX.W #$0000                                               ;8585FD|A20000  |      ;
@@ -1215,9 +1215,9 @@ fUnknown_858AE5:
     LDY.W #$0000                                               ;858AEE|A00000  |      ;
     SEP #$20                                                   ;858AF1|E220    |      ;
     LDA.B [ptrUnknown0x78],Y                                   ;858AF3|B778    |000078;
-    STA.B ptrUnkown0xAD                                        ;858AF5|85AD    |0000AD;
+    STA.B ptrUnknown0xAD                                       ;858AF5|85AD    |0000AD;
     STA.W $01AF,X                                              ;858AF7|9DAF01  |0001AF;
-    STZ.B ptrUnkown0xAD+1                                      ;858AFA|64AE    |0000AE;
+    STZ.B ptrUnknown0xAD+1                                     ;858AFA|64AE    |0000AE;
     REP #$20                                                   ;858AFC|C220    |      ;
     INY                                                        ;858AFE|C8      |      ;
     TXA                                                        ;858AFF|8A      |      ;
@@ -1225,17 +1225,17 @@ fUnknown_858AE5:
     ADC.W #$019C                                               ;858B01|699C01  |      ;
     CLC                                                        ;858B04|18      |      ;
     ADC.W #$0014                                               ;858B05|691400  |      ;
-    STA.B ptrUnkown0xAD+2                                      ;858B08|85AF    |0000AF;
+    STA.B ptrUnknown0xAD+2                                     ;858B08|85AF    |0000AF;
  
 .loop:
-    LDA.B ptrUnkown0xAD                                        ;858B0A|A5AD    |0000AD;
+    LDA.B ptrUnknown0xAD                                       ;858B0A|A5AD    |0000AD;
     BNE +                                                      ;858B0C|D002    |858B10;
     BRA .exit                                                  ;858B0E|802C    |858B3C;
  
  
   + LDA.B [ptrUnknown0x78],Y                                   ;858B10|B778    |000078;
     STA.B ptrBank86_87Data                                     ;858B12|85B3    |0000B3;
-    LDA.B ptrUnkown0xAD+2                                      ;858B14|A5AF    |0000AF;
+    LDA.B ptrUnknown0xAD+2                                     ;858B14|A5AF    |0000AF;
     STA.B ptrBank86_87Data+2                                   ;858B16|85B5    |0000B5;
     REP #$30                                                   ;858B18|C230    |      ;
     PHX                                                        ;858B1A|DA      |      ;
@@ -1250,12 +1250,12 @@ fUnknown_858AE5:
     STA.W $01B0,X                                              ;858B2A|9DB001  |0001B0;
     REP #$20                                                   ;858B2D|C220    |      ;
     INX                                                        ;858B2F|E8      |      ;
-    INC.B ptrUnkown0xAD+2                                      ;858B30|E6AF    |0000AF;
+    INC.B ptrUnknown0xAD+2                                     ;858B30|E6AF    |0000AF;
     TYA                                                        ;858B32|98      |      ;
     CLC                                                        ;858B33|18      |      ;
     ADC.W #$0005                                               ;858B34|690500  |      ;
     TAY                                                        ;858B37|A8      |      ;
-    DEC.B ptrUnkown0xAD                                        ;858B38|C6AD    |0000AD;
+    DEC.B ptrUnknown0xAD                                       ;858B38|C6AD    |0000AD;
     BRA .loop                                                  ;858B3A|80CE    |858B0A;
  
  
@@ -1331,14 +1331,14 @@ fUnknown_858B7B:
     REP #$30                                                   ;858B9C|C230    |      ;
     INC.W $0740                                                ;858B9E|EE4007  |000740;
     LDA.W #$FFFF                                               ;858BA1|A9FFFF  |      ;
-    STA.B ptrUnkown0xAD+2                                      ;858BA4|85AF    |0000AF;
+    STA.B ptrUnknown0xAD+2                                     ;858BA4|85AF    |0000AF;
     BRA .return                                                ;858BA6|8007    |858BAF;
  
  
 .label2:
     REP #$30                                                   ;858BA8|C230    |      ;
     LDA.W #$0000                                               ;858BAA|A90000  |      ;
-    STA.B ptrUnkown0xAD+2                                      ;858BAD|85AF    |0000AF;
+    STA.B ptrUnknown0xAD+2                                     ;858BAD|85AF    |0000AF;
  
 .return:
     RTS                                                        ;858BAF|60      |      ;

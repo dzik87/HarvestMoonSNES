@@ -12,12 +12,13 @@
     n16TempVar1 = $00007E
     n16TempVar2 = $000080
     n16TempVar3 = $000082
-    nTilesetCount = $000092
-    nUnknown0095 = $000095
-    ptrUnkown0xAD = $0000AD
+    n16TempVar4 = $000084
+    n8TempVar1 = $000092
+    nUnknown0x95 = $000095
+    ptrUnknown0xAD = $0000AD
     ptrBank86_87Data = $0000B3
-    ptrUnknown0xC9 = $0000C9
-    ptrUnknown0xCC = $0000CC
+    ptrAIActionArg0xC9 = $0000C9
+    ptrAIUnknown0xCC = $0000CC
     ptrUnknown0xCF = $0000CF
     nPlayerStateFlags = $0000D2
     nPlayerAction = $0000D4
@@ -100,6 +101,7 @@
     nCarriedItemId = $000984
     nTileInFrontOfPlayerX = $000985
     nTileInFrontOfPlayerY = $000987
+    n8DestinationId = $00098B
     nWeatherForecast = $00098C
     nUnknownFlags09D = $00098D
     nWeatherDialogIdIndex = $000990
@@ -328,6 +330,8 @@
     nCurrentWeekdayID = $7F1F1A
     nCurrentDay = $7F1F1B
     nCurrentTimeID = $7F1F1C
+    nIngameHourCounter = $7F1F1D
+    nINGameMinuteCounter = $7F1F1E
     nLove_Maria = $7F1F1F
     nLove_Ann = $7F1F21
     nLove_Nina = $7F1F23
@@ -357,6 +361,7 @@
     nRanchDevelopmentRate = $7F1F56
     nDailyFlags = $7F1F5A
     nEventFlags = $7F1F64
+ 
  
  
  

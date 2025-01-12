@@ -2,18 +2,18 @@
     ORG $848000
  
  
-fSubUnk1_ZeroCCPtr:
+fAI_ZeroCCPtr:
     REP #$30                                                   ;848000|C230    |      ;
     LDX.W #$0000                                               ;848002|A20000  |      ;
  
   - PHX                                                        ;848005|DA      |      ;
     TXA                                                        ;848006|8A      |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;848007|227C8884|84887C;
+    JSL.L fAI_Unknown84887C                                    ;848007|227C8884|84887C;
     SEP #$20                                                   ;84800B|E220    |      ;
     REP #$10                                                   ;84800D|C210    |      ;
     LDY.W #$0000                                               ;84800F|A00000  |      ;
     LDA.B #$00                                                 ;848012|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848014|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848014|97CC    |0000CC;
     REP #$30                                                   ;848016|C230    |      ;
     PLX                                                        ;848018|FA      |      ;
     INX                                                        ;848019|E8      |      ;
@@ -22,136 +22,136 @@ fSubUnk1_ZeroCCPtr:
     RTL                                                        ;84801F|6B      |      ;
  
  
-fSubUnk1Unknown_848020:
+fAI_Unknown848020:
     REP #$30                                                   ;848020|C230    |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;848022|227C8884|84887C;
+    JSL.L fAI_Unknown84887C                                    ;848022|227C8884|84887C;
     SEP #$20                                                   ;848026|E220    |      ;
     REP #$10                                                   ;848028|C210    |      ;
     LDY.W #$0000                                               ;84802A|A00000  |      ;
     LDA.B #$00                                                 ;84802D|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84802F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84802F|97CC    |0000CC;
     REP #$30                                                   ;848031|C230    |      ;
     LDY.W #$0012                                               ;848033|A01200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848036|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848036|B7CC    |0000CC;
     STA.B $A5                                                  ;848038|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;84803A|22A28185|8581A2;
     RTL                                                        ;84803E|6B      |      ;
  
  
-fSubUnk1Unknown_84803F:
-    REP #$30                                                   ;84803F|C230    |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;848041|227C8884|84887C;
+fAI_Unknown84803F:
+    REP #$30                                                   ;84803F|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
+    JSL.L fAI_Unknown84887C                                    ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;848045|C230    |      ;
     STX.B n16TempVar1                                          ;848047|867E    |00007E;
     STY.B n16TempVar2                                          ;848049|8480    |000080;
     LDX.W #$0000                                               ;84804B|A20000  |      ;
-    LDA.L pppTable_8494CD,X                                    ;84804E|BFCD9484|8494CD;
+    LDA.L pppAITable_8494CD,X                                  ;84804E|BFCD9484|8494CD; index = 0
     STA.B ptrUnknown0x75                                       ;848052|8575    |000075;
     INX                                                        ;848054|E8      |      ;
     INX                                                        ;848055|E8      |      ;
     SEP #$20                                                   ;848056|E220    |      ;
-    LDA.L pppTable_8494CD,X                                    ;848058|BFCD9484|8494CD;
-    STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077;
+    LDA.L pppAITable_8494CD,X                                  ;848058|BFCD9484|8494CD;
+    STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077; $0x75 = 0xB38000
     REP #$20                                                   ;84805E|C220    |      ;
     LDA.B n16TempVar1                                          ;848060|A57E    |00007E;
     ASL A                                                      ;848062|0A      |      ;
     CLC                                                        ;848063|18      |      ;
     ADC.B n16TempVar1                                          ;848064|657E    |00007E;
     TAY                                                        ;848066|A8      |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;848067|B775    |000075;
+    LDA.B [ptrUnknown0x75],Y                                   ;848067|B775    |000075; index = nIndex * 2
     STA.B ptrUnknown0x78                                       ;848069|8578    |000078;
     INY                                                        ;84806B|C8      |      ;
     INY                                                        ;84806C|C8      |      ;
     SEP #$20                                                   ;84806D|E220    |      ;
     LDA.B [ptrUnknown0x75],Y                                   ;84806F|B775    |000075;
-    STA.B ptrUnknown0x78+2                                     ;848071|857A    |00007A;
+    STA.B ptrUnknown0x78+2                                     ;848071|857A    |00007A; $78 = 0xB38BB8
     REP #$20                                                   ;848073|C220    |      ;
     LDA.B n16TempVar2                                          ;848075|A580    |000080;
     ASL A                                                      ;848077|0A      |      ;
     TAY                                                        ;848078|A8      |      ;
-    LDA.B [ptrUnknown0x78],Y                                   ;848079|B778    |000078;
+    LDA.B [ptrUnknown0x78],Y                                   ;848079|B778    |000078; index = nSubindex * 2
     REP #$30                                                   ;84807B|C230    |      ;
     LDY.W #$0030                                               ;84807D|A03000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848080|97CC    |0000CC;
-    STA.B ptrUnknown0xC9                                       ;848082|85C9    |0000C9;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848080|97CC    |0000CC;
+    STA.B ptrAIActionArg0xC9                                   ;848082|85C9    |0000C9;
     SEP #$20                                                   ;848084|E220    |      ;
     LDA.B ptrUnknown0x78+2                                     ;848086|A57A    |00007A;
     SEP #$20                                                   ;848088|E220    |      ;
     REP #$10                                                   ;84808A|C210    |      ;
     LDY.W #$0032                                               ;84808C|A03200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84808F|97CC    |0000CC;
-    STA.B ptrUnknown0xC9+2                                     ;848091|85CB    |0000CB;
-    JSR.W fSubUnk1Unknown_848961                               ;848093|206189  |848961;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84808F|97CC    |0000CC;
+    STA.B ptrAIActionArg0xC9+2                                 ;848091|85CB    |0000CB;
+    JSR.W fAI_Unknown848961                                    ;848093|206189  |848961;
     RTL                                                        ;848096|6B      |      ;
  
  
-fSubUnk1Unknown_848097:
-    REP #$30                                                   ;848097|C230    |      ;
+fAI_Unknown848097:
+    REP #$30                                                   ;848097|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;848099|48      |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;84809A|227C8884|84887C;
+    JSL.L fAI_Unknown84887C                                    ;84809A|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;84809E|C230    |      ;
     STX.B n16TempVar1                                          ;8480A0|867E    |00007E;
     STY.B n16TempVar2                                          ;8480A2|8480    |000080;
     LDX.W #$0000                                               ;8480A4|A20000  |      ;
-    LDA.L pppTable_8494CD,X                                    ;8480A7|BFCD9484|8494CD;
+    LDA.L pppAITable_8494CD,X                                  ;8480A7|BFCD9484|8494CD; index = 0
     STA.B ptrUnknown0x72                                       ;8480AB|8572    |000072;
     INX                                                        ;8480AD|E8      |      ;
     INX                                                        ;8480AE|E8      |      ;
     SEP #$20                                                   ;8480AF|E220    |      ;
-    LDA.L pppTable_8494CD,X                                    ;8480B1|BFCD9484|8494CD;
-    STA.B ptrUnknown0x72+2                                     ;8480B5|8574    |000074;
+    LDA.L pppAITable_8494CD,X                                  ;8480B1|BFCD9484|8494CD;
+    STA.B ptrUnknown0x72+2                                     ;8480B5|8574    |000074; $0x72 = 0xB38000
     REP #$20                                                   ;8480B7|C220    |      ;
     LDA.B n16TempVar1                                          ;8480B9|A57E    |00007E;
     ASL A                                                      ;8480BB|0A      |      ;
     CLC                                                        ;8480BC|18      |      ;
     ADC.B n16TempVar1                                          ;8480BD|657E    |00007E;
     TAY                                                        ;8480BF|A8      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;8480C0|B772    |000072;
-    STA.B ptrUnknown0xC9                                       ;8480C2|85C9    |0000C9;
+    LDA.B [ptrUnknown0x72],Y                                   ;8480C0|B772    |000072; index = nIndex * 2
+    STA.B ptrAIActionArg0xC9                                   ;8480C2|85C9    |0000C9;
     INY                                                        ;8480C4|C8      |      ;
     INY                                                        ;8480C5|C8      |      ;
     SEP #$20                                                   ;8480C6|E220    |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;8480C8|B772    |000072;
-    STA.B ptrUnknown0xC9+2                                     ;8480CA|85CB    |0000CB;
+    STA.B ptrAIActionArg0xC9+2                                 ;8480CA|85CB    |0000CB; $C9 = 0xB38BB8
     REP #$20                                                   ;8480CC|C220    |      ;
     LDA.B n16TempVar2                                          ;8480CE|A580    |000080;
     ASL A                                                      ;8480D0|0A      |      ;
     TAY                                                        ;8480D1|A8      |      ;
-    LDA.B [ptrUnknown0xC9],Y                                   ;8480D2|B7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9],Y                               ;8480D2|B7C9    |0000C9;
     REP #$30                                                   ;8480D4|C230    |      ;
     LDY.W #$0030                                               ;8480D6|A03000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8480D9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8480D9|97CC    |0000CC;
     SEP #$20                                                   ;8480DB|E220    |      ;
-    LDA.B ptrUnknown0xC9+2                                     ;8480DD|A5CB    |0000CB;
+    LDA.B ptrAIActionArg0xC9+2                                 ;8480DD|A5CB    |0000CB;
     SEP #$20                                                   ;8480DF|E220    |      ;
     REP #$10                                                   ;8480E1|C210    |      ;
     LDY.W #$0032                                               ;8480E3|A03200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8480E6|97CC    |0000CC;
-    JSR.W fSubUnk1Unknown_8488D4                               ;8480E8|20D488  |8488D4;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8480E6|97CC    |0000CC;
+    JSR.W fAI_Unknown8488D4                                    ;8480E8|20D488  |8488D4;
     REP #$30                                                   ;8480EB|C230    |      ;
     PLA                                                        ;8480ED|68      |      ;
     SEP #$20                                                   ;8480EE|E220    |      ;
     REP #$10                                                   ;8480F0|C210    |      ;
     LDY.W #$003F                                               ;8480F2|A03F00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8480F5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8480F5|97CC    |0000CC;
     RTL                                                        ;8480F7|6B      |      ;
  
  
-fSubUnk1Unknown_8480F8:
-    REP #$30                                                   ;8480F8|C230    |      ;
+fAI_Unknown8480F8:
+    REP #$30                                                   ;8480F8|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;8480FA|48      |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;8480FB|227C8884|84887C;
+    JSL.L fAI_Unknown84887C                                    ;8480FB|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;8480FF|C230    |      ;
     STX.B n16TempVar1                                          ;848101|867E    |00007E;
     STY.B n16TempVar2                                          ;848103|8480    |000080;
     LDX.W #$0000                                               ;848105|A20000  |      ;
-    LDA.L pppTable_8494CD,X                                    ;848108|BFCD9484|8494CD;
+    LDA.L pppAITable_8494CD,X                                  ;848108|BFCD9484|8494CD;
     STA.B ptrUnknown0x72                                       ;84810C|8572    |000072;
     INX                                                        ;84810E|E8      |      ;
     INX                                                        ;84810F|E8      |      ;
     SEP #$20                                                   ;848110|E220    |      ;
-    LDA.L pppTable_8494CD,X                                    ;848112|BFCD9484|8494CD;
-    STA.B ptrUnknown0x72+2                                     ;848116|8574    |000074;
+    LDA.L pppAITable_8494CD,X                                  ;848112|BFCD9484|8494CD;
+    STA.B ptrUnknown0x72+2                                     ;848116|8574    |000074; $0x72 = 0xB38000
     REP #$20                                                   ;848118|C220    |      ;
     LDA.B n16TempVar1                                          ;84811A|A57E    |00007E;
     ASL A                                                      ;84811C|0A      |      ;
@@ -159,46 +159,46 @@ fSubUnk1Unknown_8480F8:
     ADC.B n16TempVar1                                          ;84811E|657E    |00007E;
     TAY                                                        ;848120|A8      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;848121|B772    |000072;
-    STA.B ptrUnknown0xC9                                       ;848123|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848123|85C9    |0000C9;
     INY                                                        ;848125|C8      |      ;
     INY                                                        ;848126|C8      |      ;
     SEP #$20                                                   ;848127|E220    |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;848129|B772    |000072;
-    STA.B ptrUnknown0xC9+2                                     ;84812B|85CB    |0000CB;
+    STA.B ptrAIActionArg0xC9+2                                 ;84812B|85CB    |0000CB;
     REP #$20                                                   ;84812D|C220    |      ;
     LDA.B n16TempVar2                                          ;84812F|A580    |000080;
     ASL A                                                      ;848131|0A      |      ;
     TAY                                                        ;848132|A8      |      ;
-    LDA.B [ptrUnknown0xC9],Y                                   ;848133|B7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9],Y                               ;848133|B7C9    |0000C9;
     REP #$30                                                   ;848135|C230    |      ;
     LDY.W #$0030                                               ;848137|A03000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84813A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84813A|97CC    |0000CC;
     SEP #$20                                                   ;84813C|E220    |      ;
-    LDA.B ptrUnknown0xC9+2                                     ;84813E|A5CB    |0000CB;
+    LDA.B ptrAIActionArg0xC9+2                                 ;84813E|A5CB    |0000CB;
     SEP #$20                                                   ;848140|E220    |      ;
     REP #$10                                                   ;848142|C210    |      ;
     LDY.W #$0032                                               ;848144|A03200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848147|97CC    |0000CC;
-    JSR.W fSubUnk1Unknown_8488D4                               ;848149|20D488  |8488D4;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848147|97CC    |0000CC;
+    JSR.W fAI_Unknown8488D4                                    ;848149|20D488  |8488D4;
     REP #$30                                                   ;84814C|C230    |      ;
     PLA                                                        ;84814E|68      |      ;
     SEP #$20                                                   ;84814F|E220    |      ;
     REP #$10                                                   ;848151|C210    |      ;
     LDY.W #$003F                                               ;848153|A03F00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848156|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848156|97CC    |0000CC;
     REP #$30                                                   ;848158|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;84815A|AD8509  |000985;
     REP #$30                                                   ;84815D|C230    |      ;
     LDY.W #$001A                                               ;84815F|A01A00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848162|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848162|97CC    |0000CC;
     LDA.W nTileInFrontOfPlayerY                                ;848164|AD8709  |000987;
     REP #$30                                                   ;848167|C230    |      ;
     LDY.W #$001C                                               ;848169|A01C00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84816C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84816C|97CC    |0000CC;
     RTL                                                        ;84816E|6B      |      ;
  
  
-fSubUnk1Unknown_84816F:
+fAI_Unknown84816F:
     SEP #$20                                                   ;84816F|E220    |      ;
     REP #$10                                                   ;848171|C210    |      ;
     LDA.W $019A                                                ;848173|AD9A01  |00019A;
@@ -224,10 +224,10 @@ fSubUnk1Unknown_84816F:
     STA.B $DE                                                  ;848196|85DE    |0000DE;
     REP #$20                                                   ;848198|C220    |      ;
     LDA.W #$B586                                               ;84819A|A986B5  |      ;
-    STA.B ptrUnknown0xCC                                       ;84819D|85CC    |0000CC;
+    STA.B ptrAIUnknown0xCC                                     ;84819D|85CC    |0000CC;
     SEP #$20                                                   ;84819F|E220    |      ;
     LDA.B #$7E                                                 ;8481A1|A97E    |      ;
-    STA.B ptrUnknown0xCC+2                                     ;8481A3|85CE    |0000CE; 7EB586 -> $CC
+    STA.B ptrAIUnknown0xCC+2                                   ;8481A3|85CE    |0000CE; 7EB586 -> $CC
     REP #$20                                                   ;8481A5|C220    |      ;
     LDX.W #$0000                                               ;8481A7|A20000  |      ;
  
@@ -236,26 +236,26 @@ fSubUnk1Unknown_84816F:
     SEP #$20                                                   ;8481AD|E220    |      ;
     REP #$10                                                   ;8481AF|C210    |      ;
     LDY.W #$0000                                               ;8481B1|A00000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8481B4|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481B4|B7CC    |0000CC;
     AND.B #$01                                                 ;8481B6|2901    |      ;
     BEQ .label6                                                ;8481B8|F04F    |848209;
     REP #$30                                                   ;8481BA|C230    |      ;
     LDY.W #$0010                                               ;8481BC|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8481BF|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481BF|B7CC    |0000CC;
     BNE .label4                                                ;8481C1|D01C    |8481DF;
  
   - SEP #$20                                                   ;8481C3|E220    |      ;
     REP #$10                                                   ;8481C5|C210    |      ;
     LDY.W #$0001                                               ;8481C7|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8481CA|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481CA|B7CC    |0000CC;
     AND.B #$08                                                 ;8481CC|2908    |      ;
     BNE +                                                      ;8481CE|D00A    |8481DA;
     REP #$20                                                   ;8481D0|C220    |      ;
     LDY.W #$0003                                               ;8481D2|A00300  |      ;
     LDA.W #$0000                                               ;8481D5|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8481D8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8481D8|97CC    |0000CC;
  
-  + JSR.W fSubUnk1Handler_848249                               ;8481DA|204982  |848249;
+  + JSR.W fAI_ExecuteAiAction                                  ;8481DA|204982  |848249;
     BRA +                                                      ;8481DD|8008    |8481E7;
  
  
@@ -263,11 +263,11 @@ fSubUnk1Unknown_84816F:
     DEC A                                                      ;8481DF|3A      |      ;
     REP #$30                                                   ;8481E0|C230    |      ;
     LDY.W #$0010                                               ;8481E2|A01000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8481E5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8481E5|97CC    |0000CC;
  
   + REP #$30                                                   ;8481E7|C230    |      ;
     LDY.W #$0010                                               ;8481E9|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8481EC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481EC|B7CC    |0000CC;
     BEQ -                                                      ;8481EE|F0D3    |8481C3;
     SEP #$20                                                   ;8481F0|E220    |      ;
     LDA.B $DE                                                  ;8481F2|A5DE    |0000DE;
@@ -277,17 +277,17 @@ fSubUnk1Unknown_84816F:
     SEP #$20                                                   ;8481F9|E220    |      ;
     REP #$10                                                   ;8481FB|C210    |      ;
     LDY.W #$0001                                               ;8481FD|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848200|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848200|B7CC    |0000CC;
     AND.B #$01                                                 ;848202|2901    |      ;
     BEQ .label6                                                ;848204|F003    |848209;
-    JSR.W fSubUnk1Unknown_848286                               ;848206|208682  |848286;
+    JSR.W fAI_Unknown848286                                    ;848206|208682  |848286;
  
 .label6:
     REP #$30                                                   ;848209|C230    |      ;
-    LDA.B ptrUnknown0xCC                                       ;84820B|A5CC    |0000CC;
+    LDA.B ptrAIUnknown0xCC                                     ;84820B|A5CC    |0000CC;
     CLC                                                        ;84820D|18      |      ;
     ADC.W #$0040                                               ;84820E|694000  |      ;
-    STA.B ptrUnknown0xCC                                       ;848211|85CC    |0000CC;
+    STA.B ptrAIUnknown0xCC                                     ;848211|85CC    |0000CC;
     PLX                                                        ;848213|FA      |      ;
     INX                                                        ;848214|E8      |      ;
     CPX.W #$0031                                               ;848215|E03100  |      ;
@@ -310,76 +310,76 @@ fSubUnk1Unknown_84816F:
     RTL                                                        ;848248|6B      |      ;
  
  
-fSubUnk1Handler_848249:
+fAI_ExecuteAiAction:
     REP #$30                                                   ;848249|C230    |      ;
     REP #$30                                                   ;84824B|C230    |      ;
     LDY.W #$0030                                               ;84824D|A03000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848250|B7CC    |0000CC;
-    STA.B ptrUnknown0xC9                                       ;848252|85C9    |0000C9;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848250|B7CC    |0000CC;
+    STA.B ptrAIActionArg0xC9                                   ;848252|85C9    |0000C9;
     SEP #$20                                                   ;848254|E220    |      ;
     REP #$10                                                   ;848256|C210    |      ;
     LDY.W #$0032                                               ;848258|A03200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84825B|B7CC    |0000CC;
-    STA.B ptrUnknown0xC9+2                                     ;84825D|85CB    |0000CB;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84825B|B7CC    |0000CC;
+    STA.B ptrAIActionArg0xC9+2                                 ;84825D|85CB    |0000CB;
     SEP #$20                                                   ;84825F|E220    |      ;
     LDA.B #$00                                                 ;848261|A900    |      ;
     XBA                                                        ;848263|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848264|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848264|A7C9    |0000C9;
     REP #$20                                                   ;848266|C220    |      ;
     ASL A                                                      ;848268|0A      |      ;
     TAX                                                        ;848269|AA      |      ;
-    JSR.W (pSubUnk1Table_849419,X)                             ;84826A|FC1994  |849419;
+    JSR.W (aAIActions,X)                                       ;84826A|FC1994  |849419;
     REP #$30                                                   ;84826D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84826F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84826F|A5C9    |0000C9;
     REP #$30                                                   ;848271|C230    |      ;
     LDY.W #$0030                                               ;848273|A03000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848276|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848276|97CC    |0000CC;
     SEP #$20                                                   ;848278|E220    |      ;
-    LDA.B ptrUnknown0xC9+2                                     ;84827A|A5CB    |0000CB;
+    LDA.B ptrAIActionArg0xC9+2                                 ;84827A|A5CB    |0000CB;
     SEP #$20                                                   ;84827C|E220    |      ;
     REP #$10                                                   ;84827E|C210    |      ;
     LDY.W #$0032                                               ;848280|A03200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848283|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848283|97CC    |0000CC;
     RTS                                                        ;848285|60      |      ;
  
  
-fSubUnk1Unknown_848286:
+fAI_Unknown848286:
     REP #$30                                                   ;848286|C230    |      ;
     SEP #$20                                                   ;848288|E220    |      ;
     REP #$10                                                   ;84828A|C210    |      ;
     LDY.W #$0001                                               ;84828C|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84828F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84828F|B7CC    |0000CC;
     AND.B #$10                                                 ;848291|2910    |      ;
     BNE +                                                      ;848293|D006    |84829B;
-    JSR.W fSubUnk1Unknown_8483CC                               ;848295|20CC83  |8483CC;
-    JSR.W fSubUnk1Unknown_848331                               ;848298|203183  |848331;
+    JSR.W fAI_Unknown8483CC                                    ;848295|20CC83  |8483CC;
+    JSR.W fAI_Unknown848331                                    ;848298|203183  |848331;
  
   + REP #$30                                                   ;84829B|C230    |      ;
     LDY.W #$0012                                               ;84829D|A01200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482A0|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A0|B7CC    |0000CC;
     STA.B $A5                                                  ;8482A2|85A5    |0000A5;
     LDY.W #$0014                                               ;8482A4|A01400  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482A7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A7|B7CC    |0000CC;
     STA.B $9F                                                  ;8482A9|859F    |00009F;
     LDY.W #$001A                                               ;8482AB|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482AE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482AE|B7CC    |0000CC;
     STA.B $9B                                                  ;8482B0|859B    |00009B;
     LDY.W #$001C                                               ;8482B2|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482B5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482B5|B7CC    |0000CC;
     STA.B $9D                                                  ;8482B7|859D    |00009D;
     LDY.W #$0016                                               ;8482B9|A01600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482BC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482BC|B7CC    |0000CC;
     STA.B $A1                                                  ;8482BE|85A1    |0000A1;
     SEP #$20                                                   ;8482C0|E220    |      ;
     REP #$10                                                   ;8482C2|C210    |      ;
     LDY.W #$0001                                               ;8482C4|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482C7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482C7|B7CC    |0000CC;
     AND.B #$40                                                 ;8482C9|2940    |      ;
     BNE .label3                                                ;8482CB|D03D    |84830A;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482CD|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482CD|B7CC    |0000CC;
     AND.B #$02                                                 ;8482CF|2902    |      ;
     BNE .label1                                                ;8482D1|D00C    |8482DF;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482D3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482D3|B7CC    |0000CC;
     AND.B #$04                                                 ;8482D5|2904    |      ;
     BNE .label2                                                ;8482D7|D017    |8482F0;
     JSL.L fUnknown_8580B9                                      ;8482D9|22B98085|8580B9;
@@ -392,18 +392,18 @@ fSubUnk1Unknown_848286:
     LDA.B $A5                                                  ;8482E5|A5A5    |0000A5;
     REP #$30                                                   ;8482E7|C230    |      ;
     LDY.W #$0012                                               ;8482E9|A01200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8482EC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8482EC|97CC    |0000CC;
     BRA .return                                                ;8482EE|801E    |84830E;
  
  
 .label2:
     REP #$30                                                   ;8482F0|C230    |      ;
     LDY.W #$0016                                               ;8482F2|A01600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482F5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482F5|B7CC    |0000CC;
     STA.B n16TempVar1                                          ;8482F7|857E    |00007E;
     REP #$30                                                   ;8482F9|C230    |      ;
     LDY.W #$0018                                               ;8482FB|A01800  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8482FE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482FE|B7CC    |0000CC;
     CMP.B n16TempVar1                                          ;848300|C57E    |00007E;
     BEQ .return                                                ;848302|F00A    |84830E;
     JSL.L fUnknown_858100                                      ;848304|22008185|858100;
@@ -416,28 +416,28 @@ fSubUnk1Unknown_848286:
 .return:
     REP #$30                                                   ;84830E|C230    |      ;
     LDY.W #$0016                                               ;848310|A01600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848313|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848313|B7CC    |0000CC;
     REP #$30                                                   ;848315|C230    |      ;
     LDY.W #$0018                                               ;848317|A01800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84831A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84831A|97CC    |0000CC;
     SEP #$20                                                   ;84831C|E220    |      ;
     REP #$10                                                   ;84831E|C210    |      ;
     LDY.W #$0001                                               ;848320|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848323|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848323|B7CC    |0000CC;
     AND.B #$E9                                                 ;848325|29E9    |      ;
     SEP #$20                                                   ;848327|E220    |      ;
     REP #$10                                                   ;848329|C210    |      ;
     LDY.W #$0001                                               ;84832B|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84832E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84832E|97CC    |0000CC;
     RTS                                                        ;848330|60      |      ;
  
  
-fSubUnk1Unknown_848331:
+fAI_Unknown848331:
     REP #$30                                                   ;848331|C230    |      ;
     SEP #$20                                                   ;848333|E220    |      ;
     REP #$10                                                   ;848335|C210    |      ;
     LDY.W #$0001                                               ;848337|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84833A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84833A|B7CC    |0000CC;
     AND.B #$20                                                 ;84833C|2920    |      ;
     BNE +                                                      ;84833E|D003    |848343;
     JMP.W .return                                              ;848340|4CCB83  |8483CB;
@@ -446,31 +446,31 @@ fSubUnk1Unknown_848331:
   + SEP #$20                                                   ;848343|E220    |      ;
     REP #$10                                                   ;848345|C210    |      ;
     LDY.W #$0006                                               ;848347|A00600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84834A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84834A|B7CC    |0000CC;
     DEC A                                                      ;84834C|3A      |      ;
     SEP #$20                                                   ;84834D|E220    |      ;
     REP #$10                                                   ;84834F|C210    |      ;
     LDY.W #$0006                                               ;848351|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848354|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848354|97CC    |0000CC;
     SEP #$20                                                   ;848356|E220    |      ;
     REP #$10                                                   ;848358|C210    |      ;
     LDY.W #$0006                                               ;84835A|A00600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84835D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84835D|B7CC    |0000CC;
     BNE .return                                                ;84835F|D06A    |8483CB;
     SEP #$20                                                   ;848361|E220    |      ;
     REP #$10                                                   ;848363|C210    |      ;
     LDY.W #$0005                                               ;848365|A00500  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848368|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848368|B7CC    |0000CC;
     SEP #$20                                                   ;84836A|E220    |      ;
     REP #$10                                                   ;84836C|C210    |      ;
     LDY.W #$0006                                               ;84836E|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848371|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848371|97CC    |0000CC;
     REP #$20                                                   ;848373|C220    |      ;
     LDA.W #$0000                                               ;848375|A90000  |      ;
     SEP #$20                                                   ;848378|E220    |      ;
     REP #$10                                                   ;84837A|C210    |      ;
     LDY.W #$0003                                               ;84837C|A00300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84837F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84837F|B7CC    |0000CC;
     BMI +                                                      ;848381|3002    |848385;
     BRA .label1                                                ;848383|8006    |84838B;
  
@@ -487,7 +487,7 @@ fSubUnk1Unknown_848331:
     SEP #$20                                                   ;848392|E220    |      ;
     REP #$10                                                   ;848394|C210    |      ;
     LDY.W #$0004                                               ;848396|A00400  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848399|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848399|B7CC    |0000CC;
     BMI +                                                      ;84839B|3002    |84839F;
     BRA .label2                                                ;84839D|8006    |8483A5;
  
@@ -502,54 +502,54 @@ fSubUnk1Unknown_848331:
     STA.B n16TempVar2                                          ;8483A7|8580    |000080;
     REP #$30                                                   ;8483A9|C230    |      ;
     LDY.W #$001A                                               ;8483AB|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483AE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483AE|B7CC    |0000CC;
     CLC                                                        ;8483B0|18      |      ;
     ADC.B n16TempVar1                                          ;8483B1|657E    |00007E;
     REP #$30                                                   ;8483B3|C230    |      ;
     LDY.W #$001A                                               ;8483B5|A01A00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8483B8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8483B8|97CC    |0000CC;
     REP #$30                                                   ;8483BA|C230    |      ;
     LDY.W #$001C                                               ;8483BC|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483BF|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483BF|B7CC    |0000CC;
     CLC                                                        ;8483C1|18      |      ;
     ADC.B n16TempVar2                                          ;8483C2|6580    |000080;
     REP #$30                                                   ;8483C4|C230    |      ;
     LDY.W #$001C                                               ;8483C6|A01C00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8483C9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8483C9|97CC    |0000CC;
  
 .return:
     RTS                                                        ;8483CB|60      |      ;
  
  
-fSubUnk1Unknown_8483CC:
+fAI_Unknown8483CC:
     REP #$30                                                   ;8483CC|C230    |      ;
     SEP #$20                                                   ;8483CE|E220    |      ;
     LDY.W #$0001                                               ;8483D0|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483D3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483D3|B7CC    |0000CC;
     AND.B #$08                                                 ;8483D5|2908    |      ;
     BNE +                                                      ;8483D7|D003    |8483DC;
     JMP.W .justReturn                                          ;8483D9|4C1688  |848816;
  
  
   + LDY.W #$0006                                               ;8483DC|A00600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483DF|B7CC    |0000CC;
-    STA.B nTilesetCount                                        ;8483E1|8592    |000092;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483DF|B7CC    |0000CC;
+    STA.B n8TempVar1                                           ;8483E1|8592    |000092;
     LDY.W #$0005                                               ;8483E3|A00500  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483E6|B7CC    |0000CC;
-    CMP.B nTilesetCount                                        ;8483E8|C592    |000092;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483E6|B7CC    |0000CC;
+    CMP.B n8TempVar1                                           ;8483E8|C592    |000092;
     BEQ +                                                      ;8483EA|F003    |8483EF;
     JMP.W .justReturn                                          ;8483EC|4C1688  |848816;
  
  
   + LDY.W #$0008                                               ;8483EF|A00800  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483F2|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483F2|B7CC    |0000CC;
     BNE .label2                                                ;8483F4|D050    |848446;
     LDY.W #$0007                                               ;8483F6|A00700  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8483F9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483F9|B7CC    |0000CC;
     LDY.W #$0008                                               ;8483FB|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8483FE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8483FE|97CC    |0000CC;
     LDY.W #$000F                                               ;848400|A00F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848403|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848403|B7CC    |0000CC;
     BEQ .default                                               ;848405|F01C    |848423;
     CMP.B #$01                                                 ;848407|C901    |      ;
     BNE +                                                      ;848409|D003    |84840E;
@@ -601,7 +601,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848446|E220    |      ;
     REP #$10                                                   ;848448|C210    |      ;
     LDY.W #$0001                                               ;84844A|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84844D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84844D|B7CC    |0000CC;
     AND.B #$80                                                 ;84844F|2980    |      ;
     BEQ +                                                      ;848451|F003    |848456;
     JMP.W .label13                                             ;848453|4C1D87  |84871D;
@@ -609,7 +609,7 @@ fSubUnk1Unknown_8483CC:
  
   + SEP #$20                                                   ;848456|E220    |      ;
     LDY.W #$0002                                               ;848458|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84845B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84845B|B7CC    |0000CC;
     CMP.B #$00                                                 ;84845D|C900    |      ;
     BEQ .label3                                                ;84845F|F00F    |848470;
     CMP.B #$01                                                 ;848461|C901    |      ;
@@ -627,16 +627,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848475|E220    |      ;
     REP #$10                                                   ;848477|C210    |      ;
     LDY.W #$000A                                               ;848479|A00A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84847C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84847C|B7CC    |0000CC;
     REP #$20                                                   ;84847E|C220    |      ;
     STA.B n16TempVar1                                          ;848480|857E    |00007E;
     REP #$30                                                   ;848482|C230    |      ;
     LDY.W #$001C                                               ;848484|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848487|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848487|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;848489|8580    |000080;
     REP #$30                                                   ;84848B|C230    |      ;
     LDY.W #$0020                                               ;84848D|A02000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848490|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848490|B7CC    |0000CC;
     CLC                                                        ;848492|18      |      ;
     ADC.B n16TempVar1                                          ;848493|657E    |00007E;
     CMP.B n16TempVar2                                          ;848495|C580    |000080;
@@ -653,16 +653,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8484A4|E220    |      ;
     REP #$10                                                   ;8484A6|C210    |      ;
     LDY.W #$000A                                               ;8484A8|A00A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8484AB|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484AB|B7CC    |0000CC;
     REP #$20                                                   ;8484AD|C220    |      ;
     STA.B n16TempVar1                                          ;8484AF|857E    |00007E;
     REP #$30                                                   ;8484B1|C230    |      ;
     LDY.W #$001C                                               ;8484B3|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8484B6|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484B6|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;8484B8|8580    |000080;
     REP #$30                                                   ;8484BA|C230    |      ;
     LDY.W #$0020                                               ;8484BC|A02000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8484BF|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484BF|B7CC    |0000CC;
     SEC                                                        ;8484C1|38      |      ;
     SBC.B n16TempVar1                                          ;8484C2|E57E    |00007E;
     CMP.B n16TempVar2                                          ;8484C4|C580    |000080;
@@ -679,16 +679,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8484D3|E220    |      ;
     REP #$10                                                   ;8484D5|C210    |      ;
     LDY.W #$0009                                               ;8484D7|A00900  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8484DA|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484DA|B7CC    |0000CC;
     REP #$20                                                   ;8484DC|C220    |      ;
     STA.B n16TempVar1                                          ;8484DE|857E    |00007E;
     REP #$30                                                   ;8484E0|C230    |      ;
     LDY.W #$001A                                               ;8484E2|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8484E5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484E5|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;8484E7|8580    |000080;
     REP #$30                                                   ;8484E9|C230    |      ;
     LDY.W #$001E                                               ;8484EB|A01E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8484EE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484EE|B7CC    |0000CC;
     CLC                                                        ;8484F0|18      |      ;
     ADC.B n16TempVar1                                          ;8484F1|657E    |00007E;
     CMP.B n16TempVar2                                          ;8484F3|C580    |000080;
@@ -705,16 +705,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848502|E220    |      ;
     REP #$10                                                   ;848504|C210    |      ;
     LDY.W #$0009                                               ;848506|A00900  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848509|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848509|B7CC    |0000CC;
     REP #$20                                                   ;84850B|C220    |      ;
     STA.B n16TempVar1                                          ;84850D|857E    |00007E;
     REP #$30                                                   ;84850F|C230    |      ;
     LDY.W #$001A                                               ;848511|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848514|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848514|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;848516|8580    |000080;
     REP #$30                                                   ;848518|C230    |      ;
     LDY.W #$001E                                               ;84851A|A01E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84851D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84851D|B7CC    |0000CC;
     SEC                                                        ;84851F|38      |      ;
     SBC.B n16TempVar1                                          ;848520|E57E    |00007E;
     CMP.B n16TempVar2                                          ;848522|C580    |000080;
@@ -729,7 +729,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;84852C|E220    |      ;
     REP #$10                                                   ;84852E|C210    |      ;
     LDY.W #$0001                                               ;848530|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848533|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848533|B7CC    |0000CC;
     AND.B #$80                                                 ;848535|2980    |      ;
     BNE .label7                                                ;848537|D02C    |848565;
     REP #$20                                                   ;848539|C220    |      ;
@@ -737,16 +737,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;84853E|E220    |      ;
     REP #$10                                                   ;848540|C210    |      ;
     LDY.W #$000A                                               ;848542|A00A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848545|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848545|B7CC    |0000CC;
     REP #$20                                                   ;848547|C220    |      ;
     STA.B n16TempVar1                                          ;848549|857E    |00007E;
     REP #$30                                                   ;84854B|C230    |      ;
     LDY.W #$001C                                               ;84854D|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848550|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848550|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;848552|8580    |000080;
     REP #$30                                                   ;848554|C230    |      ;
     LDY.W #$0020                                               ;848556|A02000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848559|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848559|B7CC    |0000CC;
     CLC                                                        ;84855B|18      |      ;
     ADC.B n16TempVar1                                          ;84855C|657E    |00007E;
     CMP.B n16TempVar2                                          ;84855E|C580    |000080;
@@ -757,20 +757,20 @@ fSubUnk1Unknown_8483CC:
 .label7:
     SEP #$20                                                   ;848565|E220    |      ;
     LDY.W #$000B                                               ;848567|A00B00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84856A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84856A|B7CC    |0000CC;
     LDY.W #$0005                                               ;84856C|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84856F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84856F|97CC    |0000CC;
     LDY.W #$0006                                               ;848571|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848574|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848574|97CC    |0000CC;
     LDY.W #$0003                                               ;848576|A00300  |      ;
     LDA.B #$00                                                 ;848579|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84857B|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84857B|97CC    |0000CC;
     LDY.W #$0004                                               ;84857D|A00400  |      ;
     LDA.B #$01                                                 ;848580|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848582|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848582|97CC    |0000CC;
     LDY.W #$0002                                               ;848584|A00200  |      ;
     LDA.B #$00                                                 ;848587|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848589|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848589|97CC    |0000CC;
     JMP.W .label12                                             ;84858B|4CF486  |8486F4;
  
  
@@ -778,7 +778,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;84858E|E220    |      ;
     REP #$10                                                   ;848590|C210    |      ;
     LDY.W #$0001                                               ;848592|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848595|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848595|B7CC    |0000CC;
     AND.B #$80                                                 ;848597|2980    |      ;
     BNE .label8                                                ;848599|D02C    |8485C7;
     REP #$20                                                   ;84859B|C220    |      ;
@@ -786,16 +786,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8485A0|E220    |      ;
     REP #$10                                                   ;8485A2|C210    |      ;
     LDY.W #$000A                                               ;8485A4|A00A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8485A7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485A7|B7CC    |0000CC;
     REP #$20                                                   ;8485A9|C220    |      ;
     STA.B n16TempVar1                                          ;8485AB|857E    |00007E;
     REP #$30                                                   ;8485AD|C230    |      ;
     LDY.W #$001C                                               ;8485AF|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8485B2|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485B2|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;8485B4|8580    |000080;
     REP #$30                                                   ;8485B6|C230    |      ;
     LDY.W #$0020                                               ;8485B8|A02000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8485BB|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485BB|B7CC    |0000CC;
     SEC                                                        ;8485BD|38      |      ;
     SBC.B n16TempVar1                                          ;8485BE|E57E    |00007E;
     CMP.B n16TempVar2                                          ;8485C0|C580    |000080;
@@ -806,20 +806,20 @@ fSubUnk1Unknown_8483CC:
 .label8:
     SEP #$20                                                   ;8485C7|E220    |      ;
     LDY.W #$000B                                               ;8485C9|A00B00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8485CC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485CC|B7CC    |0000CC;
     LDY.W #$0005                                               ;8485CE|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8485D1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8485D1|97CC    |0000CC;
     LDY.W #$0006                                               ;8485D3|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8485D6|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8485D6|97CC    |0000CC;
     LDY.W #$0003                                               ;8485D8|A00300  |      ;
     LDA.B #$00                                                 ;8485DB|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8485DD|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8485DD|97CC    |0000CC;
     LDY.W #$0004                                               ;8485DF|A00400  |      ;
     LDA.B #$FF                                                 ;8485E2|A9FF    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8485E4|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8485E4|97CC    |0000CC;
     LDY.W #$0002                                               ;8485E6|A00200  |      ;
     LDA.B #$01                                                 ;8485E9|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8485EB|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8485EB|97CC    |0000CC;
     JMP.W .label12                                             ;8485ED|4CF486  |8486F4;
  
  
@@ -827,7 +827,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8485F0|E220    |      ;
     REP #$10                                                   ;8485F2|C210    |      ;
     LDY.W #$0001                                               ;8485F4|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8485F7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485F7|B7CC    |0000CC;
     AND.B #$80                                                 ;8485F9|2980    |      ;
     BNE .label9                                                ;8485FB|D02C    |848629;
     REP #$20                                                   ;8485FD|C220    |      ;
@@ -835,16 +835,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848602|E220    |      ;
     REP #$10                                                   ;848604|C210    |      ;
     LDY.W #$0009                                               ;848606|A00900  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848609|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848609|B7CC    |0000CC;
     REP #$20                                                   ;84860B|C220    |      ;
     STA.B n16TempVar1                                          ;84860D|857E    |00007E;
     REP #$30                                                   ;84860F|C230    |      ;
     LDY.W #$001A                                               ;848611|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848614|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848614|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;848616|8580    |000080;
     REP #$30                                                   ;848618|C230    |      ;
     LDY.W #$001E                                               ;84861A|A01E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84861D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84861D|B7CC    |0000CC;
     CLC                                                        ;84861F|18      |      ;
     ADC.B n16TempVar1                                          ;848620|657E    |00007E;
     CMP.B n16TempVar2                                          ;848622|C580    |000080;
@@ -855,20 +855,20 @@ fSubUnk1Unknown_8483CC:
 .label9:
     SEP #$20                                                   ;848629|E220    |      ;
     LDY.W #$000B                                               ;84862B|A00B00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84862E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84862E|B7CC    |0000CC;
     LDY.W #$0005                                               ;848630|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848633|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848633|97CC    |0000CC;
     LDY.W #$0006                                               ;848635|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848638|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848638|97CC    |0000CC;
     LDY.W #$0003                                               ;84863A|A00300  |      ;
     LDA.B #$01                                                 ;84863D|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84863F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84863F|97CC    |0000CC;
     LDY.W #$0004                                               ;848641|A00400  |      ;
     LDA.B #$00                                                 ;848644|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848646|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848646|97CC    |0000CC;
     LDY.W #$0002                                               ;848648|A00200  |      ;
     LDA.B #$02                                                 ;84864B|A902    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84864D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84864D|97CC    |0000CC;
     JMP.W .label12                                             ;84864F|4CF486  |8486F4;
  
  
@@ -876,7 +876,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848652|E220    |      ;
     REP #$10                                                   ;848654|C210    |      ;
     LDY.W #$0001                                               ;848656|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848659|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848659|B7CC    |0000CC;
     AND.B #$80                                                 ;84865B|2980    |      ;
     BNE .label10                                               ;84865D|D02C    |84868B;
     REP #$20                                                   ;84865F|C220    |      ;
@@ -884,16 +884,16 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848664|E220    |      ;
     REP #$10                                                   ;848666|C210    |      ;
     LDY.W #$0009                                               ;848668|A00900  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84866B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84866B|B7CC    |0000CC;
     REP #$20                                                   ;84866D|C220    |      ;
     STA.B n16TempVar1                                          ;84866F|857E    |00007E;
     REP #$30                                                   ;848671|C230    |      ;
     LDY.W #$001A                                               ;848673|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848676|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848676|B7CC    |0000CC;
     STA.B n16TempVar2                                          ;848678|8580    |000080;
     REP #$30                                                   ;84867A|C230    |      ;
     LDY.W #$001E                                               ;84867C|A01E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84867F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84867F|B7CC    |0000CC;
     SEC                                                        ;848681|38      |      ;
     SBC.B n16TempVar1                                          ;848682|E57E    |00007E;
     CMP.B n16TempVar2                                          ;848684|C580    |000080;
@@ -904,20 +904,20 @@ fSubUnk1Unknown_8483CC:
 .label10:
     SEP #$20                                                   ;84868B|E220    |      ;
     LDY.W #$000B                                               ;84868D|A00B00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848690|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848690|B7CC    |0000CC;
     LDY.W #$0005                                               ;848692|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848695|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848695|97CC    |0000CC;
     LDY.W #$0006                                               ;848697|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84869A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84869A|97CC    |0000CC;
     LDY.W #$0003                                               ;84869C|A00300  |      ;
     LDA.B #$FF                                                 ;84869F|A9FF    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486A1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486A1|97CC    |0000CC;
     LDY.W #$0004                                               ;8486A3|A00400  |      ;
     LDA.B #$00                                                 ;8486A6|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486A8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486A8|97CC    |0000CC;
     LDY.W #$0002                                               ;8486AA|A00200  |      ;
     LDA.B #$03                                                 ;8486AD|A903    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486AF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486AF|97CC    |0000CC;
     BRA .label12                                               ;8486B1|8041    |8486F4;
  
  
@@ -925,51 +925,51 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8486B3|E220    |      ;
     LDY.W #$0003                                               ;8486B5|A00300  |      ;
     LDA.B #$00                                                 ;8486B8|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486BA|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486BA|97CC    |0000CC;
     LDY.W #$0004                                               ;8486BC|A00400  |      ;
     LDA.B #$00                                                 ;8486BF|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486C1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486C1|97CC    |0000CC;
     LDY.W #$0008                                               ;8486C3|A00800  |      ;
     LDA.B #$00                                                 ;8486C6|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486C8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486C8|97CC    |0000CC;
     REP #$30                                                   ;8486CA|C230    |      ;
     LDY.W #$0033                                               ;8486CC|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8486CF|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8486CF|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;8486D1|8572    |000072;
     SEP #$20                                                   ;8486D3|E220    |      ;
     LDA.B #$B3                                                 ;8486D5|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;8486D7|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;8486D9|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;8486D9|22958884|848895;
     SEP #$20                                                   ;8486DD|E220    |      ;
     REP #$10                                                   ;8486DF|C210    |      ;
     LDY.W #$0001                                               ;8486E1|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8486E4|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8486E4|B7CC    |0000CC;
     ORA.B #$04                                                 ;8486E6|0904    |      ;
     SEP #$20                                                   ;8486E8|E220    |      ;
     REP #$10                                                   ;8486EA|C210    |      ;
     LDY.W #$0001                                               ;8486EC|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8486EF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8486EF|97CC    |0000CC;
     JMP.W .justReturn                                          ;8486F1|4C1688  |848816;
  
  
 .label12:
     REP #$30                                                   ;8486F4|C230    |      ;
     LDY.W #$0036                                               ;8486F6|A03600  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8486F9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8486F9|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;8486FB|8572    |000072;
     SEP #$20                                                   ;8486FD|E220    |      ;
     LDA.B #$B3                                                 ;8486FF|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;848701|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;848703|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;848703|22958884|848895;
     SEP #$20                                                   ;848707|E220    |      ;
     REP #$10                                                   ;848709|C210    |      ;
     LDY.W #$0001                                               ;84870B|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84870E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84870E|B7CC    |0000CC;
     ORA.B #$04                                                 ;848710|0904    |      ;
     SEP #$20                                                   ;848712|E220    |      ;
     REP #$10                                                   ;848714|C210    |      ;
     LDY.W #$0001                                               ;848716|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848719|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848719|97CC    |0000CC;
     BRA .label14                                               ;84871B|8013    |848730;
  
  
@@ -977,23 +977,23 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;84871D|E220    |      ;
     REP #$10                                                   ;84871F|C210    |      ;
     LDY.W #$0008                                               ;848721|A00800  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848724|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848724|B7CC    |0000CC;
     DEC A                                                      ;848726|3A      |      ;
     SEP #$20                                                   ;848727|E220    |      ;
     REP #$10                                                   ;848729|C210    |      ;
     LDY.W #$0008                                               ;84872B|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84872E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84872E|97CC    |0000CC;
  
 .label14:
     SEP #$20                                                   ;848730|E220    |      ;
     REP #$10                                                   ;848732|C210    |      ;
     LDY.W #$0003                                               ;848734|A00300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848737|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848737|B7CC    |0000CC;
     BNE .label15                                               ;848739|D00E    |848749;
     SEP #$20                                                   ;84873B|E220    |      ;
     REP #$10                                                   ;84873D|C210    |      ;
     LDY.W #$0004                                               ;84873F|A00400  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848742|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848742|B7CC    |0000CC;
     BNE .label15                                               ;848744|D003    |848749;
     JMP.W .justReturn                                          ;848746|4C1688  |848816;
  
@@ -1002,17 +1002,17 @@ fSubUnk1Unknown_8483CC:
     REP #$20                                                   ;848749|C220    |      ;
     REP #$30                                                   ;84874B|C230    |      ;
     LDY.W #$001A                                               ;84874D|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848750|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848750|B7CC    |0000CC;
     STA.B $DF                                                  ;848752|85DF    |0000DF;
     REP #$30                                                   ;848754|C230    |      ;
     LDY.W #$001C                                               ;848756|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848759|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848759|B7CC    |0000CC;
     STA.B $E1                                                  ;84875B|85E1    |0000E1;
     LDA.W #$0000                                               ;84875D|A90000  |      ;
     SEP #$20                                                   ;848760|E220    |      ;
     REP #$10                                                   ;848762|C210    |      ;
     LDY.W #$0003                                               ;848764|A00300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848767|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848767|B7CC    |0000CC;
     BMI +                                                      ;848769|3002    |84876D;
     BRA .label16                                               ;84876B|8005    |848772;
  
@@ -1028,7 +1028,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848779|E220    |      ;
     REP #$10                                                   ;84877B|C210    |      ;
     LDY.W #$0004                                               ;84877D|A00400  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848780|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848780|B7CC    |0000CC;
     BMI +                                                      ;848782|3002    |848786;
     BRA .label17                                               ;848784|8005    |84878B;
  
@@ -1044,7 +1044,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848791|E220    |      ;
     REP #$10                                                   ;848793|C210    |      ;
     LDY.W #$0001                                               ;848795|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848798|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848798|B7CC    |0000CC;
     AND.B #$80                                                 ;84879A|2980    |      ;
     BEQ .label18                                               ;84879C|F045    |8487E3;
     REP #$20                                                   ;84879E|C220    |      ;
@@ -1052,7 +1052,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8487A3|E220    |      ;
     REP #$10                                                   ;8487A5|C210    |      ;
     LDY.W #$0002                                               ;8487A7|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8487AA|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8487AA|B7CC    |0000CC;
     REP #$20                                                   ;8487AC|C220    |      ;
     JSL.L fGameEngine_Unknown83AF37                            ;8487AE|2237AF83|83AF37;
     REP #$20                                                   ;8487B2|C220    |      ;
@@ -1061,7 +1061,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;8487B7|E220    |      ;
     REP #$10                                                   ;8487B9|C210    |      ;
     LDY.W #$000E                                               ;8487BB|A00E00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8487BE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8487BE|97CC    |0000CC;
     REP #$20                                                   ;8487C0|C220    |      ;
     PLA                                                        ;8487C2|68      |      ;
     CMP.W #$0000                                               ;8487C3|C90000  |      ;
@@ -1101,7 +1101,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848802|E220    |      ;
     REP #$10                                                   ;848804|C210    |      ;
     LDY.W #$0002                                               ;848806|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848809|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848809|B7CC    |0000CC;
     REP #$20                                                   ;84880B|C220    |      ;
     JSL.L fGameEngine_Unknown83AEC3                            ;84880D|22C3AE83|83AEC3;
     CMP.W #$0000                                               ;848811|C90000  |      ;
@@ -1116,29 +1116,29 @@ fSubUnk1Unknown_8483CC:
     REP #$10                                                   ;848819|C210    |      ;
     LDY.W #$0003                                               ;84881B|A00300  |      ;
     LDA.B #$00                                                 ;84881E|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848820|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848820|97CC    |0000CC;
     SEP #$20                                                   ;848822|E220    |      ;
     REP #$10                                                   ;848824|C210    |      ;
     LDY.W #$0004                                               ;848826|A00400  |      ;
     LDA.B #$00                                                 ;848829|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84882B|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84882B|97CC    |0000CC;
     SEP #$20                                                   ;84882D|E220    |      ;
     REP #$10                                                   ;84882F|C210    |      ;
     LDY.W #$000B                                               ;848831|A00B00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848834|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848834|B7CC    |0000CC;
     SEP #$20                                                   ;848836|E220    |      ;
     REP #$10                                                   ;848838|C210    |      ;
     LDY.W #$0005                                               ;84883A|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84883D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84883D|97CC    |0000CC;
     SEP #$20                                                   ;84883F|E220    |      ;
     REP #$10                                                   ;848841|C210    |      ;
     LDY.W #$0006                                               ;848843|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848846|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848846|97CC    |0000CC;
     SEP #$20                                                   ;848848|E220    |      ;
     REP #$10                                                   ;84884A|C210    |      ;
     LDY.W #$000F                                               ;84884C|A00F00  |      ;
     LDA.B #$00                                                 ;84884F|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848851|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848851|97CC    |0000CC;
     RTS                                                        ;848853|60      |      ;
  
  
@@ -1146,7 +1146,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848854|E220    |      ;
     REP #$10                                                   ;848856|C210    |      ;
     LDY.W #$003F                                               ;848858|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84885B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84885B|B7CC    |0000CC;
     CMP.B #$24                                                 ;84885D|C924    |      ;
     BCS .return                                                ;84885F|B0B6    |848817;
     CMP.B #$18                                                 ;848861|C918    |      ;
@@ -1158,7 +1158,7 @@ fSubUnk1Unknown_8483CC:
     SEP #$20                                                   ;848868|E220    |      ;
     REP #$10                                                   ;84886A|C210    |      ;
     LDY.W #$003F                                               ;84886C|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84886F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84886F|B7CC    |0000CC;
     CMP.B #$24                                                 ;848871|C924    |      ;
     BCS .return                                                ;848873|B0A2    |848817;
     CMP.B #$18                                                 ;848875|C918    |      ;
@@ -1166,26 +1166,26 @@ fSubUnk1Unknown_8483CC:
     JMP.W .label19                                             ;848879|4CFD87  |8487FD;
  
  
-fSubUnk1Unknown_84887C:
-    REP #$30                                                   ;84887C|C230    |      ;
+fAI_Unknown84887C:
+    REP #$30                                                   ;84887C|C230    |      ; A: nArg, return $0xCC
     ASL A                                                      ;84887E|0A      |      ;
     ASL A                                                      ;84887F|0A      |      ;
     ASL A                                                      ;848880|0A      |      ;
     ASL A                                                      ;848881|0A      |      ;
     ASL A                                                      ;848882|0A      |      ;
     ASL A                                                      ;848883|0A      |      ;
-    STA.B n16TempVar1                                          ;848884|857E    |00007E;
+    STA.B n16TempVar1                                          ;848884|857E    |00007E; nTempVar1 = A * 64
     LDA.W #$B586                                               ;848886|A986B5  |      ;
     CLC                                                        ;848889|18      |      ;
     ADC.B n16TempVar1                                          ;84888A|657E    |00007E;
-    STA.B ptrUnknown0xCC                                       ;84888C|85CC    |0000CC;
+    STA.B ptrAIUnknown0xCC                                     ;84888C|85CC    |0000CC;
     SEP #$20                                                   ;84888E|E220    |      ;
     LDA.B #$7E                                                 ;848890|A97E    |      ;
-    STA.B ptrUnknown0xCC+2                                     ;848892|85CE    |0000CE;
+    STA.B ptrAIUnknown0xCC+2                                   ;848892|85CE    |0000CE; $0xCC = 7EB586 + A * 64
     RTL                                                        ;848894|6B      |      ;
  
  
-fSubUnk1Unknown_848895:
+fAI_Unknown848895:
     REP #$30                                                   ;848895|C230    |      ;
     SEP #$20                                                   ;848897|E220    |      ;
     LDA.B #$00                                                 ;848899|A900    |      ;
@@ -1193,7 +1193,7 @@ fSubUnk1Unknown_848895:
     SEP #$20                                                   ;84889C|E220    |      ;
     REP #$10                                                   ;84889E|C210    |      ;
     LDY.W #$0002                                               ;8488A0|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8488A3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8488A3|B7CC    |0000CC;
     REP #$20                                                   ;8488A5|C220    |      ;
     STA.B n16TempVar1                                          ;8488A7|857E    |00007E;
     ASL A                                                      ;8488A9|0A      |      ;
@@ -1205,7 +1205,7 @@ fSubUnk1Unknown_848895:
     PHY                                                        ;8488B2|5A      |      ;
     REP #$30                                                   ;8488B3|C230    |      ;
     LDY.W #$0016                                               ;8488B5|A01600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8488B8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8488B8|97CC    |0000CC;
     PLY                                                        ;8488BA|7A      |      ;
     INY                                                        ;8488BB|C8      |      ;
     INY                                                        ;8488BC|C8      |      ;
@@ -1222,149 +1222,149 @@ fSubUnk1Unknown_848895:
     ASL A                                                      ;8488CB|0A      |      ;
     REP #$30                                                   ;8488CC|C230    |      ;
     LDY.W #$0014                                               ;8488CE|A01400  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8488D1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8488D1|97CC    |0000CC;
     RTL                                                        ;8488D3|6B      |      ;
  
  
-fSubUnk1Unknown_8488D4:
+fAI_Unknown8488D4:
     REP #$30                                                   ;8488D4|C230    |      ;
     SEP #$20                                                   ;8488D6|E220    |      ;
     REP #$10                                                   ;8488D8|C210    |      ;
     LDY.W #$0000                                               ;8488DA|A00000  |      ;
     LDA.B #$01                                                 ;8488DD|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8488DF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8488DF|97CC    |0000CC;
     SEP #$20                                                   ;8488E1|E220    |      ;
     REP #$10                                                   ;8488E3|C210    |      ;
     LDY.W #$0001                                               ;8488E5|A00100  |      ;
     LDA.B #$00                                                 ;8488E8|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8488EA|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8488EA|97CC    |0000CC;
     SEP #$20                                                   ;8488EC|E220    |      ;
     REP #$10                                                   ;8488EE|C210    |      ;
     LDY.W #$000F                                               ;8488F0|A00F00  |      ;
     LDA.B #$00                                                 ;8488F3|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8488F5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8488F5|97CC    |0000CC;
     SEP #$20                                                   ;8488F7|E220    |      ;
     REP #$10                                                   ;8488F9|C210    |      ;
     LDY.W #$0003                                               ;8488FB|A00300  |      ;
     LDA.B #$00                                                 ;8488FE|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848900|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848900|97CC    |0000CC;
     SEP #$20                                                   ;848902|E220    |      ;
     REP #$10                                                   ;848904|C210    |      ;
     LDY.W #$0004                                               ;848906|A00400  |      ;
     LDA.B #$00                                                 ;848909|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84890B|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84890B|97CC    |0000CC;
     SEP #$20                                                   ;84890D|E220    |      ;
     REP #$10                                                   ;84890F|C210    |      ;
     LDY.W #$0005                                               ;848911|A00500  |      ;
     LDA.B #$00                                                 ;848914|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848916|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848916|97CC    |0000CC;
     SEP #$20                                                   ;848918|E220    |      ;
     REP #$10                                                   ;84891A|C210    |      ;
     LDY.W #$0006                                               ;84891C|A00600  |      ;
     LDA.B #$00                                                 ;84891F|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848921|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848921|97CC    |0000CC;
     SEP #$20                                                   ;848923|E220    |      ;
     REP #$10                                                   ;848925|C210    |      ;
     LDY.W #$000C                                               ;848927|A00C00  |      ;
     LDA.B #$00                                                 ;84892A|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84892C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84892C|97CC    |0000CC;
     REP #$30                                                   ;84892E|C230    |      ;
     LDY.W #$0010                                               ;848930|A01000  |      ;
     LDA.W #$0000                                               ;848933|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848936|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848936|97CC    |0000CC;
     REP #$30                                                   ;848938|C230    |      ;
     LDY.W #$001A                                               ;84893A|A01A00  |      ;
     LDA.W #$0000                                               ;84893D|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848940|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848940|97CC    |0000CC;
     REP #$30                                                   ;848942|C230    |      ;
     LDY.W #$001C                                               ;848944|A01C00  |      ;
     LDA.W #$0000                                               ;848947|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84894A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84894A|97CC    |0000CC;
     REP #$30                                                   ;84894C|C230    |      ;
     LDY.W #$0012                                               ;84894E|A01200  |      ;
     LDA.W #$0000                                               ;848951|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848954|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848954|97CC    |0000CC;
     REP #$30                                                   ;848956|C230    |      ;
     LDY.W #$0014                                               ;848958|A01400  |      ;
     LDA.W #$0000                                               ;84895B|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84895E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84895E|97CC    |0000CC;
     RTS                                                        ;848960|60      |      ;
  
  
-fSubUnk1Unknown_848961:
+fAI_Unknown848961:
     REP #$30                                                   ;848961|C230    |      ;
     SEP #$20                                                   ;848963|E220    |      ;
     REP #$10                                                   ;848965|C210    |      ;
     LDY.W #$0000                                               ;848967|A00000  |      ;
     LDA.B #$01                                                 ;84896A|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84896C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84896C|97CC    |0000CC;
     SEP #$20                                                   ;84896E|E220    |      ;
     REP #$10                                                   ;848970|C210    |      ;
     LDY.W #$0001                                               ;848972|A00100  |      ;
     LDA.B #$01                                                 ;848975|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848977|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848977|97CC    |0000CC;
     SEP #$20                                                   ;848979|E220    |      ;
     REP #$10                                                   ;84897B|C210    |      ;
     LDY.W #$000F                                               ;84897D|A00F00  |      ;
     LDA.B #$00                                                 ;848980|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848982|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848982|97CC    |0000CC;
     SEP #$20                                                   ;848984|E220    |      ;
     REP #$10                                                   ;848986|C210    |      ;
     LDY.W #$0003                                               ;848988|A00300  |      ;
     LDA.B #$00                                                 ;84898B|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84898D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84898D|97CC    |0000CC;
     SEP #$20                                                   ;84898F|E220    |      ;
     REP #$10                                                   ;848991|C210    |      ;
     LDY.W #$0004                                               ;848993|A00400  |      ;
     LDA.B #$00                                                 ;848996|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848998|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848998|97CC    |0000CC;
     SEP #$20                                                   ;84899A|E220    |      ;
     REP #$10                                                   ;84899C|C210    |      ;
     LDY.W #$0005                                               ;84899E|A00500  |      ;
     LDA.B #$00                                                 ;8489A1|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8489A3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8489A3|97CC    |0000CC;
     SEP #$20                                                   ;8489A5|E220    |      ;
     REP #$10                                                   ;8489A7|C210    |      ;
     LDY.W #$0006                                               ;8489A9|A00600  |      ;
     LDA.B #$00                                                 ;8489AC|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8489AE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8489AE|97CC    |0000CC;
     REP #$30                                                   ;8489B0|C230    |      ;
     LDY.W #$0010                                               ;8489B2|A01000  |      ;
     LDA.W #$0000                                               ;8489B5|A90000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8489B8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8489B8|97CC    |0000CC;
     RTS                                                        ;8489BA|60      |      ;
  
  
-subUnknown849419_0x00:
+fAIAction0x00_SetMusicTrack:
     REP #$30                                                   ;8489BB|C230    |      ;
     REP #$30                                                   ;8489BD|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8489BF|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8489BF|A5C9    |0000C9;
     CLC                                                        ;8489C1|18      |      ;
     ADC.W #$0001                                               ;8489C2|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8489C5|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8489C5|85C9    |0000C9;
     SEP #$20                                                   ;8489C7|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8489C9|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8489C9|A7C9    |0000C9;
     STA.W nAudioMusicTrackId                                   ;8489CB|8D1001  |000110;
     REP #$30                                                   ;8489CE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8489D0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8489D0|A5C9    |0000C9;
     CLC                                                        ;8489D2|18      |      ;
     ADC.W #$0001                                               ;8489D3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8489D6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8489D6|85C9    |0000C9;
     REP #$30                                                   ;8489D8|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8489DA|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8489DA|A5C9    |0000C9;
     CLC                                                        ;8489DC|18      |      ;
     ADC.W #$0001                                               ;8489DD|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8489E0|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8489E0|85C9    |0000C9;
     RTS                                                        ;8489E2|60      |      ;
  
  
-subUnknown849419_0x01:
+fAIAction0x01_UnfreezeTime:
     REP #$30                                                   ;8489E3|C230    |      ;
     REP #$30                                                   ;8489E5|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8489E7|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8489E7|A5C9    |0000C9;
     CLC                                                        ;8489E9|18      |      ;
     ADC.W #$0001                                               ;8489EA|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8489ED|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8489ED|85C9    |0000C9;
     SEP #$20                                                   ;8489EF|E220    |      ;
     LDA.B #$01                                                 ;8489F1|A901    |      ;
     STA.W nTimeState                                           ;8489F3|8D7309  |000973;
@@ -1378,13 +1378,13 @@ subUnknown849419_0x01:
     RTS                                                        ;848A0C|60      |      ;
  
  
-subUnknown849419_0x02:
+fAIAction0x02_FreezeTime:
     REP #$30                                                   ;848A0D|C230    |      ;
     REP #$30                                                   ;848A0F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A11|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A11|A5C9    |0000C9;
     CLC                                                        ;848A13|18      |      ;
     ADC.W #$0001                                               ;848A14|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A17|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A17|85C9    |0000C9;
     SEP #$20                                                   ;848A19|E220    |      ;
     LDA.B #$00                                                 ;848A1B|A900    |      ;
     STA.W nTimeState                                           ;848A1D|8D7309  |000973;
@@ -1399,114 +1399,114 @@ subUnknown849419_0x02:
     RTS                                                        ;848A38|60      |      ;
  
  
-subUnknown849419_0x03:
+fAIAction0x03_SetHour:
     REP #$30                                                   ;848A39|C230    |      ;
     REP #$30                                                   ;848A3B|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A3D|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A3D|A5C9    |0000C9;
     CLC                                                        ;848A3F|18      |      ;
     ADC.W #$0001                                               ;848A40|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A43|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A43|85C9    |0000C9;
     SEP #$20                                                   ;848A45|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848A47|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848A47|A7C9    |0000C9;
     STA.L nCurrentTimeID                                       ;848A49|8F1C1F7F|7F1F1C;
     REP #$30                                                   ;848A4D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A4F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A4F|A5C9    |0000C9;
     CLC                                                        ;848A51|18      |      ;
     ADC.W #$0001                                               ;848A52|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A55|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A55|85C9    |0000C9;
     RTS                                                        ;848A57|60      |      ;
  
  
-subUnknown849419_0x04:
+fAIAction0x04_DoesNothing:
     REP #$30                                                   ;848A58|C230    |      ;
     REP #$30                                                   ;848A5A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A5C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A5C|A5C9    |0000C9;
     CLC                                                        ;848A5E|18      |      ;
     ADC.W #$0001                                               ;848A5F|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A62|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A62|85C9    |0000C9;
     RTS                                                        ;848A64|60      |      ;
  
  
-subUnknown849419_0x05:
+fAIAction0x05_SetMapDestCoords:
     REP #$30                                                   ;848A65|C230    |      ;
     REP #$30                                                   ;848A67|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A69|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A69|A5C9    |0000C9;
     CLC                                                        ;848A6B|18      |      ;
     ADC.W #$0001                                               ;848A6C|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A6F|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848A71|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A6F|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848A71|A7C9    |0000C9;
     STA.W nMapEngine_DestinationX                              ;848A73|8D7D01  |00017D;
     STA.B nPlayerPosX                                          ;848A76|85D6    |0000D6;
     REP #$30                                                   ;848A78|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A7A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A7A|A5C9    |0000C9;
     CLC                                                        ;848A7C|18      |      ;
     ADC.W #$0002                                               ;848A7D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A80|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848A82|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A80|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848A82|A7C9    |0000C9;
     STA.W nMapEngine_DestinationY                              ;848A84|8D7F01  |00017F;
     STA.B nPlayerPosY                                          ;848A87|85D8    |0000D8;
     REP #$30                                                   ;848A89|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A8B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A8B|A5C9    |0000C9;
     CLC                                                        ;848A8D|18      |      ;
     ADC.W #$0002                                               ;848A8E|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A91|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A91|85C9    |0000C9;
     RTS                                                        ;848A93|60      |      ;
  
  
-subUnknown849419_0x06:
+fAIAction0x06_Unknown:
     REP #$30                                                   ;848A94|C230    |      ;
     REP #$30                                                   ;848A96|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848A98|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848A98|A5C9    |0000C9;
     CLC                                                        ;848A9A|18      |      ;
     ADC.W #$0001                                               ;848A9B|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848A9E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848A9E|85C9    |0000C9;
     SEP #$20                                                   ;848AA0|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848AA2|A7C9    |0000C9;
-    STA.W $098B                                                ;848AA4|8D8B09  |00098B;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848AA2|A7C9    |0000C9;
+    STA.W n8DestinationId                                      ;848AA4|8D8B09  |00098B;
     REP #$30                                                   ;848AA7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848AA9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848AA9|A5C9    |0000C9;
     CLC                                                        ;848AAB|18      |      ;
     ADC.W #$0001                                               ;848AAC|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848AAF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848AAF|85C9    |0000C9;
     REP #$30                                                   ;848AB1|C230    |      ;
     LDY.W #$0010                                               ;848AB3|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848AB6|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848AB6|B7CC    |0000CC;
     CLC                                                        ;848AB8|18      |      ;
     ADC.W #$0001                                               ;848AB9|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848ABC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848ABC|97CC    |0000CC;
     RTS                                                        ;848ABE|60      |      ;
  
  
-subUnknown849419_0x07:
+fAIAction0x07_SetPlayerDirection:
     REP #$30                                                   ;848ABF|C230    |      ;
     REP #$30                                                   ;848AC1|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848AC3|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848AC3|A5C9    |0000C9;
     CLC                                                        ;848AC5|18      |      ;
     ADC.W #$0001                                               ;848AC6|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848AC9|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848AC9|85C9    |0000C9;
     SEP #$20                                                   ;848ACB|E220    |      ;
     LDA.B #$00                                                 ;848ACD|A900    |      ;
     XBA                                                        ;848ACF|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848AD0|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848AD0|A7C9    |0000C9;
     REP #$20                                                   ;848AD2|C220    |      ;
     STA.B nPlayerDirection                                     ;848AD4|85DA    |0000DA;
     STA.W $0911                                                ;848AD6|8D1109  |000911;
     STA.W $0901                                                ;848AD9|8D0109  |000901;
     REP #$30                                                   ;848ADC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848ADE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848ADE|A5C9    |0000C9;
     CLC                                                        ;848AE0|18      |      ;
     ADC.W #$0001                                               ;848AE1|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848AE4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848AE4|85C9    |0000C9;
     RTS                                                        ;848AE6|60      |      ;
  
  
-subUnknown849419_0x08:
+fAIAction0x08_ClearPlayerStateFlags:
     REP #$30                                                   ;848AE7|C230    |      ;
     REP #$30                                                   ;848AE9|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848AEB|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848AEB|A5C9    |0000C9;
     CLC                                                        ;848AED|18      |      ;
     ADC.W #$0001                                               ;848AEE|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848AF1|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848AF1|85C9    |0000C9;
     REP #$30                                                   ;848AF3|C230    |      ;
     LDA.W #$4000                                               ;848AF5|A90040  |      ;
     EOR.W #$FFFF                                               ;848AF8|49FFFF  |      ;
@@ -1518,85 +1518,85 @@ subUnknown849419_0x08:
     RTS                                                        ;848B07|60      |      ;
  
  
-subUnknown849419_0x09:
+fAIAction0x09:
     REP #$30                                                   ;848B08|C230    |      ;
     REP #$30                                                   ;848B0A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848B0C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848B0C|A5C9    |0000C9;
     CLC                                                        ;848B0E|18      |      ;
     ADC.W #$0001                                               ;848B0F|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848B12|85C9    |0000C9;
-    LDA.B ptrUnknown0xCC                                       ;848B14|A5CC    |0000CC;
+    STA.B ptrAIActionArg0xC9                                   ;848B12|85C9    |0000C9;
+    LDA.B ptrAIUnknown0xCC                                     ;848B14|A5CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;848B16|8572    |000072;
     SEP #$20                                                   ;848B18|E220    |      ;
-    LDA.B ptrUnknown0xCC+2                                     ;848B1A|A5CE    |0000CE;
+    LDA.B ptrAIUnknown0xCC+2                                   ;848B1A|A5CE    |0000CE;
     STA.B ptrUnknown0x72+2                                     ;848B1C|8574    |000074;
     SEP #$20                                                   ;848B1E|E220    |      ;
     REP #$10                                                   ;848B20|C210    |      ;
     LDY.W #$0032                                               ;848B22|A03200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848B25|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848B25|B7CC    |0000CC;
     SEP #$20                                                   ;848B27|E220    |      ;
     PHA                                                        ;848B29|48      |      ;
     SEP #$20                                                   ;848B2A|E220    |      ;
     LDA.B #$00                                                 ;848B2C|A900    |      ;
     XBA                                                        ;848B2E|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848B2F|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848B2F|A7C9    |0000C9;
     REP #$20                                                   ;848B31|C220    |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;848B33|227C8884|84887C;
+    JSL.L fAI_Unknown84887C                                    ;848B33|227C8884|84887C;
     SEP #$20                                                   ;848B37|E220    |      ;
     REP #$10                                                   ;848B39|C210    |      ;
     PLA                                                        ;848B3B|68      |      ;
     SEP #$20                                                   ;848B3C|E220    |      ;
     REP #$10                                                   ;848B3E|C210    |      ;
     LDY.W #$0032                                               ;848B40|A03200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848B43|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848B43|97CC    |0000CC;
     SEP #$20                                                   ;848B45|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848B47|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848B47|A7C9    |0000C9;
     PHA                                                        ;848B49|48      |      ;
     REP #$30                                                   ;848B4A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848B4C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848B4C|A5C9    |0000C9;
     CLC                                                        ;848B4E|18      |      ;
     ADC.W #$0001                                               ;848B4F|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848B52|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848B54|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848B52|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848B54|A7C9    |0000C9;
     REP #$30                                                   ;848B56|C230    |      ;
     LDY.W #$0030                                               ;848B58|A03000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848B5B|97CC    |0000CC;
-    JSR.W fSubUnk1Unknown_8488D4                               ;848B5D|20D488  |8488D4;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848B5B|97CC    |0000CC;
+    JSR.W fAI_Unknown8488D4                                    ;848B5D|20D488  |8488D4;
     SEP #$20                                                   ;848B60|E220    |      ;
     PLA                                                        ;848B62|68      |      ;
     SEP #$20                                                   ;848B63|E220    |      ;
     REP #$10                                                   ;848B65|C210    |      ;
     LDY.W #$003F                                               ;848B67|A03F00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848B6A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848B6A|97CC    |0000CC;
     REP #$20                                                   ;848B6C|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;848B6E|A572    |000072;
-    STA.B ptrUnknown0xCC                                       ;848B70|85CC    |0000CC;
+    STA.B ptrAIUnknown0xCC                                     ;848B70|85CC    |0000CC;
     SEP #$20                                                   ;848B72|E220    |      ;
     LDA.B ptrUnknown0x72+2                                     ;848B74|A574    |000074;
-    STA.B ptrUnknown0xCC+2                                     ;848B76|85CE    |0000CE;
+    STA.B ptrAIUnknown0xCC+2                                   ;848B76|85CE    |0000CE;
     REP #$30                                                   ;848B78|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848B7A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848B7A|A5C9    |0000C9;
     CLC                                                        ;848B7C|18      |      ;
     ADC.W #$0002                                               ;848B7D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848B80|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848B80|85C9    |0000C9;
     RTS                                                        ;848B82|60      |      ;
  
  
-subUnknown849419_0x0A:
+fAIAction0x0A:
     REP #$30                                                   ;848B83|C230    |      ;
     REP #$30                                                   ;848B85|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848B87|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848B87|A5C9    |0000C9;
     CLC                                                        ;848B89|18      |      ;
     ADC.W #$0001                                               ;848B8A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848B8D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848B8D|85C9    |0000C9;
     REP #$30                                                   ;848B8F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848B91|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848B91|A5C9    |0000C9;
     CLC                                                        ;848B93|18      |      ;
     ADC.W #$0001                                               ;848B94|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848B97|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848B97|85C9    |0000C9;
     SEP #$20                                                   ;848B99|E220    |      ;
     LDA.B #$03                                                 ;848B9B|A903    |      ;
-    STA.B nTilesetCount                                        ;848B9D|8592    |000092;
+    STA.B n8TempVar1                                           ;848B9D|8592    |000092;
     LDA.B #$03                                                 ;848B9F|A903    |      ;
     STA.B $93                                                  ;848BA1|8593    |000093;
     LDA.B #$0F                                                 ;848BA3|A90F    |      ;
@@ -1605,165 +1605,165 @@ subUnknown849419_0x0A:
     RTS                                                        ;848BAB|60      |      ;
  
  
-subUnknown849419_0x0B:
+fAIAction0x0B:
     REP #$30                                                   ;848BAC|C230    |      ;
     REP #$30                                                   ;848BAE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848BB0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848BB0|A5C9    |0000C9;
     CLC                                                        ;848BB2|18      |      ;
     ADC.W #$0001                                               ;848BB3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848BB6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848BB6|85C9    |0000C9;
     SEP #$20                                                   ;848BB8|E220    |      ;
     LDA.B #$00                                                 ;848BBA|A900    |      ;
     XBA                                                        ;848BBC|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848BBD|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848BBD|A7C9    |0000C9;
     REP #$20                                                   ;848BBF|C220    |      ;
     ASL A                                                      ;848BC1|0A      |      ;
     TAX                                                        ;848BC2|AA      |      ;
     REP #$20                                                   ;848BC3|C220    |      ;
-    LDA.L aSetMask_8494D3,X                                    ;848BC5|BFD39484|8494D3;
+    LDA.L aAISetMask,X                                         ;848BC5|BFD39484|8494D3;
     ORA.L $7F1F7A                                              ;848BC9|0F7A1F7F|7F1F7A;
     STA.L $7F1F7A                                              ;848BCD|8F7A1F7F|7F1F7A;
     REP #$30                                                   ;848BD1|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848BD3|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848BD3|A5C9    |0000C9;
     CLC                                                        ;848BD5|18      |      ;
     ADC.W #$0001                                               ;848BD6|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848BD9|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848BD9|85C9    |0000C9;
     RTS                                                        ;848BDB|60      |      ;
  
  
-subUnknown849419_0x0C:
+fAIAction0x0C:
     REP #$30                                                   ;848BDC|C230    |      ;
     REP #$30                                                   ;848BDE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848BE0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848BE0|A5C9    |0000C9;
     CLC                                                        ;848BE2|18      |      ;
     ADC.W #$0001                                               ;848BE3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848BE6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848BE6|85C9    |0000C9;
     SEP #$20                                                   ;848BE8|E220    |      ;
     LDA.B #$00                                                 ;848BEA|A900    |      ;
     XBA                                                        ;848BEC|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848BED|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848BED|A7C9    |0000C9;
     REP #$20                                                   ;848BEF|C220    |      ;
     ASL A                                                      ;848BF1|0A      |      ;
     TAX                                                        ;848BF2|AA      |      ;
     REP #$20                                                   ;848BF3|C220    |      ;
-    LDA.L aSetMask_8494D3,X                                    ;848BF5|BFD39484|8494D3;
+    LDA.L aAISetMask,X                                         ;848BF5|BFD39484|8494D3;
     AND.L $7F1F7A                                              ;848BF9|2F7A1F7F|7F1F7A;
     BEQ +                                                      ;848BFD|F00B    |848C0A;
     REP #$30                                                   ;848BFF|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C01|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C01|A5C9    |0000C9;
     CLC                                                        ;848C03|18      |      ;
     ADC.W #$0001                                               ;848C04|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848C07|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848C07|85C9    |0000C9;
     RTS                                                        ;848C09|60      |      ;
  
  
   + REP #$30                                                   ;848C0A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C0C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C0C|A5C9    |0000C9;
     SEC                                                        ;848C0E|38      |      ;
     SBC.W #$0001                                               ;848C0F|E90100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848C12|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848C12|85C9    |0000C9;
     REP #$30                                                   ;848C14|C230    |      ;
     LDY.W #$0010                                               ;848C16|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848C19|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848C19|B7CC    |0000CC;
     CLC                                                        ;848C1B|18      |      ;
     ADC.W #$0001                                               ;848C1C|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C1F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C1F|97CC    |0000CC;
     RTS                                                        ;848C21|60      |      ;
  
  
-subUnknown849419_0x0D:
+fAIAction0x0D:
     REP #$30                                                   ;848C22|C230    |      ;
     REP #$30                                                   ;848C24|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C26|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C26|A5C9    |0000C9;
     CLC                                                        ;848C28|18      |      ;
     ADC.W #$0001                                               ;848C29|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848C2C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848C2C|85C9    |0000C9;
     SEP #$20                                                   ;848C2E|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848C30|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848C30|A7C9    |0000C9;
     SEP #$20                                                   ;848C32|E220    |      ;
     REP #$10                                                   ;848C34|C210    |      ;
     LDY.W #$0003                                               ;848C36|A00300  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C39|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C39|97CC    |0000CC;
     REP #$30                                                   ;848C3B|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C3D|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C3D|A5C9    |0000C9;
     CLC                                                        ;848C3F|18      |      ;
     ADC.W #$0001                                               ;848C40|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848C43|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848C43|85C9    |0000C9;
     SEP #$20                                                   ;848C45|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848C47|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848C47|A7C9    |0000C9;
     SEP #$20                                                   ;848C49|E220    |      ;
     REP #$10                                                   ;848C4B|C210    |      ;
     LDY.W #$0004                                               ;848C4D|A00400  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C50|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C50|97CC    |0000CC;
     REP #$30                                                   ;848C52|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C54|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C54|A5C9    |0000C9;
     CLC                                                        ;848C56|18      |      ;
     ADC.W #$0001                                               ;848C57|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848C5A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848C5A|85C9    |0000C9;
     SEP #$20                                                   ;848C5C|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848C5E|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848C5E|A7C9    |0000C9;
     SEP #$20                                                   ;848C60|E220    |      ;
     REP #$10                                                   ;848C62|C210    |      ;
     LDY.W #$0010                                               ;848C64|A01000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C67|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C67|97CC    |0000CC;
     REP #$30                                                   ;848C69|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C6B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C6B|A5C9    |0000C9;
     CLC                                                        ;848C6D|18      |      ;
     ADC.W #$0001                                               ;848C6E|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848C71|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848C71|85C9    |0000C9;
     SEP #$20                                                   ;848C73|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848C75|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848C75|A7C9    |0000C9;
     SEP #$20                                                   ;848C77|E220    |      ;
     REP #$10                                                   ;848C79|C210    |      ;
     LDY.W #$0005                                               ;848C7B|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C7E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C7E|97CC    |0000CC;
     SEP #$20                                                   ;848C80|E220    |      ;
     REP #$10                                                   ;848C82|C210    |      ;
     LDY.W #$0006                                               ;848C84|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C87|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C87|97CC    |0000CC;
     SEP #$20                                                   ;848C89|E220    |      ;
     REP #$10                                                   ;848C8B|C210    |      ;
     LDY.W #$0001                                               ;848C8D|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848C90|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848C90|B7CC    |0000CC;
     ORA.B #$20                                                 ;848C92|0920    |      ;
     SEP #$20                                                   ;848C94|E220    |      ;
     REP #$10                                                   ;848C96|C210    |      ;
     LDY.W #$0001                                               ;848C98|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848C9B|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848C9B|97CC    |0000CC;
     REP #$30                                                   ;848C9D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848C9F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848C9F|A5C9    |0000C9;
     CLC                                                        ;848CA1|18      |      ;
     ADC.W #$0001                                               ;848CA2|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848CA5|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848CA5|85C9    |0000C9;
     RTS                                                        ;848CA7|60      |      ;
  
  
-subUnknown849419_0x0E:
+fAIAction0x0E:
     REP #$30                                                   ;848CA8|C230    |      ;
     REP #$30                                                   ;848CAA|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848CAC|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848CAC|A5C9    |0000C9;
     CLC                                                        ;848CAE|18      |      ;
     ADC.W #$0002                                               ;848CAF|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848CB2|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848CB2|85C9    |0000C9;
     JSL.L fAudioUnknown_838401                                 ;848CB4|22018483|838401;
     RTS                                                        ;848CB8|60      |      ;
  
  
-subUnknown849419_0x0F:
+fAIAction0x0F:
     REP #$30                                                   ;848CB9|C230    |      ;
     REP #$30                                                   ;848CBB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848CBD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848CBD|A5C9    |0000C9;
     CLC                                                        ;848CBF|18      |      ;
     ADC.W #$0001                                               ;848CC0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848CC3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848CC3|85C9    |0000C9;
     REP #$30                                                   ;848CC5|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848CC7|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848CC7|A5C9    |0000C9;
     CLC                                                        ;848CC9|18      |      ;
     ADC.W #$0001                                               ;848CCA|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848CCD|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848CCD|85C9    |0000C9;
     SEP #$20                                                   ;848CCF|E220    |      ;
     LDA.B #$0F                                                 ;848CD1|A90F    |      ;
-    STA.B nTilesetCount                                        ;848CD3|8592    |000092;
+    STA.B n8TempVar1                                           ;848CD3|8592    |000092;
     LDA.B #$03                                                 ;848CD5|A903    |      ;
     STA.B $93                                                  ;848CD7|8593    |000093;
     LDA.B #$00                                                 ;848CD9|A900    |      ;
@@ -1772,29 +1772,29 @@ subUnknown849419_0x0F:
     RTS                                                        ;848CE1|60      |      ;
  
  
-subUnknown849419_0x10:
+fAIAction0x10:
     REP #$30                                                   ;848CE2|C230    |      ;
     SEP #$20                                                   ;848CE4|E220    |      ;
     REP #$10                                                   ;848CE6|C210    |      ;
     LDY.W #$0000                                               ;848CE8|A00000  |      ;
     LDA.B #$00                                                 ;848CEB|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848CED|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848CED|97CC    |0000CC;
     REP #$30                                                   ;848CEF|C230    |      ;
     LDY.W #$0010                                               ;848CF1|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848CF4|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848CF4|B7CC    |0000CC;
     CLC                                                        ;848CF6|18      |      ;
     ADC.W #$0001                                               ;848CF7|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848CFA|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848CFA|97CC    |0000CC;
     RTS                                                        ;848CFC|60      |      ;
  
  
-subUnknown849419_0x11:
+fAIAction0x11:
     REP #$30                                                   ;848CFD|C230    |      ;
     REP #$30                                                   ;848CFF|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D01|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D01|A5C9    |0000C9;
     CLC                                                        ;848D03|18      |      ;
     ADC.W #$0001                                               ;848D04|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D07|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D07|85C9    |0000C9;
     REP #$30                                                   ;848D09|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;848D0B|A5D2    |0000D2;
     ORA.W #$4000                                               ;848D0D|090040  |      ;
@@ -1802,276 +1802,276 @@ subUnknown849419_0x11:
     RTS                                                        ;848D12|60      |      ;
  
  
-subUnknown849419_0x12:
+fAIAction0x12:
     REP #$30                                                   ;848D13|C230    |      ;
     REP #$30                                                   ;848D15|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D17|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D17|A5C9    |0000C9;
     CLC                                                        ;848D19|18      |      ;
     ADC.W #$0001                                               ;848D1A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D1D|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848D1F|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;848D21|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D1D|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848D1F|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D21|85C9    |0000C9;
     RTS                                                        ;848D23|60      |      ;
  
  
-subUnknown849419_0x13:
+fAIAction0x13:
     REP #$30                                                   ;848D24|C230    |      ;
     REP #$30                                                   ;848D26|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D28|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D28|A5C9    |0000C9;
     CLC                                                        ;848D2A|18      |      ;
     ADC.W #$0001                                               ;848D2B|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D2E|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848D30|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D2E|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848D30|A7C9    |0000C9;
     REP #$30                                                   ;848D32|C230    |      ;
     LDY.W #$0010                                               ;848D34|A01000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848D37|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848D37|97CC    |0000CC;
     REP #$30                                                   ;848D39|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D3B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D3B|A5C9    |0000C9;
     CLC                                                        ;848D3D|18      |      ;
     ADC.W #$0002                                               ;848D3E|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D41|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D41|85C9    |0000C9;
     RTS                                                        ;848D43|60      |      ;
  
  
-subUnknown849419_0x14:
+fAIAction0x14:
     REP #$30                                                   ;848D44|C230    |      ;
     REP #$30                                                   ;848D46|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D48|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D48|A5C9    |0000C9;
     CLC                                                        ;848D4A|18      |      ;
     ADC.W #$0001                                               ;848D4B|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D4E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D4E|85C9    |0000C9;
     REP #$20                                                   ;848D50|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848D52|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848D52|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;848D54|8572    |000072;
     REP #$30                                                   ;848D56|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D58|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D58|A5C9    |0000C9;
     CLC                                                        ;848D5A|18      |      ;
     ADC.W #$0002                                               ;848D5B|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D5E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D5E|85C9    |0000C9;
     SEP #$20                                                   ;848D60|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848D62|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848D62|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;848D64|8574    |000074;
     REP #$30                                                   ;848D66|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D68|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D68|A5C9    |0000C9;
     CLC                                                        ;848D6A|18      |      ;
     ADC.W #$0001                                               ;848D6B|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D6E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D6E|85C9    |0000C9;
     SEP #$20                                                   ;848D70|E220    |      ;
     LDA.B #$00                                                 ;848D72|A900    |      ;
     XBA                                                        ;848D74|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848D75|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848D75|A7C9    |0000C9;
     REP #$20                                                   ;848D77|C220    |      ;
     ASL A                                                      ;848D79|0A      |      ;
     TAX                                                        ;848D7A|AA      |      ;
-    LDA.L aSetMask_8494D3,X                                    ;848D7B|BFD39484|8494D3;
+    LDA.L aAISetMask,X                                         ;848D7B|BFD39484|8494D3;
     STA.B n16TempVar1                                          ;848D7F|857E    |00007E;
     REP #$30                                                   ;848D81|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D83|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D83|A5C9    |0000C9;
     CLC                                                        ;848D85|18      |      ;
     ADC.W #$0001                                               ;848D86|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848D89|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D89|85C9    |0000C9;
     REP #$20                                                   ;848D8B|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848D8D|A772    |000072;
     AND.B n16TempVar1                                          ;848D8F|257E    |00007E;
     BEQ +                                                      ;848D91|F007    |848D9A;
     REP #$20                                                   ;848D93|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848D95|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;848D97|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848D95|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848D97|85C9    |0000C9;
     RTS                                                        ;848D99|60      |      ;
  
  
   + REP #$30                                                   ;848D9A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848D9C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848D9C|A5C9    |0000C9;
     CLC                                                        ;848D9E|18      |      ;
     ADC.W #$0002                                               ;848D9F|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848DA2|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DA2|85C9    |0000C9;
     RTS                                                        ;848DA4|60      |      ;
  
  
-subUnknown849419_0x15:
+fAIAction0x15:
     REP #$30                                                   ;848DA5|C230    |      ;
     REP #$30                                                   ;848DA7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848DA9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848DA9|A5C9    |0000C9;
     CLC                                                        ;848DAB|18      |      ;
     ADC.W #$0001                                               ;848DAC|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848DAF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DAF|85C9    |0000C9;
     REP #$20                                                   ;848DB1|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848DB3|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848DB3|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;848DB5|8572    |000072;
     REP #$30                                                   ;848DB7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848DB9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848DB9|A5C9    |0000C9;
     CLC                                                        ;848DBB|18      |      ;
     ADC.W #$0002                                               ;848DBC|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848DBF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DBF|85C9    |0000C9;
     SEP #$20                                                   ;848DC1|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848DC3|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848DC3|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;848DC5|8574    |000074;
     REP #$30                                                   ;848DC7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848DC9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848DC9|A5C9    |0000C9;
     CLC                                                        ;848DCB|18      |      ;
     ADC.W #$0001                                               ;848DCC|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848DCF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DCF|85C9    |0000C9;
     SEP #$20                                                   ;848DD1|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848DD3|A7C9    |0000C9;
-    STA.B nTilesetCount                                        ;848DD5|8592    |000092;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848DD3|A7C9    |0000C9;
+    STA.B n8TempVar1                                           ;848DD5|8592    |000092;
     REP #$30                                                   ;848DD7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848DD9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848DD9|A5C9    |0000C9;
     CLC                                                        ;848DDB|18      |      ;
     ADC.W #$0001                                               ;848DDC|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848DDF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DDF|85C9    |0000C9;
     SEP #$20                                                   ;848DE1|E220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848DE3|A772    |000072;
-    CMP.B nTilesetCount                                        ;848DE5|C592    |000092;
+    CMP.B n8TempVar1                                           ;848DE5|C592    |000092;
     BNE +                                                      ;848DE7|D007    |848DF0;
     REP #$20                                                   ;848DE9|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848DEB|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;848DED|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848DEB|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DED|85C9    |0000C9;
     RTS                                                        ;848DEF|60      |      ;
  
  
   + REP #$30                                                   ;848DF0|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848DF2|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848DF2|A5C9    |0000C9;
     CLC                                                        ;848DF4|18      |      ;
     ADC.W #$0002                                               ;848DF5|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848DF8|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848DF8|85C9    |0000C9;
     RTS                                                        ;848DFA|60      |      ;
  
  
-subUnknown849419_0x16:
+fAIAction0x16:
     REP #$30                                                   ;848DFB|C230    |      ;
     REP #$30                                                   ;848DFD|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848DFF|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848DFF|A5C9    |0000C9;
     CLC                                                        ;848E01|18      |      ;
     ADC.W #$0001                                               ;848E02|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E05|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E05|85C9    |0000C9;
     REP #$20                                                   ;848E07|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848E09|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E09|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;848E0B|8572    |000072;
     REP #$30                                                   ;848E0D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E0F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E0F|A5C9    |0000C9;
     CLC                                                        ;848E11|18      |      ;
     ADC.W #$0002                                               ;848E12|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E15|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E15|85C9    |0000C9;
     SEP #$20                                                   ;848E17|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848E19|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E19|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;848E1B|8574    |000074;
     REP #$30                                                   ;848E1D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E1F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E1F|A5C9    |0000C9;
     CLC                                                        ;848E21|18      |      ;
     ADC.W #$0001                                               ;848E22|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E25|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E25|85C9    |0000C9;
     SEP #$20                                                   ;848E27|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848E29|A7C9    |0000C9;
-    STA.B nTilesetCount                                        ;848E2B|8592    |000092;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E29|A7C9    |0000C9;
+    STA.B n8TempVar1                                           ;848E2B|8592    |000092;
     REP #$30                                                   ;848E2D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E2F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E2F|A5C9    |0000C9;
     CLC                                                        ;848E31|18      |      ;
     ADC.W #$0001                                               ;848E32|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E35|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E35|85C9    |0000C9;
     SEP #$20                                                   ;848E37|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848E39|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E39|A7C9    |0000C9;
     INC A                                                      ;848E3B|1A      |      ;
     STA.B $93                                                  ;848E3C|8593    |000093;
     REP #$30                                                   ;848E3E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E40|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E40|A5C9    |0000C9;
     CLC                                                        ;848E42|18      |      ;
     ADC.W #$0001                                               ;848E43|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E46|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E46|85C9    |0000C9;
     SEP #$20                                                   ;848E48|E220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848E4A|A772    |000072;
-    CMP.B nTilesetCount                                        ;848E4C|C592    |000092;
+    CMP.B n8TempVar1                                           ;848E4C|C592    |000092;
     BCC +                                                      ;848E4E|900D    |848E5D;
     LDA.B [ptrUnknown0x72]                                     ;848E50|A772    |000072;
     CMP.B $93                                                  ;848E52|C593    |000093;
     BCS +                                                      ;848E54|B007    |848E5D;
     REP #$20                                                   ;848E56|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848E58|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;848E5A|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E58|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E5A|85C9    |0000C9;
     RTS                                                        ;848E5C|60      |      ;
  
  
   + REP #$30                                                   ;848E5D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E5F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E5F|A5C9    |0000C9;
     CLC                                                        ;848E61|18      |      ;
     ADC.W #$0002                                               ;848E62|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E65|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E65|85C9    |0000C9;
     RTS                                                        ;848E67|60      |      ;
  
  
-subUnknown849419_0x17:
+fAIAction0x17:
     REP #$30                                                   ;848E68|C230    |      ;
     REP #$30                                                   ;848E6A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E6C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E6C|A5C9    |0000C9;
     CLC                                                        ;848E6E|18      |      ;
     ADC.W #$0001                                               ;848E6F|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E72|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E72|85C9    |0000C9;
     SEP #$20                                                   ;848E74|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848E76|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E76|A7C9    |0000C9;
     JSL.L fCore_GetRandomNumber                                ;848E78|22F98980|8089F9;
     SEP #$20                                                   ;848E7C|E220    |      ;
     REP #$10                                                   ;848E7E|C210    |      ;
     LDY.W #$000D                                               ;848E80|A00D00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848E83|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848E83|97CC    |0000CC;
     REP #$30                                                   ;848E85|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E87|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E87|A5C9    |0000C9;
     CLC                                                        ;848E89|18      |      ;
     ADC.W #$0001                                               ;848E8A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E8D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848E8D|85C9    |0000C9;
     RTS                                                        ;848E8F|60      |      ;
  
  
-subUnknown849419_0x18:
+fAIAction0x18:
     REP #$30                                                   ;848E90|C230    |      ;
     REP #$30                                                   ;848E92|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848E94|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848E94|A5C9    |0000C9;
     CLC                                                        ;848E96|18      |      ;
     ADC.W #$0001                                               ;848E97|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848E9A|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848E9C|A7C9    |0000C9;
-    STA.B nTilesetCount                                        ;848E9E|8592    |000092;
+    STA.B ptrAIActionArg0xC9                                   ;848E9A|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848E9C|A7C9    |0000C9;
+    STA.B n8TempVar1                                           ;848E9E|8592    |000092;
     SEP #$20                                                   ;848EA0|E220    |      ;
     REP #$10                                                   ;848EA2|C210    |      ;
     LDY.W #$000D                                               ;848EA4|A00D00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848EA7|B7CC    |0000CC;
-    CMP.B nTilesetCount                                        ;848EA9|C592    |000092;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848EA7|B7CC    |0000CC;
+    CMP.B n8TempVar1                                           ;848EA9|C592    |000092;
     BNE +                                                      ;848EAB|D011    |848EBE;
     REP #$30                                                   ;848EAD|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848EAF|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848EAF|A5C9    |0000C9;
     CLC                                                        ;848EB1|18      |      ;
     ADC.W #$0001                                               ;848EB2|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848EB5|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848EB5|85C9    |0000C9;
     REP #$20                                                   ;848EB7|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848EB9|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;848EBB|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848EB9|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848EBB|85C9    |0000C9;
     RTS                                                        ;848EBD|60      |      ;
  
  
   + REP #$30                                                   ;848EBE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848EC0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848EC0|A5C9    |0000C9;
     CLC                                                        ;848EC2|18      |      ;
     ADC.W #$0003                                               ;848EC3|690300  |      ;
-    STA.B ptrUnknown0xC9                                       ;848EC6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848EC6|85C9    |0000C9;
     RTS                                                        ;848EC8|60      |      ;
  
  
-subUnknown849419_0x19:
+fAIAction0x19:
     REP #$30                                                   ;848EC9|C230    |      ;
     REP #$30                                                   ;848ECB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848ECD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848ECD|A5C9    |0000C9;
     CLC                                                        ;848ECF|18      |      ;
     ADC.W #$0001                                               ;848ED0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848ED3|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848ED5|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848ED3|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848ED5|A7C9    |0000C9;
     STA.W $0901                                                ;848ED7|8D0109  |000901;
     REP #$30                                                   ;848EDA|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848EDC|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848EDC|A5C9    |0000C9;
     CLC                                                        ;848EDE|18      |      ;
     ADC.W #$0002                                               ;848EDF|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848EE2|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848EE2|85C9    |0000C9;
     SEP #$20                                                   ;848EE4|E220    |      ;
     LDA.B #$00                                                 ;848EE6|A900    |      ;
     XBA                                                        ;848EE8|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848EE9|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848EE9|A7C9    |0000C9;
     REP #$20                                                   ;848EEB|C220    |      ;
     ASL A                                                      ;848EED|0A      |      ;
     ASL A                                                      ;848EEE|0A      |      ;
@@ -2081,10 +2081,10 @@ subUnknown849419_0x19:
     ASL A                                                      ;848EF2|0A      |      ;
     STA.W $090F                                                ;848EF3|8D0F09  |00090F;
     REP #$30                                                   ;848EF6|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848EF8|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848EF8|A5C9    |0000C9;
     CLC                                                        ;848EFA|18      |      ;
     ADC.W #$0001                                               ;848EFB|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848EFE|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848EFE|85C9    |0000C9;
     REP #$30                                                   ;848F00|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;848F02|A5D2    |0000D2;
     ORA.W #$2000                                               ;848F04|090020  |      ;
@@ -2092,97 +2092,97 @@ subUnknown849419_0x19:
     RTS                                                        ;848F09|60      |      ;
  
  
-subUnknown849419_0x1A:
+fAIAction0x1A:
     REP #$30                                                   ;848F0A|C230    |      ;
     REP #$30                                                   ;848F0C|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848F0E|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848F0E|A5C9    |0000C9;
     CLC                                                        ;848F10|18      |      ;
     ADC.W #$0001                                               ;848F11|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848F14|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848F16|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848F14|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848F16|A7C9    |0000C9;
     REP #$30                                                   ;848F18|C230    |      ;
     LDY.W #$001A                                               ;848F1A|A01A00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848F1D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848F1D|97CC    |0000CC;
     REP #$30                                                   ;848F1F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848F21|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848F21|A5C9    |0000C9;
     CLC                                                        ;848F23|18      |      ;
     ADC.W #$0002                                               ;848F24|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848F27|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848F29|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848F27|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848F29|A7C9    |0000C9;
     REP #$30                                                   ;848F2B|C230    |      ;
     LDY.W #$001C                                               ;848F2D|A01C00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848F30|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848F30|97CC    |0000CC;
     REP #$30                                                   ;848F32|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848F34|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848F34|A5C9    |0000C9;
     CLC                                                        ;848F36|18      |      ;
     ADC.W #$0002                                               ;848F37|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848F3A|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848F3C|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848F3A|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848F3C|A7C9    |0000C9;
     REP #$30                                                   ;848F3E|C230    |      ;
     LDY.W #$0033                                               ;848F40|A03300  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848F43|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848F43|97CC    |0000CC;
     REP #$30                                                   ;848F45|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848F47|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848F47|A5C9    |0000C9;
     CLC                                                        ;848F49|18      |      ;
     ADC.W #$0002                                               ;848F4A|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848F4D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848F4D|85C9    |0000C9;
     SEP #$20                                                   ;848F4F|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848F51|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848F51|A7C9    |0000C9;
     SEP #$20                                                   ;848F53|E220    |      ;
     REP #$10                                                   ;848F55|C210    |      ;
     LDY.W #$0002                                               ;848F57|A00200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848F5A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848F5A|97CC    |0000CC;
     REP #$30                                                   ;848F5C|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848F5E|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848F5E|A5C9    |0000C9;
     CLC                                                        ;848F60|18      |      ;
     ADC.W #$0001                                               ;848F61|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848F64|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848F64|85C9    |0000C9;
     SEP #$20                                                   ;848F66|E220    |      ;
     REP #$10                                                   ;848F68|C210    |      ;
     LDY.W #$0001                                               ;848F6A|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848F6D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848F6D|B7CC    |0000CC;
     ORA.B #$03                                                 ;848F6F|0903    |      ;
     SEP #$20                                                   ;848F71|E220    |      ;
     REP #$10                                                   ;848F73|C210    |      ;
     LDY.W #$0001                                               ;848F75|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848F78|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848F78|97CC    |0000CC;
     REP #$30                                                   ;848F7A|C230    |      ;
     LDY.W #$0033                                               ;848F7C|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848F7F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848F7F|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;848F81|8572    |000072;
     SEP #$20                                                   ;848F83|E220    |      ;
     LDA.B #$B3                                                 ;848F85|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;848F87|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;848F89|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;848F89|22958884|848895;
     REP #$30                                                   ;848F8D|C230    |      ;
     LDY.W #$0010                                               ;848F8F|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848F92|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848F92|B7CC    |0000CC;
     CLC                                                        ;848F94|18      |      ;
     ADC.W #$0001                                               ;848F95|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848F98|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848F98|97CC    |0000CC;
     RTS                                                        ;848F9A|60      |      ;
  
  
-subUnknown849419_0x1B:
+fAIAction0x1B:
     REP #$30                                                   ;848F9B|C230    |      ;
     REP #$30                                                   ;848F9D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848F9F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848F9F|A5C9    |0000C9;
     CLC                                                        ;848FA1|18      |      ;
     ADC.W #$0001                                               ;848FA2|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848FA5|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;848FA7|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848FA5|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848FA7|A7C9    |0000C9;
     REP #$30                                                   ;848FA9|C230    |      ;
     LDY.W #$0016                                               ;848FAB|A01600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848FAE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848FAE|97CC    |0000CC;
     REP #$30                                                   ;848FB0|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848FB2|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848FB2|A5C9    |0000C9;
     CLC                                                        ;848FB4|18      |      ;
     ADC.W #$0002                                               ;848FB5|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;848FB8|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848FB8|85C9    |0000C9;
     SEP #$20                                                   ;848FBA|E220    |      ;
     LDA.B #$00                                                 ;848FBC|A900    |      ;
     XBA                                                        ;848FBE|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848FBF|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848FBF|A7C9    |0000C9;
     REP #$20                                                   ;848FC1|C220    |      ;
     ASL A                                                      ;848FC3|0A      |      ;
     ASL A                                                      ;848FC4|0A      |      ;
@@ -2192,107 +2192,107 @@ subUnknown849419_0x1B:
     ASL A                                                      ;848FC8|0A      |      ;
     REP #$30                                                   ;848FC9|C230    |      ;
     LDY.W #$0014                                               ;848FCB|A01400  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848FCE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848FCE|97CC    |0000CC;
     REP #$30                                                   ;848FD0|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848FD2|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848FD2|A5C9    |0000C9;
     CLC                                                        ;848FD4|18      |      ;
     ADC.W #$0001                                               ;848FD5|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848FD8|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848FD8|85C9    |0000C9;
     SEP #$20                                                   ;848FDA|E220    |      ;
     REP #$10                                                   ;848FDC|C210    |      ;
     LDY.W #$0001                                               ;848FDE|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;848FE1|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;848FE1|B7CC    |0000CC;
     ORA.B #$04                                                 ;848FE3|0904    |      ;
     SEP #$20                                                   ;848FE5|E220    |      ;
     REP #$10                                                   ;848FE7|C210    |      ;
     LDY.W #$0001                                               ;848FE9|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;848FEC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;848FEC|97CC    |0000CC;
     RTS                                                        ;848FEE|60      |      ;
  
  
-subUnknown849419_0x1C:
+fAIAction0x1C:
     REP #$30                                                   ;848FEF|C230    |      ;
     REP #$30                                                   ;848FF1|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;848FF3|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;848FF3|A5C9    |0000C9;
     CLC                                                        ;848FF5|18      |      ;
     ADC.W #$0001                                               ;848FF6|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;848FF9|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;848FF9|85C9    |0000C9;
     REP #$20                                                   ;848FFB|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;848FFD|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;848FFD|A7C9    |0000C9;
     TAX                                                        ;848FFF|AA      |      ;
     REP #$30                                                   ;849000|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849002|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849002|A5C9    |0000C9;
     CLC                                                        ;849004|18      |      ;
     ADC.W #$0002                                               ;849005|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;849008|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849008|85C9    |0000C9;
     SEP #$20                                                   ;84900A|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84900C|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84900C|A7C9    |0000C9;
     STA.W $0191                                                ;84900E|8D9101  |000191;
     SEP #$20                                                   ;849011|E220    |      ;
     LDA.B #$02                                                 ;849013|A902    |      ;
     STA.W $019A                                                ;849015|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;849018|225F9383|83935F;
     REP #$30                                                   ;84901C|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84901E|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84901E|A5C9    |0000C9;
     CLC                                                        ;849020|18      |      ;
     ADC.W #$0001                                               ;849021|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849024|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849024|85C9    |0000C9;
     REP #$30                                                   ;849026|C230    |      ;
     LDY.W #$0010                                               ;849028|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84902B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84902B|B7CC    |0000CC;
     CLC                                                        ;84902D|18      |      ;
     ADC.W #$0001                                               ;84902E|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849031|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849031|97CC    |0000CC;
     RTS                                                        ;849033|60      |      ;
  
  
-subUnknown849419_0x1D:
+fAIAction0x1D:
     REP #$30                                                   ;849034|C230    |      ;
     REP #$30                                                   ;849036|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849038|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849038|A5C9    |0000C9;
     CLC                                                        ;84903A|18      |      ;
     ADC.W #$0001                                               ;84903B|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84903E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84903E|85C9    |0000C9;
     REP #$20                                                   ;849040|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849042|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849042|A7C9    |0000C9;
     TAX                                                        ;849044|AA      |      ;
     REP #$30                                                   ;849045|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849047|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849047|A5C9    |0000C9;
     CLC                                                        ;849049|18      |      ;
     ADC.W #$0002                                               ;84904A|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84904D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84904D|85C9    |0000C9;
     SEP #$20                                                   ;84904F|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849051|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849051|A7C9    |0000C9;
     STA.W $0191                                                ;849053|8D9101  |000191;
     SEP #$20                                                   ;849056|E220    |      ;
     LDA.B #$02                                                 ;849058|A902    |      ;
     STA.W $019A                                                ;84905A|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84905D|225F9383|83935F;
     REP #$30                                                   ;849061|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849063|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849063|A5C9    |0000C9;
     CLC                                                        ;849065|18      |      ;
     ADC.W #$0001                                               ;849066|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849069|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849069|85C9    |0000C9;
     REP #$30                                                   ;84906B|C230    |      ;
     LDY.W #$0010                                               ;84906D|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849070|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849070|B7CC    |0000CC;
     CLC                                                        ;849072|18      |      ;
     ADC.W #$0001                                               ;849073|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849076|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849076|97CC    |0000CC;
     RTS                                                        ;849078|60      |      ;
  
  
-subUnknown849419_0x1E:
+fAIAction0x1E:
     REP #$30                                                   ;849079|C230    |      ;
     REP #$30                                                   ;84907B|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84907D|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84907D|A5C9    |0000C9;
     CLC                                                        ;84907F|18      |      ;
     ADC.W #$0001                                               ;849080|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849083|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849083|85C9    |0000C9;
     SEP #$20                                                   ;849085|E220    |      ;
     REP #$10                                                   ;849087|C210    |      ;
     LDY.W #$000C                                               ;849089|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84908C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84908C|B7CC    |0000CC;
     CMP.B #$00                                                 ;84908E|C900    |      ;
     BNE +                                                      ;849090|D003    |849095;
     JMP.W .return                                              ;849092|4C8591  |849185;
@@ -2348,55 +2348,55 @@ subUnknown849419_0x1E:
  
 .continue:
     REP #$20                                                   ;8490EA|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8490EC|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;8490EE|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8490EC|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8490EE|85C9    |0000C9;
     SEP #$20                                                   ;8490F0|E220    |      ;
     REP #$10                                                   ;8490F2|C210    |      ;
     LDY.W #$0007                                               ;8490F4|A00700  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8490F7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8490F7|B7CC    |0000CC;
     SEP #$20                                                   ;8490F9|E220    |      ;
     REP #$10                                                   ;8490FB|C210    |      ;
     LDY.W #$0008                                               ;8490FD|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849100|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849100|97CC    |0000CC;
     SEP #$20                                                   ;849102|E220    |      ;
     REP #$10                                                   ;849104|C210    |      ;
     LDY.W #$0003                                               ;849106|A00300  |      ;
     LDA.B #$00                                                 ;849109|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84910B|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84910B|97CC    |0000CC;
     SEP #$20                                                   ;84910D|E220    |      ;
     REP #$10                                                   ;84910F|C210    |      ;
     LDY.W #$0004                                               ;849111|A00400  |      ;
     LDA.B #$00                                                 ;849114|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849116|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849116|97CC    |0000CC;
     SEP #$20                                                   ;849118|E220    |      ;
     REP #$10                                                   ;84911A|C210    |      ;
     LDY.W #$000C                                               ;84911C|A00C00  |      ;
     LDA.B #$00                                                 ;84911F|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849121|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849121|97CC    |0000CC;
     REP #$20                                                   ;849123|C220    |      ;
     LDA.B nPlayerDirection                                     ;849125|A5DA    |0000DA;
     EOR.W #$0001                                               ;849127|490100  |      ;
     SEP #$20                                                   ;84912A|E220    |      ;
     REP #$10                                                   ;84912C|C210    |      ;
     LDY.W #$0002                                               ;84912E|A00200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849131|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849131|97CC    |0000CC;
     REP #$30                                                   ;849133|C230    |      ;
     LDY.W #$0033                                               ;849135|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849138|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849138|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;84913A|8572    |000072;
     SEP #$20                                                   ;84913C|E220    |      ;
     LDA.B #$B3                                                 ;84913E|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;849140|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;849142|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;849142|22958884|848895;
     SEP #$20                                                   ;849146|E220    |      ;
     REP #$10                                                   ;849148|C210    |      ;
     LDY.W #$0001                                               ;84914A|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84914D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84914D|B7CC    |0000CC;
     ORA.B #$14                                                 ;84914F|0914    |      ;
     SEP #$20                                                   ;849151|E220    |      ;
     REP #$10                                                   ;849153|C210    |      ;
     LDY.W #$0001                                               ;849155|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849158|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849158|97CC    |0000CC;
     SEP #$20                                                   ;84915A|E220    |      ;
     LDA.B #$56                                                 ;84915C|A956    |      ;
     STA.W nPlayerInteractionIndex                              ;84915E|8D6E09  |00096E;
@@ -2411,87 +2411,87 @@ subUnknown849419_0x1E:
     STA.B nPlayerAction                                        ;849175|85D4    |0000D4;
     REP #$30                                                   ;849177|C230    |      ;
     LDY.W #$0010                                               ;849179|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84917C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84917C|B7CC    |0000CC;
     CLC                                                        ;84917E|18      |      ;
     ADC.W #$0001                                               ;84917F|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849182|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849182|97CC    |0000CC;
     RTS                                                        ;849184|60      |      ;
  
  
 .return:
     REP #$30                                                   ;849185|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849187|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849187|A5C9    |0000C9;
     CLC                                                        ;849189|18      |      ;
     ADC.W #$0002                                               ;84918A|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84918D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84918D|85C9    |0000C9;
     REP #$30                                                   ;84918F|C230    |      ;
     LDY.W #$0010                                               ;849191|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849194|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849194|B7CC    |0000CC;
     CLC                                                        ;849196|18      |      ;
     ADC.W #$0001                                               ;849197|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84919A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84919A|97CC    |0000CC;
     RTS                                                        ;84919C|60      |      ;
  
  
-subUnknown849419_0x20:
+fAIAction0x20:
     REP #$30                                                   ;84919D|C230    |      ;
     REP #$30                                                   ;84919F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8491A1|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8491A1|A5C9    |0000C9;
     CLC                                                        ;8491A3|18      |      ;
     ADC.W #$0001                                               ;8491A4|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8491A7|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491A7|85C9    |0000C9;
     SEP #$20                                                   ;8491A9|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8491AB|A7C9    |0000C9;
-    STA.B nTilesetCount                                        ;8491AD|8592    |000092;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8491AB|A7C9    |0000C9;
+    STA.B n8TempVar1                                           ;8491AD|8592    |000092;
     LDA.W $018F                                                ;8491AF|AD8F01  |00018F;
-    CMP.B nTilesetCount                                        ;8491B2|C592    |000092;
+    CMP.B n8TempVar1                                           ;8491B2|C592    |000092;
     BNE +                                                      ;8491B4|D011    |8491C7;
     REP #$30                                                   ;8491B6|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8491B8|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8491B8|A5C9    |0000C9;
     CLC                                                        ;8491BA|18      |      ;
     ADC.W #$0001                                               ;8491BB|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8491BE|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491BE|85C9    |0000C9;
     REP #$20                                                   ;8491C0|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8491C2|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;8491C4|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8491C2|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491C4|85C9    |0000C9;
     RTS                                                        ;8491C6|60      |      ;
  
  
   + REP #$30                                                   ;8491C7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8491C9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8491C9|A5C9    |0000C9;
     CLC                                                        ;8491CB|18      |      ;
     ADC.W #$0003                                               ;8491CC|690300  |      ;
-    STA.B ptrUnknown0xC9                                       ;8491CF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491CF|85C9    |0000C9;
     RTS                                                        ;8491D1|60      |      ;
  
  
-subUnknown849419_0x21:
+fAIAction0x21:
     REP #$30                                                   ;8491D2|C230    |      ;
     REP #$30                                                   ;8491D4|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8491D6|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8491D6|A5C9    |0000C9;
     CLC                                                        ;8491D8|18      |      ;
     ADC.W #$0001                                               ;8491D9|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8491DC|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491DC|85C9    |0000C9;
     REP #$20                                                   ;8491DE|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8491E0|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8491E0|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;8491E2|8572    |000072;
     REP #$30                                                   ;8491E4|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8491E6|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8491E6|A5C9    |0000C9;
     CLC                                                        ;8491E8|18      |      ;
     ADC.W #$0002                                               ;8491E9|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;8491EC|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491EC|85C9    |0000C9;
     SEP #$20                                                   ;8491EE|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8491F0|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8491F0|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;8491F2|8574    |000074;
     REP #$30                                                   ;8491F4|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8491F6|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8491F6|A5C9    |0000C9;
     CLC                                                        ;8491F8|18      |      ;
     ADC.W #$0001                                               ;8491F9|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8491FC|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8491FC|85C9    |0000C9;
     SEP #$20                                                   ;8491FE|E220    |      ;
     LDA.B #$00                                                 ;849200|A900    |      ;
     XBA                                                        ;849202|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849203|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849203|A7C9    |0000C9;
     BPL +                                                      ;849205|1004    |84920B;
     XBA                                                        ;849207|EB      |      ;
     LDA.B #$FF                                                 ;849208|A9FF    |      ;
@@ -2500,10 +2500,10 @@ subUnknown849419_0x21:
   + REP #$20                                                   ;84920B|C220    |      ;
     STA.B n16TempVar1                                          ;84920D|857E    |00007E;
     REP #$30                                                   ;84920F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849211|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849211|A5C9    |0000C9;
     CLC                                                        ;849213|18      |      ;
     ADC.W #$0001                                               ;849214|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849217|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849217|85C9    |0000C9;
     SEP #$20                                                   ;849219|E220    |      ;
     LDA.B #$00                                                 ;84921B|A900    |      ;
     XBA                                                        ;84921D|EB      |      ;
@@ -2530,492 +2530,492 @@ subUnknown849419_0x21:
     RTS                                                        ;84923E|60      |      ;
  
  
-subUnknown849419_0x22:
+fAIAction0x22:
     REP #$30                                                   ;84923F|C230    |      ;
     REP #$30                                                   ;849241|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849243|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849243|A5C9    |0000C9;
     CLC                                                        ;849245|18      |      ;
     ADC.W #$0001                                               ;849246|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849249|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849249|85C9    |0000C9;
     SEP #$20                                                   ;84924B|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84924D|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84924D|A7C9    |0000C9;
     SEP #$20                                                   ;84924F|E220    |      ;
     REP #$10                                                   ;849251|C210    |      ;
     LDY.W #$0009                                               ;849253|A00900  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849256|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849256|97CC    |0000CC;
     REP #$30                                                   ;849258|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84925A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84925A|A5C9    |0000C9;
     CLC                                                        ;84925C|18      |      ;
     ADC.W #$0001                                               ;84925D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849260|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849260|85C9    |0000C9;
     SEP #$20                                                   ;849262|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849264|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849264|A7C9    |0000C9;
     SEP #$20                                                   ;849266|E220    |      ;
     REP #$10                                                   ;849268|C210    |      ;
     LDY.W #$000A                                               ;84926A|A00A00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84926D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84926D|97CC    |0000CC;
     REP #$30                                                   ;84926F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849271|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849271|A5C9    |0000C9;
     CLC                                                        ;849273|18      |      ;
     ADC.W #$0001                                               ;849274|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849277|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849277|85C9    |0000C9;
     SEP #$20                                                   ;849279|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84927B|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84927B|A7C9    |0000C9;
     SEP #$20                                                   ;84927D|E220    |      ;
     REP #$10                                                   ;84927F|C210    |      ;
     LDY.W #$000B                                               ;849281|A00B00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849284|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849284|97CC    |0000CC;
     SEP #$20                                                   ;849286|E220    |      ;
     REP #$10                                                   ;849288|C210    |      ;
     LDY.W #$0005                                               ;84928A|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84928D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84928D|97CC    |0000CC;
     SEP #$20                                                   ;84928F|E220    |      ;
     REP #$10                                                   ;849291|C210    |      ;
     LDY.W #$0006                                               ;849293|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849296|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849296|97CC    |0000CC;
     REP #$30                                                   ;849298|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84929A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84929A|A5C9    |0000C9;
     CLC                                                        ;84929C|18      |      ;
     ADC.W #$0001                                               ;84929D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8492A0|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;8492A2|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8492A0|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8492A2|A7C9    |0000C9;
     REP #$30                                                   ;8492A4|C230    |      ;
     LDY.W #$0036                                               ;8492A6|A03600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8492A9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8492A9|97CC    |0000CC;
     REP #$30                                                   ;8492AB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8492AD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8492AD|A5C9    |0000C9;
     CLC                                                        ;8492AF|18      |      ;
     ADC.W #$0002                                               ;8492B0|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;8492B3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8492B3|85C9    |0000C9;
     SEP #$20                                                   ;8492B5|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8492B7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8492B7|A7C9    |0000C9;
     SEP #$20                                                   ;8492B9|E220    |      ;
     REP #$10                                                   ;8492BB|C210    |      ;
     LDY.W #$0007                                               ;8492BD|A00700  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8492C0|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8492C0|97CC    |0000CC;
     SEP #$20                                                   ;8492C2|E220    |      ;
     REP #$10                                                   ;8492C4|C210    |      ;
     LDY.W #$0008                                               ;8492C6|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8492C9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8492C9|97CC    |0000CC;
     REP #$30                                                   ;8492CB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8492CD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8492CD|A5C9    |0000C9;
     CLC                                                        ;8492CF|18      |      ;
     ADC.W #$0001                                               ;8492D0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8492D3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8492D3|85C9    |0000C9;
     SEP #$20                                                   ;8492D5|E220    |      ;
     REP #$10                                                   ;8492D7|C210    |      ;
     LDY.W #$0001                                               ;8492D9|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8492DC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8492DC|B7CC    |0000CC;
     ORA.B #$28                                                 ;8492DE|0928    |      ;
     SEP #$20                                                   ;8492E0|E220    |      ;
     REP #$10                                                   ;8492E2|C210    |      ;
     LDY.W #$0001                                               ;8492E4|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8492E7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8492E7|97CC    |0000CC;
     REP #$30                                                   ;8492E9|C230    |      ;
     LDY.W #$001A                                               ;8492EB|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8492EE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8492EE|B7CC    |0000CC;
     REP #$30                                                   ;8492F0|C230    |      ;
     LDY.W #$001E                                               ;8492F2|A01E00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8492F5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8492F5|97CC    |0000CC;
     REP #$30                                                   ;8492F7|C230    |      ;
     LDY.W #$001C                                               ;8492F9|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8492FC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8492FC|B7CC    |0000CC;
     REP #$30                                                   ;8492FE|C230    |      ;
     LDY.W #$0020                                               ;849300|A02000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849303|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849303|97CC    |0000CC;
     RTS                                                        ;849305|60      |      ;
  
  
-subUnknown849419_0x23:
+fAIAction0x23:
     REP #$30                                                   ;849306|C230    |      ;
     REP #$30                                                   ;849308|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84930A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84930A|A5C9    |0000C9;
     CLC                                                        ;84930C|18      |      ;
     ADC.W #$0001                                               ;84930D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849310|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849310|85C9    |0000C9;
     REP #$20                                                   ;849312|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849314|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849314|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;849316|8572    |000072;
     REP #$30                                                   ;849318|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84931A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84931A|A5C9    |0000C9;
     CLC                                                        ;84931C|18      |      ;
     ADC.W #$0002                                               ;84931D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;849320|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849320|85C9    |0000C9;
     SEP #$20                                                   ;849322|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849324|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849324|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;849326|8574    |000074;
     REP #$30                                                   ;849328|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84932A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84932A|A5C9    |0000C9;
     CLC                                                        ;84932C|18      |      ;
     ADC.W #$0001                                               ;84932D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849330|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849330|85C9    |0000C9;
     SEP #$20                                                   ;849332|E220    |      ;
     LDA.B #$00                                                 ;849334|A900    |      ;
     XBA                                                        ;849336|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849337|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849337|A7C9    |0000C9;
     REP #$20                                                   ;849339|C220    |      ;
     ASL A                                                      ;84933B|0A      |      ;
     TAX                                                        ;84933C|AA      |      ;
-    LDA.L aSetMask_8494D3,X                                    ;84933D|BFD39484|8494D3;
+    LDA.L aAISetMask,X                                         ;84933D|BFD39484|8494D3;
     STA.B n16TempVar1                                          ;849341|857E    |00007E;
     REP #$20                                                   ;849343|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;849345|A772    |000072;
     ORA.B n16TempVar1                                          ;849347|057E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;849349|8772    |000072;
     REP #$30                                                   ;84934B|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84934D|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84934D|A5C9    |0000C9;
     CLC                                                        ;84934F|18      |      ;
     ADC.W #$0001                                               ;849350|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849353|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849353|85C9    |0000C9;
     RTS                                                        ;849355|60      |      ;
  
  
-subUnknown849419_0x24:
+fAIAction0x24:
     REP #$30                                                   ;849356|C230    |      ;
     REP #$30                                                   ;849358|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84935A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84935A|A5C9    |0000C9;
     CLC                                                        ;84935C|18      |      ;
     ADC.W #$0001                                               ;84935D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849360|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849360|85C9    |0000C9;
     SEP #$20                                                   ;849362|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849364|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849364|A7C9    |0000C9;
     JSL.L fPalette_Unknown808FC7                               ;849366|22C78F80|808FC7;
     REP #$30                                                   ;84936A|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84936C|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84936C|A5C9    |0000C9;
     CLC                                                        ;84936E|18      |      ;
     ADC.W #$0001                                               ;84936F|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849372|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849372|85C9    |0000C9;
     RTS                                                        ;849374|60      |      ;
  
  
-subUnknown849419_0x25:
+fAIAction0x25:
     REP #$30                                                   ;849375|C230    |      ;
     REP #$30                                                   ;849377|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849379|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849379|A5C9    |0000C9;
     CLC                                                        ;84937B|18      |      ;
     ADC.W #$0001                                               ;84937C|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84937F|85C9    |0000C9;
-    LDA.B ptrUnknown0xCC                                       ;849381|A5CC    |0000CC;
+    STA.B ptrAIActionArg0xC9                                   ;84937F|85C9    |0000C9;
+    LDA.B ptrAIUnknown0xCC                                     ;849381|A5CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;849383|8572    |000072;
     SEP #$20                                                   ;849385|E220    |      ;
-    LDA.B ptrUnknown0xCC+2                                     ;849387|A5CE    |0000CE;
+    LDA.B ptrAIUnknown0xCC+2                                   ;849387|A5CE    |0000CE;
     STA.B ptrUnknown0x72+2                                     ;849389|8574    |000074;
     SEP #$20                                                   ;84938B|E220    |      ;
     LDA.B #$00                                                 ;84938D|A900    |      ;
     XBA                                                        ;84938F|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849390|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849390|A7C9    |0000C9;
     REP #$20                                                   ;849392|C220    |      ;
-    JSL.L fSubUnk1Unknown_84887C                               ;849394|227C8884|84887C;
+    JSL.L fAI_Unknown84887C                                    ;849394|227C8884|84887C;
     REP #$30                                                   ;849398|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84939A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84939A|A5C9    |0000C9;
     CLC                                                        ;84939C|18      |      ;
     ADC.W #$0001                                               ;84939D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8493A0|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8493A0|85C9    |0000C9;
     REP #$30                                                   ;8493A2|C230    |      ;
     SEP #$20                                                   ;8493A4|E220    |      ;
     REP #$10                                                   ;8493A6|C210    |      ;
     LDY.W #$0000                                               ;8493A8|A00000  |      ;
     LDA.B #$00                                                 ;8493AB|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8493AD|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8493AD|97CC    |0000CC;
     REP #$30                                                   ;8493AF|C230    |      ;
     LDY.W #$0012                                               ;8493B1|A01200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8493B4|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8493B4|B7CC    |0000CC;
     STA.B $A5                                                  ;8493B6|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;8493B8|22A28185|8581A2;
     REP #$20                                                   ;8493BC|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;8493BE|A572    |000072;
-    STA.B ptrUnknown0xCC                                       ;8493C0|85CC    |0000CC;
+    STA.B ptrAIUnknown0xCC                                     ;8493C0|85CC    |0000CC;
     SEP #$20                                                   ;8493C2|E220    |      ;
     LDA.B ptrUnknown0x72+2                                     ;8493C4|A574    |000074;
-    STA.B ptrUnknown0xCC+2                                     ;8493C6|85CE    |0000CE;
+    STA.B ptrAIUnknown0xCC+2                                   ;8493C6|85CE    |0000CE;
     RTS                                                        ;8493C8|60      |      ;
  
  
-subUnknown849419_0x26:
+fAIAction0x26:
     REP #$30                                                   ;8493C9|C230    |      ;
     REP #$30                                                   ;8493CB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8493CD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8493CD|A5C9    |0000C9;
     CLC                                                        ;8493CF|18      |      ;
     ADC.W #$0001                                               ;8493D0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8493D3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8493D3|85C9    |0000C9;
     REP #$20                                                   ;8493D5|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8493D7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8493D7|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;8493D9|8572    |000072;
     REP #$30                                                   ;8493DB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8493DD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8493DD|A5C9    |0000C9;
     CLC                                                        ;8493DF|18      |      ;
     ADC.W #$0002                                               ;8493E0|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;8493E3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8493E3|85C9    |0000C9;
     SEP #$20                                                   ;8493E5|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8493E7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8493E7|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;8493E9|8574    |000074;
     REP #$30                                                   ;8493EB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8493ED|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8493ED|A5C9    |0000C9;
     CLC                                                        ;8493EF|18      |      ;
     ADC.W #$0001                                               ;8493F0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8493F3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8493F3|85C9    |0000C9;
     SEP #$20                                                   ;8493F5|E220    |      ;
     LDA.B #$00                                                 ;8493F7|A900    |      ;
     XBA                                                        ;8493F9|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8493FA|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8493FA|A7C9    |0000C9;
     REP #$20                                                   ;8493FC|C220    |      ;
     ASL A                                                      ;8493FE|0A      |      ;
     TAX                                                        ;8493FF|AA      |      ;
-    LDA.L aResetMask_8494F3,X                                  ;849400|BFF39484|8494F3;
+    LDA.L aAIResetMask,X                                       ;849400|BFF39484|8494F3;
     STA.B n16TempVar1                                          ;849404|857E    |00007E;
     REP #$20                                                   ;849406|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;849408|A772    |000072;
     AND.B n16TempVar1                                          ;84940A|257E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;84940C|8772    |000072;
     REP #$30                                                   ;84940E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849410|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849410|A5C9    |0000C9;
     CLC                                                        ;849412|18      |      ;
     ADC.W #$0001                                               ;849413|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849416|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849416|85C9    |0000C9;
     RTS                                                        ;849418|60      |      ;
  
  
-pSubUnk1Table_849419:
-    dw subUnknown849419_0x00                                   ;849419|        |8489BB; 0x60 * [ptr16]
-    dw subUnknown849419_0x01                                   ;84941B|        |8489E3;
-    dw subUnknown849419_0x02                                   ;84941D|        |848A0D;
-    dw subUnknown849419_0x03                                   ;84941F|        |848A39;
-    dw subUnknown849419_0x04                                   ;849421|        |848A58;
-    dw subUnknown849419_0x05                                   ;849423|        |848A65;
-    dw subUnknown849419_0x06                                   ;849425|        |848A94;
-    dw subUnknown849419_0x07                                   ;849427|        |848ABF;
-    dw subUnknown849419_0x08                                   ;849429|        |848AE7;
-    dw subUnknown849419_0x09                                   ;84942B|        |848B08;
-    dw subUnknown849419_0x0A                                   ;84942D|        |848B83;
-    dw subUnknown849419_0x0B                                   ;84942F|        |848BAC;
-    dw subUnknown849419_0x0C                                   ;849431|        |848BDC;
-    dw subUnknown849419_0x0D                                   ;849433|        |848C22;
-    dw subUnknown849419_0x0E                                   ;849435|        |848CA8;
-    dw subUnknown849419_0x0F                                   ;849437|        |848CB9;
-    dw subUnknown849419_0x10                                   ;849439|        |848CE2;
-    dw subUnknown849419_0x11                                   ;84943B|        |848CFD;
-    dw subUnknown849419_0x12                                   ;84943D|        |848D13;
-    dw subUnknown849419_0x13                                   ;84943F|        |848D24;
-    dw subUnknown849419_0x14                                   ;849441|        |848D44;
-    dw subUnknown849419_0x15                                   ;849443|        |848DA5;
-    dw subUnknown849419_0x16                                   ;849445|        |848DFB;
-    dw subUnknown849419_0x17                                   ;849447|        |848E68;
-    dw subUnknown849419_0x18                                   ;849449|        |848E90;
-    dw subUnknown849419_0x19                                   ;84944B|        |848EC9;
-    dw subUnknown849419_0x1A                                   ;84944D|        |848F0A;
-    dw subUnknown849419_0x1B                                   ;84944F|        |848F9B;
-    dw subUnknown849419_0x1C                                   ;849451|        |848FEF;
-    dw subUnknown849419_0x1D                                   ;849453|        |849034;
-    dw subUnknown849419_0x1E                                   ;849455|        |849079;
-    dw subUnknown849419_0x1E                                   ;849457|        |849079;
-    dw subUnknown849419_0x20                                   ;849459|        |84919D;
-    dw subUnknown849419_0x21                                   ;84945B|        |8491D2;
-    dw subUnknown849419_0x22                                   ;84945D|        |84923F;
-    dw subUnknown849419_0x23                                   ;84945F|        |849306;
-    dw subUnknown849419_0x24                                   ;849461|        |849356;
-    dw subUnknown849419_0x25                                   ;849463|        |849375;
-    dw subUnknown849419_0x26                                   ;849465|        |8493C9;
-    dw subUnknown849419_0x26                                   ;849467|        |8493C9;
-    dw subUnknown849419_0x26                                   ;849469|        |8493C9;
-    dw subUnknown849419_0x29                                   ;84946B|        |849513;
-    dw subUnknown849419_0x2A                                   ;84946D|        |849553;
-    dw subUnknown849419_0x2B                                   ;84946F|        |84957D;
-    dw subUnknown849419_0x2C                                   ;849471|        |8495E8;
-    dw subUnknown849419_0x2D                                   ;849473|        |849633;
-    dw subUnknown849419_0x2E                                   ;849475|        |849777;
-    dw subUnknown849419_0x2F                                   ;849477|        |849810;
-    dw subUnknown849419_0x30                                   ;849479|        |849857;
-    dw subUnknown849419_0x31                                   ;84947B|        |849AD4;
-    dw subUnknown849419_0x32                                   ;84947D|        |84A90F;
-    dw subUnknown849419_0x33                                   ;84947F|        |84A94C;
-    dw subUnknown849419_0x34                                   ;849481|        |84AA5D;
-    dw subUnknown849419_0x35                                   ;849483|        |84AB27;
-    dw subUnknown849419_0x36                                   ;849485|        |84AF06;
-    dw subUnknown849419_0x37                                   ;849487|        |84B34B;
-    dw subUnknown849419_0x38                                   ;849489|        |84B365;
-    dw subUnknown849419_0x39                                   ;84948B|        |84B389;
-    dw subUnknown849419_0x3A                                   ;84948D|        |84B427;
-    dw subUnknown849419_0x3B                                   ;84948F|        |84B4DC;
-    dw subUnknown849419_0x3C                                   ;849491|        |84B503;
-    dw subUnknown849419_0x3D                                   ;849493|        |84B52D;
-    dw subUnknown849419_0x3E                                   ;849495|        |84B556;
-    dw subUnknown849419_0x3F                                   ;849497|        |84B57B;
-    dw subUnknown849419_0x40                                   ;849499|        |84B58F;
-    dw subUnknown849419_0x41                                   ;84949B|        |84B5A9;
-    dw subUnknown849419_0x42                                   ;84949D|        |84B602;
-    dw subUnknown849419_0x43                                   ;84949F|        |84B666;
-    dw subUnknown849419_0x44                                   ;8494A1|        |84B6BC;
-    dw subUnknown849419_0x45                                   ;8494A3|        |84B72D;
-    dw subUnknown849419_0x46                                   ;8494A5|        |84B79A;
-    dw subUnknown849419_0x47                                   ;8494A7|        |84B84C;
-    dw subUnknown849419_0x48                                   ;8494A9|        |84B889;
-    dw subUnknown849419_0x49                                   ;8494AB|        |84B8D9;
-    dw subUnknown849419_0x4A                                   ;8494AD|        |84B93C;
-    dw subUnknown849419_0x4B                                   ;8494AF|        |84BA10;
-    dw subUnknown849419_0x4C                                   ;8494B1|        |84BA51;
-    dw subUnknown849419_0x4D                                   ;8494B3|        |84BA72;
-    dw subUnknown849419_0x4E                                   ;8494B5|        |84BB31;
-    dw subUnknown849419_0x4F                                   ;8494B7|        |84BB4B;
-    dw subUnknown849419_0x50                                   ;8494B9|        |84BBDA;
-    dw subUnknown849419_0x51                                   ;8494BB|        |84BC9C;
-    dw subUnknown849419_0x52                                   ;8494BD|        |84BD44;
-    dw subUnknown849419_0x53                                   ;8494BF|        |84BE0D;
-    dw subUnknown849419_0x54                                   ;8494C1|        |84BED6;
-    dw subUnknown849419_0x55                                   ;8494C3|        |84BF20;
-    dw subUnknown849419_0x56                                   ;8494C5|        |84BF81;
-    dw subUnknown849419_0x57                                   ;8494C7|        |84BFA0;
-    dw subUnknown849419_0x58                                   ;8494C9|        |84BFBF;
-    dw subUnknown849419_0x59                                   ;8494CB|        |84C000;
+aAIActions:
+    dw fAIAction0x00_SetMusicTrack                             ;849419|        |8489BB; 0x60 * [ptr16]
+    dw fAIAction0x01_UnfreezeTime                              ;84941B|        |8489E3;
+    dw fAIAction0x02_FreezeTime                                ;84941D|        |848A0D;
+    dw fAIAction0x03_SetHour                                   ;84941F|        |848A39;
+    dw fAIAction0x04_DoesNothing                               ;849421|        |848A58;
+    dw fAIAction0x05_SetMapDestCoords                          ;849423|        |848A65;
+    dw fAIAction0x06_Unknown                                   ;849425|        |848A94;
+    dw fAIAction0x07_SetPlayerDirection                        ;849427|        |848ABF;
+    dw fAIAction0x08_ClearPlayerStateFlags                     ;849429|        |848AE7;
+    dw fAIAction0x09                                           ;84942B|        |848B08;
+    dw fAIAction0x0A                                           ;84942D|        |848B83;
+    dw fAIAction0x0B                                           ;84942F|        |848BAC;
+    dw fAIAction0x0C                                           ;849431|        |848BDC;
+    dw fAIAction0x0D                                           ;849433|        |848C22;
+    dw fAIAction0x0E                                           ;849435|        |848CA8;
+    dw fAIAction0x0F                                           ;849437|        |848CB9;
+    dw fAIAction0x10                                           ;849439|        |848CE2;
+    dw fAIAction0x11                                           ;84943B|        |848CFD;
+    dw fAIAction0x12                                           ;84943D|        |848D13;
+    dw fAIAction0x13                                           ;84943F|        |848D24;
+    dw fAIAction0x14                                           ;849441|        |848D44;
+    dw fAIAction0x15                                           ;849443|        |848DA5;
+    dw fAIAction0x16                                           ;849445|        |848DFB;
+    dw fAIAction0x17                                           ;849447|        |848E68;
+    dw fAIAction0x18                                           ;849449|        |848E90;
+    dw fAIAction0x19                                           ;84944B|        |848EC9;
+    dw fAIAction0x1A                                           ;84944D|        |848F0A;
+    dw fAIAction0x1B                                           ;84944F|        |848F9B;
+    dw fAIAction0x1C                                           ;849451|        |848FEF;
+    dw fAIAction0x1D                                           ;849453|        |849034;
+    dw fAIAction0x1E                                           ;849455|        |849079;
+    dw fAIAction0x1E                                           ;849457|        |849079;
+    dw fAIAction0x20                                           ;849459|        |84919D;
+    dw fAIAction0x21                                           ;84945B|        |8491D2;
+    dw fAIAction0x22                                           ;84945D|        |84923F;
+    dw fAIAction0x23                                           ;84945F|        |849306;
+    dw fAIAction0x24                                           ;849461|        |849356;
+    dw fAIAction0x25                                           ;849463|        |849375;
+    dw fAIAction0x26                                           ;849465|        |8493C9;
+    dw fAIAction0x26                                           ;849467|        |8493C9;
+    dw fAIAction0x26                                           ;849469|        |8493C9;
+    dw fAIAction0x29                                           ;84946B|        |849513;
+    dw fAIAction0x2A                                           ;84946D|        |849553;
+    dw fAIAction0x2B                                           ;84946F|        |84957D;
+    dw fAIAction0x2C                                           ;849471|        |8495E8;
+    dw fAIAction0x2D                                           ;849473|        |849633;
+    dw fAIAction0x2E                                           ;849475|        |849777;
+    dw fAIAction0x2F                                           ;849477|        |849810;
+    dw fAIAction0x30_UpdateChicken                             ;849479|        |849857;
+    dw fAIAction0x31_UpdateCow                                 ;84947B|        |849AD4;
+    dw fAIAction0x32                                           ;84947D|        |84A90F;
+    dw fAIAction0x33_UpdateMole                                ;84947F|        |84A94C;
+    dw fAIAction0x34                                           ;849481|        |84AA5D;
+    dw fAIAction0x35_UpdateHorse                               ;849483|        |84AB27;
+    dw fAIAction0x36_UpdateDog                                 ;849485|        |84AF06;
+    dw fAIAction0x37                                           ;849487|        |84B34B;
+    dw fAIAction0x38                                           ;849489|        |84B365;
+    dw fAIAction0x39                                           ;84948B|        |84B389;
+    dw fAIAction0x3A                                           ;84948D|        |84B427;
+    dw fAIAction0x3B                                           ;84948F|        |84B4DC;
+    dw fAIAction0x3C                                           ;849491|        |84B503;
+    dw fAIAction0x3D                                           ;849493|        |84B52D;
+    dw fAIAction0x3E                                           ;849495|        |84B556;
+    dw fAIAction0x3F_ThrowHeldItem                             ;849497|        |84B57B;
+    dw fAIAction0x40_DisableTileInteractions                   ;849499|        |84B58F;
+    dw fAIAction0x41                                           ;84949B|        |84B5A9;
+    dw fAIAction0x42                                           ;84949D|        |84B602;
+    dw fAIAction0x43                                           ;84949F|        |84B666;
+    dw fAIAction0x44                                           ;8494A1|        |84B6BC;
+    dw fAIAction0x45                                           ;8494A3|        |84B72D;
+    dw fAIAction0x46                                           ;8494A5|        |84B79A;
+    dw fAIAction0x47                                           ;8494A7|        |84B84C;
+    dw fAIAction0x48                                           ;8494A9|        |84B889;
+    dw fAIAction0x49                                           ;8494AB|        |84B8D9;
+    dw fAIAction0x4A_UpdatePowerBerry                          ;8494AD|        |84B93C;
+    dw fAIAction0x4B                                           ;8494AF|        |84BA10;
+    dw fAIAction0x4C                                           ;8494B1|        |84BA51;
+    dw fAIAction0x4D                                           ;8494B3|        |84BA72;
+    dw fAIAction0x4E                                           ;8494B5|        |84BB31;
+    dw fAIAction0x4F                                           ;8494B7|        |84BB4B;
+    dw fAIAction0x50                                           ;8494B9|        |84BBDA;
+    dw fAIAction0x51                                           ;8494BB|        |84BC9C;
+    dw fAIAction0x52                                           ;8494BD|        |84BD44;
+    dw fAIAction0x53                                           ;8494BF|        |84BE0D;
+    dw fAIAction0x54                                           ;8494C1|        |84BED6;
+    dw fAIAction0x55                                           ;8494C3|        |84BF20;
+    dw fAIAction0x56_UseEquippedItem                           ;8494C5|        |84BF81;
+    dw fAIAction0x57_UpdateStamina                             ;8494C7|        |84BFA0;
+    dw fAIAction0x58                                           ;8494C9|        |84BFBF;
+    dw fAIAction0x59_SwapEquippedItems                         ;8494CB|        |84C000;
  
-pppTable_8494CD:
+pppAITable_8494CD:
     dl ppTable_B38000                                          ;8494CD|        |B38000;
-    dl pTable_B48000                                           ;8494D0|        |B48000;
+    dl pScripting_B48000                                       ;8494D0|        |B48000;
  
-aSetMask_8494D3:
+aAISetMask:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;8494D3|        |      ;
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;8494DF|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;8494EB|        |      ;
  
-aResetMask_8494F3:
+aAIResetMask:
     dw $FFFE,$FFFD,$FFFB,$FFF7,$FFEF,$FFDF                     ;8494F3|        |      ;
     dw $FFBF,$FF7F,$FEFF,$FDFF,$FBFF,$F7FF                     ;8494FF|        |      ;
     dw $EFFF,$DFFF,$BFFF,$7FFF                                 ;84950B|        |      ;
  
-subUnknown849419_0x29:
+fAIAction0x29:
     REP #$30                                                   ;849513|C230    |      ;
     REP #$30                                                   ;849515|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849517|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849517|A5C9    |0000C9;
     CLC                                                        ;849519|18      |      ;
     ADC.W #$0001                                               ;84951A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84951D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84951D|85C9    |0000C9;
     REP #$20                                                   ;84951F|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849521|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849521|A7C9    |0000C9;
     STA.W nMapScrool_SpeedX                                    ;849523|8D7C08  |00087C;
     REP #$30                                                   ;849526|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849528|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849528|A5C9    |0000C9;
     CLC                                                        ;84952A|18      |      ;
     ADC.W #$0002                                               ;84952B|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84952E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84952E|85C9    |0000C9;
     REP #$20                                                   ;849530|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849532|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849532|A7C9    |0000C9;
     STA.W nMapScrool_SpeedY                                    ;849534|8D7E08  |00087E;
     REP #$30                                                   ;849537|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849539|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849539|A5C9    |0000C9;
     CLC                                                        ;84953B|18      |      ;
     ADC.W #$0002                                               ;84953C|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84953F|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84953F|85C9    |0000C9;
     SEP #$20                                                   ;849541|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849543|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849543|A7C9    |0000C9;
     STA.W nMapScrool_Timer                                     ;849545|8D8008  |000880;
     REP #$30                                                   ;849548|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84954A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84954A|A5C9    |0000C9;
     CLC                                                        ;84954C|18      |      ;
     ADC.W #$0001                                               ;84954D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849550|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849550|85C9    |0000C9;
     RTS                                                        ;849552|60      |      ;
  
  
-subUnknown849419_0x2A:
+fAIAction0x2A:
     REP #$30                                                   ;849553|C230    |      ;
     REP #$30                                                   ;849555|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849557|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849557|A5C9    |0000C9;
     CLC                                                        ;849559|18      |      ;
     ADC.W #$0001                                               ;84955A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84955D|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;84955F|A7C9    |0000C9;
-    JSL.L fUnknown_81A5E1                                      ;849561|22E1A581|81A5E1;
+    STA.B ptrAIActionArg0xC9                                   ;84955D|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84955F|A7C9    |0000C9;
+    JSL.L fUnknownCF_SetPointer                                ;849561|22E1A581|81A5E1;
     REP #$30                                                   ;849565|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849567|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849567|A5C9    |0000C9;
     CLC                                                        ;849569|18      |      ;
     ADC.W #$0002                                               ;84956A|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84956D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84956D|85C9    |0000C9;
     REP #$30                                                   ;84956F|C230    |      ;
     LDY.W #$0010                                               ;849571|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849574|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849574|B7CC    |0000CC;
     CLC                                                        ;849576|18      |      ;
     ADC.W #$0001                                               ;849577|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84957A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84957A|97CC    |0000CC;
     RTS                                                        ;84957C|60      |      ;
  
  
-subUnknown849419_0x2B:
+fAIAction0x2B:
     REP #$30                                                   ;84957D|C230    |      ;
     REP #$30                                                   ;84957F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849581|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849581|A5C9    |0000C9;
     CLC                                                        ;849583|18      |      ;
     ADC.W #$0001                                               ;849584|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849587|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;849589|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849587|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849589|A7C9    |0000C9;
     REP #$30                                                   ;84958B|C230    |      ;
     LDY.W #$0033                                               ;84958D|A03300  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849590|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849590|97CC    |0000CC;
     REP #$30                                                   ;849592|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849594|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849594|A5C9    |0000C9;
     CLC                                                        ;849596|18      |      ;
     ADC.W #$0002                                               ;849597|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84959A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84959A|85C9    |0000C9;
     SEP #$20                                                   ;84959C|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84959E|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84959E|A7C9    |0000C9;
     SEP #$20                                                   ;8495A0|E220    |      ;
     REP #$10                                                   ;8495A2|C210    |      ;
     LDY.W #$0002                                               ;8495A4|A00200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8495A7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8495A7|97CC    |0000CC;
     REP #$30                                                   ;8495A9|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8495AB|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8495AB|A5C9    |0000C9;
     CLC                                                        ;8495AD|18      |      ;
     ADC.W #$0001                                               ;8495AE|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8495B1|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8495B1|85C9    |0000C9;
     SEP #$20                                                   ;8495B3|E220    |      ;
     REP #$10                                                   ;8495B5|C210    |      ;
     LDY.W #$0001                                               ;8495B7|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8495BA|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8495BA|B7CC    |0000CC;
     ORA.B #$03                                                 ;8495BC|0903    |      ;
     SEP #$20                                                   ;8495BE|E220    |      ;
     REP #$10                                                   ;8495C0|C210    |      ;
     LDY.W #$0001                                               ;8495C2|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8495C5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8495C5|97CC    |0000CC;
     REP #$30                                                   ;8495C7|C230    |      ;
     LDY.W #$0033                                               ;8495C9|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8495CC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8495CC|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;8495CE|8572    |000072;
     SEP #$20                                                   ;8495D0|E220    |      ;
     LDA.B #$B3                                                 ;8495D2|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;8495D4|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;8495D6|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;8495D6|22958884|848895;
     REP #$30                                                   ;8495DA|C230    |      ;
     LDY.W #$0010                                               ;8495DC|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8495DF|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8495DF|B7CC    |0000CC;
     CLC                                                        ;8495E1|18      |      ;
     ADC.W #$0001                                               ;8495E2|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8495E5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8495E5|97CC    |0000CC;
     RTS                                                        ;8495E7|60      |      ;
  
  
-subUnknown849419_0x2C:
+fAIAction0x2C:
     REP #$30                                                   ;8495E8|C230    |      ;
     REP #$30                                                   ;8495EA|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8495EC|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8495EC|A5C9    |0000C9;
     CLC                                                        ;8495EE|18      |      ;
     ADC.W #$0001                                               ;8495EF|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8495F2|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8495F2|85C9    |0000C9;
     SEP #$20                                                   ;8495F4|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8495F6|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8495F6|A7C9    |0000C9;
     PHA                                                        ;8495F8|48      |      ;
     REP #$30                                                   ;8495F9|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8495FB|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8495FB|A5C9    |0000C9;
     CLC                                                        ;8495FD|18      |      ;
     ADC.W #$0001                                               ;8495FE|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849601|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849601|85C9    |0000C9;
     REP #$20                                                   ;849603|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849605|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849605|A7C9    |0000C9;
     PHA                                                        ;849607|48      |      ;
     REP #$30                                                   ;849608|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84960A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84960A|A5C9    |0000C9;
     CLC                                                        ;84960C|18      |      ;
     ADC.W #$0002                                               ;84960D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;849610|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849610|85C9    |0000C9;
     REP #$20                                                   ;849612|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849614|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849614|A7C9    |0000C9;
     TAY                                                        ;849616|A8      |      ;
     PLX                                                        ;849617|FA      |      ;
     SEP #$20                                                   ;849618|E220    |      ;
@@ -3025,24 +3025,24 @@ subUnknown849419_0x2C:
     STZ.W $0119                                                ;849621|9C1901  |000119;
     JSL.L fToolUsed_SoundUnknown828FF3                         ;849624|22F38F82|828FF3;
     REP #$30                                                   ;849628|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84962A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84962A|A5C9    |0000C9;
     CLC                                                        ;84962C|18      |      ;
     ADC.W #$0002                                               ;84962D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;849630|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849630|85C9    |0000C9;
     RTS                                                        ;849632|60      |      ;
  
  
-subUnknown849419_0x2D:
+fAIAction0x2D:
     REP #$30                                                   ;849633|C230    |      ;
     REP #$30                                                   ;849635|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849637|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849637|A5C9    |0000C9;
     CLC                                                        ;849639|18      |      ;
     ADC.W #$0001                                               ;84963A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84963D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84963D|85C9    |0000C9;
     SEP #$20                                                   ;84963F|E220    |      ;
     REP #$10                                                   ;849641|C210    |      ;
     LDY.W #$000C                                               ;849643|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849646|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849646|B7CC    |0000CC;
     CMP.B #$00                                                 ;849648|C900    |      ;
     BNE +                                                      ;84964A|D003    |84964F;
     JMP.W .return                                              ;84964C|4C5F97  |84975F;
@@ -3108,62 +3108,62 @@ subUnknown849419_0x2D:
     BEQ .continue                                              ;8496B5|F00D    |8496C4;
     STA.W $091E                                                ;8496B7|8D1E09  |00091E;
     REP #$30                                                   ;8496BA|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8496BC|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8496BC|A5C9    |0000C9;
     CLC                                                        ;8496BE|18      |      ;
     ADC.W #$0002                                               ;8496BF|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;8496C2|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8496C2|85C9    |0000C9;
  
 .continue:
     REP #$20                                                   ;8496C4|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8496C6|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;8496C8|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8496C6|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8496C8|85C9    |0000C9;
     SEP #$20                                                   ;8496CA|E220    |      ;
     REP #$10                                                   ;8496CC|C210    |      ;
     LDY.W #$0007                                               ;8496CE|A00700  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8496D1|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8496D1|B7CC    |0000CC;
     SEP #$20                                                   ;8496D3|E220    |      ;
     REP #$10                                                   ;8496D5|C210    |      ;
     LDY.W #$0008                                               ;8496D7|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8496DA|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8496DA|97CC    |0000CC;
     SEP #$20                                                   ;8496DC|E220    |      ;
     REP #$10                                                   ;8496DE|C210    |      ;
     LDY.W #$0003                                               ;8496E0|A00300  |      ;
     LDA.B #$00                                                 ;8496E3|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8496E5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8496E5|97CC    |0000CC;
     SEP #$20                                                   ;8496E7|E220    |      ;
     REP #$10                                                   ;8496E9|C210    |      ;
     LDY.W #$0004                                               ;8496EB|A00400  |      ;
     LDA.B #$00                                                 ;8496EE|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8496F0|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8496F0|97CC    |0000CC;
     SEP #$20                                                   ;8496F2|E220    |      ;
     REP #$10                                                   ;8496F4|C210    |      ;
     LDY.W #$000C                                               ;8496F6|A00C00  |      ;
     LDA.B #$00                                                 ;8496F9|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8496FB|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8496FB|97CC    |0000CC;
     REP #$20                                                   ;8496FD|C220    |      ;
     LDA.B nPlayerDirection                                     ;8496FF|A5DA    |0000DA;
     EOR.W #$0001                                               ;849701|490100  |      ;
     SEP #$20                                                   ;849704|E220    |      ;
     REP #$10                                                   ;849706|C210    |      ;
     LDY.W #$0002                                               ;849708|A00200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84970B|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84970B|97CC    |0000CC;
     REP #$30                                                   ;84970D|C230    |      ;
     LDY.W #$0033                                               ;84970F|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849712|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849712|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;849714|8572    |000072;
     SEP #$20                                                   ;849716|E220    |      ;
     LDA.B #$B3                                                 ;849718|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;84971A|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;84971C|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;84971C|22958884|848895;
     SEP #$20                                                   ;849720|E220    |      ;
     REP #$10                                                   ;849722|C210    |      ;
     LDY.W #$0001                                               ;849724|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849727|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849727|B7CC    |0000CC;
     ORA.B #$14                                                 ;849729|0914    |      ;
     SEP #$20                                                   ;84972B|E220    |      ;
     REP #$10                                                   ;84972D|C210    |      ;
     LDY.W #$0001                                               ;84972F|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849732|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849732|97CC    |0000CC;
     SEP #$20                                                   ;849734|E220    |      ;
     LDA.B #$56                                                 ;849736|A956    |      ;
     STA.W nPlayerInteractionIndex                              ;849738|8D6E09  |00096E;
@@ -3178,149 +3178,149 @@ subUnknown849419_0x2D:
     STA.B nPlayerAction                                        ;84974F|85D4    |0000D4;
     REP #$30                                                   ;849751|C230    |      ;
     LDY.W #$0010                                               ;849753|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849756|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849756|B7CC    |0000CC;
     CLC                                                        ;849758|18      |      ;
     ADC.W #$0001                                               ;849759|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84975C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84975C|97CC    |0000CC;
     RTS                                                        ;84975E|60      |      ;
  
  
 .return:
     REP #$30                                                   ;84975F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849761|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849761|A5C9    |0000C9;
     CLC                                                        ;849763|18      |      ;
     ADC.W #$0004                                               ;849764|690400  |      ;
-    STA.B ptrUnknown0xC9                                       ;849767|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849767|85C9    |0000C9;
     REP #$30                                                   ;849769|C230    |      ;
     LDY.W #$0010                                               ;84976B|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84976E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84976E|B7CC    |0000CC;
     CLC                                                        ;849770|18      |      ;
     ADC.W #$0001                                               ;849771|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849774|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849774|97CC    |0000CC;
     RTS                                                        ;849776|60      |      ;
  
  
-subUnknown849419_0x2E:
+fAIAction0x2E:
     REP #$30                                                   ;849777|C230    |      ;
     REP #$30                                                   ;849779|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84977B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84977B|A5C9    |0000C9;
     CLC                                                        ;84977D|18      |      ;
     ADC.W #$0001                                               ;84977E|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849781|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849781|85C9    |0000C9;
     SEP #$20                                                   ;849783|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;849785|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;849785|A7C9    |0000C9;
     SEP #$20                                                   ;849787|E220    |      ;
     REP #$10                                                   ;849789|C210    |      ;
     LDY.W #$000B                                               ;84978B|A00B00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84978E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84978E|97CC    |0000CC;
     SEP #$20                                                   ;849790|E220    |      ;
     REP #$10                                                   ;849792|C210    |      ;
     LDY.W #$0005                                               ;849794|A00500  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849797|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849797|97CC    |0000CC;
     SEP #$20                                                   ;849799|E220    |      ;
     REP #$10                                                   ;84979B|C210    |      ;
     LDY.W #$0006                                               ;84979D|A00600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8497A0|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8497A0|97CC    |0000CC;
     REP #$30                                                   ;8497A2|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8497A4|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8497A4|A5C9    |0000C9;
     CLC                                                        ;8497A6|18      |      ;
     ADC.W #$0001                                               ;8497A7|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8497AA|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;8497AC|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8497AA|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8497AC|A7C9    |0000C9;
     REP #$30                                                   ;8497AE|C230    |      ;
     LDY.W #$0036                                               ;8497B0|A03600  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8497B3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8497B3|97CC    |0000CC;
     REP #$30                                                   ;8497B5|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8497B7|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8497B7|A5C9    |0000C9;
     CLC                                                        ;8497B9|18      |      ;
     ADC.W #$0002                                               ;8497BA|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;8497BD|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8497BD|85C9    |0000C9;
     SEP #$20                                                   ;8497BF|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;8497C1|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;8497C1|A7C9    |0000C9;
     SEP #$20                                                   ;8497C3|E220    |      ;
     REP #$10                                                   ;8497C5|C210    |      ;
     LDY.W #$0007                                               ;8497C7|A00700  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8497CA|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8497CA|97CC    |0000CC;
     SEP #$20                                                   ;8497CC|E220    |      ;
     REP #$10                                                   ;8497CE|C210    |      ;
     LDY.W #$0008                                               ;8497D0|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8497D3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8497D3|97CC    |0000CC;
     REP #$30                                                   ;8497D5|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;8497D7|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;8497D7|A5C9    |0000C9;
     CLC                                                        ;8497D9|18      |      ;
     ADC.W #$0001                                               ;8497DA|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;8497DD|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;8497DD|85C9    |0000C9;
     SEP #$20                                                   ;8497DF|E220    |      ;
     REP #$10                                                   ;8497E1|C210    |      ;
     LDY.W #$0001                                               ;8497E3|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8497E6|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8497E6|B7CC    |0000CC;
     ORA.B #$A8                                                 ;8497E8|09A8    |      ;
     SEP #$20                                                   ;8497EA|E220    |      ;
     REP #$10                                                   ;8497EC|C210    |      ;
     LDY.W #$0001                                               ;8497EE|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8497F1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8497F1|97CC    |0000CC;
     REP #$30                                                   ;8497F3|C230    |      ;
     LDY.W #$001A                                               ;8497F5|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8497F8|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8497F8|B7CC    |0000CC;
     REP #$30                                                   ;8497FA|C230    |      ;
     LDY.W #$001E                                               ;8497FC|A01E00  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;8497FF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;8497FF|97CC    |0000CC;
     REP #$30                                                   ;849801|C230    |      ;
     LDY.W #$001C                                               ;849803|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849806|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849806|B7CC    |0000CC;
     REP #$30                                                   ;849808|C230    |      ;
     LDY.W #$0020                                               ;84980A|A02000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84980D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84980D|97CC    |0000CC;
     RTS                                                        ;84980F|60      |      ;
  
  
-subUnknown849419_0x2F:
+fAIAction0x2F:
     REP #$30                                                   ;849810|C230    |      ;
     REP #$30                                                   ;849812|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849814|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849814|A5C9    |0000C9;
     CLC                                                        ;849816|18      |      ;
     ADC.W #$0001                                               ;849817|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84981A|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;84981C|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84981A|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84981C|A7C9    |0000C9;
     REP #$30                                                   ;84981E|C230    |      ;
     LDY.W #$0033                                               ;849820|A03300  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849823|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849823|97CC    |0000CC;
     REP #$30                                                   ;849825|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849827|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849827|A5C9    |0000C9;
     CLC                                                        ;849829|18      |      ;
     ADC.W #$0002                                               ;84982A|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84982D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84982D|85C9    |0000C9;
     REP #$30                                                   ;84982F|C230    |      ;
     LDY.W #$0033                                               ;849831|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849834|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849834|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;849836|8572    |000072;
     SEP #$20                                                   ;849838|E220    |      ;
     LDA.B #$B3                                                 ;84983A|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;84983C|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;84983E|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;84983E|22958884|848895;
     SEP #$20                                                   ;849842|E220    |      ;
     REP #$10                                                   ;849844|C210    |      ;
     LDY.W #$0001                                               ;849846|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849849|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849849|B7CC    |0000CC;
     ORA.B #$04                                                 ;84984B|0904    |      ;
     SEP #$20                                                   ;84984D|E220    |      ;
     REP #$10                                                   ;84984F|C210    |      ;
     LDY.W #$0001                                               ;849851|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849854|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849854|97CC    |0000CC;
     RTS                                                        ;849856|60      |      ;
  
  
-subUnknown849419_0x30:
+fAIAction0x30_UpdateChicken:
     REP #$30                                                   ;849857|C230    |      ;
     REP #$30                                                   ;849859|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84985B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84985B|A5C9    |0000C9;
     CLC                                                        ;84985D|18      |      ;
     ADC.W #$0001                                               ;84985E|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849861|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849861|85C9    |0000C9;
     SEP #$20                                                   ;849863|E220    |      ;
     REP #$10                                                   ;849865|C210    |      ;
     LDY.W #$003F                                               ;849867|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84986A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84986A|B7CC    |0000CC;
     SEC                                                        ;84986C|38      |      ;
     SBC.B #$24                                                 ;84986D|E924    |      ;
     XBA                                                        ;84986F|EB      |      ;
@@ -3330,18 +3330,18 @@ subUnknown849419_0x30:
     JSL.L fGameEngine_GetChickenData                           ;849875|2295C983|83C995;
     REP #$30                                                   ;849879|C230    |      ;
     LDY.W #$001A                                               ;84987B|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84987E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84987E|B7CC    |0000CC;
     LDY.W #$0004                                               ;849880|A00400  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849883|9772    |000072;
     REP #$30                                                   ;849885|C230    |      ;
     LDY.W #$001C                                               ;849887|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84988A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84988A|B7CC    |0000CC;
     LDY.W #$0006                                               ;84988C|A00600  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84988F|9772    |000072;
     SEP #$20                                                   ;849891|E220    |      ;
     REP #$10                                                   ;849893|C210    |      ;
     LDY.W #$000E                                               ;849895|A00E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849898|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849898|B7CC    |0000CC;
     CMP.B #$E0                                                 ;84989A|C9E0    |      ;
     BNE .loop                                                  ;84989C|D003    |8498A1;
     JMP.W .label3                                              ;84989E|4C4F9A  |849A4F;
@@ -3351,7 +3351,7 @@ subUnknown849419_0x30:
     SEP #$20                                                   ;8498A1|E220    |      ;
     REP #$10                                                   ;8498A3|C210    |      ;
     LDY.W #$000C                                               ;8498A5|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8498A8|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8498A8|B7CC    |0000CC;
     CMP.B #$00                                                 ;8498AA|C900    |      ;
     BNE +                                                      ;8498AC|D003    |8498B1;
     JMP.W .label1                                              ;8498AE|4CC899  |8499C8;
@@ -3449,32 +3449,32 @@ subUnknown849419_0x30:
     SEP #$20                                                   ;849949|E220    |      ;
     REP #$10                                                   ;84994B|C210    |      ;
     LDY.W #$003F                                               ;84994D|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849950|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849950|B7CC    |0000CC;
     STA.W $0920                                                ;849952|8D2009  |000920;
     SEP #$20                                                   ;849955|E220    |      ;
     REP #$10                                                   ;849957|C210    |      ;
     LDY.W #$0000                                               ;849959|A00000  |      ;
     LDA.B #$00                                                 ;84995C|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84995E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84995E|97CC    |0000CC;
     SEP #$20                                                   ;849960|E220    |      ;
     REP #$10                                                   ;849962|C210    |      ;
     LDY.W #$0001                                               ;849964|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849967|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849967|B7CC    |0000CC;
     ORA.B #$40                                                 ;849969|0940    |      ;
     SEP #$20                                                   ;84996B|E220    |      ;
     REP #$10                                                   ;84996D|C210    |      ;
     LDY.W #$0001                                               ;84996F|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849972|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849972|97CC    |0000CC;
     REP #$30                                                   ;849974|C230    |      ;
     LDY.W #$0010                                               ;849976|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849979|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849979|B7CC    |0000CC;
     CLC                                                        ;84997B|18      |      ;
     ADC.W #$0001                                               ;84997C|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84997F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84997F|97CC    |0000CC;
     SEP #$20                                                   ;849981|E220    |      ;
     REP #$10                                                   ;849983|C210    |      ;
     LDY.W #$003F                                               ;849985|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849988|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849988|B7CC    |0000CC;
     CMP.B #$24                                                 ;84998A|C924    |      ;
     BCS +                                                      ;84998C|B003    |849991;
     JMP.W .label2                                              ;84998E|4C419A  |849A41;
@@ -3521,7 +3521,7 @@ subUnknown849419_0x30:
     SEP #$20                                                   ;8499D5|E220    |      ;
     REP #$10                                                   ;8499D7|C210    |      ;
     LDY.W #$003F                                               ;8499D9|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;8499DC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8499DC|B7CC    |0000CC;
     SEC                                                        ;8499DE|38      |      ;
     SBC.B #$24                                                 ;8499DF|E924    |      ;
     XBA                                                        ;8499E1|EB      |      ;
@@ -3548,14 +3548,14 @@ subUnknown849419_0x30:
     SEP #$20                                                   ;849A07|E220    |      ;
     REP #$10                                                   ;849A09|C210    |      ;
     LDY.W #$003F                                               ;849A0B|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849A0E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A0E|B7CC    |0000CC;
     XBA                                                        ;849A10|EB      |      ;
     LDA.B #$00                                                 ;849A11|A900    |      ;
     XBA                                                        ;849A13|EB      |      ;
     REP #$20                                                   ;849A14|C220    |      ;
     LDX.W #$0000                                               ;849A16|A20000  |      ;
     LDY.W #$005D                                               ;849A19|A05D00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;849A1C|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;849A1C|223F8084|84803F;
     JMP.W .label2                                              ;849A20|4C419A  |849A41;
  
  
@@ -3563,24 +3563,24 @@ subUnknown849419_0x30:
     SEP #$20                                                   ;849A25|E220    |      ;
     REP #$10                                                   ;849A27|C210    |      ;
     LDY.W #$003F                                               ;849A29|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849A2C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A2C|B7CC    |0000CC;
     XBA                                                        ;849A2E|EB      |      ;
     LDA.B #$00                                                 ;849A2F|A900    |      ;
     XBA                                                        ;849A31|EB      |      ;
     REP #$20                                                   ;849A32|C220    |      ;
     LDX.W #$0000                                               ;849A34|A20000  |      ;
     LDY.W #$005C                                               ;849A37|A05C00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;849A3A|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;849A3A|223F8084|84803F;
     JMP.W .label2                                              ;849A3E|4C419A  |849A41;
  
  
 .label2:
     REP #$30                                                   ;849A41|C230    |      ;
     LDY.W #$0010                                               ;849A43|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849A46|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A46|B7CC    |0000CC;
     CLC                                                        ;849A48|18      |      ;
     ADC.W #$0001                                               ;849A49|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849A4C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849A4C|97CC    |0000CC;
     RTS                                                        ;849A4E|60      |      ;
  
  
@@ -3613,7 +3613,7 @@ subUnknown849419_0x30:
     SEP #$20                                                   ;849A89|E220    |      ;
     REP #$10                                                   ;849A8B|C210    |      ;
     LDY.W #$003F                                               ;849A8D|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849A90|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A90|B7CC    |0000CC;
     STA.W $09A1                                                ;849A92|8DA109  |0009A1;
     SEP #$20                                                   ;849A95|E220    |      ;
     LDA.B #$44                                                 ;849A97|A944    |      ;
@@ -3631,30 +3631,30 @@ subUnknown849419_0x30:
     REP #$10                                                   ;849AB4|C210    |      ;
     LDY.W #$000E                                               ;849AB6|A00E00  |      ;
     LDA.B #$00                                                 ;849AB9|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849ABB|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849ABB|97CC    |0000CC;
     SEP #$20                                                   ;849ABD|E220    |      ;
     REP #$10                                                   ;849ABF|C210    |      ;
     LDY.W #$0001                                               ;849AC1|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849AC4|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849AC4|B7CC    |0000CC;
     AND.B #$57                                                 ;849AC6|2957    |      ;
     SEP #$20                                                   ;849AC8|E220    |      ;
     REP #$10                                                   ;849ACA|C210    |      ;
     LDY.W #$0001                                               ;849ACC|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;849ACF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;849ACF|97CC    |0000CC;
     JMP.W .label2                                              ;849AD1|4C419A  |849A41;
  
  
-subUnknown849419_0x31:
+fAIAction0x31_UpdateCow:
     REP #$30                                                   ;849AD4|C230    |      ; ANOTHER SPAGHETTI
     REP #$30                                                   ;849AD6|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;849AD8|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;849AD8|A5C9    |0000C9;
     CLC                                                        ;849ADA|18      |      ;
     ADC.W #$0001                                               ;849ADB|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;849ADE|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;849ADE|85C9    |0000C9;
     SEP #$20                                                   ;849AE0|E220    |      ;
     REP #$10                                                   ;849AE2|C210    |      ;
     LDY.W #$003F                                               ;849AE4|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849AE7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849AE7|B7CC    |0000CC;
     SEC                                                        ;849AE9|38      |      ;
     SBC.B #$18                                                 ;849AEA|E918    |      ;
     XBA                                                        ;849AEC|EB      |      ;
@@ -3664,12 +3664,12 @@ subUnknown849419_0x31:
     JSL.L fGameEngine_GetCowData                               ;849AF2|22A7C983|83C9A7;
     REP #$30                                                   ;849AF6|C230    |      ;
     LDY.W #$001A                                               ;849AF8|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849AFB|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849AFB|B7CC    |0000CC;
     LDY.W #$0008                                               ;849AFD|A00800  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849B00|9772    |000072;
     REP #$30                                                   ;849B02|C230    |      ;
     LDY.W #$001C                                               ;849B04|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849B07|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B07|B7CC    |0000CC;
     LDY.W #$000A                                               ;849B09|A00A00  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849B0C|9772    |000072;
     SEP #$20                                                   ;849B0E|E220    |      ;
@@ -3679,7 +3679,7 @@ subUnknown849419_0x31:
     SEP #$20                                                   ;849B16|E220    |      ;
     REP #$10                                                   ;849B18|C210    |      ;
     LDY.W #$000E                                               ;849B1A|A00E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849B1D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B1D|B7CC    |0000CC;
     CMP.B #$C2                                                 ;849B1F|C9C2    |      ;
     BNE CODE_849B26                                            ;849B21|D003    |849B26;
     JMP.W CODE_84A595                                          ;849B23|4C95A5  |84A595;
@@ -3693,10 +3693,10 @@ CODE_849B26:
     SEP #$20                                                   ;849B2E|E220    |      ;
     REP #$10                                                   ;849B30|C210    |      ;
     LDY.W #$000E                                               ;849B32|A00E00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849B35|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B35|B7CC    |0000CC;
     CMP.B #$E0                                                 ;849B37|C9E0    |      ;
     BNE CODE_849B3E                                            ;849B39|D003    |849B3E;
-    JMP.W CODE_84A498                                          ;849B3B|4C98A4  |84A498;
+    JMP.W fAI_Unknwon84A498                                    ;849B3B|4C98A4  |84A498;
  
  
 CODE_849B3E:
@@ -3709,13 +3709,13 @@ CODE_849B45:
     SEP #$20                                                   ;849B45|E220    |      ;
     REP #$10                                                   ;849B47|C210    |      ;
     LDY.W #$000C                                               ;849B49|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849B4C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B4C|B7CC    |0000CC;
     CMP.B #$00                                                 ;849B4E|C900    |      ;
-    BNE CODE_849B55                                            ;849B50|D003    |849B55;
+    BNE fAI_Unknown849B55                                      ;849B50|D003    |849B55;
     JMP.W CODE_84A0B9                                          ;849B52|4CB9A0  |84A0B9;
  
  
-CODE_849B55:
+fAI_Unknown849B55:
     REP #$30                                                   ;849B55|C230    |      ;
     LDA.B nPlayerAction                                        ;849B57|A5D4    |0000D4;
     CMP.W #$000A                                               ;849B59|C90A00  |      ;
@@ -3765,15 +3765,15 @@ CODE_849B91:
 CODE_849B9B:
     LDA.L nDailyFlags+6                                        ;849B9B|AF601F7F|7F1F60;
     AND.W #$0006                                               ;849B9F|290600  |      ;
-    BEQ CODE_849BA7                                            ;849BA2|F003    |849BA7;
+    BEQ fAI_Unknown849BA7                                      ;849BA2|F003    |849BA7;
     JMP.W CODE_84A0B9                                          ;849BA4|4CB9A0  |84A0B9;
  
  
-CODE_849BA7:
+fAI_Unknown849BA7:
     REP #$20                                                   ;849BA7|C220    |      ;
     LDA.W $0128                                                ;849BA9|AD2801  |000128;
     BIT.W #$0080                                               ;849BAC|898000  |      ;
-    BNE CODE_849BEC                                            ;849BAF|D03B    |849BEC;
+    BNE fAI_Unknown849BEC                                      ;849BAF|D03B    |849BEC;
     SEP #$20                                                   ;849BB1|E220    |      ;
     LDY.W #$0000                                               ;849BB3|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849BB6|B772    |000072;
@@ -3803,14 +3803,14 @@ CODE_849BDB:
     LDA.L nDailyFlags                                          ;849BDD|AF5A1F7F|7F1F5A;
     AND.W #$0040                                               ;849BE1|294000  |      ;
     BEQ CODE_849BE9                                            ;849BE4|F003    |849BE9;
-    JMP.W CODE_849DBE                                          ;849BE6|4CBE9D  |849DBE;
+    JMP.W fAI_Unknown849DBE                                    ;849BE6|4CBE9D  |849DBE;
  
  
 CODE_849BE9:
     JMP.W CODE_84A0B9                                          ;849BE9|4CB9A0  |84A0B9;
  
  
-CODE_849BEC:
+fAI_Unknown849BEC:
     SEP #$20                                                   ;849BEC|E220    |      ;
     REP #$10                                                   ;849BEE|C210    |      ;
     LDA.B #$00                                                 ;849BF0|A900    |      ;
@@ -3902,7 +3902,7 @@ CODE_849C86:
     STA.B [ptrUnknown0x72],Y                                   ;849C8D|9772    |000072;
     REP #$20                                                   ;849C8F|C220    |      ;
     LDA.W #$0001                                               ;849C91|A90100  |      ;
-    JSL.L fSubUnk1Unknown_84A5D4                               ;849C94|22D4A584|84A5D4;
+    JSL.L fAI_Unknown84A5D4                                    ;849C94|22D4A584|84A5D4;
     SEP #$20                                                   ;849C98|E220    |      ;
     REP #$10                                                   ;849C9A|C210    |      ;
     LDY.W #$0000                                               ;849C9C|A00000  |      ;
@@ -3944,7 +3944,7 @@ CODE_849CCE:
     SEP #$20                                                   ;849CCE|E220    |      ;
     REP #$10                                                   ;849CD0|C210    |      ;
     LDY.W #$0002                                               ;849CD2|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849CD5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849CD5|B7CC    |0000CC;
     CMP.B #$00                                                 ;849CD7|C900    |      ;
     BEQ CODE_849CE7                                            ;849CD9|F00C    |849CE7;
     CMP.B #$01                                                 ;849CDB|C901    |      ;
@@ -3960,7 +3960,7 @@ CODE_849CE7:
     SEP #$20                                                   ;849CEC|E220    |      ;
     REP #$10                                                   ;849CEE|C210    |      ;
     LDY.W #$003F                                               ;849CF0|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849CF3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849CF3|B7CC    |0000CC;
     LDX.W #$0000                                               ;849CF5|A20000  |      ;
     LDY.W #$0064                                               ;849CF8|A06400  |      ;
     BRA CODE_849D3F                                            ;849CFB|8042    |849D3F;
@@ -3972,7 +3972,7 @@ CODE_849CFD:
     SEP #$20                                                   ;849D02|E220    |      ;
     REP #$10                                                   ;849D04|C210    |      ;
     LDY.W #$003F                                               ;849D06|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D09|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D09|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D0B|A20000  |      ;
     LDY.W #$0065                                               ;849D0E|A06500  |      ;
     BRA CODE_849D3F                                            ;849D11|802C    |849D3F;
@@ -3984,7 +3984,7 @@ CODE_849D13:
     SEP #$20                                                   ;849D18|E220    |      ;
     REP #$10                                                   ;849D1A|C210    |      ;
     LDY.W #$003F                                               ;849D1C|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D1F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D1F|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D21|A20000  |      ;
     LDY.W #$0066                                               ;849D24|A06600  |      ;
     BRA CODE_849D3F                                            ;849D27|8016    |849D3F;
@@ -3996,22 +3996,22 @@ CODE_849D29:
     SEP #$20                                                   ;849D2E|E220    |      ;
     REP #$10                                                   ;849D30|C210    |      ;
     LDY.W #$003F                                               ;849D32|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D35|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D35|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D37|A20000  |      ;
     LDY.W #$0067                                               ;849D3A|A06700  |      ;
     BRA CODE_849D3F                                            ;849D3D|8000    |849D3F;
  
  
 CODE_849D3F:
-    JSL.L fSubUnk1Unknown_84803F                               ;849D3F|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;849D43|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;849D3F|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;849D43|4C6EA4  |84A46E;
  
  
 CODE_849D46:
     SEP #$20                                                   ;849D46|E220    |      ;
     REP #$10                                                   ;849D48|C210    |      ;
     LDY.W #$0002                                               ;849D4A|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D4D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D4D|B7CC    |0000CC;
     CMP.B #$00                                                 ;849D4F|C900    |      ;
     BEQ CODE_849D5F                                            ;849D51|F00C    |849D5F;
     CMP.B #$01                                                 ;849D53|C901    |      ;
@@ -4027,7 +4027,7 @@ CODE_849D5F:
     SEP #$20                                                   ;849D64|E220    |      ;
     REP #$10                                                   ;849D66|C210    |      ;
     LDY.W #$003F                                               ;849D68|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D6B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D6B|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D6D|A20000  |      ;
     LDY.W #$0060                                               ;849D70|A06000  |      ;
     BRA CODE_849DB7                                            ;849D73|8042    |849DB7;
@@ -4039,7 +4039,7 @@ CODE_849D75:
     SEP #$20                                                   ;849D7A|E220    |      ;
     REP #$10                                                   ;849D7C|C210    |      ;
     LDY.W #$003F                                               ;849D7E|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D81|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D81|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D83|A20000  |      ;
     LDY.W #$0061                                               ;849D86|A06100  |      ;
     BRA CODE_849DB7                                            ;849D89|802C    |849DB7;
@@ -4051,7 +4051,7 @@ CODE_849D8B:
     SEP #$20                                                   ;849D90|E220    |      ;
     REP #$10                                                   ;849D92|C210    |      ;
     LDY.W #$003F                                               ;849D94|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849D97|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D97|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D99|A20000  |      ;
     LDY.W #$0062                                               ;849D9C|A06200  |      ;
     BRA CODE_849DB7                                            ;849D9F|8016    |849DB7;
@@ -4063,18 +4063,18 @@ CODE_849DA1:
     SEP #$20                                                   ;849DA6|E220    |      ;
     REP #$10                                                   ;849DA8|C210    |      ;
     LDY.W #$003F                                               ;849DAA|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849DAD|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849DAD|B7CC    |0000CC;
     LDX.W #$0000                                               ;849DAF|A20000  |      ;
     LDY.W #$0063                                               ;849DB2|A06300  |      ;
     BRA CODE_849DB7                                            ;849DB5|8000    |849DB7;
  
  
 CODE_849DB7:
-    JSL.L fSubUnk1Unknown_84803F                               ;849DB7|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;849DBB|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;849DB7|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;849DBB|4C6EA4  |84A46E;
  
  
-CODE_849DBE:
+fAI_Unknown849DBE:
     SEP #$20                                                   ;849DBE|E220    |      ;
     REP #$10                                                   ;849DC0|C210    |      ;
     LDA.W nToolEquipped                                        ;849DC2|AD2109  |000921;
@@ -4203,7 +4203,7 @@ CODE_849E69:
     STA.B [ptrUnknown0x72],Y                                   ;849E88|9772    |000072;
     REP #$20                                                   ;849E8A|C220    |      ;
     LDA.W #$000A                                               ;849E8C|A90A00  |      ;
-    JSL.L fSubUnk1Unknown_84A5D4                               ;849E8F|22D4A584|84A5D4;
+    JSL.L fAI_Unknown84A5D4                                    ;849E8F|22D4A584|84A5D4;
     SEP #$20                                                   ;849E93|E220    |      ;
     LDY.W #$0003                                               ;849E95|A00300  |      ;
     LDA.B #$15                                                 ;849E98|A915    |      ;
@@ -4233,7 +4233,7 @@ CODE_849EBE:
     STA.B [ptrUnknown0x72],Y                                   ;849EC5|9772    |000072;
     REP #$20                                                   ;849EC7|C220    |      ;
     LDA.W #$0003                                               ;849EC9|A90300  |      ;
-    JSL.L fSubUnk1Unknown_84A5D4                               ;849ECC|22D4A584|84A5D4;
+    JSL.L fAI_Unknown84A5D4                                    ;849ECC|22D4A584|84A5D4;
     SEP #$20                                                   ;849ED0|E220    |      ;
     REP #$10                                                   ;849ED2|C210    |      ;
     LDY.W #$0000                                               ;849ED4|A00000  |      ;
@@ -4300,7 +4300,7 @@ CODE_849F24:
     SEP #$20                                                   ;849F2B|E220    |      ;
     REP #$10                                                   ;849F2D|C210    |      ;
     LDY.W #$0002                                               ;849F2F|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849F32|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F32|B7CC    |0000CC;
     BEQ CODE_849F81                                            ;849F34|F04B    |849F81;
     CMP.B #$02                                                 ;849F36|C902    |      ;
     BEQ CODE_849F81                                            ;849F38|F047    |849F81;
@@ -4317,7 +4317,7 @@ CODE_849F43:
     SEP #$20                                                   ;849F4A|E220    |      ;
     REP #$10                                                   ;849F4C|C210    |      ;
     LDY.W #$0002                                               ;849F4E|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849F51|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F51|B7CC    |0000CC;
     BEQ CODE_849F81                                            ;849F53|F02C    |849F81;
     CMP.B #$02                                                 ;849F55|C902    |      ;
     BEQ CODE_849F81                                            ;849F57|F028    |849F81;
@@ -4334,7 +4334,7 @@ CODE_849F62:
     SEP #$20                                                   ;849F69|E220    |      ;
     REP #$10                                                   ;849F6B|C210    |      ;
     LDY.W #$0002                                               ;849F6D|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849F70|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F70|B7CC    |0000CC;
     BEQ CODE_849F81                                            ;849F72|F00D    |849F81;
     CMP.B #$02                                                 ;849F74|C902    |      ;
     BEQ CODE_849F81                                            ;849F76|F009    |849F81;
@@ -4360,10 +4360,10 @@ CODE_849F91:
     SEP #$20                                                   ;849F96|E220    |      ;
     REP #$10                                                   ;849F98|C210    |      ;
     LDY.W #$003F                                               ;849F9A|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849F9D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F9D|B7CC    |0000CC;
     LDX.W #$0000                                               ;849F9F|A20000  |      ;
     LDY.B n16TempVar1                                          ;849FA2|A47E    |00007E;
-    JSL.L fSubUnk1Unknown_84803F                               ;849FA4|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;849FA4|223F8084|84803F;
     SEP #$20                                                   ;849FA8|E220    |      ;
     LDY.W #$0005                                               ;849FAA|A00500  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849FAD|B772    |000072;
@@ -4393,7 +4393,7 @@ CODE_849FD0:
     SEP #$20                                                   ;849FD0|E220    |      ;
     REP #$10                                                   ;849FD2|C210    |      ;
     LDY.W #$0002                                               ;849FD4|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849FD7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849FD7|B7CC    |0000CC;
     CMP.B #$00                                                 ;849FD9|C900    |      ;
     BEQ CODE_849FE9                                            ;849FDB|F00C    |849FE9;
     CMP.B #$01                                                 ;849FDD|C901    |      ;
@@ -4409,7 +4409,7 @@ CODE_849FE9:
     SEP #$20                                                   ;849FEE|E220    |      ;
     REP #$10                                                   ;849FF0|C210    |      ;
     LDY.W #$003F                                               ;849FF2|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;849FF5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;849FF5|B7CC    |0000CC;
     LDX.W #$0000                                               ;849FF7|A20000  |      ;
     LDY.W #$000C                                               ;849FFA|A00C00  |      ;
     JMP.W CODE_84A0B5                                          ;849FFD|4CB5A0  |84A0B5;
@@ -4421,7 +4421,7 @@ CODE_84A000:
     SEP #$20                                                   ;84A005|E220    |      ;
     REP #$10                                                   ;84A007|C210    |      ;
     LDY.W #$003F                                               ;84A009|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A00C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A00C|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A00E|A20000  |      ;
     LDY.W #$000D                                               ;84A011|A00D00  |      ;
     JMP.W CODE_84A0B5                                          ;84A014|4CB5A0  |84A0B5;
@@ -4433,7 +4433,7 @@ CODE_84A017:
     SEP #$20                                                   ;84A01C|E220    |      ;
     REP #$10                                                   ;84A01E|C210    |      ;
     LDY.W #$003F                                               ;84A020|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A023|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A023|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A025|A20000  |      ;
     LDY.W #$000E                                               ;84A028|A00E00  |      ;
     JMP.W CODE_84A0B5                                          ;84A02B|4CB5A0  |84A0B5;
@@ -4445,7 +4445,7 @@ CODE_84A02E:
     SEP #$20                                                   ;84A033|E220    |      ;
     REP #$10                                                   ;84A035|C210    |      ;
     LDY.W #$003F                                               ;84A037|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A03A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A03A|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A03C|A20000  |      ;
     LDY.W #$000F                                               ;84A03F|A00F00  |      ;
     BRA CODE_84A0B5                                            ;84A042|8071    |84A0B5;
@@ -4455,7 +4455,7 @@ CODE_84A044:
     SEP #$20                                                   ;84A044|E220    |      ;
     REP #$10                                                   ;84A046|C210    |      ;
     LDY.W #$0002                                               ;84A048|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A04B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A04B|B7CC    |0000CC;
     CMP.B #$00                                                 ;84A04D|C900    |      ;
     BEQ CODE_84A05D                                            ;84A04F|F00C    |84A05D;
     CMP.B #$01                                                 ;84A051|C901    |      ;
@@ -4471,7 +4471,7 @@ CODE_84A05D:
     SEP #$20                                                   ;84A062|E220    |      ;
     REP #$10                                                   ;84A064|C210    |      ;
     LDY.W #$003F                                               ;84A066|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A069|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A069|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A06B|A20000  |      ;
     LDY.W #$0082                                               ;84A06E|A08200  |      ;
     BRA CODE_84A0B5                                            ;84A071|8042    |84A0B5;
@@ -4483,7 +4483,7 @@ CODE_84A073:
     SEP #$20                                                   ;84A078|E220    |      ;
     REP #$10                                                   ;84A07A|C210    |      ;
     LDY.W #$003F                                               ;84A07C|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A07F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A07F|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A081|A20000  |      ;
     LDY.W #$0083                                               ;84A084|A08300  |      ;
     BRA CODE_84A0B5                                            ;84A087|802C    |84A0B5;
@@ -4495,7 +4495,7 @@ CODE_84A089:
     SEP #$20                                                   ;84A08E|E220    |      ;
     REP #$10                                                   ;84A090|C210    |      ;
     LDY.W #$003F                                               ;84A092|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A095|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A095|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A097|A20000  |      ;
     LDY.W #$0084                                               ;84A09A|A08400  |      ;
     BRA CODE_84A0B5                                            ;84A09D|8016    |84A0B5;
@@ -4507,14 +4507,14 @@ CODE_84A09F:
     SEP #$20                                                   ;84A0A4|E220    |      ;
     REP #$10                                                   ;84A0A6|C210    |      ;
     LDY.W #$003F                                               ;84A0A8|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A0AB|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A0AB|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A0AD|A20000  |      ;
     LDY.W #$0085                                               ;84A0B0|A08500  |      ;
     BRA CODE_84A0B5                                            ;84A0B3|8000    |84A0B5;
  
  
 CODE_84A0B5:
-    JSL.L fSubUnk1Unknown_84803F                               ;84A0B5|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A0B5|223F8084|84803F;
  
 CODE_84A0B9:
     SEP #$20                                                   ;84A0B9|E220    |      ;
@@ -4540,14 +4540,14 @@ CODE_84A0D0:
  
  
 CODE_84A0D9:
-    JMP.W CODE_84A46E                                          ;84A0D9|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A0D9|4C6EA4  |84A46E;
  
  
 CODE_84A0DC:
     SEP #$20                                                   ;84A0DC|E220    |      ;
     REP #$10                                                   ;84A0DE|C210    |      ;
     LDY.W #$003F                                               ;84A0E0|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A0E3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A0E3|B7CC    |0000CC;
     SEC                                                        ;84A0E5|38      |      ;
     SBC.B #$18                                                 ;84A0E6|E918    |      ;
     XBA                                                        ;84A0E8|EB      |      ;
@@ -4561,7 +4561,7 @@ CODE_84A0DC:
     BEQ CODE_84A0FF                                            ;84A0F6|F007    |84A0FF;
     INC A                                                      ;84A0F8|1A      |      ;
     STA.W $0953,X                                              ;84A0F9|9D5309  |000953;
-    JMP.W CODE_84A46E                                          ;84A0FC|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A0FC|4C6EA4  |84A46E;
  
  
 CODE_84A0FF:
@@ -4597,15 +4597,15 @@ CODE_84A11D:
     SEP #$20                                                   ;84A12C|E220    |      ;
     REP #$10                                                   ;84A12E|C210    |      ;
     LDY.W #$003F                                               ;84A130|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A133|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A133|B7CC    |0000CC;
     XBA                                                        ;84A135|EB      |      ;
     LDA.B #$00                                                 ;84A136|A900    |      ;
     XBA                                                        ;84A138|EB      |      ;
     REP #$20                                                   ;84A139|C220    |      ;
     LDX.W #$0000                                               ;84A13B|A20000  |      ;
     LDY.W #$0078                                               ;84A13E|A07800  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A141|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A145|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A141|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A145|4C6EA4  |84A46E;
  
  
 CODE_84A148:
@@ -4619,15 +4619,15 @@ CODE_84A148:
     SEP #$20                                                   ;84A157|E220    |      ;
     REP #$10                                                   ;84A159|C210    |      ;
     LDY.W #$003F                                               ;84A15B|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A15E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A15E|B7CC    |0000CC;
     XBA                                                        ;84A160|EB      |      ;
     LDA.B #$00                                                 ;84A161|A900    |      ;
     XBA                                                        ;84A163|EB      |      ;
     REP #$20                                                   ;84A164|C220    |      ;
     LDX.W #$0000                                               ;84A166|A20000  |      ;
     LDY.W #$0079                                               ;84A169|A07900  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A16C|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A170|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A16C|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A170|4C6EA4  |84A46E;
  
  
 CODE_84A173:
@@ -4641,15 +4641,15 @@ CODE_84A173:
     SEP #$20                                                   ;84A182|E220    |      ;
     REP #$10                                                   ;84A184|C210    |      ;
     LDY.W #$003F                                               ;84A186|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A189|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A189|B7CC    |0000CC;
     XBA                                                        ;84A18B|EB      |      ;
     LDA.B #$00                                                 ;84A18C|A900    |      ;
     XBA                                                        ;84A18E|EB      |      ;
     REP #$20                                                   ;84A18F|C220    |      ;
     LDX.W #$0000                                               ;84A191|A20000  |      ;
     LDY.W #$007A                                               ;84A194|A07A00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A197|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A19B|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A197|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A19B|4C6EA4  |84A46E;
  
  
 CODE_84A19E:
@@ -4663,22 +4663,22 @@ CODE_84A19E:
     SEP #$20                                                   ;84A1AD|E220    |      ;
     REP #$10                                                   ;84A1AF|C210    |      ;
     LDY.W #$003F                                               ;84A1B1|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A1B4|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A1B4|B7CC    |0000CC;
     XBA                                                        ;84A1B6|EB      |      ;
     LDA.B #$00                                                 ;84A1B7|A900    |      ;
     XBA                                                        ;84A1B9|EB      |      ;
     REP #$20                                                   ;84A1BA|C220    |      ;
     LDX.W #$0000                                               ;84A1BC|A20000  |      ;
     LDY.W #$007B                                               ;84A1BF|A07B00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A1C2|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A1C6|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A1C2|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A1C6|4C6EA4  |84A46E;
  
  
 CODE_84A1C9:
     SEP #$20                                                   ;84A1C9|E220    |      ;
     REP #$10                                                   ;84A1CB|C210    |      ;
     LDY.W #$003F                                               ;84A1CD|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A1D0|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A1D0|B7CC    |0000CC;
     SEC                                                        ;84A1D2|38      |      ;
     SBC.B #$18                                                 ;84A1D3|E918    |      ;
     XBA                                                        ;84A1D5|EB      |      ;
@@ -4692,7 +4692,7 @@ CODE_84A1C9:
     BEQ CODE_84A1EC                                            ;84A1E3|F007    |84A1EC;
     INC A                                                      ;84A1E5|1A      |      ;
     STA.W $0953,X                                              ;84A1E6|9D5309  |000953;
-    JMP.W CODE_84A46E                                          ;84A1E9|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A1E9|4C6EA4  |84A46E;
  
  
 CODE_84A1EC:
@@ -4728,15 +4728,15 @@ CODE_84A20A:
     SEP #$20                                                   ;84A219|E220    |      ;
     REP #$10                                                   ;84A21B|C210    |      ;
     LDY.W #$003F                                               ;84A21D|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A220|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A220|B7CC    |0000CC;
     XBA                                                        ;84A222|EB      |      ;
     LDA.B #$00                                                 ;84A223|A900    |      ;
     XBA                                                        ;84A225|EB      |      ;
     REP #$20                                                   ;84A226|C220    |      ;
     LDX.W #$0000                                               ;84A228|A20000  |      ;
     LDY.W #$0074                                               ;84A22B|A07400  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A22E|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A232|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A22E|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A232|4C6EA4  |84A46E;
  
  
 CODE_84A235:
@@ -4750,15 +4750,15 @@ CODE_84A235:
     SEP #$20                                                   ;84A244|E220    |      ;
     REP #$10                                                   ;84A246|C210    |      ;
     LDY.W #$003F                                               ;84A248|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A24B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A24B|B7CC    |0000CC;
     XBA                                                        ;84A24D|EB      |      ;
     LDA.B #$00                                                 ;84A24E|A900    |      ;
     XBA                                                        ;84A250|EB      |      ;
     REP #$20                                                   ;84A251|C220    |      ;
     LDX.W #$0000                                               ;84A253|A20000  |      ;
     LDY.W #$0076                                               ;84A256|A07600  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A259|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A25D|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A259|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A25D|4C6EA4  |84A46E;
  
  
 CODE_84A260:
@@ -4772,15 +4772,15 @@ CODE_84A260:
     SEP #$20                                                   ;84A26F|E220    |      ;
     REP #$10                                                   ;84A271|C210    |      ;
     LDY.W #$003F                                               ;84A273|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A276|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A276|B7CC    |0000CC;
     XBA                                                        ;84A278|EB      |      ;
     LDA.B #$00                                                 ;84A279|A900    |      ;
     XBA                                                        ;84A27B|EB      |      ;
     REP #$20                                                   ;84A27C|C220    |      ;
     LDX.W #$0000                                               ;84A27E|A20000  |      ;
     LDY.W #$0077                                               ;84A281|A07700  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A284|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A288|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A284|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A288|4C6EA4  |84A46E;
  
  
 CODE_84A28B:
@@ -4794,22 +4794,22 @@ CODE_84A28B:
     SEP #$20                                                   ;84A29A|E220    |      ;
     REP #$10                                                   ;84A29C|C210    |      ;
     LDY.W #$003F                                               ;84A29E|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A2A1|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A2A1|B7CC    |0000CC;
     XBA                                                        ;84A2A3|EB      |      ;
     LDA.B #$00                                                 ;84A2A4|A900    |      ;
     XBA                                                        ;84A2A6|EB      |      ;
     REP #$20                                                   ;84A2A7|C220    |      ;
     LDX.W #$0000                                               ;84A2A9|A20000  |      ;
     LDY.W #$0075                                               ;84A2AC|A07500  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A2AF|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A2B3|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A2AF|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A2B3|4C6EA4  |84A46E;
  
  
 CODE_84A2B6:
     SEP #$20                                                   ;84A2B6|E220    |      ;
     REP #$10                                                   ;84A2B8|C210    |      ;
     LDY.W #$003F                                               ;84A2BA|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A2BD|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A2BD|B7CC    |0000CC;
     SEC                                                        ;84A2BF|38      |      ;
     SBC.B #$18                                                 ;84A2C0|E918    |      ;
     XBA                                                        ;84A2C2|EB      |      ;
@@ -4823,7 +4823,7 @@ CODE_84A2B6:
     BEQ CODE_84A2D9                                            ;84A2D0|F007    |84A2D9;
     INC A                                                      ;84A2D2|1A      |      ;
     STA.W $0953,X                                              ;84A2D3|9D5309  |000953;
-    JMP.W CODE_84A46E                                          ;84A2D6|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A2D6|4C6EA4  |84A46E;
  
  
 CODE_84A2D9:
@@ -4834,7 +4834,7 @@ CODE_84A2D9:
     LDA.B [ptrUnknown0x72],Y                                   ;84A2E3|B772    |000072;
     AND.B #$40                                                 ;84A2E5|2940    |      ;
     BEQ CODE_84A2EC                                            ;84A2E7|F003    |84A2EC;
-    JMP.W CODE_84A46E                                          ;84A2E9|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A2E9|4C6EA4  |84A46E;
  
  
 CODE_84A2EC:
@@ -4892,15 +4892,15 @@ CODE_84A338:
     SEP #$20                                                   ;84A338|E220    |      ;
     REP #$10                                                   ;84A33A|C210    |      ;
     LDY.W #$003F                                               ;84A33C|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A33F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A33F|B7CC    |0000CC;
     XBA                                                        ;84A341|EB      |      ;
     LDA.B #$00                                                 ;84A342|A900    |      ;
     XBA                                                        ;84A344|EB      |      ;
     REP #$20                                                   ;84A345|C220    |      ;
     TXY                                                        ;84A347|9B      |      ;
     LDX.W #$0000                                               ;84A348|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A34B|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A34F|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A34B|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A34F|4C6EA4  |84A46E;
  
  
 CODE_84A352:
@@ -4935,15 +4935,15 @@ CODE_84A37F:
     SEP #$20                                                   ;84A37F|E220    |      ;
     REP #$10                                                   ;84A381|C210    |      ;
     LDY.W #$003F                                               ;84A383|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A386|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A386|B7CC    |0000CC;
     XBA                                                        ;84A388|EB      |      ;
     LDA.B #$00                                                 ;84A389|A900    |      ;
     XBA                                                        ;84A38B|EB      |      ;
     REP #$20                                                   ;84A38C|C220    |      ;
     TXY                                                        ;84A38E|9B      |      ;
     LDX.W #$0000                                               ;84A38F|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A392|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A396|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A392|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A396|4C6EA4  |84A46E;
  
  
 CODE_84A399:
@@ -4978,15 +4978,15 @@ CODE_84A3C6:
     SEP #$20                                                   ;84A3C6|E220    |      ;
     REP #$10                                                   ;84A3C8|C210    |      ;
     LDY.W #$003F                                               ;84A3CA|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A3CD|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A3CD|B7CC    |0000CC;
     XBA                                                        ;84A3CF|EB      |      ;
     LDA.B #$00                                                 ;84A3D0|A900    |      ;
     XBA                                                        ;84A3D2|EB      |      ;
     REP #$20                                                   ;84A3D3|C220    |      ;
     TXY                                                        ;84A3D5|9B      |      ;
     LDX.W #$0000                                               ;84A3D6|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A3D9|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A3DD|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A3D9|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A3DD|4C6EA4  |84A46E;
  
  
 CODE_84A3E0:
@@ -5021,15 +5021,15 @@ CODE_84A40D:
     SEP #$20                                                   ;84A40D|E220    |      ;
     REP #$10                                                   ;84A40F|C210    |      ;
     LDY.W #$003F                                               ;84A411|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A414|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A414|B7CC    |0000CC;
     XBA                                                        ;84A416|EB      |      ;
     LDA.B #$00                                                 ;84A417|A900    |      ;
     XBA                                                        ;84A419|EB      |      ;
     REP #$20                                                   ;84A41A|C220    |      ;
     TXY                                                        ;84A41C|9B      |      ;
     LDX.W #$0000                                               ;84A41D|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A420|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A424|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A420|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A424|4C6EA4  |84A46E;
  
  
 CODE_84A427:
@@ -5064,18 +5064,18 @@ CODE_84A454:
     SEP #$20                                                   ;84A454|E220    |      ;
     REP #$10                                                   ;84A456|C210    |      ;
     LDY.W #$003F                                               ;84A458|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A45B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A45B|B7CC    |0000CC;
     XBA                                                        ;84A45D|EB      |      ;
     LDA.B #$00                                                 ;84A45E|A900    |      ;
     XBA                                                        ;84A460|EB      |      ;
     REP #$20                                                   ;84A461|C220    |      ;
     TXY                                                        ;84A463|9B      |      ;
     LDX.W #$0000                                               ;84A464|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A467|223F8084|84803F;
-    JMP.W CODE_84A46E                                          ;84A46B|4C6EA4  |84A46E;
+    JSL.L fAI_Unknown84803F                                    ;84A467|223F8084|84803F;
+    JMP.W fAI_Unknown84A46E                                    ;84A46B|4C6EA4  |84A46E;
  
  
-CODE_84A46E:
+fAI_Unknown84A46E:
     REP #$30                                                   ;84A46E|C230    |      ;
     LDA.L nDailyFlags                                          ;84A470|AF5A1F7F|7F1F5A;
     AND.W #$0010                                               ;84A474|291000  |      ;
@@ -5087,22 +5087,22 @@ CODE_84A47C:
     SEP #$20                                                   ;84A47C|E220    |      ;
     REP #$10                                                   ;84A47E|C210    |      ;
     LDY.W #$000C                                               ;84A480|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A483|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A483|B7CC    |0000CC;
     BEQ CODE_84A48A                                            ;84A485|F003    |84A48A;
-    JMP.W fSubUnk1Unknown_84A607                               ;84A487|4C07A6  |84A607;
+    JMP.W fAI_Unknown84A607                                    ;84A487|4C07A6  |84A607;
  
  
 CODE_84A48A:
     REP #$30                                                   ;84A48A|C230    |      ;
     LDY.W #$0010                                               ;84A48C|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A48F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A48F|B7CC    |0000CC;
     CLC                                                        ;84A491|18      |      ;
     ADC.W #$0001                                               ;84A492|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A495|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A495|97CC    |0000CC;
     RTS                                                        ;84A497|60      |      ;
  
  
-CODE_84A498:
+fAI_Unknwon84A498:
     REP #$30                                                   ;84A498|C230    |      ;
     LDA.L nDailyFlags                                          ;84A49A|AF5A1F7F|7F1F5A;
     AND.W #$0004                                               ;84A49E|290400  |      ;
@@ -5148,7 +5148,7 @@ CODE_84A4F5:
     SEP #$20                                                   ;84A4F5|E220    |      ;
     REP #$10                                                   ;84A4F7|C210    |      ;
     LDY.W #$003F                                               ;84A4F9|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A4FC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A4FC|B7CC    |0000CC;
     STA.W $09A0                                                ;84A4FE|8DA009  |0009A0;
     SEP #$20                                                   ;84A501|E220    |      ;
     LDA.B #$43                                                 ;84A503|A943    |      ;
@@ -5166,17 +5166,17 @@ CODE_84A4F5:
     REP #$10                                                   ;84A520|C210    |      ;
     LDY.W #$000E                                               ;84A522|A00E00  |      ;
     LDA.B #$00                                                 ;84A525|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A527|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A527|97CC    |0000CC;
     SEP #$20                                                   ;84A529|E220    |      ;
     REP #$10                                                   ;84A52B|C210    |      ;
     LDY.W #$0001                                               ;84A52D|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A530|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A530|B7CC    |0000CC;
     AND.B #$57                                                 ;84A532|2957    |      ;
     SEP #$20                                                   ;84A534|E220    |      ;
     REP #$10                                                   ;84A536|C210    |      ;
     LDY.W #$0001                                               ;84A538|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A53B|97CC    |0000CC;
-    JMP.W CODE_84A46E                                          ;84A53D|4C6EA4  |84A46E;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A53B|97CC    |0000CC;
+    JMP.W fAI_Unknown84A46E                                    ;84A53D|4C6EA4  |84A46E;
  
  
 CODE_84A540:
@@ -5184,22 +5184,22 @@ CODE_84A540:
     REP #$10                                                   ;84A542|C210    |      ;
     LDY.W #$0000                                               ;84A544|A00000  |      ;
     LDA.B #$00                                                 ;84A547|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A549|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A549|97CC    |0000CC;
     SEP #$20                                                   ;84A54B|E220    |      ;
     REP #$10                                                   ;84A54D|C210    |      ;
     LDY.W #$0001                                               ;84A54F|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A552|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A552|B7CC    |0000CC;
     ORA.B #$40                                                 ;84A554|0940    |      ;
     SEP #$20                                                   ;84A556|E220    |      ;
     REP #$10                                                   ;84A558|C210    |      ;
     LDY.W #$0001                                               ;84A55A|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A55D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A55D|97CC    |0000CC;
     REP #$30                                                   ;84A55F|C230    |      ;
     LDA.W #$0000                                               ;84A561|A90000  |      ;
     SEP #$20                                                   ;84A564|E220    |      ;
     REP #$10                                                   ;84A566|C210    |      ;
     LDY.W #$003F                                               ;84A568|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A56B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A56B|B7CC    |0000CC;
     SEC                                                        ;84A56D|38      |      ;
     SBC.B #$18                                                 ;84A56E|E918    |      ;
     REP #$20                                                   ;84A570|C220    |      ;
@@ -5217,7 +5217,7 @@ CODE_84A540:
     LDY.W #$000A                                               ;84A589|A00A00  |      ;
     LDA.L aGameEngine_AddCowData,X                             ;84A58C|BF44CA83|83CA44;
     STA.B [ptrUnknown0x72],Y                                   ;84A590|9772    |000072;
-    JMP.W CODE_84A46E                                          ;84A592|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A592|4C6EA4  |84A46E;
  
  
 CODE_84A595:
@@ -5225,16 +5225,16 @@ CODE_84A595:
     REP #$10                                                   ;84A597|C210    |      ;
     LDY.W #$0000                                               ;84A599|A00000  |      ;
     LDA.B #$00                                                 ;84A59C|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A59E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A59E|97CC    |0000CC;
     SEP #$20                                                   ;84A5A0|E220    |      ;
     REP #$10                                                   ;84A5A2|C210    |      ;
     LDY.W #$0001                                               ;84A5A4|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A5A7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A5A7|B7CC    |0000CC;
     ORA.B #$40                                                 ;84A5A9|0940    |      ;
     SEP #$20                                                   ;84A5AB|E220    |      ;
     REP #$10                                                   ;84A5AD|C210    |      ;
     LDY.W #$0001                                               ;84A5AF|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A5B2|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A5B2|97CC    |0000CC;
     SEP #$20                                                   ;84A5B4|E220    |      ;
     LDY.W #$0002                                               ;84A5B6|A00200  |      ;
     LDA.L nCurrentSeasonID                                     ;84A5B9|AF191F7F|7F1F19;
@@ -5246,10 +5246,10 @@ CODE_84A595:
     LDY.W #$000A                                               ;84A5C9|A00A00  |      ;
     LDA.W #$0178                                               ;84A5CC|A97801  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84A5CF|9772    |000072;
-    JMP.W CODE_84A46E                                          ;84A5D1|4C6EA4  |84A46E;
+    JMP.W fAI_Unknown84A46E                                    ;84A5D1|4C6EA4  |84A46E;
  
  
-fSubUnk1Unknown_84A5D4:
+fAI_Unknown84A5D4:
     REP #$30                                                   ;84A5D4|C230    |      ;
     STA.B n16TempVar1                                          ;84A5D6|857E    |00007E;
     LDA.W #$0000                                               ;84A5D8|A90000  |      ;
@@ -5285,7 +5285,7 @@ fSubUnk1Unknown_84A5D4:
     RTL                                                        ;84A606|6B      |      ;
  
  
-fSubUnk1Unknown_84A607:
+fAI_Unknown84A607:
     SEP #$20                                                   ;84A607|E220    |      ;
     REP #$10                                                   ;84A609|C210    |      ;
     LDY.W #$0001                                               ;84A60B|A00100  |      ;
@@ -5303,7 +5303,7 @@ CODE_84A617:
     SEP #$20                                                   ;84A620|E220    |      ;
     REP #$10                                                   ;84A622|C210    |      ;
     LDY.W #$003F                                               ;84A624|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A627|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A627|B7CC    |0000CC;
     SEC                                                        ;84A629|38      |      ;
     SBC.B #$18                                                 ;84A62A|E918    |      ;
     XBA                                                        ;84A62C|EB      |      ;
@@ -5343,24 +5343,24 @@ CODE_84A65A:
     SEP #$20                                                   ;84A65A|E220    |      ;
     REP #$10                                                   ;84A65C|C210    |      ;
     LDY.W #$0001                                               ;84A65E|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A661|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A661|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A663|0928    |      ;
     SEP #$20                                                   ;84A665|E220    |      ;
     REP #$10                                                   ;84A667|C210    |      ;
     LDY.W #$0001                                               ;84A669|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A66C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A66C|97CC    |0000CC;
     REP #$30                                                   ;84A66E|C230    |      ;
     SEP #$20                                                   ;84A670|E220    |      ;
     REP #$10                                                   ;84A672|C210    |      ;
     LDY.W #$003F                                               ;84A674|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A677|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A677|B7CC    |0000CC;
     XBA                                                        ;84A679|EB      |      ;
     LDA.B #$00                                                 ;84A67A|A900    |      ;
     XBA                                                        ;84A67C|EB      |      ;
     REP #$20                                                   ;84A67D|C220    |      ;
     LDX.W #$0000                                               ;84A67F|A20000  |      ;
     LDY.W #$0078                                               ;84A682|A07800  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A685|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A685|223F8084|84803F;
     JMP.W CODE_84A70E                                          ;84A689|4C0EA7  |84A70E;
  
  
@@ -5368,24 +5368,24 @@ CODE_84A68C:
     SEP #$20                                                   ;84A68C|E220    |      ;
     REP #$10                                                   ;84A68E|C210    |      ;
     LDY.W #$0001                                               ;84A690|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A693|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A693|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A695|0928    |      ;
     SEP #$20                                                   ;84A697|E220    |      ;
     REP #$10                                                   ;84A699|C210    |      ;
     LDY.W #$0001                                               ;84A69B|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A69E|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A69E|97CC    |0000CC;
     REP #$30                                                   ;84A6A0|C230    |      ;
     SEP #$20                                                   ;84A6A2|E220    |      ;
     REP #$10                                                   ;84A6A4|C210    |      ;
     LDY.W #$003F                                               ;84A6A6|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A6A9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A6A9|B7CC    |0000CC;
     XBA                                                        ;84A6AB|EB      |      ;
     LDA.B #$00                                                 ;84A6AC|A900    |      ;
     XBA                                                        ;84A6AE|EB      |      ;
     REP #$20                                                   ;84A6AF|C220    |      ;
     LDX.W #$0000                                               ;84A6B1|A20000  |      ;
     LDY.W #$0074                                               ;84A6B4|A07400  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A6B7|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A6B7|223F8084|84803F;
     BRA CODE_84A70E                                            ;84A6BB|8051    |84A70E;
  
  
@@ -5417,24 +5417,24 @@ CODE_84A6E1:
     SEP #$20                                                   ;84A6E1|E220    |      ;
     REP #$10                                                   ;84A6E3|C210    |      ;
     LDY.W #$0001                                               ;84A6E5|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A6E8|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A6E8|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A6EA|0928    |      ;
     SEP #$20                                                   ;84A6EC|E220    |      ;
     REP #$10                                                   ;84A6EE|C210    |      ;
     LDY.W #$0001                                               ;84A6F0|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A6F3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A6F3|97CC    |0000CC;
     REP #$30                                                   ;84A6F5|C230    |      ;
     SEP #$20                                                   ;84A6F7|E220    |      ;
     REP #$10                                                   ;84A6F9|C210    |      ;
     LDY.W #$003F                                               ;84A6FB|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A6FE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A6FE|B7CC    |0000CC;
     XBA                                                        ;84A700|EB      |      ;
     LDA.B #$00                                                 ;84A701|A900    |      ;
     XBA                                                        ;84A703|EB      |      ;
     REP #$20                                                   ;84A704|C220    |      ;
     TXY                                                        ;84A706|9B      |      ;
     LDX.W #$0000                                               ;84A707|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A70A|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A70A|223F8084|84803F;
  
 CODE_84A70E:
     REP #$30                                                   ;84A70E|C230    |      ;
@@ -5487,7 +5487,7 @@ CODE_84A750:
     SEP #$20                                                   ;84A759|E220    |      ;
     REP #$10                                                   ;84A75B|C210    |      ;
     LDY.W #$003F                                               ;84A75D|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A760|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A760|B7CC    |0000CC;
     SEC                                                        ;84A762|38      |      ;
     SBC.B #$18                                                 ;84A763|E918    |      ;
     XBA                                                        ;84A765|EB      |      ;
@@ -5527,24 +5527,24 @@ CODE_84A793:
     SEP #$20                                                   ;84A793|E220    |      ;
     REP #$10                                                   ;84A795|C210    |      ;
     LDY.W #$0001                                               ;84A797|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A79A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A79A|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A79C|0928    |      ;
     SEP #$20                                                   ;84A79E|E220    |      ;
     REP #$10                                                   ;84A7A0|C210    |      ;
     LDY.W #$0001                                               ;84A7A2|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A7A5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A7A5|97CC    |0000CC;
     REP #$30                                                   ;84A7A7|C230    |      ;
     SEP #$20                                                   ;84A7A9|E220    |      ;
     REP #$10                                                   ;84A7AB|C210    |      ;
     LDY.W #$003F                                               ;84A7AD|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A7B0|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A7B0|B7CC    |0000CC;
     XBA                                                        ;84A7B2|EB      |      ;
     LDA.B #$00                                                 ;84A7B3|A900    |      ;
     XBA                                                        ;84A7B5|EB      |      ;
     REP #$20                                                   ;84A7B6|C220    |      ;
     LDX.W #$0000                                               ;84A7B8|A20000  |      ;
     LDY.W #$0078                                               ;84A7BB|A07800  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A7BE|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A7BE|223F8084|84803F;
     JMP.W CODE_84A84A                                          ;84A7C2|4C4AA8  |84A84A;
  
  
@@ -5552,24 +5552,24 @@ CODE_84A7C5:
     SEP #$20                                                   ;84A7C5|E220    |      ;
     REP #$10                                                   ;84A7C7|C210    |      ;
     LDY.W #$0001                                               ;84A7C9|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A7CC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A7CC|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A7CE|0928    |      ;
     SEP #$20                                                   ;84A7D0|E220    |      ;
     REP #$10                                                   ;84A7D2|C210    |      ;
     LDY.W #$0001                                               ;84A7D4|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A7D7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A7D7|97CC    |0000CC;
     REP #$30                                                   ;84A7D9|C230    |      ;
     SEP #$20                                                   ;84A7DB|E220    |      ;
     REP #$10                                                   ;84A7DD|C210    |      ;
     LDY.W #$003F                                               ;84A7DF|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A7E2|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A7E2|B7CC    |0000CC;
     XBA                                                        ;84A7E4|EB      |      ;
     LDA.B #$00                                                 ;84A7E5|A900    |      ;
     XBA                                                        ;84A7E7|EB      |      ;
     REP #$20                                                   ;84A7E8|C220    |      ;
     LDX.W #$0000                                               ;84A7EA|A20000  |      ;
     LDY.W #$0074                                               ;84A7ED|A07400  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A7F0|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A7F0|223F8084|84803F;
     BRA CODE_84A84A                                            ;84A7F4|8054    |84A84A;
  
  
@@ -5605,32 +5605,32 @@ CODE_84A81D:
     SEP #$20                                                   ;84A81D|E220    |      ;
     REP #$10                                                   ;84A81F|C210    |      ;
     LDY.W #$0001                                               ;84A821|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A824|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A824|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A826|0928    |      ;
     SEP #$20                                                   ;84A828|E220    |      ;
     REP #$10                                                   ;84A82A|C210    |      ;
     LDY.W #$0001                                               ;84A82C|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A82F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A82F|97CC    |0000CC;
     REP #$30                                                   ;84A831|C230    |      ;
     SEP #$20                                                   ;84A833|E220    |      ;
     REP #$10                                                   ;84A835|C210    |      ;
     LDY.W #$003F                                               ;84A837|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A83A|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A83A|B7CC    |0000CC;
     XBA                                                        ;84A83C|EB      |      ;
     LDA.B #$00                                                 ;84A83D|A900    |      ;
     XBA                                                        ;84A83F|EB      |      ;
     REP #$20                                                   ;84A840|C220    |      ;
     TXY                                                        ;84A842|9B      |      ;
     LDX.W #$0000                                               ;84A843|A20000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84A846|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84A846|223F8084|84803F;
  
 CODE_84A84A:
     REP #$30                                                   ;84A84A|C230    |      ;
     STZ.B n16TempVar3                                          ;84A84C|6482    |000082;
-    STZ.B $84                                                  ;84A84E|6484    |000084;
+    STZ.B n16TempVar4                                          ;84A84E|6484    |000084;
     REP #$30                                                   ;84A850|C230    |      ;
     LDY.W #$001A                                               ;84A852|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A855|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A855|B7CC    |0000CC;
     SEC                                                        ;84A857|38      |      ;
     SBC.B nPlayerPosX                                          ;84A858|E5D6    |0000D6;
     STA.B n16TempVar1                                          ;84A85A|857E    |00007E;
@@ -5649,7 +5649,7 @@ CODE_84A860:
 CODE_84A86D:
     REP #$30                                                   ;84A86D|C230    |      ;
     LDY.W #$001C                                               ;84A86F|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A872|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A872|B7CC    |0000CC;
     SEC                                                        ;84A874|38      |      ;
     SBC.B nPlayerPosY                                          ;84A875|E5D8    |0000D8;
     STA.B n16TempVar2                                          ;84A877|8580    |000080;
@@ -5663,7 +5663,7 @@ CODE_84A87D:
     INC A                                                      ;84A882|1A      |      ;
     STA.B n16TempVar2                                          ;84A883|8580    |000080;
     LDA.W #$0001                                               ;84A885|A90100  |      ;
-    STA.B $84                                                  ;84A888|8584    |000084;
+    STA.B n16TempVar4                                          ;84A888|8584    |000084;
  
 CODE_84A88A:
     SEP #$20                                                   ;84A88A|E220    |      ;
@@ -5671,7 +5671,7 @@ CODE_84A88A:
     SEP #$20                                                   ;84A88E|E220    |      ;
     REP #$10                                                   ;84A890|C210    |      ;
     LDY.W #$0008                                               ;84A892|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A895|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A895|97CC    |0000CC;
     REP #$20                                                   ;84A897|C220    |      ;
     LDA.B n16TempVar2                                          ;84A899|A580    |000080;
     CMP.B n16TempVar1                                          ;84A89B|C57E    |00007E;
@@ -5695,7 +5695,7 @@ CODE_84A8B2:
     AND.B #$10                                                 ;84A8BB|2910    |      ;
     BNE CODE_84A8CF                                            ;84A8BD|D010    |84A8CF;
     REP #$20                                                   ;84A8BF|C220    |      ;
-    LDA.B $84                                                  ;84A8C1|A584    |000084;
+    LDA.B n16TempVar4                                          ;84A8C1|A584    |000084;
     BEQ CODE_84A8E5                                            ;84A8C3|F020    |84A8E5;
     BRA CODE_84A8D7                                            ;84A8C5|8010    |84A8D7;
  
@@ -5709,7 +5709,7 @@ CODE_84A8C7:
  
 CODE_84A8CF:
     REP #$20                                                   ;84A8CF|C220    |      ;
-    LDA.B $84                                                  ;84A8D1|A584    |000084;
+    LDA.B n16TempVar4                                          ;84A8D1|A584    |000084;
     BEQ CODE_84A8D7                                            ;84A8D3|F002    |84A8D7;
     BRA CODE_84A8E5                                            ;84A8D5|800E    |84A8E5;
  
@@ -5719,7 +5719,7 @@ CODE_84A8D7:
     REP #$10                                                   ;84A8D9|C210    |      ;
     LDY.W #$000F                                               ;84A8DB|A00F00  |      ;
     LDA.B #$01                                                 ;84A8DE|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A8E0|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A8E0|97CC    |0000CC;
     JMP.W CODE_84A48A                                          ;84A8E2|4C8AA4  |84A48A;
  
  
@@ -5728,7 +5728,7 @@ CODE_84A8E5:
     REP #$10                                                   ;84A8E7|C210    |      ;
     LDY.W #$000F                                               ;84A8E9|A00F00  |      ;
     LDA.B #$02                                                 ;84A8EC|A902    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A8EE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A8EE|97CC    |0000CC;
     JMP.W CODE_84A48A                                          ;84A8F0|4C8AA4  |84A48A;
  
  
@@ -5737,7 +5737,7 @@ CODE_84A8F3:
     REP #$10                                                   ;84A8F5|C210    |      ;
     LDY.W #$000F                                               ;84A8F7|A00F00  |      ;
     LDA.B #$04                                                 ;84A8FA|A904    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A8FC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A8FC|97CC    |0000CC;
     JMP.W CODE_84A48A                                          ;84A8FE|4C8AA4  |84A48A;
  
  
@@ -5746,55 +5746,55 @@ CODE_84A901:
     REP #$10                                                   ;84A903|C210    |      ;
     LDY.W #$000F                                               ;84A905|A00F00  |      ;
     LDA.B #$08                                                 ;84A908|A908    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A90A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A90A|97CC    |0000CC;
     JMP.W CODE_84A48A                                          ;84A90C|4C8AA4  |84A48A;
  
  
-subUnknown849419_0x32:
+fAIAction0x32:
     REP #$30                                                   ;84A90F|C230    |      ;
     REP #$30                                                   ;84A911|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84A913|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84A913|A5C9    |0000C9;
     CLC                                                        ;84A915|18      |      ;
     ADC.W #$0001                                               ;84A916|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84A919|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84A919|85C9    |0000C9;
     REP #$20                                                   ;84A91B|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84A91D|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84A91D|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84A91F|8572    |000072;
     REP #$30                                                   ;84A921|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84A923|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84A923|A5C9    |0000C9;
     CLC                                                        ;84A925|18      |      ;
     ADC.W #$0002                                               ;84A926|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84A929|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84A929|85C9    |0000C9;
     SEP #$20                                                   ;84A92B|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84A92D|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84A92D|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84A92F|8574    |000074;
     REP #$30                                                   ;84A931|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84A933|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84A933|A5C9    |0000C9;
     CLC                                                        ;84A935|18      |      ;
     ADC.W #$0001                                               ;84A936|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84A939|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84A939|85C9    |0000C9;
     REP #$20                                                   ;84A93B|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84A93D|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84A93D|A7C9    |0000C9;
     STA.B [ptrUnknown0x72]                                     ;84A93F|8772    |000072;
     REP #$30                                                   ;84A941|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84A943|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84A943|A5C9    |0000C9;
     CLC                                                        ;84A945|18      |      ;
     ADC.W #$0002                                               ;84A946|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84A949|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84A949|85C9    |0000C9;
     RTS                                                        ;84A94B|60      |      ;
  
  
-subUnknown849419_0x33:
+fAIAction0x33_UpdateMole:
     REP #$30                                                   ;84A94C|C230    |      ;
     REP #$30                                                   ;84A94E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84A950|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84A950|A5C9    |0000C9;
     CLC                                                        ;84A952|18      |      ;
     ADC.W #$0001                                               ;84A953|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84A956|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84A956|85C9    |0000C9;
     SEP #$20                                                   ;84A958|E220    |      ;
     REP #$10                                                   ;84A95A|C210    |      ;
     LDY.W #$000C                                               ;84A95C|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A95F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A95F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84A961|C900    |      ;
     BNE +                                                      ;84A963|D003    |84A968;
     JMP.W .label1                                              ;84A965|4C1EAA  |84AA1E;
@@ -5864,28 +5864,28 @@ subUnknown849419_0x33:
   + SEP #$20                                                   ;84A9D7|E220    |      ;
     REP #$10                                                   ;84A9D9|C210    |      ;
     LDY.W #$003F                                               ;84A9DB|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A9DE|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A9DE|B7CC    |0000CC;
     STA.W $0920                                                ;84A9E0|8D2009  |000920;
     SEP #$20                                                   ;84A9E3|E220    |      ;
     REP #$10                                                   ;84A9E5|C210    |      ;
     LDY.W #$0000                                               ;84A9E7|A00000  |      ;
     LDA.B #$00                                                 ;84A9EA|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84A9EC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84A9EC|97CC    |0000CC;
     SEP #$20                                                   ;84A9EE|E220    |      ;
     REP #$10                                                   ;84A9F0|C210    |      ;
     LDY.W #$0001                                               ;84A9F2|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84A9F5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A9F5|B7CC    |0000CC;
     ORA.B #$40                                                 ;84A9F7|0940    |      ;
     SEP #$20                                                   ;84A9F9|E220    |      ;
     REP #$10                                                   ;84A9FB|C210    |      ;
     LDY.W #$0001                                               ;84A9FD|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AA00|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AA00|97CC    |0000CC;
     REP #$30                                                   ;84AA02|C230    |      ;
     LDY.W #$0010                                               ;84AA04|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AA07|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AA07|B7CC    |0000CC;
     CLC                                                        ;84AA09|18      |      ;
     ADC.W #$0001                                               ;84AA0A|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AA0D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
     SEP #$20                                                   ;84AA0F|E220    |      ;
     LDA.B #$29                                                 ;84AA11|A929    |      ;
     STA.W $091D                                                ;84AA13|8D1D09  |00091D;
@@ -5919,29 +5919,29 @@ subUnknown849419_0x33:
     LDA.W #$0011                                               ;84AA42|A91100  |      ;
     LDX.W #$0000                                               ;84AA45|A20000  |      ;
     LDY.W #$0081                                               ;84AA48|A08100  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AA4B|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AA4B|223F8084|84803F;
  
 .return:
     REP #$30                                                   ;84AA4F|C230    |      ;
     LDY.W #$0010                                               ;84AA51|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AA54|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AA54|B7CC    |0000CC;
     CLC                                                        ;84AA56|18      |      ;
     ADC.W #$0001                                               ;84AA57|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AA5A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AA5A|97CC    |0000CC;
     RTS                                                        ;84AA5C|60      |      ;
  
  
-subUnknown849419_0x34:
+fAIAction0x34:
     REP #$30                                                   ;84AA5D|C230    |      ;
     REP #$30                                                   ;84AA5F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84AA61|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84AA61|A5C9    |0000C9;
     CLC                                                        ;84AA63|18      |      ;
     ADC.W #$0001                                               ;84AA64|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84AA67|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84AA67|85C9    |0000C9;
     SEP #$20                                                   ;84AA69|E220    |      ;
     REP #$10                                                   ;84AA6B|C210    |      ;
     LDY.W #$000C                                               ;84AA6D|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AA70|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AA70|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AA72|C900    |      ;
     BNE +                                                      ;84AA74|D003    |84AA79;
     JMP.W .return                                              ;84AA76|4C19AB  |84AB19;
@@ -5998,28 +5998,28 @@ subUnknown849419_0x34:
   + SEP #$20                                                   ;84AAD2|E220    |      ;
     REP #$10                                                   ;84AAD4|C210    |      ;
     LDY.W #$003F                                               ;84AAD6|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AAD9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AAD9|B7CC    |0000CC;
     STA.W $0920                                                ;84AADB|8D2009  |000920;
     SEP #$20                                                   ;84AADE|E220    |      ;
     REP #$10                                                   ;84AAE0|C210    |      ;
     LDY.W #$0000                                               ;84AAE2|A00000  |      ;
     LDA.B #$00                                                 ;84AAE5|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AAE7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AAE7|97CC    |0000CC;
     SEP #$20                                                   ;84AAE9|E220    |      ;
     REP #$10                                                   ;84AAEB|C210    |      ;
     LDY.W #$0001                                               ;84AAED|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AAF0|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AAF0|B7CC    |0000CC;
     ORA.B #$40                                                 ;84AAF2|0940    |      ;
     SEP #$20                                                   ;84AAF4|E220    |      ;
     REP #$10                                                   ;84AAF6|C210    |      ;
     LDY.W #$0001                                               ;84AAF8|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AAFB|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AAFB|97CC    |0000CC;
     REP #$30                                                   ;84AAFD|C230    |      ;
     LDY.W #$0010                                               ;84AAFF|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AB02|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AB02|B7CC    |0000CC;
     CLC                                                        ;84AB04|18      |      ;
     ADC.W #$0001                                               ;84AB05|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AB08|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
     SEP #$20                                                   ;84AB0A|E220    |      ;
     LDA.B #$07                                                 ;84AB0C|A907    |      ;
     STA.W $091D                                                ;84AB0E|8D1D09  |00091D;
@@ -6032,20 +6032,20 @@ subUnknown849419_0x34:
 .return:
     REP #$30                                                   ;84AB19|C230    |      ;
     LDY.W #$0010                                               ;84AB1B|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AB1E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AB1E|B7CC    |0000CC;
     CLC                                                        ;84AB20|18      |      ;
     ADC.W #$0001                                               ;84AB21|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AB24|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AB24|97CC    |0000CC;
     RTS                                                        ;84AB26|60      |      ;
  
  
-subUnknown849419_0x35:
+fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84AB27|C230    |      ;
     REP #$30                                                   ;84AB29|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84AB2B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84AB2B|A5C9    |0000C9;
     CLC                                                        ;84AB2D|18      |      ;
     ADC.W #$0001                                               ;84AB2E|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84AB31|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84AB31|85C9    |0000C9;
     REP #$20                                                   ;84AB33|C220    |      ;
     LDA.L nDailyFlags+2                                        ;84AB35|AF5C1F7F|7F1F5C;
     AND.W #$FFEF                                               ;84AB39|29EFFF  |      ;
@@ -6070,7 +6070,7 @@ subUnknown849419_0x35:
     LDA.W #$0017                                               ;84AB63|A91700  |      ;
     LDX.W #$0000                                               ;84AB66|A20000  |      ;
     LDY.W #$0080                                               ;84AB69|A08000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AB6C|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AB6C|223F8084|84803F;
     JMP.W .label8                                              ;84AB70|4C88AD  |84AD88;
  
  
@@ -6085,7 +6085,7 @@ subUnknown849419_0x35:
   + SEP #$20                                                   ;84AB81|E220    |      ;
     REP #$10                                                   ;84AB83|C210    |      ;
     LDY.W #$0002                                               ;84AB85|A00200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AB88|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AB88|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AB8A|C900    |      ;
     BEQ .case0                                                 ;84AB8C|F00C    |84AB9A;
     CMP.B #$01                                                 ;84AB8E|C901    |      ;
@@ -6128,7 +6128,7 @@ subUnknown849419_0x35:
  
  
 .break:
-    JSL.L fSubUnk1Unknown_84803F                               ;84ABCE|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84ABCE|223F8084|84803F;
     REP #$30                                                   ;84ABD2|C230    |      ;
     LDA.L nDailyFlags+2                                        ;84ABD4|AF5C1F7F|7F1F5C;
     AND.W #$FFBF                                               ;84ABD8|29BFFF  |      ;
@@ -6151,7 +6151,7 @@ subUnknown849419_0x35:
   + SEP #$20                                                   ;84ABF9|E220    |      ;
     REP #$10                                                   ;84ABFB|C210    |      ;
     LDY.W #$000C                                               ;84ABFD|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AC00|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AC00|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AC02|C900    |      ;
     BNE +                                                      ;84AC04|D003    |84AC09;
     JMP.W .label2                                              ;84AC06|4CEEAC  |84ACEE;
@@ -6317,7 +6317,7 @@ subUnknown849419_0x35:
     LDA.W #$0017                                               ;84AD30|A91700  |      ;
     LDX.W #$0000                                               ;84AD33|A20000  |      ;
     LDY.W #$004B                                               ;84AD36|A04B00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AD39|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AD39|223F8084|84803F;
     JMP.W .label8                                              ;84AD3D|4C88AD  |84AD88;
  
  
@@ -6326,7 +6326,7 @@ subUnknown849419_0x35:
     LDA.W #$0017                                               ;84AD42|A91700  |      ;
     LDX.W #$0000                                               ;84AD45|A20000  |      ;
     LDY.W #$004D                                               ;84AD48|A04D00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AD4B|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AD4B|223F8084|84803F;
     JMP.W .label8                                              ;84AD4F|4C88AD  |84AD88;
  
  
@@ -6335,7 +6335,7 @@ subUnknown849419_0x35:
     LDA.W #$0017                                               ;84AD54|A91700  |      ;
     LDX.W #$0000                                               ;84AD57|A20000  |      ;
     LDY.W #$004E                                               ;84AD5A|A04E00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AD5D|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AD5D|223F8084|84803F;
     JMP.W .label8                                              ;84AD61|4C88AD  |84AD88;
  
  
@@ -6344,7 +6344,7 @@ subUnknown849419_0x35:
     LDA.W #$0017                                               ;84AD66|A91700  |      ;
     LDX.W #$0000                                               ;84AD69|A20000  |      ;
     LDY.W #$004F                                               ;84AD6C|A04F00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AD6F|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AD6F|223F8084|84803F;
     JMP.W .label8                                              ;84AD73|4C88AD  |84AD88;
  
  
@@ -6353,7 +6353,7 @@ subUnknown849419_0x35:
     LDA.W #$0017                                               ;84AD78|A91700  |      ;
     LDX.W #$0000                                               ;84AD7B|A20000  |      ;
     LDY.W #$0050                                               ;84AD7E|A05000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AD81|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AD81|223F8084|84803F;
     JMP.W .label8                                              ;84AD85|4C88AD  |84AD88;
  
  
@@ -6368,10 +6368,10 @@ subUnknown849419_0x35:
 .loop2:
     REP #$30                                                   ;84AD96|C230    |      ;
     LDY.W #$0010                                               ;84AD98|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AD9B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AD9B|B7CC    |0000CC;
     CLC                                                        ;84AD9D|18      |      ;
     ADC.W #$0001                                               ;84AD9E|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84ADA1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADA1|97CC    |0000CC;
     RTS                                                        ;84ADA3|60      |      ;
  
  
@@ -6388,27 +6388,27 @@ subUnknown849419_0x35:
     REP #$10                                                   ;84ADBC|C210    |      ;
     LDY.W #$0000                                               ;84ADBE|A00000  |      ;
     LDA.B #$00                                                 ;84ADC1|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84ADC3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADC3|97CC    |0000CC;
     SEP #$20                                                   ;84ADC5|E220    |      ;
     REP #$10                                                   ;84ADC7|C210    |      ;
     LDY.W #$0001                                               ;84ADC9|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84ADCC|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84ADCC|B7CC    |0000CC;
     ORA.B #$40                                                 ;84ADCE|0940    |      ;
     SEP #$20                                                   ;84ADD0|E220    |      ;
     REP #$10                                                   ;84ADD2|C210    |      ;
     LDY.W #$0001                                               ;84ADD4|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84ADD7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADD7|97CC    |0000CC;
     SEP #$20                                                   ;84ADD9|E220    |      ;
     REP #$10                                                   ;84ADDB|C210    |      ;
     LDY.W #$000C                                               ;84ADDD|A00C00  |      ;
     LDA.B #$00                                                 ;84ADE0|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84ADE2|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADE2|97CC    |0000CC;
     REP #$30                                                   ;84ADE4|C230    |      ;
     LDY.W #$0010                                               ;84ADE6|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84ADE9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84ADE9|B7CC    |0000CC;
     CLC                                                        ;84ADEB|18      |      ;
     ADC.W #$0001                                               ;84ADEC|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84ADEF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADEF|97CC    |0000CC;
     RTS                                                        ;84ADF1|60      |      ;
  
  
@@ -6425,24 +6425,24 @@ subUnknown849419_0x35:
     SEP #$20                                                   ;84AE04|E220    |      ;
     REP #$10                                                   ;84AE06|C210    |      ;
     LDY.W #$0001                                               ;84AE08|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AE0B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE0B|B7CC    |0000CC;
     ORA.B #$28                                                 ;84AE0D|0928    |      ;
     SEP #$20                                                   ;84AE0F|E220    |      ;
     REP #$10                                                   ;84AE11|C210    |      ;
     LDY.W #$0001                                               ;84AE13|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AE16|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AE16|97CC    |0000CC;
     REP #$30                                                   ;84AE18|C230    |      ;
     SEP #$20                                                   ;84AE1A|E220    |      ;
     REP #$10                                                   ;84AE1C|C210    |      ;
     LDY.W #$003F                                               ;84AE1E|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AE21|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE21|B7CC    |0000CC;
     XBA                                                        ;84AE23|EB      |      ;
     LDA.B #$00                                                 ;84AE24|A900    |      ;
     XBA                                                        ;84AE26|EB      |      ;
     REP #$20                                                   ;84AE27|C220    |      ;
     LDX.W #$0000                                               ;84AE29|A20000  |      ;
     LDY.W #$004C                                               ;84AE2C|A04C00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AE2F|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AE2F|223F8084|84803F;
     BRA .label12                                               ;84AE33|8034    |84AE69;
  
  
@@ -6451,34 +6451,34 @@ subUnknown849419_0x35:
     SEP #$20                                                   ;84AE38|E220    |      ;
     REP #$10                                                   ;84AE3A|C210    |      ;
     LDY.W #$0001                                               ;84AE3C|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AE3F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE3F|B7CC    |0000CC;
     ORA.B #$28                                                 ;84AE41|0928    |      ;
     SEP #$20                                                   ;84AE43|E220    |      ;
     REP #$10                                                   ;84AE45|C210    |      ;
     LDY.W #$0001                                               ;84AE47|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AE4A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AE4A|97CC    |0000CC;
     REP #$30                                                   ;84AE4C|C230    |      ;
     SEP #$20                                                   ;84AE4E|E220    |      ;
     REP #$10                                                   ;84AE50|C210    |      ;
     LDY.W #$003F                                               ;84AE52|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AE55|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE55|B7CC    |0000CC;
     XBA                                                        ;84AE57|EB      |      ;
     LDA.B #$00                                                 ;84AE58|A900    |      ;
     XBA                                                        ;84AE5A|EB      |      ;
     REP #$20                                                   ;84AE5B|C220    |      ;
     LDX.W #$0000                                               ;84AE5D|A20000  |      ;
     LDY.W #$004A                                               ;84AE60|A04A00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84AE63|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84AE63|223F8084|84803F;
     BRA .label12                                               ;84AE67|8000    |84AE69;
  
  
 .label12:
     REP #$30                                                   ;84AE69|C230    |      ;
     STZ.B n16TempVar3                                          ;84AE6B|6482    |000082;
-    STZ.B $84                                                  ;84AE6D|6484    |000084;
+    STZ.B n16TempVar4                                          ;84AE6D|6484    |000084;
     REP #$30                                                   ;84AE6F|C230    |      ;
     LDY.W #$001A                                               ;84AE71|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AE74|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE74|B7CC    |0000CC;
     SEC                                                        ;84AE76|38      |      ;
     SBC.B nPlayerPosX                                          ;84AE77|E5D6    |0000D6;
     STA.B n16TempVar1                                          ;84AE79|857E    |00007E;
@@ -6496,7 +6496,7 @@ subUnknown849419_0x35:
 .label13:
     REP #$30                                                   ;84AE8C|C230    |      ;
     LDY.W #$001C                                               ;84AE8E|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AE91|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE91|B7CC    |0000CC;
     SEC                                                        ;84AE93|38      |      ;
     SBC.B nPlayerPosY                                          ;84AE94|E5D8    |0000D8;
     STA.B n16TempVar2                                          ;84AE96|8580    |000080;
@@ -6509,7 +6509,7 @@ subUnknown849419_0x35:
     INC A                                                      ;84AEA1|1A      |      ;
     STA.B n16TempVar2                                          ;84AEA2|8580    |000080;
     LDA.W #$0001                                               ;84AEA4|A90100  |      ;
-    STA.B $84                                                  ;84AEA7|8584    |000084;
+    STA.B n16TempVar4                                          ;84AEA7|8584    |000084;
  
 .label14:
     SEP #$20                                                   ;84AEA9|E220    |      ;
@@ -6517,7 +6517,7 @@ subUnknown849419_0x35:
     SEP #$20                                                   ;84AEAD|E220    |      ;
     REP #$10                                                   ;84AEAF|C210    |      ;
     LDY.W #$0008                                               ;84AEB1|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AEB4|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AEB4|97CC    |0000CC;
     REP #$20                                                   ;84AEB6|C220    |      ;
     LDA.B n16TempVar2                                          ;84AEB8|A580    |000080;
     CMP.B n16TempVar1                                          ;84AEBA|C57E    |00007E;
@@ -6530,7 +6530,7 @@ subUnknown849419_0x35:
  
 .label15:
     REP #$20                                                   ;84AEC6|C220    |      ;
-    LDA.B $84                                                  ;84AEC8|A584    |000084;
+    LDA.B n16TempVar4                                          ;84AEC8|A584    |000084;
     BEQ .label17                                               ;84AECA|F010    |84AEDC;
     BRA .label16                                               ;84AECC|8000    |84AECE;
  
@@ -6540,7 +6540,7 @@ subUnknown849419_0x35:
     REP #$10                                                   ;84AED0|C210    |      ;
     LDY.W #$000F                                               ;84AED2|A00F00  |      ;
     LDA.B #$01                                                 ;84AED5|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AED7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AED7|97CC    |0000CC;
     JMP.W .loop2                                               ;84AED9|4C96AD  |84AD96;
  
  
@@ -6549,7 +6549,7 @@ subUnknown849419_0x35:
     REP #$10                                                   ;84AEDE|C210    |      ;
     LDY.W #$000F                                               ;84AEE0|A00F00  |      ;
     LDA.B #$02                                                 ;84AEE3|A902    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AEE5|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AEE5|97CC    |0000CC;
     JMP.W .loop2                                               ;84AEE7|4C96AD  |84AD96;
  
  
@@ -6558,7 +6558,7 @@ subUnknown849419_0x35:
     REP #$10                                                   ;84AEEC|C210    |      ;
     LDY.W #$000F                                               ;84AEEE|A00F00  |      ;
     LDA.B #$04                                                 ;84AEF1|A904    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AEF3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AEF3|97CC    |0000CC;
     JMP.W .loop2                                               ;84AEF5|4C96AD  |84AD96;
  
  
@@ -6567,29 +6567,29 @@ subUnknown849419_0x35:
     REP #$10                                                   ;84AEFA|C210    |      ;
     LDY.W #$000F                                               ;84AEFC|A00F00  |      ;
     LDA.B #$08                                                 ;84AEFF|A908    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AF01|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AF01|97CC    |0000CC;
     JMP.W .loop2                                               ;84AF03|4C96AD  |84AD96;
  
  
-subUnknown849419_0x36:
+fAIAction0x36_UpdateDog:
     REP #$30                                                   ;84AF06|C230    |      ;
     REP #$30                                                   ;84AF08|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84AF0A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84AF0A|A5C9    |0000C9;
     CLC                                                        ;84AF0C|18      |      ;
     ADC.W #$0001                                               ;84AF0D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84AF10|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84AF10|85C9    |0000C9;
     REP #$30                                                   ;84AF12|C230    |      ;
     LDY.W #$001A                                               ;84AF14|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AF17|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF17|B7CC    |0000CC;
     STA.L nDogX                                                ;84AF19|8F2C1F7F|7F1F2C;
     REP #$30                                                   ;84AF1D|C230    |      ;
     LDY.W #$001C                                               ;84AF1F|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AF22|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF22|B7CC    |0000CC;
     STA.L nDogY                                                ;84AF24|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84AF28|E220    |      ;
     REP #$10                                                   ;84AF2A|C210    |      ;
     LDY.W #$000C                                               ;84AF2C|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AF2F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF2F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AF31|C900    |      ;
     BNE +                                                      ;84AF33|D003    |84AF38;
     JMP.W .label1                                              ;84AF35|4CF4AF  |84AFF4;
@@ -6675,16 +6675,16 @@ subUnknown849419_0x36:
     REP #$10                                                   ;84AFC0|C210    |      ;
     LDY.W #$0000                                               ;84AFC2|A00000  |      ;
     LDA.B #$00                                                 ;84AFC5|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AFC7|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AFC7|97CC    |0000CC;
     SEP #$20                                                   ;84AFC9|E220    |      ;
     REP #$10                                                   ;84AFCB|C210    |      ;
     LDY.W #$0001                                               ;84AFCD|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84AFD0|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AFD0|B7CC    |0000CC;
     ORA.B #$40                                                 ;84AFD2|0940    |      ;
     SEP #$20                                                   ;84AFD4|E220    |      ;
     REP #$10                                                   ;84AFD6|C210    |      ;
     LDY.W #$0001                                               ;84AFD8|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84AFDB|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84AFDB|97CC    |0000CC;
     REP #$30                                                   ;84AFDD|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84AFDF|A5D2    |0000D2;
     ORA.W #$0800                                               ;84AFE1|090008  |      ;
@@ -6757,7 +6757,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B05E|A91600  |      ;
     LDX.W #$0000                                               ;84B061|A20000  |      ;
     LDY.W #$003D                                               ;84B064|A03D00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B067|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B067|223F8084|84803F;
     REP #$30                                                   ;84B06B|C230    |      ;
     LDA.L $7F1F58                                              ;84B06D|AF581F7F|7F1F58;
     AND.W #$FFFE                                               ;84B071|29FEFF  |      ;
@@ -6795,7 +6795,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B0AB|A91600  |      ;
     LDX.W #$0000                                               ;84B0AE|A20000  |      ;
     LDY.W #$003E                                               ;84B0B1|A03E00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B0B4|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B0B4|223F8084|84803F;
     BRA .loop                                                  ;84B0B8|80DC    |84B096;
  
  
@@ -6804,7 +6804,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B0BC|A91600  |      ;
     LDX.W #$0000                                               ;84B0BF|A20000  |      ;
     LDY.W #$0040                                               ;84B0C2|A04000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B0C5|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B0C5|223F8084|84803F;
     BRA .loop                                                  ;84B0C9|80CB    |84B096;
  
  
@@ -6813,7 +6813,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B0CD|A91600  |      ;
     LDX.W #$0000                                               ;84B0D0|A20000  |      ;
     LDY.W #$0040                                               ;84B0D3|A04000  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B0D6|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B0D6|223F8084|84803F;
     BRA .loop                                                  ;84B0DA|80BA    |84B096;
  
  
@@ -6822,7 +6822,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B0DE|A91600  |      ;
     LDX.W #$0000                                               ;84B0E1|A20000  |      ;
     LDY.W #$0047                                               ;84B0E4|A04700  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B0E7|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B0E7|223F8084|84803F;
     BRA .loop                                                  ;84B0EB|80A9    |84B096;
  
  
@@ -6831,7 +6831,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B0EF|A91600  |      ;
     LDX.W #$0000                                               ;84B0F2|A20000  |      ;
     LDY.W #$0048                                               ;84B0F5|A04800  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B0F8|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B0F8|223F8084|84803F;
     BRA .loop                                                  ;84B0FC|8098    |84B096;
  
  
@@ -6855,7 +6855,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B119|A91600  |      ;
     LDX.W #$0000                                               ;84B11C|A20000  |      ;
     LDY.W #$003C                                               ;84B11F|A03C00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B122|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B122|223F8084|84803F;
     REP #$30                                                   ;84B126|C230    |      ;
     LDA.L $7F1F58                                              ;84B128|AF581F7F|7F1F58;
     AND.W #$FFFD                                               ;84B12C|29FDFF  |      ;
@@ -6869,7 +6869,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B13B|A91600  |      ;
     LDX.W #$0000                                               ;84B13E|A20000  |      ;
     LDY.W #$0041                                               ;84B141|A04100  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B144|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B144|223F8084|84803F;
     REP #$30                                                   ;84B148|C230    |      ;
     LDA.L $7F1F58                                              ;84B14A|AF581F7F|7F1F58;
     AND.W #$FFFD                                               ;84B14E|29FDFF  |      ;
@@ -6883,7 +6883,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B15D|A91600  |      ;
     LDX.W #$0000                                               ;84B160|A20000  |      ;
     LDY.W #$0049                                               ;84B163|A04900  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B166|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B166|223F8084|84803F;
     JMP.W .label24                                             ;84B16A|4C5CB2  |84B25C;
  
  
@@ -6892,7 +6892,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B16F|A91600  |      ;
     LDX.W #$0000                                               ;84B172|A20000  |      ;
     LDY.W #$0044                                               ;84B175|A04400  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B178|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B178|223F8084|84803F;
     JMP.W .label24                                             ;84B17C|4C5CB2  |84B25C;
  
  
@@ -6914,7 +6914,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B196|A91600  |      ;
     LDX.W #$0000                                               ;84B199|A20000  |      ;
     LDY.W #$003D                                               ;84B19C|A03D00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B19F|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B19F|223F8084|84803F;
     REP #$30                                                   ;84B1A3|C230    |      ;
     LDA.L $7F1F58                                              ;84B1A5|AF581F7F|7F1F58;
     AND.W #$FFFB                                               ;84B1A9|29FBFF  |      ;
@@ -6928,7 +6928,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B1B8|A91600  |      ;
     LDX.W #$0000                                               ;84B1BB|A20000  |      ;
     LDY.W #$0045                                               ;84B1BE|A04500  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B1C1|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B1C1|223F8084|84803F;
     REP #$30                                                   ;84B1C5|C230    |      ;
     LDA.L $7F1F58                                              ;84B1C7|AF581F7F|7F1F58;
     AND.W #$FFFB                                               ;84B1CB|29FBFF  |      ;
@@ -6942,7 +6942,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B1DA|A91600  |      ;
     LDX.W #$0000                                               ;84B1DD|A20000  |      ;
     LDY.W #$0043                                               ;84B1E0|A04300  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B1E3|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B1E3|223F8084|84803F;
     JMP.W .label24                                             ;84B1E7|4C5CB2  |84B25C;
  
  
@@ -6962,7 +6962,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B1FD|A91600  |      ;
     LDX.W #$0000                                               ;84B200|A20000  |      ;
     LDY.W #$0041                                               ;84B203|A04100  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B206|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B206|223F8084|84803F;
     REP #$30                                                   ;84B20A|C230    |      ;
     LDA.L $7F1F58                                              ;84B20C|AF581F7F|7F1F58;
     AND.W #$FFF7                                               ;84B210|29F7FF  |      ;
@@ -6976,7 +6976,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B21E|A91600  |      ;
     LDX.W #$0000                                               ;84B221|A20000  |      ;
     LDY.W #$0046                                               ;84B224|A04600  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B227|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B227|223F8084|84803F;
     BRA .label24                                               ;84B22B|802F    |84B25C;
  
  
@@ -6993,7 +6993,7 @@ subUnknown849419_0x36:
     LDA.W #$0016                                               ;84B23C|A91600  |      ;
     LDX.W #$0000                                               ;84B23F|A20000  |      ;
     LDY.W #$003C                                               ;84B242|A03C00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B245|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B245|223F8084|84803F;
     REP #$30                                                   ;84B249|C230    |      ;
     LDA.L $7F1F58                                              ;84B24B|AF581F7F|7F1F58;
     AND.W #$FFEF                                               ;84B24F|29EFFF  |      ;
@@ -7007,50 +7007,50 @@ subUnknown849419_0x36:
     LDA.L nDailyFlags+6                                        ;84B25E|AF601F7F|7F1F60;
     AND.W #$0010                                               ;84B262|291000  |      ;
     BEQ .loop2                                                 ;84B265|F003    |84B26A;
-    JMP.W .label25                                             ;84B267|4C78B2  |84B278;
+    JMP.W .whistledog                                          ;84B267|4C78B2  |84B278;
  
  
 .loop2:
     REP #$30                                                   ;84B26A|C230    |      ;
     LDY.W #$0010                                               ;84B26C|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B26F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B26F|B7CC    |0000CC;
     CLC                                                        ;84B271|18      |      ;
     ADC.W #$0001                                               ;84B272|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B275|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B275|97CC    |0000CC;
     RTS                                                        ;84B277|60      |      ;
  
  
-.label25:
+.whistledog:
     SEP #$20                                                   ;84B278|E220    |      ;
     REP #$10                                                   ;84B27A|C210    |      ;
     STZ.W $0938                                                ;84B27C|9C3809  |000938;
     SEP #$20                                                   ;84B27F|E220    |      ;
     REP #$10                                                   ;84B281|C210    |      ;
     LDY.W #$0001                                               ;84B283|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B286|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B286|B7CC    |0000CC;
     ORA.B #$28                                                 ;84B288|0928    |      ;
     SEP #$20                                                   ;84B28A|E220    |      ;
     REP #$10                                                   ;84B28C|C210    |      ;
     LDY.W #$0001                                               ;84B28E|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B291|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B291|97CC    |0000CC;
     REP #$30                                                   ;84B293|C230    |      ;
     SEP #$20                                                   ;84B295|E220    |      ;
     REP #$10                                                   ;84B297|C210    |      ;
     LDY.W #$003F                                               ;84B299|A03F00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B29C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B29C|B7CC    |0000CC;
     XBA                                                        ;84B29E|EB      |      ;
     LDA.B #$00                                                 ;84B29F|A900    |      ;
     XBA                                                        ;84B2A1|EB      |      ;
     REP #$20                                                   ;84B2A2|C220    |      ;
     LDX.W #$0000                                               ;84B2A4|A20000  |      ;
     LDY.W #$003F                                               ;84B2A7|A03F00  |      ;
-    JSL.L fSubUnk1Unknown_84803F                               ;84B2AA|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;84B2AA|223F8084|84803F;
     REP #$30                                                   ;84B2AE|C230    |      ;
     STZ.B n16TempVar3                                          ;84B2B0|6482    |000082;
-    STZ.B $84                                                  ;84B2B2|6484    |000084;
+    STZ.B n16TempVar4                                          ;84B2B2|6484    |000084;
     REP #$30                                                   ;84B2B4|C230    |      ;
     LDY.W #$001A                                               ;84B2B6|A01A00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B2B9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B2B9|B7CC    |0000CC;
     SEC                                                        ;84B2BB|38      |      ;
     SBC.B nPlayerPosX                                          ;84B2BC|E5D6    |0000D6;
     STA.B n16TempVar1                                          ;84B2BE|857E    |00007E;
@@ -7068,7 +7068,7 @@ subUnknown849419_0x36:
 .label26:
     REP #$30                                                   ;84B2D1|C230    |      ;
     LDY.W #$001C                                               ;84B2D3|A01C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B2D6|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B2D6|B7CC    |0000CC;
     SEC                                                        ;84B2D8|38      |      ;
     SBC.B nPlayerPosY                                          ;84B2D9|E5D8    |0000D8;
     STA.B n16TempVar2                                          ;84B2DB|8580    |000080;
@@ -7081,7 +7081,7 @@ subUnknown849419_0x36:
     INC A                                                      ;84B2E6|1A      |      ;
     STA.B n16TempVar2                                          ;84B2E7|8580    |000080;
     LDA.W #$0001                                               ;84B2E9|A90100  |      ;
-    STA.B $84                                                  ;84B2EC|8584    |000084;
+    STA.B n16TempVar4                                          ;84B2EC|8584    |000084;
  
 .label27:
     SEP #$20                                                   ;84B2EE|E220    |      ;
@@ -7089,7 +7089,7 @@ subUnknown849419_0x36:
     SEP #$20                                                   ;84B2F2|E220    |      ;
     REP #$10                                                   ;84B2F4|C210    |      ;
     LDY.W #$0008                                               ;84B2F6|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B2F9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B2F9|97CC    |0000CC;
     REP #$20                                                   ;84B2FB|C220    |      ;
     LDA.B n16TempVar2                                          ;84B2FD|A580    |000080;
     CMP.B n16TempVar1                                          ;84B2FF|C57E    |00007E;
@@ -7102,7 +7102,7 @@ subUnknown849419_0x36:
  
 .label28:
     REP #$20                                                   ;84B30B|C220    |      ;
-    LDA.B $84                                                  ;84B30D|A584    |000084;
+    LDA.B n16TempVar4                                          ;84B30D|A584    |000084;
     BEQ .label29                                               ;84B30F|F010    |84B321;
     BRA +                                                      ;84B311|8000    |84B313;
  
@@ -7111,7 +7111,7 @@ subUnknown849419_0x36:
     REP #$10                                                   ;84B315|C210    |      ;
     LDY.W #$000F                                               ;84B317|A00F00  |      ;
     LDA.B #$01                                                 ;84B31A|A901    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B31C|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B31C|97CC    |0000CC;
     JMP.W .loop2                                               ;84B31E|4C6AB2  |84B26A;
  
  
@@ -7120,7 +7120,7 @@ subUnknown849419_0x36:
     REP #$10                                                   ;84B323|C210    |      ;
     LDY.W #$000F                                               ;84B325|A00F00  |      ;
     LDA.B #$02                                                 ;84B328|A902    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B32A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B32A|97CC    |0000CC;
     JMP.W .loop2                                               ;84B32C|4C6AB2  |84B26A;
  
  
@@ -7129,7 +7129,7 @@ subUnknown849419_0x36:
     REP #$10                                                   ;84B331|C210    |      ;
     LDY.W #$000F                                               ;84B333|A00F00  |      ;
     LDA.B #$04                                                 ;84B336|A904    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B338|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B338|97CC    |0000CC;
     JMP.W .loop2                                               ;84B33A|4C6AB2  |84B26A;
  
  
@@ -7138,48 +7138,48 @@ subUnknown849419_0x36:
     REP #$10                                                   ;84B33F|C210    |      ;
     LDY.W #$000F                                               ;84B341|A00F00  |      ;
     LDA.B #$08                                                 ;84B344|A908    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B346|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B346|97CC    |0000CC;
     JMP.W .loop2                                               ;84B348|4C6AB2  |84B26A;
  
  
-subUnknown849419_0x37:
+fAIAction0x37:
     REP #$30                                                   ;84B34B|C230    |      ;
     REP #$30                                                   ;84B34D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B34F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B34F|A5C9    |0000C9;
     CLC                                                        ;84B351|18      |      ;
     ADC.W #$0001                                               ;84B352|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B355|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B355|85C9    |0000C9;
     REP #$30                                                   ;84B357|C230    |      ;
     LDY.W #$0012                                               ;84B359|A01200  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B35C|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B35C|B7CC    |0000CC;
     STA.B $A5                                                  ;84B35E|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;84B360|22A28185|8581A2;
     RTS                                                        ;84B364|60      |      ;
  
  
-subUnknown849419_0x38:
+fAIAction0x38:
     REP #$30                                                   ;84B365|C230    |      ;
     LDA.L nDailyFlags                                          ;84B367|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84B36B|290080  |      ;
     BEQ +                                                      ;84B36E|F00B    |84B37B;
     REP #$30                                                   ;84B370|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B372|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B372|A5C9    |0000C9;
     CLC                                                        ;84B374|18      |      ;
     ADC.W #$0001                                               ;84B375|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B378|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B378|85C9    |0000C9;
     RTS                                                        ;84B37A|60      |      ;
  
  
   + REP #$30                                                   ;84B37B|C230    |      ;
     LDY.W #$0010                                               ;84B37D|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B380|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B380|B7CC    |0000CC;
     CLC                                                        ;84B382|18      |      ;
     ADC.W #$0001                                               ;84B383|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B386|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B386|97CC    |0000CC;
     RTS                                                        ;84B388|60      |      ;
  
  
-subUnknown849419_0x39:
+fAIAction0x39:
     REP #$30                                                   ;84B389|C230    |      ;
     REP #$30                                                   ;84B38B|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84B38D|A5D2    |0000D2;
@@ -7189,39 +7189,39 @@ subUnknown849419_0x39:
  
  
   + REP #$30                                                   ;84B397|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B399|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B399|A5C9    |0000C9;
     CLC                                                        ;84B39B|18      |      ;
     ADC.W #$0001                                               ;84B39C|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B39F|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B39F|85C9    |0000C9;
     SEP #$20                                                   ;84B3A1|E220    |      ;
     LDA.B #$00                                                 ;84B3A3|A900    |      ;
     XBA                                                        ;84B3A5|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B3A6|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B3A6|A7C9    |0000C9;
     REP #$20                                                   ;84B3A8|C220    |      ;
     ASL A                                                      ;84B3AA|0A      |      ;
     TAX                                                        ;84B3AB|AA      |      ;
-    LDA.L aSetFlags_08FD,X                                     ;84B3AC|BFD2B484|84B4D2;
+    LDA.L aAISetFlags_08FD,X                                   ;84B3AC|BFD2B484|84B4D2;
     ORA.W nUnknownFlags08FD                                    ;84B3B0|0DFD08  |0008FD;
     STA.W nUnknownFlags08FD                                    ;84B3B3|8DFD08  |0008FD;
     REP #$30                                                   ;84B3B6|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B3B8|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B3B8|A5C9    |0000C9;
     CLC                                                        ;84B3BA|18      |      ;
     ADC.W #$0001                                               ;84B3BB|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B3BE|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B3BE|85C9    |0000C9;
     REP #$20                                                   ;84B3C0|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B3C2|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B3C2|A7C9    |0000C9;
     STA.W $08FF                                                ;84B3C4|8DFF08  |0008FF;
     REP #$30                                                   ;84B3C7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B3C9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B3C9|A5C9    |0000C9;
     SEC                                                        ;84B3CB|38      |      ;
     SBC.W #$0002                                               ;84B3CC|E90200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B3CF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B3CF|85C9    |0000C9;
     REP #$30                                                   ;84B3D1|C230    |      ;
     LDY.W #$0010                                               ;84B3D3|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B3D6|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B3D6|B7CC    |0000CC;
     CLC                                                        ;84B3D8|18      |      ;
     ADC.W #$0001                                               ;84B3D9|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B3DC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B3DC|97CC    |0000CC;
     REP #$30                                                   ;84B3DE|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84B3E0|A5D2    |0000D2;
     ORA.W #$1000                                               ;84B3E2|090010  |      ;
@@ -7237,10 +7237,10 @@ subUnknown849419_0x39:
     STA.W $08FF                                                ;84B3F0|8DFF08  |0008FF;
     REP #$30                                                   ;84B3F3|C230    |      ;
     LDY.W #$0010                                               ;84B3F5|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B3F8|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B3F8|B7CC    |0000CC;
     CLC                                                        ;84B3FA|18      |      ;
     ADC.W #$0001                                               ;84B3FB|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B3FE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B3FE|97CC    |0000CC;
     RTS                                                        ;84B400|60      |      ;
  
  
@@ -7256,14 +7256,14 @@ subUnknown849419_0x39:
     LDA.W #$0000                                               ;84B417|A90000  |      ;
     STA.B nPlayerAction                                        ;84B41A|85D4    |0000D4;
     REP #$30                                                   ;84B41C|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B41E|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B41E|A5C9    |0000C9;
     CLC                                                        ;84B420|18      |      ;
     ADC.W #$0004                                               ;84B421|690400  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B424|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B424|85C9    |0000C9;
     RTS                                                        ;84B426|60      |      ;
  
  
-subUnknown849419_0x3A:
+fAIAction0x3A:
     REP #$30                                                   ;84B427|C230    |      ;
     REP #$30                                                   ;84B429|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84B42B|A5D2    |0000D2;
@@ -7273,43 +7273,43 @@ subUnknown849419_0x3A:
  
  
   + REP #$30                                                   ;84B435|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B437|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B437|A5C9    |0000C9;
     CLC                                                        ;84B439|18      |      ;
     ADC.W #$0001                                               ;84B43A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B43D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B43D|85C9    |0000C9;
     SEP #$20                                                   ;84B43F|E220    |      ;
     LDA.B #$00                                                 ;84B441|A900    |      ;
     XBA                                                        ;84B443|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B444|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B444|A7C9    |0000C9;
     REP #$20                                                   ;84B446|C220    |      ;
     ASL A                                                      ;84B448|0A      |      ;
     TAX                                                        ;84B449|AA      |      ;
-    LDA.L aSetFlags_08FD,X                                     ;84B44A|BFD2B484|84B4D2;
+    LDA.L aAISetFlags_08FD,X                                   ;84B44A|BFD2B484|84B4D2;
     ORA.W nUnknownFlags08FD                                    ;84B44E|0DFD08  |0008FD;
     STA.W nUnknownFlags08FD                                    ;84B451|8DFD08  |0008FD;
     LDX.W #$0008                                               ;84B454|A20800  |      ;
-    LDA.L aSetFlags_08FD,X                                     ;84B457|BFD2B484|84B4D2;
+    LDA.L aAISetFlags_08FD,X                                   ;84B457|BFD2B484|84B4D2;
     ORA.W nUnknownFlags08FD                                    ;84B45B|0DFD08  |0008FD;
     STA.W nUnknownFlags08FD                                    ;84B45E|8DFD08  |0008FD;
     REP #$30                                                   ;84B461|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B463|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B463|A5C9    |0000C9;
     CLC                                                        ;84B465|18      |      ;
     ADC.W #$0001                                               ;84B466|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B469|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B469|85C9    |0000C9;
     REP #$20                                                   ;84B46B|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B46D|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B46D|A7C9    |0000C9;
     STA.W $08FF                                                ;84B46F|8DFF08  |0008FF;
     REP #$30                                                   ;84B472|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B474|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B474|A5C9    |0000C9;
     SEC                                                        ;84B476|38      |      ;
     SBC.W #$0002                                               ;84B477|E90200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B47A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B47A|85C9    |0000C9;
     REP #$30                                                   ;84B47C|C230    |      ;
     LDY.W #$0010                                               ;84B47E|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B481|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B481|B7CC    |0000CC;
     CLC                                                        ;84B483|18      |      ;
     ADC.W #$0001                                               ;84B484|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B487|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B487|97CC    |0000CC;
     REP #$30                                                   ;84B489|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84B48B|A5D2    |0000D2;
     ORA.W #$1000                                               ;84B48D|090010  |      ;
@@ -7325,10 +7325,10 @@ subUnknown849419_0x3A:
     STA.W $08FF                                                ;84B49B|8DFF08  |0008FF;
     REP #$30                                                   ;84B49E|C230    |      ;
     LDY.W #$0010                                               ;84B4A0|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B4A3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B4A3|B7CC    |0000CC;
     CLC                                                        ;84B4A5|18      |      ;
     ADC.W #$0001                                               ;84B4A6|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B4A9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B4A9|97CC    |0000CC;
     RTS                                                        ;84B4AB|60      |      ;
  
  
@@ -7344,31 +7344,31 @@ subUnknown849419_0x3A:
     LDA.W #$0000                                               ;84B4C2|A90000  |      ;
     STA.B nPlayerAction                                        ;84B4C5|85D4    |0000D4;
     REP #$30                                                   ;84B4C7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B4C9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B4C9|A5C9    |0000C9;
     CLC                                                        ;84B4CB|18      |      ;
     ADC.W #$0004                                               ;84B4CC|690400  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B4CF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B4CF|85C9    |0000C9;
     RTS                                                        ;84B4D1|60      |      ;
  
  
-aSetFlags_08FD:
+aAISetFlags_08FD:
     dw $0400,$0800,$0100,$0200,$8000                           ;84B4D2|        |      ; 0x05 * [n16]
  
-subUnknown849419_0x3B:
+fAIAction0x3B:
     REP #$30                                                   ;84B4DC|C230    |      ;
     REP #$30                                                   ;84B4DE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B4E0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B4E0|A5C9    |0000C9;
     CLC                                                        ;84B4E2|18      |      ;
     ADC.W #$0001                                               ;84B4E3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B4E6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B4E6|85C9    |0000C9;
     SEP #$20                                                   ;84B4E8|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B4EA|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B4EA|A7C9    |0000C9;
     STA.W $091D                                                ;84B4EC|8D1D09  |00091D;
     REP #$30                                                   ;84B4EF|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B4F1|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B4F1|A5C9    |0000C9;
     CLC                                                        ;84B4F3|18      |      ;
     ADC.W #$0001                                               ;84B4F4|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B4F7|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B4F7|85C9    |0000C9;
     REP #$30                                                   ;84B4F9|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84B4FB|A5D2    |0000D2;
     ORA.W #$0002                                               ;84B4FD|090200  |      ;
@@ -7376,16 +7376,16 @@ subUnknown849419_0x3B:
     RTS                                                        ;84B502|60      |      ;
  
  
-subUnknown849419_0x3C:
+fAIAction0x3C:
     REP #$30                                                   ;84B503|C230    |      ;
     REP #$30                                                   ;84B505|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B507|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B507|A5C9    |0000C9;
     CLC                                                        ;84B509|18      |      ;
     ADC.W #$0001                                               ;84B50A|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B50D|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B50D|85C9    |0000C9;
     SEP #$20                                                   ;84B50F|E220    |      ;
     LDA.B #$15                                                 ;84B511|A915    |      ;
-    STA.W $098B                                                ;84B513|8D8B09  |00098B;
+    STA.W n8DestinationId                                      ;84B513|8D8B09  |00098B;
     REP #$30                                                   ;84B516|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
@@ -7396,21 +7396,21 @@ subUnknown849419_0x3C:
     RTS                                                        ;84B52C|60      |      ;
  
  
-subUnknown849419_0x3D:
+fAIAction0x3D:
     REP #$30                                                   ;84B52D|C230    |      ;
     REP #$30                                                   ;84B52F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B531|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B531|A5C9    |0000C9;
     CLC                                                        ;84B533|18      |      ;
     ADC.W #$0001                                               ;84B534|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B537|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B537|85C9    |0000C9;
     SEP #$20                                                   ;84B539|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B53B|A7C9    |0000C9;
-    STA.W $098B                                                ;84B53D|8D8B09  |00098B;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B53B|A7C9    |0000C9;
+    STA.W n8DestinationId                                      ;84B53D|8D8B09  |00098B;
     REP #$30                                                   ;84B540|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B542|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B542|A5C9    |0000C9;
     CLC                                                        ;84B544|18      |      ;
     ADC.W #$0001                                               ;84B545|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B548|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B548|85C9    |0000C9;
     REP #$30                                                   ;84B54A|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;84B54C|AD9601  |000196;
     ORA.W #$4000                                               ;84B54F|090040  |      ;
@@ -7418,47 +7418,47 @@ subUnknown849419_0x3D:
     RTS                                                        ;84B555|60      |      ;
  
  
-subUnknown849419_0x3E:
+fAIAction0x3E:
     REP #$30                                                   ;84B556|C230    |      ;
     REP #$30                                                   ;84B558|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B55A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B55A|A5C9    |0000C9;
     CLC                                                        ;84B55C|18      |      ;
     ADC.W #$0001                                               ;84B55D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B560|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B560|85C9    |0000C9;
     SEP #$20                                                   ;84B562|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B564|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B564|A7C9    |0000C9;
     STA.W $091D                                                ;84B566|8D1D09  |00091D;
     REP #$30                                                   ;84B569|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B56B|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B56B|A5C9    |0000C9;
     CLC                                                        ;84B56D|18      |      ;
     ADC.W #$0001                                               ;84B56E|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B571|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B571|85C9    |0000C9;
     REP #$30                                                   ;84B573|C230    |      ;
     LDA.W #$0004                                               ;84B575|A90400  |      ;
     STA.B nPlayerAction                                        ;84B578|85D4    |0000D4;
     RTS                                                        ;84B57A|60      |      ;
  
  
-subUnknown849419_0x3F:
+fAIAction0x3F_ThrowHeldItem:
     REP #$30                                                   ;84B57B|C230    |      ;
     REP #$30                                                   ;84B57D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B57F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B57F|A5C9    |0000C9;
     CLC                                                        ;84B581|18      |      ;
     ADC.W #$0001                                               ;84B582|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B585|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B585|85C9    |0000C9;
     REP #$30                                                   ;84B587|C230    |      ;
     LDA.W #$0005                                               ;84B589|A90500  |      ;
     STA.B nPlayerAction                                        ;84B58C|85D4    |0000D4;
     RTS                                                        ;84B58E|60      |      ;
  
  
-subUnknown849419_0x40:
+fAIAction0x40_DisableTileInteractions:
     REP #$30                                                   ;84B58F|C230    |      ;
     REP #$30                                                   ;84B591|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B593|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B593|A5C9    |0000C9;
     CLC                                                        ;84B595|18      |      ;
     ADC.W #$0001                                               ;84B596|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B599|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B599|85C9    |0000C9;
     REP #$20                                                   ;84B59B|C220    |      ;
     LDA.L nDailyFlags+2                                        ;84B59D|AF5C1F7F|7F1F5C;
     ORA.W #$0008                                               ;84B5A1|090800  |      ;
@@ -7466,37 +7466,37 @@ subUnknown849419_0x40:
     RTS                                                        ;84B5A8|60      |      ;
  
  
-subUnknown849419_0x41:
+fAIAction0x41:
     REP #$30                                                   ;84B5A9|C230    |      ;
     REP #$30                                                   ;84B5AB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B5AD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B5AD|A5C9    |0000C9;
     CLC                                                        ;84B5AF|18      |      ;
     ADC.W #$0001                                               ;84B5B0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B5B3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B5B3|85C9    |0000C9;
     REP #$20                                                   ;84B5B5|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B5B7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B5B7|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B5B9|8572    |000072;
     REP #$30                                                   ;84B5BB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B5BD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B5BD|A5C9    |0000C9;
     CLC                                                        ;84B5BF|18      |      ;
     ADC.W #$0002                                               ;84B5C0|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B5C3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B5C3|85C9    |0000C9;
     SEP #$20                                                   ;84B5C5|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B5C7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B5C7|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B5C9|8574    |000074;
     REP #$30                                                   ;84B5CB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B5CD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B5CD|A5C9    |0000C9;
     CLC                                                        ;84B5CF|18      |      ;
     ADC.W #$0001                                               ;84B5D0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B5D3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B5D3|85C9    |0000C9;
     REP #$20                                                   ;84B5D5|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B5D7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B5D7|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B5D9|857E    |00007E;
     REP #$30                                                   ;84B5DB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B5DD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B5DD|A5C9    |0000C9;
     CLC                                                        ;84B5DF|18      |      ;
     ADC.W #$0002                                               ;84B5E0|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B5E3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B5E3|85C9    |0000C9;
     LDA.B [ptrUnknown0x72]                                     ;84B5E5|A772    |000072;
     CLC                                                        ;84B5E7|18      |      ;
     ADC.B n16TempVar1                                          ;84B5E8|657E    |00007E;
@@ -7518,45 +7518,45 @@ subUnknown849419_0x41:
     RTS                                                        ;84B601|60      |      ;
  
  
-subUnknown849419_0x42:
+fAIAction0x42:
     REP #$30                                                   ;84B602|C230    |      ;
     REP #$30                                                   ;84B604|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B606|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B606|A5C9    |0000C9;
     CLC                                                        ;84B608|18      |      ;
     ADC.W #$0001                                               ;84B609|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B60C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B60C|85C9    |0000C9;
     REP #$20                                                   ;84B60E|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B610|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B610|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B612|8572    |000072;
     REP #$30                                                   ;84B614|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B616|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B616|A5C9    |0000C9;
     CLC                                                        ;84B618|18      |      ;
     ADC.W #$0002                                               ;84B619|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B61C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B61C|85C9    |0000C9;
     SEP #$20                                                   ;84B61E|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B620|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B620|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B622|8574    |000074;
     REP #$30                                                   ;84B624|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B626|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B626|A5C9    |0000C9;
     CLC                                                        ;84B628|18      |      ;
     ADC.W #$0001                                               ;84B629|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B62C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B62C|85C9    |0000C9;
     REP #$20                                                   ;84B62E|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B630|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B630|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B632|8572    |000072;
     REP #$30                                                   ;84B634|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B636|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B636|A5C9    |0000C9;
     CLC                                                        ;84B638|18      |      ;
     ADC.W #$0002                                               ;84B639|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B63C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B63C|85C9    |0000C9;
     SEP #$20                                                   ;84B63E|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B640|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B640|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B642|8574    |000074;
     REP #$30                                                   ;84B644|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B646|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B646|A5C9    |0000C9;
     CLC                                                        ;84B648|18      |      ;
     ADC.W #$0001                                               ;84B649|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B64C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B64C|85C9    |0000C9;
     JSL.L fGameEngine_AddProfit                                ;84B64E|22C9B183|83B1C9;
     REP #$20                                                   ;84B652|C220    |      ;
     BEQ .justReturn                                            ;84B654|F00F    |84B665;
@@ -7570,94 +7570,94 @@ subUnknown849419_0x42:
     RTS                                                        ;84B665|60      |      ;
  
  
-subUnknown849419_0x43:
+fAIAction0x43:
     REP #$30                                                   ;84B666|C230    |      ;
     REP #$30                                                   ;84B668|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B66A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B66A|A5C9    |0000C9;
     CLC                                                        ;84B66C|18      |      ;
     ADC.W #$0001                                               ;84B66D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B670|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B670|85C9    |0000C9;
     REP #$20                                                   ;84B672|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B674|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B674|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B676|8572    |000072;
     REP #$30                                                   ;84B678|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B67A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B67A|A5C9    |0000C9;
     CLC                                                        ;84B67C|18      |      ;
     ADC.W #$0002                                               ;84B67D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B680|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B680|85C9    |0000C9;
     SEP #$20                                                   ;84B682|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B684|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B684|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B686|8574    |000074;
     REP #$30                                                   ;84B688|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B68A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B68A|A5C9    |0000C9;
     CLC                                                        ;84B68C|18      |      ;
     ADC.W #$0001                                               ;84B68D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B690|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B690|85C9    |0000C9;
     REP #$20                                                   ;84B692|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B694|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B694|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B696|857E    |00007E;
     REP #$30                                                   ;84B698|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B69A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B69A|A5C9    |0000C9;
     CLC                                                        ;84B69C|18      |      ;
     ADC.W #$0002                                               ;84B69D|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B6A0|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6A0|85C9    |0000C9;
     REP #$20                                                   ;84B6A2|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B6A4|A772    |000072;
     CMP.B n16TempVar1                                          ;84B6A6|C57E    |00007E;
     BNE +                                                      ;84B6A8|D007    |84B6B1;
     REP #$20                                                   ;84B6AA|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B6AC|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;84B6AE|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B6AC|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6AE|85C9    |0000C9;
     RTS                                                        ;84B6B0|60      |      ;
  
  
   + REP #$30                                                   ;84B6B1|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B6B3|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B6B3|A5C9    |0000C9;
     CLC                                                        ;84B6B5|18      |      ;
     ADC.W #$0002                                               ;84B6B6|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B6B9|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6B9|85C9    |0000C9;
     RTS                                                        ;84B6BB|60      |      ;
  
  
-subUnknown849419_0x44:
+fAIAction0x44:
     REP #$30                                                   ;84B6BC|C230    |      ;
     REP #$30                                                   ;84B6BE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B6C0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B6C0|A5C9    |0000C9;
     CLC                                                        ;84B6C2|18      |      ;
     ADC.W #$0001                                               ;84B6C3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B6C6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6C6|85C9    |0000C9;
     REP #$20                                                   ;84B6C8|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B6CA|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B6CA|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B6CC|8572    |000072;
     REP #$30                                                   ;84B6CE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B6D0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B6D0|A5C9    |0000C9;
     CLC                                                        ;84B6D2|18      |      ;
     ADC.W #$0002                                               ;84B6D3|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B6D6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6D6|85C9    |0000C9;
     SEP #$20                                                   ;84B6D8|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B6DA|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B6DA|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B6DC|8574    |000074;
     REP #$30                                                   ;84B6DE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B6E0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B6E0|A5C9    |0000C9;
     CLC                                                        ;84B6E2|18      |      ;
     ADC.W #$0001                                               ;84B6E3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B6E6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6E6|85C9    |0000C9;
     REP #$20                                                   ;84B6E8|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B6EA|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B6EA|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B6EC|857E    |00007E;
     REP #$30                                                   ;84B6EE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B6F0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B6F0|A5C9    |0000C9;
     CLC                                                        ;84B6F2|18      |      ;
     ADC.W #$0002                                               ;84B6F3|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B6F6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B6F6|85C9    |0000C9;
     SEP #$20                                                   ;84B6F8|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B6FA|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B6FA|A7C9    |0000C9;
     STA.B n16TempVar2                                          ;84B6FC|8580    |000080;
     REP #$30                                                   ;84B6FE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B700|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B700|A5C9    |0000C9;
     CLC                                                        ;84B702|18      |      ;
     ADC.W #$0001                                               ;84B703|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B706|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B706|85C9    |0000C9;
     REP #$20                                                   ;84B708|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B70A|A772    |000072;
     CMP.B n16TempVar1                                          ;84B70C|C57E    |00007E;
@@ -7668,59 +7668,59 @@ subUnknown849419_0x44:
     CMP.B n16TempVar2                                          ;84B717|C580    |000080;
     BNE +                                                      ;84B719|D007    |84B722;
     REP #$20                                                   ;84B71B|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B71D|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;84B71F|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B71D|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B71F|85C9    |0000C9;
     RTS                                                        ;84B721|60      |      ;
  
  
   + REP #$30                                                   ;84B722|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B724|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B724|A5C9    |0000C9;
     CLC                                                        ;84B726|18      |      ;
     ADC.W #$0002                                               ;84B727|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B72A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B72A|85C9    |0000C9;
     RTS                                                        ;84B72C|60      |      ;
  
  
-subUnknown849419_0x45:
+fAIAction0x45:
     REP #$30                                                   ;84B72D|C230    |      ;
     REP #$30                                                   ;84B72F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B731|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B731|A5C9    |0000C9;
     CLC                                                        ;84B733|18      |      ;
     ADC.W #$0001                                               ;84B734|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B737|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B737|85C9    |0000C9;
     REP #$20                                                   ;84B739|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B73B|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B73B|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B73D|8572    |000072;
     REP #$30                                                   ;84B73F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B741|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B741|A5C9    |0000C9;
     CLC                                                        ;84B743|18      |      ;
     ADC.W #$0002                                               ;84B744|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B747|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B747|85C9    |0000C9;
     SEP #$20                                                   ;84B749|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B74B|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B74B|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B74D|8574    |000074;
     REP #$30                                                   ;84B74F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B751|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B751|A5C9    |0000C9;
     CLC                                                        ;84B753|18      |      ;
     ADC.W #$0001                                               ;84B754|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B757|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B757|85C9    |0000C9;
     REP #$20                                                   ;84B759|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B75B|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B75B|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B75D|857E    |00007E;
     REP #$30                                                   ;84B75F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B761|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B761|A5C9    |0000C9;
     CLC                                                        ;84B763|18      |      ;
     ADC.W #$0002                                               ;84B764|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B767|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B767|85C9    |0000C9;
     REP #$20                                                   ;84B769|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B76B|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B76B|A7C9    |0000C9;
     INC A                                                      ;84B76D|1A      |      ;
     STA.B n16TempVar2                                          ;84B76E|8580    |000080;
     REP #$30                                                   ;84B770|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B772|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B772|A5C9    |0000C9;
     CLC                                                        ;84B774|18      |      ;
     ADC.W #$0002                                               ;84B775|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B778|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B778|85C9    |0000C9;
     REP #$20                                                   ;84B77A|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B77C|A772    |000072;
     CMP.B n16TempVar1                                          ;84B77E|C57E    |00007E;
@@ -7729,83 +7729,83 @@ subUnknown849419_0x45:
     CMP.B n16TempVar2                                          ;84B784|C580    |000080;
     BCS +                                                      ;84B786|B007    |84B78F;
     REP #$20                                                   ;84B788|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B78A|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;84B78C|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B78A|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B78C|85C9    |0000C9;
     RTS                                                        ;84B78E|60      |      ;
  
  
   + REP #$30                                                   ;84B78F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B791|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B791|A5C9    |0000C9;
     CLC                                                        ;84B793|18      |      ;
     ADC.W #$0002                                               ;84B794|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B797|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B797|85C9    |0000C9;
     RTS                                                        ;84B799|60      |      ;
  
  
-subUnknown849419_0x46:
+fAIAction0x46:
     REP #$30                                                   ;84B79A|C230    |      ;
     REP #$30                                                   ;84B79C|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B79E|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B79E|A5C9    |0000C9;
     CLC                                                        ;84B7A0|18      |      ;
     ADC.W #$0001                                               ;84B7A1|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B7A4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B7A4|85C9    |0000C9;
     REP #$20                                                   ;84B7A6|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B7A8|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B7A8|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B7AA|8572    |000072;
     REP #$30                                                   ;84B7AC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B7AE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B7AE|A5C9    |0000C9;
     CLC                                                        ;84B7B0|18      |      ;
     ADC.W #$0002                                               ;84B7B1|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B7B4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B7B4|85C9    |0000C9;
     SEP #$20                                                   ;84B7B6|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B7B8|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B7B8|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B7BA|8574    |000074;
     REP #$30                                                   ;84B7BC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B7BE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B7BE|A5C9    |0000C9;
     CLC                                                        ;84B7C0|18      |      ;
     ADC.W #$0001                                               ;84B7C1|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B7C4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B7C4|85C9    |0000C9;
     REP #$20                                                   ;84B7C6|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B7C8|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B7C8|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B7CA|857E    |00007E;
     REP #$30                                                   ;84B7CC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B7CE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B7CE|A5C9    |0000C9;
     CLC                                                        ;84B7D0|18      |      ;
     ADC.W #$0002                                               ;84B7D1|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B7D4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B7D4|85C9    |0000C9;
     SEP #$20                                                   ;84B7D6|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B7D8|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B7D8|A7C9    |0000C9;
     STA.B n16TempVar2                                          ;84B7DA|8580    |000080;
     REP #$30                                                   ;84B7DC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B7DE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B7DE|A5C9    |0000C9;
     CLC                                                        ;84B7E0|18      |      ;
     ADC.W #$0001                                               ;84B7E1|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B7E4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B7E4|85C9    |0000C9;
     REP #$20                                                   ;84B7E6|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B7E8|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B7E8|A7C9    |0000C9;
     STA.B n16TempVar3                                          ;84B7EA|8582    |000082;
     REP #$30                                                   ;84B7EC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B7EE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B7EE|A5C9    |0000C9;
     CLC                                                        ;84B7F0|18      |      ;
     ADC.W #$0002                                               ;84B7F1|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B7F4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B7F4|85C9    |0000C9;
     SEP #$20                                                   ;84B7F6|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B7F8|A7C9    |0000C9;
-    STA.B $84                                                  ;84B7FA|8584    |000084;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B7F8|A7C9    |0000C9;
+    STA.B n16TempVar4                                          ;84B7FA|8584    |000084;
     REP #$30                                                   ;84B7FC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B7FE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B7FE|A5C9    |0000C9;
     CLC                                                        ;84B800|18      |      ;
     ADC.W #$0001                                               ;84B801|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B804|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B804|85C9    |0000C9;
     REP #$20                                                   ;84B806|C220    |      ;
     LDA.B n16TempVar3                                          ;84B808|A582    |000082;
     CLC                                                        ;84B80A|18      |      ;
     ADC.W #$0001                                               ;84B80B|690100  |      ;
     STA.B n16TempVar3                                          ;84B80E|8582    |000082;
     SEP #$20                                                   ;84B810|E220    |      ;
-    LDA.B $84                                                  ;84B812|A584    |000084;
+    LDA.B n16TempVar4                                          ;84B812|A584    |000084;
     ADC.B #$00                                                 ;84B814|6900    |      ;
-    STA.B $84                                                  ;84B816|8584    |000084;
+    STA.B n16TempVar4                                          ;84B816|8584    |000084;
     REP #$20                                                   ;84B818|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B81A|A772    |000072;
     CMP.B n16TempVar1                                          ;84B81C|C57E    |00007E;
@@ -7820,159 +7820,159 @@ subUnknown849419_0x46:
     SEP #$20                                                   ;84B82F|E220    |      ;
     LDY.W #$0002                                               ;84B831|A00200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84B834|B772    |000072;
-    SBC.B $84                                                  ;84B836|E584    |000084;
+    SBC.B n16TempVar4                                          ;84B836|E584    |000084;
     BCS +                                                      ;84B838|B007    |84B841;
     REP #$20                                                   ;84B83A|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B83C|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;84B83E|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B83C|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B83E|85C9    |0000C9;
     RTS                                                        ;84B840|60      |      ;
  
  
   + REP #$30                                                   ;84B841|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B843|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B843|A5C9    |0000C9;
     CLC                                                        ;84B845|18      |      ;
     ADC.W #$0002                                               ;84B846|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B849|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B849|85C9    |0000C9;
     RTS                                                        ;84B84B|60      |      ;
  
  
-subUnknown849419_0x47:
+fAIAction0x47:
     REP #$30                                                   ;84B84C|C230    |      ;
     REP #$30                                                   ;84B84E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B850|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B850|A5C9    |0000C9;
     CLC                                                        ;84B852|18      |      ;
     ADC.W #$0001                                               ;84B853|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B856|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B856|85C9    |0000C9;
     REP #$20                                                   ;84B858|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B85A|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B85A|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B85C|8572    |000072;
     REP #$30                                                   ;84B85E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B860|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B860|A5C9    |0000C9;
     CLC                                                        ;84B862|18      |      ;
     ADC.W #$0002                                               ;84B863|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B866|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B866|85C9    |0000C9;
     SEP #$20                                                   ;84B868|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B86A|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B86A|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B86C|8574    |000074;
     REP #$30                                                   ;84B86E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B870|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B870|A5C9    |0000C9;
     CLC                                                        ;84B872|18      |      ;
     ADC.W #$0001                                               ;84B873|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B876|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B876|85C9    |0000C9;
     SEP #$20                                                   ;84B878|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B87A|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B87A|A7C9    |0000C9;
     STA.B [ptrUnknown0x72]                                     ;84B87C|8772    |000072;
     REP #$30                                                   ;84B87E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B880|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B880|A5C9    |0000C9;
     CLC                                                        ;84B882|18      |      ;
     ADC.W #$0001                                               ;84B883|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B886|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B886|85C9    |0000C9;
     RTS                                                        ;84B888|60      |      ;
  
  
-subUnknown849419_0x48:
+fAIAction0x48:
     REP #$30                                                   ;84B889|C230    |      ;
     REP #$30                                                   ;84B88B|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B88D|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B88D|A5C9    |0000C9;
     CLC                                                        ;84B88F|18      |      ;
     ADC.W #$0001                                               ;84B890|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B893|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B893|85C9    |0000C9;
     REP #$20                                                   ;84B895|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B897|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B897|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B899|8572    |000072;
     REP #$30                                                   ;84B89B|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B89D|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B89D|A5C9    |0000C9;
     CLC                                                        ;84B89F|18      |      ;
     ADC.W #$0002                                               ;84B8A0|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B8A3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B8A3|85C9    |0000C9;
     SEP #$20                                                   ;84B8A5|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B8A7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B8A7|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B8A9|8574    |000074;
     REP #$30                                                   ;84B8AB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B8AD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B8AD|A5C9    |0000C9;
     CLC                                                        ;84B8AF|18      |      ;
     ADC.W #$0001                                               ;84B8B0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B8B3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B8B3|85C9    |0000C9;
     REP #$20                                                   ;84B8B5|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B8B7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B8B7|A7C9    |0000C9;
     STA.B [ptrUnknown0x72]                                     ;84B8B9|8772    |000072;
     REP #$30                                                   ;84B8BB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B8BD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B8BD|A5C9    |0000C9;
     CLC                                                        ;84B8BF|18      |      ;
     ADC.W #$0002                                               ;84B8C0|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B8C3|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B8C3|85C9    |0000C9;
     SEP #$20                                                   ;84B8C5|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84B8C7|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B8C7|A7C9    |0000C9;
     LDY.W #$0002                                               ;84B8C9|A00200  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84B8CC|9772    |000072;
     REP #$30                                                   ;84B8CE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B8D0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B8D0|A5C9    |0000C9;
     CLC                                                        ;84B8D2|18      |      ;
     ADC.W #$0001                                               ;84B8D3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B8D6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B8D6|85C9    |0000C9;
     RTS                                                        ;84B8D8|60      |      ;
  
  
-subUnknown849419_0x49:
+fAIAction0x49:
     REP #$30                                                   ;84B8D9|C230    |      ;
     REP #$30                                                   ;84B8DB|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B8DD|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B8DD|A5C9    |0000C9;
     CLC                                                        ;84B8DF|18      |      ;
     ADC.W #$0001                                               ;84B8E0|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B8E3|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;84B8E5|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B8E3|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84B8E5|A7C9    |0000C9;
     REP #$30                                                   ;84B8E7|C230    |      ;
     LDY.W #$0033                                               ;84B8E9|A03300  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B8EC|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B8EC|97CC    |0000CC;
     REP #$30                                                   ;84B8EE|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B8F0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B8F0|A5C9    |0000C9;
     CLC                                                        ;84B8F2|18      |      ;
     ADC.W #$0002                                               ;84B8F3|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B8F6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B8F6|85C9    |0000C9;
     REP #$20                                                   ;84B8F8|C220    |      ;
     LDA.B nPlayerDirection                                     ;84B8FA|A5DA    |0000DA;
     SEP #$20                                                   ;84B8FC|E220    |      ;
     SEP #$20                                                   ;84B8FE|E220    |      ;
     REP #$10                                                   ;84B900|C210    |      ;
     LDY.W #$0002                                               ;84B902|A00200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B905|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B905|97CC    |0000CC;
     SEP #$20                                                   ;84B907|E220    |      ;
     REP #$10                                                   ;84B909|C210    |      ;
     LDY.W #$0001                                               ;84B90B|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B90E|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B90E|B7CC    |0000CC;
     ORA.B #$03                                                 ;84B910|0903    |      ;
     SEP #$20                                                   ;84B912|E220    |      ;
     REP #$10                                                   ;84B914|C210    |      ;
     LDY.W #$0001                                               ;84B916|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B919|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B919|97CC    |0000CC;
     REP #$30                                                   ;84B91B|C230    |      ;
     LDY.W #$0033                                               ;84B91D|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B920|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B920|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;84B922|8572    |000072;
     SEP #$20                                                   ;84B924|E220    |      ;
     LDA.B #$B3                                                 ;84B926|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;84B928|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;84B92A|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;84B92A|22958884|848895;
     REP #$30                                                   ;84B92E|C230    |      ;
     LDY.W #$0010                                               ;84B930|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B933|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B933|B7CC    |0000CC;
     CLC                                                        ;84B935|18      |      ;
     ADC.W #$0001                                               ;84B936|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B939|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B939|97CC    |0000CC;
     RTS                                                        ;84B93B|60      |      ;
  
  
-subUnknown849419_0x4A:
+fAIAction0x4A_UpdatePowerBerry:
     REP #$30                                                   ;84B93C|C230    |      ;
     REP #$30                                                   ;84B93E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84B940|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84B940|A5C9    |0000C9;
     CLC                                                        ;84B942|18      |      ;
     ADC.W #$0001                                               ;84B943|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84B946|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84B946|85C9    |0000C9;
     SEP #$20                                                   ;84B948|E220    |      ;
     REP #$10                                                   ;84B94A|C210    |      ;
     LDY.W #$000C                                               ;84B94C|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B94F|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B94F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84B951|C900    |      ;
     BNE +                                                      ;84B953|D003    |84B958;
     JMP.W .return                                              ;84B955|4C02BA  |84BA02;
@@ -8043,22 +8043,22 @@ subUnknown849419_0x4A:
     REP #$10                                                   ;84B9C9|C210    |      ;
     LDY.W #$0000                                               ;84B9CB|A00000  |      ;
     LDA.B #$00                                                 ;84B9CE|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B9D0|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B9D0|97CC    |0000CC;
     SEP #$20                                                   ;84B9D2|E220    |      ;
     REP #$10                                                   ;84B9D4|C210    |      ;
     LDY.W #$0001                                               ;84B9D6|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B9D9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B9D9|B7CC    |0000CC;
     ORA.B #$40                                                 ;84B9DB|0940    |      ;
     SEP #$20                                                   ;84B9DD|E220    |      ;
     REP #$10                                                   ;84B9DF|C210    |      ;
     LDY.W #$0001                                               ;84B9E1|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B9E4|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B9E4|97CC    |0000CC;
     REP #$30                                                   ;84B9E6|C230    |      ;
     LDY.W #$0010                                               ;84B9E8|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84B9EB|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B9EB|B7CC    |0000CC;
     CLC                                                        ;84B9ED|18      |      ;
     ADC.W #$0001                                               ;84B9EE|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84B9F1|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
     SEP #$20                                                   ;84B9F3|E220    |      ;
     LDA.B #$08                                                 ;84B9F5|A908    |      ;
     STA.W $091D                                                ;84B9F7|8D1D09  |00091D;
@@ -8071,43 +8071,43 @@ subUnknown849419_0x4A:
 .return:
     REP #$30                                                   ;84BA02|C230    |      ;
     LDY.W #$0010                                               ;84BA04|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BA07|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BA07|B7CC    |0000CC;
     CLC                                                        ;84BA09|18      |      ;
     ADC.W #$0001                                               ;84BA0A|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BA0D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BA0D|97CC    |0000CC;
     RTS                                                        ;84BA0F|60      |      ;
  
  
-subUnknown849419_0x4B:
+fAIAction0x4B:
     REP #$30                                                   ;84BA10|C230    |      ;
     REP #$30                                                   ;84BA12|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BA14|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BA14|A5C9    |0000C9;
     CLC                                                        ;84BA16|18      |      ;
     ADC.W #$0001                                               ;84BA17|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BA1A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BA1A|85C9    |0000C9;
     SEP #$20                                                   ;84BA1C|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BA1E|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BA1E|A7C9    |0000C9;
     PHA                                                        ;84BA20|48      |      ;
     REP #$30                                                   ;84BA21|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BA23|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BA23|A5C9    |0000C9;
     CLC                                                        ;84BA25|18      |      ;
     ADC.W #$0001                                               ;84BA26|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BA29|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BA29|85C9    |0000C9;
     REP #$20                                                   ;84BA2B|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BA2D|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BA2D|A7C9    |0000C9;
     PHA                                                        ;84BA2F|48      |      ;
     REP #$30                                                   ;84BA30|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BA32|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BA32|A5C9    |0000C9;
     CLC                                                        ;84BA34|18      |      ;
     ADC.W #$0002                                               ;84BA35|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BA38|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;84BA3A|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BA38|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BA3A|A7C9    |0000C9;
     PHA                                                        ;84BA3C|48      |      ;
     REP #$30                                                   ;84BA3D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BA3F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BA3F|A5C9    |0000C9;
     CLC                                                        ;84BA41|18      |      ;
     ADC.W #$0002                                               ;84BA42|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BA45|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BA45|85C9    |0000C9;
     PLY                                                        ;84BA47|7A      |      ;
     PLX                                                        ;84BA48|FA      |      ;
     SEP #$20                                                   ;84BA49|E220    |      ;
@@ -8116,36 +8116,36 @@ subUnknown849419_0x4B:
     RTS                                                        ;84BA50|60      |      ;
  
  
-subUnknown849419_0x4C:
+fAIAction0x4C:
     REP #$30                                                   ;84BA51|C230    |      ;
     REP #$30                                                   ;84BA53|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BA55|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BA55|A5C9    |0000C9;
     CLC                                                        ;84BA57|18      |      ;
     ADC.W #$0001                                               ;84BA58|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BA5B|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BA5B|85C9    |0000C9;
     SEP #$20                                                   ;84BA5D|E220    |      ;
     REP #$10                                                   ;84BA5F|C210    |      ;
     LDY.W #$0000                                               ;84BA61|A00000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BA64|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BA64|B7CC    |0000CC;
     ORA.B #$02                                                 ;84BA66|0902    |      ;
     SEP #$20                                                   ;84BA68|E220    |      ;
     REP #$10                                                   ;84BA6A|C210    |      ;
     LDY.W #$0000                                               ;84BA6C|A00000  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BA6F|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BA6F|97CC    |0000CC;
     RTS                                                        ;84BA71|60      |      ;
  
  
-subUnknown849419_0x4D:
+fAIAction0x4D:
     REP #$30                                                   ;84BA72|C230    |      ;
     REP #$30                                                   ;84BA74|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BA76|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BA76|A5C9    |0000C9;
     CLC                                                        ;84BA78|18      |      ;
     ADC.W #$0001                                               ;84BA79|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BA7C|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BA7C|85C9    |0000C9;
     SEP #$20                                                   ;84BA7E|E220    |      ;
     REP #$10                                                   ;84BA80|C210    |      ;
     LDY.W #$000C                                               ;84BA82|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BA85|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BA85|B7CC    |0000CC;
     CMP.B #$00                                                 ;84BA87|C900    |      ;
     BNE +                                                      ;84BA89|D003    |84BA8E;
     JMP.W .return                                              ;84BA8B|4C26BB  |84BB26;
@@ -8166,80 +8166,80 @@ subUnknown849419_0x4D:
  
  
   + REP #$20                                                   ;84BAA8|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BAAA|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;84BAAC|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BAAA|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BAAC|85C9    |0000C9;
     SEP #$20                                                   ;84BAAE|E220    |      ;
     REP #$10                                                   ;84BAB0|C210    |      ;
     LDY.W #$0007                                               ;84BAB2|A00700  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BAB5|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BAB5|B7CC    |0000CC;
     SEP #$20                                                   ;84BAB7|E220    |      ;
     REP #$10                                                   ;84BAB9|C210    |      ;
     LDY.W #$0008                                               ;84BABB|A00800  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BABE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BABE|97CC    |0000CC;
     SEP #$20                                                   ;84BAC0|E220    |      ;
     REP #$10                                                   ;84BAC2|C210    |      ;
     LDY.W #$0003                                               ;84BAC4|A00300  |      ;
     LDA.B #$00                                                 ;84BAC7|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BAC9|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BAC9|97CC    |0000CC;
     SEP #$20                                                   ;84BACB|E220    |      ;
     REP #$10                                                   ;84BACD|C210    |      ;
     LDY.W #$0004                                               ;84BACF|A00400  |      ;
     LDA.B #$00                                                 ;84BAD2|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BAD4|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BAD4|97CC    |0000CC;
     SEP #$20                                                   ;84BAD6|E220    |      ;
     REP #$10                                                   ;84BAD8|C210    |      ;
     LDY.W #$000C                                               ;84BADA|A00C00  |      ;
     LDA.B #$00                                                 ;84BADD|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BADF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BADF|97CC    |0000CC;
     REP #$20                                                   ;84BAE1|C220    |      ;
     LDA.B nPlayerDirection                                     ;84BAE3|A5DA    |0000DA;
     EOR.W #$0001                                               ;84BAE5|490100  |      ;
     SEP #$20                                                   ;84BAE8|E220    |      ;
     REP #$10                                                   ;84BAEA|C210    |      ;
     LDY.W #$0002                                               ;84BAEC|A00200  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BAEF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BAEF|97CC    |0000CC;
     REP #$30                                                   ;84BAF1|C230    |      ;
     LDY.W #$0033                                               ;84BAF3|A03300  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BAF6|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BAF6|B7CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;84BAF8|8572    |000072;
     SEP #$20                                                   ;84BAFA|E220    |      ;
     LDA.B #$B3                                                 ;84BAFC|A9B3    |      ;
     STA.B ptrUnknown0x72+2                                     ;84BAFE|8574    |000074;
-    JSL.L fSubUnk1Unknown_848895                               ;84BB00|22958884|848895;
+    JSL.L fAI_Unknown848895                                    ;84BB00|22958884|848895;
     SEP #$20                                                   ;84BB04|E220    |      ;
     REP #$10                                                   ;84BB06|C210    |      ;
     LDY.W #$0001                                               ;84BB08|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BB0B|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BB0B|B7CC    |0000CC;
     ORA.B #$14                                                 ;84BB0D|0914    |      ;
     SEP #$20                                                   ;84BB0F|E220    |      ;
     REP #$10                                                   ;84BB11|C210    |      ;
     LDY.W #$0001                                               ;84BB13|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BB16|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BB16|97CC    |0000CC;
     REP #$30                                                   ;84BB18|C230    |      ;
     LDY.W #$0010                                               ;84BB1A|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BB1D|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BB1D|B7CC    |0000CC;
     CLC                                                        ;84BB1F|18      |      ;
     ADC.W #$0001                                               ;84BB20|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BB23|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BB23|97CC    |0000CC;
     RTS                                                        ;84BB25|60      |      ;
  
  
 .return:
     REP #$30                                                   ;84BB26|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BB28|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BB28|A5C9    |0000C9;
     CLC                                                        ;84BB2A|18      |      ;
     ADC.W #$0002                                               ;84BB2B|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BB2E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BB2E|85C9    |0000C9;
     RTS                                                        ;84BB30|60      |      ;
  
  
-subUnknown849419_0x4E:
+fAIAction0x4E:
     REP #$30                                                   ;84BB31|C230    |      ;
     REP #$30                                                   ;84BB33|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BB35|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BB35|A5C9    |0000C9;
     CLC                                                        ;84BB37|18      |      ;
     ADC.W #$0001                                               ;84BB38|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BB3B|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BB3B|85C9    |0000C9;
     REP #$20                                                   ;84BB3D|C220    |      ;
     LDA.L nDailyFlags+2                                        ;84BB3F|AF5C1F7F|7F1F5C;
     AND.W #$FFF7                                               ;84BB43|29F7FF  |      ;
@@ -8247,13 +8247,13 @@ subUnknown849419_0x4E:
     RTS                                                        ;84BB4A|60      |      ;
  
  
-subUnknown849419_0x4F:
+fAIAction0x4F:
     REP #$30                                                   ;84BB4B|C230    |      ;
     REP #$30                                                   ;84BB4D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BB4F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BB4F|A5C9    |0000C9;
     CLC                                                        ;84BB51|18      |      ;
     ADC.W #$0001                                               ;84BB52|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BB55|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BB55|85C9    |0000C9;
     REP #$20                                                   ;84BB57|C220    |      ;
     LDA.L nDailyFlags+6                                        ;84BB59|AF601F7F|7F1F60;
     ORA.W #$8000                                               ;84BB5D|090080  |      ;
@@ -8277,7 +8277,7 @@ subUnknown849419_0x4F:
     PHA                                                        ;84BB7F|48      |      ;
     INX                                                        ;84BB80|E8      |      ;
     LDA.L nCarriedItemTable_81BE0F,X                           ;84BB81|BF0FBE81|81BE0F;
-    STA.B nTilesetCount                                        ;84BB85|8592    |000092;
+    STA.B n8TempVar1                                           ;84BB85|8592    |000092;
     PLA                                                        ;84BB87|68      |      ;
     XBA                                                        ;84BB88|EB      |      ;
     LDA.B #$00                                                 ;84BB89|A900    |      ;
@@ -8286,7 +8286,7 @@ subUnknown849419_0x4F:
     TAX                                                        ;84BB8E|AA      |      ;
     SEP #$20                                                   ;84BB8F|E220    |      ;
     LDA.L sShedItems,X                                         ;84BB91|BF001F7F|7F1F00;
-    ORA.B nTilesetCount                                        ;84BB95|0592    |000092;
+    ORA.B n8TempVar1                                           ;84BB95|0592    |000092;
     STA.L sShedItems,X                                         ;84BB97|9F001F7F|7F1F00;
     STZ.W nToolEquipped                                        ;84BB9B|9C2109  |000921;
  
@@ -8308,7 +8308,7 @@ subUnknown849419_0x4F:
     PHA                                                        ;84BBBA|48      |      ;
     INX                                                        ;84BBBB|E8      |      ;
     LDA.L nCarriedItemTable_81BE0F,X                           ;84BBBC|BF0FBE81|81BE0F;
-    STA.B nTilesetCount                                        ;84BBC0|8592    |000092;
+    STA.B n8TempVar1                                           ;84BBC0|8592    |000092;
     PLA                                                        ;84BBC2|68      |      ;
     XBA                                                        ;84BBC3|EB      |      ;
     LDA.B #$00                                                 ;84BBC4|A900    |      ;
@@ -8317,7 +8317,7 @@ subUnknown849419_0x4F:
     TAX                                                        ;84BBC9|AA      |      ;
     SEP #$20                                                   ;84BBCA|E220    |      ;
     LDA.L sShedItems,X                                         ;84BBCC|BF001F7F|7F1F00;
-    ORA.B nTilesetCount                                        ;84BBD0|0592    |000092;
+    ORA.B n8TempVar1                                           ;84BBD0|0592    |000092;
     STA.L sShedItems,X                                         ;84BBD2|9F001F7F|7F1F00;
     STZ.W nToolSecond                                          ;84BBD6|9C2309  |000923;
  
@@ -8325,13 +8325,13 @@ subUnknown849419_0x4F:
     RTS                                                        ;84BBD9|60      |      ;
  
  
-subUnknown849419_0x50:
+fAIAction0x50:
     REP #$30                                                   ;84BBDA|C230    |      ;
     REP #$30                                                   ;84BBDC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BBDE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BBDE|A5C9    |0000C9;
     CLC                                                        ;84BBE0|18      |      ;
     ADC.W #$0001                                               ;84BBE1|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BBE4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BBE4|85C9    |0000C9;
     SEP #$20                                                   ;84BBE6|E220    |      ;
     LDA.W $091D                                                ;84BBE8|AD1D09  |00091D;
     BEQ .label2                                                ;84BBEB|F06F    |84BC5C;
@@ -8425,13 +8425,13 @@ subUnknown849419_0x50:
     RTS                                                        ;84BC9B|60      |      ;
  
  
-subUnknown849419_0x51:
+fAIAction0x51:
     REP #$30                                                   ;84BC9C|C230    |      ;
     REP #$30                                                   ;84BC9E|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BCA0|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BCA0|A5C9    |0000C9;
     CLC                                                        ;84BCA2|18      |      ;
     ADC.W #$0001                                               ;84BCA3|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BCA6|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BCA6|85C9    |0000C9;
     SEP #$20                                                   ;84BCA8|E220    |      ;
     LDA.W $091D                                                ;84BCAA|AD1D09  |00091D;
     BEQ .label3                                                ;84BCAD|F060    |84BD0F;
@@ -8516,17 +8516,17 @@ subUnknown849419_0x51:
     RTS                                                        ;84BD43|60      |      ;
  
  
-subUnknown849419_0x52:
+fAIAction0x52:
     REP #$30                                                   ;84BD44|C230    |      ;
     REP #$30                                                   ;84BD46|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BD48|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BD48|A5C9    |0000C9;
     CLC                                                        ;84BD4A|18      |      ;
     ADC.W #$0001                                               ;84BD4B|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BD4E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BD4E|85C9    |0000C9;
     SEP #$20                                                   ;84BD50|E220    |      ;
     REP #$10                                                   ;84BD52|C210    |      ;
     LDY.W #$000C                                               ;84BD54|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BD57|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BD57|B7CC    |0000CC;
     CMP.B #$00                                                 ;84BD59|C900    |      ;
     BNE +                                                      ;84BD5B|D003    |84BD60;
     JMP.W .return                                              ;84BD5D|4CFFBD  |84BDFF;
@@ -8591,22 +8591,22 @@ subUnknown849419_0x52:
     REP #$10                                                   ;84BDC7|C210    |      ;
     LDY.W #$0000                                               ;84BDC9|A00000  |      ;
     LDA.B #$00                                                 ;84BDCC|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BDCE|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BDCE|97CC    |0000CC;
     SEP #$20                                                   ;84BDD0|E220    |      ;
     REP #$10                                                   ;84BDD2|C210    |      ;
     LDY.W #$0001                                               ;84BDD4|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BDD7|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BDD7|B7CC    |0000CC;
     ORA.B #$40                                                 ;84BDD9|0940    |      ;
     SEP #$20                                                   ;84BDDB|E220    |      ;
     REP #$10                                                   ;84BDDD|C210    |      ;
     LDY.W #$0001                                               ;84BDDF|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BDE2|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BDE2|97CC    |0000CC;
     REP #$30                                                   ;84BDE4|C230    |      ;
     LDY.W #$0010                                               ;84BDE6|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BDE9|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BDE9|B7CC    |0000CC;
     CLC                                                        ;84BDEB|18      |      ;
     ADC.W #$0001                                               ;84BDEC|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BDEF|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BDEF|97CC    |0000CC;
     REP #$30                                                   ;84BDF1|C230    |      ;
     LDA.L nDailyFlags+6                                        ;84BDF3|AF601F7F|7F1F60;
     ORA.W #$0002                                               ;84BDF7|090200  |      ;
@@ -8617,24 +8617,24 @@ subUnknown849419_0x52:
 .return:
     REP #$30                                                   ;84BDFF|C230    |      ;
     LDY.W #$0010                                               ;84BE01|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BE04|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BE04|B7CC    |0000CC;
     CLC                                                        ;84BE06|18      |      ;
     ADC.W #$0001                                               ;84BE07|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BE0A|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BE0A|97CC    |0000CC;
     RTS                                                        ;84BE0C|60      |      ;
  
  
-subUnknown849419_0x53:
+fAIAction0x53:
     REP #$30                                                   ;84BE0D|C230    |      ;
     REP #$30                                                   ;84BE0F|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BE11|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BE11|A5C9    |0000C9;
     CLC                                                        ;84BE13|18      |      ;
     ADC.W #$0001                                               ;84BE14|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BE17|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BE17|85C9    |0000C9;
     SEP #$20                                                   ;84BE19|E220    |      ;
     REP #$10                                                   ;84BE1B|C210    |      ;
     LDY.W #$000C                                               ;84BE1D|A00C00  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BE20|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BE20|B7CC    |0000CC;
     CMP.B #$00                                                 ;84BE22|C900    |      ;
     BNE +                                                      ;84BE24|D003    |84BE29;
     JMP.W .return                                              ;84BE26|4CC8BE  |84BEC8;
@@ -8699,22 +8699,22 @@ subUnknown849419_0x53:
     REP #$10                                                   ;84BE90|C210    |      ;
     LDY.W #$0000                                               ;84BE92|A00000  |      ;
     LDA.B #$00                                                 ;84BE95|A900    |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BE97|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BE97|97CC    |0000CC;
     SEP #$20                                                   ;84BE99|E220    |      ;
     REP #$10                                                   ;84BE9B|C210    |      ;
     LDY.W #$0001                                               ;84BE9D|A00100  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BEA0|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BEA0|B7CC    |0000CC;
     ORA.B #$40                                                 ;84BEA2|0940    |      ;
     SEP #$20                                                   ;84BEA4|E220    |      ;
     REP #$10                                                   ;84BEA6|C210    |      ;
     LDY.W #$0001                                               ;84BEA8|A00100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BEAB|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BEAB|97CC    |0000CC;
     REP #$30                                                   ;84BEAD|C230    |      ;
     LDY.W #$0010                                               ;84BEAF|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BEB2|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BEB2|B7CC    |0000CC;
     CLC                                                        ;84BEB4|18      |      ;
     ADC.W #$0001                                               ;84BEB5|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BEB8|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BEB8|97CC    |0000CC;
     REP #$30                                                   ;84BEBA|C230    |      ;
     LDA.L nDailyFlags+6                                        ;84BEBC|AF601F7F|7F1F60;
     ORA.W #$0004                                               ;84BEC0|090400  |      ;
@@ -8725,30 +8725,30 @@ subUnknown849419_0x53:
 .return:
     REP #$30                                                   ;84BEC8|C230    |      ;
     LDY.W #$0010                                               ;84BECA|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BECD|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BECD|B7CC    |0000CC;
     CLC                                                        ;84BECF|18      |      ;
     ADC.W #$0001                                               ;84BED0|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BED3|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BED3|97CC    |0000CC;
     RTS                                                        ;84BED5|60      |      ;
  
  
-subUnknown849419_0x54:
+fAIAction0x54:
     REP #$30                                                   ;84BED6|C230    |      ;
     REP #$30                                                   ;84BED8|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BEDA|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BEDA|A5C9    |0000C9;
     CLC                                                        ;84BEDC|18      |      ;
     ADC.W #$0001                                               ;84BEDD|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BEE0|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BEE0|85C9    |0000C9;
     REP #$20                                                   ;84BEE2|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BEE4|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BEE4|A7C9    |0000C9;
     TAX                                                        ;84BEE6|AA      |      ;
     REP #$30                                                   ;84BEE7|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BEE9|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BEE9|A5C9    |0000C9;
     CLC                                                        ;84BEEB|18      |      ;
     ADC.W #$0002                                               ;84BEEC|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BEEF|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BEEF|85C9    |0000C9;
     SEP #$20                                                   ;84BEF1|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BEF3|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BEF3|A7C9    |0000C9;
     STA.W $0191                                                ;84BEF5|8D9101  |000191;
     REP #$20                                                   ;84BEF8|C220    |      ;
     STZ.W $09B1                                                ;84BEFA|9CB109  |0009B1;
@@ -8757,82 +8757,82 @@ subUnknown849419_0x54:
     STA.W $019A                                                ;84BF01|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84BF04|225F9383|83935F;
     REP #$30                                                   ;84BF08|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF0A|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF0A|A5C9    |0000C9;
     CLC                                                        ;84BF0C|18      |      ;
     ADC.W #$0001                                               ;84BF0D|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF10|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF10|85C9    |0000C9;
     REP #$30                                                   ;84BF12|C230    |      ;
     LDY.W #$0010                                               ;84BF14|A01000  |      ;
-    LDA.B [ptrUnknown0xCC],Y                                   ;84BF17|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BF17|B7CC    |0000CC;
     CLC                                                        ;84BF19|18      |      ;
     ADC.W #$0001                                               ;84BF1A|690100  |      ;
-    STA.B [ptrUnknown0xCC],Y                                   ;84BF1D|97CC    |0000CC;
+    STA.B [ptrAIUnknown0xCC],Y                                 ;84BF1D|97CC    |0000CC;
     RTS                                                        ;84BF1F|60      |      ;
  
  
-subUnknown849419_0x55:
+fAIAction0x55:
     REP #$30                                                   ;84BF20|C230    |      ;
     REP #$30                                                   ;84BF22|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF24|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF24|A5C9    |0000C9;
     CLC                                                        ;84BF26|18      |      ;
     ADC.W #$0001                                               ;84BF27|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF2A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF2A|85C9    |0000C9;
     REP #$20                                                   ;84BF2C|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BF2E|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BF2E|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84BF30|8572    |000072;
     REP #$30                                                   ;84BF32|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF34|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF34|A5C9    |0000C9;
     CLC                                                        ;84BF36|18      |      ;
     ADC.W #$0002                                               ;84BF37|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF3A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF3A|85C9    |0000C9;
     SEP #$20                                                   ;84BF3C|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BF3E|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BF3E|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84BF40|8574    |000074;
     REP #$30                                                   ;84BF42|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF44|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF44|A5C9    |0000C9;
     CLC                                                        ;84BF46|18      |      ;
     ADC.W #$0001                                               ;84BF47|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF4A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF4A|85C9    |0000C9;
     SEP #$20                                                   ;84BF4C|E220    |      ;
     LDA.B #$00                                                 ;84BF4E|A900    |      ;
     XBA                                                        ;84BF50|EB      |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BF51|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BF51|A7C9    |0000C9;
     REP #$20                                                   ;84BF53|C220    |      ;
     ASL A                                                      ;84BF55|0A      |      ;
     TAX                                                        ;84BF56|AA      |      ;
-    LDA.L aCheckFlags_84C014,X                                 ;84BF57|BF14C084|84C014;
+    LDA.L aAICheckFlags,X                                      ;84BF57|BF14C084|84C014;
     STA.B n16TempVar1                                          ;84BF5B|857E    |00007E;
     REP #$30                                                   ;84BF5D|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF5F|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF5F|A5C9    |0000C9;
     CLC                                                        ;84BF61|18      |      ;
     ADC.W #$0001                                               ;84BF62|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF65|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF65|85C9    |0000C9;
     REP #$20                                                   ;84BF67|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84BF69|A772    |000072;
     AND.B n16TempVar1                                          ;84BF6B|257E    |00007E;
     BNE .return                                                ;84BF6D|D007    |84BF76;
     REP #$20                                                   ;84BF6F|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BF71|A7C9    |0000C9;
-    STA.B ptrUnknown0xC9                                       ;84BF73|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BF71|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF73|85C9    |0000C9;
     RTS                                                        ;84BF75|60      |      ;
  
  
 .return:
     REP #$30                                                   ;84BF76|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF78|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF78|A5C9    |0000C9;
     CLC                                                        ;84BF7A|18      |      ;
     ADC.W #$0002                                               ;84BF7B|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF7E|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF7E|85C9    |0000C9;
     RTS                                                        ;84BF80|60      |      ;
  
  
-subUnknown849419_0x56:
+fAIAction0x56_UseEquippedItem:
     REP #$30                                                   ;84BF81|C230    |      ;
     REP #$30                                                   ;84BF83|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BF85|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BF85|A5C9    |0000C9;
     CLC                                                        ;84BF87|18      |      ;
     ADC.W #$0001                                               ;84BF88|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BF8B|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BF8B|85C9    |0000C9;
     SEP #$20                                                   ;84BF8D|E220    |      ;
     LDA.W nToolEquipped                                        ;84BF8F|AD2109  |000921;
     BEQ .return                                                ;84BF92|F00B    |84BF9F;
@@ -8845,54 +8845,54 @@ subUnknown849419_0x56:
     RTS                                                        ;84BF9F|60      |      ;
  
  
-subUnknown849419_0x57:
+fAIAction0x57_UpdateStamina:
     REP #$30                                                   ;84BFA0|C230    |      ;
     REP #$30                                                   ;84BFA2|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BFA4|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BFA4|A5C9    |0000C9;
     CLC                                                        ;84BFA6|18      |      ;
     ADC.W #$0001                                               ;84BFA7|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BFAA|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BFAA|85C9    |0000C9;
     SEP #$20                                                   ;84BFAC|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BFAE|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BFAE|A7C9    |0000C9;
     JSL.L fPlayerEnergyHandler_81D061                          ;84BFB0|2261D081|81D061;
     REP #$30                                                   ;84BFB4|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BFB6|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BFB6|A5C9    |0000C9;
     CLC                                                        ;84BFB8|18      |      ;
     ADC.W #$0001                                               ;84BFB9|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BFBC|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BFBC|85C9    |0000C9;
     RTS                                                        ;84BFBE|60      |      ;
  
  
-subUnknown849419_0x58:
+fAIAction0x58:
     REP #$30                                                   ;84BFBF|C230    |      ;
     REP #$30                                                   ;84BFC1|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BFC3|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BFC3|A5C9    |0000C9;
     CLC                                                        ;84BFC5|18      |      ;
     ADC.W #$0001                                               ;84BFC6|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BFC9|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BFC9|85C9    |0000C9;
     SEP #$20                                                   ;84BFCB|E220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BFCD|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BFCD|A7C9    |0000C9;
     PHA                                                        ;84BFCF|48      |      ;
     REP #$30                                                   ;84BFD0|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BFD2|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BFD2|A5C9    |0000C9;
     CLC                                                        ;84BFD4|18      |      ;
     ADC.W #$0001                                               ;84BFD5|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BFD8|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BFD8|85C9    |0000C9;
     REP #$20                                                   ;84BFDA|C220    |      ;
-    LDA.B [ptrUnknown0xC9]                                     ;84BFDC|A7C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BFDC|A7C9    |0000C9;
     PHA                                                        ;84BFDE|48      |      ;
     REP #$30                                                   ;84BFDF|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BFE1|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BFE1|A5C9    |0000C9;
     CLC                                                        ;84BFE3|18      |      ;
     ADC.W #$0002                                               ;84BFE4|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BFE7|85C9    |0000C9;
-    LDA.B [ptrUnknown0xC9]                                     ;84BFE9|A7C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BFE7|85C9    |0000C9;
+    LDA.B [ptrAIActionArg0xC9]                                 ;84BFE9|A7C9    |0000C9;
     PHA                                                        ;84BFEB|48      |      ;
     REP #$30                                                   ;84BFEC|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84BFEE|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84BFEE|A5C9    |0000C9;
     CLC                                                        ;84BFF0|18      |      ;
     ADC.W #$0002                                               ;84BFF1|690200  |      ;
-    STA.B ptrUnknown0xC9                                       ;84BFF4|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84BFF4|85C9    |0000C9;
     PLY                                                        ;84BFF6|7A      |      ;
     PLX                                                        ;84BFF7|FA      |      ;
     SEP #$20                                                   ;84BFF8|E220    |      ;
@@ -8901,20 +8901,20 @@ subUnknown849419_0x58:
     RTS                                                        ;84BFFF|60      |      ;
  
  
-subUnknown849419_0x59:
+fAIAction0x59_SwapEquippedItems:
     REP #$30                                                   ;84C000|C230    |      ;
     REP #$30                                                   ;84C002|C230    |      ;
-    LDA.B ptrUnknown0xC9                                       ;84C004|A5C9    |0000C9;
+    LDA.B ptrAIActionArg0xC9                                   ;84C004|A5C9    |0000C9;
     CLC                                                        ;84C006|18      |      ;
     ADC.W #$0001                                               ;84C007|690100  |      ;
-    STA.B ptrUnknown0xC9                                       ;84C00A|85C9    |0000C9;
+    STA.B ptrAIActionArg0xC9                                   ;84C00A|85C9    |0000C9;
     REP #$30                                                   ;84C00C|C230    |      ;
     LDA.W #$001C                                               ;84C00E|A91C00  |      ;
     STA.B nPlayerAction                                        ;84C011|85D4    |0000D4;
     RTS                                                        ;84C013|60      |      ;
  
  
-aCheckFlags_84C014:
+aAICheckFlags:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;84C014|        |      ; 0x10 * [n16]
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;84C020|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;84C02C|        |      ;
@@ -9239,7 +9239,7 @@ fInput_Unknown84C267:
  
 fInput_Handler_case04:
     SEP #$20                                                   ;84C288|E220    |      ;
-    LDA.B nUnknown0095                                         ;84C28A|A595    |000095;
+    LDA.B nUnknown0x95                                         ;84C28A|A595    |000095;
     CMP.B #$01                                                 ;84C28C|C901    |      ;
     BNE +                                                      ;84C28E|D003    |84C293;
     JMP.W fInput_Unknown84C2B4                                 ;84C290|4CB4C2  |84C2B4;
@@ -9293,7 +9293,7 @@ fInput_Unknown84C2B4:
  
   + SEP #$20                                                   ;84C2D8|E220    |      ;
     LDA.B #$09                                                 ;84C2DA|A909    |      ;
-    STA.B nUnknown0095                                         ;84C2DC|8595    |000095;
+    STA.B nUnknown0x95                                         ;84C2DC|8595    |000095;
     SEP #$20                                                   ;84C2DE|E220    |      ;
     REP #$10                                                   ;84C2E0|C210    |      ;
     LDA.B #$03                                                 ;84C2E2|A903    |      ;
@@ -9494,7 +9494,7 @@ fInput_Unknown84C428:
 .label1:
     SEP #$20                                                   ;84C43F|E220    |      ;
     LDA.B #$06                                                 ;84C441|A906    |      ;
-    STA.B nUnknown0095                                         ;84C443|8595    |000095;
+    STA.B nUnknown0x95                                         ;84C443|8595    |000095;
     SEP #$20                                                   ;84C445|E220    |      ;
     REP #$10                                                   ;84C447|C210    |      ;
     LDA.B #$03                                                 ;84C449|A903    |      ;
@@ -9609,21 +9609,21 @@ fInput_Unknown84C458:
     CMP.B #$01                                                 ;84C513|C901    |      ;
     BEQ ..label2                                               ;84C515|F00E    |84C525;
     LDA.B #$0A                                                 ;84C517|A90A    |      ;
-    STA.B nUnknown0095                                         ;84C519|8595    |000095;
+    STA.B nUnknown0x95                                         ;84C519|8595    |000095;
     BRA +                                                      ;84C51B|8010    |84C52D;
  
  
 ..label1:
     SEP #$20                                                   ;84C51D|E220    |      ;
     LDA.B #$08                                                 ;84C51F|A908    |      ;
-    STA.B nUnknown0095                                         ;84C521|8595    |000095;
+    STA.B nUnknown0x95                                         ;84C521|8595    |000095;
     BRA +                                                      ;84C523|8008    |84C52D;
  
  
 ..label2:
     SEP #$20                                                   ;84C525|E220    |      ;
     LDA.B #$07                                                 ;84C527|A907    |      ;
-    STA.B nUnknown0095                                         ;84C529|8595    |000095;
+    STA.B nUnknown0x95                                         ;84C529|8595    |000095;
     BRA +                                                      ;84C52B|8000    |84C52D;
  
  
@@ -9964,13 +9964,13 @@ fInput_Unknown84C740:
   + LDA.W $0128                                                ;84C794|AD2801  |000128;
     BIT.W #$0010                                               ;84C797|891000  |      ;
     BEQ +                                                      ;84C79A|F003    |84C79F;
-    JMP.W fInput_SetPlayerAction0x0D                           ;84C79C|4C0CCE  |84CE0C;
+    JMP.W fInput_SetPlayerAction0x0D_WhistleR                  ;84C79C|4C0CCE  |84CE0C;
  
  
   + LDA.W $0128                                                ;84C79F|AD2801  |000128;
     BIT.W #$0020                                               ;84C7A2|892000  |      ;
     BEQ fInput_Unknown84C7AA                                   ;84C7A5|F003    |84C7AA;
-    JMP.W fInput_SetPlayerAction0x1B                           ;84C7A7|4C43CE  |84CE43;
+    JMP.W fInput_SetPlayerAction0x1B_WhistleL                  ;84C7A7|4C43CE  |84CE43;
  
  
 fInput_Unknown84C7AA:
@@ -10043,13 +10043,13 @@ fInput_Unknown08FD_case0200:
   + LDA.W nUnknownFlags08FD                                    ;84C830|ADFD08  |0008FD;
     BIT.W #$0010                                               ;84C833|891000  |      ;
     BEQ +                                                      ;84C836|F003    |84C83B;
-    JMP.W fInput_SetPlayerAction0x0D                           ;84C838|4C0CCE  |84CE0C;
+    JMP.W fInput_SetPlayerAction0x0D_WhistleR                  ;84C838|4C0CCE  |84CE0C;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C83B|ADFD08  |0008FD;
     BIT.W #$0020                                               ;84C83E|892000  |      ;
     BEQ +                                                      ;84C841|F003    |84C846;
-    JMP.W fInput_SetPlayerAction0x1B                           ;84C843|4C43CE  |84CE43;
+    JMP.W fInput_SetPlayerAction0x1B_WhistleL                  ;84C843|4C43CE  |84CE43;
  
  
   + LDA.W nUnknownFlags08FD                                    ;84C846|ADFD08  |0008FD;
@@ -10697,7 +10697,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0017                                               ;84CCFB|A91700  |      ;
     LDX.W #$0000                                               ;84CCFE|A20000  |      ;
     LDY.W #$0014                                               ;84CD01|A01400  |      ;
-    JSL.L fSubUnk1Unknown_8480F8                               ;84CD04|22F88084|8480F8;
+    JSL.L fAI_Unknown8480F8                                    ;84CD04|22F88084|8480F8;
     REP #$20                                                   ;84CD08|C220    |      ;
     STZ.W $0878                                                ;84CD0A|9C7808  |000878;
     STZ.W $087A                                                ;84CD0D|9C7A08  |00087A;
@@ -10855,7 +10855,7 @@ fInput_SetPlayerAction0x13:
     RTL                                                        ;84CE0B|6B      |      ;
  
  
-fInput_SetPlayerAction0x0D:
+fInput_SetPlayerAction0x0D_WhistleR:
     REP #$30                                                   ;84CE0C|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84CE0E|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE10|290200  |      ;
@@ -10889,7 +10889,7 @@ fInput_SetPlayerAction0x0D:
     RTL                                                        ;84CE42|6B      |      ;
  
  
-fInput_SetPlayerAction0x1B:
+fInput_SetPlayerAction0x1B_WhistleL:
     REP #$30                                                   ;84CE43|C230    |      ;
     LDA.B nPlayerStateFlags                                    ;84CE45|A5D2    |0000D2;
     AND.W #$0002                                               ;84CE47|290200  |      ;
