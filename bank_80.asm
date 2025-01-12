@@ -13,9 +13,9 @@ fCore_GameStart:
     LDA.B #$0F                                                 ;808012|A90F    |      ;
     STA.B n8TempVar1                                           ;808014|8592    |000092;
     LDA.B #$03                                                 ;808016|A903    |      ;
-    STA.B $93                                                  ;808018|8593    |000093;
+    STA.B n8TempVar2                                           ;808018|8593    |000093;
     LDA.B #$01                                                 ;80801A|A901    |      ;
-    STA.B $94                                                  ;80801C|8594    |000094;
+    STA.B n8TempVar3                                           ;80801C|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;80801E|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;808022|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;808026|22468880|808846;
@@ -99,9 +99,9 @@ fCore_SetPlayerName:
     LDA.B #$0F                                                 ;8080F1|A90F    |      ;
     STA.B n8TempVar1                                           ;8080F3|8592    |000092;
     LDA.B #$03                                                 ;8080F5|A903    |      ;
-    STA.B $93                                                  ;8080F7|8593    |000093;
+    STA.B n8TempVar2                                           ;8080F7|8593    |000093;
     LDA.B #$01                                                 ;8080F9|A901    |      ;
-    STA.B $94                                                  ;8080FB|8594    |000094;
+    STA.B n8TempVar3                                           ;8080FB|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;8080FD|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;808101|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;808105|22468880|808846;
@@ -146,9 +146,9 @@ fCore_SetBoughtCowName:
     LDA.B #$0F                                                 ;808163|A90F    |      ;
     STA.B n8TempVar1                                           ;808165|8592    |000092;
     LDA.B #$03                                                 ;808167|A903    |      ;
-    STA.B $93                                                  ;808169|8593    |000093;
+    STA.B n8TempVar2                                           ;808169|8593    |000093;
     LDA.B #$01                                                 ;80816B|A901    |      ;
-    STA.B $94                                                  ;80816D|8594    |000094;
+    STA.B n8TempVar3                                           ;80816D|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;80816F|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;808173|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;808177|22468880|808846;
@@ -191,9 +191,9 @@ fCore_SetBornCowName:
     LDA.B #$0F                                                 ;8081D6|A90F    |      ;
     STA.B n8TempVar1                                           ;8081D8|8592    |000092;
     LDA.B #$03                                                 ;8081DA|A903    |      ;
-    STA.B $93                                                  ;8081DC|8593    |000093;
+    STA.B n8TempVar2                                           ;8081DC|8593    |000093;
     LDA.B #$01                                                 ;8081DE|A901    |      ;
-    STA.B $94                                                  ;8081E0|8594    |000094;
+    STA.B n8TempVar3                                           ;8081E0|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;8081E2|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;8081E6|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;8081EA|22468880|808846;
@@ -241,9 +241,9 @@ fCore_SetDogName:
     LDA.B #$0F                                                 ;808258|A90F    |      ;
     STA.B n8TempVar1                                           ;80825A|8592    |000092;
     LDA.B #$03                                                 ;80825C|A903    |      ;
-    STA.B $93                                                  ;80825E|8593    |000093;
+    STA.B n8TempVar2                                           ;80825E|8593    |000093;
     LDA.B #$01                                                 ;808260|A901    |      ;
-    STA.B $94                                                  ;808262|8594    |000094;
+    STA.B n8TempVar3                                           ;808262|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;808264|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;808268|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;80826C|22468880|808846;
@@ -288,9 +288,9 @@ fCore_SetHorseName:
     LDA.B #$0F                                                 ;8082CA|A90F    |      ;
     STA.B n8TempVar1                                           ;8082CC|8592    |000092;
     LDA.B #$03                                                 ;8082CE|A903    |      ;
-    STA.B $93                                                  ;8082D0|8593    |000093;
+    STA.B n8TempVar2                                           ;8082D0|8593    |000093;
     LDA.B #$01                                                 ;8082D2|A901    |      ;
-    STA.B $94                                                  ;8082D4|8594    |000094;
+    STA.B n8TempVar3                                           ;8082D4|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;8082D6|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;8082DA|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;8082DE|22468880|808846;
@@ -335,9 +335,9 @@ fCore_SetFirstChildName:
     LDA.B #$0F                                                 ;80833C|A90F    |      ;
     STA.B n8TempVar1                                           ;80833E|8592    |000092;
     LDA.B #$03                                                 ;808340|A903    |      ;
-    STA.B $93                                                  ;808342|8593    |000093;
+    STA.B n8TempVar2                                           ;808342|8593    |000093;
     LDA.B #$01                                                 ;808344|A901    |      ;
-    STA.B $94                                                  ;808346|8594    |000094;
+    STA.B n8TempVar3                                           ;808346|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;808348|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;80834C|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;808350|22468880|808846;
@@ -382,9 +382,9 @@ fCore_SetSecondChildName:
     LDA.B #$0F                                                 ;8083B2|A90F    |      ;
     STA.B n8TempVar1                                           ;8083B4|8592    |000092;
     LDA.B #$03                                                 ;8083B6|A903    |      ;
-    STA.B $93                                                  ;8083B8|8593    |000093;
+    STA.B n8TempVar2                                           ;8083B8|8593    |000093;
     LDA.B #$01                                                 ;8083BA|A901    |      ;
-    STA.B $94                                                  ;8083BC|8594    |000094;
+    STA.B n8TempVar3                                           ;8083BC|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;8083BE|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;8083C2|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;8083C6|22468880|808846;
@@ -849,13 +849,13 @@ fCore_ScreenFadein:
     LDA.B n8TempVar1                                           ;8087D6|A592    |000092;
     STA.B $25                                                  ;8087D8|8525    |000025;
  
-  + LDA.B $93                                                  ;8087DA|A593    |000093;
+  + LDA.B n8TempVar2                                           ;8087DA|A593    |000093;
     STA.B $26                                                  ;8087DC|8526    |000026;
  
  -- LDA.B $25                                                  ;8087DE|A525    |000025;
     JSL.L fCore_SetBrightness                                  ;8087E0|222D8E80|808E2D;
     LDA.B $25                                                  ;8087E4|A525    |000025;
-    CMP.B $94                                                  ;8087E6|C594    |000094;
+    CMP.B n8TempVar3                                           ;8087E6|C594    |000094;
     BEQ +                                                      ;8087E8|F012    |8087FC;
     INC.B $25                                                  ;8087EA|E625    |000025;
  
@@ -863,7 +863,7 @@ fCore_ScreenFadein:
     DEC.B $26                                                  ;8087F0|C626    |000026;
     LDA.B $26                                                  ;8087F2|A526    |000026;
     BNE -                                                      ;8087F4|D0F6    |8087EC;
-    LDA.B $93                                                  ;8087F6|A593    |000093;
+    LDA.B n8TempVar2                                           ;8087F6|A593    |000093;
     STA.B $26                                                  ;8087F8|8526    |000026;
     BRA --                                                     ;8087FA|80E2    |8087DE;
  
@@ -883,13 +883,13 @@ fCore_ScreenFadeout:
     LDA.B n8TempVar1                                           ;808812|A592    |000092;
     STA.B $25                                                  ;808814|8525    |000025;
  
-  + LDA.B $93                                                  ;808816|A593    |000093;
+  + LDA.B n8TempVar2                                           ;808816|A593    |000093;
     STA.B $26                                                  ;808818|8526    |000026;
  
  -- LDA.B $25                                                  ;80881A|A525    |000025;
     JSL.L fCore_SetBrightness                                  ;80881C|222D8E80|808E2D;
     LDA.B $25                                                  ;808820|A525    |000025;
-    CMP.B $94                                                  ;808822|C594    |000094;
+    CMP.B n8TempVar3                                           ;808822|C594    |000094;
     BEQ +                                                      ;808824|F012    |808838;
     DEC.B $25                                                  ;808826|C625    |000025;
  
@@ -897,7 +897,7 @@ fCore_ScreenFadeout:
     DEC.B $26                                                  ;80882C|C626    |000026;
     LDA.B $26                                                  ;80882E|A526    |000026;
     BNE -                                                      ;808830|D0F6    |808828;
-    LDA.B $93                                                  ;808832|A593    |000093;
+    LDA.B n8TempVar2                                           ;808832|A593    |000093;
     STA.B $26                                                  ;808834|8526    |000026;
     BRA --                                                     ;808836|80E2    |80881A;
  
@@ -1106,7 +1106,7 @@ fCore_GetRandomNumber:
     SEP #$30                                                   ;8089F9|E230    |      ; A: nMaxValue, return A: nRandomNumber (0x00-nMaxValue)
     STA.B n8TempVar1                                           ;8089FB|8592    |000092;
     PHA                                                        ;8089FD|48      |      ;
-    STZ.B $93                                                  ;8089FE|6493    |000093;
+    STZ.B n8TempVar2                                           ;8089FE|6493    |000093;
     REP #$20                                                   ;808A00|C220    |      ;
     LDA.W #$00FF                                               ;808A02|A9FF00  |      ;
     STA.B n16TempVar1                                          ;808A05|857E    |00007E;
@@ -1114,23 +1114,23 @@ fCore_GetRandomNumber:
     STA.B n16TempVar2                                          ;808A09|8580    |000080;
     JSL.L fMathDivide                                          ;808A0B|22828083|838082;
     SEP #$20                                                   ;808A0F|E220    |      ;
-    STA.B $93                                                  ;808A11|8593    |000093;
+    STA.B n8TempVar2                                           ;808A11|8593    |000093;
     JSL.L fGetRandomNumber                                     ;808A13|22388183|838138;
     SEP #$30                                                   ;808A17|E230    |      ;
-    STA.B $94                                                  ;808A19|8594    |000094;
+    STA.B n8TempVar3                                           ;808A19|8594    |000094;
     PLA                                                        ;808A1B|68      |      ;
     DEC A                                                      ;808A1C|3A      |      ;
     STA.B n8TempVar1                                           ;808A1D|8592    |000092;
     LDX.B #$00                                                 ;808A1F|A200    |      ;
-    LDA.B $93                                                  ;808A21|A593    |000093;
+    LDA.B n8TempVar2                                           ;808A21|A593    |000093;
  
-  - CMP.B $94                                                  ;808A23|C594    |000094;
+  - CMP.B n8TempVar3                                           ;808A23|C594    |000094;
     BCS +                                                      ;808A25|B00A    |808A31;
     INX                                                        ;808A27|E8      |      ;
     CPX.B n8TempVar1                                           ;808A28|E492    |000092;
     BEQ +                                                      ;808A2A|F005    |808A31;
     CLC                                                        ;808A2C|18      |      ;
-    ADC.B $93                                                  ;808A2D|6593    |000093;
+    ADC.B n8TempVar2                                           ;808A2D|6593    |000093;
     BRA -                                                      ;808A2F|80F2    |808A23;
  
  
@@ -1601,7 +1601,7 @@ fCore_Unknown808E69:
     REP #$30                                                   ;808E69|C230    |      ;
     SEP #$20                                                   ;808E6B|E220    |      ;
     STZ.B n8TempVar1                                           ;808E6D|6492    |000092;
-    STZ.B $93                                                  ;808E6F|6493    |000093;
+    STZ.B n8TempVar2                                           ;808E6F|6493    |000093;
     LDY.W #$0000                                               ;808E71|A00000  |      ;
     REP #$20                                                   ;808E74|C220    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;808E76|AD9601  |000196;
@@ -1630,7 +1630,7 @@ fCore_Unknown808E69:
 .label2:
     SEP #$20                                                   ;808E9D|E220    |      ;
     LDA.B #$01                                                 ;808E9F|A901    |      ;
-    STA.B $93                                                  ;808EA1|8593    |000093;
+    STA.B n8TempVar2                                           ;808EA1|8593    |000093;
     REP #$20                                                   ;808EA3|C220    |      ;
     PHY                                                        ;808EA5|5A      |      ;
     LDA.B ptrUnknown0x42,X                                     ;808EA6|B542    |000042;
@@ -1720,7 +1720,7 @@ fCore_Unknown808E69:
  
 .label7:
     SEP #$20                                                   ;808F2C|E220    |      ;
-    LDA.B $93                                                  ;808F2E|A593    |000093;
+    LDA.B n8TempVar2                                           ;808F2E|A593    |000093;
     BEQ .return                                                ;808F30|F01F    |808F51;
     LDA.B #$05                                                 ;808F32|A905    |      ;
     STA.B $27                                                  ;808F34|8527    |000027;
@@ -2873,9 +2873,9 @@ fAudioEngine_MapChangeHandler:
     LDA.B #$0F                                                 ;8096BF|A90F    |      ;
     STA.B n8TempVar1                                           ;8096C1|8592    |000092;
     LDA.B #$03                                                 ;8096C3|A903    |      ;
-    STA.B $93                                                  ;8096C5|8593    |000093;
+    STA.B n8TempVar2                                           ;8096C5|8593    |000093;
     LDA.B #$01                                                 ;8096C7|A901    |      ;
-    STA.B $94                                                  ;8096C9|8594    |000094;
+    STA.B n8TempVar3                                           ;8096C9|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;8096CB|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;8096CF|220F8E80|808E0F;
  
@@ -3269,9 +3269,9 @@ fUnknown_80972C:
     LDA.B #$03                                                 ;809A53|A903    |      ;
     STA.B n8TempVar1                                           ;809A55|8592    |000092;
     LDA.B #$03                                                 ;809A57|A903    |      ;
-    STA.B $93                                                  ;809A59|8593    |000093;
+    STA.B n8TempVar2                                           ;809A59|8593    |000093;
     LDA.B #$0F                                                 ;809A5B|A90F    |      ;
-    STA.B $94                                                  ;809A5D|8594    |000094;
+    STA.B n8TempVar3                                           ;809A5D|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;809A5F|22CE8780|8087CE;
     RTL                                                        ;809A63|6B      |      ;
  
@@ -5323,7 +5323,7 @@ fTileMap_MapChangeHandler:
     STA.B n8TempVar1                                           ;80A833|8592    |000092; $92 = nTilemapCount
     INY                                                        ;80A835|C8      |      ;
     LDA.B (pCurrentTileMapData),Y                              ;80A836|B118    |000018; Y = 6
-    STA.B $93                                                  ;80A838|8593    |000093; $93 = nChacatermapCount
+    STA.B n8TempVar2                                           ;80A838|8593    |000093; $93 = nChacatermapCount
     INY                                                        ;80A83A|C8      |      ;
     LDA.B nMapEngine_DestinationId                             ;80A83B|A522    |000022;
     CMP.B #$57                                                 ;80A83D|C957    |      ;
@@ -5451,7 +5451,7 @@ fTileMap_MapChangeHandler:
  
 .label10:
     SEP #$20                                                   ;80A90D|E220    |      ;
-    LDA.B $93                                                  ;80A90F|A593    |000093;
+    LDA.B n8TempVar2                                           ;80A90F|A593    |000093;
     CMP.B #$01                                                 ;80A911|C901    |      ;
     BNE .label11                                               ;80A913|D00F    |80A924;
     REP #$30                                                   ;80A915|C230    |      ;
@@ -5567,9 +5567,9 @@ fTileMap_MapChangeHandler:
     REP #$30                                                   ;80A9DE|C230    |      ;
     PLY                                                        ;80A9E0|7A      |      ;
     SEP #$20                                                   ;80A9E1|E220    |      ;
-    LDA.B $93                                                  ;80A9E3|A593    |000093;
+    LDA.B n8TempVar2                                           ;80A9E3|A593    |000093;
     DEC A                                                      ;80A9E5|3A      |      ;
-    STA.B $93                                                  ;80A9E6|8593    |000093;
+    STA.B n8TempVar2                                           ;80A9E6|8593    |000093;
     BEQ .continue                                              ;80A9E8|F003    |80A9ED;
     JMP.W .charactermaps                                       ;80A9EA|4CBEA8  |80A8BE;
  

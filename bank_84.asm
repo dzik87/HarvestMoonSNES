@@ -1598,9 +1598,9 @@ fAIAction0x0A:
     LDA.B #$03                                                 ;848B9B|A903    |      ;
     STA.B n8TempVar1                                           ;848B9D|8592    |000092;
     LDA.B #$03                                                 ;848B9F|A903    |      ;
-    STA.B $93                                                  ;848BA1|8593    |000093;
+    STA.B n8TempVar2                                           ;848BA1|8593    |000093;
     LDA.B #$0F                                                 ;848BA3|A90F    |      ;
-    STA.B $94                                                  ;848BA5|8594    |000094;
+    STA.B n8TempVar3                                           ;848BA5|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;848BA7|22CE8780|8087CE;
     RTS                                                        ;848BAB|60      |      ;
  
@@ -1765,9 +1765,9 @@ fAIAction0x0F:
     LDA.B #$0F                                                 ;848CD1|A90F    |      ;
     STA.B n8TempVar1                                           ;848CD3|8592    |000092;
     LDA.B #$03                                                 ;848CD5|A903    |      ;
-    STA.B $93                                                  ;848CD7|8593    |000093;
+    STA.B n8TempVar2                                           ;848CD7|8593    |000093;
     LDA.B #$00                                                 ;848CD9|A900    |      ;
-    STA.B $94                                                  ;848CDB|8594    |000094;
+    STA.B n8TempVar3                                           ;848CDB|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;848CDD|220A8880|80880A;
     RTS                                                        ;848CE1|60      |      ;
  
@@ -1971,7 +1971,7 @@ fAIAction0x16:
     SEP #$20                                                   ;848E37|E220    |      ;
     LDA.B [ptrAIActionArg0xC9]                                 ;848E39|A7C9    |0000C9;
     INC A                                                      ;848E3B|1A      |      ;
-    STA.B $93                                                  ;848E3C|8593    |000093;
+    STA.B n8TempVar2                                           ;848E3C|8593    |000093;
     REP #$30                                                   ;848E3E|C230    |      ;
     LDA.B ptrAIActionArg0xC9                                   ;848E40|A5C9    |0000C9;
     CLC                                                        ;848E42|18      |      ;
@@ -1982,7 +1982,7 @@ fAIAction0x16:
     CMP.B n8TempVar1                                           ;848E4C|C592    |000092;
     BCC +                                                      ;848E4E|900D    |848E5D;
     LDA.B [ptrUnknown0x72]                                     ;848E50|A772    |000072;
-    CMP.B $93                                                  ;848E52|C593    |000093;
+    CMP.B n8TempVar2                                           ;848E52|C593    |000093;
     BCS +                                                      ;848E54|B007    |848E5D;
     REP #$20                                                   ;848E56|C220    |      ;
     LDA.B [ptrAIActionArg0xC9]                                 ;848E58|A7C9    |0000C9;
@@ -8285,9 +8285,9 @@ fAIAction0x4F:
     REP #$20                                                   ;84BB8C|C220    |      ;
     TAX                                                        ;84BB8E|AA      |      ;
     SEP #$20                                                   ;84BB8F|E220    |      ;
-    LDA.L sShedItems,X                                         ;84BB91|BF001F7F|7F1F00;
+    LDA.L strcShedItems,X                                      ;84BB91|BF001F7F|7F1F00;
     ORA.B n8TempVar1                                           ;84BB95|0592    |000092;
-    STA.L sShedItems,X                                         ;84BB97|9F001F7F|7F1F00;
+    STA.L strcShedItems,X                                      ;84BB97|9F001F7F|7F1F00;
     STZ.W nToolEquipped                                        ;84BB9B|9C2109  |000921;
  
   + SEP #$20                                                   ;84BB9E|E220    |      ;
@@ -8316,9 +8316,9 @@ fAIAction0x4F:
     REP #$20                                                   ;84BBC7|C220    |      ;
     TAX                                                        ;84BBC9|AA      |      ;
     SEP #$20                                                   ;84BBCA|E220    |      ;
-    LDA.L sShedItems,X                                         ;84BBCC|BF001F7F|7F1F00;
+    LDA.L strcShedItems,X                                      ;84BBCC|BF001F7F|7F1F00;
     ORA.B n8TempVar1                                           ;84BBD0|0592    |000092;
-    STA.L sShedItems,X                                         ;84BBD2|9F001F7F|7F1F00;
+    STA.L strcShedItems,X                                      ;84BBD2|9F001F7F|7F1F00;
     STZ.W nToolSecond                                          ;84BBD6|9C2309  |000923;
  
 .return:
@@ -9358,7 +9358,7 @@ fInput_Unknown84C2FE:
 .label2:
     SEP #$20                                                   ;84C34E|E220    |      ;
     LDA.B #$01                                                 ;84C350|A901    |      ;
-    STA.B $94                                                  ;84C352|8594    |000094;
+    STA.B n8TempVar3                                           ;84C352|8594    |000094;
     SEP #$20                                                   ;84C354|E220    |      ;
     REP #$10                                                   ;84C356|C210    |      ;
     LDA.B #$03                                                 ;84C358|A903    |      ;
@@ -9372,7 +9372,7 @@ fInput_Unknown84C2FE:
 .label3:
     SEP #$20                                                   ;84C367|E220    |      ;
     LDA.B #$02                                                 ;84C369|A902    |      ;
-    STA.B $94                                                  ;84C36B|8594    |000094;
+    STA.B n8TempVar3                                           ;84C36B|8594    |000094;
     SEP #$20                                                   ;84C36D|E220    |      ;
     REP #$10                                                   ;84C36F|C210    |      ;
     LDA.B #$01                                                 ;84C371|A901    |      ;
@@ -9433,7 +9433,7 @@ fInput_Unkown84C380:
 .label2:
     SEP #$20                                                   ;84C3D0|E220    |      ;
     LDA.B #$01                                                 ;84C3D2|A901    |      ;
-    STA.B $94                                                  ;84C3D4|8594    |000094;
+    STA.B n8TempVar3                                           ;84C3D4|8594    |000094;
     SEP #$20                                                   ;84C3D6|E220    |      ;
     REP #$10                                                   ;84C3D8|C210    |      ;
     LDA.B #$03                                                 ;84C3DA|A903    |      ;
@@ -9455,7 +9455,7 @@ fInput_Unkown84C380:
     BEQ +                                                      ;84C3FA|F019    |84C415;
     SEP #$20                                                   ;84C3FC|E220    |      ;
     LDA.B #$02                                                 ;84C3FE|A902    |      ;
-    STA.B $94                                                  ;84C400|8594    |000094;
+    STA.B n8TempVar3                                           ;84C400|8594    |000094;
     SEP #$20                                                   ;84C402|E220    |      ;
     REP #$10                                                   ;84C404|C210    |      ;
     LDA.B #$01                                                 ;84C406|A901    |      ;
