@@ -2,23 +2,23 @@
     ORG $B48000
  
  
-pTable_B48000:
+pScripting_B48000:
     dw DATA8_B48020                                            ;B48000|        |B48020;
     dw DATA8_B48075                                            ;B48002|        |B48075;
     dw DATA8_B4820E                                            ;B48004|        |B4820E;
     dw DATA8_B48400                                            ;B48006|        |B48400;
     dw DATA8_B485C6                                            ;B48008|        |B485C6;
     dw DATA8_B486E8                                            ;B4800A|        |B486E8;
-    dw pTable_B487B8                                           ;B4800C|        |B487B8;
-    dw pTable_B487B8                                           ;B4800E|        |B487B8;
-    dw pTable_B487B8                                           ;B48010|        |B487B8;
-    dw pTable_B487B8                                           ;B48012|        |B487B8;
-    dw pTable_B487B8                                           ;B48014|        |B487B8;
-    dw pTable_B487B8                                           ;B48016|        |B487B8;
-    dw pTable_B487B8                                           ;B48018|        |B487B8;
-    dw pTable_B487B8                                           ;B4801A|        |B487B8;
-    dw pTable_B487B8                                           ;B4801C|        |B487B8;
-    dw pTable_B487B8                                           ;B4801E|        |B487B8;
+    dw pScripting_B487B8                                       ;B4800C|        |B487B8;
+    dw pScripting_B487B8                                       ;B4800E|        |B487B8;
+    dw pScripting_B487B8                                       ;B48010|        |B487B8;
+    dw pScripting_B487B8                                       ;B48012|        |B487B8;
+    dw pScripting_B487B8                                       ;B48014|        |B487B8;
+    dw pScripting_B487B8                                       ;B48016|        |B487B8;
+    dw pScripting_B487B8                                       ;B48018|        |B487B8;
+    dw pScripting_B487B8                                       ;B4801A|        |B487B8;
+    dw pScripting_B487B8                                       ;B4801C|        |B487B8;
+    dw pScripting_B487B8                                       ;B4801E|        |B487B8;
  
 DATA8_B48020:
     db $4F,$50,$23,$60,$1F,$7F,$09,$23,$60,$1F,$7F,$00         ;B48020|        |      ;
@@ -198,23 +198,23 @@ DATA8_B486E8:
     db $04,$00,$0B,$01,$12,$66,$87,$1C,$3C,$04,$00,$0B         ;B487A8|        |      ;
     db $01,$12,$66,$87                                         ;B487B4|        |      ;
  
-pTable_B487B8:
+pScripting_B487B8:
     dw DATA8_B487D8                                            ;B487B8|        |B487D8;
-    dw pTable_B48818                                           ;B487BA|        |B48818;
-    dw pTable_B48818                                           ;B487BC|        |B48818;
-    dw pTable_B48818                                           ;B487BE|        |B48818;
-    dw pTable_B48818                                           ;B487C0|        |B48818;
-    dw pTable_B48818                                           ;B487C2|        |B48818;
-    dw pTable_B48818                                           ;B487C4|        |B48818;
-    dw pTable_B48818                                           ;B487C6|        |B48818;
-    dw pTable_B48818                                           ;B487C8|        |B48818;
-    dw pTable_B48818                                           ;B487CA|        |B48818;
-    dw pTable_B48818                                           ;B487CC|        |B48818;
-    dw pTable_B48818                                           ;B487CE|        |B48818;
-    dw pTable_B48818                                           ;B487D0|        |B48818;
-    dw pTable_B48818                                           ;B487D2|        |B48818;
-    dw pTable_B48818                                           ;B487D4|        |B48818;
-    dw pTable_B48818                                           ;B487D6|        |B48818;
+    dw pScripting_B48818                                       ;B487BA|        |B48818;
+    dw pScripting_B48818                                       ;B487BC|        |B48818;
+    dw pScripting_B48818                                       ;B487BE|        |B48818;
+    dw pScripting_B48818                                       ;B487C0|        |B48818;
+    dw pScripting_B48818                                       ;B487C2|        |B48818;
+    dw pScripting_B48818                                       ;B487C4|        |B48818;
+    dw pScripting_B48818                                       ;B487C6|        |B48818;
+    dw pScripting_B48818                                       ;B487C8|        |B48818;
+    dw pScripting_B48818                                       ;B487CA|        |B48818;
+    dw pScripting_B48818                                       ;B487CC|        |B48818;
+    dw pScripting_B48818                                       ;B487CE|        |B48818;
+    dw pScripting_B48818                                       ;B487D0|        |B48818;
+    dw pScripting_B48818                                       ;B487D2|        |B48818;
+    dw pScripting_B48818                                       ;B487D4|        |B48818;
+    dw pScripting_B48818                                       ;B487D6|        |B48818;
  
 DATA8_B487D8:
     db $08,$13,$3C,$00,$09,$07,$E5,$87,$09,$15,$F8,$87         ;B487D8|        |      ;
@@ -224,23 +224,23 @@ DATA8_B487D8:
     db $00,$02,$12,$01,$13,$B4,$00,$1B,$0D,$04,$00,$11         ;B48808|        |      ;
     db $4A,$12,$14,$88                                         ;B48814|        |      ;
  
-pTable_B48818:
+pScripting_B48818:
     dw DATA8_B48838                                            ;B48818|        |B48838;
-    dw pTable_B488A0                                           ;B4881A|        |B488A0;
-    dw pTable_B488A0                                           ;B4881C|        |B488A0;
-    dw pTable_B488A0                                           ;B4881E|        |B488A0;
-    dw pTable_B488A0                                           ;B48820|        |B488A0;
-    dw pTable_B488A0                                           ;B48822|        |B488A0;
-    dw pTable_B488A0                                           ;B48824|        |B488A0;
-    dw pTable_B488A0                                           ;B48826|        |B488A0;
-    dw pTable_B488A0                                           ;B48828|        |B488A0;
-    dw pTable_B488A0                                           ;B4882A|        |B488A0;
-    dw pTable_B488A0                                           ;B4882C|        |B488A0;
-    dw pTable_B488A0                                           ;B4882E|        |B488A0;
-    dw pTable_B488A0                                           ;B48830|        |B488A0;
-    dw pTable_B488A0                                           ;B48832|        |B488A0;
-    dw pTable_B488A0                                           ;B48834|        |B488A0;
-    dw pTable_B488A0                                           ;B48836|        |B488A0;
+    dw pScripting_B488A0                                       ;B4881A|        |B488A0;
+    dw pScripting_B488A0                                       ;B4881C|        |B488A0;
+    dw pScripting_B488A0                                       ;B4881E|        |B488A0;
+    dw pScripting_B488A0                                       ;B48820|        |B488A0;
+    dw pScripting_B488A0                                       ;B48822|        |B488A0;
+    dw pScripting_B488A0                                       ;B48824|        |B488A0;
+    dw pScripting_B488A0                                       ;B48826|        |B488A0;
+    dw pScripting_B488A0                                       ;B48828|        |B488A0;
+    dw pScripting_B488A0                                       ;B4882A|        |B488A0;
+    dw pScripting_B488A0                                       ;B4882C|        |B488A0;
+    dw pScripting_B488A0                                       ;B4882E|        |B488A0;
+    dw pScripting_B488A0                                       ;B48830|        |B488A0;
+    dw pScripting_B488A0                                       ;B48832|        |B488A0;
+    dw pScripting_B488A0                                       ;B48834|        |B488A0;
+    dw pScripting_B488A0                                       ;B48836|        |B488A0;
  
 DATA8_B48838:
     db $50,$09,$01,$6C,$88,$38,$39,$00,$50,$00,$07,$03         ;B48838|        |      ;
@@ -253,23 +253,23 @@ DATA8_B48838:
     db $1A,$78,$00,$A8,$01,$44,$81,$00,$0C,$00,$13,$1E         ;B4888C|        |      ;
     db $00,$0D,$FF,$00,$A0,$01,$37,$10                         ;B48898|        |      ;
  
-pTable_B488A0:
+pScripting_B488A0:
     dw DATA8_B488C0                                            ;B488A0|        |B488C0;
-    dw pTable_B4892A                                           ;B488A2|        |B4892A;
-    dw pTable_B4892A                                           ;B488A4|        |B4892A;
-    dw pTable_B4892A                                           ;B488A6|        |B4892A;
-    dw pTable_B4892A                                           ;B488A8|        |B4892A;
-    dw pTable_B4892A                                           ;B488AA|        |B4892A;
-    dw pTable_B4892A                                           ;B488AC|        |B4892A;
-    dw pTable_B4892A                                           ;B488AE|        |B4892A;
-    dw pTable_B4892A                                           ;B488B0|        |B4892A;
-    dw pTable_B4892A                                           ;B488B2|        |B4892A;
-    dw pTable_B4892A                                           ;B488B4|        |B4892A;
-    dw pTable_B4892A                                           ;B488B6|        |B4892A;
-    dw pTable_B4892A                                           ;B488B8|        |B4892A;
-    dw pTable_B4892A                                           ;B488BA|        |B4892A;
-    dw pTable_B4892A                                           ;B488BC|        |B4892A;
-    dw pTable_B4892A                                           ;B488BE|        |B4892A;
+    dw pScripting_B4892A                                       ;B488A2|        |B4892A;
+    dw pScripting_B4892A                                       ;B488A4|        |B4892A;
+    dw pScripting_B4892A                                       ;B488A6|        |B4892A;
+    dw pScripting_B4892A                                       ;B488A8|        |B4892A;
+    dw pScripting_B4892A                                       ;B488AA|        |B4892A;
+    dw pScripting_B4892A                                       ;B488AC|        |B4892A;
+    dw pScripting_B4892A                                       ;B488AE|        |B4892A;
+    dw pScripting_B4892A                                       ;B488B0|        |B4892A;
+    dw pScripting_B4892A                                       ;B488B2|        |B4892A;
+    dw pScripting_B4892A                                       ;B488B4|        |B4892A;
+    dw pScripting_B4892A                                       ;B488B6|        |B4892A;
+    dw pScripting_B4892A                                       ;B488B8|        |B4892A;
+    dw pScripting_B4892A                                       ;B488BA|        |B4892A;
+    dw pScripting_B4892A                                       ;B488BC|        |B4892A;
+    dw pScripting_B4892A                                       ;B488BE|        |B4892A;
  
 DATA8_B488C0:
     db $50,$00,$0A,$B4,$08,$2A,$41,$00,$13,$B4,$00,$09         ;B488C0|        |      ;
@@ -282,23 +282,23 @@ DATA8_B488C0:
     db $B4,$00,$37,$11,$10,$1A,$88,$00,$20,$01,$20,$87         ;B48914|        |      ;
     db $00,$0D,$00,$01,$50,$02,$4A,$12,$26,$89                 ;B48920|        |      ;
  
-pTable_B4892A:
+pScripting_B4892A:
     dw DATA8_B4894A                                            ;B4892A|        |B4894A;
-    dw pTable_B489D2                                           ;B4892C|        |B489D2;
-    dw pTable_B489D2                                           ;B4892E|        |B489D2;
-    dw pTable_B489D2                                           ;B48930|        |B489D2;
-    dw pTable_B489D2                                           ;B48932|        |B489D2;
-    dw pTable_B489D2                                           ;B48934|        |B489D2;
-    dw pTable_B489D2                                           ;B48936|        |B489D2;
-    dw pTable_B489D2                                           ;B48938|        |B489D2;
-    dw pTable_B489D2                                           ;B4893A|        |B489D2;
-    dw pTable_B489D2                                           ;B4893C|        |B489D2;
-    dw pTable_B489D2                                           ;B4893E|        |B489D2;
-    dw pTable_B489D2                                           ;B48940|        |B489D2;
-    dw pTable_B489D2                                           ;B48942|        |B489D2;
-    dw pTable_B489D2                                           ;B48944|        |B489D2;
-    dw pTable_B489D2                                           ;B48946|        |B489D2;
-    dw pTable_B489D2                                           ;B48948|        |B489D2;
+    dw pScripting_B489D2                                       ;B4892C|        |B489D2;
+    dw pScripting_B489D2                                       ;B4892E|        |B489D2;
+    dw pScripting_B489D2                                       ;B48930|        |B489D2;
+    dw pScripting_B489D2                                       ;B48932|        |B489D2;
+    dw pScripting_B489D2                                       ;B48934|        |B489D2;
+    dw pScripting_B489D2                                       ;B48936|        |B489D2;
+    dw pScripting_B489D2                                       ;B48938|        |B489D2;
+    dw pScripting_B489D2                                       ;B4893A|        |B489D2;
+    dw pScripting_B489D2                                       ;B4893C|        |B489D2;
+    dw pScripting_B489D2                                       ;B4893E|        |B489D2;
+    dw pScripting_B489D2                                       ;B48940|        |B489D2;
+    dw pScripting_B489D2                                       ;B48942|        |B489D2;
+    dw pScripting_B489D2                                       ;B48944|        |B489D2;
+    dw pScripting_B489D2                                       ;B48946|        |B489D2;
+    dw pScripting_B489D2                                       ;B48948|        |B489D2;
  
 DATA8_B4894A:
     db $50,$08,$09,$01,$5D,$89,$38,$39,$00,$50,$00,$07         ;B4894A|        |      ;
@@ -314,23 +314,23 @@ DATA8_B4894A:
     db $01,$10,$01,$1B,$C3,$02,$00,$0D,$FF,$00,$90,$01         ;B489C2|        |      ;
     db $0B,$01,$37,$10                                         ;B489CE|        |      ;
  
-pTable_B489D2:
+pScripting_B489D2:
     dw DATA8_B489F2                                            ;B489D2|        |B489F2;
     dw DATA8_B48AAB                                            ;B489D4|        |B48AAB;
     dw DATA8_B48B00                                            ;B489D6|        |B48B00;
     dw DATA8_B48B9B                                            ;B489D8|        |B48B9B;
     dw DATA8_B48BDE                                            ;B489DA|        |B48BDE;
-    dw pTable_B48C25                                           ;B489DC|        |B48C25;
-    dw pTable_B48C25                                           ;B489DE|        |B48C25;
-    dw pTable_B48C25                                           ;B489E0|        |B48C25;
-    dw pTable_B48C25                                           ;B489E2|        |B48C25;
-    dw pTable_B48C25                                           ;B489E4|        |B48C25;
-    dw pTable_B48C25                                           ;B489E6|        |B48C25;
-    dw pTable_B48C25                                           ;B489E8|        |B48C25;
-    dw pTable_B48C25                                           ;B489EA|        |B48C25;
-    dw pTable_B48C25                                           ;B489EC|        |B48C25;
-    dw pTable_B48C25                                           ;B489EE|        |B48C25;
-    dw pTable_B48C25                                           ;B489F0|        |B48C25;
+    dw pScripting_B48C25                                       ;B489DC|        |B48C25;
+    dw pScripting_B48C25                                       ;B489DE|        |B48C25;
+    dw pScripting_B48C25                                       ;B489E0|        |B48C25;
+    dw pScripting_B48C25                                       ;B489E2|        |B48C25;
+    dw pScripting_B48C25                                       ;B489E4|        |B48C25;
+    dw pScripting_B48C25                                       ;B489E6|        |B48C25;
+    dw pScripting_B48C25                                       ;B489E8|        |B48C25;
+    dw pScripting_B48C25                                       ;B489EA|        |B48C25;
+    dw pScripting_B48C25                                       ;B489EC|        |B48C25;
+    dw pScripting_B48C25                                       ;B489EE|        |B48C25;
+    dw pScripting_B48C25                                       ;B489F0|        |B48C25;
  
 DATA8_B489F2:
     db $50,$01,$03,$07,$05,$88,$00,$58,$01,$07,$00,$08         ;B489F2|        |      ;
@@ -391,23 +391,23 @@ DATA8_B48BDE:
     db $12,$1B,$8C,$06,$02,$12,$1B,$8C,$06,$03,$12,$1B         ;B48C0E|        |      ;
     db $8C,$38,$19,$4D,$00,$00,$13,$78,$00,$3C,$10             ;B48C1A|        |      ;
  
-pTable_B48C25:
+pScripting_B48C25:
     dw DATA8_B48C45                                            ;B48C25|        |B48C45;
-    dw pTable_B48D38                                           ;B48C27|        |B48D38;
-    dw pTable_B48D38                                           ;B48C29|        |B48D38;
-    dw pTable_B48D38                                           ;B48C2B|        |B48D38;
-    dw pTable_B48D38                                           ;B48C2D|        |B48D38;
-    dw pTable_B48D38                                           ;B48C2F|        |B48D38;
-    dw pTable_B48D38                                           ;B48C31|        |B48D38;
-    dw pTable_B48D38                                           ;B48C33|        |B48D38;
-    dw pTable_B48D38                                           ;B48C35|        |B48D38;
-    dw pTable_B48D38                                           ;B48C37|        |B48D38;
-    dw pTable_B48D38                                           ;B48C39|        |B48D38;
-    dw pTable_B48D38                                           ;B48C3B|        |B48D38;
-    dw pTable_B48D38                                           ;B48C3D|        |B48D38;
-    dw pTable_B48D38                                           ;B48C3F|        |B48D38;
-    dw pTable_B48D38                                           ;B48C41|        |B48D38;
-    dw pTable_B48D38                                           ;B48C43|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C27|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C29|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C2B|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C2D|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C2F|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C31|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C33|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C35|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C37|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C39|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C3B|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C3D|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C3F|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C41|        |B48D38;
+    dw pScripting_B48D38                                       ;B48C43|        |B48D38;
  
 DATA8_B48C45:
     db $05,$B8,$00,$68,$01,$07,$00,$08,$09,$01,$67,$8C         ;B48C45|        |      ;
@@ -432,23 +432,23 @@ DATA8_B48C45:
     db $8D,$12,$27,$8D,$1C,$26,$03,$00,$1B,$11,$03,$01         ;B48D29|        |      ;
     db $12,$27,$8D                                             ;B48D35|        |      ;
  
-pTable_B48D38:
+pScripting_B48D38:
     dw DATA8_B48D58                                            ;B48D38|        |B48D58;
-    dw pTable_B48E05                                           ;B48D3A|        |B48E05;
-    dw pTable_B48E05                                           ;B48D3C|        |B48E05;
-    dw pTable_B48E05                                           ;B48D3E|        |B48E05;
-    dw pTable_B48E05                                           ;B48D40|        |B48E05;
-    dw pTable_B48E05                                           ;B48D42|        |B48E05;
-    dw pTable_B48E05                                           ;B48D44|        |B48E05;
-    dw pTable_B48E05                                           ;B48D46|        |B48E05;
-    dw pTable_B48E05                                           ;B48D48|        |B48E05;
-    dw pTable_B48E05                                           ;B48D4A|        |B48E05;
-    dw pTable_B48E05                                           ;B48D4C|        |B48E05;
-    dw pTable_B48E05                                           ;B48D4E|        |B48E05;
-    dw pTable_B48E05                                           ;B48D50|        |B48E05;
-    dw pTable_B48E05                                           ;B48D52|        |B48E05;
-    dw pTable_B48E05                                           ;B48D54|        |B48E05;
-    dw pTable_B48E05                                           ;B48D56|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D3A|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D3C|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D3E|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D40|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D42|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D44|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D46|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D48|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D4A|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D4C|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D4E|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D50|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D52|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D54|        |B48E05;
+    dw pScripting_B48E05                                       ;B48D56|        |B48E05;
  
 DATA8_B48D58:
     db $50,$08,$09,$01,$6B,$8D,$38,$39,$00,$50,$00,$07         ;B48D58|        |      ;
@@ -467,23 +467,23 @@ DATA8_B48D58:
     db $23,$03,$00,$23,$6A,$1F,$7F,$02,$41,$33,$1F,$7F         ;B48DF4|        |      ;
     db $EC,$FF,$12,$84,$8D                                     ;B48E00|        |      ;
  
-pTable_B48E05:
+pScripting_B48E05:
     dw DATA8_B48E25                                            ;B48E05|        |B48E25;
-    dw pTable_B48EC5                                           ;B48E07|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E09|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E0B|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E0D|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E0F|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E11|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E13|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E15|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E17|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E19|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E1B|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E1D|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E1F|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E21|        |B48EC5;
-    dw pTable_B48EC5                                           ;B48E23|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E07|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E09|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E0B|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E0D|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E0F|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E11|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E13|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E15|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E17|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E19|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E1B|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E1D|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E1F|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E21|        |B48EC5;
+    dw pScripting_B48EC5                                       ;B48E23|        |B48EC5;
  
 DATA8_B48E25:
     db $00,$0A,$B4,$08,$07,$01,$09,$01,$33,$8E,$0C,$00         ;B48E25|        |      ;
@@ -501,23 +501,23 @@ DATA8_B48E25:
     db $00,$0D,$00,$FF,$20,$04,$0D,$00,$01,$30,$01,$13         ;B48EB5|        |      ;
     db $3C,$00,$37,$10                                         ;B48EC1|        |      ;
  
-pTable_B48EC5:
+pScripting_B48EC5:
     dw DATA8_B48EE5                                            ;B48EC5|        |B48EE5;
-    dw pTable_B48F95                                           ;B48EC7|        |B48F95;
-    dw pTable_B48F95                                           ;B48EC9|        |B48F95;
-    dw pTable_B48F95                                           ;B48ECB|        |B48F95;
-    dw pTable_B48F95                                           ;B48ECD|        |B48F95;
-    dw pTable_B48F95                                           ;B48ECF|        |B48F95;
-    dw pTable_B48F95                                           ;B48ED1|        |B48F95;
-    dw pTable_B48F95                                           ;B48ED3|        |B48F95;
-    dw pTable_B48F95                                           ;B48ED5|        |B48F95;
-    dw pTable_B48F95                                           ;B48ED7|        |B48F95;
-    dw pTable_B48F95                                           ;B48ED9|        |B48F95;
-    dw pTable_B48F95                                           ;B48EDB|        |B48F95;
-    dw pTable_B48F95                                           ;B48EDD|        |B48F95;
-    dw pTable_B48F95                                           ;B48EDF|        |B48F95;
-    dw pTable_B48F95                                           ;B48EE1|        |B48F95;
-    dw pTable_B48F95                                           ;B48EE3|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EC7|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EC9|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ECB|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ECD|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ECF|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ED1|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ED3|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ED5|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ED7|        |B48F95;
+    dw pScripting_B48F95                                       ;B48ED9|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EDB|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EDD|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EDF|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EE1|        |B48F95;
+    dw pScripting_B48F95                                       ;B48EE3|        |B48F95;
  
 DATA8_B48EE5:
     db $09,$01,$F9,$8E,$38,$10,$15,$1C,$1F,$7F,$12,$F8         ;B48EE5|        |      ;
@@ -536,23 +536,23 @@ DATA8_B48EE5:
     db $01,$00,$48,$01,$1B,$0E,$03,$01,$0D,$02,$FE,$06         ;B48F81|        |      ;
     db $01,$0D,$02,$02,$04,$01,$37,$10                         ;B48F8D|        |      ;
  
-pTable_B48F95:
+pScripting_B48F95:
     dw DATA8_B48FB5                                            ;B48F95|        |B48FB5;
     dw DATA8_B48FDE                                            ;B48F97|        |B48FDE;
-    dw pTable_B490D3                                           ;B48F99|        |B490D3;
-    dw pTable_B490D3                                           ;B48F9B|        |B490D3;
-    dw pTable_B490D3                                           ;B48F9D|        |B490D3;
-    dw pTable_B490D3                                           ;B48F9F|        |B490D3;
-    dw pTable_B490D3                                           ;B48FA1|        |B490D3;
-    dw pTable_B490D3                                           ;B48FA3|        |B490D3;
-    dw pTable_B490D3                                           ;B48FA5|        |B490D3;
-    dw pTable_B490D3                                           ;B48FA7|        |B490D3;
-    dw pTable_B490D3                                           ;B48FA9|        |B490D3;
-    dw pTable_B490D3                                           ;B48FAB|        |B490D3;
-    dw pTable_B490D3                                           ;B48FAD|        |B490D3;
-    dw pTable_B490D3                                           ;B48FAF|        |B490D3;
-    dw pTable_B490D3                                           ;B48FB1|        |B490D3;
-    dw pTable_B490D3                                           ;B48FB3|        |B490D3;
+    dw pScripting_B490D3                                       ;B48F99|        |B490D3;
+    dw pScripting_B490D3                                       ;B48F9B|        |B490D3;
+    dw pScripting_B490D3                                       ;B48F9D|        |B490D3;
+    dw pScripting_B490D3                                       ;B48F9F|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FA1|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FA3|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FA5|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FA7|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FA9|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FAB|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FAD|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FAF|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FB1|        |B490D3;
+    dw pScripting_B490D3                                       ;B48FB3|        |B490D3;
  
 DATA8_B48FB5:
     db $50,$08,$09,$01,$BF,$8F,$38,$0B,$00,$10,$1A,$88         ;B48FB5|        |      ;
@@ -583,23 +583,23 @@ DATA8_B48FDE:
     db $01,$00,$30,$01,$1B,$1F,$02,$00,$0D,$00,$01,$40         ;B490C2|        |      ;
     db $01,$0B,$06,$37,$10                                     ;B490CE|        |      ;
  
-pTable_B490D3:
+pScripting_B490D3:
     dw DATA8_B490F3                                            ;B490D3|        |B490F3;
     dw DATA8_B4911C                                            ;B490D5|        |B4911C;
-    dw pTable_B491B3                                           ;B490D7|        |B491B3;
-    dw pTable_B491B3                                           ;B490D9|        |B491B3;
-    dw pTable_B491B3                                           ;B490DB|        |B491B3;
-    dw pTable_B491B3                                           ;B490DD|        |B491B3;
-    dw pTable_B491B3                                           ;B490DF|        |B491B3;
-    dw pTable_B491B3                                           ;B490E1|        |B491B3;
-    dw pTable_B491B3                                           ;B490E3|        |B491B3;
-    dw pTable_B491B3                                           ;B490E5|        |B491B3;
-    dw pTable_B491B3                                           ;B490E7|        |B491B3;
-    dw pTable_B491B3                                           ;B490E9|        |B491B3;
-    dw pTable_B491B3                                           ;B490EB|        |B491B3;
-    dw pTable_B491B3                                           ;B490ED|        |B491B3;
-    dw pTable_B491B3                                           ;B490EF|        |B491B3;
-    dw pTable_B491B3                                           ;B490F1|        |B491B3;
+    dw pScripting_B491B3                                       ;B490D7|        |B491B3;
+    dw pScripting_B491B3                                       ;B490D9|        |B491B3;
+    dw pScripting_B491B3                                       ;B490DB|        |B491B3;
+    dw pScripting_B491B3                                       ;B490DD|        |B491B3;
+    dw pScripting_B491B3                                       ;B490DF|        |B491B3;
+    dw pScripting_B491B3                                       ;B490E1|        |B491B3;
+    dw pScripting_B491B3                                       ;B490E3|        |B491B3;
+    dw pScripting_B491B3                                       ;B490E5|        |B491B3;
+    dw pScripting_B491B3                                       ;B490E7|        |B491B3;
+    dw pScripting_B491B3                                       ;B490E9|        |B491B3;
+    dw pScripting_B491B3                                       ;B490EB|        |B491B3;
+    dw pScripting_B491B3                                       ;B490ED|        |B491B3;
+    dw pScripting_B491B3                                       ;B490EF|        |B491B3;
+    dw pScripting_B491B3                                       ;B490F1|        |B491B3;
  
 DATA8_B490F3:
     db $50,$08,$09,$01,$FD,$90,$38,$0B,$00,$10,$1A,$88         ;B490F3|        |      ;
@@ -622,23 +622,23 @@ DATA8_B4911C:
     db $68,$01,$18,$83,$02,$0C,$01,$1C,$E2,$01,$00,$0B         ;B491A0|        |      ;
     db $02,$13,$01,$00,$12,$AD,$91                             ;B491AC|        |      ;
  
-pTable_B491B3:
+pScripting_B491B3:
     dw DATA8_B491D3                                            ;B491B3|        |B491D3;
     dw DATA8_B49210                                            ;B491B5|        |B49210;
-    dw pTable_B492D2                                           ;B491B7|        |B492D2;
-    dw pTable_B492D2                                           ;B491B9|        |B492D2;
-    dw pTable_B492D2                                           ;B491BB|        |B492D2;
-    dw pTable_B492D2                                           ;B491BD|        |B492D2;
-    dw pTable_B492D2                                           ;B491BF|        |B492D2;
-    dw pTable_B492D2                                           ;B491C1|        |B492D2;
-    dw pTable_B492D2                                           ;B491C3|        |B492D2;
-    dw pTable_B492D2                                           ;B491C5|        |B492D2;
-    dw pTable_B492D2                                           ;B491C7|        |B492D2;
-    dw pTable_B492D2                                           ;B491C9|        |B492D2;
-    dw pTable_B492D2                                           ;B491CB|        |B492D2;
-    dw pTable_B492D2                                           ;B491CD|        |B492D2;
-    dw pTable_B492D2                                           ;B491CF|        |B492D2;
-    dw pTable_B492D2                                           ;B491D1|        |B492D2;
+    dw pScripting_B492D2                                       ;B491B7|        |B492D2;
+    dw pScripting_B492D2                                       ;B491B9|        |B492D2;
+    dw pScripting_B492D2                                       ;B491BB|        |B492D2;
+    dw pScripting_B492D2                                       ;B491BD|        |B492D2;
+    dw pScripting_B492D2                                       ;B491BF|        |B492D2;
+    dw pScripting_B492D2                                       ;B491C1|        |B492D2;
+    dw pScripting_B492D2                                       ;B491C3|        |B492D2;
+    dw pScripting_B492D2                                       ;B491C5|        |B492D2;
+    dw pScripting_B492D2                                       ;B491C7|        |B492D2;
+    dw pScripting_B492D2                                       ;B491C9|        |B492D2;
+    dw pScripting_B492D2                                       ;B491CB|        |B492D2;
+    dw pScripting_B492D2                                       ;B491CD|        |B492D2;
+    dw pScripting_B492D2                                       ;B491CF|        |B492D2;
+    dw pScripting_B492D2                                       ;B491D1|        |B492D2;
  
 DATA8_B491D3:
     db $50,$08,$09,$01,$DD,$91,$38,$0B,$00,$10,$1A,$88         ;B491D3|        |      ;
@@ -667,23 +667,23 @@ DATA8_B49210:
     db $3C,$00,$23,$6C,$1F,$7F,$01,$28,$6C,$1F,$7F,$00         ;B492C4|        |      ;
     db $3C,$10                                                 ;B492D0|        |      ;
  
-pTable_B492D2:
+pScripting_B492D2:
     dw DATA8_B492F2                                            ;B492D2|        |B492F2;
     dw DATA8_B4931D                                            ;B492D4|        |B4931D;
     dw DATA8_B49401                                            ;B492D6|        |B49401;
-    dw pTable_B4943C                                           ;B492D8|        |B4943C;
-    dw pTable_B4943C                                           ;B492DA|        |B4943C;
-    dw pTable_B4943C                                           ;B492DC|        |B4943C;
-    dw pTable_B4943C                                           ;B492DE|        |B4943C;
-    dw pTable_B4943C                                           ;B492E0|        |B4943C;
-    dw pTable_B4943C                                           ;B492E2|        |B4943C;
-    dw pTable_B4943C                                           ;B492E4|        |B4943C;
-    dw pTable_B4943C                                           ;B492E6|        |B4943C;
-    dw pTable_B4943C                                           ;B492E8|        |B4943C;
-    dw pTable_B4943C                                           ;B492EA|        |B4943C;
-    dw pTable_B4943C                                           ;B492EC|        |B4943C;
-    dw pTable_B4943C                                           ;B492EE|        |B4943C;
-    dw pTable_B4943C                                           ;B492F0|        |B4943C;
+    dw pScripting_B4943C                                       ;B492D8|        |B4943C;
+    dw pScripting_B4943C                                       ;B492DA|        |B4943C;
+    dw pScripting_B4943C                                       ;B492DC|        |B4943C;
+    dw pScripting_B4943C                                       ;B492DE|        |B4943C;
+    dw pScripting_B4943C                                       ;B492E0|        |B4943C;
+    dw pScripting_B4943C                                       ;B492E2|        |B4943C;
+    dw pScripting_B4943C                                       ;B492E4|        |B4943C;
+    dw pScripting_B4943C                                       ;B492E6|        |B4943C;
+    dw pScripting_B4943C                                       ;B492E8|        |B4943C;
+    dw pScripting_B4943C                                       ;B492EA|        |B4943C;
+    dw pScripting_B4943C                                       ;B492EC|        |B4943C;
+    dw pScripting_B4943C                                       ;B492EE|        |B4943C;
+    dw pScripting_B4943C                                       ;B492F0|        |B4943C;
  
 DATA8_B492F2:
     db $50,$08,$09,$01,$FC,$92,$38,$0B,$00,$10,$1A,$88         ;B492F2|        |      ;
@@ -719,23 +719,23 @@ DATA8_B49401:
     db $07,$03,$13,$DC,$00,$39,$03,$30,$00,$0C,$03,$23         ;B49425|        |      ;
     db $6C,$1F,$7F,$03,$28,$6C,$1F,$7F,$02,$3C,$10             ;B49431|        |      ;
  
-pTable_B4943C:
+pScripting_B4943C:
     dw DATA8_B4945C                                            ;B4943C|        |B4945C;
     dw DATA8_B49499                                            ;B4943E|        |B49499;
     dw DATA8_B49513                                            ;B49440|        |B49513;
     dw DATA8_B4958B                                            ;B49442|        |B4958B;
-    dw pTable_B4967A                                           ;B49444|        |B4967A;
-    dw pTable_B4967A                                           ;B49446|        |B4967A;
-    dw pTable_B4967A                                           ;B49448|        |B4967A;
-    dw pTable_B4967A                                           ;B4944A|        |B4967A;
-    dw pTable_B4967A                                           ;B4944C|        |B4967A;
-    dw pTable_B4967A                                           ;B4944E|        |B4967A;
-    dw pTable_B4967A                                           ;B49450|        |B4967A;
-    dw pTable_B4967A                                           ;B49452|        |B4967A;
-    dw pTable_B4967A                                           ;B49454|        |B4967A;
-    dw pTable_B4967A                                           ;B49456|        |B4967A;
-    dw pTable_B4967A                                           ;B49458|        |B4967A;
-    dw pTable_B4967A                                           ;B4945A|        |B4967A;
+    dw pScripting_B4967A                                       ;B49444|        |B4967A;
+    dw pScripting_B4967A                                       ;B49446|        |B4967A;
+    dw pScripting_B4967A                                       ;B49448|        |B4967A;
+    dw pScripting_B4967A                                       ;B4944A|        |B4967A;
+    dw pScripting_B4967A                                       ;B4944C|        |B4967A;
+    dw pScripting_B4967A                                       ;B4944E|        |B4967A;
+    dw pScripting_B4967A                                       ;B49450|        |B4967A;
+    dw pScripting_B4967A                                       ;B49452|        |B4967A;
+    dw pScripting_B4967A                                       ;B49454|        |B4967A;
+    dw pScripting_B4967A                                       ;B49456|        |B4967A;
+    dw pScripting_B4967A                                       ;B49458|        |B4967A;
+    dw pScripting_B4967A                                       ;B4945A|        |B4967A;
  
 DATA8_B4945C:
     db $50,$08,$09,$01,$66,$94,$38,$0B,$00,$10,$1A,$88         ;B4945C|        |      ;
@@ -792,23 +792,23 @@ DATA8_B4958B:
     db $01,$34,$82,$03,$0C,$04,$1C,$F9,$01,$01,$1B,$5F         ;B49663|        |      ;
     db $02,$01,$0D,$01,$00,$70,$01,$0B,$05,$37,$10             ;B4966F|        |      ;
  
-pTable_B4967A:
+pScripting_B4967A:
     dw DATA8_B4969A                                            ;B4967A|        |B4969A;
-    dw pTable_B49A3F                                           ;B4967C|        |B49A3F;
-    dw pTable_B49A3F                                           ;B4967E|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49680|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49682|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49684|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49686|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49688|        |B49A3F;
-    dw pTable_B49A3F                                           ;B4968A|        |B49A3F;
-    dw pTable_B49A3F                                           ;B4968C|        |B49A3F;
-    dw pTable_B49A3F                                           ;B4968E|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49690|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49692|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49694|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49696|        |B49A3F;
-    dw pTable_B49A3F                                           ;B49698|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B4967C|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B4967E|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49680|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49682|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49684|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49686|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49688|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B4968A|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B4968C|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B4968E|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49690|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49692|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49694|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49696|        |B49A3F;
+    dw pScripting_B49A3F                                       ;B49698|        |B49A3F;
  
 DATA8_B4969A:
     db $50,$00,$18,$B4,$23,$60,$1F,$7F,$09,$02,$03,$07         ;B4969A|        |      ;
@@ -890,23 +890,23 @@ DATA8_B4969A:
     db $00,$13,$B4,$00,$12,$2B,$9A,$1A,$98,$01,$F8,$00         ;B49A2A|        |      ;
     db $34,$8B,$00,$13,$B4,$00,$12,$39,$9A                     ;B49A36|        |      ;
  
-pTable_B49A3F:
+pScripting_B49A3F:
     dw DATA8_B49A5F                                            ;B49A3F|        |B49A5F;
     dw DATA8_B49C2A                                            ;B49A41|        |B49C2A;
     dw DATA8_B49DD5                                            ;B49A43|        |B49DD5;
-    dw pTable_B49E31                                           ;B49A45|        |B49E31;
-    dw pTable_B49E31                                           ;B49A47|        |B49E31;
-    dw pTable_B49E31                                           ;B49A49|        |B49E31;
-    dw pTable_B49E31                                           ;B49A4B|        |B49E31;
-    dw pTable_B49E31                                           ;B49A4D|        |B49E31;
-    dw pTable_B49E31                                           ;B49A4F|        |B49E31;
-    dw pTable_B49E31                                           ;B49A51|        |B49E31;
-    dw pTable_B49E31                                           ;B49A53|        |B49E31;
-    dw pTable_B49E31                                           ;B49A55|        |B49E31;
-    dw pTable_B49E31                                           ;B49A57|        |B49E31;
-    dw pTable_B49E31                                           ;B49A59|        |B49E31;
-    dw pTable_B49E31                                           ;B49A5B|        |B49E31;
-    dw pTable_B49E31                                           ;B49A5D|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A45|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A47|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A49|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A4B|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A4D|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A4F|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A51|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A53|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A55|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A57|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A59|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A5B|        |B49E31;
+    dw pScripting_B49E31                                       ;B49A5D|        |B49E31;
  
 DATA8_B49A5F:
     db $50,$23,$5E,$1F,$7F,$0D,$09,$01,$E0,$9A,$09,$02         ;B49A5F|        |      ;
@@ -997,23 +997,23 @@ DATA8_B49DD5:
     db $13,$01,$00,$12,$1D,$9E,$1A,$08,$01,$60,$00,$54         ;B49E1D|        |      ;
     db $86,$00,$13,$01,$00,$12,$2B,$9E                         ;B49E29|        |      ;
  
-pTable_B49E31:
+pScripting_B49E31:
     dw DATA8_B49E51                                            ;B49E31|        |B49E51;
-    dw pTable_B49F13                                           ;B49E33|        |B49F13;
-    dw pTable_B49F13                                           ;B49E35|        |B49F13;
-    dw pTable_B49F13                                           ;B49E37|        |B49F13;
-    dw pTable_B49F13                                           ;B49E39|        |B49F13;
-    dw pTable_B49F13                                           ;B49E3B|        |B49F13;
-    dw pTable_B49F13                                           ;B49E3D|        |B49F13;
-    dw pTable_B49F13                                           ;B49E3F|        |B49F13;
-    dw pTable_B49F13                                           ;B49E41|        |B49F13;
-    dw pTable_B49F13                                           ;B49E43|        |B49F13;
-    dw pTable_B49F13                                           ;B49E45|        |B49F13;
-    dw pTable_B49F13                                           ;B49E47|        |B49F13;
-    dw pTable_B49F13                                           ;B49E49|        |B49F13;
-    dw pTable_B49F13                                           ;B49E4B|        |B49F13;
-    dw pTable_B49F13                                           ;B49E4D|        |B49F13;
-    dw pTable_B49F13                                           ;B49E4F|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E33|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E35|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E37|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E39|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E3B|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E3D|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E3F|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E41|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E43|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E45|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E47|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E49|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E4B|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E4D|        |B49F13;
+    dw pScripting_B49F13                                       ;B49E4F|        |B49F13;
  
 DATA8_B49E51:
     db $50,$23,$60,$1F,$7F,$09,$23,$5E,$1F,$7F,$02,$00         ;B49E51|        |      ;
@@ -1034,23 +1034,23 @@ DATA8_B49E51:
     db $01,$1B,$AC,$02,$00,$0D,$00,$01,$90,$01,$0B,$02         ;B49F05|        |      ;
     db $37,$10                                                 ;B49F11|        |      ;
  
-pTable_B49F13:
+pScripting_B49F13:
     dw DATA8_B49F33                                            ;B49F13|        |B49F33;
-    dw pTable_B49FD8                                           ;B49F15|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F17|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F19|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F1B|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F1D|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F1F|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F21|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F23|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F25|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F27|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F29|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F2B|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F2D|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F2F|        |B49FD8;
-    dw pTable_B49FD8                                           ;B49F31|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F15|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F17|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F19|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F1B|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F1D|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F1F|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F21|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F23|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F25|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F27|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F29|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F2B|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F2D|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F2F|        |B49FD8;
+    dw pScripting_B49FD8                                       ;B49F31|        |B49FD8;
  
 DATA8_B49F33:
     db $09,$13,$B3,$9F,$10,$1A,$08,$01,$A8,$01,$C4,$82         ;B49F33|        |      ;
@@ -1068,7 +1068,7 @@ DATA8_B49F33:
     db $6A,$1F,$7F,$09,$09,$09,$38,$9F,$0C,$03,$1B,$03         ;B49FC3|        |      ;
     db $03,$00,$0D,$FF,$00,$3A,$01,$37,$10                     ;B49FCF|        |      ;
  
-pTable_B49FD8:
+pScripting_B49FD8:
     dw DATA8_B49FF8                                            ;B49FD8|        |B49FF8;
     dw DATA8_B4A045                                            ;B49FDA|        |B4A045;
     dw DATA8_B4A091                                            ;B49FDC|        |B4A091;
@@ -1082,9 +1082,9 @@ pTable_B49FD8:
     dw DATA8_B4A297                                            ;B49FEC|        |B4A297;
     dw DATA8_B4A301                                            ;B49FEE|        |B4A301;
     dw DATA8_B4A321                                            ;B49FF0|        |B4A321;
-    dw pTable_B4A37F                                           ;B49FF2|        |B4A37F;
-    dw pTable_B4A37F                                           ;B49FF4|        |B4A37F;
-    dw pTable_B4A37F                                           ;B49FF6|        |B4A37F;
+    dw pScripting_B4A37F                                       ;B49FF2|        |B4A37F;
+    dw pScripting_B4A37F                                       ;B49FF4|        |B4A37F;
+    dw pScripting_B4A37F                                       ;B49FF6|        |B4A37F;
  
 DATA8_B49FF8:
     db $50,$07,$02,$08,$09,$01,$12,$A0,$38,$0B,$00,$13         ;B49FF8|        |      ;
@@ -1194,23 +1194,23 @@ DATA8_B4A321:
     db $0A,$00,$0D,$02,$00,$01,$01,$1B,$F0,$02,$01,$0B         ;B4A369|        |      ;
     db $01,$12,$79,$A3,$13,$01,$00,$12,$79,$A3                 ;B4A375|        |      ;
  
-pTable_B4A37F:
+pScripting_B4A37F:
     dw DATA8_B4A39F                                            ;B4A37F|        |B4A39F;
-    dw pTable_B4A455                                           ;B4A381|        |B4A455;
-    dw pTable_B4A455                                           ;B4A383|        |B4A455;
-    dw pTable_B4A455                                           ;B4A385|        |B4A455;
-    dw pTable_B4A455                                           ;B4A387|        |B4A455;
-    dw pTable_B4A455                                           ;B4A389|        |B4A455;
-    dw pTable_B4A455                                           ;B4A38B|        |B4A455;
-    dw pTable_B4A455                                           ;B4A38D|        |B4A455;
-    dw pTable_B4A455                                           ;B4A38F|        |B4A455;
-    dw pTable_B4A455                                           ;B4A391|        |B4A455;
-    dw pTable_B4A455                                           ;B4A393|        |B4A455;
-    dw pTable_B4A455                                           ;B4A395|        |B4A455;
-    dw pTable_B4A455                                           ;B4A397|        |B4A455;
-    dw pTable_B4A455                                           ;B4A399|        |B4A455;
-    dw pTable_B4A455                                           ;B4A39B|        |B4A455;
-    dw pTable_B4A455                                           ;B4A39D|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A381|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A383|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A385|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A387|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A389|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A38B|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A38D|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A38F|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A391|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A393|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A395|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A397|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A399|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A39B|        |B4A455;
+    dw pScripting_B4A455                                       ;B4A39D|        |B4A455;
  
 DATA8_B4A39F:
     db $09,$0C,$B7,$A3,$09,$0D,$F1,$A3,$09,$0E,$29,$A4         ;B4A39F|        |      ;
@@ -1230,23 +1230,23 @@ DATA8_B4A39F:
     db $40,$03,$0D,$FF,$02,$40,$02,$0D,$FF,$01,$58,$01         ;B4A447|        |      ;
     db $37,$10                                                 ;B4A453|        |      ;
  
-pTable_B4A455:
+pScripting_B4A455:
     dw DATA8_B4A475                                            ;B4A455|        |B4A475;
     dw DATA8_B4A531                                            ;B4A457|        |B4A531;
     dw DATA8_B4A55D                                            ;B4A459|        |B4A55D;
     dw DATA8_B4A589                                            ;B4A45B|        |B4A589;
-    dw pTable_B4A5B5                                           ;B4A45D|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A45F|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A461|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A463|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A465|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A467|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A469|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A46B|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A46D|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A46F|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A471|        |B4A5B5;
-    dw pTable_B4A5B5                                           ;B4A473|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A45D|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A45F|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A461|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A463|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A465|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A467|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A469|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A46B|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A46D|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A46F|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A471|        |B4A5B5;
+    dw pScripting_B4A5B5                                       ;B4A473|        |B4A5B5;
  
 DATA8_B4A475:
     db $08,$1A,$F8,$FF,$A8,$01,$AC,$82,$02,$38,$3A,$00         ;B4A475|        |      ;
@@ -1284,23 +1284,23 @@ DATA8_B4A589:
     db $01,$13,$1E,$00,$1C,$42,$01,$00,$1B,$5F,$02,$00         ;B4A5A1|        |      ;
     db $0D,$FF,$00,$80,$01,$37,$11,$10                         ;B4A5AD|        |      ;
  
-pTable_B4A5B5:
+pScripting_B4A5B5:
     dw DATA8_B4A5D5                                            ;B4A5B5|        |B4A5D5;
-    dw pTable_B4A60D                                           ;B4A5B7|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5B9|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5BB|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5BD|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5BF|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5C1|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5C3|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5C5|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5C7|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5C9|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5CB|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5CD|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5CF|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5D1|        |B4A60D;
-    dw pTable_B4A60D                                           ;B4A5D3|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5B7|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5B9|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5BB|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5BD|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5BF|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5C1|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5C3|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5C5|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5C7|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5C9|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5CB|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5CD|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5CF|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5D1|        |B4A60D;
+    dw pScripting_B4A60D                                       ;B4A5D3|        |B4A60D;
  
 DATA8_B4A5D5:
     db $02,$05,$88,$00,$58,$01,$07,$00,$08,$09,$01,$E9         ;B4A5D5|        |      ;
@@ -1309,23 +1309,23 @@ DATA8_B4A5D5:
     db $02,$00,$0D,$00,$01,$60,$01,$1B,$9B,$02,$01,$0D         ;B4A5F9|        |      ;
     db $FF,$00,$70,$01,$0B,$01,$37,$10                         ;B4A605|        |      ;
  
-pTable_B4A60D:
+pScripting_B4A60D:
     dw DATA8_B4A62D                                            ;B4A60D|        |B4A62D;
     dw DATA8_B4B48E                                            ;B4A60F|        |B4B48E;
-    dw pTable_B4B65E                                           ;B4A611|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A613|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A615|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A617|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A619|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A61B|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A61D|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A61F|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A621|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A623|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A625|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A627|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A629|        |B4B65E;
-    dw pTable_B4B65E                                           ;B4A62B|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A611|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A613|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A615|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A617|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A619|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A61B|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A61D|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A61F|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A621|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A623|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A625|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A627|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A629|        |B4B65E;
+    dw pScripting_B4B65E                                       ;B4A62B|        |B4B65E;
  
 DATA8_B4A62D:
     db $4F,$51,$23,$60,$1F,$7F,$09,$00,$03,$B4,$02,$03         ;B4A62D|        |      ;
@@ -1677,23 +1677,23 @@ DATA8_B4B48E:
     db $1B,$02,$00,$01,$0D,$FF,$00,$10,$02,$1B,$02,$00         ;B4B64A|        |      ;
     db $01,$0D,$01,$00,$10,$02,$3C,$10                         ;B4B656|        |      ;
  
-pTable_B4B65E:
+pScripting_B4B65E:
     dw DATA8_B4B67E                                            ;B4B65E|        |B4B67E;
     dw DATA8_B4B947                                            ;B4B660|        |B4B947;
     dw DATA8_B4B9C2                                            ;B4B662|        |B4B9C2;
     dw DATA8_B4BA8E                                            ;B4B664|        |B4BA8E;
-    dw pTable_B4BACB                                           ;B4B666|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B668|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B66A|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B66C|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B66E|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B670|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B672|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B674|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B676|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B678|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B67A|        |B4BACB;
-    dw pTable_B4BACB                                           ;B4B67C|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B666|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B668|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B66A|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B66C|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B66E|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B670|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B672|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B674|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B676|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B678|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B67A|        |B4BACB;
+    dw pScripting_B4BACB                                       ;B4B67C|        |B4BACB;
  
 DATA8_B4B67E:
     db $4F,$50,$09,$01,$EB,$B6,$09,$02,$2A,$B7,$09,$03         ;B4B67E|        |      ;
@@ -1797,23 +1797,23 @@ DATA8_B4BA8E:
     db $1F,$C4,$BA,$12,$BE,$BA,$1C,$98,$02,$00,$12,$BE         ;B4BABE|        |      ;
     db $BA                                                     ;B4BACA|        |      ;
  
-pTable_B4BACB:
+pScripting_B4BACB:
     dw DATA8_B4BAEB                                            ;B4BACB|        |B4BAEB;
     dw DATA8_B4BB06                                            ;B4BACD|        |B4BB06;
     dw DATA8_B4BD19                                            ;B4BACF|        |B4BD19;
     dw DATA8_B4C3AC                                            ;B4BAD1|        |B4C3AC;
-    dw pTable_B4C427                                           ;B4BAD3|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAD5|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAD7|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAD9|        |B4C427;
-    dw pTable_B4C427                                           ;B4BADB|        |B4C427;
-    dw pTable_B4C427                                           ;B4BADD|        |B4C427;
-    dw pTable_B4C427                                           ;B4BADF|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAE1|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAE3|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAE5|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAE7|        |B4C427;
-    dw pTable_B4C427                                           ;B4BAE9|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAD3|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAD5|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAD7|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAD9|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BADB|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BADD|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BADF|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAE1|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAE3|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAE5|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAE7|        |B4C427;
+    dw pScripting_B4C427                                       ;B4BAE9|        |B4C427;
  
 DATA8_B4BAEB:
     db $4F,$50,$23,$60,$1F,$7F,$09,$23,$60,$1F,$7F,$00         ;B4BAEB|        |      ;
@@ -2023,23 +2023,23 @@ DATA8_B4C3AC:
     db $02,$00,$13,$01,$00,$1C,$ED,$02,$00,$11,$13,$8A         ;B4C418|        |      ;
     db $02,$3C,$10                                             ;B4C424|        |      ;
  
-pTable_B4C427:
+pScripting_B4C427:
     dw DATA8_B4C447                                            ;B4C427|        |B4C447;
-    dw pTable_B4C4B8                                           ;B4C429|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C42B|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C42D|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C42F|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C431|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C433|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C435|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C437|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C439|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C43B|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C43D|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C43F|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C441|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C443|        |B4C4B8;
-    dw pTable_B4C4B8                                           ;B4C445|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C429|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C42B|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C42D|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C42F|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C431|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C433|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C435|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C437|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C439|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C43B|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C43D|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C43F|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C441|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C443|        |B4C4B8;
+    dw pScripting_B4C4B8                                       ;B4C445|        |B4C4B8;
  
 DATA8_B4C447:
     db $09,$01,$4D,$C4,$38,$10,$15,$1C,$1F,$7F,$12,$B7         ;B4C447|        |      ;
@@ -2053,23 +2053,23 @@ DATA8_B4C447:
     db $28,$6A,$1F,$7F,$0A,$1B,$B6,$02,$00,$0D,$FF,$00         ;B4C4A7|        |      ;
     db $60,$01,$37,$10,$10                                     ;B4C4B3|        |      ;
  
-pTable_B4C4B8:
+pScripting_B4C4B8:
     dw DATA8_B4C4D8                                            ;B4C4B8|        |B4C4D8;
-    dw pTable_B4C504                                           ;B4C4BA|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4BC|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4BE|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4C0|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4C2|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4C4|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4C6|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4C8|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4CA|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4CC|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4CE|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4D0|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4D2|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4D4|        |B4C504;
-    dw pTable_B4C504                                           ;B4C4D6|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4BA|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4BC|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4BE|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4C0|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4C2|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4C4|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4C6|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4C8|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4CA|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4CC|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4CE|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4D0|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4D2|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4D4|        |B4C504;
+    dw pScripting_B4C504                                       ;B4C4D6|        |B4C504;
  
 DATA8_B4C4D8:
     db $1A,$18,$02,$78,$00,$A4,$87,$00,$13,$01,$00,$1B         ;B4C4D8|        |      ;
@@ -2077,69 +2077,69 @@ DATA8_B4C4D8:
     db $13,$3C,$00,$1B,$05,$03,$01,$0D,$02,$00,$80,$01         ;B4C4F0|        |      ;
     db $37,$41,$33,$1F,$7F,$0A,$00,$10                         ;B4C4FC|        |      ;
  
-pTable_B4C504:
+pScripting_B4C504:
     dw DATA8_B4C524                                            ;B4C504|        |B4C524;
-    dw pTable_B4C548                                           ;B4C506|        |B4C548;
-    dw pTable_B4C548                                           ;B4C508|        |B4C548;
-    dw pTable_B4C548                                           ;B4C50A|        |B4C548;
-    dw pTable_B4C548                                           ;B4C50C|        |B4C548;
-    dw pTable_B4C548                                           ;B4C50E|        |B4C548;
-    dw pTable_B4C548                                           ;B4C510|        |B4C548;
-    dw pTable_B4C548                                           ;B4C512|        |B4C548;
-    dw pTable_B4C548                                           ;B4C514|        |B4C548;
-    dw pTable_B4C548                                           ;B4C516|        |B4C548;
-    dw pTable_B4C548                                           ;B4C518|        |B4C548;
-    dw pTable_B4C548                                           ;B4C51A|        |B4C548;
-    dw pTable_B4C548                                           ;B4C51C|        |B4C548;
-    dw pTable_B4C548                                           ;B4C51E|        |B4C548;
-    dw pTable_B4C548                                           ;B4C520|        |B4C548;
-    dw pTable_B4C548                                           ;B4C522|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C506|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C508|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C50A|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C50C|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C50E|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C510|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C512|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C514|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C516|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C518|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C51A|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C51C|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C51E|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C520|        |B4C548;
+    dw pScripting_B4C548                                       ;B4C522|        |B4C548;
  
 DATA8_B4C524:
     db $1A,$88,$00,$98,$00,$98,$87,$00,$13,$01,$00,$1B         ;B4C524|        |      ;
     db $03,$03,$00,$0D,$FF,$00,$30,$01,$13,$3C,$00,$0D         ;B4C530|        |      ;
     db $FF,$00,$50,$01,$37,$41,$33,$1F,$7F,$0A,$00,$10         ;B4C53C|        |      ;
  
-pTable_B4C548:
+pScripting_B4C548:
     dw DATA8_B4C568                                            ;B4C548|        |B4C568;
-    dw pTable_B4C584                                           ;B4C54A|        |B4C584;
-    dw pTable_B4C584                                           ;B4C54C|        |B4C584;
-    dw pTable_B4C584                                           ;B4C54E|        |B4C584;
-    dw pTable_B4C584                                           ;B4C550|        |B4C584;
-    dw pTable_B4C584                                           ;B4C552|        |B4C584;
-    dw pTable_B4C584                                           ;B4C554|        |B4C584;
-    dw pTable_B4C584                                           ;B4C556|        |B4C584;
-    dw pTable_B4C584                                           ;B4C558|        |B4C584;
-    dw pTable_B4C584                                           ;B4C55A|        |B4C584;
-    dw pTable_B4C584                                           ;B4C55C|        |B4C584;
-    dw pTable_B4C584                                           ;B4C55E|        |B4C584;
-    dw pTable_B4C584                                           ;B4C560|        |B4C584;
-    dw pTable_B4C584                                           ;B4C562|        |B4C584;
-    dw pTable_B4C584                                           ;B4C564|        |B4C584;
-    dw pTable_B4C584                                           ;B4C566|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C54A|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C54C|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C54E|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C550|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C552|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C554|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C556|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C558|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C55A|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C55C|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C55E|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C560|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C562|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C564|        |B4C584;
+    dw pScripting_B4C584                                       ;B4C566|        |B4C584;
  
 DATA8_B4C568:
     db $1A,$28,$02,$58,$02,$B0,$87,$00,$13,$3C,$00,$1B         ;B4C568|        |      ;
     db $07,$03,$01,$0D,$01,$00,$FF,$01,$37,$41,$33,$1F         ;B4C574|        |      ;
     db $7F,$0A,$00,$10                                         ;B4C580|        |      ;
  
-pTable_B4C584:
+pScripting_B4C584:
     dw DATA8_B4C5A4                                            ;B4C584|        |B4C5A4;
-    dw pTable_B4C5F4                                           ;B4C586|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C588|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C58A|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C58C|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C58E|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C590|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C592|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C594|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C596|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C598|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C59A|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C59C|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C59E|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C5A0|        |B4C5F4;
-    dw pTable_B4C5F4                                           ;B4C5A2|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C586|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C588|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C58A|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C58C|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C58E|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C590|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C592|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C594|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C596|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C598|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C59A|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C59C|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C59E|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C5A0|        |B4C5F4;
+    dw pScripting_B4C5F4                                       ;B4C5A2|        |B4C5F4;
  
 DATA8_B4C5A4:
     db $07,$01,$09,$01,$B2,$C5,$11,$38,$13,$01,$00,$12         ;B4C5A4|        |      ;
@@ -2150,23 +2150,23 @@ DATA8_B4C5A4:
     db $04,$01,$0D,$01,$01,$0C,$02,$0D,$01,$00,$08,$02         ;B4C5E0|        |      ;
     db $0D,$00,$FF,$06,$01,$12,$BA,$C5                         ;B4C5EC|        |      ;
  
-pTable_B4C5F4:
+pScripting_B4C5F4:
     dw DATA8_B4C614                                            ;B4C5F4|        |B4C614;
-    dw pTable_B4C6F1                                           ;B4C5F6|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C5F8|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C5FA|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C5FC|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C5FE|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C600|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C602|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C604|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C606|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C608|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C60A|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C60C|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C60E|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C610|        |B4C6F1;
-    dw pTable_B4C6F1                                           ;B4C612|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C5F6|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C5F8|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C5FA|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C5FC|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C5FE|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C600|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C602|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C604|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C606|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C608|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C60A|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C60C|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C60E|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C610|        |B4C6F1;
+    dw pScripting_B4C6F1                                       ;B4C612|        |B4C6F1;
  
 DATA8_B4C614:
     db $00,$01,$B4,$23,$5E,$1F,$7F,$02,$05,$88,$00,$78         ;B4C614|        |      ;
@@ -2189,23 +2189,23 @@ DATA8_B4C614:
     db $1B,$E7,$02,$00,$13,$78,$00,$1B,$E3,$02,$00,$13         ;B4C6E0|        |      ;
     db $F0,$00,$12,$E0,$C6                                     ;B4C6EC|        |      ;
  
-pTable_B4C6F1:
+pScripting_B4C6F1:
     dw DATA8_B4C711                                            ;B4C6F1|        |B4C711;
-    dw pTable_B4C7C3                                           ;B4C6F3|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C6F5|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C6F7|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C6F9|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C6FB|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C6FD|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C6FF|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C701|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C703|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C705|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C707|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C709|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C70B|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C70D|        |B4C7C3;
-    dw pTable_B4C7C3                                           ;B4C70F|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6F3|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6F5|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6F7|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6F9|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6FB|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6FD|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C6FF|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C701|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C703|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C705|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C707|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C709|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C70B|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C70D|        |B4C7C3;
+    dw pScripting_B4C7C3                                       ;B4C70F|        |B4C7C3;
  
 DATA8_B4C711:
     db $00,$11,$B4,$02,$03,$06,$05,$88,$00,$58,$01,$07         ;B4C711|        |      ;
@@ -2224,23 +2224,23 @@ DATA8_B4C711:
     db $1B,$EA,$01,$01,$13,$50,$00,$1B,$EB,$01,$01,$13         ;B4C7AD|        |      ;
     db $B4,$00,$0B,$03,$13,$01,$00,$12,$BD,$C7                 ;B4C7B9|        |      ;
  
-pTable_B4C7C3:
+pScripting_B4C7C3:
     dw DATA8_B4C7E3                                            ;B4C7C3|        |B4C7E3;
-    dw pTable_B4C9F9                                           ;B4C7C5|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7C7|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7C9|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7CB|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7CD|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7CF|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7D1|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7D3|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7D5|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7D7|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7D9|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7DB|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7DD|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7DF|        |B4C9F9;
-    dw pTable_B4C9F9                                           ;B4C7E1|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7C5|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7C7|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7C9|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7CB|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7CD|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7CF|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7D1|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7D3|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7D5|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7D7|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7D9|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7DB|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7DD|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7DF|        |B4C9F9;
+    dw pScripting_B4C9F9                                       ;B4C7E1|        |B4C9F9;
  
 DATA8_B4C7E3:
     db $00,$10,$B4,$02,$03,$06,$05,$E8,$FF,$78,$00,$07         ;B4C7E3|        |      ;
@@ -2289,23 +2289,23 @@ DATA8_B4C7E3:
     db $01,$01,$13,$5A,$00,$1B,$EE,$01,$01,$13,$78,$00         ;B4C9E7|        |      ;
     db $13,$01,$00,$12,$F3,$C9                                 ;B4C9F3|        |      ;
  
-pTable_B4C9F9:
+pScripting_B4C9F9:
     dw DATA8_B4CA19                                            ;B4C9F9|        |B4CA19;
-    dw pTable_B4CB3F                                           ;B4C9FB|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4C9FD|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4C9FF|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA01|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA03|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA05|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA07|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA09|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA0B|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA0D|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA0F|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA11|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA13|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA15|        |B4CB3F;
-    dw pTable_B4CB3F                                           ;B4CA17|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4C9FB|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4C9FD|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4C9FF|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA01|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA03|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA05|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA07|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA09|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA0B|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA0D|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA0F|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA11|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA13|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA15|        |B4CB3F;
+    dw pScripting_B4CB3F                                       ;B4CA17|        |B4CB3F;
  
 DATA8_B4CA19:
     db $00,$10,$B4,$05,$F0,$FF,$68,$00,$02,$03,$06,$07         ;B4CA19|        |      ;
@@ -2334,23 +2334,23 @@ DATA8_B4CA19:
     db $A8,$00,$50,$81,$00,$22,$18,$18,$01,$50,$81,$0C         ;B4CB2D|        |      ;
     db $13,$01,$00,$12,$39,$CB                                 ;B4CB39|        |      ;
  
-pTable_B4CB3F:
+pScripting_B4CB3F:
     dw DATA8_B4CB5F                                            ;B4CB3F|        |B4CB5F;
-    dw pTable_B4CD56                                           ;B4CB41|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB43|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB45|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB47|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB49|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB4B|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB4D|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB4F|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB51|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB53|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB55|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB57|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB59|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB5B|        |B4CD56;
-    dw pTable_B4CD56                                           ;B4CB5D|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB41|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB43|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB45|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB47|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB49|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB4B|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB4D|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB4F|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB51|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB53|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB55|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB57|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB59|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB5B|        |B4CD56;
+    dw pScripting_B4CD56                                       ;B4CB5D|        |B4CD56;
  
 DATA8_B4CB5F:
     db $00,$10,$B4,$02,$03,$06,$05,$80,$00,$C8,$00,$07         ;B4CB5F|        |      ;
@@ -2396,23 +2396,23 @@ DATA8_B4CB5F:
     db $3B,$CD,$1A,$B8,$00,$68,$00,$50,$81,$00,$22,$18         ;B4CD3F|        |      ;
     db $18,$01,$50,$81,$0C,$13,$01,$00,$12,$50,$CD             ;B4CD4B|        |      ;
  
-pTable_B4CD56:
+pScripting_B4CD56:
     dw DATA8_B4CD76                                            ;B4CD56|        |B4CD76;
-    dw pTable_B4CECA                                           ;B4CD58|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD5A|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD5C|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD5E|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD60|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD62|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD64|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD66|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD68|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD6A|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD6C|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD6E|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD70|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD72|        |B4CECA;
-    dw pTable_B4CECA                                           ;B4CD74|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD58|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD5A|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD5C|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD5E|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD60|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD62|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD64|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD66|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD68|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD6A|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD6C|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD6E|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD70|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD72|        |B4CECA;
+    dw pScripting_B4CECA                                       ;B4CD74|        |B4CECA;
  
 DATA8_B4CD76:
     db $00,$10,$B4,$02,$03,$06,$05,$E8,$FF,$78,$00,$07         ;B4CD76|        |      ;
@@ -2445,23 +2445,23 @@ DATA8_B4CD76:
     db $01,$0C,$02,$0D,$01,$00,$08,$02,$0D,$00,$FF,$06         ;B4CEBA|        |      ;
     db $01,$12,$90,$CE                                         ;B4CEC6|        |      ;
  
-pTable_B4CECA:
+pScripting_B4CECA:
     dw DATA8_B4CEEA                                            ;B4CECA|        |B4CEEA;
-    dw pTable_B4D011                                           ;B4CECC|        |B4D011;
-    dw pTable_B4D011                                           ;B4CECE|        |B4D011;
-    dw pTable_B4D011                                           ;B4CED0|        |B4D011;
-    dw pTable_B4D011                                           ;B4CED2|        |B4D011;
-    dw pTable_B4D011                                           ;B4CED4|        |B4D011;
-    dw pTable_B4D011                                           ;B4CED6|        |B4D011;
-    dw pTable_B4D011                                           ;B4CED8|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEDA|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEDC|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEDE|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEE0|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEE2|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEE4|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEE6|        |B4D011;
-    dw pTable_B4D011                                           ;B4CEE8|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CECC|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CECE|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CED0|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CED2|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CED4|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CED6|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CED8|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEDA|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEDC|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEDE|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEE0|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEE2|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEE4|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEE6|        |B4D011;
+    dw pScripting_B4D011                                       ;B4CEE8|        |B4D011;
  
 DATA8_B4CEEA:
     db $47,$21,$09,$80,$10,$47,$26,$09,$80,$05,$00,$10         ;B4CEEA|        |      ;
@@ -2490,23 +2490,23 @@ DATA8_B4CEEA:
     db $00,$FF,$10,$01,$1B,$F7,$01,$00,$13,$5A,$00,$0B         ;B4CFFE|        |      ;
     db $01,$13,$01,$00,$12,$0B,$D0                             ;B4D00A|        |      ;
  
-pTable_B4D011:
+pScripting_B4D011:
     dw DATA8_B4D031                                            ;B4D011|        |B4D031;
-    dw pTable_B4D160                                           ;B4D013|        |B4D160;
-    dw pTable_B4D160                                           ;B4D015|        |B4D160;
-    dw pTable_B4D160                                           ;B4D017|        |B4D160;
-    dw pTable_B4D160                                           ;B4D019|        |B4D160;
-    dw pTable_B4D160                                           ;B4D01B|        |B4D160;
-    dw pTable_B4D160                                           ;B4D01D|        |B4D160;
-    dw pTable_B4D160                                           ;B4D01F|        |B4D160;
-    dw pTable_B4D160                                           ;B4D021|        |B4D160;
-    dw pTable_B4D160                                           ;B4D023|        |B4D160;
-    dw pTable_B4D160                                           ;B4D025|        |B4D160;
-    dw pTable_B4D160                                           ;B4D027|        |B4D160;
-    dw pTable_B4D160                                           ;B4D029|        |B4D160;
-    dw pTable_B4D160                                           ;B4D02B|        |B4D160;
-    dw pTable_B4D160                                           ;B4D02D|        |B4D160;
-    dw pTable_B4D160                                           ;B4D02F|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D013|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D015|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D017|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D019|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D01B|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D01D|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D01F|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D021|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D023|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D025|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D027|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D029|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D02B|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D02D|        |B4D160;
+    dw pScripting_B4D160                                       ;B4D02F|        |B4D160;
  
 DATA8_B4D031:
     db $47,$21,$09,$80,$15,$00,$10,$B4,$02,$03,$06,$05         ;B4D031|        |      ;
@@ -2536,23 +2536,23 @@ DATA8_B4D031:
     db $78,$00,$1B,$05,$02,$00,$13,$B4,$00,$13,$01,$00         ;B4D151|        |      ;
     db $12,$5A,$D1                                             ;B4D15D|        |      ;
  
-pTable_B4D160:
+pScripting_B4D160:
     dw DATA8_B4D180                                            ;B4D160|        |B4D180;
-    dw pTable_B4D2CC                                           ;B4D162|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D164|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D166|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D168|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D16A|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D16C|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D16E|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D170|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D172|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D174|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D176|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D178|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D17A|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D17C|        |B4D2CC;
-    dw pTable_B4D2CC                                           ;B4D17E|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D162|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D164|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D166|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D168|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D16A|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D16C|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D16E|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D170|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D172|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D174|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D176|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D178|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D17A|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D17C|        |B4D2CC;
+    dw pScripting_B4D2CC                                       ;B4D17E|        |B4D2CC;
  
 DATA8_B4D180:
     db $00,$10,$B4,$02,$03,$06,$05,$B8,$00,$68,$00,$07         ;B4D180|        |      ;
@@ -2584,23 +2584,23 @@ DATA8_B4D180:
     db $1B,$24,$03,$00,$0D,$FF,$00,$80,$01,$1B,$25,$03         ;B4D2B8|        |      ;
     db $00,$13,$3C,$00,$0B,$05,$37,$10                         ;B4D2C4|        |      ;
  
-pTable_B4D2CC:
+pScripting_B4D2CC:
     dw DATA8_B4D2EC                                            ;B4D2CC|        |B4D2EC;
-    dw pTable_B4D447                                           ;B4D2CE|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2D0|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2D2|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2D4|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2D6|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2D8|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2DA|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2DC|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2DE|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2E0|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2E2|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2E4|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2E6|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2E8|        |B4D447;
-    dw pTable_B4D447                                           ;B4D2EA|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2CE|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2D0|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2D2|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2D4|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2D6|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2D8|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2DA|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2DC|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2DE|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2E0|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2E2|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2E4|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2E6|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2E8|        |B4D447;
+    dw pScripting_B4D447                                       ;B4D2EA|        |B4D447;
  
 DATA8_B4D2EC:
     db $47,$21,$09,$80,$10,$47,$26,$09,$80,$05,$00,$10         ;B4D2EC|        |      ;
@@ -2633,23 +2633,23 @@ DATA8_B4D2EC:
     db $64,$00,$98,$8A,$00,$13,$1E,$00,$0D,$FF,$00,$60         ;B4D430|        |      ;
     db $02,$13,$F0,$00,$0D,$FF,$00,$60,$02,$37,$10             ;B4D43C|        |      ;
  
-pTable_B4D447:
+pScripting_B4D447:
     dw DATA8_B4D467                                            ;B4D447|        |B4D467;
-    dw pTable_B4D531                                           ;B4D449|        |B4D531;
-    dw pTable_B4D531                                           ;B4D44B|        |B4D531;
-    dw pTable_B4D531                                           ;B4D44D|        |B4D531;
-    dw pTable_B4D531                                           ;B4D44F|        |B4D531;
-    dw pTable_B4D531                                           ;B4D451|        |B4D531;
-    dw pTable_B4D531                                           ;B4D453|        |B4D531;
-    dw pTable_B4D531                                           ;B4D455|        |B4D531;
-    dw pTable_B4D531                                           ;B4D457|        |B4D531;
-    dw pTable_B4D531                                           ;B4D459|        |B4D531;
-    dw pTable_B4D531                                           ;B4D45B|        |B4D531;
-    dw pTable_B4D531                                           ;B4D45D|        |B4D531;
-    dw pTable_B4D531                                           ;B4D45F|        |B4D531;
-    dw pTable_B4D531                                           ;B4D461|        |B4D531;
-    dw pTable_B4D531                                           ;B4D463|        |B4D531;
-    dw pTable_B4D531                                           ;B4D465|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D449|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D44B|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D44D|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D44F|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D451|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D453|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D455|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D457|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D459|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D45B|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D45D|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D45F|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D461|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D463|        |B4D531;
+    dw pScripting_B4D531                                       ;B4D465|        |B4D531;
  
 DATA8_B4D467:
     db $00,$10,$B4,$02,$03,$06,$05,$E8,$FF,$78,$00,$07         ;B4D467|        |      ;
@@ -2670,23 +2670,23 @@ DATA8_B4D467:
     db $02,$01,$13,$3C,$00,$1B,$05,$02,$01,$13,$5A,$00         ;B4D51B|        |      ;
     db $1B,$00,$02,$01,$13,$78,$00,$12,$0B,$D5                 ;B4D527|        |      ;
  
-pTable_B4D531:
+pScripting_B4D531:
     dw DATA8_B4D551                                            ;B4D531|        |B4D551;
-    dw pTable_B4D772                                           ;B4D533|        |B4D772;
-    dw pTable_B4D772                                           ;B4D535|        |B4D772;
-    dw pTable_B4D772                                           ;B4D537|        |B4D772;
-    dw pTable_B4D772                                           ;B4D539|        |B4D772;
-    dw pTable_B4D772                                           ;B4D53B|        |B4D772;
-    dw pTable_B4D772                                           ;B4D53D|        |B4D772;
-    dw pTable_B4D772                                           ;B4D53F|        |B4D772;
-    dw pTable_B4D772                                           ;B4D541|        |B4D772;
-    dw pTable_B4D772                                           ;B4D543|        |B4D772;
-    dw pTable_B4D772                                           ;B4D545|        |B4D772;
-    dw pTable_B4D772                                           ;B4D547|        |B4D772;
-    dw pTable_B4D772                                           ;B4D549|        |B4D772;
-    dw pTable_B4D772                                           ;B4D54B|        |B4D772;
-    dw pTable_B4D772                                           ;B4D54D|        |B4D772;
-    dw pTable_B4D772                                           ;B4D54F|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D533|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D535|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D537|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D539|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D53B|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D53D|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D53F|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D541|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D543|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D545|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D547|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D549|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D54B|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D54D|        |B4D772;
+    dw pScripting_B4D772                                       ;B4D54F|        |B4D772;
  
 DATA8_B4D551:
     db $00,$10,$B4,$02,$03,$07,$07,$03,$05,$98,$02,$70         ;B4D551|        |      ;
@@ -2736,23 +2736,23 @@ DATA8_B4D551:
     db $40,$01,$0D,$00,$FF,$10,$01,$1B,$28,$03,$01,$13         ;B4D761|        |      ;
     db $01,$00,$12,$6C,$D7                                     ;B4D76D|        |      ;
  
-pTable_B4D772:
+pScripting_B4D772:
     dw DATA8_B4D792                                            ;B4D772|        |B4D792;
     dw DATA8_B4D863                                            ;B4D774|        |B4D863;
-    dw pTable_B4DA22                                           ;B4D776|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D778|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D77A|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D77C|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D77E|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D780|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D782|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D784|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D786|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D788|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D78A|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D78C|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D78E|        |B4DA22;
-    dw pTable_B4DA22                                           ;B4D790|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D776|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D778|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D77A|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D77C|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D77E|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D780|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D782|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D784|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D786|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D788|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D78A|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D78C|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D78E|        |B4DA22;
+    dw pScripting_B4DA22                                       ;B4D790|        |B4DA22;
  
 DATA8_B4D792:
     db $00,$10,$B4,$02,$03,$06,$05,$18,$01,$78,$01,$07         ;B4D792|        |      ;
@@ -2814,23 +2814,23 @@ DATA8_B4D863:
     db $10,$01,$1B,$E1,$02,$00,$13,$78,$00,$13,$01,$00         ;B4DA13|        |      ;
     db $12,$1C,$DA                                             ;B4DA1F|        |      ;
  
-pTable_B4DA22:
+pScripting_B4DA22:
     dw DATA8_B4DA42                                            ;B4DA22|        |B4DA42;
     dw DATA8_B4DB0A                                            ;B4DA24|        |B4DB0A;
-    dw pTable_B4DCCD                                           ;B4DA26|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA28|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA2A|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA2C|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA2E|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA30|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA32|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA34|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA36|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA38|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA3A|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA3C|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA3E|        |B4DCCD;
-    dw pTable_B4DCCD                                           ;B4DA40|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA26|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA28|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA2A|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA2C|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA2E|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA30|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA32|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA34|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA36|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA38|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA3A|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA3C|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA3E|        |B4DCCD;
+    dw pScripting_B4DCCD                                       ;B4DA40|        |B4DCCD;
  
 DATA8_B4DA42:
     db $00,$10,$B4,$02,$03,$07,$05,$88,$00,$C8,$01,$07         ;B4DA42|        |      ;
@@ -2891,23 +2891,23 @@ DATA8_B4DB0A:
     db $00,$0D,$00,$FF,$50,$01,$1B,$50,$02,$00,$13,$B4         ;B4DCBA|        |      ;
     db $00,$13,$01,$00,$12,$C7,$DC                             ;B4DCC6|        |      ;
  
-pTable_B4DCCD:
+pScripting_B4DCCD:
     dw DATA8_B4DCED                                            ;B4DCCD|        |B4DCED;
     dw DATA8_B4DE3E                                            ;B4DCCF|        |B4DE3E;
-    dw pTable_B4DF94                                           ;B4DCD1|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCD3|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCD5|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCD7|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCD9|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCDB|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCDD|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCDF|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCE1|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCE3|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCE5|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCE7|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCE9|        |B4DF94;
-    dw pTable_B4DF94                                           ;B4DCEB|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCD1|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCD3|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCD5|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCD7|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCD9|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCDB|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCDD|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCDF|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCE1|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCE3|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCE5|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCE7|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCE9|        |B4DF94;
+    dw pScripting_B4DF94                                       ;B4DCEB|        |B4DF94;
  
 DATA8_B4DCED:
     db $00,$10,$B4,$02,$03,$06,$05,$F8,$FF,$68,$00,$07         ;B4DCED|        |      ;
@@ -2971,23 +2971,23 @@ DATA8_B4DE3E:
     db $00,$98,$02,$28,$85,$00,$13,$3C,$00,$0B,$01,$13         ;B4DF82|        |      ;
     db $3C,$00,$0B,$02,$37,$10                                 ;B4DF8E|        |      ;
  
-pTable_B4DF94:
+pScripting_B4DF94:
     dw DATA8_B4DFB4                                            ;B4DF94|        |B4DFB4;
     dw DATA8_B4E0F8                                            ;B4DF96|        |B4E0F8;
-    dw pTable_B4E200                                           ;B4DF98|        |B4E200;
-    dw pTable_B4E200                                           ;B4DF9A|        |B4E200;
-    dw pTable_B4E200                                           ;B4DF9C|        |B4E200;
-    dw pTable_B4E200                                           ;B4DF9E|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFA0|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFA2|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFA4|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFA6|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFA8|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFAA|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFAC|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFAE|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFB0|        |B4E200;
-    dw pTable_B4E200                                           ;B4DFB2|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DF98|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DF9A|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DF9C|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DF9E|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFA0|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFA2|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFA4|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFA6|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFA8|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFAA|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFAC|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFAE|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFB0|        |B4E200;
+    dw pScripting_B4E200                                       ;B4DFB2|        |B4E200;
  
 DATA8_B4DFB4:
     db $00,$10,$B4,$02,$03,$06,$05,$18,$00,$98,$00,$07         ;B4DFB4|        |      ;
@@ -3042,23 +3042,23 @@ DATA8_B4E0F8:
     db $1B,$F8,$01,$00,$13,$F0,$00,$1B,$EA,$01,$01,$13         ;B4E1E8|        |      ;
     db $B4,$00,$1B,$EB,$01,$01,$13,$B4,$00,$12,$E8,$E1         ;B4E1F4|        |      ;
  
-pTable_B4E200:
+pScripting_B4E200:
     dw DATA8_B4E220                                            ;B4E200|        |B4E220;
-    dw pTable_B4E3FF                                           ;B4E202|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E204|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E206|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E208|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E20A|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E20C|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E20E|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E210|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E212|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E214|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E216|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E218|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E21A|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E21C|        |B4E3FF;
-    dw pTable_B4E3FF                                           ;B4E21E|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E202|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E204|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E206|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E208|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E20A|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E20C|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E20E|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E210|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E212|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E214|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E216|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E218|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E21A|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E21C|        |B4E3FF;
+    dw pScripting_B4E3FF                                       ;B4E21E|        |B4E3FF;
  
 DATA8_B4E220:
     db $00,$10,$B4,$02,$03,$07,$05,$48,$02,$B0,$01,$07         ;B4E220|        |      ;
@@ -3102,23 +3102,23 @@ DATA8_B4E220:
     db $38,$8A,$00,$13,$01,$00,$12,$EB,$E3,$1A,$70,$02         ;B4E3E8|        |      ;
     db $D6,$01,$50,$87,$00,$13,$01,$00,$12,$F9,$E3             ;B4E3F4|        |      ;
  
-pTable_B4E3FF:
+pScripting_B4E3FF:
     dw DATA8_B4E41F                                            ;B4E3FF|        |B4E41F;
-    dw pTable_B4E5F4                                           ;B4E401|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E403|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E405|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E407|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E409|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E40B|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E40D|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E40F|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E411|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E413|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E415|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E417|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E419|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E41B|        |B4E5F4;
-    dw pTable_B4E5F4                                           ;B4E41D|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E401|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E403|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E405|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E407|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E409|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E40B|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E40D|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E40F|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E411|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E413|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E415|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E417|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E419|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E41B|        |B4E5F4;
+    dw pScripting_B4E5F4                                       ;B4E41D|        |B4E5F4;
  
 DATA8_B4E41F:
     db $00,$10,$B4,$02,$03,$07,$05,$A8,$02,$88,$01,$07         ;B4E41F|        |      ;
@@ -3162,23 +3162,23 @@ DATA8_B4E41F:
     db $CC,$00,$D8,$02,$1C,$8B,$00,$13,$01,$00,$12,$EE         ;B4E5E7|        |      ;
     db $E5                                                     ;B4E5F3|        |      ;
  
-pTable_B4E5F4:
+pScripting_B4E5F4:
     dw DATA8_B4E614                                            ;B4E5F4|        |B4E614;
-    dw pTable_B4E7AF                                           ;B4E5F6|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E5F8|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E5FA|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E5FC|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E5FE|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E600|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E602|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E604|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E606|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E608|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E60A|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E60C|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E60E|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E610|        |B4E7AF;
-    dw pTable_B4E7AF                                           ;B4E612|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E5F6|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E5F8|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E5FA|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E5FC|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E5FE|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E600|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E602|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E604|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E606|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E608|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E60A|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E60C|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E60E|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E610|        |B4E7AF;
+    dw pScripting_B4E7AF                                       ;B4E612|        |B4E7AF;
  
 DATA8_B4E614:
     db $00,$10,$B4,$02,$03,$06,$05,$88,$00,$78,$00,$07         ;B4E614|        |      ;
@@ -3217,23 +3217,23 @@ DATA8_B4E614:
     db $01,$00,$0D,$00,$FF,$20,$02,$0B,$04,$13,$01,$00         ;B4E7A0|        |      ;
     db $12,$A9,$E7                                             ;B4E7AC|        |      ;
  
-pTable_B4E7AF:
+pScripting_B4E7AF:
     dw DATA8_B4E7CF                                            ;B4E7AF|        |B4E7CF;
-    dw pTable_B4E989                                           ;B4E7B1|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7B3|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7B5|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7B7|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7B9|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7BB|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7BD|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7BF|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7C1|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7C3|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7C5|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7C7|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7C9|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7CB|        |B4E989;
-    dw pTable_B4E989                                           ;B4E7CD|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7B1|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7B3|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7B5|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7B7|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7B9|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7BB|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7BD|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7BF|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7C1|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7C3|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7C5|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7C7|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7C9|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7CB|        |B4E989;
+    dw pScripting_B4E989                                       ;B4E7CD|        |B4E989;
  
 DATA8_B4E7CF:
     db $47,$21,$09,$80,$02,$00,$10,$B4,$23,$60,$1F,$7F         ;B4E7CF|        |      ;
@@ -3274,7 +3274,7 @@ DATA8_B4E7CF:
     db $E9,$1A,$A8,$00,$28,$00,$44,$81,$03,$22,$18,$10         ;B4E973|        |      ;
     db $01,$44,$81,$08,$13,$01,$00,$12,$83,$E9                 ;B4E97F|        |      ;
  
-pTable_B4E989:
+pScripting_B4E989:
     dw DATA8_B4E9A9                                            ;B4E989|        |B4E9A9;
     dw DATA8_B4EBA1                                            ;B4E98B|        |B4EBA1;
     dw DATA8_B4ECB4                                            ;B4E98D|        |B4ECB4;
