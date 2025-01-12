@@ -4853,11 +4853,11 @@ fGameEngine_FirstNight:
     LDA.W #$0000                                               ;83ACA9|A90000  |      ;
     STA.L strcDailyFlags.flags5                                ;83ACAC|8F621F7F|7F1F62;
     LDA.W #$0000                                               ;83ACB0|A90000  |      ;
-    STA.L $7F1F74                                              ;83ACB3|8F741F7F|7F1F74;
+    STA.L strcUnknownFlags.flags1                              ;83ACB3|8F741F7F|7F1F74;
     LDA.W #$0000                                               ;83ACB7|A90000  |      ;
-    STA.L $7F1F76                                              ;83ACBA|8F761F7F|7F1F76;
+    STA.L strcUnknownFlags.flags2                              ;83ACBA|8F761F7F|7F1F76;
     LDA.W #$0000                                               ;83ACBE|A90000  |      ;
-    STA.L $7F1F78                                              ;83ACC1|8F781F7F|7F1F78;
+    STA.L strcUnknownFlags.flags3                              ;83ACC1|8F781F7F|7F1F78;
     LDA.W #$0000                                               ;83ACC5|A90000  |      ;
     STA.L $7F1F7A                                              ;83ACC8|8F7A1F7F|7F1F7A;
     REP #$20                                                   ;83ACCC|C220    |      ;
@@ -10131,7 +10131,7 @@ CODE_83D63F:
     CMP.B #$18                                                 ;83D64F|C918    |      ;
     BNE CODE_83D66E                                            ;83D651|D01B    |83D66E;
     REP #$20                                                   ;83D653|C220    |      ;
-    LDA.L $7F1F74                                              ;83D655|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;83D655|AF741F7F|7F1F74;
     AND.W #$0002                                               ;83D659|290200  |      ;
     BEQ CODE_83D66E                                            ;83D65C|F010    |83D66E;
     REP #$30                                                   ;83D65E|C230    |      ;
@@ -10856,7 +10856,7 @@ CODE_83DBB7:
     CMP.B #$18                                                 ;83DBC7|C918    |      ;
     BNE CODE_83DBE6                                            ;83DBC9|D01B    |83DBE6;
     REP #$20                                                   ;83DBCB|C220    |      ;
-    LDA.L $7F1F74                                              ;83DBCD|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;83DBCD|AF741F7F|7F1F74;
     AND.W #$0004                                               ;83DBD1|290400  |      ;
     BEQ CODE_83DBE6                                            ;83DBD4|F010    |83DBE6;
     REP #$30                                                   ;83DBD6|C230    |      ;
@@ -12092,7 +12092,7 @@ subEngineMap_0x0A:
     CMP.B #$18                                                 ;83E613|C918    |      ;
     BNE CODE_83E631                                            ;83E615|D01A    |83E631;
     REP #$20                                                   ;83E617|C220    |      ;
-    LDA.L $7F1F74                                              ;83E619|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;83E619|AF741F7F|7F1F74;
     AND.W #$0001                                               ;83E61D|290100  |      ;
     BEQ CODE_83E631                                            ;83E620|F00F    |83E631;
     REP #$30                                                   ;83E622|C230    |      ;
@@ -12115,7 +12115,7 @@ subEngineMap_0x39:
     CMP.B #$18                                                 ;83E642|C918    |      ;
     BNE CODE_83E660                                            ;83E644|D01A    |83E660;
     REP #$20                                                   ;83E646|C220    |      ;
-    LDA.L $7F1F74                                              ;83E648|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;83E648|AF741F7F|7F1F74;
     AND.W #$0008                                               ;83E64C|290800  |      ;
     BEQ CODE_83E660                                            ;83E64F|F00F    |83E660;
     REP #$30                                                   ;83E651|C230    |      ;
@@ -12138,7 +12138,7 @@ subEngineMap_0x14:
     CMP.B #$18                                                 ;83E671|C918    |      ;
     BNE CODE_83E68F                                            ;83E673|D01A    |83E68F;
     REP #$20                                                   ;83E675|C220    |      ;
-    LDA.L $7F1F74                                              ;83E677|AF741F7F|7F1F74;
+    LDA.L strcUnknownFlags.flags1                              ;83E677|AF741F7F|7F1F74;
     AND.W #$0010                                               ;83E67B|291000  |      ;
     BEQ CODE_83E68F                                            ;83E67E|F00F    |83E68F;
     REP #$30                                                   ;83E680|C230    |      ;

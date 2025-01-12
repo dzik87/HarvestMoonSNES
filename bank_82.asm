@@ -513,9 +513,9 @@ fNextDayHandler:
     LDA.W #$0000                                               ;82843E|A90000  |      ;
     STA.L strcDailyFlags.flags5                                ;828441|8F621F7F|7F1F62;
     LDA.W #$0000                                               ;828445|A90000  |      ;
-    STA.L $7F1F74                                              ;828448|8F741F7F|7F1F74;
-    STA.L $7F1F76                                              ;82844C|8F761F7F|7F1F76;
-    STA.L $7F1F78                                              ;828450|8F781F7F|7F1F78;
+    STA.L strcUnknownFlags.flags1                              ;828448|8F741F7F|7F1F74;
+    STA.L strcUnknownFlags.flags2                              ;82844C|8F761F7F|7F1F76;
+    STA.L strcUnknownFlags.flags3                              ;828450|8F781F7F|7F1F78;
     REP #$20                                                   ;828454|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;828456|AF681F7F|7F1F68;
     ORA.W #$0001                                               ;82845A|090100  |      ;
@@ -782,7 +782,7 @@ fNextDayHandler:
  
 .skipToEndGame:
     REP #$20                                                   ;828712|C220    |      ;
-    LDA.W fInputController1_current                            ;828714|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;828714|AD2401  |000124;
     AND.W #$2030                                               ;828717|293020  |      ;
     EOR.W #$2030                                               ;82871A|493020  |      ;
     BNE +                                                      ;82871D|D014    |828733;
@@ -7176,9 +7176,9 @@ fUnknown_82D1C0:
     LDA.W #$0000                                               ;82D205|A90000  |      ;
     STA.L strcDailyFlags.flags4                                ;82D208|8F601F7F|7F1F60;
     LDA.W #$0000                                               ;82D20C|A90000  |      ;
-    STA.L $7F1F74                                              ;82D20F|8F741F7F|7F1F74;
-    STA.L $7F1F76                                              ;82D213|8F761F7F|7F1F76;
-    STA.L $7F1F78                                              ;82D217|8F781F7F|7F1F78;
+    STA.L strcUnknownFlags.flags1                              ;82D20F|8F741F7F|7F1F74;
+    STA.L strcUnknownFlags.flags2                              ;82D213|8F761F7F|7F1F76;
+    STA.L strcUnknownFlags.flags3                              ;82D217|8F781F7F|7F1F78;
     LDA.W #$0108                                               ;82D21B|A90801  |      ;
     STA.L strcDailyFlags.flags4                                ;82D21E|8F601F7F|7F1F60;
     REP #$20                                                   ;82D222|C220    |      ;
@@ -7361,9 +7361,9 @@ fUnknown_82D3C7:
     LDA.W #$0000                                               ;82D40C|A90000  |      ;
     STA.L strcDailyFlags.flags4                                ;82D40F|8F601F7F|7F1F60;
     LDA.W #$0000                                               ;82D413|A90000  |      ;
-    STA.L $7F1F74                                              ;82D416|8F741F7F|7F1F74;
-    STA.L $7F1F76                                              ;82D41A|8F761F7F|7F1F76;
-    STA.L $7F1F78                                              ;82D41E|8F781F7F|7F1F78;
+    STA.L strcUnknownFlags.flags1                              ;82D416|8F741F7F|7F1F74;
+    STA.L strcUnknownFlags.flags2                              ;82D41A|8F761F7F|7F1F76;
+    STA.L strcUnknownFlags.flags3                              ;82D41E|8F781F7F|7F1F78;
     LDA.W #$0008                                               ;82D422|A90800  |      ;
     STA.L strcDailyFlags.flags4                                ;82D425|8F601F7F|7F1F60;
     REP #$20                                                   ;82D429|C220    |      ;

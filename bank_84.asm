@@ -2340,7 +2340,7 @@ fAIAction0x1E:
  
  
   + REP #$20                                                   ;8490DD|C220    |      ;
-    LDA.W $0128                                                ;8490DF|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;8490DF|AD2801  |000128;
     BIT.W #$0080                                               ;8490E2|898000  |      ;
     BNE .continue                                              ;8490E5|D003    |8490EA;
     JMP.W .return                                              ;8490E7|4C8591  |849185;
@@ -3090,7 +3090,7 @@ fAIAction0x2D:
  
  
   + REP #$20                                                   ;849697|C220    |      ;
-    LDA.W $0128                                                ;849699|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;849699|AD2801  |000128;
     BIT.W #$0080                                               ;84969C|898000  |      ;
     BNE +                                                      ;84969F|D003    |8496A4;
     JMP.W .return                                              ;8496A1|4C5F97  |84975F;
@@ -3398,7 +3398,7 @@ fAIAction0x30_UpdateChicken:
  
  
   + REP #$20                                                   ;8498F5|C220    |      ;
-    LDA.W $0128                                                ;8498F7|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;8498F7|AD2801  |000128;
     BIT.W #$0080                                               ;8498FA|898000  |      ;
     BNE +                                                      ;8498FD|D003    |849902;
     JMP.W .label1                                              ;8498FF|4CC899  |8499C8;
@@ -3771,7 +3771,7 @@ CODE_849B9B:
  
 fAI_Unknown849BA7:
     REP #$20                                                   ;849BA7|C220    |      ;
-    LDA.W $0128                                                ;849BA9|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;849BA9|AD2801  |000128;
     BIT.W #$0080                                               ;849BAC|898000  |      ;
     BNE fAI_Unknown849BEC                                      ;849BAF|D03B    |849BEC;
     SEP #$20                                                   ;849BB1|E220    |      ;
@@ -5836,7 +5836,7 @@ fAIAction0x33_UpdateMole:
     AND.W #$0006                                               ;84A9A5|290600  |      ;
     BNE .label1                                                ;84A9A8|D074    |84AA1E;
     REP #$20                                                   ;84A9AA|C220    |      ;
-    LDA.W $0128                                                ;84A9AC|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84A9AC|AD2801  |000128;
     BIT.W #$0080                                               ;84A9AF|898000  |      ;
     BNE +                                                      ;84A9B2|D003    |84A9B7;
     JMP.W .label1                                              ;84A9B4|4C1EAA  |84AA1E;
@@ -5983,7 +5983,7 @@ fAIAction0x34:
     AND.W #$0006                                               ;84AAB6|290600  |      ;
     BNE .return                                                ;84AAB9|D05E    |84AB19;
     REP #$20                                                   ;84AABB|C220    |      ;
-    LDA.W $0128                                                ;84AABD|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84AABD|AD2801  |000128;
     BIT.W #$0080                                               ;84AAC0|898000  |      ;
     BNE +                                                      ;84AAC3|D003    |84AAC8;
     JMP.W .return                                              ;84AAC5|4C19AB  |84AB19;
@@ -6203,7 +6203,7 @@ fAIAction0x35_UpdateHorse:
     ORA.W #$0010                                               ;84AC57|091000  |      ;
     STA.L strcDailyFlags.flags2                                ;84AC5A|8F5C1F7F|7F1F5C;
     REP #$20                                                   ;84AC5E|C220    |      ;
-    LDA.W $0128                                                ;84AC60|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84AC60|AD2801  |000128;
     BIT.W #$0080                                               ;84AC63|898000  |      ;
     BNE +                                                      ;84AC66|D003    |84AC6B;
     JMP.W .label2                                              ;84AC68|4CEEAC  |84ACEE;
@@ -6634,7 +6634,7 @@ fAIAction0x36_UpdateDog:
     AND.W #$0006                                               ;84AF78|290600  |      ;
     BNE .label1                                                ;84AF7B|D077    |84AFF4;
     REP #$20                                                   ;84AF7D|C220    |      ;
-    LDA.W $0128                                                ;84AF7F|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84AF7F|AD2801  |000128;
     BIT.W #$0080                                               ;84AF82|898000  |      ;
     BNE +                                                      ;84AF85|D003    |84AF8A;
     JMP.W .label1                                              ;84AF87|4CF4AF  |84AFF4;
@@ -8014,7 +8014,7 @@ fAIAction0x4A_UpdatePowerBerry:
     AND.W #$0006                                               ;84B995|290600  |      ;
     BNE .return                                                ;84B998|D068    |84BA02;
     REP #$20                                                   ;84B99A|C220    |      ;
-    LDA.W $0128                                                ;84B99C|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84B99C|AD2801  |000128;
     BIT.W #$0080                                               ;84B99F|898000  |      ;
     BNE +                                                      ;84B9A2|D003    |84B9A7;
     JMP.W .return                                              ;84B9A4|4C02BA  |84BA02;
@@ -8568,7 +8568,7 @@ fAIAction0x52:
     AND.W #$0006                                               ;84BD9D|290600  |      ;
     BNE .return                                                ;84BDA0|D05D    |84BDFF;
     REP #$20                                                   ;84BDA2|C220    |      ;
-    LDA.W $0128                                                ;84BDA4|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84BDA4|AD2801  |000128;
     BIT.W #$0080                                               ;84BDA7|898000  |      ;
     BNE +                                                      ;84BDAA|D003    |84BDAF;
     JMP.W .return                                              ;84BDAC|4CFFBD  |84BDFF;
@@ -8676,7 +8676,7 @@ fAIAction0x53:
     AND.W #$0006                                               ;84BE66|290600  |      ;
     BNE .return                                                ;84BE69|D05D    |84BEC8;
     REP #$20                                                   ;84BE6B|C220    |      ;
-    LDA.W $0128                                                ;84BE6D|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84BE6D|AD2801  |000128;
     BIT.W #$0080                                               ;84BE70|898000  |      ;
     BNE +                                                      ;84BE73|D003    |84BE78;
     JMP.W .return                                              ;84BE75|4CC8BE  |84BEC8;
@@ -8958,37 +8958,37 @@ fInput_Handler:
  
 fInput_NameInput:
     REP #$30                                                   ;84C066|C230    |      ;
-    LDA.W nUnknownFlags012C                                    ;84C068|AD2C01  |00012C;
+    LDA.W strcJoypad1.autorepeat                               ;84C068|AD2C01  |00012C;
     BIT.W #$0400                                               ;84C06B|890004  |      ;
     BEQ +                                                      ;84C06E|F003    |84C073;
     JMP.W fInput_Unknown84C204                                 ;84C070|4C04C2  |84C204;
  
  
-  + LDA.W nUnknownFlags012C                                    ;84C073|AD2C01  |00012C;
+  + LDA.W strcJoypad1.autorepeat                               ;84C073|AD2C01  |00012C;
     BIT.W #$0800                                               ;84C076|890008  |      ;
     BEQ +                                                      ;84C079|F003    |84C07E;
     JMP.W fInput_Unknown84C225                                 ;84C07B|4C25C2  |84C225;
  
  
-  + LDA.W nUnknownFlags012C                                    ;84C07E|AD2C01  |00012C;
+  + LDA.W strcJoypad1.autorepeat                               ;84C07E|AD2C01  |00012C;
     BIT.W #$0100                                               ;84C081|890001  |      ;
     BEQ +                                                      ;84C084|F003    |84C089;
     JMP.W fInput_Unknown84C246                                 ;84C086|4C46C2  |84C246;
  
  
-  + LDA.W nUnknownFlags012C                                    ;84C089|AD2C01  |00012C;
+  + LDA.W strcJoypad1.autorepeat                               ;84C089|AD2C01  |00012C;
     BIT.W #$0200                                               ;84C08C|890002  |      ;
     BEQ +                                                      ;84C08F|F003    |84C094;
     JMP.W fInput_Unknown84C267                                 ;84C091|4C67C2  |84C267;
  
  
-  + LDA.W $0128                                                ;84C094|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C094|AD2801  |000128;
     BIT.W #$8000                                               ;84C097|890080  |      ;
     BEQ +                                                      ;84C09A|F003    |84C09F;
     JMP.W fInput_Unknown84C0AB                                 ;84C09C|4CABC0  |84C0AB;
  
  
-  + LDA.W $0128                                                ;84C09F|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C09F|AD2801  |000128;
     BIT.W #$0080                                               ;84C0A2|898000  |      ;
     BEQ .return                                                ;84C0A5|F003    |84C0AA;
     JMP.W fInput_Unknown84C0EE                                 ;84C0A7|4CEEC0  |84C0EE;
@@ -9281,7 +9281,7 @@ fInput_Unknown84C2B4:
     LDA.L strcDailyFlags.flags1                                ;84C2C3|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84C2C7|290080  |      ;
     BEQ .justReturn                                            ;84C2CA|F00B    |84C2D7;
-    LDA.W $0128                                                ;84C2CC|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C2CC|AD2801  |000128;
     BIT.W #$1000                                               ;84C2CF|890010  |      ;
     BEQ .justReturn                                            ;84C2D2|F003    |84C2D7;
     JMP.W +                                                    ;84C2D4|4CD8C2  |84C2D8;
@@ -9310,25 +9310,25 @@ fInput_Unknown84C2B4:
  
 fInput_Unknown84C2FE:
     REP #$30                                                   ;84C2FE|C230    |      ;
-    LDA.W $0128                                                ;84C300|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C300|AD2801  |000128;
     BIT.W #$0400                                               ;84C303|890004  |      ;
     BEQ +                                                      ;84C306|F003    |84C30B;
     JMP.W .label1                                              ;84C308|4C2DC3  |84C32D;
  
  
-  + LDA.W $0128                                                ;84C30B|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C30B|AD2801  |000128;
     BIT.W #$0800                                               ;84C30E|890008  |      ;
     BEQ +                                                      ;84C311|F003    |84C316;
     JMP.W .label1                                              ;84C313|4C2DC3  |84C32D;
  
  
-  + LDA.W $0128                                                ;84C316|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C316|AD2801  |000128;
     BIT.W #$8000                                               ;84C319|890080  |      ;
     BEQ +                                                      ;84C31C|F003    |84C321;
     JMP.W .label2                                              ;84C31E|4C4EC3  |84C34E;
  
  
-  + LDA.W $0128                                                ;84C321|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C321|AD2801  |000128;
     BIT.W #$0080                                               ;84C324|898000  |      ;
     BEQ .justReturn                                            ;84C327|F003    |84C32C;
     JMP.W .label3                                              ;84C329|4C67C3  |84C367;
@@ -9385,25 +9385,25 @@ fInput_Unknown84C2FE:
  
 fInput_Unkown84C380:
     REP #$30                                                   ;84C380|C230    |      ;
-    LDA.W $0128                                                ;84C382|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C382|AD2801  |000128;
     BIT.W #$0400                                               ;84C385|890004  |      ;
     BEQ +                                                      ;84C388|F003    |84C38D;
     JMP.W .label1                                              ;84C38A|4CAFC3  |84C3AF;
  
  
-  + LDA.W $0128                                                ;84C38D|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C38D|AD2801  |000128;
     BIT.W #$0800                                               ;84C390|890008  |      ;
     BEQ +                                                      ;84C393|F003    |84C398;
     JMP.W .label1                                              ;84C395|4CAFC3  |84C3AF;
  
  
-  + LDA.W $0128                                                ;84C398|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C398|AD2801  |000128;
     BIT.W #$8000                                               ;84C39B|890080  |      ;
     BEQ +                                                      ;84C39E|F003    |84C3A3;
     JMP.W .label2                                              ;84C3A0|4CD0C3  |84C3D0;
  
  
-  + LDA.W $0128                                                ;84C3A3|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C3A3|AD2801  |000128;
     BIT.W #$0080                                               ;84C3A6|898000  |      ;
     BEQ .justReturn                                            ;84C3A9|F003    |84C3AE;
     JMP.W .label3                                              ;84C3AB|4CE9C3  |84C3E9;
@@ -9481,7 +9481,7 @@ fInput_Unknown84C428:
     LDA.L strcDailyFlags.flags1                                ;84C42A|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84C42E|290080  |      ;
     BEQ .justReturn                                            ;84C431|F00B    |84C43E;
-    LDA.W $0128                                                ;84C433|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C433|AD2801  |000128;
     BIT.W #$1000                                               ;84C436|890010  |      ;
     BEQ .justReturn                                            ;84C439|F003    |84C43E;
     JMP.W .label1                                              ;84C43B|4C3FC4  |84C43F;
@@ -9507,19 +9507,19 @@ fInput_Unknown84C428:
  
 fInput_Unknown84C458:
     REP #$30                                                   ;84C458|C230    |      ;
-    LDA.W $0128                                                ;84C45A|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C45A|AD2801  |000128;
     BIT.W #$0400                                               ;84C45D|890004  |      ;
     BEQ +                                                      ;84C460|F003    |84C465;
     JMP.W .label1                                              ;84C462|4C7CC4  |84C47C;
  
  
-  + LDA.W $0128                                                ;84C465|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C465|AD2801  |000128;
     BIT.W #$0800                                               ;84C468|890008  |      ;
     BEQ +                                                      ;84C46B|F003    |84C470;
     JMP.W .label2                                              ;84C46D|4CC4C4  |84C4C4;
  
  
-  + LDA.W $0128                                                ;84C470|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C470|AD2801  |000128;
     BIT.W #$0080                                               ;84C473|898000  |      ;
     BEQ +                                                      ;84C476|F003    |84C47B;
     JMP.W .label3                                              ;84C478|4C0CC5  |84C50C;
@@ -9639,31 +9639,31 @@ fInput_Unknown84C458:
  
 fInput_Handler_case03:
     REP #$30                                                   ;84C540|C230    |      ;
-    LDA.W nUnknownFlags012C                                    ;84C542|AD2C01  |00012C;
+    LDA.W strcJoypad1.autorepeat                               ;84C542|AD2C01  |00012C;
     BIT.W #$0400                                               ;84C545|890004  |      ;
     BEQ +                                                      ;84C548|F003    |84C54D;
     JMP.W fInput_Unknown84C5D1                                 ;84C54A|4CD1C5  |84C5D1;
  
  
-  + LDA.W nUnknownFlags012C                                    ;84C54D|AD2C01  |00012C;
+  + LDA.W strcJoypad1.autorepeat                               ;84C54D|AD2C01  |00012C;
     BIT.W #$0800                                               ;84C550|890008  |      ;
     BEQ +                                                      ;84C553|F003    |84C558;
     JMP.W fInput_Unknown84C612                                 ;84C555|4C12C6  |84C612;
  
  
-  + LDA.W nUnknownFlags012C                                    ;84C558|AD2C01  |00012C;
+  + LDA.W strcJoypad1.autorepeat                               ;84C558|AD2C01  |00012C;
     BIT.W #$0100                                               ;84C55B|890001  |      ;
     BEQ +                                                      ;84C55E|F003    |84C563;
     JMP.W fInput_Unknown84C651                                 ;84C560|4C51C6  |84C651;
  
  
-  + LDA.W nUnknownFlags012C                                    ;84C563|AD2C01  |00012C;
+  + LDA.W strcJoypad1.autorepeat                               ;84C563|AD2C01  |00012C;
     BIT.W #$0200                                               ;84C566|890002  |      ;
     BEQ +                                                      ;84C569|F003    |84C56E;
     JMP.W fInput_Unknown84C684                                 ;84C56B|4C84C6  |84C684;
  
  
-  + LDA.W $0128                                                ;84C56E|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C56E|AD2801  |000128;
     BIT.W #$0080                                               ;84C571|898000  |      ;
     BEQ +                                                      ;84C574|F003    |84C579;
     JMP.W fInput_Unknown84C57A                                 ;84C576|4C7AC5  |84C57A;
@@ -9889,25 +9889,25 @@ fInput_Handler_case01:
  
  
   + REP #$30                                                   ;84C712|C230    |      ;
-    LDA.W fInputController1_current                            ;84C714|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;84C714|AD2401  |000124;
     BIT.W #$0400                                               ;84C717|890004  |      ;
     BEQ +                                                      ;84C71A|F003    |84C71F;
     JMP.W fInput_Unknown84C935                                 ;84C71C|4C35C9  |84C935;
  
  
-  + LDA.W fInputController1_current                            ;84C71F|AD2401  |000124;
+  + LDA.W strcJoypad1.current                                  ;84C71F|AD2401  |000124;
     BIT.W #$0800                                               ;84C722|890008  |      ;
     BEQ +                                                      ;84C725|F003    |84C72A;
     JMP.W fInput_Unknown84C96F                                 ;84C727|4C6FC9  |84C96F;
  
  
-  + LDA.W fInputController1_current                            ;84C72A|AD2401  |000124;
+  + LDA.W strcJoypad1.current                                  ;84C72A|AD2401  |000124;
     BIT.W #$0100                                               ;84C72D|890001  |      ;
     BEQ +                                                      ;84C730|F003    |84C735;
     JMP.W fInput_Unknown84C9A9                                 ;84C732|4CA9C9  |84C9A9;
  
  
-  + LDA.W fInputController1_current                            ;84C735|AD2401  |000124;
+  + LDA.W strcJoypad1.current                                  ;84C735|AD2401  |000124;
     BIT.W #$0200                                               ;84C738|890002  |      ;
     BEQ fInput_Unknown84C740                                   ;84C73B|F003    |84C740;
     JMP.W fInput_Unknown84C9E3                                 ;84C73D|4CE3C9  |84C9E3;
@@ -9929,7 +9929,7 @@ fInput_Unknown84C740:
  
  
   + REP #$20                                                   ;84C758|C220    |      ;
-    LDA.W $0128                                                ;84C75A|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C75A|AD2801  |000128;
     BIT.W #$0080                                               ;84C75D|898000  |      ;
     BEQ +                                                      ;84C760|F003    |84C765;
     JMP.W fInput_Unknown84CAA5                                 ;84C762|4CA5CA  |84CAA5;
@@ -9943,38 +9943,38 @@ fInput_Unknown84C740:
  
  
   + REP #$20                                                   ;84C771|C220    |      ;
-    LDA.W fInputController1_current                            ;84C773|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;84C773|AD2401  |000124;
     BIT.W #$8000                                               ;84C776|890080  |      ;
     BEQ +                                                      ;84C779|F003    |84C77E;
     JMP.W fInput_Unknown84CA1D                                 ;84C77B|4C1DCA  |84CA1D;
  
  
-  + LDA.W $0128                                                ;84C77E|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C77E|AD2801  |000128;
     BIT.W #$2000                                               ;84C781|890020  |      ;
     BEQ +                                                      ;84C784|F003    |84C789;
     JMP.W fInput_SetPlayerAction0x0C                           ;84C786|4C7ACE  |84CE7A;
  
  
-  + LDA.W $0128                                                ;84C789|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C789|AD2801  |000128;
     BIT.W #$0040                                               ;84C78C|894000  |      ;
     BEQ +                                                      ;84C78F|F003    |84C794;
     JMP.W fInput_SetPlayerAction0x1C                           ;84C791|4CA6CE  |84CEA6;
  
  
-  + LDA.W $0128                                                ;84C794|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C794|AD2801  |000128;
     BIT.W #$0010                                               ;84C797|891000  |      ;
     BEQ +                                                      ;84C79A|F003    |84C79F;
     JMP.W fInput_SetPlayerAction0x0D_WhistleR                  ;84C79C|4C0CCE  |84CE0C;
  
  
-  + LDA.W $0128                                                ;84C79F|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84C79F|AD2801  |000128;
     BIT.W #$0020                                               ;84C7A2|892000  |      ;
     BEQ fInput_Unknown84C7AA                                   ;84C7A5|F003    |84C7AA;
     JMP.W fInput_SetPlayerAction0x1B_WhistleL                  ;84C7A7|4C43CE  |84CE43;
  
  
 fInput_Unknown84C7AA:
-    LDA.W $0128                                                ;84C7AA|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84C7AA|AD2801  |000128;
     BIT.W #$4000                                               ;84C7AD|890040  |      ;
     BEQ fInput_Return84C7B5                                    ;84C7B0|F003    |84C7B5;
     JMP.W fInput_Unknown84CD77                                 ;84C7B2|4C77CD  |84CD77;
@@ -10063,22 +10063,22 @@ fInput_Unknown08FD_case0200:
  
 fInput_Unused84C852:
     REP #$30                                                   ;84C852|C230    |      ;
-    LDA.W $012A                                                ;84C854|AD2A01  |00012A;
+    LDA.W strcJoypad1.newUnpressed                             ;84C854|AD2A01  |00012A;
     BIT.W #$0080                                               ;84C857|898000  |      ;
     BEQ +                                                      ;84C85A|F003    |84C85F;
     JMP.W .return                                              ;84C85C|4C2BC9  |84C92B;
  
  
-  + LDA.W fInputController1_current                            ;84C85F|AD2401  |000124;
+  + LDA.W strcJoypad1.current                                  ;84C85F|AD2401  |000124;
     BIT.W #$0400                                               ;84C862|890004  |      ;
     BNE .label1                                                ;84C865|D023    |84C88A;
-    LDA.W fInputController1_current                            ;84C867|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;84C867|AD2401  |000124;
     BIT.W #$0800                                               ;84C86A|890008  |      ;
     BNE .label2                                                ;84C86D|D03E    |84C8AD;
-    LDA.W fInputController1_current                            ;84C86F|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;84C86F|AD2401  |000124;
     BIT.W #$0100                                               ;84C872|890001  |      ;
     BNE .label3                                                ;84C875|D059    |84C8D0;
-    LDA.W fInputController1_current                            ;84C877|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;84C877|AD2401  |000124;
     BIT.W #$0200                                               ;84C87A|890002  |      ;
     BEQ +                                                      ;84C87D|F003    |84C882;
     JMP.W .label4                                              ;84C87F|4CF3C8  |84C8F3;
@@ -11007,9 +11007,9 @@ fInput_Handler_case06:
     LDA.B #$01                                                 ;84CEF4|A901    |      ;
     STA.W $019A                                                ;84CEF6|8D9A01  |00019A;
     REP #$20                                                   ;84CEF9|C220    |      ;
-    LDA.W $0128                                                ;84CEFB|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84CEFB|AD2801  |000128;
     AND.W #$FF7F                                               ;84CEFE|297FFF  |      ;
-    STA.W $0128                                                ;84CF01|8D2801  |000128;
+    STA.W strcJoypad1.newInput                                 ;84CF01|8D2801  |000128;
  
 CODE_84CF04:
     RTL                                                        ;84CF04|6B      |      ;
@@ -11038,7 +11038,7 @@ fInput_Handler_case02:
  
 fInput_Unknown84CF2D:
     REP #$30                                                   ;84CF2D|C230    |      ;
-    LDA.W fInputController1_current                            ;84CF2F|AD2401  |000124;
+    LDA.W strcJoypad1.current                                  ;84CF2F|AD2401  |000124;
     BIT.W #$0080                                               ;84CF32|898000  |      ;
     BNE fInput_Unknown84CF38                                   ;84CF35|D001    |84CF38;
     RTL                                                        ;84CF37|6B      |      ;
@@ -11053,7 +11053,7 @@ fInput_Unknown84CF38:
  
 fInput_Unknown84CF40:
     REP #$30                                                   ;84CF40|C230    |      ;
-    LDA.W $0128                                                ;84CF42|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84CF42|AD2801  |000128;
     BIT.W #$0080                                               ;84CF45|898000  |      ;
     BNE +                                                      ;84CF48|D001    |84CF4B;
     RTL                                                        ;84CF4A|6B      |      ;
@@ -11064,15 +11064,15 @@ fInput_Unknown84CF40:
     LDA.B #$01                                                 ;84CF51|A901    |      ;
     STA.W $019A                                                ;84CF53|8D9A01  |00019A;
     REP #$20                                                   ;84CF56|C220    |      ;
-    LDA.W $0128                                                ;84CF58|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84CF58|AD2801  |000128;
     AND.W #$FF7F                                               ;84CF5B|297FFF  |      ;
-    STA.W $0128                                                ;84CF5E|8D2801  |000128;
+    STA.W strcJoypad1.newInput                                 ;84CF5E|8D2801  |000128;
     RTL                                                        ;84CF61|6B      |      ;
  
  
 fInput_Unknown84CF62:
     REP #$30                                                   ;84CF62|C230    |      ;
-    LDA.W $0128                                                ;84CF64|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84CF64|AD2801  |000128;
     BIT.W #$0080                                               ;84CF67|898000  |      ;
     BNE +                                                      ;84CF6A|D001    |84CF6D;
     RTL                                                        ;84CF6C|6B      |      ;
@@ -11098,28 +11098,28 @@ fInput_Unknown84CF62:
  
 fInput_Unknown84CF95:
     REP #$30                                                   ;84CF95|C230    |      ;
-    LDA.W $0128                                                ;84CF97|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84CF97|AD2801  |000128;
     BIT.W #$0400                                               ;84CF9A|890004  |      ;
     BNE fInput_Unknown84CFEA                                   ;84CF9D|D04B    |84CFEA;
-    LDA.W $0128                                                ;84CF9F|AD2801  |000128;
+    LDA.W strcJoypad1.newInput                                 ;84CF9F|AD2801  |000128;
     BIT.W #$0800                                               ;84CFA2|890008  |      ;
     BEQ +                                                      ;84CFA5|F003    |84CFAA;
     JMP.W fInput_Unknown84D03A                                 ;84CFA7|4C3AD0  |84D03A;
  
  
-  + LDA.W $0128                                                ;84CFAA|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84CFAA|AD2801  |000128;
     BIT.W #$0100                                               ;84CFAD|890001  |      ;
     BEQ +                                                      ;84CFB0|F003    |84CFB5;
     JMP.W fInput_Unknown84D08E                                 ;84CFB2|4C8ED0  |84D08E;
  
  
-  + LDA.W $0128                                                ;84CFB5|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84CFB5|AD2801  |000128;
     BIT.W #$0200                                               ;84CFB8|890002  |      ;
     BEQ +                                                      ;84CFBB|F003    |84CFC0;
     JMP.W fInput_Unknown84D0F4                                 ;84CFBD|4CF4D0  |84D0F4;
  
  
-  + LDA.W $0128                                                ;84CFC0|AD2801  |000128;
+  + LDA.W strcJoypad1.newInput                                 ;84CFC0|AD2801  |000128;
     BIT.W #$0080                                               ;84CFC3|898000  |      ;
     BEQ +                                                      ;84CFC6|F003    |84CFCB;
     JMP.W fInput_Unknown84CFCC                                 ;84CFC8|4CCCCF  |84CFCC;

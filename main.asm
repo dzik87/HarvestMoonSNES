@@ -1,5 +1,5 @@
     lorom
-    
+ 
     incsrc "structures.asm"
     incsrc "bank_80.asm"
     incsrc "bank_81.asm"
