@@ -14,6 +14,8 @@
     n16TempVar3 = $000082
     n16TempVar4 = $000084
     n8TempVar1 = $000092
+    n8TempVar2 = $000093
+    n8TempVar3 = $000094
     nUnknown0x95 = $000095
     ptrUnknown0xAD = $0000AD
     ptrBank86_87Data = $0000B3
@@ -55,8 +57,6 @@
     nCurrentTextIndex = $000187
     nCurrentMapdataPresetId = $000195
     nMapEngine_CurrentMapId = $000196
-    nSpritePositionX = $0001A4
-    nSpritePositionY = $0001A6
     nMapScrool_SpeedX = $00087C
     nMapScrool_SpeedY = $00087E
     nMapScrool_Timer = $000880
@@ -310,12 +310,9 @@
     DMASpriteOBJ2BitQueue = $7EA200
     DMAtoVRAMData = $7EA420
     sFarmTilemap = $7EA4E6
-    sCowDataAddress = $7EC1C6
-    sChickenDataAddress = $7EC286
     sPalette_7F0900 = $7F0900
     sPalette_7F0B00 = $7F0B00
     sPalette_7F0D00 = $7F0D00
-    sShedItems = $7F1F00
     nMoney = $7F1F04
     nShippingProfit = $7F1F07
     nOwnedCows = $7F1F0A

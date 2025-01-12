@@ -403,9 +403,9 @@ fNextDayHandler:
     LDA.B #$0F                                                 ;828307|A90F    |      ;
     STA.B n8TempVar1                                           ;828309|8592    |000092;
     LDA.B #$03                                                 ;82830B|A903    |      ;
-    STA.B $93                                                  ;82830D|8593    |000093;
+    STA.B n8TempVar2                                           ;82830D|8593    |000093;
     LDA.B #$01                                                 ;82830F|A901    |      ;
-    STA.B $94                                                  ;828311|8594    |000094;
+    STA.B n8TempVar3                                           ;828311|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;828313|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;828317|220F8E80|808E0F;
     SEP #$20                                                   ;82831B|E220    |      ;
@@ -587,9 +587,9 @@ fNextDayHandler:
     AND.W #$7FFF                                               ;828512|29FF7F  |      ;
     STA.L nEventFlags+4                                        ;828515|8F681F7F|7F1F68;
     SEP #$20                                                   ;828519|E220    |      ;
-    LDA.L sShedItems+2                                         ;82851B|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;82851B|AF021F7F|7F1F02;
     ORA.B #$04                                                 ;82851F|0904    |      ;
-    STA.L sShedItems+2                                         ;828521|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;828521|8F021F7F|7F1F02;
  
   + REP #$30                                                   ;828525|C230    |      ;
     LDA.L nEventFlags+6                                        ;828527|AF6A1F7F|7F1F6A;
@@ -623,12 +623,12 @@ fNextDayHandler:
  
 .label5:
     SEP #$20                                                   ;828569|E220    |      ;
-    LDA.L sShedItems                                           ;82856B|AF001F7F|7F1F00;
+    LDA.L strcShedItems                                        ;82856B|AF001F7F|7F1F00;
     AND.B #$FD                                                 ;82856F|29FD    |      ;
-    STA.L sShedItems                                           ;828571|8F001F7F|7F1F00;
-    LDA.L sShedItems+2                                         ;828575|AF021F7F|7F1F02;
+    STA.L strcShedItems                                        ;828571|8F001F7F|7F1F00;
+    LDA.L strcShedItems.row3                                   ;828575|AF021F7F|7F1F02;
     ORA.B #$02                                                 ;828579|0902    |      ;
-    STA.L sShedItems+2                                         ;82857B|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;82857B|8F021F7F|7F1F02;
  
 .label6:
     REP #$30                                                   ;82857F|C230    |      ;
@@ -758,9 +758,9 @@ fNextDayHandler:
     AND.W #$7FFF                                               ;8286D5|29FF7F  |      ;
     STA.L nEventFlags+10                                       ;8286D8|8F6E1F7F|7F1F6E;
     SEP #$20                                                   ;8286DC|E220    |      ;
-    LDA.L sShedItems+2                                         ;8286DE|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;8286DE|AF021F7F|7F1F02;
     ORA.B #$01                                                 ;8286E2|0901    |      ;
-    STA.L sShedItems+2                                         ;8286E4|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;8286E4|8F021F7F|7F1F02;
  
   + REP #$30                                                   ;8286E8|C230    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;8286EA|AD9601  |000196;
@@ -5727,7 +5727,7 @@ fUnknown_82AD0E:
     STA.B n8TempVar1                                           ;82ADED|8592    |000092;
     INY                                                        ;82ADEF|C8      |      ;
     LDA.B [ptrSelectedTileMap],Y                               ;82ADF0|B70D    |00000D;
-    STA.B $93                                                  ;82ADF2|8593    |000093;
+    STA.B n8TempVar2                                           ;82ADF2|8593    |000093;
     BNE +                                                      ;82ADF4|D003    |82ADF9;
     JMP.W .justReturn                                          ;82ADF6|4CE5AE  |82AEE5;
  
@@ -5812,7 +5812,7 @@ fUnknown_82AD0E:
     STA.W $0191                                                ;82AE8A|8D9101  |000191;
     LDA.B #$00                                                 ;82AE8D|A900    |      ;
     XBA                                                        ;82AE8F|EB      |      ;
-    LDA.B $93                                                  ;82AE90|A593    |000093;
+    LDA.B n8TempVar2                                           ;82AE90|A593    |000093;
     REP #$20                                                   ;82AE92|C220    |      ;
     TAX                                                        ;82AE94|AA      |      ;
     JSL.L fDialog_DialogHandler                                ;82AE95|225F9383|83935F;
@@ -6003,7 +6003,7 @@ fUnknown_82AF00:
     SEP #$20                                                   ;82AFC2|E220    |      ;
     LDA.L .unknownData,X                                       ;82AFC4|BF2AB082|82B02A;
     DEC A                                                      ;82AFC8|3A      |      ;
-    STA.B $94                                                  ;82AFC9|8594    |000094;
+    STA.B n8TempVar3                                           ;82AFC9|8594    |000094;
     PLX                                                        ;82AFCB|FA      |      ;
     SEP #$20                                                   ;82AFCC|E220    |      ;
     LDA.B #$00                                                 ;82AFCE|A900    |      ;
@@ -6018,7 +6018,7 @@ fUnknown_82AF00:
     XBA                                                        ;82AFDD|EB      |      ;
     LDA.B [ptrSelectedTileMap],Y                               ;82AFDE|B70D    |00000D;
     CLC                                                        ;82AFE0|18      |      ;
-    ADC.B $94                                                  ;82AFE1|6594    |000094;
+    ADC.B n8TempVar3                                           ;82AFE1|6594    |000094;
     BRA +                                                      ;82AFE3|801A    |82AFFF;
  
  
@@ -7152,9 +7152,9 @@ fUnknown_82D1C0:
     LDA.B #$0F                                                 ;82D1C4|A90F    |      ;
     STA.B n8TempVar1                                           ;82D1C6|8592    |000092;
     LDA.B #$03                                                 ;82D1C8|A903    |      ;
-    STA.B $93                                                  ;82D1CA|8593    |000093;
+    STA.B n8TempVar2                                           ;82D1CA|8593    |000093;
     LDA.B #$01                                                 ;82D1CC|A901    |      ;
-    STA.B $94                                                  ;82D1CE|8594    |000094;
+    STA.B n8TempVar3                                           ;82D1CE|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D1D0|220A8880|80880A;
     SEP #$20                                                   ;82D1D4|E220    |      ;
     LDA.B #$06                                                 ;82D1D6|A906    |      ;
@@ -7165,7 +7165,7 @@ fUnknown_82D1C0:
     STA.L nINGameMinuteCounter                                 ;82D1E4|8F1E1F7F|7F1F1E;
     LDA.B #$01                                                 ;82D1E8|A901    |      ;
     STA.B nUnknown0x95                                         ;82D1EA|8595    |000095;
-    STZ.B $94                                                  ;82D1EC|6494    |000094;
+    STZ.B n8TempVar3                                           ;82D1EC|6494    |000094;
     REP #$20                                                   ;82D1EE|C220    |      ;
     LDA.W #$0000                                               ;82D1F0|A90000  |      ;
     STA.L nDailyFlags                                          ;82D1F3|8F5A1F7F|7F1F5A;
@@ -7203,13 +7203,13 @@ fUnknown_82D1C0:
     STA.L $7F1F49                                              ;82D260|8F491F7F|7F1F49;
     SEP #$20                                                   ;82D264|E220    |      ;
     LDA.B #$8F                                                 ;82D266|A98F    |      ;
-    STA.L sShedItems                                           ;82D268|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;82D268|8F001F7F|7F1F00;
     LDA.B #$88                                                 ;82D26C|A988    |      ;
-    STA.L sShedItems+1                                         ;82D26E|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;82D26E|8F011F7F|7F1F01;
     LDA.B #$00                                                 ;82D272|A900    |      ;
-    STA.L sShedItems+2                                         ;82D274|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;82D274|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;82D278|A900    |      ;
-    STA.L sShedItems+3                                         ;82D27A|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;82D27A|8F031F7F|7F1F03;
     STZ.W nToolEquipped                                        ;82D27E|9C2109  |000921;
     STZ.W nToolSecond                                          ;82D281|9C2309  |000923;
     LDA.B #$01                                                 ;82D284|A901    |      ;
@@ -7319,7 +7319,7 @@ fUnknown_82D1C0:
  
   - SEP #$20                                                   ;82D3AB|E220    |      ;
     LDA.B #$00                                                 ;82D3AD|A900    |      ;
-    STA.L sChickenDataAddress,X                                ;82D3AF|9F86C27E|7EC286;
+    STA.L strcChickenData,X                                    ;82D3AF|9F86C27E|7EC286;
     INX                                                        ;82D3B3|E8      |      ;
     CPX.W #$0008                                               ;82D3B4|E00800  |      ;
     BNE -                                                      ;82D3B7|D0F2    |82D3AB;
@@ -7337,9 +7337,9 @@ fUnknown_82D3C7:
     LDA.B #$0F                                                 ;82D3CB|A90F    |      ;
     STA.B n8TempVar1                                           ;82D3CD|8592    |000092;
     LDA.B #$03                                                 ;82D3CF|A903    |      ;
-    STA.B $93                                                  ;82D3D1|8593    |000093;
+    STA.B n8TempVar2                                           ;82D3D1|8593    |000093;
     LDA.B #$01                                                 ;82D3D3|A901    |      ;
-    STA.B $94                                                  ;82D3D5|8594    |000094;
+    STA.B n8TempVar3                                           ;82D3D5|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D3D7|220A8880|80880A;
     SEP #$20                                                   ;82D3DB|E220    |      ;
     LDA.B #$06                                                 ;82D3DD|A906    |      ;
@@ -7350,7 +7350,7 @@ fUnknown_82D3C7:
     STA.L nINGameMinuteCounter                                 ;82D3EB|8F1E1F7F|7F1F1E;
     LDA.B #$01                                                 ;82D3EF|A901    |      ;
     STA.B nUnknown0x95                                         ;82D3F1|8595    |000095;
-    STZ.B $94                                                  ;82D3F3|6494    |000094;
+    STZ.B n8TempVar3                                           ;82D3F3|6494    |000094;
     REP #$20                                                   ;82D3F5|C220    |      ;
     LDA.W #$0000                                               ;82D3F7|A90000  |      ;
     STA.L nDailyFlags                                          ;82D3FA|8F5A1F7F|7F1F5A;
@@ -7385,13 +7385,13 @@ fUnknown_82D3C7:
     STA.L nEventFlags+14                                       ;82D45F|8F721F7F|7F1F72;
     SEP #$20                                                   ;82D463|E220    |      ;
     LDA.B #$8F                                                 ;82D465|A98F    |      ;
-    STA.L sShedItems                                           ;82D467|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;82D467|8F001F7F|7F1F00;
     LDA.B #$EC                                                 ;82D46B|A9EC    |      ;
-    STA.L sShedItems+1                                         ;82D46D|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;82D46D|8F011F7F|7F1F01;
     LDA.B #$00                                                 ;82D471|A900    |      ;
-    STA.L sShedItems+2                                         ;82D473|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;82D473|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;82D477|A900    |      ;
-    STA.L sShedItems+3                                         ;82D479|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;82D479|8F031F7F|7F1F03;
     STZ.W nToolEquipped                                        ;82D47D|9C2109  |000921;
     STZ.W nToolSecond                                          ;82D480|9C2309  |000923;
     LDA.B #$01                                                 ;82D483|A901    |      ;
@@ -7707,7 +7707,7 @@ fUnknown_82D731:
  
   - SEP #$20                                                   ;82D736|E220    |      ;
     LDA.B #$00                                                 ;82D738|A900    |      ;
-    STA.L sChickenDataAddress,X                                ;82D73A|9F86C27E|7EC286;
+    STA.L strcChickenData,X                                    ;82D73A|9F86C27E|7EC286;
     INX                                                        ;82D73E|E8      |      ;
     CPX.W #$0008                                               ;82D73F|E00800  |      ;
     BNE -                                                      ;82D742|D0F2    |82D736;
@@ -7785,9 +7785,9 @@ fUnknown_82D75E:
     LDA.B #$03                                                 ;82D7F0|A903    |      ;
     STA.B n8TempVar1                                           ;82D7F2|8592    |000092;
     LDA.B #$03                                                 ;82D7F4|A903    |      ;
-    STA.B $93                                                  ;82D7F6|8593    |000093;
+    STA.B n8TempVar2                                           ;82D7F6|8593    |000093;
     LDA.B #$0F                                                 ;82D7F8|A90F    |      ;
-    STA.B $94                                                  ;82D7FA|8594    |000094;
+    STA.B n8TempVar3                                           ;82D7FA|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82D7FC|22CE8780|8087CE;
     SEP #$20                                                   ;82D800|E220    |      ;
     STZ.B $97                                                  ;82D802|6497    |000097;
@@ -7882,14 +7882,14 @@ fUnknown_82D883:
     LDA.B #$0F                                                 ;82D896|A90F    |      ;
     STA.B n8TempVar1                                           ;82D898|8592    |000092;
     LDA.B #$03                                                 ;82D89A|A903    |      ;
-    STA.B $93                                                  ;82D89C|8593    |000093;
+    STA.B n8TempVar2                                           ;82D89C|8593    |000093;
     LDA.B #$01                                                 ;82D89E|A901    |      ;
-    STA.B $94                                                  ;82D8A0|8594    |000094;
+    STA.B n8TempVar3                                           ;82D8A0|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D8A2|220A8880|80880A;
     SEP #$20                                                   ;82D8A6|E220    |      ;
     LDA.B #$01                                                 ;82D8A8|A901    |      ;
     STA.B nUnknown0x95                                         ;82D8AA|8595    |000095;
-    STZ.B $94                                                  ;82D8AC|6494    |000094;
+    STZ.B n8TempVar3                                           ;82D8AC|6494    |000094;
     BRA fUnknown_82D871                                        ;82D8AE|80C1    |82D871;
  
  
@@ -7981,9 +7981,9 @@ fUnknown_82D8B0:
     LDA.B #$0F                                                 ;82D9A3|A90F    |      ;
     STA.B n8TempVar1                                           ;82D9A5|8592    |000092;
     LDA.B #$03                                                 ;82D9A7|A903    |      ;
-    STA.B $93                                                  ;82D9A9|8593    |000093;
+    STA.B n8TempVar2                                           ;82D9A9|8593    |000093;
     LDA.B #$01                                                 ;82D9AB|A901    |      ;
-    STA.B $94                                                  ;82D9AD|8594    |000094;
+    STA.B n8TempVar3                                           ;82D9AD|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D9AF|220A8880|80880A;
  
   + SEP #$20                                                   ;82D9B3|E220    |      ;
@@ -7997,9 +7997,9 @@ fUnknown_82D8B0:
     LDA.B #$0F                                                 ;82D9C0|A90F    |      ;
     STA.B n8TempVar1                                           ;82D9C2|8592    |000092;
     LDA.B #$03                                                 ;82D9C4|A903    |      ;
-    STA.B $93                                                  ;82D9C6|8593    |000093;
+    STA.B n8TempVar2                                           ;82D9C6|8593    |000093;
     LDA.B #$01                                                 ;82D9C8|A901    |      ;
-    STA.B $94                                                  ;82D9CA|8594    |000094;
+    STA.B n8TempVar3                                           ;82D9CA|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D9CC|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82D9D0|220F8E80|808E0F;
     SEP #$20                                                   ;82D9D4|E220    |      ;
@@ -8057,21 +8057,21 @@ fUnknown_82D8B0:
     LDA.B #$01                                                 ;82DA6E|A901    |      ;
     STA.B n8TempVar1                                           ;82DA70|8592    |000092;
     LDA.B #$06                                                 ;82DA72|A906    |      ;
-    STA.B $93                                                  ;82DA74|8593    |000093;
+    STA.B n8TempVar2                                           ;82DA74|8593    |000093;
     LDA.B #$0F                                                 ;82DA76|A90F    |      ;
-    STA.B $94                                                  ;82DA78|8594    |000094;
+    STA.B n8TempVar3                                           ;82DA78|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82DA7A|22CE8780|8087CE;
     SEP #$20                                                   ;82DA7E|E220    |      ;
     LDA.B #$02                                                 ;82DA80|A902    |      ;
     STA.B nUnknown0x95                                         ;82DA82|8595    |000095;
-    STZ.B $94                                                  ;82DA84|6494    |000094;
+    STZ.B n8TempVar3                                           ;82DA84|6494    |000094;
     STZ.B $96                                                  ;82DA86|6496    |000096;
     JML.L fUnknown_82D871                                      ;82DA88|5C71D882|82D871;
  
  
 fUnknown_82DA8C:
     SEP #$20                                                   ;82DA8C|E220    |      ;
-    LDA.B $94                                                  ;82DA8E|A594    |000094;
+    LDA.B n8TempVar3                                           ;82DA8E|A594    |000094;
     AND.B #$01                                                 ;82DA90|2901    |      ;
     BNE .label1                                                ;82DA92|D012    |82DAA6;
     REP #$20                                                   ;82DA94|C220    |      ;
@@ -8085,7 +8085,7 @@ fUnknown_82DA8C:
  
 .label1:
     SEP #$20                                                   ;82DAA6|E220    |      ;
-    INC.B $94                                                  ;82DAA8|E694    |000094;
+    INC.B n8TempVar3                                           ;82DAA8|E694    |000094;
     JML.L fUnknown_82D871                                      ;82DAAA|5C71D882|82D871;
  
  
@@ -8101,13 +8101,13 @@ fUnknown_82DA8C:
   + SEP #$20                                                   ;82DABD|E220    |      ;
     LDA.B #$03                                                 ;82DABF|A903    |      ;
     STA.B nUnknown0x95                                         ;82DAC1|8595    |000095;
-    STZ.B $94                                                  ;82DAC3|6494    |000094;
+    STZ.B n8TempVar3                                           ;82DAC3|6494    |000094;
     JML.L fUnknown_82D871                                      ;82DAC5|5C71D882|82D871;
  
  
 fUnknown_82DAC9:
     SEP #$20                                                   ;82DAC9|E220    |      ;
-    LDA.B $94                                                  ;82DACB|A594    |000094;
+    LDA.B n8TempVar3                                           ;82DACB|A594    |000094;
     AND.B #$01                                                 ;82DACD|2901    |      ;
     BNE .skip                                                  ;82DACF|D01C    |82DAED;
     REP #$20                                                   ;82DAD1|C220    |      ;
@@ -8127,7 +8127,7 @@ fUnknown_82DAC9:
  
 .skip:
     SEP #$20                                                   ;82DAED|E220    |      ;
-    INC.B $94                                                  ;82DAEF|E694    |000094;
+    INC.B n8TempVar3                                           ;82DAEF|E694    |000094;
     JML.L fUnknown_82D871                                      ;82DAF1|5C71D882|82D871;
  
  
@@ -8141,9 +8141,9 @@ fUnknown_82DAF5:
     LDA.B #$0F                                                 ;82DB05|A90F    |      ;
     STA.B n8TempVar1                                           ;82DB07|8592    |000092;
     LDA.B #$01                                                 ;82DB09|A901    |      ;
-    STA.B $93                                                  ;82DB0B|8593    |000093;
+    STA.B n8TempVar2                                           ;82DB0B|8593    |000093;
     LDA.B #$01                                                 ;82DB0D|A901    |      ;
-    STA.B $94                                                  ;82DB0F|8594    |000094;
+    STA.B n8TempVar3                                           ;82DB0F|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DB11|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DB15|220F8E80|808E0F;
     SEP #$20                                                   ;82DB19|E220    |      ;
@@ -8201,9 +8201,9 @@ fUnknown_82DB8E:
     LDA.B #$0F                                                 ;82DB9E|A90F    |      ;
     STA.B n8TempVar1                                           ;82DBA0|8592    |000092;
     LDA.B #$01                                                 ;82DBA2|A901    |      ;
-    STA.B $93                                                  ;82DBA4|8593    |000093;
+    STA.B n8TempVar2                                           ;82DBA4|8593    |000093;
     LDA.B #$01                                                 ;82DBA6|A901    |      ;
-    STA.B $94                                                  ;82DBA8|8594    |000094;
+    STA.B n8TempVar3                                           ;82DBA8|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DBAA|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DBAE|220F8E80|808E0F;
  
@@ -8232,20 +8232,20 @@ fUnknown_82DBB2:
     LDA.B #$01                                                 ;82DBF1|A901    |      ;
     STA.B n8TempVar1                                           ;82DBF3|8592    |000092;
     LDA.B #$01                                                 ;82DBF5|A901    |      ;
-    STA.B $93                                                  ;82DBF7|8593    |000093;
+    STA.B n8TempVar2                                           ;82DBF7|8593    |000093;
     LDA.B #$0F                                                 ;82DBF9|A90F    |      ;
-    STA.B $94                                                  ;82DBFB|8594    |000094;
+    STA.B n8TempVar3                                           ;82DBFB|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82DBFD|22CE8780|8087CE;
     SEP #$20                                                   ;82DC01|E220    |      ;
     LDA.B #$04                                                 ;82DC03|A904    |      ;
     STA.B nUnknown0x95                                         ;82DC05|8595    |000095;
-    STZ.B $94                                                  ;82DC07|6494    |000094;
+    STZ.B n8TempVar3                                           ;82DC07|6494    |000094;
     JML.L fUnknown_82D871                                      ;82DC09|5C71D882|82D871;
  
  
 fUnknown_82DC0D:
     SEP #$20                                                   ;82DC0D|E220    |      ;
-    LDA.B $94                                                  ;82DC0F|A594    |000094;
+    LDA.B n8TempVar3                                           ;82DC0F|A594    |000094;
     AND.B #$01                                                 ;82DC11|2901    |      ;
     BEQ +                                                      ;82DC13|F004    |82DC19;
     JML.L .skip                                                ;82DC15|5C22DC82|82DC22;
@@ -8258,11 +8258,11 @@ fUnknown_82DC0D:
  
 .skip:
     SEP #$20                                                   ;82DC22|E220    |      ;
-    LDA.B $94                                                  ;82DC24|A594    |000094;
+    LDA.B n8TempVar3                                           ;82DC24|A594    |000094;
     CMP.B #$3C                                                 ;82DC26|C93C    |      ;
     BEQ +                                                      ;82DC28|F008    |82DC32;
     SEP #$20                                                   ;82DC2A|E220    |      ;
-    INC.B $94                                                  ;82DC2C|E694    |000094;
+    INC.B n8TempVar3                                           ;82DC2C|E694    |000094;
     JML.L fUnknown_82D871                                      ;82DC2E|5C71D882|82D871;
  
  
@@ -8425,13 +8425,13 @@ fUnknown_82DC0D:
   + SEP #$20                                                   ;82DD80|E220    |      ;
     LDA.B #$05                                                 ;82DD82|A905    |      ;
     STA.B nUnknown0x95                                         ;82DD84|8595    |000095;
-    STZ.B $94                                                  ;82DD86|6494    |000094;
+    STZ.B n8TempVar3                                           ;82DD86|6494    |000094;
     JML.L fUnknown_82D871                                      ;82DD88|5C71D882|82D871;
  
  
 fUnknown_82DD8C:
     SEP #$20                                                   ;82DD8C|E220    |      ;
-    LDA.B $94                                                  ;82DD8E|A594    |000094;
+    LDA.B n8TempVar3                                           ;82DD8E|A594    |000094;
     AND.B #$01                                                 ;82DD90|2901    |      ;
     BNE +                                                      ;82DD92|D009    |82DD9D;
     REP #$20                                                   ;82DD94|C220    |      ;
@@ -8440,7 +8440,7 @@ fUnknown_82DD8C:
     STA.W $0140                                                ;82DD9A|8D4001  |000140;
  
   + SEP #$20                                                   ;82DD9D|E220    |      ;
-    INC.B $94                                                  ;82DD9F|E694    |000094;
+    INC.B n8TempVar3                                           ;82DD9F|E694    |000094;
     LDA.B $97                                                  ;82DDA1|A597    |000097;
     BNE +                                                      ;82DDA3|D004    |82DDA9;
     JML.L .return                                              ;82DDA5|5CBDDE82|82DEBD;
@@ -8593,9 +8593,9 @@ fUnknown_82DEC5:
     LDA.B #$0F                                                 ;82DED5|A90F    |      ;
     STA.B n8TempVar1                                           ;82DED7|8592    |000092;
     LDA.B #$01                                                 ;82DED9|A901    |      ;
-    STA.B $93                                                  ;82DEDB|8593    |000093;
+    STA.B n8TempVar2                                           ;82DEDB|8593    |000093;
     LDA.B #$01                                                 ;82DEDD|A901    |      ;
-    STA.B $94                                                  ;82DEDF|8594    |000094;
+    STA.B n8TempVar3                                           ;82DEDF|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DEE1|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DEE5|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82DEE9|22468880|808846;
@@ -8651,14 +8651,14 @@ fUnknown_82DEC5:
     LDA.B #$01                                                 ;82DF72|A901    |      ;
     STA.B n8TempVar1                                           ;82DF74|8592    |000092;
     LDA.B #$01                                                 ;82DF76|A901    |      ;
-    STA.B $93                                                  ;82DF78|8593    |000093;
+    STA.B n8TempVar2                                           ;82DF78|8593    |000093;
     LDA.B #$0F                                                 ;82DF7A|A90F    |      ;
-    STA.B $94                                                  ;82DF7C|8594    |000094;
+    STA.B n8TempVar3                                           ;82DF7C|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82DF7E|22CE8780|8087CE;
     SEP #$20                                                   ;82DF82|E220    |      ;
     LDA.B #$04                                                 ;82DF84|A904    |      ;
     STA.B nUnknown0x95                                         ;82DF86|8595    |000095;
-    STZ.B $94                                                  ;82DF88|6494    |000094;
+    STZ.B n8TempVar3                                           ;82DF88|6494    |000094;
     REP #$20                                                   ;82DF8A|C220    |      ;
     STZ.B $90                                                  ;82DF8C|6490    |000090;
     JML.L fUnknown_82D871                                      ;82DF8E|5C71D882|82D871;
@@ -8674,9 +8674,9 @@ fUnknown_82DF92:
     LDA.B #$0F                                                 ;82DFA2|A90F    |      ;
     STA.B n8TempVar1                                           ;82DFA4|8592    |000092;
     LDA.B #$03                                                 ;82DFA6|A903    |      ;
-    STA.B $93                                                  ;82DFA8|8593    |000093;
+    STA.B n8TempVar2                                           ;82DFA8|8593    |000093;
     LDA.B #$01                                                 ;82DFAA|A901    |      ;
-    STA.B $94                                                  ;82DFAC|8594    |000094;
+    STA.B n8TempVar3                                           ;82DFAC|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DFAE|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DFB2|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82DFB6|22468880|808846;
@@ -8801,12 +8801,12 @@ fUnknown_82E0B5:
     LDA.B #$03                                                 ;82E0D3|A903    |      ;
     STA.B n8TempVar1                                           ;82E0D5|8592    |000092;
     LDA.B #$03                                                 ;82E0D7|A903    |      ;
-    STA.B $93                                                  ;82E0D9|8593    |000093;
+    STA.B n8TempVar2                                           ;82E0D9|8593    |000093;
     LDA.B #$0F                                                 ;82E0DB|A90F    |      ;
-    STA.B $94                                                  ;82E0DD|8594    |000094;
+    STA.B n8TempVar3                                           ;82E0DD|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E0DF|22CE8780|8087CE;
     SEP #$20                                                   ;82E0E3|E220    |      ;
-    STZ.B $94                                                  ;82E0E5|6494    |000094;
+    STZ.B n8TempVar3                                           ;82E0E5|6494    |000094;
     STZ.B $96                                                  ;82E0E7|6496    |000096;
     STZ.B $97                                                  ;82E0E9|6497    |000097;
  
@@ -8933,7 +8933,7 @@ fUnknown_82E1BD:
     INC.B $96                                                  ;82E1D3|E696    |000096;
  
   + SEP #$20                                                   ;82E1D5|E220    |      ;
-    LDA.B $94                                                  ;82E1D7|A594    |000094;
+    LDA.B n8TempVar3                                           ;82E1D7|A594    |000094;
     CMP.B #$01                                                 ;82E1D9|C901    |      ;
     BNE +                                                      ;82E1DB|D004    |82E1E1;
     JML.L fUnknown_82DEC5                                      ;82E1DD|5CC5DE82|82DEC5;
@@ -8959,9 +8959,9 @@ fUnknown_82E1F1:
     LDA.B #$0F                                                 ;82E201|A90F    |      ;
     STA.B n8TempVar1                                           ;82E203|8592    |000092;
     LDA.B #$03                                                 ;82E205|A903    |      ;
-    STA.B $93                                                  ;82E207|8593    |000093;
+    STA.B n8TempVar2                                           ;82E207|8593    |000093;
     LDA.B #$01                                                 ;82E209|A901    |      ;
-    STA.B $94                                                  ;82E20B|8594    |000094;
+    STA.B n8TempVar3                                           ;82E20B|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82E20D|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82E211|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82E215|22468880|808846;
@@ -9077,12 +9077,12 @@ fUnknown_82E1F1:
     LDA.B #$03                                                 ;82E31F|A903    |      ;
     STA.B n8TempVar1                                           ;82E321|8592    |000092;
     LDA.B #$03                                                 ;82E323|A903    |      ;
-    STA.B $93                                                  ;82E325|8593    |000093;
+    STA.B n8TempVar2                                           ;82E325|8593    |000093;
     LDA.B #$0F                                                 ;82E327|A90F    |      ;
-    STA.B $94                                                  ;82E329|8594    |000094;
+    STA.B n8TempVar3                                           ;82E329|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E32B|22CE8780|8087CE;
     SEP #$20                                                   ;82E32F|E220    |      ;
-    STZ.B $94                                                  ;82E331|6494    |000094;
+    STZ.B n8TempVar3                                           ;82E331|6494    |000094;
     STZ.B $96                                                  ;82E333|6496    |000096;
     STZ.B $97                                                  ;82E335|6497    |000097;
  
@@ -9177,7 +9177,7 @@ fUnknown_82E3D1:
     INC.B $96                                                  ;82E3E7|E696    |000096;
  
   + SEP #$20                                                   ;82E3E9|E220    |      ;
-    LDA.B $94                                                  ;82E3EB|A594    |000094;
+    LDA.B n8TempVar3                                           ;82E3EB|A594    |000094;
     CMP.B #$01                                                 ;82E3ED|C901    |      ;
     BNE +                                                      ;82E3EF|D004    |82E3F5;
     JML.L fUnknown_82DEC5                                      ;82E3F1|5CC5DE82|82DEC5;
@@ -9597,9 +9597,9 @@ fScreen_NameInput:
     LDA.B #$0F                                                 ;82E81C|A90F    |      ;
     STA.B n8TempVar1                                           ;82E81E|8592    |000092;
     LDA.B #$03                                                 ;82E820|A903    |      ;
-    STA.B $93                                                  ;82E822|8593    |000093;
+    STA.B n8TempVar2                                           ;82E822|8593    |000093;
     LDA.B #$01                                                 ;82E824|A901    |      ;
-    STA.B $94                                                  ;82E826|8594    |000094;
+    STA.B n8TempVar3                                           ;82E826|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82E828|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82E82C|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82E830|22468880|808846;
@@ -9692,9 +9692,9 @@ fScreen_NameInput:
     LDA.B #$03                                                 ;82E921|A903    |      ;
     STA.B n8TempVar1                                           ;82E923|8592    |000092;
     LDA.B #$03                                                 ;82E925|A903    |      ;
-    STA.B $93                                                  ;82E927|8593    |000093;
+    STA.B n8TempVar2                                           ;82E927|8593    |000093;
     LDA.B #$0F                                                 ;82E929|A90F    |      ;
-    STA.B $94                                                  ;82E92B|8594    |000094;
+    STA.B n8TempVar3                                           ;82E92B|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E92D|22CE8780|8087CE;
     REP #$20                                                   ;82E931|C220    |      ;
     STZ.W nMenuIndex                                           ;82E933|9C9109  |000991;
@@ -9712,7 +9712,7 @@ fScreen_NameInput:
     STA.W sTempNameVariable+2                                  ;82E951|8D8708  |000887;
     LDA.B #$B1                                                 ;82E954|A9B1    |      ;
     STA.W sTempNameVariable+3                                  ;82E956|8D8808  |000888;
-    STZ.B $94                                                  ;82E959|6494    |000094;
+    STZ.B n8TempVar3                                           ;82E959|6494    |000094;
     STZ.B $96                                                  ;82E95B|6496    |000096;
     STZ.B $97                                                  ;82E95D|6497    |000097;
  

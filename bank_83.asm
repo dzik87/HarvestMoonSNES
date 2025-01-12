@@ -689,9 +689,9 @@ fAudioUnknown_8384D3:
 .wait1:
     SEP #$20                                                   ;8384DE|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8384E0|AD4321  |002143;
-    STA.B $93                                                  ;8384E3|8593    |000093;
+    STA.B n8TempVar2                                           ;8384E3|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8384E5|AD4321  |002143;
-    CMP.B $93                                                  ;8384E8|C593    |000093;
+    CMP.B n8TempVar2                                           ;8384E8|C593    |000093;
     BNE .wait1                                                 ;8384EA|D0F2    |8384DE;
     LDA.B #$01                                                 ;8384EC|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8384EE|CD4321  |002143;
@@ -719,9 +719,9 @@ fAudioUnknown_8384D3:
 .wait2:
     SEP #$20                                                   ;83851E|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838520|AD4321  |002143;
-    STA.B $93                                                  ;838523|8593    |000093;
+    STA.B n8TempVar2                                           ;838523|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838525|AD4321  |002143;
-    CMP.B $93                                                  ;838528|C593    |000093;
+    CMP.B n8TempVar2                                           ;838528|C593    |000093;
     BNE .wait2                                                 ;83852A|D0F2    |83851E;
     LDA.W SNES_APUIO3                                          ;83852C|AD4321  |002143;
     CMP.B #$04                                                 ;83852F|C904    |      ;
@@ -742,9 +742,9 @@ fAudioUnknown_8384D3:
 .wait3:
     SEP #$20                                                   ;83854D|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83854F|AD4321  |002143;
-    STA.B $93                                                  ;838552|8593    |000093;
+    STA.B n8TempVar2                                           ;838552|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838554|AD4321  |002143;
-    CMP.B $93                                                  ;838557|C593    |000093;
+    CMP.B n8TempVar2                                           ;838557|C593    |000093;
     BNE .wait3                                                 ;838559|D0F2    |83854D;
     LDA.B #$01                                                 ;83855B|A901    |      ;
     CMP.W SNES_APUIO3                                          ;83855D|CD4321  |002143;
@@ -765,9 +765,9 @@ fAudioUnknown_8384D3:
 .wait4:
     SEP #$20                                                   ;83857A|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83857C|AD4321  |002143;
-    STA.B $93                                                  ;83857F|8593    |000093;
+    STA.B n8TempVar2                                           ;83857F|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838581|AD4321  |002143;
-    CMP.B $93                                                  ;838584|C593    |000093;
+    CMP.B n8TempVar2                                           ;838584|C593    |000093;
     BNE .wait4                                                 ;838586|D0F2    |83857A;
     LDA.B #$00                                                 ;838588|A900    |      ;
     CMP.W SNES_APUIO3                                          ;83858A|CD4321  |002143;
@@ -785,7 +785,7 @@ fAudioUnknown_838598:
  
 .loop:
     LDA.L aAudioUnknown_8392B1,X                               ;83859F|BFB19283|8392B1;
-    STA.B $94                                                  ;8385A3|8594    |000094;
+    STA.B n8TempVar3                                           ;8385A3|8594    |000094;
     BNE +                                                      ;8385A5|D009    |8385B0;
     INX                                                        ;8385A7|E8      |      ;
     CPX.W #$000A                                               ;8385A8|E00A00  |      ;
@@ -801,9 +801,9 @@ fAudioUnknown_838598:
 .wait1:
     SEP #$20                                                   ;8385B9|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8385BB|AD4321  |002143;
-    STA.B $93                                                  ;8385BE|8593    |000093;
+    STA.B n8TempVar2                                           ;8385BE|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8385C0|AD4321  |002143;
-    CMP.B $93                                                  ;8385C3|C593    |000093;
+    CMP.B n8TempVar2                                           ;8385C3|C593    |000093;
     BNE .wait1                                                 ;8385C5|D0F2    |8385B9;
     LDA.B #$01                                                 ;8385C7|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8385C9|CD4321  |002143;
@@ -811,14 +811,14 @@ fAudioUnknown_838598:
     PHX                                                        ;8385CE|DA      |      ;
     LDA.B #$00                                                 ;8385CF|A900    |      ;
     XBA                                                        ;8385D1|EB      |      ;
-    LDA.B $94                                                  ;8385D2|A594    |000094;
+    LDA.B n8TempVar3                                           ;8385D2|A594    |000094;
     REP #$20                                                   ;8385D4|C220    |      ;
     STA.B n16TempVar1                                          ;8385D6|857E    |00007E;
     LDA.W #$000A                                               ;8385D8|A90A00  |      ;
     JSL.L fMathUnknown_838000                                  ;8385DB|22008083|838000;
     TAX                                                        ;8385DF|AA      |      ;
     SEP #$20                                                   ;8385E0|E220    |      ;
-    LDA.B $94                                                  ;8385E2|A594    |000094;
+    LDA.B n8TempVar3                                           ;8385E2|A594    |000094;
     STA.W SNES_APUIO0                                          ;8385E4|8D4021  |002140;
     REP #$20                                                   ;8385E7|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;8385E9|BFEF9083|8390EF;
@@ -834,9 +834,9 @@ fAudioUnknown_838598:
 .wait2:
     SEP #$20                                                   ;8385FD|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8385FF|AD4321  |002143;
-    STA.B $93                                                  ;838602|8593    |000093;
+    STA.B n8TempVar2                                           ;838602|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838604|AD4321  |002143;
-    CMP.B $93                                                  ;838607|C593    |000093;
+    CMP.B n8TempVar2                                           ;838607|C593    |000093;
     BNE .wait2                                                 ;838609|D0F2    |8385FD;
     LDA.W SNES_APUIO3                                          ;83860B|AD4321  |002143;
     CMP.B #$04                                                 ;83860E|C904    |      ;
@@ -848,9 +848,9 @@ fAudioUnknown_838598:
  
   - SEP #$20                                                   ;838617|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838619|AD4321  |002143;
-    STA.B $93                                                  ;83861C|8593    |000093;
+    STA.B n8TempVar2                                           ;83861C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83861E|AD4321  |002143;
-    CMP.B $93                                                  ;838621|C593    |000093;
+    CMP.B n8TempVar2                                           ;838621|C593    |000093;
     BNE -                                                      ;838623|D0F2    |838617;
  
   - LDA.B #$01                                                 ;838625|A901    |      ;
@@ -871,9 +871,9 @@ fAudioUnknown_838598:
 .wait3:
     SEP #$20                                                   ;838649|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83864B|AD4321  |002143;
-    STA.B $93                                                  ;83864E|8593    |000093;
+    STA.B n8TempVar2                                           ;83864E|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838650|AD4321  |002143;
-    CMP.B $93                                                  ;838653|C593    |000093;
+    CMP.B n8TempVar2                                           ;838653|C593    |000093;
     BNE .wait3                                                 ;838655|D0F2    |838649;
     LDA.W SNES_APUIO3                                          ;838657|AD4321  |002143;
     CMP.B #$04                                                 ;83865A|C904    |      ;
@@ -885,9 +885,9 @@ fAudioUnknown_838598:
  
   - SEP #$20                                                   ;838663|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838665|AD4321  |002143;
-    STA.B $93                                                  ;838668|8593    |000093;
+    STA.B n8TempVar2                                           ;838668|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83866A|AD4321  |002143;
-    CMP.B $93                                                  ;83866D|C593    |000093;
+    CMP.B n8TempVar2                                           ;83866D|C593    |000093;
     BNE -                                                      ;83866F|D0F2    |838663;
  
   - LDA.B #$01                                                 ;838671|A901    |      ;
@@ -906,9 +906,9 @@ fAudioUnknown_838598:
 .wait4:
     SEP #$20                                                   ;838690|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838692|AD4321  |002143;
-    STA.B $93                                                  ;838695|8593    |000093;
+    STA.B n8TempVar2                                           ;838695|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838697|AD4321  |002143;
-    CMP.B $93                                                  ;83869A|C593    |000093;
+    CMP.B n8TempVar2                                           ;83869A|C593    |000093;
     BNE .wait4                                                 ;83869C|D0F2    |838690;
     LDA.W SNES_APUIO3                                          ;83869E|AD4321  |002143;
     CMP.B #$04                                                 ;8386A1|C904    |      ;
@@ -920,9 +920,9 @@ fAudioUnknown_838598:
  
   - SEP #$20                                                   ;8386AA|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8386AC|AD4321  |002143;
-    STA.B $93                                                  ;8386AF|8593    |000093;
+    STA.B n8TempVar2                                           ;8386AF|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8386B1|AD4321  |002143;
-    CMP.B $93                                                  ;8386B4|C593    |000093;
+    CMP.B n8TempVar2                                           ;8386B4|C593    |000093;
     BNE -                                                      ;8386B6|D0F2    |8386AA;
  
   - LDA.B #$01                                                 ;8386B8|A901    |      ;
@@ -938,7 +938,7 @@ fAudioUnknown_838598:
     STA.B ptrAudioData+2                                       ;8386CF|850C    |00000C; store 8b to $0C
     LDA.B #$00                                                 ;8386D1|A900    |      ;
     XBA                                                        ;8386D3|EB      |      ;
-    LDA.B $94                                                  ;8386D4|A594    |000094;
+    LDA.B n8TempVar3                                           ;8386D4|A594    |000094;
     ASL A                                                      ;8386D6|0A      |      ;
     REP #$20                                                   ;8386D7|C220    |      ;
     TAX                                                        ;8386D9|AA      |      ;
@@ -966,9 +966,9 @@ fAudioUnknown_838598:
 .wait5:
     SEP #$20                                                   ;838708|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83870A|AD4321  |002143;
-    STA.B $93                                                  ;83870D|8593    |000093;
+    STA.B n8TempVar2                                           ;83870D|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83870F|AD4321  |002143;
-    CMP.B $93                                                  ;838712|C593    |000093;
+    CMP.B n8TempVar2                                           ;838712|C593    |000093;
     BNE .wait5                                                 ;838714|D0F2    |838708;
     LDA.W SNES_APUIO3                                          ;838716|AD4321  |002143;
     CMP.B #$04                                                 ;838719|C904    |      ;
@@ -980,9 +980,9 @@ fAudioUnknown_838598:
  
   - SEP #$20                                                   ;838722|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838724|AD4321  |002143;
-    STA.B $93                                                  ;838727|8593    |000093;
+    STA.B n8TempVar2                                           ;838727|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838729|AD4321  |002143;
-    CMP.B $93                                                  ;83872C|C593    |000093;
+    CMP.B n8TempVar2                                           ;83872C|C593    |000093;
     BNE -                                                      ;83872E|D0F2    |838722;
  
   - LDA.B #$01                                                 ;838730|A901    |      ;
@@ -1006,9 +1006,9 @@ fAudioUnknown_838598:
 .wait6:
     SEP #$20                                                   ;83874F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838751|AD4321  |002143;
-    STA.B $93                                                  ;838754|8593    |000093;
+    STA.B n8TempVar2                                           ;838754|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838756|AD4321  |002143;
-    CMP.B $93                                                  ;838759|C593    |000093;
+    CMP.B n8TempVar2                                           ;838759|C593    |000093;
     BNE .wait6                                                 ;83875B|D0F2    |83874F;
     LDA.B #$00                                                 ;83875D|A900    |      ;
     CMP.W SNES_APUIO3                                          ;83875F|CD4321  |002143;
@@ -1017,9 +1017,9 @@ fAudioUnknown_838598:
  
   - SEP #$20                                                   ;838767|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838769|AD4321  |002143;
-    STA.B $93                                                  ;83876C|8593    |000093;
+    STA.B n8TempVar2                                           ;83876C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83876E|AD4321  |002143;
-    CMP.B $93                                                  ;838771|C593    |000093;
+    CMP.B n8TempVar2                                           ;838771|C593    |000093;
     BNE -                                                      ;838773|D0F2    |838767;
  
   - LDA.B #$01                                                 ;838775|A901    |      ;
@@ -1068,7 +1068,7 @@ fAudioUnknown_83878C:
 .loop:
     SEP #$20                                                   ;8387C0|E220    |      ;
     LDA.L sAudioData1_838F83,X                                 ;8387C2|BF838F83|838F83;
-    STA.B $94                                                  ;8387C6|8594    |000094;
+    STA.B n8TempVar3                                           ;8387C6|8594    |000094;
     BNE .label1                                                ;8387C8|D010    |8387DA;
     REP #$20                                                   ;8387CA|C220    |      ;
     INX                                                        ;8387CC|E8      |      ;
@@ -1076,14 +1076,14 @@ fAudioUnknown_83878C:
     BNE .loop                                                  ;8387CF|D0EF    |8387C0;
     SEP #$20                                                   ;8387D1|E220    |      ;
     LDA.B #$06                                                 ;8387D3|A906    |      ;
-    STA.B $94                                                  ;8387D5|8594    |000094;
+    STA.B n8TempVar3                                           ;8387D5|8594    |000094;
     DEX                                                        ;8387D7|CA      |      ;
     BRA .label2                                                ;8387D8|800D    |8387E7;
  
  
 .label1:
     SEP #$20                                                   ;8387DA|E220    |      ;
-    LDA.B $94                                                  ;8387DC|A594    |000094;
+    LDA.B n8TempVar3                                           ;8387DC|A594    |000094;
     STA.W sAudioUnk104,Y                                       ;8387DE|990401  |000104;
     INC.W nAudioUnk104Index                                    ;8387E1|EE0301  |000103;
     INC.W nAudioUnk10F                                         ;8387E4|EE0F01  |00010F;
@@ -1097,9 +1097,9 @@ fAudioUnknown_83878C:
 .wait1:
     SEP #$20                                                   ;8387F0|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8387F2|AD4321  |002143;
-    STA.B $93                                                  ;8387F5|8593    |000093;
+    STA.B n8TempVar2                                           ;8387F5|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8387F7|AD4321  |002143;
-    CMP.B $93                                                  ;8387FA|C593    |000093;
+    CMP.B n8TempVar2                                           ;8387FA|C593    |000093;
     BNE .wait1                                                 ;8387FC|D0F2    |8387F0;
     LDA.B #$01                                                 ;8387FE|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838800|CD4321  |002143;
@@ -1108,14 +1108,14 @@ fAudioUnknown_83878C:
     PHY                                                        ;838806|5A      |      ;
     LDA.B #$00                                                 ;838807|A900    |      ;
     XBA                                                        ;838809|EB      |      ;
-    LDA.B $94                                                  ;83880A|A594    |000094;
+    LDA.B n8TempVar3                                           ;83880A|A594    |000094;
     REP #$20                                                   ;83880C|C220    |      ;
     STA.B n16TempVar1                                          ;83880E|857E    |00007E;
     LDA.W #$000A                                               ;838810|A90A00  |      ;
     JSL.L fMathUnknown_838000                                  ;838813|22008083|838000;
     TAX                                                        ;838817|AA      |      ;
     SEP #$20                                                   ;838818|E220    |      ;
-    LDA.B $94                                                  ;83881A|A594    |000094;
+    LDA.B n8TempVar3                                           ;83881A|A594    |000094;
     STA.W SNES_APUIO0                                          ;83881C|8D4021  |002140;
     REP #$20                                                   ;83881F|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;838821|BFEF9083|8390EF;
@@ -1131,9 +1131,9 @@ fAudioUnknown_83878C:
 .wait2:
     SEP #$20                                                   ;838835|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838837|AD4321  |002143;
-    STA.B $93                                                  ;83883A|8593    |000093;
+    STA.B n8TempVar2                                           ;83883A|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83883C|AD4321  |002143;
-    CMP.B $93                                                  ;83883F|C593    |000093;
+    CMP.B n8TempVar2                                           ;83883F|C593    |000093;
     BNE .wait2                                                 ;838841|D0F2    |838835;
     LDA.W SNES_APUIO3                                          ;838843|AD4321  |002143;
     CMP.B #$04                                                 ;838846|C904    |      ;
@@ -1145,9 +1145,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83884F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838851|AD4321  |002143;
-    STA.B $93                                                  ;838854|8593    |000093;
+    STA.B n8TempVar2                                           ;838854|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838856|AD4321  |002143;
-    CMP.B $93                                                  ;838859|C593    |000093;
+    CMP.B n8TempVar2                                           ;838859|C593    |000093;
     BNE -                                                      ;83885B|D0F2    |83884F;
  
   - LDA.B #$01                                                 ;83885D|A901    |      ;
@@ -1168,9 +1168,9 @@ fAudioUnknown_83878C:
 .wait3:
     SEP #$20                                                   ;838881|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838883|AD4321  |002143;
-    STA.B $93                                                  ;838886|8593    |000093;
+    STA.B n8TempVar2                                           ;838886|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838888|AD4321  |002143;
-    CMP.B $93                                                  ;83888B|C593    |000093;
+    CMP.B n8TempVar2                                           ;83888B|C593    |000093;
     BNE .wait3                                                 ;83888D|D0F2    |838881;
     LDA.W SNES_APUIO3                                          ;83888F|AD4321  |002143;
     CMP.B #$04                                                 ;838892|C904    |      ;
@@ -1182,9 +1182,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83889B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83889D|AD4321  |002143;
-    STA.B $93                                                  ;8388A0|8593    |000093;
+    STA.B n8TempVar2                                           ;8388A0|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8388A2|AD4321  |002143;
-    CMP.B $93                                                  ;8388A5|C593    |000093;
+    CMP.B n8TempVar2                                           ;8388A5|C593    |000093;
     BNE -                                                      ;8388A7|D0F2    |83889B;
  
   - LDA.B #$01                                                 ;8388A9|A901    |      ;
@@ -1203,9 +1203,9 @@ fAudioUnknown_83878C:
 .wait4:
     SEP #$20                                                   ;8388C8|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8388CA|AD4321  |002143;
-    STA.B $93                                                  ;8388CD|8593    |000093;
+    STA.B n8TempVar2                                           ;8388CD|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8388CF|AD4321  |002143;
-    CMP.B $93                                                  ;8388D2|C593    |000093;
+    CMP.B n8TempVar2                                           ;8388D2|C593    |000093;
     BNE .wait4                                                 ;8388D4|D0F2    |8388C8;
     LDA.W SNES_APUIO3                                          ;8388D6|AD4321  |002143;
     CMP.B #$04                                                 ;8388D9|C904    |      ;
@@ -1217,9 +1217,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;8388E2|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8388E4|AD4321  |002143;
-    STA.B $93                                                  ;8388E7|8593    |000093;
+    STA.B n8TempVar2                                           ;8388E7|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8388E9|AD4321  |002143;
-    CMP.B $93                                                  ;8388EC|C593    |000093;
+    CMP.B n8TempVar2                                           ;8388EC|C593    |000093;
     BNE -                                                      ;8388EE|D0F2    |8388E2;
  
   - LDA.B #$01                                                 ;8388F0|A901    |      ;
@@ -1235,7 +1235,7 @@ fAudioUnknown_83878C:
     STA.B ptrAudioData+2                                       ;838907|850C    |00000C;
     LDA.B #$00                                                 ;838909|A900    |      ;
     XBA                                                        ;83890B|EB      |      ;
-    LDA.B $94                                                  ;83890C|A594    |000094;
+    LDA.B n8TempVar3                                           ;83890C|A594    |000094;
     ASL A                                                      ;83890E|0A      |      ;
     REP #$20                                                   ;83890F|C220    |      ;
     TAX                                                        ;838911|AA      |      ;
@@ -1263,9 +1263,9 @@ fAudioUnknown_83878C:
 .wait5:
     SEP #$20                                                   ;838940|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838942|AD4321  |002143;
-    STA.B $93                                                  ;838945|8593    |000093;
+    STA.B n8TempVar2                                           ;838945|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838947|AD4321  |002143;
-    CMP.B $93                                                  ;83894A|C593    |000093;
+    CMP.B n8TempVar2                                           ;83894A|C593    |000093;
     BNE .wait5                                                 ;83894C|D0F2    |838940;
     LDA.W SNES_APUIO3                                          ;83894E|AD4321  |002143;
     CMP.B #$04                                                 ;838951|C904    |      ;
@@ -1277,9 +1277,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83895A|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83895C|AD4321  |002143;
-    STA.B $93                                                  ;83895F|8593    |000093;
+    STA.B n8TempVar2                                           ;83895F|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838961|AD4321  |002143;
-    CMP.B $93                                                  ;838964|C593    |000093;
+    CMP.B n8TempVar2                                           ;838964|C593    |000093;
     BNE -                                                      ;838966|D0F2    |83895A;
  
   - LDA.B #$01                                                 ;838968|A901    |      ;
@@ -1303,9 +1303,9 @@ fAudioUnknown_83878C:
 .wait6:
     SEP #$20                                                   ;838987|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838989|AD4321  |002143;
-    STA.B $93                                                  ;83898C|8593    |000093;
+    STA.B n8TempVar2                                           ;83898C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83898E|AD4321  |002143;
-    CMP.B $93                                                  ;838991|C593    |000093;
+    CMP.B n8TempVar2                                           ;838991|C593    |000093;
     BNE .wait6                                                 ;838993|D0F2    |838987;
     LDA.B #$00                                                 ;838995|A900    |      ;
     CMP.W SNES_APUIO3                                          ;838997|CD4321  |002143;
@@ -1314,9 +1314,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83899F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8389A1|AD4321  |002143;
-    STA.B $93                                                  ;8389A4|8593    |000093;
+    STA.B n8TempVar2                                           ;8389A4|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8389A6|AD4321  |002143;
-    CMP.B $93                                                  ;8389A9|C593    |000093;
+    CMP.B n8TempVar2                                           ;8389A9|C593    |000093;
     BNE -                                                      ;8389AB|D0F2    |83899F;
  
   - LDA.B #$01                                                 ;8389AD|A901    |      ;
@@ -1341,9 +1341,9 @@ fAudioUnknown_83878C:
 fAudioUnknown_8389C7:
     SEP #$20                                                   ;8389C7|E220    |      ;
     PHA                                                        ;8389C9|48      |      ;
-    STA.B $94                                                  ;8389CA|8594    |000094;
+    STA.B n8TempVar3                                           ;8389CA|8594    |000094;
  
-  - LDA.B $94                                                  ;8389CC|A594    |000094;
+  - LDA.B n8TempVar3                                           ;8389CC|A594    |000094;
     BNE .label1                                                ;8389CE|D005    |8389D5;
     JSR.W fAudioUnknown_838EC9                                 ;8389D0|20C98E  |838EC9;
     BNE -                                                      ;8389D3|D0F7    |8389CC;
@@ -1357,14 +1357,14 @@ fAudioUnknown_8389C7:
 .wait1:
     SEP #$20                                                   ;8389DE|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8389E0|AD4321  |002143;
-    STA.B $93                                                  ;8389E3|8593    |000093;
+    STA.B n8TempVar2                                           ;8389E3|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8389E5|AD4321  |002143;
-    CMP.B $93                                                  ;8389E8|C593    |000093;
+    CMP.B n8TempVar2                                           ;8389E8|C593    |000093;
     BNE .wait1                                                 ;8389EA|D0F2    |8389DE;
     LDA.B #$01                                                 ;8389EC|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8389EE|CD4321  |002143;
     BNE .wait1                                                 ;8389F1|D0EB    |8389DE;
-    LDA.B $94                                                  ;8389F3|A594    |000094;
+    LDA.B n8TempVar3                                           ;8389F3|A594    |000094;
     STA.W SNES_APUIO0                                          ;8389F5|8D4021  |002140;
     STZ.W SNES_APUIO1                                          ;8389F8|9C4121  |002141;
     STZ.W SNES_APUIO2                                          ;8389FB|9C4221  |002142;
@@ -1405,9 +1405,9 @@ fAudioUnknown_838A26:
 .wait1:
     SEP #$20                                                   ;838A31|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838A33|AD4321  |002143;
-    STA.B $93                                                  ;838A36|8593    |000093;
+    STA.B n8TempVar2                                           ;838A36|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838A38|AD4321  |002143;
-    CMP.B $93                                                  ;838A3B|C593    |000093;
+    CMP.B n8TempVar2                                           ;838A3B|C593    |000093;
     BNE .wait1                                                 ;838A3D|D0F2    |838A31;
     LDA.B #$01                                                 ;838A3F|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838A41|CD4321  |002143;
@@ -1471,9 +1471,9 @@ fAudioUnknown_838A26:
 .wait2:
     SEP #$20                                                   ;838AB4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838AB6|AD4321  |002143;
-    STA.B $93                                                  ;838AB9|8593    |000093;
+    STA.B n8TempVar2                                           ;838AB9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838ABB|AD4321  |002143;
-    CMP.B $93                                                  ;838ABE|C593    |000093;
+    CMP.B n8TempVar2                                           ;838ABE|C593    |000093;
     BNE .wait2                                                 ;838AC0|D0F2    |838AB4;
     LDA.B #$01                                                 ;838AC2|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838AC4|CD4321  |002143;
@@ -1493,9 +1493,9 @@ fAudioUnknown_838A26:
  
   - SEP #$20                                                   ;838AE1|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838AE3|AD4321  |002143;
-    STA.B $93                                                  ;838AE6|8593    |000093;
+    STA.B n8TempVar2                                           ;838AE6|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838AE8|AD4321  |002143;
-    CMP.B $93                                                  ;838AEB|C593    |000093;
+    CMP.B n8TempVar2                                           ;838AEB|C593    |000093;
     BNE -                                                      ;838AED|D0F2    |838AE1;
     LDA.B #$00                                                 ;838AEF|A900    |      ;
     CMP.W SNES_APUIO3                                          ;838AF1|CD4321  |002143;
@@ -1517,9 +1517,9 @@ fAudioUnknown_838AFF:
 .wait1:
     SEP #$20                                                   ;838B0D|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838B0F|AD4321  |002143;
-    STA.B $93                                                  ;838B12|8593    |000093;
+    STA.B n8TempVar2                                           ;838B12|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838B14|AD4321  |002143;
-    CMP.B $93                                                  ;838B17|C593    |000093;
+    CMP.B n8TempVar2                                           ;838B17|C593    |000093;
     BNE .wait1                                                 ;838B19|D0F2    |838B0D;
     LDA.B #$01                                                 ;838B1B|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838B1D|CD4321  |002143;
@@ -1529,22 +1529,22 @@ fAudioUnknown_838AFF:
     LDA.W nAudioRegisterValue0                                 ;838B25|AD1401  |000114;
     TAX                                                        ;838B28|AA      |      ;
     LDA.L aAudioUnknown_83927F,X                               ;838B29|BF7F9283|83927F;
-    STA.B $94                                                  ;838B2D|8594    |000094;
+    STA.B n8TempVar3                                           ;838B2D|8594    |000094;
     LDA.W nAudioUnk104Index                                    ;838B2F|AD0301  |000103;
     TAX                                                        ;838B32|AA      |      ;
-    LDA.B $94                                                  ;838B33|A594    |000094;
+    LDA.B n8TempVar3                                           ;838B33|A594    |000094;
     STA.W sAudioUnk104,X                                       ;838B35|9D0401  |000104;
     INC.W nAudioUnk104Index                                    ;838B38|EE0301  |000103;
     LDA.B #$00                                                 ;838B3B|A900    |      ;
     XBA                                                        ;838B3D|EB      |      ;
-    LDA.B $94                                                  ;838B3E|A594    |000094;
+    LDA.B n8TempVar3                                           ;838B3E|A594    |000094;
     REP #$20                                                   ;838B40|C220    |      ;
     STA.B n16TempVar1                                          ;838B42|857E    |00007E;
     LDA.W #$000A                                               ;838B44|A90A00  |      ;
     JSL.L fMathUnknown_838000                                  ;838B47|22008083|838000;
     TAX                                                        ;838B4B|AA      |      ;
     SEP #$20                                                   ;838B4C|E220    |      ;
-    LDA.B $94                                                  ;838B4E|A594    |000094;
+    LDA.B n8TempVar3                                           ;838B4E|A594    |000094;
     STA.W SNES_APUIO0                                          ;838B50|8D4021  |002140;
     REP #$20                                                   ;838B53|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;838B55|BFEF9083|8390EF;
@@ -1560,9 +1560,9 @@ fAudioUnknown_838AFF:
 .wait2:
     SEP #$20                                                   ;838B69|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838B6B|AD4321  |002143;
-    STA.B $93                                                  ;838B6E|8593    |000093;
+    STA.B n8TempVar2                                           ;838B6E|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838B70|AD4321  |002143;
-    CMP.B $93                                                  ;838B73|C593    |000093;
+    CMP.B n8TempVar2                                           ;838B73|C593    |000093;
     BNE .wait2                                                 ;838B75|D0F2    |838B69;
     LDA.W SNES_APUIO3                                          ;838B77|AD4321  |002143;
     CMP.B #$04                                                 ;838B7A|C904    |      ;
@@ -1574,9 +1574,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838B83|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838B85|AD4321  |002143;
-    STA.B $93                                                  ;838B88|8593    |000093;
+    STA.B n8TempVar2                                           ;838B88|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838B8A|AD4321  |002143;
-    CMP.B $93                                                  ;838B8D|C593    |000093;
+    CMP.B n8TempVar2                                           ;838B8D|C593    |000093;
     BNE -                                                      ;838B8F|D0F2    |838B83;
  
   - LDA.B #$01                                                 ;838B91|A901    |      ;
@@ -1597,9 +1597,9 @@ fAudioUnknown_838AFF:
 .wait3:
     SEP #$20                                                   ;838BB5|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838BB7|AD4321  |002143;
-    STA.B $93                                                  ;838BBA|8593    |000093;
+    STA.B n8TempVar2                                           ;838BBA|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838BBC|AD4321  |002143;
-    CMP.B $93                                                  ;838BBF|C593    |000093;
+    CMP.B n8TempVar2                                           ;838BBF|C593    |000093;
     BNE .wait3                                                 ;838BC1|D0F2    |838BB5;
     LDA.W SNES_APUIO3                                          ;838BC3|AD4321  |002143;
     CMP.B #$04                                                 ;838BC6|C904    |      ;
@@ -1611,9 +1611,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838BCF|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838BD1|AD4321  |002143;
-    STA.B $93                                                  ;838BD4|8593    |000093;
+    STA.B n8TempVar2                                           ;838BD4|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838BD6|AD4321  |002143;
-    CMP.B $93                                                  ;838BD9|C593    |000093;
+    CMP.B n8TempVar2                                           ;838BD9|C593    |000093;
     BNE -                                                      ;838BDB|D0F2    |838BCF;
  
   - LDA.B #$01                                                 ;838BDD|A901    |      ;
@@ -1632,9 +1632,9 @@ fAudioUnknown_838AFF:
 .wait4:
     SEP #$20                                                   ;838BFC|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838BFE|AD4321  |002143;
-    STA.B $93                                                  ;838C01|8593    |000093;
+    STA.B n8TempVar2                                           ;838C01|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C03|AD4321  |002143;
-    CMP.B $93                                                  ;838C06|C593    |000093;
+    CMP.B n8TempVar2                                           ;838C06|C593    |000093;
     BNE .wait4                                                 ;838C08|D0F2    |838BFC;
     LDA.W SNES_APUIO3                                          ;838C0A|AD4321  |002143;
     CMP.B #$04                                                 ;838C0D|C904    |      ;
@@ -1646,9 +1646,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838C16|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838C18|AD4321  |002143;
-    STA.B $93                                                  ;838C1B|8593    |000093;
+    STA.B n8TempVar2                                           ;838C1B|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C1D|AD4321  |002143;
-    CMP.B $93                                                  ;838C20|C593    |000093;
+    CMP.B n8TempVar2                                           ;838C20|C593    |000093;
     BNE -                                                      ;838C22|D0F2    |838C16;
  
   - LDA.B #$01                                                 ;838C24|A901    |      ;
@@ -1664,7 +1664,7 @@ fAudioUnknown_838AFF:
     STA.B ptrAudioData+2                                       ;838C3B|850C    |00000C;
     LDA.B #$00                                                 ;838C3D|A900    |      ;
     XBA                                                        ;838C3F|EB      |      ;
-    LDA.B $94                                                  ;838C40|A594    |000094;
+    LDA.B n8TempVar3                                           ;838C40|A594    |000094;
     ASL A                                                      ;838C42|0A      |      ;
     REP #$20                                                   ;838C43|C220    |      ;
     TAX                                                        ;838C45|AA      |      ;
@@ -1692,9 +1692,9 @@ fAudioUnknown_838AFF:
 .wait5:
     SEP #$20                                                   ;838C74|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838C76|AD4321  |002143;
-    STA.B $93                                                  ;838C79|8593    |000093;
+    STA.B n8TempVar2                                           ;838C79|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C7B|AD4321  |002143;
-    CMP.B $93                                                  ;838C7E|C593    |000093;
+    CMP.B n8TempVar2                                           ;838C7E|C593    |000093;
     BNE .wait5                                                 ;838C80|D0F2    |838C74;
     LDA.W SNES_APUIO3                                          ;838C82|AD4321  |002143;
     CMP.B #$04                                                 ;838C85|C904    |      ;
@@ -1706,9 +1706,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838C8E|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838C90|AD4321  |002143;
-    STA.B $93                                                  ;838C93|8593    |000093;
+    STA.B n8TempVar2                                           ;838C93|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C95|AD4321  |002143;
-    CMP.B $93                                                  ;838C98|C593    |000093;
+    CMP.B n8TempVar2                                           ;838C98|C593    |000093;
     BNE -                                                      ;838C9A|D0F2    |838C8E;
  
   - LDA.B #$01                                                 ;838C9C|A901    |      ;
@@ -1733,9 +1733,9 @@ fAudioUnknown_838AFF:
 .wait6:
     SEP #$20                                                   ;838CBD|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838CBF|AD4321  |002143;
-    STA.B $93                                                  ;838CC2|8593    |000093;
+    STA.B n8TempVar2                                           ;838CC2|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838CC4|AD4321  |002143;
-    CMP.B $93                                                  ;838CC7|C593    |000093;
+    CMP.B n8TempVar2                                           ;838CC7|C593    |000093;
     BNE .wait6                                                 ;838CC9|D0F2    |838CBD;
     LDA.B #$00                                                 ;838CCB|A900    |      ;
     CMP.W SNES_APUIO3                                          ;838CCD|CD4321  |002143;
@@ -1744,9 +1744,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838CD5|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838CD7|AD4321  |002143;
-    STA.B $93                                                  ;838CDA|8593    |000093;
+    STA.B n8TempVar2                                           ;838CDA|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838CDC|AD4321  |002143;
-    CMP.B $93                                                  ;838CDF|C593    |000093;
+    CMP.B n8TempVar2                                           ;838CDF|C593    |000093;
     BNE -                                                      ;838CE1|D0F2    |838CD5;
  
   - LDA.B #$01                                                 ;838CE3|A901    |      ;
@@ -1761,14 +1761,14 @@ fAudioUnknown_838AFF:
 fAudioUnused_838CF3:
     SEP #$20                                                   ;838CF3|E220    |      ;
     REP #$10                                                   ;838CF5|C210    |      ;
-    STA.B $94                                                  ;838CF7|8594    |000094;
+    STA.B n8TempVar3                                           ;838CF7|8594    |000094;
     LDA.B #$07                                                 ;838CF9|A907    |      ;
     STA.B n8TempVar1                                           ;838CFB|8592    |000092;
  
   - LDA.W SNES_APUIO3                                          ;838CFD|AD4321  |002143;
-    STA.B $93                                                  ;838D00|8593    |000093;
+    STA.B n8TempVar2                                           ;838D00|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D02|AD4321  |002143;
-    CMP.B $93                                                  ;838D05|C593    |000093;
+    CMP.B n8TempVar2                                           ;838D05|C593    |000093;
     BNE -                                                      ;838D07|D0F4    |838CFD;
  
   - LDA.B #$01                                                 ;838D09|A901    |      ;
@@ -1783,9 +1783,9 @@ fAudioUnused_838CF3:
  
   - SEP #$20                                                   ;838D20|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D22|AD4321  |002143;
-    STA.B $93                                                  ;838D25|8593    |000093;
+    STA.B n8TempVar2                                           ;838D25|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D27|AD4321  |002143;
-    CMP.B $93                                                  ;838D2A|C593    |000093;
+    CMP.B n8TempVar2                                           ;838D2A|C593    |000093;
     BNE -                                                      ;838D2C|D0F2    |838D20;
     LDA.B #$04                                                 ;838D2E|A904    |      ;
     CMP.W SNES_APUIO3                                          ;838D30|CD4321  |002143;
@@ -1804,9 +1804,9 @@ fAudioUnknown_838D39:
  
   - SEP #$20                                                   ;838D47|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D49|AD4321  |002143;
-    STA.B $93                                                  ;838D4C|8593    |000093;
+    STA.B n8TempVar2                                           ;838D4C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D4E|AD4321  |002143;
-    CMP.B $93                                                  ;838D51|C593    |000093;
+    CMP.B n8TempVar2                                           ;838D51|C593    |000093;
     BNE -                                                      ;838D53|D0F2    |838D47;
     LDA.B #$01                                                 ;838D55|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838D57|CD4321  |002143;
@@ -1821,9 +1821,9 @@ fAudioUnknown_838D39:
  
   - SEP #$20                                                   ;838D70|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D72|AD4321  |002143;
-    STA.B $93                                                  ;838D75|8593    |000093;
+    STA.B n8TempVar2                                           ;838D75|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D77|AD4321  |002143;
-    CMP.B $93                                                  ;838D7A|C593    |000093;
+    CMP.B n8TempVar2                                           ;838D7A|C593    |000093;
     BNE -                                                      ;838D7C|D0F2    |838D70;
     LDA.W SNES_APUIO3                                          ;838D7E|AD4321  |002143;
     CMP.B #$08                                                 ;838D81|C908    |      ;
@@ -1846,9 +1846,9 @@ fAudioUnknown_838D8B:
  
   - SEP #$20                                                   ;838D9B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D9D|AD4321  |002143;
-    STA.B $93                                                  ;838DA0|8593    |000093;
+    STA.B n8TempVar2                                           ;838DA0|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838DA2|AD4321  |002143;
-    CMP.B $93                                                  ;838DA5|C593    |000093;
+    CMP.B n8TempVar2                                           ;838DA5|C593    |000093;
     BNE -                                                      ;838DA7|D0F2    |838D9B;
     LDA.B #$01                                                 ;838DA9|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DAB|CD4321  |002143;
@@ -1863,9 +1863,9 @@ fAudioUnknown_838D8B:
  
   - SEP #$20                                                   ;838DC4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838DC6|AD4321  |002143;
-    STA.B $93                                                  ;838DC9|8593    |000093;
+    STA.B n8TempVar2                                           ;838DC9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838DCB|AD4321  |002143;
-    CMP.B $93                                                  ;838DCE|C593    |000093;
+    CMP.B n8TempVar2                                           ;838DCE|C593    |000093;
     BNE -                                                      ;838DD0|D0F2    |838DC4;
     LDA.W SNES_APUIO3                                          ;838DD2|AD4321  |002143;
     CMP.B #$08                                                 ;838DD5|C908    |      ;
@@ -1889,9 +1889,9 @@ fAudioUnknown_838DDF:
  
   - SEP #$20                                                   ;838DED|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838DEF|AD4321  |002143;
-    STA.B $93                                                  ;838DF2|8593    |000093;
+    STA.B n8TempVar2                                           ;838DF2|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838DF4|AD4321  |002143;
-    CMP.B $93                                                  ;838DF7|C593    |000093;
+    CMP.B n8TempVar2                                           ;838DF7|C593    |000093;
     BNE -                                                      ;838DF9|D0F2    |838DED;
     LDA.B #$01                                                 ;838DFB|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DFD|CD4321  |002143;
@@ -1907,9 +1907,9 @@ fAudioUnknown_838DDF:
  
   - SEP #$20                                                   ;838E19|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E1B|AD4321  |002143;
-    STA.B $93                                                  ;838E1E|8593    |000093;
+    STA.B n8TempVar2                                           ;838E1E|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E20|AD4321  |002143;
-    CMP.B $93                                                  ;838E23|C593    |000093;
+    CMP.B n8TempVar2                                           ;838E23|C593    |000093;
     BNE -                                                      ;838E25|D0F2    |838E19;
     LDA.W SNES_APUIO3                                          ;838E27|AD4321  |002143;
     CMP.B #$08                                                 ;838E2A|C908    |      ;
@@ -1922,7 +1922,7 @@ fAudioUnknown_838DDF:
  
 fAudioUnknown_838E32:
     SEP #$20                                                   ;838E32|E220    |      ;
-    STA.B $94                                                  ;838E34|8594    |000094;
+    STA.B n8TempVar3                                           ;838E34|8594    |000094;
     REP #$10                                                   ;838E36|C210    |      ;
     LDA.B #$0B                                                 ;838E38|A90B    |      ;
     STA.B n8TempVar1                                           ;838E3A|8592    |000092;
@@ -1930,14 +1930,14 @@ fAudioUnknown_838E32:
  
   - SEP #$20                                                   ;838E3F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E41|AD4321  |002143;
-    STA.B $93                                                  ;838E44|8593    |000093;
+    STA.B n8TempVar2                                           ;838E44|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E46|AD4321  |002143;
-    CMP.B $93                                                  ;838E49|C593    |000093;
+    CMP.B n8TempVar2                                           ;838E49|C593    |000093;
     BNE -                                                      ;838E4B|D0F2    |838E3F;
     LDA.B #$01                                                 ;838E4D|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838E4F|CD4321  |002143;
     BNE -                                                      ;838E52|D0EB    |838E3F;
-    LDA.B $94                                                  ;838E54|A594    |000094;
+    LDA.B n8TempVar3                                           ;838E54|A594    |000094;
     STA.W SNES_APUIO0                                          ;838E56|8D4021  |002140;
     STZ.W SNES_APUIO1                                          ;838E59|9C4121  |002141;
     STZ.W SNES_APUIO2                                          ;838E5C|9C4221  |002142;
@@ -1946,9 +1946,9 @@ fAudioUnknown_838E32:
  
   - SEP #$20                                                   ;838E64|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E66|AD4321  |002143;
-    STA.B $93                                                  ;838E69|8593    |000093;
+    STA.B n8TempVar2                                           ;838E69|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E6B|AD4321  |002143;
-    CMP.B $93                                                  ;838E6E|C593    |000093;
+    CMP.B n8TempVar2                                           ;838E6E|C593    |000093;
     BNE -                                                      ;838E70|D0F2    |838E64;
     LDA.W SNES_APUIO3                                          ;838E72|AD4321  |002143;
     CMP.B #$08                                                 ;838E75|C908    |      ;
@@ -1970,9 +1970,9 @@ fAudioUnknown_838E32:
 fAudioUnknown_838E8B:
     SEP #$20                                                   ;838E8B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E8D|AD4321  |002143;
-    STA.B $93                                                  ;838E90|8593    |000093;
+    STA.B n8TempVar2                                           ;838E90|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E92|AD4321  |002143;
-    CMP.B $93                                                  ;838E95|C593    |000093;
+    CMP.B n8TempVar2                                           ;838E95|C593    |000093;
     BNE fAudioUnknown_838E8B                                   ;838E97|D0F2    |838E8B;
  
   - LDA.B #$01                                                 ;838E99|A901    |      ;
@@ -1986,9 +1986,9 @@ fAudioUnknown_838E8B:
     STA.W SNES_APUIO3                                          ;838EAD|8D4321  |002143;
  
   - LDA.W SNES_APUIO3                                          ;838EB0|AD4321  |002143;
-    STA.B $93                                                  ;838EB3|8593    |000093;
+    STA.B n8TempVar2                                           ;838EB3|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838EB5|AD4321  |002143;
-    CMP.B $93                                                  ;838EB8|C593    |000093;
+    CMP.B n8TempVar2                                           ;838EB8|C593    |000093;
     BNE -                                                      ;838EBA|D0F4    |838EB0;
  
   - LDA.W SNES_APUIO3                                          ;838EBC|AD4321  |002143;
@@ -2004,9 +2004,9 @@ fAudioUnknown_838E8B:
 fAudioUnknown_838EC9:
     SEP #$20                                                   ;838EC9|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838ECB|AD4321  |002143;
-    STA.B $93                                                  ;838ECE|8593    |000093;
+    STA.B n8TempVar2                                           ;838ECE|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838ED0|AD4321  |002143;
-    CMP.B $93                                                  ;838ED3|C593    |000093;
+    CMP.B n8TempVar2                                           ;838ED3|C593    |000093;
     BNE fAudioUnknown_838EC9                                   ;838ED5|D0F2    |838EC9;
     LDA.B #$01                                                 ;838ED7|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838ED9|CD4321  |002143;
@@ -2019,9 +2019,9 @@ fAudioUnknown_838EC9:
 fAudioUnknown_838EE4:
     SEP #$20                                                   ;838EE4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838EE6|AD4321  |002143;
-    STA.B $93                                                  ;838EE9|8593    |000093;
+    STA.B n8TempVar2                                           ;838EE9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838EEB|AD4321  |002143;
-    CMP.B $93                                                  ;838EEE|C593    |000093;
+    CMP.B n8TempVar2                                           ;838EEE|C593    |000093;
     BNE fAudioUnknown_838EE4                                   ;838EF0|D0F2    |838EE4;
     LDA.B #$01                                                 ;838EF2|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838EF4|CD4321  |002143;
@@ -4708,13 +4708,13 @@ fGameEngine_SetDefaults:
     STA.W sPlayerNameShort+3                                   ;83AB2F|8D8408  |000884;
     SEP #$20                                                   ;83AB32|E220    |      ;
     LDA.B #$0F                                                 ;83AB34|A90F    |      ;
-    STA.L sShedItems                                           ;83AB36|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;83AB36|8F001F7F|7F1F00;
     LDA.B #$88                                                 ;83AB3A|A988    |      ;
-    STA.L sShedItems+1                                         ;83AB3C|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;83AB3C|8F011F7F|7F1F01;
     LDA.B #$00                                                 ;83AB40|A900    |      ;
-    STA.L sShedItems+2                                         ;83AB42|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;83AB42|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;83AB46|A900    |      ;
-    STA.L sShedItems+3                                         ;83AB48|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;83AB48|8F031F7F|7F1F03;
     SEP #$20                                                   ;83AB4C|E220    |      ;
     LDA.B #$B1                                                 ;83AB4E|A9B1    |      ;
     STA.W sDogNameShort                                        ;83AB50|8D9908  |000899;
@@ -5983,16 +5983,16 @@ fGameEngine_LoadGame:
     SEP #$20                                                   ;83B514|E220    |      ;
     LDY.W #$0084                                               ;83B516|A08400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B519|B772    |000072;
-    STA.L sShedItems                                           ;83B51B|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;83B51B|8F001F7F|7F1F00;
     LDY.W #$0085                                               ;83B51F|A08500  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B522|B772    |000072;
-    STA.L sShedItems+1                                         ;83B524|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;83B524|8F011F7F|7F1F01;
     LDY.W #$0086                                               ;83B528|A08600  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B52B|B772    |000072;
-    STA.L sShedItems+2                                         ;83B52D|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;83B52D|8F021F7F|7F1F02;
     LDY.W #$0087                                               ;83B531|A08700  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B534|B772    |000072;
-    STA.L sShedItems+3                                         ;83B536|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;83B536|8F031F7F|7F1F03;
     SEP #$20                                                   ;83B53A|E220    |      ;
     LDA.B #$00                                                 ;83B53C|A900    |      ;
     XBA                                                        ;83B53E|EB      |      ;
@@ -6102,7 +6102,7 @@ fGameEngine_LoadGame:
     LDX.W #$0000                                               ;83B643|A20000  |      ;
  
   - LDA.B [ptrUnknown0x72],Y                                   ;83B646|B772    |000072; loop chicken data
-    STA.L sChickenDataAddress,X                                ;83B648|9F86C27E|7EC286;
+    STA.L strcChickenData,X                                    ;83B648|9F86C27E|7EC286;
     INY                                                        ;83B64C|C8      |      ;
     INX                                                        ;83B64D|E8      |      ;
     CPX.W #$0068                                               ;83B64E|E06800  |      ;
@@ -6112,7 +6112,7 @@ fGameEngine_LoadGame:
     LDX.W #$0000                                               ;83B658|A20000  |      ;
  
   - LDA.B [ptrUnknown0x72],Y                                   ;83B65B|B772    |000072; loop cow data
-    STA.L sCowDataAddress,X                                    ;83B65D|9FC6C17E|7EC1C6;
+    STA.L strcCowData,X                                        ;83B65D|9FC6C17E|7EC1C6;
     INY                                                        ;83B661|C8      |      ;
     INX                                                        ;83B662|E8      |      ;
     CPX.W #$00C0                                               ;83B663|E0C000  |      ;
@@ -6349,16 +6349,16 @@ fGameEngine_SaveGame:
     STA.B [ptrUnknown0x72],Y                                   ;83B8D3|9772    |000072;
     SEP #$20                                                   ;83B8D5|E220    |      ;
     LDY.W #$0084                                               ;83B8D7|A08400  |      ;
-    LDA.L sShedItems                                           ;83B8DA|AF001F7F|7F1F00;
+    LDA.L strcShedItems                                        ;83B8DA|AF001F7F|7F1F00;
     STA.B [ptrUnknown0x72],Y                                   ;83B8DE|9772    |000072;
     LDY.W #$0085                                               ;83B8E0|A08500  |      ;
-    LDA.L sShedItems+1                                         ;83B8E3|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;83B8E3|AF011F7F|7F1F01;
     STA.B [ptrUnknown0x72],Y                                   ;83B8E7|9772    |000072;
     LDY.W #$0086                                               ;83B8E9|A08600  |      ;
-    LDA.L sShedItems+2                                         ;83B8EC|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;83B8EC|AF021F7F|7F1F02;
     STA.B [ptrUnknown0x72],Y                                   ;83B8F0|9772    |000072;
     LDY.W #$0087                                               ;83B8F2|A08700  |      ;
-    LDA.L sShedItems+3                                         ;83B8F5|AF031F7F|7F1F03;
+    LDA.L strcShedItems.row4                                   ;83B8F5|AF031F7F|7F1F03;
     STA.B [ptrUnknown0x72],Y                                   ;83B8F9|9772    |000072;
     SEP #$20                                                   ;83B8FB|E220    |      ;
     LDY.W #$0088                                               ;83B8FD|A08800  |      ;
@@ -6416,7 +6416,7 @@ fGameEngine_SaveGame:
     LDY.W #$0098                                               ;83B98D|A09800  |      ;
     LDX.W #$0000                                               ;83B990|A20000  |      ;
  
-  - LDA.L sChickenDataAddress,X                                ;83B993|BF86C27E|7EC286; loop chickendata
+  - LDA.L strcChickenData,X                                    ;83B993|BF86C27E|7EC286; loop chickendata
     STA.B [ptrUnknown0x72],Y                                   ;83B997|9772    |000072;
     INY                                                        ;83B999|C8      |      ;
     INX                                                        ;83B99A|E8      |      ;
@@ -6426,7 +6426,7 @@ fGameEngine_SaveGame:
     LDY.W #$0100                                               ;83B9A2|A00001  |      ;
     LDX.W #$0000                                               ;83B9A5|A20000  |      ;
  
-  - LDA.L sCowDataAddress,X                                    ;83B9A8|BFC6C17E|7EC1C6; loop cowdata
+  - LDA.L strcCowData,X                                        ;83B9A8|BFC6C17E|7EC1C6; loop cowdata
     STA.B [ptrUnknown0x72],Y                                   ;83B9AC|9772    |000072;
     INY                                                        ;83B9AE|C8      |      ;
     INX                                                        ;83B9AF|E8      |      ;
@@ -12562,13 +12562,13 @@ CODE_83E93D:
 CODE_83E955:
     SEP #$20                                                   ;83E955|E220    |      ;
     LDA.B #$3D                                                 ;83E957|A93D    |      ;
-    STA.L sShedItems                                           ;83E959|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;83E959|8F001F7F|7F1F00;
     LDA.B #$00                                                 ;83E95D|A900    |      ;
-    STA.L sShedItems+1                                         ;83E95F|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;83E95F|8F011F7F|7F1F01;
     LDA.B #$12                                                 ;83E963|A912    |      ;
-    STA.L sShedItems+2                                         ;83E965|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;83E965|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;83E969|A900    |      ;
-    STA.L sShedItems+3                                         ;83E96B|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;83E96B|8F031F7F|7F1F03;
     STZ.W nToolEquipped                                        ;83E96F|9C2109  |000921;
     STZ.W nToolSecond                                          ;83E972|9C2309  |000923;
     REP #$30                                                   ;83E975|C230    |      ;
@@ -12645,13 +12645,13 @@ CODE_83E9ED:
 CODE_83EA05:
     SEP #$20                                                   ;83EA05|E220    |      ;
     LDA.B #$0D                                                 ;83EA07|A90D    |      ;
-    STA.L sShedItems                                           ;83EA09|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;83EA09|8F001F7F|7F1F00;
     LDA.B #$64                                                 ;83EA0D|A964    |      ;
-    STA.L sShedItems+1                                         ;83EA0F|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;83EA0F|8F011F7F|7F1F01;
     LDA.B #$12                                                 ;83EA13|A912    |      ;
-    STA.L sShedItems+2                                         ;83EA15|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;83EA15|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;83EA19|A900    |      ;
-    STA.L sShedItems+3                                         ;83EA1B|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;83EA1B|8F031F7F|7F1F03;
     STZ.W nToolEquipped                                        ;83EA1F|9C2109  |000921;
     STZ.W nToolSecond                                          ;83EA22|9C2309  |000923;
     REP #$30                                                   ;83EA25|C230    |      ;

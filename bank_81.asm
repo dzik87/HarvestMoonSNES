@@ -749,9 +749,9 @@ subItemCarried_0x44:
     LDA.W $0976                                                ;81849E|AD7609  |000976;
     CMP.B #$FF                                                 ;8184A1|C9FF    |      ;
     BNE ++                                                     ;8184A3|D02F    |8184D4;
-    LDA.L sShedItems+1                                         ;8184A5|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;8184A5|AF011F7F|7F1F01;
     ORA.B #$08                                                 ;8184A9|0908    |      ;
-    STA.L sShedItems+1                                         ;8184AB|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;8184AB|8F011F7F|7F1F01;
     SEP #$20                                                   ;8184AF|E220    |      ;
     LDA.W nToolEquipped                                        ;8184B1|AD2109  |000921;
     CMP.B #$0C                                                 ;8184B4|C90C    |      ;
@@ -780,9 +780,9 @@ subItemCarried_0x45:
     LDA.W $0976                                                ;8184DA|AD7609  |000976;
     CMP.B #$FF                                                 ;8184DD|C9FF    |      ;
     BNE ++                                                     ;8184DF|D02F    |818510;
-    LDA.L sShedItems                                           ;8184E1|AF001F7F|7F1F00;
+    LDA.L strcShedItems                                        ;8184E1|AF001F7F|7F1F00;
     ORA.B #$10                                                 ;8184E5|0910    |      ;
-    STA.L sShedItems                                           ;8184E7|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;8184E7|8F001F7F|7F1F00;
     SEP #$20                                                   ;8184EB|E220    |      ;
     LDA.W nToolEquipped                                        ;8184ED|AD2109  |000921;
     CMP.B #$05                                                 ;8184F0|C905    |      ;
@@ -811,9 +811,9 @@ subItemCarried_0x46:
     LDA.W $0976                                                ;818516|AD7609  |000976;
     CMP.B #$FF                                                 ;818519|C9FF    |      ;
     BNE ++                                                     ;81851B|D02F    |81854C;
-    LDA.L sShedItems                                           ;81851D|AF001F7F|7F1F00;
+    LDA.L strcShedItems                                        ;81851D|AF001F7F|7F1F00;
     ORA.B #$20                                                 ;818521|0920    |      ;
-    STA.L sShedItems                                           ;818523|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;818523|8F001F7F|7F1F00;
     SEP #$20                                                   ;818527|E220    |      ;
     LDA.W nToolEquipped                                        ;818529|AD2109  |000921;
     CMP.B #$06                                                 ;81852C|C906    |      ;
@@ -842,9 +842,9 @@ subItemCarried_0x47:
     LDA.W $0976                                                ;818552|AD7609  |000976;
     CMP.B #$FF                                                 ;818555|C9FF    |      ;
     BNE ++                                                     ;818557|D02F    |818588;
-    LDA.L sShedItems                                           ;818559|AF001F7F|7F1F00;
+    LDA.L strcShedItems                                        ;818559|AF001F7F|7F1F00;
     ORA.B #$40                                                 ;81855D|0940    |      ;
-    STA.L sShedItems                                           ;81855F|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;81855F|8F001F7F|7F1F00;
     SEP #$20                                                   ;818563|E220    |      ;
     LDA.W nToolEquipped                                        ;818565|AD2109  |000921;
     CMP.B #$07                                                 ;818568|C907    |      ;
@@ -873,9 +873,9 @@ subItemCarried_0x48:
     LDA.W $0976                                                ;81858E|AD7609  |000976;
     CMP.B #$FF                                                 ;818591|C9FF    |      ;
     BNE ++                                                     ;818593|D02F    |8185C4;
-    LDA.L sShedItems                                           ;818595|AF001F7F|7F1F00;
+    LDA.L strcShedItems                                        ;818595|AF001F7F|7F1F00;
     ORA.B #$80                                                 ;818599|0980    |      ;
-    STA.L sShedItems                                           ;81859B|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;81859B|8F001F7F|7F1F00;
     SEP #$20                                                   ;81859F|E220    |      ;
     LDA.W nToolEquipped                                        ;8185A1|AD2109  |000921;
     CMP.B #$08                                                 ;8185A4|C908    |      ;
@@ -919,9 +919,9 @@ subItemCarried_0x4A:
     LDA.W $0976                                                ;8185E4|AD7609  |000976;
     CMP.B #$FF                                                 ;8185E7|C9FF    |      ;
     BNE +                                                      ;8185E9|D00A    |8185F5;
-    LDA.L sShedItems+1                                         ;8185EB|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;8185EB|AF011F7F|7F1F01;
     ORA.B #$10                                                 ;8185EF|0910    |      ;
-    STA.L sShedItems+1                                         ;8185F1|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;8185F1|8F011F7F|7F1F01;
  
   + RTS                                                        ;8185F5|60      |      ;
  
@@ -932,9 +932,9 @@ subItemCarried_0x4B:
     LDA.W $0976                                                ;8185FB|AD7609  |000976;
     CMP.B #$FF                                                 ;8185FE|C9FF    |      ;
     BNE +                                                      ;818600|D00A    |81860C;
-    LDA.L sShedItems+1                                         ;818602|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;818602|AF011F7F|7F1F01;
     ORA.B #$20                                                 ;818606|0920    |      ;
-    STA.L sShedItems+1                                         ;818608|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;818608|8F011F7F|7F1F01;
  
   + RTS                                                        ;81860C|60      |      ;
  
@@ -945,9 +945,9 @@ subItemCarried_0x4C:
     LDA.W $0976                                                ;818612|AD7609  |000976;
     CMP.B #$FF                                                 ;818615|C9FF    |      ;
     BNE +                                                      ;818617|D00A    |818623;
-    LDA.L sShedItems+1                                         ;818619|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;818619|AF011F7F|7F1F01;
     ORA.B #$40                                                 ;81861D|0940    |      ;
-    STA.L sShedItems+1                                         ;81861F|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;81861F|8F011F7F|7F1F01;
  
   + RTS                                                        ;818623|60      |      ;
  
@@ -958,12 +958,12 @@ subItemCarried_0x4D:
     LDA.W $0976                                                ;818629|AD7609  |000976;
     CMP.B #$FF                                                 ;81862C|C9FF    |      ;
     BNE ++                                                     ;81862E|D02A    |81865A;
-    LDA.L sShedItems+2                                         ;818630|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;818630|AF021F7F|7F1F02;
     ORA.B #$01                                                 ;818634|0901    |      ;
-    STA.L sShedItems+2                                         ;818636|8F021F7F|7F1F02;
-    LDA.L sShedItems                                           ;81863A|AF001F7F|7F1F00;
+    STA.L strcShedItems.row3                                   ;818636|8F021F7F|7F1F02;
+    LDA.L strcShedItems                                        ;81863A|AF001F7F|7F1F00;
     AND.B #$FE                                                 ;81863E|29FE    |      ;
-    STA.L sShedItems                                           ;818640|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;818640|8F001F7F|7F1F00;
     LDA.W nToolEquipped                                        ;818644|AD2109  |000921;
     CMP.B #$01                                                 ;818647|C901    |      ;
     BNE +                                                      ;818649|D003    |81864E;
@@ -984,12 +984,12 @@ subItemCarried_0x4E:
     LDA.W $0976                                                ;818660|AD7609  |000976;
     CMP.B #$FF                                                 ;818663|C9FF    |      ;
     BNE ++                                                     ;818665|D02A    |818691;
-    LDA.L sShedItems+2                                         ;818667|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;818667|AF021F7F|7F1F02;
     ORA.B #$02                                                 ;81866B|0902    |      ;
-    STA.L sShedItems+2                                         ;81866D|8F021F7F|7F1F02;
-    LDA.L sShedItems                                           ;818671|AF001F7F|7F1F00;
+    STA.L strcShedItems.row3                                   ;81866D|8F021F7F|7F1F02;
+    LDA.L strcShedItems                                        ;818671|AF001F7F|7F1F00;
     AND.B #$FD                                                 ;818675|29FD    |      ;
-    STA.L sShedItems                                           ;818677|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;818677|8F001F7F|7F1F00;
     LDA.W nToolEquipped                                        ;81867B|AD2109  |000921;
     CMP.B #$02                                                 ;81867E|C902    |      ;
     BNE +                                                      ;818680|D003    |818685;
@@ -1010,12 +1010,12 @@ subItemCarried_0x4F:
     LDA.W $0976                                                ;818697|AD7609  |000976;
     CMP.B #$FF                                                 ;81869A|C9FF    |      ;
     BNE ++                                                     ;81869C|D02A    |8186C8;
-    LDA.L sShedItems+2                                         ;81869E|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;81869E|AF021F7F|7F1F02;
     ORA.B #$04                                                 ;8186A2|0904    |      ;
-    STA.L sShedItems+2                                         ;8186A4|8F021F7F|7F1F02;
-    LDA.L sShedItems                                           ;8186A8|AF001F7F|7F1F00;
+    STA.L strcShedItems.row3                                   ;8186A4|8F021F7F|7F1F02;
+    LDA.L strcShedItems                                        ;8186A8|AF001F7F|7F1F00;
     AND.B #$FB                                                 ;8186AC|29FB    |      ;
-    STA.L sShedItems                                           ;8186AE|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;8186AE|8F001F7F|7F1F00;
     LDA.W nToolEquipped                                        ;8186B2|AD2109  |000921;
     CMP.B #$03                                                 ;8186B5|C903    |      ;
     BNE +                                                      ;8186B7|D003    |8186BC;
@@ -1036,12 +1036,12 @@ subItemCarried_0x50:
     LDA.W $0976                                                ;8186CE|AD7609  |000976;
     CMP.B #$FF                                                 ;8186D1|C9FF    |      ;
     BNE ++                                                     ;8186D3|D02A    |8186FF;
-    LDA.L sShedItems+2                                         ;8186D5|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;8186D5|AF021F7F|7F1F02;
     ORA.B #$08                                                 ;8186D9|0908    |      ;
-    STA.L sShedItems+2                                         ;8186DB|8F021F7F|7F1F02;
-    LDA.L sShedItems                                           ;8186DF|AF001F7F|7F1F00;
+    STA.L strcShedItems.row3                                   ;8186DB|8F021F7F|7F1F02;
+    LDA.L strcShedItems                                        ;8186DF|AF001F7F|7F1F00;
     AND.B #$F7                                                 ;8186E3|29F7    |      ;
-    STA.L sShedItems                                           ;8186E5|8F001F7F|7F1F00;
+    STA.L strcShedItems                                        ;8186E5|8F001F7F|7F1F00;
     LDA.W nToolEquipped                                        ;8186E9|AD2109  |000921;
     CMP.B #$04                                                 ;8186EC|C904    |      ;
     BNE +                                                      ;8186EE|D003    |8186F3;
@@ -1062,12 +1062,12 @@ subItemCarried_0x51:
     LDA.W $0976                                                ;818705|AD7609  |000976;
     CMP.B #$FF                                                 ;818708|C9FF    |      ;
     BNE ++                                                     ;81870A|D02A    |818736;
-    LDA.L sShedItems+2                                         ;81870C|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;81870C|AF021F7F|7F1F02;
     ORA.B #$10                                                 ;818710|0910    |      ;
-    STA.L sShedItems+2                                         ;818712|8F021F7F|7F1F02;
-    LDA.L sShedItems+1                                         ;818716|AF011F7F|7F1F01;
+    STA.L strcShedItems.row3                                   ;818712|8F021F7F|7F1F02;
+    LDA.L strcShedItems.row2                                   ;818716|AF011F7F|7F1F01;
     AND.B #$7F                                                 ;81871A|297F    |      ;
-    STA.L sShedItems+1                                         ;81871C|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;81871C|8F011F7F|7F1F01;
     LDA.W nToolEquipped                                        ;818720|AD2109  |000921;
     CMP.B #$10                                                 ;818723|C910    |      ;
     BNE +                                                      ;818725|D003    |81872A;
@@ -1088,9 +1088,9 @@ subItemCarried_0x52:
     LDA.W $0976                                                ;81873C|AD7609  |000976;
     CMP.B #$FF                                                 ;81873F|C9FF    |      ;
     BNE +                                                      ;818741|D00A    |81874D;
-    LDA.L sShedItems+1                                         ;818743|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;818743|AF011F7F|7F1F01;
     ORA.B #$01                                                 ;818747|0901    |      ;
-    STA.L sShedItems+1                                         ;818749|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;818749|8F011F7F|7F1F01;
  
   + RTS                                                        ;81874D|60      |      ;
  
@@ -1101,9 +1101,9 @@ subItemCarried_0x53:
     LDA.W $0976                                                ;818753|AD7609  |000976;
     CMP.B #$FF                                                 ;818756|C9FF    |      ;
     BNE +                                                      ;818758|D00A    |818764;
-    LDA.L sShedItems+1                                         ;81875A|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;81875A|AF011F7F|7F1F01;
     ORA.B #$02                                                 ;81875E|0902    |      ;
-    STA.L sShedItems+1                                         ;818760|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;818760|8F011F7F|7F1F01;
  
   + RTS                                                        ;818764|60      |      ;
  
@@ -1114,9 +1114,9 @@ subItemCarried_0x54:
     LDA.W $0976                                                ;81876A|AD7609  |000976;
     CMP.B #$FF                                                 ;81876D|C9FF    |      ;
     BNE +                                                      ;81876F|D00F    |818780;
-    LDA.L sShedItems+3                                         ;818771|AF031F7F|7F1F03;
+    LDA.L strcShedItems.row4                                   ;818771|AF031F7F|7F1F03;
     ORA.B #$01                                                 ;818775|0901    |      ;
-    STA.L sShedItems+3                                         ;818777|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;818777|8F031F7F|7F1F03;
     LDA.B #$0C                                                 ;81877B|A90C    |      ;
     STA.W nAmountLeft_ChickenFood                              ;81877D|8D2D09  |00092D;
  
@@ -1129,9 +1129,9 @@ subItemCarried_0x55:
     LDA.W $0976                                                ;818786|AD7609  |000976;
     CMP.B #$FF                                                 ;818789|C9FF    |      ;
     BNE +                                                      ;81878B|D00F    |81879C;
-    LDA.L sShedItems+3                                         ;81878D|AF031F7F|7F1F03;
+    LDA.L strcShedItems.row4                                   ;81878D|AF031F7F|7F1F03;
     ORA.B #$02                                                 ;818791|0902    |      ;
-    STA.L sShedItems+3                                         ;818793|8F031F7F|7F1F03;
+    STA.L strcShedItems.row4                                   ;818793|8F031F7F|7F1F03;
     LDA.B #$0C                                                 ;818797|A90C    |      ;
     STA.W nAmountLeft_CowFood                                  ;818799|8D2C09  |00092C;
  
@@ -1204,9 +1204,9 @@ fUnknown_8187C3:
     REP #$20                                                   ;8187FF|C220    |      ;
     TAX                                                        ;818801|AA      |      ;
     SEP #$20                                                   ;818802|E220    |      ;
-    LDA.L sShedItems,X                                         ;818804|BF001F7F|7F1F00;
+    LDA.L strcShedItems,X                                      ;818804|BF001F7F|7F1F00;
     AND.B n8TempVar1                                           ;818808|2592    |000092;
-    STA.L sShedItems,X                                         ;81880A|9F001F7F|7F1F00;
+    STA.L strcShedItems,X                                      ;81880A|9F001F7F|7F1F00;
     REP #$30                                                   ;81880E|C230    |      ;
     LDA.W #$0000                                               ;818810|A90000  |      ;
     STA.B nPlayerAction                                        ;818813|85D4    |0000D4;
@@ -4964,9 +4964,9 @@ fUnknown_81A94A:
     LDA.L nCarriedItemTable_81BE0F,X                           ;81A9D3|BF0FBE81|81BE0F;
     STA.B n8TempVar1                                           ;81A9D7|8592    |000092; A -> $92
     TYX                                                        ;81A9D9|BB      |      ;
-    LDA.L sShedItems,X                                         ;81A9DA|BF001F7F|7F1F00;
+    LDA.L strcShedItems,X                                      ;81A9DA|BF001F7F|7F1F00;
     ORA.B n8TempVar1                                           ;81A9DE|0592    |000092;
-    STA.L sShedItems,X                                         ;81A9E0|9F001F7F|7F1F00;
+    STA.L strcShedItems,X                                      ;81A9E0|9F001F7F|7F1F00;
  
 .return:
     RTL                                                        ;81A9E4|6B      |      ;
@@ -6429,7 +6429,7 @@ fUnknown_81B2BB:
     CMP.W #$0001                                               ;81B333|C90100  |      ;
     BEQ .label6                                                ;81B336|F00C    |81B344;
     SEP #$20                                                   ;81B338|E220    |      ;
-    LDA.L sShedItems,X                                         ;81B33A|BF001F7F|7F1F00;
+    LDA.L strcShedItems,X                                      ;81B33A|BF001F7F|7F1F00;
     AND.B n8TempVar1                                           ;81B33E|2592    |000092;
     BNE .return                                                ;81B340|D020    |81B362;
     BRA .label7                                                ;81B342|800A    |81B34E;
@@ -6437,7 +6437,7 @@ fUnknown_81B2BB:
  
 .label6:
     SEP #$20                                                   ;81B344|E220    |      ;
-    LDA.L sShedItems,X                                         ;81B346|BF001F7F|7F1F00;
+    LDA.L strcShedItems,X                                      ;81B346|BF001F7F|7F1F00;
     AND.B n8TempVar1                                           ;81B34A|2592    |000092;
     BEQ .return                                                ;81B34C|F014    |81B362;
  
@@ -13067,7 +13067,7 @@ subPlayerInteraction81D593_0x42:
 .case1:
     SEP #$20                                                   ;81E732|E220    |      ;
     LDX.W #$030C                                               ;81E734|A20C03  |      ;
-    LDA.L sShedItems+1                                         ;81E737|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;81E737|AF011F7F|7F1F01;
     AND.B #$04                                                 ;81E73B|2904    |      ;
     BNE +                                                      ;81E73D|D00A    |81E749;
     LDA.W nToolEquipped                                        ;81E73F|AD2109  |000921;
@@ -13100,9 +13100,9 @@ subPlayerInteraction81D593_0x42:
     STA.W nPlayerInteractionArg1                               ;81E772|8D6F09  |00096F;
     LDA.B #$01                                                 ;81E775|A901    |      ;
     STA.W nNameDestinationId                                   ;81E777|8D9F09  |00099F;
-    LDA.L sShedItems+1                                         ;81E77A|AF011F7F|7F1F01;
+    LDA.L strcShedItems.row2                                   ;81E77A|AF011F7F|7F1F01;
     ORA.B #$04                                                 ;81E77E|0904    |      ;
-    STA.L sShedItems+1                                         ;81E780|8F011F7F|7F1F01;
+    STA.L strcShedItems.row2                                   ;81E780|8F011F7F|7F1F01;
     REP #$20                                                   ;81E784|C220    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;81E786|AD9601  |000196;
     ORA.W #$2000                                               ;81E789|090020  |      ;
@@ -13594,9 +13594,9 @@ subPlayerInteraction81D593_0x43:
     LDA.B #$04                                                 ;81EB64|A904    |      ;
     STA.W nPlayerInteractionArg1                               ;81EB66|8D6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;81EB69|9C7009  |000970;
-    LDA.L sShedItems+2                                         ;81EB6C|AF021F7F|7F1F02;
+    LDA.L strcShedItems.row3                                   ;81EB6C|AF021F7F|7F1F02;
     ORA.B #$20                                                 ;81EB70|0920    |      ;
-    STA.L sShedItems+2                                         ;81EB72|8F021F7F|7F1F02;
+    STA.L strcShedItems.row3                                   ;81EB72|8F021F7F|7F1F02;
     REP #$20                                                   ;81EB76|C220    |      ;
     LDA.W #$FFCE                                               ;81EB78|A9CEFF  |      ;
     JSL.L fGameEngine_AddHappiness                             ;81EB7B|2282B283|83B282;
