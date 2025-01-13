@@ -19,7 +19,7 @@
     nUnknown0x95 = $000095; !^ n8 ^!
     ptrUnknown0xAD = $0000AD; !^ ptr24 ^!
     ptrBank86_87Data = $0000B3; !^ ptr24 ^!
-    ptrAIActionArg0xC9 = $0000C9; !^ ptr24 ^!
+    ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
     nPlayerAction = $0000D4; !^ n16 ^!
