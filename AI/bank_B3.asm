@@ -311,1001 +311,628 @@ DATA_B380D8:
     dl $0000F4,$0000F4,$0000F4,$0000F4                         ;B38BAC|        |      ;
  
 pScripting_B38BB8:
-    dw DATA24_B38CC8                                           ;B38BB8|        |B38CC8; 0x88 * [ptr16]
-    dw DATA24_B38CD0                                           ;B38BBA|        |B38CD0;
-    dw DATA24_B38CDE                                           ;B38BBC|        |B38CDE;
-    dw DATA24_B38CEB                                           ;B38BBE|        |B38CEB;
-    dw DATA24_B38CF8                                           ;B38BC0|        |B38CF8;
-    dw DATA24_B38D05                                           ;B38BC2|        |B38D05;
-    dw DATA24_B38D12                                           ;B38BC4|        |B38D12;
-    dw DATA24_B38D1F                                           ;B38BC6|        |B38D1F;
-    dw DATA24_B38D2C                                           ;B38BC8|        |B38D2C;
-    dw DATA24_B38D39                                           ;B38BCA|        |B38D39;
-    dw DATA24_B38D46                                           ;B38BCC|        |B38D46;
-    dw DATA24_B38D50                                           ;B38BCE|        |B38D50;
-    dw DATA24_B38D5A                                           ;B38BD0|        |B38D5A;
-    dw DATA24_B38D67                                           ;B38BD2|        |B38D67;
-    dw DATA24_B38D74                                           ;B38BD4|        |B38D74;
-    dw DATA24_B38D81                                           ;B38BD6|        |B38D81;
-    dw DATA24_B38D8E                                           ;B38BD8|        |B38D8E;
-    dw DATA24_B38D9B                                           ;B38BDA|        |B38D9B;
-    dw DATA24_B38DB0                                           ;B38BDC|        |B38DB0;
-    dw DATA24_B38DBC                                           ;B38BDE|        |B38DBC;
-    dw DATA24_B38DD1                                           ;B38BE0|        |B38DD1;
-    dw DATA24_B38DE5                                           ;B38BE2|        |B38DE5;
-    dw DATA24_B38DF3                                           ;B38BE4|        |B38DF3;
-    dw DATA24_B38DFC                                           ;B38BE6|        |B38DFC;
-    dw DATA24_B38E09                                           ;B38BE8|        |B38E09;
-    dw DATA24_B38E1E                                           ;B38BEA|        |B38E1E;
-    dw DATA24_B38E33                                           ;B38BEC|        |B38E33;
-    dw DATA24_B38E48                                           ;B38BEE|        |B38E48;
-    dw DATA24_B38E5D                                           ;B38BF0|        |B38E5D;
-    dw DATA24_B38E72                                           ;B38BF2|        |B38E72;
-    dw DATA24_B38E80                                           ;B38BF4|        |B38E80;
-    dw DATA24_B38E94                                           ;B38BF6|        |B38E94;
-    dw DATA24_B38E9C                                           ;B38BF8|        |B38E9C;
-    dw DATA24_B38EAA                                           ;B38BFA|        |B38EAA;
-    dw DATA24_B38ECC                                           ;B38BFC|        |B38ECC;
-    dw DATA24_B38EE0                                           ;B38BFE|        |B38EE0;
-    dw DATA24_B38EEF                                           ;B38C00|        |B38EEF;
-    dw DATA24_B38F03                                           ;B38C02|        |B38F03;
-    dw DATA24_B38F11                                           ;B38C04|        |B38F11;
-    dw DATA24_B38F38                                           ;B38C06|        |B38F38;
-    dw DATA24_B38F43                                           ;B38C08|        |B38F43;
-    dw DATA24_B38F50                                           ;B38C0A|        |B38F50;
-    dw DATA24_B38F5D                                           ;B38C0C|        |B38F5D;
-    dw DATA24_B38F6A                                           ;B38C0E|        |B38F6A;
-    dw DATA24_B38F77                                           ;B38C10|        |B38F77;
-    dw DATA24_B38F85                                           ;B38C12|        |B38F85;
-    dw DATA24_B38F99                                           ;B38C14|        |B38F99;
-    dw DATA24_B38FA2                                           ;B38C16|        |B38FA2;
-    dw DATA24_B38FAF                                           ;B38C18|        |B38FAF;
-    dw DATA24_B38FC3                                           ;B38C1A|        |B38FC3;
-    dw DATA24_B38FD0                                           ;B38C1C|        |B38FD0;
-    dw DATA24_B38FDB                                           ;B38C1E|        |B38FDB;
-    dw DATA24_B38FE8                                           ;B38C20|        |B38FE8;
-    dw DATA24_B38FF5                                           ;B38C22|        |B38FF5;
-    dw DATA24_B39001                                           ;B38C24|        |B39001;
-    dw DATA24_B3900F                                           ;B38C26|        |B3900F;
-    dw DATA24_B3901D                                           ;B38C28|        |B3901D;
-    dw DATA24_B39031                                           ;B38C2A|        |B39031;
-    dw DATA24_B39045                                           ;B38C2C|        |B39045;
-    dw DATA24_B3904E                                           ;B38C2E|        |B3904E;
-    dw DATA24_B39057                                           ;B38C30|        |B39057;
-    dw DATA24_B3905D                                           ;B38C32|        |B3905D;
-    dw DATA24_B39063                                           ;B38C34|        |B39063;
-    dw DATA24_B39069                                           ;B38C36|        |B39069;
-    dw DATA24_B3906F                                           ;B38C38|        |B3906F;
-    dw DATA24_B39075                                           ;B38C3A|        |B39075;
-    dw DATA24_B3907B                                           ;B38C3C|        |B3907B;
-    dw DATA24_B39081                                           ;B38C3E|        |B39081;
-    dw DATA24_B39087                                           ;B38C40|        |B39087;
-    dw DATA24_B3908D                                           ;B38C42|        |B3908D;
-    dw DATA24_B39093                                           ;B38C44|        |B39093;
-    dw DATA24_B39099                                           ;B38C46|        |B39099;
-    dw DATA24_B3909F                                           ;B38C48|        |B3909F;
-    dw DATA24_B390A5                                           ;B38C4A|        |B390A5;
-    dw DATA24_B390AB                                           ;B38C4C|        |B390AB;
-    dw DATA24_B390B1                                           ;B38C4E|        |B390B1;
-    dw DATA24_B390B7                                           ;B38C50|        |B390B7;
-    dw DATA24_B390BD                                           ;B38C52|        |B390BD;
-    dw DATA24_B390C3                                           ;B38C54|        |B390C3;
-    dw DATA24_B390C9                                           ;B38C56|        |B390C9;
-    dw DATA24_B390CF                                           ;B38C58|        |B390CF;
-    dw DATA24_B390D5                                           ;B38C5A|        |B390D5;
-    dw DATA24_B390DB                                           ;B38C5C|        |B390DB;
-    dw DATA24_B390E1                                           ;B38C5E|        |B390E1;
-    dw DATA24_B390E7                                           ;B38C60|        |B390E7;
-    dw DATA24_B390ED                                           ;B38C62|        |B390ED;
-    dw DATA24_B390F3                                           ;B38C64|        |B390F3;
-    dw DATA24_B390F9                                           ;B38C66|        |B390F9;
-    dw DATA24_B390FF                                           ;B38C68|        |B390FF;
-    dw DATA24_B39105                                           ;B38C6A|        |B39105;
-    dw DATA24_B3910B                                           ;B38C6C|        |B3910B;
-    dw DATA24_B39111                                           ;B38C6E|        |B39111;
-    dw DATA24_B39117                                           ;B38C70|        |B39117;
-    dw DATA24_B3911D                                           ;B38C72|        |B3911D;
-    dw DATA24_B39123                                           ;B38C74|        |B39123;
-    dw DATA24_B39129                                           ;B38C76|        |B39129;
-    dw DATA24_B3913A                                           ;B38C78|        |B3913A;
-    dw DATA24_B39147                                           ;B38C7A|        |B39147;
-    dw DATA24_B39154                                           ;B38C7C|        |B39154;
-    dw DATA24_B39161                                           ;B38C7E|        |B39161;
-    dw DATA24_B3916E                                           ;B38C80|        |B3916E;
-    dw DATA24_B3917B                                           ;B38C82|        |B3917B;
-    dw DATA24_B39188                                           ;B38C84|        |B39188;
-    dw DATA24_B39195                                           ;B38C86|        |B39195;
-    dw DATA24_B391A2                                           ;B38C88|        |B391A2;
-    dw DATA24_B391AC                                           ;B38C8A|        |B391AC;
-    dw DATA24_B391B6                                           ;B38C8C|        |B391B6;
-    dw DATA24_B391C0                                           ;B38C8E|        |B391C0;
-    dw DATA24_B391CA                                           ;B38C90|        |B391CA;
-    dw DATA24_B391D0                                           ;B38C92|        |B391D0;
-    dw DATA24_B391D6                                           ;B38C94|        |B391D6;
-    dw DATA24_B391DC                                           ;B38C96|        |B391DC;
-    dw DATA24_B391E2                                           ;B38C98|        |B391E2;
-    dw DATA24_B391E8                                           ;B38C9A|        |B391E8;
-    dw DATA24_B391EE                                           ;B38C9C|        |B391EE;
-    dw DATA24_B391F4                                           ;B38C9E|        |B391F4;
-    dw DATA24_B391FA                                           ;B38CA0|        |B391FA;
-    dw DATA24_B39200                                           ;B38CA2|        |B39200;
-    dw DATA24_B39206                                           ;B38CA4|        |B39206;
-    dw DATA24_B3920C                                           ;B38CA6|        |B3920C;
-    dw DATA24_B39212                                           ;B38CA8|        |B39212;
-    dw DATA24_B39218                                           ;B38CAA|        |B39218;
-    dw DATA24_B3921E                                           ;B38CAC|        |B3921E;
-    dw DATA24_B39224                                           ;B38CAE|        |B39224;
-    dw DATA24_B3922A                                           ;B38CB0|        |B3922A;
-    dw DATA24_B39241                                           ;B38CB2|        |B39241;
-    dw DATA24_B39250                                           ;B38CB4|        |B39250;
-    dw DATA24_B392B3                                           ;B38CB6|        |B392B3;
-    dw DATA24_B392D0                                           ;B38CB8|        |B392D0;
-    dw DATA24_B392D6                                           ;B38CBA|        |B392D6;
-    dw DATA24_B392DF                                           ;B38CBC|        |B392DF;
-    dw DATA24_B392EC                                           ;B38CBE|        |B392EC;
-    dw DATA24_B392F9                                           ;B38CC0|        |B392F9;
-    dw DATA24_B39306                                           ;B38CC2|        |B39306;
-    dw DATA24_B39313                                           ;B38CC4|        |B39313;
-    dw DATA24_B39313                                           ;B38CC6|        |B39313;
- 
-DATA24_B38CC8:
-    dl $815C2B                                                 ;B38CC8|        |      ;
-    db $00                                                     ;B38CCB|        |      ;
- 
-DATA8_B38CCC:
-    db $30,$12                                                 ;B38CCC|        |      ;
-    dw DATA8_B38CCC                                            ;B38CCE|        |B38CCC;
- 
-DATA24_B38CD0:
-    dl $81502B                                                 ;B38CD0|        |      ;
-    db $00,$2E,$01,$50,$81,$10,$4C                             ;B38CD3|        |      ;
- 
-DATA8_B38CDA:
-    db $30,$12                                                 ;B38CDA|        |      ;
-    dw DATA8_B38CDA                                            ;B38CDC|        |B38CDA;
- 
-DATA24_B38CDE:
-    dl $81442B                                                 ;B38CDE|        |      ;
-    db $00                                                     ;B38CE1|        |      ;
- 
-DATA8_B38CE2:
-    db $2E,$01,$44,$81,$10                                     ;B38CE2|        |      ;
- 
-DATA8_B38CE7:
-    db $30,$12                                                 ;B38CE7|        |      ;
-    dw DATA8_B38CE7                                            ;B38CE9|        |B38CE7;
- 
-DATA24_B38CEB:
-    dl $86C02B                                                 ;B38CEB|        |      ;
-    db $00                                                     ;B38CEE|        |      ;
- 
-DATA8_B38CEF:
-    db $2E,$01,$CC,$86,$10                                     ;B38CEF|        |      ;
- 
-DATA8_B38CF4:
-    db $31,$12                                                 ;B38CF4|        |      ;
-    dw DATA8_B38CF4                                            ;B38CF6|        |B38CF4;
- 
-DATA24_B38CF8:
-    dl $86A82B                                                 ;B38CF8|        |      ;
-    db $00                                                     ;B38CFB|        |      ;
- 
-DATA8_B38CFC:
-    db $2E,$01,$B4,$86,$10                                     ;B38CFC|        |      ;
- 
-DATA8_B38D01:
-    db $31,$12                                                 ;B38D01|        |      ;
-    dw DATA8_B38D01                                            ;B38D03|        |B38D01;
- 
-DATA24_B38D05:
-    dl $80FC2B                                                 ;B38D05|        |      ;
-    db $00                                                     ;B38D08|        |      ;
- 
-DATA8_B38D09:
-    db $2E,$01,$08,$81,$10                                     ;B38D09|        |      ;
- 
-DATA8_B38D0E:
-    db $31,$12                                                 ;B38D0E|        |      ;
-    dw DATA8_B38D0E                                            ;B38D10|        |B38D0E;
- 
-DATA24_B38D12:
-    dl $87082B                                                 ;B38D12|        |      ;
-    db $00                                                     ;B38D15|        |      ;
- 
-DATA8_B38D16:
-    db $2E,$01,$14,$87,$10                                     ;B38D16|        |      ;
- 
-DATA8_B38D1B:
-    db $31,$12                                                 ;B38D1B|        |      ;
-    dw DATA8_B38D1B                                            ;B38D1D|        |B38D1B;
- 
-DATA24_B38D1F:
-    dl $86D82B                                                 ;B38D1F|        |      ;
-    db $00                                                     ;B38D22|        |      ;
- 
-DATA8_B38D23:
-    db $2E,$02,$E4,$86,$10                                     ;B38D23|        |      ;
- 
-DATA8_B38D28:
-    db $31,$12                                                 ;B38D28|        |      ;
-    dw DATA8_B38D28                                            ;B38D2A|        |B38D28;
- 
-DATA24_B38D2C:
-    dl $86F02B                                                 ;B38D2C|        |      ;
-    db $00                                                     ;B38D2F|        |      ;
- 
-DATA8_B38D30:
-    db $2E,$02,$FC,$86,$10                                     ;B38D30|        |      ;
- 
-DATA8_B38D35:
-    db $31,$12                                                 ;B38D35|        |      ;
-    dw DATA8_B38D35                                            ;B38D37|        |B38D35;
- 
-DATA24_B38D39:
-    dl $872C2B                                                 ;B38D39|        |      ;
-    db $00,$2E,$01,$2C,$87,$10                                 ;B38D3C|        |      ;
- 
-DATA8_B38D42:
-    db $31,$12                                                 ;B38D42|        |      ;
-    dw DATA8_B38D42                                            ;B38D44|        |B38D42;
- 
-DATA24_B38D46:
-    dl $019D1B                                                 ;B38D46|        |      ;
-    db $01,$13,$3C,$00,$12                                     ;B38D49|        |      ;
-    dw DATA8_B38D09                                            ;B38D4E|        |B38D09;
- 
-DATA24_B38D50:
-    dl $019D1B                                                 ;B38D50|        |      ;
-    db $00,$13,$3C,$00,$12                                     ;B38D53|        |      ;
-    dw DATA8_B38D09                                            ;B38D58|        |B38D09;
- 
-DATA24_B38D5A:
-    dl $01A41B                                                 ;B38D5A|        |      ;
-    db $00,$13,$3C,$00,$2F,$FC,$80,$12                         ;B38D5D|        |      ;
-    dw DATA8_B38D09                                            ;B38D65|        |B38D09;
- 
-DATA24_B38D67:
-    dl $01A81B                                                 ;B38D67|        |      ;
-    db $00,$13,$3C,$00,$2F,$FC,$80,$12                         ;B38D6A|        |      ;
-    dw DATA8_B38D09                                            ;B38D72|        |B38D09;
- 
-DATA24_B38D74:
-    dl $01911B                                                 ;B38D74|        |      ;
-    db $01,$13,$3C,$00,$2F,$FC,$80,$12                         ;B38D77|        |      ;
-    dw DATA8_B38D09                                            ;B38D7F|        |B38D09;
- 
-DATA24_B38D81:
-    dl $01911B                                                 ;B38D81|        |      ;
-    db $00,$13,$3C,$00,$2F,$FC,$80,$12                         ;B38D84|        |      ;
-    dw DATA8_B38D09                                            ;B38D8C|        |B38D09;
- 
-DATA24_B38D8E:
-    dl $812C2B                                                 ;B38D8E|        |      ;
-    db $00,$2E,$01,$38,$81,$10                                 ;B38D91|        |      ;
- 
-DATA8_B38D97:
-    db $35,$12                                                 ;B38D97|        |      ;
-    dw DATA8_B38D97                                            ;B38D99|        |B38D97;
- 
-DATA24_B38D9B:
-    dl $81142B                                                 ;B38D9B|        |      ;
-    db $00                                                     ;B38D9E|        |      ;
- 
-DATA8_B38D9F:
-    db $2E,$01,$20,$81,$10,$12                                 ;B38D9F|        |      ;
-    dw DATA8_B38DAC                                            ;B38DA5|        |B38DAC;
- 
-DATA8_B38DA7:
-    db $2E,$01,$48,$89,$10                                     ;B38DA7|        |      ;
- 
-DATA8_B38DAC:
-    db $36,$12                                                 ;B38DAC|        |      ;
-    dw DATA8_B38DAC                                            ;B38DAE|        |B38DAC;
- 
-DATA24_B38DB0:
-    dl $811449                                                 ;B38DB0|        |      ;
-    db $2E,$01,$20,$81,$10                                     ;B38DB3|        |      ;
- 
-DATA8_B38DB8:
-    db $36,$12                                                 ;B38DB8|        |      ;
-    dw DATA8_B38DB8                                            ;B38DBA|        |B38DB8;
- 
-DATA24_B38DBC:
-    dl $87682B                                                 ;B38DBC|        |      ;
-    db $00                                                     ;B38DBF|        |      ;
- 
-DATA8_B38DC0:
-    db $2E,$01,$74,$87,$10,$12                                 ;B38DC0|        |      ;
-    dw DATA8_B38DCD                                            ;B38DC6|        |B38DCD;
- 
-DATA8_B38DC8:
-    db $2E,$01,$80,$87,$10                                     ;B38DC8|        |      ;
- 
-DATA8_B38DCD:
-    db $35,$12                                                 ;B38DCD|        |      ;
-    dw DATA8_B38DCD                                            ;B38DCF|        |B38DCD;
- 
-DATA24_B38DD1:
-    dl $812C49                                                 ;B38DD1|        |      ;
- 
-DATA8_B38DD4:
-    db $2E,$01,$38,$81,$10,$12                                 ;B38DD4|        |      ;
-    dw DATA8_B38DE1                                            ;B38DDA|        |B38DE1;
- 
-DATA8_B38DDC:
-    db $2E,$01,$F0,$89,$10                                     ;B38DDC|        |      ;
- 
-DATA8_B38DE1:
-    db $35,$12                                                 ;B38DE1|        |      ;
-    dw DATA8_B38DE1                                            ;B38DE3|        |B38DE1;
- 
-DATA24_B38DE5:
-    dl $00481A                                                 ;B38DE5|        |      ;
-    db $58,$00,$BC,$87,$00                                     ;B38DE8|        |      ;
- 
-DATA8_B38DED:
-    db $13,$01,$00,$12                                         ;B38DED|        |      ;
-    dw DATA8_B38DED                                            ;B38DF1|        |B38DED;
- 
-DATA24_B38DF3:
-    dl $01191B                                                 ;B38DF3|        |      ;
-    db $00,$13,$20,$00,$37,$10                                 ;B38DF6|        |      ;
- 
-DATA24_B38DFC:
-    dl $89002B                                                 ;B38DFC|        |      ;
-    db $00,$2E,$01,$CC,$86,$10                                 ;B38DFF|        |      ;
- 
-DATA8_B38E05:
-    db $31,$12                                                 ;B38E05|        |      ;
-    dw DATA8_B38E05                                            ;B38E07|        |B38E05;
- 
-DATA24_B38E09:
-    dl $00681A                                                 ;B38E09|        |      ;
-    db $68,$01,$14,$81,$00,$22,$20,$20,$01,$20,$81,$10         ;B38E0C|        |      ;
- 
-DATA8_B38E18:
-    db $13,$01,$00,$12                                         ;B38E18|        |      ;
-    dw DATA8_B38E18                                            ;B38E1C|        |B38E18;
- 
-DATA24_B38E1E:
-    dl $00F81A                                                 ;B38E1E|        |      ;
-    db $D8,$01,$2C,$81,$00,$22,$20,$20,$01,$38,$81,$10         ;B38E21|        |      ;
- 
-DATA8_B38E2D:
-    db $13,$01,$00,$12                                         ;B38E2D|        |      ;
-    dw DATA8_B38E2D                                            ;B38E31|        |B38E2D;
- 
-DATA24_B38E33:
-    dl $01081A                                                 ;B38E33|        |      ;
-    db $68,$01,$FC,$80,$00,$22,$20,$20,$01,$08,$81,$10         ;B38E36|        |      ;
- 
-DATA8_B38E42:
-    db $13,$01,$00,$12                                         ;B38E42|        |      ;
-    dw DATA8_B38E42                                            ;B38E46|        |B38E42;
- 
-DATA24_B38E48:
-    dl $01E81A                                                 ;B38E48|        |      ;
-    db $88,$01,$A8,$86,$00,$22,$20,$20,$01,$B4,$86,$10         ;B38E4B|        |      ;
- 
-DATA8_B38E57:
-    db $13,$01,$00,$12                                         ;B38E57|        |      ;
-    dw DATA8_B38E57                                            ;B38E5B|        |B38E57;
- 
-DATA24_B38E5D:
-    dl $00B81A                                                 ;B38E5D|        |      ;
-    db $B8,$01,$C0,$86,$00,$22,$20,$20,$01,$CC,$86,$10         ;B38E60|        |      ;
- 
-DATA8_B38E6C:
-    db $13,$01,$00,$12                                         ;B38E6C|        |      ;
-    dw DATA8_B38E6C                                            ;B38E70|        |B38E6C;
- 
-DATA24_B38E72:
-    dl $00881A                                                 ;B38E72|        |      ;
-    db $68,$01,$18,$83,$01                                     ;B38E75|        |      ;
- 
-DATA8_B38E7A:
-    db $13,$01,$00,$12                                         ;B38E7A|        |      ;
-    dw DATA8_B38E7A                                            ;B38E7E|        |B38E7A;
- 
-DATA24_B38E80:
-    dl $02971B                                                 ;B38E80|        |      ;
-    db $00,$0D,$00,$01,$40,$01,$1B,$9B,$02,$00,$0D,$FF         ;B38E83|        |      ;
-    db $00,$80,$01,$37,$10                                     ;B38E8F|        |      ;
- 
-DATA24_B38E94:
-    dl $87202B                                                 ;B38E94|        |      ;
-    db $00,$4A,$12,$98,$8E                                     ;B38E97|        |      ;
- 
-DATA24_B38E9C:
-    dl $00781A                                                 ;B38E9C|        |      ;
-    db $C8,$01,$6C,$83,$03                                     ;B38E9F|        |      ;
- 
-DATA8_B38EA4:
-    db $13,$01,$00,$12                                         ;B38EA4|        |      ;
-    dw DATA8_B38EA4                                            ;B38EA8|        |B38EA4;
- 
-DATA24_B38EAA:
-    dl $000113                                                 ;B38EAA|        |      ;
-    db $43,$D4,$00,$80,$05,$00,$AA,$8E,$1A,$E0,$FF,$D8         ;B38EAD|        |      ;
-    db $01,$78,$83,$02,$0D,$01,$00,$40,$01,$1B,$AF,$02         ;B38EB9|        |      ;
-    db $01                                                     ;B38EC5|        |      ;
- 
-DATA8_B38EC6:
-    db $13,$01,$00,$12                                         ;B38EC6|        |      ;
-    dw DATA8_B38EC6                                            ;B38ECA|        |B38EC6;
- 
-DATA24_B38ECC:
-    dl $01A71B                                                 ;B38ECC|        |      ;
-    db $00,$0D,$00,$FF,$20,$01,$1B,$8B,$01,$00,$0D,$FF         ;B38ECF|        |      ;
-    db $00,$60,$01,$37,$10                                     ;B38EDB|        |      ;
- 
-DATA24_B38EE0:
-    dl $00201A                                                 ;B38EE0|        |      ;
-    db $D8,$01,$78,$83,$03,$0D,$FF,$00,$40,$01,$37,$10         ;B38EE3|        |      ;
- 
-DATA24_B38EEF:
-    dl $02131B                                                 ;B38EEF|        |      ;
-    db $00,$0D,$00,$FF,$20,$01,$1B,$14,$02,$00,$0D,$FF         ;B38EF2|        |      ;
-    db $00,$60,$01,$37,$10                                     ;B38EFE|        |      ;
- 
-DATA24_B38F03:
-    dl $00D81A                                                 ;B38F03|        |      ;
-    db $48,$01,$C0,$86,$00                                     ;B38F06|        |      ;
- 
-DATA8_B38F0B:
-    db $13,$01,$00,$12                                         ;B38F0B|        |      ;
-    dw DATA8_B38F0B                                            ;B38F0F|        |B38F0B;
- 
-DATA24_B38F11:
-    dl $000113                                                 ;B38F11|        |      ;
-    db $43,$D4,$00,$80,$05,$00,$11,$8F,$1A,$E0,$FF,$D8         ;B38F14|        |      ;
-    db $01,$A0,$82,$02,$0D,$01,$00,$40,$01,$1B,$74,$02         ;B38F20|        |      ;
-    db $01,$23,$5A,$1F,$7F,$0B                                 ;B38F2C|        |      ;
- 
-DATA8_B38F32:
-    db $13,$01,$00,$12                                         ;B38F32|        |      ;
-    dw DATA8_B38F32                                            ;B38F36|        |B38F32;
- 
-DATA24_B38F38:
-    dl $02751B                                                 ;B38F38|        |      ;
-    db $00,$0D,$FF,$00,$40,$01,$37,$10                         ;B38F3B|        |      ;
- 
-DATA24_B38F43:
-    dl $02061B                                                 ;B38F43|        |      ;
-    db $00,$13,$3C,$00,$2F,$2C,$81,$12                         ;B38F46|        |      ;
-    dw DATA8_B38DD4                                            ;B38F4E|        |B38DD4;
- 
-DATA24_B38F50:
-    dl $02071B                                                 ;B38F50|        |      ;
-    db $00,$13,$3C,$00,$2F,$2C,$81,$12                         ;B38F53|        |      ;
-    dw DATA8_B38DD4                                            ;B38F5B|        |B38DD4;
- 
-DATA24_B38F5D:
-    dl $02081B                                                 ;B38F5D|        |      ;
-    db $01,$13,$3C,$00,$2F,$2C,$81,$12                         ;B38F60|        |      ;
-    dw DATA8_B38DD4                                            ;B38F68|        |B38DD4;
- 
-DATA24_B38F6A:
-    dl $02081B                                                 ;B38F6A|        |      ;
-    db $00,$13,$3C,$00,$2F,$2C,$81,$12                         ;B38F6D|        |      ;
-    dw DATA8_B38DD4                                            ;B38F75|        |B38DD4;
- 
-DATA24_B38F77:
-    dl $00881A                                                 ;B38F77|        |      ;
-    db $68,$01,$40,$82,$01                                     ;B38F7A|        |      ;
- 
-DATA8_B38F7F:
-    db $13,$01,$00,$12                                         ;B38F7F|        |      ;
-    dw DATA8_B38F7F                                            ;B38F83|        |B38F7F;
- 
-DATA24_B38F85:
-    dl $025B1B                                                 ;B38F85|        |      ;
-    db $00,$0D,$00,$01,$40,$01,$1B,$5F,$02,$00,$0D,$FF         ;B38F88|        |      ;
-    db $00,$80,$01,$37,$10                                     ;B38F94|        |      ;
- 
-DATA24_B38F99:
-    dl $130909                                                 ;B38F99|        |      ;
-    db $93,$09,$0A,$3D,$93,$10                                 ;B38F9C|        |      ;
- 
-DATA24_B38FA2:
-    dl $88AC2B                                                 ;B38FA2|        |      ;
-    db $00,$2E,$01,$B4,$86,$10                                 ;B38FA5|        |      ;
- 
-DATA8_B38FAB:
-    db $31,$12                                                 ;B38FAB|        |      ;
-    dw DATA8_B38FAB                                            ;B38FAD|        |B38FAB;
- 
-DATA24_B38FAF:
-    dl $85042B                                                 ;B38FAF|        |      ;
-    db $00,$1B,$21,$03,$00,$13,$40,$00,$2E,$01,$04,$85         ;B38FB2|        |      ;
-    db $10                                                     ;B38FBE|        |      ;
- 
-DATA8_B38FBF:
-    db $33,$12                                                 ;B38FBF|        |      ;
-    dw DATA8_B38FBF                                            ;B38FC1|        |B38FBF;
- 
-DATA24_B38FC3:
-    dl $85042B                                                 ;B38FC3|        |      ;
-    db $00,$2E,$01,$04,$85,$10                                 ;B38FC6|        |      ;
- 
-DATA8_B38FCC:
-    db $33,$12                                                 ;B38FCC|        |      ;
-    dw DATA8_B38FCC                                            ;B38FCE|        |B38FCC;
- 
-DATA24_B38FD0:
-    dl $84F82B                                                 ;B38FD0|        |      ;
-    db $02,$0D,$01,$00,$40,$02,$37,$10                         ;B38FD3|        |      ;
- 
-DATA24_B38FDB:
-    dl $02681A                                                 ;B38FDB|        |      ;
-    db $78,$01,$38,$87,$00,$13,$40,$00,$37,$10                 ;B38FDE|        |      ;
- 
-DATA24_B38FE8:
-    dl $02681A                                                 ;B38FE8|        |      ;
-    db $78,$01,$44,$87,$00,$13,$40,$00,$37,$10                 ;B38FEB|        |      ;
- 
-DATA24_B38FF5:
-    dl $02681A                                                 ;B38FF5|        |      ;
-    db $78,$01,$50,$87,$00,$34,$12,$FD,$8F                     ;B38FF8|        |      ;
- 
-DATA24_B39001:
-    dl $00881A                                                 ;B39001|        |      ;
-    db $68,$01,$34,$82,$01                                     ;B39004|        |      ;
- 
-DATA8_B39009:
-    db $13,$01,$00,$12                                         ;B39009|        |      ;
-    dw DATA8_B39009                                            ;B3900D|        |B39009;
- 
-DATA24_B3900F:
-    dl $00781A                                                 ;B3900F|        |      ;
-    db $78,$01,$34,$82,$01                                     ;B39012|        |      ;
- 
-DATA8_B39017:
-    db $13,$01,$00,$12                                         ;B39017|        |      ;
-    dw DATA8_B39017                                            ;B3901B|        |B39017;
- 
-DATA24_B3901D:
-    dl $025B1B                                                 ;B3901D|        |      ;
-    db $00,$0D,$00,$01,$40,$01,$1B,$5F,$02,$00,$0D,$FF         ;B39020|        |      ;
-    db $00,$80,$01,$37,$10                                     ;B3902C|        |      ;
- 
-DATA24_B39031:
-    dl $025B1B                                                 ;B39031|        |      ;
-    db $00,$0D,$00,$01,$40,$01,$1B,$5F,$02,$00,$0D,$FF         ;B39034|        |      ;
-    db $00,$80,$01,$37,$10                                     ;B39040|        |      ;
- 
-DATA24_B39045:
-    dl $87F82B                                                 ;B39045|        |      ;
-    db $00,$13,$3C,$00,$37,$10                                 ;B39048|        |      ;
- 
-DATA24_B3904E:
-    dl $88042B                                                 ;B3904E|        |      ;
-    db $00,$13,$3C,$00,$37,$10                                 ;B39051|        |      ;
- 
-DATA24_B39057:
-    dl $81142F                                                 ;B39057|        |      ;
-    db $12                                                     ;B3905A|        |      ;
-    dw DATA8_B38D9F                                            ;B3905B|        |B38D9F;
- 
-DATA24_B3905D:
-    dl $89602F                                                 ;B3905D|        |      ;
-    db $12                                                     ;B39060|        |      ;
-    dw DATA8_B38DAC                                            ;B39061|        |B38DAC;
- 
-DATA24_B39063:
-    dl $89542F                                                 ;B39063|        |      ;
-    db $12                                                     ;B39066|        |      ;
-    dw DATA8_B38DAC                                            ;B39067|        |B38DAC;
- 
-DATA24_B39069:
-    dl $81142F                                                 ;B39069|        |      ;
-    db $12                                                     ;B3906C|        |      ;
-    dw DATA8_B38DA7                                            ;B3906D|        |B38DA7;
- 
-DATA24_B3906F:
-    dl $896C2F                                                 ;B3906F|        |      ;
-    db $12                                                     ;B39072|        |      ;
-    dw DATA8_B38DAC                                            ;B39073|        |B38DAC;
- 
-DATA24_B39075:
-    dl $89782F                                                 ;B39075|        |      ;
-    db $12                                                     ;B39078|        |      ;
-    dw DATA8_B38DAC                                            ;B39079|        |B38DAC;
- 
-DATA24_B3907B:
-    dl $89842F                                                 ;B3907B|        |      ;
-    db $12                                                     ;B3907E|        |      ;
-    dw DATA8_B38DAC                                            ;B3907F|        |B38DAC;
- 
-DATA24_B39081:
-    dl $89902F                                                 ;B39081|        |      ;
-    db $12                                                     ;B39084|        |      ;
-    dw DATA8_B38DAC                                            ;B39085|        |B38DAC;
- 
-DATA24_B39087:
-    dl $899C2F                                                 ;B39087|        |      ;
-    db $12                                                     ;B3908A|        |      ;
-    dw DATA8_B38DAC                                            ;B3908B|        |B38DAC;
- 
-DATA24_B3908D:
-    dl $89A82F                                                 ;B3908D|        |      ;
-    db $12                                                     ;B39090|        |      ;
-    dw DATA8_B38DAC                                            ;B39091|        |B38DAC;
- 
-DATA24_B39093:
-    dl $89B42F                                                 ;B39093|        |      ;
-    db $12                                                     ;B39096|        |      ;
-    dw DATA8_B38DAC                                            ;B39097|        |B38DAC;
- 
-DATA24_B39099:
-    dl $89C02F                                                 ;B39099|        |      ;
-    db $12                                                     ;B3909C|        |      ;
-    dw DATA8_B38DAC                                            ;B3909D|        |B38DAC;
- 
-DATA24_B3909F:
-    dl $89CC2F                                                 ;B3909F|        |      ;
-    db $12                                                     ;B390A2|        |      ;
-    dw DATA8_B38DAC                                            ;B390A3|        |B38DAC;
- 
-DATA24_B390A5:
-    dl $89D82F                                                 ;B390A5|        |      ;
-    db $12                                                     ;B390A8|        |      ;
-    dw DATA8_B38DAC                                            ;B390A9|        |B38DAC;
- 
-DATA24_B390AB:
-    dl $87682F                                                 ;B390AB|        |      ;
-    db $12                                                     ;B390AE|        |      ;
-    dw DATA8_B38DC8                                            ;B390AF|        |B38DC8;
- 
-DATA24_B390B1:
-    dl $812C2F                                                 ;B390B1|        |      ;
-    db $12                                                     ;B390B4|        |      ;
-    dw DATA8_B38DD4                                            ;B390B5|        |B38DD4;
- 
-DATA24_B390B7:
-    dl $812C2F                                                 ;B390B7|        |      ;
-    db $12                                                     ;B390BA|        |      ;
-    dw DATA8_B38DDC                                            ;B390BB|        |B38DDC;
- 
-DATA24_B390BD:
-    dl $89FC2F                                                 ;B390BD|        |      ;
-    db $12                                                     ;B390C0|        |      ;
-    dw DATA8_B38DE1                                            ;B390C1|        |B38DE1;
- 
-DATA24_B390C3:
-    dl $8A082F                                                 ;B390C3|        |      ;
-    db $12                                                     ;B390C6|        |      ;
-    dw DATA8_B38DE1                                            ;B390C7|        |B38DE1;
- 
-DATA24_B390C9:
-    dl $8A142F                                                 ;B390C9|        |      ;
-    db $12                                                     ;B390CC|        |      ;
-    dw DATA8_B38DE1                                            ;B390CD|        |B38DE1;
- 
-DATA24_B390CF:
-    dl $8A202F                                                 ;B390CF|        |      ;
-    db $12                                                     ;B390D2|        |      ;
-    dw DATA8_B38DE1                                            ;B390D3|        |B38DE1;
- 
-DATA24_B390D5:
-    dl $88582F                                                 ;B390D5|        |      ;
-    db $12                                                     ;B390D8|        |      ;
-    dw DATA8_B38D0E                                            ;B390D9|        |B38D0E;
- 
-DATA24_B390DB:
-    dl $88642F                                                 ;B390DB|        |      ;
-    db $12                                                     ;B390DE|        |      ;
-    dw DATA8_B38D0E                                            ;B390DF|        |B38D0E;
- 
-DATA24_B390E1:
-    dl $88702F                                                 ;B390E1|        |      ;
-    db $12                                                     ;B390E4|        |      ;
-    dw DATA8_B38D0E                                            ;B390E5|        |B38D0E;
- 
-DATA24_B390E7:
-    dl $887C2F                                                 ;B390E7|        |      ;
-    db $12                                                     ;B390EA|        |      ;
-    dw DATA8_B38D0E                                            ;B390EB|        |B38D0E;
- 
-DATA24_B390ED:
-    dl $88882F                                                 ;B390ED|        |      ;
-    db $12                                                     ;B390F0|        |      ;
-    dw DATA8_B38D0E                                            ;B390F1|        |B38D0E;
- 
-DATA24_B390F3:
-    dl $88942F                                                 ;B390F3|        |      ;
-    db $12                                                     ;B390F6|        |      ;
-    dw DATA24_B38CC8                                           ;B390F7|        |B38CC8;
- 
-DATA24_B390F9:
-    dl $88A02F                                                 ;B390F9|        |      ;
-    db $12                                                     ;B390FC|        |      ;
-    dw DATA24_B38CC8                                           ;B390FD|        |B38CC8;
- 
-DATA24_B390FF:
-    dl $88AC2F                                                 ;B390FF|        |      ;
-    db $12                                                     ;B39102|        |      ;
-    dw DATA24_B38CC8                                           ;B39103|        |B38CC8;
- 
-DATA24_B39105:
-    dl $88DC2F                                                 ;B39105|        |      ;
-    db $12                                                     ;B39108|        |      ;
-    dw DATA24_B38CC8                                           ;B39109|        |B38CC8;
- 
-DATA24_B3910B:
-    dl $88F42F                                                 ;B3910B|        |      ;
-    db $12                                                     ;B3910E|        |      ;
-    dw DATA24_B38CC8                                           ;B3910F|        |B38CC8;
- 
-DATA24_B39111:
-    dl $89002F                                                 ;B39111|        |      ;
-    db $12                                                     ;B39114|        |      ;
-    dw DATA24_B38CC8                                           ;B39115|        |B38CC8;
- 
-DATA24_B39117:
-    dl $893C2F                                                 ;B39117|        |      ;
-    db $12                                                     ;B3911A|        |      ;
-    dw DATA8_B38CE7                                            ;B3911B|        |B38CE7;
- 
-DATA24_B3911D:
-    dl $81442F                                                 ;B3911D|        |      ;
-    db $12                                                     ;B39120|        |      ;
-    dw DATA8_B38CE2                                            ;B39121|        |B38CE2;
- 
-DATA24_B39123:
-    dl $80FC2F                                                 ;B39123|        |      ;
-    db $12                                                     ;B39126|        |      ;
-    dw DATA8_B38D09                                            ;B39127|        |B38D09;
- 
-DATA24_B39129:
-    dl $8A2C2B                                                 ;B39129|        |      ;
-    db $00                                                     ;B3912C|        |      ;
- 
-DATA8_B3912D:
-    db $1F,$33,$91,$12                                         ;B3912D|        |      ;
-    dw DATA8_B3912D                                            ;B39131|        |B3912D;
-    db $1C,$A3,$03,$00,$12,$2D,$91                             ;B39133|        |      ;
- 
-DATA24_B3913A:
-    dl $01CB1B                                                 ;B3913A|        |      ;
-    db $01,$13,$3C,$00,$2F,$A8,$86,$12                         ;B3913D|        |      ;
-    dw DATA8_B38CFC                                            ;B39145|        |B38CFC;
- 
-DATA24_B39147:
-    dl $01CB1B                                                 ;B39147|        |      ;
-    db $00,$13,$3C,$00,$2F,$A8,$86,$12                         ;B3914A|        |      ;
-    dw DATA8_B38CFC                                            ;B39152|        |B38CFC;
- 
-DATA24_B39154:
-    dl $01CB1B                                                 ;B39154|        |      ;
-    db $01,$13,$3C,$00,$2F,$A8,$86,$12                         ;B39157|        |      ;
-    dw DATA8_B38CFC                                            ;B3915F|        |B38CFC;
- 
-DATA24_B39161:
-    dl $01CB1B                                                 ;B39161|        |      ;
-    db $00,$13,$3C,$00,$2F,$A8,$86,$12                         ;B39164|        |      ;
-    dw DATA8_B38CFC                                            ;B3916C|        |B38CFC;
- 
-DATA24_B3916E:
-    dl $01BF1B                                                 ;B3916E|        |      ;
-    db $01,$13,$3C,$00,$2F,$C0,$86,$12                         ;B39171|        |      ;
-    dw DATA8_B38CEF                                            ;B39179|        |B38CEF;
- 
-DATA24_B3917B:
-    dl $01BF1B                                                 ;B3917B|        |      ;
-    db $00,$13,$3C,$00,$2F,$C0,$86,$12                         ;B3917E|        |      ;
-    dw DATA8_B38CEF                                            ;B39186|        |B38CEF;
- 
-DATA24_B39188:
-    dl $01BF1B                                                 ;B39188|        |      ;
-    db $01,$13,$3C,$00,$2F,$C0,$86,$12                         ;B3918B|        |      ;
-    dw DATA8_B38CEF                                            ;B39193|        |B38CEF;
- 
-DATA24_B39195:
-    dl $01BF1B                                                 ;B39195|        |      ;
-    db $00,$13,$3C,$00,$2F,$C0,$86,$12                         ;B39198|        |      ;
-    dw DATA8_B38CEF                                            ;B391A0|        |B38CEF;
- 
-DATA24_B391A2:
-    dl $01C71B                                                 ;B391A2|        |      ;
-    db $01,$13,$3C,$00,$12                                     ;B391A5|        |      ;
-    dw DATA8_B38CFC                                            ;B391AA|        |B38CFC;
- 
-DATA24_B391AC:
-    dl $01C71B                                                 ;B391AC|        |      ;
-    db $00,$13,$3C,$00,$12                                     ;B391AF|        |      ;
-    dw DATA8_B38CFC                                            ;B391B4|        |B38CFC;
- 
-DATA24_B391B6:
-    dl $01BC1B                                                 ;B391B6|        |      ;
-    db $01,$13,$3C,$00,$12                                     ;B391B9|        |      ;
-    dw DATA8_B38CEF                                            ;B391BE|        |B38CEF;
- 
-DATA24_B391C0:
-    dl $01BC1B                                                 ;B391C0|        |      ;
-    db $00,$13,$3C,$00,$12                                     ;B391C3|        |      ;
-    dw DATA8_B38CEF                                            ;B391C8|        |B38CEF;
- 
-DATA24_B391CA:
-    dl $86D82F                                                 ;B391CA|        |      ;
-    db $12                                                     ;B391CD|        |      ;
-    dw DATA8_B38D23                                            ;B391CE|        |B38D23;
- 
-DATA24_B391D0:
-    dl $88102F                                                 ;B391D0|        |      ;
-    db $12                                                     ;B391D3|        |      ;
-    dw DATA8_B38D28                                            ;B391D4|        |B38D28;
- 
-DATA24_B391D6:
-    dl $881C2F                                                 ;B391D6|        |      ;
-    db $12                                                     ;B391D9|        |      ;
-    dw DATA8_B38D28                                            ;B391DA|        |B38D28;
- 
-DATA24_B391DC:
-    dl $88282F                                                 ;B391DC|        |      ;
-    db $12                                                     ;B391DF|        |      ;
-    dw DATA8_B38D28                                            ;B391E0|        |B38D28;
- 
-DATA24_B391E2:
-    dl $87082F                                                 ;B391E2|        |      ;
-    db $12                                                     ;B391E5|        |      ;
-    dw DATA8_B38D16                                            ;B391E6|        |B38D16;
- 
-DATA24_B391E8:
-    dl $88342F                                                 ;B391E8|        |      ;
-    db $12                                                     ;B391EB|        |      ;
-    dw DATA8_B38D1B                                            ;B391EC|        |B38D1B;
- 
-DATA24_B391EE:
-    dl $88402F                                                 ;B391EE|        |      ;
-    db $12                                                     ;B391F1|        |      ;
-    dw DATA8_B38D1B                                            ;B391F2|        |B38D1B;
- 
-DATA24_B391F4:
-    dl $884C2F                                                 ;B391F4|        |      ;
-    db $12                                                     ;B391F7|        |      ;
-    dw DATA8_B38D1B                                            ;B391F8|        |B38D1B;
- 
-DATA24_B391FA:
-    dl $86A82F                                                 ;B391FA|        |      ;
-    db $12                                                     ;B391FD|        |      ;
-    dw DATA8_B38CFC                                            ;B391FE|        |B38CFC;
- 
-DATA24_B39200:
-    dl $88B82F                                                 ;B39200|        |      ;
-    db $12                                                     ;B39203|        |      ;
-    dw DATA8_B38D01                                            ;B39204|        |B38D01;
- 
-DATA24_B39206:
-    dl $88C42F                                                 ;B39206|        |      ;
-    db $12                                                     ;B39209|        |      ;
-    dw DATA8_B38D01                                            ;B3920A|        |B38D01;
- 
-DATA24_B3920C:
-    dl $88D02F                                                 ;B3920C|        |      ;
-    db $12                                                     ;B3920F|        |      ;
-    dw DATA8_B38D01                                            ;B39210|        |B38D01;
- 
-DATA24_B39212:
-    dl $86C02F                                                 ;B39212|        |      ;
-    db $12                                                     ;B39215|        |      ;
-    dw DATA8_B38CEF                                            ;B39216|        |B38CEF;
- 
-DATA24_B39218:
-    dl $88DC2F                                                 ;B39218|        |      ;
-    db $12                                                     ;B3921B|        |      ;
-    dw DATA8_B38CF4                                            ;B3921C|        |B38CF4;
- 
-DATA24_B3921E:
-    dl $88E82F                                                 ;B3921E|        |      ;
-    db $12                                                     ;B39221|        |      ;
-    dw DATA8_B38CF4                                            ;B39222|        |B38CF4;
- 
-DATA24_B39224:
-    dl $89182F                                                 ;B39224|        |      ;
-    db $12                                                     ;B39227|        |      ;
-    dw DATA8_B38CF4                                            ;B39228|        |B38CF4;
- 
-DATA24_B3922A:
-    dl $FFE01A                                                 ;B3922A|        |      ;
-    db $D8,$01,$B4,$83,$02,$0D,$01,$00,$40,$01,$1B,$BE         ;B3922D|        |      ;
-    db $02,$01                                                 ;B39239|        |      ;
- 
-DATA8_B3923B:
-    db $13,$01,$00,$12                                         ;B3923B|        |      ;
-    dw DATA8_B3923B                                            ;B3923F|        |B3923B;
- 
-DATA24_B39241:
-    dl $00201A                                                 ;B39241|        |      ;
-    db $D8,$01,$B4,$83,$03,$0D,$FF,$00,$40,$01,$37,$10         ;B39244|        |      ;
- 
-DATA24_B39250:
-    dl $01A81A                                                 ;B39250|        |      ;
-    db $28,$03,$C8,$87,$00,$15,$19,$1F,$7F,$00,$70,$92         ;B39253|        |      ;
-    db $15,$19,$1F,$7F,$01,$81,$92,$15,$19,$1F,$7F,$02         ;B3925F|        |      ;
-    db $A0,$92,$12                                             ;B3926B|        |      ;
-    dw DATA8_B392AD                                            ;B3926E|        |B392AD;
- 
-DATA8_B39270:
-    db $1B,$DA,$03,$00,$13,$B4,$00,$1B,$D9,$03,$00,$13         ;B39270|        |      ;
-    db $F0,$00,$12                                             ;B3927C|        |      ;
-    dw DATA8_B39270                                            ;B3927F|        |B39270;
- 
-DATA8_B39281:
-    db $1B,$DA,$03,$00,$13,$B4,$00,$1B,$DB,$03,$00,$13         ;B39281|        |      ;
-    db $72,$01,$1B,$D9,$03,$00,$13,$B4,$00,$1B,$DA,$03         ;B3928D|        |      ;
-    db $01,$13,$68,$01,$12                                     ;B39299|        |      ;
-    dw DATA8_B39281                                            ;B3929E|        |B39281;
- 
-DATA8_B392A0:
-    db $13,$F0,$00,$1B,$DA,$03,$01,$13,$5A,$00,$12             ;B392A0|        |      ;
-    dw DATA8_B392A0                                            ;B392AB|        |B392A0;
- 
-DATA8_B392AD:
-    db $13,$01,$00,$12                                         ;B392AD|        |      ;
-    dw DATA8_B392AD                                            ;B392B1|        |B392AD;
- 
-DATA24_B392B3:
-    dl $00181A                                                 ;B392B3|        |      ;
-    db $48,$00,$C8,$87,$00                                     ;B392B6|        |      ;
- 
-DATA8_B392BB:
-    db $1F,$C1,$92,$12                                         ;B392BB|        |      ;
-    dw DATA8_B392BB                                            ;B392BF|        |B392BB;
-    db $23,$5E,$1F,$7F,$04,$3D,$22,$05,$90,$00,$C8,$01         ;B392C1|        |      ;
-    db $07,$01,$10                                             ;B392CD|        |      ;
- 
-DATA24_B392D0:
-    dl $87682F                                                 ;B392D0|        |      ;
-    db $12                                                     ;B392D3|        |      ;
-    dw DATA8_B38DC0                                            ;B392D4|        |B38DC0;
- 
-DATA24_B392D6:
-    dl $03251B                                                 ;B392D6|        |      ;
-    db $00,$13,$3C,$00,$37,$10                                 ;B392D9|        |      ;
- 
-DATA24_B392DF:
-    dl $01B91B                                                 ;B392DF|        |      ;
-    db $00,$13,$3C,$00,$2F,$F0,$86,$12                         ;B392E2|        |      ;
-    dw DATA8_B38D30                                            ;B392EA|        |B38D30;
- 
-DATA24_B392EC:
-    dl $01B81B                                                 ;B392EC|        |      ;
-    db $00,$13,$3C,$00,$2F,$F0,$86,$12                         ;B392EF|        |      ;
-    dw DATA8_B38D30                                            ;B392F7|        |B38D30;
- 
-DATA24_B392F9:
-    dl $01B21B                                                 ;B392F9|        |      ;
-    db $01,$13,$3C,$00,$2F,$F0,$86,$12                         ;B392FC|        |      ;
-    dw DATA8_B38D30                                            ;B39304|        |B38D30;
- 
-DATA24_B39306:
-    dl $01B21B                                                 ;B39306|        |      ;
-    db $00,$13,$3C,$00,$2F,$F0,$86,$12                         ;B39309|        |      ;
-    dw DATA8_B38D30                                            ;B39311|        |B38D30;
- 
-DATA24_B39313:
-    dl $00581A                                                 ;B39313|        |      ;
-    db $48,$01,$58,$82,$02                                     ;B39316|        |      ;
- 
-DATA8_B3931B:
-    db $1F,$21,$93,$12                                         ;B3931B|        |      ;
-    dw DATA8_B3931B                                            ;B3931F|        |B3931B;
-    db $1C,$3A,$01,$00,$12                                     ;B39321|        |      ;
-    dw DATA8_B3931B                                            ;B39326|        |B3931B;
-    db $1A,$88,$00,$20,$01,$64,$82,$00                         ;B39328|        |      ;
- 
-DATA8_B39330:
-    db $1F,$36,$93,$12                                         ;B39330|        |      ;
-    dw DATA8_B39330                                            ;B39334|        |B39330;
-    db $1C,$3B,$01,$00,$12,$30,$93,$1A,$88,$00,$00,$01         ;B39336|        |      ;
-    db $4C,$82,$00,$22,$20,$08,$01,$4C,$82,$10                 ;B39342|        |      ;
- 
-DATA8_B3934C:
-    db $1F,$52,$93,$12                                         ;B3934C|        |      ;
-    dw DATA8_B3934C                                            ;B39350|        |B3934C;
-    db $1C,$3C,$01,$00,$12                                     ;B39352|        |      ;
-    dw DATA8_B3934C                                            ;B39357|        |B3934C;
+    dw DATA8_B38CC8                                            ;B38BB8|        |B38CC8; 0x88 * [ptr16]
+    dw DATA8_B38CD0                                            ;B38BBA|        |B38CD0;
+    dw DATA8_B38CDE                                            ;B38BBC|        |B38CDE;
+    dw DATA8_B38CEB                                            ;B38BBE|        |B38CEB;
+    dw DATA8_B38CF8                                            ;B38BC0|        |B38CF8;
+    dw DATA8_B38D05                                            ;B38BC2|        |B38D05;
+    dw DATA8_B38D12                                            ;B38BC4|        |B38D12;
+    dw DATA8_B38D1F                                            ;B38BC6|        |B38D1F;
+    dw DATA8_B38D2C                                            ;B38BC8|        |B38D2C;
+    dw DATA8_B38D39                                            ;B38BCA|        |B38D39;
+    dw DATA8_B38D46                                            ;B38BCC|        |B38D46;
+    dw DATA8_B38D50                                            ;B38BCE|        |B38D50;
+    dw DATA8_B38D5A                                            ;B38BD0|        |B38D5A;
+    dw DATA8_B38D67                                            ;B38BD2|        |B38D67;
+    dw DATA8_B38D74                                            ;B38BD4|        |B38D74;
+    dw DATA8_B38D81                                            ;B38BD6|        |B38D81;
+    dw DATA8_B38D8E                                            ;B38BD8|        |B38D8E;
+    dw DATA8_B38D9B                                            ;B38BDA|        |B38D9B;
+    dw DATA8_B38DB0                                            ;B38BDC|        |B38DB0;
+    dw DATA8_B38DBC                                            ;B38BDE|        |B38DBC;
+    dw DATA8_B38DD1                                            ;B38BE0|        |B38DD1;
+    dw DATA8_B38DE5                                            ;B38BE2|        |B38DE5;
+    dw DATA8_B38DF3                                            ;B38BE4|        |B38DF3;
+    dw DATA8_B38DFC                                            ;B38BE6|        |B38DFC;
+    dw DATA8_B38E09                                            ;B38BE8|        |B38E09;
+    dw DATA8_B38E1E                                            ;B38BEA|        |B38E1E;
+    dw DATA8_B38E33                                            ;B38BEC|        |B38E33;
+    dw DATA8_B38E48                                            ;B38BEE|        |B38E48;
+    dw DATA8_B38E5D                                            ;B38BF0|        |B38E5D;
+    dw DATA8_B38E72                                            ;B38BF2|        |B38E72;
+    dw DATA8_B38E80                                            ;B38BF4|        |B38E80;
+    dw DATA8_B38E94                                            ;B38BF6|        |B38E94;
+    dw DATA8_B38E9C                                            ;B38BF8|        |B38E9C;
+    dw DATA8_B38EAA                                            ;B38BFA|        |B38EAA;
+    dw DATA8_B38ECC                                            ;B38BFC|        |B38ECC;
+    dw DATA8_B38EE0                                            ;B38BFE|        |B38EE0;
+    dw DATA8_B38EEF                                            ;B38C00|        |B38EEF;
+    dw DATA8_B38F03                                            ;B38C02|        |B38F03;
+    dw DATA8_B38F11                                            ;B38C04|        |B38F11;
+    dw DATA8_B38F38                                            ;B38C06|        |B38F38;
+    dw DATA8_B38F43                                            ;B38C08|        |B38F43;
+    dw DATA8_B38F50                                            ;B38C0A|        |B38F50;
+    dw DATA8_B38F5D                                            ;B38C0C|        |B38F5D;
+    dw DATA8_B38F6A                                            ;B38C0E|        |B38F6A;
+    dw DATA8_B38F77                                            ;B38C10|        |B38F77;
+    dw DATA8_B38F85                                            ;B38C12|        |B38F85;
+    dw DATA8_B38F99                                            ;B38C14|        |B38F99;
+    dw DATA8_B38FA2                                            ;B38C16|        |B38FA2;
+    dw DATA8_B38FAF                                            ;B38C18|        |B38FAF;
+    dw DATA8_B38FC3                                            ;B38C1A|        |B38FC3;
+    dw DATA8_B38FD0                                            ;B38C1C|        |B38FD0;
+    dw DATA8_B38FDB                                            ;B38C1E|        |B38FDB;
+    dw DATA8_B38FE8                                            ;B38C20|        |B38FE8;
+    dw DATA8_B38FF5                                            ;B38C22|        |B38FF5;
+    dw DATA8_B39001                                            ;B38C24|        |B39001;
+    dw DATA8_B3900F                                            ;B38C26|        |B3900F;
+    dw DATA8_B3901D                                            ;B38C28|        |B3901D;
+    dw DATA8_B39031                                            ;B38C2A|        |B39031;
+    dw DATA8_B39045                                            ;B38C2C|        |B39045;
+    dw DATA8_B3904E                                            ;B38C2E|        |B3904E;
+    dw DATA8_B39057                                            ;B38C30|        |B39057;
+    dw DATA8_B3905D                                            ;B38C32|        |B3905D;
+    dw DATA8_B39063                                            ;B38C34|        |B39063;
+    dw DATA8_B39069                                            ;B38C36|        |B39069;
+    dw DATA8_B3906F                                            ;B38C38|        |B3906F;
+    dw DATA8_B39075                                            ;B38C3A|        |B39075;
+    dw DATA8_B3907B                                            ;B38C3C|        |B3907B;
+    dw DATA8_B39081                                            ;B38C3E|        |B39081;
+    dw DATA8_B39087                                            ;B38C40|        |B39087;
+    dw DATA8_B3908D                                            ;B38C42|        |B3908D;
+    dw DATA8_B39093                                            ;B38C44|        |B39093;
+    dw DATA8_B39099                                            ;B38C46|        |B39099;
+    dw DATA8_B3909F                                            ;B38C48|        |B3909F;
+    dw DATA8_B390A5                                            ;B38C4A|        |B390A5;
+    dw DATA8_B390AB                                            ;B38C4C|        |B390AB;
+    dw DATA8_B390B1                                            ;B38C4E|        |B390B1;
+    dw DATA8_B390B7                                            ;B38C50|        |B390B7;
+    dw DATA8_B390BD                                            ;B38C52|        |B390BD;
+    dw DATA8_B390C3                                            ;B38C54|        |B390C3;
+    dw DATA8_B390C9                                            ;B38C56|        |B390C9;
+    dw DATA8_B390CF                                            ;B38C58|        |B390CF;
+    dw DATA8_B390D5                                            ;B38C5A|        |B390D5;
+    dw DATA8_B390DB                                            ;B38C5C|        |B390DB;
+    dw DATA8_B390E1                                            ;B38C5E|        |B390E1;
+    dw DATA8_B390E7                                            ;B38C60|        |B390E7;
+    dw DATA8_B390ED                                            ;B38C62|        |B390ED;
+    dw DATA8_B390F3                                            ;B38C64|        |B390F3;
+    dw DATA8_B390F9                                            ;B38C66|        |B390F9;
+    dw DATA8_B390FF                                            ;B38C68|        |B390FF;
+    dw DATA8_B39105                                            ;B38C6A|        |B39105;
+    dw DATA8_B3910B                                            ;B38C6C|        |B3910B;
+    dw DATA8_B39111                                            ;B38C6E|        |B39111;
+    dw DATA8_B39117                                            ;B38C70|        |B39117;
+    dw DATA8_B3911D                                            ;B38C72|        |B3911D;
+    dw DATA8_B39123                                            ;B38C74|        |B39123;
+    dw DATA8_B39129                                            ;B38C76|        |B39129;
+    dw DATA8_B3913A                                            ;B38C78|        |B3913A;
+    dw DATA8_B39147                                            ;B38C7A|        |B39147;
+    dw DATA8_B39154                                            ;B38C7C|        |B39154;
+    dw DATA8_B39161                                            ;B38C7E|        |B39161;
+    dw DATA8_B3916E                                            ;B38C80|        |B3916E;
+    dw DATA8_B3917B                                            ;B38C82|        |B3917B;
+    dw DATA8_B39188                                            ;B38C84|        |B39188;
+    dw DATA8_B39195                                            ;B38C86|        |B39195;
+    dw DATA8_B391A2                                            ;B38C88|        |B391A2;
+    dw DATA8_B391AC                                            ;B38C8A|        |B391AC;
+    dw DATA8_B391B6                                            ;B38C8C|        |B391B6;
+    dw DATA8_B391C0                                            ;B38C8E|        |B391C0;
+    dw DATA8_B391CA                                            ;B38C90|        |B391CA;
+    dw DATA8_B391D0                                            ;B38C92|        |B391D0;
+    dw DATA8_B391D6                                            ;B38C94|        |B391D6;
+    dw DATA8_B391DC                                            ;B38C96|        |B391DC;
+    dw DATA8_B391E2                                            ;B38C98|        |B391E2;
+    dw DATA8_B391E8                                            ;B38C9A|        |B391E8;
+    dw DATA8_B391EE                                            ;B38C9C|        |B391EE;
+    dw DATA8_B391F4                                            ;B38C9E|        |B391F4;
+    dw DATA8_B391FA                                            ;B38CA0|        |B391FA;
+    dw DATA8_B39200                                            ;B38CA2|        |B39200;
+    dw DATA8_B39206                                            ;B38CA4|        |B39206;
+    dw DATA8_B3920C                                            ;B38CA6|        |B3920C;
+    dw DATA8_B39212                                            ;B38CA8|        |B39212;
+    dw DATA8_B39218                                            ;B38CAA|        |B39218;
+    dw DATA8_B3921E                                            ;B38CAC|        |B3921E;
+    dw DATA8_B39224                                            ;B38CAE|        |B39224;
+    dw DATA8_B3922A                                            ;B38CB0|        |B3922A;
+    dw DATA8_B39241                                            ;B38CB2|        |B39241;
+    dw DATA8_B39250                                            ;B38CB4|        |B39250;
+    dw DATA8_B392B3                                            ;B38CB6|        |B392B3;
+    dw DATA8_B392D0                                            ;B38CB8|        |B392D0;
+    dw DATA8_B392D6                                            ;B38CBA|        |B392D6;
+    dw DATA8_B392DF                                            ;B38CBC|        |B392DF;
+    dw DATA8_B392EC                                            ;B38CBE|        |B392EC;
+    dw DATA8_B392F9                                            ;B38CC0|        |B392F9;
+    dw DATA8_B39306                                            ;B38CC2|        |B39306;
+    dw DATA8_B39313                                            ;B38CC4|        |B39313;
+    dw DATA8_B39313                                            ;B38CC6|        |B39313;
+ 
+DATA8_B38CC8:
+    db $2B,$5C,$81,$00,$30,$12,$CC,$8C                         ;B38CC8|        |      ;
+ 
+DATA8_B38CD0:
+    db $2B,$50,$81,$00,$2E,$01,$50,$81,$10,$4C,$30,$12         ;B38CD0|        |      ;
+    db $DA,$8C                                                 ;B38CDC|        |      ;
+ 
+DATA8_B38CDE:
+    db $2B,$44,$81,$00,$2E,$01,$44,$81,$10,$30,$12,$E7         ;B38CDE|        |      ;
+    db $8C                                                     ;B38CEA|        |      ;
+ 
+DATA8_B38CEB:
+    db $2B,$C0,$86,$00,$2E,$01,$CC,$86,$10,$31,$12,$F4         ;B38CEB|        |      ;
+    db $8C                                                     ;B38CF7|        |      ;
+ 
+DATA8_B38CF8:
+    db $2B,$A8,$86,$00,$2E,$01,$B4,$86,$10,$31,$12,$01         ;B38CF8|        |      ;
+    db $8D                                                     ;B38D04|        |      ;
+ 
+DATA8_B38D05:
+    db $2B,$FC,$80,$00,$2E,$01,$08,$81,$10,$31,$12,$0E         ;B38D05|        |      ;
+    db $8D                                                     ;B38D11|        |      ;
+ 
+DATA8_B38D12:
+    db $2B,$08,$87,$00,$2E,$01,$14,$87,$10,$31,$12,$1B         ;B38D12|        |      ;
+    db $8D                                                     ;B38D1E|        |      ;
+ 
+DATA8_B38D1F:
+    db $2B,$D8,$86,$00,$2E,$02,$E4,$86,$10,$31,$12,$28         ;B38D1F|        |      ;
+    db $8D                                                     ;B38D2B|        |      ;
+ 
+DATA8_B38D2C:
+    db $2B,$F0,$86,$00,$2E,$02,$FC,$86,$10,$31,$12,$35         ;B38D2C|        |      ;
+    db $8D                                                     ;B38D38|        |      ;
+ 
+DATA8_B38D39:
+    db $2B,$2C,$87,$00,$2E,$01,$2C,$87,$10,$31,$12,$42         ;B38D39|        |      ;
+    db $8D                                                     ;B38D45|        |      ;
+ 
+DATA8_B38D46:
+    db $1B,$9D,$01,$01,$13,$3C,$00,$12,$09,$8D                 ;B38D46|        |      ;
+ 
+DATA8_B38D50:
+    db $1B,$9D,$01,$00,$13,$3C,$00,$12,$09,$8D                 ;B38D50|        |      ;
+ 
+DATA8_B38D5A:
+    db $1B,$A4,$01,$00,$13,$3C,$00,$2F,$FC,$80,$12,$09         ;B38D5A|        |      ;
+    db $8D                                                     ;B38D66|        |      ;
+ 
+DATA8_B38D67:
+    db $1B,$A8,$01,$00,$13,$3C,$00,$2F,$FC,$80,$12,$09         ;B38D67|        |      ;
+    db $8D                                                     ;B38D73|        |      ;
+ 
+DATA8_B38D74:
+    db $1B,$91,$01,$01,$13,$3C,$00,$2F,$FC,$80,$12,$09         ;B38D74|        |      ;
+    db $8D                                                     ;B38D80|        |      ;
+ 
+DATA8_B38D81:
+    db $1B,$91,$01,$00,$13,$3C,$00,$2F,$FC,$80,$12,$09         ;B38D81|        |      ;
+    db $8D                                                     ;B38D8D|        |      ;
+ 
+DATA8_B38D8E:
+    db $2B,$2C,$81,$00,$2E,$01,$38,$81,$10,$35,$12,$97         ;B38D8E|        |      ;
+    db $8D                                                     ;B38D9A|        |      ;
+ 
+DATA8_B38D9B:
+    db $2B,$14,$81,$00,$2E,$01,$20,$81,$10,$12,$AC,$8D         ;B38D9B|        |      ;
+    db $2E,$01,$48,$89,$10,$36,$12,$AC,$8D                     ;B38DA7|        |      ;
+ 
+DATA8_B38DB0:
+    db $49,$14,$81,$2E,$01,$20,$81,$10,$36,$12,$B8,$8D         ;B38DB0|        |      ;
+ 
+DATA8_B38DBC:
+    db $2B,$68,$87,$00,$2E,$01,$74,$87,$10,$12,$CD,$8D         ;B38DBC|        |      ;
+    db $2E,$01,$80,$87,$10,$35,$12,$CD,$8D                     ;B38DC8|        |      ;
+ 
+DATA8_B38DD1:
+    db $49,$2C,$81,$2E,$01,$38,$81,$10,$12,$E1,$8D,$2E         ;B38DD1|        |      ;
+    db $01,$F0,$89,$10,$35,$12,$E1,$8D                         ;B38DDD|        |      ;
+ 
+DATA8_B38DE5:
+    db $1A,$48,$00,$58,$00,$BC,$87,$00,$13,$01,$00,$12         ;B38DE5|        |      ;
+    db $ED,$8D                                                 ;B38DF1|        |      ;
+ 
+DATA8_B38DF3:
+    db $1B,$19,$01,$00,$13,$20,$00,$37,$10                     ;B38DF3|        |      ;
+ 
+DATA8_B38DFC:
+    db $2B,$00,$89,$00,$2E,$01,$CC,$86,$10,$31,$12,$05         ;B38DFC|        |      ;
+    db $8E                                                     ;B38E08|        |      ;
+ 
+DATA8_B38E09:
+    db $1A,$68,$00,$68,$01,$14,$81,$00,$22,$20,$20,$01         ;B38E09|        |      ;
+    db $20,$81,$10,$13,$01,$00,$12,$18,$8E                     ;B38E15|        |      ;
+ 
+DATA8_B38E1E:
+    db $1A,$F8,$00,$D8,$01,$2C,$81,$00,$22,$20,$20,$01         ;B38E1E|        |      ;
+    db $38,$81,$10,$13,$01,$00,$12,$2D,$8E                     ;B38E2A|        |      ;
+ 
+DATA8_B38E33:
+    db $1A,$08,$01,$68,$01,$FC,$80,$00,$22,$20,$20,$01         ;B38E33|        |      ;
+    db $08,$81,$10,$13,$01,$00,$12,$42,$8E                     ;B38E3F|        |      ;
+ 
+DATA8_B38E48:
+    db $1A,$E8,$01,$88,$01,$A8,$86,$00,$22,$20,$20,$01         ;B38E48|        |      ;
+    db $B4,$86,$10,$13,$01,$00,$12,$57,$8E                     ;B38E54|        |      ;
+ 
+DATA8_B38E5D:
+    db $1A,$B8,$00,$B8,$01,$C0,$86,$00,$22,$20,$20,$01         ;B38E5D|        |      ;
+    db $CC,$86,$10,$13,$01,$00,$12,$6C,$8E                     ;B38E69|        |      ;
+ 
+DATA8_B38E72:
+    db $1A,$88,$00,$68,$01,$18,$83,$01,$13,$01,$00,$12         ;B38E72|        |      ;
+    db $7A,$8E                                                 ;B38E7E|        |      ;
+ 
+DATA8_B38E80:
+    db $1B,$97,$02,$00,$0D,$00,$01,$40,$01,$1B,$9B,$02         ;B38E80|        |      ;
+    db $00,$0D,$FF,$00,$80,$01,$37,$10                         ;B38E8C|        |      ;
+ 
+DATA8_B38E94:
+    db $2B,$20,$87,$00,$4A,$12,$98,$8E                         ;B38E94|        |      ;
+ 
+DATA8_B38E9C:
+    db $1A,$78,$00,$C8,$01,$6C,$83,$03,$13,$01,$00,$12         ;B38E9C|        |      ;
+    db $A4,$8E                                                 ;B38EA8|        |      ;
+ 
+DATA8_B38EAA:
+    db $13,$01,$00,$43,$D4,$00,$80,$05,$00,$AA,$8E,$1A         ;B38EAA|        |      ;
+    db $E0,$FF,$D8,$01,$78,$83,$02,$0D,$01,$00,$40,$01         ;B38EB6|        |      ;
+    db $1B,$AF,$02,$01,$13,$01,$00,$12,$C6,$8E                 ;B38EC2|        |      ;
+ 
+DATA8_B38ECC:
+    db $1B,$A7,$01,$00,$0D,$00,$FF,$20,$01,$1B,$8B,$01         ;B38ECC|        |      ;
+    db $00,$0D,$FF,$00,$60,$01,$37,$10                         ;B38ED8|        |      ;
+ 
+DATA8_B38EE0:
+    db $1A,$20,$00,$D8,$01,$78,$83,$03,$0D,$FF,$00,$40         ;B38EE0|        |      ;
+    db $01,$37,$10                                             ;B38EEC|        |      ;
+ 
+DATA8_B38EEF:
+    db $1B,$13,$02,$00,$0D,$00,$FF,$20,$01,$1B,$14,$02         ;B38EEF|        |      ;
+    db $00,$0D,$FF,$00,$60,$01,$37,$10                         ;B38EFB|        |      ;
+ 
+DATA8_B38F03:
+    db $1A,$D8,$00,$48,$01,$C0,$86,$00,$13,$01,$00,$12         ;B38F03|        |      ;
+    db $0B,$8F                                                 ;B38F0F|        |      ;
+ 
+DATA8_B38F11:
+    db $13,$01,$00,$43,$D4,$00,$80,$05,$00,$11,$8F,$1A         ;B38F11|        |      ;
+    db $E0,$FF,$D8,$01,$A0,$82,$02,$0D,$01,$00,$40,$01         ;B38F1D|        |      ;
+    db $1B,$74,$02,$01,$23,$5A,$1F,$7F,$0B,$13,$01,$00         ;B38F29|        |      ;
+    db $12,$32,$8F                                             ;B38F35|        |      ;
+ 
+DATA8_B38F38:
+    db $1B,$75,$02,$00,$0D,$FF,$00,$40,$01,$37,$10             ;B38F38|        |      ;
+ 
+DATA8_B38F43:
+    db $1B,$06,$02,$00,$13,$3C,$00,$2F,$2C,$81,$12,$D4         ;B38F43|        |      ;
+    db $8D                                                     ;B38F4F|        |      ;
+ 
+DATA8_B38F50:
+    db $1B,$07,$02,$00,$13,$3C,$00,$2F,$2C,$81,$12,$D4         ;B38F50|        |      ;
+    db $8D                                                     ;B38F5C|        |      ;
+ 
+DATA8_B38F5D:
+    db $1B,$08,$02,$01,$13,$3C,$00,$2F,$2C,$81,$12,$D4         ;B38F5D|        |      ;
+    db $8D                                                     ;B38F69|        |      ;
+ 
+DATA8_B38F6A:
+    db $1B,$08,$02,$00,$13,$3C,$00,$2F,$2C,$81,$12,$D4         ;B38F6A|        |      ;
+    db $8D                                                     ;B38F76|        |      ;
+ 
+DATA8_B38F77:
+    db $1A,$88,$00,$68,$01,$40,$82,$01,$13,$01,$00,$12         ;B38F77|        |      ;
+    db $7F,$8F                                                 ;B38F83|        |      ;
+ 
+DATA8_B38F85:
+    db $1B,$5B,$02,$00,$0D,$00,$01,$40,$01,$1B,$5F,$02         ;B38F85|        |      ;
+    db $00,$0D,$FF,$00,$80,$01,$37,$10                         ;B38F91|        |      ;
+ 
+DATA8_B38F99:
+    db $09,$09,$13,$93,$09,$0A,$3D,$93,$10                     ;B38F99|        |      ;
+ 
+DATA8_B38FA2:
+    db $2B,$AC,$88,$00,$2E,$01,$B4,$86,$10,$31,$12,$AB         ;B38FA2|        |      ;
+    db $8F                                                     ;B38FAE|        |      ;
+ 
+DATA8_B38FAF:
+    db $2B,$04,$85,$00,$1B,$21,$03,$00,$13,$40,$00,$2E         ;B38FAF|        |      ;
+    db $01,$04,$85,$10,$33,$12,$BF,$8F                         ;B38FBB|        |      ;
+ 
+DATA8_B38FC3:
+    db $2B,$04,$85,$00,$2E,$01,$04,$85,$10,$33,$12,$CC         ;B38FC3|        |      ;
+    db $8F                                                     ;B38FCF|        |      ;
+ 
+DATA8_B38FD0:
+    db $2B,$F8,$84,$02,$0D,$01,$00,$40,$02,$37,$10             ;B38FD0|        |      ;
+ 
+DATA8_B38FDB:
+    db $1A,$68,$02,$78,$01,$38,$87,$00,$13,$40,$00,$37         ;B38FDB|        |      ;
+    db $10                                                     ;B38FE7|        |      ;
+ 
+DATA8_B38FE8:
+    db $1A,$68,$02,$78,$01,$44,$87,$00,$13,$40,$00,$37         ;B38FE8|        |      ;
+    db $10                                                     ;B38FF4|        |      ;
+ 
+DATA8_B38FF5:
+    db $1A,$68,$02,$78,$01,$50,$87,$00,$34,$12,$FD,$8F         ;B38FF5|        |      ;
+ 
+DATA8_B39001:
+    db $1A,$88,$00,$68,$01,$34,$82,$01,$13,$01,$00,$12         ;B39001|        |      ;
+    db $09,$90                                                 ;B3900D|        |      ;
+ 
+DATA8_B3900F:
+    db $1A,$78,$00,$78,$01,$34,$82,$01,$13,$01,$00,$12         ;B3900F|        |      ;
+    db $17,$90                                                 ;B3901B|        |      ;
+ 
+DATA8_B3901D:
+    db $1B,$5B,$02,$00,$0D,$00,$01,$40,$01,$1B,$5F,$02         ;B3901D|        |      ;
+    db $00,$0D,$FF,$00,$80,$01,$37,$10                         ;B39029|        |      ;
+ 
+DATA8_B39031:
+    db $1B,$5B,$02,$00,$0D,$00,$01,$40,$01,$1B,$5F,$02         ;B39031|        |      ;
+    db $00,$0D,$FF,$00,$80,$01,$37,$10                         ;B3903D|        |      ;
+ 
+DATA8_B39045:
+    db $2B,$F8,$87,$00,$13,$3C,$00,$37,$10                     ;B39045|        |      ;
+ 
+DATA8_B3904E:
+    db $2B,$04,$88,$00,$13,$3C,$00,$37,$10                     ;B3904E|        |      ;
+ 
+DATA8_B39057:
+    db $2F,$14,$81,$12,$9F,$8D                                 ;B39057|        |      ;
+ 
+DATA8_B3905D:
+    db $2F,$60,$89,$12,$AC,$8D                                 ;B3905D|        |      ;
+ 
+DATA8_B39063:
+    db $2F,$54,$89,$12,$AC,$8D                                 ;B39063|        |      ;
+ 
+DATA8_B39069:
+    db $2F,$14,$81,$12,$A7,$8D                                 ;B39069|        |      ;
+ 
+DATA8_B3906F:
+    db $2F,$6C,$89,$12,$AC,$8D                                 ;B3906F|        |      ;
+ 
+DATA8_B39075:
+    db $2F,$78,$89,$12,$AC,$8D                                 ;B39075|        |      ;
+ 
+DATA8_B3907B:
+    db $2F,$84,$89,$12,$AC,$8D                                 ;B3907B|        |      ;
+ 
+DATA8_B39081:
+    db $2F,$90,$89,$12,$AC,$8D                                 ;B39081|        |      ;
+ 
+DATA8_B39087:
+    db $2F,$9C,$89,$12,$AC,$8D                                 ;B39087|        |      ;
+ 
+DATA8_B3908D:
+    db $2F,$A8,$89,$12,$AC,$8D                                 ;B3908D|        |      ;
+ 
+DATA8_B39093:
+    db $2F,$B4,$89,$12,$AC,$8D                                 ;B39093|        |      ;
+ 
+DATA8_B39099:
+    db $2F,$C0,$89,$12,$AC,$8D                                 ;B39099|        |      ;
+ 
+DATA8_B3909F:
+    db $2F,$CC,$89,$12,$AC,$8D                                 ;B3909F|        |      ;
+ 
+DATA8_B390A5:
+    db $2F,$D8,$89,$12,$AC,$8D                                 ;B390A5|        |      ;
+ 
+DATA8_B390AB:
+    db $2F,$68,$87,$12,$C8,$8D                                 ;B390AB|        |      ;
+ 
+DATA8_B390B1:
+    db $2F,$2C,$81,$12,$D4,$8D                                 ;B390B1|        |      ;
+ 
+DATA8_B390B7:
+    db $2F,$2C,$81,$12,$DC,$8D                                 ;B390B7|        |      ;
+ 
+DATA8_B390BD:
+    db $2F,$FC,$89,$12,$E1,$8D                                 ;B390BD|        |      ;
+ 
+DATA8_B390C3:
+    db $2F,$08,$8A,$12,$E1,$8D                                 ;B390C3|        |      ;
+ 
+DATA8_B390C9:
+    db $2F,$14,$8A,$12,$E1,$8D                                 ;B390C9|        |      ;
+ 
+DATA8_B390CF:
+    db $2F,$20,$8A,$12,$E1,$8D                                 ;B390CF|        |      ;
+ 
+DATA8_B390D5:
+    db $2F,$58,$88,$12,$0E,$8D                                 ;B390D5|        |      ;
+ 
+DATA8_B390DB:
+    db $2F,$64,$88,$12,$0E,$8D                                 ;B390DB|        |      ;
+ 
+DATA8_B390E1:
+    db $2F,$70,$88,$12,$0E,$8D                                 ;B390E1|        |      ;
+ 
+DATA8_B390E7:
+    db $2F,$7C,$88,$12,$0E,$8D                                 ;B390E7|        |      ;
+ 
+DATA8_B390ED:
+    db $2F,$88,$88,$12,$0E,$8D                                 ;B390ED|        |      ;
+ 
+DATA8_B390F3:
+    db $2F,$94,$88,$12,$C8,$8C                                 ;B390F3|        |      ;
+ 
+DATA8_B390F9:
+    db $2F,$A0,$88,$12,$C8,$8C                                 ;B390F9|        |      ;
+ 
+DATA8_B390FF:
+    db $2F,$AC,$88,$12,$C8,$8C                                 ;B390FF|        |      ;
+ 
+DATA8_B39105:
+    db $2F,$DC,$88,$12,$C8,$8C                                 ;B39105|        |      ;
+ 
+DATA8_B3910B:
+    db $2F,$F4,$88,$12,$C8,$8C                                 ;B3910B|        |      ;
+ 
+DATA8_B39111:
+    db $2F,$00,$89,$12,$C8,$8C                                 ;B39111|        |      ;
+ 
+DATA8_B39117:
+    db $2F,$3C,$89,$12,$E7,$8C                                 ;B39117|        |      ;
+ 
+DATA8_B3911D:
+    db $2F,$44,$81,$12,$E2,$8C                                 ;B3911D|        |      ;
+ 
+DATA8_B39123:
+    db $2F,$FC,$80,$12,$09,$8D                                 ;B39123|        |      ;
+ 
+DATA8_B39129:
+    db $2B,$2C,$8A,$00,$1F,$33,$91,$12,$2D,$91,$1C,$A3         ;B39129|        |      ;
+    db $03,$00,$12,$2D,$91                                     ;B39135|        |      ;
+ 
+DATA8_B3913A:
+    db $1B,$CB,$01,$01,$13,$3C,$00,$2F,$A8,$86,$12,$FC         ;B3913A|        |      ;
+    db $8C                                                     ;B39146|        |      ;
+ 
+DATA8_B39147:
+    db $1B,$CB,$01,$00,$13,$3C,$00,$2F,$A8,$86,$12,$FC         ;B39147|        |      ;
+    db $8C                                                     ;B39153|        |      ;
+ 
+DATA8_B39154:
+    db $1B,$CB,$01,$01,$13,$3C,$00,$2F,$A8,$86,$12,$FC         ;B39154|        |      ;
+    db $8C                                                     ;B39160|        |      ;
+ 
+DATA8_B39161:
+    db $1B,$CB,$01,$00,$13,$3C,$00,$2F,$A8,$86,$12,$FC         ;B39161|        |      ;
+    db $8C                                                     ;B3916D|        |      ;
+ 
+DATA8_B3916E:
+    db $1B,$BF,$01,$01,$13,$3C,$00,$2F,$C0,$86,$12,$EF         ;B3916E|        |      ;
+    db $8C                                                     ;B3917A|        |      ;
+ 
+DATA8_B3917B:
+    db $1B,$BF,$01,$00,$13,$3C,$00,$2F,$C0,$86,$12,$EF         ;B3917B|        |      ;
+    db $8C                                                     ;B39187|        |      ;
+ 
+DATA8_B39188:
+    db $1B,$BF,$01,$01,$13,$3C,$00,$2F,$C0,$86,$12,$EF         ;B39188|        |      ;
+    db $8C                                                     ;B39194|        |      ;
+ 
+DATA8_B39195:
+    db $1B,$BF,$01,$00,$13,$3C,$00,$2F,$C0,$86,$12,$EF         ;B39195|        |      ;
+    db $8C                                                     ;B391A1|        |      ;
+ 
+DATA8_B391A2:
+    db $1B,$C7,$01,$01,$13,$3C,$00,$12,$FC,$8C                 ;B391A2|        |      ;
+ 
+DATA8_B391AC:
+    db $1B,$C7,$01,$00,$13,$3C,$00,$12,$FC,$8C                 ;B391AC|        |      ;
+ 
+DATA8_B391B6:
+    db $1B,$BC,$01,$01,$13,$3C,$00,$12,$EF,$8C                 ;B391B6|        |      ;
+ 
+DATA8_B391C0:
+    db $1B,$BC,$01,$00,$13,$3C,$00,$12,$EF,$8C                 ;B391C0|        |      ;
+ 
+DATA8_B391CA:
+    db $2F,$D8,$86,$12,$23,$8D                                 ;B391CA|        |      ;
+ 
+DATA8_B391D0:
+    db $2F,$10,$88,$12,$28,$8D                                 ;B391D0|        |      ;
+ 
+DATA8_B391D6:
+    db $2F,$1C,$88,$12,$28,$8D                                 ;B391D6|        |      ;
+ 
+DATA8_B391DC:
+    db $2F,$28,$88,$12,$28,$8D                                 ;B391DC|        |      ;
+ 
+DATA8_B391E2:
+    db $2F,$08,$87,$12,$16,$8D                                 ;B391E2|        |      ;
+ 
+DATA8_B391E8:
+    db $2F,$34,$88,$12,$1B,$8D                                 ;B391E8|        |      ;
+ 
+DATA8_B391EE:
+    db $2F,$40,$88,$12,$1B,$8D                                 ;B391EE|        |      ;
+ 
+DATA8_B391F4:
+    db $2F,$4C,$88,$12,$1B,$8D                                 ;B391F4|        |      ;
+ 
+DATA8_B391FA:
+    db $2F,$A8,$86,$12,$FC,$8C                                 ;B391FA|        |      ;
+ 
+DATA8_B39200:
+    db $2F,$B8,$88,$12,$01,$8D                                 ;B39200|        |      ;
+ 
+DATA8_B39206:
+    db $2F,$C4,$88,$12,$01,$8D                                 ;B39206|        |      ;
+ 
+DATA8_B3920C:
+    db $2F,$D0,$88,$12,$01,$8D                                 ;B3920C|        |      ;
+ 
+DATA8_B39212:
+    db $2F,$C0,$86,$12,$EF,$8C                                 ;B39212|        |      ;
+ 
+DATA8_B39218:
+    db $2F,$DC,$88,$12,$F4,$8C                                 ;B39218|        |      ;
+ 
+DATA8_B3921E:
+    db $2F,$E8,$88,$12,$F4,$8C                                 ;B3921E|        |      ;
+ 
+DATA8_B39224:
+    db $2F,$18,$89,$12,$F4,$8C                                 ;B39224|        |      ;
+ 
+DATA8_B3922A:
+    db $1A,$E0,$FF,$D8,$01,$B4,$83,$02,$0D,$01,$00,$40         ;B3922A|        |      ;
+    db $01,$1B,$BE,$02,$01,$13,$01,$00,$12,$3B,$92             ;B39236|        |      ;
+ 
+DATA8_B39241:
+    db $1A,$20,$00,$D8,$01,$B4,$83,$03,$0D,$FF,$00,$40         ;B39241|        |      ;
+    db $01,$37,$10                                             ;B3924D|        |      ;
+ 
+DATA8_B39250:
+    db $1A,$A8,$01,$28,$03,$C8,$87,$00,$15,$19,$1F,$7F         ;B39250|        |      ;
+    db $00,$70,$92,$15,$19,$1F,$7F,$01,$81,$92,$15,$19         ;B3925C|        |      ;
+    db $1F,$7F,$02,$A0,$92,$12,$AD,$92,$1B,$DA,$03,$00         ;B39268|        |      ;
+    db $13,$B4,$00,$1B,$D9,$03,$00,$13,$F0,$00,$12,$70         ;B39274|        |      ;
+    db $92,$1B,$DA,$03,$00,$13,$B4,$00,$1B,$DB,$03,$00         ;B39280|        |      ;
+    db $13,$72,$01,$1B,$D9,$03,$00,$13,$B4,$00,$1B,$DA         ;B3928C|        |      ;
+    db $03,$01,$13,$68,$01,$12,$81,$92,$13,$F0,$00,$1B         ;B39298|        |      ;
+    db $DA,$03,$01,$13,$5A,$00,$12,$A0,$92,$13,$01,$00         ;B392A4|        |      ;
+    db $12,$AD,$92                                             ;B392B0|        |      ;
+ 
+DATA8_B392B3:
+    db $1A,$18,$00,$48,$00,$C8,$87,$00,$1F,$C1,$92,$12         ;B392B3|        |      ;
+    db $BB,$92,$23,$5E,$1F,$7F,$04,$3D,$22,$05,$90,$00         ;B392BF|        |      ;
+    db $C8,$01,$07,$01,$10                                     ;B392CB|        |      ;
+ 
+DATA8_B392D0:
+    db $2F,$68,$87,$12,$C0,$8D                                 ;B392D0|        |      ;
+ 
+DATA8_B392D6:
+    db $1B,$25,$03,$00,$13,$3C,$00,$37,$10                     ;B392D6|        |      ;
+ 
+DATA8_B392DF:
+    db $1B,$B9,$01,$00,$13,$3C,$00,$2F,$F0,$86,$12,$30         ;B392DF|        |      ;
+    db $8D                                                     ;B392EB|        |      ;
+ 
+DATA8_B392EC:
+    db $1B,$B8,$01,$00,$13,$3C,$00,$2F,$F0,$86,$12,$30         ;B392EC|        |      ;
+    db $8D                                                     ;B392F8|        |      ;
+ 
+DATA8_B392F9:
+    db $1B,$B2,$01,$01,$13,$3C,$00,$2F,$F0,$86,$12,$30         ;B392F9|        |      ;
+    db $8D                                                     ;B39305|        |      ;
+ 
+DATA8_B39306:
+    db $1B,$B2,$01,$00,$13,$3C,$00,$2F,$F0,$86,$12,$30         ;B39306|        |      ;
+    db $8D                                                     ;B39312|        |      ;
+ 
+DATA8_B39313:
+    db $1A,$58,$00,$48,$01,$58,$82,$02,$1F,$21,$93,$12         ;B39313|        |      ;
+    db $1B,$93,$1C,$3A,$01,$00,$12,$1B,$93,$1A,$88,$00         ;B3931F|        |      ;
+    db $20,$01,$64,$82,$00,$1F,$36,$93,$12,$30,$93,$1C         ;B3932B|        |      ;
+    db $3B,$01,$00,$12,$30,$93,$1A,$88,$00,$00,$01,$4C         ;B39337|        |      ;
+    db $82,$00,$22,$20,$08,$01,$4C,$82,$10,$1F,$52,$93         ;B39343|        |      ;
+    db $12,$4C,$93,$1C,$3C,$01,$00,$12,$4C,$93                 ;B3934F|        |      ;
  
 pScripting_B39359:
     dw DATA8_B39379                                            ;B39359|        |B39379;
@@ -3684,20 +3311,20 @@ DATA8_B3F0A9:
 pScripting_B3F0E6:
     dw DATA8_B3F106                                            ;B3F0E6|        |B3F106;
     dw DATA8_B3FDD4                                            ;B3F0E8|        |B3FDD4;
-    dw EMPTY_B3FFA4                                            ;B3F0EA|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0EC|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0EE|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0F0|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0F2|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0F4|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0F6|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0F8|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0FA|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0FC|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F0FE|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F100|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F102|        |B3FFA4;
-    dw EMPTY_B3FFA4                                            ;B3F104|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0EA|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0EC|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0EE|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0F0|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0F2|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0F4|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0F6|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0F8|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0FA|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0FC|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F0FE|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F100|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F102|        |B3FFA4;
+    dw DATA8_B3FFA4                                            ;B3F104|        |B3FFA4;
  
 DATA8_B3F106:
     db $4F,$50,$23,$60,$1F,$7F,$09,$00,$07,$B4,$02,$03         ;B3F106|        |      ;
@@ -4016,7 +3643,7 @@ DATA8_B3FDD4:
     db $1B,$02,$00,$01,$0D,$FF,$00,$10,$02,$1B,$02,$00         ;B3FF90|        |      ;
     db $01,$0D,$01,$00,$10,$02,$3C,$10                         ;B3FF9C|        |      ;
  
-EMPTY_B3FFA4:
+DATA8_B3FFA4:
     db $00,$00,$00                                             ;B3FFA4|        |      ;
  
 Padding_B30000:
