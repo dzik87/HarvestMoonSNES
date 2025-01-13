@@ -41,26 +41,26 @@ endstruct align 4
 struct strcChickenData      $7EC286
     .statusFlags            : skip 1    ; 00 $7EC286
     .mapID                  : skip 1    ; 01 $7EC287
-    .unknown2               : skip 1    ; 02 $7EC288
+    .age                    : skip 1    ; 02 $7EC288
     .unknown3               : skip 1    ; 03 $7EC289
     .positionX              : skip 2    ; 04 $7EC28A
     .positionY              : skip 2    ; 06 $7EC28C
 endstruct align 8
 
-!CHICKENDATA_EXISTS         =   $01
-!CHICKENDATA_ADULT          =   $02
-!CHICKENDATA_CHILD          =   $04
-!CHICKENDATA_ISEGG          =   $08
-!CHICKENDATA_UNK10          =   $10
-!CHICKENDATA_UNK20          =   $20
-!CHICKENDATA_UNK40          =   $40
-!CHICKENDATA_UNK80          =   $80
+!CHICKENSTATUS_EXISTS       =   $01
+!CHICKENSTATUS_ISEGG        =   $02
+!CHICKENSTATUS_CHILD        =   $04
+!CHICKENSTATUS_ADULT        =   $08
+!CHICKENSTATUS_CRANKY       =   $10
+!CHICKENSTATUS_HELDBYPLAYER =   $20
+!CHICKENSTATUS_ININCUBATOR  =   $40
+!CHICKENSTATUS_UNK80        =   $80
 
 
 ; Cow Data
 struct strcCowData          $7EC1C6
     .statusFlags            : skip 1    ; 00 $7EC1C6
-    .unknown1               : skip 1    ; 01 $7EC1C7
+    .interactions           : skip 1    ; 01 $7EC1C7
     .mapID                  : skip 1    ; 02 $7EC1C8
     .age                    : skip 1    ; 03 $7EC1C9    - also pregancy, crankyness, sickness
     .happiness              : skip 1    ; 04 $7EC1CA
@@ -72,14 +72,14 @@ struct strcCowData          $7EC1C6
     .name                   : skip 4    ; 0C $7EC1D2    - 4 short bytes as name
 endstruct align 16
 
-!COWDATA_EXISTS             =   $01
-!COWDATA_ADULT              =   $02
-!COWDATA_CHILD              =   $04
-!COWDATA_BABY               =   $08
-!COWDATA_CRANKY             =   $10
-!COWDATA_SICK               =   $20
-!COWDATA_PREGNANT           =   $40
-!COWDATA_UNK80              =   $80
+!COWSTATUS_EXISTS           =   $01
+!COWSTATUS_BABY             =   $02
+!COWSTATUS_CHILD            =   $04
+!COWSTATUS_ADULT            =   $08
+!COWSTATUS_CRANKY           =   $10
+!COWSTATUS_SICK             =   $20
+!COWSTATUS_PREGNANT         =   $40
+!COWSTATUS_BIRTHINGTODAY    =   $80
 
 
 ; Daily flags
@@ -173,3 +173,57 @@ endstruct align 12
 !JOYPAD_SELECT              = $2000
 !JOYPAD_Y                   = $4000
 !JOYPAD_B                   = $8000
+
+
+; Equipped items            $000921
+!EQUIPPEDITEM_NONE          =   $00
+!EQUIPPEDITEM_SICKLE        =   $01
+!EQUIPPEDITEM_HOE           =   $02
+!EQUIPPEDITEM_HAMMER        =   $03
+!EQUIPPEDITEM_AXE           =   $04
+!EQUIPPEDITEM_CORNSEED      =   $05
+!EQUIPPEDITEM_TOMATOSEED    =   $06
+!EQUIPPEDITEM_POTATOSEED    =   $07
+!EQUIPPEDITEM_TURNIPSEED    =   $08
+!EQUIPPEDITEM_MEDICIDE      =   $09
+!EQUIPPEDITEM_MIRACLEPOTION =   $0A
+!EQUIPPEDITEM_BELL          =   $0B
+!EQUIPPEDITEM_GRASSSEED     =   $0C
+!EQUIPPEDITEM_PAINT         =   $0D
+!EQUIPPEDITEM_MILKER        =   $0E
+!EQUIPPEDITEM_BRUSH         =   $0F
+!EQUIPPEDITEM_WATERINGCAN   =   $10
+!EQUIPPEDITEM_GOLDSICKLE    =   $11
+!EQUIPPEDITEM_GOLDHOE       =   $12
+!EQUIPPEDITEM_GOLDHAMMER    =   $13
+!EQUIPPEDITEM_GOLDAXE       =   $14
+!EQUIPPEDITEM_SPRINKLER     =   $15
+!EQUIPPEDITEM_BEANSTALKSEED =   $16
+!EQUIPPEDITEM_BLUEDIAMOND   =   $17
+!EQUIPPEDITEM_BLUEFEATHER   =   $18
+!EQUIPPEDITEM_CHICKENFEED   =   $19
+!EQUIPPEDITEM_COWFEED       =   $1A
+!EQUIPPEDITEM_FISHINGPOLE   =   $1B
+
+
+; Weather forecast          $00098C
+!WEATHER_SUN                =   $00
+!WEATHER_RAIN               =   $01
+!WEATHER_SNOW               =   $02
+!WEATHER_HURRICANE          =   $03
+!WEATHER_FAIR               =   $04
+!WEATHER_CALM               =   $05
+!WEATHER_FLOWERFESTIVAL     =   $06
+!WEATHER_HARVESTFESTIVAL    =   $07
+!WEATHER_THANKSGIVING       =   $08
+!WEATHER_STARNIGHTFESTIVAL  =   $09
+!WEATHER_NEWYEARFESTIVAL    =   $0A
+!WEATHER_EGGFESTIVAL        =   $0B
+!WEATHER_COUNT              =   $0C
+
+
+; Seasons                   $7F1F19
+!SEASON_SPRING              =   $00
+!SEASON_SUMMER              =   $01
+!SEASON_FALL                =   $02
+!SEASON_WINTER              =   $03
