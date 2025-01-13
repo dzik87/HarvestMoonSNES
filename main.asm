@@ -80,6 +80,7 @@
     incsrc "AUDIO/bank_B2.asm"
     
     ; AI
+    incsrc "AI/helpers.asm"
     incsrc "AI/bank_B3.asm"
     incsrc "AI/bank_B4.asm"
     incsrc "AI/bank_B5.asm"
