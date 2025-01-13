@@ -11,6 +11,7 @@
     incsrc "structures.asm"
     
     ; Source Code
+    incsrc "SOURCE/helpers.asm"
     incsrc "SOURCE/bank_80.asm"
     incsrc "SOURCE/bank_81.asm"
     incsrc "SOURCE/bank_82.asm"
