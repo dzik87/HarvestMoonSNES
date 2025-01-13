@@ -355,7 +355,7 @@ subItemCarried_RedEgg:
     LDA.W #$00A1                                               ;81821F|A9A100  |      ;
     LDX.W $09AD                                                ;818222|AEAD09  |0009AD;
     LDY.W $09AF                                                ;818225|ACAF09  |0009AF;
-    JSL.L fUnknown_82B03A                                      ;818228|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;818228|223AB082|82B03A;
  
  ++ JSR.W fUnknown_8188E5                                      ;81822C|20E588  |8188E5;
     SEP #$20                                                   ;81822F|E220    |      ;
@@ -391,7 +391,7 @@ subItemCarried_LightPurpleEgg:
     LDA.W #$00A1                                               ;818261|A9A100  |      ;
     LDX.W $09AD                                                ;818264|AEAD09  |0009AD;
     LDY.W $09AF                                                ;818267|ACAF09  |0009AF;
-    JSL.L fUnknown_82B03A                                      ;81826A|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;81826A|223AB082|82B03A;
  
  ++ JSR.W fUnknown_8188E5                                      ;81826E|20E588  |8188E5;
     SEP #$20                                                   ;818271|E220    |      ;
@@ -428,7 +428,7 @@ subItemCarried_BlueEgg:
     LDA.W #$00A1                                               ;8182A3|A9A100  |      ;
     LDX.W $09AD                                                ;8182A6|AEAD09  |0009AD;
     LDY.W $09AF                                                ;8182A9|ACAF09  |0009AF;
-    JSL.L fUnknown_82B03A                                      ;8182AC|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;8182AC|223AB082|82B03A;
  
  ++ JSR.W fUnknown_8188E5                                      ;8182B0|20E588  |8188E5;
     SEP #$20                                                   ;8182B3|E220    |      ;
@@ -461,7 +461,7 @@ subItemCarried_PurpleEgg:
     LDA.W #$00A1                                               ;8182E2|A9A100  |      ;
     LDX.W $09AD                                                ;8182E5|AEAD09  |0009AD;
     LDY.W $09AF                                                ;8182E8|ACAF09  |0009AF;
-    JSL.L fUnknown_82B03A                                      ;8182EB|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;8182EB|223AB082|82B03A;
  
  ++ JSR.W fUnknown_8188E5                                      ;8182EF|20E588  |8188E5;
     SEP #$20                                                   ;8182F2|E220    |      ;
@@ -488,7 +488,7 @@ subItemCarried_GreenEgg:
     LDA.W #$00A1                                               ;81831B|A9A100  |      ;
     LDX.W $09AD                                                ;81831E|AEAD09  |0009AD;
     LDY.W $09AF                                                ;818321|ACAF09  |0009AF;
-    JSL.L fUnknown_82B03A                                      ;818324|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;818324|223AB082|82B03A;
  
   + JSR.W fUnknown_8188E5                                      ;818328|20E588  |8188E5;
     SEP #$20                                                   ;81832B|E220    |      ;
@@ -2968,7 +2968,7 @@ fUnknown_819497:
     LDA.W #$00A1                                               ;819512|A9A100  |      ;
     LDX.W #$00E0                                               ;819515|A2E000  |      ;
     LDY.W #$00B0                                               ;819518|A0B000  |      ;
-    JSL.L fUnknown_82B03A                                      ;81951B|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;81951B|223AB082|82B03A;
     REP #$30                                                   ;81951F|C230    |      ;
     LDA.W $0978                                                ;819521|AD7809  |000978;
     STA.B $A5                                                  ;819524|85A5    |0000A5;
@@ -5421,7 +5421,7 @@ fItemSub81A9F6_0x15:
     LDA.W #$00D7                                               ;81ACFD|A9D700  |      ;
     LDX.W #$0090                                               ;81AD00|A29000  |      ;
     LDY.W #$0050                                               ;81AD03|A05000  |      ;
-    JSL.L fUnknown_82B03A                                      ;81AD06|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;81AD06|223AB082|82B03A;
  
   + REP #$30                                                   ;81AD0A|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;81AD0C|AF6E1F7F|7F1F6E;
@@ -5457,7 +5457,7 @@ fItemSub81A9F6_0x16:
     LDA.W #$00D7                                               ;81AD54|A9D700  |      ;
     LDX.W #$0090                                               ;81AD57|A29000  |      ;
     LDY.W #$0050                                               ;81AD5A|A05000  |      ;
-    JSL.L fUnknown_82B03A                                      ;81AD5D|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;81AD5D|223AB082|82B03A;
  
   + REP #$30                                                   ;81AD61|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;81AD63|AF6E1F7F|7F1F6E;
@@ -5493,7 +5493,7 @@ fItemSub81A9F6_0x17:
     LDA.W #$00D7                                               ;81ADAB|A9D700  |      ;
     LDX.W #$0140                                               ;81ADAE|A24001  |      ;
     LDY.W #$0060                                               ;81ADB1|A06000  |      ;
-    JSL.L fUnknown_82B03A                                      ;81ADB4|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;81ADB4|223AB082|82B03A;
  
   + REP #$30                                                   ;81ADB8|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;81ADBA|AF6E1F7F|7F1F6E;
@@ -14899,7 +14899,7 @@ subPlayerInteraction81D593_Return:
     LDA.W #$00A1                                               ;81F596|A9A100  |      ;
     LDX.W $09AD                                                ;81F599|AEAD09  |0009AD;
     LDY.W $09AF                                                ;81F59C|ACAF09  |0009AF;
-    JSL.L fUnknown_82B03A                                      ;81F59F|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;81F59F|223AB082|82B03A;
     REP #$30                                                   ;81F5A3|C230    |      ;
     LDA.W #$0040                                               ;81F5A5|A94000  |      ;
     EOR.W #$FFFF                                               ;81F5A8|49FFFF  |      ;

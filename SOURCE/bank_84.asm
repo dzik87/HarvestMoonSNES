@@ -1500,7 +1500,7 @@ fAIAction0x07_SetPlayerDirection:
     RTS                                                        ;848AE6|60      |      ;
  
  
-fAIAction0x08_ClearPlayerStateFlags:
+fAIAction0x08:
     REP #$30                                                   ;848AE7|C230    |      ;
     REP #$30                                                   ;848AE9|C230    |      ;
     LDA.B ptrAIActionData                                      ;848AEB|A5C9    |0000C9;
@@ -1772,7 +1772,7 @@ fAIAction0x0F:
     RTS                                                        ;848CE1|60      |      ;
  
  
-fAIAction0x10:
+fAIAction0x10_End:
     REP #$30                                                   ;848CE2|C230    |      ;
     SEP #$20                                                   ;848CE4|E220    |      ;
     REP #$10                                                   ;848CE6|C210    |      ;
@@ -1833,7 +1833,7 @@ fAIAction0x13:
     RTS                                                        ;848D43|60      |      ;
  
  
-fAIAction0x14:
+fAIAction0x14_JumpIfEqualsToIndexedValue:
     REP #$30                                                   ;848D44|C230    |      ;
     REP #$30                                                   ;848D46|C230    |      ;
     LDA.B ptrAIActionData                                      ;848D48|A5C9    |0000C9;
@@ -2626,7 +2626,7 @@ fAIAction0x22:
     RTS                                                        ;849305|60      |      ;
  
  
-fAIAction0x23:
+fAIAction0x23_OrWithIndexedValue:
     REP #$30                                                   ;849306|C230    |      ;
     REP #$30                                                   ;849308|C230    |      ;
     LDA.B ptrAIActionData                                      ;84930A|A5C9    |0000C9;
@@ -2784,7 +2784,7 @@ aAIActions:
     dw fAIAction0x05_SetMapDestinationCoords                   ;849423|        |848A65;
     dw fAIAction0x06_SetMapDestinationId                       ;849425|        |848A94;
     dw fAIAction0x07_SetPlayerDirection                        ;849427|        |848ABF;
-    dw fAIAction0x08_ClearPlayerStateFlags                     ;849429|        |848AE7;
+    dw fAIAction0x08                                           ;849429|        |848AE7;
     dw fAIAction0x09                                           ;84942B|        |848B08;
     dw fAIAction0x0A                                           ;84942D|        |848B83;
     dw fAIAction0x0B                                           ;84942F|        |848BAC;
@@ -2792,11 +2792,11 @@ aAIActions:
     dw fAIAction0x0D                                           ;849433|        |848C22;
     dw fAIAction0x0E                                           ;849435|        |848CA8;
     dw fAIAction0x0F                                           ;849437|        |848CB9;
-    dw fAIAction0x10                                           ;849439|        |848CE2;
+    dw fAIAction0x10_End                                       ;849439|        |848CE2;
     dw fAIAction0x11                                           ;84943B|        |848CFD;
     dw fAIAction0x12_AlwaysJump                                ;84943D|        |848D13;
     dw fAIAction0x13                                           ;84943F|        |848D24;
-    dw fAIAction0x14                                           ;849441|        |848D44;
+    dw fAIAction0x14_JumpIfEqualsToIndexedValue                ;849441|        |848D44;
     dw fAIAction0x15                                           ;849443|        |848DA5;
     dw fAIAction0x16                                           ;849445|        |848DFB;
     dw fAIAction0x17                                           ;849447|        |848E68;
@@ -2811,7 +2811,7 @@ aAIActions:
     dw fAIAction0x20                                           ;849459|        |84919D;
     dw fAIAction0x21                                           ;84945B|        |8491D2;
     dw fAIAction0x22                                           ;84945D|        |84923F;
-    dw fAIAction0x23                                           ;84945F|        |849306;
+    dw fAIAction0x23_OrWithIndexedValue                        ;84945F|        |849306;
     dw fAIAction0x24                                           ;849461|        |849356;
     dw fAIAction0x25                                           ;849463|        |849375;
     dw fAIAction0x26                                           ;849465|        |8493C9;
@@ -2864,7 +2864,7 @@ aAIActions:
     dw fAIAction0x55                                           ;8494C3|        |84BF20;
     dw fAIAction0x56_UseEquippedItem                           ;8494C5|        |84BF81;
     dw fAIAction0x57_UpdateStamina                             ;8494C7|        |84BFA0;
-    dw fAIAction0x58                                           ;8494C9|        |84BFBF;
+    dw fAIAction0x58_ReplaceFarmTile                           ;8494C9|        |84BFBF;
     dw fAIAction0x59_SwapEquippedItems                         ;8494CB|        |84C000;
  
 pppAITable_8494CD:
@@ -8112,7 +8112,7 @@ fAIAction0x4B:
     PLX                                                        ;84BA48|FA      |      ;
     SEP #$20                                                   ;84BA49|E220    |      ;
     PLA                                                        ;84BA4B|68      |      ;
-    JSL.L fUnknown_82B03A                                      ;84BA4C|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;84BA4C|223AB082|82B03A;
     RTS                                                        ;84BA50|60      |      ;
  
  
@@ -8863,7 +8863,7 @@ fAIAction0x57_UpdateStamina:
     RTS                                                        ;84BFBE|60      |      ;
  
  
-fAIAction0x58:
+fAIAction0x58_ReplaceFarmTile:
     REP #$30                                                   ;84BFBF|C230    |      ;
     REP #$30                                                   ;84BFC1|C230    |      ;
     LDA.B ptrAIActionData                                      ;84BFC3|A5C9    |0000C9;
@@ -8897,7 +8897,7 @@ fAIAction0x58:
     PLX                                                        ;84BFF7|FA      |      ;
     SEP #$20                                                   ;84BFF8|E220    |      ;
     PLA                                                        ;84BFFA|68      |      ;
-    JSL.L fUnknown_82B049                                      ;84BFFB|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemap                               ;84BFFB|2249B082|82B049;
     RTS                                                        ;84BFFF|60      |      ;
  
  

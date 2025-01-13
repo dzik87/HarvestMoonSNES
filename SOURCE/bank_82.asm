@@ -3439,7 +3439,7 @@ subToolUsed82A5C3_WateringCan:
     SEP #$20                                                   ;829D0D|E220    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;829D0F|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;829D12|AC8709  |000987;
-    JSL.L fUnknown_82B03A                                      ;829D15|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;829D15|223AB082|82B03A;
     REP #$20                                                   ;829D19|C220    |      ;
     PLA                                                        ;829D1B|68      |      ;
     ASL A                                                      ;829D1C|0A      |      ;
@@ -4160,7 +4160,7 @@ subToolUsed82A5C3_Sprinkler:
     SEP #$20                                                   ;82A332|E220    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;82A334|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A337|AC8709  |000987;
-    JSL.L fUnknown_82B03A                                      ;82A33A|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;82A33A|223AB082|82B03A;
     REP #$20                                                   ;82A33E|C220    |      ;
     PLA                                                        ;82A340|68      |      ;
     ASL A                                                      ;82A341|0A      |      ;
@@ -6074,8 +6074,8 @@ fUnknown_82AF00:
     db $09,$02,$07,$01,$07,$04,$07,$04,$09,$03,$08,$02         ;82B02A|        |      ;
     db $09,$06,$08,$05                                         ;82B036|        |      ;
  
-fUnknown_82B03A:
-    SEP #$20                                                   ;82B03A|E220    |      ;
+fMap_UpdateCurrentTilemap:
+    SEP #$20                                                   ;82B03A|E220    |      ; A: nTileId, X: nPosX, Y: nPosY
     REP #$10                                                   ;82B03C|C210    |      ;
     PHA                                                        ;82B03E|48      |      ;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B03F|203CB1  |82B13C;
@@ -6085,8 +6085,8 @@ fUnknown_82B03A:
     RTL                                                        ;82B048|6B      |      ;
  
  
-fUnknown_82B049:
-    SEP #$20                                                   ;82B049|E220    |      ;
+fMap_UpdateFarmTilemap:
+    SEP #$20                                                   ;82B049|E220    |      ; A: nTileId, X: nPosX, Y: nPosY
     REP #$10                                                   ;82B04B|C210    |      ;
     PHA                                                        ;82B04D|48      |      ;
     LDA.B #$04                                                 ;82B04E|A904    |      ;
@@ -6219,7 +6219,7 @@ fUnknown_82B0A7:
     TAY                                                        ;82B10C|A8      |      ;
     SEP #$20                                                   ;82B10D|E220    |      ;
     PLA                                                        ;82B10F|68      |      ;
-    JSL.L fUnknown_82B03A                                      ;82B110|223AB082|82B03A;
+    JSL.L fMap_UpdateCurrentTilemap                            ;82B110|223AB082|82B03A;
     REP #$30                                                   ;82B114|C230    |      ;
     PLY                                                        ;82B116|7A      |      ;
     PLX                                                        ;82B117|FA      |      ;
