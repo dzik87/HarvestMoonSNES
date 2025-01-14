@@ -148,22 +148,20 @@ macro AICMD0x14_JumpIfEqualsToIndexedValue(nAddress, nIndex, pNextAction)
 endmacro
 
 ; AI command 0x15 - 
-macro AICMD0x15(nUnknown1, nUnknown2, nUnknown3, pNextAction)
+macro AICMD0x15(nAddress, nUnknown2, pNextAction)
     db $15
-    dw <nUnknown1>
+    dl <nAddress>
     db <nUnknown2>
-    db <nUnknown3>
     dw <pNextAction>
     
 endmacro
 
 ; AI command 0x16 - 
-macro AICMD0x16(nUnknown1, nUnknown2, nUnknown3, nUnknown4, pNextAction)
+macro AICMD0x16(nAddress, nUnknown2, nUnknown3, pNextAction)
     db $16
-    dw <nUnknown1>
+    dl <nAddress>
     db <nUnknown2>
     db <nUnknown3>
-    db <nUnknown4>
     dw <pNextAction>
     
 endmacro
@@ -192,11 +190,11 @@ macro AICMD0x19(nUnknown1, nUnknown2)
 endmacro
 
 ; AI command 0x1A - 
-macro AICMD0x1A(nUnknown1, nUnknown2, nUnknown3, nUnknown4)
+macro AICMD0x1A(nUnknown1, nUnknown2, pPointerB3, nUnknown4)
     db $1A
     dw <nUnknown1>
     dw <nUnknown2>
-    dw <nUnknown3>
+    dw <pPointerB3>
     db <nUnknown4>
     
 endmacro
@@ -485,11 +483,11 @@ macro AICMD0x40()
     
 endmacro
 
-; AI command 0x41 - 
-macro AICMD0x41(pPointer, nUnknown2)
+; AI command 0x41 - Adds nValue to [pAddress]
+macro AICMD0x41_ModifyVariable(pAddress, nValue)
     db $41
-    dl <pPointer>
-    dw <nUnknown2>
+    dl <pAddress>
+    dw <nValue>
     
 endmacro
 
