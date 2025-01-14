@@ -25,20 +25,20 @@ fGame_TimeHandler:
  
  
   + SEP #$20                                                   ;828026|E220    |      ;
-    LDA.L nINGameMinuteCounter                                 ;828028|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;828028|AF1E1F7F|7F1F1E;
     INC A                                                      ;82802C|1A      |      ;
-    STA.L nINGameMinuteCounter                                 ;82802D|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;82802D|8F1E1F7F|7F1F1E;
     CMP.B #$3C                                                 ;828031|C93C    |      ; Ingame minute counter
     BNE .continue                                              ;828033|D057    |82808C;
     LDA.B #$00                                                 ;828035|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;828037|8F1E1F7F|7F1F1E;
-    LDA.L nIngameHourCounter                                   ;82803B|AF1D1F7F|7F1F1D;
+    STA.L nInGameMinuteCounter                                 ;828037|8F1E1F7F|7F1F1E;
+    LDA.L nInGameHourCounter                                   ;82803B|AF1D1F7F|7F1F1D;
     INC A                                                      ;82803F|1A      |      ;
-    STA.L nIngameHourCounter                                   ;828040|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;828040|8F1D1F7F|7F1F1D;
     CMP.B #$0F                                                 ;828044|C90F    |      ; Ingame hour counter
     BNE .continue                                              ;828046|D044    |82808C;
     LDA.B #$00                                                 ;828048|A900    |      ;
-    STA.L nIngameHourCounter                                   ;82804A|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;82804A|8F1D1F7F|7F1F1D;
     LDA.L nCurrentTimeID                                       ;82804E|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;828052|C912    |      ;
     BEQ .continue                                              ;828054|F036    |82808C;
@@ -448,9 +448,9 @@ fNextDayHandler:
     LDA.B #$06                                                 ;828382|A906    |      ; Set time to 6:00AM
     STA.L nCurrentTimeID                                       ;828384|8F1C1F7F|7F1F1C; Store current time
     LDA.B #$00                                                 ;828388|A900    |      ;
-    STA.L nIngameHourCounter                                   ;82838A|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;82838A|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;82838E|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;828390|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;828390|8F1E1F7F|7F1F1E;
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
     JSL.L fObjectMap_Unknown82A811                             ;828398|2211A882|82A811;
     JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
@@ -7160,9 +7160,9 @@ fUnknown_82D1C0:
     LDA.B #$06                                                 ;82D1D6|A906    |      ;
     STA.L nCurrentTimeID                                       ;82D1D8|8F1C1F7F|7F1F1C;
     LDA.B #$00                                                 ;82D1DC|A900    |      ;
-    STA.L nIngameHourCounter                                   ;82D1DE|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;82D1DE|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;82D1E2|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;82D1E4|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;82D1E4|8F1E1F7F|7F1F1E;
     LDA.B #$01                                                 ;82D1E8|A901    |      ;
     STA.B nUnknown0x95                                         ;82D1EA|8595    |000095;
     STZ.B n8TempVar3                                           ;82D1EC|6494    |000094;
@@ -7345,9 +7345,9 @@ fUnknown_82D3C7:
     LDA.B #$06                                                 ;82D3DD|A906    |      ;
     STA.L nCurrentTimeID                                       ;82D3DF|8F1C1F7F|7F1F1C;
     LDA.B #$00                                                 ;82D3E3|A900    |      ;
-    STA.L nIngameHourCounter                                   ;82D3E5|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;82D3E5|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;82D3E9|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;82D3EB|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;82D3EB|8F1E1F7F|7F1F1E;
     LDA.B #$01                                                 ;82D3EF|A901    |      ;
     STA.B nUnknown0x95                                         ;82D3F1|8595    |000095;
     STZ.B n8TempVar3                                           ;82D3F3|6494    |000094;
