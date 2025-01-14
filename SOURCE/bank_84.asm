@@ -2841,7 +2841,7 @@ aAIActions:
     dw fAIAction0x3E                                           ;849495|        |84B556;
     dw fAIAction0x3F_ThrowHeldItem                             ;849497|        |84B57B;
     dw fAIAction0x40_DisableTileInteractions                   ;849499|        |84B58F;
-    dw fAIAction0x41                                           ;84949B|        |84B5A9;
+    dw fAIAction0x41_ModifyVariable                            ;84949B|        |84B5A9;
     dw fAIAction0x42                                           ;84949D|        |84B602;
     dw fAIAction0x43                                           ;84949F|        |84B666;
     dw fAIAction0x44                                           ;8494A1|        |84B6BC;
@@ -7466,7 +7466,7 @@ fAIAction0x40_DisableTileInteractions:
     RTS                                                        ;84B5A8|60      |      ;
  
  
-fAIAction0x41:
+fAIAction0x41_ModifyVariable:
     REP #$30                                                   ;84B5A9|C230    |      ;
     REP #$30                                                   ;84B5AB|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B5AD|A5C9    |0000C9;
