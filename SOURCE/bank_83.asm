@@ -3013,8 +3013,7 @@ aTextDataTableFFFE:
  
 pTextAmmountTable:
     dl $000001,$00000A,$000064,$0003E8                         ;8398D6|        |      ; 0x06 * [n24/ptr24] (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
-    dl $002710,$0186A0,$0F4240                                 ;8398E2|        |      ;
-    dl GFX_989680                                              ;8398EB|        |989680;
+    dl $002710,$0186A0,$0F4240,$989680                         ;8398E2|        |      ;
  
 aTextDataTableFFFC:
     dl $7F1F04                                                 ;8398EE|        |7F1F04; 0x70 * [ptr28 pData, n8 nSize]
@@ -4838,9 +4837,9 @@ fGameEngine_FirstNight:
     LDA.B #$06                                                 ;83AC79|A906    |      ;
     STA.L nCurrentTimeID                                       ;83AC7B|8F1C1F7F|7F1F1C;
     LDA.B #$00                                                 ;83AC7F|A900    |      ;
-    STA.L nIngameHourCounter                                   ;83AC81|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;83AC81|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;83AC85|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;83AC87|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;83AC87|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83AC8B|C220    |      ;
     LDA.W #$0000                                               ;83AC8D|A90000  |      ;
     STA.L strcDailyFlags.flags1                                ;83AC90|8F5A1F7F|7F1F5A;
@@ -8999,13 +8998,13 @@ CODE_83CC53:
  
  
 CODE_83CC60:
-    LDA.L nIngameHourCounter                                   ;83CC60|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CC60|AF1D1F7F|7F1F1D;
     BEQ CODE_83CC69                                            ;83CC64|F003    |83CC69;
     JMP.W CODE_83CE5B                                          ;83CC66|4C5BCE  |83CE5B;
  
  
 CODE_83CC69:
-    LDA.L nINGameMinuteCounter                                 ;83CC69|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CC69|AF1E1F7F|7F1F1E;
     BEQ CODE_83CC72                                            ;83CC6D|F003    |83CC72;
     JMP.W CODE_83CE5B                                          ;83CC6F|4C5BCE  |83CE5B;
  
@@ -9295,9 +9294,9 @@ CODE_83CF10:
     LDA.L nCurrentTimeID                                       ;83CF1B|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF1F|C906    |      ;
     BNE CODE_83CF42                                            ;83CF21|D01F    |83CF42;
-    LDA.L nIngameHourCounter                                   ;83CF23|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CF23|AF1D1F7F|7F1F1D;
     BNE CODE_83CF42                                            ;83CF27|D019    |83CF42;
-    LDA.L nINGameMinuteCounter                                 ;83CF29|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CF29|AF1E1F7F|7F1F1E;
     BEQ CODE_83CF32                                            ;83CF2D|F003    |83CF32;
     JMP.W CODE_83CFF8                                          ;83CF2F|4CF8CF  |83CFF8;
  
@@ -9320,9 +9319,9 @@ CODE_83CF42:
     LDA.L nCurrentTimeID                                       ;83CF4F|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF53|C906    |      ;
     BNE CODE_83CF73                                            ;83CF55|D01C    |83CF73;
-    LDA.L nIngameHourCounter                                   ;83CF57|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CF57|AF1D1F7F|7F1F1D;
     BNE CODE_83CF73                                            ;83CF5B|D016    |83CF73;
-    LDA.L nINGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E;
     BNE CODE_83CF73                                            ;83CF61|D010    |83CF73;
     REP #$30                                                   ;83CF63|C230    |      ;
     LDA.W #$0006                                               ;83CF65|A90600  |      ;
@@ -9341,9 +9340,9 @@ CODE_83CF73:
     LDA.L nCurrentTimeID                                       ;83CF80|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF84|C906    |      ;
     BNE CODE_83CFA4                                            ;83CF86|D01C    |83CFA4;
-    LDA.L nIngameHourCounter                                   ;83CF88|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CF88|AF1D1F7F|7F1F1D;
     BNE CODE_83CFA4                                            ;83CF8C|D016    |83CFA4;
-    LDA.L nINGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E;
     BNE CODE_83CFA4                                            ;83CF92|D010    |83CFA4;
     REP #$30                                                   ;83CF94|C230    |      ;
     LDA.W #$0006                                               ;83CF96|A90600  |      ;
@@ -9370,9 +9369,9 @@ CODE_83CFA4:
     LDA.L nCurrentTimeID                                       ;83CFC7|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CFCB|C906    |      ;
     BNE CODE_83CFF8                                            ;83CFCD|D029    |83CFF8;
-    LDA.L nIngameHourCounter                                   ;83CFCF|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CFCF|AF1D1F7F|7F1F1D;
     BNE CODE_83CFF8                                            ;83CFD3|D023    |83CFF8;
-    LDA.L nINGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E;
     BNE CODE_83CFF8                                            ;83CFD9|D01D    |83CFF8;
     REP #$20                                                   ;83CFDB|C220    |      ;
     LDA.L strcEventFlags.flags7                                ;83CFDD|AF701F7F|7F1F70;
@@ -9504,9 +9503,9 @@ CODE_83D0FF:
     LDA.L nCurrentTimeID                                       ;83D109|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D10D|C906    |      ;
     BNE CODE_83D163                                            ;83D10F|D052    |83D163;
-    LDA.L nIngameHourCounter                                   ;83D111|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D111|AF1D1F7F|7F1F1D;
     BNE CODE_83D163                                            ;83D115|D04C    |83D163;
-    LDA.L nINGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E;
     BNE CODE_83D163                                            ;83D11B|D046    |83D163;
     REP #$20                                                   ;83D11D|C220    |      ;
     LDA.W nMapEngine_CurrentMapId                              ;83D11F|AD9601  |000196;
@@ -9550,9 +9549,9 @@ CODE_83D175:
     LDA.L nCurrentTimeID                                       ;83D177|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D17B|C906    |      ;
     BNE CODE_83D1CE                                            ;83D17D|D04F    |83D1CE;
-    LDA.L nIngameHourCounter                                   ;83D17F|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D17F|AF1D1F7F|7F1F1D;
     BNE CODE_83D1CE                                            ;83D183|D049    |83D1CE;
-    LDA.L nINGameMinuteCounter                                 ;83D185|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D185|AF1E1F7F|7F1F1E;
     BNE CODE_83D1CE                                            ;83D189|D043    |83D1CE;
     LDA.L nCurrentWeekdayID                                    ;83D18B|AF1A1F7F|7F1F1A;
     CMP.B #$06                                                 ;83D18F|C906    |      ;
@@ -9651,9 +9650,9 @@ CODE_83D23E:
     LDA.L nCurrentTimeID                                       ;83D26D|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D271|C906    |      ;
     BNE CODE_83D29E                                            ;83D273|D029    |83D29E;
-    LDA.L nIngameHourCounter                                   ;83D275|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D275|AF1D1F7F|7F1F1D;
     BNE CODE_83D29E                                            ;83D279|D023    |83D29E;
-    LDA.L nINGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E;
     BNE CODE_83D29E                                            ;83D27F|D01D    |83D29E;
     REP #$20                                                   ;83D281|C220    |      ;
     LDA.L strcEventFlags.flags4                                ;83D283|AF6A1F7F|7F1F6A;
@@ -9678,9 +9677,9 @@ CODE_83D29E:
     LDA.L nCurrentTimeID                                       ;83D2AA|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D2AE|C906    |      ;
     BNE CODE_83D2DF                                            ;83D2B0|D02D    |83D2DF;
-    LDA.L nIngameHourCounter                                   ;83D2B2|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D2B2|AF1D1F7F|7F1F1D;
     BNE CODE_83D2DF                                            ;83D2B6|D027    |83D2DF;
-    LDA.L nINGameMinuteCounter                                 ;83D2B8|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D2B8|AF1E1F7F|7F1F1E;
     BNE CODE_83D2DF                                            ;83D2BC|D021    |83D2DF;
     LDA.B #$08                                                 ;83D2BE|A908    |      ;
     JSL.L fCore_GetRandomNumber                                ;83D2C0|22F98980|8089F9;
@@ -11569,9 +11568,9 @@ CODE_83E1BA:
     LDA.L nCurrentTimeID                                       ;83E1BE|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E1C2|C906    |      ;
     BNE CODE_83E210                                            ;83E1C4|D04A    |83E210;
-    LDA.L nIngameHourCounter                                   ;83E1C6|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83E1C6|AF1D1F7F|7F1F1D;
     BNE CODE_83E210                                            ;83E1CA|D044    |83E210;
-    LDA.L nINGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E;
     BNE CODE_83E210                                            ;83E1D0|D03E    |83E210;
     REP #$20                                                   ;83E1D2|C220    |      ;
     LDA.L strcEventFlags.flags6                                ;83E1D4|AF6E1F7F|7F1F6E;
@@ -11758,9 +11757,9 @@ CODE_83E340:
     LDA.L nCurrentTimeID                                       ;83E35C|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E360|C906    |      ;
     BNE CODE_83E380                                            ;83E362|D01C    |83E380;
-    LDA.L nIngameHourCounter                                   ;83E364|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83E364|AF1D1F7F|7F1F1D;
     BNE CODE_83E380                                            ;83E368|D016    |83E380;
-    LDA.L nINGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E;
     BNE CODE_83E380                                            ;83E36E|D010    |83E380;
     REP #$30                                                   ;83E370|C230    |      ;
     LDA.W #$0000                                               ;83E372|A90000  |      ;
@@ -11785,9 +11784,9 @@ CODE_83E380:
     LDA.L nCurrentTimeID                                       ;83E39C|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E3A0|C906    |      ;
     BNE CODE_83E3C0                                            ;83E3A2|D01C    |83E3C0;
-    LDA.L nIngameHourCounter                                   ;83E3A4|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83E3A4|AF1D1F7F|7F1F1D;
     BNE CODE_83E3C0                                            ;83E3A8|D016    |83E3C0;
-    LDA.L nINGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E;
     BNE CODE_83E3C0                                            ;83E3AE|D010    |83E3C0;
     REP #$30                                                   ;83E3B0|C230    |      ;
     LDA.W #$0000                                               ;83E3B2|A90000  |      ;
@@ -12259,9 +12258,9 @@ subEngineMap_0x3C:
     LDA.B #$07                                                 ;83E773|A907    |      ;
     STA.L nCurrentTimeID                                       ;83E775|8F1C1F7F|7F1F1C;
     LDA.B #$00                                                 ;83E779|A900    |      ;
-    STA.L nIngameHourCounter                                   ;83E77B|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;83E77B|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;83E77F|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;83E781|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;83E781|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83E785|C220    |      ;
     STZ.W $0915                                                ;83E787|9C1509  |000915;
     STZ.B strcPlayerFlags                                      ;83E78A|64D2    |0000D2;
@@ -12860,9 +12859,9 @@ subEngineMap_0x3D:
     LDA.B #$06                                                 ;83EBAC|A906    |      ;
     STA.L nCurrentTimeID                                       ;83EBAE|8F1C1F7F|7F1F1C;
     LDA.B #$00                                                 ;83EBB2|A900    |      ;
-    STA.L nIngameHourCounter                                   ;83EBB4|8F1D1F7F|7F1F1D;
+    STA.L nInGameHourCounter                                   ;83EBB4|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;83EBB8|A900    |      ;
-    STA.L nINGameMinuteCounter                                 ;83EBBA|8F1E1F7F|7F1F1E;
+    STA.L nInGameMinuteCounter                                 ;83EBBA|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83EBBE|C220    |      ;
     STZ.W $0915                                                ;83EBC0|9C1509  |000915;
     STZ.B strcPlayerFlags                                      ;83EBC3|64D2    |0000D2;

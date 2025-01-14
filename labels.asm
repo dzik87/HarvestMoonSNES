@@ -323,8 +323,8 @@
     nCurrentWeekdayID = $7F1F1A; !^ n8 ^!
     nCurrentDay = $7F1F1B; !^ n8 ^!
     nCurrentTimeID = $7F1F1C; !^ n8 ^!
-    nIngameHourCounter = $7F1F1D; !^ n8 ^!
-    nINGameMinuteCounter = $7F1F1E; !^ n8 ^!
+    nInGameHourCounter = $7F1F1D; !^ n8 ^!
+    nInGameMinuteCounter = $7F1F1E; !^ n8 ^!
     nLove_Maria = $7F1F1F; !^ n16 ^!
     nLove_Ann = $7F1F21; !^ n16 ^!
     nLove_Nina = $7F1F23; !^ n16 ^!
