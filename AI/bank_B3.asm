@@ -3705,7 +3705,7 @@ DATA8_B3BA59:
     %AICMD0x1D($01C3, $00)                                     ;B3BADB
     %AICMD0x20($00, $B3BAE7)                                   ;B3BADF
     %AICMD0x20($01, $B3BB0A)                                   ;B3BAE3
-    %AICMD0x46($7F1F04, $000000, $000063, $BB11)               ;B3BAE7
+    %AICMD0x46($7F1F04, $000000, $000063, $B3BB11)             ;B3BAE7
     %AICMD0x1C($01C4, $00)                                     ;B3BAF3
     %AICMD0x42($7F1F04, $FFFF9C)                               ;B3BAF7
     %AICMD0x37()                                               ;B3BAFE
@@ -7328,7 +7328,7 @@ AI_B3F106:
     %AICMD0x12_Jump($B3F225)                                   ;B3F249
     %AICMD0x1C($024E, $00)                                     ;B3F24C
     %AICMD0x12_Jump($B3F225)                                   ;B3F250
-    %AICMD0x46($7F1F04, $000000, $0000C7, $F262)               ;B3F253
+    %AICMD0x46($7F1F04, $000000, $0000C7, $B3F262)             ;B3F253
     %AICMD0x12_Jump($B3F269)                                   ;B3F25F
     %AICMD0x1C($0213, $00)                                     ;B3F262
     %AICMD0x12_Jump($B3F22B)                                   ;B3F266

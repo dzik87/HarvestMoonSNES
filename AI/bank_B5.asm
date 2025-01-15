@@ -2508,7 +2508,7 @@ DATA8_B5A85D:
     %AICMD0x1B($02DD, $00)                                     ;B5ABB3
     %AICMD0x13($003C)                                          ;B5ABB7
     %AICMD0x0B($00)                                            ;B5ABBA
-    %AICMD0x46($7F1F04, $0003E8, $00270F, $ABCF)               ;B5ABBC
+    %AICMD0x46($7F1F04, $0003E8, $00270F, $B5ABCF)             ;B5ABBC
     %AICMD0x54($047B, $01)                                     ;B5ABC8
     %AICMD0x12_Jump($B5ABD6)                                   ;B5ABCC
     %AICMD0x54($048E, $01)                                     ;B5ABCF
