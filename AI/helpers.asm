@@ -139,7 +139,7 @@ macro AICMD0x13(nUnknown1)
 endmacro
 
 ; AI command 0x14 - Jump to pNextAction if value at nAddress = aAISetMask[nIndex *2] (button mask ???)
-macro AICMD0x14_JumpIfEqualsToIndexedValue(nAddress, nIndex, pNextAction)
+macro AICMD0x14_JumpIfEqualsToIdxValue(nAddress, nIndex, pNextAction)
     db $14
     dl <nAddress>
     db <nIndex>
