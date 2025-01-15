@@ -246,11 +246,10 @@ macro AICMD0x20(nUnknown1, pNextAction)
 endmacro
 
 ; AI command 0x21 - 
-macro AICMD0x21(nUnknown1, nUnknown2, nUnknown3)
+macro AICMD0x21(nUnknown1, nUnknown2)
     db $21
-    dw <nUnknown1>
+    dl <nUnknown1>
     db <nUnknown2>
-    db <nUnknown3>
     
 endmacro
 
@@ -306,11 +305,10 @@ macro AICMD0x27(nUnknown1, nUnknown2, nUnknown3)
 endmacro
 
 ; AI command 0x28 - does not exists, pointer to 0x26
-macro AICMD0x28(nUnknown1, nUnknown2, nUnknown3)
+macro AICMD0x28(nUnknown1, nUnknown2)
     db $28
-    dw <nUnknown1>
+    dl <nUnknown1>
     db <nUnknown2>
-    db <nUnknown3>
     
 endmacro
 
@@ -384,11 +382,10 @@ macro AICMD0x31_UpdateCow()
 endmacro
 
 ; AI command 0x32 - 
-macro AICMD0x32(nUnknown1, nUnknown2, nUnknown3)
+macro AICMD0x32(nUnknown1, nUnknown2)
     db $32
-    dw <nUnknown1>
-    db <nUnknown2>
-    dw <nUnknown3>
+    dl <nUnknown1>
+    dw <nUnknown2>
     
 endmacro
 
