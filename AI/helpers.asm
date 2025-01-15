@@ -216,9 +216,9 @@ macro AICMD0x1C(nUnknown1, nUnknown2)
 endmacro
 
 ; AI command 0x1D - 
-macro AICMD0x1D(nUnknown1, nUnknown2)
+macro AICMD0x1D(nDialogId, nUnknown2)
     db $1D
-    dw <nUnknown1>
+    dw <nDialogId>
     db <nUnknown2>
     
 endmacro
@@ -240,7 +240,7 @@ endmacro
 ; AI command 0x20 - 
 macro AICMD0x20(nUnknown1, pNextAction)
     db $20
-    dw <nUnknown1>
+    db <nUnknown1>
     dw <pNextAction>
     
 endmacro
@@ -429,10 +429,10 @@ macro AICMD0x38()
 endmacro
 
 ; AI command 0x39 - 
-macro AICMD0x39(nUnknown1, nUnknown2)
+macro AICMD0x39(nIndex, nUnknown2)
     db $39
-    db <nUnknown1>
-    dl <nUnknown2>
+    db <nIndex>
+    dw <nUnknown2>
     
 endmacro
 
@@ -440,7 +440,7 @@ endmacro
 macro AICMD0x3A(nUnknown1, nUnknown2)
     db $3A
     db <nUnknown1>
-    dl <nUnknown2>
+    dw <nUnknown2>
     
 endmacro
 
