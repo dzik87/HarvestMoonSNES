@@ -22,81 +22,81 @@ pScripting_B58000:
  
 DATA8_B58020:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8036) ;B58020
-    %AICMD0x15($7F1F19, $03, $8036)                            ;B58027
-    %AICMD0x16($7F1F1C, $0B, $0E, $84D4)                       ;B5802E
-    %AICMD0x15($7F1F1C, $12, $805A)                            ;B58036
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $804F) ;B5803D
-    %AICMD0x1A($0058, $0068, $845C, $00)                       ;B58044
-    %AICMD0x12_Jump($8087)                                     ;B5804C
-    %AICMD0x1A($0148, $0078, $845C, $00)                       ;B5804F
-    %AICMD0x12_Jump($8087)                                     ;B58057
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58036)   ;B58020
+    %AICMD0x15($7F1F19, $03, $B58036)                          ;B58027
+    %AICMD0x16($7F1F1C, $0B, $0E, $B584D4)                     ;B5802E
+    %AICMD0x15($7F1F1C, $12, $B5805A)                          ;B58036
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B5804F)   ;B5803D
+    %AICMD0x1A($0058, $0068, $B3845C, $00)                     ;B58044
+    %AICMD0x12_Jump($B58087)                                   ;B5804C
+    %AICMD0x1A($0148, $0078, $B3845C, $00)                     ;B5804F
+    %AICMD0x12_Jump($B58087)                                   ;B58057
     %AICMD0x41_ModifyVariable($7F1F1F, $FFFE)                  ;B5805A
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $8077) ;B58060
-    %AICMD0x1A($0029, $0053, $8468, $00)                       ;B58067
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B58077)   ;B58060
+    %AICMD0x1A($0029, $0053, $B38468, $00)                     ;B58067
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B5806F
-    %AICMD0x12_Jump($8096)                                     ;B58074
-    %AICMD0x1A($0119, $0063, $8468, $00)                       ;B58077
+    %AICMD0x12_Jump($B58096)                                   ;B58074
+    %AICMD0x1A($0119, $0063, $B38468, $00)                     ;B58077
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B5807F
-    %AICMD0x12_Jump($8096)                                     ;B58084
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $84A0) ;B58087
-    %AICMD0x2D($8169, $809C)                                   ;B5808E
-    %AICMD0x12_Jump($8087)                                     ;B58093
+    %AICMD0x12_Jump($B58096)                                   ;B58084
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B584A0)   ;B58087
+    %AICMD0x2D($B58169, $B5809C)                               ;B5808E
+    %AICMD0x12_Jump($B58087)                                   ;B58093
     %AICMD0x1F($84CD)                                          ;B58096
-    %AICMD0x12_Jump($8096)                                     ;B58099
-    %AICMD0x15($80091E, $02, $80DE)                            ;B5809C
-    %AICMD0x16($80091E, $01, $05, $80EB)                       ;B580A3
-    %AICMD0x15($80091E, $07, $80EB)                            ;B580AB
-    %AICMD0x16($80091E, $10, $17, $80EB)                       ;B580B2
-    %AICMD0x15($80091E, $19, $80FF)                            ;B580BA
-    %AICMD0x15($80091E, $49, $80FF)                            ;B580C1
-    %AICMD0x15($80091E, $06, $8120)                            ;B580C8
-    %AICMD0x16($80091E, $09, $0C, $8113)                       ;B580CF
+    %AICMD0x12_Jump($B58096)                                   ;B58099
+    %AICMD0x15($80091E, $02, $B580DE)                          ;B5809C
+    %AICMD0x16($80091E, $01, $05, $B580EB)                     ;B580A3
+    %AICMD0x15($80091E, $07, $B580EB)                          ;B580AB
+    %AICMD0x16($80091E, $10, $17, $B580EB)                     ;B580B2
+    %AICMD0x15($80091E, $19, $B580FF)                          ;B580BA
+    %AICMD0x15($80091E, $49, $B580FF)                          ;B580C1
+    %AICMD0x15($80091E, $06, $B58120)                          ;B580C8
+    %AICMD0x16($80091E, $09, $0C, $B58113)                     ;B580CF
     %AICMD0x1C($0200, $00)                                     ;B580D7
-    %AICMD0x12_Jump($8087)                                     ;B580DB
+    %AICMD0x12_Jump($B58087)                                   ;B580DB
     %AICMD0x1C($03B0, $00)                                     ;B580DE
     %AICMD0x41_ModifyVariable($7F1F1F, $FFFA)                  ;B580E2
-    %AICMD0x12_Jump($8087)                                     ;B580E8
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8142) ;B580EB
+    %AICMD0x12_Jump($B58087)                                   ;B580E8
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58142)   ;B580EB
     %AICMD0x41_ModifyVariable($7F1F1F, $0004)                  ;B580F2
     %AICMD0x1C($03B2, $00)                                     ;B580F8
-    %AICMD0x12_Jump($8087)                                     ;B580FC
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8142) ;B580FF
+    %AICMD0x12_Jump($B58087)                                   ;B580FC
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58142)   ;B580FF
     %AICMD0x1C($03B5, $00)                                     ;B58106
     %AICMD0x41_ModifyVariable($7F1F1F, $0008)                  ;B5810A
-    %AICMD0x12_Jump($8087)                                     ;B58110
+    %AICMD0x12_Jump($B58087)                                   ;B58110
     %AICMD0x1C($01D9, $00)                                     ;B58113
     %AICMD0x41_ModifyVariable($7F1F1F, $FFFC)                  ;B58117
-    %AICMD0x12_Jump($8087)                                     ;B5811D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8142) ;B58120
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $814F) ;B58127
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $815C) ;B5812E
+    %AICMD0x12_Jump($B58087)                                   ;B5811D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58142)   ;B58120
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B5814F)   ;B58127
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B5815C)   ;B5812E
     %AICMD0x41_ModifyVariable($7F1F1F, $0008)                  ;B58135
     %AICMD0x1C($0212, $00)                                     ;B5813B
-    %AICMD0x12_Jump($8087)                                     ;B5813F
+    %AICMD0x12_Jump($B58087)                                   ;B5813F
     %AICMD0x1C($01BD, $00)                                     ;B58142
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58146
-    %AICMD0x12_Jump($8087)                                     ;B5814C
+    %AICMD0x12_Jump($B58087)                                   ;B5814C
     %AICMD0x1C($041D, $00)                                     ;B5814F
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58153
-    %AICMD0x12_Jump($8087)                                     ;B58159
+    %AICMD0x12_Jump($B58087)                                   ;B58159
     %AICMD0x1C($041E, $00)                                     ;B5815C
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58160
-    %AICMD0x12_Jump($8087)                                     ;B58166
-    %AICMD0x16($7F1F1C, $0F, $12, $8466)                       ;B58169
+    %AICMD0x12_Jump($B58087)                                   ;B58166
+    %AICMD0x16($7F1F1C, $0F, $12, $B58466)                     ;B58169
     %AICMD0x43($7F1F3B, $0001, $8295)                          ;B58171
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $829C) ;B58179
-    %AICMD0x15($80098C, $03, $82A3)                            ;B58180
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $82AA) ;B58187
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $829C) ;B5818E
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B5829C)   ;B58179
+    %AICMD0x15($80098C, $03, $B582A3)                          ;B58180
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B582AA)   ;B58187
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B5829C)   ;B5818E
     %AICMD0x43($7F1F37, $0001, $82BF)                          ;B58195
     %AICMD0x43($7F1F39, $0001, $82BF)                          ;B5819D
-    %AICMD0x45($7F1F37, $0002, $0013, $82C6)                   ;B581A5
-    %AICMD0x45($7F1F39, $0002, $0013, $82C6)                   ;B581AF
-    %AICMD0x45($7F1F37, $0014, $0027, $82DA)                   ;B581B9
-    %AICMD0x45($7F1F39, $0014, $0027, $82DA)                   ;B581C3
-    %AICMD0x45($7F1F37, $0028, $003B, $82EE)                   ;B581CD
-    %AICMD0x45($7F1F39, $0028, $003B, $82EE)                   ;B581D7
+    %AICMD0x45($7F1F37, $0002, $0013, $B582C6)                 ;B581A5
+    %AICMD0x45($7F1F39, $0002, $0013, $B582C6)                 ;B581AF
+    %AICMD0x45($7F1F37, $0014, $0027, $B582DA)                 ;B581B9
+    %AICMD0x45($7F1F39, $0014, $0027, $B582DA)                 ;B581C3
+    %AICMD0x45($7F1F37, $0028, $003B, $B582EE)                 ;B581CD
+    %AICMD0x45($7F1F39, $0028, $003B, $B582EE)                 ;B581D7
     %AICMD0x43($7F1F37, $005A, $82FF)                          ;B581E1
     %AICMD0x43($7F1F39, $005A, $82FF)                          ;B581E9
     %AICMD0x55($7F1F64, $07, $8214)                            ;B581F1
@@ -104,118 +104,118 @@ DATA8_B58020:
     %AICMD0x55($7F1F66, $0B, $82B1)                            ;B581FF
     %AICMD0x55($7F1F66, $0C, $82B1)                            ;B58206
     %AICMD0x55($7F1F66, $09, $82B8)                            ;B5820D
-    %AICMD0x15($7F1F1A, $00, $833D)                            ;B58214
-    %AICMD0x15($7F1F1A, $06, $8336)                            ;B5821B
-    %AICMD0x45($7F1F1F, $00C8, $00DC, $8328)                   ;B58222
-    %AICMD0x45($7F1F1F, $00DD, $00FA, $832F)                   ;B5822C
-    %AICMD0x15($7F1F19, $00, $8352)                            ;B58236
-    %AICMD0x15($7F1F19, $01, $837B)                            ;B5823D
-    %AICMD0x15($7F1F19, $02, $83A5)                            ;B58244
-    %AICMD0x15($7F1F19, $03, $83D5)                            ;B5824B
-    %AICMD0x45($7F1F37, $003C, $0059, $8306)                   ;B58252
-    %AICMD0x45($7F1F39, $003C, $0059, $8306)                   ;B5825C
-    %AICMD0x45($7F1F37, $005B, $0077, $830D)                   ;B58266
-    %AICMD0x45($7F1F39, $005B, $0077, $830D)                   ;B58270
-    %AICMD0x45($7F1F37, $0078, $03E7, $8314)                   ;B5827A
-    %AICMD0x45($7F1F39, $0078, $03E7, $8314)                   ;B58284
+    %AICMD0x15($7F1F1A, $00, $B5833D)                          ;B58214
+    %AICMD0x15($7F1F1A, $06, $B58336)                          ;B5821B
+    %AICMD0x45($7F1F1F, $00C8, $00DC, $B58328)                 ;B58222
+    %AICMD0x45($7F1F1F, $00DD, $00FA, $B5832F)                 ;B5822C
+    %AICMD0x15($7F1F19, $00, $B58352)                          ;B58236
+    %AICMD0x15($7F1F19, $01, $B5837B)                          ;B5823D
+    %AICMD0x15($7F1F19, $02, $B583A5)                          ;B58244
+    %AICMD0x15($7F1F19, $03, $B583D5)                          ;B5824B
+    %AICMD0x45($7F1F37, $003C, $0059, $B58306)                 ;B58252
+    %AICMD0x45($7F1F39, $003C, $0059, $B58306)                 ;B5825C
+    %AICMD0x45($7F1F37, $005B, $0077, $B5830D)                 ;B58266
+    %AICMD0x45($7F1F39, $005B, $0077, $B5830D)                 ;B58270
+    %AICMD0x45($7F1F37, $0078, $03E7, $B58314)                 ;B5827A
+    %AICMD0x45($7F1F39, $0078, $03E7, $B58314)                 ;B58284
     %AICMD0x1C($0485, $00)                                     ;B5828E
-    %AICMD0x12_Jump($8087)                                     ;B58292
+    %AICMD0x12_Jump($B58087)                                   ;B58292
     %AICMD0x1C($017D, $00)                                     ;B58295
-    %AICMD0x12_Jump($8087)                                     ;B58299
+    %AICMD0x12_Jump($B58087)                                   ;B58299
     %AICMD0x1C($0166, $00)                                     ;B5829C
-    %AICMD0x12_Jump($8087)                                     ;B582A0
+    %AICMD0x12_Jump($B58087)                                   ;B582A0
     %AICMD0x1C($015F, $00)                                     ;B582A3
-    %AICMD0x12_Jump($8087)                                     ;B582A7
+    %AICMD0x12_Jump($B58087)                                   ;B582A7
     %AICMD0x1C($0160, $00)                                     ;B582AA
-    %AICMD0x12_Jump($8087)                                     ;B582AE
+    %AICMD0x12_Jump($B58087)                                   ;B582AE
     %AICMD0x1C($01A0, $00)                                     ;B582B1
-    %AICMD0x12_Jump($8087)                                     ;B582B5
+    %AICMD0x12_Jump($B58087)                                   ;B582B5
     %AICMD0x1C($0493, $00)                                     ;B582B8
-    %AICMD0x12_Jump($8087)                                     ;B582BC
+    %AICMD0x12_Jump($B58087)                                   ;B582BC
     %AICMD0x1C($01A2, $00)                                     ;B582BF
-    %AICMD0x12_Jump($8087)                                     ;B582C3
+    %AICMD0x12_Jump($B58087)                                   ;B582C3
     %AICMD0x17($02)                                            ;B582C6
-    %AICMD0x18($00, $8214)                                     ;B582C8
-    %AICMD0x18($01, $82D3)                                     ;B582CC
-    %AICMD0x12_Jump($8087)                                     ;B582D0
+    %AICMD0x18($00, $B58214)                                   ;B582C8
+    %AICMD0x18($01, $B582D3)                                   ;B582CC
+    %AICMD0x12_Jump($B58087)                                   ;B582D0
     %AICMD0x1C($01A3, $00)                                     ;B582D3
-    %AICMD0x12_Jump($8087)                                     ;B582D7
+    %AICMD0x12_Jump($B58087)                                   ;B582D7
     %AICMD0x17($02)                                            ;B582DA
-    %AICMD0x18($00, $8214)                                     ;B582DC
-    %AICMD0x18($01, $82E7)                                     ;B582E0
-    %AICMD0x12_Jump($8087)                                     ;B582E4
+    %AICMD0x18($00, $B58214)                                   ;B582DC
+    %AICMD0x18($01, $B582E7)                                   ;B582E0
+    %AICMD0x12_Jump($B58087)                                   ;B582E4
     %AICMD0x1C($01A4, $00)                                     ;B582E7
-    %AICMD0x12_Jump($8087)                                     ;B582EB
+    %AICMD0x12_Jump($B58087)                                   ;B582EB
     %AICMD0x17($02)                                            ;B582EE
-    %AICMD0x18($00, $8214)                                     ;B582F0
-    %AICMD0x18($01, $82F8)                                     ;B582F4
+    %AICMD0x18($00, $B58214)                                   ;B582F0
+    %AICMD0x18($01, $B582F8)                                   ;B582F4
     %AICMD0x1C($01A5, $00)                                     ;B582F8
-    %AICMD0x12_Jump($8087)                                     ;B582FC
+    %AICMD0x12_Jump($B58087)                                   ;B582FC
     %AICMD0x1C($0481, $00)                                     ;B582FF
-    %AICMD0x12_Jump($8087)                                     ;B58303
+    %AICMD0x12_Jump($B58087)                                   ;B58303
     %AICMD0x1C($0480, $00)                                     ;B58306
-    %AICMD0x12_Jump($8087)                                     ;B5830A
+    %AICMD0x12_Jump($B58087)                                   ;B5830A
     %AICMD0x1C($0484, $00)                                     ;B5830D
-    %AICMD0x12_Jump($8087)                                     ;B58311
+    %AICMD0x12_Jump($B58087)                                   ;B58311
     %AICMD0x17($02)                                            ;B58314
-    %AICMD0x18($00, $8321)                                     ;B58316
+    %AICMD0x18($00, $B58321)                                   ;B58316
     %AICMD0x1C($0482, $00)                                     ;B5831A
-    %AICMD0x12_Jump($8087)                                     ;B5831E
+    %AICMD0x12_Jump($B58087)                                   ;B5831E
     %AICMD0x1C($0443, $00)                                     ;B58321
-    %AICMD0x12_Jump($8087)                                     ;B58325
+    %AICMD0x12_Jump($B58087)                                   ;B58325
     %AICMD0x1C($01F3, $00)                                     ;B58328
-    %AICMD0x12_Jump($8087)                                     ;B5832C
+    %AICMD0x12_Jump($B58087)                                   ;B5832C
     %AICMD0x1C($0049, $00)                                     ;B5832F
-    %AICMD0x12_Jump($8087)                                     ;B58333
+    %AICMD0x12_Jump($B58087)                                   ;B58333
     %AICMD0x1C($047D, $00)                                     ;B58336
-    %AICMD0x12_Jump($8087)                                     ;B5833A
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $845F) ;B5833D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $845F) ;B58344
+    %AICMD0x12_Jump($B58087)                                   ;B5833A
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5845F)   ;B5833D
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B5845F)   ;B58344
     %AICMD0x1C($0194, $00)                                     ;B5834B
-    %AICMD0x12_Jump($8087)                                     ;B5834F
-    %AICMD0x15($7F1F1B, $16, $8374)                            ;B58352
-    %AICMD0x15($7F1F1B, $17, $844A)                            ;B58359
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8451) ;B58360
+    %AICMD0x12_Jump($B58087)                                   ;B5834F
+    %AICMD0x15($7F1F1B, $16, $B58374)                          ;B58352
+    %AICMD0x15($7F1F1B, $17, $B5844A)                          ;B58359
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58451)   ;B58360
     %AICMD0x17($02)                                            ;B58367
-    %AICMD0x18($00, $8252)                                     ;B58369
+    %AICMD0x18($00, $B58252)                                   ;B58369
     %AICMD0x1C($0182, $00)                                     ;B5836D
-    %AICMD0x12_Jump($8087)                                     ;B58371
+    %AICMD0x12_Jump($B58087)                                   ;B58371
     %AICMD0x1C($0206, $00)                                     ;B58374
-    %AICMD0x12_Jump($8087)                                     ;B58378
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8451) ;B5837B
+    %AICMD0x12_Jump($B58087)                                   ;B58378
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58451)   ;B5837B
     %AICMD0x17($04)                                            ;B58382
-    %AICMD0x18($00, $8397)                                     ;B58384
-    %AICMD0x18($01, $839E)                                     ;B58388
-    %AICMD0x18($02, $8252)                                     ;B5838C
+    %AICMD0x18($00, $B58397)                                   ;B58384
+    %AICMD0x18($01, $B5839E)                                   ;B58388
+    %AICMD0x18($02, $B58252)                                   ;B5838C
     %AICMD0x1C($0427, $00)                                     ;B58390
-    %AICMD0x12_Jump($8087)                                     ;B58394
+    %AICMD0x12_Jump($B58087)                                   ;B58394
     %AICMD0x1C($017F, $00)                                     ;B58397
-    %AICMD0x12_Jump($8087)                                     ;B5839B
+    %AICMD0x12_Jump($B58087)                                   ;B5839B
     %AICMD0x1C($0183, $00)                                     ;B5839E
-    %AICMD0x12_Jump($8087)                                     ;B583A2
-    %AICMD0x15($7F1F1B, $0B, $83CE)                            ;B583A5
-    %AICMD0x15($7F1F1B, $0C, $844A)                            ;B583AC
-    %AICMD0x15($7F1F1B, $14, $844A)                            ;B583B3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8451) ;B583BA
+    %AICMD0x12_Jump($B58087)                                   ;B583A2
+    %AICMD0x15($7F1F1B, $0B, $B583CE)                          ;B583A5
+    %AICMD0x15($7F1F1B, $0C, $B5844A)                          ;B583AC
+    %AICMD0x15($7F1F1B, $14, $B5844A)                          ;B583B3
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58451)   ;B583BA
     %AICMD0x17($02)                                            ;B583C1
-    %AICMD0x18($00, $8252)                                     ;B583C3
+    %AICMD0x18($00, $B58252)                                   ;B583C3
     %AICMD0x1C($018D, $00)                                     ;B583C7
-    %AICMD0x12_Jump($8087)                                     ;B583CB
+    %AICMD0x12_Jump($B58087)                                   ;B583CB
     %AICMD0x1C($0238, $00)                                     ;B583CE
-    %AICMD0x12_Jump($8087)                                     ;B583D2
-    %AICMD0x15($7F1F1B, $0A, $8413)                            ;B583D5
-    %AICMD0x15($7F1F1B, $17, $843C)                            ;B583DC
-    %AICMD0x15($7F1F1B, $1E, $8443)                            ;B583E3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $8458) ;B583EA
-    %AICMD0x16($7F1F1C, $0F, $11, $8466)                       ;B583F1
+    %AICMD0x12_Jump($B58087)                                   ;B583D2
+    %AICMD0x15($7F1F1B, $0A, $B58413)                          ;B583D5
+    %AICMD0x15($7F1F1B, $17, $B5843C)                          ;B583DC
+    %AICMD0x15($7F1F1B, $1E, $B58443)                          ;B583E3
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B58458)   ;B583EA
+    %AICMD0x16($7F1F1C, $0F, $11, $B58466)                     ;B583F1
     %AICMD0x17($02)                                            ;B583F9
-    %AICMD0x18($00, $8252)                                     ;B583FB
+    %AICMD0x18($00, $B58252)                                   ;B583FB
     %AICMD0x1C($042F, $00)                                     ;B583FF
-    %AICMD0x12_Jump($8087)                                     ;B58403
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $84A0) ;B58406
+    %AICMD0x12_Jump($B58087)                                   ;B58403
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B584A0)   ;B58406
     %AICMD0x1F($8413)                                          ;B5840D
-    %AICMD0x12_Jump($8406)                                     ;B58410
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $8435) ;B58413
+    %AICMD0x12_Jump($B58406)                                   ;B58410
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B58435)   ;B58413
     %AICMD0x1C($0292, $00)                                     ;B5841A
     %AICMD0x23_OrWithIndexedValue($7F1F74, $05)                ;B5841E
     %AICMD0x08()                                               ;B58423
@@ -223,22 +223,22 @@ DATA8_B58020:
     %AICMD0x13($0078)                                          ;B58428
     %AICMD0x11()                                               ;B5842B
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B5842C
-    %AICMD0x12_Jump($8406)                                     ;B58432
+    %AICMD0x12_Jump($B58406)                                   ;B58432
     %AICMD0x1C($0293, $00)                                     ;B58435
-    %AICMD0x12_Jump($8406)                                     ;B58439
+    %AICMD0x12_Jump($B58406)                                   ;B58439
     %AICMD0x1C($02AF, $00)                                     ;B5843C
-    %AICMD0x12_Jump($8087)                                     ;B58440
+    %AICMD0x12_Jump($B58087)                                   ;B58440
     %AICMD0x1C($03F8, $00)                                     ;B58443
-    %AICMD0x12_Jump($8087)                                     ;B58447
+    %AICMD0x12_Jump($B58087)                                   ;B58447
     %AICMD0x1C($0363, $00)                                     ;B5844A
-    %AICMD0x12_Jump($8087)                                     ;B5844E
+    %AICMD0x12_Jump($B58087)                                   ;B5844E
     %AICMD0x1C($0197, $00)                                     ;B58451
-    %AICMD0x12_Jump($8087)                                     ;B58455
+    %AICMD0x12_Jump($B58087)                                   ;B58455
     %AICMD0x1C($0199, $00)                                     ;B58458
-    %AICMD0x12_Jump($8087)                                     ;B5845C
+    %AICMD0x12_Jump($B58087)                                   ;B5845C
     %AICMD0x1C($047C, $00)                                     ;B5845F
-    %AICMD0x12_Jump($8087)                                     ;B58463
-    %AICMD0x15($7F1F19, $03, $8483)                            ;B58466
+    %AICMD0x12_Jump($B58087)                                   ;B58463
+    %AICMD0x15($7F1F19, $03, $B58483)                          ;B58466
     %AICMD0x1C($0180, $00)                                     ;B5846D
     %AICMD0x1B($022F, $00)                                     ;B58471
     %AICMD0x08()                                               ;B58475
@@ -246,8 +246,8 @@ DATA8_B58020:
     %AICMD0x13($0078)                                          ;B5847A
     %AICMD0x11()                                               ;B5847D
     %AICMD0x57_UpdateStamina($1E)                              ;B5847E
-    %AICMD0x12_Jump($8087)                                     ;B58480
-    %AICMD0x15($7F1F1B, $0A, $8413)                            ;B58483
+    %AICMD0x12_Jump($B58087)                                   ;B58480
+    %AICMD0x15($7F1F1B, $0A, $B58413)                          ;B58483
     %AICMD0x1C($0431, $00)                                     ;B5848A
     %AICMD0x1B($022F, $00)                                     ;B5848E
     %AICMD0x08()                                               ;B58492
@@ -255,7 +255,7 @@ DATA8_B58020:
     %AICMD0x13($0078)                                          ;B58497
     %AICMD0x11()                                               ;B5849A
     %AICMD0x57_UpdateStamina($1E)                              ;B5849B
-    %AICMD0x12_Jump($8087)                                     ;B5849D
+    %AICMD0x12_Jump($B58087)                                   ;B5849D
     %AICMD0x1B($02E7, $00)                                     ;B584A0
     %AICMD0x0D($FF, $00, $20, $01)                             ;B584A4
     %AICMD0x1B($02E5, $00)                                     ;B584A9
@@ -265,88 +265,88 @@ DATA8_B58020:
     %AICMD0x1B($02F1, $00)                                     ;B584BB
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B584BF
     %AICMD0x41_ModifyVariable($7F1F1F, $0002)                  ;B584C4
-    %AICMD0x12_Jump($8096)                                     ;B584CA
+    %AICMD0x12_Jump($B58096)                                   ;B584CA
     %AICMD0x1C($02C2, $00)                                     ;B584CD
-    %AICMD0x12_Jump($8096)                                     ;B584D1
+    %AICMD0x12_Jump($B58096)                                   ;B584D1
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B584D4
     %AICMD0x10_End()                                           ;B584D9
 
 DATA8_B584DA:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $84F0) ;B584DA
-    %AICMD0x15($7F1F19, $03, $84F0)                            ;B584E1
-    %AICMD0x16($7F1F1C, $0B, $0E, $898A)                       ;B584E8
-    %AICMD0x15($7F1F1C, $12, $8514)                            ;B584F0
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $8509) ;B584F7
-    %AICMD0x1A($0058, $0068, $845C, $00)                       ;B584FE
-    %AICMD0x12_Jump($8541)                                     ;B58506
-    %AICMD0x1A($0148, $0078, $845C, $00)                       ;B58509
-    %AICMD0x12_Jump($8541)                                     ;B58511
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B584F0)   ;B584DA
+    %AICMD0x15($7F1F19, $03, $B584F0)                          ;B584E1
+    %AICMD0x16($7F1F1C, $0B, $0E, $B5898A)                     ;B584E8
+    %AICMD0x15($7F1F1C, $12, $B58514)                          ;B584F0
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B58509)   ;B584F7
+    %AICMD0x1A($0058, $0068, $B3845C, $00)                     ;B584FE
+    %AICMD0x12_Jump($B58541)                                   ;B58506
+    %AICMD0x1A($0148, $0078, $B3845C, $00)                     ;B58509
+    %AICMD0x12_Jump($B58541)                                   ;B58511
     %AICMD0x41_ModifyVariable($7F1F21, $FFFE)                  ;B58514
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $8531) ;B5851A
-    %AICMD0x1A($0029, $0053, $8468, $00)                       ;B58521
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B58531)   ;B5851A
+    %AICMD0x1A($0029, $0053, $B38468, $00)                     ;B58521
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58529
-    %AICMD0x12_Jump($8550)                                     ;B5852E
-    %AICMD0x1A($0119, $0063, $8468, $00)                       ;B58531
+    %AICMD0x12_Jump($B58550)                                   ;B5852E
+    %AICMD0x1A($0119, $0063, $B38468, $00)                     ;B58531
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58539
-    %AICMD0x12_Jump($8550)                                     ;B5853E
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $8956) ;B58541
-    %AICMD0x2D($861C, $8556)                                   ;B58548
-    %AICMD0x12_Jump($8541)                                     ;B5854D
+    %AICMD0x12_Jump($B58550)                                   ;B5853E
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B58956)   ;B58541
+    %AICMD0x2D($B5861C, $B58556)                               ;B58548
+    %AICMD0x12_Jump($B58541)                                   ;B5854D
     %AICMD0x1F($8983)                                          ;B58550
-    %AICMD0x12_Jump($8550)                                     ;B58553
-    %AICMD0x15($80091E, $02, $8591)                            ;B58556
-    %AICMD0x16($80091E, $03, $05, $85B2)                       ;B5855D
-    %AICMD0x16($80091E, $10, $17, $85B2)                       ;B58565
-    %AICMD0x15($80091E, $06, $85D3)                            ;B5856D
-    %AICMD0x15($80091E, $19, $859E)                            ;B58574
-    %AICMD0x15($80091E, $49, $859E)                            ;B5857B
-    %AICMD0x16($80091E, $09, $0C, $85C6)                       ;B58582
+    %AICMD0x12_Jump($B58550)                                   ;B58553
+    %AICMD0x15($80091E, $02, $B58591)                          ;B58556
+    %AICMD0x16($80091E, $03, $05, $B585B2)                     ;B5855D
+    %AICMD0x16($80091E, $10, $17, $B585B2)                     ;B58565
+    %AICMD0x15($80091E, $06, $B585D3)                          ;B5856D
+    %AICMD0x15($80091E, $19, $B5859E)                          ;B58574
+    %AICMD0x15($80091E, $49, $B5859E)                          ;B5857B
+    %AICMD0x16($80091E, $09, $0C, $B585C6)                     ;B58582
     %AICMD0x1C($0200, $00)                                     ;B5858A
-    %AICMD0x12_Jump($8541)                                     ;B5858E
+    %AICMD0x12_Jump($B58541)                                   ;B5858E
     %AICMD0x1C($03B4, $00)                                     ;B58591
     %AICMD0x41_ModifyVariable($7F1F21, $FFF8)                  ;B58595
-    %AICMD0x12_Jump($8541)                                     ;B5859B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $85F5) ;B5859E
+    %AICMD0x12_Jump($B58541)                                   ;B5859B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B585F5)   ;B5859E
     %AICMD0x1C($0212, $00)                                     ;B585A5
     %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B585A9
-    %AICMD0x12_Jump($8541)                                     ;B585AF
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $85F5) ;B585B2
+    %AICMD0x12_Jump($B58541)                                   ;B585AF
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B585F5)   ;B585B2
     %AICMD0x1C($03B2, $00)                                     ;B585B9
     %AICMD0x41_ModifyVariable($7F1F21, $0005)                  ;B585BD
-    %AICMD0x12_Jump($8541)                                     ;B585C3
+    %AICMD0x12_Jump($B58541)                                   ;B585C3
     %AICMD0x1C($03B4, $00)                                     ;B585C6
     %AICMD0x41_ModifyVariable($7F1F21, $FFFC)                  ;B585CA
-    %AICMD0x12_Jump($8541)                                     ;B585D0
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $85F5) ;B585D3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $8602) ;B585DA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $860F) ;B585E1
+    %AICMD0x12_Jump($B58541)                                   ;B585D0
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B585F5)   ;B585D3
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B58602)   ;B585DA
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B5860F)   ;B585E1
     %AICMD0x1C($0212, $00)                                     ;B585E8
     %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B585EC
-    %AICMD0x12_Jump($8541)                                     ;B585F2
+    %AICMD0x12_Jump($B58541)                                   ;B585F2
     %AICMD0x1C($01BD, $00)                                     ;B585F5
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B585F9
-    %AICMD0x12_Jump($8541)                                     ;B585FF
+    %AICMD0x12_Jump($B58541)                                   ;B585FF
     %AICMD0x1C($041D, $00)                                     ;B58602
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58606
-    %AICMD0x12_Jump($8541)                                     ;B5860C
+    %AICMD0x12_Jump($B58541)                                   ;B5860C
     %AICMD0x1C($041E, $00)                                     ;B5860F
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58613
-    %AICMD0x12_Jump($8541)                                     ;B58619
-    %AICMD0x16($7F1F1C, $0F, $12, $891C)                       ;B5861C
+    %AICMD0x12_Jump($B58541)                                   ;B58619
+    %AICMD0x16($7F1F1C, $0F, $12, $B5891C)                     ;B5861C
     %AICMD0x43($7F1F3B, $0001, $8748)                          ;B58624
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $874F) ;B5862C
-    %AICMD0x15($80098C, $03, $8756)                            ;B58633
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $875D) ;B5863A
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $874F) ;B58641
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B5874F)   ;B5862C
+    %AICMD0x15($80098C, $03, $B58756)                          ;B58633
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B5875D)   ;B5863A
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B5874F)   ;B58641
     %AICMD0x43($7F1F37, $0001, $8772)                          ;B58648
     %AICMD0x43($7F1F39, $0001, $8772)                          ;B58650
-    %AICMD0x45($7F1F37, $0002, $0013, $8779)                   ;B58658
-    %AICMD0x45($7F1F39, $0002, $0013, $8779)                   ;B58662
-    %AICMD0x45($7F1F37, $0014, $0027, $878D)                   ;B5866C
-    %AICMD0x45($7F1F39, $0014, $0027, $878D)                   ;B58676
-    %AICMD0x45($7F1F37, $0028, $003B, $87A1)                   ;B58680
-    %AICMD0x45($7F1F39, $0028, $003B, $87A1)                   ;B5868A
+    %AICMD0x45($7F1F37, $0002, $0013, $B58779)                 ;B58658
+    %AICMD0x45($7F1F39, $0002, $0013, $B58779)                 ;B58662
+    %AICMD0x45($7F1F37, $0014, $0027, $B5878D)                 ;B5866C
+    %AICMD0x45($7F1F39, $0014, $0027, $B5878D)                 ;B58676
+    %AICMD0x45($7F1F37, $0028, $003B, $B587A1)                 ;B58680
+    %AICMD0x45($7F1F39, $0028, $003B, $B587A1)                 ;B5868A
     %AICMD0x43($7F1F37, $005A, $87B5)                          ;B58694
     %AICMD0x43($7F1F39, $005A, $87B5)                          ;B5869C
     %AICMD0x55($7F1F64, $07, $86C7)                            ;B586A4
@@ -354,119 +354,119 @@ DATA8_B584DA:
     %AICMD0x55($7F1F66, $0B, $8764)                            ;B586B2
     %AICMD0x55($7F1F66, $0C, $8764)                            ;B586B9
     %AICMD0x55($7F1F66, $09, $876B)                            ;B586C0
-    %AICMD0x15($7F1F1A, $00, $87F3)                            ;B586C7
-    %AICMD0x15($7F1F1A, $06, $87EC)                            ;B586CE
-    %AICMD0x45($7F1F21, $00C8, $00DC, $87DE)                   ;B586D5
-    %AICMD0x45($7F1F21, $00DD, $00FA, $87E5)                   ;B586DF
-    %AICMD0x15($7F1F19, $00, $8808)                            ;B586E9
-    %AICMD0x15($7F1F19, $01, $8831)                            ;B586F0
-    %AICMD0x15($7F1F19, $02, $885B)                            ;B586F7
-    %AICMD0x15($7F1F19, $03, $888B)                            ;B586FE
-    %AICMD0x45($7F1F37, $003C, $0059, $87BC)                   ;B58705
-    %AICMD0x45($7F1F39, $003C, $0059, $87BC)                   ;B5870F
-    %AICMD0x45($7F1F37, $005B, $0077, $87C3)                   ;B58719
-    %AICMD0x45($7F1F39, $005B, $0077, $87C3)                   ;B58723
-    %AICMD0x45($7F1F37, $0078, $03E7, $87CA)                   ;B5872D
-    %AICMD0x45($7F1F39, $0078, $03E7, $87CA)                   ;B58737
+    %AICMD0x15($7F1F1A, $00, $B587F3)                          ;B586C7
+    %AICMD0x15($7F1F1A, $06, $B587EC)                          ;B586CE
+    %AICMD0x45($7F1F21, $00C8, $00DC, $B587DE)                 ;B586D5
+    %AICMD0x45($7F1F21, $00DD, $00FA, $B587E5)                 ;B586DF
+    %AICMD0x15($7F1F19, $00, $B58808)                          ;B586E9
+    %AICMD0x15($7F1F19, $01, $B58831)                          ;B586F0
+    %AICMD0x15($7F1F19, $02, $B5885B)                          ;B586F7
+    %AICMD0x15($7F1F19, $03, $B5888B)                          ;B586FE
+    %AICMD0x45($7F1F37, $003C, $0059, $B587BC)                 ;B58705
+    %AICMD0x45($7F1F39, $003C, $0059, $B587BC)                 ;B5870F
+    %AICMD0x45($7F1F37, $005B, $0077, $B587C3)                 ;B58719
+    %AICMD0x45($7F1F39, $005B, $0077, $B587C3)                 ;B58723
+    %AICMD0x45($7F1F37, $0078, $03E7, $B587CA)                 ;B5872D
+    %AICMD0x45($7F1F39, $0078, $03E7, $B587CA)                 ;B58737
     %AICMD0x1C($0485, $00)                                     ;B58741
-    %AICMD0x12_Jump($8541)                                     ;B58745
+    %AICMD0x12_Jump($B58541)                                   ;B58745
     %AICMD0x1C($017D, $00)                                     ;B58748
-    %AICMD0x12_Jump($8541)                                     ;B5874C
+    %AICMD0x12_Jump($B58541)                                   ;B5874C
     %AICMD0x1C($0166, $00)                                     ;B5874F
-    %AICMD0x12_Jump($8541)                                     ;B58753
+    %AICMD0x12_Jump($B58541)                                   ;B58753
     %AICMD0x1C($015F, $00)                                     ;B58756
-    %AICMD0x12_Jump($8541)                                     ;B5875A
+    %AICMD0x12_Jump($B58541)                                   ;B5875A
     %AICMD0x1C($0160, $00)                                     ;B5875D
-    %AICMD0x12_Jump($8541)                                     ;B58761
+    %AICMD0x12_Jump($B58541)                                   ;B58761
     %AICMD0x1C($01A0, $00)                                     ;B58764
-    %AICMD0x12_Jump($8541)                                     ;B58768
+    %AICMD0x12_Jump($B58541)                                   ;B58768
     %AICMD0x1C($0493, $00)                                     ;B5876B
-    %AICMD0x12_Jump($8541)                                     ;B5876F
+    %AICMD0x12_Jump($B58541)                                   ;B5876F
     %AICMD0x1C($01A2, $00)                                     ;B58772
-    %AICMD0x12_Jump($8541)                                     ;B58776
+    %AICMD0x12_Jump($B58541)                                   ;B58776
     %AICMD0x17($02)                                            ;B58779
-    %AICMD0x18($00, $86C7)                                     ;B5877B
-    %AICMD0x18($01, $8786)                                     ;B5877F
-    %AICMD0x12_Jump($8541)                                     ;B58783
+    %AICMD0x18($00, $B586C7)                                   ;B5877B
+    %AICMD0x18($01, $B58786)                                   ;B5877F
+    %AICMD0x12_Jump($B58541)                                   ;B58783
     %AICMD0x1C($01A4, $00)                                     ;B58786
-    %AICMD0x12_Jump($8541)                                     ;B5878A
+    %AICMD0x12_Jump($B58541)                                   ;B5878A
     %AICMD0x17($02)                                            ;B5878D
-    %AICMD0x18($00, $86C7)                                     ;B5878F
-    %AICMD0x18($01, $879A)                                     ;B58793
-    %AICMD0x12_Jump($8541)                                     ;B58797
+    %AICMD0x18($00, $B586C7)                                   ;B5878F
+    %AICMD0x18($01, $B5879A)                                   ;B58793
+    %AICMD0x12_Jump($B58541)                                   ;B58797
     %AICMD0x1C($01A6, $00)                                     ;B5879A
-    %AICMD0x12_Jump($8541)                                     ;B5879E
+    %AICMD0x12_Jump($B58541)                                   ;B5879E
     %AICMD0x17($02)                                            ;B587A1
-    %AICMD0x18($00, $86C7)                                     ;B587A3
-    %AICMD0x18($01, $87AE)                                     ;B587A7
-    %AICMD0x12_Jump($8541)                                     ;B587AB
+    %AICMD0x18($00, $B586C7)                                   ;B587A3
+    %AICMD0x18($01, $B587AE)                                   ;B587A7
+    %AICMD0x12_Jump($B58541)                                   ;B587AB
     %AICMD0x1C($01A7, $00)                                     ;B587AE
-    %AICMD0x12_Jump($8541)                                     ;B587B2
+    %AICMD0x12_Jump($B58541)                                   ;B587B2
     %AICMD0x1C($0481, $00)                                     ;B587B5
-    %AICMD0x12_Jump($8541)                                     ;B587B9
+    %AICMD0x12_Jump($B58541)                                   ;B587B9
     %AICMD0x1C($0480, $00)                                     ;B587BC
-    %AICMD0x12_Jump($8541)                                     ;B587C0
+    %AICMD0x12_Jump($B58541)                                   ;B587C0
     %AICMD0x1C($0484, $00)                                     ;B587C3
-    %AICMD0x12_Jump($8541)                                     ;B587C7
+    %AICMD0x12_Jump($B58541)                                   ;B587C7
     %AICMD0x17($02)                                            ;B587CA
-    %AICMD0x18($00, $87D7)                                     ;B587CC
+    %AICMD0x18($00, $B587D7)                                   ;B587CC
     %AICMD0x1C($0482, $00)                                     ;B587D0
-    %AICMD0x12_Jump($8541)                                     ;B587D4
+    %AICMD0x12_Jump($B58541)                                   ;B587D4
     %AICMD0x1C($0443, $00)                                     ;B587D7
-    %AICMD0x12_Jump($8541)                                     ;B587DB
+    %AICMD0x12_Jump($B58541)                                   ;B587DB
     %AICMD0x1C($01F4, $00)                                     ;B587DE
-    %AICMD0x12_Jump($8541)                                     ;B587E2
+    %AICMD0x12_Jump($B58541)                                   ;B587E2
     %AICMD0x1C($0049, $00)                                     ;B587E5
-    %AICMD0x12_Jump($8541)                                     ;B587E9
+    %AICMD0x12_Jump($B58541)                                   ;B587E9
     %AICMD0x1C($047D, $00)                                     ;B587EC
-    %AICMD0x12_Jump($8541)                                     ;B587F0
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8915) ;B587F3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $8915) ;B587FA
+    %AICMD0x12_Jump($B58541)                                   ;B587F0
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58915)   ;B587F3
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B58915)   ;B587FA
     %AICMD0x1C($0195, $00)                                     ;B58801
-    %AICMD0x12_Jump($8541)                                     ;B58805
-    %AICMD0x15($7F1F1B, $16, $882A)                            ;B58808
-    %AICMD0x15($7F1F1B, $17, $8900)                            ;B5880F
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8907) ;B58816
+    %AICMD0x12_Jump($B58541)                                   ;B58805
+    %AICMD0x15($7F1F1B, $16, $B5882A)                          ;B58808
+    %AICMD0x15($7F1F1B, $17, $B58900)                          ;B5880F
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58907)   ;B58816
     %AICMD0x17($02)                                            ;B5881D
-    %AICMD0x18($00, $8705)                                     ;B5881F
+    %AICMD0x18($00, $B58705)                                   ;B5881F
     %AICMD0x1C($0182, $00)                                     ;B58823
-    %AICMD0x12_Jump($8541)                                     ;B58827
+    %AICMD0x12_Jump($B58541)                                   ;B58827
     %AICMD0x1C($0207, $00)                                     ;B5882A
-    %AICMD0x12_Jump($8541)                                     ;B5882E
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8907) ;B58831
+    %AICMD0x12_Jump($B58541)                                   ;B5882E
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58907)   ;B58831
     %AICMD0x17($04)                                            ;B58838
-    %AICMD0x18($00, $884D)                                     ;B5883A
-    %AICMD0x18($01, $8854)                                     ;B5883E
-    %AICMD0x18($02, $8705)                                     ;B58842
+    %AICMD0x18($00, $B5884D)                                   ;B5883A
+    %AICMD0x18($01, $B58854)                                   ;B5883E
+    %AICMD0x18($02, $B58705)                                   ;B58842
     %AICMD0x1C($0422, $00)                                     ;B58846
-    %AICMD0x12_Jump($8541)                                     ;B5884A
+    %AICMD0x12_Jump($B58541)                                   ;B5884A
     %AICMD0x1C($0420, $00)                                     ;B5884D
-    %AICMD0x12_Jump($8541)                                     ;B58851
+    %AICMD0x12_Jump($B58541)                                   ;B58851
     %AICMD0x1C($0426, $00)                                     ;B58854
-    %AICMD0x12_Jump($8541)                                     ;B58858
-    %AICMD0x15($7F1F1B, $0B, $8884)                            ;B5885B
-    %AICMD0x15($7F1F1B, $0C, $8900)                            ;B58862
-    %AICMD0x15($7F1F1B, $14, $8900)                            ;B58869
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8907) ;B58870
+    %AICMD0x12_Jump($B58541)                                   ;B58858
+    %AICMD0x15($7F1F1B, $0B, $B58884)                          ;B5885B
+    %AICMD0x15($7F1F1B, $0C, $B58900)                          ;B58862
+    %AICMD0x15($7F1F1B, $14, $B58900)                          ;B58869
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58907)   ;B58870
     %AICMD0x17($02)                                            ;B58877
-    %AICMD0x18($00, $8705)                                     ;B58879
+    %AICMD0x18($00, $B58705)                                   ;B58879
     %AICMD0x1C($0423, $00)                                     ;B5887D
-    %AICMD0x12_Jump($8541)                                     ;B58881
+    %AICMD0x12_Jump($B58541)                                   ;B58881
     %AICMD0x1C($0239, $00)                                     ;B58884
-    %AICMD0x12_Jump($8541)                                     ;B58888
-    %AICMD0x15($7F1F1B, $0A, $88C9)                            ;B5888B
-    %AICMD0x15($7F1F1B, $17, $88F2)                            ;B58892
-    %AICMD0x15($7F1F1B, $1E, $88F9)                            ;B58899
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $890E) ;B588A0
-    %AICMD0x16($7F1F1C, $0F, $11, $8939)                       ;B588A7
+    %AICMD0x12_Jump($B58541)                                   ;B58888
+    %AICMD0x15($7F1F1B, $0A, $B588C9)                          ;B5888B
+    %AICMD0x15($7F1F1B, $17, $B588F2)                          ;B58892
+    %AICMD0x15($7F1F1B, $1E, $B588F9)                          ;B58899
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B5890E)   ;B588A0
+    %AICMD0x16($7F1F1C, $0F, $11, $B58939)                     ;B588A7
     %AICMD0x17($02)                                            ;B588AF
-    %AICMD0x18($00, $8705)                                     ;B588B1
+    %AICMD0x18($00, $B58705)                                   ;B588B1
     %AICMD0x1C($042D, $00)                                     ;B588B5
-    %AICMD0x12_Jump($8541)                                     ;B588B9
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $8956) ;B588BC
+    %AICMD0x12_Jump($B58541)                                   ;B588B9
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B58956)   ;B588BC
     %AICMD0x1F($88C9)                                          ;B588C3
-    %AICMD0x12_Jump($88BC)                                     ;B588C6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $88EB) ;B588C9
+    %AICMD0x12_Jump($B588BC)                                   ;B588C6
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B588EB)   ;B588C9
     %AICMD0x1C($0292, $00)                                     ;B588D0
     %AICMD0x23_OrWithIndexedValue($7F1F74, $05)                ;B588D4
     %AICMD0x08()                                               ;B588D9
@@ -474,22 +474,22 @@ DATA8_B584DA:
     %AICMD0x13($0078)                                          ;B588DE
     %AICMD0x11()                                               ;B588E1
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B588E2
-    %AICMD0x12_Jump($88BC)                                     ;B588E8
+    %AICMD0x12_Jump($B588BC)                                   ;B588E8
     %AICMD0x1C($0293, $00)                                     ;B588EB
-    %AICMD0x12_Jump($88BC)                                     ;B588EF
+    %AICMD0x12_Jump($B588BC)                                   ;B588EF
     %AICMD0x1C($02B4, $00)                                     ;B588F2
-    %AICMD0x12_Jump($8541)                                     ;B588F6
+    %AICMD0x12_Jump($B58541)                                   ;B588F6
     %AICMD0x1C($03F9, $00)                                     ;B588F9
-    %AICMD0x12_Jump($8541)                                     ;B588FD
+    %AICMD0x12_Jump($B58541)                                   ;B588FD
     %AICMD0x1C($0361, $00)                                     ;B58900
-    %AICMD0x12_Jump($8541)                                     ;B58904
+    %AICMD0x12_Jump($B58541)                                   ;B58904
     %AICMD0x1C($0196, $00)                                     ;B58907
-    %AICMD0x12_Jump($8541)                                     ;B5890B
+    %AICMD0x12_Jump($B58541)                                   ;B5890B
     %AICMD0x1C($0198, $00)                                     ;B5890E
-    %AICMD0x12_Jump($8541)                                     ;B58912
+    %AICMD0x12_Jump($B58541)                                   ;B58912
     %AICMD0x1C($047C, $00)                                     ;B58915
-    %AICMD0x12_Jump($8541)                                     ;B58919
-    %AICMD0x15($7F1F19, $03, $8939)                            ;B5891C
+    %AICMD0x12_Jump($B58541)                                   ;B58919
+    %AICMD0x15($7F1F19, $03, $B58939)                          ;B5891C
     %AICMD0x1C($0180, $00)                                     ;B58923
     %AICMD0x1B($022F, $00)                                     ;B58927
     %AICMD0x08()                                               ;B5892B
@@ -497,8 +497,8 @@ DATA8_B584DA:
     %AICMD0x13($0078)                                          ;B58930
     %AICMD0x11()                                               ;B58933
     %AICMD0x57_UpdateStamina($1E)                              ;B58934
-    %AICMD0x12_Jump($8541)                                     ;B58936
-    %AICMD0x15($7F1F1B, $0A, $88C9)                            ;B58939
+    %AICMD0x12_Jump($B58541)                                   ;B58936
+    %AICMD0x15($7F1F1B, $0A, $B588C9)                          ;B58939
     %AICMD0x1C($042E, $00)                                     ;B58940
     %AICMD0x1B($022F, $00)                                     ;B58944
     %AICMD0x08()                                               ;B58948
@@ -506,7 +506,7 @@ DATA8_B584DA:
     %AICMD0x13($0078)                                          ;B5894D
     %AICMD0x11()                                               ;B58950
     %AICMD0x57_UpdateStamina($1E)                              ;B58951
-    %AICMD0x12_Jump($8541)                                     ;B58953
+    %AICMD0x12_Jump($B58541)                                   ;B58953
     %AICMD0x1B($02E7, $00)                                     ;B58956
     %AICMD0x0D($FF, $00, $20, $01)                             ;B5895A
     %AICMD0x1B($02E5, $00)                                     ;B5895F
@@ -516,88 +516,88 @@ DATA8_B584DA:
     %AICMD0x1B($02F1, $00)                                     ;B58971
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58975
     %AICMD0x41_ModifyVariable($7F1F21, $0002)                  ;B5897A
-    %AICMD0x12_Jump($8550)                                     ;B58980
+    %AICMD0x12_Jump($B58550)                                   ;B58980
     %AICMD0x1C($02C2, $00)                                     ;B58983
-    %AICMD0x12_Jump($8550)                                     ;B58987
+    %AICMD0x12_Jump($B58550)                                   ;B58987
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B5898A
     %AICMD0x10_End()                                           ;B5898F
 
 DATA8_B58990:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $89A6) ;B58990
-    %AICMD0x15($7F1F19, $03, $89A6)                            ;B58997
-    %AICMD0x16($7F1F1C, $0B, $0E, $8E48)                       ;B5899E
-    %AICMD0x15($7F1F1C, $12, $89CA)                            ;B589A6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $89BF) ;B589AD
-    %AICMD0x1A($0058, $0068, $845C, $00)                       ;B589B4
-    %AICMD0x12_Jump($89F7)                                     ;B589BC
-    %AICMD0x1A($0148, $0078, $845C, $00)                       ;B589BF
-    %AICMD0x12_Jump($89F7)                                     ;B589C7
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B589A6)   ;B58990
+    %AICMD0x15($7F1F19, $03, $B589A6)                          ;B58997
+    %AICMD0x16($7F1F1C, $0B, $0E, $B58E48)                     ;B5899E
+    %AICMD0x15($7F1F1C, $12, $B589CA)                          ;B589A6
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B589BF)   ;B589AD
+    %AICMD0x1A($0058, $0068, $B3845C, $00)                     ;B589B4
+    %AICMD0x12_Jump($B589F7)                                   ;B589BC
+    %AICMD0x1A($0148, $0078, $B3845C, $00)                     ;B589BF
+    %AICMD0x12_Jump($B589F7)                                   ;B589C7
     %AICMD0x41_ModifyVariable($7F1F23, $FFFE)                  ;B589CA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $89E7) ;B589D0
-    %AICMD0x1A($0029, $0053, $8468, $00)                       ;B589D7
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B589E7)   ;B589D0
+    %AICMD0x1A($0029, $0053, $B38468, $00)                     ;B589D7
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B589DF
-    %AICMD0x12_Jump($8A06)                                     ;B589E4
-    %AICMD0x1A($0119, $0063, $8468, $00)                       ;B589E7
+    %AICMD0x12_Jump($B58A06)                                   ;B589E4
+    %AICMD0x1A($0119, $0063, $B38468, $00)                     ;B589E7
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B589EF
-    %AICMD0x12_Jump($8A06)                                     ;B589F4
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $8E14) ;B589F7
-    %AICMD0x2D($8AD2, $8A0C)                                   ;B589FE
-    %AICMD0x12_Jump($89F7)                                     ;B58A03
+    %AICMD0x12_Jump($B58A06)                                   ;B589F4
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B58E14)   ;B589F7
+    %AICMD0x2D($B58AD2, $B58A0C)                               ;B589FE
+    %AICMD0x12_Jump($B589F7)                                   ;B58A03
     %AICMD0x1F($8E41)                                          ;B58A06
-    %AICMD0x12_Jump($8A06)                                     ;B58A09
-    %AICMD0x16($80091E, $01, $04, $8A68)                       ;B58A0C
-    %AICMD0x16($80091E, $10, $17, $8A68)                       ;B58A14
-    %AICMD0x16($80091E, $09, $0C, $8A9E)                       ;B58A1C
-    %AICMD0x15($80091E, $06, $8A7C)                            ;B58A24
-    %AICMD0x15($80091E, $05, $8A7C)                            ;B58A2B
-    %AICMD0x15($80091E, $19, $8A47)                            ;B58A32
-    %AICMD0x15($80091E, $49, $8A54)                            ;B58A39
+    %AICMD0x12_Jump($B58A06)                                   ;B58A09
+    %AICMD0x16($80091E, $01, $04, $B58A68)                     ;B58A0C
+    %AICMD0x16($80091E, $10, $17, $B58A68)                     ;B58A14
+    %AICMD0x16($80091E, $09, $0C, $B58A9E)                     ;B58A1C
+    %AICMD0x15($80091E, $06, $B58A7C)                          ;B58A24
+    %AICMD0x15($80091E, $05, $B58A7C)                          ;B58A2B
+    %AICMD0x15($80091E, $19, $B58A47)                          ;B58A32
+    %AICMD0x15($80091E, $49, $B58A54)                          ;B58A39
     %AICMD0x1C($0200, $00)                                     ;B58A40
-    %AICMD0x12_Jump($89F7)                                     ;B58A44
+    %AICMD0x12_Jump($B589F7)                                   ;B58A44
     %AICMD0x1C($03B1, $00)                                     ;B58A47
     %AICMD0x41_ModifyVariable($7F1F23, $FFF8)                  ;B58A4B
-    %AICMD0x12_Jump($89F7)                                     ;B58A51
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8AAB) ;B58A54
+    %AICMD0x12_Jump($B589F7)                                   ;B58A51
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58AAB)   ;B58A54
     %AICMD0x1C($0212, $00)                                     ;B58A5B
     %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B58A5F
-    %AICMD0x12_Jump($89F7)                                     ;B58A65
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8AAB) ;B58A68
+    %AICMD0x12_Jump($B589F7)                                   ;B58A65
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58AAB)   ;B58A68
     %AICMD0x1C($03B2, $00)                                     ;B58A6F
     %AICMD0x41_ModifyVariable($7F1F23, $0005)                  ;B58A73
-    %AICMD0x12_Jump($89F7)                                     ;B58A79
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8AAB) ;B58A7C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $8AB8) ;B58A83
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $8AC5) ;B58A8A
+    %AICMD0x12_Jump($B589F7)                                   ;B58A79
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58AAB)   ;B58A7C
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B58AB8)   ;B58A83
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B58AC5)   ;B58A8A
     %AICMD0x1C($0212, $00)                                     ;B58A91
     %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B58A95
-    %AICMD0x12_Jump($89F7)                                     ;B58A9B
+    %AICMD0x12_Jump($B589F7)                                   ;B58A9B
     %AICMD0x1C($03BA, $00)                                     ;B58A9E
     %AICMD0x41_ModifyVariable($7F1F23, $FFFC)                  ;B58AA2
-    %AICMD0x12_Jump($89F7)                                     ;B58AA8
+    %AICMD0x12_Jump($B589F7)                                   ;B58AA8
     %AICMD0x1C($01BD, $00)                                     ;B58AAB
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58AAF
-    %AICMD0x12_Jump($89F7)                                     ;B58AB5
+    %AICMD0x12_Jump($B589F7)                                   ;B58AB5
     %AICMD0x1C($041D, $00)                                     ;B58AB8
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58ABC
-    %AICMD0x12_Jump($89F7)                                     ;B58AC2
+    %AICMD0x12_Jump($B589F7)                                   ;B58AC2
     %AICMD0x1C($041E, $00)                                     ;B58AC5
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58AC9
-    %AICMD0x12_Jump($89F7)                                     ;B58ACF
-    %AICMD0x16($7F1F1C, $0F, $12, $8DDA)                       ;B58AD2
+    %AICMD0x12_Jump($B589F7)                                   ;B58ACF
+    %AICMD0x16($7F1F1C, $0F, $12, $B58DDA)                     ;B58AD2
     %AICMD0x43($7F1F3B, $0001, $8BFE)                          ;B58ADA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $8C0D) ;B58AE2
-    %AICMD0x15($80098C, $03, $8C14)                            ;B58AE9
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $8C1B) ;B58AF0
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $8C0D) ;B58AF7
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B58C0D)   ;B58AE2
+    %AICMD0x15($80098C, $03, $B58C14)                          ;B58AE9
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B58C1B)   ;B58AF0
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B58C0D)   ;B58AF7
     %AICMD0x43($7F1F37, $0001, $8C30)                          ;B58AFE
     %AICMD0x43($7F1F39, $0001, $8C30)                          ;B58B06
-    %AICMD0x45($7F1F37, $0002, $0013, $8C37)                   ;B58B0E
-    %AICMD0x45($7F1F39, $0002, $0013, $8C37)                   ;B58B18
-    %AICMD0x45($7F1F37, $0014, $0027, $8C4B)                   ;B58B22
-    %AICMD0x45($7F1F39, $0014, $0027, $8C4B)                   ;B58B2C
-    %AICMD0x45($7F1F37, $0028, $003B, $8C5F)                   ;B58B36
-    %AICMD0x45($7F1F39, $0028, $003B, $8C5F)                   ;B58B40
+    %AICMD0x45($7F1F37, $0002, $0013, $B58C37)                 ;B58B0E
+    %AICMD0x45($7F1F39, $0002, $0013, $B58C37)                 ;B58B18
+    %AICMD0x45($7F1F37, $0014, $0027, $B58C4B)                 ;B58B22
+    %AICMD0x45($7F1F39, $0014, $0027, $B58C4B)                 ;B58B2C
+    %AICMD0x45($7F1F37, $0028, $003B, $B58C5F)                 ;B58B36
+    %AICMD0x45($7F1F39, $0028, $003B, $B58C5F)                 ;B58B40
     %AICMD0x43($7F1F37, $005A, $8C73)                          ;B58B4A
     %AICMD0x43($7F1F39, $005A, $8C73)                          ;B58B52
     %AICMD0x55($7F1F64, $07, $8B7D)                            ;B58B5A
@@ -605,120 +605,120 @@ DATA8_B58990:
     %AICMD0x55($7F1F66, $0B, $8C22)                            ;B58B68
     %AICMD0x55($7F1F66, $0C, $8C22)                            ;B58B6F
     %AICMD0x55($7F1F66, $09, $8C29)                            ;B58B76
-    %AICMD0x15($7F1F1A, $00, $8CB1)                            ;B58B7D
-    %AICMD0x15($7F1F1A, $06, $8CAA)                            ;B58B84
-    %AICMD0x45($7F1F23, $00C8, $00DC, $8C9C)                   ;B58B8B
-    %AICMD0x45($7F1F23, $00DD, $00FA, $8CA3)                   ;B58B95
-    %AICMD0x15($7F1F19, $00, $8CC6)                            ;B58B9F
-    %AICMD0x15($7F1F19, $01, $8CEF)                            ;B58BA6
-    %AICMD0x15($7F1F19, $02, $8D19)                            ;B58BAD
-    %AICMD0x15($7F1F19, $03, $8D49)                            ;B58BB4
-    %AICMD0x45($7F1F37, $003C, $0059, $8C7A)                   ;B58BBB
-    %AICMD0x45($7F1F39, $003C, $0059, $8C7A)                   ;B58BC5
-    %AICMD0x45($7F1F37, $005B, $0077, $8C81)                   ;B58BCF
-    %AICMD0x45($7F1F39, $005B, $0077, $8C81)                   ;B58BD9
-    %AICMD0x45($7F1F37, $0078, $03E7, $8C88)                   ;B58BE3
-    %AICMD0x45($7F1F39, $0078, $03E7, $8C88)                   ;B58BED
+    %AICMD0x15($7F1F1A, $00, $B58CB1)                          ;B58B7D
+    %AICMD0x15($7F1F1A, $06, $B58CAA)                          ;B58B84
+    %AICMD0x45($7F1F23, $00C8, $00DC, $B58C9C)                 ;B58B8B
+    %AICMD0x45($7F1F23, $00DD, $00FA, $B58CA3)                 ;B58B95
+    %AICMD0x15($7F1F19, $00, $B58CC6)                          ;B58B9F
+    %AICMD0x15($7F1F19, $01, $B58CEF)                          ;B58BA6
+    %AICMD0x15($7F1F19, $02, $B58D19)                          ;B58BAD
+    %AICMD0x15($7F1F19, $03, $B58D49)                          ;B58BB4
+    %AICMD0x45($7F1F37, $003C, $0059, $B58C7A)                 ;B58BBB
+    %AICMD0x45($7F1F39, $003C, $0059, $B58C7A)                 ;B58BC5
+    %AICMD0x45($7F1F37, $005B, $0077, $B58C81)                 ;B58BCF
+    %AICMD0x45($7F1F39, $005B, $0077, $B58C81)                 ;B58BD9
+    %AICMD0x45($7F1F37, $0078, $03E7, $B58C88)                 ;B58BE3
+    %AICMD0x45($7F1F39, $0078, $03E7, $B58C88)                 ;B58BED
     %AICMD0x1C($0485, $00)                                     ;B58BF7
-    %AICMD0x12_Jump($89F7)                                     ;B58BFB
-    %AICMD0x16($7F1F1C, $0F, $12, $8DDA)                       ;B58BFE
+    %AICMD0x12_Jump($B589F7)                                   ;B58BFB
+    %AICMD0x16($7F1F1C, $0F, $12, $B58DDA)                     ;B58BFE
     %AICMD0x1C($017D, $00)                                     ;B58C06
-    %AICMD0x12_Jump($89F7)                                     ;B58C0A
+    %AICMD0x12_Jump($B589F7)                                   ;B58C0A
     %AICMD0x1C($0166, $00)                                     ;B58C0D
-    %AICMD0x12_Jump($89F7)                                     ;B58C11
+    %AICMD0x12_Jump($B589F7)                                   ;B58C11
     %AICMD0x1C($015F, $00)                                     ;B58C14
-    %AICMD0x12_Jump($89F7)                                     ;B58C18
+    %AICMD0x12_Jump($B589F7)                                   ;B58C18
     %AICMD0x1C($0160, $00)                                     ;B58C1B
-    %AICMD0x12_Jump($89F7)                                     ;B58C1F
+    %AICMD0x12_Jump($B589F7)                                   ;B58C1F
     %AICMD0x1C($01A0, $00)                                     ;B58C22
-    %AICMD0x12_Jump($89F7)                                     ;B58C26
+    %AICMD0x12_Jump($B589F7)                                   ;B58C26
     %AICMD0x1C($0493, $00)                                     ;B58C29
-    %AICMD0x12_Jump($89F7)                                     ;B58C2D
+    %AICMD0x12_Jump($B589F7)                                   ;B58C2D
     %AICMD0x1C($01A2, $00)                                     ;B58C30
-    %AICMD0x12_Jump($89F7)                                     ;B58C34
+    %AICMD0x12_Jump($B589F7)                                   ;B58C34
     %AICMD0x17($02)                                            ;B58C37
-    %AICMD0x18($00, $8B7D)                                     ;B58C39
-    %AICMD0x18($01, $8C44)                                     ;B58C3D
-    %AICMD0x12_Jump($89F7)                                     ;B58C41
+    %AICMD0x18($00, $B58B7D)                                   ;B58C39
+    %AICMD0x18($01, $B58C44)                                   ;B58C3D
+    %AICMD0x12_Jump($B589F7)                                   ;B58C41
     %AICMD0x1C($01A4, $00)                                     ;B58C44
-    %AICMD0x12_Jump($89F7)                                     ;B58C48
+    %AICMD0x12_Jump($B589F7)                                   ;B58C48
     %AICMD0x17($02)                                            ;B58C4B
-    %AICMD0x18($00, $8B7D)                                     ;B58C4D
-    %AICMD0x18($01, $8C58)                                     ;B58C51
-    %AICMD0x12_Jump($89F7)                                     ;B58C55
+    %AICMD0x18($00, $B58B7D)                                   ;B58C4D
+    %AICMD0x18($01, $B58C58)                                   ;B58C51
+    %AICMD0x12_Jump($B589F7)                                   ;B58C55
     %AICMD0x1C($01A6, $00)                                     ;B58C58
-    %AICMD0x12_Jump($89F7)                                     ;B58C5C
+    %AICMD0x12_Jump($B589F7)                                   ;B58C5C
     %AICMD0x17($02)                                            ;B58C5F
-    %AICMD0x18($00, $8B7D)                                     ;B58C61
-    %AICMD0x18($01, $8C6C)                                     ;B58C65
-    %AICMD0x12_Jump($89F7)                                     ;B58C69
+    %AICMD0x18($00, $B58B7D)                                   ;B58C61
+    %AICMD0x18($01, $B58C6C)                                   ;B58C65
+    %AICMD0x12_Jump($B589F7)                                   ;B58C69
     %AICMD0x1C($01A8, $00)                                     ;B58C6C
-    %AICMD0x12_Jump($89F7)                                     ;B58C70
+    %AICMD0x12_Jump($B589F7)                                   ;B58C70
     %AICMD0x1C($0481, $00)                                     ;B58C73
-    %AICMD0x12_Jump($89F7)                                     ;B58C77
+    %AICMD0x12_Jump($B589F7)                                   ;B58C77
     %AICMD0x1C($0480, $00)                                     ;B58C7A
-    %AICMD0x12_Jump($89F7)                                     ;B58C7E
+    %AICMD0x12_Jump($B589F7)                                   ;B58C7E
     %AICMD0x1C($0484, $00)                                     ;B58C81
-    %AICMD0x12_Jump($89F7)                                     ;B58C85
+    %AICMD0x12_Jump($B589F7)                                   ;B58C85
     %AICMD0x17($02)                                            ;B58C88
-    %AICMD0x18($00, $8C95)                                     ;B58C8A
+    %AICMD0x18($00, $B58C95)                                   ;B58C8A
     %AICMD0x1C($0482, $00)                                     ;B58C8E
-    %AICMD0x12_Jump($89F7)                                     ;B58C92
+    %AICMD0x12_Jump($B589F7)                                   ;B58C92
     %AICMD0x1C($0443, $00)                                     ;B58C95
-    %AICMD0x12_Jump($89F7)                                     ;B58C99
+    %AICMD0x12_Jump($B589F7)                                   ;B58C99
     %AICMD0x1C($01F4, $00)                                     ;B58C9C
-    %AICMD0x12_Jump($89F7)                                     ;B58CA0
+    %AICMD0x12_Jump($B589F7)                                   ;B58CA0
     %AICMD0x1C($0049, $00)                                     ;B58CA3
-    %AICMD0x12_Jump($89F7)                                     ;B58CA7
+    %AICMD0x12_Jump($B589F7)                                   ;B58CA7
     %AICMD0x1C($047D, $00)                                     ;B58CAA
-    %AICMD0x12_Jump($89F7)                                     ;B58CAE
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8DC5) ;B58CB1
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $8DC5) ;B58CB8
+    %AICMD0x12_Jump($B589F7)                                   ;B58CAE
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58DC5)   ;B58CB1
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B58DC5)   ;B58CB8
     %AICMD0x1C($0195, $00)                                     ;B58CBF
-    %AICMD0x12_Jump($89F7)                                     ;B58CC3
-    %AICMD0x15($7F1F1B, $16, $8CE8)                            ;B58CC6
-    %AICMD0x15($7F1F1B, $17, $8DBE)                            ;B58CCD
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8DCC) ;B58CD4
+    %AICMD0x12_Jump($B589F7)                                   ;B58CC3
+    %AICMD0x15($7F1F1B, $16, $B58CE8)                          ;B58CC6
+    %AICMD0x15($7F1F1B, $17, $B58DBE)                          ;B58CCD
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58DCC)   ;B58CD4
     %AICMD0x17($02)                                            ;B58CDB
-    %AICMD0x18($00, $8BBB)                                     ;B58CDD
+    %AICMD0x18($00, $B58BBB)                                   ;B58CDD
     %AICMD0x1C($0424, $00)                                     ;B58CE1
-    %AICMD0x12_Jump($89F7)                                     ;B58CE5
+    %AICMD0x12_Jump($B589F7)                                   ;B58CE5
     %AICMD0x1C($0208, $00)                                     ;B58CE8
-    %AICMD0x12_Jump($89F7)                                     ;B58CEC
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8DCC) ;B58CEF
+    %AICMD0x12_Jump($B589F7)                                   ;B58CEC
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58DCC)   ;B58CEF
     %AICMD0x17($04)                                            ;B58CF6
-    %AICMD0x18($00, $8D0B)                                     ;B58CF8
-    %AICMD0x18($01, $8D12)                                     ;B58CFC
-    %AICMD0x18($02, $8BBB)                                     ;B58D00
+    %AICMD0x18($00, $B58D0B)                                   ;B58CF8
+    %AICMD0x18($01, $B58D12)                                   ;B58CFC
+    %AICMD0x18($02, $B58BBB)                                   ;B58D00
     %AICMD0x1C($0425, $00)                                     ;B58D04
-    %AICMD0x12_Jump($89F7)                                     ;B58D08
+    %AICMD0x12_Jump($B589F7)                                   ;B58D08
     %AICMD0x1C($0423, $00)                                     ;B58D0B
-    %AICMD0x12_Jump($89F7)                                     ;B58D0F
+    %AICMD0x12_Jump($B589F7)                                   ;B58D0F
     %AICMD0x1C($0141, $00)                                     ;B58D12
-    %AICMD0x12_Jump($89F7)                                     ;B58D16
-    %AICMD0x15($7F1F1B, $0B, $8D42)                            ;B58D19
-    %AICMD0x15($7F1F1B, $0C, $8DBE)                            ;B58D20
-    %AICMD0x15($7F1F1B, $14, $8DBE)                            ;B58D27
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8DCC) ;B58D2E
+    %AICMD0x12_Jump($B589F7)                                   ;B58D16
+    %AICMD0x15($7F1F1B, $0B, $B58D42)                          ;B58D19
+    %AICMD0x15($7F1F1B, $0C, $B58DBE)                          ;B58D20
+    %AICMD0x15($7F1F1B, $14, $B58DBE)                          ;B58D27
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58DCC)   ;B58D2E
     %AICMD0x17($02)                                            ;B58D35
-    %AICMD0x18($00, $8BBB)                                     ;B58D37
+    %AICMD0x18($00, $B58BBB)                                   ;B58D37
     %AICMD0x1C($0423, $00)                                     ;B58D3B
-    %AICMD0x12_Jump($89F7)                                     ;B58D3F
+    %AICMD0x12_Jump($B589F7)                                   ;B58D3F
     %AICMD0x1C($023A, $00)                                     ;B58D42
-    %AICMD0x12_Jump($89F7)                                     ;B58D46
-    %AICMD0x15($7F1F1B, $0A, $8D87)                            ;B58D49
-    %AICMD0x15($7F1F1B, $17, $8DB0)                            ;B58D50
-    %AICMD0x15($7F1F1B, $1E, $8DB7)                            ;B58D57
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $8DD3) ;B58D5E
-    %AICMD0x16($7F1F1C, $0F, $11, $8DDA)                       ;B58D65
+    %AICMD0x12_Jump($B589F7)                                   ;B58D46
+    %AICMD0x15($7F1F1B, $0A, $B58D87)                          ;B58D49
+    %AICMD0x15($7F1F1B, $17, $B58DB0)                          ;B58D50
+    %AICMD0x15($7F1F1B, $1E, $B58DB7)                          ;B58D57
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B58DD3)   ;B58D5E
+    %AICMD0x16($7F1F1C, $0F, $11, $B58DDA)                     ;B58D65
     %AICMD0x17($02)                                            ;B58D6D
-    %AICMD0x18($00, $8BBB)                                     ;B58D6F
+    %AICMD0x18($00, $B58BBB)                                   ;B58D6F
     %AICMD0x1C($042F, $00)                                     ;B58D73
-    %AICMD0x12_Jump($89F7)                                     ;B58D77
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $8E14) ;B58D7A
+    %AICMD0x12_Jump($B589F7)                                   ;B58D77
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B58E14)   ;B58D7A
     %AICMD0x1F($8D87)                                          ;B58D81
-    %AICMD0x12_Jump($8D7A)                                     ;B58D84
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $8DA9) ;B58D87
+    %AICMD0x12_Jump($B58D7A)                                   ;B58D84
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B58DA9)   ;B58D87
     %AICMD0x1C($0292, $00)                                     ;B58D8E
     %AICMD0x23_OrWithIndexedValue($7F1F74, $05)                ;B58D92
     %AICMD0x08()                                               ;B58D97
@@ -726,22 +726,22 @@ DATA8_B58990:
     %AICMD0x13($0078)                                          ;B58D9C
     %AICMD0x11()                                               ;B58D9F
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58DA0
-    %AICMD0x12_Jump($8D7A)                                     ;B58DA6
+    %AICMD0x12_Jump($B58D7A)                                   ;B58DA6
     %AICMD0x1C($0293, $00)                                     ;B58DA9
-    %AICMD0x12_Jump($8D7A)                                     ;B58DAD
+    %AICMD0x12_Jump($B58D7A)                                   ;B58DAD
     %AICMD0x1C($02B1, $00)                                     ;B58DB0
-    %AICMD0x12_Jump($89F7)                                     ;B58DB4
+    %AICMD0x12_Jump($B589F7)                                   ;B58DB4
     %AICMD0x1C($03FA, $00)                                     ;B58DB7
-    %AICMD0x12_Jump($89F7)                                     ;B58DBB
+    %AICMD0x12_Jump($B589F7)                                   ;B58DBB
     %AICMD0x1C($0361, $00)                                     ;B58DBE
-    %AICMD0x12_Jump($89F7)                                     ;B58DC2
+    %AICMD0x12_Jump($B589F7)                                   ;B58DC2
     %AICMD0x1C($037C, $00)                                     ;B58DC5
-    %AICMD0x12_Jump($89F7)                                     ;B58DC9
+    %AICMD0x12_Jump($B589F7)                                   ;B58DC9
     %AICMD0x1C($0196, $00)                                     ;B58DCC
-    %AICMD0x12_Jump($89F7)                                     ;B58DD0
+    %AICMD0x12_Jump($B589F7)                                   ;B58DD0
     %AICMD0x1C($0199, $00)                                     ;B58DD3
-    %AICMD0x12_Jump($89F7)                                     ;B58DD7
-    %AICMD0x15($7F1F19, $03, $8DF7)                            ;B58DDA
+    %AICMD0x12_Jump($B589F7)                                   ;B58DD7
+    %AICMD0x15($7F1F19, $03, $B58DF7)                          ;B58DDA
     %AICMD0x1C($0180, $00)                                     ;B58DE1
     %AICMD0x1B($022F, $00)                                     ;B58DE5
     %AICMD0x08()                                               ;B58DE9
@@ -749,8 +749,8 @@ DATA8_B58990:
     %AICMD0x13($0078)                                          ;B58DEE
     %AICMD0x11()                                               ;B58DF1
     %AICMD0x57_UpdateStamina($1E)                              ;B58DF2
-    %AICMD0x12_Jump($89F7)                                     ;B58DF4
-    %AICMD0x15($7F1F1B, $0A, $8D87)                            ;B58DF7
+    %AICMD0x12_Jump($B589F7)                                   ;B58DF4
+    %AICMD0x15($7F1F1B, $0A, $B58D87)                          ;B58DF7
     %AICMD0x1C($0432, $00)                                     ;B58DFE
     %AICMD0x1B($022F, $00)                                     ;B58E02
     %AICMD0x08()                                               ;B58E06
@@ -758,7 +758,7 @@ DATA8_B58990:
     %AICMD0x13($0078)                                          ;B58E0B
     %AICMD0x11()                                               ;B58E0E
     %AICMD0x57_UpdateStamina($1E)                              ;B58E0F
-    %AICMD0x12_Jump($89F7)                                     ;B58E11
+    %AICMD0x12_Jump($B589F7)                                   ;B58E11
     %AICMD0x1B($02E7, $00)                                     ;B58E14
     %AICMD0x0D($FF, $00, $20, $01)                             ;B58E18
     %AICMD0x1B($02E5, $00)                                     ;B58E1D
@@ -768,91 +768,91 @@ DATA8_B58990:
     %AICMD0x1B($02F1, $00)                                     ;B58E2F
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58E33
     %AICMD0x41_ModifyVariable($7F1F23, $0002)                  ;B58E38
-    %AICMD0x12_Jump($8A06)                                     ;B58E3E
+    %AICMD0x12_Jump($B58A06)                                   ;B58E3E
     %AICMD0x1C($02C2, $00)                                     ;B58E41
-    %AICMD0x12_Jump($8A06)                                     ;B58E45
+    %AICMD0x12_Jump($B58A06)                                   ;B58E45
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58E48
     %AICMD0x10_End()                                           ;B58E4D
 
 DATA8_B58E4E:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $8E64) ;B58E4E
-    %AICMD0x15($7F1F19, $03, $8E64)                            ;B58E55
-    %AICMD0x16($7F1F1C, $0B, $0E, $930D)                       ;B58E5C
-    %AICMD0x15($7F1F1C, $12, $8E88)                            ;B58E64
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $8E7D) ;B58E6B
-    %AICMD0x1A($0058, $0068, $845C, $00)                       ;B58E72
-    %AICMD0x12_Jump($8EB5)                                     ;B58E7A
-    %AICMD0x1A($0148, $0078, $845C, $00)                       ;B58E7D
-    %AICMD0x12_Jump($8EB5)                                     ;B58E85
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B58E64)   ;B58E4E
+    %AICMD0x15($7F1F19, $03, $B58E64)                          ;B58E55
+    %AICMD0x16($7F1F1C, $0B, $0E, $B5930D)                     ;B58E5C
+    %AICMD0x15($7F1F1C, $12, $B58E88)                          ;B58E64
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B58E7D)   ;B58E6B
+    %AICMD0x1A($0058, $0068, $B3845C, $00)                     ;B58E72
+    %AICMD0x12_Jump($B58EB5)                                   ;B58E7A
+    %AICMD0x1A($0148, $0078, $B3845C, $00)                     ;B58E7D
+    %AICMD0x12_Jump($B58EB5)                                   ;B58E85
     %AICMD0x41_ModifyVariable($7F1F25, $FFFE)                  ;B58E88
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $8EA5) ;B58E8E
-    %AICMD0x1A($0029, $0053, $8468, $00)                       ;B58E95
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B58EA5)   ;B58E8E
+    %AICMD0x1A($0029, $0053, $B38468, $00)                     ;B58E95
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58E9D
-    %AICMD0x12_Jump($8EC4)                                     ;B58EA2
-    %AICMD0x1A($0119, $0063, $8468, $00)                       ;B58EA5
+    %AICMD0x12_Jump($B58EC4)                                   ;B58EA2
+    %AICMD0x1A($0119, $0063, $B38468, $00)                     ;B58EA5
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B58EAD
-    %AICMD0x12_Jump($8EC4)                                     ;B58EB2
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $92D9) ;B58EB5
-    %AICMD0x2D($8F9F, $8ECA)                                   ;B58EBC
-    %AICMD0x12_Jump($8EB5)                                     ;B58EC1
+    %AICMD0x12_Jump($B58EC4)                                   ;B58EB2
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B592D9)   ;B58EB5
+    %AICMD0x2D($B58F9F, $B58ECA)                               ;B58EBC
+    %AICMD0x12_Jump($B58EB5)                                   ;B58EC1
     %AICMD0x1F($9306)                                          ;B58EC4
-    %AICMD0x12_Jump($8EC4)                                     ;B58EC7
-    %AICMD0x15($80091E, $02, $8F0D)                            ;B58ECA
-    %AICMD0x16($80091E, $01, $07, $8F1A)                       ;B58ED1
-    %AICMD0x15($80091E, $19, $8F2E)                            ;B58ED9
-    %AICMD0x15($80091E, $49, $8F2E)                            ;B58EE0
-    %AICMD0x15($80091E, $06, $8F5C)                            ;B58EE7
-    %AICMD0x16($80091E, $10, $13, $8F1A)                       ;B58EEE
-    %AICMD0x16($80091E, $14, $17, $8F42)                       ;B58EF6
-    %AICMD0x16($80091E, $09, $0C, $8F4F)                       ;B58EFE
+    %AICMD0x12_Jump($B58EC4)                                   ;B58EC7
+    %AICMD0x15($80091E, $02, $B58F0D)                          ;B58ECA
+    %AICMD0x16($80091E, $01, $07, $B58F1A)                     ;B58ED1
+    %AICMD0x15($80091E, $19, $B58F2E)                          ;B58ED9
+    %AICMD0x15($80091E, $49, $B58F2E)                          ;B58EE0
+    %AICMD0x15($80091E, $06, $B58F5C)                          ;B58EE7
+    %AICMD0x16($80091E, $10, $13, $B58F1A)                     ;B58EEE
+    %AICMD0x16($80091E, $14, $17, $B58F42)                     ;B58EF6
+    %AICMD0x16($80091E, $09, $0C, $B58F4F)                     ;B58EFE
     %AICMD0x1C($0200, $00)                                     ;B58F06
-    %AICMD0x12_Jump($8EB5)                                     ;B58F0A
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F0A
     %AICMD0x1C($01D9, $00)                                     ;B58F0D
     %AICMD0x41_ModifyVariable($7F1F25, $FFF8)                  ;B58F11
-    %AICMD0x12_Jump($8EB5)                                     ;B58F17
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8F78) ;B58F1A
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F17
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58F78)   ;B58F1A
     %AICMD0x1C($03B2, $00)                                     ;B58F21
     %AICMD0x41_ModifyVariable($7F1F25, $0006)                  ;B58F25
-    %AICMD0x12_Jump($8EB5)                                     ;B58F2B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8F78) ;B58F2E
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F2B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58F78)   ;B58F2E
     %AICMD0x1C($0212, $00)                                     ;B58F35
     %AICMD0x41_ModifyVariable($7F1F25, $0006)                  ;B58F39
-    %AICMD0x12_Jump($8EB5)                                     ;B58F3F
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F3F
     %AICMD0x1C($03B3, $00)                                     ;B58F42
     %AICMD0x41_ModifyVariable($7F1F25, $0004)                  ;B58F46
-    %AICMD0x12_Jump($8EB5)                                     ;B58F4C
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F4C
     %AICMD0x1C($03BA, $00)                                     ;B58F4F
     %AICMD0x41_ModifyVariable($7F1F25, $FFFC)                  ;B58F53
-    %AICMD0x12_Jump($8EB5)                                     ;B58F59
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $8F78) ;B58F5C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $8F85) ;B58F63
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $8F92) ;B58F6A
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F59
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B58F78)   ;B58F5C
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B58F85)   ;B58F63
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B58F92)   ;B58F6A
     %AICMD0x1C($0212, $00)                                     ;B58F71
-    %AICMD0x12_Jump($8EB5)                                     ;B58F75
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F75
     %AICMD0x1C($01BD, $00)                                     ;B58F78
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58F7C
-    %AICMD0x12_Jump($8EB5)                                     ;B58F82
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F82
     %AICMD0x1C($041D, $00)                                     ;B58F85
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58F89
-    %AICMD0x12_Jump($8EB5)                                     ;B58F8F
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F8F
     %AICMD0x1C($041E, $00)                                     ;B58F92
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B58F96
-    %AICMD0x12_Jump($8EB5)                                     ;B58F9C
-    %AICMD0x16($7F1F1C, $0F, $12, $929F)                       ;B58F9F
+    %AICMD0x12_Jump($B58EB5)                                   ;B58F9C
+    %AICMD0x16($7F1F1C, $0F, $12, $B5929F)                     ;B58F9F
     %AICMD0x43($7F1F3B, $0001, $90CB)                          ;B58FA7
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $90D2) ;B58FAF
-    %AICMD0x15($80098C, $03, $90D9)                            ;B58FB6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $90E0) ;B58FBD
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $90D2) ;B58FC4
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B590D2)   ;B58FAF
+    %AICMD0x15($80098C, $03, $B590D9)                          ;B58FB6
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B590E0)   ;B58FBD
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B590D2)   ;B58FC4
     %AICMD0x43($7F1F37, $0001, $90F5)                          ;B58FCB
     %AICMD0x43($7F1F39, $0001, $90F5)                          ;B58FD3
-    %AICMD0x45($7F1F37, $0002, $0013, $90FC)                   ;B58FDB
-    %AICMD0x45($7F1F39, $0002, $0013, $90FC)                   ;B58FE5
-    %AICMD0x45($7F1F37, $0014, $0027, $9110)                   ;B58FEF
-    %AICMD0x45($7F1F39, $0014, $0027, $9110)                   ;B58FF9
-    %AICMD0x45($7F1F37, $0028, $003B, $9124)                   ;B59003
-    %AICMD0x45($7F1F39, $0028, $003B, $9124)                   ;B5900D
+    %AICMD0x45($7F1F37, $0002, $0013, $B590FC)                 ;B58FDB
+    %AICMD0x45($7F1F39, $0002, $0013, $B590FC)                 ;B58FE5
+    %AICMD0x45($7F1F37, $0014, $0027, $B59110)                 ;B58FEF
+    %AICMD0x45($7F1F39, $0014, $0027, $B59110)                 ;B58FF9
+    %AICMD0x45($7F1F37, $0028, $003B, $B59124)                 ;B59003
+    %AICMD0x45($7F1F39, $0028, $003B, $B59124)                 ;B5900D
     %AICMD0x43($7F1F37, $005A, $9138)                          ;B59017
     %AICMD0x43($7F1F39, $005A, $9138)                          ;B5901F
     %AICMD0x55($7F1F64, $07, $904A)                            ;B59027
@@ -860,119 +860,119 @@ DATA8_B58E4E:
     %AICMD0x55($7F1F66, $0B, $90E7)                            ;B59035
     %AICMD0x55($7F1F66, $0C, $90E7)                            ;B5903C
     %AICMD0x55($7F1F66, $09, $90EE)                            ;B59043
-    %AICMD0x15($7F1F1A, $00, $916F)                            ;B5904A
-    %AICMD0x15($7F1F1A, $06, $9184)                            ;B59051
-    %AICMD0x45($7F1F25, $00C8, $00DC, $9161)                   ;B59058
-    %AICMD0x45($7F1F25, $00DD, $00FA, $9168)                   ;B59062
-    %AICMD0x15($7F1F19, $00, $918B)                            ;B5906C
-    %AICMD0x15($7F1F19, $01, $91B4)                            ;B59073
-    %AICMD0x15($7F1F19, $02, $91DE)                            ;B5907A
-    %AICMD0x15($7F1F19, $03, $920E)                            ;B59081
-    %AICMD0x45($7F1F37, $003C, $0059, $913F)                   ;B59088
-    %AICMD0x45($7F1F39, $003C, $0059, $913F)                   ;B59092
-    %AICMD0x45($7F1F37, $005B, $0077, $9146)                   ;B5909C
-    %AICMD0x45($7F1F39, $005B, $0077, $9146)                   ;B590A6
-    %AICMD0x45($7F1F37, $0078, $03E7, $914D)                   ;B590B0
-    %AICMD0x45($7F1F39, $0078, $03E7, $914D)                   ;B590BA
+    %AICMD0x15($7F1F1A, $00, $B5916F)                          ;B5904A
+    %AICMD0x15($7F1F1A, $06, $B59184)                          ;B59051
+    %AICMD0x45($7F1F25, $00C8, $00DC, $B59161)                 ;B59058
+    %AICMD0x45($7F1F25, $00DD, $00FA, $B59168)                 ;B59062
+    %AICMD0x15($7F1F19, $00, $B5918B)                          ;B5906C
+    %AICMD0x15($7F1F19, $01, $B591B4)                          ;B59073
+    %AICMD0x15($7F1F19, $02, $B591DE)                          ;B5907A
+    %AICMD0x15($7F1F19, $03, $B5920E)                          ;B59081
+    %AICMD0x45($7F1F37, $003C, $0059, $B5913F)                 ;B59088
+    %AICMD0x45($7F1F39, $003C, $0059, $B5913F)                 ;B59092
+    %AICMD0x45($7F1F37, $005B, $0077, $B59146)                 ;B5909C
+    %AICMD0x45($7F1F39, $005B, $0077, $B59146)                 ;B590A6
+    %AICMD0x45($7F1F37, $0078, $03E7, $B5914D)                 ;B590B0
+    %AICMD0x45($7F1F39, $0078, $03E7, $B5914D)                 ;B590BA
     %AICMD0x1C($0485, $00)                                     ;B590C4
-    %AICMD0x12_Jump($8EB5)                                     ;B590C8
+    %AICMD0x12_Jump($B58EB5)                                   ;B590C8
     %AICMD0x1C($017D, $00)                                     ;B590CB
-    %AICMD0x12_Jump($8EB5)                                     ;B590CF
+    %AICMD0x12_Jump($B58EB5)                                   ;B590CF
     %AICMD0x1C($0166, $00)                                     ;B590D2
-    %AICMD0x12_Jump($8EB5)                                     ;B590D6
+    %AICMD0x12_Jump($B58EB5)                                   ;B590D6
     %AICMD0x1C($015F, $00)                                     ;B590D9
-    %AICMD0x12_Jump($8EB5)                                     ;B590DD
+    %AICMD0x12_Jump($B58EB5)                                   ;B590DD
     %AICMD0x1C($0160, $00)                                     ;B590E0
-    %AICMD0x12_Jump($8EB5)                                     ;B590E4
+    %AICMD0x12_Jump($B58EB5)                                   ;B590E4
     %AICMD0x1C($01A0, $00)                                     ;B590E7
-    %AICMD0x12_Jump($8EB5)                                     ;B590EB
+    %AICMD0x12_Jump($B58EB5)                                   ;B590EB
     %AICMD0x1C($0493, $00)                                     ;B590EE
-    %AICMD0x12_Jump($8EB5)                                     ;B590F2
+    %AICMD0x12_Jump($B58EB5)                                   ;B590F2
     %AICMD0x1C($01A2, $00)                                     ;B590F5
-    %AICMD0x12_Jump($8EB5)                                     ;B590F9
+    %AICMD0x12_Jump($B58EB5)                                   ;B590F9
     %AICMD0x17($02)                                            ;B590FC
-    %AICMD0x18($00, $904A)                                     ;B590FE
-    %AICMD0x18($01, $9109)                                     ;B59102
-    %AICMD0x12_Jump($8EB5)                                     ;B59106
+    %AICMD0x18($00, $B5904A)                                   ;B590FE
+    %AICMD0x18($01, $B59109)                                   ;B59102
+    %AICMD0x12_Jump($B58EB5)                                   ;B59106
     %AICMD0x1C($01A3, $00)                                     ;B59109
-    %AICMD0x12_Jump($8EB5)                                     ;B5910D
+    %AICMD0x12_Jump($B58EB5)                                   ;B5910D
     %AICMD0x17($02)                                            ;B59110
-    %AICMD0x18($00, $904A)                                     ;B59112
-    %AICMD0x18($01, $911D)                                     ;B59116
-    %AICMD0x12_Jump($8EB5)                                     ;B5911A
+    %AICMD0x18($00, $B5904A)                                   ;B59112
+    %AICMD0x18($01, $B5911D)                                   ;B59116
+    %AICMD0x12_Jump($B58EB5)                                   ;B5911A
     %AICMD0x1C($01A4, $00)                                     ;B5911D
-    %AICMD0x12_Jump($8EB5)                                     ;B59121
+    %AICMD0x12_Jump($B58EB5)                                   ;B59121
     %AICMD0x17($02)                                            ;B59124
-    %AICMD0x18($00, $904A)                                     ;B59126
-    %AICMD0x18($01, $9131)                                     ;B5912A
-    %AICMD0x12_Jump($8EB5)                                     ;B5912E
+    %AICMD0x18($00, $B5904A)                                   ;B59126
+    %AICMD0x18($01, $B59131)                                   ;B5912A
+    %AICMD0x12_Jump($B58EB5)                                   ;B5912E
     %AICMD0x1C($01A5, $00)                                     ;B59131
-    %AICMD0x12_Jump($8EB5)                                     ;B59135
+    %AICMD0x12_Jump($B58EB5)                                   ;B59135
     %AICMD0x1C($0481, $00)                                     ;B59138
-    %AICMD0x12_Jump($8EB5)                                     ;B5913C
+    %AICMD0x12_Jump($B58EB5)                                   ;B5913C
     %AICMD0x1C($0480, $00)                                     ;B5913F
-    %AICMD0x12_Jump($8EB5)                                     ;B59143
+    %AICMD0x12_Jump($B58EB5)                                   ;B59143
     %AICMD0x1C($0484, $00)                                     ;B59146
-    %AICMD0x12_Jump($8EB5)                                     ;B5914A
+    %AICMD0x12_Jump($B58EB5)                                   ;B5914A
     %AICMD0x17($02)                                            ;B5914D
-    %AICMD0x18($00, $915A)                                     ;B5914F
+    %AICMD0x18($00, $B5915A)                                   ;B5914F
     %AICMD0x1C($0482, $00)                                     ;B59153
-    %AICMD0x12_Jump($8EB5)                                     ;B59157
+    %AICMD0x12_Jump($B58EB5)                                   ;B59157
     %AICMD0x1C($0443, $00)                                     ;B5915A
-    %AICMD0x12_Jump($8EB5)                                     ;B5915E
+    %AICMD0x12_Jump($B58EB5)                                   ;B5915E
     %AICMD0x1C($01F3, $00)                                     ;B59161
-    %AICMD0x12_Jump($8EB5)                                     ;B59165
+    %AICMD0x12_Jump($B58EB5)                                   ;B59165
     %AICMD0x1C($0049, $00)                                     ;B59168
-    %AICMD0x12_Jump($8EB5)                                     ;B5916C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9291) ;B5916F
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $9291) ;B59176
+    %AICMD0x12_Jump($B58EB5)                                   ;B5916C
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59291)   ;B5916F
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B59291)   ;B59176
     %AICMD0x1C($0194, $00)                                     ;B5917D
-    %AICMD0x12_Jump($8EB5)                                     ;B59181
+    %AICMD0x12_Jump($B58EB5)                                   ;B59181
     %AICMD0x1C($047D, $00)                                     ;B59184
-    %AICMD0x12_Jump($8EB5)                                     ;B59188
-    %AICMD0x15($7F1F1B, $16, $91AD)                            ;B5918B
-    %AICMD0x15($7F1F1B, $17, $9283)                            ;B59192
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $928A) ;B59199
+    %AICMD0x12_Jump($B58EB5)                                   ;B59188
+    %AICMD0x15($7F1F1B, $16, $B591AD)                          ;B5918B
+    %AICMD0x15($7F1F1B, $17, $B59283)                          ;B59192
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5928A)   ;B59199
     %AICMD0x17($02)                                            ;B591A0
-    %AICMD0x18($00, $9088)                                     ;B591A2
+    %AICMD0x18($00, $B59088)                                   ;B591A2
     %AICMD0x1C($018C, $00)                                     ;B591A6
-    %AICMD0x12_Jump($8EB5)                                     ;B591AA
+    %AICMD0x12_Jump($B58EB5)                                   ;B591AA
     %AICMD0x1C($0209, $00)                                     ;B591AD
-    %AICMD0x12_Jump($8EB5)                                     ;B591B1
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $928A) ;B591B4
+    %AICMD0x12_Jump($B58EB5)                                   ;B591B1
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5928A)   ;B591B4
     %AICMD0x17($04)                                            ;B591BB
-    %AICMD0x18($00, $91D0)                                     ;B591BD
-    %AICMD0x18($01, $91D7)                                     ;B591C1
-    %AICMD0x18($02, $9088)                                     ;B591C5
+    %AICMD0x18($00, $B591D0)                                   ;B591BD
+    %AICMD0x18($01, $B591D7)                                   ;B591C1
+    %AICMD0x18($02, $B59088)                                   ;B591C5
     %AICMD0x1C($018D, $00)                                     ;B591C9
-    %AICMD0x12_Jump($8EB5)                                     ;B591CD
+    %AICMD0x12_Jump($B58EB5)                                   ;B591CD
     %AICMD0x1C($0426, $00)                                     ;B591D0
-    %AICMD0x12_Jump($8EB5)                                     ;B591D4
+    %AICMD0x12_Jump($B58EB5)                                   ;B591D4
     %AICMD0x1C($0420, $00)                                     ;B591D7
-    %AICMD0x12_Jump($8EB5)                                     ;B591DB
-    %AICMD0x15($7F1F1B, $0B, $9207)                            ;B591DE
-    %AICMD0x15($7F1F1B, $0C, $9283)                            ;B591E5
-    %AICMD0x15($7F1F1B, $14, $9283)                            ;B591EC
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $928A) ;B591F3
+    %AICMD0x12_Jump($B58EB5)                                   ;B591DB
+    %AICMD0x15($7F1F1B, $0B, $B59207)                          ;B591DE
+    %AICMD0x15($7F1F1B, $0C, $B59283)                          ;B591E5
+    %AICMD0x15($7F1F1B, $14, $B59283)                          ;B591EC
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5928A)   ;B591F3
     %AICMD0x17($02)                                            ;B591FA
-    %AICMD0x18($00, $9088)                                     ;B591FC
+    %AICMD0x18($00, $B59088)                                   ;B591FC
     %AICMD0x1C($0192, $00)                                     ;B59200
-    %AICMD0x12_Jump($8EB5)                                     ;B59204
+    %AICMD0x12_Jump($B58EB5)                                   ;B59204
     %AICMD0x1C($023B, $00)                                     ;B59207
-    %AICMD0x12_Jump($8EB5)                                     ;B5920B
-    %AICMD0x15($7F1F1B, $0A, $924C)                            ;B5920E
-    %AICMD0x15($7F1F1B, $17, $9275)                            ;B59215
-    %AICMD0x15($7F1F1B, $1E, $927C)                            ;B5921C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $9298) ;B59223
-    %AICMD0x16($7F1F1C, $0F, $11, $929F)                       ;B5922A
+    %AICMD0x12_Jump($B58EB5)                                   ;B5920B
+    %AICMD0x15($7F1F1B, $0A, $B5924C)                          ;B5920E
+    %AICMD0x15($7F1F1B, $17, $B59275)                          ;B59215
+    %AICMD0x15($7F1F1B, $1E, $B5927C)                          ;B5921C
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B59298)   ;B59223
+    %AICMD0x16($7F1F1C, $0F, $11, $B5929F)                     ;B5922A
     %AICMD0x17($02)                                            ;B59232
-    %AICMD0x18($00, $9088)                                     ;B59234
+    %AICMD0x18($00, $B59088)                                   ;B59234
     %AICMD0x1C($042F, $00)                                     ;B59238
-    %AICMD0x12_Jump($8EB5)                                     ;B5923C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $92D9) ;B5923F
+    %AICMD0x12_Jump($B58EB5)                                   ;B5923C
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B592D9)   ;B5923F
     %AICMD0x1F($924C)                                          ;B59246
-    %AICMD0x12_Jump($923F)                                     ;B59249
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $926E) ;B5924C
+    %AICMD0x12_Jump($B5923F)                                   ;B59249
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B5926E)   ;B5924C
     %AICMD0x1C($0292, $00)                                     ;B59253
     %AICMD0x23_OrWithIndexedValue($7F1F74, $05)                ;B59257
     %AICMD0x08()                                               ;B5925C
@@ -980,22 +980,22 @@ DATA8_B58E4E:
     %AICMD0x13($0078)                                          ;B59261
     %AICMD0x11()                                               ;B59264
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59265
-    %AICMD0x12_Jump($923F)                                     ;B5926B
+    %AICMD0x12_Jump($B5923F)                                   ;B5926B
     %AICMD0x1C($0293, $00)                                     ;B5926E
-    %AICMD0x12_Jump($923F)                                     ;B59272
+    %AICMD0x12_Jump($B5923F)                                   ;B59272
     %AICMD0x1C($02B4, $00)                                     ;B59275
-    %AICMD0x12_Jump($8EB5)                                     ;B59279
+    %AICMD0x12_Jump($B58EB5)                                   ;B59279
     %AICMD0x1C($03FB, $00)                                     ;B5927C
-    %AICMD0x12_Jump($8EB5)                                     ;B59280
+    %AICMD0x12_Jump($B58EB5)                                   ;B59280
     %AICMD0x1C($0363, $00)                                     ;B59283
-    %AICMD0x12_Jump($8EB5)                                     ;B59287
+    %AICMD0x12_Jump($B58EB5)                                   ;B59287
     %AICMD0x1C($0197, $00)                                     ;B5928A
-    %AICMD0x12_Jump($8EB5)                                     ;B5928E
+    %AICMD0x12_Jump($B58EB5)                                   ;B5928E
     %AICMD0x1C($047C, $00)                                     ;B59291
-    %AICMD0x12_Jump($8EB5)                                     ;B59295
+    %AICMD0x12_Jump($B58EB5)                                   ;B59295
     %AICMD0x1C($0199, $00)                                     ;B59298
-    %AICMD0x12_Jump($8EB5)                                     ;B5929C
-    %AICMD0x15($7F1F19, $03, $92BC)                            ;B5929F
+    %AICMD0x12_Jump($B58EB5)                                   ;B5929C
+    %AICMD0x15($7F1F19, $03, $B592BC)                          ;B5929F
     %AICMD0x1B($022F, $00)                                     ;B592A6
     %AICMD0x08()                                               ;B592AA
     %AICMD0x19($0039, $00)                                     ;B592AB
@@ -1003,8 +1003,8 @@ DATA8_B58E4E:
     %AICMD0x11()                                               ;B592B2
     %AICMD0x57_UpdateStamina($1E)                              ;B592B3
     %AICMD0x1C($0180, $00)                                     ;B592B5
-    %AICMD0x12_Jump($8EB5)                                     ;B592B9
-    %AICMD0x15($7F1F1B, $0A, $924C)                            ;B592BC
+    %AICMD0x12_Jump($B58EB5)                                   ;B592B9
+    %AICMD0x15($7F1F1B, $0A, $B5924C)                          ;B592BC
     %AICMD0x1C($042E, $00)                                     ;B592C3
     %AICMD0x1B($022F, $00)                                     ;B592C7
     %AICMD0x08()                                               ;B592CB
@@ -1012,7 +1012,7 @@ DATA8_B58E4E:
     %AICMD0x13($0078)                                          ;B592D0
     %AICMD0x11()                                               ;B592D3
     %AICMD0x57_UpdateStamina($1E)                              ;B592D4
-    %AICMD0x12_Jump($8EB5)                                     ;B592D6
+    %AICMD0x12_Jump($B58EB5)                                   ;B592D6
     %AICMD0x1B($02E7, $00)                                     ;B592D9
     %AICMD0x0D($FF, $00, $20, $01)                             ;B592DD
     %AICMD0x1B($02E5, $00)                                     ;B592E2
@@ -1022,89 +1022,89 @@ DATA8_B58E4E:
     %AICMD0x1B($02F1, $00)                                     ;B592F4
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B592F8
     %AICMD0x41_ModifyVariable($7F1F25, $0002)                  ;B592FD
-    %AICMD0x12_Jump($8EC4)                                     ;B59303
+    %AICMD0x12_Jump($B58EC4)                                   ;B59303
     %AICMD0x1C($02C2, $00)                                     ;B59306
-    %AICMD0x12_Jump($8EC4)                                     ;B5930A
+    %AICMD0x12_Jump($B58EC4)                                   ;B5930A
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B5930D
     %AICMD0x10_End()                                           ;B59312
 
 DATA8_B59313:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9329) ;B59313
-    %AICMD0x15($7F1F19, $03, $9329)                            ;B5931A
-    %AICMD0x16($7F1F1C, $0B, $0E, $97CB)                       ;B59321
-    %AICMD0x15($7F1F1C, $12, $934D)                            ;B59329
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $9342) ;B59330
-    %AICMD0x1A($0058, $0068, $845C, $00)                       ;B59337
-    %AICMD0x12_Jump($937A)                                     ;B5933F
-    %AICMD0x1A($0148, $0078, $845C, $00)                       ;B59342
-    %AICMD0x12_Jump($937A)                                     ;B5934A
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59329)   ;B59313
+    %AICMD0x15($7F1F19, $03, $B59329)                          ;B5931A
+    %AICMD0x16($7F1F1C, $0B, $0E, $B597CB)                     ;B59321
+    %AICMD0x15($7F1F1C, $12, $B5934D)                          ;B59329
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B59342)   ;B59330
+    %AICMD0x1A($0058, $0068, $B3845C, $00)                     ;B59337
+    %AICMD0x12_Jump($B5937A)                                   ;B5933F
+    %AICMD0x1A($0148, $0078, $B3845C, $00)                     ;B59342
+    %AICMD0x12_Jump($B5937A)                                   ;B5934A
     %AICMD0x41_ModifyVariable($7F1F27, $FFFE)                  ;B5934D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $936A) ;B59353
-    %AICMD0x1A($0029, $0053, $8468, $00)                       ;B5935A
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B5936A)   ;B59353
+    %AICMD0x1A($0029, $0053, $B38468, $00)                     ;B5935A
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B59362
-    %AICMD0x12_Jump($9389)                                     ;B59367
-    %AICMD0x1A($0119, $0063, $8468, $00)                       ;B5936A
+    %AICMD0x12_Jump($B59389)                                   ;B59367
+    %AICMD0x1A($0119, $0063, $B38468, $00)                     ;B5936A
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B59372
-    %AICMD0x12_Jump($9389)                                     ;B59377
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $9797) ;B5937A
-    %AICMD0x2D($945C, $938F)                                   ;B59381
-    %AICMD0x12_Jump($937A)                                     ;B59386
+    %AICMD0x12_Jump($B59389)                                   ;B59377
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B59797)   ;B5937A
+    %AICMD0x2D($B5945C, $B5938F)                               ;B59381
+    %AICMD0x12_Jump($B5937A)                                   ;B59386
     %AICMD0x1F($97C4)                                          ;B59389
-    %AICMD0x12_Jump($9389)                                     ;B5938C
-    %AICMD0x15($80091E, $02, $93D1)                            ;B5938F
-    %AICMD0x15($80091E, $07, $93D1)                            ;B59396
-    %AICMD0x16($80091E, $01, $05, $93DE)                       ;B5939D
-    %AICMD0x16($80091E, $10, $17, $93DE)                       ;B593A5
-    %AICMD0x15($80091E, $06, $93F2)                            ;B593AD
-    %AICMD0x15($80091E, $19, $9406)                            ;B593B4
-    %AICMD0x15($80091E, $49, $9406)                            ;B593BB
-    %AICMD0x16($80091E, $09, $0C, $9428)                       ;B593C2
+    %AICMD0x12_Jump($B59389)                                   ;B5938C
+    %AICMD0x15($80091E, $02, $B593D1)                          ;B5938F
+    %AICMD0x15($80091E, $07, $B593D1)                          ;B59396
+    %AICMD0x16($80091E, $01, $05, $B593DE)                     ;B5939D
+    %AICMD0x16($80091E, $10, $17, $B593DE)                     ;B593A5
+    %AICMD0x15($80091E, $06, $B593F2)                          ;B593AD
+    %AICMD0x15($80091E, $19, $B59406)                          ;B593B4
+    %AICMD0x15($80091E, $49, $B59406)                          ;B593BB
+    %AICMD0x16($80091E, $09, $0C, $B59428)                     ;B593C2
     %AICMD0x1C($0200, $00)                                     ;B593CA
-    %AICMD0x12_Jump($937A)                                     ;B593CE
+    %AICMD0x12_Jump($B5937A)                                   ;B593CE
     %AICMD0x1C($03B4, $00)                                     ;B593D1
     %AICMD0x41_ModifyVariable($7F1F27, $FFF8)                  ;B593D5
-    %AICMD0x12_Jump($937A)                                     ;B593DB
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9435) ;B593DE
+    %AICMD0x12_Jump($B5937A)                                   ;B593DB
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59435)   ;B593DE
     %AICMD0x1C($03B2, $00)                                     ;B593E5
     %AICMD0x41_ModifyVariable($7F1F27, $0004)                  ;B593E9
-    %AICMD0x12_Jump($937A)                                     ;B593EF
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9435) ;B593F2
+    %AICMD0x12_Jump($B5937A)                                   ;B593EF
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59435)   ;B593F2
     %AICMD0x1C($0212, $00)                                     ;B593F9
     %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B593FD
-    %AICMD0x12_Jump($937A)                                     ;B59403
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9435) ;B59406
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $9442) ;B5940D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $944F) ;B59414
+    %AICMD0x12_Jump($B5937A)                                   ;B59403
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59435)   ;B59406
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B59442)   ;B5940D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B5944F)   ;B59414
     %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B5941B
     %AICMD0x1C($0212, $00)                                     ;B59421
-    %AICMD0x12_Jump($937A)                                     ;B59425
+    %AICMD0x12_Jump($B5937A)                                   ;B59425
     %AICMD0x1C($03BA, $00)                                     ;B59428
     %AICMD0x41_ModifyVariable($7F1F27, $FFFB)                  ;B5942C
-    %AICMD0x12_Jump($937A)                                     ;B59432
+    %AICMD0x12_Jump($B5937A)                                   ;B59432
     %AICMD0x1C($01BD, $00)                                     ;B59435
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59439
-    %AICMD0x12_Jump($937A)                                     ;B5943F
+    %AICMD0x12_Jump($B5937A)                                   ;B5943F
     %AICMD0x1C($041D, $00)                                     ;B59442
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59446
-    %AICMD0x12_Jump($937A)                                     ;B5944C
+    %AICMD0x12_Jump($B5937A)                                   ;B5944C
     %AICMD0x1C($041E, $00)                                     ;B5944F
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59453
-    %AICMD0x12_Jump($937A)                                     ;B59459
-    %AICMD0x16($7F1F1C, $0F, $12, $9759)                       ;B5945C
+    %AICMD0x12_Jump($B5937A)                                   ;B59459
+    %AICMD0x16($7F1F1C, $0F, $12, $B59759)                     ;B5945C
     %AICMD0x43($7F1F3B, $0001, $9588)                          ;B59464
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $958F) ;B5946C
-    %AICMD0x15($80098C, $03, $9596)                            ;B59473
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $959D) ;B5947A
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $958F) ;B59481
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B5958F)   ;B5946C
+    %AICMD0x15($80098C, $03, $B59596)                          ;B59473
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B5959D)   ;B5947A
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B5958F)   ;B59481
     %AICMD0x43($7F1F37, $0001, $95B2)                          ;B59488
     %AICMD0x43($7F1F39, $0001, $95B2)                          ;B59490
-    %AICMD0x45($7F1F37, $0002, $0013, $95B9)                   ;B59498
-    %AICMD0x45($7F1F39, $0002, $0013, $95B9)                   ;B594A2
-    %AICMD0x45($7F1F37, $0014, $0027, $95CD)                   ;B594AC
-    %AICMD0x45($7F1F39, $0014, $0027, $95CD)                   ;B594B6
-    %AICMD0x45($7F1F37, $0028, $003B, $95E1)                   ;B594C0
-    %AICMD0x45($7F1F39, $0028, $003B, $95E1)                   ;B594CA
+    %AICMD0x45($7F1F37, $0002, $0013, $B595B9)                 ;B59498
+    %AICMD0x45($7F1F39, $0002, $0013, $B595B9)                 ;B594A2
+    %AICMD0x45($7F1F37, $0014, $0027, $B595CD)                 ;B594AC
+    %AICMD0x45($7F1F39, $0014, $0027, $B595CD)                 ;B594B6
+    %AICMD0x45($7F1F37, $0028, $003B, $B595E1)                 ;B594C0
+    %AICMD0x45($7F1F39, $0028, $003B, $B595E1)                 ;B594CA
     %AICMD0x43($7F1F37, $005A, $95F2)                          ;B594D4
     %AICMD0x43($7F1F39, $005A, $95F2)                          ;B594DC
     %AICMD0x55($7F1F64, $07, $9507)                            ;B594E4
@@ -1112,118 +1112,118 @@ DATA8_B59313:
     %AICMD0x55($7F1F66, $0B, $95A4)                            ;B594F2
     %AICMD0x55($7F1F66, $0C, $95A4)                            ;B594F9
     %AICMD0x55($7F1F66, $09, $95AB)                            ;B59500
-    %AICMD0x15($7F1F1A, $00, $9629)                            ;B59507
-    %AICMD0x15($7F1F1A, $06, $963E)                            ;B5950E
-    %AICMD0x45($7F1F27, $00C8, $00DC, $961B)                   ;B59515
-    %AICMD0x45($7F1F27, $00DD, $00FA, $9622)                   ;B5951F
-    %AICMD0x15($7F1F19, $00, $9645)                            ;B59529
-    %AICMD0x15($7F1F19, $01, $966E)                            ;B59530
-    %AICMD0x15($7F1F19, $02, $9698)                            ;B59537
-    %AICMD0x15($7F1F19, $03, $96C8)                            ;B5953E
-    %AICMD0x45($7F1F37, $003C, $0059, $95F9)                   ;B59545
-    %AICMD0x45($7F1F39, $003C, $0059, $95F9)                   ;B5954F
-    %AICMD0x45($7F1F37, $005B, $0077, $9600)                   ;B59559
-    %AICMD0x45($7F1F39, $005B, $0077, $9600)                   ;B59563
-    %AICMD0x45($7F1F37, $0078, $03E7, $9607)                   ;B5956D
-    %AICMD0x45($7F1F39, $0078, $03E7, $9607)                   ;B59577
+    %AICMD0x15($7F1F1A, $00, $B59629)                          ;B59507
+    %AICMD0x15($7F1F1A, $06, $B5963E)                          ;B5950E
+    %AICMD0x45($7F1F27, $00C8, $00DC, $B5961B)                 ;B59515
+    %AICMD0x45($7F1F27, $00DD, $00FA, $B59622)                 ;B5951F
+    %AICMD0x15($7F1F19, $00, $B59645)                          ;B59529
+    %AICMD0x15($7F1F19, $01, $B5966E)                          ;B59530
+    %AICMD0x15($7F1F19, $02, $B59698)                          ;B59537
+    %AICMD0x15($7F1F19, $03, $B596C8)                          ;B5953E
+    %AICMD0x45($7F1F37, $003C, $0059, $B595F9)                 ;B59545
+    %AICMD0x45($7F1F39, $003C, $0059, $B595F9)                 ;B5954F
+    %AICMD0x45($7F1F37, $005B, $0077, $B59600)                 ;B59559
+    %AICMD0x45($7F1F39, $005B, $0077, $B59600)                 ;B59563
+    %AICMD0x45($7F1F37, $0078, $03E7, $B59607)                 ;B5956D
+    %AICMD0x45($7F1F39, $0078, $03E7, $B59607)                 ;B59577
     %AICMD0x1C($0485, $00)                                     ;B59581
-    %AICMD0x12_Jump($937A)                                     ;B59585
+    %AICMD0x12_Jump($B5937A)                                   ;B59585
     %AICMD0x1C($017D, $00)                                     ;B59588
-    %AICMD0x12_Jump($937A)                                     ;B5958C
+    %AICMD0x12_Jump($B5937A)                                   ;B5958C
     %AICMD0x1C($0166, $00)                                     ;B5958F
-    %AICMD0x12_Jump($937A)                                     ;B59593
+    %AICMD0x12_Jump($B5937A)                                   ;B59593
     %AICMD0x1C($015F, $00)                                     ;B59596
-    %AICMD0x12_Jump($937A)                                     ;B5959A
+    %AICMD0x12_Jump($B5937A)                                   ;B5959A
     %AICMD0x1C($0160, $00)                                     ;B5959D
-    %AICMD0x12_Jump($937A)                                     ;B595A1
+    %AICMD0x12_Jump($B5937A)                                   ;B595A1
     %AICMD0x1C($01A0, $00)                                     ;B595A4
-    %AICMD0x12_Jump($937A)                                     ;B595A8
+    %AICMD0x12_Jump($B5937A)                                   ;B595A8
     %AICMD0x1C($0493, $00)                                     ;B595AB
-    %AICMD0x12_Jump($937A)                                     ;B595AF
+    %AICMD0x12_Jump($B5937A)                                   ;B595AF
     %AICMD0x1C($01A2, $00)                                     ;B595B2
-    %AICMD0x12_Jump($937A)                                     ;B595B6
+    %AICMD0x12_Jump($B5937A)                                   ;B595B6
     %AICMD0x17($02)                                            ;B595B9
-    %AICMD0x18($00, $9507)                                     ;B595BB
-    %AICMD0x18($01, $95C6)                                     ;B595BF
-    %AICMD0x12_Jump($937A)                                     ;B595C3
+    %AICMD0x18($00, $B59507)                                   ;B595BB
+    %AICMD0x18($01, $B595C6)                                   ;B595BF
+    %AICMD0x12_Jump($B5937A)                                   ;B595C3
     %AICMD0x1C($01A4, $00)                                     ;B595C6
-    %AICMD0x12_Jump($937A)                                     ;B595CA
+    %AICMD0x12_Jump($B5937A)                                   ;B595CA
     %AICMD0x17($02)                                            ;B595CD
-    %AICMD0x18($00, $9507)                                     ;B595CF
-    %AICMD0x18($01, $95DA)                                     ;B595D3
-    %AICMD0x12_Jump($937A)                                     ;B595D7
+    %AICMD0x18($00, $B59507)                                   ;B595CF
+    %AICMD0x18($01, $B595DA)                                   ;B595D3
+    %AICMD0x12_Jump($B5937A)                                   ;B595D7
     %AICMD0x1C($01A5, $00)                                     ;B595DA
-    %AICMD0x12_Jump($937A)                                     ;B595DE
+    %AICMD0x12_Jump($B5937A)                                   ;B595DE
     %AICMD0x17($02)                                            ;B595E1
-    %AICMD0x18($00, $9507)                                     ;B595E3
-    %AICMD0x18($01, $95EB)                                     ;B595E7
+    %AICMD0x18($00, $B59507)                                   ;B595E3
+    %AICMD0x18($01, $B595EB)                                   ;B595E7
     %AICMD0x1C($01A7, $00)                                     ;B595EB
-    %AICMD0x12_Jump($937A)                                     ;B595EF
+    %AICMD0x12_Jump($B5937A)                                   ;B595EF
     %AICMD0x1C($0481, $00)                                     ;B595F2
-    %AICMD0x12_Jump($937A)                                     ;B595F6
+    %AICMD0x12_Jump($B5937A)                                   ;B595F6
     %AICMD0x1C($0480, $00)                                     ;B595F9
-    %AICMD0x12_Jump($937A)                                     ;B595FD
+    %AICMD0x12_Jump($B5937A)                                   ;B595FD
     %AICMD0x1C($0484, $00)                                     ;B59600
-    %AICMD0x12_Jump($937A)                                     ;B59604
+    %AICMD0x12_Jump($B5937A)                                   ;B59604
     %AICMD0x17($02)                                            ;B59607
-    %AICMD0x18($00, $9614)                                     ;B59609
+    %AICMD0x18($00, $B59614)                                   ;B59609
     %AICMD0x1C($0482, $00)                                     ;B5960D
-    %AICMD0x12_Jump($937A)                                     ;B59611
+    %AICMD0x12_Jump($B5937A)                                   ;B59611
     %AICMD0x1C($0443, $00)                                     ;B59614
-    %AICMD0x12_Jump($937A)                                     ;B59618
+    %AICMD0x12_Jump($B5937A)                                   ;B59618
     %AICMD0x1C($01F4, $00)                                     ;B5961B
-    %AICMD0x12_Jump($937A)                                     ;B5961F
+    %AICMD0x12_Jump($B5937A)                                   ;B5961F
     %AICMD0x1C($0049, $00)                                     ;B59622
-    %AICMD0x12_Jump($937A)                                     ;B59626
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $974B) ;B59629
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $974B) ;B59630
+    %AICMD0x12_Jump($B5937A)                                   ;B59626
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5974B)   ;B59629
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B5974B)   ;B59630
     %AICMD0x1C($0195, $00)                                     ;B59637
-    %AICMD0x12_Jump($937A)                                     ;B5963B
+    %AICMD0x12_Jump($B5937A)                                   ;B5963B
     %AICMD0x1C($047D, $00)                                     ;B5963E
-    %AICMD0x12_Jump($937A)                                     ;B59642
-    %AICMD0x15($7F1F1B, $16, $9667)                            ;B59645
-    %AICMD0x15($7F1F1B, $17, $973D)                            ;B5964C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9744) ;B59653
+    %AICMD0x12_Jump($B5937A)                                   ;B59642
+    %AICMD0x15($7F1F1B, $16, $B59667)                          ;B59645
+    %AICMD0x15($7F1F1B, $17, $B5973D)                          ;B5964C
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59744)   ;B59653
     %AICMD0x17($02)                                            ;B5965A
-    %AICMD0x18($00, $9545)                                     ;B5965C
+    %AICMD0x18($00, $B59545)                                   ;B5965C
     %AICMD0x1C($018F, $00)                                     ;B59660
-    %AICMD0x12_Jump($937A)                                     ;B59664
+    %AICMD0x12_Jump($B5937A)                                   ;B59664
     %AICMD0x1C($020A, $00)                                     ;B59667
-    %AICMD0x12_Jump($937A)                                     ;B5966B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9744) ;B5966E
+    %AICMD0x12_Jump($B5937A)                                   ;B5966B
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59744)   ;B5966E
     %AICMD0x17($04)                                            ;B59675
-    %AICMD0x18($00, $968A)                                     ;B59677
-    %AICMD0x18($01, $9691)                                     ;B5967B
-    %AICMD0x18($02, $9545)                                     ;B5967F
+    %AICMD0x18($00, $B5968A)                                   ;B59677
+    %AICMD0x18($01, $B59691)                                   ;B5967B
+    %AICMD0x18($02, $B59545)                                   ;B5967F
     %AICMD0x1C($0190, $00)                                     ;B59683
-    %AICMD0x12_Jump($937A)                                     ;B59687
+    %AICMD0x12_Jump($B5937A)                                   ;B59687
     %AICMD0x1C($0426, $00)                                     ;B5968A
-    %AICMD0x12_Jump($937A)                                     ;B5968E
+    %AICMD0x12_Jump($B5937A)                                   ;B5968E
     %AICMD0x1C($0420, $00)                                     ;B59691
-    %AICMD0x12_Jump($937A)                                     ;B59695
-    %AICMD0x15($7F1F1B, $0B, $96C1)                            ;B59698
-    %AICMD0x15($7F1F1B, $0C, $973D)                            ;B5969F
-    %AICMD0x15($7F1F1B, $14, $973D)                            ;B596A6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9744) ;B596AD
+    %AICMD0x12_Jump($B5937A)                                   ;B59695
+    %AICMD0x15($7F1F1B, $0B, $B596C1)                          ;B59698
+    %AICMD0x15($7F1F1B, $0C, $B5973D)                          ;B5969F
+    %AICMD0x15($7F1F1B, $14, $B5973D)                          ;B596A6
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59744)   ;B596AD
     %AICMD0x17($02)                                            ;B596B4
-    %AICMD0x18($00, $9545)                                     ;B596B6
+    %AICMD0x18($00, $B59545)                                   ;B596B6
     %AICMD0x1C($0191, $00)                                     ;B596BA
-    %AICMD0x12_Jump($937A)                                     ;B596BE
+    %AICMD0x12_Jump($B5937A)                                   ;B596BE
     %AICMD0x1C($020A, $00)                                     ;B596C1
-    %AICMD0x12_Jump($937A)                                     ;B596C5
-    %AICMD0x15($7F1F1B, $0A, $9706)                            ;B596C8
-    %AICMD0x15($7F1F1B, $17, $972F)                            ;B596CF
-    %AICMD0x15($7F1F1B, $1E, $9736)                            ;B596D6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $03, $9752) ;B596DD
-    %AICMD0x16($7F1F1C, $0F, $11, $9759)                       ;B596E4
+    %AICMD0x12_Jump($B5937A)                                   ;B596C5
+    %AICMD0x15($7F1F1B, $0A, $B59706)                          ;B596C8
+    %AICMD0x15($7F1F1B, $17, $B5972F)                          ;B596CF
+    %AICMD0x15($7F1F1B, $1E, $B59736)                          ;B596D6
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $03, $B59752)   ;B596DD
+    %AICMD0x16($7F1F1C, $0F, $11, $B59759)                     ;B596E4
     %AICMD0x17($02)                                            ;B596EC
-    %AICMD0x18($00, $9545)                                     ;B596EE
+    %AICMD0x18($00, $B59545)                                   ;B596EE
     %AICMD0x1C($0430, $00)                                     ;B596F2
-    %AICMD0x12_Jump($937A)                                     ;B596F6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5E, $0B, $9797) ;B596F9
+    %AICMD0x12_Jump($B5937A)                                   ;B596F6
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F5E, $0B, $B59797)   ;B596F9
     %AICMD0x1F($9706)                                          ;B59700
-    %AICMD0x12_Jump($96F9)                                     ;B59703
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $9728) ;B59706
+    %AICMD0x12_Jump($B596F9)                                   ;B59703
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B59728)   ;B59706
     %AICMD0x1C($0292, $00)                                     ;B5970D
     %AICMD0x23_OrWithIndexedValue($7F1F74, $05)                ;B59711
     %AICMD0x08()                                               ;B59716
@@ -1231,22 +1231,22 @@ DATA8_B59313:
     %AICMD0x13($0078)                                          ;B5971B
     %AICMD0x11()                                               ;B5971E
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B5971F
-    %AICMD0x12_Jump($96F9)                                     ;B59725
+    %AICMD0x12_Jump($B596F9)                                   ;B59725
     %AICMD0x1C($0293, $00)                                     ;B59728
-    %AICMD0x12_Jump($96F9)                                     ;B5972C
+    %AICMD0x12_Jump($B596F9)                                   ;B5972C
     %AICMD0x1C($02B4, $00)                                     ;B5972F
-    %AICMD0x12_Jump($937A)                                     ;B59733
+    %AICMD0x12_Jump($B5937A)                                   ;B59733
     %AICMD0x1C($0144, $00)                                     ;B59736
-    %AICMD0x12_Jump($937A)                                     ;B5973A
+    %AICMD0x12_Jump($B5937A)                                   ;B5973A
     %AICMD0x1C($0361, $00)                                     ;B5973D
-    %AICMD0x12_Jump($937A)                                     ;B59741
+    %AICMD0x12_Jump($B5937A)                                   ;B59741
     %AICMD0x1C($0196, $00)                                     ;B59744
-    %AICMD0x12_Jump($937A)                                     ;B59748
+    %AICMD0x12_Jump($B5937A)                                   ;B59748
     %AICMD0x1C($047C, $00)                                     ;B5974B
-    %AICMD0x12_Jump($937A)                                     ;B5974F
+    %AICMD0x12_Jump($B5937A)                                   ;B5974F
     %AICMD0x1C($0198, $00)                                     ;B59752
-    %AICMD0x12_Jump($937A)                                     ;B59756
-    %AICMD0x15($7F1F19, $03, $9778)                            ;B59759
+    %AICMD0x12_Jump($B5937A)                                   ;B59756
+    %AICMD0x15($7F1F19, $03, $B59778)                          ;B59759
     %AICMD0x1C($0180, $00)                                     ;B59760
     %AICMD0x1B($022F, $00)                                     ;B59764
     %AICMD0x08()                                               ;B59768
@@ -1254,8 +1254,8 @@ DATA8_B59313:
     %AICMD0x13($0078)                                          ;B5976F
     %AICMD0x11()                                               ;B59772
     %AICMD0x57_UpdateStamina($1E)                              ;B59773
-    %AICMD0x12_Jump($937A)                                     ;B59775
-    %AICMD0x15($7F1F1B, $0A, $9706)                            ;B59778
+    %AICMD0x12_Jump($B5937A)                                   ;B59775
+    %AICMD0x15($7F1F1B, $0A, $B59706)                          ;B59778
     %AICMD0x1C($042F, $00)                                     ;B5977F
     %AICMD0x1B($022F, $00)                                     ;B59783
     %AICMD0x08()                                               ;B59787
@@ -1263,7 +1263,7 @@ DATA8_B59313:
     %AICMD0x13($0078)                                          ;B5978E
     %AICMD0x11()                                               ;B59791
     %AICMD0x57_UpdateStamina($1E)                              ;B59792
-    %AICMD0x12_Jump($937A)                                     ;B59794
+    %AICMD0x12_Jump($B5937A)                                   ;B59794
     %AICMD0x1B($02E7, $00)                                     ;B59797
     %AICMD0x0D($FF, $00, $20, $01)                             ;B5979B
     %AICMD0x1B($02E5, $00)                                     ;B597A0
@@ -1273,9 +1273,9 @@ DATA8_B59313:
     %AICMD0x1B($02F1, $00)                                     ;B597B2
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B597B6
     %AICMD0x41_ModifyVariable($7F1F27, $FFFE)                  ;B597BB
-    %AICMD0x12_Jump($9389)                                     ;B597C1
+    %AICMD0x12_Jump($B59389)                                   ;B597C1
     %AICMD0x1C($02C2, $00)                                     ;B597C4
-    %AICMD0x12_Jump($9389)                                     ;B597C8
+    %AICMD0x12_Jump($B59389)                                   ;B597C8
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $0C)                ;B597CB
     %AICMD0x10_End()                                           ;B597D0
 
@@ -1299,528 +1299,528 @@ pScripting_B597D1:
  
 DATA8_B597F1:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $99EA) ;B597F1
-    %AICMD0x16($7F1F1C, $06, $0A, $99EA)                       ;B597F8
-    %AICMD0x16($7F1F1C, $0F, $12, $99EA)                       ;B59800
-    %AICMD0x15($7F1F19, $03, $99EA)                            ;B59808
-    %AICMD0x45($7F1F37, $003C, $0059, $982E)                   ;B5980F
-    %AICMD0x45($7F1F39, $003C, $0059, $982E)                   ;B59819
-    %AICMD0x1A($0168, $0168, $8AEC, $00)                       ;B59823
-    %AICMD0x12_Jump($9836)                                     ;B5982B
-    %AICMD0x1A($0168, $0168, $8480, $00)                       ;B5982E
-    %AICMD0x2D($990B, $983E)                                   ;B59836
-    %AICMD0x12_Jump($9836)                                     ;B5983B
-    %AICMD0x15($80091E, $02, $9880)                            ;B5983E
-    %AICMD0x16($80091E, $01, $05, $988D)                       ;B59845
-    %AICMD0x15($80091E, $07, $988D)                            ;B5984D
-    %AICMD0x16($80091E, $10, $17, $988D)                       ;B59854
-    %AICMD0x15($80091E, $19, $98A1)                            ;B5985C
-    %AICMD0x15($80091E, $49, $98A1)                            ;B59863
-    %AICMD0x15($80091E, $06, $98C2)                            ;B5986A
-    %AICMD0x16($80091E, $09, $0C, $98B5)                       ;B59871
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B599EA)   ;B597F1
+    %AICMD0x16($7F1F1C, $06, $0A, $B599EA)                     ;B597F8
+    %AICMD0x16($7F1F1C, $0F, $12, $B599EA)                     ;B59800
+    %AICMD0x15($7F1F19, $03, $B599EA)                          ;B59808
+    %AICMD0x45($7F1F37, $003C, $0059, $B5982E)                 ;B5980F
+    %AICMD0x45($7F1F39, $003C, $0059, $B5982E)                 ;B59819
+    %AICMD0x1A($0168, $0168, $B38AEC, $00)                     ;B59823
+    %AICMD0x12_Jump($B59836)                                   ;B5982B
+    %AICMD0x1A($0168, $0168, $B38480, $00)                     ;B5982E
+    %AICMD0x2D($B5990B, $B5983E)                               ;B59836
+    %AICMD0x12_Jump($B59836)                                   ;B5983B
+    %AICMD0x15($80091E, $02, $B59880)                          ;B5983E
+    %AICMD0x16($80091E, $01, $05, $B5988D)                     ;B59845
+    %AICMD0x15($80091E, $07, $B5988D)                          ;B5984D
+    %AICMD0x16($80091E, $10, $17, $B5988D)                     ;B59854
+    %AICMD0x15($80091E, $19, $B598A1)                          ;B5985C
+    %AICMD0x15($80091E, $49, $B598A1)                          ;B59863
+    %AICMD0x15($80091E, $06, $B598C2)                          ;B5986A
+    %AICMD0x16($80091E, $09, $0C, $B598B5)                     ;B59871
     %AICMD0x1C($0200, $00)                                     ;B59879
-    %AICMD0x12_Jump($9836)                                     ;B5987D
+    %AICMD0x12_Jump($B59836)                                   ;B5987D
     %AICMD0x1C($03B0, $00)                                     ;B59880
     %AICMD0x41_ModifyVariable($7F1F1F, $FFFA)                  ;B59884
-    %AICMD0x12_Jump($9836)                                     ;B5988A
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $98E4) ;B5988D
+    %AICMD0x12_Jump($B59836)                                   ;B5988A
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B598E4)   ;B5988D
     %AICMD0x41_ModifyVariable($7F1F1F, $0004)                  ;B59894
     %AICMD0x1C($03B2, $00)                                     ;B5989A
-    %AICMD0x12_Jump($9836)                                     ;B5989E
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $98E4) ;B598A1
+    %AICMD0x12_Jump($B59836)                                   ;B5989E
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B598E4)   ;B598A1
     %AICMD0x1C($03B5, $00)                                     ;B598A8
     %AICMD0x41_ModifyVariable($7F1F1F, $0008)                  ;B598AC
-    %AICMD0x12_Jump($9836)                                     ;B598B2
+    %AICMD0x12_Jump($B59836)                                   ;B598B2
     %AICMD0x1C($01D9, $00)                                     ;B598B5
     %AICMD0x41_ModifyVariable($7F1F1F, $FFFC)                  ;B598B9
-    %AICMD0x12_Jump($9836)                                     ;B598BF
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $98E4) ;B598C2
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $98F1) ;B598C9
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $98FE) ;B598D0
+    %AICMD0x12_Jump($B59836)                                   ;B598BF
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B598E4)   ;B598C2
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B598F1)   ;B598C9
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B598FE)   ;B598D0
     %AICMD0x41_ModifyVariable($7F1F1F, $0008)                  ;B598D7
     %AICMD0x1C($0212, $00)                                     ;B598DD
-    %AICMD0x12_Jump($9836)                                     ;B598E1
+    %AICMD0x12_Jump($B59836)                                   ;B598E1
     %AICMD0x1C($01BD, $00)                                     ;B598E4
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B598E8
-    %AICMD0x12_Jump($9836)                                     ;B598EE
+    %AICMD0x12_Jump($B59836)                                   ;B598EE
     %AICMD0x1C($041D, $00)                                     ;B598F1
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B598F5
-    %AICMD0x12_Jump($9836)                                     ;B598FB
+    %AICMD0x12_Jump($B59836)                                   ;B598FB
     %AICMD0x1C($041E, $00)                                     ;B598FE
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59902
-    %AICMD0x12_Jump($9836)                                     ;B59908
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $9961) ;B5990B
-    %AICMD0x15($80098C, $03, $9968)                            ;B59912
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $996F) ;B59919
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $9961) ;B59920
-    %AICMD0x45($7F1F1F, $00C8, $00DC, $9976)                   ;B59927
-    %AICMD0x45($7F1F1F, $00DD, $00FA, $997D)                   ;B59931
-    %AICMD0x15($7F1F1A, $00, $998B)                            ;B5993B
-    %AICMD0x15($7F1F1A, $06, $9984)                            ;B59942
-    %AICMD0x15($7F1F19, $00, $9992)                            ;B59949
-    %AICMD0x15($7F1F19, $01, $99B4)                            ;B59950
-    %AICMD0x15($7F1F19, $02, $99C8)                            ;B59957
-    %AICMD0x12_Jump($9836)                                     ;B5995E
+    %AICMD0x12_Jump($B59836)                                   ;B59908
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B59961)   ;B5990B
+    %AICMD0x15($80098C, $03, $B59968)                          ;B59912
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B5996F)   ;B59919
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B59961)   ;B59920
+    %AICMD0x45($7F1F1F, $00C8, $00DC, $B59976)                 ;B59927
+    %AICMD0x45($7F1F1F, $00DD, $00FA, $B5997D)                 ;B59931
+    %AICMD0x15($7F1F1A, $00, $B5998B)                          ;B5993B
+    %AICMD0x15($7F1F1A, $06, $B59984)                          ;B59942
+    %AICMD0x15($7F1F19, $00, $B59992)                          ;B59949
+    %AICMD0x15($7F1F19, $01, $B599B4)                          ;B59950
+    %AICMD0x15($7F1F19, $02, $B599C8)                          ;B59957
+    %AICMD0x12_Jump($B59836)                                   ;B5995E
     %AICMD0x1C($0166, $00)                                     ;B59961
-    %AICMD0x12_Jump($9836)                                     ;B59965
+    %AICMD0x12_Jump($B59836)                                   ;B59965
     %AICMD0x1C($015F, $00)                                     ;B59968
-    %AICMD0x12_Jump($9836)                                     ;B5996C
+    %AICMD0x12_Jump($B59836)                                   ;B5996C
     %AICMD0x1C($0160, $00)                                     ;B5996F
-    %AICMD0x12_Jump($9836)                                     ;B59973
+    %AICMD0x12_Jump($B59836)                                   ;B59973
     %AICMD0x1C($01F3, $00)                                     ;B59976
-    %AICMD0x12_Jump($9836)                                     ;B5997A
+    %AICMD0x12_Jump($B59836)                                   ;B5997A
     %AICMD0x1C($0049, $00)                                     ;B5997D
-    %AICMD0x12_Jump($9836)                                     ;B59981
+    %AICMD0x12_Jump($B59836)                                   ;B59981
     %AICMD0x1C($047D, $00)                                     ;B59984
-    %AICMD0x12_Jump($9836)                                     ;B59988
+    %AICMD0x12_Jump($B59836)                                   ;B59988
     %AICMD0x1C($0195, $00)                                     ;B5998B
-    %AICMD0x12_Jump($9836)                                     ;B5998F
-    %AICMD0x15($7F1F1B, $16, $99AD)                            ;B59992
+    %AICMD0x12_Jump($B59836)                                   ;B5998F
+    %AICMD0x15($7F1F1B, $16, $B599AD)                          ;B59992
     %AICMD0x17($02)                                            ;B59999
-    %AICMD0x18($00, $99A6)                                     ;B5999B
+    %AICMD0x18($00, $B599A6)                                   ;B5999B
     %AICMD0x1C($041F, $00)                                     ;B5999F
-    %AICMD0x12_Jump($9836)                                     ;B599A3
+    %AICMD0x12_Jump($B59836)                                   ;B599A3
     %AICMD0x1C($0188, $00)                                     ;B599A6
-    %AICMD0x12_Jump($9836)                                     ;B599AA
+    %AICMD0x12_Jump($B59836)                                   ;B599AA
     %AICMD0x1C($0206, $00)                                     ;B599AD
-    %AICMD0x12_Jump($9836)                                     ;B599B1
+    %AICMD0x12_Jump($B59836)                                   ;B599B1
     %AICMD0x17($02)                                            ;B599B4
-    %AICMD0x18($00, $99C1)                                     ;B599B6
+    %AICMD0x18($00, $B599C1)                                   ;B599B6
     %AICMD0x1C($0420, $00)                                     ;B599BA
-    %AICMD0x12_Jump($9836)                                     ;B599BE
+    %AICMD0x12_Jump($B59836)                                   ;B599BE
     %AICMD0x1C($0193, $00)                                     ;B599C1
-    %AICMD0x12_Jump($9836)                                     ;B599C5
-    %AICMD0x15($7F1F1B, $0B, $99E3)                            ;B599C8
+    %AICMD0x12_Jump($B59836)                                   ;B599C5
+    %AICMD0x15($7F1F1B, $0B, $B599E3)                          ;B599C8
     %AICMD0x17($02)                                            ;B599CF
-    %AICMD0x18($00, $99DC)                                     ;B599D1
+    %AICMD0x18($00, $B599DC)                                   ;B599D1
     %AICMD0x1C($0421, $00)                                     ;B599D5
-    %AICMD0x12_Jump($9836)                                     ;B599D9
+    %AICMD0x12_Jump($B59836)                                   ;B599D9
     %AICMD0x1C($0184, $00)                                     ;B599DC
-    %AICMD0x12_Jump($9836)                                     ;B599E0
+    %AICMD0x12_Jump($B59836)                                   ;B599E0
     %AICMD0x1C($0238, $00)                                     ;B599E3
-    %AICMD0x12_Jump($9836)                                     ;B599E7
+    %AICMD0x12_Jump($B59836)                                   ;B599E7
     %AICMD0x10_End()                                           ;B599EA
 
 DATA8_B599EB:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9BD4) ;B599EB
-    %AICMD0x16($7F1F1C, $06, $0A, $9BD4)                       ;B599F2
-    %AICMD0x16($7F1F1C, $0F, $12, $9BD4)                       ;B599FA
-    %AICMD0x15($7F1F19, $03, $9BD4)                            ;B59A02
-    %AICMD0x09($01, $9BD5)                                     ;B59A09
-    %AICMD0x45($7F1F37, $003C, $0059, $9A2C)                   ;B59A0D
-    %AICMD0x45($7F1F39, $003C, $0059, $9A2C)                   ;B59A17
-    %AICMD0x1A($0048, $0048, $8AF8, $00)                       ;B59A21
-    %AICMD0x12_Jump($9A34)                                     ;B59A29
-    %AICMD0x1A($0048, $0048, $8480, $00)                       ;B59A2C
-    %AICMD0x2D($9AF5, $9A3C)                                   ;B59A34
-    %AICMD0x12_Jump($9A34)                                     ;B59A39
-    %AICMD0x15($80091E, $02, $9A77)                            ;B59A3C
-    %AICMD0x16($80091E, $03, $07, $9A98)                       ;B59A43
-    %AICMD0x16($80091E, $10, $17, $9A98)                       ;B59A4B
-    %AICMD0x15($80091E, $06, $9AAC)                            ;B59A53
-    %AICMD0x15($80091E, $19, $9A84)                            ;B59A5A
-    %AICMD0x15($80091E, $49, $9A84)                            ;B59A61
-    %AICMD0x16($80091E, $09, $0C, $9A77)                       ;B59A68
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59BD4)   ;B599EB
+    %AICMD0x16($7F1F1C, $06, $0A, $B59BD4)                     ;B599F2
+    %AICMD0x16($7F1F1C, $0F, $12, $B59BD4)                     ;B599FA
+    %AICMD0x15($7F1F19, $03, $B59BD4)                          ;B59A02
+    %AICMD0x09($01, $B59BD5)                                   ;B59A09
+    %AICMD0x45($7F1F37, $003C, $0059, $B59A2C)                 ;B59A0D
+    %AICMD0x45($7F1F39, $003C, $0059, $B59A2C)                 ;B59A17
+    %AICMD0x1A($0048, $0048, $B38AF8, $00)                     ;B59A21
+    %AICMD0x12_Jump($B59A34)                                   ;B59A29
+    %AICMD0x1A($0048, $0048, $B38480, $00)                     ;B59A2C
+    %AICMD0x2D($B59AF5, $B59A3C)                               ;B59A34
+    %AICMD0x12_Jump($B59A34)                                   ;B59A39
+    %AICMD0x15($80091E, $02, $B59A77)                          ;B59A3C
+    %AICMD0x16($80091E, $03, $07, $B59A98)                     ;B59A43
+    %AICMD0x16($80091E, $10, $17, $B59A98)                     ;B59A4B
+    %AICMD0x15($80091E, $06, $B59AAC)                          ;B59A53
+    %AICMD0x15($80091E, $19, $B59A84)                          ;B59A5A
+    %AICMD0x15($80091E, $49, $B59A84)                          ;B59A61
+    %AICMD0x16($80091E, $09, $0C, $B59A77)                     ;B59A68
     %AICMD0x1C($0200, $00)                                     ;B59A70
-    %AICMD0x12_Jump($9A34)                                     ;B59A74
+    %AICMD0x12_Jump($B59A34)                                   ;B59A74
     %AICMD0x1C($03B4, $00)                                     ;B59A77
     %AICMD0x41_ModifyVariable($7F1F21, $FFFA)                  ;B59A7B
-    %AICMD0x12_Jump($9A34)                                     ;B59A81
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9ACE) ;B59A84
+    %AICMD0x12_Jump($B59A34)                                   ;B59A81
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59ACE)   ;B59A84
     %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B59A8B
     %AICMD0x1C($0212, $00)                                     ;B59A91
-    %AICMD0x12_Jump($9A34)                                     ;B59A95
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9ACE) ;B59A98
+    %AICMD0x12_Jump($B59A34)                                   ;B59A95
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59ACE)   ;B59A98
     %AICMD0x1C($03B2, $00)                                     ;B59A9F
     %AICMD0x41_ModifyVariable($7F1F21, $0005)                  ;B59AA3
-    %AICMD0x12_Jump($9A34)                                     ;B59AA9
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9ACE) ;B59AAC
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $9ADB) ;B59AB3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $9AE8) ;B59ABA
+    %AICMD0x12_Jump($B59A34)                                   ;B59AA9
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59ACE)   ;B59AAC
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B59ADB)   ;B59AB3
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B59AE8)   ;B59ABA
     %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B59AC1
     %AICMD0x1C($0212, $00)                                     ;B59AC7
-    %AICMD0x12_Jump($9A34)                                     ;B59ACB
+    %AICMD0x12_Jump($B59A34)                                   ;B59ACB
     %AICMD0x1C($01BD, $00)                                     ;B59ACE
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59AD2
-    %AICMD0x12_Jump($9A34)                                     ;B59AD8
+    %AICMD0x12_Jump($B59A34)                                   ;B59AD8
     %AICMD0x1C($041D, $00)                                     ;B59ADB
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59ADF
-    %AICMD0x12_Jump($9A34)                                     ;B59AE5
+    %AICMD0x12_Jump($B59A34)                                   ;B59AE5
     %AICMD0x1C($041E, $00)                                     ;B59AE8
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59AEC
-    %AICMD0x12_Jump($9A34)                                     ;B59AF2
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $9B4B) ;B59AF5
-    %AICMD0x15($80098C, $03, $9B52)                            ;B59AFC
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $9B59) ;B59B03
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $9B4B) ;B59B0A
-    %AICMD0x45($7F1F21, $00C8, $00DC, $9B60)                   ;B59B11
-    %AICMD0x45($7F1F21, $00DD, $00FA, $9B67)                   ;B59B1B
-    %AICMD0x15($7F1F1A, $00, $9B75)                            ;B59B25
-    %AICMD0x15($7F1F1A, $06, $9B6E)                            ;B59B2C
-    %AICMD0x15($7F1F19, $00, $9B7C)                            ;B59B33
-    %AICMD0x15($7F1F19, $01, $9B9E)                            ;B59B3A
-    %AICMD0x15($7F1F19, $02, $9BB2)                            ;B59B41
-    %AICMD0x12_Jump($9A34)                                     ;B59B48
+    %AICMD0x12_Jump($B59A34)                                   ;B59AF2
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B59B4B)   ;B59AF5
+    %AICMD0x15($80098C, $03, $B59B52)                          ;B59AFC
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B59B59)   ;B59B03
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B59B4B)   ;B59B0A
+    %AICMD0x45($7F1F21, $00C8, $00DC, $B59B60)                 ;B59B11
+    %AICMD0x45($7F1F21, $00DD, $00FA, $B59B67)                 ;B59B1B
+    %AICMD0x15($7F1F1A, $00, $B59B75)                          ;B59B25
+    %AICMD0x15($7F1F1A, $06, $B59B6E)                          ;B59B2C
+    %AICMD0x15($7F1F19, $00, $B59B7C)                          ;B59B33
+    %AICMD0x15($7F1F19, $01, $B59B9E)                          ;B59B3A
+    %AICMD0x15($7F1F19, $02, $B59BB2)                          ;B59B41
+    %AICMD0x12_Jump($B59A34)                                   ;B59B48
     %AICMD0x1C($0166, $00)                                     ;B59B4B
-    %AICMD0x12_Jump($9A34)                                     ;B59B4F
+    %AICMD0x12_Jump($B59A34)                                   ;B59B4F
     %AICMD0x1C($015F, $00)                                     ;B59B52
-    %AICMD0x12_Jump($9A34)                                     ;B59B56
+    %AICMD0x12_Jump($B59A34)                                   ;B59B56
     %AICMD0x1C($0160, $00)                                     ;B59B59
-    %AICMD0x12_Jump($9A34)                                     ;B59B5D
+    %AICMD0x12_Jump($B59A34)                                   ;B59B5D
     %AICMD0x1C($01F4, $00)                                     ;B59B60
-    %AICMD0x12_Jump($9A34)                                     ;B59B64
+    %AICMD0x12_Jump($B59A34)                                   ;B59B64
     %AICMD0x1C($0049, $00)                                     ;B59B67
-    %AICMD0x12_Jump($9A34)                                     ;B59B6B
+    %AICMD0x12_Jump($B59A34)                                   ;B59B6B
     %AICMD0x1C($047D, $00)                                     ;B59B6E
-    %AICMD0x12_Jump($9A34)                                     ;B59B72
+    %AICMD0x12_Jump($B59A34)                                   ;B59B72
     %AICMD0x1C($0194, $00)                                     ;B59B75
-    %AICMD0x12_Jump($9A34)                                     ;B59B79
-    %AICMD0x15($7F1F1B, $16, $9B97)                            ;B59B7C
+    %AICMD0x12_Jump($B59A34)                                   ;B59B79
+    %AICMD0x15($7F1F1B, $16, $B59B97)                          ;B59B7C
     %AICMD0x17($02)                                            ;B59B83
-    %AICMD0x18($00, $9B90)                                     ;B59B85
+    %AICMD0x18($00, $B59B90)                                   ;B59B85
     %AICMD0x1C($0185, $00)                                     ;B59B89
-    %AICMD0x12_Jump($9A34)                                     ;B59B8D
+    %AICMD0x12_Jump($B59A34)                                   ;B59B8D
     %AICMD0x1C($018F, $00)                                     ;B59B90
-    %AICMD0x12_Jump($9A34)                                     ;B59B94
+    %AICMD0x12_Jump($B59A34)                                   ;B59B94
     %AICMD0x1C($0207, $00)                                     ;B59B97
-    %AICMD0x12_Jump($9A34)                                     ;B59B9B
+    %AICMD0x12_Jump($B59A34)                                   ;B59B9B
     %AICMD0x17($02)                                            ;B59B9E
-    %AICMD0x18($00, $9BAB)                                     ;B59BA0
+    %AICMD0x18($00, $B59BAB)                                   ;B59BA0
     %AICMD0x1C($0186, $00)                                     ;B59BA4
-    %AICMD0x12_Jump($9A34)                                     ;B59BA8
+    %AICMD0x12_Jump($B59A34)                                   ;B59BA8
     %AICMD0x1C($0193, $00)                                     ;B59BAB
-    %AICMD0x12_Jump($9A34)                                     ;B59BAF
-    %AICMD0x15($7F1F1B, $0B, $9BCD)                            ;B59BB2
+    %AICMD0x12_Jump($B59A34)                                   ;B59BAF
+    %AICMD0x15($7F1F1B, $0B, $B59BCD)                          ;B59BB2
     %AICMD0x17($02)                                            ;B59BB9
-    %AICMD0x18($00, $9BC6)                                     ;B59BBB
+    %AICMD0x18($00, $B59BC6)                                   ;B59BBB
     %AICMD0x1C($0187, $00)                                     ;B59BBF
-    %AICMD0x12_Jump($9A34)                                     ;B59BC3
+    %AICMD0x12_Jump($B59A34)                                   ;B59BC3
     %AICMD0x1C($009A, $00)                                     ;B59BC6
-    %AICMD0x12_Jump($9A34)                                     ;B59BCA
+    %AICMD0x12_Jump($B59A34)                                   ;B59BCA
     %AICMD0x1C($0239, $00)                                     ;B59BCD
-    %AICMD0x12_Jump($9A34)                                     ;B59BD1
+    %AICMD0x12_Jump($B59A34)                                   ;B59BD1
     %AICMD0x10_End()                                           ;B59BD4
-    %AICMD0x1A($0058, $0048, $8B1C, $00)                       ;B59BD5
+    %AICMD0x1A($0058, $0048, $B38B1C, $00)                     ;B59BD5
     %AICMD0x13($0001)                                          ;B59BDD
-    %AICMD0x12_Jump($9BDD)                                     ;B59BE0
+    %AICMD0x12_Jump($B59BDD)                                   ;B59BE0
 
 DATA8_B59BE3:
  
-    %AICMD0x15($7F1F19, $03, $9DD2)                            ;B59BE3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9DD2) ;B59BEA
-    %AICMD0x16($7F1F1C, $06, $0A, $9DD2)                       ;B59BF1
-    %AICMD0x16($7F1F1C, $0F, $12, $9DD2)                       ;B59BF9
-    %AICMD0x45($7F1F37, $003C, $0059, $9C20)                   ;B59C01
-    %AICMD0x45($7F1F39, $003C, $0059, $9C20)                   ;B59C0B
-    %AICMD0x1A($0168, $0168, $8B04, $00)                       ;B59C15
-    %AICMD0x12_Jump($9C28)                                     ;B59C1D
-    %AICMD0x1A($0168, $0168, $848C, $00)                       ;B59C20
-    %AICMD0x2D($9CF6, $9C30)                                   ;B59C28
-    %AICMD0x12_Jump($9C28)                                     ;B59C2D
-    %AICMD0x16($80091E, $01, $04, $9C8C)                       ;B59C30
-    %AICMD0x16($80091E, $10, $17, $9C8C)                       ;B59C38
-    %AICMD0x16($80091E, $09, $0C, $9CA0)                       ;B59C40
-    %AICMD0x15($80091E, $06, $9CAD)                            ;B59C48
-    %AICMD0x15($80091E, $05, $9CAD)                            ;B59C4F
-    %AICMD0x15($80091E, $19, $9C6B)                            ;B59C56
-    %AICMD0x15($80091E, $49, $9C78)                            ;B59C5D
+    %AICMD0x15($7F1F19, $03, $B59DD2)                          ;B59BE3
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59DD2)   ;B59BEA
+    %AICMD0x16($7F1F1C, $06, $0A, $B59DD2)                     ;B59BF1
+    %AICMD0x16($7F1F1C, $0F, $12, $B59DD2)                     ;B59BF9
+    %AICMD0x45($7F1F37, $003C, $0059, $B59C20)                 ;B59C01
+    %AICMD0x45($7F1F39, $003C, $0059, $B59C20)                 ;B59C0B
+    %AICMD0x1A($0168, $0168, $B38B04, $00)                     ;B59C15
+    %AICMD0x12_Jump($B59C28)                                   ;B59C1D
+    %AICMD0x1A($0168, $0168, $B3848C, $00)                     ;B59C20
+    %AICMD0x2D($B59CF6, $B59C30)                               ;B59C28
+    %AICMD0x12_Jump($B59C28)                                   ;B59C2D
+    %AICMD0x16($80091E, $01, $04, $B59C8C)                     ;B59C30
+    %AICMD0x16($80091E, $10, $17, $B59C8C)                     ;B59C38
+    %AICMD0x16($80091E, $09, $0C, $B59CA0)                     ;B59C40
+    %AICMD0x15($80091E, $06, $B59CAD)                          ;B59C48
+    %AICMD0x15($80091E, $05, $B59CAD)                          ;B59C4F
+    %AICMD0x15($80091E, $19, $B59C6B)                          ;B59C56
+    %AICMD0x15($80091E, $49, $B59C78)                          ;B59C5D
     %AICMD0x1C($0200, $00)                                     ;B59C64
-    %AICMD0x12_Jump($9C28)                                     ;B59C68
+    %AICMD0x12_Jump($B59C28)                                   ;B59C68
     %AICMD0x1C($03B1, $00)                                     ;B59C6B
     %AICMD0x41_ModifyVariable($7F1F23, $FFF8)                  ;B59C6F
-    %AICMD0x12_Jump($9C28)                                     ;B59C75
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9CCF) ;B59C78
+    %AICMD0x12_Jump($B59C28)                                   ;B59C75
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59CCF)   ;B59C78
     %AICMD0x1C($0212, $00)                                     ;B59C7F
     %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B59C83
-    %AICMD0x12_Jump($9C28)                                     ;B59C89
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9CCF) ;B59C8C
+    %AICMD0x12_Jump($B59C28)                                   ;B59C89
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59CCF)   ;B59C8C
     %AICMD0x1C($03B2, $00)                                     ;B59C93
     %AICMD0x41_ModifyVariable($7F1F23, $0005)                  ;B59C97
-    %AICMD0x12_Jump($9C28)                                     ;B59C9D
+    %AICMD0x12_Jump($B59C28)                                   ;B59C9D
     %AICMD0x1C($03BA, $00)                                     ;B59CA0
     %AICMD0x41_ModifyVariable($7F1F23, $FFFC)                  ;B59CA4
-    %AICMD0x12_Jump($9C28)                                     ;B59CAA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9CCF) ;B59CAD
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $9CDC) ;B59CB4
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $9CE9) ;B59CBB
+    %AICMD0x12_Jump($B59C28)                                   ;B59CAA
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59CCF)   ;B59CAD
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B59CDC)   ;B59CB4
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B59CE9)   ;B59CBB
     %AICMD0x1C($0212, $00)                                     ;B59CC2
     %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B59CC6
-    %AICMD0x12_Jump($9C28)                                     ;B59CCC
+    %AICMD0x12_Jump($B59C28)                                   ;B59CCC
     %AICMD0x1C($01BD, $00)                                     ;B59CCF
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59CD3
-    %AICMD0x12_Jump($9C28)                                     ;B59CD9
+    %AICMD0x12_Jump($B59C28)                                   ;B59CD9
     %AICMD0x1C($041D, $00)                                     ;B59CDC
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59CE0
-    %AICMD0x12_Jump($9C28)                                     ;B59CE6
+    %AICMD0x12_Jump($B59C28)                                   ;B59CE6
     %AICMD0x1C($041E, $00)                                     ;B59CE9
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59CED
-    %AICMD0x12_Jump($9C28)                                     ;B59CF3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $9D49) ;B59CF6
-    %AICMD0x15($80098C, $03, $9D50)                            ;B59CFD
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $9D57) ;B59D04
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $9D49) ;B59D0B
-    %AICMD0x45($7F1F23, $00C8, $00DC, $9D5E)                   ;B59D12
-    %AICMD0x45($7F1F23, $00DD, $00FA, $9D65)                   ;B59D1C
-    %AICMD0x15($7F1F1A, $00, $9D6C)                            ;B59D26
-    %AICMD0x15($7F1F1A, $06, $9D73)                            ;B59D2D
-    %AICMD0x15($7F1F19, $00, $9D7A)                            ;B59D34
-    %AICMD0x15($7F1F19, $01, $9D9C)                            ;B59D3B
-    %AICMD0x15($7F1F19, $02, $9DB0)                            ;B59D42
+    %AICMD0x12_Jump($B59C28)                                   ;B59CF3
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B59D49)   ;B59CF6
+    %AICMD0x15($80098C, $03, $B59D50)                          ;B59CFD
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B59D57)   ;B59D04
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B59D49)   ;B59D0B
+    %AICMD0x45($7F1F23, $00C8, $00DC, $B59D5E)                 ;B59D12
+    %AICMD0x45($7F1F23, $00DD, $00FA, $B59D65)                 ;B59D1C
+    %AICMD0x15($7F1F1A, $00, $B59D6C)                          ;B59D26
+    %AICMD0x15($7F1F1A, $06, $B59D73)                          ;B59D2D
+    %AICMD0x15($7F1F19, $00, $B59D7A)                          ;B59D34
+    %AICMD0x15($7F1F19, $01, $B59D9C)                          ;B59D3B
+    %AICMD0x15($7F1F19, $02, $B59DB0)                          ;B59D42
     %AICMD0x1C($0166, $00)                                     ;B59D49
-    %AICMD0x12_Jump($9C28)                                     ;B59D4D
+    %AICMD0x12_Jump($B59C28)                                   ;B59D4D
     %AICMD0x1C($015F, $00)                                     ;B59D50
-    %AICMD0x12_Jump($9C28)                                     ;B59D54
+    %AICMD0x12_Jump($B59C28)                                   ;B59D54
     %AICMD0x1C($0160, $00)                                     ;B59D57
-    %AICMD0x12_Jump($9C28)                                     ;B59D5B
+    %AICMD0x12_Jump($B59C28)                                   ;B59D5B
     %AICMD0x1C($01F4, $00)                                     ;B59D5E
-    %AICMD0x12_Jump($9C28)                                     ;B59D62
+    %AICMD0x12_Jump($B59C28)                                   ;B59D62
     %AICMD0x1C($0049, $00)                                     ;B59D65
-    %AICMD0x12_Jump($9C28)                                     ;B59D69
+    %AICMD0x12_Jump($B59C28)                                   ;B59D69
     %AICMD0x1C($0194, $00)                                     ;B59D6C
-    %AICMD0x12_Jump($9C28)                                     ;B59D70
+    %AICMD0x12_Jump($B59C28)                                   ;B59D70
     %AICMD0x1C($047D, $00)                                     ;B59D73
-    %AICMD0x12_Jump($9C28)                                     ;B59D77
-    %AICMD0x15($7F1F1B, $16, $9D95)                            ;B59D7A
+    %AICMD0x12_Jump($B59C28)                                   ;B59D77
+    %AICMD0x15($7F1F1B, $16, $B59D95)                          ;B59D7A
     %AICMD0x17($02)                                            ;B59D81
-    %AICMD0x18($00, $9D8E)                                     ;B59D83
+    %AICMD0x18($00, $B59D8E)                                   ;B59D83
     %AICMD0x1C($0189, $00)                                     ;B59D87
-    %AICMD0x12_Jump($9C28)                                     ;B59D8B
+    %AICMD0x12_Jump($B59C28)                                   ;B59D8B
     %AICMD0x1C($018F, $00)                                     ;B59D8E
-    %AICMD0x12_Jump($9C28)                                     ;B59D92
+    %AICMD0x12_Jump($B59C28)                                   ;B59D92
     %AICMD0x1C($0208, $00)                                     ;B59D95
-    %AICMD0x12_Jump($9C28)                                     ;B59D99
+    %AICMD0x12_Jump($B59C28)                                   ;B59D99
     %AICMD0x17($02)                                            ;B59D9C
-    %AICMD0x18($00, $9DA9)                                     ;B59D9E
+    %AICMD0x18($00, $B59DA9)                                   ;B59D9E
     %AICMD0x1C($018A, $00)                                     ;B59DA2
-    %AICMD0x12_Jump($9C28)                                     ;B59DA6
+    %AICMD0x12_Jump($B59C28)                                   ;B59DA6
     %AICMD0x1C($018B, $00)                                     ;B59DA9
-    %AICMD0x12_Jump($9C28)                                     ;B59DAD
-    %AICMD0x15($7F1F1B, $0B, $9DCB)                            ;B59DB0
+    %AICMD0x12_Jump($B59C28)                                   ;B59DAD
+    %AICMD0x15($7F1F1B, $0B, $B59DCB)                          ;B59DB0
     %AICMD0x17($02)                                            ;B59DB7
-    %AICMD0x18($00, $9DC4)                                     ;B59DB9
+    %AICMD0x18($00, $B59DC4)                                   ;B59DB9
     %AICMD0x1C($0432, $00)                                     ;B59DBD
-    %AICMD0x12_Jump($9C28)                                     ;B59DC1
+    %AICMD0x12_Jump($B59C28)                                   ;B59DC1
     %AICMD0x1C($0191, $00)                                     ;B59DC4
-    %AICMD0x12_Jump($9C28)                                     ;B59DC8
+    %AICMD0x12_Jump($B59C28)                                   ;B59DC8
     %AICMD0x1C($023A, $00)                                     ;B59DCB
-    %AICMD0x12_Jump($9C28)                                     ;B59DCF
+    %AICMD0x12_Jump($B59C28)                                   ;B59DCF
     %AICMD0x10_End()                                           ;B59DD2
 
 DATA8_B59DD3:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $9FC9) ;B59DD3
-    %AICMD0x15($7F1F19, $03, $9FC9)                            ;B59DDA
-    %AICMD0x16($7F1F1C, $11, $12, $9FC9)                       ;B59DE1
-    %AICMD0x45($7F1F37, $003C, $0059, $9E08)                   ;B59DE9
-    %AICMD0x45($7F1F39, $003C, $0059, $9E08)                   ;B59DF3
-    %AICMD0x1A($0168, $0168, $8B04, $00)                       ;B59DFD
-    %AICMD0x12_Jump($9E10)                                     ;B59E05
-    %AICMD0x1A($0168, $0168, $848C, $00)                       ;B59E08
-    %AICMD0x2D($9EED, $9E18)                                   ;B59E10
-    %AICMD0x12_Jump($9E10)                                     ;B59E15
-    %AICMD0x15($80091E, $02, $9E5B)                            ;B59E18
-    %AICMD0x16($80091E, $01, $07, $9E68)                       ;B59E1F
-    %AICMD0x16($80091E, $10, $13, $9E68)                       ;B59E27
-    %AICMD0x15($80091E, $19, $9E7C)                            ;B59E2F
-    %AICMD0x15($80091E, $49, $9E7C)                            ;B59E36
-    %AICMD0x15($80091E, $06, $9EAA)                            ;B59E3D
-    %AICMD0x16($80091E, $14, $17, $9E90)                       ;B59E44
-    %AICMD0x16($80091E, $09, $0C, $9E9D)                       ;B59E4C
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B59FC9)   ;B59DD3
+    %AICMD0x15($7F1F19, $03, $B59FC9)                          ;B59DDA
+    %AICMD0x16($7F1F1C, $11, $12, $B59FC9)                     ;B59DE1
+    %AICMD0x45($7F1F37, $003C, $0059, $B59E08)                 ;B59DE9
+    %AICMD0x45($7F1F39, $003C, $0059, $B59E08)                 ;B59DF3
+    %AICMD0x1A($0168, $0168, $B38B04, $00)                     ;B59DFD
+    %AICMD0x12_Jump($B59E10)                                   ;B59E05
+    %AICMD0x1A($0168, $0168, $B3848C, $00)                     ;B59E08
+    %AICMD0x2D($B59EED, $B59E18)                               ;B59E10
+    %AICMD0x12_Jump($B59E10)                                   ;B59E15
+    %AICMD0x15($80091E, $02, $B59E5B)                          ;B59E18
+    %AICMD0x16($80091E, $01, $07, $B59E68)                     ;B59E1F
+    %AICMD0x16($80091E, $10, $13, $B59E68)                     ;B59E27
+    %AICMD0x15($80091E, $19, $B59E7C)                          ;B59E2F
+    %AICMD0x15($80091E, $49, $B59E7C)                          ;B59E36
+    %AICMD0x15($80091E, $06, $B59EAA)                          ;B59E3D
+    %AICMD0x16($80091E, $14, $17, $B59E90)                     ;B59E44
+    %AICMD0x16($80091E, $09, $0C, $B59E9D)                     ;B59E4C
     %AICMD0x1C($0200, $00)                                     ;B59E54
-    %AICMD0x12_Jump($9E10)                                     ;B59E58
+    %AICMD0x12_Jump($B59E10)                                   ;B59E58
     %AICMD0x1C($01D9, $00)                                     ;B59E5B
     %AICMD0x41_ModifyVariable($7F1F25, $FFF8)                  ;B59E5F
-    %AICMD0x12_Jump($9E10)                                     ;B59E65
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9EC6) ;B59E68
+    %AICMD0x12_Jump($B59E10)                                   ;B59E65
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59EC6)   ;B59E68
     %AICMD0x1C($03B2, $00)                                     ;B59E6F
     %AICMD0x41_ModifyVariable($7F1F25, $0006)                  ;B59E73
-    %AICMD0x12_Jump($9E10)                                     ;B59E79
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9EC6) ;B59E7C
+    %AICMD0x12_Jump($B59E10)                                   ;B59E79
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59EC6)   ;B59E7C
     %AICMD0x1C($0212, $00)                                     ;B59E83
     %AICMD0x41_ModifyVariable($7F1F25, $0006)                  ;B59E87
-    %AICMD0x12_Jump($9E10)                                     ;B59E8D
+    %AICMD0x12_Jump($B59E10)                                   ;B59E8D
     %AICMD0x1C($03B3, $00)                                     ;B59E90
     %AICMD0x41_ModifyVariable($7F1F25, $0004)                  ;B59E94
-    %AICMD0x12_Jump($9E10)                                     ;B59E9A
+    %AICMD0x12_Jump($B59E10)                                   ;B59E9A
     %AICMD0x1C($03BA, $00)                                     ;B59E9D
     %AICMD0x41_ModifyVariable($7F1F25, $FFFC)                  ;B59EA1
-    %AICMD0x12_Jump($9E10)                                     ;B59EA7
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $9EC6) ;B59EAA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $9ED3) ;B59EB1
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $9EE0) ;B59EB8
+    %AICMD0x12_Jump($B59E10)                                   ;B59EA7
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B59EC6)   ;B59EAA
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B59ED3)   ;B59EB1
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B59EE0)   ;B59EB8
     %AICMD0x1C($0212, $00)                                     ;B59EBF
-    %AICMD0x12_Jump($9E10)                                     ;B59EC3
+    %AICMD0x12_Jump($B59E10)                                   ;B59EC3
     %AICMD0x1C($01BD, $00)                                     ;B59EC6
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59ECA
-    %AICMD0x12_Jump($9E10)                                     ;B59ED0
+    %AICMD0x12_Jump($B59E10)                                   ;B59ED0
     %AICMD0x1C($041D, $00)                                     ;B59ED3
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59ED7
-    %AICMD0x12_Jump($9E10)                                     ;B59EDD
+    %AICMD0x12_Jump($B59E10)                                   ;B59EDD
     %AICMD0x1C($041E, $00)                                     ;B59EE0
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B59EE4
-    %AICMD0x12_Jump($9E10)                                     ;B59EEA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $9F40) ;B59EED
-    %AICMD0x15($80098C, $03, $9F47)                            ;B59EF4
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $9F4E) ;B59EFB
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $9F40) ;B59F02
-    %AICMD0x45($7F1F25, $00C8, $00DC, $9F55)                   ;B59F09
-    %AICMD0x45($7F1F25, $00DD, $00FA, $9F5C)                   ;B59F13
-    %AICMD0x15($7F1F1A, $00, $9F63)                            ;B59F1D
-    %AICMD0x15($7F1F1A, $06, $9F6A)                            ;B59F24
-    %AICMD0x15($7F1F19, $00, $9F71)                            ;B59F2B
-    %AICMD0x15($7F1F19, $01, $9F93)                            ;B59F32
-    %AICMD0x15($7F1F19, $02, $9FA7)                            ;B59F39
+    %AICMD0x12_Jump($B59E10)                                   ;B59EEA
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B59F40)   ;B59EED
+    %AICMD0x15($80098C, $03, $B59F47)                          ;B59EF4
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B59F4E)   ;B59EFB
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B59F40)   ;B59F02
+    %AICMD0x45($7F1F25, $00C8, $00DC, $B59F55)                 ;B59F09
+    %AICMD0x45($7F1F25, $00DD, $00FA, $B59F5C)                 ;B59F13
+    %AICMD0x15($7F1F1A, $00, $B59F63)                          ;B59F1D
+    %AICMD0x15($7F1F1A, $06, $B59F6A)                          ;B59F24
+    %AICMD0x15($7F1F19, $00, $B59F71)                          ;B59F2B
+    %AICMD0x15($7F1F19, $01, $B59F93)                          ;B59F32
+    %AICMD0x15($7F1F19, $02, $B59FA7)                          ;B59F39
     %AICMD0x1C($0166, $00)                                     ;B59F40
-    %AICMD0x12_Jump($9E10)                                     ;B59F44
+    %AICMD0x12_Jump($B59E10)                                   ;B59F44
     %AICMD0x1C($015F, $00)                                     ;B59F47
-    %AICMD0x12_Jump($9E10)                                     ;B59F4B
+    %AICMD0x12_Jump($B59E10)                                   ;B59F4B
     %AICMD0x1C($0160, $00)                                     ;B59F4E
-    %AICMD0x12_Jump($9E10)                                     ;B59F52
+    %AICMD0x12_Jump($B59E10)                                   ;B59F52
     %AICMD0x1C($01F3, $00)                                     ;B59F55
-    %AICMD0x12_Jump($9E10)                                     ;B59F59
+    %AICMD0x12_Jump($B59E10)                                   ;B59F59
     %AICMD0x1C($0049, $00)                                     ;B59F5C
-    %AICMD0x12_Jump($9E10)                                     ;B59F60
+    %AICMD0x12_Jump($B59E10)                                   ;B59F60
     %AICMD0x1C($0195, $00)                                     ;B59F63
-    %AICMD0x12_Jump($9E10)                                     ;B59F67
+    %AICMD0x12_Jump($B59E10)                                   ;B59F67
     %AICMD0x1C($047D, $00)                                     ;B59F6A
-    %AICMD0x12_Jump($9E10)                                     ;B59F6E
-    %AICMD0x15($7F1F1B, $16, $9F8C)                            ;B59F71
+    %AICMD0x12_Jump($B59E10)                                   ;B59F6E
+    %AICMD0x15($7F1F1B, $16, $B59F8C)                          ;B59F71
     %AICMD0x17($02)                                            ;B59F78
-    %AICMD0x18($00, $9F85)                                     ;B59F7A
+    %AICMD0x18($00, $B59F85)                                   ;B59F7A
     %AICMD0x1C($0427, $00)                                     ;B59F7E
-    %AICMD0x12_Jump($9E10)                                     ;B59F82
+    %AICMD0x12_Jump($B59E10)                                   ;B59F82
     %AICMD0x1C($041F, $00)                                     ;B59F85
-    %AICMD0x12_Jump($9E10)                                     ;B59F89
+    %AICMD0x12_Jump($B59E10)                                   ;B59F89
     %AICMD0x1C($0209, $00)                                     ;B59F8C
-    %AICMD0x12_Jump($9E10)                                     ;B59F90
+    %AICMD0x12_Jump($B59E10)                                   ;B59F90
     %AICMD0x17($02)                                            ;B59F93
-    %AICMD0x18($00, $9FA0)                                     ;B59F95
+    %AICMD0x18($00, $B59FA0)                                   ;B59F95
     %AICMD0x1C($0429, $00)                                     ;B59F99
-    %AICMD0x12_Jump($9E10)                                     ;B59F9D
+    %AICMD0x12_Jump($B59E10)                                   ;B59F9D
     %AICMD0x1C($018E, $00)                                     ;B59FA0
-    %AICMD0x12_Jump($9E10)                                     ;B59FA4
-    %AICMD0x15($7F1F1B, $0B, $9FC2)                            ;B59FA7
+    %AICMD0x12_Jump($B59E10)                                   ;B59FA4
+    %AICMD0x15($7F1F1B, $0B, $B59FC2)                          ;B59FA7
     %AICMD0x17($02)                                            ;B59FAE
-    %AICMD0x18($00, $9FBB)                                     ;B59FB0
+    %AICMD0x18($00, $B59FBB)                                   ;B59FB0
     %AICMD0x1C($0428, $00)                                     ;B59FB4
-    %AICMD0x12_Jump($9E10)                                     ;B59FB8
+    %AICMD0x12_Jump($B59E10)                                   ;B59FB8
     %AICMD0x1C($0421, $00)                                     ;B59FBB
-    %AICMD0x12_Jump($9E10)                                     ;B59FBF
+    %AICMD0x12_Jump($B59E10)                                   ;B59FBF
     %AICMD0x1C($023B, $00)                                     ;B59FC2
-    %AICMD0x12_Jump($9E10)                                     ;B59FC6
+    %AICMD0x12_Jump($B59E10)                                   ;B59FC6
     %AICMD0x10_End()                                           ;B59FC9
 
 DATA8_B59FCA:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A1C8) ;B59FCA
-    %AICMD0x15($7F1F19, $03, $A1C8)                            ;B59FD1
-    %AICMD0x16($7F1F1C, $06, $0A, $A1C8)                       ;B59FD8
-    %AICMD0x16($7F1F1C, $10, $12, $A1C8)                       ;B59FE0
-    %AICMD0x09($01, $A1C9)                                     ;B59FE8
-    %AICMD0x09($02, $A1D7)                                     ;B59FEC
-    %AICMD0x45($7F1F37, $003C, $0059, $A00F)                   ;B59FF0
-    %AICMD0x45($7F1F39, $003C, $0059, $A00F)                   ;B59FFA
-    %AICMD0x1A($0048, $0048, $8AF8, $03)                       ;B5A004
-    %AICMD0x12_Jump($A017)                                     ;B5A00C
-    %AICMD0x1A($0048, $0048, $8480, $00)                       ;B5A00F
-    %AICMD0x2D($A0EC, $A01F)                                   ;B5A017
-    %AICMD0x12_Jump($A017)                                     ;B5A01C
-    %AICMD0x15($80091E, $02, $A061)                            ;B5A01F
-    %AICMD0x15($80091E, $07, $A061)                            ;B5A026
-    %AICMD0x16($80091E, $01, $05, $A06E)                       ;B5A02D
-    %AICMD0x16($80091E, $10, $17, $A06E)                       ;B5A035
-    %AICMD0x15($80091E, $06, $A082)                            ;B5A03D
-    %AICMD0x15($80091E, $19, $A096)                            ;B5A044
-    %AICMD0x15($80091E, $49, $A096)                            ;B5A04B
-    %AICMD0x16($80091E, $09, $0C, $A0B8)                       ;B5A052
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A1C8)   ;B59FCA
+    %AICMD0x15($7F1F19, $03, $B5A1C8)                          ;B59FD1
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A1C8)                     ;B59FD8
+    %AICMD0x16($7F1F1C, $10, $12, $B5A1C8)                     ;B59FE0
+    %AICMD0x09($01, $B5A1C9)                                   ;B59FE8
+    %AICMD0x09($02, $B5A1D7)                                   ;B59FEC
+    %AICMD0x45($7F1F37, $003C, $0059, $B5A00F)                 ;B59FF0
+    %AICMD0x45($7F1F39, $003C, $0059, $B5A00F)                 ;B59FFA
+    %AICMD0x1A($0048, $0048, $B38AF8, $03)                     ;B5A004
+    %AICMD0x12_Jump($B5A017)                                   ;B5A00C
+    %AICMD0x1A($0048, $0048, $B38480, $00)                     ;B5A00F
+    %AICMD0x2D($B5A0EC, $B5A01F)                               ;B5A017
+    %AICMD0x12_Jump($B5A017)                                   ;B5A01C
+    %AICMD0x15($80091E, $02, $B5A061)                          ;B5A01F
+    %AICMD0x15($80091E, $07, $B5A061)                          ;B5A026
+    %AICMD0x16($80091E, $01, $05, $B5A06E)                     ;B5A02D
+    %AICMD0x16($80091E, $10, $17, $B5A06E)                     ;B5A035
+    %AICMD0x15($80091E, $06, $B5A082)                          ;B5A03D
+    %AICMD0x15($80091E, $19, $B5A096)                          ;B5A044
+    %AICMD0x15($80091E, $49, $B5A096)                          ;B5A04B
+    %AICMD0x16($80091E, $09, $0C, $B5A0B8)                     ;B5A052
     %AICMD0x1C($0200, $00)                                     ;B5A05A
-    %AICMD0x12_Jump($A017)                                     ;B5A05E
+    %AICMD0x12_Jump($B5A017)                                   ;B5A05E
     %AICMD0x1C($03B4, $00)                                     ;B5A061
     %AICMD0x41_ModifyVariable($7F1F27, $FFF8)                  ;B5A065
-    %AICMD0x12_Jump($A017)                                     ;B5A06B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $A0C5) ;B5A06E
+    %AICMD0x12_Jump($B5A017)                                   ;B5A06B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B5A0C5)   ;B5A06E
     %AICMD0x1C($03B2, $00)                                     ;B5A075
     %AICMD0x41_ModifyVariable($7F1F27, $0004)                  ;B5A079
-    %AICMD0x12_Jump($A017)                                     ;B5A07F
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $A0C5) ;B5A082
+    %AICMD0x12_Jump($B5A017)                                   ;B5A07F
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B5A0C5)   ;B5A082
     %AICMD0x1C($0212, $00)                                     ;B5A089
     %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B5A08D
-    %AICMD0x12_Jump($A017)                                     ;B5A093
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $07, $A0C5) ;B5A096
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $A0D2) ;B5A09D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $09, $A0DF) ;B5A0A4
+    %AICMD0x12_Jump($B5A017)                                   ;B5A093
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $07, $B5A0C5)   ;B5A096
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B5A0D2)   ;B5A09D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $09, $B5A0DF)   ;B5A0A4
     %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B5A0AB
     %AICMD0x1C($0212, $00)                                     ;B5A0B1
-    %AICMD0x12_Jump($A017)                                     ;B5A0B5
+    %AICMD0x12_Jump($B5A017)                                   ;B5A0B5
     %AICMD0x1C($03BA, $00)                                     ;B5A0B8
     %AICMD0x41_ModifyVariable($7F1F27, $FFFC)                  ;B5A0BC
-    %AICMD0x12_Jump($A017)                                     ;B5A0C2
+    %AICMD0x12_Jump($B5A017)                                   ;B5A0C2
     %AICMD0x1C($01BD, $00)                                     ;B5A0C5
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B5A0C9
-    %AICMD0x12_Jump($A017)                                     ;B5A0CF
+    %AICMD0x12_Jump($B5A017)                                   ;B5A0CF
     %AICMD0x1C($041D, $00)                                     ;B5A0D2
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B5A0D6
-    %AICMD0x12_Jump($A017)                                     ;B5A0DC
+    %AICMD0x12_Jump($B5A017)                                   ;B5A0DC
     %AICMD0x1C($041E, $00)                                     ;B5A0DF
     %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B5A0E3
-    %AICMD0x12_Jump($A017)                                     ;B5A0E9
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $04, $A13F) ;B5A0EC
-    %AICMD0x15($80098C, $03, $A146)                            ;B5A0F3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $04, $A14D) ;B5A0FA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $05, $A13F) ;B5A101
-    %AICMD0x45($7F1F27, $00C8, $00DC, $A154)                   ;B5A108
-    %AICMD0x45($7F1F27, $00DD, $00FA, $A15B)                   ;B5A112
-    %AICMD0x15($7F1F1A, $00, $A162)                            ;B5A11C
-    %AICMD0x15($7F1F1A, $06, $A169)                            ;B5A123
-    %AICMD0x15($7F1F19, $00, $A170)                            ;B5A12A
-    %AICMD0x15($7F1F19, $01, $A192)                            ;B5A131
-    %AICMD0x15($7F1F19, $02, $A1A6)                            ;B5A138
+    %AICMD0x12_Jump($B5A017)                                   ;B5A0E9
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $04, $B5A13F)   ;B5A0EC
+    %AICMD0x15($80098C, $03, $B5A146)                          ;B5A0F3
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $04, $B5A14D)   ;B5A0FA
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $05, $B5A13F)   ;B5A101
+    %AICMD0x45($7F1F27, $00C8, $00DC, $B5A154)                 ;B5A108
+    %AICMD0x45($7F1F27, $00DD, $00FA, $B5A15B)                 ;B5A112
+    %AICMD0x15($7F1F1A, $00, $B5A162)                          ;B5A11C
+    %AICMD0x15($7F1F1A, $06, $B5A169)                          ;B5A123
+    %AICMD0x15($7F1F19, $00, $B5A170)                          ;B5A12A
+    %AICMD0x15($7F1F19, $01, $B5A192)                          ;B5A131
+    %AICMD0x15($7F1F19, $02, $B5A1A6)                          ;B5A138
     %AICMD0x1C($0166, $00)                                     ;B5A13F
-    %AICMD0x12_Jump($A017)                                     ;B5A143
+    %AICMD0x12_Jump($B5A017)                                   ;B5A143
     %AICMD0x1C($015F, $00)                                     ;B5A146
-    %AICMD0x12_Jump($A017)                                     ;B5A14A
+    %AICMD0x12_Jump($B5A017)                                   ;B5A14A
     %AICMD0x1C($0160, $00)                                     ;B5A14D
-    %AICMD0x12_Jump($A017)                                     ;B5A151
+    %AICMD0x12_Jump($B5A017)                                   ;B5A151
     %AICMD0x1C($01F4, $00)                                     ;B5A154
-    %AICMD0x12_Jump($A017)                                     ;B5A158
+    %AICMD0x12_Jump($B5A017)                                   ;B5A158
     %AICMD0x1C($0049, $00)                                     ;B5A15B
-    %AICMD0x12_Jump($A017)                                     ;B5A15F
+    %AICMD0x12_Jump($B5A017)                                   ;B5A15F
     %AICMD0x1C($0194, $00)                                     ;B5A162
-    %AICMD0x12_Jump($A017)                                     ;B5A166
+    %AICMD0x12_Jump($B5A017)                                   ;B5A166
     %AICMD0x1C($047D, $00)                                     ;B5A169
-    %AICMD0x12_Jump($A017)                                     ;B5A16D
-    %AICMD0x15($7F1F1B, $16, $A18B)                            ;B5A170
+    %AICMD0x12_Jump($B5A017)                                   ;B5A16D
+    %AICMD0x15($7F1F1B, $16, $B5A18B)                          ;B5A170
     %AICMD0x17($02)                                            ;B5A177
-    %AICMD0x18($00, $A184)                                     ;B5A179
+    %AICMD0x18($00, $B5A184)                                   ;B5A179
     %AICMD0x1C($042A, $00)                                     ;B5A17D
-    %AICMD0x12_Jump($A017)                                     ;B5A181
+    %AICMD0x12_Jump($B5A017)                                   ;B5A181
     %AICMD0x1C($0188, $00)                                     ;B5A184
-    %AICMD0x12_Jump($A017)                                     ;B5A188
+    %AICMD0x12_Jump($B5A017)                                   ;B5A188
     %AICMD0x1C($020A, $00)                                     ;B5A18B
-    %AICMD0x12_Jump($A017)                                     ;B5A18F
+    %AICMD0x12_Jump($B5A017)                                   ;B5A18F
     %AICMD0x17($02)                                            ;B5A192
-    %AICMD0x18($00, $A19F)                                     ;B5A194
+    %AICMD0x18($00, $B5A19F)                                   ;B5A194
     %AICMD0x1C($042B, $00)                                     ;B5A198
-    %AICMD0x12_Jump($A017)                                     ;B5A19C
+    %AICMD0x12_Jump($B5A017)                                   ;B5A19C
     %AICMD0x1C($0193, $00)                                     ;B5A19F
-    %AICMD0x12_Jump($A017)                                     ;B5A1A3
-    %AICMD0x15($7F1F1B, $0B, $A1C1)                            ;B5A1A6
+    %AICMD0x12_Jump($B5A017)                                   ;B5A1A3
+    %AICMD0x15($7F1F1B, $0B, $B5A1C1)                          ;B5A1A6
     %AICMD0x17($02)                                            ;B5A1AD
-    %AICMD0x18($00, $A1BA)                                     ;B5A1AF
+    %AICMD0x18($00, $B5A1BA)                                   ;B5A1AF
     %AICMD0x1C($042C, $00)                                     ;B5A1B3
-    %AICMD0x12_Jump($A017)                                     ;B5A1B7
+    %AICMD0x12_Jump($B5A017)                                   ;B5A1B7
     %AICMD0x1C($0192, $00)                                     ;B5A1BA
-    %AICMD0x12_Jump($A017)                                     ;B5A1BE
+    %AICMD0x12_Jump($B5A017)                                   ;B5A1BE
     %AICMD0x1C($020A, $00)                                     ;B5A1C1
-    %AICMD0x12_Jump($A017)                                     ;B5A1C5
+    %AICMD0x12_Jump($B5A017)                                   ;B5A1C5
     %AICMD0x10_End()                                           ;B5A1C8
-    %AICMD0x1A($0058, $0048, $8BA0, $00)                       ;B5A1C9
+    %AICMD0x1A($0058, $0048, $B38BA0, $00)                     ;B5A1C9
     %AICMD0x13($0001)                                          ;B5A1D1
-    %AICMD0x12_Jump($A1D1)                                     ;B5A1D4
-    %AICMD0x1A($0038, $0058, $8BA0, $00)                       ;B5A1D7
+    %AICMD0x12_Jump($B5A1D1)                                   ;B5A1D4
+    %AICMD0x1A($0038, $0058, $B38BA0, $00)                     ;B5A1D7
     %AICMD0x13($0001)                                          ;B5A1DF
-    %AICMD0x12_Jump($A1DF)                                     ;B5A1E2
+    %AICMD0x12_Jump($B5A1DF)                                   ;B5A1E2
 
 pScripting_B5A1E5:
     dw DATA8_B5A205                                            ;B5A1E5|        |B5A205;
@@ -1842,259 +1842,259 @@ pScripting_B5A1E5:
  
 DATA8_B5A205:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A21B) ;B5A205
-    %AICMD0x15($7F1F19, $03, $A21B)                            ;B5A20C
-    %AICMD0x16($7F1F1C, $0B, $0E, $A406)                       ;B5A213
-    %AICMD0x45($7F1F37, $0000, $0059, $A2F1)                   ;B5A21B
-    %AICMD0x16($7F1F1C, $0F, $12, $A2B4)                       ;B5A225
-    %AICMD0x45($7F1F37, $0078, $03E7, $A2BF)                   ;B5A22D
-    %AICMD0x1A($0158, $0098, $84A4, $00)                       ;B5A237
-    %AICMD0x22($10, $10, $01, $84A4, $04)                      ;B5A23F
-    %AICMD0x2D($A299, $A254)                                   ;B5A246
-    %AICMD0x12_Jump($A246)                                     ;B5A24B
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A21B)   ;B5A205
+    %AICMD0x15($7F1F19, $03, $B5A21B)                          ;B5A20C
+    %AICMD0x16($7F1F1C, $0B, $0E, $B5A406)                     ;B5A213
+    %AICMD0x45($7F1F37, $0000, $0059, $B5A2F1)                 ;B5A21B
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A2B4)                     ;B5A225
+    %AICMD0x45($7F1F37, $0078, $03E7, $B5A2BF)                 ;B5A22D
+    %AICMD0x1A($0158, $0098, $B384A4, $00)                     ;B5A237
+    %AICMD0x22($10, $10, $01, $B384A4, $04)                    ;B5A23F
+    %AICMD0x2D($B5A299, $B5A254)                               ;B5A246
+    %AICMD0x12_Jump($B5A246)                                   ;B5A24B
     %AICMD0x13($0001)                                          ;B5A24E
-    %AICMD0x12_Jump($A24E)                                     ;B5A251
-    %AICMD0x15($80091E, $06, $A26A)                            ;B5A254
-    %AICMD0x16($80091E, $09, $0C, $A292)                       ;B5A25B
+    %AICMD0x12_Jump($B5A24E)                                   ;B5A251
+    %AICMD0x15($80091E, $06, $B5A26A)                          ;B5A254
+    %AICMD0x16($80091E, $09, $0C, $B5A292)                     ;B5A25B
     %AICMD0x1C($01C2, $00)                                     ;B5A263
-    %AICMD0x12_Jump($A246)                                     ;B5A267
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $A278) ;B5A26A
+    %AICMD0x12_Jump($B5A246)                                   ;B5A267
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B5A278)   ;B5A26A
     %AICMD0x1C($01C2, $00)                                     ;B5A271
-    %AICMD0x12_Jump($A246)                                     ;B5A275
+    %AICMD0x12_Jump($B5A246)                                   ;B5A275
     %AICMD0x1C($041D, $00)                                     ;B5A278
     %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B5A27C
-    %AICMD0x12_Jump($A246)                                     ;B5A282
+    %AICMD0x12_Jump($B5A246)                                   ;B5A282
     %AICMD0x1C($041E, $00)                                     ;B5A285
     %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B5A289
-    %AICMD0x12_Jump($A246)                                     ;B5A28F
+    %AICMD0x12_Jump($B5A246)                                   ;B5A28F
     %AICMD0x1C($01D9, $00)                                     ;B5A292
-    %AICMD0x12_Jump($A246)                                     ;B5A296
+    %AICMD0x12_Jump($B5A246)                                   ;B5A296
     %AICMD0x17($02)                                            ;B5A299
-    %AICMD0x18($00, $A2A6)                                     ;B5A29B
-    %AICMD0x18($01, $A2AD)                                     ;B5A29F
-    %AICMD0x12_Jump($A246)                                     ;B5A2A3
+    %AICMD0x18($00, $B5A2A6)                                   ;B5A29B
+    %AICMD0x18($01, $B5A2AD)                                   ;B5A29F
+    %AICMD0x12_Jump($B5A246)                                   ;B5A2A3
     %AICMD0x1C($01C0, $00)                                     ;B5A2A6
-    %AICMD0x12_Jump($A246)                                     ;B5A2AA
+    %AICMD0x12_Jump($B5A246)                                   ;B5A2AA
     %AICMD0x1C($01C2, $00)                                     ;B5A2AD
-    %AICMD0x12_Jump($A246)                                     ;B5A2B1
-    %AICMD0x1A($0178, $0058, $8648, $00)                       ;B5A2B4
-    %AICMD0x12_Jump($A24E)                                     ;B5A2BC
-    %AICMD0x1A($0158, $0098, $84BC, $00)                       ;B5A2BF
-    %AICMD0x22($10, $10, $01, $84BC, $04)                      ;B5A2C7
-    %AICMD0x2D($A2D6, $A254)                                   ;B5A2CE
-    %AICMD0x12_Jump($A2CE)                                     ;B5A2D3
+    %AICMD0x12_Jump($B5A246)                                   ;B5A2B1
+    %AICMD0x1A($0178, $0058, $B38648, $00)                     ;B5A2B4
+    %AICMD0x12_Jump($B5A24E)                                   ;B5A2BC
+    %AICMD0x1A($0158, $0098, $B384BC, $00)                     ;B5A2BF
+    %AICMD0x22($10, $10, $01, $B384BC, $04)                    ;B5A2C7
+    %AICMD0x2D($B5A2D6, $B5A254)                               ;B5A2CE
+    %AICMD0x12_Jump($B5A2CE)                                   ;B5A2D3
     %AICMD0x17($02)                                            ;B5A2D6
-    %AICMD0x18($00, $A2E3)                                     ;B5A2D8
-    %AICMD0x18($01, $A2EA)                                     ;B5A2DC
-    %AICMD0x12_Jump($A2CE)                                     ;B5A2E0
+    %AICMD0x18($00, $B5A2E3)                                   ;B5A2D8
+    %AICMD0x18($01, $B5A2EA)                                   ;B5A2DC
+    %AICMD0x12_Jump($B5A2CE)                                   ;B5A2E0
     %AICMD0x1C($01C1, $00)                                     ;B5A2E3
-    %AICMD0x12_Jump($A2CE)                                     ;B5A2E7
+    %AICMD0x12_Jump($B5A2CE)                                   ;B5A2E7
     %AICMD0x1C($01C2, $00)                                     ;B5A2EA
-    %AICMD0x12_Jump($A2CE)                                     ;B5A2EE
-    %AICMD0x1A($0186, $0098, $8654, $00)                       ;B5A2F1
+    %AICMD0x12_Jump($B5A2CE)                                   ;B5A2EE
+    %AICMD0x1A($0186, $0098, $B38654, $00)                     ;B5A2F1
     %AICMD0x52()                                               ;B5A2F9
-    %AICMD0x12_Jump($A2F9)                                     ;B5A2FA
+    %AICMD0x12_Jump($B5A2F9)                                   ;B5A2FA
 
 DATA8_B5A2FD:
  
-    %AICMD0x45($7F1F37, $0000, $0059, $A406)                   ;B5A2FD
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $A32D) ;B5A307
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $A330) ;B5A30E
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A333) ;B5A315
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $A336) ;B5A31C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $A339) ;B5A323
-    %AICMD0x12_Jump($A33C)                                     ;B5A32A
-    %AICMD0x12_Jump($A33D)                                     ;B5A32D
-    %AICMD0x12_Jump($A33C)                                     ;B5A330
-    %AICMD0x12_Jump($A380)                                     ;B5A333
-    %AICMD0x12_Jump($A3C3)                                     ;B5A336
-    %AICMD0x12_Jump($A33C)                                     ;B5A339
+    %AICMD0x45($7F1F37, $0000, $0059, $B5A406)                 ;B5A2FD
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B5A32D)   ;B5A307
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $01, $B5A330)   ;B5A30E
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B5A333)   ;B5A315
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B5A336)   ;B5A31C
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B5A339)   ;B5A323
+    %AICMD0x12_Jump($B5A33C)                                   ;B5A32A
+    %AICMD0x12_Jump($B5A33D)                                   ;B5A32D
+    %AICMD0x12_Jump($B5A33C)                                   ;B5A330
+    %AICMD0x12_Jump($B5A380)                                   ;B5A333
+    %AICMD0x12_Jump($B5A3C3)                                   ;B5A336
+    %AICMD0x12_Jump($B5A33C)                                   ;B5A339
     %AICMD0x10_End()                                           ;B5A33C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A406) ;B5A33D
-    %AICMD0x16($7F1F1C, $06, $0A, $A406)                       ;B5A344
-    %AICMD0x16($7F1F1C, $0F, $12, $A406)                       ;B5A34C
-    %AICMD0x15($7F1F19, $03, $A406)                            ;B5A354
-    %AICMD0x45($7F1F37, $0078, $03E7, $A370)                   ;B5A35B
-    %AICMD0x1A($0160, $0178, $84A4, $00)                       ;B5A365
-    %AICMD0x12_Jump($A378)                                     ;B5A36D
-    %AICMD0x1A($0160, $0178, $84BC, $00)                       ;B5A370
-    %AICMD0x2D($A299, $A254)                                   ;B5A378
-    %AICMD0x12_Jump($A378)                                     ;B5A37D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A406) ;B5A380
-    %AICMD0x16($7F1F1C, $06, $0A, $A406)                       ;B5A387
-    %AICMD0x16($7F1F1C, $0F, $12, $A406)                       ;B5A38F
-    %AICMD0x15($7F1F19, $03, $A406)                            ;B5A397
-    %AICMD0x45($7F1F37, $0078, $03E7, $A3B3)                   ;B5A39E
-    %AICMD0x1A($0160, $0178, $84A4, $00)                       ;B5A3A8
-    %AICMD0x12_Jump($A3BB)                                     ;B5A3B0
-    %AICMD0x1A($0160, $0178, $84BC, $00)                       ;B5A3B3
-    %AICMD0x2D($A299, $A254)                                   ;B5A3BB
-    %AICMD0x12_Jump($A3BB)                                     ;B5A3C0
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A406) ;B5A3C3
-    %AICMD0x16($7F1F1C, $06, $0A, $A406)                       ;B5A3CA
-    %AICMD0x16($7F1F1C, $0F, $12, $A406)                       ;B5A3D2
-    %AICMD0x15($7F1F19, $03, $A406)                            ;B5A3DA
-    %AICMD0x45($7F1F37, $0078, $03E7, $A3F6)                   ;B5A3E1
-    %AICMD0x1A($0160, $0178, $84A4, $00)                       ;B5A3EB
-    %AICMD0x12_Jump($A3FE)                                     ;B5A3F3
-    %AICMD0x1A($0160, $0178, $84BC, $00)                       ;B5A3F6
-    %AICMD0x2D($A299, $A254)                                   ;B5A3FE
-    %AICMD0x12_Jump($A3FE)                                     ;B5A403
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A406)   ;B5A33D
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A406)                     ;B5A344
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A406)                     ;B5A34C
+    %AICMD0x15($7F1F19, $03, $B5A406)                          ;B5A354
+    %AICMD0x45($7F1F37, $0078, $03E7, $B5A370)                 ;B5A35B
+    %AICMD0x1A($0160, $0178, $B384A4, $00)                     ;B5A365
+    %AICMD0x12_Jump($B5A378)                                   ;B5A36D
+    %AICMD0x1A($0160, $0178, $B384BC, $00)                     ;B5A370
+    %AICMD0x2D($B5A299, $B5A254)                               ;B5A378
+    %AICMD0x12_Jump($B5A378)                                   ;B5A37D
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A406)   ;B5A380
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A406)                     ;B5A387
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A406)                     ;B5A38F
+    %AICMD0x15($7F1F19, $03, $B5A406)                          ;B5A397
+    %AICMD0x45($7F1F37, $0078, $03E7, $B5A3B3)                 ;B5A39E
+    %AICMD0x1A($0160, $0178, $B384A4, $00)                     ;B5A3A8
+    %AICMD0x12_Jump($B5A3BB)                                   ;B5A3B0
+    %AICMD0x1A($0160, $0178, $B384BC, $00)                     ;B5A3B3
+    %AICMD0x2D($B5A299, $B5A254)                               ;B5A3BB
+    %AICMD0x12_Jump($B5A3BB)                                   ;B5A3C0
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A406)   ;B5A3C3
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A406)                     ;B5A3CA
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A406)                     ;B5A3D2
+    %AICMD0x15($7F1F19, $03, $B5A406)                          ;B5A3DA
+    %AICMD0x45($7F1F37, $0078, $03E7, $B5A3F6)                 ;B5A3E1
+    %AICMD0x1A($0160, $0178, $B384A4, $00)                     ;B5A3EB
+    %AICMD0x12_Jump($B5A3FE)                                   ;B5A3F3
+    %AICMD0x1A($0160, $0178, $B384BC, $00)                     ;B5A3F6
+    %AICMD0x2D($B5A299, $B5A254)                               ;B5A3FE
+    %AICMD0x12_Jump($B5A3FE)                                   ;B5A403
     %AICMD0x10_End()                                           ;B5A406
 
 DATA8_B5A407:
  
-    %AICMD0x45($7F1F37, $0000, $0059, $A440)                   ;B5A407
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $A437) ;B5A411
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $A438) ;B5A418
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A43B) ;B5A41F
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $A43C) ;B5A426
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $A43D) ;B5A42D
-    %AICMD0x12_Jump($A440)                                     ;B5A434
+    %AICMD0x45($7F1F37, $0000, $0059, $B5A440)                 ;B5A407
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B5A437)   ;B5A411
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $01, $B5A438)   ;B5A418
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B5A43B)   ;B5A41F
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B5A43C)   ;B5A426
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B5A43D)   ;B5A42D
+    %AICMD0x12_Jump($B5A440)                                   ;B5A434
     %AICMD0x10_End()                                           ;B5A437
-    %AICMD0x12_Jump($A441)                                     ;B5A438
+    %AICMD0x12_Jump($B5A441)                                   ;B5A438
     %AICMD0x10_End()                                           ;B5A43B
     %AICMD0x10_End()                                           ;B5A43C
-    %AICMD0x12_Jump($A441)                                     ;B5A43D
+    %AICMD0x12_Jump($B5A441)                                   ;B5A43D
     %AICMD0x10_End()                                           ;B5A440
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A406) ;B5A441
-    %AICMD0x16($7F1F1C, $06, $0A, $A406)                       ;B5A448
-    %AICMD0x16($7F1F1C, $0F, $12, $A406)                       ;B5A450
-    %AICMD0x15($7F1F19, $03, $A406)                            ;B5A458
-    %AICMD0x45($7F1F37, $0078, $03E7, $A474)                   ;B5A45F
-    %AICMD0x1A($0088, $0048, $84A4, $00)                       ;B5A469
-    %AICMD0x12_Jump($A47C)                                     ;B5A471
-    %AICMD0x1A($0088, $0048, $84BC, $00)                       ;B5A474
-    %AICMD0x2D($A299, $A254)                                   ;B5A47C
-    %AICMD0x12_Jump($A47C)                                     ;B5A481
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A406)   ;B5A441
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A406)                     ;B5A448
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A406)                     ;B5A450
+    %AICMD0x15($7F1F19, $03, $B5A406)                          ;B5A458
+    %AICMD0x45($7F1F37, $0078, $03E7, $B5A474)                 ;B5A45F
+    %AICMD0x1A($0088, $0048, $B384A4, $00)                     ;B5A469
+    %AICMD0x12_Jump($B5A47C)                                   ;B5A471
+    %AICMD0x1A($0088, $0048, $B384BC, $00)                     ;B5A474
+    %AICMD0x2D($B5A299, $B5A254)                               ;B5A47C
+    %AICMD0x12_Jump($B5A47C)                                   ;B5A481
 
 DATA8_B5A484:
  
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A49A) ;B5A484
-    %AICMD0x15($7F1F19, $03, $A49A)                            ;B5A48B
-    %AICMD0x16($7F1F1C, $0B, $0E, $A685)                       ;B5A492
-    %AICMD0x45($7F1F39, $0000, $0059, $A570)                   ;B5A49A
-    %AICMD0x16($7F1F1C, $0F, $12, $A533)                       ;B5A4A4
-    %AICMD0x45($7F1F39, $0078, $03E7, $A53E)                   ;B5A4AC
-    %AICMD0x1A($0168, $0088, $8498, $02)                       ;B5A4B6
-    %AICMD0x22($10, $10, $01, $84A4, $04)                      ;B5A4BE
-    %AICMD0x2D($A518, $A4D3)                                   ;B5A4C5
-    %AICMD0x12_Jump($A4C5)                                     ;B5A4CA
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A49A)   ;B5A484
+    %AICMD0x15($7F1F19, $03, $B5A49A)                          ;B5A48B
+    %AICMD0x16($7F1F1C, $0B, $0E, $B5A685)                     ;B5A492
+    %AICMD0x45($7F1F39, $0000, $0059, $B5A570)                 ;B5A49A
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A533)                     ;B5A4A4
+    %AICMD0x45($7F1F39, $0078, $03E7, $B5A53E)                 ;B5A4AC
+    %AICMD0x1A($0168, $0088, $B38498, $02)                     ;B5A4B6
+    %AICMD0x22($10, $10, $01, $B384A4, $04)                    ;B5A4BE
+    %AICMD0x2D($B5A518, $B5A4D3)                               ;B5A4C5
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A4CA
     %AICMD0x13($0001)                                          ;B5A4CD
-    %AICMD0x12_Jump($A4CD)                                     ;B5A4D0
-    %AICMD0x15($80091E, $06, $A4E9)                            ;B5A4D3
-    %AICMD0x16($80091E, $09, $0C, $A511)                       ;B5A4DA
+    %AICMD0x12_Jump($B5A4CD)                                   ;B5A4D0
+    %AICMD0x15($80091E, $06, $B5A4E9)                          ;B5A4D3
+    %AICMD0x16($80091E, $09, $0C, $B5A511)                     ;B5A4DA
     %AICMD0x1C($01C2, $00)                                     ;B5A4E2
-    %AICMD0x12_Jump($A4C5)                                     ;B5A4E6
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $08, $A4F7) ;B5A4E9
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A4E6
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $08, $B5A4F7)   ;B5A4E9
     %AICMD0x1C($01C2, $00)                                     ;B5A4F0
-    %AICMD0x12_Jump($A4C5)                                     ;B5A4F4
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A4F4
     %AICMD0x1C($041D, $00)                                     ;B5A4F7
     %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B5A4FB
-    %AICMD0x12_Jump($A4C5)                                     ;B5A501
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A501
     %AICMD0x1C($041E, $00)                                     ;B5A504
     %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B5A508
-    %AICMD0x12_Jump($A4C5)                                     ;B5A50E
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A50E
     %AICMD0x1C($01D9, $00)                                     ;B5A511
-    %AICMD0x12_Jump($A4C5)                                     ;B5A515
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A515
     %AICMD0x17($02)                                            ;B5A518
-    %AICMD0x18($00, $A525)                                     ;B5A51A
-    %AICMD0x18($01, $A52C)                                     ;B5A51E
-    %AICMD0x12_Jump($A4C5)                                     ;B5A522
+    %AICMD0x18($00, $B5A525)                                   ;B5A51A
+    %AICMD0x18($01, $B5A52C)                                   ;B5A51E
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A522
     %AICMD0x1C($01C0, $00)                                     ;B5A525
-    %AICMD0x12_Jump($A4C5)                                     ;B5A529
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A529
     %AICMD0x1C($01C2, $00)                                     ;B5A52C
-    %AICMD0x12_Jump($A4C5)                                     ;B5A530
-    %AICMD0x1A($0188, $0058, $8648, $00)                       ;B5A533
-    %AICMD0x12_Jump($A4CD)                                     ;B5A53B
-    %AICMD0x1A($0168, $0088, $84B0, $00)                       ;B5A53E
-    %AICMD0x22($10, $0C, $01, $84BC, $04)                      ;B5A546
-    %AICMD0x2D($A555, $A4D3)                                   ;B5A54D
-    %AICMD0x12_Jump($A54D)                                     ;B5A552
+    %AICMD0x12_Jump($B5A4C5)                                   ;B5A530
+    %AICMD0x1A($0188, $0058, $B38648, $00)                     ;B5A533
+    %AICMD0x12_Jump($B5A4CD)                                   ;B5A53B
+    %AICMD0x1A($0168, $0088, $B384B0, $00)                     ;B5A53E
+    %AICMD0x22($10, $0C, $01, $B384BC, $04)                    ;B5A546
+    %AICMD0x2D($B5A555, $B5A4D3)                               ;B5A54D
+    %AICMD0x12_Jump($B5A54D)                                   ;B5A552
     %AICMD0x17($02)                                            ;B5A555
-    %AICMD0x18($00, $A562)                                     ;B5A557
-    %AICMD0x18($01, $A569)                                     ;B5A55B
-    %AICMD0x12_Jump($A54D)                                     ;B5A55F
+    %AICMD0x18($00, $B5A562)                                   ;B5A557
+    %AICMD0x18($01, $B5A569)                                   ;B5A55B
+    %AICMD0x12_Jump($B5A54D)                                   ;B5A55F
     %AICMD0x1C($01C1, $00)                                     ;B5A562
-    %AICMD0x12_Jump($A54D)                                     ;B5A566
+    %AICMD0x12_Jump($B5A54D)                                   ;B5A566
     %AICMD0x1C($01C2, $00)                                     ;B5A569
-    %AICMD0x12_Jump($A54D)                                     ;B5A56D
-    %AICMD0x1A($0186, $0098, $8654, $00)                       ;B5A570
+    %AICMD0x12_Jump($B5A54D)                                   ;B5A56D
+    %AICMD0x1A($0186, $0098, $B38654, $00)                     ;B5A570
     %AICMD0x53()                                               ;B5A578
-    %AICMD0x12_Jump($A578)                                     ;B5A579
+    %AICMD0x12_Jump($B5A578)                                   ;B5A579
 
 DATA8_B5A57C:
  
-    %AICMD0x45($7F1F39, $0000, $0059, $A685)                   ;B5A57C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $A5AC) ;B5A586
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $A5AF) ;B5A58D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A5B2) ;B5A594
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $A5B5) ;B5A59B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $A5B8) ;B5A5A2
-    %AICMD0x12_Jump($A5BB)                                     ;B5A5A9
-    %AICMD0x12_Jump($A5BC)                                     ;B5A5AC
-    %AICMD0x12_Jump($A5BB)                                     ;B5A5AF
-    %AICMD0x12_Jump($A5FF)                                     ;B5A5B2
-    %AICMD0x12_Jump($A642)                                     ;B5A5B5
-    %AICMD0x12_Jump($A5BB)                                     ;B5A5B8
+    %AICMD0x45($7F1F39, $0000, $0059, $B5A685)                 ;B5A57C
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B5A5AC)   ;B5A586
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $01, $B5A5AF)   ;B5A58D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B5A5B2)   ;B5A594
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B5A5B5)   ;B5A59B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B5A5B8)   ;B5A5A2
+    %AICMD0x12_Jump($B5A5BB)                                   ;B5A5A9
+    %AICMD0x12_Jump($B5A5BC)                                   ;B5A5AC
+    %AICMD0x12_Jump($B5A5BB)                                   ;B5A5AF
+    %AICMD0x12_Jump($B5A5FF)                                   ;B5A5B2
+    %AICMD0x12_Jump($B5A642)                                   ;B5A5B5
+    %AICMD0x12_Jump($B5A5BB)                                   ;B5A5B8
     %AICMD0x10_End()                                           ;B5A5BB
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A685) ;B5A5BC
-    %AICMD0x16($7F1F1C, $06, $0A, $A685)                       ;B5A5C3
-    %AICMD0x16($7F1F1C, $0F, $12, $A685)                       ;B5A5CB
-    %AICMD0x15($7F1F19, $03, $A685)                            ;B5A5D3
-    %AICMD0x45($7F1F39, $0078, $03E7, $A5EF)                   ;B5A5DA
-    %AICMD0x1A($0170, $0178, $84A4, $00)                       ;B5A5E4
-    %AICMD0x12_Jump($A5F7)                                     ;B5A5EC
-    %AICMD0x1A($0170, $0178, $84BC, $00)                       ;B5A5EF
-    %AICMD0x2D($A518, $A4D3)                                   ;B5A5F7
-    %AICMD0x12_Jump($A5F7)                                     ;B5A5FC
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A685) ;B5A5FF
-    %AICMD0x16($7F1F1C, $06, $0A, $A685)                       ;B5A606
-    %AICMD0x16($7F1F1C, $0F, $12, $A685)                       ;B5A60E
-    %AICMD0x15($7F1F19, $03, $A685)                            ;B5A616
-    %AICMD0x45($7F1F39, $0078, $03E7, $A632)                   ;B5A61D
-    %AICMD0x1A($0170, $0178, $84A4, $00)                       ;B5A627
-    %AICMD0x12_Jump($A63A)                                     ;B5A62F
-    %AICMD0x1A($0170, $0178, $84BC, $00)                       ;B5A632
-    %AICMD0x2D($A518, $A4D3)                                   ;B5A63A
-    %AICMD0x12_Jump($A63A)                                     ;B5A63F
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A685) ;B5A642
-    %AICMD0x16($7F1F1C, $06, $0A, $A685)                       ;B5A649
-    %AICMD0x16($7F1F1C, $0F, $12, $A685)                       ;B5A651
-    %AICMD0x15($7F1F19, $03, $A685)                            ;B5A659
-    %AICMD0x45($7F1F39, $0078, $03E7, $A675)                   ;B5A660
-    %AICMD0x1A($0170, $0178, $84A4, $00)                       ;B5A66A
-    %AICMD0x12_Jump($A67D)                                     ;B5A672
-    %AICMD0x1A($0170, $0178, $84BC, $00)                       ;B5A675
-    %AICMD0x2D($A518, $A4D3)                                   ;B5A67D
-    %AICMD0x12_Jump($A67D)                                     ;B5A682
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A685)   ;B5A5BC
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A685)                     ;B5A5C3
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A685)                     ;B5A5CB
+    %AICMD0x15($7F1F19, $03, $B5A685)                          ;B5A5D3
+    %AICMD0x45($7F1F39, $0078, $03E7, $B5A5EF)                 ;B5A5DA
+    %AICMD0x1A($0170, $0178, $B384A4, $00)                     ;B5A5E4
+    %AICMD0x12_Jump($B5A5F7)                                   ;B5A5EC
+    %AICMD0x1A($0170, $0178, $B384BC, $00)                     ;B5A5EF
+    %AICMD0x2D($B5A518, $B5A4D3)                               ;B5A5F7
+    %AICMD0x12_Jump($B5A5F7)                                   ;B5A5FC
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A685)   ;B5A5FF
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A685)                     ;B5A606
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A685)                     ;B5A60E
+    %AICMD0x15($7F1F19, $03, $B5A685)                          ;B5A616
+    %AICMD0x45($7F1F39, $0078, $03E7, $B5A632)                 ;B5A61D
+    %AICMD0x1A($0170, $0178, $B384A4, $00)                     ;B5A627
+    %AICMD0x12_Jump($B5A63A)                                   ;B5A62F
+    %AICMD0x1A($0170, $0178, $B384BC, $00)                     ;B5A632
+    %AICMD0x2D($B5A518, $B5A4D3)                               ;B5A63A
+    %AICMD0x12_Jump($B5A63A)                                   ;B5A63F
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A685)   ;B5A642
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A685)                     ;B5A649
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A685)                     ;B5A651
+    %AICMD0x15($7F1F19, $03, $B5A685)                          ;B5A659
+    %AICMD0x45($7F1F39, $0078, $03E7, $B5A675)                 ;B5A660
+    %AICMD0x1A($0170, $0178, $B384A4, $00)                     ;B5A66A
+    %AICMD0x12_Jump($B5A67D)                                   ;B5A672
+    %AICMD0x1A($0170, $0178, $B384BC, $00)                     ;B5A675
+    %AICMD0x2D($B5A518, $B5A4D3)                               ;B5A67D
+    %AICMD0x12_Jump($B5A67D)                                   ;B5A682
     %AICMD0x10_End()                                           ;B5A685
 
 DATA8_B5A686:
  
-    %AICMD0x45($7F1F39, $0000, $0059, $A6BF)                   ;B5A686
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $A6B6) ;B5A690
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $A6B7) ;B5A697
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A6BA) ;B5A69E
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $A6BB) ;B5A6A5
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $A6BC) ;B5A6AC
-    %AICMD0x12_Jump($A6BF)                                     ;B5A6B3
+    %AICMD0x45($7F1F39, $0000, $0059, $B5A6BF)                 ;B5A686
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B5A6B6)   ;B5A690
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $01, $B5A6B7)   ;B5A697
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B5A6BA)   ;B5A69E
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B5A6BB)   ;B5A6A5
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B5A6BC)   ;B5A6AC
+    %AICMD0x12_Jump($B5A6BF)                                   ;B5A6B3
     %AICMD0x10_End()                                           ;B5A6B6
-    %AICMD0x12_Jump($A6C0)                                     ;B5A6B7
+    %AICMD0x12_Jump($B5A6C0)                                   ;B5A6B7
     %AICMD0x10_End()                                           ;B5A6BA
     %AICMD0x10_End()                                           ;B5A6BB
-    %AICMD0x12_Jump($A6C0)                                     ;B5A6BC
+    %AICMD0x12_Jump($B5A6C0)                                   ;B5A6BC
     %AICMD0x10_End()                                           ;B5A6BF
-    %AICMD0x14_JumpIfEqualsToIndexedValue($800196, $01, $A685) ;B5A6C0
-    %AICMD0x16($7F1F1C, $06, $0A, $A685)                       ;B5A6C7
-    %AICMD0x16($7F1F1C, $0F, $12, $A685)                       ;B5A6CF
-    %AICMD0x15($7F1F19, $03, $A685)                            ;B5A6D7
-    %AICMD0x45($7F1F39, $0078, $03E7, $A6F3)                   ;B5A6DE
-    %AICMD0x1A($0068, $0048, $84A4, $00)                       ;B5A6E8
-    %AICMD0x12_Jump($A6FB)                                     ;B5A6F0
-    %AICMD0x1A($0068, $0048, $84BC, $00)                       ;B5A6F3
-    %AICMD0x2D($A518, $A4D3)                                   ;B5A6FB
-    %AICMD0x12_Jump($A6FB)                                     ;B5A700
+    %AICMD0x14_JumpIfEqualsToIdxValue($800196, $01, $B5A685)   ;B5A6C0
+    %AICMD0x16($7F1F1C, $06, $0A, $B5A685)                     ;B5A6C7
+    %AICMD0x16($7F1F1C, $0F, $12, $B5A685)                     ;B5A6CF
+    %AICMD0x15($7F1F19, $03, $B5A685)                          ;B5A6D7
+    %AICMD0x45($7F1F39, $0078, $03E7, $B5A6F3)                 ;B5A6DE
+    %AICMD0x1A($0068, $0048, $B384A4, $00)                     ;B5A6E8
+    %AICMD0x12_Jump($B5A6FB)                                   ;B5A6F0
+    %AICMD0x1A($0068, $0048, $B384BC, $00)                     ;B5A6F3
+    %AICMD0x2D($B5A518, $B5A4D3)                               ;B5A6FB
+    %AICMD0x12_Jump($B5A6FB)                                   ;B5A700
 
 pScripting_B5A703:
     dw DATA8_B5A723                                            ;B5A703|        |B5A723;
@@ -2339,57 +2339,57 @@ DATA8_B5A85D:
     %AICMD0x13($0078)                                          ;B5A8D3
     %AICMD0x54($044C, $01)                                     ;B5A8D6
     %AICMD0x13($0078)                                          ;B5A8DA
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $A8F9) ;B5A8DD
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $06, $A8F2) ;B5A8E4
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $07, $B5A8F9)   ;B5A8DD
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F64, $06, $B5A8F2)   ;B5A8E4
     %AICMD0x54($0451, $01)                                     ;B5A8EB
-    %AICMD0x12_Jump($A8FD)                                     ;B5A8EF
+    %AICMD0x12_Jump($B5A8FD)                                   ;B5A8EF
     %AICMD0x54($0452, $01)                                     ;B5A8F2
-    %AICMD0x12_Jump($A8FD)                                     ;B5A8F6
+    %AICMD0x12_Jump($B5A8FD)                                   ;B5A8F6
     %AICMD0x54($0453, $01)                                     ;B5A8F9
     %AICMD0x13($0078)                                          ;B5A8FD
     %AICMD0x54($048C, $01)                                     ;B5A900
     %AICMD0x13($0078)                                          ;B5A904
     %AICMD0x54($0454, $01)                                     ;B5A907
     %AICMD0x13($0078)                                          ;B5A90B
-    %AICMD0x45($7F1F54, $0000, $00C7, $A940)                   ;B5A90E
-    %AICMD0x45($7F1F54, $00C8, $018F, $A947)                   ;B5A918
-    %AICMD0x45($7F1F54, $0190, $0257, $A94E)                   ;B5A922
-    %AICMD0x45($7F1F54, $0258, $031F, $A955)                   ;B5A92C
-    %AICMD0x45($7F1F54, $0320, $03E7, $A95C)                   ;B5A936
+    %AICMD0x45($7F1F54, $0000, $00C7, $B5A940)                 ;B5A90E
+    %AICMD0x45($7F1F54, $00C8, $018F, $B5A947)                 ;B5A918
+    %AICMD0x45($7F1F54, $0190, $0257, $B5A94E)                 ;B5A922
+    %AICMD0x45($7F1F54, $0258, $031F, $B5A955)                 ;B5A92C
+    %AICMD0x45($7F1F54, $0320, $03E7, $B5A95C)                 ;B5A936
     %AICMD0x54($0483, $01)                                     ;B5A940
-    %AICMD0x12_Jump($A963)                                     ;B5A944
+    %AICMD0x12_Jump($B5A963)                                   ;B5A944
     %AICMD0x54($0488, $01)                                     ;B5A947
-    %AICMD0x12_Jump($A963)                                     ;B5A94B
+    %AICMD0x12_Jump($B5A963)                                   ;B5A94B
     %AICMD0x54($0489, $01)                                     ;B5A94E
-    %AICMD0x12_Jump($A963)                                     ;B5A952
+    %AICMD0x12_Jump($B5A963)                                   ;B5A952
     %AICMD0x54($048A, $01)                                     ;B5A955
-    %AICMD0x12_Jump($A963)                                     ;B5A959
+    %AICMD0x12_Jump($B5A963)                                   ;B5A959
     %AICMD0x54($048B, $01)                                     ;B5A95C
-    %AICMD0x12_Jump($A963)                                     ;B5A960
+    %AICMD0x12_Jump($B5A963)                                   ;B5A960
     %AICMD0x19($00E8, $00)                                     ;B5A963
-    %AICMD0x09($01, $A9E9)                                     ;B5A967
-    %AICMD0x12_Jump($A96E)                                     ;B5A96B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $A99E) ;B5A96E
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $A9A5) ;B5A975
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A9AC) ;B5A97C
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $A9B3) ;B5A983
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $A9BA) ;B5A98A
-    %AICMD0x45($7F1F33, $0000, $012B, $A9C1)                   ;B5A991
-    %AICMD0x12_Jump($A9C8)                                     ;B5A99B
-    %AICMD0x09($02, $AA14)                                     ;B5A99E
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9A2
-    %AICMD0x09($02, $AA4C)                                     ;B5A9A5
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9A9
-    %AICMD0x09($02, $AA84)                                     ;B5A9AC
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9B0
-    %AICMD0x09($02, $AABC)                                     ;B5A9B3
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9B7
-    %AICMD0x09($02, $AAF4)                                     ;B5A9BA
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9BE
-    %AICMD0x09($03, $ABA9)                                     ;B5A9C1
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9C5
-    %AICMD0x09($04, $AB5C)                                     ;B5A9C8
-    %AICMD0x12_Jump($A9CF)                                     ;B5A9CC
+    %AICMD0x09($01, $B5A9E9)                                   ;B5A967
+    %AICMD0x12_Jump($B5A96E)                                   ;B5A96B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B5A99E)   ;B5A96E
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $01, $B5A9A5)   ;B5A975
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B5A9AC)   ;B5A97C
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B5A9B3)   ;B5A983
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B5A9BA)   ;B5A98A
+    %AICMD0x45($7F1F33, $0000, $012B, $B5A9C1)                 ;B5A991
+    %AICMD0x12_Jump($B5A9C8)                                   ;B5A99B
+    %AICMD0x09($02, $B5AA14)                                   ;B5A99E
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9A2
+    %AICMD0x09($02, $B5AA4C)                                   ;B5A9A5
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9A9
+    %AICMD0x09($02, $B5AA84)                                   ;B5A9AC
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9B0
+    %AICMD0x09($02, $B5AABC)                                   ;B5A9B3
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9B7
+    %AICMD0x09($02, $B5AAF4)                                   ;B5A9BA
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9BE
+    %AICMD0x09($03, $B5ABA9)                                   ;B5A9C1
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9C5
+    %AICMD0x09($04, $B5AB5C)                                   ;B5A9C8
+    %AICMD0x12_Jump($B5A9CF)                                   ;B5A9CC
     %AICMD0x29($0000, $0001, $D0)                              ;B5A9CF
     %AICMD0x13($00F0)                                          ;B5A9D5
     %AICMD0x0B($03)                                            ;B5A9D8
@@ -2398,7 +2398,7 @@ DATA8_B5A85D:
     %AICMD0x29($0000, $FFFF, $80)                              ;B5A9DF
     %AICMD0x13($00F0)                                          ;B5A9E5
     %AICMD0x10_End()                                           ;B5A9E8
-    %AICMD0x1A($0078, $0118, $80D8, $01)                       ;B5A9E9
+    %AICMD0x1A($0078, $0118, $B380D8, $01)                     ;B5A9E9
     %AICMD0x0C($00)                                            ;B5A9F1
     %AICMD0x1B($0007, $01)                                     ;B5A9F3
     %AICMD0x13($0078)                                          ;B5A9F7
@@ -2411,65 +2411,65 @@ DATA8_B5A85D:
     %AICMD0x0B($02)                                            ;B5AA10
     %AICMD0x37()                                               ;B5AA12
     %AICMD0x10_End()                                           ;B5AA13
-    %AICMD0x1A($0088, $0188, $845C, $01)                       ;B5AA14
+    %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AA14
     %AICMD0x0C($03)                                            ;B5AA1C
     %AICMD0x1B($02E5, $00)                                     ;B5AA1E
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AA22
     %AICMD0x1B($02E6, $00)                                     ;B5AA27
     %AICMD0x0B($00)                                            ;B5AA2B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $02, $AB2C) ;B5AA2D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $03, $AB2C) ;B5AA34
-    %AICMD0x45($7F1F1F, $0000, $00FA, $AB33)                   ;B5AA3B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $02, $B5AB2C)   ;B5AA2D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $03, $B5AB2C)   ;B5AA34
+    %AICMD0x45($7F1F1F, $0000, $00FA, $B5AB33)                 ;B5AA3B
     %AICMD0x54($0468, $01)                                     ;B5AA45
-    %AICMD0x12_Jump($AB3A)                                     ;B5AA49
-    %AICMD0x1A($0088, $0188, $845C, $01)                       ;B5AA4C
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AA49
+    %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AA4C
     %AICMD0x0C($03)                                            ;B5AA54
     %AICMD0x1B($02E5, $00)                                     ;B5AA56
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AA5A
     %AICMD0x1B($02E6, $00)                                     ;B5AA5F
     %AICMD0x0B($00)                                            ;B5AA63
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $02, $AB2C) ;B5AA65
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $03, $AB2C) ;B5AA6C
-    %AICMD0x45($7F1F21, $0000, $00FA, $AB33)                   ;B5AA73
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $02, $B5AB2C)   ;B5AA65
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $03, $B5AB2C)   ;B5AA6C
+    %AICMD0x45($7F1F21, $0000, $00FA, $B5AB33)                 ;B5AA73
     %AICMD0x54($0468, $01)                                     ;B5AA7D
-    %AICMD0x12_Jump($AB3A)                                     ;B5AA81
-    %AICMD0x1A($0088, $0188, $845C, $01)                       ;B5AA84
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AA81
+    %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AA84
     %AICMD0x0C($03)                                            ;B5AA8C
     %AICMD0x1B($02E5, $00)                                     ;B5AA8E
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AA92
     %AICMD0x1B($02E6, $00)                                     ;B5AA97
     %AICMD0x0B($00)                                            ;B5AA9B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $02, $AB2C) ;B5AA9D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $03, $AB2C) ;B5AAA4
-    %AICMD0x45($7F1F23, $0000, $00FA, $AB33)                   ;B5AAAB
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $02, $B5AB2C)   ;B5AA9D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $03, $B5AB2C)   ;B5AAA4
+    %AICMD0x45($7F1F23, $0000, $00FA, $B5AB33)                 ;B5AAAB
     %AICMD0x54($0468, $01)                                     ;B5AAB5
-    %AICMD0x12_Jump($AB3A)                                     ;B5AAB9
-    %AICMD0x1A($0088, $0188, $845C, $01)                       ;B5AABC
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AAB9
+    %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AABC
     %AICMD0x0C($03)                                            ;B5AAC4
     %AICMD0x1B($02E5, $00)                                     ;B5AAC6
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AACA
     %AICMD0x1B($02E6, $00)                                     ;B5AACF
     %AICMD0x0B($00)                                            ;B5AAD3
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $02, $AB2C) ;B5AAD5
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $03, $AB2C) ;B5AADC
-    %AICMD0x45($7F1F25, $0000, $00FA, $AB33)                   ;B5AAE3
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $02, $B5AB2C)   ;B5AAD5
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $03, $B5AB2C)   ;B5AADC
+    %AICMD0x45($7F1F25, $0000, $00FA, $B5AB33)                 ;B5AAE3
     %AICMD0x54($0468, $01)                                     ;B5AAED
-    %AICMD0x12_Jump($AB3A)                                     ;B5AAF1
-    %AICMD0x1A($0088, $0188, $845C, $01)                       ;B5AAF4
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AAF1
+    %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AAF4
     %AICMD0x0C($03)                                            ;B5AAFC
     %AICMD0x1B($02E5, $00)                                     ;B5AAFE
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AB02
     %AICMD0x1B($02E6, $00)                                     ;B5AB07
     %AICMD0x0B($00)                                            ;B5AB0B
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $02, $AB2C) ;B5AB0D
-    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $03, $AB2C) ;B5AB14
-    %AICMD0x45($7F1F27, $0000, $00FA, $AB33)                   ;B5AB1B
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $02, $B5AB2C)   ;B5AB0D
+    %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6E, $03, $B5AB2C)   ;B5AB14
+    %AICMD0x45($7F1F27, $0000, $00FA, $B5AB33)                 ;B5AB1B
     %AICMD0x54($0468, $01)                                     ;B5AB25
-    %AICMD0x12_Jump($AB3A)                                     ;B5AB29
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AB29
     %AICMD0x54($0467, $01)                                     ;B5AB2C
-    %AICMD0x12_Jump($AB3A)                                     ;B5AB30
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AB30
     %AICMD0x54($0469, $01)                                     ;B5AB33
-    %AICMD0x12_Jump($AB3A)                                     ;B5AB37
+    %AICMD0x12_Jump($B5AB3A)                                   ;B5AB37
     %AICMD0x1B($02E6, $00)                                     ;B5AB3A
     %AICMD0x13($0078)                                          ;B5AB3E
     %AICMD0x1B($02E4, $00)                                     ;B5AB41
@@ -2481,7 +2481,7 @@ DATA8_B5A85D:
     %AICMD0x0D($00, $01, $80, $01)                             ;B5AB55
     %AICMD0x37()                                               ;B5AB5A
     %AICMD0x10_End()                                           ;B5AB5B
-    %AICMD0x1A($0088, $0188, $8960, $03)                       ;B5AB5C
+    %AICMD0x1A($0088, $0188, $B38960, $03)                     ;B5AB5C
     %AICMD0x0C($03)                                            ;B5AB64
     %AICMD0x13($003C)                                          ;B5AB66
     %AICMD0x1B($01E1, $00)                                     ;B5AB69
@@ -2503,43 +2503,43 @@ DATA8_B5A85D:
     %AICMD0x0D($00, $01, $40, $01)                             ;B5ABA2
     %AICMD0x37()                                               ;B5ABA7
     %AICMD0x10_End()                                           ;B5ABA8
-    %AICMD0x1A($0088, $0118, $8438, $03)                       ;B5ABA9
+    %AICMD0x1A($0088, $0118, $B38438, $03)                     ;B5ABA9
     %AICMD0x0C($03)                                            ;B5ABB1
     %AICMD0x1B($02DD, $00)                                     ;B5ABB3
     %AICMD0x13($003C)                                          ;B5ABB7
     %AICMD0x0B($00)                                            ;B5ABBA
     %AICMD0x46($7F1F04, $0003E8, $00270F, $ABCF)               ;B5ABBC
     %AICMD0x54($047B, $01)                                     ;B5ABC8
-    %AICMD0x12_Jump($ABD6)                                     ;B5ABCC
+    %AICMD0x12_Jump($B5ABD6)                                   ;B5ABCC
     %AICMD0x54($048E, $01)                                     ;B5ABCF
-    %AICMD0x12_Jump($ABD6)                                     ;B5ABD3
+    %AICMD0x12_Jump($B5ABD6)                                   ;B5ABD3
     %AICMD0x13($003C)                                          ;B5ABD6
     %AICMD0x1B($02DA, $00)                                     ;B5ABD9
     %AICMD0x0D($00, $01, $80, $01)                             ;B5ABDD
     %AICMD0x0B($01)                                            ;B5ABE2
     %AICMD0x37()                                               ;B5ABE4
     %AICMD0x10_End()                                           ;B5ABE5
-    %AICMD0x1A($0058, $0088, $8B64, $00)                       ;B5ABE6
+    %AICMD0x1A($0058, $0088, $B38B64, $00)                     ;B5ABE6
     %AICMD0x13($001E)                                          ;B5ABEE
-    %AICMD0x09($05, $ABFB)                                     ;B5ABF1
+    %AICMD0x09($05, $B5ABFB)                                   ;B5ABF1
     %AICMD0x13($0001)                                          ;B5ABF5
-    %AICMD0x12_Jump($ABF5)                                     ;B5ABF8
-    %AICMD0x1A($0068, $0088, $8B70, $00)                       ;B5ABFB
+    %AICMD0x12_Jump($B5ABF5)                                   ;B5ABF8
+    %AICMD0x1A($0068, $0088, $B38B70, $00)                     ;B5ABFB
     %AICMD0x13($001E)                                          ;B5AC03
-    %AICMD0x09($06, $AC10)                                     ;B5AC06
+    %AICMD0x09($06, $B5AC10)                                   ;B5AC06
     %AICMD0x13($0001)                                          ;B5AC0A
-    %AICMD0x12_Jump($AC0A)                                     ;B5AC0D
-    %AICMD0x1A($0078, $0088, $8B7C, $00)                       ;B5AC10
+    %AICMD0x12_Jump($B5AC0A)                                   ;B5AC0D
+    %AICMD0x1A($0078, $0088, $B38B7C, $00)                     ;B5AC10
     %AICMD0x13($001E)                                          ;B5AC18
-    %AICMD0x09($07, $AC25)                                     ;B5AC1B
+    %AICMD0x09($07, $B5AC25)                                   ;B5AC1B
     %AICMD0x13($0001)                                          ;B5AC1F
-    %AICMD0x12_Jump($AC1F)                                     ;B5AC22
-    %AICMD0x1A($008A, $0088, $8B88, $00)                       ;B5AC25
+    %AICMD0x12_Jump($B5AC1F)                                   ;B5AC22
+    %AICMD0x1A($008A, $0088, $B38B88, $00)                     ;B5AC25
     %AICMD0x13($003C)                                          ;B5AC2D
-    %AICMD0x09($08, $AC3A)                                     ;B5AC30
+    %AICMD0x09($08, $B5AC3A)                                   ;B5AC30
     %AICMD0x13($0001)                                          ;B5AC34
-    %AICMD0x12_Jump($AC34)                                     ;B5AC37
-    %AICMD0x1A($00E6, $0060, $8B94, $00)                       ;B5AC3A
+    %AICMD0x12_Jump($B5AC34)                                   ;B5AC37
+    %AICMD0x1A($00E6, $0060, $B38B94, $00)                     ;B5AC3A
     %AICMD0x13($0008)                                          ;B5AC42
     %AICMD0x0D($FE, $01, $10, $02)                             ;B5AC45
     %AICMD0x0D($FF, $01, $10, $01)                             ;B5AC4A
@@ -2549,7 +2549,7 @@ DATA8_B5A85D:
     %AICMD0x0D($FE, $01, $08, $02)                             ;B5AC5E
     %AICMD0x0D($FF, $01, $08, $01)                             ;B5AC63
     %AICMD0x13($0001)                                          ;B5AC68
-    %AICMD0x12_Jump($AC68)                                     ;B5AC6B
+    %AICMD0x12_Jump($B5AC68)                                   ;B5AC6B
 
 pScripting_B5AC6E:
     dw DATA8_B5ACAE                                            ;B5AC6E|        |B5ACAE;
@@ -3309,7 +3309,7 @@ DATA8_B5B501:
     %AICMD0x05_SetPosition($0088, $0158)                       ;B5B6A8
     %AICMD0x08()                                               ;B5B6AD
     %AICMD0x07_SetPlayerDirection($00)                         ;B5B6AE
-    %AICMD0x09($01, $B7DC)                                     ;B5B6B0
+    %AICMD0x09($01, $B5B7DC)                                   ;B5B6B0
     %AICMD0x47($7F1F19, $01)                                   ;B5B6B4
     %AICMD0x06_SetDestination($01)                             ;B5B6B9
     %AICMD0x38()                                               ;B5B6BB
@@ -3407,7 +3407,7 @@ DATA8_B5B501:
     %AICMD0x39($01, $0010)                                     ;B5B7D2
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5B7D6
     %AICMD0x10_End()                                           ;B5B7DB
-    %AICMD0x1A($0168, $01C8, $812C, $03)                       ;B5B7DC
+    %AICMD0x1A($0168, $01C8, $B3812C, $03)                     ;B5B7DC
     %AICMD0x13($00F0)                                          ;B5B7E4
     %AICMD0x13($00F0)                                          ;B5B7E7
     %AICMD0x13($00F0)                                          ;B5B7EA
@@ -3431,7 +3431,7 @@ DATA8_B5B501:
     %AICMD0x13($003C)                                          ;B5B827
     %AICMD0x1B($0200, $00)                                     ;B5B82A
     %AICMD0x13($0001)                                          ;B5B82E
-    %AICMD0x12_Jump($B82E)                                     ;B5B831
+    %AICMD0x12_Jump($B5B82E)                                   ;B5B831
 
 DATA8_B5B834:
  
@@ -4186,8 +4186,8 @@ DATA8_B5C4BA:
     %AICMD0x05_SetPosition($0080, $0168)                       ;B5C4CF
     %AICMD0x08()                                               ;B5C4D4
     %AICMD0x07_SetPlayerDirection($01)                         ;B5C4D5
-    %AICMD0x09($01, $C567)                                     ;B5C4D7
-    %AICMD0x09($02, $C59D)                                     ;B5C4DB
+    %AICMD0x09($01, $B5C567)                                   ;B5C4D7
+    %AICMD0x09($02, $B5C59D)                                   ;B5C4DB
     %AICMD0x47($7F1F19, $02)                                   ;B5C4DF
     %AICMD0x06_SetDestination($27)                             ;B5C4E4
     %AICMD0x38()                                               ;B5C4E6
@@ -4233,7 +4233,7 @@ DATA8_B5C4BA:
     %AICMD0x39($00, $0028)                                     ;B5C55D
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5C561
     %AICMD0x10_End()                                           ;B5C566
-    %AICMD0x1A($00A8, $0118, $80FC, $00)                       ;B5C567
+    %AICMD0x1A($00A8, $0118, $B380FC, $00)                     ;B5C567
     %AICMD0x13($004B)                                          ;B5C56F
     %AICMD0x1B($018B, $00)                                     ;B5C572
     %AICMD0x0D($FF, $00, $10, $01)                             ;B5C576
@@ -4246,8 +4246,8 @@ DATA8_B5C4BA:
     %AICMD0x13($003C)                                          ;B5C590
     %AICMD0x1B($018C, $00)                                     ;B5C593
     %AICMD0x13($0001)                                          ;B5C597
-    %AICMD0x12_Jump($C597)                                     ;B5C59A
-    %AICMD0x1A($00A8, $00F8, $80FC, $00)                       ;B5C59D
+    %AICMD0x12_Jump($B5C597)                                   ;B5C59A
+    %AICMD0x1A($00A8, $00F8, $B380FC, $00)                     ;B5C59D
     %AICMD0x13($00D1)                                          ;B5C5A5
     %AICMD0x1B($018B, $00)                                     ;B5C5A8
     %AICMD0x0D($FF, $00, $10, $01)                             ;B5C5AC
@@ -4260,7 +4260,7 @@ DATA8_B5C4BA:
     %AICMD0x13($003C)                                          ;B5C5C6
     %AICMD0x1B($018C, $00)                                     ;B5C5C9
     %AICMD0x13($0001)                                          ;B5C5CD
-    %AICMD0x12_Jump($C5CD)                                     ;B5C5D0
+    %AICMD0x12_Jump($B5C5CD)                                   ;B5C5D0
 
 DATA8_B5C5D3:
  
@@ -4335,8 +4335,8 @@ DATA8_B5C679:
     %AICMD0x05_SetPosition($0080, $0168)                       ;B5C689
     %AICMD0x08()                                               ;B5C68E
     %AICMD0x07_SetPlayerDirection($01)                         ;B5C68F
-    %AICMD0x09($01, $C713)                                     ;B5C691
-    %AICMD0x09($02, $C769)                                     ;B5C695
+    %AICMD0x09($01, $B5C713)                                   ;B5C691
+    %AICMD0x09($02, $B5C769)                                   ;B5C695
     %AICMD0x47($7F1F19, $02)                                   ;B5C699
     %AICMD0x06_SetDestination($27)                             ;B5C69E
     %AICMD0x38()                                               ;B5C6A0
@@ -4377,7 +4377,7 @@ DATA8_B5C679:
     %AICMD0x39($00, $0010)                                     ;B5C709
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5C70D
     %AICMD0x10_End()                                           ;B5C712
-    %AICMD0x1A($00A8, $0118, $80FC, $00)                       ;B5C713
+    %AICMD0x1A($00A8, $0118, $B380FC, $00)                     ;B5C713
     %AICMD0x13($01E0)                                          ;B5C71B
     %AICMD0x1B($018B, $01)                                     ;B5C71E
     %AICMD0x0D($01, $00, $10, $01)                             ;B5C722
@@ -4399,7 +4399,7 @@ DATA8_B5C679:
     %AICMD0x0D($00, $01, $24, $01)                             ;B5C762
     %AICMD0x37()                                               ;B5C767
     %AICMD0x10_End()                                           ;B5C768
-    %AICMD0x1A($00A8, $00F8, $80FC, $00)                       ;B5C769
+    %AICMD0x1A($00A8, $00F8, $B380FC, $00)                     ;B5C769
     %AICMD0x13($01E0)                                          ;B5C771
     %AICMD0x1B($019F, $00)                                     ;B5C774
     %AICMD0x13($00F0)                                          ;B5C778
@@ -4409,7 +4409,7 @@ DATA8_B5C679:
     %AICMD0x13($00F0)                                          ;B5C786
     %AICMD0x1B($019E, $00)                                     ;B5C789
     %AICMD0x13($0001)                                          ;B5C78D
-    %AICMD0x12_Jump($C78D)                                     ;B5C790
+    %AICMD0x12_Jump($B5C78D)                                   ;B5C790
 
 DATA8_B5C793:
  
@@ -4420,7 +4420,7 @@ DATA8_B5C793:
     %AICMD0x05_SetPosition($0148, $0168)                       ;B5C79E
     %AICMD0x08()                                               ;B5C7A3
     %AICMD0x07_SetPlayerDirection($00)                         ;B5C7A4
-    %AICMD0x09($01, $C7C4)                                     ;B5C7A6
+    %AICMD0x09($01, $B5C7C4)                                   ;B5C7A6
     %AICMD0x47($7F1F19, $02)                                   ;B5C7AA
     %AICMD0x06_SetDestination($02)                             ;B5C7AF
     %AICMD0x38()                                               ;B5C7B1
@@ -4429,12 +4429,12 @@ DATA8_B5C793:
     %AICMD0x39($01, $0020)                                     ;B5C7BA
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5C7BE
     %AICMD0x10_End()                                           ;B5C7C3
-    %AICMD0x1A($0148, $0178, $8108, $00)                       ;B5C7C4
+    %AICMD0x1A($0148, $0178, $B38108, $00)                     ;B5C7C4
     %AICMD0x13($0002)                                          ;B5C7CC
     %AICMD0x0D($00, $01, $20, $01)                             ;B5C7CF
     %AICMD0x1B($019E, $00)                                     ;B5C7D4
     %AICMD0x13($0001)                                          ;B5C7D8
-    %AICMD0x12_Jump($C7D8)                                     ;B5C7DB
+    %AICMD0x12_Jump($B5C7D8)                                   ;B5C7DB
 
 DATA8_B5C7DE:
  
@@ -4447,8 +4447,8 @@ DATA8_B5C7DE:
     %AICMD0x07_SetPlayerDirection($01)                         ;B5C7EF
     %AICMD0x23_OrWithIndexedValue($7F1F45, $04)                ;B5C7F1
     %AICMD0x23_OrWithIndexedValue($7F1F45, $05)                ;B5C7F6
-    %AICMD0x09($01, $C885)                                     ;B5C7FB
-    %AICMD0x09($02, $C89A)                                     ;B5C7FF
+    %AICMD0x09($01, $B5C885)                                   ;B5C7FB
+    %AICMD0x09($02, $B5C89A)                                   ;B5C7FF
     %AICMD0x47($7F1F19, $02)                                   ;B5C803
     %AICMD0x06_SetDestination($28)                             ;B5C808
     %AICMD0x38()                                               ;B5C80A
@@ -4490,14 +4490,14 @@ DATA8_B5C7DE:
     %AICMD0x39($00, $0030)                                     ;B5C87B
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5C87F
     %AICMD0x10_End()                                           ;B5C884
-    %AICMD0x1A($00A8, $0078, $8144, $00)                       ;B5C885
-    %AICMD0x22($10, $10, $01, $8144, $08)                      ;B5C88D
+    %AICMD0x1A($00A8, $0078, $B38144, $00)                     ;B5C885
+    %AICMD0x22($10, $10, $01, $B38144, $08)                    ;B5C88D
     %AICMD0x13($0001)                                          ;B5C894
-    %AICMD0x12_Jump($C894)                                     ;B5C897
-    %AICMD0x1A($00C8, $0068, $8144, $00)                       ;B5C89A
-    %AICMD0x22($10, $10, $01, $8144, $08)                      ;B5C8A2
+    %AICMD0x12_Jump($B5C894)                                   ;B5C897
+    %AICMD0x1A($00C8, $0068, $B38144, $00)                     ;B5C89A
+    %AICMD0x22($10, $10, $01, $B38144, $08)                    ;B5C8A2
     %AICMD0x13($0001)                                          ;B5C8A9
-    %AICMD0x12_Jump($C8A9)                                     ;B5C8AC
+    %AICMD0x12_Jump($B5C8A9)                                   ;B5C8AC
 
 DATA8_B5C8AF:
  
@@ -4508,7 +4508,7 @@ DATA8_B5C8AF:
     %AICMD0x05_SetPosition($01C8, $0168)                       ;B5C8BA
     %AICMD0x08()                                               ;B5C8BF
     %AICMD0x07_SetPlayerDirection($00)                         ;B5C8C0
-    %AICMD0x09($01, $C8E0)                                     ;B5C8C2
+    %AICMD0x09($01, $B5C8E0)                                   ;B5C8C2
     %AICMD0x47($7F1F19, $02)                                   ;B5C8C6
     %AICMD0x06_SetDestination($02)                             ;B5C8CB
     %AICMD0x38()                                               ;B5C8CD
@@ -4517,9 +4517,9 @@ DATA8_B5C8AF:
     %AICMD0x39($01, $0028)                                     ;B5C8D6
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5C8DA
     %AICMD0x10_End()                                           ;B5C8DF
-    %AICMD0x1A($0148, $0198, $80FC, $00)                       ;B5C8E0
+    %AICMD0x1A($0148, $0198, $B380FC, $00)                     ;B5C8E0
     %AICMD0x13($0001)                                          ;B5C8E8
-    %AICMD0x12_Jump($C8E8)                                     ;B5C8EB
+    %AICMD0x12_Jump($B5C8E8)                                   ;B5C8EB
 
 DATA8_B5C8EE:
  
@@ -4530,18 +4530,18 @@ DATA8_B5C8EE:
     %AICMD0x05_SetPosition($0108, $0138)                       ;B5C8F9
     %AICMD0x08()                                               ;B5C8FE
     %AICMD0x07_SetPlayerDirection($01)                         ;B5C8FF
-    %AICMD0x09($01, $C958)                                     ;B5C901
-    %AICMD0x09($03, $C966)                                     ;B5C905
-    %AICMD0x09($06, $C974)                                     ;B5C909
-    %AICMD0x09($07, $C982)                                     ;B5C90D
-    %AICMD0x09($0B, $C990)                                     ;B5C911
-    %AICMD0x09($0D, $C99E)                                     ;B5C915
-    %AICMD0x09($0E, $C9AC)                                     ;B5C919
-    %AICMD0x09($0F, $C9BA)                                     ;B5C91D
-    %AICMD0x09($10, $C9C8)                                     ;B5C921
-    %AICMD0x09($11, $C9D6)                                     ;B5C925
-    %AICMD0x09($12, $C9E4)                                     ;B5C929
-    %AICMD0x09($13, $C9F2)                                     ;B5C92D
+    %AICMD0x09($01, $B5C958)                                   ;B5C901
+    %AICMD0x09($03, $B5C966)                                   ;B5C905
+    %AICMD0x09($06, $B5C974)                                   ;B5C909
+    %AICMD0x09($07, $B5C982)                                   ;B5C90D
+    %AICMD0x09($0B, $B5C990)                                   ;B5C911
+    %AICMD0x09($0D, $B5C99E)                                   ;B5C915
+    %AICMD0x09($0E, $B5C9AC)                                   ;B5C919
+    %AICMD0x09($0F, $B5C9BA)                                   ;B5C91D
+    %AICMD0x09($10, $B5C9C8)                                   ;B5C921
+    %AICMD0x09($11, $B5C9D6)                                   ;B5C925
+    %AICMD0x09($12, $B5C9E4)                                   ;B5C929
+    %AICMD0x09($13, $B5C9F2)                                   ;B5C92D
     %AICMD0x47($7F1F19, $02)                                   ;B5C931
     %AICMD0x3B($01)                                            ;B5C936
     %AICMD0x06_SetDestination($09)                             ;B5C938
@@ -4555,42 +4555,42 @@ DATA8_B5C8EE:
     %AICMD0x3D($3C)                                            ;B5C950
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5C952
     %AICMD0x10_End()                                           ;B5C957
-    %AICMD0x1A($0198, $00C8, $83FC, $00)                       ;B5C958
+    %AICMD0x1A($0198, $00C8, $B383FC, $00)                     ;B5C958
     %AICMD0x13($0001)                                          ;B5C960
-    %AICMD0x12_Jump($C960)                                     ;B5C963
-    %AICMD0x1A($0078, $00F8, $83D8, $02)                       ;B5C966
+    %AICMD0x12_Jump($B5C960)                                   ;B5C963
+    %AICMD0x1A($0078, $00F8, $B383D8, $02)                     ;B5C966
     %AICMD0x13($0001)                                          ;B5C96E
-    %AICMD0x12_Jump($C96E)                                     ;B5C971
-    %AICMD0x1A($0168, $0108, $8420, $01)                       ;B5C974
+    %AICMD0x12_Jump($B5C96E)                                   ;B5C971
+    %AICMD0x1A($0168, $0108, $B38420, $01)                     ;B5C974
     %AICMD0x13($0001)                                          ;B5C97C
-    %AICMD0x12_Jump($C97C)                                     ;B5C97F
-    %AICMD0x1A($0148, $0158, $8384, $01)                       ;B5C982
+    %AICMD0x12_Jump($B5C97C)                                   ;B5C97F
+    %AICMD0x1A($0148, $0158, $B38384, $01)                     ;B5C982
     %AICMD0x13($0001)                                          ;B5C98A
-    %AICMD0x12_Jump($C98A)                                     ;B5C98D
-    %AICMD0x1A($0058, $00E8, $8300, $02)                       ;B5C990
+    %AICMD0x12_Jump($B5C98A)                                   ;B5C98D
+    %AICMD0x1A($0058, $00E8, $B38300, $02)                     ;B5C990
     %AICMD0x13($0001)                                          ;B5C998
-    %AICMD0x12_Jump($C998)                                     ;B5C99B
-    %AICMD0x1A($00C8, $0158, $8168, $02)                       ;B5C99E
+    %AICMD0x12_Jump($B5C998)                                   ;B5C99B
+    %AICMD0x1A($00C8, $0158, $B38168, $02)                     ;B5C99E
     %AICMD0x13($0001)                                          ;B5C9A6
-    %AICMD0x12_Jump($C9A6)                                     ;B5C9A9
-    %AICMD0x1A($0098, $0068, $8198, $00)                       ;B5C9AC
+    %AICMD0x12_Jump($B5C9A6)                                   ;B5C9A9
+    %AICMD0x1A($0098, $0068, $B38198, $00)                     ;B5C9AC
     %AICMD0x13($0001)                                          ;B5C9B4
-    %AICMD0x12_Jump($C9B4)                                     ;B5C9B7
-    %AICMD0x1A($0148, $00A8, $81C8, $00)                       ;B5C9BA
+    %AICMD0x12_Jump($B5C9B4)                                   ;B5C9B7
+    %AICMD0x1A($0148, $00A8, $B381C8, $00)                     ;B5C9BA
     %AICMD0x13($0001)                                          ;B5C9C2
-    %AICMD0x12_Jump($C9C2)                                     ;B5C9C5
-    %AICMD0x1A($0108, $0098, $81E0, $00)                       ;B5C9C8
+    %AICMD0x12_Jump($B5C9C2)                                   ;B5C9C5
+    %AICMD0x1A($0108, $0098, $B381E0, $00)                     ;B5C9C8
     %AICMD0x13($0001)                                          ;B5C9D0
-    %AICMD0x12_Jump($C9D0)                                     ;B5C9D3
-    %AICMD0x1A($00B8, $0098, $8204, $00)                       ;B5C9D6
+    %AICMD0x12_Jump($B5C9D0)                                   ;B5C9D3
+    %AICMD0x1A($00B8, $0098, $B38204, $00)                     ;B5C9D6
     %AICMD0x13($0001)                                          ;B5C9DE
-    %AICMD0x12_Jump($C9DE)                                     ;B5C9E1
-    %AICMD0x1A($0108, $00B8, $8AB0, $00)                       ;B5C9E4
+    %AICMD0x12_Jump($B5C9DE)                                   ;B5C9E1
+    %AICMD0x1A($0108, $00B8, $B38AB0, $00)                     ;B5C9E4
     %AICMD0x13($0001)                                          ;B5C9EC
-    %AICMD0x12_Jump($C9EC)                                     ;B5C9EF
-    %AICMD0x1A($00B8, $0108, $8348, $00)                       ;B5C9F2
+    %AICMD0x12_Jump($B5C9EC)                                   ;B5C9EF
+    %AICMD0x1A($00B8, $0108, $B38348, $00)                     ;B5C9F2
     %AICMD0x13($0001)                                          ;B5C9FA
-    %AICMD0x12_Jump($C9FA)                                     ;B5C9FD
+    %AICMD0x12_Jump($B5C9FA)                                   ;B5C9FD
 
 DATA8_B5CA00:
  
@@ -4624,8 +4624,8 @@ DATA8_B5CA3D:
     %AICMD0x08()                                               ;B5CA4D
     %AICMD0x07_SetPlayerDirection($00)                         ;B5CA4E
     %AICMD0x3B($06)                                            ;B5CA50
-    %AICMD0x09($01, $CA76)                                     ;B5CA52
-    %AICMD0x09($02, $CA94)                                     ;B5CA56
+    %AICMD0x09($01, $B5CA76)                                   ;B5CA52
+    %AICMD0x09($02, $B5CA94)                                   ;B5CA56
     %AICMD0x47($7F1F19, $03)                                   ;B5CA5A
     %AICMD0x06_SetDestination($07)                             ;B5CA5F
     %AICMD0x38()                                               ;B5CA61
@@ -4636,16 +4636,16 @@ DATA8_B5CA3D:
     %AICMD0x3D($3C)                                            ;B5CA6E
     %AICMD0x23_OrWithIndexedValue($7F1F60, $07)                ;B5CA70
     %AICMD0x10_End()                                           ;B5CA75
-    %AICMD0x1A($0178, $0378, $8198, $00)                       ;B5CA76
+    %AICMD0x1A($0178, $0378, $B38198, $00)                     ;B5CA76
     %AICMD0x13($006E)                                          ;B5CA7E
     %AICMD0x1B($022A, $00)                                     ;B5CA81
     %AICMD0x54($03B2, $00)                                     ;B5CA85
     %AICMD0x47($80019A, $04)                                   ;B5CA89
     %AICMD0x13($0001)                                          ;B5CA8E
-    %AICMD0x12_Jump($CA8E)                                     ;B5CA91
-    %AICMD0x1A($01A8, $0328, $87C8, $00)                       ;B5CA94
+    %AICMD0x12_Jump($B5CA8E)                                   ;B5CA91
+    %AICMD0x1A($01A8, $0328, $B387C8, $00)                     ;B5CA94
     %AICMD0x13($0001)                                          ;B5CA9C
-    %AICMD0x12_Jump($CA9C)                                     ;B5CA9F
+    %AICMD0x12_Jump($B5CA9C)                                   ;B5CA9F
 
 DATA8_B5CAA2:
  
@@ -4704,7 +4704,7 @@ DATA8_B5CB13:
     %AICMD0x05_SetPosition($0018, $01C8)                       ;B5CB1E
     %AICMD0x08()                                               ;B5CB23
     %AICMD0x07_SetPlayerDirection($02)                         ;B5CB24
-    %AICMD0x09($01, $CB4B)                                     ;B5CB26
+    %AICMD0x09($01, $B5CB4B)                                   ;B5CB26
     %AICMD0x47($7F1F19, $00)                                   ;B5CB2A
     %AICMD0x06_SetDestination($00)                             ;B5CB2F
     %AICMD0x38()                                               ;B5CB31
@@ -4715,13 +4715,13 @@ DATA8_B5CB13:
     %AICMD0x13($00F0)                                          ;B5CB42
     %AICMD0x23_OrWithIndexedValue($7F1F5C, $02)                ;B5CB45
     %AICMD0x10_End()                                           ;B5CB4A
-    %AICMD0x1A($00D8, $0178, $8114, $03)                       ;B5CB4B
+    %AICMD0x1A($00D8, $0178, $B38114, $03)                     ;B5CB4B
     %AICMD0x13($00A0)                                          ;B5CB53
     %AICMD0x1B($01EC, $00)                                     ;B5CB56
     %AICMD0x0D($FF, $00, $44, $01)                             ;B5CB5A
     %AICMD0x1B($01E8, $00)                                     ;B5CB5F
     %AICMD0x13($0001)                                          ;B5CB63
-    %AICMD0x12_Jump($CB63)                                     ;B5CB66
+    %AICMD0x12_Jump($B5CB63)                                   ;B5CB66
 
 DATA8_B5CB69:
  
