@@ -21,183 +21,530 @@ pScripting_B48000:
     dw pScripting_B487B8                                       ;B4801E|        |B487B8;
  
 DATA8_B48020:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$23,$60,$1F,$7F,$00         ;B48020|        |      ;
-    db $08,$38,$01,$24,$74,$13,$B4,$00,$1D,$B6,$02,$00         ;B4802C|        |      ;
-    db $20,$00,$4D,$80,$20,$01,$55,$80,$20,$02,$5D,$80         ;B48038|        |      ;
-    db $20,$03,$65,$80,$20,$04,$6D,$80,$10,$23,$74,$1F         ;B48044|        |      ;
-    db $7F,$00,$3D,$0A,$10,$23,$74,$1F,$7F,$01,$3D,$1B         ;B48050|        |      ;
-    db $10,$23,$74,$1F,$7F,$02,$3D,$1E,$10,$23,$74,$1F         ;B4805C|        |      ;
-    db $7F,$03,$3D,$39,$10,$23,$74,$1F,$7F,$04,$3D,$14         ;B48068|        |      ;
-    db $10                                                     ;B48074|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $00)
+    %AICMD0x08()
+    %AICMD0x38()
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x24($74)
+    %AICMD0x13($00B4)
+    %AICMD0x1D($02B6, $00)
+    %AICMD0x20($00, $804D)
+    %AICMD0x20($01, $8055)
+    %AICMD0x20($02, $805D)
+    %AICMD0x20($03, $8065)
+    %AICMD0x20($04, $806D)
+    %AICMD0x10_End()
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $00)
+    %AICMD0x3D($0A)
+    %AICMD0x10_End()
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $01)
+    %AICMD0x3D($1B)
+    %AICMD0x10_End()
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $02)
+    %AICMD0x3D($1E)
+    %AICMD0x10_End()
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $03)
+    %AICMD0x3D($39)
+    %AICMD0x10_End()
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $04)
+    %AICMD0x3D($14)
+    %AICMD0x10_End()
+
 DATA8_B48075:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$23,$5E,$1F,$7F,$0F         ;B48075|        |      ;
-    db $00,$0E,$B4,$03,$11,$05,$08,$01,$38,$01,$07,$01         ;B48081|        |      ;
-    db $09,$01,$BC,$80,$09,$02,$D3,$80,$09,$03,$EA,$80         ;B4808D|        |      ;
-    db $09,$05,$28,$81,$09,$06,$89,$81,$38,$0C,$00,$0C         ;B48099|        |      ;
-    db $01,$0C,$02,$0C,$03,$0C,$04,$13,$3C,$00,$28,$5E         ;B480A5|        |      ;
-    db $1F,$7F,$0F,$41,$25,$1F,$7F,$1E,$00,$3C,$10,$1A         ;B480B1|        |      ;
-    db $08,$01,$98,$00,$00,$83,$00,$1F,$CA,$80,$12,$C4         ;B480BD|        |      ;
-    db $80,$1C,$B7,$02,$00,$0B,$00,$12,$C4,$80,$1A,$B8         ;B480C9|        |      ;
-    db $00,$A8,$00,$D8,$83,$01,$1F,$E1,$80,$12,$DB,$80         ;B480D5|        |      ;
-    db $1C,$B8,$02,$00,$0B,$01,$12,$DB,$80,$1A,$68,$01         ;B480E1|        |      ;
-    db $D8,$00,$F4,$82,$03,$1F,$FE,$80,$12,$F2,$80,$1F         ;B480ED|        |      ;
-    db $1F,$81,$12,$F8,$80,$1D,$BA,$02,$00,$20,$00,$0D         ;B480F9|        |      ;
-    db $81,$20,$01,$16,$81,$12,$F2,$80,$1C,$BB,$02,$00         ;B48105|        |      ;
-    db $0B,$02,$12,$F8,$80,$1C,$BC,$02,$00,$0B,$02,$12         ;B48111|        |      ;
-    db $F8,$80,$1C,$DC,$02,$00,$0B,$02,$12,$F8,$80,$1A         ;B4811D|        |      ;
-    db $48,$01,$28,$01,$30,$83,$03,$22,$20,$18,$01,$3C         ;B48129|        |      ;
-    db $83,$0C,$1F,$3D,$81,$12,$37,$81,$1C,$B9,$02,$00         ;B48135|        |      ;
-    db $0B,$03,$12,$37,$81,$14,$66,$1F,$7F,$00,$65,$81         ;B48141|        |      ;
-    db $14,$66,$1F,$7F,$01,$6E,$81,$14,$66,$1F,$7F,$02         ;B4814D|        |      ;
-    db $77,$81,$14,$66,$1F,$7F,$04,$80,$81,$12,$93,$81         ;B48159|        |      ;
-    db $41,$1F,$1F,$7F,$E2,$FF,$12,$93,$81,$41,$21,$1F         ;B48165|        |      ;
-    db $7F,$E2,$FF,$12,$93,$81,$41,$23,$1F,$7F,$E2,$FF         ;B48171|        |      ;
-    db $12,$93,$81,$41,$27,$1F,$7F,$E2,$FF,$12,$93,$81         ;B4817D|        |      ;
-    db $14,$66,$1F,$7F,$03,$A5,$81,$12,$46,$81,$1A,$F8         ;B48189|        |      ;
-    db $00,$08,$01,$E0,$81,$00,$13,$01,$00,$1B,$42,$02         ;B48195|        |      ;
-    db $00,$12,$B4,$81,$1A,$28,$01,$98,$00,$5C,$84,$00         ;B481A1|        |      ;
-    db $13,$01,$00,$1B,$E9,$02,$00,$0C,$00,$0C,$01,$0C         ;B481AD|        |      ;
-    db $02,$0C,$03,$1F,$C2,$81,$12,$BC,$81,$14,$66,$1F         ;B481B9|        |      ;
-    db $7F,$03,$05,$82,$45,$25,$1F,$7F,$00,$00,$C8,$00         ;B481C5|        |      ;
-    db $EA,$81,$45,$25,$1F,$7F,$C9,$00,$2C,$01,$F3,$81         ;B481D1|        |      ;
-    db $45,$25,$1F,$7F,$2D,$01,$E7,$03,$FC,$81,$12,$BC         ;B481DD|        |      ;
-    db $81,$1C,$BD,$02,$00,$0B,$04,$12,$BC,$81,$1C,$BE         ;B481E9|        |      ;
-    db $02,$00,$0B,$04,$12,$BC,$81,$1C,$33,$04,$00,$0B         ;B481F5|        |      ;
-    db $04,$12,$BC,$81,$1C,$34,$04,$00,$0B,$04,$12,$BC         ;B48201|        |      ;
-    db $81                                                     ;B4820D|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $0F)
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x03_SetHour($11)
+    %AICMD0x05_SetPosition($0108, $0138)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $80BC)
+    %AICMD0x09($02, $80D3)
+    %AICMD0x09($03, $80EA)
+    %AICMD0x09($05, $8128)
+    %AICMD0x09($06, $8189)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x0C($01)
+    %AICMD0x0C($02)
+    %AICMD0x0C($03)
+    %AICMD0x0C($04)
+    %AICMD0x13($003C)
+    %AICMD0x28($1F5E, $7F, $0F)
+    %AICMD0x41_ModifyVariable($7F1F25, $001E)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0108, $0098, $8300, $00)
+    %AICMD0x1F($80CA)
+    %AICMD0x12_Jump($80C4)
+    %AICMD0x1C($02B7, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($80C4)
+    %AICMD0x1A($00B8, $00A8, $83D8, $01)
+    %AICMD0x1F($80E1)
+    %AICMD0x12_Jump($80DB)
+    %AICMD0x1C($02B8, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($80DB)
+    %AICMD0x1A($0168, $00D8, $82F4, $03)
+    %AICMD0x1F($80FE)
+    %AICMD0x12_Jump($80F2)
+    %AICMD0x1F($811F)
+    %AICMD0x12_Jump($80F8)
+    %AICMD0x1D($02BA, $00)
+    %AICMD0x20($00, $810D)
+    %AICMD0x20($01, $8116)
+    %AICMD0x12_Jump($80F2)
+    %AICMD0x1C($02BB, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($80F8)
+    %AICMD0x1C($02BC, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($80F8)
+    %AICMD0x1C($02DC, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($80F8)
+    %AICMD0x1A($0148, $0128, $8330, $03)
+    %AICMD0x22($20, $18, $01, $833C, $0C)
+    %AICMD0x1F($813D)
+    %AICMD0x12_Jump($8137)
+    %AICMD0x1C($02B9, $00)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($8137)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $8165)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $816E)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $8177)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $8180)
+    %AICMD0x12_Jump($8193)
+    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)
+    %AICMD0x12_Jump($8193)
+    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)
+    %AICMD0x12_Jump($8193)
+    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)
+    %AICMD0x12_Jump($8193)
+    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)
+    %AICMD0x12_Jump($8193)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $81A5)
+    %AICMD0x12_Jump($8146)
+    %AICMD0x1A($00F8, $0108, $81E0, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1B($0242, $00)
+    %AICMD0x12_Jump($81B4)
+    %AICMD0x1A($0128, $0098, $845C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1B($02E9, $00)
+    %AICMD0x0C($00)
+    %AICMD0x0C($01)
+    %AICMD0x0C($02)
+    %AICMD0x0C($03)
+    %AICMD0x1F($81C2)
+    %AICMD0x12_Jump($81BC)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $8205)
+    %AICMD0x45($7F1F25, $0000, $00C8, $81EA)
+    %AICMD0x45($7F1F25, $00C9, $012C, $81F3)
+    %AICMD0x45($7F1F25, $012D, $03E7, $81FC)
+    %AICMD0x12_Jump($81BC)
+    %AICMD0x1C($02BD, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($81BC)
+    %AICMD0x1C($02BE, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($81BC)
+    %AICMD0x1C($0433, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($81BC)
+    %AICMD0x1C($0434, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($81BC)
+
 DATA8_B4820E:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$09,$B4,$03,$07         ;B4820E|        |      ;
-    db $05,$80,$00,$B8,$01,$07,$01,$09,$01,$61,$82,$09         ;B4821A|        |      ;
-    db $02,$78,$82,$09,$03,$93,$82,$09,$04,$AE,$82,$09         ;B48226|        |      ;
-    db $05,$C5,$82,$09,$06,$E0,$82,$09,$07,$3E,$83,$38         ;B48232|        |      ;
-    db $0C,$00,$0C,$01,$0C,$02,$0C,$03,$0C,$04,$0C,$05         ;B4823E|        |      ;
-    db $0B,$07,$0C,$06,$39,$02,$10,$00,$07,$03,$0B,$08         ;B4824A|        |      ;
-    db $13,$B4,$00,$41,$1F,$1F,$7F,$1E,$00,$3C,$10,$1A         ;B48256|        |      ;
-    db $80,$00,$90,$00,$54,$83,$00,$1F,$6F,$82,$12,$69         ;B48262|        |      ;
-    db $82,$1C,$BF,$02,$00,$0B,$00,$12,$69,$82,$1A,$38         ;B4826E|        |      ;
-    db $00,$18,$01,$20,$84,$01,$1F,$86,$82,$12,$80,$82         ;B4827A|        |      ;
-    db $1C,$C1,$02,$00,$1B,$D4,$02,$00,$0B,$01,$12,$80         ;B48286|        |      ;
-    db $82,$1A,$50,$00,$18,$01,$84,$83,$01,$1F,$A1,$82         ;B48292|        |      ;
-    db $12,$9B,$82,$1B,$B3,$02,$00,$1C,$C2,$02,$00,$0B         ;B4829E|        |      ;
-    db $02,$12,$9B,$82,$1A,$80,$00,$C8,$01,$94,$82,$01         ;B482AA|        |      ;
-    db $1F,$BC,$82,$12,$B6,$82,$1C,$7A,$03,$00,$0B,$03         ;B482B6|        |      ;
-    db $12,$B6,$82,$1A,$B8,$00,$58,$01,$AC,$82,$01,$1F         ;B482C2|        |      ;
-    db $D3,$82,$12,$CD,$82,$1B,$78,$02,$00,$1C,$5F,$03         ;B482CE|        |      ;
-    db $00,$0B,$04,$12,$CD,$82,$1A,$C8,$00,$18,$01,$7C         ;B482DA|        |      ;
-    db $82,$01,$1F,$EE,$82,$12,$E8,$82,$1C,$C0,$02,$00         ;B482E6|        |      ;
-    db $1B,$6B,$02,$00,$0B,$05,$12,$E8,$82,$14,$66,$1F         ;B482F2|        |      ;
-    db $7F,$01,$1A,$83,$14,$66,$1F,$7F,$02,$23,$83,$14         ;B482FE|        |      ;
-    db $66,$1F,$7F,$03,$2C,$83,$14,$66,$1F,$7F,$04,$35         ;B4830A|        |      ;
-    db $83,$12,$48,$83,$41,$21,$1F,$7F,$E2,$FF,$12,$48         ;B48316|        |      ;
-    db $83,$41,$23,$1F,$7F,$E2,$FF,$12,$48,$83,$41,$25         ;B48322|        |      ;
-    db $1F,$7F,$E2,$FF,$12,$48,$83,$41,$27,$1F,$7F,$E2         ;B4832E|        |      ;
-    db $FF,$12,$48,$83,$14,$66,$1F,$7F,$00,$55,$83,$12         ;B4833A|        |      ;
-    db $FB,$82,$1A,$C1,$00,$88,$00,$80,$81,$01,$0C,$07         ;B48346|        |      ;
-    db $12,$5D,$83,$1A,$C1,$00,$88,$00,$80,$81,$01,$1F         ;B48352|        |      ;
-    db $63,$83,$12,$5D,$83,$08,$14,$66,$1F,$7F,$00,$E3         ;B4835E|        |      ;
-    db $83,$45,$1F,$1F,$7F,$00,$00,$C8,$00,$8C,$83,$45         ;B4836A|        |      ;
-    db $1F,$1F,$7F,$C9,$00,$2C,$01,$A9,$83,$45,$1F,$1F         ;B48376|        |      ;
-    db $7F,$2D,$01,$E7,$03,$C6,$83,$12,$5D,$83,$0B,$06         ;B48382|        |      ;
-    db $0C,$08,$13,$1E,$00,$1B,$23,$02,$01,$0D,$01,$00         ;B4838E|        |      ;
-    db $10,$01,$13,$3C,$00,$1C,$C3,$02,$00,$13,$B4,$00         ;B4839A|        |      ;
-    db $12,$5D,$83,$0B,$06,$0C,$08,$13,$1E,$00,$1B,$23         ;B483A6|        |      ;
-    db $02,$01,$0D,$01,$00,$10,$01,$13,$3C,$00,$1C,$C4         ;B483B2|        |      ;
-    db $02,$00,$13,$B4,$00,$12,$5D,$83,$0B,$06,$0C,$08         ;B483BE|        |      ;
-    db $13,$1E,$00,$1B,$23,$02,$01,$0D,$01,$00,$10,$01         ;B483CA|        |      ;
-    db $13,$3C,$00,$1C,$35,$04,$00,$13,$B4,$00,$12,$5D         ;B483D6|        |      ;
-    db $83,$0B,$06,$0C,$08,$13,$1E,$00,$1B,$E7,$02,$01         ;B483E2|        |      ;
-    db $0D,$01,$00,$10,$01,$13,$3C,$00,$1C,$36,$04,$00         ;B483EE|        |      ;
-    db $13,$B4,$00,$12,$5D,$83                                 ;B483FA|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($09, $B4)
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0080, $01B8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $8261)
+    %AICMD0x09($02, $8278)
+    %AICMD0x09($03, $8293)
+    %AICMD0x09($04, $82AE)
+    %AICMD0x09($05, $82C5)
+    %AICMD0x09($06, $82E0)
+    %AICMD0x09($07, $833E)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x0C($01)
+    %AICMD0x0C($02)
+    %AICMD0x0C($03)
+    %AICMD0x0C($04)
+    %AICMD0x0C($05)
+    %AICMD0x0B($07)
+    %AICMD0x0C($06)
+    %AICMD0x39($02, $0010)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($08)
+    %AICMD0x13($00B4)
+    %AICMD0x41_ModifyVariable($7F1F1F, $001E)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0080, $0090, $8354, $00)
+    %AICMD0x1F($826F)
+    %AICMD0x12_Jump($8269)
+    %AICMD0x1C($02BF, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($8269)
+    %AICMD0x1A($0038, $0118, $8420, $01)
+    %AICMD0x1F($8286)
+    %AICMD0x12_Jump($8280)
+    %AICMD0x1C($02C1, $00)
+    %AICMD0x1B($02D4, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($8280)
+    %AICMD0x1A($0050, $0118, $8384, $01)
+    %AICMD0x1F($82A1)
+    %AICMD0x12_Jump($829B)
+    %AICMD0x1B($02B3, $00)
+    %AICMD0x1C($02C2, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($829B)
+    %AICMD0x1A($0080, $01C8, $8294, $01)
+    %AICMD0x1F($82BC)
+    %AICMD0x12_Jump($82B6)
+    %AICMD0x1C($037A, $00)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($82B6)
+    %AICMD0x1A($00B8, $0158, $82AC, $01)
+    %AICMD0x1F($82D3)
+    %AICMD0x12_Jump($82CD)
+    %AICMD0x1B($0278, $00)
+    %AICMD0x1C($035F, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($82CD)
+    %AICMD0x1A($00C8, $0118, $827C, $01)
+    %AICMD0x1F($82EE)
+    %AICMD0x12_Jump($82E8)
+    %AICMD0x1C($02C0, $00)
+    %AICMD0x1B($026B, $00)
+    %AICMD0x0B($05)
+    %AICMD0x12_Jump($82E8)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $831A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $8323)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $832C)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $8335)
+    %AICMD0x12_Jump($8348)
+    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)
+    %AICMD0x12_Jump($8348)
+    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)
+    %AICMD0x12_Jump($8348)
+    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)
+    %AICMD0x12_Jump($8348)
+    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)
+    %AICMD0x12_Jump($8348)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $8355)
+    %AICMD0x12_Jump($82FB)
+    %AICMD0x1A($00C1, $0088, $8180, $01)
+    %AICMD0x0C($07)
+    %AICMD0x12_Jump($835D)
+    %AICMD0x1A($00C1, $0088, $8180, $01)
+    %AICMD0x1F($8363)
+    %AICMD0x12_Jump($835D)
+    %AICMD0x08()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $83E3)
+    %AICMD0x45($7F1F1F, $0000, $00C8, $838C)
+    %AICMD0x45($7F1F1F, $00C9, $012C, $83A9)
+    %AICMD0x45($7F1F1F, $012D, $03E7, $83C6)
+    %AICMD0x12_Jump($835D)
+    %AICMD0x0B($06)
+    %AICMD0x0C($08)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1C($02C3, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($835D)
+    %AICMD0x0B($06)
+    %AICMD0x0C($08)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1C($02C4, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($835D)
+    %AICMD0x0B($06)
+    %AICMD0x0C($08)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1C($0435, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($835D)
+    %AICMD0x0B($06)
+    %AICMD0x0C($08)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1C($0436, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($835D)
+
 DATA8_B48400:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$07,$B4,$03,$12         ;B48400|        |      ;
-    db $05,$90,$00,$B8,$01,$07,$01,$09,$01,$4E,$84,$09         ;B4840C|        |      ;
-    db $02,$65,$84,$09,$03,$7C,$84,$09,$04,$97,$84,$09         ;B48418|        |      ;
-    db $05,$23,$85,$09,$06,$B2,$84,$09,$07,$C9,$84,$38         ;B48424|        |      ;
-    db $0C,$00,$0C,$01,$0C,$02,$0C,$03,$0C,$05,$0C,$06         ;B48430|        |      ;
-    db $23,$74,$1F,$7F,$05,$0C,$04,$13,$B4,$00,$41,$27         ;B4843C|        |      ;
-    db $1F,$7F,$1E,$00,$3C,$10,$1A,$28,$00,$98,$01,$DC         ;B48448|        |      ;
-    db $82,$00,$1F,$5C,$84,$12,$56,$84,$1C,$C5,$02,$00         ;B48454|        |      ;
-    db $0B,$00,$12,$56,$84,$1A,$64,$00,$70,$01,$48,$83         ;B48460|        |      ;
-    db $00,$1F,$73,$84,$12,$6D,$84,$1C,$C6,$02,$00,$0B         ;B4846C|        |      ;
-    db $01,$12,$6D,$84,$1A,$B4,$00,$A0,$01,$18,$83,$01         ;B48478|        |      ;
-    db $1F,$8A,$84,$12,$84,$84,$1C,$C7,$02,$00,$1B,$98         ;B48484|        |      ;
-    db $02,$00,$0B,$02,$12,$84,$84,$1A,$B4,$00,$70,$01         ;B48490|        |      ;
-    db $FC,$83,$00,$1F,$A5,$84,$12,$9F,$84,$1C,$C8,$02         ;B4849C|        |      ;
-    db $00,$1B,$CC,$02,$00,$0B,$03,$12,$9F,$84,$1A,$88         ;B484A8|        |      ;
-    db $00,$48,$01,$34,$82,$00,$1F,$C0,$84,$12,$BA,$84         ;B484B4|        |      ;
-    db $1C,$07,$04,$00,$0B,$05,$12,$BA,$84,$1A,$90,$00         ;B484C0|        |      ;
-    db $C8,$01,$34,$82,$01,$1F,$D7,$84,$12,$D1,$84,$1C         ;B484CC|        |      ;
-    db $D9,$03,$00,$0B,$06,$12,$D1,$84,$14,$66,$1F,$7F         ;B484D8|        |      ;
-    db $00,$FF,$84,$14,$66,$1F,$7F,$01,$08,$85,$14,$66         ;B484E4|        |      ;
-    db $1F,$7F,$02,$11,$85,$14,$66,$1F,$7F,$03,$1A,$85         ;B484F0|        |      ;
-    db $12,$2D,$85,$41,$1F,$1F,$7F,$E2,$FF,$12,$2D,$85         ;B484FC|        |      ;
-    db $41,$21,$1F,$7F,$E2,$FF,$12,$2D,$85,$41,$23,$1F         ;B48508|        |      ;
-    db $7F,$E2,$FF,$12,$2D,$85,$41,$25,$1F,$7F,$E2,$FF         ;B48514|        |      ;
-    db $12,$2D,$85,$14,$66,$1F,$7F,$04,$3F,$85,$12,$E0         ;B48520|        |      ;
-    db $84,$1A,$38,$00,$C0,$01,$04,$82,$00,$22,$18,$08         ;B4852C|        |      ;
-    db $01,$10,$82,$08,$12,$4E,$85,$1A,$38,$00,$C0,$01         ;B48538|        |      ;
-    db $5C,$84,$01,$22,$18,$08,$01,$74,$84,$08,$1F,$54         ;B48544|        |      ;
-    db $85,$12,$4E,$85,$14,$74,$1F,$7F,$05,$62,$85,$1C         ;B48550|        |      ;
-    db $51,$01,$00,$12,$4E,$85,$14,$66,$1F,$7F,$04,$B7         ;B4855C|        |      ;
-    db $85,$45,$27,$1F,$7F,$00,$00,$C8,$00,$8A,$85,$45         ;B48568|        |      ;
-    db $27,$1F,$7F,$C9,$00,$2C,$01,$99,$85,$45,$27,$1F         ;B48574|        |      ;
-    db $7F,$2D,$01,$E7,$03,$A8,$85,$12,$4E,$85,$1C,$C9         ;B48580|        |      ;
-    db $02,$00,$32,$D4,$00,$80,$15,$00,$0B,$04,$12,$4E         ;B4858C|        |      ;
-    db $85,$1C,$CA,$02,$00,$32,$D4,$00,$80,$15,$00,$0B         ;B48598|        |      ;
-    db $04,$12,$4E,$85,$1C,$37,$04,$00,$32,$D4,$00,$80         ;B485A4|        |      ;
-    db $15,$00,$0B,$04,$12,$4E,$85,$1C,$38,$04,$00,$32         ;B485B0|        |      ;
-    db $D4,$00,$80,$15,$00,$0B,$04,$12,$4E,$85                 ;B485BC|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($07, $B4)
+    %AICMD0x03_SetHour($12)
+    %AICMD0x05_SetPosition($0090, $01B8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $844E)
+    %AICMD0x09($02, $8465)
+    %AICMD0x09($03, $847C)
+    %AICMD0x09($04, $8497)
+    %AICMD0x09($05, $8523)
+    %AICMD0x09($06, $84B2)
+    %AICMD0x09($07, $84C9)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x0C($01)
+    %AICMD0x0C($02)
+    %AICMD0x0C($03)
+    %AICMD0x0C($05)
+    %AICMD0x0C($06)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $05)
+    %AICMD0x0C($04)
+    %AICMD0x13($00B4)
+    %AICMD0x41_ModifyVariable($7F1F27, $001E)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0028, $0198, $82DC, $00)
+    %AICMD0x1F($845C)
+    %AICMD0x12_Jump($8456)
+    %AICMD0x1C($02C5, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($8456)
+    %AICMD0x1A($0064, $0170, $8348, $00)
+    %AICMD0x1F($8473)
+    %AICMD0x12_Jump($846D)
+    %AICMD0x1C($02C6, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($846D)
+    %AICMD0x1A($00B4, $01A0, $8318, $01)
+    %AICMD0x1F($848A)
+    %AICMD0x12_Jump($8484)
+    %AICMD0x1C($02C7, $00)
+    %AICMD0x1B($0298, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($8484)
+    %AICMD0x1A($00B4, $0170, $83FC, $00)
+    %AICMD0x1F($84A5)
+    %AICMD0x12_Jump($849F)
+    %AICMD0x1C($02C8, $00)
+    %AICMD0x1B($02CC, $00)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($849F)
+    %AICMD0x1A($0088, $0148, $8234, $00)
+    %AICMD0x1F($84C0)
+    %AICMD0x12_Jump($84BA)
+    %AICMD0x1C($0407, $00)
+    %AICMD0x0B($05)
+    %AICMD0x12_Jump($84BA)
+    %AICMD0x1A($0090, $01C8, $8234, $01)
+    %AICMD0x1F($84D7)
+    %AICMD0x12_Jump($84D1)
+    %AICMD0x1C($03D9, $00)
+    %AICMD0x0B($06)
+    %AICMD0x12_Jump($84D1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $84FF)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $8508)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $8511)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $851A)
+    %AICMD0x12_Jump($852D)
+    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)
+    %AICMD0x12_Jump($852D)
+    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)
+    %AICMD0x12_Jump($852D)
+    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)
+    %AICMD0x12_Jump($852D)
+    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)
+    %AICMD0x12_Jump($852D)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $853F)
+    %AICMD0x12_Jump($84E0)
+    %AICMD0x1A($0038, $01C0, $8204, $00)
+    %AICMD0x22($18, $08, $01, $8210, $08)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x1A($0038, $01C0, $845C, $01)
+    %AICMD0x22($18, $08, $01, $8474, $08)
+    %AICMD0x1F($8554)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $8562)
+    %AICMD0x1C($0151, $00)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $85B7)
+    %AICMD0x45($7F1F27, $0000, $00C8, $858A)
+    %AICMD0x45($7F1F27, $00C9, $012C, $8599)
+    %AICMD0x45($7F1F27, $012D, $03E7, $85A8)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x1C($02C9, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x1C($02CA, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x1C($0437, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($854E)
+    %AICMD0x1C($0438, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($854E)
+
 DATA8_B485C6:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$0E,$B4,$03,$12         ;B485C6|        |      ;
-    db $05,$78,$00,$C8,$01,$07,$01,$08,$09,$01,$77,$86         ;B485D2|        |      ;
-    db $38,$39,$01,$B0,$00,$13,$3C,$00,$29,$00,$00,$FF         ;B485DE|        |      ;
-    db $FF,$F0,$13,$F0,$00,$29,$00,$00,$FF,$FF,$40,$13         ;B485EA|        |      ;
-    db $40,$00,$09,$02,$23,$86,$0C,$00,$29,$00,$00,$01         ;B485F6|        |      ;
-    db $00,$F0,$13,$F0,$00,$29,$00,$00,$01,$00,$40,$13         ;B48602|        |      ;
-    db $40,$00,$0B,$01,$0C,$02,$19,$06,$00,$00,$13,$B4         ;B4860E|        |      ;
-    db $00,$41,$23,$1F,$7F,$1E,$00,$3C,$10,$1A,$00,$01         ;B4861A|        |      ;
-    db $80,$FF,$7C,$85,$00,$0D,$FE,$01,$A0,$01,$0B,$00         ;B48626|        |      ;
-    db $37,$10,$14,$66,$1F,$7F,$00,$53,$86,$14,$66,$1F         ;B48632|        |      ;
-    db $7F,$01,$5C,$86,$14,$66,$1F,$7F,$03,$65,$86,$14         ;B4863E|        |      ;
-    db $66,$1F,$7F,$04,$6E,$86,$12,$81,$86,$41,$1F,$1F         ;B4864A|        |      ;
-    db $7F,$E2,$FF,$12,$81,$86,$41,$21,$1F,$7F,$E2,$FF         ;B48656|        |      ;
-    db $12,$81,$86,$41,$25,$1F,$7F,$E2,$FF,$12,$81,$86         ;B48662|        |      ;
-    db $41,$27,$1F,$7F,$E2,$FF,$12,$81,$86,$14,$66,$1F         ;B4866E|        |      ;
-    db $7F,$02,$AD,$86,$12,$34,$86,$1A,$88,$00,$18,$01         ;B4867A|        |      ;
-    db $C8,$81,$01,$0C,$01,$1B,$50,$02,$00,$45,$23,$1F         ;B48686|        |      ;
-    db $7F,$00,$00,$C8,$00,$C4,$86,$45,$23,$1F,$7F,$C9         ;B48692|        |      ;
-    db $00,$2C,$01,$CD,$86,$45,$23,$1F,$7F,$2D,$01,$E7         ;B4869E|        |      ;
-    db $03,$D6,$86,$1A,$88,$00,$18,$01,$5C,$84,$01,$0C         ;B486AA|        |      ;
-    db $01,$1B,$E6,$02,$00,$12,$DF,$86,$13,$01,$00,$12         ;B486B6|        |      ;
-    db $BE,$86,$1C,$CB,$02,$00,$0B,$02,$12,$BE,$86,$1C         ;B486C2|        |      ;
-    db $CC,$02,$00,$0B,$02,$12,$BE,$86,$1C,$39,$04,$00         ;B486CE|        |      ;
-    db $0B,$02,$12,$BE,$86,$1C,$3A,$04,$00,$0B,$02,$12         ;B486DA|        |      ;
-    db $BE,$86                                                 ;B486E6|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x03_SetHour($12)
+    %AICMD0x05_SetPosition($0078, $01C8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $8677)
+    %AICMD0x38()
+    %AICMD0x39($01, $00B0)
+    %AICMD0x13($003C)
+    %AICMD0x29($0000, $FFFF, $F0)
+    %AICMD0x13($00F0)
+    %AICMD0x29($0000, $FFFF, $40)
+    %AICMD0x13($0040)
+    %AICMD0x09($02, $8623)
+    %AICMD0x0C($00)
+    %AICMD0x29($0000, $0001, $F0)
+    %AICMD0x13($00F0)
+    %AICMD0x29($0000, $0001, $40)
+    %AICMD0x13($0040)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x19($0006, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x41_ModifyVariable($7F1F23, $001E)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0100, $FF80, $857C, $00)
+    %AICMD0x0D($FE, $01, $A0, $01)
+    %AICMD0x0B($00)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $8653)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $865C)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $8665)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $866E)
+    %AICMD0x12_Jump($8681)
+    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)
+    %AICMD0x12_Jump($8681)
+    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)
+    %AICMD0x12_Jump($8681)
+    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)
+    %AICMD0x12_Jump($8681)
+    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)
+    %AICMD0x12_Jump($8681)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $86AD)
+    %AICMD0x12_Jump($8634)
+    %AICMD0x1A($0088, $0118, $81C8, $01)
+    %AICMD0x0C($01)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x45($7F1F23, $0000, $00C8, $86C4)
+    %AICMD0x45($7F1F23, $00C9, $012C, $86CD)
+    %AICMD0x45($7F1F23, $012D, $03E7, $86D6)
+    %AICMD0x1A($0088, $0118, $845C, $01)
+    %AICMD0x0C($01)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x12_Jump($86DF)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($86BE)
+    %AICMD0x1C($02CB, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($86BE)
+    %AICMD0x1C($02CC, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($86BE)
+    %AICMD0x1C($0439, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($86BE)
+    %AICMD0x1C($043A, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($86BE)
+
 DATA8_B486E8:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$0E,$B4,$03,$12         ;B486E8|        |      ;
-    db $05,$18,$00,$58,$00,$07,$02,$08,$09,$01,$5B,$87         ;B486F4|        |      ;
-    db $38,$39,$02,$20,$00,$13,$78,$00,$11,$0B,$00,$0C         ;B48700|        |      ;
-    db $01,$13,$B4,$00,$41,$21,$1F,$7F,$1E,$00,$3C,$10         ;B4870C|        |      ;
-    db $14,$66,$1F,$7F,$00,$37,$87,$14,$66,$1F,$7F,$02         ;B48718|        |      ;
-    db $40,$87,$14,$66,$1F,$7F,$03,$49,$87,$14,$66,$1F         ;B48724|        |      ;
-    db $7F,$04,$52,$87,$12,$5E,$87,$41,$1F,$1F,$7F,$E2         ;B48730|        |      ;
-    db $FF,$12,$5E,$87,$41,$23,$1F,$7F,$E2,$FF,$12,$5E         ;B4873C|        |      ;
-    db $87,$41,$25,$1F,$7F,$E2,$FF,$12,$5E,$87,$41,$27         ;B48748|        |      ;
-    db $1F,$7F,$E2,$FF,$12,$5E,$87,$12,$18,$87,$1A,$A8         ;B48754|        |      ;
-    db $00,$98,$00,$BC,$81,$01,$1F,$6C,$87,$12,$66,$87         ;B48760|        |      ;
-    db $14,$66,$1F,$7F,$01,$AF,$87,$45,$21,$1F,$7F,$00         ;B4876C|        |      ;
-    db $00,$C8,$00,$94,$87,$45,$21,$1F,$7F,$C9,$00,$2C         ;B48778|        |      ;
-    db $01,$9D,$87,$45,$21,$1F,$7F,$2D,$01,$E7,$03,$A6         ;B48784|        |      ;
-    db $87,$12,$66,$87,$1C,$CD,$02,$00,$0B,$01,$12,$66         ;B48790|        |      ;
-    db $87,$1C,$A9,$02,$00,$0B,$01,$12,$66,$87,$1C,$3B         ;B4879C|        |      ;
-    db $04,$00,$0B,$01,$12,$66,$87,$1C,$3C,$04,$00,$0B         ;B487A8|        |      ;
-    db $01,$12,$66,$87                                         ;B487B4|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x03_SetHour($12)
+    %AICMD0x05_SetPosition($0018, $0058)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x08()
+    %AICMD0x09($01, $875B)
+    %AICMD0x38()
+    %AICMD0x39($02, $0020)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x13($00B4)
+    %AICMD0x41_ModifyVariable($7F1F21, $001E)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $8737)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $8740)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $8749)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $8752)
+    %AICMD0x12_Jump($875E)
+    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)
+    %AICMD0x12_Jump($875E)
+    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)
+    %AICMD0x12_Jump($875E)
+    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)
+    %AICMD0x12_Jump($875E)
+    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)
+    %AICMD0x12_Jump($875E)
+    %AICMD0x12_Jump($8718)
+    %AICMD0x1A($00A8, $0098, $81BC, $01)
+    %AICMD0x1F($876C)
+    %AICMD0x12_Jump($8766)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $87AF)
+    %AICMD0x45($7F1F21, $0000, $00C8, $8794)
+    %AICMD0x45($7F1F21, $00C9, $012C, $879D)
+    %AICMD0x45($7F1F21, $012D, $03E7, $87A6)
+    %AICMD0x12_Jump($8766)
+    %AICMD0x1C($02CD, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($8766)
+    %AICMD0x1C($02A9, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($8766)
+    %AICMD0x1C($043B, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($8766)
+    %AICMD0x1C($043C, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($8766)
+
 pScripting_B487B8:
     dw DATA8_B487D8                                            ;B487B8|        |B487D8;
     dw pScripting_B48818                                       ;B487BA|        |B48818;
@@ -217,13 +564,28 @@ pScripting_B487B8:
     dw pScripting_B48818                                       ;B487D6|        |B48818;
  
 DATA8_B487D8:
-    db $08,$13,$3C,$00,$09,$07,$E5,$87,$09,$15,$F8,$87         ;B487D8|        |      ;
-    db $10,$1A,$B0,$02,$70,$01,$64,$85,$00,$1C,$35,$03         ;B487E4|        |      ;
-    db $00,$0B,$00,$13,$B4,$00,$37,$10,$0C,$00,$1A,$A8         ;B487F0|        |      ;
-    db $02,$78,$01,$20,$87,$00,$0D,$00,$01,$0C,$01,$0D         ;B487FC|        |      ;
-    db $00,$02,$12,$01,$13,$B4,$00,$1B,$0D,$04,$00,$11         ;B48808|        |      ;
-    db $4A,$12,$14,$88                                         ;B48814|        |      ;
  
+    %AICMD0x08()
+    %AICMD0x13($003C)
+    %AICMD0x09($07, $87E5)
+    %AICMD0x09($15, $87F8)
+    %AICMD0x10_End()
+    %AICMD0x1A($02B0, $0170, $8564, $00)
+    %AICMD0x1C($0335, $00)
+    %AICMD0x0B($00)
+    %AICMD0x13($00B4)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x0C($00)
+    %AICMD0x1A($02A8, $0178, $8720, $00)
+    %AICMD0x0D($00, $01, $0C, $01)
+    %AICMD0x0D($00, $02, $12, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($040D, $00)
+    %AICMD0x11()
+    %AICMD0x4A()
+    %AICMD0x12_Jump($8814)
+
 pScripting_B48818:
     dw DATA8_B48838                                            ;B48818|        |B48838;
     dw pScripting_B488A0                                       ;B4881A|        |B488A0;
@@ -243,16 +605,44 @@ pScripting_B48818:
     dw pScripting_B488A0                                       ;B48836|        |B488A0;
  
 DATA8_B48838:
-    db $50,$09,$01,$6C,$88,$38,$39,$00,$50,$00,$07,$03         ;B48838|        |      ;
-    db $1D,$48,$01,$00,$20,$00,$50,$88,$20,$01,$62,$88         ;B48844|        |      ;
-    db $0F,$01,$09,$02,$8C,$88,$0A,$01,$1C,$4A,$01,$00         ;B48850|        |      ;
-    db $0B,$00,$0C,$01,$11,$10,$1C,$4C,$01,$00,$0B,$00         ;B4885C|        |      ;
-    db $0C,$01,$11,$10,$1A,$68,$00,$A8,$01,$A8,$83,$02         ;B48868|        |      ;
-    db $0C,$00,$1B,$BB,$02,$00,$0D,$00,$01,$10,$01,$1B         ;B48874|        |      ;
-    db $BF,$02,$00,$0D,$FF,$00,$A0,$01,$0B,$01,$37,$10         ;B48880|        |      ;
-    db $1A,$78,$00,$A8,$01,$44,$81,$00,$0C,$00,$13,$1E         ;B4888C|        |      ;
-    db $00,$0D,$FF,$00,$A0,$01,$37,$10                         ;B48898|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x09($01, $886C)
+    %AICMD0x38()
+    %AICMD0x39($00, $0050)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x1D($0148, $00)
+    %AICMD0x20($00, $8850)
+    %AICMD0x20($01, $8862)
+    %AICMD0x0F($01)
+    %AICMD0x09($02, $888C)
+    %AICMD0x0A($01)
+    %AICMD0x1C($014A, $00)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1C($014C, $00)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $01A8, $83A8, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02BB, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($02BF, $00)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $01A8, $8144, $00)
+    %AICMD0x0C($00)
+    %AICMD0x13($001E)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B488A0:
     dw DATA8_B488C0                                            ;B488A0|        |B488C0;
     dw pScripting_B4892A                                       ;B488A2|        |B4892A;
@@ -272,16 +662,39 @@ pScripting_B488A0:
     dw pScripting_B4892A                                       ;B488BE|        |B4892A;
  
 DATA8_B488C0:
-    db $50,$00,$0A,$B4,$08,$2A,$41,$00,$13,$B4,$00,$09         ;B488C0|        |      ;
-    db $01,$D6,$88,$0C,$00,$09,$10,$19,$89,$10,$1A,$88         ;B488CC|        |      ;
-    db $00,$F8,$00,$1C,$85,$00,$13,$B4,$00,$0D,$00,$FF         ;B488D8|        |      ;
-    db $10,$01,$0D,$01,$01,$10,$01,$0D,$00,$01,$10,$01         ;B488E4|        |      ;
-    db $0D,$FF,$00,$10,$01,$1C,$39,$03,$01,$0B,$00,$13         ;B488F0|        |      ;
-    db $78,$00,$1C,$3A,$03,$01,$13,$1E,$00,$0D,$00,$FF         ;B488FC|        |      ;
-    db $10,$02,$0D,$00,$FF,$18,$03,$1B,$18,$03,$00,$13         ;B48908|        |      ;
-    db $B4,$00,$37,$11,$10,$1A,$88,$00,$20,$01,$20,$87         ;B48914|        |      ;
-    db $00,$0D,$00,$01,$50,$02,$4A,$12,$26,$89                 ;B48920|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x00_SetMusic($0A, $B4)
+    %AICMD0x08()
+    %AICMD0x2A($0041)
+    %AICMD0x13($00B4)
+    %AICMD0x09($01, $88D6)
+    %AICMD0x0C($00)
+    %AICMD0x09($10, $8919)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $00F8, $851C, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0D($00, $FF, $10, $01)
+    %AICMD0x0D($01, $01, $10, $01)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1C($0339, $01)
+    %AICMD0x0B($00)
+    %AICMD0x13($0078)
+    %AICMD0x1C($033A, $01)
+    %AICMD0x13($001E)
+    %AICMD0x0D($00, $FF, $10, $02)
+    %AICMD0x0D($00, $FF, $18, $03)
+    %AICMD0x1B($0318, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $0120, $8720, $00)
+    %AICMD0x0D($00, $01, $50, $02)
+    %AICMD0x4A()
+    %AICMD0x12_Jump($8926)
+
 pScripting_B4892A:
     dw DATA8_B4894A                                            ;B4892A|        |B4894A;
     dw pScripting_B489D2                                       ;B4892C|        |B489D2;
@@ -301,19 +714,47 @@ pScripting_B4892A:
     dw pScripting_B489D2                                       ;B48948|        |B489D2;
  
 DATA8_B4894A:
-    db $50,$08,$09,$01,$5D,$89,$38,$39,$00,$50,$00,$07         ;B4894A|        |      ;
-    db $03,$0B,$00,$0C,$01,$11,$10,$1A,$78,$00,$A8,$01         ;B48956|        |      ;
-    db $C0,$83,$02,$0C,$00,$1D,$4D,$01,$00,$20,$00,$73         ;B48962|        |      ;
-    db $89,$20,$01,$B5,$89,$1B,$BD,$02,$00,$0D,$00,$FF         ;B4896E|        |      ;
-    db $30,$01,$1B,$C3,$02,$01,$0D,$01,$00,$A0,$01,$1B         ;B4897A|        |      ;
-    db $C0,$02,$00,$13,$B4,$00,$1B,$C3,$02,$00,$0D,$FF         ;B48986|        |      ;
-    db $00,$A0,$01,$1B,$C1,$02,$00,$0D,$00,$01,$30,$01         ;B48992|        |      ;
-    db $1B,$C2,$02,$01,$1C,$4E,$01,$00,$42,$04,$1F,$7F         ;B4899E|        |      ;
-    db $30,$F8,$FF,$23,$68,$1F,$7F,$0B,$12,$BC,$89,$1C         ;B489AA|        |      ;
-    db $4F,$01,$00,$12,$BC,$89,$1B,$C1,$02,$00,$0D,$00         ;B489B6|        |      ;
-    db $01,$10,$01,$1B,$C3,$02,$00,$0D,$FF,$00,$90,$01         ;B489C2|        |      ;
-    db $0B,$01,$37,$10                                         ;B489CE|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $895D)
+    %AICMD0x38()
+    %AICMD0x39($00, $0050)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $01A8, $83C0, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1D($014D, $00)
+    %AICMD0x20($00, $8973)
+    %AICMD0x20($01, $89B5)
+    %AICMD0x1B($02BD, $00)
+    %AICMD0x0D($00, $FF, $30, $01)
+    %AICMD0x1B($02C3, $01)
+    %AICMD0x0D($01, $00, $A0, $01)
+    %AICMD0x1B($02C0, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02C3, $00)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x1B($02C1, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x1B($02C2, $01)
+    %AICMD0x1C($014E, $00)
+    %AICMD0x42($7F1F04, $FFF830)
+    %AICMD0x23_OrWithIndexedValue($7F1F68, $0B)
+    %AICMD0x12_Jump($89BC)
+    %AICMD0x1C($014F, $00)
+    %AICMD0x12_Jump($89BC)
+    %AICMD0x1B($02C1, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($02C3, $00)
+    %AICMD0x0D($FF, $00, $90, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B489D2:
     dw DATA8_B489F2                                            ;B489D2|        |B489F2;
     dw DATA8_B48AAB                                            ;B489D4|        |B48AAB;
@@ -333,64 +774,193 @@ pScripting_B489D2:
     dw pScripting_B48C25                                       ;B489F0|        |B48C25;
  
 DATA8_B489F2:
-    db $50,$01,$03,$07,$05,$88,$00,$58,$01,$07,$00,$08         ;B489F2|        |      ;
-    db $09,$01,$1B,$8A,$38,$39,$00,$50,$00,$07,$03,$0B         ;B489FE|        |      ;
-    db $00,$0C,$01,$0F,$01,$09,$02,$8B,$8A,$0A,$01,$0B         ;B48A0A|        |      ;
-    db $02,$0C,$04,$11,$10,$1A,$F0,$FF,$A8,$01,$B4,$83         ;B48A16|        |      ;
-    db $02,$0C,$00,$0D,$01,$00,$60,$01,$1D,$49,$01,$00         ;B48A22|        |      ;
-    db $20,$00,$36,$8A,$20,$01,$61,$8A,$0B,$01,$0C,$02         ;B48A2E|        |      ;
-    db $1B,$BB,$02,$00,$0D,$00,$01,$20,$01,$1B,$BF,$02         ;B48A3A|        |      ;
-    db $00,$0D,$FF,$00,$20,$01,$1B,$BB,$02,$00,$1C,$4A         ;B48A46|        |      ;
-    db $01,$00,$23,$64,$1F,$7F,$06,$23,$64,$1F,$7F,$07         ;B48A52|        |      ;
-    db $12,$68,$8A,$1C,$4C,$01,$00,$12,$75,$8A,$1B,$BF         ;B48A5E|        |      ;
-    db $02,$00,$0D,$FF,$00,$40,$01,$0B,$03,$37,$10,$1B         ;B48A6A|        |      ;
-    db $BB,$02,$00,$0D,$00,$01,$20,$01,$1B,$BF,$02,$00         ;B48A76|        |      ;
-    db $0D,$FF,$00,$A0,$01,$0B,$04,$37,$10,$1A,$48,$00         ;B48A82|        |      ;
-    db $E8,$01,$FC,$80,$03,$0C,$03,$1B,$A7,$01,$00,$0D         ;B48A8E|        |      ;
-    db $00,$FF,$10,$01,$1B,$8B,$01,$00,$0D,$FF,$00,$40         ;B48A9A|        |      ;
-    db $01,$0B,$04,$37,$10                                     ;B48AA6|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0088, $0158)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $8A1B)
+    %AICMD0x38()
+    %AICMD0x39($00, $0050)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x0F($01)
+    %AICMD0x09($02, $8A8B)
+    %AICMD0x0A($01)
+    %AICMD0x0B($02)
+    %AICMD0x0C($04)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($FFF0, $01A8, $83B4, $02)
+    %AICMD0x0C($00)
+    %AICMD0x0D($01, $00, $60, $01)
+    %AICMD0x1D($0149, $00)
+    %AICMD0x20($00, $8A36)
+    %AICMD0x20($01, $8A61)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x1B($02BB, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x1B($02BF, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x1B($02BB, $00)
+    %AICMD0x1C($014A, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F64, $06)
+    %AICMD0x23_OrWithIndexedValue($7F1F64, $07)
+    %AICMD0x12_Jump($8A68)
+    %AICMD0x1C($014C, $00)
+    %AICMD0x12_Jump($8A75)
+    %AICMD0x1B($02BF, $00)
+    %AICMD0x0D($FF, $00, $40, $01)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1B($02BB, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x1B($02BF, $00)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x0B($04)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0048, $01E8, $80FC, $03)
+    %AICMD0x0C($03)
+    %AICMD0x1B($01A7, $00)
+    %AICMD0x0D($00, $FF, $10, $01)
+    %AICMD0x1B($018B, $00)
+    %AICMD0x0D($FF, $00, $40, $01)
+    %AICMD0x0B($04)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 DATA8_B48AAB:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$0A,$B4,$05,$80         ;B48AAB|        |      ;
-    db $00,$C8,$01,$07,$01,$08,$02,$03,$07,$09,$01,$D0         ;B48AB7|        |      ;
-    db $8A,$19,$E8,$00,$00,$06,$3B,$38,$0C,$00,$3D,$2C         ;B48AC3|        |      ;
-    db $10,$1A,$80,$00,$C8,$01,$E4,$80,$01,$0D,$00,$FF         ;B48ACF|        |      ;
-    db $40,$01,$29,$00,$00,$FF,$FF,$40,$0D,$00,$FF,$50         ;B48ADB|        |      ;
-    db $01,$1B,$06,$00,$00,$13,$3C,$00,$1B,$63,$00,$00         ;B48AE7|        |      ;
-    db $0D,$00,$FF,$90,$02,$0B,$00,$13,$01,$00,$12,$FA         ;B48AF3|        |      ;
-    db $8A                                                     ;B48AFF|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($0A, $B4)
+    %AICMD0x05_SetPosition($0080, $01C8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x09($01, $8AD0)
+    %AICMD0x19($00E8, $00)
+    %AICMD0x06_SetDestination($3B)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x3D($2C)
+    %AICMD0x10_End()
+    %AICMD0x1A($0080, $01C8, $80E4, $01)
+    %AICMD0x0D($00, $FF, $40, $01)
+    %AICMD0x29($0000, $FFFF, $40)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x1B($0006, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0063, $00)
+    %AICMD0x0D($00, $FF, $90, $02)
+    %AICMD0x0B($00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($8AFA)
+
 DATA8_B48B00:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$03,$07,$05,$88,$00         ;B48B00|        |      ;
-    db $78,$02,$07,$01,$09,$01,$23,$8B,$28,$68,$1F,$7F         ;B48B0C|        |      ;
-    db $09,$23,$60,$1F,$7F,$0A,$06,$2C,$38,$11,$10,$1A         ;B48B18|        |      ;
-    db $88,$00,$CC,$00,$24,$86,$00,$1F,$37,$8B,$12,$2B         ;B48B24|        |      ;
-    db $8B,$1F,$88,$8B,$12,$31,$8B,$1D,$36,$03,$00,$20         ;B48B30|        |      ;
-    db $01,$7A,$8B,$08,$1B,$1B,$02,$00,$09,$02,$8F,$8B         ;B48B3C|        |      ;
-    db $0D,$FF,$FF,$24,$02,$13,$1E,$00,$1B,$1C,$02,$00         ;B48B48|        |      ;
-    db $13,$78,$00,$1C,$37,$03,$00,$0B,$00,$2A,$43,$00         ;B48B54|        |      ;
-    db $4B,$C3,$40,$00,$80,$00,$3E,$23,$13,$3C,$00,$32         ;B48B60|        |      ;
-    db $D4,$00,$80,$00,$00,$28,$D2,$00,$80,$01,$11,$12         ;B48B6C|        |      ;
-    db $31,$8B,$2A,$43,$00,$4B,$C3,$40,$00,$80,$00,$23         ;B48B78|        |      ;
-    db $5C,$1F,$7F,$0C,$1C,$38,$03,$00,$12,$31,$8B,$1A         ;B48B84|        |      ;
-    db $88,$00,$C8,$00,$18,$86,$00,$0C,$00,$37,$10             ;B48B90|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0088, $0278)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $8B23)
+    %AICMD0x28($1F68, $7F, $09)
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $0A)
+    %AICMD0x06_SetDestination($2C)
+    %AICMD0x38()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $00CC, $8624, $00)
+    %AICMD0x1F($8B37)
+    %AICMD0x12_Jump($8B2B)
+    %AICMD0x1F($8B88)
+    %AICMD0x12_Jump($8B31)
+    %AICMD0x1D($0336, $00)
+    %AICMD0x20($01, $8B7A)
+    %AICMD0x08()
+    %AICMD0x1B($021B, $00)
+    %AICMD0x09($02, $8B8F)
+    %AICMD0x0D($FF, $FF, $24, $02)
+    %AICMD0x13($001E)
+    %AICMD0x1B($021C, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1C($0337, $00)
+    %AICMD0x0B($00)
+    %AICMD0x2A($0043)
+    %AICMD0x4B($C3, $0040, $0080)
+    %AICMD0x3E($23)
+    %AICMD0x13($003C)
+    %AICMD0x32($00D4, $80, $0000)
+    %AICMD0x28($00D2, $80, $01)
+    %AICMD0x11()
+    %AICMD0x12_Jump($8B31)
+    %AICMD0x2A($0043)
+    %AICMD0x4B($C3, $0040, $0080)
+    %AICMD0x23_OrWithIndexedValue($7F1F5C, $0C)
+    %AICMD0x1C($0338, $00)
+    %AICMD0x12_Jump($8B31)
+    %AICMD0x1A($0088, $00C8, $8618, $00)
+    %AICMD0x0C($00)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 DATA8_B48B9B:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$14,$5C,$1F,$7F,$0C         ;B48B9B|        |      ;
-    db $DE,$8B,$08,$07,$03,$09,$01,$C2,$8B,$09,$02,$D0         ;B48BA7|        |      ;
-    db $8B,$38,$1C,$60,$03,$00,$42,$04,$1F,$7F,$E8,$03         ;B48BB3|        |      ;
-    db $00,$3C,$10,$1A,$48,$02,$68,$01,$9C,$83,$00,$13         ;B48BBF|        |      ;
-    db $01,$00,$12,$CA,$8B,$1A,$58,$02,$68,$01,$18,$86         ;B48BCB|        |      ;
-    db $00,$13,$01,$00,$12,$D8,$8B                             ;B48BD7|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F5C, $0C, $8BDE)
+    %AICMD0x08()
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x09($01, $8BC2)
+    %AICMD0x09($02, $8BD0)
+    %AICMD0x38()
+    %AICMD0x1C($0360, $00)
+    %AICMD0x42($7F1F04, $0003E8)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0248, $0168, $839C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($8BCA)
+    %AICMD0x1A($0258, $0168, $8618, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($8BD8)
+
 DATA8_B48BDE:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$05,$88,$00,$C8,$01         ;B48BDE|        |      ;
-    db $08,$15,$19,$1F,$7F,$00,$07,$8C,$15,$19,$1F,$7F         ;B48BEA|        |      ;
-    db $01,$0C,$8C,$15,$19,$1F,$7F,$02,$11,$8C,$15,$19         ;B48BF6|        |      ;
-    db $1F,$7F,$03,$16,$8C,$06,$00,$12,$1B,$8C,$06,$01         ;B48C02|        |      ;
-    db $12,$1B,$8C,$06,$02,$12,$1B,$8C,$06,$03,$12,$1B         ;B48C0E|        |      ;
-    db $8C,$38,$19,$4D,$00,$00,$13,$78,$00,$3C,$10             ;B48C1A|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x05_SetPosition($0088, $01C8)
+    %AICMD0x08()
+    %AICMD0x15($7F1F19, $00, $8C07)
+    %AICMD0x15($7F1F19, $01, $8C0C)
+    %AICMD0x15($7F1F19, $02, $8C11)
+    %AICMD0x15($7F1F19, $03, $8C16)
+    %AICMD0x06_SetDestination($00)
+    %AICMD0x12_Jump($8C1B)
+    %AICMD0x06_SetDestination($01)
+    %AICMD0x12_Jump($8C1B)
+    %AICMD0x06_SetDestination($02)
+    %AICMD0x12_Jump($8C1B)
+    %AICMD0x06_SetDestination($03)
+    %AICMD0x12_Jump($8C1B)
+    %AICMD0x38()
+    %AICMD0x19($004D, $00)
+    %AICMD0x13($0078)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+
 pScripting_B48C25:
     dw DATA8_B48C45                                            ;B48C25|        |B48C45;
     dw pScripting_B48D38                                       ;B48C27|        |B48D38;
@@ -410,28 +980,73 @@ pScripting_B48C25:
     dw pScripting_B48D38                                       ;B48C43|        |B48D38;
  
 DATA8_B48C45:
-    db $05,$B8,$00,$68,$01,$07,$00,$08,$09,$01,$67,$8C         ;B48C45|        |      ;
-    db $09,$02,$F6,$8C,$09,$03,$1F,$8D,$38,$11,$0C,$00         ;B48C51|        |      ;
-    db $08,$0C,$01,$11,$13,$01,$00,$12,$61,$8C,$1A,$58         ;B48C5D|        |      ;
-    db $00,$78,$01,$D4,$84,$02,$1F,$7B,$8C,$12,$6F,$8C         ;B48C69|        |      ;
-    db $1F,$DD,$8C,$12,$75,$8C,$23,$68,$1F,$7F,$0D,$1D         ;B48C75|        |      ;
-    db $27,$03,$00,$20,$00,$8F,$8C,$20,$01,$C9,$8C,$12         ;B48C81|        |      ;
-    db $E4,$8C,$1C,$28,$03,$00,$15,$21,$09,$80,$01,$A4         ;B48C8D|        |      ;
-    db $8C,$15,$23,$09,$80,$01,$AC,$8C,$12,$B4,$8C,$47         ;B48C99|        |      ;
-    db $21,$09,$80,$00,$12,$B4,$8C,$47,$23,$09,$80,$00         ;B48CA5|        |      ;
-    db $12,$B4,$8C,$28,$00,$1F,$7F,$00,$23,$6E,$1F,$7F         ;B48CB1|        |      ;
-    db $0F,$41,$33,$1F,$7F,$14,$00,$0B,$00,$12,$E4,$8C         ;B48CBD|        |      ;
-    db $1C,$29,$03,$00,$23,$6A,$1F,$7F,$00,$41,$33,$1F         ;B48CC9|        |      ;
-    db $7F,$F6,$FF,$0B,$00,$12,$E4,$8C,$1C,$2A,$03,$00         ;B48CD5|        |      ;
-    db $12,$75,$8C,$1B,$0E,$03,$00,$0D,$FF,$00,$30,$01         ;B48CE1|        |      ;
-    db $1B,$0E,$03,$01,$0B,$01,$12,$75,$8C,$1A,$58,$00         ;B48CED|        |      ;
-    db $88,$01,$D4,$84,$00,$22,$04,$04,$01,$D4,$84,$02         ;B48CF9|        |      ;
-    db $1F,$11,$8D,$12,$05,$8D,$1F,$18,$8D,$12,$0B,$8D         ;B48D05|        |      ;
-    db $1C,$25,$03,$00,$12,$0B,$8D,$1C,$2A,$03,$00,$12         ;B48D11|        |      ;
-    db $0B,$8D,$1A,$88,$00,$58,$00,$C8,$84,$00,$1F,$2D         ;B48D1D|        |      ;
-    db $8D,$12,$27,$8D,$1C,$26,$03,$00,$1B,$11,$03,$01         ;B48D29|        |      ;
-    db $12,$27,$8D                                             ;B48D35|        |      ;
  
+    %AICMD0x05_SetPosition($00B8, $0168)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $8C67)
+    %AICMD0x09($02, $8CF6)
+    %AICMD0x09($03, $8D1F)
+    %AICMD0x38()
+    %AICMD0x11()
+    %AICMD0x0C($00)
+    %AICMD0x08()
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($8C61)
+    %AICMD0x1A($0058, $0178, $84D4, $02)
+    %AICMD0x1F($8C7B)
+    %AICMD0x12_Jump($8C6F)
+    %AICMD0x1F($8CDD)
+    %AICMD0x12_Jump($8C75)
+    %AICMD0x23_OrWithIndexedValue($7F1F68, $0D)
+    %AICMD0x1D($0327, $00)
+    %AICMD0x20($00, $8C8F)
+    %AICMD0x20($01, $8CC9)
+    %AICMD0x12_Jump($8CE4)
+    %AICMD0x1C($0328, $00)
+    %AICMD0x15($800921, $01, $8CA4)
+    %AICMD0x15($800923, $01, $8CAC)
+    %AICMD0x12_Jump($8CB4)
+    %AICMD0x47($800921, $00)
+    %AICMD0x12_Jump($8CB4)
+    %AICMD0x47($800923, $00)
+    %AICMD0x12_Jump($8CB4)
+    %AICMD0x28($1F00, $7F, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F6E, $0F)
+    %AICMD0x41_ModifyVariable($7F1F33, $0014)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($8CE4)
+    %AICMD0x1C($0329, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFF6)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($8CE4)
+    %AICMD0x1C($032A, $00)
+    %AICMD0x12_Jump($8C75)
+    %AICMD0x1B($030E, $00)
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x1B($030E, $01)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($8C75)
+    %AICMD0x1A($0058, $0188, $84D4, $00)
+    %AICMD0x22($04, $04, $01, $84D4, $02)
+    %AICMD0x1F($8D11)
+    %AICMD0x12_Jump($8D05)
+    %AICMD0x1F($8D18)
+    %AICMD0x12_Jump($8D0B)
+    %AICMD0x1C($0325, $00)
+    %AICMD0x12_Jump($8D0B)
+    %AICMD0x1C($032A, $00)
+    %AICMD0x12_Jump($8D0B)
+    %AICMD0x1A($0088, $0058, $84C8, $00)
+    %AICMD0x1F($8D2D)
+    %AICMD0x12_Jump($8D27)
+    %AICMD0x1C($0326, $00)
+    %AICMD0x1B($0311, $01)
+    %AICMD0x12_Jump($8D27)
+
 pScripting_B48D38:
     dw DATA8_B48D58                                            ;B48D38|        |B48D58;
     dw pScripting_B48E05                                       ;B48D3A|        |B48E05;
@@ -451,22 +1066,54 @@ pScripting_B48D38:
     dw pScripting_B48E05                                       ;B48D56|        |B48E05;
  
 DATA8_B48D58:
-    db $50,$08,$09,$01,$6B,$8D,$38,$39,$00,$50,$00,$07         ;B48D58|        |      ;
-    db $03,$0B,$00,$0C,$01,$11,$10,$1A,$78,$00,$A8,$01         ;B48D64|        |      ;
-    db $34,$82,$02,$0C,$00,$1D,$21,$03,$00,$20,$00,$90         ;B48D70|        |      ;
-    db $8D,$20,$01,$F3,$8D,$12,$84,$8D,$1B,$5F,$02,$00         ;B48D7C|        |      ;
-    db $0D,$FF,$00,$90,$01,$0B,$01,$10,$1B,$5D,$02,$00         ;B48D88|        |      ;
-    db $0D,$00,$FF,$30,$01,$1B,$5F,$02,$01,$0D,$01,$00         ;B48D94|        |      ;
-    db $A8,$01,$13,$3C,$00,$1B,$5F,$02,$00,$0D,$FF,$00         ;B48DA0|        |      ;
-    db $A8,$01,$1B,$5B,$02,$00,$0D,$00,$01,$30,$01,$1B         ;B48DAC|        |      ;
-    db $5E,$02,$01,$1C,$22,$03,$00,$15,$21,$09,$80,$03         ;B48DB8|        |      ;
-    db $D0,$8D,$15,$23,$09,$80,$03,$D8,$8D,$12,$E0,$8D         ;B48DC4|        |      ;
-    db $47,$21,$09,$80,$00,$12,$E0,$8D,$47,$23,$09,$80         ;B48DD0|        |      ;
-    db $00,$12,$E0,$8D,$28,$00,$1F,$7F,$02,$23,$68,$1F         ;B48DDC|        |      ;
-    db $7F,$0F,$41,$33,$1F,$7F,$14,$00,$12,$84,$8D,$1C         ;B48DE8|        |      ;
-    db $23,$03,$00,$23,$6A,$1F,$7F,$02,$41,$33,$1F,$7F         ;B48DF4|        |      ;
-    db $EC,$FF,$12,$84,$8D                                     ;B48E00|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $8D6B)
+    %AICMD0x38()
+    %AICMD0x39($00, $0050)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $01A8, $8234, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1D($0321, $00)
+    %AICMD0x20($00, $8D90)
+    %AICMD0x20($01, $8DF3)
+    %AICMD0x12_Jump($8D84)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x0D($FF, $00, $90, $01)
+    %AICMD0x0B($01)
+    %AICMD0x10_End()
+    %AICMD0x1B($025D, $00)
+    %AICMD0x0D($00, $FF, $30, $01)
+    %AICMD0x1B($025F, $01)
+    %AICMD0x0D($01, $00, $A8, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x0D($FF, $00, $A8, $01)
+    %AICMD0x1B($025B, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x1B($025E, $01)
+    %AICMD0x1C($0322, $00)
+    %AICMD0x15($800921, $03, $8DD0)
+    %AICMD0x15($800923, $03, $8DD8)
+    %AICMD0x12_Jump($8DE0)
+    %AICMD0x47($800921, $00)
+    %AICMD0x12_Jump($8DE0)
+    %AICMD0x47($800923, $00)
+    %AICMD0x12_Jump($8DE0)
+    %AICMD0x28($1F00, $7F, $02)
+    %AICMD0x23_OrWithIndexedValue($7F1F68, $0F)
+    %AICMD0x41_ModifyVariable($7F1F33, $0014)
+    %AICMD0x12_Jump($8D84)
+    %AICMD0x1C($0323, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $02)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFEC)
+    %AICMD0x12_Jump($8D84)
+
 pScripting_B48E05:
     dw DATA8_B48E25                                            ;B48E05|        |B48E25;
     dw pScripting_B48EC5                                       ;B48E07|        |B48EC5;
@@ -486,21 +1133,53 @@ pScripting_B48E05:
     dw pScripting_B48EC5                                       ;B48E23|        |B48EC5;
  
 DATA8_B48E25:
-    db $00,$0A,$B4,$08,$07,$01,$09,$01,$33,$8E,$0C,$00         ;B48E25|        |      ;
-    db $11,$10,$1A,$68,$00,$18,$02,$28,$85,$00,$1B,$15         ;B48E31|        |      ;
-    db $03,$00,$0D,$00,$03,$10,$01,$09,$02,$94,$8E,$13         ;B48E3D|        |      ;
-    db $1E,$00,$1D,$1E,$03,$00,$20,$00,$5A,$8E,$20,$01         ;B48E49|        |      ;
-    db $72,$8E,$12,$89,$8E,$25,$02,$09,$02,$AE,$8E,$1C         ;B48E55|        |      ;
-    db $1F,$03,$00,$23,$6A,$1F,$7F,$03,$41,$33,$1F,$7F         ;B48E61|        |      ;
-    db $E2,$FF,$12,$89,$8E,$1C,$20,$03,$00,$28,$00,$1F         ;B48E6D|        |      ;
-    db $7F,$03,$47,$21,$09,$80,$14,$41,$33,$1F,$7F,$14         ;B48E79|        |      ;
-    db $00,$12,$89,$8E,$13,$78,$00,$1B,$16,$03,$00,$0B         ;B48E85|        |      ;
-    db $00,$37,$10,$13,$1E,$00,$1A,$68,$00,$38,$02,$E0         ;B48E91|        |      ;
-    db $87,$00,$0D,$00,$FF,$20,$04,$0D,$00,$01,$30,$01         ;B48E9D|        |      ;
-    db $13,$3C,$00,$37,$10,$1A,$68,$00,$38,$02,$D4,$87         ;B48EA9|        |      ;
-    db $00,$0D,$00,$FF,$20,$04,$0D,$00,$01,$30,$01,$13         ;B48EB5|        |      ;
-    db $3C,$00,$37,$10                                         ;B48EC1|        |      ;
  
+    %AICMD0x00_SetMusic($0A, $B4)
+    %AICMD0x08()
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $8E33)
+    %AICMD0x0C($00)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $0218, $8528, $00)
+    %AICMD0x1B($0315, $00)
+    %AICMD0x0D($00, $03, $10, $01)
+    %AICMD0x09($02, $8E94)
+    %AICMD0x13($001E)
+    %AICMD0x1D($031E, $00)
+    %AICMD0x20($00, $8E5A)
+    %AICMD0x20($01, $8E72)
+    %AICMD0x12_Jump($8E89)
+    %AICMD0x25($02)
+    %AICMD0x09($02, $8EAE)
+    %AICMD0x1C($031F, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $03)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFE2)
+    %AICMD0x12_Jump($8E89)
+    %AICMD0x1C($0320, $00)
+    %AICMD0x28($1F00, $7F, $03)
+    %AICMD0x47($800921, $14)
+    %AICMD0x41_ModifyVariable($7F1F33, $0014)
+    %AICMD0x12_Jump($8E89)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0316, $00)
+    %AICMD0x0B($00)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x13($001E)
+    %AICMD0x1A($0068, $0238, $87E0, $00)
+    %AICMD0x0D($00, $FF, $20, $04)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $0238, $87D4, $00)
+    %AICMD0x0D($00, $FF, $20, $04)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B48EC5:
     dw DATA8_B48EE5                                            ;B48EC5|        |B48EE5;
     dw pScripting_B48F95                                       ;B48EC7|        |B48F95;
@@ -520,22 +1199,49 @@ pScripting_B48EC5:
     dw pScripting_B48F95                                       ;B48EE3|        |B48F95;
  
 DATA8_B48EE5:
-    db $09,$01,$F9,$8E,$38,$10,$15,$1C,$1F,$7F,$12,$F8         ;B48EE5|        |      ;
-    db $8E,$13,$01,$00,$12,$EB,$8E,$10,$15,$1C,$1F,$7F         ;B48EF1|        |      ;
-    db $12,$94,$8F,$1A,$98,$00,$A8,$01,$E0,$84,$01,$2D         ;B48EFD|        |      ;
-    db $28,$8F,$2F,$8F,$16,$1C,$1F,$7F,$12,$18,$6E,$8F         ;B48F09|        |      ;
-    db $12,$08,$8F,$2D,$67,$8F,$2F,$8F,$16,$1C,$1F,$7F         ;B48F15|        |      ;
-    db $12,$18,$6E,$8F,$12,$18,$8F,$1C,$2B,$03,$00,$12         ;B48F21|        |      ;
-    db $18,$8F,$15,$1E,$09,$80,$01,$44,$8F,$15,$1E,$09         ;B48F2D|        |      ;
-    db $80,$02,$5A,$8F,$1C,$2F,$03,$00,$12,$08,$8F,$1B         ;B48F39|        |      ;
-    db $09,$03,$01,$1C,$2D,$03,$00,$23,$6A,$1F,$7F,$08         ;B48F45|        |      ;
-    db $41,$33,$1F,$7F,$14,$00,$12,$6E,$8F,$1C,$2E,$03         ;B48F51|        |      ;
-    db $00,$41,$33,$1F,$7F,$EC,$FF,$12,$18,$8F,$1C,$2C         ;B48F5D|        |      ;
-    db $03,$00,$12,$18,$8F,$1B,$0E,$03,$01,$0D,$02,$FE         ;B48F69|        |      ;
-    db $04,$01,$0D,$02,$02,$04,$01,$1B,$0E,$03,$01,$0D         ;B48F75|        |      ;
-    db $01,$00,$48,$01,$1B,$0E,$03,$01,$0D,$02,$FE,$06         ;B48F81|        |      ;
-    db $01,$0D,$02,$02,$04,$01,$37,$10                         ;B48F8D|        |      ;
  
+    %AICMD0x09($01, $8EF9)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x15($7F1F1C, $12, $8EF8)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($8EEB)
+    %AICMD0x10_End()
+    %AICMD0x15($7F1F1C, $12, $8F94)
+    %AICMD0x1A($0098, $01A8, $84E0, $01)
+    %AICMD0x2D($8F28, $8F2F)
+    %AICMD0x16($7F1F1C, $12, $18, $8F6E)
+    %AICMD0x12_Jump($8F08)
+    %AICMD0x2D($8F67, $8F2F)
+    %AICMD0x16($7F1F1C, $12, $18, $8F6E)
+    %AICMD0x12_Jump($8F18)
+    %AICMD0x1C($032B, $00)
+    %AICMD0x12_Jump($8F18)
+    %AICMD0x15($80091E, $01, $8F44)
+    %AICMD0x15($80091E, $02, $8F5A)
+    %AICMD0x1C($032F, $00)
+    %AICMD0x12_Jump($8F08)
+    %AICMD0x1B($0309, $01)
+    %AICMD0x1C($032D, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $08)
+    %AICMD0x41_ModifyVariable($7F1F33, $0014)
+    %AICMD0x12_Jump($8F6E)
+    %AICMD0x1C($032E, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFEC)
+    %AICMD0x12_Jump($8F18)
+    %AICMD0x1C($032C, $00)
+    %AICMD0x12_Jump($8F18)
+    %AICMD0x1B($030E, $01)
+    %AICMD0x0D($02, $FE, $04, $01)
+    %AICMD0x0D($02, $02, $04, $01)
+    %AICMD0x1B($030E, $01)
+    %AICMD0x0D($01, $00, $48, $01)
+    %AICMD0x1B($030E, $01)
+    %AICMD0x0D($02, $FE, $06, $01)
+    %AICMD0x0D($02, $02, $04, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B48F95:
     dw DATA8_B48FB5                                            ;B48F95|        |B48FB5;
     dw DATA8_B48FDE                                            ;B48F97|        |B48FDE;
@@ -555,34 +1261,99 @@ pScripting_B48F95:
     dw pScripting_B490D3                                       ;B48FB3|        |B490D3;
  
 DATA8_B48FB5:
-    db $50,$08,$09,$01,$BF,$8F,$38,$0B,$00,$10,$1A,$88         ;B48FB5|        |      ;
-    db $00,$B8,$01,$0C,$83,$01,$0C,$00,$0D,$00,$FF,$50         ;B48FC1|        |      ;
-    db $01,$1C,$CC,$01,$00,$1B,$90,$02,$00,$0D,$00,$01         ;B48FCD|        |      ;
-    db $60,$01,$37,$11,$10                                     ;B48FD9|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $8FBF)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $01B8, $830C, $01)
+    %AICMD0x0C($00)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x1C($01CC, $00)
+    %AICMD0x1B($0290, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B48FDE:
-    db $50,$00,$0E,$B4,$08,$09,$01,$83,$90,$09,$02,$3D         ;B48FDE|        |      ;
-    db $90,$09,$03,$51,$90,$09,$04,$65,$90,$38,$39,$03         ;B48FEA|        |      ;
-    db $18,$00,$0B,$00,$39,$01,$30,$00,$07,$02,$0B,$01         ;B48FF6|        |      ;
-    db $39,$03,$14,$00,$39,$01,$33,$00,$07,$02,$0B,$02         ;B49002|        |      ;
-    db $0C,$03,$07,$00,$0C,$04,$19,$07,$00,$00,$13,$3C         ;B4900E|        |      ;
-    db $00,$07,$00,$39,$00,$40,$00,$0B,$05,$39,$02,$30         ;B4901A|        |      ;
-    db $00,$40,$39,$00,$40,$00,$0C,$06,$13,$3C,$00,$23         ;B49026|        |      ;
-    db $6A,$1F,$7F,$0D,$28,$6A,$1F,$7F,$0C,$3C,$10,$1A         ;B49032|        |      ;
-    db $58,$00,$C8,$00,$34,$82,$02,$0C,$00,$1C,$D3,$01         ;B4903E|        |      ;
-    db $00,$13,$01,$00,$12,$4B,$90,$1A,$A8,$00,$98,$00         ;B4904A|        |      ;
-    db $34,$82,$03,$0C,$01,$1C,$D4,$01,$00,$13,$01,$00         ;B49056|        |      ;
-    db $12,$5F,$90,$1A,$68,$00,$68,$00,$34,$82,$00,$0C         ;B49062|        |      ;
-    db $02,$1B,$5F,$02,$00,$1C,$D5,$01,$00,$0B,$03,$1B         ;B4906E|        |      ;
-    db $5A,$02,$00,$13,$01,$00,$12,$7D,$90,$1A,$28,$00         ;B4907A|        |      ;
-    db $68,$00,$68,$81,$02,$0C,$03,$1B,$23,$02,$01,$0D         ;B49086|        |      ;
-    db $01,$00,$22,$01,$1C,$D6,$01,$00,$1B,$25,$02,$01         ;B49092|        |      ;
-    db $13,$3C,$00,$1B,$23,$02,$01,$0D,$FF,$00,$04,$01         ;B4909E|        |      ;
-    db $41,$1F,$1F,$7F,$32,$00,$0B,$04,$0C,$05,$1B,$1F         ;B490AA|        |      ;
-    db $02,$00,$0D,$00,$01,$40,$01,$1B,$23,$02,$01,$0D         ;B490B6|        |      ;
-    db $01,$00,$30,$01,$1B,$1F,$02,$00,$0D,$00,$01,$40         ;B490C2|        |      ;
-    db $01,$0B,$06,$37,$10                                     ;B490CE|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x08()
+    %AICMD0x09($01, $9083)
+    %AICMD0x09($02, $903D)
+    %AICMD0x09($03, $9051)
+    %AICMD0x09($04, $9065)
+    %AICMD0x38()
+    %AICMD0x39($03, $0018)
+    %AICMD0x0B($00)
+    %AICMD0x39($01, $0030)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($01)
+    %AICMD0x39($03, $0014)
+    %AICMD0x39($01, $0033)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0C($04)
+    %AICMD0x19($0007, $00)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x39($00, $0040)
+    %AICMD0x0B($05)
+    %AICMD0x39($02, $0030)
+    %AICMD0x40()
+    %AICMD0x39($00, $0040)
+    %AICMD0x0C($06)
+    %AICMD0x13($003C)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $0D)
+    %AICMD0x28($1F6A, $7F, $0C)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0058, $00C8, $8234, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1C($01D3, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($904B)
+    %AICMD0x1A($00A8, $0098, $8234, $03)
+    %AICMD0x0C($01)
+    %AICMD0x1C($01D4, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($905F)
+    %AICMD0x1A($0068, $0068, $8234, $00)
+    %AICMD0x0C($02)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x1C($01D5, $00)
+    %AICMD0x0B($03)
+    %AICMD0x1B($025A, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($907D)
+    %AICMD0x1A($0028, $0068, $8168, $02)
+    %AICMD0x0C($03)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($01, $00, $22, $01)
+    %AICMD0x1C($01D6, $00)
+    %AICMD0x1B($0225, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($FF, $00, $04, $01)
+    %AICMD0x41_ModifyVariable($7F1F1F, $0032)
+    %AICMD0x0B($04)
+    %AICMD0x0C($05)
+    %AICMD0x1B($021F, $00)
+    %AICMD0x0D($00, $01, $40, $01)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($021F, $00)
+    %AICMD0x0D($00, $01, $40, $01)
+    %AICMD0x0B($06)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B490D3:
     dw DATA8_B490F3                                            ;B490D3|        |B490F3;
     dw DATA8_B4911C                                            ;B490D5|        |B4911C;
@@ -602,26 +1373,74 @@ pScripting_B490D3:
     dw pScripting_B491B3                                       ;B490F1|        |B491B3;
  
 DATA8_B490F3:
-    db $50,$08,$09,$01,$FD,$90,$38,$0B,$00,$10,$1A,$88         ;B490F3|        |      ;
-    db $00,$B8,$01,$A4,$81,$01,$0C,$00,$0D,$00,$FF,$50         ;B490FF|        |      ;
-    db $01,$1C,$DB,$01,$00,$1B,$27,$02,$00,$0D,$00,$01         ;B4910B|        |      ;
-    db $60,$01,$37,$11,$10                                     ;B49117|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $90FD)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $01B8, $81A4, $01)
+    %AICMD0x0C($00)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x1C($01DB, $00)
+    %AICMD0x1B($0227, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B4911C:
-    db $50,$00,$0E,$B4,$02,$03,$07,$05,$88,$00,$C8,$01         ;B4911C|        |      ;
-    db $07,$01,$08,$09,$01,$55,$91,$09,$02,$9D,$91,$3B         ;B49128|        |      ;
-    db $24,$38,$0B,$03,$39,$01,$40,$00,$3F,$0B,$00,$0C         ;B49134|        |      ;
-    db $02,$40,$39,$00,$60,$00,$13,$3C,$00,$23,$6A,$1F         ;B49140|        |      ;
-    db $7F,$0F,$28,$6A,$1F,$7F,$0E,$3C,$10,$1A,$88,$00         ;B4914C|        |      ;
-    db $78,$01,$98,$81,$00,$0C,$00,$1B,$26,$02,$00,$13         ;B49158|        |      ;
-    db $3C,$00,$1C,$E1,$01,$00,$1B,$2B,$02,$01,$0D,$01         ;B49164|        |      ;
-    db $00,$10,$01,$1B,$27,$02,$00,$0D,$00,$01,$10,$01         ;B49170|        |      ;
-    db $1B,$26,$02,$00,$13,$14,$00,$1B,$2D,$02,$00,$13         ;B4917C|        |      ;
-    db $3C,$00,$41,$21,$1F,$7F,$32,$00,$1B,$27,$02,$00         ;B49188|        |      ;
-    db $0D,$00,$01,$50,$01,$0B,$01,$37,$10,$1A,$28,$00         ;B49194|        |      ;
-    db $68,$01,$18,$83,$02,$0C,$01,$1C,$E2,$01,$00,$0B         ;B491A0|        |      ;
-    db $02,$13,$01,$00,$12,$AD,$91                             ;B491AC|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0088, $01C8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $9155)
+    %AICMD0x09($02, $919D)
+    %AICMD0x3B($24)
+    %AICMD0x38()
+    %AICMD0x0B($03)
+    %AICMD0x39($01, $0040)
+    %AICMD0x3F()
+    %AICMD0x0B($00)
+    %AICMD0x0C($02)
+    %AICMD0x40()
+    %AICMD0x39($00, $0060)
+    %AICMD0x13($003C)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $0F)
+    %AICMD0x28($1F6A, $7F, $0E)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $0178, $8198, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0226, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1C($01E1, $00)
+    %AICMD0x1B($022B, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x1B($0227, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($0226, $00)
+    %AICMD0x13($0014)
+    %AICMD0x1B($022D, $00)
+    %AICMD0x13($003C)
+    %AICMD0x41_ModifyVariable($7F1F21, $0032)
+    %AICMD0x1B($0227, $00)
+    %AICMD0x0D($00, $01, $50, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0028, $0168, $8318, $02)
+    %AICMD0x0C($01)
+    %AICMD0x1C($01E2, $00)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($91AD)
+
 pScripting_B491B3:
     dw DATA8_B491D3                                            ;B491B3|        |B491D3;
     dw DATA8_B49210                                            ;B491B5|        |B49210;
@@ -641,32 +1460,87 @@ pScripting_B491B3:
     dw pScripting_B492D2                                       ;B491D1|        |B492D2;
  
 DATA8_B491D3:
-    db $50,$08,$09,$01,$DD,$91,$38,$0B,$00,$10,$1A,$88         ;B491D3|        |      ;
-    db $00,$B8,$01,$24,$83,$01,$0C,$00,$0D,$00,$FF,$50         ;B491DF|        |      ;
-    db $01,$1B,$9B,$02,$01,$13,$0A,$00,$1B,$9B,$02,$00         ;B491EB|        |      ;
-    db $13,$0A,$00,$1B,$99,$02,$00,$1C,$E3,$01,$00,$1B         ;B491F7|        |      ;
-    db $97,$02,$00,$0D,$00,$01,$60,$01,$0B,$01,$37,$11         ;B49203|        |      ;
-    db $10                                                     ;B4920F|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $91DD)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $01B8, $8324, $01)
+    %AICMD0x0C($00)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($029B, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0299, $00)
+    %AICMD0x1C($01E3, $00)
+    %AICMD0x1B($0297, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B49210:
-    db $00,$0E,$B4,$09,$01,$21,$92,$38,$11,$10,$13,$01         ;B49210|        |      ;
-    db $00,$12,$1A,$92,$10,$1A,$38,$00,$F8,$00,$EC,$87         ;B4921C|        |      ;
-    db $00,$12,$2C,$92,$2D,$3C,$92,$4A,$92,$12,$2C,$92         ;B49228|        |      ;
-    db $2D,$43,$92,$4A,$92,$12,$34,$92,$1C,$E5,$01,$00         ;B49234|        |      ;
-    db $12,$34,$92,$1C,$E8,$01,$00,$12,$34,$92,$43,$1E         ;B49240|        |      ;
-    db $09,$80,$18,$00,$59,$92,$1C,$E8,$01,$00,$12,$34         ;B4924C|        |      ;
-    db $92,$08,$1B,$4F,$02,$01,$1C,$E7,$01,$00,$1B,$52         ;B49258|        |      ;
-    db $02,$01,$13,$5A,$00,$1B,$4F,$02,$01,$41,$23,$1F         ;B49264|        |      ;
-    db $7F,$32,$00,$0B,$00,$07,$02,$39,$02,$30,$00,$07         ;B49270|        |      ;
-    db $00,$1B,$50,$02,$01,$0D,$01,$00,$30,$01,$1B,$4C         ;B4927C|        |      ;
-    db $02,$00,$0D,$00,$01,$20,$02,$13,$0A,$00,$0D,$00         ;B49288|        |      ;
-    db $01,$30,$01,$13,$0A,$00,$0D,$01,$01,$18,$02,$13         ;B49294|        |      ;
-    db $0A,$00,$0D,$00,$01,$46,$01,$1B,$47,$03,$00,$3A         ;B492A0|        |      ;
-    db $00,$44,$00,$19,$24,$00,$00,$13,$3C,$00,$1C,$47         ;B492AC|        |      ;
-    db $01,$00,$07,$00,$13,$1E,$00,$1B,$4E,$02,$00,$13         ;B492B8|        |      ;
-    db $3C,$00,$23,$6C,$1F,$7F,$01,$28,$6C,$1F,$7F,$00         ;B492C4|        |      ;
-    db $3C,$10                                                 ;B492D0|        |      ;
  
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x09($01, $9221)
+    %AICMD0x38()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($921A)
+    %AICMD0x10_End()
+    %AICMD0x1A($0038, $00F8, $87EC, $00)
+    %AICMD0x12_Jump($922C)
+    %AICMD0x2D($923C, $924A)
+    %AICMD0x12_Jump($922C)
+    %AICMD0x2D($9243, $924A)
+    %AICMD0x12_Jump($9234)
+    %AICMD0x1C($01E5, $00)
+    %AICMD0x12_Jump($9234)
+    %AICMD0x1C($01E8, $00)
+    %AICMD0x12_Jump($9234)
+    %AICMD0x43($80091E, $0018, $9259)
+    %AICMD0x1C($01E8, $00)
+    %AICMD0x12_Jump($9234)
+    %AICMD0x08()
+    %AICMD0x1B($024F, $01)
+    %AICMD0x1C($01E7, $00)
+    %AICMD0x1B($0252, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($024F, $01)
+    %AICMD0x41_ModifyVariable($7F1F23, $0032)
+    %AICMD0x0B($00)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x39($02, $0030)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x1B($0250, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($024C, $00)
+    %AICMD0x0D($00, $01, $20, $02)
+    %AICMD0x13($000A)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($000A)
+    %AICMD0x0D($01, $01, $18, $02)
+    %AICMD0x13($000A)
+    %AICMD0x0D($00, $01, $46, $01)
+    %AICMD0x1B($0347, $00)
+    %AICMD0x3A($00, $0044)
+    %AICMD0x19($0024, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1C($0147, $00)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($024E, $00)
+    %AICMD0x13($003C)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $01)
+    %AICMD0x28($1F6C, $7F, $00)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+
 pScripting_B492D2:
     dw DATA8_B492F2                                            ;B492D2|        |B492F2;
     dw DATA8_B4931D                                            ;B492D4|        |B4931D;
@@ -686,39 +1560,114 @@ pScripting_B492D2:
     dw pScripting_B4943C                                       ;B492F0|        |B4943C;
  
 DATA8_B492F2:
-    db $50,$08,$09,$01,$FC,$92,$38,$0B,$00,$10,$1A,$88         ;B492F2|        |      ;
-    db $00,$B8,$01,$EC,$81,$01,$0C,$00,$0D,$00,$FF,$50         ;B492FE|        |      ;
-    db $01,$1C,$EB,$01,$00,$1B,$3D,$02,$00,$0D,$00,$01         ;B4930A|        |      ;
-    db $60,$01,$0B,$01,$37,$11,$10                             ;B49316|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $92FC)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $01B8, $81EC, $01)
+    %AICMD0x0C($00)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x1C($01EB, $00)
+    %AICMD0x1B($023D, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B4931D:
-    db $00,$0E,$B4,$09,$0A,$26,$93,$38,$10,$1A,$9C,$02         ;B4931D|        |      ;
-    db $8E,$01,$58,$85,$03,$1F,$34,$93,$12,$2E,$93,$08         ;B49329|        |      ;
-    db $1B,$20,$03,$01,$0D,$01,$FF,$18,$02,$0D,$01,$00         ;B49335|        |      ;
-    db $10,$04,$23,$5E,$1F,$7F,$03,$15,$19,$1F,$7F,$00         ;B49341|        |      ;
-    db $64,$93,$15,$19,$1F,$7F,$01,$69,$93,$15,$19,$1F         ;B4934D|        |      ;
-    db $7F,$02,$6E,$93,$15,$19,$1F,$7F,$03,$73,$93,$3D         ;B49359|        |      ;
-    db $10,$12,$78,$93,$3D,$11,$12,$78,$93,$3D,$12,$12         ;B49365|        |      ;
-    db $78,$93,$3D,$13,$12,$78,$93,$10,$1A,$88,$02,$F5         ;B49371|        |      ;
-    db $01,$58,$85,$03,$0C,$01,$1B,$20,$03,$01,$0D,$02         ;B4937D|        |      ;
-    db $FF,$20,$02,$0D,$01,$FF,$20,$02,$0D,$01,$FF,$50         ;B49389|        |      ;
-    db $01,$0B,$02,$37,$10,$1A,$08,$02,$08,$02,$EC,$81         ;B49395|        |      ;
-    db $02,$0D,$01,$00,$60,$01,$1B,$40,$02,$01,$13,$5A         ;B493A1|        |      ;
-    db $00,$1C,$F1,$01,$00,$0B,$01,$1B,$42,$02,$00,$13         ;B493AD|        |      ;
-    db $5A,$00,$0C,$02,$1B,$40,$02,$01,$1C,$F2,$01,$00         ;B493B9|        |      ;
-    db $1B,$41,$02,$01,$0D,$01,$00,$14,$01,$1B,$43,$02         ;B493C5|        |      ;
-    db $01,$13,$5A,$00,$41,$25,$1F,$7F,$32,$00,$1B,$40         ;B493D1|        |      ;
-    db $02,$01,$13,$28,$00,$1B,$41,$02,$00,$0D,$FF,$00         ;B493DD|        |      ;
-    db $44,$01,$1B,$3D,$02,$00,$0D,$00,$01,$50,$01,$1B         ;B493E9|        |      ;
-    db $41,$02,$00,$0D,$FF,$00,$70,$01,$0B,$03,$37,$10         ;B493F5|        |      ;
  
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x09($0A, $9326)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($029C, $018E, $8558, $03)
+    %AICMD0x1F($9334)
+    %AICMD0x12_Jump($932E)
+    %AICMD0x08()
+    %AICMD0x1B($0320, $01)
+    %AICMD0x0D($01, $FF, $18, $02)
+    %AICMD0x0D($01, $00, $10, $04)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $03)
+    %AICMD0x15($7F1F19, $00, $9364)
+    %AICMD0x15($7F1F19, $01, $9369)
+    %AICMD0x15($7F1F19, $02, $936E)
+    %AICMD0x15($7F1F19, $03, $9373)
+    %AICMD0x3D($10)
+    %AICMD0x12_Jump($9378)
+    %AICMD0x3D($11)
+    %AICMD0x12_Jump($9378)
+    %AICMD0x3D($12)
+    %AICMD0x12_Jump($9378)
+    %AICMD0x3D($13)
+    %AICMD0x12_Jump($9378)
+    %AICMD0x10_End()
+    %AICMD0x1A($0288, $01F5, $8558, $03)
+    %AICMD0x0C($01)
+    %AICMD0x1B($0320, $01)
+    %AICMD0x0D($02, $FF, $20, $02)
+    %AICMD0x0D($01, $FF, $20, $02)
+    %AICMD0x0D($01, $FF, $50, $01)
+    %AICMD0x0B($02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0208, $0208, $81EC, $02)
+    %AICMD0x0D($01, $00, $60, $01)
+    %AICMD0x1B($0240, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1C($01F1, $00)
+    %AICMD0x0B($01)
+    %AICMD0x1B($0242, $00)
+    %AICMD0x13($005A)
+    %AICMD0x0C($02)
+    %AICMD0x1B($0240, $01)
+    %AICMD0x1C($01F2, $00)
+    %AICMD0x1B($0241, $01)
+    %AICMD0x0D($01, $00, $14, $01)
+    %AICMD0x1B($0243, $01)
+    %AICMD0x13($005A)
+    %AICMD0x41_ModifyVariable($7F1F25, $0032)
+    %AICMD0x1B($0240, $01)
+    %AICMD0x13($0028)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($FF, $00, $44, $01)
+    %AICMD0x1B($023D, $00)
+    %AICMD0x0D($00, $01, $50, $01)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($FF, $00, $70, $01)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 DATA8_B49401:
-    db $50,$02,$08,$07,$03,$05,$88,$02,$08,$02,$09,$0A         ;B49401|        |      ;
-    db $9A,$93,$09,$0B,$79,$93,$38,$0C,$01,$07,$01,$13         ;B4940D|        |      ;
-    db $3C,$00,$07,$02,$13,$50,$00,$07,$01,$13,$78,$00         ;B49419|        |      ;
-    db $07,$03,$13,$DC,$00,$39,$03,$30,$00,$0C,$03,$23         ;B49425|        |      ;
-    db $6C,$1F,$7F,$03,$28,$6C,$1F,$7F,$02,$3C,$10             ;B49431|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x02_FreezeTime()
+    %AICMD0x08()
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x05_SetPosition($0288, $0208)
+    %AICMD0x09($0A, $939A)
+    %AICMD0x09($0B, $9379)
+    %AICMD0x38()
+    %AICMD0x0C($01)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($0050)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($00DC)
+    %AICMD0x39($03, $0030)
+    %AICMD0x0C($03)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $03)
+    %AICMD0x28($1F6C, $7F, $02)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+
 pScripting_B4943C:
     dw DATA8_B4945C                                            ;B4943C|        |B4945C;
     dw DATA8_B49499                                            ;B4943E|        |B49499;
@@ -738,60 +1687,174 @@ pScripting_B4943C:
     dw pScripting_B4967A                                       ;B4945A|        |B4967A;
  
 DATA8_B4945C:
-    db $50,$08,$09,$01,$66,$94,$38,$0B,$00,$10,$1A,$88         ;B4945C|        |      ;
-    db $00,$B8,$01,$40,$82,$01,$0C,$00,$0D,$00,$FE,$28         ;B49468|        |      ;
-    db $01,$1B,$5F,$02,$01,$13,$0A,$00,$1B,$5F,$02,$00         ;B49474|        |      ;
-    db $13,$0A,$00,$1B,$5D,$02,$00,$1C,$F5,$01,$00,$1B         ;B49480|        |      ;
-    db $5B,$02,$00,$0D,$00,$02,$30,$01,$0B,$01,$37,$11         ;B4948C|        |      ;
-    db $10                                                     ;B49498|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $9466)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $01B8, $8240, $01)
+    %AICMD0x0C($00)
+    %AICMD0x0D($00, $FE, $28, $01)
+    %AICMD0x1B($025F, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($025D, $00)
+    %AICMD0x1C($01F5, $00)
+    %AICMD0x1B($025B, $00)
+    %AICMD0x0D($00, $02, $30, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B49499:
-    db $09,$01,$B1,$94,$09,$02,$C6,$94,$09,$03,$E2,$94         ;B49499|        |      ;
-    db $09,$04,$F7,$94,$38,$10,$13,$01,$00,$12,$AB,$94         ;B494A5|        |      ;
-    db $1A,$08,$02,$38,$02,$40,$82,$03,$1F,$BF,$94,$12         ;B494B1|        |      ;
-    db $B9,$94,$1C,$F7,$01,$00,$12,$B9,$94,$1A,$68,$01         ;B494BD|        |      ;
-    db $18,$02,$40,$82,$03,$22,$10,$10,$01,$40,$82,$10         ;B494C9|        |      ;
-    db $1F,$DB,$94,$12,$D5,$94,$1C,$F8,$01,$00,$12,$D5         ;B494D5|        |      ;
-    db $94,$1A,$88,$01,$48,$00,$40,$82,$00,$1F,$F0,$94         ;B494E1|        |      ;
-    db $12,$EA,$94,$1C,$F7,$01,$00,$12,$EA,$94,$1A,$D8         ;B494ED|        |      ;
-    db $00,$D8,$01,$34,$82,$00,$22,$20,$00,$01,$40,$82         ;B494F9|        |      ;
-    db $10,$1F,$0C,$95,$12,$06,$95,$1C,$FA,$01,$00,$12         ;B49505|        |      ;
-    db $06,$95                                                 ;B49511|        |      ;
  
+    %AICMD0x09($01, $94B1)
+    %AICMD0x09($02, $94C6)
+    %AICMD0x09($03, $94E2)
+    %AICMD0x09($04, $94F7)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($94AB)
+    %AICMD0x1A($0208, $0238, $8240, $03)
+    %AICMD0x1F($94BF)
+    %AICMD0x12_Jump($94B9)
+    %AICMD0x1C($01F7, $00)
+    %AICMD0x12_Jump($94B9)
+    %AICMD0x1A($0168, $0218, $8240, $03)
+    %AICMD0x22($10, $10, $01, $8240, $10)
+    %AICMD0x1F($94DB)
+    %AICMD0x12_Jump($94D5)
+    %AICMD0x1C($01F8, $00)
+    %AICMD0x12_Jump($94D5)
+    %AICMD0x1A($0188, $0048, $8240, $00)
+    %AICMD0x1F($94F0)
+    %AICMD0x12_Jump($94EA)
+    %AICMD0x1C($01F7, $00)
+    %AICMD0x12_Jump($94EA)
+    %AICMD0x1A($00D8, $01D8, $8234, $00)
+    %AICMD0x22($20, $00, $01, $8240, $10)
+    %AICMD0x1F($950C)
+    %AICMD0x12_Jump($9506)
+    %AICMD0x1C($01FA, $00)
+    %AICMD0x12_Jump($9506)
+
 DATA8_B49513:
-    db $50,$00,$0E,$B4,$09,$01,$74,$95,$09,$02,$5F,$95         ;B49513|        |      ;
-    db $38,$0C,$00,$23,$5E,$1F,$7F,$05,$15,$19,$1F,$7F         ;B4951F|        |      ;
-    db $00,$43,$95,$15,$19,$1F,$7F,$01,$48,$95,$15,$19         ;B4952B|        |      ;
-    db $1F,$7F,$02,$4D,$95,$15,$19,$1F,$7F,$03,$52,$95         ;B49537|        |      ;
-    db $3D,$10,$12,$57,$95,$3D,$11,$12,$57,$95,$3D,$12         ;B49543|        |      ;
-    db $12,$57,$95,$3D,$13,$12,$57,$95,$05,$A8,$00,$A8         ;B4954F|        |      ;
-    db $01,$07,$00,$10,$1A,$98,$01,$78,$00,$04,$82,$02         ;B4955B|        |      ;
-    db $1F,$6D,$95,$12,$67,$95,$1C,$F6,$01,$00,$12,$67         ;B49567|        |      ;
-    db $95,$1A,$38,$00,$58,$00,$60,$86,$03,$1F,$82,$95         ;B49573|        |      ;
-    db $12,$7C,$95,$1C,$FC,$01,$00,$0B,$00,$12,$7C,$95         ;B4957F|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x09($01, $9574)
+    %AICMD0x09($02, $955F)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $05)
+    %AICMD0x15($7F1F19, $00, $9543)
+    %AICMD0x15($7F1F19, $01, $9548)
+    %AICMD0x15($7F1F19, $02, $954D)
+    %AICMD0x15($7F1F19, $03, $9552)
+    %AICMD0x3D($10)
+    %AICMD0x12_Jump($9557)
+    %AICMD0x3D($11)
+    %AICMD0x12_Jump($9557)
+    %AICMD0x3D($12)
+    %AICMD0x12_Jump($9557)
+    %AICMD0x3D($13)
+    %AICMD0x12_Jump($9557)
+    %AICMD0x05_SetPosition($00A8, $01A8)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x10_End()
+    %AICMD0x1A($0198, $0078, $8204, $02)
+    %AICMD0x1F($956D)
+    %AICMD0x12_Jump($9567)
+    %AICMD0x1C($01F6, $00)
+    %AICMD0x12_Jump($9567)
+    %AICMD0x1A($0038, $0058, $8660, $03)
+    %AICMD0x1F($9582)
+    %AICMD0x12_Jump($957C)
+    %AICMD0x1C($01FC, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($957C)
+
 DATA8_B4958B:
-    db $50,$08,$09,$01,$C4,$95,$09,$02,$5F,$96,$09,$03         ;B4958B|        |      ;
-    db $2A,$96,$38,$0B,$00,$0C,$02,$07,$03,$0C,$04,$07         ;B49597|        |      ;
-    db $00,$0C,$06,$13,$78,$00,$39,$00,$30,$00,$0C,$07         ;B495A3|        |      ;
-    db $07,$02,$13,$3C,$00,$39,$02,$20,$00,$23,$6C,$1F         ;B495AF|        |      ;
-    db $7F,$05,$28,$6C,$1F,$7F,$04,$3C,$10,$1A,$68,$00         ;B495BB|        |      ;
-    db $A8,$01,$04,$82,$02,$0C,$00,$1B,$49,$02,$01,$0D         ;B495C7|        |      ;
-    db $01,$00,$20,$01,$1C,$FD,$01,$01,$0B,$01,$0C,$02         ;B495D3|        |      ;
-    db $1C,$FF,$01,$01,$0B,$03,$0C,$05,$1B,$49,$02,$01         ;B495DF|        |      ;
-    db $0D,$01,$00,$10,$01,$1C,$00,$02,$01,$0D,$01,$00         ;B495EB|        |      ;
-    db $08,$01,$1B,$4A,$02,$01,$13,$5A,$00,$41,$27,$1F         ;B495F7|        |      ;
-    db $7F,$32,$00,$0B,$06,$1B,$45,$02,$00,$0D,$00,$01         ;B49603|        |      ;
-    db $30,$01,$13,$0A,$00,$1B,$49,$02,$01,$0D,$01,$00         ;B4960F|        |      ;
-    db $30,$01,$0B,$07,$1B,$49,$02,$01,$0D,$01,$00,$76         ;B4961B|        |      ;
-    db $01,$37,$10,$1A,$98,$00,$A8,$01,$D0,$82,$00,$0C         ;B49627|        |      ;
-    db $01,$1B,$81,$02,$00,$1C,$FE,$01,$00,$0B,$02,$0C         ;B49633|        |      ;
-    db $03,$1B,$7D,$02,$00,$0D,$00,$01,$30,$01,$1B,$81         ;B4963F|        |      ;
-    db $02,$01,$0D,$01,$00,$20,$01,$0B,$04,$1B,$81,$02         ;B4964B|        |      ;
-    db $01,$0D,$01,$00,$70,$01,$37,$10,$1A,$D8,$00,$D8         ;B49657|        |      ;
-    db $01,$34,$82,$03,$0C,$04,$1C,$F9,$01,$01,$1B,$5F         ;B49663|        |      ;
-    db $02,$01,$0D,$01,$00,$70,$01,$0B,$05,$37,$10             ;B4966F|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $95C4)
+    %AICMD0x09($02, $965F)
+    %AICMD0x09($03, $962A)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x0C($02)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0C($04)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0C($06)
+    %AICMD0x13($0078)
+    %AICMD0x39($00, $0030)
+    %AICMD0x0C($07)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($003C)
+    %AICMD0x39($02, $0020)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $05)
+    %AICMD0x28($1F6C, $7F, $04)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $01A8, $8204, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0249, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1C($01FD, $01)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x1C($01FF, $01)
+    %AICMD0x0B($03)
+    %AICMD0x0C($05)
+    %AICMD0x1B($0249, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x1C($0200, $01)
+    %AICMD0x0D($01, $00, $08, $01)
+    %AICMD0x1B($024A, $01)
+    %AICMD0x13($005A)
+    %AICMD0x41_ModifyVariable($7F1F27, $0032)
+    %AICMD0x0B($06)
+    %AICMD0x1B($0245, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0249, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x0B($07)
+    %AICMD0x1B($0249, $01)
+    %AICMD0x0D($01, $00, $76, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0098, $01A8, $82D0, $00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($0281, $00)
+    %AICMD0x1C($01FE, $00)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x1B($027D, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x1B($0281, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x0B($04)
+    %AICMD0x1B($0281, $01)
+    %AICMD0x0D($01, $00, $70, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($00D8, $01D8, $8234, $03)
+    %AICMD0x0C($04)
+    %AICMD0x1C($01F9, $01)
+    %AICMD0x1B($025F, $01)
+    %AICMD0x0D($01, $00, $70, $01)
+    %AICMD0x0B($05)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B4967A:
     dw DATA8_B4969A                                            ;B4967A|        |B4969A;
     dw pScripting_B49A3F                                       ;B4967C|        |B49A3F;
@@ -811,85 +1874,247 @@ pScripting_B4967A:
     dw pScripting_B49A3F                                       ;B49698|        |B49A3F;
  
 DATA8_B4969A:
-    db $50,$00,$18,$B4,$23,$60,$1F,$7F,$09,$02,$03,$07         ;B4969A|        |      ;
-    db $05,$68,$01,$98,$00,$07,$00,$08,$19,$E8,$00,$00         ;B496A6|        |      ;
-    db $09,$01,$9C,$97,$09,$02,$CF,$99,$09,$03,$DD,$99         ;B496B2|        |      ;
-    db $09,$04,$EB,$99,$09,$05,$F9,$99,$09,$06,$15,$9A         ;B496BE|        |      ;
-    db $09,$07,$07,$9A,$09,$08,$23,$9A,$09,$09,$31,$9A         ;B496CA|        |      ;
-    db $09,$0A,$3C,$97,$15,$19,$1F,$7F,$00,$F6,$96,$15         ;B496D6|        |      ;
-    db $19,$1F,$7F,$01,$FB,$96,$15,$19,$1F,$7F,$02,$00         ;B496E2|        |      ;
-    db $97,$15,$19,$1F,$7F,$03,$05,$97,$06,$04,$12,$0A         ;B496EE|        |      ;
-    db $97,$06,$05,$12,$0A,$97,$06,$06,$12,$0A,$97,$06         ;B496FA|        |      ;
-    db $07,$12,$0A,$97,$38,$0C,$01,$09,$0B,$1D,$99,$09         ;B49706|        |      ;
-    db $0C,$49,$99,$09,$0D,$73,$99,$09,$0E,$90,$99,$09         ;B49712|        |      ;
-    db $0F,$AD,$99,$0C,$03,$13,$3C,$00,$41,$33,$1F,$7F         ;B4971E|        |      ;
-    db $32,$00,$01,$24,$74,$13,$B4,$00,$1C,$BF,$01,$00         ;B4972A|        |      ;
-    db $47,$73,$09,$80,$03,$10,$1A,$68,$01,$98,$00,$40         ;B49736|        |      ;
-    db $8B,$00,$13,$B4,$00,$1B,$2D,$03,$00,$29,$00,$00         ;B49742|        |      ;
-    db $01,$00,$10,$0D,$00,$01,$10,$01,$1B,$2C,$03,$00         ;B4974E|        |      ;
-    db $13,$3C,$00,$1B,$2E,$03,$00,$13,$3C,$00,$1B,$2F         ;B4975A|        |      ;
-    db $03,$00,$09,$10,$8F,$97,$13,$78,$00,$1B,$2C,$03         ;B49766|        |      ;
-    db $00,$13,$3C,$00,$1B,$2D,$03,$00,$29,$00,$00,$01         ;B49772|        |      ;
-    db $00,$30,$0D,$00,$01,$30,$01,$13,$3C,$00,$1B,$2C         ;B4977E|        |      ;
-    db $03,$00,$0B,$01,$10,$1A,$70,$01,$90,$00,$4C,$8B         ;B4978A|        |      ;
-    db $00,$13,$3C,$00,$37,$10,$14,$66,$1F,$7F,$00,$BF         ;B49796|        |      ;
-    db $97,$14,$66,$1F,$7F,$01,$00,$98,$14,$66,$1F,$7F         ;B497A2|        |      ;
-    db $02,$41,$98,$14,$66,$1F,$7F,$03,$82,$98,$14,$66         ;B497AE|        |      ;
-    db $1F,$7F,$04,$C3,$98,$1A,$78,$01,$98,$00,$6C,$86         ;B497BA|        |      ;
-    db $00,$13,$B4,$00,$1B,$31,$03,$00,$0D,$00,$01,$10         ;B497C6|        |      ;
-    db $01,$1B,$30,$03,$00,$13,$40,$00,$1B,$32,$03,$00         ;B497D2|        |      ;
-    db $13,$3C,$00,$1B,$33,$03,$00,$13,$78,$00,$1B,$30         ;B497DE|        |      ;
-    db $03,$00,$13,$3C,$00,$1B,$31,$03,$00,$0D,$00,$01         ;B497EA|        |      ;
-    db $30,$01,$0B,$02,$13,$01,$00,$12,$FA,$97,$1A,$78         ;B497F6|        |      ;
-    db $01,$98,$00,$78,$86,$00,$1B,$35,$03,$00,$13,$B4         ;B49802|        |      ;
-    db $00,$0D,$00,$01,$10,$01,$1B,$34,$03,$00,$13,$3C         ;B4980E|        |      ;
-    db $00,$1B,$36,$03,$00,$13,$3C,$00,$1B,$37,$03,$00         ;B4981A|        |      ;
-    db $13,$78,$00,$1B,$36,$03,$00,$13,$3C,$00,$1B,$35         ;B49826|        |      ;
-    db $03,$00,$0D,$00,$01,$30,$01,$0B,$02,$13,$01,$00         ;B49832|        |      ;
-    db $12,$3B,$98,$1A,$78,$01,$98,$00,$84,$86,$00,$1B         ;B4983E|        |      ;
-    db $41,$03,$00,$13,$B4,$00,$0D,$00,$01,$10,$01,$1B         ;B4984A|        |      ;
-    db $40,$03,$00,$13,$3C,$00,$1B,$42,$03,$00,$13,$3C         ;B49856|        |      ;
-    db $00,$1B,$43,$03,$00,$13,$78,$00,$1B,$42,$03,$00         ;B49862|        |      ;
-    db $13,$3C,$00,$1B,$41,$03,$00,$0D,$00,$01,$30,$01         ;B4986E|        |      ;
-    db $0B,$02,$13,$01,$00,$12,$7C,$98,$1A,$78,$01,$98         ;B4987A|        |      ;
-    db $00,$90,$86,$00,$1B,$39,$03,$00,$13,$B4,$00,$0D         ;B49886|        |      ;
-    db $00,$01,$10,$01,$1B,$38,$03,$00,$13,$3C,$00,$1B         ;B49892|        |      ;
-    db $3A,$03,$00,$13,$3C,$00,$1B,$3B,$03,$00,$13,$78         ;B4989E|        |      ;
-    db $00,$1B,$38,$03,$00,$13,$3C,$00,$1B,$39,$03,$00         ;B498AA|        |      ;
-    db $0D,$00,$01,$30,$01,$0B,$02,$13,$01,$00,$12,$BD         ;B498B6|        |      ;
-    db $98,$1A,$78,$01,$98,$00,$9C,$86,$00,$1B,$3D,$03         ;B498C2|        |      ;
-    db $00,$13,$B4,$00,$0D,$00,$01,$10,$01,$1B,$3C,$03         ;B498CE|        |      ;
-    db $00,$13,$3C,$00,$1B,$3E,$03,$00,$13,$3C,$00,$1B         ;B498DA|        |      ;
-    db $3F,$03,$00,$13,$78,$00,$1B,$3E,$03,$00,$13,$3C         ;B498E6|        |      ;
-    db $00,$1B,$3D,$03,$00,$0D,$00,$01,$30,$01,$0B,$02         ;B498F2|        |      ;
-    db $13,$01,$00,$12,$FE,$98,$1A,$78,$01,$D0,$00,$3C         ;B498FE|        |      ;
-    db $86,$00,$0D,$01,$FF,$40,$02,$0D,$01,$00,$20,$02         ;B4990A|        |      ;
-    db $0D,$01,$01,$40,$02,$37,$10,$1A,$08,$02,$CC,$00         ;B49916|        |      ;
-    db $4C,$85,$03,$0C,$02,$0D,$FD,$00,$30,$03,$0D,$FD         ;B49922|        |      ;
-    db $FF,$30,$03,$0D,$FC,$FE,$30,$03,$0D,$FC,$FD,$18         ;B4992E|        |      ;
-    db $02,$0D,$FC,$FC,$18,$02,$0D,$FC,$FB,$14,$02,$0B         ;B4993A|        |      ;
-    db $03,$37,$10,$1A,$F8,$01,$68,$00,$4C,$85,$03,$0C         ;B49946|        |      ;
-    db $02,$13,$28,$00,$0D,$FD,$04,$3C,$03,$0D,$FD,$03         ;B49952|        |      ;
-    db $30,$02,$0D,$FD,$02,$40,$02,$0D,$FD,$01,$40,$02         ;B4995E|        |      ;
-    db $0D,$FD,$00,$30,$02,$0B,$03,$37,$10,$1A,$00,$01         ;B4996A|        |      ;
-    db $C8,$00,$4C,$85,$02,$0C,$02,$0D,$03,$FF,$30,$02         ;B49976|        |      ;
-    db $0D,$03,$FE,$20,$03,$0D,$01,$FF,$40,$01,$0B,$03         ;B49982|        |      ;
-    db $37,$10,$1A,$96,$01,$48,$00,$4C,$85,$00,$0C,$02         ;B4998E|        |      ;
-    db $0D,$00,$02,$20,$02,$0D,$FE,$03,$40,$03,$0D,$FE         ;B4999A|        |      ;
-    db $03,$90,$02,$0B,$03,$37,$10,$1A,$E8,$00,$28,$00         ;B499A6|        |      ;
-    db $4C,$85,$00,$0C,$02,$0D,$00,$02,$40,$02,$0D,$01         ;B499B2|        |      ;
-    db $03,$40,$03,$0D,$02,$03,$40,$03,$0D,$03,$03,$58         ;B499BE|        |      ;
-    db $03,$0B,$03,$37,$10,$1A,$40,$01,$98,$00,$60,$83         ;B499CA|        |      ;
-    db $02,$13,$01,$00,$12,$D7,$99,$1A,$98,$01,$98,$00         ;B499D6|        |      ;
-    db $0C,$83,$03,$13,$01,$00,$12,$E5,$99,$1A,$48,$01         ;B499E2|        |      ;
-    db $C8,$00,$08,$84,$02,$13,$01,$00,$12,$F3,$99,$1A         ;B499EE|        |      ;
-    db $38,$01,$D8,$00,$24,$83,$02,$13,$01,$00,$12,$01         ;B499FA|        |      ;
-    db $9A,$1A,$90,$01,$C8,$00,$78,$83,$03,$13,$01,$00         ;B49A06|        |      ;
-    db $12,$0F,$9A,$1A,$A8,$01,$B0,$00,$3C,$83,$03,$13         ;B49A12|        |      ;
-    db $01,$00,$12,$1D,$9A,$1A,$48,$01,$F8,$00,$28,$8B         ;B49A1E|        |      ;
-    db $00,$13,$B4,$00,$12,$2B,$9A,$1A,$98,$01,$F8,$00         ;B49A2A|        |      ;
-    db $34,$8B,$00,$13,$B4,$00,$12,$39,$9A                     ;B49A36|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x00_SetMusic($18, $B4)
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0168, $0098)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x19($00E8, $00)
+    %AICMD0x09($01, $979C)
+    %AICMD0x09($02, $99CF)
+    %AICMD0x09($03, $99DD)
+    %AICMD0x09($04, $99EB)
+    %AICMD0x09($05, $99F9)
+    %AICMD0x09($06, $9A15)
+    %AICMD0x09($07, $9A07)
+    %AICMD0x09($08, $9A23)
+    %AICMD0x09($09, $9A31)
+    %AICMD0x09($0A, $973C)
+    %AICMD0x15($7F1F19, $00, $96F6)
+    %AICMD0x15($7F1F19, $01, $96FB)
+    %AICMD0x15($7F1F19, $02, $9700)
+    %AICMD0x15($7F1F19, $03, $9705)
+    %AICMD0x06_SetDestination($04)
+    %AICMD0x12_Jump($970A)
+    %AICMD0x06_SetDestination($05)
+    %AICMD0x12_Jump($970A)
+    %AICMD0x06_SetDestination($06)
+    %AICMD0x12_Jump($970A)
+    %AICMD0x06_SetDestination($07)
+    %AICMD0x12_Jump($970A)
+    %AICMD0x38()
+    %AICMD0x0C($01)
+    %AICMD0x09($0B, $991D)
+    %AICMD0x09($0C, $9949)
+    %AICMD0x09($0D, $9973)
+    %AICMD0x09($0E, $9990)
+    %AICMD0x09($0F, $99AD)
+    %AICMD0x0C($03)
+    %AICMD0x13($003C)
+    %AICMD0x41_ModifyVariable($7F1F33, $0032)
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x24($74)
+    %AICMD0x13($00B4)
+    %AICMD0x1C($01BF, $00)
+    %AICMD0x47($800973, $03)
+    %AICMD0x10_End()
+    %AICMD0x1A($0168, $0098, $8B40, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($032D, $00)
+    %AICMD0x29($0000, $0001, $10)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($032C, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($032E, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($032F, $00)
+    %AICMD0x09($10, $978F)
+    %AICMD0x13($0078)
+    %AICMD0x1B($032C, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($032D, $00)
+    %AICMD0x29($0000, $0001, $30)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($032C, $00)
+    %AICMD0x0B($01)
+    %AICMD0x10_End()
+    %AICMD0x1A($0170, $0090, $8B4C, $00)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $97BF)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $9800)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $9841)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $9882)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $98C3)
+    %AICMD0x1A($0178, $0098, $866C, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0331, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($0330, $00)
+    %AICMD0x13($0040)
+    %AICMD0x1B($0332, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0333, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0330, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0331, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($97FA)
+    %AICMD0x1A($0178, $0098, $8678, $00)
+    %AICMD0x1B($0335, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($0334, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0336, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0337, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0336, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0335, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($983B)
+    %AICMD0x1A($0178, $0098, $8684, $00)
+    %AICMD0x1B($0341, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($0340, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0342, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0343, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0342, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0341, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($987C)
+    %AICMD0x1A($0178, $0098, $8690, $00)
+    %AICMD0x1B($0339, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($0338, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($033A, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($033B, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0338, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0339, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($98BD)
+    %AICMD0x1A($0178, $0098, $869C, $00)
+    %AICMD0x1B($033D, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($033C, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($033E, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($033F, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($033E, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($033D, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($98FE)
+    %AICMD0x1A($0178, $00D0, $863C, $00)
+    %AICMD0x0D($01, $FF, $40, $02)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x0D($01, $01, $40, $02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0208, $00CC, $854C, $03)
+    %AICMD0x0C($02)
+    %AICMD0x0D($FD, $00, $30, $03)
+    %AICMD0x0D($FD, $FF, $30, $03)
+    %AICMD0x0D($FC, $FE, $30, $03)
+    %AICMD0x0D($FC, $FD, $18, $02)
+    %AICMD0x0D($FC, $FC, $18, $02)
+    %AICMD0x0D($FC, $FB, $14, $02)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($01F8, $0068, $854C, $03)
+    %AICMD0x0C($02)
+    %AICMD0x13($0028)
+    %AICMD0x0D($FD, $04, $3C, $03)
+    %AICMD0x0D($FD, $03, $30, $02)
+    %AICMD0x0D($FD, $02, $40, $02)
+    %AICMD0x0D($FD, $01, $40, $02)
+    %AICMD0x0D($FD, $00, $30, $02)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0100, $00C8, $854C, $02)
+    %AICMD0x0C($02)
+    %AICMD0x0D($03, $FF, $30, $02)
+    %AICMD0x0D($03, $FE, $20, $03)
+    %AICMD0x0D($01, $FF, $40, $01)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0196, $0048, $854C, $00)
+    %AICMD0x0C($02)
+    %AICMD0x0D($00, $02, $20, $02)
+    %AICMD0x0D($FE, $03, $40, $03)
+    %AICMD0x0D($FE, $03, $90, $02)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($00E8, $0028, $854C, $00)
+    %AICMD0x0C($02)
+    %AICMD0x0D($00, $02, $40, $02)
+    %AICMD0x0D($01, $03, $40, $03)
+    %AICMD0x0D($02, $03, $40, $03)
+    %AICMD0x0D($03, $03, $58, $03)
+    %AICMD0x0B($03)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0140, $0098, $8360, $02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($99D7)
+    %AICMD0x1A($0198, $0098, $830C, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($99E5)
+    %AICMD0x1A($0148, $00C8, $8408, $02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($99F3)
+    %AICMD0x1A($0138, $00D8, $8324, $02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9A01)
+    %AICMD0x1A($0190, $00C8, $8378, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9A0F)
+    %AICMD0x1A($01A8, $00B0, $833C, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9A1D)
+    %AICMD0x1A($0148, $00F8, $8B28, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($9A2B)
+    %AICMD0x1A($0198, $00F8, $8B34, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($9A39)
+
 pScripting_B49A3F:
     dw DATA8_B49A5F                                            ;B49A3F|        |B49A5F;
     dw DATA8_B49C2A                                            ;B49A41|        |B49C2A;
@@ -909,94 +2134,251 @@ pScripting_B49A3F:
     dw pScripting_B49E31                                       ;B49A5D|        |B49E31;
  
 DATA8_B49A5F:
-    db $50,$23,$5E,$1F,$7F,$0D,$09,$01,$E0,$9A,$09,$02         ;B49A5F|        |      ;
-    db $97,$9B,$09,$03,$74,$9B,$12,$97,$9A,$55,$6E,$1F         ;B49A6B|        |      ;
-    db $7F,$02,$89,$9A,$45,$37,$1F,$7F,$00,$00,$3C,$00         ;B49A77|        |      ;
-    db $89,$9A,$09,$05,$57,$9D,$38,$0C,$00,$13,$10,$0E         ;B49A83|        |      ;
-    db $23,$5E,$1F,$7F,$0D,$3D,$17,$10,$14,$66,$1F,$7F         ;B49A8F|        |      ;
-    db $00,$BD,$9A,$14,$66,$1F,$7F,$01,$C4,$9A,$14,$66         ;B49A9B|        |      ;
-    db $1F,$7F,$02,$CB,$9A,$14,$66,$1F,$7F,$03,$D2,$9A         ;B49AA7|        |      ;
-    db $14,$66,$1F,$7F,$04,$D9,$9A,$12,$74,$9A,$09,$04         ;B49AB3|        |      ;
-    db $AC,$9B,$12,$74,$9A,$09,$04,$C8,$9B,$12,$74,$9A         ;B49ABF|        |      ;
-    db $09,$04,$E4,$9B,$12,$74,$9A,$09,$04,$F9,$9B,$12         ;B49ACB|        |      ;
-    db $74,$9A,$09,$04,$15,$9C,$12,$74,$9A,$1A,$19,$01         ;B49AD7|        |      ;
-    db $63,$00,$58,$8B,$00,$1F,$F4,$9A,$12,$E8,$9A,$1F         ;B49AE3|        |      ;
-    db $40,$9B,$12,$EE,$9A,$0B,$00,$1D,$AA,$01,$00,$20         ;B49AEF|        |      ;
-    db $00,$05,$9B,$20,$01,$12,$9B,$12,$E8,$9A,$1C,$AB         ;B49AFB|        |      ;
-    db $01,$00,$25,$03,$09,$03,$89,$9B,$12,$EE,$9A,$1C         ;B49B07|        |      ;
-    db $AC,$01,$00,$14,$66,$1F,$7F,$00,$47,$9B,$14,$66         ;B49B13|        |      ;
-    db $1F,$7F,$01,$50,$9B,$14,$66,$1F,$7F,$02,$59,$9B         ;B49B1F|        |      ;
-    db $14,$66,$1F,$7F,$03,$62,$9B,$14,$66,$1F,$7F,$04         ;B49B2B|        |      ;
-    db $6B,$9B,$1B,$E9,$02,$00,$12,$EE,$9A,$1C,$AD,$01         ;B49B37|        |      ;
-    db $00,$12,$EE,$9A,$41,$1F,$1F,$7F,$32,$00,$12,$39         ;B49B43|        |      ;
-    db $9B,$41,$21,$1F,$7F,$32,$00,$12,$39,$9B,$41,$23         ;B49B4F|        |      ;
-    db $1F,$7F,$32,$00,$12,$39,$9B,$41,$25,$1F,$7F,$32         ;B49B5B|        |      ;
-    db $00,$12,$39,$9B,$41,$27,$1F,$7F,$32,$00,$12,$39         ;B49B67|        |      ;
-    db $9B,$1A,$80,$00,$C8,$00,$54,$83,$01,$1F,$82,$9B         ;B49B73|        |      ;
-    db $12,$7C,$9B,$1C,$80,$02,$00,$12,$7C,$9B,$1A,$60         ;B49B7F|        |      ;
-    db $00,$B0,$00,$54,$83,$00,$13,$01,$00,$12,$7C,$9B         ;B49B8B|        |      ;
-    db $1A,$28,$01,$78,$00,$F4,$82,$03,$1F,$A5,$9B,$12         ;B49B97|        |      ;
-    db $9F,$9B,$1D,$A9,$01,$00,$12,$9F,$9B,$1A,$48,$01         ;B49BA3|        |      ;
-    db $68,$00,$00,$83,$00,$22,$10,$10,$01,$0C,$83,$00         ;B49BAF|        |      ;
-    db $1F,$C1,$9B,$12,$BB,$9B,$1C,$AE,$01,$00,$12,$BB         ;B49BBB|        |      ;
-    db $9B,$1A,$48,$01,$88,$00,$18,$83,$00,$22,$10,$10         ;B49BC7|        |      ;
-    db $01,$24,$83,$08,$1F,$DD,$9B,$12,$D7,$9B,$1C,$AF         ;B49BD3|        |      ;
-    db $01,$00,$12,$D7,$9B,$1A,$48,$01,$68,$00,$FC,$83         ;B49BDF|        |      ;
-    db $00,$1F,$F2,$9B,$12,$EC,$9B,$1C,$B0,$01,$00,$12         ;B49BEB|        |      ;
-    db $EC,$9B,$1A,$48,$01,$78,$00,$3C,$83,$00,$22,$10         ;B49BF7|        |      ;
-    db $10,$01,$3C,$83,$08,$1F,$0E,$9C,$12,$08,$9C,$1C         ;B49C03|        |      ;
-    db $B1,$01,$00,$12,$08,$9C,$1A,$48,$01,$68,$00,$D0         ;B49C0F|        |      ;
-    db $82,$00,$1F,$23,$9C,$12,$1D,$9C,$1C,$B2,$01,$00         ;B49C1B|        |      ;
-    db $12,$1D,$9C                                             ;B49C27|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $0D)
+    %AICMD0x09($01, $9AE0)
+    %AICMD0x09($02, $9B97)
+    %AICMD0x09($03, $9B74)
+    %AICMD0x12_Jump($9A97)
+    %AICMD0x55($7F1F6E, $02, $9A89)
+    %AICMD0x45($7F1F37, $0000, $003C, $9A89)
+    %AICMD0x09($05, $9D57)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x13($0E10)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $0D)
+    %AICMD0x3D($17)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $9ABD)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $9AC4)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $9ACB)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $9AD2)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $9AD9)
+    %AICMD0x12_Jump($9A74)
+    %AICMD0x09($04, $9BAC)
+    %AICMD0x12_Jump($9A74)
+    %AICMD0x09($04, $9BC8)
+    %AICMD0x12_Jump($9A74)
+    %AICMD0x09($04, $9BE4)
+    %AICMD0x12_Jump($9A74)
+    %AICMD0x09($04, $9BF9)
+    %AICMD0x12_Jump($9A74)
+    %AICMD0x09($04, $9C15)
+    %AICMD0x12_Jump($9A74)
+    %AICMD0x1A($0119, $0063, $8B58, $00)
+    %AICMD0x1F($9AF4)
+    %AICMD0x12_Jump($9AE8)
+    %AICMD0x1F($9B40)
+    %AICMD0x12_Jump($9AEE)
+    %AICMD0x0B($00)
+    %AICMD0x1D($01AA, $00)
+    %AICMD0x20($00, $9B05)
+    %AICMD0x20($01, $9B12)
+    %AICMD0x12_Jump($9AE8)
+    %AICMD0x1C($01AB, $00)
+    %AICMD0x25($03)
+    %AICMD0x09($03, $9B89)
+    %AICMD0x12_Jump($9AEE)
+    %AICMD0x1C($01AC, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $9B47)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $9B50)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $9B59)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $9B62)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $9B6B)
+    %AICMD0x1B($02E9, $00)
+    %AICMD0x12_Jump($9AEE)
+    %AICMD0x1C($01AD, $00)
+    %AICMD0x12_Jump($9AEE)
+    %AICMD0x41_ModifyVariable($7F1F1F, $0032)
+    %AICMD0x12_Jump($9B39)
+    %AICMD0x41_ModifyVariable($7F1F21, $0032)
+    %AICMD0x12_Jump($9B39)
+    %AICMD0x41_ModifyVariable($7F1F23, $0032)
+    %AICMD0x12_Jump($9B39)
+    %AICMD0x41_ModifyVariable($7F1F25, $0032)
+    %AICMD0x12_Jump($9B39)
+    %AICMD0x41_ModifyVariable($7F1F27, $0032)
+    %AICMD0x12_Jump($9B39)
+    %AICMD0x1A($0080, $00C8, $8354, $01)
+    %AICMD0x1F($9B82)
+    %AICMD0x12_Jump($9B7C)
+    %AICMD0x1C($0280, $00)
+    %AICMD0x12_Jump($9B7C)
+    %AICMD0x1A($0060, $00B0, $8354, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9B7C)
+    %AICMD0x1A($0128, $0078, $82F4, $03)
+    %AICMD0x1F($9BA5)
+    %AICMD0x12_Jump($9B9F)
+    %AICMD0x1D($01A9, $00)
+    %AICMD0x12_Jump($9B9F)
+    %AICMD0x1A($0148, $0068, $8300, $00)
+    %AICMD0x22($10, $10, $01, $830C, $00)
+    %AICMD0x1F($9BC1)
+    %AICMD0x12_Jump($9BBB)
+    %AICMD0x1C($01AE, $00)
+    %AICMD0x12_Jump($9BBB)
+    %AICMD0x1A($0148, $0088, $8318, $00)
+    %AICMD0x22($10, $10, $01, $8324, $08)
+    %AICMD0x1F($9BDD)
+    %AICMD0x12_Jump($9BD7)
+    %AICMD0x1C($01AF, $00)
+    %AICMD0x12_Jump($9BD7)
+    %AICMD0x1A($0148, $0068, $83FC, $00)
+    %AICMD0x1F($9BF2)
+    %AICMD0x12_Jump($9BEC)
+    %AICMD0x1C($01B0, $00)
+    %AICMD0x12_Jump($9BEC)
+    %AICMD0x1A($0148, $0078, $833C, $00)
+    %AICMD0x22($10, $10, $01, $833C, $08)
+    %AICMD0x1F($9C0E)
+    %AICMD0x12_Jump($9C08)
+    %AICMD0x1C($01B1, $00)
+    %AICMD0x12_Jump($9C08)
+    %AICMD0x1A($0148, $0068, $82D0, $00)
+    %AICMD0x1F($9C23)
+    %AICMD0x12_Jump($9C1D)
+    %AICMD0x1C($01B2, $00)
+    %AICMD0x12_Jump($9C1D)
+
 DATA8_B49C2A:
-    db $50,$00,$0B,$B4,$05,$88,$00,$B8,$00,$07,$01,$08         ;B49C2A|        |      ;
-    db $09,$01,$BD,$9C,$09,$02,$D4,$9C,$09,$03,$34,$9D         ;B49C36|        |      ;
-    db $09,$04,$49,$9D,$12,$74,$9C,$55,$6E,$1F,$7F,$02         ;B49C42|        |      ;
-    db $5E,$9C,$45,$37,$1F,$7F,$00,$00,$3C,$00,$5E,$9C         ;B49C4E|        |      ;
-    db $09,$05,$57,$9D,$38,$13,$01,$00,$1C,$B3,$01,$01         ;B49C5A|        |      ;
-    db $11,$0C,$00,$23,$96,$01,$80,$0D,$23,$5E,$1F,$7F         ;B49C66|        |      ;
-    db $0E,$10,$14,$66,$1F,$7F,$00,$9A,$9C,$14,$66,$1F         ;B49C72|        |      ;
-    db $7F,$01,$A1,$9C,$14,$66,$1F,$7F,$02,$A8,$9C,$14         ;B49C7E|        |      ;
-    db $66,$1F,$7F,$03,$AF,$9C,$14,$66,$1F,$7F,$04,$B6         ;B49C8A|        |      ;
-    db $9C,$12,$49,$9C,$09,$06,$6C,$9D,$12,$49,$9C,$09         ;B49C96|        |      ;
-    db $06,$81,$9D,$12,$49,$9C,$09,$06,$96,$9D,$12,$49         ;B49CA2|        |      ;
-    db $9C,$09,$06,$AB,$9D,$12,$49,$9C,$09,$06,$C0,$9D         ;B49CAE|        |      ;
-    db $12,$49,$9C,$1A,$19,$01,$63,$00,$5C,$84,$00,$1F         ;B49CBA|        |      ;
-    db $CB,$9C,$12,$C5,$9C,$1C,$BA,$01,$00,$0B,$00,$12         ;B49CC6|        |      ;
-    db $C5,$9C,$1A,$38,$01,$68,$00,$E8,$82,$03,$1F,$FD         ;B49CD2|        |      ;
-    db $9C,$12,$DC,$9C,$1F,$E8,$9C,$12,$E2,$9C,$14,$74         ;B49CDE|        |      ;
-    db $1F,$7F,$00,$F6,$9C,$1C,$81,$02,$00,$12,$E2,$9C         ;B49CEA|        |      ;
-    db $1C,$B4,$01,$00,$12,$E2,$9C,$17,$02,$18,$00,$0A         ;B49CF6|        |      ;
-    db $9D,$18,$01,$16,$9D,$12,$DC,$9C,$1C,$B4,$01,$00         ;B49D02|        |      ;
-    db $23,$74,$1F,$7F,$00,$12,$22,$9D,$1C,$81,$02,$00         ;B49D0E|        |      ;
-    db $23,$74,$1F,$7F,$01,$12,$22,$9D,$08,$1B,$8D,$02         ;B49D1A|        |      ;
-    db $01,$0D,$01,$00,$30,$01,$1B,$8C,$02,$01,$11,$12         ;B49D26|        |      ;
-    db $E2,$9C,$1A,$80,$00,$C8,$00,$54,$83,$02,$1F,$42         ;B49D32|        |      ;
-    db $9D,$12,$3C,$9D,$1C,$7F,$02,$00,$12,$3C,$9D,$1A         ;B49D3E|        |      ;
-    db $08,$01,$60,$00,$54,$86,$00,$13,$01,$00,$12,$51         ;B49D4A|        |      ;
-    db $9D,$1A,$78,$01,$58,$00,$B0,$84,$00,$1F,$65,$9D         ;B49D56|        |      ;
-    db $12,$5F,$9D,$1C,$C1,$01,$00,$12,$5F,$9D,$1A,$28         ;B49D62|        |      ;
-    db $01,$78,$00,$0C,$83,$00,$1F,$7A,$9D,$12,$74,$9D         ;B49D6E|        |      ;
-    db $1C,$B5,$01,$00,$12,$74,$9D,$1A,$28,$01,$78,$00         ;B49D7A|        |      ;
-    db $24,$83,$00,$1F,$8F,$9D,$12,$89,$9D,$1C,$B6,$01         ;B49D86|        |      ;
-    db $00,$12,$89,$9D,$1A,$28,$01,$78,$00,$08,$84,$00         ;B49D92|        |      ;
-    db $1F,$A4,$9D,$12,$9E,$9D,$1C,$B7,$01,$00,$12,$9E         ;B49D9E|        |      ;
-    db $9D,$1A,$28,$01,$78,$00,$3C,$83,$00,$1F,$B9,$9D         ;B49DAA|        |      ;
-    db $12,$B3,$9D,$1C,$B8,$01,$00,$12,$B3,$9D,$1A,$28         ;B49DB6|        |      ;
-    db $01,$78,$00,$D0,$82,$00,$1F,$CE,$9D,$12,$C8,$9D         ;B49DC2|        |      ;
-    db $1C,$B9,$01,$00,$12,$C8,$9D                             ;B49DCE|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x00_SetMusic($0B, $B4)
+    %AICMD0x05_SetPosition($0088, $00B8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $9CBD)
+    %AICMD0x09($02, $9CD4)
+    %AICMD0x09($03, $9D34)
+    %AICMD0x09($04, $9D49)
+    %AICMD0x12_Jump($9C74)
+    %AICMD0x55($7F1F6E, $02, $9C5E)
+    %AICMD0x45($7F1F37, $0000, $003C, $9C5E)
+    %AICMD0x09($05, $9D57)
+    %AICMD0x38()
+    %AICMD0x13($0001)
+    %AICMD0x1C($01B3, $01)
+    %AICMD0x11()
+    %AICMD0x0C($00)
+    %AICMD0x23_OrWithIndexedValue($800196, $0D)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $0E)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $9C9A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $9CA1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $9CA8)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $9CAF)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $9CB6)
+    %AICMD0x12_Jump($9C49)
+    %AICMD0x09($06, $9D6C)
+    %AICMD0x12_Jump($9C49)
+    %AICMD0x09($06, $9D81)
+    %AICMD0x12_Jump($9C49)
+    %AICMD0x09($06, $9D96)
+    %AICMD0x12_Jump($9C49)
+    %AICMD0x09($06, $9DAB)
+    %AICMD0x12_Jump($9C49)
+    %AICMD0x09($06, $9DC0)
+    %AICMD0x12_Jump($9C49)
+    %AICMD0x1A($0119, $0063, $845C, $00)
+    %AICMD0x1F($9CCB)
+    %AICMD0x12_Jump($9CC5)
+    %AICMD0x1C($01BA, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($9CC5)
+    %AICMD0x1A($0138, $0068, $82E8, $03)
+    %AICMD0x1F($9CFD)
+    %AICMD0x12_Jump($9CDC)
+    %AICMD0x1F($9CE8)
+    %AICMD0x12_Jump($9CE2)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $00, $9CF6)
+    %AICMD0x1C($0281, $00)
+    %AICMD0x12_Jump($9CE2)
+    %AICMD0x1C($01B4, $00)
+    %AICMD0x12_Jump($9CE2)
+    %AICMD0x17($02)
+    %AICMD0x18($00, $9D0A)
+    %AICMD0x18($01, $9D16)
+    %AICMD0x12_Jump($9CDC)
+    %AICMD0x1C($01B4, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $00)
+    %AICMD0x12_Jump($9D22)
+    %AICMD0x1C($0281, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $01)
+    %AICMD0x12_Jump($9D22)
+    %AICMD0x08()
+    %AICMD0x1B($028D, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($028C, $01)
+    %AICMD0x11()
+    %AICMD0x12_Jump($9CE2)
+    %AICMD0x1A($0080, $00C8, $8354, $02)
+    %AICMD0x1F($9D42)
+    %AICMD0x12_Jump($9D3C)
+    %AICMD0x1C($027F, $00)
+    %AICMD0x12_Jump($9D3C)
+    %AICMD0x1A($0108, $0060, $8654, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9D51)
+    %AICMD0x1A($0178, $0058, $84B0, $00)
+    %AICMD0x1F($9D65)
+    %AICMD0x12_Jump($9D5F)
+    %AICMD0x1C($01C1, $00)
+    %AICMD0x12_Jump($9D5F)
+    %AICMD0x1A($0128, $0078, $830C, $00)
+    %AICMD0x1F($9D7A)
+    %AICMD0x12_Jump($9D74)
+    %AICMD0x1C($01B5, $00)
+    %AICMD0x12_Jump($9D74)
+    %AICMD0x1A($0128, $0078, $8324, $00)
+    %AICMD0x1F($9D8F)
+    %AICMD0x12_Jump($9D89)
+    %AICMD0x1C($01B6, $00)
+    %AICMD0x12_Jump($9D89)
+    %AICMD0x1A($0128, $0078, $8408, $00)
+    %AICMD0x1F($9DA4)
+    %AICMD0x12_Jump($9D9E)
+    %AICMD0x1C($01B7, $00)
+    %AICMD0x12_Jump($9D9E)
+    %AICMD0x1A($0128, $0078, $833C, $00)
+    %AICMD0x1F($9DB9)
+    %AICMD0x12_Jump($9DB3)
+    %AICMD0x1C($01B8, $00)
+    %AICMD0x12_Jump($9DB3)
+    %AICMD0x1A($0128, $0078, $82D0, $00)
+    %AICMD0x1F($9DCE)
+    %AICMD0x12_Jump($9DC8)
+    %AICMD0x1C($01B9, $00)
+    %AICMD0x12_Jump($9DC8)
+
 DATA8_B49DD5:
-    db $50,$08,$05,$28,$01,$68,$00,$07,$03,$09,$01,$15         ;B49DD5|        |      ;
-    db $9E,$09,$02,$23,$9E,$55,$6E,$1F,$7F,$02,$FB,$9D         ;B49DE1|        |      ;
-    db $45,$37,$1F,$7F,$00,$00,$3C,$00,$FB,$9D,$09,$05         ;B49DED|        |      ;
-    db $57,$9D,$38,$1C,$BB,$01,$00,$01,$24,$74,$13,$B4         ;B49DF9|        |      ;
-    db $00,$1C,$BC,$01,$00,$28,$6E,$1F,$7F,$04,$47,$73         ;B49E05|        |      ;
-    db $09,$80,$03,$10,$1A,$19,$01,$63,$00,$5C,$84,$02         ;B49E11|        |      ;
-    db $13,$01,$00,$12,$1D,$9E,$1A,$08,$01,$60,$00,$54         ;B49E1D|        |      ;
-    db $86,$00,$13,$01,$00,$12,$2B,$9E                         ;B49E29|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x05_SetPosition($0128, $0068)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x09($01, $9E15)
+    %AICMD0x09($02, $9E23)
+    %AICMD0x55($7F1F6E, $02, $9DFB)
+    %AICMD0x45($7F1F37, $0000, $003C, $9DFB)
+    %AICMD0x09($05, $9D57)
+    %AICMD0x38()
+    %AICMD0x1C($01BB, $00)
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x24($74)
+    %AICMD0x13($00B4)
+    %AICMD0x1C($01BC, $00)
+    %AICMD0x28($1F6E, $7F, $04)
+    %AICMD0x47($800973, $03)
+    %AICMD0x10_End()
+    %AICMD0x1A($0119, $0063, $845C, $02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9E1D)
+    %AICMD0x1A($0108, $0060, $8654, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($9E2B)
+
 pScripting_B49E31:
     dw DATA8_B49E51                                            ;B49E31|        |B49E51;
     dw pScripting_B49F13                                       ;B49E33|        |B49F13;
@@ -1016,24 +2398,65 @@ pScripting_B49E31:
     dw pScripting_B49F13                                       ;B49E4F|        |B49F13;
  
 DATA8_B49E51:
-    db $50,$23,$60,$1F,$7F,$09,$23,$5E,$1F,$7F,$02,$00         ;B49E51|        |      ;
-    db $0C,$B4,$01,$03,$0E,$05,$B8,$01,$A0,$00,$07,$01         ;B49E5D|        |      ;
-    db $08,$09,$01,$C6,$9E,$09,$02,$DF,$9E,$15,$19,$1F         ;B49E69|        |      ;
-    db $7F,$00,$8E,$9E,$15,$19,$1F,$7F,$01,$93,$9E,$15         ;B49E75|        |      ;
-    db $19,$1F,$7F,$02,$98,$9E,$15,$19,$1F,$7F,$03,$9D         ;B49E81|        |      ;
-    db $9E,$06,$04,$12,$A2,$9E,$06,$05,$12,$A2,$9E,$06         ;B49E8D|        |      ;
-    db $06,$12,$A2,$9E,$06,$07,$12,$A2,$9E,$38,$0B,$00         ;B49E99|        |      ;
-    db $0C,$02,$19,$25,$00,$00,$13,$B4,$00,$01,$24,$74         ;B49EA5|        |      ;
-    db $13,$B4,$00,$1C,$8A,$03,$00,$41,$33,$1F,$7F,$9C         ;B49EB1|        |      ;
-    db $FF,$03,$0F,$47,$73,$09,$80,$03,$10,$1A,$98,$01         ;B49EBD|        |      ;
-    db $98,$00,$54,$83,$02,$0C,$00,$13,$78,$00,$1C,$15         ;B49EC9|        |      ;
-    db $03,$00,$0B,$01,$1F,$CE,$9E,$12,$D9,$9E,$1A,$F8         ;B49ED5|        |      ;
-    db $01,$90,$00,$6C,$83,$03,$0C,$01,$1B,$B0,$02,$00         ;B49EE1|        |      ;
-    db $0D,$FF,$00,$30,$01,$1B,$AB,$02,$00,$13,$78,$00         ;B49EED|        |      ;
-    db $1C,$16,$03,$00,$1B,$B0,$02,$01,$0D,$01,$00,$30         ;B49EF9|        |      ;
-    db $01,$1B,$AC,$02,$00,$0D,$00,$01,$90,$01,$0B,$02         ;B49F05|        |      ;
-    db $37,$10                                                 ;B49F11|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $02)
+    %AICMD0x00_SetMusic($0C, $B4)
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x03_SetHour($0E)
+    %AICMD0x05_SetPosition($01B8, $00A0)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $9EC6)
+    %AICMD0x09($02, $9EDF)
+    %AICMD0x15($7F1F19, $00, $9E8E)
+    %AICMD0x15($7F1F19, $01, $9E93)
+    %AICMD0x15($7F1F19, $02, $9E98)
+    %AICMD0x15($7F1F19, $03, $9E9D)
+    %AICMD0x06_SetDestination($04)
+    %AICMD0x12_Jump($9EA2)
+    %AICMD0x06_SetDestination($05)
+    %AICMD0x12_Jump($9EA2)
+    %AICMD0x06_SetDestination($06)
+    %AICMD0x12_Jump($9EA2)
+    %AICMD0x06_SetDestination($07)
+    %AICMD0x12_Jump($9EA2)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x0C($02)
+    %AICMD0x19($0025, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x24($74)
+    %AICMD0x13($00B4)
+    %AICMD0x1C($038A, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $FF9C)
+    %AICMD0x03_SetHour($0F)
+    %AICMD0x47($800973, $03)
+    %AICMD0x10_End()
+    %AICMD0x1A($0198, $0098, $8354, $02)
+    %AICMD0x0C($00)
+    %AICMD0x13($0078)
+    %AICMD0x1C($0315, $00)
+    %AICMD0x0B($01)
+    %AICMD0x1F($9ECE)
+    %AICMD0x12_Jump($9ED9)
+    %AICMD0x1A($01F8, $0090, $836C, $03)
+    %AICMD0x0C($01)
+    %AICMD0x1B($02B0, $00)
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x1B($02AB, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1C($0316, $00)
+    %AICMD0x1B($02B0, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($02AC, $00)
+    %AICMD0x0D($00, $01, $90, $01)
+    %AICMD0x0B($02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B49F13:
     dw DATA8_B49F33                                            ;B49F13|        |B49F33;
     dw pScripting_B49FD8                                       ;B49F15|        |B49FD8;
@@ -1053,21 +2476,56 @@ pScripting_B49F13:
     dw pScripting_B49FD8                                       ;B49F31|        |B49FD8;
  
 DATA8_B49F33:
-    db $09,$13,$B3,$9F,$10,$1A,$08,$01,$A8,$01,$C4,$82         ;B49F33|        |      ;
-    db $03,$1B,$81,$02,$00,$0D,$FF,$00,$70,$01,$1B,$80         ;B49F3F|        |      ;
-    db $02,$00,$1D,$30,$03,$00,$20,$00,$5F,$9F,$20,$01         ;B49F4B|        |      ;
-    db $6E,$9F,$12,$5C,$9F,$12,$5C,$9F,$1D,$31,$03,$00         ;B49F57|        |      ;
-    db $20,$00,$7B,$9F,$20,$01,$88,$9F,$12,$5C,$9F,$1C         ;B49F63|        |      ;
-    db $32,$03,$00,$41,$33,$1F,$7F,$F6,$FF,$12,$9D,$9F         ;B49F6F|        |      ;
-    db $1C,$33,$03,$00,$41,$33,$1F,$7F,$32,$00,$12,$8F         ;B49F7B|        |      ;
-    db $9F,$1C,$34,$03,$00,$12,$9D,$9F,$0B,$03,$1B,$81         ;B49F87|        |      ;
-    db $02,$01,$0D,$01,$00,$70,$01,$37,$11,$10,$0D,$FF         ;B49F93|        |      ;
-    db $00,$30,$01,$25,$13,$13,$0A,$00,$1B,$84,$02,$00         ;B49F9F|        |      ;
-    db $0D,$01,$00,$A0,$01,$37,$11,$10,$1A,$68,$00,$A8         ;B49FAB|        |      ;
-    db $01,$98,$87,$00,$1F,$C1,$9F,$12,$BB,$9F,$08,$23         ;B49FB7|        |      ;
-    db $6A,$1F,$7F,$09,$09,$09,$38,$9F,$0C,$03,$1B,$03         ;B49FC3|        |      ;
-    db $03,$00,$0D,$FF,$00,$3A,$01,$37,$10                     ;B49FCF|        |      ;
  
+    %AICMD0x09($13, $9FB3)
+    %AICMD0x10_End()
+    %AICMD0x1A($0108, $01A8, $82C4, $03)
+    %AICMD0x1B($0281, $00)
+    %AICMD0x0D($FF, $00, $70, $01)
+    %AICMD0x1B($0280, $00)
+    %AICMD0x1D($0330, $00)
+    %AICMD0x20($00, $9F5F)
+    %AICMD0x20($01, $9F6E)
+    %AICMD0x12_Jump($9F5C)
+    %AICMD0x12_Jump($9F5C)
+    %AICMD0x1D($0331, $00)
+    %AICMD0x20($00, $9F7B)
+    %AICMD0x20($01, $9F88)
+    %AICMD0x12_Jump($9F5C)
+    %AICMD0x1C($0332, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFF6)
+    %AICMD0x12_Jump($9F9D)
+    %AICMD0x1C($0333, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $0032)
+    %AICMD0x12_Jump($9F8F)
+    %AICMD0x1C($0334, $00)
+    %AICMD0x12_Jump($9F9D)
+    %AICMD0x0B($03)
+    %AICMD0x1B($0281, $01)
+    %AICMD0x0D($01, $00, $70, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x25($13)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0284, $00)
+    %AICMD0x0D($01, $00, $A0, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $01A8, $8798, $00)
+    %AICMD0x1F($9FC1)
+    %AICMD0x12_Jump($9FBB)
+    %AICMD0x08()
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $09)
+    %AICMD0x09($09, $9F38)
+    %AICMD0x0C($03)
+    %AICMD0x1B($0303, $00)
+    %AICMD0x0D($FF, $00, $3A, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B49FD8:
     dw DATA8_B49FF8                                            ;B49FD8|        |B49FF8;
     dw DATA8_B4A045                                            ;B49FDA|        |B4A045;
@@ -1087,113 +2545,329 @@ pScripting_B49FD8:
     dw pScripting_B4A37F                                       ;B49FF6|        |B4A37F;
  
 DATA8_B49FF8:
-    db $50,$07,$02,$08,$09,$01,$12,$A0,$38,$0B,$00,$13         ;B49FF8|        |      ;
-    db $96,$00,$07,$00,$0C,$01,$11,$41,$33,$1F,$7F,$CE         ;B4A004|        |      ;
-    db $FF,$10,$1A,$A8,$00,$78,$00,$5C,$84,$03,$0C,$00         ;B4A010|        |      ;
-    db $13,$5A,$00,$1C,$9A,$01,$00,$1B,$E3,$02,$00,$0D         ;B4A01C|        |      ;
-    db $00,$01,$50,$01,$1B,$E7,$02,$00,$0D,$FF,$00,$28         ;B4A028|        |      ;
-    db $01,$1B,$E3,$02,$00,$0D,$00,$01,$30,$01,$13,$3C         ;B4A034|        |      ;
-    db $00,$0B,$01,$37,$10                                     ;B4A040|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x08()
+    %AICMD0x09($01, $A012)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x13($0096)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F33, $FFCE)
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0078, $845C, $03)
+    %AICMD0x0C($00)
+    %AICMD0x13($005A)
+    %AICMD0x1C($019A, $00)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $50, $01)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $28, $01)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 DATA8_B4A045:
-    db $50,$05,$88,$00,$78,$00,$07,$02,$08,$09,$01,$5E         ;B4A045|        |      ;
-    db $A0,$38,$0B,$00,$13,$96,$00,$07,$00,$0C,$01,$11         ;B4A051|        |      ;
-    db $10,$1A,$A8,$00,$78,$00,$5C,$84,$03,$0C,$00,$13         ;B4A05D|        |      ;
-    db $5A,$00,$1C,$9A,$01,$00,$1B,$E3,$02,$00,$0D,$00         ;B4A069|        |      ;
-    db $01,$50,$01,$1B,$E7,$02,$00,$0D,$FF,$00,$28,$01         ;B4A075|        |      ;
-    db $1B,$E3,$02,$00,$0D,$00,$01,$30,$01,$13,$3C,$00         ;B4A081|        |      ;
-    db $0B,$01,$37,$10                                         ;B4A08D|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x05_SetPosition($0088, $0078)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x08()
+    %AICMD0x09($01, $A05E)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x13($0096)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0078, $845C, $03)
+    %AICMD0x0C($00)
+    %AICMD0x13($005A)
+    %AICMD0x1C($019A, $00)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $50, $01)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $28, $01)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 DATA8_B4A091:
-    db $50,$14,$6A,$1F,$7F,$00,$B6,$A0,$14,$6A,$1F,$7F         ;B4A091|        |      ;
-    db $01,$D2,$A0,$14,$6A,$1F,$7F,$02,$1E,$A1,$14,$6A         ;B4A09D|        |      ;
-    db $1F,$7F,$03,$41,$A1,$14,$6A,$1F,$7F,$04,$BC,$A1         ;B4A0A9|        |      ;
-    db $10                                                     ;B4A0B5|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6A, $00, $A0B6)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6A, $01, $A0D2)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6A, $02, $A11E)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6A, $03, $A141)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6A, $04, $A1BC)
+    %AICMD0x10_End()
+
 DATA8_B4A0B6:
-    db $50,$09,$01,$BD,$A0,$38,$10,$1A,$58,$01,$58,$00         ;B4A0B6|        |      ;
-    db $D8,$83,$00,$1F,$CB,$A0,$12,$C5,$A0,$1C,$D8,$01         ;B4A0C2|        |      ;
-    db $00,$12,$C5,$A0                                         ;B4A0CE|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x09($01, $A0BD)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($0158, $0058, $83D8, $00)
+    %AICMD0x1F($A0CB)
+    %AICMD0x12_Jump($A0C5)
+    %AICMD0x1C($01D8, $00)
+    %AICMD0x12_Jump($A0C5)
+
 DATA8_B4A0D2:
-    db $50,$08,$09,$01,$EC,$A0,$38,$39,$00,$10,$00,$39         ;B4A0D2|        |      ;
-    db $03,$14,$00,$0B,$00,$0C,$01,$28,$6E,$1F,$7F,$01         ;B4A0DE|        |      ;
-    db $3C,$10,$1A,$58,$00,$68,$01,$5C,$84,$03,$0C,$00         ;B4A0EA|        |      ;
-    db $13,$3C,$00,$1B,$E7,$02,$01,$0D,$01,$00,$20,$01         ;B4A0F6|        |      ;
-    db $1C,$9B,$01,$00,$41,$1F,$1F,$7F,$64,$00,$1B,$F0         ;B4A102|        |      ;
-    db $02,$01,$13,$3C,$00,$0B,$01,$12,$18,$A1,$13,$01         ;B4A10E|        |      ;
-    db $00,$12,$18,$A1                                         ;B4A11A|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $A0EC)
+    %AICMD0x38()
+    %AICMD0x39($00, $0010)
+    %AICMD0x39($03, $0014)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x28($1F6E, $7F, $01)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0058, $0168, $845C, $03)
+    %AICMD0x0C($00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1C($019B, $00)
+    %AICMD0x41_ModifyVariable($7F1F1F, $0064)
+    %AICMD0x1B($02F0, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($A118)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($A118)
+
 DATA8_B4A11E:
-    db $50,$09,$01,$25,$A1,$38,$10,$1A,$28,$00,$64,$01         ;B4A11E|        |      ;
-    db $24,$83,$00,$22,$01,$01,$01,$24,$83,$01,$1F,$3A         ;B4A12A|        |      ;
-    db $A1,$12,$34,$A1,$1C,$DF,$01,$00,$12,$34,$A1             ;B4A136|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x09($01, $A125)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($0028, $0164, $8324, $00)
+    %AICMD0x22($01, $01, $01, $8324, $01)
+    %AICMD0x1F($A13A)
+    %AICMD0x12_Jump($A134)
+    %AICMD0x1C($01DF, $00)
+    %AICMD0x12_Jump($A134)
+
 DATA8_B4A141:
-    db $50,$08,$09,$01,$78,$A1,$38,$39,$02,$20,$00,$39         ;B4A141|        |      ;
-    db $01,$30,$00,$07,$02,$0B,$00,$0C,$01,$13,$5A,$00         ;B4A14D|        |      ;
-    db $39,$00,$10,$00,$39,$02,$20,$00,$39,$01,$10,$00         ;B4A159|        |      ;
-    db $39,$03,$20,$00,$0B,$02,$39,$03,$40,$00,$0C,$03         ;B4A165|        |      ;
-    db $28,$6E,$1F,$7F,$01,$3C,$10,$1A,$98,$00,$88,$00         ;B4A171|        |      ;
-    db $5C,$84,$01,$0C,$00,$13,$1E,$00,$1B,$E7,$02,$01         ;B4A17D|        |      ;
-    db $0B,$01,$0C,$02,$13,$1E,$00,$1B,$E7,$02,$00,$13         ;B4A189|        |      ;
-    db $1E,$00,$1C,$9C,$01,$00,$41,$21,$1F,$7F,$64,$00         ;B4A195|        |      ;
-    db $1B,$E7,$02,$01,$0D,$01,$00,$04,$01,$1B,$F0,$02         ;B4A1A1|        |      ;
-    db $01,$13,$3C,$00,$0B,$03,$12,$B6,$A1,$13,$01,$00         ;B4A1AD|        |      ;
-    db $12,$B6,$A1                                             ;B4A1B9|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $A178)
+    %AICMD0x38()
+    %AICMD0x39($02, $0020)
+    %AICMD0x39($01, $0030)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x13($005A)
+    %AICMD0x39($00, $0010)
+    %AICMD0x39($02, $0020)
+    %AICMD0x39($01, $0010)
+    %AICMD0x39($03, $0020)
+    %AICMD0x0B($02)
+    %AICMD0x39($03, $0040)
+    %AICMD0x0C($03)
+    %AICMD0x28($1F6E, $7F, $01)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0098, $0088, $845C, $01)
+    %AICMD0x0C($00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($001E)
+    %AICMD0x1C($019C, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $0064)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $04, $01)
+    %AICMD0x1B($02F0, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($A1B6)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($A1B6)
+
 DATA8_B4A1BC:
-    db $50,$09,$01,$C3,$A1,$38,$10,$1A,$28,$00,$68,$01         ;B4A1BC|        |      ;
-    db $FC,$83,$00,$1F,$D1,$A1,$12,$CB,$A1,$1C,$E9,$01         ;B4A1C8|        |      ;
-    db $00,$12,$CB,$A1                                         ;B4A1D4|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x09($01, $A1C3)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($0028, $0168, $83FC, $00)
+    %AICMD0x1F($A1D1)
+    %AICMD0x12_Jump($A1CB)
+    %AICMD0x1C($01E9, $00)
+    %AICMD0x12_Jump($A1CB)
+
 DATA8_B4A1D8:
-    db $50,$08,$09,$01,$17,$A2,$38,$39,$01,$20,$00,$07         ;B4A1D8|        |      ;
-    db $02,$0B,$00,$0C,$01,$39,$02,$10,$00,$39,$01,$20         ;B4A1E4|        |      ;
-    db $00,$0B,$02,$0C,$03,$39,$01,$10,$00,$39,$02,$10         ;B4A1F0|        |      ;
-    db $00,$0B,$04,$0C,$05,$07,$00,$0C,$06,$19,$24,$00         ;B4A1FC|        |      ;
-    db $00,$13,$3C,$00,$1C,$9D,$01,$00,$28,$6E,$1F,$7F         ;B4A208|        |      ;
-    db $01,$3C,$10,$1A,$78,$00,$88,$00,$5C,$84,$01,$0C         ;B4A214|        |      ;
-    db $00,$13,$1E,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$20         ;B4A220|        |      ;
-    db $01,$0B,$01,$0C,$02,$13,$1E,$00,$1B,$E7,$02,$01         ;B4A22C|        |      ;
-    db $0D,$01,$00,$20,$01,$0B,$03,$0C,$04,$13,$1E,$00         ;B4A238|        |      ;
-    db $1B,$E3,$02,$00,$0D,$00,$01,$40,$01,$0B,$05,$13         ;B4A244|        |      ;
-    db $3C,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$10,$01,$1B         ;B4A250|        |      ;
-    db $E5,$02,$00,$13,$3C,$00,$0D,$00,$FE,$1A,$01,$0B         ;B4A25C|        |      ;
-    db $06,$41,$23,$1F,$7F,$64,$00,$12,$72,$A2,$13,$01         ;B4A268|        |      ;
-    db $00,$12,$72,$A2                                         ;B4A274|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $A217)
+    %AICMD0x38()
+    %AICMD0x39($01, $0020)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x39($02, $0010)
+    %AICMD0x39($01, $0020)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x39($01, $0010)
+    %AICMD0x39($02, $0010)
+    %AICMD0x0B($04)
+    %AICMD0x0C($05)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0C($06)
+    %AICMD0x19($0024, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1C($019D, $00)
+    %AICMD0x28($1F6E, $7F, $01)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0088, $845C, $01)
+    %AICMD0x0C($00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x0B($03)
+    %AICMD0x0C($04)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $40, $01)
+    %AICMD0x0B($05)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0D($00, $FE, $1A, $01)
+    %AICMD0x0B($06)
+    %AICMD0x41_ModifyVariable($7F1F23, $0064)
+    %AICMD0x12_Jump($A272)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($A272)
+
 DATA8_B4A278:
-    db $50,$09,$01,$7F,$A2,$38,$10,$1A,$28,$00,$98,$01         ;B4A278|        |      ;
-    db $30,$83,$00,$12,$8A,$A2,$1F,$90,$A2,$12,$8A,$A2         ;B4A284|        |      ;
-    db $1C,$B1,$01,$00,$12,$8A,$A2                             ;B4A290|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x09($01, $A27F)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($0028, $0198, $8330, $00)
+    %AICMD0x12_Jump($A28A)
+    %AICMD0x1F($A290)
+    %AICMD0x12_Jump($A28A)
+    %AICMD0x1C($01B1, $00)
+    %AICMD0x12_Jump($A28A)
+
 DATA8_B4A297:
-    db $50,$08,$09,$01,$C5,$A2,$38,$13,$5A,$00,$39,$01         ;B4A297|        |      ;
-    db $10,$00,$39,$03,$10,$00,$07,$01,$0B,$00,$0C,$01         ;B4A2A3|        |      ;
-    db $39,$01,$60,$00,$0B,$02,$39,$01,$20,$00,$0C,$03         ;B4A2AF|        |      ;
-    db $13,$3C,$00,$28,$6E,$1F,$7F,$01,$3C,$10,$1A,$58         ;B4A2BB|        |      ;
-    db $00,$88,$00,$5C,$84,$00,$0C,$00,$1B,$E5,$02,$00         ;B4A2C7|        |      ;
-    db $0D,$00,$FF,$30,$01,$1B,$E4,$02,$00,$0B,$01,$0C         ;B4A2D3|        |      ;
-    db $02,$13,$0A,$00,$1C,$9E,$01,$00,$41,$25,$1F,$7F         ;B4A2DF|        |      ;
-    db $64,$00,$1B,$E3,$02,$00,$0D,$00,$01,$08,$02,$0B         ;B4A2EB|        |      ;
-    db $03,$12,$FB,$A2,$13,$01,$00,$12,$FB,$A2                 ;B4A2F7|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $A2C5)
+    %AICMD0x38()
+    %AICMD0x13($005A)
+    %AICMD0x39($01, $0010)
+    %AICMD0x39($03, $0010)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x39($01, $0060)
+    %AICMD0x0B($02)
+    %AICMD0x39($01, $0020)
+    %AICMD0x0C($03)
+    %AICMD0x13($003C)
+    %AICMD0x28($1F6E, $7F, $01)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0058, $0088, $845C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $30, $01)
+    %AICMD0x1B($02E4, $00)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x13($000A)
+    %AICMD0x1C($019E, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0064)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $08, $02)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($A2FB)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($A2FB)
+
 DATA8_B4A301:
-    db $50,$09,$01,$08,$A3,$38,$10,$1A,$28,$00,$98,$01         ;B4A301|        |      ;
-    db $DC,$82,$00,$1F,$16,$A3,$12,$10,$A3,$1C,$EA,$01         ;B4A30D|        |      ;
-    db $00,$1B,$85,$02,$00,$12,$10,$A3                         ;B4A319|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x09($01, $A308)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($0028, $0198, $82DC, $00)
+    %AICMD0x1F($A316)
+    %AICMD0x12_Jump($A310)
+    %AICMD0x1C($01EA, $00)
+    %AICMD0x1B($0285, $00)
+    %AICMD0x12_Jump($A310)
+
 DATA8_B4A321:
-    db $50,$08,$09,$01,$48,$A3,$38,$13,$5A,$00,$39,$01         ;B4A321|        |      ;
-    db $18,$00,$39,$03,$44,$00,$40,$39,$01,$5E,$00,$07         ;B4A32D|        |      ;
-    db $03,$0B,$00,$0C,$01,$13,$5A,$00,$28,$6E,$1F,$7F         ;B4A339|        |      ;
-    db $01,$3C,$10,$1A,$20,$00,$4E,$00,$5C,$84,$03,$0C         ;B4A345|        |      ;
-    db $00,$13,$1E,$00,$1B,$E7,$02,$01,$0D,$01,$00,$18         ;B4A351|        |      ;
-    db $01,$1C,$9F,$01,$00,$41,$27,$1F,$7F,$64,$00,$13         ;B4A35D|        |      ;
-    db $0A,$00,$0D,$02,$00,$01,$01,$1B,$F0,$02,$01,$0B         ;B4A369|        |      ;
-    db $01,$12,$79,$A3,$13,$01,$00,$12,$79,$A3                 ;B4A375|        |      ;
  
+    %AICMD0x50()
+    %AICMD0x08()
+    %AICMD0x09($01, $A348)
+    %AICMD0x38()
+    %AICMD0x13($005A)
+    %AICMD0x39($01, $0018)
+    %AICMD0x39($03, $0044)
+    %AICMD0x40()
+    %AICMD0x39($01, $005E)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x13($005A)
+    %AICMD0x28($1F6E, $7F, $01)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0020, $004E, $845C, $03)
+    %AICMD0x0C($00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $18, $01)
+    %AICMD0x1C($019F, $00)
+    %AICMD0x41_ModifyVariable($7F1F27, $0064)
+    %AICMD0x13($000A)
+    %AICMD0x0D($02, $00, $01, $01)
+    %AICMD0x1B($02F0, $01)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($A379)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($A379)
+
 pScripting_B4A37F:
     dw DATA8_B4A39F                                            ;B4A37F|        |B4A39F;
     dw pScripting_B4A455                                       ;B4A381|        |B4A455;
@@ -1213,23 +2887,57 @@ pScripting_B4A37F:
     dw pScripting_B4A455                                       ;B4A39D|        |B4A455;
  
 DATA8_B4A39F:
-    db $09,$0C,$B7,$A3,$09,$0D,$F1,$A3,$09,$0E,$29,$A4         ;B4A39F|        |      ;
-    db $08,$38,$2C,$23,$07,$00,$3C,$00,$0C,$00,$11,$10         ;B4A3AB|        |      ;
-    db $1A,$98,$00,$78,$01,$70,$85,$03,$13,$28,$00,$1B         ;B4A3B7|        |      ;
-    db $28,$03,$01,$0D,$FF,$FF,$01,$01,$13,$3C,$00,$1B         ;B4A3C3|        |      ;
-    db $28,$03,$01,$0D,$01,$00,$01,$01,$13,$1E,$00,$1B         ;B4A3CF|        |      ;
-    db $29,$03,$01,$0D,$03,$FF,$40,$03,$0D,$02,$FF,$40         ;B4A3DB|        |      ;
-    db $02,$0B,$00,$0D,$01,$FF,$20,$01,$37,$10,$1A,$68         ;B4A3E7|        |      ;
-    db $00,$78,$01,$70,$85,$00,$13,$30,$00,$1B,$28,$03         ;B4A3F3|        |      ;
-    db $01,$0D,$FF,$FF,$01,$01,$0D,$FF,$01,$01,$01,$13         ;B4A3FF|        |      ;
-    db $3C,$00,$1B,$29,$03,$00,$0D,$FF,$00,$10,$01,$0D         ;B4A40B|        |      ;
-    db $FF,$FF,$20,$01,$0B,$00,$0D,$00,$00,$04,$01,$0D         ;B4A417|        |      ;
-    db $FE,$FF,$40,$01,$37,$10,$1A,$78,$00,$80,$01,$70         ;B4A423|        |      ;
-    db $85,$02,$13,$46,$00,$1B,$27,$03,$00,$13,$26,$00         ;B4A42F|        |      ;
-    db $1B,$2A,$03,$00,$0D,$00,$01,$10,$01,$0D,$FF,$03         ;B4A43B|        |      ;
-    db $40,$03,$0D,$FF,$02,$40,$02,$0D,$FF,$01,$58,$01         ;B4A447|        |      ;
-    db $37,$10                                                 ;B4A453|        |      ;
  
+    %AICMD0x09($0C, $A3B7)
+    %AICMD0x09($0D, $A3F1)
+    %AICMD0x09($0E, $A429)
+    %AICMD0x08()
+    %AICMD0x38()
+    %AICMD0x2C($23, $0007, $003C)
+    %AICMD0x0C($00)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0098, $0178, $8570, $03)
+    %AICMD0x13($0028)
+    %AICMD0x1B($0328, $01)
+    %AICMD0x0D($FF, $FF, $01, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0328, $01)
+    %AICMD0x0D($01, $00, $01, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0329, $01)
+    %AICMD0x0D($03, $FF, $40, $03)
+    %AICMD0x0D($02, $FF, $40, $02)
+    %AICMD0x0B($00)
+    %AICMD0x0D($01, $FF, $20, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $0178, $8570, $00)
+    %AICMD0x13($0030)
+    %AICMD0x1B($0328, $01)
+    %AICMD0x0D($FF, $FF, $01, $01)
+    %AICMD0x0D($FF, $01, $01, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0329, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x0D($FF, $FF, $20, $01)
+    %AICMD0x0B($00)
+    %AICMD0x0D($00, $00, $04, $01)
+    %AICMD0x0D($FE, $FF, $40, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0180, $8570, $02)
+    %AICMD0x13($0046)
+    %AICMD0x1B($0327, $00)
+    %AICMD0x13($0026)
+    %AICMD0x1B($032A, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x0D($FF, $03, $40, $03)
+    %AICMD0x0D($FF, $02, $40, $02)
+    %AICMD0x0D($FF, $01, $58, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B4A455:
     dw DATA8_B4A475                                            ;B4A455|        |B4A475;
     dw DATA8_B4A531                                            ;B4A457|        |B4A531;
@@ -1249,41 +2957,110 @@ pScripting_B4A455:
     dw pScripting_B4A5B5                                       ;B4A473|        |B4A5B5;
  
 DATA8_B4A475:
-    db $08,$1A,$F8,$FF,$A8,$01,$AC,$82,$02,$38,$3A,$00         ;B4A475|        |      ;
-    db $28,$00,$07,$03,$1B,$7B,$02,$01,$0D,$01,$00,$80         ;B4A481|        |      ;
-    db $01,$13,$1E,$00,$15,$8C,$09,$80,$06,$BE,$A4,$15         ;B4A48D|        |      ;
-    db $8C,$09,$80,$07,$C5,$A4,$15,$8C,$09,$80,$08,$CC         ;B4A499|        |      ;
-    db $A4,$15,$8C,$09,$80,$09,$D3,$A4,$15,$8C,$09,$80         ;B4A4A5|        |      ;
-    db $0A,$DA,$A4,$15,$8C,$09,$80,$0B,$E1,$A4,$12,$E8         ;B4A4B1|        |      ;
-    db $A4,$1C,$72,$02,$00,$12,$E8,$A4,$1C,$40,$02,$00         ;B4A4BD|        |      ;
-    db $12,$E8,$A4,$1C,$8E,$02,$00,$12,$F7,$A4,$1C,$6E         ;B4A4C9|        |      ;
-    db $02,$00,$12,$E8,$A4,$1C,$89,$02,$00,$12,$E8,$A4         ;B4A4D5|        |      ;
-    db $1C,$74,$02,$00,$12,$E8,$A4,$13,$1E,$00,$1B,$7B         ;B4A4E1|        |      ;
-    db $02,$00,$0D,$FF,$00,$80,$01,$37,$11,$10,$09,$02         ;B4A4ED|        |      ;
-    db $0C,$A5,$13,$1E,$00,$0C,$02,$1B,$7B,$02,$00,$0D         ;B4A4F9|        |      ;
-    db $FF,$00,$80,$01,$37,$11,$10,$1A,$F8,$FF,$A8,$01         ;B4A505|        |      ;
-    db $7C,$82,$02,$1B,$6E,$02,$01,$0D,$01,$00,$70,$01         ;B4A511|        |      ;
-    db $13,$1E,$00,$1C,$8F,$02,$00,$0B,$02,$1B,$6E,$02         ;B4A51D|        |      ;
-    db $00,$0D,$FF,$00,$80,$01,$37,$10                         ;B4A529|        |      ;
  
+    %AICMD0x08()
+    %AICMD0x1A($FFF8, $01A8, $82AC, $02)
+    %AICMD0x38()
+    %AICMD0x3A($00, $0028)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x1B($027B, $01)
+    %AICMD0x0D($01, $00, $80, $01)
+    %AICMD0x13($001E)
+    %AICMD0x15($80098C, $06, $A4BE)
+    %AICMD0x15($80098C, $07, $A4C5)
+    %AICMD0x15($80098C, $08, $A4CC)
+    %AICMD0x15($80098C, $09, $A4D3)
+    %AICMD0x15($80098C, $0A, $A4DA)
+    %AICMD0x15($80098C, $0B, $A4E1)
+    %AICMD0x12_Jump($A4E8)
+    %AICMD0x1C($0272, $00)
+    %AICMD0x12_Jump($A4E8)
+    %AICMD0x1C($0240, $00)
+    %AICMD0x12_Jump($A4E8)
+    %AICMD0x1C($028E, $00)
+    %AICMD0x12_Jump($A4F7)
+    %AICMD0x1C($026E, $00)
+    %AICMD0x12_Jump($A4E8)
+    %AICMD0x1C($0289, $00)
+    %AICMD0x12_Jump($A4E8)
+    %AICMD0x1C($0274, $00)
+    %AICMD0x12_Jump($A4E8)
+    %AICMD0x13($001E)
+    %AICMD0x1B($027B, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x09($02, $A50C)
+    %AICMD0x13($001E)
+    %AICMD0x0C($02)
+    %AICMD0x1B($027B, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($FFF8, $01A8, $827C, $02)
+    %AICMD0x1B($026E, $01)
+    %AICMD0x0D($01, $00, $70, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1C($028F, $00)
+    %AICMD0x0B($02)
+    %AICMD0x1B($026E, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 DATA8_B4A531:
-    db $08,$1A,$F8,$FF,$A8,$01,$18,$83,$02,$38,$3A,$00         ;B4A531|        |      ;
-    db $28,$00,$07,$03,$1B,$9B,$02,$01,$0D,$01,$00,$80         ;B4A53D|        |      ;
-    db $01,$13,$1E,$00,$1C,$7F,$04,$00,$1B,$9B,$02,$00         ;B4A549|        |      ;
-    db $0D,$FF,$00,$80,$01,$37,$11,$10                         ;B4A555|        |      ;
  
+    %AICMD0x08()
+    %AICMD0x1A($FFF8, $01A8, $8318, $02)
+    %AICMD0x38()
+    %AICMD0x3A($00, $0028)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x0D($01, $00, $80, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1C($047F, $00)
+    %AICMD0x1B($029B, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B4A55D:
-    db $08,$1A,$F8,$FF,$A8,$01,$40,$82,$02,$38,$3A,$00         ;B4A55D|        |      ;
-    db $28,$00,$07,$03,$1B,$5F,$02,$01,$0D,$01,$00,$80         ;B4A569|        |      ;
-    db $01,$13,$1E,$00,$1C,$86,$04,$00,$1B,$5F,$02,$00         ;B4A575|        |      ;
-    db $0D,$FF,$00,$80,$01,$37,$11,$10                         ;B4A581|        |      ;
  
+    %AICMD0x08()
+    %AICMD0x1A($FFF8, $01A8, $8240, $02)
+    %AICMD0x38()
+    %AICMD0x3A($00, $0028)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x1B($025F, $01)
+    %AICMD0x0D($01, $00, $80, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1C($0486, $00)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 DATA8_B4A589:
-    db $08,$1A,$F8,$FF,$A8,$01,$40,$82,$02,$38,$3A,$00         ;B4A589|        |      ;
-    db $28,$00,$07,$03,$1B,$5F,$02,$01,$0D,$01,$00,$80         ;B4A595|        |      ;
-    db $01,$13,$1E,$00,$1C,$42,$01,$00,$1B,$5F,$02,$00         ;B4A5A1|        |      ;
-    db $0D,$FF,$00,$80,$01,$37,$11,$10                         ;B4A5AD|        |      ;
  
+    %AICMD0x08()
+    %AICMD0x1A($FFF8, $01A8, $8240, $02)
+    %AICMD0x38()
+    %AICMD0x3A($00, $0028)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x1B($025F, $01)
+    %AICMD0x0D($01, $00, $80, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1C($0142, $00)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x11()
+    %AICMD0x10_End()
+
 pScripting_B4A5B5:
     dw DATA8_B4A5D5                                            ;B4A5B5|        |B4A5D5;
     dw pScripting_B4A60D                                       ;B4A5B7|        |B4A60D;
@@ -1303,12 +3080,28 @@ pScripting_B4A5B5:
     dw pScripting_B4A60D                                       ;B4A5D3|        |B4A60D;
  
 DATA8_B4A5D5:
-    db $02,$05,$88,$00,$58,$01,$07,$00,$08,$09,$01,$E9         ;B4A5D5|        |      ;
-    db $A5,$38,$0B,$00,$0C,$01,$11,$10,$1A,$68,$00,$A8         ;B4A5E1|        |      ;
-    db $01,$18,$83,$02,$0C,$00,$1C,$00,$03,$00,$1B,$97         ;B4A5ED|        |      ;
-    db $02,$00,$0D,$00,$01,$60,$01,$1B,$9B,$02,$01,$0D         ;B4A5F9|        |      ;
-    db $FF,$00,$70,$01,$0B,$01,$37,$10                         ;B4A605|        |      ;
  
+    %AICMD0x02_FreezeTime()
+    %AICMD0x05_SetPosition($0088, $0158)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $A5E9)
+    %AICMD0x38()
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x11()
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $01A8, $8318, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1C($0300, $00)
+    %AICMD0x1B($0297, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x0D($FF, $00, $70, $01)
+    %AICMD0x0B($01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B4A60D:
     dw DATA8_B4A62D                                            ;B4A60D|        |B4A62D;
     dw DATA8_B4B48E                                            ;B4A60F|        |B4B48E;
@@ -1328,355 +3121,1039 @@ pScripting_B4A60D:
     dw pScripting_B4B65E                                       ;B4A62B|        |B4B65E;
  
 DATA8_B4A62D:
-    db $4F,$51,$23,$60,$1F,$7F,$09,$00,$03,$B4,$02,$03         ;B4A62D|        |      ;
-    db $07,$08,$05,$08,$01,$38,$01,$07,$01,$32,$74,$1F         ;B4A639|        |      ;
-    db $7F,$DF,$FF,$09,$01,$62,$A9,$09,$03,$D9,$A9,$09         ;B4A645|        |      ;
-    db $06,$81,$AA,$09,$07,$B2,$AA,$09,$0B,$61,$AB,$09         ;B4A651|        |      ;
-    db $0D,$97,$AB,$09,$0E,$3D,$AC,$09,$0F,$63,$AD,$09         ;B4A65D|        |      ;
-    db $10,$66,$AE,$09,$11,$7F,$AF,$09,$12,$5E,$A7,$09         ;B4A669|        |      ;
-    db $13,$93,$A9,$06,$09,$38,$39,$01,$40,$00,$15,$1D         ;B4A675|        |      ;
-    db $09,$80,$00,$A1,$A6,$1C,$41,$02,$00,$40,$39,$01         ;B4A681|        |      ;
-    db $10,$00,$3F,$13,$3C,$00,$1C,$43,$02,$00,$39,$00         ;B4A68D|        |      ;
-    db $10,$00,$07,$01,$4E,$12,$AE,$A6,$1C,$42,$02,$00         ;B4A699|        |      ;
-    db $1C,$43,$02,$00,$23,$76,$1F,$7F,$00,$13,$78,$00         ;B4A6A5|        |      ;
-    db $0B,$00,$0C,$01,$09,$14,$B0,$A7,$19,$12,$00,$00         ;B4A6B1|        |      ;
-    db $13,$14,$00,$13,$78,$00,$11,$0C,$02,$3D,$09,$10         ;B4A6BD|        |      ;
-    db $14,$66,$1F,$7F,$00,$2D,$A7,$09,$07,$84,$B2,$41         ;B4A6C9|        |      ;
-    db $1F,$1F,$7F,$1E,$00,$12,$E6,$B4,$14,$66,$1F,$7F         ;B4A6D5|        |      ;
-    db $01,$36,$A7,$09,$07,$DB,$B2,$41,$21,$1F,$7F,$1E         ;B4A6E1|        |      ;
-    db $00,$12,$E6,$B4,$14,$66,$1F,$7F,$02,$3F,$A7,$09         ;B4A6ED|        |      ;
-    db $07,$32,$B3,$41,$23,$1F,$7F,$1E,$00,$12,$E6,$B4         ;B4A6F9|        |      ;
-    db $14,$66,$1F,$7F,$03,$48,$A7,$09,$07,$89,$B3,$41         ;B4A705|        |      ;
-    db $25,$1F,$7F,$1E,$00,$12,$E6,$B4,$14,$66,$1F,$7F         ;B4A711|        |      ;
-    db $04,$51,$A7,$09,$07,$E0,$B3,$41,$27,$1F,$7F,$1E         ;B4A71D|        |      ;
-    db $00,$12,$E6,$B4,$41,$1F,$1F,$7F,$1E,$00,$12,$57         ;B4A729|        |      ;
-    db $A7,$41,$21,$1F,$7F,$1E,$00,$12,$57,$A7,$41,$23         ;B4A735|        |      ;
-    db $1F,$7F,$1E,$00,$12,$57,$A7,$41,$25,$1F,$7F,$1E         ;B4A741|        |      ;
-    db $00,$12,$57,$A7,$41,$27,$1F,$7F,$1E,$00,$09,$07         ;B4A74D|        |      ;
-    db $37,$B4,$12,$E6,$B4,$1A,$08,$01,$B8,$00,$B0,$8A         ;B4A759|        |      ;
-    db $00,$0C,$00,$1B,$A2,$02,$01,$0D,$01,$00,$30,$01         ;B4A765|        |      ;
-    db $1B,$9E,$02,$01,$0D,$00,$01,$40,$01,$1B,$A2,$02         ;B4A771|        |      ;
-    db $00,$0D,$FF,$00,$10,$01,$1B,$A1,$02,$00,$2A,$45         ;B4A77D|        |      ;
-    db $00,$07,$02,$1C,$44,$02,$00,$0B,$01,$2F,$30,$83         ;B4A789|        |      ;
-    db $1F,$9B,$A7,$12,$95,$A7,$14,$74,$1F,$7F,$05,$A9         ;B4A795|        |      ;
-    db $A7,$1C,$86,$02,$00,$12,$95,$A7,$1C,$8C,$02,$00         ;B4A7A1|        |      ;
-    db $12,$95,$A7,$14,$76,$1F,$7F,$00,$26,$A8,$15,$1E         ;B4A7AD|        |      ;
-    db $09,$80,$15,$13,$A8,$15,$1E,$09,$80,$16,$13,$A8         ;B4A7B9|        |      ;
-    db $15,$1E,$09,$80,$17,$13,$A8,$15,$1E,$09,$80,$01         ;B4A7C5|        |      ;
-    db $13,$A8,$15,$1E,$09,$80,$02,$08,$A8,$15,$1E,$09         ;B4A7D1|        |      ;
-    db $80,$14,$13,$A8,$15,$1E,$09,$80,$07,$40,$A8,$15         ;B4A7DD|        |      ;
-    db $1E,$09,$80,$05,$40,$A8,$15,$1E,$09,$80,$18,$13         ;B4A7E9|        |      ;
-    db $A8,$16,$1E,$09,$80,$09,$0C,$08,$A8,$15,$1E,$09         ;B4A7F5|        |      ;
-    db $80,$1A,$08,$A8,$12,$08,$A8,$17,$02,$18,$00,$DE         ;B4A801|        |      ;
-    db $A8,$18,$01,$F8,$A8,$10,$17,$04,$18,$00,$76,$A8         ;B4A80D|        |      ;
-    db $18,$01,$90,$A8,$18,$02,$AA,$A8,$18,$03,$C4,$A8         ;B4A819|        |      ;
-    db $10,$1A,$18,$01,$F8,$00,$BC,$8A,$00,$13,$10,$00         ;B4A825|        |      ;
-    db $0D,$F8,$F8,$01,$01,$13,$04,$00,$19,$34,$00,$00         ;B4A831|        |      ;
-    db $12,$2C,$A9,$14,$6C,$1F,$7F,$0F,$12,$A9,$1A,$18         ;B4A83D|        |      ;
-    db $01,$F8,$00,$20,$87,$00,$13,$10,$00,$0D,$F8,$F8         ;B4A849|        |      ;
-    db $01,$01,$13,$04,$00,$19,$3B,$00,$00,$21,$36,$1F         ;B4A855|        |      ;
-    db $7F,$01,$21,$17,$09,$80,$0A,$41,$33,$1F,$7F,$0A         ;B4A861|        |      ;
-    db $00,$23,$6C,$1F,$7F,$0F,$12,$2C,$A9,$1A,$18,$01         ;B4A86D|        |      ;
-    db $F8,$00,$C8,$8A,$00,$13,$10,$00,$0D,$F8,$F8,$01         ;B4A879|        |      ;
-    db $01,$13,$04,$00,$19,$F7,$00,$00,$12,$2C,$A9,$1A         ;B4A885|        |      ;
-    db $18,$01,$F8,$00,$D4,$8A,$00,$13,$10,$00,$0D,$F8         ;B4A891|        |      ;
-    db $F8,$01,$01,$13,$04,$00,$19,$F6,$00,$00,$12,$2C         ;B4A89D|        |      ;
-    db $A9,$1A,$18,$01,$F8,$00,$E0,$8A,$00,$13,$10,$00         ;B4A8A9|        |      ;
-    db $0D,$F8,$F8,$01,$01,$13,$04,$00,$19,$F9,$00,$00         ;B4A8B5|        |      ;
-    db $12,$2C,$A9,$1A,$18,$01,$F8,$00,$98,$8A,$00,$13         ;B4A8C1|        |      ;
-    db $10,$00,$0D,$F8,$F8,$01,$01,$13,$04,$00,$19,$F8         ;B4A8CD|        |      ;
-    db $00,$00,$12,$2C,$A9,$1A,$18,$01,$F8,$00,$04,$85         ;B4A8D9|        |      ;
-    db $00,$13,$10,$00,$0D,$F8,$F8,$01,$01,$13,$04,$00         ;B4A8E5|        |      ;
-    db $19,$FD,$00,$00,$12,$2C,$A9,$1A,$18,$01,$F8,$00         ;B4A8F1|        |      ;
-    db $F8,$84,$00,$13,$10,$00,$0D,$F8,$F8,$01,$01,$13         ;B4A8FD|        |      ;
-    db $04,$00,$19,$FC,$00,$00,$12,$2C,$A9,$1A,$18,$01         ;B4A909|        |      ;
-    db $F8,$00,$50,$87,$00,$13,$10,$00,$0D,$F8,$F8,$01         ;B4A915|        |      ;
-    db $01,$13,$04,$00,$19,$3A,$00,$00,$12,$2C,$A9,$37         ;B4A921|        |      ;
-    db $10,$1A,$48,$01,$A0,$00,$F8,$84,$00,$13,$01,$00         ;B4A92D|        |      ;
-    db $37,$10,$1A,$48,$01,$A8,$00,$10,$85,$00,$13,$01         ;B4A939|        |      ;
-    db $00,$37,$10,$1A,$48,$01,$A8,$00,$74,$8A,$00,$13         ;B4A945|        |      ;
-    db $01,$00,$37,$10,$1A,$08,$01,$98,$00,$44,$8A,$00         ;B4A951|        |      ;
-    db $13,$01,$00,$37,$10,$1A,$98,$01,$C8,$00,$FC,$83         ;B4A95D|        |      ;
-    db $00,$1F,$70,$A9,$12,$6A,$A9,$14,$66,$1F,$7F,$02         ;B4A969|        |      ;
-    db $85,$A9,$14,$74,$1F,$7F,$05,$8C,$A9,$1C,$47,$02         ;B4A975|        |      ;
-    db $00,$12,$6A,$A9,$1C,$92,$04,$00,$12,$6A,$A9,$1C         ;B4A981|        |      ;
-    db $84,$02,$00,$12,$6A,$A9,$1A,$B8,$00,$08,$01,$48         ;B4A98D|        |      ;
-    db $83,$00,$1F,$A1,$A9,$12,$9B,$A9,$14,$74,$1F,$7F         ;B4A999|        |      ;
-    db $05,$AF,$A9,$1C,$48,$02,$00,$12,$9B,$A9,$1C,$85         ;B4A9A5|        |      ;
-    db $02,$00,$12,$9B,$A9,$1A,$B8,$00,$08,$01,$6C,$83         ;B4A9B1|        |      ;
-    db $03,$1F,$C4,$A9,$12,$BE,$A9,$14,$74,$1F,$7F,$05         ;B4A9BD|        |      ;
-    db $D2,$A9,$1C,$48,$02,$00,$12,$BE,$A9,$1C,$88,$02         ;B4A9C9|        |      ;
-    db $00,$12,$BE,$A9,$1A,$78,$00,$F8,$00,$D8,$83,$02         ;B4A9D5|        |      ;
-    db $1F,$ED,$A9,$12,$E1,$A9,$1F,$26,$AA,$12,$E7,$A9         ;B4A9E1|        |      ;
-    db $1C,$45,$02,$00,$14,$74,$1F,$7F,$00,$E1,$A9,$14         ;B4A9ED|        |      ;
-    db $74,$1F,$7F,$01,$E1,$A9,$14,$74,$1F,$7F,$02,$E1         ;B4A9F9|        |      ;
-    db $A9,$14,$74,$1F,$7F,$03,$E1,$A9,$14,$74,$1F,$7F         ;B4AA05|        |      ;
-    db $04,$E1,$A9,$08,$1B,$C7,$02,$00,$0D,$00,$FF,$30         ;B4AA11|        |      ;
-    db $01,$1B,$C4,$02,$00,$11,$12,$E7,$A9,$14,$74,$1F         ;B4AA1D|        |      ;
-    db $7F,$05,$34,$AA,$1C,$45,$02,$00,$12,$E7,$A9,$1C         ;B4AA29|        |      ;
-    db $82,$02,$00,$12,$E7,$A9,$1A,$58,$01,$C8,$00,$18         ;B4AA35|        |      ;
-    db $83,$00,$1F,$49,$AA,$12,$43,$AA,$14,$74,$1F,$7F         ;B4AA41|        |      ;
-    db $05,$57,$AA,$1C,$46,$02,$00,$12,$43,$AA,$1C,$83         ;B4AA4D|        |      ;
-    db $02,$00,$12,$43,$AA,$1A,$98,$00,$A8,$00,$54,$83         ;B4AA59|        |      ;
-    db $00,$1F,$6C,$AA,$12,$66,$AA,$14,$74,$1F,$7F,$05         ;B4AA65|        |      ;
-    db $7A,$AA,$1C,$4C,$02,$00,$12,$66,$AA,$1C,$8A,$02         ;B4AA71|        |      ;
-    db $00,$12,$66,$AA,$1A,$68,$01,$08,$01,$20,$84,$01         ;B4AA7D|        |      ;
-    db $1F,$8F,$AA,$12,$89,$AA,$14,$74,$1F,$7F,$05,$9D         ;B4AA89|        |      ;
-    db $AA,$1C,$49,$02,$00,$12,$89,$AA,$14,$66,$1F,$7F         ;B4AA95|        |      ;
-    db $00,$AB,$AA,$1C,$88,$02,$00,$12,$89,$AA,$1C,$50         ;B4AAA1|        |      ;
-    db $02,$00,$12,$89,$AA,$1A,$48,$01,$58,$01,$84,$83         ;B4AAAD|        |      ;
-    db $01,$1F,$C0,$AA,$12,$BA,$AA,$14,$74,$1F,$7F,$05         ;B4AAB9|        |      ;
-    db $CE,$AA,$1C,$4F,$02,$00,$12,$BA,$AA,$1C,$87,$02         ;B4AAC5|        |      ;
-    db $00,$12,$BA,$AA,$1A,$A8,$00,$48,$01,$E8,$82,$03         ;B4AAD1|        |      ;
-    db $1F,$E3,$AA,$12,$DD,$AA,$14,$74,$1F,$7F,$05,$F1         ;B4AADD|        |      ;
-    db $AA,$1C,$4E,$02,$00,$12,$DD,$AA,$1C,$8C,$02,$00         ;B4AAE9|        |      ;
-    db $12,$DD,$AA,$1A,$28,$01,$48,$01,$94,$82,$01,$1F         ;B4AAF5|        |      ;
-    db $06,$AB,$12,$00,$AB,$14,$74,$1F,$7F,$05,$14,$AB         ;B4AB01|        |      ;
-    db $1C,$4A,$02,$00,$12,$00,$AB,$1C,$88,$02,$00,$12         ;B4AB0D|        |      ;
-    db $00,$AB,$1A,$08,$01,$58,$01,$AC,$82,$01,$1F,$29         ;B4AB19|        |      ;
-    db $AB,$12,$23,$AB,$14,$74,$1F,$7F,$05,$37,$AB,$1C         ;B4AB25|        |      ;
-    db $4B,$02,$00,$12,$23,$AB,$1C,$89,$02,$00,$12,$23         ;B4AB31|        |      ;
-    db $AB,$1A,$88,$00,$58,$01,$7C,$82,$02,$1F,$4C,$AB         ;B4AB3D|        |      ;
-    db $12,$46,$AB,$14,$74,$1F,$7F,$05,$5A,$AB,$1C,$4D         ;B4AB49|        |      ;
-    db $02,$00,$12,$46,$AB,$1C,$8B,$02,$00,$12,$46,$AB         ;B4AB55|        |      ;
-    db $1A,$58,$00,$E8,$00,$00,$83,$02,$1F,$75,$AB,$12         ;B4AB61|        |      ;
-    db $69,$AB,$1F,$84,$AB,$12,$6F,$AB,$1D,$34,$02,$00         ;B4AB6D|        |      ;
-    db $20,$00,$84,$AB,$20,$01,$90,$AB,$12,$69,$AB,$1C         ;B4AB79|        |      ;
-    db $35,$02,$00,$23,$74,$1F,$7F,$05,$12,$6F,$AB,$1C         ;B4AB85|        |      ;
-    db $36,$02,$00,$12,$69,$AB,$14,$66,$1F,$7F,$00,$A9         ;B4AB91|        |      ;
-    db $AB,$1A,$C8,$00,$58,$01,$68,$81,$02,$12,$B8,$AB         ;B4AB9D|        |      ;
-    db $14,$6E,$1F,$7F,$04,$37,$AC,$1A,$C8,$00,$58,$01         ;B4ABA9|        |      ;
-    db $5C,$84,$02,$1F,$C4,$AB,$12,$B8,$AB,$1F,$29,$AC         ;B4ABB5|        |      ;
-    db $12,$BE,$AB,$28,$74,$1F,$7F,$00,$15,$18,$1F,$7F         ;B4ABC1|        |      ;
-    db $00,$E4,$AB,$15,$18,$1F,$7F,$01,$0D,$AC,$12,$B8         ;B4ABCD|        |      ;
-    db $AB,$23,$74,$1F,$7F,$00,$0B,$02,$12,$B8,$AB,$1D         ;B4ABD9|        |      ;
-    db $52,$02,$00,$20,$00,$F3,$AB,$20,$01,$00,$AC,$12         ;B4ABE5|        |      ;
-    db $BE,$AB,$1C,$53,$02,$00,$41,$1F,$1F,$7F,$08,$00         ;B4ABF1|        |      ;
-    db $12,$BE,$AB,$1C,$54,$02,$00,$41,$1F,$1F,$7F,$02         ;B4ABFD|        |      ;
-    db $00,$12,$BE,$AB,$1C,$5D,$02,$00,$12,$BE,$AB,$1C         ;B4AC09|        |      ;
-    db $6A,$02,$00,$12,$BE,$AB,$1C,$72,$02,$00,$12,$BE         ;B4AC15|        |      ;
-    db $AB,$1C,$7A,$02,$00,$12,$BE,$AB,$14,$74,$1F,$7F         ;B4AC21|        |      ;
-    db $05,$DA,$AB,$1C,$7A,$02,$00,$12,$BE,$AB,$28,$74         ;B4AC2D|        |      ;
-    db $1F,$7F,$00,$10,$14,$66,$1F,$7F,$01,$4F,$AC,$1A         ;B4AC39|        |      ;
-    db $98,$00,$58,$00,$98,$81,$00,$12,$5E,$AC,$14,$6E         ;B4AC45|        |      ;
-    db $1F,$7F,$04,$5D,$AD,$1A,$98,$00,$58,$00,$5C,$84         ;B4AC51|        |      ;
-    db $00,$1F,$6A,$AC,$12,$5E,$AC,$1F,$4F,$AD,$12,$64         ;B4AC5D|        |      ;
-    db $AC,$28,$74,$1F,$7F,$01,$15,$18,$1F,$7F,$00,$8A         ;B4AC69|        |      ;
-    db $AC,$15,$18,$1F,$7F,$01,$14,$AD,$12,$5E,$AC,$23         ;B4AC75|        |      ;
-    db $74,$1F,$7F,$01,$0B,$02,$12,$5E,$AC,$1D,$5E,$02         ;B4AC81|        |      ;
-    db $00,$20,$00,$99,$AC,$20,$01,$AF,$AC,$12,$64,$AC         ;B4AC8D|        |      ;
-    db $08,$19,$E9,$00,$00,$13,$78,$00,$11,$1C,$5F,$02         ;B4AC99|        |      ;
-    db $00,$41,$21,$1F,$7F,$08,$00,$12,$64,$AC,$1C,$60         ;B4ACA5|        |      ;
-    db $02,$00,$1B,$45,$03,$00,$1B,$46,$03,$00,$13,$28         ;B4ACB1|        |      ;
-    db $00,$1C,$61,$02,$00,$1B,$26,$02,$00,$41,$21,$1F         ;B4ACBD|        |      ;
-    db $7F,$02,$00,$12,$64,$AC,$1D,$6B,$02,$00,$20,$00         ;B4ACC9|        |      ;
-    db $DE,$AC,$20,$01,$F4,$AC,$12,$64,$AC,$08,$19,$E9         ;B4ACD5|        |      ;
-    db $00,$00,$13,$78,$00,$11,$1C,$5F,$02,$00,$41,$21         ;B4ACE1|        |      ;
-    db $1F,$7F,$08,$00,$12,$64,$AC,$1C,$60,$02,$00,$1B         ;B4ACED|        |      ;
-    db $45,$03,$00,$1B,$46,$03,$00,$13,$28,$00,$1C,$6C         ;B4ACF9|        |      ;
-    db $02,$00,$1B,$26,$02,$00,$41,$21,$1F,$7F,$02,$00         ;B4AD05|        |      ;
-    db $12,$64,$AC,$1C,$7B,$02,$00,$20,$00,$23,$AD,$20         ;B4AD11|        |      ;
-    db $01,$39,$AD,$12,$64,$AC,$08,$19,$E9,$00,$00,$13         ;B4AD1D|        |      ;
-    db $78,$00,$11,$1C,$5F,$02,$00,$41,$21,$1F,$7F,$08         ;B4AD29|        |      ;
-    db $00,$12,$64,$AC,$1B,$45,$03,$00,$1B,$46,$03,$00         ;B4AD35|        |      ;
-    db $13,$3C,$00,$1C,$6C,$02,$00,$1B,$26,$02,$00,$12         ;B4AD41|        |      ;
-    db $64,$AC,$14,$74,$1F,$7F,$05,$80,$AC,$1C,$55,$02         ;B4AD4D|        |      ;
-    db $00,$12,$64,$AC,$28,$74,$1F,$7F,$01,$10,$14,$66         ;B4AD59|        |      ;
-    db $1F,$7F,$02,$75,$AD,$1A,$48,$01,$A8,$00,$C8,$81         ;B4AD65|        |      ;
-    db $00,$12,$84,$AD,$14,$6E,$1F,$7F,$04,$60,$AE,$1A         ;B4AD71|        |      ;
-    db $48,$01,$A8,$00,$5C,$84,$00,$1F,$90,$AD,$12,$84         ;B4AD7D|        |      ;
-    db $AD,$1F,$52,$AE,$12,$8A,$AD,$28,$74,$1F,$7F,$02         ;B4AD89|        |      ;
-    db $15,$18,$1F,$7F,$00,$B0,$AD,$15,$18,$1F,$7F,$01         ;B4AD95|        |      ;
-    db $E6,$AD,$12,$84,$AD,$23,$74,$1F,$7F,$02,$0B,$02         ;B4ADA1|        |      ;
-    db $12,$84,$AD,$09,$14,$2E,$A9,$1D,$56,$02,$00,$20         ;B4ADAD|        |      ;
-    db $00,$C3,$AD,$20,$01,$D9,$AD,$12,$84,$AD,$08,$19         ;B4ADB9|        |      ;
-    db $FC,$00,$00,$13,$78,$00,$11,$1C,$57,$02,$00,$41         ;B4ADC5|        |      ;
-    db $23,$1F,$7F,$08,$00,$12,$8A,$AD,$1C,$58,$02,$00         ;B4ADD1|        |      ;
-    db $41,$23,$1F,$7F,$02,$00,$12,$8A,$AD,$09,$14,$48         ;B4ADDD|        |      ;
-    db $A9,$1D,$91,$02,$00,$20,$00,$F9,$AD,$20,$01,$0F         ;B4ADE9|        |      ;
-    db $AE,$12,$8A,$AD,$08,$19,$38,$00,$00,$13,$78,$00         ;B4ADF5|        |      ;
-    db $11,$1C,$62,$02,$00,$41,$23,$1F,$7F,$08,$00,$12         ;B4AE01|        |      ;
-    db $8A,$AD,$1C,$63,$02,$00,$41,$23,$1F,$7F,$02,$00         ;B4AE0D|        |      ;
-    db $12,$8A,$AD,$09,$14,$3B,$A9,$1D,$56,$02,$00,$20         ;B4AE19|        |      ;
-    db $00,$2F,$AE,$20,$01,$D9,$AD,$12,$8A,$AD,$08,$19         ;B4AE25|        |      ;
-    db $FD,$00,$00,$13,$78,$00,$11,$1C,$7C,$02,$00,$41         ;B4AE31|        |      ;
-    db $23,$1F,$7F,$08,$00,$12,$8A,$AD,$1C,$58,$02,$00         ;B4AE3D|        |      ;
-    db $41,$23,$1F,$7F,$02,$00,$12,$8A,$AD,$14,$74,$1F         ;B4AE49|        |      ;
-    db $7F,$05,$A6,$AD,$1C,$6D,$02,$00,$12,$8A,$AD,$28         ;B4AE55|        |      ;
-    db $74,$1F,$7F,$02,$10,$14,$66,$1F,$7F,$03,$78,$AE         ;B4AE61|        |      ;
-    db $1A,$08,$01,$98,$00,$E0,$81,$00,$12,$87,$AE,$14         ;B4AE6D|        |      ;
-    db $6E,$1F,$7F,$04,$79,$AF,$1A,$08,$01,$98,$00,$5C         ;B4AE79|        |      ;
-    db $84,$00,$1F,$93,$AE,$12,$87,$AE,$1F,$6B,$AF,$12         ;B4AE85|        |      ;
-    db $8D,$AE,$28,$74,$1F,$7F,$03,$15,$18,$1F,$7F,$00         ;B4AE91|        |      ;
-    db $B3,$AE,$15,$18,$1F,$7F,$01,$E9,$AE,$12,$87,$AE         ;B4AE9D|        |      ;
-    db $23,$74,$1F,$7F,$03,$0B,$02,$12,$8D,$AE,$09,$14         ;B4AEA9|        |      ;
-    db $55,$A9,$1D,$59,$02,$00,$20,$00,$C6,$AE,$20,$01         ;B4AEB5|        |      ;
-    db $DC,$AE,$12,$87,$AE,$08,$19,$39,$00,$00,$13,$78         ;B4AEC1|        |      ;
-    db $00,$11,$1C,$5A,$02,$00,$41,$25,$1F,$7F,$08,$00         ;B4AECD|        |      ;
-    db $12,$8D,$AE,$1C,$5B,$02,$00,$41,$25,$1F,$7F,$02         ;B4AED9|        |      ;
-    db $00,$12,$8D,$AE,$09,$14,$55,$A9,$1D,$64,$02,$00         ;B4AEE5|        |      ;
-    db $20,$00,$FC,$AE,$20,$01,$12,$AF,$12,$8D,$AE,$08         ;B4AEF1|        |      ;
-    db $19,$39,$00,$00,$13,$78,$00,$11,$1C,$65,$02,$00         ;B4AEFD|        |      ;
-    db $41,$25,$1F,$7F,$08,$00,$12,$8D,$AE,$1C,$66,$02         ;B4AF09|        |      ;
-    db $00,$41,$25,$1F,$7F,$02,$00,$12,$8D,$AE,$09,$14         ;B4AF15|        |      ;
-    db $55,$A9,$1D,$75,$02,$00,$20,$00,$32,$AF,$20,$01         ;B4AF21|        |      ;
-    db $48,$AF,$12,$8D,$AE,$08,$19,$39,$00,$00,$13,$78         ;B4AF2D|        |      ;
-    db $00,$11,$1C,$65,$02,$00,$41,$25,$1F,$7F,$08,$00         ;B4AF39|        |      ;
-    db $12,$8D,$AE,$1C,$66,$02,$00,$41,$25,$1F,$7F,$02         ;B4AF45|        |      ;
-    db $00,$12,$8D,$AE,$1C,$7D,$02,$00,$08,$19,$39,$00         ;B4AF51|        |      ;
-    db $00,$13,$78,$00,$11,$41,$25,$1F,$7F,$02,$00,$12         ;B4AF5D|        |      ;
-    db $8D,$AE,$14,$74,$1F,$7F,$05,$A9,$AE,$1C,$7D,$02         ;B4AF69|        |      ;
-    db $00,$12,$8D,$AE,$28,$74,$1F,$7F,$03,$10,$14,$66         ;B4AF75|        |      ;
-    db $1F,$7F,$04,$91,$AF,$1A,$B8,$00,$98,$00,$04,$82         ;B4AF81|        |      ;
-    db $00,$12,$A0,$AF,$14,$6E,$1F,$7F,$04,$74,$B0,$1A         ;B4AF8D|        |      ;
-    db $B8,$00,$98,$00,$5C,$84,$00,$1F,$AC,$AF,$12,$A0         ;B4AF99|        |      ;
-    db $AF,$1F,$66,$B0,$12,$A6,$AF,$28,$74,$1F,$7F,$04         ;B4AFA5|        |      ;
-    db $15,$18,$1F,$7F,$00,$CC,$AF,$15,$18,$1F,$7F,$01         ;B4AFB1|        |      ;
-    db $2A,$B0,$12,$A0,$AF,$23,$74,$1F,$7F,$04,$0B,$02         ;B4AFBD|        |      ;
-    db $12,$A0,$AF,$1D,$67,$02,$00,$20,$00,$DB,$AF,$20         ;B4AFC9|        |      ;
-    db $01,$EE,$AF,$12,$A6,$AF,$1C,$68,$02,$00,$32,$D4         ;B4AFD5|        |      ;
-    db $00,$80,$15,$00,$41,$27,$1F,$7F,$08,$00,$12,$A6         ;B4AFE1|        |      ;
-    db $AF,$1C,$69,$02,$00,$41,$27,$1F,$7F,$02,$00,$12         ;B4AFED|        |      ;
-    db $A6,$AF,$1D,$6F,$02,$00,$20,$00,$0A,$B0,$20,$01         ;B4AFF9|        |      ;
-    db $1D,$B0,$12,$A0,$AF,$1C,$70,$02,$00,$32,$D4,$00         ;B4B005|        |      ;
-    db $80,$15,$00,$41,$27,$1F,$7F,$08,$00,$12,$A6,$AF         ;B4B011|        |      ;
-    db $1C,$71,$02,$00,$41,$27,$1F,$7F,$02,$00,$12,$A6         ;B4B01D|        |      ;
-    db $AF,$1D,$77,$02,$00,$20,$00,$39,$B0,$20,$01,$4C         ;B4B029|        |      ;
-    db $B0,$12,$A6,$AF,$1C,$78,$02,$00,$32,$D4,$00,$80         ;B4B035|        |      ;
-    db $15,$00,$41,$27,$1F,$7F,$08,$00,$12,$A6,$AF,$1C         ;B4B041|        |      ;
-    db $79,$02,$00,$41,$27,$1F,$7F,$02,$00,$12,$A6,$AF         ;B4B04D|        |      ;
-    db $1C,$7F,$02,$00,$32,$D4,$00,$80,$15,$00,$12,$A6         ;B4B059|        |      ;
-    db $AF,$14,$74,$1F,$7F,$05,$C2,$AF,$1C,$65,$03,$00         ;B4B065|        |      ;
-    db $12,$A6,$AF,$28,$74,$1F,$7F,$04,$10,$1A,$B8,$00         ;B4B071|        |      ;
-    db $B8,$00,$00,$83,$02,$0C,$09,$13,$B4,$00,$1B,$94         ;B4B07D|        |      ;
-    db $02,$01,$13,$32,$00,$1B,$92,$02,$00,$13,$0A,$00         ;B4B089|        |      ;
-    db $1B,$94,$02,$00,$13,$0A,$00,$1B,$90,$02,$00,$13         ;B4B095|        |      ;
-    db $0A,$00,$1B,$94,$02,$01,$13,$0A,$00,$1B,$94,$02         ;B4B0A1|        |      ;
-    db $01,$0D,$FF,$00,$20,$02,$1B,$94,$02,$01,$0D,$01         ;B4B0AD|        |      ;
-    db $00,$20,$02,$1B,$94,$02,$01,$0D,$FF,$00,$10,$02         ;B4B0B9|        |      ;
-    db $1B,$94,$02,$01,$0D,$01,$00,$10,$02,$12,$87,$B0         ;B4B0C5|        |      ;
-    db $1A,$C8,$00,$B8,$00,$D8,$83,$03,$0C,$09,$13,$B4         ;B4B0D1|        |      ;
-    db $00,$1B,$C5,$02,$00,$13,$0A,$00,$1B,$C9,$02,$01         ;B4B0DD|        |      ;
-    db $13,$0A,$00,$1B,$C7,$02,$00,$13,$0A,$00,$1B,$C9         ;B4B0E9|        |      ;
-    db $02,$00,$13,$0A,$00,$1B,$C5,$02,$00,$13,$32,$00         ;B4B0F5|        |      ;
-    db $1B,$C9,$02,$00,$0D,$01,$00,$20,$02,$1B,$C9,$02         ;B4B101|        |      ;
-    db $00,$0D,$FF,$00,$20,$02,$1B,$C9,$02,$00,$0D,$01         ;B4B10D|        |      ;
-    db $00,$10,$02,$1B,$C9,$02,$00,$0D,$FF,$00,$10,$02         ;B4B119|        |      ;
-    db $12,$DE,$B0,$1A,$58,$01,$D8,$00,$18,$83,$02,$0C         ;B4B125|        |      ;
-    db $09,$13,$B4,$00,$1B,$9B,$02,$01,$13,$32,$00,$1B         ;B4B131|        |      ;
-    db $99,$02,$00,$13,$0A,$00,$1B,$9B,$02,$00,$13,$0A         ;B4B13D|        |      ;
-    db $00,$1B,$97,$02,$00,$13,$0A,$00,$1B,$9B,$02,$01         ;B4B149|        |      ;
-    db $13,$0A,$00,$1B,$9B,$02,$01,$0D,$FF,$00,$20,$02         ;B4B155|        |      ;
-    db $1B,$9B,$02,$01,$0D,$01,$00,$20,$02,$1B,$9B,$02         ;B4B161|        |      ;
-    db $01,$0D,$FF,$00,$10,$02,$1B,$9B,$02,$01,$0D,$01         ;B4B16D|        |      ;
-    db $00,$10,$02,$12,$35,$B1,$1A,$68,$01,$D8,$00,$FC         ;B4B179|        |      ;
-    db $83,$03,$0C,$09,$13,$B4,$00,$1B,$D0,$02,$00,$13         ;B4B185|        |      ;
-    db $0A,$00,$1B,$CF,$02,$00,$13,$0A,$00,$1B,$D0,$02         ;B4B191|        |      ;
-    db $01,$13,$0A,$00,$1B,$CD,$02,$00,$13,$0A,$00,$1B         ;B4B19D|        |      ;
-    db $D0,$02,$00,$13,$32,$00,$1B,$D0,$02,$00,$0D,$01         ;B4B1A9|        |      ;
-    db $00,$20,$02,$1B,$D0,$02,$00,$0D,$FF,$00,$20,$02         ;B4B1B5|        |      ;
-    db $1B,$D0,$02,$00,$0D,$01,$00,$10,$02,$1B,$D0,$02         ;B4B1C1|        |      ;
-    db $00,$0D,$FF,$00,$10,$02,$12,$8C,$B1,$1A,$B8,$00         ;B4B1CD|        |      ;
-    db $28,$01,$20,$84,$02,$0C,$09,$13,$B4,$00,$1B,$D7         ;B4B1D9|        |      ;
-    db $02,$01,$13,$32,$00,$1B,$D5,$02,$00,$13,$0A,$00         ;B4B1E5|        |      ;
-    db $1B,$D7,$02,$00,$13,$0A,$00,$1B,$D3,$02,$00,$13         ;B4B1F1|        |      ;
-    db $0A,$00,$1B,$D7,$02,$01,$13,$0A,$00,$1B,$D7,$02         ;B4B1FD|        |      ;
-    db $00,$0D,$01,$00,$0C,$01,$1B,$D7,$02,$00,$0D,$FF         ;B4B209|        |      ;
-    db $00,$0C,$01,$1B,$D7,$02,$00,$0D,$01,$00,$08,$01         ;B4B215|        |      ;
-    db $1B,$D7,$02,$00,$0D,$FF,$00,$08,$01,$12,$E3,$B1         ;B4B221|        |      ;
-    db $1A,$C8,$00,$28,$01,$84,$83,$03,$0C,$09,$13,$B4         ;B4B22D|        |      ;
-    db $00,$1B,$B6,$02,$01,$13,$0A,$00,$1B,$B4,$02,$00         ;B4B239|        |      ;
-    db $13,$0A,$00,$1B,$B6,$02,$00,$13,$0A,$00,$1B,$B2         ;B4B245|        |      ;
-    db $02,$00,$13,$0A,$00,$1B,$B6,$02,$01,$13,$32,$00         ;B4B251|        |      ;
-    db $1B,$B6,$02,$01,$0D,$FF,$00,$0C,$01,$1B,$B6,$02         ;B4B25D|        |      ;
-    db $01,$0D,$01,$00,$0C,$01,$1B,$B6,$02,$01,$0D,$FF         ;B4B269|        |      ;
-    db $00,$08,$01,$1B,$B6,$02,$01,$0D,$01,$00,$08,$01         ;B4B275|        |      ;
-    db $12,$3A,$B2,$1A,$10,$01,$08,$01,$68,$81,$03,$0C         ;B4B281|        |      ;
-    db $09,$13,$C8,$00,$1B,$23,$02,$00,$13,$0A,$00,$1B         ;B4B28D|        |      ;
-    db $21,$02,$00,$13,$0A,$00,$1B,$23,$02,$01,$13,$0A         ;B4B299|        |      ;
-    db $00,$1B,$1F,$02,$00,$13,$0A,$00,$1B,$23,$02,$00         ;B4B2A5|        |      ;
-    db $13,$32,$00,$1B,$23,$02,$00,$0D,$01,$00,$20,$02         ;B4B2B1|        |      ;
-    db $1B,$23,$02,$00,$0D,$FF,$00,$20,$02,$1B,$23,$02         ;B4B2BD|        |      ;
-    db $00,$0D,$01,$00,$10,$02,$1B,$23,$02,$00,$0D,$FF         ;B4B2C9|        |      ;
-    db $00,$10,$02,$12,$91,$B2,$1A,$10,$01,$08,$01,$98         ;B4B2D5|        |      ;
-    db $81,$03,$0C,$09,$13,$C8,$00,$1B,$2B,$02,$00,$13         ;B4B2E1|        |      ;
-    db $0A,$00,$1B,$29,$02,$00,$13,$0A,$00,$1B,$2B,$02         ;B4B2ED|        |      ;
-    db $01,$13,$0A,$00,$1B,$27,$02,$00,$13,$0A,$00,$1B         ;B4B2F9|        |      ;
-    db $2B,$02,$00,$13,$32,$00,$1B,$2B,$02,$00,$0D,$01         ;B4B305|        |      ;
-    db $00,$20,$02,$1B,$2B,$02,$00,$0D,$FF,$00,$20,$02         ;B4B311|        |      ;
-    db $1B,$2B,$02,$00,$0D,$01,$00,$10,$02,$1B,$2B,$02         ;B4B31D|        |      ;
-    db $00,$0D,$FF,$00,$10,$02,$12,$E8,$B2,$1A,$10,$01         ;B4B329|        |      ;
-    db $08,$01,$C8,$81,$03,$0C,$09,$13,$C8,$00,$1B,$50         ;B4B335|        |      ;
-    db $02,$00,$13,$0A,$00,$1B,$4E,$02,$00,$13,$0A,$00         ;B4B341|        |      ;
-    db $1B,$50,$02,$01,$13,$0A,$00,$1B,$4C,$02,$00,$13         ;B4B34D|        |      ;
-    db $0A,$00,$1B,$50,$02,$00,$13,$32,$00,$1B,$50,$02         ;B4B359|        |      ;
-    db $00,$0D,$01,$00,$20,$02,$1B,$50,$02,$00,$0D,$FF         ;B4B365|        |      ;
-    db $00,$20,$02,$1B,$50,$02,$00,$0D,$01,$00,$10,$02         ;B4B371|        |      ;
-    db $1B,$50,$02,$00,$0D,$FF,$00,$10,$02,$12,$3F,$B3         ;B4B37D|        |      ;
-    db $1A,$10,$01,$08,$01,$E0,$81,$03,$0C,$09,$13,$C8         ;B4B389|        |      ;
-    db $00,$1B,$41,$02,$00,$13,$0A,$00,$1B,$3F,$02,$00         ;B4B395|        |      ;
-    db $13,$0A,$00,$1B,$41,$02,$01,$13,$0A,$00,$1B,$3D         ;B4B3A1|        |      ;
-    db $02,$00,$13,$0A,$00,$1B,$41,$02,$00,$13,$32,$00         ;B4B3AD|        |      ;
-    db $1B,$41,$02,$00,$0D,$01,$00,$20,$02,$1B,$41,$02         ;B4B3B9|        |      ;
-    db $00,$0D,$FF,$00,$20,$02,$1B,$41,$02,$00,$0D,$01         ;B4B3C5|        |      ;
-    db $00,$10,$02,$1B,$41,$02,$00,$0D,$FF,$00,$10,$02         ;B4B3D1|        |      ;
-    db $12,$96,$B3,$1A,$10,$01,$08,$01,$04,$82,$03,$0C         ;B4B3DD|        |      ;
-    db $09,$13,$C8,$00,$1B,$49,$02,$00,$13,$0A,$00,$1B         ;B4B3E9|        |      ;
-    db $47,$02,$00,$13,$0A,$00,$1B,$49,$02,$01,$13,$0A         ;B4B3F5|        |      ;
-    db $00,$1B,$45,$02,$00,$13,$0A,$00,$1B,$49,$02,$00         ;B4B401|        |      ;
-    db $13,$32,$00,$1B,$49,$02,$00,$0D,$01,$00,$20,$02         ;B4B40D|        |      ;
-    db $1B,$49,$02,$00,$0D,$FF,$00,$20,$02,$1B,$49,$02         ;B4B419|        |      ;
-    db $00,$0D,$01,$00,$10,$02,$1B,$49,$02,$00,$0D,$FF         ;B4B425|        |      ;
-    db $00,$10,$02,$12,$ED,$B3,$1A,$10,$01,$08,$01,$5C         ;B4B431|        |      ;
-    db $84,$03,$0C,$09,$13,$C8,$00,$1B,$E7,$02,$00,$13         ;B4B43D|        |      ;
-    db $0A,$00,$1B,$E5,$02,$00,$13,$0A,$00,$1B,$E7,$02         ;B4B449|        |      ;
-    db $01,$13,$0A,$00,$1B,$E3,$02,$00,$13,$0A,$00,$1B         ;B4B455|        |      ;
-    db $E7,$02,$00,$13,$32,$00,$1B,$E7,$02,$00,$0D,$01         ;B4B461|        |      ;
-    db $00,$20,$02,$1B,$E7,$02,$00,$0D,$FF,$00,$20,$02         ;B4B46D|        |      ;
-    db $1B,$E7,$02,$00,$0D,$01,$00,$10,$02,$1B,$E7,$02         ;B4B479|        |      ;
-    db $00,$0D,$FF,$00,$10,$02,$12,$44,$B4                     ;B4B485|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x51()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($03, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x08()
+    %AICMD0x05_SetPosition($0108, $0138)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x32($1F74, $7F, $FFDF)
+    %AICMD0x09($01, $A962)
+    %AICMD0x09($03, $A9D9)
+    %AICMD0x09($06, $AA81)
+    %AICMD0x09($07, $AAB2)
+    %AICMD0x09($0B, $AB61)
+    %AICMD0x09($0D, $AB97)
+    %AICMD0x09($0E, $AC3D)
+    %AICMD0x09($0F, $AD63)
+    %AICMD0x09($10, $AE66)
+    %AICMD0x09($11, $AF7F)
+    %AICMD0x09($12, $A75E)
+    %AICMD0x09($13, $A993)
+    %AICMD0x06_SetDestination($09)
+    %AICMD0x38()
+    %AICMD0x39($01, $0040)
+    %AICMD0x15($80091D, $00, $A6A1)
+    %AICMD0x1C($0241, $00)
+    %AICMD0x40()
+    %AICMD0x39($01, $0010)
+    %AICMD0x3F()
+    %AICMD0x13($003C)
+    %AICMD0x1C($0243, $00)
+    %AICMD0x39($00, $0010)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x4E()
+    %AICMD0x12_Jump($A6AE)
+    %AICMD0x1C($0242, $00)
+    %AICMD0x1C($0243, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F76, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x09($14, $A7B0)
+    %AICMD0x19($0012, $00)
+    %AICMD0x13($0014)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x0C($02)
+    %AICMD0x3D($09)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $A72D)
+    %AICMD0x09($07, $B284)
+    %AICMD0x41_ModifyVariable($7F1F1F, $001E)
+    %AICMD0x12_Jump($B4E6)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $A736)
+    %AICMD0x09($07, $B2DB)
+    %AICMD0x41_ModifyVariable($7F1F21, $001E)
+    %AICMD0x12_Jump($B4E6)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A73F)
+    %AICMD0x09($07, $B332)
+    %AICMD0x41_ModifyVariable($7F1F23, $001E)
+    %AICMD0x12_Jump($B4E6)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $A748)
+    %AICMD0x09($07, $B389)
+    %AICMD0x41_ModifyVariable($7F1F25, $001E)
+    %AICMD0x12_Jump($B4E6)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $A751)
+    %AICMD0x09($07, $B3E0)
+    %AICMD0x41_ModifyVariable($7F1F27, $001E)
+    %AICMD0x12_Jump($B4E6)
+    %AICMD0x41_ModifyVariable($7F1F1F, $001E)
+    %AICMD0x12_Jump($A757)
+    %AICMD0x41_ModifyVariable($7F1F21, $001E)
+    %AICMD0x12_Jump($A757)
+    %AICMD0x41_ModifyVariable($7F1F23, $001E)
+    %AICMD0x12_Jump($A757)
+    %AICMD0x41_ModifyVariable($7F1F25, $001E)
+    %AICMD0x12_Jump($A757)
+    %AICMD0x41_ModifyVariable($7F1F27, $001E)
+    %AICMD0x09($07, $B437)
+    %AICMD0x12_Jump($B4E6)
+    %AICMD0x1A($0108, $00B8, $8AB0, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02A2, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($029E, $01)
+    %AICMD0x0D($00, $01, $40, $01)
+    %AICMD0x1B($02A2, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1B($02A1, $00)
+    %AICMD0x2A($0045)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x1C($0244, $00)
+    %AICMD0x0B($01)
+    %AICMD0x2F($8330)
+    %AICMD0x1F($A79B)
+    %AICMD0x12_Jump($A795)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $A7A9)
+    %AICMD0x1C($0286, $00)
+    %AICMD0x12_Jump($A795)
+    %AICMD0x1C($028C, $00)
+    %AICMD0x12_Jump($A795)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $00, $A826)
+    %AICMD0x15($80091E, $15, $A813)
+    %AICMD0x15($80091E, $16, $A813)
+    %AICMD0x15($80091E, $17, $A813)
+    %AICMD0x15($80091E, $01, $A813)
+    %AICMD0x15($80091E, $02, $A808)
+    %AICMD0x15($80091E, $14, $A813)
+    %AICMD0x15($80091E, $07, $A840)
+    %AICMD0x15($80091E, $05, $A840)
+    %AICMD0x15($80091E, $18, $A813)
+    %AICMD0x16($80091E, $09, $0C, $A808)
+    %AICMD0x15($80091E, $1A, $A808)
+    %AICMD0x12_Jump($A808)
+    %AICMD0x17($02)
+    %AICMD0x18($00, $A8DE)
+    %AICMD0x18($01, $A8F8)
+    %AICMD0x10_End()
+    %AICMD0x17($04)
+    %AICMD0x18($00, $A876)
+    %AICMD0x18($01, $A890)
+    %AICMD0x18($02, $A8AA)
+    %AICMD0x18($03, $A8C4)
+    %AICMD0x10_End()
+    %AICMD0x1A($0118, $00F8, $8ABC, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($0034, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $0F, $A912)
+    %AICMD0x1A($0118, $00F8, $8720, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($003B, $00)
+    %AICMD0x21($1F36, $7F, $01)
+    %AICMD0x21($0917, $80, $0A)
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $0F)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $8AC8, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($00F7, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $8AD4, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($00F6, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $8AE0, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($00F9, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $8A98, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($00F8, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $8504, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($00FD, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $84F8, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($00FC, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x1A($0118, $00F8, $8750, $00)
+    %AICMD0x13($0010)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x13($0004)
+    %AICMD0x19($003A, $00)
+    %AICMD0x12_Jump($A92C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0148, $00A0, $84F8, $00)
+    %AICMD0x13($0001)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0148, $00A8, $8510, $00)
+    %AICMD0x13($0001)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0148, $00A8, $8A74, $00)
+    %AICMD0x13($0001)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0108, $0098, $8A44, $00)
+    %AICMD0x13($0001)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0198, $00C8, $83FC, $00)
+    %AICMD0x1F($A970)
+    %AICMD0x12_Jump($A96A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $A985)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $A98C)
+    %AICMD0x1C($0247, $00)
+    %AICMD0x12_Jump($A96A)
+    %AICMD0x1C($0492, $00)
+    %AICMD0x12_Jump($A96A)
+    %AICMD0x1C($0284, $00)
+    %AICMD0x12_Jump($A96A)
+    %AICMD0x1A($00B8, $0108, $8348, $00)
+    %AICMD0x1F($A9A1)
+    %AICMD0x12_Jump($A99B)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $A9AF)
+    %AICMD0x1C($0248, $00)
+    %AICMD0x12_Jump($A99B)
+    %AICMD0x1C($0285, $00)
+    %AICMD0x12_Jump($A99B)
+    %AICMD0x1A($00B8, $0108, $836C, $03)
+    %AICMD0x1F($A9C4)
+    %AICMD0x12_Jump($A9BE)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $A9D2)
+    %AICMD0x1C($0248, $00)
+    %AICMD0x12_Jump($A9BE)
+    %AICMD0x1C($0288, $00)
+    %AICMD0x12_Jump($A9BE)
+    %AICMD0x1A($0078, $00F8, $83D8, $02)
+    %AICMD0x1F($A9ED)
+    %AICMD0x12_Jump($A9E1)
+    %AICMD0x1F($AA26)
+    %AICMD0x12_Jump($A9E7)
+    %AICMD0x1C($0245, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $00, $A9E1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $01, $A9E1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $02, $A9E1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $A9E1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $04, $A9E1)
+    %AICMD0x08()
+    %AICMD0x1B($02C7, $00)
+    %AICMD0x0D($00, $FF, $30, $01)
+    %AICMD0x1B($02C4, $00)
+    %AICMD0x11()
+    %AICMD0x12_Jump($A9E7)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AA34)
+    %AICMD0x1C($0245, $00)
+    %AICMD0x12_Jump($A9E7)
+    %AICMD0x1C($0282, $00)
+    %AICMD0x12_Jump($A9E7)
+    %AICMD0x1A($0158, $00C8, $8318, $00)
+    %AICMD0x1F($AA49)
+    %AICMD0x12_Jump($AA43)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AA57)
+    %AICMD0x1C($0246, $00)
+    %AICMD0x12_Jump($AA43)
+    %AICMD0x1C($0283, $00)
+    %AICMD0x12_Jump($AA43)
+    %AICMD0x1A($0098, $00A8, $8354, $00)
+    %AICMD0x1F($AA6C)
+    %AICMD0x12_Jump($AA66)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AA7A)
+    %AICMD0x1C($024C, $00)
+    %AICMD0x12_Jump($AA66)
+    %AICMD0x1C($028A, $00)
+    %AICMD0x12_Jump($AA66)
+    %AICMD0x1A($0168, $0108, $8420, $01)
+    %AICMD0x1F($AA8F)
+    %AICMD0x12_Jump($AA89)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AA9D)
+    %AICMD0x1C($0249, $00)
+    %AICMD0x12_Jump($AA89)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $AAAB)
+    %AICMD0x1C($0288, $00)
+    %AICMD0x12_Jump($AA89)
+    %AICMD0x1C($0250, $00)
+    %AICMD0x12_Jump($AA89)
+    %AICMD0x1A($0148, $0158, $8384, $01)
+    %AICMD0x1F($AAC0)
+    %AICMD0x12_Jump($AABA)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AACE)
+    %AICMD0x1C($024F, $00)
+    %AICMD0x12_Jump($AABA)
+    %AICMD0x1C($0287, $00)
+    %AICMD0x12_Jump($AABA)
+    %AICMD0x1A($00A8, $0148, $82E8, $03)
+    %AICMD0x1F($AAE3)
+    %AICMD0x12_Jump($AADD)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AAF1)
+    %AICMD0x1C($024E, $00)
+    %AICMD0x12_Jump($AADD)
+    %AICMD0x1C($028C, $00)
+    %AICMD0x12_Jump($AADD)
+    %AICMD0x1A($0128, $0148, $8294, $01)
+    %AICMD0x1F($AB06)
+    %AICMD0x12_Jump($AB00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AB14)
+    %AICMD0x1C($024A, $00)
+    %AICMD0x12_Jump($AB00)
+    %AICMD0x1C($0288, $00)
+    %AICMD0x12_Jump($AB00)
+    %AICMD0x1A($0108, $0158, $82AC, $01)
+    %AICMD0x1F($AB29)
+    %AICMD0x12_Jump($AB23)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AB37)
+    %AICMD0x1C($024B, $00)
+    %AICMD0x12_Jump($AB23)
+    %AICMD0x1C($0289, $00)
+    %AICMD0x12_Jump($AB23)
+    %AICMD0x1A($0088, $0158, $827C, $02)
+    %AICMD0x1F($AB4C)
+    %AICMD0x12_Jump($AB46)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AB5A)
+    %AICMD0x1C($024D, $00)
+    %AICMD0x12_Jump($AB46)
+    %AICMD0x1C($028B, $00)
+    %AICMD0x12_Jump($AB46)
+    %AICMD0x1A($0058, $00E8, $8300, $02)
+    %AICMD0x1F($AB75)
+    %AICMD0x12_Jump($AB69)
+    %AICMD0x1F($AB84)
+    %AICMD0x12_Jump($AB6F)
+    %AICMD0x1D($0234, $00)
+    %AICMD0x20($00, $AB84)
+    %AICMD0x20($01, $AB90)
+    %AICMD0x12_Jump($AB69)
+    %AICMD0x1C($0235, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $05)
+    %AICMD0x12_Jump($AB6F)
+    %AICMD0x1C($0236, $00)
+    %AICMD0x12_Jump($AB69)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $ABA9)
+    %AICMD0x1A($00C8, $0158, $8168, $02)
+    %AICMD0x12_Jump($ABB8)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $AC37)
+    %AICMD0x1A($00C8, $0158, $845C, $02)
+    %AICMD0x1F($ABC4)
+    %AICMD0x12_Jump($ABB8)
+    %AICMD0x1F($AC29)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x28($1F74, $7F, $00)
+    %AICMD0x15($7F1F18, $00, $ABE4)
+    %AICMD0x15($7F1F18, $01, $AC0D)
+    %AICMD0x12_Jump($ABB8)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($ABB8)
+    %AICMD0x1D($0252, $00)
+    %AICMD0x20($00, $ABF3)
+    %AICMD0x20($01, $AC00)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x1C($0253, $00)
+    %AICMD0x41_ModifyVariable($7F1F1F, $0008)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x1C($0254, $00)
+    %AICMD0x41_ModifyVariable($7F1F1F, $0002)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x1C($025D, $00)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x1C($026A, $00)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x1C($0272, $00)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x1C($027A, $00)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $ABDA)
+    %AICMD0x1C($027A, $00)
+    %AICMD0x12_Jump($ABBE)
+    %AICMD0x28($1F74, $7F, $00)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $AC4F)
+    %AICMD0x1A($0098, $0058, $8198, $00)
+    %AICMD0x12_Jump($AC5E)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $AD5D)
+    %AICMD0x1A($0098, $0058, $845C, $00)
+    %AICMD0x1F($AC6A)
+    %AICMD0x12_Jump($AC5E)
+    %AICMD0x1F($AD4F)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x28($1F74, $7F, $01)
+    %AICMD0x15($7F1F18, $00, $AC8A)
+    %AICMD0x15($7F1F18, $01, $AD14)
+    %AICMD0x12_Jump($AC5E)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $01)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($AC5E)
+    %AICMD0x1D($025E, $00)
+    %AICMD0x20($00, $AC99)
+    %AICMD0x20($01, $ACAF)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x08()
+    %AICMD0x19($00E9, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($025F, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $0008)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x1C($0260, $00)
+    %AICMD0x1B($0345, $00)
+    %AICMD0x1B($0346, $00)
+    %AICMD0x13($0028)
+    %AICMD0x1C($0261, $00)
+    %AICMD0x1B($0226, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $0002)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x1D($026B, $00)
+    %AICMD0x20($00, $ACDE)
+    %AICMD0x20($01, $ACF4)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x08()
+    %AICMD0x19($00E9, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($025F, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $0008)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x1C($0260, $00)
+    %AICMD0x1B($0345, $00)
+    %AICMD0x1B($0346, $00)
+    %AICMD0x13($0028)
+    %AICMD0x1C($026C, $00)
+    %AICMD0x1B($0226, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $0002)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x1C($027B, $00)
+    %AICMD0x20($00, $AD23)
+    %AICMD0x20($01, $AD39)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x08()
+    %AICMD0x19($00E9, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($025F, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $0008)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x1B($0345, $00)
+    %AICMD0x1B($0346, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1C($026C, $00)
+    %AICMD0x1B($0226, $00)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AC80)
+    %AICMD0x1C($0255, $00)
+    %AICMD0x12_Jump($AC64)
+    %AICMD0x28($1F74, $7F, $01)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $AD75)
+    %AICMD0x1A($0148, $00A8, $81C8, $00)
+    %AICMD0x12_Jump($AD84)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $AE60)
+    %AICMD0x1A($0148, $00A8, $845C, $00)
+    %AICMD0x1F($AD90)
+    %AICMD0x12_Jump($AD84)
+    %AICMD0x1F($AE52)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x28($1F74, $7F, $02)
+    %AICMD0x15($7F1F18, $00, $ADB0)
+    %AICMD0x15($7F1F18, $01, $ADE6)
+    %AICMD0x12_Jump($AD84)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $02)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($AD84)
+    %AICMD0x09($14, $A92E)
+    %AICMD0x1D($0256, $00)
+    %AICMD0x20($00, $ADC3)
+    %AICMD0x20($01, $ADD9)
+    %AICMD0x12_Jump($AD84)
+    %AICMD0x08()
+    %AICMD0x19($00FC, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($0257, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $0008)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x1C($0258, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $0002)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x09($14, $A948)
+    %AICMD0x1D($0291, $00)
+    %AICMD0x20($00, $ADF9)
+    %AICMD0x20($01, $AE0F)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x08()
+    %AICMD0x19($0038, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($0262, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $0008)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x1C($0263, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $0002)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x09($14, $A93B)
+    %AICMD0x1D($0256, $00)
+    %AICMD0x20($00, $AE2F)
+    %AICMD0x20($01, $ADD9)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x08()
+    %AICMD0x19($00FD, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($027C, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $0008)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x1C($0258, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $0002)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $ADA6)
+    %AICMD0x1C($026D, $00)
+    %AICMD0x12_Jump($AD8A)
+    %AICMD0x28($1F74, $7F, $02)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $AE78)
+    %AICMD0x1A($0108, $0098, $81E0, $00)
+    %AICMD0x12_Jump($AE87)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $AF79)
+    %AICMD0x1A($0108, $0098, $845C, $00)
+    %AICMD0x1F($AE93)
+    %AICMD0x12_Jump($AE87)
+    %AICMD0x1F($AF6B)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x28($1F74, $7F, $03)
+    %AICMD0x15($7F1F18, $00, $AEB3)
+    %AICMD0x15($7F1F18, $01, $AEE9)
+    %AICMD0x12_Jump($AE87)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $03)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x09($14, $A955)
+    %AICMD0x1D($0259, $00)
+    %AICMD0x20($00, $AEC6)
+    %AICMD0x20($01, $AEDC)
+    %AICMD0x12_Jump($AE87)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($025A, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0008)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x1C($025B, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0002)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x09($14, $A955)
+    %AICMD0x1D($0264, $00)
+    %AICMD0x20($00, $AEFC)
+    %AICMD0x20($01, $AF12)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($0265, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0008)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x1C($0266, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0002)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x09($14, $A955)
+    %AICMD0x1D($0275, $00)
+    %AICMD0x20($00, $AF32)
+    %AICMD0x20($01, $AF48)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x1C($0265, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0008)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x1C($0266, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $0002)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x1C($027D, $00)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F25, $0002)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AEA9)
+    %AICMD0x1C($027D, $00)
+    %AICMD0x12_Jump($AE8D)
+    %AICMD0x28($1F74, $7F, $03)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $AF91)
+    %AICMD0x1A($00B8, $0098, $8204, $00)
+    %AICMD0x12_Jump($AFA0)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $B074)
+    %AICMD0x1A($00B8, $0098, $845C, $00)
+    %AICMD0x1F($AFAC)
+    %AICMD0x12_Jump($AFA0)
+    %AICMD0x1F($B066)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x28($1F74, $7F, $04)
+    %AICMD0x15($7F1F18, $00, $AFCC)
+    %AICMD0x15($7F1F18, $01, $B02A)
+    %AICMD0x12_Jump($AFA0)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $04)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($AFA0)
+    %AICMD0x1D($0267, $00)
+    %AICMD0x20($00, $AFDB)
+    %AICMD0x20($01, $AFEE)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1C($0268, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x41_ModifyVariable($7F1F27, $0008)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1C($0269, $00)
+    %AICMD0x41_ModifyVariable($7F1F27, $0002)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1D($026F, $00)
+    %AICMD0x20($00, $B00A)
+    %AICMD0x20($01, $B01D)
+    %AICMD0x12_Jump($AFA0)
+    %AICMD0x1C($0270, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x41_ModifyVariable($7F1F27, $0008)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1C($0271, $00)
+    %AICMD0x41_ModifyVariable($7F1F27, $0002)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1D($0277, $00)
+    %AICMD0x20($00, $B039)
+    %AICMD0x20($01, $B04C)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1C($0278, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x41_ModifyVariable($7F1F27, $0008)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1C($0279, $00)
+    %AICMD0x41_ModifyVariable($7F1F27, $0002)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x1C($027F, $00)
+    %AICMD0x32($00D4, $80, $0015)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $AFC2)
+    %AICMD0x1C($0365, $00)
+    %AICMD0x12_Jump($AFA6)
+    %AICMD0x28($1F74, $7F, $04)
+    %AICMD0x10_End()
+    %AICMD0x1A($00B8, $00B8, $8300, $02)
+    %AICMD0x0C($09)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0294, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0292, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0294, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0290, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0294, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0294, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0294, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0294, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($0294, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x12_Jump($B087)
+    %AICMD0x1A($00C8, $00B8, $83D8, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02C5, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02C9, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02C7, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02C9, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02C5, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($02C9, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($02C9, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($02C9, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($02C9, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B0DE)
+    %AICMD0x1A($0158, $00D8, $8318, $02)
+    %AICMD0x0C($09)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0299, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($029B, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0297, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($029B, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x12_Jump($B135)
+    %AICMD0x1A($0168, $00D8, $83FC, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02CF, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02D0, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02CD, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B18C)
+    %AICMD0x1A($00B8, $0128, $8420, $02)
+    %AICMD0x0C($09)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02D7, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($02D5, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02D7, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02D3, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02D7, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02D7, $00)
+    %AICMD0x0D($01, $00, $0C, $01)
+    %AICMD0x1B($02D7, $00)
+    %AICMD0x0D($FF, $00, $0C, $01)
+    %AICMD0x1B($02D7, $00)
+    %AICMD0x0D($01, $00, $08, $01)
+    %AICMD0x1B($02D7, $00)
+    %AICMD0x0D($FF, $00, $08, $01)
+    %AICMD0x12_Jump($B1E3)
+    %AICMD0x1A($00C8, $0128, $8384, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02B4, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02B6, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02B2, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x0D($FF, $00, $0C, $01)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x0D($01, $00, $0C, $01)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x0D($FF, $00, $08, $01)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x0D($01, $00, $08, $01)
+    %AICMD0x12_Jump($B23A)
+    %AICMD0x1A($0110, $0108, $8168, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($0223, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0221, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($021F, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0223, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0223, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0223, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0223, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0223, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B291)
+    %AICMD0x1A($0110, $0108, $8198, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($022B, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0229, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($022B, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0227, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($022B, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($022B, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($022B, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($022B, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($022B, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B2E8)
+    %AICMD0x1A($0110, $0108, $81C8, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($024E, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0250, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($024C, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B33F)
+    %AICMD0x1A($0110, $0108, $81E0, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($023F, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0241, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($023D, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B396)
+    %AICMD0x1A($0110, $0108, $8204, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0247, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0249, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0245, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B3ED)
+    %AICMD0x1A($0110, $0108, $845C, $03)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($0032)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x12_Jump($B444)
+
 DATA8_B4B48E:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$08,$B4,$02,$03         ;B4B48E|        |      ;
-    db $07,$05,$08,$01,$08,$01,$07,$02,$08,$19,$E8,$00         ;B4B49A|        |      ;
-    db $00,$09,$01,$7A,$B0,$09,$02,$D1,$B0,$09,$03,$28         ;B4B4A6|        |      ;
-    db $B1,$09,$04,$7F,$B1,$09,$05,$D6,$B1,$09,$06,$2D         ;B4B4B2|        |      ;
-    db $B2,$09,$08,$EC,$B4,$14,$74,$1F,$7F,$00,$C9,$A6         ;B4B4BE|        |      ;
-    db $14,$74,$1F,$7F,$01,$DD,$A6,$14,$74,$1F,$7F,$02         ;B4B4CA|        |      ;
-    db $F1,$A6,$14,$74,$1F,$7F,$03,$05,$A7,$14,$74,$1F         ;B4B4D6|        |      ;
-    db $7F,$04,$19,$A7,$06,$09,$38,$0B,$09,$10,$1A,$00         ;B4B4E2|        |      ;
-    db $01,$08,$01,$D8,$80,$02,$0C,$09,$13,$C8,$00,$1B         ;B4B4EE|        |      ;
-    db $02,$00,$01,$13,$32,$00,$1B,$00,$00,$00,$13,$0A         ;B4B4FA|        |      ;
-    db $00,$1B,$02,$00,$00,$13,$0A,$00,$1B,$01,$00,$00         ;B4B506|        |      ;
-    db $13,$0A,$00,$1B,$02,$00,$01,$13,$0A,$00,$1B,$02         ;B4B512|        |      ;
-    db $00,$01,$0D,$FF,$00,$20,$02,$1B,$02,$00,$01,$0D         ;B4B51E|        |      ;
-    db $01,$00,$20,$02,$1B,$02,$00,$01,$0D,$FF,$00,$10         ;B4B52A|        |      ;
-    db $02,$1B,$02,$00,$01,$0D,$01,$00,$10,$02,$1B,$02         ;B4B536|        |      ;
-    db $00,$01,$13,$32,$00,$1B,$00,$00,$00,$13,$0A,$00         ;B4B542|        |      ;
-    db $1B,$02,$00,$00,$13,$0A,$00,$1B,$01,$00,$00,$13         ;B4B54E|        |      ;
-    db $0A,$00,$1B,$02,$00,$01,$13,$0A,$00,$1B,$02,$00         ;B4B55A|        |      ;
-    db $01,$0D,$FF,$00,$20,$02,$1B,$02,$00,$01,$0D,$01         ;B4B566|        |      ;
-    db $00,$20,$02,$1B,$02,$00,$01,$0D,$FF,$00,$10,$02         ;B4B572|        |      ;
-    db $1B,$02,$00,$01,$0D,$01,$00,$10,$02,$1B,$02,$00         ;B4B57E|        |      ;
-    db $01,$13,$32,$00,$1B,$00,$00,$00,$13,$0A,$00,$1B         ;B4B58A|        |      ;
-    db $02,$00,$00,$13,$0A,$00,$1B,$01,$00,$00,$13,$0A         ;B4B596|        |      ;
-    db $00,$1B,$02,$00,$01,$13,$0A,$00,$1B,$02,$00,$01         ;B4B5A2|        |      ;
-    db $0D,$FF,$00,$20,$02,$1B,$02,$00,$01,$0D,$01,$00         ;B4B5AE|        |      ;
-    db $20,$02,$1B,$02,$00,$01,$0D,$FF,$00,$10,$02,$1B         ;B4B5BA|        |      ;
-    db $02,$00,$01,$0D,$01,$00,$10,$02,$1B,$02,$00,$01         ;B4B5C6|        |      ;
-    db $13,$32,$00,$1B,$00,$00,$00,$13,$0A,$00,$1B,$02         ;B4B5D2|        |      ;
-    db $00,$00,$13,$0A,$00,$1B,$01,$00,$00,$13,$0A,$00         ;B4B5DE|        |      ;
-    db $1B,$02,$00,$01,$13,$0A,$00,$1B,$02,$00,$01,$0D         ;B4B5EA|        |      ;
-    db $FF,$00,$20,$02,$1B,$02,$00,$01,$0D,$01,$00,$20         ;B4B5F6|        |      ;
-    db $02,$1B,$02,$00,$01,$0D,$FF,$00,$10,$02,$1B,$02         ;B4B602|        |      ;
-    db $00,$01,$0D,$01,$00,$10,$02,$1B,$02,$00,$01,$13         ;B4B60E|        |      ;
-    db $32,$00,$1B,$00,$00,$00,$13,$0A,$00,$1B,$02,$00         ;B4B61A|        |      ;
-    db $00,$13,$0A,$00,$1B,$01,$00,$00,$13,$0A,$00,$1B         ;B4B626|        |      ;
-    db $02,$00,$01,$13,$0A,$00,$1B,$02,$00,$01,$0D,$FF         ;B4B632|        |      ;
-    db $00,$20,$02,$1B,$02,$00,$01,$0D,$01,$00,$20,$02         ;B4B63E|        |      ;
-    db $1B,$02,$00,$01,$0D,$FF,$00,$10,$02,$1B,$02,$00         ;B4B64A|        |      ;
-    db $01,$0D,$01,$00,$10,$02,$3C,$10                         ;B4B656|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($08, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0108, $0108)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x08()
+    %AICMD0x19($00E8, $00)
+    %AICMD0x09($01, $B07A)
+    %AICMD0x09($02, $B0D1)
+    %AICMD0x09($03, $B128)
+    %AICMD0x09($04, $B17F)
+    %AICMD0x09($05, $B1D6)
+    %AICMD0x09($06, $B22D)
+    %AICMD0x09($08, $B4EC)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $00, $A6C9)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $01, $A6DD)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $02, $A6F1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $A705)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $04, $A719)
+    %AICMD0x06_SetDestination($09)
+    %AICMD0x38()
+    %AICMD0x0B($09)
+    %AICMD0x10_End()
+    %AICMD0x1A($0100, $0108, $80D8, $02)
+    %AICMD0x0C($09)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0000, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0001, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0000, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0001, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0000, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0001, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0000, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0001, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($0032)
+    %AICMD0x1B($0000, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0001, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($FF, $00, $10, $02)
+    %AICMD0x1B($0002, $01)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+
 pScripting_B4B65E:
     dw DATA8_B4B67E                                            ;B4B65E|        |B4B67E;
     dw DATA8_B4B947                                            ;B4B660|        |B4B947;
@@ -1696,107 +4173,287 @@ pScripting_B4B65E:
     dw pScripting_B4BACB                                       ;B4B67C|        |B4BACB;
  
 DATA8_B4B67E:
-    db $4F,$50,$09,$01,$EB,$B6,$09,$02,$2A,$B7,$09,$03         ;B4B67E|        |      ;
-    db $5B,$B7,$09,$04,$85,$B7,$09,$05,$AD,$B7,$09,$0A         ;B4B68A|        |      ;
-    db $CC,$B6,$12,$9D,$B6,$38,$10,$14,$66,$1F,$7F,$01         ;B4B696|        |      ;
-    db $A8,$B6,$09,$06,$C9,$B7,$14,$66,$1F,$7F,$02,$B3         ;B4B6A2|        |      ;
-    db $B6,$09,$07,$26,$B8,$14,$66,$1F,$7F,$03,$BE,$B6         ;B4B6AE|        |      ;
-    db $09,$08,$83,$B8,$14,$66,$1F,$7F,$04,$C9,$B6,$09         ;B4B6BA|        |      ;
-    db $09,$E0,$B8,$12,$9B,$B6,$1A,$A8,$01,$28,$03,$C8         ;B4B6C6|        |      ;
-    db $87,$00,$1B,$DA,$03,$00,$13,$B4,$00,$1B,$D9,$03         ;B4B6D2|        |      ;
-    db $00,$13,$68,$01,$12,$E5,$B6,$13,$01,$00,$12,$E5         ;B4B6DE|        |      ;
-    db $B6,$1A,$28,$02,$78,$03,$6C,$83,$00,$1F,$F9,$B6         ;B4B6EA|        |      ;
-    db $12,$F3,$B6,$14,$66,$1F,$7F,$00,$23,$B7,$14,$66         ;B4B6F6|        |      ;
-    db $1F,$7F,$01,$23,$B7,$14,$66,$1F,$7F,$02,$23,$B7         ;B4B702|        |      ;
-    db $14,$66,$1F,$7F,$03,$23,$B7,$14,$66,$1F,$7F,$04         ;B4B70E|        |      ;
-    db $23,$B7,$1C,$96,$02,$00,$12,$F3,$B6,$1C,$95,$04         ;B4B71A|        |      ;
-    db $00,$12,$F3,$B6,$1A,$78,$01,$08,$03,$08,$84,$00         ;B4B726|        |      ;
-    db $22,$10,$10,$01,$08,$84,$01,$1F,$3F,$B7,$12,$39         ;B4B732|        |      ;
-    db $B7,$14,$66,$1F,$7F,$01,$54,$B7,$14,$66,$1F,$7F         ;B4B73E|        |      ;
-    db $02,$54,$B7,$1C,$99,$02,$00,$12,$39,$B7,$1C,$97         ;B4B74A|        |      ;
-    db $04,$00,$12,$39,$B7,$1A,$78,$01,$68,$03,$18,$83         ;B4B756|        |      ;
-    db $00,$1F,$69,$B7,$12,$63,$B7,$14,$66,$1F,$7F,$01         ;B4B762|        |      ;
-    db $7E,$B7,$14,$66,$1F,$7F,$02,$7E,$B7,$1C,$9A,$02         ;B4B76E|        |      ;
-    db $00,$12,$63,$B7,$1C,$96,$04,$00,$12,$63,$B7,$1A         ;B4B77A|        |      ;
-    db $78,$01,$D8,$01,$B8,$82,$03,$16,$1C,$1F,$7F,$11         ;B4B786|        |      ;
-    db $12,$A2,$B7,$1F,$9B,$B7,$12,$95,$B7,$1C,$95,$02         ;B4B792|        |      ;
-    db $00,$12,$95,$B7,$1B,$7B,$02,$01,$0D,$01,$00,$40         ;B4B79E|        |      ;
-    db $01,$37,$10,$1A,$E8,$00,$A8,$01,$7C,$82,$00,$22         ;B4B7AA|        |      ;
-    db $20,$10,$01,$88,$82,$18,$1F,$C2,$B7,$12,$BC,$B7         ;B4B7B6|        |      ;
-    db $1C,$94,$02,$00,$12,$BC,$B7,$1A,$B0,$01,$68,$03         ;B4B7C2|        |      ;
-    db $98,$81,$00,$14,$74,$1F,$7F,$01,$DE,$B7,$1F,$E4         ;B4B7CE|        |      ;
-    db $B7,$12,$D8,$B7,$1F,$1F,$B8,$12,$DE,$B7,$45,$21         ;B4B7DA|        |      ;
-    db $1F,$7F,$00,$00,$77,$00,$18,$B8,$45,$21,$1F,$7F         ;B4B7E6|        |      ;
-    db $78,$00,$E7,$03,$FB,$B7,$12,$D8,$B7,$1C,$A1,$02         ;B4B7F2|        |      ;
-    db $00,$23,$74,$1F,$7F,$01,$08,$19,$39,$00,$00,$13         ;B4B7FE|        |      ;
-    db $78,$00,$11,$41,$33,$1F,$7F,$0A,$00,$57,$14,$12         ;B4B80A|        |      ;
-    db $DE,$B7,$1C,$A3,$02,$00,$12,$D8,$B7,$1C,$A2,$02         ;B4B816|        |      ;
-    db $00,$12,$DE,$B7,$1A,$68,$02,$08,$01,$D4,$81,$00         ;B4B822|        |      ;
-    db $14,$74,$1F,$7F,$02,$3B,$B8,$1F,$41,$B8,$12,$35         ;B4B82E|        |      ;
-    db $B8,$1F,$7C,$B8,$12,$3B,$B8,$45,$23,$1F,$7F,$00         ;B4B83A|        |      ;
-    db $00,$77,$00,$75,$B8,$45,$23,$1F,$7F,$78,$00,$E7         ;B4B846|        |      ;
-    db $03,$58,$B8,$12,$35,$B8,$1C,$A4,$02,$00,$23,$74         ;B4B852|        |      ;
-    db $1F,$7F,$02,$08,$19,$39,$00,$00,$13,$78,$00,$11         ;B4B85E|        |      ;
-    db $41,$33,$1F,$7F,$0A,$00,$57,$14,$12,$3B,$B8,$1C         ;B4B86A|        |      ;
-    db $A6,$02,$00,$12,$35,$B8,$1C,$A5,$02,$00,$12,$3B         ;B4B876|        |      ;
-    db $B8,$1A,$B8,$01,$68,$01,$E0,$81,$00,$14,$74,$1F         ;B4B882|        |      ;
-    db $7F,$03,$98,$B8,$1F,$9E,$B8,$12,$92,$B8,$1F,$D9         ;B4B88E|        |      ;
-    db $B8,$12,$98,$B8,$45,$25,$1F,$7F,$00,$00,$77,$00         ;B4B89A|        |      ;
-    db $D2,$B8,$45,$25,$1F,$7F,$78,$00,$E7,$03,$B5,$B8         ;B4B8A6|        |      ;
-    db $12,$92,$B8,$1C,$A7,$02,$00,$23,$74,$1F,$7F,$03         ;B4B8B2|        |      ;
-    db $08,$19,$39,$00,$00,$13,$78,$00,$11,$41,$33,$1F         ;B4B8BE|        |      ;
-    db $7F,$0A,$00,$57,$14,$12,$98,$B8,$1C,$A0,$02,$00         ;B4B8CA|        |      ;
-    db $12,$92,$B8,$1C,$A8,$02,$00,$12,$98,$B8,$1A,$48         ;B4B8D6|        |      ;
-    db $00,$98,$02,$04,$82,$00,$14,$74,$1F,$7F,$04,$F5         ;B4B8E2|        |      ;
-    db $B8,$1F,$FB,$B8,$12,$EF,$B8,$1F,$36,$B9,$12,$F5         ;B4B8EE|        |      ;
-    db $B8,$45,$27,$1F,$7F,$00,$00,$77,$00,$2F,$B9,$45         ;B4B8FA|        |      ;
-    db $27,$1F,$7F,$78,$00,$E7,$03,$12,$B9,$12,$EF,$B8         ;B4B906|        |      ;
-    db $1C,$AA,$02,$00,$23,$74,$1F,$7F,$04,$08,$19,$39         ;B4B912|        |      ;
-    db $00,$00,$13,$78,$00,$11,$41,$33,$1F,$7F,$0A,$00         ;B4B91E|        |      ;
-    db $57,$14,$12,$F5,$B8,$1C,$A0,$02,$00,$12,$EF,$B8         ;B4B92A|        |      ;
-    db $1C,$AB,$02,$00,$12,$F5,$B8,$08,$3E,$06,$13,$3C         ;B4B936|        |      ;
-    db $00,$11,$12,$9C,$B6                                     ;B4B942|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x09($01, $B6EB)
+    %AICMD0x09($02, $B72A)
+    %AICMD0x09($03, $B75B)
+    %AICMD0x09($04, $B785)
+    %AICMD0x09($05, $B7AD)
+    %AICMD0x09($0A, $B6CC)
+    %AICMD0x12_Jump($B69D)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $B6A8)
+    %AICMD0x09($06, $B7C9)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $B6B3)
+    %AICMD0x09($07, $B826)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $B6BE)
+    %AICMD0x09($08, $B883)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $B6C9)
+    %AICMD0x09($09, $B8E0)
+    %AICMD0x12_Jump($B69B)
+    %AICMD0x1A($01A8, $0328, $87C8, $00)
+    %AICMD0x1B($03DA, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($03D9, $00)
+    %AICMD0x13($0168)
+    %AICMD0x12_Jump($B6E5)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($B6E5)
+    %AICMD0x1A($0228, $0378, $836C, $00)
+    %AICMD0x1F($B6F9)
+    %AICMD0x12_Jump($B6F3)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $B723)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $B723)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $B723)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $B723)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $B723)
+    %AICMD0x1C($0296, $00)
+    %AICMD0x12_Jump($B6F3)
+    %AICMD0x1C($0495, $00)
+    %AICMD0x12_Jump($B6F3)
+    %AICMD0x1A($0178, $0308, $8408, $00)
+    %AICMD0x22($10, $10, $01, $8408, $01)
+    %AICMD0x1F($B73F)
+    %AICMD0x12_Jump($B739)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $B754)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $B754)
+    %AICMD0x1C($0299, $00)
+    %AICMD0x12_Jump($B739)
+    %AICMD0x1C($0497, $00)
+    %AICMD0x12_Jump($B739)
+    %AICMD0x1A($0178, $0368, $8318, $00)
+    %AICMD0x1F($B769)
+    %AICMD0x12_Jump($B763)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $B77E)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $B77E)
+    %AICMD0x1C($029A, $00)
+    %AICMD0x12_Jump($B763)
+    %AICMD0x1C($0496, $00)
+    %AICMD0x12_Jump($B763)
+    %AICMD0x1A($0178, $01D8, $82B8, $03)
+    %AICMD0x16($7F1F1C, $11, $12, $B7A2)
+    %AICMD0x1F($B79B)
+    %AICMD0x12_Jump($B795)
+    %AICMD0x1C($0295, $00)
+    %AICMD0x12_Jump($B795)
+    %AICMD0x1B($027B, $01)
+    %AICMD0x0D($01, $00, $40, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($00E8, $01A8, $827C, $00)
+    %AICMD0x22($20, $10, $01, $8288, $18)
+    %AICMD0x1F($B7C2)
+    %AICMD0x12_Jump($B7BC)
+    %AICMD0x1C($0294, $00)
+    %AICMD0x12_Jump($B7BC)
+    %AICMD0x1A($01B0, $0368, $8198, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $01, $B7DE)
+    %AICMD0x1F($B7E4)
+    %AICMD0x12_Jump($B7D8)
+    %AICMD0x1F($B81F)
+    %AICMD0x12_Jump($B7DE)
+    %AICMD0x45($7F1F21, $0000, $0077, $B818)
+    %AICMD0x45($7F1F21, $0078, $03E7, $B7FB)
+    %AICMD0x12_Jump($B7D8)
+    %AICMD0x1C($02A1, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $01)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x57_UpdateStamina($14)
+    %AICMD0x12_Jump($B7DE)
+    %AICMD0x1C($02A3, $00)
+    %AICMD0x12_Jump($B7D8)
+    %AICMD0x1C($02A2, $00)
+    %AICMD0x12_Jump($B7DE)
+    %AICMD0x1A($0268, $0108, $81D4, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $02, $B83B)
+    %AICMD0x1F($B841)
+    %AICMD0x12_Jump($B835)
+    %AICMD0x1F($B87C)
+    %AICMD0x12_Jump($B83B)
+    %AICMD0x45($7F1F23, $0000, $0077, $B875)
+    %AICMD0x45($7F1F23, $0078, $03E7, $B858)
+    %AICMD0x12_Jump($B835)
+    %AICMD0x1C($02A4, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $02)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x57_UpdateStamina($14)
+    %AICMD0x12_Jump($B83B)
+    %AICMD0x1C($02A6, $00)
+    %AICMD0x12_Jump($B835)
+    %AICMD0x1C($02A5, $00)
+    %AICMD0x12_Jump($B83B)
+    %AICMD0x1A($01B8, $0168, $81E0, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $B898)
+    %AICMD0x1F($B89E)
+    %AICMD0x12_Jump($B892)
+    %AICMD0x1F($B8D9)
+    %AICMD0x12_Jump($B898)
+    %AICMD0x45($7F1F25, $0000, $0077, $B8D2)
+    %AICMD0x45($7F1F25, $0078, $03E7, $B8B5)
+    %AICMD0x12_Jump($B892)
+    %AICMD0x1C($02A7, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $03)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x57_UpdateStamina($14)
+    %AICMD0x12_Jump($B898)
+    %AICMD0x1C($02A0, $00)
+    %AICMD0x12_Jump($B892)
+    %AICMD0x1C($02A8, $00)
+    %AICMD0x12_Jump($B898)
+    %AICMD0x1A($0048, $0298, $8204, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $04, $B8F5)
+    %AICMD0x1F($B8FB)
+    %AICMD0x12_Jump($B8EF)
+    %AICMD0x1F($B936)
+    %AICMD0x12_Jump($B8F5)
+    %AICMD0x45($7F1F27, $0000, $0077, $B92F)
+    %AICMD0x45($7F1F27, $0078, $03E7, $B912)
+    %AICMD0x12_Jump($B8EF)
+    %AICMD0x1C($02AA, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $04)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x57_UpdateStamina($14)
+    %AICMD0x12_Jump($B8F5)
+    %AICMD0x1C($02A0, $00)
+    %AICMD0x12_Jump($B8EF)
+    %AICMD0x1C($02AB, $00)
+    %AICMD0x12_Jump($B8F5)
+    %AICMD0x08()
+    %AICMD0x3E($06)
+    %AICMD0x13($003C)
+    %AICMD0x11()
+    %AICMD0x12_Jump($B69C)
+
 DATA8_B4B947:
-    db $4F,$50,$23,$66,$1F,$7F,$01,$02,$03,$06,$05,$88         ;B4B947|        |      ;
-    db $00,$78,$00,$07,$00,$11,$14,$66,$1F,$7F,$00,$7F         ;B4B953|        |      ;
-    db $B9,$14,$66,$1F,$7F,$01,$7F,$B9,$14,$66,$1F,$7F         ;B4B95F|        |      ;
-    db $02,$7F,$B9,$14,$66,$1F,$7F,$03,$7F,$B9,$14,$66         ;B4B96B|        |      ;
-    db $1F,$7F,$04,$7F,$B9,$12,$83,$B9,$09,$01,$8A,$B9         ;B4B977|        |      ;
-    db $38,$13,$01,$00,$12,$84,$B9,$1A,$28,$00,$80,$00         ;B4B983|        |      ;
-    db $5C,$84,$00,$1F,$9E,$B9,$12,$92,$B9,$1F,$B1,$B9         ;B4B98F|        |      ;
-    db $12,$98,$B9,$1C,$92,$02,$00,$09,$02,$B8,$B9,$41         ;B4B99B|        |      ;
-    db $33,$1F,$7F,$0A,$00,$57,$14,$12,$98,$B9,$1C,$93         ;B4B9A7|        |      ;
-    db $02,$00,$12,$98,$B9,$08,$3E,$06,$13,$3C,$00,$11         ;B4B9B3|        |      ;
-    db $12,$84,$B9                                             ;B4B9BF|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F66, $01)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0088, $0078)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x11()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $B97F)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $B97F)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $B97F)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $B97F)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $B97F)
+    %AICMD0x12_Jump($B983)
+    %AICMD0x09($01, $B98A)
+    %AICMD0x38()
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($B984)
+    %AICMD0x1A($0028, $0080, $845C, $00)
+    %AICMD0x1F($B99E)
+    %AICMD0x12_Jump($B992)
+    %AICMD0x1F($B9B1)
+    %AICMD0x12_Jump($B998)
+    %AICMD0x1C($0292, $00)
+    %AICMD0x09($02, $B9B8)
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x57_UpdateStamina($14)
+    %AICMD0x12_Jump($B998)
+    %AICMD0x1C($0293, $00)
+    %AICMD0x12_Jump($B998)
+    %AICMD0x08()
+    %AICMD0x3E($06)
+    %AICMD0x13($003C)
+    %AICMD0x11()
+    %AICMD0x12_Jump($B984)
+
 DATA8_B4B9C2:
-    db $4F,$50,$09,$01,$DD,$B9,$09,$02,$00,$BA,$09,$03         ;B4B9C2|        |      ;
-    db $1C,$BA,$14,$66,$1F,$7F,$00,$DB,$B9,$09,$04,$31         ;B4B9CE|        |      ;
-    db $BA,$38,$10,$1A,$70,$00,$F8,$00,$54,$83,$00,$1F         ;B4B9DA|        |      ;
-    db $EB,$B9,$12,$E5,$B9,$14,$66,$1F,$7F,$00,$F9,$B9         ;B4B9E6|        |      ;
-    db $1C,$9B,$02,$00,$12,$E5,$B9,$1C,$94,$04,$00,$12         ;B4B9F2|        |      ;
-    db $E5,$B9,$1A,$80,$00,$38,$01,$2C,$84,$00,$22,$18         ;B4B9FE|        |      ;
-    db $20,$01,$2C,$84,$10,$1F,$15,$BA,$12,$0F,$BA,$1C         ;B4BA0A|        |      ;
-    db $9C,$02,$00,$12,$0F,$BA,$1A,$A8,$00,$B8,$01,$90         ;B4BA16|        |      ;
-    db $83,$01,$1F,$2A,$BA,$12,$24,$BA,$1C,$9D,$02,$00         ;B4BA22|        |      ;
-    db $12,$24,$BA,$1A,$48,$00,$98,$00,$74,$81,$00,$14         ;B4BA2E|        |      ;
-    db $74,$1F,$7F,$00,$46,$BA,$1F,$4C,$BA,$12,$40,$BA         ;B4BA3A|        |      ;
-    db $1F,$87,$BA,$12,$46,$BA,$45,$1F,$1F,$7F,$00,$00         ;B4BA46|        |      ;
-    db $77,$00,$80,$BA,$45,$1F,$1F,$7F,$78,$00,$E7,$03         ;B4BA52|        |      ;
-    db $63,$BA,$12,$40,$BA,$1C,$9E,$02,$00,$23,$74,$1F         ;B4BA5E|        |      ;
-    db $7F,$00,$08,$19,$39,$00,$00,$13,$78,$00,$11,$41         ;B4BA6A|        |      ;
-    db $33,$1F,$7F,$0A,$00,$57,$14,$12,$46,$BA,$1C,$A0         ;B4BA76|        |      ;
-    db $02,$00,$12,$40,$BA,$1C,$9F,$02,$00,$12,$46,$BA         ;B4BA82|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x09($01, $B9DD)
+    %AICMD0x09($02, $BA00)
+    %AICMD0x09($03, $BA1C)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $B9DB)
+    %AICMD0x09($04, $BA31)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($0070, $00F8, $8354, $00)
+    %AICMD0x1F($B9EB)
+    %AICMD0x12_Jump($B9E5)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $B9F9)
+    %AICMD0x1C($029B, $00)
+    %AICMD0x12_Jump($B9E5)
+    %AICMD0x1C($0494, $00)
+    %AICMD0x12_Jump($B9E5)
+    %AICMD0x1A($0080, $0138, $842C, $00)
+    %AICMD0x22($18, $20, $01, $842C, $10)
+    %AICMD0x1F($BA15)
+    %AICMD0x12_Jump($BA0F)
+    %AICMD0x1C($029C, $00)
+    %AICMD0x12_Jump($BA0F)
+    %AICMD0x1A($00A8, $01B8, $8390, $01)
+    %AICMD0x1F($BA2A)
+    %AICMD0x12_Jump($BA24)
+    %AICMD0x1C($029D, $00)
+    %AICMD0x12_Jump($BA24)
+    %AICMD0x1A($0048, $0098, $8174, $00)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $00, $BA46)
+    %AICMD0x1F($BA4C)
+    %AICMD0x12_Jump($BA40)
+    %AICMD0x1F($BA87)
+    %AICMD0x12_Jump($BA46)
+    %AICMD0x45($7F1F1F, $0000, $0077, $BA80)
+    %AICMD0x45($7F1F1F, $0078, $03E7, $BA63)
+    %AICMD0x12_Jump($BA40)
+    %AICMD0x1C($029E, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $00)
+    %AICMD0x08()
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($0078)
+    %AICMD0x11()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x57_UpdateStamina($14)
+    %AICMD0x12_Jump($BA46)
+    %AICMD0x1C($02A0, $00)
+    %AICMD0x12_Jump($BA40)
+    %AICMD0x1C($029F, $00)
+    %AICMD0x12_Jump($BA46)
+
 DATA8_B4BA8E:
-    db $4F,$50,$09,$01,$9A,$BA,$09,$02,$B6,$BA,$38,$10         ;B4BA8E|        |      ;
-    db $1A,$A8,$00,$78,$00,$00,$83,$00,$22,$20,$10,$01         ;B4BA9A|        |      ;
-    db $0C,$83,$14,$1F,$AF,$BA,$12,$A9,$BA,$1C,$97,$02         ;B4BAA6|        |      ;
-    db $00,$12,$A9,$BA,$1A,$88,$01,$A0,$00,$D8,$83,$00         ;B4BAB2|        |      ;
-    db $1F,$C4,$BA,$12,$BE,$BA,$1C,$98,$02,$00,$12,$BE         ;B4BABE|        |      ;
-    db $BA                                                     ;B4BACA|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x09($01, $BA9A)
+    %AICMD0x09($02, $BAB6)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0078, $8300, $00)
+    %AICMD0x22($20, $10, $01, $830C, $14)
+    %AICMD0x1F($BAAF)
+    %AICMD0x12_Jump($BAA9)
+    %AICMD0x1C($0297, $00)
+    %AICMD0x12_Jump($BAA9)
+    %AICMD0x1A($0188, $00A0, $83D8, $00)
+    %AICMD0x1F($BAC4)
+    %AICMD0x12_Jump($BABE)
+    %AICMD0x1C($0298, $00)
+    %AICMD0x12_Jump($BABE)
+
 pScripting_B4BACB:
     dw DATA8_B4BAEB                                            ;B4BACB|        |B4BAEB;
     dw DATA8_B4BB06                                            ;B4BACD|        |B4BB06;
@@ -1816,213 +4473,608 @@ pScripting_B4BACB:
     dw pScripting_B4C427                                       ;B4BAE9|        |B4C427;
  
 DATA8_B4BAEB:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$23,$60,$1F,$7F,$00         ;B4BAEB|        |      ;
-    db $08,$38,$01,$24,$74,$13,$B4,$00,$1C,$F5,$02,$00         ;B4BAF7|        |      ;
-    db $3D,$3A,$10                                             ;B4BB03|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $00)
+    %AICMD0x08()
+    %AICMD0x38()
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x24($74)
+    %AICMD0x13($00B4)
+    %AICMD0x1C($02F5, $00)
+    %AICMD0x3D($3A)
+    %AICMD0x10_End()
+
 DATA8_B4BB06:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$0E,$B4,$02,$03         ;B4BB06|        |      ;
-    db $06,$05,$80,$00,$B8,$01,$08,$07,$01,$09,$01,$63         ;B4BB12|        |      ;
-    db $BB,$09,$02,$91,$BB,$09,$03,$36,$BC,$09,$04,$4D         ;B4BB1E|        |      ;
-    db $BC,$09,$05,$C1,$BB,$09,$06,$73,$BC,$09,$07,$8A         ;B4BB2A|        |      ;
-    db $BC,$09,$08,$A1,$BC,$09,$09,$DD,$BC,$06,$3A,$38         ;B4BB36|        |      ;
-    db $39,$01,$60,$00,$11,$0C,$00,$0C,$02,$0C,$03,$0C         ;B4BB42|        |      ;
-    db $04,$0C,$05,$0C,$06,$0C,$07,$0C,$08,$23,$74,$1F         ;B4BB4E|        |      ;
-    db $7F,$02,$0C,$01,$13,$3C,$00,$3C,$10,$1A,$88,$00         ;B4BB5A|        |      ;
-    db $28,$01,$54,$83,$00,$1F,$77,$BB,$12,$6B,$BB,$1F         ;B4BB66|        |      ;
-    db $8A,$BB,$12,$71,$BB,$08,$1C,$CE,$02,$00,$0B,$00         ;B4BB72|        |      ;
-    db $01,$03,$07,$07,$01,$13,$F0,$00,$11,$12,$71,$BB         ;B4BB7E|        |      ;
-    db $1C,$CE,$02,$00,$12,$71,$BB,$1A,$80,$00,$E8,$01         ;B4BB8A|        |      ;
-    db $E4,$83,$01,$0D,$00,$FF,$30,$01,$1F,$AA,$BB,$12         ;B4BB96|        |      ;
-    db $9E,$BB,$1F,$B8,$BB,$12,$A4,$BB,$14,$74,$1F,$7F         ;B4BBA2|        |      ;
-    db $02,$B8,$BB,$1C,$CF,$02,$00,$12,$9E,$BB,$1C,$1A         ;B4BBAE|        |      ;
-    db $00,$00,$0B,$01,$12,$A4,$BB,$1A,$48,$00,$68,$01         ;B4BBBA|        |      ;
-    db $E8,$82,$01,$1F,$D5,$BB,$12,$C9,$BB,$1F,$2F,$BC         ;B4BBC6|        |      ;
-    db $12,$CF,$BB,$1D,$D3,$02,$00,$20,$00,$E4,$BB,$20         ;B4BBD2|        |      ;
-    db $01,$F9,$BB,$12,$C9,$BB,$1D,$D4,$02,$00,$17,$03         ;B4BBDE|        |      ;
-    db $18,$00,$02,$BC,$18,$01,$11,$BC,$18,$02,$20,$BC         ;B4BBEA|        |      ;
-    db $12,$CF,$BB,$1C,$D8,$02,$00,$0B,$02,$12,$CF,$BB         ;B4BBF6|        |      ;
-    db $1C,$D5,$02,$00,$41,$33,$1F,$7F,$1E,$00,$0B,$02         ;B4BC02|        |      ;
-    db $12,$CF,$BB,$1C,$D6,$02,$00,$41,$33,$1F,$7F,$0A         ;B4BC0E|        |      ;
-    db $00,$0B,$02,$12,$CF,$BB,$1C,$D7,$02,$00,$41,$33         ;B4BC1A|        |      ;
-    db $1F,$7F,$EC,$FF,$0B,$02,$12,$CF,$BB,$1C,$DC,$02         ;B4BC26|        |      ;
-    db $00,$12,$CF,$BB,$1A,$78,$00,$58,$01,$14,$84,$01         ;B4BC32|        |      ;
-    db $1F,$44,$BC,$12,$3E,$BC,$1C,$D0,$02,$00,$0B,$03         ;B4BC3E|        |      ;
-    db $12,$3E,$BC,$1A,$B8,$00,$68,$01,$18,$83,$01,$1F         ;B4BC4A|        |      ;
-    db $61,$BC,$12,$55,$BC,$1F,$6A,$BC,$12,$5B,$BC,$1C         ;B4BC56|        |      ;
-    db $D1,$02,$00,$0B,$04,$12,$5B,$BC,$1C,$8E,$03,$00         ;B4BC62|        |      ;
-    db $0B,$04,$12,$5B,$BC,$1A,$B8,$00,$98,$01,$C4,$82         ;B4BC6E|        |      ;
-    db $01,$1F,$81,$BC,$12,$7B,$BC,$1C,$D9,$02,$00,$0B         ;B4BC7A|        |      ;
-    db $05,$12,$7B,$BC,$1A,$58,$00,$88,$01,$30,$83,$01         ;B4BC86|        |      ;
-    db $1F,$98,$BC,$12,$92,$BC,$1C,$D2,$02,$00,$0B,$06         ;B4BC92|        |      ;
-    db $12,$92,$BC,$14,$66,$1F,$7F,$00,$B3,$BC,$1A,$98         ;B4BC9E|        |      ;
-    db $00,$78,$01,$68,$81,$01,$12,$BB,$BC,$1A,$88,$00         ;B4BCAA|        |      ;
-    db $78,$01,$5C,$84,$01,$1F,$C7,$BC,$12,$BB,$BC,$1F         ;B4BCB6|        |      ;
-    db $D6,$BC,$12,$C1,$BC,$1C,$DA,$02,$00,$41,$1F,$1F         ;B4BCC2|        |      ;
-    db $7F,$0A,$00,$0B,$07,$12,$C1,$BC,$1C,$93,$02,$00         ;B4BCCE|        |      ;
-    db $12,$C1,$BC,$14,$66,$1F,$7F,$04,$EF,$BC,$1A,$A8         ;B4BCDA|        |      ;
-    db $00,$98,$01,$04,$82,$01,$12,$F7,$BC,$1A,$A8,$00         ;B4BCE6|        |      ;
-    db $98,$01,$5C,$84,$01,$1F,$03,$BD,$12,$F7,$BC,$1F         ;B4BCF2|        |      ;
-    db $12,$BD,$12,$FD,$BC,$1C,$DB,$02,$00,$41,$27,$1F         ;B4BCFE|        |      ;
-    db $7F,$0A,$00,$0B,$08,$12,$FD,$BC,$1C,$93,$02,$00         ;B4BD0A|        |      ;
-    db $12,$FD,$BC                                             ;B4BD16|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($0E, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0080, $01B8)
+    %AICMD0x08()
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $BB63)
+    %AICMD0x09($02, $BB91)
+    %AICMD0x09($03, $BC36)
+    %AICMD0x09($04, $BC4D)
+    %AICMD0x09($05, $BBC1)
+    %AICMD0x09($06, $BC73)
+    %AICMD0x09($07, $BC8A)
+    %AICMD0x09($08, $BCA1)
+    %AICMD0x09($09, $BCDD)
+    %AICMD0x06_SetDestination($3A)
+    %AICMD0x38()
+    %AICMD0x39($01, $0060)
+    %AICMD0x11()
+    %AICMD0x0C($00)
+    %AICMD0x0C($02)
+    %AICMD0x0C($03)
+    %AICMD0x0C($04)
+    %AICMD0x0C($05)
+    %AICMD0x0C($06)
+    %AICMD0x0C($07)
+    %AICMD0x0C($08)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $02)
+    %AICMD0x0C($01)
+    %AICMD0x13($003C)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $0128, $8354, $00)
+    %AICMD0x1F($BB77)
+    %AICMD0x12_Jump($BB6B)
+    %AICMD0x1F($BB8A)
+    %AICMD0x12_Jump($BB71)
+    %AICMD0x08()
+    %AICMD0x1C($02CE, $00)
+    %AICMD0x0B($00)
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($00F0)
+    %AICMD0x11()
+    %AICMD0x12_Jump($BB71)
+    %AICMD0x1C($02CE, $00)
+    %AICMD0x12_Jump($BB71)
+    %AICMD0x1A($0080, $01E8, $83E4, $01)
+    %AICMD0x0D($00, $FF, $30, $01)
+    %AICMD0x1F($BBAA)
+    %AICMD0x12_Jump($BB9E)
+    %AICMD0x1F($BBB8)
+    %AICMD0x12_Jump($BBA4)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $02, $BBB8)
+    %AICMD0x1C($02CF, $00)
+    %AICMD0x12_Jump($BB9E)
+    %AICMD0x1C($001A, $00)
+    %AICMD0x0B($01)
+    %AICMD0x12_Jump($BBA4)
+    %AICMD0x1A($0048, $0168, $82E8, $01)
+    %AICMD0x1F($BBD5)
+    %AICMD0x12_Jump($BBC9)
+    %AICMD0x1F($BC2F)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1D($02D3, $00)
+    %AICMD0x20($00, $BBE4)
+    %AICMD0x20($01, $BBF9)
+    %AICMD0x12_Jump($BBC9)
+    %AICMD0x1D($02D4, $00)
+    %AICMD0x17($03)
+    %AICMD0x18($00, $BC02)
+    %AICMD0x18($01, $BC11)
+    %AICMD0x18($02, $BC20)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1C($02D8, $00)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1C($02D5, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $001E)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1C($02D6, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1C($02D7, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFEC)
+    %AICMD0x0B($02)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1C($02DC, $00)
+    %AICMD0x12_Jump($BBCF)
+    %AICMD0x1A($0078, $0158, $8414, $01)
+    %AICMD0x1F($BC44)
+    %AICMD0x12_Jump($BC3E)
+    %AICMD0x1C($02D0, $00)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($BC3E)
+    %AICMD0x1A($00B8, $0168, $8318, $01)
+    %AICMD0x1F($BC61)
+    %AICMD0x12_Jump($BC55)
+    %AICMD0x1F($BC6A)
+    %AICMD0x12_Jump($BC5B)
+    %AICMD0x1C($02D1, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($BC5B)
+    %AICMD0x1C($038E, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($BC5B)
+    %AICMD0x1A($00B8, $0198, $82C4, $01)
+    %AICMD0x1F($BC81)
+    %AICMD0x12_Jump($BC7B)
+    %AICMD0x1C($02D9, $00)
+    %AICMD0x0B($05)
+    %AICMD0x12_Jump($BC7B)
+    %AICMD0x1A($0058, $0188, $8330, $01)
+    %AICMD0x1F($BC98)
+    %AICMD0x12_Jump($BC92)
+    %AICMD0x1C($02D2, $00)
+    %AICMD0x0B($06)
+    %AICMD0x12_Jump($BC92)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $BCB3)
+    %AICMD0x1A($0098, $0178, $8168, $01)
+    %AICMD0x12_Jump($BCBB)
+    %AICMD0x1A($0088, $0178, $845C, $01)
+    %AICMD0x1F($BCC7)
+    %AICMD0x12_Jump($BCBB)
+    %AICMD0x1F($BCD6)
+    %AICMD0x12_Jump($BCC1)
+    %AICMD0x1C($02DA, $00)
+    %AICMD0x41_ModifyVariable($7F1F1F, $000A)
+    %AICMD0x0B($07)
+    %AICMD0x12_Jump($BCC1)
+    %AICMD0x1C($0293, $00)
+    %AICMD0x12_Jump($BCC1)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $BCEF)
+    %AICMD0x1A($00A8, $0198, $8204, $01)
+    %AICMD0x12_Jump($BCF7)
+    %AICMD0x1A($00A8, $0198, $845C, $01)
+    %AICMD0x1F($BD03)
+    %AICMD0x12_Jump($BCF7)
+    %AICMD0x1F($BD12)
+    %AICMD0x12_Jump($BCFD)
+    %AICMD0x1C($02DB, $00)
+    %AICMD0x41_ModifyVariable($7F1F27, $000A)
+    %AICMD0x0B($08)
+    %AICMD0x12_Jump($BCFD)
+    %AICMD0x1C($0293, $00)
+    %AICMD0x12_Jump($BCFD)
+
 DATA8_B4BD19:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$00,$0D,$B4,$02,$03         ;B4BD19|        |      ;
-    db $07,$05,$28,$01,$18,$02,$07,$01,$09,$01,$6F,$BD         ;B4BD25|        |      ;
-    db $09,$02,$01,$C0,$09,$03,$8F,$C0,$09,$04,$DA,$C0         ;B4BD31|        |      ;
-    db $09,$05,$3E,$C1,$09,$06,$8F,$C1,$09,$07,$39,$C2         ;B4BD3D|        |      ;
-    db $09,$08,$E6,$C2,$06,$0B,$11,$38,$13,$01,$00,$14         ;B4BD49|        |      ;
-    db $74,$1F,$7F,$04,$5E,$BD,$12,$51,$BD,$23,$74,$1F         ;B4BD55|        |      ;
-    db $7F,$07,$3D,$0B,$10,$13,$08,$07,$23,$74,$1F,$7F         ;B4BD61|        |      ;
-    db $05,$10,$1A,$28,$01,$A8,$01,$00,$83,$00,$1F,$8C         ;B4BD6D|        |      ;
-    db $BD,$12,$77,$BD,$2D,$C3,$BD,$CE,$BD,$14,$74,$1F         ;B4BD79|        |      ;
-    db $7F,$05,$7C,$BE,$12,$7D,$BD,$1D,$DD,$02,$00,$20         ;B4BD85|        |      ;
-    db $00,$9B,$BD,$20,$01,$BC,$BD,$12,$77,$BD,$08,$1C         ;B4BD91|        |      ;
-    db $DE,$02,$00,$28,$74,$1F,$7F,$05,$1B,$95,$02,$00         ;B4BD9D|        |      ;
-    db $09,$09,$F0,$BE,$09,$0A,$66,$BD,$0C,$01,$23,$74         ;B4BDA9|        |      ;
-    db $1F,$7F,$03,$11,$12,$7D,$BD,$1C,$36,$02,$00,$12         ;B4BDB5|        |      ;
-    db $77,$BD,$1C,$DF,$02,$00,$1B,$95,$02,$00,$12,$7D         ;B4BDC1|        |      ;
-    db $BD,$21,$A2,$09,$80,$01,$14,$76,$1F,$7F,$00,$DD         ;B4BDCD|        |      ;
-    db $BD,$12,$02,$BE,$14,$76,$1F,$7F,$01,$E7,$BD,$12         ;B4BDD9|        |      ;
-    db $02,$BE,$14,$76,$1F,$7F,$02,$F1,$BD,$12,$02,$BE         ;B4BDE5|        |      ;
-    db $14,$76,$1F,$7F,$03,$FB,$BD,$12,$02,$BE,$14,$76         ;B4BDF1|        |      ;
-    db $1F,$7F,$04,$72,$BE,$08,$13,$01,$00,$2C,$19,$06         ;B4BDFD|        |      ;
-    db $00,$5A,$00,$11,$1C,$E7,$02,$00,$15,$AC,$09,$80         ;B4BE09|        |      ;
-    db $01,$34,$BE,$15,$AC,$09,$80,$02,$3C,$BE,$15,$AC         ;B4BE15|        |      ;
-    db $09,$80,$03,$44,$BE,$15,$AC,$09,$80,$04,$4C,$BE         ;B4BE21|        |      ;
-    db $15,$AC,$09,$80,$05,$54,$BE,$23,$78,$1F,$7F,$00         ;B4BE2D|        |      ;
-    db $12,$5C,$BE,$23,$78,$1F,$7F,$01,$12,$5C,$BE,$23         ;B4BE39|        |      ;
-    db $78,$1F,$7F,$02,$12,$5C,$BE,$23,$78,$1F,$7F,$03         ;B4BE45|        |      ;
-    db $12,$5C,$BE,$23,$78,$1F,$7F,$04,$12,$5C,$BE,$25         ;B4BE51|        |      ;
-    db $09,$28,$74,$1F,$7F,$05,$1B,$95,$02,$00,$09,$09         ;B4BE5D|        |      ;
-    db $F0,$BE,$09,$0A,$66,$BD,$12,$7D,$BD,$23,$74,$1F         ;B4BE69|        |      ;
-    db $7F,$04,$1C,$E8,$02,$00,$10,$14,$76,$1F,$7F,$00         ;B4BE75|        |      ;
-    db $86,$BE,$12,$AB,$BE,$14,$76,$1F,$7F,$01,$90,$BE         ;B4BE81|        |      ;
-    db $12,$AB,$BE,$14,$76,$1F,$7F,$02,$9A,$BE,$12,$AB         ;B4BE8D|        |      ;
-    db $BE,$14,$76,$1F,$7F,$03,$A4,$BE,$12,$AB,$BE,$14         ;B4BE99|        |      ;
-    db $76,$1F,$7F,$04,$72,$BE,$14,$74,$1F,$7F,$06,$C4         ;B4BEA5|        |      ;
-    db $BE,$08,$13,$01,$00,$2C,$19,$06,$00,$5A,$00,$11         ;B4BEB1|        |      ;
-    db $1C,$E9,$02,$00,$12,$11,$BE,$28,$74,$1F,$7F,$06         ;B4BEBD|        |      ;
-    db $08,$13,$01,$00,$2C,$04,$06,$00,$5A,$00,$11,$1C         ;B4BEC9|        |      ;
-    db $90,$03,$00,$12,$11,$BE,$1A,$28,$01,$A8,$01,$00         ;B4BED5|        |      ;
-    db $83,$00,$1F,$E9,$BE,$12,$E3,$BE,$1C,$ED,$02,$00         ;B4BEE1|        |      ;
-    db $12,$E3,$BE,$17,$05,$18,$00,$0C,$BF,$18,$01,$28         ;B4BEED|        |      ;
-    db $BF,$18,$02,$44,$BF,$18,$03,$60,$BF,$18,$04,$7C         ;B4BEF9|        |      ;
-    db $BF,$13,$78,$00,$0B,$01,$10,$14,$76,$1F,$7F,$00         ;B4BF05|        |      ;
-    db $28,$BF,$1A,$28,$01,$B0,$01,$DC,$85,$00,$23,$76         ;B4BF11|        |      ;
-    db $1F,$7F,$00,$47,$AC,$09,$80,$01,$12,$06,$BF,$14         ;B4BF1D|        |      ;
-    db $76,$1F,$7F,$01,$44,$BF,$1A,$28,$01,$B0,$01,$E8         ;B4BF29|        |      ;
-    db $85,$00,$23,$76,$1F,$7F,$01,$47,$AC,$09,$80,$02         ;B4BF35|        |      ;
-    db $12,$06,$BF,$14,$76,$1F,$7F,$02,$60,$BF,$1A,$28         ;B4BF41|        |      ;
-    db $01,$B0,$01,$F4,$85,$00,$23,$76,$1F,$7F,$02,$47         ;B4BF4D|        |      ;
-    db $AC,$09,$80,$03,$12,$06,$BF,$14,$76,$1F,$7F,$03         ;B4BF59|        |      ;
-    db $7C,$BF,$1A,$28,$01,$B0,$01,$00,$86,$00,$23,$76         ;B4BF65|        |      ;
-    db $1F,$7F,$03,$47,$AC,$09,$80,$04,$12,$06,$BF,$14         ;B4BF71|        |      ;
-    db $76,$1F,$7F,$04,$0C,$BF,$1A,$28,$01,$B0,$01,$0C         ;B4BF7D|        |      ;
-    db $86,$00,$23,$76,$1F,$7F,$04,$47,$AC,$09,$80,$05         ;B4BF89|        |      ;
-    db $12,$06,$BF,$17,$02,$18,$00,$D9,$BF,$18,$01,$F0         ;B4BF95|        |      ;
-    db $BF,$10,$14,$6C,$1F,$7F,$0A,$D9,$BF,$23,$6C,$1F         ;B4BFA1|        |      ;
-    db $7F,$0A,$41,$10,$1F,$7F,$1E,$00,$1C,$EB,$02,$00         ;B4BFAD|        |      ;
-    db $0B,$00,$12,$A2,$BF,$14,$6C,$1F,$7F,$0B,$D9,$BF         ;B4BFB9|        |      ;
-    db $23,$6C,$1F,$7F,$0B,$41,$10,$1F,$7F,$1E,$00,$1C         ;B4BFC5|        |      ;
-    db $EB,$02,$00,$0B,$00,$12,$A2,$BF,$14,$6C,$1F,$7F         ;B4BFD1|        |      ;
-    db $0C,$F0,$BF,$23,$6C,$1F,$7F,$0C,$41,$33,$1F,$7F         ;B4BFDD|        |      ;
-    db $32,$00,$0B,$00,$12,$A2,$BF,$14,$6C,$1F,$7F,$0D         ;B4BFE9|        |      ;
-    db $D9,$BF,$23,$6C,$1F,$7F,$0D,$0B,$00,$12,$A2,$BF         ;B4BFF5|        |      ;
-    db $1A,$E0,$00,$68,$01,$6C,$83,$00,$1F,$16,$C0,$14         ;B4C001|        |      ;
-    db $74,$1F,$7F,$03,$1D,$C0,$12,$09,$C0,$1C,$E0,$02         ;B4C00D|        |      ;
-    db $00,$12,$09,$C0,$1B,$AE,$02,$00,$0D,$00,$FF,$40         ;B4C019|        |      ;
-    db $01,$1B,$B0,$02,$01,$0D,$01,$00,$40,$01,$13,$1E         ;B4C025|        |      ;
-    db $00,$1B,$B0,$02,$00,$0D,$FF,$00,$40,$01,$1B,$AC         ;B4C031|        |      ;
-    db $02,$00,$0D,$00,$01,$40,$01,$13,$3C,$00,$12,$1D         ;B4C03D|        |      ;
-    db $C0,$1F,$50,$C0,$12,$4A,$C0,$1C,$E0,$02,$00,$12         ;B4C049|        |      ;
-    db $4A,$C0,$1A,$58,$01,$B8,$01,$6C,$83,$03,$12,$62         ;B4C055|        |      ;
-    db $C0,$1F,$68,$C0,$12,$62,$C0,$15,$A2,$09,$80,$00         ;B4C061|        |      ;
-    db $86,$C0,$15,$A2,$09,$80,$01,$86,$C0,$15,$A2,$09         ;B4C06D|        |      ;
-    db $80,$02,$86,$C0,$1C,$EF,$02,$00,$0B,$03,$12,$62         ;B4C079|        |      ;
-    db $C0,$1C,$EE,$02,$00,$0B,$03,$12,$62,$C0,$1A,$70         ;B4C085|        |      ;
-    db $01,$68,$01,$48,$83,$00,$1F,$AA,$C0,$14,$74,$1F         ;B4C091|        |      ;
-    db $7F,$03,$B1,$C0,$12,$97,$C0,$13,$01,$00,$12,$A4         ;B4C09D|        |      ;
-    db $C0,$1C,$E1,$02,$00,$12,$97,$C0,$0D,$00,$01,$20         ;B4C0A9|        |      ;
-    db $01,$22,$10,$08,$01,$48,$83,$08,$12,$A4,$C0,$1A         ;B4C0B5|        |      ;
-    db $68,$01,$78,$01,$48,$83,$00,$12,$CB,$C0,$1F,$D1         ;B4C0C1|        |      ;
-    db $C0,$12,$CB,$C0,$1C,$F0,$02,$00,$0B,$04,$12,$CB         ;B4C0CD|        |      ;
-    db $C0,$1A,$18,$01,$70,$02,$2C,$84,$02,$1F,$F5,$C0         ;B4C0D9|        |      ;
-    db $14,$74,$1F,$7F,$03,$03,$C1,$12,$E2,$C0,$1F,$FC         ;B4C0E5|        |      ;
-    db $C0,$12,$EF,$C0,$1C,$E2,$02,$00,$12,$E2,$C0,$1C         ;B4C0F1|        |      ;
-    db $E2,$02,$00,$12,$EF,$C0,$0D,$01,$00,$20,$01,$1B         ;B4C0FD|        |      ;
-    db $D3,$02,$00,$0D,$00,$01,$60,$01,$1B,$D7,$02,$00         ;B4C109|        |      ;
-    db $0D,$FF,$00,$A0,$01,$22,$20,$20,$01,$2C,$84,$10         ;B4C115|        |      ;
-    db $12,$EF,$C0,$1A,$08,$01,$B8,$01,$20,$84,$01,$12         ;B4C121|        |      ;
-    db $2F,$C1,$1F,$35,$C1,$12,$2F,$C1,$1C,$F1,$02,$00         ;B4C12D|        |      ;
-    db $0B,$05,$12,$2F,$C1,$1A,$38,$01,$98,$02,$90,$83         ;B4C139|        |      ;
-    db $00,$1F,$59,$C1,$14,$74,$1F,$7F,$03,$60,$C1,$12         ;B4C145|        |      ;
-    db $46,$C1,$13,$01,$00,$12,$53,$C1,$1C,$E3,$02,$00         ;B4C151|        |      ;
-    db $12,$46,$C1,$0D,$00,$01,$50,$01,$1B,$B6,$02,$01         ;B4C15D|        |      ;
-    db $0D,$01,$00,$60,$01,$22,$18,$20,$01,$90,$83,$10         ;B4C169|        |      ;
-    db $12,$EF,$C0,$1A,$38,$01,$18,$02,$84,$83,$01,$1F         ;B4C175|        |      ;
-    db $86,$C1,$12,$80,$C1,$1C,$F1,$02,$00,$0B,$06,$12         ;B4C181|        |      ;
-    db $80,$C1,$14,$66,$1F,$7F,$01,$A1,$C1,$1A,$D8,$00         ;B4C18D|        |      ;
-    db $28,$02,$A4,$81,$01,$12,$B0,$C1,$14,$6E,$1F,$7F         ;B4C199|        |      ;
-    db $04,$38,$C2,$1A,$D8,$00,$28,$02,$5C,$84,$01,$1F         ;B4C1A5|        |      ;
-    db $C3,$C1,$14,$74,$1F,$7F,$03,$CA,$C1,$12,$B0,$C1         ;B4C1B1|        |      ;
-    db $13,$01,$00,$12,$BD,$C1,$1C,$E4,$02,$00,$12,$B0         ;B4C1BD|        |      ;
-    db $C1,$14,$66,$1F,$7F,$01,$E4,$C1,$1B,$2B,$02,$01         ;B4C1C9|        |      ;
-    db $0D,$01,$00,$84,$01,$22,$20,$20,$01,$A4,$81,$10         ;B4C1D5|        |      ;
-    db $12,$BD,$C1,$14,$6E,$1F,$7F,$04,$38,$C2,$22,$20         ;B4C1E1|        |      ;
-    db $20,$01,$74,$84,$10,$12,$BD,$C1,$14,$66,$1F,$7F         ;B4C1ED|        |      ;
-    db $01,$07,$C2,$1A,$78,$01,$D8,$01,$98,$81,$00,$12         ;B4C1F9|        |      ;
-    db $16,$C2,$14,$6E,$1F,$7F,$04,$38,$C2,$1A,$78,$01         ;B4C205|        |      ;
-    db $D8,$01,$5C,$84,$00,$1F,$22,$C2,$12,$16,$C2,$1F         ;B4C211|        |      ;
-    db $31,$C2,$12,$1C,$C2,$1C,$F2,$02,$00,$41,$21,$1F         ;B4C21D|        |      ;
-    db $7F,$0A,$00,$0B,$07,$12,$1C,$C2,$1C,$F1,$02,$00         ;B4C229|        |      ;
-    db $12,$1C,$C2,$10,$14,$66,$1F,$7F,$02,$4B,$C2,$1A         ;B4C235|        |      ;
-    db $C8,$00,$18,$02,$D4,$81,$02,$12,$5A,$C2,$14,$6E         ;B4C241|        |      ;
-    db $1F,$7F,$04,$E5,$C2,$1A,$C8,$00,$18,$02,$5C,$84         ;B4C24D|        |      ;
-    db $00,$1F,$6D,$C2,$14,$74,$1F,$7F,$03,$74,$C2,$12         ;B4C259|        |      ;
-    db $5A,$C2,$13,$01,$00,$12,$67,$C2,$1C,$E5,$02,$00         ;B4C265|        |      ;
-    db $12,$5A,$C2,$14,$66,$1F,$7F,$02,$91,$C2,$13,$50         ;B4C271|        |      ;
-    db $00,$1B,$50,$02,$01,$0D,$01,$00,$40,$01,$22,$20         ;B4C27D|        |      ;
-    db $18,$01,$D4,$81,$10,$12,$67,$C2,$14,$6E,$1F,$7F         ;B4C289|        |      ;
-    db $04,$E5,$C2,$22,$20,$20,$01,$74,$84,$00,$12,$67         ;B4C295|        |      ;
-    db $C2,$14,$66,$1F,$7F,$02,$B4,$C2,$1A,$68,$01,$D8         ;B4C2A1|        |      ;
-    db $01,$C8,$81,$00,$12,$C3,$C2,$14,$6E,$1F,$7F,$04         ;B4C2AD|        |      ;
-    db $E5,$C2,$1A,$68,$01,$D8,$01,$5C,$84,$00,$1F,$CF         ;B4C2B9|        |      ;
-    db $C2,$12,$C3,$C2,$1F,$DE,$C2,$12,$C9,$C2,$1C,$F3         ;B4C2C5|        |      ;
-    db $02,$00,$41,$23,$1F,$7F,$0A,$00,$0B,$08,$12,$C9         ;B4C2D1|        |      ;
-    db $C2,$1C,$F1,$02,$00,$12,$1C,$C2,$10,$14,$66,$1F         ;B4C2DD|        |      ;
-    db $7F,$03,$F8,$C2,$1A,$D8,$00,$08,$02,$EC,$81,$00         ;B4C2E9|        |      ;
-    db $12,$07,$C3,$14,$6E,$1F,$7F,$04,$AB,$C3,$1A,$D8         ;B4C2F5|        |      ;
-    db $00,$08,$02,$5C,$84,$00,$1F,$1A,$C3,$14,$74,$1F         ;B4C301|        |      ;
-    db $7F,$03,$21,$C3,$12,$07,$C3,$13,$01,$00,$12,$14         ;B4C30D|        |      ;
-    db $C3,$1C,$E6,$02,$00,$12,$07,$C3,$14,$66,$1F,$7F         ;B4C319|        |      ;
-    db $03,$57,$C3,$1B,$3F,$02,$00,$0D,$00,$FF,$40,$01         ;B4C325|        |      ;
-    db $13,$1E,$00,$0D,$00,$FF,$40,$01,$13,$1E,$00,$0D         ;B4C331|        |      ;
-    db $00,$FF,$40,$01,$13,$1E,$00,$1B,$41,$02,$00,$0D         ;B4C33D|        |      ;
-    db $FF,$00,$A8,$01,$22,$18,$20,$01,$EC,$81,$10,$12         ;B4C349|        |      ;
-    db $14,$C3,$14,$6E,$1F,$7F,$04,$AB,$C3,$22,$20,$20         ;B4C355|        |      ;
-    db $01,$74,$84,$10,$12,$14,$C3,$14,$66,$1F,$7F,$03         ;B4C361|        |      ;
-    db $7A,$C3,$1A,$F8,$00,$E8,$01,$E0,$81,$00,$12,$89         ;B4C36D|        |      ;
-    db $C3,$14,$6E,$1F,$7F,$04,$AB,$C3,$1A,$F8,$00,$E8         ;B4C379|        |      ;
-    db $01,$5C,$84,$00,$1F,$95,$C3,$12,$89,$C3,$1F,$A4         ;B4C385|        |      ;
-    db $C3,$12,$8F,$C3,$1C,$F4,$02,$00,$41,$25,$1F,$7F         ;B4C391|        |      ;
-    db $0A,$00,$0B,$09,$12,$8F,$C3,$1C,$F1,$02,$00,$12         ;B4C39D|        |      ;
-    db $8F,$C3,$10                                             ;B4C3A9|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x00_SetMusic($0D, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0128, $0218)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $BD6F)
+    %AICMD0x09($02, $C001)
+    %AICMD0x09($03, $C08F)
+    %AICMD0x09($04, $C0DA)
+    %AICMD0x09($05, $C13E)
+    %AICMD0x09($06, $C18F)
+    %AICMD0x09($07, $C239)
+    %AICMD0x09($08, $C2E6)
+    %AICMD0x06_SetDestination($0B)
+    %AICMD0x11()
+    %AICMD0x38()
+    %AICMD0x13($0001)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $04, $BD5E)
+    %AICMD0x12_Jump($BD51)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $07)
+    %AICMD0x3D($0B)
+    %AICMD0x10_End()
+    %AICMD0x13($0708)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $05)
+    %AICMD0x10_End()
+    %AICMD0x1A($0128, $01A8, $8300, $00)
+    %AICMD0x1F($BD8C)
+    %AICMD0x12_Jump($BD77)
+    %AICMD0x2D($BDC3, $BDCE)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $05, $BE7C)
+    %AICMD0x12_Jump($BD7D)
+    %AICMD0x1D($02DD, $00)
+    %AICMD0x20($00, $BD9B)
+    %AICMD0x20($01, $BDBC)
+    %AICMD0x12_Jump($BD77)
+    %AICMD0x08()
+    %AICMD0x1C($02DE, $00)
+    %AICMD0x28($1F74, $7F, $05)
+    %AICMD0x1B($0295, $00)
+    %AICMD0x09($09, $BEF0)
+    %AICMD0x09($0A, $BD66)
+    %AICMD0x0C($01)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $03)
+    %AICMD0x11()
+    %AICMD0x12_Jump($BD7D)
+    %AICMD0x1C($0236, $00)
+    %AICMD0x12_Jump($BD77)
+    %AICMD0x1C($02DF, $00)
+    %AICMD0x1B($0295, $00)
+    %AICMD0x12_Jump($BD7D)
+    %AICMD0x21($09A2, $80, $01)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $00, $BDDD)
+    %AICMD0x12_Jump($BE02)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $01, $BDE7)
+    %AICMD0x12_Jump($BE02)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $02, $BDF1)
+    %AICMD0x12_Jump($BE02)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $03, $BDFB)
+    %AICMD0x12_Jump($BE02)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $04, $BE72)
+    %AICMD0x08()
+    %AICMD0x13($0001)
+    %AICMD0x2C($19, $0006, $005A)
+    %AICMD0x11()
+    %AICMD0x1C($02E7, $00)
+    %AICMD0x15($8009AC, $01, $BE34)
+    %AICMD0x15($8009AC, $02, $BE3C)
+    %AICMD0x15($8009AC, $03, $BE44)
+    %AICMD0x15($8009AC, $04, $BE4C)
+    %AICMD0x15($8009AC, $05, $BE54)
+    %AICMD0x23_OrWithIndexedValue($7F1F78, $00)
+    %AICMD0x12_Jump($BE5C)
+    %AICMD0x23_OrWithIndexedValue($7F1F78, $01)
+    %AICMD0x12_Jump($BE5C)
+    %AICMD0x23_OrWithIndexedValue($7F1F78, $02)
+    %AICMD0x12_Jump($BE5C)
+    %AICMD0x23_OrWithIndexedValue($7F1F78, $03)
+    %AICMD0x12_Jump($BE5C)
+    %AICMD0x23_OrWithIndexedValue($7F1F78, $04)
+    %AICMD0x12_Jump($BE5C)
+    %AICMD0x25($09)
+    %AICMD0x28($1F74, $7F, $05)
+    %AICMD0x1B($0295, $00)
+    %AICMD0x09($09, $BEF0)
+    %AICMD0x09($0A, $BD66)
+    %AICMD0x12_Jump($BD7D)
+    %AICMD0x23_OrWithIndexedValue($7F1F74, $04)
+    %AICMD0x1C($02E8, $00)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $00, $BE86)
+    %AICMD0x12_Jump($BEAB)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $01, $BE90)
+    %AICMD0x12_Jump($BEAB)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $02, $BE9A)
+    %AICMD0x12_Jump($BEAB)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $03, $BEA4)
+    %AICMD0x12_Jump($BEAB)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $04, $BE72)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $06, $BEC4)
+    %AICMD0x08()
+    %AICMD0x13($0001)
+    %AICMD0x2C($19, $0006, $005A)
+    %AICMD0x11()
+    %AICMD0x1C($02E9, $00)
+    %AICMD0x12_Jump($BE11)
+    %AICMD0x28($1F74, $7F, $06)
+    %AICMD0x08()
+    %AICMD0x13($0001)
+    %AICMD0x2C($04, $0006, $005A)
+    %AICMD0x11()
+    %AICMD0x1C($0390, $00)
+    %AICMD0x12_Jump($BE11)
+    %AICMD0x1A($0128, $01A8, $8300, $00)
+    %AICMD0x1F($BEE9)
+    %AICMD0x12_Jump($BEE3)
+    %AICMD0x1C($02ED, $00)
+    %AICMD0x12_Jump($BEE3)
+    %AICMD0x17($05)
+    %AICMD0x18($00, $BF0C)
+    %AICMD0x18($01, $BF28)
+    %AICMD0x18($02, $BF44)
+    %AICMD0x18($03, $BF60)
+    %AICMD0x18($04, $BF7C)
+    %AICMD0x13($0078)
+    %AICMD0x0B($01)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $00, $BF28)
+    %AICMD0x1A($0128, $01B0, $85DC, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F76, $00)
+    %AICMD0x47($8009AC, $01)
+    %AICMD0x12_Jump($BF06)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $01, $BF44)
+    %AICMD0x1A($0128, $01B0, $85E8, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F76, $01)
+    %AICMD0x47($8009AC, $02)
+    %AICMD0x12_Jump($BF06)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $02, $BF60)
+    %AICMD0x1A($0128, $01B0, $85F4, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F76, $02)
+    %AICMD0x47($8009AC, $03)
+    %AICMD0x12_Jump($BF06)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $03, $BF7C)
+    %AICMD0x1A($0128, $01B0, $8600, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F76, $03)
+    %AICMD0x47($8009AC, $04)
+    %AICMD0x12_Jump($BF06)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F76, $04, $BF0C)
+    %AICMD0x1A($0128, $01B0, $860C, $00)
+    %AICMD0x23_OrWithIndexedValue($7F1F76, $04)
+    %AICMD0x47($8009AC, $05)
+    %AICMD0x12_Jump($BF06)
+    %AICMD0x17($02)
+    %AICMD0x18($00, $BFD9)
+    %AICMD0x18($01, $BFF0)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $0A, $BFD9)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $0A)
+    %AICMD0x41_ModifyVariable($7F1F10, $001E)
+    %AICMD0x1C($02EB, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($BFA2)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $0B, $BFD9)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $0B)
+    %AICMD0x41_ModifyVariable($7F1F10, $001E)
+    %AICMD0x1C($02EB, $00)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($BFA2)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $0C, $BFF0)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $0C)
+    %AICMD0x41_ModifyVariable($7F1F33, $0032)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($BFA2)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6C, $0D, $BFD9)
+    %AICMD0x23_OrWithIndexedValue($7F1F6C, $0D)
+    %AICMD0x0B($00)
+    %AICMD0x12_Jump($BFA2)
+    %AICMD0x1A($00E0, $0168, $836C, $00)
+    %AICMD0x1F($C016)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C01D)
+    %AICMD0x12_Jump($C009)
+    %AICMD0x1C($02E0, $00)
+    %AICMD0x12_Jump($C009)
+    %AICMD0x1B($02AE, $00)
+    %AICMD0x0D($00, $FF, $40, $01)
+    %AICMD0x1B($02B0, $01)
+    %AICMD0x0D($01, $00, $40, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02B0, $00)
+    %AICMD0x0D($FF, $00, $40, $01)
+    %AICMD0x1B($02AC, $00)
+    %AICMD0x0D($00, $01, $40, $01)
+    %AICMD0x13($003C)
+    %AICMD0x12_Jump($C01D)
+    %AICMD0x1F($C050)
+    %AICMD0x12_Jump($C04A)
+    %AICMD0x1C($02E0, $00)
+    %AICMD0x12_Jump($C04A)
+    %AICMD0x1A($0158, $01B8, $836C, $03)
+    %AICMD0x12_Jump($C062)
+    %AICMD0x1F($C068)
+    %AICMD0x12_Jump($C062)
+    %AICMD0x15($8009A2, $00, $C086)
+    %AICMD0x15($8009A2, $01, $C086)
+    %AICMD0x15($8009A2, $02, $C086)
+    %AICMD0x1C($02EF, $00)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($C062)
+    %AICMD0x1C($02EE, $00)
+    %AICMD0x0B($03)
+    %AICMD0x12_Jump($C062)
+    %AICMD0x1A($0170, $0168, $8348, $00)
+    %AICMD0x1F($C0AA)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C0B1)
+    %AICMD0x12_Jump($C097)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C0A4)
+    %AICMD0x1C($02E1, $00)
+    %AICMD0x12_Jump($C097)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x22($10, $08, $01, $8348, $08)
+    %AICMD0x12_Jump($C0A4)
+    %AICMD0x1A($0168, $0178, $8348, $00)
+    %AICMD0x12_Jump($C0CB)
+    %AICMD0x1F($C0D1)
+    %AICMD0x12_Jump($C0CB)
+    %AICMD0x1C($02F0, $00)
+    %AICMD0x0B($04)
+    %AICMD0x12_Jump($C0CB)
+    %AICMD0x1A($0118, $0270, $842C, $02)
+    %AICMD0x1F($C0F5)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C103)
+    %AICMD0x12_Jump($C0E2)
+    %AICMD0x1F($C0FC)
+    %AICMD0x12_Jump($C0EF)
+    %AICMD0x1C($02E2, $00)
+    %AICMD0x12_Jump($C0E2)
+    %AICMD0x1C($02E2, $00)
+    %AICMD0x12_Jump($C0EF)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1B($02D3, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x1B($02D7, $00)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x22($20, $20, $01, $842C, $10)
+    %AICMD0x12_Jump($C0EF)
+    %AICMD0x1A($0108, $01B8, $8420, $01)
+    %AICMD0x12_Jump($C12F)
+    %AICMD0x1F($C135)
+    %AICMD0x12_Jump($C12F)
+    %AICMD0x1C($02F1, $00)
+    %AICMD0x0B($05)
+    %AICMD0x12_Jump($C12F)
+    %AICMD0x1A($0138, $0298, $8390, $00)
+    %AICMD0x1F($C159)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C160)
+    %AICMD0x12_Jump($C146)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C153)
+    %AICMD0x1C($02E3, $00)
+    %AICMD0x12_Jump($C146)
+    %AICMD0x0D($00, $01, $50, $01)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x0D($01, $00, $60, $01)
+    %AICMD0x22($18, $20, $01, $8390, $10)
+    %AICMD0x12_Jump($C0EF)
+    %AICMD0x1A($0138, $0218, $8384, $01)
+    %AICMD0x1F($C186)
+    %AICMD0x12_Jump($C180)
+    %AICMD0x1C($02F1, $00)
+    %AICMD0x0B($06)
+    %AICMD0x12_Jump($C180)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $C1A1)
+    %AICMD0x1A($00D8, $0228, $81A4, $01)
+    %AICMD0x12_Jump($C1B0)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C238)
+    %AICMD0x1A($00D8, $0228, $845C, $01)
+    %AICMD0x1F($C1C3)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C1CA)
+    %AICMD0x12_Jump($C1B0)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C1BD)
+    %AICMD0x1C($02E4, $00)
+    %AICMD0x12_Jump($C1B0)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $C1E4)
+    %AICMD0x1B($022B, $01)
+    %AICMD0x0D($01, $00, $84, $01)
+    %AICMD0x22($20, $20, $01, $81A4, $10)
+    %AICMD0x12_Jump($C1BD)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C238)
+    %AICMD0x22($20, $20, $01, $8474, $10)
+    %AICMD0x12_Jump($C1BD)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $C207)
+    %AICMD0x1A($0178, $01D8, $8198, $00)
+    %AICMD0x12_Jump($C216)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C238)
+    %AICMD0x1A($0178, $01D8, $845C, $00)
+    %AICMD0x1F($C222)
+    %AICMD0x12_Jump($C216)
+    %AICMD0x1F($C231)
+    %AICMD0x12_Jump($C21C)
+    %AICMD0x1C($02F2, $00)
+    %AICMD0x41_ModifyVariable($7F1F21, $000A)
+    %AICMD0x0B($07)
+    %AICMD0x12_Jump($C21C)
+    %AICMD0x1C($02F1, $00)
+    %AICMD0x12_Jump($C21C)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $C24B)
+    %AICMD0x1A($00C8, $0218, $81D4, $02)
+    %AICMD0x12_Jump($C25A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C2E5)
+    %AICMD0x1A($00C8, $0218, $845C, $00)
+    %AICMD0x1F($C26D)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C274)
+    %AICMD0x12_Jump($C25A)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C267)
+    %AICMD0x1C($02E5, $00)
+    %AICMD0x12_Jump($C25A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $C291)
+    %AICMD0x13($0050)
+    %AICMD0x1B($0250, $01)
+    %AICMD0x0D($01, $00, $40, $01)
+    %AICMD0x22($20, $18, $01, $81D4, $10)
+    %AICMD0x12_Jump($C267)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C2E5)
+    %AICMD0x22($20, $20, $01, $8474, $00)
+    %AICMD0x12_Jump($C267)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $C2B4)
+    %AICMD0x1A($0168, $01D8, $81C8, $00)
+    %AICMD0x12_Jump($C2C3)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C2E5)
+    %AICMD0x1A($0168, $01D8, $845C, $00)
+    %AICMD0x1F($C2CF)
+    %AICMD0x12_Jump($C2C3)
+    %AICMD0x1F($C2DE)
+    %AICMD0x12_Jump($C2C9)
+    %AICMD0x1C($02F3, $00)
+    %AICMD0x41_ModifyVariable($7F1F23, $000A)
+    %AICMD0x0B($08)
+    %AICMD0x12_Jump($C2C9)
+    %AICMD0x1C($02F1, $00)
+    %AICMD0x12_Jump($C21C)
+    %AICMD0x10_End()
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $C2F8)
+    %AICMD0x1A($00D8, $0208, $81EC, $00)
+    %AICMD0x12_Jump($C307)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C3AB)
+    %AICMD0x1A($00D8, $0208, $845C, $00)
+    %AICMD0x1F($C31A)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F74, $03, $C321)
+    %AICMD0x12_Jump($C307)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C314)
+    %AICMD0x1C($02E6, $00)
+    %AICMD0x12_Jump($C307)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $C357)
+    %AICMD0x1B($023F, $00)
+    %AICMD0x0D($00, $FF, $40, $01)
+    %AICMD0x13($001E)
+    %AICMD0x0D($00, $FF, $40, $01)
+    %AICMD0x13($001E)
+    %AICMD0x0D($00, $FF, $40, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0241, $00)
+    %AICMD0x0D($FF, $00, $A8, $01)
+    %AICMD0x22($18, $20, $01, $81EC, $10)
+    %AICMD0x12_Jump($C314)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C3AB)
+    %AICMD0x22($20, $20, $01, $8474, $10)
+    %AICMD0x12_Jump($C314)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $C37A)
+    %AICMD0x1A($00F8, $01E8, $81E0, $00)
+    %AICMD0x12_Jump($C389)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F6E, $04, $C3AB)
+    %AICMD0x1A($00F8, $01E8, $845C, $00)
+    %AICMD0x1F($C395)
+    %AICMD0x12_Jump($C389)
+    %AICMD0x1F($C3A4)
+    %AICMD0x12_Jump($C38F)
+    %AICMD0x1C($02F4, $00)
+    %AICMD0x41_ModifyVariable($7F1F25, $000A)
+    %AICMD0x0B($09)
+    %AICMD0x12_Jump($C38F)
+    %AICMD0x1C($02F1, $00)
+    %AICMD0x12_Jump($C38F)
+    %AICMD0x10_End()
+
 DATA8_B4C3AC:
-    db $4F,$50,$23,$60,$1F,$7F,$09,$02,$03,$07,$05,$28         ;B4C3AC|        |      ;
-    db $01,$18,$02,$07,$01,$09,$01,$DB,$BE,$09,$02,$57         ;B4C3B8|        |      ;
-    db $C0,$09,$03,$C0,$C0,$09,$04,$24,$C1,$09,$05,$78         ;B4C3C4|        |      ;
-    db $C1,$09,$06,$F5,$C1,$09,$07,$A2,$C2,$09,$08,$68         ;B4C3D0|        |      ;
-    db $C3,$08,$13,$01,$00,$06,$0B,$38,$13,$01,$00,$15         ;B4C3DC|        |      ;
-    db $A2,$09,$80,$03,$03,$C4,$15,$A2,$09,$80,$04,$03         ;B4C3E8|        |      ;
-    db $C4,$15,$A2,$09,$80,$05,$03,$C4,$1C,$8F,$03,$00         ;B4C3F4|        |      ;
-    db $12,$13,$C4,$1C,$EA,$02,$00,$41,$33,$1F,$7F,$1E         ;B4C400|        |      ;
-    db $00,$09,$09,$98,$BF,$0C,$00,$13,$01,$00,$1C,$EC         ;B4C40C|        |      ;
-    db $02,$00,$13,$01,$00,$1C,$ED,$02,$00,$11,$13,$8A         ;B4C418|        |      ;
-    db $02,$3C,$10                                             ;B4C424|        |      ;
  
+    %AICMD0x4F()
+    %AICMD0x50()
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $09)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0128, $0218)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $BEDB)
+    %AICMD0x09($02, $C057)
+    %AICMD0x09($03, $C0C0)
+    %AICMD0x09($04, $C124)
+    %AICMD0x09($05, $C178)
+    %AICMD0x09($06, $C1F5)
+    %AICMD0x09($07, $C2A2)
+    %AICMD0x09($08, $C368)
+    %AICMD0x08()
+    %AICMD0x13($0001)
+    %AICMD0x06_SetDestination($0B)
+    %AICMD0x38()
+    %AICMD0x13($0001)
+    %AICMD0x15($8009A2, $03, $C403)
+    %AICMD0x15($8009A2, $04, $C403)
+    %AICMD0x15($8009A2, $05, $C403)
+    %AICMD0x1C($038F, $00)
+    %AICMD0x12_Jump($C413)
+    %AICMD0x1C($02EA, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $001E)
+    %AICMD0x09($09, $BF98)
+    %AICMD0x0C($00)
+    %AICMD0x13($0001)
+    %AICMD0x1C($02EC, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1C($02ED, $00)
+    %AICMD0x11()
+    %AICMD0x13($028A)
+    %AICMD0x3C()
+    %AICMD0x10_End()
+
 pScripting_B4C427:
     dw DATA8_B4C447                                            ;B4C427|        |B4C447;
     dw pScripting_B4C4B8                                       ;B4C429|        |B4C4B8;
@@ -2042,17 +5094,35 @@ pScripting_B4C427:
     dw pScripting_B4C4B8                                       ;B4C445|        |B4C4B8;
  
 DATA8_B4C447:
-    db $09,$01,$4D,$C4,$38,$10,$15,$1C,$1F,$7F,$12,$B7         ;B4C447|        |      ;
-    db $C4,$1A,$68,$00,$A8,$01,$84,$83,$02,$2D,$7A,$C4         ;B4C453|        |      ;
-    db $6C,$C4,$16,$1C,$1F,$7F,$12,$18,$81,$C4,$12,$5C         ;B4C45F|        |      ;
-    db $C4,$15,$1E,$09,$80,$14,$8E,$C4,$1C,$1B,$04,$00         ;B4C46B|        |      ;
-    db $12,$5C,$C4,$1C,$18,$04,$00,$12,$5C,$C4,$1C,$19         ;B4C477|        |      ;
-    db $04,$00,$41,$33,$1F,$7F,$FB,$FF,$12,$A2,$C4,$1C         ;B4C483|        |      ;
-    db $1A,$04,$00,$42,$04,$1F,$7F,$02,$00,$00,$41,$33         ;B4C48F|        |      ;
-    db $1F,$7F,$1E,$00,$12,$A2,$C4,$23,$6A,$1F,$7F,$0B         ;B4C49B|        |      ;
-    db $28,$6A,$1F,$7F,$0A,$1B,$B6,$02,$00,$0D,$FF,$00         ;B4C4A7|        |      ;
-    db $60,$01,$37,$10,$10                                     ;B4C4B3|        |      ;
  
+    %AICMD0x09($01, $C44D)
+    %AICMD0x38()
+    %AICMD0x10_End()
+    %AICMD0x15($7F1F1C, $12, $C4B7)
+    %AICMD0x1A($0068, $01A8, $8384, $02)
+    %AICMD0x2D($C47A, $C46C)
+    %AICMD0x16($7F1F1C, $12, $18, $C481)
+    %AICMD0x12_Jump($C45C)
+    %AICMD0x15($80091E, $14, $C48E)
+    %AICMD0x1C($041B, $00)
+    %AICMD0x12_Jump($C45C)
+    %AICMD0x1C($0418, $00)
+    %AICMD0x12_Jump($C45C)
+    %AICMD0x1C($0419, $00)
+    %AICMD0x41_ModifyVariable($7F1F33, $FFFB)
+    %AICMD0x12_Jump($C4A2)
+    %AICMD0x1C($041A, $00)
+    %AICMD0x42($7F1F04, $000002)
+    %AICMD0x41_ModifyVariable($7F1F33, $001E)
+    %AICMD0x12_Jump($C4A2)
+    %AICMD0x23_OrWithIndexedValue($7F1F6A, $0B)
+    %AICMD0x28($1F6A, $7F, $0A)
+    %AICMD0x1B($02B6, $00)
+    %AICMD0x0D($FF, $00, $60, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x10_End()
+
 pScripting_B4C4B8:
     dw DATA8_B4C4D8                                            ;B4C4B8|        |B4C4D8;
     dw pScripting_B4C504                                       ;B4C4BA|        |B4C504;
@@ -2072,11 +5142,19 @@ pScripting_B4C4B8:
     dw pScripting_B4C504                                       ;B4C4D6|        |B4C504;
  
 DATA8_B4C4D8:
-    db $1A,$18,$02,$78,$00,$A4,$87,$00,$13,$01,$00,$1B         ;B4C4D8|        |      ;
-    db $05,$03,$01,$0D,$01,$00,$50,$01,$1B,$04,$03,$01         ;B4C4E4|        |      ;
-    db $13,$3C,$00,$1B,$05,$03,$01,$0D,$02,$00,$80,$01         ;B4C4F0|        |      ;
-    db $37,$41,$33,$1F,$7F,$0A,$00,$10                         ;B4C4FC|        |      ;
  
+    %AICMD0x1A($0218, $0078, $87A4, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1B($0305, $01)
+    %AICMD0x0D($01, $00, $50, $01)
+    %AICMD0x1B($0304, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0305, $01)
+    %AICMD0x0D($02, $00, $80, $01)
+    %AICMD0x37()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x10_End()
+
 pScripting_B4C504:
     dw DATA8_B4C524                                            ;B4C504|        |B4C524;
     dw pScripting_B4C548                                       ;B4C506|        |B4C548;
@@ -2096,10 +5174,17 @@ pScripting_B4C504:
     dw pScripting_B4C548                                       ;B4C522|        |B4C548;
  
 DATA8_B4C524:
-    db $1A,$88,$00,$98,$00,$98,$87,$00,$13,$01,$00,$1B         ;B4C524|        |      ;
-    db $03,$03,$00,$0D,$FF,$00,$30,$01,$13,$3C,$00,$0D         ;B4C530|        |      ;
-    db $FF,$00,$50,$01,$37,$41,$33,$1F,$7F,$0A,$00,$10         ;B4C53C|        |      ;
  
+    %AICMD0x1A($0088, $0098, $8798, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1B($0303, $00)
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0D($FF, $00, $50, $01)
+    %AICMD0x37()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x10_End()
+
 pScripting_B4C548:
     dw DATA8_B4C568                                            ;B4C548|        |B4C568;
     dw pScripting_B4C584                                       ;B4C54A|        |B4C584;
@@ -2119,10 +5204,15 @@ pScripting_B4C548:
     dw pScripting_B4C584                                       ;B4C566|        |B4C584;
  
 DATA8_B4C568:
-    db $1A,$28,$02,$58,$02,$B0,$87,$00,$13,$3C,$00,$1B         ;B4C568|        |      ;
-    db $07,$03,$01,$0D,$01,$00,$FF,$01,$37,$41,$33,$1F         ;B4C574|        |      ;
-    db $7F,$0A,$00,$10                                         ;B4C580|        |      ;
  
+    %AICMD0x1A($0228, $0258, $87B0, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0307, $01)
+    %AICMD0x0D($01, $00, $FF, $01)
+    %AICMD0x37()
+    %AICMD0x41_ModifyVariable($7F1F33, $000A)
+    %AICMD0x10_End()
+
 pScripting_B4C584:
     dw DATA8_B4C5A4                                            ;B4C584|        |B4C5A4;
     dw pScripting_B4C5F4                                       ;B4C586|        |B4C5F4;
@@ -2142,14 +5232,27 @@ pScripting_B4C584:
     dw pScripting_B4C5F4                                       ;B4C5A2|        |B4C5F4;
  
 DATA8_B4C5A4:
-    db $07,$01,$09,$01,$B2,$C5,$11,$38,$13,$01,$00,$12         ;B4C5A4|        |      ;
-    db $AC,$C5,$1A,$08,$01,$1A,$00,$EC,$84,$00,$0D,$01         ;B4C5B0|        |      ;
-    db $00,$08,$01,$0D,$00,$FF,$06,$01,$0D,$FF,$00,$08         ;B4C5BC|        |      ;
-    db $02,$0D,$FF,$01,$04,$01,$0D,$01,$00,$0C,$02,$0D         ;B4C5C8|        |      ;
-    db $FF,$00,$06,$01,$0D,$00,$FF,$10,$02,$0D,$FF,$01         ;B4C5D4|        |      ;
-    db $04,$01,$0D,$01,$01,$0C,$02,$0D,$01,$00,$08,$02         ;B4C5E0|        |      ;
-    db $0D,$00,$FF,$06,$01,$12,$BA,$C5                         ;B4C5EC|        |      ;
  
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x09($01, $C5B2)
+    %AICMD0x11()
+    %AICMD0x38()
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C5AC)
+    %AICMD0x1A($0108, $001A, $84EC, $00)
+    %AICMD0x0D($01, $00, $08, $01)
+    %AICMD0x0D($00, $FF, $06, $01)
+    %AICMD0x0D($FF, $00, $08, $02)
+    %AICMD0x0D($FF, $01, $04, $01)
+    %AICMD0x0D($01, $00, $0C, $02)
+    %AICMD0x0D($FF, $00, $06, $01)
+    %AICMD0x0D($00, $FF, $10, $02)
+    %AICMD0x0D($FF, $01, $04, $01)
+    %AICMD0x0D($01, $01, $0C, $02)
+    %AICMD0x0D($01, $00, $08, $02)
+    %AICMD0x0D($00, $FF, $06, $01)
+    %AICMD0x12_Jump($C5BA)
+
 pScripting_B4C5F4:
     dw DATA8_B4C614                                            ;B4C5F4|        |B4C614;
     dw pScripting_B4C6F1                                       ;B4C5F6|        |B4C6F1;
@@ -2169,26 +5272,69 @@ pScripting_B4C5F4:
     dw pScripting_B4C6F1                                       ;B4C612|        |B4C6F1;
  
 DATA8_B4C614:
-    db $00,$01,$B4,$23,$5E,$1F,$7F,$02,$05,$88,$00,$78         ;B4C614|        |      ;
-    db $00,$02,$03,$07,$07,$00,$08,$09,$01,$B1,$C6,$09         ;B4C620|        |      ;
-    db $02,$91,$C6,$14,$66,$1F,$7F,$00,$55,$C6,$14,$66         ;B4C62C|        |      ;
-    db $1F,$7F,$01,$55,$C6,$14,$66,$1F,$7F,$02,$55,$C6         ;B4C638|        |      ;
-    db $14,$66,$1F,$7F,$03,$55,$C6,$14,$66,$1F,$7F,$04         ;B4C644|        |      ;
-    db $55,$C6,$12,$59,$C6,$09,$03,$D8,$C6,$14,$64,$1F         ;B4C650|        |      ;
-    db $7F,$07,$71,$C6,$14,$64,$1F,$7F,$06,$6C,$C6,$06         ;B4C65C|        |      ;
-    db $15,$12,$76,$C6,$06,$16,$12,$76,$C6,$06,$17,$12         ;B4C668|        |      ;
-    db $76,$C6,$38,$13,$5A,$00,$39,$03,$20,$00,$39,$00         ;B4C674|        |      ;
-    db $40,$00,$07,$02,$0B,$00,$13,$5A,$00,$0C,$02,$13         ;B4C680|        |      ;
-    db $3C,$00,$3D,$3D,$10,$1A,$88,$00,$B8,$00,$38,$84         ;B4C68C|        |      ;
-    db $03,$0C,$01,$13,$1E,$00,$1B,$DC,$02,$00,$0D,$FF         ;B4C698|        |      ;
-    db $00,$10,$01,$1B,$DE,$02,$00,$13,$78,$00,$0B,$02         ;B4C6A4|        |      ;
-    db $10,$1A,$78,$00,$B8,$00,$50,$84,$02,$0C,$00,$1B         ;B4C6B0|        |      ;
-    db $E0,$02,$00,$13,$78,$00,$1B,$DF,$02,$00,$0D,$00         ;B4C6BC|        |      ;
-    db $01,$10,$01,$13,$14,$00,$0B,$01,$1B,$E0,$02,$00         ;B4C6C8|        |      ;
-    db $13,$78,$00,$10,$1A,$A8,$00,$78,$00,$74,$84,$00         ;B4C6D4|        |      ;
-    db $1B,$E7,$02,$00,$13,$78,$00,$1B,$E3,$02,$00,$13         ;B4C6E0|        |      ;
-    db $F0,$00,$12,$E0,$C6                                     ;B4C6EC|        |      ;
  
+    %AICMD0x00_SetMusic($01, $B4)
+    %AICMD0x23_OrWithIndexedValue($7F1F5E, $02)
+    %AICMD0x05_SetPosition($0088, $0078)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $C6B1)
+    %AICMD0x09($02, $C691)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $00, $C655)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $01, $C655)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $02, $C655)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $03, $C655)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F66, $04, $C655)
+    %AICMD0x12_Jump($C659)
+    %AICMD0x09($03, $C6D8)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $07, $C671)
+    %AICMD0x14_JumpIfEqualsToIndexedValue($7F1F64, $06, $C66C)
+    %AICMD0x06_SetDestination($15)
+    %AICMD0x12_Jump($C676)
+    %AICMD0x06_SetDestination($16)
+    %AICMD0x12_Jump($C676)
+    %AICMD0x06_SetDestination($17)
+    %AICMD0x12_Jump($C676)
+    %AICMD0x38()
+    %AICMD0x13($005A)
+    %AICMD0x39($03, $0020)
+    %AICMD0x39($00, $0040)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($00)
+    %AICMD0x13($005A)
+    %AICMD0x0C($02)
+    %AICMD0x13($003C)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $00B8, $8438, $03)
+    %AICMD0x0C($01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02DC, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1B($02DE, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($02)
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $00B8, $8450, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02E0, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02DF, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x13($0014)
+    %AICMD0x0B($01)
+    %AICMD0x1B($02E0, $00)
+    %AICMD0x13($0078)
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0078, $8474, $00)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x13($00F0)
+    %AICMD0x12_Jump($C6E0)
+
 pScripting_B4C6F1:
     dw DATA8_B4C711                                            ;B4C6F1|        |B4C711;
     dw pScripting_B4C7C3                                       ;B4C6F3|        |B4C7C3;
@@ -2208,22 +5354,64 @@ pScripting_B4C6F1:
     dw pScripting_B4C7C3                                       ;B4C70F|        |B4C7C3;
  
 DATA8_B4C711:
-    db $00,$11,$B4,$02,$03,$06,$05,$88,$00,$58,$01,$07         ;B4C711|        |      ;
-    db $00,$08,$09,$01,$4F,$C7,$06,$01,$38,$39,$00,$20         ;B4C71D|        |      ;
-    db $00,$07,$01,$13,$5A,$00,$07,$02,$13,$78,$00,$0B         ;B4C729|        |      ;
-    db $00,$0C,$01,$39,$00,$30,$00,$40,$39,$03,$44,$00         ;B4C735|        |      ;
-    db $13,$46,$00,$3A,$03,$2C,$00,$0B,$02,$0C,$03,$3D         ;B4C741|        |      ;
-    db $3D,$10,$1A,$10,$01,$78,$01,$14,$81,$00,$0C,$00         ;B4C74D|        |      ;
-    db $1B,$EC,$01,$00,$0D,$FF,$00,$78,$01,$13,$3C,$00         ;B4C759|        |      ;
-    db $1B,$F2,$01,$00,$0B,$01,$0C,$02,$1B,$E9,$01,$00         ;B4C765|        |      ;
-    db $0D,$FF,$00,$40,$02,$1B,$DD,$01,$00,$13,$3C,$00         ;B4C771|        |      ;
-    db $1B,$DA,$01,$00,$0D,$00,$01,$60,$02,$1B,$F2,$01         ;B4C77D|        |      ;
-    db $00,$13,$3C,$00,$1B,$E9,$01,$00,$0D,$FF,$00,$40         ;B4C789|        |      ;
-    db $02,$1B,$F2,$01,$01,$13,$78,$00,$1B,$E9,$01,$01         ;B4C795|        |      ;
-    db $0D,$01,$00,$20,$02,$1B,$E4,$01,$00,$13,$3C,$00         ;B4C7A1|        |      ;
-    db $1B,$EA,$01,$01,$13,$50,$00,$1B,$EB,$01,$01,$13         ;B4C7AD|        |      ;
-    db $B4,$00,$0B,$03,$13,$01,$00,$12,$BD,$C7                 ;B4C7B9|        |      ;
  
+    %AICMD0x00_SetMusic($11, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0088, $0158)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $C74F)
+    %AICMD0x06_SetDestination($01)
+    %AICMD0x38()
+    %AICMD0x39($00, $0020)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($005A)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($0078)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x39($00, $0030)
+    %AICMD0x40()
+    %AICMD0x39($03, $0044)
+    %AICMD0x13($0046)
+    %AICMD0x3A($03, $002C)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0110, $0178, $8114, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $78, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01F2, $00)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x1B($01E9, $00)
+    %AICMD0x0D($FF, $00, $40, $02)
+    %AICMD0x1B($01DD, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01DA, $00)
+    %AICMD0x0D($00, $01, $60, $02)
+    %AICMD0x1B($01F2, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01E9, $00)
+    %AICMD0x0D($FF, $00, $40, $02)
+    %AICMD0x1B($01F2, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01E9, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($01E4, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01EA, $01)
+    %AICMD0x13($0050)
+    %AICMD0x1B($01EB, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x0B($03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C7BD)
+
 pScripting_B4C7C3:
     dw DATA8_B4C7E3                                            ;B4C7C3|        |B4C7E3;
     dw pScripting_B4C9F9                                       ;B4C7C5|        |B4C9F9;
@@ -2243,52 +5431,153 @@ pScripting_B4C7C3:
     dw pScripting_B4C9F9                                       ;B4C7E1|        |B4C9F9;
  
 DATA8_B4C7E3:
-    db $00,$10,$B4,$02,$03,$06,$05,$E8,$FF,$78,$00,$07         ;B4C7E3|        |      ;
-    db $02,$40,$08,$09,$01,$BA,$C9,$09,$02,$62,$C8,$09         ;B4C7EF|        |      ;
-    db $03,$98,$C8,$09,$04,$D1,$C8,$09,$05,$13,$C9,$09         ;B4C7FB|        |      ;
-    db $06,$49,$C9,$09,$07,$71,$C9,$06,$43,$38,$13,$78         ;B4C807|        |      ;
-    db $00,$39,$02,$88,$00,$13,$3C,$00,$07,$00,$19,$62         ;B4C813|        |      ;
-    db $00,$00,$13,$5A,$00,$0B,$00,$19,$63,$00,$00,$13         ;B4C81F|        |      ;
-    db $5A,$00,$0B,$01,$19,$60,$00,$00,$13,$5A,$00,$07         ;B4C82B|        |      ;
-    db $00,$13,$1E,$00,$19,$26,$00,$00,$13,$78,$00,$19         ;B4C837|        |      ;
-    db $27,$00,$00,$13,$5A,$00,$3A,$00,$20,$00,$19,$24         ;B4C843|        |      ;
-    db $00,$00,$13,$5A,$00,$3A,$02,$20,$00,$19,$26,$00         ;B4C84F|        |      ;
-    db $00,$13,$3C,$00,$3D,$3D,$10,$1A,$B8,$00,$58,$00         ;B4C85B|        |      ;
-    db $88,$88,$03,$0C,$00,$1B,$8C,$01,$00,$1B,$9F,$01         ;B4C867|        |      ;
-    db $00,$0D,$00,$01,$20,$01,$13,$28,$00,$1B,$8B,$01         ;B4C873|        |      ;
-    db $00,$0D,$FF,$00,$36,$01,$13,$3C,$00,$2F,$FC,$80         ;B4C87F|        |      ;
-    db $22,$08,$04,$01,$08,$81,$08,$13,$01,$00,$12,$92         ;B4C88B|        |      ;
-    db $C8,$1A,$38,$00,$68,$00,$70,$88,$02,$0C,$00,$1B         ;B4C897|        |      ;
-    db $90,$01,$01,$0C,$01,$1B,$8C,$01,$01,$1B,$9F,$01         ;B4C8A3|        |      ;
-    db $00,$0D,$00,$01,$1C,$02,$13,$14,$00,$1B,$8B,$01         ;B4C8AF|        |      ;
-    db $01,$0D,$01,$00,$4E,$02,$13,$78,$00,$22,$08,$08         ;B4C8BB|        |      ;
-    db $01,$08,$81,$08,$13,$01,$00,$12,$CB,$C8,$1A,$28         ;B4C8C7|        |      ;
-    db $00,$C8,$00,$08,$81,$01,$0C,$01,$13,$0A,$00,$1B         ;B4C8D3|        |      ;
-    db $8B,$01,$01,$0D,$01,$00,$20,$01,$13,$1E,$00,$1B         ;B4C8DF|        |      ;
-    db $8B,$01,$01,$0D,$01,$00,$36,$02,$13,$1E,$00,$1B         ;B4C8EB|        |      ;
-    db $A7,$01,$00,$0D,$00,$FF,$42,$01,$1B,$8B,$01,$01         ;B4C8F7|        |      ;
-    db $13,$78,$00,$22,$08,$04,$01,$08,$81,$01,$13,$01         ;B4C903|        |      ;
-    db $00,$12,$0D,$C9,$1A,$98,$00,$38,$00,$88,$88,$00         ;B4C90F|        |      ;
-    db $0C,$00,$13,$14,$00,$1B,$9F,$01,$00,$0D,$00,$01         ;B4C91B|        |      ;
-    db $30,$01,$13,$1E,$00,$1B,$8B,$01,$00,$0D,$FF,$00         ;B4C927|        |      ;
-    db $3C,$02,$1B,$90,$01,$00,$13,$78,$00,$1B,$90,$01         ;B4C933|        |      ;
-    db $00,$13,$78,$00,$13,$01,$00,$12,$43,$C9,$1A,$A8         ;B4C93F|        |      ;
-    db $00,$A8,$00,$FC,$86,$03,$0C,$01,$1B,$B0,$01,$00         ;B4C94B|        |      ;
-    db $0D,$FE,$00,$48,$03,$13,$14,$00,$1B,$B7,$01,$00         ;B4C957|        |      ;
-    db $0D,$00,$FF,$4E,$03,$13,$3C,$00,$13,$01,$00,$12         ;B4C963|        |      ;
-    db $6B,$C9,$1A,$88,$00,$B8,$00,$B4,$86,$02,$0C,$00         ;B4C96F|        |      ;
-    db $13,$3C,$00,$1B,$CA,$01,$00,$0D,$FF,$00,$20,$01         ;B4C97B|        |      ;
-    db $13,$3C,$00,$1B,$CA,$01,$01,$0D,$01,$00,$20,$01         ;B4C987|        |      ;
-    db $13,$3C,$00,$1B,$D8,$01,$00,$0D,$00,$FF,$38,$02         ;B4C993|        |      ;
-    db $13,$3C,$00,$1B,$CA,$01,$01,$0D,$01,$00,$40,$02         ;B4C99F|        |      ;
-    db $0B,$02,$1B,$D0,$01,$01,$13,$78,$00,$13,$01,$00         ;B4C9AB|        |      ;
-    db $12,$B4,$C9,$1A,$38,$00,$A0,$00,$A8,$89,$02,$0C         ;B4C9B7|        |      ;
-    db $00,$1B,$F5,$01,$01,$13,$78,$00,$1B,$F4,$01,$01         ;B4C9C3|        |      ;
-    db $1B,$F3,$01,$01,$13,$78,$00,$1B,$E8,$01,$01,$0C         ;B4C9CF|        |      ;
-    db $02,$1B,$EC,$01,$01,$0D,$01,$00,$60,$01,$1B,$F2         ;B4C9DB|        |      ;
-    db $01,$01,$13,$5A,$00,$1B,$EE,$01,$01,$13,$78,$00         ;B4C9E7|        |      ;
-    db $13,$01,$00,$12,$F3,$C9                                 ;B4C9F3|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($FFE8, $0078)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $C9BA)
+    %AICMD0x09($02, $C862)
+    %AICMD0x09($03, $C898)
+    %AICMD0x09($04, $C8D1)
+    %AICMD0x09($05, $C913)
+    %AICMD0x09($06, $C949)
+    %AICMD0x09($07, $C971)
+    %AICMD0x06_SetDestination($43)
+    %AICMD0x38()
+    %AICMD0x13($0078)
+    %AICMD0x39($02, $0088)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x19($0062, $00)
+    %AICMD0x13($005A)
+    %AICMD0x0B($00)
+    %AICMD0x19($0063, $00)
+    %AICMD0x13($005A)
+    %AICMD0x0B($01)
+    %AICMD0x19($0060, $00)
+    %AICMD0x13($005A)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x19($0026, $00)
+    %AICMD0x13($0078)
+    %AICMD0x19($0027, $00)
+    %AICMD0x13($005A)
+    %AICMD0x3A($00, $0020)
+    %AICMD0x19($0024, $00)
+    %AICMD0x13($005A)
+    %AICMD0x3A($02, $0020)
+    %AICMD0x19($0026, $00)
+    %AICMD0x13($003C)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($00B8, $0058, $8888, $03)
+    %AICMD0x0C($00)
+    %AICMD0x1B($018C, $00)
+    %AICMD0x1B($019F, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x13($0028)
+    %AICMD0x1B($018B, $00)
+    %AICMD0x0D($FF, $00, $36, $01)
+    %AICMD0x13($003C)
+    %AICMD0x2F($80FC)
+    %AICMD0x22($08, $04, $01, $8108, $08)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C892)
+    %AICMD0x1A($0038, $0068, $8870, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0190, $01)
+    %AICMD0x0C($01)
+    %AICMD0x1B($018C, $01)
+    %AICMD0x1B($019F, $00)
+    %AICMD0x0D($00, $01, $1C, $02)
+    %AICMD0x13($0014)
+    %AICMD0x1B($018B, $01)
+    %AICMD0x0D($01, $00, $4E, $02)
+    %AICMD0x13($0078)
+    %AICMD0x22($08, $08, $01, $8108, $08)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C8CB)
+    %AICMD0x1A($0028, $00C8, $8108, $01)
+    %AICMD0x0C($01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($018B, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($018B, $01)
+    %AICMD0x0D($01, $00, $36, $02)
+    %AICMD0x13($001E)
+    %AICMD0x1B($01A7, $00)
+    %AICMD0x0D($00, $FF, $42, $01)
+    %AICMD0x1B($018B, $01)
+    %AICMD0x13($0078)
+    %AICMD0x22($08, $04, $01, $8108, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C90D)
+    %AICMD0x1A($0098, $0038, $8888, $00)
+    %AICMD0x0C($00)
+    %AICMD0x13($0014)
+    %AICMD0x1B($019F, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($018B, $00)
+    %AICMD0x0D($FF, $00, $3C, $02)
+    %AICMD0x1B($0190, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0190, $00)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C943)
+    %AICMD0x1A($00A8, $00A8, $86FC, $03)
+    %AICMD0x0C($01)
+    %AICMD0x1B($01B0, $00)
+    %AICMD0x0D($FE, $00, $48, $03)
+    %AICMD0x13($0014)
+    %AICMD0x1B($01B7, $00)
+    %AICMD0x0D($00, $FF, $4E, $03)
+    %AICMD0x13($003C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C96B)
+    %AICMD0x1A($0088, $00B8, $86B4, $02)
+    %AICMD0x0C($00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01CA, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01CA, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01D8, $00)
+    %AICMD0x0D($00, $FF, $38, $02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01CA, $01)
+    %AICMD0x0D($01, $00, $40, $02)
+    %AICMD0x0B($02)
+    %AICMD0x1B($01D0, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C9B4)
+    %AICMD0x1A($0038, $00A0, $89A8, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($01F5, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01F4, $01)
+    %AICMD0x1B($01F3, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01E8, $01)
+    %AICMD0x0C($02)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $60, $01)
+    %AICMD0x1B($01F2, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01EE, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($C9F3)
+
 pScripting_B4C9F9:
     dw DATA8_B4CA19                                            ;B4C9F9|        |B4CA19;
     dw pScripting_B4CB3F                                       ;B4C9FB|        |B4CB3F;
@@ -2308,32 +5597,95 @@ pScripting_B4C9F9:
     dw pScripting_B4CB3F                                       ;B4CA17|        |B4CB3F;
  
 DATA8_B4CA19:
-    db $00,$10,$B4,$05,$F0,$FF,$68,$00,$02,$03,$06,$07         ;B4CA19|        |      ;
-    db $02,$40,$08,$09,$01,$A6,$CA,$09,$02,$E0,$CA,$09         ;B4CA25|        |      ;
-    db $03,$15,$CB,$09,$04,$2A,$CB,$06,$43,$38,$13,$78         ;B4CA31|        |      ;
-    db $00,$39,$02,$78,$00,$13,$1E,$00,$19,$7A,$00,$01         ;B4CA3D|        |      ;
-    db $13,$5A,$00,$3E,$16,$0B,$00,$13,$5A,$00,$07,$00         ;B4CA49|        |      ;
-    db $13,$1E,$00,$39,$00,$10,$00,$13,$3C,$00,$39,$03         ;B4CA55|        |      ;
-    db $80,$00,$3F,$13,$B4,$00,$39,$02,$90,$00,$07,$01         ;B4CA61|        |      ;
-    db $13,$1E,$00,$19,$65,$00,$00,$13,$5A,$00,$39,$03         ;B4CA6D|        |      ;
-    db $10,$00,$13,$0A,$00,$39,$01,$10,$00,$13,$0A,$00         ;B4CA79|        |      ;
-    db $19,$66,$00,$01,$13,$5A,$00,$07,$02,$0B,$01,$13         ;B4CA85|        |      ;
-    db $5A,$00,$0C,$02,$39,$00,$10,$00,$13,$1E,$00,$19         ;B4CA91|        |      ;
-    db $3D,$00,$00,$13,$2C,$01,$3D,$3D,$10,$1A,$F0,$FF         ;B4CA9D|        |      ;
-    db $88,$00,$14,$81,$02,$0C,$00,$1B,$EC,$01,$01,$0D         ;B4CAA9|        |      ;
-    db $01,$00,$58,$01,$13,$5A,$00,$1B,$F8,$01,$01,$13         ;B4CAB5|        |      ;
-    db $78,$00,$1B,$E9,$01,$01,$0D,$01,$00,$10,$01,$13         ;B4CAC1|        |      ;
-    db $3C,$00,$1B,$EA,$01,$01,$13,$B4,$00,$1B,$EB,$01         ;B4CACD|        |      ;
-    db $01,$13,$5A,$00,$12,$CF,$CA,$1A,$78,$00,$6C,$00         ;B4CAD9|        |      ;
-    db $70,$88,$02,$13,$1C,$02,$1B,$90,$01,$01,$13,$B4         ;B4CAE5|        |      ;
-    db $00,$1B,$94,$01,$01,$13,$B4,$00,$1B,$93,$01,$01         ;B4CAF1|        |      ;
-    db $13,$B4,$00,$1B,$8C,$01,$01,$0C,$01,$1B,$91,$01         ;B4CAFD|        |      ;
-    db $01,$13,$B4,$00,$0B,$02,$13,$01,$00,$12,$0F,$CB         ;B4CB09|        |      ;
-    db $1A,$A0,$00,$88,$00,$44,$81,$00,$22,$18,$18,$01         ;B4CB15|        |      ;
-    db $44,$81,$0C,$13,$01,$00,$12,$24,$CB,$1A,$98,$00         ;B4CB21|        |      ;
-    db $A8,$00,$50,$81,$00,$22,$18,$18,$01,$50,$81,$0C         ;B4CB2D|        |      ;
-    db $13,$01,$00,$12,$39,$CB                                 ;B4CB39|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x05_SetPosition($FFF0, $0068)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $CAA6)
+    %AICMD0x09($02, $CAE0)
+    %AICMD0x09($03, $CB15)
+    %AICMD0x09($04, $CB2A)
+    %AICMD0x06_SetDestination($43)
+    %AICMD0x38()
+    %AICMD0x13($0078)
+    %AICMD0x39($02, $0078)
+    %AICMD0x13($001E)
+    %AICMD0x19($007A, $01)
+    %AICMD0x13($005A)
+    %AICMD0x3E($16)
+    %AICMD0x0B($00)
+    %AICMD0x13($005A)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x39($00, $0010)
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $0080)
+    %AICMD0x3F()
+    %AICMD0x13($00B4)
+    %AICMD0x39($02, $0090)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($001E)
+    %AICMD0x19($0065, $00)
+    %AICMD0x13($005A)
+    %AICMD0x39($03, $0010)
+    %AICMD0x13($000A)
+    %AICMD0x39($01, $0010)
+    %AICMD0x13($000A)
+    %AICMD0x19($0066, $01)
+    %AICMD0x13($005A)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($01)
+    %AICMD0x13($005A)
+    %AICMD0x0C($02)
+    %AICMD0x39($00, $0010)
+    %AICMD0x13($001E)
+    %AICMD0x19($003D, $00)
+    %AICMD0x13($012C)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($FFF0, $0088, $8114, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $58, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01F8, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01E9, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01EA, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EB, $01)
+    %AICMD0x13($005A)
+    %AICMD0x12_Jump($CACF)
+    %AICMD0x1A($0078, $006C, $8870, $02)
+    %AICMD0x13($021C)
+    %AICMD0x1B($0190, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0194, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0193, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($018C, $01)
+    %AICMD0x0C($01)
+    %AICMD0x1B($0191, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x0B($02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CB0F)
+    %AICMD0x1A($00A0, $0088, $8144, $00)
+    %AICMD0x22($18, $18, $01, $8144, $0C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CB24)
+    %AICMD0x1A($0098, $00A8, $8150, $00)
+    %AICMD0x22($18, $18, $01, $8150, $0C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CB39)
+
 pScripting_B4CB3F:
     dw DATA8_B4CB5F                                            ;B4CB3F|        |B4CB5F;
     dw pScripting_B4CD56                                       ;B4CB41|        |B4CD56;
@@ -2353,49 +5705,145 @@ pScripting_B4CB3F:
     dw pScripting_B4CD56                                       ;B4CB5D|        |B4CD56;
  
 DATA8_B4CB5F:
-    db $00,$10,$B4,$02,$03,$06,$05,$80,$00,$C8,$00,$07         ;B4CB5F|        |      ;
-    db $01,$08,$09,$01,$39,$CC,$09,$02,$73,$CC,$09,$03         ;B4CB6B|        |      ;
-    db $A7,$CC,$09,$04,$DD,$CC,$09,$05,$12,$CD,$09,$06         ;B4CB77|        |      ;
-    db $41,$CD,$09,$07,$1F,$CC,$09,$08,$2B,$CC,$3B,$14         ;B4CB83|        |      ;
-    db $06,$28,$38,$13,$1E,$00,$3A,$01,$10,$00,$13,$0A         ;B4CB8F|        |      ;
-    db $00,$3A,$03,$33,$00,$07,$00,$13,$1E,$00,$3F,$13         ;B4CB9B|        |      ;
-    db $3C,$00,$39,$01,$10,$00,$3A,$02,$2F,$00,$39,$01         ;B4CBA7|        |      ;
-    db $18,$00,$13,$1E,$00,$3E,$14,$0B,$02,$13,$1E,$00         ;B4CBB3|        |      ;
-    db $39,$01,$10,$00,$13,$14,$00,$07,$03,$13,$14,$00         ;B4CBBF|        |      ;
-    db $3A,$03,$15,$00,$3F,$13,$1E,$00,$0B,$00,$0C,$01         ;B4CBCB|        |      ;
-    db $19,$42,$00,$00,$13,$28,$00,$19,$26,$00,$00,$13         ;B4CBD7|        |      ;
-    db $3C,$00,$3A,$03,$40,$00,$0B,$03,$07,$02,$13,$3C         ;B4CBE3|        |      ;
-    db $00,$19,$26,$00,$00,$13,$3C,$00,$3E,$25,$13,$1E         ;B4CBEF|        |      ;
-    db $00,$3A,$02,$40,$00,$13,$3C,$00,$3A,$00,$40,$00         ;B4CBFB|        |      ;
-    db $13,$3C,$00,$3A,$01,$40,$00,$13,$3C,$00,$3A,$02         ;B4CC07|        |      ;
-    db $28,$00,$13,$14,$00,$3A,$00,$18,$00,$3D,$3D,$10         ;B4CC13|        |      ;
-    db $1A,$78,$00,$88,$00,$5C,$81,$00,$0C,$02,$37,$10         ;B4CC1F|        |      ;
-    db $1A,$48,$00,$60,$00,$5C,$81,$00,$13,$01,$00,$12         ;B4CC2B|        |      ;
-    db $33,$CC,$1A,$C0,$00,$48,$00,$3C,$89,$00,$0C,$00         ;B4CC37|        |      ;
-    db $1B,$14,$02,$00,$0D,$FF,$00,$20,$01,$0D,$00,$01         ;B4CC43|        |      ;
-    db $3A,$01,$0D,$FF,$00,$42,$01,$1B,$12,$02,$00,$0B         ;B4CC4F|        |      ;
-    db $01,$0C,$03,$0D,$FF,$00,$28,$01,$2F,$44,$81,$22         ;B4CC5B|        |      ;
-    db $10,$10,$01,$44,$81,$04,$13,$01,$00,$12,$6D,$CC         ;B4CC67|        |      ;
-    db $1A,$C8,$00,$78,$00,$44,$81,$03,$0C,$00,$1B,$14         ;B4CC73|        |      ;
-    db $02,$00,$0D,$FF,$00,$20,$01,$0D,$FF,$01,$14,$01         ;B4CC7F|        |      ;
-    db $0D,$FF,$00,$38,$01,$0C,$03,$13,$3C,$00,$0D,$FF         ;B4CC8B|        |      ;
-    db $00,$28,$01,$22,$10,$08,$01,$44,$81,$04,$13,$01         ;B4CC97|        |      ;
-    db $00,$12,$A1,$CC,$1A,$38,$00,$50,$00,$44,$81,$02         ;B4CCA3|        |      ;
-    db $0C,$00,$1B,$12,$02,$01,$0D,$00,$01,$18,$01,$13         ;B4CCAF|        |      ;
-    db $0A,$00,$0D,$01,$01,$08,$01,$13,$B4,$00,$0C,$03         ;B4CCBB|        |      ;
-    db $1B,$14,$02,$00,$0D,$FF,$00,$18,$01,$22,$08,$08         ;B4CCC7|        |      ;
-    db $01,$44,$81,$04,$13,$01,$00,$12,$D7,$CC,$1A,$98         ;B4CCD3|        |      ;
-    db $00,$A8,$00,$44,$81,$00,$0C,$00,$1B,$12,$02,$00         ;B4CCDF|        |      ;
-    db $0D,$FF,$00,$3C,$01,$1B,$13,$02,$00,$0D,$FF,$FF         ;B4CCEB|        |      ;
-    db $10,$01,$0C,$03,$0D,$00,$FF,$08,$01,$0D,$FF,$00         ;B4CCF7|        |      ;
-    db $20,$01,$22,$08,$08,$01,$44,$81,$04,$13,$01,$00         ;B4CD03|        |      ;
-    db $12,$0C,$CD,$1A,$88,$00,$78,$00,$44,$81,$01,$0C         ;B4CD0F|        |      ;
-    db $00,$1B,$12,$02,$00,$0D,$FF,$00,$30,$01,$13,$1E         ;B4CD1B|        |      ;
-    db $00,$0D,$00,$01,$08,$01,$0C,$03,$0D,$FF,$00,$20         ;B4CD27|        |      ;
-    db $01,$22,$10,$08,$01,$44,$81,$04,$13,$01,$00,$12         ;B4CD33|        |      ;
-    db $3B,$CD,$1A,$B8,$00,$68,$00,$50,$81,$00,$22,$18         ;B4CD3F|        |      ;
-    db $18,$01,$50,$81,$0C,$13,$01,$00,$12,$50,$CD             ;B4CD4B|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0080, $00C8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $CC39)
+    %AICMD0x09($02, $CC73)
+    %AICMD0x09($03, $CCA7)
+    %AICMD0x09($04, $CCDD)
+    %AICMD0x09($05, $CD12)
+    %AICMD0x09($06, $CD41)
+    %AICMD0x09($07, $CC1F)
+    %AICMD0x09($08, $CC2B)
+    %AICMD0x3B($14)
+    %AICMD0x06_SetDestination($28)
+    %AICMD0x38()
+    %AICMD0x13($001E)
+    %AICMD0x3A($01, $0010)
+    %AICMD0x13($000A)
+    %AICMD0x3A($03, $0033)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x3F()
+    %AICMD0x13($003C)
+    %AICMD0x39($01, $0010)
+    %AICMD0x3A($02, $002F)
+    %AICMD0x39($01, $0018)
+    %AICMD0x13($001E)
+    %AICMD0x3E($14)
+    %AICMD0x0B($02)
+    %AICMD0x13($001E)
+    %AICMD0x39($01, $0010)
+    %AICMD0x13($0014)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($0014)
+    %AICMD0x3A($03, $0015)
+    %AICMD0x3F()
+    %AICMD0x13($001E)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x19($0042, $00)
+    %AICMD0x13($0028)
+    %AICMD0x19($0026, $00)
+    %AICMD0x13($003C)
+    %AICMD0x3A($03, $0040)
+    %AICMD0x0B($03)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($003C)
+    %AICMD0x19($0026, $00)
+    %AICMD0x13($003C)
+    %AICMD0x3E($25)
+    %AICMD0x13($001E)
+    %AICMD0x3A($02, $0040)
+    %AICMD0x13($003C)
+    %AICMD0x3A($00, $0040)
+    %AICMD0x13($003C)
+    %AICMD0x3A($01, $0040)
+    %AICMD0x13($003C)
+    %AICMD0x3A($02, $0028)
+    %AICMD0x13($0014)
+    %AICMD0x3A($00, $0018)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0088, $815C, $00)
+    %AICMD0x0C($02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0048, $0060, $815C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CC33)
+    %AICMD0x1A($00C0, $0048, $893C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0214, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x0D($00, $01, $3A, $01)
+    %AICMD0x0D($FF, $00, $42, $01)
+    %AICMD0x1B($0212, $00)
+    %AICMD0x0B($01)
+    %AICMD0x0C($03)
+    %AICMD0x0D($FF, $00, $28, $01)
+    %AICMD0x2F($8144)
+    %AICMD0x22($10, $10, $01, $8144, $04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CC6D)
+    %AICMD0x1A($00C8, $0078, $8144, $03)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0214, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x0D($FF, $01, $14, $01)
+    %AICMD0x0D($FF, $00, $38, $01)
+    %AICMD0x0C($03)
+    %AICMD0x13($003C)
+    %AICMD0x0D($FF, $00, $28, $01)
+    %AICMD0x22($10, $08, $01, $8144, $04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CCA1)
+    %AICMD0x1A($0038, $0050, $8144, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0212, $01)
+    %AICMD0x0D($00, $01, $18, $01)
+    %AICMD0x13($000A)
+    %AICMD0x0D($01, $01, $08, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x0C($03)
+    %AICMD0x1B($0214, $00)
+    %AICMD0x0D($FF, $00, $18, $01)
+    %AICMD0x22($08, $08, $01, $8144, $04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CCD7)
+    %AICMD0x1A($0098, $00A8, $8144, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0212, $00)
+    %AICMD0x0D($FF, $00, $3C, $01)
+    %AICMD0x1B($0213, $00)
+    %AICMD0x0D($FF, $FF, $10, $01)
+    %AICMD0x0C($03)
+    %AICMD0x0D($00, $FF, $08, $01)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x22($08, $08, $01, $8144, $04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CD0C)
+    %AICMD0x1A($0088, $0078, $8144, $01)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0212, $00)
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x13($001E)
+    %AICMD0x0D($00, $01, $08, $01)
+    %AICMD0x0C($03)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x22($10, $08, $01, $8144, $04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CD3B)
+    %AICMD0x1A($00B8, $0068, $8150, $00)
+    %AICMD0x22($18, $18, $01, $8150, $0C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CD50)
+
 pScripting_B4CD56:
     dw DATA8_B4CD76                                            ;B4CD56|        |B4CD76;
     dw pScripting_B4CECA                                       ;B4CD58|        |B4CECA;
@@ -2415,36 +5863,103 @@ pScripting_B4CD56:
     dw pScripting_B4CECA                                       ;B4CD74|        |B4CECA;
  
 DATA8_B4CD76:
-    db $00,$10,$B4,$02,$03,$06,$05,$E8,$FF,$78,$00,$07         ;B4CD76|        |      ;
-    db $02,$40,$08,$09,$01,$EF,$CD,$09,$02,$35,$CE,$09         ;B4CD82|        |      ;
-    db $03,$6C,$CE,$09,$04,$88,$CE,$06,$43,$38,$13,$78         ;B4CD8E|        |      ;
-    db $00,$39,$02,$90,$00,$07,$01,$13,$3C,$00,$19,$79         ;B4CD9A|        |      ;
-    db $00,$00,$13,$64,$00,$3E,$17,$13,$3C,$00,$39,$03         ;B4CDA6|        |      ;
-    db $80,$00,$3F,$0B,$00,$0C,$01,$13,$B4,$00,$39,$02         ;B4CDB2|        |      ;
-    db $80,$00,$13,$3C,$00,$19,$40,$00,$00,$13,$78,$00         ;B4CDBE|        |      ;
-    db $07,$00,$19,$4C,$00,$00,$13,$0A,$00,$19,$E8,$00         ;B4CDCA|        |      ;
-    db $00,$09,$05,$E1,$CD,$13,$2C,$01,$3D,$3D,$10,$1A         ;B4CDD6|        |      ;
-    db $78,$00,$7D,$00,$80,$8A,$00,$13,$01,$00,$12,$E9         ;B4CDE2|        |      ;
-    db $CD,$1A,$A8,$00,$88,$00,$14,$81,$02,$0C,$00,$1B         ;B4CDEE|        |      ;
-    db $EC,$01,$00,$0D,$FF,$00,$48,$01,$13,$3C,$00,$1B         ;B4CDFA|        |      ;
-    db $F2,$01,$00,$13,$78,$00,$1B,$F1,$01,$00,$13,$64         ;B4CE06|        |      ;
-    db $00,$1B,$E8,$01,$00,$13,$3C,$00,$1B,$F6,$01,$00         ;B4CE12|        |      ;
-    db $13,$5A,$00,$1B,$F3,$01,$00,$13,$B4,$00,$1B,$F4         ;B4CE1E|        |      ;
-    db $01,$00,$13,$68,$01,$13,$01,$00,$12,$2F,$CE,$1A         ;B4CE2A|        |      ;
-    db $78,$00,$6A,$00,$FC,$80,$02,$13,$78,$00,$1B,$94         ;B4CE36|        |      ;
-    db $01,$01,$13,$78,$00,$1B,$93,$01,$01,$13,$A0,$00         ;B4CE42|        |      ;
-    db $1B,$8C,$01,$01,$13,$78,$00,$1B,$8D,$01,$01,$0B         ;B4CE4E|        |      ;
-    db $01,$1B,$92,$01,$01,$13,$78,$00,$1B,$95,$01,$01         ;B4CE5A|        |      ;
-    db $13,$01,$00,$12,$5B,$CE,$1A,$98,$00,$98,$00,$C0         ;B4CE66|        |      ;
-    db $86,$03,$13,$78,$00,$1B,$BD,$01,$00,$13,$78,$00         ;B4CE72|        |      ;
-    db $1B,$BE,$01,$00,$13,$78,$00,$12,$77,$CE,$1A,$3A         ;B4CE7E|        |      ;
-    db $00,$68,$00,$EC,$84,$00,$0D,$01,$00,$08,$01,$0D         ;B4CE8A|        |      ;
-    db $00,$FF,$06,$01,$0D,$FF,$00,$08,$02,$0D,$FF,$01         ;B4CE96|        |      ;
-    db $04,$01,$0D,$01,$00,$0C,$02,$0D,$FF,$00,$06,$01         ;B4CEA2|        |      ;
-    db $0D,$00,$FF,$10,$02,$0D,$FF,$01,$04,$01,$0D,$01         ;B4CEAE|        |      ;
-    db $01,$0C,$02,$0D,$01,$00,$08,$02,$0D,$00,$FF,$06         ;B4CEBA|        |      ;
-    db $01,$12,$90,$CE                                         ;B4CEC6|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($FFE8, $0078)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $CDEF)
+    %AICMD0x09($02, $CE35)
+    %AICMD0x09($03, $CE6C)
+    %AICMD0x09($04, $CE88)
+    %AICMD0x06_SetDestination($43)
+    %AICMD0x38()
+    %AICMD0x13($0078)
+    %AICMD0x39($02, $0090)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($003C)
+    %AICMD0x19($0079, $00)
+    %AICMD0x13($0064)
+    %AICMD0x3E($17)
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $0080)
+    %AICMD0x3F()
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x13($00B4)
+    %AICMD0x39($02, $0080)
+    %AICMD0x13($003C)
+    %AICMD0x19($0040, $00)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x19($004C, $00)
+    %AICMD0x13($000A)
+    %AICMD0x19($00E8, $00)
+    %AICMD0x09($05, $CDE1)
+    %AICMD0x13($012C)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $007D, $8A80, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CDE9)
+    %AICMD0x1A($00A8, $0088, $8114, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $48, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01F2, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01F1, $00)
+    %AICMD0x13($0064)
+    %AICMD0x1B($01E8, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01F6, $00)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01F3, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01F4, $00)
+    %AICMD0x13($0168)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CE2F)
+    %AICMD0x1A($0078, $006A, $80FC, $02)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0194, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0193, $01)
+    %AICMD0x13($00A0)
+    %AICMD0x1B($018C, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($018D, $01)
+    %AICMD0x0B($01)
+    %AICMD0x1B($0192, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0195, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($CE5B)
+    %AICMD0x1A($0098, $0098, $86C0, $03)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01BD, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01BE, $00)
+    %AICMD0x13($0078)
+    %AICMD0x12_Jump($CE77)
+    %AICMD0x1A($003A, $0068, $84EC, $00)
+    %AICMD0x0D($01, $00, $08, $01)
+    %AICMD0x0D($00, $FF, $06, $01)
+    %AICMD0x0D($FF, $00, $08, $02)
+    %AICMD0x0D($FF, $01, $04, $01)
+    %AICMD0x0D($01, $00, $0C, $02)
+    %AICMD0x0D($FF, $00, $06, $01)
+    %AICMD0x0D($00, $FF, $10, $02)
+    %AICMD0x0D($FF, $01, $04, $01)
+    %AICMD0x0D($01, $01, $0C, $02)
+    %AICMD0x0D($01, $00, $08, $02)
+    %AICMD0x0D($00, $FF, $06, $01)
+    %AICMD0x12_Jump($CE90)
+
 pScripting_B4CECA:
     dw DATA8_B4CEEA                                            ;B4CECA|        |B4CEEA;
     dw pScripting_B4D011                                       ;B4CECC|        |B4D011;
@@ -2464,32 +5979,105 @@ pScripting_B4CECA:
     dw pScripting_B4D011                                       ;B4CEE8|        |B4D011;
  
 DATA8_B4CEEA:
-    db $47,$21,$09,$80,$10,$47,$26,$09,$80,$05,$00,$10         ;B4CEEA|        |      ;
-    db $B4,$02,$03,$06,$05,$E8,$00,$F8,$FF,$07,$03,$08         ;B4CEF6|        |      ;
-    db $09,$01,$B1,$CF,$06,$44,$38,$13,$3C,$00,$39,$00         ;B4CF02|        |      ;
-    db $70,$00,$13,$1E,$00,$3A,$03,$40,$00,$13,$1E,$00         ;B4CF0E|        |      ;
-    db $3A,$00,$18,$00,$07,$02,$3E,$10,$13,$1E,$00,$3A         ;B4CF1A|        |      ;
-    db $01,$18,$00,$13,$28,$00,$3A,$02,$58,$00,$3F,$13         ;B4CF26|        |      ;
-    db $5A,$00,$07,$03,$3A,$03,$58,$00,$13,$1E,$00,$3A         ;B4CF32|        |      ;
-    db $00,$10,$00,$07,$02,$3E,$10,$13,$1E,$00,$3A,$01         ;B4CF3E|        |      ;
-    db $10,$00,$13,$1E,$00,$3A,$02,$58,$00,$3F,$13,$5A         ;B4CF4A|        |      ;
-    db $00,$07,$03,$3A,$03,$58,$00,$13,$1E,$00,$39,$00         ;B4CF56|        |      ;
-    db $0F,$00,$13,$1E,$00,$07,$03,$56,$13,$50,$00,$39         ;B4CF62|        |      ;
-    db $00,$0F,$00,$07,$03,$56,$13,$50,$00,$39,$00,$0F         ;B4CF6E|        |      ;
-    db $00,$07,$03,$56,$13,$50,$00,$39,$00,$0F,$00,$07         ;B4CF7A|        |      ;
-    db $03,$56,$13,$50,$00,$39,$00,$0F,$00,$07,$03,$56         ;B4CF86|        |      ;
-    db $13,$50,$00,$39,$00,$0F,$00,$07,$03,$56,$13,$50         ;B4CF92|        |      ;
-    db $00,$3A,$01,$30,$00,$13,$1E,$00,$3A,$03,$40,$00         ;B4CF9E|        |      ;
-    db $0B,$00,$0C,$01,$3D,$3D,$10,$1A,$98,$00,$98,$00         ;B4CFAA|        |      ;
-    db $A8,$89,$03,$1B,$EA,$01,$00,$0C,$00,$13,$B4,$00         ;B4CFB6|        |      ;
-    db $1B,$E1,$01,$00,$0D,$00,$FF,$20,$01,$1B,$EE,$01         ;B4CFC2|        |      ;
-    db $01,$13,$78,$00,$1B,$DA,$01,$00,$0D,$00,$01,$20         ;B4CFCE|        |      ;
-    db $01,$1B,$EE,$01,$01,$13,$5A,$00,$1B,$F7,$01,$00         ;B4CFDA|        |      ;
-    db $13,$5A,$00,$1B,$E1,$01,$00,$0D,$00,$FF,$10,$01         ;B4CFE6|        |      ;
-    db $1B,$F7,$01,$00,$13,$5A,$00,$1B,$E1,$01,$00,$0D         ;B4CFF2|        |      ;
-    db $00,$FF,$10,$01,$1B,$F7,$01,$00,$13,$5A,$00,$0B         ;B4CFFE|        |      ;
-    db $01,$13,$01,$00,$12,$0B,$D0                             ;B4D00A|        |      ;
  
+    %AICMD0x47($800921, $10)
+    %AICMD0x47($800926, $05)
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($00E8, $FFF8)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x08()
+    %AICMD0x09($01, $CFB1)
+    %AICMD0x06_SetDestination($44)
+    %AICMD0x38()
+    %AICMD0x13($003C)
+    %AICMD0x39($00, $0070)
+    %AICMD0x13($001E)
+    %AICMD0x3A($03, $0040)
+    %AICMD0x13($001E)
+    %AICMD0x3A($00, $0018)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x3E($10)
+    %AICMD0x13($001E)
+    %AICMD0x3A($01, $0018)
+    %AICMD0x13($0028)
+    %AICMD0x3A($02, $0058)
+    %AICMD0x3F()
+    %AICMD0x13($005A)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x3A($03, $0058)
+    %AICMD0x13($001E)
+    %AICMD0x3A($00, $0010)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x3E($10)
+    %AICMD0x13($001E)
+    %AICMD0x3A($01, $0010)
+    %AICMD0x13($001E)
+    %AICMD0x3A($02, $0058)
+    %AICMD0x3F()
+    %AICMD0x13($005A)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x3A($03, $0058)
+    %AICMD0x13($001E)
+    %AICMD0x39($00, $000F)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($00, $000F)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($00, $000F)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($00, $000F)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($00, $000F)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($00, $000F)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x3A($01, $0030)
+    %AICMD0x13($001E)
+    %AICMD0x3A($03, $0040)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0098, $0098, $89A8, $03)
+    %AICMD0x1B($01EA, $00)
+    %AICMD0x0C($00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01E1, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x1B($01EE, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01DA, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x1B($01EE, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01F7, $00)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01E1, $00)
+    %AICMD0x0D($00, $FF, $10, $01)
+    %AICMD0x1B($01F7, $00)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01E1, $00)
+    %AICMD0x0D($00, $FF, $10, $01)
+    %AICMD0x1B($01F7, $00)
+    %AICMD0x13($005A)
+    %AICMD0x0B($01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D00B)
+
 pScripting_B4D011:
     dw DATA8_B4D031                                            ;B4D011|        |B4D031;
     dw pScripting_B4D160                                       ;B4D013|        |B4D160;
@@ -2509,33 +6097,105 @@ pScripting_B4D011:
     dw pScripting_B4D160                                       ;B4D02F|        |B4D160;
  
 DATA8_B4D031:
-    db $47,$21,$09,$80,$15,$00,$10,$B4,$02,$03,$06,$05         ;B4D031|        |      ;
-    db $08,$01,$78,$00,$07,$03,$08,$09,$01,$D4,$D0,$09         ;B4D03D|        |      ;
-    db $02,$27,$D1,$06,$45,$38,$13,$B4,$00,$3A,$03,$40         ;B4D049|        |      ;
-    db $00,$07,$00,$13,$1E,$00,$3E,$11,$13,$3C,$00,$07         ;B4D055|        |      ;
-    db $01,$13,$1E,$00,$39,$01,$20,$00,$3F,$0B,$00,$13         ;B4D061|        |      ;
-    db $3C,$00,$39,$00,$20,$00,$13,$1E,$00,$39,$03,$10         ;B4D06D|        |      ;
-    db $00,$07,$00,$13,$1E,$00,$3E,$11,$13,$3C,$00,$07         ;B4D079|        |      ;
-    db $01,$13,$1E,$00,$39,$01,$20,$00,$13,$1E,$00,$07         ;B4D085|        |      ;
-    db $01,$3F,$0B,$01,$13,$3C,$00,$3A,$00,$18,$00,$19         ;B4D091|        |      ;
-    db $A5,$00,$00,$13,$3C,$00,$3A,$02,$38,$00,$56,$13         ;B4D09D|        |      ;
-    db $78,$00,$3A,$03,$10,$00,$56,$13,$78,$00,$19,$4A         ;B4D0A9|        |      ;
-    db $00,$00,$13,$78,$00,$39,$03,$60,$00,$13,$1E,$00         ;B4D0B5|        |      ;
-    db $07,$00,$13,$3C,$00,$19,$30,$00,$00,$13,$3C,$00         ;B4D0C1|        |      ;
-    db $0B,$02,$0C,$03,$3D,$3D,$10,$1A,$A8,$00,$48,$00         ;B4D0CD|        |      ;
-    db $14,$81,$00,$1B,$DB,$01,$00,$13,$78,$00,$1B,$DA         ;B4D0D9|        |      ;
-    db $01,$00,$0D,$00,$01,$20,$01,$1B,$DC,$01,$00,$13         ;B4D0E5|        |      ;
-    db $78,$00,$1B,$DB,$01,$00,$13,$78,$00,$1B,$DC,$01         ;B4D0F1|        |      ;
-    db $01,$13,$3C,$00,$0C,$02,$1B,$DA,$01,$00,$0D,$00         ;B4D0FD|        |      ;
-    db $01,$10,$01,$1B,$E9,$01,$00,$13,$1E,$00,$0D,$FF         ;B4D109|        |      ;
-    db $00,$20,$01,$1B,$F2,$01,$00,$13,$78,$00,$0B,$03         ;B4D115|        |      ;
-    db $13,$01,$00,$12,$21,$D1,$1A,$80,$00,$48,$00,$2C         ;B4D121|        |      ;
-    db $81,$03,$0C,$00,$1B,$08,$02,$00,$13,$3C,$00,$1B         ;B4D12D|        |      ;
-    db $00,$02,$00,$0C,$01,$1B,$08,$02,$00,$13,$3C,$00         ;B4D139|        |      ;
-    db $1B,$00,$02,$00,$13,$78,$00,$1B,$03,$02,$00,$13         ;B4D145|        |      ;
-    db $78,$00,$1B,$05,$02,$00,$13,$B4,$00,$13,$01,$00         ;B4D151|        |      ;
-    db $12,$5A,$D1                                             ;B4D15D|        |      ;
  
+    %AICMD0x47($800921, $15)
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0108, $0078)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x08()
+    %AICMD0x09($01, $D0D4)
+    %AICMD0x09($02, $D127)
+    %AICMD0x06_SetDestination($45)
+    %AICMD0x38()
+    %AICMD0x13($00B4)
+    %AICMD0x3A($03, $0040)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x3E($11)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($001E)
+    %AICMD0x39($01, $0020)
+    %AICMD0x3F()
+    %AICMD0x0B($00)
+    %AICMD0x13($003C)
+    %AICMD0x39($00, $0020)
+    %AICMD0x13($001E)
+    %AICMD0x39($03, $0010)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x3E($11)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($001E)
+    %AICMD0x39($01, $0020)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x3F()
+    %AICMD0x0B($01)
+    %AICMD0x13($003C)
+    %AICMD0x3A($00, $0018)
+    %AICMD0x19($00A5, $00)
+    %AICMD0x13($003C)
+    %AICMD0x3A($02, $0038)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0078)
+    %AICMD0x3A($03, $0010)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0078)
+    %AICMD0x19($004A, $00)
+    %AICMD0x13($0078)
+    %AICMD0x39($03, $0060)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($003C)
+    %AICMD0x19($0030, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0048, $8114, $00)
+    %AICMD0x1B($01DB, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01DA, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x1B($01DC, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01DB, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01DC, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0C($02)
+    %AICMD0x1B($01DA, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($01E9, $00)
+    %AICMD0x13($001E)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x1B($01F2, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D121)
+    %AICMD0x1A($0080, $0048, $812C, $03)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0208, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0200, $00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($0208, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0200, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0203, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0205, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D15A)
+
 pScripting_B4D160:
     dw DATA8_B4D180                                            ;B4D160|        |B4D180;
     dw pScripting_B4D2CC                                       ;B4D162|        |B4D2CC;
@@ -2555,35 +6215,112 @@ pScripting_B4D160:
     dw pScripting_B4D2CC                                       ;B4D17E|        |B4D2CC;
  
 DATA8_B4D180:
-    db $00,$10,$B4,$02,$03,$06,$05,$B8,$00,$68,$00,$07         ;B4D180|        |      ;
-    db $00,$08,$09,$01,$16,$D2,$09,$02,$83,$D2,$09,$04         ;B4D18C|        |      ;
-    db $D4,$D1,$09,$05,$E9,$D1,$09,$06,$FE,$D1,$3B,$12         ;B4D198|        |      ;
-    db $06,$46,$38,$13,$3C,$00,$39,$03,$C0,$00,$13,$78         ;B4D1A4|        |      ;
-    db $00,$3F,$13,$1E,$00,$07,$02,$13,$1E,$00,$3A,$02         ;B4D1B0|        |      ;
-    db $6A,$00,$07,$00,$3E,$12,$13,$1E,$00,$3A,$03,$6C         ;B4D1BC|        |      ;
-    db $00,$0B,$00,$3F,$13,$2C,$01,$0C,$05,$3D,$3D,$10         ;B4D1C8|        |      ;
-    db $1A,$B8,$00,$78,$00,$8C,$8A,$00,$0C,$00,$1B,$B7         ;B4D1D4|        |      ;
-    db $00,$00,$13,$3C,$00,$37,$0B,$01,$10,$1A,$98,$00         ;B4D1E0|        |      ;
-    db $78,$00,$8C,$8A,$00,$0C,$01,$1B,$B7,$00,$00,$13         ;B4D1EC|        |      ;
-    db $3C,$00,$37,$0B,$02,$10,$1A,$88,$00,$78,$00,$8C         ;B4D1F8|        |      ;
-    db $8A,$00,$0C,$02,$13,$3C,$00,$1B,$B7,$00,$00,$13         ;B4D204|        |      ;
-    db $3C,$00,$37,$0B,$03,$10,$1A,$78,$00,$78,$00,$60         ;B4D210|        |      ;
-    db $89,$02,$13,$C8,$00,$1B,$F6,$01,$01,$13,$78,$00         ;B4D21C|        |      ;
-    db $1B,$EB,$01,$01,$13,$B4,$00,$1B,$EA,$01,$01,$13         ;B4D228|        |      ;
-    db $B4,$00,$0C,$03,$1B,$E8,$01,$01,$13,$3C,$00,$0C         ;B4D234|        |      ;
-    db $03,$1B,$F2,$01,$01,$13,$78,$00,$0B,$04,$13,$78         ;B4D240|        |      ;
-    db $00,$1B,$EC,$01,$01,$0D,$01,$00,$30,$01,$13,$28         ;B4D24C|        |      ;
-    db $00,$1B,$E2,$01,$00,$0D,$00,$FF,$10,$01,$13,$28         ;B4D258|        |      ;
-    db $00,$1B,$EC,$01,$01,$0D,$01,$00,$48,$01,$13,$28         ;B4D264|        |      ;
-    db $00,$1B,$EC,$01,$00,$0D,$FF,$00,$58,$01,$13,$5A         ;B4D270|        |      ;
-    db $00,$13,$01,$00,$12,$7D,$D2,$0C,$04,$1A,$88,$00         ;B4D27C|        |      ;
-    db $78,$00,$04,$85,$00,$1B,$21,$03,$00,$13,$3C,$00         ;B4D288|        |      ;
-    db $1B,$24,$03,$01,$0D,$01,$00,$20,$01,$13,$1E,$00         ;B4D294|        |      ;
-    db $1B,$23,$03,$00,$0D,$00,$FF,$20,$01,$13,$1E,$00         ;B4D2A0|        |      ;
-    db $1B,$24,$03,$01,$0D,$01,$00,$50,$01,$13,$1E,$00         ;B4D2AC|        |      ;
-    db $1B,$24,$03,$00,$0D,$FF,$00,$80,$01,$1B,$25,$03         ;B4D2B8|        |      ;
-    db $00,$13,$3C,$00,$0B,$05,$37,$10                         ;B4D2C4|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($00B8, $0068)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $D216)
+    %AICMD0x09($02, $D283)
+    %AICMD0x09($04, $D1D4)
+    %AICMD0x09($05, $D1E9)
+    %AICMD0x09($06, $D1FE)
+    %AICMD0x3B($12)
+    %AICMD0x06_SetDestination($46)
+    %AICMD0x38()
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $00C0)
+    %AICMD0x13($0078)
+    %AICMD0x3F()
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($001E)
+    %AICMD0x3A($02, $006A)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x3E($12)
+    %AICMD0x13($001E)
+    %AICMD0x3A($03, $006C)
+    %AICMD0x0B($00)
+    %AICMD0x3F()
+    %AICMD0x13($012C)
+    %AICMD0x0C($05)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($00B8, $0078, $8A8C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($00B7, $00)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x0B($01)
+    %AICMD0x10_End()
+    %AICMD0x1A($0098, $0078, $8A8C, $00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($00B7, $00)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x0B($02)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $0078, $8A8C, $00)
+    %AICMD0x0C($02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($00B7, $00)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x0B($03)
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0078, $8960, $02)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($01F6, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EB, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EA, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x0C($03)
+    %AICMD0x1B($01E8, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0C($03)
+    %AICMD0x1B($01F2, $01)
+    %AICMD0x13($0078)
+    %AICMD0x0B($04)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x13($0028)
+    %AICMD0x1B($01E2, $00)
+    %AICMD0x0D($00, $FF, $10, $01)
+    %AICMD0x13($0028)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $48, $01)
+    %AICMD0x13($0028)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $58, $01)
+    %AICMD0x13($005A)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D27D)
+    %AICMD0x0C($04)
+    %AICMD0x1A($0088, $0078, $8504, $00)
+    %AICMD0x1B($0321, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0324, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0323, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0324, $01)
+    %AICMD0x0D($01, $00, $50, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0324, $00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x1B($0325, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($05)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B4D2CC:
     dw DATA8_B4D2EC                                            ;B4D2CC|        |B4D2EC;
     dw pScripting_B4D447                                       ;B4D2CE|        |B4D447;
@@ -2603,36 +6340,116 @@ pScripting_B4D2CC:
     dw pScripting_B4D447                                       ;B4D2EA|        |B4D447;
  
 DATA8_B4D2EC:
-    db $47,$21,$09,$80,$10,$47,$26,$09,$80,$05,$00,$10         ;B4D2EC|        |      ;
-    db $B4,$02,$03,$06,$05,$58,$00,$68,$00,$07,$00,$08         ;B4D2F8|        |      ;
-    db $09,$01,$84,$D3,$09,$02,$A1,$D3,$09,$03,$E6,$D3         ;B4D304|        |      ;
-    db $06,$47,$38,$13,$1E,$00,$3A,$02,$28,$00,$07,$00         ;B4D310|        |      ;
-    db $56,$13,$50,$00,$39,$03,$10,$00,$07,$00,$13,$1E         ;B4D31C|        |      ;
-    db $00,$56,$13,$50,$00,$39,$03,$10,$00,$07,$00,$13         ;B4D328|        |      ;
-    db $1E,$00,$56,$13,$50,$00,$0B,$00,$13,$3C,$00,$07         ;B4D334|        |      ;
-    db $03,$0C,$02,$39,$03,$40,$00,$13,$3C,$00,$3A,$02         ;B4D340|        |      ;
-    db $28,$00,$07,$00,$13,$1E,$00,$3E,$13,$13,$1E,$00         ;B4D34C|        |      ;
-    db $3A,$03,$30,$00,$13,$14,$00,$3F,$13,$0A,$00,$09         ;B4D358|        |      ;
-    db $04,$2D,$D4,$0B,$04,$13,$3C,$00,$19,$0F,$00,$00         ;B4D364|        |      ;
-    db $13,$28,$00,$19,$23,$00,$00,$13,$28,$00,$19,$0F         ;B4D370|        |      ;
-    db $00,$00,$13,$28,$00,$3D,$3D,$10,$1A,$78,$00,$58         ;B4D37C|        |      ;
-    db $00,$14,$81,$02,$0C,$00,$1B,$F2,$01,$00,$13,$78         ;B4D388|        |      ;
-    db $00,$0B,$01,$1B,$EA,$01,$00,$13,$01,$00,$12,$9B         ;B4D394|        |      ;
-    db $D3,$1A,$E8,$FF,$68,$00,$C8,$84,$00,$0C,$01,$1B         ;B4D3A0|        |      ;
-    db $0E,$03,$01,$0D,$01,$00,$BC,$02,$1B,$0D,$03,$01         ;B4D3AC|        |      ;
-    db $0C,$04,$13,$1E,$00,$1B,$0E,$03,$00,$0D,$FF,$00         ;B4D3B8|        |      ;
-    db $60,$02,$1B,$0D,$03,$01,$13,$1E,$00,$1B,$09,$03         ;B4D3C4|        |      ;
-    db $00,$13,$5A,$00,$1B,$11,$03,$00,$13,$78,$00,$1B         ;B4D3D0|        |      ;
-    db $0E,$03,$00,$0D,$FF,$00,$60,$02,$37,$10,$1A,$F8         ;B4D3DC|        |      ;
-    db $FF,$68,$00,$C8,$84,$00,$0C,$01,$1B,$0E,$03,$01         ;B4D3E8|        |      ;
-    db $0D,$01,$00,$C0,$02,$1B,$0F,$03,$01,$0B,$02,$0C         ;B4D3F4|        |      ;
-    db $04,$13,$1E,$00,$1B,$0E,$03,$00,$0D,$FF,$00,$60         ;B4D400|        |      ;
-    db $02,$1B,$0D,$03,$00,$13,$1E,$00,$1B,$0D,$03,$01         ;B4D40C|        |      ;
-    db $13,$5A,$00,$1B,$11,$03,$00,$13,$78,$00,$1B,$0E         ;B4D418|        |      ;
-    db $03,$00,$0D,$FF,$00,$60,$02,$37,$10,$1A,$4E,$00         ;B4D424|        |      ;
-    db $64,$00,$98,$8A,$00,$13,$1E,$00,$0D,$FF,$00,$60         ;B4D430|        |      ;
-    db $02,$13,$F0,$00,$0D,$FF,$00,$60,$02,$37,$10             ;B4D43C|        |      ;
  
+    %AICMD0x47($800921, $10)
+    %AICMD0x47($800926, $05)
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0058, $0068)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $D384)
+    %AICMD0x09($02, $D3A1)
+    %AICMD0x09($03, $D3E6)
+    %AICMD0x06_SetDestination($47)
+    %AICMD0x38()
+    %AICMD0x13($001E)
+    %AICMD0x3A($02, $0028)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($03, $0010)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x39($03, $0010)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($0050)
+    %AICMD0x0B($00)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0C($02)
+    %AICMD0x39($03, $0040)
+    %AICMD0x13($003C)
+    %AICMD0x3A($02, $0028)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x3E($13)
+    %AICMD0x13($001E)
+    %AICMD0x3A($03, $0030)
+    %AICMD0x13($0014)
+    %AICMD0x3F()
+    %AICMD0x13($000A)
+    %AICMD0x09($04, $D42D)
+    %AICMD0x0B($04)
+    %AICMD0x13($003C)
+    %AICMD0x19($000F, $00)
+    %AICMD0x13($0028)
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($0028)
+    %AICMD0x19($000F, $00)
+    %AICMD0x13($0028)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0058, $8114, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($01F2, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($01)
+    %AICMD0x1B($01EA, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D39B)
+    %AICMD0x1A($FFE8, $0068, $84C8, $00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($030E, $01)
+    %AICMD0x0D($01, $00, $BC, $02)
+    %AICMD0x1B($030D, $01)
+    %AICMD0x0C($04)
+    %AICMD0x13($001E)
+    %AICMD0x1B($030E, $00)
+    %AICMD0x0D($FF, $00, $60, $02)
+    %AICMD0x1B($030D, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0309, $00)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0311, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($030E, $00)
+    %AICMD0x0D($FF, $00, $60, $02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($FFF8, $0068, $84C8, $00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($030E, $01)
+    %AICMD0x0D($01, $00, $C0, $02)
+    %AICMD0x1B($030F, $01)
+    %AICMD0x0B($02)
+    %AICMD0x0C($04)
+    %AICMD0x13($001E)
+    %AICMD0x1B($030E, $00)
+    %AICMD0x0D($FF, $00, $60, $02)
+    %AICMD0x1B($030D, $00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($030D, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0311, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($030E, $00)
+    %AICMD0x0D($FF, $00, $60, $02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($004E, $0064, $8A98, $00)
+    %AICMD0x13($001E)
+    %AICMD0x0D($FF, $00, $60, $02)
+    %AICMD0x13($00F0)
+    %AICMD0x0D($FF, $00, $60, $02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B4D447:
     dw DATA8_B4D467                                            ;B4D447|        |B4D467;
     dw pScripting_B4D531                                       ;B4D449|        |B4D531;
@@ -2652,24 +6469,69 @@ pScripting_B4D447:
     dw pScripting_B4D531                                       ;B4D465|        |B4D531;
  
 DATA8_B4D467:
-    db $00,$10,$B4,$02,$03,$06,$05,$E8,$FF,$78,$00,$07         ;B4D467|        |      ;
-    db $02,$40,$08,$09,$01,$A6,$D4,$09,$02,$03,$D5,$06         ;B4D473|        |      ;
-    db $43,$38,$0C,$00,$3A,$02,$28,$00,$13,$1E,$00,$19         ;B4D47F|        |      ;
-    db $BE,$00,$00,$0B,$01,$13,$5A,$00,$0C,$02,$13,$1E         ;B4D48B|        |      ;
-    db $00,$39,$02,$0C,$00,$19,$41,$00,$00,$13,$0A,$00         ;B4D497|        |      ;
-    db $3D,$3D,$10,$1A,$78,$00,$78,$00,$14,$81,$03,$1B         ;B4D4A3|        |      ;
-    db $E7,$01,$00,$13,$78,$00,$1B,$F3,$01,$00,$13,$78         ;B4D4AF|        |      ;
-    db $00,$1B,$F6,$01,$00,$13,$78,$00,$1B,$EC,$01,$01         ;B4D4BB|        |      ;
-    db $0D,$01,$00,$30,$01,$1B,$EE,$01,$01,$13,$78,$00         ;B4D4C7|        |      ;
-    db $1B,$EC,$01,$00,$0D,$FF,$00,$30,$01,$1B,$EA,$01         ;B4D4D3|        |      ;
-    db $00,$13,$1E,$00,$0B,$00,$0C,$01,$1B,$F8,$01,$00         ;B4D4DF|        |      ;
-    db $13,$3C,$00,$0B,$02,$1B,$EC,$01,$00,$0D,$FF,$00         ;B4D4EB|        |      ;
-    db $2A,$01,$1B,$ED,$01,$00,$13,$01,$00,$12,$FD,$D4         ;B4D4F7|        |      ;
-    db $1A,$68,$00,$68,$00,$2C,$81,$02,$1B,$03,$02,$01         ;B4D503|        |      ;
-    db $13,$50,$00,$1B,$00,$02,$01,$13,$B4,$00,$1B,$04         ;B4D50F|        |      ;
-    db $02,$01,$13,$3C,$00,$1B,$05,$02,$01,$13,$5A,$00         ;B4D51B|        |      ;
-    db $1B,$00,$02,$01,$13,$78,$00,$12,$0B,$D5                 ;B4D527|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($FFE8, $0078)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $D4A6)
+    %AICMD0x09($02, $D503)
+    %AICMD0x06_SetDestination($43)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x3A($02, $0028)
+    %AICMD0x13($001E)
+    %AICMD0x19($00BE, $00)
+    %AICMD0x0B($01)
+    %AICMD0x13($005A)
+    %AICMD0x0C($02)
+    %AICMD0x13($001E)
+    %AICMD0x39($02, $000C)
+    %AICMD0x19($0041, $00)
+    %AICMD0x13($000A)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0078, $8114, $03)
+    %AICMD0x1B($01E7, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01F3, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01F6, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($01EE, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x1B($01EA, $00)
+    %AICMD0x13($001E)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($01F8, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($02)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $2A, $01)
+    %AICMD0x1B($01ED, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D4FD)
+    %AICMD0x1A($0068, $0068, $812C, $02)
+    %AICMD0x1B($0203, $01)
+    %AICMD0x13($0050)
+    %AICMD0x1B($0200, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0204, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0205, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0200, $01)
+    %AICMD0x13($0078)
+    %AICMD0x12_Jump($D50B)
+
 pScripting_B4D531:
     dw DATA8_B4D551                                            ;B4D531|        |B4D551;
     dw pScripting_B4D772                                       ;B4D533|        |B4D772;
@@ -2689,53 +6551,160 @@ pScripting_B4D531:
     dw pScripting_B4D772                                       ;B4D54F|        |B4D772;
  
 DATA8_B4D551:
-    db $00,$10,$B4,$02,$03,$07,$07,$03,$05,$98,$02,$70         ;B4D551|        |      ;
-    db $00,$08,$09,$01,$10,$D6,$09,$02,$1E,$D6,$09,$03         ;B4D55D|        |      ;
-    db $71,$D6,$09,$04,$C1,$D6,$06,$11,$38,$13,$3C,$00         ;B4D569|        |      ;
-    db $39,$03,$50,$00,$13,$14,$00,$39,$01,$10,$00,$07         ;B4D575|        |      ;
-    db $03,$13,$1E,$00,$19,$5F,$00,$00,$13,$3C,$00,$19         ;B4D581|        |      ;
-    db $03,$00,$00,$13,$01,$00,$19,$5F,$00,$00,$13,$3C         ;B4D58D|        |      ;
-    db $00,$19,$03,$00,$00,$13,$01,$00,$19,$5F,$00,$00         ;B4D599|        |      ;
-    db $13,$3C,$00,$19,$03,$00,$00,$13,$01,$00,$19,$5F         ;B4D5A5|        |      ;
-    db $00,$00,$13,$3C,$00,$19,$4A,$00,$00,$13,$78,$00         ;B4D5B1|        |      ;
-    db $07,$03,$0B,$00,$13,$3C,$00,$07,$00,$13,$78,$00         ;B4D5BD|        |      ;
-    db $39,$00,$0C,$00,$0B,$03,$19,$10,$00,$00,$13,$0E         ;B4D5C9|        |      ;
-    db $00,$19,$14,$00,$00,$13,$3C,$00,$19,$3B,$00,$00         ;B4D5D5|        |      ;
-    db $13,$3C,$00,$0B,$01,$13,$78,$00,$07,$01,$13,$2C         ;B4D5E1|        |      ;
-    db $01,$07,$02,$13,$78,$00,$07,$00,$13,$5A,$00,$19         ;B4D5ED|        |      ;
-    db $3C,$00,$00,$13,$78,$00,$19,$00,$00,$00,$13,$01         ;B4D5F9|        |      ;
-    db $00,$19,$3C,$00,$00,$13,$78,$00,$3D,$3D,$10,$1A         ;B4D605|        |      ;
-    db $B8,$02,$CB,$00,$40,$85,$00,$13,$01,$00,$12,$18         ;B4D611|        |      ;
-    db $D6,$1A,$10,$02,$88,$00,$98,$87,$00,$0C,$00,$1B         ;B4D61D|        |      ;
-    db $03,$03,$01,$0D,$01,$00,$38,$01,$1B,$02,$03,$01         ;B4D629|        |      ;
-    db $13,$3C,$00,$09,$05,$57,$D6,$1B,$03,$03,$00,$0D         ;B4D635|        |      ;
-    db $FF,$00,$10,$01,$1B,$02,$03,$01,$13,$78,$00,$1B         ;B4D641|        |      ;
-    db $03,$03,$00,$0D,$FF,$00,$40,$01,$37,$10,$1A,$58         ;B4D64D|        |      ;
-    db $02,$88,$00,$20,$87,$00,$13,$1E,$00,$0C,$03,$13         ;B4D659|        |      ;
-    db $0A,$00,$0D,$00,$F0,$02,$01,$13,$3C,$00,$37,$10         ;B4D665|        |      ;
-    db $1A,$08,$02,$54,$00,$B0,$87,$00,$0C,$01,$13,$5A         ;B4D671|        |      ;
-    db $00,$1B,$07,$03,$01,$13,$3C,$00,$0D,$01,$00,$40         ;B4D67D|        |      ;
-    db $01,$1B,$06,$03,$00,$13,$3C,$00,$1B,$07,$03,$01         ;B4D689|        |      ;
-    db $0D,$02,$00,$20,$03,$1B,$06,$03,$00,$13,$3C,$00         ;B4D695|        |      ;
-    db $1B,$07,$03,$01,$0D,$02,$00,$28,$03,$1B,$06,$03         ;B4D6A1|        |      ;
-    db $00,$13,$3C,$00,$0B,$02,$09,$06,$EF,$D6,$09,$07         ;B4D6AD|        |      ;
-    db $1D,$D7,$13,$01,$00,$12,$BB,$D6,$1A,$20,$03,$78         ;B4D6B9|        |      ;
-    db $00,$A4,$87,$00,$0C,$02,$1B,$05,$03,$00,$0D,$FF         ;B4D6C5|        |      ;
-    db $00,$70,$01,$1B,$04,$03,$00,$09,$08,$52,$D7,$1B         ;B4D6D1|        |      ;
-    db $05,$03,$00,$0D,$FF,$00,$20,$01,$1B,$04,$03,$00         ;B4D6DD|        |      ;
-    db $13,$01,$00,$12,$E9,$D6,$1A,$C8,$01,$24,$00,$70         ;B4D6E9|        |      ;
-    db $85,$02,$1B,$29,$03,$01,$13,$3C,$00,$0D,$01,$01         ;B4D6F5|        |      ;
-    db $28,$01,$13,$0A,$00,$0D,$02,$01,$40,$02,$13,$0A         ;B4D701|        |      ;
-    db $00,$0D,$01,$00,$10,$01,$1B,$28,$03,$01,$13,$01         ;B4D70D|        |      ;
-    db $00,$12,$17,$D7,$1A,$C8,$02,$58,$00,$70,$85,$03         ;B4D719|        |      ;
-    db $1B,$29,$03,$00,$0D,$FF,$01,$20,$01,$13,$1E,$00         ;B4D725|        |      ;
-    db $0D,$FE,$01,$20,$01,$13,$0A,$00,$0D,$FF,$00,$20         ;B4D731|        |      ;
-    db $01,$13,$1E,$00,$1B,$29,$03,$00,$13,$0A,$00,$1B         ;B4D73D|        |      ;
-    db $27,$03,$00,$13,$01,$00,$12,$4C,$D7,$1A,$18,$02         ;B4D749|        |      ;
-    db $F8,$00,$70,$85,$01,$1B,$29,$03,$01,$0D,$01,$FF         ;B4D755|        |      ;
-    db $40,$01,$0D,$00,$FF,$10,$01,$1B,$28,$03,$01,$13         ;B4D761|        |      ;
-    db $01,$00,$12,$6C,$D7                                     ;B4D76D|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x05_SetPosition($0298, $0070)
+    %AICMD0x08()
+    %AICMD0x09($01, $D610)
+    %AICMD0x09($02, $D61E)
+    %AICMD0x09($03, $D671)
+    %AICMD0x09($04, $D6C1)
+    %AICMD0x06_SetDestination($11)
+    %AICMD0x38()
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $0050)
+    %AICMD0x13($0014)
+    %AICMD0x39($01, $0010)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($001E)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($004A, $00)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($00)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($0078)
+    %AICMD0x39($00, $000C)
+    %AICMD0x0B($03)
+    %AICMD0x19($0010, $00)
+    %AICMD0x13($000E)
+    %AICMD0x19($0014, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($003B, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($01)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($012C)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($005A)
+    %AICMD0x19($003C, $00)
+    %AICMD0x13($0078)
+    %AICMD0x19($0000, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($003C, $00)
+    %AICMD0x13($0078)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($02B8, $00CB, $8540, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D618)
+    %AICMD0x1A($0210, $0088, $8798, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0303, $01)
+    %AICMD0x0D($01, $00, $38, $01)
+    %AICMD0x1B($0302, $01)
+    %AICMD0x13($003C)
+    %AICMD0x09($05, $D657)
+    %AICMD0x1B($0303, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1B($0302, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0303, $00)
+    %AICMD0x0D($FF, $00, $40, $01)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0258, $0088, $8720, $00)
+    %AICMD0x13($001E)
+    %AICMD0x0C($03)
+    %AICMD0x13($000A)
+    %AICMD0x0D($00, $F0, $02, $01)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0208, $0054, $87B0, $00)
+    %AICMD0x0C($01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0307, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0D($01, $00, $40, $01)
+    %AICMD0x1B($0306, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0307, $01)
+    %AICMD0x0D($02, $00, $20, $03)
+    %AICMD0x1B($0306, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0307, $01)
+    %AICMD0x0D($02, $00, $28, $03)
+    %AICMD0x1B($0306, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($02)
+    %AICMD0x09($06, $D6EF)
+    %AICMD0x09($07, $D71D)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D6BB)
+    %AICMD0x1A($0320, $0078, $87A4, $00)
+    %AICMD0x0C($02)
+    %AICMD0x1B($0305, $00)
+    %AICMD0x0D($FF, $00, $70, $01)
+    %AICMD0x1B($0304, $00)
+    %AICMD0x09($08, $D752)
+    %AICMD0x1B($0305, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x1B($0304, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D6E9)
+    %AICMD0x1A($01C8, $0024, $8570, $02)
+    %AICMD0x1B($0329, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0D($01, $01, $28, $01)
+    %AICMD0x13($000A)
+    %AICMD0x0D($02, $01, $40, $02)
+    %AICMD0x13($000A)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x1B($0328, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D717)
+    %AICMD0x1A($02C8, $0058, $8570, $03)
+    %AICMD0x1B($0329, $00)
+    %AICMD0x0D($FF, $01, $20, $01)
+    %AICMD0x13($001E)
+    %AICMD0x0D($FE, $01, $20, $01)
+    %AICMD0x13($000A)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0329, $00)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0327, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D74C)
+    %AICMD0x1A($0218, $00F8, $8570, $01)
+    %AICMD0x1B($0329, $01)
+    %AICMD0x0D($01, $FF, $40, $01)
+    %AICMD0x0D($00, $FF, $10, $01)
+    %AICMD0x1B($0328, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D76C)
+
 pScripting_B4D772:
     dw DATA8_B4D792                                            ;B4D772|        |B4D792;
     dw DATA8_B4D863                                            ;B4D774|        |B4D863;
@@ -2755,65 +6724,198 @@ pScripting_B4D772:
     dw pScripting_B4DA22                                       ;B4D790|        |B4DA22;
  
 DATA8_B4D792:
-    db $00,$10,$B4,$02,$03,$06,$05,$18,$01,$78,$01,$07         ;B4D792|        |      ;
-    db $03,$40,$08,$09,$01,$44,$D8,$09,$02,$FD,$D7,$06         ;B4D79E|        |      ;
-    db $01,$38,$39,$03,$70,$00,$13,$3C,$00,$0B,$00,$13         ;B4D7AA|        |      ;
-    db $3C,$00,$39,$03,$10,$00,$13,$78,$00,$19,$23,$00         ;B4D7B6|        |      ;
-    db $00,$13,$3C,$00,$19,$03,$00,$00,$13,$0A,$00,$19         ;B4D7C2|        |      ;
-    db $23,$00,$00,$13,$3C,$00,$0C,$01,$39,$00,$10,$00         ;B4D7CE|        |      ;
-    db $13,$0A,$00,$39,$03,$18,$00,$13,$0A,$00,$39,$00         ;B4D7DA|        |      ;
-    db $20,$00,$07,$01,$13,$28,$00,$0B,$02,$39,$00,$10         ;B4D7E6|        |      ;
-    db $00,$13,$14,$00,$39,$03,$30,$00,$3D,$3D,$10,$1A         ;B4D7F2|        |      ;
-    db $88,$00,$58,$01,$5C,$84,$00,$0C,$00,$1B,$E3,$02         ;B4D7FE|        |      ;
-    db $00,$0D,$00,$01,$20,$01,$1B,$E6,$02,$01,$13,$5A         ;B4D80A|        |      ;
-    db $00,$1B,$33,$02,$01,$13,$78,$00,$1B,$E9,$02,$00         ;B4D816|        |      ;
-    db $13,$78,$00,$0B,$01,$0C,$02,$1B,$E3,$02,$00,$0D         ;B4D822|        |      ;
-    db $00,$01,$30,$01,$13,$0A,$00,$1B,$E7,$02,$00,$0D         ;B4D82E|        |      ;
-    db $FF,$00,$30,$01,$13,$01,$00,$12,$3E,$D8,$1A,$88         ;B4D83A|        |      ;
-    db $00,$68,$00,$14,$81,$02,$13,$78,$00,$1B,$EA,$01         ;B4D846|        |      ;
-    db $01,$13,$A0,$00,$1B,$F6,$01,$01,$12,$5D,$D8,$13         ;B4D852|        |      ;
-    db $01,$00,$12,$5D,$D8                                     ;B4D85E|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0118, $0178)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $D844)
+    %AICMD0x09($02, $D7FD)
+    %AICMD0x06_SetDestination($01)
+    %AICMD0x38()
+    %AICMD0x39($03, $0070)
+    %AICMD0x13($003C)
+    %AICMD0x0B($00)
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $0010)
+    %AICMD0x13($0078)
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($000A)
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0C($01)
+    %AICMD0x39($00, $0010)
+    %AICMD0x13($000A)
+    %AICMD0x39($03, $0018)
+    %AICMD0x13($000A)
+    %AICMD0x39($00, $0020)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($0028)
+    %AICMD0x0B($02)
+    %AICMD0x39($00, $0010)
+    %AICMD0x13($0014)
+    %AICMD0x39($03, $0030)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0088, $0158, $845C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x1B($02E6, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0233, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E9, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $30, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D83E)
+    %AICMD0x1A($0088, $0068, $8114, $02)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EA, $01)
+    %AICMD0x13($00A0)
+    %AICMD0x1B($01F6, $01)
+    %AICMD0x12_Jump($D85D)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D85D)
+
 DATA8_B4D863:
-    db $00,$10,$B4,$02,$03,$07,$05,$E8,$02,$A8,$01,$07         ;B4D863|        |      ;
-    db $03,$08,$09,$01,$5C,$D9,$09,$02,$E0,$D8,$09,$03         ;B4D86F|        |      ;
-    db $98,$D9,$09,$04,$BD,$D9,$09,$05,$73,$D9,$09,$06         ;B4D87B|        |      ;
-    db $81,$D9,$09,$07,$D9,$D9,$09,$08,$F9,$D9,$06,$05         ;B4D887|        |      ;
-    db $38,$13,$5A,$00,$39,$03,$38,$00,$13,$14,$00,$39         ;B4D893|        |      ;
-    db $01,$88,$00,$13,$14,$00,$39,$03,$A8,$00,$13,$14         ;B4D89F|        |      ;
-    db $00,$39,$03,$A0,$00,$13,$14,$00,$39,$01,$60,$00         ;B4D8AB|        |      ;
-    db $13,$78,$00,$39,$00,$60,$00,$13,$3C,$00,$39,$03         ;B4D8B7|        |      ;
-    db $D2,$00,$07,$02,$13,$3C,$00,$39,$01,$60,$00,$0B         ;B4D8C3|        |      ;
-    db $00,$13,$78,$00,$07,$03,$13,$3C,$00,$07,$02,$13         ;B4D8CF|        |      ;
-    db $78,$00,$3D,$3D,$10,$1A,$F8,$02,$A8,$01,$5C,$84         ;B4D8DB|        |      ;
-    db $03,$13,$5A,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$38         ;B4D8E7|        |      ;
-    db $01,$13,$1E,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$88         ;B4D8F3|        |      ;
-    db $01,$13,$14,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$A8         ;B4D8FF|        |      ;
-    db $01,$13,$14,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$A0         ;B4D90B|        |      ;
-    db $01,$13,$14,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$70         ;B4D917|        |      ;
-    db $01,$0B,$02,$13,$78,$00,$1B,$E3,$02,$00,$0D,$00         ;B4D923|        |      ;
-    db $01,$70,$01,$13,$14,$00,$1B,$E7,$02,$00,$0D,$FF         ;B4D92F|        |      ;
-    db $00,$D4,$01,$13,$3C,$00,$1B,$E5,$02,$00,$0D,$00         ;B4D93B|        |      ;
-    db $FF,$60,$01,$0B,$01,$13,$78,$00,$1B,$E6,$02,$01         ;B4D947|        |      ;
-    db $13,$3C,$00,$13,$01,$00,$12,$56,$D9,$1A,$78,$01         ;B4D953|        |      ;
-    db $A8,$00,$54,$83,$00,$0C,$02,$1B,$A6,$02,$00,$13         ;B4D95F|        |      ;
-    db $78,$00,$13,$01,$00,$12,$6D,$D9,$1A,$58,$01,$C8         ;B4D96B|        |      ;
-    db $00,$2C,$84,$00,$13,$01,$00,$12,$7B,$D9,$1A,$68         ;B4D977|        |      ;
-    db $01,$B8,$00,$84,$83,$00,$0C,$02,$1B,$B6,$02,$01         ;B4D983|        |      ;
-    db $13,$78,$00,$13,$01,$00,$12,$92,$D9,$1A,$88,$00         ;B4D98F|        |      ;
-    db $B8,$00,$0C,$83,$03,$0C,$00,$1B,$93,$02,$01,$13         ;B4D99B|        |      ;
-    db $3C,$00,$1B,$8F,$02,$00,$13,$3C,$00,$1B,$95,$02         ;B4D9A7|        |      ;
-    db $00,$13,$78,$00,$13,$01,$00,$12,$B7,$D9,$1A,$98         ;B4D9B3|        |      ;
-    db $00,$A8,$00,$E4,$83,$02,$13,$78,$00,$1B,$C4,$02         ;B4D9BF|        |      ;
-    db $00,$13,$3C,$00,$1B,$C5,$02,$00,$13,$01,$00,$12         ;B4D9CB|        |      ;
-    db $D3,$D9,$1A,$78,$00,$B8,$00,$38,$84,$02,$0C,$00         ;B4D9D7|        |      ;
-    db $1B,$DA,$02,$00,$0D,$00,$01,$10,$01,$1B,$DD,$02         ;B4D9E3|        |      ;
-    db $01,$13,$78,$00,$13,$01,$00,$12,$F3,$D9,$1A,$A8         ;B4D9EF|        |      ;
-    db $00,$A8,$00,$50,$84,$03,$0C,$00,$1B,$E1,$02,$01         ;B4D9FB|        |      ;
-    db $0D,$01,$00,$10,$01,$1B,$DF,$02,$00,$0D,$00,$01         ;B4DA07|        |      ;
-    db $10,$01,$1B,$E1,$02,$00,$13,$78,$00,$13,$01,$00         ;B4DA13|        |      ;
-    db $12,$1C,$DA                                             ;B4DA1F|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($02E8, $01A8)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x08()
+    %AICMD0x09($01, $D95C)
+    %AICMD0x09($02, $D8E0)
+    %AICMD0x09($03, $D998)
+    %AICMD0x09($04, $D9BD)
+    %AICMD0x09($05, $D973)
+    %AICMD0x09($06, $D981)
+    %AICMD0x09($07, $D9D9)
+    %AICMD0x09($08, $D9F9)
+    %AICMD0x06_SetDestination($05)
+    %AICMD0x38()
+    %AICMD0x13($005A)
+    %AICMD0x39($03, $0038)
+    %AICMD0x13($0014)
+    %AICMD0x39($01, $0088)
+    %AICMD0x13($0014)
+    %AICMD0x39($03, $00A8)
+    %AICMD0x13($0014)
+    %AICMD0x39($03, $00A0)
+    %AICMD0x13($0014)
+    %AICMD0x39($01, $0060)
+    %AICMD0x13($0078)
+    %AICMD0x39($00, $0060)
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $00D2)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($003C)
+    %AICMD0x39($01, $0060)
+    %AICMD0x0B($00)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($0078)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($02F8, $01A8, $845C, $03)
+    %AICMD0x13($005A)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $38, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $88, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $A8, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $70, $01)
+    %AICMD0x0B($02)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $70, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $D4, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $60, $01)
+    %AICMD0x0B($01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E6, $01)
+    %AICMD0x13($003C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D956)
+    %AICMD0x1A($0178, $00A8, $8354, $00)
+    %AICMD0x0C($02)
+    %AICMD0x1B($02A6, $00)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D96D)
+    %AICMD0x1A($0158, $00C8, $842C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D97B)
+    %AICMD0x1A($0168, $00B8, $8384, $00)
+    %AICMD0x0C($02)
+    %AICMD0x1B($02B6, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D992)
+    %AICMD0x1A($0088, $00B8, $830C, $03)
+    %AICMD0x0C($00)
+    %AICMD0x1B($0293, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($028F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0295, $00)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D9B7)
+    %AICMD0x1A($0098, $00A8, $83E4, $02)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02C4, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02C5, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D9D3)
+    %AICMD0x1A($0078, $00B8, $8438, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02DA, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($02DD, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($D9F3)
+    %AICMD0x1A($00A8, $00A8, $8450, $03)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02E1, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x1B($02DF, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($02E1, $00)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DA1C)
+
 pScripting_B4DA22:
     dw DATA8_B4DA42                                            ;B4DA22|        |B4DA42;
     dw DATA8_B4DB0A                                            ;B4DA24|        |B4DB0A;
@@ -2833,64 +6935,192 @@ pScripting_B4DA22:
     dw pScripting_B4DCCD                                       ;B4DA40|        |B4DCCD;
  
 DATA8_B4DA42:
-    db $00,$10,$B4,$02,$03,$07,$05,$88,$00,$C8,$01,$07         ;B4DA42|        |      ;
-    db $01,$08,$09,$01,$90,$DA,$06,$22,$38,$13,$3C,$00         ;B4DA4E|        |      ;
-    db $39,$01,$40,$00,$13,$3C,$00,$07,$00,$0B,$00,$13         ;B4DA5A|        |      ;
-    db $60,$00,$07,$02,$13,$1E,$00,$07,$03,$13,$1E,$00         ;B4DA66|        |      ;
-    db $39,$01,$20,$00,$13,$3C,$00,$39,$03,$40,$00,$13         ;B4DA72|        |      ;
-    db $3C,$00,$39,$00,$10,$00,$13,$1E,$00,$39,$02,$60         ;B4DA7E|        |      ;
-    db $00,$0C,$01,$3D,$3D,$10,$1A,$98,$00,$E8,$01,$5C         ;B4DA8A|        |      ;
-    db $84,$00,$0C,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$60         ;B4DA96|        |      ;
-    db $01,$1B,$E7,$02,$00,$13,$1E,$00,$1B,$E7,$02,$01         ;B4DAA2|        |      ;
-    db $13,$1E,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$20,$01         ;B4DAAE|        |      ;
-    db $1B,$E7,$02,$00,$13,$50,$00,$1B,$E7,$02,$01,$0D         ;B4DABA|        |      ;
-    db $01,$00,$30,$01,$13,$1E,$00,$09,$02,$FC,$DA,$13         ;B4DAC6|        |      ;
-    db $1E,$00,$1B,$33,$02,$01,$13,$3C,$00,$1B,$E3,$02         ;B4DAD2|        |      ;
-    db $00,$0D,$00,$01,$10,$01,$1B,$E7,$02,$00,$0D,$FF         ;B4DADE|        |      ;
-    db $00,$10,$01,$1B,$33,$02,$00,$13,$78,$00,$0B,$01         ;B4DAEA|        |      ;
-    db $13,$01,$00,$12,$F6,$DA,$1A,$D8,$00,$68,$01,$1C         ;B4DAF6|        |      ;
-    db $8B,$00,$13,$01,$00,$12,$04,$DB                         ;B4DB02|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0088, $01C8)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $DA90)
+    %AICMD0x06_SetDestination($22)
+    %AICMD0x38()
+    %AICMD0x13($003C)
+    %AICMD0x39($01, $0040)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0B($00)
+    %AICMD0x13($0060)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($001E)
+    %AICMD0x39($01, $0020)
+    %AICMD0x13($003C)
+    %AICMD0x39($03, $0040)
+    %AICMD0x13($003C)
+    %AICMD0x39($00, $0010)
+    %AICMD0x13($001E)
+    %AICMD0x39($02, $0060)
+    %AICMD0x0C($01)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0098, $01E8, $845C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $60, $01)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($0050)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x13($001E)
+    %AICMD0x09($02, $DAFC)
+    %AICMD0x13($001E)
+    %AICMD0x1B($0233, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1B($0233, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DAF6)
+    %AICMD0x1A($00D8, $0168, $8B1C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DB04)
+
 DATA8_B4DB0A:
-    db $00,$10,$B4,$02,$03,$07,$05,$28,$01,$68,$03,$07         ;B4DB0A|        |      ;
-    db $00,$08,$09,$01,$86,$DB,$09,$02,$50,$DC,$09,$03         ;B4DB16|        |      ;
-    db $1E,$DC,$09,$04,$37,$DC,$09,$05,$69,$DC,$06,$05         ;B4DB22|        |      ;
-    db $38,$13,$5A,$00,$39,$02,$20,$00,$13,$14,$00,$39         ;B4DB2E|        |      ;
-    db $01,$90,$00,$13,$14,$00,$39,$03,$20,$00,$13,$14         ;B4DB3A|        |      ;
-    db $00,$39,$01,$A0,$00,$0B,$00,$0C,$01,$07,$02,$13         ;B4DB46|        |      ;
-    db $3C,$00,$39,$01,$10,$00,$39,$02,$50,$00,$39,$01         ;B4DB52|        |      ;
-    db $F0,$00,$13,$3C,$00,$39,$01,$70,$00,$07,$03,$13         ;B4DB5E|        |      ;
-    db $78,$00,$07,$01,$19,$21,$00,$00,$13,$50,$00,$19         ;B4DB6A|        |      ;
-    db $01,$00,$00,$13,$0A,$00,$19,$21,$00,$00,$13,$B4         ;B4DB76|        |      ;
-    db $00,$3D,$3D,$10,$1A,$18,$01,$68,$03,$5C,$84,$00         ;B4DB82|        |      ;
-    db $13,$78,$00,$1B,$E7,$02,$01,$0D,$01,$00,$20,$01         ;B4DB8E|        |      ;
-    db $13,$14,$00,$1B,$E7,$02,$01,$0D,$01,$00,$10,$01         ;B4DB9A|        |      ;
-    db $13,$14,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$90,$01         ;B4DBA6|        |      ;
-    db $13,$14,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$10,$01         ;B4DBB2|        |      ;
-    db $13,$14,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$A0,$01         ;B4DBBE|        |      ;
-    db $0C,$01,$1B,$E6,$02,$00,$13,$3C,$00,$1B,$E5,$02         ;B4DBCA|        |      ;
-    db $00,$13,$3C,$00,$1B,$E7,$02,$01,$0D,$01,$00,$30         ;B4DBD6|        |      ;
-    db $01,$1B,$E5,$02,$00,$0D,$00,$FF,$FF,$01,$13,$3C         ;B4DBE2|        |      ;
-    db $00,$1B,$E5,$02,$00,$0D,$00,$FF,$78,$01,$1B,$E6         ;B4DBEE|        |      ;
-    db $02,$01,$13,$78,$00,$1B,$E7,$02,$00,$0D,$FF,$00         ;B4DBFA|        |      ;
-    db $10,$01,$1B,$E5,$02,$00,$0D,$00,$FF,$18,$01,$1B         ;B4DC06|        |      ;
-    db $33,$02,$01,$13,$B4,$00,$13,$01,$00,$12,$18,$DC         ;B4DC12|        |      ;
-    db $1A,$68,$01,$A8,$00,$18,$83,$00,$1B,$9A,$02,$01         ;B4DC1E|        |      ;
-    db $13,$3C,$00,$1B,$9C,$02,$00,$13,$B4,$00,$12,$26         ;B4DC2A|        |      ;
-    db $DC,$1A,$78,$01,$A8,$00,$FC,$83,$00,$1B,$D0,$02         ;B4DC36|        |      ;
-    db $00,$13,$3C,$00,$1B,$CC,$02,$00,$13,$B4,$00,$12         ;B4DC42|        |      ;
-    db $3F,$DC,$1A,$48,$01,$B8,$00,$54,$83,$02,$1B,$A5         ;B4DC4E|        |      ;
-    db $02,$00,$13,$78,$00,$1B,$A6,$02,$00,$13,$78,$00         ;B4DC5A|        |      ;
-    db $12,$58,$DC,$1A,$B8,$01,$18,$02,$D4,$81,$03,$0C         ;B4DC66|        |      ;
-    db $00,$0D,$FF,$00,$80,$01,$1B,$4C,$02,$00,$0D,$00         ;B4DC72|        |      ;
-    db $01,$08,$01,$1B,$51,$03,$00,$13,$78,$00,$1B,$4E         ;B4DC7E|        |      ;
-    db $02,$00,$0D,$00,$FF,$18,$01,$1B,$50,$02,$01,$0D         ;B4DC8A|        |      ;
-    db $01,$00,$30,$01,$1B,$4E,$02,$00,$0D,$00,$FF,$50         ;B4DC96|        |      ;
-    db $01,$0B,$01,$1B,$4E,$02,$00,$0D,$00,$FF,$B4,$01         ;B4DCA2|        |      ;
-    db $1B,$50,$02,$01,$0D,$01,$00,$20,$01,$1B,$4E,$02         ;B4DCAE|        |      ;
-    db $00,$0D,$00,$FF,$50,$01,$1B,$50,$02,$00,$13,$B4         ;B4DCBA|        |      ;
-    db $00,$13,$01,$00,$12,$C7,$DC                             ;B4DCC6|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0128, $0368)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $DB86)
+    %AICMD0x09($02, $DC50)
+    %AICMD0x09($03, $DC1E)
+    %AICMD0x09($04, $DC37)
+    %AICMD0x09($05, $DC69)
+    %AICMD0x06_SetDestination($05)
+    %AICMD0x38()
+    %AICMD0x13($005A)
+    %AICMD0x39($02, $0020)
+    %AICMD0x13($0014)
+    %AICMD0x39($01, $0090)
+    %AICMD0x13($0014)
+    %AICMD0x39($03, $0020)
+    %AICMD0x13($0014)
+    %AICMD0x39($01, $00A0)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($003C)
+    %AICMD0x39($01, $0010)
+    %AICMD0x39($02, $0050)
+    %AICMD0x39($01, $00F0)
+    %AICMD0x13($003C)
+    %AICMD0x39($01, $0070)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x19($0021, $00)
+    %AICMD0x13($0050)
+    %AICMD0x19($0001, $00)
+    %AICMD0x13($000A)
+    %AICMD0x19($0021, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0118, $0368, $845C, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $90, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $A0, $01)
+    %AICMD0x0C($01)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $FF, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $78, $01)
+    %AICMD0x1B($02E6, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $18, $01)
+    %AICMD0x1B($0233, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DC18)
+    %AICMD0x1A($0168, $00A8, $8318, $00)
+    %AICMD0x1B($029A, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($029C, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($DC26)
+    %AICMD0x1A($0178, $00A8, $83FC, $00)
+    %AICMD0x1B($02D0, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02CC, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($DC3F)
+    %AICMD0x1A($0148, $00B8, $8354, $02)
+    %AICMD0x1B($02A5, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02A6, $00)
+    %AICMD0x13($0078)
+    %AICMD0x12_Jump($DC58)
+    %AICMD0x1A($01B8, $0218, $81D4, $03)
+    %AICMD0x0C($00)
+    %AICMD0x0D($FF, $00, $80, $01)
+    %AICMD0x1B($024C, $00)
+    %AICMD0x0D($00, $01, $08, $01)
+    %AICMD0x1B($0351, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($024E, $00)
+    %AICMD0x0D($00, $FF, $18, $01)
+    %AICMD0x1B($0250, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x1B($024E, $00)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x0B($01)
+    %AICMD0x1B($024E, $00)
+    %AICMD0x0D($00, $FF, $B4, $01)
+    %AICMD0x1B($0250, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1B($024E, $00)
+    %AICMD0x0D($00, $FF, $50, $01)
+    %AICMD0x1B($0250, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DCC7)
+
 pScripting_B4DCCD:
     dw DATA8_B4DCED                                            ;B4DCCD|        |B4DCED;
     dw DATA8_B4DE3E                                            ;B4DCCF|        |B4DE3E;
@@ -2910,67 +7140,208 @@ pScripting_B4DCCD:
     dw pScripting_B4DF94                                       ;B4DCEB|        |B4DF94;
  
 DATA8_B4DCED:
-    db $00,$10,$B4,$02,$03,$06,$05,$F8,$FF,$68,$00,$07         ;B4DCED|        |      ;
-    db $02,$40,$08,$09,$01,$4D,$DD,$09,$02,$74,$DD,$09         ;B4DCF9|        |      ;
-    db $03,$29,$DE,$06,$41,$38,$0C,$00,$13,$14,$00,$39         ;B4DD05|        |      ;
-    db $02,$60,$00,$13,$14,$00,$39,$01,$20,$00,$13,$1E         ;B4DD11|        |      ;
-    db $00,$19,$71,$00,$00,$13,$3C,$00,$39,$00,$20,$00         ;B4DD1D|        |      ;
-    db $13,$14,$00,$39,$02,$10,$00,$07,$02,$13,$1E,$00         ;B4DD29|        |      ;
-    db $19,$6A,$00,$00,$13,$50,$00,$07,$02,$13,$14,$00         ;B4DD35|        |      ;
-    db $19,$6A,$00,$00,$13,$B4,$00,$0C,$01,$3D,$3D,$10         ;B4DD41|        |      ;
-    db $1A,$68,$00,$98,$00,$14,$81,$02,$1B,$F8,$01,$01         ;B4DD4D|        |      ;
-    db $13,$B4,$00,$1B,$EE,$01,$01,$13,$78,$00,$1B,$EB         ;B4DD59|        |      ;
-    db $01,$01,$13,$78,$00,$1B,$EF,$01,$01,$13,$78,$00         ;B4DD65|        |      ;
-    db $12,$55,$DD,$1A,$98,$00,$68,$00,$74,$84,$00,$13         ;B4DD71|        |      ;
-    db $78,$00,$0D,$00,$01,$20,$01,$13,$3C,$00,$1B,$E6         ;B4DD7D|        |      ;
-    db $02,$00,$13,$3C,$00,$1B,$ED,$02,$00,$13,$B4,$00         ;B4DD89|        |      ;
-    db $1B,$E5,$02,$00,$0D,$00,$FF,$20,$01,$13,$78,$00         ;B4DD95|        |      ;
-    db $1B,$E6,$02,$00,$13,$3C,$00,$1B,$33,$02,$00,$0B         ;B4DDA1|        |      ;
-    db $00,$13,$F0,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$10         ;B4DDAD|        |      ;
-    db $01,$13,$3C,$00,$1B,$ED,$02,$00,$13,$3C,$00,$09         ;B4DDB9|        |      ;
-    db $04,$F7,$DD,$1B,$E7,$02,$00,$13,$78,$00,$1B,$E7         ;B4DDC5|        |      ;
-    db $02,$01,$0D,$01,$00,$20,$01,$1B,$58,$02,$01,$13         ;B4DDD1|        |      ;
-    db $B4,$00,$1B,$E7,$02,$00,$0D,$FF,$00,$20,$01,$1B         ;B4DDDD|        |      ;
-    db $58,$02,$00,$13,$B4,$00,$0B,$01,$13,$01,$00,$12         ;B4DDE9|        |      ;
-    db $F1,$DD,$1A,$78,$00,$6A,$00,$F8,$84,$02,$1B,$13         ;B4DDF5|        |      ;
-    db $03,$01,$0D,$08,$F8,$02,$01,$13,$76,$00,$1B,$13         ;B4DE01|        |      ;
-    db $03,$01,$0D,$01,$00,$20,$01,$13,$B4,$00,$1B,$13         ;B4DE0D|        |      ;
-    db $03,$00,$0D,$FF,$00,$20,$01,$13,$B4,$00,$13,$01         ;B4DE19|        |      ;
-    db $00,$12,$23,$DE,$1A,$78,$00,$98,$00,$FC,$83,$03         ;B4DE25|        |      ;
-    db $13,$68,$01,$1B,$D1,$02,$00,$13,$01,$00,$12,$38         ;B4DE31|        |      ;
-    db $DE                                                     ;B4DE3D|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($FFF8, $0068)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $DD4D)
+    %AICMD0x09($02, $DD74)
+    %AICMD0x09($03, $DE29)
+    %AICMD0x06_SetDestination($41)
+    %AICMD0x38()
+    %AICMD0x0C($00)
+    %AICMD0x13($0014)
+    %AICMD0x39($02, $0060)
+    %AICMD0x13($0014)
+    %AICMD0x39($01, $0020)
+    %AICMD0x13($001E)
+    %AICMD0x19($0071, $00)
+    %AICMD0x13($003C)
+    %AICMD0x39($00, $0020)
+    %AICMD0x13($0014)
+    %AICMD0x39($02, $0010)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($001E)
+    %AICMD0x19($006A, $00)
+    %AICMD0x13($0050)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($0014)
+    %AICMD0x19($006A, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0C($01)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0068, $0098, $8114, $02)
+    %AICMD0x1B($01F8, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EE, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EB, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EF, $01)
+    %AICMD0x13($0078)
+    %AICMD0x12_Jump($DD55)
+    %AICMD0x1A($0098, $0068, $8474, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02ED, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0233, $00)
+    %AICMD0x0B($00)
+    %AICMD0x13($00F0)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02ED, $00)
+    %AICMD0x13($003C)
+    %AICMD0x09($04, $DDF7)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1B($0258, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x1B($0258, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0B($01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DDF1)
+    %AICMD0x1A($0078, $006A, $84F8, $02)
+    %AICMD0x1B($0313, $01)
+    %AICMD0x0D($08, $F8, $02, $01)
+    %AICMD0x13($0076)
+    %AICMD0x1B($0313, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0313, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DE23)
+    %AICMD0x1A($0078, $0098, $83FC, $03)
+    %AICMD0x13($0168)
+    %AICMD0x1B($02D1, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DE38)
+
 DATA8_B4DE3E:
-    db $00,$10,$B4,$02,$03,$07,$40,$05,$88,$00,$88,$02         ;B4DE3E|        |      ;
-    db $07,$00,$08,$09,$01,$B1,$DE,$09,$02,$5E,$DF,$09         ;B4DE4A|        |      ;
-    db $03,$50,$DF,$09,$04,$6C,$DF,$06,$10,$38,$13,$50         ;B4DE56|        |      ;
-    db $00,$07,$02,$0C,$00,$13,$B4,$00,$39,$02,$40,$00         ;B4DE62|        |      ;
-    db $13,$0A,$00,$07,$01,$13,$1E,$00,$09,$05,$80,$DF         ;B4DE6E|        |      ;
-    db $0C,$02,$13,$14,$00,$07,$03,$13,$32,$00,$3A,$03         ;B4DE7A|        |      ;
-    db $18,$00,$4E,$19,$23,$00,$00,$13,$3C,$00,$07,$00         ;B4DE86|        |      ;
-    db $13,$3C,$00,$07,$02,$13,$1E,$00,$07,$03,$13,$1E         ;B4DE92|        |      ;
-    db $00,$07,$02,$13,$1E,$00,$07,$03,$13,$1E,$00,$07         ;B4DE9E|        |      ;
-    db $02,$13,$B4,$00,$3D,$3D,$10,$1A,$A8,$00,$98,$02         ;B4DEAA|        |      ;
-    db $74,$84,$03,$13,$3C,$00,$0B,$00,$09,$06,$2E,$DF         ;B4DEB6|        |      ;
-    db $1B,$E7,$02,$01,$0D,$01,$00,$20,$01,$1B,$E6,$02         ;B4DEC2|        |      ;
-    db $00,$13,$1E,$00,$1B,$E5,$02,$00,$0D,$00,$FF,$20         ;B4DECE|        |      ;
-    db $01,$1B,$E7,$02,$01,$0D,$01,$00,$90,$01,$0C,$02         ;B4DEDA|        |      ;
-    db $13,$3C,$00,$09,$07,$13,$DF,$1B,$E7,$02,$00,$0D         ;B4DEE6|        |      ;
-    db $FF,$00,$90,$01,$1B,$E3,$02,$00,$0D,$00,$01,$0E         ;B4DEF2|        |      ;
-    db $01,$1B,$E7,$02,$00,$13,$3C,$00,$1B,$58,$02,$00         ;B4DEFE|        |      ;
-    db $13,$78,$00,$13,$01,$00,$12,$0D,$DF,$1A,$58,$01         ;B4DF0A|        |      ;
-    db $64,$02,$AC,$8B,$00,$0D,$FF,$00,$90,$01,$0D,$00         ;B4DF16|        |      ;
-    db $01,$0E,$01,$13,$B4,$00,$13,$01,$00,$12,$28,$DF         ;B4DF22|        |      ;
-    db $1A,$C8,$00,$48,$02,$EC,$84,$00,$13,$1E,$00,$0D         ;B4DF2E|        |      ;
-    db $01,$00,$08,$02,$0D,$00,$FF,$06,$02,$0D,$FF,$00         ;B4DF3A|        |      ;
-    db $08,$02,$0D,$01,$00,$08,$02,$12,$39,$DF,$1A,$94         ;B4DF46|        |      ;
-    db $00,$98,$02,$5C,$8A,$00,$13,$01,$00,$12,$58,$DF         ;B4DF52|        |      ;
-    db $1A,$92,$00,$A0,$02,$5C,$81,$00,$13,$01,$00,$12         ;B4DF5E|        |      ;
-    db $66,$DF,$1A,$88,$00,$98,$02,$38,$8A,$00,$0C,$01         ;B4DF6A|        |      ;
-    db $0D,$F0,$F0,$01,$01,$13,$3C,$00,$37,$10,$1A,$78         ;B4DF76|        |      ;
-    db $00,$98,$02,$28,$85,$00,$13,$3C,$00,$0B,$01,$13         ;B4DF82|        |      ;
-    db $3C,$00,$0B,$02,$37,$10                                 ;B4DF8E|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x40()
+    %AICMD0x05_SetPosition($0088, $0288)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $DEB1)
+    %AICMD0x09($02, $DF5E)
+    %AICMD0x09($03, $DF50)
+    %AICMD0x09($04, $DF6C)
+    %AICMD0x06_SetDestination($10)
+    %AICMD0x38()
+    %AICMD0x13($0050)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0C($00)
+    %AICMD0x13($00B4)
+    %AICMD0x39($02, $0040)
+    %AICMD0x13($000A)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($001E)
+    %AICMD0x09($05, $DF80)
+    %AICMD0x0C($02)
+    %AICMD0x13($0014)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($0032)
+    %AICMD0x3A($03, $0018)
+    %AICMD0x4E()
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($001E)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($00B4)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0298, $8474, $03)
+    %AICMD0x13($003C)
+    %AICMD0x0B($00)
+    %AICMD0x09($06, $DF2E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $90, $01)
+    %AICMD0x0C($02)
+    %AICMD0x13($003C)
+    %AICMD0x09($07, $DF13)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $90, $01)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $0E, $01)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0258, $00)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DF0D)
+    %AICMD0x1A($0158, $0264, $8BAC, $00)
+    %AICMD0x0D($FF, $00, $90, $01)
+    %AICMD0x0D($00, $01, $0E, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DF28)
+    %AICMD0x1A($00C8, $0248, $84EC, $00)
+    %AICMD0x13($001E)
+    %AICMD0x0D($01, $00, $08, $02)
+    %AICMD0x0D($00, $FF, $06, $02)
+    %AICMD0x0D($FF, $00, $08, $02)
+    %AICMD0x0D($01, $00, $08, $02)
+    %AICMD0x12_Jump($DF39)
+    %AICMD0x1A($0094, $0298, $8A5C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DF58)
+    %AICMD0x1A($0092, $02A0, $815C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($DF66)
+    %AICMD0x1A($0088, $0298, $8A38, $00)
+    %AICMD0x0C($01)
+    %AICMD0x0D($F0, $F0, $01, $01)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0078, $0298, $8528, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($02)
+    %AICMD0x37()
+    %AICMD0x10_End()
+
 pScripting_B4DF94:
     dw DATA8_B4DFB4                                            ;B4DF94|        |B4DFB4;
     dw DATA8_B4E0F8                                            ;B4DF96|        |B4E0F8;
@@ -2990,58 +7361,181 @@ pScripting_B4DF94:
     dw pScripting_B4E200                                       ;B4DFB2|        |B4E200;
  
 DATA8_B4DFB4:
-    db $00,$10,$B4,$02,$03,$06,$05,$18,$00,$98,$00,$07         ;B4DFB4|        |      ;
-    db $02,$40,$08,$09,$01,$15,$E0,$09,$02,$A9,$E0,$06         ;B4DFC0|        |      ;
-    db $43,$38,$13,$78,$00,$3A,$02,$38,$00,$0B,$00,$19         ;B4DFCC|        |      ;
-    db $52,$00,$00,$13,$50,$00,$39,$02,$10,$00,$19,$52         ;B4DFD8|        |      ;
-    db $00,$00,$13,$50,$00,$19,$41,$00,$00,$13,$3C,$00         ;B4DFE4|        |      ;
-    db $0B,$01,$13,$3C,$00,$07,$01,$13,$B4,$00,$39,$03         ;B4DFF0|        |      ;
-    db $50,$00,$13,$B4,$00,$07,$01,$13,$B4,$00,$39,$02         ;B4DFFC|        |      ;
-    db $30,$00,$07,$01,$0C,$02,$39,$01,$20,$00,$3D,$3D         ;B4E008|        |      ;
-    db $10,$1A,$CE,$FF,$38,$00,$74,$84,$02,$0C,$01,$1B         ;B4E014|        |      ;
-    db $4A,$04,$01,$0D,$01,$00,$A0,$01,$13,$50,$00,$1B         ;B4E020|        |      ;
-    db $4A,$04,$00,$0D,$FF,$00,$A0,$01,$0D,$00,$01,$30         ;B4E02C|        |      ;
-    db $01,$13,$1E,$00,$1B,$4A,$04,$01,$0D,$01,$00,$80         ;B4E038|        |      ;
-    db $01,$13,$3C,$00,$1B,$4A,$04,$01,$0D,$01,$00,$40         ;B4E044|        |      ;
-    db $01,$1B,$48,$04,$01,$13,$3C,$00,$09,$03,$89,$E0         ;B4E050|        |      ;
-    db $1B,$58,$02,$00,$0D,$F8,$F8,$01,$01,$1B,$58,$02         ;B4E05C|        |      ;
-    db $00,$0D,$FA,$06,$02,$01,$13,$3C,$00,$0B,$02,$1B         ;B4E068|        |      ;
-    db $E8,$02,$00,$13,$3C,$00,$1B,$E3,$02,$00,$0D,$00         ;B4E074|        |      ;
-    db $01,$10,$01,$13,$01,$00,$12,$83,$E0,$1A,$90,$00         ;B4E080|        |      ;
-    db $68,$00,$2C,$81,$02,$1B,$03,$02,$01,$13,$78,$00         ;B4E08C|        |      ;
-    db $1B,$01,$02,$01,$13,$F0,$00,$1B,$05,$02,$01,$13         ;B4E098|        |      ;
-    db $B4,$00,$12,$91,$E0,$1A,$48,$00,$88,$00,$14,$81         ;B4E0A4|        |      ;
-    db $02,$0C,$00,$1B,$EC,$01,$01,$0D,$01,$00,$48,$01         ;B4E0B0|        |      ;
-    db $13,$3C,$00,$1B,$F2,$01,$00,$13,$78,$00,$1B,$E8         ;B4E0BC|        |      ;
-    db $01,$00,$13,$3C,$00,$1B,$F6,$01,$00,$13,$5A,$00         ;B4E0C8|        |      ;
-    db $1B,$F3,$01,$00,$13,$B4,$00,$1B,$EC,$01,$00,$0D         ;B4E0D4|        |      ;
-    db $FF,$00,$4A,$01,$13,$3C,$00,$1B,$F8,$01,$00,$13         ;B4E0E0|        |      ;
-    db $F0,$00,$1B,$EA,$01,$01,$13,$B4,$00,$12,$E7,$E0         ;B4E0EC|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0018, $0098)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $E015)
+    %AICMD0x09($02, $E0A9)
+    %AICMD0x06_SetDestination($43)
+    %AICMD0x38()
+    %AICMD0x13($0078)
+    %AICMD0x3A($02, $0038)
+    %AICMD0x0B($00)
+    %AICMD0x19($0052, $00)
+    %AICMD0x13($0050)
+    %AICMD0x39($02, $0010)
+    %AICMD0x19($0052, $00)
+    %AICMD0x13($0050)
+    %AICMD0x19($0041, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($01)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($00B4)
+    %AICMD0x39($03, $0050)
+    %AICMD0x13($00B4)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x13($00B4)
+    %AICMD0x39($02, $0030)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x0C($02)
+    %AICMD0x39($01, $0020)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($FFCE, $0038, $8474, $02)
+    %AICMD0x0C($01)
+    %AICMD0x1B($044A, $01)
+    %AICMD0x0D($01, $00, $A0, $01)
+    %AICMD0x13($0050)
+    %AICMD0x1B($044A, $00)
+    %AICMD0x0D($FF, $00, $A0, $01)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($044A, $01)
+    %AICMD0x0D($01, $00, $80, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($044A, $01)
+    %AICMD0x0D($01, $00, $40, $01)
+    %AICMD0x1B($0448, $01)
+    %AICMD0x13($003C)
+    %AICMD0x09($03, $E089)
+    %AICMD0x1B($0258, $00)
+    %AICMD0x0D($F8, $F8, $01, $01)
+    %AICMD0x1B($0258, $00)
+    %AICMD0x0D($FA, $06, $02, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($02)
+    %AICMD0x1B($02E8, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E083)
+    %AICMD0x1A($0090, $0068, $812C, $02)
+    %AICMD0x1B($0203, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0201, $01)
+    %AICMD0x13($00F0)
+    %AICMD0x1B($0205, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($E091)
+    %AICMD0x1A($0048, $0088, $8114, $02)
+    %AICMD0x0C($00)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $48, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01F2, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01E8, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01F6, $00)
+    %AICMD0x13($005A)
+    %AICMD0x1B($01F3, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $4A, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01F8, $00)
+    %AICMD0x13($00F0)
+    %AICMD0x1B($01EA, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($E0E7)
+
 DATA8_B4E0F8:
-    db $00,$10,$B4,$02,$03,$07,$05,$78,$02,$F8,$01,$07         ;B4E0F8|        |      ;
-    db $00,$08,$09,$01,$4C,$E1,$09,$02,$B7,$E1,$09,$03         ;B4E104|        |      ;
-    db $80,$E1,$09,$04,$E0,$E1,$06,$11,$38,$13,$1E,$00         ;B4E110|        |      ;
-    db $0B,$00,$19,$4A,$00,$00,$13,$78,$00,$0C,$01,$19         ;B4E11C|        |      ;
-    db $41,$00,$00,$13,$50,$00,$39,$00,$18,$00,$13,$14         ;B4E128|        |      ;
-    db $00,$39,$03,$10,$00,$13,$14,$00,$07,$03,$0B,$02         ;B4E134|        |      ;
-    db $0C,$03,$19,$23,$00,$00,$13,$78,$00,$3D,$3D,$10         ;B4E140|        |      ;
-    db $1A,$CC,$01,$A8,$01,$58,$85,$02,$0C,$02,$1B,$20         ;B4E14C|        |      ;
-    db $03,$01,$0D,$02,$01,$40,$02,$0D,$01,$00,$10,$01         ;B4E158|        |      ;
-    db $0D,$00,$0A,$01,$01,$0D,$01,$01,$1E,$02,$13,$1E         ;B4E164|        |      ;
-    db $00,$0B,$03,$13,$1E,$00,$1B,$1E,$03,$01,$13,$01         ;B4E170|        |      ;
-    db $00,$12,$7A,$E1,$1A,$B0,$02,$18,$02,$78,$83,$01         ;B4E17C|        |      ;
-    db $0C,$00,$13,$3C,$00,$0D,$00,$FF,$20,$01,$13,$3C         ;B4E188|        |      ;
-    db $00,$1B,$B0,$02,$00,$0D,$FF,$00,$28,$01,$13,$3C         ;B4E194|        |      ;
-    db $00,$1B,$B0,$02,$00,$0B,$01,$13,$B4,$00,$1B,$AB         ;B4E1A0|        |      ;
-    db $02,$00,$13,$78,$00,$13,$01,$00,$12,$B1,$E1,$1A         ;B4E1AC|        |      ;
-    db $58,$02,$08,$02,$74,$84,$01,$0C,$01,$1B,$E6,$02         ;B4E1B8|        |      ;
-    db $01,$13,$78,$00,$1B,$E2,$02,$00,$13,$3C,$00,$1B         ;B4E1C4|        |      ;
-    db $E6,$02,$00,$13,$3C,$00,$1B,$58,$02,$00,$13,$01         ;B4E1D0|        |      ;
-    db $00,$12,$DA,$E1,$1A,$38,$02,$38,$02,$14,$81,$02         ;B4E1DC|        |      ;
-    db $1B,$F8,$01,$00,$13,$F0,$00,$1B,$EA,$01,$01,$13         ;B4E1E8|        |      ;
-    db $B4,$00,$1B,$EB,$01,$01,$13,$B4,$00,$12,$E8,$E1         ;B4E1F4|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0278, $01F8)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $E14C)
+    %AICMD0x09($02, $E1B7)
+    %AICMD0x09($03, $E180)
+    %AICMD0x09($04, $E1E0)
+    %AICMD0x06_SetDestination($11)
+    %AICMD0x38()
+    %AICMD0x13($001E)
+    %AICMD0x0B($00)
+    %AICMD0x19($004A, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0C($01)
+    %AICMD0x19($0041, $00)
+    %AICMD0x13($0050)
+    %AICMD0x39($00, $0018)
+    %AICMD0x13($0014)
+    %AICMD0x39($03, $0010)
+    %AICMD0x13($0014)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($0078)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($01CC, $01A8, $8558, $02)
+    %AICMD0x0C($02)
+    %AICMD0x1B($0320, $01)
+    %AICMD0x0D($02, $01, $40, $02)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x0D($00, $0A, $01, $01)
+    %AICMD0x0D($01, $01, $1E, $02)
+    %AICMD0x13($001E)
+    %AICMD0x0B($03)
+    %AICMD0x13($001E)
+    %AICMD0x1B($031E, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E17A)
+    %AICMD0x1A($02B0, $0218, $8378, $01)
+    %AICMD0x0C($00)
+    %AICMD0x13($003C)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02B0, $00)
+    %AICMD0x0D($FF, $00, $28, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02B0, $00)
+    %AICMD0x0B($01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02AB, $00)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E1B1)
+    %AICMD0x1A($0258, $0208, $8474, $01)
+    %AICMD0x0C($01)
+    %AICMD0x1B($02E6, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E2, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($0258, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E1DA)
+    %AICMD0x1A($0238, $0238, $8114, $02)
+    %AICMD0x1B($01F8, $00)
+    %AICMD0x13($00F0)
+    %AICMD0x1B($01EA, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EB, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($E1E8)
+
 pScripting_B4E200:
     dw DATA8_B4E220                                            ;B4E200|        |B4E220;
     dw pScripting_B4E3FF                                       ;B4E202|        |B4E3FF;
@@ -3061,47 +7555,142 @@ pScripting_B4E200:
     dw pScripting_B4E3FF                                       ;B4E21E|        |B4E3FF;
  
 DATA8_B4E220:
-    db $00,$10,$B4,$02,$03,$07,$05,$48,$02,$B0,$01,$07         ;B4E220|        |      ;
-    db $03,$08,$09,$01,$5C,$E3,$09,$02,$21,$E3,$09,$03         ;B4E22C|        |      ;
-    db $B4,$E2,$09,$04,$C7,$E3,$09,$05,$D5,$E3,$09,$06         ;B4E238|        |      ;
-    db $E3,$E3,$09,$07,$93,$E3,$06,$11,$38,$13,$1E,$00         ;B4E244|        |      ;
-    db $19,$5F,$00,$00,$13,$50,$00,$19,$03,$00,$00,$13         ;B4E250|        |      ;
-    db $01,$00,$19,$5F,$00,$00,$13,$50,$00,$19,$03,$00         ;B4E25C|        |      ;
-    db $00,$13,$01,$00,$19,$5F,$00,$00,$13,$50,$00,$19         ;B4E268|        |      ;
-    db $03,$00,$00,$13,$01,$00,$19,$5F,$00,$00,$13,$50         ;B4E274|        |      ;
-    db $00,$07,$00,$13,$1E,$00,$19,$4A,$00,$00,$13,$B4         ;B4E280|        |      ;
-    db $00,$39,$00,$20,$00,$0B,$00,$13,$78,$00,$19,$43         ;B4E28C|        |      ;
-    db $00,$00,$13,$78,$00,$39,$03,$10,$00,$39,$00,$10         ;B4E298|        |      ;
-    db $00,$0C,$03,$07,$02,$13,$1E,$00,$0C,$04,$13,$5A         ;B4E2A4|        |      ;
-    db $00,$3D,$3D,$10,$1A,$08,$02,$D8,$01,$74,$84,$00         ;B4E2B0|        |      ;
-    db $0C,$00,$13,$1E,$00,$1B,$E7,$02,$01,$0D,$01,$00         ;B4E2BC|        |      ;
-    db $30,$01,$13,$50,$00,$1B,$E3,$02,$00,$0D,$00,$01         ;B4E2C8|        |      ;
-    db $60,$01,$13,$3C,$00,$1B,$E5,$02,$00,$0D,$00,$FF         ;B4E2D4|        |      ;
-    db $28,$01,$13,$0A,$00,$1B,$E8,$02,$00,$13,$78,$00         ;B4E2E0|        |      ;
-    db $1B,$E5,$02,$00,$0D,$00,$FF,$20,$01,$0B,$01,$13         ;B4E2EC|        |      ;
-    db $3C,$00,$1B,$E3,$02,$00,$0D,$00,$01,$08,$01,$13         ;B4E2F8|        |      ;
-    db $3C,$00,$1B,$E7,$02,$01,$13,$78,$00,$1B,$E3,$02         ;B4E304|        |      ;
-    db $00,$13,$78,$00,$1B,$E7,$02,$01,$13,$78,$00,$13         ;B4E310|        |      ;
-    db $01,$00,$12,$1B,$E3,$1A,$38,$02,$68,$02,$D0,$82         ;B4E31C|        |      ;
-    db $01,$0C,$01,$13,$14,$00,$0D,$00,$FF,$60,$01,$13         ;B4E328|        |      ;
-    db $14,$00,$1B,$81,$02,$01,$0D,$01,$00,$10,$01,$1B         ;B4E334|        |      ;
-    db $81,$02,$01,$13,$78,$00,$0B,$02,$1B,$7F,$02,$00         ;B4E340|        |      ;
-    db $13,$B4,$00,$1B,$81,$02,$01,$13,$B4,$00,$13,$01         ;B4E34C|        |      ;
-    db $00,$12,$56,$E3,$1A,$78,$02,$08,$02,$14,$81,$03         ;B4E358|        |      ;
-    db $0C,$02,$1B,$EC,$01,$00,$0D,$FF,$00,$20,$01,$13         ;B4E364|        |      ;
-    db $3C,$00,$1B,$EB,$01,$00,$13,$B4,$00,$1B,$EF,$01         ;B4E370|        |      ;
-    db $00,$13,$3C,$00,$0B,$03,$1B,$F0,$01,$00,$13,$78         ;B4E37C|        |      ;
-    db $00,$1B,$E3,$01,$00,$13,$01,$00,$12,$8D,$E3,$1A         ;B4E388|        |      ;
-    db $70,$02,$30,$02,$34,$82,$01,$0C,$03,$1B,$5D,$02         ;B4E394|        |      ;
-    db $00,$0D,$00,$FF,$40,$01,$1B,$5F,$02,$00,$13,$3C         ;B4E3A0|        |      ;
-    db $00,$1B,$5D,$02,$00,$13,$1E,$00,$09,$08,$F1,$E3         ;B4E3AC|        |      ;
-    db $1B,$5F,$02,$00,$13,$3C,$00,$0B,$04,$13,$01,$00         ;B4E3B8|        |      ;
-    db $12,$C1,$E3,$1A,$54,$02,$E2,$01,$5C,$8A,$00,$13         ;B4E3C4|        |      ;
-    db $01,$00,$12,$CF,$E3,$1A,$4A,$02,$E8,$01,$5C,$81         ;B4E3D0|        |      ;
-    db $00,$13,$01,$00,$12,$DD,$E3,$1A,$54,$02,$EE,$01         ;B4E3DC|        |      ;
-    db $38,$8A,$00,$13,$01,$00,$12,$EB,$E3,$1A,$70,$02         ;B4E3E8|        |      ;
-    db $D6,$01,$50,$87,$00,$13,$01,$00,$12,$F9,$E3             ;B4E3F4|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($0248, $01B0)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x08()
+    %AICMD0x09($01, $E35C)
+    %AICMD0x09($02, $E321)
+    %AICMD0x09($03, $E2B4)
+    %AICMD0x09($04, $E3C7)
+    %AICMD0x09($05, $E3D5)
+    %AICMD0x09($06, $E3E3)
+    %AICMD0x09($07, $E393)
+    %AICMD0x06_SetDestination($11)
+    %AICMD0x38()
+    %AICMD0x13($001E)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($0050)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($0050)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($0050)
+    %AICMD0x19($0003, $00)
+    %AICMD0x13($0001)
+    %AICMD0x19($005F, $00)
+    %AICMD0x13($0050)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($001E)
+    %AICMD0x19($004A, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x39($00, $0020)
+    %AICMD0x0B($00)
+    %AICMD0x13($0078)
+    %AICMD0x19($0043, $00)
+    %AICMD0x13($0078)
+    %AICMD0x39($03, $0010)
+    %AICMD0x39($00, $0010)
+    %AICMD0x0C($03)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($001E)
+    %AICMD0x0C($04)
+    %AICMD0x13($005A)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0208, $01D8, $8474, $00)
+    %AICMD0x0C($00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $30, $01)
+    %AICMD0x13($0050)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $60, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $28, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($02E8, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x0B($01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $08, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E31B)
+    %AICMD0x1A($0238, $0268, $82D0, $01)
+    %AICMD0x0C($01)
+    %AICMD0x13($0014)
+    %AICMD0x0D($00, $FF, $60, $01)
+    %AICMD0x13($0014)
+    %AICMD0x1B($0281, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x1B($0281, $01)
+    %AICMD0x13($0078)
+    %AICMD0x0B($02)
+    %AICMD0x1B($027F, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0281, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E356)
+    %AICMD0x1A($0278, $0208, $8114, $03)
+    %AICMD0x0C($02)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01EB, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EF, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($03)
+    %AICMD0x1B($01F0, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01E3, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E38D)
+    %AICMD0x1A($0270, $0230, $8234, $01)
+    %AICMD0x0C($03)
+    %AICMD0x1B($025D, $00)
+    %AICMD0x0D($00, $FF, $40, $01)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($025D, $00)
+    %AICMD0x13($001E)
+    %AICMD0x09($08, $E3F1)
+    %AICMD0x1B($025F, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E3C1)
+    %AICMD0x1A($0254, $01E2, $8A5C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E3CF)
+    %AICMD0x1A($024A, $01E8, $815C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E3DD)
+    %AICMD0x1A($0254, $01EE, $8A38, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E3EB)
+    %AICMD0x1A($0270, $01D6, $8750, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E3F9)
+
 pScripting_B4E3FF:
     dw DATA8_B4E41F                                            ;B4E3FF|        |B4E41F;
     dw pScripting_B4E5F4                                       ;B4E401|        |B4E5F4;
@@ -3121,47 +7710,145 @@ pScripting_B4E3FF:
     dw pScripting_B4E5F4                                       ;B4E41D|        |B4E5F4;
  
 DATA8_B4E41F:
-    db $00,$10,$B4,$02,$03,$07,$05,$A8,$02,$88,$01,$07         ;B4E41F|        |      ;
-    db $01,$08,$09,$01,$16,$E5,$09,$02,$BF,$E5,$09,$03         ;B4E42B|        |      ;
-    db $E4,$E4,$09,$04,$8D,$E5,$09,$05,$4C,$E5,$09,$06         ;B4E437|        |      ;
-    db $E6,$E5,$06,$05,$38,$13,$3C,$00,$3A,$01,$30,$00         ;B4E443|        |      ;
-    db $13,$14,$00,$3A,$03,$50,$00,$07,$01,$0B,$00,$0C         ;B4E44F|        |      ;
-    db $01,$19,$38,$00,$00,$13,$5A,$00,$19,$29,$00,$00         ;B4E45B|        |      ;
-    db $13,$5A,$00,$3A,$03,$4C,$00,$0B,$02,$19,$03,$00         ;B4E467|        |      ;
-    db $00,$07,$03,$13,$2C,$01,$3A,$00,$50,$00,$13,$0A         ;B4E473|        |      ;
-    db $00,$07,$02,$0B,$03,$0C,$07,$39,$02,$08,$00,$13         ;B4E47F|        |      ;
-    db $5A,$00,$19,$CC,$00,$00,$13,$78,$00,$19,$8F,$00         ;B4E48B|        |      ;
-    db $00,$13,$78,$00,$39,$00,$50,$00,$07,$03,$0B,$04         ;B4E497|        |      ;
-    db $0C,$05,$13,$3C,$00,$19,$39,$00,$00,$13,$5A,$00         ;B4E4A3|        |      ;
-    db $3A,$00,$18,$00,$13,$0A,$00,$3A,$03,$28,$00,$13         ;B4E4AF|        |      ;
-    db $28,$00,$3A,$00,$44,$00,$13,$1E,$00,$39,$03,$34         ;B4E4BB|        |      ;
-    db $00,$0B,$06,$13,$78,$00,$19,$23,$00,$00,$13,$32         ;B4E4C7|        |      ;
-    db $00,$3A,$02,$10,$00,$07,$03,$13,$3C,$00,$3A,$02         ;B4E4D3|        |      ;
-    db $30,$00,$3D,$3D,$10,$1A,$08,$02,$F8,$00,$D4,$81         ;B4E4DF|        |      ;
-    db $00,$0C,$00,$0D,$00,$01,$1C,$01,$13,$14,$00,$09         ;B4E4EB|        |      ;
-    db $06,$09,$E5,$13,$78,$00,$0B,$01,$1B,$51,$03,$00         ;B4E4F7|        |      ;
-    db $13,$01,$00,$12,$03,$E5,$1A,$08,$02,$14,$01,$68         ;B4E503|        |      ;
-    db $8A,$00,$13,$78,$00,$37,$10,$1A,$48,$01,$18,$01         ;B4E50F|        |      ;
-    db $8C,$81,$00,$0C,$02,$1B,$1F,$02,$00,$0D,$00,$01         ;B4E51B|        |      ;
-    db $10,$01,$13,$0A,$00,$1B,$23,$02,$01,$0D,$01,$00         ;B4E527|        |      ;
-    db $14,$01,$13,$78,$00,$1B,$4C,$03,$00,$13,$28,$00         ;B4E533|        |      ;
-    db $1B,$4D,$03,$00,$13,$3C,$00,$13,$01,$00,$12,$46         ;B4E53F|        |      ;
-    db $E5,$1A,$98,$01,$98,$01,$04,$82,$03,$0C,$03,$1B         ;B4E54B|        |      ;
-    db $49,$02,$00,$0D,$FF,$00,$10,$01,$13,$0A,$00,$1B         ;B4E557|        |      ;
-    db $45,$02,$00,$0D,$00,$01,$30,$01,$1B,$48,$02,$00         ;B4E563|        |      ;
-    db $13,$32,$00,$0B,$07,$1B,$49,$02,$00,$0D,$FF,$00         ;B4E56F|        |      ;
-    db $08,$01,$13,$40,$01,$1B,$50,$03,$00,$13,$B4,$00         ;B4E57B|        |      ;
-    db $13,$01,$00,$12,$87,$E5,$1A,$D8,$00,$18,$02,$EC         ;B4E587|        |      ;
-    db $81,$02,$0C,$04,$0D,$01,$00,$88,$01,$13,$3C,$00         ;B4E593|        |      ;
-    db $09,$07,$B2,$E5,$0B,$05,$13,$C8,$00,$1B,$4F,$03         ;B4E59F|        |      ;
-    db $00,$13,$01,$00,$12,$AC,$E5,$1A,$68,$01,$08,$02         ;B4E5AB|        |      ;
-    db $38,$8A,$00,$13,$3C,$00,$37,$10,$1A,$D8,$00,$D8         ;B4E5B7|        |      ;
-    db $02,$98,$81,$00,$0C,$06,$1B,$45,$03,$00,$13,$5A         ;B4E5C3|        |      ;
-    db $00,$1B,$46,$03,$00,$13,$A0,$00,$1B,$2B,$02,$01         ;B4E5CF|        |      ;
-    db $0D,$02,$00,$30,$01,$13,$01,$00,$12,$E0,$E5,$1A         ;B4E5DB|        |      ;
-    db $CC,$00,$D8,$02,$1C,$8B,$00,$13,$01,$00,$12,$EE         ;B4E5E7|        |      ;
-    db $E5                                                     ;B4E5F3|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($07)
+    %AICMD0x05_SetPosition($02A8, $0188)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $E516)
+    %AICMD0x09($02, $E5BF)
+    %AICMD0x09($03, $E4E4)
+    %AICMD0x09($04, $E58D)
+    %AICMD0x09($05, $E54C)
+    %AICMD0x09($06, $E5E6)
+    %AICMD0x06_SetDestination($05)
+    %AICMD0x38()
+    %AICMD0x13($003C)
+    %AICMD0x3A($01, $0030)
+    %AICMD0x13($0014)
+    %AICMD0x3A($03, $0050)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x19($0038, $00)
+    %AICMD0x13($005A)
+    %AICMD0x19($0029, $00)
+    %AICMD0x13($005A)
+    %AICMD0x3A($03, $004C)
+    %AICMD0x0B($02)
+    %AICMD0x19($0003, $00)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($012C)
+    %AICMD0x3A($00, $0050)
+    %AICMD0x13($000A)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x0B($03)
+    %AICMD0x0C($07)
+    %AICMD0x39($02, $0008)
+    %AICMD0x13($005A)
+    %AICMD0x19($00CC, $00)
+    %AICMD0x13($0078)
+    %AICMD0x19($008F, $00)
+    %AICMD0x13($0078)
+    %AICMD0x39($00, $0050)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x0B($04)
+    %AICMD0x0C($05)
+    %AICMD0x13($003C)
+    %AICMD0x19($0039, $00)
+    %AICMD0x13($005A)
+    %AICMD0x3A($00, $0018)
+    %AICMD0x13($000A)
+    %AICMD0x3A($03, $0028)
+    %AICMD0x13($0028)
+    %AICMD0x3A($00, $0044)
+    %AICMD0x13($001E)
+    %AICMD0x39($03, $0034)
+    %AICMD0x0B($06)
+    %AICMD0x13($0078)
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($0032)
+    %AICMD0x3A($02, $0010)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($003C)
+    %AICMD0x3A($02, $0030)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0208, $00F8, $81D4, $00)
+    %AICMD0x0C($00)
+    %AICMD0x0D($00, $01, $1C, $01)
+    %AICMD0x13($0014)
+    %AICMD0x09($06, $E509)
+    %AICMD0x13($0078)
+    %AICMD0x0B($01)
+    %AICMD0x1B($0351, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E503)
+    %AICMD0x1A($0208, $0114, $8A68, $00)
+    %AICMD0x13($0078)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0148, $0118, $818C, $00)
+    %AICMD0x0C($02)
+    %AICMD0x1B($021F, $00)
+    %AICMD0x0D($00, $01, $10, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0223, $01)
+    %AICMD0x0D($01, $00, $14, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($034C, $00)
+    %AICMD0x13($0028)
+    %AICMD0x1B($034D, $00)
+    %AICMD0x13($003C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E546)
+    %AICMD0x1A($0198, $0198, $8204, $03)
+    %AICMD0x0C($03)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x0D($FF, $00, $10, $01)
+    %AICMD0x13($000A)
+    %AICMD0x1B($0245, $00)
+    %AICMD0x0D($00, $01, $30, $01)
+    %AICMD0x1B($0248, $00)
+    %AICMD0x13($0032)
+    %AICMD0x0B($07)
+    %AICMD0x1B($0249, $00)
+    %AICMD0x0D($FF, $00, $08, $01)
+    %AICMD0x13($0140)
+    %AICMD0x1B($0350, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E587)
+    %AICMD0x1A($00D8, $0218, $81EC, $02)
+    %AICMD0x0C($04)
+    %AICMD0x0D($01, $00, $88, $01)
+    %AICMD0x13($003C)
+    %AICMD0x09($07, $E5B2)
+    %AICMD0x0B($05)
+    %AICMD0x13($00C8)
+    %AICMD0x1B($034F, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E5AC)
+    %AICMD0x1A($0168, $0208, $8A38, $00)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($00D8, $02D8, $8198, $00)
+    %AICMD0x0C($06)
+    %AICMD0x1B($0345, $00)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0346, $00)
+    %AICMD0x13($00A0)
+    %AICMD0x1B($022B, $01)
+    %AICMD0x0D($02, $00, $30, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E5E0)
+    %AICMD0x1A($00CC, $02D8, $8B1C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E5EE)
+
 pScripting_B4E5F4:
     dw DATA8_B4E614                                            ;B4E5F4|        |B4E614;
     dw pScripting_B4E7AF                                       ;B4E5F6|        |B4E7AF;
@@ -3181,42 +7868,127 @@ pScripting_B4E5F4:
     dw pScripting_B4E7AF                                       ;B4E612|        |B4E7AF;
  
 DATA8_B4E614:
-    db $00,$10,$B4,$02,$03,$06,$05,$88,$00,$78,$00,$07         ;B4E614|        |      ;
-    db $00,$40,$08,$09,$01,$7C,$E6,$09,$02,$C9,$E6,$09         ;B4E620|        |      ;
-    db $03,$4B,$E7,$06,$17,$38,$13,$3C,$00,$3A,$02,$18         ;B4E62C|        |      ;
-    db $00,$3A,$00,$20,$00,$3A,$02,$36,$00,$07,$01,$0B         ;B4E638|        |      ;
-    db $00,$0C,$01,$0B,$02,$13,$3C,$00,$0C,$03,$13,$1E         ;B4E644|        |      ;
-    db $00,$39,$03,$10,$00,$39,$01,$20,$00,$07,$02,$13         ;B4E650|        |      ;
-    db $C8,$00,$39,$02,$48,$00,$39,$01,$0E,$00,$13,$14         ;B4E65C|        |      ;
-    db $00,$07,$03,$13,$5A,$00,$19,$42,$00,$00,$13,$78         ;B4E668|        |      ;
-    db $00,$07,$00,$0C,$04,$3D,$3D,$10,$1A,$68,$01,$98         ;B4E674|        |      ;
-    db $00,$A4,$84,$01,$13,$78,$00,$1B,$F5,$02,$00,$0D         ;B4E680|        |      ;
-    db $00,$FF,$80,$04,$13,$3C,$00,$1B,$F7,$02,$00,$0D         ;B4E68C|        |      ;
-    db $FF,$00,$80,$04,$13,$3C,$00,$1B,$F3,$02,$00,$0D         ;B4E698|        |      ;
-    db $00,$01,$50,$04,$13,$3C,$00,$1B,$F7,$02,$01,$0D         ;B4E6A4|        |      ;
-    db $01,$00,$60,$04,$13,$3C,$00,$1B,$F7,$02,$00,$0D         ;B4E6B0|        |      ;
-    db $FF,$00,$50,$04,$13,$3C,$00,$13,$01,$00,$12,$C3         ;B4E6BC|        |      ;
-    db $E6,$1A,$38,$01,$78,$00,$5C,$84,$00,$0C,$00,$13         ;B4E6C8|        |      ;
-    db $1E,$00,$1B,$E3,$02,$00,$0D,$00,$01,$42,$01,$1B         ;B4E6D4|        |      ;
-    db $E6,$02,$00,$0B,$01,$0C,$02,$13,$14,$00,$1B,$E7         ;B4E6E0|        |      ;
-    db $02,$00,$0D,$FF,$00,$08,$02,$1B,$33,$02,$00,$13         ;B4E6EC|        |      ;
-    db $3C,$00,$1B,$F0,$02,$00,$09,$04,$3E,$E7,$13,$5A         ;B4E6F8|        |      ;
-    db $00,$1B,$E5,$02,$00,$0D,$00,$FF,$30,$01,$0B,$03         ;B4E704|        |      ;
-    db $13,$28,$00,$1B,$E6,$02,$01,$13,$A0,$00,$1B,$E7         ;B4E710|        |      ;
-    db $02,$01,$0D,$01,$00,$08,$01,$13,$3C,$00,$1B,$E7         ;B4E71C|        |      ;
-    db $02,$01,$13,$5A,$00,$1B,$33,$02,$01,$13,$3C,$00         ;B4E728|        |      ;
-    db $1B,$ED,$02,$01,$13,$01,$00,$12,$38,$E7,$1A,$30         ;B4E734|        |      ;
-    db $01,$A0,$00,$4C,$8B,$00,$13,$3C,$00,$37,$10,$1A         ;B4E740|        |      ;
-    db $28,$01,$98,$00,$14,$81,$02,$1B,$EC,$01,$00,$13         ;B4E74C|        |      ;
-    db $78,$00,$1B,$F8,$01,$00,$13,$B4,$00,$1B,$EB,$01         ;B4E758|        |      ;
-    db $00,$13,$B4,$00,$0C,$03,$13,$78,$00,$1B,$DF,$01         ;B4E764|        |      ;
-    db $00,$0D,$00,$01,$20,$01,$13,$1E,$00,$1B,$EC,$01         ;B4E770|        |      ;
-    db $00,$0D,$FF,$00,$70,$01,$13,$78,$00,$1B,$EC,$01         ;B4E77C|        |      ;
-    db $01,$0D,$01,$00,$98,$01,$1B,$F2,$01,$01,$13,$3C         ;B4E788|        |      ;
-    db $00,$1B,$E9,$01,$01,$0D,$01,$00,$20,$02,$1B,$E1         ;B4E794|        |      ;
-    db $01,$00,$0D,$00,$FF,$20,$02,$0B,$04,$13,$01,$00         ;B4E7A0|        |      ;
-    db $12,$A9,$E7                                             ;B4E7AC|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0088, $0078)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x40()
+    %AICMD0x08()
+    %AICMD0x09($01, $E67C)
+    %AICMD0x09($02, $E6C9)
+    %AICMD0x09($03, $E74B)
+    %AICMD0x06_SetDestination($17)
+    %AICMD0x38()
+    %AICMD0x13($003C)
+    %AICMD0x3A($02, $0018)
+    %AICMD0x3A($00, $0020)
+    %AICMD0x3A($02, $0036)
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x0B($02)
+    %AICMD0x13($003C)
+    %AICMD0x0C($03)
+    %AICMD0x13($001E)
+    %AICMD0x39($03, $0010)
+    %AICMD0x39($01, $0020)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($00C8)
+    %AICMD0x39($02, $0048)
+    %AICMD0x39($01, $000E)
+    %AICMD0x13($0014)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($005A)
+    %AICMD0x19($0042, $00)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x0C($04)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0168, $0098, $84A4, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02F5, $00)
+    %AICMD0x0D($00, $FF, $80, $04)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F7, $00)
+    %AICMD0x0D($FF, $00, $80, $04)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F3, $00)
+    %AICMD0x0D($00, $01, $50, $04)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F7, $01)
+    %AICMD0x0D($01, $00, $60, $04)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F7, $00)
+    %AICMD0x0D($FF, $00, $50, $04)
+    %AICMD0x13($003C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E6C3)
+    %AICMD0x1A($0138, $0078, $845C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $42, $01)
+    %AICMD0x1B($02E6, $00)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x13($0014)
+    %AICMD0x1B($02E7, $00)
+    %AICMD0x0D($FF, $00, $08, $02)
+    %AICMD0x1B($0233, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F0, $00)
+    %AICMD0x09($04, $E73E)
+    %AICMD0x13($005A)
+    %AICMD0x1B($02E5, $00)
+    %AICMD0x0D($00, $FF, $30, $01)
+    %AICMD0x0B($03)
+    %AICMD0x13($0028)
+    %AICMD0x1B($02E6, $01)
+    %AICMD0x13($00A0)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x0D($01, $00, $08, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02E7, $01)
+    %AICMD0x13($005A)
+    %AICMD0x1B($0233, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02ED, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E738)
+    %AICMD0x1A($0130, $00A0, $8B4C, $00)
+    %AICMD0x13($003C)
+    %AICMD0x37()
+    %AICMD0x10_End()
+    %AICMD0x1A($0128, $0098, $8114, $02)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01F8, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EB, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x0C($03)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01DF, $00)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $70, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $98, $01)
+    %AICMD0x1B($01F2, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01E9, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x1B($01E1, $00)
+    %AICMD0x0D($00, $FF, $20, $02)
+    %AICMD0x0B($04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E7A9)
+
 pScripting_B4E7AF:
     dw DATA8_B4E7CF                                            ;B4E7AF|        |B4E7CF;
     dw pScripting_B4E989                                       ;B4E7B1|        |B4E989;
@@ -3236,44 +8008,132 @@ pScripting_B4E7AF:
     dw pScripting_B4E989                                       ;B4E7CD|        |B4E989;
  
 DATA8_B4E7CF:
-    db $47,$21,$09,$80,$02,$00,$10,$B4,$23,$60,$1F,$7F         ;B4E7CF|        |      ;
-    db $03,$02,$03,$06,$05,$58,$00,$68,$00,$07,$02,$08         ;B4E7DB|        |      ;
-    db $09,$01,$62,$E8,$09,$02,$B4,$E8,$09,$03,$06,$E9         ;B4E7E7|        |      ;
-    db $09,$04,$3B,$E9,$09,$05,$74,$E9,$09,$06,$E0,$E8         ;B4E7F3|        |      ;
-    db $06,$40,$38,$56,$13,$3C,$00,$39,$02,$10,$00,$13         ;B4E7FF|        |      ;
-    db $12,$00,$56,$13,$3C,$00,$39,$02,$10,$00,$13,$12         ;B4E80B|        |      ;
-    db $00,$56,$13,$3C,$00,$39,$02,$08,$00,$13,$12,$00         ;B4E817|        |      ;
-    db $19,$41,$00,$00,$13,$5A,$00,$0B,$00,$19,$3D,$00         ;B4E823|        |      ;
-    db $00,$13,$78,$00,$07,$03,$13,$3C,$00,$0C,$01,$3A         ;B4E82F|        |      ;
-    db $03,$10,$00,$13,$3C,$00,$19,$42,$00,$00,$13,$3C         ;B4E83B|        |      ;
-    db $00,$19,$23,$00,$00,$13,$78,$00,$0B,$02,$0C,$03         ;B4E847|        |      ;
-    db $39,$03,$10,$00,$13,$1E,$00,$28,$60,$1F,$7F,$03         ;B4E853|        |      ;
-    db $3D,$3D,$10,$1A,$30,$00,$68,$00,$A4,$84,$02,$0C         ;B4E85F|        |      ;
-    db $00,$0D,$01,$00,$40,$04,$13,$1E,$00,$0D,$01,$00         ;B4E86B|        |      ;
-    db $18,$04,$13,$1E,$00,$1B,$F6,$02,$01,$13,$1E,$00         ;B4E877|        |      ;
-    db $0D,$01,$00,$20,$04,$1B,$F6,$02,$01,$13,$1E,$00         ;B4E883|        |      ;
-    db $1B,$F7,$02,$01,$0D,$01,$00,$20,$04,$13,$1E,$00         ;B4E88F|        |      ;
-    db $0B,$01,$0C,$02,$13,$3C,$00,$1B,$F7,$02,$00,$0D         ;B4E89B|        |      ;
-    db $FF,$00,$20,$02,$13,$5A,$00,$13,$01,$00,$12,$AE         ;B4E8A7|        |      ;
-    db $E8,$1A,$F6,$FF,$68,$00,$74,$84,$02,$0C,$02,$0D         ;B4E8B3|        |      ;
-    db $01,$00,$40,$01,$1B,$E6,$02,$01,$13,$3C,$00,$1B         ;B4E8BF|        |      ;
-    db $ED,$02,$01,$13,$78,$00,$1B,$33,$02,$01,$13,$3C         ;B4E8CB|        |      ;
-    db $00,$0B,$03,$13,$01,$00,$12,$DA,$E8,$1A,$24,$00         ;B4E8D7|        |      ;
-    db $78,$00,$BC,$84,$00,$0D,$00,$01,$40,$02,$13,$3C         ;B4E8E3|        |      ;
-    db $00,$1B,$FF,$02,$01,$0D,$01,$00,$20,$02,$13,$78         ;B4E8EF|        |      ;
-    db $00,$1B,$F8,$02,$01,$13,$01,$00,$12,$00,$E9,$1A         ;B4E8FB|        |      ;
-    db $48,$00,$98,$00,$14,$81,$03,$1B,$F4,$01,$00,$13         ;B4E907|        |      ;
-    db $B4,$00,$1B,$F5,$01,$00,$13,$78,$00,$1B,$F0,$01         ;B4E913|        |      ;
-    db $00,$13,$78,$00,$1B,$EA,$01,$00,$13,$B4,$00,$1B         ;B4E91F|        |      ;
-    db $EB,$01,$00,$13,$3C,$00,$1B,$EA,$01,$00,$13,$01         ;B4E92B|        |      ;
-    db $00,$12,$35,$E9,$1A,$B8,$00,$98,$00,$2C,$81,$03         ;B4E937|        |      ;
-    db $1B,$01,$02,$00,$13,$B4,$00,$1B,$01,$02,$00,$0D         ;B4E943|        |      ;
-    db $FF,$00,$20,$01,$1B,$03,$02,$00,$13,$F0,$00,$1B         ;B4E94F|        |      ;
-    db $05,$02,$00,$13,$B4,$00,$1B,$01,$02,$01,$0D,$01         ;B4E95B|        |      ;
-    db $00,$20,$01,$1B,$05,$02,$01,$13,$B4,$00,$12,$43         ;B4E967|        |      ;
-    db $E9,$1A,$A8,$00,$28,$00,$44,$81,$03,$22,$18,$10         ;B4E973|        |      ;
-    db $01,$44,$81,$08,$13,$01,$00,$12,$83,$E9                 ;B4E97F|        |      ;
  
+    %AICMD0x47($800921, $02)
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x23_OrWithIndexedValue($7F1F60, $03)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0058, $0068)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x08()
+    %AICMD0x09($01, $E862)
+    %AICMD0x09($02, $E8B4)
+    %AICMD0x09($03, $E906)
+    %AICMD0x09($04, $E93B)
+    %AICMD0x09($05, $E974)
+    %AICMD0x09($06, $E8E0)
+    %AICMD0x06_SetDestination($40)
+    %AICMD0x38()
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($003C)
+    %AICMD0x39($02, $0010)
+    %AICMD0x13($0012)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($003C)
+    %AICMD0x39($02, $0010)
+    %AICMD0x13($0012)
+    %AICMD0x56_UseEquippedItem()
+    %AICMD0x13($003C)
+    %AICMD0x39($02, $0008)
+    %AICMD0x13($0012)
+    %AICMD0x19($0041, $00)
+    %AICMD0x13($005A)
+    %AICMD0x0B($00)
+    %AICMD0x19($003D, $00)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($03)
+    %AICMD0x13($003C)
+    %AICMD0x0C($01)
+    %AICMD0x3A($03, $0010)
+    %AICMD0x13($003C)
+    %AICMD0x19($0042, $00)
+    %AICMD0x13($003C)
+    %AICMD0x19($0023, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0B($02)
+    %AICMD0x0C($03)
+    %AICMD0x39($03, $0010)
+    %AICMD0x13($001E)
+    %AICMD0x28($1F60, $7F, $03)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0030, $0068, $84A4, $02)
+    %AICMD0x0C($00)
+    %AICMD0x0D($01, $00, $40, $04)
+    %AICMD0x13($001E)
+    %AICMD0x0D($01, $00, $18, $04)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02F6, $01)
+    %AICMD0x13($001E)
+    %AICMD0x0D($01, $00, $20, $04)
+    %AICMD0x1B($02F6, $01)
+    %AICMD0x13($001E)
+    %AICMD0x1B($02F7, $01)
+    %AICMD0x0D($01, $00, $20, $04)
+    %AICMD0x13($001E)
+    %AICMD0x0B($01)
+    %AICMD0x0C($02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F7, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x13($005A)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E8AE)
+    %AICMD0x1A($FFF6, $0068, $8474, $02)
+    %AICMD0x0C($02)
+    %AICMD0x0D($01, $00, $40, $01)
+    %AICMD0x1B($02E6, $01)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02ED, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0233, $01)
+    %AICMD0x13($003C)
+    %AICMD0x0B($03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E8DA)
+    %AICMD0x1A($0024, $0078, $84BC, $00)
+    %AICMD0x0D($00, $01, $40, $02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02FF, $01)
+    %AICMD0x0D($01, $00, $20, $02)
+    %AICMD0x13($0078)
+    %AICMD0x1B($02F8, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E900)
+    %AICMD0x1A($0048, $0098, $8114, $03)
+    %AICMD0x1B($01F4, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01F5, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01F0, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EA, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EB, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01EA, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E935)
+    %AICMD0x1A($00B8, $0098, $812C, $03)
+    %AICMD0x1B($0201, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0201, $00)
+    %AICMD0x0D($FF, $00, $20, $01)
+    %AICMD0x1B($0203, $00)
+    %AICMD0x13($00F0)
+    %AICMD0x1B($0205, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0201, $01)
+    %AICMD0x0D($01, $00, $20, $01)
+    %AICMD0x1B($0205, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($E943)
+    %AICMD0x1A($00A8, $0028, $8144, $03)
+    %AICMD0x22($18, $10, $01, $8144, $08)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($E983)
+
 pScripting_B4E989:
     dw DATA8_B4E9A9                                            ;B4E989|        |B4E9A9;
     dw DATA8_B4EBA1                                            ;B4E98B|        |B4EBA1;
@@ -3293,487 +8153,222 @@ pScripting_B4E989:
     dw DATA8_B4ECB4                                            ;B4E9A7|        |B4ECB4;
  
 DATA8_B4E9A9:
-    db $00,$10,$B4,$02,$03,$06,$05,$60,$00,$C8,$00,$40         ;B4E9A9|        |      ;
-    db $07,$01,$08,$09,$01,$0B,$EA,$09,$02,$68,$EA,$09         ;B4E9B5|        |      ;
-    db $03,$92,$EA,$09,$04,$BF,$EA,$09,$05,$54,$EB,$09         ;B4E9C1|        |      ;
-    db $06,$2D,$EB,$09,$07,$70,$EB,$09,$08,$7E,$EB,$09         ;B4E9CD|        |      ;
-    db $09,$93,$EB,$09,$0A,$ED,$EA,$09,$0B,$FB,$EA,$06         ;B4E9D9|        |      ;
-    db $49,$38,$0C,$02,$13,$B4,$00,$39,$01,$50,$00,$13         ;B4E9E5|        |      ;
-    db $3C,$00,$39,$02,$18,$00,$07,$00,$13,$3C,$00,$07         ;B4E9F1|        |      ;
-    db $02,$13,$78,$00,$07,$00,$13,$3C,$00,$0C,$03,$3D         ;B4E9FD|        |      ;
-    db $3D,$10,$1A,$10,$01,$78,$00,$14,$81,$00,$13,$78         ;B4EA09|        |      ;
-    db $00,$1B,$EC,$01,$00,$0D,$FF,$00,$48,$01,$13,$78         ;B4EA15|        |      ;
-    db $00,$1B,$E9,$01,$00,$0D,$FF,$00,$20,$02,$13,$3C         ;B4EA21|        |      ;
-    db $00,$1B,$EA,$01,$00,$13,$B4,$00,$1B,$EB,$01,$00         ;B4EA2D|        |      ;
-    db $13,$50,$00,$1B,$E9,$01,$00,$0D,$FF,$00,$20,$02         ;B4EA39|        |      ;
-    db $13,$50,$00,$1B,$DB,$01,$00,$13,$78,$00,$1B,$DC         ;B4EA45|        |      ;
-    db $01,$00,$13,$3C,$00,$1B,$EC,$01,$01,$0D,$01,$00         ;B4EA51|        |      ;
-    db $68,$01,$0B,$03,$10,$13,$01,$00,$12,$62,$EA,$1A         ;B4EA5D|        |      ;
-    db $68,$00,$58,$00,$5C,$84,$00,$0C,$00,$1B,$E3,$02         ;B4EA69|        |      ;
-    db $00,$0D,$00,$01,$24,$01,$13,$78,$00,$0B,$01,$1B         ;B4EA75|        |      ;
-    db $E3,$02,$00,$0D,$00,$FF,$20,$01,$13,$78,$00,$13         ;B4EA81|        |      ;
-    db $01,$00,$12,$8C,$EA,$1A,$68,$00,$68,$00,$BC,$84         ;B4EA8D|        |      ;
-    db $00,$13,$78,$00,$0D,$00,$01,$20,$01,$1B,$FB,$02         ;B4EA99|        |      ;
-    db $00,$13,$3C,$00,$0B,$00,$0C,$01,$1B,$FB,$02,$00         ;B4EAA5|        |      ;
-    db $0D,$00,$FF,$20,$01,$13,$78,$00,$13,$01,$00,$12         ;B4EAB1|        |      ;
-    db $B9,$EA,$1A,$88,$00,$58,$00,$A4,$84,$02,$13,$B4         ;B4EABD|        |      ;
-    db $00,$0D,$01,$00,$10,$02,$13,$78,$00,$0C,$02,$1B         ;B4EAC9|        |      ;
-    db $F7,$02,$01,$0D,$FF,$00,$1E,$02,$13,$3C,$00,$1B         ;B4EAD5|        |      ;
-    db $F3,$02,$00,$13,$3C,$00,$13,$01,$00,$12,$E7,$EA         ;B4EAE1|        |      ;
-    db $1A,$58,$00,$58,$00,$38,$84,$00,$13,$01,$00,$12         ;B4EAED|        |      ;
-    db $F5,$EA,$1A,$78,$00,$58,$00,$50,$84,$00,$13,$B4         ;B4EAF9|        |      ;
-    db $00,$1B,$E1,$02,$01,$0D,$01,$00,$10,$01,$13,$5A         ;B4EB05|        |      ;
-    db $00,$0B,$02,$1B,$E1,$02,$01,$0D,$FF,$00,$20,$02         ;B4EB11|        |      ;
-    db $13,$3C,$00,$1B,$DF,$02,$00,$13,$3C,$00,$13,$01         ;B4EB1D|        |      ;
-    db $00,$12,$27,$EB,$1A,$28,$00,$68,$00,$2C,$81,$02         ;B4EB29|        |      ;
-    db $1B,$01,$02,$01,$13,$B4,$00,$1B,$01,$02,$01,$13         ;B4EB35|        |      ;
-    db $B4,$00,$1B,$03,$02,$01,$13,$F0,$00,$1B,$05,$02         ;B4EB41|        |      ;
-    db $01,$13,$B4,$00,$12,$35,$EB,$1A,$A8,$00,$98,$00         ;B4EB4D|        |      ;
-    db $88,$88,$03,$13,$78,$00,$1B,$92,$01,$01,$13,$78         ;B4EB59|        |      ;
-    db $00,$1B,$95,$01,$01,$13,$01,$00,$12,$5C,$EB,$1A         ;B4EB65|        |      ;
-    db $D8,$00,$58,$00,$44,$81,$03,$13,$01,$00,$12,$78         ;B4EB71|        |      ;
-    db $EB,$1A,$C8,$00,$68,$00,$50,$81,$03,$22,$08,$08         ;B4EB7D|        |      ;
-    db $01,$50,$81,$04,$13,$01,$00,$12,$8D,$EB,$1A,$98         ;B4EB89|        |      ;
-    db $00,$24,$00,$70,$85,$03,$13,$01,$00,$12,$9B,$EB         ;B4EB95|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0060, $00C8)
+    %AICMD0x40()
+    %AICMD0x07_SetPlayerDirection($01)
+    %AICMD0x08()
+    %AICMD0x09($01, $EA0B)
+    %AICMD0x09($02, $EA68)
+    %AICMD0x09($03, $EA92)
+    %AICMD0x09($04, $EABF)
+    %AICMD0x09($05, $EB54)
+    %AICMD0x09($06, $EB2D)
+    %AICMD0x09($07, $EB70)
+    %AICMD0x09($08, $EB7E)
+    %AICMD0x09($09, $EB93)
+    %AICMD0x09($0A, $EAED)
+    %AICMD0x09($0B, $EAFB)
+    %AICMD0x06_SetDestination($49)
+    %AICMD0x38()
+    %AICMD0x0C($02)
+    %AICMD0x13($00B4)
+    %AICMD0x39($01, $0050)
+    %AICMD0x13($003C)
+    %AICMD0x39($02, $0018)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($003C)
+    %AICMD0x07_SetPlayerDirection($02)
+    %AICMD0x13($0078)
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x13($003C)
+    %AICMD0x0C($03)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($0110, $0078, $8114, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01EC, $00)
+    %AICMD0x0D($FF, $00, $48, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01E9, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01EA, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($01EB, $00)
+    %AICMD0x13($0050)
+    %AICMD0x1B($01E9, $00)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x13($0050)
+    %AICMD0x1B($01DB, $00)
+    %AICMD0x13($0078)
+    %AICMD0x1B($01DC, $00)
+    %AICMD0x13($003C)
+    %AICMD0x1B($01EC, $01)
+    %AICMD0x0D($01, $00, $68, $01)
+    %AICMD0x0B($03)
+    %AICMD0x10_End()
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EA62)
+    %AICMD0x1A($0068, $0058, $845C, $00)
+    %AICMD0x0C($00)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $01, $24, $01)
+    %AICMD0x13($0078)
+    %AICMD0x0B($01)
+    %AICMD0x1B($02E3, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EA8C)
+    %AICMD0x1A($0068, $0068, $84BC, $00)
+    %AICMD0x13($0078)
+    %AICMD0x0D($00, $01, $20, $01)
+    %AICMD0x1B($02FB, $00)
+    %AICMD0x13($003C)
+    %AICMD0x0B($00)
+    %AICMD0x0C($01)
+    %AICMD0x1B($02FB, $00)
+    %AICMD0x0D($00, $FF, $20, $01)
+    %AICMD0x13($0078)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EAB9)
+    %AICMD0x1A($0088, $0058, $84A4, $02)
+    %AICMD0x13($00B4)
+    %AICMD0x0D($01, $00, $10, $02)
+    %AICMD0x13($0078)
+    %AICMD0x0C($02)
+    %AICMD0x1B($02F7, $01)
+    %AICMD0x0D($FF, $00, $1E, $02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02F3, $00)
+    %AICMD0x13($003C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EAE7)
+    %AICMD0x1A($0058, $0058, $8438, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EAF5)
+    %AICMD0x1A($0078, $0058, $8450, $00)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($02E1, $01)
+    %AICMD0x0D($01, $00, $10, $01)
+    %AICMD0x13($005A)
+    %AICMD0x0B($02)
+    %AICMD0x1B($02E1, $01)
+    %AICMD0x0D($FF, $00, $20, $02)
+    %AICMD0x13($003C)
+    %AICMD0x1B($02DF, $00)
+    %AICMD0x13($003C)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EB27)
+    %AICMD0x1A($0028, $0068, $812C, $02)
+    %AICMD0x1B($0201, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0201, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x1B($0203, $01)
+    %AICMD0x13($00F0)
+    %AICMD0x1B($0205, $01)
+    %AICMD0x13($00B4)
+    %AICMD0x12_Jump($EB35)
+    %AICMD0x1A($00A8, $0098, $8888, $03)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0192, $01)
+    %AICMD0x13($0078)
+    %AICMD0x1B($0195, $01)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EB5C)
+    %AICMD0x1A($00D8, $0058, $8144, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EB78)
+    %AICMD0x1A($00C8, $0068, $8150, $03)
+    %AICMD0x22($08, $08, $01, $8150, $04)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EB8D)
+    %AICMD0x1A($0098, $0024, $8570, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EB9B)
+
 DATA8_B4EBA1:
-    db $00,$10,$B4,$02,$03,$06,$05,$78,$00,$88,$00,$40         ;B4EBA1|        |      ;
-    db $07,$00,$08,$09,$01,$F0,$EB,$09,$02,$05,$EC,$09         ;B4EBAD|        |      ;
-    db $03,$13,$EC,$09,$04,$21,$EC,$09,$05,$60,$EC,$09         ;B4EBB9|        |      ;
-    db $06,$52,$EC,$09,$07,$6E,$EC,$09,$08,$83,$EC,$09         ;B4EBC5|        |      ;
-    db $09,$98,$EC,$09,$0A,$2F,$EC,$09,$0B,$3D,$EC,$09         ;B4EBD1|        |      ;
-    db $0C,$A6,$EC,$06,$4A,$38,$01,$24,$74,$13,$B4,$00         ;B4EBDD|        |      ;
-    db $02,$13,$F0,$00,$3D,$3D,$10,$1A,$A8,$00,$88,$00         ;B4EBE9|        |      ;
-    db $14,$81,$00,$13,$01,$00,$1B,$4B,$03,$00,$13,$01         ;B4EBF5|        |      ;
-    db $00,$12,$FF,$EB,$1A,$68,$00,$68,$00,$5C,$84,$00         ;B4EC01|        |      ;
-    db $13,$01,$00,$12,$0D,$EC,$1A,$68,$00,$78,$00,$B0         ;B4EC0D|        |      ;
-    db $84,$00,$13,$01,$00,$12,$1B,$EC,$1A,$88,$00,$68         ;B4EC19|        |      ;
-    db $00,$98,$84,$00,$13,$01,$00,$12,$29,$EC,$1A,$58         ;B4EC25|        |      ;
-    db $00,$68,$00,$38,$84,$00,$13,$01,$00,$12,$37,$EC         ;B4EC31|        |      ;
-    db $1A,$78,$00,$68,$00,$50,$84,$00,$13,$01,$00,$1B         ;B4EC3D|        |      ;
-    db $49,$03,$00,$13,$01,$00,$12,$4C,$EC,$1A,$48,$00         ;B4EC49|        |      ;
-    db $88,$00,$2C,$81,$02,$13,$01,$00,$12,$5A,$EC,$1A         ;B4EC55|        |      ;
-    db $88,$00,$98,$00,$FC,$80,$03,$13,$01,$00,$12,$68         ;B4EC61|        |      ;
-    db $EC,$1A,$C0,$00,$70,$00,$44,$81,$03,$13,$01,$00         ;B4EC6D|        |      ;
-    db $1B,$14,$04,$00,$13,$01,$00,$12,$7D,$EC,$1A,$C8         ;B4EC79|        |      ;
-    db $00,$78,$00,$50,$81,$03,$13,$01,$00,$1B,$1C,$04         ;B4EC85|        |      ;
-    db $00,$13,$01,$00,$12,$92,$EC,$1A,$A8,$00,$A0,$00         ;B4EC91|        |      ;
-    db $C8,$84,$03,$13,$01,$00,$12,$A0,$EC,$1A,$98,$00         ;B4EC9D|        |      ;
-    db $A0,$00,$C8,$84,$00,$13,$01,$00,$12,$AE,$EC             ;B4ECA9|        |      ;
  
+    %AICMD0x00_SetMusic($10, $B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x03_SetHour($06)
+    %AICMD0x05_SetPosition($0078, $0088)
+    %AICMD0x40()
+    %AICMD0x07_SetPlayerDirection($00)
+    %AICMD0x08()
+    %AICMD0x09($01, $EBF0)
+    %AICMD0x09($02, $EC05)
+    %AICMD0x09($03, $EC13)
+    %AICMD0x09($04, $EC21)
+    %AICMD0x09($05, $EC60)
+    %AICMD0x09($06, $EC52)
+    %AICMD0x09($07, $EC6E)
+    %AICMD0x09($08, $EC83)
+    %AICMD0x09($09, $EC98)
+    %AICMD0x09($0A, $EC2F)
+    %AICMD0x09($0B, $EC3D)
+    %AICMD0x09($0C, $ECA6)
+    %AICMD0x06_SetDestination($4A)
+    %AICMD0x38()
+    %AICMD0x01_UnfreezeTime()
+    %AICMD0x24($74)
+    %AICMD0x13($00B4)
+    %AICMD0x02_FreezeTime()
+    %AICMD0x13($00F0)
+    %AICMD0x3D($3D)
+    %AICMD0x10_End()
+    %AICMD0x1A($00A8, $0088, $8114, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1B($034B, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EBFF)
+    %AICMD0x1A($0068, $0068, $845C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC0D)
+    %AICMD0x1A($0068, $0078, $84B0, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC1B)
+    %AICMD0x1A($0088, $0068, $8498, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC29)
+    %AICMD0x1A($0058, $0068, $8438, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC37)
+    %AICMD0x1A($0078, $0068, $8450, $00)
+    %AICMD0x13($0001)
+    %AICMD0x1B($0349, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC4C)
+    %AICMD0x1A($0048, $0088, $812C, $02)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC5A)
+    %AICMD0x1A($0088, $0098, $80FC, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC68)
+    %AICMD0x1A($00C0, $0070, $8144, $03)
+    %AICMD0x13($0001)
+    %AICMD0x1B($0414, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC7D)
+    %AICMD0x1A($00C8, $0078, $8150, $03)
+    %AICMD0x13($0001)
+    %AICMD0x1B($041C, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($EC92)
+    %AICMD0x1A($00A8, $00A0, $84C8, $03)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($ECA0)
+    %AICMD0x1A($0098, $00A0, $84C8, $00)
+    %AICMD0x13($0001)
+    %AICMD0x12_Jump($ECAE)
+
 DATA8_B4ECB4:
-    db $00,$00,$00                                             ;B4ECB4|        |      ;
  
-Padding_B40000:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ECFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4ED9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDA7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDB3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDBF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDCB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDD7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDE3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDEF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EDFB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EE97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEBB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EED3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEDF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EEF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EF9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4EFFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F00B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F017|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F023|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F02F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F03B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F047|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F053|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F05F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F06B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F077|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F083|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F08F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F09B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F0FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F107|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F113|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F11F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F12B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F137|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F143|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F14F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F15B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F167|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F173|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F17F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F18B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F197|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F1F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F203|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F20F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F21B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F227|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F233|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F23F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F24B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F257|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F263|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F26F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F27B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F287|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F293|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F29F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F2FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F30B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F317|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F323|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F32F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F33B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F347|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F353|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F35F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F36B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F377|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F383|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F38F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F39B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F3FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F407|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F413|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F41F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F42B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F437|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F443|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F44F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F45B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F467|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F473|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F47F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F48B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F497|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F4F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F503|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F50F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F51B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F527|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F533|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F53F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F54B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F557|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F563|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F56F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F57B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F587|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F593|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F59F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F5FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F60B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F617|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F623|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F62F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F63B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F647|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F653|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F65F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F66B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F677|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F683|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F68F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F69B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F6FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F707|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F713|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F71F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F72B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F737|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F743|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F74F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F75B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F767|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F773|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F77F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F78B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F797|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F7F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F803|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F80F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F81B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F827|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F833|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F83F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F84B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F857|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F863|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F86F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F87B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F887|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F893|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F89F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F8FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F90B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F917|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F923|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F92F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F93B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F947|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F953|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F95F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F96B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F977|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F983|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F98F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F99B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4F9FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FA97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FAA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FAAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FABB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FAC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FAD3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FADF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FAEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FAF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FB9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FBFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FC9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCA7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCB3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCBF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCCB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCD7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCE3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCEF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FCFB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FD97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDBB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDD3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDDF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FDF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FE9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FECF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FEFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FF9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFA7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFB3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFBF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFCB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFD7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFE3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;B4FFEF|        |      ;
-    db $00,$00,$00,$00,$00                                     ;B4FFFB|        |      ;
+    %AICMD0x00_SetMusic($00, $00)
+
+    pad $B4FFFF
