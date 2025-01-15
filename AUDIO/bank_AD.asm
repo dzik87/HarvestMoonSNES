@@ -342,7 +342,7 @@ sAudioTrack_AD8000:
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;AD8FC0|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00                 ;AD8FCC|        |      ;
  
-sAudioTrack_AD8FD6:
+sAudioTrack_Spring:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$77,$00         ;AD8FD6|        |      ;
     db $CD,$00,$3C,$01,$B2,$01,$10,$02,$00,$00,$00,$00         ;AD8FE2|        |      ;
     db $FA,$0B,$F5,$DB,$5A,$5A,$F7,$05,$3C,$01,$E7,$1B         ;AD8FEE|        |      ;
@@ -407,7 +407,7 @@ sAudioTrack_AD8FD6:
     db $A6,$C9,$AF,$C9,$00,$18,$B2,$0C,$AD,$C9,$18,$AD         ;AD92B2|        |      ;
     db $B2,$AD,$B2,$00                                         ;AD92BE|        |      ;
  
-sAudioTrack_AD92C2:
+sAudioTrack_Winter:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$83,$00         ;AD92C2|        |      ;
     db $C9,$00,$1E,$01,$7F,$01,$CB,$01,$00,$00,$00,$00         ;AD92CE|        |      ;
     db $FA,$0B,$F5,$DB,$3C,$3C,$F7,$05,$3C,$01,$E7,$15         ;AD92DA|        |      ;
@@ -467,7 +467,7 @@ sAudioTrack_AD92C2:
     db $AD,$0C,$B4,$C9,$18,$B4,$00,$0C,$AD,$B0,$B4,$B2         ;AD9562|        |      ;
     db $B4,$C9,$18,$B7,$B5,$B4,$B2,$B0,$B2,$00                 ;AD956E|        |      ;
  
-sAudioTrack_AD9578:
+sAudioTrack_TrollsCave:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$61,$00         ;AD9578|        |      ;
     db $DC,$00,$88,$01,$AD,$01,$C3,$01,$00,$00,$00,$00         ;AD9584|        |      ;
     db $FA,$0B,$F5,$D7,$5A,$5A,$F7,$05,$3C,$01,$E7,$1D         ;AD9590|        |      ;
@@ -532,7 +532,7 @@ sAudioTrack_AD9578:
     db $C0,$0C,$BC,$BE,$BC,$60,$C0,$00,$3C,$C0,$0C,$BC         ;AD9854|        |      ;
     db $BE,$BC,$60,$C0,$00,$A9,$A4,$A9,$A4,$00                 ;AD9860|        |      ;
  
-sAudioTrack_AD986A:
+sAudioTrack_StarNightFestival:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$57,$00         ;AD986A|        |      ;
     db $6B,$00,$84,$00,$99,$00,$E9,$00,$00,$00,$00,$00         ;AD9876|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E7,$12         ;AD9882|        |      ;
@@ -675,7 +675,7 @@ sAudioTrack_AD9AA7:
     db $AD,$10,$AE,$08,$AD,$10,$AE,$08,$B0,$00,$A4,$C9         ;AD9ED3|        |      ;
     db $AB,$A4,$C9,$AB,$A4,$C9,$AB,$A4,$C9,$AB,$00             ;AD9EDF|        |      ;
  
-sAudioTrack_AD9EEA:
+sAudioTrack_BadEnding:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$51,$00         ;AD9EEA|        |      ;
     db $7C,$00,$AE,$00,$C6,$00,$DE,$00,$00,$00,$00,$00         ;AD9EF6|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E9,$01         ;AD9F02|        |      ;
@@ -700,7 +700,7 @@ sAudioTrack_AD9EEA:
     db $48,$B5,$18,$B3,$60,$B5,$18,$C9,$3C,$BC,$0C,$B0         ;AD9FE6|        |      ;
     db $60,$B5,$18,$C9,$3C,$BC,$0C,$B0,$5A,$B5,$00             ;AD9FF2|        |      ;
  
-sAudioTrack_AD9FFD:
+sAudioTrack_HarvestFestival:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$66,$00         ;AD9FFD|        |      ;
     db $EA,$00,$44,$01,$8D,$01,$01,$02,$00,$00,$00,$00         ;ADA009|        |      ;
     db $FA,$0B,$F5,$FC,$5A,$5A,$F7,$05,$3C,$01,$E7,$13         ;ADA015|        |      ;
@@ -822,7 +822,7 @@ sAudioTrack_ADA3A8:
     db $30,$BC,$0C,$C9,$06,$BC,$BE,$0C,$C0,$B9,$18,$BC         ;ADA564|        |      ;
     db $BB,$00,$06,$BC,$BB,$BC,$4E,$C9,$00                     ;ADA570|        |      ;
  
-sAudioTrack_ADA579:
+sAudioTrack_Ending:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$3F,$00         ;ADA579|        |      ;
     db $AC,$00,$7C,$01,$A4,$01,$CE,$01,$44,$02,$00,$00         ;ADA585|        |      ;
     db $FA,$0B,$F5,$FE,$5A,$5A,$F7,$05,$3C,$01,$E7,$19         ;ADA591|        |      ;
@@ -914,7 +914,7 @@ sAudioTrack_ADA579:
     db $02,$C9,$06,$BC,$02,$C9,$06,$BA,$02,$C9,$06,$BC         ;ADA999|        |      ;
     db $02,$C9,$06,$B9,$02,$C9,$00,$C9,$00                     ;ADA9A5|        |      ;
  
-sAudioTrack_ADA9AE:
+sAudioTrack_Church:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$C0,$00         ;ADA9AE|        |      ;
     db $E6,$00,$79,$01,$A3,$01,$CC,$01,$00,$00,$00,$00         ;ADA9BA|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E7,$13         ;ADA9C6|        |      ;
@@ -967,7 +967,7 @@ sAudioTrack_ADA9AE:
     db $BC,$BB,$BC,$BE,$3C,$C3,$0C,$BA,$BA,$BC,$EE,$C0         ;ADABFA|        |      ;
     db $0A,$60,$BA,$48,$C9,$60,$C9,$00                         ;ADAC06|        |      ;
  
-sAudioTrack_ADAC0E:
+sAudioTrack_Mountain:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$65,$00         ;ADAC0E|        |      ;
     db $FC,$00,$5C,$01,$B9,$01,$19,$02,$00,$00,$00,$00         ;ADAC1A|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E7,$1B         ;ADAC26|        |      ;
@@ -1046,7 +1046,7 @@ sAudioTrack_ADAC0E:
     db $B5,$12,$C9,$00,$06,$B0,$12,$C9,$06,$B0,$12,$C9         ;ADAF92|        |      ;
     db $06,$B0,$12,$C9,$06,$B0,$12,$C9,$00                     ;ADAF9E|        |      ;
  
-sAudioTrack_ADAFA7:
+sAudioTrack_Fall:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$88,$00         ;ADAFA7|        |      ;
     db $EF,$00,$FD,$00,$53,$01,$C3,$01,$00,$00,$00,$00         ;ADAFB3|        |      ;
     db $FA,$0B,$F5,$DB,$5A,$5A,$F7,$05,$3C,$01,$E7,$19         ;ADAFBF|        |      ;
@@ -1106,7 +1106,7 @@ sAudioTrack_ADAFA7:
     db $C9,$06,$B5,$C9,$B0,$12,$C9,$B3,$B2,$06,$AE,$C9         ;ADB247|        |      ;
     db $00                                                     ;ADB253|        |      ;
  
-sAudioTrack_ADB254:
+sAudioTrack_Dance:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$38,$00         ;ADB254|        |      ;
     db $90,$00,$DC,$00,$27,$01,$76,$01,$00,$00,$00,$00         ;ADB260|        |      ;
     db $FA,$0B,$F5,$FE,$5A,$5A,$F7,$05,$3C,$01,$E7,$19         ;ADB26C|        |      ;
@@ -1150,7 +1150,7 @@ sAudioTrack_ADB254:
     db $BC,$BA,$BC,$BA,$BC,$BA,$BC,$BA,$00,$C1,$0C,$BC         ;ADB434|        |      ;
     db $C9,$B5,$C9,$BA,$C9,$C0,$C9,$C0,$C9,$00                 ;ADB440|        |      ;
  
-sAudioTrack_ADB44A:
+sAudioTrack_Summer:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$58,$00         ;ADB44A|        |      ;
     db $94,$00,$E5,$00,$1F,$01,$4B,$01,$00,$00,$00,$00         ;ADB456|        |      ;
     db $FA,$0B,$F5,$FE,$5A,$5A,$F7,$05,$3C,$01,$E7,$26         ;ADB462|        |      ;
@@ -1205,7 +1205,7 @@ sAudioTrack_ADB44A:
     db $9D,$C9,$00,$24,$9A,$9A,$18,$9A,$24,$98,$98,$18         ;ADB6AE|        |      ;
     db $98,$00                                                 ;ADB6BA|        |      ;
  
-sAudioTrack_ADB6BC:
+sAudioTrack_EggFestival:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$42,$00         ;ADB6BC|        |      ;
     db $85,$00,$BA,$00,$1F,$01,$77,$01,$00,$00,$00,$00         ;ADB6C8|        |      ;
     db $FA,$0B,$F5,$F6,$5A,$5A,$F7,$05,$3C,$01,$E7,$1D         ;ADB6D4|        |      ;
@@ -1262,7 +1262,7 @@ sAudioTrack_ADB6BC:
     db $06,$A6,$C9,$A9,$0C,$A4,$06,$A9,$0C,$A4,$06,$A9         ;ADB938|        |      ;
     db $0C,$A4,$06,$A9,$0C,$A4,$A7,$06,$A8,$C9,$00             ;ADB944|        |      ;
  
-sAudioTrack_ADB94F:
+sAudioTrack_Opening:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$4C,$00         ;ADB94F|        |      ;
     db $69,$00,$BF,$00,$06,$01,$48,$01,$A0,$01,$03,$02         ;ADB95B|        |      ;
     db $FA,$0B,$F5,$FE,$5A,$5A,$F7,$05,$32,$01,$E7,$1C         ;ADB967|        |      ;
@@ -1365,7 +1365,7 @@ sAudioTrack_ADB94F:
     db $02,$C9,$06,$B9,$02,$C9,$06,$BD,$02,$C9,$06,$B9         ;ADBDF3|        |      ;
     db $02,$C9,$06,$B4,$02,$C9,$00                             ;ADBDFF|        |      ;
  
-sAudioTrack_ADBE06:
+sAudioTrack_NamingScreen:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$58,$00         ;ADBE06|        |      ;
     db $8C,$00,$BE,$00,$FA,$00,$2F,$01,$00,$00,$00,$00         ;ADBE12|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E7,$19         ;ADBE1E|        |      ;
@@ -1402,7 +1402,7 @@ sAudioTrack_ADBE06:
     db $C9,$06,$BC,$12,$C9,$06,$BC,$12,$C9,$06,$BC,$12         ;ADBF92|        |      ;
     db $C9,$00                                                 ;ADBF9E|        |      ;
  
-sAudioTrack_ADBFA0:
+sAudioTrack_Title:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$55,$00         ;ADBFA0|        |      ;
     db $92,$00,$D7,$00,$00,$01,$2B,$01,$00,$00,$00,$00         ;ADBFAC|        |      ;
     db $FA,$0B,$F5,$FE,$5A,$5A,$F7,$05,$3C,$01,$E7,$21         ;ADBFB8|        |      ;
@@ -1438,7 +1438,7 @@ sAudioTrack_ADBFA0:
     db $C0,$C1,$C0,$BE,$BC,$C8,$18,$C1,$0C,$C0,$C1,$24         ;ADC120|        |      ;
     db $BC,$00                                                 ;ADC12C|        |      ;
  
-sAudioTrack_ADC12E:
+sAudioTrack_Rain:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$3C,$00         ;ADC12E|        |      ;
     db $62,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;ADC13A|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E7,$19         ;ADC146|        |      ;
@@ -1485,7 +1485,7 @@ sAudioTrack_ADC228:
     db $84,$00,$85,$85,$85,$85,$85,$85,$85,$85,$85,$85         ;ADC2F4|        |      ;
     db $85,$85,$00                                             ;ADC300|        |      ;
  
-sAudioTrack_ADC303:
+sAudioTrack_Hurricane:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$55,$00         ;ADC303|        |      ;
     db $7E,$00,$9A,$00,$B6,$00,$E9,$00,$00,$00,$00,$00         ;ADC30F|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$03,$E7,$19         ;ADC31B|        |      ;
@@ -1528,7 +1528,7 @@ sAudioTrack_ADC421:
     db $EA,$10,$F4,$0C,$E1,$09,$E3,$00,$14,$1E,$03,$C9         ;ADC4BD|        |      ;
     db $06,$7F,$93,$54,$93,$30,$C8,$00                         ;ADC4C9|        |      ;
  
-sAudioTrack_ADC4D1:
+sAudioTrack_Bell:
     db $08,$00,$FF,$80,$00,$00,$00,$80,$18,$00,$40,$00         ;ADC4D1|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;ADC4DD|        |      ;
     db $FA,$0B,$F5,$FF,$5A,$5A,$F7,$05,$3C,$01,$E7,$13         ;ADC4E9|        |      ;

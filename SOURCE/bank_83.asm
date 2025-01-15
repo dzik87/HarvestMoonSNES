@@ -2,7 +2,7 @@
     ORG $838000
  
  
-fMathUnknown_838000:
+fMathMultiply_7EbyA:
     PHP                                                        ;838000|08      |      ;
     REP #$30                                                   ;838001|C230    |      ;
     STA.W $011C                                                ;838003|8D1C01  |00011C;
@@ -778,14 +778,14 @@ fAudioUnknown_8384D3:
     RTL                                                        ;838597|6B      |      ;
  
  
-fAudioUnknown_838598:
-    SEP #$20                                                   ;838598|E220    |      ;
+fAudio_PlayAudio_Unknown838598:
+    SEP #$20                                                   ;838598|E220    |      ; X: nAudioId (0x00 - 0x09)
     REP #$10                                                   ;83859A|C210    |      ;
     LDX.W #$0000                                               ;83859C|A20000  |      ;
  
 .loop:
-    LDA.L aAudioUnknown_8392B1,X                               ;83859F|BFB19283|8392B1;
-    STA.B n8TempVar3                                           ;8385A3|8594    |000094;
+    LDA.L aAudio2IndexLookup_8392B1,X                          ;83859F|BFB19283|8392B1;
+    STA.B n8TempVar3                                           ;8385A3|8594    |000094; sAudioData2Index
     BNE +                                                      ;8385A5|D009    |8385B0;
     INX                                                        ;8385A7|E8      |      ;
     CPX.W #$000A                                               ;8385A8|E00A00  |      ;
@@ -811,14 +811,14 @@ fAudioUnknown_838598:
     PHX                                                        ;8385CE|DA      |      ;
     LDA.B #$00                                                 ;8385CF|A900    |      ;
     XBA                                                        ;8385D1|EB      |      ;
-    LDA.B n8TempVar3                                           ;8385D2|A594    |000094;
+    LDA.B n8TempVar3                                           ;8385D2|A594    |000094; sAudioData2Index
     REP #$20                                                   ;8385D4|C220    |      ;
     STA.B n16TempVar1                                          ;8385D6|857E    |00007E;
     LDA.W #$000A                                               ;8385D8|A90A00  |      ;
-    JSL.L fMathUnknown_838000                                  ;8385DB|22008083|838000;
+    JSL.L fMathMultiply_7EbyA                                  ;8385DB|22008083|838000; Calculate new X offset (X * 0x0A)
     TAX                                                        ;8385DF|AA      |      ;
     SEP #$20                                                   ;8385E0|E220    |      ;
-    LDA.B n8TempVar3                                           ;8385E2|A594    |000094;
+    LDA.B n8TempVar3                                           ;8385E2|A594    |000094; sAudioData2Index
     STA.W SNES_APUIO0                                          ;8385E4|8D4021  |002140;
     REP #$20                                                   ;8385E7|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;8385E9|BFEF9083|8390EF;
@@ -938,11 +938,11 @@ fAudioUnknown_838598:
     STA.B ptrAudioData+2                                       ;8386CF|850C    |00000C; store 8b to $0C
     LDA.B #$00                                                 ;8386D1|A900    |      ;
     XBA                                                        ;8386D3|EB      |      ;
-    LDA.B n8TempVar3                                           ;8386D4|A594    |000094;
+    LDA.B n8TempVar3                                           ;8386D4|A594    |000094; sAudioData2Index
     ASL A                                                      ;8386D6|0A      |      ;
     REP #$20                                                   ;8386D7|C220    |      ;
     TAX                                                        ;8386D9|AA      |      ;
-    LDA.L aAudioUnknown_838EFF,X                               ;8386DA|BFFF8E83|838EFF;
+    LDA.L aAudioTracks2Size,X                                  ;8386DA|BFFF8E83|838EFF;
     STA.B n16TempVar1                                          ;8386DE|857E    |00007E;
     LDA.W #$0003                                               ;8386E0|A90300  |      ;
     STA.B n16TempVar2                                          ;8386E3|8580    |000080;
@@ -953,7 +953,7 @@ fAudioUnknown_838598:
     INC.B n16TempVar2                                          ;8386EF|E680    |000080;
  
   + LDA.B n16TempVar2                                          ;8386F1|A580    |000080;
-    TAX                                                        ;8386F3|AA      |      ;
+    TAX                                                        ;8386F3|AA      |      ; X = nAudioTrackSize / 3 (we copy 3 bytes at time
     SEP #$20                                                   ;8386F4|E220    |      ;
     STA.W SNES_APUIO0                                          ;8386F6|8D4021  |002140;
     XBA                                                        ;8386F9|EB      |      ;
@@ -1056,14 +1056,14 @@ fAudioUnknown_83878C:
     REP #$20                                                   ;8387AB|C220    |      ;
     STA.B n16TempVar1                                          ;8387AD|857E    |00007E;
     LDA.W #$000E                                               ;8387AF|A90E00  |      ;
-    JSL.L fMathUnknown_838000                                  ;8387B2|22008083|838000;
+    JSL.L fMathMultiply_7EbyA                                  ;8387B2|22008083|838000;
     TAX                                                        ;8387B6|AA      |      ;
     INX                                                        ;8387B7|E8      |      ;
     INX                                                        ;8387B8|E8      |      ;
     INX                                                        ;8387B9|E8      |      ;
     CLC                                                        ;8387BA|18      |      ;
     ADC.W #$000E                                               ;8387BB|690E00  |      ;
-    STA.B n16TempVar4                                          ;8387BE|8584    |000084;
+    STA.B n16TempVar4                                          ;8387BE|8584    |000084; nIndex = nAudioMusicTrackId * 0x0E + 0x0E + 3
  
 .loop:
     SEP #$20                                                   ;8387C0|E220    |      ;
@@ -1112,7 +1112,7 @@ fAudioUnknown_83878C:
     REP #$20                                                   ;83880C|C220    |      ;
     STA.B n16TempVar1                                          ;83880E|857E    |00007E;
     LDA.W #$000A                                               ;838810|A90A00  |      ;
-    JSL.L fMathUnknown_838000                                  ;838813|22008083|838000;
+    JSL.L fMathMultiply_7EbyA                                  ;838813|22008083|838000;
     TAX                                                        ;838817|AA      |      ;
     SEP #$20                                                   ;838818|E220    |      ;
     LDA.B n8TempVar3                                           ;83881A|A594    |000094;
@@ -1239,7 +1239,7 @@ fAudioUnknown_83878C:
     ASL A                                                      ;83890E|0A      |      ;
     REP #$20                                                   ;83890F|C220    |      ;
     TAX                                                        ;838911|AA      |      ;
-    LDA.L aAudioUnknown_838EFF,X                               ;838912|BFFF8E83|838EFF;
+    LDA.L aAudioTracks2Size,X                                  ;838912|BFFF8E83|838EFF;
     STA.B n16TempVar1                                          ;838916|857E    |00007E;
     LDA.W #$0003                                               ;838918|A90300  |      ;
     STA.B n16TempVar2                                          ;83891B|8580    |000080;
@@ -1451,7 +1451,7 @@ fAudioUnknown_838A26:
     REP #$20                                                   ;838A8E|C220    |      ;
     STA.B n16TempVar1                                          ;838A90|857E    |00007E;
     LDA.W #$000E                                               ;838A92|A90E00  |      ;
-    JSL.L fMathUnknown_838000                                  ;838A95|22008083|838000;
+    JSL.L fMathMultiply_7EbyA                                  ;838A95|22008083|838000;
     TAX                                                        ;838A99|AA      |      ;
     LDA.L sAudioData1_838F83,X                                 ;838A9A|BF838F83|838F83;
     STA.B ptrAudioData                                         ;838A9E|850A    |00000A;
@@ -1541,7 +1541,7 @@ fAudioUnknown_838AFF:
     REP #$20                                                   ;838B40|C220    |      ;
     STA.B n16TempVar1                                          ;838B42|857E    |00007E;
     LDA.W #$000A                                               ;838B44|A90A00  |      ;
-    JSL.L fMathUnknown_838000                                  ;838B47|22008083|838000;
+    JSL.L fMathMultiply_7EbyA                                  ;838B47|22008083|838000;
     TAX                                                        ;838B4B|AA      |      ;
     SEP #$20                                                   ;838B4C|E220    |      ;
     LDA.B n8TempVar3                                           ;838B4E|A594    |000094;
@@ -1668,7 +1668,7 @@ fAudioUnknown_838AFF:
     ASL A                                                      ;838C42|0A      |      ;
     REP #$20                                                   ;838C43|C220    |      ;
     TAX                                                        ;838C45|AA      |      ;
-    LDA.L aAudioUnknown_838EFF,X                               ;838C46|BFFF8E83|838EFF;
+    LDA.L aAudioTracks2Size,X                                  ;838C46|BFFF8E83|838EFF;
     STA.B n16TempVar1                                          ;838C4A|857E    |00007E;
     LDA.W #$0003                                               ;838C4C|A90300  |      ;
     STA.B n16TempVar2                                          ;838C4F|8580    |000080;
@@ -2031,7 +2031,7 @@ fAudioUnknown_838EE4:
     RTS                                                        ;838EFE|60      |      ;
  
  
-aAudioUnknown_838EFF:
+aAudioTracks2Size:
     dw $10C0,$10C0,$2EE0,$0BB0,$0780,$0D10                     ;838EFF|        |      ;
     dw $0040,$1F30,$1950,$1300,$02D0,$1B80                     ;838F0B|        |      ;
     dw $0340,$0670,$0DA0,$1240,$0FA0,$07D0                     ;838F17|        |      ;
@@ -2048,55 +2048,55 @@ aAudioUnknown_838F4F:
     dw $005C,$00BC                                             ;838F7F|        |      ;
  
 sAudioData1_838F83:
-    dl sAudioTrack_AD8FD6                                      ;838F83|        |AD8FD6; 0x1A * [ptr24 pAudioTrack, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
+    dl sAudioTrack_Spring                                      ;838F83|        |AD8FD6; 0x1A * [ptr24 pAudioTrack, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
     db $07,$03,$01,$0C,$05,$26,$24,$00,$00,$00,$00             ;838F86|        |      ;
-    dl sAudioTrack_AD8FD6                                      ;838F91|        |AD8FD6;
+    dl sAudioTrack_Spring                                      ;838F91|        |AD8FD6;
     db $07,$03,$01,$0C,$00,$00,$00,$00,$00,$00,$00             ;838F94|        |      ;
-    dl sAudioTrack_ADB44A                                      ;838F9F|        |ADB44A;
+    dl sAudioTrack_Summer                                      ;838F9F|        |ADB44A;
     db $01,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;838FA2|        |      ;
-    dl sAudioTrack_AD9FFD                                      ;838FAD|        |AD9FFD;
+    dl sAudioTrack_HarvestFestival                             ;838FAD|        |AD9FFD;
     db $03,$07,$01,$16,$05,$00,$00,$00,$00,$00,$00             ;838FB0|        |      ;
-    dl sAudioTrack_AD92C2                                      ;838FBB|        |AD92C2;
+    dl sAudioTrack_Winter                                      ;838FBB|        |AD92C2;
     db $03,$07,$01,$00,$00,$00,$00,$00,$00,$00,$00             ;838FBE|        |      ;
     dl sAudioTrack_AD9AA7                                      ;838FC9|        |AD9AA7;
     db $05,$01,$07,$00,$00,$00,$00,$00,$00,$00,$00             ;838FCC|        |      ;
-    dl sAudioTrack_ADAC0E                                      ;838FD7|        |ADAC0E;
+    dl sAudioTrack_Mountain                                    ;838FD7|        |ADAC0E;
     db $03,$07,$01,$00,$00,$00,$00,$00,$00,$00,$00             ;838FDA|        |      ;
-    dl sAudioTrack_ADAFA7                                      ;838FE5|        |ADAFA7;
+    dl sAudioTrack_Fall                                        ;838FE5|        |ADAFA7;
     db $01,$04,$0C,$08,$00,$00,$00,$00,$00,$00,$00             ;838FE8|        |      ;
-    dl sAudioTrack_ADB254                                      ;838FF3|        |ADB254;
+    dl sAudioTrack_Dance                                       ;838FF3|        |ADB254;
     db $01,$07,$16,$00,$00,$00,$00,$00,$00,$00,$00             ;838FF6|        |      ;
-    dl sAudioTrack_ADA9AE                                      ;839001|        |ADA9AE;
+    dl sAudioTrack_Church                                      ;839001|        |ADA9AE;
     db $02,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;839004|        |      ;
-    dl sAudioTrack_ADBE06                                      ;83900F|        |ADBE06;
+    dl sAudioTrack_NamingScreen                                ;83900F|        |ADBE06;
     db $05,$07,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;839012|        |      ;
-    dl sAudioTrack_ADBFA0                                      ;83901D|        |ADBFA0;
+    dl sAudioTrack_Title                                       ;83901D|        |ADBFA0;
     db $05,$01,$07,$00,$00,$00,$00,$00,$00,$00,$00             ;839020|        |      ;
     dl sAudioTrack_ADA3A8                                      ;83902B|        |ADA3A8;
     db $05,$07,$01,$00,$00,$00,$00,$00,$00,$00,$00             ;83902E|        |      ;
-    dl sAudioTrack_ADB6BC                                      ;839039|        |ADB6BC;
+    dl sAudioTrack_EggFestival                                 ;839039|        |ADB6BC;
     db $05,$01,$08,$00,$00,$00,$00,$00,$00,$00,$00             ;83903C|        |      ;
-    dl sAudioTrack_AD986A                                      ;839047|        |AD986A;
+    dl sAudioTrack_StarNightFestival                           ;839047|        |AD986A;
     db $05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;83904A|        |      ;
-    dl sAudioTrack_AD9578                                      ;839055|        |AD9578;
+    dl sAudioTrack_TrollsCave                                  ;839055|        |AD9578;
     db $05,$0B,$01,$08,$00,$00,$00,$00,$00,$00,$00             ;839058|        |      ;
-    dl sAudioTrack_ADA579                                      ;839063|        |ADA579;
+    dl sAudioTrack_Ending                                      ;839063|        |ADA579;
     db $05,$01,$0C,$00,$00,$00,$00,$00,$00,$00,$00             ;839066|        |      ;
-    dl sAudioTrack_AD9EEA                                      ;839071|        |AD9EEA;
+    dl sAudioTrack_BadEnding                                   ;839071|        |AD9EEA;
     db $05,$03,$07,$00,$00,$00,$00,$00,$00,$00,$00             ;839074|        |      ;
-    dl sAudioTrack_ADB94F                                      ;83907F|        |ADB94F;
+    dl sAudioTrack_Opening                                     ;83907F|        |ADB94F;
     db $04,$03,$07,$0B,$00,$00,$00,$00,$00,$00,$00             ;839082|        |      ;
-    dl sAudioTrack_ADC12E                                      ;83908D|        |ADC12E;
+    dl sAudioTrack_Rain                                        ;83908D|        |ADC12E;
     db $0D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;839090|        |      ;
     dl sAudioTrack_ADC1A8                                      ;83909B|        |ADC1A8;
     db $0D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;83909E|        |      ;
     dl sAudioTrack_ADC228                                      ;8390A9|        |ADC228;
     db $15,$0D,$18,$00,$00,$00,$00,$00,$00,$00,$00             ;8390AC|        |      ;
-    dl sAudioTrack_ADC303                                      ;8390B7|        |ADC303;
+    dl sAudioTrack_Hurricane                                   ;8390B7|        |ADC303;
     db $10,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390BA|        |      ;
     dl sAudioTrack_ADC421                                      ;8390C5|        |ADC421;
     db $1D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390C8|        |      ;
-    dl sAudioTrack_ADC4D1                                      ;8390D3|        |ADC4D1;
+    dl sAudioTrack_Bell                                        ;8390D3|        |ADC4D1;
     db $1D,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390D6|        |      ;
     dl sAudioTrack_ADC52D                                      ;8390E1|        |ADC52D;
     db $13,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390E4|        |      ;
@@ -2190,7 +2190,7 @@ aAudioUnknown_83927F:
     db $14,$1C,$1F,$14,$11,$0F,$12,$10,$11,$11,$11,$07         ;8392A3|        |      ;
     db $26,$06                                                 ;8392AF|        |      ;
  
-aAudioUnknown_8392B1:
+aAudio2IndexLookup_8392B1:
     db $17,$18,$19,$1A,$15,$06,$0A,$00,$00,$00                 ;8392B1|        |      ;
  
 fDialog_Unknown_8392BB:
@@ -14111,7 +14111,7 @@ CODE_83F573:
     LDA.L nRanchDevelopmentRate                                ;83F582|AF561F7F|7F1F56;
     STA.B n16TempVar1                                          ;83F586|857E    |00007E;
     LDA.W #$000A                                               ;83F588|A90A00  |      ;
-    JSL.L fMathUnknown_838000                                  ;83F58B|22008083|838000;
+    JSL.L fMathMultiply_7EbyA                                  ;83F58B|22008083|838000;
     REP #$30                                                   ;83F58F|C230    |      ;
     STA.B n16TempVar1                                          ;83F591|857E    |00007E;
     LDA.W #$0127                                               ;83F593|A92701  |      ;

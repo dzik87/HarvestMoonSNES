@@ -600,7 +600,7 @@ fCore_Interrupt808428:
     SEP #$20                                                   ;808600|E220    |      ;
     LDA.B #$00                                                 ;808602|A900    |      ;
     JSL.L fAudioUnknown_838E32                                 ;808604|22328E83|838E32;
-    JSL.L fAudioUnknown_838598                                 ;808608|22988583|838598;
+    JSL.L fAudio_PlayAudio_Unknown838598                       ;808608|22988583|838598;
     JSL.L fAudioUnknown_8384D3                                 ;80860C|22D38483|8384D3;
     JSL.L fCore_InitializeScreenStatus                         ;808610|224C8C80|808C4C;
     JSL.L fCore_ZeroVRAM                                       ;808614|22468880|808846;
