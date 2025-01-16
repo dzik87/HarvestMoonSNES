@@ -1888,7 +1888,7 @@ fAIAction0x14_JumpIfEqualsToIndexedValue:
     RTS                                                        ;848DA4|60      |      ;
  
  
-fAIAction0x15:
+fAIAction0x15_JumpIfEquals:
     REP #$30                                                   ;848DA5|C230    |      ;
     REP #$30                                                   ;848DA7|C230    |      ;
     LDA.B ptrAIActionData                                      ;848DA9|A5C9    |0000C9;
@@ -2210,7 +2210,7 @@ fAIAction0x1B:
     RTS                                                        ;848FEE|60      |      ;
  
  
-fAIAction0x1C:
+fAIAction0x1C_ShowDialog:
     REP #$30                                                   ;848FEF|C230    |      ;
     REP #$30                                                   ;848FF1|C230    |      ;
     LDA.B ptrAIActionData                                      ;848FF3|A5C9    |0000C9;
@@ -2246,7 +2246,7 @@ fAIAction0x1C:
     RTS                                                        ;849033|60      |      ;
  
  
-fAIAction0x1D:
+fAIAction0x1D_ShowDialog:
     REP #$30                                                   ;849034|C230    |      ;
     REP #$30                                                   ;849036|C230    |      ;
     LDA.B ptrAIActionData                                      ;849038|A5C9    |0000C9;
@@ -2797,15 +2797,15 @@ aAIActions:
     dw fAIAction0x12_AlwaysJump                                ;84943D|        |848D13;
     dw fAIAction0x13                                           ;84943F|        |848D24;
     dw fAIAction0x14_JumpIfEqualsToIndexedValue                ;849441|        |848D44;
-    dw fAIAction0x15                                           ;849443|        |848DA5;
+    dw fAIAction0x15_JumpIfEquals                              ;849443|        |848DA5;
     dw fAIAction0x16                                           ;849445|        |848DFB;
     dw fAIAction0x17                                           ;849447|        |848E68;
     dw fAIAction0x18                                           ;849449|        |848E90;
     dw fAIAction0x19                                           ;84944B|        |848EC9;
     dw fAIAction0x1A                                           ;84944D|        |848F0A;
     dw fAIAction0x1B                                           ;84944F|        |848F9B;
-    dw fAIAction0x1C                                           ;849451|        |848FEF;
-    dw fAIAction0x1D                                           ;849453|        |849034;
+    dw fAIAction0x1C_ShowDialog                                ;849451|        |848FEF;
+    dw fAIAction0x1D_ShowDialog                                ;849453|        |849034;
     dw fAIAction0x1E                                           ;849455|        |849079;
     dw fAIAction0x1E                                           ;849457|        |849079;
     dw fAIAction0x20                                           ;849459|        |84919D;
@@ -2821,7 +2821,7 @@ aAIActions:
     dw fAIAction0x2A                                           ;84946D|        |849553;
     dw fAIAction0x2B                                           ;84946F|        |84957D;
     dw fAIAction0x2C                                           ;849471|        |8495E8;
-    dw fAIAction0x2D_ConditionalJump                           ;849473|        |849633;
+    dw fAIAction0x2D                                           ;849473|        |849633;
     dw fAIAction0x2E                                           ;849475|        |849777;
     dw fAIAction0x2F                                           ;849477|        |849810;
     dw fAIAction0x30_UpdateChicken                             ;849479|        |849857;
@@ -2845,12 +2845,12 @@ aAIActions:
     dw fAIAction0x42                                           ;84949D|        |84B602;
     dw fAIAction0x43                                           ;84949F|        |84B666;
     dw fAIAction0x44                                           ;8494A1|        |84B6BC;
-    dw fAIAction0x45                                           ;8494A3|        |84B72D;
+    dw fAIAction0x45_JumpIfBetween                             ;8494A3|        |84B72D;
     dw fAIAction0x46                                           ;8494A5|        |84B79A;
     dw fAIAction0x47                                           ;8494A7|        |84B84C;
     dw fAIAction0x48                                           ;8494A9|        |84B889;
     dw fAIAction0x49                                           ;8494AB|        |84B8D9;
-    dw fAIAction0x4A_UpdatePowerBerry                          ;8494AD|        |84B93C;
+    dw fAIAction0x4A                                           ;8494AD|        |84B93C;
     dw fAIAction0x4B                                           ;8494AF|        |84BA10;
     dw fAIAction0x4C                                           ;8494B1|        |84BA51;
     dw fAIAction0x4D                                           ;8494B3|        |84BA72;
@@ -3032,7 +3032,7 @@ fAIAction0x2C:
     RTS                                                        ;849632|60      |      ;
  
  
-fAIAction0x2D_ConditionalJump:
+fAIAction0x2D:
     REP #$30                                                   ;849633|C230    |      ;
     REP #$30                                                   ;849635|C230    |      ;
     LDA.B ptrAIActionData                                      ;849637|A5C9    |0000C9;
@@ -7681,7 +7681,7 @@ fAIAction0x44:
     RTS                                                        ;84B72C|60      |      ;
  
  
-fAIAction0x45:
+fAIAction0x45_JumpIfBetween:
     REP #$30                                                   ;84B72D|C230    |      ;
     REP #$30                                                   ;84B72F|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B731|A5C9    |0000C9;
@@ -7962,7 +7962,7 @@ fAIAction0x49:
     RTS                                                        ;84B93B|60      |      ;
  
  
-fAIAction0x4A_UpdatePowerBerry:
+fAIAction0x4A:
     REP #$30                                                   ;84B93C|C230    |      ;
     REP #$30                                                   ;84B93E|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B940|A5C9    |0000C9;
