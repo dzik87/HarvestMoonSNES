@@ -1427,7 +1427,7 @@ fAIAction0x04_DoesNothing:
     RTS                                                        ;848A64|60      |      ;
  
  
-fAIAction0x05_SetMapDestinationCoords:
+fAIAction0x05_SetTransferPosition:
     REP #$30                                                   ;848A65|C230    |      ;
     REP #$30                                                   ;848A67|C230    |      ;
     LDA.B ptrAIActionData                                      ;848A69|A5C9    |0000C9;
@@ -1453,7 +1453,7 @@ fAIAction0x05_SetMapDestinationCoords:
     RTS                                                        ;848A93|60      |      ;
  
  
-fAIAction0x06_SetMapDestinationId:
+fAIAction0x06_SetTransferDestination:
     REP #$30                                                   ;848A94|C230    |      ;
     REP #$30                                                   ;848A96|C230    |      ;
     LDA.B ptrAIActionData                                      ;848A98|A5C9    |0000C9;
@@ -1833,7 +1833,7 @@ fAIAction0x13:
     RTS                                                        ;848D43|60      |      ;
  
  
-fAIAction0x14_JumpIfEqualsToIndexedValue:
+fAIAction0x14_JumpIfFlagSet:
     REP #$30                                                   ;848D44|C230    |      ;
     REP #$30                                                   ;848D46|C230    |      ;
     LDA.B ptrAIActionData                                      ;848D48|A5C9    |0000C9;
@@ -1888,7 +1888,7 @@ fAIAction0x14_JumpIfEqualsToIndexedValue:
     RTS                                                        ;848DA4|60      |      ;
  
  
-fAIAction0x15_JumpIfEquals:
+fAIAction0x15_JumpIfEquals8:
     REP #$30                                                   ;848DA5|C230    |      ;
     REP #$30                                                   ;848DA7|C230    |      ;
     LDA.B ptrAIActionData                                      ;848DA9|A5C9    |0000C9;
@@ -1937,7 +1937,7 @@ fAIAction0x15_JumpIfEquals:
     RTS                                                        ;848DFA|60      |      ;
  
  
-fAIAction0x16:
+fAIAction0x16_JumpIfBetween8:
     REP #$30                                                   ;848DFB|C230    |      ;
     REP #$30                                                   ;848DFD|C230    |      ;
     LDA.B ptrAIActionData                                      ;848DFF|A5C9    |0000C9;
@@ -2433,7 +2433,7 @@ fAIAction0x1E:
     RTS                                                        ;84919C|60      |      ;
  
  
-fAIAction0x20:
+fAIAction0x20_JumpIfChoice:
     REP #$30                                                   ;84919D|C230    |      ;
     REP #$30                                                   ;84919F|C230    |      ;
     LDA.B ptrAIActionData                                      ;8491A1|A5C9    |0000C9;
@@ -2443,7 +2443,7 @@ fAIAction0x20:
     SEP #$20                                                   ;8491A9|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491AB|A7C9    |0000C9;
     STA.B n8TempVar1                                           ;8491AD|8592    |000092;
-    LDA.W $018F                                                ;8491AF|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;8491AF|AD8F01  |00018F;
     CMP.B n8TempVar1                                           ;8491B2|C592    |000092;
     BNE +                                                      ;8491B4|D011    |8491C7;
     REP #$30                                                   ;8491B6|C230    |      ;
@@ -2465,7 +2465,7 @@ fAIAction0x20:
     RTS                                                        ;8491D1|60      |      ;
  
  
-fAIAction0x21:
+fAIAction0x21_AddValue8:
     REP #$30                                                   ;8491D2|C230    |      ;
     REP #$30                                                   ;8491D4|C230    |      ;
     LDA.B ptrAIActionData                                      ;8491D6|A5C9    |0000C9;
@@ -2781,8 +2781,8 @@ aAIActions:
     dw fAIAction0x02_FreezeTime                                ;84941D|        |848A0D;
     dw fAIAction0x03_SetHour                                   ;84941F|        |848A39;
     dw fAIAction0x04_DoesNothing                               ;849421|        |848A58;
-    dw fAIAction0x05_SetMapDestinationCoords                   ;849423|        |848A65;
-    dw fAIAction0x06_SetMapDestinationId                       ;849425|        |848A94;
+    dw fAIAction0x05_SetTransferPosition                       ;849423|        |848A65;
+    dw fAIAction0x06_SetTransferDestination                    ;849425|        |848A94;
     dw fAIAction0x07_SetPlayerDirection                        ;849427|        |848ABF;
     dw fAIAction0x08                                           ;849429|        |848AE7;
     dw fAIAction0x09                                           ;84942B|        |848B08;
@@ -2796,9 +2796,9 @@ aAIActions:
     dw fAIAction0x11                                           ;84943B|        |848CFD;
     dw fAIAction0x12_AlwaysJump                                ;84943D|        |848D13;
     dw fAIAction0x13                                           ;84943F|        |848D24;
-    dw fAIAction0x14_JumpIfEqualsToIndexedValue                ;849441|        |848D44;
-    dw fAIAction0x15_JumpIfEquals                              ;849443|        |848DA5;
-    dw fAIAction0x16                                           ;849445|        |848DFB;
+    dw fAIAction0x14_JumpIfFlagSet                             ;849441|        |848D44;
+    dw fAIAction0x15_JumpIfEquals8                             ;849443|        |848DA5;
+    dw fAIAction0x16_JumpIfBetween8                            ;849445|        |848DFB;
     dw fAIAction0x17                                           ;849447|        |848E68;
     dw fAIAction0x18                                           ;849449|        |848E90;
     dw fAIAction0x19                                           ;84944B|        |848EC9;
@@ -2808,8 +2808,8 @@ aAIActions:
     dw fAIAction0x1D_ShowDialog                                ;849453|        |849034;
     dw fAIAction0x1E                                           ;849455|        |849079;
     dw fAIAction0x1E                                           ;849457|        |849079;
-    dw fAIAction0x20                                           ;849459|        |84919D;
-    dw fAIAction0x21                                           ;84945B|        |8491D2;
+    dw fAIAction0x20_JumpIfChoice                              ;849459|        |84919D;
+    dw fAIAction0x21_AddValue8                                 ;84945B|        |8491D2;
     dw fAIAction0x22                                           ;84945D|        |84923F;
     dw fAIAction0x23_OrWithIndexedValue                        ;84945F|        |849306;
     dw fAIAction0x24                                           ;849461|        |849356;
@@ -2817,7 +2817,7 @@ aAIActions:
     dw fAIAction0x26                                           ;849465|        |8493C9;
     dw fAIAction0x26                                           ;849467|        |8493C9;
     dw fAIAction0x26                                           ;849469|        |8493C9;
-    dw fAIAction0x29                                           ;84946B|        |849513;
+    dw fAIAction0x29_SetMapScrooling                           ;84946B|        |849513;
     dw fAIAction0x2A                                           ;84946D|        |849553;
     dw fAIAction0x2B                                           ;84946F|        |84957D;
     dw fAIAction0x2C                                           ;849471|        |8495E8;
@@ -2837,17 +2837,17 @@ aAIActions:
     dw fAIAction0x3A                                           ;84948D|        |84B427;
     dw fAIAction0x3B                                           ;84948F|        |84B4DC;
     dw fAIAction0x3C                                           ;849491|        |84B503;
-    dw fAIAction0x3D                                           ;849493|        |84B52D;
+    dw fAIAction0x3D_TeleportToMap                             ;849493|        |84B52D;
     dw fAIAction0x3E                                           ;849495|        |84B556;
     dw fAIAction0x3F_ThrowHeldItem                             ;849497|        |84B57B;
     dw fAIAction0x40_DisableTileInteractions                   ;849499|        |84B58F;
-    dw fAIAction0x41_ModifyVariable                            ;84949B|        |84B5A9;
-    dw fAIAction0x42                                           ;84949D|        |84B602;
-    dw fAIAction0x43                                           ;84949F|        |84B666;
-    dw fAIAction0x44                                           ;8494A1|        |84B6BC;
-    dw fAIAction0x45_JumpIfBetween                             ;8494A3|        |84B72D;
-    dw fAIAction0x46                                           ;8494A5|        |84B79A;
-    dw fAIAction0x47                                           ;8494A7|        |84B84C;
+    dw fAIAction0x41_AddValue16                                ;84949B|        |84B5A9;
+    dw fAIAction0x42_AddValue24                                ;84949D|        |84B602;
+    dw fAIAction0x43_JumpIfEqual16                             ;84949F|        |84B666;
+    dw fAIAction0x44_JumpIfEqual24                             ;8494A1|        |84B6BC;
+    dw fAIAction0x45_JumpIfBetween16                           ;8494A3|        |84B72D;
+    dw fAIAction0x46_JumpIfBetween24                           ;8494A5|        |84B79A;
+    dw fAIAction0x47_SetValue8                                 ;8494A7|        |84B84C;
     dw fAIAction0x48                                           ;8494A9|        |84B889;
     dw fAIAction0x49                                           ;8494AB|        |84B8D9;
     dw fAIAction0x4A                                           ;8494AD|        |84B93C;
@@ -2869,7 +2869,7 @@ aAIActions:
  
 pppAITable_8494CD:
     dl ppTable_B38000                                          ;8494CD|        |B38000;
-    dl pScripting_B48000                                       ;8494D0|        |B48000;
+    dl pScripting_StarNightFestival                            ;8494D0|        |B48000;
  
 aAISetMask:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;8494D3|        |      ;
@@ -2881,7 +2881,7 @@ aAIResetMask:
     dw $FFBF,$FF7F,$FEFF,$FDFF,$FBFF,$F7FF                     ;8494FF|        |      ;
     dw $EFFF,$DFFF,$BFFF,$7FFF                                 ;84950B|        |      ;
  
-fAIAction0x29:
+fAIAction0x29_SetMapScrooling:
     REP #$30                                                   ;849513|C230    |      ;
     REP #$30                                                   ;849515|C230    |      ;
     LDA.B ptrAIActionData                                      ;849517|A5C9    |0000C9;
@@ -7396,7 +7396,7 @@ fAIAction0x3C:
     RTS                                                        ;84B52C|60      |      ;
  
  
-fAIAction0x3D:
+fAIAction0x3D_TeleportToMap:
     REP #$30                                                   ;84B52D|C230    |      ;
     REP #$30                                                   ;84B52F|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B531|A5C9    |0000C9;
@@ -7466,7 +7466,7 @@ fAIAction0x40_DisableTileInteractions:
     RTS                                                        ;84B5A8|60      |      ;
  
  
-fAIAction0x41_ModifyVariable:
+fAIAction0x41_AddValue16:
     REP #$30                                                   ;84B5A9|C230    |      ;
     REP #$30                                                   ;84B5AB|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B5AD|A5C9    |0000C9;
@@ -7518,7 +7518,7 @@ fAIAction0x41_ModifyVariable:
     RTS                                                        ;84B601|60      |      ;
  
  
-fAIAction0x42:
+fAIAction0x42_AddValue24:
     REP #$30                                                   ;84B602|C230    |      ;
     REP #$30                                                   ;84B604|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B606|A5C9    |0000C9;
@@ -7570,7 +7570,7 @@ fAIAction0x42:
     RTS                                                        ;84B665|60      |      ;
  
  
-fAIAction0x43:
+fAIAction0x43_JumpIfEqual16:
     REP #$30                                                   ;84B666|C230    |      ;
     REP #$30                                                   ;84B668|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B66A|A5C9    |0000C9;
@@ -7619,7 +7619,7 @@ fAIAction0x43:
     RTS                                                        ;84B6BB|60      |      ;
  
  
-fAIAction0x44:
+fAIAction0x44_JumpIfEqual24:
     REP #$30                                                   ;84B6BC|C230    |      ;
     REP #$30                                                   ;84B6BE|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B6C0|A5C9    |0000C9;
@@ -7681,7 +7681,7 @@ fAIAction0x44:
     RTS                                                        ;84B72C|60      |      ;
  
  
-fAIAction0x45_JumpIfBetween:
+fAIAction0x45_JumpIfBetween16:
     REP #$30                                                   ;84B72D|C230    |      ;
     REP #$30                                                   ;84B72F|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B731|A5C9    |0000C9;
@@ -7742,7 +7742,7 @@ fAIAction0x45_JumpIfBetween:
     RTS                                                        ;84B799|60      |      ;
  
  
-fAIAction0x46:
+fAIAction0x46_JumpIfBetween24:
     REP #$30                                                   ;84B79A|C230    |      ;
     REP #$30                                                   ;84B79C|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B79E|A5C9    |0000C9;
@@ -7836,7 +7836,7 @@ fAIAction0x46:
     RTS                                                        ;84B84B|60      |      ;
  
  
-fAIAction0x47:
+fAIAction0x47_SetValue8:
     REP #$30                                                   ;84B84C|C230    |      ;
     REP #$30                                                   ;84B84E|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B850|A5C9    |0000C9;
@@ -11156,13 +11156,13 @@ fInput_Unknown84CFEA:
     LDA.W #$00B1                                               ;84D001|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D004|22239883|839823;
     SEP #$20                                                   ;84D008|E220    |      ;
-    LDA.W $018F                                                ;84D00A|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D00A|AD8F01  |00018F;
     CMP.B #$03                                                 ;84D00D|C903    |      ;
     BCC .label1                                                ;84D00F|900B    |84D01C;
     CMP.W $018E                                                ;84D011|CD8E01  |00018E;
     BEQ .label2                                                ;84D014|F01A    |84D030;
     INC A                                                      ;84D016|1A      |      ;
-    STA.W $018F                                                ;84D017|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D017|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D01A|801A    |84D036;
  
  
@@ -11172,17 +11172,17 @@ fInput_Unknown84CFEA:
     CMP.B #$02                                                 ;84D021|C902    |      ;
     BEQ +                                                      ;84D023|F006    |84D02B;
     INC A                                                      ;84D025|1A      |      ;
-    STA.W $018F                                                ;84D026|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D026|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D029|800B    |84D036;
  
  
-  + STZ.W $018F                                                ;84D02B|9C8F01  |00018F;
+  + STZ.W nSelectedOption                                      ;84D02B|9C8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D02E|8006    |84D036;
  
  
 .label2:
     DEC A                                                      ;84D030|3A      |      ;
-    STA.W $018F                                                ;84D031|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D031|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D034|8000    |84D036;
  
  
@@ -11204,12 +11204,12 @@ fInput_Unknown84D03A:
     LDA.W #$00B1                                               ;84D051|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D054|22239883|839823;
     SEP #$20                                                   ;84D058|E220    |      ;
-    LDA.W $018F                                                ;84D05A|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D05A|AD8F01  |00018F;
     BEQ .label1                                                ;84D05D|F00A    |84D069;
     CMP.B #$03                                                 ;84D05F|C903    |      ;
     BEQ .label2                                                ;84D061|F019    |84D07C;
     DEC A                                                      ;84D063|3A      |      ;
-    STA.W $018F                                                ;84D064|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D064|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D067|80CD    |84D036;
  
  
@@ -11218,11 +11218,11 @@ fInput_Unknown84D03A:
     CMP.B #$03                                                 ;84D06C|C903    |      ;
     BCC +                                                      ;84D06E|9007    |84D077;
     LDA.B #$02                                                 ;84D070|A902    |      ;
-    STA.W $018F                                                ;84D072|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D072|8D8F01  |00018F;
     BRA .return                                                ;84D075|8013    |84D08A;
  
  
-  + STA.W $018F                                                ;84D077|8D8F01  |00018F;
+  + STA.W nSelectedOption                                      ;84D077|8D8F01  |00018F;
     BRA .return                                                ;84D07A|800E    |84D08A;
  
  
@@ -11230,9 +11230,9 @@ fInput_Unknown84D03A:
     LDA.W $018E                                                ;84D07C|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D07F|C903    |      ;
     BEQ .return                                                ;84D081|F007    |84D08A;
-    LDA.W $018F                                                ;84D083|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D083|AD8F01  |00018F;
     INC A                                                      ;84D086|1A      |      ;
-    STA.W $018F                                                ;84D087|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D087|8D8F01  |00018F;
  
 .return:
     STZ.W $018B                                                ;84D08A|9C8B01  |00018B;
@@ -11251,7 +11251,7 @@ fInput_Unknown84D08E:
     LDA.W $018E                                                ;84D0A2|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0A5|C903    |      ;
     BCC .return                                                ;84D0A7|9047    |84D0F0;
-    LDA.W $018F                                                ;84D0A9|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D0A9|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0AC|C902    |      ;
     BEQ .return                                                ;84D0AE|F040    |84D0F0;
     REP #$30                                                   ;84D0B0|C230    |      ;
@@ -11259,22 +11259,22 @@ fInput_Unknown84D08E:
     LDA.W #$00B1                                               ;84D0B5|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D0B8|22239883|839823;
     SEP #$20                                                   ;84D0BC|E220    |      ;
-    LDA.W $018F                                                ;84D0BE|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D0BE|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0C1|C902    |      ;
     BCC +                                                      ;84D0C3|9008    |84D0CD;
     SEC                                                        ;84D0C5|38      |      ;
     SBC.B #$03                                                 ;84D0C6|E903    |      ;
-    STA.W $018F                                                ;84D0C8|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D0C8|8D8F01  |00018F;
     BRA .return                                                ;84D0CB|8023    |84D0F0;
  
  
   + SEP #$20                                                   ;84D0CD|E220    |      ;
-    LDA.W $018F                                                ;84D0CF|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D0CF|AD8F01  |00018F;
     CMP.B #$01                                                 ;84D0D2|C901    |      ;
     BEQ +                                                      ;84D0D4|F008    |84D0DE;
     CLC                                                        ;84D0D6|18      |      ;
     ADC.B #$03                                                 ;84D0D7|6903    |      ;
-    STA.W $018F                                                ;84D0D9|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D0D9|8D8F01  |00018F;
     BRA .return                                                ;84D0DC|8012    |84D0F0;
  
  
@@ -11282,10 +11282,10 @@ fInput_Unknown84D08E:
     LDA.W $018E                                                ;84D0E0|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0E3|C903    |      ;
     BEQ .return                                                ;84D0E5|F009    |84D0F0;
-    LDA.W $018F                                                ;84D0E7|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D0E7|AD8F01  |00018F;
     CLC                                                        ;84D0EA|18      |      ;
     ADC.B #$03                                                 ;84D0EB|6903    |      ;
-    STA.W $018F                                                ;84D0ED|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D0ED|8D8F01  |00018F;
  
 .return:
     STZ.W $018B                                                ;84D0F0|9C8B01  |00018B;
@@ -11304,7 +11304,7 @@ fInput_Unknown84D0F4:
     LDA.W $018E                                                ;84D108|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D10B|C903    |      ;
     BCC .return                                                ;84D10D|9047    |84D156;
-    LDA.W $018F                                                ;84D10F|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D10F|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D112|C902    |      ;
     BEQ .return                                                ;84D114|F040    |84D156;
     REP #$30                                                   ;84D116|C230    |      ;
@@ -11312,22 +11312,22 @@ fInput_Unknown84D0F4:
     LDA.W #$00B1                                               ;84D11B|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D11E|22239883|839823;
     SEP #$20                                                   ;84D122|E220    |      ;
-    LDA.W $018F                                                ;84D124|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D124|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D127|C902    |      ;
     BCC +                                                      ;84D129|9008    |84D133;
     SEC                                                        ;84D12B|38      |      ;
     SBC.B #$03                                                 ;84D12C|E903    |      ;
-    STA.W $018F                                                ;84D12E|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D12E|8D8F01  |00018F;
     BRA .return                                                ;84D131|8023    |84D156;
  
  
   + SEP #$20                                                   ;84D133|E220    |      ;
-    LDA.W $018F                                                ;84D135|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D135|AD8F01  |00018F;
     CMP.B #$01                                                 ;84D138|C901    |      ;
     BEQ +                                                      ;84D13A|F008    |84D144;
     CLC                                                        ;84D13C|18      |      ;
     ADC.B #$03                                                 ;84D13D|6903    |      ;
-    STA.W $018F                                                ;84D13F|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D13F|8D8F01  |00018F;
     BRA .return                                                ;84D142|8012    |84D156;
  
  
@@ -11335,10 +11335,10 @@ fInput_Unknown84D0F4:
     LDA.W $018E                                                ;84D146|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D149|C903    |      ;
     BEQ .return                                                ;84D14B|F009    |84D156;
-    LDA.W $018F                                                ;84D14D|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;84D14D|AD8F01  |00018F;
     CLC                                                        ;84D150|18      |      ;
     ADC.B #$03                                                 ;84D151|6903    |      ;
-    STA.W $018F                                                ;84D153|8D8F01  |00018F;
+    STA.W nSelectedOption                                      ;84D153|8D8F01  |00018F;
  
 .return:
     STZ.W $018B                                                ;84D156|9C8B01  |00018B;

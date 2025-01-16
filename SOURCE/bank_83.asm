@@ -2285,7 +2285,7 @@ fDialog_DialogHandler:
     STZ.W $018B                                                ;83937E|9C8B01  |00018B;
     STZ.W $018C                                                ;839381|9C8C01  |00018C;
     STZ.W $018E                                                ;839384|9C8E01  |00018E;
-    STZ.W $018F                                                ;839387|9C8F01  |00018F;
+    STZ.W nSelectedOption                                      ;839387|9C8F01  |00018F;
     STZ.W $0190                                                ;83938A|9C9001  |000190;
     REP #$20                                                   ;83938D|C220    |      ;
     LDA.W nCurrentDialogPointerIndex                           ;83938F|AD8301  |000183;
@@ -2781,7 +2781,7 @@ fDialog_IterateText:
     SEP #$20                                                   ;839734|E220    |      ;
     LDA.B #$00                                                 ;839736|A900    |      ;
     XBA                                                        ;839738|EB      |      ;
-    LDA.W $018F                                                ;839739|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;839739|AD8F01  |00018F;
     ASL A                                                      ;83973C|0A      |      ;
     TAX                                                        ;83973D|AA      |      ;
     REP #$20                                                   ;83973E|C220    |      ;
