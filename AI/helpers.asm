@@ -207,16 +207,16 @@ macro AICMD0x1B(nUnknown1, nUnknown2)
     
 endmacro
 
-; AI command 0x1C - 
-macro AICMD0x1C(nUnknown1, nUnknown2)
+; AI command 0x1C - Show dialog
+macro AICMD0x1C_ShowDialog(nDialogId, nUnknown2)
     db $1C
-    dw <nUnknown1>
+    dw <nDialogId>
     db <nUnknown2>
     
 endmacro
 
-; AI command 0x1D - 
-macro AICMD0x1D(nDialogId, nUnknown2)
+; AI command 0x1D - Exactly same as 0x1C
+macro AICMD0x1D_ShowDialog(nDialogId, nUnknown2)
     db $1D
     dw <nDialogId>
     db <nUnknown2>
@@ -467,13 +467,13 @@ macro AICMD0x3E(nUnknown1)
 endmacro
 
 ; AI command 0x3F - 
-macro AICMD0x3F()
+macro AICMD0x3F_ThrowHeldItem()
     db $3F
     
 endmacro
 
 ; AI command 0x40 - 
-macro AICMD0x40()
+macro AICMD0x40_DisableTileInteractions()
     db $40
     
 endmacro
@@ -512,12 +512,12 @@ macro AICMD0x44(nUnknown1, nConditionPointer, pNextAction)
     
 endmacro
 
-; AI command 0x45 - 
-macro AICMD0x45(nUnknown1, nUnknown2, nUnknown3, pNextAction)
+; AI command 0x45 - Jump if [pAddress] is between nMin and nMax
+macro AICMD0x45_JumpIfBetween(pAddress, nMin, nMax, pNextAction)
     db $45
-    dl <nUnknown1>
-    dw <nUnknown2>
-    dw <nUnknown3>
+    dl <pAddress>
+    dw <nMin>
+    dw <nMax>
     dw <pNextAction>
     
 endmacro
@@ -659,7 +659,7 @@ macro AICMD0x58_ReplaceFarmTile(nTileId, nPosX, nPosY)
 endmacro
 
 ; AI command 0x59 - 
-macro AICMD0x59()
+macro AICMD0x59_SwapEquippedItems()
     db $59
     
 endmacro
