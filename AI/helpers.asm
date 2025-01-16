@@ -147,11 +147,11 @@ macro AICMD0x14_JumpIfEqualsToIdxValue(nAddress, nIndex, pNextAction)
     
 endmacro
 
-; AI command 0x15 - 
-macro AICMD0x15(nAddress, nUnknown2, pNextAction)
+; AI command 0x15 - jump to pNextAction if [nAddress] = nValue
+macro AICMD0x15_JumpIfEquals(nAddress, nValue, pNextAction)
     db $15
     dl <nAddress>
-    db <nUnknown2>
+    db <nValue>
     dw <pNextAction>
     
 endmacro
@@ -287,20 +287,18 @@ macro AICMD0x25(nUnknown1)
 endmacro
 
 ; AI command 0x26 - 
-macro AICMD0x26(nUnknown1, nUnknown2, nUnknown3)
-    db $26
-    dw <nUnknown1>
+macro AICMD0x26(nUnknown1, nUnknown2)
+    db $28
+    dl <nUnknown1>
     db <nUnknown2>
-    db <nUnknown3>
     
 endmacro
 
 ; AI command 0x27 - does not exists, pointer to 0x26
-macro AICMD0x27(nUnknown1, nUnknown2, nUnknown3)
-    db $27
-    dw <nUnknown1>
+macro AICMD0x27(nUnknown1, nUnknown2)
+    db $28
+    dl <nUnknown1>
     db <nUnknown2>
-    db <nUnknown3>
     
 endmacro
 
