@@ -78,7 +78,7 @@ DATA8_B48075:
     %AICMD0x0C($04)                                            ;B480AA
     %AICMD0x13($003C)                                          ;B480AC
     %AICMD0x28($7F1F5E, $0F)                                   ;B480AF
-    %AICMD0x41_ModifyVariable($7F1F25, $001E)                  ;B480B4
+    %AICMD0x41_ModifyVariable($7F1F25, 30)                     ;B480B4
     %AICMD0x3C()                                               ;B480BA
     %AICMD0x10_End()                                           ;B480BB
     %AICMD0x1A($0108, $0098, $B38300, $00)                     ;B480BC
@@ -123,13 +123,13 @@ DATA8_B48075:
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B48177)   ;B48154
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B48180)   ;B4815B
     %AICMD0x12_Jump($B48193)                                   ;B48162
-    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)                  ;B48165
+    %AICMD0x41_ModifyVariable($7F1F1F, -30)                    ;B48165
     %AICMD0x12_Jump($B48193)                                   ;B4816B
-    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)                  ;B4816E
+    %AICMD0x41_ModifyVariable($7F1F21, -30)                    ;B4816E
     %AICMD0x12_Jump($B48193)                                   ;B48174
-    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)                  ;B48177
+    %AICMD0x41_ModifyVariable($7F1F23, -30)                    ;B48177
     %AICMD0x12_Jump($B48193)                                   ;B4817D
-    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)                  ;B48180
+    %AICMD0x41_ModifyVariable($7F1F27, -30)                    ;B48180
     %AICMD0x12_Jump($B48193)                                   ;B48186
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B481A5)   ;B48189
     %AICMD0x12_Jump($B48146)                                   ;B48190
@@ -194,7 +194,7 @@ DATA8_B4820E:
     %AICMD0x07_SetPlayerDirection($03)                         ;B48252
     %AICMD0x0B($08)                                            ;B48254
     %AICMD0x13($00B4)                                          ;B48256
-    %AICMD0x41_ModifyVariable($7F1F1F, $001E)                  ;B48259
+    %AICMD0x41_ModifyVariable($7F1F1F, 30)                     ;B48259
     %AICMD0x3C()                                               ;B4825F
     %AICMD0x10_End()                                           ;B48260
     %AICMD0x1A($0080, $0090, $B38354, $00)                     ;B48261
@@ -242,13 +242,13 @@ DATA8_B4820E:
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B4832C)   ;B48309
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B48335)   ;B48310
     %AICMD0x12_Jump($B48348)                                   ;B48317
-    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)                  ;B4831A
+    %AICMD0x41_ModifyVariable($7F1F21, -30)                    ;B4831A
     %AICMD0x12_Jump($B48348)                                   ;B48320
-    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)                  ;B48323
+    %AICMD0x41_ModifyVariable($7F1F23, -30)                    ;B48323
     %AICMD0x12_Jump($B48348)                                   ;B48329
-    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)                  ;B4832C
+    %AICMD0x41_ModifyVariable($7F1F25, -30)                    ;B4832C
     %AICMD0x12_Jump($B48348)                                   ;B48332
-    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)                  ;B48335
+    %AICMD0x41_ModifyVariable($7F1F27, -30)                    ;B48335
     %AICMD0x12_Jump($B48348)                                   ;B4833B
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B48355)   ;B4833E
     %AICMD0x12_Jump($B482FB)                                   ;B48345
@@ -328,7 +328,7 @@ DATA8_B48400:
     %AICMD0x23_OrWithIndexedValue($7F1F74, $05)                ;B4843C
     %AICMD0x0C($04)                                            ;B48441
     %AICMD0x13($00B4)                                          ;B48443
-    %AICMD0x41_ModifyVariable($7F1F27, $001E)                  ;B48446
+    %AICMD0x41_ModifyVariable($7F1F27, 30)                     ;B48446
     %AICMD0x3C()                                               ;B4844C
     %AICMD0x10_End()                                           ;B4844D
     %AICMD0x1A($0028, $0198, $B382DC, $00)                     ;B4844E
@@ -374,13 +374,13 @@ DATA8_B48400:
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B48511)   ;B484EE
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B4851A)   ;B484F5
     %AICMD0x12_Jump($B4852D)                                   ;B484FC
-    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)                  ;B484FF
+    %AICMD0x41_ModifyVariable($7F1F1F, -30)                    ;B484FF
     %AICMD0x12_Jump($B4852D)                                   ;B48505
-    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)                  ;B48508
+    %AICMD0x41_ModifyVariable($7F1F21, -30)                    ;B48508
     %AICMD0x12_Jump($B4852D)                                   ;B4850E
-    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)                  ;B48511
+    %AICMD0x41_ModifyVariable($7F1F23, -30)                    ;B48511
     %AICMD0x12_Jump($B4852D)                                   ;B48517
-    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)                  ;B4851A
+    %AICMD0x41_ModifyVariable($7F1F25, -30)                    ;B4851A
     %AICMD0x12_Jump($B4852D)                                   ;B48520
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B4853F)   ;B48523
     %AICMD0x12_Jump($B484E0)                                   ;B4852A
@@ -445,7 +445,7 @@ DATA8_B485C6:
     %AICMD0x0C($02)                                            ;B48612
     %AICMD0x19($0006, $00)                                     ;B48614
     %AICMD0x13($00B4)                                          ;B48618
-    %AICMD0x41_ModifyVariable($7F1F23, $001E)                  ;B4861B
+    %AICMD0x41_ModifyVariable($7F1F23, 30)                     ;B4861B
     %AICMD0x3C()                                               ;B48621
     %AICMD0x10_End()                                           ;B48622
     %AICMD0x1A($0100, $FF80, $B3857C, $00)                     ;B48623
@@ -458,13 +458,13 @@ DATA8_B485C6:
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B48665)   ;B48642
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B4866E)   ;B48649
     %AICMD0x12_Jump($B48681)                                   ;B48650
-    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)                  ;B48653
+    %AICMD0x41_ModifyVariable($7F1F1F, -30)                    ;B48653
     %AICMD0x12_Jump($B48681)                                   ;B48659
-    %AICMD0x41_ModifyVariable($7F1F21, $FFE2)                  ;B4865C
+    %AICMD0x41_ModifyVariable($7F1F21, -30)                    ;B4865C
     %AICMD0x12_Jump($B48681)                                   ;B48662
-    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)                  ;B48665
+    %AICMD0x41_ModifyVariable($7F1F25, -30)                    ;B48665
     %AICMD0x12_Jump($B48681)                                   ;B4866B
-    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)                  ;B4866E
+    %AICMD0x41_ModifyVariable($7F1F27, -30)                    ;B4866E
     %AICMD0x12_Jump($B48681)                                   ;B48674
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B486AD)   ;B48677
     %AICMD0x12_Jump($B48634)                                   ;B4867E
@@ -512,7 +512,7 @@ DATA8_B486E8:
     %AICMD0x0B($00)                                            ;B48709
     %AICMD0x0C($01)                                            ;B4870B
     %AICMD0x13($00B4)                                          ;B4870D
-    %AICMD0x41_ModifyVariable($7F1F21, $001E)                  ;B48710
+    %AICMD0x41_ModifyVariable($7F1F21, 30)                     ;B48710
     %AICMD0x3C()                                               ;B48716
     %AICMD0x10_End()                                           ;B48717
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B48737)   ;B48718
@@ -520,13 +520,13 @@ DATA8_B486E8:
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B48749)   ;B48726
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B48752)   ;B4872D
     %AICMD0x12_Jump($B4875E)                                   ;B48734
-    %AICMD0x41_ModifyVariable($7F1F1F, $FFE2)                  ;B48737
+    %AICMD0x41_ModifyVariable($7F1F1F, -30)                    ;B48737
     %AICMD0x12_Jump($B4875E)                                   ;B4873D
-    %AICMD0x41_ModifyVariable($7F1F23, $FFE2)                  ;B48740
+    %AICMD0x41_ModifyVariable($7F1F23, -30)                    ;B48740
     %AICMD0x12_Jump($B4875E)                                   ;B48746
-    %AICMD0x41_ModifyVariable($7F1F25, $FFE2)                  ;B48749
+    %AICMD0x41_ModifyVariable($7F1F25, -30)                    ;B48749
     %AICMD0x12_Jump($B4875E)                                   ;B4874F
-    %AICMD0x41_ModifyVariable($7F1F27, $FFE2)                  ;B48752
+    %AICMD0x41_ModifyVariable($7F1F27, -30)                    ;B48752
     %AICMD0x12_Jump($B4875E)                                   ;B48758
     %AICMD0x12_Jump($B48718)                                   ;B4875B
     %AICMD0x1A($00A8, $0098, $B381BC, $01)                     ;B4875E
@@ -957,10 +957,10 @@ DATA8_B48BDE:
     %AICMD0x23_OrWithIndexedValue($7F1F60, $09)                ;B48BE0
     %AICMD0x05_SetPosition($0088, $01C8)                       ;B48BE5
     %AICMD0x08()                                               ;B48BEA
-    %AICMD0x15($7F1F19, $00, $B48C07)                          ;B48BEB
-    %AICMD0x15($7F1F19, $01, $B48C0C)                          ;B48BF2
-    %AICMD0x15($7F1F19, $02, $B48C11)                          ;B48BF9
-    %AICMD0x15($7F1F19, $03, $B48C16)                          ;B48C00
+    %AICMD0x15_JumpIfEquals($7F1F19, $00, $B48C07)             ;B48BEB
+    %AICMD0x15_JumpIfEquals($7F1F19, $01, $B48C0C)             ;B48BF2
+    %AICMD0x15_JumpIfEquals($7F1F19, $02, $B48C11)             ;B48BF9
+    %AICMD0x15_JumpIfEquals($7F1F19, $03, $B48C16)             ;B48C00
     %AICMD0x06_SetDestination($00)                             ;B48C07
     %AICMD0x12_Jump($B48C1B)                                   ;B48C09
     %AICMD0x06_SetDestination($01)                             ;B48C0C
@@ -1021,8 +1021,8 @@ DATA8_B48C45:
     %AICMD0x20($01, $B48CC9)                                   ;B48C88
     %AICMD0x12_Jump($B48CE4)                                   ;B48C8C
     %AICMD0x1C($0328, $00)                                     ;B48C8F
-    %AICMD0x15($800921, $01, $B48CA4)                          ;B48C93
-    %AICMD0x15($800923, $01, $B48CAC)                          ;B48C9A
+    %AICMD0x15_JumpIfEquals($800921, $01, $B48CA4)             ;B48C93
+    %AICMD0x15_JumpIfEquals($800923, $01, $B48CAC)             ;B48C9A
     %AICMD0x12_Jump($B48CB4)                                   ;B48CA1
     %AICMD0x47($800921, $00)                                   ;B48CA4
     %AICMD0x12_Jump($B48CB4)                                   ;B48CA9
@@ -1030,12 +1030,12 @@ DATA8_B48C45:
     %AICMD0x12_Jump($B48CB4)                                   ;B48CB1
     %AICMD0x28($7F1F00, $00)                                   ;B48CB4
     %AICMD0x23_OrWithIndexedValue($7F1F6E, $0F)                ;B48CB9
-    %AICMD0x41_ModifyVariable($7F1F33, $0014)                  ;B48CBE
+    %AICMD0x41_ModifyVariable($7F1F33, 20)                     ;B48CBE
     %AICMD0x0B($00)                                            ;B48CC4
     %AICMD0x12_Jump($B48CE4)                                   ;B48CC6
     %AICMD0x1C($0329, $00)                                     ;B48CC9
     %AICMD0x23_OrWithIndexedValue($7F1F6A, $00)                ;B48CCD
-    %AICMD0x41_ModifyVariable($7F1F33, $FFF6)                  ;B48CD2
+    %AICMD0x41_ModifyVariable($7F1F33, -10)                    ;B48CD2
     %AICMD0x0B($00)                                            ;B48CD8
     %AICMD0x12_Jump($B48CE4)                                   ;B48CDA
     %AICMD0x1C($032A, $00)                                     ;B48CDD
@@ -1114,8 +1114,8 @@ DATA8_B48D58:
     %AICMD0x0D($00, $01, $30, $01)                             ;B48DB2
     %AICMD0x1B($025E, $01)                                     ;B48DB7
     %AICMD0x1C($0322, $00)                                     ;B48DBB
-    %AICMD0x15($800921, $03, $B48DD0)                          ;B48DBF
-    %AICMD0x15($800923, $03, $B48DD8)                          ;B48DC6
+    %AICMD0x15_JumpIfEquals($800921, $03, $B48DD0)             ;B48DBF
+    %AICMD0x15_JumpIfEquals($800923, $03, $B48DD8)             ;B48DC6
     %AICMD0x12_Jump($B48DE0)                                   ;B48DCD
     %AICMD0x47($800921, $00)                                   ;B48DD0
     %AICMD0x12_Jump($B48DE0)                                   ;B48DD5
@@ -1123,11 +1123,11 @@ DATA8_B48D58:
     %AICMD0x12_Jump($B48DE0)                                   ;B48DDD
     %AICMD0x28($7F1F00, $02)                                   ;B48DE0
     %AICMD0x23_OrWithIndexedValue($7F1F68, $0F)                ;B48DE5
-    %AICMD0x41_ModifyVariable($7F1F33, $0014)                  ;B48DEA
+    %AICMD0x41_ModifyVariable($7F1F33, 20)                     ;B48DEA
     %AICMD0x12_Jump($B48D84)                                   ;B48DF0
     %AICMD0x1C($0323, $00)                                     ;B48DF3
     %AICMD0x23_OrWithIndexedValue($7F1F6A, $02)                ;B48DF7
-    %AICMD0x41_ModifyVariable($7F1F33, $FFEC)                  ;B48DFC
+    %AICMD0x41_ModifyVariable($7F1F33, -20)                    ;B48DFC
     %AICMD0x12_Jump($B48D84)                                   ;B48E02
 
 
@@ -1171,12 +1171,12 @@ DATA8_B48E25:
     %AICMD0x09($02, $B48EAE)                                   ;B48E5C
     %AICMD0x1C($031F, $00)                                     ;B48E60
     %AICMD0x23_OrWithIndexedValue($7F1F6A, $03)                ;B48E64
-    %AICMD0x41_ModifyVariable($7F1F33, $FFE2)                  ;B48E69
+    %AICMD0x41_ModifyVariable($7F1F33, -30)                    ;B48E69
     %AICMD0x12_Jump($B48E89)                                   ;B48E6F
     %AICMD0x1C($0320, $00)                                     ;B48E72
     %AICMD0x28($7F1F00, $03)                                   ;B48E76
     %AICMD0x47($800921, $14)                                   ;B48E7B
-    %AICMD0x41_ModifyVariable($7F1F33, $0014)                  ;B48E80
+    %AICMD0x41_ModifyVariable($7F1F33, 20)                     ;B48E80
     %AICMD0x12_Jump($B48E89)                                   ;B48E86
     %AICMD0x13($0078)                                          ;B48E89
     %AICMD0x1B($0316, $00)                                     ;B48E8C
@@ -1221,11 +1221,11 @@ DATA8_B48EE5:
     %AICMD0x09($01, $B48EF9)                                   ;B48EE5
     %AICMD0x38()                                               ;B48EE9
     %AICMD0x10_End()                                           ;B48EEA
-    %AICMD0x15($7F1F1C, $12, $B48EF8)                          ;B48EEB
+    %AICMD0x15_JumpIfEquals($7F1F1C, $12, $B48EF8)             ;B48EEB
     %AICMD0x13($0001)                                          ;B48EF2
     %AICMD0x12_Jump($B48EEB)                                   ;B48EF5
     %AICMD0x10_End()                                           ;B48EF8
-    %AICMD0x15($7F1F1C, $12, $B48F94)                          ;B48EF9
+    %AICMD0x15_JumpIfEquals($7F1F1C, $12, $B48F94)             ;B48EF9
     %AICMD0x1A($0098, $01A8, $B384E0, $01)                     ;B48F00
     %AICMD0x2D($B48F28, $B48F2F)                               ;B48F08
     %AICMD0x16($7F1F1C, $12, $18, $B48F6E)                     ;B48F0D
@@ -1235,17 +1235,17 @@ DATA8_B48EE5:
     %AICMD0x12_Jump($B48F18)                                   ;B48F25
     %AICMD0x1C($032B, $00)                                     ;B48F28
     %AICMD0x12_Jump($B48F18)                                   ;B48F2C
-    %AICMD0x15($80091E, $01, $B48F44)                          ;B48F2F
-    %AICMD0x15($80091E, $02, $B48F5A)                          ;B48F36
+    %AICMD0x15_JumpIfEquals($80091E, $01, $B48F44)             ;B48F2F
+    %AICMD0x15_JumpIfEquals($80091E, $02, $B48F5A)             ;B48F36
     %AICMD0x1C($032F, $00)                                     ;B48F3D
     %AICMD0x12_Jump($B48F08)                                   ;B48F41
     %AICMD0x1B($0309, $01)                                     ;B48F44
     %AICMD0x1C($032D, $00)                                     ;B48F48
     %AICMD0x23_OrWithIndexedValue($7F1F6A, $08)                ;B48F4C
-    %AICMD0x41_ModifyVariable($7F1F33, $0014)                  ;B48F51
+    %AICMD0x41_ModifyVariable($7F1F33, 20)                     ;B48F51
     %AICMD0x12_Jump($B48F6E)                                   ;B48F57
     %AICMD0x1C($032E, $00)                                     ;B48F5A
-    %AICMD0x41_ModifyVariable($7F1F33, $FFEC)                  ;B48F5E
+    %AICMD0x41_ModifyVariable($7F1F33, -20)                    ;B48F5E
     %AICMD0x12_Jump($B48F18)                                   ;B48F64
     %AICMD0x1C($032C, $00)                                     ;B48F67
     %AICMD0x12_Jump($B48F18)                                   ;B48F6B
@@ -1361,7 +1361,7 @@ DATA8_B48FDE:
     %AICMD0x13($003C)                                          ;B4909E
     %AICMD0x1B($0223, $01)                                     ;B490A1
     %AICMD0x0D($FF, $00, $04, $01)                             ;B490A5
-    %AICMD0x41_ModifyVariable($7F1F1F, $0032)                  ;B490AA
+    %AICMD0x41_ModifyVariable($7F1F1F, 50)                     ;B490AA
     %AICMD0x0B($04)                                            ;B490B0
     %AICMD0x0C($05)                                            ;B490B2
     %AICMD0x1B($021F, $00)                                     ;B490B4
@@ -1450,7 +1450,7 @@ DATA8_B4911C:
     %AICMD0x13($0014)                                          ;B49180
     %AICMD0x1B($022D, $00)                                     ;B49183
     %AICMD0x13($003C)                                          ;B49187
-    %AICMD0x41_ModifyVariable($7F1F21, $0032)                  ;B4918A
+    %AICMD0x41_ModifyVariable($7F1F21, 50)                     ;B4918A
     %AICMD0x1B($0227, $00)                                     ;B49190
     %AICMD0x0D($00, $01, $50, $01)                             ;B49194
     %AICMD0x0B($01)                                            ;B49199
@@ -1536,7 +1536,7 @@ DATA8_B49210:
     %AICMD0x1B($0252, $01)                                     ;B49262
     %AICMD0x13($005A)                                          ;B49266
     %AICMD0x1B($024F, $01)                                     ;B49269
-    %AICMD0x41_ModifyVariable($7F1F23, $0032)                  ;B4926D
+    %AICMD0x41_ModifyVariable($7F1F23, 50)                     ;B4926D
     %AICMD0x0B($00)                                            ;B49273
     %AICMD0x07_SetPlayerDirection($02)                         ;B49275
     %AICMD0x39($02, $0030)                                     ;B49277
@@ -1618,10 +1618,10 @@ DATA8_B4931D:
     %AICMD0x0D($01, $FF, $18, $02)                             ;B49339
     %AICMD0x0D($01, $00, $10, $04)                             ;B4933E
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $03)                ;B49343
-    %AICMD0x15($7F1F19, $00, $B49364)                          ;B49348
-    %AICMD0x15($7F1F19, $01, $B49369)                          ;B4934F
-    %AICMD0x15($7F1F19, $02, $B4936E)                          ;B49356
-    %AICMD0x15($7F1F19, $03, $B49373)                          ;B4935D
+    %AICMD0x15_JumpIfEquals($7F1F19, $00, $B49364)             ;B49348
+    %AICMD0x15_JumpIfEquals($7F1F19, $01, $B49369)             ;B4934F
+    %AICMD0x15_JumpIfEquals($7F1F19, $02, $B4936E)             ;B49356
+    %AICMD0x15_JumpIfEquals($7F1F19, $03, $B49373)             ;B4935D
     %AICMD0x3D($10)                                            ;B49364
     %AICMD0x12_Jump($B49378)                                   ;B49366
     %AICMD0x3D($11)                                            ;B49369
@@ -1655,7 +1655,7 @@ DATA8_B4931D:
     %AICMD0x0D($01, $00, $14, $01)                             ;B493C9
     %AICMD0x1B($0243, $01)                                     ;B493CE
     %AICMD0x13($005A)                                          ;B493D2
-    %AICMD0x41_ModifyVariable($7F1F25, $0032)                  ;B493D5
+    %AICMD0x41_ModifyVariable($7F1F25, 50)                     ;B493D5
     %AICMD0x1B($0240, $01)                                     ;B493DB
     %AICMD0x13($0028)                                          ;B493DF
     %AICMD0x1B($0241, $00)                                     ;B493E2
@@ -1782,10 +1782,10 @@ DATA8_B49513:
     %AICMD0x38()                                               ;B4951F
     %AICMD0x0C($00)                                            ;B49520
     %AICMD0x23_OrWithIndexedValue($7F1F5E, $05)                ;B49522
-    %AICMD0x15($7F1F19, $00, $B49543)                          ;B49527
-    %AICMD0x15($7F1F19, $01, $B49548)                          ;B4952E
-    %AICMD0x15($7F1F19, $02, $B4954D)                          ;B49535
-    %AICMD0x15($7F1F19, $03, $B49552)                          ;B4953C
+    %AICMD0x15_JumpIfEquals($7F1F19, $00, $B49543)             ;B49527
+    %AICMD0x15_JumpIfEquals($7F1F19, $01, $B49548)             ;B4952E
+    %AICMD0x15_JumpIfEquals($7F1F19, $02, $B4954D)             ;B49535
+    %AICMD0x15_JumpIfEquals($7F1F19, $03, $B49552)             ;B4953C
     %AICMD0x3D($10)                                            ;B49543
     %AICMD0x12_Jump($B49557)                                   ;B49545
     %AICMD0x3D($11)                                            ;B49548
@@ -1850,7 +1850,7 @@ DATA8_B4958B:
     %AICMD0x0D($01, $00, $08, $01)                             ;B495F4
     %AICMD0x1B($024A, $01)                                     ;B495F9
     %AICMD0x13($005A)                                          ;B495FD
-    %AICMD0x41_ModifyVariable($7F1F27, $0032)                  ;B49600
+    %AICMD0x41_ModifyVariable($7F1F27, 50)                     ;B49600
     %AICMD0x0B($06)                                            ;B49606
     %AICMD0x1B($0245, $00)                                     ;B49608
     %AICMD0x0D($00, $01, $30, $01)                             ;B4960C
@@ -1926,10 +1926,10 @@ DATA8_B4969A:
     %AICMD0x09($08, $B49A23)                                   ;B496CE
     %AICMD0x09($09, $B49A31)                                   ;B496D2
     %AICMD0x09($0A, $B4973C)                                   ;B496D6
-    %AICMD0x15($7F1F19, $00, $B496F6)                          ;B496DA
-    %AICMD0x15($7F1F19, $01, $B496FB)                          ;B496E1
-    %AICMD0x15($7F1F19, $02, $B49700)                          ;B496E8
-    %AICMD0x15($7F1F19, $03, $B49705)                          ;B496EF
+    %AICMD0x15_JumpIfEquals($7F1F19, $00, $B496F6)             ;B496DA
+    %AICMD0x15_JumpIfEquals($7F1F19, $01, $B496FB)             ;B496E1
+    %AICMD0x15_JumpIfEquals($7F1F19, $02, $B49700)             ;B496E8
+    %AICMD0x15_JumpIfEquals($7F1F19, $03, $B49705)             ;B496EF
     %AICMD0x06_SetDestination($04)                             ;B496F6
     %AICMD0x12_Jump($B4970A)                                   ;B496F8
     %AICMD0x06_SetDestination($05)                             ;B496FB
@@ -1947,7 +1947,7 @@ DATA8_B4969A:
     %AICMD0x09($0F, $B499AD)                                   ;B4971D
     %AICMD0x0C($03)                                            ;B49721
     %AICMD0x13($003C)                                          ;B49723
-    %AICMD0x41_ModifyVariable($7F1F33, $0032)                  ;B49726
+    %AICMD0x41_ModifyVariable($7F1F33, 50)                     ;B49726
     %AICMD0x01_UnfreezeTime()                                  ;B4972C
     %AICMD0x24($74)                                            ;B4972D
     %AICMD0x13($00B4)                                          ;B4972F
@@ -2223,15 +2223,15 @@ DATA8_B49A5F:
     %AICMD0x12_Jump($B49AEE)                                   ;B49B3D
     %AICMD0x1C($01AD, $00)                                     ;B49B40
     %AICMD0x12_Jump($B49AEE)                                   ;B49B44
-    %AICMD0x41_ModifyVariable($7F1F1F, $0032)                  ;B49B47
+    %AICMD0x41_ModifyVariable($7F1F1F, 50)                     ;B49B47
     %AICMD0x12_Jump($B49B39)                                   ;B49B4D
-    %AICMD0x41_ModifyVariable($7F1F21, $0032)                  ;B49B50
+    %AICMD0x41_ModifyVariable($7F1F21, 50)                     ;B49B50
     %AICMD0x12_Jump($B49B39)                                   ;B49B56
-    %AICMD0x41_ModifyVariable($7F1F23, $0032)                  ;B49B59
+    %AICMD0x41_ModifyVariable($7F1F23, 50)                     ;B49B59
     %AICMD0x12_Jump($B49B39)                                   ;B49B5F
-    %AICMD0x41_ModifyVariable($7F1F25, $0032)                  ;B49B62
+    %AICMD0x41_ModifyVariable($7F1F25, 50)                     ;B49B62
     %AICMD0x12_Jump($B49B39)                                   ;B49B68
-    %AICMD0x41_ModifyVariable($7F1F27, $0032)                  ;B49B6B
+    %AICMD0x41_ModifyVariable($7F1F27, 50)                     ;B49B6B
     %AICMD0x12_Jump($B49B39)                                   ;B49B71
     %AICMD0x1A($0080, $00C8, $B38354, $01)                     ;B49B74
     %AICMD0x1F($B49B82)                                        ;B49B7C
@@ -2446,10 +2446,10 @@ DATA8_B49E51:
     %AICMD0x08()                                               ;B49E69
     %AICMD0x09($01, $B49EC6)                                   ;B49E6A
     %AICMD0x09($02, $B49EDF)                                   ;B49E6E
-    %AICMD0x15($7F1F19, $00, $B49E8E)                          ;B49E72
-    %AICMD0x15($7F1F19, $01, $B49E93)                          ;B49E79
-    %AICMD0x15($7F1F19, $02, $B49E98)                          ;B49E80
-    %AICMD0x15($7F1F19, $03, $B49E9D)                          ;B49E87
+    %AICMD0x15_JumpIfEquals($7F1F19, $00, $B49E8E)             ;B49E72
+    %AICMD0x15_JumpIfEquals($7F1F19, $01, $B49E93)             ;B49E79
+    %AICMD0x15_JumpIfEquals($7F1F19, $02, $B49E98)             ;B49E80
+    %AICMD0x15_JumpIfEquals($7F1F19, $03, $B49E9D)             ;B49E87
     %AICMD0x06_SetDestination($04)                             ;B49E8E
     %AICMD0x12_Jump($B49EA2)                                   ;B49E90
     %AICMD0x06_SetDestination($05)                             ;B49E93
@@ -2467,7 +2467,7 @@ DATA8_B49E51:
     %AICMD0x24($74)                                            ;B49EAF
     %AICMD0x13($00B4)                                          ;B49EB1
     %AICMD0x1C($038A, $00)                                     ;B49EB4
-    %AICMD0x41_ModifyVariable($7F1F33, $FF9C)                  ;B49EB8
+    %AICMD0x41_ModifyVariable($7F1F33, -100)                   ;B49EB8
     %AICMD0x03_SetHour($0F)                                    ;B49EBE
     %AICMD0x47($800973, $03)                                   ;B49EC0
     %AICMD0x10_End()                                           ;B49EC5
@@ -2530,10 +2530,10 @@ DATA8_B49F33:
     %AICMD0x20($01, $B49F88)                                   ;B49F67
     %AICMD0x12_Jump($B49F5C)                                   ;B49F6B
     %AICMD0x1C($0332, $00)                                     ;B49F6E
-    %AICMD0x41_ModifyVariable($7F1F33, $FFF6)                  ;B49F72
+    %AICMD0x41_ModifyVariable($7F1F33, -10)                    ;B49F72
     %AICMD0x12_Jump($B49F9D)                                   ;B49F78
     %AICMD0x1C($0333, $00)                                     ;B49F7B
-    %AICMD0x41_ModifyVariable($7F1F33, $0032)                  ;B49F7F
+    %AICMD0x41_ModifyVariable($7F1F33, 50)                     ;B49F7F
     %AICMD0x12_Jump($B49F8F)                                   ;B49F85
     %AICMD0x1C($0334, $00)                                     ;B49F88
     %AICMD0x12_Jump($B49F9D)                                   ;B49F8C
@@ -2594,7 +2594,7 @@ DATA8_B49FF8:
     %AICMD0x07_SetPlayerDirection($00)                         ;B4A006
     %AICMD0x0C($01)                                            ;B4A008
     %AICMD0x11()                                               ;B4A00A
-    %AICMD0x41_ModifyVariable($7F1F33, $FFCE)                  ;B4A00B
+    %AICMD0x41_ModifyVariable($7F1F33, -50)                    ;B4A00B
     %AICMD0x10_End()                                           ;B4A011
     %AICMD0x1A($00A8, $0078, $B3845C, $03)                     ;B4A012
     %AICMD0x0C($00)                                            ;B4A01A
@@ -2685,7 +2685,7 @@ DATA8_B4A0D2:
     %AICMD0x1B($02E7, $01)                                     ;B4A0F9
     %AICMD0x0D($01, $00, $20, $01)                             ;B4A0FD
     %AICMD0x1C($019B, $00)                                     ;B4A102
-    %AICMD0x41_ModifyVariable($7F1F1F, $0064)                  ;B4A106
+    %AICMD0x41_ModifyVariable($7F1F1F, 100)                    ;B4A106
     %AICMD0x1B($02F0, $01)                                     ;B4A10C
     %AICMD0x13($003C)                                          ;B4A110
     %AICMD0x0B($01)                                            ;B4A113
@@ -2740,7 +2740,7 @@ DATA8_B4A141:
     %AICMD0x1B($02E7, $00)                                     ;B4A190
     %AICMD0x13($001E)                                          ;B4A194
     %AICMD0x1C($019C, $00)                                     ;B4A197
-    %AICMD0x41_ModifyVariable($7F1F21, $0064)                  ;B4A19B
+    %AICMD0x41_ModifyVariable($7F1F21, 100)                    ;B4A19B
     %AICMD0x1B($02E7, $01)                                     ;B4A1A1
     %AICMD0x0D($01, $00, $04, $01)                             ;B4A1A5
     %AICMD0x1B($02F0, $01)                                     ;B4A1AA
@@ -2813,7 +2813,7 @@ DATA8_B4A1D8:
     %AICMD0x13($003C)                                          ;B4A25F
     %AICMD0x0D($00, $FE, $1A, $01)                             ;B4A262
     %AICMD0x0B($06)                                            ;B4A267
-    %AICMD0x41_ModifyVariable($7F1F23, $0064)                  ;B4A269
+    %AICMD0x41_ModifyVariable($7F1F23, 100)                    ;B4A269
     %AICMD0x12_Jump($B4A272)                                   ;B4A26F
     %AICMD0x13($0001)                                          ;B4A272
     %AICMD0x12_Jump($B4A272)                                   ;B4A275
@@ -2862,7 +2862,7 @@ DATA8_B4A297:
     %AICMD0x0C($02)                                            ;B4A2DE
     %AICMD0x13($000A)                                          ;B4A2E0
     %AICMD0x1C($019E, $00)                                     ;B4A2E3
-    %AICMD0x41_ModifyVariable($7F1F25, $0064)                  ;B4A2E7
+    %AICMD0x41_ModifyVariable($7F1F25, 100)                    ;B4A2E7
     %AICMD0x1B($02E3, $00)                                     ;B4A2ED
     %AICMD0x0D($00, $01, $08, $02)                             ;B4A2F1
     %AICMD0x0B($03)                                            ;B4A2F6
@@ -2909,7 +2909,7 @@ DATA8_B4A321:
     %AICMD0x1B($02E7, $01)                                     ;B4A355
     %AICMD0x0D($01, $00, $18, $01)                             ;B4A359
     %AICMD0x1C($019F, $00)                                     ;B4A35E
-    %AICMD0x41_ModifyVariable($7F1F27, $0064)                  ;B4A362
+    %AICMD0x41_ModifyVariable($7F1F27, 100)                    ;B4A362
     %AICMD0x13($000A)                                          ;B4A368
     %AICMD0x0D($02, $00, $01, $01)                             ;B4A36B
     %AICMD0x1B($02F0, $01)                                     ;B4A370
@@ -3018,12 +3018,12 @@ DATA8_B4A475:
     %AICMD0x1B($027B, $01)                                     ;B4A485
     %AICMD0x0D($01, $00, $80, $01)                             ;B4A489
     %AICMD0x13($001E)                                          ;B4A48E
-    %AICMD0x15($80098C, $06, $B4A4BE)                          ;B4A491
-    %AICMD0x15($80098C, $07, $B4A4C5)                          ;B4A498
-    %AICMD0x15($80098C, $08, $B4A4CC)                          ;B4A49F
-    %AICMD0x15($80098C, $09, $B4A4D3)                          ;B4A4A6
-    %AICMD0x15($80098C, $0A, $B4A4DA)                          ;B4A4AD
-    %AICMD0x15($80098C, $0B, $B4A4E1)                          ;B4A4B4
+    %AICMD0x15_JumpIfEquals($80098C, $06, $B4A4BE)             ;B4A491
+    %AICMD0x15_JumpIfEquals($80098C, $07, $B4A4C5)             ;B4A498
+    %AICMD0x15_JumpIfEquals($80098C, $08, $B4A4CC)             ;B4A49F
+    %AICMD0x15_JumpIfEquals($80098C, $09, $B4A4D3)             ;B4A4A6
+    %AICMD0x15_JumpIfEquals($80098C, $0A, $B4A4DA)             ;B4A4AD
+    %AICMD0x15_JumpIfEquals($80098C, $0B, $B4A4E1)             ;B4A4B4
     %AICMD0x12_Jump($B4A4E8)                                   ;B4A4BB
     %AICMD0x1C($0272, $00)                                     ;B4A4BE
     %AICMD0x12_Jump($B4A4E8)                                   ;B4A4C2
@@ -3204,7 +3204,7 @@ DATA8_B4A62D:
     %AICMD0x06_SetDestination($09)                             ;B4A678
     %AICMD0x38()                                               ;B4A67A
     %AICMD0x39($01, $0040)                                     ;B4A67B
-    %AICMD0x15($80091D, $00, $B4A6A1)                          ;B4A67F
+    %AICMD0x15_JumpIfEquals($80091D, $00, $B4A6A1)             ;B4A67F
     %AICMD0x1C($0241, $00)                                     ;B4A686
     %AICMD0x40()                                               ;B4A68A
     %AICMD0x39($01, $0010)                                     ;B4A68B
@@ -3231,33 +3231,33 @@ DATA8_B4A62D:
     %AICMD0x10_End()                                           ;B4A6C8
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $00, $B4A72D)   ;B4A6C9
     %AICMD0x09($07, $B4B284)                                   ;B4A6D0
-    %AICMD0x41_ModifyVariable($7F1F1F, $001E)                  ;B4A6D4
+    %AICMD0x41_ModifyVariable($7F1F1F, 30)                     ;B4A6D4
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A6DA
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $01, $B4A736)   ;B4A6DD
     %AICMD0x09($07, $B4B2DB)                                   ;B4A6E4
-    %AICMD0x41_ModifyVariable($7F1F21, $001E)                  ;B4A6E8
+    %AICMD0x41_ModifyVariable($7F1F21, 30)                     ;B4A6E8
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A6EE
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $02, $B4A73F)   ;B4A6F1
     %AICMD0x09($07, $B4B332)                                   ;B4A6F8
-    %AICMD0x41_ModifyVariable($7F1F23, $001E)                  ;B4A6FC
+    %AICMD0x41_ModifyVariable($7F1F23, 30)                     ;B4A6FC
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A702
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $03, $B4A748)   ;B4A705
     %AICMD0x09($07, $B4B389)                                   ;B4A70C
-    %AICMD0x41_ModifyVariable($7F1F25, $001E)                  ;B4A710
+    %AICMD0x41_ModifyVariable($7F1F25, 30)                     ;B4A710
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A716
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F66, $04, $B4A751)   ;B4A719
     %AICMD0x09($07, $B4B3E0)                                   ;B4A720
-    %AICMD0x41_ModifyVariable($7F1F27, $001E)                  ;B4A724
+    %AICMD0x41_ModifyVariable($7F1F27, 30)                     ;B4A724
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A72A
-    %AICMD0x41_ModifyVariable($7F1F1F, $001E)                  ;B4A72D
+    %AICMD0x41_ModifyVariable($7F1F1F, 30)                     ;B4A72D
     %AICMD0x12_Jump($B4A757)                                   ;B4A733
-    %AICMD0x41_ModifyVariable($7F1F21, $001E)                  ;B4A736
+    %AICMD0x41_ModifyVariable($7F1F21, 30)                     ;B4A736
     %AICMD0x12_Jump($B4A757)                                   ;B4A73C
-    %AICMD0x41_ModifyVariable($7F1F23, $001E)                  ;B4A73F
+    %AICMD0x41_ModifyVariable($7F1F23, 30)                     ;B4A73F
     %AICMD0x12_Jump($B4A757)                                   ;B4A745
-    %AICMD0x41_ModifyVariable($7F1F25, $001E)                  ;B4A748
+    %AICMD0x41_ModifyVariable($7F1F25, 30)                     ;B4A748
     %AICMD0x12_Jump($B4A757)                                   ;B4A74E
-    %AICMD0x41_ModifyVariable($7F1F27, $001E)                  ;B4A751
+    %AICMD0x41_ModifyVariable($7F1F27, 30)                     ;B4A751
     %AICMD0x09($07, $B4B437)                                   ;B4A757
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A75B
     %AICMD0x1A($0108, $00B8, $B38AB0, $00)                     ;B4A75E
@@ -3282,17 +3282,17 @@ DATA8_B4A62D:
     %AICMD0x1C($028C, $00)                                     ;B4A7A9
     %AICMD0x12_Jump($B4A795)                                   ;B4A7AD
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F76, $00, $B4A826)   ;B4A7B0
-    %AICMD0x15($80091E, $15, $B4A813)                          ;B4A7B7
-    %AICMD0x15($80091E, $16, $B4A813)                          ;B4A7BE
-    %AICMD0x15($80091E, $17, $B4A813)                          ;B4A7C5
-    %AICMD0x15($80091E, $01, $B4A813)                          ;B4A7CC
-    %AICMD0x15($80091E, $02, $B4A808)                          ;B4A7D3
-    %AICMD0x15($80091E, $14, $B4A813)                          ;B4A7DA
-    %AICMD0x15($80091E, $07, $B4A840)                          ;B4A7E1
-    %AICMD0x15($80091E, $05, $B4A840)                          ;B4A7E8
-    %AICMD0x15($80091E, $18, $B4A813)                          ;B4A7EF
+    %AICMD0x15_JumpIfEquals($80091E, $15, $B4A813)             ;B4A7B7
+    %AICMD0x15_JumpIfEquals($80091E, $16, $B4A813)             ;B4A7BE
+    %AICMD0x15_JumpIfEquals($80091E, $17, $B4A813)             ;B4A7C5
+    %AICMD0x15_JumpIfEquals($80091E, $01, $B4A813)             ;B4A7CC
+    %AICMD0x15_JumpIfEquals($80091E, $02, $B4A808)             ;B4A7D3
+    %AICMD0x15_JumpIfEquals($80091E, $14, $B4A813)             ;B4A7DA
+    %AICMD0x15_JumpIfEquals($80091E, $07, $B4A840)             ;B4A7E1
+    %AICMD0x15_JumpIfEquals($80091E, $05, $B4A840)             ;B4A7E8
+    %AICMD0x15_JumpIfEquals($80091E, $18, $B4A813)             ;B4A7EF
     %AICMD0x16($80091E, $09, $0C, $B4A808)                     ;B4A7F6
-    %AICMD0x15($80091E, $1A, $B4A808)                          ;B4A7FE
+    %AICMD0x15_JumpIfEquals($80091E, $1A, $B4A808)             ;B4A7FE
     %AICMD0x12_Jump($B4A808)                                   ;B4A805
     %AICMD0x17($02)                                            ;B4A808
     %AICMD0x18($00, $B4A8DE)                                   ;B4A80A
@@ -3318,7 +3318,7 @@ DATA8_B4A62D:
     %AICMD0x19($003B, $00)                                     ;B4A85A
     %AICMD0x21($7F1F36, $01)                                   ;B4A85E
     %AICMD0x21($800917, $0A)                                   ;B4A863
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4A868
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4A868
     %AICMD0x23_OrWithIndexedValue($7F1F6C, $0F)                ;B4A86E
     %AICMD0x12_Jump($B4A92C)                                   ;B4A873
     %AICMD0x1A($0118, $00F8, $B38AC8, $00)                     ;B4A876
@@ -3521,8 +3521,8 @@ DATA8_B4A62D:
     %AICMD0x1F($B4AC29)                                        ;B4ABBE
     %AICMD0x12_Jump($B4ABBE)                                   ;B4ABC1
     %AICMD0x28($7F1F74, $00)                                   ;B4ABC4
-    %AICMD0x15($7F1F18, $00, $B4ABE4)                          ;B4ABC9
-    %AICMD0x15($7F1F18, $01, $B4AC0D)                          ;B4ABD0
+    %AICMD0x15_JumpIfEquals($7F1F18, $00, $B4ABE4)             ;B4ABC9
+    %AICMD0x15_JumpIfEquals($7F1F18, $01, $B4AC0D)             ;B4ABD0
     %AICMD0x12_Jump($B4ABB8)                                   ;B4ABD7
     %AICMD0x23_OrWithIndexedValue($7F1F74, $00)                ;B4ABDA
     %AICMD0x0B($02)                                            ;B4ABDF
@@ -3532,10 +3532,10 @@ DATA8_B4A62D:
     %AICMD0x20($01, $B4AC00)                                   ;B4ABEC
     %AICMD0x12_Jump($B4ABBE)                                   ;B4ABF0
     %AICMD0x1C($0253, $00)                                     ;B4ABF3
-    %AICMD0x41_ModifyVariable($7F1F1F, $0008)                  ;B4ABF7
+    %AICMD0x41_ModifyVariable($7F1F1F, 8)                      ;B4ABF7
     %AICMD0x12_Jump($B4ABBE)                                   ;B4ABFD
     %AICMD0x1C($0254, $00)                                     ;B4AC00
-    %AICMD0x41_ModifyVariable($7F1F1F, $0002)                  ;B4AC04
+    %AICMD0x41_ModifyVariable($7F1F1F, 2)                      ;B4AC04
     %AICMD0x12_Jump($B4ABBE)                                   ;B4AC0A
     %AICMD0x1C($025D, $00)                                     ;B4AC0D
     %AICMD0x12_Jump($B4ABBE)                                   ;B4AC11
@@ -3560,8 +3560,8 @@ DATA8_B4A62D:
     %AICMD0x1F($B4AD4F)                                        ;B4AC64
     %AICMD0x12_Jump($B4AC64)                                   ;B4AC67
     %AICMD0x28($7F1F74, $01)                                   ;B4AC6A
-    %AICMD0x15($7F1F18, $00, $B4AC8A)                          ;B4AC6F
-    %AICMD0x15($7F1F18, $01, $B4AD14)                          ;B4AC76
+    %AICMD0x15_JumpIfEquals($7F1F18, $00, $B4AC8A)             ;B4AC6F
+    %AICMD0x15_JumpIfEquals($7F1F18, $01, $B4AD14)             ;B4AC76
     %AICMD0x12_Jump($B4AC5E)                                   ;B4AC7D
     %AICMD0x23_OrWithIndexedValue($7F1F74, $01)                ;B4AC80
     %AICMD0x0B($02)                                            ;B4AC85
@@ -3575,7 +3575,7 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4AC9E
     %AICMD0x11()                                               ;B4ACA1
     %AICMD0x1C($025F, $00)                                     ;B4ACA2
-    %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B4ACA6
+    %AICMD0x41_ModifyVariable($7F1F21, 8)                      ;B4ACA6
     %AICMD0x12_Jump($B4AC64)                                   ;B4ACAC
     %AICMD0x1C($0260, $00)                                     ;B4ACAF
     %AICMD0x1B($0345, $00)                                     ;B4ACB3
@@ -3583,7 +3583,7 @@ DATA8_B4A62D:
     %AICMD0x13($0028)                                          ;B4ACBB
     %AICMD0x1C($0261, $00)                                     ;B4ACBE
     %AICMD0x1B($0226, $00)                                     ;B4ACC2
-    %AICMD0x41_ModifyVariable($7F1F21, $0002)                  ;B4ACC6
+    %AICMD0x41_ModifyVariable($7F1F21, 2)                      ;B4ACC6
     %AICMD0x12_Jump($B4AC64)                                   ;B4ACCC
     %AICMD0x1D($026B, $00)                                     ;B4ACCF
     %AICMD0x20($00, $B4ACDE)                                   ;B4ACD3
@@ -3594,7 +3594,7 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4ACE3
     %AICMD0x11()                                               ;B4ACE6
     %AICMD0x1C($025F, $00)                                     ;B4ACE7
-    %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B4ACEB
+    %AICMD0x41_ModifyVariable($7F1F21, 8)                      ;B4ACEB
     %AICMD0x12_Jump($B4AC64)                                   ;B4ACF1
     %AICMD0x1C($0260, $00)                                     ;B4ACF4
     %AICMD0x1B($0345, $00)                                     ;B4ACF8
@@ -3602,7 +3602,7 @@ DATA8_B4A62D:
     %AICMD0x13($0028)                                          ;B4AD00
     %AICMD0x1C($026C, $00)                                     ;B4AD03
     %AICMD0x1B($0226, $00)                                     ;B4AD07
-    %AICMD0x41_ModifyVariable($7F1F21, $0002)                  ;B4AD0B
+    %AICMD0x41_ModifyVariable($7F1F21, 2)                      ;B4AD0B
     %AICMD0x12_Jump($B4AC64)                                   ;B4AD11
     %AICMD0x1C($027B, $00)                                     ;B4AD14
     %AICMD0x20($00, $B4AD23)                                   ;B4AD18
@@ -3613,7 +3613,7 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4AD28
     %AICMD0x11()                                               ;B4AD2B
     %AICMD0x1C($025F, $00)                                     ;B4AD2C
-    %AICMD0x41_ModifyVariable($7F1F21, $0008)                  ;B4AD30
+    %AICMD0x41_ModifyVariable($7F1F21, 8)                      ;B4AD30
     %AICMD0x12_Jump($B4AC64)                                   ;B4AD36
     %AICMD0x1B($0345, $00)                                     ;B4AD39
     %AICMD0x1B($0346, $00)                                     ;B4AD3D
@@ -3636,8 +3636,8 @@ DATA8_B4A62D:
     %AICMD0x1F($B4AE52)                                        ;B4AD8A
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AD8D
     %AICMD0x28($7F1F74, $02)                                   ;B4AD90
-    %AICMD0x15($7F1F18, $00, $B4ADB0)                          ;B4AD95
-    %AICMD0x15($7F1F18, $01, $B4ADE6)                          ;B4AD9C
+    %AICMD0x15_JumpIfEquals($7F1F18, $00, $B4ADB0)             ;B4AD95
+    %AICMD0x15_JumpIfEquals($7F1F18, $01, $B4ADE6)             ;B4AD9C
     %AICMD0x12_Jump($B4AD84)                                   ;B4ADA3
     %AICMD0x23_OrWithIndexedValue($7F1F74, $02)                ;B4ADA6
     %AICMD0x0B($02)                                            ;B4ADAB
@@ -3652,10 +3652,10 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4ADC8
     %AICMD0x11()                                               ;B4ADCB
     %AICMD0x1C($0257, $00)                                     ;B4ADCC
-    %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B4ADD0
+    %AICMD0x41_ModifyVariable($7F1F23, 8)                      ;B4ADD0
     %AICMD0x12_Jump($B4AD8A)                                   ;B4ADD6
     %AICMD0x1C($0258, $00)                                     ;B4ADD9
-    %AICMD0x41_ModifyVariable($7F1F23, $0002)                  ;B4ADDD
+    %AICMD0x41_ModifyVariable($7F1F23, 2)                      ;B4ADDD
     %AICMD0x12_Jump($B4AD8A)                                   ;B4ADE3
     %AICMD0x09($14, $B4A948)                                   ;B4ADE6
     %AICMD0x1D($0291, $00)                                     ;B4ADEA
@@ -3667,10 +3667,10 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4ADFE
     %AICMD0x11()                                               ;B4AE01
     %AICMD0x1C($0262, $00)                                     ;B4AE02
-    %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B4AE06
+    %AICMD0x41_ModifyVariable($7F1F23, 8)                      ;B4AE06
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AE0C
     %AICMD0x1C($0263, $00)                                     ;B4AE0F
-    %AICMD0x41_ModifyVariable($7F1F23, $0002)                  ;B4AE13
+    %AICMD0x41_ModifyVariable($7F1F23, 2)                      ;B4AE13
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AE19
     %AICMD0x09($14, $B4A93B)                                   ;B4AE1C
     %AICMD0x1D($0256, $00)                                     ;B4AE20
@@ -3682,10 +3682,10 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4AE34
     %AICMD0x11()                                               ;B4AE37
     %AICMD0x1C($027C, $00)                                     ;B4AE38
-    %AICMD0x41_ModifyVariable($7F1F23, $0008)                  ;B4AE3C
+    %AICMD0x41_ModifyVariable($7F1F23, 8)                      ;B4AE3C
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AE42
     %AICMD0x1C($0258, $00)                                     ;B4AE45
-    %AICMD0x41_ModifyVariable($7F1F23, $0002)                  ;B4AE49
+    %AICMD0x41_ModifyVariable($7F1F23, 2)                      ;B4AE49
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AE4F
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B4ADA6)   ;B4AE52
     %AICMD0x1C($026D, $00)                                     ;B4AE59
@@ -3702,8 +3702,8 @@ DATA8_B4A62D:
     %AICMD0x1F($B4AF6B)                                        ;B4AE8D
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AE90
     %AICMD0x28($7F1F74, $03)                                   ;B4AE93
-    %AICMD0x15($7F1F18, $00, $B4AEB3)                          ;B4AE98
-    %AICMD0x15($7F1F18, $01, $B4AEE9)                          ;B4AE9F
+    %AICMD0x15_JumpIfEquals($7F1F18, $00, $B4AEB3)             ;B4AE98
+    %AICMD0x15_JumpIfEquals($7F1F18, $01, $B4AEE9)             ;B4AE9F
     %AICMD0x12_Jump($B4AE87)                                   ;B4AEA6
     %AICMD0x23_OrWithIndexedValue($7F1F74, $03)                ;B4AEA9
     %AICMD0x0B($02)                                            ;B4AEAE
@@ -3718,10 +3718,10 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4AECB
     %AICMD0x11()                                               ;B4AECE
     %AICMD0x1C($025A, $00)                                     ;B4AECF
-    %AICMD0x41_ModifyVariable($7F1F25, $0008)                  ;B4AED3
+    %AICMD0x41_ModifyVariable($7F1F25, 8)                      ;B4AED3
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AED9
     %AICMD0x1C($025B, $00)                                     ;B4AEDC
-    %AICMD0x41_ModifyVariable($7F1F25, $0002)                  ;B4AEE0
+    %AICMD0x41_ModifyVariable($7F1F25, 2)                      ;B4AEE0
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AEE6
     %AICMD0x09($14, $B4A955)                                   ;B4AEE9
     %AICMD0x1D($0264, $00)                                     ;B4AEED
@@ -3733,10 +3733,10 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4AF01
     %AICMD0x11()                                               ;B4AF04
     %AICMD0x1C($0265, $00)                                     ;B4AF05
-    %AICMD0x41_ModifyVariable($7F1F25, $0008)                  ;B4AF09
+    %AICMD0x41_ModifyVariable($7F1F25, 8)                      ;B4AF09
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF0F
     %AICMD0x1C($0266, $00)                                     ;B4AF12
-    %AICMD0x41_ModifyVariable($7F1F25, $0002)                  ;B4AF16
+    %AICMD0x41_ModifyVariable($7F1F25, 2)                      ;B4AF16
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF1C
     %AICMD0x09($14, $B4A955)                                   ;B4AF1F
     %AICMD0x1D($0275, $00)                                     ;B4AF23
@@ -3748,17 +3748,17 @@ DATA8_B4A62D:
     %AICMD0x13($0078)                                          ;B4AF37
     %AICMD0x11()                                               ;B4AF3A
     %AICMD0x1C($0265, $00)                                     ;B4AF3B
-    %AICMD0x41_ModifyVariable($7F1F25, $0008)                  ;B4AF3F
+    %AICMD0x41_ModifyVariable($7F1F25, 8)                      ;B4AF3F
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF45
     %AICMD0x1C($0266, $00)                                     ;B4AF48
-    %AICMD0x41_ModifyVariable($7F1F25, $0002)                  ;B4AF4C
+    %AICMD0x41_ModifyVariable($7F1F25, 2)                      ;B4AF4C
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF52
     %AICMD0x1C($027D, $00)                                     ;B4AF55
     %AICMD0x08()                                               ;B4AF59
     %AICMD0x19($0039, $00)                                     ;B4AF5A
     %AICMD0x13($0078)                                          ;B4AF5E
     %AICMD0x11()                                               ;B4AF61
-    %AICMD0x41_ModifyVariable($7F1F25, $0002)                  ;B4AF62
+    %AICMD0x41_ModifyVariable($7F1F25, 2)                      ;B4AF62
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF68
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F74, $05, $B4AEA9)   ;B4AF6B
     %AICMD0x1C($027D, $00)                                     ;B4AF72
@@ -3775,8 +3775,8 @@ DATA8_B4A62D:
     %AICMD0x1F($B4B066)                                        ;B4AFA6
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFA9
     %AICMD0x28($7F1F74, $04)                                   ;B4AFAC
-    %AICMD0x15($7F1F18, $00, $B4AFCC)                          ;B4AFB1
-    %AICMD0x15($7F1F18, $01, $B4B02A)                          ;B4AFB8
+    %AICMD0x15_JumpIfEquals($7F1F18, $00, $B4AFCC)             ;B4AFB1
+    %AICMD0x15_JumpIfEquals($7F1F18, $01, $B4B02A)             ;B4AFB8
     %AICMD0x12_Jump($B4AFA0)                                   ;B4AFBF
     %AICMD0x23_OrWithIndexedValue($7F1F74, $04)                ;B4AFC2
     %AICMD0x0B($02)                                            ;B4AFC7
@@ -3787,10 +3787,10 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFD8
     %AICMD0x1C($0268, $00)                                     ;B4AFDB
     %AICMD0x32($8000D4, $0015)                                 ;B4AFDF
-    %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B4AFE5
+    %AICMD0x41_ModifyVariable($7F1F27, 8)                      ;B4AFE5
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFEB
     %AICMD0x1C($0269, $00)                                     ;B4AFEE
-    %AICMD0x41_ModifyVariable($7F1F27, $0002)                  ;B4AFF2
+    %AICMD0x41_ModifyVariable($7F1F27, 2)                      ;B4AFF2
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFF8
     %AICMD0x1D($026F, $00)                                     ;B4AFFB
     %AICMD0x20($00, $B4B00A)                                   ;B4AFFF
@@ -3798,10 +3798,10 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AFA0)                                   ;B4B007
     %AICMD0x1C($0270, $00)                                     ;B4B00A
     %AICMD0x32($8000D4, $0015)                                 ;B4B00E
-    %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B4B014
+    %AICMD0x41_ModifyVariable($7F1F27, 8)                      ;B4B014
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B01A
     %AICMD0x1C($0271, $00)                                     ;B4B01D
-    %AICMD0x41_ModifyVariable($7F1F27, $0002)                  ;B4B021
+    %AICMD0x41_ModifyVariable($7F1F27, 2)                      ;B4B021
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B027
     %AICMD0x1D($0277, $00)                                     ;B4B02A
     %AICMD0x20($00, $B4B039)                                   ;B4B02E
@@ -3809,10 +3809,10 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B036
     %AICMD0x1C($0278, $00)                                     ;B4B039
     %AICMD0x32($8000D4, $0015)                                 ;B4B03D
-    %AICMD0x41_ModifyVariable($7F1F27, $0008)                  ;B4B043
+    %AICMD0x41_ModifyVariable($7F1F27, 8)                      ;B4B043
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B049
     %AICMD0x1C($0279, $00)                                     ;B4B04C
-    %AICMD0x41_ModifyVariable($7F1F27, $0002)                  ;B4B050
+    %AICMD0x41_ModifyVariable($7F1F27, 2)                      ;B4B050
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B056
     %AICMD0x1C($027F, $00)                                     ;B4B059
     %AICMD0x32($8000D4, $0015)                                 ;B4B05D
@@ -4323,8 +4323,8 @@ DATA8_B4B67E:
     %AICMD0x19($0039, $00)                                     ;B4B805
     %AICMD0x13($0078)                                          ;B4B809
     %AICMD0x11()                                               ;B4B80C
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4B80D
-    %AICMD0x57_UpdateStamina($14)                              ;B4B813
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4B80D
+    %AICMD0x57_UpdateStamina(20)                               ;B4B813
     %AICMD0x12_Jump($B4B7DE)                                   ;B4B815
     %AICMD0x1C($02A3, $00)                                     ;B4B818
     %AICMD0x12_Jump($B4B7D8)                                   ;B4B81C
@@ -4345,8 +4345,8 @@ DATA8_B4B67E:
     %AICMD0x19($0039, $00)                                     ;B4B862
     %AICMD0x13($0078)                                          ;B4B866
     %AICMD0x11()                                               ;B4B869
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4B86A
-    %AICMD0x57_UpdateStamina($14)                              ;B4B870
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4B86A
+    %AICMD0x57_UpdateStamina(20)                               ;B4B870
     %AICMD0x12_Jump($B4B83B)                                   ;B4B872
     %AICMD0x1C($02A6, $00)                                     ;B4B875
     %AICMD0x12_Jump($B4B835)                                   ;B4B879
@@ -4367,8 +4367,8 @@ DATA8_B4B67E:
     %AICMD0x19($0039, $00)                                     ;B4B8BF
     %AICMD0x13($0078)                                          ;B4B8C3
     %AICMD0x11()                                               ;B4B8C6
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4B8C7
-    %AICMD0x57_UpdateStamina($14)                              ;B4B8CD
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4B8C7
+    %AICMD0x57_UpdateStamina(20)                               ;B4B8CD
     %AICMD0x12_Jump($B4B898)                                   ;B4B8CF
     %AICMD0x1C($02A0, $00)                                     ;B4B8D2
     %AICMD0x12_Jump($B4B892)                                   ;B4B8D6
@@ -4389,8 +4389,8 @@ DATA8_B4B67E:
     %AICMD0x19($0039, $00)                                     ;B4B91C
     %AICMD0x13($0078)                                          ;B4B920
     %AICMD0x11()                                               ;B4B923
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4B924
-    %AICMD0x57_UpdateStamina($14)                              ;B4B92A
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4B924
+    %AICMD0x57_UpdateStamina(20)                               ;B4B92A
     %AICMD0x12_Jump($B4B8F5)                                   ;B4B92C
     %AICMD0x1C($02A0, $00)                                     ;B4B92F
     %AICMD0x12_Jump($B4B8EF)                                   ;B4B933
@@ -4430,8 +4430,8 @@ DATA8_B4B947:
     %AICMD0x12_Jump($B4B998)                                   ;B4B99B
     %AICMD0x1C($0292, $00)                                     ;B4B99E
     %AICMD0x09($02, $B4B9B8)                                   ;B4B9A2
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4B9A6
-    %AICMD0x57_UpdateStamina($14)                              ;B4B9AC
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4B9A6
+    %AICMD0x57_UpdateStamina(20)                               ;B4B9AC
     %AICMD0x12_Jump($B4B998)                                   ;B4B9AE
     %AICMD0x1C($0293, $00)                                     ;B4B9B1
     %AICMD0x12_Jump($B4B998)                                   ;B4B9B5
@@ -4487,8 +4487,8 @@ DATA8_B4B9C2:
     %AICMD0x19($0039, $00)                                     ;B4BA6D
     %AICMD0x13($0078)                                          ;B4BA71
     %AICMD0x11()                                               ;B4BA74
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4BA75
-    %AICMD0x57_UpdateStamina($14)                              ;B4BA7B
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4BA75
+    %AICMD0x57_UpdateStamina(20)                               ;B4BA7B
     %AICMD0x12_Jump($B4BA46)                                   ;B4BA7D
     %AICMD0x1C($02A0, $00)                                     ;B4BA80
     %AICMD0x12_Jump($B4BA40)                                   ;B4BA84
@@ -4635,15 +4635,15 @@ DATA8_B4BB06:
     %AICMD0x0B($02)                                            ;B4BBFD
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BBFF
     %AICMD0x1C($02D5, $00)                                     ;B4BC02
-    %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B4BC06
+    %AICMD0x41_ModifyVariable($7F1F33, 30)                     ;B4BC06
     %AICMD0x0B($02)                                            ;B4BC0C
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC0E
     %AICMD0x1C($02D6, $00)                                     ;B4BC11
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4BC15
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4BC15
     %AICMD0x0B($02)                                            ;B4BC1B
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC1D
     %AICMD0x1C($02D7, $00)                                     ;B4BC20
-    %AICMD0x41_ModifyVariable($7F1F33, $FFEC)                  ;B4BC24
+    %AICMD0x41_ModifyVariable($7F1F33, -20)                    ;B4BC24
     %AICMD0x0B($02)                                            ;B4BC2A
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC2C
     %AICMD0x1C($02DC, $00)                                     ;B4BC2F
@@ -4686,7 +4686,7 @@ DATA8_B4BB06:
     %AICMD0x1F($B4BCD6)                                        ;B4BCC1
     %AICMD0x12_Jump($B4BCC1)                                   ;B4BCC4
     %AICMD0x1C($02DA, $00)                                     ;B4BCC7
-    %AICMD0x41_ModifyVariable($7F1F1F, $000A)                  ;B4BCCB
+    %AICMD0x41_ModifyVariable($7F1F1F, 10)                     ;B4BCCB
     %AICMD0x0B($07)                                            ;B4BCD1
     %AICMD0x12_Jump($B4BCC1)                                   ;B4BCD3
     %AICMD0x1C($0293, $00)                                     ;B4BCD6
@@ -4700,7 +4700,7 @@ DATA8_B4BB06:
     %AICMD0x1F($B4BD12)                                        ;B4BCFD
     %AICMD0x12_Jump($B4BCFD)                                   ;B4BD00
     %AICMD0x1C($02DB, $00)                                     ;B4BD03
-    %AICMD0x41_ModifyVariable($7F1F27, $000A)                  ;B4BD07
+    %AICMD0x41_ModifyVariable($7F1F27, 10)                     ;B4BD07
     %AICMD0x0B($08)                                            ;B4BD0D
     %AICMD0x12_Jump($B4BCFD)                                   ;B4BD0F
     %AICMD0x1C($0293, $00)                                     ;B4BD12
@@ -4777,11 +4777,11 @@ DATA8_B4BD19:
     %AICMD0x2C($19, $0006, $005A)                              ;B4BE06
     %AICMD0x11()                                               ;B4BE0C
     %AICMD0x1C($02E7, $00)                                     ;B4BE0D
-    %AICMD0x15($8009AC, $01, $B4BE34)                          ;B4BE11
-    %AICMD0x15($8009AC, $02, $B4BE3C)                          ;B4BE18
-    %AICMD0x15($8009AC, $03, $B4BE44)                          ;B4BE1F
-    %AICMD0x15($8009AC, $04, $B4BE4C)                          ;B4BE26
-    %AICMD0x15($8009AC, $05, $B4BE54)                          ;B4BE2D
+    %AICMD0x15_JumpIfEquals($8009AC, $01, $B4BE34)             ;B4BE11
+    %AICMD0x15_JumpIfEquals($8009AC, $02, $B4BE3C)             ;B4BE18
+    %AICMD0x15_JumpIfEquals($8009AC, $03, $B4BE44)             ;B4BE1F
+    %AICMD0x15_JumpIfEquals($8009AC, $04, $B4BE4C)             ;B4BE26
+    %AICMD0x15_JumpIfEquals($8009AC, $05, $B4BE54)             ;B4BE2D
     %AICMD0x23_OrWithIndexedValue($7F1F78, $00)                ;B4BE34
     %AICMD0x12_Jump($B4BE5C)                                   ;B4BE39
     %AICMD0x23_OrWithIndexedValue($7F1F78, $01)                ;B4BE3C
@@ -4869,19 +4869,19 @@ DATA8_B4BD19:
     %AICMD0x10_End()                                           ;B4BFA2
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $0A, $B4BFD9)   ;B4BFA3
     %AICMD0x23_OrWithIndexedValue($7F1F6C, $0A)                ;B4BFAA
-    %AICMD0x41_ModifyVariable($7F1F10, $001E)                  ;B4BFAF
+    %AICMD0x41_ModifyVariable($7F1F10, 30)                     ;B4BFAF
     %AICMD0x1C($02EB, $00)                                     ;B4BFB5
     %AICMD0x0B($00)                                            ;B4BFB9
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFBB
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $0B, $B4BFD9)   ;B4BFBE
     %AICMD0x23_OrWithIndexedValue($7F1F6C, $0B)                ;B4BFC5
-    %AICMD0x41_ModifyVariable($7F1F10, $001E)                  ;B4BFCA
+    %AICMD0x41_ModifyVariable($7F1F10, 30)                     ;B4BFCA
     %AICMD0x1C($02EB, $00)                                     ;B4BFD0
     %AICMD0x0B($00)                                            ;B4BFD4
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFD6
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $0C, $B4BFF0)   ;B4BFD9
     %AICMD0x23_OrWithIndexedValue($7F1F6C, $0C)                ;B4BFE0
-    %AICMD0x41_ModifyVariable($7F1F33, $0032)                  ;B4BFE5
+    %AICMD0x41_ModifyVariable($7F1F33, 50)                     ;B4BFE5
     %AICMD0x0B($00)                                            ;B4BFEB
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFED
     %AICMD0x14_JumpIfEqualsToIdxValue($7F1F6C, $0D, $B4BFD9)   ;B4BFF0
@@ -4913,9 +4913,9 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4C062)                                   ;B4C05F
     %AICMD0x1F($B4C068)                                        ;B4C062
     %AICMD0x12_Jump($B4C062)                                   ;B4C065
-    %AICMD0x15($8009A2, $00, $B4C086)                          ;B4C068
-    %AICMD0x15($8009A2, $01, $B4C086)                          ;B4C06F
-    %AICMD0x15($8009A2, $02, $B4C086)                          ;B4C076
+    %AICMD0x15_JumpIfEquals($8009A2, $00, $B4C086)             ;B4C068
+    %AICMD0x15_JumpIfEquals($8009A2, $01, $B4C086)             ;B4C06F
+    %AICMD0x15_JumpIfEquals($8009A2, $02, $B4C086)             ;B4C076
     %AICMD0x1C($02EF, $00)                                     ;B4C07D
     %AICMD0x0B($03)                                            ;B4C081
     %AICMD0x12_Jump($B4C062)                                   ;B4C083
@@ -5013,7 +5013,7 @@ DATA8_B4BD19:
     %AICMD0x1F($B4C231)                                        ;B4C21C
     %AICMD0x12_Jump($B4C21C)                                   ;B4C21F
     %AICMD0x1C($02F2, $00)                                     ;B4C222
-    %AICMD0x41_ModifyVariable($7F1F21, $000A)                  ;B4C226
+    %AICMD0x41_ModifyVariable($7F1F21, 10)                     ;B4C226
     %AICMD0x0B($07)                                            ;B4C22C
     %AICMD0x12_Jump($B4C21C)                                   ;B4C22E
     %AICMD0x1C($02F1, $00)                                     ;B4C231
@@ -5050,7 +5050,7 @@ DATA8_B4BD19:
     %AICMD0x1F($B4C2DE)                                        ;B4C2C9
     %AICMD0x12_Jump($B4C2C9)                                   ;B4C2CC
     %AICMD0x1C($02F3, $00)                                     ;B4C2CF
-    %AICMD0x41_ModifyVariable($7F1F23, $000A)                  ;B4C2D3
+    %AICMD0x41_ModifyVariable($7F1F23, 10)                     ;B4C2D3
     %AICMD0x0B($08)                                            ;B4C2D9
     %AICMD0x12_Jump($B4C2C9)                                   ;B4C2DB
     %AICMD0x1C($02F1, $00)                                     ;B4C2DE
@@ -5093,7 +5093,7 @@ DATA8_B4BD19:
     %AICMD0x1F($B4C3A4)                                        ;B4C38F
     %AICMD0x12_Jump($B4C38F)                                   ;B4C392
     %AICMD0x1C($02F4, $00)                                     ;B4C395
-    %AICMD0x41_ModifyVariable($7F1F25, $000A)                  ;B4C399
+    %AICMD0x41_ModifyVariable($7F1F25, 10)                     ;B4C399
     %AICMD0x0B($09)                                            ;B4C39F
     %AICMD0x12_Jump($B4C38F)                                   ;B4C3A1
     %AICMD0x1C($02F1, $00)                                     ;B4C3A4
@@ -5123,13 +5123,13 @@ DATA8_B4C3AC:
     %AICMD0x06_SetDestination($0B)                             ;B4C3E1
     %AICMD0x38()                                               ;B4C3E3
     %AICMD0x13($0001)                                          ;B4C3E4
-    %AICMD0x15($8009A2, $03, $B4C403)                          ;B4C3E7
-    %AICMD0x15($8009A2, $04, $B4C403)                          ;B4C3EE
-    %AICMD0x15($8009A2, $05, $B4C403)                          ;B4C3F5
+    %AICMD0x15_JumpIfEquals($8009A2, $03, $B4C403)             ;B4C3E7
+    %AICMD0x15_JumpIfEquals($8009A2, $04, $B4C403)             ;B4C3EE
+    %AICMD0x15_JumpIfEquals($8009A2, $05, $B4C403)             ;B4C3F5
     %AICMD0x1C($038F, $00)                                     ;B4C3FC
     %AICMD0x12_Jump($B4C413)                                   ;B4C400
     %AICMD0x1C($02EA, $00)                                     ;B4C403
-    %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B4C407
+    %AICMD0x41_ModifyVariable($7F1F33, 30)                     ;B4C407
     %AICMD0x09($09, $B4BF98)                                   ;B4C40D
     %AICMD0x0C($00)                                            ;B4C411
     %AICMD0x13($0001)                                          ;B4C413
@@ -5165,22 +5165,22 @@ DATA8_B4C447:
     %AICMD0x09($01, $B4C44D)                                   ;B4C447
     %AICMD0x38()                                               ;B4C44B
     %AICMD0x10_End()                                           ;B4C44C
-    %AICMD0x15($7F1F1C, $12, $B4C4B7)                          ;B4C44D
+    %AICMD0x15_JumpIfEquals($7F1F1C, $12, $B4C4B7)             ;B4C44D
     %AICMD0x1A($0068, $01A8, $B38384, $02)                     ;B4C454
     %AICMD0x2D($B4C47A, $B4C46C)                               ;B4C45C
     %AICMD0x16($7F1F1C, $12, $18, $B4C481)                     ;B4C461
     %AICMD0x12_Jump($B4C45C)                                   ;B4C469
-    %AICMD0x15($80091E, $14, $B4C48E)                          ;B4C46C
+    %AICMD0x15_JumpIfEquals($80091E, $14, $B4C48E)             ;B4C46C
     %AICMD0x1C($041B, $00)                                     ;B4C473
     %AICMD0x12_Jump($B4C45C)                                   ;B4C477
     %AICMD0x1C($0418, $00)                                     ;B4C47A
     %AICMD0x12_Jump($B4C45C)                                   ;B4C47E
     %AICMD0x1C($0419, $00)                                     ;B4C481
-    %AICMD0x41_ModifyVariable($7F1F33, $FFFB)                  ;B4C485
+    %AICMD0x41_ModifyVariable($7F1F33, -5)                     ;B4C485
     %AICMD0x12_Jump($B4C4A2)                                   ;B4C48B
     %AICMD0x1C($041A, $00)                                     ;B4C48E
     %AICMD0x42($7F1F04, $000002)                               ;B4C492
-    %AICMD0x41_ModifyVariable($7F1F33, $001E)                  ;B4C499
+    %AICMD0x41_ModifyVariable($7F1F33, 30)                     ;B4C499
     %AICMD0x12_Jump($B4C4A2)                                   ;B4C49F
     %AICMD0x23_OrWithIndexedValue($7F1F6A, $0B)                ;B4C4A2
     %AICMD0x28($7F1F6A, $0A)                                   ;B4C4A7
@@ -5220,7 +5220,7 @@ DATA8_B4C4D8:
     %AICMD0x1B($0305, $01)                                     ;B4C4F3
     %AICMD0x0D($02, $00, $80, $01)                             ;B4C4F7
     %AICMD0x37()                                               ;B4C4FC
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4C4FD
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4C4FD
     %AICMD0x10_End()                                           ;B4C503
 
 
@@ -5251,7 +5251,7 @@ DATA8_B4C524:
     %AICMD0x13($003C)                                          ;B4C538
     %AICMD0x0D($FF, $00, $50, $01)                             ;B4C53B
     %AICMD0x37()                                               ;B4C540
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4C541
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4C541
     %AICMD0x10_End()                                           ;B4C547
 
 
@@ -5280,7 +5280,7 @@ DATA8_B4C568:
     %AICMD0x1B($0307, $01)                                     ;B4C573
     %AICMD0x0D($01, $00, $FF, $01)                             ;B4C577
     %AICMD0x37()                                               ;B4C57C
-    %AICMD0x41_ModifyVariable($7F1F33, $000A)                  ;B4C57D
+    %AICMD0x41_ModifyVariable($7F1F33, 10)                     ;B4C57D
     %AICMD0x10_End()                                           ;B4C583
 
 
