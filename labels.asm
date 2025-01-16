@@ -51,6 +51,7 @@
     nCurrentMapdata_RoomHeightMult = $000182; !^ n8 (offset 0x04) ^!
     nCurrentDialogPointerIndex = $000183; !^ n16, ptrDialog index ^!
     nCurrentTextIndex = $000187; !^ n16, ptrCurrentDialog index (to get one letter) ^!
+    nSelectedOption = $00018F; !^ n8 ^!
     nCurrentMapdataPresetId = $000195; !^ n8 (offset 0x00) ^!
     nMapEngine_CurrentMapId = $000196; !^ n16 (offset 0x01) ^!
     nMapScrool_SpeedX = $00087C; !^ n16 ^!

@@ -227,3 +227,11 @@ endstruct align 12
 !SEASON_SUMMER              =   $01
 !SEASON_FALL                =   $02
 !SEASON_WINTER              =   $03
+
+
+; Areas/Maps
+!MAP_PUBLICSQUARE           =   $0A
+!MAP_CHURCH                 =   $1B
+!MAP_BAR                    =   $1E
+!MAP_MOUNTAINTOP            =   $39
+!MAP_SPA                    =   $14

@@ -1474,7 +1474,7 @@ fItemBuy_Unknown818989:
     JMP.W fReturn_818B6A                                       ;818992|4C6A8B  |818B6A;
  
  
-  + LDA.W $018F                                                ;818995|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;818995|AD8F01  |00018F;
     BEQ +                                                      ;818998|F003    |81899D;
     JMP.W fItemBuy_Unknown818A4E                               ;81899A|4C4E8A  |818A4E;
  
@@ -1784,7 +1784,7 @@ fItemFound_Consume:
     JMP.W fReturn_818C23                                       ;818BAE|4C238C  |818C23;
  
  
-  + LDA.W $018F                                                ;818BB1|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;818BB1|AD8F01  |00018F;
     BEQ +                                                      ;818BB4|F003    |818BB9;
     JMP.W fUnknown_818C0C                                      ;818BB6|4C0C8C  |818C0C;
  
@@ -2247,7 +2247,7 @@ fItemSell_Unknown818F5A:
     JMP.W fReturn_81900F                                       ;818F63|4C0F90  |81900F;
  
  
-  + LDA.W $018F                                                ;818F66|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;818F66|AD8F01  |00018F;
     BEQ +                                                      ;818F69|F003    |818F6E;
     JMP.W fUnknown_818FD7                                      ;818F6B|4CD78F  |818FD7;
  
@@ -11054,7 +11054,7 @@ subPlayerInteraction81D593_PlayerDiary:
  
  
   + SEP #$20                                                   ;81D824|E220    |      ;
-    LDA.W $018F                                                ;81D826|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81D826|AD8F01  |00018F;
     BNE +                                                      ;81D829|D013    |81D83E;
     INC.W nPlayerInteractionArg1                               ;81D82B|EE6F09  |00096F;
     INC.W nPlayerInteractionArg1                               ;81D82E|EE6F09  |00096F;
@@ -11085,7 +11085,7 @@ subPlayerInteraction81D593_PlayerDiary:
  
  
   + SEP #$20                                                   ;81D863|E220    |      ;
-    LDA.W $018F                                                ;81D865|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81D865|AD8F01  |00018F;
     BNE +                                                      ;81D868|D006    |81D870;
     INC.W nPlayerInteractionArg1                               ;81D86A|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81D86D|4C6BD9  |81D96B;
@@ -11595,7 +11595,7 @@ subPlayerInteraction81D593_0x1E:
     JMP.W .return                                              ;81DC1F|4C56DC  |81DC56;
  
  
-  + LDA.W $018F                                                ;81DC22|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81DC22|AD8F01  |00018F;
     BEQ +                                                      ;81DC25|F003    |81DC2A;
     JMP.W .exit                                                ;81DC27|4C4ADC  |81DC4A;
  
@@ -11680,7 +11680,7 @@ subPlayerInteraction81D593_MariasDiary:
     JMP.W .return                                              ;81DC8D|4CCDDC  |81DCCD;
  
  
-  + LDA.W $018F                                                ;81DC90|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81DC90|AD8F01  |00018F;
     BEQ +                                                      ;81DC93|F003    |81DC98;
     JMP.W .exit                                                ;81DC95|4CC1DC  |81DCC1;
  
@@ -11859,7 +11859,7 @@ subPlayerInteraction81D593_NinasDiary:
     JMP.W .return                                              ;81DDDB|4C1BDE  |81DE1B;
  
  
-  + LDA.W $018F                                                ;81DDDE|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81DDDE|AD8F01  |00018F;
     BEQ +                                                      ;81DDE1|F003    |81DDE6;
     JMP.W .exit                                                ;81DDE3|4C0FDE  |81DE0F;
  
@@ -11963,7 +11963,7 @@ subPlayerInteraction81D593_AnimalNPC:
     JMP.W .return                                              ;81DEA0|4C21E2  |81E221;
  
  
-  + LDA.W $018F                                                ;81DEA3|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81DEA3|AD8F01  |00018F;
     CMP.B #$00                                                 ;81DEA6|C900    |      ;
     BEQ .cowCheck                                              ;81DEA8|F012    |81DEBC;
     CMP.B #$01                                                 ;81DEAA|C901    |      ;
@@ -12107,7 +12107,7 @@ subPlayerInteraction81D593_AnimalNPC:
     JMP.W .return                                              ;81DFD1|4C21E2  |81E221;
  
  
-  + LDA.W $018F                                                ;81DFD4|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81DFD4|AD8F01  |00018F;
     BEQ +                                                      ;81DFD7|F003    |81DFDC;
     JMP.W .label23                                             ;81DFD9|4CCDE0  |81E0CD;
  
@@ -12246,7 +12246,7 @@ subPlayerInteraction81D593_AnimalNPC:
     JMP.W .return                                              ;81E0F8|4C21E2  |81E221;
  
  
-  + LDA.W $018F                                                ;81E0FB|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81E0FB|AD8F01  |00018F;
     BEQ +                                                      ;81E0FE|F003    |81E103;
     JMP.W .label31                                             ;81E100|4C00E2  |81E200;
  
@@ -12512,7 +12512,7 @@ subPlayerInteraction81D593_EllensDiary:
     JMP.W .justReturn                                          ;81E308|4C48E3  |81E348;
  
  
-  + LDA.W $018F                                                ;81E30B|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81E30B|AD8F01  |00018F;
     BEQ +                                                      ;81E30E|F003    |81E313;
     JMP.W .return                                              ;81E310|4C3CE3  |81E33C;
  
@@ -12608,7 +12608,7 @@ subPlayerInteraction81D593_AnnsDiary:
     JMP.W .return                                              ;81E3C3|4C03E4  |81E403;
  
  
-  + LDA.W $018F                                                ;81E3C6|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81E3C6|AD8F01  |00018F;
     BEQ +                                                      ;81E3C9|F003    |81E3CE;
     JMP.W .exit                                                ;81E3CB|4CF7E3  |81E3F7;
  
@@ -12826,7 +12826,7 @@ subPlayerInteraction81D593_EvesDiary:
     JMP.W .return                                              ;81E55B|4C9BE5  |81E59B;
  
  
-  + LDA.W $018F                                                ;81E55E|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81E55E|AD8F01  |00018F;
     BEQ +                                                      ;81E561|F003    |81E566;
     JMP.W .exit                                                ;81E563|4C8FE5  |81E58F;
  
@@ -12892,7 +12892,7 @@ subPlayerInteraction81D593_0x40:
     JMP.W .justReturn                                          ;81E5D8|4C9FE6  |81E69F;
  
  
-  + LDA.W $018F                                                ;81E5DB|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81E5DB|AD8F01  |00018F;
     CMP.B #$00                                                 ;81E5DE|C900    |      ;
     BEQ .case0                                                 ;81E5E0|F013    |81E5F5;
     CMP.B #$01                                                 ;81E5E2|C901    |      ;
@@ -13322,7 +13322,7 @@ subPlayerInteraction81D593_0x43:
  
  
   + SEP #$20                                                   ;81E91C|E220    |      ;
-    LDA.W $018F                                                ;81E91E|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81E91E|AD8F01  |00018F;
     BNE +                                                      ;81E921|D01D    |81E940;
     SEP #$20                                                   ;81E923|E220    |      ;
     LDA.B #$02                                                 ;81E925|A902    |      ;
@@ -13523,7 +13523,7 @@ subPlayerInteraction81D593_0x43:
  
  
   + SEP #$20                                                   ;81EAC6|E220    |      ;
-    LDA.W $018F                                                ;81EAC8|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81EAC8|AD8F01  |00018F;
     BNE +                                                      ;81EACB|D01D    |81EAEA;
     SEP #$20                                                   ;81EACD|E220    |      ;
     LDA.B #$02                                                 ;81EACF|A902    |      ;
@@ -13791,7 +13791,7 @@ subPlayerInteraction81D593_0x44:
  
  
   + SEP #$20                                                   ;81ECDF|E220    |      ;
-    LDA.W $018F                                                ;81ECE1|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81ECE1|AD8F01  |00018F;
     BNE +                                                      ;81ECE4|D01D    |81ED03;
     SEP #$20                                                   ;81ECE6|E220    |      ;
     LDA.B #$02                                                 ;81ECE8|A902    |      ;
@@ -13992,7 +13992,7 @@ subPlayerInteraction81D593_0x44:
  
  
   + SEP #$20                                                   ;81EE89|E220    |      ;
-    LDA.W $018F                                                ;81EE8B|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81EE8B|AD8F01  |00018F;
     BNE +                                                      ;81EE8E|D01D    |81EEAD;
     SEP #$20                                                   ;81EE90|E220    |      ;
     LDA.B #$02                                                 ;81EE92|A902    |      ;
@@ -14457,7 +14457,7 @@ subPlayerInteraction81D593_0x47:
  
  
   + SEP #$20                                                   ;81F21D|E220    |      ;
-    LDA.W $018F                                                ;81F21F|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81F21F|AD8F01  |00018F;
     BEQ +                                                      ;81F222|F003    |81F227;
     JMP.W .return                                              ;81F224|4CBDF2  |81F2BD;
  
@@ -14950,7 +14950,7 @@ subPlayerInteraction81D593_0x51:
  
  
   + SEP #$20                                                   ;81F5F7|E220    |      ;
-    LDA.W $018F                                                ;81F5F9|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81F5F9|AD8F01  |00018F;
     BNE .label1                                                ;81F5FC|D035    |81F633;
     REP #$20                                                   ;81F5FE|C220    |      ;
     LDA.W #$FFEC                                               ;81F600|A9ECFF  |      ;
@@ -15102,7 +15102,7 @@ subPlayerInteraction81D593_0x52:
  
  
   + SEP #$20                                                   ;81F71E|E220    |      ;
-    LDA.W $018F                                                ;81F720|AD8F01  |00018F;
+    LDA.W nSelectedOption                                      ;81F720|AD8F01  |00018F;
     BNE .label1                                                ;81F723|D035    |81F75A;
     REP #$20                                                   ;81F725|C220    |      ;
     LDA.W #$FFE2                                               ;81F727|A9E2FF  |      ;
@@ -15309,7 +15309,7 @@ subPlayerInteraction81D593_FloristNotebook:
     JMP.W .justReturn                                          ;81F8A6|4C1EF9  |81F91E;
  
  
-  + LDA.W $018F                                                ;81F8A9|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81F8A9|AD8F01  |00018F;
     CMP.B #$00                                                 ;81F8AC|C900    |      ;
     BEQ .case0                                                 ;81F8AE|F008    |81F8B8;
     CMP.B #$01                                                 ;81F8B0|C901    |      ;
@@ -15419,7 +15419,7 @@ subPlayerInteraction81D593_AnimalNotebook:
     JMP.W .justReturn                                          ;81F97E|4C45FA  |81FA45;
  
  
-  + LDA.W $018F                                                ;81F981|AD8F01  |00018F;
+  + LDA.W nSelectedOption                                      ;81F981|AD8F01  |00018F;
     CMP.B #$00                                                 ;81F984|C900    |      ;
     BEQ .case0                                                 ;81F986|F013    |81F99B;
     CMP.B #$01                                                 ;81F988|C901    |      ;

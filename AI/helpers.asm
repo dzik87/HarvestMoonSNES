@@ -32,7 +32,7 @@ macro AICMD0x04_Emtpy()
 endmacro
 
 ; AI command 0x05 - Set player's position X and Y
-macro AICMD0x05_SetPosition(nDestinationX, nDestinationY)
+macro AICMD0x05_SetTransferPosition(nDestinationX, nDestinationY)
     db $05
     dw <nDestinationX>
     dw <nDestinationY>
@@ -40,7 +40,7 @@ macro AICMD0x05_SetPosition(nDestinationX, nDestinationY)
 endmacro
 
 ; AI command 0x06 - Set destination
-macro AICMD0x06_SetDestination(nDestinationId)
+macro AICMD0x06_SetTransferDestination(nDestinationId)
     db $06
     db <nDestinationId>
     
@@ -60,10 +60,10 @@ macro AICMD0x08()
 endmacro
 
 ; AI command 0x09 - 
-macro AICMD0x09(nUnknown1, nUnknown2)
+macro AICMD0x09(nIndex, pNextAction)
     db $09
-    db <nUnknown1>
-    dw <nUnknown2>
+    db <nIndex>
+    dw <pNextAction>
     
 endmacro
 
@@ -148,7 +148,7 @@ macro AICMD0x14_JumpIfFlagSet(nAddress, nIndex, pNextAction)
 endmacro
 
 ; AI command 0x15 - jump to pNextAction if [nAddress] = nValue
-macro AICMD0x15_JumpIfEquals(nAddress, nValue, pNextAction)
+macro AICMD0x15_JumpIfEquals8(nAddress, nValue, pNextAction)
     db $15
     dl <nAddress>
     db <nValue>
@@ -156,12 +156,12 @@ macro AICMD0x15_JumpIfEquals(nAddress, nValue, pNextAction)
     
 endmacro
 
-; AI command 0x16 - 
-macro AICMD0x16(nAddress, nUnknown2, nUnknown3, pNextAction)
+; AI command 0x16 - Jump if [pAddress] is between nMin and nMax
+macro AICMD0x16_JumpIfBetween8(nAddress, nMin, nMax, pNextAction)
     db $16
     dl <nAddress>
-    db <nUnknown2>
-    db <nUnknown3>
+    db <nMin>
+    db <nMax>
     dw <pNextAction>
     
 endmacro
@@ -223,43 +223,43 @@ macro AICMD0x1D_ShowDialog(nDialogId, nUnknown2)
     
 endmacro
 
-; AI command 0x1E - 
+; AI command 0x1E - does not exists, pointer to 0x1F
 macro AICMD0x1E(pNextAction)
     db $1E
     dw <pNextAction>
     
 endmacro
 
-; AI command 0x1F - does not exists, pointer to 0x1E
+; AI command 0x1F - 
 macro AICMD0x1F(pNextAction)
     db $1F
     dw <pNextAction>
     
 endmacro
 
-; AI command 0x20 - 
-macro AICMD0x20(nUnknown1, pNextAction)
+; AI command 0x20 - Jumps if nSelectedOption is equal to nAnswer
+macro AICMD0x20_JumpIfChoice(nAnswer, pNextAction)
     db $20
-    db <nUnknown1>
+    db <nAnswer>
     dw <pNextAction>
     
 endmacro
 
-; AI command 0x21 - 
-macro AICMD0x21(nUnknown1, nUnknown2)
+; AI command 0x21 - Adds n8Value to [pAddress]
+macro AICMD0x21_AddValue8(pAddress, n8Value)
     db $21
-    dl <nUnknown1>
-    db <nUnknown2>
+    dl <pAddress>
+    db <n8Value>
     
 endmacro
 
 ; AI command 0x22 - 
-macro AICMD0x22(nUnknown1, nUnknown2, nUnknown3, nUnknown4, nUnknown5)
+macro AICMD0x22(nUnknown1, nUnknown2, nUnknown3, pNextAction, nUnknown5)
     db $22
     db <nUnknown1>
     db <nUnknown2>
     db <nUnknown3>
-    dw <nUnknown4>
+    dw <pNextAction>
     db <nUnknown5>
     
 endmacro
@@ -286,7 +286,7 @@ macro AICMD0x25(nUnknown1)
     
 endmacro
 
-; AI command 0x26 - 
+; AI command 0x26 - does not exists, pointer to 0x28
 macro AICMD0x26(nUnknown1, nUnknown2)
     db $28
     dl <nUnknown1>
@@ -294,7 +294,7 @@ macro AICMD0x26(nUnknown1, nUnknown2)
     
 endmacro
 
-; AI command 0x27 - does not exists, pointer to 0x26
+; AI command 0x27 - does not exists, pointer to 0x28
 macro AICMD0x27(nUnknown1, nUnknown2)
     db $28
     dl <nUnknown1>
@@ -302,20 +302,20 @@ macro AICMD0x27(nUnknown1, nUnknown2)
     
 endmacro
 
-; AI command 0x28 - does not exists, pointer to 0x26
-macro AICMD0x28(nUnknown1, nUnknown2)
+; AI command 0x28 - 
+macro AICMD0x28(pAddress, nUnknown2)
     db $28
-    dl <nUnknown1>
+    dl <pAddress>
     db <nUnknown2>
     
 endmacro
 
-; AI command 0x29 - 
-macro AICMD0x29(nUnknown1, nUnknown2, nUnknown3)
+; AI command 0x29 - Sets Horizontal and Vertical map scrooling speed and its timer
+macro AICMD0x29_SetMapScrooling(nMapSpeedX, nMapSpeedY, nMapTimer)
     db $29
-    dw <nUnknown1>
-    dw <nUnknown2>
-    db <nUnknown3>
+    dw <nMapSpeedX>
+    dw <nMapSpeedY>
+    db <nMapTimer>
     
 endmacro
 
@@ -452,10 +452,10 @@ macro AICMD0x3C()
     
 endmacro
 
-; AI command 0x3D - 
-macro AICMD0x3D(nUnknown1)
+; AI command 0x3D - Teleports you to selected MapId
+macro AICMD0x3D_TeleportToMap(nMapId)
     db $3D
-    db <nUnknown1>
+    db <nMapId>
     
 endmacro
 
@@ -478,42 +478,42 @@ macro AICMD0x40_DisableTileInteractions()
     
 endmacro
 
-; AI command 0x41 - Adds nValue to [pAddress]
-macro AICMD0x41_ModifyVariable(pAddress, nValue)
+; AI command 0x41 - Adds n16Value to [pAddress]
+macro AICMD0x41_AddValue16(pAddress, n16Value)
     db $41
     dl <pAddress>
-    dw <nValue>
+    dw <n16Value>
     
 endmacro
 
-; AI command 0x42 - 
-macro AICMD0x42(nUnknown1, nMoney)
+; AI command 0x42 - Adds n24Value to [pAddress]
+macro AICMD0x42_AddValue24(pAddress, n24Value)
     db $42
-    dl <nUnknown1>
-    dl <nMoney>
+    dl <pAddress>
+    dl <n24Value>
     
 endmacro
 
-; AI command 0x43 - 
-macro AICMD0x43(nUnknown1, nUnknown2, pNextAction)
+; AI command 0x43 - Jump if [pAddress] = n16Value
+macro AICMD0x43_JumpIfEqual16(pAddress, n16Value, pNextAction)
     db $43
-    dl <nUnknown1>
-    dw <nUnknown2>
+    dl <pAddress>
+    dw <n16Value>
     dw <pNextAction>
     
 endmacro
 
-; AI command 0x44 - 
-macro AICMD0x44(nUnknown1, nConditionPointer, pNextAction)
+; AI command 0x44 - Jump if [pAddress] = n24Value
+macro AICMD0x44_JumpIfEqual24(pAddress, n24Value, pNextAction)
     db $44
-    dl <nUnknown1>
-    dl <nConditionPointer>
+    dl <pAddress>
+    dl <n24Value>
     dw <pNextAction>
     
 endmacro
 
 ; AI command 0x45 - Jump if [pAddress] is between nMin and nMax
-macro AICMD0x45_JumpIfBetween(pAddress, nMin, nMax, pNextAction)
+macro AICMD0x45_JumpIfBetween16(pAddress, nMin, nMax, pNextAction)
     db $45
     dl <pAddress>
     dw <nMin>
@@ -522,29 +522,29 @@ macro AICMD0x45_JumpIfBetween(pAddress, nMin, nMax, pNextAction)
     
 endmacro
 
-; AI command 0x46 - 
-macro AICMD0x46(nUnknown1, nUnknown2, nUnknown3, pNextAction)
+; AI command 0x46 - Jump if [pAddress] is between nMin and nMax
+macro AICMD0x46_JumpIfBetween24(pAddress, nMin, nMax, pNextAction)
     db $46
-    dl <nUnknown1>
-    dl <nUnknown2>
-    dl <nUnknown3>
+    dl <pAddress>
+    dl <nMin>
+    dl <nMax>
     dw <pNextAction>
     
 endmacro
 
-; AI command 0x47 - 
-macro AICMD0x47(nUnknown1, nUnknown2)
+; AI command 0x47 - Sets [pAddress] to n8Value
+macro AICMD0x47_SetValue8(pAddress, n8Value)
     db $47
-    dl <nUnknown1>
-    db <nUnknown2>
+    dl <pAddress>
+    db <n8Value>
     
 endmacro
 
-; AI command 0x48 - 
-macro AICMD0x48(pDestination, nValue)
+; AI command 0x48 - Not used anywhere what it does ?
+macro AICMD0x48(nUnknown1, nUnknown2)
     db $48
-    dl <pDestination>
-    dl <nValue>
+    dl <nUnknown1>
+    dl <nUnknown2>
     
 endmacro
 
