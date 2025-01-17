@@ -74,7 +74,7 @@ ppTable_B38000:
     dl pScripting_B597D1                                       ;B380CC|        |B597D1;
     dl pScripting_B5A1E5                                       ;B380CF|        |B5A1E5;
     dl pScripting_B5A703                                       ;B380D2|        |B5A703;
-    dl pScripting_B5AC6E                                       ;B380D5|        |B5AC6E;
+    dl pScripting_HowToPlay                                    ;B380D5|        |B5AC6E;
  
 DATA_B380D8:
     dl $000005,$000006,$010007,$000007                         ;B380D8|        |      ;

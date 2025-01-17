@@ -2126,9 +2126,9 @@ pScripting_B5A703:
     dw DATA8_B5A827                                            ;B5A717|        |B5A827;
     dw DATA8_B5A841                                            ;B5A719|        |B5A841;
     dw DATA8_B5A85D                                            ;B5A71B|        |B5A85D;
-    dw pScripting_B5AC6E                                       ;B5A71D|        |B5AC6E;
-    dw pScripting_B5AC6E                                       ;B5A71F|        |B5AC6E;
-    dw pScripting_B5AC6E                                       ;B5A721|        |B5AC6E;
+    dw pScripting_HowToPlay                                    ;B5A71D|        |B5AC6E;
+    dw pScripting_HowToPlay                                    ;B5A71F|        |B5AC6E;
+    dw pScripting_HowToPlay                                    ;B5A721|        |B5AC6E;
  
 DATA8_B5A723:
  
@@ -2579,7 +2579,7 @@ DATA8_B5A85D:
     %AICMD0x12_Jump($B5AC68)                                   ;B5AC6B
 
 
-pScripting_B5AC6E:
+pScripting_HowToPlay:
     dw DATA8_B5ACAE                                            ;B5AC6E|        |B5ACAE;
     dw DATA8_B5ACDE                                            ;B5AC70|        |B5ACDE;
     dw DATA8_B5AD25                                            ;B5AC72|        |B5AD25;
