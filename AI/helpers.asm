@@ -352,10 +352,10 @@ macro AICMD0x2D(pNextAction1, pNextAction2)
 endmacro
 
 ; AI command 0x2E - 
-macro AICMD0x2E(nUnknown1, nUnknown2, nUnknown3)
+macro AICMD0x2E(nUnknown1, pPointerB3, nUnknown3)
     db $2E
     db <nUnknown1>
-    dw <nUnknown2>
+    dw <pPointerB3>
     db <nUnknown3>
     
 endmacro

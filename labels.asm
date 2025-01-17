@@ -51,9 +51,9 @@
     nCurrentMapdata_RoomHeightMult = $000182; !^ n8 (offset 0x04) ^!
     nCurrentDialogPointerIndex = $000183; !^ n16, ptrDialog index ^!
     nCurrentTextIndex = $000187; !^ n16, ptrCurrentDialog index (to get one letter) ^!
-    nSelectedOption = $00018F; !^ n8 ^!
+    nSelectedDialogOption = $00018F; !^ n8 ^!
     nCurrentMapdataPresetId = $000195; !^ n8 (offset 0x00) ^!
-    nMapEngine_CurrentMapId = $000196; !^ n16 (offset 0x01) ^!
+    nMapEngine_flags = $000196; !^ n16 (offset 0x01) ^!
     nMapScrool_SpeedX = $00087C; !^ n16 ^!
     nMapScrool_SpeedY = $00087E; !^ n16 ^!
     nMapScrool_Timer = $000880
@@ -61,6 +61,7 @@
     sTempNameVariable = $000885; !^ 4 * s8 ^!
     sDogNameShort = $000899; !^ 4 * s8 ^!
     sHorseNameShort = $00089D; !^ 4 * s8 ^!
+    sMostLovedGirlName = $0008A1
     sSeasonName = $0008B3; !^ 6 * s8 ^!
     sWeekdayName = $0008BF; !^ 9 * s16 ^!
     sNumberOrdinal = $0008D1; !^ 2 * s16 ^!
@@ -74,6 +75,8 @@
     nPlayerPosYCopy = $000909; !^ n16 ^!
     nPlayerStamina = $000917; !^ n8 MaxHP ^!
     nPlayerEnergy = $000918; !^ n8 HP ^!
+    nHandItem_Current = $00091D; !^ n8 ^!
+    nHandItem_Previous = $00091E; !^ n8 ^!
     nToolEquipped = $000921
     nToolSecond = $000923
     nAmountLeft_Water = $000926; !^ n8 ^!
