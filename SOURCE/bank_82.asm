@@ -183,7 +183,7 @@ fEvents_ShippingScene:
     LDA.W #$0006                                               ;828158|A90600  |      ;
     LDX.W #$0000                                               ;82815B|A20000  |      ;
     LDY.W #$0026                                               ;82815E|A02600  |      ;
-    JSL.L fAI_Unknown848097                                    ;828161|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;828161|22978084|848097;
  
 fEvents_ShippingSceneDialog:
     REP #$20                                                   ;828165|C220    |      ;
@@ -238,10 +238,10 @@ fWeatherUnknown_8281C0:
     LDA.L .data,X                                              ;8281CF|BFFD8182|8281FD;
     STA.W nWeatherDialogIdIndex                                ;8281D3|8D9009  |000990;
     REP #$20                                                   ;8281D6|C220    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;8281D8|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;8281D8|AD9601  |000196;
     AND.W #$0010                                               ;8281DB|291000  |      ;
     BNE .label1                                                ;8281DE|D00A    |8281EA;
-    LDA.W nMapEngine_CurrentMapId                              ;8281E0|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;8281E0|AD9601  |000196;
     AND.W #$0200                                               ;8281E3|290002  |      ;
     BNE .label2                                                ;8281E6|D00B    |8281F3;
     BRA .return                                                ;8281E8|8012    |8281FC;
@@ -270,19 +270,19 @@ fWeatherUnknown_8281C0:
  
 fUnknown_828209:
     REP #$30                                                   ;828209|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82820B|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82820B|AD9601  |000196;
     AND.W #$0002                                               ;82820E|290200  |      ;
     BNE .label1                                                ;828211|D021    |828234;
-    LDA.W nMapEngine_CurrentMapId                              ;828213|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;828213|AD9601  |000196;
     AND.W #$0008                                               ;828216|290800  |      ;
     BNE .label2                                                ;828219|D027    |828242;
-    LDA.W nMapEngine_CurrentMapId                              ;82821B|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82821B|AD9601  |000196;
     AND.W #$0010                                               ;82821E|291000  |      ;
     BNE .label3                                                ;828221|D02D    |828250;
-    LDA.W nMapEngine_CurrentMapId                              ;828223|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;828223|AD9601  |000196;
     AND.W #$0100                                               ;828226|290001  |      ;
     BNE .label4                                                ;828229|D033    |82825E;
-    LDA.W nMapEngine_CurrentMapId                              ;82822B|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82822B|AD9601  |000196;
     AND.W #$0200                                               ;82822E|290002  |      ;
     BNE .label5                                                ;828231|D02D    |828260;
  
@@ -419,7 +419,7 @@ fNextDayHandler:
     AND.W #$FFFD                                               ;828332|29FDFF  |      ;
     STA.L strcEventFlags.flags7                                ;828335|8F701F7F|7F1F70;
     REP #$30                                                   ;828339|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82833B|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82833B|AD9601  |000196;
     AND.W #$0010                                               ;82833E|291000  |      ;
     BEQ +                                                      ;828341|F00B    |82834E;
     LDA.L strcEventFlags.flags1                                ;828343|AF641F7F|7F1F64;
@@ -428,7 +428,7 @@ fNextDayHandler:
  
   + JSL.L fWeatherForecast_828C09                              ;82834E|22098C82|828C09;
     REP #$30                                                   ;828352|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;828354|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;828354|AD9601  |000196;
     AND.W #$0200                                               ;828357|290002  |      ;
     BEQ +                                                      ;82835A|F00B    |828367;
     LDA.L strcEventFlags.flags1                                ;82835C|AF641F7F|7F1F64;
@@ -436,7 +436,7 @@ fNextDayHandler:
     STA.L strcEventFlags.flags1                                ;828363|8F641F7F|7F1F64;
  
   + REP #$30                                                   ;828367|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;828369|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;828369|AD9601  |000196;
     AND.W #$0100                                               ;82836C|290001  |      ;
     BEQ +                                                      ;82836F|F00B    |82837C;
     LDA.L strcEventFlags.flags7                                ;828371|AF701F7F|7F1F70;
@@ -763,7 +763,7 @@ fNextDayHandler:
     STA.L strcShedItems.row3                                   ;8286E4|8F021F7F|7F1F02;
  
   + REP #$30                                                   ;8286E8|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;8286EA|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;8286EA|AD9601  |000196;
     AND.W #$0010                                               ;8286ED|291000  |      ;
     BEQ +                                                      ;8286F0|F00B    |8286FD;
     LDA.L strcDailyFlags.flags4                                ;8286F2|AF601F7F|7F1F60;
@@ -797,7 +797,7 @@ fNextDayHandler:
   + SEP #$20                                                   ;828733|E220    |      ;
     STZ.W nTimeState                                           ;828735|9C7309  |000973;
     SEP #$20                                                   ;828738|E220    |      ;
-    STZ.W $091D                                                ;82873A|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;82873A|9C1D09  |00091D;
     REP #$30                                                   ;82873D|C230    |      ;
     LDA.W #$0002                                               ;82873F|A90200  |      ;
     EOR.W #$FFFF                                               ;828742|49FFFF  |      ;
@@ -1263,7 +1263,7 @@ aDayOrdinalString:
  
 fWeatherForecast_828C09:
     REP #$30                                                   ;828C09|C230    |      ;
-    STZ.W nMapEngine_CurrentMapId                              ;828C0B|9C9601  |000196;
+    STZ.W nMapEngine_flags                                     ;828C0B|9C9601  |000196;
     SEP #$20                                                   ;828C0E|E220    |      ;
     LDA.B #$00                                                 ;828C10|A900    |      ;
     XBA                                                        ;828C12|EB      |      ;
@@ -1295,7 +1295,7 @@ fWeatherForecast_828C09:
  
   + REP #$20                                                   ;828C3F|C220    |      ;
     LDA.L nWeatherTable_828CED                                 ;828C41|AFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828C45|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828C45|8D9601  |000196;
     JMP.W .return                                              ;828C48|4CEC8C  |828CEC;
  
  
@@ -1307,14 +1307,14 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828C55|C220    |      ;
     LDX.W #$0004                                               ;828C57|A20400  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C5A|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828C5E|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828C5E|8D9601  |000196;
     JMP.W .return                                              ;828C61|4CEC8C  |828CEC;
  
  
   + REP #$20                                                   ;828C64|C220    |      ;
     LDX.W #$0002                                               ;828C66|A20200  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C69|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828C6D|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828C6D|8D9601  |000196;
     BRA .return                                                ;828C70|807A    |828CEC;
  
  
@@ -1325,14 +1325,14 @@ fWeatherForecast_828C09:
     LDX.W #$0002                                               ;828C7A|A20200  |      ;
     REP #$20                                                   ;828C7D|C220    |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C7F|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828C83|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828C83|8D9601  |000196;
     BRA .return                                                ;828C86|8064    |828CEC;
  
  
   + REP #$20                                                   ;828C88|C220    |      ;
     LDX.W #$0004                                               ;828C8A|A20400  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C8D|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828C91|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828C91|8D9601  |000196;
     BRA .return                                                ;828C94|8056    |828CEC;
  
  
@@ -1340,7 +1340,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828C96|C220    |      ;
     LDX.W #$0006                                               ;828C98|A20600  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C9B|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828C9F|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828C9F|8D9601  |000196;
     BRA .return                                                ;828CA2|8048    |828CEC;
  
  
@@ -1348,7 +1348,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828CA4|C220    |      ;
     LDX.W #$0008                                               ;828CA6|A20800  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CA9|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828CAD|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828CAD|8D9601  |000196;
     LDA.L strcEventFlags.flags1                                ;828CB0|AF641F7F|7F1F64;
     ORA.W #$0002                                               ;828CB4|090200  |      ;
     STA.L strcEventFlags.flags1                                ;828CB7|8F641F7F|7F1F64;
@@ -1362,7 +1362,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828CC8|C220    |      ;
     LDX.W #$000A                                               ;828CCA|A20A00  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CCD|BFED8C82|828CED;
-    STA.W nMapEngine_CurrentMapId                              ;828CD1|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;828CD1|8D9601  |000196;
     LDA.L strcEventFlags.flags1                                ;828CD4|AF641F7F|7F1F64;
     ORA.W #$0001                                               ;828CD8|090100  |      ;
     STA.L strcEventFlags.flags1                                ;828CDB|8F641F7F|7F1F64;
@@ -1662,90 +1662,90 @@ fCore_FindBestLove:
     CPX.W #$000A                                               ;828EEB|E00A00  |      ;
     BNE .loop                                                  ;828EEE|D0E4    |828ED4;
     CPY.W #$0000                                               ;828EF0|C00000  |      ;
-    BEQ .label3                                                ;828EF3|F017    |828F0C;
+    BEQ .maria                                                 ;828EF3|F017    |828F0C;
     CPY.W #$0001                                               ;828EF5|C00100  |      ;
-    BEQ .label4                                                ;828EF8|F033    |828F2D;
+    BEQ .ann                                                   ;828EF8|F033    |828F2D;
     CPY.W #$0002                                               ;828EFA|C00200  |      ;
-    BEQ .label5                                                ;828EFD|F04F    |828F4E;
+    BEQ .nina                                                  ;828EFD|F04F    |828F4E;
     CPY.W #$0003                                               ;828EFF|C00300  |      ;
-    BEQ .label6                                                ;828F02|F06B    |828F6F;
+    BEQ .ellen                                                 ;828F02|F06B    |828F6F;
     CPY.W #$0004                                               ;828F04|C00400  |      ;
-    BNE .label3                                                ;828F07|D003    |828F0C;
-    JMP.W .label7                                              ;828F09|4C908F  |828F90;
+    BNE .maria                                                 ;828F07|D003    |828F0C;
+    JMP.W .eve                                                 ;828F09|4C908F  |828F90;
  
  
-.label3:
+.maria:
     REP #$30                                                   ;828F0C|C230    |      ;
     LDA.W #$0026                                               ;828F0E|A92600  |      ;
-    STA.W $08A1                                                ;828F11|8DA108  |0008A1;
+    STA.W sMostLovedGirlName                                   ;828F11|8DA108  |0008A1;
     LDA.W #$0000                                               ;828F14|A90000  |      ;
-    STA.W $08A3                                                ;828F17|8DA308  |0008A3;
+    STA.W sMostLovedGirlName+2                                 ;828F17|8DA308  |0008A3;
     LDA.W #$0011                                               ;828F1A|A91100  |      ;
-    STA.W $08A5                                                ;828F1D|8DA508  |0008A5;
+    STA.W sMostLovedGirlName+4                                 ;828F1D|8DA508  |0008A5;
     LDA.W #$0008                                               ;828F20|A90800  |      ;
-    STA.W $08A7                                                ;828F23|8DA708  |0008A7;
+    STA.W sMostLovedGirlName+6                                 ;828F23|8DA708  |0008A7;
     LDA.W #$0000                                               ;828F26|A90000  |      ;
-    STA.W $08A9                                                ;828F29|8DA908  |0008A9;
+    STA.W sMostLovedGirlName+8                                 ;828F29|8DA908  |0008A9;
     RTL                                                        ;828F2C|6B      |      ;
  
  
-.label4:
+.ann:
     REP #$30                                                   ;828F2D|C230    |      ;
     LDA.W #$001A                                               ;828F2F|A91A00  |      ;
-    STA.W $08A1                                                ;828F32|8DA108  |0008A1;
+    STA.W sMostLovedGirlName                                   ;828F32|8DA108  |0008A1;
     LDA.W #$000D                                               ;828F35|A90D00  |      ;
-    STA.W $08A3                                                ;828F38|8DA308  |0008A3;
+    STA.W sMostLovedGirlName+2                                 ;828F38|8DA308  |0008A3;
     LDA.W #$000D                                               ;828F3B|A90D00  |      ;
-    STA.W $08A5                                                ;828F3E|8DA508  |0008A5;
+    STA.W sMostLovedGirlName+4                                 ;828F3E|8DA508  |0008A5;
     LDA.W #$00B1                                               ;828F41|A9B100  |      ;
-    STA.W $08A7                                                ;828F44|8DA708  |0008A7;
+    STA.W sMostLovedGirlName+6                                 ;828F44|8DA708  |0008A7;
     LDA.W #$00B1                                               ;828F47|A9B100  |      ;
-    STA.W $08A9                                                ;828F4A|8DA908  |0008A9;
+    STA.W sMostLovedGirlName+8                                 ;828F4A|8DA908  |0008A9;
     RTL                                                        ;828F4D|6B      |      ;
  
  
-.label5:
+.nina:
     REP #$30                                                   ;828F4E|C230    |      ;
     LDA.W #$0027                                               ;828F50|A92700  |      ;
-    STA.W $08A1                                                ;828F53|8DA108  |0008A1;
+    STA.W sMostLovedGirlName                                   ;828F53|8DA108  |0008A1;
     LDA.W #$0008                                               ;828F56|A90800  |      ;
-    STA.W $08A3                                                ;828F59|8DA308  |0008A3;
+    STA.W sMostLovedGirlName+2                                 ;828F59|8DA308  |0008A3;
     LDA.W #$000D                                               ;828F5C|A90D00  |      ;
-    STA.W $08A5                                                ;828F5F|8DA508  |0008A5;
+    STA.W sMostLovedGirlName+4                                 ;828F5F|8DA508  |0008A5;
     LDA.W #$0000                                               ;828F62|A90000  |      ;
-    STA.W $08A7                                                ;828F65|8DA708  |0008A7;
+    STA.W sMostLovedGirlName+6                                 ;828F65|8DA708  |0008A7;
     LDA.W #$00B1                                               ;828F68|A9B100  |      ;
-    STA.W $08A9                                                ;828F6B|8DA908  |0008A9;
+    STA.W sMostLovedGirlName+8                                 ;828F6B|8DA908  |0008A9;
     RTL                                                        ;828F6E|6B      |      ;
  
  
-.label6:
+.ellen:
     REP #$30                                                   ;828F6F|C230    |      ;
     LDA.W #$001E                                               ;828F71|A91E00  |      ;
-    STA.W $08A1                                                ;828F74|8DA108  |0008A1;
+    STA.W sMostLovedGirlName                                   ;828F74|8DA108  |0008A1;
     LDA.W #$000B                                               ;828F77|A90B00  |      ;
-    STA.W $08A3                                                ;828F7A|8DA308  |0008A3;
+    STA.W sMostLovedGirlName+2                                 ;828F7A|8DA308  |0008A3;
     LDA.W #$000B                                               ;828F7D|A90B00  |      ;
-    STA.W $08A5                                                ;828F80|8DA508  |0008A5;
+    STA.W sMostLovedGirlName+4                                 ;828F80|8DA508  |0008A5;
     LDA.W #$0004                                               ;828F83|A90400  |      ;
-    STA.W $08A7                                                ;828F86|8DA708  |0008A7;
+    STA.W sMostLovedGirlName+6                                 ;828F86|8DA708  |0008A7;
     LDA.W #$000D                                               ;828F89|A90D00  |      ;
-    STA.W $08A9                                                ;828F8C|8DA908  |0008A9;
+    STA.W sMostLovedGirlName+8                                 ;828F8C|8DA908  |0008A9;
     RTL                                                        ;828F8F|6B      |      ;
  
  
-.label7:
+.eve:
     REP #$30                                                   ;828F90|C230    |      ;
     LDA.W #$001E                                               ;828F92|A91E00  |      ;
-    STA.W $08A1                                                ;828F95|8DA108  |0008A1;
+    STA.W sMostLovedGirlName                                   ;828F95|8DA108  |0008A1;
     LDA.W #$0015                                               ;828F98|A91500  |      ;
-    STA.W $08A3                                                ;828F9B|8DA308  |0008A3;
+    STA.W sMostLovedGirlName+2                                 ;828F9B|8DA308  |0008A3;
     LDA.W #$0004                                               ;828F9E|A90400  |      ;
-    STA.W $08A5                                                ;828FA1|8DA508  |0008A5;
+    STA.W sMostLovedGirlName+4                                 ;828FA1|8DA508  |0008A5;
     LDA.W #$00B1                                               ;828FA4|A9B100  |      ;
-    STA.W $08A7                                                ;828FA7|8DA708  |0008A7;
+    STA.W sMostLovedGirlName+6                                 ;828FA7|8DA708  |0008A7;
     LDA.W #$00B1                                               ;828FAA|A9B100  |      ;
-    STA.W $08A9                                                ;828FAD|8DA908  |0008A9;
+    STA.W sMostLovedGirlName+8                                 ;828FAD|8DA908  |0008A9;
     RTL                                                        ;828FB0|6B      |      ;
  
  
@@ -2962,7 +2962,7 @@ subToolUsed82A5C3_Axe:
     CPX.W #$00F4                                               ;829957|E0F400  |      ;
     BNE .return                                                ;82995A|D02D    |829989;
     REP #$30                                                   ;82995C|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82995E|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82995E|AD9601  |000196;
     AND.W #$001A                                               ;829961|291A00  |      ;
     BNE .return                                                ;829964|D023    |829989;
     LDA.L strcEventFlags.flags4                                ;829966|AF6A1F7F|7F1F6A;
@@ -2975,7 +2975,7 @@ subToolUsed82A5C3_Axe:
     LDA.W #$0000                                               ;82997C|A90000  |      ;
     LDX.W #$0017                                               ;82997F|A21700  |      ;
     LDY.W #$0000                                               ;829982|A00000  |      ;
-    JSL.L fAI_Unknown848097                                    ;829985|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;829985|22978084|848097;
  
 .return:
     REP #$30                                                   ;829989|C230    |      ;
@@ -4244,7 +4244,7 @@ subToolUsed82A5C3_BlueDiamond:
     LDA.W #$0000                                               ;82A3E3|A90000  |      ;
     LDX.W #$0012                                               ;82A3E6|A21200  |      ;
     LDY.W #$0000                                               ;82A3E9|A00000  |      ;
-    JSL.L fAI_Unknown848097                                    ;82A3EC|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82A3EC|22978084|848097;
     SEP #$20                                                   ;82A3F0|E220    |      ;
     STZ.W nToolEquipped                                        ;82A3F2|9C2109  |000921;
  
@@ -4922,7 +4922,7 @@ fObjectMap_Unknown82A811:
  
 .label1:
     REP #$20                                                   ;82A8A4|C220    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82A8A6|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82A8A6|AD9601  |000196;
     AND.W #$0002                                               ;82A8A9|290200  |      ;
     BEQ +                                                      ;82A8AC|F003    |82A8B1;
     JMP.W .label6                                              ;82A8AE|4C06A9  |82A906;
@@ -4933,7 +4933,7 @@ fObjectMap_Unknown82A811:
  
 .label2:
     REP #$20                                                   ;82A8B4|C220    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82A8B6|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82A8B6|AD9601  |000196;
     AND.W #$0002                                               ;82A8B9|290200  |      ;
     BEQ +                                                      ;82A8BC|F003    |82A8C1;
     JMP.W .label9                                              ;82A8BE|4C69A9  |82A969;
@@ -5015,9 +5015,9 @@ fObjectMap_Unknown82A811:
     JSL.L fCore_GetRandomNumber                                ;82A94D|22F98980|8089F9;
     BNE .label9                                                ;82A951|D016    |82A969;
     REP #$20                                                   ;82A953|C220    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82A955|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82A955|AD9601  |000196;
     ORA.W #$0400                                               ;82A958|090004  |      ;
-    STA.W nMapEngine_CurrentMapId                              ;82A95B|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;82A95B|8D9601  |000196;
     LDA.L strcEventFlags.flags6                                ;82A95E|AF6E1F7F|7F1F6E;
     ORA.W #$0200                                               ;82A962|090002  |      ;
     STA.L strcEventFlags.flags6                                ;82A965|8F6E1F7F|7F1F6E;
@@ -5688,7 +5688,7 @@ fUnknown_82AD0E:
     TAX                                                        ;82ADB1|AA      |      ;
     SEP #$20                                                   ;82ADB2|E220    |      ;
     LDA.L nUnkownItemOnHandTable,X                             ;82ADB4|BFB4CF82|82CFB4;
-    STA.W $091D                                                ;82ADB8|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;82ADB8|8D1D09  |00091D;
     REP #$30                                                   ;82ADBB|C230    |      ;
     LDA.W #$0004                                               ;82ADBD|A90400  |      ;
     STA.B nPlayerAction                                        ;82ADC0|85D4    |0000D4;
@@ -5798,7 +5798,7 @@ fUnknown_82AD0E:
     AND.B #$80                                                 ;82AE71|2980    |      ;
     BEQ .justReturn                                            ;82AE73|F070    |82AEE5;
     REP #$20                                                   ;82AE75|C220    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82AE77|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82AE77|AD9601  |000196;
     AND.W #$0010                                               ;82AE7A|291000  |      ;
     BEQ .justReturn                                            ;82AE7D|F066    |82AEE5;
     BRA .label2                                                ;82AE7F|8000    |82AE81;
@@ -7243,7 +7243,7 @@ fUnknown_82D1C0:
     LDA.B #$00                                                 ;82D2C9|A900    |      ;
     STA.L nCurrentSeasonID                                     ;82D2CB|8F191F7F|7F1F19;
     SEP #$20                                                   ;82D2CF|E220    |      ;
-    STZ.W $091D                                                ;82D2D1|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;82D2D1|9C1D09  |00091D;
     REP #$30                                                   ;82D2D4|C230    |      ;
     LDA.W #$0002                                               ;82D2D6|A90200  |      ;
     EOR.W #$FFFF                                               ;82D2D9|49FFFF  |      ;
@@ -7270,7 +7270,7 @@ fUnknown_82D1C0:
     LDA.W #$0000                                               ;82D31D|A90000  |      ;
     LDX.W #$0047                                               ;82D320|A24700  |      ;
     LDY.W #$0000                                               ;82D323|A00000  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D326|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D326|22978084|848097;
     JSL.L fAI_Unknown84816F                                    ;82D32A|226F8184|84816F;
     SEP #$20                                                   ;82D32E|E220    |      ;
     LDA.W n8DestinationId                                      ;82D330|AD8B09  |00098B;
@@ -7426,7 +7426,7 @@ fUnknown_82D3C7:
     LDA.B #$00                                                 ;82D4CA|A900    |      ;
     STA.L nCurrentSeasonID                                     ;82D4CC|8F191F7F|7F1F19;
     SEP #$20                                                   ;82D4D0|E220    |      ;
-    STZ.W $091D                                                ;82D4D2|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;82D4D2|9C1D09  |00091D;
     REP #$30                                                   ;82D4D5|C230    |      ;
     LDA.W #$0002                                               ;82D4D7|A90200  |      ;
     EOR.W #$FFFF                                               ;82D4DA|49FFFF  |      ;
@@ -7515,7 +7515,7 @@ fUnknown_82D574:
     LDA.W #$0000                                               ;82D576|A90000  |      ;
     LDX.W #$0047                                               ;82D579|A24700  |      ;
     LDY.W #$0002                                               ;82D57C|A00200  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D57F|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D57F|22978084|848097;
     SEP #$20                                                   ;82D583|E220    |      ;
     LDA.B #$01                                                 ;82D585|A901    |      ;
     STA.L $7F1F48                                              ;82D587|8F481F7F|7F1F48;
@@ -7527,7 +7527,7 @@ fUnknown_82D58E:
     LDA.W #$0000                                               ;82D590|A90000  |      ;
     LDX.W #$0047                                               ;82D593|A24700  |      ;
     LDY.W #$0004                                               ;82D596|A00400  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D599|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D599|22978084|848097;
     SEP #$20                                                   ;82D59D|E220    |      ;
     LDA.B #$02                                                 ;82D59F|A902    |      ;
     STA.L $7F1F48                                              ;82D5A1|8F481F7F|7F1F48;
@@ -7539,7 +7539,7 @@ fUnknown_82D5A8:
     LDA.W #$0000                                               ;82D5AA|A90000  |      ;
     LDX.W #$0047                                               ;82D5AD|A24700  |      ;
     LDY.W #$0006                                               ;82D5B0|A00600  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D5B3|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D5B3|22978084|848097;
     SEP #$20                                                   ;82D5B7|E220    |      ;
     LDA.B #$03                                                 ;82D5B9|A903    |      ;
     STA.L $7F1F48                                              ;82D5BB|8F481F7F|7F1F48;
@@ -7551,7 +7551,7 @@ fUnknown_82D5C2:
     LDA.W #$0000                                               ;82D5C4|A90000  |      ;
     LDX.W #$0047                                               ;82D5C7|A24700  |      ;
     LDY.W #$0007                                               ;82D5CA|A00700  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D5CD|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D5CD|22978084|848097;
     SEP #$20                                                   ;82D5D1|E220    |      ;
     LDA.B #$04                                                 ;82D5D3|A904    |      ;
     STA.L $7F1F48                                              ;82D5D5|8F481F7F|7F1F48;
@@ -7563,7 +7563,7 @@ fUnknown_82D5DC:
     LDA.W #$0000                                               ;82D5DE|A90000  |      ;
     LDX.W #$0047                                               ;82D5E1|A24700  |      ;
     LDY.W #$0009                                               ;82D5E4|A00900  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D5E7|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D5E7|22978084|848097;
     SEP #$20                                                   ;82D5EB|E220    |      ;
     LDA.B #$05                                                 ;82D5ED|A905    |      ;
     STA.L $7F1F48                                              ;82D5EF|8F481F7F|7F1F48;
@@ -7575,7 +7575,7 @@ fUnknown_82D5F6:
     LDA.W #$0000                                               ;82D5F8|A90000  |      ;
     LDX.W #$0047                                               ;82D5FB|A24700  |      ;
     LDY.W #$000B                                               ;82D5FE|A00B00  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D601|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D601|22978084|848097;
     SEP #$20                                                   ;82D605|E220    |      ;
     LDA.B #$06                                                 ;82D607|A906    |      ;
     STA.L $7F1F48                                              ;82D609|8F481F7F|7F1F48;
@@ -7587,7 +7587,7 @@ fUnknown_82D610:
     LDA.W #$0000                                               ;82D612|A90000  |      ;
     LDX.W #$0047                                               ;82D615|A24700  |      ;
     LDY.W #$000D                                               ;82D618|A00D00  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D61B|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D61B|22978084|848097;
     SEP #$20                                                   ;82D61F|E220    |      ;
     LDA.B #$07                                                 ;82D621|A907    |      ;
     STA.L $7F1F48                                              ;82D623|8F481F7F|7F1F48;
@@ -7599,7 +7599,7 @@ fUnknown_82D62A:
     LDA.W #$0000                                               ;82D62C|A90000  |      ;
     LDX.W #$0047                                               ;82D62F|A24700  |      ;
     LDY.W #$0011                                               ;82D632|A01100  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D635|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D635|22978084|848097;
     SEP #$20                                                   ;82D639|E220    |      ;
     LDA.B #$08                                                 ;82D63B|A908    |      ;
     STA.L $7F1F48                                              ;82D63D|8F481F7F|7F1F48;
@@ -7611,7 +7611,7 @@ fUnknown_82D644:
     LDA.W #$0000                                               ;82D646|A90000  |      ;
     LDX.W #$0047                                               ;82D649|A24700  |      ;
     LDY.W #$0015                                               ;82D64C|A01500  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D64F|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D64F|22978084|848097;
     SEP #$20                                                   ;82D653|E220    |      ;
     LDA.B #$09                                                 ;82D655|A909    |      ;
     STA.L $7F1F48                                              ;82D657|8F481F7F|7F1F48;
@@ -7623,7 +7623,7 @@ fUnknown_82D65E:
     LDA.W #$0000                                               ;82D660|A90000  |      ;
     LDX.W #$0047                                               ;82D663|A24700  |      ;
     LDY.W #$0017                                               ;82D666|A01700  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D669|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D669|22978084|848097;
     SEP #$20                                                   ;82D66D|E220    |      ;
     LDA.B #$0A                                                 ;82D66F|A90A    |      ;
     STA.L $7F1F48                                              ;82D671|8F481F7F|7F1F48;
@@ -7635,7 +7635,7 @@ fUnknown_82D678:
     LDA.W #$0000                                               ;82D67A|A90000  |      ;
     LDX.W #$0047                                               ;82D67D|A24700  |      ;
     LDY.W #$0019                                               ;82D680|A01900  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D683|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D683|22978084|848097;
     SEP #$20                                                   ;82D687|E220    |      ;
     LDA.B #$0B                                                 ;82D689|A90B    |      ;
     STA.L $7F1F48                                              ;82D68B|8F481F7F|7F1F48;
@@ -7647,7 +7647,7 @@ fUnknown_82D692:
     LDA.W #$0000                                               ;82D694|A90000  |      ;
     LDX.W #$0047                                               ;82D697|A24700  |      ;
     LDY.W #$001B                                               ;82D69A|A01B00  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D69D|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D69D|22978084|848097;
     SEP #$20                                                   ;82D6A1|E220    |      ;
     LDA.B #$00                                                 ;82D6A3|A900    |      ;
     STA.L $7F1F48                                              ;82D6A5|8F481F7F|7F1F48;
@@ -7926,7 +7926,7 @@ fUnknown_82D8B0:
     LDA.W #$0000                                               ;82D901|A90000  |      ;
     LDX.W #$0009                                               ;82D904|A20900  |      ;
     LDY.W #$0000                                               ;82D907|A00000  |      ;
-    JSL.L fAI_Unknown848097                                    ;82D90A|22978084|848097;
+    JSL.L fAI_SetupAreaScripting                               ;82D90A|22978084|848097;
     JSL.L fAI_Unknown84816F                                    ;82D90E|226F8184|84816F;
     SEP #$20                                                   ;82D912|E220    |      ;
     LDA.W n8DestinationId                                      ;82D914|AD8B09  |00098B;
@@ -8161,7 +8161,7 @@ fUnknown_82DAF5:
     STZ.B nPlayerPosY                                          ;82DB41|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DB43|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DB46|9C7F01  |00017F;
-    STZ.W nMapEngine_CurrentMapId                              ;82DB49|9C9601  |000196;
+    STZ.W nMapEngine_flags                                     ;82DB49|9C9601  |000196;
     SEP #$20                                                   ;82DB4C|E220    |      ;
     LDA.B #$5B                                                 ;82DB4E|A95B    |      ;
     STA.B nMapEngine_DestinationId                             ;82DB50|8522    |000022;
@@ -8218,7 +8218,7 @@ fUnknown_82DBB2:
     STZ.B nPlayerPosY                                          ;82DBC4|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DBC6|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DBC9|9C7F01  |00017F;
-    STZ.W nMapEngine_CurrentMapId                              ;82DBCC|9C9601  |000196;
+    STZ.W nMapEngine_flags                                     ;82DBCC|9C9601  |000196;
     JSL.L fTileMap_MapChangeHandler                            ;82DBCF|22C6A780|80A7C6;
     JSL.L fAudioUnknown_83841F                                 ;82DBD3|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82DBD7|22A48383|8383A4;
@@ -8611,7 +8611,7 @@ fUnknown_82DEC5:
     STZ.B nPlayerPosY                                          ;82DF05|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DF07|9C7D01  |00017D;
     STZ.W nMapEngine_DestinationY                              ;82DF0A|9C7F01  |00017F;
-    STZ.W nMapEngine_CurrentMapId                              ;82DF0D|9C9601  |000196;
+    STZ.W nMapEngine_flags                                     ;82DF0D|9C9601  |000196;
     SEP #$20                                                   ;82DF10|E220    |      ;
     LDA.B #$5B                                                 ;82DF12|A95B    |      ;
     STA.B nMapEngine_DestinationId                             ;82DF14|8522    |000022;
@@ -9607,9 +9607,9 @@ fScreen_NameInput:
     JSL.L fUnknown_Zero7EA220                                  ;82E838|22D78E85|858ED7;
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;82E842|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;82E842|AD9601  |000196;
     STA.W $0198                                                ;82E845|8D9801  |000198;
-    STZ.W nMapEngine_CurrentMapId                              ;82E848|9C9601  |000196;
+    STZ.W nMapEngine_flags                                     ;82E848|9C9601  |000196;
     STZ.W $0905                                                ;82E84B|9C0509  |000905;
     SEP #$20                                                   ;82E84E|E220    |      ;
     LDA.B #$05                                                 ;82E850|A905    |      ;
@@ -9770,7 +9770,7 @@ fScreen_NameInput:
 .nameHandler:
     REP #$20                                                   ;82E9CE|C220    |      ;
     LDA.W $0198                                                ;82E9D0|AD9801  |000198;
-    STA.W nMapEngine_CurrentMapId                              ;82E9D3|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
     LDA.W nNameDestinationId                                   ;82E9D8|AD9F09  |00099F;
     CMP.B #$00                                                 ;82E9DB|C900    |      ;

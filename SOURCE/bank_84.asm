@@ -85,7 +85,7 @@ fAI_Unknown84803F:
     RTL                                                        ;848096|6B      |      ;
  
  
-fAI_Unknown848097:
+fAI_SetupAreaScripting:
     REP #$30                                                   ;848097|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;848099|48      |      ;
     JSL.L fAI_Unknown84887C                                    ;84809A|227C8884|84887C; $0xCC = 7EB586 + A * 64
@@ -1372,9 +1372,9 @@ fAIAction0x01_UnfreezeTime:
     LDA.L strcDailyFlags.flags2                                ;8489F8|AF5C1F7F|7F1F5C;
     AND.W #$FFFE                                               ;8489FC|29FEFF  |      ;
     STA.L strcDailyFlags.flags2                                ;8489FF|8F5C1F7F|7F1F5C;
-    LDA.W nMapEngine_CurrentMapId                              ;848A03|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
-    STA.W nMapEngine_CurrentMapId                              ;848A09|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;848A09|8D9601  |000196;
     RTS                                                        ;848A0C|60      |      ;
  
  
@@ -1393,9 +1393,9 @@ fAIAction0x02_FreezeTime:
     ORA.W #$0001                                               ;848A26|090100  |      ;
     STA.L strcDailyFlags.flags2                                ;848A29|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;848A2D|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;848A2F|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;848A2F|AD9601  |000196;
     AND.W #$FFDF                                               ;848A32|29DFFF  |      ;
-    STA.W nMapEngine_CurrentMapId                              ;848A35|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;848A35|8D9601  |000196;
     RTS                                                        ;848A38|60      |      ;
  
  
@@ -2443,7 +2443,7 @@ fAIAction0x20_JumpIfChoice:
     SEP #$20                                                   ;8491A9|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491AB|A7C9    |0000C9;
     STA.B n8TempVar1                                           ;8491AD|8592    |000092;
-    LDA.W nSelectedOption                                      ;8491AF|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;8491AF|AD8F01  |00018F;
     CMP.B n8TempVar1                                           ;8491B2|C592    |000092;
     BNE +                                                      ;8491B4|D011    |8491C7;
     REP #$30                                                   ;8491B6|C230    |      ;
@@ -3104,9 +3104,9 @@ fAIAction0x2D:
  
  
   + SEP #$20                                                   ;8496B0|E220    |      ;
-    LDA.W $091D                                                ;8496B2|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;8496B2|AD1D09  |00091D;
     BEQ .continue                                              ;8496B5|F00D    |8496C4;
-    STA.W $091E                                                ;8496B7|8D1E09  |00091E;
+    STA.W nHandItem_Previous                                   ;8496B7|8D1E09  |00091E;
     REP #$30                                                   ;8496BA|C230    |      ;
     LDA.B ptrAIActionData                                      ;8496BC|A5C9    |0000C9;
     CLC                                                        ;8496BE|18      |      ;
@@ -3424,7 +3424,7 @@ fAIAction0x30_UpdateChicken:
  
  
   + SEP #$20                                                   ;849922|E220    |      ;
-    LDA.W $091D                                                ;849924|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;849924|AD1D09  |00091D;
     BEQ +                                                      ;849927|F003    |84992C;
     JMP.W .label1                                              ;849929|4CC899  |8499C8;
  
@@ -3487,7 +3487,7 @@ fAIAction0x30_UpdateChicken:
     BEQ +                                                      ;84999A|F00F    |8499AB;
     SEP #$20                                                   ;84999C|E220    |      ;
     LDA.B #$26                                                 ;84999E|A926    |      ;
-    STA.W $091D                                                ;8499A0|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;8499A0|8D1D09  |00091D;
     REP #$30                                                   ;8499A3|C230    |      ;
     LDA.W #$0004                                               ;8499A5|A90400  |      ;
     STA.B nPlayerAction                                        ;8499A8|85D4    |0000D4;
@@ -3504,7 +3504,7 @@ fAIAction0x30_UpdateChicken:
  
   + SEP #$20                                                   ;8499B9|E220    |      ;
     LDA.B #$25                                                 ;8499BB|A925    |      ;
-    STA.W $091D                                                ;8499BD|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;8499BD|8D1D09  |00091D;
     REP #$30                                                   ;8499C0|C230    |      ;
     LDA.W #$0004                                               ;8499C2|A90400  |      ;
     STA.B nPlayerAction                                        ;8499C5|85D4    |0000D4;
@@ -4146,7 +4146,7 @@ CODE_849E17:
     STA.B [ptrUnknown0x72],Y                                   ;849E1E|9772    |000072;
     SEP #$20                                                   ;849E20|E220    |      ;
     LDA.B #$15                                                 ;849E22|A915    |      ;
-    STA.W $091D                                                ;849E24|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;849E24|8D1D09  |00091D;
     LDY.W #$0004                                               ;849E27|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E2A|B772    |000072;
     CMP.B #$60                                                 ;849E2C|C960    |      ;
@@ -4155,14 +4155,14 @@ CODE_849E17:
     BCC CODE_849E3D                                            ;849E32|9009    |849E3D;
     SEP #$20                                                   ;849E34|E220    |      ;
     LDA.B #$17                                                 ;849E36|A917    |      ;
-    STA.W $091D                                                ;849E38|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;849E38|8D1D09  |00091D;
     BRA CODE_849E44                                            ;849E3B|8007    |849E44;
  
  
 CODE_849E3D:
     SEP #$20                                                   ;849E3D|E220    |      ;
     LDA.B #$16                                                 ;849E3F|A916    |      ;
-    STA.W $091D                                                ;849E41|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;849E41|8D1D09  |00091D;
  
 CODE_849E44:
     REP #$30                                                   ;849E44|C230    |      ;
@@ -5856,7 +5856,7 @@ fAIAction0x33_UpdateMole:
  
  
   + SEP #$20                                                   ;84A9CD|E220    |      ;
-    LDA.W $091D                                                ;84A9CF|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84A9CF|AD1D09  |00091D;
     BEQ +                                                      ;84A9D2|F003    |84A9D7;
     JMP.W .label1                                              ;84A9D4|4C1EAA  |84AA1E;
  
@@ -5888,7 +5888,7 @@ fAIAction0x33_UpdateMole:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
     SEP #$20                                                   ;84AA0F|E220    |      ;
     LDA.B #$29                                                 ;84AA11|A929    |      ;
-    STA.W $091D                                                ;84AA13|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;84AA13|8D1D09  |00091D;
     REP #$30                                                   ;84AA16|C230    |      ;
     LDA.W #$0004                                               ;84AA18|A90400  |      ;
     STA.B nPlayerAction                                        ;84AA1B|85D4    |0000D4;
@@ -5990,7 +5990,7 @@ fAIAction0x34:
  
  
   + SEP #$20                                                   ;84AAC8|E220    |      ;
-    LDA.W $091D                                                ;84AACA|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84AACA|AD1D09  |00091D;
     BEQ +                                                      ;84AACD|F003    |84AAD2;
     JMP.W .return                                              ;84AACF|4C19AB  |84AB19;
  
@@ -6022,7 +6022,7 @@ fAIAction0x34:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
     SEP #$20                                                   ;84AB0A|E220    |      ;
     LDA.B #$07                                                 ;84AB0C|A907    |      ;
-    STA.W $091D                                                ;84AB0E|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;84AB0E|8D1D09  |00091D;
     REP #$30                                                   ;84AB11|C230    |      ;
     LDA.W #$0004                                               ;84AB13|A90400  |      ;
     STA.B nPlayerAction                                        ;84AB16|85D4    |0000D4;
@@ -6641,7 +6641,7 @@ fAIAction0x36_UpdateDog:
  
  
   + SEP #$20                                                   ;84AF8A|E220    |      ;
-    LDA.W $091D                                                ;84AF8C|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84AF8C|AD1D09  |00091D;
     BEQ +                                                      ;84AF8F|F003    |84AF94;
     JMP.W .label1                                              ;84AF91|4CF4AF  |84AFF4;
  
@@ -7363,7 +7363,7 @@ fAIAction0x3B:
     STA.B ptrAIActionData                                      ;84B4E6|85C9    |0000C9;
     SEP #$20                                                   ;84B4E8|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B4EA|A7C9    |0000C9;
-    STA.W $091D                                                ;84B4EC|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;84B4EC|8D1D09  |00091D;
     REP #$30                                                   ;84B4EF|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B4F1|A5C9    |0000C9;
     CLC                                                        ;84B4F3|18      |      ;
@@ -7387,9 +7387,9 @@ fAIAction0x3C:
     LDA.B #$15                                                 ;84B511|A915    |      ;
     STA.W n8DestinationId                                      ;84B513|8D8B09  |00098B;
     REP #$30                                                   ;84B516|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;84B518|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
-    STA.W nMapEngine_CurrentMapId                              ;84B51E|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;84B51E|8D9601  |000196;
     LDA.L strcDailyFlags.flags4                                ;84B521|AF601F7F|7F1F60;
     ORA.W #$0020                                               ;84B525|092000  |      ;
     STA.L strcDailyFlags.flags4                                ;84B528|8F601F7F|7F1F60;
@@ -7412,9 +7412,9 @@ fAIAction0x3D_TeleportToMap:
     ADC.W #$0001                                               ;84B545|690100  |      ;
     STA.B ptrAIActionData                                      ;84B548|85C9    |0000C9;
     REP #$30                                                   ;84B54A|C230    |      ;
-    LDA.W nMapEngine_CurrentMapId                              ;84B54C|AD9601  |000196;
+    LDA.W nMapEngine_flags                                     ;84B54C|AD9601  |000196;
     ORA.W #$4000                                               ;84B54F|090040  |      ;
-    STA.W nMapEngine_CurrentMapId                              ;84B552|8D9601  |000196;
+    STA.W nMapEngine_flags                                     ;84B552|8D9601  |000196;
     RTS                                                        ;84B555|60      |      ;
  
  
@@ -7427,7 +7427,7 @@ fAIAction0x3E:
     STA.B ptrAIActionData                                      ;84B560|85C9    |0000C9;
     SEP #$20                                                   ;84B562|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B564|A7C9    |0000C9;
-    STA.W $091D                                                ;84B566|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;84B566|8D1D09  |00091D;
     REP #$30                                                   ;84B569|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B56B|A5C9    |0000C9;
     CLC                                                        ;84B56D|18      |      ;
@@ -8034,7 +8034,7 @@ fAIAction0x4A:
  
  
   + SEP #$20                                                   ;84B9BD|E220    |      ;
-    LDA.W $091D                                                ;84B9BF|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84B9BF|AD1D09  |00091D;
     BEQ +                                                      ;84B9C2|F003    |84B9C7;
     JMP.W .return                                              ;84B9C4|4C02BA  |84BA02;
  
@@ -8061,7 +8061,7 @@ fAIAction0x4A:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
     SEP #$20                                                   ;84B9F3|E220    |      ;
     LDA.B #$08                                                 ;84B9F5|A908    |      ;
-    STA.W $091D                                                ;84B9F7|8D1D09  |00091D;
+    STA.W nHandItem_Current                                    ;84B9F7|8D1D09  |00091D;
     REP #$30                                                   ;84B9FA|C230    |      ;
     LDA.W #$0004                                               ;84B9FC|A90400  |      ;
     STA.B nPlayerAction                                        ;84B9FF|85D4    |0000D4;
@@ -8333,13 +8333,13 @@ fAIAction0x50:
     ADC.W #$0001                                               ;84BBE1|690100  |      ;
     STA.B ptrAIActionData                                      ;84BBE4|85C9    |0000C9;
     SEP #$20                                                   ;84BBE6|E220    |      ;
-    LDA.W $091D                                                ;84BBE8|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84BBE8|AD1D09  |00091D;
     BEQ .label2                                                ;84BBEB|F06F    |84BC5C;
     CMP.B #$25                                                 ;84BBED|C925    |      ;
     BEQ .label1                                                ;84BBEF|F015    |84BC06;
     CMP.B #$26                                                 ;84BBF1|C926    |      ;
     BEQ .label1                                                ;84BBF3|F011    |84BC06;
-    STZ.W $091D                                                ;84BBF5|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;84BBF5|9C1D09  |00091D;
     REP #$30                                                   ;84BBF8|C230    |      ;
     LDA.W #$0000                                               ;84BBFA|A90000  |      ;
     CLC                                                        ;84BBFD|18      |      ;
@@ -8383,7 +8383,7 @@ fAIAction0x50:
     LDA.L aGameEngine_AddChickenPositionsData,X                ;84BC44|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BC48|9772    |000072;
     SEP #$20                                                   ;84BC4A|E220    |      ;
-    STZ.W $091D                                                ;84BC4C|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;84BC4C|9C1D09  |00091D;
     REP #$30                                                   ;84BC4F|C230    |      ;
     LDA.W #$0000                                               ;84BC51|A90000  |      ;
     CLC                                                        ;84BC54|18      |      ;
@@ -8433,7 +8433,7 @@ fAIAction0x51:
     ADC.W #$0001                                               ;84BCA3|690100  |      ;
     STA.B ptrAIActionData                                      ;84BCA6|85C9    |0000C9;
     SEP #$20                                                   ;84BCA8|E220    |      ;
-    LDA.W $091D                                                ;84BCAA|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84BCAA|AD1D09  |00091D;
     BEQ .label3                                                ;84BCAD|F060    |84BD0F;
     CMP.B #$25                                                 ;84BCAF|C925    |      ;
     BEQ .label2                                                ;84BCB1|F011    |84BCC4;
@@ -8445,7 +8445,7 @@ fAIAction0x51:
  
  
 .label1:
-    STZ.W $091D                                                ;84BCBE|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;84BCBE|9C1D09  |00091D;
     JMP.W .return                                              ;84BCC1|4C43BD  |84BD43;
  
  
@@ -8484,7 +8484,7 @@ fAIAction0x51:
     LDA.L aGameEngine_AddChickenPositionsData,X                ;84BD02|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BD06|9772    |000072;
     SEP #$20                                                   ;84BD08|E220    |      ;
-    STZ.W $091D                                                ;84BD0A|9C1D09  |00091D;
+    STZ.W nHandItem_Current                                    ;84BD0A|9C1D09  |00091D;
     BRA .return                                                ;84BD0D|8034    |84BD43;
  
  
@@ -8582,7 +8582,7 @@ fAIAction0x52:
  
  
   + SEP #$20                                                   ;84BDBB|E220    |      ;
-    LDA.W $091D                                                ;84BDBD|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84BDBD|AD1D09  |00091D;
     BEQ +                                                      ;84BDC0|F003    |84BDC5;
     JMP.W .return                                              ;84BDC2|4CFFBD  |84BDFF;
  
@@ -8690,7 +8690,7 @@ fAIAction0x53:
  
  
   + SEP #$20                                                   ;84BE84|E220    |      ;
-    LDA.W $091D                                                ;84BE86|AD1D09  |00091D;
+    LDA.W nHandItem_Current                                    ;84BE86|AD1D09  |00091D;
     BEQ +                                                      ;84BE89|F003    |84BE8E;
     JMP.W .return                                              ;84BE8B|4CC8BE  |84BEC8;
  
@@ -11156,13 +11156,13 @@ fInput_Unknown84CFEA:
     LDA.W #$00B1                                               ;84D001|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D004|22239883|839823;
     SEP #$20                                                   ;84D008|E220    |      ;
-    LDA.W nSelectedOption                                      ;84D00A|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D00A|AD8F01  |00018F;
     CMP.B #$03                                                 ;84D00D|C903    |      ;
     BCC .label1                                                ;84D00F|900B    |84D01C;
     CMP.W $018E                                                ;84D011|CD8E01  |00018E;
     BEQ .label2                                                ;84D014|F01A    |84D030;
     INC A                                                      ;84D016|1A      |      ;
-    STA.W nSelectedOption                                      ;84D017|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D017|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D01A|801A    |84D036;
  
  
@@ -11172,17 +11172,17 @@ fInput_Unknown84CFEA:
     CMP.B #$02                                                 ;84D021|C902    |      ;
     BEQ +                                                      ;84D023|F006    |84D02B;
     INC A                                                      ;84D025|1A      |      ;
-    STA.W nSelectedOption                                      ;84D026|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D026|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D029|800B    |84D036;
  
  
-  + STZ.W nSelectedOption                                      ;84D02B|9C8F01  |00018F;
+  + STZ.W nSelectedDialogOption                                ;84D02B|9C8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D02E|8006    |84D036;
  
  
 .label2:
     DEC A                                                      ;84D030|3A      |      ;
-    STA.W nSelectedOption                                      ;84D031|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D031|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D034|8000    |84D036;
  
  
@@ -11204,12 +11204,12 @@ fInput_Unknown84D03A:
     LDA.W #$00B1                                               ;84D051|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D054|22239883|839823;
     SEP #$20                                                   ;84D058|E220    |      ;
-    LDA.W nSelectedOption                                      ;84D05A|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D05A|AD8F01  |00018F;
     BEQ .label1                                                ;84D05D|F00A    |84D069;
     CMP.B #$03                                                 ;84D05F|C903    |      ;
     BEQ .label2                                                ;84D061|F019    |84D07C;
     DEC A                                                      ;84D063|3A      |      ;
-    STA.W nSelectedOption                                      ;84D064|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D064|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D067|80CD    |84D036;
  
  
@@ -11218,11 +11218,11 @@ fInput_Unknown84D03A:
     CMP.B #$03                                                 ;84D06C|C903    |      ;
     BCC +                                                      ;84D06E|9007    |84D077;
     LDA.B #$02                                                 ;84D070|A902    |      ;
-    STA.W nSelectedOption                                      ;84D072|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D072|8D8F01  |00018F;
     BRA .return                                                ;84D075|8013    |84D08A;
  
  
-  + STA.W nSelectedOption                                      ;84D077|8D8F01  |00018F;
+  + STA.W nSelectedDialogOption                                ;84D077|8D8F01  |00018F;
     BRA .return                                                ;84D07A|800E    |84D08A;
  
  
@@ -11230,9 +11230,9 @@ fInput_Unknown84D03A:
     LDA.W $018E                                                ;84D07C|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D07F|C903    |      ;
     BEQ .return                                                ;84D081|F007    |84D08A;
-    LDA.W nSelectedOption                                      ;84D083|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D083|AD8F01  |00018F;
     INC A                                                      ;84D086|1A      |      ;
-    STA.W nSelectedOption                                      ;84D087|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D087|8D8F01  |00018F;
  
 .return:
     STZ.W $018B                                                ;84D08A|9C8B01  |00018B;
@@ -11251,7 +11251,7 @@ fInput_Unknown84D08E:
     LDA.W $018E                                                ;84D0A2|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0A5|C903    |      ;
     BCC .return                                                ;84D0A7|9047    |84D0F0;
-    LDA.W nSelectedOption                                      ;84D0A9|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D0A9|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0AC|C902    |      ;
     BEQ .return                                                ;84D0AE|F040    |84D0F0;
     REP #$30                                                   ;84D0B0|C230    |      ;
@@ -11259,22 +11259,22 @@ fInput_Unknown84D08E:
     LDA.W #$00B1                                               ;84D0B5|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D0B8|22239883|839823;
     SEP #$20                                                   ;84D0BC|E220    |      ;
-    LDA.W nSelectedOption                                      ;84D0BE|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D0BE|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0C1|C902    |      ;
     BCC +                                                      ;84D0C3|9008    |84D0CD;
     SEC                                                        ;84D0C5|38      |      ;
     SBC.B #$03                                                 ;84D0C6|E903    |      ;
-    STA.W nSelectedOption                                      ;84D0C8|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D0C8|8D8F01  |00018F;
     BRA .return                                                ;84D0CB|8023    |84D0F0;
  
  
   + SEP #$20                                                   ;84D0CD|E220    |      ;
-    LDA.W nSelectedOption                                      ;84D0CF|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D0CF|AD8F01  |00018F;
     CMP.B #$01                                                 ;84D0D2|C901    |      ;
     BEQ +                                                      ;84D0D4|F008    |84D0DE;
     CLC                                                        ;84D0D6|18      |      ;
     ADC.B #$03                                                 ;84D0D7|6903    |      ;
-    STA.W nSelectedOption                                      ;84D0D9|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D0D9|8D8F01  |00018F;
     BRA .return                                                ;84D0DC|8012    |84D0F0;
  
  
@@ -11282,10 +11282,10 @@ fInput_Unknown84D08E:
     LDA.W $018E                                                ;84D0E0|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0E3|C903    |      ;
     BEQ .return                                                ;84D0E5|F009    |84D0F0;
-    LDA.W nSelectedOption                                      ;84D0E7|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D0E7|AD8F01  |00018F;
     CLC                                                        ;84D0EA|18      |      ;
     ADC.B #$03                                                 ;84D0EB|6903    |      ;
-    STA.W nSelectedOption                                      ;84D0ED|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D0ED|8D8F01  |00018F;
  
 .return:
     STZ.W $018B                                                ;84D0F0|9C8B01  |00018B;
@@ -11304,7 +11304,7 @@ fInput_Unknown84D0F4:
     LDA.W $018E                                                ;84D108|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D10B|C903    |      ;
     BCC .return                                                ;84D10D|9047    |84D156;
-    LDA.W nSelectedOption                                      ;84D10F|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D10F|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D112|C902    |      ;
     BEQ .return                                                ;84D114|F040    |84D156;
     REP #$30                                                   ;84D116|C230    |      ;
@@ -11312,22 +11312,22 @@ fInput_Unknown84D0F4:
     LDA.W #$00B1                                               ;84D11B|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D11E|22239883|839823;
     SEP #$20                                                   ;84D122|E220    |      ;
-    LDA.W nSelectedOption                                      ;84D124|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D124|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D127|C902    |      ;
     BCC +                                                      ;84D129|9008    |84D133;
     SEC                                                        ;84D12B|38      |      ;
     SBC.B #$03                                                 ;84D12C|E903    |      ;
-    STA.W nSelectedOption                                      ;84D12E|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D12E|8D8F01  |00018F;
     BRA .return                                                ;84D131|8023    |84D156;
  
  
   + SEP #$20                                                   ;84D133|E220    |      ;
-    LDA.W nSelectedOption                                      ;84D135|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D135|AD8F01  |00018F;
     CMP.B #$01                                                 ;84D138|C901    |      ;
     BEQ +                                                      ;84D13A|F008    |84D144;
     CLC                                                        ;84D13C|18      |      ;
     ADC.B #$03                                                 ;84D13D|6903    |      ;
-    STA.W nSelectedOption                                      ;84D13F|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D13F|8D8F01  |00018F;
     BRA .return                                                ;84D142|8012    |84D156;
  
  
@@ -11335,10 +11335,10 @@ fInput_Unknown84D0F4:
     LDA.W $018E                                                ;84D146|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D149|C903    |      ;
     BEQ .return                                                ;84D14B|F009    |84D156;
-    LDA.W nSelectedOption                                      ;84D14D|AD8F01  |00018F;
+    LDA.W nSelectedDialogOption                                ;84D14D|AD8F01  |00018F;
     CLC                                                        ;84D150|18      |      ;
     ADC.B #$03                                                 ;84D151|6903    |      ;
-    STA.W nSelectedOption                                      ;84D153|8D8F01  |00018F;
+    STA.W nSelectedDialogOption                                ;84D153|8D8F01  |00018F;
  
 .return:
     STZ.W $018B                                                ;84D156|9C8B01  |00018B;
