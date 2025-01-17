@@ -12296,189 +12296,159 @@ fAreaInit_Intro:
     STA.B strcPlayerFlags                                      ;83E7D4|85D2    |0000D2;
     SEP #$20                                                   ;83E7D6|E220    |      ;
     LDA.L $7F1F49                                              ;83E7D8|AF491F7F|7F1F49;
-    BNE CODE_83E7E1                                            ;83E7DC|D003    |83E7E1;
-    JMP.W CODE_83E8AD                                          ;83E7DE|4CADE8  |83E8AD;
+    BNE +                                                      ;83E7DC|D003    |83E7E1;
+    JMP.W .howToPlay00                                         ;83E7DE|4CADE8  |83E8AD;
  
  
-CODE_83E7E1:
-    CMP.B #$01                                                 ;83E7E1|C901    |      ;
-    BNE CODE_83E7E8                                            ;83E7E3|D003    |83E7E8;
-    JMP.W CODE_83E8C5                                          ;83E7E5|4CC5E8  |83E8C5;
+  + CMP.B #$01                                                 ;83E7E1|C901    |      ;
+    BNE +                                                      ;83E7E3|D003    |83E7E8;
+    JMP.W .howToPlay01                                         ;83E7E5|4CC5E8  |83E8C5;
  
  
-CODE_83E7E8:
-    CMP.B #$02                                                 ;83E7E8|C902    |      ;
-    BNE CODE_83E7EF                                            ;83E7EA|D003    |83E7EF;
-    JMP.W CODE_83E8DD                                          ;83E7EC|4CDDE8  |83E8DD;
+  + CMP.B #$02                                                 ;83E7E8|C902    |      ;
+    BNE +                                                      ;83E7EA|D003    |83E7EF;
+    JMP.W .howToPlay02                                         ;83E7EC|4CDDE8  |83E8DD;
  
  
-CODE_83E7EF:
-    CMP.B #$03                                                 ;83E7EF|C903    |      ;
-    BNE CODE_83E7F6                                            ;83E7F1|D003    |83E7F6;
-    JMP.W CODE_83E8F5                                          ;83E7F3|4CF5E8  |83E8F5;
+  + CMP.B #$03                                                 ;83E7EF|C903    |      ;
+    BNE +                                                      ;83E7F1|D003    |83E7F6;
+    JMP.W .howToPlay03                                         ;83E7F3|4CF5E8  |83E8F5;
  
  
-CODE_83E7F6:
-    CMP.B #$04                                                 ;83E7F6|C904    |      ;
-    BNE CODE_83E7FD                                            ;83E7F8|D003    |83E7FD;
-    JMP.W CODE_83E90D                                          ;83E7FA|4C0DE9  |83E90D;
+  + CMP.B #$04                                                 ;83E7F6|C904    |      ;
+    BNE +                                                      ;83E7F8|D003    |83E7FD;
+    JMP.W .howToPlay04                                         ;83E7FA|4C0DE9  |83E90D;
  
  
-CODE_83E7FD:
-    CMP.B #$05                                                 ;83E7FD|C905    |      ;
-    BNE CODE_83E804                                            ;83E7FF|D003    |83E804;
-    JMP.W CODE_83E925                                          ;83E801|4C25E9  |83E925;
+  + CMP.B #$05                                                 ;83E7FD|C905    |      ;
+    BNE +                                                      ;83E7FF|D003    |83E804;
+    JMP.W .howToPlay05                                         ;83E801|4C25E9  |83E925;
  
  
-CODE_83E804:
-    CMP.B #$06                                                 ;83E804|C906    |      ;
-    BNE CODE_83E80B                                            ;83E806|D003    |83E80B;
-    JMP.W CODE_83E93D                                          ;83E808|4C3DE9  |83E93D;
+  + CMP.B #$06                                                 ;83E804|C906    |      ;
+    BNE +                                                      ;83E806|D003    |83E80B;
+    JMP.W .howToPlay06                                         ;83E808|4C3DE9  |83E93D;
  
  
-CODE_83E80B:
-    CMP.B #$07                                                 ;83E80B|C907    |      ;
-    BNE CODE_83E812                                            ;83E80D|D003    |83E812;
-    JMP.W CODE_83E955                                          ;83E80F|4C55E9  |83E955;
+  + CMP.B #$07                                                 ;83E80B|C907    |      ;
+    BNE +                                                      ;83E80D|D003    |83E812;
+    JMP.W .howToPlay07                                         ;83E80F|4C55E9  |83E955;
  
  
-CODE_83E812:
-    CMP.B #$08                                                 ;83E812|C908    |      ;
-    BNE CODE_83E819                                            ;83E814|D003    |83E819;
-    JMP.W CODE_83E98D                                          ;83E816|4C8DE9  |83E98D;
+  + CMP.B #$08                                                 ;83E812|C908    |      ;
+    BNE +                                                      ;83E814|D003    |83E819;
+    JMP.W .howToPlay08                                         ;83E816|4C8DE9  |83E98D;
  
  
-CODE_83E819:
-    CMP.B #$09                                                 ;83E819|C909    |      ;
-    BNE CODE_83E820                                            ;83E81B|D003    |83E820;
-    JMP.W CODE_83E9A5                                          ;83E81D|4CA5E9  |83E9A5;
+  + CMP.B #$09                                                 ;83E819|C909    |      ;
+    BNE +                                                      ;83E81B|D003    |83E820;
+    JMP.W .howToPlay09                                         ;83E81D|4CA5E9  |83E9A5;
  
  
-CODE_83E820:
-    CMP.B #$0A                                                 ;83E820|C90A    |      ;
-    BNE CODE_83E827                                            ;83E822|D003    |83E827;
-    JMP.W CODE_83E9BD                                          ;83E824|4CBDE9  |83E9BD;
+  + CMP.B #$0A                                                 ;83E820|C90A    |      ;
+    BNE +                                                      ;83E822|D003    |83E827;
+    JMP.W .howToPlay0A                                         ;83E824|4CBDE9  |83E9BD;
  
  
-CODE_83E827:
-    CMP.B #$0B                                                 ;83E827|C90B    |      ;
-    BNE CODE_83E82E                                            ;83E829|D003    |83E82E;
-    JMP.W CODE_83E9D5                                          ;83E82B|4CD5E9  |83E9D5;
+  + CMP.B #$0B                                                 ;83E827|C90B    |      ;
+    BNE +                                                      ;83E829|D003    |83E82E;
+    JMP.W .howToPlay0B                                         ;83E82B|4CD5E9  |83E9D5;
  
  
-CODE_83E82E:
-    CMP.B #$0C                                                 ;83E82E|C90C    |      ;
-    BNE CODE_83E835                                            ;83E830|D003    |83E835;
-    JMP.W CODE_83E9ED                                          ;83E832|4CEDE9  |83E9ED;
+  + CMP.B #$0C                                                 ;83E82E|C90C    |      ;
+    BNE +                                                      ;83E830|D003    |83E835;
+    JMP.W .howToPlay0C                                         ;83E832|4CEDE9  |83E9ED;
  
  
-CODE_83E835:
-    CMP.B #$0D                                                 ;83E835|C90D    |      ;
-    BNE CODE_83E83C                                            ;83E837|D003    |83E83C;
-    JMP.W CODE_83EA05                                          ;83E839|4C05EA  |83EA05;
+  + CMP.B #$0D                                                 ;83E835|C90D    |      ;
+    BNE +                                                      ;83E837|D003    |83E83C;
+    JMP.W .howToPlay0D                                         ;83E839|4C05EA  |83EA05;
  
  
-CODE_83E83C:
-    CMP.B #$0E                                                 ;83E83C|C90E    |      ;
-    BNE CODE_83E843                                            ;83E83E|D003    |83E843;
-    JMP.W CODE_83EA3D                                          ;83E840|4C3DEA  |83EA3D;
+  + CMP.B #$0E                                                 ;83E83C|C90E    |      ;
+    BNE +                                                      ;83E83E|D003    |83E843;
+    JMP.W .howToPlay0E                                         ;83E840|4C3DEA  |83EA3D;
  
  
-CODE_83E843:
-    CMP.B #$0F                                                 ;83E843|C90F    |      ;
-    BNE CODE_83E84A                                            ;83E845|D003    |83E84A;
-    JMP.W CODE_83EA55                                          ;83E847|4C55EA  |83EA55;
+  + CMP.B #$0F                                                 ;83E843|C90F    |      ;
+    BNE +                                                      ;83E845|D003    |83E84A;
+    JMP.W .howToPlay0F                                         ;83E847|4C55EA  |83EA55;
  
  
-CODE_83E84A:
-    CMP.B #$10                                                 ;83E84A|C910    |      ;
-    BNE CODE_83E851                                            ;83E84C|D003    |83E851;
-    JMP.W CODE_83EA6D                                          ;83E84E|4C6DEA  |83EA6D;
+  + CMP.B #$10                                                 ;83E84A|C910    |      ;
+    BNE +                                                      ;83E84C|D003    |83E851;
+    JMP.W .howToPlay10                                         ;83E84E|4C6DEA  |83EA6D;
  
  
-CODE_83E851:
-    CMP.B #$11                                                 ;83E851|C911    |      ;
-    BNE CODE_83E858                                            ;83E853|D003    |83E858;
-    JMP.W CODE_83EA85                                          ;83E855|4C85EA  |83EA85;
+  + CMP.B #$11                                                 ;83E851|C911    |      ;
+    BNE +                                                      ;83E853|D003    |83E858;
+    JMP.W .howToPlay11                                         ;83E855|4C85EA  |83EA85;
  
  
-CODE_83E858:
-    CMP.B #$12                                                 ;83E858|C912    |      ;
-    BNE CODE_83E85F                                            ;83E85A|D003    |83E85F;
-    JMP.W CODE_83EA9D                                          ;83E85C|4C9DEA  |83EA9D;
+  + CMP.B #$12                                                 ;83E858|C912    |      ;
+    BNE +                                                      ;83E85A|D003    |83E85F;
+    JMP.W .howToPlay12                                         ;83E85C|4C9DEA  |83EA9D;
  
  
-CODE_83E85F:
-    CMP.B #$13                                                 ;83E85F|C913    |      ;
-    BNE CODE_83E866                                            ;83E861|D003    |83E866;
-    JMP.W CODE_83EAB5                                          ;83E863|4CB5EA  |83EAB5;
+  + CMP.B #$13                                                 ;83E85F|C913    |      ;
+    BNE +                                                      ;83E861|D003    |83E866;
+    JMP.W .howToPlay13                                         ;83E863|4CB5EA  |83EAB5;
  
  
-CODE_83E866:
-    CMP.B #$14                                                 ;83E866|C914    |      ;
-    BNE CODE_83E86D                                            ;83E868|D003    |83E86D;
-    JMP.W CODE_83EACD                                          ;83E86A|4CCDEA  |83EACD;
+  + CMP.B #$14                                                 ;83E866|C914    |      ;
+    BNE +                                                      ;83E868|D003    |83E86D;
+    JMP.W .howToPlay14                                         ;83E86A|4CCDEA  |83EACD;
  
  
-CODE_83E86D:
-    CMP.B #$15                                                 ;83E86D|C915    |      ;
-    BNE CODE_83E874                                            ;83E86F|D003    |83E874;
-    JMP.W CODE_83EAE5                                          ;83E871|4CE5EA  |83EAE5;
+  + CMP.B #$15                                                 ;83E86D|C915    |      ;
+    BNE +                                                      ;83E86F|D003    |83E874;
+    JMP.W .howToPlay15                                         ;83E871|4CE5EA  |83EAE5;
  
  
-CODE_83E874:
-    CMP.B #$16                                                 ;83E874|C916    |      ;
-    BNE CODE_83E87B                                            ;83E876|D003    |83E87B;
-    JMP.W CODE_83EAFD                                          ;83E878|4CFDEA  |83EAFD;
+  + CMP.B #$16                                                 ;83E874|C916    |      ;
+    BNE +                                                      ;83E876|D003    |83E87B;
+    JMP.W .howToPlay16                                         ;83E878|4CFDEA  |83EAFD;
  
  
-CODE_83E87B:
-    CMP.B #$17                                                 ;83E87B|C917    |      ;
-    BNE CODE_83E882                                            ;83E87D|D003    |83E882;
-    JMP.W CODE_83EB15                                          ;83E87F|4C15EB  |83EB15;
+  + CMP.B #$17                                                 ;83E87B|C917    |      ;
+    BNE +                                                      ;83E87D|D003    |83E882;
+    JMP.W .howToPlay17                                         ;83E87F|4C15EB  |83EB15;
  
  
-CODE_83E882:
-    CMP.B #$18                                                 ;83E882|C918    |      ;
-    BNE CODE_83E889                                            ;83E884|D003    |83E889;
-    JMP.W CODE_83EB2D                                          ;83E886|4C2DEB  |83EB2D;
+  + CMP.B #$18                                                 ;83E882|C918    |      ;
+    BNE +                                                      ;83E884|D003    |83E889;
+    JMP.W .howToPlay18                                         ;83E886|4C2DEB  |83EB2D;
  
  
-CODE_83E889:
-    CMP.B #$19                                                 ;83E889|C919    |      ;
-    BNE CODE_83E890                                            ;83E88B|D003    |83E890;
-    JMP.W CODE_83EB45                                          ;83E88D|4C45EB  |83EB45;
+  + CMP.B #$19                                                 ;83E889|C919    |      ;
+    BNE +                                                      ;83E88B|D003    |83E890;
+    JMP.W .howToPlay19                                         ;83E88D|4C45EB  |83EB45;
  
  
-CODE_83E890:
-    CMP.B #$1A                                                 ;83E890|C91A    |      ;
-    BNE CODE_83E897                                            ;83E892|D003    |83E897;
-    JMP.W CODE_83EB5D                                          ;83E894|4C5DEB  |83EB5D;
+  + CMP.B #$1A                                                 ;83E890|C91A    |      ;
+    BNE +                                                      ;83E892|D003    |83E897;
+    JMP.W .howToPlay1A                                         ;83E894|4C5DEB  |83EB5D;
  
  
-CODE_83E897:
-    CMP.B #$1B                                                 ;83E897|C91B    |      ;
-    BNE CODE_83E89E                                            ;83E899|D003    |83E89E;
-    JMP.W CODE_83EB75                                          ;83E89B|4C75EB  |83EB75;
+  + CMP.B #$1B                                                 ;83E897|C91B    |      ;
+    BNE +                                                      ;83E899|D003    |83E89E;
+    JMP.W .howToPlay1B                                         ;83E89B|4C75EB  |83EB75;
  
  
-CODE_83E89E:
-    CMP.B #$1C                                                 ;83E89E|C91C    |      ;
-    BNE CODE_83E8A5                                            ;83E8A0|D003    |83E8A5;
-    JMP.W CODE_83EB8D                                          ;83E8A2|4C8DEB  |83EB8D;
+  + CMP.B #$1C                                                 ;83E89E|C91C    |      ;
+    BNE +                                                      ;83E8A0|D003    |83E8A5;
+    JMP.W .howToPlay1C                                         ;83E8A2|4C8DEB  |83EB8D;
  
  
-CODE_83E8A5:
-    CMP.B #$1D                                                 ;83E8A5|C91D    |      ;
-    BNE CODE_83E8AC                                            ;83E8A7|D003    |83E8AC;
-    JMP.W CODE_83EBA5                                          ;83E8A9|4CA5EB  |83EBA5;
+  + CMP.B #$1D                                                 ;83E8A5|C91D    |      ;
+    BNE +                                                      ;83E8A7|D003    |83E8AC;
+    JMP.W .howToPlay1D                                         ;83E8A9|4CA5EB  |83EBA5;
  
  
-CODE_83E8AC:
-    RTS                                                        ;83E8AC|60      |      ;
+  + RTS                                                        ;83E8AC|60      |      ;
  
  
-CODE_83E8AD:
+.howToPlay00:
     REP #$30                                                   ;83E8AD|C230    |      ;
     LDA.W #$0000                                               ;83E8AF|A90000  |      ;
     LDX.W #$0047                                               ;83E8B2|A24700  |      ;
@@ -12490,7 +12460,7 @@ CODE_83E8AD:
     RTS                                                        ;83E8C4|60      |      ;
  
  
-CODE_83E8C5:
+.howToPlay01:
     REP #$30                                                   ;83E8C5|C230    |      ;
     LDA.W #$0000                                               ;83E8C7|A90000  |      ;
     LDX.W #$0047                                               ;83E8CA|A24700  |      ;
@@ -12502,7 +12472,7 @@ CODE_83E8C5:
     RTS                                                        ;83E8DC|60      |      ;
  
  
-CODE_83E8DD:
+.howToPlay02:
     REP #$30                                                   ;83E8DD|C230    |      ;
     LDA.W #$0000                                               ;83E8DF|A90000  |      ;
     LDX.W #$0047                                               ;83E8E2|A24700  |      ;
@@ -12514,7 +12484,7 @@ CODE_83E8DD:
     RTS                                                        ;83E8F4|60      |      ;
  
  
-CODE_83E8F5:
+.howToPlay03:
     REP #$30                                                   ;83E8F5|C230    |      ;
     LDA.W #$0000                                               ;83E8F7|A90000  |      ;
     LDX.W #$0047                                               ;83E8FA|A24700  |      ;
@@ -12526,7 +12496,7 @@ CODE_83E8F5:
     RTS                                                        ;83E90C|60      |      ;
  
  
-CODE_83E90D:
+.howToPlay04:
     REP #$30                                                   ;83E90D|C230    |      ;
     LDA.W #$0000                                               ;83E90F|A90000  |      ;
     LDX.W #$0047                                               ;83E912|A24700  |      ;
@@ -12538,7 +12508,7 @@ CODE_83E90D:
     RTS                                                        ;83E924|60      |      ;
  
  
-CODE_83E925:
+.howToPlay05:
     REP #$30                                                   ;83E925|C230    |      ;
     LDA.W #$0000                                               ;83E927|A90000  |      ;
     LDX.W #$0047                                               ;83E92A|A24700  |      ;
@@ -12550,7 +12520,7 @@ CODE_83E925:
     RTS                                                        ;83E93C|60      |      ;
  
  
-CODE_83E93D:
+.howToPlay06:
     REP #$30                                                   ;83E93D|C230    |      ;
     LDA.W #$0000                                               ;83E93F|A90000  |      ;
     LDX.W #$0047                                               ;83E942|A24700  |      ;
@@ -12562,7 +12532,7 @@ CODE_83E93D:
     RTS                                                        ;83E954|60      |      ;
  
  
-CODE_83E955:
+.howToPlay07:
     SEP #$20                                                   ;83E955|E220    |      ;
     LDA.B #$3D                                                 ;83E957|A93D    |      ;
     STA.L strcShedItems                                        ;83E959|8F001F7F|7F1F00;
@@ -12585,7 +12555,7 @@ CODE_83E955:
     RTS                                                        ;83E98C|60      |      ;
  
  
-CODE_83E98D:
+.howToPlay08:
     REP #$30                                                   ;83E98D|C230    |      ;
     LDA.W #$0000                                               ;83E98F|A90000  |      ;
     LDX.W #$0047                                               ;83E992|A24700  |      ;
@@ -12597,7 +12567,7 @@ CODE_83E98D:
     RTS                                                        ;83E9A4|60      |      ;
  
  
-CODE_83E9A5:
+.howToPlay09:
     REP #$30                                                   ;83E9A5|C230    |      ;
     LDA.W #$0000                                               ;83E9A7|A90000  |      ;
     LDX.W #$0047                                               ;83E9AA|A24700  |      ;
@@ -12609,7 +12579,7 @@ CODE_83E9A5:
     RTS                                                        ;83E9BC|60      |      ;
  
  
-CODE_83E9BD:
+.howToPlay0A:
     REP #$30                                                   ;83E9BD|C230    |      ;
     LDA.W #$0000                                               ;83E9BF|A90000  |      ;
     LDX.W #$0047                                               ;83E9C2|A24700  |      ;
@@ -12621,7 +12591,7 @@ CODE_83E9BD:
     RTS                                                        ;83E9D4|60      |      ;
  
  
-CODE_83E9D5:
+.howToPlay0B:
     REP #$30                                                   ;83E9D5|C230    |      ;
     LDA.W #$0000                                               ;83E9D7|A90000  |      ;
     LDX.W #$0047                                               ;83E9DA|A24700  |      ;
@@ -12633,7 +12603,7 @@ CODE_83E9D5:
     RTS                                                        ;83E9EC|60      |      ;
  
  
-CODE_83E9ED:
+.howToPlay0C:
     REP #$30                                                   ;83E9ED|C230    |      ;
     LDA.W #$0000                                               ;83E9EF|A90000  |      ;
     LDX.W #$0047                                               ;83E9F2|A24700  |      ;
@@ -12645,7 +12615,7 @@ CODE_83E9ED:
     RTS                                                        ;83EA04|60      |      ;
  
  
-CODE_83EA05:
+.howToPlay0D:
     SEP #$20                                                   ;83EA05|E220    |      ;
     LDA.B #$0D                                                 ;83EA07|A90D    |      ;
     STA.L strcShedItems                                        ;83EA09|8F001F7F|7F1F00;
@@ -12668,7 +12638,7 @@ CODE_83EA05:
     RTS                                                        ;83EA3C|60      |      ;
  
  
-CODE_83EA3D:
+.howToPlay0E:
     REP #$30                                                   ;83EA3D|C230    |      ;
     LDA.W #$0000                                               ;83EA3F|A90000  |      ;
     LDX.W #$0047                                               ;83EA42|A24700  |      ;
@@ -12680,7 +12650,7 @@ CODE_83EA3D:
     RTS                                                        ;83EA54|60      |      ;
  
  
-CODE_83EA55:
+.howToPlay0F:
     REP #$30                                                   ;83EA55|C230    |      ;
     LDA.W #$0000                                               ;83EA57|A90000  |      ;
     LDX.W #$0047                                               ;83EA5A|A24700  |      ;
@@ -12692,7 +12662,7 @@ CODE_83EA55:
     RTS                                                        ;83EA6C|60      |      ;
  
  
-CODE_83EA6D:
+.howToPlay10:
     REP #$30                                                   ;83EA6D|C230    |      ;
     LDA.W #$0000                                               ;83EA6F|A90000  |      ;
     LDX.W #$0047                                               ;83EA72|A24700  |      ;
@@ -12704,7 +12674,7 @@ CODE_83EA6D:
     RTS                                                        ;83EA84|60      |      ;
  
  
-CODE_83EA85:
+.howToPlay11:
     REP #$30                                                   ;83EA85|C230    |      ;
     LDA.W #$0000                                               ;83EA87|A90000  |      ;
     LDX.W #$0047                                               ;83EA8A|A24700  |      ;
@@ -12716,7 +12686,7 @@ CODE_83EA85:
     RTS                                                        ;83EA9C|60      |      ;
  
  
-CODE_83EA9D:
+.howToPlay12:
     REP #$30                                                   ;83EA9D|C230    |      ;
     LDA.W #$0000                                               ;83EA9F|A90000  |      ;
     LDX.W #$0047                                               ;83EAA2|A24700  |      ;
@@ -12728,7 +12698,7 @@ CODE_83EA9D:
     RTS                                                        ;83EAB4|60      |      ;
  
  
-CODE_83EAB5:
+.howToPlay13:
     REP #$30                                                   ;83EAB5|C230    |      ;
     LDA.W #$0000                                               ;83EAB7|A90000  |      ;
     LDX.W #$0047                                               ;83EABA|A24700  |      ;
@@ -12740,7 +12710,7 @@ CODE_83EAB5:
     RTS                                                        ;83EACC|60      |      ;
  
  
-CODE_83EACD:
+.howToPlay14:
     REP #$30                                                   ;83EACD|C230    |      ;
     LDA.W #$0000                                               ;83EACF|A90000  |      ;
     LDX.W #$0047                                               ;83EAD2|A24700  |      ;
@@ -12752,7 +12722,7 @@ CODE_83EACD:
     RTS                                                        ;83EAE4|60      |      ;
  
  
-CODE_83EAE5:
+.howToPlay15:
     REP #$30                                                   ;83EAE5|C230    |      ;
     LDA.W #$0000                                               ;83EAE7|A90000  |      ;
     LDX.W #$0047                                               ;83EAEA|A24700  |      ;
@@ -12764,7 +12734,7 @@ CODE_83EAE5:
     RTS                                                        ;83EAFC|60      |      ;
  
  
-CODE_83EAFD:
+.howToPlay16:
     REP #$30                                                   ;83EAFD|C230    |      ;
     LDA.W #$0000                                               ;83EAFF|A90000  |      ;
     LDX.W #$0047                                               ;83EB02|A24700  |      ;
@@ -12776,7 +12746,7 @@ CODE_83EAFD:
     RTS                                                        ;83EB14|60      |      ;
  
  
-CODE_83EB15:
+.howToPlay17:
     REP #$30                                                   ;83EB15|C230    |      ;
     LDA.W #$0000                                               ;83EB17|A90000  |      ;
     LDX.W #$0047                                               ;83EB1A|A24700  |      ;
@@ -12788,7 +12758,7 @@ CODE_83EB15:
     RTS                                                        ;83EB2C|60      |      ;
  
  
-CODE_83EB2D:
+.howToPlay18:
     REP #$30                                                   ;83EB2D|C230    |      ;
     LDA.W #$0000                                               ;83EB2F|A90000  |      ;
     LDX.W #$0047                                               ;83EB32|A24700  |      ;
@@ -12800,7 +12770,7 @@ CODE_83EB2D:
     RTS                                                        ;83EB44|60      |      ;
  
  
-CODE_83EB45:
+.howToPlay19:
     REP #$30                                                   ;83EB45|C230    |      ;
     LDA.W #$0000                                               ;83EB47|A90000  |      ;
     LDX.W #$0047                                               ;83EB4A|A24700  |      ;
@@ -12812,7 +12782,7 @@ CODE_83EB45:
     RTS                                                        ;83EB5C|60      |      ;
  
  
-CODE_83EB5D:
+.howToPlay1A:
     REP #$30                                                   ;83EB5D|C230    |      ;
     LDA.W #$0000                                               ;83EB5F|A90000  |      ;
     LDX.W #$0047                                               ;83EB62|A24700  |      ;
@@ -12824,7 +12794,7 @@ CODE_83EB5D:
     RTS                                                        ;83EB74|60      |      ;
  
  
-CODE_83EB75:
+.howToPlay1B:
     REP #$30                                                   ;83EB75|C230    |      ;
     LDA.W #$0000                                               ;83EB77|A90000  |      ;
     LDX.W #$0047                                               ;83EB7A|A24700  |      ;
@@ -12836,7 +12806,7 @@ CODE_83EB75:
     RTS                                                        ;83EB8C|60      |      ;
  
  
-CODE_83EB8D:
+.howToPlay1C:
     REP #$30                                                   ;83EB8D|C230    |      ;
     LDA.W #$0000                                               ;83EB8F|A90000  |      ;
     LDX.W #$0047                                               ;83EB92|A24700  |      ;
@@ -12848,7 +12818,7 @@ CODE_83EB8D:
     RTS                                                        ;83EBA4|60      |      ;
  
  
-CODE_83EBA5:
+.howToPlay1D:
     RTS                                                        ;83EBA5|60      |      ;
  
  

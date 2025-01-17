@@ -7450,7 +7450,7 @@ fUnknown_82D3C7:
     LDA.W #$0100                                               ;82D516|A90001  |      ;
     STA.W $0146                                                ;82D519|8D4601  |000146;
     SEP #$20                                                   ;82D51C|E220    |      ;
-    LDA.L $7F1F48                                              ;82D51E|AF481F7F|7F1F48;
+    LDA.L nIntroHowToPlayIndex                                 ;82D51E|AF481F7F|7F1F48;
     BNE +                                                      ;82D522|D003    |82D527;
     JMP.W fUnknown_82D574                                      ;82D524|4C74D5  |82D574;
  
@@ -7518,7 +7518,7 @@ fUnknown_82D574:
     JSL.L fAI_SetupAreaScripting                               ;82D57F|22978084|848097;
     SEP #$20                                                   ;82D583|E220    |      ;
     LDA.B #$01                                                 ;82D585|A901    |      ;
-    STA.L $7F1F48                                              ;82D587|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D587|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D58B|4CACD6  |82D6AC;
  
  
@@ -7530,7 +7530,7 @@ fUnknown_82D58E:
     JSL.L fAI_SetupAreaScripting                               ;82D599|22978084|848097;
     SEP #$20                                                   ;82D59D|E220    |      ;
     LDA.B #$02                                                 ;82D59F|A902    |      ;
-    STA.L $7F1F48                                              ;82D5A1|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D5A1|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D5A5|4CACD6  |82D6AC;
  
  
@@ -7542,7 +7542,7 @@ fUnknown_82D5A8:
     JSL.L fAI_SetupAreaScripting                               ;82D5B3|22978084|848097;
     SEP #$20                                                   ;82D5B7|E220    |      ;
     LDA.B #$03                                                 ;82D5B9|A903    |      ;
-    STA.L $7F1F48                                              ;82D5BB|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D5BB|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D5BF|4CACD6  |82D6AC;
  
  
@@ -7554,7 +7554,7 @@ fUnknown_82D5C2:
     JSL.L fAI_SetupAreaScripting                               ;82D5CD|22978084|848097;
     SEP #$20                                                   ;82D5D1|E220    |      ;
     LDA.B #$04                                                 ;82D5D3|A904    |      ;
-    STA.L $7F1F48                                              ;82D5D5|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D5D5|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D5D9|4CACD6  |82D6AC;
  
  
@@ -7566,7 +7566,7 @@ fUnknown_82D5DC:
     JSL.L fAI_SetupAreaScripting                               ;82D5E7|22978084|848097;
     SEP #$20                                                   ;82D5EB|E220    |      ;
     LDA.B #$05                                                 ;82D5ED|A905    |      ;
-    STA.L $7F1F48                                              ;82D5EF|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D5EF|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D5F3|4CACD6  |82D6AC;
  
  
@@ -7578,7 +7578,7 @@ fUnknown_82D5F6:
     JSL.L fAI_SetupAreaScripting                               ;82D601|22978084|848097;
     SEP #$20                                                   ;82D605|E220    |      ;
     LDA.B #$06                                                 ;82D607|A906    |      ;
-    STA.L $7F1F48                                              ;82D609|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D609|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D60D|4CACD6  |82D6AC;
  
  
@@ -7590,7 +7590,7 @@ fUnknown_82D610:
     JSL.L fAI_SetupAreaScripting                               ;82D61B|22978084|848097;
     SEP #$20                                                   ;82D61F|E220    |      ;
     LDA.B #$07                                                 ;82D621|A907    |      ;
-    STA.L $7F1F48                                              ;82D623|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D623|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D627|4CACD6  |82D6AC;
  
  
@@ -7602,7 +7602,7 @@ fUnknown_82D62A:
     JSL.L fAI_SetupAreaScripting                               ;82D635|22978084|848097;
     SEP #$20                                                   ;82D639|E220    |      ;
     LDA.B #$08                                                 ;82D63B|A908    |      ;
-    STA.L $7F1F48                                              ;82D63D|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D63D|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D641|4CACD6  |82D6AC;
  
  
@@ -7614,7 +7614,7 @@ fUnknown_82D644:
     JSL.L fAI_SetupAreaScripting                               ;82D64F|22978084|848097;
     SEP #$20                                                   ;82D653|E220    |      ;
     LDA.B #$09                                                 ;82D655|A909    |      ;
-    STA.L $7F1F48                                              ;82D657|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D657|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D65B|4CACD6  |82D6AC;
  
  
@@ -7626,7 +7626,7 @@ fUnknown_82D65E:
     JSL.L fAI_SetupAreaScripting                               ;82D669|22978084|848097;
     SEP #$20                                                   ;82D66D|E220    |      ;
     LDA.B #$0A                                                 ;82D66F|A90A    |      ;
-    STA.L $7F1F48                                              ;82D671|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D671|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D675|4CACD6  |82D6AC;
  
  
@@ -7638,7 +7638,7 @@ fUnknown_82D678:
     JSL.L fAI_SetupAreaScripting                               ;82D683|22978084|848097;
     SEP #$20                                                   ;82D687|E220    |      ;
     LDA.B #$0B                                                 ;82D689|A90B    |      ;
-    STA.L $7F1F48                                              ;82D68B|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D68B|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D68F|4CACD6  |82D6AC;
  
  
@@ -7650,7 +7650,7 @@ fUnknown_82D692:
     JSL.L fAI_SetupAreaScripting                               ;82D69D|22978084|848097;
     SEP #$20                                                   ;82D6A1|E220    |      ;
     LDA.B #$00                                                 ;82D6A3|A900    |      ;
-    STA.L $7F1F48                                              ;82D6A5|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D6A5|8F481F7F|7F1F48;
     JMP.W fUnknown_82D6AC                                      ;82D6A9|4CACD6  |82D6AC;
  
  
@@ -7743,7 +7743,7 @@ fUnknown_82D75E:
  
   + SEP #$20                                                   ;82D77E|E220    |      ;
     LDA.B #$00                                                 ;82D780|A900    |      ;
-    STA.L $7F1F48                                              ;82D782|8F481F7F|7F1F48;
+    STA.L nIntroHowToPlayIndex                                 ;82D782|8F481F7F|7F1F48;
     STA.L $7F1F49                                              ;82D786|8F491F7F|7F1F49;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D78A|225AA682|82A65A;
     SEP #$20                                                   ;82D78E|E220    |      ;

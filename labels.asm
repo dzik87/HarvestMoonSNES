@@ -349,6 +349,7 @@
     sFirstChildNameShort = $7F1F3D; !^ 4 * s16 ^!
     sSecondChildNameShort = $7F1F41; !^ 4 * s8 ^!
     nEggInCoopFlags = $7F1F45
+    nIntroHowToPlayIndex = $7F1F48; !^ n8 ^!
     nStatShippedCorns = $7F1F4A; !^ n16 ^!
     nStatShippedTomatoes = $7F1F4C; !^ n16 ^!
     nStatShippedTurnips = $7F1F4E; !^ n16 ^!
