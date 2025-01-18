@@ -6869,7 +6869,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label3:
     REP #$20                                                   ;83BD10|C220    |      ;
     LDA.W #$FFF8                                               ;83BD12|A9F8FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BD15|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD15|22D4A584|84A5D4;
     REP #$30                                                   ;83BD19|C230    |      ;
     LDY.W #$0004                                               ;83BD1B|A00400  |      ;
     BRA .label7                                                ;83BD1E|8030    |83BD50;
@@ -6878,7 +6878,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label4:
     REP #$20                                                   ;83BD20|C220    |      ;
     LDA.W #$FFF0                                               ;83BD22|A9F0FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BD25|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD25|22D4A584|84A5D4;
     REP #$30                                                   ;83BD29|C230    |      ;
     LDY.W #$0002                                               ;83BD2B|A00200  |      ;
     BRA .label7                                                ;83BD2E|8020    |83BD50;
@@ -6887,7 +6887,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label5:
     REP #$20                                                   ;83BD30|C220    |      ;
     LDA.W #$FFE8                                               ;83BD32|A9E8FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BD35|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD35|22D4A584|84A5D4;
     REP #$30                                                   ;83BD39|C230    |      ;
     LDY.W #$0002                                               ;83BD3B|A00200  |      ;
     BRA .label7                                                ;83BD3E|8010    |83BD50;
@@ -6896,7 +6896,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label6:
     REP #$20                                                   ;83BD40|C220    |      ;
     LDA.W #$FFF8                                               ;83BD42|A9F8FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BD45|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD45|22D4A584|84A5D4;
     REP #$30                                                   ;83BD49|C230    |      ;
     LDY.W #$0008                                               ;83BD4B|A00800  |      ;
     BRA .label7                                                ;83BD4E|8000    |83BD50;
@@ -6932,7 +6932,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     STA.B [ptrUnknown0x72],Y                                   ;83BD8A|9772    |000072;
     REP #$20                                                   ;83BD8C|C220    |      ;
     LDA.W #$FFF4                                               ;83BD8E|A9F4FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BD91|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BD91|22D4A584|84A5D4;
     REP #$30                                                   ;83BD95|C230    |      ;
     LDA.W #$FFE2                                               ;83BD97|A9E2FF  |      ;
     JSL.L fGameEngine_AddHappiness                             ;83BD9A|2282B283|83B282;
@@ -6959,7 +6959,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     BNE .label9                                                ;83BDC9|D00B    |83BDD6;
     REP #$20                                                   ;83BDCB|C220    |      ;
     LDA.W #$FFF8                                               ;83BDCD|A9F8FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BDD0|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BDD0|22D4A584|84A5D4;
     BRA .label10                                               ;83BDD4|8015    |83BDEB;
  
  
@@ -7002,7 +7002,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     STA.B [ptrUnknown0x72],Y                                   ;83BE21|9772    |000072;
     REP #$20                                                   ;83BE23|C220    |      ;
     LDA.W #$FFE2                                               ;83BE25|A9E2FF  |      ;
-    JSL.L fAI_Unknown84A5D4                                    ;83BE28|22D4A584|84A5D4;
+    JSL.L fUnknown_84A5D4                                      ;83BE28|22D4A584|84A5D4;
     BRA .label12                                               ;83BE2C|8011    |83BE3F;
  
  
@@ -8763,7 +8763,7 @@ aEngineUnknown_83CA78:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;83CA84|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;83CA90|        |      ;
  
-fMapEngine_Initialize:
+fMapEngine_AreaEvents:
     SEP #$20                                                   ;83CA98|E220    |      ;
     REP #$10                                                   ;83CA9A|C210    |      ;
     LDA.B #$00                                                 ;83CA9C|A900    |      ;
@@ -8772,289 +8772,274 @@ fMapEngine_Initialize:
     REP #$20                                                   ;83CAA1|C220    |      ;
     ASL A                                                      ;83CAA3|0A      |      ;
     TAX                                                        ;83CAA4|AA      |      ;
-    JSR.W (.jumpTable,X)                                       ;83CAA5|FCA9CA  |83CAA9;
+    JSR.W (.areaEventsJumpTable,X)                             ;83CAA5|FCA9CA  |83CAA9;
     RTL                                                        ;83CAA8|6B      |      ;
  
  
-.jumpTable:
-    dw fAreaInit_Farm                                          ;83CAA9|        |83CB69; 0x60 * [ptr16]
-    dw fAreaInit_Farm                                          ;83CAAB|        |83CB69;
-    dw fAreaInit_Farm                                          ;83CAAD|        |83CB69;
-    dw fAreaInit_Farm                                          ;83CAAF|        |83CB69;
-    dw fAreaInit_Town                                          ;83CAB1|        |83D2E0;
-    dw fAreaInit_Town                                          ;83CAB3|        |83D2E0;
-    dw fAreaInit_Town                                          ;83CAB5|        |83D2E0;
-    dw fAreaInit_Town                                          ;83CAB7|        |83D2E0;
-    dw fAreaInit_Festival1                                     ;83CAB9|        |83E5DF;
-    dw fAreaInit_Festival2                                     ;83CABB|        |83E5F1;
-    dw fAreaInit_Festival3                                     ;83CABD|        |83E603;
-    dw fAreaInit_EggFestival                                   ;83CABF|        |83E6B2;
-    dw fAreaInit_CrossRoad                                     ;83CAC1|        |83E407;
-    dw fAreaInit_CrossRoad                                     ;83CAC3|        |83E407;
-    dw fAreaInit_CrossRoad                                     ;83CAC5|        |83E407;
-    dw fAreaInit_CrossRoad                                     ;83CAC7|        |83E407;
-    dw fAreaInit_Woods                                         ;83CAC9|        |83DC4A;
-    dw fAreaInit_Woods                                         ;83CACB|        |83DC4A;
-    dw fAreaInit_Woods                                         ;83CACD|        |83DC4A;
-    dw fAreaInit_Woods                                         ;83CACF|        |83DC4A;
-    dw fAreaInit_Spa                                           ;83CAD1|        |83E661;
-    dw fAreaInit_House                                         ;83CAD3|        |83DED3;
-    dw fAreaInit_House                                         ;83CAD5|        |83DED3;
-    dw fAreaInit_House                                         ;83CAD7|        |83DED3;
-    dw fAreaInit_MajorHouse                                    ;83CAD9|        |83D4D7;
-    dw fAreaInit_MajorHouse                                    ;83CADB|        |83D4D7;
-    dw fAreaInit_MariaBedroom                                  ;83CADD|        |83D5E7;
-    dw fAreaInit_Church                                        ;83CADF|        |83D613;
-    dw fAreaInit_Florist                                       ;83CAE1|        |83D74E;
-    dw fAreaInit_FloristBedroom                                ;83CAE3|        |83D818;
-    dw fAreaInit_Bar                                           ;83CAE5|        |83DB8F;
-    dw fAreaInit_EveBedroom                                    ;83CAE7|        |83DC1E;
-    dw fAreaInit_Restaurant                                    ;83CAE9|        |83D955;
-    dw fAreaInit_RestaurantBedroom                             ;83CAEB|        |83DA1F;
-    dw fAreaInit_Toolshop                                      ;83CAED|        |83D844;
-    dw fAreaInit_ToolshopBedroom                               ;83CAEF|        |83D929;
-    dw fAreaInit_AnimalShop                                    ;83CAF1|        |83DAED;
-    dw fAreaInit_FortuneTeller                                 ;83CAF3|        |83DA4B;
-    dw fAreaInit_Shed                                          ;83CAF5|        |83E6C4;
-    dw fAreaInit_CowBarn                                       ;83CAF7|        |83DE9B;
-    dw fAreaInit_Coop                                          ;83CAF9|        |83E5B4;
-    dw fAreaInit_Mine                                          ;83CAFB|        |83E4CB;
-    dw fAreaInit_ImpsUnderground                               ;83CAFD|        |83DE64;
-    dw fAreaInit_WorksmanHouse                                 ;83CAFF|        |83DD95;
-    dw fAreaInit_GoldChicken                                   ;83CB01|        |83E5A2;
-    dw fAreaInit_Wedding                                       ;83CB03|        |83E5CD;
-    dw fAreaInit_Wedding                                       ;83CB05|        |83E5CD;
-    dw fAreaInit_Wedding                                       ;83CB07|        |83E5CD;
-    dw fAreaInit_Wedding                                       ;83CB09|        |83E5CD;
-    dw fAreaInit_MountainTop                                   ;83CB0B|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB0D|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB0F|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB11|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB13|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB15|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB17|        |83E586;
-    dw fAreaInit_MountainTop                                   ;83CB19|        |83E586;
-    dw fAreaInit_MountainTopStarNightFestival                  ;83CB1B|        |83E632;
-    dw fAreaInit_MountainTopUnk                                ;83CB1D|        |83E690;
-    dw fAreaInit_MountainTopBean                               ;83CB1F|        |83E74C;
-    dw fAreaInit_Intro                                         ;83CB21|        |83E76D;
-    dw fAreaInit_Endings                                       ;83CB23|        |83EBA6;
-    dw fAreaInit_MountainTopBean                               ;83CB25|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB27|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB29|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB2B|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB2D|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB2F|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB31|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB33|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB35|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB37|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB39|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB3B|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB3D|        |83E74C;
-    dw fAreaInit_Endings                                       ;83CB3F|        |83EBA6;
-    dw fAreaInit_MountainTopBean                               ;83CB41|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB43|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB45|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB47|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB49|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB4B|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB4D|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB4F|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB51|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB53|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB55|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB57|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB59|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB5B|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB5D|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB5F|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB61|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB63|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB65|        |83E74C;
-    dw fAreaInit_MountainTopBean                               ;83CB67|        |83E74C;
+.areaEventsJumpTable:
+    dw fAreaEvents_Farm                                        ;83CAA9|        |83CB69; 0x60 * [ptr16]
+    dw fAreaEvents_Farm                                        ;83CAAB|        |83CB69;
+    dw fAreaEvents_Farm                                        ;83CAAD|        |83CB69;
+    dw fAreaEvents_Farm                                        ;83CAAF|        |83CB69;
+    dw fAreaEvents_Town                                        ;83CAB1|        |83D2E0;
+    dw fAreaEvents_Town                                        ;83CAB3|        |83D2E0;
+    dw fAreaEvents_Town                                        ;83CAB5|        |83D2E0;
+    dw fAreaEvents_Town                                        ;83CAB7|        |83D2E0;
+    dw fAreaEvents_Festival1                                   ;83CAB9|        |83E5DF;
+    dw fAreaEvents_Festival2                                   ;83CABB|        |83E5F1;
+    dw fAreaEvents_Festival3                                   ;83CABD|        |83E603;
+    dw fAreaEvents_EggFestival                                 ;83CABF|        |83E6B2;
+    dw fAreaEvents_CrossRoad                                   ;83CAC1|        |83E407;
+    dw fAreaEvents_CrossRoad                                   ;83CAC3|        |83E407;
+    dw fAreaEvents_CrossRoad                                   ;83CAC5|        |83E407;
+    dw fAreaEvents_CrossRoad                                   ;83CAC7|        |83E407;
+    dw fAreaEvents_Woods                                       ;83CAC9|        |83DC4A;
+    dw fAreaEvents_Woods                                       ;83CACB|        |83DC4A;
+    dw fAreaEvents_Woods                                       ;83CACD|        |83DC4A;
+    dw fAreaEvents_Woods                                       ;83CACF|        |83DC4A;
+    dw fAreaEvents_SNF_Spa                                     ;83CAD1|        |83E661;
+    dw fAreaEvents_House                                       ;83CAD3|        |83DED3;
+    dw fAreaEvents_House                                       ;83CAD5|        |83DED3;
+    dw fAreaEvents_House                                       ;83CAD7|        |83DED3;
+    dw fAreaEvents_MajorHouse                                  ;83CAD9|        |83D4D7;
+    dw fAreaEvents_MajorHouse                                  ;83CADB|        |83D4D7;
+    dw fAreaEvents_MariaBedroom                                ;83CADD|        |83D5E7;
+    dw fAreaEvents_Church                                      ;83CADF|        |83D613;
+    dw fAreaEvents_Florist                                     ;83CAE1|        |83D74E;
+    dw fAreaEvents_NinaBedroom                                 ;83CAE3|        |83D818;
+    dw fAreaEvents_Bar                                         ;83CAE5|        |83DB8F;
+    dw fAreaEvents_EveBedroom                                  ;83CAE7|        |83DC1E;
+    dw fAreaEvents_Restaurant                                  ;83CAE9|        |83D955;
+    dw fAreaEvents_EllenBedroom                                ;83CAEB|        |83DA1F;
+    dw fAreaEvents_Toolshop                                    ;83CAED|        |83D844;
+    dw fAreaEvents_AnnBedroom                                  ;83CAEF|        |83D929;
+    dw fAreaEvents_AnimalShop                                  ;83CAF1|        |83DAED;
+    dw fAreaEvents_FortuneTeller                               ;83CAF3|        |83DA4B;
+    dw fAreaEvents_Shed                                        ;83CAF5|        |83E6C4;
+    dw fAreaEvents_CowBarn                                     ;83CAF7|        |83DE9B;
+    dw fAreaEvents_Coop                                        ;83CAF9|        |83E5B4;
+    dw fAreaEvents_Mine                                        ;83CAFB|        |83E4CB;
+    dw fAreaEvents_ImpsUnderground                             ;83CAFD|        |83DE64;
+    dw fAreaEvents_WorksmanHouse                               ;83CAFF|        |83DD95;
+    dw fAreaEvents_GoldChicken                                 ;83CB01|        |83E5A2;
+    dw fAreaEvents_Wedding                                     ;83CB03|        |83E5CD;
+    dw fAreaEvents_Wedding                                     ;83CB05|        |83E5CD;
+    dw fAreaEvents_Wedding                                     ;83CB07|        |83E5CD;
+    dw fAreaEvents_Wedding                                     ;83CB09|        |83E5CD;
+    dw fAreaEvents_MountainTop                                 ;83CB0B|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB0D|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB0F|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB11|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB13|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB15|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB17|        |83E586;
+    dw fAreaEvents_MountainTop                                 ;83CB19|        |83E586;
+    dw fAreaEvents_SNF_MountainTop                             ;83CB1B|        |83E632;
+    dw fAreaEvents_MountainTopUnknown                          ;83CB1D|        |83E690;
+    dw fAreaEvents_MountainTopBean                             ;83CB1F|        |83E74C;
+    dw fAreaEvents_Intro                                       ;83CB21|        |83E76D;
+    dw fAreaEvents_Endings                                     ;83CB23|        |83EBA6;
+    dw fAreaEvents_MountainTopBean                             ;83CB25|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB27|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB29|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB2B|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB2D|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB2F|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB31|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB33|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB35|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB37|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB39|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB3B|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB3D|        |83E74C;
+    dw fAreaEvents_Endings                                     ;83CB3F|        |83EBA6;
+    dw fAreaEvents_MountainTopBean                             ;83CB41|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB43|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB45|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB47|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB49|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB4B|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB4D|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB4F|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB51|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB53|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB55|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB57|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB59|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB5B|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB5D|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB5F|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB61|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB63|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB65|        |83E74C;
+    dw fAreaEvents_MountainTopBean                             ;83CB67|        |83E74C;
  
-fAreaInit_Farm:
+fAreaEvents_Farm:
     REP #$30                                                   ;83CB69|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83CB6B|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83CB6F|290200  |      ;
-    BNE CODE_83CBC4                                            ;83CB72|D050    |83CBC4;
+    BNE +                                                      ;83CB72|D050    |83CBC4;
     LDA.L strcEventFlags.flags2                                ;83CB74|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83CB78|290100  |      ;
-    BNE CODE_83CB91                                            ;83CB7B|D014    |83CB91;
+    BNE .label1                                                ;83CB7B|D014    |83CB91;
     LDA.L strcEventFlags.flags2                                ;83CB7D|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83CB81|290400  |      ;
-    BNE CODE_83CBA2                                            ;83CB84|D01C    |83CBA2;
+    BNE .label2                                                ;83CB84|D01C    |83CBA2;
     LDA.L strcEventFlags.flags2                                ;83CB86|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83CB8A|290800  |      ;
-    BNE CODE_83CBB3                                            ;83CB8D|D024    |83CBB3;
-    BRA CODE_83CBC4                                            ;83CB8F|8033    |83CBC4;
+    BNE .label3                                                ;83CB8D|D024    |83CBB3;
+    BRA +                                                      ;83CB8F|8033    |83CBC4;
  
  
-CODE_83CB91:
+.label1:
     REP #$30                                                   ;83CB91|C230    |      ;
     LDA.W #$0013                                               ;83CB93|A91300  |      ;
     LDX.W #$0044                                               ;83CB96|A24400  |      ;
     LDY.W #$0000                                               ;83CB99|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83CB9C|22978084|848097;
-    BRA CODE_83CBC4                                            ;83CBA0|8022    |83CBC4;
+    BRA +                                                      ;83CBA0|8022    |83CBC4;
  
  
-CODE_83CBA2:
+.label2:
     REP #$30                                                   ;83CBA2|C230    |      ;
     LDA.W #$0013                                               ;83CBA4|A91300  |      ;
     LDX.W #$0044                                               ;83CBA7|A24400  |      ;
     LDY.W #$0002                                               ;83CBAA|A00200  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83CBAD|22978084|848097;
-    BRA CODE_83CBC4                                            ;83CBB1|8011    |83CBC4;
+    BRA +                                                      ;83CBB1|8011    |83CBC4;
  
  
-CODE_83CBB3:
+.label3:
     REP #$30                                                   ;83CBB3|C230    |      ;
     LDA.W #$0013                                               ;83CBB5|A91300  |      ;
     LDX.W #$0044                                               ;83CBB8|A24400  |      ;
     LDY.W #$0003                                               ;83CBBB|A00300  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83CBBE|22978084|848097;
-    BRA CODE_83CBC4                                            ;83CBC2|8000    |83CBC4;
+    BRA +                                                      ;83CBC2|8000    |83CBC4;
  
  
-CODE_83CBC4:
-    REP #$30                                                   ;83CBC4|C230    |      ;
+  + REP #$30                                                   ;83CBC4|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83CBC6|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;83CBCA|290400  |      ;
-    BEQ CODE_83CBE7                                            ;83CBCD|F018    |83CBE7;
+    BEQ +                                                      ;83CBCD|F018    |83CBE7;
     LDA.L nFirstChildAge                                       ;83CBCF|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83CBD3|C93C00  |      ;
-    BCC CODE_83CBE7                                            ;83CBD6|900F    |83CBE7;
+    BCC +                                                      ;83CBD6|900F    |83CBE7;
     REP #$30                                                   ;83CBD8|C230    |      ;
     LDA.W #$0014                                               ;83CBDA|A91400  |      ;
     LDX.W #$0045                                               ;83CBDD|A24500  |      ;
     LDY.W #$0001                                               ;83CBE0|A00100  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83CBE3|22978084|848097;
  
-CODE_83CBE7:
-    REP #$30                                                   ;83CBE7|C230    |      ;
+  + REP #$30                                                   ;83CBE7|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83CBE9|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;83CBED|290800  |      ;
-    BEQ CODE_83CC0A                                            ;83CBF0|F018    |83CC0A;
+    BEQ +                                                      ;83CBF0|F018    |83CC0A;
     LDA.L nSecondChildAge                                      ;83CBF2|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83CBF6|C93C00  |      ;
-    BCC CODE_83CC0A                                            ;83CBF9|900F    |83CC0A;
+    BCC +                                                      ;83CBF9|900F    |83CC0A;
     REP #$30                                                   ;83CBFB|C230    |      ;
     LDA.W #$0015                                               ;83CBFD|A91500  |      ;
     LDX.W #$0045                                               ;83CC00|A24500  |      ;
     LDY.W #$0004                                               ;83CC03|A00400  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83CC06|22978084|848097;
  
-CODE_83CC0A:
-    REP #$30                                                   ;83CC0A|C230    |      ;
+  + REP #$30                                                   ;83CC0A|C230    |      ;
     LDA.W nMapEngine_flags                                     ;83CC0C|AD9601  |000196;
     AND.W #$001A                                               ;83CC0F|291A00  |      ;
-    BEQ CODE_83CC17                                            ;83CC12|F003    |83CC17;
-    JMP.W CODE_83CE5B                                          ;83CC14|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC12|F003    |83CC17;
+    JMP.W .label9                                              ;83CC14|4C5BCE  |83CE5B;
  
  
-CODE_83CC17:
-    LDA.L strcEventFlags.flags2                                ;83CC17|AF661F7F|7F1F66;
+  + LDA.L strcEventFlags.flags2                                ;83CC17|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83CC1B|290100  |      ;
-    BEQ CODE_83CC23                                            ;83CC1E|F003    |83CC23;
-    JMP.W CODE_83CE5B                                          ;83CC20|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC1E|F003    |83CC23;
+    JMP.W .label9                                              ;83CC20|4C5BCE  |83CE5B;
  
  
-CODE_83CC23:
-    LDA.L strcEventFlags.flags2                                ;83CC23|AF661F7F|7F1F66;
+  + LDA.L strcEventFlags.flags2                                ;83CC23|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83CC27|290200  |      ;
-    BEQ CODE_83CC2F                                            ;83CC2A|F003    |83CC2F;
-    JMP.W CODE_83CE5B                                          ;83CC2C|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC2A|F003    |83CC2F;
+    JMP.W .label9                                              ;83CC2C|4C5BCE  |83CE5B;
  
  
-CODE_83CC2F:
-    LDA.L strcEventFlags.flags2                                ;83CC2F|AF661F7F|7F1F66;
+  + LDA.L strcEventFlags.flags2                                ;83CC2F|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83CC33|290400  |      ;
-    BEQ CODE_83CC3B                                            ;83CC36|F003    |83CC3B;
-    JMP.W CODE_83CE5B                                          ;83CC38|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC36|F003    |83CC3B;
+    JMP.W .label9                                              ;83CC38|4C5BCE  |83CE5B;
  
  
-CODE_83CC3B:
-    LDA.L strcEventFlags.flags2                                ;83CC3B|AF661F7F|7F1F66;
+  + LDA.L strcEventFlags.flags2                                ;83CC3B|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83CC3F|290800  |      ;
-    BEQ CODE_83CC47                                            ;83CC42|F003    |83CC47;
-    JMP.W CODE_83CE5B                                          ;83CC44|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC42|F003    |83CC47;
+    JMP.W .label9                                              ;83CC44|4C5BCE  |83CE5B;
  
  
-CODE_83CC47:
-    LDA.L strcEventFlags.flags2                                ;83CC47|AF661F7F|7F1F66;
+  + LDA.L strcEventFlags.flags2                                ;83CC47|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83CC4B|291000  |      ;
-    BEQ CODE_83CC53                                            ;83CC4E|F003    |83CC53;
-    JMP.W CODE_83CE5B                                          ;83CC50|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC4E|F003    |83CC53;
+    JMP.W .label9                                              ;83CC50|4C5BCE  |83CE5B;
  
  
-CODE_83CC53:
-    SEP #$20                                                   ;83CC53|E220    |      ;
+  + SEP #$20                                                   ;83CC53|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CC55|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CC59|C906    |      ;
-    BEQ CODE_83CC60                                            ;83CC5B|F003    |83CC60;
-    JMP.W CODE_83CE5B                                          ;83CC5D|4C5BCE  |83CE5B;
+    BEQ +                                                      ;83CC5B|F003    |83CC60;
+    JMP.W .label9                                              ;83CC5D|4C5BCE  |83CE5B;
  
  
-CODE_83CC60:
-    LDA.L nInGameHourCounter                                   ;83CC60|AF1D1F7F|7F1F1D;
-    BEQ CODE_83CC69                                            ;83CC64|F003    |83CC69;
-    JMP.W CODE_83CE5B                                          ;83CC66|4C5BCE  |83CE5B;
+  + LDA.L nInGameHourCounter                                   ;83CC60|AF1D1F7F|7F1F1D;
+    BEQ +                                                      ;83CC64|F003    |83CC69;
+    JMP.W .label9                                              ;83CC66|4C5BCE  |83CE5B;
  
  
-CODE_83CC69:
-    LDA.L nInGameMinuteCounter                                 ;83CC69|AF1E1F7F|7F1F1E;
-    BEQ CODE_83CC72                                            ;83CC6D|F003    |83CC72;
-    JMP.W CODE_83CE5B                                          ;83CC6F|4C5BCE  |83CE5B;
+  + LDA.L nInGameMinuteCounter                                 ;83CC69|AF1E1F7F|7F1F1E;
+    BEQ +                                                      ;83CC6D|F003    |83CC72;
+    JMP.W .label9                                              ;83CC6F|4C5BCE  |83CE5B;
  
  
-CODE_83CC72:
-    LDA.L nCurrentDay                                          ;83CC72|AF1B1F7F|7F1F1B;
+  + LDA.L nCurrentDay                                          ;83CC72|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83CC76|C901    |      ;
-    BNE CODE_83CC7D                                            ;83CC78|D003    |83CC7D;
-    JMP.W CODE_83CE5B                                          ;83CC7A|4C5BCE  |83CE5B;
+    BNE +                                                      ;83CC78|D003    |83CC7D;
+    JMP.W .label9                                              ;83CC7A|4C5BCE  |83CE5B;
  
  
-CODE_83CC7D:
-    CMP.B #$08                                                 ;83CC7D|C908    |      ;
-    BCC CODE_83CC9A                                            ;83CC7F|9019    |83CC9A;
+  + CMP.B #$08                                                 ;83CC7D|C908    |      ;
+    BCC .label4                                                ;83CC7F|9019    |83CC9A;
     CMP.B #$0D                                                 ;83CC81|C90D    |      ;
-    BCS CODE_83CC88                                            ;83CC83|B003    |83CC88;
-    JMP.W CODE_83CE5B                                          ;83CC85|4C5BCE  |83CE5B;
+    BCS +                                                      ;83CC83|B003    |83CC88;
+    JMP.W .label9                                              ;83CC85|4C5BCE  |83CE5B;
  
  
-CODE_83CC88:
-    CMP.B #$12                                                 ;83CC88|C912    |      ;
-    BCC CODE_83CC9A                                            ;83CC8A|900E    |83CC9A;
+  + CMP.B #$12                                                 ;83CC88|C912    |      ;
+    BCC .label4                                                ;83CC8A|900E    |83CC9A;
     CMP.B #$19                                                 ;83CC8C|C919    |      ;
-    BCS CODE_83CC93                                            ;83CC8E|B003    |83CC93;
-    JMP.W CODE_83CE5B                                          ;83CC90|4C5BCE  |83CE5B;
+    BCS +                                                      ;83CC8E|B003    |83CC93;
+    JMP.W .label9                                              ;83CC90|4C5BCE  |83CE5B;
  
  
-CODE_83CC93:
-    CMP.B #$1D                                                 ;83CC93|C91D    |      ;
-    BCC CODE_83CC9A                                            ;83CC95|9003    |83CC9A;
-    JMP.W CODE_83CE5B                                          ;83CC97|4C5BCE  |83CE5B;
+  + CMP.B #$1D                                                 ;83CC93|C91D    |      ;
+    BCC .label4                                                ;83CC95|9003    |83CC9A;
+    JMP.W .label9                                              ;83CC97|4C5BCE  |83CE5B;
  
  
-CODE_83CC9A:
+.label4:
     REP #$20                                                   ;83CC9A|C220    |      ;
     LDA.L strcEventFlags.flags2                                ;83CC9C|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83CCA0|290100  |      ;
-    BNE CODE_83CCE9                                            ;83CCA3|D044    |83CCE9;
+    BNE .label5                                                ;83CCA3|D044    |83CCE9;
     LDA.L strcEventFlags.flags2                                ;83CCA5|AF661F7F|7F1F66;
     AND.W #$0080                                               ;83CCA9|298000  |      ;
-    BNE CODE_83CCE9                                            ;83CCAC|D03B    |83CCE9;
+    BNE .label5                                                ;83CCAC|D03B    |83CCE9;
     LDA.L strcEventFlags.flags4                                ;83CCAE|AF6A1F7F|7F1F6A;
     AND.W #$2000                                               ;83CCB2|290020  |      ;
-    BNE CODE_83CCE9                                            ;83CCB5|D032    |83CCE9;
+    BNE .label5                                                ;83CCB5|D032    |83CCE9;
     LDA.L strcEventFlags.flags4                                ;83CCB7|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;83CCBB|290010  |      ;
-    BNE CODE_83CCE9                                            ;83CCBE|D029    |83CCE9;
+    BNE .label5                                                ;83CCBE|D029    |83CCE9;
     LDA.L nLove_Maria                                          ;83CCC0|AF1F1F7F|7F1F1F;
     CMP.W #$00C8                                               ;83CCC4|C9C800  |      ;
-    BCC CODE_83CCE9                                            ;83CCC7|9020    |83CCE9;
+    BCC .label5                                                ;83CCC7|9020    |83CCE9;
     LDA.L strcEventFlags.flags4                                ;83CCC9|AF6A1F7F|7F1F6A;
     ORA.W #$1000                                               ;83CCCD|090010  |      ;
     STA.L strcEventFlags.flags4                                ;83CCD0|8F6A1F7F|7F1F6A;
@@ -9068,23 +9053,23 @@ CODE_83CC9A:
     RTS                                                        ;83CCE8|60      |      ;
  
  
-CODE_83CCE9:
+.label5:
     REP #$20                                                   ;83CCE9|C220    |      ;
     LDA.L strcEventFlags.flags4                                ;83CCEB|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;83CCEF|290010  |      ;
-    BNE CODE_83CD38                                            ;83CCF2|D044    |83CD38;
+    BNE .label6                                                ;83CCF2|D044    |83CD38;
     LDA.L strcEventFlags.flags2                                ;83CCF4|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83CCF8|290200  |      ;
-    BNE CODE_83CD38                                            ;83CCFB|D03B    |83CD38;
+    BNE .label6                                                ;83CCFB|D03B    |83CD38;
     LDA.L strcEventFlags.flags4                                ;83CCFD|AF6A1F7F|7F1F6A;
     AND.W #$8000                                               ;83CD01|290080  |      ;
-    BNE CODE_83CD38                                            ;83CD04|D032    |83CD38;
+    BNE .label6                                                ;83CD04|D032    |83CD38;
     LDA.L strcEventFlags.flags4                                ;83CD06|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83CD0A|290040  |      ;
-    BNE CODE_83CD38                                            ;83CD0D|D029    |83CD38;
+    BNE .label6                                                ;83CD0D|D029    |83CD38;
     LDA.L nLove_Ann                                            ;83CD0F|AF211F7F|7F1F21;
     CMP.W #$00C8                                               ;83CD13|C9C800  |      ;
-    BCC CODE_83CD38                                            ;83CD16|9020    |83CD38;
+    BCC .label6                                                ;83CD16|9020    |83CD38;
     LDA.L strcEventFlags.flags4                                ;83CD18|AF6A1F7F|7F1F6A;
     ORA.W #$4000                                               ;83CD1C|090040  |      ;
     STA.L strcEventFlags.flags4                                ;83CD1F|8F6A1F7F|7F1F6A;
@@ -9098,26 +9083,26 @@ CODE_83CCE9:
     RTS                                                        ;83CD37|60      |      ;
  
  
-CODE_83CD38:
+.label6:
     REP #$20                                                   ;83CD38|C220    |      ;
     LDA.L strcEventFlags.flags4                                ;83CD3A|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;83CD3E|290010  |      ;
-    BNE CODE_83CD90                                            ;83CD41|D04D    |83CD90;
+    BNE .label7                                                ;83CD41|D04D    |83CD90;
     LDA.L strcEventFlags.flags4                                ;83CD43|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83CD47|290040  |      ;
-    BNE CODE_83CD90                                            ;83CD4A|D044    |83CD90;
+    BNE .label7                                                ;83CD4A|D044    |83CD90;
     LDA.L strcEventFlags.flags2                                ;83CD4C|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83CD50|290400  |      ;
-    BNE CODE_83CD90                                            ;83CD53|D03B    |83CD90;
+    BNE .label7                                                ;83CD53|D03B    |83CD90;
     LDA.L strcEventFlags.flags5                                ;83CD55|AF6C1F7F|7F1F6C;
     AND.W #$0002                                               ;83CD59|290200  |      ;
-    BNE CODE_83CD90                                            ;83CD5C|D032    |83CD90;
+    BNE .label7                                                ;83CD5C|D032    |83CD90;
     LDA.L strcEventFlags.flags5                                ;83CD5E|AF6C1F7F|7F1F6C;
     AND.W #$0001                                               ;83CD62|290100  |      ;
-    BNE CODE_83CD90                                            ;83CD65|D029    |83CD90;
+    BNE .label7                                                ;83CD65|D029    |83CD90;
     LDA.L nLove_Nina                                           ;83CD67|AF231F7F|7F1F23;
     CMP.W #$00C8                                               ;83CD6B|C9C800  |      ;
-    BCC CODE_83CD90                                            ;83CD6E|9020    |83CD90;
+    BCC .label7                                                ;83CD6E|9020    |83CD90;
     LDA.L strcEventFlags.flags5                                ;83CD70|AF6C1F7F|7F1F6C;
     ORA.W #$0001                                               ;83CD74|090100  |      ;
     STA.L strcEventFlags.flags5                                ;83CD77|8F6C1F7F|7F1F6C;
@@ -9131,29 +9116,29 @@ CODE_83CD38:
     RTS                                                        ;83CD8F|60      |      ;
  
  
-CODE_83CD90:
+.label7:
     REP #$20                                                   ;83CD90|C220    |      ;
     LDA.L strcEventFlags.flags4                                ;83CD92|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;83CD96|290010  |      ;
-    BNE CODE_83CDF1                                            ;83CD99|D056    |83CDF1;
+    BNE .label8                                                ;83CD99|D056    |83CDF1;
     LDA.L strcEventFlags.flags4                                ;83CD9B|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83CD9F|290040  |      ;
-    BNE CODE_83CDF1                                            ;83CDA2|D04D    |83CDF1;
+    BNE .label8                                                ;83CDA2|D04D    |83CDF1;
     LDA.L strcEventFlags.flags5                                ;83CDA4|AF6C1F7F|7F1F6C;
     AND.W #$0001                                               ;83CDA8|290100  |      ;
-    BNE CODE_83CDF1                                            ;83CDAB|D044    |83CDF1;
+    BNE .label8                                                ;83CDAB|D044    |83CDF1;
     LDA.L strcEventFlags.flags2                                ;83CDAD|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83CDB1|290800  |      ;
-    BNE CODE_83CDF1                                            ;83CDB4|D03B    |83CDF1;
+    BNE .label8                                                ;83CDB4|D03B    |83CDF1;
     LDA.L strcEventFlags.flags5                                ;83CDB6|AF6C1F7F|7F1F6C;
     AND.W #$0008                                               ;83CDBA|290800  |      ;
-    BNE CODE_83CDF1                                            ;83CDBD|D032    |83CDF1;
+    BNE .label8                                                ;83CDBD|D032    |83CDF1;
     LDA.L strcEventFlags.flags5                                ;83CDBF|AF6C1F7F|7F1F6C;
     AND.W #$0004                                               ;83CDC3|290400  |      ;
-    BNE CODE_83CDF1                                            ;83CDC6|D029    |83CDF1;
+    BNE .label8                                                ;83CDC6|D029    |83CDF1;
     LDA.L nLove_Ellen                                          ;83CDC8|AF251F7F|7F1F25;
     CMP.W #$00C8                                               ;83CDCC|C9C800  |      ;
-    BCC CODE_83CDF1                                            ;83CDCF|9020    |83CDF1;
+    BCC .label8                                                ;83CDCF|9020    |83CDF1;
     LDA.L strcEventFlags.flags5                                ;83CDD1|AF6C1F7F|7F1F6C;
     ORA.W #$0004                                               ;83CDD5|090400  |      ;
     STA.L strcEventFlags.flags5                                ;83CDD8|8F6C1F7F|7F1F6C;
@@ -9167,32 +9152,32 @@ CODE_83CD90:
     RTS                                                        ;83CDF0|60      |      ;
  
  
-CODE_83CDF1:
+.label8:
     REP #$20                                                   ;83CDF1|C220    |      ;
     LDA.L strcEventFlags.flags4                                ;83CDF3|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;83CDF7|290010  |      ;
-    BNE CODE_83CE5B                                            ;83CDFA|D05F    |83CE5B;
+    BNE .label9                                                ;83CDFA|D05F    |83CE5B;
     LDA.L strcEventFlags.flags4                                ;83CDFC|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83CE00|290040  |      ;
-    BNE CODE_83CE5B                                            ;83CE03|D056    |83CE5B;
+    BNE .label9                                                ;83CE03|D056    |83CE5B;
     LDA.L strcEventFlags.flags5                                ;83CE05|AF6C1F7F|7F1F6C;
     AND.W #$0001                                               ;83CE09|290100  |      ;
-    BNE CODE_83CE5B                                            ;83CE0C|D04D    |83CE5B;
+    BNE .label9                                                ;83CE0C|D04D    |83CE5B;
     LDA.L strcEventFlags.flags5                                ;83CE0E|AF6C1F7F|7F1F6C;
     AND.W #$0004                                               ;83CE12|290400  |      ;
-    BNE CODE_83CE5B                                            ;83CE15|D044    |83CE5B;
+    BNE .label9                                                ;83CE15|D044    |83CE5B;
     LDA.L strcEventFlags.flags2                                ;83CE17|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83CE1B|291000  |      ;
-    BNE CODE_83CE5B                                            ;83CE1E|D03B    |83CE5B;
+    BNE .label9                                                ;83CE1E|D03B    |83CE5B;
     LDA.L strcEventFlags.flags5                                ;83CE20|AF6C1F7F|7F1F6C;
     AND.W #$0020                                               ;83CE24|292000  |      ;
-    BNE CODE_83CE5B                                            ;83CE27|D032    |83CE5B;
+    BNE .label9                                                ;83CE27|D032    |83CE5B;
     LDA.L strcEventFlags.flags5                                ;83CE29|AF6C1F7F|7F1F6C;
     AND.W #$0010                                               ;83CE2D|291000  |      ;
-    BNE CODE_83CE5B                                            ;83CE30|D029    |83CE5B;
+    BNE .label9                                                ;83CE30|D029    |83CE5B;
     LDA.L nLove_Eve                                            ;83CE32|AF271F7F|7F1F27;
     CMP.W #$00C8                                               ;83CE36|C9C800  |      ;
-    BCC CODE_83CE5B                                            ;83CE39|9020    |83CE5B;
+    BCC .label9                                                ;83CE39|9020    |83CE5B;
     LDA.L strcEventFlags.flags5                                ;83CE3B|AF6C1F7F|7F1F6C;
     ORA.W #$0010                                               ;83CE3F|091000  |      ;
     STA.L strcEventFlags.flags5                                ;83CE42|8F6C1F7F|7F1F6C;
@@ -9206,11 +9191,11 @@ CODE_83CDF1:
     RTS                                                        ;83CE5A|60      |      ;
  
  
-CODE_83CE5B:
+.label9:
     REP #$30                                                   ;83CE5B|C230    |      ;
     LDA.L strcDailyFlags.flags1                                ;83CE5D|AF5A1F7F|7F1F5A;
     AND.W #$0002                                               ;83CE61|290200  |      ;
-    BEQ CODE_83CE93                                            ;83CE64|F02D    |83CE93;
+    BEQ .label10                                               ;83CE64|F02D    |83CE93;
     REP #$20                                                   ;83CE66|C220    |      ;
     LDA.W #$0007                                               ;83CE68|A90700  |      ;
     LDX.W #$0000                                               ;83CE6B|A20000  |      ;
@@ -9231,11 +9216,11 @@ CODE_83CE5B:
     RTS                                                        ;83CE92|60      |      ;
  
  
-CODE_83CE93:
+.label10:
     REP #$30                                                   ;83CE93|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83CE95|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83CE99|290100  |      ;
-    BNE CODE_83CEAE                                            ;83CE9C|D010    |83CEAE;
+    BNE .label11                                               ;83CE9C|D010    |83CEAE;
     REP #$30                                                   ;83CE9E|C230    |      ;
     LDA.W #$0000                                               ;83CEA0|A90000  |      ;
     LDX.W #$000A                                               ;83CEA3|A20A00  |      ;
@@ -9244,11 +9229,11 @@ CODE_83CE93:
     RTS                                                        ;83CEAD|60      |      ;
  
  
-CODE_83CEAE:
+.label11:
     REP #$30                                                   ;83CEAE|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83CEB0|AF681F7F|7F1F68;
     AND.W #$0020                                               ;83CEB4|292000  |      ;
-    BNE CODE_83CEDD                                            ;83CEB7|D024    |83CEDD;
+    BNE .label12                                               ;83CEB7|D024    |83CEDD;
     REP #$30                                                   ;83CEB9|C230    |      ;
     LDA.W #$0000                                               ;83CEBB|A90000  |      ;
     LDX.W #$000C                                               ;83CEBE|A20C00  |      ;
@@ -9264,11 +9249,11 @@ CODE_83CEAE:
     RTS                                                        ;83CEDC|60      |      ;
  
  
-CODE_83CEDD:
+.label12:
     REP #$30                                                   ;83CEDD|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83CEDF|AF681F7F|7F1F68;
     AND.W #$0080                                               ;83CEE3|298000  |      ;
-    BNE CODE_83CF10                                            ;83CEE6|D028    |83CF10;
+    BNE .label13                                               ;83CEE6|D028    |83CF10;
     REP #$30                                                   ;83CEE8|C230    |      ;
     LDA.W #$0000                                               ;83CEEA|A90000  |      ;
     LDX.W #$000C                                               ;83CEED|A20C00  |      ;
@@ -9285,24 +9270,23 @@ CODE_83CEDD:
     RTS                                                        ;83CF0F|60      |      ;
  
  
-CODE_83CF10:
+.label13:
     SEP #$20                                                   ;83CF10|E220    |      ;
     REP #$10                                                   ;83CF12|C210    |      ;
     LDA.W nWeatherForecast                                     ;83CF14|AD8C09  |00098C;
     CMP.B #$06                                                 ;83CF17|C906    |      ;
-    BCC CODE_83CF42                                            ;83CF19|9027    |83CF42;
+    BCC .label14                                               ;83CF19|9027    |83CF42;
     LDA.L nCurrentTimeID                                       ;83CF1B|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF1F|C906    |      ;
-    BNE CODE_83CF42                                            ;83CF21|D01F    |83CF42;
+    BNE .label14                                               ;83CF21|D01F    |83CF42;
     LDA.L nInGameHourCounter                                   ;83CF23|AF1D1F7F|7F1F1D;
-    BNE CODE_83CF42                                            ;83CF27|D019    |83CF42;
+    BNE .label14                                               ;83CF27|D019    |83CF42;
     LDA.L nInGameMinuteCounter                                 ;83CF29|AF1E1F7F|7F1F1E;
-    BEQ CODE_83CF32                                            ;83CF2D|F003    |83CF32;
-    JMP.W CODE_83CFF8                                          ;83CF2F|4CF8CF  |83CFF8;
+    BEQ +                                                      ;83CF2D|F003    |83CF32;
+    JMP.W .label17                                             ;83CF2F|4CF8CF  |83CFF8;
  
  
-CODE_83CF32:
-    REP #$30                                                   ;83CF32|C230    |      ;
+  + REP #$30                                                   ;83CF32|C230    |      ;
     LDA.W #$0006                                               ;83CF34|A90600  |      ;
     LDX.W #$0024                                               ;83CF37|A22400  |      ;
     LDY.W #$0000                                               ;83CF3A|A00000  |      ;
@@ -9310,19 +9294,19 @@ CODE_83CF32:
     RTS                                                        ;83CF41|60      |      ;
  
  
-CODE_83CF42:
+.label14:
     REP #$30                                                   ;83CF42|C230    |      ;
     LDA.L strcEventFlags.flags7                                ;83CF44|AF701F7F|7F1F70;
     AND.W #$0002                                               ;83CF48|290200  |      ;
-    BEQ CODE_83CF73                                            ;83CF4B|F026    |83CF73;
+    BEQ .label15                                               ;83CF4B|F026    |83CF73;
     SEP #$20                                                   ;83CF4D|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CF4F|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF53|C906    |      ;
-    BNE CODE_83CF73                                            ;83CF55|D01C    |83CF73;
+    BNE .label15                                               ;83CF55|D01C    |83CF73;
     LDA.L nInGameHourCounter                                   ;83CF57|AF1D1F7F|7F1F1D;
-    BNE CODE_83CF73                                            ;83CF5B|D016    |83CF73;
+    BNE .label15                                               ;83CF5B|D016    |83CF73;
     LDA.L nInGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E;
-    BNE CODE_83CF73                                            ;83CF61|D010    |83CF73;
+    BNE .label15                                               ;83CF61|D010    |83CF73;
     REP #$30                                                   ;83CF63|C230    |      ;
     LDA.W #$0006                                               ;83CF65|A90600  |      ;
     LDX.W #$0024                                               ;83CF68|A22400  |      ;
@@ -9331,19 +9315,19 @@ CODE_83CF42:
     RTS                                                        ;83CF72|60      |      ;
  
  
-CODE_83CF73:
+.label15:
     REP #$30                                                   ;83CF73|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83CF75|AF641F7F|7F1F64;
     AND.W #$0010                                               ;83CF79|291000  |      ;
-    BEQ CODE_83CFA4                                            ;83CF7C|F026    |83CFA4;
+    BEQ .label16                                               ;83CF7C|F026    |83CFA4;
     SEP #$20                                                   ;83CF7E|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CF80|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF84|C906    |      ;
-    BNE CODE_83CFA4                                            ;83CF86|D01C    |83CFA4;
+    BNE .label16                                               ;83CF86|D01C    |83CFA4;
     LDA.L nInGameHourCounter                                   ;83CF88|AF1D1F7F|7F1F1D;
-    BNE CODE_83CFA4                                            ;83CF8C|D016    |83CFA4;
+    BNE .label16                                               ;83CF8C|D016    |83CFA4;
     LDA.L nInGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E;
-    BNE CODE_83CFA4                                            ;83CF92|D010    |83CFA4;
+    BNE .label16                                               ;83CF92|D010    |83CFA4;
     REP #$30                                                   ;83CF94|C230    |      ;
     LDA.W #$0006                                               ;83CF96|A90600  |      ;
     LDX.W #$0024                                               ;83CF99|A22400  |      ;
@@ -9352,27 +9336,27 @@ CODE_83CF73:
     RTS                                                        ;83CFA3|60      |      ;
  
  
-CODE_83CFA4:
+.label16:
     REP #$30                                                   ;83CFA4|C230    |      ;
     LDA.L strcEventFlags.flags7                                ;83CFA6|AF701F7F|7F1F70;
     AND.W #$0001                                               ;83CFAA|290100  |      ;
-    BNE CODE_83CFF8                                            ;83CFAD|D049    |83CFF8;
+    BNE .label17                                               ;83CFAD|D049    |83CFF8;
     SEP #$20                                                   ;83CFAF|E220    |      ;
     LDA.L nCurrentYearID                                       ;83CFB1|AF181F7F|7F1F18;
-    BNE CODE_83CFF8                                            ;83CFB5|D041    |83CFF8;
+    BNE .label17                                               ;83CFB5|D041    |83CFF8;
     LDA.L nCurrentSeasonID                                     ;83CFB7|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;83CFBB|C901    |      ;
-    BNE CODE_83CFF8                                            ;83CFBD|D039    |83CFF8;
+    BNE .label17                                               ;83CFBD|D039    |83CFF8;
     LDA.L nCurrentDay                                          ;83CFBF|AF1B1F7F|7F1F1B;
     CMP.B #$14                                                 ;83CFC3|C914    |      ;
-    BCS CODE_83CFF8                                            ;83CFC5|B031    |83CFF8;
+    BCS .label17                                               ;83CFC5|B031    |83CFF8;
     LDA.L nCurrentTimeID                                       ;83CFC7|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CFCB|C906    |      ;
-    BNE CODE_83CFF8                                            ;83CFCD|D029    |83CFF8;
+    BNE .label17                                               ;83CFCD|D029    |83CFF8;
     LDA.L nInGameHourCounter                                   ;83CFCF|AF1D1F7F|7F1F1D;
-    BNE CODE_83CFF8                                            ;83CFD3|D023    |83CFF8;
+    BNE .label17                                               ;83CFD3|D023    |83CFF8;
     LDA.L nInGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E;
-    BNE CODE_83CFF8                                            ;83CFD9|D01D    |83CFF8;
+    BNE .label17                                               ;83CFD9|D01D    |83CFF8;
     REP #$20                                                   ;83CFDB|C220    |      ;
     LDA.L strcEventFlags.flags7                                ;83CFDD|AF701F7F|7F1F70;
     ORA.W #$0001                                               ;83CFE1|090100  |      ;
@@ -9385,11 +9369,11 @@ CODE_83CFA4:
     RTS                                                        ;83CFF7|60      |      ;
  
  
-CODE_83CFF8:
+.label17:
     REP #$30                                                   ;83CFF8|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83CFFA|AF661F7F|7F1F66;
     AND.W #$0040                                               ;83CFFE|294000  |      ;
-    BEQ CODE_83D03D                                            ;83D001|F03A    |83D03D;
+    BEQ .label18                                               ;83D001|F03A    |83D03D;
     REP #$20                                                   ;83D003|C220    |      ;
     LDA.W #$0009                                               ;83D005|A90900  |      ;
     LDX.W #$0000                                               ;83D008|A20000  |      ;
@@ -9414,14 +9398,14 @@ CODE_83CFF8:
     RTS                                                        ;83D03C|60      |      ;
  
  
-CODE_83D03D:
+.label18:
     REP #$30                                                   ;83D03D|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D03F|AF661F7F|7F1F66;
     AND.W #$0080                                               ;83D043|298000  |      ;
-    BEQ CODE_83D060                                            ;83D046|F018    |83D060;
+    BEQ .label19                                               ;83D046|F018    |83D060;
     SEP #$20                                                   ;83D048|E220    |      ;
     LDA.L nConstructionDayCounter                              ;83D04A|AF351F7F|7F1F35;
-    BEQ CODE_83D060                                            ;83D04E|F010    |83D060;
+    BEQ .label19                                               ;83D04E|F010    |83D060;
     REP #$30                                                   ;83D050|C230    |      ;
     LDA.W #$0000                                               ;83D052|A90000  |      ;
     LDX.W #$0000                                               ;83D055|A20000  |      ;
@@ -9430,11 +9414,11 @@ CODE_83D03D:
     RTS                                                        ;83D05F|60      |      ;
  
  
-CODE_83D060:
+.label19:
     REP #$30                                                   ;83D060|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D062|AF661F7F|7F1F66;
     AND.W #$0100                                               ;83D066|290001  |      ;
-    BEQ CODE_83D0B2                                            ;83D069|F047    |83D0B2;
+    BEQ .label20                                               ;83D069|F047    |83D0B2;
     LDA.L strcEventFlags.flags2                                ;83D06B|AF661F7F|7F1F66;
     AND.W #$FEFF                                               ;83D06F|29FFFE  |      ;
     STA.L strcEventFlags.flags2                                ;83D072|8F661F7F|7F1F66;
@@ -9463,15 +9447,15 @@ CODE_83D060:
     RTS                                                        ;83D0B1|60      |      ;
  
  
-CODE_83D0B2:
+.label20:
     REP #$30                                                   ;83D0B2|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D0B4|AF641F7F|7F1F64;
     AND.W #$0100                                               ;83D0B8|290001  |      ;
-    BNE CODE_83D0FF                                            ;83D0BB|D042    |83D0FF;
+    BNE .label21                                               ;83D0BB|D042    |83D0FF;
     SEP #$20                                                   ;83D0BD|E220    |      ;
     LDA.L nHorseAge                                            ;83D0BF|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;83D0C3|C915    |      ;
-    BNE CODE_83D0FF                                            ;83D0C5|D038    |83D0FF;
+    BNE .label21                                               ;83D0C5|D038    |83D0FF;
     REP #$30                                                   ;83D0C7|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D0C9|AF641F7F|7F1F64;
     ORA.W #$0100                                               ;83D0CD|090001  |      ;
@@ -9495,22 +9479,22 @@ CODE_83D0B2:
     RTS                                                        ;83D0FE|60      |      ;
  
  
-CODE_83D0FF:
+.label21:
     SEP #$20                                                   ;83D0FF|E220    |      ;
     REP #$10                                                   ;83D101|C210    |      ;
     LDA.L nCurrentYearID                                       ;83D103|AF181F7F|7F1F18;
-    BEQ CODE_83D163                                            ;83D107|F05A    |83D163;
+    BEQ .label22                                               ;83D107|F05A    |83D163;
     LDA.L nCurrentTimeID                                       ;83D109|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D10D|C906    |      ;
-    BNE CODE_83D163                                            ;83D10F|D052    |83D163;
+    BNE .label22                                               ;83D10F|D052    |83D163;
     LDA.L nInGameHourCounter                                   ;83D111|AF1D1F7F|7F1F1D;
-    BNE CODE_83D163                                            ;83D115|D04C    |83D163;
+    BNE .label22                                               ;83D115|D04C    |83D163;
     LDA.L nInGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E;
-    BNE CODE_83D163                                            ;83D11B|D046    |83D163;
+    BNE .label22                                               ;83D11B|D046    |83D163;
     REP #$20                                                   ;83D11D|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D11F|AD9601  |000196;
     AND.W #$001A                                               ;83D122|291A00  |      ;
-    BNE CODE_83D163                                            ;83D125|D03C    |83D163;
+    BNE .label22                                               ;83D125|D03C    |83D163;
     REP #$20                                                   ;83D127|C220    |      ;
     LDA.L nMoney                                               ;83D129|AF041F7F|7F1F04;
     CLC                                                        ;83D12D|18      |      ;
@@ -9518,11 +9502,11 @@ CODE_83D0FF:
     SEP #$20                                                   ;83D131|E220    |      ;
     LDA.L nMoney+2                                             ;83D133|AF061F7F|7F1F06;
     ADC.B #$FF                                                 ;83D137|69FF    |      ;
-    BMI CODE_83D163                                            ;83D139|3028    |83D163;
+    BMI .label22                                               ;83D139|3028    |83D163;
     REP #$30                                                   ;83D13B|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D13D|AF681F7F|7F1F68;
     AND.W #$0400                                               ;83D141|290004  |      ;
-    BNE CODE_83D163                                            ;83D144|D01D    |83D163;
+    BNE .label22                                               ;83D144|D01D    |83D163;
     REP #$30                                                   ;83D146|C230    |      ;
     LDA.W #$0000                                               ;83D148|A90000  |      ;
     LDX.W #$0013                                               ;83D14B|A21300  |      ;
@@ -9535,39 +9519,39 @@ CODE_83D0FF:
     RTS                                                        ;83D162|60      |      ;
  
  
-CODE_83D163:
+.label22:
     SEP #$20                                                   ;83D163|E220    |      ;
     REP #$10                                                   ;83D165|C210    |      ;
     LDA.L nCurrentYearID                                       ;83D167|AF181F7F|7F1F18;
-    BNE CODE_83D175                                            ;83D16B|D008    |83D175;
+    BNE .label23                                               ;83D16B|D008    |83D175;
     LDA.L nCurrentSeasonID                                     ;83D16D|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83D171|C903    |      ;
-    BNE CODE_83D1CE                                            ;83D173|D059    |83D1CE;
+    BNE .label24                                               ;83D173|D059    |83D1CE;
  
-CODE_83D175:
+.label23:
     SEP #$20                                                   ;83D175|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83D177|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D17B|C906    |      ;
-    BNE CODE_83D1CE                                            ;83D17D|D04F    |83D1CE;
+    BNE .label24                                               ;83D17D|D04F    |83D1CE;
     LDA.L nInGameHourCounter                                   ;83D17F|AF1D1F7F|7F1F1D;
-    BNE CODE_83D1CE                                            ;83D183|D049    |83D1CE;
+    BNE .label24                                               ;83D183|D049    |83D1CE;
     LDA.L nInGameMinuteCounter                                 ;83D185|AF1E1F7F|7F1F1E;
-    BNE CODE_83D1CE                                            ;83D189|D043    |83D1CE;
+    BNE .label24                                               ;83D189|D043    |83D1CE;
     LDA.L nCurrentWeekdayID                                    ;83D18B|AF1A1F7F|7F1F1A;
     CMP.B #$06                                                 ;83D18F|C906    |      ;
-    BNE CODE_83D1CE                                            ;83D191|D03B    |83D1CE;
+    BNE .label24                                               ;83D191|D03B    |83D1CE;
     REP #$20                                                   ;83D193|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D195|AD9601  |000196;
     AND.W #$001A                                               ;83D198|291A00  |      ;
-    BNE CODE_83D1CE                                            ;83D19B|D031    |83D1CE;
+    BNE .label24                                               ;83D19B|D031    |83D1CE;
     REP #$30                                                   ;83D19D|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D19F|AF641F7F|7F1F64;
     AND.W #$00C0                                               ;83D1A3|29C000  |      ;
-    BEQ CODE_83D1CE                                            ;83D1A6|F026    |83D1CE;
+    BEQ .label24                                               ;83D1A6|F026    |83D1CE;
     REP #$30                                                   ;83D1A8|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D1AA|AF681F7F|7F1F68;
     AND.W #$4000                                               ;83D1AE|290040  |      ;
-    BNE CODE_83D1CE                                            ;83D1B1|D01B    |83D1CE;
+    BNE .label24                                               ;83D1B1|D01B    |83D1CE;
     LDA.L strcEventFlags.flags3                                ;83D1B3|AF681F7F|7F1F68;
     ORA.W #$4000                                               ;83D1B7|090040  |      ;
     STA.L strcEventFlags.flags3                                ;83D1BA|8F681F7F|7F1F68;
@@ -9579,45 +9563,45 @@ CODE_83D175:
     RTS                                                        ;83D1CD|60      |      ;
  
  
-CODE_83D1CE:
+.label24:
     SEP #$20                                                   ;83D1CE|E220    |      ;
     REP #$10                                                   ;83D1D0|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D1D2|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83D1D6|C902    |      ;
-    BNE CODE_83D23E                                            ;83D1D8|D064    |83D23E;
+    BNE .label26                                               ;83D1D8|D064    |83D23E;
     LDA.L nCurrentDay                                          ;83D1DA|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83D1DE|C901    |      ;
-    BEQ CODE_83D23E                                            ;83D1E0|F05C    |83D23E;
+    BEQ .label26                                               ;83D1E0|F05C    |83D23E;
     CMP.B #$08                                                 ;83D1E2|C908    |      ;
-    BCC CODE_83D1F8                                            ;83D1E4|9012    |83D1F8;
+    BCC .label25                                               ;83D1E4|9012    |83D1F8;
     CMP.B #$0D                                                 ;83D1E6|C90D    |      ;
-    BCC CODE_83D23E                                            ;83D1E8|9054    |83D23E;
+    BCC .label26                                               ;83D1E8|9054    |83D23E;
     CMP.B #$12                                                 ;83D1EA|C912    |      ;
-    BCC CODE_83D1F8                                            ;83D1EC|900A    |83D1F8;
+    BCC .label25                                               ;83D1EC|900A    |83D1F8;
     CMP.B #$19                                                 ;83D1EE|C919    |      ;
-    BCC CODE_83D23E                                            ;83D1F0|904C    |83D23E;
+    BCC .label26                                               ;83D1F0|904C    |83D23E;
     CMP.B #$1D                                                 ;83D1F2|C91D    |      ;
-    BCC CODE_83D1F8                                            ;83D1F4|9002    |83D1F8;
-    BRA CODE_83D23E                                            ;83D1F6|8046    |83D23E;
+    BCC .label25                                               ;83D1F4|9002    |83D1F8;
+    BRA .label26                                               ;83D1F6|8046    |83D23E;
  
  
-CODE_83D1F8:
+.label25:
     REP #$20                                                   ;83D1F8|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D1FA|AD9601  |000196;
     AND.W #$001A                                               ;83D1FD|291A00  |      ;
-    BNE CODE_83D23E                                            ;83D200|D03C    |83D23E;
+    BNE .label26                                               ;83D200|D03C    |83D23E;
     REP #$30                                                   ;83D202|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D204|AF641F7F|7F1F64;
     AND.W #$00C0                                               ;83D208|29C000  |      ;
-    BEQ CODE_83D23E                                            ;83D20B|F031    |83D23E;
+    BEQ .label26                                               ;83D20B|F031    |83D23E;
     REP #$30                                                   ;83D20D|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D20F|AF681F7F|7F1F68;
     AND.W #$2000                                               ;83D213|290020  |      ;
-    BEQ CODE_83D23E                                            ;83D216|F026    |83D23E;
+    BEQ .label26                                               ;83D216|F026    |83D23E;
     REP #$30                                                   ;83D218|C230    |      ;
     LDA.L strcEventFlags.flags4                                ;83D21A|AF6A1F7F|7F1F6A;
     AND.W #$0100                                               ;83D21E|290001  |      ;
-    BNE CODE_83D23E                                            ;83D221|D01B    |83D23E;
+    BNE .label26                                               ;83D221|D01B    |83D23E;
     LDA.L strcEventFlags.flags4                                ;83D223|AF6A1F7F|7F1F6A;
     ORA.W #$0080                                               ;83D227|098000  |      ;
     STA.L strcEventFlags.flags4                                ;83D22A|8F6A1F7F|7F1F6A;
@@ -9629,37 +9613,37 @@ CODE_83D1F8:
     RTS                                                        ;83D23D|60      |      ;
  
  
-CODE_83D23E:
+.label26:
     REP #$30                                                   ;83D23E|C230    |      ;
     LDA.L strcEventFlags.flags4                                ;83D240|AF6A1F7F|7F1F6A;
     AND.W #$0800                                               ;83D244|290008  |      ;
-    BNE CODE_83D29E                                            ;83D247|D055    |83D29E;
+    BNE .label28                                               ;83D247|D055    |83D29E;
     LDA.L strcEventFlags.flags4                                ;83D249|AF6A1F7F|7F1F6A;
     AND.W #$0400                                               ;83D24D|290004  |      ;
-    BNE CODE_83D28E                                            ;83D250|D03C    |83D28E;
+    BNE .label27                                               ;83D250|D03C    |83D28E;
     LDA.W nMapEngine_flags                                     ;83D252|AD9601  |000196;
     AND.W #$001E                                               ;83D255|291E00  |      ;
-    BNE CODE_83D29E                                            ;83D258|D044    |83D29E;
+    BNE .label28                                               ;83D258|D044    |83D29E;
     LDA.L strcEventFlags.flags6                                ;83D25A|AF6E1F7F|7F1F6E;
     AND.W #$0400                                               ;83D25E|290004  |      ;
-    BEQ CODE_83D29E                                            ;83D261|F03B    |83D29E;
+    BEQ .label28                                               ;83D261|F03B    |83D29E;
     SEP #$20                                                   ;83D263|E220    |      ;
     LDA.L nOwnedChickens                                       ;83D265|AF0B1F7F|7F1F0B;
     CMP.B #$06                                                 ;83D269|C906    |      ;
-    BCC CODE_83D29E                                            ;83D26B|9031    |83D29E;
+    BCC .label28                                               ;83D26B|9031    |83D29E;
     LDA.L nCurrentTimeID                                       ;83D26D|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D271|C906    |      ;
-    BNE CODE_83D29E                                            ;83D273|D029    |83D29E;
+    BNE .label28                                               ;83D273|D029    |83D29E;
     LDA.L nInGameHourCounter                                   ;83D275|AF1D1F7F|7F1F1D;
-    BNE CODE_83D29E                                            ;83D279|D023    |83D29E;
+    BNE .label28                                               ;83D279|D023    |83D29E;
     LDA.L nInGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E;
-    BNE CODE_83D29E                                            ;83D27F|D01D    |83D29E;
+    BNE .label28                                               ;83D27F|D01D    |83D29E;
     REP #$20                                                   ;83D281|C220    |      ;
     LDA.L strcEventFlags.flags4                                ;83D283|AF6A1F7F|7F1F6A;
     ORA.W #$0400                                               ;83D287|090004  |      ;
     STA.L strcEventFlags.flags4                                ;83D28A|8F6A1F7F|7F1F6A;
  
-CODE_83D28E:
+.label27:
     REP #$30                                                   ;83D28E|C230    |      ;
     LDA.W #$0000                                               ;83D290|A90000  |      ;
     LDX.W #$0029                                               ;83D293|A22900  |      ;
@@ -9668,22 +9652,22 @@ CODE_83D28E:
     RTS                                                        ;83D29D|60      |      ;
  
  
-CODE_83D29E:
+.label28:
     REP #$30                                                   ;83D29E|C230    |      ;
     LDA.W nMapEngine_flags                                     ;83D2A0|AD9601  |000196;
     AND.W #$001A                                               ;83D2A3|291A00  |      ;
-    BNE CODE_83D2DF                                            ;83D2A6|D037    |83D2DF;
+    BNE .justReturn                                            ;83D2A6|D037    |83D2DF;
     SEP #$20                                                   ;83D2A8|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83D2AA|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D2AE|C906    |      ;
-    BNE CODE_83D2DF                                            ;83D2B0|D02D    |83D2DF;
+    BNE .justReturn                                            ;83D2B0|D02D    |83D2DF;
     LDA.L nInGameHourCounter                                   ;83D2B2|AF1D1F7F|7F1F1D;
-    BNE CODE_83D2DF                                            ;83D2B6|D027    |83D2DF;
+    BNE .justReturn                                            ;83D2B6|D027    |83D2DF;
     LDA.L nInGameMinuteCounter                                 ;83D2B8|AF1E1F7F|7F1F1E;
-    BNE CODE_83D2DF                                            ;83D2BC|D021    |83D2DF;
+    BNE .justReturn                                            ;83D2BC|D021    |83D2DF;
     LDA.B #$08                                                 ;83D2BE|A908    |      ;
     JSL.L fCore_GetRandomNumber                                ;83D2C0|22F98980|8089F9;
-    BNE CODE_83D2DF                                            ;83D2C4|D019    |83D2DF;
+    BNE .justReturn                                            ;83D2C4|D019    |83D2DF;
     REP #$30                                                   ;83D2C6|C230    |      ;
     LDA.W #$0000                                               ;83D2C8|A90000  |      ;
     LDX.W #$0023                                               ;83D2CB|A22300  |      ;
@@ -9695,15 +9679,15 @@ CODE_83D29E:
     RTS                                                        ;83D2DE|60      |      ;
  
  
-CODE_83D2DF:
+.justReturn:
     RTS                                                        ;83D2DF|60      |      ;
  
  
-fAreaInit_Town:
+fAreaEvents_Town:
     REP #$30                                                   ;83D2E0|C230    |      ;
     LDA.L strcDailyFlags.flags4                                ;83D2E2|AF601F7F|7F1F60;
     AND.W #$0400                                               ;83D2E6|290004  |      ;
-    BEQ CODE_83D304                                            ;83D2E9|F019    |83D304;
+    BEQ +                                                      ;83D2E9|F019    |83D304;
     LDA.L strcDailyFlags.flags4                                ;83D2EB|AF601F7F|7F1F60;
     AND.W #$FBFF                                               ;83D2EF|29FFFB  |      ;
     STA.B $60                                                  ;83D2F2|8560    |000060;
@@ -9715,31 +9699,27 @@ fAreaInit_Town:
     RTS                                                        ;83D303|60      |      ;
  
  
-CODE_83D304:
-    SEP #$20                                                   ;83D304|E220    |      ;
+  + SEP #$20                                                   ;83D304|E220    |      ;
     REP #$10                                                   ;83D306|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D308|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83D30C|C902    |      ;
-    BEQ CODE_83D313                                            ;83D30E|F003    |83D313;
-    JMP.W CODE_83D3B8                                          ;83D310|4CB8D3  |83D3B8;
+    BEQ +                                                      ;83D30E|F003    |83D313;
+    JMP.W .label1                                              ;83D310|4CB8D3  |83D3B8;
  
  
-CODE_83D313:
-    LDA.L nCurrentDay                                          ;83D313|AF1B1F7F|7F1F1B;
+  + LDA.L nCurrentDay                                          ;83D313|AF1B1F7F|7F1F1B;
     CMP.B #$14                                                 ;83D317|C914    |      ;
-    BEQ CODE_83D31E                                            ;83D319|F003    |83D31E;
-    JMP.W CODE_83D3B8                                          ;83D31B|4CB8D3  |83D3B8;
+    BEQ +                                                      ;83D319|F003    |83D31E;
+    JMP.W .label1                                              ;83D31B|4CB8D3  |83D3B8;
  
  
-CODE_83D31E:
-    LDA.L nCurrentTimeID                                       ;83D31E|AF1C1F7F|7F1F1C;
+  + LDA.L nCurrentTimeID                                       ;83D31E|AF1C1F7F|7F1F1C;
     CMP.B #$0F                                                 ;83D322|C90F    |      ;
-    BCC CODE_83D329                                            ;83D324|9003    |83D329;
-    JMP.W CODE_83D3B8                                          ;83D326|4CB8D3  |83D3B8;
+    BCC +                                                      ;83D324|9003    |83D329;
+    JMP.W .label1                                              ;83D326|4CB8D3  |83D3B8;
  
  
-CODE_83D329:
-    REP #$30                                                   ;83D329|C230    |      ;
+  + REP #$30                                                   ;83D329|C230    |      ;
     LDA.W #$0015                                               ;83D32B|A91500  |      ;
     LDX.W #$0000                                               ;83D32E|A20000  |      ;
     LDY.W #$007E                                               ;83D331|A07E00  |      ;
@@ -9765,8 +9745,7 @@ CODE_83D329:
     STA.W $09AB                                                ;83D363|8DAB09  |0009AB;
     LDY.W #$0000                                               ;83D366|A00000  |      ;
  
-CODE_83D369:
-    SEP #$20                                                   ;83D369|E220    |      ;
+  - SEP #$20                                                   ;83D369|E220    |      ;
     REP #$10                                                   ;83D36B|C210    |      ;
     PHY                                                        ;83D36D|5A      |      ;
     TYX                                                        ;83D36E|BB      |      ;
@@ -9794,7 +9773,7 @@ CODE_83D369:
     PLY                                                        ;83D39C|7A      |      ;
     INY                                                        ;83D39D|C8      |      ;
     CPY.W #$0007                                               ;83D39E|C00700  |      ;
-    BNE CODE_83D369                                            ;83D3A1|D0C6    |83D369;
+    BNE -                                                      ;83D3A1|D0C6    |83D369;
     SEP #$20                                                   ;83D3A3|E220    |      ;
     STZ.W $09A2                                                ;83D3A5|9CA209  |0009A2;
     REP #$30                                                   ;83D3A8|C230    |      ;
@@ -9805,17 +9784,17 @@ CODE_83D369:
     RTS                                                        ;83D3B7|60      |      ;
  
  
-CODE_83D3B8:
+.label1:
     SEP #$20                                                   ;83D3B8|E220    |      ;
     REP #$10                                                   ;83D3BA|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D3BC|AF191F7F|7F1F19;
-    BNE CODE_83D3E2                                            ;83D3C0|D020    |83D3E2;
+    BNE +                                                      ;83D3C0|D020    |83D3E2;
     LDA.L nCurrentDay                                          ;83D3C2|AF1B1F7F|7F1F1B;
     CMP.B #$17                                                 ;83D3C6|C917    |      ;
-    BNE CODE_83D3E2                                            ;83D3C8|D018    |83D3E2;
+    BNE +                                                      ;83D3C8|D018    |83D3E2;
     LDA.L nCurrentTimeID                                       ;83D3CA|AF1C1F7F|7F1F1C;
     CMP.B #$0F                                                 ;83D3CE|C90F    |      ;
-    BCS CODE_83D3E2                                            ;83D3D0|B010    |83D3E2;
+    BCS +                                                      ;83D3D0|B010    |83D3E2;
     REP #$30                                                   ;83D3D2|C230    |      ;
     LDA.W #$0000                                               ;83D3D4|A90000  |      ;
     LDX.W #$000E                                               ;83D3D7|A20E00  |      ;
@@ -9824,18 +9803,17 @@ CODE_83D3B8:
     RTS                                                        ;83D3E1|60      |      ;
  
  
-CODE_83D3E2:
-    SEP #$20                                                   ;83D3E2|E220    |      ;
+  + SEP #$20                                                   ;83D3E2|E220    |      ;
     REP #$10                                                   ;83D3E4|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D3E6|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83D3EA|C902    |      ;
-    BNE CODE_83D40E                                            ;83D3EC|D020    |83D40E;
+    BNE +                                                      ;83D3EC|D020    |83D40E;
     LDA.L nCurrentDay                                          ;83D3EE|AF1B1F7F|7F1F1B;
     CMP.B #$0C                                                 ;83D3F2|C90C    |      ;
-    BNE CODE_83D40E                                            ;83D3F4|D018    |83D40E;
+    BNE +                                                      ;83D3F4|D018    |83D40E;
     LDA.L nCurrentTimeID                                       ;83D3F6|AF1C1F7F|7F1F1C;
     CMP.B #$0F                                                 ;83D3FA|C90F    |      ;
-    BCS CODE_83D40E                                            ;83D3FC|B010    |83D40E;
+    BCS +                                                      ;83D3FC|B010    |83D40E;
     REP #$30                                                   ;83D3FE|C230    |      ;
     LDA.W #$0000                                               ;83D400|A90000  |      ;
     LDX.W #$0026                                               ;83D403|A22600  |      ;
@@ -9844,18 +9822,17 @@ CODE_83D3E2:
     RTS                                                        ;83D40D|60      |      ;
  
  
-CODE_83D40E:
-    SEP #$20                                                   ;83D40E|E220    |      ;
+  + SEP #$20                                                   ;83D40E|E220    |      ;
     REP #$10                                                   ;83D410|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D412|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83D416|C903    |      ;
-    BNE CODE_83D43A                                            ;83D418|D020    |83D43A;
+    BNE +                                                      ;83D418|D020    |83D43A;
     LDA.L nCurrentDay                                          ;83D41A|AF1B1F7F|7F1F1B;
     CMP.B #$0A                                                 ;83D41E|C90A    |      ;
-    BNE CODE_83D43A                                            ;83D420|D018    |83D43A;
+    BNE +                                                      ;83D420|D018    |83D43A;
     LDA.L nCurrentTimeID                                       ;83D422|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;83D426|C911    |      ;
-    BCS CODE_83D43A                                            ;83D428|B010    |83D43A;
+    BCS +                                                      ;83D428|B010    |83D43A;
     REP #$30                                                   ;83D42A|C230    |      ;
     LDA.W #$0000                                               ;83D42C|A90000  |      ;
     LDX.W #$0027                                               ;83D42F|A22700  |      ;
@@ -9864,21 +9841,19 @@ CODE_83D40E:
     RTS                                                        ;83D439|60      |      ;
  
  
-CODE_83D43A:
-    REP #$30                                                   ;83D43A|C230    |      ;
+  + REP #$30                                                   ;83D43A|C230    |      ;
     LDA.L strcEventFlags.flags4                                ;83D43C|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83D440|290040  |      ;
-    BNE CODE_83D452                                            ;83D443|D00D    |83D452;
+    BNE +                                                      ;83D443|D00D    |83D452;
     LDA.W #$0015                                               ;83D445|A91500  |      ;
     LDX.W #$0000                                               ;83D448|A20000  |      ;
     LDY.W #$007E                                               ;83D44B|A07E00  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83D44E|22978084|848097;
  
-CODE_83D452:
-    REP #$30                                                   ;83D452|C230    |      ;
+  + REP #$30                                                   ;83D452|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D454|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D458|290100  |      ;
-    BNE CODE_83D46D                                            ;83D45B|D010    |83D46D;
+    BNE +                                                      ;83D45B|D010    |83D46D;
     REP #$30                                                   ;83D45D|C230    |      ;
     LDA.W #$0000                                               ;83D45F|A90000  |      ;
     LDX.W #$000B                                               ;83D462|A20B00  |      ;
@@ -9887,41 +9862,39 @@ CODE_83D452:
     RTS                                                        ;83D46C|60      |      ;
  
  
-CODE_83D46D:
-    REP #$20                                                   ;83D46D|C220    |      ;
+  + REP #$20                                                   ;83D46D|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D46F|AD9601  |000196;
     AND.W #$0008                                               ;83D472|290800  |      ;
-    BNE CODE_83D4B6                                            ;83D475|D03F    |83D4B6;
+    BNE +                                                      ;83D475|D03F    |83D4B6;
     SEP #$20                                                   ;83D477|E220    |      ;
     LDA.W nWeatherForecast                                     ;83D479|AD8C09  |00098C;
     CMP.B #$03                                                 ;83D47C|C903    |      ;
-    BEQ CODE_83D4B6                                            ;83D47E|F036    |83D4B6;
+    BEQ +                                                      ;83D47E|F036    |83D4B6;
     REP #$30                                                   ;83D480|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D482|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83D486|292000  |      ;
-    BNE CODE_83D4B6                                            ;83D489|D02B    |83D4B6;
+    BNE +                                                      ;83D489|D02B    |83D4B6;
     LDA.W nMapEngine_flags                                     ;83D48B|AD9601  |000196;
     AND.W #$0200                                               ;83D48E|290002  |      ;
-    BNE CODE_83D4B6                                            ;83D491|D023    |83D4B6;
+    BNE +                                                      ;83D491|D023    |83D4B6;
     LDA.W nMapEngine_flags                                     ;83D493|AD9601  |000196;
     AND.W #$0002                                               ;83D496|290200  |      ;
-    BNE CODE_83D4B6                                            ;83D499|D01B    |83D4B6;
+    BNE +                                                      ;83D499|D01B    |83D4B6;
     SEP #$20                                                   ;83D49B|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83D49D|AF1A1F7F|7F1F1A;
-    BEQ CODE_83D4B7                                            ;83D4A1|F014    |83D4B7;
+    BEQ .return1                                               ;83D4A1|F014    |83D4B7;
     CMP.B #$06                                                 ;83D4A3|C906    |      ;
-    BEQ CODE_83D4C7                                            ;83D4A5|F020    |83D4C7;
+    BEQ .return2                                               ;83D4A5|F020    |83D4C7;
     REP #$30                                                   ;83D4A7|C230    |      ;
     LDA.W #$0000                                               ;83D4A9|A90000  |      ;
     LDX.W #$0001                                               ;83D4AC|A20100  |      ;
     LDY.W #$0000                                               ;83D4AF|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83D4B2|22978084|848097;
  
-CODE_83D4B6:
-    RTS                                                        ;83D4B6|60      |      ;
+  + RTS                                                        ;83D4B6|60      |      ;
  
  
-CODE_83D4B7:
+.return1:
     REP #$30                                                   ;83D4B7|C230    |      ;
     LDA.W #$0000                                               ;83D4B9|A90000  |      ;
     LDX.W #$0003                                               ;83D4BC|A20300  |      ;
@@ -9930,7 +9903,7 @@ CODE_83D4B7:
     RTS                                                        ;83D4C6|60      |      ;
  
  
-CODE_83D4C7:
+.return2:
     REP #$30                                                   ;83D4C7|C230    |      ;
     LDA.W #$0000                                               ;83D4C9|A90000  |      ;
     LDX.W #$0002                                               ;83D4CC|A20200  |      ;
@@ -9939,19 +9912,18 @@ CODE_83D4C7:
     RTS                                                        ;83D4D6|60      |      ;
  
  
-fAreaInit_MajorHouse:
+fAreaEvents_MajorHouse:
     REP #$30                                                   ;83D4D7|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D4D9|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83D4DD|290100  |      ;
-    BNE CODE_83D4E4                                            ;83D4E0|D002    |83D4E4;
-    BRA CODE_83D4FF                                            ;83D4E2|801B    |83D4FF;
+    BNE +                                                      ;83D4E0|D002    |83D4E4;
+    BRA fAreaEvents_MajorHouseHandler                          ;83D4E2|801B    |83D4FF;
  
  
-CODE_83D4E4:
-    REP #$30                                                   ;83D4E4|C230    |      ;
+  + REP #$30                                                   ;83D4E4|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D4E6|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D4EA|290200  |      ;
-    BEQ CODE_83D4FF                                            ;83D4ED|F010    |83D4FF;
+    BEQ fAreaEvents_MajorHouseHandler                          ;83D4ED|F010    |83D4FF;
     REP #$30                                                   ;83D4EF|C230    |      ;
     LDA.W #$0000                                               ;83D4F1|A90000  |      ;
     LDX.W #$0022                                               ;83D4F4|A22200  |      ;
@@ -9960,18 +9932,18 @@ CODE_83D4E4:
     RTS                                                        ;83D4FE|60      |      ;
  
  
-CODE_83D4FF:
+fAreaEvents_MajorHouseHandler:
     SEP #$20                                                   ;83D4FF|E220    |      ;
     REP #$10                                                   ;83D501|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D503|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83D507|C903    |      ;
-    BNE CODE_83D52B                                            ;83D509|D020    |83D52B;
+    BNE +                                                      ;83D509|D020    |83D52B;
     LDA.L nCurrentDay                                          ;83D50B|AF1B1F7F|7F1F1B;
     CMP.B #$0A                                                 ;83D50F|C90A    |      ;
-    BNE CODE_83D52B                                            ;83D511|D018    |83D52B;
+    BNE +                                                      ;83D511|D018    |83D52B;
     LDA.L nCurrentTimeID                                       ;83D513|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;83D517|C911    |      ;
-    BCS CODE_83D52B                                            ;83D519|B010    |83D52B;
+    BCS +                                                      ;83D519|B010    |83D52B;
     REP #$30                                                   ;83D51B|C230    |      ;
     LDA.W #$0000                                               ;83D51D|A90000  |      ;
     LDX.W #$0027                                               ;83D520|A22700  |      ;
@@ -9980,11 +9952,10 @@ CODE_83D4FF:
     RTS                                                        ;83D52A|60      |      ;
  
  
-CODE_83D52B:
-    REP #$30                                                   ;83D52B|C230    |      ;
+  + REP #$30                                                   ;83D52B|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D52D|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D531|290100  |      ;
-    BNE CODE_83D546                                            ;83D534|D010    |83D546;
+    BNE +                                                      ;83D534|D010    |83D546;
     REP #$30                                                   ;83D536|C230    |      ;
     LDA.W #$0000                                               ;83D538|A90000  |      ;
     LDX.W #$000B                                               ;83D53B|A20B00  |      ;
@@ -9993,35 +9964,34 @@ CODE_83D52B:
     RTS                                                        ;83D545|60      |      ;
  
  
-CODE_83D546:
-    REP #$20                                                   ;83D546|C220    |      ;
+  + REP #$20                                                   ;83D546|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D548|AD9601  |000196;
     AND.W #$0008                                               ;83D54B|290800  |      ;
-    BNE CODE_83D5B7                                            ;83D54E|D067    |83D5B7;
+    BNE .label2                                                ;83D54E|D067    |83D5B7;
     SEP #$20                                                   ;83D550|E220    |      ;
     REP #$10                                                   ;83D552|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D554|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D557|C906    |      ;
-    BCS CODE_83D587                                            ;83D559|B02C    |83D587;
+    CMP.B #$06                                                 ;83D557|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    BCS .anyFestival                                           ;83D559|B02C    |83D587;
     LDA.W nWeatherForecast                                     ;83D55B|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D55E|C903    |      ;
-    BEQ CODE_83D5C7                                            ;83D560|F065    |83D5C7;
+    CMP.B #$03                                                 ;83D55E|C903    |      ; !WEATHER_HURRICANE
+    BEQ .hurricane                                             ;83D560|F065    |83D5C7;
     REP #$30                                                   ;83D562|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D564|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83D568|292000  |      ;
-    BNE CODE_83D5C7                                            ;83D56B|D05A    |83D5C7;
+    BNE .hurricane                                             ;83D56B|D05A    |83D5C7;
     LDA.W nMapEngine_flags                                     ;83D56D|AD9601  |000196;
     AND.W #$0200                                               ;83D570|290002  |      ;
-    BNE CODE_83D5D7                                            ;83D573|D062    |83D5D7;
+    BNE .label3                                                ;83D573|D062    |83D5D7;
     LDA.W nMapEngine_flags                                     ;83D575|AD9601  |000196;
     AND.W #$0002                                               ;83D578|290200  |      ;
-    BNE CODE_83D5A7                                            ;83D57B|D02A    |83D5A7;
+    BNE .label1                                                ;83D57B|D02A    |83D5A7;
     SEP #$20                                                   ;83D57D|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83D57F|AF1A1F7F|7F1F1A;
-    CMP.B #$06                                                 ;83D583|C906    |      ;
-    BEQ CODE_83D597                                            ;83D585|F010    |83D597;
+    CMP.B #$06                                                 ;83D583|C906    |      ; !DAY_SATURDAY
+    BEQ .saturday                                              ;83D585|F010    |83D597;
  
-CODE_83D587:
+.anyFestival:
     REP #$30                                                   ;83D587|C230    |      ;
     LDA.W #$0000                                               ;83D589|A90000  |      ;
     LDX.W #$0001                                               ;83D58C|A20100  |      ;
@@ -10030,7 +10000,7 @@ CODE_83D587:
     RTS                                                        ;83D596|60      |      ;
  
  
-CODE_83D597:
+.saturday:
     REP #$30                                                   ;83D597|C230    |      ;
     LDA.W #$0000                                               ;83D599|A90000  |      ;
     LDX.W #$0002                                               ;83D59C|A20200  |      ;
@@ -10039,7 +10009,7 @@ CODE_83D597:
     RTS                                                        ;83D5A6|60      |      ;
  
  
-CODE_83D5A7:
+.label1:
     REP #$30                                                   ;83D5A7|C230    |      ;
     LDA.W #$0000                                               ;83D5A9|A90000  |      ;
     LDX.W #$0004                                               ;83D5AC|A20400  |      ;
@@ -10048,7 +10018,7 @@ CODE_83D5A7:
     RTS                                                        ;83D5B6|60      |      ;
  
  
-CODE_83D5B7:
+.label2:
     REP #$30                                                   ;83D5B7|C230    |      ;
     LDA.W #$0000                                               ;83D5B9|A90000  |      ;
     LDX.W #$0007                                               ;83D5BC|A20700  |      ;
@@ -10057,7 +10027,7 @@ CODE_83D5B7:
     RTS                                                        ;83D5C6|60      |      ;
  
  
-CODE_83D5C7:
+.hurricane:
     REP #$30                                                   ;83D5C7|C230    |      ;
     LDA.W #$0000                                               ;83D5C9|A90000  |      ;
     LDX.W #$0006                                               ;83D5CC|A20600  |      ;
@@ -10066,7 +10036,7 @@ CODE_83D5C7:
     RTS                                                        ;83D5D6|60      |      ;
  
  
-CODE_83D5D7:
+.label3:
     REP #$30                                                   ;83D5D7|C230    |      ;
     LDA.W #$0000                                               ;83D5D9|A90000  |      ;
     LDX.W #$0008                                               ;83D5DC|A20800  |      ;
@@ -10075,24 +10045,22 @@ CODE_83D5D7:
     RTS                                                        ;83D5E6|60      |      ;
  
  
-fAreaInit_MariaBedroom:
+fAreaEvents_MariaBedroom:
     REP #$30                                                   ;83D5E7|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D5E9|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83D5ED|290100  |      ;
-    BNE CODE_83D5F5                                            ;83D5F0|D003    |83D5F5;
-    JMP.W CODE_83D4FF                                          ;83D5F2|4CFFD4  |83D4FF;
+    BNE +                                                      ;83D5F0|D003    |83D5F5;
+    JMP.W fAreaEvents_MajorHouseHandler                        ;83D5F2|4CFFD4  |83D4FF;
  
  
-CODE_83D5F5:
-    REP #$30                                                   ;83D5F5|C230    |      ;
+  + REP #$30                                                   ;83D5F5|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D5F7|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D5FB|290200  |      ;
-    BNE CODE_83D603                                            ;83D5FE|D003    |83D603;
-    JMP.W CODE_83D4FF                                          ;83D600|4CFFD4  |83D4FF;
+    BNE +                                                      ;83D5FE|D003    |83D603;
+    JMP.W fAreaEvents_MajorHouseHandler                        ;83D600|4CFFD4  |83D4FF;
  
  
-CODE_83D603:
-    REP #$30                                                   ;83D603|C230    |      ;
+  + REP #$30                                                   ;83D603|C230    |      ;
     LDA.W #$0000                                               ;83D605|A90000  |      ;
     LDX.W #$0022                                               ;83D608|A22200  |      ;
     LDY.W #$0004                                               ;83D60B|A00400  |      ;
@@ -10100,18 +10068,18 @@ CODE_83D603:
     RTS                                                        ;83D612|60      |      ;
  
  
-fAreaInit_Church:
+fAreaEvents_Church:
     SEP #$20                                                   ;83D613|E220    |      ;
     REP #$10                                                   ;83D615|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D617|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83D61B|C903    |      ;
-    BNE CODE_83D63F                                            ;83D61D|D020    |83D63F;
+    BNE +                                                      ;83D61D|D020    |83D63F;
     LDA.L nCurrentDay                                          ;83D61F|AF1B1F7F|7F1F1B;
     CMP.B #$0A                                                 ;83D623|C90A    |      ;
-    BNE CODE_83D63F                                            ;83D625|D018    |83D63F;
+    BNE +                                                      ;83D625|D018    |83D63F;
     LDA.L nCurrentTimeID                                       ;83D627|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;83D62B|C911    |      ;
-    BCS CODE_83D63F                                            ;83D62D|B010    |83D63F;
+    BCS +                                                      ;83D62D|B010    |83D63F;
     REP #$30                                                   ;83D62F|C230    |      ;
     LDA.W #$0000                                               ;83D631|A90000  |      ;
     LDX.W #$0027                                               ;83D634|A22700  |      ;
@@ -10120,19 +10088,18 @@ fAreaInit_Church:
     RTS                                                        ;83D63E|60      |      ;
  
  
-CODE_83D63F:
-    SEP #$20                                                   ;83D63F|E220    |      ;
+  + SEP #$20                                                   ;83D63F|E220    |      ;
     REP #$10                                                   ;83D641|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D643|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83D647|C903    |      ;
-    BNE CODE_83D66E                                            ;83D649|D023    |83D66E;
+    BNE +                                                      ;83D649|D023    |83D66E;
     LDA.L nCurrentDay                                          ;83D64B|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83D64F|C918    |      ;
-    BNE CODE_83D66E                                            ;83D651|D01B    |83D66E;
+    BNE +                                                      ;83D651|D01B    |83D66E;
     REP #$20                                                   ;83D653|C220    |      ;
     LDA.L strcUnknownFlags.flags1                              ;83D655|AF741F7F|7F1F74;
     AND.W #$0002                                               ;83D659|290200  |      ;
-    BEQ CODE_83D66E                                            ;83D65C|F010    |83D66E;
+    BEQ +                                                      ;83D65C|F010    |83D66E;
     REP #$30                                                   ;83D65E|C230    |      ;
     LDA.W #$0000                                               ;83D660|A90000  |      ;
     LDX.W #$000F                                               ;83D663|A20F00  |      ;
@@ -10141,11 +10108,10 @@ CODE_83D63F:
     RTS                                                        ;83D66D|60      |      ;
  
  
-CODE_83D66E:
-    REP #$30                                                   ;83D66E|C230    |      ;
+  + REP #$30                                                   ;83D66E|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D670|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D674|290100  |      ;
-    BNE CODE_83D689                                            ;83D677|D010    |83D689;
+    BNE +                                                      ;83D677|D010    |83D689;
     REP #$30                                                   ;83D679|C230    |      ;
     LDA.W #$0000                                               ;83D67B|A90000  |      ;
     LDX.W #$000B                                               ;83D67E|A20B00  |      ;
@@ -10154,62 +10120,58 @@ CODE_83D66E:
     RTS                                                        ;83D688|60      |      ;
  
  
-CODE_83D689:
-    REP #$20                                                   ;83D689|C220    |      ;
+  + REP #$20                                                   ;83D689|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D68B|AD9601  |000196;
     AND.W #$0008                                               ;83D68E|290800  |      ;
-    BEQ CODE_83D696                                            ;83D691|F003    |83D696;
-    JMP.W CODE_83D71E                                          ;83D693|4C1ED7  |83D71E;
+    BEQ +                                                      ;83D691|F003    |83D696;
+    JMP.W .label4                                              ;83D693|4C1ED7  |83D71E;
  
  
-CODE_83D696:
-    SEP #$20                                                   ;83D696|E220    |      ;
+  + SEP #$20                                                   ;83D696|E220    |      ;
     REP #$10                                                   ;83D698|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D69A|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D69D|C906    |      ;
-    BCS CODE_83D6DE                                            ;83D69F|B03D    |83D6DE;
+    CMP.B #$06                                                 ;83D69D|C906    |      ; !WEATHER_FLOWERFESTIVAL +
+    BCS .anyFestival                                           ;83D69F|B03D    |83D6DE;
     LDA.W nWeatherForecast                                     ;83D6A1|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D6A4|C903    |      ;
-    BNE CODE_83D6AB                                            ;83D6A6|D003    |83D6AB;
-    JMP.W CODE_83D72E                                          ;83D6A8|4C2ED7  |83D72E;
+    CMP.B #$03                                                 ;83D6A4|C903    |      ; !WEATHER_HURRICANE
+    BNE +                                                      ;83D6A6|D003    |83D6AB;
+    JMP.W .hurricane                                           ;83D6A8|4C2ED7  |83D72E;
  
  
-CODE_83D6AB:
-    REP #$30                                                   ;83D6AB|C230    |      ;
+  + REP #$30                                                   ;83D6AB|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D6AD|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83D6B1|292000  |      ;
-    BNE CODE_83D72E                                            ;83D6B4|D078    |83D72E;
+    BNE .hurricane                                             ;83D6B4|D078    |83D72E;
     LDA.W nMapEngine_flags                                     ;83D6B6|AD9601  |000196;
     AND.W #$0200                                               ;83D6B9|290002  |      ;
-    BEQ CODE_83D6C1                                            ;83D6BC|F003    |83D6C1;
-    JMP.W CODE_83D73E                                          ;83D6BE|4C3ED7  |83D73E;
+    BEQ +                                                      ;83D6BC|F003    |83D6C1;
+    JMP.W .label5                                              ;83D6BE|4C3ED7  |83D73E;
  
  
-CODE_83D6C1:
-    LDA.L strcEventFlags.flags3                                ;83D6C1|AF681F7F|7F1F68;
+  + LDA.L strcEventFlags.flags3                                ;83D6C1|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D6C5|290100  |      ;
-    BEQ CODE_83D6ED                                            ;83D6C8|F023    |83D6ED;
+    BEQ .justReturn                                            ;83D6C8|F023    |83D6ED;
     LDA.W nMapEngine_flags                                     ;83D6CA|AD9601  |000196;
     AND.W #$0002                                               ;83D6CD|290200  |      ;
-    BNE CODE_83D70E                                            ;83D6D0|D03C    |83D70E;
+    BNE .label3                                                ;83D6D0|D03C    |83D70E;
     SEP #$20                                                   ;83D6D2|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83D6D4|AF1A1F7F|7F1F1A;
-    BEQ CODE_83D6EE                                            ;83D6D8|F014    |83D6EE;
+    BEQ .notSunday                                             ;83D6D8|F014    |83D6EE;
     CMP.B #$06                                                 ;83D6DA|C906    |      ;
-    BEQ CODE_83D6FE                                            ;83D6DC|F020    |83D6FE;
+    BEQ .saturday                                              ;83D6DC|F020    |83D6FE;
  
-CODE_83D6DE:
+.anyFestival:
     REP #$30                                                   ;83D6DE|C230    |      ;
     LDA.W #$0000                                               ;83D6E0|A90000  |      ;
     LDX.W #$0001                                               ;83D6E3|A20100  |      ;
     LDY.W #$0002                                               ;83D6E6|A00200  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83D6E9|22978084|848097;
  
-CODE_83D6ED:
+.justReturn:
     RTS                                                        ;83D6ED|60      |      ;
  
  
-CODE_83D6EE:
+.notSunday:
     REP #$30                                                   ;83D6EE|C230    |      ;
     LDA.W #$0000                                               ;83D6F0|A90000  |      ;
     LDX.W #$0003                                               ;83D6F3|A20300  |      ;
@@ -10218,7 +10180,7 @@ CODE_83D6EE:
     RTS                                                        ;83D6FD|60      |      ;
  
  
-CODE_83D6FE:
+.saturday:
     REP #$30                                                   ;83D6FE|C230    |      ;
     LDA.W #$0000                                               ;83D700|A90000  |      ;
     LDX.W #$0002                                               ;83D703|A20200  |      ;
@@ -10227,7 +10189,7 @@ CODE_83D6FE:
     RTS                                                        ;83D70D|60      |      ;
  
  
-CODE_83D70E:
+.label3:
     REP #$30                                                   ;83D70E|C230    |      ;
     LDA.W #$0000                                               ;83D710|A90000  |      ;
     LDX.W #$0004                                               ;83D713|A20400  |      ;
@@ -10236,7 +10198,7 @@ CODE_83D70E:
     RTS                                                        ;83D71D|60      |      ;
  
  
-CODE_83D71E:
+.label4:
     REP #$30                                                   ;83D71E|C230    |      ;
     LDA.W #$0000                                               ;83D720|A90000  |      ;
     LDX.W #$0007                                               ;83D723|A20700  |      ;
@@ -10245,7 +10207,7 @@ CODE_83D71E:
     RTS                                                        ;83D72D|60      |      ;
  
  
-CODE_83D72E:
+.hurricane:
     REP #$30                                                   ;83D72E|C230    |      ;
     LDA.W #$0000                                               ;83D730|A90000  |      ;
     LDX.W #$0006                                               ;83D733|A20600  |      ;
@@ -10254,7 +10216,7 @@ CODE_83D72E:
     RTS                                                        ;83D73D|60      |      ;
  
  
-CODE_83D73E:
+.label5:
     REP #$30                                                   ;83D73E|C230    |      ;
     LDA.W #$0000                                               ;83D740|A90000  |      ;
     LDX.W #$0008                                               ;83D743|A20800  |      ;
@@ -10263,19 +10225,18 @@ CODE_83D73E:
     RTS                                                        ;83D74D|60      |      ;
  
  
-fAreaInit_Florist:
+fAreaEvents_Florist:
     REP #$30                                                   ;83D74E|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D750|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83D754|290400  |      ;
-    BNE CODE_83D75B                                            ;83D757|D002    |83D75B;
-    BRA CODE_83D776                                            ;83D759|801B    |83D776;
+    BNE +                                                      ;83D757|D002    |83D75B;
+    BRA fAreaEvents_FloristHandler                             ;83D759|801B    |83D776;
  
  
-CODE_83D75B:
-    REP #$30                                                   ;83D75B|C230    |      ;
+  + REP #$30                                                   ;83D75B|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D75D|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D761|290200  |      ;
-    BEQ CODE_83D776                                            ;83D764|F010    |83D776;
+    BEQ fAreaEvents_FloristHandler                             ;83D764|F010    |83D776;
     REP #$30                                                   ;83D766|C230    |      ;
     LDA.W #$0000                                               ;83D768|A90000  |      ;
     LDX.W #$0022                                               ;83D76B|A22200  |      ;
@@ -10284,11 +10245,11 @@ CODE_83D75B:
     RTS                                                        ;83D775|60      |      ;
  
  
-CODE_83D776:
+fAreaEvents_FloristHandler:
     REP #$30                                                   ;83D776|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D778|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D77C|290100  |      ;
-    BNE CODE_83D791                                            ;83D77F|D010    |83D791;
+    BNE +                                                      ;83D77F|D010    |83D791;
     REP #$30                                                   ;83D781|C230    |      ;
     LDA.W #$0000                                               ;83D783|A90000  |      ;
     LDX.W #$000B                                               ;83D786|A20B00  |      ;
@@ -10297,31 +10258,30 @@ CODE_83D776:
     RTS                                                        ;83D790|60      |      ;
  
  
-CODE_83D791:
-    REP #$20                                                   ;83D791|C220    |      ;
+  + REP #$20                                                   ;83D791|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D793|AD9601  |000196;
     AND.W #$0008                                               ;83D796|290800  |      ;
-    BNE CODE_83D7E8                                            ;83D799|D04D    |83D7E8;
+    BNE .label5                                                ;83D799|D04D    |83D7E8;
     SEP #$20                                                   ;83D79B|E220    |      ;
     REP #$10                                                   ;83D79D|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D79F|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D7A2|C906    |      ;
-    BCS CODE_83D7C8                                            ;83D7A4|B022    |83D7C8;
+    CMP.B #$06                                                 ;83D7A2|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    BCS .anyFestival                                           ;83D7A4|B022    |83D7C8;
     LDA.W nWeatherForecast                                     ;83D7A6|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D7A9|C903    |      ;
-    BEQ CODE_83D7F8                                            ;83D7AB|F04B    |83D7F8;
+    CMP.B #$03                                                 ;83D7A9|C903    |      ; !WEATHER_HURRICANE
+    BEQ .hurricane                                             ;83D7AB|F04B    |83D7F8;
     REP #$30                                                   ;83D7AD|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D7AF|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83D7B3|292000  |      ;
-    BNE CODE_83D7F8                                            ;83D7B6|D040    |83D7F8;
+    BNE .hurricane                                             ;83D7B6|D040    |83D7F8;
     LDA.W nMapEngine_flags                                     ;83D7B8|AD9601  |000196;
     AND.W #$0200                                               ;83D7BB|290002  |      ;
-    BNE CODE_83D808                                            ;83D7BE|D048    |83D808;
+    BNE .label7                                                ;83D7BE|D048    |83D808;
     LDA.W nMapEngine_flags                                     ;83D7C0|AD9601  |000196;
     AND.W #$0002                                               ;83D7C3|290200  |      ;
-    BNE CODE_83D7D8                                            ;83D7C6|D010    |83D7D8;
+    BNE .label4                                                ;83D7C6|D010    |83D7D8;
  
-CODE_83D7C8:
+.anyFestival:
     REP #$30                                                   ;83D7C8|C230    |      ;
     LDA.W #$0000                                               ;83D7CA|A90000  |      ;
     LDX.W #$0001                                               ;83D7CD|A20100  |      ;
@@ -10330,7 +10290,7 @@ CODE_83D7C8:
     RTS                                                        ;83D7D7|60      |      ;
  
  
-CODE_83D7D8:
+.label4:
     REP #$30                                                   ;83D7D8|C230    |      ;
     LDA.W #$0000                                               ;83D7DA|A90000  |      ;
     LDX.W #$0004                                               ;83D7DD|A20400  |      ;
@@ -10339,7 +10299,7 @@ CODE_83D7D8:
     RTS                                                        ;83D7E7|60      |      ;
  
  
-CODE_83D7E8:
+.label5:
     REP #$30                                                   ;83D7E8|C230    |      ;
     LDA.W #$0000                                               ;83D7EA|A90000  |      ;
     LDX.W #$0007                                               ;83D7ED|A20700  |      ;
@@ -10348,7 +10308,7 @@ CODE_83D7E8:
     RTS                                                        ;83D7F7|60      |      ;
  
  
-CODE_83D7F8:
+.hurricane:
     REP #$30                                                   ;83D7F8|C230    |      ;
     LDA.W #$0000                                               ;83D7FA|A90000  |      ;
     LDX.W #$0006                                               ;83D7FD|A20600  |      ;
@@ -10357,7 +10317,7 @@ CODE_83D7F8:
     RTS                                                        ;83D807|60      |      ;
  
  
-CODE_83D808:
+.label7:
     REP #$30                                                   ;83D808|C230    |      ;
     LDA.W #$0000                                               ;83D80A|A90000  |      ;
     LDX.W #$0008                                               ;83D80D|A20800  |      ;
@@ -10366,24 +10326,22 @@ CODE_83D808:
     RTS                                                        ;83D817|60      |      ;
  
  
-fAreaInit_FloristBedroom:
+fAreaEvents_NinaBedroom:
     REP #$30                                                   ;83D818|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D81A|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83D81E|290400  |      ;
-    BNE CODE_83D826                                            ;83D821|D003    |83D826;
-    JMP.W CODE_83D776                                          ;83D823|4C76D7  |83D776;
+    BNE +                                                      ;83D821|D003    |83D826;
+    JMP.W fAreaEvents_FloristHandler                           ;83D823|4C76D7  |83D776;
  
  
-CODE_83D826:
-    REP #$30                                                   ;83D826|C230    |      ;
+  + REP #$30                                                   ;83D826|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D828|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D82C|290200  |      ;
-    BNE CODE_83D834                                            ;83D82F|D003    |83D834;
-    JMP.W CODE_83D776                                          ;83D831|4C76D7  |83D776;
+    BNE +                                                      ;83D82F|D003    |83D834;
+    JMP.W fAreaEvents_FloristHandler                           ;83D831|4C76D7  |83D776;
  
  
-CODE_83D834:
-    REP #$30                                                   ;83D834|C230    |      ;
+  + REP #$30                                                   ;83D834|C230    |      ;
     LDA.W #$0000                                               ;83D836|A90000  |      ;
     LDX.W #$0022                                               ;83D839|A22200  |      ;
     LDY.W #$0008                                               ;83D83C|A00800  |      ;
@@ -10391,19 +10349,18 @@ CODE_83D834:
     RTS                                                        ;83D843|60      |      ;
  
  
-fAreaInit_Toolshop:
+fAreaEvents_Toolshop:
     REP #$30                                                   ;83D844|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D846|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83D84A|290200  |      ;
-    BNE CODE_83D851                                            ;83D84D|D002    |83D851;
-    BRA CODE_83D86C                                            ;83D84F|801B    |83D86C;
+    BNE +                                                      ;83D84D|D002    |83D851;
+    BRA fAreaEvents_ToolshopHandler                            ;83D84F|801B    |83D86C;
  
  
-CODE_83D851:
-    REP #$30                                                   ;83D851|C230    |      ;
+  + REP #$30                                                   ;83D851|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D853|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D857|290200  |      ;
-    BEQ CODE_83D86C                                            ;83D85A|F010    |83D86C;
+    BEQ fAreaEvents_ToolshopHandler                            ;83D85A|F010    |83D86C;
     REP #$30                                                   ;83D85C|C230    |      ;
     LDA.W #$0000                                               ;83D85E|A90000  |      ;
     LDX.W #$0022                                               ;83D861|A22200  |      ;
@@ -10412,11 +10369,11 @@ CODE_83D851:
     RTS                                                        ;83D86B|60      |      ;
  
  
-CODE_83D86C:
+fAreaEvents_ToolshopHandler:
     REP #$30                                                   ;83D86C|C230    |      ;
     LDA.L strcDailyFlags.flags3                                ;83D86E|AF5E1F7F|7F1F5E;
     AND.W #$0010                                               ;83D872|291000  |      ;
-    BEQ CODE_83D887                                            ;83D875|F010    |83D887;
+    BEQ +                                                      ;83D875|F010    |83D887;
     REP #$30                                                   ;83D877|C230    |      ;
     LDA.W #$0000                                               ;83D879|A90000  |      ;
     LDX.W #$001A                                               ;83D87C|A21A00  |      ;
@@ -10425,11 +10382,10 @@ CODE_83D86C:
     RTS                                                        ;83D886|60      |      ;
  
  
-CODE_83D887:
-    REP #$30                                                   ;83D887|C230    |      ;
+  + REP #$30                                                   ;83D887|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D889|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D88D|290100  |      ;
-    BNE CODE_83D8A2                                            ;83D890|D010    |83D8A2;
+    BNE .label1                                                ;83D890|D010    |83D8A2;
     REP #$30                                                   ;83D892|C230    |      ;
     LDA.W #$0000                                               ;83D894|A90000  |      ;
     LDX.W #$000B                                               ;83D897|A20B00  |      ;
@@ -10438,31 +10394,31 @@ CODE_83D887:
     RTS                                                        ;83D8A1|60      |      ;
  
  
-CODE_83D8A2:
+.label1:
     REP #$20                                                   ;83D8A2|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D8A4|AD9601  |000196;
     AND.W #$0008                                               ;83D8A7|290800  |      ;
-    BNE CODE_83D8F9                                            ;83D8AA|D04D    |83D8F9;
+    BNE .label3                                                ;83D8AA|D04D    |83D8F9;
     SEP #$20                                                   ;83D8AC|E220    |      ;
     REP #$10                                                   ;83D8AE|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D8B0|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D8B3|C906    |      ;
-    BCS CODE_83D8D9                                            ;83D8B5|B022    |83D8D9;
+    CMP.B #$06                                                 ;83D8B3|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    BCS .anyFestival                                           ;83D8B5|B022    |83D8D9;
     LDA.W nWeatherForecast                                     ;83D8B7|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D8BA|C903    |      ;
-    BEQ CODE_83D909                                            ;83D8BC|F04B    |83D909;
+    CMP.B #$03                                                 ;83D8BA|C903    |      ; !WEATHER_HURRICANE
+    BEQ .hurricane                                             ;83D8BC|F04B    |83D909;
     REP #$30                                                   ;83D8BE|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D8C0|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83D8C4|292000  |      ;
-    BNE CODE_83D909                                            ;83D8C7|D040    |83D909;
+    BNE .hurricane                                             ;83D8C7|D040    |83D909;
     LDA.W nMapEngine_flags                                     ;83D8C9|AD9601  |000196;
     AND.W #$0200                                               ;83D8CC|290002  |      ;
-    BNE CODE_83D919                                            ;83D8CF|D048    |83D919;
+    BNE .label4                                                ;83D8CF|D048    |83D919;
     LDA.W nMapEngine_flags                                     ;83D8D1|AD9601  |000196;
     AND.W #$0002                                               ;83D8D4|290200  |      ;
-    BNE CODE_83D8E9                                            ;83D8D7|D010    |83D8E9;
+    BNE .label2                                                ;83D8D7|D010    |83D8E9;
  
-CODE_83D8D9:
+.anyFestival:
     REP #$30                                                   ;83D8D9|C230    |      ;
     LDA.W #$0000                                               ;83D8DB|A90000  |      ;
     LDX.W #$0001                                               ;83D8DE|A20100  |      ;
@@ -10471,7 +10427,7 @@ CODE_83D8D9:
     RTS                                                        ;83D8E8|60      |      ;
  
  
-CODE_83D8E9:
+.label2:
     REP #$30                                                   ;83D8E9|C230    |      ;
     LDA.W #$0000                                               ;83D8EB|A90000  |      ;
     LDX.W #$0004                                               ;83D8EE|A20400  |      ;
@@ -10480,7 +10436,7 @@ CODE_83D8E9:
     RTS                                                        ;83D8F8|60      |      ;
  
  
-CODE_83D8F9:
+.label3:
     REP #$30                                                   ;83D8F9|C230    |      ;
     LDA.W #$0000                                               ;83D8FB|A90000  |      ;
     LDX.W #$0007                                               ;83D8FE|A20700  |      ;
@@ -10489,7 +10445,7 @@ CODE_83D8F9:
     RTS                                                        ;83D908|60      |      ;
  
  
-CODE_83D909:
+.hurricane:
     REP #$30                                                   ;83D909|C230    |      ;
     LDA.W #$0000                                               ;83D90B|A90000  |      ;
     LDX.W #$0006                                               ;83D90E|A20600  |      ;
@@ -10498,7 +10454,7 @@ CODE_83D909:
     RTS                                                        ;83D918|60      |      ;
  
  
-CODE_83D919:
+.label4:
     REP #$30                                                   ;83D919|C230    |      ;
     LDA.W #$0000                                               ;83D91B|A90000  |      ;
     LDX.W #$0008                                               ;83D91E|A20800  |      ;
@@ -10507,24 +10463,22 @@ CODE_83D919:
     RTS                                                        ;83D928|60      |      ;
  
  
-fAreaInit_ToolshopBedroom:
+fAreaEvents_AnnBedroom:
     REP #$30                                                   ;83D929|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D92B|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83D92F|290200  |      ;
-    BNE CODE_83D937                                            ;83D932|D003    |83D937;
-    JMP.W CODE_83D86C                                          ;83D934|4C6CD8  |83D86C;
+    BNE +                                                      ;83D932|D003    |83D937;
+    JMP.W fAreaEvents_ToolshopHandler                          ;83D934|4C6CD8  |83D86C;
  
  
-CODE_83D937:
-    REP #$30                                                   ;83D937|C230    |      ;
+  + REP #$30                                                   ;83D937|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D939|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D93D|290200  |      ;
-    BNE CODE_83D945                                            ;83D940|D003    |83D945;
-    JMP.W CODE_83D86C                                          ;83D942|4C6CD8  |83D86C;
+    BNE +                                                      ;83D940|D003    |83D945;
+    JMP.W fAreaEvents_ToolshopHandler                          ;83D942|4C6CD8  |83D86C;
  
  
-CODE_83D945:
-    REP #$30                                                   ;83D945|C230    |      ;
+  + REP #$30                                                   ;83D945|C230    |      ;
     LDA.W #$0000                                               ;83D947|A90000  |      ;
     LDX.W #$0022                                               ;83D94A|A22200  |      ;
     LDY.W #$0006                                               ;83D94D|A00600  |      ;
@@ -10532,19 +10486,18 @@ CODE_83D945:
     RTS                                                        ;83D954|60      |      ;
  
  
-fAreaInit_Restaurant:
+fAreaEvents_Restaurant:
     REP #$30                                                   ;83D955|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D957|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83D95B|290800  |      ;
-    BNE CODE_83D962                                            ;83D95E|D002    |83D962;
-    BRA CODE_83D97D                                            ;83D960|801B    |83D97D;
+    BNE +                                                      ;83D95E|D002    |83D962;
+    BRA fAreaEvents_RestaurantHandler                          ;83D960|801B    |83D97D;
  
  
-CODE_83D962:
-    REP #$30                                                   ;83D962|C230    |      ;
+  + REP #$30                                                   ;83D962|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83D964|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83D968|290200  |      ;
-    BEQ CODE_83D97D                                            ;83D96B|F010    |83D97D;
+    BEQ fAreaEvents_RestaurantHandler                          ;83D96B|F010    |83D97D;
     REP #$30                                                   ;83D96D|C230    |      ;
     LDA.W #$0000                                               ;83D96F|A90000  |      ;
     LDX.W #$0022                                               ;83D972|A22200  |      ;
@@ -10553,11 +10506,11 @@ CODE_83D962:
     RTS                                                        ;83D97C|60      |      ;
  
  
-CODE_83D97D:
+fAreaEvents_RestaurantHandler:
     REP #$30                                                   ;83D97D|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D97F|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D983|290100  |      ;
-    BNE CODE_83D998                                            ;83D986|D010    |83D998;
+    BNE +                                                      ;83D986|D010    |83D998;
     REP #$30                                                   ;83D988|C230    |      ;
     LDA.W #$0000                                               ;83D98A|A90000  |      ;
     LDX.W #$000B                                               ;83D98D|A20B00  |      ;
@@ -10566,31 +10519,30 @@ CODE_83D97D:
     RTS                                                        ;83D997|60      |      ;
  
  
-CODE_83D998:
-    REP #$20                                                   ;83D998|C220    |      ;
+  + REP #$20                                                   ;83D998|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D99A|AD9601  |000196;
     AND.W #$0008                                               ;83D99D|290800  |      ;
-    BNE CODE_83D9EF                                            ;83D9A0|D04D    |83D9EF;
+    BNE .label2                                                ;83D9A0|D04D    |83D9EF;
     SEP #$20                                                   ;83D9A2|E220    |      ;
     REP #$10                                                   ;83D9A4|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D9A6|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D9A9|C906    |      ;
-    BCS CODE_83D9CF                                            ;83D9AB|B022    |83D9CF;
+    CMP.B #$06                                                 ;83D9A9|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    BCS .anyFestival                                           ;83D9AB|B022    |83D9CF;
     LDA.W nWeatherForecast                                     ;83D9AD|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D9B0|C903    |      ;
-    BEQ CODE_83D9FF                                            ;83D9B2|F04B    |83D9FF;
+    CMP.B #$03                                                 ;83D9B0|C903    |      ; !WEATHER_HURRICANE
+    BEQ .hurricane                                             ;83D9B2|F04B    |83D9FF;
     REP #$30                                                   ;83D9B4|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D9B6|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83D9BA|292000  |      ;
-    BNE CODE_83D9FF                                            ;83D9BD|D040    |83D9FF;
+    BNE .hurricane                                             ;83D9BD|D040    |83D9FF;
     LDA.W nMapEngine_flags                                     ;83D9BF|AD9601  |000196;
     AND.W #$0200                                               ;83D9C2|290002  |      ;
-    BNE CODE_83DA0F                                            ;83D9C5|D048    |83DA0F;
+    BNE .label3                                                ;83D9C5|D048    |83DA0F;
     LDA.W nMapEngine_flags                                     ;83D9C7|AD9601  |000196;
     AND.W #$0002                                               ;83D9CA|290200  |      ;
-    BNE CODE_83D9DF                                            ;83D9CD|D010    |83D9DF;
+    BNE .label1                                                ;83D9CD|D010    |83D9DF;
  
-CODE_83D9CF:
+.anyFestival:
     REP #$30                                                   ;83D9CF|C230    |      ;
     LDA.W #$0000                                               ;83D9D1|A90000  |      ;
     LDX.W #$0001                                               ;83D9D4|A20100  |      ;
@@ -10599,7 +10551,7 @@ CODE_83D9CF:
     RTS                                                        ;83D9DE|60      |      ;
  
  
-CODE_83D9DF:
+.label1:
     REP #$30                                                   ;83D9DF|C230    |      ;
     LDA.W #$0000                                               ;83D9E1|A90000  |      ;
     LDX.W #$0004                                               ;83D9E4|A20400  |      ;
@@ -10608,7 +10560,7 @@ CODE_83D9DF:
     RTS                                                        ;83D9EE|60      |      ;
  
  
-CODE_83D9EF:
+.label2:
     REP #$30                                                   ;83D9EF|C230    |      ;
     LDA.W #$0000                                               ;83D9F1|A90000  |      ;
     LDX.W #$0007                                               ;83D9F4|A20700  |      ;
@@ -10617,7 +10569,7 @@ CODE_83D9EF:
     RTS                                                        ;83D9FE|60      |      ;
  
  
-CODE_83D9FF:
+.hurricane:
     REP #$30                                                   ;83D9FF|C230    |      ;
     LDA.W #$0000                                               ;83DA01|A90000  |      ;
     LDX.W #$0006                                               ;83DA04|A20600  |      ;
@@ -10626,7 +10578,7 @@ CODE_83D9FF:
     RTS                                                        ;83DA0E|60      |      ;
  
  
-CODE_83DA0F:
+.label3:
     REP #$30                                                   ;83DA0F|C230    |      ;
     LDA.W #$0000                                               ;83DA11|A90000  |      ;
     LDX.W #$0008                                               ;83DA14|A20800  |      ;
@@ -10635,24 +10587,22 @@ CODE_83DA0F:
     RTS                                                        ;83DA1E|60      |      ;
  
  
-fAreaInit_RestaurantBedroom:
+fAreaEvents_EllenBedroom:
     REP #$30                                                   ;83DA1F|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83DA21|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83DA25|290800  |      ;
-    BNE CODE_83DA2D                                            ;83DA28|D003    |83DA2D;
-    JMP.W CODE_83D97D                                          ;83DA2A|4C7DD9  |83D97D;
+    BNE +                                                      ;83DA28|D003    |83DA2D;
+    JMP.W fAreaEvents_RestaurantHandler                        ;83DA2A|4C7DD9  |83D97D;
  
  
-CODE_83DA2D:
-    REP #$30                                                   ;83DA2D|C230    |      ;
+  + REP #$30                                                   ;83DA2D|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83DA2F|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83DA33|290200  |      ;
-    BNE CODE_83DA3B                                            ;83DA36|D003    |83DA3B;
-    JMP.W CODE_83D97D                                          ;83DA38|4C7DD9  |83D97D;
+    BNE +                                                      ;83DA36|D003    |83DA3B;
+    JMP.W fAreaEvents_RestaurantHandler                        ;83DA38|4C7DD9  |83D97D;
  
  
-CODE_83DA3B:
-    REP #$30                                                   ;83DA3B|C230    |      ;
+  + REP #$30                                                   ;83DA3B|C230    |      ;
     LDA.W #$0000                                               ;83DA3D|A90000  |      ;
     LDX.W #$0022                                               ;83DA40|A22200  |      ;
     LDY.W #$000A                                               ;83DA43|A00A00  |      ;
@@ -10660,11 +10610,11 @@ CODE_83DA3B:
     RTS                                                        ;83DA4A|60      |      ;
  
  
-fAreaInit_FortuneTeller:
+fAreaEvents_FortuneTeller:
     REP #$30                                                   ;83DA4B|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DA4D|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83DA51|290100  |      ;
-    BNE CODE_83DA66                                            ;83DA54|D010    |83DA66;
+    BNE +                                                      ;83DA54|D010    |83DA66;
     REP #$30                                                   ;83DA56|C230    |      ;
     LDA.W #$0000                                               ;83DA58|A90000  |      ;
     LDX.W #$000B                                               ;83DA5B|A20B00  |      ;
@@ -10673,31 +10623,30 @@ fAreaInit_FortuneTeller:
     RTS                                                        ;83DA65|60      |      ;
  
  
-CODE_83DA66:
-    REP #$20                                                   ;83DA66|C220    |      ;
+  + REP #$20                                                   ;83DA66|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83DA68|AD9601  |000196;
     AND.W #$0008                                               ;83DA6B|290800  |      ;
-    BNE CODE_83DABD                                            ;83DA6E|D04D    |83DABD;
+    BNE .label2                                                ;83DA6E|D04D    |83DABD;
     SEP #$20                                                   ;83DA70|E220    |      ;
     REP #$10                                                   ;83DA72|C210    |      ;
     LDA.W nWeatherForecast                                     ;83DA74|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83DA77|C906    |      ;
-    BCS CODE_83DA9D                                            ;83DA79|B022    |83DA9D;
+    CMP.B #$06                                                 ;83DA77|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    BCS .anyFestival                                           ;83DA79|B022    |83DA9D;
     LDA.W nWeatherForecast                                     ;83DA7B|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83DA7E|C903    |      ;
-    BEQ CODE_83DACD                                            ;83DA80|F04B    |83DACD;
+    CMP.B #$03                                                 ;83DA7E|C903    |      ; !WEATHER_HURRICANE
+    BEQ .hurricane                                             ;83DA80|F04B    |83DACD;
     REP #$30                                                   ;83DA82|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DA84|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83DA88|292000  |      ;
-    BNE CODE_83DACD                                            ;83DA8B|D040    |83DACD;
+    BNE .hurricane                                             ;83DA8B|D040    |83DACD;
     LDA.W nMapEngine_flags                                     ;83DA8D|AD9601  |000196;
     AND.W #$0200                                               ;83DA90|290002  |      ;
-    BNE CODE_83DADD                                            ;83DA93|D048    |83DADD;
+    BNE .label3                                                ;83DA93|D048    |83DADD;
     LDA.W nMapEngine_flags                                     ;83DA95|AD9601  |000196;
     AND.W #$0002                                               ;83DA98|290200  |      ;
-    BNE CODE_83DAAD                                            ;83DA9B|D010    |83DAAD;
+    BNE .label1                                                ;83DA9B|D010    |83DAAD;
  
-CODE_83DA9D:
+.anyFestival:
     REP #$30                                                   ;83DA9D|C230    |      ;
     LDA.W #$0000                                               ;83DA9F|A90000  |      ;
     LDX.W #$0001                                               ;83DAA2|A20100  |      ;
@@ -10706,7 +10655,7 @@ CODE_83DA9D:
     RTS                                                        ;83DAAC|60      |      ;
  
  
-CODE_83DAAD:
+.label1:
     REP #$30                                                   ;83DAAD|C230    |      ;
     LDA.W #$0000                                               ;83DAAF|A90000  |      ;
     LDX.W #$0004                                               ;83DAB2|A20400  |      ;
@@ -10715,7 +10664,7 @@ CODE_83DAAD:
     RTS                                                        ;83DABC|60      |      ;
  
  
-CODE_83DABD:
+.label2:
     REP #$30                                                   ;83DABD|C230    |      ;
     LDA.W #$0000                                               ;83DABF|A90000  |      ;
     LDX.W #$0007                                               ;83DAC2|A20700  |      ;
@@ -10724,7 +10673,7 @@ CODE_83DABD:
     RTS                                                        ;83DACC|60      |      ;
  
  
-CODE_83DACD:
+.hurricane:
     REP #$30                                                   ;83DACD|C230    |      ;
     LDA.W #$0000                                               ;83DACF|A90000  |      ;
     LDX.W #$0006                                               ;83DAD2|A20600  |      ;
@@ -10733,7 +10682,7 @@ CODE_83DACD:
     RTS                                                        ;83DADC|60      |      ;
  
  
-CODE_83DADD:
+.label3:
     REP #$30                                                   ;83DADD|C230    |      ;
     LDA.W #$0000                                               ;83DADF|A90000  |      ;
     LDX.W #$0008                                               ;83DAE2|A20800  |      ;
@@ -10742,11 +10691,11 @@ CODE_83DADD:
     RTS                                                        ;83DAEC|60      |      ;
  
  
-fAreaInit_AnimalShop:
+fAreaEvents_AnimalShop:
     REP #$30                                                   ;83DAED|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DAEF|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83DAF3|290100  |      ;
-    BNE CODE_83DB08                                            ;83DAF6|D010    |83DB08;
+    BNE +                                                      ;83DAF6|D010    |83DB08;
     REP #$30                                                   ;83DAF8|C230    |      ;
     LDA.W #$0000                                               ;83DAFA|A90000  |      ;
     LDX.W #$000B                                               ;83DAFD|A20B00  |      ;
@@ -10755,31 +10704,30 @@ fAreaInit_AnimalShop:
     RTS                                                        ;83DB07|60      |      ;
  
  
-CODE_83DB08:
-    REP #$20                                                   ;83DB08|C220    |      ;
+  + REP #$20                                                   ;83DB08|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83DB0A|AD9601  |000196;
     AND.W #$0008                                               ;83DB0D|290800  |      ;
-    BNE CODE_83DB5F                                            ;83DB10|D04D    |83DB5F;
+    BNE .label2                                                ;83DB10|D04D    |83DB5F;
     SEP #$20                                                   ;83DB12|E220    |      ;
     REP #$10                                                   ;83DB14|C210    |      ;
     LDA.W nWeatherForecast                                     ;83DB16|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83DB19|C906    |      ;
-    BCS CODE_83DB3F                                            ;83DB1B|B022    |83DB3F;
+    CMP.B #$06                                                 ;83DB19|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    BCS .anyFestival                                           ;83DB1B|B022    |83DB3F;
     LDA.W nWeatherForecast                                     ;83DB1D|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83DB20|C903    |      ;
-    BEQ CODE_83DB6F                                            ;83DB22|F04B    |83DB6F;
+    CMP.B #$03                                                 ;83DB20|C903    |      ; !WEATHER_HURRICANE
+    BEQ .hurricane                                             ;83DB22|F04B    |83DB6F;
     REP #$30                                                   ;83DB24|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DB26|AF641F7F|7F1F64;
     AND.W #$0020                                               ;83DB2A|292000  |      ;
-    BNE CODE_83DB6F                                            ;83DB2D|D040    |83DB6F;
+    BNE .hurricane                                             ;83DB2D|D040    |83DB6F;
     LDA.W nMapEngine_flags                                     ;83DB2F|AD9601  |000196;
     AND.W #$0200                                               ;83DB32|290002  |      ;
-    BNE CODE_83DB7F                                            ;83DB35|D048    |83DB7F;
+    BNE .label3                                                ;83DB35|D048    |83DB7F;
     LDA.W nMapEngine_flags                                     ;83DB37|AD9601  |000196;
     AND.W #$0002                                               ;83DB3A|290200  |      ;
-    BNE CODE_83DB4F                                            ;83DB3D|D010    |83DB4F;
+    BNE .label1                                                ;83DB3D|D010    |83DB4F;
  
-CODE_83DB3F:
+.anyFestival:
     REP #$30                                                   ;83DB3F|C230    |      ;
     LDA.W #$0000                                               ;83DB41|A90000  |      ;
     LDX.W #$0001                                               ;83DB44|A20100  |      ;
@@ -10788,7 +10736,7 @@ CODE_83DB3F:
     RTS                                                        ;83DB4E|60      |      ;
  
  
-CODE_83DB4F:
+.label1:
     REP #$30                                                   ;83DB4F|C230    |      ;
     LDA.W #$0000                                               ;83DB51|A90000  |      ;
     LDX.W #$0004                                               ;83DB54|A20400  |      ;
@@ -10797,7 +10745,7 @@ CODE_83DB4F:
     RTS                                                        ;83DB5E|60      |      ;
  
  
-CODE_83DB5F:
+.label2:
     REP #$30                                                   ;83DB5F|C230    |      ;
     LDA.W #$0000                                               ;83DB61|A90000  |      ;
     LDX.W #$0007                                               ;83DB64|A20700  |      ;
@@ -10806,7 +10754,7 @@ CODE_83DB5F:
     RTS                                                        ;83DB6E|60      |      ;
  
  
-CODE_83DB6F:
+.hurricane:
     REP #$30                                                   ;83DB6F|C230    |      ;
     LDA.W #$0000                                               ;83DB71|A90000  |      ;
     LDX.W #$0006                                               ;83DB74|A20600  |      ;
@@ -10815,7 +10763,7 @@ CODE_83DB6F:
     RTS                                                        ;83DB7E|60      |      ;
  
  
-CODE_83DB7F:
+.label3:
     REP #$30                                                   ;83DB7F|C230    |      ;
     LDA.W #$0000                                               ;83DB81|A90000  |      ;
     LDX.W #$0008                                               ;83DB84|A20800  |      ;
@@ -10824,19 +10772,18 @@ CODE_83DB7F:
     RTS                                                        ;83DB8E|60      |      ;
  
  
-fAreaInit_Bar:
+fAreaEvents_Bar:
     REP #$30                                                   ;83DB8F|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83DB91|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83DB95|291000  |      ;
-    BNE CODE_83DB9C                                            ;83DB98|D002    |83DB9C;
-    BRA CODE_83DBB7                                            ;83DB9A|801B    |83DBB7;
+    BNE +                                                      ;83DB98|D002    |83DB9C;
+    BRA fAreaEvents_BarHandler                                 ;83DB9A|801B    |83DBB7;
  
  
-CODE_83DB9C:
-    REP #$30                                                   ;83DB9C|C230    |      ;
+  + REP #$30                                                   ;83DB9C|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83DB9E|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83DBA2|290200  |      ;
-    BEQ CODE_83DBB7                                            ;83DBA5|F010    |83DBB7;
+    BEQ fAreaEvents_BarHandler                                 ;83DBA5|F010    |83DBB7;
     REP #$30                                                   ;83DBA7|C230    |      ;
     LDA.W #$0000                                               ;83DBA9|A90000  |      ;
     LDX.W #$0022                                               ;83DBAC|A22200  |      ;
@@ -10845,19 +10792,19 @@ CODE_83DB9C:
     RTS                                                        ;83DBB6|60      |      ;
  
  
-CODE_83DBB7:
+fAreaEvents_BarHandler:
     SEP #$20                                                   ;83DBB7|E220    |      ;
     REP #$10                                                   ;83DBB9|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83DBBB|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83DBBF|C903    |      ;
-    BNE CODE_83DBE6                                            ;83DBC1|D023    |83DBE6;
+    BNE +                                                      ;83DBC1|D023    |83DBE6;
     LDA.L nCurrentDay                                          ;83DBC3|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83DBC7|C918    |      ;
-    BNE CODE_83DBE6                                            ;83DBC9|D01B    |83DBE6;
+    BNE +                                                      ;83DBC9|D01B    |83DBE6;
     REP #$20                                                   ;83DBCB|C220    |      ;
     LDA.L strcUnknownFlags.flags1                              ;83DBCD|AF741F7F|7F1F74;
     AND.W #$0004                                               ;83DBD1|290400  |      ;
-    BEQ CODE_83DBE6                                            ;83DBD4|F010    |83DBE6;
+    BEQ +                                                      ;83DBD4|F010    |83DBE6;
     REP #$30                                                   ;83DBD6|C230    |      ;
     LDA.W #$0000                                               ;83DBD8|A90000  |      ;
     LDX.W #$000F                                               ;83DBDB|A20F00  |      ;
@@ -10866,11 +10813,10 @@ CODE_83DBB7:
     RTS                                                        ;83DBE5|60      |      ;
  
  
-CODE_83DBE6:
-    REP #$30                                                   ;83DBE6|C230    |      ;
+  + REP #$30                                                   ;83DBE6|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DBE8|AF681F7F|7F1F68;
     AND.W #$0002                                               ;83DBEC|290200  |      ;
-    BNE CODE_83DC0E                                            ;83DBEF|D01D    |83DC0E;
+    BNE +                                                      ;83DBEF|D01D    |83DC0E;
     REP #$30                                                   ;83DBF1|C230    |      ;
     LDA.W #$0000                                               ;83DBF3|A90000  |      ;
     LDX.W #$000B                                               ;83DBF6|A20B00  |      ;
@@ -10883,8 +10829,7 @@ CODE_83DBE6:
     RTS                                                        ;83DC0D|60      |      ;
  
  
-CODE_83DC0E:
-    REP #$30                                                   ;83DC0E|C230    |      ;
+  + REP #$30                                                   ;83DC0E|C230    |      ;
     LDA.W #$0000                                               ;83DC10|A90000  |      ;
     LDX.W #$0005                                               ;83DC13|A20500  |      ;
     LDY.W #$0000                                               ;83DC16|A00000  |      ;
@@ -10892,24 +10837,22 @@ CODE_83DC0E:
     RTS                                                        ;83DC1D|60      |      ;
  
  
-fAreaInit_EveBedroom:
+fAreaEvents_EveBedroom:
     REP #$30                                                   ;83DC1E|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83DC20|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83DC24|291000  |      ;
-    BNE CODE_83DC2C                                            ;83DC27|D003    |83DC2C;
-    JMP.W CODE_83DBB7                                          ;83DC29|4CB7DB  |83DBB7;
+    BNE +                                                      ;83DC27|D003    |83DC2C;
+    JMP.W fAreaEvents_BarHandler                               ;83DC29|4CB7DB  |83DBB7;
  
  
-CODE_83DC2C:
-    REP #$30                                                   ;83DC2C|C230    |      ;
+  + REP #$30                                                   ;83DC2C|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83DC2E|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83DC32|290200  |      ;
-    BNE CODE_83DC3A                                            ;83DC35|D003    |83DC3A;
-    JMP.W CODE_83DBB7                                          ;83DC37|4CB7DB  |83DBB7;
+    BNE +                                                      ;83DC35|D003    |83DC3A;
+    JMP.W fAreaEvents_BarHandler                               ;83DC37|4CB7DB  |83DBB7;
  
  
-CODE_83DC3A:
-    REP #$30                                                   ;83DC3A|C230    |      ;
+  + REP #$30                                                   ;83DC3A|C230    |      ;
     LDA.W #$0000                                               ;83DC3C|A90000  |      ;
     LDX.W #$0022                                               ;83DC3F|A22200  |      ;
     LDY.W #$000C                                               ;83DC42|A00C00  |      ;
@@ -10917,11 +10860,11 @@ CODE_83DC3A:
     RTS                                                        ;83DC49|60      |      ;
  
  
-fAreaInit_Woods:
+fAreaEvents_Woods:
     REP #$30                                                   ;83DC4A|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DC4C|AF681F7F|7F1F68;
     AND.W #$0004                                               ;83DC50|290400  |      ;
-    BNE CODE_83DC72                                            ;83DC53|D01D    |83DC72;
+    BNE +                                                      ;83DC53|D01D    |83DC72;
     REP #$30                                                   ;83DC55|C230    |      ;
     LDA.W #$0000                                               ;83DC57|A90000  |      ;
     LDX.W #$000B                                               ;83DC5A|A20B00  |      ;
@@ -10934,11 +10877,10 @@ fAreaInit_Woods:
     RTS                                                        ;83DC71|60      |      ;
  
  
-CODE_83DC72:
-    REP #$30                                                   ;83DC72|C230    |      ;
+  + REP #$30                                                   ;83DC72|C230    |      ;
     LDA.L strcDailyFlags.flags3                                ;83DC74|AF5E1F7F|7F1F5E;
     AND.W #$0020                                               ;83DC78|292000  |      ;
-    BEQ CODE_83DC8D                                            ;83DC7B|F010    |83DC8D;
+    BEQ +                                                      ;83DC7B|F010    |83DC8D;
     REP #$30                                                   ;83DC7D|C230    |      ;
     LDA.W #$0000                                               ;83DC7F|A90000  |      ;
     LDX.W #$001D                                               ;83DC82|A21D00  |      ;
@@ -10947,11 +10889,10 @@ CODE_83DC72:
     RTS                                                        ;83DC8C|60      |      ;
  
  
-CODE_83DC8D:
-    REP #$30                                                   ;83DC8D|C230    |      ;
+  + REP #$30                                                   ;83DC8D|C230    |      ;
     LDA.L strcEventFlags.flags5                                ;83DC8F|AF6C1F7F|7F1F6C;
     AND.W #$0010                                               ;83DC93|291000  |      ;
-    BEQ CODE_83DCA8                                            ;83DC96|F010    |83DCA8;
+    BEQ +                                                      ;83DC96|F010    |83DCA8;
     REP #$30                                                   ;83DC98|C230    |      ;
     LDA.W #$0000                                               ;83DC9A|A90000  |      ;
     LDX.W #$001D                                               ;83DC9D|A21D00  |      ;
@@ -10960,103 +10901,100 @@ CODE_83DC8D:
     RTS                                                        ;83DCA7|60      |      ;
  
  
-CODE_83DCA8:
-    REP #$30                                                   ;83DCA8|C230    |      ;
+  + REP #$30                                                   ;83DCA8|C230    |      ;
     LDA.L strcEventFlags.flags5                                ;83DCAA|AF6C1F7F|7F1F6C;
     AND.W #$0004                                               ;83DCAE|290400  |      ;
-    BEQ CODE_83DCDF                                            ;83DCB1|F02C    |83DCDF;
+    BEQ .label1                                                ;83DCB1|F02C    |83DCDF;
     LDA.L strcDailyFlags.flags3                                ;83DCB3|AF5E1F7F|7F1F5E;
     AND.W #$0008                                               ;83DCB7|290800  |      ;
-    BNE CODE_83DCCD                                            ;83DCBA|D011    |83DCCD;
+    BNE +                                                      ;83DCBA|D011    |83DCCD;
     REP #$30                                                   ;83DCBC|C230    |      ;
     LDA.W #$0009                                               ;83DCBE|A90900  |      ;
     LDX.W #$001C                                               ;83DCC1|A21C00  |      ;
     LDY.W #$0001                                               ;83DCC4|A00100  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83DCC7|22978084|848097;
-    BRA CODE_83DD3F                                            ;83DCCB|8072    |83DD3F;
+    BRA .label2                                                ;83DCCB|8072    |83DD3F;
  
  
-CODE_83DCCD:
-    REP #$30                                                   ;83DCCD|C230    |      ;
+  + REP #$30                                                   ;83DCCD|C230    |      ;
     LDA.W #$0009                                               ;83DCCF|A90900  |      ;
     LDX.W #$001C                                               ;83DCD2|A21C00  |      ;
     LDY.W #$0002                                               ;83DCD5|A00200  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83DCD8|22978084|848097;
-    JMP.W CODE_83DD74                                          ;83DCDC|4C74DD  |83DD74;
+    JMP.W .justReturn                                          ;83DCDC|4C74DD  |83DD74;
  
  
-CODE_83DCDF:
+.label1:
     SEP #$20                                                   ;83DCDF|E220    |      ;
     REP #$10                                                   ;83DCE1|C210    |      ;
     LDA.L nCurrentYearID                                       ;83DCE3|AF181F7F|7F1F18;
-    BEQ CODE_83DD3F                                            ;83DCE7|F056    |83DD3F;
+    BEQ .label2                                                ;83DCE7|F056    |83DD3F;
     LDA.L nCurrentSeasonID                                     ;83DCE9|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83DCED|C902    |      ;
-    BCC CODE_83DD3F                                            ;83DCEF|904E    |83DD3F;
+    BCC .label2                                                ;83DCEF|904E    |83DD3F;
     LDA.L nCurrentDay                                          ;83DCF1|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83DCF5|C901    |      ;
-    BEQ CODE_83DD3F                                            ;83DCF7|F046    |83DD3F;
+    BEQ .label2                                                ;83DCF7|F046    |83DD3F;
     CMP.B #$08                                                 ;83DCF9|C908    |      ;
-    BCC CODE_83DD0F                                            ;83DCFB|9012    |83DD0F;
+    BCC +                                                      ;83DCFB|9012    |83DD0F;
     CMP.B #$0D                                                 ;83DCFD|C90D    |      ;
-    BCC CODE_83DD3F                                            ;83DCFF|903E    |83DD3F;
+    BCC .label2                                                ;83DCFF|903E    |83DD3F;
     CMP.B #$12                                                 ;83DD01|C912    |      ;
-    BCC CODE_83DD0F                                            ;83DD03|900A    |83DD0F;
+    BCC +                                                      ;83DD03|900A    |83DD0F;
     CMP.B #$19                                                 ;83DD05|C919    |      ;
-    BCC CODE_83DD3F                                            ;83DD07|9036    |83DD3F;
+    BCC .label2                                                ;83DD07|9036    |83DD3F;
     CMP.B #$1D                                                 ;83DD09|C91D    |      ;
-    BCC CODE_83DD0F                                            ;83DD0B|9002    |83DD0F;
-    BRA CODE_83DD3F                                            ;83DD0D|8030    |83DD3F;
+    BCC +                                                      ;83DD0B|9002    |83DD0F;
+    BRA .label2                                                ;83DD0D|8030    |83DD3F;
  
  
-CODE_83DD0F:
-    REP #$20                                                   ;83DD0F|C220    |      ;
+  + REP #$20                                                   ;83DD0F|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83DD11|AD9601  |000196;
     AND.W #$001A                                               ;83DD14|291A00  |      ;
-    BNE CODE_83DD3F                                            ;83DD17|D026    |83DD3F;
+    BNE .label2                                                ;83DD17|D026    |83DD3F;
     LDA.L strcEventFlags.flags4                                ;83DD19|AF6A1F7F|7F1F6A;
     AND.W #$0200                                               ;83DD1D|290002  |      ;
-    BNE CODE_83DD3F                                            ;83DD20|D01D    |83DD3F;
+    BNE .label2                                                ;83DD20|D01D    |83DD3F;
     SEP #$20                                                   ;83DD22|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83DD24|AF1A1F7F|7F1F1A;
-    BEQ CODE_83DD3F                                            ;83DD28|F015    |83DD3F;
+    BEQ .label2                                                ;83DD28|F015    |83DD3F;
     CMP.B #$06                                                 ;83DD2A|C906    |      ;
-    BEQ CODE_83DD3F                                            ;83DD2C|F011    |83DD3F;
+    BEQ .label2                                                ;83DD2C|F011    |83DD3F;
     REP #$30                                                   ;83DD2E|C230    |      ;
     LDA.W #$0009                                               ;83DD30|A90900  |      ;
     LDX.W #$0021                                               ;83DD33|A22100  |      ;
     LDY.W #$0000                                               ;83DD36|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83DD39|22978084|848097;
-    BRA CODE_83DD3F                                            ;83DD3D|8000    |83DD3F;
+    BRA .label2                                                ;83DD3D|8000    |83DD3F;
  
  
-CODE_83DD3F:
+.label2:
     REP #$30                                                   ;83DD3F|C230    |      ;
     LDA.W nMapEngine_flags                                     ;83DD41|AD9601  |000196;
     AND.W #$0008                                               ;83DD44|290800  |      ;
-    BNE CODE_83DD74                                            ;83DD47|D02B    |83DD74;
+    BNE .justReturn                                            ;83DD47|D02B    |83DD74;
     LDA.W nMapEngine_flags                                     ;83DD49|AD9601  |000196;
     AND.W #$0200                                               ;83DD4C|290002  |      ;
-    BNE CODE_83DD74                                            ;83DD4F|D023    |83DD74;
+    BNE .justReturn                                            ;83DD4F|D023    |83DD74;
     LDA.W nMapEngine_flags                                     ;83DD51|AD9601  |000196;
     AND.W #$0002                                               ;83DD54|290200  |      ;
-    BNE CODE_83DD74                                            ;83DD57|D01B    |83DD74;
+    BNE .justReturn                                            ;83DD57|D01B    |83DD74;
     SEP #$20                                                   ;83DD59|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83DD5B|AF1A1F7F|7F1F1A;
-    BEQ CODE_83DD75                                            ;83DD5F|F014    |83DD75;
+    BEQ .notSunday                                             ;83DD5F|F014    |83DD75;
     CMP.B #$06                                                 ;83DD61|C906    |      ;
-    BEQ CODE_83DD85                                            ;83DD63|F020    |83DD85;
+    BEQ .saturday                                              ;83DD63|F020    |83DD85;
     REP #$30                                                   ;83DD65|C230    |      ;
     LDA.W #$0000                                               ;83DD67|A90000  |      ;
     LDX.W #$0001                                               ;83DD6A|A20100  |      ;
     LDY.W #$0008                                               ;83DD6D|A00800  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83DD70|22978084|848097;
  
-CODE_83DD74:
+.justReturn:
     RTS                                                        ;83DD74|60      |      ;
  
  
-CODE_83DD75:
+.notSunday:
     REP #$30                                                   ;83DD75|C230    |      ;
     LDA.W #$0000                                               ;83DD77|A90000  |      ;
     LDX.W #$0003                                               ;83DD7A|A20300  |      ;
@@ -11065,7 +11003,7 @@ CODE_83DD75:
     RTS                                                        ;83DD84|60      |      ;
  
  
-CODE_83DD85:
+.saturday:
     REP #$30                                                   ;83DD85|C230    |      ;
     LDA.W #$0000                                               ;83DD87|A90000  |      ;
     LDX.W #$0002                                               ;83DD8A|A20200  |      ;
@@ -11074,14 +11012,14 @@ CODE_83DD85:
     RTS                                                        ;83DD94|60      |      ;
  
  
-fAreaInit_WorksmanHouse:
+fAreaEvents_WorksmanHouse:
     REP #$30                                                   ;83DD95|C230    |      ;
     LDA.L strcEventFlags.flags4                                ;83DD97|AF6A1F7F|7F1F6A;
     AND.W #$2000                                               ;83DD9B|290020  |      ;
-    BNE CODE_83DDB9                                            ;83DD9E|D019    |83DDB9;
+    BNE +                                                      ;83DD9E|D019    |83DDB9;
     LDA.L strcEventFlags.flags4                                ;83DDA0|AF6A1F7F|7F1F6A;
     AND.W #$1000                                               ;83DDA4|290010  |      ;
-    BEQ CODE_83DDB9                                            ;83DDA7|F010    |83DDB9;
+    BEQ +                                                      ;83DDA7|F010    |83DDB9;
     REP #$30                                                   ;83DDA9|C230    |      ;
     LDA.W #$0000                                               ;83DDAB|A90000  |      ;
     LDX.W #$0019                                               ;83DDAE|A21900  |      ;
@@ -11090,25 +11028,23 @@ fAreaInit_WorksmanHouse:
     RTS                                                        ;83DDB8|60      |      ;
  
  
-CODE_83DDB9:
-    REP #$30                                                   ;83DDB9|C230    |      ;
+  + REP #$30                                                   ;83DDB9|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DDBB|AF681F7F|7F1F68;
     AND.W #$0008                                               ;83DDBF|290800  |      ;
-    BNE CODE_83DE0A                                            ;83DDC2|D046    |83DE0A;
+    BNE .label2                                                ;83DDC2|D046    |83DE0A;
     SEP #$20                                                   ;83DDC4|E220    |      ;
     LDA.L nCurrentYearID                                       ;83DDC6|AF181F7F|7F1F18;
-    BNE CODE_83DDFD                                            ;83DDCA|D031    |83DDFD;
+    BNE .label1                                                ;83DDCA|D031    |83DDFD;
     LDA.L nCurrentSeasonID                                     ;83DDCC|AF191F7F|7F1F19;
-    CMP.B #$02                                                 ;83DDD0|C902    |      ;
-    BCS CODE_83DDFD                                            ;83DDD2|B029    |83DDFD;
-    CMP.B #$00                                                 ;83DDD4|C900    |      ;
-    BEQ CODE_83DDE0                                            ;83DDD6|F008    |83DDE0;
+    CMP.B #$02                                                 ;83DDD0|C902    |      ; !SEASON_FALL
+    BCS .label1                                                ;83DDD2|B029    |83DDFD;
+    CMP.B #$00                                                 ;83DDD4|C900    |      ; !SEASON_SPRING
+    BEQ +                                                      ;83DDD6|F008    |83DDE0;
     LDA.L nCurrentDay                                          ;83DDD8|AF1B1F7F|7F1F1B;
     CMP.B #$1A                                                 ;83DDDC|C91A    |      ;
-    BCS CODE_83DDFD                                            ;83DDDE|B01D    |83DDFD;
+    BCS .label1                                                ;83DDDE|B01D    |83DDFD;
  
-CODE_83DDE0:
-    REP #$30                                                   ;83DDE0|C230    |      ;
+  + REP #$30                                                   ;83DDE0|C230    |      ;
     LDA.W #$0000                                               ;83DDE2|A90000  |      ;
     LDX.W #$000B                                               ;83DDE5|A20B00  |      ;
     LDY.W #$000A                                               ;83DDE8|A00A00  |      ;
@@ -11120,23 +11056,23 @@ CODE_83DDE0:
     RTS                                                        ;83DDFC|60      |      ;
  
  
-CODE_83DDFD:
+.label1:
     REP #$20                                                   ;83DDFD|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83DDFF|AF681F7F|7F1F68;
     ORA.W #$0008                                               ;83DE03|090800  |      ;
     STA.L strcEventFlags.flags3                                ;83DE06|8F681F7F|7F1F68;
  
-CODE_83DE0A:
+.label2:
     REP #$30                                                   ;83DE0A|C230    |      ;
     LDA.W nMapEngine_flags                                     ;83DE0C|AD9601  |000196;
     AND.W #$0008                                               ;83DE0F|290800  |      ;
-    BNE CODE_83DE44                                            ;83DE12|D030    |83DE44;
+    BNE .label4                                                ;83DE12|D030    |83DE44;
     LDA.W nMapEngine_flags                                     ;83DE14|AD9601  |000196;
     AND.W #$0200                                               ;83DE17|290002  |      ;
-    BNE CODE_83DE54                                            ;83DE1A|D038    |83DE54;
+    BNE .label5                                                ;83DE1A|D038    |83DE54;
     LDA.W nMapEngine_flags                                     ;83DE1C|AD9601  |000196;
     AND.W #$0002                                               ;83DE1F|290200  |      ;
-    BNE CODE_83DE34                                            ;83DE22|D010    |83DE34;
+    BNE .label3                                                ;83DE22|D010    |83DE34;
     REP #$30                                                   ;83DE24|C230    |      ;
     LDA.W #$0000                                               ;83DE26|A90000  |      ;
     LDX.W #$0001                                               ;83DE29|A20100  |      ;
@@ -11145,7 +11081,7 @@ CODE_83DE0A:
     RTS                                                        ;83DE33|60      |      ;
  
  
-CODE_83DE34:
+.label3:
     REP #$30                                                   ;83DE34|C230    |      ;
     LDA.W #$0000                                               ;83DE36|A90000  |      ;
     LDX.W #$0004                                               ;83DE39|A20400  |      ;
@@ -11154,7 +11090,7 @@ CODE_83DE34:
     RTS                                                        ;83DE43|60      |      ;
  
  
-CODE_83DE44:
+.label4:
     REP #$30                                                   ;83DE44|C230    |      ;
     LDA.W #$0000                                               ;83DE46|A90000  |      ;
     LDX.W #$0007                                               ;83DE49|A20700  |      ;
@@ -11163,7 +11099,7 @@ CODE_83DE44:
     RTS                                                        ;83DE53|60      |      ;
  
  
-CODE_83DE54:
+.label5:
     REP #$30                                                   ;83DE54|C230    |      ;
     LDA.W #$0000                                               ;83DE56|A90000  |      ;
     LDX.W #$0008                                               ;83DE59|A20800  |      ;
@@ -11172,11 +11108,11 @@ CODE_83DE54:
     RTS                                                        ;83DE63|60      |      ;
  
  
-fAreaInit_ImpsUnderground:
+fAreaEvents_ImpsUnderground:
     REP #$30                                                   ;83DE64|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DE66|AF681F7F|7F1F68;
     AND.W #$2000                                               ;83DE6A|290020  |      ;
-    BNE CODE_83DE7F                                            ;83DE6D|D010    |83DE7F;
+    BNE +                                                      ;83DE6D|D010    |83DE7F;
     REP #$30                                                   ;83DE6F|C230    |      ;
     LDA.W #$0000                                               ;83DE71|A90000  |      ;
     LDX.W #$0015                                               ;83DE74|A21500  |      ;
@@ -11185,11 +11121,10 @@ fAreaInit_ImpsUnderground:
     RTS                                                        ;83DE7E|60      |      ;
  
  
-CODE_83DE7F:
-    REP #$30                                                   ;83DE7F|C230    |      ;
+  + REP #$30                                                   ;83DE7F|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DE81|AF641F7F|7F1F64;
     AND.W #$0002                                               ;83DE85|290200  |      ;
-    BEQ CODE_83DE9A                                            ;83DE88|F010    |83DE9A;
+    BEQ .justReturn                                            ;83DE88|F010    |83DE9A;
     REP #$30                                                   ;83DE8A|C230    |      ;
     LDA.W #$0000                                               ;83DE8C|A90000  |      ;
     LDX.W #$0001                                               ;83DE8F|A20100  |      ;
@@ -11198,15 +11133,15 @@ CODE_83DE7F:
     RTS                                                        ;83DE99|60      |      ;
  
  
-CODE_83DE9A:
+.justReturn:
     RTS                                                        ;83DE9A|60      |      ;
  
  
-fAreaInit_CowBarn:
+fAreaEvents_CowBarn:
     REP #$20                                                   ;83DE9B|C220    |      ;
     LDA.L strcEventFlags.flags1                                ;83DE9D|AF641F7F|7F1F64;
     AND.W #$0008                                               ;83DEA1|290800  |      ;
-    BEQ CODE_83DED2                                            ;83DEA4|F02C    |83DED2;
+    BEQ .justReturn                                            ;83DEA4|F02C    |83DED2;
     REP #$20                                                   ;83DEA6|C220    |      ;
     LDA.W #$0015                                               ;83DEA8|A91500  |      ;
     LDX.W #$0000                                               ;83DEAB|A20000  |      ;
@@ -11225,55 +11160,53 @@ fAreaInit_CowBarn:
     LDA.W #$0000                                               ;83DECD|A90000  |      ;
     STA.B nPlayerAction                                        ;83DED0|85D4    |0000D4;
  
-CODE_83DED2:
+.justReturn:
     RTS                                                        ;83DED2|60      |      ;
  
  
-fAreaInit_House:
+fAreaEvents_House:
     SEP #$20                                                   ;83DED3|E220    |      ;
     REP #$10                                                   ;83DED5|C210    |      ;
     LDA.L nCurrentYearID                                       ;83DED7|AF181F7F|7F1F18;
     CMP.B #$02                                                 ;83DEDB|C902    |      ;
-    BNE CODE_83DEF2                                            ;83DEDD|D013    |83DEF2;
+    BNE +                                                      ;83DEDD|D013    |83DEF2;
     LDA.L nCurrentSeasonID                                     ;83DEDF|AF191F7F|7F1F19;
-    CMP.B #$01                                                 ;83DEE3|C901    |      ;
-    BNE CODE_83DEF2                                            ;83DEE5|D00B    |83DEF2;
+    CMP.B #$01                                                 ;83DEE3|C901    |      ; !SEASON_SUMMER
+    BNE +                                                      ;83DEE5|D00B    |83DEF2;
     LDA.L nCurrentDay                                          ;83DEE7|AF1B1F7F|7F1F1B;
     CMP.B #$1E                                                 ;83DEEB|C91E    |      ;
-    BNE CODE_83DEF2                                            ;83DEED|D003    |83DEF2;
-    JMP.W CODE_83F4D8                                          ;83DEEF|4CD8F4  |83F4D8;
+    BNE +                                                      ;83DEED|D003    |83DEF2;
+    JMP.W fAreaInit_HouseHelper                                ;83DEEF|4CD8F4  |83F4D8;
  
  
-CODE_83DEF2:
-    REP #$30                                                   ;83DEF2|C230    |      ;
+  + REP #$30                                                   ;83DEF2|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DEF4|AF641F7F|7F1F64;
     AND.W #$0080                                               ;83DEF8|298000  |      ;
-    BEQ CODE_83DF06                                            ;83DEFB|F009    |83DF06;
+    BEQ +                                                      ;83DEFB|F009    |83DF06;
     SEP #$20                                                   ;83DEFD|E220    |      ;
-    LDA.B #$17                                                 ;83DEFF|A917    |      ;
+    LDA.B #$17                                                 ;83DEFF|A917    |      ; !AREA_HOUSE3
     STA.W nDestinationAreaId                                   ;83DF01|8D8B09  |00098B;
-    BRA CODE_83DF1A                                            ;83DF04|8014    |83DF1A;
+    BRA .jump                                                  ;83DF04|8014    |83DF1A;
  
  
-CODE_83DF06:
-    REP #$30                                                   ;83DF06|C230    |      ;
+  + REP #$30                                                   ;83DF06|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DF08|AF641F7F|7F1F64;
     AND.W #$0040                                               ;83DF0C|294000  |      ;
-    BEQ CODE_83DF1A                                            ;83DF0F|F009    |83DF1A;
+    BEQ .jump                                                  ;83DF0F|F009    |83DF1A;
     SEP #$20                                                   ;83DF11|E220    |      ;
-    LDA.B #$16                                                 ;83DF13|A916    |      ;
+    LDA.B #$16                                                 ;83DF13|A916    |      ; !AREA_HOUSE2
     STA.W nDestinationAreaId                                   ;83DF15|8D8B09  |00098B;
-    BRA CODE_83DF1A                                            ;83DF18|8000    |83DF1A;
+    BRA .jump                                                  ;83DF18|8000    |83DF1A;
  
  
-CODE_83DF1A:
+.jump:
     REP #$30                                                   ;83DF1A|C230    |      ;
     LDA.L strcEventFlags.flags5                                ;83DF1C|AF6C1F7F|7F1F6C;
     AND.W #$2000                                               ;83DF20|290020  |      ;
-    BEQ CODE_83DF47                                            ;83DF23|F022    |83DF47;
+    BEQ +                                                      ;83DF23|F022    |83DF47;
     LDA.L strcEventFlags.flags5                                ;83DF25|AF6C1F7F|7F1F6C;
     AND.W #$4000                                               ;83DF29|290040  |      ;
-    BNE CODE_83DF47                                            ;83DF2C|D019    |83DF47;
+    BNE +                                                      ;83DF2C|D019    |83DF47;
     LDA.W #$009C                                               ;83DF2E|A99C00  |      ;
     STA.W nTileInFrontOfPlayerX                                ;83DF31|8D8509  |000985;
     LDA.W #$0090                                               ;83DF34|A99000  |      ;
@@ -11283,15 +11216,14 @@ CODE_83DF1A:
     LDY.W #$001F                                               ;83DF40|A01F00  |      ;
     JSL.L fAI_Unknown8480F8                                    ;83DF43|22F88084|8480F8;
  
-CODE_83DF47:
-    REP #$30                                                   ;83DF47|C230    |      ;
+  + REP #$30                                                   ;83DF47|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83DF49|AF6E1F7F|7F1F6E;
     AND.W #$0080                                               ;83DF4D|298000  |      ;
-    BNE CODE_83DF55                                            ;83DF50|D003    |83DF55;
-    JMP.W CODE_83DFF8                                          ;83DF52|4CF8DF  |83DFF8;
+    BNE .label1                                                ;83DF50|D003    |83DF55;
+    JMP.W .label2                                              ;83DF52|4CF8DF  |83DFF8;
  
  
-CODE_83DF55:
+.label1:
     LDA.L strcEventFlags.flags6                                ;83DF55|AF6E1F7F|7F1F6E;
     AND.W #$FF7F                                               ;83DF59|297FFF  |      ;
     STA.L strcEventFlags.flags6                                ;83DF5C|8F6E1F7F|7F1F6E;
@@ -11303,61 +11235,61 @@ CODE_83DF55:
     LDA.B #$02                                                 ;83DF6C|A902    |      ;
     LDX.W #$0240                                               ;83DF6E|A24002  |      ;
     LDY.W #$02C0                                               ;83DF71|A0C002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DF74|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DF74|2249B082|82B049;
     SEP #$20                                                   ;83DF78|E220    |      ;
     REP #$10                                                   ;83DF7A|C210    |      ;
     LDA.B #$02                                                 ;83DF7C|A902    |      ;
     LDX.W #$0250                                               ;83DF7E|A25002  |      ;
     LDY.W #$02C0                                               ;83DF81|A0C002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DF84|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DF84|2249B082|82B049;
     SEP #$20                                                   ;83DF88|E220    |      ;
     REP #$10                                                   ;83DF8A|C210    |      ;
     LDA.B #$02                                                 ;83DF8C|A902    |      ;
     LDX.W #$0260                                               ;83DF8E|A26002  |      ;
     LDY.W #$02C0                                               ;83DF91|A0C002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DF94|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DF94|2249B082|82B049;
     SEP #$20                                                   ;83DF98|E220    |      ;
     REP #$10                                                   ;83DF9A|C210    |      ;
     LDA.B #$02                                                 ;83DF9C|A902    |      ;
     LDX.W #$0240                                               ;83DF9E|A24002  |      ;
     LDY.W #$02D0                                               ;83DFA1|A0D002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DFA4|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFA4|2249B082|82B049;
     SEP #$20                                                   ;83DFA8|E220    |      ;
     REP #$10                                                   ;83DFAA|C210    |      ;
     LDA.B #$02                                                 ;83DFAC|A902    |      ;
     LDX.W #$0250                                               ;83DFAE|A25002  |      ;
     LDY.W #$02D0                                               ;83DFB1|A0D002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DFB4|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFB4|2249B082|82B049;
     SEP #$20                                                   ;83DFB8|E220    |      ;
     REP #$10                                                   ;83DFBA|C210    |      ;
     LDA.B #$02                                                 ;83DFBC|A902    |      ;
     LDX.W #$0260                                               ;83DFBE|A26002  |      ;
     LDY.W #$02D0                                               ;83DFC1|A0D002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DFC4|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFC4|2249B082|82B049;
     SEP #$20                                                   ;83DFC8|E220    |      ;
     REP #$10                                                   ;83DFCA|C210    |      ;
     LDA.B #$02                                                 ;83DFCC|A902    |      ;
     LDX.W #$0240                                               ;83DFCE|A24002  |      ;
     LDY.W #$02E0                                               ;83DFD1|A0E002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DFD4|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFD4|2249B082|82B049;
     SEP #$20                                                   ;83DFD8|E220    |      ;
     REP #$10                                                   ;83DFDA|C210    |      ;
     LDA.B #$02                                                 ;83DFDC|A902    |      ;
     LDX.W #$0250                                               ;83DFDE|A25002  |      ;
     LDY.W #$02E0                                               ;83DFE1|A0E002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DFE4|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFE4|2249B082|82B049;
     SEP #$20                                                   ;83DFE8|E220    |      ;
     REP #$10                                                   ;83DFEA|C210    |      ;
     LDA.B #$02                                                 ;83DFEC|A902    |      ;
     LDX.W #$0260                                               ;83DFEE|A26002  |      ;
     LDY.W #$02E0                                               ;83DFF1|A0E002  |      ;
-    JSL.L fMap_UpdateFarmTilemap                               ;83DFF4|2249B082|82B049;
+    JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFF4|2249B082|82B049;
  
-CODE_83DFF8:
+.label2:
     REP #$30                                                   ;83DFF8|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83DFFA|AF6E1F7F|7F1F6E;
     AND.W #$0100                                               ;83DFFE|290001  |      ;
-    BEQ CODE_83E016                                            ;83E001|F013    |83E016;
+    BEQ +                                                      ;83E001|F013    |83E016;
     LDA.L strcEventFlags.flags6                                ;83E003|AF6E1F7F|7F1F6E;
     AND.W #$FEFF                                               ;83E007|29FFFE  |      ;
     STA.L strcEventFlags.flags6                                ;83E00A|8F6E1F7F|7F1F6E;
@@ -11365,11 +11297,10 @@ CODE_83DFF8:
     LDA.B #$15                                                 ;83E010|A915    |      ;
     JSL.L fAudioUnknown_8382C6                                 ;83E012|22C68283|8382C6;
  
-CODE_83E016:
-    REP #$30                                                   ;83E016|C230    |      ;
+  + REP #$30                                                   ;83E016|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E018|AF6E1F7F|7F1F6E;
     AND.W #$0200                                               ;83E01C|290002  |      ;
-    BEQ CODE_83E04C                                            ;83E01F|F02B    |83E04C;
+    BEQ +                                                      ;83E01F|F02B    |83E04C;
     LDA.L strcEventFlags.flags6                                ;83E021|AF6E1F7F|7F1F6E;
     AND.W #$FDFF                                               ;83E025|29FFFD  |      ;
     STA.L strcEventFlags.flags6                                ;83E028|8F6E1F7F|7F1F6E;
@@ -11386,11 +11317,10 @@ CODE_83E016:
     LDY.W #$001E                                               ;83E045|A01E00  |      ;
     JSL.L fAudioUnknown_8382FE                                 ;83E048|22FE8283|8382FE;
  
-CODE_83E04C:
-    REP #$30                                                   ;83E04C|C230    |      ;
+  + REP #$30                                                   ;83E04C|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E04E|AF6E1F7F|7F1F6E;
     AND.W #$0020                                               ;83E052|292000  |      ;
-    BEQ CODE_83E074                                            ;83E055|F01D    |83E074;
+    BEQ +                                                      ;83E055|F01D    |83E074;
     SEP #$20                                                   ;83E057|E220    |      ;
     REP #$10                                                   ;83E059|C210    |      ;
     LDA.B #$20                                                 ;83E05B|A920    |      ;
@@ -11402,17 +11332,16 @@ CODE_83E04C:
     AND.W #$FFDF                                               ;83E06D|29DFFF  |      ;
     STA.L strcEventFlags.flags6                                ;83E070|8F6E1F7F|7F1F6E;
  
-CODE_83E074:
-    REP #$30                                                   ;83E074|C230    |      ;
+  + REP #$30                                                   ;83E074|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E076|AF6E1F7F|7F1F6E;
     AND.W #$0010                                               ;83E07A|291000  |      ;
-    BEQ CODE_83E0DB                                            ;83E07D|F05C    |83E0DB;
+    BEQ .label6                                                ;83E07D|F05C    |83E0DB;
     LDA.L strcDailyFlags.flags3                                ;83E07F|AF5E1F7F|7F1F5E;
     AND.W #$4000                                               ;83E083|290040  |      ;
-    BNE CODE_83E0CB                                            ;83E086|D043    |83E0CB;
+    BNE .label5                                                ;83E086|D043    |83E0CB;
     LDA.L strcDailyFlags.flags3                                ;83E088|AF5E1F7F|7F1F5E;
     AND.W #$2000                                               ;83E08C|290020  |      ;
-    BNE CODE_83E0A1                                            ;83E08F|D010    |83E0A1;
+    BNE +                                                      ;83E08F|D010    |83E0A1;
     REP #$30                                                   ;83E091|C230    |      ;
     LDA.W #$0000                                               ;83E093|A90000  |      ;
     LDX.W #$001F                                               ;83E096|A21F00  |      ;
@@ -11421,8 +11350,7 @@ CODE_83E074:
     RTS                                                        ;83E0A0|60      |      ;
  
  
-CODE_83E0A1:
-    REP #$30                                                   ;83E0A1|C230    |      ;
+  + REP #$30                                                   ;83E0A1|C230    |      ;
     LDA.W #$0000                                               ;83E0A3|A90000  |      ;
     LDX.W #$001F                                               ;83E0A6|A21F00  |      ;
     LDY.W #$0001                                               ;83E0A9|A00100  |      ;
@@ -11430,21 +11358,20 @@ CODE_83E0A1:
     REP #$20                                                   ;83E0B0|C220    |      ;
     LDA.L nFirstChildAge                                       ;83E0B2|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E0B6|C93C00  |      ;
-    BNE CODE_83E0C3                                            ;83E0B9|D008    |83E0C3;
+    BNE +                                                      ;83E0B9|D008    |83E0C3;
     SEP #$20                                                   ;83E0BB|E220    |      ;
     LDA.B #$05                                                 ;83E0BD|A905    |      ;
     STA.W nNameInputLenght                                     ;83E0BF|8D9F09  |00099F;
     RTS                                                        ;83E0C2|60      |      ;
  
  
-CODE_83E0C3:
-    SEP #$20                                                   ;83E0C3|E220    |      ;
+  + SEP #$20                                                   ;83E0C3|E220    |      ;
     LDA.B #$06                                                 ;83E0C5|A906    |      ;
     STA.W nNameInputLenght                                     ;83E0C7|8D9F09  |00099F;
     RTS                                                        ;83E0CA|60      |      ;
  
  
-CODE_83E0CB:
+.label5:
     REP #$30                                                   ;83E0CB|C230    |      ;
     LDA.W #$0000                                               ;83E0CD|A90000  |      ;
     LDX.W #$001F                                               ;83E0D0|A21F00  |      ;
@@ -11453,11 +11380,11 @@ CODE_83E0CB:
     RTS                                                        ;83E0DA|60      |      ;
  
  
-CODE_83E0DB:
+.label6:
     REP #$30                                                   ;83E0DB|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E0DD|AF6E1F7F|7F1F6E;
     AND.W #$0040                                               ;83E0E1|294000  |      ;
-    BEQ CODE_83E144                                            ;83E0E4|F05E    |83E144;
+    BEQ .label7                                                ;83E0E4|F05E    |83E144;
     REP #$30                                                   ;83E0E6|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E0E8|AF6E1F7F|7F1F6E;
     AND.W #$FFBF                                               ;83E0EC|29BFFF  |      ;
@@ -11498,87 +11425,86 @@ CODE_83E0DB:
     RTS                                                        ;83E143|60      |      ;
  
  
-CODE_83E144:
+.label7:
     REP #$30                                                   ;83E144|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83E146|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83E14A|290100  |      ;
-    BNE CODE_83E176                                            ;83E14D|D027    |83E176;
+    BNE .label8                                                ;83E14D|D027    |83E176;
     LDA.L strcEventFlags.flags2                                ;83E14F|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83E153|290200  |      ;
-    BNE CODE_83E186                                            ;83E156|D02E    |83E186;
+    BNE .label9                                                ;83E156|D02E    |83E186;
     LDA.L strcEventFlags.flags2                                ;83E158|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83E15C|290400  |      ;
-    BNE CODE_83E193                                            ;83E15F|D032    |83E193;
+    BNE .label10                                               ;83E15F|D032    |83E193;
     LDA.L strcEventFlags.flags2                                ;83E161|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83E165|290800  |      ;
-    BNE CODE_83E1A0                                            ;83E168|D036    |83E1A0;
+    BNE .label11                                               ;83E168|D036    |83E1A0;
     LDA.L strcEventFlags.flags2                                ;83E16A|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83E16E|291000  |      ;
-    BNE CODE_83E1AD                                            ;83E171|D03A    |83E1AD;
-    JMP.W CODE_83E2C6                                          ;83E173|4CC6E2  |83E2C6;
+    BNE .label12                                               ;83E171|D03A    |83E1AD;
+    JMP.W .label23                                             ;83E173|4CC6E2  |83E2C6;
  
  
-CODE_83E176:
+.label8:
     REP #$30                                                   ;83E176|C230    |      ;
     LDA.L nLove_Maria                                          ;83E178|AF1F1F7F|7F1F1F;
     CMP.W #$00C8                                               ;83E17C|C9C800  |      ;
-    BCC CODE_83E184                                            ;83E17F|9003    |83E184;
-    JMP.W CODE_83E210                                          ;83E181|4C10E2  |83E210;
+    BCC +                                                      ;83E17F|9003    |83E184;
+    JMP.W .label14                                             ;83E181|4C10E2  |83E210;
  
  
-CODE_83E184:
-    BRA CODE_83E1BA                                            ;83E184|8034    |83E1BA;
+  + BRA .label13                                               ;83E184|8034    |83E1BA;
  
  
-CODE_83E186:
+.label9:
     REP #$30                                                   ;83E186|C230    |      ;
     LDA.L nLove_Ann                                            ;83E188|AF211F7F|7F1F21;
     CMP.W #$00C8                                               ;83E18C|C9C800  |      ;
-    BCS CODE_83E210                                            ;83E18F|B07F    |83E210;
-    BRA CODE_83E1BA                                            ;83E191|8027    |83E1BA;
+    BCS .label14                                               ;83E18F|B07F    |83E210;
+    BRA .label13                                               ;83E191|8027    |83E1BA;
  
  
-CODE_83E193:
+.label10:
     REP #$30                                                   ;83E193|C230    |      ;
     LDA.L nLove_Nina                                           ;83E195|AF231F7F|7F1F23;
     CMP.W #$00C8                                               ;83E199|C9C800  |      ;
-    BCS CODE_83E210                                            ;83E19C|B072    |83E210;
-    BRA CODE_83E1BA                                            ;83E19E|801A    |83E1BA;
+    BCS .label14                                               ;83E19C|B072    |83E210;
+    BRA .label13                                               ;83E19E|801A    |83E1BA;
  
  
-CODE_83E1A0:
+.label11:
     REP #$30                                                   ;83E1A0|C230    |      ;
     LDA.L nLove_Ellen                                          ;83E1A2|AF251F7F|7F1F25;
     CMP.W #$00C8                                               ;83E1A6|C9C800  |      ;
-    BCS CODE_83E210                                            ;83E1A9|B065    |83E210;
-    BRA CODE_83E1BA                                            ;83E1AB|800D    |83E1BA;
+    BCS .label14                                               ;83E1A9|B065    |83E210;
+    BRA .label13                                               ;83E1AB|800D    |83E1BA;
  
  
-CODE_83E1AD:
+.label12:
     REP #$30                                                   ;83E1AD|C230    |      ;
     LDA.L nLove_Eve                                            ;83E1AF|AF271F7F|7F1F27;
     CMP.W #$00C8                                               ;83E1B3|C9C800  |      ;
-    BCS CODE_83E210                                            ;83E1B6|B058    |83E210;
-    BRA CODE_83E1BA                                            ;83E1B8|8000    |83E1BA;
+    BCS .label14                                               ;83E1B6|B058    |83E210;
+    BRA .label13                                               ;83E1B8|8000    |83E1BA;
  
  
-CODE_83E1BA:
+.label13:
     SEP #$20                                                   ;83E1BA|E220    |      ;
     REP #$10                                                   ;83E1BC|C210    |      ;
     LDA.L nCurrentTimeID                                       ;83E1BE|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E1C2|C906    |      ;
-    BNE CODE_83E210                                            ;83E1C4|D04A    |83E210;
+    BNE .label14                                               ;83E1C4|D04A    |83E210;
     LDA.L nInGameHourCounter                                   ;83E1C6|AF1D1F7F|7F1F1D;
-    BNE CODE_83E210                                            ;83E1CA|D044    |83E210;
+    BNE .label14                                               ;83E1CA|D044    |83E210;
     LDA.L nInGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E;
-    BNE CODE_83E210                                            ;83E1D0|D03E    |83E210;
+    BNE .label14                                               ;83E1D0|D03E    |83E210;
     REP #$20                                                   ;83E1D2|C220    |      ;
     LDA.L strcEventFlags.flags6                                ;83E1D4|AF6E1F7F|7F1F6E;
     AND.W #$000C                                               ;83E1D8|290C00  |      ;
-    BNE CODE_83E210                                            ;83E1DB|D033    |83E210;
+    BNE .label14                                               ;83E1DB|D033    |83E210;
     LDA.L strcEventFlags.flags6                                ;83E1DD|AF6E1F7F|7F1F6E;
     AND.W #$0001                                               ;83E1E1|290100  |      ;
-    BNE CODE_83E210                                            ;83E1E4|D02A    |83E210;
+    BNE .label14                                               ;83E1E4|D02A    |83E210;
     REP #$30                                                   ;83E1E6|C230    |      ;
     LDA.W #$0000                                               ;83E1E8|A90000  |      ;
     LDX.W #$0022                                               ;83E1EB|A22200  |      ;
@@ -11591,140 +11517,138 @@ CODE_83E1BA:
     LDA.L strcDailyFlags.flags3                                ;83E202|AF5E1F7F|7F1F5E;
     ORA.W #$1000                                               ;83E206|090010  |      ;
     STA.L strcDailyFlags.flags3                                ;83E209|8F5E1F7F|7F1F5E;
-    JMP.W CODE_83E2C6                                          ;83E20D|4CC6E2  |83E2C6;
+    JMP.W .label23                                             ;83E20D|4CC6E2  |83E2C6;
  
  
-CODE_83E210:
+.label14:
     REP #$30                                                   ;83E210|C230    |      ;
     LDA.L strcDailyFlags.flags3                                ;83E212|AF5E1F7F|7F1F5E;
     AND.W #$EFFF                                               ;83E216|29FFEF  |      ;
     STA.L strcDailyFlags.flags3                                ;83E219|8F5E1F7F|7F1F5E;
     LDA.L strcEventFlags.flags6                                ;83E21D|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83E221|290200  |      ;
-    BNE CODE_83E262                                            ;83E224|D03C    |83E262;
+    BNE .label17                                               ;83E224|D03C    |83E262;
     LDA.L strcEventFlags.flags2                                ;83E226|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83E22A|290100  |      ;
-    BNE CODE_83E271                                            ;83E22D|D042    |83E271;
+    BNE .label18                                               ;83E22D|D042    |83E271;
     LDA.L strcEventFlags.flags2                                ;83E22F|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83E233|290200  |      ;
-    BEQ CODE_83E23B                                            ;83E236|F003    |83E23B;
-    JMP.W CODE_83E282                                          ;83E238|4C82E2  |83E282;
+    BEQ +                                                      ;83E236|F003    |83E23B;
+    JMP.W .label19                                             ;83E238|4C82E2  |83E282;
  
  
-CODE_83E23B:
-    LDA.L strcEventFlags.flags2                                ;83E23B|AF661F7F|7F1F66;
+  + LDA.L strcEventFlags.flags2                                ;83E23B|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83E23F|290400  |      ;
-    BEQ CODE_83E247                                            ;83E242|F003    |83E247;
-    JMP.W CODE_83E293                                          ;83E244|4C93E2  |83E293;
+    BEQ .label15                                               ;83E242|F003    |83E247;
+    JMP.W .label20                                             ;83E244|4C93E2  |83E293;
  
  
-CODE_83E247:
+.label15:
     LDA.L strcEventFlags.flags2                                ;83E247|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83E24B|290800  |      ;
-    BEQ CODE_83E253                                            ;83E24E|F003    |83E253;
-    JMP.W CODE_83E2A4                                          ;83E250|4CA4E2  |83E2A4;
+    BEQ .label16                                               ;83E24E|F003    |83E253;
+    JMP.W .label21                                             ;83E250|4CA4E2  |83E2A4;
  
  
-CODE_83E253:
+.label16:
     LDA.L strcEventFlags.flags2                                ;83E253|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83E257|291000  |      ;
-    BEQ CODE_83E25F                                            ;83E25A|F003    |83E25F;
-    JMP.W CODE_83E2B5                                          ;83E25C|4CB5E2  |83E2B5;
+    BEQ +                                                      ;83E25A|F003    |83E25F;
+    JMP.W .label22                                             ;83E25C|4CB5E2  |83E2B5;
  
  
-CODE_83E25F:
-    JMP.W CODE_83E2C6                                          ;83E25F|4CC6E2  |83E2C6;
+  + JMP.W .label23                                             ;83E25F|4CC6E2  |83E2C6;
  
  
-CODE_83E262:
+.label17:
     REP #$30                                                   ;83E262|C230    |      ;
     LDA.L strcDailyFlags.flags3                                ;83E264|AF5E1F7F|7F1F5E;
     ORA.W #$1000                                               ;83E268|090010  |      ;
     STA.L strcDailyFlags.flags3                                ;83E26B|8F5E1F7F|7F1F5E;
-    BRA CODE_83E2C6                                            ;83E26F|8055    |83E2C6;
+    BRA .label23                                               ;83E26F|8055    |83E2C6;
  
  
-CODE_83E271:
+.label18:
     REP #$30                                                   ;83E271|C230    |      ;
     LDA.W #$0013                                               ;83E273|A91300  |      ;
     LDX.W #$0043                                               ;83E276|A24300  |      ;
     LDY.W #$0000                                               ;83E279|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E27C|22978084|848097;
-    BRA CODE_83E2C6                                            ;83E280|8044    |83E2C6;
+    BRA .label23                                               ;83E280|8044    |83E2C6;
  
  
-CODE_83E282:
+.label19:
     REP #$30                                                   ;83E282|C230    |      ;
     LDA.W #$0013                                               ;83E284|A91300  |      ;
     LDX.W #$0043                                               ;83E287|A24300  |      ;
     LDY.W #$0001                                               ;83E28A|A00100  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E28D|22978084|848097;
-    BRA CODE_83E2C6                                            ;83E291|8033    |83E2C6;
+    BRA .label23                                               ;83E291|8033    |83E2C6;
  
  
-CODE_83E293:
+.label20:
     REP #$30                                                   ;83E293|C230    |      ;
     LDA.W #$0013                                               ;83E295|A91300  |      ;
     LDX.W #$0043                                               ;83E298|A24300  |      ;
     LDY.W #$0002                                               ;83E29B|A00200  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E29E|22978084|848097;
-    BRA CODE_83E2C6                                            ;83E2A2|8022    |83E2C6;
+    BRA .label23                                               ;83E2A2|8022    |83E2C6;
  
  
-CODE_83E2A4:
+.label21:
     REP #$30                                                   ;83E2A4|C230    |      ;
     LDA.W #$0013                                               ;83E2A6|A91300  |      ;
     LDX.W #$0043                                               ;83E2A9|A24300  |      ;
     LDY.W #$0003                                               ;83E2AC|A00300  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E2AF|22978084|848097;
-    BRA CODE_83E2C6                                            ;83E2B3|8011    |83E2C6;
+    BRA .label23                                               ;83E2B3|8011    |83E2C6;
  
  
-CODE_83E2B5:
+.label22:
     REP #$30                                                   ;83E2B5|C230    |      ;
     LDA.W #$0013                                               ;83E2B7|A91300  |      ;
     LDX.W #$0043                                               ;83E2BA|A24300  |      ;
     LDY.W #$0004                                               ;83E2BD|A00400  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E2C0|22978084|848097;
-    BRA CODE_83E2C6                                            ;83E2C4|8000    |83E2C6;
+    BRA .label23                                               ;83E2C4|8000    |83E2C6;
  
  
-CODE_83E2C6:
+.label23:
     REP #$30                                                   ;83E2C6|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E2C8|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;83E2CC|290400  |      ;
-    BEQ CODE_83E2E9                                            ;83E2CF|F018    |83E2E9;
+    BEQ .label24                                               ;83E2CF|F018    |83E2E9;
     LDA.L nFirstChildAge                                       ;83E2D1|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E2D5|C93C00  |      ;
-    BCC CODE_83E2E9                                            ;83E2D8|900F    |83E2E9;
+    BCC .label24                                               ;83E2D8|900F    |83E2E9;
     REP #$30                                                   ;83E2DA|C230    |      ;
     LDA.W #$0014                                               ;83E2DC|A91400  |      ;
     LDX.W #$0045                                               ;83E2DF|A24500  |      ;
     LDY.W #$0000                                               ;83E2E2|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E2E5|22978084|848097;
  
-CODE_83E2E9:
+.label24:
     REP #$30                                                   ;83E2E9|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E2EB|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;83E2EF|290800  |      ;
-    BEQ CODE_83E30C                                            ;83E2F2|F018    |83E30C;
+    BEQ .label25                                               ;83E2F2|F018    |83E30C;
     LDA.L nSecondChildAge                                      ;83E2F4|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83E2F8|C93C00  |      ;
-    BCC CODE_83E30C                                            ;83E2FB|900F    |83E30C;
+    BCC .label25                                               ;83E2FB|900F    |83E30C;
     REP #$30                                                   ;83E2FD|C230    |      ;
     LDA.W #$0015                                               ;83E2FF|A91500  |      ;
     LDX.W #$0045                                               ;83E302|A24500  |      ;
     LDY.W #$0003                                               ;83E305|A00300  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E308|22978084|848097;
  
-CODE_83E30C:
+.label25:
     REP #$30                                                   ;83E30C|C230    |      ;
     LDA.L strcDailyFlags.flags4                                ;83E30E|AF601F7F|7F1F60;
     AND.W #$0020                                               ;83E312|292000  |      ;
-    BNE CODE_83E330                                            ;83E315|D019    |83E330;
+    BNE .label26                                               ;83E315|D019    |83E330;
     LDA.L strcEventFlags.flags3                                ;83E317|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83E31B|290100  |      ;
-    BNE CODE_83E340                                            ;83E31E|D020    |83E340;
+    BNE .label27                                               ;83E31E|D020    |83E340;
     REP #$30                                                   ;83E320|C230    |      ;
     LDA.W #$0000                                               ;83E322|A90000  |      ;
     LDX.W #$000A                                               ;83E325|A20A00  |      ;
@@ -11733,7 +11657,7 @@ CODE_83E30C:
     RTS                                                        ;83E32F|60      |      ;
  
  
-CODE_83E330:
+.label26:
     REP #$30                                                   ;83E330|C230    |      ;
     LDA.W #$0000                                               ;83E332|A90000  |      ;
     LDX.W #$000A                                               ;83E335|A20A00  |      ;
@@ -11742,25 +11666,25 @@ CODE_83E330:
     RTS                                                        ;83E33F|60      |      ;
  
  
-CODE_83E340:
+.label27:
     SEP #$20                                                   ;83E340|E220    |      ;
     REP #$10                                                   ;83E342|C210    |      ;
     LDA.L nCurrentYearID                                       ;83E344|AF181F7F|7F1F18;
     CMP.B #$01                                                 ;83E348|C901    |      ;
-    BNE CODE_83E380                                            ;83E34A|D034    |83E380;
+    BNE .label28                                               ;83E34A|D034    |83E380;
     LDA.L nCurrentSeasonID                                     ;83E34C|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;83E350|C901    |      ;
-    BNE CODE_83E380                                            ;83E352|D02C    |83E380;
+    BNE .label28                                               ;83E352|D02C    |83E380;
     LDA.L nCurrentDay                                          ;83E354|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83E358|C901    |      ;
-    BNE CODE_83E380                                            ;83E35A|D024    |83E380;
+    BNE .label28                                               ;83E35A|D024    |83E380;
     LDA.L nCurrentTimeID                                       ;83E35C|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E360|C906    |      ;
-    BNE CODE_83E380                                            ;83E362|D01C    |83E380;
+    BNE .label28                                               ;83E362|D01C    |83E380;
     LDA.L nInGameHourCounter                                   ;83E364|AF1D1F7F|7F1F1D;
-    BNE CODE_83E380                                            ;83E368|D016    |83E380;
+    BNE .label28                                               ;83E368|D016    |83E380;
     LDA.L nInGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E;
-    BNE CODE_83E380                                            ;83E36E|D010    |83E380;
+    BNE .label28                                               ;83E36E|D010    |83E380;
     REP #$30                                                   ;83E370|C230    |      ;
     LDA.W #$0000                                               ;83E372|A90000  |      ;
     LDX.W #$000A                                               ;83E375|A20A00  |      ;
@@ -11769,25 +11693,25 @@ CODE_83E340:
     RTS                                                        ;83E37F|60      |      ;
  
  
-CODE_83E380:
+.label28:
     SEP #$20                                                   ;83E380|E220    |      ;
     REP #$10                                                   ;83E382|C210    |      ;
     LDA.L nCurrentYearID                                       ;83E384|AF181F7F|7F1F18;
     CMP.B #$02                                                 ;83E388|C902    |      ;
-    BNE CODE_83E3C0                                            ;83E38A|D034    |83E3C0;
+    BNE .label29                                               ;83E38A|D034    |83E3C0;
     LDA.L nCurrentSeasonID                                     ;83E38C|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;83E390|C901    |      ;
-    BNE CODE_83E3C0                                            ;83E392|D02C    |83E3C0;
+    BNE .label29                                               ;83E392|D02C    |83E3C0;
     LDA.L nCurrentDay                                          ;83E394|AF1B1F7F|7F1F1B;
     CMP.B #$1D                                                 ;83E398|C91D    |      ;
-    BNE CODE_83E3C0                                            ;83E39A|D024    |83E3C0;
+    BNE .label29                                               ;83E39A|D024    |83E3C0;
     LDA.L nCurrentTimeID                                       ;83E39C|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E3A0|C906    |      ;
-    BNE CODE_83E3C0                                            ;83E3A2|D01C    |83E3C0;
+    BNE .label29                                               ;83E3A2|D01C    |83E3C0;
     LDA.L nInGameHourCounter                                   ;83E3A4|AF1D1F7F|7F1F1D;
-    BNE CODE_83E3C0                                            ;83E3A8|D016    |83E3C0;
+    BNE .label29                                               ;83E3A8|D016    |83E3C0;
     LDA.L nInGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E;
-    BNE CODE_83E3C0                                            ;83E3AE|D010    |83E3C0;
+    BNE .label29                                               ;83E3AE|D010    |83E3C0;
     REP #$30                                                   ;83E3B0|C230    |      ;
     LDA.W #$0000                                               ;83E3B2|A90000  |      ;
     LDX.W #$000A                                               ;83E3B5|A20A00  |      ;
@@ -11796,14 +11720,14 @@ CODE_83E380:
     RTS                                                        ;83E3BF|60      |      ;
  
  
-CODE_83E3C0:
+.label29:
     SEP #$20                                                   ;83E3C0|E220    |      ;
     REP #$10                                                   ;83E3C2|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E3C4|AF191F7F|7F1F19;
-    BNE CODE_83E3E2                                            ;83E3C8|D018    |83E3E2;
+    BNE .label30                                               ;83E3C8|D018    |83E3E2;
     LDA.L nCurrentDay                                          ;83E3CA|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83E3CE|C901    |      ;
-    BNE CODE_83E3E2                                            ;83E3D0|D010    |83E3E2;
+    BNE .label30                                               ;83E3D0|D010    |83E3E2;
     REP #$30                                                   ;83E3D2|C230    |      ;
     LDA.W #$0000                                               ;83E3D4|A90000  |      ;
     LDX.W #$0028                                               ;83E3D7|A22800  |      ;
@@ -11812,15 +11736,15 @@ CODE_83E3C0:
     RTS                                                        ;83E3E1|60      |      ;
  
  
-CODE_83E3E2:
+.label30:
     SEP #$20                                                   ;83E3E2|E220    |      ;
     REP #$10                                                   ;83E3E4|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E3E6|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83E3EA|C903    |      ;
-    BNE CODE_83E406                                            ;83E3EC|D018    |83E406;
+    BNE .justReturn                                            ;83E3EC|D018    |83E406;
     LDA.L nCurrentDay                                          ;83E3EE|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83E3F2|C918    |      ;
-    BNE CODE_83E406                                            ;83E3F4|D010    |83E406;
+    BNE .justReturn                                            ;83E3F4|D010    |83E406;
     REP #$30                                                   ;83E3F6|C230    |      ;
     LDA.W #$0000                                               ;83E3F8|A90000  |      ;
     LDX.W #$000F                                               ;83E3FB|A20F00  |      ;
@@ -11829,11 +11753,11 @@ CODE_83E3E2:
     RTS                                                        ;83E405|60      |      ;
  
  
-CODE_83E406:
+.justReturn:
     RTS                                                        ;83E406|60      |      ;
  
  
-fAreaInit_CrossRoad:
+fAreaEvents_CrossRoad:
     REP #$30                                                   ;83E407|C230    |      ;
     LDA.L strcDailyFlags.flags2                                ;83E409|AF5C1F7F|7F1F5C;
     AND.W #$FF7F                                               ;83E40D|297FFF  |      ;
@@ -11921,11 +11845,11 @@ fAreaInit_CrossRoad:
     RTS                                                        ;83E4CA|60      |      ;
  
  
-fAreaInit_Mine:
+fAreaEvents_Mine:
     REP #$30                                                   ;83E4CB|C230    |      ;
     LDA.L strcEventFlags.flags4                                ;83E4CD|AF6A1F7F|7F1F6A;
     AND.W #$0040                                               ;83E4D1|294000  |      ;
-    BNE CODE_83E4EF                                            ;83E4D4|D019    |83E4EF;
+    BNE +                                                      ;83E4D4|D019    |83E4EF;
     LDA.W #$00E0                                               ;83E4D6|A9E000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;83E4D9|8D8509  |000985;
     LDA.W #$0180                                               ;83E4DC|A98001  |      ;
@@ -11935,20 +11859,18 @@ fAreaInit_Mine:
     LDY.W #$001F                                               ;83E4E8|A01F00  |      ;
     JSL.L fAI_Unknown8480F8                                    ;83E4EB|22F88084|8480F8;
  
-CODE_83E4EF:
-    REP #$30                                                   ;83E4EF|C230    |      ;
+  + REP #$30                                                   ;83E4EF|C230    |      ;
     LDA.B nPlayerPosY                                          ;83E4F1|A5D8    |0000D8;
     CMP.W #$0200                                               ;83E4F3|C90002  |      ;
-    BCC CODE_83E535                                            ;83E4F6|903D    |83E535;
+    BCC .label1                                                ;83E4F6|903D    |83E535;
     REP #$30                                                   ;83E4F8|C230    |      ;
     LDA.B strcPlayerFlags                                      ;83E4FA|A5D2    |0000D2;
     AND.W #$0800                                               ;83E4FC|290008  |      ;
-    BNE CODE_83E504                                            ;83E4FF|D003    |83E504;
-    JMP.W CODE_83E535                                          ;83E501|4C35E5  |83E535;
+    BNE +                                                      ;83E4FF|D003    |83E504;
+    JMP.W .label1                                              ;83E501|4C35E5  |83E535;
  
  
-CODE_83E504:
-    REP #$30                                                   ;83E504|C230    |      ;
+  + REP #$30                                                   ;83E504|C230    |      ;
     LDA.W #$0800                                               ;83E506|A90008  |      ;
     EOR.W #$FFFF                                               ;83E509|49FFFF  |      ;
     AND.B strcPlayerFlags                                      ;83E50C|25D2    |0000D2;
@@ -11967,11 +11889,11 @@ CODE_83E504:
     ADC.B nPlayerDirection                                     ;83E530|65DA    |0000DA;
     STA.W $0901                                                ;83E532|8D0109  |000901;
  
-CODE_83E535:
+.label1:
     REP #$30                                                   ;83E535|C230    |      ;
     LDA.L strcEventFlags.flags5                                ;83E537|AF6C1F7F|7F1F6C;
     AND.W #$0010                                               ;83E53B|291000  |      ;
-    BEQ CODE_83E550                                            ;83E53E|F010    |83E550;
+    BEQ +                                                      ;83E53E|F010    |83E550;
     REP #$30                                                   ;83E540|C230    |      ;
     LDA.W #$0000                                               ;83E542|A90000  |      ;
     LDX.W #$001D                                               ;83E545|A21D00  |      ;
@@ -11980,11 +11902,10 @@ CODE_83E535:
     RTS                                                        ;83E54F|60      |      ;
  
  
-CODE_83E550:
-    REP #$30                                                   ;83E550|C230    |      ;
+  + REP #$30                                                   ;83E550|C230    |      ;
     LDA.L strcEventFlags.flags5                                ;83E552|AF6C1F7F|7F1F6C;
     AND.W #$0001                                               ;83E556|290100  |      ;
-    BEQ CODE_83E56B                                            ;83E559|F010    |83E56B;
+    BEQ +                                                      ;83E559|F010    |83E56B;
     REP #$30                                                   ;83E55B|C230    |      ;
     LDA.W #$0000                                               ;83E55D|A90000  |      ;
     LDX.W #$001B                                               ;83E560|A21B00  |      ;
@@ -11993,11 +11914,10 @@ CODE_83E550:
     RTS                                                        ;83E56A|60      |      ;
  
  
-CODE_83E56B:
-    SEP #$20                                                   ;83E56B|E220    |      ;
+  + SEP #$20                                                   ;83E56B|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83E56D|AF1A1F7F|7F1F1A;
     CMP.B #$06                                                 ;83E571|C906    |      ;
-    BNE CODE_83E585                                            ;83E573|D010    |83E585;
+    BNE .justReturn                                            ;83E573|D010    |83E585;
     REP #$30                                                   ;83E575|C230    |      ;
     LDA.W #$0000                                               ;83E577|A90000  |      ;
     LDX.W #$0002                                               ;83E57A|A20200  |      ;
@@ -12006,15 +11926,15 @@ CODE_83E56B:
     RTS                                                        ;83E584|60      |      ;
  
  
-CODE_83E585:
+.justReturn:
     RTS                                                        ;83E585|60      |      ;
  
  
-fAreaInit_MountainTop:
+fAreaEvents_MountainTop:
     REP #$30                                                   ;83E586|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83E588|AF681F7F|7F1F68;
     AND.W #$0200                                               ;83E58C|290002  |      ;
-    BEQ CODE_83E5A1                                            ;83E58F|F010    |83E5A1;
+    BEQ .justReturn                                            ;83E58F|F010    |83E5A1;
     REP #$30                                                   ;83E591|C230    |      ;
     LDA.W #$0000                                               ;83E593|A90000  |      ;
     LDX.W #$0014                                               ;83E596|A21400  |      ;
@@ -12023,11 +11943,11 @@ fAreaInit_MountainTop:
     RTS                                                        ;83E5A0|60      |      ;
  
  
-CODE_83E5A1:
+.justReturn:
     RTS                                                        ;83E5A1|60      |      ;
  
  
-fAreaInit_GoldChicken:
+fAreaEvents_GoldChicken:
     REP #$30                                                   ;83E5A2|C230    |      ;
     REP #$30                                                   ;83E5A4|C230    |      ;
     LDA.W #$0000                                               ;83E5A6|A90000  |      ;
@@ -12037,21 +11957,21 @@ fAreaInit_GoldChicken:
     RTS                                                        ;83E5B3|60      |      ;
  
  
-fAreaInit_Coop:
+fAreaEvents_Coop:
     REP #$30                                                   ;83E5B4|C230    |      ;
     LDA.L strcEventFlags.flags4                                ;83E5B6|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83E5BA|290040  |      ;
-    BEQ CODE_83E5CC                                            ;83E5BD|F00D    |83E5CC;
+    BEQ .justReturn                                            ;83E5BD|F00D    |83E5CC;
     LDA.W #$0015                                               ;83E5BF|A91500  |      ;
     LDX.W #$0000                                               ;83E5C2|A20000  |      ;
     LDY.W #$007F                                               ;83E5C5|A07F00  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E5C8|22978084|848097;
  
-CODE_83E5CC:
+.justReturn:
     RTS                                                        ;83E5CC|60      |      ;
  
  
-fAreaInit_Wedding:
+fAreaEvents_Wedding:
     REP #$30                                                   ;83E5CD|C230    |      ;
     REP #$30                                                   ;83E5CF|C230    |      ;
     LDA.W #$0000                                               ;83E5D1|A90000  |      ;
@@ -12061,7 +11981,7 @@ fAreaInit_Wedding:
     RTS                                                        ;83E5DE|60      |      ;
  
  
-fAreaInit_Festival1:
+fAreaEvents_Festival1:
     REP #$30                                                   ;83E5DF|C230    |      ;
     REP #$30                                                   ;83E5E1|C230    |      ;
     LDA.W #$0000                                               ;83E5E3|A90000  |      ;
@@ -12071,7 +11991,7 @@ fAreaInit_Festival1:
     RTS                                                        ;83E5F0|60      |      ;
  
  
-fAreaInit_Festival2:
+fAreaEvents_Festival2:
     REP #$30                                                   ;83E5F1|C230    |      ;
     REP #$30                                                   ;83E5F3|C230    |      ;
     LDA.W #$0000                                               ;83E5F5|A90000  |      ;
@@ -12081,94 +12001,94 @@ fAreaInit_Festival2:
     RTS                                                        ;83E602|60      |      ;
  
  
-fAreaInit_Festival3:
+fAreaEvents_Festival3:
     SEP #$20                                                   ;83E603|E220    |      ;
     REP #$10                                                   ;83E605|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E607|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83E60B|C903    |      ;
-    BNE CODE_83E631                                            ;83E60D|D022    |83E631;
+    BNE .justReturn                                            ;83E60D|D022    |83E631;
     LDA.L nCurrentDay                                          ;83E60F|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83E613|C918    |      ;
-    BNE CODE_83E631                                            ;83E615|D01A    |83E631;
+    BNE .justReturn                                            ;83E615|D01A    |83E631;
     REP #$20                                                   ;83E617|C220    |      ;
     LDA.L strcUnknownFlags.flags1                              ;83E619|AF741F7F|7F1F74;
     AND.W #$0001                                               ;83E61D|290100  |      ;
-    BEQ CODE_83E631                                            ;83E620|F00F    |83E631;
+    BEQ .justReturn                                            ;83E620|F00F    |83E631;
     REP #$30                                                   ;83E622|C230    |      ;
     LDA.W #$0000                                               ;83E624|A90000  |      ;
     LDX.W #$000F                                               ;83E627|A20F00  |      ;
     LDY.W #$0001                                               ;83E62A|A00100  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E62D|22978084|848097;
  
-CODE_83E631:
+.justReturn:
     RTS                                                        ;83E631|60      |      ;
  
  
-fAreaInit_MountainTopStarNightFestival:
+fAreaEvents_SNF_MountainTop:
     SEP #$20                                                   ;83E632|E220    |      ;
     REP #$10                                                   ;83E634|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E636|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83E63A|C903    |      ;
-    BNE CODE_83E660                                            ;83E63C|D022    |83E660;
+    BNE .justReturn                                            ;83E63C|D022    |83E660;
     LDA.L nCurrentDay                                          ;83E63E|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83E642|C918    |      ;
-    BNE CODE_83E660                                            ;83E644|D01A    |83E660;
+    BNE .justReturn                                            ;83E644|D01A    |83E660;
     REP #$20                                                   ;83E646|C220    |      ;
     LDA.L strcUnknownFlags.flags1                              ;83E648|AF741F7F|7F1F74;
     AND.W #$0008                                               ;83E64C|290800  |      ;
-    BEQ CODE_83E660                                            ;83E64F|F00F    |83E660;
+    BEQ .justReturn                                            ;83E64F|F00F    |83E660;
     REP #$30                                                   ;83E651|C230    |      ;
     LDA.W #$0000                                               ;83E653|A90000  |      ;
     LDX.W #$000F                                               ;83E656|A20F00  |      ;
     LDY.W #$0004                                               ;83E659|A00400  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E65C|22978084|848097;
  
-CODE_83E660:
+.justReturn:
     RTS                                                        ;83E660|60      |      ;
  
  
-fAreaInit_Spa:
+fAreaEvents_SNF_Spa:
     SEP #$20                                                   ;83E661|E220    |      ;
     REP #$10                                                   ;83E663|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E665|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83E669|C903    |      ;
-    BNE CODE_83E68F                                            ;83E66B|D022    |83E68F;
+    BNE .justReturn                                            ;83E66B|D022    |83E68F;
     LDA.L nCurrentDay                                          ;83E66D|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83E671|C918    |      ;
-    BNE CODE_83E68F                                            ;83E673|D01A    |83E68F;
+    BNE .justReturn                                            ;83E673|D01A    |83E68F;
     REP #$20                                                   ;83E675|C220    |      ;
     LDA.L strcUnknownFlags.flags1                              ;83E677|AF741F7F|7F1F74;
     AND.W #$0010                                               ;83E67B|291000  |      ;
-    BEQ CODE_83E68F                                            ;83E67E|F00F    |83E68F;
+    BEQ .justReturn                                            ;83E67E|F00F    |83E68F;
     REP #$30                                                   ;83E680|C230    |      ;
     LDA.W #$0000                                               ;83E682|A90000  |      ;
     LDX.W #$000F                                               ;83E685|A20F00  |      ;
     LDY.W #$0005                                               ;83E688|A00500  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E68B|22978084|848097;
  
-CODE_83E68F:
+.justReturn:
     RTS                                                        ;83E68F|60      |      ;
  
  
-fAreaInit_MountainTopUnk:
+fAreaEvents_MountainTopUnknown:
     SEP #$20                                                   ;83E690|E220    |      ;
     REP #$10                                                   ;83E692|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E694|AF191F7F|7F1F19;
-    BNE CODE_83E6B1                                            ;83E698|D017    |83E6B1;
+    BNE .justReturn                                            ;83E698|D017    |83E6B1;
     LDA.L nCurrentDay                                          ;83E69A|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83E69E|C901    |      ;
-    BNE CODE_83E6B1                                            ;83E6A0|D00F    |83E6B1;
+    BNE .justReturn                                            ;83E6A0|D00F    |83E6B1;
     REP #$30                                                   ;83E6A2|C230    |      ;
     LDA.W #$0000                                               ;83E6A4|A90000  |      ;
     LDX.W #$0028                                               ;83E6A7|A22800  |      ;
     LDY.W #$0001                                               ;83E6AA|A00100  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E6AD|22978084|848097;
  
-CODE_83E6B1:
+.justReturn:
     RTS                                                        ;83E6B1|60      |      ;
  
  
-fAreaInit_EggFestival:
+fAreaEvents_EggFestival:
     REP #$30                                                   ;83E6B2|C230    |      ;
     REP #$30                                                   ;83E6B4|C230    |      ;
     LDA.W #$0000                                               ;83E6B6|A90000  |      ;
@@ -12178,71 +12098,70 @@ fAreaInit_EggFestival:
     RTS                                                        ;83E6C3|60      |      ;
  
  
-fAreaInit_Shed:
+fAreaEvents_Shed:
     REP #$30                                                   ;83E6C4|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E6C6|AF6E1F7F|7F1F6E;
     AND.W #$0002                                               ;83E6CA|290200  |      ;
-    BNE CODE_83E705                                            ;83E6CD|D036    |83E705;
+    BNE .label3                                                ;83E6CD|D036    |83E705;
     LDA.L strcEventFlags.flags2                                ;83E6CF|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83E6D3|290200  |      ;
-    BNE CODE_83E6E3                                            ;83E6D6|D00B    |83E6E3;
+    BNE .label1                                                ;83E6D6|D00B    |83E6E3;
     LDA.L strcEventFlags.flags2                                ;83E6D8|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83E6DC|291000  |      ;
-    BNE CODE_83E6F4                                            ;83E6DF|D013    |83E6F4;
-    BRA CODE_83E705                                            ;83E6E1|8022    |83E705;
+    BNE .label2                                                ;83E6DF|D013    |83E6F4;
+    BRA .label3                                                ;83E6E1|8022    |83E705;
  
  
-CODE_83E6E3:
+.label1:
     REP #$30                                                   ;83E6E3|C230    |      ;
     LDA.W #$0013                                               ;83E6E5|A91300  |      ;
     LDX.W #$0044                                               ;83E6E8|A24400  |      ;
     LDY.W #$0001                                               ;83E6EB|A00100  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E6EE|22978084|848097;
-    BRA CODE_83E705                                            ;83E6F2|8011    |83E705;
+    BRA .label3                                                ;83E6F2|8011    |83E705;
  
  
-CODE_83E6F4:
+.label2:
     REP #$30                                                   ;83E6F4|C230    |      ;
     LDA.W #$0013                                               ;83E6F6|A91300  |      ;
     LDX.W #$0044                                               ;83E6F9|A24400  |      ;
     LDY.W #$0004                                               ;83E6FC|A00400  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E6FF|22978084|848097;
-    BRA CODE_83E705                                            ;83E703|8000    |83E705;
+    BRA .label3                                                ;83E703|8000    |83E705;
  
  
-CODE_83E705:
+.label3:
     REP #$30                                                   ;83E705|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E707|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;83E70B|290400  |      ;
-    BEQ CODE_83E728                                            ;83E70E|F018    |83E728;
+    BEQ +                                                      ;83E70E|F018    |83E728;
     LDA.L nFirstChildAge                                       ;83E710|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E714|C93C00  |      ;
-    BCC CODE_83E728                                            ;83E717|900F    |83E728;
+    BCC +                                                      ;83E717|900F    |83E728;
     REP #$30                                                   ;83E719|C230    |      ;
     LDA.W #$0014                                               ;83E71B|A91400  |      ;
     LDX.W #$0045                                               ;83E71E|A24500  |      ;
     LDY.W #$0002                                               ;83E721|A00200  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E724|22978084|848097;
  
-CODE_83E728:
-    REP #$30                                                   ;83E728|C230    |      ;
+  + REP #$30                                                   ;83E728|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E72A|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;83E72E|290800  |      ;
-    BEQ CODE_83E74B                                            ;83E731|F018    |83E74B;
+    BEQ .justReturn                                            ;83E731|F018    |83E74B;
     LDA.L nSecondChildAge                                      ;83E733|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83E737|C93C00  |      ;
-    BCC CODE_83E74B                                            ;83E73A|900F    |83E74B;
+    BCC .justReturn                                            ;83E73A|900F    |83E74B;
     REP #$30                                                   ;83E73C|C230    |      ;
     LDA.W #$0015                                               ;83E73E|A91500  |      ;
     LDX.W #$0045                                               ;83E741|A24500  |      ;
     LDY.W #$0005                                               ;83E744|A00500  |      ;
     JSL.L fAI_SetupAreaScripting                               ;83E747|22978084|848097;
  
-CODE_83E74B:
+.justReturn:
     RTS                                                        ;83E74B|60      |      ;
  
  
-fAreaInit_MountainTopBean:
+fAreaEvents_MountainTopBean:
     RTS                                                        ;83E74C|60      |      ;
  
  
@@ -12251,7 +12170,7 @@ aUnusedTable_83E74D:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;83E759|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;83E765|        |      ;
  
-fAreaInit_Intro:
+fAreaEvents_Intro:
     SEP #$20                                                   ;83E76D|E220    |      ;
     REP #$10                                                   ;83E76F|C210    |      ;
     SEP #$20                                                   ;83E771|E220    |      ;
@@ -12822,7 +12741,7 @@ fAreaInit_Intro:
     RTS                                                        ;83EBA5|60      |      ;
  
  
-fAreaInit_Endings:
+fAreaEvents_Endings:
     SEP #$20                                                   ;83EBA6|E220    |      ;
     REP #$10                                                   ;83EBA8|C210    |      ;
     SEP #$20                                                   ;83EBAA|E220    |      ;
@@ -12867,250 +12786,212 @@ fAreaInit_Endings:
     STA.B strcPlayerFlags                                      ;83EC0D|85D2    |0000D2;
     SEP #$20                                                   ;83EC0F|E220    |      ;
     LDA.L $7F1F47                                              ;83EC11|AF471F7F|7F1F47;
-    BNE CODE_83EC1A                                            ;83EC15|D003    |83EC1A;
-    JMP.W fUnknown_83ED1E                                      ;83EC17|4C1EED  |83ED1E;
+    BNE +                                                      ;83EC15|D003    |83EC1A;
+    JMP.W .ending00                                            ;83EC17|4C1EED  |83ED1E;
  
  
-CODE_83EC1A:
-    CMP.B #$01                                                 ;83EC1A|C901    |      ;
-    BNE CODE_83EC21                                            ;83EC1C|D003    |83EC21;
-    JMP.W CODE_83ED5A                                          ;83EC1E|4C5AED  |83ED5A;
+  + CMP.B #$01                                                 ;83EC1A|C901    |      ;
+    BNE +                                                      ;83EC1C|D003    |83EC21;
+    JMP.W .ending01                                            ;83EC1E|4C5AED  |83ED5A;
  
  
-CODE_83EC21:
-    CMP.B #$02                                                 ;83EC21|C902    |      ;
-    BNE CODE_83EC28                                            ;83EC23|D003    |83EC28;
-    JMP.W CODE_83ED8B                                          ;83EC25|4C8BED  |83ED8B;
+  + CMP.B #$02                                                 ;83EC21|C902    |      ;
+    BNE +                                                      ;83EC23|D003    |83EC28;
+    JMP.W .ending02                                            ;83EC25|4C8BED  |83ED8B;
  
  
-CODE_83EC28:
-    CMP.B #$03                                                 ;83EC28|C903    |      ;
-    BNE CODE_83EC2F                                            ;83EC2A|D003    |83EC2F;
-    JMP.W CODE_83EDB1                                          ;83EC2C|4CB1ED  |83EDB1;
+  + CMP.B #$03                                                 ;83EC28|C903    |      ;
+    BNE +                                                      ;83EC2A|D003    |83EC2F;
+    JMP.W .ending03                                            ;83EC2C|4CB1ED  |83EDB1;
  
  
-CODE_83EC2F:
-    CMP.B #$04                                                 ;83EC2F|C904    |      ;
-    BNE CODE_83EC36                                            ;83EC31|D003    |83EC36;
-    JMP.W CODE_83EDD3                                          ;83EC33|4CD3ED  |83EDD3;
+  + CMP.B #$04                                                 ;83EC2F|C904    |      ;
+    BNE +                                                      ;83EC31|D003    |83EC36;
+    JMP.W .ending04                                            ;83EC33|4CD3ED  |83EDD3;
  
  
-CODE_83EC36:
-    CMP.B #$05                                                 ;83EC36|C905    |      ;
-    BNE CODE_83EC3D                                            ;83EC38|D003    |83EC3D;
-    JMP.W CODE_83EDF6                                          ;83EC3A|4CF6ED  |83EDF6;
+  + CMP.B #$05                                                 ;83EC36|C905    |      ;
+    BNE +                                                      ;83EC38|D003    |83EC3D;
+    JMP.W .ending05                                            ;83EC3A|4CF6ED  |83EDF6;
  
  
-CODE_83EC3D:
-    CMP.B #$06                                                 ;83EC3D|C906    |      ;
-    BNE CODE_83EC44                                            ;83EC3F|D003    |83EC44;
-    JMP.W CODE_83EE19                                          ;83EC41|4C19EE  |83EE19;
+  + CMP.B #$06                                                 ;83EC3D|C906    |      ;
+    BNE +                                                      ;83EC3F|D003    |83EC44;
+    JMP.W .ending06                                            ;83EC41|4C19EE  |83EE19;
  
  
-CODE_83EC44:
-    CMP.B #$07                                                 ;83EC44|C907    |      ;
-    BNE CODE_83EC4B                                            ;83EC46|D003    |83EC4B;
-    JMP.W CODE_83EE3C                                          ;83EC48|4C3CEE  |83EE3C;
+  + CMP.B #$07                                                 ;83EC44|C907    |      ;
+    BNE +                                                      ;83EC46|D003    |83EC4B;
+    JMP.W .ending07                                            ;83EC48|4C3CEE  |83EE3C;
  
  
-CODE_83EC4B:
-    CMP.B #$08                                                 ;83EC4B|C908    |      ;
-    BNE CODE_83EC52                                            ;83EC4D|D003    |83EC52;
-    JMP.W CODE_83EE5F                                          ;83EC4F|4C5FEE  |83EE5F;
+  + CMP.B #$08                                                 ;83EC4B|C908    |      ;
+    BNE +                                                      ;83EC4D|D003    |83EC52;
+    JMP.W .ending08                                            ;83EC4F|4C5FEE  |83EE5F;
  
  
-CODE_83EC52:
-    CMP.B #$09                                                 ;83EC52|C909    |      ;
-    BNE CODE_83EC59                                            ;83EC54|D003    |83EC59;
-    JMP.W CODE_83EE82                                          ;83EC56|4C82EE  |83EE82;
+  + CMP.B #$09                                                 ;83EC52|C909    |      ;
+    BNE +                                                      ;83EC54|D003    |83EC59;
+    JMP.W .ending09                                            ;83EC56|4C82EE  |83EE82;
  
  
-CODE_83EC59:
-    CMP.B #$0A                                                 ;83EC59|C90A    |      ;
-    BNE CODE_83EC60                                            ;83EC5B|D003    |83EC60;
-    JMP.W CODE_83EEAE                                          ;83EC5D|4CAEEE  |83EEAE;
+  + CMP.B #$0A                                                 ;83EC59|C90A    |      ;
+    BNE +                                                      ;83EC5B|D003    |83EC60;
+    JMP.W .ending0A                                            ;83EC5D|4CAEEE  |83EEAE;
  
  
-CODE_83EC60:
-    CMP.B #$0B                                                 ;83EC60|C90B    |      ;
-    BNE CODE_83EC67                                            ;83EC62|D003    |83EC67;
-    JMP.W CODE_83EEDA                                          ;83EC64|4CDAEE  |83EEDA;
+  + CMP.B #$0B                                                 ;83EC60|C90B    |      ;
+    BNE +                                                      ;83EC62|D003    |83EC67;
+    JMP.W .ending0B                                            ;83EC64|4CDAEE  |83EEDA;
  
  
-CODE_83EC67:
-    CMP.B #$0C                                                 ;83EC67|C90C    |      ;
-    BNE CODE_83EC6E                                            ;83EC69|D003    |83EC6E;
-    JMP.W CODE_83EF15                                          ;83EC6B|4C15EF  |83EF15;
+  + CMP.B #$0C                                                 ;83EC67|C90C    |      ;
+    BNE +                                                      ;83EC69|D003    |83EC6E;
+    JMP.W .ending0C                                            ;83EC6B|4C15EF  |83EF15;
  
  
-CODE_83EC6E:
-    CMP.B #$0D                                                 ;83EC6E|C90D    |      ;
-    BNE CODE_83EC75                                            ;83EC70|D003    |83EC75;
-    JMP.W CODE_83EF50                                          ;83EC72|4C50EF  |83EF50;
+  + CMP.B #$0D                                                 ;83EC6E|C90D    |      ;
+    BNE +                                                      ;83EC70|D003    |83EC75;
+    JMP.W .ending0D                                            ;83EC72|4C50EF  |83EF50;
  
  
-CODE_83EC75:
-    CMP.B #$0E                                                 ;83EC75|C90E    |      ;
-    BNE CODE_83EC7C                                            ;83EC77|D003    |83EC7C;
-    JMP.W CODE_83EF8B                                          ;83EC79|4C8BEF  |83EF8B;
+  + CMP.B #$0E                                                 ;83EC75|C90E    |      ;
+    BNE +                                                      ;83EC77|D003    |83EC7C;
+    JMP.W .ending0E                                            ;83EC79|4C8BEF  |83EF8B;
  
  
-CODE_83EC7C:
-    CMP.B #$0F                                                 ;83EC7C|C90F    |      ;
-    BNE CODE_83EC83                                            ;83EC7E|D003    |83EC83;
-    JMP.W CODE_83EFC6                                          ;83EC80|4CC6EF  |83EFC6;
+  + CMP.B #$0F                                                 ;83EC7C|C90F    |      ;
+    BNE +                                                      ;83EC7E|D003    |83EC83;
+    JMP.W .ending0F                                            ;83EC80|4CC6EF  |83EFC6;
  
  
-CODE_83EC83:
-    CMP.B #$10                                                 ;83EC83|C910    |      ;
-    BNE CODE_83EC8A                                            ;83EC85|D003    |83EC8A;
-    JMP.W CODE_83EFE9                                          ;83EC87|4CE9EF  |83EFE9;
+  + CMP.B #$10                                                 ;83EC83|C910    |      ;
+    BNE +                                                      ;83EC85|D003    |83EC8A;
+    JMP.W .ending10                                            ;83EC87|4CE9EF  |83EFE9;
  
  
-CODE_83EC8A:
-    CMP.B #$11                                                 ;83EC8A|C911    |      ;
-    BNE CODE_83EC91                                            ;83EC8C|D003    |83EC91;
-    JMP.W CODE_83F02F                                          ;83EC8E|4C2FF0  |83F02F;
+  + CMP.B #$11                                                 ;83EC8A|C911    |      ;
+    BNE +                                                      ;83EC8C|D003    |83EC91;
+    JMP.W .ending11                                            ;83EC8E|4C2FF0  |83F02F;
  
  
-CODE_83EC91:
-    CMP.B #$12                                                 ;83EC91|C912    |      ;
-    BNE CODE_83EC98                                            ;83EC93|D003    |83EC98;
-    JMP.W CODE_83F052                                          ;83EC95|4C52F0  |83F052;
+  + CMP.B #$12                                                 ;83EC91|C912    |      ;
+    BNE +                                                      ;83EC93|D003    |83EC98;
+    JMP.W .ending12                                            ;83EC95|4C52F0  |83F052;
  
  
-CODE_83EC98:
-    CMP.B #$13                                                 ;83EC98|C913    |      ;
-    BNE CODE_83EC9F                                            ;83EC9A|D003    |83EC9F;
-    JMP.W CODE_83F075                                          ;83EC9C|4C75F0  |83F075;
+  + CMP.B #$13                                                 ;83EC98|C913    |      ;
+    BNE +                                                      ;83EC9A|D003    |83EC9F;
+    JMP.W .ending13                                            ;83EC9C|4C75F0  |83F075;
  
  
-CODE_83EC9F:
-    CMP.B #$14                                                 ;83EC9F|C914    |      ;
-    BNE CODE_83ECA6                                            ;83ECA1|D003    |83ECA6;
-    JMP.W CODE_83F0E3                                          ;83ECA3|4CE3F0  |83F0E3;
+  + CMP.B #$14                                                 ;83EC9F|C914    |      ;
+    BNE +                                                      ;83ECA1|D003    |83ECA6;
+    JMP.W .ending14                                            ;83ECA3|4CE3F0  |83F0E3;
  
  
-CODE_83ECA6:
-    CMP.B #$15                                                 ;83ECA6|C915    |      ;
-    BNE CODE_83ECAD                                            ;83ECA8|D003    |83ECAD;
-    JMP.W CODE_83F14B                                          ;83ECAA|4C4BF1  |83F14B;
+  + CMP.B #$15                                                 ;83ECA6|C915    |      ;
+    BNE +                                                      ;83ECA8|D003    |83ECAD;
+    JMP.W .ending15                                            ;83ECAA|4C4BF1  |83F14B;
  
  
-CODE_83ECAD:
-    CMP.B #$16                                                 ;83ECAD|C916    |      ;
-    BNE CODE_83ECB4                                            ;83ECAF|D003    |83ECB4;
-    JMP.W CODE_83F163                                          ;83ECB1|4C63F1  |83F163;
+  + CMP.B #$16                                                 ;83ECAD|C916    |      ;
+    BNE +                                                      ;83ECAF|D003    |83ECB4;
+    JMP.W .ending16                                            ;83ECB1|4C63F1  |83F163;
  
  
-CODE_83ECB4:
-    CMP.B #$17                                                 ;83ECB4|C917    |      ;
-    BNE CODE_83ECBB                                            ;83ECB6|D003    |83ECBB;
-    JMP.W CODE_83F17B                                          ;83ECB8|4C7BF1  |83F17B;
+  + CMP.B #$17                                                 ;83ECB4|C917    |      ;
+    BNE +                                                      ;83ECB6|D003    |83ECBB;
+    JMP.W .ending17                                            ;83ECB8|4C7BF1  |83F17B;
  
  
-CODE_83ECBB:
-    CMP.B #$18                                                 ;83ECBB|C918    |      ;
-    BNE CODE_83ECC2                                            ;83ECBD|D003    |83ECC2;
-    JMP.W CODE_83F193                                          ;83ECBF|4C93F1  |83F193;
+  + CMP.B #$18                                                 ;83ECBB|C918    |      ;
+    BNE +                                                      ;83ECBD|D003    |83ECC2;
+    JMP.W .ending18                                            ;83ECBF|4C93F1  |83F193;
  
  
-CODE_83ECC2:
-    CMP.B #$19                                                 ;83ECC2|C919    |      ;
-    BNE CODE_83ECC9                                            ;83ECC4|D003    |83ECC9;
-    JMP.W CODE_83F1AB                                          ;83ECC6|4CABF1  |83F1AB;
+  + CMP.B #$19                                                 ;83ECC2|C919    |      ;
+    BNE +                                                      ;83ECC4|D003    |83ECC9;
+    JMP.W .ending19                                            ;83ECC6|4CABF1  |83F1AB;
  
  
-CODE_83ECC9:
-    CMP.B #$1A                                                 ;83ECC9|C91A    |      ;
-    BNE CODE_83ECD0                                            ;83ECCB|D003    |83ECD0;
-    JMP.W CODE_83F1C3                                          ;83ECCD|4CC3F1  |83F1C3;
+  + CMP.B #$1A                                                 ;83ECC9|C91A    |      ;
+    BNE +                                                      ;83ECCB|D003    |83ECD0;
+    JMP.W .ending1A                                            ;83ECCD|4CC3F1  |83F1C3;
  
  
-CODE_83ECD0:
-    CMP.B #$1B                                                 ;83ECD0|C91B    |      ;
-    BNE CODE_83ECD7                                            ;83ECD2|D003    |83ECD7;
-    JMP.W CODE_83F1DB                                          ;83ECD4|4CDBF1  |83F1DB;
+  + CMP.B #$1B                                                 ;83ECD0|C91B    |      ;
+    BNE +                                                      ;83ECD2|D003    |83ECD7;
+    JMP.W .ending1B                                            ;83ECD4|4CDBF1  |83F1DB;
  
  
-CODE_83ECD7:
-    CMP.B #$1C                                                 ;83ECD7|C91C    |      ;
-    BNE CODE_83ECDE                                            ;83ECD9|D003    |83ECDE;
-    JMP.W CODE_83F200                                          ;83ECDB|4C00F2  |83F200;
+  + CMP.B #$1C                                                 ;83ECD7|C91C    |      ;
+    BNE +                                                      ;83ECD9|D003    |83ECDE;
+    JMP.W .ending1C                                            ;83ECDB|4C00F2  |83F200;
  
  
-CODE_83ECDE:
-    CMP.B #$1D                                                 ;83ECDE|C91D    |      ;
-    BNE CODE_83ECE5                                            ;83ECE0|D003    |83ECE5;
-    JMP.W CODE_83F218                                          ;83ECE2|4C18F2  |83F218;
+  + CMP.B #$1D                                                 ;83ECDE|C91D    |      ;
+    BNE +                                                      ;83ECE0|D003    |83ECE5;
+    JMP.W .ending1D                                            ;83ECE2|4C18F2  |83F218;
  
  
-CODE_83ECE5:
-    CMP.B #$1E                                                 ;83ECE5|C91E    |      ;
-    BNE CODE_83ECEC                                            ;83ECE7|D003    |83ECEC;
-    JMP.W CODE_83F230                                          ;83ECE9|4C30F2  |83F230;
+  + CMP.B #$1E                                                 ;83ECE5|C91E    |      ;
+    BNE +                                                      ;83ECE7|D003    |83ECEC;
+    JMP.W .ending1E                                            ;83ECE9|4C30F2  |83F230;
  
  
-CODE_83ECEC:
-    CMP.B #$1F                                                 ;83ECEC|C91F    |      ;
-    BNE CODE_83ECF3                                            ;83ECEE|D003    |83ECF3;
-    JMP.W CODE_83F248                                          ;83ECF0|4C48F2  |83F248;
+  + CMP.B #$1F                                                 ;83ECEC|C91F    |      ;
+    BNE +                                                      ;83ECEE|D003    |83ECF3;
+    JMP.W .ending1F                                            ;83ECF0|4C48F2  |83F248;
  
  
-CODE_83ECF3:
-    CMP.B #$20                                                 ;83ECF3|C920    |      ;
-    BNE CODE_83ECFA                                            ;83ECF5|D003    |83ECFA;
-    JMP.W CODE_83F26D                                          ;83ECF7|4C6DF2  |83F26D;
+  + CMP.B #$20                                                 ;83ECF3|C920    |      ;
+    BNE +                                                      ;83ECF5|D003    |83ECFA;
+    JMP.W .ending20                                            ;83ECF7|4C6DF2  |83F26D;
  
  
-CODE_83ECFA:
-    CMP.B #$21                                                 ;83ECFA|C921    |      ;
-    BNE CODE_83ED01                                            ;83ECFC|D003    |83ED01;
-    JMP.W CODE_83EEFD                                          ;83ECFE|4CFDEE  |83EEFD;
+  + CMP.B #$21                                                 ;83ECFA|C921    |      ;
+    BNE +                                                      ;83ECFC|D003    |83ED01;
+    JMP.W .ending21                                            ;83ECFE|4CFDEE  |83EEFD;
  
  
-CODE_83ED01:
-    CMP.B #$22                                                 ;83ED01|C922    |      ;
-    BNE CODE_83ED08                                            ;83ED03|D003    |83ED08;
-    JMP.W CODE_83EF38                                          ;83ED05|4C38EF  |83EF38;
+  + CMP.B #$22                                                 ;83ED01|C922    |      ;
+    BNE +                                                      ;83ED03|D003    |83ED08;
+    JMP.W .ending22                                            ;83ED05|4C38EF  |83EF38;
  
  
-CODE_83ED08:
-    CMP.B #$23                                                 ;83ED08|C923    |      ;
-    BNE CODE_83ED0F                                            ;83ED0A|D003    |83ED0F;
-    JMP.W CODE_83EF73                                          ;83ED0C|4C73EF  |83EF73;
+  + CMP.B #$23                                                 ;83ED08|C923    |      ;
+    BNE +                                                      ;83ED0A|D003    |83ED0F;
+    JMP.W .ending23                                            ;83ED0C|4C73EF  |83EF73;
  
  
-CODE_83ED0F:
-    CMP.B #$24                                                 ;83ED0F|C924    |      ;
-    BNE CODE_83ED16                                            ;83ED11|D003    |83ED16;
-    JMP.W CODE_83EFAE                                          ;83ED13|4CAEEF  |83EFAE;
+  + CMP.B #$24                                                 ;83ED0F|C924    |      ;
+    BNE +                                                      ;83ED11|D003    |83ED16;
+    JMP.W .ending24                                            ;83ED13|4CAEEF  |83EFAE;
  
  
-CODE_83ED16:
-    CMP.B #$25                                                 ;83ED16|C925    |      ;
-    BNE CODE_83ED1D                                            ;83ED18|D003    |83ED1D;
-    JMP.W CODE_83F4D7                                          ;83ED1A|4CD7F4  |83F4D7;
+  + CMP.B #$25                                                 ;83ED16|C925    |      ;
+    BNE +                                                      ;83ED18|D003    |83ED1D;
+    JMP.W .justReturn                                          ;83ED1A|4CD7F4  |83F4D7;
  
  
-CODE_83ED1D:
-    RTS                                                        ;83ED1D|60      |      ;
+  + RTS                                                        ;83ED1D|60      |      ;
  
  
-fUnknown_83ED1E:
+.ending00:
     REP #$30                                                   ;83ED1E|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83ED20|AF661F7F|7F1F66;
     AND.W #$001F                                               ;83ED24|291F00  |      ;
-    BNE CODE_83ED5A                                            ;83ED27|D031    |83ED5A;
+    BNE .ending01                                              ;83ED27|D031    |83ED5A;
     LDA.L nPlayerHappiness                                     ;83ED29|AF331F7F|7F1F33;
     CMP.W #$0064                                               ;83ED2D|C96400  |      ;
-    BCS CODE_83ED5A                                            ;83ED30|B028    |83ED5A;
+    BCS .ending01                                              ;83ED30|B028    |83ED5A;
     SEP #$20                                                   ;83ED32|E220    |      ;
     LDA.L nOwnedCows                                           ;83ED34|AF0A1F7F|7F1F0A;
-    BNE CODE_83ED5A                                            ;83ED38|D020    |83ED5A;
+    BNE .ending01                                              ;83ED38|D020    |83ED5A;
     SEP #$20                                                   ;83ED3A|E220    |      ;
     LDA.L nOwnedChickens                                       ;83ED3C|AF0B1F7F|7F1F0B;
-    BNE CODE_83ED5A                                            ;83ED40|D018    |83ED5A;
+    BNE .ending01                                              ;83ED40|D018    |83ED5A;
     REP #$30                                                   ;83ED42|C230    |      ;
     LDA.W #$0000                                               ;83ED44|A90000  |      ;
     LDX.W #$002F                                               ;83ED47|A22F00  |      ;
@@ -13122,7 +13003,7 @@ fUnknown_83ED1E:
     RTS                                                        ;83ED59|60      |      ;
  
  
-CODE_83ED5A:
+.ending01:
     REP #$20                                                   ;83ED5A|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;83ED5C|AF5E1F7F|7F1F5E;
     ORA.W #$8000                                               ;83ED60|090080  |      ;
@@ -13131,7 +13012,7 @@ CODE_83ED5A:
     REP #$10                                                   ;83ED69|C210    |      ;
     LDA.L nOwnedCows                                           ;83ED6B|AF0A1F7F|7F1F0A;
     CMP.B #$07                                                 ;83ED6F|C907    |      ;
-    BCC CODE_83ED8B                                            ;83ED71|9018    |83ED8B;
+    BCC .ending02                                              ;83ED71|9018    |83ED8B;
     REP #$30                                                   ;83ED73|C230    |      ;
     LDA.W #$0000                                               ;83ED75|A90000  |      ;
     LDX.W #$0030                                               ;83ED78|A23000  |      ;
@@ -13143,13 +13024,13 @@ CODE_83ED5A:
     RTS                                                        ;83ED8A|60      |      ;
  
  
-CODE_83ED8B:
+.ending02:
     SEP #$20                                                   ;83ED8B|E220    |      ;
     REP #$10                                                   ;83ED8D|C210    |      ;
     LDA.L nOwnedCows                                           ;83ED8F|AF0A1F7F|7F1F0A;
-    BEQ CODE_83EDB1                                            ;83ED93|F01C    |83EDB1;
+    BEQ .ending03                                              ;83ED93|F01C    |83EDB1;
     CMP.B #$07                                                 ;83ED95|C907    |      ;
-    BCS CODE_83EDB1                                            ;83ED97|B018    |83EDB1;
+    BCS .ending03                                              ;83ED97|B018    |83EDB1;
     REP #$30                                                   ;83ED99|C230    |      ;
     LDA.W #$0000                                               ;83ED9B|A90000  |      ;
     LDX.W #$0031                                               ;83ED9E|A23100  |      ;
@@ -13161,11 +13042,11 @@ CODE_83ED8B:
     RTS                                                        ;83EDB0|60      |      ;
  
  
-CODE_83EDB1:
+.ending03:
     SEP #$20                                                   ;83EDB1|E220    |      ;
     REP #$10                                                   ;83EDB3|C210    |      ;
     LDA.L nOwnedChickens                                       ;83EDB5|AF0B1F7F|7F1F0B;
-    BEQ CODE_83EDD3                                            ;83EDB9|F018    |83EDD3;
+    BEQ .ending04                                              ;83EDB9|F018    |83EDD3;
     REP #$30                                                   ;83EDBB|C230    |      ;
     LDA.W #$0000                                               ;83EDBD|A90000  |      ;
     LDX.W #$0032                                               ;83EDC0|A23200  |      ;
@@ -13177,12 +13058,12 @@ CODE_83EDB1:
     RTS                                                        ;83EDD2|60      |      ;
  
  
-CODE_83EDD3:
+.ending04:
     SEP #$20                                                   ;83EDD3|E220    |      ;
     REP #$10                                                   ;83EDD5|C210    |      ;
     LDA.W nUnknown9B5                                          ;83EDD7|ADB509  |0009B5;
     CMP.B #$C0                                                 ;83EDDA|C9C0    |      ;
-    BCC CODE_83EDF6                                            ;83EDDC|9018    |83EDF6;
+    BCC .ending05                                              ;83EDDC|9018    |83EDF6;
     REP #$30                                                   ;83EDDE|C230    |      ;
     LDA.W #$0000                                               ;83EDE0|A90000  |      ;
     LDX.W #$0033                                               ;83EDE3|A23300  |      ;
@@ -13194,11 +13075,11 @@ CODE_83EDD3:
     RTS                                                        ;83EDF5|60      |      ;
  
  
-CODE_83EDF6:
+.ending05:
     REP #$30                                                   ;83EDF6|C230    |      ;
     LDA.L nStatShippedCorns                                    ;83EDF8|AF4A1F7F|7F1F4A;
     CMP.W #$00C8                                               ;83EDFC|C9C800  |      ;
-    BCC CODE_83EE19                                            ;83EDFF|9018    |83EE19;
+    BCC .ending06                                              ;83EDFF|9018    |83EE19;
     REP #$30                                                   ;83EE01|C230    |      ;
     LDA.W #$0000                                               ;83EE03|A90000  |      ;
     LDX.W #$0034                                               ;83EE06|A23400  |      ;
@@ -13210,11 +13091,11 @@ CODE_83EDF6:
     RTS                                                        ;83EE18|60      |      ;
  
  
-CODE_83EE19:
+.ending06:
     REP #$30                                                   ;83EE19|C230    |      ;
     LDA.L nStatShippedTomatoes                                 ;83EE1B|AF4C1F7F|7F1F4C;
     CMP.W #$00C8                                               ;83EE1F|C9C800  |      ;
-    BCC CODE_83EE3C                                            ;83EE22|9018    |83EE3C;
+    BCC .ending07                                              ;83EE22|9018    |83EE3C;
     REP #$30                                                   ;83EE24|C230    |      ;
     LDA.W #$0000                                               ;83EE26|A90000  |      ;
     LDX.W #$0035                                               ;83EE29|A23500  |      ;
@@ -13226,11 +13107,11 @@ CODE_83EE19:
     RTS                                                        ;83EE3B|60      |      ;
  
  
-CODE_83EE3C:
+.ending07:
     REP #$30                                                   ;83EE3C|C230    |      ;
     LDA.L nStatShippedTurnips                                  ;83EE3E|AF4E1F7F|7F1F4E;
     CMP.W #$00C8                                               ;83EE42|C9C800  |      ;
-    BCC CODE_83EE5F                                            ;83EE45|9018    |83EE5F;
+    BCC .ending08                                              ;83EE45|9018    |83EE5F;
     REP #$30                                                   ;83EE47|C230    |      ;
     LDA.W #$0000                                               ;83EE49|A90000  |      ;
     LDX.W #$0037                                               ;83EE4C|A23700  |      ;
@@ -13242,11 +13123,11 @@ CODE_83EE3C:
     RTS                                                        ;83EE5E|60      |      ;
  
  
-CODE_83EE5F:
+.ending08:
     REP #$30                                                   ;83EE5F|C230    |      ;
     LDA.L nStatShippedPotatoes                                 ;83EE61|AF501F7F|7F1F50;
     CMP.W #$00C8                                               ;83EE65|C9C800  |      ;
-    BCC CODE_83EE82                                            ;83EE68|9018    |83EE82;
+    BCC .ending09                                              ;83EE68|9018    |83EE82;
     REP #$30                                                   ;83EE6A|C230    |      ;
     LDA.W #$0000                                               ;83EE6C|A90000  |      ;
     LDX.W #$0036                                               ;83EE6F|A23600  |      ;
@@ -13258,14 +13139,14 @@ CODE_83EE5F:
     RTS                                                        ;83EE81|60      |      ;
  
  
-CODE_83EE82:
+.ending09:
     REP #$30                                                   ;83EE82|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EE84|AF661F7F|7F1F66;
     AND.W #$001F                                               ;83EE88|291F00  |      ;
-    BNE CODE_83EEAE                                            ;83EE8B|D021    |83EEAE;
+    BNE .ending0A                                              ;83EE8B|D021    |83EEAE;
     LDA.L nPlayerHappiness                                     ;83EE8D|AF331F7F|7F1F33;
     CMP.W #$0064                                               ;83EE91|C96400  |      ;
-    BCC CODE_83EEAE                                            ;83EE94|9018    |83EEAE;
+    BCC .ending0A                                              ;83EE94|9018    |83EEAE;
     REP #$30                                                   ;83EE96|C230    |      ;
     LDA.W #$0000                                               ;83EE98|A90000  |      ;
     LDX.W #$0038                                               ;83EE9B|A23800  |      ;
@@ -13277,14 +13158,14 @@ CODE_83EE82:
     RTS                                                        ;83EEAD|60      |      ;
  
  
-CODE_83EEAE:
+.ending0A:
     REP #$30                                                   ;83EEAE|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EEB0|AF661F7F|7F1F66;
     AND.W #$001F                                               ;83EEB4|291F00  |      ;
-    BNE CODE_83EEDA                                            ;83EEB7|D021    |83EEDA;
+    BNE .ending0B                                              ;83EEB7|D021    |83EEDA;
     LDA.L nPlayerHappiness                                     ;83EEB9|AF331F7F|7F1F33;
     CMP.W #$0320                                               ;83EEBD|C92003  |      ;
-    BCC CODE_83EEDA                                            ;83EEC0|9018    |83EEDA;
+    BCC .ending0B                                              ;83EEC0|9018    |83EEDA;
     REP #$30                                                   ;83EEC2|C230    |      ;
     LDA.W #$0000                                               ;83EEC4|A90000  |      ;
     LDX.W #$0039                                               ;83EEC7|A23900  |      ;
@@ -13296,11 +13177,11 @@ CODE_83EEAE:
     RTS                                                        ;83EED9|60      |      ;
  
  
-CODE_83EEDA:
+.ending0B:
     REP #$30                                                   ;83EEDA|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EEDC|AF661F7F|7F1F66;
     AND.W #$0001                                               ;83EEE0|290100  |      ;
-    BEQ CODE_83EF15                                            ;83EEE3|F030    |83EF15;
+    BEQ .ending0C                                              ;83EEE3|F030    |83EF15;
     REP #$30                                                   ;83EEE5|C230    |      ;
     LDA.W #$0000                                               ;83EEE7|A90000  |      ;
     LDX.W #$003A                                               ;83EEEA|A23A00  |      ;
@@ -13312,7 +13193,7 @@ CODE_83EEDA:
     RTS                                                        ;83EEFC|60      |      ;
  
  
-CODE_83EEFD:
+.ending21:
     REP #$30                                                   ;83EEFD|C230    |      ;
     LDA.W #$0000                                               ;83EEFF|A90000  |      ;
     LDX.W #$003A                                               ;83EF02|A23A00  |      ;
@@ -13324,11 +13205,11 @@ CODE_83EEFD:
     RTS                                                        ;83EF14|60      |      ;
  
  
-CODE_83EF15:
+.ending0C:
     REP #$30                                                   ;83EF15|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EF17|AF661F7F|7F1F66;
     AND.W #$0002                                               ;83EF1B|290200  |      ;
-    BEQ CODE_83EF50                                            ;83EF1E|F030    |83EF50;
+    BEQ .ending0D                                              ;83EF1E|F030    |83EF50;
     REP #$30                                                   ;83EF20|C230    |      ;
     LDA.W #$0000                                               ;83EF22|A90000  |      ;
     LDX.W #$003B                                               ;83EF25|A23B00  |      ;
@@ -13340,7 +13221,7 @@ CODE_83EF15:
     RTS                                                        ;83EF37|60      |      ;
  
  
-CODE_83EF38:
+.ending22:
     REP #$30                                                   ;83EF38|C230    |      ;
     LDA.W #$0000                                               ;83EF3A|A90000  |      ;
     LDX.W #$003B                                               ;83EF3D|A23B00  |      ;
@@ -13352,11 +13233,11 @@ CODE_83EF38:
     RTS                                                        ;83EF4F|60      |      ;
  
  
-CODE_83EF50:
+.ending0D:
     REP #$30                                                   ;83EF50|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EF52|AF661F7F|7F1F66;
     AND.W #$0004                                               ;83EF56|290400  |      ;
-    BEQ CODE_83EF8B                                            ;83EF59|F030    |83EF8B;
+    BEQ .ending0E                                              ;83EF59|F030    |83EF8B;
     REP #$30                                                   ;83EF5B|C230    |      ;
     LDA.W #$0000                                               ;83EF5D|A90000  |      ;
     LDX.W #$003C                                               ;83EF60|A23C00  |      ;
@@ -13368,7 +13249,7 @@ CODE_83EF50:
     RTS                                                        ;83EF72|60      |      ;
  
  
-CODE_83EF73:
+.ending23:
     REP #$30                                                   ;83EF73|C230    |      ;
     LDA.W #$0000                                               ;83EF75|A90000  |      ;
     LDX.W #$003C                                               ;83EF78|A23C00  |      ;
@@ -13380,11 +13261,11 @@ CODE_83EF73:
     RTS                                                        ;83EF8A|60      |      ;
  
  
-CODE_83EF8B:
+.ending0E:
     REP #$30                                                   ;83EF8B|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EF8D|AF661F7F|7F1F66;
     AND.W #$0008                                               ;83EF91|290800  |      ;
-    BEQ CODE_83EFC6                                            ;83EF94|F030    |83EFC6;
+    BEQ .ending0F                                              ;83EF94|F030    |83EFC6;
     REP #$30                                                   ;83EF96|C230    |      ;
     LDA.W #$0000                                               ;83EF98|A90000  |      ;
     LDX.W #$003D                                               ;83EF9B|A23D00  |      ;
@@ -13396,7 +13277,7 @@ CODE_83EF8B:
     RTS                                                        ;83EFAD|60      |      ;
  
  
-CODE_83EFAE:
+.ending24:
     REP #$30                                                   ;83EFAE|C230    |      ;
     LDA.W #$0000                                               ;83EFB0|A90000  |      ;
     LDX.W #$003D                                               ;83EFB3|A23D00  |      ;
@@ -13408,11 +13289,11 @@ CODE_83EFAE:
     RTS                                                        ;83EFC5|60      |      ;
  
  
-CODE_83EFC6:
+.ending0F:
     REP #$30                                                   ;83EFC6|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EFC8|AF661F7F|7F1F66;
     AND.W #$0010                                               ;83EFCC|291000  |      ;
-    BEQ CODE_83EFE9                                            ;83EFCF|F018    |83EFE9;
+    BEQ .ending10                                              ;83EFCF|F018    |83EFE9;
     REP #$30                                                   ;83EFD1|C230    |      ;
     LDA.W #$0000                                               ;83EFD3|A90000  |      ;
     LDX.W #$003E                                               ;83EFD6|A23E00  |      ;
@@ -13424,14 +13305,14 @@ CODE_83EFC6:
     RTS                                                        ;83EFE8|60      |      ;
  
  
-CODE_83EFE9:
+.ending10:
     REP #$30                                                   ;83EFE9|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EFEB|AF661F7F|7F1F66;
     AND.W #$001F                                               ;83EFEF|291F00  |      ;
-    BNE CODE_83F02F                                            ;83EFF2|D03B    |83F02F;
+    BNE .ending11                                              ;83EFF2|D03B    |83F02F;
     LDA.L nPlayerHappiness                                     ;83EFF4|AF331F7F|7F1F33;
     CMP.W #$00C8                                               ;83EFF8|C9C800  |      ;
-    BCC CODE_83F02F                                            ;83EFFB|9032    |83F02F;
+    BCC .ending11                                              ;83EFFB|9032    |83F02F;
     LDA.L nLove_Maria                                          ;83EFFD|AF1F1F7F|7F1F1F;
     CLC                                                        ;83F001|18      |      ;
     ADC.L nLove_Ann                                            ;83F002|6F211F7F|7F1F21;
@@ -13439,7 +13320,7 @@ CODE_83EFE9:
     ADC.L nLove_Ellen                                          ;83F00A|6F251F7F|7F1F25;
     ADC.L nLove_Eve                                            ;83F00E|6F271F7F|7F1F27;
     CMP.W #$05DC                                               ;83F012|C9DC05  |      ;
-    BCC CODE_83F02F                                            ;83F015|9018    |83F02F;
+    BCC .ending11                                              ;83F015|9018    |83F02F;
     REP #$30                                                   ;83F017|C230    |      ;
     LDA.W #$0000                                               ;83F019|A90000  |      ;
     LDX.W #$003F                                               ;83F01C|A23F00  |      ;
@@ -13451,11 +13332,11 @@ CODE_83EFE9:
     RTS                                                        ;83F02E|60      |      ;
  
  
-CODE_83F02F:
+.ending11:
     REP #$30                                                   ;83F02F|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83F031|AF6E1F7F|7F1F6E;
     AND.W #$000C                                               ;83F035|290C00  |      ;
-    BEQ CODE_83F052                                            ;83F038|F018    |83F052;
+    BEQ .ending12                                              ;83F038|F018    |83F052;
     REP #$30                                                   ;83F03A|C230    |      ;
     LDA.W #$0000                                               ;83F03C|A90000  |      ;
     LDX.W #$0040                                               ;83F03F|A24000  |      ;
@@ -13467,11 +13348,11 @@ CODE_83F02F:
     RTS                                                        ;83F051|60      |      ;
  
  
-CODE_83F052:
+.ending12:
     REP #$30                                                   ;83F052|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83F054|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;83F058|290800  |      ;
-    BEQ CODE_83F075                                            ;83F05B|F018    |83F075;
+    BEQ .ending13                                              ;83F05B|F018    |83F075;
     REP #$30                                                   ;83F05D|C230    |      ;
     LDA.W #$0000                                               ;83F05F|A90000  |      ;
     LDX.W #$0041                                               ;83F062|A24100  |      ;
@@ -13483,22 +13364,22 @@ CODE_83F052:
     RTS                                                        ;83F074|60      |      ;
  
  
-CODE_83F075:
+.ending13:
     REP #$30                                                   ;83F075|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83F077|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;83F07B|290800  |      ;
-    BEQ CODE_83F0E3                                            ;83F07E|F063    |83F0E3;
+    BEQ .ending14                                              ;83F07E|F063    |83F0E3;
     LDA.L nPlayerHappiness                                     ;83F080|AF331F7F|7F1F33;
     CMP.W #$0384                                               ;83F084|C98403  |      ;
-    BCC CODE_83F0E3                                            ;83F087|905A    |83F0E3;
+    BCC .ending14                                              ;83F087|905A    |83F0E3;
     SEP #$20                                                   ;83F089|E220    |      ;
     LDA.L nOwnedCows                                           ;83F08B|AF0A1F7F|7F1F0A;
-    BEQ CODE_83F0E3                                            ;83F08F|F052    |83F0E3;
+    BEQ .ending14                                              ;83F08F|F052    |83F0E3;
     LDA.L nOwnedChickens                                       ;83F091|AF0B1F7F|7F1F0B;
-    BEQ CODE_83F0E3                                            ;83F095|F04C    |83F0E3;
+    BEQ .ending14                                              ;83F095|F04C    |83F0E3;
     LDA.L nPowerBerryEaten                                     ;83F097|AF361F7F|7F1F36;
     CMP.B #$0A                                                 ;83F09B|C90A    |      ;
-    BNE CODE_83F0E3                                            ;83F09D|D044    |83F0E3;
+    BNE .ending14                                              ;83F09D|D044    |83F0E3;
     REP #$20                                                   ;83F09F|C220    |      ;
     LDA.L nMoney                                               ;83F0A1|AF041F7F|7F1F04;
     CLC                                                        ;83F0A5|18      |      ;
@@ -13506,11 +13387,11 @@ CODE_83F075:
     SEP #$20                                                   ;83F0A9|E220    |      ;
     LDA.L nMoney+2                                             ;83F0AB|AF061F7F|7F1F06;
     ADC.B #$FF                                                 ;83F0AF|69FF    |      ;
-    BMI CODE_83F0E3                                            ;83F0B1|3030    |83F0E3;
+    BMI .ending14                                              ;83F0B1|3030    |83F0E3;
     REP #$20                                                   ;83F0B3|C220    |      ;
     LDA.L nDogHugs                                             ;83F0B5|AF521F7F|7F1F52;
     CMP.W #$0064                                               ;83F0B9|C96400  |      ;
-    BCC CODE_83F0E3                                            ;83F0BC|9025    |83F0E3;
+    BCC .ending14                                              ;83F0BC|9025    |83F0E3;
     REP #$30                                                   ;83F0BE|C230    |      ;
     LDA.W #$0000                                               ;83F0C0|A90000  |      ;
     LDX.W #$0042                                               ;83F0C3|A24200  |      ;
@@ -13526,38 +13407,34 @@ CODE_83F075:
     RTS                                                        ;83F0E2|60      |      ;
  
  
-CODE_83F0E3:
+.ending14:
     REP #$30                                                   ;83F0E3|C230    |      ;
     LDA.L nLove_Maria                                          ;83F0E5|AF1F1F7F|7F1F1F;
     STA.W $09B3                                                ;83F0E9|8DB309  |0009B3;
     CMP.L nLove_Ann                                            ;83F0EC|CF211F7F|7F1F21;
-    BCS CODE_83F0F9                                            ;83F0F0|B007    |83F0F9;
+    BCS +                                                      ;83F0F0|B007    |83F0F9;
     LDA.L nLove_Ann                                            ;83F0F2|AF211F7F|7F1F21;
     STA.W $09B3                                                ;83F0F6|8DB309  |0009B3;
  
-CODE_83F0F9:
-    REP #$30                                                   ;83F0F9|C230    |      ;
+  + REP #$30                                                   ;83F0F9|C230    |      ;
     CMP.L nLove_Nina                                           ;83F0FB|CF231F7F|7F1F23;
-    BCS CODE_83F108                                            ;83F0FF|B007    |83F108;
+    BCS +                                                      ;83F0FF|B007    |83F108;
     LDA.L nLove_Nina                                           ;83F101|AF231F7F|7F1F23;
     STA.W $09B3                                                ;83F105|8DB309  |0009B3;
  
-CODE_83F108:
-    REP #$30                                                   ;83F108|C230    |      ;
+  + REP #$30                                                   ;83F108|C230    |      ;
     CMP.L nLove_Ellen                                          ;83F10A|CF251F7F|7F1F25;
-    BCS CODE_83F117                                            ;83F10E|B007    |83F117;
+    BCS +                                                      ;83F10E|B007    |83F117;
     LDA.L nLove_Ellen                                          ;83F110|AF251F7F|7F1F25;
     STA.W $09B3                                                ;83F114|8DB309  |0009B3;
  
-CODE_83F117:
-    REP #$30                                                   ;83F117|C230    |      ;
+  + REP #$30                                                   ;83F117|C230    |      ;
     CMP.L nLove_Eve                                            ;83F119|CF271F7F|7F1F27;
-    BCS CODE_83F126                                            ;83F11D|B007    |83F126;
+    BCS +                                                      ;83F11D|B007    |83F126;
     LDA.L nLove_Eve                                            ;83F11F|AF271F7F|7F1F27;
     STA.W $09B3                                                ;83F123|8DB309  |0009B3;
  
-CODE_83F126:
-    REP #$30                                                   ;83F126|C230    |      ;
+  + REP #$30                                                   ;83F126|C230    |      ;
     LDA.W #$0000                                               ;83F128|A90000  |      ;
     LDX.W #$0046                                               ;83F12B|A24600  |      ;
     LDY.W #$0000                                               ;83F12E|A00000  |      ;
@@ -13572,7 +13449,7 @@ CODE_83F126:
     RTS                                                        ;83F14A|60      |      ;
  
  
-CODE_83F14B:
+.ending15:
     REP #$30                                                   ;83F14B|C230    |      ;
     LDA.W #$0000                                               ;83F14D|A90000  |      ;
     LDX.W #$0046                                               ;83F150|A24600  |      ;
@@ -13584,7 +13461,7 @@ CODE_83F14B:
     RTS                                                        ;83F162|60      |      ;
  
  
-CODE_83F163:
+.ending16:
     REP #$30                                                   ;83F163|C230    |      ;
     LDA.W #$0000                                               ;83F165|A90000  |      ;
     LDX.W #$0046                                               ;83F168|A24600  |      ;
@@ -13596,7 +13473,7 @@ CODE_83F163:
     RTS                                                        ;83F17A|60      |      ;
  
  
-CODE_83F17B:
+.ending17:
     REP #$30                                                   ;83F17B|C230    |      ;
     LDA.W #$0000                                               ;83F17D|A90000  |      ;
     LDX.W #$0046                                               ;83F180|A24600  |      ;
@@ -13608,7 +13485,7 @@ CODE_83F17B:
     RTS                                                        ;83F192|60      |      ;
  
  
-CODE_83F193:
+.ending18:
     REP #$30                                                   ;83F193|C230    |      ;
     LDA.W #$0000                                               ;83F195|A90000  |      ;
     LDX.W #$0046                                               ;83F198|A24600  |      ;
@@ -13620,7 +13497,7 @@ CODE_83F193:
     RTS                                                        ;83F1AA|60      |      ;
  
  
-CODE_83F1AB:
+.ending19:
     REP #$30                                                   ;83F1AB|C230    |      ;
     LDA.W #$0000                                               ;83F1AD|A90000  |      ;
     LDX.W #$0046                                               ;83F1B0|A24600  |      ;
@@ -13632,7 +13509,7 @@ CODE_83F1AB:
     RTS                                                        ;83F1C2|60      |      ;
  
  
-CODE_83F1C3:
+.ending1A:
     REP #$30                                                   ;83F1C3|C230    |      ;
     LDA.W #$0000                                               ;83F1C5|A90000  |      ;
     LDX.W #$0046                                               ;83F1C8|A24600  |      ;
@@ -13644,7 +13521,7 @@ CODE_83F1C3:
     RTS                                                        ;83F1DA|60      |      ;
  
  
-CODE_83F1DB:
+.ending1B:
     REP #$30                                                   ;83F1DB|C230    |      ;
     LDA.W #$0000                                               ;83F1DD|A90000  |      ;
     LDX.W #$0046                                               ;83F1E0|A24600  |      ;
@@ -13660,7 +13537,7 @@ CODE_83F1DB:
     RTS                                                        ;83F1FF|60      |      ;
  
  
-CODE_83F200:
+.ending1C:
     REP #$30                                                   ;83F200|C230    |      ;
     LDA.W #$0000                                               ;83F202|A90000  |      ;
     LDX.W #$0046                                               ;83F205|A24600  |      ;
@@ -13672,7 +13549,7 @@ CODE_83F200:
     RTS                                                        ;83F217|60      |      ;
  
  
-CODE_83F218:
+.ending1D:
     REP #$30                                                   ;83F218|C230    |      ;
     LDA.W #$0000                                               ;83F21A|A90000  |      ;
     LDX.W #$0046                                               ;83F21D|A24600  |      ;
@@ -13684,7 +13561,7 @@ CODE_83F218:
     RTS                                                        ;83F22F|60      |      ;
  
  
-CODE_83F230:
+.ending1E:
     REP #$30                                                   ;83F230|C230    |      ;
     LDA.W #$0000                                               ;83F232|A90000  |      ;
     LDX.W #$0046                                               ;83F235|A24600  |      ;
@@ -13696,7 +13573,7 @@ CODE_83F230:
     RTS                                                        ;83F247|60      |      ;
  
  
-CODE_83F248:
+.ending1F:
     REP #$30                                                   ;83F248|C230    |      ;
     LDA.W #$0000                                               ;83F24A|A90000  |      ;
     LDX.W #$0046                                               ;83F24D|A24600  |      ;
@@ -13712,7 +13589,7 @@ CODE_83F248:
     RTS                                                        ;83F26C|60      |      ;
  
  
-CODE_83F26D:
+.ending20:
     REP #$20                                                   ;83F26D|C220    |      ;
     LDA.W #$0000                                               ;83F26F|A90000  |      ;
     STA.L nRanchMasteringRate                                  ;83F272|8F541F7F|7F1F54;
@@ -13725,11 +13602,10 @@ CODE_83F26D:
     LSR A                                                      ;83F27F|4A      |      ;
     LSR A                                                      ;83F280|4A      |      ;
     CMP.W #$004E                                               ;83F281|C94E00  |      ;
-    BCC CODE_83F289                                            ;83F284|9003    |83F289;
+    BCC +                                                      ;83F284|9003    |83F289;
     LDA.W #$004E                                               ;83F286|A94E00  |      ;
  
-CODE_83F289:
-    STA.L nRanchMasteringRate                                  ;83F289|8F541F7F|7F1F54;
+  + STA.L nRanchMasteringRate                                  ;83F289|8F541F7F|7F1F54;
     SEP #$20                                                   ;83F28D|E220    |      ;
     LDA.B #$00                                                 ;83F28F|A900    |      ;
     XBA                                                        ;83F291|EB      |      ;
@@ -13864,74 +13740,67 @@ CODE_83F289:
     REP #$20                                                   ;83F3B0|C220    |      ;
     LDA.L strcEventFlags.flags1                                ;83F3B2|AF641F7F|7F1F64;
     AND.W #$0080                                               ;83F3B6|298000  |      ;
-    BEQ CODE_83F3C7                                            ;83F3B9|F00C    |83F3C7;
+    BEQ +                                                      ;83F3B9|F00C    |83F3C7;
     LDA.L nRanchMasteringRate                                  ;83F3BB|AF541F7F|7F1F54;
     CLC                                                        ;83F3BF|18      |      ;
     ADC.W #$0010                                               ;83F3C0|691000  |      ;
     STA.L nRanchMasteringRate                                  ;83F3C3|8F541F7F|7F1F54;
  
-CODE_83F3C7:
-    REP #$20                                                   ;83F3C7|C220    |      ;
+  + REP #$20                                                   ;83F3C7|C220    |      ;
     LDA.L strcEventFlags.flags1                                ;83F3C9|AF641F7F|7F1F64;
     AND.W #$0040                                               ;83F3CD|294000  |      ;
-    BEQ CODE_83F3DE                                            ;83F3D0|F00C    |83F3DE;
+    BEQ +                                                      ;83F3D0|F00C    |83F3DE;
     LDA.L nRanchMasteringRate                                  ;83F3D2|AF541F7F|7F1F54;
     CLC                                                        ;83F3D6|18      |      ;
     ADC.W #$0010                                               ;83F3D7|691000  |      ;
     STA.L nRanchMasteringRate                                  ;83F3DA|8F541F7F|7F1F54;
  
-CODE_83F3DE:
-    REP #$20                                                   ;83F3DE|C220    |      ;
+  + REP #$20                                                   ;83F3DE|C220    |      ;
     LDA.L strcEventFlags.flags6                                ;83F3E0|AF6E1F7F|7F1F6E;
     AND.W #$0008                                               ;83F3E4|290800  |      ;
-    BEQ CODE_83F3F5                                            ;83F3E7|F00C    |83F3F5;
+    BEQ +                                                      ;83F3E7|F00C    |83F3F5;
     LDA.L nRanchMasteringRate                                  ;83F3E9|AF541F7F|7F1F54;
     CLC                                                        ;83F3ED|18      |      ;
     ADC.W #$0010                                               ;83F3EE|691000  |      ;
     STA.L nRanchMasteringRate                                  ;83F3F1|8F541F7F|7F1F54;
  
-CODE_83F3F5:
-    REP #$20                                                   ;83F3F5|C220    |      ;
+  + REP #$20                                                   ;83F3F5|C220    |      ;
     LDA.L strcEventFlags.flags6                                ;83F3F7|AF6E1F7F|7F1F6E;
     AND.W #$0004                                               ;83F3FB|290400  |      ;
-    BEQ CODE_83F40C                                            ;83F3FE|F00C    |83F40C;
+    BEQ +                                                      ;83F3FE|F00C    |83F40C;
     LDA.L nRanchMasteringRate                                  ;83F400|AF541F7F|7F1F54;
     CLC                                                        ;83F404|18      |      ;
     ADC.W #$0010                                               ;83F405|691000  |      ;
     STA.L nRanchMasteringRate                                  ;83F408|8F541F7F|7F1F54;
  
-CODE_83F40C:
-    REP #$20                                                   ;83F40C|C220    |      ;
+  + REP #$20                                                   ;83F40C|C220    |      ;
     LDA.L strcEventFlags.flags2                                ;83F40E|AF661F7F|7F1F66;
     AND.W #$001F                                               ;83F412|291F00  |      ;
-    BEQ CODE_83F423                                            ;83F415|F00C    |83F423;
+    BEQ +                                                      ;83F415|F00C    |83F423;
     LDA.L nRanchMasteringRate                                  ;83F417|AF541F7F|7F1F54;
     CLC                                                        ;83F41B|18      |      ;
     ADC.W #$0020                                               ;83F41C|692000  |      ;
     STA.L nRanchMasteringRate                                  ;83F41F|8F541F7F|7F1F54;
  
-CODE_83F423:
-    REP #$20                                                   ;83F423|C220    |      ;
+  + REP #$20                                                   ;83F423|C220    |      ;
     LDA.L strcEventFlags.flags6                                ;83F425|AF6E1F7F|7F1F6E;
     AND.W #$4000                                               ;83F429|290040  |      ;
-    BEQ CODE_83F43A                                            ;83F42C|F00C    |83F43A;
+    BEQ +                                                      ;83F42C|F00C    |83F43A;
     LDA.L nRanchMasteringRate                                  ;83F42E|AF541F7F|7F1F54;
     CLC                                                        ;83F432|18      |      ;
     ADC.W #$0016                                               ;83F433|691600  |      ;
     STA.L nRanchMasteringRate                                  ;83F436|8F541F7F|7F1F54;
  
-CODE_83F43A:
-    REP #$20                                                   ;83F43A|C220    |      ;
+  + REP #$20                                                   ;83F43A|C220    |      ;
     LDA.L strcEventFlags.flags5                                ;83F43C|AF6C1F7F|7F1F6C;
     AND.W #$1000                                               ;83F440|290010  |      ;
-    BEQ CODE_83F451                                            ;83F443|F00C    |83F451;
+    BEQ +                                                      ;83F443|F00C    |83F451;
     LDA.L nRanchMasteringRate                                  ;83F445|AF541F7F|7F1F54;
     CLC                                                        ;83F449|18      |      ;
     ADC.W #$0015                                               ;83F44A|691500  |      ;
     STA.L nRanchMasteringRate                                  ;83F44D|8F541F7F|7F1F54;
  
-CODE_83F451:
-    REP #$20                                                   ;83F451|C220    |      ;
+  + REP #$20                                                   ;83F451|C220    |      ;
     LDA.L nRanchDevelopmentRate                                ;83F453|AF561F7F|7F1F56;
     LSR A                                                      ;83F457|4A      |      ;
     CLC                                                        ;83F458|18      |      ;
@@ -13940,8 +13809,7 @@ CODE_83F451:
     REP #$20                                                   ;83F461|C220    |      ;
     LDX.W #$0000                                               ;83F463|A20000  |      ;
  
-CODE_83F466:
-    REP #$30                                                   ;83F466|C230    |      ;
+  - REP #$30                                                   ;83F466|C230    |      ;
     PHX                                                        ;83F468|DA      |      ;
     TXA                                                        ;83F469|8A      |      ;
     JSL.L fGameEngine_GetCowData                               ;83F46A|22A7C983|83C9A7;
@@ -13950,7 +13818,7 @@ CODE_83F466:
     LDY.W #$0000                                               ;83F472|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83F475|B772    |000072;
     AND.B #$01                                                 ;83F477|2901    |      ;
-    BEQ CODE_83F497                                            ;83F479|F01C    |83F497;
+    BEQ ++                                                     ;83F479|F01C    |83F497;
     LDY.W #$0004                                               ;83F47B|A00400  |      ;
     LDA.B #$00                                                 ;83F47E|A900    |      ;
     XBA                                                        ;83F480|EB      |      ;
@@ -13959,30 +13827,27 @@ CODE_83F466:
     LSR A                                                      ;83F484|4A      |      ;
     LSR A                                                      ;83F485|4A      |      ;
     CMP.B #$19                                                 ;83F486|C919    |      ;
-    BCC CODE_83F48C                                            ;83F488|9002    |83F48C;
+    BCC +                                                      ;83F488|9002    |83F48C;
     LDA.B #$19                                                 ;83F48A|A919    |      ;
  
-CODE_83F48C:
-    REP #$20                                                   ;83F48C|C220    |      ;
+  + REP #$20                                                   ;83F48C|C220    |      ;
     CLC                                                        ;83F48E|18      |      ;
     ADC.L nRanchMasteringRate                                  ;83F48F|6F541F7F|7F1F54;
     STA.L nRanchMasteringRate                                  ;83F493|8F541F7F|7F1F54;
  
-CODE_83F497:
-    REP #$30                                                   ;83F497|C230    |      ;
+ ++ REP #$30                                                   ;83F497|C230    |      ;
     PLX                                                        ;83F499|FA      |      ;
     INX                                                        ;83F49A|E8      |      ;
     CPX.W #$000C                                               ;83F49B|E00C00  |      ;
-    BNE CODE_83F466                                            ;83F49E|D0C6    |83F466;
+    BNE -                                                      ;83F49E|D0C6    |83F466;
     REP #$20                                                   ;83F4A0|C220    |      ;
     LDA.L nRanchMasteringRate                                  ;83F4A2|AF541F7F|7F1F54;
     CMP.W #$03E7                                               ;83F4A6|C9E703  |      ;
-    BCC CODE_83F4B2                                            ;83F4A9|9007    |83F4B2;
+    BCC +                                                      ;83F4A9|9007    |83F4B2;
     LDA.W #$03E7                                               ;83F4AB|A9E703  |      ;
     STA.L nRanchMasteringRate                                  ;83F4AE|8F541F7F|7F1F54;
  
-CODE_83F4B2:
-    REP #$30                                                   ;83F4B2|C230    |      ;
+  + REP #$30                                                   ;83F4B2|C230    |      ;
     LDA.W #$0000                                               ;83F4B4|A90000  |      ;
     LDX.W #$0046                                               ;83F4B7|A24600  |      ;
     LDY.W #$000C                                               ;83F4BA|A00C00  |      ;
@@ -13997,11 +13862,11 @@ CODE_83F4B2:
     RTS                                                        ;83F4D6|60      |      ;
  
  
-CODE_83F4D7:
+.justReturn:
     RTS                                                        ;83F4D7|60      |      ;
  
  
-CODE_83F4D8:
+fAreaInit_HouseHelper:
     REP #$30                                                   ;83F4D8|C230    |      ;
     LDA.W #$0000                                               ;83F4DA|A90000  |      ;
     LDX.W #$002E                                               ;83F4DD|A22E00  |      ;
@@ -14026,8 +13891,7 @@ CODE_83F4D8:
     STA.W $088F                                                ;83F514|8D8F08  |00088F;
     LDX.W #$0000                                               ;83F517|A20000  |      ;
  
-CODE_83F51A:
-    REP #$30                                                   ;83F51A|C230    |      ;
+  - REP #$30                                                   ;83F51A|C230    |      ;
     PHX                                                        ;83F51C|DA      |      ;
     TXA                                                        ;83F51D|8A      |      ;
     JSL.L fGameEngine_GetCowData                               ;83F51E|22A7C983|83C9A7;
@@ -14036,15 +13900,15 @@ CODE_83F51A:
     LDY.W #$0000                                               ;83F526|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83F529|B772    |000072;
     AND.B #$01                                                 ;83F52B|2901    |      ;
-    BEQ CODE_83F573                                            ;83F52D|F044    |83F573;
+    BEQ .label2                                                ;83F52D|F044    |83F573;
     LDY.W #$0004                                               ;83F52F|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83F532|B772    |000072;
     CMP.W nUnknown9B5                                          ;83F534|CDB509  |0009B5;
-    BCS CODE_83F53B                                            ;83F537|B002    |83F53B;
-    BRA CODE_83F573                                            ;83F539|8038    |83F573;
+    BCS .label1                                                ;83F537|B002    |83F53B;
+    BRA .label2                                                ;83F539|8038    |83F573;
  
  
-CODE_83F53B:
+.label1:
     SEP #$20                                                   ;83F53B|E220    |      ;
     STA.W nUnknown9B5                                          ;83F53D|8DB509  |0009B5;
     SEP #$20                                                   ;83F540|E220    |      ;
@@ -14070,12 +13934,12 @@ CODE_83F53B:
     REP #$20                                                   ;83F56E|C220    |      ;
     STA.W $088F                                                ;83F570|8D8F08  |00088F;
  
-CODE_83F573:
+.label2:
     REP #$30                                                   ;83F573|C230    |      ;
     PLX                                                        ;83F575|FA      |      ;
     INX                                                        ;83F576|E8      |      ;
     CPX.W #$000C                                               ;83F577|E00C00  |      ;
-    BNE CODE_83F51A                                            ;83F57A|D09E    |83F51A;
+    BNE -                                                      ;83F57A|D09E    |83F51A;
     JSL.L fObjectMap_CalculateRanchDev                         ;83F57C|220CAA82|82AA0C;
     REP #$30                                                   ;83F580|C230    |      ;
     LDA.L nRanchDevelopmentRate                                ;83F582|AF561F7F|7F1F56;
@@ -14090,11 +13954,11 @@ CODE_83F573:
     REP #$30                                                   ;83F59C|C230    |      ;
     STA.L nRanchDevelopmentRate                                ;83F59E|8F561F7F|7F1F56;
     CMP.W #$0064                                               ;83F5A2|C96400  |      ;
-    BCC CODE_83F5AE                                            ;83F5A5|9007    |83F5AE;
+    BCC .justReturn                                            ;83F5A5|9007    |83F5AE;
     LDA.W #$0064                                               ;83F5A7|A96400  |      ;
     STA.L nRanchDevelopmentRate                                ;83F5AA|8F561F7F|7F1F56;
  
-CODE_83F5AE:
+.justReturn:
     RTS                                                        ;83F5AE|60      |      ;
  
  

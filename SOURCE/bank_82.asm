@@ -6085,7 +6085,7 @@ fMap_UpdateCurrentTilemap:
     RTL                                                        ;82B048|6B      |      ;
  
  
-fMap_UpdateFarmTilemap:
+fMap_UpdateFarmTilemapCoords:
     SEP #$20                                                   ;82B049|E220    |      ; A: nTileId, X: nPosX, Y: nPosY
     REP #$10                                                   ;82B04B|C210    |      ;
     PHA                                                        ;82B04D|48      |      ;
