@@ -22,6 +22,7 @@
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
+    nPlayerFlags = $0000D2; !^ n16 ^!
     nPlayerAction = $0000D4; !^ n16 ^!
     nPlayerPosX = $0000D6; !^ n16 ^!
     nPlayerPosY = $0000D8; !^ n16 ^!
@@ -71,6 +72,7 @@
     sFirstChildNameLong = $0008ED; !^ 4 * s16 ^!
     sSecondChildNameLong = $0008F5; !^ 4 * s16 ^!
     nUnknownFlags08FD = $0008FD; !^ n16 ^!
+    nFoodToEatSpriteIndex = $000901; !^ n8 - nFoodToEat plus 0x30 ^!
     nPlayerPosXCopy = $000907; !^ n16 ^!
     nPlayerPosYCopy = $000909; !^ n16 ^!
     nPlayerStamina = $000917; !^ n8 MaxHP ^!
@@ -79,6 +81,7 @@
     nHandItem_Previous = $00091E; !^ n8 ^!
     nToolEquipped = $000921
     nToolSecond = $000923
+    nFoodToEat = $000924; !^ n8 ^!
     nAmountLeft_Water = $000926; !^ n8 ^!
     nAmountLeft_GrassSeeds = $000927; !^ n8 ^!
     nAmountLeft_CornSeeds = $000928; !^ n8 ^!

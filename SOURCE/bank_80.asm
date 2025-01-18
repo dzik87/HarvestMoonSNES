@@ -46,11 +46,11 @@ fCore_GameStart:
     LDA.B #$03                                                 ;80806F|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;808071|22F98980|8089F9;
     SEP #$20                                                   ;808075|E220    |      ;
-    STA.W $0924                                                ;808077|8D2409  |000924;
+    STA.W nFoodToEat                                           ;808077|8D2409  |000924;
     REP #$30                                                   ;80807A|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;80807C|A5D2    |0000D2;
-    ORA.W #$0004                                               ;80807E|090400  |      ;
-    STA.B strcPlayerFlags                                      ;808081|85D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;80807C|A5D2    |0000D2;
+    ORA.W #$0004                                               ;80807E|090400  |      ; !PLAYERFLAGS_EATINGMEAL
+    STA.B nPlayerFlags                                         ;808081|85D2    |0000D2;
  
 fCore_MainLoop:
     SEP #$20                                                   ;808083|E220    |      ;
@@ -2888,9 +2888,9 @@ fUnknown_8096D3:
     AND.W #$FFF0                                               ;8096E2|29F0FF  |      ;
     STA.L strcDailyFlags.flags2                                ;8096E5|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;8096E9|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;8096EB|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;8096EB|A5D2    |0000D2;
     ORA.W #$4000                                               ;8096ED|090040  |      ;
-    STA.B strcPlayerFlags                                      ;8096F0|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;8096F0|85D2    |0000D2;
     REP #$20                                                   ;8096F2|C220    |      ;
     LDA.W #$7000                                               ;8096F4|A90070  |      ;
     JSL.L fCore_ZeroVRAMatOffset                               ;8096F7|22BC8980|8089BC;
@@ -3160,16 +3160,16 @@ fMap_SetupArea:
     REP #$30                                                   ;809940|C230    |      ;
     LDA.W #$0080                                               ;809942|A98000  |      ;
     EOR.W #$FFFF                                               ;809945|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;809948|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;80994A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;809948|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;80994A|85D2    |0000D2;
     REP #$20                                                   ;80994C|C220    |      ;
     STZ.W nUnknownFlags08FD                                    ;80994E|9CFD08  |0008FD;
     STZ.W $08FF                                                ;809951|9CFF08  |0008FF;
     REP #$30                                                   ;809954|C230    |      ;
     LDA.W #$1000                                               ;809956|A90010  |      ;
     EOR.W #$FFFF                                               ;809959|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;80995C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;80995E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;80995C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;80995E|85D2    |0000D2;
     SEP #$20                                                   ;809960|E220    |      ;
     LDA.W nHandItem_Current                                    ;809962|AD1D09  |00091D;
     BEQ .label11                                               ;809965|F055    |8099BC;
@@ -3201,7 +3201,7 @@ fMap_SetupArea:
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
     CLC                                                        ;8099A9|18      |      ;
     ADC.B nPlayerDirection                                     ;8099AA|65DA    |0000DA;
-    STA.W $0901                                                ;8099AC|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8099AC|8D0109  |000901;
     BRA .label12                                               ;8099AF|801C    |8099CD;
  
  
@@ -3210,7 +3210,7 @@ fMap_SetupArea:
     LDA.W #$0000                                               ;8099B3|A90000  |      ;
     CLC                                                        ;8099B6|18      |      ;
     ADC.B nPlayerDirection                                     ;8099B7|65DA    |0000DA;
-    STA.W $0901                                                ;8099B9|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8099B9|8D0109  |000901;
  
 .label11:
     SEP #$20                                                   ;8099BC|E220    |      ;
@@ -3218,8 +3218,8 @@ fMap_SetupArea:
     REP #$30                                                   ;8099C1|C230    |      ;
     LDA.W #$0002                                               ;8099C3|A90200  |      ;
     EOR.W #$FFFF                                               ;8099C6|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;8099C9|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;8099CB|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;8099C9|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;8099CB|85D2    |0000D2;
  
 .label12:
     JSL.L fUnknown_81CFA0                                      ;8099CD|22A0CF81|81CFA0;
@@ -3305,7 +3305,7 @@ fMapChangeHandler_809A64:
  
 .label4:
     REP #$30                                                   ;809A8C|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;809A8E|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;809A8E|A5D2    |0000D2;
     AND.W #$0010                                               ;809A90|291000  |      ;
     BEQ .label5                                                ;809A93|F003    |809A98;
     JMP.W .return                                              ;809A95|4C0A9D  |809D0A;
@@ -3350,9 +3350,9 @@ fMapChangeHandler_809A64:
     LDA.W #$0000                                               ;809AD5|A90000  |      ;
     STA.B nPlayerAction                                        ;809AD8|85D4    |0000D4;
     REP #$30                                                   ;809ADA|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;809ADC|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;809ADC|A5D2    |0000D2;
     ORA.W #$0080                                               ;809ADE|098000  |      ;
-    STA.B strcPlayerFlags                                      ;809AE1|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;809AE1|85D2    |0000D2;
     SEP #$20                                                   ;809AE3|E220    |      ;
     LDA.W $098A                                                ;809AE5|AD8A09  |00098A;
     CMP.B #$01                                                 ;809AE8|C901    |      ;
@@ -3527,8 +3527,8 @@ fMapChangeHandler_809A64:
     REP #$30                                                   ;809C14|C230    |      ;
     LDA.W #$0080                                               ;809C16|A98000  |      ;
     EOR.W #$FFFF                                               ;809C19|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;809C1C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;809C1E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;809C1C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;809C1E|85D2    |0000D2;
     REP #$20                                                   ;809C20|C220    |      ;
     STZ.W $0878                                                ;809C22|9C7808  |000878;
     STZ.W $087A                                                ;809C25|9C7A08  |00087A;
@@ -3741,7 +3741,7 @@ fMapChangeHandler_809A64:
  
 .label43:
     REP #$30                                                   ;809D87|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;809D89|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;809D89|A5D2    |0000D2;
     AND.W #$0002                                               ;809D8B|290200  |      ;
     BEQ .label44                                               ;809D8E|F003    |809D93;
     JMP.W .return2                                             ;809D90|4CBB9E  |809EBB;
@@ -3749,7 +3749,7 @@ fMapChangeHandler_809A64:
  
 .label44:
     REP #$30                                                   ;809D93|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;809D95|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;809D95|A5D2    |0000D2;
     AND.W #$0010                                               ;809D97|291000  |      ;
     BEQ .label45                                               ;809D9A|F003    |809D9F;
     JMP.W .return2                                             ;809D9C|4CBB9E  |809EBB;
@@ -3757,7 +3757,7 @@ fMapChangeHandler_809A64:
  
 .label45:
     REP #$30                                                   ;809D9F|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;809DA1|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;809DA1|A5D2    |0000D2;
     AND.W #$0800                                               ;809DA3|290008  |      ;
     BEQ .label46                                               ;809DA6|F003    |809DAB;
     JMP.W .return2                                             ;809DA8|4CBB9E  |809EBB;

@@ -40,9 +40,9 @@ macro AICMD0x05_SetTransferPosition(nDestinationX, nDestinationY)
 endmacro
 
 ; AI command 0x06 - Set destination
-macro AICMD0x06_SetTransferDestination(nDestinationId)
+macro AICMD0x06_SetDestinationArea(nAreaId)
     db $06
-    db <nDestinationId>
+    db <nAreaId>
     
 endmacro
 
@@ -60,9 +60,9 @@ macro AICMD0x08()
 endmacro
 
 ; AI command 0x09 - 
-macro AICMD0x09(nIndex, pNextAction)
+macro AICMD0x09(nDataIndex, pNextAction)
     db $09
-    db <nIndex>
+    db <nDataIndex>
     dw <pNextAction>
     
 endmacro
@@ -327,10 +327,10 @@ macro AICMD0x2A(nUnknown1)
 endmacro
 
 ; AI command 0x2B - 
-macro AICMD0x2B(nUnknown1, nUnknown2)
+macro AICMD0x2B(pPointerB3, nDataIndex)
     db $2B
-    dw <nUnknown1>
-    db <nUnknown2>
+    dw <pPointerB3>
+    db <nDataIndex>
     
 endmacro
 

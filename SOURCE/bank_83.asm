@@ -4808,7 +4808,7 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AC32|E220    |      ;
     STZ.W nBreakHitCounter                                     ;83AC34|9C6D09  |00096D;
     REP #$20                                                   ;83AC37|C220    |      ;
-    STZ.B strcPlayerFlags                                      ;83AC39|64D2    |0000D2;
+    STZ.B nPlayerFlags                                         ;83AC39|64D2    |0000D2;
     STZ.B $E9                                                  ;83AC3B|64E9    |0000E9;
     STZ.B $EB                                                  ;83AC3D|64EB    |0000EB;
     STZ.W $0878                                                ;83AC3F|9C7808  |000878;
@@ -4861,9 +4861,9 @@ fGameEngine_FirstNight:
     STA.L $7F1F7A                                              ;83ACC8|8F7A1F7F|7F1F7A;
     REP #$20                                                   ;83ACCC|C220    |      ;
     REP #$30                                                   ;83ACCE|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83ACD0|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83ACD0|A5D2    |0000D2;
     ORA.W #$0001                                               ;83ACD2|090100  |      ;
-    STA.B strcPlayerFlags                                      ;83ACD5|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83ACD5|85D2    |0000D2;
     REP #$30                                                   ;83ACD7|C230    |      ;
     LDA.W #$0000                                               ;83ACD9|A90000  |      ;
     STA.B nPlayerAction                                        ;83ACDC|85D4    |0000D4;
@@ -4875,7 +4875,7 @@ fGameEngine_FirstNight:
     STA.W $0911                                                ;83ACEA|8D1109  |000911;
     REP #$30                                                   ;83ACED|C230    |      ;
     LDA.W #$0000                                               ;83ACEF|A90000  |      ;
-    STA.W $0901                                                ;83ACF2|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;83ACF2|8D0109  |000901;
     REP #$20                                                   ;83ACF5|C220    |      ;
     STZ.W $0915                                                ;83ACF7|9C1509  |000915;
     SEP #$20                                                   ;83ACFA|E220    |      ;
@@ -5537,7 +5537,7 @@ fGameEngine_Unknown83B0F6:
     AND.B #$10                                                 ;83B14D|2910    |      ;
     BNE .label5                                                ;83B14F|D055    |83B1A6;
     REP #$30                                                   ;83B151|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83B153|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83B153|A5D2    |0000D2;
     AND.W #$0010                                               ;83B155|291000  |      ;
     BNE +                                                      ;83B158|D003    |83B15D;
     JMP.W .return0                                             ;83B15A|4CC1B1  |83B1C1;
@@ -8178,7 +8178,7 @@ fGameEngine_ChichenUnknown83C296:
     JMP.W .label37                                             ;83C654|4C34C7  |83C734;
  
  
-  + LDA.B strcPlayerFlags                                      ;83C657|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;83C657|A5D2    |0000D2;
     AND.W #$0800                                               ;83C659|290008  |      ;
     BEQ +                                                      ;83C65C|F003    |83C661;
     JMP.W .label37                                             ;83C65E|4C34C7  |83C734;
@@ -8319,7 +8319,7 @@ fGameEngine_ChichenUnknown83C296:
     JMP.W .return                                              ;83C73F|4C06C8  |83C806;
  
  
-  + LDA.B strcPlayerFlags                                      ;83C742|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;83C742|A5D2    |0000D2;
     AND.W #$0010                                               ;83C744|291000  |      ;
     BEQ +                                                      ;83C747|F003    |83C74C;
     JMP.W .return                                              ;83C749|4C06C8  |83C806;
@@ -9207,9 +9207,9 @@ fAreaEvents_Farm:
     STZ.W nPlayerInteractionArg1                               ;83CE7C|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83CE7F|9C7009  |000970;
     REP #$30                                                   ;83CE82|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83CE84|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83CE84|A5D2    |0000D2;
     ORA.W #$0040                                               ;83CE86|094000  |      ;
-    STA.B strcPlayerFlags                                      ;83CE89|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83CE89|85D2    |0000D2;
     REP #$30                                                   ;83CE8B|C230    |      ;
     LDA.W #$0000                                               ;83CE8D|A90000  |      ;
     STA.B nPlayerAction                                        ;83CE90|85D4    |0000D4;
@@ -9385,9 +9385,9 @@ fAreaEvents_Farm:
     STZ.W nPlayerInteractionArg1                               ;83D019|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83D01C|9C7009  |000970;
     REP #$30                                                   ;83D01F|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83D021|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83D021|A5D2    |0000D2;
     ORA.W #$0040                                               ;83D023|094000  |      ;
-    STA.B strcPlayerFlags                                      ;83D026|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83D026|85D2    |0000D2;
     REP #$30                                                   ;83D028|C230    |      ;
     LDA.W #$0000                                               ;83D02A|A90000  |      ;
     STA.B nPlayerAction                                        ;83D02D|85D4    |0000D4;
@@ -9438,9 +9438,9 @@ fAreaEvents_Farm:
     STZ.W nPlayerInteractionArg1                               ;83D09B|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83D09E|9C7009  |000970;
     REP #$30                                                   ;83D0A1|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83D0A3|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83D0A3|A5D2    |0000D2;
     ORA.W #$0040                                               ;83D0A5|094000  |      ;
-    STA.B strcPlayerFlags                                      ;83D0A8|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83D0A8|85D2    |0000D2;
     REP #$30                                                   ;83D0AA|C230    |      ;
     LDA.W #$0000                                               ;83D0AC|A90000  |      ;
     STA.B nPlayerAction                                        ;83D0AF|85D4    |0000D4;
@@ -9470,9 +9470,9 @@ fAreaEvents_Farm:
     STZ.W nPlayerInteractionArg1                               ;83D0E8|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83D0EB|9C7009  |000970;
     REP #$30                                                   ;83D0EE|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83D0F0|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83D0F0|A5D2    |0000D2;
     ORA.W #$0040                                               ;83D0F2|094000  |      ;
-    STA.B strcPlayerFlags                                      ;83D0F5|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83D0F5|85D2    |0000D2;
     REP #$30                                                   ;83D0F7|C230    |      ;
     LDA.W #$0000                                               ;83D0F9|A90000  |      ;
     STA.B nPlayerAction                                        ;83D0FC|85D4    |0000D4;
@@ -11153,9 +11153,9 @@ fAreaEvents_CowBarn:
     STZ.W nPlayerInteractionArg1                               ;83DEBC|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83DEBF|9C7009  |000970;
     REP #$30                                                   ;83DEC2|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83DEC4|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83DEC4|A5D2    |0000D2;
     ORA.W #$0040                                               ;83DEC6|094000  |      ;
-    STA.B strcPlayerFlags                                      ;83DEC9|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83DEC9|85D2    |0000D2;
     REP #$30                                                   ;83DECB|C230    |      ;
     LDA.W #$0000                                               ;83DECD|A90000  |      ;
     STA.B nPlayerAction                                        ;83DED0|85D4    |0000D4;
@@ -11864,7 +11864,7 @@ fAreaEvents_Mine:
     CMP.W #$0200                                               ;83E4F3|C90002  |      ;
     BCC .label1                                                ;83E4F6|903D    |83E535;
     REP #$30                                                   ;83E4F8|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83E4FA|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83E4FA|A5D2    |0000D2;
     AND.W #$0800                                               ;83E4FC|290008  |      ;
     BNE +                                                      ;83E4FF|D003    |83E504;
     JMP.W .label1                                              ;83E501|4C35E5  |83E535;
@@ -11873,8 +11873,8 @@ fAreaEvents_Mine:
   + REP #$30                                                   ;83E504|C230    |      ;
     LDA.W #$0800                                               ;83E506|A90008  |      ;
     EOR.W #$FFFF                                               ;83E509|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;83E50C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;83E50E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;83E50C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83E50E|85D2    |0000D2;
     SEP #$20                                                   ;83E510|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;83E512|AF191F7F|7F1F19;
     STA.L nDogAreaId                                           ;83E516|8F301F7F|7F1F30;
@@ -11887,7 +11887,7 @@ fAreaEvents_Mine:
     LDA.W #$0000                                               ;83E52C|A90000  |      ;
     CLC                                                        ;83E52F|18      |      ;
     ADC.B nPlayerDirection                                     ;83E530|65DA    |0000DA;
-    STA.W $0901                                                ;83E532|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;83E532|8D0109  |000901;
  
 .label1:
     REP #$30                                                   ;83E535|C230    |      ;
@@ -12182,16 +12182,16 @@ fAreaEvents_Intro:
     STA.L nInGameMinuteCounter                                 ;83E781|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83E785|C220    |      ;
     STZ.W $0915                                                ;83E787|9C1509  |000915;
-    STZ.B strcPlayerFlags                                      ;83E78A|64D2    |0000D2;
+    STZ.B nPlayerFlags                                         ;83E78A|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;83E78C|64D4    |0000D4;
     SEP #$20                                                   ;83E78E|E220    |      ;
     LDA.W nPlayerStamina                                       ;83E790|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83E793|8D1809  |000918;
     STZ.W $0925                                                ;83E796|9C2509  |000925;
     REP #$30                                                   ;83E799|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83E79B|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83E79B|A5D2    |0000D2;
     ORA.W #$0001                                               ;83E79D|090100  |      ;
-    STA.B strcPlayerFlags                                      ;83E7A0|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83E7A0|85D2    |0000D2;
     REP #$30                                                   ;83E7A2|C230    |      ;
     LDA.W #$0000                                               ;83E7A4|A90000  |      ;
     STA.B nPlayerAction                                        ;83E7A7|85D4    |0000D4;
@@ -12203,7 +12203,7 @@ fAreaEvents_Intro:
     STA.W $0911                                                ;83E7B5|8D1109  |000911;
     REP #$30                                                   ;83E7B8|C230    |      ;
     LDA.W #$0000                                               ;83E7BA|A90000  |      ;
-    STA.W $0901                                                ;83E7BD|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;83E7BD|8D0109  |000901;
     SEP #$20                                                   ;83E7C0|E220    |      ;
     STZ.W nTimeState                                           ;83E7C2|9C7309  |000973;
     SEP #$20                                                   ;83E7C5|E220    |      ;
@@ -12211,8 +12211,8 @@ fAreaEvents_Intro:
     REP #$30                                                   ;83E7CA|C230    |      ;
     LDA.W #$0002                                               ;83E7CC|A90200  |      ;
     EOR.W #$FFFF                                               ;83E7CF|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;83E7D2|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;83E7D4|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;83E7D2|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83E7D4|85D2    |0000D2;
     SEP #$20                                                   ;83E7D6|E220    |      ;
     LDA.L nIntroHowToPlayIndex2                                ;83E7D8|AF491F7F|7F1F49;
     BNE +                                                      ;83E7DC|D003    |83E7E1;
@@ -12753,16 +12753,16 @@ fAreaEvents_Endings:
     STA.L nInGameMinuteCounter                                 ;83EBBA|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83EBBE|C220    |      ;
     STZ.W $0915                                                ;83EBC0|9C1509  |000915;
-    STZ.B strcPlayerFlags                                      ;83EBC3|64D2    |0000D2;
+    STZ.B nPlayerFlags                                         ;83EBC3|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;83EBC5|64D4    |0000D4;
     SEP #$20                                                   ;83EBC7|E220    |      ;
     LDA.W nPlayerStamina                                       ;83EBC9|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83EBCC|8D1809  |000918;
     STZ.W $0925                                                ;83EBCF|9C2509  |000925;
     REP #$30                                                   ;83EBD2|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;83EBD4|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;83EBD4|A5D2    |0000D2;
     ORA.W #$0001                                               ;83EBD6|090100  |      ;
-    STA.B strcPlayerFlags                                      ;83EBD9|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83EBD9|85D2    |0000D2;
     REP #$30                                                   ;83EBDB|C230    |      ;
     LDA.W #$0000                                               ;83EBDD|A90000  |      ;
     STA.B nPlayerAction                                        ;83EBE0|85D4    |0000D4;
@@ -12774,7 +12774,7 @@ fAreaEvents_Endings:
     STA.W $0911                                                ;83EBEE|8D1109  |000911;
     REP #$30                                                   ;83EBF1|C230    |      ;
     LDA.W #$0000                                               ;83EBF3|A90000  |      ;
-    STA.W $0901                                                ;83EBF6|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;83EBF6|8D0109  |000901;
     SEP #$20                                                   ;83EBF9|E220    |      ;
     STZ.W nTimeState                                           ;83EBFB|9C7309  |000973;
     SEP #$20                                                   ;83EBFE|E220    |      ;
@@ -12782,8 +12782,8 @@ fAreaEvents_Endings:
     REP #$30                                                   ;83EC03|C230    |      ;
     LDA.W #$0002                                               ;83EC05|A90200  |      ;
     EOR.W #$FFFF                                               ;83EC08|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;83EC0B|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;83EC0D|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;83EC0B|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;83EC0D|85D2    |0000D2;
     SEP #$20                                                   ;83EC0F|E220    |      ;
     LDA.L $7F1F47                                              ;83EC11|AF471F7F|7F1F47;
     BNE +                                                      ;83EC15|D003    |83EC1A;
