@@ -101,7 +101,7 @@
     nCarriedItemId = $000984; !^ n16 ^!
     nTileInFrontOfPlayerX = $000985; !^ n16 ^!
     nTileInFrontOfPlayerY = $000987; !^ n16 ^!
-    n8DestinationId = $00098B; !^ n8 ^!
+    nDestinationAreaId = $00098B; !^ n8 ^!
     nWeatherForecast = $00098C
     nUnknownFlags09D = $00098D; !^ n8 ^!
     nWeatherDialogIdIndex = $000990; !^ n8 ^!
@@ -111,7 +111,7 @@
     nMenuFlip = $000999; !^ n16 ^!
     nMenuPosX = $00099B; !^ n16 ^!
     nMenuPoxY = $00099D; !^ n16 ^!
-    nNameDestinationId = $00099F; !^ n8 ^!
+    nNameInputLenght = $00099F; !^ n8 ^!
     nUnknown9B5 = $0009B5; !^ n8 ^!
     sCurrentObjectMap = $0009B6; !^ sObjectMap (0x1000) ^!
     SNES_INIDISP = $002100
@@ -338,7 +338,8 @@
     nNewBornCowAffection = $7F1F2B; !^ n8 ^!
     nDogX = $7F1F2C; !^ n16 ^!
     nDogY = $7F1F2E; !^ n16 ^!
-    nDogMapId = $7F1F30; !^ n16 ^!
+    nDogAreaId = $7F1F30; !^ n16 ^!
+    nHorseAreaIdMaybe = $7F1F31; !^ n8 ^!
     nHorseAge = $7F1F32; !^ n16 ^!
     nPlayerHappiness = $7F1F33; !^ n16 ^!
     nConstructionDayCounter = $7F1F35; !^ n8 ^!
@@ -350,6 +351,7 @@
     sSecondChildNameShort = $7F1F41; !^ 4 * s8 ^!
     nEggInCoopFlags = $7F1F45
     nIntroHowToPlayIndex = $7F1F48; !^ n8 ^!
+    nIntroHowToPlayIndex2 = $7F1F49; !^ n8 ^!
     nStatShippedCorns = $7F1F4A; !^ n16 ^!
     nStatShippedTomatoes = $7F1F4C; !^ n16 ^!
     nStatShippedTurnips = $7F1F4E; !^ n16 ^!

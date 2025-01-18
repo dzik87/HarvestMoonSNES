@@ -35,7 +35,7 @@ fCore_GameStart:
     STA.W nMapEngine_DestinationY                              ;808050|8D7F01  |00017F;
     SEP #$20                                                   ;808053|E220    |      ;
     LDA.B #$15                                                 ;808055|A915    |      ;
-    STA.W n8DestinationId                                      ;808057|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;808057|8D8B09  |00098B;
     JSL.L fCore_FindBestLove                                   ;80805A|22C68E82|828EC6;
     JSL.L fUnknown_8096D3                                      ;80805E|22D39680|8096D3;
     REP #$20                                                   ;808062|C220    |      ;
@@ -75,7 +75,7 @@ fCore_MainLoop:
     JSL.L fUnknown_81A383                                      ;8080B7|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;8080BB|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;8080BF|22B39580|8095B3;
-    JSL.L fAI_Unknown84816F                                    ;8080C3|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;8080C3|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;8080C7|2200A681|81A600;
     JSL.L fUnknown_8582C7                                      ;8080CB|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;8080CF|22B28C85|858CB2;
@@ -2855,7 +2855,7 @@ fAudioEngine_MapChangeHandler:
  
 .label1:
     SEP #$20                                                   ;80969C|E220    |      ;
-    LDA.W n8DestinationId                                      ;80969E|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;80969E|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;8096A1|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8096A3|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;8096A7|22018483|838401;
@@ -2867,7 +2867,7 @@ fAudioEngine_MapChangeHandler:
     BEQ +                                                      ;8096B4|F007    |8096BD;
     SEP #$20                                                   ;8096B6|E220    |      ;
     LDA.B #$3C                                                 ;8096B8|A93C    |      ;
-    STA.W n8DestinationId                                      ;8096BA|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;8096BA|8D8B09  |00098B;
  
   + SEP #$20                                                   ;8096BD|E220    |      ;
     LDA.B #$0F                                                 ;8096BF|A90F    |      ;
@@ -2901,20 +2901,20 @@ fUnknown_8096D3:
     JSL.L fUnknown_Zero07Ptr                                   ;80970B|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;80970F|22008084|848000;
     SEP #$20                                                   ;809713|E220    |      ;
-    LDA.W n8DestinationId                                      ;809715|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;809715|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;809718|8522    |000022;
     JSL.L fMapEngine_Initialize                                ;80971A|2298CA83|83CA98;
-    JSL.L fAI_Unknown84816F                                    ;80971E|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;80971E|226F8184|84816F;
     SEP #$20                                                   ;809722|E220    |      ;
-    LDA.W n8DestinationId                                      ;809724|AD8B09  |00098B;
-    JSL.L fUnknown_80972C                                      ;809727|222C9780|80972C;
+    LDA.W nDestinationAreaId                                   ;809724|AD8B09  |00098B;
+    JSL.L fMap_SetupArea                                       ;809727|222C9780|80972C;
  
 fReturn_80972B:
     RTL                                                        ;80972B|6B      |      ; FIXME: I want to be .return
  
  
-fUnknown_80972C:
-    SEP #$20                                                   ;80972C|E220    |      ;
+fMap_SetupArea:
+    SEP #$20                                                   ;80972C|E220    |      ; A: nAreaId
     REP #$10                                                   ;80972E|C210    |      ;
     STA.B nMapEngine_DestinationId                             ;809730|8522    |000022;
     PHA                                                        ;809732|48      |      ;
@@ -3246,7 +3246,7 @@ fUnknown_80972C:
     LDA.W #$1800                                               ;809A09|A90018  |      ;
     STA.B $C7                                                  ;809A0C|85C7    |0000C7;
     JSL.L fUnknown_81A383                                      ;809A0E|2283A381|81A383;
-    JSL.L fAI_Unknown84816F                                    ;809A12|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;809A12|226F8184|84816F;
     JSL.L fUnknown_8582C7                                      ;809A16|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;809A1A|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;809A1E|22E08385|8583E0;
@@ -3257,7 +3257,7 @@ fUnknown_80972C:
     LDA.W #$1800                                               ;809A2C|A90018  |      ;
     STA.B $C7                                                  ;809A2F|85C7    |0000C7;
     JSL.L fUnknown_81A383                                      ;809A31|2283A381|81A383;
-    JSL.L fAI_Unknown84816F                                    ;809A35|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;809A35|226F8184|84816F;
     JSL.L fUnknown_8582C7                                      ;809A39|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;809A3D|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;809A41|22E08385|8583E0;
@@ -3385,7 +3385,7 @@ fMapChangeHandler_809A64:
     TAX                                                        ;809B0E|AA      |      ;
     SEP #$20                                                   ;809B0F|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809B11|BFF5B680|80B6F5;
-    STA.W n8DestinationId                                      ;809B15|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;809B15|8D8B09  |00098B;
     INX                                                        ;809B18|E8      |      ;
     INX                                                        ;809B19|E8      |      ;
     SEP #$20                                                   ;809B1A|E220    |      ;
@@ -3395,10 +3395,10 @@ fMapChangeHandler_809A64:
     LDA.L aScreenTransitionTable,X                             ;809B23|BFF5B680|80B6F5;
     AND.B #$01                                                 ;809B27|2901    |      ;
     BEQ .label10                                               ;809B29|F00B    |809B36;
-    LDA.W n8DestinationId                                      ;809B2B|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;809B2B|AD8B09  |00098B;
     CLC                                                        ;809B2E|18      |      ;
     ADC.L nCurrentSeasonID                                     ;809B2F|6F191F7F|7F1F19;
-    STA.W n8DestinationId                                      ;809B33|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;809B33|8D8B09  |00098B;
  
 .label10:
     SEP #$20                                                   ;809B36|E220    |      ;
@@ -3414,10 +3414,10 @@ fMapChangeHandler_809A64:
     BCC .label13                                               ;809B4E|902D    |809B7D;
     CMP.B #$0D                                                 ;809B50|C90D    |      ;
     BCS .label13                                               ;809B52|B029    |809B7D;
-    LDA.W n8DestinationId                                      ;809B54|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;809B54|AD8B09  |00098B;
     CLC                                                        ;809B57|18      |      ;
     ADC.B #$04                                                 ;809B58|6904    |      ;
-    STA.W n8DestinationId                                      ;809B5A|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;809B5A|8D8B09  |00098B;
     BRA .label13                                               ;809B5D|801E    |809B7D;
  
  
@@ -3426,7 +3426,7 @@ fMapChangeHandler_809A64:
     LDA.L nCurrentSeasonID                                     ;809B61|AF191F7F|7F1F19;
     BNE .label13                                               ;809B65|D016    |809B7D;
     LDA.B #$3A                                                 ;809B67|A93A    |      ;
-    STA.W n8DestinationId                                      ;809B69|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;809B69|8D8B09  |00098B;
     BRA .label13                                               ;809B6C|800F    |809B7D;
  
  
@@ -3436,7 +3436,7 @@ fMapChangeHandler_809A64:
     CMP.B #$03                                                 ;809B74|C903    |      ;
     BNE .label13                                               ;809B76|D005    |809B7D;
     LDA.B #$39                                                 ;809B78|A939    |      ;
-    STA.W n8DestinationId                                      ;809B7A|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;809B7A|8D8B09  |00098B;
  
 .label13:
     SEP #$20                                                   ;809B7D|E220    |      ;

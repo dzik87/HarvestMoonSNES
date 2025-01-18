@@ -452,10 +452,10 @@ macro AICMD0x3C()
     
 endmacro
 
-; AI command 0x3D - Teleports you to selected MapId
-macro AICMD0x3D_TeleportToMap(nMapId)
+; AI command 0x3D - Teleports you to selected AreaId
+macro AICMD0x3D_TeleportToArea(nAreaId)
     db $3D
-    db <nMapId>
+    db <nAreaId>
     
 endmacro
 

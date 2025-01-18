@@ -230,7 +230,7 @@ endstruct align 12
 
 
 ; nMapEngine_flags          $000196
-!AREA_FORCETELEPORT         = $4000
+!AREAFLAGS_FORCETELEPORT    = $4000
 
 
 ; Areas/Maps                $00098B
@@ -330,3 +330,70 @@ endstruct align 12
 !AREA_NATSUMELOGO           =   $5D
 !AREA_UNKNOWN5E             =   $5E
 !AREA_UNKNOWN5F             =   $5F
+
+
+; Unknown AI structure pointer to it is stored at 0xCC (48 entries)
+struct strcAIUnknown        $7EB586
+    .unk00                  skip 1
+    .unk01                  skip 1
+    .nDataIndex             skip 1  ; stored as n8 used as index for pDataAddress
+    .unk03                  skip 1
+    .unk04                  skip 1
+    .unk05                  skip 1
+    .unk06                  skip 1
+    .unk07                  skip 1
+    .unk08                  skip 1
+    .unk09                  skip 1
+    .unk0A                  skip 1
+    .unk0B                  skip 1
+    .unk0C                  skip 1
+    .unk0D                  skip 1
+    .unk0E                  skip 1
+    .unk0F                  skip 1
+    .unk10                  skip 1
+    .unk11                  skip 1
+    .unk12                  skip 1
+    .unk13                  skip 1
+    .nOtherUnknownIndex     skip 1  ; stores pDataAddress[nDataIndex * 3 + 2] * 64 as n16 (64 is size of this struct so maybe it's child/parent index ?)
+    .unk15                  skip 1
+    .nDataValue             skip 2  ; stores pDataAddress[nDataIndex * 3 + 0] as n16
+    .unk18                  skip 1
+    .unk19                  skip 1
+    .unk1A                  skip 1
+    .unk1B                  skip 1
+    .unk1C                  skip 1
+    .unk1D                  skip 1
+    .unk1E                  skip 1
+    .unk1F                  skip 1
+    .unk20                  skip 1
+    .unk21                  skip 1
+    .unk22                  skip 1
+    .unk23                  skip 1
+    .unk24                  skip 1
+    .unk25                  skip 1
+    .unk26                  skip 1
+    .unk27                  skip 1
+    .unk28                  skip 1
+    .unk29                  skip 1
+    .unk2A                  skip 1
+    .unk2B                  skip 1
+    .unk2C                  skip 1
+    .unk2D                  skip 1
+    .unk2E                  skip 1
+    .unk2F                  skip 1
+    .unk30                  skip 1
+    .unk31                  skip 1
+    .unk32                  skip 1
+    .pDataAddress           skip 2  ; data address in B3 - hardcoded
+    .unk35                  skip 1
+    .unk36                  skip 1
+    .unk37                  skip 1
+    .unk38                  skip 1
+    .unk39                  skip 1
+    .unk3A                  skip 1
+    .unk3B                  skip 1
+    .unk3C                  skip 1
+    .unk3D                  skip 1
+    .unk3E                  skip 1
+    .unk3F                  skip 1
+endstruct align 64

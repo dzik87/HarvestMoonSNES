@@ -8,7 +8,7 @@ fAI_ZeroCCPtr:
  
   - PHX                                                        ;848005|DA      |      ;
     TXA                                                        ;848006|8A      |      ;
-    JSL.L fAI_Unknown84887C                                    ;848007|227C8884|84887C;
+    JSL.L fAI_SetCCPointer                                     ;848007|227C8884|84887C;
     SEP #$20                                                   ;84800B|E220    |      ;
     REP #$10                                                   ;84800D|C210    |      ;
     LDY.W #$0000                                               ;84800F|A00000  |      ;
@@ -24,7 +24,7 @@ fAI_ZeroCCPtr:
  
 fAI_Unknown848020:
     REP #$30                                                   ;848020|C230    |      ;
-    JSL.L fAI_Unknown84887C                                    ;848022|227C8884|84887C;
+    JSL.L fAI_SetCCPointer                                     ;848022|227C8884|84887C;
     SEP #$20                                                   ;848026|E220    |      ;
     REP #$10                                                   ;848028|C210    |      ;
     LDY.W #$0000                                               ;84802A|A00000  |      ;
@@ -40,17 +40,17 @@ fAI_Unknown848020:
  
 fAI_Unknown84803F:
     REP #$30                                                   ;84803F|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
-    JSL.L fAI_Unknown84887C                                    ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
+    JSL.L fAI_SetCCPointer                                     ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;848045|C230    |      ;
     STX.B n16TempVar1                                          ;848047|867E    |00007E;
     STY.B n16TempVar2                                          ;848049|8480    |000080;
     LDX.W #$0000                                               ;84804B|A20000  |      ;
-    LDA.L pppAITable_8494CD,X                                  ;84804E|BFCD9484|8494CD; index = 0
+    LDA.L pppAISelector,X                                      ;84804E|BFCD9484|8494CD; index = 0
     STA.B ptrUnknown0x75                                       ;848052|8575    |000075;
     INX                                                        ;848054|E8      |      ;
     INX                                                        ;848055|E8      |      ;
     SEP #$20                                                   ;848056|E220    |      ;
-    LDA.L pppAITable_8494CD,X                                  ;848058|BFCD9484|8494CD;
+    LDA.L pppAISelector,X                                      ;848058|BFCD9484|8494CD;
     STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077; $0x75 = 0xB38000
     REP #$20                                                   ;84805E|C220    |      ;
     LDA.B n16TempVar1                                          ;848060|A57E    |00007E;
@@ -88,17 +88,17 @@ fAI_Unknown84803F:
 fAI_SetupAreaScripting:
     REP #$30                                                   ;848097|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;848099|48      |      ;
-    JSL.L fAI_Unknown84887C                                    ;84809A|227C8884|84887C; $0xCC = 7EB586 + A * 64
+    JSL.L fAI_SetCCPointer                                     ;84809A|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;84809E|C230    |      ;
     STX.B n16TempVar1                                          ;8480A0|867E    |00007E;
     STY.B n16TempVar2                                          ;8480A2|8480    |000080;
     LDX.W #$0000                                               ;8480A4|A20000  |      ;
-    LDA.L pppAITable_8494CD,X                                  ;8480A7|BFCD9484|8494CD; index = 0
+    LDA.L pppAISelector,X                                      ;8480A7|BFCD9484|8494CD; index = 0
     STA.B ptrUnknown0x72                                       ;8480AB|8572    |000072;
     INX                                                        ;8480AD|E8      |      ;
     INX                                                        ;8480AE|E8      |      ;
     SEP #$20                                                   ;8480AF|E220    |      ;
-    LDA.L pppAITable_8494CD,X                                  ;8480B1|BFCD9484|8494CD;
+    LDA.L pppAISelector,X                                      ;8480B1|BFCD9484|8494CD;
     STA.B ptrUnknown0x72+2                                     ;8480B5|8574    |000074; $0x72 = 0xB38000
     REP #$20                                                   ;8480B7|C220    |      ;
     LDA.B n16TempVar1                                          ;8480B9|A57E    |00007E;
@@ -140,17 +140,17 @@ fAI_SetupAreaScripting:
 fAI_Unknown8480F8:
     REP #$30                                                   ;8480F8|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;8480FA|48      |      ;
-    JSL.L fAI_Unknown84887C                                    ;8480FB|227C8884|84887C; $0xCC = 7EB586 + A * 64
+    JSL.L fAI_SetCCPointer                                     ;8480FB|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;8480FF|C230    |      ;
     STX.B n16TempVar1                                          ;848101|867E    |00007E;
     STY.B n16TempVar2                                          ;848103|8480    |000080;
     LDX.W #$0000                                               ;848105|A20000  |      ;
-    LDA.L pppAITable_8494CD,X                                  ;848108|BFCD9484|8494CD;
+    LDA.L pppAISelector,X                                      ;848108|BFCD9484|8494CD;
     STA.B ptrUnknown0x72                                       ;84810C|8572    |000072;
     INX                                                        ;84810E|E8      |      ;
     INX                                                        ;84810F|E8      |      ;
     SEP #$20                                                   ;848110|E220    |      ;
-    LDA.L pppAITable_8494CD,X                                  ;848112|BFCD9484|8494CD;
+    LDA.L pppAISelector,X                                      ;848112|BFCD9484|8494CD;
     STA.B ptrUnknown0x72+2                                     ;848116|8574    |000074; $0x72 = 0xB38000
     REP #$20                                                   ;848118|C220    |      ;
     LDA.B n16TempVar1                                          ;84811A|A57E    |00007E;
@@ -198,7 +198,7 @@ fAI_Unknown8480F8:
     RTL                                                        ;84816E|6B      |      ;
  
  
-fAI_Unknown84816F:
+fAI_HowToPlaySetup:
     SEP #$20                                                   ;84816F|E220    |      ;
     REP #$10                                                   ;848171|C210    |      ;
     LDA.W $019A                                                ;848173|AD9A01  |00019A;
@@ -1166,8 +1166,8 @@ fAI_Unknown8483CC:
     JMP.W .label19                                             ;848879|4CFD87  |8487FD;
  
  
-fAI_Unknown84887C:
-    REP #$30                                                   ;84887C|C230    |      ; A: nArg, return $0xCC
+fAI_SetCCPointer:
+    REP #$30                                                   ;84887C|C230    |      ; A: nIndex, return $0xCC
     ASL A                                                      ;84887E|0A      |      ;
     ASL A                                                      ;84887F|0A      |      ;
     ASL A                                                      ;848880|0A      |      ;
@@ -1193,7 +1193,7 @@ fAI_Unknown848895:
     SEP #$20                                                   ;84889C|E220    |      ;
     REP #$10                                                   ;84889E|C210    |      ;
     LDY.W #$0002                                               ;8488A0|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8488A3|B7CC    |0000CC;
+    LDA.B [ptrAIUnknown0xCC],Y                                 ;8488A3|B7CC    |0000CC; strcAIUnknown.nDataIndex
     REP #$20                                                   ;8488A5|C220    |      ;
     STA.B n16TempVar1                                          ;8488A7|857E    |00007E;
     ASL A                                                      ;8488A9|0A      |      ;
@@ -1462,7 +1462,7 @@ fAIAction0x06_SetTransferDestination:
     STA.B ptrAIActionData                                      ;848A9E|85C9    |0000C9;
     SEP #$20                                                   ;848AA0|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848AA2|A7C9    |0000C9;
-    STA.W n8DestinationId                                      ;848AA4|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;848AA4|8D8B09  |00098B;
     REP #$30                                                   ;848AA7|C230    |      ;
     LDA.B ptrAIActionData                                      ;848AA9|A5C9    |0000C9;
     CLC                                                        ;848AAB|18      |      ;
@@ -1541,7 +1541,7 @@ fAIAction0x09:
     XBA                                                        ;848B2E|EB      |      ;
     LDA.B [ptrAIActionData]                                    ;848B2F|A7C9    |0000C9;
     REP #$20                                                   ;848B31|C220    |      ;
-    JSL.L fAI_Unknown84887C                                    ;848B33|227C8884|84887C;
+    JSL.L fAI_SetCCPointer                                     ;848B33|227C8884|84887C;
     SEP #$20                                                   ;848B37|E220    |      ;
     REP #$10                                                   ;848B39|C210    |      ;
     PLA                                                        ;848B3B|68      |      ;
@@ -2705,7 +2705,7 @@ fAIAction0x25:
     XBA                                                        ;84938F|EB      |      ;
     LDA.B [ptrAIActionData]                                    ;849390|A7C9    |0000C9;
     REP #$20                                                   ;849392|C220    |      ;
-    JSL.L fAI_Unknown84887C                                    ;849394|227C8884|84887C;
+    JSL.L fAI_SetCCPointer                                     ;849394|227C8884|84887C;
     REP #$30                                                   ;849398|C230    |      ;
     LDA.B ptrAIActionData                                      ;84939A|A5C9    |0000C9;
     CLC                                                        ;84939C|18      |      ;
@@ -2867,9 +2867,9 @@ aAIActions:
     dw fAIAction0x58_ReplaceFarmTile                           ;8494C9|        |84BFBF;
     dw fAIAction0x59_SwapEquippedItems                         ;8494CB|        |84C000;
  
-pppAITable_8494CD:
-    dl ppTable_B38000                                          ;8494CD|        |B38000;
-    dl pScripting_StarNightFestival                            ;8494D0|        |B48000;
+pppAISelector:
+    dl ppAIScriptingList                                       ;8494CD|        |B38000;
+    dl pAIScripting0x0F_StarNightFestival                      ;8494D0|        |B48000;
  
 aAISetMask:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;8494D3|        |      ;
@@ -7385,7 +7385,7 @@ fAIAction0x3C:
     STA.B ptrAIActionData                                      ;84B50D|85C9    |0000C9;
     SEP #$20                                                   ;84B50F|E220    |      ;
     LDA.B #$15                                                 ;84B511|A915    |      ;
-    STA.W n8DestinationId                                      ;84B513|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;84B513|8D8B09  |00098B;
     REP #$30                                                   ;84B516|C230    |      ;
     LDA.W nMapEngine_flags                                     ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
@@ -7405,7 +7405,7 @@ fAIAction0x3D_TeleportToMap:
     STA.B ptrAIActionData                                      ;84B537|85C9    |0000C9;
     SEP #$20                                                   ;84B539|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B53B|A7C9    |0000C9;
-    STA.W n8DestinationId                                      ;84B53D|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;84B53D|8D8B09  |00098B;
     REP #$30                                                   ;84B540|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B542|A5C9    |0000C9;
     CLC                                                        ;84B544|18      |      ;
@@ -8407,7 +8407,7 @@ fAIAction0x50:
     STA.B strcPlayerFlags                                      ;84BC72|85D2    |0000D2;
     SEP #$20                                                   ;84BC74|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;84BC76|AF191F7F|7F1F19;
-    STA.L nDogMapId                                            ;84BC7A|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;84BC7A|8F301F7F|7F1F30;
     REP #$30                                                   ;84BC7E|C230    |      ;
     LDA.W #$0078                                               ;84BC80|A97800  |      ;
     STA.L nDogX                                                ;84BC83|8F2C1F7F|7F1F2C;
@@ -8503,7 +8503,7 @@ fAIAction0x51:
     STA.B strcPlayerFlags                                      ;84BD25|85D2    |0000D2;
     SEP #$20                                                   ;84BD27|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;84BD29|AF191F7F|7F1F19;
-    STA.L nDogMapId                                            ;84BD2D|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;84BD2D|8F301F7F|7F1F30;
     REP #$30                                                   ;84BD31|C230    |      ;
     LDA.W #$0078                                               ;84BD33|A97800  |      ;
     STA.L nDogX                                                ;84BD36|8F2C1F7F|7F1F2C;
@@ -10568,7 +10568,7 @@ fInput_Unknown84CAA5:
     STA.L nDogY                                                ;84CBFB|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84CBFF|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;84CC01|A522    |000022;
-    STA.L nDogMapId                                            ;84CC03|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;84CC03|8F301F7F|7F1F30;
     REP #$30                                                   ;84CC07|C230    |      ;
     LDA.W #$0016                                               ;84CC09|A91600  |      ;
     STA.B nPlayerAction                                        ;84CC0C|85D4    |0000D4;

@@ -2,23 +2,23 @@
     ORG $B58000
  
  
-pScripting_B58000:
+pAIScripting0x43:
     dw DATA8_B58020                                            ;B58000|        |B58020;
     dw DATA8_B584DA                                            ;B58002|        |B584DA;
     dw DATA8_B58990                                            ;B58004|        |B58990;
     dw DATA8_B58E4E                                            ;B58006|        |B58E4E;
     dw DATA8_B59313                                            ;B58008|        |B59313;
-    dw pScripting_B597D1                                       ;B5800A|        |B597D1;
-    dw pScripting_B597D1                                       ;B5800C|        |B597D1;
-    dw pScripting_B597D1                                       ;B5800E|        |B597D1;
-    dw pScripting_B597D1                                       ;B58010|        |B597D1;
-    dw pScripting_B597D1                                       ;B58012|        |B597D1;
-    dw pScripting_B597D1                                       ;B58014|        |B597D1;
-    dw pScripting_B597D1                                       ;B58016|        |B597D1;
-    dw pScripting_B597D1                                       ;B58018|        |B597D1;
-    dw pScripting_B597D1                                       ;B5801A|        |B597D1;
-    dw pScripting_B597D1                                       ;B5801C|        |B597D1;
-    dw pScripting_B597D1                                       ;B5801E|        |B597D1;
+    dw pAIScripting0x44                                        ;B5800A|        |B597D1;
+    dw pAIScripting0x44                                        ;B5800C|        |B597D1;
+    dw pAIScripting0x44                                        ;B5800E|        |B597D1;
+    dw pAIScripting0x44                                        ;B58010|        |B597D1;
+    dw pAIScripting0x44                                        ;B58012|        |B597D1;
+    dw pAIScripting0x44                                        ;B58014|        |B597D1;
+    dw pAIScripting0x44                                        ;B58016|        |B597D1;
+    dw pAIScripting0x44                                        ;B58018|        |B597D1;
+    dw pAIScripting0x44                                        ;B5801A|        |B597D1;
+    dw pAIScripting0x44                                        ;B5801C|        |B597D1;
+    dw pAIScripting0x44                                        ;B5801E|        |B597D1;
  
 DATA8_B58020:
  
@@ -1284,23 +1284,23 @@ DATA8_B59313:
     %AICMD0x10_End()                                           ;B597D0
 
 
-pScripting_B597D1:
+pAIScripting0x44:
     dw DATA8_B597F1                                            ;B597D1|        |B597F1;
     dw DATA8_B599EB                                            ;B597D3|        |B599EB;
     dw DATA8_B59BE3                                            ;B597D5|        |B59BE3;
     dw DATA8_B59DD3                                            ;B597D7|        |B59DD3;
     dw DATA8_B59FCA                                            ;B597D9|        |B59FCA;
-    dw pScripting_B5A1E5                                       ;B597DB|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597DD|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597DF|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597E1|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597E3|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597E5|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597E7|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597E9|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597EB|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597ED|        |B5A1E5;
-    dw pScripting_B5A1E5                                       ;B597EF|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597DB|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597DD|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597DF|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E1|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E3|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E5|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E7|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E9|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597EB|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597ED|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597EF|        |B5A1E5;
  
 DATA8_B597F1:
  
@@ -1832,23 +1832,23 @@ DATA8_B59FCA:
     %AICMD0x12_Jump($B5A1DF)                                   ;B5A1E2
 
 
-pScripting_B5A1E5:
+pAIScripting0x45:
     dw DATA8_B5A205                                            ;B5A1E5|        |B5A205;
     dw DATA8_B5A2FD                                            ;B5A1E7|        |B5A2FD;
     dw DATA8_B5A407                                            ;B5A1E9|        |B5A407;
     dw DATA8_B5A484                                            ;B5A1EB|        |B5A484;
     dw DATA8_B5A57C                                            ;B5A1ED|        |B5A57C;
     dw DATA8_B5A686                                            ;B5A1EF|        |B5A686;
-    dw pScripting_B5A703                                       ;B5A1F1|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1F3|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1F5|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1F7|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1F9|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1FB|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1FD|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A1FF|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A201|        |B5A703;
-    dw pScripting_B5A703                                       ;B5A203|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F1|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F3|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F5|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F7|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F9|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1FB|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1FD|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1FF|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A201|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A203|        |B5A703;
  
 DATA8_B5A205:
  
@@ -2112,7 +2112,7 @@ DATA8_B5A686:
     %AICMD0x12_Jump($B5A6FB)                                   ;B5A700
 
 
-pScripting_B5A703:
+pAIScripting0x46:
     dw DATA8_B5A723                                            ;B5A703|        |B5A723;
     dw DATA8_B5A73D                                            ;B5A705|        |B5A73D;
     dw DATA8_B5A757                                            ;B5A707|        |B5A757;
@@ -2126,9 +2126,9 @@ pScripting_B5A703:
     dw DATA8_B5A827                                            ;B5A717|        |B5A827;
     dw DATA8_B5A841                                            ;B5A719|        |B5A841;
     dw DATA8_B5A85D                                            ;B5A71B|        |B5A85D;
-    dw pScripting_HowToPlay                                    ;B5A71D|        |B5AC6E;
-    dw pScripting_HowToPlay                                    ;B5A71F|        |B5AC6E;
-    dw pScripting_HowToPlay                                    ;B5A721|        |B5AC6E;
+    dw pAIScripting0x47_HowToPlay                              ;B5A71D|        |B5AC6E;
+    dw pAIScripting0x47_HowToPlay                              ;B5A71F|        |B5AC6E;
+    dw pAIScripting0x47_HowToPlay                              ;B5A721|        |B5AC6E;
  
 DATA8_B5A723:
  
@@ -2142,7 +2142,7 @@ DATA8_B5A723:
     %AICMD0x06_SetTransferDestination($4B)                     ;B5A734
     %AICMD0x38()                                               ;B5A736
     %AICMD0x13($00B4)                                          ;B5A737
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A73A
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A73A
     %AICMD0x10_End()                                           ;B5A73C
 
 
@@ -2158,7 +2158,7 @@ DATA8_B5A73D:
     %AICMD0x06_SetTransferDestination($4C)                     ;B5A74E
     %AICMD0x38()                                               ;B5A750
     %AICMD0x13($00B4)                                          ;B5A751
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A754
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A754
     %AICMD0x10_End()                                           ;B5A756
 
 
@@ -2174,7 +2174,7 @@ DATA8_B5A757:
     %AICMD0x06_SetTransferDestination($4D)                     ;B5A768
     %AICMD0x38()                                               ;B5A76A
     %AICMD0x13($00B4)                                          ;B5A76B
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A76E
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A76E
     %AICMD0x10_End()                                           ;B5A770
 
 
@@ -2190,7 +2190,7 @@ DATA8_B5A771:
     %AICMD0x06_SetTransferDestination($4E)                     ;B5A782
     %AICMD0x38()                                               ;B5A784
     %AICMD0x13($00B4)                                          ;B5A785
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A788
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A788
     %AICMD0x10_End()                                           ;B5A78A
 
 
@@ -2206,7 +2206,7 @@ DATA8_B5A78B:
     %AICMD0x06_SetTransferDestination($4F)                     ;B5A79C
     %AICMD0x38()                                               ;B5A79E
     %AICMD0x13($00B4)                                          ;B5A79F
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A7A2
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A7A2
     %AICMD0x10_End()                                           ;B5A7A4
 
 
@@ -2222,7 +2222,7 @@ DATA8_B5A7A5:
     %AICMD0x06_SetTransferDestination($50)                     ;B5A7B6
     %AICMD0x38()                                               ;B5A7B8
     %AICMD0x13($00B4)                                          ;B5A7B9
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A7BC
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A7BC
     %AICMD0x10_End()                                           ;B5A7BE
 
 
@@ -2238,7 +2238,7 @@ DATA8_B5A7BF:
     %AICMD0x06_SetTransferDestination($51)                     ;B5A7D0
     %AICMD0x38()                                               ;B5A7D2
     %AICMD0x13($00B4)                                          ;B5A7D3
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A7D6
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A7D6
     %AICMD0x10_End()                                           ;B5A7D8
 
 
@@ -2254,7 +2254,7 @@ DATA8_B5A7D9:
     %AICMD0x06_SetTransferDestination($52)                     ;B5A7EA
     %AICMD0x38()                                               ;B5A7EC
     %AICMD0x13($00B4)                                          ;B5A7ED
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A7F0
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A7F0
     %AICMD0x10_End()                                           ;B5A7F2
 
 
@@ -2270,7 +2270,7 @@ DATA8_B5A7F3:
     %AICMD0x06_SetTransferDestination($56)                     ;B5A804
     %AICMD0x38()                                               ;B5A806
     %AICMD0x13($00B4)                                          ;B5A807
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A80A
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A80A
     %AICMD0x10_End()                                           ;B5A80C
 
 
@@ -2286,7 +2286,7 @@ DATA8_B5A80D:
     %AICMD0x06_SetTransferDestination($53)                     ;B5A81E
     %AICMD0x38()                                               ;B5A820
     %AICMD0x13($00B4)                                          ;B5A821
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A824
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A824
     %AICMD0x10_End()                                           ;B5A826
 
 
@@ -2302,7 +2302,7 @@ DATA8_B5A827:
     %AICMD0x06_SetTransferDestination($54)                     ;B5A838
     %AICMD0x38()                                               ;B5A83A
     %AICMD0x13($00B4)                                          ;B5A83B
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A83E
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A83E
     %AICMD0x10_End()                                           ;B5A840
 
 
@@ -2320,7 +2320,7 @@ DATA8_B5A841:
     %AICMD0x06_SetTransferDestination($55)                     ;B5A854
     %AICMD0x38()                                               ;B5A856
     %AICMD0x13($00B4)                                          ;B5A857
-    %AICMD0x3D_TeleportToMap($3D)                              ;B5A85A
+    %AICMD0x3D_TeleportToArea($3D)                             ;B5A85A
     %AICMD0x10_End()                                           ;B5A85C
 
 
@@ -2579,7 +2579,7 @@ DATA8_B5A85D:
     %AICMD0x12_Jump($B5AC68)                                   ;B5AC6B
 
 
-pScripting_HowToPlay:
+pAIScripting0x47_HowToPlay:
     dw DATA8_B5ACAE                                            ;B5AC6E|        |B5ACAE;
     dw DATA8_B5ACDE                                            ;B5AC70|        |B5ACDE;
     dw DATA8_B5AD25                                            ;B5AC72|        |B5AD25;
@@ -4605,7 +4605,7 @@ DATA8_B5C8EE:
     %AICMD0x40_DisableTileInteractions()                       ;B5C948
     %AICMD0x39($01, $0010)                                     ;B5C949
     %AICMD0x13($003C)                                          ;B5C94D
-    %AICMD0x3D_TeleportToMap($3C)                              ;B5C950
+    %AICMD0x3D_TeleportToArea($3C)                             ;B5C950
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C952
     %AICMD0x10_End()                                           ;B5C957
     %AICMD0x1A($0198, $00C8, $B383FC, $00)                     ;B5C958
@@ -4688,7 +4688,7 @@ DATA8_B5CA3D:
     %AICMD0x39($02, $0057)                                     ;B5CA66
     %AICMD0x3F_ThrowHeldItem()                                 ;B5CA6A
     %AICMD0x13($003C)                                          ;B5CA6B
-    %AICMD0x3D_TeleportToMap($3C)                              ;B5CA6E
+    %AICMD0x3D_TeleportToArea($3C)                             ;B5CA6E
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5CA70
     %AICMD0x10_End()                                           ;B5CA75
     %AICMD0x1A($0178, $0378, $B38198, $00)                     ;B5CA76
@@ -4747,7 +4747,7 @@ DATA8_B5CAA2:
     %AICMD0x56_UseEquippedItem()                               ;B5CB04
     %AICMD0x13($003C)                                          ;B5CB05
     %AICMD0x13($003C)                                          ;B5CB08
-    %AICMD0x3D_TeleportToMap($3C)                              ;B5CB0B
+    %AICMD0x3D_TeleportToArea($3C)                             ;B5CB0B
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5CB0D
     %AICMD0x10_End()                                           ;B5CB12
 
