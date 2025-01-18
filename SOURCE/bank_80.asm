@@ -2903,7 +2903,7 @@ fUnknown_8096D3:
     SEP #$20                                                   ;809713|E220    |      ;
     LDA.W nDestinationAreaId                                   ;809715|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;809718|8522    |000022;
-    JSL.L fMapEngine_Initialize                                ;80971A|2298CA83|83CA98;
+    JSL.L fMapEngine_AreaEvents                                ;80971A|2298CA83|83CA98;
     JSL.L fAI_HowToPlaySetup                                   ;80971E|226F8184|84816F;
     SEP #$20                                                   ;809722|E220    |      ;
     LDA.W nDestinationAreaId                                   ;809724|AD8B09  |00098B;

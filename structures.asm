@@ -395,5 +395,57 @@ struct strcAIUnknown        $7EB586
     .unk3C                  skip 1
     .unk3D                  skip 1
     .unk3E                  skip 1
-    .unk3F                  skip 1
+    .nArg                   skip 1  ; Saved value from A register passed to fAI_SetupAreaScripting
 endstruct align 64
+
+
+; Days of week              $7F1F1A
+!DAY_SUNDAY                 =   $00
+!DAY_MONDAY                 =   $01
+!DAY_TUESDAY                =   $02
+!DAY_WEDNESDAY              =   $03
+!DAY_THURSDAY               =   $04
+!DAY_FRIDAY                 =   $05
+!DAY_SATURDAY               =   $06
+
+
+; Player actions            $0000D4
+!PACTION_00                 = $0000
+!PACTION_WALK               = $0001
+!PACTION_RUN                = $0002
+!PACTION_JUMP               = $0003
+!PACTION_ITEMONHAND         = $0004
+!PACTION_DROPITEM           = $0005
+!PACTION_06                 = $0006
+!PACTION_07                 = $0007
+!PACTION_08                 = $0008
+!PACTION_09                 = $0009
+!PACTION_USINGTOOL          = $000A
+!PACTION_TIRED              = $000B
+!PACTION_SHOWTOOL           = $000C
+!PACTION_WHISTLEHORSE       = $000D
+!PACTION_0E                 = $000E
+!PACTION_0F                 = $000F
+!PACTION_10                 = $0010
+!PACTION_FISHING            = $0011
+!PACTION_FISHINGBITE        = $0012
+!PACTION_REELING            = $0013
+!PACTION_DRUNK              = $0014
+!PACTION_DRINKING           = $0015
+!PACTION_DROPPINGDOG        = $0016
+!PACTION_17                 = $0017
+!PACTION_18                 = $0018
+!PACTION_19                 = $0019
+!PACTION_1A                 = $001A
+!PACTION_WHISTLEDOG         = $001B
+!PACTION_USETOOL            = $001C
+!PACTION_1D                 = $001D
+!PACTION_1E                 = $001E
+!PACTION_1F                 = $001F
+
+
+; PLayer direction          $0000DA
+!PDIR_DOWN                  = $0000
+!PDIR_UP                    = $0001
+!PDIR_LEFT                  = $0002
+!PDIR_RIGHT                 = $0003
