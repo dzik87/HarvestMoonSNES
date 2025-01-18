@@ -3026,9 +3026,9 @@ DATA8_B392B3:
     %AICMD0x1F($B392C1)                                        ;B392BB
     %AICMD0x12_Jump($B392BB)                                   ;B392BE
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags3, $04)  ;B392C1
-    %AICMD0x3D_TeleportToArea($22)                             ;B392C6
+    %AICMD0x3D_TeleportToArea(!AREA_TOOLSSHOP)                 ;B392C6
     %AICMD0x05_SetTransferPosition(144, 456)                   ;B392C8
-    %AICMD0x07_SetPlayerDirection($01)                         ;B392CD
+    %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B392CD
     %AICMD0x10_End()                                           ;B392CF
 
 
@@ -4899,7 +4899,7 @@ DATA8_B3AE23:
     %AICMD0x47_SetValue8($800921, 0)                           ;B3B132
     %AICMD0x23_OrWithIndexedValue(strcEventFlags.flags2, $01)  ;B3B137
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags3, $08)  ;B3B13C
-    %AICMD0x3D_TeleportToArea($2D)                             ;B3B141
+    %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B141
     %AICMD0x10_End()                                           ;B3B143
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3B144
     %AICMD0x12_Jump($B3B110)                                   ;B3B148
@@ -5000,7 +5000,7 @@ DATA8_B3AE23:
     %AICMD0x47_SetValue8($800921, 0)                           ;B3B2F6
     %AICMD0x23_OrWithIndexedValue(strcEventFlags.flags2, $03)  ;B3B2FB
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags3, $08)  ;B3B300
-    %AICMD0x3D_TeleportToArea($2D)                             ;B3B305
+    %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B305
     %AICMD0x10_End()                                           ;B3B307
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3B308
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B30C
@@ -5186,7 +5186,7 @@ DATA8_B3B4E3:
     %AICMD0x47_SetValue8($800921, 0)                           ;B3B5FA
     %AICMD0x23_OrWithIndexedValue(strcEventFlags.flags2, $00)  ;B3B5FF
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags3, $07)  ;B3B604
-    %AICMD0x3D_TeleportToArea($2D)                             ;B3B609
+    %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B609
     %AICMD0x10_End()                                           ;B3B60B
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3B60C
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B610
@@ -5309,7 +5309,7 @@ DATA8_B3B6E1:
     %AICMD0x47_SetValue8($800921, 0)                           ;B3B812
     %AICMD0x23_OrWithIndexedValue(strcEventFlags.flags2, $04)  ;B3B817
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags3, $09)  ;B3B81C
-    %AICMD0x3D_TeleportToArea($2D)                             ;B3B821
+    %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B821
     %AICMD0x10_End()                                           ;B3B823
     %AICMD0x1C_ShowDialog($017C, $00)                          ;B3B824
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B828
@@ -5963,7 +5963,7 @@ DATA8_B3C1E4:
     %AICMD0x47_SetValue8($800921, 0)                           ;B3C31C
     %AICMD0x23_OrWithIndexedValue(strcEventFlags.flags2, $02)  ;B3C321
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags3, $09)  ;B3C326
-    %AICMD0x3D_TeleportToArea($2D)                             ;B3C32B
+    %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3C32B
     %AICMD0x10_End()                                           ;B3C32D
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3C32E
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C332
@@ -8160,11 +8160,11 @@ DATA8_B3E623:
     %AICMD0x40_DisableTileInteractions()                       ;B3E623
     %AICMD0x02_FreezeTime()                                    ;B3E624
     %AICMD0x05_SetTransferPosition(96, 120)                    ;B3E625
-    %AICMD0x07_SetPlayerDirection($03)                         ;B3E62A
+    %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3E62A
     %AICMD0x08()                                               ;B3E62C
     %AICMD0x09($01, $B3E6FC)                                   ;B3E62D
     %AICMD0x09($02, $B3E6D7)                                   ;B3E631
-    %AICMD0x06_SetTransferDestination($3C)                     ;B3E635
+    %AICMD0x06_SetDestinationArea(!AREA_INTRO)                 ;B3E635
     %AICMD0x38()                                               ;B3E637
     %AICMD0x0B($00)                                            ;B3E638
     %AICMD0x0C($02)                                            ;B3E63A
@@ -8190,7 +8190,7 @@ DATA8_B3E623:
     %AICMD0x0A($01)                                            ;B3E67E
     %AICMD0x39($02, $0070)                                     ;B3E680
     %AICMD0x0B($03)                                            ;B3E684
-    %AICMD0x07_SetPlayerDirection($02)                         ;B3E686
+    %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B3E686
     %AICMD0x13($0050)                                          ;B3E688
     %AICMD0x19($0041, $00)                                     ;B3E68B
     %AICMD0x13($0078)                                          ;B3E68F
@@ -8198,12 +8198,12 @@ DATA8_B3E623:
     %AICMD0x13($0078)                                          ;B3E696
     %AICMD0x19($0002, $00)                                     ;B3E699
     %AICMD0x0C($04)                                            ;B3E69D
-    %AICMD0x07_SetPlayerDirection($00)                         ;B3E69F
+    %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E69F
     %AICMD0x13($0078)                                          ;B3E6A1
     %AICMD0x19($0004, $00)                                     ;B3E6A4
     %AICMD0x13($0078)                                          ;B3E6A8
     %AICMD0x19($0000, $00)                                     ;B3E6AB
-    %AICMD0x07_SetPlayerDirection($02)                         ;B3E6AF
+    %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B3E6AF
     %AICMD0x13($003C)                                          ;B3E6B1
     %AICMD0x19($001E, $00)                                     ;B3E6B4
     %AICMD0x13($003C)                                          ;B3E6B8
@@ -8323,10 +8323,10 @@ DATA8_B3E85B:
     %AICMD0x50()                                               ;B3E85C
     %AICMD0x02_FreezeTime()                                    ;B3E85D
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B3E85E
-    %AICMD0x07_SetPlayerDirection($00)                         ;B3E863
+    %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E863
     %AICMD0x08()                                               ;B3E865
     %AICMD0x09($01, $B3E877)                                   ;B3E866
-    %AICMD0x06_SetTransferDestination($00)                     ;B3E86A
+    %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B3E86A
     %AICMD0x38()                                               ;B3E86C
     %AICMD0x0B($00)                                            ;B3E86D
     %AICMD0x0C($01)                                            ;B3E86F
@@ -8354,9 +8354,9 @@ DATA8_B3E89A:
     %AICMD0x38()                                               ;B3E8A7
     %AICMD0x0B($00)                                            ;B3E8A8
     %AICMD0x0C($01)                                            ;B3E8AA
-    %AICMD0x3D_TeleportToArea($04)                             ;B3E8AC
+    %AICMD0x3D_TeleportToArea(!AREA_TOWNSPRING)                ;B3E8AC
     %AICMD0x05_SetTransferPosition(712, 424)                   ;B3E8AE
-    %AICMD0x07_SetPlayerDirection($03)                         ;B3E8B3
+    %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3E8B3
     %AICMD0x10_End()                                           ;B3E8B5
     %AICMD0x1A($00F0, $0088, $B3875C, $00)                     ;B3E8B6
     %AICMD0x0C($00)                                            ;B3E8BE
@@ -8371,7 +8371,7 @@ DATA8_B3E8C8:
     %AICMD0x50()                                               ;B3E8C9
     %AICMD0x02_FreezeTime()                                    ;B3E8CA
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B3E8CB
-    %AICMD0x07_SetPlayerDirection($00)                         ;B3E8D0
+    %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E8D0
     %AICMD0x08()                                               ;B3E8D2
     %AICMD0x09($01, $B3E8E8)                                   ;B3E8D3
     %AICMD0x38()                                               ;B3E8D7
@@ -8380,7 +8380,7 @@ DATA8_B3E8C8:
     %AICMD0x39($00, $0060)                                     ;B3E8DC
     %AICMD0x40_DisableTileInteractions()                       ;B3E8E0
     %AICMD0x39($03, $0090)                                     ;B3E8E1
-    %AICMD0x3D_TeleportToArea($0C)                             ;B3E8E5
+    %AICMD0x3D_TeleportToArea(!AREA_CROSSROADSPRING)           ;B3E8E5
     %AICMD0x10_End()                                           ;B3E8E7
     %AICMD0x1A($0088, $0168, $B38294, $01)                     ;B3E8E8
     %AICMD0x0C($00)                                            ;B3E8F0
@@ -8401,7 +8401,7 @@ DATA8_B3E90B:
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $0E)  ;B3E912
     %AICMD0x02_FreezeTime()                                    ;B3E917
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B3E918
-    %AICMD0x07_SetPlayerDirection($01)                         ;B3E91D
+    %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3E91D
     %AICMD0x08()                                               ;B3E91F
     %AICMD0x38()                                               ;B3E920
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags1, $07, $B3E969);B3E921
@@ -8410,7 +8410,7 @@ DATA8_B3E90B:
     %AICMD0x39($03, $0028)                                     ;B3E933
     %AICMD0x39($01, $0060)                                     ;B3E937
     %AICMD0x39($03, $0010)                                     ;B3E93B
-    %AICMD0x07_SetPlayerDirection($00)                         ;B3E93F
+    %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E93F
     %AICMD0x54($0290, $00)                                     ;B3E941
     %AICMD0x50()                                               ;B3E945
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E946
@@ -8419,7 +8419,7 @@ DATA8_B3E90B:
     %AICMD0x39($03, $0038)                                     ;B3E950
     %AICMD0x39($01, $0060)                                     ;B3E954
     %AICMD0x39($03, $0010)                                     ;B3E958
-    %AICMD0x07_SetPlayerDirection($00)                         ;B3E95C
+    %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E95C
     %AICMD0x54($0290, $00)                                     ;B3E95E
     %AICMD0x50()                                               ;B3E962
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E963
@@ -8427,7 +8427,7 @@ DATA8_B3E90B:
     %AICMD0x39($01, $0010)                                     ;B3E969
     %AICMD0x39($02, $00A6)                                     ;B3E96D
     %AICMD0x39($01, $0060)                                     ;B3E971
-    %AICMD0x07_SetPlayerDirection($00)                         ;B3E975
+    %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E975
     %AICMD0x54($0290, $00)                                     ;B3E977
     %AICMD0x50()                                               ;B3E97B
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E97C
@@ -8797,7 +8797,7 @@ DATA8_B3ED39:
 
 DATA8_B3EE1A:
  
-    %AICMD0x07_SetPlayerDirection($01)                         ;B3EE1A
+    %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3EE1A
     %AICMD0x08()                                               ;B3EE1C
     %AICMD0x09($01, $B3EE39)                                   ;B3EE1D
     %AICMD0x09($02, $B3EE64)                                   ;B3EE21
@@ -9022,7 +9022,7 @@ AI_HorseSpawn:
     %AICMD0x08()                                               ;B3F08A
     %AICMD0x09($17, $B3F0A0)                                   ;B3F08B
     %AICMD0x38()                                               ;B3F08F
-    %AICMD0x07_SetPlayerDirection($03)                         ;B3F090
+    %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3F090
     %AICMD0x39($03, $0028)                                     ;B3F092
     %AICMD0x1C_ShowDialog($0318, $00)                          ;B3F096
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B3F09A
@@ -9082,7 +9082,7 @@ DATA8_B3F106:
     %AICMD0x02_FreezeTime()                                    ;B3F110
     %AICMD0x03_SetHour($07)                                    ;B3F111
     %AICMD0x05_SetTransferPosition(264, 312)                   ;B3F113
-    %AICMD0x07_SetPlayerDirection($01)                         ;B3F118
+    %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3F118
     %AICMD0x32(strcUnknownFlags.flags1, $F7FF)                 ;B3F11A
     %AICMD0x09($01, $B3F1F1)                                   ;B3F120
     %AICMD0x09($02, $B3F21D)                                   ;B3F124
@@ -9097,10 +9097,10 @@ DATA8_B3F106:
     %AICMD0x09($0F, $B3F65F)                                   ;B3F148
     %AICMD0x09($10, $B3F76E)                                   ;B3F14C
     %AICMD0x09($11, $B3F881)                                   ;B3F150
-    %AICMD0x06_SetTransferDestination($08)                     ;B3F154
+    %AICMD0x06_SetDestinationArea(!AREA_DANCINGS1)             ;B3F154
     %AICMD0x38()                                               ;B3F156
     %AICMD0x0C($00)                                            ;B3F157
-    %AICMD0x3D_TeleportToArea($08)                             ;B3F159
+    %AICMD0x3D_TeleportToArea(!AREA_DANCINGS1)                 ;B3F159
     %AICMD0x10_End()                                           ;B3F15B
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags2, $00, $B3F1C0);B3F15C
     %AICMD0x09($07, $B3FBCA)                                   ;B3F163
@@ -9826,7 +9826,7 @@ DATA8_B3FDD4:
     %AICMD0x02_FreezeTime()                                    ;B3FDDE
     %AICMD0x03_SetHour($07)                                    ;B3FDDF
     %AICMD0x05_SetTransferPosition(264, 264)                   ;B3FDE1
-    %AICMD0x07_SetPlayerDirection($02)                         ;B3FDE6
+    %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B3FDE6
     %AICMD0x08()                                               ;B3FDE8
     %AICMD0x19($00E8, $00)                                     ;B3FDE9
     %AICMD0x09($01, $B3F9C0)                                   ;B3FDED
@@ -9841,7 +9841,7 @@ DATA8_B3FDD4:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $02, $B3F184);B3FE17
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $03, $B3F198);B3FE1E
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $04, $B3F1AC);B3FE25
-    %AICMD0x06_SetTransferDestination($08)                     ;B3FE2C
+    %AICMD0x06_SetDestinationArea(!AREA_DANCINGS1)             ;B3FE2C
     %AICMD0x38()                                               ;B3FE2E
     %AICMD0x0B($09)                                            ;B3FE2F
     %AICMD0x10_End()                                           ;B3FE31

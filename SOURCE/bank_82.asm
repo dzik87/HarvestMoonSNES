@@ -95,7 +95,7 @@ fUnknown_8280AA:
     LDA.B #$14                                                 ;8280BB|A914    |      ;
     JSL.L fPlayerEnergyHandler_81D061                          ;8280BD|2261D081|81D061;
     REP #$20                                                   ;8280C1|C220    |      ;
-    LDA.B strcPlayerFlags                                      ;8280C3|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;8280C3|A5D2    |0000D2;
     AND.W #$0430                                               ;8280C5|293004  |      ;
     BEQ +                                                      ;8280C8|F003    |8280CD;
     JMP.W .return                                              ;8280CA|4C3081  |828130;
@@ -137,7 +137,7 @@ fUnknown_8280AA:
     JMP.W .return                                              ;828104|4C3081  |828130;
  
  
-  + LDA.B strcPlayerFlags                                      ;828107|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;828107|A5D2    |0000D2;
     AND.W #$0800                                               ;828109|290008  |      ;
     BEQ +                                                      ;82810C|F003    |828111;
     JMP.W .return                                              ;82810E|4C3081  |828130;
@@ -147,15 +147,15 @@ fUnknown_8280AA:
     LDA.B #$03                                                 ;828113|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;828115|22F98980|8089F9;
     SEP #$20                                                   ;828119|E220    |      ;
-    STA.W $0924                                                ;82811B|8D2409  |000924;
+    STA.W nFoodToEat                                           ;82811B|8D2409  |000924;
     REP #$30                                                   ;82811E|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;828120|A5D2    |0000D2;
-    ORA.W #$0004                                               ;828122|090400  |      ;
-    STA.B strcPlayerFlags                                      ;828125|85D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;828120|A5D2    |0000D2;
+    ORA.W #$0004                                               ;828122|090400  |      ; !PLAYERFLAGS_EATINGMEAL
+    STA.B nPlayerFlags                                         ;828125|85D2    |0000D2;
     REP #$30                                                   ;828127|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;828129|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;828129|A5D2    |0000D2;
     ORA.W #$0400                                               ;82812B|090004  |      ;
-    STA.B strcPlayerFlags                                      ;82812E|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82812E|85D2    |0000D2;
  
 .return:
     RTL                                                        ;828130|6B      |      ;
@@ -191,7 +191,7 @@ fEvents_ShippingSceneDialog:
     AND.W #$0800                                               ;82816B|290008  |      ;
     BEQ fEvents_ShippingSceneReturn                            ;82816E|F04F    |8281BF;
     REP #$30                                                   ;828170|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;828172|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;828172|A5D2    |0000D2;
     AND.W #$0040                                               ;828174|294000  |      ;
     BEQ +                                                      ;828177|F003    |82817C;
     JMP.W fEvents_ShippingSceneReturn                          ;828179|4CBF81  |8281BF;
@@ -460,16 +460,16 @@ fNextDayHandler:
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
     STZ.W $0915                                                ;8283B2|9C1509  |000915;
-    STZ.B strcPlayerFlags                                      ;8283B5|64D2    |0000D2;
+    STZ.B nPlayerFlags                                         ;8283B5|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;8283B7|64D4    |0000D4;
     SEP #$20                                                   ;8283B9|E220    |      ;
     LDA.W nPlayerStamina                                       ;8283BB|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;8283BE|8D1809  |000918; Reset player energy to max available
     STZ.W $0925                                                ;8283C1|9C2509  |000925;
     REP #$30                                                   ;8283C4|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;8283C6|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;8283C6|A5D2    |0000D2;
     ORA.W #$0001                                               ;8283C8|090100  |      ;
-    STA.B strcPlayerFlags                                      ;8283CB|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;8283CB|85D2    |0000D2;
     REP #$30                                                   ;8283CD|C230    |      ;
     LDA.W #$0000                                               ;8283CF|A90000  |      ;
     STA.B nPlayerAction                                        ;8283D2|85D4    |0000D4;
@@ -481,7 +481,7 @@ fNextDayHandler:
     STA.W $0911                                                ;8283E0|8D1109  |000911;
     REP #$30                                                   ;8283E3|C230    |      ;
     LDA.W #$0000                                               ;8283E5|A90000  |      ;
-    STA.W $0901                                                ;8283E8|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8283E8|8D0109  |000901;
     REP #$20                                                   ;8283EB|C220    |      ;
     LDA.L nShippingProfit                                      ;8283ED|AF071F7F|7F1F07;
     STA.B ptrUnknown0x72                                       ;8283F1|8572    |000072;
@@ -801,8 +801,8 @@ fNextDayHandler:
     REP #$30                                                   ;82873D|C230    |      ;
     LDA.W #$0002                                               ;82873F|A90200  |      ;
     EOR.W #$FFFF                                               ;828742|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;828745|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;828747|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;828745|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;828747|85D2    |0000D2;
     REP #$30                                                   ;828749|C230    |      ;
     LDA.W #$0088                                               ;82874B|A98800  |      ;
     STA.W nMapEngine_DestinationX                              ;82874E|8D7D01  |00017D;
@@ -824,11 +824,11 @@ fNextDayHandler:
     LDA.B #$03                                                 ;828779|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;82877B|22F98980|8089F9;
     SEP #$20                                                   ;82877F|E220    |      ;
-    STA.W $0924                                                ;828781|8D2409  |000924;
+    STA.W nFoodToEat                                           ;828781|8D2409  |000924;
     REP #$30                                                   ;828784|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;828786|A5D2    |0000D2;
-    ORA.W #$0004                                               ;828788|090400  |      ;
-    STA.B strcPlayerFlags                                      ;82878B|85D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;828786|A5D2    |0000D2;
+    ORA.W #$0004                                               ;828788|090400  |      ; !PLAYERFLAGS_EATINGMEAL
+    STA.B nPlayerFlags                                         ;82878B|85D2    |0000D2;
  
 .return:
     RTL                                                        ;82878D|6B      |      ;
@@ -1850,7 +1850,7 @@ fToolUsed_AnimationSubrutines:
     SEP #$20                                                   ;8290A8|E220    |      ;
     REP #$10                                                   ;8290AA|C210    |      ;
     REP #$30                                                   ;8290AC|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;8290AE|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;8290AE|A5D2    |0000D2;
     AND.W #$0008                                               ;8290B0|290800  |      ;
     BEQ +                                                      ;8290B3|F003    |8290B8;
     JMP.W .label1                                              ;8290B5|4CCD90  |8290CD;
@@ -1871,7 +1871,7 @@ fToolUsed_AnimationSubrutines:
 .label1:
     REP #$20                                                   ;8290CD|C220    |      ;
     LDA.W #$004D                                               ;8290CF|A94D00  |      ;
-    STA.W $0901                                                ;8290D2|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8290D2|8D0109  |000901;
     REP #$30                                                   ;8290D5|C230    |      ;
     LDA.W #$000B                                               ;8290D7|A90B00  |      ;
     STA.B nPlayerAction                                        ;8290DA|85D4    |0000D4;
@@ -1890,7 +1890,7 @@ subToolAnimation82A58B_Sickle:
     LDA.W #$0050                                               ;8290E2|A95000  |      ;
     CLC                                                        ;8290E5|18      |      ;
     ADC.B nPlayerDirection                                     ;8290E6|65DA    |0000DA;
-    STA.W $0901                                                ;8290E8|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8290E8|8D0109  |000901;
     RTS                                                        ;8290EB|60      |      ;
  
  
@@ -1900,7 +1900,7 @@ subToolAnimation82A58B_Plow:
     LDA.W #$0054                                               ;8290F0|A95400  |      ;
     CLC                                                        ;8290F3|18      |      ;
     ADC.B nPlayerDirection                                     ;8290F4|65DA    |0000DA;
-    STA.W $0901                                                ;8290F6|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8290F6|8D0109  |000901;
     RTS                                                        ;8290F9|60      |      ;
  
  
@@ -1910,7 +1910,7 @@ subToolAnimation82A58B_Hammer:
     LDA.W #$0058                                               ;8290FE|A95800  |      ;
     CLC                                                        ;829101|18      |      ;
     ADC.B nPlayerDirection                                     ;829102|65DA    |0000DA;
-    STA.W $0901                                                ;829104|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829104|8D0109  |000901;
     RTS                                                        ;829107|60      |      ;
  
  
@@ -1920,7 +1920,7 @@ subToolAnimation82A58B_Axe:
     LDA.W #$005C                                               ;82910C|A95C00  |      ;
     CLC                                                        ;82910F|18      |      ;
     ADC.B nPlayerDirection                                     ;829110|65DA    |0000DA;
-    STA.W $0901                                                ;829112|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829112|8D0109  |000901;
     RTS                                                        ;829115|60      |      ;
  
  
@@ -1928,7 +1928,7 @@ subToolAnimation82A58B_CornSeedBag:
     REP #$30                                                   ;829116|C230    |      ;
     REP #$30                                                   ;829118|C230    |      ;
     LDA.W #$0046                                               ;82911A|A94600  |      ;
-    STA.W $0901                                                ;82911D|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82911D|8D0109  |000901;
     RTS                                                        ;829120|60      |      ;
  
  
@@ -1936,7 +1936,7 @@ subToolAnimation82A58B_TomatoSeedBag:
     REP #$30                                                   ;829121|C230    |      ;
     REP #$30                                                   ;829123|C230    |      ;
     LDA.W #$0046                                               ;829125|A94600  |      ;
-    STA.W $0901                                                ;829128|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829128|8D0109  |000901;
     RTS                                                        ;82912B|60      |      ;
  
  
@@ -1944,7 +1944,7 @@ subToolAnimation82A58B_PotatoSeedBag:
     REP #$30                                                   ;82912C|C230    |      ;
     REP #$30                                                   ;82912E|C230    |      ;
     LDA.W #$0046                                               ;829130|A94600  |      ;
-    STA.W $0901                                                ;829133|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829133|8D0109  |000901;
     RTS                                                        ;829136|60      |      ;
  
  
@@ -1952,7 +1952,7 @@ subToolAnimation82A58B_TurnipSeedBag:
     REP #$30                                                   ;829137|C230    |      ;
     REP #$30                                                   ;829139|C230    |      ;
     LDA.W #$0046                                               ;82913B|A94600  |      ;
-    STA.W $0901                                                ;82913E|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82913E|8D0109  |000901;
     RTS                                                        ;829141|60      |      ;
  
  
@@ -1962,7 +1962,7 @@ subToolAnimation82A58B_CowMedicine:
     LDA.W #$00AC                                               ;829146|A9AC00  |      ;
     CLC                                                        ;829149|18      |      ;
     ADC.B nPlayerDirection                                     ;82914A|65DA    |0000DA;
-    STA.W $0901                                                ;82914C|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82914C|8D0109  |000901;
     RTS                                                        ;82914F|60      |      ;
  
  
@@ -1972,7 +1972,7 @@ subToolAnimation82A58B_MiraclePotion:
     LDA.W #$00AC                                               ;829154|A9AC00  |      ;
     CLC                                                        ;829157|18      |      ;
     ADC.B nPlayerDirection                                     ;829158|65DA    |0000DA;
-    STA.W $0901                                                ;82915A|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82915A|8D0109  |000901;
     RTS                                                        ;82915D|60      |      ;
  
  
@@ -1982,7 +1982,7 @@ subToolAnimation82A58B_Bell:
     LDA.W #$0060                                               ;829162|A96000  |      ;
     CLC                                                        ;829165|18      |      ;
     ADC.B nPlayerDirection                                     ;829166|65DA    |0000DA;
-    STA.W $0901                                                ;829168|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829168|8D0109  |000901;
     REP #$20                                                   ;82916B|C220    |      ;
     LDA.L strcDailyFlags.flags1                                ;82916D|AF5A1F7F|7F1F5A;
     ORA.W #$0010                                               ;829171|091000  |      ;
@@ -1994,14 +1994,14 @@ subToolAnimation82A58B_GrassSeedBag:
     REP #$30                                                   ;829179|C230    |      ;
     REP #$30                                                   ;82917B|C230    |      ;
     LDA.W #$0046                                               ;82917D|A94600  |      ;
-    STA.W $0901                                                ;829180|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829180|8D0109  |000901;
     RTS                                                        ;829183|60      |      ;
  
  
 subToolAnimation82A58B_Paint:
     REP #$30                                                   ;829184|C230    |      ;
     LDA.W #$0044                                               ;829186|A94400  |      ;
-    STA.W $0901                                                ;829189|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829189|8D0109  |000901;
     RTS                                                        ;82918C|60      |      ;
  
  
@@ -2011,7 +2011,7 @@ subToolAnimation82A58B_Milker:
     LDA.W #$0078                                               ;829191|A97800  |      ;
     CLC                                                        ;829194|18      |      ;
     ADC.B nPlayerDirection                                     ;829195|65DA    |0000DA;
-    STA.W $0901                                                ;829197|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829197|8D0109  |000901;
     RTS                                                        ;82919A|60      |      ;
  
  
@@ -2021,7 +2021,7 @@ subToolAnimation82A58B_Brush:
     LDA.W #$0064                                               ;82919F|A96400  |      ;
     CLC                                                        ;8291A2|18      |      ;
     ADC.B nPlayerDirection                                     ;8291A3|65DA    |0000DA;
-    STA.W $0901                                                ;8291A5|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8291A5|8D0109  |000901;
     RTS                                                        ;8291A8|60      |      ;
  
  
@@ -2038,7 +2038,7 @@ subToolAnimation82A58B_WateringCan:
     LDA.W #$0068                                               ;8291BD|A96800  |      ;
     CLC                                                        ;8291C0|18      |      ;
     ADC.B nPlayerDirection                                     ;8291C1|65DA    |0000DA;
-    STA.W $0901                                                ;8291C3|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8291C3|8D0109  |000901;
     BRA .return                                                ;8291C6|801F    |8291E7;
  
  
@@ -2047,7 +2047,7 @@ subToolAnimation82A58B_WateringCan:
     LDA.W #$006C                                               ;8291CA|A96C00  |      ;
     CLC                                                        ;8291CD|18      |      ;
     ADC.B nPlayerDirection                                     ;8291CE|65DA    |0000DA;
-    STA.W $0901                                                ;8291D0|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8291D0|8D0109  |000901;
     BRA .return                                                ;8291D3|8012    |8291E7;
  
  
@@ -2056,7 +2056,7 @@ subToolAnimation82A58B_WateringCan:
     LDA.W #$0070                                               ;8291D7|A97000  |      ;
     CLC                                                        ;8291DA|18      |      ;
     ADC.B nPlayerDirection                                     ;8291DB|65DA    |0000DA;
-    STA.W $0901                                                ;8291DD|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8291DD|8D0109  |000901;
     SEP #$20                                                   ;8291E0|E220    |      ;
     LDA.B #$14                                                 ;8291E2|A914    |      ;
     STA.W nAmountLeft_Water                                    ;8291E4|8D2609  |000926;
@@ -2068,7 +2068,7 @@ subToolAnimation82A58B_WateringCan:
 subToolAnimation82A58B_GoldenSickle:
     REP #$30                                                   ;8291E8|C230    |      ;
     LDA.W #$0048                                               ;8291EA|A94800  |      ;
-    STA.W $0901                                                ;8291ED|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8291ED|8D0109  |000901;
     RTS                                                        ;8291F0|60      |      ;
  
  
@@ -2077,7 +2077,7 @@ subToolAnimation82A58B_GoldenPlow:
     LDA.W #$007C                                               ;8291F3|A97C00  |      ;
     CLC                                                        ;8291F6|18      |      ;
     ADC.B nPlayerDirection                                     ;8291F7|65DA    |0000DA;
-    STA.W $0901                                                ;8291F9|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;8291F9|8D0109  |000901;
     RTS                                                        ;8291FC|60      |      ;
  
  
@@ -2086,7 +2086,7 @@ subToolAnimation82A58B_GoldenHammer:
     LDA.W #$0084                                               ;8291FF|A98400  |      ;
     CLC                                                        ;829202|18      |      ;
     ADC.B nPlayerDirection                                     ;829203|65DA    |0000DA;
-    STA.W $0901                                                ;829205|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829205|8D0109  |000901;
     RTS                                                        ;829208|60      |      ;
  
  
@@ -2095,14 +2095,14 @@ subToolAnimation82A58B_GoldenAxe:
     LDA.W #$0080                                               ;82920B|A98000  |      ;
     CLC                                                        ;82920E|18      |      ;
     ADC.B nPlayerDirection                                     ;82920F|65DA    |0000DA;
-    STA.W $0901                                                ;829211|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829211|8D0109  |000901;
     RTS                                                        ;829214|60      |      ;
  
  
 subToolAnimation82A58B_Sprinkler:
     REP #$30                                                   ;829215|C230    |      ;
     LDA.W #$0047                                               ;829217|A94700  |      ;
-    STA.W $0901                                                ;82921A|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82921A|8D0109  |000901;
     RTS                                                        ;82921D|60      |      ;
  
  
@@ -2111,7 +2111,7 @@ subToolAnimation82A58B_BeanstalkSeed:
     LDA.W #$00AC                                               ;829220|A9AC00  |      ;
     CLC                                                        ;829223|18      |      ;
     ADC.B nPlayerDirection                                     ;829224|65DA    |0000DA;
-    STA.W $0901                                                ;829226|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829226|8D0109  |000901;
     RTS                                                        ;829229|60      |      ;
  
  
@@ -2120,14 +2120,14 @@ subToolAnimation82A58B_BlueDiamond:
     LDA.W #$00AC                                               ;82922C|A9AC00  |      ;
     CLC                                                        ;82922F|18      |      ;
     ADC.B nPlayerDirection                                     ;829230|65DA    |0000DA;
-    STA.W $0901                                                ;829232|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829232|8D0109  |000901;
     RTS                                                        ;829235|60      |      ;
  
  
 subToolAnimation82A58B_BlueFeather:
     REP #$30                                                   ;829236|C230    |      ;
     LDA.W #$00A8                                               ;829238|A9A800  |      ;
-    STA.W $0901                                                ;82923B|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82923B|8D0109  |000901;
     RTS                                                        ;82923E|60      |      ;
  
  
@@ -2136,7 +2136,7 @@ subToolAnimation82A58B_ChickenFood:
     LDA.W #$0074                                               ;829241|A97400  |      ;
     CLC                                                        ;829244|18      |      ;
     ADC.B nPlayerDirection                                     ;829245|65DA    |0000DA;
-    STA.W $0901                                                ;829247|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829247|8D0109  |000901;
     RTS                                                        ;82924A|60      |      ;
  
  
@@ -2145,14 +2145,14 @@ subToolAnimation82A58B_CowFood:
     LDA.W #$0074                                               ;82924D|A97400  |      ;
     CLC                                                        ;829250|18      |      ;
     ADC.B nPlayerDirection                                     ;829251|65DA    |0000DA;
-    STA.W $0901                                                ;829253|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;829253|8D0109  |000901;
     RTS                                                        ;829256|60      |      ;
  
  
 subToolAnimation82A58B_0x1B:
     REP #$30                                                   ;829257|C230    |      ;
     LDA.W #$0088                                               ;829259|A98800  |      ;
-    STA.W $0901                                                ;82925C|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82925C|8D0109  |000901;
     RTS                                                        ;82925F|60      |      ;
  
  
@@ -5705,7 +5705,7 @@ fUnknown_82AD0E:
  
  
   + REP #$30                                                   ;82ADD1|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;82ADD3|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;82ADD3|A5D2    |0000D2;
     AND.W #$0020                                               ;82ADD5|292000  |      ;
     BEQ +                                                      ;82ADD8|F003    |82ADDD;
     JMP.W .justReturn                                          ;82ADDA|4CE5AE  |82AEE5;
@@ -5858,9 +5858,9 @@ fUnknown_82AD0E:
     STZ.W nPlayerInteractionArg1                               ;82AECF|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;82AED2|9C7009  |000970;
     REP #$30                                                   ;82AED5|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;82AED7|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;82AED7|A5D2    |0000D2;
     ORA.W #$0040                                               ;82AED9|094000  |      ;
-    STA.B strcPlayerFlags                                      ;82AEDC|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82AEDC|85D2    |0000D2;
     REP #$30                                                   ;82AEDE|C230    |      ;
     LDA.W #$0000                                               ;82AEE0|A90000  |      ;
     STA.B nPlayerAction                                        ;82AEE3|85D4    |0000D4;
@@ -7219,13 +7219,13 @@ fUnknown_82D1C0:
     STA.W nAmountLeft_TomatoSeeds                              ;82D28F|8D2909  |000929;
     REP #$20                                                   ;82D292|C220    |      ;
     STZ.W $0915                                                ;82D294|9C1509  |000915;
-    STZ.B strcPlayerFlags                                      ;82D297|64D2    |0000D2;
+    STZ.B nPlayerFlags                                         ;82D297|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;82D299|64D4    |0000D4;
     SEP #$20                                                   ;82D29B|E220    |      ;
     REP #$30                                                   ;82D29D|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;82D29F|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;82D29F|A5D2    |0000D2;
     ORA.W #$0001                                               ;82D2A1|090100  |      ;
-    STA.B strcPlayerFlags                                      ;82D2A4|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82D2A4|85D2    |0000D2;
     REP #$30                                                   ;82D2A6|C230    |      ;
     LDA.W #$0000                                               ;82D2A8|A90000  |      ;
     STA.B nPlayerAction                                        ;82D2AB|85D4    |0000D4;
@@ -7237,7 +7237,7 @@ fUnknown_82D1C0:
     STA.W $0911                                                ;82D2B9|8D1109  |000911;
     REP #$30                                                   ;82D2BC|C230    |      ;
     LDA.W #$0000                                               ;82D2BE|A90000  |      ;
-    STA.W $0901                                                ;82D2C1|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82D2C1|8D0109  |000901;
     SEP #$20                                                   ;82D2C4|E220    |      ;
     STZ.W nTimeState                                           ;82D2C6|9C7309  |000973;
     LDA.B #$00                                                 ;82D2C9|A900    |      ;
@@ -7247,8 +7247,8 @@ fUnknown_82D1C0:
     REP #$30                                                   ;82D2D4|C230    |      ;
     LDA.W #$0002                                               ;82D2D6|A90200  |      ;
     EOR.W #$FFFF                                               ;82D2D9|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;82D2DC|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;82D2DE|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;82D2DC|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82D2DE|85D2    |0000D2;
     REP #$30                                                   ;82D2E0|C230    |      ;
     STZ.W sPlacedCowFeed                                       ;82D2E2|9C3209  |000932;
     STZ.W sPlacedChickenFeed                                   ;82D2E5|9C3409  |000934;
@@ -7402,13 +7402,13 @@ fMainMenu_AutoHowToPlay:
     STZ.W $08FF                                                ;82D490|9CFF08  |0008FF;
     REP #$20                                                   ;82D493|C220    |      ;
     STZ.W $0915                                                ;82D495|9C1509  |000915;
-    STZ.B strcPlayerFlags                                      ;82D498|64D2    |0000D2;
+    STZ.B nPlayerFlags                                         ;82D498|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;82D49A|64D4    |0000D4;
     SEP #$20                                                   ;82D49C|E220    |      ;
     REP #$30                                                   ;82D49E|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;82D4A0|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;82D4A0|A5D2    |0000D2;
     ORA.W #$0001                                               ;82D4A2|090100  |      ;
-    STA.B strcPlayerFlags                                      ;82D4A5|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82D4A5|85D2    |0000D2;
     REP #$30                                                   ;82D4A7|C230    |      ;
     LDA.W #$0000                                               ;82D4A9|A90000  |      ;
     STA.B nPlayerAction                                        ;82D4AC|85D4    |0000D4;
@@ -7420,7 +7420,7 @@ fMainMenu_AutoHowToPlay:
     STA.W $0911                                                ;82D4BA|8D1109  |000911;
     REP #$30                                                   ;82D4BD|C230    |      ;
     LDA.W #$0000                                               ;82D4BF|A90000  |      ;
-    STA.W $0901                                                ;82D4C2|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82D4C2|8D0109  |000901;
     SEP #$20                                                   ;82D4C5|E220    |      ;
     STZ.W nTimeState                                           ;82D4C7|9C7309  |000973;
     LDA.B #$00                                                 ;82D4CA|A900    |      ;
@@ -7430,8 +7430,8 @@ fMainMenu_AutoHowToPlay:
     REP #$30                                                   ;82D4D5|C230    |      ;
     LDA.W #$0002                                               ;82D4D7|A90200  |      ;
     EOR.W #$FFFF                                               ;82D4DA|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;82D4DD|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;82D4DF|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;82D4DD|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82D4DF|85D2    |0000D2;
     REP #$30                                                   ;82D4E1|C230    |      ;
     STZ.W sPlacedCowFeed                                       ;82D4E3|9C3209  |000932;
     STZ.W sPlacedChickenFeed                                   ;82D4E6|9C3409  |000934;
@@ -7904,9 +7904,9 @@ fUnknown_82D8B0:
     JSL.L fAI_ZeroCCPtr                                        ;82D8CA|22008084|848000;
     REP #$20                                                   ;82D8CE|C220    |      ;
     REP #$30                                                   ;82D8D0|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;82D8D2|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;82D8D2|A5D2    |0000D2;
     ORA.W #$0001                                               ;82D8D4|090100  |      ;
-    STA.B strcPlayerFlags                                      ;82D8D7|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;82D8D7|85D2    |0000D2;
     REP #$30                                                   ;82D8D9|C230    |      ;
     LDA.W #$0000                                               ;82D8DB|A90000  |      ;
     STA.B nPlayerAction                                        ;82D8DE|85D4    |0000D4;
@@ -7918,7 +7918,7 @@ fUnknown_82D8B0:
     STA.W $0911                                                ;82D8EC|8D1109  |000911;
     REP #$30                                                   ;82D8EF|C230    |      ;
     LDA.W #$0000                                               ;82D8F1|A90000  |      ;
-    STA.W $0901                                                ;82D8F4|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;82D8F4|8D0109  |000901;
     REP #$20                                                   ;82D8F7|C220    |      ;
     LDA.W #$0100                                               ;82D8F9|A90001  |      ;
     STA.W $0146                                                ;82D8FC|8D4601  |000146;

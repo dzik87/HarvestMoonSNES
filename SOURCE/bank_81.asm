@@ -513,8 +513,8 @@ fEggFestivalUnknown_818337:
     REP #$30                                                   ;818352|C230    |      ;
     LDA.W #$0002                                               ;818354|A90200  |      ;
     EOR.W #$FFFF                                               ;818357|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81835A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81835C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81835A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81835C|85D2    |0000D2;
  
 fEggFestivalUnknown_81835E:
     REP #$30                                                   ;81835E|C230    |      ;
@@ -543,8 +543,8 @@ fEggFestivalUnknown_WrongEgg:
     REP #$30                                                   ;818396|C230    |      ;
     LDA.W #$0002                                               ;818398|A90200  |      ;
     EOR.W #$FFFF                                               ;81839B|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81839E|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;8183A0|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81839E|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;8183A0|85D2    |0000D2;
     SEP #$20                                                   ;8183A2|E220    |      ;
     LDA.B #$02                                                 ;8183A4|A902    |      ;
     STA.W $019A                                                ;8183A6|8D9A01  |00019A;
@@ -1213,8 +1213,8 @@ fUnknown_8187C3:
     REP #$30                                                   ;818815|C230    |      ;
     LDA.W #$0002                                               ;818817|A90200  |      ;
     EOR.W #$FFFF                                               ;81881A|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81881D|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81881F|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81881D|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81881F|85D2    |0000D2;
     REP #$20                                                   ;818821|C220    |      ;
     LDA.W $0978                                                ;818823|AD7809  |000978;
     STA.B $A5                                                  ;818826|85A5    |0000A5;
@@ -1652,8 +1652,8 @@ fItemBuy_Unknown818AA0:
     REP #$30                                                   ;818AB2|C230    |      ;
     LDA.W #$0002                                               ;818AB4|A90200  |      ;
     EOR.W #$FFFF                                               ;818AB7|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;818ABA|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;818ABC|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;818ABA|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;818ABC|85D2    |0000D2;
     JSL.L fUnknown_81A4F1                                      ;818ABE|22F1A481|81A4F1;
     SEP #$20                                                   ;818AC2|E220    |      ;
     STZ.W nHandItem_Current                                    ;818AC4|9C1D09  |00091D;
@@ -1733,8 +1733,8 @@ fUnknown_818B19:
     REP #$30                                                   ;818B4E|C230    |      ;
     LDA.W #$0002                                               ;818B50|A90200  |      ;
     EOR.W #$FFFF                                               ;818B53|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;818B56|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;818B58|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;818B56|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;818B58|85D2    |0000D2;
     JSL.L fUnknown_81A4F1                                      ;818B5A|22F1A481|81A4F1;
     SEP #$20                                                   ;818B5E|E220    |      ;
     STZ.W nHandItem_Current                                    ;818B60|9C1D09  |00091D;
@@ -1795,8 +1795,8 @@ fItemFound_Consume:
     REP #$30                                                   ;818BC0|C230    |      ;
     LDA.W #$8000                                               ;818BC2|A90080  |      ;
     EOR.W #$FFFF                                               ;818BC5|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;818BC8|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;818BCA|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;818BC8|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;818BCA|85D2    |0000D2;
     REP #$20                                                   ;818BCC|C220    |      ;
     LDA.W $0978                                                ;818BCE|AD7809  |000978;
     STA.B $A5                                                  ;818BD1|85A5    |0000A5;
@@ -1823,8 +1823,8 @@ fItemFound_Consume:
     REP #$30                                                   ;818BFE|C230    |      ;
     LDA.W #$0002                                               ;818C00|A90200  |      ;
     EOR.W #$FFFF                                               ;818C03|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;818C06|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;818C08|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;818C06|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;818C08|85D2    |0000D2;
     BRA fReturn_818C23                                         ;818C0A|8017    |818C23;
  
  
@@ -1833,9 +1833,9 @@ fUnknown_818C0C:
     LDA.W #$0000                                               ;818C0E|A90000  |      ;
     STA.B nPlayerAction                                        ;818C11|85D4    |0000D4;
     REP #$30                                                   ;818C13|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;818C15|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;818C15|A5D2    |0000D2;
     ORA.W #$0002                                               ;818C17|090200  |      ;
-    STA.B strcPlayerFlags                                      ;818C1A|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;818C1A|85D2    |0000D2;
     SEP #$20                                                   ;818C1C|E220    |      ;
     LDA.B #$02                                                 ;818C1E|A902    |      ;
     STA.W $0976                                                ;818C20|8D7609  |000976;
@@ -2323,9 +2323,9 @@ fUnknown_818FEA:
     LDA.B #$02                                                 ;819001|A902    |      ;
     STA.W $0976                                                ;819003|8D7609  |000976;
     REP #$30                                                   ;819006|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;819008|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;819008|A5D2    |0000D2;
     ORA.W #$0002                                               ;81900A|090200  |      ;
-    STA.B strcPlayerFlags                                      ;81900D|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81900D|85D2    |0000D2;
  
 fReturn_81900F:
     RTS                                                        ;81900F|60      |      ;
@@ -2355,8 +2355,8 @@ fUnknown_819021:
     REP #$30                                                   ;81903C|C230    |      ;
     LDA.W #$0002                                               ;81903E|A90200  |      ;
     EOR.W #$FFFF                                               ;819041|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;819044|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;819046|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;819044|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;819046|85D2    |0000D2;
     RTS                                                        ;819048|60      |      ;
  
  
@@ -2511,8 +2511,8 @@ fItemSell_Unknown8190AA:
     REP #$30                                                   ;81916F|C230    |      ;
     LDA.W #$0002                                               ;819171|A90200  |      ;
     EOR.W #$FFFF                                               ;819174|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;819177|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;819179|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;819177|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;819179|85D2    |0000D2;
     JMP.W fReturn_819227                                       ;81917B|4C2792  |819227;
  
  
@@ -2870,8 +2870,8 @@ fItemShipped_Unknown819397:
     REP #$30                                                   ;81943B|C230    |      ;
     LDA.W #$0001                                               ;81943D|A90100  |      ;
     EOR.W #$FFFF                                               ;819440|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;819443|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;819445|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;819443|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;819445|85D2    |0000D2;
     SEP #$20                                                   ;819447|E220    |      ;
     STZ.W nHandItem_Current                                    ;819449|9C1D09  |00091D;
     JMP.W fReturn_8196AE                                       ;81944C|4CAE96  |8196AE;
@@ -2887,8 +2887,8 @@ fUnknown_81944F:
     REP #$30                                                   ;81945F|C230    |      ;
     LDA.W #$0001                                               ;819461|A90100  |      ;
     EOR.W #$FFFF                                               ;819464|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;819467|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;819469|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;819467|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;819469|85D2    |0000D2;
     SEP #$20                                                   ;81946B|E220    |      ;
     STZ.W nHandItem_Current                                    ;81946D|9C1D09  |00091D;
     JMP.W fReturn_8196AE                                       ;819470|4CAE96  |8196AE;
@@ -2904,8 +2904,8 @@ fUnknown_819473:
     REP #$30                                                   ;819483|C230    |      ;
     LDA.W #$0001                                               ;819485|A90100  |      ;
     EOR.W #$FFFF                                               ;819488|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81948B|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81948D|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81948B|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81948D|85D2    |0000D2;
     SEP #$20                                                   ;81948F|E220    |      ;
     STZ.W nHandItem_Current                                    ;819491|9C1D09  |00091D;
     JMP.W fReturn_8196AE                                       ;819494|4CAE96  |8196AE;
@@ -3157,9 +3157,9 @@ fUnknown_819695:
     BNE fReturn_8196AE                                         ;81969F|D00D    |8196AE;
     JSL.L fUnknown_81A4F1                                      ;8196A1|22F1A481|81A4F1;
     REP #$30                                                   ;8196A5|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;8196A7|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;8196A7|A5D2    |0000D2;
     ORA.W #$0001                                               ;8196A9|090100  |      ;
-    STA.B strcPlayerFlags                                      ;8196AC|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;8196AC|85D2    |0000D2;
  
 fReturn_8196AE:
     RTS                                                        ;8196AE|60      |      ;
@@ -7500,14 +7500,14 @@ fUnknownSubrutineHandler_81BFB7:
     SEP #$20                                                   ;81BFB7|E220    |      ;
     REP #$10                                                   ;81BFB9|C210    |      ;
     REP #$30                                                   ;81BFBB|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81BFBD|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81BFBD|A5D2    |0000D2;
     AND.W #$0001                                               ;81BFBF|290100  |      ;
     BNE +                                                      ;81BFC2|D003    |81BFC7;
     JMP.W fUnknown_81C002                                      ;81BFC4|4C02C0  |81C002;
  
  
   + REP #$30                                                   ;81BFC7|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81BFC9|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81BFC9|A5D2    |0000D2;
     AND.W #$0040                                               ;81BFCB|294000  |      ;
     BEQ fUnknownSubrutineExecute_81BFD3                        ;81BFCE|F003    |81BFD3;
     JMP.W fPlayerInteractionSubrutineExecute                   ;81BFD0|4C70D5  |81D570;
@@ -7523,10 +7523,10 @@ fUnknownSubrutineExecute_81BFD3:
  
 subUnkown81C027_0x00:
     REP #$30                                                   ;81BFDC|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81BFDE|A5D2    |0000D2;
-    AND.W #$0004                                               ;81BFE0|290400  |      ;
+    LDA.B nPlayerFlags                                         ;81BFDE|A5D2    |0000D2;
+    AND.W #$0004                                               ;81BFE0|290400  |      ; !PLAYERFLAGS_EATINGMEAL
     BEQ +                                                      ;81BFE3|F003    |81BFE8;
-    JMP.W fUnknown_81CB14                                      ;81BFE5|4C14CB  |81CB14;
+    JMP.W fUnknown_EatMeal                                     ;81BFE5|4C14CB  |81CB14;
  
  
   + LDA.B nPlayerAction                                        ;81BFE8|A5D4    |0000D4;
@@ -7602,16 +7602,16 @@ pUnknownSubrutineTable_81C027:
 subUnkown81C027_0x1C:
     REP #$30                                                   ;81C061|C230    |      ;
     REP #$30                                                   ;81C063|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C065|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C065|A5D2    |0000D2;
     AND.W #$8000                                               ;81C067|290080  |      ;
     BEQ +                                                      ;81C06A|F003    |81C06F;
     JMP.W .label2                                              ;81C06C|4C8AC0  |81C08A;
  
  
   + REP #$30                                                   ;81C06F|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C071|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C071|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C073|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C076|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C076|85D2    |0000D2;
     SEP #$20                                                   ;81C078|E220    |      ;
     REP #$10                                                   ;81C07A|C210    |      ;
     LDA.B #$00                                                 ;81C07C|A900    |      ;
@@ -7620,7 +7620,7 @@ subUnkown81C027_0x1C:
     CLC                                                        ;81C082|18      |      ;
     ADC.B #$90                                                 ;81C083|6990    |      ;
     REP #$20                                                   ;81C085|C220    |      ;
-    STA.W $0901                                                ;81C087|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C087|8D0109  |000901;
  
 .label2:
     JSR.W fUnknown_81CFE6                                      ;81C08A|20E6CF  |81CFE6;
@@ -7650,7 +7650,7 @@ subUnkown81C027_0x1A:
     LDA.W #$00F2                                               ;81C0B9|A9F200  |      ;
     CLC                                                        ;81C0BC|18      |      ;
     ADC.B nPlayerDirection                                     ;81C0BD|65DA    |0000DA;
-    STA.W $0901                                                ;81C0BF|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C0BF|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C0C2|20E6CF  |81CFE6;
     REP #$20                                                   ;81C0C5|C220    |      ;
     LDA.W $0915                                                ;81C0C7|AD1509  |000915;
@@ -7697,7 +7697,7 @@ subUnkown81C027_0x17:
     LDA.W #$00DC                                               ;81C11D|A9DC00  |      ;
     CLC                                                        ;81C120|18      |      ;
     ADC.B nPlayerDirection                                     ;81C121|65DA    |0000DA;
-    STA.W $0901                                                ;81C123|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C123|8D0109  |000901;
     SEP #$20                                                   ;81C126|E220    |      ;
     LDA.B #$01                                                 ;81C128|A901    |      ;
     STA.B $1E                                                  ;81C12A|851E    |00001E;
@@ -7725,7 +7725,7 @@ subUnkown81C027_0x18:
     LDA.W #$00E0                                               ;81C157|A9E000  |      ;
     CLC                                                        ;81C15A|18      |      ;
     ADC.W $0911                                                ;81C15B|6D1109  |000911;
-    STA.W $0901                                                ;81C15E|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C15E|8D0109  |000901;
     REP #$20                                                   ;81C161|C220    |      ;
     LDA.W $0911                                                ;81C163|AD1109  |000911;
     STA.B nPlayerDirection                                     ;81C166|85DA    |0000DA;
@@ -7742,10 +7742,10 @@ subUnkown81C027_0x18:
     LDA.W #$0000                                               ;81C180|A90000  |      ;
     STA.B nPlayerAction                                        ;81C183|85D4    |0000D4;
     REP #$30                                                   ;81C185|C230    |      ;
-    LDA.W #$0010                                               ;81C187|A91000  |      ;
+    LDA.W #$0010                                               ;81C187|A91000  |      ; !PLAYERFLAGS_RIDINGHORSE
     EOR.W #$FFFF                                               ;81C18A|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C18D|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C18F|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C18D|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C18F|85D2    |0000D2;
     REP #$20                                                   ;81C191|C220    |      ;
     LDA.L strcDailyFlags.flags2                                ;81C193|AF5C1F7F|7F1F5C;
     ORA.W #$0800                                               ;81C197|090008  |      ;
@@ -7761,7 +7761,7 @@ subUnkown81C027_0x16:
     LDA.W #$00D8                                               ;81C1A5|A9D800  |      ;
     CLC                                                        ;81C1A8|18      |      ;
     ADC.B nPlayerDirection                                     ;81C1A9|65DA    |0000DA;
-    STA.W $0901                                                ;81C1AB|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C1AB|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C1AE|20E6CF  |81CFE6;
     REP #$20                                                   ;81C1B1|C220    |      ;
     LDA.W $0915                                                ;81C1B3|AD1509  |000915;
@@ -7793,7 +7793,7 @@ subUnkown81C027_0x15:
     REP #$30                                                   ;81C1F0|C230    |      ;
     REP #$30                                                   ;81C1F2|C230    |      ;
     LDA.W #$00CC                                               ;81C1F4|A9CC00  |      ;
-    STA.W $0901                                                ;81C1F7|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C1F7|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C1FA|20E6CF  |81CFE6;
     REP #$20                                                   ;81C1FD|C220    |      ;
     LDA.W $0915                                                ;81C1FF|AD1509  |000915;
@@ -7811,7 +7811,7 @@ subUnkown81C027_0x14:
     REP #$30                                                   ;81C211|C230    |      ;
     REP #$30                                                   ;81C213|C230    |      ;
     LDA.W #$008F                                               ;81C215|A98F00  |      ;
-    STA.W $0901                                                ;81C218|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C218|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C21B|20E6CF  |81CFE6;
     REP #$20                                                   ;81C21E|C220    |      ;
     LDA.W $0915                                                ;81C220|AD1509  |000915;
@@ -7829,7 +7829,7 @@ subUnkown81C027_0x0F:
     REP #$30                                                   ;81C232|C230    |      ;
     REP #$30                                                   ;81C234|C230    |      ;
     LDA.W #$0088                                               ;81C236|A98800  |      ;
-    STA.W $0901                                                ;81C239|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C239|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C23C|20E6CF  |81CFE6;
     JMP.W fUnknown_81C002                                      ;81C23F|4C02C0  |81C002;
  
@@ -7838,7 +7838,7 @@ subUnkown81C027_0x10:
     REP #$30                                                   ;81C242|C230    |      ;
     REP #$30                                                   ;81C244|C230    |      ;
     LDA.W #$0089                                               ;81C246|A98900  |      ;
-    STA.W $0901                                                ;81C249|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C249|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C24C|20E6CF  |81CFE6;
     REP #$20                                                   ;81C24F|C220    |      ;
     LDA.W $0915                                                ;81C251|AD1509  |000915;
@@ -7868,7 +7868,7 @@ subUnkown81C027_0x11:
  
   + REP #$30                                                   ;81C280|C230    |      ;
     LDA.W #$008E                                               ;81C282|A98E00  |      ;
-    STA.W $0901                                                ;81C285|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C285|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C288|20E6CF  |81CFE6;
     JMP.W fUnknown_81C002                                      ;81C28B|4C02C0  |81C002;
  
@@ -7877,7 +7877,7 @@ subUnkown81C027_0x12:
     REP #$30                                                   ;81C28E|C230    |      ;
     REP #$30                                                   ;81C290|C230    |      ;
     LDA.W #$008A                                               ;81C292|A98A00  |      ;
-    STA.W $0901                                                ;81C295|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C295|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C298|20E6CF  |81CFE6;
     REP #$20                                                   ;81C29B|C220    |      ;
     LDA.W $0915                                                ;81C29D|AD1509  |000915;
@@ -7915,7 +7915,7 @@ subUnkown81C027_0x13:
  
 .label1:
     REP #$30                                                   ;81C2E2|C230    |      ;
-    LDA.W $0901                                                ;81C2E4|AD0109  |000901;
+    LDA.W nFoodToEatSpriteIndex                                ;81C2E4|AD0109  |000901;
     CMP.W #$008B                                               ;81C2E7|C98B00  |      ;
     BEQ .label2                                                ;81C2EA|F017    |81C303;
     CMP.W #$008C                                               ;81C2EC|C98C00  |      ;
@@ -7963,7 +7963,7 @@ subUnkown81C027_0x1B:
     LDA.W #$00BC                                               ;81C344|A9BC00  |      ;
     CLC                                                        ;81C347|18      |      ;
     ADC.B nPlayerDirection                                     ;81C348|65DA    |0000DA;
-    STA.W $0901                                                ;81C34A|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C34A|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C34D|20E6CF  |81CFE6;
     REP #$20                                                   ;81C350|C220    |      ;
     LDA.W $0915                                                ;81C352|AD1509  |000915;
@@ -7987,7 +7987,7 @@ subUnkown81C027_0x0D:
     LDA.W #$00BC                                               ;81C375|A9BC00  |      ;
     CLC                                                        ;81C378|18      |      ;
     ADC.B nPlayerDirection                                     ;81C379|65DA    |0000DA;
-    STA.W $0901                                                ;81C37B|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C37B|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C37E|20E6CF  |81CFE6;
     REP #$20                                                   ;81C381|C220    |      ;
     LDA.W $0915                                                ;81C383|AD1509  |000915;
@@ -8004,16 +8004,16 @@ subUnkown81C027_0x0D:
 subUnkown81C027_SelectDialog:
     REP #$30                                                   ;81C395|C230    |      ;
     REP #$30                                                   ;81C397|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C399|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C399|A5D2    |0000D2;
     AND.W #$8000                                               ;81C39B|290080  |      ;
     BEQ +                                                      ;81C39E|F003    |81C3A3;
     JMP.W .continue                                            ;81C3A0|4CCAC4  |81C4CA;
  
  
   + REP #$30                                                   ;81C3A3|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C3A5|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C3A5|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C3A7|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C3AA|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C3AA|85D2    |0000D2;
     SEP #$20                                                   ;81C3AC|E220    |      ;
     REP #$10                                                   ;81C3AE|C210    |      ;
     LDA.B #$00                                                 ;81C3B0|A900    |      ;
@@ -8022,7 +8022,7 @@ subUnkown81C027_SelectDialog:
     CLC                                                        ;81C3B6|18      |      ;
     ADC.B #$90                                                 ;81C3B7|6990    |      ;
     REP #$20                                                   ;81C3B9|C220    |      ;
-    STA.W $0901                                                ;81C3BB|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C3BB|8D0109  |000901;
     REP #$30                                                   ;81C3BE|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;81C3C0|AF6E1F7F|7F1F6E;
     AND.W #$4000                                               ;81C3C4|290040  |      ;
@@ -8201,16 +8201,16 @@ subUnkown81C027_SelectDialog:
 subUnkown81C027_0x0B:
     REP #$30                                                   ;81C4EC|C230    |      ;
     REP #$30                                                   ;81C4EE|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C4F0|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C4F0|A5D2    |0000D2;
     AND.W #$8000                                               ;81C4F2|290080  |      ;
     BEQ +                                                      ;81C4F5|F003    |81C4FA;
     JMP.W .label1                                              ;81C4F7|4C03C5  |81C503;
  
  
   + REP #$30                                                   ;81C4FA|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C4FC|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C4FC|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C4FE|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C501|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C501|85D2    |0000D2;
  
 .label1:
     JSR.W fUnknown_81CFE6                                      ;81C503|20E6CF  |81CFE6;
@@ -8229,16 +8229,16 @@ subUnkown81C027_0x0B:
 subUnkown81C027_0x0A:
     REP #$30                                                   ;81C51A|C230    |      ;
     REP #$30                                                   ;81C51C|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C51E|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C51E|A5D2    |0000D2;
     AND.W #$8000                                               ;81C520|290080  |      ;
     BEQ +                                                      ;81C523|F003    |81C528;
     JMP.W .label1                                              ;81C525|4C31C5  |81C531;
  
  
   + REP #$30                                                   ;81C528|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C52A|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C52A|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C52C|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C52F|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C52F|85D2    |0000D2;
  
 .label1:
     JSR.W fUnknown_81CFE6                                      ;81C531|20E6CF  |81CFE6;
@@ -8265,17 +8265,17 @@ fUnknown_81C556:
     REP #$30                                                   ;81C558|C230    |      ;
     LDA.W #$8000                                               ;81C55A|A90080  |      ;
     EOR.W #$FFFF                                               ;81C55D|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C560|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C562|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C560|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C562|85D2    |0000D2;
     REP #$30                                                   ;81C564|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C566|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C566|A5D2    |0000D2;
     AND.W #$2000                                               ;81C568|290020  |      ;
     BEQ +                                                      ;81C56B|F003    |81C570;
     JMP.W .exit3                                               ;81C56D|4C68C6  |81C668;
  
  
   + REP #$30                                                   ;81C570|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C572|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C572|A5D2    |0000D2;
     AND.W #$4000                                               ;81C574|290040  |      ;
     BNE +                                                      ;81C577|D003    |81C57C;
     JMP.W .label2                                              ;81C579|4CBDC5  |81C5BD;
@@ -8294,7 +8294,7 @@ fUnknown_81C556:
     ASL A                                                      ;81C593|0A      |      ;
     CLC                                                        ;81C594|18      |      ;
     ADC.W #$003C                                               ;81C595|693C00  |      ;
-    STA.W $0901                                                ;81C598|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C598|8D0109  |000901;
     SEP #$20                                                   ;81C59B|E220    |      ;
     LDA.B #$02                                                 ;81C59D|A902    |      ;
     JSL.L fCore_GetRandomNumber                                ;81C59F|22F98980|8089F9;
@@ -8304,8 +8304,8 @@ fUnknown_81C556:
     XBA                                                        ;81C5A8|EB      |      ;
     REP #$20                                                   ;81C5A9|C220    |      ;
     CLC                                                        ;81C5AB|18      |      ;
-    ADC.W $0901                                                ;81C5AC|6D0109  |000901;
-    STA.W $0901                                                ;81C5AF|8D0109  |000901;
+    ADC.W nFoodToEatSpriteIndex                                ;81C5AC|6D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C5AF|8D0109  |000901;
     JMP.W subUnkown81C027_0x09                                 ;81C5B2|4C5ECB  |81CB5E;
  
  
@@ -8317,35 +8317,35 @@ fUnknown_81C556:
  
 .label2:
     REP #$30                                                   ;81C5BD|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C5BF|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C5BF|A5D2    |0000D2;
     AND.W #$0002                                               ;81C5C1|290200  |      ;
     BEQ +                                                      ;81C5C4|F003    |81C5C9;
     JMP.W .label3                                              ;81C5C6|4C11C6  |81C611;
  
  
   + REP #$30                                                   ;81C5C9|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C5CB|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C5CB|A5D2    |0000D2;
     AND.W #$0010                                               ;81C5CD|291000  |      ;
     BEQ +                                                      ;81C5D0|F003    |81C5D5;
     JMP.W .label4                                              ;81C5D2|4C1EC6  |81C61E;
  
  
   + REP #$30                                                   ;81C5D5|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C5D7|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C5D7|A5D2    |0000D2;
     AND.W #$0020                                               ;81C5D9|292000  |      ;
     BEQ +                                                      ;81C5DC|F003    |81C5E1;
     JMP.W .label5                                              ;81C5DE|4C2BC6  |81C62B;
  
  
   + REP #$30                                                   ;81C5E1|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C5E3|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C5E3|A5D2    |0000D2;
     AND.W #$0100                                               ;81C5E5|290001  |      ;
     BEQ +                                                      ;81C5E8|F003    |81C5ED;
     JMP.W .label6                                              ;81C5EA|4C38C6  |81C638;
  
  
   + REP #$30                                                   ;81C5ED|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C5EF|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C5EF|A5D2    |0000D2;
     AND.W #$0800                                               ;81C5F1|290008  |      ;
     BEQ +                                                      ;81C5F4|F003    |81C5F9;
     JMP.W .label7                                              ;81C5F6|4C42C6  |81C642;
@@ -8359,7 +8359,7 @@ fUnknown_81C556:
     LDA.W #$0000                                               ;81C606|A90000  |      ;
     CLC                                                        ;81C609|18      |      ;
     ADC.B nPlayerDirection                                     ;81C60A|65DA    |0000DA;
-    STA.W $0901                                                ;81C60C|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C60C|8D0109  |000901;
     BRA .exit1                                                 ;81C60F|804B    |81C65C;
  
  
@@ -8368,7 +8368,7 @@ fUnknown_81C556:
     LDA.W #$0014                                               ;81C613|A91400  |      ;
     CLC                                                        ;81C616|18      |      ;
     ADC.B nPlayerDirection                                     ;81C617|65DA    |0000DA;
-    STA.W $0901                                                ;81C619|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C619|8D0109  |000901;
     BRA .exit2                                                 ;81C61C|8044    |81C662;
  
  
@@ -8377,7 +8377,7 @@ fUnknown_81C556:
     LDA.W #$00B0                                               ;81C620|A9B000  |      ;
     CLC                                                        ;81C623|18      |      ;
     ADC.B nPlayerDirection                                     ;81C624|65DA    |0000DA;
-    STA.W $0901                                                ;81C626|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C626|8D0109  |000901;
     BRA .exit2                                                 ;81C629|8037    |81C662;
  
  
@@ -8386,14 +8386,14 @@ fUnknown_81C556:
     LDA.W #$00C0                                               ;81C62D|A9C000  |      ;
     CLC                                                        ;81C630|18      |      ;
     ADC.B nPlayerDirection                                     ;81C631|65DA    |0000DA;
-    STA.W $0901                                                ;81C633|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C633|8D0109  |000901;
     BRA .exit2                                                 ;81C636|802A    |81C662;
  
  
 .label6:
     REP #$30                                                   ;81C638|C230    |      ;
     LDA.W #$004F                                               ;81C63A|A94F00  |      ;
-    STA.W $0901                                                ;81C63D|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C63D|8D0109  |000901;
     BRA .exit2                                                 ;81C640|8020    |81C662;
  
  
@@ -8402,7 +8402,7 @@ fUnknown_81C556:
     LDA.W #$00D0                                               ;81C644|A9D000  |      ;
     CLC                                                        ;81C647|18      |      ;
     ADC.B nPlayerDirection                                     ;81C648|65DA    |0000DA;
-    STA.W $0901                                                ;81C64A|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C64A|8D0109  |000901;
     BRA .exit2                                                 ;81C64D|8013    |81C662;
  
  
@@ -8411,7 +8411,7 @@ fUnknown_81C556:
     LDA.W #$00EA                                               ;81C651|A9EA00  |      ;
     CLC                                                        ;81C654|18      |      ;
     ADC.B nPlayerDirection                                     ;81C655|65DA    |0000DA;
-    STA.W $0901                                                ;81C657|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C657|8D0109  |000901;
     BRA .exit2                                                 ;81C65A|8006    |81C662;
  
  
@@ -8435,28 +8435,28 @@ fUnknown_81C66E:
     REP #$30                                                   ;81C670|C230    |      ;
     LDA.W #$8000                                               ;81C672|A90080  |      ;
     EOR.W #$FFFF                                               ;81C675|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C678|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C67A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C678|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C67A|85D2    |0000D2;
     REP #$20                                                   ;81C67C|C220    |      ;
-    LDA.B strcPlayerFlags                                      ;81C67E|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C67E|A5D2    |0000D2;
     AND.W #$0002                                               ;81C680|290200  |      ;
     BEQ +                                                      ;81C683|F003    |81C688;
     JMP.W .label1                                              ;81C685|4CC2C6  |81C6C2;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C688|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C688|A5D2    |0000D2;
     AND.W #$0010                                               ;81C68A|291000  |      ;
     BEQ +                                                      ;81C68D|F003    |81C692;
     JMP.W .label2                                              ;81C68F|4CD5C6  |81C6D5;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C692|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C692|A5D2    |0000D2;
     AND.W #$0020                                               ;81C694|292000  |      ;
     BEQ +                                                      ;81C697|F003    |81C69C;
     JMP.W .label3                                              ;81C699|4CE9C6  |81C6E9;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C69C|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C69C|A5D2    |0000D2;
     AND.W #$0800                                               ;81C69E|290008  |      ;
     BEQ +                                                      ;81C6A1|F003    |81C6A6;
     JMP.W .label4                                              ;81C6A3|4CFCC6  |81C6FC;
@@ -8469,7 +8469,7 @@ fUnknown_81C66E:
     LDA.W #$0004                                               ;81C6B1|A90400  |      ;
     CLC                                                        ;81C6B4|18      |      ;
     ADC.B nPlayerDirection                                     ;81C6B5|65DA    |0000DA;
-    STA.W $0901                                                ;81C6B7|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C6B7|8D0109  |000901;
     SEP #$20                                                   ;81C6BA|E220    |      ;
     LDA.B #$01                                                 ;81C6BC|A901    |      ;
     STA.B $1E                                                  ;81C6BE|851E    |00001E;
@@ -8481,7 +8481,7 @@ fUnknown_81C66E:
     LDA.W #$0028                                               ;81C6C4|A92800  |      ;
     CLC                                                        ;81C6C7|18      |      ;
     ADC.B nPlayerDirection                                     ;81C6C8|65DA    |0000DA;
-    STA.W $0901                                                ;81C6CA|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C6CA|8D0109  |000901;
     SEP #$20                                                   ;81C6CD|E220    |      ;
     LDA.B #$01                                                 ;81C6CF|A901    |      ;
     STA.B $1E                                                  ;81C6D1|851E    |00001E;
@@ -8493,7 +8493,7 @@ fUnknown_81C66E:
     LDA.W #$00B4                                               ;81C6D7|A9B400  |      ;
     CLC                                                        ;81C6DA|18      |      ;
     ADC.B nPlayerDirection                                     ;81C6DB|65DA    |0000DA;
-    STA.W $0901                                                ;81C6DD|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C6DD|8D0109  |000901;
     SEP #$20                                                   ;81C6E0|E220    |      ;
     LDA.B #$03                                                 ;81C6E2|A903    |      ;
     STA.B $1E                                                  ;81C6E4|851E    |00001E;
@@ -8505,7 +8505,7 @@ fUnknown_81C66E:
     LDA.W #$00C4                                               ;81C6EB|A9C400  |      ;
     CLC                                                        ;81C6EE|18      |      ;
     ADC.B nPlayerDirection                                     ;81C6EF|65DA    |0000DA;
-    STA.W $0901                                                ;81C6F1|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C6F1|8D0109  |000901;
     SEP #$20                                                   ;81C6F4|E220    |      ;
     LDA.B #$01                                                 ;81C6F6|A901    |      ;
     STA.B $1E                                                  ;81C6F8|851E    |00001E;
@@ -8517,7 +8517,7 @@ fUnknown_81C66E:
     LDA.W #$00D4                                               ;81C6FE|A9D400  |      ;
     CLC                                                        ;81C701|18      |      ;
     ADC.B nPlayerDirection                                     ;81C702|65DA    |0000DA;
-    STA.W $0901                                                ;81C704|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C704|8D0109  |000901;
     SEP #$20                                                   ;81C707|E220    |      ;
     LDA.B #$01                                                 ;81C709|A901    |      ;
     STA.B $1E                                                  ;81C70B|851E    |00001E;
@@ -8529,7 +8529,7 @@ fUnknown_81C66E:
     LDA.W #$00EE                                               ;81C711|A9EE00  |      ;
     CLC                                                        ;81C714|18      |      ;
     ADC.B nPlayerDirection                                     ;81C715|65DA    |0000DA;
-    STA.W $0901                                                ;81C717|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C717|8D0109  |000901;
     SEP #$20                                                   ;81C71A|E220    |      ;
     LDA.B #$01                                                 ;81C71C|A901    |      ;
     STA.B $1E                                                  ;81C71E|851E    |00001E;
@@ -8552,19 +8552,19 @@ fUnknown_81C736:
     REP #$30                                                   ;81C738|C230    |      ;
     LDA.W #$8000                                               ;81C73A|A90080  |      ;
     EOR.W #$FFFF                                               ;81C73D|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C740|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C742|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C740|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C742|85D2    |0000D2;
     REP #$20                                                   ;81C744|C220    |      ;
-    LDA.B strcPlayerFlags                                      ;81C746|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C746|A5D2    |0000D2;
     AND.W #$1000                                               ;81C748|290010  |      ;
     BNE .skip                                                  ;81C74B|D014    |81C761;
-    LDA.B strcPlayerFlags                                      ;81C74D|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C74D|A5D2    |0000D2;
     AND.W #$2000                                               ;81C74F|290020  |      ;
     BEQ +                                                      ;81C752|F003    |81C757;
     JMP.W fHelper_81C82A                                       ;81C754|4C2AC8  |81C82A;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C757|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C757|A5D2    |0000D2;
     AND.W #$4000                                               ;81C759|290040  |      ;
     BNE .skip                                                  ;81C75C|D003    |81C761;
     JMP.W fHelper_81C82A                                       ;81C75E|4C2AC8  |81C82A;
@@ -8572,25 +8572,25 @@ fUnknown_81C736:
  
 .skip:
     REP #$20                                                   ;81C761|C220    |      ;
-    LDA.B strcPlayerFlags                                      ;81C763|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C763|A5D2    |0000D2;
     AND.W #$0002                                               ;81C765|290200  |      ;
     BEQ +                                                      ;81C768|F003    |81C76D;
     JMP.W .label1                                              ;81C76A|4CA7C7  |81C7A7;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C76D|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C76D|A5D2    |0000D2;
     AND.W #$0010                                               ;81C76F|291000  |      ;
     BEQ +                                                      ;81C772|F003    |81C777;
     JMP.W .label2                                              ;81C774|4CBAC7  |81C7BA;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C777|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C777|A5D2    |0000D2;
     AND.W #$0020                                               ;81C779|292000  |      ;
     BEQ +                                                      ;81C77C|F003    |81C781;
     JMP.W .label3                                              ;81C77E|4CCDC7  |81C7CD;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C781|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C781|A5D2    |0000D2;
     AND.W #$0800                                               ;81C783|290008  |      ;
     BEQ +                                                      ;81C786|F003    |81C78B;
     JMP.W .label4                                              ;81C788|4CE0C7  |81C7E0;
@@ -8603,7 +8603,7 @@ fUnknown_81C736:
     LDA.W #$0008                                               ;81C796|A90800  |      ;
     CLC                                                        ;81C799|18      |      ;
     ADC.B nPlayerDirection                                     ;81C79A|65DA    |0000DA;
-    STA.W $0901                                                ;81C79C|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C79C|8D0109  |000901;
     SEP #$20                                                   ;81C79F|E220    |      ;
     LDA.B #$02                                                 ;81C7A1|A902    |      ;
     STA.B $1E                                                  ;81C7A3|851E    |00001E;
@@ -8615,7 +8615,7 @@ fUnknown_81C736:
     LDA.W #$002C                                               ;81C7A9|A92C00  |      ;
     CLC                                                        ;81C7AC|18      |      ;
     ADC.B nPlayerDirection                                     ;81C7AD|65DA    |0000DA;
-    STA.W $0901                                                ;81C7AF|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C7AF|8D0109  |000901;
     SEP #$20                                                   ;81C7B2|E220    |      ;
     LDA.B #$02                                                 ;81C7B4|A902    |      ;
     STA.B $1E                                                  ;81C7B6|851E    |00001E;
@@ -8627,7 +8627,7 @@ fUnknown_81C736:
     LDA.W #$00B4                                               ;81C7BC|A9B400  |      ;
     CLC                                                        ;81C7BF|18      |      ;
     ADC.B nPlayerDirection                                     ;81C7C0|65DA    |0000DA;
-    STA.W $0901                                                ;81C7C2|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C7C2|8D0109  |000901;
     SEP #$20                                                   ;81C7C5|E220    |      ;
     LDA.B #$03                                                 ;81C7C7|A903    |      ;
     STA.B $1E                                                  ;81C7C9|851E    |00001E;
@@ -8639,7 +8639,7 @@ fUnknown_81C736:
     LDA.W #$00C4                                               ;81C7CF|A9C400  |      ;
     CLC                                                        ;81C7D2|18      |      ;
     ADC.B nPlayerDirection                                     ;81C7D3|65DA    |0000DA;
-    STA.W $0901                                                ;81C7D5|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C7D5|8D0109  |000901;
     SEP #$20                                                   ;81C7D8|E220    |      ;
     LDA.B #$01                                                 ;81C7DA|A901    |      ;
     STA.B $1E                                                  ;81C7DC|851E    |00001E;
@@ -8651,7 +8651,7 @@ fUnknown_81C736:
     LDA.W #$00D4                                               ;81C7E2|A9D400  |      ;
     CLC                                                        ;81C7E5|18      |      ;
     ADC.B nPlayerDirection                                     ;81C7E6|65DA    |0000DA;
-    STA.W $0901                                                ;81C7E8|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C7E8|8D0109  |000901;
     SEP #$20                                                   ;81C7EB|E220    |      ;
     LDA.B #$01                                                 ;81C7ED|A901    |      ;
     STA.B $1E                                                  ;81C7EF|851E    |00001E;
@@ -8663,7 +8663,7 @@ fUnknown_81C736:
     LDA.W #$00EE                                               ;81C7F5|A9EE00  |      ;
     CLC                                                        ;81C7F8|18      |      ;
     ADC.B nPlayerDirection                                     ;81C7F9|65DA    |0000DA;
-    STA.W $0901                                                ;81C7FB|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C7FB|8D0109  |000901;
     SEP #$20                                                   ;81C7FE|E220    |      ;
     LDA.B #$01                                                 ;81C800|A901    |      ;
     STA.B $1E                                                  ;81C802|851E    |00001E;
@@ -8704,11 +8704,11 @@ fUnknown_81C83B:
     REP #$30                                                   ;81C83D|C230    |      ;
     LDA.W #$8000                                               ;81C83F|A90080  |      ;
     EOR.W #$FFFF                                               ;81C842|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C845|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C847|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C845|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C847|85D2    |0000D2;
     REP #$30                                                   ;81C849|C230    |      ;
     LDA.W #$0045                                               ;81C84B|A94500  |      ;
-    STA.W $0901                                                ;81C84E|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C84E|8D0109  |000901;
     SEP #$20                                                   ;81C851|E220    |      ;
     LDA.B #$01                                                 ;81C853|A901    |      ;
     STA.B $1E                                                  ;81C855|851E    |00001E;
@@ -8725,30 +8725,30 @@ fUnknown_81C83B:
 subUnkown81C027_0x03:
     REP #$30                                                   ;81C86B|C230    |      ;
     REP #$30                                                   ;81C86D|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C86F|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C86F|A5D2    |0000D2;
     AND.W #$8000                                               ;81C871|290080  |      ;
     BEQ +                                                      ;81C874|F003    |81C879;
     JMP.W .label4                                              ;81C876|4C23C9  |81C923;
  
  
   + REP #$30                                                   ;81C879|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C87B|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C87B|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C87D|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C880|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C880|85D2    |0000D2;
     REP #$20                                                   ;81C882|C220    |      ;
-    LDA.B strcPlayerFlags                                      ;81C884|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C884|A5D2    |0000D2;
     AND.W #$0002                                               ;81C886|290200  |      ;
     BEQ +                                                      ;81C889|F003    |81C88E;
     JMP.W .label1                                              ;81C88B|4CC6C8  |81C8C6;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C88E|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C88E|A5D2    |0000D2;
     AND.W #$0010                                               ;81C890|291000  |      ;
     BEQ +                                                      ;81C893|F003    |81C898;
     JMP.W .label2                                              ;81C895|4CE5C8  |81C8E5;
  
  
-  + LDA.B strcPlayerFlags                                      ;81C898|A5D2    |0000D2;
+  + LDA.B nPlayerFlags                                         ;81C898|A5D2    |0000D2;
     AND.W #$0020                                               ;81C89A|292000  |      ;
     BEQ +                                                      ;81C89D|F003    |81C8A2;
     JMP.W .label3                                              ;81C89F|4C04C9  |81C904;
@@ -8758,7 +8758,7 @@ subUnkown81C027_0x03:
     LDA.W #$000C                                               ;81C8A4|A90C00  |      ;
     CLC                                                        ;81C8A7|18      |      ;
     ADC.B nPlayerDirection                                     ;81C8A8|65DA    |0000DA;
-    STA.W $0901                                                ;81C8AA|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C8AA|8D0109  |000901;
     SEP #$20                                                   ;81C8AD|E220    |      ;
     REP #$10                                                   ;81C8AF|C210    |      ;
     LDA.B #$06                                                 ;81C8B1|A906    |      ;
@@ -8776,7 +8776,7 @@ subUnkown81C027_0x03:
     LDA.W #$0020                                               ;81C8C8|A92000  |      ;
     CLC                                                        ;81C8CB|18      |      ;
     ADC.B nPlayerDirection                                     ;81C8CC|65DA    |0000DA;
-    STA.W $0901                                                ;81C8CE|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C8CE|8D0109  |000901;
     SEP #$20                                                   ;81C8D1|E220    |      ;
     REP #$10                                                   ;81C8D3|C210    |      ;
     LDA.B #$06                                                 ;81C8D5|A906    |      ;
@@ -8792,7 +8792,7 @@ subUnkown81C027_0x03:
     LDA.W #$00B8                                               ;81C8E7|A9B800  |      ;
     CLC                                                        ;81C8EA|18      |      ;
     ADC.B nPlayerDirection                                     ;81C8EB|65DA    |0000DA;
-    STA.W $0901                                                ;81C8ED|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C8ED|8D0109  |000901;
     SEP #$20                                                   ;81C8F0|E220    |      ;
     REP #$10                                                   ;81C8F2|C210    |      ;
     LDA.B #$06                                                 ;81C8F4|A906    |      ;
@@ -8808,7 +8808,7 @@ subUnkown81C027_0x03:
     LDA.W #$00C8                                               ;81C906|A9C800  |      ;
     CLC                                                        ;81C909|18      |      ;
     ADC.B nPlayerDirection                                     ;81C90A|65DA    |0000DA;
-    STA.W $0901                                                ;81C90C|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C90C|8D0109  |000901;
     SEP #$20                                                   ;81C90F|E220    |      ;
     REP #$10                                                   ;81C911|C210    |      ;
     LDA.B #$06                                                 ;81C913|A906    |      ;
@@ -8825,7 +8825,7 @@ subUnkown81C027_0x03:
     LDA.B #$01                                                 ;81C927|A901    |      ;
     STA.B $1E                                                  ;81C929|851E    |00001E;
     REP #$30                                                   ;81C92B|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C92D|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C92D|A5D2    |0000D2;
     AND.W #$0200                                               ;81C92F|290002  |      ;
     BNE .label5                                                ;81C932|D003    |81C937;
     JMP.W .label7                                              ;81C934|4C51C9  |81C951;
@@ -8861,8 +8861,8 @@ subUnkown81C027_0x03:
     REP #$30                                                   ;81C968|C230    |      ;
     LDA.W #$0200                                               ;81C96A|A90002  |      ;
     EOR.W #$FFFF                                               ;81C96D|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C970|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C972|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C970|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C972|85D2    |0000D2;
     REP #$30                                                   ;81C974|C230    |      ;
     LDA.B nPlayerDirection                                     ;81C976|A5DA    |0000DA;
     CMP.W #$0003                                               ;81C978|C90300  |      ;
@@ -8877,8 +8877,8 @@ subUnkown81C027_0x03:
     REP #$30                                                   ;81C982|C230    |      ;
     LDA.W #$0020                                               ;81C984|A92000  |      ;
     EOR.W #$FFFF                                               ;81C987|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81C98A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81C98C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81C98A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C98C|85D2    |0000D2;
  
 .exit2:
     JMP.W fUnknown_81C002                                      ;81C98E|4C02C0  |81C002;
@@ -8887,21 +8887,21 @@ subUnkown81C027_0x03:
 subUnkown81C027_0x04:
     REP #$30                                                   ;81C991|C230    |      ;
     REP #$30                                                   ;81C993|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C995|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C995|A5D2    |0000D2;
     AND.W #$8000                                               ;81C997|290080  |      ;
     BEQ +                                                      ;81C99A|F003    |81C99F;
     JMP.W .label1                                              ;81C99C|4CB7C9  |81C9B7;
  
  
   + REP #$30                                                   ;81C99F|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C9A1|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C9A1|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C9A3|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C9A6|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C9A6|85D2    |0000D2;
     REP #$30                                                   ;81C9A8|C230    |      ;
     LDA.W #$0010                                               ;81C9AA|A91000  |      ;
     CLC                                                        ;81C9AD|18      |      ;
     ADC.B nPlayerDirection                                     ;81C9AE|65DA    |0000DA;
-    STA.W $0901                                                ;81C9B0|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C9B0|8D0109  |000901;
     JSL.L fUnknown_818000                                      ;81C9B3|22008081|818000;
  
 .label1:
@@ -8914,9 +8914,9 @@ subUnkown81C027_0x04:
     LDA.W #$0000                                               ;81C9C6|A90000  |      ;
     STA.B nPlayerAction                                        ;81C9C9|85D4    |0000D4;
     REP #$30                                                   ;81C9CB|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C9CD|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C9CD|A5D2    |0000D2;
     ORA.W #$0002                                               ;81C9CF|090200  |      ;
-    STA.B strcPlayerFlags                                      ;81C9D2|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C9D2|85D2    |0000D2;
     SEP #$20                                                   ;81C9D4|E220    |      ;
     LDA.W nHandItem_Current                                    ;81C9D6|AD1D09  |00091D;
     STA.W nHandItem_Previous                                   ;81C9D9|8D1E09  |00091E;
@@ -8928,21 +8928,21 @@ subUnkown81C027_0x04:
 subUnkown81C027_0x05:
     REP #$30                                                   ;81C9DF|C230    |      ;
     REP #$30                                                   ;81C9E1|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C9E3|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C9E3|A5D2    |0000D2;
     AND.W #$8000                                               ;81C9E5|290080  |      ;
     BEQ +                                                      ;81C9E8|F003    |81C9ED;
     JMP.W .label1                                              ;81C9EA|4C13CA  |81CA13;
  
  
   + REP #$30                                                   ;81C9ED|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81C9EF|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81C9EF|A5D2    |0000D2;
     ORA.W #$8000                                               ;81C9F1|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81C9F4|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81C9F4|85D2    |0000D2;
     REP #$30                                                   ;81C9F6|C230    |      ;
     LDA.W #$001C                                               ;81C9F8|A91C00  |      ;
     CLC                                                        ;81C9FB|18      |      ;
     ADC.B nPlayerDirection                                     ;81C9FC|65DA    |0000DA;
-    STA.W $0901                                                ;81C9FE|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81C9FE|8D0109  |000901;
     SEP #$20                                                   ;81CA01|E220    |      ;
     REP #$10                                                   ;81CA03|C210    |      ;
     LDA.B #$07                                                 ;81CA05|A907    |      ;
@@ -8963,8 +8963,8 @@ subUnkown81C027_0x05:
     REP #$30                                                   ;81CA27|C230    |      ;
     LDA.W #$0002                                               ;81CA29|A90200  |      ;
     EOR.W #$FFFF                                               ;81CA2C|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81CA2F|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81CA31|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81CA2F|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CA31|85D2    |0000D2;
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81CA33|4C02C0  |81C002;
@@ -8974,16 +8974,16 @@ subUnkown81C027_0x08:
     SEP #$20                                                   ;81CA36|E220    |      ;
     REP #$10                                                   ;81CA38|C210    |      ;
     REP #$30                                                   ;81CA3A|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CA3C|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CA3C|A5D2    |0000D2;
     AND.W #$8000                                               ;81CA3E|290080  |      ;
     BEQ +                                                      ;81CA41|F003    |81CA46;
     JMP.W .skip                                                ;81CA43|4C60CA  |81CA60;
  
  
   + REP #$30                                                   ;81CA46|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CA48|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CA48|A5D2    |0000D2;
     ORA.W #$8000                                               ;81CA4A|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81CA4D|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CA4D|85D2    |0000D2;
     SEP #$20                                                   ;81CA4F|E220    |      ;
     LDA.B #$00                                                 ;81CA51|A900    |      ;
     XBA                                                        ;81CA53|EB      |      ;
@@ -8991,7 +8991,7 @@ subUnkown81C027_0x08:
     REP #$20                                                   ;81CA57|C220    |      ;
     CLC                                                        ;81CA59|18      |      ;
     ADC.W #$0033                                               ;81CA5A|693300  |      ;
-    STA.W $0901                                                ;81CA5D|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81CA5D|8D0109  |000901;
  
 .skip:
     JSR.W fUnknown_81CFE6                                      ;81CA60|20E6CF  |81CFE6;
@@ -9015,8 +9015,8 @@ subUnkown81C027_0x08:
     REP #$30                                                   ;81CA87|C230    |      ;
     LDA.W #$0002                                               ;81CA89|A90200  |      ;
     EOR.W #$FFFF                                               ;81CA8C|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81CA8F|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81CA91|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81CA8F|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CA91|85D2    |0000D2;
     JMP.W .exit                                                ;81CA93|4C11CB  |81CB11;
  
  
@@ -9027,8 +9027,8 @@ subUnkown81C027_0x08:
     REP #$30                                                   ;81CA9D|C230    |      ;
     LDA.W #$0002                                               ;81CA9F|A90200  |      ;
     EOR.W #$FFFF                                               ;81CAA2|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81CAA5|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81CAA7|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81CAA5|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CAA7|85D2    |0000D2;
     BRA .exit                                                  ;81CAA9|8066    |81CB11;
  
  
@@ -9051,8 +9051,8 @@ subUnkown81C027_0x08:
     REP #$30                                                   ;81CAD1|C230    |      ;
     LDA.W #$0002                                               ;81CAD3|A90200  |      ;
     EOR.W #$FFFF                                               ;81CAD6|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81CAD9|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81CADB|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81CAD9|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CADB|85D2    |0000D2;
     SEP #$20                                                   ;81CADD|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;81CADF|A522    |000022;
     CMP.B #$15                                                 ;81CAE1|C915    |      ;
@@ -9083,25 +9083,25 @@ subUnkown81C027_0x08:
     JMP.W fUnknown_81C002                                      ;81CB11|4C02C0  |81C002;
  
  
-fUnknown_81CB14:
+fUnknown_EatMeal:
     SEP #$20                                                   ;81CB14|E220    |      ;
     REP #$10                                                   ;81CB16|C210    |      ;
     REP #$30                                                   ;81CB18|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CB1A|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CB1A|A5D2    |0000D2;
     AND.W #$8000                                               ;81CB1C|290080  |      ;
     BEQ +                                                      ;81CB1F|F003    |81CB24;
     JMP.W .skip                                                ;81CB21|4C38CB  |81CB38;
  
  
   + REP #$30                                                   ;81CB24|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CB26|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CB26|A5D2    |0000D2;
     ORA.W #$8000                                               ;81CB28|090080  |      ;
-    STA.B strcPlayerFlags                                      ;81CB2B|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CB2B|85D2    |0000D2;
     SEP #$20                                                   ;81CB2D|E220    |      ;
-    LDA.W $0924                                                ;81CB2F|AD2409  |000924;
+    LDA.W nFoodToEat                                           ;81CB2F|AD2409  |000924;
     CLC                                                        ;81CB32|18      |      ;
     ADC.B #$30                                                 ;81CB33|6930    |      ;
-    STA.W $0901                                                ;81CB35|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81CB35|8D0109  |000901;
  
 .skip:
     JSR.W fUnknown_81CFE6                                      ;81CB38|20E6CF  |81CFE6;
@@ -9113,10 +9113,10 @@ fUnknown_81CB14:
     LDA.W #$0000                                               ;81CB47|A90000  |      ;
     STA.B nPlayerAction                                        ;81CB4A|85D4    |0000D4;
     REP #$30                                                   ;81CB4C|C230    |      ;
-    LDA.W #$0004                                               ;81CB4E|A90400  |      ;
+    LDA.W #$0004                                               ;81CB4E|A90400  |      ; !PLAYERFLAGS_EATINGMEAL
     EOR.W #$FFFF                                               ;81CB51|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81CB54|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81CB56|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81CB54|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81CB56|85D2    |0000D2;
     JMP.W fUnknown_81C002                                      ;81CB58|4C02C0  |81C002;
  
  
@@ -9187,7 +9187,7 @@ fUnknown_81CB77:
  
  
   + REP #$30                                                   ;81CBC4|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CBC6|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CBC6|A5D2    |0000D2;
     AND.W #$0080                                               ;81CBC8|298000  |      ;
     BEQ +                                                      ;81CBCB|F003    |81CBD0;
     JMP.W .addY                                                ;81CBCD|4C30CC  |81CC30;
@@ -9278,7 +9278,7 @@ fUnknown_81CB77:
  
  
   + REP #$30                                                   ;81CC68|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CC6A|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CC6A|A5D2    |0000D2;
     AND.W #$0080                                               ;81CC6C|298000  |      ;
     BEQ +                                                      ;81CC6F|F003    |81CC74;
     JMP.W .subY                                                ;81CC71|4CD4CC  |81CCD4;
@@ -9369,7 +9369,7 @@ fUnknown_81CB77:
  
  
   + REP #$30                                                   ;81CD0C|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CD0E|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CD0E|A5D2    |0000D2;
     AND.W #$0080                                               ;81CD10|298000  |      ;
     BEQ +                                                      ;81CD13|F003    |81CD18;
     JMP.W .addX                                                ;81CD15|4C78CD  |81CD78;
@@ -9460,7 +9460,7 @@ fUnknown_81CB77:
  
  
   + REP #$30                                                   ;81CDB0|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81CDB2|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81CDB2|A5D2    |0000D2;
     AND.W #$0080                                               ;81CDB4|298000  |      ;
     BEQ +                                                      ;81CDB7|F003    |81CDBC;
     JMP.W .subX                                                ;81CDB9|4C1CCE  |81CE1C;
@@ -9739,7 +9739,7 @@ fUnknown_81CB77:
  
 fUnknown_81CFA0:
     REP #$30                                                   ;81CFA0|C230    |      ;
-    LDA.W $0901                                                ;81CFA2|AD0109  |000901;
+    LDA.W nFoodToEatSpriteIndex                                ;81CFA2|AD0109  |000901;
     STA.W $0903                                                ;81CFA5|8D0309  |000903;
     STA.B n16TempVar1                                          ;81CFA8|857E    |00007E;
     ASL A                                                      ;81CFAA|0A      |      ;
@@ -9788,7 +9788,7 @@ fUnknown_81CFE6:
     STA.B $9F                                                  ;81CFF8|859F    |00009F;
     JSL.L fUnknown_8580B9                                      ;81CFFA|22B98085|8580B9;
     REP #$20                                                   ;81CFFE|C220    |      ;
-    LDA.W $0901                                                ;81D000|AD0109  |000901;
+    LDA.W nFoodToEatSpriteIndex                                ;81D000|AD0109  |000901;
     CMP.W $0903                                                ;81D003|CD0309  |000903;
     BEQ .exit                                                  ;81D006|F031    |81D039;
     STA.W $0903                                                ;81D008|8D0309  |000903;
@@ -9836,8 +9836,8 @@ fUnknown_81D03D:
     REP #$30                                                   ;81D054|C230    |      ;
     LDA.W #$2000                                               ;81D056|A90020  |      ;
     EOR.W #$FFFF                                               ;81D059|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D05C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D05E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D05C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D05E|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81D060|60      |      ;
@@ -9886,8 +9886,8 @@ fPlayerEnergyHandler_81D061:
     REP #$30                                                   ;81D0A5|C230    |      ;
     LDA.W #$0008                                               ;81D0A7|A90800  |      ;
     EOR.W #$FFFF                                               ;81D0AA|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D0AD|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D0AF|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D0AD|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D0AF|85D2    |0000D2;
     BRA .label5                                                ;81D0B1|8035    |81D0E8;
  
  
@@ -9895,12 +9895,12 @@ fPlayerEnergyHandler_81D061:
     SEP #$20                                                   ;81D0B3|E220    |      ;
     STZ.W nPlayerEnergy                                        ;81D0B5|9C1809  |000918;
     REP #$30                                                   ;81D0B8|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81D0BA|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81D0BA|A5D2    |0000D2;
     ORA.W #$0008                                               ;81D0BC|090800  |      ;
-    STA.B strcPlayerFlags                                      ;81D0BF|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D0BF|85D2    |0000D2;
     REP #$20                                                   ;81D0C1|C220    |      ;
     LDA.W #$004D                                               ;81D0C3|A94D00  |      ;
-    STA.W $0901                                                ;81D0C6|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81D0C6|8D0109  |000901;
     REP #$30                                                   ;81D0C9|C230    |      ;
     LDA.W #$000B                                               ;81D0CB|A90B00  |      ;
     STA.B nPlayerAction                                        ;81D0CE|85D4    |0000D4;
@@ -9914,8 +9914,8 @@ fPlayerEnergyHandler_81D061:
     REP #$30                                                   ;81D0DA|C230    |      ;
     LDA.W #$0008                                               ;81D0DC|A90800  |      ;
     EOR.W #$FFFF                                               ;81D0DF|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D0E2|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D0E4|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D0E2|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D0E4|85D2    |0000D2;
     BRA .label6                                                ;81D0E6|800B    |81D0F3;
  
  
@@ -9977,7 +9977,7 @@ fPlayerEnergyHandler_81D061:
     CLC                                                        ;81D133|18      |      ;
     ADC.B #$4A                                                 ;81D134|694A    |      ;
     REP #$20                                                   ;81D136|C220    |      ;
-    STA.W $0901                                                ;81D138|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81D138|8D0109  |000901;
     SEP #$20                                                   ;81D13B|E220    |      ;
     LDA.W $096C                                                ;81D13D|AD6C09  |00096C;
     INC A                                                      ;81D140|1A      |      ;
@@ -10789,8 +10789,8 @@ subPlayerInteraction81D593_0x01:
   + REP #$30                                                   ;81D662|C230    |      ;
     LDA.W #$0040                                               ;81D664|A94000  |      ;
     EOR.W #$FFFF                                               ;81D667|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D66A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D66C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D66A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D66C|85D2    |0000D2;
     RTS                                                        ;81D66E|60      |      ;
  
  
@@ -10840,8 +10840,8 @@ subPlayerInteraction81D593_0x03:
     REP #$30                                                   ;81D6CB|C230    |      ;
     LDA.W #$0040                                               ;81D6CD|A94000  |      ;
     EOR.W #$FFFF                                               ;81D6D0|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D6D3|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D6D5|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D6D3|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D6D5|85D2    |0000D2;
     SEP #$20                                                   ;81D6D7|E220    |      ;
     STZ.W $0119                                                ;81D6D9|9C1901  |000119;
     JSL.L fToolUsed_SoundUnknown828FF3                         ;81D6DC|22F38F82|828FF3;
@@ -10861,8 +10861,8 @@ subPlayerInteraction81D593_0x05:
     REP #$30                                                   ;81D6EB|C230    |      ;
     LDA.W #$0040                                               ;81D6ED|A94000  |      ;
     EOR.W #$FFFF                                               ;81D6F0|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D6F3|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D6F5|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D6F3|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D6F5|85D2    |0000D2;
     RTS                                                        ;81D6F7|60      |      ;
  
  
@@ -10873,8 +10873,8 @@ subPlayerInteraction81D593_0x06:
     REP #$30                                                   ;81D701|C230    |      ;
     LDA.W #$0040                                               ;81D703|A94000  |      ;
     EOR.W #$FFFF                                               ;81D706|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D709|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D70B|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D709|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D70B|85D2    |0000D2;
     RTS                                                        ;81D70D|60      |      ;
  
  
@@ -10919,9 +10919,9 @@ subPlayerInteraction81D593_0x0F:
     CMP.B #$02                                                 ;81D721|C902    |      ;
     BEQ .case2                                                 ;81D723|F075    |81D79A;
     REP #$30                                                   ;81D725|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81D727|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81D727|A5D2    |0000D2;
     ORA.W #$0100                                               ;81D729|090001  |      ;
-    STA.B strcPlayerFlags                                      ;81D72C|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D72C|85D2    |0000D2;
     REP #$20                                                   ;81D72E|C220    |      ;
     LDA.W nMapEngine_flags                                     ;81D730|AD9601  |000196;
     AND.W #$0010                                               ;81D733|291000  |      ;
@@ -10987,13 +10987,13 @@ subPlayerInteraction81D593_0x0F:
     REP #$30                                                   ;81D7AC|C230    |      ;
     LDA.W #$0040                                               ;81D7AE|A94000  |      ;
     EOR.W #$FFFF                                               ;81D7B1|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D7B4|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D7B6|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D7B4|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D7B6|85D2    |0000D2;
     REP #$30                                                   ;81D7B8|C230    |      ;
     LDA.W #$0100                                               ;81D7BA|A90001  |      ;
     EOR.W #$FFFF                                               ;81D7BD|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D7C0|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D7C2|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D7C0|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D7C2|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81D7C4|60      |      ;
@@ -11094,8 +11094,8 @@ subPlayerInteraction81D593_PlayerDiary:
   + REP #$30                                                   ;81D870|C230    |      ;
     LDA.W #$0040                                               ;81D872|A94000  |      ;
     EOR.W #$FFFF                                               ;81D875|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D878|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D87A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D878|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D87A|85D2    |0000D2;
     JMP.W .justReturn                                          ;81D87C|4C6BD9  |81D96B;
  
  
@@ -11117,9 +11117,9 @@ subPlayerInteraction81D593_PlayerDiary:
     AND.W #$0010                                               ;81D8A9|291000  |      ; Married with Eve
     BNE .marriedCheck                                          ;81D8AC|D04F    |81D8FD;
     REP #$30                                                   ;81D8AE|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81D8B0|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81D8B0|A5D2    |0000D2;
     ORA.W #$0080                                               ;81D8B2|098000  |      ;
-    STA.B strcPlayerFlags                                      ;81D8B5|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D8B5|85D2    |0000D2;
     REP #$30                                                   ;81D8B7|C230    |      ;
     LDA.W #$0001                                               ;81D8B9|A90100  |      ;
     STA.B nPlayerAction                                        ;81D8BC|85D4    |0000D4;
@@ -11143,7 +11143,7 @@ subPlayerInteraction81D593_PlayerDiary:
     STA.B nPlayerAction                                        ;81D8E3|85D4    |0000D4;
     REP #$30                                                   ;81D8E5|C230    |      ;
     LDA.W #$004E                                               ;81D8E7|A94E00  |      ;
-    STA.W $0901                                                ;81D8EA|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81D8EA|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81D8ED|20E6CF  |81CFE6;
     SEP #$20                                                   ;81D8F0|E220    |      ;
     LDA.W nTimeState                                           ;81D8F2|AD7309  |000973;
@@ -11158,9 +11158,9 @@ subPlayerInteraction81D593_PlayerDiary:
     ORA.W #$0800                                               ;81D903|090008  |      ;
     STA.L strcDailyFlags.flags3                                ;81D906|8F5E1F7F|7F1F5E;
     REP #$30                                                   ;81D90A|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81D90C|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81D90C|A5D2    |0000D2;
     ORA.W #$0080                                               ;81D90E|098000  |      ;
-    STA.B strcPlayerFlags                                      ;81D911|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D911|85D2    |0000D2;
     REP #$30                                                   ;81D913|C230    |      ;
     LDA.W #$0001                                               ;81D915|A90100  |      ;
     STA.B nPlayerAction                                        ;81D918|85D4    |0000D4;
@@ -11186,7 +11186,7 @@ subPlayerInteraction81D593_PlayerDiary:
     STA.B nPlayerAction                                        ;81D944|85D4    |0000D4;
     REP #$30                                                   ;81D946|C230    |      ;
     LDA.W #$004E                                               ;81D948|A94E00  |      ;
-    STA.W $0901                                                ;81D94B|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81D94B|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81D94E|20E6CF  |81CFE6;
     JMP.W .justReturn                                          ;81D951|4C6BD9  |81D96B;
  
@@ -11211,8 +11211,8 @@ subPlayerInteraction81D593_PlayerDiary:
     REP #$30                                                   ;81D96C|C230    |      ;
     LDA.W #$0040                                               ;81D96E|A94000  |      ;
     EOR.W #$FFFF                                               ;81D971|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D974|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D976|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D974|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D976|85D2    |0000D2;
     RTS                                                        ;81D978|60      |      ;
  
  
@@ -11223,9 +11223,9 @@ subPlayerInteraction81D593_0x11:
     CMP.B #$01                                                 ;81D980|C901    |      ;
     BEQ +                                                      ;81D982|F030    |81D9B4;
     REP #$30                                                   ;81D984|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81D986|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81D986|A5D2    |0000D2;
     ORA.W #$0080                                               ;81D988|098000  |      ;
-    STA.B strcPlayerFlags                                      ;81D98B|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D98B|85D2    |0000D2;
     REP #$30                                                   ;81D98D|C230    |      ;
     LDA.W #$000E                                               ;81D98F|A90E00  |      ;
     STA.B nPlayerAction                                        ;81D992|85D4    |0000D4;
@@ -11251,8 +11251,8 @@ subPlayerInteraction81D593_0x11:
     REP #$30                                                   ;81D9BF|C230    |      ;
     LDA.W #$0040                                               ;81D9C1|A94000  |      ;
     EOR.W #$FFFF                                               ;81D9C4|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81D9C7|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81D9C9|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81D9C7|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D9C9|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81D9CB|60      |      ;
@@ -11267,9 +11267,9 @@ subPlayerInteraction81D593_0x12:
     CMP.B #$02                                                 ;81D9D7|C902    |      ;
     BEQ .case2                                                 ;81D9D9|F07C    |81DA57;
     REP #$30                                                   ;81D9DB|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81D9DD|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81D9DD|A5D2    |0000D2;
     ORA.W #$0100                                               ;81D9DF|090001  |      ;
-    STA.B strcPlayerFlags                                      ;81D9E2|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81D9E2|85D2    |0000D2;
     REP #$20                                                   ;81D9E4|C220    |      ;
     LDA.W nMapEngine_flags                                     ;81D9E6|AD9601  |000196;
     AND.W #$0010                                               ;81D9E9|291000  |      ;
@@ -11340,13 +11340,13 @@ subPlayerInteraction81D593_0x12:
     REP #$30                                                   ;81DA69|C230    |      ;
     LDA.W #$0040                                               ;81DA6B|A94000  |      ;
     EOR.W #$FFFF                                               ;81DA6E|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DA71|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DA73|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DA71|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DA73|85D2    |0000D2;
     REP #$30                                                   ;81DA75|C230    |      ;
     LDA.W #$0100                                               ;81DA77|A90001  |      ;
     EOR.W #$FFFF                                               ;81DA7A|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DA7D|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DA7F|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DA7D|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DA7F|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81DA81|60      |      ;
@@ -11361,9 +11361,9 @@ subPlayerInteraction81D593_0x13:
     CMP.B #$02                                                 ;81DA8D|C902    |      ;
     BEQ .case2                                                 ;81DA8F|F07C    |81DB0D;
     REP #$30                                                   ;81DA91|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81DA93|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81DA93|A5D2    |0000D2;
     ORA.W #$0100                                               ;81DA95|090001  |      ;
-    STA.B strcPlayerFlags                                      ;81DA98|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DA98|85D2    |0000D2;
     REP #$20                                                   ;81DA9A|C220    |      ;
     LDA.W nMapEngine_flags                                     ;81DA9C|AD9601  |000196;
     AND.W #$0010                                               ;81DA9F|291000  |      ;
@@ -11434,13 +11434,13 @@ subPlayerInteraction81D593_0x13:
     REP #$30                                                   ;81DB1F|C230    |      ;
     LDA.W #$0040                                               ;81DB21|A94000  |      ;
     EOR.W #$FFFF                                               ;81DB24|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DB27|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DB29|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DB27|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DB29|85D2    |0000D2;
     REP #$30                                                   ;81DB2B|C230    |      ;
     LDA.W #$0100                                               ;81DB2D|A90001  |      ;
     EOR.W #$FFFF                                               ;81DB30|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DB33|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DB35|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DB33|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DB35|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81DB37|60      |      ;
@@ -11489,8 +11489,8 @@ subPlayerInteraction81D593_0x14:
   + REP #$30                                                   ;81DB84|C230    |      ;
     LDA.W #$0040                                               ;81DB86|A94000  |      ;
     EOR.W #$FFFF                                               ;81DB89|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DB8C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DB8E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DB8C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DB8E|85D2    |0000D2;
     BRA .return                                                ;81DB90|800E    |81DBA0;
  
  
@@ -11523,8 +11523,8 @@ subPlayerInteraction81D593_0x15:
   + REP #$30                                                   ;81DBBF|C230    |      ;
     LDA.W #$0040                                               ;81DBC1|A94000  |      ;
     EOR.W #$FFFF                                               ;81DBC4|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DBC7|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DBC9|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DBC7|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DBC9|85D2    |0000D2;
     RTS                                                        ;81DBCB|60      |      ;
  
  
@@ -11619,8 +11619,8 @@ subPlayerInteraction81D593_0x1E:
     REP #$30                                                   ;81DC4A|C230    |      ;
     LDA.W #$0040                                               ;81DC4C|A94000  |      ;
     EOR.W #$FFFF                                               ;81DC4F|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DC52|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DC54|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DC52|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DC54|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81DC56|60      |      ;
@@ -11706,8 +11706,8 @@ subPlayerInteraction81D593_MariasDiary:
     REP #$30                                                   ;81DCC1|C230    |      ;
     LDA.W #$0040                                               ;81DCC3|A94000  |      ;
     EOR.W #$FFFF                                               ;81DCC6|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DCC9|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DCCB|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DCC9|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DCCB|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81DCCD|60      |      ;
@@ -11728,8 +11728,8 @@ subPlayerInteraction81D593_0x27:
     REP #$30                                                   ;81DCE6|C230    |      ;
     LDA.W #$0040                                               ;81DCE8|A94000  |      ;
     EOR.W #$FFFF                                               ;81DCEB|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DCEE|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DCF0|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DCEE|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DCF0|85D2    |0000D2;
     RTS                                                        ;81DCF2|60      |      ;
  
  
@@ -11748,8 +11748,8 @@ subPlayerInteraction81D593_0x28:
     REP #$30                                                   ;81DD0B|C230    |      ;
     LDA.W #$0040                                               ;81DD0D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DD10|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DD13|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DD15|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DD13|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DD15|85D2    |0000D2;
     RTS                                                        ;81DD17|60      |      ;
  
  
@@ -11768,8 +11768,8 @@ subPlayerInteraction81D593_0x29:
     REP #$30                                                   ;81DD30|C230    |      ;
     LDA.W #$0040                                               ;81DD32|A94000  |      ;
     EOR.W #$FFFF                                               ;81DD35|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DD38|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DD3A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DD38|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DD3A|85D2    |0000D2;
     RTS                                                        ;81DD3C|60      |      ;
  
  
@@ -11788,8 +11788,8 @@ subPlayerInteraction81D593_0x2A:
     REP #$30                                                   ;81DD55|C230    |      ;
     LDA.W #$0040                                               ;81DD57|A94000  |      ;
     EOR.W #$FFFF                                               ;81DD5A|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DD5D|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DD5F|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DD5D|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DD5F|85D2    |0000D2;
     RTS                                                        ;81DD61|60      |      ;
  
  
@@ -11808,8 +11808,8 @@ subPlayerInteraction81D593_0x2B:
     REP #$30                                                   ;81DD7A|C230    |      ;
     LDA.W #$0040                                               ;81DD7C|A94000  |      ;
     EOR.W #$FFFF                                               ;81DD7F|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DD82|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DD84|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DD82|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DD84|85D2    |0000D2;
     RTS                                                        ;81DD86|60      |      ;
  
  
@@ -11828,8 +11828,8 @@ subPlayerInteraction81D593_0x2C:
     REP #$30                                                   ;81DD9F|C230    |      ;
     LDA.W #$0040                                               ;81DDA1|A94000  |      ;
     EOR.W #$FFFF                                               ;81DDA4|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DDA7|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DDA9|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DDA7|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DDA9|85D2    |0000D2;
     RTS                                                        ;81DDAB|60      |      ;
  
  
@@ -11885,8 +11885,8 @@ subPlayerInteraction81D593_NinasDiary:
     REP #$30                                                   ;81DE0F|C230    |      ;
     LDA.W #$0040                                               ;81DE11|A94000  |      ;
     EOR.W #$FFFF                                               ;81DE14|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DE17|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DE19|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DE17|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DE19|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81DE1B|60      |      ;
@@ -11943,8 +11943,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81DE7B|C230    |      ;
     LDA.W #$0040                                               ;81DE7D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DE80|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DE83|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DE85|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DE83|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DE85|85D2    |0000D2;
     JMP.W .return                                              ;81DE87|4C21E2  |81E221;
  
  
@@ -12014,8 +12014,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81DF04|C230    |      ;
     LDA.W #$0040                                               ;81DF06|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF09|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DF0C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DF0E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DF0C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DF0E|85D2    |0000D2;
     JMP.W .return                                              ;81DF10|4C21E2  |81E221;
  
  
@@ -12054,8 +12054,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81DF5B|C230    |      ;
     LDA.W #$0040                                               ;81DF5D|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF60|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DF63|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DF65|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DF63|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DF65|85D2    |0000D2;
     JMP.W .return                                              ;81DF67|4C21E2  |81E221;
  
  
@@ -12070,8 +12070,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81DF7D|C230    |      ;
     LDA.W #$0040                                               ;81DF7F|A94000  |      ;
     EOR.W #$FFFF                                               ;81DF82|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DF85|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DF87|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DF85|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DF87|85D2    |0000D2;
     REP #$20                                                   ;81DF89|C220    |      ;
     LDA.L strcDailyFlags.flags1                                ;81DF8B|AF5A1F7F|7F1F5A;
     ORA.W #$0008                                               ;81DF8F|090800  |      ;
@@ -12090,8 +12090,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81DFAC|C230    |      ;
     LDA.W #$0040                                               ;81DFAE|A94000  |      ;
     EOR.W #$FFFF                                               ;81DFB1|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81DFB4|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81DFB6|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81DFB4|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81DFB6|85D2    |0000D2;
     REP #$20                                                   ;81DFB8|C220    |      ;
     LDA.L strcDailyFlags.flags1                                ;81DFBA|AF5A1F7F|7F1F5A;
     ORA.W #$0004                                               ;81DFBE|090400  |      ;
@@ -12149,8 +12149,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E01F|C230    |      ;
     LDA.W #$0040                                               ;81E021|A94000  |      ;
     EOR.W #$FFFF                                               ;81E024|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E027|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E029|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E027|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E029|85D2    |0000D2;
     JMP.W .return                                              ;81E02B|4C21E2  |81E221;
  
  
@@ -12165,8 +12165,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E041|C230    |      ;
     LDA.W #$0040                                               ;81E043|A94000  |      ;
     EOR.W #$FFFF                                               ;81E046|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E049|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E04B|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E049|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E04B|85D2    |0000D2;
     JMP.W .return                                              ;81E04D|4C21E2  |81E221;
  
  
@@ -12191,8 +12191,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E07B|C230    |      ;
     LDA.W #$0040                                               ;81E07D|A94000  |      ;
     EOR.W #$FFFF                                               ;81E080|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E083|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E085|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E083|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E085|85D2    |0000D2;
     JMP.W .return                                              ;81E087|4C21E2  |81E221;
  
  
@@ -12206,8 +12206,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E09D|C230    |      ;
     LDA.W #$0040                                               ;81E09F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E0A2|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E0A5|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E0A7|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E0A5|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E0A7|85D2    |0000D2;
     REP #$20                                                   ;81E0A9|C220    |      ;
     LDA.L strcDailyFlags.flags1                                ;81E0AB|AF5A1F7F|7F1F5A;
     ORA.W #$0022                                               ;81E0AF|092200  |      ;
@@ -12233,8 +12233,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E0E0|C230    |      ;
     LDA.W #$0040                                               ;81E0E2|A94000  |      ;
     EOR.W #$FFFF                                               ;81E0E5|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E0E8|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E0EA|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E0E8|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E0EA|85D2    |0000D2;
     JMP.W .return                                              ;81E0EC|4C21E2  |81E221;
  
  
@@ -12292,8 +12292,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E14B|C230    |      ;
     LDA.W #$0040                                               ;81E14D|A94000  |      ;
     EOR.W #$FFFF                                               ;81E150|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E153|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E155|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E153|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E155|85D2    |0000D2;
     JMP.W .return                                              ;81E157|4C21E2  |81E221;
  
  
@@ -12308,8 +12308,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E16D|C230    |      ;
     LDA.W #$0040                                               ;81E16F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E172|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E175|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E177|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E175|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E177|85D2    |0000D2;
     JMP.W .return                                              ;81E179|4C21E2  |81E221;
  
  
@@ -12334,8 +12334,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E1A7|C230    |      ;
     LDA.W #$0040                                               ;81E1A9|A94000  |      ;
     EOR.W #$FFFF                                               ;81E1AC|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E1AF|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E1B1|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E1AF|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E1B1|85D2    |0000D2;
     BRA .return                                                ;81E1B3|806C    |81E221;
  
  
@@ -12349,8 +12349,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E1C8|C230    |      ;
     LDA.W #$0040                                               ;81E1CA|A94000  |      ;
     EOR.W #$FFFF                                               ;81E1CD|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E1D0|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E1D2|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E1D0|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E1D2|85D2    |0000D2;
     REP #$20                                                   ;81E1D4|C220    |      ;
     LDA.W #$0002                                               ;81E1D6|A90200  |      ;
     JSL.L fGameEngine_AddChicken                               ;81E1D9|2207C883|83C807;
@@ -12381,8 +12381,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E213|C230    |      ;
     LDA.W #$0040                                               ;81E215|A94000  |      ;
     EOR.W #$FFFF                                               ;81E218|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E21B|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E21D|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E21B|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E21D|85D2    |0000D2;
     BRA .return                                                ;81E21F|8000    |81E221;
  
  
@@ -12402,8 +12402,8 @@ subPlayerInteraction81D593_AnimalNPC:
     REP #$30                                                   ;81E238|C230    |      ;
     LDA.W #$0040                                               ;81E23A|A94000  |      ;
     EOR.W #$FFFF                                               ;81E23D|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E240|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E242|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E240|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E242|85D2    |0000D2;
     RTS                                                        ;81E244|60      |      ;
  
  
@@ -12422,8 +12422,8 @@ subPlayerInteraction81D593_0x2F:
     REP #$30                                                   ;81E25D|C230    |      ;
     LDA.W #$0040                                               ;81E25F|A94000  |      ;
     EOR.W #$FFFF                                               ;81E262|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E265|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E267|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E265|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E267|85D2    |0000D2;
     RTS                                                        ;81E269|60      |      ;
  
  
@@ -12442,8 +12442,8 @@ subPlayerInteraction81D593_0x30:
     REP #$30                                                   ;81E282|C230    |      ;
     LDA.W #$0040                                               ;81E284|A94000  |      ;
     EOR.W #$FFFF                                               ;81E287|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E28A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E28C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E28A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E28C|85D2    |0000D2;
     RTS                                                        ;81E28E|60      |      ;
  
  
@@ -12462,8 +12462,8 @@ subPlayerInteraction81D593_0x31:
     REP #$30                                                   ;81E2A7|C230    |      ;
     LDA.W #$0040                                               ;81E2A9|A94000  |      ;
     EOR.W #$FFFF                                               ;81E2AC|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E2AF|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E2B1|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E2AF|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E2B1|85D2    |0000D2;
     RTS                                                        ;81E2B3|60      |      ;
  
  
@@ -12482,8 +12482,8 @@ subPlayerInteraction81D593_0x32:
     REP #$30                                                   ;81E2CC|C230    |      ;
     LDA.W #$0040                                               ;81E2CE|A94000  |      ;
     EOR.W #$FFFF                                               ;81E2D1|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E2D4|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E2D6|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E2D4|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E2D6|85D2    |0000D2;
     RTS                                                        ;81E2D8|60      |      ;
  
  
@@ -12538,8 +12538,8 @@ subPlayerInteraction81D593_EllensDiary:
     REP #$30                                                   ;81E33C|C230    |      ;
     LDA.W #$0040                                               ;81E33E|A94000  |      ;
     EOR.W #$FFFF                                               ;81E341|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E344|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E346|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E344|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E346|85D2    |0000D2;
  
 .justReturn:
     RTS                                                        ;81E348|60      |      ;
@@ -12560,8 +12560,8 @@ subPlayerInteraction81D593_0x34:
     REP #$30                                                   ;81E361|C230    |      ;
     LDA.W #$0040                                               ;81E363|A94000  |      ;
     EOR.W #$FFFF                                               ;81E366|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E369|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E36B|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E369|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E36B|85D2    |0000D2;
     RTS                                                        ;81E36D|60      |      ;
  
  
@@ -12578,8 +12578,8 @@ subPlayerInteraction81D593_0x35:
     REP #$30                                                   ;81E387|C230    |      ;
     LDA.W #$0040                                               ;81E389|A94000  |      ;
     EOR.W #$FFFF                                               ;81E38C|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E38F|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E391|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E38F|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E391|85D2    |0000D2;
     RTS                                                        ;81E393|60      |      ;
  
  
@@ -12634,8 +12634,8 @@ subPlayerInteraction81D593_AnnsDiary:
     REP #$30                                                   ;81E3F7|C230    |      ;
     LDA.W #$0040                                               ;81E3F9|A94000  |      ;
     EOR.W #$FFFF                                               ;81E3FC|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E3FF|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E401|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E3FF|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E401|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81E403|60      |      ;
@@ -12656,8 +12656,8 @@ subPlayerInteraction81D593_0x37:
     REP #$30                                                   ;81E41C|C230    |      ;
     LDA.W #$0040                                               ;81E41E|A94000  |      ;
     EOR.W #$FFFF                                               ;81E421|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E424|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E426|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E424|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E426|85D2    |0000D2;
     RTS                                                        ;81E428|60      |      ;
  
  
@@ -12676,8 +12676,8 @@ subPlayerInteraction81D593_0x38:
     REP #$30                                                   ;81E441|C230    |      ;
     LDA.W #$0040                                               ;81E443|A94000  |      ;
     EOR.W #$FFFF                                               ;81E446|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E449|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E44B|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E449|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E44B|85D2    |0000D2;
     RTS                                                        ;81E44D|60      |      ;
  
  
@@ -12696,8 +12696,8 @@ subPlayerInteraction81D593_0x39:
     REP #$30                                                   ;81E466|C230    |      ;
     LDA.W #$0040                                               ;81E468|A94000  |      ;
     EOR.W #$FFFF                                               ;81E46B|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E46E|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E470|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E46E|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E470|85D2    |0000D2;
     RTS                                                        ;81E472|60      |      ;
  
  
@@ -12716,8 +12716,8 @@ subPlayerInteraction81D593_0x3A:
     REP #$30                                                   ;81E48B|C230    |      ;
     LDA.W #$0040                                               ;81E48D|A94000  |      ;
     EOR.W #$FFFF                                               ;81E490|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E493|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E495|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E493|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E495|85D2    |0000D2;
     RTS                                                        ;81E497|60      |      ;
  
  
@@ -12736,8 +12736,8 @@ subPlayerInteraction81D593_0x3B:
     REP #$30                                                   ;81E4B0|C230    |      ;
     LDA.W #$0040                                               ;81E4B2|A94000  |      ;
     EOR.W #$FFFF                                               ;81E4B5|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E4B8|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E4BA|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E4B8|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E4BA|85D2    |0000D2;
     RTS                                                        ;81E4BC|60      |      ;
  
  
@@ -12756,8 +12756,8 @@ subPlayerInteraction81D593_0x3C:
     REP #$30                                                   ;81E4D5|C230    |      ;
     LDA.W #$0040                                               ;81E4D7|A94000  |      ;
     EOR.W #$FFFF                                               ;81E4DA|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E4DD|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E4DF|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E4DD|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E4DF|85D2    |0000D2;
     RTS                                                        ;81E4E1|60      |      ;
  
  
@@ -12776,8 +12776,8 @@ subPlayerInteraction81D593_0x3D:
     REP #$30                                                   ;81E4FA|C230    |      ;
     LDA.W #$0040                                               ;81E4FC|A94000  |      ;
     EOR.W #$FFFF                                               ;81E4FF|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E502|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E504|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E502|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E504|85D2    |0000D2;
     RTS                                                        ;81E506|60      |      ;
  
  
@@ -12796,8 +12796,8 @@ subPlayerInteraction81D593_0x3E:
     REP #$30                                                   ;81E51F|C230    |      ;
     LDA.W #$0040                                               ;81E521|A94000  |      ;
     EOR.W #$FFFF                                               ;81E524|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E527|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E529|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E527|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E529|85D2    |0000D2;
     RTS                                                        ;81E52B|60      |      ;
  
  
@@ -12852,8 +12852,8 @@ subPlayerInteraction81D593_EvesDiary:
     REP #$30                                                   ;81E58F|C230    |      ;
     LDA.W #$0040                                               ;81E591|A94000  |      ;
     EOR.W #$FFFF                                               ;81E594|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E597|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E599|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E597|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E599|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81E59B|60      |      ;
@@ -12917,8 +12917,8 @@ subPlayerInteraction81D593_0x40:
     REP #$30                                                   ;81E608|C230    |      ;
     LDA.W #$0040                                               ;81E60A|A94000  |      ;
     EOR.W #$FFFF                                               ;81E60D|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E610|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E612|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E610|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E612|85D2    |0000D2;
     JMP.W .justReturn                                          ;81E614|4C9FE6  |81E69F;
  
  
@@ -12933,8 +12933,8 @@ subPlayerInteraction81D593_0x40:
     REP #$30                                                   ;81E62A|C230    |      ;
     LDA.W #$0040                                               ;81E62C|A94000  |      ;
     EOR.W #$FFFF                                               ;81E62F|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E632|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E634|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E632|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E634|85D2    |0000D2;
     JMP.W .justReturn                                          ;81E636|4C9FE6  |81E69F;
  
  
@@ -12949,8 +12949,8 @@ subPlayerInteraction81D593_0x40:
     REP #$30                                                   ;81E64C|C230    |      ;
     LDA.W #$0040                                               ;81E64E|A94000  |      ;
     EOR.W #$FFFF                                               ;81E651|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E654|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E656|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E654|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E656|85D2    |0000D2;
     JMP.W .justReturn                                          ;81E658|4C9FE6  |81E69F;
  
  
@@ -12965,8 +12965,8 @@ subPlayerInteraction81D593_0x40:
     REP #$30                                                   ;81E66E|C230    |      ;
     LDA.W #$0040                                               ;81E670|A94000  |      ;
     EOR.W #$FFFF                                               ;81E673|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E676|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E678|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E676|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E678|85D2    |0000D2;
     JMP.W .justReturn                                          ;81E67A|4C9FE6  |81E69F;
  
  
@@ -12981,8 +12981,8 @@ subPlayerInteraction81D593_0x40:
     REP #$30                                                   ;81E690|C230    |      ;
     LDA.W #$0040                                               ;81E692|A94000  |      ;
     EOR.W #$FFFF                                               ;81E695|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E698|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E69A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E698|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E69A|85D2    |0000D2;
     JMP.W .justReturn                                          ;81E69C|4C9FE6  |81E69F;
  
  
@@ -13002,25 +13002,25 @@ subPlayerInteraction81D593_0x40:
     REP #$30                                                   ;81E6B6|C230    |      ;
     LDA.W #$0040                                               ;81E6B8|A94000  |      ;
     EOR.W #$FFFF                                               ;81E6BB|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E6BE|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E6C0|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E6BE|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E6C0|85D2    |0000D2;
     RTS                                                        ;81E6C2|60      |      ;
  
  
 subPlayerInteraction81D593_0x41:
     REP #$30                                                   ;81E6C3|C230    |      ;
     REP #$30                                                   ;81E6C5|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81E6C7|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81E6C7|A5D2    |0000D2;
     ORA.W #$0020                                               ;81E6C9|092000  |      ;
-    STA.B strcPlayerFlags                                      ;81E6CC|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E6CC|85D2    |0000D2;
     REP #$30                                                   ;81E6CE|C230    |      ;
     LDA.W #$0003                                               ;81E6D0|A90300  |      ;
     STA.B nPlayerAction                                        ;81E6D3|85D4    |0000D4;
     REP #$30                                                   ;81E6D5|C230    |      ;
     LDA.W #$0040                                               ;81E6D7|A94000  |      ;
     EOR.W #$FFFF                                               ;81E6DA|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E6DD|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E6DF|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E6DD|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E6DF|85D2    |0000D2;
     SEP #$20                                                   ;81E6E1|E220    |      ;
     LDA.B #$0C                                                 ;81E6E3|A90C    |      ;
     JSL.L fPlayerEnergyHandler_81D061                          ;81E6E5|2261D081|81D061;
@@ -13042,9 +13042,9 @@ subPlayerInteraction81D593_0x42:
  
 .default:
     REP #$30                                                   ;81E700|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81E702|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81E702|A5D2    |0000D2;
     ORA.W #$0080                                               ;81E704|098000  |      ;
-    STA.B strcPlayerFlags                                      ;81E707|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E707|85D2    |0000D2;
     REP #$30                                                   ;81E709|C230    |      ;
     LDA.W #$0001                                               ;81E70B|A90100  |      ;
     STA.B nPlayerAction                                        ;81E70E|85D4    |0000D4;
@@ -13114,8 +13114,8 @@ subPlayerInteraction81D593_0x42:
     REP #$30                                                   ;81E791|C230    |      ;
     LDA.W #$0040                                               ;81E793|A94000  |      ;
     EOR.W #$FFFF                                               ;81E796|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81E799|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81E79B|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81E799|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81E79B|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81E79D|60      |      ;
@@ -13426,8 +13426,8 @@ subPlayerInteraction81D593_0x43:
   + REP #$30                                                   ;81EA02|C230    |      ;
     LDA.W #$0040                                               ;81EA04|A94000  |      ;
     EOR.W #$FFFF                                               ;81EA07|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81EA0A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81EA0C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81EA0A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81EA0C|85D2    |0000D2;
     JMP.W .return                                              ;81EA0E|4CD4EB  |81EBD4;
  
  
@@ -13466,8 +13466,8 @@ subPlayerInteraction81D593_0x43:
   + REP #$30                                                   ;81EA51|C230    |      ;
     LDA.W #$0040                                               ;81EA53|A94000  |      ;
     EOR.W #$FFFF                                               ;81EA56|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81EA59|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81EA5B|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81EA59|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81EA5B|85D2    |0000D2;
     REP #$20                                                   ;81EA5D|C220    |      ;
     LDA.L strcDailyFlags.flags4                                ;81EA5F|AF601F7F|7F1F60;
     AND.W #$2000                                               ;81EA63|290020  |      ;
@@ -13895,8 +13895,8 @@ subPlayerInteraction81D593_0x44:
   + REP #$30                                                   ;81EDC5|C230    |      ;
     LDA.W #$0040                                               ;81EDC7|A94000  |      ;
     EOR.W #$FFFF                                               ;81EDCA|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81EDCD|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81EDCF|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81EDCD|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81EDCF|85D2    |0000D2;
     JMP.W .return                                              ;81EDD1|4CACEF  |81EFAC;
  
  
@@ -13935,8 +13935,8 @@ subPlayerInteraction81D593_0x44:
   + REP #$30                                                   ;81EE14|C230    |      ;
     LDA.W #$0040                                               ;81EE16|A94000  |      ;
     EOR.W #$FFFF                                               ;81EE19|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81EE1C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81EE1E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81EE1C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81EE1E|85D2    |0000D2;
     REP #$20                                                   ;81EE20|C220    |      ;
     LDA.L strcDailyFlags.flags4                                ;81EE22|AF601F7F|7F1F60;
     AND.W #$1000                                               ;81EE26|290010  |      ;
@@ -14156,9 +14156,9 @@ subPlayerInteraction81D593_0x45:
  
 .case1:
     REP #$30                                                   ;81EFE1|C230    |      ;
-    LDA.B strcPlayerFlags                                      ;81EFE3|A5D2    |0000D2;
+    LDA.B nPlayerFlags                                         ;81EFE3|A5D2    |0000D2;
     ORA.W #$0080                                               ;81EFE5|098000  |      ;
-    STA.B strcPlayerFlags                                      ;81EFE8|85D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81EFE8|85D2    |0000D2;
     REP #$30                                                   ;81EFEA|C230    |      ;
     LDA.W #$0001                                               ;81EFEC|A90100  |      ;
     STA.B nPlayerAction                                        ;81EFEF|85D4    |0000D4;
@@ -14216,8 +14216,8 @@ subPlayerInteraction81D593_0x45:
     REP #$30                                                   ;81F054|C230    |      ;
     LDA.W #$0040                                               ;81F056|A94000  |      ;
     EOR.W #$FFFF                                               ;81F059|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F05C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F05E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F05C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F05E|85D2    |0000D2;
  
 .return:
     RTS                                                        ;81F060|60      |      ;
@@ -14315,8 +14315,8 @@ subPlayerInteraction81D593_0x46:
   + REP #$30                                                   ;81F112|C230    |      ;
     LDA.W #$0040                                               ;81F114|A94000  |      ;
     EOR.W #$FFFF                                               ;81F117|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F11A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F11C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F11A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F11C|85D2    |0000D2;
     BRA .return                                                ;81F11E|8000    |81F120;
  
  
@@ -14443,8 +14443,8 @@ subPlayerInteraction81D593_0x47:
   + REP #$30                                                   ;81F202|C230    |      ;
     LDA.W #$0040                                               ;81F204|A94000  |      ;
     EOR.W #$FFFF                                               ;81F207|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F20A|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F20C|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F20A|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F20C|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F20E|4CD9F2  |81F2D9;
  
  
@@ -14667,8 +14667,8 @@ subPlayerInteraction81D593_0x48:
   + REP #$30                                                   ;81F3CA|C230    |      ;
     LDA.W #$0040                                               ;81F3CC|A94000  |      ;
     EOR.W #$FFFF                                               ;81F3CF|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F3D2|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F3D4|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F3D2|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F3D4|85D2    |0000D2;
     JMP.W .return                                              ;81F3D6|4C0DF4  |81F40D;
  
  
@@ -14761,8 +14761,8 @@ subPlayerInteraction81D593_0x49:
   + REP #$30                                                   ;81F480|C230    |      ;
     LDA.W #$0040                                               ;81F482|A94000  |      ;
     EOR.W #$FFFF                                               ;81F485|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F488|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F48A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F488|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F48A|85D2    |0000D2;
     JMP.W .return                                              ;81F48C|4C8FF4  |81F48F;
  
  
@@ -14890,8 +14890,8 @@ subPlayerInteraction81D593_Return:
     REP #$30                                                   ;81F587|C230    |      ;
     LDA.W #$0040                                               ;81F589|A94000  |      ;
     EOR.W #$FFFF                                               ;81F58C|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F58F|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F591|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F58F|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F591|85D2    |0000D2;
     RTS                                                        ;81F593|60      |      ;
  
  
@@ -14903,8 +14903,8 @@ subPlayerInteraction81D593_Return:
     REP #$30                                                   ;81F5A3|C230    |      ;
     LDA.W #$0040                                               ;81F5A5|A94000  |      ;
     EOR.W #$FFFF                                               ;81F5A8|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F5AB|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F5AD|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F5AB|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F5AD|85D2    |0000D2;
     RTS                                                        ;81F5AF|60      |      ;
  
  
@@ -15014,7 +15014,7 @@ subPlayerInteraction81D593_0x51:
     STA.B nPlayerAction                                        ;81F67C|85D4    |0000D4;
     REP #$30                                                   ;81F67E|C230    |      ;
     LDA.W #$0030                                               ;81F680|A93000  |      ;
-    STA.W $0901                                                ;81F683|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81F683|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81F686|20E6CF  |81CFE6;
     REP #$30                                                   ;81F689|C230    |      ;
     LDA.W #$0001                                               ;81F68B|A90100  |      ;
@@ -15034,8 +15034,8 @@ subPlayerInteraction81D593_0x51:
     REP #$30                                                   ;81F6A7|C230    |      ;
     LDA.W #$0040                                               ;81F6A9|A94000  |      ;
     EOR.W #$FFFF                                               ;81F6AC|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F6AF|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F6B1|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F6AF|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F6B1|85D2    |0000D2;
     BRA fReturn_81F6D6                                         ;81F6B3|8021    |81F6D6;
  
  
@@ -15048,8 +15048,8 @@ subPlayerInteraction81D593_0x51:
     REP #$30                                                   ;81F6C1|C230    |      ;
     LDA.W #$0040                                               ;81F6C3|A94000  |      ;
     EOR.W #$FFFF                                               ;81F6C6|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F6C9|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F6CB|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F6C9|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F6CB|85D2    |0000D2;
     REP #$30                                                   ;81F6CD|C230    |      ;
     LDA.W #$0000                                               ;81F6CF|A90000  |      ;
     STA.B nPlayerAction                                        ;81F6D2|85D4    |0000D4;
@@ -15166,7 +15166,7 @@ subPlayerInteraction81D593_0x52:
     STA.B nPlayerAction                                        ;81F7A4|85D4    |0000D4;
     REP #$30                                                   ;81F7A6|C230    |      ;
     LDA.W #$00FB                                               ;81F7A8|A9FB00  |      ;
-    STA.W $0901                                                ;81F7AB|8D0109  |000901;
+    STA.W nFoodToEatSpriteIndex                                ;81F7AB|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81F7AE|20E6CF  |81CFE6;
     REP #$30                                                   ;81F7B1|C230    |      ;
     LDA.W #$0003                                               ;81F7B3|A90300  |      ;
@@ -15186,8 +15186,8 @@ subPlayerInteraction81D593_0x52:
     REP #$30                                                   ;81F7CF|C230    |      ;
     LDA.W #$0040                                               ;81F7D1|A94000  |      ;
     EOR.W #$FFFF                                               ;81F7D4|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F7D7|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F7D9|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F7D7|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F7D9|85D2    |0000D2;
     BRA .return                                                ;81F7DB|8021    |81F7FE;
  
  
@@ -15200,8 +15200,8 @@ subPlayerInteraction81D593_0x52:
     REP #$30                                                   ;81F7E9|C230    |      ;
     LDA.W #$0040                                               ;81F7EB|A94000  |      ;
     EOR.W #$FFFF                                               ;81F7EE|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F7F1|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F7F3|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F7F1|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F7F3|85D2    |0000D2;
     REP #$30                                                   ;81F7F5|C230    |      ;
     LDA.W #$0000                                               ;81F7F7|A90000  |      ;
     STA.B nPlayerAction                                        ;81F7FA|85D4    |0000D4;
@@ -15229,8 +15229,8 @@ subPlayerInteraction81D593_0x53:
     REP #$30                                                   ;81F820|C230    |      ;
     LDA.W #$0040                                               ;81F822|A94000  |      ;
     EOR.W #$FFFF                                               ;81F825|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F828|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F82A|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F828|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F82A|85D2    |0000D2;
     REP #$30                                                   ;81F82C|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;81F82E|AD8509  |000985;
     LSR A                                                      ;81F831|4A      |      ;
@@ -15328,8 +15328,8 @@ subPlayerInteraction81D593_FloristNotebook:
     REP #$30                                                   ;81F8CB|C230    |      ;
     LDA.W #$0040                                               ;81F8CD|A94000  |      ;
     EOR.W #$FFFF                                               ;81F8D0|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F8D3|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F8D5|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F8D3|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F8D5|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F8D7|4C1EF9  |81F91E;
  
  
@@ -15344,8 +15344,8 @@ subPlayerInteraction81D593_FloristNotebook:
     REP #$30                                                   ;81F8ED|C230    |      ;
     LDA.W #$0040                                               ;81F8EF|A94000  |      ;
     EOR.W #$FFFF                                               ;81F8F2|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F8F5|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F8F7|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F8F5|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F8F7|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F8F9|4C1EF9  |81F91E;
  
  
@@ -15360,8 +15360,8 @@ subPlayerInteraction81D593_FloristNotebook:
     REP #$30                                                   ;81F90F|C230    |      ;
     LDA.W #$0040                                               ;81F911|A94000  |      ;
     EOR.W #$FFFF                                               ;81F914|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F917|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F919|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F917|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F919|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F91B|4C1EF9  |81F91E;
  
  
@@ -15381,8 +15381,8 @@ subPlayerInteraction81D593_FloristNotebook:
     REP #$30                                                   ;81F935|C230    |      ;
     LDA.W #$0040                                               ;81F937|A94000  |      ;
     EOR.W #$FFFF                                               ;81F93A|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F93D|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F93F|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F93D|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F93F|85D2    |0000D2;
     RTS                                                        ;81F941|60      |      ;
  
  
@@ -15444,8 +15444,8 @@ subPlayerInteraction81D593_AnimalNotebook:
     REP #$30                                                   ;81F9AE|C230    |      ;
     LDA.W #$0040                                               ;81F9B0|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9B3|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F9B6|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F9B8|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F9B6|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F9B8|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F9BA|4C45FA  |81FA45;
  
  
@@ -15460,8 +15460,8 @@ subPlayerInteraction81D593_AnimalNotebook:
     REP #$30                                                   ;81F9D0|C230    |      ;
     LDA.W #$0040                                               ;81F9D2|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9D5|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F9D8|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F9DA|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F9D8|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F9DA|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F9DC|4C45FA  |81FA45;
  
  
@@ -15476,8 +15476,8 @@ subPlayerInteraction81D593_AnimalNotebook:
     REP #$30                                                   ;81F9F2|C230    |      ;
     LDA.W #$0040                                               ;81F9F4|A94000  |      ;
     EOR.W #$FFFF                                               ;81F9F7|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81F9FA|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81F9FC|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81F9FA|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81F9FC|85D2    |0000D2;
     JMP.W .justReturn                                          ;81F9FE|4C45FA  |81FA45;
  
  
@@ -15492,8 +15492,8 @@ subPlayerInteraction81D593_AnimalNotebook:
     REP #$30                                                   ;81FA14|C230    |      ;
     LDA.W #$0040                                               ;81FA16|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA19|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81FA1C|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81FA1E|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81FA1C|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81FA1E|85D2    |0000D2;
     JMP.W .justReturn                                          ;81FA20|4C45FA  |81FA45;
  
  
@@ -15508,8 +15508,8 @@ subPlayerInteraction81D593_AnimalNotebook:
     REP #$30                                                   ;81FA36|C230    |      ;
     LDA.W #$0040                                               ;81FA38|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA3B|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81FA3E|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81FA40|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81FA3E|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81FA40|85D2    |0000D2;
     JMP.W .justReturn                                          ;81FA42|4C45FA  |81FA45;
  
  
@@ -15529,8 +15529,8 @@ subPlayerInteraction81D593_AnimalNotebook:
     REP #$30                                                   ;81FA5C|C230    |      ;
     LDA.W #$0040                                               ;81FA5E|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA61|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81FA64|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81FA66|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81FA64|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81FA66|85D2    |0000D2;
     RTS                                                        ;81FA68|60      |      ;
  
  
@@ -15544,8 +15544,8 @@ subPlayerInteraction81D593_0x56:
     REP #$30                                                   ;81FA77|C230    |      ;
     LDA.W #$0040                                               ;81FA79|A94000  |      ;
     EOR.W #$FFFF                                               ;81FA7C|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81FA7F|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81FA81|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81FA7F|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81FA81|85D2    |0000D2;
  
   + RTS                                                        ;81FA83|60      |      ;
  
@@ -15568,8 +15568,8 @@ subPlayerInteraction81D593_0x57:
     REP #$30                                                   ;81FAA7|C230    |      ;
     LDA.W #$0040                                               ;81FAA9|A94000  |      ;
     EOR.W #$FFFF                                               ;81FAAC|49FFFF  |      ;
-    AND.B strcPlayerFlags                                      ;81FAAF|25D2    |0000D2;
-    STA.B strcPlayerFlags                                      ;81FAB1|85D2    |0000D2;
+    AND.B nPlayerFlags                                         ;81FAAF|25D2    |0000D2;
+    STA.B nPlayerFlags                                         ;81FAB1|85D2    |0000D2;
     RTS                                                        ;81FAB3|60      |      ;
  
  

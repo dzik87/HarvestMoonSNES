@@ -9,6 +9,7 @@
     
     ; Structures
     incsrc "structures.asm"
+    incsrc "enums.asm"
     
     ; Source Code
     incsrc "SOURCE/helpers.asm"
