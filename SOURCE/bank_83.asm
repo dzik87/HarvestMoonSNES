@@ -411,7 +411,7 @@ fAudioUnknown_8382C6:
     LDA.W #$00B4                                               ;8382E7|A9B400  |      ;
     JSL.L fCore_WaitForNMITimes                                ;8382EA|225D8680|80865D;
     SEP #$20                                                   ;8382EE|E220    |      ;
-    LDA.W n8DestinationId                                      ;8382F0|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;8382F0|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;8382F3|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8382F5|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;8382F9|22018483|838401;
@@ -4618,9 +4618,9 @@ fGameEngine_SetDefaults:
     LDA.B #$00                                                 ;83AA11|A900    |      ;
     STA.L nNewBornCowAffection                                 ;83AA13|8F2B1F7F|7F1F2B;
     LDA.B #$00                                                 ;83AA17|A900    |      ;
-    STA.L nDogMapId                                            ;83AA19|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;83AA19|8F301F7F|7F1F30;
     LDA.B #$00                                                 ;83AA1D|A900    |      ;
-    STA.L $7F1F31                                              ;83AA1F|8F311F7F|7F1F31;
+    STA.L nHorseAreaIdMaybe                                    ;83AA1F|8F311F7F|7F1F31;
     LDA.B #$00                                                 ;83AA23|A900    |      ;
     STA.L nHorseAge                                            ;83AA25|8F321F7F|7F1F32;
     LDA.B #$00                                                 ;83AA29|A900    |      ;
@@ -4915,7 +4915,7 @@ fGameEngine_FirstNight:
     STZ.W $084A                                                ;83AD55|9C4A08  |00084A;
     STZ.B $DC                                                  ;83AD58|64DC    |0000DC;
     SEP #$20                                                   ;83AD5A|E220    |      ;
-    STZ.W n8DestinationId                                      ;83AD5C|9C8B09  |00098B;
+    STZ.W nDestinationAreaId                                   ;83AD5C|9C8B09  |00098B;
     REP #$20                                                   ;83AD5F|C220    |      ;
     STZ.W nMapScrool_SpeedX                                    ;83AD61|9C7C08  |00087C;
     STZ.W nMapScrool_SpeedY                                    ;83AD64|9C7E08  |00087E;
@@ -5835,10 +5835,10 @@ fGameEngine_LoadGame:
     STA.L nNewBornCowAffection                                 ;83B370|8F2B1F7F|7F1F2B;
     LDY.W #$0013                                               ;83B374|A01300  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B377|B772    |000072;
-    STA.L nDogMapId                                            ;83B379|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;83B379|8F301F7F|7F1F30;
     LDY.W #$0014                                               ;83B37D|A01400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B380|B772    |000072;
-    STA.L $7F1F31                                              ;83B382|8F311F7F|7F1F31;
+    STA.L nHorseAreaIdMaybe                                    ;83B382|8F311F7F|7F1F31;
     LDY.W #$0015                                               ;83B386|A01500  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B389|B772    |000072;
     STA.L nHorseAge                                            ;83B38B|8F321F7F|7F1F32;
@@ -6214,10 +6214,10 @@ fGameEngine_SaveGame:
     LDA.L nNewBornCowAffection                                 ;83B74C|AF2B1F7F|7F1F2B;
     STA.B [ptrUnknown0x72],Y                                   ;83B750|9772    |000072;
     LDY.W #$0013                                               ;83B752|A01300  |      ;
-    LDA.L nDogMapId                                            ;83B755|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83B755|AF301F7F|7F1F30;
     STA.B [ptrUnknown0x72],Y                                   ;83B759|9772    |000072;
     LDY.W #$0014                                               ;83B75B|A01400  |      ;
-    LDA.L $7F1F31                                              ;83B75E|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83B75E|AF311F7F|7F1F31;
     STA.B [ptrUnknown0x72],Y                                   ;83B762|9772    |000072;
     LDY.W #$0015                                               ;83B764|A01500  |      ;
     LDA.L nHorseAge                                            ;83B767|AF321F7F|7F1F32;
@@ -8185,7 +8185,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + SEP #$20                                                   ;83C661|E220    |      ;
-    LDA.L nDogMapId                                            ;83C663|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C663|AF301F7F|7F1F30;
     CMP.B #$04                                                 ;83C667|C904    |      ;
     BCS .label30                                               ;83C669|B00C    |83C677;
     LDA.B nMapEngine_DestinationId                             ;83C66B|A522    |000022;
@@ -8199,7 +8199,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label30:
     SEP #$20                                                   ;83C677|E220    |      ;
-    LDA.L nDogMapId                                            ;83C679|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C679|AF301F7F|7F1F30;
     CMP.B #$08                                                 ;83C67D|C908    |      ;
     BCS .label31                                               ;83C67F|B012    |83C693;
     LDA.B nMapEngine_DestinationId                             ;83C681|A522    |000022;
@@ -8218,7 +8218,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label31:
     SEP #$20                                                   ;83C693|E220    |      ;
-    LDA.L nDogMapId                                            ;83C695|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C695|AF301F7F|7F1F30;
     CMP.B #$10                                                 ;83C699|C910    |      ;
     BCS .label33                                               ;83C69B|B012    |83C6AF;
     LDA.B nMapEngine_DestinationId                             ;83C69D|A522    |000022;
@@ -8237,7 +8237,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label33:
     SEP #$20                                                   ;83C6AF|E220    |      ;
-    LDA.L nDogMapId                                            ;83C6B1|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C6B1|AF301F7F|7F1F30;
     CMP.B #$14                                                 ;83C6B5|C914    |      ;
     BCS .label34                                               ;83C6B7|B012    |83C6CB;
     LDA.B nMapEngine_DestinationId                             ;83C6B9|A522    |000022;
@@ -8256,7 +8256,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label34:
     SEP #$20                                                   ;83C6CB|E220    |      ;
-    LDA.L nDogMapId                                            ;83C6CD|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C6CD|AF301F7F|7F1F30;
     CMP.B #$18                                                 ;83C6D1|C918    |      ;
     BCS .label35                                               ;83C6D3|B012    |83C6E7;
     LDA.B nMapEngine_DestinationId                             ;83C6D5|A522    |000022;
@@ -8275,7 +8275,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label35:
     SEP #$20                                                   ;83C6E7|E220    |      ;
-    LDA.L nDogMapId                                            ;83C6E9|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C6E9|AF301F7F|7F1F30;
     CMP.B #$31                                                 ;83C6ED|C931    |      ;
     BCC .label36                                               ;83C6EF|900B    |83C6FC;
     LDA.B nMapEngine_DestinationId                             ;83C6F1|A522    |000022;
@@ -8289,7 +8289,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label36:
     SEP #$20                                                   ;83C6FC|E220    |      ;
-    LDA.L nDogMapId                                            ;83C6FE|AF301F7F|7F1F30;
+    LDA.L nDogAreaId                                           ;83C6FE|AF301F7F|7F1F30;
     CMP.B nMapEngine_DestinationId                             ;83C702|C522    |000022;
     BEQ .jump1                                                 ;83C704|F003    |83C709;
     JMP.W .label37                                             ;83C706|4C34C7  |83C734;
@@ -8326,7 +8326,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + SEP #$20                                                   ;83C74C|E220    |      ;
-    LDA.L $7F1F31                                              ;83C74E|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83C74E|AF311F7F|7F1F31;
     CMP.B #$04                                                 ;83C752|C904    |      ;
     BCS .label38                                               ;83C754|B00B    |83C761;
     LDA.B nMapEngine_DestinationId                             ;83C756|A522    |000022;
@@ -8340,7 +8340,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label38:
     SEP #$20                                                   ;83C761|E220    |      ;
-    LDA.L $7F1F31                                              ;83C763|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83C763|AF311F7F|7F1F31;
     CMP.B #$08                                                 ;83C767|C908    |      ;
     BCS .label39                                               ;83C769|B012    |83C77D;
     LDA.B nMapEngine_DestinationId                             ;83C76B|A522    |000022;
@@ -8359,7 +8359,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label39:
     SEP #$20                                                   ;83C77D|E220    |      ;
-    LDA.L $7F1F31                                              ;83C77F|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83C77F|AF311F7F|7F1F31;
     CMP.B #$10                                                 ;83C783|C910    |      ;
     BCS .label40                                               ;83C785|B012    |83C799;
     LDA.B nMapEngine_DestinationId                             ;83C787|A522    |000022;
@@ -8378,7 +8378,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label40:
     SEP #$20                                                   ;83C799|E220    |      ;
-    LDA.L $7F1F31                                              ;83C79B|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83C79B|AF311F7F|7F1F31;
     CMP.B #$14                                                 ;83C79F|C914    |      ;
     BCS .label41                                               ;83C7A1|B012    |83C7B5;
     LDA.B nMapEngine_DestinationId                             ;83C7A3|A522    |000022;
@@ -8397,7 +8397,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label41:
     SEP #$20                                                   ;83C7B5|E220    |      ;
-    LDA.L $7F1F31                                              ;83C7B7|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83C7B7|AF311F7F|7F1F31;
     CMP.B #$31                                                 ;83C7BB|C931    |      ;
     BCC .label42                                               ;83C7BD|900B    |83C7CA;
     LDA.B nMapEngine_DestinationId                             ;83C7BF|A522    |000022;
@@ -8411,7 +8411,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label42:
     SEP #$20                                                   ;83C7CA|E220    |      ;
-    LDA.L $7F1F31                                              ;83C7CC|AF311F7F|7F1F31;
+    LDA.L nHorseAreaIdMaybe                                    ;83C7CC|AF311F7F|7F1F31;
     CMP.B nMapEngine_DestinationId                             ;83C7D0|C522    |000022;
     BEQ .jump2                                                 ;83C7D2|F003    |83C7D7;
     JMP.W .return                                              ;83C7D4|4C06C8  |83C806;
@@ -9260,7 +9260,7 @@ CODE_83CEAE:
     STA.L strcEventFlags.flags3                                ;83CED1|8F681F7F|7F1F68;
     SEP #$20                                                   ;83CED5|E220    |      ;
     LDA.B #$03                                                 ;83CED7|A903    |      ;
-    STA.W nNameDestinationId                                   ;83CED9|8D9F09  |00099F;
+    STA.W nNameInputLenght                                     ;83CED9|8D9F09  |00099F;
     RTS                                                        ;83CEDC|60      |      ;
  
  
@@ -9281,7 +9281,7 @@ CODE_83CEDD:
     STA.L nDogY                                                ;83CF03|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;83CF07|E220    |      ;
     LDA.B #$00                                                 ;83CF09|A900    |      ;
-    STA.L nDogMapId                                            ;83CF0B|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;83CF0B|8F301F7F|7F1F30;
     RTS                                                        ;83CF0F|60      |      ;
  
  
@@ -11251,7 +11251,7 @@ CODE_83DEF2:
     BEQ CODE_83DF06                                            ;83DEFB|F009    |83DF06;
     SEP #$20                                                   ;83DEFD|E220    |      ;
     LDA.B #$17                                                 ;83DEFF|A917    |      ;
-    STA.W n8DestinationId                                      ;83DF01|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;83DF01|8D8B09  |00098B;
     BRA CODE_83DF1A                                            ;83DF04|8014    |83DF1A;
  
  
@@ -11262,7 +11262,7 @@ CODE_83DF06:
     BEQ CODE_83DF1A                                            ;83DF0F|F009    |83DF1A;
     SEP #$20                                                   ;83DF11|E220    |      ;
     LDA.B #$16                                                 ;83DF13|A916    |      ;
-    STA.W n8DestinationId                                      ;83DF15|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;83DF15|8D8B09  |00098B;
     BRA CODE_83DF1A                                            ;83DF18|8000    |83DF1A;
  
  
@@ -11433,14 +11433,14 @@ CODE_83E0A1:
     BNE CODE_83E0C3                                            ;83E0B9|D008    |83E0C3;
     SEP #$20                                                   ;83E0BB|E220    |      ;
     LDA.B #$05                                                 ;83E0BD|A905    |      ;
-    STA.W nNameDestinationId                                   ;83E0BF|8D9F09  |00099F;
+    STA.W nNameInputLenght                                     ;83E0BF|8D9F09  |00099F;
     RTS                                                        ;83E0C2|60      |      ;
  
  
 CODE_83E0C3:
     SEP #$20                                                   ;83E0C3|E220    |      ;
     LDA.B #$06                                                 ;83E0C5|A906    |      ;
-    STA.W nNameDestinationId                                   ;83E0C7|8D9F09  |00099F;
+    STA.W nNameInputLenght                                     ;83E0C7|8D9F09  |00099F;
     RTS                                                        ;83E0CA|60      |      ;
  
  
@@ -11846,10 +11846,10 @@ fAreaInit_CrossRoad:
     REP #$20                                                   ;83E423|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83E425|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83E429|290100  |      ;
-    BNE CODE_83E464                                            ;83E42C|D036    |83E464;
+    BNE .horseEventCheck                                       ;83E42C|D036    |83E464;
     LDA.L strcEventFlags.flags3                                ;83E42E|AF681F7F|7F1F68;
     AND.W #$0010                                               ;83E432|291000  |      ;
-    BNE CODE_83E454                                            ;83E435|D01D    |83E454;
+    BNE .houseExtensionCampain                                 ;83E435|D01D    |83E454;
     REP #$30                                                   ;83E437|C230    |      ;
     LDA.W #$0000                                               ;83E439|A90000  |      ;
     LDX.W #$000A                                               ;83E43C|A20A00  |      ;
@@ -11862,7 +11862,7 @@ fAreaInit_CrossRoad:
     RTS                                                        ;83E453|60      |      ;
  
  
-CODE_83E454:
+.houseExtensionCampain:
     REP #$30                                                   ;83E454|C230    |      ;
     LDA.W #$0000                                               ;83E456|A90000  |      ;
     LDX.W #$000B                                               ;83E459|A20B00  |      ;
@@ -11871,21 +11871,21 @@ CODE_83E454:
     RTS                                                        ;83E463|60      |      ;
  
  
-CODE_83E464:
+.horseEventCheck:
     SEP #$20                                                   ;83E464|E220    |      ;
     REP #$10                                                   ;83E466|C210    |      ;
     LDA.L nCurrentYearID                                       ;83E468|AF181F7F|7F1F18;
-    BNE CODE_83E478                                            ;83E46C|D00A    |83E478;
+    BNE .launchHorseEvent                                      ;83E46C|D00A    |83E478;
     SEP #$20                                                   ;83E46E|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;83E470|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83E474|C903    |      ;
-    BNE CODE_83E4CA                                            ;83E476|D052    |83E4CA;
+    BNE .justReturn                                            ;83E476|D052    |83E4CA;
  
-CODE_83E478:
+.launchHorseEvent:
     REP #$20                                                   ;83E478|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83E47A|AF681F7F|7F1F68;
     AND.W #$0040                                               ;83E47E|294000  |      ;
-    BNE CODE_83E4A7                                            ;83E481|D024    |83E4A7;
+    BNE .label2                                                ;83E481|D024    |83E4A7;
     REP #$30                                                   ;83E483|C230    |      ;
     LDA.W #$0000                                               ;83E485|A90000  |      ;
     LDX.W #$000D                                               ;83E488|A20D00  |      ;
@@ -11897,15 +11897,15 @@ CODE_83E478:
     STA.L strcEventFlags.flags3                                ;83E49B|8F681F7F|7F1F68;
     SEP #$20                                                   ;83E49F|E220    |      ;
     LDA.B #$04                                                 ;83E4A1|A904    |      ;
-    STA.W nNameDestinationId                                   ;83E4A3|8D9F09  |00099F;
+    STA.W nNameInputLenght                                     ;83E4A3|8D9F09  |00099F;
     RTS                                                        ;83E4A6|60      |      ;
  
  
-CODE_83E4A7:
+.label2:
     REP #$30                                                   ;83E4A7|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83E4A9|AF681F7F|7F1F68;
     AND.W #$0100                                               ;83E4AD|290001  |      ;
-    BNE CODE_83E4CA                                            ;83E4B0|D018    |83E4CA;
+    BNE .justReturn                                            ;83E4B0|D018    |83E4CA;
     REP #$30                                                   ;83E4B2|C230    |      ;
     LDA.W #$0000                                               ;83E4B4|A90000  |      ;
     LDX.W #$000D                                               ;83E4B7|A20D00  |      ;
@@ -11913,11 +11913,11 @@ CODE_83E4A7:
     JSL.L fAI_SetupAreaScripting                               ;83E4BD|22978084|848097;
     SEP #$20                                                   ;83E4C1|E220    |      ;
     LDA.B #$00                                                 ;83E4C3|A900    |      ;
-    STA.L $7F1F31                                              ;83E4C5|8F311F7F|7F1F31;
+    STA.L nHorseAreaIdMaybe                                    ;83E4C5|8F311F7F|7F1F31;
     RTS                                                        ;83E4C9|60      |      ;
  
  
-CODE_83E4CA:
+.justReturn:
     RTS                                                        ;83E4CA|60      |      ;
  
  
@@ -11955,7 +11955,7 @@ CODE_83E504:
     STA.B strcPlayerFlags                                      ;83E50E|85D2    |0000D2;
     SEP #$20                                                   ;83E510|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;83E512|AF191F7F|7F1F19;
-    STA.L nDogMapId                                            ;83E516|8F301F7F|7F1F30;
+    STA.L nDogAreaId                                           ;83E516|8F301F7F|7F1F30;
     REP #$30                                                   ;83E51A|C230    |      ;
     LDA.W #$0078                                               ;83E51C|A97800  |      ;
     STA.L nDogX                                                ;83E51F|8F2C1F7F|7F1F2C;
@@ -12295,7 +12295,7 @@ fAreaInit_Intro:
     AND.B strcPlayerFlags                                      ;83E7D2|25D2    |0000D2;
     STA.B strcPlayerFlags                                      ;83E7D4|85D2    |0000D2;
     SEP #$20                                                   ;83E7D6|E220    |      ;
-    LDA.L $7F1F49                                              ;83E7D8|AF491F7F|7F1F49;
+    LDA.L nIntroHowToPlayIndex2                                ;83E7D8|AF491F7F|7F1F49;
     BNE +                                                      ;83E7DC|D003    |83E7E1;
     JMP.W .howToPlay00                                         ;83E7DE|4CADE8  |83E8AD;
  
@@ -12456,7 +12456,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E8B8|22978084|848097;
     SEP #$20                                                   ;83E8BC|E220    |      ;
     LDA.B #$01                                                 ;83E8BE|A901    |      ;
-    STA.L $7F1F49                                              ;83E8C0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E8C0|8F491F7F|7F1F49;
     RTS                                                        ;83E8C4|60      |      ;
  
  
@@ -12468,7 +12468,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E8D0|22978084|848097;
     SEP #$20                                                   ;83E8D4|E220    |      ;
     LDA.B #$02                                                 ;83E8D6|A902    |      ;
-    STA.L $7F1F49                                              ;83E8D8|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E8D8|8F491F7F|7F1F49;
     RTS                                                        ;83E8DC|60      |      ;
  
  
@@ -12480,7 +12480,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E8E8|22978084|848097;
     SEP #$20                                                   ;83E8EC|E220    |      ;
     LDA.B #$03                                                 ;83E8EE|A903    |      ;
-    STA.L $7F1F49                                              ;83E8F0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E8F0|8F491F7F|7F1F49;
     RTS                                                        ;83E8F4|60      |      ;
  
  
@@ -12492,7 +12492,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E900|22978084|848097;
     SEP #$20                                                   ;83E904|E220    |      ;
     LDA.B #$04                                                 ;83E906|A904    |      ;
-    STA.L $7F1F49                                              ;83E908|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E908|8F491F7F|7F1F49;
     RTS                                                        ;83E90C|60      |      ;
  
  
@@ -12504,7 +12504,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E918|22978084|848097;
     SEP #$20                                                   ;83E91C|E220    |      ;
     LDA.B #$05                                                 ;83E91E|A905    |      ;
-    STA.L $7F1F49                                              ;83E920|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E920|8F491F7F|7F1F49;
     RTS                                                        ;83E924|60      |      ;
  
  
@@ -12516,7 +12516,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E930|22978084|848097;
     SEP #$20                                                   ;83E934|E220    |      ;
     LDA.B #$06                                                 ;83E936|A906    |      ;
-    STA.L $7F1F49                                              ;83E938|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E938|8F491F7F|7F1F49;
     RTS                                                        ;83E93C|60      |      ;
  
  
@@ -12528,7 +12528,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E948|22978084|848097;
     SEP #$20                                                   ;83E94C|E220    |      ;
     LDA.B #$07                                                 ;83E94E|A907    |      ;
-    STA.L $7F1F49                                              ;83E950|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E950|8F491F7F|7F1F49;
     RTS                                                        ;83E954|60      |      ;
  
  
@@ -12551,7 +12551,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E980|22978084|848097;
     SEP #$20                                                   ;83E984|E220    |      ;
     LDA.B #$08                                                 ;83E986|A908    |      ;
-    STA.L $7F1F49                                              ;83E988|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E988|8F491F7F|7F1F49;
     RTS                                                        ;83E98C|60      |      ;
  
  
@@ -12563,7 +12563,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E998|22978084|848097;
     SEP #$20                                                   ;83E99C|E220    |      ;
     LDA.B #$09                                                 ;83E99E|A909    |      ;
-    STA.L $7F1F49                                              ;83E9A0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E9A0|8F491F7F|7F1F49;
     RTS                                                        ;83E9A4|60      |      ;
  
  
@@ -12575,7 +12575,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E9B0|22978084|848097;
     SEP #$20                                                   ;83E9B4|E220    |      ;
     LDA.B #$0A                                                 ;83E9B6|A90A    |      ;
-    STA.L $7F1F49                                              ;83E9B8|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E9B8|8F491F7F|7F1F49;
     RTS                                                        ;83E9BC|60      |      ;
  
  
@@ -12587,7 +12587,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E9C8|22978084|848097;
     SEP #$20                                                   ;83E9CC|E220    |      ;
     LDA.B #$0B                                                 ;83E9CE|A90B    |      ;
-    STA.L $7F1F49                                              ;83E9D0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E9D0|8F491F7F|7F1F49;
     RTS                                                        ;83E9D4|60      |      ;
  
  
@@ -12599,7 +12599,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E9E0|22978084|848097;
     SEP #$20                                                   ;83E9E4|E220    |      ;
     LDA.B #$0C                                                 ;83E9E6|A90C    |      ;
-    STA.L $7F1F49                                              ;83E9E8|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83E9E8|8F491F7F|7F1F49;
     RTS                                                        ;83E9EC|60      |      ;
  
  
@@ -12611,7 +12611,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83E9F8|22978084|848097;
     SEP #$20                                                   ;83E9FC|E220    |      ;
     LDA.B #$0D                                                 ;83E9FE|A90D    |      ;
-    STA.L $7F1F49                                              ;83EA00|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EA00|8F491F7F|7F1F49;
     RTS                                                        ;83EA04|60      |      ;
  
  
@@ -12634,7 +12634,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EA30|22978084|848097;
     SEP #$20                                                   ;83EA34|E220    |      ;
     LDA.B #$0E                                                 ;83EA36|A90E    |      ;
-    STA.L $7F1F49                                              ;83EA38|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EA38|8F491F7F|7F1F49;
     RTS                                                        ;83EA3C|60      |      ;
  
  
@@ -12646,7 +12646,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EA48|22978084|848097;
     SEP #$20                                                   ;83EA4C|E220    |      ;
     LDA.B #$0F                                                 ;83EA4E|A90F    |      ;
-    STA.L $7F1F49                                              ;83EA50|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EA50|8F491F7F|7F1F49;
     RTS                                                        ;83EA54|60      |      ;
  
  
@@ -12658,7 +12658,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EA60|22978084|848097;
     SEP #$20                                                   ;83EA64|E220    |      ;
     LDA.B #$10                                                 ;83EA66|A910    |      ;
-    STA.L $7F1F49                                              ;83EA68|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EA68|8F491F7F|7F1F49;
     RTS                                                        ;83EA6C|60      |      ;
  
  
@@ -12670,7 +12670,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EA78|22978084|848097;
     SEP #$20                                                   ;83EA7C|E220    |      ;
     LDA.B #$11                                                 ;83EA7E|A911    |      ;
-    STA.L $7F1F49                                              ;83EA80|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EA80|8F491F7F|7F1F49;
     RTS                                                        ;83EA84|60      |      ;
  
  
@@ -12682,7 +12682,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EA90|22978084|848097;
     SEP #$20                                                   ;83EA94|E220    |      ;
     LDA.B #$12                                                 ;83EA96|A912    |      ;
-    STA.L $7F1F49                                              ;83EA98|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EA98|8F491F7F|7F1F49;
     RTS                                                        ;83EA9C|60      |      ;
  
  
@@ -12694,7 +12694,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EAA8|22978084|848097;
     SEP #$20                                                   ;83EAAC|E220    |      ;
     LDA.B #$13                                                 ;83EAAE|A913    |      ;
-    STA.L $7F1F49                                              ;83EAB0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EAB0|8F491F7F|7F1F49;
     RTS                                                        ;83EAB4|60      |      ;
  
  
@@ -12706,7 +12706,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EAC0|22978084|848097;
     SEP #$20                                                   ;83EAC4|E220    |      ;
     LDA.B #$14                                                 ;83EAC6|A914    |      ;
-    STA.L $7F1F49                                              ;83EAC8|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EAC8|8F491F7F|7F1F49;
     RTS                                                        ;83EACC|60      |      ;
  
  
@@ -12718,7 +12718,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EAD8|22978084|848097;
     SEP #$20                                                   ;83EADC|E220    |      ;
     LDA.B #$15                                                 ;83EADE|A915    |      ;
-    STA.L $7F1F49                                              ;83EAE0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EAE0|8F491F7F|7F1F49;
     RTS                                                        ;83EAE4|60      |      ;
  
  
@@ -12730,7 +12730,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EAF0|22978084|848097;
     SEP #$20                                                   ;83EAF4|E220    |      ;
     LDA.B #$16                                                 ;83EAF6|A916    |      ;
-    STA.L $7F1F49                                              ;83EAF8|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EAF8|8F491F7F|7F1F49;
     RTS                                                        ;83EAFC|60      |      ;
  
  
@@ -12742,7 +12742,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB08|22978084|848097;
     SEP #$20                                                   ;83EB0C|E220    |      ;
     LDA.B #$17                                                 ;83EB0E|A917    |      ;
-    STA.L $7F1F49                                              ;83EB10|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EB10|8F491F7F|7F1F49;
     RTS                                                        ;83EB14|60      |      ;
  
  
@@ -12754,7 +12754,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB20|22978084|848097;
     SEP #$20                                                   ;83EB24|E220    |      ;
     LDA.B #$18                                                 ;83EB26|A918    |      ;
-    STA.L $7F1F49                                              ;83EB28|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EB28|8F491F7F|7F1F49;
     RTS                                                        ;83EB2C|60      |      ;
  
  
@@ -12766,7 +12766,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB38|22978084|848097;
     SEP #$20                                                   ;83EB3C|E220    |      ;
     LDA.B #$19                                                 ;83EB3E|A919    |      ;
-    STA.L $7F1F49                                              ;83EB40|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EB40|8F491F7F|7F1F49;
     RTS                                                        ;83EB44|60      |      ;
  
  
@@ -12778,7 +12778,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB50|22978084|848097;
     SEP #$20                                                   ;83EB54|E220    |      ;
     LDA.B #$1A                                                 ;83EB56|A91A    |      ;
-    STA.L $7F1F49                                              ;83EB58|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EB58|8F491F7F|7F1F49;
     RTS                                                        ;83EB5C|60      |      ;
  
  
@@ -12790,7 +12790,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB68|22978084|848097;
     SEP #$20                                                   ;83EB6C|E220    |      ;
     LDA.B #$1B                                                 ;83EB6E|A91B    |      ;
-    STA.L $7F1F49                                              ;83EB70|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EB70|8F491F7F|7F1F49;
     RTS                                                        ;83EB74|60      |      ;
  
  
@@ -12802,7 +12802,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB80|22978084|848097;
     SEP #$20                                                   ;83EB84|E220    |      ;
     LDA.B #$1C                                                 ;83EB86|A91C    |      ;
-    STA.L $7F1F49                                              ;83EB88|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EB88|8F491F7F|7F1F49;
     RTS                                                        ;83EB8C|60      |      ;
  
  
@@ -12814,7 +12814,7 @@ fAreaInit_Intro:
     JSL.L fAI_SetupAreaScripting                               ;83EB98|22978084|848097;
     SEP #$20                                                   ;83EB9C|E220    |      ;
     LDA.B #$1D                                                 ;83EB9E|A91D    |      ;
-    STA.L $7F1F49                                              ;83EBA0|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;83EBA0|8F491F7F|7F1F49;
     RTS                                                        ;83EBA4|60      |      ;
  
  

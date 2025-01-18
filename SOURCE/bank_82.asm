@@ -810,7 +810,7 @@ fNextDayHandler:
     STA.W nMapEngine_DestinationY                              ;828754|8D7F01  |00017F;
     SEP #$20                                                   ;828757|E220    |      ;
     LDA.B #$15                                                 ;828759|A915    |      ;
-    STA.W n8DestinationId                                      ;82875B|8D8B09  |00098B;
+    STA.W nDestinationAreaId                                   ;82875B|8D8B09  |00098B;
     JSL.L fUnknown_8096D3                                      ;82875E|22D39680|8096D3;
     SEP #$20                                                   ;828762|E220    |      ;
     REP #$10                                                   ;828764|C210    |      ;
@@ -7200,7 +7200,7 @@ fUnknown_82D1C0:
     STA.L strcEventFlags.flags8                                ;82D258|8F721F7F|7F1F72;
     SEP #$20                                                   ;82D25C|E220    |      ;
     LDA.B #$00                                                 ;82D25E|A900    |      ;
-    STA.L $7F1F49                                              ;82D260|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;82D260|8F491F7F|7F1F49;
     SEP #$20                                                   ;82D264|E220    |      ;
     LDA.B #$8F                                                 ;82D266|A98F    |      ;
     STA.L strcShedItems                                        ;82D268|8F001F7F|7F1F00;
@@ -7271,14 +7271,14 @@ fUnknown_82D1C0:
     LDX.W #$0047                                               ;82D320|A24700  |      ;
     LDY.W #$0000                                               ;82D323|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;82D326|22978084|848097;
-    JSL.L fAI_Unknown84816F                                    ;82D32A|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;82D32A|226F8184|84816F;
     SEP #$20                                                   ;82D32E|E220    |      ;
-    LDA.W n8DestinationId                                      ;82D330|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;82D330|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;82D333|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D335|22DE9580|8095DE;
     SEP #$20                                                   ;82D339|E220    |      ;
-    LDA.W n8DestinationId                                      ;82D33B|AD8B09  |00098B;
-    JSL.L fUnknown_80972C                                      ;82D33E|222C9780|80972C;
+    LDA.W nDestinationAreaId                                   ;82D33B|AD8B09  |00098B;
+    JSL.L fMap_SetupArea                                       ;82D33E|222C9780|80972C;
     REP #$30                                                   ;82D342|C230    |      ;
     LDY.W #$0000                                               ;82D344|A00000  |      ;
  
@@ -7300,7 +7300,7 @@ fUnknown_82D1C0:
     JSL.L fUnknown_81A383                                      ;82D374|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D378|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D37C|22B39580|8095B3;
-    JSL.L fAI_Unknown84816F                                    ;82D380|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;82D380|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;82D384|2200A681|81A600;
     JSL.L fUnknown_8582C7                                      ;82D388|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82D38C|22B28C85|858CB2;
@@ -7331,7 +7331,7 @@ fUnknown_82D1C0:
     JML.L fUnknown_82D871                                      ;82D3C3|5C71D882|82D871;
  
  
-fUnknown_82D3C7:
+fMainMenu_AutoHowToPlay:
     SEP #$20                                                   ;82D3C7|E220    |      ;
     REP #$10                                                   ;82D3C9|C210    |      ;
     LDA.B #$0F                                                 ;82D3CB|A90F    |      ;
@@ -7452,65 +7452,65 @@ fUnknown_82D3C7:
     SEP #$20                                                   ;82D51C|E220    |      ;
     LDA.L nIntroHowToPlayIndex                                 ;82D51E|AF481F7F|7F1F48;
     BNE +                                                      ;82D522|D003    |82D527;
-    JMP.W fUnknown_82D574                                      ;82D524|4C74D5  |82D574;
+    JMP.W .howToPlay_default                                   ;82D524|4C74D5  |82D574;
  
  
   + CMP.B #$01                                                 ;82D527|C901    |      ;
     BNE +                                                      ;82D529|D003    |82D52E;
-    JMP.W fUnknown_82D58E                                      ;82D52B|4C8ED5  |82D58E;
+    JMP.W .howToPlay01                                         ;82D52B|4C8ED5  |82D58E;
  
  
   + CMP.B #$02                                                 ;82D52E|C902    |      ;
     BNE +                                                      ;82D530|D003    |82D535;
-    JMP.W fUnknown_82D5A8                                      ;82D532|4CA8D5  |82D5A8;
+    JMP.W .howToPlay02                                         ;82D532|4CA8D5  |82D5A8;
  
  
   + CMP.B #$03                                                 ;82D535|C903    |      ;
     BNE +                                                      ;82D537|D003    |82D53C;
-    JMP.W fUnknown_82D5C2                                      ;82D539|4CC2D5  |82D5C2;
+    JMP.W .howToPlay03                                         ;82D539|4CC2D5  |82D5C2;
  
  
   + CMP.B #$04                                                 ;82D53C|C904    |      ;
     BNE +                                                      ;82D53E|D003    |82D543;
-    JMP.W fUnknown_82D5DC                                      ;82D540|4CDCD5  |82D5DC;
+    JMP.W .howToPlay04                                         ;82D540|4CDCD5  |82D5DC;
  
  
   + CMP.B #$05                                                 ;82D543|C905    |      ;
     BNE +                                                      ;82D545|D003    |82D54A;
-    JMP.W fUnknown_82D5F6                                      ;82D547|4CF6D5  |82D5F6;
+    JMP.W .howToPlay05                                         ;82D547|4CF6D5  |82D5F6;
  
  
   + CMP.B #$06                                                 ;82D54A|C906    |      ;
     BNE +                                                      ;82D54C|D003    |82D551;
-    JMP.W fUnknown_82D610                                      ;82D54E|4C10D6  |82D610;
+    JMP.W .howToPlay06                                         ;82D54E|4C10D6  |82D610;
  
  
   + CMP.B #$07                                                 ;82D551|C907    |      ;
     BNE +                                                      ;82D553|D003    |82D558;
-    JMP.W fUnknown_82D62A                                      ;82D555|4C2AD6  |82D62A;
+    JMP.W .howToPlay07                                         ;82D555|4C2AD6  |82D62A;
  
  
   + CMP.B #$08                                                 ;82D558|C908    |      ;
     BNE +                                                      ;82D55A|D003    |82D55F;
-    JMP.W fUnknown_82D644                                      ;82D55C|4C44D6  |82D644;
+    JMP.W .howToPlay08                                         ;82D55C|4C44D6  |82D644;
  
  
   + CMP.B #$09                                                 ;82D55F|C909    |      ;
     BNE +                                                      ;82D561|D003    |82D566;
-    JMP.W fUnknown_82D65E                                      ;82D563|4C5ED6  |82D65E;
+    JMP.W .howToPlay09                                         ;82D563|4C5ED6  |82D65E;
  
  
   + CMP.B #$0A                                                 ;82D566|C90A    |      ;
     BNE +                                                      ;82D568|D003    |82D56D;
-    JMP.W fUnknown_82D678                                      ;82D56A|4C78D6  |82D678;
+    JMP.W .howToPlay0A                                         ;82D56A|4C78D6  |82D678;
  
  
   + CMP.B #$0B                                                 ;82D56D|C90B    |      ;
-    BNE fUnknown_82D574                                        ;82D56F|D003    |82D574;
-    JMP.W fUnknown_82D692                                      ;82D571|4C92D6  |82D692;
+    BNE .howToPlay_default                                     ;82D56F|D003    |82D574;
+    JMP.W .howToPlay0B                                         ;82D571|4C92D6  |82D692;
  
  
-fUnknown_82D574:
+.howToPlay_default:
     REP #$30                                                   ;82D574|C230    |      ;
     LDA.W #$0000                                               ;82D576|A90000  |      ;
     LDX.W #$0047                                               ;82D579|A24700  |      ;
@@ -7519,10 +7519,10 @@ fUnknown_82D574:
     SEP #$20                                                   ;82D583|E220    |      ;
     LDA.B #$01                                                 ;82D585|A901    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D587|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D58B|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D58B|4CACD6  |82D6AC;
  
  
-fUnknown_82D58E:
+.howToPlay01:
     REP #$30                                                   ;82D58E|C230    |      ;
     LDA.W #$0000                                               ;82D590|A90000  |      ;
     LDX.W #$0047                                               ;82D593|A24700  |      ;
@@ -7531,10 +7531,10 @@ fUnknown_82D58E:
     SEP #$20                                                   ;82D59D|E220    |      ;
     LDA.B #$02                                                 ;82D59F|A902    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5A1|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D5A5|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D5A5|4CACD6  |82D6AC;
  
  
-fUnknown_82D5A8:
+.howToPlay02:
     REP #$30                                                   ;82D5A8|C230    |      ;
     LDA.W #$0000                                               ;82D5AA|A90000  |      ;
     LDX.W #$0047                                               ;82D5AD|A24700  |      ;
@@ -7543,10 +7543,10 @@ fUnknown_82D5A8:
     SEP #$20                                                   ;82D5B7|E220    |      ;
     LDA.B #$03                                                 ;82D5B9|A903    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5BB|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D5BF|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D5BF|4CACD6  |82D6AC;
  
  
-fUnknown_82D5C2:
+.howToPlay03:
     REP #$30                                                   ;82D5C2|C230    |      ;
     LDA.W #$0000                                               ;82D5C4|A90000  |      ;
     LDX.W #$0047                                               ;82D5C7|A24700  |      ;
@@ -7555,10 +7555,10 @@ fUnknown_82D5C2:
     SEP #$20                                                   ;82D5D1|E220    |      ;
     LDA.B #$04                                                 ;82D5D3|A904    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5D5|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D5D9|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D5D9|4CACD6  |82D6AC;
  
  
-fUnknown_82D5DC:
+.howToPlay04:
     REP #$30                                                   ;82D5DC|C230    |      ;
     LDA.W #$0000                                               ;82D5DE|A90000  |      ;
     LDX.W #$0047                                               ;82D5E1|A24700  |      ;
@@ -7567,10 +7567,10 @@ fUnknown_82D5DC:
     SEP #$20                                                   ;82D5EB|E220    |      ;
     LDA.B #$05                                                 ;82D5ED|A905    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5EF|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D5F3|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D5F3|4CACD6  |82D6AC;
  
  
-fUnknown_82D5F6:
+.howToPlay05:
     REP #$30                                                   ;82D5F6|C230    |      ;
     LDA.W #$0000                                               ;82D5F8|A90000  |      ;
     LDX.W #$0047                                               ;82D5FB|A24700  |      ;
@@ -7579,10 +7579,10 @@ fUnknown_82D5F6:
     SEP #$20                                                   ;82D605|E220    |      ;
     LDA.B #$06                                                 ;82D607|A906    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D609|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D60D|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D60D|4CACD6  |82D6AC;
  
  
-fUnknown_82D610:
+.howToPlay06:
     REP #$30                                                   ;82D610|C230    |      ;
     LDA.W #$0000                                               ;82D612|A90000  |      ;
     LDX.W #$0047                                               ;82D615|A24700  |      ;
@@ -7591,10 +7591,10 @@ fUnknown_82D610:
     SEP #$20                                                   ;82D61F|E220    |      ;
     LDA.B #$07                                                 ;82D621|A907    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D623|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D627|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D627|4CACD6  |82D6AC;
  
  
-fUnknown_82D62A:
+.howToPlay07:
     REP #$30                                                   ;82D62A|C230    |      ;
     LDA.W #$0000                                               ;82D62C|A90000  |      ;
     LDX.W #$0047                                               ;82D62F|A24700  |      ;
@@ -7603,10 +7603,10 @@ fUnknown_82D62A:
     SEP #$20                                                   ;82D639|E220    |      ;
     LDA.B #$08                                                 ;82D63B|A908    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D63D|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D641|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D641|4CACD6  |82D6AC;
  
  
-fUnknown_82D644:
+.howToPlay08:
     REP #$30                                                   ;82D644|C230    |      ;
     LDA.W #$0000                                               ;82D646|A90000  |      ;
     LDX.W #$0047                                               ;82D649|A24700  |      ;
@@ -7615,10 +7615,10 @@ fUnknown_82D644:
     SEP #$20                                                   ;82D653|E220    |      ;
     LDA.B #$09                                                 ;82D655|A909    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D657|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D65B|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D65B|4CACD6  |82D6AC;
  
  
-fUnknown_82D65E:
+.howToPlay09:
     REP #$30                                                   ;82D65E|C230    |      ;
     LDA.W #$0000                                               ;82D660|A90000  |      ;
     LDX.W #$0047                                               ;82D663|A24700  |      ;
@@ -7627,10 +7627,10 @@ fUnknown_82D65E:
     SEP #$20                                                   ;82D66D|E220    |      ;
     LDA.B #$0A                                                 ;82D66F|A90A    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D671|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D675|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D675|4CACD6  |82D6AC;
  
  
-fUnknown_82D678:
+.howToPlay0A:
     REP #$30                                                   ;82D678|C230    |      ;
     LDA.W #$0000                                               ;82D67A|A90000  |      ;
     LDX.W #$0047                                               ;82D67D|A24700  |      ;
@@ -7639,10 +7639,10 @@ fUnknown_82D678:
     SEP #$20                                                   ;82D687|E220    |      ;
     LDA.B #$0B                                                 ;82D689|A90B    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D68B|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D68F|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D68F|4CACD6  |82D6AC;
  
  
-fUnknown_82D692:
+.howToPlay0B:
     REP #$30                                                   ;82D692|C230    |      ;
     LDA.W #$0000                                               ;82D694|A90000  |      ;
     LDX.W #$0047                                               ;82D697|A24700  |      ;
@@ -7651,18 +7651,18 @@ fUnknown_82D692:
     SEP #$20                                                   ;82D6A1|E220    |      ;
     LDA.B #$00                                                 ;82D6A3|A900    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D6A5|8F481F7F|7F1F48;
-    JMP.W fUnknown_82D6AC                                      ;82D6A9|4CACD6  |82D6AC;
+    JMP.W fMainMenu_PrepareHowToPlay                           ;82D6A9|4CACD6  |82D6AC;
  
  
-fUnknown_82D6AC:
-    JSL.L fAI_Unknown84816F                                    ;82D6AC|226F8184|84816F;
+fMainMenu_PrepareHowToPlay:
+    JSL.L fAI_HowToPlaySetup                                   ;82D6AC|226F8184|84816F;
     SEP #$20                                                   ;82D6B0|E220    |      ;
-    LDA.W n8DestinationId                                      ;82D6B2|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;82D6B2|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;82D6B5|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D6B7|22DE9580|8095DE;
     SEP #$20                                                   ;82D6BB|E220    |      ;
-    LDA.W n8DestinationId                                      ;82D6BD|AD8B09  |00098B;
-    JSL.L fUnknown_80972C                                      ;82D6C0|222C9780|80972C;
+    LDA.W nDestinationAreaId                                   ;82D6BD|AD8B09  |00098B;
+    JSL.L fMap_SetupArea                                       ;82D6C0|222C9780|80972C;
     REP #$30                                                   ;82D6C4|C230    |      ;
     LDY.W #$0000                                               ;82D6C6|A00000  |      ;
  
@@ -7684,7 +7684,7 @@ fUnknown_82D6AC:
     JSL.L fUnknown_81A383                                      ;82D6F6|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D6FA|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D6FE|22B39580|8095B3;
-    JSL.L fAI_Unknown84816F                                    ;82D702|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;82D702|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;82D706|2200A681|81A600;
     JSL.L fUnknown_8582C7                                      ;82D70A|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82D70E|22B28C85|858CB2;
@@ -7744,7 +7744,7 @@ fUnknown_82D75E:
   + SEP #$20                                                   ;82D77E|E220    |      ;
     LDA.B #$00                                                 ;82D780|A900    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D782|8F481F7F|7F1F48;
-    STA.L $7F1F49                                              ;82D786|8F491F7F|7F1F49;
+    STA.L nIntroHowToPlayIndex2                                ;82D786|8F491F7F|7F1F49;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D78A|225AA682|82A65A;
     SEP #$20                                                   ;82D78E|E220    |      ;
     LDA.B #$03                                                 ;82D790|A903    |      ;
@@ -7862,7 +7862,7 @@ fUnknown_82D871:
     LDA.B $90                                                  ;82D877|A590    |000090;
     CMP.W #$0258                                               ;82D879|C95802  |      ;
     BNE +                                                      ;82D87C|D003    |82D881;
-    JMP.W fUnknown_82D3C7                                      ;82D87E|4CC7D3  |82D3C7;
+    JMP.W fMainMenu_AutoHowToPlay                              ;82D87E|4CC7D3  |82D3C7;
  
  
   + BRA fUnknown_82D80D                                        ;82D881|808A    |82D80D;
@@ -7927,9 +7927,9 @@ fUnknown_82D8B0:
     LDX.W #$0009                                               ;82D904|A20900  |      ;
     LDY.W #$0000                                               ;82D907|A00000  |      ;
     JSL.L fAI_SetupAreaScripting                               ;82D90A|22978084|848097;
-    JSL.L fAI_Unknown84816F                                    ;82D90E|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;82D90E|226F8184|84816F;
     SEP #$20                                                   ;82D912|E220    |      ;
-    LDA.W n8DestinationId                                      ;82D914|AD8B09  |00098B;
+    LDA.W nDestinationAreaId                                   ;82D914|AD8B09  |00098B;
     STA.B nMapEngine_DestinationId                             ;82D917|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D919|22DE9580|8095DE;
     JSL.L fAudioUnknown_83841F                                 ;82D91D|221F8483|83841F;
@@ -7939,8 +7939,8 @@ fUnknown_82D8B0:
     LDA.W nAudioMusicTrackId                                   ;82D92B|AD1001  |000110;
     STA.W $0117                                                ;82D92E|8D1701  |000117;
     SEP #$20                                                   ;82D931|E220    |      ;
-    LDA.W n8DestinationId                                      ;82D933|AD8B09  |00098B;
-    JSL.L fUnknown_80972C                                      ;82D936|222C9780|80972C;
+    LDA.W nDestinationAreaId                                   ;82D933|AD8B09  |00098B;
+    JSL.L fMap_SetupArea                                       ;82D936|222C9780|80972C;
     REP #$30                                                   ;82D93A|C230    |      ;
     LDY.W #$0000                                               ;82D93C|A00000  |      ;
  
@@ -7960,7 +7960,7 @@ fUnknown_82D8B0:
     JSL.L fUnknown_81A383                                      ;82D968|2283A381|81A383;
     JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D96C|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D970|22B39580|8095B3;
-    JSL.L fAI_Unknown84816F                                    ;82D974|226F8184|84816F;
+    JSL.L fAI_HowToPlaySetup                                   ;82D974|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;82D978|2200A681|81A600;
     JSL.L fUnknown_8582C7                                      ;82D97C|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82D980|22B28C85|858CB2;
@@ -9583,7 +9583,7 @@ fStartNewGame:
 fUnreached_82E801:
     SEP #$20                                                   ;82E801|E220    |      ;
     LDA.B #$00                                                 ;82E803|A900    |      ;
-    STA.W nNameDestinationId                                   ;82E805|8D9F09  |00099F;
+    STA.W nNameInputLenght                                     ;82E805|8D9F09  |00099F;
     JML.L fScreen_NameInput                                    ;82E808|5C0CE882|82E80C;
  
  
@@ -9772,7 +9772,7 @@ fScreen_NameInput:
     LDA.W $0198                                                ;82E9D0|AD9801  |000198;
     STA.W nMapEngine_flags                                     ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
-    LDA.W nNameDestinationId                                   ;82E9D8|AD9F09  |00099F;
+    LDA.W nNameInputLenght                                     ;82E9D8|AD9F09  |00099F;
     CMP.B #$00                                                 ;82E9DB|C900    |      ;
     BNE +                                                      ;82E9DD|D004    |82E9E3;
     JML.L fCore_SetPlayerName                                  ;82E9DF|5CED8080|8080ED;
