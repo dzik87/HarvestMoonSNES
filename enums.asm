@@ -1,32 +1,35 @@
 ; Equipped items            $000921
-!EQUIPPEDITEM_NONE          =   $00
-!EQUIPPEDITEM_SICKLE        =   $01
-!EQUIPPEDITEM_HOE           =   $02
-!EQUIPPEDITEM_HAMMER        =   $03
-!EQUIPPEDITEM_AXE           =   $04
-!EQUIPPEDITEM_CORNSEED      =   $05
-!EQUIPPEDITEM_TOMATOSEED    =   $06
-!EQUIPPEDITEM_POTATOSEED    =   $07
-!EQUIPPEDITEM_TURNIPSEED    =   $08
-!EQUIPPEDITEM_MEDICIDE      =   $09
-!EQUIPPEDITEM_MIRACLEPOTION =   $0A
-!EQUIPPEDITEM_BELL          =   $0B
-!EQUIPPEDITEM_GRASSSEED     =   $0C
-!EQUIPPEDITEM_PAINT         =   $0D
-!EQUIPPEDITEM_MILKER        =   $0E
-!EQUIPPEDITEM_BRUSH         =   $0F
-!EQUIPPEDITEM_WATERINGCAN   =   $10
-!EQUIPPEDITEM_GOLDSICKLE    =   $11
-!EQUIPPEDITEM_GOLDHOE       =   $12
-!EQUIPPEDITEM_GOLDHAMMER    =   $13
-!EQUIPPEDITEM_GOLDAXE       =   $14
-!EQUIPPEDITEM_SPRINKLER     =   $15
-!EQUIPPEDITEM_BEANSTALKSEED =   $16
-!EQUIPPEDITEM_BLUEDIAMOND   =   $17
-!EQUIPPEDITEM_BLUEFEATHER   =   $18
-!EQUIPPEDITEM_CHICKENFEED   =   $19
-!EQUIPPEDITEM_COWFEED       =   $1A
-!EQUIPPEDITEM_FISHINGPOLE   =   $1B
+!EITEM_NONE                 =   $00
+!EITEM_SICKLE               =   $01
+!EITEM_HOE                  =   $02
+!EITEM_HAMMER               =   $03
+!EITEM_AXE                  =   $04
+!EITEM_CORNSEED             =   $05
+!EITEM_TOMATOSEED           =   $06
+!EITEM_POTATOSEED           =   $07
+!EITEM_TURNIPSEED           =   $08
+!EITEM_MEDICIDE             =   $09
+!EITEM_MIRACLEPOTION        =   $0A
+!EITEM_BELL                 =   $0B
+!EITEM_GRASSSEED            =   $0C
+!EITEM_PAINT                =   $0D
+!EITEM_MILKER               =   $0E
+!EITEM_BRUSH                =   $0F
+!EITEM_WATERINGCAN          =   $10
+!EITEM_GOLDSICKLE           =   $11
+!EITEM_GOLDHOE              =   $12
+!EITEM_GOLDHAMMER           =   $13
+!EITEM_GOLDAXE              =   $14
+!EITEM_SPRINKLER            =   $15
+!EITEM_BEANSTALKSEED        =   $16
+!EITEM_BLUEDIAMOND          =   $17
+!EITEM_BLUEFEATHER          =   $18
+!EITEM_CHICKENFEED          =   $19
+!EITEM_COWFEED              =   $1A
+!EITEM_FISHINGPOLE          =   $1B
+
+; Carry items               $00091D
+!CITEM_NONE                 =   $00
 
 
 ; Weather forecast          $00098C
@@ -43,6 +46,16 @@
 !WEATHER_NEWYEARFESTIVAL    =   $0A
 !WEATHER_EGGFESTIVAL        =   $0B
 !WEATHER_COUNT              =   $0C
+
+
+; Days of week              $7F1F1A
+!DAY_SUNDAY                 =   $00
+!DAY_MONDAY                 =   $01
+!DAY_TUESDAY                =   $02
+!DAY_WEDNESDAY              =   $03
+!DAY_THURSDAY               =   $04
+!DAY_FRIDAY                 =   $05
+!DAY_SATURDAY               =   $06
 
 
 ; Seasons                   $7F1F19
@@ -155,18 +168,27 @@
 !AREA_UNKNOWN5F             =   $5F
 
 
-; Days of week              $7F1F1A
-!DAY_SUNDAY                 =   $00
-!DAY_MONDAY                 =   $01
-!DAY_TUESDAY                =   $02
-!DAY_WEDNESDAY              =   $03
-!DAY_THURSDAY               =   $04
-!DAY_FRIDAY                 =   $05
-!DAY_SATURDAY               =   $06
+; Player flags              $0000D2
+!PFLAGS_ACTIVE              = $0001
+!PFLAGS_HOLDINGITEM         = $0002
+!PFLAGS_EATINGMEAL          = $0004
+!PFLAGS_OUTOFSTAMINA        = $0008
+!PFLAGS_RIDINGHORSE         = $0010
+!PFLAGS_INSPRINGS           = $0020
+!PFLAGS_INTERACTING         = $0040 ;   interacting with stuff - like diary, tv and some others
+!PFLAGS_INTRANSITION        = $0080 ;   set on area transition
+!PFLAGS_SITTING             = $0100 ;   sitting next to TV watching weather forecast
+!PFLAGS_FALLING             = $0200 ;   like in woods when you go down jumping from edge
+!PFLAGS_UNK0400             = $0400 ;   set
+!PFLAGS_DOGHUGGING          = $0800 ;   set when we hug dog
+!PFLAGS_AISTEERING          = $1000
+!PFLAGS_KNEEING             = $2000
+!PFLAGS_USERCONTROL         = $4000 ;   seems to be always set when player can take control
+!PFLAGS_ANIMATING           = $8000 ;   any player animation
 
 
 ; Player actions            $0000D4
-!PACTION_00                 = $0000
+!PACTION_NONE               = $0000
 !PACTION_WALK               = $0001
 !PACTION_RUN                = $0002
 !PACTION_JUMP               = $0003
@@ -175,7 +197,7 @@
 !PACTION_06                 = $0006
 !PACTION_07                 = $0007
 !PACTION_08                 = $0008
-!PACTION_09                 = $0009
+!PACTION_EXCERCISE          = $0009
 !PACTION_USINGTOOL          = $000A
 !PACTION_TIRED              = $000B
 !PACTION_SHOWTOOL           = $000C
@@ -191,7 +213,7 @@
 !PACTION_DROPPINGDOG        = $0016
 !PACTION_17                 = $0017
 !PACTION_18                 = $0018
-!PACTION_19                 = $0019
+!PACTION_AUTOPILOT          = $0019 ;   probably used by AI to make predefined moves also when we go to sleep
 !PACTION_1A                 = $001A
 !PACTION_WHISTLEDOG         = $001B
 !PACTION_USETOOL            = $001C
@@ -207,20 +229,9 @@
 !PDIR_RIGHT                 = $0003
 
 
-; Player flags              $0000D2
-!PFLAGS_ACTIVE              = $0001
-!PFLAGS_HOLDINGITEM         = $0002
-!PFLAGS_EATINGMEAL          = $0004
-!PFLAGS_OUTOFSTAMINA        = $0008
-!PFLAGS_RIDINGHORSE         = $0010
-!PFLAGS_INSPRINGS           = $0020
-!PFLAGS_JUMPINGOVER         = $0040
-!PFLAGS_UNK0080             = $0080
-!PFLAGS_UNK0100             = $0100
-!PFLAGS_UNK0200             = $0200
-!PFLAGS_UNK0400             = $0400
-!PFLAGS_UNK0800             = $0800
-!PFLAGS_UNK1000             = $1000
-!PFLAGS_UNK2000             = $2000
-!PFLAGS_UNK4000             = $4000
-!PFLAGS_UNK8000             = $8000
+; AI input INDEXES          $84B4D2 - !JOYPAD_DOWN, !JOYPAD_UP, !JOYPAD_RIGHT, !JOYPAD_LEFT, !JOYPAD_B
+!AIINPUT_DOWN               =   $00
+!AIINPUT_UP                 =   $01
+!AIINPUT_RIGHT              =   $02
+!AIINPUT_LEFT               =   $03
+!AIINPUT_B                  =   $04
