@@ -1003,11 +1003,11 @@ fAI_Unknown8483CC:
     REP #$30                                                   ;84874B|C230    |      ;
     LDY.W #$001A                                               ;84874D|A01A00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848750|B7CC    |0000CC;
-    STA.B $DF                                                  ;848752|85DF    |0000DF;
+    STA.B nPlayerPosXCopy                                      ;848752|85DF    |0000DF;
     REP #$30                                                   ;848754|C230    |      ;
     LDY.W #$001C                                               ;848756|A01C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848759|B7CC    |0000CC;
-    STA.B $E1                                                  ;84875B|85E1    |0000E1;
+    STA.B nPlayerPosYCopy                                      ;84875B|85E1    |0000E1;
     LDA.W #$0000                                               ;84875D|A90000  |      ;
     SEP #$20                                                   ;848760|E220    |      ;
     REP #$10                                                   ;848762|C210    |      ;
@@ -1023,7 +1023,7 @@ fAI_Unknown8483CC:
  
 .label16:
     REP #$20                                                   ;848772|C220    |      ;
-    STA.B $E5                                                  ;848774|85E5    |0000E5;
+    STA.B nPlayerPosCalculationX                               ;848774|85E5    |0000E5;
     LDA.W #$0000                                               ;848776|A90000  |      ;
     SEP #$20                                                   ;848779|E220    |      ;
     REP #$10                                                   ;84877B|C210    |      ;
@@ -1039,7 +1039,7 @@ fAI_Unknown8483CC:
  
 .label17:
     REP #$20                                                   ;84878B|C220    |      ;
-    STA.B $E7                                                  ;84878D|85E7    |0000E7;
+    STA.B nPlayerPosCalculationY                               ;84878D|85E7    |0000E7;
     STZ.B $E3                                                  ;84878F|64E3    |0000E3;
     SEP #$20                                                   ;848791|E220    |      ;
     REP #$10                                                   ;848793|C210    |      ;
@@ -1054,7 +1054,7 @@ fAI_Unknown8483CC:
     LDY.W #$0002                                               ;8487A7|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8487AA|B7CC    |0000CC;
     REP #$20                                                   ;8487AC|C220    |      ;
-    JSL.L fGameEngine_Unknown83AF37                            ;8487AE|2237AF83|83AF37;
+    JSL.L fGameEngine_DirectionHandler83AF37                   ;8487AE|2237AF83|83AF37;
     REP #$20                                                   ;8487B2|C220    |      ;
     PHA                                                        ;8487B4|48      |      ;
     LDA.B $E9                                                  ;8487B5|A5E9    |0000E9;
@@ -1453,7 +1453,7 @@ fAIAction0x05_SetTransferPosition:
     RTS                                                        ;848A93|60      |      ;
  
  
-fAIAction0x06_SetTransferDestination:
+fAIAction0x06_SetDestinationArea:
     REP #$30                                                   ;848A94|C230    |      ;
     REP #$30                                                   ;848A96|C230    |      ;
     LDA.B ptrAIActionData                                      ;848A98|A5C9    |0000C9;
@@ -1491,7 +1491,7 @@ fAIAction0x07_SetPlayerDirection:
     REP #$20                                                   ;848AD2|C220    |      ;
     STA.B nPlayerDirection                                     ;848AD4|85DA    |0000DA;
     STA.W $0911                                                ;848AD6|8D1109  |000911;
-    STA.W nFoodToEatSpriteIndex                                ;848AD9|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;848AD9|8D0109  |000901;
     REP #$30                                                   ;848ADC|C230    |      ;
     LDA.B ptrAIActionData                                      ;848ADE|A5C9    |0000C9;
     CLC                                                        ;848AE0|18      |      ;
@@ -1513,8 +1513,8 @@ fAIAction0x08:
     AND.B nPlayerFlags                                         ;848AFB|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;848AFD|85D2    |0000D2;
     REP #$20                                                   ;848AFF|C220    |      ;
-    STZ.W nUnknownFlags08FD                                    ;848B01|9CFD08  |0008FD;
-    STZ.W $08FF                                                ;848B04|9CFF08  |0008FF;
+    STZ.W nAIJoypadInput                                       ;848B01|9CFD08  |0008FD;
+    STZ.W nAISteeringCounter                                   ;848B04|9CFF08  |0008FF;
     RTS                                                        ;848B07|60      |      ;
  
  
@@ -1814,7 +1814,7 @@ fAIAction0x12_AlwaysJump:
     RTS                                                        ;848D23|60      |      ;
  
  
-fAIAction0x13:
+fAIAction0x13_Wait:
     REP #$30                                                   ;848D24|C230    |      ;
     REP #$30                                                   ;848D26|C230    |      ;
     LDA.B ptrAIActionData                                      ;848D28|A5C9    |0000C9;
@@ -2062,7 +2062,7 @@ fAIAction0x19:
     ADC.W #$0001                                               ;848ED0|690100  |      ;
     STA.B ptrAIActionData                                      ;848ED3|85C9    |0000C9;
     LDA.B [ptrAIActionData]                                    ;848ED5|A7C9    |0000C9;
-    STA.W nFoodToEatSpriteIndex                                ;848ED7|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;848ED7|8D0109  |000901;
     REP #$30                                                   ;848EDA|C230    |      ;
     LDA.B ptrAIActionData                                      ;848EDC|A5C9    |0000C9;
     CLC                                                        ;848EDE|18      |      ;
@@ -2782,7 +2782,7 @@ aAIActions:
     dw fAIAction0x03_SetHour                                   ;84941F|        |848A39;
     dw fAIAction0x04_DoesNothing                               ;849421|        |848A58;
     dw fAIAction0x05_SetTransferPosition                       ;849423|        |848A65;
-    dw fAIAction0x06_SetTransferDestination                    ;849425|        |848A94;
+    dw fAIAction0x06_SetDestinationArea                        ;849425|        |848A94;
     dw fAIAction0x07_SetPlayerDirection                        ;849427|        |848ABF;
     dw fAIAction0x08                                           ;849429|        |848AE7;
     dw fAIAction0x09                                           ;84942B|        |848B08;
@@ -2795,7 +2795,7 @@ aAIActions:
     dw fAIAction0x10_End                                       ;849439|        |848CE2;
     dw fAIAction0x11                                           ;84943B|        |848CFD;
     dw fAIAction0x12_AlwaysJump                                ;84943D|        |848D13;
-    dw fAIAction0x13                                           ;84943F|        |848D24;
+    dw fAIAction0x13_Wait                                      ;84943F|        |848D24;
     dw fAIAction0x14_JumpIfFlagSet                             ;849441|        |848D44;
     dw fAIAction0x15_JumpIfEquals8                             ;849443|        |848DA5;
     dw fAIAction0x16_JumpIfBetween8                            ;849445|        |848DFB;
@@ -2833,11 +2833,11 @@ aAIActions:
     dw fAIAction0x36_UpdateDog                                 ;849485|        |84AF06;
     dw fAIAction0x37                                           ;849487|        |84B34B;
     dw fAIAction0x38                                           ;849489|        |84B365;
-    dw fAIAction0x39                                           ;84948B|        |84B389;
-    dw fAIAction0x3A                                           ;84948D|        |84B427;
+    dw fAIAction0x39_WalkForTime                               ;84948B|        |84B389;
+    dw fAIAction0x3A_RunForTime                                ;84948D|        |84B427;
     dw fAIAction0x3B                                           ;84948F|        |84B4DC;
     dw fAIAction0x3C                                           ;849491|        |84B503;
-    dw fAIAction0x3D_TeleportToMap                             ;849493|        |84B52D;
+    dw fAIAction0x3D_TeleportToArea                            ;849493|        |84B52D;
     dw fAIAction0x3E                                           ;849495|        |84B556;
     dw fAIAction0x3F_ThrowHeldItem                             ;849497|        |84B57B;
     dw fAIAction0x40_DisableTileInteractions                   ;849499|        |84B58F;
@@ -3104,9 +3104,9 @@ fAIAction0x2D:
  
  
   + SEP #$20                                                   ;8496B0|E220    |      ;
-    LDA.W nHandItem_Current                                    ;8496B2|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;8496B2|AD1D09  |00091D;
     BEQ .continue                                              ;8496B5|F00D    |8496C4;
-    STA.W nHandItem_Previous                                   ;8496B7|8D1E09  |00091E;
+    STA.W nCarryItem_Previous                                  ;8496B7|8D1E09  |00091E;
     REP #$30                                                   ;8496BA|C230    |      ;
     LDA.B ptrAIActionData                                      ;8496BC|A5C9    |0000C9;
     CLC                                                        ;8496BE|18      |      ;
@@ -3359,34 +3359,34 @@ fAIAction0x30_UpdateChicken:
  
   + REP #$20                                                   ;8498B1|C220    |      ;
     LDA.B nPlayerAction                                        ;8498B3|A5D4    |0000D4;
-    CMP.W #$000A                                               ;8498B5|C90A00  |      ;
+    CMP.W #!PACTION_USINGTOOL                                               
     BNE +                                                      ;8498B8|D003    |8498BD;
     JMP.W .label1                                              ;8498BA|4CC899  |8499C8;
  
  
-  + CMP.W #$000C                                               ;8498BD|C90C00  |      ;
+  + CMP.W #!PACTION_SHOWTOOL                                               
     BNE +                                                      ;8498C0|D003    |8498C5;
     JMP.W .label1                                              ;8498C2|4CC899  |8499C8;
  
  
-  + CMP.W #$000D                                               ;8498C5|C90D00  |      ;
+  + CMP.W #!PACTION_WHISTLEHORSE                                               
     BNE +                                                      ;8498C8|D003    |8498CD;
     JMP.W .label1                                              ;8498CA|4CC899  |8499C8;
  
  
-  + CMP.W #$001B                                               ;8498CD|C91B00  |      ;
+  + CMP.W #!PACTION_WHISTLEDOG                                               
     BNE +                                                      ;8498D0|D003    |8498D5;
     JMP.W .label1                                              ;8498D2|4CC899  |8499C8;
  
  
   + LDA.B nPlayerFlags                                         ;8498D5|A5D2    |0000D2;
-    AND.W #$0004                                               ;8498D7|290400  |      ;
+    AND.W #!PFLAGS_EATINGMEAL                                               
     BEQ +                                                      ;8498DA|F003    |8498DF;
     JMP.W .label1                                              ;8498DC|4CC899  |8499C8;
  
  
   + LDA.B nPlayerFlags                                         ;8498DF|A5D2    |0000D2;
-    AND.W #$0040                                               ;8498E1|294000  |      ;
+    AND.W #!PFLAGS_INTERACTING                                               
     BEQ +                                                      ;8498E4|F003    |8498E9;
     JMP.W .label1                                              ;8498E6|4CC899  |8499C8;
  
@@ -3399,14 +3399,14 @@ fAIAction0x30_UpdateChicken:
  
   + REP #$20                                                   ;8498F5|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;8498F7|AD2801  |000128;
-    BIT.W #$0080                                               ;8498FA|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;8498FD|D003    |849902;
     JMP.W .label1                                              ;8498FF|4CC899  |8499C8;
  
  
   + REP #$30                                                   ;849902|C230    |      ;
     LDA.B nPlayerFlags                                         ;849904|A5D2    |0000D2;
-    AND.W #$0800                                               ;849906|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;849909|F003    |84990E;
     JMP.W .label1                                              ;84990B|4CC899  |8499C8;
  
@@ -3418,13 +3418,13 @@ fAIAction0x30_UpdateChicken:
  
  
   + LDA.B nPlayerAction                                        ;849918|A5D4    |0000D4;
-    CMP.W #$0004                                               ;84991A|C90400  |      ;
+    CMP.W #!PACTION_ITEMONHAND                                               
     BNE +                                                      ;84991D|D003    |849922;
     JMP.W .label1                                              ;84991F|4CC899  |8499C8;
  
  
   + SEP #$20                                                   ;849922|E220    |      ;
-    LDA.W nHandItem_Current                                    ;849924|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;849924|AD1D09  |00091D;
     BEQ +                                                      ;849927|F003    |84992C;
     JMP.W .label1                                              ;849929|4CC899  |8499C8;
  
@@ -3487,9 +3487,9 @@ fAIAction0x30_UpdateChicken:
     BEQ +                                                      ;84999A|F00F    |8499AB;
     SEP #$20                                                   ;84999C|E220    |      ;
     LDA.B #$26                                                 ;84999E|A926    |      ;
-    STA.W nHandItem_Current                                    ;8499A0|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;8499A0|8D1D09  |00091D;
     REP #$30                                                   ;8499A3|C230    |      ;
-    LDA.W #$0004                                               ;8499A5|A90400  |      ;
+    LDA.W #!PACTION_ITEMONHAND                                               
     STA.B nPlayerAction                                        ;8499A8|85D4    |0000D4;
     RTS                                                        ;8499AA|60      |      ;
  
@@ -3504,9 +3504,9 @@ fAIAction0x30_UpdateChicken:
  
   + SEP #$20                                                   ;8499B9|E220    |      ;
     LDA.B #$25                                                 ;8499BB|A925    |      ;
-    STA.W nHandItem_Current                                    ;8499BD|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;8499BD|8D1D09  |00091D;
     REP #$30                                                   ;8499C0|C230    |      ;
-    LDA.W #$0004                                               ;8499C2|A90400  |      ;
+    LDA.W #!PACTION_ITEMONHAND                                               
     STA.B nPlayerAction                                        ;8499C5|85D4    |0000D4;
     RTS                                                        ;8499C7|60      |      ;
  
@@ -3622,10 +3622,10 @@ fAIAction0x30_UpdateChicken:
     STZ.W nPlayerInteractionArg2                               ;849A9F|9C7009  |000970;
     REP #$30                                                   ;849AA2|C230    |      ;
     LDA.B nPlayerFlags                                         ;849AA4|A5D2    |0000D2;
-    ORA.W #$0040                                               ;849AA6|094000  |      ;
+    ORA.W #!PFLAGS_INTERACTING                                               
     STA.B nPlayerFlags                                         ;849AA9|85D2    |0000D2;
     REP #$30                                                   ;849AAB|C230    |      ;
-    LDA.W #$0000                                               ;849AAD|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;849AB0|85D4    |0000D4;
     SEP #$20                                                   ;849AB2|E220    |      ;
     REP #$10                                                   ;849AB4|C210    |      ;
@@ -3674,7 +3674,7 @@ fAIAction0x31_UpdateCow:
     STA.B [ptrUnknown0x72],Y                                   ;849B0C|9772    |000072;
     SEP #$20                                                   ;849B0E|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;849B10|A522    |000022;
-    CMP.B #$27                                                 ;849B12|C927    |      ; !AREA_COWBARN
+    CMP.B #!AREA_COWBARN                                                 
     BNE +                                                      ;849B14|D010    |849B26;
     SEP #$20                                                   ;849B16|E220    |      ;
     REP #$10                                                   ;849B18|C210    |      ;
@@ -3687,7 +3687,7 @@ fAIAction0x31_UpdateCow:
  
   + SEP #$20                                                   ;849B26|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;849B28|A522    |000022;
-    CMP.B #$04                                                 ;849B2A|C904    |      ; !AREA_TOWNSPRING
+    CMP.B #!AREA_TOWNSPRING                                                 
     BCS fUnknown_ToFarm                                        ;849B2C|B017    |849B45;
     SEP #$20                                                   ;849B2E|E220    |      ;
     REP #$10                                                   ;849B30|C210    |      ;
@@ -3715,41 +3715,41 @@ fUnknown_ToFarm:
  
   + REP #$30                                                   ;849B55|C230    |      ;
     LDA.B nPlayerAction                                        ;849B57|A5D4    |0000D4;
-    CMP.W #$000A                                               ;849B59|C90A00  |      ; !PACTION_USINGTOOL
+    CMP.W #!PACTION_USINGTOOL                                               
     BNE +                                                      ;849B5C|D003    |849B61;
     JMP.W .continue                                            ;849B5E|4CB9A0  |84A0B9;
  
  
   + REP #$30                                                   ;849B61|C230    |      ;
     LDA.B nPlayerAction                                        ;849B63|A5D4    |0000D4;
-    CMP.W #$000C                                               ;849B65|C90C00  |      ; !PACTION_SHOWTOOL
+    CMP.W #!PACTION_SHOWTOOL                                               
     BNE +                                                      ;849B68|D003    |849B6D;
     JMP.W .continue                                            ;849B6A|4CB9A0  |84A0B9;
  
  
   + REP #$30                                                   ;849B6D|C230    |      ;
     LDA.B nPlayerAction                                        ;849B6F|A5D4    |0000D4;
-    CMP.W #$000D                                               ;849B71|C90D00  |      ; !PACTION_WHISTLEHORSE
+    CMP.W #!PACTION_WHISTLEHORSE                                               
     BNE +                                                      ;849B74|D003    |849B79;
     JMP.W .continue                                            ;849B76|4CB9A0  |84A0B9;
  
  
   + REP #$30                                                   ;849B79|C230    |      ;
     LDA.B nPlayerAction                                        ;849B7B|A5D4    |0000D4;
-    CMP.W #$001B                                               ;849B7D|C91B00  |      ; !PACTION_WHISTLEDOG
+    CMP.W #!PACTION_WHISTLEDOG                                               
     BNE +                                                      ;849B80|D003    |849B85;
     JMP.W .continue                                            ;849B82|4CB9A0  |84A0B9;
  
  
   + REP #$20                                                   ;849B85|C220    |      ;
     LDA.B nPlayerFlags                                         ;849B87|A5D2    |0000D2;
-    AND.W #$0004                                               ;849B89|290400  |      ;
+    AND.W #!PFLAGS_EATINGMEAL                                               
     BEQ +                                                      ;849B8C|F003    |849B91;
     JMP.W .continue                                            ;849B8E|4CB9A0  |84A0B9;
  
  
   + LDA.B nPlayerFlags                                         ;849B91|A5D2    |0000D2;
-    AND.W #$0040                                               ;849B93|294000  |      ;
+    AND.W #!PFLAGS_INTERACTING                                               
     BEQ +                                                      ;849B96|F003    |849B9B;
     JMP.W .continue                                            ;849B98|4CB9A0  |84A0B9;
  
@@ -3762,7 +3762,7 @@ fUnknown_ToFarm:
  
   + REP #$20                                                   ;849BA7|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;849BA9|AD2801  |000128;
-    BIT.W #$0080                                               ;849BAC|898000  |      ; !JOYPAD_A
+    BIT.W #!JOYPAD_A                                               
     BNE .AbuttonPressed                                        ;849BAF|D03B    |849BEC;
     SEP #$20                                                   ;849BB1|E220    |      ;
     LDY.W #$0000                                               ;849BB3|A00000  |      ;
@@ -4063,7 +4063,7 @@ fUnknown_ToFarm:
     JMP.W .continue                                            ;849DC7|4CB9A0  |84A0B9;
  
  
-  + CMP.B #$05                                                 ;849DCA|C905    |      ; !PACTION_DROPITEM
+  + CMP.B #!PACTION_DROPITEM                                                 
     BCS +                                                      ;849DCC|B003    |849DD1;
     JMP.W .label23                                             ;849DCE|4C049F  |849F04;
  
@@ -4119,7 +4119,7 @@ fUnknown_ToFarm:
     STA.B [ptrUnknown0x72],Y                                   ;849E1E|9772    |000072;
     SEP #$20                                                   ;849E20|E220    |      ;
     LDA.B #$15                                                 ;849E22|A915    |      ;
-    STA.W nHandItem_Current                                    ;849E24|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;849E24|8D1D09  |00091D;
     LDY.W #$0004                                               ;849E27|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E2A|B772    |000072;
     CMP.B #$60                                                 ;849E2C|C960    |      ;
@@ -4128,13 +4128,13 @@ fUnknown_ToFarm:
     BCC +                                                      ;849E32|9009    |849E3D;
     SEP #$20                                                   ;849E34|E220    |      ;
     LDA.B #$17                                                 ;849E36|A917    |      ;
-    STA.W nHandItem_Current                                    ;849E38|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;849E38|8D1D09  |00091D;
     BRA .label20                                               ;849E3B|8007    |849E44;
  
  
   + SEP #$20                                                   ;849E3D|E220    |      ;
     LDA.B #$16                                                 ;849E3F|A916    |      ;
-    STA.W nHandItem_Current                                    ;849E41|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;849E41|8D1D09  |00091D;
  
 .label20:
     REP #$30                                                   ;849E44|C230    |      ;
@@ -5376,28 +5376,28 @@ fUnknown_84A607:
     REP #$30                                                   ;84A70E|C230    |      ;
     REP #$30                                                   ;84A710|C230    |      ;
     LDA.B nPlayerDirection                                     ;84A712|A5DA    |0000DA;
-    CMP.W #$0000                                               ;84A714|C90000  |      ; !PDIR_DOWN
+    CMP.W #!PDIR_DOWN                                               
     BNE +                                                      ;84A717|D003    |84A71C;
     JMP.W fUnknown_playerDirDown                               ;84A719|4CD7A8  |84A8D7;
  
  
   + REP #$30                                                   ;84A71C|C230    |      ;
     LDA.B nPlayerDirection                                     ;84A71E|A5DA    |0000DA;
-    CMP.W #$0001                                               ;84A720|C90100  |      ; !PDIR_UP
+    CMP.W #!PDIR_UP                                               
     BNE +                                                      ;84A723|D003    |84A728;
     JMP.W fUnknown_playerDirUp                                 ;84A725|4CE5A8  |84A8E5;
  
  
   + REP #$30                                                   ;84A728|C230    |      ;
     LDA.B nPlayerDirection                                     ;84A72A|A5DA    |0000DA;
-    CMP.W #$0002                                               ;84A72C|C90200  |      ; !PDIR_LEFT
+    CMP.W #!PDIR_LEFT                                               
     BNE +                                                      ;84A72F|D003    |84A734;
     JMP.W fUnknown_playerDirLeft                               ;84A731|4CF3A8  |84A8F3;
  
  
   + REP #$30                                                   ;84A734|C230    |      ;
     LDA.B nPlayerDirection                                     ;84A736|A5DA    |0000DA;
-    CMP.W #$0003                                               ;84A738|C90300  |      ; !PDIR_RIGHT
+    CMP.W #!PDIR_RIGHT                                               
     BNE fUnknown_84A740                                        ;84A73B|D003    |84A740;
     JMP.W fUnknown_playerDirRight                              ;84A73D|4C01A9  |84A901;
  
@@ -5727,49 +5727,49 @@ fAIAction0x33_UpdateMole:
  
   + REP #$30                                                   ;84A968|C230    |      ;
     LDA.B nPlayerAction                                        ;84A96A|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84A96C|C90A00  |      ;
+    CMP.W #!PACTION_USINGTOOL                                               
     BNE +                                                      ;84A96F|D003    |84A974;
     JMP.W .label1                                              ;84A971|4C1EAA  |84AA1E;
  
  
   + REP #$30                                                   ;84A974|C230    |      ;
     LDA.B nPlayerAction                                        ;84A976|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84A978|C90C00  |      ;
+    CMP.W #!PACTION_SHOWTOOL                                               
     BNE +                                                      ;84A97B|D003    |84A980;
     JMP.W .label1                                              ;84A97D|4C1EAA  |84AA1E;
  
  
   + REP #$30                                                   ;84A980|C230    |      ;
     LDA.B nPlayerAction                                        ;84A982|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84A984|C90D00  |      ;
+    CMP.W #!PACTION_WHISTLEHORSE                                               
     BNE +                                                      ;84A987|D003    |84A98C;
     JMP.W .label1                                              ;84A989|4C1EAA  |84AA1E;
  
  
   + REP #$30                                                   ;84A98C|C230    |      ;
     LDA.B nPlayerAction                                        ;84A98E|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84A990|C91B00  |      ;
+    CMP.W #!PACTION_WHISTLEDOG                                               
     BNE +                                                      ;84A993|D003    |84A998;
     JMP.W .label1                                              ;84A995|4C1EAA  |84AA1E;
  
  
   + REP #$20                                                   ;84A998|C220    |      ;
     LDA.B nPlayerFlags                                         ;84A99A|A5D2    |0000D2;
-    AND.W #$0004                                               ;84A99C|290400  |      ;
+    AND.W #!PFLAGS_EATINGMEAL                                               
     BNE .label1                                                ;84A99F|D07D    |84AA1E;
     LDA.L strcDailyFlags.flags4                                ;84A9A1|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84A9A5|290600  |      ;
     BNE .label1                                                ;84A9A8|D074    |84AA1E;
     REP #$20                                                   ;84A9AA|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84A9AC|AD2801  |000128;
-    BIT.W #$0080                                               ;84A9AF|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84A9B2|D003    |84A9B7;
     JMP.W .label1                                              ;84A9B4|4C1EAA  |84AA1E;
  
  
   + REP #$30                                                   ;84A9B7|C230    |      ;
     LDA.B nPlayerFlags                                         ;84A9B9|A5D2    |0000D2;
-    AND.W #$0800                                               ;84A9BB|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84A9BE|F003    |84A9C3;
     JMP.W .label1                                              ;84A9C0|4C1EAA  |84AA1E;
  
@@ -5781,7 +5781,7 @@ fAIAction0x33_UpdateMole:
  
  
   + SEP #$20                                                   ;84A9CD|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84A9CF|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84A9CF|AD1D09  |00091D;
     BEQ +                                                      ;84A9D2|F003    |84A9D7;
     JMP.W .label1                                              ;84A9D4|4C1EAA  |84AA1E;
  
@@ -5813,7 +5813,7 @@ fAIAction0x33_UpdateMole:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
     SEP #$20                                                   ;84AA0F|E220    |      ;
     LDA.B #$29                                                 ;84AA11|A929    |      ;
-    STA.W nHandItem_Current                                    ;84AA13|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;84AA13|8D1D09  |00091D;
     REP #$30                                                   ;84AA16|C230    |      ;
     LDA.W #$0004                                               ;84AA18|A90400  |      ;
     STA.B nPlayerAction                                        ;84AA1B|85D4    |0000D4;
@@ -5915,7 +5915,7 @@ fAIAction0x34:
  
  
   + SEP #$20                                                   ;84AAC8|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84AACA|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84AACA|AD1D09  |00091D;
     BEQ +                                                      ;84AACD|F003    |84AAD2;
     JMP.W .return                                              ;84AACF|4C19AB  |84AB19;
  
@@ -5947,7 +5947,7 @@ fAIAction0x34:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
     SEP #$20                                                   ;84AB0A|E220    |      ;
     LDA.B #$07                                                 ;84AB0C|A907    |      ;
-    STA.W nHandItem_Current                                    ;84AB0E|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;84AB0E|8D1D09  |00091D;
     REP #$30                                                   ;84AB11|C230    |      ;
     LDA.W #$0004                                               ;84AB13|A90400  |      ;
     STA.B nPlayerAction                                        ;84AB16|85D4    |0000D4;
@@ -6138,13 +6138,13 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$000D                                               ;84AC6D|A90D00  |      ;
     STA.B $E3                                                  ;84AC70|85E3    |0000E3;
     LDA.B nPlayerPosX                                          ;84AC72|A5D6    |0000D6;
-    STA.B $DF                                                  ;84AC74|85DF    |0000DF;
+    STA.B nPlayerPosXCopy                                      ;84AC74|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84AC76|A5D8    |0000D8;
-    STA.B $E1                                                  ;84AC78|85E1    |0000E1;
-    STZ.B $E5                                                  ;84AC7A|64E5    |0000E5;
-    STZ.B $E7                                                  ;84AC7C|64E7    |0000E7;
+    STA.B nPlayerPosYCopy                                      ;84AC78|85E1    |0000E1;
+    STZ.B nPlayerPosCalculationX                               ;84AC7A|64E5    |0000E5;
+    STZ.B nPlayerPosCalculationY                               ;84AC7C|64E7    |0000E7;
     LDA.W $0913                                                ;84AC7E|AD1309  |000913;
-    JSL.L fGameEngine_Unknown83AF37                            ;84AC81|2237AF83|83AF37;
+    JSL.L fGameEngine_DirectionHandler83AF37                   ;84AC81|2237AF83|83AF37;
     REP #$30                                                   ;84AC85|C230    |      ;
     BEQ +                                                      ;84AC87|F003    |84AC8C;
     JMP.W .label2                                              ;84AC89|4CEEAC  |84ACEE;
@@ -6170,7 +6170,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0020                                               ;84ACAA|A92000  |      ;
     STA.B $E3                                                  ;84ACAD|85E3    |0000E3;
     LDA.W $0913                                                ;84ACAF|AD1309  |000913;
-    JSL.L fGameEngine_Unknown83AD91                            ;84ACB2|2291AD83|83AD91;
+    JSL.L fGameEngine_DirectionHandler83AD91                   ;84ACB2|2291AD83|83AD91;
     REP #$30                                                   ;84ACB6|C230    |      ;
     CMP.W #$0000                                               ;84ACB8|C90000  |      ;
     BEQ +                                                      ;84ACBB|F003    |84ACC0;
@@ -6522,35 +6522,35 @@ fAIAction0x36_UpdateDog:
  
   + REP #$30                                                   ;84AF38|C230    |      ;
     LDA.B nPlayerAction                                        ;84AF3A|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84AF3C|C90A00  |      ;
+    CMP.W #!PACTION_USINGTOOL                                               
     BNE +                                                      ;84AF3F|D003    |84AF44;
     JMP.W .label1                                              ;84AF41|4CF4AF  |84AFF4;
  
  
   + REP #$30                                                   ;84AF44|C230    |      ;
     LDA.B nPlayerAction                                        ;84AF46|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84AF48|C90C00  |      ;
+    CMP.W #!PACTION_SHOWTOOL                                               
     BNE +                                                      ;84AF4B|D003    |84AF50;
     JMP.W .label1                                              ;84AF4D|4CF4AF  |84AFF4;
  
  
   + REP #$30                                                   ;84AF50|C230    |      ;
     LDA.B nPlayerAction                                        ;84AF52|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84AF54|C90D00  |      ;
+    CMP.W #!PACTION_WHISTLEHORSE                                               
     BNE +                                                      ;84AF57|D003    |84AF5C;
     JMP.W .label1                                              ;84AF59|4CF4AF  |84AFF4;
  
  
   + REP #$30                                                   ;84AF5C|C230    |      ;
     LDA.B nPlayerAction                                        ;84AF5E|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84AF60|C91B00  |      ;
+    CMP.W #!PACTION_WHISTLEDOG                                               
     BNE +                                                      ;84AF63|D003    |84AF68;
     JMP.W .label1                                              ;84AF65|4CF4AF  |84AFF4;
  
  
   + REP #$20                                                   ;84AF68|C220    |      ;
     LDA.B nPlayerFlags                                         ;84AF6A|A5D2    |0000D2;
-    AND.W #$0004                                               ;84AF6C|290400  |      ;
+    AND.W #!PFLAGS_EATINGMEAL                                               
     BEQ +                                                      ;84AF6F|F003    |84AF74;
     JMP.W .label1                                              ;84AF71|4CF4AF  |84AFF4;
  
@@ -6560,26 +6560,26 @@ fAIAction0x36_UpdateDog:
     BNE .label1                                                ;84AF7B|D077    |84AFF4;
     REP #$20                                                   ;84AF7D|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AF7F|AD2801  |000128;
-    BIT.W #$0080                                               ;84AF82|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84AF85|D003    |84AF8A;
     JMP.W .label1                                              ;84AF87|4CF4AF  |84AFF4;
  
  
   + SEP #$20                                                   ;84AF8A|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84AF8C|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84AF8C|AD1D09  |00091D;
     BEQ +                                                      ;84AF8F|F003    |84AF94;
     JMP.W .label1                                              ;84AF91|4CF4AF  |84AFF4;
  
  
   + REP #$30                                                   ;84AF94|C230    |      ;
     LDA.B nPlayerFlags                                         ;84AF96|A5D2    |0000D2;
-    AND.W #$0800                                               ;84AF98|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84AF9B|F003    |84AFA0;
     JMP.W .label1                                              ;84AF9D|4CF4AF  |84AFF4;
  
  
   + LDA.B nPlayerFlags                                         ;84AFA0|A5D2    |0000D2;
-    AND.W #$0010                                               ;84AFA2|291000  |      ;
+    AND.W #!PFLAGS_RIDINGHORSE                                               
     BEQ +                                                      ;84AFA5|F003    |84AFAA;
     JMP.W .label1                                              ;84AFA7|4CF4AF  |84AFF4;
  
@@ -6591,7 +6591,7 @@ fAIAction0x36_UpdateDog:
  
  
   + LDA.B nPlayerAction                                        ;84AFB4|A5D4    |0000D4;
-    CMP.W #$0004                                               ;84AFB6|C90400  |      ;
+    CMP.W #!PACTION_ITEMONHAND                                               
     BNE +                                                      ;84AFB9|D003    |84AFBE;
     JMP.W .label1                                              ;84AFBB|4CF4AF  |84AFF4;
  
@@ -6612,7 +6612,7 @@ fAIAction0x36_UpdateDog:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AFDB|97CC    |0000CC;
     REP #$30                                                   ;84AFDD|C230    |      ;
     LDA.B nPlayerFlags                                         ;84AFDF|A5D2    |0000D2;
-    ORA.W #$0800                                               ;84AFE1|090008  |      ;
+    ORA.W #!PFLAGS_DOGHUGGING                                               
     STA.B nPlayerFlags                                         ;84AFE4|85D2    |0000D2;
     REP #$30                                                   ;84AFE6|C230    |      ;
     LDA.L nDogHugs                                             ;84AFE8|AF521F7F|7F1F52;
@@ -7104,16 +7104,17 @@ fAIAction0x38:
     RTS                                                        ;84B388|60      |      ;
  
  
-fAIAction0x39:
+fAIAction0x39_WalkForTime:
     REP #$30                                                   ;84B389|C230    |      ;
     REP #$30                                                   ;84B38B|C230    |      ;
     LDA.B nPlayerFlags                                         ;84B38D|A5D2    |0000D2;
-    AND.W #$1000                                               ;84B38F|290010  |      ;
-    BEQ +                                                      ;84B392|F003    |84B397;
-    JMP.W .label1                                              ;84B394|4CE8B3  |84B3E8;
+    AND.W #!PFLAGS_AISTEERING                                               
+    BEQ .setAiSteering                                         ;84B392|F003    |84B397;
+    JMP.W .wait                                                ;84B394|4CE8B3  |84B3E8;
  
  
-  + REP #$30                                                   ;84B397|C230    |      ;
+.setAiSteering:
+    REP #$30                                                   ;84B397|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B399|A5C9    |0000C9;
     CLC                                                        ;84B39B|18      |      ;
     ADC.W #$0001                                               ;84B39C|690100  |      ;
@@ -7125,9 +7126,9 @@ fAIAction0x39:
     REP #$20                                                   ;84B3A8|C220    |      ;
     ASL A                                                      ;84B3AA|0A      |      ;
     TAX                                                        ;84B3AB|AA      |      ;
-    LDA.L aAISetFlags_08FD,X                                   ;84B3AC|BFD2B484|84B4D2;
-    ORA.W nUnknownFlags08FD                                    ;84B3B0|0DFD08  |0008FD;
-    STA.W nUnknownFlags08FD                                    ;84B3B3|8DFD08  |0008FD;
+    LDA.L aAIJoypadInput,X                                     ;84B3AC|BFD2B484|84B4D2;
+    ORA.W nAIJoypadInput                                       ;84B3B0|0DFD08  |0008FD;
+    STA.W nAIJoypadInput                                       ;84B3B3|8DFD08  |0008FD;
     REP #$30                                                   ;84B3B6|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B3B8|A5C9    |0000C9;
     CLC                                                        ;84B3BA|18      |      ;
@@ -7135,7 +7136,7 @@ fAIAction0x39:
     STA.B ptrAIActionData                                      ;84B3BE|85C9    |0000C9;
     REP #$20                                                   ;84B3C0|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B3C2|A7C9    |0000C9;
-    STA.W $08FF                                                ;84B3C4|8DFF08  |0008FF;
+    STA.W nAISteeringCounter                                   ;84B3C4|8DFF08  |0008FF;
     REP #$30                                                   ;84B3C7|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B3C9|A5C9    |0000C9;
     SEC                                                        ;84B3CB|38      |      ;
@@ -7149,17 +7150,17 @@ fAIAction0x39:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B3DC|97CC    |0000CC;
     REP #$30                                                   ;84B3DE|C230    |      ;
     LDA.B nPlayerFlags                                         ;84B3E0|A5D2    |0000D2;
-    ORA.W #$1000                                               ;84B3E2|090010  |      ;
+    ORA.W #!PFLAGS_AISTEERING                                               
     STA.B nPlayerFlags                                         ;84B3E5|85D2    |0000D2;
     RTS                                                        ;84B3E7|60      |      ;
  
  
-.label1:
+.wait:
     REP #$20                                                   ;84B3E8|C220    |      ;
-    LDA.W $08FF                                                ;84B3EA|ADFF08  |0008FF;
-    BEQ +                                                      ;84B3ED|F012    |84B401;
+    LDA.W nAISteeringCounter                                   ;84B3EA|ADFF08  |0008FF;
+    BEQ .doneWaiting                                           ;84B3ED|F012    |84B401;
     DEC A                                                      ;84B3EF|3A      |      ;
-    STA.W $08FF                                                ;84B3F0|8DFF08  |0008FF;
+    STA.W nAISteeringCounter                                   ;84B3F0|8DFF08  |0008FF;
     REP #$30                                                   ;84B3F3|C230    |      ;
     LDY.W #$0010                                               ;84B3F5|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B3F8|B7CC    |0000CC;
@@ -7169,16 +7170,17 @@ fAIAction0x39:
     RTS                                                        ;84B400|60      |      ;
  
  
-  + REP #$20                                                   ;84B401|C220    |      ;
-    STZ.W nUnknownFlags08FD                                    ;84B403|9CFD08  |0008FD;
-    STZ.W $08FF                                                ;84B406|9CFF08  |0008FF;
+.doneWaiting:
+    REP #$20                                                   ;84B401|C220    |      ;
+    STZ.W nAIJoypadInput                                       ;84B403|9CFD08  |0008FD;
+    STZ.W nAISteeringCounter                                   ;84B406|9CFF08  |0008FF;
     REP #$30                                                   ;84B409|C230    |      ;
-    LDA.W #$1000                                               ;84B40B|A90010  |      ;
+    LDA.W #!PFLAGS_AISTEERING                                               
     EOR.W #$FFFF                                               ;84B40E|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;84B411|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;84B413|85D2    |0000D2;
     REP #$30                                                   ;84B415|C230    |      ;
-    LDA.W #$0000                                               ;84B417|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84B41A|85D4    |0000D4;
     REP #$30                                                   ;84B41C|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B41E|A5C9    |0000C9;
@@ -7188,16 +7190,17 @@ fAIAction0x39:
     RTS                                                        ;84B426|60      |      ;
  
  
-fAIAction0x3A:
+fAIAction0x3A_RunForTime:
     REP #$30                                                   ;84B427|C230    |      ;
     REP #$30                                                   ;84B429|C230    |      ;
     LDA.B nPlayerFlags                                         ;84B42B|A5D2    |0000D2;
-    AND.W #$1000                                               ;84B42D|290010  |      ;
-    BEQ +                                                      ;84B430|F003    |84B435;
-    JMP.W .label1                                              ;84B432|4C93B4  |84B493;
+    AND.W #!PFLAGS_AISTEERING                                               
+    BEQ .setAiSteering                                         ;84B430|F003    |84B435;
+    JMP.W .wait                                                ;84B432|4C93B4  |84B493;
  
  
-  + REP #$30                                                   ;84B435|C230    |      ;
+.setAiSteering:
+    REP #$30                                                   ;84B435|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B437|A5C9    |0000C9;
     CLC                                                        ;84B439|18      |      ;
     ADC.W #$0001                                               ;84B43A|690100  |      ;
@@ -7209,13 +7212,13 @@ fAIAction0x3A:
     REP #$20                                                   ;84B446|C220    |      ;
     ASL A                                                      ;84B448|0A      |      ;
     TAX                                                        ;84B449|AA      |      ;
-    LDA.L aAISetFlags_08FD,X                                   ;84B44A|BFD2B484|84B4D2;
-    ORA.W nUnknownFlags08FD                                    ;84B44E|0DFD08  |0008FD;
-    STA.W nUnknownFlags08FD                                    ;84B451|8DFD08  |0008FD;
+    LDA.L aAIJoypadInput,X                                     ;84B44A|BFD2B484|84B4D2;
+    ORA.W nAIJoypadInput                                       ;84B44E|0DFD08  |0008FD;
+    STA.W nAIJoypadInput                                       ;84B451|8DFD08  |0008FD;
     LDX.W #$0008                                               ;84B454|A20800  |      ;
-    LDA.L aAISetFlags_08FD,X                                   ;84B457|BFD2B484|84B4D2;
-    ORA.W nUnknownFlags08FD                                    ;84B45B|0DFD08  |0008FD;
-    STA.W nUnknownFlags08FD                                    ;84B45E|8DFD08  |0008FD;
+    LDA.L aAIJoypadInput,X                                     ;84B457|BFD2B484|84B4D2;
+    ORA.W nAIJoypadInput                                       ;84B45B|0DFD08  |0008FD;
+    STA.W nAIJoypadInput                                       ;84B45E|8DFD08  |0008FD;
     REP #$30                                                   ;84B461|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B463|A5C9    |0000C9;
     CLC                                                        ;84B465|18      |      ;
@@ -7223,7 +7226,7 @@ fAIAction0x3A:
     STA.B ptrAIActionData                                      ;84B469|85C9    |0000C9;
     REP #$20                                                   ;84B46B|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B46D|A7C9    |0000C9;
-    STA.W $08FF                                                ;84B46F|8DFF08  |0008FF;
+    STA.W nAISteeringCounter                                   ;84B46F|8DFF08  |0008FF;
     REP #$30                                                   ;84B472|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B474|A5C9    |0000C9;
     SEC                                                        ;84B476|38      |      ;
@@ -7237,17 +7240,17 @@ fAIAction0x3A:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B487|97CC    |0000CC;
     REP #$30                                                   ;84B489|C230    |      ;
     LDA.B nPlayerFlags                                         ;84B48B|A5D2    |0000D2;
-    ORA.W #$1000                                               ;84B48D|090010  |      ;
+    ORA.W #!PFLAGS_AISTEERING                                               
     STA.B nPlayerFlags                                         ;84B490|85D2    |0000D2;
     RTS                                                        ;84B492|60      |      ;
  
  
-.label1:
+.wait:
     REP #$20                                                   ;84B493|C220    |      ;
-    LDA.W $08FF                                                ;84B495|ADFF08  |0008FF;
-    BEQ +                                                      ;84B498|F012    |84B4AC;
+    LDA.W nAISteeringCounter                                   ;84B495|ADFF08  |0008FF;
+    BEQ .doneWaiting                                           ;84B498|F012    |84B4AC;
     DEC A                                                      ;84B49A|3A      |      ;
-    STA.W $08FF                                                ;84B49B|8DFF08  |0008FF;
+    STA.W nAISteeringCounter                                   ;84B49B|8DFF08  |0008FF;
     REP #$30                                                   ;84B49E|C230    |      ;
     LDY.W #$0010                                               ;84B4A0|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B4A3|B7CC    |0000CC;
@@ -7257,16 +7260,17 @@ fAIAction0x3A:
     RTS                                                        ;84B4AB|60      |      ;
  
  
-  + REP #$20                                                   ;84B4AC|C220    |      ;
-    STZ.W nUnknownFlags08FD                                    ;84B4AE|9CFD08  |0008FD;
-    STZ.W $08FF                                                ;84B4B1|9CFF08  |0008FF;
+.doneWaiting:
+    REP #$20                                                   ;84B4AC|C220    |      ;
+    STZ.W nAIJoypadInput                                       ;84B4AE|9CFD08  |0008FD;
+    STZ.W nAISteeringCounter                                   ;84B4B1|9CFF08  |0008FF;
     REP #$30                                                   ;84B4B4|C230    |      ;
-    LDA.W #$1000                                               ;84B4B6|A90010  |      ;
+    LDA.W #!PFLAGS_AISTEERING                                               
     EOR.W #$FFFF                                               ;84B4B9|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;84B4BC|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;84B4BE|85D2    |0000D2;
     REP #$30                                                   ;84B4C0|C230    |      ;
-    LDA.W #$0000                                               ;84B4C2|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84B4C5|85D4    |0000D4;
     REP #$30                                                   ;84B4C7|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B4C9|A5C9    |0000C9;
@@ -7276,7 +7280,7 @@ fAIAction0x3A:
     RTS                                                        ;84B4D1|60      |      ;
  
  
-aAISetFlags_08FD:
+aAIJoypadInput:
     dw $0400,$0800,$0100,$0200,$8000                           ;84B4D2|        |      ; 0x05 * [n16]
  
 fAIAction0x3B:
@@ -7288,7 +7292,7 @@ fAIAction0x3B:
     STA.B ptrAIActionData                                      ;84B4E6|85C9    |0000C9;
     SEP #$20                                                   ;84B4E8|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B4EA|A7C9    |0000C9;
-    STA.W nHandItem_Current                                    ;84B4EC|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;84B4EC|8D1D09  |00091D;
     REP #$30                                                   ;84B4EF|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B4F1|A5C9    |0000C9;
     CLC                                                        ;84B4F3|18      |      ;
@@ -7321,7 +7325,7 @@ fAIAction0x3C:
     RTS                                                        ;84B52C|60      |      ;
  
  
-fAIAction0x3D_TeleportToMap:
+fAIAction0x3D_TeleportToArea:
     REP #$30                                                   ;84B52D|C230    |      ;
     REP #$30                                                   ;84B52F|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B531|A5C9    |0000C9;
@@ -7352,7 +7356,7 @@ fAIAction0x3E:
     STA.B ptrAIActionData                                      ;84B560|85C9    |0000C9;
     SEP #$20                                                   ;84B562|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B564|A7C9    |0000C9;
-    STA.W nHandItem_Current                                    ;84B566|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;84B566|8D1D09  |00091D;
     REP #$30                                                   ;84B569|C230    |      ;
     LDA.B ptrAIActionData                                      ;84B56B|A5C9    |0000C9;
     CLC                                                        ;84B56D|18      |      ;
@@ -7947,7 +7951,7 @@ fAIAction0x4A:
  
   + REP #$30                                                   ;84B9A7|C230    |      ;
     LDA.B nPlayerFlags                                         ;84B9A9|A5D2    |0000D2;
-    AND.W #$0800                                               ;84B9AB|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84B9AE|F003    |84B9B3;
     JMP.W .return                                              ;84B9B0|4C02BA  |84BA02;
  
@@ -7959,7 +7963,7 @@ fAIAction0x4A:
  
  
   + SEP #$20                                                   ;84B9BD|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84B9BF|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84B9BF|AD1D09  |00091D;
     BEQ +                                                      ;84B9C2|F003    |84B9C7;
     JMP.W .return                                              ;84B9C4|4C02BA  |84BA02;
  
@@ -7986,7 +7990,7 @@ fAIAction0x4A:
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
     SEP #$20                                                   ;84B9F3|E220    |      ;
     LDA.B #$08                                                 ;84B9F5|A908    |      ;
-    STA.W nHandItem_Current                                    ;84B9F7|8D1D09  |00091D;
+    STA.W nCarryItem_Current                                   ;84B9F7|8D1D09  |00091D;
     REP #$30                                                   ;84B9FA|C230    |      ;
     LDA.W #$0004                                               ;84B9FC|A90400  |      ;
     STA.B nPlayerAction                                        ;84B9FF|85D4    |0000D4;
@@ -8258,18 +8262,18 @@ fAIAction0x50:
     ADC.W #$0001                                               ;84BBE1|690100  |      ;
     STA.B ptrAIActionData                                      ;84BBE4|85C9    |0000C9;
     SEP #$20                                                   ;84BBE6|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84BBE8|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84BBE8|AD1D09  |00091D;
     BEQ .label2                                                ;84BBEB|F06F    |84BC5C;
     CMP.B #$25                                                 ;84BBED|C925    |      ;
     BEQ .label1                                                ;84BBEF|F015    |84BC06;
     CMP.B #$26                                                 ;84BBF1|C926    |      ;
     BEQ .label1                                                ;84BBF3|F011    |84BC06;
-    STZ.W nHandItem_Current                                    ;84BBF5|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;84BBF5|9C1D09  |00091D;
     REP #$30                                                   ;84BBF8|C230    |      ;
     LDA.W #$0000                                               ;84BBFA|A90000  |      ;
     CLC                                                        ;84BBFD|18      |      ;
     ADC.B nPlayerDirection                                     ;84BBFE|65DA    |0000DA;
-    STA.W nFoodToEatSpriteIndex                                ;84BC00|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;84BC00|8D0109  |000901;
     JMP.W .return                                              ;84BC03|4C9BBC  |84BC9B;
  
  
@@ -8308,25 +8312,25 @@ fAIAction0x50:
     LDA.L aGameEngine_AddChickenPositionsData,X                ;84BC44|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BC48|9772    |000072;
     SEP #$20                                                   ;84BC4A|E220    |      ;
-    STZ.W nHandItem_Current                                    ;84BC4C|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;84BC4C|9C1D09  |00091D;
     REP #$30                                                   ;84BC4F|C230    |      ;
     LDA.W #$0000                                               ;84BC51|A90000  |      ;
     CLC                                                        ;84BC54|18      |      ;
     ADC.B nPlayerDirection                                     ;84BC55|65DA    |0000DA;
-    STA.W nFoodToEatSpriteIndex                                ;84BC57|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;84BC57|8D0109  |000901;
     BRA .return                                                ;84BC5A|803F    |84BC9B;
  
  
 .label2:
     REP #$30                                                   ;84BC5C|C230    |      ;
     LDA.B nPlayerFlags                                         ;84BC5E|A5D2    |0000D2;
-    AND.W #$0800                                               ;84BC60|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BNE +                                                      ;84BC63|D003    |84BC68;
     JMP.W .return                                              ;84BC65|4C9BBC  |84BC9B;
  
  
   + REP #$30                                                   ;84BC68|C230    |      ;
-    LDA.W #$0800                                               ;84BC6A|A90008  |      ;
+    LDA.W #!PFLAGS_DOGHUGGING                                               
     EOR.W #$FFFF                                               ;84BC6D|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;84BC70|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;84BC72|85D2    |0000D2;
@@ -8342,7 +8346,7 @@ fAIAction0x50:
     LDA.W #$0000                                               ;84BC90|A90000  |      ;
     CLC                                                        ;84BC93|18      |      ;
     ADC.B nPlayerDirection                                     ;84BC94|65DA    |0000DA;
-    STA.W nFoodToEatSpriteIndex                                ;84BC96|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;84BC96|8D0109  |000901;
     BRA .return                                                ;84BC99|8000    |84BC9B;
  
  
@@ -8358,7 +8362,7 @@ fAIAction0x51:
     ADC.W #$0001                                               ;84BCA3|690100  |      ;
     STA.B ptrAIActionData                                      ;84BCA6|85C9    |0000C9;
     SEP #$20                                                   ;84BCA8|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84BCAA|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84BCAA|AD1D09  |00091D;
     BEQ .label3                                                ;84BCAD|F060    |84BD0F;
     CMP.B #$25                                                 ;84BCAF|C925    |      ;
     BEQ .label2                                                ;84BCB1|F011    |84BCC4;
@@ -8370,7 +8374,7 @@ fAIAction0x51:
  
  
 .label1:
-    STZ.W nHandItem_Current                                    ;84BCBE|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;84BCBE|9C1D09  |00091D;
     JMP.W .return                                              ;84BCC1|4C43BD  |84BD43;
  
  
@@ -8409,20 +8413,20 @@ fAIAction0x51:
     LDA.L aGameEngine_AddChickenPositionsData,X                ;84BD02|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BD06|9772    |000072;
     SEP #$20                                                   ;84BD08|E220    |      ;
-    STZ.W nHandItem_Current                                    ;84BD0A|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;84BD0A|9C1D09  |00091D;
     BRA .return                                                ;84BD0D|8034    |84BD43;
  
  
 .label3:
     REP #$30                                                   ;84BD0F|C230    |      ;
     LDA.B nPlayerFlags                                         ;84BD11|A5D2    |0000D2;
-    AND.W #$0800                                               ;84BD13|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BNE +                                                      ;84BD16|D003    |84BD1B;
     JMP.W .return                                              ;84BD18|4C43BD  |84BD43;
  
  
   + REP #$30                                                   ;84BD1B|C230    |      ;
-    LDA.W #$0800                                               ;84BD1D|A90008  |      ;
+    LDA.W #!PFLAGS_DOGHUGGING                                               
     EOR.W #$FFFF                                               ;84BD20|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;84BD23|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;84BD25|85D2    |0000D2;
@@ -8501,13 +8505,13 @@ fAIAction0x52:
  
   + REP #$30                                                   ;84BDAF|C230    |      ;
     LDA.B nPlayerFlags                                         ;84BDB1|A5D2    |0000D2;
-    AND.W #$0800                                               ;84BDB3|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84BDB6|F003    |84BDBB;
     JMP.W .return                                              ;84BDB8|4CFFBD  |84BDFF;
  
  
   + SEP #$20                                                   ;84BDBB|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84BDBD|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84BDBD|AD1D09  |00091D;
     BEQ +                                                      ;84BDC0|F003    |84BDC5;
     JMP.W .return                                              ;84BDC2|4CFFBD  |84BDFF;
  
@@ -8615,7 +8619,7 @@ fAIAction0x53:
  
  
   + SEP #$20                                                   ;84BE84|E220    |      ;
-    LDA.W nHandItem_Current                                    ;84BE86|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;84BE86|AD1D09  |00091D;
     BEQ +                                                      ;84BE89|F003    |84BE8E;
     JMP.W .return                                              ;84BE8B|4CC8BE  |84BEC8;
  
@@ -8779,7 +8783,7 @@ fAIAction0x57_UpdateStamina:
     STA.B ptrAIActionData                                      ;84BFAA|85C9    |0000C9;
     SEP #$20                                                   ;84BFAC|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BFAE|A7C9    |0000C9;
-    JSL.L fPlayerEnergyHandler_81D061                          ;84BFB0|2261D081|81D061;
+    JSL.L fPlayerEnergyHandler                                 ;84BFB0|2261D081|81D061;
     REP #$30                                                   ;84BFB4|C230    |      ;
     LDA.B ptrAIActionData                                      ;84BFB6|A5C9    |0000C9;
     CLC                                                        ;84BFB8|18      |      ;
@@ -8870,7 +8874,7 @@ fInput_Handler:
  
   + CMP.B #$05                                                 ;84C057|C905    |      ;
     BNE +                                                      ;84C059|D003    |84C05E;
-    JMP.W fInput_NameInput                                     ;84C05B|4C66C0  |84C066;
+    JMP.W fNameInput_ControlsHandler                           ;84C05B|4C66C0  |84C066;
  
  
   + CMP.B #$06                                                 ;84C05E|C906    |      ;
@@ -8881,49 +8885,49 @@ fInput_Handler:
   + RTL                                                        ;84C065|6B      |      ;
  
  
-fInput_NameInput:
+fNameInput_ControlsHandler:
     REP #$30                                                   ;84C066|C230    |      ;
     LDA.W strcJoypad1.autorepeat                               ;84C068|AD2C01  |00012C;
-    BIT.W #$0400                                               ;84C06B|890004  |      ;
+    BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C06E|F003    |84C073;
-    JMP.W fInput_Unknown84C204                                 ;84C070|4C04C2  |84C204;
+    JMP.W fNameInput_DownButton                                ;84C070|4C04C2  |84C204;
  
  
   + LDA.W strcJoypad1.autorepeat                               ;84C073|AD2C01  |00012C;
-    BIT.W #$0800                                               ;84C076|890008  |      ;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C079|F003    |84C07E;
-    JMP.W fInput_Unknown84C225                                 ;84C07B|4C25C2  |84C225;
+    JMP.W fNameInput_UpButton                                  ;84C07B|4C25C2  |84C225;
  
  
   + LDA.W strcJoypad1.autorepeat                               ;84C07E|AD2C01  |00012C;
-    BIT.W #$0100                                               ;84C081|890001  |      ;
+    BIT.W #!JOYPAD_RIGHT                                               
     BEQ +                                                      ;84C084|F003    |84C089;
-    JMP.W fInput_Unknown84C246                                 ;84C086|4C46C2  |84C246;
+    JMP.W fNameInput_RightButton                               ;84C086|4C46C2  |84C246;
  
  
   + LDA.W strcJoypad1.autorepeat                               ;84C089|AD2C01  |00012C;
-    BIT.W #$0200                                               ;84C08C|890002  |      ;
+    BIT.W #!JOYPAD_LEFT                                               
     BEQ +                                                      ;84C08F|F003    |84C094;
-    JMP.W fInput_Unknown84C267                                 ;84C091|4C67C2  |84C267;
+    JMP.W fNameInput_LeftButton                                ;84C091|4C67C2  |84C267;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C094|AD2801  |000128;
-    BIT.W #$8000                                               ;84C097|890080  |      ;
+    BIT.W #!JOYPAD_B                                               
     BEQ +                                                      ;84C09A|F003    |84C09F;
-    JMP.W fInput_Unknown84C0AB                                 ;84C09C|4CABC0  |84C0AB;
+    JMP.W fNameInput_BButton                                   ;84C09C|4CABC0  |84C0AB;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C09F|AD2801  |000128;
-    BIT.W #$0080                                               ;84C0A2|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ .return                                                ;84C0A5|F003    |84C0AA;
-    JMP.W fInput_Unknown84C0EE                                 ;84C0A7|4CEEC0  |84C0EE;
+    JMP.W fNameInput_AButton                                   ;84C0A7|4CEEC0  |84C0EE;
  
  
 .return:
     RTL                                                        ;84C0AA|6B      |      ;
  
  
-fInput_Unknown84C0AB:
+fNameInput_BButton:
     SEP #$20                                                   ;84C0AB|E220    |      ;
     LDA.W nNameEntryIndex                                      ;84C0AD|AD9409  |000994;
     BEQ .label2                                                ;84C0B0|F029    |84C0DB;
@@ -8960,7 +8964,7 @@ fInput_Unknown84C0AB:
     RTL                                                        ;84C0ED|6B      |      ;
  
  
-fInput_Unknown84C0EE:
+fNameInput_AButton:
     REP #$20                                                   ;84C0EE|C220    |      ;
     LDA.W #$0005                                               ;84C0F0|A90500  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C0F3|22ACEB82|82EBAC;
@@ -9098,7 +9102,7 @@ fInput_Unknown84C1D2:
     RTL                                                        ;84C203|6B      |      ;
  
  
-fInput_Unknown84C204:
+fNameInput_DownButton:
     REP #$20                                                   ;84C204|C220    |      ;
     LDA.W #$0000                                               ;84C206|A90000  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C209|22ACEB82|82EBAC;
@@ -9114,7 +9118,7 @@ fInput_Unknown84C204:
     RTL                                                        ;84C224|6B      |      ;
  
  
-fInput_Unknown84C225:
+fNameInput_UpButton:
     REP #$20                                                   ;84C225|C220    |      ;
     LDA.W #$0001                                               ;84C227|A90100  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C22A|22ACEB82|82EBAC;
@@ -9130,7 +9134,7 @@ fInput_Unknown84C225:
     RTL                                                        ;84C245|6B      |      ;
  
  
-fInput_Unknown84C246:
+fNameInput_RightButton:
     REP #$20                                                   ;84C246|C220    |      ;
     LDA.W #$0002                                               ;84C248|A90200  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C24B|22ACEB82|82EBAC;
@@ -9146,7 +9150,7 @@ fInput_Unknown84C246:
     RTL                                                        ;84C266|6B      |      ;
  
  
-fInput_Unknown84C267:
+fNameInput_LeftButton:
     REP #$20                                                   ;84C267|C220    |      ;
     LDA.W #$0003                                               ;84C269|A90300  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C26C|22ACEB82|82EBAC;
@@ -9200,7 +9204,7 @@ fInput_Unknown84C2B4:
     LDA.B nPlayerAction                                        ;84C2B6|A5D4    |0000D4;
     CMP.W #$0003                                               ;84C2B8|C90300  |      ;
     BEQ +                                                      ;84C2BB|F004    |84C2C1;
-    JSL.L fInput_Unknown84C7D6                                 ;84C2BD|22D6C784|84C7D6;
+    JSL.L fInput_AIJoypadHandler                               ;84C2BD|22D6C784|84C7D6;
  
   + REP #$30                                                   ;84C2C1|C230    |      ;
     LDA.L strcDailyFlags.flags1                                ;84C2C3|AF5A1F7F|7F1F5A;
@@ -9784,7 +9788,7 @@ fInput_Handler_case01:
     LDA.B nPlayerFlags                                         ;84C6DB|A5D2    |0000D2;
     AND.W #$1000                                               ;84C6DD|290010  |      ;
     BEQ +                                                      ;84C6E0|F003    |84C6E5;
-    JMP.W fInput_Unknown84C7D6                                 ;84C6E2|4CD6C7  |84C7D6;
+    JMP.W fInput_AIJoypadHandler                               ;84C6E2|4CD6C7  |84C7D6;
  
  
   + REP #$30                                                   ;84C6E5|C230    |      ;
@@ -9817,25 +9821,25 @@ fInput_Handler_case01:
     LDA.W strcJoypad1.current                                  ;84C714|AD2401  |000124;
     BIT.W #$0400                                               ;84C717|890004  |      ;
     BEQ +                                                      ;84C71A|F003    |84C71F;
-    JMP.W fInput_Unknown84C935                                 ;84C71C|4C35C9  |84C935;
+    JMP.W fAiInput_PressDown                                   ;84C71C|4C35C9  |84C935;
  
  
   + LDA.W strcJoypad1.current                                  ;84C71F|AD2401  |000124;
     BIT.W #$0800                                               ;84C722|890008  |      ;
     BEQ +                                                      ;84C725|F003    |84C72A;
-    JMP.W fInput_Unknown84C96F                                 ;84C727|4C6FC9  |84C96F;
+    JMP.W fAiInput_PressUp                                     ;84C727|4C6FC9  |84C96F;
  
  
   + LDA.W strcJoypad1.current                                  ;84C72A|AD2401  |000124;
     BIT.W #$0100                                               ;84C72D|890001  |      ;
     BEQ +                                                      ;84C730|F003    |84C735;
-    JMP.W fInput_Unknown84C9A9                                 ;84C732|4CA9C9  |84C9A9;
+    JMP.W fAiInput_PressRight                                  ;84C732|4CA9C9  |84C9A9;
  
  
   + LDA.W strcJoypad1.current                                  ;84C735|AD2401  |000124;
     BIT.W #$0200                                               ;84C738|890002  |      ;
     BEQ fInput_Unknown84C740                                   ;84C73B|F003    |84C740;
-    JMP.W fInput_Unknown84C9E3                                 ;84C73D|4CE3C9  |84C9E3;
+    JMP.W fAiInput_PressLeft                                   ;84C73D|4CE3C9  |84C9E3;
  
  
 fInput_Unknown84C740:
@@ -9871,7 +9875,7 @@ fInput_Unknown84C740:
     LDA.W strcJoypad1.current                                  ;84C773|AD2401  |000124;
     BIT.W #$8000                                               ;84C776|890080  |      ;
     BEQ +                                                      ;84C779|F003    |84C77E;
-    JMP.W fInput_Unknown84CA1D                                 ;84C77B|4C1DCA  |84CA1D;
+    JMP.W fInput_RunToJump                                     ;84C77B|4C1DCA  |84CA1D;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C77E|AD2801  |000128;
@@ -9914,70 +9918,70 @@ aLoopupTable_84C7B6:
     db $01,$01,$00,$00,$01,$00,$00,$01,$01,$01,$01,$01         ;84C7C2|        |      ;
     db $01,$00,$01,$01,$01,$00,$00,$00                         ;84C7CE|        |      ;
  
-fInput_Unknown84C7D6:
+fInput_AIJoypadHandler:
     REP #$30                                                   ;84C7D6|C230    |      ;
-    LDA.W nUnknownFlags08FD                                    ;84C7D8|ADFD08  |0008FD;
-    BIT.W #$0400                                               ;84C7DB|890004  |      ;
+    LDA.W nAIJoypadInput                                       ;84C7D8|ADFD08  |0008FD;
+    BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C7DE|F003    |84C7E3;
-    JMP.W fInput_Unknown84C935                                 ;84C7E0|4C35C9  |84C935;
+    JMP.W fAiInput_PressDown                                   ;84C7E0|4C35C9  |84C935;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C7E3|ADFD08  |0008FD;
-    BIT.W #$0800                                               ;84C7E6|890008  |      ;
+  + LDA.W nAIJoypadInput                                       ;84C7E3|ADFD08  |0008FD;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C7E9|F003    |84C7EE;
-    JMP.W fInput_Unknown84C96F                                 ;84C7EB|4C6FC9  |84C96F;
+    JMP.W fAiInput_PressUp                                     ;84C7EB|4C6FC9  |84C96F;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C7EE|ADFD08  |0008FD;
-    BIT.W #$0100                                               ;84C7F1|890001  |      ;
+  + LDA.W nAIJoypadInput                                       ;84C7EE|ADFD08  |0008FD;
+    BIT.W #!JOYPAD_RIGHT                                               
     BEQ +                                                      ;84C7F4|F003    |84C7F9;
-    JMP.W fInput_Unknown84C9A9                                 ;84C7F6|4CA9C9  |84C9A9;
+    JMP.W fAiInput_PressRight                                  ;84C7F6|4CA9C9  |84C9A9;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C7F9|ADFD08  |0008FD;
-    BIT.W #$0200                                               ;84C7FC|890002  |      ;
+  + LDA.W nAIJoypadInput                                       ;84C7F9|ADFD08  |0008FD;
+    BIT.W #!JOYPAD_LEFT                                               
     BEQ fInput_Unknown08FD_case0200                            ;84C7FF|F003    |84C804;
-    JMP.W fInput_Unknown84C9E3                                 ;84C801|4CE3C9  |84C9E3;
+    JMP.W fAiInput_PressLeft                                   ;84C801|4CE3C9  |84C9E3;
  
  
 fInput_Unknown08FD_case0200:
-    LDA.W nUnknownFlags08FD                                    ;84C804|ADFD08  |0008FD;
+    LDA.W nAIJoypadInput                                       ;84C804|ADFD08  |0008FD;
     BIT.W #$0080                                               ;84C807|898000  |      ;
     BEQ +                                                      ;84C80A|F003    |84C80F;
     JMP.W fInput_Unknown84CAA5                                 ;84C80C|4CA5CA  |84CAA5;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C80F|ADFD08  |0008FD;
+  + LDA.W nAIJoypadInput                                       ;84C80F|ADFD08  |0008FD;
     BIT.W #$8000                                               ;84C812|890080  |      ;
     BEQ +                                                      ;84C815|F003    |84C81A;
-    JMP.W fInput_Unknown84CA1D                                 ;84C817|4C1DCA  |84CA1D;
+    JMP.W fInput_RunToJump                                     ;84C817|4C1DCA  |84CA1D;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C81A|ADFD08  |0008FD;
+  + LDA.W nAIJoypadInput                                       ;84C81A|ADFD08  |0008FD;
     BIT.W #$2000                                               ;84C81D|890020  |      ;
     BEQ +                                                      ;84C820|F003    |84C825;
     JMP.W fInput_SetPlayerAction0x0C                           ;84C822|4C7ACE  |84CE7A;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C825|ADFD08  |0008FD;
+  + LDA.W nAIJoypadInput                                       ;84C825|ADFD08  |0008FD;
     BIT.W #$0040                                               ;84C828|894000  |      ;
     BEQ +                                                      ;84C82B|F003    |84C830;
     JMP.W fInput_SetPlayerAction0x1C                           ;84C82D|4CA6CE  |84CEA6;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C830|ADFD08  |0008FD;
+  + LDA.W nAIJoypadInput                                       ;84C830|ADFD08  |0008FD;
     BIT.W #$0010                                               ;84C833|891000  |      ;
     BEQ +                                                      ;84C836|F003    |84C83B;
     JMP.W fInput_SetPlayerAction0x0D_WhistleR                  ;84C838|4C0CCE  |84CE0C;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C83B|ADFD08  |0008FD;
+  + LDA.W nAIJoypadInput                                       ;84C83B|ADFD08  |0008FD;
     BIT.W #$0020                                               ;84C83E|892000  |      ;
     BEQ +                                                      ;84C841|F003    |84C846;
     JMP.W fInput_SetPlayerAction0x1B_WhistleL                  ;84C843|4C43CE  |84CE43;
  
  
-  + LDA.W nUnknownFlags08FD                                    ;84C846|ADFD08  |0008FD;
+  + LDA.W nAIJoypadInput                                       ;84C846|ADFD08  |0008FD;
     BIT.W #$4000                                               ;84C849|890040  |      ;
     BEQ +                                                      ;84C84C|F003    |84C851;
     JMP.W fInput_Unknown84CD77                                 ;84C84E|4C77CD  |84CD77;
@@ -9989,35 +9993,35 @@ fInput_Unknown08FD_case0200:
 fInput_Unused84C852:
     REP #$30                                                   ;84C852|C230    |      ;
     LDA.W strcJoypad1.newUnpressed                             ;84C854|AD2A01  |00012A;
-    BIT.W #$0080                                               ;84C857|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84C85A|F003    |84C85F;
     JMP.W .return                                              ;84C85C|4C2BC9  |84C92B;
  
  
   + LDA.W strcJoypad1.current                                  ;84C85F|AD2401  |000124;
-    BIT.W #$0400                                               ;84C862|890004  |      ;
-    BNE .label1                                                ;84C865|D023    |84C88A;
+    BIT.W #!JOYPAD_DOWN                                               
+    BNE .down                                                  ;84C865|D023    |84C88A;
     LDA.W strcJoypad1.current                                  ;84C867|AD2401  |000124;
-    BIT.W #$0800                                               ;84C86A|890008  |      ;
-    BNE .label2                                                ;84C86D|D03E    |84C8AD;
+    BIT.W #!JOYPAD_UP                                               
+    BNE .up                                                    ;84C86D|D03E    |84C8AD;
     LDA.W strcJoypad1.current                                  ;84C86F|AD2401  |000124;
-    BIT.W #$0100                                               ;84C872|890001  |      ;
-    BNE .label3                                                ;84C875|D059    |84C8D0;
+    BIT.W #!JOYPAD_RIGHT                                               
+    BNE .right                                                 ;84C875|D059    |84C8D0;
     LDA.W strcJoypad1.current                                  ;84C877|AD2401  |000124;
-    BIT.W #$0200                                               ;84C87A|890002  |      ;
+    BIT.W #!JOYPAD_LEFT                                               
     BEQ +                                                      ;84C87D|F003    |84C882;
-    JMP.W .label4                                              ;84C87F|4CF3C8  |84C8F3;
+    JMP.W .left                                                ;84C87F|4CF3C8  |84C8F3;
  
  
   + REP #$30                                                   ;84C882|C230    |      ;
-    LDA.W #$0000                                               ;84C884|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84C887|85D4    |0000D4;
  
 .justReturn:
     RTL                                                        ;84C889|6B      |      ;
  
  
-.label1:
+.down:
     REP #$30                                                   ;84C88A|C230    |      ;
     LDA.W $0911                                                ;84C88C|AD1109  |000911;
     CMP.W #$0000                                               ;84C88F|C90000  |      ;
@@ -10033,12 +10037,12 @@ fInput_Unused84C852:
  
  
   + REP #$30                                                   ;84C8A4|C230    |      ;
-    LDA.W #$0000                                               ;84C8A6|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84C8A9|85D4    |0000D4;
     BRA .justReturn                                            ;84C8AB|80DC    |84C889;
  
  
-.label2:
+.up:
     REP #$30                                                   ;84C8AD|C230    |      ;
     LDA.W $0911                                                ;84C8AF|AD1109  |000911;
     CMP.W #$0001                                               ;84C8B2|C90100  |      ;
@@ -10054,12 +10058,12 @@ fInput_Unused84C852:
  
  
   + REP #$30                                                   ;84C8C7|C230    |      ;
-    LDA.W #$0000                                               ;84C8C9|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84C8CC|85D4    |0000D4;
     BRA .justReturn                                            ;84C8CE|80B9    |84C889;
  
  
-.label3:
+.right:
     REP #$30                                                   ;84C8D0|C230    |      ;
     LDA.W $0911                                                ;84C8D2|AD1109  |000911;
     CMP.W #$0002                                               ;84C8D5|C90200  |      ;
@@ -10075,12 +10079,12 @@ fInput_Unused84C852:
  
  
   + REP #$30                                                   ;84C8EA|C230    |      ;
-    LDA.W #$0000                                               ;84C8EC|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84C8EF|85D4    |0000D4;
     BRA .justReturn                                            ;84C8F1|8096    |84C889;
  
  
-.label4:
+.left:
     REP #$30                                                   ;84C8F3|C230    |      ;
     LDA.W $0911                                                ;84C8F5|AD1109  |000911;
     CMP.W #$0003                                               ;84C8F8|C90300  |      ;
@@ -10096,7 +10100,7 @@ fInput_Unused84C852:
  
  
   + REP #$30                                                   ;84C90D|C230    |      ;
-    LDA.W #$0000                                               ;84C90F|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84C912|85D4    |0000D4;
     JMP.W .justReturn                                          ;84C914|4C89C8  |84C889;
  
@@ -10117,17 +10121,17 @@ fInput_Unused84C852:
  
 .return:
     REP #$30                                                   ;84C92B|C230    |      ;
-    LDA.W #$0000                                               ;84C92D|A90000  |      ;
+    LDA.W #!PACTION_NONE                                               
     STA.B nPlayerAction                                        ;84C930|85D4    |0000D4;
     JMP.W .justReturn                                          ;84C932|4C89C8  |84C889;
  
  
-fInput_Unknown84C935:
+fAiInput_PressDown:
     REP #$30                                                   ;84C935|C230    |      ;
-    LDA.W #$0001                                               ;84C937|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84C93A|85D4    |0000D4;
     REP #$30                                                   ;84C93C|C230    |      ;
-    LDA.W #$0000                                               ;84C93E|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;84C941|85DA    |0000DA;
     REP #$30                                                   ;84C943|C230    |      ;
     LDA.W #$0000                                               ;84C945|A90000  |      ;
@@ -10138,28 +10142,28 @@ fInput_Unknown84C935:
     LDA.W $0911                                                ;84C950|AD1109  |000911;
     CMP.W #$0001                                               ;84C953|C90100  |      ;
     BNE +                                                      ;84C956|D003    |84C95B;
-    JMP.W fInput_Unknown84C95E                                 ;84C958|4C5EC9  |84C95E;
+    JMP.W .label1                                              ;84C958|4C5EC9  |84C95E;
  
  
   + JMP.W fInput_Return84C7B5                                  ;84C95B|4CB5C7  |84C7B5;
  
  
-fInput_Unknown84C95E:
+.label1:
     REP #$30                                                   ;84C95E|C230    |      ;
     LDA.W #$0001                                               ;84C960|A90100  |      ;
     STA.B nPlayerAction                                        ;84C963|85D4    |0000D4;
     REP #$30                                                   ;84C965|C230    |      ;
-    LDA.W #$0001                                               ;84C967|A90100  |      ;
+    LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;84C96A|85DA    |0000DA;
     JMP.W fInput_Return84C7B5                                  ;84C96C|4CB5C7  |84C7B5;
  
  
-fInput_Unknown84C96F:
+fAiInput_PressUp:
     REP #$30                                                   ;84C96F|C230    |      ;
-    LDA.W #$0001                                               ;84C971|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84C974|85D4    |0000D4;
     REP #$30                                                   ;84C976|C230    |      ;
-    LDA.W #$0001                                               ;84C978|A90100  |      ;
+    LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;84C97B|85DA    |0000DA;
     REP #$30                                                   ;84C97D|C230    |      ;
     LDA.W #$0001                                               ;84C97F|A90100  |      ;
@@ -10170,28 +10174,28 @@ fInput_Unknown84C96F:
     LDA.W $0911                                                ;84C98A|AD1109  |000911;
     CMP.W #$0000                                               ;84C98D|C90000  |      ;
     BNE +                                                      ;84C990|D003    |84C995;
-    JMP.W fInput_Unknown84C998                                 ;84C992|4C98C9  |84C998;
+    JMP.W .label1                                              ;84C992|4C98C9  |84C998;
  
  
   + JMP.W fInput_Unknown84C740                                 ;84C995|4C40C7  |84C740;
  
  
-fInput_Unknown84C998:
+.label1:
     REP #$30                                                   ;84C998|C230    |      ;
-    LDA.W #$0001                                               ;84C99A|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84C99D|85D4    |0000D4;
     REP #$30                                                   ;84C99F|C230    |      ;
-    LDA.W #$0000                                               ;84C9A1|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;84C9A4|85DA    |0000DA;
     JMP.W fInput_Return84C7B5                                  ;84C9A6|4CB5C7  |84C7B5;
  
  
-fInput_Unknown84C9A9:
+fAiInput_PressRight:
     REP #$30                                                   ;84C9A9|C230    |      ;
-    LDA.W #$0001                                               ;84C9AB|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84C9AE|85D4    |0000D4;
     REP #$30                                                   ;84C9B0|C230    |      ;
-    LDA.W #$0002                                               ;84C9B2|A90200  |      ;
+    LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;84C9B5|85DA    |0000DA;
     REP #$30                                                   ;84C9B7|C230    |      ;
     LDA.W #$0002                                               ;84C9B9|A90200  |      ;
@@ -10202,28 +10206,28 @@ fInput_Unknown84C9A9:
     LDA.W $0911                                                ;84C9C4|AD1109  |000911;
     CMP.W #$0003                                               ;84C9C7|C90300  |      ;
     BNE +                                                      ;84C9CA|D003    |84C9CF;
-    JMP.W fInput_Unknown84C9D2                                 ;84C9CC|4CD2C9  |84C9D2;
+    JMP.W .label1                                              ;84C9CC|4CD2C9  |84C9D2;
  
  
   + JMP.W fInput_Unknown84C740                                 ;84C9CF|4C40C7  |84C740;
  
  
-fInput_Unknown84C9D2:
+.label1:
     REP #$30                                                   ;84C9D2|C230    |      ;
-    LDA.W #$0001                                               ;84C9D4|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84C9D7|85D4    |0000D4;
     REP #$30                                                   ;84C9D9|C230    |      ;
-    LDA.W #$0003                                               ;84C9DB|A90300  |      ;
+    LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;84C9DE|85DA    |0000DA;
     JMP.W fInput_Return84C7B5                                  ;84C9E0|4CB5C7  |84C7B5;
  
  
-fInput_Unknown84C9E3:
+fAiInput_PressLeft:
     REP #$30                                                   ;84C9E3|C230    |      ;
-    LDA.W #$0001                                               ;84C9E5|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84C9E8|85D4    |0000D4;
     REP #$30                                                   ;84C9EA|C230    |      ;
-    LDA.W #$0003                                               ;84C9EC|A90300  |      ;
+    LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;84C9EF|85DA    |0000DA;
     REP #$30                                                   ;84C9F1|C230    |      ;
     LDA.W #$0003                                               ;84C9F3|A90300  |      ;
@@ -10234,26 +10238,26 @@ fInput_Unknown84C9E3:
     LDA.W $0911                                                ;84C9FE|AD1109  |000911;
     CMP.W #$0002                                               ;84CA01|C90200  |      ;
     BNE +                                                      ;84CA04|D003    |84CA09;
-    JMP.W fInput_Unknown84CA0C                                 ;84CA06|4C0CCA  |84CA0C;
+    JMP.W .label1                                              ;84CA06|4C0CCA  |84CA0C;
  
  
   + JMP.W fInput_Unknown84C740                                 ;84CA09|4C40C7  |84C740;
  
  
-fInput_Unknown84CA0C:
+.label1:
     REP #$30                                                   ;84CA0C|C230    |      ;
-    LDA.W #$0001                                               ;84CA0E|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;84CA11|85D4    |0000D4;
     REP #$30                                                   ;84CA13|C230    |      ;
-    LDA.W #$0002                                               ;84CA15|A90200  |      ;
+    LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;84CA18|85DA    |0000DA;
     JMP.W fInput_Return84C7B5                                  ;84CA1A|4CB5C7  |84C7B5;
  
  
-fInput_Unknown84CA1D:
+fInput_RunToJump:
     REP #$30                                                   ;84CA1D|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CA1F|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CA21|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CA24|F003    |84CA29;
     JMP.W .return                                              ;84CA26|4C9DCA  |84CA9D;
  
@@ -10261,7 +10265,7 @@ fInput_Unknown84CA1D:
   + LDA.W #$0000                                               ;84CA29|A90000  |      ;
     LDX.W #$0007                                               ;84CA2C|A20700  |      ;
     LDY.W #$0007                                               ;84CA2F|A00700  |      ;
-    JSL.L fUnknown_81D14E                                      ;84CA32|224ED181|81D14E;
+    JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;84CA32|224ED181|81D14E;
     REP #$30                                                   ;84CA36|C230    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CA38|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CA3B|AC8709  |000987;
@@ -10291,32 +10295,32 @@ fInput_Unknown84CA1D:
     REP #$30                                                   ;84CA66|C230    |      ;
     STA.B $E3                                                  ;84CA68|85E3    |0000E3;
     LDA.B nPlayerPosX                                          ;84CA6A|A5D6    |0000D6;
-    STA.B $DF                                                  ;84CA6C|85DF    |0000DF;
+    STA.B nPlayerPosXCopy                                      ;84CA6C|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84CA6E|A5D8    |0000D8;
-    STA.B $E1                                                  ;84CA70|85E1    |0000E1;
-    STZ.B $E5                                                  ;84CA72|64E5    |0000E5;
-    STZ.B $E7                                                  ;84CA74|64E7    |0000E7;
+    STA.B nPlayerPosYCopy                                      ;84CA70|85E1    |0000E1;
+    STZ.B nPlayerPosCalculationX                               ;84CA72|64E5    |0000E5;
+    STZ.B nPlayerPosCalculationY                               ;84CA74|64E7    |0000E7;
     LDA.B nPlayerDirection                                     ;84CA76|A5DA    |0000DA;
-    JSL.L fGameEngine_Unknown83AF37                            ;84CA78|2237AF83|83AF37;
+    JSL.L fGameEngine_DirectionHandler83AF37                   ;84CA78|2237AF83|83AF37;
     REP #$30                                                   ;84CA7C|C230    |      ;
     BNE .return                                                ;84CA7E|D01D    |84CA9D;
     REP #$20                                                   ;84CA80|C220    |      ;
     LDA.W #$0020                                               ;84CA82|A92000  |      ;
     STA.B $E3                                                  ;84CA85|85E3    |0000E3;
     LDA.B nPlayerDirection                                     ;84CA87|A5DA    |0000DA;
-    JSL.L fGameEngine_Unknown83AD91                            ;84CA89|2291AD83|83AD91;
+    JSL.L fGameEngine_DirectionHandler83AD91                   ;84CA89|2291AD83|83AD91;
     REP #$30                                                   ;84CA8D|C230    |      ;
     CMP.W #$0000                                               ;84CA8F|C90000  |      ;
     BNE .return                                                ;84CA92|D009    |84CA9D;
     REP #$30                                                   ;84CA94|C230    |      ;
-    LDA.W #$0003                                               ;84CA96|A90300  |      ;
+    LDA.W #!PACTION_JUMP                                               
     STA.B nPlayerAction                                        ;84CA99|85D4    |0000D4;
     BRA .justReturn                                            ;84CA9B|8007    |84CAA4;
  
  
 .return:
     REP #$30                                                   ;84CA9D|C230    |      ;
-    LDA.W #$0002                                               ;84CA9F|A90200  |      ;
+    LDA.W #!PACTION_RUN                                               
     STA.B nPlayerAction                                        ;84CAA2|85D4    |0000D4;
  
 .justReturn:
@@ -10326,7 +10330,7 @@ fInput_Unknown84CA1D:
 fInput_Unknown84CAA5:
     REP #$30                                                   ;84CAA5|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CAA7|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CAA9|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CAAC|F003    |84CAB1;
     JMP.W .label3                                              ;84CAAE|4C2BCB  |84CB2B;
  
@@ -10345,7 +10349,7 @@ fInput_Unknown84CAA5:
  
   + REP #$30                                                   ;84CAC7|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CAC9|A5D2    |0000D2;
-    AND.W #$0002                                               ;84CACB|290200  |      ;
+    AND.W #!PFLAGS_HOLDINGITEM                                               
     BEQ +                                                      ;84CACE|F003    |84CAD3;
     JMP.W .label1                                              ;84CAD0|4CF6CA  |84CAF6;
  
@@ -10354,7 +10358,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0000                                               ;84CAD5|A90000  |      ;
     LDX.W #$0007                                               ;84CAD8|A20700  |      ;
     LDY.W #$0007                                               ;84CADB|A00700  |      ;
-    JSL.L fUnknown_81D14E                                      ;84CADE|224ED181|81D14E;
+    JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;84CADE|224ED181|81D14E;
     REP #$30                                                   ;84CAE2|C230    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CAE4|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CAE7|AC8709  |000987;
@@ -10366,7 +10370,7 @@ fInput_Unknown84CAA5:
  
 .label1:
     REP #$30                                                   ;84CAF6|C230    |      ;
-    LDA.W #$0005                                               ;84CAF8|A90500  |      ;
+    LDA.W #!PACTION_DROPITEM                                               
     STA.B nPlayerAction                                        ;84CAFB|85D4    |0000D4;
     RTL                                                        ;84CAFD|6B      |      ;
  
@@ -10376,7 +10380,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0000                                               ;84CB00|A90000  |      ;
     LDX.W #$0007                                               ;84CB03|A20700  |      ;
     LDY.W #$0007                                               ;84CB06|A00700  |      ;
-    JSL.L fUnknown_81D14E                                      ;84CB09|224ED181|81D14E;
+    JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;84CB09|224ED181|81D14E;
     REP #$30                                                   ;84CB0D|C230    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CB0F|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CB12|AC8709  |000987;
@@ -10396,15 +10400,15 @@ fInput_Unknown84CAA5:
 .label3:
     REP #$30                                                   ;84CB2B|C230    |      ;
     LDA.B nPlayerPosX                                          ;84CB2D|A5D6    |0000D6;
-    STA.B $DF                                                  ;84CB2F|85DF    |0000DF;
+    STA.B nPlayerPosXCopy                                      ;84CB2F|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84CB31|A5D8    |0000D8;
-    STA.B $E1                                                  ;84CB33|85E1    |0000E1;
-    STZ.B $E5                                                  ;84CB35|64E5    |0000E5;
-    STZ.B $E7                                                  ;84CB37|64E7    |0000E7;
+    STA.B nPlayerPosYCopy                                      ;84CB33|85E1    |0000E1;
+    STZ.B nPlayerPosCalculationX                               ;84CB35|64E5    |0000E5;
+    STZ.B nPlayerPosCalculationY                               ;84CB37|64E7    |0000E7;
     LDA.W #$0010                                               ;84CB39|A91000  |      ;
     STA.B $E3                                                  ;84CB3C|85E3    |0000E3;
     LDA.B nPlayerDirection                                     ;84CB3E|A5DA    |0000DA;
-    JSL.L fGameEngine_Unknown83AD91                            ;84CB40|2291AD83|83AD91;
+    JSL.L fGameEngine_DirectionHandler83AD91                   ;84CB40|2291AD83|83AD91;
     REP #$30                                                   ;84CB44|C230    |      ;
     CMP.W #$0000                                               ;84CB46|C90000  |      ;
     BEQ +                                                      ;84CB49|F003    |84CB4E;
@@ -10415,7 +10419,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0000                                               ;84CB50|A90000  |      ;
     LDX.W #$0007                                               ;84CB53|A20700  |      ;
     LDY.W #$0007                                               ;84CB56|A00700  |      ;
-    JSL.L fUnknown_81D14E                                      ;84CB59|224ED181|81D14E;
+    JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;84CB59|224ED181|81D14E;
     REP #$20                                                   ;84CB5D|C220    |      ;
     LDA.W #$0002                                               ;84CB5F|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CB62|AE8509  |000985;
@@ -10436,7 +10440,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0001                                               ;84CB7F|A90100  |      ;
     LDX.W #$000A                                               ;84CB82|A20A00  |      ;
     LDY.W #$000A                                               ;84CB85|A00A00  |      ;
-    JSL.L fUnknown_81D14E                                      ;84CB88|224ED181|81D14E;
+    JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;84CB88|224ED181|81D14E;
     REP #$20                                                   ;84CB8C|C220    |      ;
     LDA.W #$0002                                               ;84CB8E|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CB91|AE8509  |000985;
@@ -10457,7 +10461,7 @@ fInput_Unknown84CAA5:
     LDA.W #$0001                                               ;84CBAE|A90100  |      ;
     LDX.W #$0000                                               ;84CBB1|A20000  |      ;
     LDY.W #$0000                                               ;84CBB4|A00000  |      ;
-    JSL.L fUnknown_81D14E                                      ;84CBB7|224ED181|81D14E;
+    JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;84CBB7|224ED181|81D14E;
     REP #$20                                                   ;84CBBB|C220    |      ;
     LDA.W #$0002                                               ;84CBBD|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CBC0|AE8509  |000985;
@@ -10495,10 +10499,10 @@ fInput_Unknown84CAA5:
     LDA.B nMapEngine_DestinationId                             ;84CC01|A522    |000022;
     STA.L nDogAreaId                                           ;84CC03|8F301F7F|7F1F30;
     REP #$30                                                   ;84CC07|C230    |      ;
-    LDA.W #$0016                                               ;84CC09|A91600  |      ;
+    LDA.W #!PACTION_DROPPINGDOG                                               
     STA.B nPlayerAction                                        ;84CC0C|85D4    |0000D4;
     REP #$30                                                   ;84CC0E|C230    |      ;
-    LDA.W #$0800                                               ;84CC10|A90008  |      ;
+    LDA.W #!PFLAGS_DOGHUGGING                                               
     EOR.W #$FFFF                                               ;84CC13|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;84CC16|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;84CC18|85D2    |0000D2;
@@ -10512,22 +10516,22 @@ fInput_Unknown84CAA5:
 .label4:
     REP #$30                                                   ;84CC1C|C230    |      ;
     LDA.B nPlayerDirection                                     ;84CC1E|A5DA    |0000DA;
-    CMP.W #$0000                                               ;84CC20|C90000  |      ;
+    CMP.W #!PDIR_DOWN                                               
     BNE +                                                      ;84CC23|D003    |84CC28;
     JMP.W .label5                                              ;84CC25|4C40CC  |84CC40;
  
  
-  + CMP.W #$0001                                               ;84CC28|C90100  |      ;
+  + CMP.W #!PDIR_UP                                               
     BNE +                                                      ;84CC2B|D003    |84CC30;
     JMP.W .label6                                              ;84CC2D|4C6FCC  |84CC6F;
  
  
-  + CMP.W #$0002                                               ;84CC30|C90200  |      ;
+  + CMP.W #!PDIR_LEFT                                               
     BNE +                                                      ;84CC33|D003    |84CC38;
     JMP.W .label7                                              ;84CC35|4C98CC  |84CC98;
  
  
-  + CMP.W #$0003                                               ;84CC38|C90300  |      ;
+  + CMP.W #!PDIR_RIGHT                                               
     BNE .label5                                                ;84CC3B|D003    |84CC40;
     JMP.W .label8                                              ;84CC3D|4CC0CC  |84CCC0;
  
@@ -10550,7 +10554,7 @@ fInput_Unknown84CAA5:
     JMP.W .label9                                              ;84CC61|4CE8CC  |84CCE8;
  
  
-  + LDA.W #$0000                                               ;84CC64|A90000  |      ;
+  + LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;84CC67|85DA    |0000DA;
     STA.W $0911                                                ;84CC69|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC6C|4C15CD  |84CD15;
@@ -10568,7 +10572,7 @@ fInput_Unknown84CAA5:
     JSL.L fInput_Unknown84CD16                                 ;84CC85|2216CD84|84CD16;
     REP #$30                                                   ;84CC89|C230    |      ;
     BEQ .label9                                                ;84CC8B|F05B    |84CCE8;
-    LDA.W #$0001                                               ;84CC8D|A90100  |      ;
+    LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;84CC90|85DA    |0000DA;
     STA.W $0911                                                ;84CC92|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC95|4C15CD  |84CD15;
@@ -10586,7 +10590,7 @@ fInput_Unknown84CAA5:
     JSL.L fInput_Unknown84CD16                                 ;84CCAE|2216CD84|84CD16;
     REP #$30                                                   ;84CCB2|C230    |      ;
     BEQ .label9                                                ;84CCB4|F032    |84CCE8;
-    LDA.W #$0002                                               ;84CCB6|A90200  |      ;
+    LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;84CCB9|85DA    |0000DA;
     STA.W $0911                                                ;84CCBB|8D1109  |000911;
     BRA .justReturn3                                           ;84CCBE|8055    |84CD15;
@@ -10604,7 +10608,7 @@ fInput_Unknown84CAA5:
     JSL.L fInput_Unknown84CD16                                 ;84CCD6|2216CD84|84CD16;
     REP #$30                                                   ;84CCDA|C230    |      ;
     BEQ .label9                                                ;84CCDC|F00A    |84CCE8;
-    LDA.W #$0003                                               ;84CCDE|A90300  |      ;
+    LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;84CCE1|85DA    |0000DA;
     STA.W $0911                                                ;84CCE3|8D1109  |000911;
     BRA .justReturn3                                           ;84CCE6|802D    |84CD15;
@@ -10638,13 +10642,13 @@ fInput_Unknown84CD16:
     LDA.W #$0010                                               ;84CD18|A91000  |      ;
     STA.B $E3                                                  ;84CD1B|85E3    |0000E3;
     LDA.B nPlayerPosX                                          ;84CD1D|A5D6    |0000D6;
-    STA.B $DF                                                  ;84CD1F|85DF    |0000DF;
+    STA.B nPlayerPosXCopy                                      ;84CD1F|85DF    |0000DF;
     LDA.B nPlayerPosY                                          ;84CD21|A5D8    |0000D8;
-    STA.B $E1                                                  ;84CD23|85E1    |0000E1;
-    STZ.B $E5                                                  ;84CD25|64E5    |0000E5;
-    STZ.B $E7                                                  ;84CD27|64E7    |0000E7;
+    STA.B nPlayerPosYCopy                                      ;84CD23|85E1    |0000E1;
+    STZ.B nPlayerPosCalculationX                               ;84CD25|64E5    |0000E5;
+    STZ.B nPlayerPosCalculationY                               ;84CD27|64E7    |0000E7;
     LDA.W $0911                                                ;84CD29|AD1109  |000911;
-    JSL.L fGameEngine_Unknown83AF37                            ;84CD2C|2237AF83|83AF37;
+    JSL.L fGameEngine_DirectionHandler83AF37                   ;84CD2C|2237AF83|83AF37;
     REP #$30                                                   ;84CD30|C230    |      ;
     BEQ +                                                      ;84CD32|F003    |84CD37;
     JMP.W .return                                              ;84CD34|4C71CD  |84CD71;
@@ -10670,7 +10674,7 @@ fInput_Unknown84CD16:
     LDA.W #$0010                                               ;84CD55|A91000  |      ;
     STA.B $E3                                                  ;84CD58|85E3    |0000E3;
     LDA.W $0911                                                ;84CD5A|AD1109  |000911;
-    JSL.L fGameEngine_Unknown83AD91                            ;84CD5D|2291AD83|83AD91;
+    JSL.L fGameEngine_DirectionHandler83AD91                   ;84CD5D|2291AD83|83AD91;
     REP #$30                                                   ;84CD61|C230    |      ;
     CMP.W #$0000                                               ;84CD63|C90000  |      ;
     BEQ +                                                      ;84CD66|F003    |84CD6B;
@@ -10705,7 +10709,7 @@ fInput_Unknown84CD77:
  
   + REP #$30                                                   ;84CD8F|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CD91|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CD93|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CD96|F003    |84CD9B;
     JMP.W fInput_Return84CDDC                                  ;84CD98|4CDCCD  |84CDDC;
  
@@ -10776,7 +10780,7 @@ fInput_SetPlayerAction0x13:
     REP #$20                                                   ;84CE02|C220    |      ;
     CLC                                                        ;84CE04|18      |      ;
     ADC.W #$008B                                               ;84CE05|698B00  |      ;
-    STA.W nFoodToEatSpriteIndex                                ;84CE08|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;84CE08|8D0109  |000901;
     RTL                                                        ;84CE0B|6B      |      ;
  
  
@@ -10797,7 +10801,7 @@ fInput_SetPlayerAction0x0D_WhistleR:
  
   + REP #$30                                                   ;84CE24|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CE26|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CE28|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CE2B|F003    |84CE30;
     JMP.W .justReturn                                          ;84CE2D|4C42CE  |84CE42;
  
@@ -10831,7 +10835,7 @@ fInput_SetPlayerAction0x1B_WhistleL:
  
   + REP #$30                                                   ;84CE5B|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CE5D|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CE5F|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CE62|F003    |84CE67;
     JMP.W .justReturn                                          ;84CE64|4C79CE  |84CE79;
  
@@ -10865,7 +10869,7 @@ fInput_SetPlayerAction0x0C:
  
   + REP #$30                                                   ;84CE92|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CE94|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CE96|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CE99|F003    |84CE9E;
     JMP.W .justReturn                                          ;84CE9B|4CA5CE  |84CEA5;
  
@@ -10895,7 +10899,7 @@ fInput_SetPlayerAction0x1C:
  
   + REP #$30                                                   ;84CEBE|C230    |      ;
     LDA.B nPlayerFlags                                         ;84CEC0|A5D2    |0000D2;
-    AND.W #$0800                                               ;84CEC2|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;84CEC5|F003    |84CECA;
     JMP.W .justReturn                                          ;84CEC7|4CD1CE  |84CED1;
  
@@ -11018,28 +11022,28 @@ fInput_Unknown84CF62:
 fInput_Unknown84CF95:
     REP #$30                                                   ;84CF95|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF97|AD2801  |000128;
-    BIT.W #$0400                                               ;84CF9A|890004  |      ;
+    BIT.W #!JOYPAD_DOWN                                               
     BNE fInput_Unknown84CFEA                                   ;84CF9D|D04B    |84CFEA;
     LDA.W strcJoypad1.newInput                                 ;84CF9F|AD2801  |000128;
-    BIT.W #$0800                                               ;84CFA2|890008  |      ;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84CFA5|F003    |84CFAA;
     JMP.W fInput_Unknown84D03A                                 ;84CFA7|4C3AD0  |84D03A;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84CFAA|AD2801  |000128;
-    BIT.W #$0100                                               ;84CFAD|890001  |      ;
+    BIT.W #!JOYPAD_RIGHT                                               
     BEQ +                                                      ;84CFB0|F003    |84CFB5;
     JMP.W fInput_Unknown84D08E                                 ;84CFB2|4C8ED0  |84D08E;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84CFB5|AD2801  |000128;
-    BIT.W #$0200                                               ;84CFB8|890002  |      ;
+    BIT.W #!JOYPAD_LEFT                                               
     BEQ +                                                      ;84CFBB|F003    |84CFC0;
     JMP.W fInput_Unknown84D0F4                                 ;84CFBD|4CF4D0  |84D0F4;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84CFC0|AD2801  |000128;
-    BIT.W #$0080                                               ;84CFC3|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84CFC6|F003    |84CFCB;
     JMP.W fInput_Unknown84CFCC                                 ;84CFC8|4CCCCF  |84CFCC;
  
@@ -11264,1000 +11268,4 @@ fInput_Unknown84D0F4:
     RTL                                                        ;84D159|6B      |      ;
  
  
-Padding_840000:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D15A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D166|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D172|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D17E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D18A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D196|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D1F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D202|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D20E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D21A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D226|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D232|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D23E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D24A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D256|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D262|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D26E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D27A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D286|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D292|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D29E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D2FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D30A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D316|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D322|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D32E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D33A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D346|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D352|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D35E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D36A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D376|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D382|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D38E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D39A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D3FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D406|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D412|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D41E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D42A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D436|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D442|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D44E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D45A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D466|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D472|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D47E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D48A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D496|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D4F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D502|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D50E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D51A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D526|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D532|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D53E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D54A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D556|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D562|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D56E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D57A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D586|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D592|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D59E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D5FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D60A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D616|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D622|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D62E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D63A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D646|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D652|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D65E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D66A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D676|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D682|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D68E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D69A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D6FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D706|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D712|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D71E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D72A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D736|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D742|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D74E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D75A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D766|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D772|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D77E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D78A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D796|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D7F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D802|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D80E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D81A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D826|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D832|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D83E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D84A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D856|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D862|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D86E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D87A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D886|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D892|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D89E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D8FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D90A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D916|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D922|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D92E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D93A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D946|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D952|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D95E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D96A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D976|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D982|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D98E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D99A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84D9FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA06|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA12|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA1E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA2A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA36|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA42|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA4E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA5A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA66|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA72|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA7E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA8A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DA96|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DAA2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DAAE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DABA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DAC6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DAD2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DADE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DAEA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DAF6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB02|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB0E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB1A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB26|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB32|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB3E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB4A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB56|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB6E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB7A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB86|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB92|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DB9E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBAA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBB6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBC2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBCE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBDA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBE6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBF2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DBFE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC0A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC16|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC22|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC2E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC3A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC46|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC52|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC5E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC6A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC76|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC82|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC8E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DC9A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCA6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCB2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCBE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCCA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCD6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCE2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCEE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DCFA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD06|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD12|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD1E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD2A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD36|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD42|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD4E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD5A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD66|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD72|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD7E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD8A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DD96|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDA2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDAE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDBA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDC6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDD2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDDE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDEA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DDF6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE02|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE0E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE1A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE26|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE32|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE3E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE4A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE56|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE6E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE7A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE86|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE92|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DE9E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEAA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEB6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEC2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DECE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEDA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEE6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEF2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DEFE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF0A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF16|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF22|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF2E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF3A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF46|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF52|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF5E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF6A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF76|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF82|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF8E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DF9A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFA6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFB2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFBE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFCA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFD6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFE2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFEE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84DFFA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E006|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E012|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E01E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E02A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E036|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E042|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E04E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E05A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E066|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E072|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E07E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E08A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E096|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E0F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E102|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E10E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E11A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E126|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E132|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E13E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E14A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E156|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E162|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E16E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E17A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E186|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E192|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E19E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E1FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E20A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E216|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E222|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E22E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E23A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E246|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E252|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E25E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E26A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E276|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E282|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E28E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E29A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E2FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E306|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E312|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E31E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E32A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E336|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E342|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E34E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E35A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E366|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E372|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E37E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E38A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E396|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E3F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E402|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E40E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E41A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E426|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E432|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E43E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E44A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E456|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E462|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E46E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E47A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E486|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E492|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E49E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E4FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E50A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E516|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E522|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E52E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E53A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E546|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E552|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E55E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E56A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E576|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E582|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E58E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E59A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E5FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E606|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E612|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E61E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E62A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E636|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E642|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E64E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E65A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E666|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E672|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E67E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E68A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E696|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E6F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E702|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E70E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E71A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E726|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E732|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E73E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E74A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E756|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E762|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E76E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E77A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E786|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E792|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E79E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E7FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E80A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E816|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E822|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E82E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E83A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E846|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E852|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E85E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E86A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E876|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E882|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E88E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E89A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E8FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E906|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E912|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E91E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E92A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E936|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E942|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E94E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E95A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E966|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E972|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E97E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E98A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E996|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84E9F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA02|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA0E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA1A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA26|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA32|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA3E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA4A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA56|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA6E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA7A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA86|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA92|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EA9E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EAAA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EAB6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EAC2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EACE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EADA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EAE6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EAF2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EAFE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB0A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB16|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB22|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB2E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB3A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB46|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB52|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB5E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB6A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB76|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB82|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB8E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EB9A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBA6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBB2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBBE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBCA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBD6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBE2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBEE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EBFA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC06|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC12|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC1E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC2A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC36|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC42|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC4E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC5A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC66|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC72|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC7E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC8A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EC96|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECA2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECAE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECBA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECC6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECD2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECDE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECEA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ECF6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED02|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED0E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED1A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED26|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED32|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED3E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED4A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED56|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED6E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED7A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED86|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED92|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84ED9E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDAA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDB6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDC2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDCE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDDA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDE6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDF2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EDFE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE0A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE16|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE22|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE2E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE3A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE46|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE52|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE5E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE6A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE76|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE82|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE8E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EE9A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EEA6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EEB2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EEBE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EECA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EED6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EEE2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EEEE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EEFA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF06|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF12|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF1E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF2A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF36|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF42|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF4E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF5A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF66|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF72|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF7E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF8A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EF96|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFA2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFAE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFBA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFC6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFD2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFDE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFEA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84EFF6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F002|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F00E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F01A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F026|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F032|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F03E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F04A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F056|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F062|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F06E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F07A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F086|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F092|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F09E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F0FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F10A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F116|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F122|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F12E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F13A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F146|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F152|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F15E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F16A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F176|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F182|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F18E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F19A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F1FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F206|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F212|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F21E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F22A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F236|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F242|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F24E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F25A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F266|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F272|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F27E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F28A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F296|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F2F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F302|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F30E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F31A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F326|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F332|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F33E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F34A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F356|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F362|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F36E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F37A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F386|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F392|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F39E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F3FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F40A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F416|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F422|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F42E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F43A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F446|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F452|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F45E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F46A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F476|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F482|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F48E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F49A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F4FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F506|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F512|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F51E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F52A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F536|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F542|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F54E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F55A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F566|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F572|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F57E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F58A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F596|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F5F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F602|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F60E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F61A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F626|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F632|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F63E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F64A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F656|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F662|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F66E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F67A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F686|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F692|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F69E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F6FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F70A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F716|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F722|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F72E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F73A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F746|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F752|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F75E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F76A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F776|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F782|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F78E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F79A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7A6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7B2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7BE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7CA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7D6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7E2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7EE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F7FA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F806|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F812|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F81E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F82A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F836|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F842|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F84E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F85A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F866|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F872|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F87E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F88A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F896|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8A2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8AE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8BA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8C6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8D2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8DE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8EA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F8F6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F902|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F90E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F91A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F926|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F932|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F93E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F94A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F956|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F962|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F96E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F97A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F986|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F992|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F99E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9AA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9B6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9C2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9CE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9DA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9E6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9F2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84F9FE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA0A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA16|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA22|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA2E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA3A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA46|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA52|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA5E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA6A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA76|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA82|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA8E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FA9A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FAA6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FAB2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FABE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FACA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FAD6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FAE2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FAEE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FAFA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB06|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB12|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB1E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB2A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB36|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB42|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB4E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB5A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB66|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB72|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB7E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB8A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FB96|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBA2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBAE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBBA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBC6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBD2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBDE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBEA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FBF6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC02|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC0E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC1A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC26|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC32|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC3E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC4A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC56|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC6E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC7A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC86|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC92|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FC9E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCAA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCB6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCC2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCCE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCDA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCE6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCF2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FCFE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD0A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD16|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD22|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD2E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD3A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD46|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD52|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD5E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD6A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD76|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD82|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD8E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FD9A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDA6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDB2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDBE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDCA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDD6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDE2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDEE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FDFA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE06|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE12|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE1E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE2A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE36|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE42|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE4E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE5A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE66|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE72|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE7E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE8A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FE96|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEA2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEAE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEBA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEC6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FED2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEDE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEEA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FEF6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF02|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF0E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF1A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF26|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF32|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF3E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF4A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF56|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF62|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF6E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF7A|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF86|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF92|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FF9E|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFAA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFB6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFC2|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFCE|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFDA|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFE6|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;84FFF2|        |      ;
-    db $00,$00                                                 ;84FFFE|        |      ;
+    pad $84FFFF

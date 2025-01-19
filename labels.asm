@@ -27,6 +27,10 @@
     nPlayerPosX = $0000D6; !^ n16 ^!
     nPlayerPosY = $0000D8; !^ n16 ^!
     nPlayerDirection = $0000DA; !^ n16 ^!
+    nPlayerPosXCopy = $0000DF; !^ n16 ^!
+    nPlayerPosYCopy = $0000E1; !^ n16 ^!
+    nPlayerPosCalculationX = $0000E5; !^ n16 ^!
+    nPlayerPosCalculationY = $0000E7; !^ n16 ^!
     nCameraX = $0000F5; !^ n16 ^!
     nCameraY = $0000F7; !^ n16 ^!
     nRandomTempVar1 = $000100
@@ -71,14 +75,15 @@
     sHorseNameLong = $0008E5; !^ 4 * s16 ^!
     sFirstChildNameLong = $0008ED; !^ 4 * s16 ^!
     sSecondChildNameLong = $0008F5; !^ 4 * s16 ^!
-    nUnknownFlags08FD = $0008FD; !^ n16 ^!
-    nFoodToEatSpriteIndex = $000901; !^ n8 - nFoodToEat plus 0x30 ^!
-    nPlayerPosXCopy = $000907; !^ n16 ^!
-    nPlayerPosYCopy = $000909; !^ n16 ^!
+    nAIJoypadInput = $0008FD; !^ n16 ^!
+    nAISteeringCounter = $0008FF; !^ n16 ^!
+    nSmallItemSpriteIndex = $000901; !^ n8 ^!
+    nPlayerPosXCopy2 = $000907; !^ n16 ^!
+    nPlayerPosYCopy2 = $000909; !^ n16 ^!
     nPlayerStamina = $000917; !^ n8 MaxHP ^!
     nPlayerEnergy = $000918; !^ n8 HP ^!
-    nHandItem_Current = $00091D; !^ n8 ^!
-    nHandItem_Previous = $00091E; !^ n8 ^!
+    nCarryItem_Current = $00091D; !^ n8 ^!
+    nCarryItem_Previous = $00091E; !^ n8 ^!
     nToolEquipped = $000921
     nToolSecond = $000923
     nFoodToEat = $000924; !^ n8 ^!
@@ -362,6 +367,8 @@
     nDogHugs = $7F1F52; !^ n16 ^!
     nRanchMasteringRate = $7F1F54; !^ n16 ^!
     nRanchDevelopmentRate = $7F1F56; !^ n8 (0-100%) ^!
+ 
+ 
  
  
  

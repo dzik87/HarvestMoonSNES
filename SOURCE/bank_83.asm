@@ -4823,8 +4823,8 @@ fGameEngine_FirstNight:
     REP #$20                                                   ;83AC56|C220    |      ;
     STZ.B nPlayerPosX                                          ;83AC58|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;83AC5A|64D8    |0000D8;
-    STZ.W nPlayerPosXCopy                                      ;83AC5C|9C0709  |000907;
-    STZ.W nPlayerPosYCopy                                      ;83AC5F|9C0909  |000909;
+    STZ.W nPlayerPosXCopy2                                     ;83AC5C|9C0709  |000907;
+    STZ.W nPlayerPosYCopy2                                     ;83AC5F|9C0909  |000909;
     SEP #$20                                                   ;83AC62|E220    |      ;
     STZ.W $0919                                                ;83AC64|9C1909  |000919;
     REP #$20                                                   ;83AC67|C220    |      ;
@@ -4875,7 +4875,7 @@ fGameEngine_FirstNight:
     STA.W $0911                                                ;83ACEA|8D1109  |000911;
     REP #$30                                                   ;83ACED|C230    |      ;
     LDA.W #$0000                                               ;83ACEF|A90000  |      ;
-    STA.W nFoodToEatSpriteIndex                                ;83ACF2|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;83ACF2|8D0109  |000901;
     REP #$20                                                   ;83ACF5|C220    |      ;
     STZ.W $0915                                                ;83ACF7|9C1509  |000915;
     SEP #$20                                                   ;83ACFA|E220    |      ;
@@ -4889,8 +4889,8 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AD0F|E220    |      ;
     STZ.W nWeatherDialogIdIndex                                ;83AD11|9C9009  |000990;
     SEP #$20                                                   ;83AD14|E220    |      ;
-    STZ.W nHandItem_Current                                    ;83AD16|9C1D09  |00091D;
-    STZ.W nHandItem_Previous                                   ;83AD19|9C1E09  |00091E;
+    STZ.W nCarryItem_Current                                   ;83AD16|9C1D09  |00091D;
+    STZ.W nCarryItem_Previous                                  ;83AD19|9C1E09  |00091E;
     STZ.W $091F                                                ;83AD1C|9C1F09  |00091F;
     STZ.W $0920                                                ;83AD1F|9C2009  |000920;
     STZ.W $096B                                                ;83AD22|9C6B09  |00096B;
@@ -4937,8 +4937,8 @@ fGameEngine_FirstNight:
     RTL                                                        ;83AD90|6B      |      ;
  
  
-fGameEngine_Unknown83AD91:
-    REP #$30                                                   ;83AD91|C230    |      ; A: nIndex
+fGameEngine_DirectionHandler83AD91:
+    REP #$30                                                   ;83AD91|C230    |      ; A: nPlayerDirection
     TAX                                                        ;83AD93|AA      |      ; X = A
     LDA.L strcDailyFlags.flags4                                ;83AD94|AF601F7F|7F1F60;
     AND.W #$4000                                               ;83AD98|290040  |      ;
@@ -4959,13 +4959,13 @@ fGameEngine_Unknown83AD91:
     dw .case4                                                  ;83ADAC|        |83ADF1;
  
 .case0:
-    LDA.B $DF                                                  ;83ADAE|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83ADAE|A5DF    |0000DF;
     CLC                                                        ;83ADB0|18      |      ;
     ADC.W #$000C                                               ;83ADB1|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADB4|8580    |000080;
-    LDA.B $E1                                                  ;83ADB6|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83ADB6|A5E1    |0000E1;
     CLC                                                        ;83ADB8|18      |      ;
-    ADC.B $E7                                                  ;83ADB9|65E7    |0000E7;
+    ADC.B nPlayerPosCalculationY                               ;83ADB9|65E7    |0000E7;
     ADC.B $E3                                                  ;83ADBB|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADBD|690C00  |      ;
     STA.B n16TempVar3                                          ;83ADC0|8582    |000082;
@@ -4973,13 +4973,13 @@ fGameEngine_Unknown83AD91:
  
  
 .case1:
-    LDA.B $DF                                                  ;83ADC4|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83ADC4|A5DF    |0000DF;
     CLC                                                        ;83ADC6|18      |      ;
     ADC.W #$000C                                               ;83ADC7|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADCA|8580    |000080;
-    LDA.B $E1                                                  ;83ADCC|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83ADCC|A5E1    |0000E1;
     SEC                                                        ;83ADCE|38      |      ;
-    SBC.B $E7                                                  ;83ADCF|E5E7    |0000E7;
+    SBC.B nPlayerPosCalculationY                               ;83ADCF|E5E7    |0000E7;
     SBC.B $E3                                                  ;83ADD1|E5E3    |0000E3;
     CLC                                                        ;83ADD3|18      |      ;
     ADC.W #$000C                                               ;83ADD4|690C00  |      ;
@@ -4988,13 +4988,13 @@ fGameEngine_Unknown83AD91:
  
  
 .case3:
-    LDA.B $DF                                                  ;83ADDB|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83ADDB|A5DF    |0000DF;
     CLC                                                        ;83ADDD|18      |      ;
-    ADC.B $E5                                                  ;83ADDE|65E5    |0000E5;
+    ADC.B nPlayerPosCalculationX                               ;83ADDE|65E5    |0000E5;
     ADC.B $E3                                                  ;83ADE0|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADE2|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADE5|8580    |000080;
-    LDA.B $E1                                                  ;83ADE7|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83ADE7|A5E1    |0000E1;
     CLC                                                        ;83ADE9|18      |      ;
     ADC.W #$000C                                               ;83ADEA|690C00  |      ;
     STA.B n16TempVar3                                          ;83ADED|8582    |000082;
@@ -5002,14 +5002,14 @@ fGameEngine_Unknown83AD91:
  
  
 .case4:
-    LDA.B $DF                                                  ;83ADF1|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83ADF1|A5DF    |0000DF;
     SEC                                                        ;83ADF3|38      |      ;
-    SBC.B $E5                                                  ;83ADF4|E5E5    |0000E5;
+    SBC.B nPlayerPosCalculationX                               ;83ADF4|E5E5    |0000E5;
     SBC.B $E3                                                  ;83ADF6|E5E3    |0000E3;
     CLC                                                        ;83ADF8|18      |      ;
     ADC.W #$000C                                               ;83ADF9|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADFC|8580    |000080;
-    LDA.B $E1                                                  ;83ADFE|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83ADFE|A5E1    |0000E1;
     CLC                                                        ;83AE00|18      |      ;
     ADC.W #$000C                                               ;83AE01|690C00  |      ;
     STA.B n16TempVar3                                          ;83AE04|8582    |000082;
@@ -5103,8 +5103,8 @@ fGameEngine_Unknown83AD91:
  
 .label3:
     REP #$30                                                   ;83AEA2|C230    |      ;
-    LDX.B $E5                                                  ;83AEA4|A6E5    |0000E5;
-    LDY.B $E7                                                  ;83AEA6|A4E7    |0000E7;
+    LDX.B nPlayerPosCalculationX                               ;83AEA4|A6E5    |0000E5;
+    LDY.B nPlayerPosCalculationY                               ;83AEA6|A4E7    |0000E7;
     LDA.W #$0000                                               ;83AEA8|A90000  |      ;
     BRA .justReturn                                            ;83AEAB|8015    |83AEC2;
  
@@ -5139,41 +5139,41 @@ fGameEngine_Unknown83AEC3:
     dw .case3                                                  ;83AED0|        |83AEF9;
  
 .case0:
-    LDA.B $DF                                                  ;83AED2|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AED2|A5DF    |0000DF;
     STA.B n16TempVar2                                          ;83AED4|8580    |000080;
-    LDA.B $E1                                                  ;83AED6|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83AED6|A5E1    |0000E1;
     CLC                                                        ;83AED8|18      |      ;
-    ADC.B $E7                                                  ;83AED9|65E7    |0000E7;
+    ADC.B nPlayerPosCalculationY                               ;83AED9|65E7    |0000E7;
     STA.B n16TempVar3                                          ;83AEDB|8582    |000082;
     BRA .continue                                              ;83AEDD|8027    |83AF06;
  
  
 .case1:
-    LDA.B $DF                                                  ;83AEDF|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AEDF|A5DF    |0000DF;
     STA.B n16TempVar2                                          ;83AEE1|8580    |000080;
-    LDA.B $E1                                                  ;83AEE3|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83AEE3|A5E1    |0000E1;
     SEC                                                        ;83AEE5|38      |      ;
-    SBC.B $E7                                                  ;83AEE6|E5E7    |0000E7;
+    SBC.B nPlayerPosCalculationY                               ;83AEE6|E5E7    |0000E7;
     STA.B n16TempVar3                                          ;83AEE8|8582    |000082;
     BRA .continue                                              ;83AEEA|801A    |83AF06;
  
  
 .case2:
-    LDA.B $DF                                                  ;83AEEC|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AEEC|A5DF    |0000DF;
     CLC                                                        ;83AEEE|18      |      ;
-    ADC.B $E5                                                  ;83AEEF|65E5    |0000E5;
+    ADC.B nPlayerPosCalculationX                               ;83AEEF|65E5    |0000E5;
     STA.B n16TempVar2                                          ;83AEF1|8580    |000080;
-    LDA.B $E1                                                  ;83AEF3|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83AEF3|A5E1    |0000E1;
     STA.B n16TempVar3                                          ;83AEF5|8582    |000082;
     BRA .continue                                              ;83AEF7|800D    |83AF06;
  
  
 .case3:
-    LDA.B $DF                                                  ;83AEF9|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AEF9|A5DF    |0000DF;
     SEC                                                        ;83AEFB|38      |      ;
-    SBC.B $E5                                                  ;83AEFC|E5E5    |0000E5;
+    SBC.B nPlayerPosCalculationX                               ;83AEFC|E5E5    |0000E5;
     STA.B n16TempVar2                                          ;83AEFE|8580    |000080;
-    LDA.B $E1                                                  ;83AF00|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83AF00|A5E1    |0000E1;
     STA.B n16TempVar3                                          ;83AF02|8582    |000082;
     BRA .continue                                              ;83AF04|8000    |83AF06;
  
@@ -5202,15 +5202,15 @@ fGameEngine_Unknown83AEC3:
 .return:
     REP #$30                                                   ;83AF2D|C230    |      ;
     LDA.W #$0000                                               ;83AF2F|A90000  |      ;
-    LDX.B $E5                                                  ;83AF32|A6E5    |0000E5;
-    LDY.B $E7                                                  ;83AF34|A4E7    |0000E7;
+    LDX.B nPlayerPosCalculationX                               ;83AF32|A6E5    |0000E5;
+    LDY.B nPlayerPosCalculationY                               ;83AF34|A4E7    |0000E7;
  
 .jusReturn:
     RTL                                                        ;83AF36|6B      |      ;
  
  
-fGameEngine_Unknown83AF37:
-    REP #$30                                                   ;83AF37|C230    |      ;
+fGameEngine_DirectionHandler83AF37:
+    REP #$30                                                   ;83AF37|C230    |      ; A: nPlayerDirection
     ASL A                                                      ;83AF39|0A      |      ;
     TAX                                                        ;83AF3A|AA      |      ;
     JMP.W (.aJumpTable,X)                                      ;83AF3B|7C3EAF  |83AF3E;
@@ -5223,13 +5223,13 @@ fGameEngine_Unknown83AF37:
     dw .case3                                                  ;83AF44|        |83B07C;
  
 .case0:
-    LDA.B $DF                                                  ;83AF46|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AF46|A5DF    |0000DF;
     SEC                                                        ;83AF48|38      |      ;
     SBC.W #$0006                                               ;83AF49|E90600  |      ;
     TAX                                                        ;83AF4C|AA      |      ;
-    LDA.B $E1                                                  ;83AF4D|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83AF4D|A5E1    |0000E1;
     CLC                                                        ;83AF4F|18      |      ;
-    ADC.B $E7                                                  ;83AF50|65E7    |0000E7;
+    ADC.B nPlayerPosCalculationY                               ;83AF50|65E7    |0000E7;
     ADC.W #$0006                                               ;83AF52|690600  |      ;
     ADC.B $E3                                                  ;83AF55|65E3    |0000E3;
     PHA                                                        ;83AF57|48      |      ;
@@ -5241,7 +5241,7 @@ fGameEngine_Unknown83AF37:
     PHA                                                        ;83AF62|48      |      ;
     LDA.B $90                                                  ;83AF63|A590    |000090;
     PHA                                                        ;83AF65|48      |      ;
-    LDA.B $DF                                                  ;83AF66|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AF66|A5DF    |0000DF;
     CLC                                                        ;83AF68|18      |      ;
     ADC.W #$0006                                               ;83AF69|690600  |      ;
     TAX                                                        ;83AF6C|AA      |      ;
@@ -5285,13 +5285,13 @@ fGameEngine_Unknown83AF37:
  
  
 .case1:
-    LDA.B $DF                                                  ;83AFAE|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AFAE|A5DF    |0000DF;
     SEC                                                        ;83AFB0|38      |      ;
     SBC.W #$0006                                               ;83AFB1|E90600  |      ;
     TAX                                                        ;83AFB4|AA      |      ;
-    LDA.B $E1                                                  ;83AFB5|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83AFB5|A5E1    |0000E1;
     SEC                                                        ;83AFB7|38      |      ;
-    SBC.B $E7                                                  ;83AFB8|E5E7    |0000E7;
+    SBC.B nPlayerPosCalculationY                               ;83AFB8|E5E7    |0000E7;
     SBC.W #$0006                                               ;83AFBA|E90600  |      ;
     SBC.B $E3                                                  ;83AFBD|E5E3    |0000E3;
     PHA                                                        ;83AFBF|48      |      ;
@@ -5303,7 +5303,7 @@ fGameEngine_Unknown83AF37:
     PHA                                                        ;83AFCA|48      |      ;
     LDA.B $8E                                                  ;83AFCB|A58E    |00008E;
     PHA                                                        ;83AFCD|48      |      ;
-    LDA.B $DF                                                  ;83AFCE|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83AFCE|A5DF    |0000DF;
     CLC                                                        ;83AFD0|18      |      ;
     ADC.W #$0006                                               ;83AFD1|690600  |      ;
     TAX                                                        ;83AFD4|AA      |      ;
@@ -5347,14 +5347,14 @@ fGameEngine_Unknown83AF37:
  
  
 .case2:
-    LDA.B $DF                                                  ;83B016|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83B016|A5DF    |0000DF;
     CLC                                                        ;83B018|18      |      ;
-    ADC.B $E5                                                  ;83B019|65E5    |0000E5;
+    ADC.B nPlayerPosCalculationX                               ;83B019|65E5    |0000E5;
     ADC.W #$0006                                               ;83B01B|690600  |      ;
     ADC.B $E3                                                  ;83B01E|65E3    |0000E3;
     PHA                                                        ;83B020|48      |      ;
     TAX                                                        ;83B021|AA      |      ;
-    LDA.B $E1                                                  ;83B022|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83B022|A5E1    |0000E1;
     SEC                                                        ;83B024|38      |      ;
     SBC.W #$0006                                               ;83B025|E90600  |      ;
     TAY                                                        ;83B028|A8      |      ;
@@ -5365,7 +5365,7 @@ fGameEngine_Unknown83AF37:
     PHA                                                        ;83B032|48      |      ;
     LDA.B $90                                                  ;83B033|A590    |000090;
     PHA                                                        ;83B035|48      |      ;
-    LDA.B $E1                                                  ;83B036|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83B036|A5E1    |0000E1;
     CLC                                                        ;83B038|18      |      ;
     ADC.W #$0006                                               ;83B039|690600  |      ;
     TAY                                                        ;83B03C|A8      |      ;
@@ -5409,14 +5409,14 @@ fGameEngine_Unknown83AF37:
  
  
 .case3:
-    LDA.B $DF                                                  ;83B07C|A5DF    |0000DF;
+    LDA.B nPlayerPosXCopy                                      ;83B07C|A5DF    |0000DF;
     SEC                                                        ;83B07E|38      |      ;
-    SBC.B $E5                                                  ;83B07F|E5E5    |0000E5;
+    SBC.B nPlayerPosCalculationX                               ;83B07F|E5E5    |0000E5;
     SBC.W #$0006                                               ;83B081|E90600  |      ;
     SBC.B $E3                                                  ;83B084|E5E3    |0000E3;
     PHA                                                        ;83B086|48      |      ;
     TAX                                                        ;83B087|AA      |      ;
-    LDA.B $E1                                                  ;83B088|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83B088|A5E1    |0000E1;
     SEC                                                        ;83B08A|38      |      ;
     SBC.W #$0006                                               ;83B08B|E90600  |      ;
     TAY                                                        ;83B08E|A8      |      ;
@@ -5427,7 +5427,7 @@ fGameEngine_Unknown83AF37:
     PHA                                                        ;83B098|48      |      ;
     LDA.B $8E                                                  ;83B099|A58E    |00008E;
     PHA                                                        ;83B09B|48      |      ;
-    LDA.B $E1                                                  ;83B09C|A5E1    |0000E1;
+    LDA.B nPlayerPosYCopy                                      ;83B09C|A5E1    |0000E1;
     CLC                                                        ;83B09E|18      |      ;
     ADC.W #$0006                                               ;83B09F|690600  |      ;
     TAY                                                        ;83B0A2|A8      |      ;
@@ -5552,7 +5552,7 @@ fGameEngine_Unknown83B0F6:
  
 .label2:
     REP #$30                                                   ;83B16A|C230    |      ;
-    LDA.B $E7                                                  ;83B16C|A5E7    |0000E7;
+    LDA.B nPlayerPosCalculationY                               ;83B16C|A5E7    |0000E7;
     BNE +                                                      ;83B16E|D005    |83B175;
     LDA.W #$0008                                               ;83B170|A90800  |      ;
     STA.B $8E                                                  ;83B173|858E    |00008E;
@@ -5565,7 +5565,7 @@ fGameEngine_Unknown83B0F6:
  
 .label3:
     REP #$30                                                   ;83B17E|C230    |      ;
-    LDA.B $E7                                                  ;83B180|A5E7    |0000E7;
+    LDA.B nPlayerPosCalculationY                               ;83B180|A5E7    |0000E7;
     BNE +                                                      ;83B182|D005    |83B189;
     LDA.W #$0008                                               ;83B184|A90800  |      ;
     STA.B $90                                                  ;83B187|8590    |000090;
@@ -5578,7 +5578,7 @@ fGameEngine_Unknown83B0F6:
  
 .label4:
     REP #$30                                                   ;83B192|C230    |      ;
-    LDA.B $E5                                                  ;83B194|A5E5    |0000E5;
+    LDA.B nPlayerPosCalculationX                               ;83B194|A5E5    |0000E5;
     BNE +                                                      ;83B196|D005    |83B19D;
     LDA.W #$0008                                               ;83B198|A90800  |      ;
     STA.B $8E                                                  ;83B19B|858E    |00008E;
@@ -5591,7 +5591,7 @@ fGameEngine_Unknown83B0F6:
  
 .label5:
     REP #$30                                                   ;83B1A6|C230    |      ;
-    LDA.B $E5                                                  ;83B1A8|A5E5    |0000E5;
+    LDA.B nPlayerPosCalculationX                               ;83B1A8|A5E5    |0000E5;
     BNE +                                                      ;83B1AA|D005    |83B1B1;
     LDA.W #$0008                                               ;83B1AC|A90800  |      ;
     STA.B $90                                                  ;83B1AF|8590    |000090;
@@ -8179,7 +8179,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + LDA.B nPlayerFlags                                         ;83C657|A5D2    |0000D2;
-    AND.W #$0800                                               ;83C659|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ +                                                      ;83C65C|F003    |83C661;
     JMP.W .label37                                             ;83C65E|4C34C7  |83C734;
  
@@ -9971,10 +9971,10 @@ fAreaEvents_MajorHouseHandler:
     SEP #$20                                                   ;83D550|E220    |      ;
     REP #$10                                                   ;83D552|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D554|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D557|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83D559|B02C    |83D587;
     LDA.W nWeatherForecast                                     ;83D55B|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D55E|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D560|F065    |83D5C7;
     REP #$30                                                   ;83D562|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D564|AF641F7F|7F1F64;
@@ -9988,7 +9988,7 @@ fAreaEvents_MajorHouseHandler:
     BNE .label1                                                ;83D57B|D02A    |83D5A7;
     SEP #$20                                                   ;83D57D|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83D57F|AF1A1F7F|7F1F1A;
-    CMP.B #$06                                                 ;83D583|C906    |      ; !DAY_SATURDAY
+    CMP.B #!DAY_SATURDAY                                                 
     BEQ .saturday                                              ;83D585|F010    |83D597;
  
 .anyFestival:
@@ -10130,10 +10130,10 @@ fAreaEvents_Church:
   + SEP #$20                                                   ;83D696|E220    |      ;
     REP #$10                                                   ;83D698|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D69A|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D69D|C906    |      ; !WEATHER_FLOWERFESTIVAL +
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83D69F|B03D    |83D6DE;
     LDA.W nWeatherForecast                                     ;83D6A1|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D6A4|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BNE +                                                      ;83D6A6|D003    |83D6AB;
     JMP.W .hurricane                                           ;83D6A8|4C2ED7  |83D72E;
  
@@ -10265,10 +10265,10 @@ fAreaEvents_FloristHandler:
     SEP #$20                                                   ;83D79B|E220    |      ;
     REP #$10                                                   ;83D79D|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D79F|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D7A2|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83D7A4|B022    |83D7C8;
     LDA.W nWeatherForecast                                     ;83D7A6|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D7A9|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D7AB|F04B    |83D7F8;
     REP #$30                                                   ;83D7AD|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D7AF|AF641F7F|7F1F64;
@@ -10402,10 +10402,10 @@ fAreaEvents_ToolshopHandler:
     SEP #$20                                                   ;83D8AC|E220    |      ;
     REP #$10                                                   ;83D8AE|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D8B0|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D8B3|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83D8B5|B022    |83D8D9;
     LDA.W nWeatherForecast                                     ;83D8B7|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D8BA|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D8BC|F04B    |83D909;
     REP #$30                                                   ;83D8BE|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D8C0|AF641F7F|7F1F64;
@@ -10526,10 +10526,10 @@ fAreaEvents_RestaurantHandler:
     SEP #$20                                                   ;83D9A2|E220    |      ;
     REP #$10                                                   ;83D9A4|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D9A6|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83D9A9|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83D9AB|B022    |83D9CF;
     LDA.W nWeatherForecast                                     ;83D9AD|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83D9B0|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D9B2|F04B    |83D9FF;
     REP #$30                                                   ;83D9B4|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83D9B6|AF641F7F|7F1F64;
@@ -10630,10 +10630,10 @@ fAreaEvents_FortuneTeller:
     SEP #$20                                                   ;83DA70|E220    |      ;
     REP #$10                                                   ;83DA72|C210    |      ;
     LDA.W nWeatherForecast                                     ;83DA74|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83DA77|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83DA79|B022    |83DA9D;
     LDA.W nWeatherForecast                                     ;83DA7B|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83DA7E|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83DA80|F04B    |83DACD;
     REP #$30                                                   ;83DA82|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DA84|AF641F7F|7F1F64;
@@ -10711,10 +10711,10 @@ fAreaEvents_AnimalShop:
     SEP #$20                                                   ;83DB12|E220    |      ;
     REP #$10                                                   ;83DB14|C210    |      ;
     LDA.W nWeatherForecast                                     ;83DB16|AD8C09  |00098C;
-    CMP.B #$06                                                 ;83DB19|C906    |      ; !WEATHER_FLOWERFESTIVAL
+    CMP.B #!WEATHER_FLOWERFESTIVAL                                                 
     BCS .anyFestival                                           ;83DB1B|B022    |83DB3F;
     LDA.W nWeatherForecast                                     ;83DB1D|AD8C09  |00098C;
-    CMP.B #$03                                                 ;83DB20|C903    |      ; !WEATHER_HURRICANE
+    CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83DB22|F04B    |83DB6F;
     REP #$30                                                   ;83DB24|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;83DB26|AF641F7F|7F1F64;
@@ -11036,9 +11036,9 @@ fAreaEvents_WorksmanHouse:
     LDA.L nCurrentYearID                                       ;83DDC6|AF181F7F|7F1F18;
     BNE .label1                                                ;83DDCA|D031    |83DDFD;
     LDA.L nCurrentSeasonID                                     ;83DDCC|AF191F7F|7F1F19;
-    CMP.B #$02                                                 ;83DDD0|C902    |      ; !SEASON_FALL
+    CMP.B #!SEASON_FALL                                                 
     BCS .label1                                                ;83DDD2|B029    |83DDFD;
-    CMP.B #$00                                                 ;83DDD4|C900    |      ; !SEASON_SPRING
+    CMP.B #!SEASON_SPRING                                                 
     BEQ +                                                      ;83DDD6|F008    |83DDE0;
     LDA.L nCurrentDay                                          ;83DDD8|AF1B1F7F|7F1F1B;
     CMP.B #$1A                                                 ;83DDDC|C91A    |      ;
@@ -11171,7 +11171,7 @@ fAreaEvents_House:
     CMP.B #$02                                                 ;83DEDB|C902    |      ;
     BNE +                                                      ;83DEDD|D013    |83DEF2;
     LDA.L nCurrentSeasonID                                     ;83DEDF|AF191F7F|7F1F19;
-    CMP.B #$01                                                 ;83DEE3|C901    |      ; !SEASON_SUMMER
+    CMP.B #!SEASON_SUMMER                                                 
     BNE +                                                      ;83DEE5|D00B    |83DEF2;
     LDA.L nCurrentDay                                          ;83DEE7|AF1B1F7F|7F1F1B;
     CMP.B #$1E                                                 ;83DEEB|C91E    |      ;
@@ -11184,7 +11184,7 @@ fAreaEvents_House:
     AND.W #$0080                                               ;83DEF8|298000  |      ;
     BEQ +                                                      ;83DEFB|F009    |83DF06;
     SEP #$20                                                   ;83DEFD|E220    |      ;
-    LDA.B #$17                                                 ;83DEFF|A917    |      ; !AREA_HOUSE3
+    LDA.B #!AREA_HOUSE3                                                 
     STA.W nDestinationAreaId                                   ;83DF01|8D8B09  |00098B;
     BRA .jump                                                  ;83DF04|8014    |83DF1A;
  
@@ -11194,7 +11194,7 @@ fAreaEvents_House:
     AND.W #$0040                                               ;83DF0C|294000  |      ;
     BEQ .jump                                                  ;83DF0F|F009    |83DF1A;
     SEP #$20                                                   ;83DF11|E220    |      ;
-    LDA.B #$16                                                 ;83DF13|A916    |      ; !AREA_HOUSE2
+    LDA.B #!AREA_HOUSE2                                                 
     STA.W nDestinationAreaId                                   ;83DF15|8D8B09  |00098B;
     BRA .jump                                                  ;83DF18|8000    |83DF1A;
  
@@ -11871,7 +11871,7 @@ fAreaEvents_Mine:
  
  
   + REP #$30                                                   ;83E504|C230    |      ;
-    LDA.W #$0800                                               ;83E506|A90008  |      ;
+    LDA.W #!PFLAGS_DOGHUGGING                                               
     EOR.W #$FFFF                                               ;83E509|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;83E50C|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;83E50E|85D2    |0000D2;
@@ -11887,7 +11887,7 @@ fAreaEvents_Mine:
     LDA.W #$0000                                               ;83E52C|A90000  |      ;
     CLC                                                        ;83E52F|18      |      ;
     ADC.B nPlayerDirection                                     ;83E530|65DA    |0000DA;
-    STA.W nFoodToEatSpriteIndex                                ;83E532|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;83E532|8D0109  |000901;
  
 .label1:
     REP #$30                                                   ;83E535|C230    |      ;
@@ -11916,7 +11916,7 @@ fAreaEvents_Mine:
  
   + SEP #$20                                                   ;83E56B|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83E56D|AF1A1F7F|7F1F1A;
-    CMP.B #$06                                                 ;83E571|C906    |      ;
+    CMP.B #!DAY_SATURDAY                                                 
     BNE .justReturn                                            ;83E573|D010    |83E585;
     REP #$30                                                   ;83E575|C230    |      ;
     LDA.W #$0000                                               ;83E577|A90000  |      ;
@@ -12203,11 +12203,11 @@ fAreaEvents_Intro:
     STA.W $0911                                                ;83E7B5|8D1109  |000911;
     REP #$30                                                   ;83E7B8|C230    |      ;
     LDA.W #$0000                                               ;83E7BA|A90000  |      ;
-    STA.W nFoodToEatSpriteIndex                                ;83E7BD|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;83E7BD|8D0109  |000901;
     SEP #$20                                                   ;83E7C0|E220    |      ;
     STZ.W nTimeState                                           ;83E7C2|9C7309  |000973;
     SEP #$20                                                   ;83E7C5|E220    |      ;
-    STZ.W nHandItem_Current                                    ;83E7C7|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;83E7C7|9C1D09  |00091D;
     REP #$30                                                   ;83E7CA|C230    |      ;
     LDA.W #$0002                                               ;83E7CC|A90200  |      ;
     EOR.W #$FFFF                                               ;83E7CF|49FFFF  |      ;
@@ -12774,11 +12774,11 @@ fAreaEvents_Endings:
     STA.W $0911                                                ;83EBEE|8D1109  |000911;
     REP #$30                                                   ;83EBF1|C230    |      ;
     LDA.W #$0000                                               ;83EBF3|A90000  |      ;
-    STA.W nFoodToEatSpriteIndex                                ;83EBF6|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;83EBF6|8D0109  |000901;
     SEP #$20                                                   ;83EBF9|E220    |      ;
     STZ.W nTimeState                                           ;83EBFB|9C7309  |000973;
     SEP #$20                                                   ;83EBFE|E220    |      ;
-    STZ.W nHandItem_Current                                    ;83EC00|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;83EC00|9C1D09  |00091D;
     REP #$30                                                   ;83EC03|C230    |      ;
     LDA.W #$0002                                               ;83EC05|A90200  |      ;
     EOR.W #$FFFF                                               ;83EC08|49FFFF  |      ;
@@ -13962,225 +13962,4 @@ fAreaInit_HouseHelper:
     RTS                                                        ;83F5AE|60      |      ;
  
  
-Padding_830000:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F5F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F603|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F60F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F61B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F627|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F633|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F63F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F64B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F657|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F663|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F66F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F67B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F687|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F693|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F69F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F6FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F70B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F717|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F723|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F72F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F73B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F747|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F753|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F75F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F76B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F777|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F783|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F78F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F79B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F7FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F807|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F813|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F81F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F82B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F837|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F843|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F84F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F85B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F867|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F873|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F87F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F88B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F897|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F8F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F903|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F90F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F91B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F927|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F933|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F93F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F94B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F957|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F963|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F96F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F97B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F987|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F993|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F99F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83F9FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FA9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FAA7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FAB3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FABF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FACB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FAD7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FAE3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FAEF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FAFB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FB97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBBB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBD3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBDF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FBF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FC9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FCFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FD9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDA7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDB3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDBF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDCB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDD7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDE3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDEF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FDFB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FE97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEBB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FED3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEDF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FEF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FF9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;83FFF3|        |      ;
-    db $00                                                     ;83FFFF|        |      ;
+    pad $83FFFF

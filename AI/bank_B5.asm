@@ -220,7 +220,7 @@ DATA8_B58020:
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B5841E
     %AICMD0x08()                                               ;B58423
     %AICMD0x19($0039, $00)                                     ;B58424
-    %AICMD0x13($0078)                                          ;B58428
+    %AICMD0x13_Wait(120)                                       ;B58428
     %AICMD0x11()                                               ;B5842B
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B5842C
     %AICMD0x12_Jump($B58406)                                   ;B58432
@@ -243,7 +243,7 @@ DATA8_B58020:
     %AICMD0x1B($022F, $00)                                     ;B58471
     %AICMD0x08()                                               ;B58475
     %AICMD0x19($0030, $00)                                     ;B58476
-    %AICMD0x13($0078)                                          ;B5847A
+    %AICMD0x13_Wait(120)                                       ;B5847A
     %AICMD0x11()                                               ;B5847D
     %AICMD0x57_UpdateStamina(30)                               ;B5847E
     %AICMD0x12_Jump($B58087)                                   ;B58480
@@ -252,7 +252,7 @@ DATA8_B58020:
     %AICMD0x1B($022F, $00)                                     ;B5848E
     %AICMD0x08()                                               ;B58492
     %AICMD0x19($0032, $00)                                     ;B58493
-    %AICMD0x13($0078)                                          ;B58497
+    %AICMD0x13_Wait(120)                                       ;B58497
     %AICMD0x11()                                               ;B5849A
     %AICMD0x57_UpdateStamina(30)                               ;B5849B
     %AICMD0x12_Jump($B58087)                                   ;B5849D
@@ -472,7 +472,7 @@ DATA8_B584DA:
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B588D4
     %AICMD0x08()                                               ;B588D9
     %AICMD0x19($0039, $00)                                     ;B588DA
-    %AICMD0x13($0078)                                          ;B588DE
+    %AICMD0x13_Wait(120)                                       ;B588DE
     %AICMD0x11()                                               ;B588E1
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B588E2
     %AICMD0x12_Jump($B588BC)                                   ;B588E8
@@ -495,7 +495,7 @@ DATA8_B584DA:
     %AICMD0x1B($022F, $00)                                     ;B58927
     %AICMD0x08()                                               ;B5892B
     %AICMD0x19($003A, $00)                                     ;B5892C
-    %AICMD0x13($0078)                                          ;B58930
+    %AICMD0x13_Wait(120)                                       ;B58930
     %AICMD0x11()                                               ;B58933
     %AICMD0x57_UpdateStamina(30)                               ;B58934
     %AICMD0x12_Jump($B58541)                                   ;B58936
@@ -504,7 +504,7 @@ DATA8_B584DA:
     %AICMD0x1B($022F, $00)                                     ;B58944
     %AICMD0x08()                                               ;B58948
     %AICMD0x19($0030, $00)                                     ;B58949
-    %AICMD0x13($0078)                                          ;B5894D
+    %AICMD0x13_Wait(120)                                       ;B5894D
     %AICMD0x11()                                               ;B58950
     %AICMD0x57_UpdateStamina(30)                               ;B58951
     %AICMD0x12_Jump($B58541)                                   ;B58953
@@ -725,7 +725,7 @@ DATA8_B58990:
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B58D92
     %AICMD0x08()                                               ;B58D97
     %AICMD0x19($0039, $00)                                     ;B58D98
-    %AICMD0x13($0078)                                          ;B58D9C
+    %AICMD0x13_Wait(120)                                       ;B58D9C
     %AICMD0x11()                                               ;B58D9F
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B58DA0
     %AICMD0x12_Jump($B58D7A)                                   ;B58DA6
@@ -748,7 +748,7 @@ DATA8_B58990:
     %AICMD0x1B($022F, $00)                                     ;B58DE5
     %AICMD0x08()                                               ;B58DE9
     %AICMD0x19($0031, $00)                                     ;B58DEA
-    %AICMD0x13($0078)                                          ;B58DEE
+    %AICMD0x13_Wait(120)                                       ;B58DEE
     %AICMD0x11()                                               ;B58DF1
     %AICMD0x57_UpdateStamina(30)                               ;B58DF2
     %AICMD0x12_Jump($B589F7)                                   ;B58DF4
@@ -757,7 +757,7 @@ DATA8_B58990:
     %AICMD0x1B($022F, $00)                                     ;B58E02
     %AICMD0x08()                                               ;B58E06
     %AICMD0x19($0032, $00)                                     ;B58E07
-    %AICMD0x13($0078)                                          ;B58E0B
+    %AICMD0x13_Wait(120)                                       ;B58E0B
     %AICMD0x11()                                               ;B58E0E
     %AICMD0x57_UpdateStamina(30)                               ;B58E0F
     %AICMD0x12_Jump($B589F7)                                   ;B58E11
@@ -980,7 +980,7 @@ DATA8_B58E4E:
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B59257
     %AICMD0x08()                                               ;B5925C
     %AICMD0x19($0039, $00)                                     ;B5925D
-    %AICMD0x13($0078)                                          ;B59261
+    %AICMD0x13_Wait(120)                                       ;B59261
     %AICMD0x11()                                               ;B59264
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B59265
     %AICMD0x12_Jump($B5923F)                                   ;B5926B
@@ -1002,7 +1002,7 @@ DATA8_B58E4E:
     %AICMD0x1B($022F, $00)                                     ;B592A6
     %AICMD0x08()                                               ;B592AA
     %AICMD0x19($0039, $00)                                     ;B592AB
-    %AICMD0x13($0078)                                          ;B592AF
+    %AICMD0x13_Wait(120)                                       ;B592AF
     %AICMD0x11()                                               ;B592B2
     %AICMD0x57_UpdateStamina(30)                               ;B592B3
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B592B5
@@ -1012,7 +1012,7 @@ DATA8_B58E4E:
     %AICMD0x1B($022F, $00)                                     ;B592C7
     %AICMD0x08()                                               ;B592CB
     %AICMD0x19($0030, $00)                                     ;B592CC
-    %AICMD0x13($0078)                                          ;B592D0
+    %AICMD0x13_Wait(120)                                       ;B592D0
     %AICMD0x11()                                               ;B592D3
     %AICMD0x57_UpdateStamina(30)                               ;B592D4
     %AICMD0x12_Jump($B58EB5)                                   ;B592D6
@@ -1232,7 +1232,7 @@ DATA8_B59313:
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B59711
     %AICMD0x08()                                               ;B59716
     %AICMD0x19($0039, $00)                                     ;B59717
-    %AICMD0x13($0078)                                          ;B5971B
+    %AICMD0x13_Wait(120)                                       ;B5971B
     %AICMD0x11()                                               ;B5971E
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B5971F
     %AICMD0x12_Jump($B596F9)                                   ;B59725
@@ -1255,7 +1255,7 @@ DATA8_B59313:
     %AICMD0x1B($022F, $00)                                     ;B59764
     %AICMD0x08()                                               ;B59768
     %AICMD0x32($8000D4, $0015)                                 ;B59769
-    %AICMD0x13($0078)                                          ;B5976F
+    %AICMD0x13_Wait(120)                                       ;B5976F
     %AICMD0x11()                                               ;B59772
     %AICMD0x57_UpdateStamina(30)                               ;B59773
     %AICMD0x12_Jump($B5937A)                                   ;B59775
@@ -1264,7 +1264,7 @@ DATA8_B59313:
     %AICMD0x1B($022F, $00)                                     ;B59783
     %AICMD0x08()                                               ;B59787
     %AICMD0x32($8000D4, $0015)                                 ;B59788
-    %AICMD0x13($0078)                                          ;B5978E
+    %AICMD0x13_Wait(120)                                       ;B5978E
     %AICMD0x11()                                               ;B59791
     %AICMD0x57_UpdateStamina(30)                               ;B59792
     %AICMD0x12_Jump($B5937A)                                   ;B59794
@@ -1508,7 +1508,7 @@ DATA8_B599EB:
     %AICMD0x12_Jump($B59A34)                                   ;B59BD1
     %AICMD0x10_End()                                           ;B59BD4
     %AICMD0x1A($0058, $0048, $B38B1C, $00)                     ;B59BD5
-    %AICMD0x13($0001)                                          ;B59BDD
+    %AICMD0x13_Wait(1)                                         ;B59BDD
     %AICMD0x12_Jump($B59BDD)                                   ;B59BE0
 
 
@@ -1825,10 +1825,10 @@ DATA8_B59FCA:
     %AICMD0x12_Jump($B5A017)                                   ;B5A1C5
     %AICMD0x10_End()                                           ;B5A1C8
     %AICMD0x1A($0058, $0048, $B38BA0, $00)                     ;B5A1C9
-    %AICMD0x13($0001)                                          ;B5A1D1
+    %AICMD0x13_Wait(1)                                         ;B5A1D1
     %AICMD0x12_Jump($B5A1D1)                                   ;B5A1D4
     %AICMD0x1A($0038, $0058, $B38BA0, $00)                     ;B5A1D7
-    %AICMD0x13($0001)                                          ;B5A1DF
+    %AICMD0x13_Wait(1)                                         ;B5A1DF
     %AICMD0x12_Jump($B5A1DF)                                   ;B5A1E2
 
 
@@ -1862,7 +1862,7 @@ DATA8_B5A205:
     %AICMD0x22($10, $10, $01, $B384A4, $04)                    ;B5A23F
     %AICMD0x2D($B5A299, $B5A254)                               ;B5A246
     %AICMD0x12_Jump($B5A246)                                   ;B5A24B
-    %AICMD0x13($0001)                                          ;B5A24E
+    %AICMD0x13_Wait(1)                                         ;B5A24E
     %AICMD0x12_Jump($B5A24E)                                   ;B5A251
     %AICMD0x15_JumpIfEquals8($80091E, 6, $B5A26A)              ;B5A254
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B5A292)         ;B5A25B
@@ -1993,7 +1993,7 @@ DATA8_B5A484:
     %AICMD0x22($10, $10, $01, $B384A4, $04)                    ;B5A4BE
     %AICMD0x2D($B5A518, $B5A4D3)                               ;B5A4C5
     %AICMD0x12_Jump($B5A4C5)                                   ;B5A4CA
-    %AICMD0x13($0001)                                          ;B5A4CD
+    %AICMD0x13_Wait(1)                                         ;B5A4CD
     %AICMD0x12_Jump($B5A4CD)                                   ;B5A4D0
     %AICMD0x15_JumpIfEquals8($80091E, 6, $B5A4E9)              ;B5A4D3
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B5A511)         ;B5A4DA
@@ -2141,7 +2141,7 @@ DATA8_B5A723:
     %AICMD0x08()                                               ;B5A733
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS0)              ;B5A734
     %AICMD0x38()                                               ;B5A736
-    %AICMD0x13($00B4)                                          ;B5A737
+    %AICMD0x13_Wait(180)                                       ;B5A737
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A73A
     %AICMD0x10_End()                                           ;B5A73C
 
@@ -2157,7 +2157,7 @@ DATA8_B5A73D:
     %AICMD0x08()                                               ;B5A74D
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS1)              ;B5A74E
     %AICMD0x38()                                               ;B5A750
-    %AICMD0x13($00B4)                                          ;B5A751
+    %AICMD0x13_Wait(180)                                       ;B5A751
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A754
     %AICMD0x10_End()                                           ;B5A756
 
@@ -2173,7 +2173,7 @@ DATA8_B5A757:
     %AICMD0x08()                                               ;B5A767
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS2)              ;B5A768
     %AICMD0x38()                                               ;B5A76A
-    %AICMD0x13($00B4)                                          ;B5A76B
+    %AICMD0x13_Wait(180)                                       ;B5A76B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A76E
     %AICMD0x10_End()                                           ;B5A770
 
@@ -2189,7 +2189,7 @@ DATA8_B5A771:
     %AICMD0x08()                                               ;B5A781
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS3)              ;B5A782
     %AICMD0x38()                                               ;B5A784
-    %AICMD0x13($00B4)                                          ;B5A785
+    %AICMD0x13_Wait(180)                                       ;B5A785
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A788
     %AICMD0x10_End()                                           ;B5A78A
 
@@ -2205,7 +2205,7 @@ DATA8_B5A78B:
     %AICMD0x08()                                               ;B5A79B
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS4)              ;B5A79C
     %AICMD0x38()                                               ;B5A79E
-    %AICMD0x13($00B4)                                          ;B5A79F
+    %AICMD0x13_Wait(180)                                       ;B5A79F
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7A2
     %AICMD0x10_End()                                           ;B5A7A4
 
@@ -2221,7 +2221,7 @@ DATA8_B5A7A5:
     %AICMD0x08()                                               ;B5A7B5
     %AICMD0x06_SetDestinationArea(!AREA_DRIVETOTOWN)           ;B5A7B6
     %AICMD0x38()                                               ;B5A7B8
-    %AICMD0x13($00B4)                                          ;B5A7B9
+    %AICMD0x13_Wait(180)                                       ;B5A7B9
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7BC
     %AICMD0x10_End()                                           ;B5A7BE
 
@@ -2237,7 +2237,7 @@ DATA8_B5A7BF:
     %AICMD0x08()                                               ;B5A7CF
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN51)             ;B5A7D0
     %AICMD0x38()                                               ;B5A7D2
-    %AICMD0x13($00B4)                                          ;B5A7D3
+    %AICMD0x13_Wait(180)                                       ;B5A7D3
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7D6
     %AICMD0x10_End()                                           ;B5A7D8
 
@@ -2253,7 +2253,7 @@ DATA8_B5A7D9:
     %AICMD0x08()                                               ;B5A7E9
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN52)             ;B5A7EA
     %AICMD0x38()                                               ;B5A7EC
-    %AICMD0x13($00B4)                                          ;B5A7ED
+    %AICMD0x13_Wait(180)                                       ;B5A7ED
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7F0
     %AICMD0x10_End()                                           ;B5A7F2
 
@@ -2269,7 +2269,7 @@ DATA8_B5A7F3:
     %AICMD0x08()                                               ;B5A803
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN56)             ;B5A804
     %AICMD0x38()                                               ;B5A806
-    %AICMD0x13($00B4)                                          ;B5A807
+    %AICMD0x13_Wait(180)                                       ;B5A807
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A80A
     %AICMD0x10_End()                                           ;B5A80C
 
@@ -2285,7 +2285,7 @@ DATA8_B5A80D:
     %AICMD0x08()                                               ;B5A81D
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN53)             ;B5A81E
     %AICMD0x38()                                               ;B5A820
-    %AICMD0x13($00B4)                                          ;B5A821
+    %AICMD0x13_Wait(180)                                       ;B5A821
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A824
     %AICMD0x10_End()                                           ;B5A826
 
@@ -2301,7 +2301,7 @@ DATA8_B5A827:
     %AICMD0x08()                                               ;B5A837
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN54)             ;B5A838
     %AICMD0x38()                                               ;B5A83A
-    %AICMD0x13($00B4)                                          ;B5A83B
+    %AICMD0x13_Wait(180)                                       ;B5A83B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A83E
     %AICMD0x10_End()                                           ;B5A840
 
@@ -2319,7 +2319,7 @@ DATA8_B5A841:
     %AICMD0x08()                                               ;B5A853
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN55)             ;B5A854
     %AICMD0x38()                                               ;B5A856
-    %AICMD0x13($00B4)                                          ;B5A857
+    %AICMD0x13_Wait(180)                                       ;B5A857
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A85A
     %AICMD0x10_End()                                           ;B5A85C
 
@@ -2335,37 +2335,37 @@ DATA8_B5A85D:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5A86A
     %AICMD0x06_SetDestinationArea(!AREA_MNTTOPENDINGSUMMER)    ;B5A86C
     %AICMD0x38()                                               ;B5A86E
-    %AICMD0x39($01, $00B0)                                     ;B5A86F
-    %AICMD0x13($003C)                                          ;B5A873
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 176)                   ;B5A86F
+    %AICMD0x13_Wait(60)                                        ;B5A873
     %AICMD0x29_SetMapScrooling(0, -1, 208)                     ;B5A876
-    %AICMD0x13($00F0)                                          ;B5A87C
-    %AICMD0x13($0040)                                          ;B5A87F
+    %AICMD0x13_Wait(240)                                       ;B5A87C
+    %AICMD0x13_Wait(64)                                        ;B5A87F
     %AICMD0x54($0444, $01)                                     ;B5A882
-    %AICMD0x13($0078)                                          ;B5A886
+    %AICMD0x13_Wait(120)                                       ;B5A886
     %AICMD0x54($0445, $01)                                     ;B5A889
-    %AICMD0x13($0078)                                          ;B5A88D
+    %AICMD0x13_Wait(120)                                       ;B5A88D
     %AICMD0x54($0446, $01)                                     ;B5A890
-    %AICMD0x13($0078)                                          ;B5A894
+    %AICMD0x13_Wait(120)                                       ;B5A894
     %AICMD0x54($044D, $01)                                     ;B5A897
-    %AICMD0x13($0078)                                          ;B5A89B
+    %AICMD0x13_Wait(120)                                       ;B5A89B
     %AICMD0x54($044E, $01)                                     ;B5A89E
-    %AICMD0x13($0078)                                          ;B5A8A2
+    %AICMD0x13_Wait(120)                                       ;B5A8A2
     %AICMD0x54($044F, $01)                                     ;B5A8A5
-    %AICMD0x13($0078)                                          ;B5A8A9
+    %AICMD0x13_Wait(120)                                       ;B5A8A9
     %AICMD0x54($0450, $01)                                     ;B5A8AC
-    %AICMD0x13($0078)                                          ;B5A8B0
+    %AICMD0x13_Wait(120)                                       ;B5A8B0
     %AICMD0x54($0447, $01)                                     ;B5A8B3
-    %AICMD0x13($0078)                                          ;B5A8B7
+    %AICMD0x13_Wait(120)                                       ;B5A8B7
     %AICMD0x54($0448, $01)                                     ;B5A8BA
-    %AICMD0x13($0078)                                          ;B5A8BE
+    %AICMD0x13_Wait(120)                                       ;B5A8BE
     %AICMD0x54($0449, $01)                                     ;B5A8C1
-    %AICMD0x13($0078)                                          ;B5A8C5
+    %AICMD0x13_Wait(120)                                       ;B5A8C5
     %AICMD0x54($044A, $01)                                     ;B5A8C8
-    %AICMD0x13($0078)                                          ;B5A8CC
+    %AICMD0x13_Wait(120)                                       ;B5A8CC
     %AICMD0x54($044B, $01)                                     ;B5A8CF
-    %AICMD0x13($0078)                                          ;B5A8D3
+    %AICMD0x13_Wait(120)                                       ;B5A8D3
     %AICMD0x54($044C, $01)                                     ;B5A8D6
-    %AICMD0x13($0078)                                          ;B5A8DA
+    %AICMD0x13_Wait(120)                                       ;B5A8DA
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags1, $07, $B5A8F9);B5A8DD
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags1, $06, $B5A8F2);B5A8E4
     %AICMD0x54($0451, $01)                                     ;B5A8EB
@@ -2373,11 +2373,11 @@ DATA8_B5A85D:
     %AICMD0x54($0452, $01)                                     ;B5A8F2
     %AICMD0x12_Jump($B5A8FD)                                   ;B5A8F6
     %AICMD0x54($0453, $01)                                     ;B5A8F9
-    %AICMD0x13($0078)                                          ;B5A8FD
+    %AICMD0x13_Wait(120)                                       ;B5A8FD
     %AICMD0x54($048C, $01)                                     ;B5A900
-    %AICMD0x13($0078)                                          ;B5A904
+    %AICMD0x13_Wait(120)                                       ;B5A904
     %AICMD0x54($0454, $01)                                     ;B5A907
-    %AICMD0x13($0078)                                          ;B5A90B
+    %AICMD0x13_Wait(120)                                       ;B5A90B
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 0, 199, $B5A940);B5A90E
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 200, 399, $B5A947);B5A918
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 400, 599, $B5A94E);B5A922
@@ -2418,19 +2418,19 @@ DATA8_B5A85D:
     %AICMD0x09($04, $B5AB5C)                                   ;B5A9C8
     %AICMD0x12_Jump($B5A9CF)                                   ;B5A9CC
     %AICMD0x29_SetMapScrooling(0, 1, 208)                      ;B5A9CF
-    %AICMD0x13($00F0)                                          ;B5A9D5
+    %AICMD0x13_Wait(240)                                       ;B5A9D5
     %AICMD0x0B($03)                                            ;B5A9D8
     %AICMD0x0C($02)                                            ;B5A9DA
-    %AICMD0x13($003C)                                          ;B5A9DC
+    %AICMD0x13_Wait(60)                                        ;B5A9DC
     %AICMD0x29_SetMapScrooling(0, -1, 128)                     ;B5A9DF
-    %AICMD0x13($00F0)                                          ;B5A9E5
+    %AICMD0x13_Wait(240)                                       ;B5A9E5
     %AICMD0x10_End()                                           ;B5A9E8
     %AICMD0x1A($0078, $0118, $B380D8, $01)                     ;B5A9E9
     %AICMD0x0C($00)                                            ;B5A9F1
     %AICMD0x1B($0007, $01)                                     ;B5A9F3
-    %AICMD0x13($0078)                                          ;B5A9F7
+    %AICMD0x13_Wait(120)                                       ;B5A9F7
     %AICMD0x1B($0006, $00)                                     ;B5A9FA
-    %AICMD0x13($00B4)                                          ;B5A9FE
+    %AICMD0x13_Wait(180)                                       ;B5A9FE
     %AICMD0x1B($0005, $00)                                     ;B5AA01
     %AICMD0x0C($01)                                            ;B5AA05
     %AICMD0x1B($0000, $00)                                     ;B5AA07
@@ -2498,11 +2498,11 @@ DATA8_B5A85D:
     %AICMD0x54($0469, $01)                                     ;B5AB33
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AB37
     %AICMD0x1B($02E6, $00)                                     ;B5AB3A
-    %AICMD0x13($0078)                                          ;B5AB3E
+    %AICMD0x13_Wait(120)                                       ;B5AB3E
     %AICMD0x1B($02E4, $00)                                     ;B5AB41
-    %AICMD0x13($00B4)                                          ;B5AB45
+    %AICMD0x13_Wait(180)                                       ;B5AB45
     %AICMD0x1B($02E6, $00)                                     ;B5AB48
-    %AICMD0x13($003C)                                          ;B5AB4C
+    %AICMD0x13_Wait(60)                                        ;B5AB4C
     %AICMD0x0B($01)                                            ;B5AB4F
     %AICMD0x1B($02E3, $00)                                     ;B5AB51
     %AICMD0x0D($00, $01, $80, $01)                             ;B5AB55
@@ -2510,19 +2510,19 @@ DATA8_B5A85D:
     %AICMD0x10_End()                                           ;B5AB5B
     %AICMD0x1A($0088, $0188, $B38960, $03)                     ;B5AB5C
     %AICMD0x0C($03)                                            ;B5AB64
-    %AICMD0x13($003C)                                          ;B5AB66
+    %AICMD0x13_Wait(60)                                        ;B5AB66
     %AICMD0x1B($01E1, $00)                                     ;B5AB69
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AB6D
-    %AICMD0x13($003C)                                          ;B5AB72
+    %AICMD0x13_Wait(60)                                        ;B5AB72
     %AICMD0x1B($01EA, $00)                                     ;B5AB75
-    %AICMD0x13($0078)                                          ;B5AB79
+    %AICMD0x13_Wait(120)                                       ;B5AB79
     %AICMD0x0B($00)                                            ;B5AB7C
     %AICMD0x1B($01F8, $00)                                     ;B5AB7E
-    %AICMD0x13($0078)                                          ;B5AB82
+    %AICMD0x13_Wait(120)                                       ;B5AB82
     %AICMD0x1B($01E6, $01)                                     ;B5AB85
-    %AICMD0x13($0096)                                          ;B5AB89
+    %AICMD0x13_Wait(150)                                       ;B5AB89
     %AICMD0x1B($01E8, $00)                                     ;B5AB8C
-    %AICMD0x13($005A)                                          ;B5AB90
+    %AICMD0x13_Wait(90)                                        ;B5AB90
     %AICMD0x1B($01DA, $00)                                     ;B5AB93
     %AICMD0x0D($00, $01, $30, $01)                             ;B5AB97
     %AICMD0x0B($01)                                            ;B5AB9C
@@ -2533,41 +2533,41 @@ DATA8_B5A85D:
     %AICMD0x1A($0088, $0118, $B38438, $03)                     ;B5ABA9
     %AICMD0x0C($03)                                            ;B5ABB1
     %AICMD0x1B($02DD, $00)                                     ;B5ABB3
-    %AICMD0x13($003C)                                          ;B5ABB7
+    %AICMD0x13_Wait(60)                                        ;B5ABB7
     %AICMD0x0B($00)                                            ;B5ABBA
     %AICMD0x46_JumpIfBetween24(nMoney, 1000, 9999, $B5ABCF)    ;B5ABBC
     %AICMD0x54($047B, $01)                                     ;B5ABC8
     %AICMD0x12_Jump($B5ABD6)                                   ;B5ABCC
     %AICMD0x54($048E, $01)                                     ;B5ABCF
     %AICMD0x12_Jump($B5ABD6)                                   ;B5ABD3
-    %AICMD0x13($003C)                                          ;B5ABD6
+    %AICMD0x13_Wait(60)                                        ;B5ABD6
     %AICMD0x1B($02DA, $00)                                     ;B5ABD9
     %AICMD0x0D($00, $01, $80, $01)                             ;B5ABDD
     %AICMD0x0B($01)                                            ;B5ABE2
     %AICMD0x37()                                               ;B5ABE4
     %AICMD0x10_End()                                           ;B5ABE5
     %AICMD0x1A($0058, $0088, $B38B64, $00)                     ;B5ABE6
-    %AICMD0x13($001E)                                          ;B5ABEE
+    %AICMD0x13_Wait(30)                                        ;B5ABEE
     %AICMD0x09($05, $B5ABFB)                                   ;B5ABF1
-    %AICMD0x13($0001)                                          ;B5ABF5
+    %AICMD0x13_Wait(1)                                         ;B5ABF5
     %AICMD0x12_Jump($B5ABF5)                                   ;B5ABF8
     %AICMD0x1A($0068, $0088, $B38B70, $00)                     ;B5ABFB
-    %AICMD0x13($001E)                                          ;B5AC03
+    %AICMD0x13_Wait(30)                                        ;B5AC03
     %AICMD0x09($06, $B5AC10)                                   ;B5AC06
-    %AICMD0x13($0001)                                          ;B5AC0A
+    %AICMD0x13_Wait(1)                                         ;B5AC0A
     %AICMD0x12_Jump($B5AC0A)                                   ;B5AC0D
     %AICMD0x1A($0078, $0088, $B38B7C, $00)                     ;B5AC10
-    %AICMD0x13($001E)                                          ;B5AC18
+    %AICMD0x13_Wait(30)                                        ;B5AC18
     %AICMD0x09($07, $B5AC25)                                   ;B5AC1B
-    %AICMD0x13($0001)                                          ;B5AC1F
+    %AICMD0x13_Wait(1)                                         ;B5AC1F
     %AICMD0x12_Jump($B5AC1F)                                   ;B5AC22
     %AICMD0x1A($008A, $0088, $B38B88, $00)                     ;B5AC25
-    %AICMD0x13($003C)                                          ;B5AC2D
+    %AICMD0x13_Wait(60)                                        ;B5AC2D
     %AICMD0x09($08, $B5AC3A)                                   ;B5AC30
-    %AICMD0x13($0001)                                          ;B5AC34
+    %AICMD0x13_Wait(1)                                         ;B5AC34
     %AICMD0x12_Jump($B5AC34)                                   ;B5AC37
     %AICMD0x1A($00E6, $0060, $B38B94, $00)                     ;B5AC3A
-    %AICMD0x13($0008)                                          ;B5AC42
+    %AICMD0x13_Wait(8)                                         ;B5AC42
     %AICMD0x0D($FE, $01, $10, $02)                             ;B5AC45
     %AICMD0x0D($FF, $01, $10, $01)                             ;B5AC4A
     %AICMD0x0D($FF, $02, $10, $02)                             ;B5AC4F
@@ -2575,7 +2575,7 @@ DATA8_B5A85D:
     %AICMD0x0D($FE, $FF, $08, $02)                             ;B5AC59
     %AICMD0x0D($FE, $01, $08, $02)                             ;B5AC5E
     %AICMD0x0D($FF, $01, $08, $01)                             ;B5AC63
-    %AICMD0x13($0001)                                          ;B5AC68
+    %AICMD0x13_Wait(1)                                         ;B5AC68
     %AICMD0x12_Jump($B5AC68)                                   ;B5AC6B
 
 
@@ -2624,11 +2624,11 @@ DATA8_B5ACAE:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5ACBF
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5ACC1
     %AICMD0x38()                                               ;B5ACC3
-    %AICMD0x39($00, $0020)                                     ;B5ACC4
-    %AICMD0x3A($02, $0066)                                     ;B5ACC8
-    %AICMD0x3A($00, $0038)                                     ;B5ACCC
-    %AICMD0x3A($02, $0028)                                     ;B5ACD0
-    %AICMD0x39($01, $0010)                                     ;B5ACD4
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5ACC4
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 102)                 ;B5ACC8
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 56)                   ;B5ACCC
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 40)                  ;B5ACD0
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5ACD4
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5ACD8
     %AICMD0x10_End()                                           ;B5ACDD
 
@@ -2645,18 +2645,18 @@ DATA8_B5ACDE:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5ACF1
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5ACF6
     %AICMD0x38()                                               ;B5ACF8
-    %AICMD0x39($01, $0010)                                     ;B5ACF9
-    %AICMD0x39($02, $0048)                                     ;B5ACFD
-    %AICMD0x39($01, $0008)                                     ;B5AD01
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5ACF9
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 72)                 ;B5ACFD
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5AD01
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5AD05
-    %AICMD0x3E($2D)                                            ;B5AD07
-    %AICMD0x13($003C)                                          ;B5AD09
-    %AICMD0x39($03, $0010)                                     ;B5AD0C
+    %AICMD0x3E_SetCarryItem($2D)                               ;B5AD07
+    %AICMD0x13_Wait(60)                                        ;B5AD09
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B5AD0C
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5AD10
-    %AICMD0x3E($2C)                                            ;B5AD12
-    %AICMD0x13($003C)                                          ;B5AD14
-    %AICMD0x39($03, $0038)                                     ;B5AD17
-    %AICMD0x39($00, $0020)                                     ;B5AD1B
+    %AICMD0x3E_SetCarryItem($2C)                               ;B5AD12
+    %AICMD0x13_Wait(60)                                        ;B5AD14
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 56)                  ;B5AD17
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5AD1B
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5AD1F
     %AICMD0x10_End()                                           ;B5AD24
 
@@ -2675,252 +2675,252 @@ DATA8_B5AD25:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5AD42
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5AD47
     %AICMD0x38()                                               ;B5AD49
-    %AICMD0x3A($00, $0001)                                     ;B5AD4A
-    %AICMD0x39($00, $000E)                                     ;B5AD4E
-    %AICMD0x39($02, $0010)                                     ;B5AD52
-    %AICMD0x3E($09)                                            ;B5AD56
-    %AICMD0x13($0028)                                          ;B5AD58
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AD5B
-    %AICMD0x13($0014)                                          ;B5AD5C
-    %AICMD0x39($02, $0010)                                     ;B5AD5F
-    %AICMD0x3E($09)                                            ;B5AD63
-    %AICMD0x13($0028)                                          ;B5AD65
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AD68
-    %AICMD0x13($0014)                                          ;B5AD69
-    %AICMD0x39($02, $0010)                                     ;B5AD6C
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 1)                    ;B5AD4A
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 14)                  ;B5AD4E
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5AD52
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AD56
+    %AICMD0x13_Wait(40)                                        ;B5AD58
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AD5B
+    %AICMD0x13_Wait(20)                                        ;B5AD5C
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5AD5F
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AD63
+    %AICMD0x13_Wait(40)                                        ;B5AD65
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AD68
+    %AICMD0x13_Wait(20)                                        ;B5AD69
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5AD6C
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5AD70
-    %AICMD0x3E($09)                                            ;B5AD72
-    %AICMD0x13($0028)                                          ;B5AD74
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AD77
-    %AICMD0x13($0014)                                          ;B5AD78
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AD72
+    %AICMD0x13_Wait(40)                                        ;B5AD74
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AD77
+    %AICMD0x13_Wait(20)                                        ;B5AD78
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5AD7B
-    %AICMD0x3E($09)                                            ;B5AD7D
-    %AICMD0x13($0028)                                          ;B5AD7F
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AD82
-    %AICMD0x13($0014)                                          ;B5AD83
-    %AICMD0x39($00, $001C)                                     ;B5AD86
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AD7D
+    %AICMD0x13_Wait(40)                                        ;B5AD7F
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AD82
+    %AICMD0x13_Wait(20)                                        ;B5AD83
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 28)                  ;B5AD86
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5AD8A
     %AICMD0x56_UseEquippedItem()                               ;B5AD8C
-    %AICMD0x13($003C)                                          ;B5AD8D
-    %AICMD0x3A($03, $0028)                                     ;B5AD90
+    %AICMD0x13_Wait(60)                                        ;B5AD8D
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 40)                   ;B5AD90
     %AICMD0x56_UseEquippedItem()                               ;B5AD94
-    %AICMD0x13($003C)                                          ;B5AD95
+    %AICMD0x13_Wait(60)                                        ;B5AD95
     %AICMD0x56_UseEquippedItem()                               ;B5AD98
-    %AICMD0x13($003C)                                          ;B5AD99
+    %AICMD0x13_Wait(60)                                        ;B5AD99
     %AICMD0x56_UseEquippedItem()                               ;B5AD9C
-    %AICMD0x13($003C)                                          ;B5AD9D
+    %AICMD0x13_Wait(60)                                        ;B5AD9D
     %AICMD0x56_UseEquippedItem()                               ;B5ADA0
-    %AICMD0x13($003C)                                          ;B5ADA1
+    %AICMD0x13_Wait(60)                                        ;B5ADA1
     %AICMD0x56_UseEquippedItem()                               ;B5ADA4
-    %AICMD0x13($003C)                                          ;B5ADA5
+    %AICMD0x13_Wait(60)                                        ;B5ADA5
     %AICMD0x56_UseEquippedItem()                               ;B5ADA8
-    %AICMD0x13($003C)                                          ;B5ADA9
-    %AICMD0x39($00, $0004)                                     ;B5ADAC
-    %AICMD0x3E($09)                                            ;B5ADB0
-    %AICMD0x13($0028)                                          ;B5ADB2
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5ADB5
-    %AICMD0x13($0014)                                          ;B5ADB6
-    %AICMD0x39($00, $000E)                                     ;B5ADB9
+    %AICMD0x13_Wait(60)                                        ;B5ADA9
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 4)                   ;B5ADAC
+    %AICMD0x3E_SetCarryItem($09)                               ;B5ADB0
+    %AICMD0x13_Wait(40)                                        ;B5ADB2
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5ADB5
+    %AICMD0x13_Wait(20)                                        ;B5ADB6
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 14)                  ;B5ADB9
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5ADBD
-    %AICMD0x3E($09)                                            ;B5ADBF
-    %AICMD0x13($0028)                                          ;B5ADC1
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5ADC4
-    %AICMD0x13($0014)                                          ;B5ADC5
-    %AICMD0x39($03, $0010)                                     ;B5ADC8
+    %AICMD0x3E_SetCarryItem($09)                               ;B5ADBF
+    %AICMD0x13_Wait(40)                                        ;B5ADC1
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5ADC4
+    %AICMD0x13_Wait(20)                                        ;B5ADC5
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B5ADC8
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5ADCC
-    %AICMD0x3E($0D)                                            ;B5ADCE
-    %AICMD0x13($0028)                                          ;B5ADD0
-    %AICMD0x3A($02, $0010)                                     ;B5ADD3
-    %AICMD0x39($01, $0010)                                     ;B5ADD7
-    %AICMD0x3A($02, $003C)                                     ;B5ADDB
-    %AICMD0x39($01, $0010)                                     ;B5ADDF
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5ADE3
-    %AICMD0x13($0014)                                          ;B5ADE4
-    %AICMD0x39($00, $0010)                                     ;B5ADE7
-    %AICMD0x3A($03, $0034)                                     ;B5ADEB
+    %AICMD0x3E_SetCarryItem($0D)                               ;B5ADCE
+    %AICMD0x13_Wait(40)                                        ;B5ADD0
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 16)                  ;B5ADD3
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5ADD7
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 60)                  ;B5ADDB
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5ADDF
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5ADE3
+    %AICMD0x13_Wait(20)                                        ;B5ADE4
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B5ADE7
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 52)                   ;B5ADEB
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5ADEF
     %AICMD0x59_SwapEquippedItems()                             ;B5ADF1
-    %AICMD0x13($003C)                                          ;B5ADF2
+    %AICMD0x13_Wait(60)                                        ;B5ADF2
     %AICMD0x56_UseEquippedItem()                               ;B5ADF5
-    %AICMD0x13($003C)                                          ;B5ADF6
+    %AICMD0x13_Wait(60)                                        ;B5ADF6
     %AICMD0x56_UseEquippedItem()                               ;B5ADF9
-    %AICMD0x13($003C)                                          ;B5ADFA
+    %AICMD0x13_Wait(60)                                        ;B5ADFA
     %AICMD0x56_UseEquippedItem()                               ;B5ADFD
-    %AICMD0x13($003C)                                          ;B5ADFE
+    %AICMD0x13_Wait(60)                                        ;B5ADFE
     %AICMD0x56_UseEquippedItem()                               ;B5AE01
-    %AICMD0x13($003C)                                          ;B5AE02
+    %AICMD0x13_Wait(60)                                        ;B5AE02
     %AICMD0x56_UseEquippedItem()                               ;B5AE05
-    %AICMD0x13($003C)                                          ;B5AE06
+    %AICMD0x13_Wait(60)                                        ;B5AE06
     %AICMD0x56_UseEquippedItem()                               ;B5AE09
-    %AICMD0x13($003C)                                          ;B5AE0A
-    %AICMD0x39($00, $0020)                                     ;B5AE0D
-    %AICMD0x39($02, $001E)                                     ;B5AE11
-    %AICMD0x3E($09)                                            ;B5AE15
-    %AICMD0x13($0028)                                          ;B5AE17
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE1A
-    %AICMD0x13($0014)                                          ;B5AE1B
-    %AICMD0x39($02, $0010)                                     ;B5AE1E
-    %AICMD0x3A($01, $0028)                                     ;B5AE22
-    %AICMD0x3E($0F)                                            ;B5AE26
-    %AICMD0x13($0028)                                          ;B5AE28
-    %AICMD0x3A($00, $0010)                                     ;B5AE2B
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE2F
-    %AICMD0x13($0014)                                          ;B5AE30
-    %AICMD0x3A($01, $0020)                                     ;B5AE33
-    %AICMD0x3E($09)                                            ;B5AE37
-    %AICMD0x13($0028)                                          ;B5AE39
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE3C
-    %AICMD0x13($0028)                                          ;B5AE3D
+    %AICMD0x13_Wait(60)                                        ;B5AE0A
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5AE0D
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 30)                 ;B5AE11
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AE15
+    %AICMD0x13_Wait(40)                                        ;B5AE17
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE1A
+    %AICMD0x13_Wait(20)                                        ;B5AE1B
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5AE1E
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 40)                     ;B5AE22
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AE26
+    %AICMD0x13_Wait(40)                                        ;B5AE28
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AE2B
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE2F
+    %AICMD0x13_Wait(20)                                        ;B5AE30
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 32)                     ;B5AE33
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AE37
+    %AICMD0x13_Wait(40)                                        ;B5AE39
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE3C
+    %AICMD0x13_Wait(40)                                        ;B5AE3D
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5AE40
-    %AICMD0x3E($0F)                                            ;B5AE42
-    %AICMD0x13($0028)                                          ;B5AE44
-    %AICMD0x3A($00, $0018)                                     ;B5AE47
-    %AICMD0x39($03, $000F)                                     ;B5AE4B
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AE42
+    %AICMD0x13_Wait(40)                                        ;B5AE44
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 24)                   ;B5AE47
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AE4B
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5AE4F
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE51
-    %AICMD0x13($0014)                                          ;B5AE52
-    %AICMD0x39($03, $000F)                                     ;B5AE55
-    %AICMD0x3A($01, $0010)                                     ;B5AE59
-    %AICMD0x3E($0F)                                            ;B5AE5D
-    %AICMD0x13($0028)                                          ;B5AE5F
-    %AICMD0x3A($00, $0010)                                     ;B5AE62
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE66
-    %AICMD0x13($0014)                                          ;B5AE67
-    %AICMD0x39($03, $000F)                                     ;B5AE6A
-    %AICMD0x3A($01, $0010)                                     ;B5AE6E
-    %AICMD0x3E($0F)                                            ;B5AE72
-    %AICMD0x13($0028)                                          ;B5AE74
-    %AICMD0x3A($00, $0010)                                     ;B5AE77
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE7B
-    %AICMD0x13($0014)                                          ;B5AE7C
-    %AICMD0x39($03, $000F)                                     ;B5AE7F
-    %AICMD0x3A($01, $0010)                                     ;B5AE83
-    %AICMD0x3E($0F)                                            ;B5AE87
-    %AICMD0x13($0028)                                          ;B5AE89
-    %AICMD0x3A($00, $0010)                                     ;B5AE8C
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AE90
-    %AICMD0x13($0014)                                          ;B5AE91
-    %AICMD0x39($03, $000F)                                     ;B5AE94
-    %AICMD0x3A($01, $0010)                                     ;B5AE98
-    %AICMD0x3E($0F)                                            ;B5AE9C
-    %AICMD0x13($0028)                                          ;B5AE9E
-    %AICMD0x3A($00, $0010)                                     ;B5AEA1
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AEA5
-    %AICMD0x13($0014)                                          ;B5AEA6
-    %AICMD0x39($03, $000F)                                     ;B5AEA9
-    %AICMD0x39($01, $0010)                                     ;B5AEAD
-    %AICMD0x3E($09)                                            ;B5AEB1
-    %AICMD0x13($0028)                                          ;B5AEB3
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AEB6
-    %AICMD0x13($0014)                                          ;B5AEB7
-    %AICMD0x39($01, $0010)                                     ;B5AEBA
-    %AICMD0x3E($0F)                                            ;B5AEBE
-    %AICMD0x13($0028)                                          ;B5AEC0
-    %AICMD0x3A($00, $0010)                                     ;B5AEC3
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AEC7
-    %AICMD0x13($0014)                                          ;B5AEC8
-    %AICMD0x39($03, $000F)                                     ;B5AECB
-    %AICMD0x39($01, $0010)                                     ;B5AECF
-    %AICMD0x3E($09)                                            ;B5AED3
-    %AICMD0x13($0028)                                          ;B5AED5
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AED8
-    %AICMD0x13($0014)                                          ;B5AED9
-    %AICMD0x39($01, $0010)                                     ;B5AEDC
-    %AICMD0x3E($0F)                                            ;B5AEE0
-    %AICMD0x13($0028)                                          ;B5AEE2
-    %AICMD0x3A($00, $0010)                                     ;B5AEE5
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AEE9
-    %AICMD0x13($0014)                                          ;B5AEEA
-    %AICMD0x39($03, $000F)                                     ;B5AEED
-    %AICMD0x39($01, $0010)                                     ;B5AEF1
-    %AICMD0x3E($09)                                            ;B5AEF5
-    %AICMD0x13($0028)                                          ;B5AEF7
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AEFA
-    %AICMD0x13($0014)                                          ;B5AEFB
-    %AICMD0x39($01, $0010)                                     ;B5AEFE
-    %AICMD0x3E($0F)                                            ;B5AF02
-    %AICMD0x13($0028)                                          ;B5AF04
-    %AICMD0x3A($00, $0010)                                     ;B5AF07
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AF0B
-    %AICMD0x13($0014)                                          ;B5AF0C
-    %AICMD0x39($03, $000F)                                     ;B5AF0F
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE51
+    %AICMD0x13_Wait(20)                                        ;B5AE52
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AE55
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 16)                     ;B5AE59
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AE5D
+    %AICMD0x13_Wait(40)                                        ;B5AE5F
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AE62
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE66
+    %AICMD0x13_Wait(20)                                        ;B5AE67
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AE6A
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 16)                     ;B5AE6E
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AE72
+    %AICMD0x13_Wait(40)                                        ;B5AE74
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AE77
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE7B
+    %AICMD0x13_Wait(20)                                        ;B5AE7C
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AE7F
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 16)                     ;B5AE83
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AE87
+    %AICMD0x13_Wait(40)                                        ;B5AE89
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AE8C
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AE90
+    %AICMD0x13_Wait(20)                                        ;B5AE91
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AE94
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 16)                     ;B5AE98
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AE9C
+    %AICMD0x13_Wait(40)                                        ;B5AE9E
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AEA1
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AEA5
+    %AICMD0x13_Wait(20)                                        ;B5AEA6
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AEA9
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AEAD
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AEB1
+    %AICMD0x13_Wait(40)                                        ;B5AEB3
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AEB6
+    %AICMD0x13_Wait(20)                                        ;B5AEB7
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AEBA
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AEBE
+    %AICMD0x13_Wait(40)                                        ;B5AEC0
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AEC3
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AEC7
+    %AICMD0x13_Wait(20)                                        ;B5AEC8
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AECB
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AECF
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AED3
+    %AICMD0x13_Wait(40)                                        ;B5AED5
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AED8
+    %AICMD0x13_Wait(20)                                        ;B5AED9
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AEDC
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AEE0
+    %AICMD0x13_Wait(40)                                        ;B5AEE2
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AEE5
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AEE9
+    %AICMD0x13_Wait(20)                                        ;B5AEEA
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AEED
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AEF1
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AEF5
+    %AICMD0x13_Wait(40)                                        ;B5AEF7
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AEFA
+    %AICMD0x13_Wait(20)                                        ;B5AEFB
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AEFE
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AF02
+    %AICMD0x13_Wait(40)                                        ;B5AF04
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AF07
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AF0B
+    %AICMD0x13_Wait(20)                                        ;B5AF0C
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5AF0F
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5AF13
-    %AICMD0x3E($09)                                            ;B5AF15
-    %AICMD0x13($0028)                                          ;B5AF17
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AF1A
-    %AICMD0x13($0014)                                          ;B5AF1B
-    %AICMD0x3A($01, $0010)                                     ;B5AF1E
-    %AICMD0x3E($0F)                                            ;B5AF22
-    %AICMD0x13($0028)                                          ;B5AF24
-    %AICMD0x3A($00, $0010)                                     ;B5AF27
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AF2B
-    %AICMD0x13($0014)                                          ;B5AF2C
-    %AICMD0x3A($01, $0030)                                     ;B5AF2F
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AF15
+    %AICMD0x13_Wait(40)                                        ;B5AF17
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AF1A
+    %AICMD0x13_Wait(20)                                        ;B5AF1B
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 16)                     ;B5AF1E
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5AF22
+    %AICMD0x13_Wait(40)                                        ;B5AF24
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 16)                   ;B5AF27
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AF2B
+    %AICMD0x13_Wait(20)                                        ;B5AF2C
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B5AF2F
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5AF33
     %AICMD0x56_UseEquippedItem()                               ;B5AF35
-    %AICMD0x13($003C)                                          ;B5AF36
+    %AICMD0x13_Wait(60)                                        ;B5AF36
     %AICMD0x56_UseEquippedItem()                               ;B5AF39
-    %AICMD0x13($003C)                                          ;B5AF3A
+    %AICMD0x13_Wait(60)                                        ;B5AF3A
     %AICMD0x56_UseEquippedItem()                               ;B5AF3D
-    %AICMD0x13($003C)                                          ;B5AF3E
+    %AICMD0x13_Wait(60)                                        ;B5AF3E
     %AICMD0x56_UseEquippedItem()                               ;B5AF41
-    %AICMD0x13($003C)                                          ;B5AF42
+    %AICMD0x13_Wait(60)                                        ;B5AF42
     %AICMD0x56_UseEquippedItem()                               ;B5AF45
-    %AICMD0x13($003C)                                          ;B5AF46
+    %AICMD0x13_Wait(60)                                        ;B5AF46
     %AICMD0x56_UseEquippedItem()                               ;B5AF49
-    %AICMD0x13($003C)                                          ;B5AF4A
-    %AICMD0x39($01, $0010)                                     ;B5AF4D
-    %AICMD0x3E($09)                                            ;B5AF51
-    %AICMD0x13($0028)                                          ;B5AF53
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AF56
-    %AICMD0x13($0014)                                          ;B5AF57
-    %AICMD0x39($01, $0010)                                     ;B5AF5A
-    %AICMD0x3E($09)                                            ;B5AF5E
-    %AICMD0x13($0028)                                          ;B5AF60
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AF63
-    %AICMD0x13($0014)                                          ;B5AF64
-    %AICMD0x3A($01, $0020)                                     ;B5AF67
-    %AICMD0x3A($03, $0034)                                     ;B5AF6B
-    %AICMD0x3A($01, $0030)                                     ;B5AF6F
-    %AICMD0x3E($57)                                            ;B5AF73
-    %AICMD0x13($0028)                                          ;B5AF75
-    %AICMD0x3A($00, $0030)                                     ;B5AF78
-    %AICMD0x3A($02, $0034)                                     ;B5AF7C
-    %AICMD0x3A($00, $004E)                                     ;B5AF80
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AF84
-    %AICMD0x13($0014)                                          ;B5AF85
-    %AICMD0x3A($01, $004E)                                     ;B5AF88
-    %AICMD0x3A($03, $0034)                                     ;B5AF8C
-    %AICMD0x3A($01, $0030)                                     ;B5AF90
-    %AICMD0x3E($57)                                            ;B5AF94
-    %AICMD0x13($0028)                                          ;B5AF96
-    %AICMD0x3A($00, $0030)                                     ;B5AF99
-    %AICMD0x3A($02, $0034)                                     ;B5AF9D
-    %AICMD0x3A($00, $0046)                                     ;B5AFA1
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AFA5
-    %AICMD0x13($0014)                                          ;B5AFA6
-    %AICMD0x3A($01, $0046)                                     ;B5AFA9
-    %AICMD0x3A($03, $0034)                                     ;B5AFAD
-    %AICMD0x3A($01, $0030)                                     ;B5AFB1
-    %AICMD0x3E($57)                                            ;B5AFB5
-    %AICMD0x13($0028)                                          ;B5AFB7
-    %AICMD0x3A($00, $0030)                                     ;B5AFBA
-    %AICMD0x3A($02, $0034)                                     ;B5AFBE
-    %AICMD0x3A($00, $003E)                                     ;B5AFC2
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AFC6
-    %AICMD0x13($0014)                                          ;B5AFC7
-    %AICMD0x3A($01, $003E)                                     ;B5AFCA
-    %AICMD0x3A($03, $0034)                                     ;B5AFCE
-    %AICMD0x3A($01, $0030)                                     ;B5AFD2
-    %AICMD0x3E($57)                                            ;B5AFD6
-    %AICMD0x13($0028)                                          ;B5AFD8
-    %AICMD0x3A($00, $0030)                                     ;B5AFDB
-    %AICMD0x3A($02, $0034)                                     ;B5AFDF
-    %AICMD0x3A($00, $0036)                                     ;B5AFE3
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5AFE7
-    %AICMD0x13($0014)                                          ;B5AFE8
-    %AICMD0x3A($02, $0030)                                     ;B5AFEB
-    %AICMD0x39($01, $0008)                                     ;B5AFEF
+    %AICMD0x13_Wait(60)                                        ;B5AF4A
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AF4D
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AF51
+    %AICMD0x13_Wait(40)                                        ;B5AF53
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AF56
+    %AICMD0x13_Wait(20)                                        ;B5AF57
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5AF5A
+    %AICMD0x3E_SetCarryItem($09)                               ;B5AF5E
+    %AICMD0x13_Wait(40)                                        ;B5AF60
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AF63
+    %AICMD0x13_Wait(20)                                        ;B5AF64
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 32)                     ;B5AF67
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 52)                   ;B5AF6B
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B5AF6F
+    %AICMD0x3E_SetCarryItem($57)                               ;B5AF73
+    %AICMD0x13_Wait(40)                                        ;B5AF75
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 48)                   ;B5AF78
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 52)                  ;B5AF7C
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 78)                   ;B5AF80
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AF84
+    %AICMD0x13_Wait(20)                                        ;B5AF85
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 78)                     ;B5AF88
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 52)                   ;B5AF8C
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B5AF90
+    %AICMD0x3E_SetCarryItem($57)                               ;B5AF94
+    %AICMD0x13_Wait(40)                                        ;B5AF96
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 48)                   ;B5AF99
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 52)                  ;B5AF9D
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 70)                   ;B5AFA1
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AFA5
+    %AICMD0x13_Wait(20)                                        ;B5AFA6
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 70)                     ;B5AFA9
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 52)                   ;B5AFAD
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B5AFB1
+    %AICMD0x3E_SetCarryItem($57)                               ;B5AFB5
+    %AICMD0x13_Wait(40)                                        ;B5AFB7
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 48)                   ;B5AFBA
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 52)                  ;B5AFBE
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 62)                   ;B5AFC2
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AFC6
+    %AICMD0x13_Wait(20)                                        ;B5AFC7
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 62)                     ;B5AFCA
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 52)                   ;B5AFCE
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B5AFD2
+    %AICMD0x3E_SetCarryItem($57)                               ;B5AFD6
+    %AICMD0x13_Wait(40)                                        ;B5AFD8
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 48)                   ;B5AFDB
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 52)                  ;B5AFDF
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 54)                   ;B5AFE3
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5AFE7
+    %AICMD0x13_Wait(20)                                        ;B5AFE8
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 48)                  ;B5AFEB
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5AFEF
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5AFF3
     %AICMD0x10_End()                                           ;B5AFF8
 
@@ -2937,23 +2937,23 @@ DATA8_B5AFF9:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B00C
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B011
     %AICMD0x38()                                               ;B5B013
-    %AICMD0x39($01, $0040)                                     ;B5B014
-    %AICMD0x39($03, $0018)                                     ;B5B018
-    %AICMD0x39($01, $0008)                                     ;B5B01C
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5B014
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5B018
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B01C
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B020
-    %AICMD0x3E($35)                                            ;B5B022
-    %AICMD0x13($003C)                                          ;B5B024
-    %AICMD0x39($02, $0018)                                     ;B5B027
-    %AICMD0x39($00, $0035)                                     ;B5B02B
+    %AICMD0x3E_SetCarryItem($35)                               ;B5B022
+    %AICMD0x13_Wait(60)                                        ;B5B024
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 24)                 ;B5B027
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 53)                  ;B5B02B
     %AICMD0x59_SwapEquippedItems()                             ;B5B02F
-    %AICMD0x13($003C)                                          ;B5B030
-    %AICMD0x39($02, $0028)                                     ;B5B033
-    %AICMD0x39($01, $0008)                                     ;B5B037
+    %AICMD0x13_Wait(60)                                        ;B5B030
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5B033
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B037
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B03B
-    %AICMD0x3E($2B)                                            ;B5B03D
-    %AICMD0x13($003C)                                          ;B5B03F
-    %AICMD0x39($03, $0028)                                     ;B5B042
-    %AICMD0x39($00, $0020)                                     ;B5B046
+    %AICMD0x3E_SetCarryItem($2B)                               ;B5B03D
+    %AICMD0x13_Wait(60)                                        ;B5B03F
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 40)                  ;B5B042
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5B046
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5B04A
     %AICMD0x10_End()                                           ;B5B04F
 
@@ -3021,79 +3021,79 @@ DATA8_B5B050:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B193
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5B198
     %AICMD0x38()                                               ;B5B19A
-    %AICMD0x39($00, $000F)                                     ;B5B19B
-    %AICMD0x39($03, $000F)                                     ;B5B19F
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B19B
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B19F
     %AICMD0x56_UseEquippedItem()                               ;B5B1A3
-    %AICMD0x13($003C)                                          ;B5B1A4
-    %AICMD0x39($03, $000F)                                     ;B5B1A7
+    %AICMD0x13_Wait(60)                                        ;B5B1A4
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B1A7
     %AICMD0x56_UseEquippedItem()                               ;B5B1AB
-    %AICMD0x13($003C)                                          ;B5B1AC
-    %AICMD0x39($03, $000F)                                     ;B5B1AF
+    %AICMD0x13_Wait(60)                                        ;B5B1AC
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B1AF
     %AICMD0x56_UseEquippedItem()                               ;B5B1B3
-    %AICMD0x13($003C)                                          ;B5B1B4
-    %AICMD0x39($03, $000F)                                     ;B5B1B7
+    %AICMD0x13_Wait(60)                                        ;B5B1B4
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B1B7
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B1BB
     %AICMD0x56_UseEquippedItem()                               ;B5B1BD
-    %AICMD0x13($003C)                                          ;B5B1BE
-    %AICMD0x39($00, $000F)                                     ;B5B1C1
+    %AICMD0x13_Wait(60)                                        ;B5B1BE
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B1C1
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5B1C5
     %AICMD0x56_UseEquippedItem()                               ;B5B1C7
-    %AICMD0x13($003C)                                          ;B5B1C8
-    %AICMD0x39($02, $000F)                                     ;B5B1CB
+    %AICMD0x13_Wait(60)                                        ;B5B1C8
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B1CB
     %AICMD0x56_UseEquippedItem()                               ;B5B1CF
-    %AICMD0x13($003C)                                          ;B5B1D0
-    %AICMD0x39($02, $000F)                                     ;B5B1D3
+    %AICMD0x13_Wait(60)                                        ;B5B1D0
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B1D3
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B1D7
     %AICMD0x56_UseEquippedItem()                               ;B5B1D9
-    %AICMD0x13($003C)                                          ;B5B1DA
-    %AICMD0x39($00, $000F)                                     ;B5B1DD
+    %AICMD0x13_Wait(60)                                        ;B5B1DA
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B1DD
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B1E1
     %AICMD0x56_UseEquippedItem()                               ;B5B1E3
-    %AICMD0x13($003C)                                          ;B5B1E4
-    %AICMD0x39($03, $000F)                                     ;B5B1E7
+    %AICMD0x13_Wait(60)                                        ;B5B1E4
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B1E7
     %AICMD0x56_UseEquippedItem()                               ;B5B1EB
-    %AICMD0x13($003C)                                          ;B5B1EC
-    %AICMD0x3A($02, $000F)                                     ;B5B1EF
-    %AICMD0x3A($01, $000F)                                     ;B5B1F3
+    %AICMD0x13_Wait(60)                                        ;B5B1EC
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 15)                  ;B5B1EF
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5B1F3
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5B1F7
     %AICMD0x56_UseEquippedItem()                               ;B5B1F9
-    %AICMD0x13($003C)                                          ;B5B1FA
-    %AICMD0x39($02, $000F)                                     ;B5B1FD
+    %AICMD0x13_Wait(60)                                        ;B5B1FA
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B1FD
     %AICMD0x56_UseEquippedItem()                               ;B5B201
-    %AICMD0x13($003C)                                          ;B5B202
-    %AICMD0x39($02, $000F)                                     ;B5B205
+    %AICMD0x13_Wait(60)                                        ;B5B202
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B205
     %AICMD0x56_UseEquippedItem()                               ;B5B209
-    %AICMD0x13($003C)                                          ;B5B20A
-    %AICMD0x39($02, $000F)                                     ;B5B20D
+    %AICMD0x13_Wait(60)                                        ;B5B20A
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B20D
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B211
     %AICMD0x56_UseEquippedItem()                               ;B5B213
-    %AICMD0x13($003C)                                          ;B5B214
-    %AICMD0x39($00, $000F)                                     ;B5B217
+    %AICMD0x13_Wait(60)                                        ;B5B214
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B217
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B21B
     %AICMD0x56_UseEquippedItem()                               ;B5B21D
-    %AICMD0x13($003C)                                          ;B5B21E
-    %AICMD0x39($03, $000F)                                     ;B5B221
+    %AICMD0x13_Wait(60)                                        ;B5B21E
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B221
     %AICMD0x56_UseEquippedItem()                               ;B5B225
-    %AICMD0x13($003C)                                          ;B5B226
-    %AICMD0x39($03, $000F)                                     ;B5B229
+    %AICMD0x13_Wait(60)                                        ;B5B226
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B229
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B22D
     %AICMD0x56_UseEquippedItem()                               ;B5B22F
-    %AICMD0x13($003C)                                          ;B5B230
-    %AICMD0x39($00, $000F)                                     ;B5B233
+    %AICMD0x13_Wait(60)                                        ;B5B230
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B233
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5B237
     %AICMD0x56_UseEquippedItem()                               ;B5B239
-    %AICMD0x13($003C)                                          ;B5B23A
-    %AICMD0x39($02, $000F)                                     ;B5B23D
+    %AICMD0x13_Wait(60)                                        ;B5B23A
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B23D
     %AICMD0x56_UseEquippedItem()                               ;B5B241
-    %AICMD0x13($003C)                                          ;B5B242
-    %AICMD0x39($01, $000F)                                     ;B5B245
+    %AICMD0x13_Wait(60)                                        ;B5B242
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B245
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B249
     %AICMD0x59_SwapEquippedItems()                             ;B5B24B
-    %AICMD0x13($003C)                                          ;B5B24C
+    %AICMD0x13_Wait(60)                                        ;B5B24C
     %AICMD0x56_UseEquippedItem()                               ;B5B24F
-    %AICMD0x13($0078)                                          ;B5B250
-    %AICMD0x39($03, $000F)                                     ;B5B253
-    %AICMD0x39($01, $0028)                                     ;B5B257
+    %AICMD0x13_Wait(120)                                       ;B5B250
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B253
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 40)                    ;B5B257
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5B25B
     %AICMD0x10_End()                                           ;B5B260
 
@@ -3110,23 +3110,23 @@ DATA8_B5B261:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B274
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B279
     %AICMD0x38()                                               ;B5B27B
-    %AICMD0x39($01, $0040)                                     ;B5B27C
-    %AICMD0x39($02, $0048)                                     ;B5B280
-    %AICMD0x39($01, $0008)                                     ;B5B284
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5B27C
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 72)                 ;B5B280
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B284
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B288
-    %AICMD0x3E($31)                                            ;B5B28A
-    %AICMD0x13($003C)                                          ;B5B28C
-    %AICMD0x39($03, $0048)                                     ;B5B28F
-    %AICMD0x39($00, $0035)                                     ;B5B293
+    %AICMD0x3E_SetCarryItem($31)                               ;B5B28A
+    %AICMD0x13_Wait(60)                                        ;B5B28C
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 72)                  ;B5B28F
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 53)                  ;B5B293
     %AICMD0x59_SwapEquippedItems()                             ;B5B297
-    %AICMD0x13($003C)                                          ;B5B298
-    %AICMD0x39($03, $0018)                                     ;B5B29B
-    %AICMD0x39($01, $0008)                                     ;B5B29F
+    %AICMD0x13_Wait(60)                                        ;B5B298
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5B29B
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B29F
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B2A3
-    %AICMD0x3E($39)                                            ;B5B2A5
-    %AICMD0x13($003C)                                          ;B5B2A7
-    %AICMD0x39($02, $0018)                                     ;B5B2AA
-    %AICMD0x39($00, $0020)                                     ;B5B2AE
+    %AICMD0x3E_SetCarryItem($39)                               ;B5B2A5
+    %AICMD0x13_Wait(60)                                        ;B5B2A7
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 24)                 ;B5B2AA
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5B2AE
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5B2B2
     %AICMD0x10_End()                                           ;B5B2B7
 
@@ -3212,56 +3212,56 @@ DATA8_B5B2B8:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B467
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5B46C
     %AICMD0x38()                                               ;B5B46E
-    %AICMD0x39($00, $001F)                                     ;B5B46F
-    %AICMD0x39($03, $002F)                                     ;B5B473
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 31)                  ;B5B46F
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 47)                  ;B5B473
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B477
     %AICMD0x56_UseEquippedItem()                               ;B5B479
-    %AICMD0x13($0078)                                          ;B5B47A
+    %AICMD0x13_Wait(120)                                       ;B5B47A
     %AICMD0x59_SwapEquippedItems()                             ;B5B47D
-    %AICMD0x13($003C)                                          ;B5B47E
-    %AICMD0x3A($00, $0011)                                     ;B5B481
-    %AICMD0x3A($02, $004C)                                     ;B5B485
-    %AICMD0x39($01, $001F)                                     ;B5B489
+    %AICMD0x13_Wait(60)                                        ;B5B47E
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 17)                   ;B5B481
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 76)                  ;B5B485
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 31)                    ;B5B489
     %AICMD0x56_UseEquippedItem()                               ;B5B48D
-    %AICMD0x13($0050)                                          ;B5B48E
-    %AICMD0x39($00, $001F)                                     ;B5B491
-    %AICMD0x3A($03, $003C)                                     ;B5B495
-    %AICMD0x3A($01, $0002)                                     ;B5B499
-    %AICMD0x39($01, $000F)                                     ;B5B49D
+    %AICMD0x13_Wait(80)                                        ;B5B48E
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 31)                  ;B5B491
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 60)                   ;B5B495
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 2)                      ;B5B499
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B49D
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B4A1
     %AICMD0x56_UseEquippedItem()                               ;B5B4A3
-    %AICMD0x13($0050)                                          ;B5B4A4
-    %AICMD0x39($03, $000F)                                     ;B5B4A7
+    %AICMD0x13_Wait(80)                                        ;B5B4A4
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B4A7
     %AICMD0x56_UseEquippedItem()                               ;B5B4AB
-    %AICMD0x13($0050)                                          ;B5B4AC
-    %AICMD0x39($03, $000F)                                     ;B5B4AF
+    %AICMD0x13_Wait(80)                                        ;B5B4AC
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B4AF
     %AICMD0x56_UseEquippedItem()                               ;B5B4B3
-    %AICMD0x13($0050)                                          ;B5B4B4
-    %AICMD0x39($03, $000F)                                     ;B5B4B7
+    %AICMD0x13_Wait(80)                                        ;B5B4B4
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B4B7
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B4BB
     %AICMD0x56_UseEquippedItem()                               ;B5B4BD
-    %AICMD0x13($0050)                                          ;B5B4BE
-    %AICMD0x39($01, $000F)                                     ;B5B4C1
+    %AICMD0x13_Wait(80)                                        ;B5B4BE
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B4C1
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5B4C5
     %AICMD0x56_UseEquippedItem()                               ;B5B4C7
-    %AICMD0x13($0050)                                          ;B5B4C8
-    %AICMD0x39($02, $000F)                                     ;B5B4CB
+    %AICMD0x13_Wait(80)                                        ;B5B4C8
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B4CB
     %AICMD0x56_UseEquippedItem()                               ;B5B4CF
-    %AICMD0x13($0050)                                          ;B5B4D0
-    %AICMD0x39($02, $000F)                                     ;B5B4D3
+    %AICMD0x13_Wait(80)                                        ;B5B4D0
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B4D3
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B4D7
     %AICMD0x56_UseEquippedItem()                               ;B5B4D9
-    %AICMD0x13($0050)                                          ;B5B4DA
-    %AICMD0x39($01, $000F)                                     ;B5B4DD
+    %AICMD0x13_Wait(80)                                        ;B5B4DA
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B4DD
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B4E1
     %AICMD0x56_UseEquippedItem()                               ;B5B4E3
-    %AICMD0x13($0050)                                          ;B5B4E4
-    %AICMD0x39($03, $000F)                                     ;B5B4E7
+    %AICMD0x13_Wait(80)                                        ;B5B4E4
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B4E7
     %AICMD0x56_UseEquippedItem()                               ;B5B4EB
-    %AICMD0x13($0050)                                          ;B5B4EC
-    %AICMD0x3A($01, $003F)                                     ;B5B4EF
-    %AICMD0x3A($03, $0078)                                     ;B5B4F3
-    %AICMD0x39($01, $0028)                                     ;B5B4F7
+    %AICMD0x13_Wait(80)                                        ;B5B4EC
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 63)                     ;B5B4EF
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 120)                  ;B5B4F3
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 40)                    ;B5B4F7
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5B4FB
     %AICMD0x10_End()                                           ;B5B500
 
@@ -3348,124 +3348,124 @@ DATA8_B5B501:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5B6B4
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5B6B9
     %AICMD0x38()                                               ;B5B6BB
-    %AICMD0x39($00, $0020)                                     ;B5B6BC
-    %AICMD0x3A($02, $0017)                                     ;B5B6C0
-    %AICMD0x3A($00, $0027)                                     ;B5B6C4
-    %AICMD0x3E($0D)                                            ;B5B6C8
-    %AICMD0x13($0028)                                          ;B5B6CA
-    %AICMD0x39($01, $000F)                                     ;B5B6CD
-    %AICMD0x39($02, $000F)                                     ;B5B6D1
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B6D5
-    %AICMD0x13($0014)                                          ;B5B6D6
-    %AICMD0x3A($00, $000F)                                     ;B5B6D9
-    %AICMD0x3E($0D)                                            ;B5B6DD
-    %AICMD0x13($0028)                                          ;B5B6DF
-    %AICMD0x39($01, $000F)                                     ;B5B6E2
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B6E6
-    %AICMD0x13($0014)                                          ;B5B6E7
-    %AICMD0x3A($00, $000F)                                     ;B5B6EA
-    %AICMD0x3A($02, $004F)                                     ;B5B6EE
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5B6BC
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 23)                  ;B5B6C0
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 39)                   ;B5B6C4
+    %AICMD0x3E_SetCarryItem($0D)                               ;B5B6C8
+    %AICMD0x13_Wait(40)                                        ;B5B6CA
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B6CD
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5B6D1
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B6D5
+    %AICMD0x13_Wait(20)                                        ;B5B6D6
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5B6D9
+    %AICMD0x3E_SetCarryItem($0D)                               ;B5B6DD
+    %AICMD0x13_Wait(40)                                        ;B5B6DF
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B6E2
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B6E6
+    %AICMD0x13_Wait(20)                                        ;B5B6E7
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5B6EA
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 79)                  ;B5B6EE
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B6F2
-    %AICMD0x3E($13)                                            ;B5B6F4
-    %AICMD0x13($0028)                                          ;B5B6F6
-    %AICMD0x3A($03, $0057)                                     ;B5B6F9
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B6FD
-    %AICMD0x13($003C)                                          ;B5B6FE
-    %AICMD0x3A($02, $005F)                                     ;B5B701
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B6F4
+    %AICMD0x13_Wait(40)                                        ;B5B6F6
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 87)                   ;B5B6F9
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B6FD
+    %AICMD0x13_Wait(60)                                        ;B5B6FE
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 95)                  ;B5B701
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B705
-    %AICMD0x3E($13)                                            ;B5B707
-    %AICMD0x13($0028)                                          ;B5B709
-    %AICMD0x3A($03, $005F)                                     ;B5B70C
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B710
-    %AICMD0x13($003C)                                          ;B5B711
-    %AICMD0x3A($02, $0067)                                     ;B5B714
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B707
+    %AICMD0x13_Wait(40)                                        ;B5B709
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 95)                   ;B5B70C
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B710
+    %AICMD0x13_Wait(60)                                        ;B5B711
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 103)                 ;B5B714
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B718
-    %AICMD0x3E($13)                                            ;B5B71A
-    %AICMD0x13($0028)                                          ;B5B71C
-    %AICMD0x3A($03, $0067)                                     ;B5B71F
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B723
-    %AICMD0x13($003C)                                          ;B5B724
-    %AICMD0x3A($02, $0057)                                     ;B5B727
-    %AICMD0x39($00, $000F)                                     ;B5B72B
-    %AICMD0x3E($13)                                            ;B5B72F
-    %AICMD0x13($0028)                                          ;B5B731
-    %AICMD0x39($01, $000F)                                     ;B5B734
-    %AICMD0x3A($03, $0057)                                     ;B5B738
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B73C
-    %AICMD0x13($003C)                                          ;B5B73D
-    %AICMD0x3A($02, $0067)                                     ;B5B740
-    %AICMD0x39($00, $000F)                                     ;B5B744
-    %AICMD0x3E($13)                                            ;B5B748
-    %AICMD0x13($0028)                                          ;B5B74A
-    %AICMD0x3A($01, $000F)                                     ;B5B74D
-    %AICMD0x3A($03, $0007)                                     ;B5B751
-    %AICMD0x3A($01, $000E)                                     ;B5B755
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B71A
+    %AICMD0x13_Wait(40)                                        ;B5B71C
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 103)                  ;B5B71F
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B723
+    %AICMD0x13_Wait(60)                                        ;B5B724
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 87)                  ;B5B727
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B72B
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B72F
+    %AICMD0x13_Wait(40)                                        ;B5B731
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5B734
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 87)                   ;B5B738
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B73C
+    %AICMD0x13_Wait(60)                                        ;B5B73D
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 103)                 ;B5B740
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B744
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B748
+    %AICMD0x13_Wait(40)                                        ;B5B74A
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5B74D
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5B751
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 14)                     ;B5B755
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B759
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B75B
-    %AICMD0x13($0014)                                          ;B5B75C
-    %AICMD0x3A($00, $0017)                                     ;B5B75F
-    %AICMD0x3A($02, $0007)                                     ;B5B763
-    %AICMD0x3A($00, $0007)                                     ;B5B767
-    %AICMD0x3E($13)                                            ;B5B76B
-    %AICMD0x13($0028)                                          ;B5B76D
-    %AICMD0x3A($01, $0007)                                     ;B5B770
-    %AICMD0x3A($03, $0007)                                     ;B5B774
-    %AICMD0x3A($01, $0017)                                     ;B5B778
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B75B
+    %AICMD0x13_Wait(20)                                        ;B5B75C
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5B75F
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5B763
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5B767
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B76B
+    %AICMD0x13_Wait(40)                                        ;B5B76D
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5B770
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5B774
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5B778
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B77C
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B77E
-    %AICMD0x13($0014)                                          ;B5B77F
-    %AICMD0x3A($00, $0017)                                     ;B5B782
-    %AICMD0x3A($03, $0007)                                     ;B5B786
-    %AICMD0x3A($00, $0007)                                     ;B5B78A
-    %AICMD0x3E($13)                                            ;B5B78E
-    %AICMD0x13($0028)                                          ;B5B790
-    %AICMD0x3A($01, $0007)                                     ;B5B793
-    %AICMD0x3A($02, $0007)                                     ;B5B797
-    %AICMD0x3A($01, $0017)                                     ;B5B79B
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B77E
+    %AICMD0x13_Wait(20)                                        ;B5B77F
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5B782
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5B786
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5B78A
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B78E
+    %AICMD0x13_Wait(40)                                        ;B5B790
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5B793
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5B797
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5B79B
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B79F
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B7A1
-    %AICMD0x13($0014)                                          ;B5B7A2
-    %AICMD0x3A($00, $0017)                                     ;B5B7A5
-    %AICMD0x3A($03, $0007)                                     ;B5B7A9
-    %AICMD0x3A($00, $000F)                                     ;B5B7AD
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B7A1
+    %AICMD0x13_Wait(20)                                        ;B5B7A2
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5B7A5
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5B7A9
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5B7AD
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5B7B1
-    %AICMD0x3E($13)                                            ;B5B7B3
-    %AICMD0x13($0028)                                          ;B5B7B5
-    %AICMD0x3A($01, $000F)                                     ;B5B7B8
-    %AICMD0x3A($02, $0007)                                     ;B5B7BC
-    %AICMD0x3A($01, $0017)                                     ;B5B7C0
+    %AICMD0x3E_SetCarryItem($13)                               ;B5B7B3
+    %AICMD0x13_Wait(40)                                        ;B5B7B5
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5B7B8
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5B7BC
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5B7C0
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5B7C4
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5B7C6
-    %AICMD0x13($0014)                                          ;B5B7C7
-    %AICMD0x3A($00, $000F)                                     ;B5B7CA
-    %AICMD0x3A($02, $0017)                                     ;B5B7CE
-    %AICMD0x39($01, $0010)                                     ;B5B7D2
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5B7C6
+    %AICMD0x13_Wait(20)                                        ;B5B7C7
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5B7CA
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 23)                  ;B5B7CE
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5B7D2
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5B7D6
     %AICMD0x10_End()                                           ;B5B7DB
     %AICMD0x1A($0168, $01C8, $B3812C, $03)                     ;B5B7DC
-    %AICMD0x13($00F0)                                          ;B5B7E4
-    %AICMD0x13($00F0)                                          ;B5B7E7
-    %AICMD0x13($00F0)                                          ;B5B7EA
-    %AICMD0x13($00F0)                                          ;B5B7ED
-    %AICMD0x13($00F0)                                          ;B5B7F0
-    %AICMD0x13($00F0)                                          ;B5B7F3
-    %AICMD0x13($00F0)                                          ;B5B7F6
+    %AICMD0x13_Wait(240)                                       ;B5B7E4
+    %AICMD0x13_Wait(240)                                       ;B5B7E7
+    %AICMD0x13_Wait(240)                                       ;B5B7EA
+    %AICMD0x13_Wait(240)                                       ;B5B7ED
+    %AICMD0x13_Wait(240)                                       ;B5B7F0
+    %AICMD0x13_Wait(240)                                       ;B5B7F3
+    %AICMD0x13_Wait(240)                                       ;B5B7F6
     %AICMD0x1B($0208, $00)                                     ;B5B7F9
-    %AICMD0x13($003C)                                          ;B5B7FD
+    %AICMD0x13_Wait(60)                                        ;B5B7FD
     %AICMD0x1B($0200, $00)                                     ;B5B800
-    %AICMD0x13($0050)                                          ;B5B804
+    %AICMD0x13_Wait(80)                                        ;B5B804
     %AICMD0x1B($0208, $00)                                     ;B5B807
-    %AICMD0x13($003C)                                          ;B5B80B
+    %AICMD0x13_Wait(60)                                        ;B5B80B
     %AICMD0x1B($0200, $00)                                     ;B5B80E
-    %AICMD0x13($0050)                                          ;B5B812
+    %AICMD0x13_Wait(80)                                        ;B5B812
     %AICMD0x1B($0208, $00)                                     ;B5B815
-    %AICMD0x13($003C)                                          ;B5B819
+    %AICMD0x13_Wait(60)                                        ;B5B819
     %AICMD0x1B($0200, $00)                                     ;B5B81C
-    %AICMD0x13($005F)                                          ;B5B820
+    %AICMD0x13_Wait(95)                                        ;B5B820
     %AICMD0x1B($0208, $00)                                     ;B5B823
-    %AICMD0x13($003C)                                          ;B5B827
+    %AICMD0x13_Wait(60)                                        ;B5B827
     %AICMD0x1B($0200, $00)                                     ;B5B82A
-    %AICMD0x13($0001)                                          ;B5B82E
+    %AICMD0x13_Wait(1)                                         ;B5B82E
     %AICMD0x12_Jump($B5B82E)                                   ;B5B831
 
 
@@ -3481,18 +3481,18 @@ DATA8_B5B834:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5B847
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B84C
     %AICMD0x38()                                               ;B5B84E
-    %AICMD0x39($01, $0010)                                     ;B5B84F
-    %AICMD0x39($02, $0028)                                     ;B5B853
-    %AICMD0x39($01, $0008)                                     ;B5B857
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5B84F
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5B853
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B857
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B85B
-    %AICMD0x3E($3B)                                            ;B5B85D
-    %AICMD0x13($003C)                                          ;B5B85F
-    %AICMD0x39($03, $0010)                                     ;B5B862
+    %AICMD0x3E_SetCarryItem($3B)                               ;B5B85D
+    %AICMD0x13_Wait(60)                                        ;B5B85F
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B5B862
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B866
-    %AICMD0x3E($2A)                                            ;B5B868
-    %AICMD0x13($003C)                                          ;B5B86A
-    %AICMD0x39($03, $0018)                                     ;B5B86D
-    %AICMD0x39($00, $0020)                                     ;B5B871
+    %AICMD0x3E_SetCarryItem($2A)                               ;B5B868
+    %AICMD0x13_Wait(60)                                        ;B5B86A
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5B86D
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5B871
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5B875
     %AICMD0x10_End()                                           ;B5B87A
 
@@ -3583,156 +3583,156 @@ DATA8_B5B87B:
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5BA47
     %AICMD0x38()                                               ;B5BA49
     %AICMD0x56_UseEquippedItem()                               ;B5BA4A
-    %AICMD0x13($003C)                                          ;B5BA4B
-    %AICMD0x39($00, $000F)                                     ;B5BA4E
+    %AICMD0x13_Wait(60)                                        ;B5BA4B
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5BA4E
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5BA52
     %AICMD0x56_UseEquippedItem()                               ;B5BA54
-    %AICMD0x13($003C)                                          ;B5BA55
-    %AICMD0x39($02, $000F)                                     ;B5BA58
+    %AICMD0x13_Wait(60)                                        ;B5BA55
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5BA58
     %AICMD0x56_UseEquippedItem()                               ;B5BA5C
-    %AICMD0x13($003C)                                          ;B5BA5D
-    %AICMD0x39($02, $000F)                                     ;B5BA60
+    %AICMD0x13_Wait(60)                                        ;B5BA5D
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5BA60
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BA64
     %AICMD0x56_UseEquippedItem()                               ;B5BA66
-    %AICMD0x13($003C)                                          ;B5BA67
-    %AICMD0x39($00, $000F)                                     ;B5BA6A
+    %AICMD0x13_Wait(60)                                        ;B5BA67
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5BA6A
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5BA6E
     %AICMD0x56_UseEquippedItem()                               ;B5BA70
-    %AICMD0x13($003C)                                          ;B5BA71
-    %AICMD0x39($03, $000F)                                     ;B5BA74
+    %AICMD0x13_Wait(60)                                        ;B5BA71
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5BA74
     %AICMD0x56_UseEquippedItem()                               ;B5BA78
-    %AICMD0x13($003C)                                          ;B5BA79
-    %AICMD0x39($03, $000F)                                     ;B5BA7C
+    %AICMD0x13_Wait(60)                                        ;B5BA79
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5BA7C
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BA80
     %AICMD0x56_UseEquippedItem()                               ;B5BA82
-    %AICMD0x13($003C)                                          ;B5BA83
-    %AICMD0x39($00, $000F)                                     ;B5BA86
+    %AICMD0x13_Wait(60)                                        ;B5BA83
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5BA86
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5BA8A
     %AICMD0x56_UseEquippedItem()                               ;B5BA8C
-    %AICMD0x13($003C)                                          ;B5BA8D
-    %AICMD0x39($02, $000F)                                     ;B5BA90
+    %AICMD0x13_Wait(60)                                        ;B5BA8D
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5BA90
     %AICMD0x56_UseEquippedItem()                               ;B5BA94
-    %AICMD0x13($003C)                                          ;B5BA95
-    %AICMD0x3A($03, $0030)                                     ;B5BA98
-    %AICMD0x3A($03, $0010)                                     ;B5BA9C
-    %AICMD0x39($00, $0010)                                     ;B5BAA0
-    %AICMD0x3E($09)                                            ;B5BAA4
-    %AICMD0x13($0028)                                          ;B5BAA6
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BAA9
-    %AICMD0x13($0014)                                          ;B5BAAA
-    %AICMD0x39($03, $0020)                                     ;B5BAAD
+    %AICMD0x13_Wait(60)                                        ;B5BA95
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 48)                   ;B5BA98
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 16)                   ;B5BA9C
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B5BAA0
+    %AICMD0x3E_SetCarryItem($09)                               ;B5BAA4
+    %AICMD0x13_Wait(40)                                        ;B5BAA6
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BAA9
+    %AICMD0x13_Wait(20)                                        ;B5BAAA
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 32)                  ;B5BAAD
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BAB1
-    %AICMD0x3E($09)                                            ;B5BAB3
-    %AICMD0x13($0028)                                          ;B5BAB5
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BAB8
-    %AICMD0x13($0014)                                          ;B5BAB9
-    %AICMD0x39($03, $000F)                                     ;B5BABC
+    %AICMD0x3E_SetCarryItem($09)                               ;B5BAB3
+    %AICMD0x13_Wait(40)                                        ;B5BAB5
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BAB8
+    %AICMD0x13_Wait(20)                                        ;B5BAB9
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5BABC
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BAC0
-    %AICMD0x3E($09)                                            ;B5BAC2
-    %AICMD0x13($0028)                                          ;B5BAC4
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BAC7
-    %AICMD0x13($0014)                                          ;B5BAC8
-    %AICMD0x39($03, $000F)                                     ;B5BACB
-    %AICMD0x39($01, $000F)                                     ;B5BACF
-    %AICMD0x3E($09)                                            ;B5BAD3
-    %AICMD0x13($0028)                                          ;B5BAD5
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BAD8
-    %AICMD0x13($0014)                                          ;B5BAD9
-    %AICMD0x3A($02, $0008)                                     ;B5BADC
-    %AICMD0x3A($01, $0007)                                     ;B5BAE0
-    %AICMD0x3E($0F)                                            ;B5BAE4
-    %AICMD0x13($0028)                                          ;B5BAE6
+    %AICMD0x3E_SetCarryItem($09)                               ;B5BAC2
+    %AICMD0x13_Wait(40)                                        ;B5BAC4
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BAC7
+    %AICMD0x13_Wait(20)                                        ;B5BAC8
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5BACB
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5BACF
+    %AICMD0x3E_SetCarryItem($09)                               ;B5BAD3
+    %AICMD0x13_Wait(40)                                        ;B5BAD5
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BAD8
+    %AICMD0x13_Wait(20)                                        ;B5BAD9
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 8)                   ;B5BADC
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5BAE0
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BAE4
+    %AICMD0x13_Wait(40)                                        ;B5BAE6
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5BAE9
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BAEB
-    %AICMD0x13($0014)                                          ;B5BAEC
-    %AICMD0x3A($02, $0007)                                     ;B5BAEF
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BAEB
+    %AICMD0x13_Wait(20)                                        ;B5BAEC
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5BAEF
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BAF3
-    %AICMD0x3E($0F)                                            ;B5BAF5
-    %AICMD0x13($0028)                                          ;B5BAF7
-    %AICMD0x3A($00, $0007)                                     ;B5BAFA
-    %AICMD0x3A($03, $0007)                                     ;B5BAFE
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB02
-    %AICMD0x13($0014)                                          ;B5BB03
-    %AICMD0x3A($02, $000F)                                     ;B5BB06
-    %AICMD0x3A($01, $0007)                                     ;B5BB0A
-    %AICMD0x3E($0F)                                            ;B5BB0E
-    %AICMD0x13($0028)                                          ;B5BB10
-    %AICMD0x3A($00, $000F)                                     ;B5BB13
-    %AICMD0x3A($03, $000F)                                     ;B5BB17
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB1B
-    %AICMD0x13($0014)                                          ;B5BB1C
-    %AICMD0x3A($02, $0017)                                     ;B5BB1F
-    %AICMD0x3A($01, $000F)                                     ;B5BB23
-    %AICMD0x3E($0F)                                            ;B5BB27
-    %AICMD0x13($0028)                                          ;B5BB29
-    %AICMD0x3A($00, $0017)                                     ;B5BB2C
-    %AICMD0x3A($03, $0017)                                     ;B5BB30
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB34
-    %AICMD0x13($0014)                                          ;B5BB35
-    %AICMD0x3A($02, $001F)                                     ;B5BB38
-    %AICMD0x3A($01, $0017)                                     ;B5BB3C
-    %AICMD0x3E($0F)                                            ;B5BB40
-    %AICMD0x13($0028)                                          ;B5BB42
-    %AICMD0x3A($00, $0017)                                     ;B5BB45
-    %AICMD0x3A($03, $0017)                                     ;B5BB49
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB4D
-    %AICMD0x13($0014)                                          ;B5BB4E
-    %AICMD0x3A($02, $001F)                                     ;B5BB51
-    %AICMD0x3A($01, $0017)                                     ;B5BB55
-    %AICMD0x3E($0F)                                            ;B5BB59
-    %AICMD0x13($0028)                                          ;B5BB5B
-    %AICMD0x3A($00, $0017)                                     ;B5BB5E
-    %AICMD0x3A($03, $0017)                                     ;B5BB62
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB66
-    %AICMD0x13($0014)                                          ;B5BB67
-    %AICMD0x3A($02, $0017)                                     ;B5BB6A
-    %AICMD0x3A($01, $001F)                                     ;B5BB6E
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BAF5
+    %AICMD0x13_Wait(40)                                        ;B5BAF7
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5BAFA
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5BAFE
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB02
+    %AICMD0x13_Wait(20)                                        ;B5BB03
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 15)                  ;B5BB06
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5BB0A
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BB0E
+    %AICMD0x13_Wait(40)                                        ;B5BB10
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5BB13
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 15)                   ;B5BB17
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB1B
+    %AICMD0x13_Wait(20)                                        ;B5BB1C
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 23)                  ;B5BB1F
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5BB23
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BB27
+    %AICMD0x13_Wait(40)                                        ;B5BB29
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5BB2C
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 23)                   ;B5BB30
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB34
+    %AICMD0x13_Wait(20)                                        ;B5BB35
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 31)                  ;B5BB38
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5BB3C
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BB40
+    %AICMD0x13_Wait(40)                                        ;B5BB42
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5BB45
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 23)                   ;B5BB49
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB4D
+    %AICMD0x13_Wait(20)                                        ;B5BB4E
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 31)                  ;B5BB51
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5BB55
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BB59
+    %AICMD0x13_Wait(40)                                        ;B5BB5B
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5BB5E
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 23)                   ;B5BB62
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB66
+    %AICMD0x13_Wait(20)                                        ;B5BB67
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 23)                  ;B5BB6A
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 31)                     ;B5BB6E
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5BB72
-    %AICMD0x3E($0F)                                            ;B5BB74
-    %AICMD0x13($0028)                                          ;B5BB76
-    %AICMD0x3A($00, $001F)                                     ;B5BB79
-    %AICMD0x3A($03, $000F)                                     ;B5BB7D
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB81
-    %AICMD0x13($0014)                                          ;B5BB82
-    %AICMD0x3A($02, $000F)                                     ;B5BB85
-    %AICMD0x3A($01, $0017)                                     ;B5BB89
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BB74
+    %AICMD0x13_Wait(40)                                        ;B5BB76
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 31)                   ;B5BB79
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 15)                   ;B5BB7D
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB81
+    %AICMD0x13_Wait(20)                                        ;B5BB82
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 15)                  ;B5BB85
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5BB89
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5BB8D
-    %AICMD0x3E($0F)                                            ;B5BB8F
-    %AICMD0x13($0028)                                          ;B5BB91
-    %AICMD0x3A($00, $0017)                                     ;B5BB94
-    %AICMD0x3A($03, $0007)                                     ;B5BB98
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BB9C
-    %AICMD0x13($0014)                                          ;B5BB9D
-    %AICMD0x3A($02, $0007)                                     ;B5BBA0
-    %AICMD0x3A($01, $000F)                                     ;B5BBA4
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BB8F
+    %AICMD0x13_Wait(40)                                        ;B5BB91
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5BB94
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5BB98
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BB9C
+    %AICMD0x13_Wait(20)                                        ;B5BB9D
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5BBA0
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5BBA4
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5BBA8
-    %AICMD0x3E($0F)                                            ;B5BBAA
-    %AICMD0x13($0028)                                          ;B5BBAC
-    %AICMD0x3A($03, $0007)                                     ;B5BBAF
-    %AICMD0x3A($00, $0007)                                     ;B5BBB3
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BBB7
-    %AICMD0x13($0014)                                          ;B5BBB8
-    %AICMD0x3A($02, $0007)                                     ;B5BBBB
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BBAA
+    %AICMD0x13_Wait(40)                                        ;B5BBAC
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5BBAF
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5BBB3
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BBB7
+    %AICMD0x13_Wait(20)                                        ;B5BBB8
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5BBBB
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5BBBF
-    %AICMD0x3E($0F)                                            ;B5BBC1
-    %AICMD0x13($0028)                                          ;B5BBC3
+    %AICMD0x3E_SetCarryItem($0F)                               ;B5BBC1
+    %AICMD0x13_Wait(40)                                        ;B5BBC3
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BBC6
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5BBC8
-    %AICMD0x13($0014)                                          ;B5BBC9
-    %AICMD0x3A($02, $000F)                                     ;B5BBCC
-    %AICMD0x3A($01, $0009)                                     ;B5BBD0
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5BBC8
+    %AICMD0x13_Wait(20)                                        ;B5BBC9
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 15)                  ;B5BBCC
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 9)                      ;B5BBD0
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5BBD4
     %AICMD0x59_SwapEquippedItems()                             ;B5BBD6
-    %AICMD0x13($003C)                                          ;B5BBD7
+    %AICMD0x13_Wait(60)                                        ;B5BBD7
     %AICMD0x56_UseEquippedItem()                               ;B5BBDA
-    %AICMD0x13($0078)                                          ;B5BBDB
-    %AICMD0x39($01, $001F)                                     ;B5BBDE
+    %AICMD0x13_Wait(120)                                       ;B5BBDB
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 31)                    ;B5BBDE
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5BBE2
     %AICMD0x56_UseEquippedItem()                               ;B5BBE4
-    %AICMD0x13($0078)                                          ;B5BBE5
-    %AICMD0x39($01, $000B)                                     ;B5BBE8
-    %AICMD0x3A($02, $0027)                                     ;B5BBEC
-    %AICMD0x39($01, $000F)                                     ;B5BBF0
+    %AICMD0x13_Wait(120)                                       ;B5BBE5
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 11)                    ;B5BBE8
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 39)                  ;B5BBEC
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 15)                    ;B5BBF0
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5BBF4
     %AICMD0x10_End()                                           ;B5BBF9
 
@@ -3749,20 +3749,20 @@ DATA8_B5BBFA:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BC0D
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5BC12
     %AICMD0x38()                                               ;B5BC14
-    %AICMD0x39($01, $0040)                                     ;B5BC15
-    %AICMD0x39($02, $0028)                                     ;B5BC19
-    %AICMD0x39($01, $0008)                                     ;B5BC1D
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5BC15
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5BC19
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5BC1D
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BC21
-    %AICMD0x3E($2F)                                            ;B5BC23
-    %AICMD0x13($003C)                                          ;B5BC25
-    %AICMD0x39($03, $0010)                                     ;B5BC28
+    %AICMD0x3E_SetCarryItem($2F)                               ;B5BC23
+    %AICMD0x13_Wait(60)                                        ;B5BC25
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B5BC28
     %AICMD0x59_SwapEquippedItems()                             ;B5BC2C
-    %AICMD0x13($003C)                                          ;B5BC2D
+    %AICMD0x13_Wait(60)                                        ;B5BC2D
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BC30
-    %AICMD0x3E($2E)                                            ;B5BC32
-    %AICMD0x13($003C)                                          ;B5BC34
-    %AICMD0x39($03, $0018)                                     ;B5BC37
-    %AICMD0x39($00, $0050)                                     ;B5BC3B
+    %AICMD0x3E_SetCarryItem($2E)                               ;B5BC32
+    %AICMD0x13_Wait(60)                                        ;B5BC34
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5BC37
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B5BC3B
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5BC3F
     %AICMD0x10_End()                                           ;B5BC44
 
@@ -3878,20 +3878,20 @@ DATA8_B5BC45:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BEA8
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5BEAD
     %AICMD0x38()                                               ;B5BEAF
-    %AICMD0x3A($03, $004F)                                     ;B5BEB0
-    %AICMD0x3A($00, $000F)                                     ;B5BEB4
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 79)                   ;B5BEB0
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5BEB4
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BEB8
     %AICMD0x56_UseEquippedItem()                               ;B5BEBA
-    %AICMD0x13($0078)                                          ;B5BEBB
-    %AICMD0x39($02, $002F)                                     ;B5BEBE
+    %AICMD0x13_Wait(120)                                       ;B5BEBB
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 47)                 ;B5BEBE
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BEC2
     %AICMD0x59_SwapEquippedItems()                             ;B5BEC4
-    %AICMD0x13($003C)                                          ;B5BEC5
+    %AICMD0x13_Wait(60)                                        ;B5BEC5
     %AICMD0x56_UseEquippedItem()                               ;B5BEC8
-    %AICMD0x13($0078)                                          ;B5BEC9
-    %AICMD0x3A($01, $000F)                                     ;B5BECC
-    %AICMD0x3A($02, $0037)                                     ;B5BED0
-    %AICMD0x39($01, $0008)                                     ;B5BED4
+    %AICMD0x13_Wait(120)                                       ;B5BEC9
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5BECC
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 55)                  ;B5BED0
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5BED4
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5BED8
     %AICMD0x10_End()                                           ;B5BEDD
 
@@ -3908,14 +3908,14 @@ DATA8_B5BEDE:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BEF1
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5BEF6
     %AICMD0x38()                                               ;B5BEF8
-    %AICMD0x39($01, $0010)                                     ;B5BEF9
-    %AICMD0x39($03, $0018)                                     ;B5BEFD
-    %AICMD0x39($01, $0008)                                     ;B5BF01
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5BEF9
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5BEFD
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5BF01
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BF05
-    %AICMD0x3E($3E)                                            ;B5BF07
-    %AICMD0x13($003C)                                          ;B5BF09
-    %AICMD0x39($02, $0018)                                     ;B5BF0C
-    %AICMD0x39($00, $0020)                                     ;B5BF10
+    %AICMD0x3E_SetCarryItem($3E)                               ;B5BF07
+    %AICMD0x13_Wait(60)                                        ;B5BF09
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 24)                 ;B5BF0C
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5BF10
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5BF14
     %AICMD0x10_End()                                           ;B5BF19
 
@@ -4031,23 +4031,23 @@ DATA8_B5BF1A:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5C17D
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5C182
     %AICMD0x38()                                               ;B5C184
-    %AICMD0x3A($03, $004F)                                     ;B5C185
-    %AICMD0x3A($00, $000F)                                     ;B5C189
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 79)                   ;B5C185
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5C189
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C18D
     %AICMD0x56_UseEquippedItem()                               ;B5C18F
-    %AICMD0x13($0078)                                          ;B5C190
-    %AICMD0x39($02, $002F)                                     ;B5C193
+    %AICMD0x13_Wait(120)                                       ;B5C190
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 47)                 ;B5C193
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C197
     %AICMD0x56_UseEquippedItem()                               ;B5C199
-    %AICMD0x13($0078)                                          ;B5C19A
-    %AICMD0x3A($02, $0017)                                     ;B5C19D
+    %AICMD0x13_Wait(120)                                       ;B5C19A
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 23)                  ;B5C19D
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C1A1
     %AICMD0x56_UseEquippedItem()                               ;B5C1A3
-    %AICMD0x13($0078)                                          ;B5C1A4
-    %AICMD0x3A($03, $0007)                                     ;B5C1A7
-    %AICMD0x3A($01, $0048)                                     ;B5C1AB
-    %AICMD0x3A($03, $0068)                                     ;B5C1AF
-    %AICMD0x39($01, $0030)                                     ;B5C1B3
+    %AICMD0x13_Wait(120)                                       ;B5C1A4
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5C1A7
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 72)                     ;B5C1AB
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 104)                  ;B5C1AF
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 48)                    ;B5C1B3
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C1B7
     %AICMD0x10_End()                                           ;B5C1BC
 
@@ -4163,11 +4163,11 @@ DATA8_B5C1BD:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C420
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C425
     %AICMD0x38()                                               ;B5C427
-    %AICMD0x39($00, $0020)                                     ;B5C428
-    %AICMD0x3A($02, $0066)                                     ;B5C42C
-    %AICMD0x3A($00, $0038)                                     ;B5C430
-    %AICMD0x3A($02, $0028)                                     ;B5C434
-    %AICMD0x39($01, $0010)                                     ;B5C438
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5C428
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 102)                 ;B5C42C
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 56)                   ;B5C430
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 40)                  ;B5C434
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5C438
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C43C
     %AICMD0x10_End()                                           ;B5C441
 
@@ -4184,18 +4184,18 @@ DATA8_B5C442:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C455
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5C45A
     %AICMD0x38()                                               ;B5C45C
-    %AICMD0x39($01, $0010)                                     ;B5C45D
-    %AICMD0x39($03, $0038)                                     ;B5C461
-    %AICMD0x39($01, $0008)                                     ;B5C465
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5C45D
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 56)                  ;B5C461
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5C465
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C469
-    %AICMD0x3E($37)                                            ;B5C46B
-    %AICMD0x13($003C)                                          ;B5C46D
-    %AICMD0x39($02, $0010)                                     ;B5C470
+    %AICMD0x3E_SetCarryItem($37)                               ;B5C46B
+    %AICMD0x13_Wait(60)                                        ;B5C46D
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5C470
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C474
-    %AICMD0x3E($38)                                            ;B5C476
-    %AICMD0x13($003C)                                          ;B5C478
-    %AICMD0x39($02, $0028)                                     ;B5C47B
-    %AICMD0x39($00, $0020)                                     ;B5C47F
+    %AICMD0x3E_SetCarryItem($38)                               ;B5C476
+    %AICMD0x13_Wait(60)                                        ;B5C478
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5C47B
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5C47F
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C483
     %AICMD0x10_End()                                           ;B5C488
 
@@ -4212,10 +4212,10 @@ DATA8_B5C489:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C49C
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C4A1
     %AICMD0x38()                                               ;B5C4A3
-    %AICMD0x3A($03, $0027)                                     ;B5C4A4
-    %AICMD0x3A($01, $0037)                                     ;B5C4A8
-    %AICMD0x3A($03, $0007)                                     ;B5C4AC
-    %AICMD0x39($01, $0020)                                     ;B5C4B0
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 39)                   ;B5C4A4
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 55)                     ;B5C4A8
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5C4AC
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B5C4B0
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C4B4
     %AICMD0x10_End()                                           ;B5C4B9
 
@@ -4236,75 +4236,75 @@ DATA8_B5C4BA:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C4DF
     %AICMD0x06_SetDestinationArea(!AREA_COWBARN)               ;B5C4E4
     %AICMD0x38()                                               ;B5C4E6
-    %AICMD0x3A($01, $000F)                                     ;B5C4E7
-    %AICMD0x3A($02, $001B)                                     ;B5C4EB
-    %AICMD0x3A($01, $0017)                                     ;B5C4EF
-    %AICMD0x39($03, $0012)                                     ;B5C4F3
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5C4E7
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 27)                  ;B5C4EB
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5C4EF
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 18)                  ;B5C4F3
     %AICMD0x56_UseEquippedItem()                               ;B5C4F7
-    %AICMD0x13($0050)                                          ;B5C4F8
-    %AICMD0x39($02, $0012)                                     ;B5C4FB
-    %AICMD0x3A($01, $000F)                                     ;B5C4FF
-    %AICMD0x39($03, $0012)                                     ;B5C503
+    %AICMD0x13_Wait(80)                                        ;B5C4F8
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 18)                 ;B5C4FB
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5C4FF
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 18)                  ;B5C503
     %AICMD0x56_UseEquippedItem()                               ;B5C507
-    %AICMD0x13($0050)                                          ;B5C508
-    %AICMD0x39($02, $0012)                                     ;B5C50B
+    %AICMD0x13_Wait(80)                                        ;B5C508
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 18)                 ;B5C50B
     %AICMD0x59_SwapEquippedItems()                             ;B5C50F
-    %AICMD0x13($003C)                                          ;B5C510
-    %AICMD0x39($03, $0012)                                     ;B5C513
+    %AICMD0x13_Wait(60)                                        ;B5C510
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 18)                  ;B5C513
     %AICMD0x56_UseEquippedItem()                               ;B5C517
-    %AICMD0x13($0044)                                          ;B5C518
-    %AICMD0x3E($15)                                            ;B5C51B
-    %AICMD0x13($0028)                                          ;B5C51D
-    %AICMD0x39($02, $0010)                                     ;B5C520
-    %AICMD0x3A($00, $0027)                                     ;B5C524
-    %AICMD0x3A($03, $004F)                                     ;B5C528
+    %AICMD0x13_Wait(68)                                        ;B5C518
+    %AICMD0x3E_SetCarryItem($15)                               ;B5C51B
+    %AICMD0x13_Wait(40)                                        ;B5C51D
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5C520
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 39)                   ;B5C524
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 79)                   ;B5C528
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C52C
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C52E
-    %AICMD0x13($003C)                                          ;B5C52F
-    %AICMD0x3A($02, $004F)                                     ;B5C532
-    %AICMD0x3A($01, $0017)                                     ;B5C536
-    %AICMD0x39($03, $0010)                                     ;B5C53A
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C52E
+    %AICMD0x13_Wait(60)                                        ;B5C52F
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 79)                  ;B5C532
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5C536
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B5C53A
     %AICMD0x56_UseEquippedItem()                               ;B5C53E
-    %AICMD0x13($0044)                                          ;B5C53F
-    %AICMD0x3E($15)                                            ;B5C542
-    %AICMD0x13($0028)                                          ;B5C544
-    %AICMD0x39($02, $0010)                                     ;B5C547
-    %AICMD0x3A($00, $0017)                                     ;B5C54B
-    %AICMD0x3A($03, $004F)                                     ;B5C54F
+    %AICMD0x13_Wait(68)                                        ;B5C53F
+    %AICMD0x3E_SetCarryItem($15)                               ;B5C542
+    %AICMD0x13_Wait(40)                                        ;B5C544
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5C547
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5C54B
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 79)                   ;B5C54F
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C553
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C555
-    %AICMD0x13($003C)                                          ;B5C556
-    %AICMD0x3A($02, $0033)                                     ;B5C559
-    %AICMD0x39($00, $0028)                                     ;B5C55D
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C555
+    %AICMD0x13_Wait(60)                                        ;B5C556
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 51)                  ;B5C559
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 40)                  ;B5C55D
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C561
     %AICMD0x10_End()                                           ;B5C566
     %AICMD0x1A($00A8, $0118, $B380FC, $00)                     ;B5C567
-    %AICMD0x13($004B)                                          ;B5C56F
+    %AICMD0x13_Wait(75)                                        ;B5C56F
     %AICMD0x1B($018B, $00)                                     ;B5C572
     %AICMD0x0D($FF, $00, $10, $01)                             ;B5C576
-    %AICMD0x13($003C)                                          ;B5C57B
+    %AICMD0x13_Wait(60)                                        ;B5C57B
     %AICMD0x1B($0191, $00)                                     ;B5C57E
-    %AICMD0x13($003C)                                          ;B5C582
+    %AICMD0x13_Wait(60)                                        ;B5C582
     %AICMD0x1B($018C, $00)                                     ;B5C585
-    %AICMD0x13($02A8)                                          ;B5C589
+    %AICMD0x13_Wait(680)                                       ;B5C589
     %AICMD0x1B($0191, $00)                                     ;B5C58C
-    %AICMD0x13($003C)                                          ;B5C590
+    %AICMD0x13_Wait(60)                                        ;B5C590
     %AICMD0x1B($018C, $00)                                     ;B5C593
-    %AICMD0x13($0001)                                          ;B5C597
+    %AICMD0x13_Wait(1)                                         ;B5C597
     %AICMD0x12_Jump($B5C597)                                   ;B5C59A
     %AICMD0x1A($00A8, $00F8, $B380FC, $00)                     ;B5C59D
-    %AICMD0x13($00D1)                                          ;B5C5A5
+    %AICMD0x13_Wait(209)                                       ;B5C5A5
     %AICMD0x1B($018B, $00)                                     ;B5C5A8
     %AICMD0x0D($FF, $00, $10, $01)                             ;B5C5AC
-    %AICMD0x13($003C)                                          ;B5C5B1
+    %AICMD0x13_Wait(60)                                        ;B5C5B1
     %AICMD0x1B($0191, $00)                                     ;B5C5B4
-    %AICMD0x13($003C)                                          ;B5C5B8
+    %AICMD0x13_Wait(60)                                        ;B5C5B8
     %AICMD0x1B($018C, $00)                                     ;B5C5BB
-    %AICMD0x13($0078)                                          ;B5C5BF
+    %AICMD0x13_Wait(120)                                       ;B5C5BF
     %AICMD0x1B($0191, $00)                                     ;B5C5C2
-    %AICMD0x13($003C)                                          ;B5C5C6
+    %AICMD0x13_Wait(60)                                        ;B5C5C6
     %AICMD0x1B($018C, $00)                                     ;B5C5C9
-    %AICMD0x13($0001)                                          ;B5C5CD
+    %AICMD0x13_Wait(1)                                         ;B5C5CD
     %AICMD0x12_Jump($B5C5CD)                                   ;B5C5D0
 
 
@@ -4320,11 +4320,11 @@ DATA8_B5C5D3:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C5E6
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C5EB
     %AICMD0x38()                                               ;B5C5ED
-    %AICMD0x3A($00, $0007)                                     ;B5C5EE
-    %AICMD0x3A($02, $0007)                                     ;B5C5F2
-    %AICMD0x3A($00, $0037)                                     ;B5C5F6
-    %AICMD0x3A($02, $0027)                                     ;B5C5FA
-    %AICMD0x39($01, $0010)                                     ;B5C5FE
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5C5EE
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5C5F2
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 55)                   ;B5C5F6
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 39)                  ;B5C5FA
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5C5FE
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C602
     %AICMD0x10_End()                                           ;B5C607
 
@@ -4341,15 +4341,15 @@ DATA8_B5C608:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C61B
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5C620
     %AICMD0x38()                                               ;B5C622
-    %AICMD0x39($01, $0040)                                     ;B5C623
-    %AICMD0x39($03, $0028)                                     ;B5C627
-    %AICMD0x39($01, $0008)                                     ;B5C62B
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5C623
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 40)                  ;B5C627
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5C62B
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C62F
-    %AICMD0x3E($34)                                            ;B5C631
-    %AICMD0x13($003C)                                          ;B5C633
-    %AICMD0x39($02, $0028)                                     ;B5C636
-    %AICMD0x3A($00, $0020)                                     ;B5C63A
-    %AICMD0x39($00, $0010)                                     ;B5C63E
+    %AICMD0x3E_SetCarryItem($34)                               ;B5C631
+    %AICMD0x13_Wait(60)                                        ;B5C633
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5C636
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 32)                   ;B5C63A
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B5C63E
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C642
     %AICMD0x10_End()                                           ;B5C647
 
@@ -4366,10 +4366,10 @@ DATA8_B5C648:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C65B
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C660
     %AICMD0x38()                                               ;B5C662
-    %AICMD0x3A($03, $0027)                                     ;B5C663
-    %AICMD0x3A($01, $0037)                                     ;B5C667
-    %AICMD0x3A($03, $0007)                                     ;B5C66B
-    %AICMD0x39($01, $0020)                                     ;B5C66F
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 39)                   ;B5C663
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 55)                     ;B5C667
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5C66B
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B5C66F
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C673
     %AICMD0x10_End()                                           ;B5C678
 
@@ -4389,75 +4389,75 @@ DATA8_B5C679:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C699
     %AICMD0x06_SetDestinationArea(!AREA_COWBARN)               ;B5C69E
     %AICMD0x38()                                               ;B5C6A0
-    %AICMD0x3A($01, $000F)                                     ;B5C6A1
-    %AICMD0x3A($02, $001B)                                     ;B5C6A5
-    %AICMD0x3A($01, $0047)                                     ;B5C6A9
-    %AICMD0x3A($02, $000F)                                     ;B5C6AD
-    %AICMD0x3E($1A)                                            ;B5C6B1
-    %AICMD0x13($0028)                                          ;B5C6B3
-    %AICMD0x3A($03, $0033)                                     ;B5C6B6
-    %AICMD0x3A($00, $0021)                                     ;B5C6BA
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5C6A1
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 27)                  ;B5C6A5
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 71)                     ;B5C6A9
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 15)                  ;B5C6AD
+    %AICMD0x3E_SetCarryItem($1A)                               ;B5C6B1
+    %AICMD0x13_Wait(40)                                        ;B5C6B3
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 51)                   ;B5C6B6
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 33)                   ;B5C6BA
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5C6BE
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C6C0
-    %AICMD0x13($003C)                                          ;B5C6C1
-    %AICMD0x3A($00, $001F)                                     ;B5C6C4
-    %AICMD0x3A($02, $002B)                                     ;B5C6C8
-    %AICMD0x3A($01, $000F)                                     ;B5C6CC
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C6C0
+    %AICMD0x13_Wait(60)                                        ;B5C6C1
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 31)                   ;B5C6C4
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 43)                  ;B5C6C8
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5C6CC
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B5C6D0
     %AICMD0x56_UseEquippedItem()                               ;B5C6D2
-    %AICMD0x13($0078)                                          ;B5C6D3
-    %AICMD0x3A($00, $001F)                                     ;B5C6D6
+    %AICMD0x13_Wait(120)                                       ;B5C6D3
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 31)                   ;B5C6D6
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C6DA
     %AICMD0x56_UseEquippedItem()                               ;B5C6DC
-    %AICMD0x13($0078)                                          ;B5C6DD
-    %AICMD0x39($03, $0004)                                     ;B5C6E0
-    %AICMD0x13($003C)                                          ;B5C6E4
-    %AICMD0x3A($03, $000D)                                     ;B5C6E7
-    %AICMD0x3A($00, $0007)                                     ;B5C6EB
-    %AICMD0x3A($03, $001C)                                     ;B5C6EF
-    %AICMD0x3A($01, $0007)                                     ;B5C6F3
+    %AICMD0x13_Wait(120)                                       ;B5C6DD
+    %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 4)                   ;B5C6E0
+    %AICMD0x13_Wait(60)                                        ;B5C6E4
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 13)                   ;B5C6E7
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5C6EB
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 28)                   ;B5C6EF
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5C6F3
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5C6F7
     %AICMD0x56_UseEquippedItem()                               ;B5C6F9
-    %AICMD0x13($0064)                                          ;B5C6FA
-    %AICMD0x39($00, $001C)                                     ;B5C6FD
+    %AICMD0x13_Wait(100)                                       ;B5C6FA
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 28)                  ;B5C6FD
     %AICMD0x56_UseEquippedItem()                               ;B5C701
-    %AICMD0x13($0078)                                          ;B5C702
-    %AICMD0x39($02, $000F)                                     ;B5C705
-    %AICMD0x39($00, $0010)                                     ;B5C709
+    %AICMD0x13_Wait(120)                                       ;B5C702
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 15)                 ;B5C705
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B5C709
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C70D
     %AICMD0x10_End()                                           ;B5C712
     %AICMD0x1A($00A8, $0118, $B380FC, $00)                     ;B5C713
-    %AICMD0x13($01E0)                                          ;B5C71B
+    %AICMD0x13_Wait(480)                                       ;B5C71B
     %AICMD0x1B($018B, $01)                                     ;B5C71E
     %AICMD0x0D($01, $00, $10, $01)                             ;B5C722
     %AICMD0x1B($018C, $01)                                     ;B5C727
-    %AICMD0x13($0078)                                          ;B5C72B
+    %AICMD0x13_Wait(120)                                       ;B5C72B
     %AICMD0x1B($019F, $00)                                     ;B5C72E
     %AICMD0x0D($00, $01, $30, $01)                             ;B5C732
     %AICMD0x1B($019E, $00)                                     ;B5C737
-    %AICMD0x13($001E)                                          ;B5C73B
+    %AICMD0x13_Wait(30)                                        ;B5C73B
     %AICMD0x1B($018B, $00)                                     ;B5C73E
     %AICMD0x0D($FF, $00, $20, $01)                             ;B5C742
     %AICMD0x1B($018C, $00)                                     ;B5C747
-    %AICMD0x13($0078)                                          ;B5C74B
+    %AICMD0x13_Wait(120)                                       ;B5C74B
     %AICMD0x1B($018B, $00)                                     ;B5C74E
     %AICMD0x0D($FF, $00, $18, $01)                             ;B5C752
     %AICMD0x1B($018C, $00)                                     ;B5C757
-    %AICMD0x13($0078)                                          ;B5C75B
+    %AICMD0x13_Wait(120)                                       ;B5C75B
     %AICMD0x1B($019F, $00)                                     ;B5C75E
     %AICMD0x0D($00, $01, $24, $01)                             ;B5C762
     %AICMD0x37()                                               ;B5C767
     %AICMD0x10_End()                                           ;B5C768
     %AICMD0x1A($00A8, $00F8, $B380FC, $00)                     ;B5C769
-    %AICMD0x13($01E0)                                          ;B5C771
+    %AICMD0x13_Wait(480)                                       ;B5C771
     %AICMD0x1B($019F, $00)                                     ;B5C774
-    %AICMD0x13($00F0)                                          ;B5C778
+    %AICMD0x13_Wait(240)                                       ;B5C778
     %AICMD0x1B($019E, $00)                                     ;B5C77B
-    %AICMD0x13($0078)                                          ;B5C77F
+    %AICMD0x13_Wait(120)                                       ;B5C77F
     %AICMD0x1B($019F, $00)                                     ;B5C782
-    %AICMD0x13($00F0)                                          ;B5C786
+    %AICMD0x13_Wait(240)                                       ;B5C786
     %AICMD0x1B($019E, $00)                                     ;B5C789
-    %AICMD0x13($0001)                                          ;B5C78D
+    %AICMD0x13_Wait(1)                                         ;B5C78D
     %AICMD0x12_Jump($B5C78D)                                   ;B5C790
 
 
@@ -4474,16 +4474,16 @@ DATA8_B5C793:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C7AA
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C7AF
     %AICMD0x38()                                               ;B5C7B1
-    %AICMD0x39($00, $000F)                                     ;B5C7B2
-    %AICMD0x3A($02, $003F)                                     ;B5C7B6
-    %AICMD0x39($01, $0020)                                     ;B5C7BA
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5C7B2
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 63)                  ;B5C7B6
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B5C7BA
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C7BE
     %AICMD0x10_End()                                           ;B5C7C3
     %AICMD0x1A($0148, $0178, $B38108, $00)                     ;B5C7C4
-    %AICMD0x13($0002)                                          ;B5C7CC
+    %AICMD0x13_Wait(2)                                         ;B5C7CC
     %AICMD0x0D($00, $01, $20, $01)                             ;B5C7CF
     %AICMD0x1B($019E, $00)                                     ;B5C7D4
-    %AICMD0x13($0001)                                          ;B5C7D8
+    %AICMD0x13_Wait(1)                                         ;B5C7D8
     %AICMD0x12_Jump($B5C7D8)                                   ;B5C7DB
 
 
@@ -4503,51 +4503,51 @@ DATA8_B5C7DE:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C803
     %AICMD0x06_SetDestinationArea(!AREA_COOP)                  ;B5C808
     %AICMD0x38()                                               ;B5C80A
-    %AICMD0x3A($03, $000B)                                     ;B5C80B
-    %AICMD0x3A($01, $0007)                                     ;B5C80F
-    %AICMD0x3E($14)                                            ;B5C813
-    %AICMD0x13($0028)                                          ;B5C815
-    %AICMD0x3A($00, $0007)                                     ;B5C818
-    %AICMD0x3A($03, $001F)                                     ;B5C81C
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C820
-    %AICMD0x13($003C)                                          ;B5C821
-    %AICMD0x3A($02, $0027)                                     ;B5C824
-    %AICMD0x3A($01, $0017)                                     ;B5C828
-    %AICMD0x3E($14)                                            ;B5C82C
-    %AICMD0x13($0028)                                          ;B5C82E
-    %AICMD0x3A($00, $000F)                                     ;B5C831
-    %AICMD0x3A($02, $002F)                                     ;B5C835
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C839
-    %AICMD0x13($003C)                                          ;B5C83A
-    %AICMD0x3A($03, $003F)                                     ;B5C83D
-    %AICMD0x3A($01, $0023)                                     ;B5C841
-    %AICMD0x3A($03, $0017)                                     ;B5C845
-    %AICMD0x3E($1A)                                            ;B5C849
-    %AICMD0x13($0028)                                          ;B5C84B
-    %AICMD0x3A($02, $0007)                                     ;B5C84E
-    %AICMD0x3A($01, $0017)                                     ;B5C852
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C856
-    %AICMD0x13($003C)                                          ;B5C857
-    %AICMD0x3A($00, $0017)                                     ;B5C85A
-    %AICMD0x3A($03, $0007)                                     ;B5C85E
-    %AICMD0x3E($1A)                                            ;B5C862
-    %AICMD0x13($0028)                                          ;B5C864
-    %AICMD0x3A($02, $000F)                                     ;B5C867
-    %AICMD0x3A($01, $0017)                                     ;B5C86B
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5C86F
-    %AICMD0x13($003C)                                          ;B5C870
-    %AICMD0x3A($00, $0033)                                     ;B5C873
-    %AICMD0x3A($02, $001B)                                     ;B5C877
-    %AICMD0x39($00, $0030)                                     ;B5C87B
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 11)                   ;B5C80B
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5C80F
+    %AICMD0x3E_SetCarryItem($14)                               ;B5C813
+    %AICMD0x13_Wait(40)                                        ;B5C815
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5C818
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 31)                   ;B5C81C
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C820
+    %AICMD0x13_Wait(60)                                        ;B5C821
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 39)                  ;B5C824
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5C828
+    %AICMD0x3E_SetCarryItem($14)                               ;B5C82C
+    %AICMD0x13_Wait(40)                                        ;B5C82E
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5C831
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 47)                  ;B5C835
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C839
+    %AICMD0x13_Wait(60)                                        ;B5C83A
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 63)                   ;B5C83D
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 35)                     ;B5C841
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 23)                   ;B5C845
+    %AICMD0x3E_SetCarryItem($1A)                               ;B5C849
+    %AICMD0x13_Wait(40)                                        ;B5C84B
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5C84E
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5C852
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C856
+    %AICMD0x13_Wait(60)                                        ;B5C857
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5C85A
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5C85E
+    %AICMD0x3E_SetCarryItem($1A)                               ;B5C862
+    %AICMD0x13_Wait(40)                                        ;B5C864
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 15)                  ;B5C867
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5C86B
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5C86F
+    %AICMD0x13_Wait(60)                                        ;B5C870
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 51)                   ;B5C873
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 27)                  ;B5C877
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 48)                  ;B5C87B
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C87F
     %AICMD0x10_End()                                           ;B5C884
     %AICMD0x1A($00A8, $0078, $B38144, $00)                     ;B5C885
     %AICMD0x22($10, $10, $01, $B38144, $08)                    ;B5C88D
-    %AICMD0x13($0001)                                          ;B5C894
+    %AICMD0x13_Wait(1)                                         ;B5C894
     %AICMD0x12_Jump($B5C894)                                   ;B5C897
     %AICMD0x1A($00C8, $0068, $B38144, $00)                     ;B5C89A
     %AICMD0x22($10, $10, $01, $B38144, $08)                    ;B5C8A2
-    %AICMD0x13($0001)                                          ;B5C8A9
+    %AICMD0x13_Wait(1)                                         ;B5C8A9
     %AICMD0x12_Jump($B5C8A9)                                   ;B5C8AC
 
 
@@ -4564,13 +4564,13 @@ DATA8_B5C8AF:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C8C6
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C8CB
     %AICMD0x38()                                               ;B5C8CD
-    %AICMD0x3A($00, $0007)                                     ;B5C8CE
-    %AICMD0x3A($03, $009F)                                     ;B5C8D2
-    %AICMD0x39($01, $0028)                                     ;B5C8D6
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5C8CE
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 159)                  ;B5C8D2
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 40)                    ;B5C8D6
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C8DA
     %AICMD0x10_End()                                           ;B5C8DF
     %AICMD0x1A($0148, $0198, $B380FC, $00)                     ;B5C8E0
-    %AICMD0x13($0001)                                          ;B5C8E8
+    %AICMD0x13_Wait(1)                                         ;B5C8E8
     %AICMD0x12_Jump($B5C8E8)                                   ;B5C8EB
 
 
@@ -4599,50 +4599,50 @@ DATA8_B5C8EE:
     %AICMD0x3B($01)                                            ;B5C936
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS2)             ;B5C938
     %AICMD0x38()                                               ;B5C93A
-    %AICMD0x39($01, $0040)                                     ;B5C93B
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5C93B
     %AICMD0x54($0241, $00)                                     ;B5C93F
     %AICMD0x47_SetValue8($80019A, 4)                           ;B5C943
     %AICMD0x40_DisableTileInteractions()                       ;B5C948
-    %AICMD0x39($01, $0010)                                     ;B5C949
-    %AICMD0x13($003C)                                          ;B5C94D
+    %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5C949
+    %AICMD0x13_Wait(60)                                        ;B5C94D
     %AICMD0x3D_TeleportToArea(!AREA_INTRO)                     ;B5C950
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5C952
     %AICMD0x10_End()                                           ;B5C957
     %AICMD0x1A($0198, $00C8, $B383FC, $00)                     ;B5C958
-    %AICMD0x13($0001)                                          ;B5C960
+    %AICMD0x13_Wait(1)                                         ;B5C960
     %AICMD0x12_Jump($B5C960)                                   ;B5C963
     %AICMD0x1A($0078, $00F8, $B383D8, $02)                     ;B5C966
-    %AICMD0x13($0001)                                          ;B5C96E
+    %AICMD0x13_Wait(1)                                         ;B5C96E
     %AICMD0x12_Jump($B5C96E)                                   ;B5C971
     %AICMD0x1A($0168, $0108, $B38420, $01)                     ;B5C974
-    %AICMD0x13($0001)                                          ;B5C97C
+    %AICMD0x13_Wait(1)                                         ;B5C97C
     %AICMD0x12_Jump($B5C97C)                                   ;B5C97F
     %AICMD0x1A($0148, $0158, $B38384, $01)                     ;B5C982
-    %AICMD0x13($0001)                                          ;B5C98A
+    %AICMD0x13_Wait(1)                                         ;B5C98A
     %AICMD0x12_Jump($B5C98A)                                   ;B5C98D
     %AICMD0x1A($0058, $00E8, $B38300, $02)                     ;B5C990
-    %AICMD0x13($0001)                                          ;B5C998
+    %AICMD0x13_Wait(1)                                         ;B5C998
     %AICMD0x12_Jump($B5C998)                                   ;B5C99B
     %AICMD0x1A($00C8, $0158, $B38168, $02)                     ;B5C99E
-    %AICMD0x13($0001)                                          ;B5C9A6
+    %AICMD0x13_Wait(1)                                         ;B5C9A6
     %AICMD0x12_Jump($B5C9A6)                                   ;B5C9A9
     %AICMD0x1A($0098, $0068, $B38198, $00)                     ;B5C9AC
-    %AICMD0x13($0001)                                          ;B5C9B4
+    %AICMD0x13_Wait(1)                                         ;B5C9B4
     %AICMD0x12_Jump($B5C9B4)                                   ;B5C9B7
     %AICMD0x1A($0148, $00A8, $B381C8, $00)                     ;B5C9BA
-    %AICMD0x13($0001)                                          ;B5C9C2
+    %AICMD0x13_Wait(1)                                         ;B5C9C2
     %AICMD0x12_Jump($B5C9C2)                                   ;B5C9C5
     %AICMD0x1A($0108, $0098, $B381E0, $00)                     ;B5C9C8
-    %AICMD0x13($0001)                                          ;B5C9D0
+    %AICMD0x13_Wait(1)                                         ;B5C9D0
     %AICMD0x12_Jump($B5C9D0)                                   ;B5C9D3
     %AICMD0x1A($00B8, $0098, $B38204, $00)                     ;B5C9D6
-    %AICMD0x13($0001)                                          ;B5C9DE
+    %AICMD0x13_Wait(1)                                         ;B5C9DE
     %AICMD0x12_Jump($B5C9DE)                                   ;B5C9E1
     %AICMD0x1A($0108, $00B8, $B38AB0, $00)                     ;B5C9E4
-    %AICMD0x13($0001)                                          ;B5C9EC
+    %AICMD0x13_Wait(1)                                         ;B5C9EC
     %AICMD0x12_Jump($B5C9EC)                                   ;B5C9EF
     %AICMD0x1A($00B8, $0108, $B38348, $00)                     ;B5C9F2
-    %AICMD0x13($0001)                                          ;B5C9FA
+    %AICMD0x13_Wait(1)                                         ;B5C9FA
     %AICMD0x12_Jump($B5C9FA)                                   ;B5C9FD
 
 
@@ -4658,13 +4658,13 @@ DATA8_B5CA00:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CA13
     %AICMD0x06_SetDestinationArea(!AREA_FARMWINTER)            ;B5CA18
     %AICMD0x38()                                               ;B5CA1A
-    %AICMD0x39($00, $001F)                                     ;B5CA1B
-    %AICMD0x3A($00, $0017)                                     ;B5CA1F
-    %AICMD0x3A($03, $002F)                                     ;B5CA23
-    %AICMD0x3A($00, $0007)                                     ;B5CA27
-    %AICMD0x3A($02, $002F)                                     ;B5CA2B
-    %AICMD0x3A($00, $0007)                                     ;B5CA2F
-    %AICMD0x3A($03, $0040)                                     ;B5CA33
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 31)                  ;B5CA1B
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5CA1F
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 47)                   ;B5CA23
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5CA27
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 47)                  ;B5CA2B
+    %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5CA2F
+    %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 64)                   ;B5CA33
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5CA37
     %AICMD0x10_End()                                           ;B5CA3C
 
@@ -4684,22 +4684,22 @@ DATA8_B5CA3D:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CA5A
     %AICMD0x06_SetDestinationArea(!AREA_TOWNWINTER)            ;B5CA5F
     %AICMD0x38()                                               ;B5CA61
-    %AICMD0x39($00, $000F)                                     ;B5CA62
-    %AICMD0x39($02, $0057)                                     ;B5CA66
-    %AICMD0x3F_ThrowHeldItem()                                 ;B5CA6A
-    %AICMD0x13($003C)                                          ;B5CA6B
+    %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5CA62
+    %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 87)                 ;B5CA66
+    %AICMD0x3F_ThrowCarriedItem()                              ;B5CA6A
+    %AICMD0x13_Wait(60)                                        ;B5CA6B
     %AICMD0x3D_TeleportToArea(!AREA_INTRO)                     ;B5CA6E
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5CA70
     %AICMD0x10_End()                                           ;B5CA75
     %AICMD0x1A($0178, $0378, $B38198, $00)                     ;B5CA76
-    %AICMD0x13($006E)                                          ;B5CA7E
+    %AICMD0x13_Wait(110)                                       ;B5CA7E
     %AICMD0x1B($022A, $00)                                     ;B5CA81
     %AICMD0x54($03B2, $00)                                     ;B5CA85
     %AICMD0x47_SetValue8($80019A, 4)                           ;B5CA89
-    %AICMD0x13($0001)                                          ;B5CA8E
+    %AICMD0x13_Wait(1)                                         ;B5CA8E
     %AICMD0x12_Jump($B5CA8E)                                   ;B5CA91
     %AICMD0x1A($01A8, $0328, $B387C8, $00)                     ;B5CA94
-    %AICMD0x13($0001)                                          ;B5CA9C
+    %AICMD0x13_Wait(1)                                         ;B5CA9C
     %AICMD0x12_Jump($B5CA9C)                                   ;B5CA9F
 
 
@@ -4716,37 +4716,37 @@ DATA8_B5CAA2:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CABA
     %AICMD0x06_SetDestinationArea(!AREA_WOODSWINTER)           ;B5CABF
     %AICMD0x38()                                               ;B5CAC1
-    %AICMD0x3A($02, $0029)                                     ;B5CAC2
-    %AICMD0x3A($01, $0007)                                     ;B5CAC6
-    %AICMD0x3A($02, $0007)                                     ;B5CACA
-    %AICMD0x3A($01, $001F)                                     ;B5CACE
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 41)                  ;B5CAC2
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5CAC6
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5CACA
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 31)                     ;B5CACE
     %AICMD0x56_UseEquippedItem()                               ;B5CAD2
-    %AICMD0x13($003C)                                          ;B5CAD3
+    %AICMD0x13_Wait(60)                                        ;B5CAD3
     %AICMD0x56_UseEquippedItem()                               ;B5CAD6
-    %AICMD0x13($003C)                                          ;B5CAD7
+    %AICMD0x13_Wait(60)                                        ;B5CAD7
     %AICMD0x56_UseEquippedItem()                               ;B5CADA
-    %AICMD0x13($003C)                                          ;B5CADB
+    %AICMD0x13_Wait(60)                                        ;B5CADB
     %AICMD0x56_UseEquippedItem()                               ;B5CADE
-    %AICMD0x13($003C)                                          ;B5CADF
+    %AICMD0x13_Wait(60)                                        ;B5CADF
     %AICMD0x56_UseEquippedItem()                               ;B5CAE2
-    %AICMD0x13($003C)                                          ;B5CAE3
+    %AICMD0x13_Wait(60)                                        ;B5CAE3
     %AICMD0x56_UseEquippedItem()                               ;B5CAE6
-    %AICMD0x13($003C)                                          ;B5CAE7
-    %AICMD0x3A($01, $0017)                                     ;B5CAEA
+    %AICMD0x13_Wait(60)                                        ;B5CAE7
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5CAEA
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CAEE
     %AICMD0x56_UseEquippedItem()                               ;B5CAF0
-    %AICMD0x13($003C)                                          ;B5CAF1
+    %AICMD0x13_Wait(60)                                        ;B5CAF1
     %AICMD0x56_UseEquippedItem()                               ;B5CAF4
-    %AICMD0x13($003C)                                          ;B5CAF5
+    %AICMD0x13_Wait(60)                                        ;B5CAF5
     %AICMD0x56_UseEquippedItem()                               ;B5CAF8
-    %AICMD0x13($003C)                                          ;B5CAF9
+    %AICMD0x13_Wait(60)                                        ;B5CAF9
     %AICMD0x56_UseEquippedItem()                               ;B5CAFC
-    %AICMD0x13($003C)                                          ;B5CAFD
+    %AICMD0x13_Wait(60)                                        ;B5CAFD
     %AICMD0x56_UseEquippedItem()                               ;B5CB00
-    %AICMD0x13($003C)                                          ;B5CB01
+    %AICMD0x13_Wait(60)                                        ;B5CB01
     %AICMD0x56_UseEquippedItem()                               ;B5CB04
-    %AICMD0x13($003C)                                          ;B5CB05
-    %AICMD0x13($003C)                                          ;B5CB08
+    %AICMD0x13_Wait(60)                                        ;B5CB05
+    %AICMD0x13_Wait(60)                                        ;B5CB08
     %AICMD0x3D_TeleportToArea(!AREA_INTRO)                     ;B5CB0B
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $07)  ;B5CB0D
     %AICMD0x10_End()                                           ;B5CB12
@@ -4765,19 +4765,19 @@ DATA8_B5CB13:
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5CB2A
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5CB2F
     %AICMD0x38()                                               ;B5CB31
-    %AICMD0x3A($02, $0035)                                     ;B5CB32
-    %AICMD0x3A($01, $0027)                                     ;B5CB36
+    %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 53)                  ;B5CB32
+    %AICMD0x3A_RunForTime(!AIINPUT_UP, 39)                     ;B5CB36
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CB3A
     %AICMD0x32($8000D4, $001B)                                 ;B5CB3C
-    %AICMD0x13($00F0)                                          ;B5CB42
+    %AICMD0x13_Wait(240)                                       ;B5CB42
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags2, $02)  ;B5CB45
     %AICMD0x10_End()                                           ;B5CB4A
     %AICMD0x1A($00D8, $0178, $B38114, $03)                     ;B5CB4B
-    %AICMD0x13($00A0)                                          ;B5CB53
+    %AICMD0x13_Wait(160)                                       ;B5CB53
     %AICMD0x1B($01EC, $00)                                     ;B5CB56
     %AICMD0x0D($FF, $00, $44, $01)                             ;B5CB5A
     %AICMD0x1B($01E8, $00)                                     ;B5CB5F
-    %AICMD0x13($0001)                                          ;B5CB63
+    %AICMD0x13_Wait(1)                                         ;B5CB63
     %AICMD0x12_Jump($B5CB63)                                   ;B5CB66
 
 

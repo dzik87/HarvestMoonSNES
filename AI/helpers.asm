@@ -131,10 +131,10 @@ macro AICMD0x12_Jump(pNextAction)
     
 endmacro
 
-; AI command 0x13 - 
-macro AICMD0x13(nUnknown1)
+; AI command 0x13 - Wait for nTime time/frames without doing nothing
+macro AICMD0x13_Wait(nTime)
     db $13
-    dw <nUnknown1>
+    dw <nTime>
     
 endmacro
 
@@ -423,19 +423,19 @@ macro AICMD0x38()
     
 endmacro
 
-; AI command 0x39 - 
-macro AICMD0x39(nIndex, nUnknown2)
+; AI command 0x39 - Simulates input (taken from table) and keep it for nAmount of time/frames
+macro AICMD0x39_WalkForTime(nInputIndex, nAmount)
     db $39
-    db <nIndex>
-    dw <nUnknown2>
+    db <nInputIndex>
+    dw <nAmount>
     
 endmacro
 
-; AI command 0x3A - 
-macro AICMD0x3A(nUnknown1, nUnknown2)
+; AI command 0x3A - Simulates input (taken from table) and keep it for nAmount of time/frames also presses B button at the same time
+macro AICMD0x3A_RunForTime(nInputIndex, nAmount)
     db $3A
-    db <nUnknown1>
-    dw <nUnknown2>
+    db <nInputIndex>
+    dw <nAmount>
     
 endmacro
 
@@ -460,14 +460,14 @@ macro AICMD0x3D_TeleportToArea(nAreaId)
 endmacro
 
 ; AI command 0x3E - 
-macro AICMD0x3E(nUnknown1)
+macro AICMD0x3E_SetCarryItem(nCarryItemId)
     db $3E
-    db <nUnknown1>
+    db <nCarryItemId>
     
 endmacro
 
 ; AI command 0x3F - 
-macro AICMD0x3F_ThrowHeldItem()
+macro AICMD0x3F_ThrowCarriedItem()
     db $3F
     
 endmacro

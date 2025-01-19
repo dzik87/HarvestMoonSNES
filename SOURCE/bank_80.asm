@@ -49,7 +49,7 @@ fCore_GameStart:
     STA.W nFoodToEat                                           ;808077|8D2409  |000924;
     REP #$30                                                   ;80807A|C230    |      ;
     LDA.B nPlayerFlags                                         ;80807C|A5D2    |0000D2;
-    ORA.W #$0004                                               ;80807E|090400  |      ; !PLAYERFLAGS_EATINGMEAL
+    ORA.W #!PFLAGS_EATINGMEAL                                               
     STA.B nPlayerFlags                                         ;808081|85D2    |0000D2;
  
 fCore_MainLoop:
@@ -1733,7 +1733,7 @@ fCore_Unknown808E69:
     STA.B ptrUnknown0x72                                       ;808F45|8572    |000072;
     SEP #$20                                                   ;808F47|E220    |      ;
     LDA.B #$7F                                                 ;808F49|A97F    |      ;
-    STA.B ptrUnknown0x72+2                                     ;808F4B|8574    |000074;
+    STA.B ptrUnknown0x72+2                                     ;808F4B|8574    |000074; $72 = 0x7F0900 (sPalette_7F0900)
     JSL.L fCore_PrepareTransfer                                ;808F4D|22338A80|808A33;
  
 .return:
@@ -2696,7 +2696,7 @@ fSubrutinesExecute_809553:
     BEQ .load                                                  ;809592|F00A    |80959E;
     SEP #$20                                                   ;809594|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;809596|AF191F7F|7F1F19;
-    CMP.B #$02                                                 ;80959A|C902    |      ;
+    CMP.B #!SEASON_FALL                                                 
     BCC +                                                      ;80959C|9014    |8095B2;
  
 .load:
@@ -3151,9 +3151,9 @@ fMap_SetupArea:
     STA.L $7F1F7A                                              ;809927|8F7A1F7F|7F1F7A;
     STZ.W $0878                                                ;80992B|9C7808  |000878;
     LDA.B nPlayerPosX                                          ;80992E|A5D6    |0000D6;
-    STA.W nPlayerPosXCopy                                      ;809930|8D0709  |000907;
+    STA.W nPlayerPosXCopy2                                     ;809930|8D0709  |000907;
     LDA.B nPlayerPosY                                          ;809933|A5D8    |0000D8;
-    STA.W nPlayerPosYCopy                                      ;809935|8D0909  |000909;
+    STA.W nPlayerPosYCopy2                                     ;809935|8D0909  |000909;
     SEP #$20                                                   ;809938|E220    |      ;
     STZ.W $098A                                                ;80993A|9C8A09  |00098A;
     STZ.W $0919                                                ;80993D|9C1909  |000919;
@@ -3163,15 +3163,15 @@ fMap_SetupArea:
     AND.B nPlayerFlags                                         ;809948|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;80994A|85D2    |0000D2;
     REP #$20                                                   ;80994C|C220    |      ;
-    STZ.W nUnknownFlags08FD                                    ;80994E|9CFD08  |0008FD;
-    STZ.W $08FF                                                ;809951|9CFF08  |0008FF;
+    STZ.W nAIJoypadInput                                       ;80994E|9CFD08  |0008FD;
+    STZ.W nAISteeringCounter                                   ;809951|9CFF08  |0008FF;
     REP #$30                                                   ;809954|C230    |      ;
     LDA.W #$1000                                               ;809956|A90010  |      ;
     EOR.W #$FFFF                                               ;809959|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;80995C|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;80995E|85D2    |0000D2;
     SEP #$20                                                   ;809960|E220    |      ;
-    LDA.W nHandItem_Current                                    ;809962|AD1D09  |00091D;
+    LDA.W nCarryItem_Current                                   ;809962|AD1D09  |00091D;
     BEQ .label11                                               ;809965|F055    |8099BC;
     CMP.B #$0D                                                 ;809967|C90D    |      ;
     BEQ .label10                                               ;809969|F046    |8099B1;
@@ -3201,7 +3201,7 @@ fMap_SetupArea:
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
     CLC                                                        ;8099A9|18      |      ;
     ADC.B nPlayerDirection                                     ;8099AA|65DA    |0000DA;
-    STA.W nFoodToEatSpriteIndex                                ;8099AC|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;8099AC|8D0109  |000901;
     BRA .label12                                               ;8099AF|801C    |8099CD;
  
  
@@ -3210,13 +3210,13 @@ fMap_SetupArea:
     LDA.W #$0000                                               ;8099B3|A90000  |      ;
     CLC                                                        ;8099B6|18      |      ;
     ADC.B nPlayerDirection                                     ;8099B7|65DA    |0000DA;
-    STA.W nFoodToEatSpriteIndex                                ;8099B9|8D0109  |000901;
+    STA.W nSmallItemSpriteIndex                                ;8099B9|8D0109  |000901;
  
 .label11:
     SEP #$20                                                   ;8099BC|E220    |      ;
-    STZ.W nHandItem_Current                                    ;8099BE|9C1D09  |00091D;
+    STZ.W nCarryItem_Current                                   ;8099BE|9C1D09  |00091D;
     REP #$30                                                   ;8099C1|C230    |      ;
-    LDA.W #$0002                                               ;8099C3|A90200  |      ;
+    LDA.W #!PFLAGS_HOLDINGITEM                                               
     EOR.W #$FFFF                                               ;8099C6|49FFFF  |      ;
     AND.B nPlayerFlags                                         ;8099C9|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;8099CB|85D2    |0000D2;
@@ -3306,7 +3306,7 @@ fMapChangeHandler_809A64:
 .label4:
     REP #$30                                                   ;809A8C|C230    |      ;
     LDA.B nPlayerFlags                                         ;809A8E|A5D2    |0000D2;
-    AND.W #$0010                                               ;809A90|291000  |      ;
+    AND.W #!PFLAGS_RIDINGHORSE                                               
     BEQ .label5                                                ;809A93|F003    |809A98;
     JMP.W .return                                              ;809A95|4C0A9D  |809D0A;
  
@@ -3433,15 +3433,15 @@ fMapChangeHandler_809A64:
 .label12:
     SEP #$20                                                   ;809B6E|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;809B70|AF191F7F|7F1F19;
-    CMP.B #$03                                                 ;809B74|C903    |      ;
+    CMP.B #!SEASON_WINTER                                                 
     BNE .label13                                               ;809B76|D005    |809B7D;
-    LDA.B #$39                                                 ;809B78|A939    |      ;
+    LDA.B #!AREA_NY_MOUNTAINTOP                                                 
     STA.W nDestinationAreaId                                   ;809B7A|8D8B09  |00098B;
  
 .label13:
     SEP #$20                                                   ;809B7D|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;809B7F|A522    |000022;
-    CMP.B #$0B                                                 ;809B81|C90B    |      ;
+    CMP.B #!AREA_EGGFESTIVAL                                                 
     BNE .label14                                               ;809B83|D003    |809B88;
     JMP.W .label21                                             ;809B85|4C149C  |809C14;
  
@@ -3474,7 +3474,7 @@ fMapChangeHandler_809A64:
     BEQ .label17                                               ;809BB6|F00C    |809BC4;
     LDA.L nCurrentWeekdayID                                    ;809BB8|AF1A1F7F|7F1F1A;
     BEQ .label17                                               ;809BBC|F006    |809BC4;
-    CMP.B #$06                                                 ;809BBE|C906    |      ;
+    CMP.B #!DAY_SATURDAY                                                 
     BEQ .label17                                               ;809BC0|F002    |809BC4;
     BRA .label21                                               ;809BC2|8050    |809C14;
  
@@ -3485,7 +3485,7 @@ fMapChangeHandler_809A64:
     AND.B #$10                                                 ;809BCA|2910    |      ;
     BEQ .label19                                               ;809BCC|F01E    |809BEC;
     LDA.L nCurrentSeasonID                                     ;809BCE|AF191F7F|7F1F19;
-    CMP.B #$03                                                 ;809BD2|C903    |      ;
+    CMP.B #!SEASON_WINTER                                                 
     BNE .label18                                               ;809BD4|D00A    |809BE0;
     LDA.L nCurrentDay                                          ;809BD6|AF1B1F7F|7F1F1B;
     CMP.B #$0A                                                 ;809BDA|C90A    |      ;
@@ -3496,7 +3496,7 @@ fMapChangeHandler_809A64:
 .label18:
     SEP #$20                                                   ;809BE0|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;809BE2|AF1A1F7F|7F1F1A;
-    CMP.B #$06                                                 ;809BE6|C906    |      ;
+    CMP.B #!DAY_SATURDAY                                                 
     BNE .label19                                               ;809BE8|D002    |809BEC;
     BRA .label21                                               ;809BEA|8028    |809C14;
  
@@ -3573,22 +3573,22 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809C67|E220    |      ;
     LDA.W $098A                                                ;809C69|AD8A09  |00098A;
     CMP.B #$0D                                                 ;809C6C|C90D    |      ;
-    BEQ .label29                                               ;809C6E|F063    |809CD3;
+    BEQ .destinationFarm                                       ;809C6E|F063    |809CD3;
     INC A                                                      ;809C70|1A      |      ;
     STA.W $098A                                                ;809C71|8D8A09  |00098A;
     REP #$30                                                   ;809C74|C230    |      ;
-    LDA.W #$0001                                               ;809C76|A90100  |      ;
+    LDA.W #!PACTION_WALK                                               
     STA.B nPlayerAction                                        ;809C79|85D4    |0000D4;
     REP #$20                                                   ;809C7B|C220    |      ;
     LDA.B nPlayerDirection                                     ;809C7D|A5DA    |0000DA;
-    CMP.W #$0000                                               ;809C7F|C90000  |      ;
-    BEQ .label26                                               ;809C82|F01C    |809CA0;
-    CMP.W #$0001                                               ;809C84|C90100  |      ;
-    BEQ .label27                                               ;809C87|F028    |809CB1;
-    CMP.W #$0002                                               ;809C89|C90200  |      ;
-    BEQ .label28                                               ;809C8C|F034    |809CC2;
+    CMP.W #!PDIR_DOWN                                               
+    BEQ .setDirectionDown                                      ;809C82|F01C    |809CA0;
+    CMP.W #!PDIR_UP                                               
+    BEQ .setDirectionUp                                        ;809C87|F028    |809CB1;
+    CMP.W #!PDIR_LEFT                                               
+    BEQ .setDirectionLeft                                      ;809C8C|F034    |809CC2;
     REP #$30                                                   ;809C8E|C230    |      ;
-    LDA.W #$0003                                               ;809C90|A90300  |      ;
+    LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;809C93|85DA    |0000DA;
     REP #$30                                                   ;809C95|C230    |      ;
     LDA.W #$0003                                               ;809C97|A90300  |      ;
@@ -3596,9 +3596,9 @@ fMapChangeHandler_809A64:
     JMP.W .return                                              ;809C9D|4C0A9D  |809D0A;
  
  
-.label26:
+.setDirectionDown:
     REP #$30                                                   ;809CA0|C230    |      ;
-    LDA.W #$0000                                               ;809CA2|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;809CA5|85DA    |0000DA;
     REP #$30                                                   ;809CA7|C230    |      ;
     LDA.W #$0000                                               ;809CA9|A90000  |      ;
@@ -3606,9 +3606,9 @@ fMapChangeHandler_809A64:
     BRA .return                                                ;809CAF|8059    |809D0A;
  
  
-.label27:
+.setDirectionUp:
     REP #$30                                                   ;809CB1|C230    |      ;
-    LDA.W #$0001                                               ;809CB3|A90100  |      ;
+    LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;809CB6|85DA    |0000DA;
     REP #$30                                                   ;809CB8|C230    |      ;
     LDA.W #$0001                                               ;809CBA|A90100  |      ;
@@ -3616,9 +3616,9 @@ fMapChangeHandler_809A64:
     BRA .return                                                ;809CC0|8048    |809D0A;
  
  
-.label28:
+.setDirectionLeft:
     REP #$30                                                   ;809CC2|C230    |      ;
-    LDA.W #$0002                                               ;809CC4|A90200  |      ;
+    LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;809CC7|85DA    |0000DA;
     REP #$30                                                   ;809CC9|C230    |      ;
     LDA.W #$0002                                               ;809CCB|A90200  |      ;
@@ -3626,32 +3626,32 @@ fMapChangeHandler_809A64:
     BRA .return                                                ;809CD1|8037    |809D0A;
  
  
-.label29:
+.destinationFarm:
     SEP #$20                                                   ;809CD3|E220    |      ;
     LDA.W nMapEngine_DestinationId                             ;809CD5|AD2200  |000022;
-    CMP.B #$04                                                 ;809CD8|C904    |      ;
-    BCS .label30                                               ;809CDA|B004    |809CE0;
+    CMP.B #!AREA_TOWNSPRING                                                 
+    BCS .destinationNotFarm                                    ;809CDA|B004    |809CE0;
     JSL.L fObjectMap_LoadFarm                                  ;809CDC|2282A682|82A682;
  
-.label30:
+.destinationNotFarm:
     SEP #$20                                                   ;809CE0|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;809CE2|A522    |000022;
-    CMP.B #$0C                                                 ;809CE4|C90C    |      ;
-    BCC .label31                                               ;809CE6|9017    |809CFF;
+    CMP.B #!AREA_CROSSROADSPRING                                                 
+    BCC .destinationCrossRoad                                  ;809CE6|9017    |809CFF;
     LDA.B nMapEngine_DestinationId                             ;809CE8|A522    |000022;
-    CMP.B #$10                                                 ;809CEA|C910    |      ;
-    BCS .label31                                               ;809CEC|B011    |809CFF;
+    CMP.B #!AREA_WOODSSPRING                                                 
+    BCS .destinationCrossRoad                                  ;809CEC|B011    |809CFF;
     LDA.L nCurrentTimeID                                       ;809CEE|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;809CF2|C912    |      ;
-    BEQ .label31                                               ;809CF4|F009    |809CFF;
+    BEQ .destinationCrossRoad                                  ;809CF4|F009    |809CFF;
     INC A                                                      ;809CF6|1A      |      ;
-    STA.L nCurrentTimeID                                       ;809CF7|8F1C1F7F|7F1F1C;
+    STA.L nCurrentTimeID                                       ;809CF7|8F1C1F7F|7F1F1C; changing area increase time by 1 hour
     JSL.L fUnknown_8280AA                                      ;809CFB|22AA8082|8280AA;
  
-.label31:
+.destinationCrossRoad:
     REP #$30                                                   ;809CFF|C230    |      ;
     LDA.W nMapEngine_flags                                     ;809D01|AD9601  |000196;
-    ORA.W #$4000                                               ;809D04|090040  |      ;
+    ORA.W #!AREAFLAGS_FORCETELEPORT                                               
     STA.W nMapEngine_flags                                     ;809D07|8D9601  |000196;
  
 .return:
@@ -3662,21 +3662,21 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809D0B|E220    |      ;
     REP #$10                                                   ;809D0D|C210    |      ;
     LDA.B nMapEngine_DestinationId                             ;809D0F|A522    |000022;
-    CMP.B #$04                                                 ;809D11|C904    |      ;
-    BCS .label33                                               ;809D13|B003    |809D18;
+    CMP.B #!AREA_TOWNSPRING                                                 
+    BCS .destinationNotFarm2                                   ;809D13|B003    |809D18;
     JMP.W .return2                                             ;809D15|4CBB9E  |809EBB;
  
  
-.label33:
+.destinationNotFarm2:
     SEP #$20                                                   ;809D18|E220    |      ;
     LDA.B nMapEngine_DestinationId                             ;809D1A|A522    |000022;
-    CMP.B #$10                                                 ;809D1C|C910    |      ;
+    CMP.B #!AREA_WOODSSPRING                                                 
     BCS .label34                                               ;809D1E|B003    |809D23;
     JMP.W .return2                                             ;809D20|4CBB9E  |809EBB;
  
  
 .label34:
-    CMP.B #$14                                                 ;809D23|C914    |      ;
+    CMP.B #!AREA_NY_SPA                                                 
     BCC .label35                                               ;809D25|9003    |809D2A;
     JMP.W .return2                                             ;809D27|4CBB9E  |809EBB;
  
@@ -3742,7 +3742,7 @@ fMapChangeHandler_809A64:
 .label43:
     REP #$30                                                   ;809D87|C230    |      ;
     LDA.B nPlayerFlags                                         ;809D89|A5D2    |0000D2;
-    AND.W #$0002                                               ;809D8B|290200  |      ;
+    AND.W #!PFLAGS_HOLDINGITEM                                               
     BEQ .label44                                               ;809D8E|F003    |809D93;
     JMP.W .return2                                             ;809D90|4CBB9E  |809EBB;
  
@@ -3750,7 +3750,7 @@ fMapChangeHandler_809A64:
 .label44:
     REP #$30                                                   ;809D93|C230    |      ;
     LDA.B nPlayerFlags                                         ;809D95|A5D2    |0000D2;
-    AND.W #$0010                                               ;809D97|291000  |      ;
+    AND.W #!PFLAGS_RIDINGHORSE                                               
     BEQ .label45                                               ;809D9A|F003    |809D9F;
     JMP.W .return2                                             ;809D9C|4CBB9E  |809EBB;
  
@@ -3758,7 +3758,7 @@ fMapChangeHandler_809A64:
 .label45:
     REP #$30                                                   ;809D9F|C230    |      ;
     LDA.B nPlayerFlags                                         ;809DA1|A5D2    |0000D2;
-    AND.W #$0800                                               ;809DA3|290008  |      ;
+    AND.W #!PFLAGS_DOGHUGGING                                               
     BEQ .label46                                               ;809DA6|F003    |809DAB;
     JMP.W .return2                                             ;809DA8|4CBB9E  |809EBB;
  
@@ -3789,7 +3789,7 @@ fMapChangeHandler_809A64:
 .label49:
     REP #$30                                                   ;809DCF|C230    |      ;
     LDA.B nPlayerAction                                        ;809DD1|A5D4    |0000D4;
-    CMP.W #$0011                                               ;809DD3|C91100  |      ;
+    CMP.W #!PACTION_FISHING                                               
     BNE .label50                                               ;809DD6|D003    |809DDB;
     JMP.W .return2                                             ;809DD8|4CBB9E  |809EBB;
  
@@ -3797,7 +3797,7 @@ fMapChangeHandler_809A64:
 .label50:
     REP #$30                                                   ;809DDB|C230    |      ;
     LDA.B nPlayerAction                                        ;809DDD|A5D4    |0000D4;
-    CMP.W #$0012                                               ;809DDF|C91200  |      ;
+    CMP.W #!PACTION_FISHINGBITE                                               
     BNE .label51                                               ;809DE2|D003    |809DE7;
     JMP.W .return2                                             ;809DE4|4CBB9E  |809EBB;
  
@@ -3805,7 +3805,7 @@ fMapChangeHandler_809A64:
 .label51:
     REP #$30                                                   ;809DE7|C230    |      ;
     LDA.B nPlayerAction                                        ;809DE9|A5D4    |0000D4;
-    CMP.W #$0013                                               ;809DEB|C91300  |      ;
+    CMP.W #!PACTION_REELING                                               
     BNE .label52                                               ;809DEE|D003    |809DF3;
     JMP.W .return2                                             ;809DF0|4CBB9E  |809EBB;
  
@@ -3856,7 +3856,7 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809E3F|E220    |      ;
     REP #$10                                                   ;809E41|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;809E43|AF191F7F|7F1F19;
-    CMP.B #$02                                                 ;809E47|C902    |      ;
+    CMP.B #!SEASON_FALL                                                 
     BNE .return2                                               ;809E49|D070    |809EBB;
     LDA.B #$10                                                 ;809E4B|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;809E4D|22F98980|8089F9;
@@ -3884,7 +3884,7 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809E7D|E220    |      ;
     REP #$10                                                   ;809E7F|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;809E81|AF191F7F|7F1F19;
-    CMP.B #$03                                                 ;809E85|C903    |      ;
+    CMP.B #!SEASON_WINTER                                                 
     BNE .return2                                               ;809E87|D032    |809EBB;
     LDA.B #$10                                                 ;809E89|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;809E8B|22F98980|8089F9;
@@ -4020,7 +4020,7 @@ fUnknown_809F61:
     SEP #$20                                                   ;809F61|E220    |      ;
     REP #$10                                                   ;809F63|C210    |      ;
     LDA.B nMapEngine_DestinationId                             ;809F65|A522    |000022;
-    CMP.B #$26                                                 ;809F67|C926    |      ;
+    CMP.B #!AREA_SHED                                                 
     BNE .label1                                                ;809F69|D003    |809F6E;
     JMP.W .return                                              ;809F6B|4CAAA0  |80A0AA;
  
@@ -4049,7 +4049,7 @@ fUnknown_809F61:
     STA.B $1E                                                  ;809F8C|851E    |00001E;
     REP #$30                                                   ;809F8E|C230    |      ;
     LDA.B nPlayerDirection                                     ;809F90|A5DA    |0000DA;
-    CMP.W #$0002                                               ;809F92|C90200  |      ;
+    CMP.W #!PDIR_LEFT                                               
     BNE .label4                                                ;809F95|D003    |809F9A;
     JMP.W .return                                              ;809F97|4CAAA0  |80A0AA;
  
@@ -4057,7 +4057,7 @@ fUnknown_809F61:
 .label4:
     REP #$30                                                   ;809F9A|C230    |      ;
     LDA.B nPlayerDirection                                     ;809F9C|A5DA    |0000DA;
-    CMP.W #$0003                                               ;809F9E|C90300  |      ;
+    CMP.W #!PDIR_RIGHT                                               
     BNE .label5                                                ;809FA1|D003    |809FA6;
     JMP.W .return                                              ;809FA3|4CAAA0  |80A0AA;
  
@@ -4094,7 +4094,7 @@ fUnknown_809F61:
 .label8:
     REP #$30                                                   ;809FD7|C230    |      ;
     LDA.B nPlayerDirection                                     ;809FD9|A5DA    |0000DA;
-    CMP.W #$0000                                               ;809FDB|C90000  |      ;
+    CMP.W #!PDIR_DOWN                                               
     BNE .label9                                                ;809FDE|D003    |809FE3;
     JMP.W .and0000                                             ;809FE0|4C33A0  |80A033;
  
@@ -4102,7 +4102,7 @@ fUnknown_809F61:
 .label9:
     REP #$30                                                   ;809FE3|C230    |      ;
     LDA.B nPlayerDirection                                     ;809FE5|A5DA    |0000DA;
-    CMP.W #$0001                                               ;809FE7|C90100  |      ;
+    CMP.W #!PDIR_UP                                               
     BNE .label10                                               ;809FEA|D003    |809FEF;
     JMP.W .and0001                                             ;809FEC|4C4AA0  |80A04A;
  
@@ -4110,7 +4110,7 @@ fUnknown_809F61:
 .label10:
     REP #$30                                                   ;809FEF|C230    |      ;
     LDA.B nPlayerDirection                                     ;809FF1|A5DA    |0000DA;
-    CMP.W #$0002                                               ;809FF3|C90200  |      ;
+    CMP.W #!PDIR_LEFT                                               
     BNE .label11                                               ;809FF6|D003    |809FFB;
     JMP.W .and0002                                             ;809FF8|4C61A0  |80A061;
  
@@ -4118,7 +4118,7 @@ fUnknown_809F61:
 .label11:
     REP #$30                                                   ;809FFB|C230    |      ;
     LDA.B nPlayerDirection                                     ;809FFD|A5DA    |0000DA;
-    CMP.W #$0003                                               ;809FFF|C90300  |      ;
+    CMP.W #!PDIR_RIGHT                                               
     BNE .back                                                  ;80A002|D003    |80A007;
     JMP.W .and0003                                             ;80A004|4C78A0  |80A078;
  
@@ -7367,582 +7367,582 @@ aMapPalettesId:
     db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF         ;80BEE0|        |      ;
  
 pSubrutineTable_80BEEC:
-    dw subUnknown_80C36C                                       ;80BEEC|        |80C36C; ? * [ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16, ptr16]
+    dw subUnknown_80C36C                                       ;80BEEC|        |80C36C; 0x60 * [ptr16, ptr16, ptr16, ptr16, ptr16, n16]
     dw subUnknown_80C36C                                       ;80BEEE|        |80C36C;
     dw subUnknown_80C3D9                                       ;80BEF0|        |80C3D9;
     dw subUnknown_80C446                                       ;80BEF2|        |80C446;
     dw subUnknown_80C4B3                                       ;80BEF4|        |80C4B3;
-    dw PTR16_80FFFF                                            ;80BEF6|        |80FFFF;
+    dw $FFFF                                                   ;80BEF6|        |      ;
     dw subUnknown_80C36C                                       ;80BEF8|        |80C36C;
     dw subUnknown_80C36C                                       ;80BEFA|        |80C36C;
     dw subUnknown_80C3D9                                       ;80BEFC|        |80C3D9;
     dw subUnknown_80C446                                       ;80BEFE|        |80C446;
     dw subUnknown_80C4B3                                       ;80BF00|        |80C4B3;
-    dw PTR16_80FFFF                                            ;80BF02|        |80FFFF;
+    dw $FFFF                                                   ;80BF02|        |      ;
     dw subUnknown_80C520                                       ;80BF04|        |80C520;
     dw subUnknown_80C520                                       ;80BF06|        |80C520;
     dw subUnknown_80C58D                                       ;80BF08|        |80C58D;
     dw subUnknown_80C5FA                                       ;80BF0A|        |80C5FA;
     dw subUnknown_80C667                                       ;80BF0C|        |80C667;
-    dw PTR16_80FFFF                                            ;80BF0E|        |80FFFF;
+    dw $FFFF                                                   ;80BF0E|        |      ;
     dw PTR16_80FFFF                                            ;80BF10|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF12|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF14|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF16|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF18|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF1A|        |80FFFF;
+    dw $FFFF                                                   ;80BF1A|        |      ;
     dw PTR16_80FFFF                                            ;80BF1C|        |80FFFF;
     dw subUnknown_80CADE                                       ;80BF1E|        |80CADE;
     dw subUnknown_80CB30                                       ;80BF20|        |80CB30;
     dw subUnknown_80CB82                                       ;80BF22|        |80CB82;
     dw subUnknown_80CBD4                                       ;80BF24|        |80CBD4;
-    dw PTR16_80FFFF                                            ;80BF26|        |80FFFF;
+    dw $FFFF                                                   ;80BF26|        |      ;
     dw PTR16_80FFFF                                            ;80BF28|        |80FFFF;
     dw subUnknown_80CC92                                       ;80BF2A|        |80CC92;
     dw subUnknown_80CCE4                                       ;80BF2C|        |80CCE4;
     dw subUnknown_80CD36                                       ;80BF2E|        |80CD36;
     dw subUnknown_80CD88                                       ;80BF30|        |80CD88;
-    dw PTR16_80FFFF                                            ;80BF32|        |80FFFF;
+    dw $FFFF                                                   ;80BF32|        |      ;
     dw PTR16_80FFFF                                            ;80BF34|        |80FFFF;
     dw subUnknown_80CE46                                       ;80BF36|        |80CE46;
     dw subUnknown_80CE98                                       ;80BF38|        |80CE98;
     dw subUnknown_80CEEA                                       ;80BF3A|        |80CEEA;
     dw subUnknown_80CF3C                                       ;80BF3C|        |80CF3C;
-    dw PTR16_80FFFF                                            ;80BF3E|        |80FFFF;
+    dw $FFFF                                                   ;80BF3E|        |      ;
     dw PTR16_80FFFF                                            ;80BF40|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF42|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF44|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF46|        |80FFFF;
     dw subUnknown_80CFFA                                       ;80BF48|        |80CFFA;
-    dw PTR16_80FFFF                                            ;80BF4A|        |80FFFF;
+    dw $FFFF                                                   ;80BF4A|        |      ;
     dw PTR16_80FFFF                                            ;80BF4C|        |80FFFF;
     dw subUnknown_80CADE                                       ;80BF4E|        |80CADE;
     dw PTR16_80FFFF                                            ;80BF50|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF52|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF54|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF56|        |80FFFF;
+    dw $FFFF                                                   ;80BF56|        |      ;
     dw PTR16_80FFFF                                            ;80BF58|        |80FFFF;
     dw subUnknown_80DC30                                       ;80BF5A|        |80DC30;
     dw PTR16_80FFFF                                            ;80BF5C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF5E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF60|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF62|        |80FFFF;
+    dw $FFFF                                                   ;80BF62|        |      ;
     dw PTR16_80FFFF                                            ;80BF64|        |80FFFF;
     dw subUnknown_80CE46                                       ;80BF66|        |80CE46;
     dw PTR16_80FFFF                                            ;80BF68|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF6A|        |80FFFF;
     dw subUnknown_80DAB4                                       ;80BF6C|        |80DAB4;
-    dw PTR16_80FFFF                                            ;80BF6E|        |80FFFF;
+    dw $FFFF                                                   ;80BF6E|        |      ;
     dw PTR16_80FFFF                                            ;80BF70|        |80FFFF;
     dw subUnknown_80CADE                                       ;80BF72|        |80CADE;
     dw PTR16_80FFFF                                            ;80BF74|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF76|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF78|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF7A|        |80FFFF;
+    dw $FFFF                                                   ;80BF7A|        |      ;
     dw PTR16_80FFFF                                            ;80BF7C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF7E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF80|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF82|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF84|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF86|        |80FFFF;
+    dw $FFFF                                                   ;80BF86|        |      ;
     dw PTR16_80FFFF                                            ;80BF88|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF8A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF8C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF8E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF90|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF92|        |80FFFF;
+    dw $FFFF                                                   ;80BF92|        |      ;
     dw PTR16_80FFFF                                            ;80BF94|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF96|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF98|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF9A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF9C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BF9E|        |80FFFF;
+    dw $FFFF                                                   ;80BF9E|        |      ;
     dw PTR16_80FFFF                                            ;80BFA0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BFA2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BFA4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BFA6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BFA8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80BFAA|        |80FFFF;
+    dw $FFFF                                                   ;80BFAA|        |      ;
     dw PTR16_80FFFF                                            ;80BFAC|        |80FFFF;
     dw subUnknown_80D067                                       ;80BFAE|        |80D067;
     dw subUnknown_80D125                                       ;80BFB0|        |80D125;
     dw subUnknown_80D1E3                                       ;80BFB2|        |80D1E3;
     dw subUnknown_80D2A1                                       ;80BFB4|        |80D2A1;
-    dw PTR16_80FFFF                                            ;80BFB6|        |80FFFF;
+    dw $FFFF                                                   ;80BFB6|        |      ;
     dw PTR16_80FFFF                                            ;80BFB8|        |80FFFF;
     dw subUnknown_80D344                                       ;80BFBA|        |80D344;
     dw subUnknown_80D402                                       ;80BFBC|        |80D402;
     dw subUnknown_80D4C0                                       ;80BFBE|        |80D4C0;
     dw subUnknown_80D563                                       ;80BFC0|        |80D563;
-    dw PTR16_80FFFF                                            ;80BFC2|        |80FFFF;
+    dw $FFFF                                                   ;80BFC2|        |      ;
     dw PTR16_80FFFF                                            ;80BFC4|        |80FFFF;
     dw subUnknown_80D606                                       ;80BFC6|        |80D606;
     dw subUnknown_80D6FA                                       ;80BFC8|        |80D6FA;
     dw subUnknown_80D7EE                                       ;80BFCA|        |80D7EE;
     dw subUnknown_80D891                                       ;80BFCC|        |80D891;
-    dw PTR16_80FFFF                                            ;80BFCE|        |80FFFF;
+    dw $FFFF                                                   ;80BFCE|        |      ;
     dw PTR16_80FFFF                                            ;80BFD0|        |80FFFF;
     dw subUnknown_80D934                                       ;80BFD2|        |80D934;
     dw subUnknown_80D96B                                       ;80BFD4|        |80D96B;
     dw subUnknown_80D9A2                                       ;80BFD6|        |80D9A2;
     dw subUnknown_80D9D9                                       ;80BFD8|        |80D9D9;
-    dw PTR16_80FFFF                                            ;80BFDA|        |80FFFF;
+    dw $FFFF                                                   ;80BFDA|        |      ;
     dw PTR16_80FFFF                                            ;80BFDC|        |80FFFF;
     dw subUnknown_80D934                                       ;80BFDE|        |80D934;
     dw subUnknown_80D96B                                       ;80BFE0|        |80D96B;
     dw subUnknown_80D9A2                                       ;80BFE2|        |80D9A2;
     dw subUnknown_80D9D9                                       ;80BFE4|        |80D9D9;
-    dw PTR16_80FFFF                                            ;80BFE6|        |80FFFF;
+    dw $FFFF                                                   ;80BFE6|        |      ;
     dw subUnknown_80C792                                       ;80BFE8|        |80C792;
     dw subUnknown_80C792                                       ;80BFEA|        |80C792;
     dw subUnknown_80C792                                       ;80BFEC|        |80C792;
     dw subUnknown_80C792                                       ;80BFEE|        |80C792;
     dw subUnknown_80C792                                       ;80BFF0|        |80C792;
-    dw $0001                                                   ;80BFF2|        |800001;
+    dw $0001                                                   ;80BFF2|        |      ;
     dw subUnknown_80C792                                       ;80BFF4|        |80C792;
     dw subUnknown_80C792                                       ;80BFF6|        |80C792;
     dw subUnknown_80C792                                       ;80BFF8|        |80C792;
     dw subUnknown_80C792                                       ;80BFFA|        |80C792;
     dw subUnknown_80C792                                       ;80BFFC|        |80C792;
-    dw $0001                                                   ;80BFFE|        |800001;
+    dw $0001                                                   ;80BFFE|        |      ;
     dw subUnknown_80C792                                       ;80C000|        |80C792;
     dw subUnknown_80C792                                       ;80C002|        |80C792;
     dw subUnknown_80C792                                       ;80C004|        |80C792;
     dw subUnknown_80C792                                       ;80C006|        |80C792;
     dw subUnknown_80C792                                       ;80C008|        |80C792;
-    dw $0001                                                   ;80C00A|        |800001;
+    dw $0001                                                   ;80C00A|        |      ;
     dw PTR16_80FFFF                                            ;80C00C|        |80FFFF;
     dw subUnknown_80C7FF                                       ;80C00E|        |80C7FF;
     dw subUnknown_80C7FF                                       ;80C010|        |80C7FF;
     dw subUnknown_80C7FF                                       ;80C012|        |80C7FF;
     dw subUnknown_80C7FF                                       ;80C014|        |80C7FF;
-    dw $0001                                                   ;80C016|        |800001;
+    dw $0001                                                   ;80C016|        |      ;
     dw PTR16_80FFFF                                            ;80C018|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C01A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C01C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C01E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C020|        |80FFFF;
-    dw $0001                                                   ;80C022|        |800001;
+    dw $0001                                                   ;80C022|        |      ;
     dw PTR16_80FFFF                                            ;80C024|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C026|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C028|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C02A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C02C|        |80FFFF;
-    dw $0001                                                   ;80C02E|        |800001;
+    dw $0001                                                   ;80C02E|        |      ;
     dw PTR16_80FFFF                                            ;80C030|        |80FFFF;
     dw subUnknown_80C86C                                       ;80C032|        |80C86C;
     dw subUnknown_80C86C                                       ;80C034|        |80C86C;
     dw subUnknown_80C86C                                       ;80C036|        |80C86C;
     dw subUnknown_80C86C                                       ;80C038|        |80C86C;
-    dw PTR16_80FFFF                                            ;80C03A|        |80FFFF;
+    dw $FFFF                                                   ;80C03A|        |      ;
     dw PTR16_80FFFF                                            ;80C03C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C03E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C040|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C042|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C044|        |80FFFF;
-    dw $0001                                                   ;80C046|        |800001;
+    dw $0001                                                   ;80C046|        |      ;
     dw PTR16_80FFFF                                            ;80C048|        |80FFFF;
     dw subUnknown_80C945                                       ;80C04A|        |80C945;
     dw subUnknown_80C945                                       ;80C04C|        |80C945;
     dw subUnknown_80C945                                       ;80C04E|        |80C945;
     dw subUnknown_80C945                                       ;80C050|        |80C945;
-    dw $0001                                                   ;80C052|        |800001;
+    dw $0001                                                   ;80C052|        |      ;
     dw PTR16_80FFFF                                            ;80C054|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C056|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C058|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C05A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C05C|        |80FFFF;
-    dw $0001                                                   ;80C05E|        |800001;
+    dw $0001                                                   ;80C05E|        |      ;
     dw PTR16_80FFFF                                            ;80C060|        |80FFFF;
     dw subUnknown_80C9B2                                       ;80C062|        |80C9B2;
     dw subUnknown_80C9B2                                       ;80C064|        |80C9B2;
     dw subUnknown_80C9B2                                       ;80C066|        |80C9B2;
     dw subUnknown_80C9B2                                       ;80C068|        |80C9B2;
-    dw $0001                                                   ;80C06A|        |800001;
+    dw $0001                                                   ;80C06A|        |      ;
     dw PTR16_80FFFF                                            ;80C06C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C06E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C070|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C072|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C074|        |80FFFF;
-    dw $0001                                                   ;80C076|        |800001;
+    dw $0001                                                   ;80C076|        |      ;
     dw PTR16_80FFFF                                            ;80C078|        |80FFFF;
     dw subUnknown_80DD09                                       ;80C07A|        |80DD09;
     dw subUnknown_80DD09                                       ;80C07C|        |80DD09;
     dw subUnknown_80DD09                                       ;80C07E|        |80DD09;
     dw subUnknown_80DD09                                       ;80C080|        |80DD09;
-    dw $0001                                                   ;80C082|        |800001;
+    dw $0001                                                   ;80C082|        |      ;
     dw PTR16_80FFFF                                            ;80C084|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C086|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C088|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C08A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C08C|        |80FFFF;
-    dw $0001                                                   ;80C08E|        |800001;
+    dw $0001                                                   ;80C08E|        |      ;
     dw PTR16_80FFFF                                            ;80C090|        |80FFFF;
     dw subUnknown_80CA1F                                       ;80C092|        |80CA1F;
     dw subUnknown_80CA1F                                       ;80C094|        |80CA1F;
     dw subUnknown_80CA1F                                       ;80C096|        |80CA1F;
     dw subUnknown_80CA1F                                       ;80C098|        |80CA1F;
-    dw $0001                                                   ;80C09A|        |800001;
+    dw $0001                                                   ;80C09A|        |      ;
     dw PTR16_80FFFF                                            ;80C09C|        |80FFFF;
     dw subUnknown_80CA8C                                       ;80C09E|        |80CA8C;
     dw subUnknown_80CA8C                                       ;80C0A0|        |80CA8C;
     dw subUnknown_80CA8C                                       ;80C0A2|        |80CA8C;
     dw subUnknown_80CA8C                                       ;80C0A4|        |80CA8C;
-    dw $0001                                                   ;80C0A6|        |800001;
+    dw $0001                                                   ;80C0A6|        |      ;
     dw PTR16_80FFFF                                            ;80C0A8|        |80FFFF;
     dw subUnknown_80DB06                                       ;80C0AA|        |80DB06;
     dw subUnknown_80DB06                                       ;80C0AC|        |80DB06;
     dw subUnknown_80DB06                                       ;80C0AE|        |80DB06;
     dw subUnknown_80DB06                                       ;80C0B0|        |80DB06;
-    dw PTR16_80FFFF                                            ;80C0B2|        |80FFFF;
+    dw $FFFF                                                   ;80C0B2|        |      ;
     dw PTR16_80FFFF                                            ;80C0B4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0B6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0B8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0BA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0BC|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C0BE|        |80FFFF;
+    dw $FFFF                                                   ;80C0BE|        |      ;
     dw PTR16_80FFFF                                            ;80C0C0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0C2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0C4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0C6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0C8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C0CA|        |80FFFF;
+    dw $FFFF                                                   ;80C0CA|        |      ;
     dw PTR16_80FFFF                                            ;80C0CC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0CE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0D0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0D2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0D4|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C0D6|        |80FFFF;
+    dw $FFFF                                                   ;80C0D6|        |      ;
     dw PTR16_80FFFF                                            ;80C0D8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0DA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0DC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0DE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0E0|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C0E2|        |80FFFF;
+    dw $FFFF                                                   ;80C0E2|        |      ;
     dw subUnknown_80C6D4                                       ;80C0E4|        |80C6D4;
     dw subUnknown_80C6D4                                       ;80C0E6|        |80C6D4;
     dw subUnknown_80C6D4                                       ;80C0E8|        |80C6D4;
     dw subUnknown_80C6D4                                       ;80C0EA|        |80C6D4;
     dw subUnknown_80C6D4                                       ;80C0EC|        |80C6D4;
-    dw PTR16_80FFFF                                            ;80C0EE|        |80FFFF;
+    dw $FFFF                                                   ;80C0EE|        |      ;
     dw PTR16_80FFFF                                            ;80C0F0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0F2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0F4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0F6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0F8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C0FA|        |80FFFF;
+    dw $FFFF                                                   ;80C0FA|        |      ;
     dw subUnknown_80DA47                                       ;80C0FC|        |80DA47;
     dw subUnknown_80DA47                                       ;80C0FE|        |80DA47;
     dw subUnknown_80DA47                                       ;80C100|        |80DA47;
     dw subUnknown_80DA47                                       ;80C102|        |80DA47;
     dw subUnknown_80DA47                                       ;80C104|        |80DA47;
-    dw PTR16_80FFFF                                            ;80C106|        |80FFFF;
+    dw $FFFF                                                   ;80C106|        |      ;
     dw PTR16_80FFFF                                            ;80C108|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C10A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C10C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C10E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C110|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C112|        |80FFFF;
+    dw $FFFF                                                   ;80C112|        |      ;
     dw PTR16_80FFFF                                            ;80C114|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C116|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C118|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C11A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C11C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C11E|        |80FFFF;
+    dw $FFFF                                                   ;80C11E|        |      ;
     dw PTR16_80FFFF                                            ;80C120|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C122|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C124|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C126|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C128|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C12A|        |80FFFF;
+    dw $FFFF                                                   ;80C12A|        |      ;
     dw PTR16_80FFFF                                            ;80C12C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C12E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C130|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C132|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C134|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C136|        |80FFFF;
+    dw $FFFF                                                   ;80C136|        |      ;
     dw PTR16_80FFFF                                            ;80C138|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13E|        |80FFFF;
     dw subUnknown_80DA10                                       ;80C140|        |80DA10;
-    dw PTR16_80FFFF                                            ;80C142|        |80FFFF;
+    dw $FFFF                                                   ;80C142|        |      ;
     dw PTR16_80FFFF                                            ;80C144|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C146|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C148|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C14A|        |80FFFF;
     dw subUnknown_80DA10                                       ;80C14C|        |80DA10;
-    dw PTR16_80FFFF                                            ;80C14E|        |80FFFF;
+    dw $FFFF                                                   ;80C14E|        |      ;
     dw PTR16_80FFFF                                            ;80C150|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C152|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C154|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C156|        |80FFFF;
     dw subUnknown_80DA10                                       ;80C158|        |80DA10;
-    dw PTR16_80FFFF                                            ;80C15A|        |80FFFF;
+    dw $FFFF                                                   ;80C15A|        |      ;
     dw PTR16_80FFFF                                            ;80C15C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C15E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C160|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C162|        |80FFFF;
     dw subUnknown_80DA10                                       ;80C164|        |80DA10;
-    dw PTR16_80FFFF                                            ;80C166|        |80FFFF;
+    dw $FFFF                                                   ;80C166|        |      ;
     dw PTR16_80FFFF                                            ;80C168|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C16A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C16C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C16E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C170|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C172|        |80FFFF;
+    dw $FFFF                                                   ;80C172|        |      ;
     dw PTR16_80FFFF                                            ;80C174|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C176|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C178|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C17A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C17C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C17E|        |80FFFF;
+    dw $FFFF                                                   ;80C17E|        |      ;
     dw PTR16_80FFFF                                            ;80C180|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C182|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C184|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C186|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C188|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C18A|        |80FFFF;
+    dw $FFFF                                                   ;80C18A|        |      ;
     dw PTR16_80FFFF                                            ;80C18C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C18E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C190|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C192|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C194|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C196|        |80FFFF;
+    dw $FFFF                                                   ;80C196|        |      ;
     dw PTR16_80FFFF                                            ;80C198|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19E|        |80FFFF;
     dw subUnknown_80DA10                                       ;80C1A0|        |80DA10;
-    dw PTR16_80FFFF                                            ;80C1A2|        |80FFFF;
+    dw $FFFF                                                   ;80C1A2|        |      ;
     dw PTR16_80FFFF                                            ;80C1A4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1A6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1A8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1AA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1AC|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1AE|        |80FFFF;
+    dw $FFFF                                                   ;80C1AE|        |      ;
     dw PTR16_80FFFF                                            ;80C1B0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1B2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1B4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1B6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1B8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1BA|        |80FFFF;
+    dw $FFFF                                                   ;80C1BA|        |      ;
     dw PTR16_80FFFF                                            ;80C1BC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1BE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1C0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1C2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1C4|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1C6|        |80FFFF;
+    dw $FFFF                                                   ;80C1C6|        |      ;
     dw PTR16_80FFFF                                            ;80C1C8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1CA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1CC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1CE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1D0|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1D2|        |80FFFF;
+    dw $FFFF                                                   ;80C1D2|        |      ;
     dw PTR16_80FFFF                                            ;80C1D4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1D6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1D8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1DA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1DC|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1DE|        |80FFFF;
+    dw $FFFF                                                   ;80C1DE|        |      ;
     dw PTR16_80FFFF                                            ;80C1E0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1E2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1E4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1E6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1E8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1EA|        |80FFFF;
+    dw $FFFF                                                   ;80C1EA|        |      ;
     dw PTR16_80FFFF                                            ;80C1EC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1EE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1F0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1F2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1F4|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C1F6|        |80FFFF;
+    dw $FFFF                                                   ;80C1F6|        |      ;
     dw PTR16_80FFFF                                            ;80C1F8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1FA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1FC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1FE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C200|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C202|        |80FFFF;
+    dw $FFFF                                                   ;80C202|        |      ;
     dw PTR16_80FFFF                                            ;80C204|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C206|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C208|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C20A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C20C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C20E|        |80FFFF;
+    dw $FFFF                                                   ;80C20E|        |      ;
     dw PTR16_80FFFF                                            ;80C210|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C212|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C214|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C216|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C218|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C21A|        |80FFFF;
+    dw $FFFF                                                   ;80C21A|        |      ;
     dw PTR16_80FFFF                                            ;80C21C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C21E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C220|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C222|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C224|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C226|        |80FFFF;
+    dw $FFFF                                                   ;80C226|        |      ;
     dw PTR16_80FFFF                                            ;80C228|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C22A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C22C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C22E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C230|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C232|        |80FFFF;
+    dw $FFFF                                                   ;80C232|        |      ;
     dw PTR16_80FFFF                                            ;80C234|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C236|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C238|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C23A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C23C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C23E|        |80FFFF;
+    dw $FFFF                                                   ;80C23E|        |      ;
     dw PTR16_80FFFF                                            ;80C240|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C242|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C244|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C246|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C248|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C24A|        |80FFFF;
+    dw $FFFF                                                   ;80C24A|        |      ;
     dw PTR16_80FFFF                                            ;80C24C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C24E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C250|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C252|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C254|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C256|        |80FFFF;
+    dw $FFFF                                                   ;80C256|        |      ;
     dw PTR16_80FFFF                                            ;80C258|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C25A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C25C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C25E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C260|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C262|        |80FFFF;
+    dw $FFFF                                                   ;80C262|        |      ;
     dw PTR16_80FFFF                                            ;80C264|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C266|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C268|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C26A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C26C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C26E|        |80FFFF;
+    dw $FFFF                                                   ;80C26E|        |      ;
     dw PTR16_80FFFF                                            ;80C270|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C272|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C274|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C276|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C278|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C27A|        |80FFFF;
+    dw $FFFF                                                   ;80C27A|        |      ;
     dw PTR16_80FFFF                                            ;80C27C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C27E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C280|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C282|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C284|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C286|        |80FFFF;
+    dw $FFFF                                                   ;80C286|        |      ;
     dw PTR16_80FFFF                                            ;80C288|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C28A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C28C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C28E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C290|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C292|        |80FFFF;
+    dw $FFFF                                                   ;80C292|        |      ;
     dw PTR16_80FFFF                                            ;80C294|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C296|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C298|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C29A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C29C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C29E|        |80FFFF;
+    dw $FFFF                                                   ;80C29E|        |      ;
     dw PTR16_80FFFF                                            ;80C2A0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2A2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2A4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2A6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2A8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2AA|        |80FFFF;
+    dw $FFFF                                                   ;80C2AA|        |      ;
     dw PTR16_80FFFF                                            ;80C2AC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2AE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2B0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2B2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2B4|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2B6|        |80FFFF;
+    dw $FFFF                                                   ;80C2B6|        |      ;
     dw PTR16_80FFFF                                            ;80C2B8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2BA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2BC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2BE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2C0|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2C2|        |80FFFF;
+    dw $FFFF                                                   ;80C2C2|        |      ;
     dw PTR16_80FFFF                                            ;80C2C4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2C6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2C8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2CA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2CC|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2CE|        |80FFFF;
+    dw $FFFF                                                   ;80C2CE|        |      ;
     dw PTR16_80FFFF                                            ;80C2D0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2D2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2D4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2D6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2D8|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2DA|        |80FFFF;
+    dw $FFFF                                                   ;80C2DA|        |      ;
     dw PTR16_80FFFF                                            ;80C2DC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2DE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2E0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2E2|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2E4|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2E6|        |80FFFF;
+    dw $FFFF                                                   ;80C2E6|        |      ;
     dw PTR16_80FFFF                                            ;80C2E8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2EA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2EC|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2EE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2F0|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2F2|        |80FFFF;
+    dw $FFFF                                                   ;80C2F2|        |      ;
     dw PTR16_80FFFF                                            ;80C2F4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2F6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2F8|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2FA|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C2FC|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C2FE|        |80FFFF;
+    dw $FFFF                                                   ;80C2FE|        |      ;
     dw PTR16_80FFFF                                            ;80C300|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C302|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C304|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C306|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C308|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C30A|        |80FFFF;
+    dw $FFFF                                                   ;80C30A|        |      ;
     dw PTR16_80FFFF                                            ;80C30C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C30E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C310|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C312|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C314|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C316|        |80FFFF;
+    dw $FFFF                                                   ;80C316|        |      ;
     dw PTR16_80FFFF                                            ;80C318|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C31A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C31C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C31E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C320|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C322|        |80FFFF;
+    dw $FFFF                                                   ;80C322|        |      ;
     dw PTR16_80FFFF                                            ;80C324|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C326|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C328|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C32A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C32C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C32E|        |80FFFF;
+    dw $FFFF                                                   ;80C32E|        |      ;
     dw PTR16_80FFFF                                            ;80C330|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C332|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C334|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C336|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C338|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C33A|        |80FFFF;
+    dw $FFFF                                                   ;80C33A|        |      ;
     dw PTR16_80FFFF                                            ;80C33C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C33E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C340|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C342|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C344|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C346|        |80FFFF;
+    dw $FFFF                                                   ;80C346|        |      ;
     dw PTR16_80FFFF                                            ;80C348|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C34A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C34C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C34E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C350|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C352|        |80FFFF;
+    dw $FFFF                                                   ;80C352|        |      ;
     dw PTR16_80FFFF                                            ;80C354|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C356|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C358|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C35A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C35C|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C35E|        |80FFFF;
+    dw $FFFF                                                   ;80C35E|        |      ;
     dw PTR16_80FFFF                                            ;80C360|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C362|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C364|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C366|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C368|        |80FFFF;
-    dw PTR16_80FFFF                                            ;80C36A|        |80FFFF;
+    dw $FFFF                                                   ;80C36A|        |      ;
  
 subUnknown_80C36C:
     REP #$20                                                   ;80C36C|C220    |      ;
@@ -12374,360 +12374,10 @@ DATA24_80EF1C:
     dw $FFFE                                                   ;80EF22|        |      ;
     dl DATA24_80EF1C                                           ;80EF24|        |80EF1C;
  
-Padding_800000:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EF9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80EFFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F00B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F017|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F023|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F02F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F03B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F047|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F053|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F05F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F06B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F077|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F083|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F08F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F09B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F0FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F107|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F113|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F11F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F12B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F137|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F143|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F14F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F15B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F167|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F173|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F17F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F18B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F197|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F1F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F203|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F20F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F21B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F227|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F233|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F23F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F24B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F257|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F263|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F26F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F27B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F287|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F293|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F29F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F2FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F30B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F317|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F323|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F32F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F33B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F347|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F353|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F35F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F36B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F377|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F383|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F38F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F39B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F3FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F407|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F413|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F41F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F42B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F437|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F443|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F44F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F45B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F467|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F473|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F47F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F48B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F497|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F4F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F503|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F50F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F51B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F527|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F533|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F53F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F54B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F557|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F563|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F56F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F57B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F587|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F593|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F59F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F5FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F60B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F617|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F623|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F62F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F63B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F647|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F653|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F65F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F66B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F677|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F683|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F68F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F69B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F6FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F707|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F713|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F71F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F72B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F737|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F743|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F74F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F75B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F767|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F773|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F77F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F78B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F797|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7A3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7AF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7BB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7C7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7D3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7DF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7EB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F7F7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F803|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F80F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F81B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F827|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F833|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F83F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F84B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F857|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F863|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F86F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F87B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F887|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F893|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F89F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8AB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8B7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8C3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8CF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8DB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8E7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8F3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F8FF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F90B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F917|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F923|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F92F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F93B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F947|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F953|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F95F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F96B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F977|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F983|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F98F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F99B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9A7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9B3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9BF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9CB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9D7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9E3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9EF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80F9FB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FA97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FAA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FAAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FABB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FAC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FAD3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FADF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FAEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FAF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FB9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBCF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FBFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FC9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCA7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCB3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCBF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCCB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCD7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCE3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCEF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FCFB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD07|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD13|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD1F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD2B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD37|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD43|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD4F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD5B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD67|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD73|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD7F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD8B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FD97|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDA3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDAF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDBB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDC7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDD3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDDF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDEB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FDF7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE03|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE0F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE1B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE27|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE33|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE3F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE4B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE57|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE63|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE6F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE7B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE87|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE93|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FE9F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEAB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEB7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEC3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FECF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEDB|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEE7|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEF3|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FEFF|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF0B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF17|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF23|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF2F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF3B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF47|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF53|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF5F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF6B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF77|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF83|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF8F|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;80FF9B|        |      ;
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;80FFA7|        |      ;
+    pad $80FFB0
+
+
+; HEADER
     db $45,$39,$41,$59,$57,$45,$00,$00,$00,$00,$00,$00         ;80FFB0|        |      ;
     db $00,$00,$00,$00,$48,$41,$52,$56,$45,$53,$54,$20         ;80FFBC|        |      ;
     db $4D,$4F,$4F,$4E,$20,$20,$20,$20,$20,$20,$20,$20         ;80FFC8|        |      ;
