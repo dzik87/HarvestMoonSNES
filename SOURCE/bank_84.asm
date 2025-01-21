@@ -1500,7 +1500,7 @@ fAIAction0x07_SetPlayerDirection:
     RTS                                                        ;848AE6|60      |      ;
  
  
-fAIAction0x08:
+fAIAction0x08_EnableAIControl:
     REP #$30                                                   ;848AE7|C230    |      ;
     REP #$30                                                   ;848AE9|C230    |      ;
     LDA.B ptrAIActionData                                      ;848AEB|A5C9    |0000C9;
@@ -1749,7 +1749,7 @@ fAIAction0x0E:
     RTS                                                        ;848CB8|60      |      ;
  
  
-fAIAction0x0F:
+fAIAction0x0F_ScreenFadeout:
     REP #$30                                                   ;848CB9|C230    |      ;
     REP #$30                                                   ;848CBB|C230    |      ;
     LDA.B ptrAIActionData                                      ;848CBD|A5C9    |0000C9;
@@ -1788,7 +1788,7 @@ fAIAction0x10_End:
     RTS                                                        ;848CFC|60      |      ;
  
  
-fAIAction0x11:
+fAIAction0x11_EnableUserControl:
     REP #$30                                                   ;848CFD|C230    |      ;
     REP #$30                                                   ;848CFF|C230    |      ;
     LDA.B ptrAIActionData                                      ;848D01|A5C9    |0000C9;
@@ -1797,7 +1797,7 @@ fAIAction0x11:
     STA.B ptrAIActionData                                      ;848D07|85C9    |0000C9;
     REP #$30                                                   ;848D09|C230    |      ;
     LDA.B nPlayerFlags                                         ;848D0B|A5D2    |0000D2;
-    ORA.W #$4000                                               ;848D0D|090040  |      ;
+    ORA.W #!PFLAGS_USERCONTROL                                               
     STA.B nPlayerFlags                                         ;848D10|85D2    |0000D2;
     RTS                                                        ;848D12|60      |      ;
  
@@ -2282,7 +2282,7 @@ fAIAction0x1D_ShowDialog:
     RTS                                                        ;849078|60      |      ;
  
  
-fAIAction0x1E:
+fAIAction0x1F:
     REP #$30                                                   ;849079|C230    |      ;
     REP #$30                                                   ;84907B|C230    |      ;
     LDA.B ptrAIActionData                                      ;84907D|A5C9    |0000C9;
@@ -2670,7 +2670,7 @@ fAIAction0x23_OrWithIndexedValue:
     RTS                                                        ;849355|60      |      ;
  
  
-fAIAction0x24:
+fAIAction0x24_NextHourPalette:
     REP #$30                                                   ;849356|C230    |      ;
     REP #$30                                                   ;849358|C230    |      ;
     LDA.B ptrAIActionData                                      ;84935A|A5C9    |0000C9;
@@ -2731,7 +2731,7 @@ fAIAction0x25:
     RTS                                                        ;8493C8|60      |      ;
  
  
-fAIAction0x26:
+fAIAction0x28:
     REP #$30                                                   ;8493C9|C230    |      ;
     REP #$30                                                   ;8493CB|C230    |      ;
     LDA.B ptrAIActionData                                      ;8493CD|A5C9    |0000C9;
@@ -2784,16 +2784,16 @@ aAIActions:
     dw fAIAction0x05_SetTransferPosition                       ;849423|        |848A65;
     dw fAIAction0x06_SetDestinationArea                        ;849425|        |848A94;
     dw fAIAction0x07_SetPlayerDirection                        ;849427|        |848ABF;
-    dw fAIAction0x08                                           ;849429|        |848AE7;
+    dw fAIAction0x08_EnableAIControl                           ;849429|        |848AE7;
     dw fAIAction0x09                                           ;84942B|        |848B08;
     dw fAIAction0x0A                                           ;84942D|        |848B83;
     dw fAIAction0x0B                                           ;84942F|        |848BAC;
     dw fAIAction0x0C                                           ;849431|        |848BDC;
     dw fAIAction0x0D                                           ;849433|        |848C22;
     dw fAIAction0x0E                                           ;849435|        |848CA8;
-    dw fAIAction0x0F                                           ;849437|        |848CB9;
+    dw fAIAction0x0F_ScreenFadeout                             ;849437|        |848CB9;
     dw fAIAction0x10_End                                       ;849439|        |848CE2;
-    dw fAIAction0x11                                           ;84943B|        |848CFD;
+    dw fAIAction0x11_EnableUserControl                         ;84943B|        |848CFD;
     dw fAIAction0x12_AlwaysJump                                ;84943D|        |848D13;
     dw fAIAction0x13_Wait                                      ;84943F|        |848D24;
     dw fAIAction0x14_JumpIfFlagSet                             ;849441|        |848D44;
@@ -2806,17 +2806,17 @@ aAIActions:
     dw fAIAction0x1B                                           ;84944F|        |848F9B;
     dw fAIAction0x1C_ShowDialog                                ;849451|        |848FEF;
     dw fAIAction0x1D_ShowDialog                                ;849453|        |849034;
-    dw fAIAction0x1E                                           ;849455|        |849079;
-    dw fAIAction0x1E                                           ;849457|        |849079;
+    dw fAIAction0x1F                                           ;849455|        |849079;
+    dw fAIAction0x1F                                           ;849457|        |849079;
     dw fAIAction0x20_JumpIfChoice                              ;849459|        |84919D;
     dw fAIAction0x21_AddValue8                                 ;84945B|        |8491D2;
     dw fAIAction0x22                                           ;84945D|        |84923F;
     dw fAIAction0x23_OrWithIndexedValue                        ;84945F|        |849306;
-    dw fAIAction0x24                                           ;849461|        |849356;
+    dw fAIAction0x24_NextHourPalette                           ;849461|        |849356;
     dw fAIAction0x25                                           ;849463|        |849375;
-    dw fAIAction0x26                                           ;849465|        |8493C9;
-    dw fAIAction0x26                                           ;849467|        |8493C9;
-    dw fAIAction0x26                                           ;849469|        |8493C9;
+    dw fAIAction0x28                                           ;849465|        |8493C9;
+    dw fAIAction0x28                                           ;849467|        |8493C9;
+    dw fAIAction0x28                                           ;849469|        |8493C9;
     dw fAIAction0x29_SetMapScrooling                           ;84946B|        |849513;
     dw fAIAction0x2A                                           ;84946D|        |849553;
     dw fAIAction0x2B                                           ;84946F|        |84957D;
@@ -3673,7 +3673,7 @@ fAIAction0x31_UpdateCow:
     LDY.W #$000A                                               ;849B09|A00A00  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849B0C|9772    |000072;
     SEP #$20                                                   ;849B0E|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;849B10|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;849B10|A522    |000022;
     CMP.B #!AREA_COWBARN                                                 
     BNE +                                                      ;849B14|D010    |849B26;
     SEP #$20                                                   ;849B16|E220    |      ;
@@ -3686,7 +3686,7 @@ fAIAction0x31_UpdateCow:
  
  
   + SEP #$20                                                   ;849B26|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;849B28|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;849B28|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
     BCS fUnknown_ToFarm                                        ;849B2C|B017    |849B45;
     SEP #$20                                                   ;849B2E|E220    |      ;
@@ -9022,8 +9022,8 @@ fInput_Unknown84C157:
     LDA.B #$00                                                 ;84C159|A900    |      ;
     STA.W nMenuTableSelector                                   ;84C15B|8D9309  |000993;
     REP #$20                                                   ;84C15E|C220    |      ;
-    STZ.W $013C                                                ;84C160|9C3C01  |00013C;
-    STZ.W $013E                                                ;84C163|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG1HorOffs                              ;84C160|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;84C163|9C3E01  |00013E;
     REP #$20                                                   ;84C166|C220    |      ;
     STZ.W nMenuIndex                                           ;84C168|9C9109  |000991;
     SEP #$20                                                   ;84C16B|E220    |      ;
@@ -9042,8 +9042,8 @@ fInput_Unknown84C17E:
     STA.W nMenuTableSelector                                   ;84C182|8D9309  |000993;
     REP #$20                                                   ;84C185|C220    |      ;
     LDA.W #$0100                                               ;84C187|A90001  |      ;
-    STA.W $013C                                                ;84C18A|8D3C01  |00013C;
-    STZ.W $013E                                                ;84C18D|9C3E01  |00013E;
+    STA.W strcBGScrool.BG1HorOffs                              ;84C18A|8D3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;84C18D|9C3E01  |00013E;
     REP #$20                                                   ;84C190|C220    |      ;
     STZ.W nMenuIndex                                           ;84C192|9C9109  |000991;
     SEP #$20                                                   ;84C195|E220    |      ;
@@ -9061,9 +9061,9 @@ fInput_Unknown84C1A8:
     LDA.B #$02                                                 ;84C1AA|A902    |      ;
     STA.W nMenuTableSelector                                   ;84C1AC|8D9309  |000993;
     REP #$20                                                   ;84C1AF|C220    |      ;
-    STZ.W $013C                                                ;84C1B1|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1HorOffs                              ;84C1B1|9C3C01  |00013C;
     LDA.W #$0100                                               ;84C1B4|A90001  |      ;
-    STA.W $013E                                                ;84C1B7|8D3E01  |00013E;
+    STA.W strcBGScrool.BG1VerOffs                              ;84C1B7|8D3E01  |00013E;
     REP #$20                                                   ;84C1BA|C220    |      ;
     STZ.W nMenuIndex                                           ;84C1BC|9C9109  |000991;
     SEP #$20                                                   ;84C1BF|E220    |      ;
@@ -9641,7 +9641,7 @@ fInput_Unknown84C57A:
  
   + REP #$20                                                   ;84C5C8|C220    |      ;
     LDA.W #$0100                                               ;84C5CA|A90001  |      ;
-    STA.W $0142                                                ;84C5CD|8D4201  |000142;
+    STA.W strcBGScrool.BG2VerOffs                              ;84C5CD|8D4201  |000142;
     RTL                                                        ;84C5D0|6B      |      ;
  
  
@@ -10496,7 +10496,7 @@ fInput_Unknown84CAA5:
     LDA.W nTileInFrontOfPlayerY                                ;84CBF8|AD8709  |000987;
     STA.L nDogY                                                ;84CBFB|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84CBFF|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;84CC01|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;84CC01|A522    |000022;
     STA.L nDogAreaId                                           ;84CC03|8F301F7F|7F1F30;
     REP #$30                                                   ;84CC07|C230    |      ;
     LDA.W #!PACTION_DROPPINGDOG                                               

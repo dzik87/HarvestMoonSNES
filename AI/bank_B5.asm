@@ -218,10 +218,10 @@ DATA8_B58020:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $05, $B58435);B58413
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B5841A
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B5841E
-    %AICMD0x08()                                               ;B58423
+    %AICMD0x08_EnableAIControl()                               ;B58423
     %AICMD0x19($0039, $00)                                     ;B58424
     %AICMD0x13_Wait(120)                                       ;B58428
-    %AICMD0x11()                                               ;B5842B
+    %AICMD0x11_EnableUserControl()                             ;B5842B
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B5842C
     %AICMD0x12_Jump($B58406)                                   ;B58432
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B58435
@@ -241,19 +241,19 @@ DATA8_B58020:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B58483)     ;B58466
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B5846D
     %AICMD0x1B($022F, $00)                                     ;B58471
-    %AICMD0x08()                                               ;B58475
+    %AICMD0x08_EnableAIControl()                               ;B58475
     %AICMD0x19($0030, $00)                                     ;B58476
     %AICMD0x13_Wait(120)                                       ;B5847A
-    %AICMD0x11()                                               ;B5847D
+    %AICMD0x11_EnableUserControl()                             ;B5847D
     %AICMD0x57_UpdateStamina(30)                               ;B5847E
     %AICMD0x12_Jump($B58087)                                   ;B58480
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, $B58413)         ;B58483
     %AICMD0x1C_ShowDialog($0431, $00)                          ;B5848A
     %AICMD0x1B($022F, $00)                                     ;B5848E
-    %AICMD0x08()                                               ;B58492
+    %AICMD0x08_EnableAIControl()                               ;B58492
     %AICMD0x19($0032, $00)                                     ;B58493
     %AICMD0x13_Wait(120)                                       ;B58497
-    %AICMD0x11()                                               ;B5849A
+    %AICMD0x11_EnableUserControl()                             ;B5849A
     %AICMD0x57_UpdateStamina(30)                               ;B5849B
     %AICMD0x12_Jump($B58087)                                   ;B5849D
     %AICMD0x1B($02E7, $00)                                     ;B584A0
@@ -470,10 +470,10 @@ DATA8_B584DA:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $05, $B588EB);B588C9
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B588D0
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B588D4
-    %AICMD0x08()                                               ;B588D9
+    %AICMD0x08_EnableAIControl()                               ;B588D9
     %AICMD0x19($0039, $00)                                     ;B588DA
     %AICMD0x13_Wait(120)                                       ;B588DE
-    %AICMD0x11()                                               ;B588E1
+    %AICMD0x11_EnableUserControl()                             ;B588E1
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B588E2
     %AICMD0x12_Jump($B588BC)                                   ;B588E8
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B588EB
@@ -493,19 +493,19 @@ DATA8_B584DA:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B58939)     ;B5891C
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B58923
     %AICMD0x1B($022F, $00)                                     ;B58927
-    %AICMD0x08()                                               ;B5892B
+    %AICMD0x08_EnableAIControl()                               ;B5892B
     %AICMD0x19($003A, $00)                                     ;B5892C
     %AICMD0x13_Wait(120)                                       ;B58930
-    %AICMD0x11()                                               ;B58933
+    %AICMD0x11_EnableUserControl()                             ;B58933
     %AICMD0x57_UpdateStamina(30)                               ;B58934
     %AICMD0x12_Jump($B58541)                                   ;B58936
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, $B588C9)         ;B58939
     %AICMD0x1C_ShowDialog($042E, $00)                          ;B58940
     %AICMD0x1B($022F, $00)                                     ;B58944
-    %AICMD0x08()                                               ;B58948
+    %AICMD0x08_EnableAIControl()                               ;B58948
     %AICMD0x19($0030, $00)                                     ;B58949
     %AICMD0x13_Wait(120)                                       ;B5894D
-    %AICMD0x11()                                               ;B58950
+    %AICMD0x11_EnableUserControl()                             ;B58950
     %AICMD0x57_UpdateStamina(30)                               ;B58951
     %AICMD0x12_Jump($B58541)                                   ;B58953
     %AICMD0x1B($02E7, $00)                                     ;B58956
@@ -723,10 +723,10 @@ DATA8_B58990:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $05, $B58DA9);B58D87
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B58D8E
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B58D92
-    %AICMD0x08()                                               ;B58D97
+    %AICMD0x08_EnableAIControl()                               ;B58D97
     %AICMD0x19($0039, $00)                                     ;B58D98
     %AICMD0x13_Wait(120)                                       ;B58D9C
-    %AICMD0x11()                                               ;B58D9F
+    %AICMD0x11_EnableUserControl()                             ;B58D9F
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B58DA0
     %AICMD0x12_Jump($B58D7A)                                   ;B58DA6
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B58DA9
@@ -746,19 +746,19 @@ DATA8_B58990:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B58DF7)     ;B58DDA
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B58DE1
     %AICMD0x1B($022F, $00)                                     ;B58DE5
-    %AICMD0x08()                                               ;B58DE9
+    %AICMD0x08_EnableAIControl()                               ;B58DE9
     %AICMD0x19($0031, $00)                                     ;B58DEA
     %AICMD0x13_Wait(120)                                       ;B58DEE
-    %AICMD0x11()                                               ;B58DF1
+    %AICMD0x11_EnableUserControl()                             ;B58DF1
     %AICMD0x57_UpdateStamina(30)                               ;B58DF2
     %AICMD0x12_Jump($B589F7)                                   ;B58DF4
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, $B58D87)         ;B58DF7
     %AICMD0x1C_ShowDialog($0432, $00)                          ;B58DFE
     %AICMD0x1B($022F, $00)                                     ;B58E02
-    %AICMD0x08()                                               ;B58E06
+    %AICMD0x08_EnableAIControl()                               ;B58E06
     %AICMD0x19($0032, $00)                                     ;B58E07
     %AICMD0x13_Wait(120)                                       ;B58E0B
-    %AICMD0x11()                                               ;B58E0E
+    %AICMD0x11_EnableUserControl()                             ;B58E0E
     %AICMD0x57_UpdateStamina(30)                               ;B58E0F
     %AICMD0x12_Jump($B589F7)                                   ;B58E11
     %AICMD0x1B($02E7, $00)                                     ;B58E14
@@ -978,10 +978,10 @@ DATA8_B58E4E:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $05, $B5926E);B5924C
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B59253
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B59257
-    %AICMD0x08()                                               ;B5925C
+    %AICMD0x08_EnableAIControl()                               ;B5925C
     %AICMD0x19($0039, $00)                                     ;B5925D
     %AICMD0x13_Wait(120)                                       ;B59261
-    %AICMD0x11()                                               ;B59264
+    %AICMD0x11_EnableUserControl()                             ;B59264
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B59265
     %AICMD0x12_Jump($B5923F)                                   ;B5926B
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B5926E
@@ -1000,20 +1000,20 @@ DATA8_B58E4E:
     %AICMD0x12_Jump($B58EB5)                                   ;B5929C
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B592BC)     ;B5929F
     %AICMD0x1B($022F, $00)                                     ;B592A6
-    %AICMD0x08()                                               ;B592AA
+    %AICMD0x08_EnableAIControl()                               ;B592AA
     %AICMD0x19($0039, $00)                                     ;B592AB
     %AICMD0x13_Wait(120)                                       ;B592AF
-    %AICMD0x11()                                               ;B592B2
+    %AICMD0x11_EnableUserControl()                             ;B592B2
     %AICMD0x57_UpdateStamina(30)                               ;B592B3
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B592B5
     %AICMD0x12_Jump($B58EB5)                                   ;B592B9
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, $B5924C)         ;B592BC
     %AICMD0x1C_ShowDialog($042E, $00)                          ;B592C3
     %AICMD0x1B($022F, $00)                                     ;B592C7
-    %AICMD0x08()                                               ;B592CB
+    %AICMD0x08_EnableAIControl()                               ;B592CB
     %AICMD0x19($0030, $00)                                     ;B592CC
     %AICMD0x13_Wait(120)                                       ;B592D0
-    %AICMD0x11()                                               ;B592D3
+    %AICMD0x11_EnableUserControl()                             ;B592D3
     %AICMD0x57_UpdateStamina(30)                               ;B592D4
     %AICMD0x12_Jump($B58EB5)                                   ;B592D6
     %AICMD0x1B($02E7, $00)                                     ;B592D9
@@ -1230,10 +1230,10 @@ DATA8_B59313:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $05, $B59728);B59706
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B5970D
     %AICMD0x23_OrWithIndexedValue(strcUnknownFlags.flags1, $05);B59711
-    %AICMD0x08()                                               ;B59716
+    %AICMD0x08_EnableAIControl()                               ;B59716
     %AICMD0x19($0039, $00)                                     ;B59717
     %AICMD0x13_Wait(120)                                       ;B5971B
-    %AICMD0x11()                                               ;B5971E
+    %AICMD0x11_EnableUserControl()                             ;B5971E
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B5971F
     %AICMD0x12_Jump($B596F9)                                   ;B59725
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B59728
@@ -1253,19 +1253,19 @@ DATA8_B59313:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B59778)     ;B59759
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B59760
     %AICMD0x1B($022F, $00)                                     ;B59764
-    %AICMD0x08()                                               ;B59768
+    %AICMD0x08_EnableAIControl()                               ;B59768
     %AICMD0x32($8000D4, $0015)                                 ;B59769
     %AICMD0x13_Wait(120)                                       ;B5976F
-    %AICMD0x11()                                               ;B59772
+    %AICMD0x11_EnableUserControl()                             ;B59772
     %AICMD0x57_UpdateStamina(30)                               ;B59773
     %AICMD0x12_Jump($B5937A)                                   ;B59775
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, $B59706)         ;B59778
     %AICMD0x1C_ShowDialog($042F, $00)                          ;B5977F
     %AICMD0x1B($022F, $00)                                     ;B59783
-    %AICMD0x08()                                               ;B59787
+    %AICMD0x08_EnableAIControl()                               ;B59787
     %AICMD0x32($8000D4, $0015)                                 ;B59788
     %AICMD0x13_Wait(120)                                       ;B5978E
-    %AICMD0x11()                                               ;B59791
+    %AICMD0x11_EnableUserControl()                             ;B59791
     %AICMD0x57_UpdateStamina(30)                               ;B59792
     %AICMD0x12_Jump($B5937A)                                   ;B59794
     %AICMD0x1B($02E7, $00)                                     ;B59797
@@ -2138,7 +2138,7 @@ DATA8_B5A723:
     %AICMD0x40_DisableTileInteractions()                       ;B5A729
     %AICMD0x05_SetTransferPosition(128, 128)                   ;B5A72A
     %AICMD0x19($00E8, $00)                                     ;B5A72F
-    %AICMD0x08()                                               ;B5A733
+    %AICMD0x08_EnableAIControl()                               ;B5A733
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS0)              ;B5A734
     %AICMD0x38()                                               ;B5A736
     %AICMD0x13_Wait(180)                                       ;B5A737
@@ -2154,7 +2154,7 @@ DATA8_B5A73D:
     %AICMD0x40_DisableTileInteractions()                       ;B5A743
     %AICMD0x05_SetTransferPosition(384, 128)                   ;B5A744
     %AICMD0x19($00E8, $00)                                     ;B5A749
-    %AICMD0x08()                                               ;B5A74D
+    %AICMD0x08_EnableAIControl()                               ;B5A74D
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS1)              ;B5A74E
     %AICMD0x38()                                               ;B5A750
     %AICMD0x13_Wait(180)                                       ;B5A751
@@ -2170,7 +2170,7 @@ DATA8_B5A757:
     %AICMD0x40_DisableTileInteractions()                       ;B5A75D
     %AICMD0x05_SetTransferPosition(128, 384)                   ;B5A75E
     %AICMD0x19($00E8, $00)                                     ;B5A763
-    %AICMD0x08()                                               ;B5A767
+    %AICMD0x08_EnableAIControl()                               ;B5A767
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS2)              ;B5A768
     %AICMD0x38()                                               ;B5A76A
     %AICMD0x13_Wait(180)                                       ;B5A76B
@@ -2186,7 +2186,7 @@ DATA8_B5A771:
     %AICMD0x40_DisableTileInteractions()                       ;B5A777
     %AICMD0x05_SetTransferPosition(384, 384)                   ;B5A778
     %AICMD0x19($00E8, $00)                                     ;B5A77D
-    %AICMD0x08()                                               ;B5A781
+    %AICMD0x08_EnableAIControl()                               ;B5A781
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS3)              ;B5A782
     %AICMD0x38()                                               ;B5A784
     %AICMD0x13_Wait(180)                                       ;B5A785
@@ -2202,7 +2202,7 @@ DATA8_B5A78B:
     %AICMD0x40_DisableTileInteractions()                       ;B5A791
     %AICMD0x05_SetTransferPosition(128, 128)                   ;B5A792
     %AICMD0x19($00E8, $00)                                     ;B5A797
-    %AICMD0x08()                                               ;B5A79B
+    %AICMD0x08_EnableAIControl()                               ;B5A79B
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS4)              ;B5A79C
     %AICMD0x38()                                               ;B5A79E
     %AICMD0x13_Wait(180)                                       ;B5A79F
@@ -2218,7 +2218,7 @@ DATA8_B5A7A5:
     %AICMD0x40_DisableTileInteractions()                       ;B5A7AB
     %AICMD0x05_SetTransferPosition(384, 128)                   ;B5A7AC
     %AICMD0x19($00E8, $00)                                     ;B5A7B1
-    %AICMD0x08()                                               ;B5A7B5
+    %AICMD0x08_EnableAIControl()                               ;B5A7B5
     %AICMD0x06_SetDestinationArea(!AREA_DRIVETOTOWN)           ;B5A7B6
     %AICMD0x38()                                               ;B5A7B8
     %AICMD0x13_Wait(180)                                       ;B5A7B9
@@ -2234,7 +2234,7 @@ DATA8_B5A7BF:
     %AICMD0x40_DisableTileInteractions()                       ;B5A7C5
     %AICMD0x05_SetTransferPosition(128, 384)                   ;B5A7C6
     %AICMD0x19($00E8, $00)                                     ;B5A7CB
-    %AICMD0x08()                                               ;B5A7CF
+    %AICMD0x08_EnableAIControl()                               ;B5A7CF
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN51)             ;B5A7D0
     %AICMD0x38()                                               ;B5A7D2
     %AICMD0x13_Wait(180)                                       ;B5A7D3
@@ -2250,7 +2250,7 @@ DATA8_B5A7D9:
     %AICMD0x40_DisableTileInteractions()                       ;B5A7DF
     %AICMD0x05_SetTransferPosition(384, 384)                   ;B5A7E0
     %AICMD0x19($00E8, $00)                                     ;B5A7E5
-    %AICMD0x08()                                               ;B5A7E9
+    %AICMD0x08_EnableAIControl()                               ;B5A7E9
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN52)             ;B5A7EA
     %AICMD0x38()                                               ;B5A7EC
     %AICMD0x13_Wait(180)                                       ;B5A7ED
@@ -2266,7 +2266,7 @@ DATA8_B5A7F3:
     %AICMD0x40_DisableTileInteractions()                       ;B5A7F9
     %AICMD0x05_SetTransferPosition(384, 384)                   ;B5A7FA
     %AICMD0x19($00E8, $00)                                     ;B5A7FF
-    %AICMD0x08()                                               ;B5A803
+    %AICMD0x08_EnableAIControl()                               ;B5A803
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN56)             ;B5A804
     %AICMD0x38()                                               ;B5A806
     %AICMD0x13_Wait(180)                                       ;B5A807
@@ -2282,7 +2282,7 @@ DATA8_B5A80D:
     %AICMD0x40_DisableTileInteractions()                       ;B5A813
     %AICMD0x05_SetTransferPosition(128, 128)                   ;B5A814
     %AICMD0x19($00E8, $00)                                     ;B5A819
-    %AICMD0x08()                                               ;B5A81D
+    %AICMD0x08_EnableAIControl()                               ;B5A81D
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN53)             ;B5A81E
     %AICMD0x38()                                               ;B5A820
     %AICMD0x13_Wait(180)                                       ;B5A821
@@ -2298,7 +2298,7 @@ DATA8_B5A827:
     %AICMD0x40_DisableTileInteractions()                       ;B5A82D
     %AICMD0x05_SetTransferPosition(384, 128)                   ;B5A82E
     %AICMD0x19($00E8, $00)                                     ;B5A833
-    %AICMD0x08()                                               ;B5A837
+    %AICMD0x08_EnableAIControl()                               ;B5A837
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN54)             ;B5A838
     %AICMD0x38()                                               ;B5A83A
     %AICMD0x13_Wait(180)                                       ;B5A83B
@@ -2316,7 +2316,7 @@ DATA8_B5A841:
     %AICMD0x40_DisableTileInteractions()                       ;B5A849
     %AICMD0x05_SetTransferPosition(128, 384)                   ;B5A84A
     %AICMD0x19($00E8, $00)                                     ;B5A84F
-    %AICMD0x08()                                               ;B5A853
+    %AICMD0x08_EnableAIControl()                               ;B5A853
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN55)             ;B5A854
     %AICMD0x38()                                               ;B5A856
     %AICMD0x13_Wait(180)                                       ;B5A857
@@ -2330,7 +2330,7 @@ DATA8_B5A85D:
     %AICMD0x01_UnfreezeTime()                                  ;B5A860
     %AICMD0x03_SetHour($10)                                    ;B5A861
     %AICMD0x40_DisableTileInteractions()                       ;B5A863
-    %AICMD0x08()                                               ;B5A864
+    %AICMD0x08_EnableAIControl()                               ;B5A864
     %AICMD0x05_SetTransferPosition(120, 456)                   ;B5A865
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5A86A
     %AICMD0x06_SetDestinationArea(!AREA_MNTTOPENDINGSUMMER)    ;B5A86C
@@ -2620,7 +2620,7 @@ DATA8_B5ACAE:
     %AICMD0x02_FreezeTime()                                    ;B5ACB6
     %AICMD0x03_SetHour($07)                                    ;B5ACB7
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B5ACB9
-    %AICMD0x08()                                               ;B5ACBE
+    %AICMD0x08_EnableAIControl()                               ;B5ACBE
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5ACBF
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5ACC1
     %AICMD0x38()                                               ;B5ACC3
@@ -2640,7 +2640,7 @@ DATA8_B5ACDE:
     %AICMD0x02_FreezeTime()                                    ;B5ACE6
     %AICMD0x03_SetHour($07)                                    ;B5ACE7
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5ACE9
-    %AICMD0x08()                                               ;B5ACEE
+    %AICMD0x08_EnableAIControl()                               ;B5ACEE
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5ACEF
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5ACF1
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5ACF6
@@ -2670,7 +2670,7 @@ DATA8_B5AD25:
     %AICMD0x02_FreezeTime()                                    ;B5AD37
     %AICMD0x03_SetHour($07)                                    ;B5AD38
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5AD3A
-    %AICMD0x08()                                               ;B5AD3F
+    %AICMD0x08_EnableAIControl()                               ;B5AD3F
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5AD40
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5AD42
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5AD47
@@ -2932,7 +2932,7 @@ DATA8_B5AFF9:
     %AICMD0x02_FreezeTime()                                    ;B5B001
     %AICMD0x03_SetHour($07)                                    ;B5B002
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5B004
-    %AICMD0x08()                                               ;B5B009
+    %AICMD0x08_EnableAIControl()                               ;B5B009
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B00A
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B00C
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B011
@@ -2960,55 +2960,55 @@ DATA8_B5AFF9:
 
 DATA8_B5B050:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5B050
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5B056
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5B05C
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5B062
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5B068
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5B06E
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5B074
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5B07A
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5B080
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5B086
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5B08C
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5B092
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5B098
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5B09E
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5B0A4
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5B0AA
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5B0B0
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5B0B6
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5B0BC
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5B0C2
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5B0C8
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5B0CE
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5B0D4
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5B0DA
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5B0E0
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5B0E6
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5B0EC
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5B0F2
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5B0F8
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5B0FE
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5B104
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5B10A
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5B110
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5B116
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5B11C
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5B122
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5B128
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5B12E
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5B134
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5B13A
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5B140
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5B146
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5B14C
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5B152
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5B158
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5B15E
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5B164
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5B16A
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5B170
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B050
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5B056
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5B05C
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5B062
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5B068
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5B06E
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5B074
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5B07A
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5B080
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5B086
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5B08C
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5B092
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5B098
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5B09E
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5B0A4
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5B0AA
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5B0B0
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5B0B6
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5B0BC
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5B0C2
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5B0C8
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5B0CE
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5B0D4
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5B0DA
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5B0E0
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5B0E6
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5B0EC
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5B0F2
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5B0F8
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5B0FE
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5B104
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5B10A
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5B110
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5B116
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5B11C
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5B122
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5B128
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5B12E
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5B134
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5B13A
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5B140
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5B146
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5B14C
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5B152
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5B158
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5B15E
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5B164
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5B16A
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5B170
     %AICMD0x47_SetValue8($800921, 2)                           ;B5B176
     %AICMD0x47_SetValue8($800923, 12)                          ;B5B17B
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5B180
@@ -3016,7 +3016,7 @@ DATA8_B5B050:
     %AICMD0x02_FreezeTime()                                    ;B5B188
     %AICMD0x03_SetHour($07)                                    ;B5B189
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5B18B
-    %AICMD0x08()                                               ;B5B190
+    %AICMD0x08_EnableAIControl()                               ;B5B190
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B191
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B193
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5B198
@@ -3105,7 +3105,7 @@ DATA8_B5B261:
     %AICMD0x02_FreezeTime()                                    ;B5B269
     %AICMD0x03_SetHour($07)                                    ;B5B26A
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5B26C
-    %AICMD0x08()                                               ;B5B271
+    %AICMD0x08_EnableAIControl()                               ;B5B271
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B272
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B274
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B279
@@ -3133,73 +3133,73 @@ DATA8_B5B261:
 
 DATA8_B5B2B8:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5B2B8
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5B2BE
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5B2C4
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5B2CA
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5B2D0
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5B2D6
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5B2DC
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5B2E2
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5B2E8
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5B2EE
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5B2F4
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5B2FA
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5B300
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5B306
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5B30C
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5B312
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5B318
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5B31E
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5B324
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5B32A
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5B330
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5B336
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5B33C
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5B342
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5B348
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5B34E
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5B354
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5B35A
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5B360
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5B366
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5B36C
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5B372
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5B378
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5B37E
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5B384
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5B38A
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5B390
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5B396
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5B39C
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5B3A2
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5B3A8
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5B3AE
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5B3B4
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5B3BA
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5B3C0
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5B3C6
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5B3CC
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5B3D2
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5B3D8
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $01F0)              ;B5B3DE
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $01F0)              ;B5B3E4
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $01F0)              ;B5B3EA
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0200)              ;B5B3F0
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0200)              ;B5B3F6
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0200)              ;B5B3FC
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0210)              ;B5B402
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0210)              ;B5B408
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0210)              ;B5B40E
-    %AICMD0x58_ReplaceFarmTile($70, $01A0, $01F0)              ;B5B414
-    %AICMD0x58_ReplaceFarmTile($70, $01B0, $01F0)              ;B5B41A
-    %AICMD0x58_ReplaceFarmTile($70, $01C0, $01F0)              ;B5B420
-    %AICMD0x58_ReplaceFarmTile($70, $01A0, $0200)              ;B5B426
-    %AICMD0x58_ReplaceFarmTile($70, $01B0, $0200)              ;B5B42C
-    %AICMD0x58_ReplaceFarmTile($70, $01C0, $0200)              ;B5B432
-    %AICMD0x58_ReplaceFarmTile($70, $01A0, $0210)              ;B5B438
-    %AICMD0x58_ReplaceFarmTile($70, $01B0, $0210)              ;B5B43E
-    %AICMD0x58_ReplaceFarmTile($70, $01C0, $0210)              ;B5B444
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B2B8
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5B2BE
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5B2C4
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5B2CA
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5B2D0
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5B2D6
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5B2DC
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5B2E2
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5B2E8
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5B2EE
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5B2F4
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5B2FA
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5B300
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5B306
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5B30C
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5B312
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5B318
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5B31E
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5B324
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5B32A
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5B330
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5B336
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5B33C
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5B342
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5B348
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5B34E
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5B354
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5B35A
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5B360
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5B366
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5B36C
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5B372
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5B378
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5B37E
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5B384
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5B38A
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5B390
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5B396
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5B39C
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5B3A2
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5B3A8
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5B3AE
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5B3B4
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5B3BA
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5B3C0
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5B3C6
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5B3CC
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5B3D2
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5B3D8
+    %AICMD0x58_ReplaceFarmTile($07, 352, 496)                  ;B5B3DE
+    %AICMD0x58_ReplaceFarmTile($07, 368, 496)                  ;B5B3E4
+    %AICMD0x58_ReplaceFarmTile($07, 384, 496)                  ;B5B3EA
+    %AICMD0x58_ReplaceFarmTile($07, 352, 512)                  ;B5B3F0
+    %AICMD0x58_ReplaceFarmTile($07, 368, 512)                  ;B5B3F6
+    %AICMD0x58_ReplaceFarmTile($07, 384, 512)                  ;B5B3FC
+    %AICMD0x58_ReplaceFarmTile($07, 352, 528)                  ;B5B402
+    %AICMD0x58_ReplaceFarmTile($07, 368, 528)                  ;B5B408
+    %AICMD0x58_ReplaceFarmTile($07, 384, 528)                  ;B5B40E
+    %AICMD0x58_ReplaceFarmTile($70, 416, 496)                  ;B5B414
+    %AICMD0x58_ReplaceFarmTile($70, 432, 496)                  ;B5B41A
+    %AICMD0x58_ReplaceFarmTile($70, 448, 496)                  ;B5B420
+    %AICMD0x58_ReplaceFarmTile($70, 416, 512)                  ;B5B426
+    %AICMD0x58_ReplaceFarmTile($70, 432, 512)                  ;B5B42C
+    %AICMD0x58_ReplaceFarmTile($70, 448, 512)                  ;B5B432
+    %AICMD0x58_ReplaceFarmTile($70, 416, 528)                  ;B5B438
+    %AICMD0x58_ReplaceFarmTile($70, 432, 528)                  ;B5B43E
+    %AICMD0x58_ReplaceFarmTile($70, 448, 528)                  ;B5B444
     %AICMD0x47_SetValue8($800921, 8)                           ;B5B44A
     %AICMD0x47_SetValue8($800923, 16)                          ;B5B44F
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5B454
@@ -3207,7 +3207,7 @@ DATA8_B5B2B8:
     %AICMD0x02_FreezeTime()                                    ;B5B45C
     %AICMD0x03_SetHour($07)                                    ;B5B45D
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5B45F
-    %AICMD0x08()                                               ;B5B464
+    %AICMD0x08_EnableAIControl()                               ;B5B464
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B465
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B467
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5B46C
@@ -3268,73 +3268,73 @@ DATA8_B5B2B8:
 
 DATA8_B5B501:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5B501
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5B507
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5B50D
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5B513
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5B519
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5B51F
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5B525
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5B52B
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5B531
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5B537
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5B53D
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5B543
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5B549
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5B54F
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5B555
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5B55B
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5B561
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5B567
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5B56D
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5B573
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5B579
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5B57F
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5B585
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5B58B
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5B591
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5B597
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5B59D
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5B5A3
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5B5A9
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5B5AF
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5B5B5
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5B5BB
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5B5C1
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5B5C7
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5B5CD
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5B5D3
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5B5D9
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5B5DF
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5B5E5
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5B5EB
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5B5F1
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5B5F7
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5B5FD
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5B603
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5B609
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5B60F
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5B615
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5B61B
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5B621
-    %AICMD0x58_ReplaceFarmTile($6E, $0160, $01F0)              ;B5B627
-    %AICMD0x58_ReplaceFarmTile($6E, $0170, $01F0)              ;B5B62D
-    %AICMD0x58_ReplaceFarmTile($6E, $0180, $01F0)              ;B5B633
-    %AICMD0x58_ReplaceFarmTile($6E, $0160, $0200)              ;B5B639
-    %AICMD0x58_ReplaceFarmTile($6A, $0170, $0200)              ;B5B63F
-    %AICMD0x58_ReplaceFarmTile($6E, $0180, $0200)              ;B5B645
-    %AICMD0x58_ReplaceFarmTile($6E, $0160, $0210)              ;B5B64B
-    %AICMD0x58_ReplaceFarmTile($6E, $0170, $0210)              ;B5B651
-    %AICMD0x58_ReplaceFarmTile($6E, $0180, $0210)              ;B5B657
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $01F0)              ;B5B65D
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $01F0)              ;B5B663
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $01F0)              ;B5B669
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0200)              ;B5B66F
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0200)              ;B5B675
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0200)              ;B5B67B
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0210)              ;B5B681
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0210)              ;B5B687
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0210)              ;B5B68D
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B501
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5B507
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5B50D
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5B513
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5B519
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5B51F
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5B525
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5B52B
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5B531
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5B537
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5B53D
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5B543
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5B549
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5B54F
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5B555
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5B55B
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5B561
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5B567
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5B56D
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5B573
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5B579
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5B57F
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5B585
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5B58B
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5B591
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5B597
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5B59D
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5B5A3
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5B5A9
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5B5AF
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5B5B5
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5B5BB
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5B5C1
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5B5C7
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5B5CD
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5B5D3
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5B5D9
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5B5DF
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5B5E5
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5B5EB
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5B5F1
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5B5F7
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5B5FD
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5B603
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5B609
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5B60F
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5B615
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5B61B
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5B621
+    %AICMD0x58_ReplaceFarmTile($6E, 352, 496)                  ;B5B627
+    %AICMD0x58_ReplaceFarmTile($6E, 368, 496)                  ;B5B62D
+    %AICMD0x58_ReplaceFarmTile($6E, 384, 496)                  ;B5B633
+    %AICMD0x58_ReplaceFarmTile($6E, 352, 512)                  ;B5B639
+    %AICMD0x58_ReplaceFarmTile($6A, 368, 512)                  ;B5B63F
+    %AICMD0x58_ReplaceFarmTile($6E, 384, 512)                  ;B5B645
+    %AICMD0x58_ReplaceFarmTile($6E, 352, 528)                  ;B5B64B
+    %AICMD0x58_ReplaceFarmTile($6E, 368, 528)                  ;B5B651
+    %AICMD0x58_ReplaceFarmTile($6E, 384, 528)                  ;B5B657
+    %AICMD0x58_ReplaceFarmTile($79, 416, 496)                  ;B5B65D
+    %AICMD0x58_ReplaceFarmTile($79, 432, 496)                  ;B5B663
+    %AICMD0x58_ReplaceFarmTile($79, 448, 496)                  ;B5B669
+    %AICMD0x58_ReplaceFarmTile($79, 416, 512)                  ;B5B66F
+    %AICMD0x58_ReplaceFarmTile($79, 432, 512)                  ;B5B675
+    %AICMD0x58_ReplaceFarmTile($79, 448, 512)                  ;B5B67B
+    %AICMD0x58_ReplaceFarmTile($79, 416, 528)                  ;B5B681
+    %AICMD0x58_ReplaceFarmTile($79, 432, 528)                  ;B5B687
+    %AICMD0x58_ReplaceFarmTile($79, 448, 528)                  ;B5B68D
     %AICMD0x47_SetValue8($800921, 0)                           ;B5B693
     %AICMD0x47_SetValue8($800923, 0)                           ;B5B698
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5B69D
@@ -3342,7 +3342,7 @@ DATA8_B5B501:
     %AICMD0x02_FreezeTime()                                    ;B5B6A5
     %AICMD0x03_SetHour($07)                                    ;B5B6A6
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B5B6A8
-    %AICMD0x08()                                               ;B5B6AD
+    %AICMD0x08_EnableAIControl()                               ;B5B6AD
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B6AE
     %AICMD0x09($01, $B5B7DC)                                   ;B5B6B0
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5B6B4
@@ -3476,7 +3476,7 @@ DATA8_B5B834:
     %AICMD0x02_FreezeTime()                                    ;B5B83C
     %AICMD0x03_SetHour($07)                                    ;B5B83D
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5B83F
-    %AICMD0x08()                                               ;B5B844
+    %AICMD0x08_EnableAIControl()                               ;B5B844
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B845
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5B847
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B84C
@@ -3499,77 +3499,77 @@ DATA8_B5B834:
 
 DATA8_B5B87B:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5B87B
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5B881
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5B887
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5B88D
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5B893
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5B899
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5B89F
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5B8A5
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5B8AB
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5B8B1
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5B8B7
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5B8BD
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5B8C3
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5B8C9
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5B8CF
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5B8D5
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5B8DB
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5B8E1
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5B8E7
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5B8ED
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5B8F3
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5B8F9
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5B8FF
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5B905
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5B90B
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5B911
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5B917
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5B91D
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5B923
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5B929
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5B92F
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5B935
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5B93B
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5B941
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5B947
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5B94D
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5B953
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5B959
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5B95F
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5B965
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5B96B
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5B971
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5B977
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5B97D
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5B983
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5B989
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5B98F
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5B995
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5B99B
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $01F0)              ;B5B9A1
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $01F0)              ;B5B9A7
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $01F0)              ;B5B9AD
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0200)              ;B5B9B3
-    %AICMD0x58_ReplaceFarmTile($6A, $0170, $0200)              ;B5B9B9
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0200)              ;B5B9BF
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0210)              ;B5B9C5
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0210)              ;B5B9CB
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0210)              ;B5B9D1
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $01F0)              ;B5B9D7
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $01F0)              ;B5B9DD
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $01F0)              ;B5B9E3
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0200)              ;B5B9E9
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0200)              ;B5B9EF
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0200)              ;B5B9F5
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0210)              ;B5B9FB
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0210)              ;B5BA01
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0210)              ;B5BA07
-    %AICMD0x58_ReplaceFarmTile($02, $00B0, $01D0)              ;B5BA0D
-    %AICMD0x58_ReplaceFarmTile($02, $00C0, $01E0)              ;B5BA13
-    %AICMD0x58_ReplaceFarmTile($04, $00C0, $01B0)              ;B5BA19
-    %AICMD0x58_ReplaceFarmTile($04, $00D0, $01B0)              ;B5BA1F
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B87B
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5B881
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5B887
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5B88D
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5B893
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5B899
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5B89F
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5B8A5
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5B8AB
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5B8B1
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5B8B7
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5B8BD
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5B8C3
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5B8C9
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5B8CF
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5B8D5
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5B8DB
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5B8E1
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5B8E7
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5B8ED
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5B8F3
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5B8F9
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5B8FF
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5B905
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5B90B
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5B911
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5B917
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5B91D
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5B923
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5B929
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5B92F
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5B935
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5B93B
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5B941
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5B947
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5B94D
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5B953
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5B959
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5B95F
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5B965
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5B96B
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5B971
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5B977
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5B97D
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5B983
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5B989
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5B98F
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5B995
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5B99B
+    %AICMD0x58_ReplaceFarmTile($07, 352, 496)                  ;B5B9A1
+    %AICMD0x58_ReplaceFarmTile($07, 368, 496)                  ;B5B9A7
+    %AICMD0x58_ReplaceFarmTile($07, 384, 496)                  ;B5B9AD
+    %AICMD0x58_ReplaceFarmTile($07, 352, 512)                  ;B5B9B3
+    %AICMD0x58_ReplaceFarmTile($6A, 368, 512)                  ;B5B9B9
+    %AICMD0x58_ReplaceFarmTile($07, 384, 512)                  ;B5B9BF
+    %AICMD0x58_ReplaceFarmTile($07, 352, 528)                  ;B5B9C5
+    %AICMD0x58_ReplaceFarmTile($07, 368, 528)                  ;B5B9CB
+    %AICMD0x58_ReplaceFarmTile($07, 384, 528)                  ;B5B9D1
+    %AICMD0x58_ReplaceFarmTile($79, 416, 496)                  ;B5B9D7
+    %AICMD0x58_ReplaceFarmTile($79, 432, 496)                  ;B5B9DD
+    %AICMD0x58_ReplaceFarmTile($79, 448, 496)                  ;B5B9E3
+    %AICMD0x58_ReplaceFarmTile($79, 416, 512)                  ;B5B9E9
+    %AICMD0x58_ReplaceFarmTile($79, 432, 512)                  ;B5B9EF
+    %AICMD0x58_ReplaceFarmTile($79, 448, 512)                  ;B5B9F5
+    %AICMD0x58_ReplaceFarmTile($79, 416, 528)                  ;B5B9FB
+    %AICMD0x58_ReplaceFarmTile($79, 432, 528)                  ;B5BA01
+    %AICMD0x58_ReplaceFarmTile($79, 448, 528)                  ;B5BA07
+    %AICMD0x58_ReplaceFarmTile($02, 176, 464)                  ;B5BA0D
+    %AICMD0x58_ReplaceFarmTile($02, 192, 480)                  ;B5BA13
+    %AICMD0x58_ReplaceFarmTile($04, 192, 432)                  ;B5BA19
+    %AICMD0x58_ReplaceFarmTile($04, 208, 432)                  ;B5BA1F
     %AICMD0x47_SetValue8($800921, 1)                           ;B5BA25
     %AICMD0x47_SetValue8($800923, 18)                          ;B5BA2A
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5BA2F
@@ -3577,7 +3577,7 @@ DATA8_B5B87B:
     %AICMD0x02_FreezeTime()                                    ;B5BA37
     %AICMD0x03_SetHour($07)                                    ;B5BA38
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5BA3A
-    %AICMD0x08()                                               ;B5BA3F
+    %AICMD0x08_EnableAIControl()                               ;B5BA3F
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BA40
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BA42
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5BA47
@@ -3744,7 +3744,7 @@ DATA8_B5BBFA:
     %AICMD0x02_FreezeTime()                                    ;B5BC02
     %AICMD0x03_SetHour($07)                                    ;B5BC03
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5BC05
-    %AICMD0x08()                                               ;B5BC0A
+    %AICMD0x08_EnableAIControl()                               ;B5BC0A
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BC0B
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BC0D
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5BC12
@@ -3769,103 +3769,103 @@ DATA8_B5BBFA:
 
 DATA8_B5BC45:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5BC45
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5BC4B
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5BC51
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5BC57
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5BC5D
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5BC63
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5BC69
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5BC6F
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5BC75
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5BC7B
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5BC81
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5BC87
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5BC8D
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5BC93
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5BC99
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5BC9F
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5BCA5
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5BCAB
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5BCB1
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5BCB7
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5BCBD
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5BCC3
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5BCC9
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5BCCF
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5BCD5
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5BCDB
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5BCE1
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5BCE7
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5BCED
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5BCF3
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5BCF9
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5BCFF
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5BD05
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5BD0B
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5BD11
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5BD17
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5BD1D
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5BD23
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5BD29
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5BD2F
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5BD35
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5BD3B
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5BD41
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5BD47
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5BD4D
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5BD53
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5BD59
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5BD5F
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5BD65
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $01F0)              ;B5BD6B
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $01F0)              ;B5BD71
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $01F0)              ;B5BD77
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0200)              ;B5BD7D
-    %AICMD0x58_ReplaceFarmTile($6A, $0170, $0200)              ;B5BD83
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0200)              ;B5BD89
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0210)              ;B5BD8F
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0210)              ;B5BD95
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0210)              ;B5BD9B
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $01F0)              ;B5BDA1
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $01F0)              ;B5BDA7
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $01F0)              ;B5BDAD
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0200)              ;B5BDB3
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0200)              ;B5BDB9
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0200)              ;B5BDBF
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0210)              ;B5BDC5
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0210)              ;B5BDCB
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0210)              ;B5BDD1
-    %AICMD0x58_ReplaceFarmTile($02, $00B0, $01D0)              ;B5BDD7
-    %AICMD0x58_ReplaceFarmTile($02, $00C0, $01E0)              ;B5BDDD
-    %AICMD0x58_ReplaceFarmTile($04, $00C0, $01B0)              ;B5BDE3
-    %AICMD0x58_ReplaceFarmTile($04, $00D0, $01B0)              ;B5BDE9
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $01F0)              ;B5BDEF
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0200)              ;B5BDF5
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0210)              ;B5BDFB
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0220)              ;B5BE01
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0230)              ;B5BE07
-    %AICMD0x58_ReplaceFarmTile($05, $00E0, $0230)              ;B5BE0D
-    %AICMD0x58_ReplaceFarmTile($05, $00F0, $0230)              ;B5BE13
-    %AICMD0x58_ReplaceFarmTile($05, $0100, $0230)              ;B5BE19
-    %AICMD0x58_ReplaceFarmTile($05, $0110, $0230)              ;B5BE1F
-    %AICMD0x58_ReplaceFarmTile($05, $0120, $0230)              ;B5BE25
-    %AICMD0x58_ReplaceFarmTile($05, $0130, $0230)              ;B5BE2B
-    %AICMD0x58_ReplaceFarmTile($07, $00F0, $01F0)              ;B5BE31
-    %AICMD0x58_ReplaceFarmTile($07, $0100, $01F0)              ;B5BE37
-    %AICMD0x58_ReplaceFarmTile($07, $0110, $01F0)              ;B5BE3D
-    %AICMD0x58_ReplaceFarmTile($07, $0120, $01F0)              ;B5BE43
-    %AICMD0x58_ReplaceFarmTile($07, $0130, $01F0)              ;B5BE49
-    %AICMD0x58_ReplaceFarmTile($07, $0140, $01F0)              ;B5BE4F
-    %AICMD0x58_ReplaceFarmTile($07, $00F0, $0210)              ;B5BE55
-    %AICMD0x58_ReplaceFarmTile($07, $0100, $0210)              ;B5BE5B
-    %AICMD0x58_ReplaceFarmTile($07, $0110, $0210)              ;B5BE61
-    %AICMD0x58_ReplaceFarmTile($07, $0120, $0210)              ;B5BE67
-    %AICMD0x58_ReplaceFarmTile($07, $0130, $0210)              ;B5BE6D
-    %AICMD0x58_ReplaceFarmTile($07, $0140, $0210)              ;B5BE73
-    %AICMD0x58_ReplaceFarmTile($02, $00E0, $01F0)              ;B5BE79
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $0200)              ;B5BE7F
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $0220)              ;B5BE85
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5BC45
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5BC4B
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5BC51
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5BC57
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5BC5D
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5BC63
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5BC69
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5BC6F
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5BC75
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5BC7B
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5BC81
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5BC87
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5BC8D
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5BC93
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5BC99
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5BC9F
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5BCA5
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5BCAB
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5BCB1
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5BCB7
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5BCBD
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5BCC3
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5BCC9
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5BCCF
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5BCD5
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5BCDB
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5BCE1
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5BCE7
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5BCED
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5BCF3
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5BCF9
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5BCFF
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5BD05
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5BD0B
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5BD11
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5BD17
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5BD1D
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5BD23
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5BD29
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5BD2F
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5BD35
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5BD3B
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5BD41
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5BD47
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5BD4D
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5BD53
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5BD59
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5BD5F
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5BD65
+    %AICMD0x58_ReplaceFarmTile($07, 352, 496)                  ;B5BD6B
+    %AICMD0x58_ReplaceFarmTile($07, 368, 496)                  ;B5BD71
+    %AICMD0x58_ReplaceFarmTile($07, 384, 496)                  ;B5BD77
+    %AICMD0x58_ReplaceFarmTile($07, 352, 512)                  ;B5BD7D
+    %AICMD0x58_ReplaceFarmTile($6A, 368, 512)                  ;B5BD83
+    %AICMD0x58_ReplaceFarmTile($07, 384, 512)                  ;B5BD89
+    %AICMD0x58_ReplaceFarmTile($07, 352, 528)                  ;B5BD8F
+    %AICMD0x58_ReplaceFarmTile($07, 368, 528)                  ;B5BD95
+    %AICMD0x58_ReplaceFarmTile($07, 384, 528)                  ;B5BD9B
+    %AICMD0x58_ReplaceFarmTile($79, 416, 496)                  ;B5BDA1
+    %AICMD0x58_ReplaceFarmTile($79, 432, 496)                  ;B5BDA7
+    %AICMD0x58_ReplaceFarmTile($79, 448, 496)                  ;B5BDAD
+    %AICMD0x58_ReplaceFarmTile($79, 416, 512)                  ;B5BDB3
+    %AICMD0x58_ReplaceFarmTile($79, 432, 512)                  ;B5BDB9
+    %AICMD0x58_ReplaceFarmTile($79, 448, 512)                  ;B5BDBF
+    %AICMD0x58_ReplaceFarmTile($79, 416, 528)                  ;B5BDC5
+    %AICMD0x58_ReplaceFarmTile($79, 432, 528)                  ;B5BDCB
+    %AICMD0x58_ReplaceFarmTile($79, 448, 528)                  ;B5BDD1
+    %AICMD0x58_ReplaceFarmTile($02, 176, 464)                  ;B5BDD7
+    %AICMD0x58_ReplaceFarmTile($02, 192, 480)                  ;B5BDDD
+    %AICMD0x58_ReplaceFarmTile($04, 192, 432)                  ;B5BDE3
+    %AICMD0x58_ReplaceFarmTile($04, 208, 432)                  ;B5BDE9
+    %AICMD0x58_ReplaceFarmTile($05, 208, 496)                  ;B5BDEF
+    %AICMD0x58_ReplaceFarmTile($05, 208, 512)                  ;B5BDF5
+    %AICMD0x58_ReplaceFarmTile($05, 208, 528)                  ;B5BDFB
+    %AICMD0x58_ReplaceFarmTile($05, 208, 544)                  ;B5BE01
+    %AICMD0x58_ReplaceFarmTile($05, 208, 560)                  ;B5BE07
+    %AICMD0x58_ReplaceFarmTile($05, 224, 560)                  ;B5BE0D
+    %AICMD0x58_ReplaceFarmTile($05, 240, 560)                  ;B5BE13
+    %AICMD0x58_ReplaceFarmTile($05, 256, 560)                  ;B5BE19
+    %AICMD0x58_ReplaceFarmTile($05, 272, 560)                  ;B5BE1F
+    %AICMD0x58_ReplaceFarmTile($05, 288, 560)                  ;B5BE25
+    %AICMD0x58_ReplaceFarmTile($05, 304, 560)                  ;B5BE2B
+    %AICMD0x58_ReplaceFarmTile($07, 240, 496)                  ;B5BE31
+    %AICMD0x58_ReplaceFarmTile($07, 256, 496)                  ;B5BE37
+    %AICMD0x58_ReplaceFarmTile($07, 272, 496)                  ;B5BE3D
+    %AICMD0x58_ReplaceFarmTile($07, 288, 496)                  ;B5BE43
+    %AICMD0x58_ReplaceFarmTile($07, 304, 496)                  ;B5BE49
+    %AICMD0x58_ReplaceFarmTile($07, 320, 496)                  ;B5BE4F
+    %AICMD0x58_ReplaceFarmTile($07, 240, 528)                  ;B5BE55
+    %AICMD0x58_ReplaceFarmTile($07, 256, 528)                  ;B5BE5B
+    %AICMD0x58_ReplaceFarmTile($07, 272, 528)                  ;B5BE61
+    %AICMD0x58_ReplaceFarmTile($07, 288, 528)                  ;B5BE67
+    %AICMD0x58_ReplaceFarmTile($07, 304, 528)                  ;B5BE6D
+    %AICMD0x58_ReplaceFarmTile($07, 320, 528)                  ;B5BE73
+    %AICMD0x58_ReplaceFarmTile($02, 224, 496)                  ;B5BE79
+    %AICMD0x58_ReplaceFarmTile($02, 320, 512)                  ;B5BE7F
+    %AICMD0x58_ReplaceFarmTile($02, 320, 544)                  ;B5BE85
     %AICMD0x47_SetValue8($800921, 5)                           ;B5BE8B
     %AICMD0x47_SetValue8($800923, 6)                           ;B5BE90
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5BE95
@@ -3873,7 +3873,7 @@ DATA8_B5BC45:
     %AICMD0x02_FreezeTime()                                    ;B5BE9D
     %AICMD0x03_SetHour($07)                                    ;B5BE9E
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5BEA0
-    %AICMD0x08()                                               ;B5BEA5
+    %AICMD0x08_EnableAIControl()                               ;B5BEA5
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BEA6
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BEA8
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5BEAD
@@ -3903,7 +3903,7 @@ DATA8_B5BEDE:
     %AICMD0x02_FreezeTime()                                    ;B5BEE6
     %AICMD0x03_SetHour($07)                                    ;B5BEE7
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5BEE9
-    %AICMD0x08()                                               ;B5BEEE
+    %AICMD0x08_EnableAIControl()                               ;B5BEEE
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BEEF
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BEF1
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5BEF6
@@ -3922,103 +3922,103 @@ DATA8_B5BEDE:
 
 DATA8_B5BF1A:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5BF1A
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5BF20
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5BF26
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5BF2C
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5BF32
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5BF38
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5BF3E
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5BF44
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5BF4A
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5BF50
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5BF56
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5BF5C
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5BF62
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5BF68
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5BF6E
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5BF74
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5BF7A
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5BF80
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5BF86
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5BF8C
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5BF92
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5BF98
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5BF9E
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5BFA4
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5BFAA
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5BFB0
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5BFB6
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5BFBC
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5BFC2
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5BFC8
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5BFCE
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5BFD4
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5BFDA
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5BFE0
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5BFE6
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5BFEC
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5BFF2
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5BFF8
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5BFFE
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5C004
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5C00A
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5C010
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5C016
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5C01C
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5C022
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5C028
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5C02E
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5C034
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5C03A
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $01F0)              ;B5C040
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $01F0)              ;B5C046
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $01F0)              ;B5C04C
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0200)              ;B5C052
-    %AICMD0x58_ReplaceFarmTile($6A, $0170, $0200)              ;B5C058
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0200)              ;B5C05E
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0210)              ;B5C064
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0210)              ;B5C06A
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0210)              ;B5C070
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $01F0)              ;B5C076
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $01F0)              ;B5C07C
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $01F0)              ;B5C082
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0200)              ;B5C088
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0200)              ;B5C08E
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0200)              ;B5C094
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0210)              ;B5C09A
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0210)              ;B5C0A0
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0210)              ;B5C0A6
-    %AICMD0x58_ReplaceFarmTile($02, $00B0, $01D0)              ;B5C0AC
-    %AICMD0x58_ReplaceFarmTile($02, $00C0, $01E0)              ;B5C0B2
-    %AICMD0x58_ReplaceFarmTile($04, $00C0, $01B0)              ;B5C0B8
-    %AICMD0x58_ReplaceFarmTile($04, $00D0, $01B0)              ;B5C0BE
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $01F0)              ;B5C0C4
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0200)              ;B5C0CA
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0210)              ;B5C0D0
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0220)              ;B5C0D6
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0230)              ;B5C0DC
-    %AICMD0x58_ReplaceFarmTile($05, $00E0, $0230)              ;B5C0E2
-    %AICMD0x58_ReplaceFarmTile($05, $00F0, $0230)              ;B5C0E8
-    %AICMD0x58_ReplaceFarmTile($05, $0100, $0230)              ;B5C0EE
-    %AICMD0x58_ReplaceFarmTile($05, $0110, $0230)              ;B5C0F4
-    %AICMD0x58_ReplaceFarmTile($05, $0120, $0230)              ;B5C0FA
-    %AICMD0x58_ReplaceFarmTile($05, $0130, $0230)              ;B5C100
-    %AICMD0x58_ReplaceFarmTile($3A, $00F0, $01F0)              ;B5C106
-    %AICMD0x58_ReplaceFarmTile($3A, $0100, $01F0)              ;B5C10C
-    %AICMD0x58_ReplaceFarmTile($3A, $0110, $01F0)              ;B5C112
-    %AICMD0x58_ReplaceFarmTile($26, $0120, $01F0)              ;B5C118
-    %AICMD0x58_ReplaceFarmTile($26, $0130, $01F0)              ;B5C11E
-    %AICMD0x58_ReplaceFarmTile($26, $0140, $01F0)              ;B5C124
-    %AICMD0x58_ReplaceFarmTile($3A, $00F0, $0210)              ;B5C12A
-    %AICMD0x58_ReplaceFarmTile($3A, $0100, $0210)              ;B5C130
-    %AICMD0x58_ReplaceFarmTile($3A, $0110, $0210)              ;B5C136
-    %AICMD0x58_ReplaceFarmTile($26, $0120, $0210)              ;B5C13C
-    %AICMD0x58_ReplaceFarmTile($26, $0130, $0210)              ;B5C142
-    %AICMD0x58_ReplaceFarmTile($26, $0140, $0210)              ;B5C148
-    %AICMD0x58_ReplaceFarmTile($02, $00E0, $01F0)              ;B5C14E
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $0200)              ;B5C154
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $0220)              ;B5C15A
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5BF1A
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5BF20
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5BF26
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5BF2C
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5BF32
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5BF38
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5BF3E
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5BF44
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5BF4A
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5BF50
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5BF56
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5BF5C
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5BF62
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5BF68
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5BF6E
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5BF74
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5BF7A
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5BF80
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5BF86
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5BF8C
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5BF92
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5BF98
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5BF9E
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5BFA4
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5BFAA
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5BFB0
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5BFB6
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5BFBC
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5BFC2
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5BFC8
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5BFCE
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5BFD4
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5BFDA
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5BFE0
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5BFE6
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5BFEC
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5BFF2
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5BFF8
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5BFFE
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5C004
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5C00A
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5C010
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5C016
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5C01C
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5C022
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5C028
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5C02E
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5C034
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5C03A
+    %AICMD0x58_ReplaceFarmTile($07, 352, 496)                  ;B5C040
+    %AICMD0x58_ReplaceFarmTile($07, 368, 496)                  ;B5C046
+    %AICMD0x58_ReplaceFarmTile($07, 384, 496)                  ;B5C04C
+    %AICMD0x58_ReplaceFarmTile($07, 352, 512)                  ;B5C052
+    %AICMD0x58_ReplaceFarmTile($6A, 368, 512)                  ;B5C058
+    %AICMD0x58_ReplaceFarmTile($07, 384, 512)                  ;B5C05E
+    %AICMD0x58_ReplaceFarmTile($07, 352, 528)                  ;B5C064
+    %AICMD0x58_ReplaceFarmTile($07, 368, 528)                  ;B5C06A
+    %AICMD0x58_ReplaceFarmTile($07, 384, 528)                  ;B5C070
+    %AICMD0x58_ReplaceFarmTile($79, 416, 496)                  ;B5C076
+    %AICMD0x58_ReplaceFarmTile($79, 432, 496)                  ;B5C07C
+    %AICMD0x58_ReplaceFarmTile($79, 448, 496)                  ;B5C082
+    %AICMD0x58_ReplaceFarmTile($79, 416, 512)                  ;B5C088
+    %AICMD0x58_ReplaceFarmTile($79, 432, 512)                  ;B5C08E
+    %AICMD0x58_ReplaceFarmTile($79, 448, 512)                  ;B5C094
+    %AICMD0x58_ReplaceFarmTile($79, 416, 528)                  ;B5C09A
+    %AICMD0x58_ReplaceFarmTile($79, 432, 528)                  ;B5C0A0
+    %AICMD0x58_ReplaceFarmTile($79, 448, 528)                  ;B5C0A6
+    %AICMD0x58_ReplaceFarmTile($02, 176, 464)                  ;B5C0AC
+    %AICMD0x58_ReplaceFarmTile($02, 192, 480)                  ;B5C0B2
+    %AICMD0x58_ReplaceFarmTile($04, 192, 432)                  ;B5C0B8
+    %AICMD0x58_ReplaceFarmTile($04, 208, 432)                  ;B5C0BE
+    %AICMD0x58_ReplaceFarmTile($05, 208, 496)                  ;B5C0C4
+    %AICMD0x58_ReplaceFarmTile($05, 208, 512)                  ;B5C0CA
+    %AICMD0x58_ReplaceFarmTile($05, 208, 528)                  ;B5C0D0
+    %AICMD0x58_ReplaceFarmTile($05, 208, 544)                  ;B5C0D6
+    %AICMD0x58_ReplaceFarmTile($05, 208, 560)                  ;B5C0DC
+    %AICMD0x58_ReplaceFarmTile($05, 224, 560)                  ;B5C0E2
+    %AICMD0x58_ReplaceFarmTile($05, 240, 560)                  ;B5C0E8
+    %AICMD0x58_ReplaceFarmTile($05, 256, 560)                  ;B5C0EE
+    %AICMD0x58_ReplaceFarmTile($05, 272, 560)                  ;B5C0F4
+    %AICMD0x58_ReplaceFarmTile($05, 288, 560)                  ;B5C0FA
+    %AICMD0x58_ReplaceFarmTile($05, 304, 560)                  ;B5C100
+    %AICMD0x58_ReplaceFarmTile($3A, 240, 496)                  ;B5C106
+    %AICMD0x58_ReplaceFarmTile($3A, 256, 496)                  ;B5C10C
+    %AICMD0x58_ReplaceFarmTile($3A, 272, 496)                  ;B5C112
+    %AICMD0x58_ReplaceFarmTile($26, 288, 496)                  ;B5C118
+    %AICMD0x58_ReplaceFarmTile($26, 304, 496)                  ;B5C11E
+    %AICMD0x58_ReplaceFarmTile($26, 320, 496)                  ;B5C124
+    %AICMD0x58_ReplaceFarmTile($3A, 240, 528)                  ;B5C12A
+    %AICMD0x58_ReplaceFarmTile($3A, 256, 528)                  ;B5C130
+    %AICMD0x58_ReplaceFarmTile($3A, 272, 528)                  ;B5C136
+    %AICMD0x58_ReplaceFarmTile($26, 288, 528)                  ;B5C13C
+    %AICMD0x58_ReplaceFarmTile($26, 304, 528)                  ;B5C142
+    %AICMD0x58_ReplaceFarmTile($26, 320, 528)                  ;B5C148
+    %AICMD0x58_ReplaceFarmTile($02, 224, 496)                  ;B5C14E
+    %AICMD0x58_ReplaceFarmTile($02, 320, 512)                  ;B5C154
+    %AICMD0x58_ReplaceFarmTile($02, 320, 544)                  ;B5C15A
     %AICMD0x47_SetValue8($800921, 21)                          ;B5C160
     %AICMD0x47_SetValue8($800923, 0)                           ;B5C165
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5C16A
@@ -4026,7 +4026,7 @@ DATA8_B5BF1A:
     %AICMD0x02_FreezeTime()                                    ;B5C172
     %AICMD0x03_SetHour($07)                                    ;B5C173
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5C175
-    %AICMD0x08()                                               ;B5C17A
+    %AICMD0x08_EnableAIControl()                               ;B5C17A
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C17B
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5C17D
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5C182
@@ -4054,103 +4054,103 @@ DATA8_B5BF1A:
 
 DATA8_B5C1BD:
  
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $0210)              ;B5C1BD
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0210)              ;B5C1C3
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0200)              ;B5C1C9
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $0220)              ;B5C1CF
-    %AICMD0x58_ReplaceFarmTile($02, $01E0, $0230)              ;B5C1D5
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0240)              ;B5C1DB
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $0240)              ;B5C1E1
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0250)              ;B5C1E7
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0220)              ;B5C1ED
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0220)              ;B5C1F3
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0230)              ;B5C1F9
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0230)              ;B5C1FF
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0240)              ;B5C205
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0240)              ;B5C20B
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $0250)              ;B5C211
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $0250)              ;B5C217
-    %AICMD0x58_ReplaceFarmTile($02, $01D0, $01F0)              ;B5C21D
-    %AICMD0x58_ReplaceFarmTile($02, $01C0, $01F0)              ;B5C223
-    %AICMD0x58_ReplaceFarmTile($02, $01B0, $01F0)              ;B5C229
-    %AICMD0x58_ReplaceFarmTile($02, $01A0, $01F0)              ;B5C22F
-    %AICMD0x58_ReplaceFarmTile($02, $0190, $01F0)              ;B5C235
-    %AICMD0x58_ReplaceFarmTile($02, $0180, $01F0)              ;B5C23B
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $01F0)              ;B5C241
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $01F0)              ;B5C247
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $01F0)              ;B5C24D
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01F0)              ;B5C253
-    %AICMD0x58_ReplaceFarmTile($05, $01D0, $0230)              ;B5C259
-    %AICMD0x58_ReplaceFarmTile($05, $01C0, $0230)              ;B5C25F
-    %AICMD0x58_ReplaceFarmTile($05, $01B0, $0230)              ;B5C265
-    %AICMD0x58_ReplaceFarmTile($05, $01A0, $0230)              ;B5C26B
-    %AICMD0x58_ReplaceFarmTile($05, $0190, $0230)              ;B5C271
-    %AICMD0x58_ReplaceFarmTile($05, $0180, $0230)              ;B5C277
-    %AICMD0x58_ReplaceFarmTile($05, $0170, $0230)              ;B5C27D
-    %AICMD0x58_ReplaceFarmTile($05, $0160, $0230)              ;B5C283
-    %AICMD0x58_ReplaceFarmTile($05, $0150, $0230)              ;B5C289
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0230)              ;B5C28F
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0220)              ;B5C295
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0210)              ;B5C29B
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $0200)              ;B5C2A1
-    %AICMD0x58_ReplaceFarmTile($05, $0140, $01F0)              ;B5C2A7
-    %AICMD0x58_ReplaceFarmTile($02, $0150, $0200)              ;B5C2AD
-    %AICMD0x58_ReplaceFarmTile($02, $0160, $0200)              ;B5C2B3
-    %AICMD0x58_ReplaceFarmTile($02, $0170, $0200)              ;B5C2B9
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01A0)              ;B5C2BF
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $01B0)              ;B5C2C5
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01C0)              ;B5C2CB
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01C0)              ;B5C2D1
-    %AICMD0x58_ReplaceFarmTile($02, $0120, $01D0)              ;B5C2D7
-    %AICMD0x58_ReplaceFarmTile($02, $0130, $01D0)              ;B5C2DD
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $01F0)              ;B5C2E3
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $01F0)              ;B5C2E9
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $01F0)              ;B5C2EF
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0200)              ;B5C2F5
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0200)              ;B5C2FB
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0200)              ;B5C301
-    %AICMD0x58_ReplaceFarmTile($07, $0160, $0210)              ;B5C307
-    %AICMD0x58_ReplaceFarmTile($07, $0170, $0210)              ;B5C30D
-    %AICMD0x58_ReplaceFarmTile($07, $0180, $0210)              ;B5C313
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $01F0)              ;B5C319
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $01F0)              ;B5C31F
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $01F0)              ;B5C325
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0200)              ;B5C32B
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0200)              ;B5C331
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0200)              ;B5C337
-    %AICMD0x58_ReplaceFarmTile($79, $01A0, $0210)              ;B5C33D
-    %AICMD0x58_ReplaceFarmTile($79, $01B0, $0210)              ;B5C343
-    %AICMD0x58_ReplaceFarmTile($79, $01C0, $0210)              ;B5C349
-    %AICMD0x58_ReplaceFarmTile($02, $00B0, $01D0)              ;B5C34F
-    %AICMD0x58_ReplaceFarmTile($02, $00C0, $01E0)              ;B5C355
-    %AICMD0x58_ReplaceFarmTile($04, $00C0, $01B0)              ;B5C35B
-    %AICMD0x58_ReplaceFarmTile($04, $00D0, $01B0)              ;B5C361
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $01F0)              ;B5C367
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0200)              ;B5C36D
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0210)              ;B5C373
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0220)              ;B5C379
-    %AICMD0x58_ReplaceFarmTile($05, $00D0, $0230)              ;B5C37F
-    %AICMD0x58_ReplaceFarmTile($05, $00E0, $0230)              ;B5C385
-    %AICMD0x58_ReplaceFarmTile($05, $00F0, $0230)              ;B5C38B
-    %AICMD0x58_ReplaceFarmTile($05, $0100, $0230)              ;B5C391
-    %AICMD0x58_ReplaceFarmTile($05, $0110, $0230)              ;B5C397
-    %AICMD0x58_ReplaceFarmTile($05, $0120, $0230)              ;B5C39D
-    %AICMD0x58_ReplaceFarmTile($05, $0130, $0230)              ;B5C3A3
-    %AICMD0x58_ReplaceFarmTile($07, $00F0, $01F0)              ;B5C3A9
-    %AICMD0x58_ReplaceFarmTile($07, $0100, $01F0)              ;B5C3AF
-    %AICMD0x58_ReplaceFarmTile($07, $0110, $01F0)              ;B5C3B5
-    %AICMD0x58_ReplaceFarmTile($07, $0120, $01F0)              ;B5C3BB
-    %AICMD0x58_ReplaceFarmTile($07, $0130, $01F0)              ;B5C3C1
-    %AICMD0x58_ReplaceFarmTile($07, $0140, $01F0)              ;B5C3C7
-    %AICMD0x58_ReplaceFarmTile($07, $00F0, $0210)              ;B5C3CD
-    %AICMD0x58_ReplaceFarmTile($07, $0100, $0210)              ;B5C3D3
-    %AICMD0x58_ReplaceFarmTile($07, $0110, $0210)              ;B5C3D9
-    %AICMD0x58_ReplaceFarmTile($07, $0120, $0210)              ;B5C3DF
-    %AICMD0x58_ReplaceFarmTile($07, $0130, $0210)              ;B5C3E5
-    %AICMD0x58_ReplaceFarmTile($07, $0140, $0210)              ;B5C3EB
-    %AICMD0x58_ReplaceFarmTile($02, $00E0, $01F0)              ;B5C3F1
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $0200)              ;B5C3F7
-    %AICMD0x58_ReplaceFarmTile($02, $0140, $0220)              ;B5C3FD
+    %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5C1BD
+    %AICMD0x58_ReplaceFarmTile($02, 464, 528)                  ;B5C1C3
+    %AICMD0x58_ReplaceFarmTile($02, 464, 512)                  ;B5C1C9
+    %AICMD0x58_ReplaceFarmTile($02, 464, 544)                  ;B5C1CF
+    %AICMD0x58_ReplaceFarmTile($02, 480, 560)                  ;B5C1D5
+    %AICMD0x58_ReplaceFarmTile($02, 368, 576)                  ;B5C1DB
+    %AICMD0x58_ReplaceFarmTile($02, 384, 576)                  ;B5C1E1
+    %AICMD0x58_ReplaceFarmTile($02, 368, 592)                  ;B5C1E7
+    %AICMD0x58_ReplaceFarmTile($02, 352, 544)                  ;B5C1ED
+    %AICMD0x58_ReplaceFarmTile($02, 368, 544)                  ;B5C1F3
+    %AICMD0x58_ReplaceFarmTile($02, 352, 560)                  ;B5C1F9
+    %AICMD0x58_ReplaceFarmTile($02, 368, 560)                  ;B5C1FF
+    %AICMD0x58_ReplaceFarmTile($02, 416, 576)                  ;B5C205
+    %AICMD0x58_ReplaceFarmTile($02, 432, 576)                  ;B5C20B
+    %AICMD0x58_ReplaceFarmTile($02, 416, 592)                  ;B5C211
+    %AICMD0x58_ReplaceFarmTile($02, 432, 592)                  ;B5C217
+    %AICMD0x58_ReplaceFarmTile($02, 464, 496)                  ;B5C21D
+    %AICMD0x58_ReplaceFarmTile($02, 448, 496)                  ;B5C223
+    %AICMD0x58_ReplaceFarmTile($02, 432, 496)                  ;B5C229
+    %AICMD0x58_ReplaceFarmTile($02, 416, 496)                  ;B5C22F
+    %AICMD0x58_ReplaceFarmTile($02, 400, 496)                  ;B5C235
+    %AICMD0x58_ReplaceFarmTile($02, 384, 496)                  ;B5C23B
+    %AICMD0x58_ReplaceFarmTile($02, 368, 496)                  ;B5C241
+    %AICMD0x58_ReplaceFarmTile($02, 352, 496)                  ;B5C247
+    %AICMD0x58_ReplaceFarmTile($02, 336, 496)                  ;B5C24D
+    %AICMD0x58_ReplaceFarmTile($02, 320, 496)                  ;B5C253
+    %AICMD0x58_ReplaceFarmTile($05, 464, 560)                  ;B5C259
+    %AICMD0x58_ReplaceFarmTile($05, 448, 560)                  ;B5C25F
+    %AICMD0x58_ReplaceFarmTile($05, 432, 560)                  ;B5C265
+    %AICMD0x58_ReplaceFarmTile($05, 416, 560)                  ;B5C26B
+    %AICMD0x58_ReplaceFarmTile($05, 400, 560)                  ;B5C271
+    %AICMD0x58_ReplaceFarmTile($05, 384, 560)                  ;B5C277
+    %AICMD0x58_ReplaceFarmTile($05, 368, 560)                  ;B5C27D
+    %AICMD0x58_ReplaceFarmTile($05, 352, 560)                  ;B5C283
+    %AICMD0x58_ReplaceFarmTile($05, 336, 560)                  ;B5C289
+    %AICMD0x58_ReplaceFarmTile($05, 320, 560)                  ;B5C28F
+    %AICMD0x58_ReplaceFarmTile($05, 320, 544)                  ;B5C295
+    %AICMD0x58_ReplaceFarmTile($05, 320, 528)                  ;B5C29B
+    %AICMD0x58_ReplaceFarmTile($05, 320, 512)                  ;B5C2A1
+    %AICMD0x58_ReplaceFarmTile($05, 320, 496)                  ;B5C2A7
+    %AICMD0x58_ReplaceFarmTile($02, 336, 512)                  ;B5C2AD
+    %AICMD0x58_ReplaceFarmTile($02, 352, 512)                  ;B5C2B3
+    %AICMD0x58_ReplaceFarmTile($02, 368, 512)                  ;B5C2B9
+    %AICMD0x58_ReplaceFarmTile($02, 320, 416)                  ;B5C2BF
+    %AICMD0x58_ReplaceFarmTile($02, 320, 432)                  ;B5C2C5
+    %AICMD0x58_ReplaceFarmTile($02, 288, 448)                  ;B5C2CB
+    %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5C2D1
+    %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5C2D7
+    %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5C2DD
+    %AICMD0x58_ReplaceFarmTile($07, 352, 496)                  ;B5C2E3
+    %AICMD0x58_ReplaceFarmTile($07, 368, 496)                  ;B5C2E9
+    %AICMD0x58_ReplaceFarmTile($07, 384, 496)                  ;B5C2EF
+    %AICMD0x58_ReplaceFarmTile($07, 352, 512)                  ;B5C2F5
+    %AICMD0x58_ReplaceFarmTile($07, 368, 512)                  ;B5C2FB
+    %AICMD0x58_ReplaceFarmTile($07, 384, 512)                  ;B5C301
+    %AICMD0x58_ReplaceFarmTile($07, 352, 528)                  ;B5C307
+    %AICMD0x58_ReplaceFarmTile($07, 368, 528)                  ;B5C30D
+    %AICMD0x58_ReplaceFarmTile($07, 384, 528)                  ;B5C313
+    %AICMD0x58_ReplaceFarmTile($79, 416, 496)                  ;B5C319
+    %AICMD0x58_ReplaceFarmTile($79, 432, 496)                  ;B5C31F
+    %AICMD0x58_ReplaceFarmTile($79, 448, 496)                  ;B5C325
+    %AICMD0x58_ReplaceFarmTile($79, 416, 512)                  ;B5C32B
+    %AICMD0x58_ReplaceFarmTile($79, 432, 512)                  ;B5C331
+    %AICMD0x58_ReplaceFarmTile($79, 448, 512)                  ;B5C337
+    %AICMD0x58_ReplaceFarmTile($79, 416, 528)                  ;B5C33D
+    %AICMD0x58_ReplaceFarmTile($79, 432, 528)                  ;B5C343
+    %AICMD0x58_ReplaceFarmTile($79, 448, 528)                  ;B5C349
+    %AICMD0x58_ReplaceFarmTile($02, 176, 464)                  ;B5C34F
+    %AICMD0x58_ReplaceFarmTile($02, 192, 480)                  ;B5C355
+    %AICMD0x58_ReplaceFarmTile($04, 192, 432)                  ;B5C35B
+    %AICMD0x58_ReplaceFarmTile($04, 208, 432)                  ;B5C361
+    %AICMD0x58_ReplaceFarmTile($05, 208, 496)                  ;B5C367
+    %AICMD0x58_ReplaceFarmTile($05, 208, 512)                  ;B5C36D
+    %AICMD0x58_ReplaceFarmTile($05, 208, 528)                  ;B5C373
+    %AICMD0x58_ReplaceFarmTile($05, 208, 544)                  ;B5C379
+    %AICMD0x58_ReplaceFarmTile($05, 208, 560)                  ;B5C37F
+    %AICMD0x58_ReplaceFarmTile($05, 224, 560)                  ;B5C385
+    %AICMD0x58_ReplaceFarmTile($05, 240, 560)                  ;B5C38B
+    %AICMD0x58_ReplaceFarmTile($05, 256, 560)                  ;B5C391
+    %AICMD0x58_ReplaceFarmTile($05, 272, 560)                  ;B5C397
+    %AICMD0x58_ReplaceFarmTile($05, 288, 560)                  ;B5C39D
+    %AICMD0x58_ReplaceFarmTile($05, 304, 560)                  ;B5C3A3
+    %AICMD0x58_ReplaceFarmTile($07, 240, 496)                  ;B5C3A9
+    %AICMD0x58_ReplaceFarmTile($07, 256, 496)                  ;B5C3AF
+    %AICMD0x58_ReplaceFarmTile($07, 272, 496)                  ;B5C3B5
+    %AICMD0x58_ReplaceFarmTile($07, 288, 496)                  ;B5C3BB
+    %AICMD0x58_ReplaceFarmTile($07, 304, 496)                  ;B5C3C1
+    %AICMD0x58_ReplaceFarmTile($07, 320, 496)                  ;B5C3C7
+    %AICMD0x58_ReplaceFarmTile($07, 240, 528)                  ;B5C3CD
+    %AICMD0x58_ReplaceFarmTile($07, 256, 528)                  ;B5C3D3
+    %AICMD0x58_ReplaceFarmTile($07, 272, 528)                  ;B5C3D9
+    %AICMD0x58_ReplaceFarmTile($07, 288, 528)                  ;B5C3DF
+    %AICMD0x58_ReplaceFarmTile($07, 304, 528)                  ;B5C3E5
+    %AICMD0x58_ReplaceFarmTile($07, 320, 528)                  ;B5C3EB
+    %AICMD0x58_ReplaceFarmTile($02, 224, 496)                  ;B5C3F1
+    %AICMD0x58_ReplaceFarmTile($02, 320, 512)                  ;B5C3F7
+    %AICMD0x58_ReplaceFarmTile($02, 320, 544)                  ;B5C3FD
     %AICMD0x47_SetValue8($800921, 0)                           ;B5C403
     %AICMD0x47_SetValue8($800923, 0)                           ;B5C408
     %AICMD0x23_OrWithIndexedValue(strcDailyFlags.flags4, $06)  ;B5C40D
@@ -4158,7 +4158,7 @@ DATA8_B5C1BD:
     %AICMD0x02_FreezeTime()                                    ;B5C415
     %AICMD0x03_SetHour($07)                                    ;B5C416
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B5C418
-    %AICMD0x08()                                               ;B5C41D
+    %AICMD0x08_EnableAIControl()                               ;B5C41D
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C41E
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C420
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C425
@@ -4179,7 +4179,7 @@ DATA8_B5C442:
     %AICMD0x02_FreezeTime()                                    ;B5C44A
     %AICMD0x03_SetHour($07)                                    ;B5C44B
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5C44D
-    %AICMD0x08()                                               ;B5C452
+    %AICMD0x08_EnableAIControl()                               ;B5C452
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C453
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C455
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5C45A
@@ -4207,7 +4207,7 @@ DATA8_B5C489:
     %AICMD0x02_FreezeTime()                                    ;B5C491
     %AICMD0x03_SetHour($07)                                    ;B5C492
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5C494
-    %AICMD0x08()                                               ;B5C499
+    %AICMD0x08_EnableAIControl()                               ;B5C499
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C49A
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C49C
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C4A1
@@ -4229,7 +4229,7 @@ DATA8_B5C4BA:
     %AICMD0x02_FreezeTime()                                    ;B5C4CC
     %AICMD0x03_SetHour($07)                                    ;B5C4CD
     %AICMD0x05_SetTransferPosition(128, 360)                   ;B5C4CF
-    %AICMD0x08()                                               ;B5C4D4
+    %AICMD0x08_EnableAIControl()                               ;B5C4D4
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C4D5
     %AICMD0x09($01, $B5C567)                                   ;B5C4D7
     %AICMD0x09($02, $B5C59D)                                   ;B5C4DB
@@ -4315,7 +4315,7 @@ DATA8_B5C5D3:
     %AICMD0x02_FreezeTime()                                    ;B5C5DB
     %AICMD0x03_SetHour($07)                                    ;B5C5DC
     %AICMD0x05_SetTransferPosition(328, 360)                   ;B5C5DE
-    %AICMD0x08()                                               ;B5C5E3
+    %AICMD0x08_EnableAIControl()                               ;B5C5E3
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C5E4
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C5E6
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C5EB
@@ -4336,7 +4336,7 @@ DATA8_B5C608:
     %AICMD0x02_FreezeTime()                                    ;B5C610
     %AICMD0x03_SetHour($07)                                    ;B5C611
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5C613
-    %AICMD0x08()                                               ;B5C618
+    %AICMD0x08_EnableAIControl()                               ;B5C618
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C619
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C61B
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5C620
@@ -4361,7 +4361,7 @@ DATA8_B5C648:
     %AICMD0x02_FreezeTime()                                    ;B5C650
     %AICMD0x03_SetHour($07)                                    ;B5C651
     %AICMD0x05_SetTransferPosition(424, 488)                   ;B5C653
-    %AICMD0x08()                                               ;B5C658
+    %AICMD0x08_EnableAIControl()                               ;B5C658
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C659
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C65B
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C660
@@ -4382,7 +4382,7 @@ DATA8_B5C679:
     %AICMD0x02_FreezeTime()                                    ;B5C686
     %AICMD0x03_SetHour($07)                                    ;B5C687
     %AICMD0x05_SetTransferPosition(128, 360)                   ;B5C689
-    %AICMD0x08()                                               ;B5C68E
+    %AICMD0x08_EnableAIControl()                               ;B5C68E
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C68F
     %AICMD0x09($01, $B5C713)                                   ;B5C691
     %AICMD0x09($02, $B5C769)                                   ;B5C695
@@ -4468,7 +4468,7 @@ DATA8_B5C793:
     %AICMD0x02_FreezeTime()                                    ;B5C79B
     %AICMD0x03_SetHour($07)                                    ;B5C79C
     %AICMD0x05_SetTransferPosition(328, 360)                   ;B5C79E
-    %AICMD0x08()                                               ;B5C7A3
+    %AICMD0x08_EnableAIControl()                               ;B5C7A3
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C7A4
     %AICMD0x09($01, $B5C7C4)                                   ;B5C7A6
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C7AA
@@ -4494,7 +4494,7 @@ DATA8_B5C7DE:
     %AICMD0x02_FreezeTime()                                    ;B5C7E6
     %AICMD0x03_SetHour($07)                                    ;B5C7E7
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B5C7E9
-    %AICMD0x08()                                               ;B5C7EE
+    %AICMD0x08_EnableAIControl()                               ;B5C7EE
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C7EF
     %AICMD0x23_OrWithIndexedValue(nEggInCoopFlags, $04)        ;B5C7F1
     %AICMD0x23_OrWithIndexedValue(nEggInCoopFlags, $05)        ;B5C7F6
@@ -4558,7 +4558,7 @@ DATA8_B5C8AF:
     %AICMD0x02_FreezeTime()                                    ;B5C8B7
     %AICMD0x03_SetHour($07)                                    ;B5C8B8
     %AICMD0x05_SetTransferPosition(456, 360)                   ;B5C8BA
-    %AICMD0x08()                                               ;B5C8BF
+    %AICMD0x08_EnableAIControl()                               ;B5C8BF
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C8C0
     %AICMD0x09($01, $B5C8E0)                                   ;B5C8C2
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C8C6
@@ -4581,7 +4581,7 @@ DATA8_B5C8EE:
     %AICMD0x02_FreezeTime()                                    ;B5C8F6
     %AICMD0x03_SetHour($07)                                    ;B5C8F7
     %AICMD0x05_SetTransferPosition(264, 312)                   ;B5C8F9
-    %AICMD0x08()                                               ;B5C8FE
+    %AICMD0x08_EnableAIControl()                               ;B5C8FE
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C8FF
     %AICMD0x09($01, $B5C958)                                   ;B5C901
     %AICMD0x09($03, $B5C966)                                   ;B5C905
@@ -4653,7 +4653,7 @@ DATA8_B5CA00:
     %AICMD0x02_FreezeTime()                                    ;B5CA08
     %AICMD0x03_SetHour($07)                                    ;B5CA09
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B5CA0B
-    %AICMD0x08()                                               ;B5CA10
+    %AICMD0x08_EnableAIControl()                               ;B5CA10
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5CA11
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CA13
     %AICMD0x06_SetDestinationArea(!AREA_FARMWINTER)            ;B5CA18
@@ -4676,7 +4676,7 @@ DATA8_B5CA3D:
     %AICMD0x02_FreezeTime()                                    ;B5CA45
     %AICMD0x03_SetHour($07)                                    ;B5CA46
     %AICMD0x05_SetTransferPosition(280, 872)                   ;B5CA48
-    %AICMD0x08()                                               ;B5CA4D
+    %AICMD0x08_EnableAIControl()                               ;B5CA4D
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5CA4E
     %AICMD0x3B($06)                                            ;B5CA50
     %AICMD0x09($01, $B5CA76)                                   ;B5CA52
@@ -4711,7 +4711,7 @@ DATA8_B5CAA2:
     %AICMD0x02_FreezeTime()                                    ;B5CAAF
     %AICMD0x03_SetHour($07)                                    ;B5CAB0
     %AICMD0x05_SetTransferPosition(488, 216)                   ;B5CAB2
-    %AICMD0x08()                                               ;B5CAB7
+    %AICMD0x08_EnableAIControl()                               ;B5CAB7
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CAB8
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CABA
     %AICMD0x06_SetDestinationArea(!AREA_WOODSWINTER)           ;B5CABF
@@ -4759,7 +4759,7 @@ DATA8_B5CB13:
     %AICMD0x02_FreezeTime()                                    ;B5CB1B
     %AICMD0x03_SetHour($07)                                    ;B5CB1C
     %AICMD0x05_SetTransferPosition(24, 456)                    ;B5CB1E
-    %AICMD0x08()                                               ;B5CB23
+    %AICMD0x08_EnableAIControl()                               ;B5CB23
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CB24
     %AICMD0x09($01, $B5CB4B)                                   ;B5CB26
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5CB2A

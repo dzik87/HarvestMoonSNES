@@ -53,8 +53,8 @@ macro AICMD0x07_SetPlayerDirection(nPlayerDirection)
     
 endmacro
 
-; AI command 0x08 - 
-macro AICMD0x08()
+; AI command 0x08 - Disable user input, unset flags nPlayerFlag !PFLAGS_USERCONTROL
+macro AICMD0x08_EnableAIControl()
     db $08
     
 endmacro
@@ -106,9 +106,9 @@ macro AICMD0x0E(nUnknown1)
 endmacro
 
 ; AI command 0x0F - 
-macro AICMD0x0F(nUnknown1)
+macro AICMD0x0F_ScreenFadeout(nUnused)
     db $0F
-    db <nUnknown1>
+    db <nUnused>
     
 endmacro
 
@@ -119,7 +119,7 @@ macro AICMD0x10_End()
 endmacro
 
 ; AI command 0x11 - 
-macro AICMD0x11()
+macro AICMD0x11_EnableUserControl()
     db $11
     
 endmacro
@@ -273,9 +273,9 @@ macro AICMD0x23_OrWithIndexedValue(nAddress, nIndex)
 endmacro
 
 ; AI command 0x24 - 
-macro AICMD0x24(nUnknown1)
+macro AICMD0x24_NextHourPalette(nNextHourPalette)
     db $24
-    db <nUnknown1>
+    db <nNextHourPalette>
     
 endmacro
 

@@ -15,7 +15,7 @@ ppAIScriptingList:
     dl pAIScripting0x09                                        ;B3801B|        |B3E603;
     dl pAIScripting0x0A                                        ;B3801E|        |B3E83B;
     dl pAIScripting0x0B                                        ;B38021|        |B3E9DA;
-    dl pAIScripting0x0C                                        ;B38024|        |B3EF5A;
+    dl pAIScripting0x0C_DogEvent                               ;B38024|        |B3EF5A;
     dl pAIScripting0x0D_CrossRoadsEvents                       ;B38027|        |B3F068;
     dl pAIScripting0x0E                                        ;B3802A|        |B3F0E6;
     dl pAIScripting0x0F_StarNightFestival                      ;B3802D|        |B48000;
@@ -3118,7 +3118,7 @@ pAIScripting0x01:
  
 DATA8_B39379:
  
-    %AICMD0x11()                                               ;B39379
+    %AICMD0x11_EnableUserControl()                             ;B39379
     %AICMD0x09($01, $B393CE)                                   ;B3937A
     %AICMD0x09($02, $B39498)                                   ;B3937E
     %AICMD0x09($07, $B39CE8)                                   ;B39382
@@ -3673,7 +3673,7 @@ DATA8_B39379:
 
 DATA8_B39D05:
  
-    %AICMD0x11()                                               ;B39D05
+    %AICMD0x11_EnableUserControl()                             ;B39D05
     %AICMD0x09($01, $B39D14)                                   ;B39D06
     %AICMD0x09($02, $B39E2A)                                   ;B39D0A
     %AICMD0x13_Wait(1)                                         ;B39D0E
@@ -3805,7 +3805,7 @@ DATA8_B39D05:
 
 DATA8_B39F3E:
  
-    %AICMD0x11()                                               ;B39F3E
+    %AICMD0x11_EnableUserControl()                             ;B39F3E
     %AICMD0x09($01, $B39F49)                                   ;B39F3F
     %AICMD0x13_Wait(1)                                         ;B39F43
     %AICMD0x12_Jump($B39F43)                                   ;B39F46
@@ -3888,7 +3888,7 @@ DATA8_B39F3E:
 
 DATA8_B3A086:
  
-    %AICMD0x11()                                               ;B3A086
+    %AICMD0x11_EnableUserControl()                             ;B3A086
     %AICMD0x09($01, $B3A091)                                   ;B3A087
     %AICMD0x13_Wait(1)                                         ;B3A08B
     %AICMD0x12_Jump($B3A08B)                                   ;B3A08E
@@ -3943,7 +3943,7 @@ DATA8_B3A086:
 
 DATA8_B3A162:
  
-    %AICMD0x11()                                               ;B3A162
+    %AICMD0x11_EnableUserControl()                             ;B3A162
     %AICMD0x09($01, $B3A17E)                                   ;B3A163
     %AICMD0x12_Jump($B3A170)                                   ;B3A167
     %AICMD0x13_Wait(1)                                         ;B3A16A
@@ -4115,7 +4115,7 @@ DATA8_B3A162:
 
 DATA8_B3A438:
  
-    %AICMD0x11()                                               ;B3A438
+    %AICMD0x11_EnableUserControl()                             ;B3A438
     %AICMD0x09($01, $B3A459)                                   ;B3A439
     %AICMD0x09($02, $B3A538)                                   ;B3A43D
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $02, $B3A453);B3A441
@@ -4209,7 +4209,7 @@ DATA8_B3A438:
 
 DATA8_B3A5B1:
  
-    %AICMD0x11()                                               ;B3A5B1
+    %AICMD0x11_EnableUserControl()                             ;B3A5B1
     %AICMD0x09($01, $B3A5BC)                                   ;B3A5B2
     %AICMD0x13_Wait(1)                                         ;B3A5B6
     %AICMD0x12_Jump($B3A5B6)                                   ;B3A5B9
@@ -4304,7 +4304,7 @@ DATA8_B3A5B1:
 
 DATA8_B3A727:
  
-    %AICMD0x11()                                               ;B3A727
+    %AICMD0x11_EnableUserControl()                             ;B3A727
     %AICMD0x09($01, $B3A732)                                   ;B3A728
     %AICMD0x13_Wait(1)                                         ;B3A72C
     %AICMD0x12_Jump($B3A72C)                                   ;B3A72F
@@ -4367,7 +4367,7 @@ DATA8_B3A727:
 
 DATA8_B3A81B:
  
-    %AICMD0x11()                                               ;B3A81B
+    %AICMD0x11_EnableUserControl()                             ;B3A81B
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags4, $09, $B3A850);B3A81C
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B3A850)       ;B3A823
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 1, $B3A850)       ;B3A82A
@@ -4643,7 +4643,7 @@ DATA8_B3A81B:
 
 DATA8_B3AD24:
  
-    %AICMD0x11()                                               ;B3AD24
+    %AICMD0x11_EnableUserControl()                             ;B3AD24
     %AICMD0x09($01, $B3AD2F)                                   ;B3AD25
     %AICMD0x13_Wait(1)                                         ;B3AD29
     %AICMD0x12_Jump($B3AD29)                                   ;B3AD2C
@@ -4681,7 +4681,7 @@ DATA8_B3AD24:
 
 DATA8_B3ADB1:
  
-    %AICMD0x11()                                               ;B3ADB1
+    %AICMD0x11_EnableUserControl()                             ;B3ADB1
     %AICMD0x09($01, $B3ADC4)                                   ;B3ADB2
     %AICMD0x09($02, $B3ADD9)                                   ;B3ADB6
     %AICMD0x09($03, $B3ADEE)                                   ;B3ADBA
@@ -4724,7 +4724,7 @@ pAIScripting0x02:
  
 DATA8_B3AE23:
  
-    %AICMD0x11()                                               ;B3AE23
+    %AICMD0x11_EnableUserControl()                             ;B3AE23
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3AE36)     ;B3AE24
     %AICMD0x09($01, $B3AECD)                                   ;B3AE2B
     %AICMD0x09($02, $B3AF5A)                                   ;B3AE2F
@@ -4963,10 +4963,10 @@ DATA8_B3AE23:
     %AICMD0x20_JumpIfChoice(0, $B3B26C)                        ;B3B261
     %AICMD0x20_JumpIfChoice(1, $B3B282)                        ;B3B265
     %AICMD0x12_Jump($B3B1C6)                                   ;B3B269
-    %AICMD0x08()                                               ;B3B26C
+    %AICMD0x08_EnableAIControl()                               ;B3B26C
     %AICMD0x19($00E9, $00)                                     ;B3B26D
     %AICMD0x13_Wait(120)                                       ;B3B271
-    %AICMD0x11()                                               ;B3B274
+    %AICMD0x11_EnableUserControl()                             ;B3B274
     %AICMD0x1C_ShowDialog($00AC, $00)                          ;B3B275
     %AICMD0x41_AddValue16(nLove_Ann, 10)                       ;B3B279
     %AICMD0x12_Jump($B3B1CE)                                   ;B3B27F
@@ -5054,10 +5054,10 @@ DATA8_B3AE23:
     %AICMD0x20_JumpIfChoice(0, $B3B405)                        ;B3B3FA
     %AICMD0x20_JumpIfChoice(1, $B3B41B)                        ;B3B3FE
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B402
-    %AICMD0x08()                                               ;B3B405
+    %AICMD0x08_EnableAIControl()                               ;B3B405
     %AICMD0x19($0039, $00)                                     ;B3B406
     %AICMD0x13_Wait(120)                                       ;B3B40A
-    %AICMD0x11()                                               ;B3B40D
+    %AICMD0x11_EnableUserControl()                             ;B3B40D
     %AICMD0x1C_ShowDialog($00DA, $00)                          ;B3B40E
     %AICMD0x41_AddValue16(nLove_Ellen, 10)                     ;B3B412
     %AICMD0x12_Jump($B3B2DF)                                   ;B3B418
@@ -5078,7 +5078,7 @@ DATA8_B3AE23:
 
 DATA8_B3B44A:
  
-    %AICMD0x11()                                               ;B3B44A
+    %AICMD0x11_EnableUserControl()                             ;B3B44A
     %AICMD0x09($01, $B3B459)                                   ;B3B44B
     %AICMD0x09($02, $B3B49E)                                   ;B3B44F
     %AICMD0x13_Wait(1)                                         ;B3B453
@@ -5119,7 +5119,7 @@ DATA8_B3B44A:
 
 DATA8_B3B4E3:
  
-    %AICMD0x11()                                               ;B3B4E3
+    %AICMD0x11_EnableUserControl()                             ;B3B4E3
     %AICMD0x09($01, $B3B50A)                                   ;B3B4E4
     %AICMD0x09($02, $B3B54F)                                   ;B3B4E8
     %AICMD0x12_Jump($B3B4F5)                                   ;B3B4EC
@@ -5236,7 +5236,7 @@ DATA8_B3B4E3:
 
 DATA8_B3B6E1:
  
-    %AICMD0x11()                                               ;B3B6E1
+    %AICMD0x11_EnableUserControl()                             ;B3B6E1
     %AICMD0x09($01, $B3B70F)                                   ;B3B6E2
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $04, $B3B6FA);B3B6E6
     %AICMD0x09($02, $B3B79E)                                   ;B3B6ED
@@ -5352,7 +5352,7 @@ DATA8_B3B6E1:
 
 DATA8_B3B8D2:
  
-    %AICMD0x11()                                               ;B3B8D2
+    %AICMD0x11_EnableUserControl()                             ;B3B8D2
     %AICMD0x12_Jump($B3B8DC)                                   ;B3B8D3
     %AICMD0x13_Wait(1)                                         ;B3B8D6
     %AICMD0x12_Jump($B3B8D6)                                   ;B3B8D9
@@ -5454,7 +5454,7 @@ pAIScripting0x03:
  
 DATA8_B3BA59:
  
-    %AICMD0x11()                                               ;B3BA59
+    %AICMD0x11_EnableUserControl()                             ;B3BA59
     %AICMD0x09($01, $B3BB19)                                   ;B3BA5A
     %AICMD0x09($02, $B3BBBB)                                   ;B3BA5E
     %AICMD0x09($03, $B3BC06)                                   ;B3BA62
@@ -5615,7 +5615,7 @@ DATA8_B3BA59:
 
 DATA8_B3BD2D:
  
-    %AICMD0x11()                                               ;B3BD2D
+    %AICMD0x11_EnableUserControl()                             ;B3BD2D
     %AICMD0x09($01, $B3BD7A)                                   ;B3BD2E
     %AICMD0x09($02, $B3BDBF)                                   ;B3BD32
     %AICMD0x09($03, $B3BE18)                                   ;B3BD36
@@ -5887,7 +5887,7 @@ DATA8_B3BD2D:
 
 DATA8_B3C1E4:
  
-    %AICMD0x11()                                               ;B3C1E4
+    %AICMD0x11_EnableUserControl()                             ;B3C1E4
     %AICMD0x09($01, $B3C482)                                   ;B3C1E5
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $04, $B3C1FD);B3C1E9
     %AICMD0x09($02, $B3C224)                                   ;B3C1F0
@@ -6090,7 +6090,7 @@ pAIScripting0x04:
  
 DATA8_B3C527:
  
-    %AICMD0x11()                                               ;B3C527
+    %AICMD0x11_EnableUserControl()                             ;B3C527
     %AICMD0x09($01, $B3C54E)                                   ;B3C528
     %AICMD0x09($02, $B3C5A1)                                   ;B3C52C
     %AICMD0x12_Jump($B3C539)                                   ;B3C530
@@ -6179,7 +6179,7 @@ DATA8_B3C527:
 
 DATA8_B3C6AE:
  
-    %AICMD0x11()                                               ;B3C6AE
+    %AICMD0x11_EnableUserControl()                             ;B3C6AE
     %AICMD0x09($01, $B3C6B9)                                   ;B3C6AF
     %AICMD0x13_Wait(1)                                         ;B3C6B3
     %AICMD0x12_Jump($B3C6B3)                                   ;B3C6B6
@@ -6203,7 +6203,7 @@ DATA8_B3C6AE:
 
 DATA8_B3C6FE:
  
-    %AICMD0x11()                                               ;B3C6FE
+    %AICMD0x11_EnableUserControl()                             ;B3C6FE
     %AICMD0x09($01, $B3C721)                                   ;B3C6FF
     %AICMD0x12_Jump($B3C70C)                                   ;B3C703
     %AICMD0x13_Wait(1)                                         ;B3C706
@@ -6266,7 +6266,7 @@ DATA8_B3C6FE:
 
 DATA8_B3C810:
  
-    %AICMD0x11()                                               ;B3C810
+    %AICMD0x11_EnableUserControl()                             ;B3C810
     %AICMD0x09($01, $B3C82C)                                   ;B3C811
     %AICMD0x12_Jump($B3C81E)                                   ;B3C815
     %AICMD0x13_Wait(1)                                         ;B3C818
@@ -6331,7 +6331,7 @@ DATA8_B3C810:
 
 DATA8_B3C92A:
  
-    %AICMD0x11()                                               ;B3C92A
+    %AICMD0x11_EnableUserControl()                             ;B3C92A
     %AICMD0x09($01, $B3C96A)                                   ;B3C92B
     %AICMD0x09($02, $B3C9B2)                                   ;B3C92F
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $02, $B3C94E);B3C933
@@ -6486,7 +6486,7 @@ DATA8_B3CB60:
 
 DATA8_B3CBA5:
  
-    %AICMD0x11()                                               ;B3CBA5
+    %AICMD0x11_EnableUserControl()                             ;B3CBA5
     %AICMD0x09($01, $B3CBEC)                                   ;B3CBA6
     %AICMD0x09($02, $B3CBB4)                                   ;B3CBAA
     %AICMD0x13_Wait(1)                                         ;B3CBAE
@@ -6558,7 +6558,7 @@ pAIScripting0x05:
  
 DATA8_B3CC91:
  
-    %AICMD0x11()                                               ;B3CC91
+    %AICMD0x11_EnableUserControl()                             ;B3CC91
     %AICMD0x09($01, $B3CCDB)                                   ;B3CC92
     %AICMD0x09($02, $B3CD7C)                                   ;B3CC96
     %AICMD0x09($03, $B3CDB6)                                   ;B3CC9A
@@ -7005,7 +7005,7 @@ pAIScripting0x06:
  
 DATA8_B3D467:
  
-    %AICMD0x11()                                               ;B3D467
+    %AICMD0x11_EnableUserControl()                             ;B3D467
     %AICMD0x09($01, $B3D48E)                                   ;B3D468
     %AICMD0x09($02, $B3D4D0)                                   ;B3D46C
     %AICMD0x12_Jump($B3D479)                                   ;B3D470
@@ -7076,7 +7076,7 @@ DATA8_B3D467:
 
 DATA8_B3D59D:
  
-    %AICMD0x11()                                               ;B3D59D
+    %AICMD0x11_EnableUserControl()                             ;B3D59D
     %AICMD0x09($01, $B3D5A8)                                   ;B3D59E
     %AICMD0x13_Wait(1)                                         ;B3D5A2
     %AICMD0x12_Jump($B3D5A2)                                   ;B3D5A5
@@ -7097,7 +7097,7 @@ DATA8_B3D59D:
 
 DATA8_B3D5E3:
  
-    %AICMD0x11()                                               ;B3D5E3
+    %AICMD0x11_EnableUserControl()                             ;B3D5E3
     %AICMD0x09($01, $B3D606)                                   ;B3D5E4
     %AICMD0x12_Jump($B3D5F1)                                   ;B3D5E8
     %AICMD0x13_Wait(1)                                         ;B3D5EB
@@ -7153,7 +7153,7 @@ DATA8_B3D5E3:
 
 DATA8_B3D6CF:
  
-    %AICMD0x11()                                               ;B3D6CF
+    %AICMD0x11_EnableUserControl()                             ;B3D6CF
     %AICMD0x09($01, $B3D6EB)                                   ;B3D6D0
     %AICMD0x12_Jump($B3D6DD)                                   ;B3D6D4
     %AICMD0x13_Wait(1)                                         ;B3D6D7
@@ -7211,7 +7211,7 @@ DATA8_B3D6CF:
 
 DATA8_B3D7C9:
  
-    %AICMD0x11()                                               ;B3D7C9
+    %AICMD0x11_EnableUserControl()                             ;B3D7C9
     %AICMD0x09($01, $B3D805)                                   ;B3D7CA
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $02, $B3D7E9);B3D7CE
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $03, $B3D7E9);B3D7D5
@@ -7284,7 +7284,7 @@ DATA8_B3D7C9:
 
 DATA8_B3D90E:
  
-    %AICMD0x11()                                               ;B3D90E
+    %AICMD0x11_EnableUserControl()                             ;B3D90E
     %AICMD0x09($01, $B3D91D)                                   ;B3D90F
     %AICMD0x09($02, $B3D958)                                   ;B3D913
     %AICMD0x13_Wait(1)                                         ;B3D917
@@ -7321,7 +7321,7 @@ DATA8_B3D90E:
 
 DATA8_B3D99B:
  
-    %AICMD0x11()                                               ;B3D99B
+    %AICMD0x11_EnableUserControl()                             ;B3D99B
     %AICMD0x09($01, $B3D9A6)                                   ;B3D99C
     %AICMD0x13_Wait(1)                                         ;B3D9A0
     %AICMD0x12_Jump($B3D9A0)                                   ;B3D9A3
@@ -7366,7 +7366,7 @@ pAIScripting0x07:
  
 DATA8_B3DA17:
  
-    %AICMD0x11()                                               ;B3DA17
+    %AICMD0x11_EnableUserControl()                             ;B3DA17
     %AICMD0x09($01, $B3DA3E)                                   ;B3DA18
     %AICMD0x09($02, $B3DA96)                                   ;B3DA1C
     %AICMD0x12_Jump($B3DA29)                                   ;B3DA20
@@ -7448,7 +7448,7 @@ DATA8_B3DA17:
 
 DATA8_B3DB72:
  
-    %AICMD0x11()                                               ;B3DB72
+    %AICMD0x11_EnableUserControl()                             ;B3DB72
     %AICMD0x09($01, $B3DB7D)                                   ;B3DB73
     %AICMD0x13_Wait(1)                                         ;B3DB77
     %AICMD0x12_Jump($B3DB77)                                   ;B3DB7A
@@ -7476,7 +7476,7 @@ DATA8_B3DB72:
 
 DATA8_B3DBD5:
  
-    %AICMD0x11()                                               ;B3DBD5
+    %AICMD0x11_EnableUserControl()                             ;B3DBD5
     %AICMD0x09($01, $B3DBF8)                                   ;B3DBD6
     %AICMD0x12_Jump($B3DBE3)                                   ;B3DBDA
     %AICMD0x13_Wait(1)                                         ;B3DBDD
@@ -7537,7 +7537,7 @@ DATA8_B3DBD5:
 
 DATA8_B3DCD1:
  
-    %AICMD0x11()                                               ;B3DCD1
+    %AICMD0x11_EnableUserControl()                             ;B3DCD1
     %AICMD0x09($01, $B3DCED)                                   ;B3DCD2
     %AICMD0x12_Jump($B3DCDF)                                   ;B3DCD6
     %AICMD0x13_Wait(1)                                         ;B3DCD9
@@ -7597,7 +7597,7 @@ DATA8_B3DCD1:
 
 DATA8_B3DDC7:
  
-    %AICMD0x11()                                               ;B3DDC7
+    %AICMD0x11_EnableUserControl()                             ;B3DDC7
     %AICMD0x09($01, $B3DE07)                                   ;B3DDC8
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $02, $B3DDEB);B3DDCC
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $03, $B3DDEB);B3DDD3
@@ -7675,7 +7675,7 @@ DATA8_B3DDC7:
 
 DATA8_B3DF0F:
  
-    %AICMD0x11()                                               ;B3DF0F
+    %AICMD0x11_EnableUserControl()                             ;B3DF0F
     %AICMD0x09($01, $B3DF1E)                                   ;B3DF10
     %AICMD0x09($02, $B3DF92)                                   ;B3DF14
     %AICMD0x13_Wait(1)                                         ;B3DF18
@@ -7725,7 +7725,7 @@ DATA8_B3DF0F:
 
 DATA8_B3DFCE:
  
-    %AICMD0x11()                                               ;B3DFCE
+    %AICMD0x11_EnableUserControl()                             ;B3DFCE
     %AICMD0x09($01, $B3DFD9)                                   ;B3DFCF
     %AICMD0x13_Wait(1)                                         ;B3DFD3
     %AICMD0x12_Jump($B3DFD3)                                   ;B3DFD6
@@ -7755,7 +7755,7 @@ DATA8_B3DFCE:
 
 DATA8_B3E037:
  
-    %AICMD0x11()                                               ;B3E037
+    %AICMD0x11_EnableUserControl()                             ;B3E037
     %AICMD0x09($01, $B3E083)                                   ;B3E038
     %AICMD0x09($02, $B3E046)                                   ;B3E03C
     %AICMD0x13_Wait(1)                                         ;B3E040
@@ -7811,7 +7811,7 @@ pAIScripting0x08:
  
 DATA8_B3E0DF:
  
-    %AICMD0x11()                                               ;B3E0DF
+    %AICMD0x11_EnableUserControl()                             ;B3E0DF
     %AICMD0x09($01, $B3E102)                                   ;B3E0E0
     %AICMD0x12_Jump($B3E0ED)                                   ;B3E0E4
     %AICMD0x13_Wait(1)                                         ;B3E0E7
@@ -7865,7 +7865,7 @@ DATA8_B3E0DF:
 
 DATA8_B3E1C9:
  
-    %AICMD0x11()                                               ;B3E1C9
+    %AICMD0x11_EnableUserControl()                             ;B3E1C9
     %AICMD0x09($01, $B3E1D8)                                   ;B3E1CA
     %AICMD0x09($02, $B3E205)                                   ;B3E1CE
     %AICMD0x13_Wait(1)                                         ;B3E1D2
@@ -7894,7 +7894,7 @@ DATA8_B3E1C9:
 
 DATA8_B3E232:
  
-    %AICMD0x11()                                               ;B3E232
+    %AICMD0x11_EnableUserControl()                             ;B3E232
     %AICMD0x09($01, $B3E255)                                   ;B3E233
     %AICMD0x12_Jump($B3E240)                                   ;B3E237
     %AICMD0x13_Wait(1)                                         ;B3E23A
@@ -7949,7 +7949,7 @@ DATA8_B3E232:
 
 DATA8_B3E31F:
  
-    %AICMD0x11()                                               ;B3E31F
+    %AICMD0x11_EnableUserControl()                             ;B3E31F
     %AICMD0x09($01, $B3E33B)                                   ;B3E320
     %AICMD0x12_Jump($B3E32D)                                   ;B3E324
     %AICMD0x13_Wait(1)                                         ;B3E327
@@ -8005,7 +8005,7 @@ DATA8_B3E31F:
 
 DATA8_B3E413:
  
-    %AICMD0x11()                                               ;B3E413
+    %AICMD0x11_EnableUserControl()                             ;B3E413
     %AICMD0x09($01, $B3E453)                                   ;B3E414
     %AICMD0x09($02, $B3E483)                                   ;B3E418
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags5, $02, $B3E437);B3E41C
@@ -8059,7 +8059,7 @@ DATA8_B3E413:
 
 DATA8_B3E4ED:
  
-    %AICMD0x11()                                               ;B3E4ED
+    %AICMD0x11_EnableUserControl()                             ;B3E4ED
     %AICMD0x09($01, $B3E4FE)                                   ;B3E4EE
     %AICMD0x09($02, $B3E52B)                                   ;B3E4F2
     %AICMD0x0A($01)                                            ;B3E4F6
@@ -8091,7 +8091,7 @@ DATA8_B3E4ED:
 
 DATA8_B3E560:
  
-    %AICMD0x11()                                               ;B3E560
+    %AICMD0x11_EnableUserControl()                             ;B3E560
     %AICMD0x09($01, $B3E56D)                                   ;B3E561
     %AICMD0x0A($01)                                            ;B3E565
     %AICMD0x13_Wait(1)                                         ;B3E567
@@ -8110,7 +8110,7 @@ DATA8_B3E560:
 
 DATA8_B3E59A:
  
-    %AICMD0x11()                                               ;B3E59A
+    %AICMD0x11_EnableUserControl()                             ;B3E59A
     %AICMD0x09($01, $B3E5D6)                                   ;B3E59B
     %AICMD0x09($02, $B3E5A9)                                   ;B3E59F
     %AICMD0x13_Wait(1)                                         ;B3E5A3
@@ -8161,7 +8161,7 @@ DATA8_B3E623:
     %AICMD0x02_FreezeTime()                                    ;B3E624
     %AICMD0x05_SetTransferPosition(96, 120)                    ;B3E625
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3E62A
-    %AICMD0x08()                                               ;B3E62C
+    %AICMD0x08_EnableAIControl()                               ;B3E62C
     %AICMD0x09($01, $B3E6FC)                                   ;B3E62D
     %AICMD0x09($02, $B3E6D7)                                   ;B3E631
     %AICMD0x06_SetDestinationArea(!AREA_INTRO)                 ;B3E635
@@ -8173,7 +8173,7 @@ DATA8_B3E623:
     %AICMD0x13_Wait(60)                                        ;B3E643
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 48)                 ;B3E646
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 64)                  ;B3E64A
-    %AICMD0x0F($01)                                            ;B3E64E
+    %AICMD0x0F_ScreenFadeout($01)                              ;B3E64E
     %AICMD0x13_Wait(180)                                       ;B3E650
     %AICMD0x05_SetTransferPosition(8, 104)                     ;B3E653
     %AICMD0x25($01)                                            ;B3E658
@@ -8324,7 +8324,7 @@ DATA8_B3E85B:
     %AICMD0x02_FreezeTime()                                    ;B3E85D
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B3E85E
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E863
-    %AICMD0x08()                                               ;B3E865
+    %AICMD0x08_EnableAIControl()                               ;B3E865
     %AICMD0x09($01, $B3E877)                                   ;B3E866
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B3E86A
     %AICMD0x38()                                               ;B3E86C
@@ -8349,7 +8349,7 @@ DATA8_B3E89A:
     %AICMD0x50()                                               ;B3E89B
     %AICMD0x02_FreezeTime()                                    ;B3E89C
     %AICMD0x05_SetTransferPosition(136, 296)                   ;B3E89D
-    %AICMD0x08()                                               ;B3E8A2
+    %AICMD0x08_EnableAIControl()                               ;B3E8A2
     %AICMD0x09($01, $B3E8B6)                                   ;B3E8A3
     %AICMD0x38()                                               ;B3E8A7
     %AICMD0x0B($00)                                            ;B3E8A8
@@ -8372,7 +8372,7 @@ DATA8_B3E8C8:
     %AICMD0x02_FreezeTime()                                    ;B3E8CA
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B3E8CB
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E8D0
-    %AICMD0x08()                                               ;B3E8D2
+    %AICMD0x08_EnableAIControl()                               ;B3E8D2
     %AICMD0x09($01, $B3E8E8)                                   ;B3E8D3
     %AICMD0x38()                                               ;B3E8D7
     %AICMD0x0B($00)                                            ;B3E8D8
@@ -8402,7 +8402,7 @@ DATA8_B3E90B:
     %AICMD0x02_FreezeTime()                                    ;B3E917
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B3E918
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3E91D
-    %AICMD0x08()                                               ;B3E91F
+    %AICMD0x08_EnableAIControl()                               ;B3E91F
     %AICMD0x38()                                               ;B3E920
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags1, $07, $B3E969);B3E921
     %AICMD0x14_JumpIfFlagSet(strcEventFlags.flags1, $06, $B3E94C);B3E928
@@ -8437,7 +8437,7 @@ DATA8_B3E90B:
 DATA8_B3E982:
  
     %AICMD0x02_FreezeTime()                                    ;B3E982
-    %AICMD0x08()                                               ;B3E983
+    %AICMD0x08_EnableAIControl()                               ;B3E983
     %AICMD0x09($01, $B3E98A)                                   ;B3E984
     %AICMD0x38()                                               ;B3E988
     %AICMD0x10_End()                                           ;B3E989
@@ -8449,14 +8449,14 @@ DATA8_B3E982:
     %AICMD0x1B($0290, $00)                                     ;B3E9A2
     %AICMD0x0D($00, $01, $20, $01)                             ;B3E9A6
     %AICMD0x37()                                               ;B3E9AB
-    %AICMD0x11()                                               ;B3E9AC
+    %AICMD0x11_EnableUserControl()                             ;B3E9AC
     %AICMD0x10_End()                                           ;B3E9AD
 
 
 DATA8_B3E9AE:
  
     %AICMD0x02_FreezeTime()                                    ;B3E9AE
-    %AICMD0x08()                                               ;B3E9AF
+    %AICMD0x08_EnableAIControl()                               ;B3E9AF
     %AICMD0x09($01, $B3E9B6)                                   ;B3E9B0
     %AICMD0x38()                                               ;B3E9B4
     %AICMD0x10_End()                                           ;B3E9B5
@@ -8468,7 +8468,7 @@ DATA8_B3E9AE:
     %AICMD0x1B($0290, $00)                                     ;B3E9CE
     %AICMD0x0D($00, $01, $20, $01)                             ;B3E9D2
     %AICMD0x37()                                               ;B3E9D7
-    %AICMD0x11()                                               ;B3E9D8
+    %AICMD0x11_EnableUserControl()                             ;B3E9D8
     %AICMD0x10_End()                                           ;B3E9D9
 
 
@@ -8486,9 +8486,9 @@ pAIScripting0x0B:
     dw AI_HouseExtensionCampain                                ;B3E9EE|        |B3EEEA;
     dw DATA8_B3EF0A                                            ;B3E9F0|        |B3EF0A;
     dw DATA8_B3EF2E                                            ;B3E9F2|        |B3EF2E;
-    dw pAIScripting0x0C                                        ;B3E9F4|        |B3EF5A;
-    dw pAIScripting0x0C                                        ;B3E9F6|        |B3EF5A;
-    dw pAIScripting0x0C                                        ;B3E9F8|        |B3EF5A;
+    dw pAIScripting0x0C_DogEvent                               ;B3E9F4|        |B3EF5A;
+    dw pAIScripting0x0C_DogEvent                               ;B3E9F6|        |B3EF5A;
+    dw pAIScripting0x0C_DogEvent                               ;B3E9F8|        |B3EF5A;
  
 DATA8_B3E9FA:
  
@@ -8798,14 +8798,14 @@ DATA8_B3ED39:
 DATA8_B3EE1A:
  
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3EE1A
-    %AICMD0x08()                                               ;B3EE1C
+    %AICMD0x08_EnableAIControl()                               ;B3EE1C
     %AICMD0x09($01, $B3EE39)                                   ;B3EE1D
     %AICMD0x09($02, $B3EE64)                                   ;B3EE21
     %AICMD0x09($03, $B3EE82)                                   ;B3EE25
     %AICMD0x09($04, $B3EEA7)                                   ;B3EE29
     %AICMD0x09($05, $B3EECC)                                   ;B3EE2D
     %AICMD0x38()                                               ;B3EE31
-    %AICMD0x11()                                               ;B3EE32
+    %AICMD0x11_EnableUserControl()                             ;B3EE32
     %AICMD0x13_Wait(1)                                         ;B3EE33
     %AICMD0x12_Jump($B3EE33)                                   ;B3EE36
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3EE63) ;B3EE39
@@ -8868,7 +8868,7 @@ DATA8_B3EF0A:
  
     %AICMD0x02_FreezeTime()                                    ;B3EF0A
     %AICMD0x05_SetTransferPosition(136, 296)                   ;B3EF0B
-    %AICMD0x08()                                               ;B3EF10
+    %AICMD0x08_EnableAIControl()                               ;B3EF10
     %AICMD0x09($01, $B3EF1C)                                   ;B3EF11
     %AICMD0x38()                                               ;B3EF15
     %AICMD0x0B($00)                                            ;B3EF16
@@ -8898,9 +8898,9 @@ DATA8_B3EF2E:
     %AICMD0x12_Jump($B3EF41)                                   ;B3EF57
 
 
-pAIScripting0x0C:
-    dw DATA8_B3EF7A                                            ;B3EF5A|        |B3EF7A;
-    dw DATA8_B3EFF3                                            ;B3EF5C|        |B3EFF3;
+pAIScripting0x0C_DogEvent:
+    dw AI_ObtainDog                                            ;B3EF5A|        |B3EF7A;
+    dw AI_EllenSayGoodbye                                      ;B3EF5C|        |B3EFF3;
     dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF5E|        |B3F068;
     dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF60|        |B3F068;
     dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF62|        |B3F068;
@@ -8916,10 +8916,10 @@ pAIScripting0x0C:
     dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF76|        |B3F068;
     dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF78|        |B3F068;
  
-DATA8_B3EF7A:
+AI_ObtainDog:
  
     %AICMD0x50()                                               ;B3EF7A
-    %AICMD0x08()                                               ;B3EF7B
+    %AICMD0x08_EnableAIControl()                               ;B3EF7B
     %AICMD0x09($16, $B3EFB0)                                   ;B3EF7C
     %AICMD0x09($02, $B3EFD1)                                   ;B3EF80
     %AICMD0x38()                                               ;B3EF84
@@ -8956,11 +8956,11 @@ DATA8_B3EF7A:
     %AICMD0x12_Jump($B3EFED)                                   ;B3EFF0
 
 
-DATA8_B3EFF3:
+AI_EllenSayGoodbye:
  
     %AICMD0x50()                                               ;B3EFF3
     %AICMD0x02_FreezeTime()                                    ;B3EFF4
-    %AICMD0x08()                                               ;B3EFF5
+    %AICMD0x08_EnableAIControl()                               ;B3EFF5
     %AICMD0x09($16, $B3F00C)                                   ;B3EFF6
     %AICMD0x09($01, $B3F034)                                   ;B3EFFA
     %AICMD0x05_SetTransferPosition(136, 424)                   ;B3EFFE
@@ -8968,7 +8968,7 @@ DATA8_B3EFF3:
     %AICMD0x0B($00)                                            ;B3F004
     %AICMD0x0C($01)                                            ;B3F006
     %AICMD0x0C($02)                                            ;B3F008
-    %AICMD0x11()                                               ;B3F00A
+    %AICMD0x11_EnableUserControl()                             ;B3F00A
     %AICMD0x10_End()                                           ;B3F00B
     %AICMD0x1A($0078, $01A8, $B38114, $02)                     ;B3F00C
     %AICMD0x0C($00)                                            ;B3F014
@@ -8998,7 +8998,7 @@ DATA8_B3EFF3:
 
 
 pAIScripting0x0D_CrossRoadsEvents:
-    dw AI_HorseSpawn                                           ;B3F068|        |B3F088;
+    dw AI_ObtainHorse                                          ;B3F068|        |B3F088;
     dw DATA8_B3F0A9                                            ;B3F06A|        |B3F0A9;
     dw pAIScripting0x0E                                        ;B3F06C|        |B3F0E6;
     dw pAIScripting0x0E                                        ;B3F06E|        |B3F0E6;
@@ -9015,11 +9015,11 @@ pAIScripting0x0D_CrossRoadsEvents:
     dw pAIScripting0x0E                                        ;B3F084|        |B3F0E6;
     dw pAIScripting0x0E                                        ;B3F086|        |B3F0E6;
  
-AI_HorseSpawn:
+AI_ObtainHorse:
  
     %AICMD0x50()                                               ;B3F088
     %AICMD0x02_FreezeTime()                                    ;B3F089
-    %AICMD0x08()                                               ;B3F08A
+    %AICMD0x08_EnableAIControl()                               ;B3F08A
     %AICMD0x09($17, $B3F0A0)                                   ;B3F08B
     %AICMD0x38()                                               ;B3F08F
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3F090
@@ -9035,13 +9035,13 @@ DATA8_B3F0A9:
  
     %AICMD0x50()                                               ;B3F0A9
     %AICMD0x02_FreezeTime()                                    ;B3F0AA
-    %AICMD0x08()                                               ;B3F0AB
+    %AICMD0x08_EnableAIControl()                               ;B3F0AB
     %AICMD0x05_SetTransferPosition(184, 120)                   ;B3F0AC
     %AICMD0x09($17, $B3F0C2)                                   ;B3F0B1
     %AICMD0x38()                                               ;B3F0B5
     %AICMD0x0B($00)                                            ;B3F0B6
     %AICMD0x0C($01)                                            ;B3F0B8
-    %AICMD0x11()                                               ;B3F0BA
+    %AICMD0x11_EnableUserControl()                             ;B3F0BA
     %AICMD0x41_AddValue16(nPlayerHappiness, 10)                ;B3F0BB
     %AICMD0x10_End()                                           ;B3F0C1
     %AICMD0x1A($00A8, $0080, $B38768, $00)                     ;B3F0C2
@@ -9187,11 +9187,11 @@ DATA8_B3F106:
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $08, $B3F298);B3F2E0
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $09, $B3F298);B3F2E7
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $0A, $B3F298);B3F2EE
-    %AICMD0x08()                                               ;B3F2F5
+    %AICMD0x08_EnableAIControl()                               ;B3F2F5
     %AICMD0x1B($02C7, $00)                                     ;B3F2F6
     %AICMD0x0D($00, $FF, $30, $01)                             ;B3F2FA
     %AICMD0x1B($02C4, $00)                                     ;B3F2FF
-    %AICMD0x11()                                               ;B3F303
+    %AICMD0x11_EnableUserControl()                             ;B3F303
     %AICMD0x12_Jump($B3F29E)                                   ;B3F304
     %AICMD0x14_JumpIfFlagSet(strcUnknownFlags.flags1, $0B, $B3F315);B3F307
     %AICMD0x1C_ShowDialog($0217, $00)                          ;B3F30E
@@ -9827,7 +9827,7 @@ DATA8_B3FDD4:
     %AICMD0x03_SetHour($07)                                    ;B3FDDF
     %AICMD0x05_SetTransferPosition(264, 264)                   ;B3FDE1
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B3FDE6
-    %AICMD0x08()                                               ;B3FDE8
+    %AICMD0x08_EnableAIControl()                               ;B3FDE8
     %AICMD0x19($00E8, $00)                                     ;B3FDE9
     %AICMD0x09($01, $B3F9C0)                                   ;B3FDED
     %AICMD0x09($02, $B3FA17)                                   ;B3FDF1
