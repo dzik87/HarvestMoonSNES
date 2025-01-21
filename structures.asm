@@ -104,6 +104,13 @@ struct strcEventFlags       $7F1F64
     .flags8                 : skip 2    ; 0E $7F1F72
 endstruct align 16
 
+!EFLAGS2_MARRIEDMARIA       = $0001
+!EFLAGS2_MARRIEDANN         = $0002
+!EFLAGS2_MARRIEDNINA        = $0004
+!EFLAGS2_MARRIEDELLEN       = $0008
+!EFLAGS2_MARRIEDEVE         = $0010
+!EFLAGS2_MARRIED            = !EFLAGS2_MARRIEDMARIA|!EFLAGS2_MARRIEDANN|!EFLAGS2_MARRIEDNINA|!EFLAGS2_MARRIEDELLEN|!EFLAGS2_MARRIEDEVE
+
 
 ; Unknown flags
 struct strcUnknownFlags     $7F1F74
@@ -155,12 +162,12 @@ endstruct align 12
 ; Unknown AI structure pointer to it is stored at 0xCC (48 entries)
 struct strcAIUnknown        $7EB586
     .unk00                  skip 1
-    .unk01                  skip 1
+    .flags                  skip 1  ; n8
     .nDataIndex             skip 1  ; stored as n8 used as index for pDataAddress
-    .unk03                  skip 1
-    .unk04                  skip 1
-    .unk05                  skip 1
-    .unk06                  skip 1
+    .unk03                  skip 1  ; n8
+    .unk04                  skip 1  ; n8
+    .unk05                  skip 1  ; n8
+    .unk06                  skip 1  ; n8
     .unk07                  skip 1
     .unk08                  skip 1
     .unk09                  skip 1
@@ -170,11 +177,11 @@ struct strcAIUnknown        $7EB586
     .unk0D                  skip 1
     .unk0E                  skip 1
     .unk0F                  skip 1
-    .unk10                  skip 1
+    .unk10                  skip 1  ; n8
     .unk11                  skip 1
     .unk12                  skip 1
     .unk13                  skip 1
-    .nOtherUnknownIndex     skip 1  ; stores pDataAddress[nDataIndex * 3 + 2] * 64 as n16 (64 is size of this struct so maybe it's child/parent index ?)
+    .nOtherUnknownIndex     skip 1  ; stores pDataAddress[nDataIndex * 3 + 2] * 64 as n16 (64 is size of this struct so maybe it's child/parent index/offset    ?)
     .unk15                  skip 1
     .nDataValue             skip 2  ; stores pDataAddress[nDataIndex * 3 + 0] as n16
     .unk18                  skip 1
@@ -217,3 +224,23 @@ struct strcAIUnknown        $7EB586
     .unk3E                  skip 1
     .nArg                   skip 1  ; Saved value from A register passed to fAI_SetupAreaScripting
 endstruct align 64
+
+!AIFLAGS_UNK00              =  $01
+!AIFLAGS_UNK02              =  $02
+!AIFLAGS_UNK04              =  $04
+!AIFLAGS_UNK08              =  $08
+!AIFLAGS_UNK10              =  $10
+!AIFLAGS_UNK20              =  $20
+!AIFLAGS_UNK40              =  $40
+!AIFLAGS_UNK80              =  $80
+
+
+; Gfx BG scrool Data
+struct strcBGScrool         $00013C
+    .BG1HorOffs             skip 2
+    .BG1VerOffs             skip 2
+    .BG2HorOffs             skip 2
+    .BG2VerOffs             skip 2
+    .BG3HorOffs             skip 2
+    .BG3VerOffs             skip 2
+endstruct

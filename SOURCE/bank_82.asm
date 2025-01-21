@@ -171,7 +171,7 @@ fEvents_ShippingScene:
  
  
 .sellingTime:
-    LDA.B nMapEngine_DestinationId                             ;828140|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;828140|A522    |000022;
     CMP.B #$04                                                 ;828142|C904    |      ;
     BCS fEvents_ShippingSceneReturn                            ;828144|B079    |8281BF;
     LDA.B #$00                                                 ;828146|A900    |      ;
@@ -410,7 +410,7 @@ fNextDayHandler:
     JSL.L fCore_SetForceBlank                                  ;828317|220F8E80|808E0F;
     SEP #$20                                                   ;82831B|E220    |      ;
     LDA.B #$0F                                                 ;82831D|A90F    |      ;
-    STA.B nMapEngine_DestinationId                             ;82831F|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82831F|8522    |000022;
     REP #$30                                                   ;828321|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;828323|AF641F7F|7F1F64;
     AND.W #$FFCF                                               ;828327|29CFFF  |      ;
@@ -844,19 +844,19 @@ fUnknown_828790:
     AND.W #$FC7F                                               ;828796|297FFC  |      ;
     STA.L strcEventFlags.flags5                                ;828799|8F6C1F7F|7F1F6C;
     LDA.L strcEventFlags.flags2                                ;82879D|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;8287A1|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .marriedCheck                                          ;8287A4|D027    |8287CD;
     LDA.L strcEventFlags.flags2                                ;8287A6|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;8287AA|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .marriedCheck                                          ;8287AD|D01E    |8287CD;
     LDA.L strcEventFlags.flags2                                ;8287AF|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;8287B3|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE .marriedCheck                                          ;8287B6|D015    |8287CD;
     LDA.L strcEventFlags.flags2                                ;8287B8|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;8287BC|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE .marriedCheck                                          ;8287BF|D00C    |8287CD;
     LDA.L strcEventFlags.flags2                                ;8287C1|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;8287C5|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE .marriedCheck                                          ;8287C8|D003    |8287CD;
     JMP.W .return                                              ;8287CA|4CD589  |8289D5;
  
@@ -879,22 +879,22 @@ fUnknown_828790:
  
   + REP #$30                                                   ;8287F4|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;8287F6|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;8287FA|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .marriedToMaria                                        ;8287FD|D02D    |82882C;
     LDA.L strcEventFlags.flags2                                ;8287FF|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;828803|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .marriedToAnn                                          ;828806|D04F    |828857;
     LDA.L strcEventFlags.flags2                                ;828808|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;82880C|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE .marriedToNina                                         ;82880F|D06B    |82887C;
     LDA.L strcEventFlags.flags2                                ;828811|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;828815|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BEQ +                                                      ;828818|F003    |82881D;
     JMP.W .marriedToEllen                                      ;82881A|4CA188  |8288A1;
  
  
   + LDA.L strcEventFlags.flags2                                ;82881D|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;828821|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BEQ +                                                      ;828824|F003    |828829;
     JMP.W .marriedToEve                                        ;828826|4CC488  |8288C4;
  
@@ -2262,7 +2262,7 @@ subToolUsed82A5C3_Sickle:
     JMP.W .return                                              ;82933C|4C5094  |829450;
  
  
-  + LDA.B nMapEngine_DestinationId                             ;82933F|A522    |000022;
+  + LDA.B nMapEngine_AreaIdToLoad                              ;82933F|A522    |000022;
     CMP.B #$04                                                 ;829341|C904    |      ;
     BCC .label1                                                ;829343|9015    |82935A;
     REP #$20                                                   ;829345|C220    |      ;
@@ -2548,10 +2548,10 @@ subToolUsed82A5C3_Hammer:
     CPX.W #$0004                                               ;8295CF|E00400  |      ;
     BNE .label5                                                ;8295D2|D071    |829645;
     SEP #$20                                                   ;8295D4|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;8295D6|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;8295D6|A522    |000022;
     CMP.B #$04                                                 ;8295D8|C904    |      ;
     BCC .label2                                                ;8295DA|9014    |8295F0;
-    LDA.B nMapEngine_DestinationId                             ;8295DC|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;8295DC|A522    |000022;
     CMP.B #$29                                                 ;8295DE|C929    |      ;
     BCS .label1                                                ;8295E0|B007    |8295E9;
     REP #$20                                                   ;8295E2|C220    |      ;
@@ -2649,7 +2649,7 @@ subToolUsed82A5C3_Hammer:
  
 .label7:
     SEP #$20                                                   ;8296A5|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;8296A7|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;8296A7|A522    |000022;
     CMP.B #$04                                                 ;8296A9|C904    |      ;
     BCC .label8                                                ;8296AB|9007    |8296B4;
     REP #$20                                                   ;8296AD|C220    |      ;
@@ -2723,7 +2723,7 @@ subToolUsed82A5C3_Hammer:
 .label12:
     SEP #$20                                                   ;82973F|E220    |      ;
     REP #$10                                                   ;829741|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;829743|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;829743|A522    |000022;
     CMP.B #$0C                                                 ;829745|C90C    |      ;
     BCC .label11                                               ;829747|90E6    |82972F;
     CMP.B #$10                                                 ;829749|C910    |      ;
@@ -2840,7 +2840,7 @@ subToolUsed82A5C3_Axe:
  
 .label1:
     SEP #$20                                                   ;829849|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82984B|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82984B|A522    |000022;
     CMP.B #$04                                                 ;82984D|C904    |      ;
     BCC .label4                                                ;82984F|9072    |8298C3;
     REP #$20                                                   ;829851|C220    |      ;
@@ -2954,7 +2954,7 @@ subToolUsed82A5C3_Axe:
  
 .label7:
     SEP #$20                                                   ;82994B|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82994D|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82994D|A522    |000022;
     CMP.B #$10                                                 ;82994F|C910    |      ;
     BCC .return                                                ;829951|9036    |829989;
     CMP.B #$14                                                 ;829953|C914    |      ;
@@ -3482,7 +3482,7 @@ subToolUsed82A5C3_GoldenSickle:
     JMP.W .justReturn                                          ;829D5E|4C8D9E  |829E8D;
  
  
-  + LDA.B nMapEngine_DestinationId                             ;829D61|A522    |000022;
+  + LDA.B nMapEngine_AreaIdToLoad                              ;829D61|A522    |000022;
     CMP.B #$04                                                 ;829D63|C904    |      ;
     BCC .label1                                                ;829D65|9013    |829D7A;
     REP #$20                                                   ;829D67|C220    |      ;
@@ -3795,10 +3795,10 @@ subToolUsed82A5C3_GolderHammer:
  
  
   + SEP #$20                                                   ;82A01C|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82A01E|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A01E|A522    |000022;
     CMP.B #$04                                                 ;82A020|C904    |      ;
     BCC .label2                                                ;82A022|9014    |82A038;
-    LDA.B nMapEngine_DestinationId                             ;82A024|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A024|A522    |000022;
     CMP.B #$29                                                 ;82A026|C929    |      ;
     BCS .label1                                                ;82A028|B007    |82A031;
     REP #$20                                                   ;82A02A|C220    |      ;
@@ -3885,7 +3885,7 @@ subToolUsed82A5C3_GolderHammer:
  
 .label6:
     SEP #$20                                                   ;82A0DA|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82A0DC|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A0DC|A522    |000022;
     CMP.B #$04                                                 ;82A0DE|C904    |      ;
     BCC .label7                                                ;82A0E0|9007    |82A0E9;
     REP #$20                                                   ;82A0E2|C220    |      ;
@@ -3937,7 +3937,7 @@ subToolUsed82A5C3_GolderHammer:
 .label9:
     SEP #$20                                                   ;82A141|E220    |      ;
     REP #$10                                                   ;82A143|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82A145|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A145|A522    |000022;
     CMP.B #$0C                                                 ;82A147|C90C    |      ;
     BCC .loop                                                  ;82A149|90E6    |82A131;
     CMP.B #$10                                                 ;82A14B|C910    |      ;
@@ -4041,7 +4041,7 @@ subToolUsed82A5C3_GoldenAxe:
  
 .label1:
     SEP #$20                                                   ;82A235|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82A237|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A237|A522    |000022;
     CMP.B #$04                                                 ;82A239|C904    |      ;
     BCC .label3                                                ;82A23B|9067    |82A2A4;
     SEP #$20                                                   ;82A23D|E220    |      ;
@@ -4200,7 +4200,7 @@ subToolUsed82A5C3_BeanstalkSeed:
     LDA.L nCurrentTimeID                                       ;82A37B|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;82A37F|C911    |      ;
     BCS +                                                      ;82A381|B01F    |82A3A2;
-    LDA.B nMapEngine_DestinationId                             ;82A383|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A383|A522    |000022;
     CMP.B #$31                                                 ;82A385|C931    |      ;
     BNE +                                                      ;82A387|D019    |82A3A2;
     REP #$30                                                   ;82A389|C230    |      ;
@@ -4224,7 +4224,7 @@ subToolUsed82A5C3_BlueDiamond:
     LDA.L nCurrentTimeID                                       ;82A3AE|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;82A3B2|C911    |      ;
     BCS +                                                      ;82A3B4|B03F    |82A3F5;
-    LDA.B nMapEngine_DestinationId                             ;82A3B6|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A3B6|A522    |000022;
     CMP.B #$34                                                 ;82A3B8|C934    |      ;
     BNE +                                                      ;82A3BA|D039    |82A3F5;
     REP #$30                                                   ;82A3BC|C230    |      ;
@@ -4269,7 +4269,7 @@ subToolUsed82A5C3_BlueFeather:
 subToolUsed82A5C3_ChickenFeed:
     SEP #$20                                                   ;82A414|E220    |      ;
     REP #$10                                                   ;82A416|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82A418|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A418|A522    |000022;
     CMP.B #$28                                                 ;82A41A|C928    |      ;
     BNE .label1                                                ;82A41C|D055    |82A473;
     REP #$20                                                   ;82A41E|C220    |      ;
@@ -4347,7 +4347,7 @@ subToolUsed82A5C3_ChickenFeed:
 subToolUsed82A5C3_CowFeed:
     SEP #$20                                                   ;82A4C2|E220    |      ;
     REP #$10                                                   ;82A4C4|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82A4C6|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A4C6|A522    |000022;
     CMP.B #$27                                                 ;82A4C8|C927    |      ;
     BNE .label1                                                ;82A4CA|D055    |82A521;
     REP #$20                                                   ;82A4CC|C220    |      ;
@@ -4496,7 +4496,7 @@ fObjectMap_LoadData:
     REP #$10                                                   ;82A5FD|C210    |      ;
     LDA.B #$00                                                 ;82A5FF|A900    |      ;
     XBA                                                        ;82A601|EB      |      ; B <-> A
-    LDA.B nMapEngine_DestinationId                             ;82A602|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82A602|A522    |000022;
     CMP.B #$04                                                 ;82A604|C904    |      ;
     BCS .notFarm                                               ;82A606|B013    |82A61B;
     REP #$20                                                   ;82A608|C220    |      ;
@@ -4514,7 +4514,7 @@ fObjectMap_LoadData:
     SEP #$20                                                   ;82A61B|E220    |      ;
     ASL A                                                      ;82A61D|0A      |      ;
     CLC                                                        ;82A61E|18      |      ;
-    ADC.B nMapEngine_DestinationId                             ;82A61F|6522    |000022;
+    ADC.B nMapEngine_AreaIdToLoad                              ;82A61F|6522    |000022;
     REP #$20                                                   ;82A621|C220    |      ;
     TAX                                                        ;82A623|AA      |      ;
     PHX                                                        ;82A624|DA      |      ;
@@ -5349,7 +5349,7 @@ fSound_GetToolSound:
  
 .wateringCan:
     SEP #$20                                                   ;82AB79|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82AB7B|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82AB7B|A522    |000022;
     CMP.B #$04                                                 ;82AB7D|C904    |      ;
     BCC +                                                      ;82AB7F|9021    |82ABA2;
     CMP.B #$10                                                 ;82AB81|C910    |      ;
@@ -5451,7 +5451,7 @@ fSound_GetToolSound:
  
 .paint:
     SEP #$20                                                   ;82AC35|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82AC37|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82AC37|A522    |000022;
     CMP.B #$04                                                 ;82AC39|C904    |      ;
     BCS ..return0                                              ;82AC3B|B01E    |82AC5B;
     REP #$30                                                   ;82AC3D|C230    |      ;
@@ -7265,7 +7265,7 @@ fUnknown_82D1C0:
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D30F|225AA682|82A65A;
     REP #$20                                                   ;82D313|C220    |      ;
     LDA.W #$0100                                               ;82D315|A90001  |      ;
-    STA.W $0146                                                ;82D318|8D4601  |000146;
+    STA.W strcBGScrool.BG3VerOffs                              ;82D318|8D4601  |000146;
     REP #$30                                                   ;82D31B|C230    |      ;
     LDA.W #$0000                                               ;82D31D|A90000  |      ;
     LDX.W #$0047                                               ;82D320|A24700  |      ;
@@ -7274,7 +7274,7 @@ fUnknown_82D1C0:
     JSL.L fAI_HowToPlaySetup                                   ;82D32A|226F8184|84816F;
     SEP #$20                                                   ;82D32E|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D330|AD8B09  |00098B;
-    STA.B nMapEngine_DestinationId                             ;82D333|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82D333|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D335|22DE9580|8095DE;
     SEP #$20                                                   ;82D339|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D33B|AD8B09  |00098B;
@@ -7448,7 +7448,7 @@ fMainMenu_AutoHowToPlay:
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D510|225AA682|82A65A;
     REP #$20                                                   ;82D514|C220    |      ;
     LDA.W #$0100                                               ;82D516|A90001  |      ;
-    STA.W $0146                                                ;82D519|8D4601  |000146;
+    STA.W strcBGScrool.BG3VerOffs                              ;82D519|8D4601  |000146;
     SEP #$20                                                   ;82D51C|E220    |      ;
     LDA.L nIntroHowToPlayIndex                                 ;82D51E|AF481F7F|7F1F48;
     BNE +                                                      ;82D522|D003    |82D527;
@@ -7658,7 +7658,7 @@ fMainMenu_PrepareHowToPlay:
     JSL.L fAI_HowToPlaySetup                                   ;82D6AC|226F8184|84816F;
     SEP #$20                                                   ;82D6B0|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D6B2|AD8B09  |00098B;
-    STA.B nMapEngine_DestinationId                             ;82D6B5|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82D6B5|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D6B7|22DE9580|8095DE;
     SEP #$20                                                   ;82D6BB|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D6BD|AD8B09  |00098B;
@@ -7712,7 +7712,7 @@ fUnknown_82D731:
     CPX.W #$0008                                               ;82D73F|E00800  |      ;
     BNE -                                                      ;82D742|D0F2    |82D736;
     SEP #$20                                                   ;82D744|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;82D746|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;82D746|A522    |000022;
     CMP.B #$04                                                 ;82D748|C904    |      ;
     BCS fUnknown_82D750                                        ;82D74A|B004    |82D750;
     JSL.L fObjectMap_LoadFarm                                  ;82D74C|2282A682|82A682;
@@ -7753,7 +7753,7 @@ fUnknown_82D75E:
     JSL.L fCore_ZeroVRAM                                       ;82D79A|22468880|808846;
     SEP #$20                                                   ;82D79E|E220    |      ;
     LDA.B #$5D                                                 ;82D7A0|A95D    |      ;
-    STA.B nMapEngine_DestinationId                             ;82D7A2|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82D7A2|8522    |000022;
     JSL.L fTileMap_MapChangeHandler                            ;82D7A4|22C6A780|80A7C6;
     REP #$20                                                   ;82D7A8|C220    |      ;
     LDA.W #$006E                                               ;82D7AA|A96E00  |      ;
@@ -7775,10 +7775,10 @@ fUnknown_82D75E:
     JSL.L fCore_PrepareTransfer                                ;82D7D0|22338A80|808A33;
     JSL.L fCore_StartPreparedTransfer                          ;82D7D4|22B28A80|808AB2;
     REP #$20                                                   ;82D7D8|C220    |      ;
-    STZ.W $013C                                                ;82D7DA|9C3C01  |00013C;
-    STZ.W $013E                                                ;82D7DD|9C3E01  |00013E;
-    STZ.W $0140                                                ;82D7E0|9C4001  |000140;
-    STZ.W $0142                                                ;82D7E3|9C4201  |000142;
+    STZ.W strcBGScrool.BG1HorOffs                              ;82D7DA|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;82D7DD|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG2HorOffs                              ;82D7E0|9C4001  |000140;
+    STZ.W strcBGScrool.BG2VerOffs                              ;82D7E3|9C4201  |000142;
     JSL.L fCore_ResetForceBlank                                ;82D7E6|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82D7EA|22458680|808645;
     SEP #$20                                                   ;82D7EE|E220    |      ;
@@ -7921,7 +7921,7 @@ fUnknown_82D8B0:
     STA.W nSmallItemSpriteIndex                                ;82D8F4|8D0109  |000901;
     REP #$20                                                   ;82D8F7|C220    |      ;
     LDA.W #$0100                                               ;82D8F9|A90001  |      ;
-    STA.W $0146                                                ;82D8FC|8D4601  |000146;
+    STA.W strcBGScrool.BG3VerOffs                              ;82D8FC|8D4601  |000146;
     REP #$30                                                   ;82D8FF|C230    |      ;
     LDA.W #$0000                                               ;82D901|A90000  |      ;
     LDX.W #$0009                                               ;82D904|A20900  |      ;
@@ -7930,7 +7930,7 @@ fUnknown_82D8B0:
     JSL.L fAI_HowToPlaySetup                                   ;82D90E|226F8184|84816F;
     SEP #$20                                                   ;82D912|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D914|AD8B09  |00098B;
-    STA.B nMapEngine_DestinationId                             ;82D917|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82D917|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D919|22DE9580|8095DE;
     JSL.L fAudioUnknown_83841F                                 ;82D91D|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82D921|22A48383|8383A4;
@@ -8014,7 +8014,7 @@ fUnknown_82D8B0:
     JSL.L fAI_ZeroCCPtr                                        ;82D9F4|22008084|848000;
     SEP #$20                                                   ;82D9F8|E220    |      ;
     LDA.B #$5B                                                 ;82D9FA|A95B    |      ;
-    STA.B nMapEngine_DestinationId                             ;82D9FC|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82D9FC|8522    |000022;
     JSL.L fTileMap_MapChangeHandler                            ;82D9FE|22C6A780|80A7C6;
     REP #$20                                                   ;82DA02|C220    |      ;
     LDA.W #$006D                                               ;82DA04|A96D00  |      ;
@@ -8037,13 +8037,13 @@ fUnknown_82D8B0:
     JSL.L fCore_StartPreparedTransfer                          ;82DA2E|22B28A80|808AB2;
     REP #$20                                                   ;82DA32|C220    |      ;
     LDA.W #$0100                                               ;82DA34|A90001  |      ;
-    STA.W $013C                                                ;82DA37|8D3C01  |00013C;
+    STA.W strcBGScrool.BG1HorOffs                              ;82DA37|8D3C01  |00013C;
     LDA.W #$0100                                               ;82DA3A|A90001  |      ;
-    STA.W $0140                                                ;82DA3D|8D4001  |000140;
+    STA.W strcBGScrool.BG2HorOffs                              ;82DA3D|8D4001  |000140;
     LDA.W #$0100                                               ;82DA40|A90001  |      ;
-    STA.W $013E                                                ;82DA43|8D3E01  |00013E;
+    STA.W strcBGScrool.BG1VerOffs                              ;82DA43|8D3E01  |00013E;
     LDA.W #$0100                                               ;82DA46|A90001  |      ;
-    STA.W $0142                                                ;82DA49|8D4201  |000142;
+    STA.W strcBGScrool.BG2VerOffs                              ;82DA49|8D4201  |000142;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DA4C|22DE9580|8095DE;
     JSL.L fAudioUnknown_83841F                                 ;82DA50|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82DA54|22A48383|8383A4;
@@ -8075,13 +8075,13 @@ fUnknown_82DA8C:
     AND.B #$01                                                 ;82DA90|2901    |      ;
     BNE .label1                                                ;82DA92|D012    |82DAA6;
     REP #$20                                                   ;82DA94|C220    |      ;
-    LDA.W $0140                                                ;82DA96|AD4001  |000140;
+    LDA.W strcBGScrool.BG2HorOffs                              ;82DA96|AD4001  |000140;
     INC A                                                      ;82DA99|1A      |      ;
-    STA.W $0140                                                ;82DA9A|8D4001  |000140;
-    LDA.W $013C                                                ;82DA9D|AD3C01  |00013C;
+    STA.W strcBGScrool.BG2HorOffs                              ;82DA9A|8D4001  |000140;
+    LDA.W strcBGScrool.BG1HorOffs                              ;82DA9D|AD3C01  |00013C;
     BEQ +                                                      ;82DAA0|F00C    |82DAAE;
     DEC A                                                      ;82DAA2|3A      |      ;
-    STA.W $013C                                                ;82DAA3|8D3C01  |00013C;
+    STA.W strcBGScrool.BG1HorOffs                              ;82DAA3|8D3C01  |00013C;
  
 .label1:
     SEP #$20                                                   ;82DAA6|E220    |      ;
@@ -8111,19 +8111,19 @@ fUnknown_82DAC9:
     AND.B #$01                                                 ;82DACD|2901    |      ;
     BNE .skip                                                  ;82DACF|D01C    |82DAED;
     REP #$20                                                   ;82DAD1|C220    |      ;
-    LDA.W $0140                                                ;82DAD3|AD4001  |000140;
+    LDA.W strcBGScrool.BG2HorOffs                              ;82DAD3|AD4001  |000140;
     INC A                                                      ;82DAD6|1A      |      ;
-    STA.W $0140                                                ;82DAD7|8D4001  |000140;
-    LDA.W $013E                                                ;82DADA|AD3E01  |00013E;
+    STA.W strcBGScrool.BG2HorOffs                              ;82DAD7|8D4001  |000140;
+    LDA.W strcBGScrool.BG1VerOffs                              ;82DADA|AD3E01  |00013E;
     BNE +                                                      ;82DADD|D003    |82DAE2;
     JMP.W fUnknown_82DB8E                                      ;82DADF|4C8EDB  |82DB8E;
  
  
   + DEC A                                                      ;82DAE2|3A      |      ;
-    STA.W $013E                                                ;82DAE3|8D3E01  |00013E;
-    LDA.W $0142                                                ;82DAE6|AD4201  |000142;
+    STA.W strcBGScrool.BG1VerOffs                              ;82DAE3|8D3E01  |00013E;
+    LDA.W strcBGScrool.BG2VerOffs                              ;82DAE6|AD4201  |000142;
     DEC A                                                      ;82DAE9|3A      |      ;
-    STA.W $0142                                                ;82DAEA|8D4201  |000142;
+    STA.W strcBGScrool.BG2VerOffs                              ;82DAEA|8D4201  |000142;
  
 .skip:
     SEP #$20                                                   ;82DAED|E220    |      ;
@@ -8134,7 +8134,7 @@ fUnknown_82DAC9:
 fUnknown_82DAF5:
     SEP #$20                                                   ;82DAF5|E220    |      ;
     LDA.B #$5C                                                 ;82DAF7|A95C    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DAF9|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DAF9|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DAFB|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;82DAFF|22018483|838401;
     SEP #$20                                                   ;82DB03|E220    |      ;
@@ -8164,7 +8164,7 @@ fUnknown_82DAF5:
     STZ.W nMapEngine_flags                                     ;82DB49|9C9601  |000196;
     SEP #$20                                                   ;82DB4C|E220    |      ;
     LDA.B #$5B                                                 ;82DB4E|A95B    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DB50|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DB50|8522    |000022;
     JSL.L fTileMap_MapChangeHandler                            ;82DB52|22C6A780|80A7C6;
     REP #$20                                                   ;82DB56|C220    |      ;
     LDA.W #$006D                                               ;82DB58|A96D00  |      ;
@@ -8187,14 +8187,14 @@ fUnknown_82DAF5:
     JSL.L fCore_StartPreparedTransfer                          ;82DB82|22B28A80|808AB2;
     SEP #$20                                                   ;82DB86|E220    |      ;
     LDA.B #$5C                                                 ;82DB88|A95C    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DB8A|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DB8A|8522    |000022;
     BRA fUnknown_82DBB2                                        ;82DB8C|8024    |82DBB2;
  
  
 fUnknown_82DB8E:
     SEP #$20                                                   ;82DB8E|E220    |      ;
     LDA.B #$5C                                                 ;82DB90|A95C    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DB92|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DB92|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DB94|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;82DB98|22018483|838401;
     SEP #$20                                                   ;82DB9C|E220    |      ;
@@ -8210,10 +8210,10 @@ fUnknown_82DB8E:
 fUnknown_82DBB2:
     REP #$20                                                   ;82DBB2|C220    |      ;
     STZ.B $90                                                  ;82DBB4|6490    |000090;
-    STZ.W $013C                                                ;82DBB6|9C3C01  |00013C;
-    STZ.W $013E                                                ;82DBB9|9C3E01  |00013E;
-    STZ.W $0140                                                ;82DBBC|9C4001  |000140;
-    STZ.W $0142                                                ;82DBBF|9C4201  |000142;
+    STZ.W strcBGScrool.BG1HorOffs                              ;82DBB6|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;82DBB9|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG2HorOffs                              ;82DBBC|9C4001  |000140;
+    STZ.W strcBGScrool.BG2VerOffs                              ;82DBBF|9C4201  |000142;
     STZ.B nPlayerPosX                                          ;82DBC2|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DBC4|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DBC6|9C7D01  |00017D;
@@ -8252,9 +8252,9 @@ fUnknown_82DC0D:
  
  
   + REP #$20                                                   ;82DC19|C220    |      ;
-    LDA.W $0140                                                ;82DC1B|AD4001  |000140;
+    LDA.W strcBGScrool.BG2HorOffs                              ;82DC1B|AD4001  |000140;
     INC A                                                      ;82DC1E|1A      |      ;
-    STA.W $0140                                                ;82DC1F|8D4001  |000140;
+    STA.W strcBGScrool.BG2HorOffs                              ;82DC1F|8D4001  |000140;
  
 .skip:
     SEP #$20                                                   ;82DC22|E220    |      ;
@@ -8435,9 +8435,9 @@ fUnknown_82DD8C:
     AND.B #$01                                                 ;82DD90|2901    |      ;
     BNE +                                                      ;82DD92|D009    |82DD9D;
     REP #$20                                                   ;82DD94|C220    |      ;
-    LDA.W $0140                                                ;82DD96|AD4001  |000140;
+    LDA.W strcBGScrool.BG2HorOffs                              ;82DD96|AD4001  |000140;
     INC A                                                      ;82DD99|1A      |      ;
-    STA.W $0140                                                ;82DD9A|8D4001  |000140;
+    STA.W strcBGScrool.BG2HorOffs                              ;82DD9A|8D4001  |000140;
  
   + SEP #$20                                                   ;82DD9D|E220    |      ;
     INC.B n8TempVar3                                           ;82DD9F|E694    |000094;
@@ -8586,7 +8586,7 @@ fUnknown_82DD8C:
 fUnknown_82DEC5:
     SEP #$20                                                   ;82DEC5|E220    |      ;
     LDA.B #$5C                                                 ;82DEC7|A95C    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DEC9|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DEC9|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DECB|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;82DECF|22018483|838401;
     SEP #$20                                                   ;82DED3|E220    |      ;
@@ -8603,10 +8603,10 @@ fUnknown_82DEC5:
     LDA.B #$03                                                 ;82DEEF|A903    |      ;
     JSL.L fCore_ManageGraphicsPresets                          ;82DEF1|22598C80|808C59;
     REP #$20                                                   ;82DEF5|C220    |      ;
-    STZ.W $013C                                                ;82DEF7|9C3C01  |00013C;
-    STZ.W $013E                                                ;82DEFA|9C3E01  |00013E;
-    STZ.W $0140                                                ;82DEFD|9C4001  |000140;
-    STZ.W $0142                                                ;82DF00|9C4201  |000142;
+    STZ.W strcBGScrool.BG1HorOffs                              ;82DEF7|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;82DEFA|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG2HorOffs                              ;82DEFD|9C4001  |000140;
+    STZ.W strcBGScrool.BG2VerOffs                              ;82DF00|9C4201  |000142;
     STZ.B nPlayerPosX                                          ;82DF03|64D6    |0000D6;
     STZ.B nPlayerPosY                                          ;82DF05|64D8    |0000D8;
     STZ.W nMapEngine_DestinationX                              ;82DF07|9C7D01  |00017D;
@@ -8614,11 +8614,11 @@ fUnknown_82DEC5:
     STZ.W nMapEngine_flags                                     ;82DF0D|9C9601  |000196;
     SEP #$20                                                   ;82DF10|E220    |      ;
     LDA.B #$5B                                                 ;82DF12|A95B    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DF14|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DF14|8522    |000022;
     JSL.L fTileMap_MapChangeHandler                            ;82DF16|22C6A780|80A7C6;
     SEP #$20                                                   ;82DF1A|E220    |      ;
     LDA.B #$5C                                                 ;82DF1C|A95C    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DF1E|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DF1E|8522    |000022;
     JSL.L fTileMap_MapChangeHandler                            ;82DF20|22C6A780|80A7C6;
     REP #$20                                                   ;82DF24|C220    |      ;
     LDA.W #$006D                                               ;82DF26|A96D00  |      ;
@@ -8667,7 +8667,7 @@ fUnknown_82DEC5:
 fUnknown_82DF92:
     SEP #$20                                                   ;82DF92|E220    |      ;
     LDA.B #$5E                                                 ;82DF94|A95E    |      ;
-    STA.B nMapEngine_DestinationId                             ;82DF96|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82DF96|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DF98|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;82DF9C|22018483|838401;
     SEP #$20                                                   ;82DFA0|E220    |      ;
@@ -8714,12 +8714,12 @@ fUnknown_82DF92:
     JSR.W fUnknown_82E405                                      ;82E00C|2005E4  |82E405;
     JSL.L fCore_Zero0x42Ptr                                    ;82E00F|22AB8F80|808FAB;
     REP #$20                                                   ;82E013|C220    |      ;
-    STZ.W $013C                                                ;82E015|9C3C01  |00013C;
-    STZ.W $013E                                                ;82E018|9C3E01  |00013E;
-    STZ.W $0140                                                ;82E01B|9C4001  |000140;
-    STZ.W $0142                                                ;82E01E|9C4201  |000142;
-    STZ.W $0144                                                ;82E021|9C4401  |000144;
-    STZ.W $0146                                                ;82E024|9C4601  |000146;
+    STZ.W strcBGScrool.BG1HorOffs                              ;82E015|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;82E018|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG2HorOffs                              ;82E01B|9C4001  |000140;
+    STZ.W strcBGScrool.BG2VerOffs                              ;82E01E|9C4201  |000142;
+    STZ.W strcBGScrool.BG3HorOffs                              ;82E021|9C4401  |000144;
+    STZ.W strcBGScrool.BG3VerOffs                              ;82E024|9C4601  |000146;
     SEP #$20                                                   ;82E027|E220    |      ;
     LDA.B #$00                                                 ;82E029|A900    |      ;
     XBA                                                        ;82E02B|EB      |      ;
@@ -8842,7 +8842,7 @@ fUnknown_82E0EB:
  
   + REP #$30                                                   ;82E127|C230    |      ;
     LDA.W #$0000                                               ;82E129|A90000  |      ;
-    STA.W $013C                                                ;82E12C|8D3C01  |00013C;
+    STA.W strcBGScrool.BG1HorOffs                              ;82E12C|8D3C01  |00013C;
     BRA .label2                                                ;82E12F|8000    |82E131;
  
  
@@ -8886,7 +8886,7 @@ fUnknown_82E16B:
  
   + REP #$30                                                   ;82E17D|C230    |      ;
     LDA.W #$0000                                               ;82E17F|A90000  |      ;
-    STA.W $013C                                                ;82E182|8D3C01  |00013C;
+    STA.W strcBGScrool.BG1HorOffs                              ;82E182|8D3C01  |00013C;
     BRA .label1                                                ;82E185|8000    |82E187;
  
  
@@ -8923,8 +8923,8 @@ fUnknown_82E1BD:
     BNE .label1                                                ;82E1C3|D00C    |82E1D1;
     STZ.B $96                                                  ;82E1C5|6496    |000096;
     REP #$20                                                   ;82E1C7|C220    |      ;
-    INC.W $0140                                                ;82E1C9|EE4001  |000140;
-    DEC.W $0142                                                ;82E1CC|CE4201  |000142;
+    INC.W strcBGScrool.BG2HorOffs                              ;82E1C9|EE4001  |000140;
+    DEC.W strcBGScrool.BG2VerOffs                              ;82E1CC|CE4201  |000142;
     BRA +                                                      ;82E1CF|8004    |82E1D5;
  
  
@@ -8952,7 +8952,7 @@ fUnknown_82E1BD:
 fUnknown_82E1F1:
     SEP #$20                                                   ;82E1F1|E220    |      ;
     LDA.B #$5E                                                 ;82E1F3|A95E    |      ;
-    STA.B nMapEngine_DestinationId                             ;82E1F5|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;82E1F5|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82E1F7|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;82E1FB|22018483|838401;
     SEP #$20                                                   ;82E1FF|E220    |      ;
@@ -9059,12 +9059,12 @@ fUnknown_82E1F1:
  
 .label2:
     REP #$20                                                   ;82E2ED|C220    |      ;
-    STZ.W $013C                                                ;82E2EF|9C3C01  |00013C;
-    STZ.W $013E                                                ;82E2F2|9C3E01  |00013E;
-    STZ.W $0140                                                ;82E2F5|9C4001  |000140;
-    STZ.W $0142                                                ;82E2F8|9C4201  |000142;
-    STZ.W $0144                                                ;82E2FB|9C4401  |000144;
-    STZ.W $0146                                                ;82E2FE|9C4601  |000146;
+    STZ.W strcBGScrool.BG1HorOffs                              ;82E2EF|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;82E2F2|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG2HorOffs                              ;82E2F5|9C4001  |000140;
+    STZ.W strcBGScrool.BG2VerOffs                              ;82E2F8|9C4201  |000142;
+    STZ.W strcBGScrool.BG3HorOffs                              ;82E2FB|9C4401  |000144;
+    STZ.W strcBGScrool.BG3VerOffs                              ;82E2FE|9C4601  |000146;
     JSL.L fAudioUnknown_83841F                                 ;82E301|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82E305|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;82E309|22808383|838380;
@@ -9167,8 +9167,8 @@ fUnknown_82E3D1:
     BNE .label1                                                ;82E3D7|D00C    |82E3E5;
     STZ.B $96                                                  ;82E3D9|6496    |000096;
     REP #$20                                                   ;82E3DB|C220    |      ;
-    INC.W $0140                                                ;82E3DD|EE4001  |000140;
-    DEC.W $0142                                                ;82E3E0|CE4201  |000142;
+    INC.W strcBGScrool.BG2HorOffs                              ;82E3DD|EE4001  |000140;
+    DEC.W strcBGScrool.BG2VerOffs                              ;82E3E0|CE4201  |000142;
     BRA +                                                      ;82E3E3|8004    |82E3E9;
  
  
@@ -9583,14 +9583,14 @@ fStartNewGame:
 fUnreached_82E801:
     SEP #$20                                                   ;82E801|E220    |      ;
     LDA.B #$00                                                 ;82E803|A900    |      ;
-    STA.W nNameInputLenght                                     ;82E805|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;82E805|8D9F09  |00099F;
     JML.L fScreen_NameInput                                    ;82E808|5C0CE882|82E80C;
  
  
 fScreen_NameInput:
     SEP #$20                                                   ;82E80C|E220    |      ;
-    LDA.B #$5F                                                 ;82E80E|A95F    |      ;
-    STA.B nMapEngine_DestinationId                             ;82E810|8522    |000022;
+    LDA.B #!AREA_NAMEINPUT                                                 
+    STA.B nMapEngine_AreaIdToLoad                              ;82E810|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82E812|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;82E816|22018483|838401;
     SEP #$20                                                   ;82E81A|E220    |      ;
@@ -9608,7 +9608,7 @@ fScreen_NameInput:
     JSL.L fUnknown_ZeroUnknown_85820F                          ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
     LDA.W nMapEngine_flags                                     ;82E842|AD9601  |000196;
-    STA.W $0198                                                ;82E845|8D9801  |000198;
+    STA.W nMapEngine_flags_TempCopy                            ;82E845|8D9801  |000198;
     STZ.W nMapEngine_flags                                     ;82E848|9C9601  |000196;
     STZ.W $0905                                                ;82E84B|9C0509  |000905;
     SEP #$20                                                   ;82E84E|E220    |      ;
@@ -9674,12 +9674,12 @@ fScreen_NameInput:
     JSL.L fUnknown_82EAB4                                      ;82E8E7|22B4EA82|82EAB4;
     JSL.L fUnknown_82EA80                                      ;82E8EB|2280EA82|82EA80;
     REP #$20                                                   ;82E8EF|C220    |      ;
-    STZ.W $013C                                                ;82E8F1|9C3C01  |00013C;
-    STZ.W $013E                                                ;82E8F4|9C3E01  |00013E;
-    STZ.W $0140                                                ;82E8F7|9C4001  |000140;
-    STZ.W $0142                                                ;82E8FA|9C4201  |000142;
-    STZ.W $0144                                                ;82E8FD|9C4401  |000144;
-    STZ.W $0146                                                ;82E900|9C4601  |000146;
+    STZ.W strcBGScrool.BG1HorOffs                              ;82E8F1|9C3C01  |00013C;
+    STZ.W strcBGScrool.BG1VerOffs                              ;82E8F4|9C3E01  |00013E;
+    STZ.W strcBGScrool.BG2HorOffs                              ;82E8F7|9C4001  |000140;
+    STZ.W strcBGScrool.BG2VerOffs                              ;82E8FA|9C4201  |000142;
+    STZ.W strcBGScrool.BG3HorOffs                              ;82E8FD|9C4401  |000144;
+    STZ.W strcBGScrool.BG3VerOffs                              ;82E900|9C4601  |000146;
     JSL.L fAudioUnknown_83841F                                 ;82E903|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82E907|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;82E90B|22808383|838380;
@@ -9738,8 +9738,8 @@ fScreen_NameInput:
     BNE .continue                                              ;82E989|D00C    |82E997;
     STZ.B $96                                                  ;82E98B|6496    |000096;
     REP #$20                                                   ;82E98D|C220    |      ;
-    INC.W $0140                                                ;82E98F|EE4001  |000140;
-    DEC.W $0142                                                ;82E992|CE4201  |000142;
+    INC.W strcBGScrool.BG2HorOffs                              ;82E98F|EE4001  |000140;
+    DEC.W strcBGScrool.BG2VerOffs                              ;82E992|CE4201  |000142;
     BRA +                                                      ;82E995|8004    |82E99B;
  
  
@@ -9769,41 +9769,41 @@ fScreen_NameInput:
  
 .nameHandler:
     REP #$20                                                   ;82E9CE|C220    |      ;
-    LDA.W $0198                                                ;82E9D0|AD9801  |000198;
+    LDA.W nMapEngine_flags_TempCopy                            ;82E9D0|AD9801  |000198;
     STA.W nMapEngine_flags                                     ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
-    LDA.W nNameInputLenght                                     ;82E9D8|AD9F09  |00099F;
-    CMP.B #$00                                                 ;82E9DB|C900    |      ;
+    LDA.W nNameInputDestination                                ;82E9D8|AD9F09  |00099F;
+    CMP.B #!NI_PLAYER                                                 
     BNE +                                                      ;82E9DD|D004    |82E9E3;
     JML.L fCore_SetPlayerName                                  ;82E9DF|5CED8080|8080ED;
  
  
-  + CMP.B #$01                                                 ;82E9E3|C901    |      ;
+  + CMP.B #!NI_COWBOUGHT                                                 
     BNE +                                                      ;82E9E5|D004    |82E9EB;
     JML.L fCore_SetBoughtCowName                               ;82E9E7|5C5F8180|80815F;
  
  
-  + CMP.B #$02                                                 ;82E9EB|C902    |      ;
+  + CMP.B #!NI_COWBORN                                                 
     BNE +                                                      ;82E9ED|D004    |82E9F3;
     JML.L fCore_SetBornCowName                                 ;82E9EF|5CD28180|8081D2;
  
  
-  + CMP.B #$03                                                 ;82E9F3|C903    |      ;
+  + CMP.B #!NI_DOG                                                 
     BNE +                                                      ;82E9F5|D004    |82E9FB;
     JML.L fCore_SetDogName                                     ;82E9F7|5C548280|808254;
  
  
-  + CMP.B #$04                                                 ;82E9FB|C904    |      ;
+  + CMP.B #!NI_HORSE                                                 
     BNE +                                                      ;82E9FD|D004    |82EA03;
     JML.L fCore_SetHorseName                                   ;82E9FF|5CC68280|8082C6;
  
  
-  + CMP.B #$05                                                 ;82EA03|C905    |      ;
+  + CMP.B #!NI_FIRSTHILD                                                 
     BNE +                                                      ;82EA05|D004    |82EA0B;
     JML.L fCore_SetFirstChildName                              ;82EA07|5C388380|808338;
  
  
-  + CMP.B #$06                                                 ;82EA0B|C906    |      ;
+  + CMP.B #!NI_SECONDCHILD                                                 
     BNE +                                                      ;82EA0D|D004    |82EA13;
     JML.L fCore_SetSecondChildName                             ;82EA0F|5CAE8380|8083AE;
  

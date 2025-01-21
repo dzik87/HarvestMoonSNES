@@ -412,7 +412,7 @@ fAudioUnknown_8382C6:
     JSL.L fCore_WaitForNMITimes                                ;8382EA|225D8680|80865D;
     SEP #$20                                                   ;8382EE|E220    |      ;
     LDA.W nDestinationAreaId                                   ;8382F0|AD8B09  |00098B;
-    STA.B nMapEngine_DestinationId                             ;8382F3|8522    |000022;
+    STA.B nMapEngine_AreaIdToLoad                              ;8382F3|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8382F5|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;8382F9|22018483|838401;
     RTL                                                        ;8382FD|6B      |      ;
@@ -2327,12 +2327,12 @@ fDialog_DialogHandler:
     ASL A                                                      ;8393D5|0A      |      ;
     ASL A                                                      ;8393D6|0A      |      ;
     STA.B n16TempVar1                                          ;8393D7|857E    |00007E;
-    LDA.W $0146                                                ;8393D9|AD4601  |000146;
+    LDA.W strcBGScrool.BG3VerOffs                              ;8393D9|AD4601  |000146;
     SEC                                                        ;8393DC|38      |      ;
     SBC.W #$0100                                               ;8393DD|E90001  |      ;
     SEC                                                        ;8393E0|38      |      ;
     SBC.B n16TempVar1                                          ;8393E1|E57E    |00007E;
-    STA.W $0146                                                ;8393E3|8D4601  |000146;
+    STA.W strcBGScrool.BG3VerOffs                              ;8393E3|8D4601  |000146;
     SEP #$20                                                   ;8393E6|E220    |      ;
     STZ.W nTimeState                                           ;8393E8|9C7309  |000973;
     REP #$20                                                   ;8393EB|C220    |      ;
@@ -2360,12 +2360,12 @@ fDialog_Unknown_8393F9:
     ASL A                                                      ;839410|0A      |      ;
     ASL A                                                      ;839411|0A      |      ;
     STA.B n16TempVar1                                          ;839412|857E    |00007E;
-    LDA.W $0146                                                ;839414|AD4601  |000146;
+    LDA.W strcBGScrool.BG3VerOffs                              ;839414|AD4601  |000146;
     CLC                                                        ;839417|18      |      ;
     ADC.W #$0100                                               ;839418|690001  |      ;
     CLC                                                        ;83941B|18      |      ;
     ADC.B n16TempVar1                                          ;83941C|657E    |00007E;
-    STA.W $0146                                                ;83941E|8D4601  |000146;
+    STA.W strcBGScrool.BG3VerOffs                              ;83941E|8D4601  |000146;
     JSL.L fDialog_Unknown_83932D                               ;839421|222D9383|83932D;
     REP #$20                                                   ;839425|C220    |      ;
     LDA.W nMapEngine_flags                                     ;839427|AD9601  |000196;
@@ -7629,7 +7629,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C2C6|B772    |000072;
     CMP.B #$04                                                 ;83C2C8|C904    |      ;
     BCS .label3                                                ;83C2CA|B00C    |83C2D8;
-    LDA.B nMapEngine_DestinationId                             ;83C2CC|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C2CC|A522    |000022;
     CMP.B #$04                                                 ;83C2CE|C904    |      ;
     BCC +                                                      ;83C2D0|9003    |83C2D5;
     JMP.W .label12                                             ;83C2D2|4C01C4  |83C401;
@@ -7644,7 +7644,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C2DD|B772    |000072;
     CMP.B #$08                                                 ;83C2DF|C908    |      ;
     BCS .label4                                                ;83C2E1|B012    |83C2F5;
-    LDA.B nMapEngine_DestinationId                             ;83C2E3|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C2E3|A522    |000022;
     CMP.B #$04                                                 ;83C2E5|C904    |      ;
     BCS +                                                      ;83C2E7|B003    |83C2EC;
     JMP.W .label12                                             ;83C2E9|4C01C4  |83C401;
@@ -7664,7 +7664,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C2FA|B772    |000072;
     CMP.B #$10                                                 ;83C2FC|C910    |      ;
     BCS .label5                                                ;83C2FE|B012    |83C312;
-    LDA.B nMapEngine_DestinationId                             ;83C300|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C300|A522    |000022;
     CMP.B #$0C                                                 ;83C302|C90C    |      ;
     BCS +                                                      ;83C304|B003    |83C309;
     JMP.W .label12                                             ;83C306|4C01C4  |83C401;
@@ -7684,7 +7684,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C317|B772    |000072;
     CMP.B #$14                                                 ;83C319|C914    |      ;
     BCS .label6                                                ;83C31B|B012    |83C32F;
-    LDA.B nMapEngine_DestinationId                             ;83C31D|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C31D|A522    |000022;
     CMP.B #$10                                                 ;83C31F|C910    |      ;
     BCS +                                                      ;83C321|B003    |83C326;
     JMP.W .label12                                             ;83C323|4C01C4  |83C401;
@@ -7704,7 +7704,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C334|B772    |000072;
     CMP.B #$18                                                 ;83C336|C918    |      ;
     BCS .label7                                                ;83C338|B012    |83C34C;
-    LDA.B nMapEngine_DestinationId                             ;83C33A|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C33A|A522    |000022;
     CMP.B #$15                                                 ;83C33C|C915    |      ;
     BCS +                                                      ;83C33E|B003    |83C343;
     JMP.W .label12                                             ;83C340|4C01C4  |83C401;
@@ -7724,7 +7724,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C351|B772    |000072;
     CMP.B #$31                                                 ;83C353|C931    |      ;
     BCC .label8                                                ;83C355|900B    |83C362;
-    LDA.B nMapEngine_DestinationId                             ;83C357|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C357|A522    |000022;
     CMP.B #$31                                                 ;83C359|C931    |      ;
     BCS +                                                      ;83C35B|B003    |83C360;
     JMP.W .label12                                             ;83C35D|4C01C4  |83C401;
@@ -7737,7 +7737,7 @@ fGameEngine_ChichenUnknown83C296:
     SEP #$20                                                   ;83C362|E220    |      ;
     LDY.W #$0001                                               ;83C364|A00100  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83C367|B772    |000072;
-    CMP.B nMapEngine_DestinationId                             ;83C369|C522    |000022;
+    CMP.B nMapEngine_AreaIdToLoad                              ;83C369|C522    |000022;
     BEQ .continue                                              ;83C36B|F003    |83C370;
     JMP.W .label12                                             ;83C36D|4C01C4  |83C401;
  
@@ -7845,7 +7845,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + SEP #$20                                                   ;83C42A|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;83C42C|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C42C|A522    |000022;
     CMP.B #$27                                                 ;83C42E|C927    |      ;
     BNE .label14                                               ;83C430|D03B    |83C46D;
     LDY.W #$0002                                               ;83C432|A00200  |      ;
@@ -7886,7 +7886,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C472|B772    |000072;
     CMP.B #$04                                                 ;83C474|C904    |      ;
     BCS .label15                                               ;83C476|B00C    |83C484;
-    LDA.B nMapEngine_DestinationId                             ;83C478|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C478|A522    |000022;
     CMP.B #$04                                                 ;83C47A|C904    |      ;
     BCC +                                                      ;83C47C|9003    |83C481;
     JMP.W .label29                                             ;83C47E|4C3DC6  |83C63D;
@@ -7901,7 +7901,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C489|B772    |000072;
     CMP.B #$08                                                 ;83C48B|C908    |      ;
     BCS .label50                                               ;83C48D|B012    |83C4A1;
-    LDA.B nMapEngine_DestinationId                             ;83C48F|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C48F|A522    |000022;
     CMP.B #$04                                                 ;83C491|C904    |      ;
     BCS +                                                      ;83C493|B003    |83C498;
     JMP.W .label29                                             ;83C495|4C3DC6  |83C63D;
@@ -7921,7 +7921,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4A6|B772    |000072;
     CMP.B #$10                                                 ;83C4A8|C910    |      ;
     BCS .label16                                               ;83C4AA|B012    |83C4BE;
-    LDA.B nMapEngine_DestinationId                             ;83C4AC|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C4AC|A522    |000022;
     CMP.B #$0C                                                 ;83C4AE|C90C    |      ;
     BCS +                                                      ;83C4B0|B003    |83C4B5;
     JMP.W .label29                                             ;83C4B2|4C3DC6  |83C63D;
@@ -7941,7 +7941,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4C3|B772    |000072;
     CMP.B #$14                                                 ;83C4C5|C914    |      ;
     BCS .label51                                               ;83C4C7|B012    |83C4DB;
-    LDA.B nMapEngine_DestinationId                             ;83C4C9|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C4C9|A522    |000022;
     CMP.B #$10                                                 ;83C4CB|C910    |      ;
     BCS +                                                      ;83C4CD|B003    |83C4D2;
     JMP.W .label29                                             ;83C4CF|4C3DC6  |83C63D;
@@ -7961,7 +7961,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4E0|B772    |000072;
     CMP.B #$18                                                 ;83C4E2|C918    |      ;
     BCS .label17                                               ;83C4E4|B012    |83C4F8;
-    LDA.B nMapEngine_DestinationId                             ;83C4E6|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C4E6|A522    |000022;
     CMP.B #$15                                                 ;83C4E8|C915    |      ;
     BCS +                                                      ;83C4EA|B003    |83C4EF;
     JMP.W .label29                                             ;83C4EC|4C3DC6  |83C63D;
@@ -7981,7 +7981,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4FD|B772    |000072;
     CMP.B #$31                                                 ;83C4FF|C931    |      ;
     BCC .label18                                               ;83C501|900B    |83C50E;
-    LDA.B nMapEngine_DestinationId                             ;83C503|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C503|A522    |000022;
     CMP.B #$31                                                 ;83C505|C931    |      ;
     BCS +                                                      ;83C507|B003    |83C50C;
     JMP.W .label29                                             ;83C509|4C3DC6  |83C63D;
@@ -7994,7 +7994,7 @@ fGameEngine_ChichenUnknown83C296:
     SEP #$20                                                   ;83C50E|E220    |      ;
     LDY.W #$0002                                               ;83C510|A00200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83C513|B772    |000072;
-    CMP.B nMapEngine_DestinationId                             ;83C515|C522    |000022;
+    CMP.B nMapEngine_AreaIdToLoad                              ;83C515|C522    |000022;
     BEQ .label19                                               ;83C517|F003    |83C51C;
     JMP.W .label29                                             ;83C519|4C3DC6  |83C63D;
  
@@ -8188,7 +8188,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C663|AF301F7F|7F1F30;
     CMP.B #$04                                                 ;83C667|C904    |      ;
     BCS .label30                                               ;83C669|B00C    |83C677;
-    LDA.B nMapEngine_DestinationId                             ;83C66B|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C66B|A522    |000022;
     CMP.B #$04                                                 ;83C66D|C904    |      ;
     BCC +                                                      ;83C66F|9003    |83C674;
     JMP.W .label37                                             ;83C671|4C34C7  |83C734;
@@ -8202,7 +8202,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C679|AF301F7F|7F1F30;
     CMP.B #$08                                                 ;83C67D|C908    |      ;
     BCS .label31                                               ;83C67F|B012    |83C693;
-    LDA.B nMapEngine_DestinationId                             ;83C681|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C681|A522    |000022;
     CMP.B #$04                                                 ;83C683|C904    |      ;
     BCS +                                                      ;83C685|B003    |83C68A;
     JMP.W .label37                                             ;83C687|4C34C7  |83C734;
@@ -8221,7 +8221,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C695|AF301F7F|7F1F30;
     CMP.B #$10                                                 ;83C699|C910    |      ;
     BCS .label33                                               ;83C69B|B012    |83C6AF;
-    LDA.B nMapEngine_DestinationId                             ;83C69D|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C69D|A522    |000022;
     CMP.B #$0C                                                 ;83C69F|C90C    |      ;
     BCS +                                                      ;83C6A1|B003    |83C6A6;
     JMP.W .label37                                             ;83C6A3|4C34C7  |83C734;
@@ -8240,7 +8240,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C6B1|AF301F7F|7F1F30;
     CMP.B #$14                                                 ;83C6B5|C914    |      ;
     BCS .label34                                               ;83C6B7|B012    |83C6CB;
-    LDA.B nMapEngine_DestinationId                             ;83C6B9|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C6B9|A522    |000022;
     CMP.B #$10                                                 ;83C6BB|C910    |      ;
     BCS +                                                      ;83C6BD|B003    |83C6C2;
     JMP.W .label37                                             ;83C6BF|4C34C7  |83C734;
@@ -8259,7 +8259,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C6CD|AF301F7F|7F1F30;
     CMP.B #$18                                                 ;83C6D1|C918    |      ;
     BCS .label35                                               ;83C6D3|B012    |83C6E7;
-    LDA.B nMapEngine_DestinationId                             ;83C6D5|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C6D5|A522    |000022;
     CMP.B #$15                                                 ;83C6D7|C915    |      ;
     BCS +                                                      ;83C6D9|B003    |83C6DE;
     JMP.W .label37                                             ;83C6DB|4C34C7  |83C734;
@@ -8278,7 +8278,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C6E9|AF301F7F|7F1F30;
     CMP.B #$31                                                 ;83C6ED|C931    |      ;
     BCC .label36                                               ;83C6EF|900B    |83C6FC;
-    LDA.B nMapEngine_DestinationId                             ;83C6F1|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C6F1|A522    |000022;
     CMP.B #$31                                                 ;83C6F3|C931    |      ;
     BCS +                                                      ;83C6F5|B003    |83C6FA;
     JMP.W .label37                                             ;83C6F7|4C34C7  |83C734;
@@ -8290,7 +8290,7 @@ fGameEngine_ChichenUnknown83C296:
 .label36:
     SEP #$20                                                   ;83C6FC|E220    |      ;
     LDA.L nDogAreaId                                           ;83C6FE|AF301F7F|7F1F30;
-    CMP.B nMapEngine_DestinationId                             ;83C702|C522    |000022;
+    CMP.B nMapEngine_AreaIdToLoad                              ;83C702|C522    |000022;
     BEQ .jump1                                                 ;83C704|F003    |83C709;
     JMP.W .label37                                             ;83C706|4C34C7  |83C734;
  
@@ -8329,7 +8329,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C74E|AF311F7F|7F1F31;
     CMP.B #$04                                                 ;83C752|C904    |      ;
     BCS .label38                                               ;83C754|B00B    |83C761;
-    LDA.B nMapEngine_DestinationId                             ;83C756|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C756|A522    |000022;
     CMP.B #$04                                                 ;83C758|C904    |      ;
     BCC +                                                      ;83C75A|9003    |83C75F;
     JMP.W .return                                              ;83C75C|4C06C8  |83C806;
@@ -8343,7 +8343,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C763|AF311F7F|7F1F31;
     CMP.B #$08                                                 ;83C767|C908    |      ;
     BCS .label39                                               ;83C769|B012    |83C77D;
-    LDA.B nMapEngine_DestinationId                             ;83C76B|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C76B|A522    |000022;
     CMP.B #$04                                                 ;83C76D|C904    |      ;
     BCS +                                                      ;83C76F|B003    |83C774;
     JMP.W .return                                              ;83C771|4C06C8  |83C806;
@@ -8362,7 +8362,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C77F|AF311F7F|7F1F31;
     CMP.B #$10                                                 ;83C783|C910    |      ;
     BCS .label40                                               ;83C785|B012    |83C799;
-    LDA.B nMapEngine_DestinationId                             ;83C787|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C787|A522    |000022;
     CMP.B #$0C                                                 ;83C789|C90C    |      ;
     BCS +                                                      ;83C78B|B003    |83C790;
     JMP.W .return                                              ;83C78D|4C06C8  |83C806;
@@ -8381,7 +8381,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C79B|AF311F7F|7F1F31;
     CMP.B #$14                                                 ;83C79F|C914    |      ;
     BCS .label41                                               ;83C7A1|B012    |83C7B5;
-    LDA.B nMapEngine_DestinationId                             ;83C7A3|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C7A3|A522    |000022;
     CMP.B #$10                                                 ;83C7A5|C910    |      ;
     BCS +                                                      ;83C7A7|B003    |83C7AC;
     JMP.W .return                                              ;83C7A9|4C06C8  |83C806;
@@ -8400,7 +8400,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C7B7|AF311F7F|7F1F31;
     CMP.B #$31                                                 ;83C7BB|C931    |      ;
     BCC .label42                                               ;83C7BD|900B    |83C7CA;
-    LDA.B nMapEngine_DestinationId                             ;83C7BF|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83C7BF|A522    |000022;
     CMP.B #$31                                                 ;83C7C1|C931    |      ;
     BCS +                                                      ;83C7C3|B003    |83C7C8;
     JMP.W .return                                              ;83C7C5|4C06C8  |83C806;
@@ -8412,7 +8412,7 @@ fGameEngine_ChichenUnknown83C296:
 .label42:
     SEP #$20                                                   ;83C7CA|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C7CC|AF311F7F|7F1F31;
-    CMP.B nMapEngine_DestinationId                             ;83C7D0|C522    |000022;
+    CMP.B nMapEngine_AreaIdToLoad                              ;83C7D0|C522    |000022;
     BEQ .jump2                                                 ;83C7D2|F003    |83C7D7;
     JMP.W .return                                              ;83C7D4|4C06C8  |83C806;
  
@@ -8768,7 +8768,7 @@ fMapEngine_AreaEvents:
     REP #$10                                                   ;83CA9A|C210    |      ;
     LDA.B #$00                                                 ;83CA9C|A900    |      ;
     XBA                                                        ;83CA9E|EB      |      ;
-    LDA.B nMapEngine_DestinationId                             ;83CA9F|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;83CA9F|A522    |000022;
     REP #$20                                                   ;83CAA1|C220    |      ;
     ASL A                                                      ;83CAA3|0A      |      ;
     TAX                                                        ;83CAA4|AA      |      ;
@@ -8880,18 +8880,18 @@ fAreaEvents_Farm:
     AND.W #$0002                                               ;83CB6F|290200  |      ;
     BNE +                                                      ;83CB72|D050    |83CBC4;
     LDA.L strcEventFlags.flags2                                ;83CB74|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83CB78|290100  |      ;
-    BNE .label1                                                ;83CB7B|D014    |83CB91;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    BNE .maria                                                 ;83CB7B|D014    |83CB91;
     LDA.L strcEventFlags.flags2                                ;83CB7D|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83CB81|290400  |      ;
-    BNE .label2                                                ;83CB84|D01C    |83CBA2;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    BNE .nina                                                  ;83CB84|D01C    |83CBA2;
     LDA.L strcEventFlags.flags2                                ;83CB86|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83CB8A|290800  |      ;
-    BNE .label3                                                ;83CB8D|D024    |83CBB3;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    BNE .ellen                                                 ;83CB8D|D024    |83CBB3;
     BRA +                                                      ;83CB8F|8033    |83CBC4;
  
  
-.label1:
+.maria:
     REP #$30                                                   ;83CB91|C230    |      ;
     LDA.W #$0013                                               ;83CB93|A91300  |      ;
     LDX.W #$0044                                               ;83CB96|A24400  |      ;
@@ -8900,7 +8900,7 @@ fAreaEvents_Farm:
     BRA +                                                      ;83CBA0|8022    |83CBC4;
  
  
-.label2:
+.nina:
     REP #$30                                                   ;83CBA2|C230    |      ;
     LDA.W #$0013                                               ;83CBA4|A91300  |      ;
     LDX.W #$0044                                               ;83CBA7|A24400  |      ;
@@ -8909,7 +8909,7 @@ fAreaEvents_Farm:
     BRA +                                                      ;83CBB1|8011    |83CBC4;
  
  
-.label3:
+.ellen:
     REP #$30                                                   ;83CBB3|C230    |      ;
     LDA.W #$0013                                               ;83CBB5|A91300  |      ;
     LDX.W #$0044                                               ;83CBB8|A24400  |      ;
@@ -8952,31 +8952,31 @@ fAreaEvents_Farm:
  
  
   + LDA.L strcEventFlags.flags2                                ;83CC17|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83CC1B|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BEQ +                                                      ;83CC1E|F003    |83CC23;
     JMP.W .label9                                              ;83CC20|4C5BCE  |83CE5B;
  
  
   + LDA.L strcEventFlags.flags2                                ;83CC23|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83CC27|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BEQ +                                                      ;83CC2A|F003    |83CC2F;
     JMP.W .label9                                              ;83CC2C|4C5BCE  |83CE5B;
  
  
   + LDA.L strcEventFlags.flags2                                ;83CC2F|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83CC33|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BEQ +                                                      ;83CC36|F003    |83CC3B;
     JMP.W .label9                                              ;83CC38|4C5BCE  |83CE5B;
  
  
   + LDA.L strcEventFlags.flags2                                ;83CC3B|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83CC3F|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BEQ +                                                      ;83CC42|F003    |83CC47;
     JMP.W .label9                                              ;83CC44|4C5BCE  |83CE5B;
  
  
   + LDA.L strcEventFlags.flags2                                ;83CC47|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83CC4B|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BEQ +                                                      ;83CC4E|F003    |83CC53;
     JMP.W .label9                                              ;83CC50|4C5BCE  |83CE5B;
  
@@ -9026,7 +9026,7 @@ fAreaEvents_Farm:
 .label4:
     REP #$20                                                   ;83CC9A|C220    |      ;
     LDA.L strcEventFlags.flags2                                ;83CC9C|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83CCA0|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .label5                                                ;83CCA3|D044    |83CCE9;
     LDA.L strcEventFlags.flags2                                ;83CCA5|AF661F7F|7F1F66;
     AND.W #$0080                                               ;83CCA9|298000  |      ;
@@ -9059,7 +9059,7 @@ fAreaEvents_Farm:
     AND.W #$1000                                               ;83CCEF|290010  |      ;
     BNE .label6                                                ;83CCF2|D044    |83CD38;
     LDA.L strcEventFlags.flags2                                ;83CCF4|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83CCF8|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .label6                                                ;83CCFB|D03B    |83CD38;
     LDA.L strcEventFlags.flags4                                ;83CCFD|AF6A1F7F|7F1F6A;
     AND.W #$8000                                               ;83CD01|290080  |      ;
@@ -9092,7 +9092,7 @@ fAreaEvents_Farm:
     AND.W #$4000                                               ;83CD47|290040  |      ;
     BNE .label7                                                ;83CD4A|D044    |83CD90;
     LDA.L strcEventFlags.flags2                                ;83CD4C|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83CD50|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE .label7                                                ;83CD53|D03B    |83CD90;
     LDA.L strcEventFlags.flags5                                ;83CD55|AF6C1F7F|7F1F6C;
     AND.W #$0002                                               ;83CD59|290200  |      ;
@@ -9128,7 +9128,7 @@ fAreaEvents_Farm:
     AND.W #$0001                                               ;83CDA8|290100  |      ;
     BNE .label8                                                ;83CDAB|D044    |83CDF1;
     LDA.L strcEventFlags.flags2                                ;83CDAD|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83CDB1|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE .label8                                                ;83CDB4|D03B    |83CDF1;
     LDA.L strcEventFlags.flags5                                ;83CDB6|AF6C1F7F|7F1F6C;
     AND.W #$0008                                               ;83CDBA|290800  |      ;
@@ -9167,7 +9167,7 @@ fAreaEvents_Farm:
     AND.W #$0004                                               ;83CE12|290400  |      ;
     BNE .label9                                                ;83CE15|D044    |83CE5B;
     LDA.L strcEventFlags.flags2                                ;83CE17|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83CE1B|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE .label9                                                ;83CE1E|D03B    |83CE5B;
     LDA.L strcEventFlags.flags5                                ;83CE20|AF6C1F7F|7F1F6C;
     AND.W #$0020                                               ;83CE24|292000  |      ;
@@ -9245,7 +9245,7 @@ fAreaEvents_Farm:
     STA.L strcEventFlags.flags3                                ;83CED1|8F681F7F|7F1F68;
     SEP #$20                                                   ;83CED5|E220    |      ;
     LDA.B #$03                                                 ;83CED7|A903    |      ;
-    STA.W nNameInputLenght                                     ;83CED9|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;83CED9|8D9F09  |00099F;
     RTS                                                        ;83CEDC|60      |      ;
  
  
@@ -9915,7 +9915,7 @@ fAreaEvents_Town:
 fAreaEvents_MajorHouse:
     REP #$30                                                   ;83D4D7|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D4D9|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83D4DD|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE +                                                      ;83D4E0|D002    |83D4E4;
     BRA fAreaEvents_MajorHouseHandler                          ;83D4E2|801B    |83D4FF;
  
@@ -10048,7 +10048,7 @@ fAreaEvents_MajorHouseHandler:
 fAreaEvents_MariaBedroom:
     REP #$30                                                   ;83D5E7|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D5E9|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83D5ED|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE +                                                      ;83D5F0|D003    |83D5F5;
     JMP.W fAreaEvents_MajorHouseHandler                        ;83D5F2|4CFFD4  |83D4FF;
  
@@ -10072,7 +10072,7 @@ fAreaEvents_Church:
     SEP #$20                                                   ;83D613|E220    |      ;
     REP #$10                                                   ;83D615|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D617|AF191F7F|7F1F19;
-    CMP.B #$03                                                 ;83D61B|C903    |      ;
+    CMP.B #!SEASON_WINTER                                                 
     BNE +                                                      ;83D61D|D020    |83D63F;
     LDA.L nCurrentDay                                          ;83D61F|AF1B1F7F|7F1F1B;
     CMP.B #$0A                                                 ;83D623|C90A    |      ;
@@ -10091,7 +10091,7 @@ fAreaEvents_Church:
   + SEP #$20                                                   ;83D63F|E220    |      ;
     REP #$10                                                   ;83D641|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D643|AF191F7F|7F1F19;
-    CMP.B #$03                                                 ;83D647|C903    |      ;
+    CMP.B #!SEASON_WINTER                                                 
     BNE +                                                      ;83D649|D023    |83D66E;
     LDA.L nCurrentDay                                          ;83D64B|AF1B1F7F|7F1F1B;
     CMP.B #$18                                                 ;83D64F|C918    |      ;
@@ -10122,7 +10122,7 @@ fAreaEvents_Church:
  
   + REP #$20                                                   ;83D689|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83D68B|AD9601  |000196;
-    AND.W #$0008                                               ;83D68E|290800  |      ;
+    AND.W #!AFLAGS_UNK0008                                               
     BEQ +                                                      ;83D691|F003    |83D696;
     JMP.W .label4                                              ;83D693|4C1ED7  |83D71E;
  
@@ -10228,7 +10228,7 @@ fAreaEvents_Church:
 fAreaEvents_Florist:
     REP #$30                                                   ;83D74E|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D750|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83D754|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE +                                                      ;83D757|D002    |83D75B;
     BRA fAreaEvents_FloristHandler                             ;83D759|801B    |83D776;
  
@@ -10329,7 +10329,7 @@ fAreaEvents_FloristHandler:
 fAreaEvents_NinaBedroom:
     REP #$30                                                   ;83D818|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D81A|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83D81E|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE +                                                      ;83D821|D003    |83D826;
     JMP.W fAreaEvents_FloristHandler                           ;83D823|4C76D7  |83D776;
  
@@ -10352,7 +10352,7 @@ fAreaEvents_NinaBedroom:
 fAreaEvents_Toolshop:
     REP #$30                                                   ;83D844|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D846|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83D84A|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE +                                                      ;83D84D|D002    |83D851;
     BRA fAreaEvents_ToolshopHandler                            ;83D84F|801B    |83D86C;
  
@@ -10466,7 +10466,7 @@ fAreaEvents_ToolshopHandler:
 fAreaEvents_AnnBedroom:
     REP #$30                                                   ;83D929|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D92B|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83D92F|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE +                                                      ;83D932|D003    |83D937;
     JMP.W fAreaEvents_ToolshopHandler                          ;83D934|4C6CD8  |83D86C;
  
@@ -10489,7 +10489,7 @@ fAreaEvents_AnnBedroom:
 fAreaEvents_Restaurant:
     REP #$30                                                   ;83D955|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83D957|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83D95B|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE +                                                      ;83D95E|D002    |83D962;
     BRA fAreaEvents_RestaurantHandler                          ;83D960|801B    |83D97D;
  
@@ -10590,7 +10590,7 @@ fAreaEvents_RestaurantHandler:
 fAreaEvents_EllenBedroom:
     REP #$30                                                   ;83DA1F|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83DA21|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83DA25|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE +                                                      ;83DA28|D003    |83DA2D;
     JMP.W fAreaEvents_RestaurantHandler                        ;83DA2A|4C7DD9  |83D97D;
  
@@ -10775,7 +10775,7 @@ fAreaEvents_AnimalShop:
 fAreaEvents_Bar:
     REP #$30                                                   ;83DB8F|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83DB91|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83DB95|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE +                                                      ;83DB98|D002    |83DB9C;
     BRA fAreaEvents_BarHandler                                 ;83DB9A|801B    |83DBB7;
  
@@ -10840,7 +10840,7 @@ fAreaEvents_BarHandler:
 fAreaEvents_EveBedroom:
     REP #$30                                                   ;83DC1E|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83DC20|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83DC24|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE +                                                      ;83DC27|D003    |83DC2C;
     JMP.W fAreaEvents_BarHandler                               ;83DC29|4CB7DB  |83DBB7;
  
@@ -11361,13 +11361,13 @@ fAreaEvents_House:
     BNE +                                                      ;83E0B9|D008    |83E0C3;
     SEP #$20                                                   ;83E0BB|E220    |      ;
     LDA.B #$05                                                 ;83E0BD|A905    |      ;
-    STA.W nNameInputLenght                                     ;83E0BF|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;83E0BF|8D9F09  |00099F;
     RTS                                                        ;83E0C2|60      |      ;
  
  
   + SEP #$20                                                   ;83E0C3|E220    |      ;
     LDA.B #$06                                                 ;83E0C5|A906    |      ;
-    STA.W nNameInputLenght                                     ;83E0C7|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;83E0C7|8D9F09  |00099F;
     RTS                                                        ;83E0CA|60      |      ;
  
  
@@ -11428,19 +11428,19 @@ fAreaEvents_House:
 .label7:
     REP #$30                                                   ;83E144|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83E146|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83E14A|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .label8                                                ;83E14D|D027    |83E176;
     LDA.L strcEventFlags.flags2                                ;83E14F|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83E153|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .label9                                                ;83E156|D02E    |83E186;
     LDA.L strcEventFlags.flags2                                ;83E158|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83E15C|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE .label10                                               ;83E15F|D032    |83E193;
     LDA.L strcEventFlags.flags2                                ;83E161|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83E165|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE .label11                                               ;83E168|D036    |83E1A0;
     LDA.L strcEventFlags.flags2                                ;83E16A|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83E16E|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE .label12                                               ;83E171|D03A    |83E1AD;
     JMP.W .label23                                             ;83E173|4CC6E2  |83E2C6;
  
@@ -11529,30 +11529,30 @@ fAreaEvents_House:
     AND.W #$0002                                               ;83E221|290200  |      ;
     BNE .label17                                               ;83E224|D03C    |83E262;
     LDA.L strcEventFlags.flags2                                ;83E226|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83E22A|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .label18                                               ;83E22D|D042    |83E271;
     LDA.L strcEventFlags.flags2                                ;83E22F|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83E233|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BEQ +                                                      ;83E236|F003    |83E23B;
     JMP.W .label19                                             ;83E238|4C82E2  |83E282;
  
  
   + LDA.L strcEventFlags.flags2                                ;83E23B|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83E23F|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BEQ .label15                                               ;83E242|F003    |83E247;
     JMP.W .label20                                             ;83E244|4C93E2  |83E293;
  
  
 .label15:
     LDA.L strcEventFlags.flags2                                ;83E247|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83E24B|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BEQ .label16                                               ;83E24E|F003    |83E253;
     JMP.W .label21                                             ;83E250|4CA4E2  |83E2A4;
  
  
 .label16:
     LDA.L strcEventFlags.flags2                                ;83E253|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83E257|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BEQ +                                                      ;83E25A|F003    |83E25F;
     JMP.W .label22                                             ;83E25C|4CB5E2  |83E2B5;
  
@@ -11821,7 +11821,7 @@ fAreaEvents_CrossRoad:
     STA.L strcEventFlags.flags3                                ;83E49B|8F681F7F|7F1F68;
     SEP #$20                                                   ;83E49F|E220    |      ;
     LDA.B #$04                                                 ;83E4A1|A904    |      ;
-    STA.W nNameInputLenght                                     ;83E4A3|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;83E4A3|8D9F09  |00099F;
     RTS                                                        ;83E4A6|60      |      ;
  
  
@@ -12104,10 +12104,10 @@ fAreaEvents_Shed:
     AND.W #$0002                                               ;83E6CA|290200  |      ;
     BNE .label3                                                ;83E6CD|D036    |83E705;
     LDA.L strcEventFlags.flags2                                ;83E6CF|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83E6D3|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .label1                                                ;83E6D6|D00B    |83E6E3;
     LDA.L strcEventFlags.flags2                                ;83E6D8|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83E6DC|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE .label2                                                ;83E6DF|D013    |83E6F4;
     BRA .label3                                                ;83E6E1|8022    |83E705;
  
@@ -12981,7 +12981,7 @@ fAreaEvents_Endings:
 .ending00:
     REP #$30                                                   ;83ED1E|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83ED20|AF661F7F|7F1F66;
-    AND.W #$001F                                               ;83ED24|291F00  |      ;
+    AND.W #!EFLAGS2_MARRIED                                               
     BNE .ending01                                              ;83ED27|D031    |83ED5A;
     LDA.L nPlayerHappiness                                     ;83ED29|AF331F7F|7F1F33;
     CMP.W #$0064                                               ;83ED2D|C96400  |      ;
@@ -13142,7 +13142,7 @@ fAreaEvents_Endings:
 .ending09:
     REP #$30                                                   ;83EE82|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EE84|AF661F7F|7F1F66;
-    AND.W #$001F                                               ;83EE88|291F00  |      ;
+    AND.W #!EFLAGS2_MARRIED                                               
     BNE .ending0A                                              ;83EE8B|D021    |83EEAE;
     LDA.L nPlayerHappiness                                     ;83EE8D|AF331F7F|7F1F33;
     CMP.W #$0064                                               ;83EE91|C96400  |      ;
@@ -13161,7 +13161,7 @@ fAreaEvents_Endings:
 .ending0A:
     REP #$30                                                   ;83EEAE|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EEB0|AF661F7F|7F1F66;
-    AND.W #$001F                                               ;83EEB4|291F00  |      ;
+    AND.W #!EFLAGS2_MARRIED                                               
     BNE .ending0B                                              ;83EEB7|D021    |83EEDA;
     LDA.L nPlayerHappiness                                     ;83EEB9|AF331F7F|7F1F33;
     CMP.W #$0320                                               ;83EEBD|C92003  |      ;
@@ -13180,7 +13180,7 @@ fAreaEvents_Endings:
 .ending0B:
     REP #$30                                                   ;83EEDA|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EEDC|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;83EEE0|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BEQ .ending0C                                              ;83EEE3|F030    |83EF15;
     REP #$30                                                   ;83EEE5|C230    |      ;
     LDA.W #$0000                                               ;83EEE7|A90000  |      ;
@@ -13208,7 +13208,7 @@ fAreaEvents_Endings:
 .ending0C:
     REP #$30                                                   ;83EF15|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EF17|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;83EF1B|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BEQ .ending0D                                              ;83EF1E|F030    |83EF50;
     REP #$30                                                   ;83EF20|C230    |      ;
     LDA.W #$0000                                               ;83EF22|A90000  |      ;
@@ -13236,7 +13236,7 @@ fAreaEvents_Endings:
 .ending0D:
     REP #$30                                                   ;83EF50|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EF52|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;83EF56|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BEQ .ending0E                                              ;83EF59|F030    |83EF8B;
     REP #$30                                                   ;83EF5B|C230    |      ;
     LDA.W #$0000                                               ;83EF5D|A90000  |      ;
@@ -13264,7 +13264,7 @@ fAreaEvents_Endings:
 .ending0E:
     REP #$30                                                   ;83EF8B|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EF8D|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;83EF91|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BEQ .ending0F                                              ;83EF94|F030    |83EFC6;
     REP #$30                                                   ;83EF96|C230    |      ;
     LDA.W #$0000                                               ;83EF98|A90000  |      ;
@@ -13292,7 +13292,7 @@ fAreaEvents_Endings:
 .ending0F:
     REP #$30                                                   ;83EFC6|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EFC8|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;83EFCC|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BEQ .ending10                                              ;83EFCF|F018    |83EFE9;
     REP #$30                                                   ;83EFD1|C230    |      ;
     LDA.W #$0000                                               ;83EFD3|A90000  |      ;
@@ -13308,7 +13308,7 @@ fAreaEvents_Endings:
 .ending10:
     REP #$30                                                   ;83EFE9|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;83EFEB|AF661F7F|7F1F66;
-    AND.W #$001F                                               ;83EFEF|291F00  |      ;
+    AND.W #!EFLAGS2_MARRIED                                               
     BNE .ending11                                              ;83EFF2|D03B    |83F02F;
     LDA.L nPlayerHappiness                                     ;83EFF4|AF331F7F|7F1F33;
     CMP.W #$00C8                                               ;83EFF8|C9C800  |      ;
@@ -13775,7 +13775,7 @@ fAreaEvents_Endings:
  
   + REP #$20                                                   ;83F40C|C220    |      ;
     LDA.L strcEventFlags.flags2                                ;83F40E|AF661F7F|7F1F66;
-    AND.W #$001F                                               ;83F412|291F00  |      ;
+    AND.W #!EFLAGS2_MARRIED                                               
     BEQ +                                                      ;83F415|F00C    |83F423;
     LDA.L nRanchMasteringRate                                  ;83F417|AF541F7F|7F1F54;
     CLC                                                        ;83F41B|18      |      ;

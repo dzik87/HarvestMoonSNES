@@ -28,6 +28,7 @@
 !EITEM_COWFEED              =   $1A
 !EITEM_FISHINGPOLE          =   $1B
 
+
 ; Carry items               $00091D
 !CITEM_NONE                 =   $00
 
@@ -66,7 +67,23 @@
 
 
 ; nMapEngine_flags          $000196
-!AREAFLAGS_FORCETELEPORT    = $4000
+!AFLAGS_NONE                = $0000
+!AFLAGS_UNK0001             = $0001
+!AFLAGS_UNK0002             = $0002
+!AFLAGS_FOR0004             = $0004
+!AFLAGS_UNK0008             = $0008
+!AFLAGS_UNK0010             = $0010
+!AFLAGS_UNK0020             = $0020
+!AFLAGS_FOR0040             = $0040
+!AFLAGS_UNK0080             = $0080
+!AFLAGS_UNK0100             = $0100
+!AFLAGS_UNK0200             = $0200
+!AFLAGS_FOR0400             = $0400
+!AFLAGS_UNK0800             = $0800
+!AFLAGS_UNK1000             = $1000
+!AFLAGS_NAMEINPUTREQUEST    = $2000
+!AFLAGS_FORCETELEPORT       = $4000
+!AFLAGS_RAWCHARMAP          = $8000
 
 
 ; Areas/Maps                $00098B
@@ -165,7 +182,7 @@
 !AREA_UNKNOWN5C             =   $5C
 !AREA_NATSUMELOGO           =   $5D
 !AREA_UNKNOWN5E             =   $5E
-!AREA_UNKNOWN5F             =   $5F
+!AREA_NAMEINPUT             =   $5F
 
 
 ; Player flags              $0000D2
@@ -235,3 +252,13 @@
 !AIINPUT_RIGHT              =   $02
 !AIINPUT_LEFT               =   $03
 !AIINPUT_B                  =   $04
+
+
+; Name input destination    $00099F
+!NI_PLAYER                  =   $00
+!NI_COWBOUGHT               =   $01
+!NI_COWBORN                 =   $02
+!NI_DOG                     =   $03
+!NI_HORSE                   =   $04
+!NI_FIRSTHILD               =   $05
+!NI_SECONDCHILD             =   $06

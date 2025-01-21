@@ -2096,7 +2096,7 @@ fUnknown_818E1B:
     JSL.L fGameEngine_GetChickenData                           ;818E2F|2295C983|83C995;
     SEP #$20                                                   ;818E33|E220    |      ;
     LDY.W #$0001                                               ;818E35|A00100  |      ;
-    LDA.B nMapEngine_DestinationId                             ;818E38|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;818E38|A522    |000022;
     STA.B [ptrUnknown0x72],Y                                   ;818E3A|9772    |000072;
     LDY.W #$0000                                               ;818E3C|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;818E3F|B772    |000072;
@@ -2153,7 +2153,7 @@ fUnknown_818E98:
     JSL.L fUnknown_82AC61                                      ;818EB7|2261AC82|82AC61;
     SEP #$20                                                   ;818EBB|E220    |      ;
     REP #$10                                                   ;818EBD|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;818EBF|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;818EBF|A522    |000022;
     CMP.B #$27                                                 ;818EC1|C927    |      ;
     BEQ +                                                      ;818EC3|F007    |818ECC;
     CMP.B #$28                                                 ;818EC5|C928    |      ;
@@ -2436,7 +2436,7 @@ fItemSell_Unknown8190AA:
  
  
   + SEP #$20                                                   ;8190D9|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;8190DB|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;8190DB|A522    |000022;
     CMP.B #$04                                                 ;8190DD|C904    |      ;
     BCS +                                                      ;8190DF|B003    |8190E4;
     JMP.W fUnknown_81917E                                      ;8190E1|4C7E91  |81917E;
@@ -2772,7 +2772,7 @@ fUnknown_819378:
 fUnknown_819379:
     SEP #$20                                                   ;819379|E220    |      ;
     REP #$10                                                   ;81937B|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;81937D|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;81937D|A522    |000022;
     CMP.B #$04                                                 ;81937F|C904    |      ;
     BCS +                                                      ;819381|B003    |819386;
     JMP.W fItemShipped_Unknown819397                           ;819383|4C9793  |819397;
@@ -2850,7 +2850,7 @@ fItemShipped_Unknown819397:
     STA.B $A5                                                  ;819413|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;819415|22A28185|8581A2;
     SEP #$20                                                   ;819419|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;81941B|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;81941B|A522    |000022;
     CMP.B #$27                                                 ;81941D|C927    |      ;
     BNE +                                                      ;81941F|D003    |819424;
     JMP.W fUnknown_81944F                                      ;819421|4C4F94  |81944F;
@@ -2920,7 +2920,7 @@ fUnknown_819497:
     JMP.W fUnknown_81953F                                      ;8194A2|4C3F95  |81953F;
  
  
-  + LDA.B nMapEngine_DestinationId                             ;8194A5|A522    |000022;
+  + LDA.B nMapEngine_AreaIdToLoad                              ;8194A5|A522    |000022;
     CMP.B #$28                                                 ;8194A7|C928    |      ;
     BEQ +                                                      ;8194A9|F003    |8194AE;
     JMP.W fUnknown_81953F                                      ;8194AB|4C3F95  |81953F;
@@ -2985,7 +2985,7 @@ fUnknown_819497:
 fUnknown_81953F:
     SEP #$20                                                   ;81953F|E220    |      ;
     REP #$10                                                   ;819541|C210    |      ;
-    LDA.B nMapEngine_DestinationId                             ;819543|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;819543|A522    |000022;
     CMP.B #$04                                                 ;819545|C904    |      ;
     BCC fUnknown_819590                                        ;819547|9047    |819590;
     CMP.B #$10                                                 ;819549|C910    |      ;
@@ -4291,7 +4291,7 @@ fUnknownCF_81A58F:
     LDA.L nCurrentSeasonID                                     ;81A593|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;81A597|C903    |      ;
     BNE .return                                                ;81A599|D045    |81A5E0;
-    LDA.B nMapEngine_DestinationId                             ;81A59B|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;81A59B|A522    |000022;
     CMP.B #$04                                                 ;81A59D|C904    |      ;
     BCC +                                                      ;81A59F|9008    |81A5A9;
     CMP.B #$10                                                 ;81A5A1|C910    |      ;
@@ -4891,7 +4891,7 @@ fUnknown_81A94A:
     CMP.B #$19                                                 ;81A95F|C919    |      ;
     BEQ .label2                                                ;81A961|F00B    |81A96E;
     SEP #$20                                                   ;81A963|E220    |      ;
-    LDA.W nMapEngine_DestinationId                             ;81A965|AD2200  |000022;
+    LDA.W nMapEngine_AreaIdToLoad                              ;81A965|AD2200  |000022;
     CMP.B #$27                                                 ;81A968|C927    |      ;
     BNE .label5                                                ;81A96A|D042    |81A9AE;
     BRA .label4                                                ;81A96C|8014    |81A982;
@@ -4899,7 +4899,7 @@ fUnknown_81A94A:
  
 .label2:
     SEP #$20                                                   ;81A96E|E220    |      ;
-    LDA.W nMapEngine_DestinationId                             ;81A970|AD2200  |000022;
+    LDA.W nMapEngine_AreaIdToLoad                              ;81A970|AD2200  |000022;
     CMP.B #$28                                                 ;81A973|C928    |      ;
     BNE .label5                                                ;81A975|D037    |81A9AE;
     BRA .label4                                                ;81A977|8009    |81A982;
@@ -4907,7 +4907,7 @@ fUnknown_81A94A:
  
 .label3:
     SEP #$20                                                   ;81A979|E220    |      ;
-    LDA.W nMapEngine_DestinationId                             ;81A97B|AD2200  |000022;
+    LDA.W nMapEngine_AreaIdToLoad                              ;81A97B|AD2200  |000022;
     CMP.B #$26                                                 ;81A97E|C926    |      ;
     BNE .label5                                                ;81A980|D02C    |81A9AE;
  
@@ -4977,7 +4977,7 @@ fItemSubrutineHandler_81A9E5:
     REP #$10                                                   ;81A9E7|C210    |      ;
     LDA.B #$00                                                 ;81A9E9|A900    |      ;
     XBA                                                        ;81A9EB|EB      |      ;
-    LDA.B nMapEngine_DestinationId                             ;81A9EC|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;81A9EC|A522    |000022;
     REP #$20                                                   ;81A9EE|C220    |      ;
     ASL A                                                      ;81A9F0|0A      |      ;
     TAX                                                        ;81A9F1|AA      |      ;
@@ -8136,19 +8136,19 @@ fPlayerAction0x0C_SelectDialog:
 .05pm:
     REP #$30                                                   ;81C46D|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;81C46F|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;81C473|290100  |      ;
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .marriedCheck                                          ;81C476|D02A    |81C4A2;
     LDA.L strcEventFlags.flags2                                ;81C478|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;81C47C|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .marriedCheck                                          ;81C47F|D021    |81C4A2;
     LDA.L strcEventFlags.flags2                                ;81C481|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;81C485|290400  |      ;
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE .marriedCheck                                          ;81C488|D018    |81C4A2;
     LDA.L strcEventFlags.flags2                                ;81C48A|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;81C48E|290800  |      ;
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE .marriedCheck                                          ;81C491|D00F    |81C4A2;
     LDA.L strcEventFlags.flags2                                ;81C493|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;81C497|291000  |      ;
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE .marriedCheck                                          ;81C49A|D006    |81C4A2;
     LDX.W #$0476                                               ;81C49C|A27604  |      ;
     JMP.W .timeHandler                                         ;81C49F|4CBAC4  |81C4BA;
@@ -9054,14 +9054,14 @@ fPlayerAction0x08:
     AND.B nPlayerFlags                                         ;81CAD9|25D2    |0000D2;
     STA.B nPlayerFlags                                         ;81CADB|85D2    |0000D2;
     SEP #$20                                                   ;81CADD|E220    |      ;
-    LDA.B nMapEngine_DestinationId                             ;81CADF|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;81CADF|A522    |000022;
     CMP.B #!AREA_HOUSE1                                                 
     BEQ .goHome                                                ;81CAE3|F01D    |81CB02;
     CMP.B #!AREA_HOUSE2                                                 
     BEQ .goHome                                                ;81CAE7|F019    |81CB02;
     CMP.B #!AREA_HOUSE3                                                 
     BEQ .goHome                                                ;81CAEB|F015    |81CB02;
-    LDA.B nMapEngine_DestinationId                             ;81CAED|A522    |000022;
+    LDA.B nMapEngine_AreaIdToLoad                              ;81CAED|A522    |000022;
     CMP.B #!AREA_WOODSCAVE                                                 
     BNE .exit                                                  ;81CAF1|D01E    |81CB11;
     REP #$30                                                   ;81CAF3|C230    |      ;
@@ -11101,19 +11101,19 @@ fPlayerInteraction0x10_PlayerDiary:
 .case3:
     REP #$30                                                   ;81D87F|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;81D881|AF661F7F|7F1F66;
-    AND.W #$0001                                               ;81D885|290100  |      ; Married with Maria
+    AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BNE .marriedCheck                                          ;81D888|D073    |81D8FD;
     LDA.L strcEventFlags.flags2                                ;81D88A|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;81D88E|290200  |      ; Married with Ann
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE .marriedCheck                                          ;81D891|D06A    |81D8FD;
     LDA.L strcEventFlags.flags2                                ;81D893|AF661F7F|7F1F66;
-    AND.W #$0004                                               ;81D897|290400  |      ; Married with Nina
+    AND.W #!EFLAGS2_MARRIEDNINA                                               
     BNE .marriedCheck                                          ;81D89A|D061    |81D8FD;
     LDA.L strcEventFlags.flags2                                ;81D89C|AF661F7F|7F1F66;
-    AND.W #$0008                                               ;81D8A0|290800  |      ; Married with Ellen
+    AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BNE .marriedCheck                                          ;81D8A3|D058    |81D8FD;
     LDA.L strcEventFlags.flags2                                ;81D8A5|AF661F7F|7F1F66;
-    AND.W #$0010                                               ;81D8A9|291000  |      ; Married with Eve
+    AND.W #!EFLAGS2_MARRIEDEVE                                               
     BNE .marriedCheck                                          ;81D8AC|D04F    |81D8FD;
     REP #$30                                                   ;81D8AE|C230    |      ;
     LDA.B nPlayerFlags                                         ;81D8B0|A5D2    |0000D2;
@@ -11461,7 +11461,7 @@ fPlayerInteraction0x14:
  
 .case1:
     REP #$20                                                   ;81DB53|C220    |      ;
-    STZ.W $0142                                                ;81DB55|9C4201  |000142;
+    STZ.W strcBGScrool.BG2VerOffs                              ;81DB55|9C4201  |000142;
     SEP #$20                                                   ;81DB58|E220    |      ;
     LDA.B #$03                                                 ;81DB5A|A903    |      ;
     STA.W $019A                                                ;81DB5C|8D9A01  |00019A;
@@ -13098,7 +13098,7 @@ fPlayerInteraction0x42:
     LDA.B #$03                                                 ;81E770|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81E772|8D6F09  |00096F;
     LDA.B #$01                                                 ;81E775|A901    |      ;
-    STA.W nNameInputLenght                                     ;81E777|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;81E777|8D9F09  |00099F;
     LDA.L strcShedItems.row2                                   ;81E77A|AF011F7F|7F1F01;
     ORA.B #$04                                                 ;81E77E|0904    |      ;
     STA.L strcShedItems.row2                                   ;81E780|8F011F7F|7F1F01;
@@ -14203,7 +14203,7 @@ fPlayerInteraction0x45:
     LDA.B #$04                                                 ;81F03D|A904    |      ;
     STA.W nPlayerInteractionArg1                               ;81F03F|8D6F09  |00096F;
     LDA.B #$02                                                 ;81F042|A902    |      ;
-    STA.W nNameInputLenght                                     ;81F044|8D9F09  |00099F;
+    STA.W nNameInputDestination                                ;81F044|8D9F09  |00099F;
     REP #$20                                                   ;81F047|C220    |      ;
     LDA.W nMapEngine_flags                                     ;81F049|AD9601  |000196;
     ORA.W #$2000                                               ;81F04C|090020  |      ;
@@ -15553,7 +15553,7 @@ fPlayerInteraction0x57:
     REP #$30                                                   ;81FA84|C230    |      ;
     LDX.W #$0491                                               ;81FA86|A29104  |      ;
     LDA.L strcEventFlags.flags2                                ;81FA89|AF661F7F|7F1F66;
-    AND.W #$0002                                               ;81FA8D|290200  |      ;
+    AND.W #!EFLAGS2_MARRIEDANN                                               
     BNE +                                                      ;81FA90|D003    |81FA95;
     LDX.W #$0246                                               ;81FA92|A24602  |      ;
  

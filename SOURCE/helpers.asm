@@ -6,3 +6,10 @@ macro AIMoveAction(nValue)
     ADC.W #<nValue>
     STA.B ptrAIActionData
 endmacro
+
+macro AIExecute(nArg, nIndex, nSubIndex)
+    LDA.W #<nArg>
+    LDX.W #<nIndex>
+    LDY.W #<nSubIndex>
+    JSL.L fAI_SetupAreaScripting
+endmacro

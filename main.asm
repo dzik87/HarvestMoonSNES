@@ -4,6 +4,9 @@
     ; Default padding value
     padbyte $00
     
+    ; SNES
+    incsrc "snes.asm"
+    
     ; DiztinGUIsh generated labels
     incsrc "labels.asm"
     
