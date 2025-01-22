@@ -95,8 +95,7 @@ fUnknown_8280AA:
     LDA.B #$14                                                 ;8280BB|A914    |      ;
     JSL.L fPlayerEnergyHandler                                 ;8280BD|2261D081|81D061;
     REP #$20                                                   ;8280C1|C220    |      ;
-    LDA.B nPlayerFlags                                         ;8280C3|A5D2    |0000D2;
-    AND.W #$0430                                               ;8280C5|293004  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_UNK0400|!PFLAGS_INSPRINGS|!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;8280C8|F003    |8280CD;
     JMP.W .return                                              ;8280CA|4C3081  |828130;
  
@@ -137,8 +136,7 @@ fUnknown_8280AA:
     JMP.W .return                                              ;828104|4C3081  |828130;
  
  
-  + LDA.B nPlayerFlags                                         ;828107|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlagsNoReg(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;82810C|F003    |828111;
     JMP.W .return                                              ;82810E|4C3081  |828130;
  
@@ -148,14 +146,8 @@ fUnknown_8280AA:
     JSL.L fCore_GetRandomNumber                                ;828115|22F98980|8089F9;
     SEP #$20                                                   ;828119|E220    |      ;
     STA.W nFoodToEat                                           ;82811B|8D2409  |000924;
-    REP #$30                                                   ;82811E|C230    |      ;
-    LDA.B nPlayerFlags                                         ;828120|A5D2    |0000D2;
-    ORA.W #!PFLAGS_EATINGMEAL                                               
-    STA.B nPlayerFlags                                         ;828125|85D2    |0000D2;
-    REP #$30                                                   ;828127|C230    |      ;
-    LDA.B nPlayerFlags                                         ;828129|A5D2    |0000D2;
-    ORA.W #$0400                                               ;82812B|090004  |      ;
-    STA.B nPlayerFlags                                         ;82812E|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_EATINGMEAL)
+    %SetPlayerFlag(!PFLAGS_UNK0400)
  
 .return:
     RTL                                                        ;828130|6B      |      ;
@@ -180,19 +172,14 @@ fEvents_ShippingScene:
     LDA.L strcDailyFlags.flags1                                ;82814D|AF5A1F7F|7F1F5A;
     ORA.W #$0400                                               ;828151|090004  |      ;
     STA.L strcDailyFlags.flags1                                ;828154|8F5A1F7F|7F1F5A;
-    LDA.W #$0006                                               ;828158|A90600  |      ;
-    LDX.W #$0000                                               ;82815B|A20000  |      ;
-    LDY.W #$0026                                               ;82815E|A02600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;828161|22978084|848097;
+    %AIExecute($0006, $0000, $0026)
  
 fEvents_ShippingSceneDialog:
     REP #$20                                                   ;828165|C220    |      ;
     LDA.L strcDailyFlags.flags1                                ;828167|AF5A1F7F|7F1F5A;
     AND.W #$0800                                               ;82816B|290008  |      ;
     BEQ fEvents_ShippingSceneReturn                            ;82816E|F04F    |8281BF;
-    REP #$30                                                   ;828170|C230    |      ;
-    LDA.B nPlayerFlags                                         ;828172|A5D2    |0000D2;
-    AND.W #$0040                                               ;828174|294000  |      ;
+    %CheckPlayerFlags(!PFLAGS_INTERACTING)
     BEQ +                                                      ;828177|F003    |82817C;
     JMP.W fEvents_ShippingSceneReturn                          ;828179|4CBF81  |8281BF;
  
@@ -455,7 +442,7 @@ fNextDayHandler:
     JSL.L fObjectMap_Unknown82A811                             ;828398|2211A882|82A811;
     JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
     JSL.L fGameEngine_AnimalsUnknown83BC5A                     ;8283A0|225ABC83|83BC5A;
-    JSL.L fWeatherSpecialEvents                                ;8283A4|22F98C82|828CF9;
+    JSL.L fWeatherRandomizer                                   ;8283A4|22F98C82|828CF9;
     JSL.L fCore_FindBestLove                                   ;8283A8|22C68E82|828EC6;
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
@@ -466,19 +453,14 @@ fNextDayHandler:
     LDA.W nPlayerStamina                                       ;8283BB|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;8283BE|8D1809  |000918; Reset player energy to max available
     STZ.W $0925                                                ;8283C1|9C2509  |000925;
-    REP #$30                                                   ;8283C4|C230    |      ;
-    LDA.B nPlayerFlags                                         ;8283C6|A5D2    |0000D2;
-    ORA.W #$0001                                               ;8283C8|090100  |      ;
-    STA.B nPlayerFlags                                         ;8283CB|85D2    |0000D2;
-    REP #$30                                                   ;8283CD|C230    |      ;
-    LDA.W #$0000                                               ;8283CF|A90000  |      ;
-    STA.B nPlayerAction                                        ;8283D2|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;8283D4|C230    |      ;
-    LDA.W #$0000                                               ;8283D6|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;8283D9|85DA    |0000DA;
     REP #$30                                                   ;8283DB|C230    |      ;
     LDA.W #$0000                                               ;8283DD|A90000  |      ;
-    STA.W $0911                                                ;8283E0|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;8283E0|8D1109  |000911;
     REP #$30                                                   ;8283E3|C230    |      ;
     LDA.W #$0000                                               ;8283E5|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;8283E8|8D0109  |000901;
@@ -798,11 +780,7 @@ fNextDayHandler:
     STZ.W nTimeState                                           ;828735|9C7309  |000973;
     SEP #$20                                                   ;828738|E220    |      ;
     STZ.W nCarryItem_Current                                   ;82873A|9C1D09  |00091D;
-    REP #$30                                                   ;82873D|C230    |      ;
-    LDA.W #$0002                                               ;82873F|A90200  |      ;
-    EOR.W #$FFFF                                               ;828742|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;828745|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;828747|85D2    |0000D2;
+    %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;828749|C230    |      ;
     LDA.W #$0088                                               ;82874B|A98800  |      ;
     STA.W nMapEngine_DestinationX                              ;82874E|8D7D01  |00017D;
@@ -825,10 +803,7 @@ fNextDayHandler:
     JSL.L fCore_GetRandomNumber                                ;82877B|22F98980|8089F9;
     SEP #$20                                                   ;82877F|E220    |      ;
     STA.W nFoodToEat                                           ;828781|8D2409  |000924;
-    REP #$30                                                   ;828784|C230    |      ;
-    LDA.B nPlayerFlags                                         ;828786|A5D2    |0000D2;
-    ORA.W #!PFLAGS_EATINGMEAL                                               
-    STA.B nPlayerFlags                                         ;82878B|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_EATINGMEAL)
  
 .return:
     RTL                                                        ;82878D|6B      |      ;
@@ -1379,19 +1354,20 @@ fWeatherForecast_828C09:
 nWeatherTable_828CED:
     dw $0004,$0002,$0008,$0010,$0200,$0100                     ;828CED|        |      ; [n16 nSunny, n16 nRainy, n16 nSnowy, n16 nHurricane, n16 nWeather4, n16 nWeather5]
  
-fWeatherSpecialEvents:
+fWeatherRandomizer:
     SEP #$20                                                   ;828CF9|E220    |      ;
     REP #$10                                                   ;828CFB|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;828CFD|AF191F7F|7F1F19;
     BNE .harvestFestival                                       ;828D01|D015    |828D18;
     LDA.L nCurrentDay                                          ;828D03|AF1B1F7F|7F1F1B;
     CMP.B #$16                                                 ;828D07|C916    |      ;
-    BEQ +                                                      ;828D09|F003    |828D0E;
+    BEQ .flowerFestival                                        ;828D09|F003    |828D0E;
     JMP.W .label6                                              ;828D0B|4C648E  |828E64;
  
  
-  + SEP #$20                                                   ;828D0E|E220    |      ;
-    LDA.B #$06                                                 ;828D10|A906    |      ;
+.flowerFestival:
+    SEP #$20                                                   ;828D0E|E220    |      ;
+    LDA.B #!WEATHER_FLOWERFESTIVAL                                                 
     STA.W nWeatherForecast                                     ;828D12|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D15|4CB18E  |828EB1;
  
@@ -1405,7 +1381,7 @@ fWeatherSpecialEvents:
     CMP.B #$0B                                                 ;828D26|C90B    |      ;
     BNE .eggHuntFestival                                       ;828D28|D00A    |828D34;
     SEP #$20                                                   ;828D2A|E220    |      ;
-    LDA.B #$07                                                 ;828D2C|A907    |      ;
+    LDA.B #!WEATHER_HARVESTFESTIVAL                                                 
     STA.W nWeatherForecast                                     ;828D2E|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D31|4CB18E  |828EB1;
  
@@ -1419,7 +1395,7 @@ fWeatherSpecialEvents:
  
  
   + SEP #$20                                                   ;828D41|E220    |      ;
-    LDA.B #$0B                                                 ;828D43|A90B    |      ;
+    LDA.B #!WEATHER_EGGFESTIVAL                                                 
     STA.W nWeatherForecast                                     ;828D45|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D48|4CB18E  |828EB1;
  
@@ -1436,7 +1412,7 @@ fWeatherSpecialEvents:
     CMP.B #$09                                                 ;828D5C|C909    |      ;
     BNE .starNightFestival                                     ;828D5E|D00A    |828D6A;
     SEP #$20                                                   ;828D60|E220    |      ;
-    LDA.B #$08                                                 ;828D62|A908    |      ;
+    LDA.B #!WEATHER_THANKSGIVING                                                 
     STA.W nWeatherForecast                                     ;828D64|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D67|4CB18E  |828EB1;
  
@@ -1447,7 +1423,7 @@ fWeatherSpecialEvents:
     CMP.B #$17                                                 ;828D70|C917    |      ;
     BNE .newYearFestival                                       ;828D72|D00A    |828D7E;
     SEP #$20                                                   ;828D74|E220    |      ;
-    LDA.B #$09                                                 ;828D76|A909    |      ;
+    LDA.B #!WEATHER_STARNIGHTFESTIVAL                                                 
     STA.W nWeatherForecast                                     ;828D78|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D7B|4CB18E  |828EB1;
  
@@ -1458,7 +1434,7 @@ fWeatherSpecialEvents:
     CMP.B #$1E                                                 ;828D84|C91E    |      ;
     BNE .label1                                                ;828D86|D00A    |828D92;
     SEP #$20                                                   ;828D88|E220    |      ;
-    LDA.B #$0A                                                 ;828D8A|A90A    |      ;
+    LDA.B #!WEATHER_NEWYEARFESTIVAL                                                 
     STA.W nWeatherForecast                                     ;828D8C|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D8F|4CB18E  |828EB1;
  
@@ -1501,7 +1477,7 @@ fWeatherSpecialEvents:
  
 .sunday:
     SEP #$20                                                   ;828DD5|E220    |      ;
-    LDA.B #$04                                                 ;828DD7|A904    |      ;
+    LDA.B #!WEATHER_FAIR                                                 
     STA.W nWeatherForecast                                     ;828DD9|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828DDC|4CB18E  |828EB1;
  
@@ -1532,7 +1508,7 @@ fWeatherSpecialEvents:
  
 .label3:
     SEP #$20                                                   ;828E16|E220    |      ;
-    LDA.B #$05                                                 ;828E18|A905    |      ;
+    LDA.B #!WEATHER_CALM                                                 
     STA.W nWeatherForecast                                     ;828E1A|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828E1D|4CB18E  |828EB1;
  
@@ -1569,7 +1545,7 @@ fWeatherSpecialEvents:
     JSL.L fCore_GetRandomNumber                                ;828E55|22F98980|8089F9;
     SEP #$20                                                   ;828E59|E220    |      ;
     BNE .label6                                                ;828E5B|D007    |828E64;
-    LDA.B #$03                                                 ;828E5D|A903    |      ;
+    LDA.B #!WEATHER_HURRICANE                                                 
     STA.W nWeatherForecast                                     ;828E5F|8D8C09  |00098C;
     BRA .justReturn                                            ;828E62|804D    |828EB1;
  
@@ -1587,7 +1563,7 @@ fWeatherSpecialEvents:
     JSL.L fCore_GetRandomNumber                                ;828E78|22F98980|8089F9;
     SEP #$20                                                   ;828E7C|E220    |      ;
     BNE .label7                                                ;828E7E|D007    |828E87;
-    LDA.B #$01                                                 ;828E80|A901    |      ;
+    LDA.B #!WEATHER_RAIN                                                 
     STA.W nWeatherForecast                                     ;828E82|8D8C09  |00098C;
     BRA .justReturn                                            ;828E85|802A    |828EB1;
  
@@ -1605,14 +1581,14 @@ fWeatherSpecialEvents:
     JSL.L fCore_GetRandomNumber                                ;828E9B|22F98980|8089F9;
     SEP #$20                                                   ;828E9F|E220    |      ;
     BNE .return                                                ;828EA1|D007    |828EAA;
-    LDA.B #$02                                                 ;828EA3|A902    |      ;
+    LDA.B #!WEATHER_SNOW                                                 
     STA.W nWeatherForecast                                     ;828EA5|8D8C09  |00098C;
     BRA .justReturn                                            ;828EA8|8007    |828EB1;
  
  
 .return:
     SEP #$20                                                   ;828EAA|E220    |      ;
-    LDA.B #$00                                                 ;828EAC|A900    |      ;
+    LDA.B #!WEATHER_SUN                                                 
     STA.W nWeatherForecast                                     ;828EAE|8D8C09  |00098C;
  
 .justReturn:
@@ -1749,7 +1725,7 @@ fCore_FindBestLove:
     RTL                                                        ;828FB0|6B      |      ;
  
  
-fToolUsed_SoundUnknown828FB1:
+fToolUsedSound_Unknown828FB1:
     SEP #$20                                                   ;828FB1|E220    |      ;
     LDA.B #$00                                                 ;828FB3|A900    |      ; A = 0
     XBA                                                        ;828FB5|EB      |      ; A <-> B
@@ -1787,7 +1763,7 @@ fToolUsed_SoundUnknown828FB1:
     RTL                                                        ;828FF2|6B      |      ;
  
  
-fToolUsed_SoundUnknown828FF3:
+fToolUsedSound_Unknown828FF3:
     SEP #$20                                                   ;828FF3|E220    |      ;
     LDA.B #$00                                                 ;828FF5|A900    |      ;
     XBA                                                        ;828FF7|EB      |      ;
@@ -1846,17 +1822,15 @@ nToolSoundData_829054:
     db $06,$11,$16,$07,$28,$28,$00,$00,$00,$00,$00,$00         ;829090|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;82909C|        |      ;
  
-fToolUsed_AnimationSubrutines:
+fToolUsedAnimationHandler:
     SEP #$20                                                   ;8290A8|E220    |      ;
     REP #$10                                                   ;8290AA|C210    |      ;
-    REP #$30                                                   ;8290AC|C230    |      ;
-    LDA.B nPlayerFlags                                         ;8290AE|A5D2    |0000D2;
-    AND.W #$0008                                               ;8290B0|290800  |      ;
+    %CheckPlayerFlags(!PFLAGS_OUTOFSTAMINA)
     BEQ +                                                      ;8290B3|F003    |8290B8;
     JMP.W .label1                                              ;8290B5|4CCD90  |8290CD;
  
  
-  + JSR.W fUnknown_82927D                                      ;8290B8|207D92  |82927D;
+  + JSR.W fToolUsedUnknown_82927D                              ;8290B8|207D92  |82927D;
     SEP #$20                                                   ;8290BB|E220    |      ;
     STZ.W $091B                                                ;8290BD|9C1B09  |00091B;
     LDA.B #$00                                                 ;8290C0|A900    |      ;
@@ -1864,7 +1838,7 @@ fToolUsed_AnimationSubrutines:
     LDA.W nToolEquipped                                        ;8290C3|AD2109  |000921;
     ASL A                                                      ;8290C6|0A      |      ;
     TAX                                                        ;8290C7|AA      |      ;
-    JSR.W (aToolUsed_AnimationTable,X)                         ;8290C8|FC8BA5  |82A58B;
+    JSR.W (aToolUsedAnimationTable,X)                          ;8290C8|FC8BA5  |82A58B;
     BRA .return                                                ;8290CB|800F    |8290DC;
  
  
@@ -1872,19 +1846,17 @@ fToolUsed_AnimationSubrutines:
     REP #$20                                                   ;8290CD|C220    |      ;
     LDA.W #$004D                                               ;8290CF|A94D00  |      ;
     STA.W nSmallItemSpriteIndex                                ;8290D2|8D0109  |000901;
-    REP #$30                                                   ;8290D5|C230    |      ;
-    LDA.W #$000B                                               ;8290D7|A90B00  |      ;
-    STA.B nPlayerAction                                        ;8290DA|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_TIRED)
  
 .return:
     RTL                                                        ;8290DC|6B      |      ;
  
  
-subToolAnimation82A58B_Empty:
+fToolUsedAnimation0x00_Empty:
     RTS                                                        ;8290DD|60      |      ;
  
  
-subToolAnimation82A58B_Sickle:
+fToolUsedAnimation0x01_Sickle:
     REP #$30                                                   ;8290DE|C230    |      ;
     REP #$30                                                   ;8290E0|C230    |      ;
     LDA.W #$0050                                               ;8290E2|A95000  |      ;
@@ -1894,7 +1866,7 @@ subToolAnimation82A58B_Sickle:
     RTS                                                        ;8290EB|60      |      ;
  
  
-subToolAnimation82A58B_Plow:
+fToolUsedAnimation0x02_Plow:
     REP #$30                                                   ;8290EC|C230    |      ;
     REP #$30                                                   ;8290EE|C230    |      ;
     LDA.W #$0054                                               ;8290F0|A95400  |      ;
@@ -1904,7 +1876,7 @@ subToolAnimation82A58B_Plow:
     RTS                                                        ;8290F9|60      |      ;
  
  
-subToolAnimation82A58B_Hammer:
+fToolUsedAnimation0x03_Hammer:
     REP #$30                                                   ;8290FA|C230    |      ;
     REP #$30                                                   ;8290FC|C230    |      ;
     LDA.W #$0058                                               ;8290FE|A95800  |      ;
@@ -1914,7 +1886,7 @@ subToolAnimation82A58B_Hammer:
     RTS                                                        ;829107|60      |      ;
  
  
-subToolAnimation82A58B_Axe:
+fToolUsedAnimation0x04_Axe:
     REP #$30                                                   ;829108|C230    |      ;
     REP #$30                                                   ;82910A|C230    |      ;
     LDA.W #$005C                                               ;82910C|A95C00  |      ;
@@ -1924,7 +1896,7 @@ subToolAnimation82A58B_Axe:
     RTS                                                        ;829115|60      |      ;
  
  
-subToolAnimation82A58B_CornSeedBag:
+fToolUsedAnimation0x05_CornSeedBag:
     REP #$30                                                   ;829116|C230    |      ;
     REP #$30                                                   ;829118|C230    |      ;
     LDA.W #$0046                                               ;82911A|A94600  |      ;
@@ -1932,7 +1904,7 @@ subToolAnimation82A58B_CornSeedBag:
     RTS                                                        ;829120|60      |      ;
  
  
-subToolAnimation82A58B_TomatoSeedBag:
+fToolUsedAnimation0x06_TomatoSeedBag:
     REP #$30                                                   ;829121|C230    |      ;
     REP #$30                                                   ;829123|C230    |      ;
     LDA.W #$0046                                               ;829125|A94600  |      ;
@@ -1940,7 +1912,7 @@ subToolAnimation82A58B_TomatoSeedBag:
     RTS                                                        ;82912B|60      |      ;
  
  
-subToolAnimation82A58B_PotatoSeedBag:
+fToolUsedAnimation0x07_PotatoSeedBag:
     REP #$30                                                   ;82912C|C230    |      ;
     REP #$30                                                   ;82912E|C230    |      ;
     LDA.W #$0046                                               ;829130|A94600  |      ;
@@ -1948,7 +1920,7 @@ subToolAnimation82A58B_PotatoSeedBag:
     RTS                                                        ;829136|60      |      ;
  
  
-subToolAnimation82A58B_TurnipSeedBag:
+fToolUsedAnimation0x08_TurnipSeedBag:
     REP #$30                                                   ;829137|C230    |      ;
     REP #$30                                                   ;829139|C230    |      ;
     LDA.W #$0046                                               ;82913B|A94600  |      ;
@@ -1956,7 +1928,7 @@ subToolAnimation82A58B_TurnipSeedBag:
     RTS                                                        ;829141|60      |      ;
  
  
-subToolAnimation82A58B_CowMedicine:
+fToolUsedAnimation0x09_CowMedicine:
     REP #$30                                                   ;829142|C230    |      ;
     REP #$30                                                   ;829144|C230    |      ;
     LDA.W #$00AC                                               ;829146|A9AC00  |      ;
@@ -1966,7 +1938,7 @@ subToolAnimation82A58B_CowMedicine:
     RTS                                                        ;82914F|60      |      ;
  
  
-subToolAnimation82A58B_MiraclePotion:
+fToolUsedAnimation0x0A_MiraclePotion:
     REP #$30                                                   ;829150|C230    |      ;
     REP #$30                                                   ;829152|C230    |      ;
     LDA.W #$00AC                                               ;829154|A9AC00  |      ;
@@ -1976,7 +1948,7 @@ subToolAnimation82A58B_MiraclePotion:
     RTS                                                        ;82915D|60      |      ;
  
  
-subToolAnimation82A58B_Bell:
+fToolUsedAnimation0x0B_Bell:
     REP #$30                                                   ;82915E|C230    |      ;
     REP #$30                                                   ;829160|C230    |      ;
     LDA.W #$0060                                               ;829162|A96000  |      ;
@@ -1990,7 +1962,7 @@ subToolAnimation82A58B_Bell:
     RTS                                                        ;829178|60      |      ;
  
  
-subToolAnimation82A58B_GrassSeedBag:
+fToolUsedAnimation0x0C_GrassSeedBag:
     REP #$30                                                   ;829179|C230    |      ;
     REP #$30                                                   ;82917B|C230    |      ;
     LDA.W #$0046                                               ;82917D|A94600  |      ;
@@ -1998,14 +1970,14 @@ subToolAnimation82A58B_GrassSeedBag:
     RTS                                                        ;829183|60      |      ;
  
  
-subToolAnimation82A58B_Paint:
+fToolUsedAnimation0x0D_Paint:
     REP #$30                                                   ;829184|C230    |      ;
     LDA.W #$0044                                               ;829186|A94400  |      ;
     STA.W nSmallItemSpriteIndex                                ;829189|8D0109  |000901;
     RTS                                                        ;82918C|60      |      ;
  
  
-subToolAnimation82A58B_Milker:
+fToolUsedAnimation0x0E_Milker:
     REP #$30                                                   ;82918D|C230    |      ;
     REP #$30                                                   ;82918F|C230    |      ;
     LDA.W #$0078                                               ;829191|A97800  |      ;
@@ -2015,7 +1987,7 @@ subToolAnimation82A58B_Milker:
     RTS                                                        ;82919A|60      |      ;
  
  
-subToolAnimation82A58B_Brush:
+fToolUsedAnimation0x0F_Brush:
     REP #$30                                                   ;82919B|C230    |      ;
     REP #$30                                                   ;82919D|C230    |      ;
     LDA.W #$0064                                               ;82919F|A96400  |      ;
@@ -2025,10 +1997,10 @@ subToolAnimation82A58B_Brush:
     RTS                                                        ;8291A8|60      |      ;
  
  
-subToolAnimation82A58B_WateringCan:
+fToolUsedAnimation0x10_WateringCan:
     SEP #$20                                                   ;8291A9|E220    |      ;
     REP #$10                                                   ;8291AB|C210    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;8291AD|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;8291AD|20A092  |8292A0;
     SEP #$20                                                   ;8291B0|E220    |      ;
     CMP.B #$02                                                 ;8291B2|C902    |      ;
     BEQ .label2                                                ;8291B4|F01F    |8291D5;
@@ -2065,14 +2037,14 @@ subToolAnimation82A58B_WateringCan:
     RTS                                                        ;8291E7|60      |      ;
  
  
-subToolAnimation82A58B_GoldenSickle:
+fToolUsedAnimation0x11_GoldenSickle:
     REP #$30                                                   ;8291E8|C230    |      ;
     LDA.W #$0048                                               ;8291EA|A94800  |      ;
     STA.W nSmallItemSpriteIndex                                ;8291ED|8D0109  |000901;
     RTS                                                        ;8291F0|60      |      ;
  
  
-subToolAnimation82A58B_GoldenPlow:
+fToolUsedAnimation0x12_GoldenPlow:
     REP #$30                                                   ;8291F1|C230    |      ;
     LDA.W #$007C                                               ;8291F3|A97C00  |      ;
     CLC                                                        ;8291F6|18      |      ;
@@ -2081,7 +2053,7 @@ subToolAnimation82A58B_GoldenPlow:
     RTS                                                        ;8291FC|60      |      ;
  
  
-subToolAnimation82A58B_GoldenHammer:
+fToolUsedAnimation0x13_GoldenHammer:
     REP #$30                                                   ;8291FD|C230    |      ;
     LDA.W #$0084                                               ;8291FF|A98400  |      ;
     CLC                                                        ;829202|18      |      ;
@@ -2090,7 +2062,7 @@ subToolAnimation82A58B_GoldenHammer:
     RTS                                                        ;829208|60      |      ;
  
  
-subToolAnimation82A58B_GoldenAxe:
+fToolUsedAnimation0x14_GoldenAxe:
     REP #$30                                                   ;829209|C230    |      ;
     LDA.W #$0080                                               ;82920B|A98000  |      ;
     CLC                                                        ;82920E|18      |      ;
@@ -2099,14 +2071,14 @@ subToolAnimation82A58B_GoldenAxe:
     RTS                                                        ;829214|60      |      ;
  
  
-subToolAnimation82A58B_Sprinkler:
+fToolUsedAnimation0x15_Sprinkler:
     REP #$30                                                   ;829215|C230    |      ;
     LDA.W #$0047                                               ;829217|A94700  |      ;
     STA.W nSmallItemSpriteIndex                                ;82921A|8D0109  |000901;
     RTS                                                        ;82921D|60      |      ;
  
  
-subToolAnimation82A58B_BeanstalkSeed:
+fToolUsedAnimation0x16_BeanstalkSeed:
     REP #$30                                                   ;82921E|C230    |      ;
     LDA.W #$00AC                                               ;829220|A9AC00  |      ;
     CLC                                                        ;829223|18      |      ;
@@ -2115,7 +2087,7 @@ subToolAnimation82A58B_BeanstalkSeed:
     RTS                                                        ;829229|60      |      ;
  
  
-subToolAnimation82A58B_BlueDiamond:
+fToolUsedAnimation0x17_BlueDiamond:
     REP #$30                                                   ;82922A|C230    |      ;
     LDA.W #$00AC                                               ;82922C|A9AC00  |      ;
     CLC                                                        ;82922F|18      |      ;
@@ -2124,14 +2096,14 @@ subToolAnimation82A58B_BlueDiamond:
     RTS                                                        ;829235|60      |      ;
  
  
-subToolAnimation82A58B_BlueFeather:
+fToolUsedAnimation0x18_BlueFeather:
     REP #$30                                                   ;829236|C230    |      ;
     LDA.W #$00A8                                               ;829238|A9A800  |      ;
     STA.W nSmallItemSpriteIndex                                ;82923B|8D0109  |000901;
     RTS                                                        ;82923E|60      |      ;
  
  
-subToolAnimation82A58B_ChickenFood:
+fToolUsedAnimation0x19_ChickenFood:
     REP #$30                                                   ;82923F|C230    |      ;
     LDA.W #$0074                                               ;829241|A97400  |      ;
     CLC                                                        ;829244|18      |      ;
@@ -2140,7 +2112,7 @@ subToolAnimation82A58B_ChickenFood:
     RTS                                                        ;82924A|60      |      ;
  
  
-subToolAnimation82A58B_CowFood:
+fToolUsedAnimation0x1A_CowFood:
     REP #$30                                                   ;82924B|C230    |      ;
     LDA.W #$0074                                               ;82924D|A97400  |      ;
     CLC                                                        ;829250|18      |      ;
@@ -2149,14 +2121,14 @@ subToolAnimation82A58B_CowFood:
     RTS                                                        ;829256|60      |      ;
  
  
-subToolAnimation82A58B_0x1B:
+fToolUsedAnimation0x1B_FishingPole:
     REP #$30                                                   ;829257|C230    |      ;
     LDA.W #$0088                                               ;829259|A98800  |      ;
     STA.W nSmallItemSpriteIndex                                ;82925C|8D0109  |000901;
     RTS                                                        ;82925F|60      |      ;
  
  
-fToolUsedSubrituneExecute:
+fToolUsedActionHandler:
     SEP #$20                                                   ;829260|E220    |      ;
     REP #$10                                                   ;829262|C210    |      ;
     LDA.B #$00                                                 ;829264|A900    |      ;
@@ -2164,7 +2136,7 @@ fToolUsedSubrituneExecute:
     LDA.W nToolEquipped                                        ;829267|AD2109  |000921;
     ASL A                                                      ;82926A|0A      |      ;
     TAX                                                        ;82926B|AA      |      ;
-    JSR.W (aToolUsed_Table82A5C3,X)                            ;82926C|FCC3A5  |82A5C3;
+    JSR.W (aToolUsedActionTable,X)                             ;82926C|FCC3A5  |82A5C3;
     REP #$20                                                   ;82926F|C220    |      ;
     LDA.L strcDailyFlags.flags1                                ;829271|AF5A1F7F|7F1F5A;
     ORA.W #$0040                                               ;829275|094000  |      ;
@@ -2172,7 +2144,7 @@ fToolUsedSubrituneExecute:
     RTL                                                        ;82927C|6B      |      ;
  
  
-fUnknown_82927D:
+fToolUsedUnknown_82927D:
     REP #$30                                                   ;82927D|C230    |      ;
     LDA.W #$0001                                               ;82927F|A90100  |      ;
     LDX.W #$0000                                               ;829282|A20000  |      ;
@@ -2188,7 +2160,7 @@ fUnknown_82927D:
     RTS                                                        ;82929F|60      |      ;
  
  
-fWaterTileUnknown_8292A0:
+fToolusedUnknown_8292A0:
     REP #$30                                                   ;8292A0|C230    |      ;
     LDA.W #$0001                                               ;8292A2|A90100  |      ;
     LDX.W #$0000                                               ;8292A5|A20000  |      ;
@@ -2201,7 +2173,7 @@ fWaterTileUnknown_8292A0:
     RTS                                                        ;8292BB|60      |      ;
  
  
-fUnknown_8292BC:
+fToolUsedUnknown_8292BC:
     REP #$30                                                   ;8292BC|C230    |      ;
     INC A                                                      ;8292BE|1A      |      ;
     LDX.W #$0000                                               ;8292BF|A20000  |      ;
@@ -2214,7 +2186,7 @@ fUnknown_8292BC:
     RTS                                                        ;8292D5|60      |      ;
  
  
-fToolUnknown_8292D6:
+fToolUsedUnknown_8292D6:
     REP #$30                                                   ;8292D6|C230    |      ; A: nArg
     ASL A                                                      ;8292D8|0A      |      ;
     ASL A                                                      ;8292D9|0A      |      ;
@@ -2240,17 +2212,15 @@ nFindTileArgsTable_8292FA:
     dw $0001,$0000,$0001,$FFFF,$0000,$FFFF                     ;829306|        |      ;
     dw $FFFF,$FFFF,$FFFF,$0000,$FFFF,$0001                     ;829312|        |      ;
  
-subToolUsed82A5C3_Empty:
+fToolUsedAction0x00_Empty:
     REP #$30                                                   ;82931E|C230    |      ;
-    REP #$30                                                   ;829320|C230    |      ;
-    LDA.W #$0000                                               ;829322|A90000  |      ;
-    STA.B nPlayerAction                                        ;829325|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;829327|60      |      ;
  
  
-subToolUsed82A5C3_Sickle:
+fToolUsedAction0x01_Sickle:
     REP #$30                                                   ;829328|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;82932A|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;82932A|20A092  |8292A0;
     BNE +                                                      ;82932D|D003    |829332;
     JMP.W .return                                              ;82932F|4C5094  |829450;
  
@@ -2380,18 +2350,16 @@ subToolUsed82A5C3_Sickle:
     STA.L strcDailyFlags.flags1                                ;82944C|8F5A1F7F|7F1F5A;
  
 .return:
-    REP #$30                                                   ;829450|C230    |      ;
-    LDA.W #$0000                                               ;829452|A90000  |      ;
-    STA.B nPlayerAction                                        ;829455|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829457|E220    |      ;
     LDA.B #$FE                                                 ;829459|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82945B|2261D081|81D061;
     RTS                                                        ;82945F|60      |      ;
  
  
-subToolUsed82A5C3_Plow:
+fToolUsedAction0x02_Plow:
     REP #$30                                                   ;829460|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;829462|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;829462|20A092  |8292A0;
     BNE +                                                      ;829465|D003    |82946A;
     JMP.W .return                                              ;829467|4CB095  |8295B0;
  
@@ -2436,7 +2404,7 @@ subToolUsed82A5C3_Plow:
     AND.W #$0008                                               ;8294CB|290800  |      ;
     BNE .normalDestroy                                         ;8294CE|D07A    |82954A;
     LDA.L strcDailyFlags.flags2                                ;8294D0|AF5C1F7F|7F1F5C;
-    AND.W #$0200                                               ;8294D4|290002  |      ;
+    AND.W #!DFLAGS2_DUGUPMONEY                                               
     BNE .normalDestroy                                         ;8294D7|D071    |82954A;
     SEP #$20                                                   ;8294D9|E220    |      ;
     LDA.B #$10                                                 ;8294DB|A910    |      ;
@@ -2444,18 +2412,18 @@ subToolUsed82A5C3_Plow:
     BNE .luckCheck                                             ;8294E1|D02E    |829511;
     REP #$30                                                   ;8294E3|C230    |      ;
     LDA.L strcDailyFlags.flags2                                ;8294E5|AF5C1F7F|7F1F5C;
-    ORA.W #$0200                                               ;8294E9|090002  |      ;
+    ORA.W #!DFLAGS2_DUGUPMONEY                                               
     STA.L strcDailyFlags.flags2                                ;8294EC|8F5C1F7F|7F1F5C;
     LDA.W #$000F                                               ;8294F0|A90F00  |      ;
     LDX.W #$0000                                               ;8294F3|A20000  |      ;
     LDY.W #$003A                                               ;8294F6|A03A00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;8294F9|22F88084|8480F8;
+    JSL.L fAI_Unknown8480F8                                    ;8294F9|22F88084|8480F8; AI spawn coin
     REP #$20                                                   ;8294FD|C220    |      ;
     LDA.W #$0001                                               ;8294FF|A90100  |      ;
     STA.B ptrUnknown0x72                                       ;829502|8572    |000072;
     SEP #$20                                                   ;829504|E220    |      ;
     LDA.B #$00                                                 ;829506|A900    |      ;
-    STA.B ptrUnknown0x72+2                                     ;829508|8574    |000074;
+    STA.B ptrUnknown0x72+2                                     ;829508|8574    |000074; 10G profit
     JSL.L fGameEngine_AddProfit                                ;82950A|22C9B183|83B1C9;
     JMP.W .return                                              ;82950E|4CB095  |8295B0;
  
@@ -2463,23 +2431,23 @@ subToolUsed82A5C3_Plow:
 .luckCheck:
     SEP #$20                                                   ;829511|E220    |      ;
     LDA.B #$10                                                 ;829513|A910    |      ;
-    JSL.L fCore_GetRandomNumber                                ;829515|22F98980|8089F9;
+    JSL.L fCore_GetRandomNumber                                ;829515|22F98980|8089F9; 1 in 10 chance to dig up money
     BNE .normalDestroy                                         ;829519|D02F    |82954A;
     REP #$30                                                   ;82951B|C230    |      ;
     LDA.L strcDailyFlags.flags2                                ;82951D|AF5C1F7F|7F1F5C;
-    ORA.W #$0200                                               ;829521|090002  |      ;
+    ORA.W #!DFLAGS2_DUGUPMONEY                                               
     STA.L strcDailyFlags.flags2                                ;829524|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;829528|C230    |      ;
     LDA.W #$000F                                               ;82952A|A90F00  |      ;
     LDX.W #$0000                                               ;82952D|A20000  |      ;
     LDY.W #$003B                                               ;829530|A03B00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829533|22F88084|8480F8;
+    JSL.L fAI_Unknown8480F8                                    ;829533|22F88084|8480F8; AI for spawning money bag
     REP #$20                                                   ;829537|C220    |      ;
     LDA.W #$0005                                               ;829539|A90500  |      ;
     STA.B ptrUnknown0x72                                       ;82953C|8572    |000072;
     SEP #$20                                                   ;82953E|E220    |      ;
     LDA.B #$00                                                 ;829540|A900    |      ;
-    STA.B ptrUnknown0x72+2                                     ;829542|8574    |000074;
+    STA.B ptrUnknown0x72+2                                     ;829542|8574    |000074; 50G profit
     JSL.L fGameEngine_AddProfit                                ;829544|22C9B183|83B1C9;
     BRA .return                                                ;829548|8066    |8295B0;
  
@@ -2527,20 +2495,18 @@ subToolUsed82A5C3_Plow:
  
  
 .return:
-    REP #$30                                                   ;8295B0|C230    |      ;
-    LDA.W #$0000                                               ;8295B2|A90000  |      ;
-    STA.B nPlayerAction                                        ;8295B5|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;8295B7|E220    |      ;
     LDA.B #$FE                                                 ;8295B9|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;8295BB|2261D081|81D061;
     RTS                                                        ;8295BF|60      |      ;
  
  
-subToolUsed82A5C3_Hammer:
+fToolUsedAction0x03_Hammer:
     REP #$30                                                   ;8295C0|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;8295C2|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;8295C2|20A092  |8292A0;
     BNE +                                                      ;8295C5|D003    |8295CA;
-    JMP.W .label12                                             ;8295C7|4C3F97  |82973F;
+    JMP.W .chickenStatue                                       ;8295C7|4C3F97  |82973F;
  
  
   + CPX.W #$0006                                               ;8295CA|E00600  |      ;
@@ -2549,10 +2515,10 @@ subToolUsed82A5C3_Hammer:
     BNE .label5                                                ;8295D2|D071    |829645;
     SEP #$20                                                   ;8295D4|E220    |      ;
     LDA.B nMapEngine_AreaIdToLoad                              ;8295D6|A522    |000022;
-    CMP.B #$04                                                 ;8295D8|C904    |      ;
+    CMP.B #!AREA_TOWNSPRING                                                 
     BCC .label2                                                ;8295DA|9014    |8295F0;
     LDA.B nMapEngine_AreaIdToLoad                              ;8295DC|A522    |000022;
-    CMP.B #$29                                                 ;8295DE|C929    |      ;
+    CMP.B #!AREA_WOODSCAVE                                                 
     BCS .label1                                                ;8295E0|B007    |8295E9;
     REP #$20                                                   ;8295E2|C220    |      ;
     LDA.W #$00DD                                               ;8295E4|A9DD00  |      ;
@@ -2591,7 +2557,7 @@ subToolUsed82A5C3_Hammer:
     LDA.B #$00                                                 ;829627|A900    |      ;
     STA.W $0976                                                ;829629|8D7609  |000976;
     JSL.L fUnknown_81A500                                      ;82962C|2200A581|81A500;
-    JMP.W .label11                                             ;829630|4C2F97  |82972F;
+    JMP.W .return                                              ;829630|4C2F97  |82972F;
  
  
 .label4:
@@ -2600,7 +2566,7 @@ subToolUsed82A5C3_Hammer:
     LDX.W nTileInFrontOfPlayerX                                ;829638|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82963B|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;82963E|2288A681|81A688;
-    JMP.W .label11                                             ;829642|4C2F97  |82972F;
+    JMP.W .return                                              ;829642|4C2F97  |82972F;
  
  
 .label5:
@@ -2608,7 +2574,7 @@ subToolUsed82A5C3_Hammer:
     LDA.W nBreakHitCounter                                     ;829647|AD6D09  |00096D;
     INC A                                                      ;82964A|1A      |      ;
     STA.W nBreakHitCounter                                     ;82964B|8D6D09  |00096D;
-    CMP.B #$06                                                 ;82964E|C906    |      ;
+    CMP.B #$06                                                 ;82964E|C906    |      ; 6 hits to break big stone
     BEQ .label6                                                ;829650|F003    |829655;
     JMP.W .label10                                             ;829652|4CFE96  |8296FE;
  
@@ -2687,7 +2653,7 @@ subToolUsed82A5C3_Hammer:
     LDA.B #$00                                                 ;8296F3|A900    |      ;
     STA.W $0976                                                ;8296F5|8D7609  |000976;
     JSL.L fUnknown_81A500                                      ;8296F8|2200A581|81A500;
-    BRA .label11                                               ;8296FC|8031    |82972F;
+    BRA .return                                                ;8296FC|8031    |82972F;
  
  
 .label10:
@@ -2710,43 +2676,41 @@ subToolUsed82A5C3_Hammer:
     STA.W $0976                                                ;829728|8D7609  |000976;
     JSL.L fUnknown_81A500                                      ;82972B|2200A581|81A500;
  
-.label11:
-    REP #$30                                                   ;82972F|C230    |      ;
-    LDA.W #$0000                                               ;829731|A90000  |      ;
-    STA.B nPlayerAction                                        ;829734|85D4    |0000D4;
+.return:
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829736|E220    |      ;
     LDA.B #$FE                                                 ;829738|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82973A|2261D081|81D061;
     RTS                                                        ;82973E|60      |      ;
  
  
-.label12:
+.chickenStatue:
     SEP #$20                                                   ;82973F|E220    |      ;
     REP #$10                                                   ;829741|C210    |      ;
     LDA.B nMapEngine_AreaIdToLoad                              ;829743|A522    |000022;
-    CMP.B #$0C                                                 ;829745|C90C    |      ;
-    BCC .label11                                               ;829747|90E6    |82972F;
-    CMP.B #$10                                                 ;829749|C910    |      ;
-    BCS .label11                                               ;82974B|B0E2    |82972F;
+    CMP.B #!AREA_CROSSROADSPRING                                                 
+    BCC .return                                                ;829747|90E6    |82972F;
+    CMP.B #!AREA_WOODSSPRING                                                 
+    BCS .return                                                ;82974B|B0E2    |82972F;
     CPX.W #$00F8                                               ;82974D|E0F800  |      ;
-    BNE .label11                                               ;829750|D0DD    |82972F;
+    BNE .return                                                ;829750|D0DD    |82972F;
     REP #$30                                                   ;829752|C230    |      ;
     LDA.L strcDailyFlags.flags2                                ;829754|AF5C1F7F|7F1F5C;
-    AND.W #$0080                                               ;829758|298000  |      ;
-    BNE .label11                                               ;82975B|D0D2    |82972F;
+    AND.W #!DFLAGS2_BROKECHICKENSTATUE                                               
+    BNE .return                                                ;82975B|D0D2    |82972F;
     REP #$20                                                   ;82975D|C220    |      ;
     LDA.W #$0015                                               ;82975F|A91500  |      ;
     LDX.W #$0000                                               ;829762|A20000  |      ;
     LDY.W #$0016                                               ;829765|A01600  |      ;
-    JSL.L fAI_Unknown84803F                                    ;829768|223F8084|84803F;
+    JSL.L fAI_Unknown84803F                                    ;829768|223F8084|84803F; AI spawn power berry
     SEP #$20                                                   ;82976C|E220    |      ;
     LDA.B #$04                                                 ;82976E|A904    |      ;
     JSL.L fCore_GetRandomNumber                                ;829770|22F98980|8089F9;
-    BNE .label11                                               ;829774|D0B9    |82972F;
+    BNE .return                                                ;829774|D0B9    |82972F;
     REP #$30                                                   ;829776|C230    |      ;
     LDA.L strcEventFlags.flags1                                ;829778|AF641F7F|7F1F64;
     AND.W #$0200                                               ;82977C|290002  |      ;
-    BNE .label11                                               ;82977F|D0AE    |82972F;
+    BNE .return                                                ;82977F|D0AE    |82972F;
     LDA.L strcEventFlags.flags1                                ;829781|AF641F7F|7F1F64;
     ORA.W #$0200                                               ;829785|090002  |      ;
     STA.L strcEventFlags.flags1                                ;829788|8F641F7F|7F1F64;
@@ -2765,14 +2729,14 @@ subToolUsed82A5C3_Hammer:
     JSL.L fAI_Unknown8480F8                                    ;8297A9|22F88084|8480F8;
     REP #$30                                                   ;8297AD|C230    |      ;
     LDA.L strcDailyFlags.flags2                                ;8297AF|AF5C1F7F|7F1F5C;
-    ORA.W #$0080                                               ;8297B3|098000  |      ;
+    ORA.W #!DFLAGS2_BROKECHICKENSTATUE                                               
     STA.L strcDailyFlags.flags2                                ;8297B6|8F5C1F7F|7F1F5C;
-    JMP.W .label11                                             ;8297BA|4C2F97  |82972F;
+    JMP.W .return                                              ;8297BA|4C2F97  |82972F;
  
  
-subToolUsed82A5C3_Axe:
+fToolUsedAction0x04_Axe:
     REP #$30                                                   ;8297BD|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;8297BF|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;8297BF|20A092  |8292A0;
     BNE +                                                      ;8297C2|D003    |8297C7;
     JMP.W .label7                                              ;8297C4|4C4B99  |82994B;
  
@@ -2972,28 +2936,23 @@ subToolUsed82A5C3_Axe:
     ORA.W #$0020                                               ;829973|092000  |      ;
     STA.L strcEventFlags.flags4                                ;829976|8F6A1F7F|7F1F6A;
     REP #$30                                                   ;82997A|C230    |      ;
-    LDA.W #$0000                                               ;82997C|A90000  |      ;
-    LDX.W #$0017                                               ;82997F|A21700  |      ;
-    LDY.W #$0000                                               ;829982|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;829985|22978084|848097;
+    %AIExecute($0000, $0017, $0000)
  
 .return:
-    REP #$30                                                   ;829989|C230    |      ;
-    LDA.W #$0000                                               ;82998B|A90000  |      ;
-    STA.B nPlayerAction                                        ;82998E|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829990|E220    |      ;
     LDA.B #$FE                                                 ;829992|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829994|2261D081|81D061;
     RTS                                                        ;829998|60      |      ;
  
  
-subToolUsed82A5C3_CornSeedBag:
+fToolUsedAction0x05_CornSeedBag:
     SEP #$20                                                   ;829999|E220    |      ;
     REP #$10                                                   ;82999B|C210    |      ;
     LDA.B #$00                                                 ;82999D|A900    |      ;
     XBA                                                        ;82999F|EB      |      ;
     LDA.W $096B                                                ;8299A0|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;8299A3|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;8299A3|20D692  |8292D6;
     BNE +                                                      ;8299A6|D003    |8299AB;
     JMP.W .label1                                              ;8299A8|4CCA99  |8299CA;
  
@@ -3027,9 +2986,7 @@ subToolUsed82A5C3_CornSeedBag:
     BNE +                                                      ;8299E3|D003    |8299E8;
     STZ.W nToolEquipped                                        ;8299E5|9C2109  |000921;
  
-  + REP #$30                                                   ;8299E8|C230    |      ;
-    LDA.W #$0000                                               ;8299EA|A90000  |      ;
-    STA.B nPlayerAction                                        ;8299ED|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;8299EF|E220    |      ;
     LDA.B #$FF                                                 ;8299F1|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;8299F3|2261D081|81D061;
@@ -3038,13 +2995,13 @@ subToolUsed82A5C3_CornSeedBag:
     RTS                                                        ;8299F7|60      |      ;
  
  
-subToolUsed82A5C3_TomatoSeedBag:
+fToolUsedAction0x06_TomatoSeedBag:
     SEP #$20                                                   ;8299F8|E220    |      ;
     REP #$10                                                   ;8299FA|C210    |      ;
     LDA.B #$00                                                 ;8299FC|A900    |      ;
     XBA                                                        ;8299FE|EB      |      ;
     LDA.W $096B                                                ;8299FF|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;829A02|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;829A02|20D692  |8292D6;
     BNE +                                                      ;829A05|D003    |829A0A;
     JMP.W .label1                                              ;829A07|4C299A  |829A29;
  
@@ -3078,9 +3035,7 @@ subToolUsed82A5C3_TomatoSeedBag:
     BNE +                                                      ;829A42|D003    |829A47;
     STZ.W nToolEquipped                                        ;829A44|9C2109  |000921;
  
-  + REP #$30                                                   ;829A47|C230    |      ;
-    LDA.W #$0000                                               ;829A49|A90000  |      ;
-    STA.B nPlayerAction                                        ;829A4C|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829A4E|E220    |      ;
     LDA.B #$FF                                                 ;829A50|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829A52|2261D081|81D061;
@@ -3089,13 +3044,13 @@ subToolUsed82A5C3_TomatoSeedBag:
     RTS                                                        ;829A56|60      |      ;
  
  
-subToolUsed82A5C3_PotatoSeedBag:
+fToolUsedAction0x07_PotatoSeedBag:
     SEP #$20                                                   ;829A57|E220    |      ;
     REP #$10                                                   ;829A59|C210    |      ;
     LDA.B #$00                                                 ;829A5B|A900    |      ;
     XBA                                                        ;829A5D|EB      |      ;
     LDA.W $096B                                                ;829A5E|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;829A61|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;829A61|20D692  |8292D6;
     BNE +                                                      ;829A64|D003    |829A69;
     JMP.W .label1                                              ;829A66|4C869A  |829A86;
  
@@ -3128,9 +3083,7 @@ subToolUsed82A5C3_PotatoSeedBag:
     BNE +                                                      ;829A9F|D003    |829AA4;
     STZ.W nToolEquipped                                        ;829AA1|9C2109  |000921;
  
-  + REP #$30                                                   ;829AA4|C230    |      ;
-    LDA.W #$0000                                               ;829AA6|A90000  |      ;
-    STA.B nPlayerAction                                        ;829AA9|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829AAB|E220    |      ;
     LDA.B #$FF                                                 ;829AAD|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829AAF|2261D081|81D061;
@@ -3139,13 +3092,13 @@ subToolUsed82A5C3_PotatoSeedBag:
     RTS                                                        ;829AB3|60      |      ;
  
  
-subToolUsed82A5C3_TurnipSeedBag:
+fToolUsedAction0x08_TurnipSeedBag:
     SEP #$20                                                   ;829AB4|E220    |      ;
     REP #$10                                                   ;829AB6|C210    |      ;
     LDA.B #$00                                                 ;829AB8|A900    |      ;
     XBA                                                        ;829ABA|EB      |      ;
     LDA.W $096B                                                ;829ABB|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;829ABE|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;829ABE|20D692  |8292D6;
     BNE +                                                      ;829AC1|D003    |829AC6;
     JMP.W .label1                                              ;829AC3|4CE39A  |829AE3;
  
@@ -3178,9 +3131,7 @@ subToolUsed82A5C3_TurnipSeedBag:
     BNE +                                                      ;829AFC|D003    |829B01;
     STZ.W nToolEquipped                                        ;829AFE|9C2109  |000921;
  
-  + REP #$30                                                   ;829B01|C230    |      ;
-    LDA.W #$0000                                               ;829B03|A90000  |      ;
-    STA.B nPlayerAction                                        ;829B06|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B08|E220    |      ;
     LDA.B #$FF                                                 ;829B0A|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829B0C|2261D081|81D061;
@@ -3189,10 +3140,8 @@ subToolUsed82A5C3_TurnipSeedBag:
     RTS                                                        ;829B10|60      |      ;
  
  
-subToolUsed82A5C3_CowMedicine:
-    REP #$30                                                   ;829B11|C230    |      ;
-    LDA.W #$0000                                               ;829B13|A90000  |      ;
-    STA.B nPlayerAction                                        ;829B16|85D4    |0000D4;
+fToolUsedAction0x09_CowMedicine:
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B18|E220    |      ;
     STZ.W nToolEquipped                                        ;829B1A|9C2109  |000921;
     LDA.B #$FF                                                 ;829B1D|A9FF    |      ;
@@ -3204,10 +3153,8 @@ subToolUsed82A5C3_CowMedicine:
     RTS                                                        ;829B30|60      |      ;
  
  
-subToolUsed82A5C3_MiraclePotion:
-    REP #$30                                                   ;829B31|C230    |      ;
-    LDA.W #$0000                                               ;829B33|A90000  |      ;
-    STA.B nPlayerAction                                        ;829B36|85D4    |0000D4;
+fToolUsedAction0x0A_MiraclePotion:
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B38|E220    |      ;
     STZ.W nToolEquipped                                        ;829B3A|9C2109  |000921;
     LDA.B #$FF                                                 ;829B3D|A9FF    |      ;
@@ -3219,23 +3166,21 @@ subToolUsed82A5C3_MiraclePotion:
     RTS                                                        ;829B50|60      |      ;
  
  
-subToolUsed82A5C3_Bell:
-    REP #$30                                                   ;829B51|C230    |      ;
-    LDA.W #$0000                                               ;829B53|A90000  |      ;
-    STA.B nPlayerAction                                        ;829B56|85D4    |0000D4;
+fToolUsedAction0x0B_Bell:
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B58|E220    |      ;
     LDA.B #$FF                                                 ;829B5A|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829B5C|2261D081|81D061;
     RTS                                                        ;829B60|60      |      ;
  
  
-subToolUsed82A5C3_GrassSeedBag:
+fToolUsedAction0x0C_GrassSeedBag:
     SEP #$20                                                   ;829B61|E220    |      ;
     REP #$10                                                   ;829B63|C210    |      ;
     LDA.B #$00                                                 ;829B65|A900    |      ;
     XBA                                                        ;829B67|EB      |      ;
     LDA.W $096B                                                ;829B68|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;829B6B|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;829B6B|20D692  |8292D6;
     BNE +                                                      ;829B6E|D003    |829B73;
     JMP.W .label1                                              ;829B70|4C9D9B  |829B9D;
  
@@ -3273,9 +3218,7 @@ subToolUsed82A5C3_GrassSeedBag:
     BNE +                                                      ;829BB6|D003    |829BBB;
     STZ.W nToolEquipped                                        ;829BB8|9C2109  |000921;
  
-  + REP #$30                                                   ;829BBB|C230    |      ;
-    LDA.W #$0000                                               ;829BBD|A90000  |      ;
-    STA.B nPlayerAction                                        ;829BC0|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829BC2|E220    |      ;
     LDA.B #$FF                                                 ;829BC4|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829BC6|2261D081|81D061;
@@ -3284,9 +3227,9 @@ subToolUsed82A5C3_GrassSeedBag:
     RTS                                                        ;829BCA|60      |      ;
  
  
-subToolUsed82A5C3_Paint:
+fToolUsedAction0x0D_Paint:
     REP #$30                                                   ;829BCB|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;829BCD|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;829BCD|20A092  |8292A0;
     BNE +                                                      ;829BD0|D003    |829BD5;
     JMP.W .return                                              ;829BD2|4CB09C  |829CB0;
  
@@ -3303,7 +3246,7 @@ subToolUsed82A5C3_Paint:
  
   + REP #$30                                                   ;829BE9|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829BEB|AF661F7F|7F1F66;
-    AND.W #$0200                                               ;829BEF|290002  |      ;
+    AND.W #!EFLAGS2_PAINTEDHOUSEDOOR                                               
     BEQ +                                                      ;829BF2|F003    |829BF7;
     JMP.W .return                                              ;829BF4|4CB09C  |829CB0;
  
@@ -3317,7 +3260,7 @@ subToolUsed82A5C3_Paint:
     JSL.L fSetTileAtCoords                                     ;829C09|2288A681|81A688;
     REP #$30                                                   ;829C0D|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829C0F|AF661F7F|7F1F66;
-    ORA.W #$0200                                               ;829C13|090002  |      ;
+    ORA.W #!EFLAGS2_PAINTEDHOUSEDOOR                                               
     STA.L strcEventFlags.flags2                                ;829C16|8F661F7F|7F1F66;
     JMP.W .return                                              ;829C1A|4CB09C  |829CB0;
  
@@ -3325,7 +3268,7 @@ subToolUsed82A5C3_Paint:
 .caseE2:
     REP #$30                                                   ;829C1D|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829C1F|AF661F7F|7F1F66;
-    AND.W #$0400                                               ;829C23|290004  |      ;
+    AND.W #!EFLAGS2_PAINTEDHOUSELEFT                                               
     BEQ +                                                      ;829C26|F003    |829C2B;
     JMP.W .return                                              ;829C28|4CB09C  |829CB0;
  
@@ -3339,7 +3282,7 @@ subToolUsed82A5C3_Paint:
     JSL.L fSetTileAtCoords                                     ;829C3D|2288A681|81A688;
     REP #$30                                                   ;829C41|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829C43|AF661F7F|7F1F66;
-    ORA.W #$0400                                               ;829C47|090004  |      ;
+    ORA.W #!EFLAGS2_PAINTEDHOUSELEFT                                               
     STA.L strcEventFlags.flags2                                ;829C4A|8F661F7F|7F1F66;
     BRA .return                                                ;829C4E|8060    |829CB0;
  
@@ -3347,7 +3290,7 @@ subToolUsed82A5C3_Paint:
 .caseE3:
     REP #$30                                                   ;829C50|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829C52|AF661F7F|7F1F66;
-    AND.W #$0800                                               ;829C56|290008  |      ;
+    AND.W #!EFLAGS2_PAINTEDHOUSECENTER                                               
     BNE .return                                                ;829C59|D055    |829CB0;
     LDA.W #$000A                                               ;829C5B|A90A00  |      ;
     JSL.L fGameEngine_AddHappiness                             ;829C5E|2282B283|83B282;
@@ -3358,7 +3301,7 @@ subToolUsed82A5C3_Paint:
     JSL.L fSetTileAtCoords                                     ;829C6D|2288A681|81A688;
     REP #$30                                                   ;829C71|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829C73|AF661F7F|7F1F66;
-    ORA.W #$0800                                               ;829C77|090008  |      ;
+    ORA.W #!EFLAGS2_PAINTEDHOUSECENTER                                               
     STA.L strcEventFlags.flags2                                ;829C7A|8F661F7F|7F1F66;
     BRA .return                                                ;829C7E|8030    |829CB0;
  
@@ -3366,7 +3309,7 @@ subToolUsed82A5C3_Paint:
 .caseE4:
     REP #$30                                                   ;829C80|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829C82|AF661F7F|7F1F66;
-    AND.W #$1000                                               ;829C86|290010  |      ;
+    AND.W #!EFLAGS2_PAINTEDHOUSERIGHT                                               
     BNE .return                                                ;829C89|D025    |829CB0;
     LDA.W #$000A                                               ;829C8B|A90A00  |      ;
     JSL.L fGameEngine_AddHappiness                             ;829C8E|2282B283|83B282;
@@ -3377,39 +3320,33 @@ subToolUsed82A5C3_Paint:
     JSL.L fSetTileAtCoords                                     ;829C9D|2288A681|81A688;
     REP #$30                                                   ;829CA1|C230    |      ;
     LDA.L strcEventFlags.flags2                                ;829CA3|AF661F7F|7F1F66;
-    ORA.W #$1000                                               ;829CA7|090010  |      ;
+    ORA.W #!EFLAGS2_PAINTEDHOUSERIGHT                                               
     STA.L strcEventFlags.flags2                                ;829CAA|8F661F7F|7F1F66;
     BRA .return                                                ;829CAE|8000    |829CB0;
  
  
 .return:
-    REP #$30                                                   ;829CB0|C230    |      ;
-    LDA.W #$0000                                               ;829CB2|A90000  |      ;
-    STA.B nPlayerAction                                        ;829CB5|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829CB7|E220    |      ;
     LDA.B #$FE                                                 ;829CB9|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829CBB|2261D081|81D061;
     RTS                                                        ;829CBF|60      |      ;
  
  
-subToolUsed82A5C3_Milker:
-    REP #$30                                                   ;829CC0|C230    |      ;
-    LDA.W #$0000                                               ;829CC2|A90000  |      ;
-    STA.B nPlayerAction                                        ;829CC5|85D4    |0000D4;
+fToolUsedAction0x0E_Milker:
+    %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;829CC7|60      |      ;
  
  
-subToolUsed82A5C3_Brush:
-    REP #$30                                                   ;829CC8|C230    |      ;
-    LDA.W #$0000                                               ;829CCA|A90000  |      ;
-    STA.B nPlayerAction                                        ;829CCD|85D4    |0000D4;
+fToolUsedAction0x0F_Brush:
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829CCF|E220    |      ;
     LDA.B #$FF                                                 ;829CD1|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829CD3|2261D081|81D061;
     RTS                                                        ;829CD7|60      |      ;
  
  
-subToolUsed82A5C3_WateringCan:
+fToolUsedAction0x10_WateringCan:
     SEP #$20                                                   ;829CD8|E220    |      ;
     REP #$10                                                   ;829CDA|C210    |      ;
     SEP #$20                                                   ;829CDC|E220    |      ;
@@ -3419,7 +3356,7 @@ subToolUsed82A5C3_WateringCan:
     LDA.B #$07                                                 ;829CE5|A907    |      ;
     STA.W nAudioRegisterValue1                                 ;829CE7|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;829CEA|22328383|838332;
-    JSR.W fWaterTileUnknown_8292A0                             ;829CEE|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;829CEE|20A092  |8292A0;
     SEP #$20                                                   ;829CF1|E220    |      ;
     CMP.B #$02                                                 ;829CF3|C902    |      ;
     BEQ .return                                                ;829CF5|F03B    |829D32;
@@ -3427,7 +3364,7 @@ subToolUsed82A5C3_WateringCan:
     BEQ .return                                                ;829CFA|F036    |829D32;
     DEC A                                                      ;829CFC|3A      |      ;
     STA.W nAmountLeft_Water                                    ;829CFD|8D2609  |000926;
-    JSR.W fWaterTileUnknown_8292A0                             ;829D00|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;829D00|20A092  |8292A0;
     BNE +                                                      ;829D03|D003    |829D08;
     JMP.W .return                                              ;829D05|4C329D  |829D32;
  
@@ -3455,22 +3392,20 @@ subToolUsed82A5C3_WateringCan:
     JSL.L fSetTileAtCoords                                     ;829D2E|2288A681|81A688;
  
 .return:
-    REP #$30                                                   ;829D32|C230    |      ;
-    LDA.W #$0000                                               ;829D34|A90000  |      ;
-    STA.B nPlayerAction                                        ;829D37|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829D39|E220    |      ;
     LDA.B #$FE                                                 ;829D3B|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829D3D|2261D081|81D061;
     RTS                                                        ;829D41|60      |      ;
  
  
-subToolUsed82A5C3_GoldenSickle:
+fToolUsedAction0x11_GoldenSickle:
     SEP #$20                                                   ;829D42|E220    |      ;
     REP #$10                                                   ;829D44|C210    |      ;
     LDA.B #$00                                                 ;829D46|A900    |      ;
     XBA                                                        ;829D48|EB      |      ;
     LDA.W $096B                                                ;829D49|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;829D4C|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;829D4C|20D692  |8292D6;
     BNE +                                                      ;829D4F|D003    |829D54;
     JMP.W .label6                                              ;829D51|4C6E9E  |829E6E;
  
@@ -3607,9 +3542,7 @@ subToolUsed82A5C3_GoldenSickle:
     CMP.B #$09                                                 ;829E77|C909    |      ;
     BNE .justReturn                                            ;829E79|D012    |829E8D;
     STZ.W $096B                                                ;829E7B|9C6B09  |00096B;
-    REP #$30                                                   ;829E7E|C230    |      ;
-    LDA.W #$0000                                               ;829E80|A90000  |      ;
-    STA.B nPlayerAction                                        ;829E83|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829E85|E220    |      ;
     LDA.B #$F8                                                 ;829E87|A9F8    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829E89|2261D081|81D061;
@@ -3618,13 +3551,13 @@ subToolUsed82A5C3_GoldenSickle:
     RTS                                                        ;829E8D|60      |      ;
  
  
-subToolUsed82A5C3_GoldenPlow:
+fToolUsedAction0x12_GoldenPlow:
     SEP #$20                                                   ;829E8E|E220    |      ;
     REP #$10                                                   ;829E90|C210    |      ;
     LDA.B #$00                                                 ;829E92|A900    |      ;
     XBA                                                        ;829E94|EB      |      ;
     LDA.W $096B                                                ;829E95|AD6B09  |00096B;
-    JSR.W fUnknown_8292BC                                      ;829E98|20BC92  |8292BC;
+    JSR.W fToolUsedUnknown_8292BC                              ;829E98|20BC92  |8292BC;
     BNE +                                                      ;829E9B|D003    |829EA0;
     JMP.W .return                                              ;829E9D|4CF09F  |829FF0;
  
@@ -3769,9 +3702,7 @@ subToolUsed82A5C3_GoldenPlow:
 .return:
     SEP #$20                                                   ;829FF0|E220    |      ;
     STZ.W $096B                                                ;829FF2|9C6B09  |00096B;
-    REP #$30                                                   ;829FF5|C230    |      ;
-    LDA.W #$0000                                               ;829FF7|A90000  |      ;
-    STA.B nPlayerAction                                        ;829FFA|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829FFC|E220    |      ;
     LDA.B #$F8                                                 ;829FFE|A9F8    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82A000|2261D081|81D061;
@@ -3780,9 +3711,9 @@ subToolUsed82A5C3_GoldenPlow:
     RTS                                                        ;82A004|60      |      ;
  
  
-subToolUsed82A5C3_GolderHammer:
+fToolUsedAction0x13_GolderHammer:
     REP #$30                                                   ;82A005|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;82A007|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;82A007|20A092  |8292A0;
     BNE +                                                      ;82A00A|D003    |82A00F;
     JMP.W .label9                                              ;82A00C|4C41A1  |82A141;
  
@@ -3925,9 +3856,7 @@ subToolUsed82A5C3_GolderHammer:
     JSL.L fUnknown_81A500                                      ;82A12D|2200A581|81A500;
  
 .loop:
-    REP #$30                                                   ;82A131|C230    |      ;
-    LDA.W #$0000                                               ;82A133|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A136|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A138|E220    |      ;
     LDA.B #$FC                                                 ;82A13A|A9FC    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82A13C|2261D081|81D061;
@@ -3984,9 +3913,9 @@ subToolUsed82A5C3_GolderHammer:
     JMP.W .loop                                                ;82A1BC|4C31A1  |82A131;
  
  
-subToolUsed82A5C3_GoldenAxe:
+fToolUsedAction0x14_GoldenAxe:
     REP #$30                                                   ;82A1BF|C230    |      ;
-    JSR.W fWaterTileUnknown_8292A0                             ;82A1C1|20A092  |8292A0;
+    JSR.W fToolusedUnknown_8292A0                              ;82A1C1|20A092  |8292A0;
     BNE +                                                      ;82A1C4|D003    |82A1C9;
     JMP.W .return                                              ;82A1C6|4CF7A2  |82A2F7;
  
@@ -4125,16 +4054,14 @@ subToolUsed82A5C3_GoldenAxe:
     JSL.L fGameEngine_AddWood                                  ;82A2F3|2224B283|83B224;
  
 .return:
-    REP #$30                                                   ;82A2F7|C230    |      ;
-    LDA.W #$0000                                               ;82A2F9|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A2FC|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A2FE|E220    |      ;
     LDA.B #$F8                                                 ;82A300|A9F8    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82A302|2261D081|81D061;
     RTS                                                        ;82A306|60      |      ;
  
  
-subToolUsed82A5C3_Sprinkler:
+fToolUsedAction0x15_Sprinkler:
     SEP #$20                                                   ;82A307|E220    |      ;
     REP #$10                                                   ;82A309|C210    |      ;
     SEP #$20                                                   ;82A30B|E220    |      ;
@@ -4148,7 +4075,7 @@ subToolUsed82A5C3_Sprinkler:
     LDA.B #$00                                                 ;82A31F|A900    |      ;
     XBA                                                        ;82A321|EB      |      ;
     LDA.W $096B                                                ;82A322|AD6B09  |00096B;
-    JSR.W fToolUnknown_8292D6                                  ;82A325|20D692  |8292D6;
+    JSR.W fToolUsedUnknown_8292D6                              ;82A325|20D692  |8292D6;
     BNE +                                                      ;82A328|D003    |82A32D;
     JMP.W .return                                              ;82A32A|4C57A3  |82A357;
  
@@ -4183,9 +4110,7 @@ subToolUsed82A5C3_Sprinkler:
     CMP.B #$09                                                 ;82A360|C909    |      ;
     BNE .justReturn                                            ;82A362|D012    |82A376;
     STZ.W $096B                                                ;82A364|9C6B09  |00096B;
-    REP #$30                                                   ;82A367|C230    |      ;
-    LDA.W #$0000                                               ;82A369|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A36C|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A36E|E220    |      ;
     LDA.B #$F8                                                 ;82A370|A9F8    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82A372|2261D081|81D061;
@@ -4194,7 +4119,7 @@ subToolUsed82A5C3_Sprinkler:
     RTS                                                        ;82A376|60      |      ;
  
  
-subToolUsed82A5C3_BeanstalkSeed:
+fToolUsedAction0x16_BeanstalkSeed:
     SEP #$20                                                   ;82A377|E220    |      ;
     REP #$10                                                   ;82A379|C210    |      ;
     LDA.L nCurrentTimeID                                       ;82A37B|AF1C1F7F|7F1F1C;
@@ -4212,13 +4137,11 @@ subToolUsed82A5C3_BeanstalkSeed:
     SEP #$20                                                   ;82A39D|E220    |      ;
     STZ.W nToolEquipped                                        ;82A39F|9C2109  |000921;
  
-  + REP #$30                                                   ;82A3A2|C230    |      ;
-    LDA.W #$0000                                               ;82A3A4|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A3A7|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A3A9|60      |      ;
  
  
-subToolUsed82A5C3_BlueDiamond:
+fToolUsedAction0x17_BlueDiamond:
     SEP #$20                                                   ;82A3AA|E220    |      ;
     REP #$10                                                   ;82A3AC|C210    |      ;
     LDA.L nCurrentTimeID                                       ;82A3AE|AF1C1F7F|7F1F1C;
@@ -4241,24 +4164,17 @@ subToolUsed82A5C3_BlueDiamond:
     CPX.W #$00F6                                               ;82A3DC|E0F600  |      ;
     BNE +                                                      ;82A3DF|D014    |82A3F5;
     REP #$30                                                   ;82A3E1|C230    |      ;
-    LDA.W #$0000                                               ;82A3E3|A90000  |      ;
-    LDX.W #$0012                                               ;82A3E6|A21200  |      ;
-    LDY.W #$0000                                               ;82A3E9|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82A3EC|22978084|848097;
+    %AIExecute($0000, $0012, $0000)
     SEP #$20                                                   ;82A3F0|E220    |      ;
     STZ.W nToolEquipped                                        ;82A3F2|9C2109  |000921;
  
-  + REP #$30                                                   ;82A3F5|C230    |      ;
-    LDA.W #$0000                                               ;82A3F7|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A3FA|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A3FC|60      |      ;
  
  
-subToolUsed82A5C3_BlueFeather:
+fToolUsedAction0x18_BlueFeather:
     REP #$30                                                   ;82A3FD|C230    |      ;
-    REP #$30                                                   ;82A3FF|C230    |      ;
-    LDA.W #$0000                                               ;82A401|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A404|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     REP #$20                                                   ;82A406|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;82A408|AF5E1F7F|7F1F5E;
     ORA.W #$0040                                               ;82A40C|094000  |      ;
@@ -4266,7 +4182,7 @@ subToolUsed82A5C3_BlueFeather:
     RTS                                                        ;82A413|60      |      ;
  
  
-subToolUsed82A5C3_ChickenFeed:
+fToolUsedAction0x19_ChickenFeed:
     SEP #$20                                                   ;82A414|E220    |      ;
     REP #$10                                                   ;82A416|C210    |      ;
     LDA.B nMapEngine_AreaIdToLoad                              ;82A418|A522    |000022;
@@ -4338,13 +4254,11 @@ subToolUsed82A5C3_ChickenFeed:
   + SEP #$20                                                   ;82A4B2|E220    |      ;
     LDA.B #$FE                                                 ;82A4B4|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82A4B6|2261D081|81D061;
-    REP #$30                                                   ;82A4BA|C230    |      ;
-    LDA.W #$0000                                               ;82A4BC|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A4BF|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A4C1|60      |      ;
  
  
-subToolUsed82A5C3_CowFeed:
+fToolUsedAction0x1A_CowFeed:
     SEP #$20                                                   ;82A4C2|E220    |      ;
     REP #$10                                                   ;82A4C4|C210    |      ;
     LDA.B nMapEngine_AreaIdToLoad                              ;82A4C6|A522    |000022;
@@ -4413,16 +4327,14 @@ subToolUsed82A5C3_CowFeed:
     BNE +                                                      ;82A55B|D003    |82A560;
     STZ.W nToolEquipped                                        ;82A55D|9C2109  |000921;
  
-  + REP #$30                                                   ;82A560|C230    |      ;
-    LDA.W #$0000                                               ;82A562|A90000  |      ;
-    STA.B nPlayerAction                                        ;82A565|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A567|E220    |      ;
     LDA.B #$FE                                                 ;82A569|A9FE    |      ;
     JSL.L fPlayerEnergyHandler                                 ;82A56B|2261D081|81D061;
     RTS                                                        ;82A56F|60      |      ;
  
  
-subToolUsed82A5C3_0x1B:
+fToolUsedAction0x1B_FishingPole:
     RTS                                                        ;82A570|60      |      ;
  
  
@@ -4431,65 +4343,65 @@ nCowFeedFlagsTable:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;82A57D|        |      ;
     dw $1000                                                   ;82A589|        |      ;
  
-aToolUsed_AnimationTable:
-    dw subToolAnimation82A58B_Empty                            ;82A58B|        |8290DD; 0x1C * [ptr16]
-    dw subToolAnimation82A58B_Sickle                           ;82A58D|        |8290DE;
-    dw subToolAnimation82A58B_Plow                             ;82A58F|        |8290EC;
-    dw subToolAnimation82A58B_Hammer                           ;82A591|        |8290FA;
-    dw subToolAnimation82A58B_Axe                              ;82A593|        |829108;
-    dw subToolAnimation82A58B_CornSeedBag                      ;82A595|        |829116;
-    dw subToolAnimation82A58B_TomatoSeedBag                    ;82A597|        |829121;
-    dw subToolAnimation82A58B_PotatoSeedBag                    ;82A599|        |82912C;
-    dw subToolAnimation82A58B_TurnipSeedBag                    ;82A59B|        |829137;
-    dw subToolAnimation82A58B_CowMedicine                      ;82A59D|        |829142;
-    dw subToolAnimation82A58B_MiraclePotion                    ;82A59F|        |829150;
-    dw subToolAnimation82A58B_Bell                             ;82A5A1|        |82915E;
-    dw subToolAnimation82A58B_GrassSeedBag                     ;82A5A3|        |829179;
-    dw subToolAnimation82A58B_Paint                            ;82A5A5|        |829184;
-    dw subToolAnimation82A58B_Milker                           ;82A5A7|        |82918D;
-    dw subToolAnimation82A58B_Brush                            ;82A5A9|        |82919B;
-    dw subToolAnimation82A58B_WateringCan                      ;82A5AB|        |8291A9;
-    dw subToolAnimation82A58B_GoldenSickle                     ;82A5AD|        |8291E8;
-    dw subToolAnimation82A58B_GoldenPlow                       ;82A5AF|        |8291F1;
-    dw subToolAnimation82A58B_GoldenHammer                     ;82A5B1|        |8291FD;
-    dw subToolAnimation82A58B_GoldenAxe                        ;82A5B3|        |829209;
-    dw subToolAnimation82A58B_Sprinkler                        ;82A5B5|        |829215;
-    dw subToolAnimation82A58B_BeanstalkSeed                    ;82A5B7|        |82921E;
-    dw subToolAnimation82A58B_BlueDiamond                      ;82A5B9|        |82922A;
-    dw subToolAnimation82A58B_BlueFeather                      ;82A5BB|        |829236;
-    dw subToolAnimation82A58B_ChickenFood                      ;82A5BD|        |82923F;
-    dw subToolAnimation82A58B_CowFood                          ;82A5BF|        |82924B;
-    dw subToolAnimation82A58B_0x1B                             ;82A5C1|        |829257;
+aToolUsedAnimationTable:
+    dw fToolUsedAnimation0x00_Empty                            ;82A58B|        |8290DD; 0x1C * [ptr16]
+    dw fToolUsedAnimation0x01_Sickle                           ;82A58D|        |8290DE;
+    dw fToolUsedAnimation0x02_Plow                             ;82A58F|        |8290EC;
+    dw fToolUsedAnimation0x03_Hammer                           ;82A591|        |8290FA;
+    dw fToolUsedAnimation0x04_Axe                              ;82A593|        |829108;
+    dw fToolUsedAnimation0x05_CornSeedBag                      ;82A595|        |829116;
+    dw fToolUsedAnimation0x06_TomatoSeedBag                    ;82A597|        |829121;
+    dw fToolUsedAnimation0x07_PotatoSeedBag                    ;82A599|        |82912C;
+    dw fToolUsedAnimation0x08_TurnipSeedBag                    ;82A59B|        |829137;
+    dw fToolUsedAnimation0x09_CowMedicine                      ;82A59D|        |829142;
+    dw fToolUsedAnimation0x0A_MiraclePotion                    ;82A59F|        |829150;
+    dw fToolUsedAnimation0x0B_Bell                             ;82A5A1|        |82915E;
+    dw fToolUsedAnimation0x0C_GrassSeedBag                     ;82A5A3|        |829179;
+    dw fToolUsedAnimation0x0D_Paint                            ;82A5A5|        |829184;
+    dw fToolUsedAnimation0x0E_Milker                           ;82A5A7|        |82918D;
+    dw fToolUsedAnimation0x0F_Brush                            ;82A5A9|        |82919B;
+    dw fToolUsedAnimation0x10_WateringCan                      ;82A5AB|        |8291A9;
+    dw fToolUsedAnimation0x11_GoldenSickle                     ;82A5AD|        |8291E8;
+    dw fToolUsedAnimation0x12_GoldenPlow                       ;82A5AF|        |8291F1;
+    dw fToolUsedAnimation0x13_GoldenHammer                     ;82A5B1|        |8291FD;
+    dw fToolUsedAnimation0x14_GoldenAxe                        ;82A5B3|        |829209;
+    dw fToolUsedAnimation0x15_Sprinkler                        ;82A5B5|        |829215;
+    dw fToolUsedAnimation0x16_BeanstalkSeed                    ;82A5B7|        |82921E;
+    dw fToolUsedAnimation0x17_BlueDiamond                      ;82A5B9|        |82922A;
+    dw fToolUsedAnimation0x18_BlueFeather                      ;82A5BB|        |829236;
+    dw fToolUsedAnimation0x19_ChickenFood                      ;82A5BD|        |82923F;
+    dw fToolUsedAnimation0x1A_CowFood                          ;82A5BF|        |82924B;
+    dw fToolUsedAnimation0x1B_FishingPole                      ;82A5C1|        |829257;
  
-aToolUsed_Table82A5C3:
-    dw subToolUsed82A5C3_Empty                                 ;82A5C3|        |82931E; 0x1C * [ptr16]
-    dw subToolUsed82A5C3_Sickle                                ;82A5C5|        |829328;
-    dw subToolUsed82A5C3_Plow                                  ;82A5C7|        |829460;
-    dw subToolUsed82A5C3_Hammer                                ;82A5C9|        |8295C0;
-    dw subToolUsed82A5C3_Axe                                   ;82A5CB|        |8297BD;
-    dw subToolUsed82A5C3_CornSeedBag                           ;82A5CD|        |829999;
-    dw subToolUsed82A5C3_TomatoSeedBag                         ;82A5CF|        |8299F8;
-    dw subToolUsed82A5C3_PotatoSeedBag                         ;82A5D1|        |829A57;
-    dw subToolUsed82A5C3_TurnipSeedBag                         ;82A5D3|        |829AB4;
-    dw subToolUsed82A5C3_CowMedicine                           ;82A5D5|        |829B11;
-    dw subToolUsed82A5C3_MiraclePotion                         ;82A5D7|        |829B31;
-    dw subToolUsed82A5C3_Bell                                  ;82A5D9|        |829B51;
-    dw subToolUsed82A5C3_GrassSeedBag                          ;82A5DB|        |829B61;
-    dw subToolUsed82A5C3_Paint                                 ;82A5DD|        |829BCB;
-    dw subToolUsed82A5C3_Milker                                ;82A5DF|        |829CC0;
-    dw subToolUsed82A5C3_Brush                                 ;82A5E1|        |829CC8;
-    dw subToolUsed82A5C3_WateringCan                           ;82A5E3|        |829CD8;
-    dw subToolUsed82A5C3_GoldenSickle                          ;82A5E5|        |829D42;
-    dw subToolUsed82A5C3_GoldenPlow                            ;82A5E7|        |829E8E;
-    dw subToolUsed82A5C3_GolderHammer                          ;82A5E9|        |82A005;
-    dw subToolUsed82A5C3_GoldenAxe                             ;82A5EB|        |82A1BF;
-    dw subToolUsed82A5C3_Sprinkler                             ;82A5ED|        |82A307;
-    dw subToolUsed82A5C3_BeanstalkSeed                         ;82A5EF|        |82A377;
-    dw subToolUsed82A5C3_BlueDiamond                           ;82A5F1|        |82A3AA;
-    dw subToolUsed82A5C3_BlueFeather                           ;82A5F3|        |82A3FD;
-    dw subToolUsed82A5C3_ChickenFeed                           ;82A5F5|        |82A414;
-    dw subToolUsed82A5C3_CowFeed                               ;82A5F7|        |82A4C2;
-    dw subToolUsed82A5C3_0x1B                                  ;82A5F9|        |82A570;
+aToolUsedActionTable:
+    dw fToolUsedAction0x00_Empty                               ;82A5C3|        |82931E; 0x1C * [ptr16]
+    dw fToolUsedAction0x01_Sickle                              ;82A5C5|        |829328;
+    dw fToolUsedAction0x02_Plow                                ;82A5C7|        |829460;
+    dw fToolUsedAction0x03_Hammer                              ;82A5C9|        |8295C0;
+    dw fToolUsedAction0x04_Axe                                 ;82A5CB|        |8297BD;
+    dw fToolUsedAction0x05_CornSeedBag                         ;82A5CD|        |829999;
+    dw fToolUsedAction0x06_TomatoSeedBag                       ;82A5CF|        |8299F8;
+    dw fToolUsedAction0x07_PotatoSeedBag                       ;82A5D1|        |829A57;
+    dw fToolUsedAction0x08_TurnipSeedBag                       ;82A5D3|        |829AB4;
+    dw fToolUsedAction0x09_CowMedicine                         ;82A5D5|        |829B11;
+    dw fToolUsedAction0x0A_MiraclePotion                       ;82A5D7|        |829B31;
+    dw fToolUsedAction0x0B_Bell                                ;82A5D9|        |829B51;
+    dw fToolUsedAction0x0C_GrassSeedBag                        ;82A5DB|        |829B61;
+    dw fToolUsedAction0x0D_Paint                               ;82A5DD|        |829BCB;
+    dw fToolUsedAction0x0E_Milker                              ;82A5DF|        |829CC0;
+    dw fToolUsedAction0x0F_Brush                               ;82A5E1|        |829CC8;
+    dw fToolUsedAction0x10_WateringCan                         ;82A5E3|        |829CD8;
+    dw fToolUsedAction0x11_GoldenSickle                        ;82A5E5|        |829D42;
+    dw fToolUsedAction0x12_GoldenPlow                          ;82A5E7|        |829E8E;
+    dw fToolUsedAction0x13_GolderHammer                        ;82A5E9|        |82A005;
+    dw fToolUsedAction0x14_GoldenAxe                           ;82A5EB|        |82A1BF;
+    dw fToolUsedAction0x15_Sprinkler                           ;82A5ED|        |82A307;
+    dw fToolUsedAction0x16_BeanstalkSeed                       ;82A5EF|        |82A377;
+    dw fToolUsedAction0x17_BlueDiamond                         ;82A5F1|        |82A3AA;
+    dw fToolUsedAction0x18_BlueFeather                         ;82A5F3|        |82A3FD;
+    dw fToolUsedAction0x19_ChickenFeed                         ;82A5F5|        |82A414;
+    dw fToolUsedAction0x1A_CowFeed                             ;82A5F7|        |82A4C2;
+    dw fToolUsedAction0x1B_FishingPole                         ;82A5F9|        |82A570;
  
 fObjectMap_LoadData:
     SEP #$20                                                   ;82A5FB|E220    |      ;
@@ -5687,11 +5599,9 @@ fUnknown_82AD0E:
     ADC.B n16TempVar1                                          ;82ADAF|657E    |00007E;
     TAX                                                        ;82ADB1|AA      |      ;
     SEP #$20                                                   ;82ADB2|E220    |      ;
-    LDA.L nUnkownItemOnHandTable,X                             ;82ADB4|BFB4CF82|82CFB4;
+    LDA.L aInteractionItemTable,X                              ;82ADB4|BFB4CF82|82CFB4;
     STA.W nCarryItem_Current                                   ;82ADB8|8D1D09  |00091D;
-    REP #$30                                                   ;82ADBB|C230    |      ;
-    LDA.W #$0004                                               ;82ADBD|A90400  |      ;
-    STA.B nPlayerAction                                        ;82ADC0|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     JMP.W .justReturn                                          ;82ADC2|4CE5AE  |82AEE5;
  
  
@@ -5704,9 +5614,7 @@ fUnknown_82AD0E:
     JMP.W .return                                              ;82ADCE|4CE6AE  |82AEE6;
  
  
-  + REP #$30                                                   ;82ADD1|C230    |      ;
-    LDA.B nPlayerFlags                                         ;82ADD3|A5D2    |0000D2;
-    AND.W #$0020                                               ;82ADD5|292000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;82ADD8|F003    |82ADDD;
     JMP.W .justReturn                                          ;82ADDA|4CE5AE  |82AEE5;
  
@@ -5857,13 +5765,8 @@ fUnknown_82AD0E:
     STA.W nPlayerInteractionIndex                              ;82AECC|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;82AECF|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;82AED2|9C7009  |000970;
-    REP #$30                                                   ;82AED5|C230    |      ;
-    LDA.B nPlayerFlags                                         ;82AED7|A5D2    |0000D2;
-    ORA.W #$0040                                               ;82AED9|094000  |      ;
-    STA.B nPlayerFlags                                         ;82AEDC|85D2    |0000D2;
-    REP #$30                                                   ;82AEDE|C230    |      ;
-    LDA.W #$0000                                               ;82AEE0|A90000  |      ;
-    STA.B nPlayerAction                                        ;82AEE3|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
  
 .justReturn:
     RTL                                                        ;82AEE5|6B      |      ;
@@ -7100,7 +7003,7 @@ sObjectMap2_0x06:
     dw $013F,$F201,$0140,$FF01,$0000,$FF00                     ;82CFA4|        |      ;
     dw $0000,$FF00                                             ;82CFB0|        |      ;
  
-nUnkownItemOnHandTable:
+aInteractionItemTable:
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;82CFB4|        |      ; 8b, 8b, 8b, 8b - season subindexed
     db $09,$09,$0A,$00,$0D,$0D,$0D,$0E,$0F,$0F,$0F,$0F         ;82CFC0|        |      ;
     db $0B,$0B,$0B,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;82CFCC|        |      ;
@@ -7222,19 +7125,14 @@ fUnknown_82D1C0:
     STZ.B nPlayerFlags                                         ;82D297|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;82D299|64D4    |0000D4;
     SEP #$20                                                   ;82D29B|E220    |      ;
-    REP #$30                                                   ;82D29D|C230    |      ;
-    LDA.B nPlayerFlags                                         ;82D29F|A5D2    |0000D2;
-    ORA.W #$0001                                               ;82D2A1|090100  |      ;
-    STA.B nPlayerFlags                                         ;82D2A4|85D2    |0000D2;
-    REP #$30                                                   ;82D2A6|C230    |      ;
-    LDA.W #$0000                                               ;82D2A8|A90000  |      ;
-    STA.B nPlayerAction                                        ;82D2AB|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;82D2AD|C230    |      ;
-    LDA.W #$0000                                               ;82D2AF|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;82D2B2|85DA    |0000DA;
     REP #$30                                                   ;82D2B4|C230    |      ;
     LDA.W #$0000                                               ;82D2B6|A90000  |      ;
-    STA.W $0911                                                ;82D2B9|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;82D2B9|8D1109  |000911;
     REP #$30                                                   ;82D2BC|C230    |      ;
     LDA.W #$0000                                               ;82D2BE|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;82D2C1|8D0109  |000901;
@@ -7244,11 +7142,7 @@ fUnknown_82D1C0:
     STA.L nCurrentSeasonID                                     ;82D2CB|8F191F7F|7F1F19;
     SEP #$20                                                   ;82D2CF|E220    |      ;
     STZ.W nCarryItem_Current                                   ;82D2D1|9C1D09  |00091D;
-    REP #$30                                                   ;82D2D4|C230    |      ;
-    LDA.W #$0002                                               ;82D2D6|A90200  |      ;
-    EOR.W #$FFFF                                               ;82D2D9|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;82D2DC|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;82D2DE|85D2    |0000D2;
+    %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;82D2E0|C230    |      ;
     STZ.W sPlacedCowFeed                                       ;82D2E2|9C3209  |000932;
     STZ.W sPlacedChickenFeed                                   ;82D2E5|9C3409  |000934;
@@ -7267,10 +7161,7 @@ fUnknown_82D1C0:
     LDA.W #$0100                                               ;82D315|A90001  |      ;
     STA.W strcBGScrool.BG3VerOffs                              ;82D318|8D4601  |000146;
     REP #$30                                                   ;82D31B|C230    |      ;
-    LDA.W #$0000                                               ;82D31D|A90000  |      ;
-    LDX.W #$0047                                               ;82D320|A24700  |      ;
-    LDY.W #$0000                                               ;82D323|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D326|22978084|848097;
+    %AIExecute($0000, $0047, $0000)
     JSL.L fAI_HowToPlaySetup                                   ;82D32A|226F8184|84816F;
     SEP #$20                                                   ;82D32E|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D330|AD8B09  |00098B;
@@ -7405,19 +7296,14 @@ fMainMenu_AutoHowToPlay:
     STZ.B nPlayerFlags                                         ;82D498|64D2    |0000D2;
     STZ.B nPlayerAction                                        ;82D49A|64D4    |0000D4;
     SEP #$20                                                   ;82D49C|E220    |      ;
-    REP #$30                                                   ;82D49E|C230    |      ;
-    LDA.B nPlayerFlags                                         ;82D4A0|A5D2    |0000D2;
-    ORA.W #$0001                                               ;82D4A2|090100  |      ;
-    STA.B nPlayerFlags                                         ;82D4A5|85D2    |0000D2;
-    REP #$30                                                   ;82D4A7|C230    |      ;
-    LDA.W #$0000                                               ;82D4A9|A90000  |      ;
-    STA.B nPlayerAction                                        ;82D4AC|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;82D4AE|C230    |      ;
-    LDA.W #$0000                                               ;82D4B0|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;82D4B3|85DA    |0000DA;
     REP #$30                                                   ;82D4B5|C230    |      ;
     LDA.W #$0000                                               ;82D4B7|A90000  |      ;
-    STA.W $0911                                                ;82D4BA|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;82D4BA|8D1109  |000911;
     REP #$30                                                   ;82D4BD|C230    |      ;
     LDA.W #$0000                                               ;82D4BF|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;82D4C2|8D0109  |000901;
@@ -7427,11 +7313,7 @@ fMainMenu_AutoHowToPlay:
     STA.L nCurrentSeasonID                                     ;82D4CC|8F191F7F|7F1F19;
     SEP #$20                                                   ;82D4D0|E220    |      ;
     STZ.W nCarryItem_Current                                   ;82D4D2|9C1D09  |00091D;
-    REP #$30                                                   ;82D4D5|C230    |      ;
-    LDA.W #$0002                                               ;82D4D7|A90200  |      ;
-    EOR.W #$FFFF                                               ;82D4DA|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;82D4DD|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;82D4DF|85D2    |0000D2;
+    %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;82D4E1|C230    |      ;
     STZ.W sPlacedCowFeed                                       ;82D4E3|9C3209  |000932;
     STZ.W sPlacedChickenFeed                                   ;82D4E6|9C3409  |000934;
@@ -7512,10 +7394,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay_default:
     REP #$30                                                   ;82D574|C230    |      ;
-    LDA.W #$0000                                               ;82D576|A90000  |      ;
-    LDX.W #$0047                                               ;82D579|A24700  |      ;
-    LDY.W #$0002                                               ;82D57C|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D57F|22978084|848097;
+    %AIExecute($0000, $0047, $0002)
     SEP #$20                                                   ;82D583|E220    |      ;
     LDA.B #$01                                                 ;82D585|A901    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D587|8F481F7F|7F1F48;
@@ -7524,10 +7403,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay01:
     REP #$30                                                   ;82D58E|C230    |      ;
-    LDA.W #$0000                                               ;82D590|A90000  |      ;
-    LDX.W #$0047                                               ;82D593|A24700  |      ;
-    LDY.W #$0004                                               ;82D596|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D599|22978084|848097;
+    %AIExecute($0000, $0047, $0004)
     SEP #$20                                                   ;82D59D|E220    |      ;
     LDA.B #$02                                                 ;82D59F|A902    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5A1|8F481F7F|7F1F48;
@@ -7536,10 +7412,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay02:
     REP #$30                                                   ;82D5A8|C230    |      ;
-    LDA.W #$0000                                               ;82D5AA|A90000  |      ;
-    LDX.W #$0047                                               ;82D5AD|A24700  |      ;
-    LDY.W #$0006                                               ;82D5B0|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D5B3|22978084|848097;
+    %AIExecute($0000, $0047, $0006)
     SEP #$20                                                   ;82D5B7|E220    |      ;
     LDA.B #$03                                                 ;82D5B9|A903    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5BB|8F481F7F|7F1F48;
@@ -7548,10 +7421,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay03:
     REP #$30                                                   ;82D5C2|C230    |      ;
-    LDA.W #$0000                                               ;82D5C4|A90000  |      ;
-    LDX.W #$0047                                               ;82D5C7|A24700  |      ;
-    LDY.W #$0007                                               ;82D5CA|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D5CD|22978084|848097;
+    %AIExecute($0000, $0047, $0007)
     SEP #$20                                                   ;82D5D1|E220    |      ;
     LDA.B #$04                                                 ;82D5D3|A904    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5D5|8F481F7F|7F1F48;
@@ -7560,10 +7430,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay04:
     REP #$30                                                   ;82D5DC|C230    |      ;
-    LDA.W #$0000                                               ;82D5DE|A90000  |      ;
-    LDX.W #$0047                                               ;82D5E1|A24700  |      ;
-    LDY.W #$0009                                               ;82D5E4|A00900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D5E7|22978084|848097;
+    %AIExecute($0000, $0047, $0009)
     SEP #$20                                                   ;82D5EB|E220    |      ;
     LDA.B #$05                                                 ;82D5ED|A905    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D5EF|8F481F7F|7F1F48;
@@ -7572,10 +7439,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay05:
     REP #$30                                                   ;82D5F6|C230    |      ;
-    LDA.W #$0000                                               ;82D5F8|A90000  |      ;
-    LDX.W #$0047                                               ;82D5FB|A24700  |      ;
-    LDY.W #$000B                                               ;82D5FE|A00B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D601|22978084|848097;
+    %AIExecute($0000, $0047, $000B)
     SEP #$20                                                   ;82D605|E220    |      ;
     LDA.B #$06                                                 ;82D607|A906    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D609|8F481F7F|7F1F48;
@@ -7584,10 +7448,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay06:
     REP #$30                                                   ;82D610|C230    |      ;
-    LDA.W #$0000                                               ;82D612|A90000  |      ;
-    LDX.W #$0047                                               ;82D615|A24700  |      ;
-    LDY.W #$000D                                               ;82D618|A00D00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D61B|22978084|848097;
+    %AIExecute($0000, $0047, $000D)
     SEP #$20                                                   ;82D61F|E220    |      ;
     LDA.B #$07                                                 ;82D621|A907    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D623|8F481F7F|7F1F48;
@@ -7596,10 +7457,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay07:
     REP #$30                                                   ;82D62A|C230    |      ;
-    LDA.W #$0000                                               ;82D62C|A90000  |      ;
-    LDX.W #$0047                                               ;82D62F|A24700  |      ;
-    LDY.W #$0011                                               ;82D632|A01100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D635|22978084|848097;
+    %AIExecute($0000, $0047, $0011)
     SEP #$20                                                   ;82D639|E220    |      ;
     LDA.B #$08                                                 ;82D63B|A908    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D63D|8F481F7F|7F1F48;
@@ -7608,10 +7466,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay08:
     REP #$30                                                   ;82D644|C230    |      ;
-    LDA.W #$0000                                               ;82D646|A90000  |      ;
-    LDX.W #$0047                                               ;82D649|A24700  |      ;
-    LDY.W #$0015                                               ;82D64C|A01500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D64F|22978084|848097;
+    %AIExecute($0000, $0047, $0015)
     SEP #$20                                                   ;82D653|E220    |      ;
     LDA.B #$09                                                 ;82D655|A909    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D657|8F481F7F|7F1F48;
@@ -7620,10 +7475,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay09:
     REP #$30                                                   ;82D65E|C230    |      ;
-    LDA.W #$0000                                               ;82D660|A90000  |      ;
-    LDX.W #$0047                                               ;82D663|A24700  |      ;
-    LDY.W #$0017                                               ;82D666|A01700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D669|22978084|848097;
+    %AIExecute($0000, $0047, $0017)
     SEP #$20                                                   ;82D66D|E220    |      ;
     LDA.B #$0A                                                 ;82D66F|A90A    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D671|8F481F7F|7F1F48;
@@ -7632,10 +7484,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay0A:
     REP #$30                                                   ;82D678|C230    |      ;
-    LDA.W #$0000                                               ;82D67A|A90000  |      ;
-    LDX.W #$0047                                               ;82D67D|A24700  |      ;
-    LDY.W #$0019                                               ;82D680|A01900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D683|22978084|848097;
+    %AIExecute($0000, $0047, $0019)
     SEP #$20                                                   ;82D687|E220    |      ;
     LDA.B #$0B                                                 ;82D689|A90B    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D68B|8F481F7F|7F1F48;
@@ -7644,10 +7493,7 @@ fMainMenu_AutoHowToPlay:
  
 .howToPlay0B:
     REP #$30                                                   ;82D692|C230    |      ;
-    LDA.W #$0000                                               ;82D694|A90000  |      ;
-    LDX.W #$0047                                               ;82D697|A24700  |      ;
-    LDY.W #$001B                                               ;82D69A|A01B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D69D|22978084|848097;
+    %AIExecute($0000, $0047, $001B)
     SEP #$20                                                   ;82D6A1|E220    |      ;
     LDA.B #$00                                                 ;82D6A3|A900    |      ;
     STA.L nIntroHowToPlayIndex                                 ;82D6A5|8F481F7F|7F1F48;
@@ -7903,19 +7749,14 @@ fUnknown_82D8B0:
     JSL.L fUnknown_Zero07Ptr                                   ;82D8C6|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D8CA|22008084|848000;
     REP #$20                                                   ;82D8CE|C220    |      ;
-    REP #$30                                                   ;82D8D0|C230    |      ;
-    LDA.B nPlayerFlags                                         ;82D8D2|A5D2    |0000D2;
-    ORA.W #$0001                                               ;82D8D4|090100  |      ;
-    STA.B nPlayerFlags                                         ;82D8D7|85D2    |0000D2;
-    REP #$30                                                   ;82D8D9|C230    |      ;
-    LDA.W #$0000                                               ;82D8DB|A90000  |      ;
-    STA.B nPlayerAction                                        ;82D8DE|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;82D8E0|C230    |      ;
-    LDA.W #$0000                                               ;82D8E2|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;82D8E5|85DA    |0000DA;
     REP #$30                                                   ;82D8E7|C230    |      ;
     LDA.W #$0000                                               ;82D8E9|A90000  |      ;
-    STA.W $0911                                                ;82D8EC|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;82D8EC|8D1109  |000911;
     REP #$30                                                   ;82D8EF|C230    |      ;
     LDA.W #$0000                                               ;82D8F1|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;82D8F4|8D0109  |000901;
@@ -7923,10 +7764,7 @@ fUnknown_82D8B0:
     LDA.W #$0100                                               ;82D8F9|A90001  |      ;
     STA.W strcBGScrool.BG3VerOffs                              ;82D8FC|8D4601  |000146;
     REP #$30                                                   ;82D8FF|C230    |      ;
-    LDA.W #$0000                                               ;82D901|A90000  |      ;
-    LDX.W #$0009                                               ;82D904|A20900  |      ;
-    LDY.W #$0000                                               ;82D907|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;82D90A|22978084|848097;
+    %AIExecute($0000, $0009, $0000)
     JSL.L fAI_HowToPlaySetup                                   ;82D90E|226F8184|84816F;
     SEP #$20                                                   ;82D912|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D914|AD8B09  |00098B;
@@ -9583,7 +9421,7 @@ fStartNewGame:
 fUnreached_82E801:
     SEP #$20                                                   ;82E801|E220    |      ;
     LDA.B #$00                                                 ;82E803|A900    |      ;
-    STA.W nNameInputDestination                                ;82E805|8D9F09  |00099F;
+    STA.W strcMenuObjectData.nameDestinationIdx                ;82E805|8D9F09  |00099F;
     JML.L fScreen_NameInput                                    ;82E808|5C0CE882|82E80C;
  
  
@@ -9655,22 +9493,22 @@ fScreen_NameInput:
     JSL.L fUnknown_Zero07Ptr                                   ;82E8B4|22C7A481|81A4C7;
     REP #$20                                                   ;82E8B8|C220    |      ;
     LDA.W #$0219                                               ;82E8BA|A91902  |      ;
-    STA.B $A1                                                  ;82E8BD|85A1    |0000A1;
-    STA.W $0997                                                ;82E8BF|8D9709  |000997;
+    STA.B strcSingleObjectData.spriteTableIdx                  ;82E8BD|85A1    |0000A1;
+    STA.W strcMenuObjectData.spriteTableIdx                    ;82E8BF|8D9709  |000997;
     LDA.W #$0000                                               ;82E8C2|A90000  |      ;
-    STA.B $9F                                                  ;82E8C5|859F    |00009F;
-    STA.W nMenuFlip                                            ;82E8C7|8D9909  |000999;
+    STA.B strcSingleObjectData.flip                            ;82E8C5|859F    |00009F;
+    STA.W strcMenuObjectData.flip                              ;82E8C7|8D9909  |000999;
     LDA.W #$0028                                               ;82E8CA|A92800  |      ;
-    STA.B $9B                                                  ;82E8CD|859B    |00009B;
-    STA.W nMenuPosX                                            ;82E8CF|8D9B09  |00099B;
+    STA.B strcSingleObjectData.posX                            ;82E8CD|859B    |00009B;
+    STA.W strcMenuObjectData.posX                              ;82E8CF|8D9B09  |00099B;
     LDA.W #$0044                                               ;82E8D2|A94400  |      ;
-    STA.B $9D                                                  ;82E8D5|859D    |00009D;
-    STA.W nMenuPoxY                                            ;82E8D7|8D9D09  |00099D;
-    STZ.B $A3                                                  ;82E8DA|64A3    |0000A3;
+    STA.B strcSingleObjectData.posY                            ;82E8D5|859D    |00009D;
+    STA.W strcMenuObjectData.posY                              ;82E8D7|8D9D09  |00099D;
+    STZ.B strcSingleObjectData.unk6                            ;82E8DA|64A3    |0000A3;
     JSL.L fUnknown_858000                                      ;82E8DC|22008085|858000;
     REP #$20                                                   ;82E8E0|C220    |      ;
-    LDA.B $A5                                                  ;82E8E2|A5A5    |0000A5;
-    STA.W $0995                                                ;82E8E4|8D9509  |000995;
+    LDA.B strcSingleObjectData.gameObjectIdx                   ;82E8E2|A5A5    |0000A5;
+    STA.W strcMenuObjectData.gameObjectIdx                     ;82E8E4|8D9509  |000995;
     JSL.L fUnknown_82EAB4                                      ;82E8E7|22B4EA82|82EAB4;
     JSL.L fUnknown_82EA80                                      ;82E8EB|2280EA82|82EA80;
     REP #$20                                                   ;82E8EF|C220    |      ;
@@ -9697,11 +9535,11 @@ fScreen_NameInput:
     STA.B n8TempVar3                                           ;82E92B|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E92D|22CE8780|8087CE;
     REP #$20                                                   ;82E931|C220    |      ;
-    STZ.W nMenuIndex                                           ;82E933|9C9109  |000991;
+    STZ.W strcMenuObjectData.menuIdx                           ;82E933|9C9109  |000991;
     SEP #$20                                                   ;82E936|E220    |      ;
     LDA.B #$00                                                 ;82E938|A900    |      ;
-    STA.W nMenuTableSelector                                   ;82E93A|8D9309  |000993;
-    STZ.W nNameEntryIndex                                      ;82E93D|9C9409  |000994;
+    STA.W strcMenuObjectData.tableSelector                     ;82E93A|8D9309  |000993;
+    STZ.W strcMenuObjectData.nameEntryIdx                      ;82E93D|9C9409  |000994;
     STZ.W $018B                                                ;82E940|9C8B01  |00018B;
     SEP #$20                                                   ;82E943|E220    |      ;
     LDA.B #$B1                                                 ;82E945|A9B1    |      ;
@@ -9725,7 +9563,7 @@ fScreen_NameInput:
     JSR.W fUnknown_82EA15                                      ;82E96C|2015EA  |82EA15;
     JSL.L fInput_Handler                                       ;82E96F|2234C084|84C034;
     SEP #$20                                                   ;82E973|E220    |      ;
-    LDA.W nMenuTableSelector                                   ;82E975|AD9309  |000993;
+    LDA.W strcMenuObjectData.tableSelector                     ;82E975|AD9309  |000993;
     CMP.B #$03                                                 ;82E978|C903    |      ;
     BNE +                                                      ;82E97A|D003    |82E97F;
     JMP.W .nameHandler                                         ;82E97C|4CCEE9  |82E9CE;
@@ -9748,16 +9586,16 @@ fScreen_NameInput:
     INC.B $96                                                  ;82E999|E696    |000096;
  
   + REP #$20                                                   ;82E99B|C220    |      ;
-    LDA.W $0997                                                ;82E99D|AD9709  |000997;
-    STA.B $A1                                                  ;82E9A0|85A1    |0000A1;
-    LDA.W nMenuFlip                                            ;82E9A2|AD9909  |000999;
-    STA.B $9F                                                  ;82E9A5|859F    |00009F;
-    LDA.W nMenuPosX                                            ;82E9A7|AD9B09  |00099B;
-    STA.B $9B                                                  ;82E9AA|859B    |00009B;
-    LDA.W nMenuPoxY                                            ;82E9AC|AD9D09  |00099D;
-    STA.B $9D                                                  ;82E9AF|859D    |00009D;
-    LDA.W $0995                                                ;82E9B1|AD9509  |000995;
-    STA.B $A5                                                  ;82E9B4|85A5    |0000A5;
+    LDA.W strcMenuObjectData.spriteTableIdx                    ;82E99D|AD9709  |000997;
+    STA.B strcSingleObjectData.spriteTableIdx                  ;82E9A0|85A1    |0000A1;
+    LDA.W strcMenuObjectData.flip                              ;82E9A2|AD9909  |000999;
+    STA.B strcSingleObjectData.flip                            ;82E9A5|859F    |00009F;
+    LDA.W strcMenuObjectData.posX                              ;82E9A7|AD9B09  |00099B;
+    STA.B strcSingleObjectData.posX                            ;82E9AA|859B    |00009B;
+    LDA.W strcMenuObjectData.posY                              ;82E9AC|AD9D09  |00099D;
+    STA.B strcSingleObjectData.posY                            ;82E9AF|859D    |00009D;
+    LDA.W strcMenuObjectData.gameObjectIdx                     ;82E9B1|AD9509  |000995;
+    STA.B strcSingleObjectData.gameObjectIdx                   ;82E9B4|85A5    |0000A5;
     JSL.L fUnknown_8580B9                                      ;82E9B6|22B98085|8580B9;
     JSL.L fUnknown_8582C7                                      ;82E9BA|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82E9BE|22B28C85|858CB2;
@@ -9772,7 +9610,7 @@ fScreen_NameInput:
     LDA.W nMapEngine_flags_TempCopy                            ;82E9D0|AD9801  |000198;
     STA.W nMapEngine_flags                                     ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
-    LDA.W nNameInputDestination                                ;82E9D8|AD9F09  |00099F;
+    LDA.W strcMenuObjectData.nameDestinationIdx                ;82E9D8|AD9F09  |00099F;
     CMP.B #!NI_PLAYER                                                 
     BNE +                                                      ;82E9DD|D004    |82E9E3;
     JML.L fCore_SetPlayerName                                  ;82E9DF|5CED8080|8080ED;
@@ -9814,7 +9652,7 @@ fScreen_NameInput:
 fUnknown_82EA15:
     SEP #$20                                                   ;82EA15|E220    |      ;
     REP #$10                                                   ;82EA17|C210    |      ;
-    LDA.W nNameEntryIndex                                      ;82EA19|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;82EA19|AD9409  |000994;
     CMP.B #$04                                                 ;82EA1C|C904    |      ;
     BEQ .return                                                ;82EA1E|F03F    |82EA5F;
     REP #$20                                                   ;82EA20|C220    |      ;
@@ -9859,7 +9697,7 @@ fTextUnknown_82EA60:
     SEP #$20                                                   ;82EA63|E220    |      ;
     LDA.B #$00                                                 ;82EA65|A900    |      ;
     XBA                                                        ;82EA67|EB      |      ;
-    LDA.W nNameEntryIndex                                      ;82EA68|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;82EA68|AD9409  |000994;
     REP #$20                                                   ;82EA6B|C220    |      ;
     ASL A                                                      ;82EA6D|0A      |      ;
     TAX                                                        ;82EA6E|AA      |      ;
@@ -9989,7 +9827,7 @@ fMenuUnknown_82EB57:
     SEP #$20                                                   ;82EB5E|E220    |      ;
     LDA.B #$82                                                 ;82EB60|A982    |      ;
     STA.B ptrUnknown0x72+2                                     ;82EB62|8574    |000074; 82EBF8 -> $72
-    LDA.W nMenuTableSelector                                   ;82EB64|AD9309  |000993;
+    LDA.W strcMenuObjectData.tableSelector                     ;82EB64|AD9309  |000993;
     BEQ .load                                                  ;82EB67|F020    |82EB89;
     CMP.B #$01                                                 ;82EB69|C901    |      ;
     BEQ +                                                      ;82EB6B|F00F    |82EB7C;
@@ -10011,7 +9849,7 @@ fMenuUnknown_82EB57:
  
 .load:
     REP #$20                                                   ;82EB89|C220    |      ;
-    LDA.W nMenuIndex                                           ;82EB8B|AD9109  |000991;
+    LDA.W strcMenuObjectData.menuIdx                           ;82EB8B|AD9109  |000991;
     ASL A                                                      ;82EB8E|0A      |      ;
     ASL A                                                      ;82EB8F|0A      |      ;
     ASL A                                                      ;82EB90|0A      |      ;
@@ -10021,14 +9859,14 @@ fMenuUnknown_82EB57:
     XBA                                                        ;82EB96|EB      |      ; B = 0
     LDA.B [ptrUnknown0x72],Y                                   ;82EB97|B772    |000072; Y = $0991 * 8
     REP #$20                                                   ;82EB99|C220    |      ;
-    STA.W nMenuPosX                                            ;82EB9B|8D9B09  |00099B;
+    STA.W strcMenuObjectData.posX                              ;82EB9B|8D9B09  |00099B;
     INY                                                        ;82EB9E|C8      |      ; Y++
     SEP #$20                                                   ;82EB9F|E220    |      ;
     LDA.B #$00                                                 ;82EBA1|A900    |      ;
     XBA                                                        ;82EBA3|EB      |      ; B = 0
     LDA.B [ptrUnknown0x72],Y                                   ;82EBA4|B772    |000072;
     REP #$20                                                   ;82EBA6|C220    |      ;
-    STA.W nMenuPoxY                                            ;82EBA8|8D9D09  |00099D;
+    STA.W strcMenuObjectData.posY                              ;82EBA8|8D9D09  |00099D;
     RTL                                                        ;82EBAB|6B      |      ;
  
  
@@ -10040,7 +9878,7 @@ fMenuUnknown_82EBAC:
     SEP #$20                                                   ;82EBB4|E220    |      ;
     LDA.B #$82                                                 ;82EBB6|A982    |      ;
     STA.B ptrUnknown0x72+2                                     ;82EBB8|8574    |000074; 82EBF8 -> $72
-    LDA.W nMenuTableSelector                                   ;82EBBA|AD9309  |000993;
+    LDA.W strcMenuObjectData.tableSelector                     ;82EBBA|AD9309  |000993;
     BEQ .load                                                  ;82EBBD|F020    |82EBDF;
     CMP.B #$01                                                 ;82EBBF|C901    |      ;
     BEQ +                                                      ;82EBC1|F00F    |82EBD2;
@@ -10066,7 +9904,7 @@ fMenuUnknown_82EBAC:
     INC A                                                      ;82EBE2|1A      |      ;
     INC A                                                      ;82EBE3|1A      |      ;
     STA.B n16TempVar1                                          ;82EBE4|857E    |00007E; $7E = nArg * 4
-    LDA.W nMenuIndex                                           ;82EBE6|AD9109  |000991; A = $0991
+    LDA.W strcMenuObjectData.menuIdx                           ;82EBE6|AD9109  |000991; A = $0991
     ASL A                                                      ;82EBE9|0A      |      ;
     ASL A                                                      ;82EBEA|0A      |      ;
     ASL A                                                      ;82EBEB|0A      |      ;

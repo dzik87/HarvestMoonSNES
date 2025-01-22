@@ -9,16 +9,16 @@ pAIScripting0x0F_StarNightFestival:
     dw DATA8_B48400                                            ;B48006|        |B48400;
     dw DATA8_B485C6                                            ;B48008|        |B485C6;
     dw DATA8_B486E8                                            ;B4800A|        |B486E8;
-    dw pAIScripting0x10                                        ;B4800C|        |B487B8;
-    dw pAIScripting0x10                                        ;B4800E|        |B487B8;
-    dw pAIScripting0x10                                        ;B48010|        |B487B8;
-    dw pAIScripting0x10                                        ;B48012|        |B487B8;
-    dw pAIScripting0x10                                        ;B48014|        |B487B8;
-    dw pAIScripting0x10                                        ;B48016|        |B487B8;
-    dw pAIScripting0x10                                        ;B48018|        |B487B8;
-    dw pAIScripting0x10                                        ;B4801A|        |B487B8;
-    dw pAIScripting0x10                                        ;B4801C|        |B487B8;
-    dw pAIScripting0x10                                        ;B4801E|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B4800C|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B4800E|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B48010|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B48012|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B48014|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B48016|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B48018|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B4801A|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B4801C|        |B487B8;
+    dw pAIScripting0x10_WoodsPondEvent                         ;B4801E|        |B487B8;
  
 DATA8_B48020:
  
@@ -551,8 +551,8 @@ DATA8_B486E8:
     %AICMD0x12_Jump($B48766)                                   ;B487B5
 
 
-pAIScripting0x10:
-    dw DATA8_B487D8                                            ;B487B8|        |B487D8;
+pAIScripting0x10_WoodsPondEvent:
+    dw AI_WaterImp                                             ;B487B8|        |B487D8;
     dw pAIScripting0x11                                        ;B487BA|        |B48818;
     dw pAIScripting0x11                                        ;B487BC|        |B48818;
     dw pAIScripting0x11                                        ;B487BE|        |B48818;
@@ -569,7 +569,7 @@ pAIScripting0x10:
     dw pAIScripting0x11                                        ;B487D4|        |B48818;
     dw pAIScripting0x11                                        ;B487D6|        |B48818;
  
-DATA8_B487D8:
+AI_WaterImp:
  
     %AICMD0x08_EnableAIControl()                               ;B487D8
     %AICMD0x13_Wait(60)                                        ;B487D9

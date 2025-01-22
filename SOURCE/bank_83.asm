@@ -4828,10 +4828,10 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AC62|E220    |      ;
     STZ.W $0919                                                ;83AC64|9C1909  |000919;
     REP #$20                                                   ;83AC67|C220    |      ;
-    STZ.W nMenuIndex                                           ;83AC69|9C9109  |000991;
+    STZ.W strcMenuObjectData.menuIdx                           ;83AC69|9C9109  |000991;
     SEP #$20                                                   ;83AC6C|E220    |      ;
-    STZ.W nMenuTableSelector                                   ;83AC6E|9C9309  |000993;
-    STZ.W nNameEntryIndex                                      ;83AC71|9C9409  |000994;
+    STZ.W strcMenuObjectData.tableSelector                     ;83AC6E|9C9309  |000993;
+    STZ.W strcMenuObjectData.nameEntryIdx                      ;83AC71|9C9409  |000994;
     STZ.W $018B                                                ;83AC74|9C8B01  |00018B;
     SEP #$20                                                   ;83AC77|E220    |      ;
     LDA.B #$06                                                 ;83AC79|A906    |      ;
@@ -4860,19 +4860,14 @@ fGameEngine_FirstNight:
     LDA.W #$0000                                               ;83ACC5|A90000  |      ;
     STA.L $7F1F7A                                              ;83ACC8|8F7A1F7F|7F1F7A;
     REP #$20                                                   ;83ACCC|C220    |      ;
-    REP #$30                                                   ;83ACCE|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83ACD0|A5D2    |0000D2;
-    ORA.W #$0001                                               ;83ACD2|090100  |      ;
-    STA.B nPlayerFlags                                         ;83ACD5|85D2    |0000D2;
-    REP #$30                                                   ;83ACD7|C230    |      ;
-    LDA.W #$0000                                               ;83ACD9|A90000  |      ;
-    STA.B nPlayerAction                                        ;83ACDC|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83ACDE|C230    |      ;
-    LDA.W #$0000                                               ;83ACE0|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;83ACE3|85DA    |0000DA;
     REP #$30                                                   ;83ACE5|C230    |      ;
     LDA.W #$0000                                               ;83ACE7|A90000  |      ;
-    STA.W $0911                                                ;83ACEA|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;83ACEA|8D1109  |000911;
     REP #$30                                                   ;83ACED|C230    |      ;
     LDA.W #$0000                                               ;83ACEF|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;83ACF2|8D0109  |000901;
@@ -5536,9 +5531,7 @@ fGameEngine_Unknown83B0F6:
     LDA.B n8TempVar1                                           ;83B14B|A592    |000092;
     AND.B #$10                                                 ;83B14D|2910    |      ;
     BNE .label5                                                ;83B14F|D055    |83B1A6;
-    REP #$30                                                   ;83B151|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83B153|A5D2    |0000D2;
-    AND.W #$0010                                               ;83B155|291000  |      ;
+    %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BNE +                                                      ;83B158|D003    |83B15D;
     JMP.W .return0                                             ;83B15A|4CC1B1  |83B1C1;
  
@@ -8178,8 +8171,7 @@ fGameEngine_ChichenUnknown83C296:
     JMP.W .label37                                             ;83C654|4C34C7  |83C734;
  
  
-  + LDA.B nPlayerFlags                                         ;83C657|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlagsNoReg(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;83C65C|F003    |83C661;
     JMP.W .label37                                             ;83C65E|4C34C7  |83C734;
  
@@ -8319,8 +8311,7 @@ fGameEngine_ChichenUnknown83C296:
     JMP.W .return                                              ;83C73F|4C06C8  |83C806;
  
  
-  + LDA.B nPlayerFlags                                         ;83C742|A5D2    |0000D2;
-    AND.W #$0010                                               ;83C744|291000  |      ;
+  + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;83C747|F003    |83C74C;
     JMP.W .return                                              ;83C749|4C06C8  |83C806;
  
@@ -8893,28 +8884,19 @@ fAreaEvents_Farm:
  
 .maria:
     REP #$30                                                   ;83CB91|C230    |      ;
-    LDA.W #$0013                                               ;83CB93|A91300  |      ;
-    LDX.W #$0044                                               ;83CB96|A24400  |      ;
-    LDY.W #$0000                                               ;83CB99|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CB9C|22978084|848097;
+    %AIExecute($0013, $0044, $0000)
     BRA +                                                      ;83CBA0|8022    |83CBC4;
  
  
 .nina:
     REP #$30                                                   ;83CBA2|C230    |      ;
-    LDA.W #$0013                                               ;83CBA4|A91300  |      ;
-    LDX.W #$0044                                               ;83CBA7|A24400  |      ;
-    LDY.W #$0002                                               ;83CBAA|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CBAD|22978084|848097;
+    %AIExecute($0013, $0044, $0002)
     BRA +                                                      ;83CBB1|8011    |83CBC4;
  
  
 .ellen:
     REP #$30                                                   ;83CBB3|C230    |      ;
-    LDA.W #$0013                                               ;83CBB5|A91300  |      ;
-    LDX.W #$0044                                               ;83CBB8|A24400  |      ;
-    LDY.W #$0003                                               ;83CBBB|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CBBE|22978084|848097;
+    %AIExecute($0013, $0044, $0003)
     BRA +                                                      ;83CBC2|8000    |83CBC4;
  
  
@@ -8926,10 +8908,7 @@ fAreaEvents_Farm:
     CMP.W #$003C                                               ;83CBD3|C93C00  |      ;
     BCC +                                                      ;83CBD6|900F    |83CBE7;
     REP #$30                                                   ;83CBD8|C230    |      ;
-    LDA.W #$0014                                               ;83CBDA|A91400  |      ;
-    LDX.W #$0045                                               ;83CBDD|A24500  |      ;
-    LDY.W #$0001                                               ;83CBE0|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CBE3|22978084|848097;
+    %AIExecute($0014, $0045, $0001)
  
   + REP #$30                                                   ;83CBE7|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83CBE9|AF6E1F7F|7F1F6E;
@@ -8939,10 +8918,7 @@ fAreaEvents_Farm:
     CMP.W #$003C                                               ;83CBF6|C93C00  |      ;
     BCC +                                                      ;83CBF9|900F    |83CC0A;
     REP #$30                                                   ;83CBFB|C230    |      ;
-    LDA.W #$0015                                               ;83CBFD|A91500  |      ;
-    LDX.W #$0045                                               ;83CC00|A24500  |      ;
-    LDY.W #$0004                                               ;83CC03|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CC06|22978084|848097;
+    %AIExecute($0015, $0045, $0004)
  
   + REP #$30                                                   ;83CC0A|C230    |      ;
     LDA.W nMapEngine_flags                                     ;83CC0C|AD9601  |000196;
@@ -9044,10 +9020,7 @@ fAreaEvents_Farm:
     ORA.W #$1000                                               ;83CCCD|090010  |      ;
     STA.L strcEventFlags.flags4                                ;83CCD0|8F6A1F7F|7F1F6A;
     REP #$30                                                   ;83CCD4|C230    |      ;
-    LDA.W #$0000                                               ;83CCD6|A90000  |      ;
-    LDX.W #$0019                                               ;83CCD9|A21900  |      ;
-    LDY.W #$0000                                               ;83CCDC|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CCDF|22978084|848097;
+    %AIExecute($0000, $0019, $0000)
     SEP #$20                                                   ;83CCE3|E220    |      ;
     STZ.W $09A3                                                ;83CCE5|9CA309  |0009A3;
     RTS                                                        ;83CCE8|60      |      ;
@@ -9074,10 +9047,7 @@ fAreaEvents_Farm:
     ORA.W #$4000                                               ;83CD1C|090040  |      ;
     STA.L strcEventFlags.flags4                                ;83CD1F|8F6A1F7F|7F1F6A;
     REP #$30                                                   ;83CD23|C230    |      ;
-    LDA.W #$0000                                               ;83CD25|A90000  |      ;
-    LDX.W #$001A                                               ;83CD28|A21A00  |      ;
-    LDY.W #$0000                                               ;83CD2B|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CD2E|22978084|848097;
+    %AIExecute($0000, $001A, $0000)
     SEP #$20                                                   ;83CD32|E220    |      ;
     STZ.W $09A3                                                ;83CD34|9CA309  |0009A3;
     RTS                                                        ;83CD37|60      |      ;
@@ -9107,10 +9077,7 @@ fAreaEvents_Farm:
     ORA.W #$0001                                               ;83CD74|090100  |      ;
     STA.L strcEventFlags.flags5                                ;83CD77|8F6C1F7F|7F1F6C;
     REP #$30                                                   ;83CD7B|C230    |      ;
-    LDA.W #$0000                                               ;83CD7D|A90000  |      ;
-    LDX.W #$001B                                               ;83CD80|A21B00  |      ;
-    LDY.W #$0000                                               ;83CD83|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CD86|22978084|848097;
+    %AIExecute($0000, $001B, $0000)
     SEP #$20                                                   ;83CD8A|E220    |      ;
     STZ.W $09A3                                                ;83CD8C|9CA309  |0009A3;
     RTS                                                        ;83CD8F|60      |      ;
@@ -9143,10 +9110,7 @@ fAreaEvents_Farm:
     ORA.W #$0004                                               ;83CDD5|090400  |      ;
     STA.L strcEventFlags.flags5                                ;83CDD8|8F6C1F7F|7F1F6C;
     REP #$30                                                   ;83CDDC|C230    |      ;
-    LDA.W #$0000                                               ;83CDDE|A90000  |      ;
-    LDX.W #$001C                                               ;83CDE1|A21C00  |      ;
-    LDY.W #$0000                                               ;83CDE4|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CDE7|22978084|848097;
+    %AIExecute($0000, $001C, $0000)
     SEP #$20                                                   ;83CDEB|E220    |      ;
     STZ.W $09A3                                                ;83CDED|9CA309  |0009A3;
     RTS                                                        ;83CDF0|60      |      ;
@@ -9182,10 +9146,7 @@ fAreaEvents_Farm:
     ORA.W #$0010                                               ;83CE3F|091000  |      ;
     STA.L strcEventFlags.flags5                                ;83CE42|8F6C1F7F|7F1F6C;
     REP #$30                                                   ;83CE46|C230    |      ;
-    LDA.W #$0000                                               ;83CE48|A90000  |      ;
-    LDX.W #$001D                                               ;83CE4B|A21D00  |      ;
-    LDY.W #$0000                                               ;83CE4E|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CE51|22978084|848097;
+    %AIExecute($0000, $001D, $0000)
     SEP #$20                                                   ;83CE55|E220    |      ;
     STZ.W $09A3                                                ;83CE57|9CA309  |0009A3;
     RTS                                                        ;83CE5A|60      |      ;
@@ -9197,22 +9158,14 @@ fAreaEvents_Farm:
     AND.W #$0002                                               ;83CE61|290200  |      ;
     BEQ .label10                                               ;83CE64|F02D    |83CE93;
     REP #$20                                                   ;83CE66|C220    |      ;
-    LDA.W #$0007                                               ;83CE68|A90700  |      ;
-    LDX.W #$0000                                               ;83CE6B|A20000  |      ;
-    LDY.W #$0020                                               ;83CE6E|A02000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CE71|22978084|848097;
+    %AIExecute($0007, $0000, $0020)
     SEP #$20                                                   ;83CE75|E220    |      ;
     LDA.B #$42                                                 ;83CE77|A942    |      ;
     STA.W nPlayerInteractionIndex                              ;83CE79|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;83CE7C|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83CE7F|9C7009  |000970;
-    REP #$30                                                   ;83CE82|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83CE84|A5D2    |0000D2;
-    ORA.W #$0040                                               ;83CE86|094000  |      ;
-    STA.B nPlayerFlags                                         ;83CE89|85D2    |0000D2;
-    REP #$30                                                   ;83CE8B|C230    |      ;
-    LDA.W #$0000                                               ;83CE8D|A90000  |      ;
-    STA.B nPlayerAction                                        ;83CE90|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;83CE92|60      |      ;
  
  
@@ -9222,10 +9175,7 @@ fAreaEvents_Farm:
     AND.W #$0001                                               ;83CE99|290100  |      ;
     BNE .label11                                               ;83CE9C|D010    |83CEAE;
     REP #$30                                                   ;83CE9E|C230    |      ;
-    LDA.W #$0000                                               ;83CEA0|A90000  |      ;
-    LDX.W #$000A                                               ;83CEA3|A20A00  |      ;
-    LDY.W #$0002                                               ;83CEA6|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CEA9|22978084|848097;
+    %AIExecute($0000, $000A, $0002)
     RTS                                                        ;83CEAD|60      |      ;
  
  
@@ -9235,17 +9185,14 @@ fAreaEvents_Farm:
     AND.W #$0020                                               ;83CEB4|292000  |      ;
     BNE .label12                                               ;83CEB7|D024    |83CEDD;
     REP #$30                                                   ;83CEB9|C230    |      ;
-    LDA.W #$0000                                               ;83CEBB|A90000  |      ;
-    LDX.W #$000C                                               ;83CEBE|A20C00  |      ;
-    LDY.W #$0000                                               ;83CEC1|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CEC4|22978084|848097;
+    %AIExecute($0000, $000C, $0000)
     REP #$20                                                   ;83CEC8|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83CECA|AF681F7F|7F1F68;
     ORA.W #$0020                                               ;83CECE|092000  |      ;
     STA.L strcEventFlags.flags3                                ;83CED1|8F681F7F|7F1F68;
     SEP #$20                                                   ;83CED5|E220    |      ;
     LDA.B #$03                                                 ;83CED7|A903    |      ;
-    STA.W nNameInputDestination                                ;83CED9|8D9F09  |00099F;
+    STA.W strcMenuObjectData.nameDestinationIdx                ;83CED9|8D9F09  |00099F;
     RTS                                                        ;83CEDC|60      |      ;
  
  
@@ -9255,10 +9202,7 @@ fAreaEvents_Farm:
     AND.W #$0080                                               ;83CEE3|298000  |      ;
     BNE .label13                                               ;83CEE6|D028    |83CF10;
     REP #$30                                                   ;83CEE8|C230    |      ;
-    LDA.W #$0000                                               ;83CEEA|A90000  |      ;
-    LDX.W #$000C                                               ;83CEED|A20C00  |      ;
-    LDY.W #$0001                                               ;83CEF0|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CEF3|22978084|848097;
+    %AIExecute($0000, $000C, $0001)
     REP #$20                                                   ;83CEF7|C220    |      ;
     LDA.W #$0078                                               ;83CEF9|A97800  |      ;
     STA.L nDogX                                                ;83CEFC|8F2C1F7F|7F1F2C;
@@ -9287,10 +9231,7 @@ fAreaEvents_Farm:
  
  
   + REP #$30                                                   ;83CF32|C230    |      ;
-    LDA.W #$0006                                               ;83CF34|A90600  |      ;
-    LDX.W #$0024                                               ;83CF37|A22400  |      ;
-    LDY.W #$0000                                               ;83CF3A|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CF3D|22978084|848097;
+    %AIExecute($0006, $0024, $0000)
     RTS                                                        ;83CF41|60      |      ;
  
  
@@ -9308,10 +9249,7 @@ fAreaEvents_Farm:
     LDA.L nInGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E;
     BNE .label15                                               ;83CF61|D010    |83CF73;
     REP #$30                                                   ;83CF63|C230    |      ;
-    LDA.W #$0006                                               ;83CF65|A90600  |      ;
-    LDX.W #$0024                                               ;83CF68|A22400  |      ;
-    LDY.W #$0002                                               ;83CF6B|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CF6E|22978084|848097;
+    %AIExecute($0006, $0024, $0002)
     RTS                                                        ;83CF72|60      |      ;
  
  
@@ -9329,10 +9267,7 @@ fAreaEvents_Farm:
     LDA.L nInGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E;
     BNE .label16                                               ;83CF92|D010    |83CFA4;
     REP #$30                                                   ;83CF94|C230    |      ;
-    LDA.W #$0006                                               ;83CF96|A90600  |      ;
-    LDX.W #$0024                                               ;83CF99|A22400  |      ;
-    LDY.W #$0003                                               ;83CF9C|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CF9F|22978084|848097;
+    %AIExecute($0006, $0024, $0003)
     RTS                                                        ;83CFA3|60      |      ;
  
  
@@ -9362,10 +9297,7 @@ fAreaEvents_Farm:
     ORA.W #$0001                                               ;83CFE1|090100  |      ;
     STA.L strcEventFlags.flags7                                ;83CFE4|8F701F7F|7F1F70;
     REP #$30                                                   ;83CFE8|C230    |      ;
-    LDA.W #$000B                                               ;83CFEA|A90B00  |      ;
-    LDX.W #$0024                                               ;83CFED|A22400  |      ;
-    LDY.W #$0001                                               ;83CFF0|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83CFF3|22978084|848097;
+    %AIExecute($000B, $0024, $0001)
     RTS                                                        ;83CFF7|60      |      ;
  
  
@@ -9375,22 +9307,14 @@ fAreaEvents_Farm:
     AND.W #$0040                                               ;83CFFE|294000  |      ;
     BEQ .label18                                               ;83D001|F03A    |83D03D;
     REP #$20                                                   ;83D003|C220    |      ;
-    LDA.W #$0009                                               ;83D005|A90900  |      ;
-    LDX.W #$0000                                               ;83D008|A20000  |      ;
-    LDY.W #$002C                                               ;83D00B|A02C00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D00E|22978084|848097;
+    %AIExecute($0009, $0000, $002C)
     SEP #$20                                                   ;83D012|E220    |      ;
     LDA.B #$47                                                 ;83D014|A947    |      ;
     STA.W nPlayerInteractionIndex                              ;83D016|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;83D019|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83D01C|9C7009  |000970;
-    REP #$30                                                   ;83D01F|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83D021|A5D2    |0000D2;
-    ORA.W #$0040                                               ;83D023|094000  |      ;
-    STA.B nPlayerFlags                                         ;83D026|85D2    |0000D2;
-    REP #$30                                                   ;83D028|C230    |      ;
-    LDA.W #$0000                                               ;83D02A|A90000  |      ;
-    STA.B nPlayerAction                                        ;83D02D|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$20                                                   ;83D02F|C220    |      ;
     LDA.L strcEventFlags.flags2                                ;83D031|AF661F7F|7F1F66;
     AND.W #$FFBF                                               ;83D035|29BFFF  |      ;
@@ -9407,10 +9331,7 @@ fAreaEvents_Farm:
     LDA.L nConstructionDayCounter                              ;83D04A|AF351F7F|7F1F35;
     BEQ .label19                                               ;83D04E|F010    |83D060;
     REP #$30                                                   ;83D050|C230    |      ;
-    LDA.W #$0000                                               ;83D052|A90000  |      ;
-    LDX.W #$0000                                               ;83D055|A20000  |      ;
-    LDY.W #$002E                                               ;83D058|A02E00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D05B|22978084|848097;
+    %AIExecute($0000, $0000, $002E)
     RTS                                                        ;83D05F|60      |      ;
  
  
@@ -9423,27 +9344,16 @@ fAreaEvents_Farm:
     AND.W #$FEFF                                               ;83D06F|29FFFE  |      ;
     STA.L strcEventFlags.flags2                                ;83D072|8F661F7F|7F1F66;
     REP #$30                                                   ;83D076|C230    |      ;
-    LDA.W #$0009                                               ;83D078|A90900  |      ;
-    LDX.W #$0000                                               ;83D07B|A20000  |      ;
-    LDY.W #$0036                                               ;83D07E|A03600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D081|22978084|848097;
+    %AIExecute($0009, $0000, $0036)
     REP #$30                                                   ;83D085|C230    |      ;
-    LDA.W #$000A                                               ;83D087|A90A00  |      ;
-    LDX.W #$0000                                               ;83D08A|A20000  |      ;
-    LDY.W #$0037                                               ;83D08D|A03700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D090|22978084|848097;
+    %AIExecute($000A, $0000, $0037)
     SEP #$20                                                   ;83D094|E220    |      ;
     LDA.B #$48                                                 ;83D096|A948    |      ;
     STA.W nPlayerInteractionIndex                              ;83D098|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;83D09B|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83D09E|9C7009  |000970;
-    REP #$30                                                   ;83D0A1|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83D0A3|A5D2    |0000D2;
-    ORA.W #$0040                                               ;83D0A5|094000  |      ;
-    STA.B nPlayerFlags                                         ;83D0A8|85D2    |0000D2;
-    REP #$30                                                   ;83D0AA|C230    |      ;
-    LDA.W #$0000                                               ;83D0AC|A90000  |      ;
-    STA.B nPlayerAction                                        ;83D0AF|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;83D0B1|60      |      ;
  
  
@@ -9460,22 +9370,14 @@ fAreaEvents_Farm:
     LDA.L strcEventFlags.flags1                                ;83D0C9|AF641F7F|7F1F64;
     ORA.W #$0100                                               ;83D0CD|090001  |      ;
     STA.L strcEventFlags.flags1                                ;83D0D0|8F641F7F|7F1F64;
-    LDA.W #$000B                                               ;83D0D4|A90B00  |      ;
-    LDX.W #$0000                                               ;83D0D7|A20000  |      ;
-    LDY.W #$001D                                               ;83D0DA|A01D00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D0DD|22978084|848097;
+    %AIExecute($000B, $0000, $001D)
     SEP #$20                                                   ;83D0E1|E220    |      ;
     LDA.B #$49                                                 ;83D0E3|A949    |      ;
     STA.W nPlayerInteractionIndex                              ;83D0E5|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;83D0E8|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83D0EB|9C7009  |000970;
-    REP #$30                                                   ;83D0EE|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83D0F0|A5D2    |0000D2;
-    ORA.W #$0040                                               ;83D0F2|094000  |      ;
-    STA.B nPlayerFlags                                         ;83D0F5|85D2    |0000D2;
-    REP #$30                                                   ;83D0F7|C230    |      ;
-    LDA.W #$0000                                               ;83D0F9|A90000  |      ;
-    STA.B nPlayerAction                                        ;83D0FC|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;83D0FE|60      |      ;
  
  
@@ -9508,10 +9410,7 @@ fAreaEvents_Farm:
     AND.W #$0400                                               ;83D141|290004  |      ;
     BNE .label22                                               ;83D144|D01D    |83D163;
     REP #$30                                                   ;83D146|C230    |      ;
-    LDA.W #$0000                                               ;83D148|A90000  |      ;
-    LDX.W #$0013                                               ;83D14B|A21300  |      ;
-    LDY.W #$0000                                               ;83D14E|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D151|22978084|848097;
+    %AIExecute($0000, $0013, $0000)
     REP #$20                                                   ;83D155|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83D157|AF681F7F|7F1F68;
     ORA.W #$0400                                               ;83D15B|090004  |      ;
@@ -9556,10 +9455,7 @@ fAreaEvents_Farm:
     ORA.W #$4000                                               ;83D1B7|090040  |      ;
     STA.L strcEventFlags.flags3                                ;83D1BA|8F681F7F|7F1F68;
     REP #$30                                                   ;83D1BE|C230    |      ;
-    LDA.W #$0000                                               ;83D1C0|A90000  |      ;
-    LDX.W #$0016                                               ;83D1C3|A21600  |      ;
-    LDY.W #$0000                                               ;83D1C6|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D1C9|22978084|848097;
+    %AIExecute($0000, $0016, $0000)
     RTS                                                        ;83D1CD|60      |      ;
  
  
@@ -9606,10 +9502,7 @@ fAreaEvents_Farm:
     ORA.W #$0080                                               ;83D227|098000  |      ;
     STA.L strcEventFlags.flags4                                ;83D22A|8F6A1F7F|7F1F6A;
     REP #$30                                                   ;83D22E|C230    |      ;
-    LDA.W #$0000                                               ;83D230|A90000  |      ;
-    LDX.W #$0018                                               ;83D233|A21800  |      ;
-    LDY.W #$0000                                               ;83D236|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D239|22978084|848097;
+    %AIExecute($0000, $0018, $0000)
     RTS                                                        ;83D23D|60      |      ;
  
  
@@ -9645,10 +9538,7 @@ fAreaEvents_Farm:
  
 .label27:
     REP #$30                                                   ;83D28E|C230    |      ;
-    LDA.W #$0000                                               ;83D290|A90000  |      ;
-    LDX.W #$0029                                               ;83D293|A22900  |      ;
-    LDY.W #$0000                                               ;83D296|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D299|22978084|848097;
+    %AIExecute($0000, $0029, $0000)
     RTS                                                        ;83D29D|60      |      ;
  
  
@@ -9669,10 +9559,7 @@ fAreaEvents_Farm:
     JSL.L fCore_GetRandomNumber                                ;83D2C0|22F98980|8089F9;
     BNE .justReturn                                            ;83D2C4|D019    |83D2DF;
     REP #$30                                                   ;83D2C6|C230    |      ;
-    LDA.W #$0000                                               ;83D2C8|A90000  |      ;
-    LDX.W #$0023                                               ;83D2CB|A22300  |      ;
-    LDY.W #$0000                                               ;83D2CE|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D2D1|22978084|848097;
+    %AIExecute($0000, $0023, $0000)
     REP #$30                                                   ;83D2D5|C230    |      ;
     LDA.W #$0002                                               ;83D2D7|A90200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;83D2DA|2282B283|83B282;
@@ -9692,10 +9579,7 @@ fAreaEvents_Town:
     AND.W #$FBFF                                               ;83D2EF|29FFFB  |      ;
     STA.B $60                                                  ;83D2F2|8560    |000060;
     REP #$30                                                   ;83D2F4|C230    |      ;
-    LDA.W #$0000                                               ;83D2F6|A90000  |      ;
-    LDX.W #$0014                                               ;83D2F9|A21400  |      ;
-    LDY.W #$0003                                               ;83D2FC|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D2FF|22978084|848097;
+    %AIExecute($0000, $0014, $0003)
     RTS                                                        ;83D303|60      |      ;
  
  
@@ -9720,10 +9604,7 @@ fAreaEvents_Town:
  
  
   + REP #$30                                                   ;83D329|C230    |      ;
-    LDA.W #$0015                                               ;83D32B|A91500  |      ;
-    LDX.W #$0000                                               ;83D32E|A20000  |      ;
-    LDY.W #$007E                                               ;83D331|A07E00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D334|22978084|848097;
+    %AIExecute($0015, $0000, $007E)
     REP #$20                                                   ;83D338|C220    |      ;
     STZ.B n16TempVar1                                          ;83D33A|647E    |00007E;
     SEP #$20                                                   ;83D33C|E220    |      ;
@@ -9777,10 +9658,7 @@ fAreaEvents_Town:
     SEP #$20                                                   ;83D3A3|E220    |      ;
     STZ.W $09A2                                                ;83D3A5|9CA209  |0009A2;
     REP #$30                                                   ;83D3A8|C230    |      ;
-    LDA.W #$0000                                               ;83D3AA|A90000  |      ;
-    LDX.W #$0028                                               ;83D3AD|A22800  |      ;
-    LDY.W #$0002                                               ;83D3B0|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D3B3|22978084|848097;
+    %AIExecute($0000, $0028, $0002)
     RTS                                                        ;83D3B7|60      |      ;
  
  
@@ -9796,10 +9674,7 @@ fAreaEvents_Town:
     CMP.B #$0F                                                 ;83D3CE|C90F    |      ;
     BCS +                                                      ;83D3D0|B010    |83D3E2;
     REP #$30                                                   ;83D3D2|C230    |      ;
-    LDA.W #$0000                                               ;83D3D4|A90000  |      ;
-    LDX.W #$000E                                               ;83D3D7|A20E00  |      ;
-    LDY.W #$0000                                               ;83D3DA|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D3DD|22978084|848097;
+    %AIExecute($0000, $000E, $0000)
     RTS                                                        ;83D3E1|60      |      ;
  
  
@@ -9815,10 +9690,7 @@ fAreaEvents_Town:
     CMP.B #$0F                                                 ;83D3FA|C90F    |      ;
     BCS +                                                      ;83D3FC|B010    |83D40E;
     REP #$30                                                   ;83D3FE|C230    |      ;
-    LDA.W #$0000                                               ;83D400|A90000  |      ;
-    LDX.W #$0026                                               ;83D403|A22600  |      ;
-    LDY.W #$0000                                               ;83D406|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D409|22978084|848097;
+    %AIExecute($0000, $0026, $0000)
     RTS                                                        ;83D40D|60      |      ;
  
  
@@ -9834,10 +9706,7 @@ fAreaEvents_Town:
     CMP.B #$11                                                 ;83D426|C911    |      ;
     BCS +                                                      ;83D428|B010    |83D43A;
     REP #$30                                                   ;83D42A|C230    |      ;
-    LDA.W #$0000                                               ;83D42C|A90000  |      ;
-    LDX.W #$0027                                               ;83D42F|A22700  |      ;
-    LDY.W #$0000                                               ;83D432|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D435|22978084|848097;
+    %AIExecute($0000, $0027, $0000)
     RTS                                                        ;83D439|60      |      ;
  
  
@@ -9845,20 +9714,14 @@ fAreaEvents_Town:
     LDA.L strcEventFlags.flags4                                ;83D43C|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83D440|290040  |      ;
     BNE +                                                      ;83D443|D00D    |83D452;
-    LDA.W #$0015                                               ;83D445|A91500  |      ;
-    LDX.W #$0000                                               ;83D448|A20000  |      ;
-    LDY.W #$007E                                               ;83D44B|A07E00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D44E|22978084|848097;
+    %AIExecute($0015, $0000, $007E)
  
   + REP #$30                                                   ;83D452|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83D454|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83D458|290100  |      ;
     BNE +                                                      ;83D45B|D010    |83D46D;
     REP #$30                                                   ;83D45D|C230    |      ;
-    LDA.W #$0000                                               ;83D45F|A90000  |      ;
-    LDX.W #$000B                                               ;83D462|A20B00  |      ;
-    LDY.W #$0000                                               ;83D465|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D468|22978084|848097;
+    %AIExecute($0000, $000B, $0000)
     RTS                                                        ;83D46C|60      |      ;
  
  
@@ -9886,29 +9749,20 @@ fAreaEvents_Town:
     CMP.B #$06                                                 ;83D4A3|C906    |      ;
     BEQ .return2                                               ;83D4A5|F020    |83D4C7;
     REP #$30                                                   ;83D4A7|C230    |      ;
-    LDA.W #$0000                                               ;83D4A9|A90000  |      ;
-    LDX.W #$0001                                               ;83D4AC|A20100  |      ;
-    LDY.W #$0000                                               ;83D4AF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D4B2|22978084|848097;
+    %AIExecute($0000, $0001, $0000)
  
   + RTS                                                        ;83D4B6|60      |      ;
  
  
 .return1:
     REP #$30                                                   ;83D4B7|C230    |      ;
-    LDA.W #$0000                                               ;83D4B9|A90000  |      ;
-    LDX.W #$0003                                               ;83D4BC|A20300  |      ;
-    LDY.W #$0000                                               ;83D4BF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D4C2|22978084|848097;
+    %AIExecute($0000, $0003, $0000)
     RTS                                                        ;83D4C6|60      |      ;
  
  
 .return2:
     REP #$30                                                   ;83D4C7|C230    |      ;
-    LDA.W #$0000                                               ;83D4C9|A90000  |      ;
-    LDX.W #$0002                                               ;83D4CC|A20200  |      ;
-    LDY.W #$0000                                               ;83D4CF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D4D2|22978084|848097;
+    %AIExecute($0000, $0002, $0000)
     RTS                                                        ;83D4D6|60      |      ;
  
  
@@ -9925,10 +9779,7 @@ fAreaEvents_MajorHouse:
     AND.W #$0002                                               ;83D4EA|290200  |      ;
     BEQ fAreaEvents_MajorHouseHandler                          ;83D4ED|F010    |83D4FF;
     REP #$30                                                   ;83D4EF|C230    |      ;
-    LDA.W #$0000                                               ;83D4F1|A90000  |      ;
-    LDX.W #$0022                                               ;83D4F4|A22200  |      ;
-    LDY.W #$0003                                               ;83D4F7|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D4FA|22978084|848097;
+    %AIExecute($0000, $0022, $0003)
     RTS                                                        ;83D4FE|60      |      ;
  
  
@@ -9945,10 +9796,7 @@ fAreaEvents_MajorHouseHandler:
     CMP.B #$11                                                 ;83D517|C911    |      ;
     BCS +                                                      ;83D519|B010    |83D52B;
     REP #$30                                                   ;83D51B|C230    |      ;
-    LDA.W #$0000                                               ;83D51D|A90000  |      ;
-    LDX.W #$0027                                               ;83D520|A22700  |      ;
-    LDY.W #$0003                                               ;83D523|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D526|22978084|848097;
+    %AIExecute($0000, $0027, $0003)
     RTS                                                        ;83D52A|60      |      ;
  
  
@@ -9957,10 +9805,7 @@ fAreaEvents_MajorHouseHandler:
     AND.W #$0001                                               ;83D531|290100  |      ;
     BNE +                                                      ;83D534|D010    |83D546;
     REP #$30                                                   ;83D536|C230    |      ;
-    LDA.W #$0000                                               ;83D538|A90000  |      ;
-    LDX.W #$000B                                               ;83D53B|A20B00  |      ;
-    LDY.W #$0001                                               ;83D53E|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D541|22978084|848097;
+    %AIExecute($0000, $000B, $0001)
     RTS                                                        ;83D545|60      |      ;
  
  
@@ -9993,55 +9838,37 @@ fAreaEvents_MajorHouseHandler:
  
 .anyFestival:
     REP #$30                                                   ;83D587|C230    |      ;
-    LDA.W #$0000                                               ;83D589|A90000  |      ;
-    LDX.W #$0001                                               ;83D58C|A20100  |      ;
-    LDY.W #$0001                                               ;83D58F|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D592|22978084|848097;
+    %AIExecute($0000, $0001, $0001)
     RTS                                                        ;83D596|60      |      ;
  
  
 .saturday:
     REP #$30                                                   ;83D597|C230    |      ;
-    LDA.W #$0000                                               ;83D599|A90000  |      ;
-    LDX.W #$0002                                               ;83D59C|A20200  |      ;
-    LDY.W #$0001                                               ;83D59F|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D5A2|22978084|848097;
+    %AIExecute($0000, $0002, $0001)
     RTS                                                        ;83D5A6|60      |      ;
  
  
 .label1:
     REP #$30                                                   ;83D5A7|C230    |      ;
-    LDA.W #$0000                                               ;83D5A9|A90000  |      ;
-    LDX.W #$0004                                               ;83D5AC|A20400  |      ;
-    LDY.W #$0000                                               ;83D5AF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D5B2|22978084|848097;
+    %AIExecute($0000, $0004, $0000)
     RTS                                                        ;83D5B6|60      |      ;
  
  
 .label2:
     REP #$30                                                   ;83D5B7|C230    |      ;
-    LDA.W #$0000                                               ;83D5B9|A90000  |      ;
-    LDX.W #$0007                                               ;83D5BC|A20700  |      ;
-    LDY.W #$0000                                               ;83D5BF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D5C2|22978084|848097;
+    %AIExecute($0000, $0007, $0000)
     RTS                                                        ;83D5C6|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83D5C7|C230    |      ;
-    LDA.W #$0000                                               ;83D5C9|A90000  |      ;
-    LDX.W #$0006                                               ;83D5CC|A20600  |      ;
-    LDY.W #$0000                                               ;83D5CF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D5D2|22978084|848097;
+    %AIExecute($0000, $0006, $0000)
     RTS                                                        ;83D5D6|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83D5D7|C230    |      ;
-    LDA.W #$0000                                               ;83D5D9|A90000  |      ;
-    LDX.W #$0008                                               ;83D5DC|A20800  |      ;
-    LDY.W #$0000                                               ;83D5DF|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D5E2|22978084|848097;
+    %AIExecute($0000, $0008, $0000)
     RTS                                                        ;83D5E6|60      |      ;
  
  
@@ -10061,10 +9888,7 @@ fAreaEvents_MariaBedroom:
  
  
   + REP #$30                                                   ;83D603|C230    |      ;
-    LDA.W #$0000                                               ;83D605|A90000  |      ;
-    LDX.W #$0022                                               ;83D608|A22200  |      ;
-    LDY.W #$0004                                               ;83D60B|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D60E|22978084|848097;
+    %AIExecute($0000, $0022, $0004)
     RTS                                                        ;83D612|60      |      ;
  
  
@@ -10081,10 +9905,7 @@ fAreaEvents_Church:
     CMP.B #$11                                                 ;83D62B|C911    |      ;
     BCS +                                                      ;83D62D|B010    |83D63F;
     REP #$30                                                   ;83D62F|C230    |      ;
-    LDA.W #$0000                                               ;83D631|A90000  |      ;
-    LDX.W #$0027                                               ;83D634|A22700  |      ;
-    LDY.W #$0002                                               ;83D637|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D63A|22978084|848097;
+    %AIExecute($0000, $0027, $0002)
     RTS                                                        ;83D63E|60      |      ;
  
  
@@ -10101,10 +9922,7 @@ fAreaEvents_Church:
     AND.W #$0002                                               ;83D659|290200  |      ;
     BEQ +                                                      ;83D65C|F010    |83D66E;
     REP #$30                                                   ;83D65E|C230    |      ;
-    LDA.W #$0000                                               ;83D660|A90000  |      ;
-    LDX.W #$000F                                               ;83D663|A20F00  |      ;
-    LDY.W #$0002                                               ;83D666|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D669|22978084|848097;
+    %AIExecute($0000, $000F, $0002)
     RTS                                                        ;83D66D|60      |      ;
  
  
@@ -10113,10 +9931,7 @@ fAreaEvents_Church:
     AND.W #$0001                                               ;83D674|290100  |      ;
     BNE +                                                      ;83D677|D010    |83D689;
     REP #$30                                                   ;83D679|C230    |      ;
-    LDA.W #$0000                                               ;83D67B|A90000  |      ;
-    LDX.W #$000B                                               ;83D67E|A20B00  |      ;
-    LDY.W #$000C                                               ;83D681|A00C00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D684|22978084|848097;
+    %AIExecute($0000, $000B, $000C)
     RTS                                                        ;83D688|60      |      ;
  
  
@@ -10162,10 +9977,7 @@ fAreaEvents_Church:
  
 .anyFestival:
     REP #$30                                                   ;83D6DE|C230    |      ;
-    LDA.W #$0000                                               ;83D6E0|A90000  |      ;
-    LDX.W #$0001                                               ;83D6E3|A20100  |      ;
-    LDY.W #$0002                                               ;83D6E6|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D6E9|22978084|848097;
+    %AIExecute($0000, $0001, $0002)
  
 .justReturn:
     RTS                                                        ;83D6ED|60      |      ;
@@ -10173,55 +9985,37 @@ fAreaEvents_Church:
  
 .notSunday:
     REP #$30                                                   ;83D6EE|C230    |      ;
-    LDA.W #$0000                                               ;83D6F0|A90000  |      ;
-    LDX.W #$0003                                               ;83D6F3|A20300  |      ;
-    LDY.W #$0001                                               ;83D6F6|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D6F9|22978084|848097;
+    %AIExecute($0000, $0003, $0001)
     RTS                                                        ;83D6FD|60      |      ;
  
  
 .saturday:
     REP #$30                                                   ;83D6FE|C230    |      ;
-    LDA.W #$0000                                               ;83D700|A90000  |      ;
-    LDX.W #$0002                                               ;83D703|A20200  |      ;
-    LDY.W #$0002                                               ;83D706|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D709|22978084|848097;
+    %AIExecute($0000, $0002, $0002)
     RTS                                                        ;83D70D|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83D70E|C230    |      ;
-    LDA.W #$0000                                               ;83D710|A90000  |      ;
-    LDX.W #$0004                                               ;83D713|A20400  |      ;
-    LDY.W #$0001                                               ;83D716|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D719|22978084|848097;
+    %AIExecute($0000, $0004, $0001)
     RTS                                                        ;83D71D|60      |      ;
  
  
 .label4:
     REP #$30                                                   ;83D71E|C230    |      ;
-    LDA.W #$0000                                               ;83D720|A90000  |      ;
-    LDX.W #$0007                                               ;83D723|A20700  |      ;
-    LDY.W #$0001                                               ;83D726|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D729|22978084|848097;
+    %AIExecute($0000, $0007, $0001)
     RTS                                                        ;83D72D|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83D72E|C230    |      ;
-    LDA.W #$0000                                               ;83D730|A90000  |      ;
-    LDX.W #$0006                                               ;83D733|A20600  |      ;
-    LDY.W #$0001                                               ;83D736|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D739|22978084|848097;
+    %AIExecute($0000, $0006, $0001)
     RTS                                                        ;83D73D|60      |      ;
  
  
 .label5:
     REP #$30                                                   ;83D73E|C230    |      ;
-    LDA.W #$0000                                               ;83D740|A90000  |      ;
-    LDX.W #$0008                                               ;83D743|A20800  |      ;
-    LDY.W #$0001                                               ;83D746|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D749|22978084|848097;
+    %AIExecute($0000, $0008, $0001)
     RTS                                                        ;83D74D|60      |      ;
  
  
@@ -10238,10 +10032,7 @@ fAreaEvents_Florist:
     AND.W #$0002                                               ;83D761|290200  |      ;
     BEQ fAreaEvents_FloristHandler                             ;83D764|F010    |83D776;
     REP #$30                                                   ;83D766|C230    |      ;
-    LDA.W #$0000                                               ;83D768|A90000  |      ;
-    LDX.W #$0022                                               ;83D76B|A22200  |      ;
-    LDY.W #$0007                                               ;83D76E|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D771|22978084|848097;
+    %AIExecute($0000, $0022, $0007)
     RTS                                                        ;83D775|60      |      ;
  
  
@@ -10251,10 +10042,7 @@ fAreaEvents_FloristHandler:
     AND.W #$0001                                               ;83D77C|290100  |      ;
     BNE +                                                      ;83D77F|D010    |83D791;
     REP #$30                                                   ;83D781|C230    |      ;
-    LDA.W #$0000                                               ;83D783|A90000  |      ;
-    LDX.W #$000B                                               ;83D786|A20B00  |      ;
-    LDY.W #$0003                                               ;83D789|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D78C|22978084|848097;
+    %AIExecute($0000, $000B, $0003)
     RTS                                                        ;83D790|60      |      ;
  
  
@@ -10283,46 +10071,31 @@ fAreaEvents_FloristHandler:
  
 .anyFestival:
     REP #$30                                                   ;83D7C8|C230    |      ;
-    LDA.W #$0000                                               ;83D7CA|A90000  |      ;
-    LDX.W #$0001                                               ;83D7CD|A20100  |      ;
-    LDY.W #$0003                                               ;83D7D0|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D7D3|22978084|848097;
+    %AIExecute($0000, $0001, $0003)
     RTS                                                        ;83D7D7|60      |      ;
  
  
 .label4:
     REP #$30                                                   ;83D7D8|C230    |      ;
-    LDA.W #$0000                                               ;83D7DA|A90000  |      ;
-    LDX.W #$0004                                               ;83D7DD|A20400  |      ;
-    LDY.W #$0002                                               ;83D7E0|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D7E3|22978084|848097;
+    %AIExecute($0000, $0004, $0002)
     RTS                                                        ;83D7E7|60      |      ;
  
  
 .label5:
     REP #$30                                                   ;83D7E8|C230    |      ;
-    LDA.W #$0000                                               ;83D7EA|A90000  |      ;
-    LDX.W #$0007                                               ;83D7ED|A20700  |      ;
-    LDY.W #$0002                                               ;83D7F0|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D7F3|22978084|848097;
+    %AIExecute($0000, $0007, $0002)
     RTS                                                        ;83D7F7|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83D7F8|C230    |      ;
-    LDA.W #$0000                                               ;83D7FA|A90000  |      ;
-    LDX.W #$0006                                               ;83D7FD|A20600  |      ;
-    LDY.W #$0002                                               ;83D800|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D803|22978084|848097;
+    %AIExecute($0000, $0006, $0002)
     RTS                                                        ;83D807|60      |      ;
  
  
 .label7:
     REP #$30                                                   ;83D808|C230    |      ;
-    LDA.W #$0000                                               ;83D80A|A90000  |      ;
-    LDX.W #$0008                                               ;83D80D|A20800  |      ;
-    LDY.W #$0002                                               ;83D810|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D813|22978084|848097;
+    %AIExecute($0000, $0008, $0002)
     RTS                                                        ;83D817|60      |      ;
  
  
@@ -10342,10 +10115,7 @@ fAreaEvents_NinaBedroom:
  
  
   + REP #$30                                                   ;83D834|C230    |      ;
-    LDA.W #$0000                                               ;83D836|A90000  |      ;
-    LDX.W #$0022                                               ;83D839|A22200  |      ;
-    LDY.W #$0008                                               ;83D83C|A00800  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D83F|22978084|848097;
+    %AIExecute($0000, $0022, $0008)
     RTS                                                        ;83D843|60      |      ;
  
  
@@ -10362,10 +10132,7 @@ fAreaEvents_Toolshop:
     AND.W #$0002                                               ;83D857|290200  |      ;
     BEQ fAreaEvents_ToolshopHandler                            ;83D85A|F010    |83D86C;
     REP #$30                                                   ;83D85C|C230    |      ;
-    LDA.W #$0000                                               ;83D85E|A90000  |      ;
-    LDX.W #$0022                                               ;83D861|A22200  |      ;
-    LDY.W #$0005                                               ;83D864|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D867|22978084|848097;
+    %AIExecute($0000, $0022, $0005)
     RTS                                                        ;83D86B|60      |      ;
  
  
@@ -10375,10 +10142,7 @@ fAreaEvents_ToolshopHandler:
     AND.W #$0010                                               ;83D872|291000  |      ;
     BEQ +                                                      ;83D875|F010    |83D887;
     REP #$30                                                   ;83D877|C230    |      ;
-    LDA.W #$0000                                               ;83D879|A90000  |      ;
-    LDX.W #$001A                                               ;83D87C|A21A00  |      ;
-    LDY.W #$0001                                               ;83D87F|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D882|22978084|848097;
+    %AIExecute($0000, $001A, $0001)
     RTS                                                        ;83D886|60      |      ;
  
  
@@ -10387,10 +10151,7 @@ fAreaEvents_ToolshopHandler:
     AND.W #$0001                                               ;83D88D|290100  |      ;
     BNE .label1                                                ;83D890|D010    |83D8A2;
     REP #$30                                                   ;83D892|C230    |      ;
-    LDA.W #$0000                                               ;83D894|A90000  |      ;
-    LDX.W #$000B                                               ;83D897|A20B00  |      ;
-    LDY.W #$0002                                               ;83D89A|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D89D|22978084|848097;
+    %AIExecute($0000, $000B, $0002)
     RTS                                                        ;83D8A1|60      |      ;
  
  
@@ -10420,46 +10181,31 @@ fAreaEvents_ToolshopHandler:
  
 .anyFestival:
     REP #$30                                                   ;83D8D9|C230    |      ;
-    LDA.W #$0000                                               ;83D8DB|A90000  |      ;
-    LDX.W #$0001                                               ;83D8DE|A20100  |      ;
-    LDY.W #$0004                                               ;83D8E1|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D8E4|22978084|848097;
+    %AIExecute($0000, $0001, $0004)
     RTS                                                        ;83D8E8|60      |      ;
  
  
 .label2:
     REP #$30                                                   ;83D8E9|C230    |      ;
-    LDA.W #$0000                                               ;83D8EB|A90000  |      ;
-    LDX.W #$0004                                               ;83D8EE|A20400  |      ;
-    LDY.W #$0003                                               ;83D8F1|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D8F4|22978084|848097;
+    %AIExecute($0000, $0004, $0003)
     RTS                                                        ;83D8F8|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83D8F9|C230    |      ;
-    LDA.W #$0000                                               ;83D8FB|A90000  |      ;
-    LDX.W #$0007                                               ;83D8FE|A20700  |      ;
-    LDY.W #$0003                                               ;83D901|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D904|22978084|848097;
+    %AIExecute($0000, $0007, $0003)
     RTS                                                        ;83D908|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83D909|C230    |      ;
-    LDA.W #$0000                                               ;83D90B|A90000  |      ;
-    LDX.W #$0006                                               ;83D90E|A20600  |      ;
-    LDY.W #$0003                                               ;83D911|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D914|22978084|848097;
+    %AIExecute($0000, $0006, $0003)
     RTS                                                        ;83D918|60      |      ;
  
  
 .label4:
     REP #$30                                                   ;83D919|C230    |      ;
-    LDA.W #$0000                                               ;83D91B|A90000  |      ;
-    LDX.W #$0008                                               ;83D91E|A20800  |      ;
-    LDY.W #$0003                                               ;83D921|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D924|22978084|848097;
+    %AIExecute($0000, $0008, $0003)
     RTS                                                        ;83D928|60      |      ;
  
  
@@ -10479,10 +10225,7 @@ fAreaEvents_AnnBedroom:
  
  
   + REP #$30                                                   ;83D945|C230    |      ;
-    LDA.W #$0000                                               ;83D947|A90000  |      ;
-    LDX.W #$0022                                               ;83D94A|A22200  |      ;
-    LDY.W #$0006                                               ;83D94D|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D950|22978084|848097;
+    %AIExecute($0000, $0022, $0006)
     RTS                                                        ;83D954|60      |      ;
  
  
@@ -10499,10 +10242,7 @@ fAreaEvents_Restaurant:
     AND.W #$0002                                               ;83D968|290200  |      ;
     BEQ fAreaEvents_RestaurantHandler                          ;83D96B|F010    |83D97D;
     REP #$30                                                   ;83D96D|C230    |      ;
-    LDA.W #$0000                                               ;83D96F|A90000  |      ;
-    LDX.W #$0022                                               ;83D972|A22200  |      ;
-    LDY.W #$0009                                               ;83D975|A00900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D978|22978084|848097;
+    %AIExecute($0000, $0022, $0009)
     RTS                                                        ;83D97C|60      |      ;
  
  
@@ -10512,10 +10252,7 @@ fAreaEvents_RestaurantHandler:
     AND.W #$0001                                               ;83D983|290100  |      ;
     BNE +                                                      ;83D986|D010    |83D998;
     REP #$30                                                   ;83D988|C230    |      ;
-    LDA.W #$0000                                               ;83D98A|A90000  |      ;
-    LDX.W #$000B                                               ;83D98D|A20B00  |      ;
-    LDY.W #$0004                                               ;83D990|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D993|22978084|848097;
+    %AIExecute($0000, $000B, $0004)
     RTS                                                        ;83D997|60      |      ;
  
  
@@ -10544,46 +10281,31 @@ fAreaEvents_RestaurantHandler:
  
 .anyFestival:
     REP #$30                                                   ;83D9CF|C230    |      ;
-    LDA.W #$0000                                               ;83D9D1|A90000  |      ;
-    LDX.W #$0001                                               ;83D9D4|A20100  |      ;
-    LDY.W #$0005                                               ;83D9D7|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D9DA|22978084|848097;
+    %AIExecute($0000, $0001, $0005)
     RTS                                                        ;83D9DE|60      |      ;
  
  
 .label1:
     REP #$30                                                   ;83D9DF|C230    |      ;
-    LDA.W #$0000                                               ;83D9E1|A90000  |      ;
-    LDX.W #$0004                                               ;83D9E4|A20400  |      ;
-    LDY.W #$0004                                               ;83D9E7|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D9EA|22978084|848097;
+    %AIExecute($0000, $0004, $0004)
     RTS                                                        ;83D9EE|60      |      ;
  
  
 .label2:
     REP #$30                                                   ;83D9EF|C230    |      ;
-    LDA.W #$0000                                               ;83D9F1|A90000  |      ;
-    LDX.W #$0007                                               ;83D9F4|A20700  |      ;
-    LDY.W #$0004                                               ;83D9F7|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83D9FA|22978084|848097;
+    %AIExecute($0000, $0007, $0004)
     RTS                                                        ;83D9FE|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83D9FF|C230    |      ;
-    LDA.W #$0000                                               ;83DA01|A90000  |      ;
-    LDX.W #$0006                                               ;83DA04|A20600  |      ;
-    LDY.W #$0004                                               ;83DA07|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DA0A|22978084|848097;
+    %AIExecute($0000, $0006, $0004)
     RTS                                                        ;83DA0E|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83DA0F|C230    |      ;
-    LDA.W #$0000                                               ;83DA11|A90000  |      ;
-    LDX.W #$0008                                               ;83DA14|A20800  |      ;
-    LDY.W #$0004                                               ;83DA17|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DA1A|22978084|848097;
+    %AIExecute($0000, $0008, $0004)
     RTS                                                        ;83DA1E|60      |      ;
  
  
@@ -10603,10 +10325,7 @@ fAreaEvents_EllenBedroom:
  
  
   + REP #$30                                                   ;83DA3B|C230    |      ;
-    LDA.W #$0000                                               ;83DA3D|A90000  |      ;
-    LDX.W #$0022                                               ;83DA40|A22200  |      ;
-    LDY.W #$000A                                               ;83DA43|A00A00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DA46|22978084|848097;
+    %AIExecute($0000, $0022, $000A)
     RTS                                                        ;83DA4A|60      |      ;
  
  
@@ -10616,10 +10335,7 @@ fAreaEvents_FortuneTeller:
     AND.W #$0001                                               ;83DA51|290100  |      ;
     BNE +                                                      ;83DA54|D010    |83DA66;
     REP #$30                                                   ;83DA56|C230    |      ;
-    LDA.W #$0000                                               ;83DA58|A90000  |      ;
-    LDX.W #$000B                                               ;83DA5B|A20B00  |      ;
-    LDY.W #$0005                                               ;83DA5E|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DA61|22978084|848097;
+    %AIExecute($0000, $000B, $0005)
     RTS                                                        ;83DA65|60      |      ;
  
  
@@ -10648,46 +10364,31 @@ fAreaEvents_FortuneTeller:
  
 .anyFestival:
     REP #$30                                                   ;83DA9D|C230    |      ;
-    LDA.W #$0000                                               ;83DA9F|A90000  |      ;
-    LDX.W #$0001                                               ;83DAA2|A20100  |      ;
-    LDY.W #$0006                                               ;83DAA5|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DAA8|22978084|848097;
+    %AIExecute($0000, $0001, $0006)
     RTS                                                        ;83DAAC|60      |      ;
  
  
 .label1:
     REP #$30                                                   ;83DAAD|C230    |      ;
-    LDA.W #$0000                                               ;83DAAF|A90000  |      ;
-    LDX.W #$0004                                               ;83DAB2|A20400  |      ;
-    LDY.W #$0005                                               ;83DAB5|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DAB8|22978084|848097;
+    %AIExecute($0000, $0004, $0005)
     RTS                                                        ;83DABC|60      |      ;
  
  
 .label2:
     REP #$30                                                   ;83DABD|C230    |      ;
-    LDA.W #$0000                                               ;83DABF|A90000  |      ;
-    LDX.W #$0007                                               ;83DAC2|A20700  |      ;
-    LDY.W #$0005                                               ;83DAC5|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DAC8|22978084|848097;
+    %AIExecute($0000, $0007, $0005)
     RTS                                                        ;83DACC|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83DACD|C230    |      ;
-    LDA.W #$0000                                               ;83DACF|A90000  |      ;
-    LDX.W #$0006                                               ;83DAD2|A20600  |      ;
-    LDY.W #$0005                                               ;83DAD5|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DAD8|22978084|848097;
+    %AIExecute($0000, $0006, $0005)
     RTS                                                        ;83DADC|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83DADD|C230    |      ;
-    LDA.W #$0000                                               ;83DADF|A90000  |      ;
-    LDX.W #$0008                                               ;83DAE2|A20800  |      ;
-    LDY.W #$0005                                               ;83DAE5|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DAE8|22978084|848097;
+    %AIExecute($0000, $0008, $0005)
     RTS                                                        ;83DAEC|60      |      ;
  
  
@@ -10697,10 +10398,7 @@ fAreaEvents_AnimalShop:
     AND.W #$0001                                               ;83DAF3|290100  |      ;
     BNE +                                                      ;83DAF6|D010    |83DB08;
     REP #$30                                                   ;83DAF8|C230    |      ;
-    LDA.W #$0000                                               ;83DAFA|A90000  |      ;
-    LDX.W #$000B                                               ;83DAFD|A20B00  |      ;
-    LDY.W #$0006                                               ;83DB00|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DB03|22978084|848097;
+    %AIExecute($0000, $000B, $0006)
     RTS                                                        ;83DB07|60      |      ;
  
  
@@ -10729,46 +10427,31 @@ fAreaEvents_AnimalShop:
  
 .anyFestival:
     REP #$30                                                   ;83DB3F|C230    |      ;
-    LDA.W #$0000                                               ;83DB41|A90000  |      ;
-    LDX.W #$0001                                               ;83DB44|A20100  |      ;
-    LDY.W #$0007                                               ;83DB47|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DB4A|22978084|848097;
+    %AIExecute($0000, $0001, $0007)
     RTS                                                        ;83DB4E|60      |      ;
  
  
 .label1:
     REP #$30                                                   ;83DB4F|C230    |      ;
-    LDA.W #$0000                                               ;83DB51|A90000  |      ;
-    LDX.W #$0004                                               ;83DB54|A20400  |      ;
-    LDY.W #$0006                                               ;83DB57|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DB5A|22978084|848097;
+    %AIExecute($0000, $0004, $0006)
     RTS                                                        ;83DB5E|60      |      ;
  
  
 .label2:
     REP #$30                                                   ;83DB5F|C230    |      ;
-    LDA.W #$0000                                               ;83DB61|A90000  |      ;
-    LDX.W #$0007                                               ;83DB64|A20700  |      ;
-    LDY.W #$0006                                               ;83DB67|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DB6A|22978084|848097;
+    %AIExecute($0000, $0007, $0006)
     RTS                                                        ;83DB6E|60      |      ;
  
  
 .hurricane:
     REP #$30                                                   ;83DB6F|C230    |      ;
-    LDA.W #$0000                                               ;83DB71|A90000  |      ;
-    LDX.W #$0006                                               ;83DB74|A20600  |      ;
-    LDY.W #$0006                                               ;83DB77|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DB7A|22978084|848097;
+    %AIExecute($0000, $0006, $0006)
     RTS                                                        ;83DB7E|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83DB7F|C230    |      ;
-    LDA.W #$0000                                               ;83DB81|A90000  |      ;
-    LDX.W #$0008                                               ;83DB84|A20800  |      ;
-    LDY.W #$0006                                               ;83DB87|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DB8A|22978084|848097;
+    %AIExecute($0000, $0008, $0006)
     RTS                                                        ;83DB8E|60      |      ;
  
  
@@ -10785,10 +10468,7 @@ fAreaEvents_Bar:
     AND.W #$0002                                               ;83DBA2|290200  |      ;
     BEQ fAreaEvents_BarHandler                                 ;83DBA5|F010    |83DBB7;
     REP #$30                                                   ;83DBA7|C230    |      ;
-    LDA.W #$0000                                               ;83DBA9|A90000  |      ;
-    LDX.W #$0022                                               ;83DBAC|A22200  |      ;
-    LDY.W #$000B                                               ;83DBAF|A00B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DBB2|22978084|848097;
+    %AIExecute($0000, $0022, $000B)
     RTS                                                        ;83DBB6|60      |      ;
  
  
@@ -10806,10 +10486,7 @@ fAreaEvents_BarHandler:
     AND.W #$0004                                               ;83DBD1|290400  |      ;
     BEQ +                                                      ;83DBD4|F010    |83DBE6;
     REP #$30                                                   ;83DBD6|C230    |      ;
-    LDA.W #$0000                                               ;83DBD8|A90000  |      ;
-    LDX.W #$000F                                               ;83DBDB|A20F00  |      ;
-    LDY.W #$0003                                               ;83DBDE|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DBE1|22978084|848097;
+    %AIExecute($0000, $000F, $0003)
     RTS                                                        ;83DBE5|60      |      ;
  
  
@@ -10818,10 +10495,7 @@ fAreaEvents_BarHandler:
     AND.W #$0002                                               ;83DBEC|290200  |      ;
     BNE +                                                      ;83DBEF|D01D    |83DC0E;
     REP #$30                                                   ;83DBF1|C230    |      ;
-    LDA.W #$0000                                               ;83DBF3|A90000  |      ;
-    LDX.W #$000B                                               ;83DBF6|A20B00  |      ;
-    LDY.W #$0007                                               ;83DBF9|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DBFC|22978084|848097;
+    %AIExecute($0000, $000B, $0007)
     REP #$30                                                   ;83DC00|C230    |      ;
     LDA.L strcEventFlags.flags3                                ;83DC02|AF681F7F|7F1F68;
     ORA.W #$0002                                               ;83DC06|090200  |      ;
@@ -10830,10 +10504,7 @@ fAreaEvents_BarHandler:
  
  
   + REP #$30                                                   ;83DC0E|C230    |      ;
-    LDA.W #$0000                                               ;83DC10|A90000  |      ;
-    LDX.W #$0005                                               ;83DC13|A20500  |      ;
-    LDY.W #$0000                                               ;83DC16|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DC19|22978084|848097;
+    %AIExecute($0000, $0005, $0000)
     RTS                                                        ;83DC1D|60      |      ;
  
  
@@ -10853,10 +10524,7 @@ fAreaEvents_EveBedroom:
  
  
   + REP #$30                                                   ;83DC3A|C230    |      ;
-    LDA.W #$0000                                               ;83DC3C|A90000  |      ;
-    LDX.W #$0022                                               ;83DC3F|A22200  |      ;
-    LDY.W #$000C                                               ;83DC42|A00C00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DC45|22978084|848097;
+    %AIExecute($0000, $0022, $000C)
     RTS                                                        ;83DC49|60      |      ;
  
  
@@ -10866,10 +10534,7 @@ fAreaEvents_Woods:
     AND.W #$0004                                               ;83DC50|290400  |      ;
     BNE +                                                      ;83DC53|D01D    |83DC72;
     REP #$30                                                   ;83DC55|C230    |      ;
-    LDA.W #$0000                                               ;83DC57|A90000  |      ;
-    LDX.W #$000B                                               ;83DC5A|A20B00  |      ;
-    LDY.W #$0009                                               ;83DC5D|A00900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DC60|22978084|848097;
+    %AIExecute($0000, $000B, $0009)
     REP #$20                                                   ;83DC64|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83DC66|AF681F7F|7F1F68;
     ORA.W #$0004                                               ;83DC6A|090400  |      ;
@@ -10882,10 +10547,7 @@ fAreaEvents_Woods:
     AND.W #$0020                                               ;83DC78|292000  |      ;
     BEQ +                                                      ;83DC7B|F010    |83DC8D;
     REP #$30                                                   ;83DC7D|C230    |      ;
-    LDA.W #$0000                                               ;83DC7F|A90000  |      ;
-    LDX.W #$001D                                               ;83DC82|A21D00  |      ;
-    LDY.W #$0003                                               ;83DC85|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DC88|22978084|848097;
+    %AIExecute($0000, $001D, $0003)
     RTS                                                        ;83DC8C|60      |      ;
  
  
@@ -10894,10 +10556,7 @@ fAreaEvents_Woods:
     AND.W #$0010                                               ;83DC93|291000  |      ;
     BEQ +                                                      ;83DC96|F010    |83DCA8;
     REP #$30                                                   ;83DC98|C230    |      ;
-    LDA.W #$0000                                               ;83DC9A|A90000  |      ;
-    LDX.W #$001D                                               ;83DC9D|A21D00  |      ;
-    LDY.W #$0001                                               ;83DCA0|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DCA3|22978084|848097;
+    %AIExecute($0000, $001D, $0001)
     RTS                                                        ;83DCA7|60      |      ;
  
  
@@ -10909,18 +10568,12 @@ fAreaEvents_Woods:
     AND.W #$0008                                               ;83DCB7|290800  |      ;
     BNE +                                                      ;83DCBA|D011    |83DCCD;
     REP #$30                                                   ;83DCBC|C230    |      ;
-    LDA.W #$0009                                               ;83DCBE|A90900  |      ;
-    LDX.W #$001C                                               ;83DCC1|A21C00  |      ;
-    LDY.W #$0001                                               ;83DCC4|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DCC7|22978084|848097;
+    %AIExecute($0009, $001C, $0001)
     BRA .label2                                                ;83DCCB|8072    |83DD3F;
  
  
   + REP #$30                                                   ;83DCCD|C230    |      ;
-    LDA.W #$0009                                               ;83DCCF|A90900  |      ;
-    LDX.W #$001C                                               ;83DCD2|A21C00  |      ;
-    LDY.W #$0002                                               ;83DCD5|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DCD8|22978084|848097;
+    %AIExecute($0009, $001C, $0002)
     JMP.W .justReturn                                          ;83DCDC|4C74DD  |83DD74;
  
  
@@ -10961,10 +10614,7 @@ fAreaEvents_Woods:
     CMP.B #$06                                                 ;83DD2A|C906    |      ;
     BEQ .label2                                                ;83DD2C|F011    |83DD3F;
     REP #$30                                                   ;83DD2E|C230    |      ;
-    LDA.W #$0009                                               ;83DD30|A90900  |      ;
-    LDX.W #$0021                                               ;83DD33|A22100  |      ;
-    LDY.W #$0000                                               ;83DD36|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DD39|22978084|848097;
+    %AIExecute($0009, $0021, $0000)
     BRA .label2                                                ;83DD3D|8000    |83DD3F;
  
  
@@ -10985,10 +10635,7 @@ fAreaEvents_Woods:
     CMP.B #$06                                                 ;83DD61|C906    |      ;
     BEQ .saturday                                              ;83DD63|F020    |83DD85;
     REP #$30                                                   ;83DD65|C230    |      ;
-    LDA.W #$0000                                               ;83DD67|A90000  |      ;
-    LDX.W #$0001                                               ;83DD6A|A20100  |      ;
-    LDY.W #$0008                                               ;83DD6D|A00800  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DD70|22978084|848097;
+    %AIExecute($0000, $0001, $0008)
  
 .justReturn:
     RTS                                                        ;83DD74|60      |      ;
@@ -10996,19 +10643,13 @@ fAreaEvents_Woods:
  
 .notSunday:
     REP #$30                                                   ;83DD75|C230    |      ;
-    LDA.W #$0000                                               ;83DD77|A90000  |      ;
-    LDX.W #$0003                                               ;83DD7A|A20300  |      ;
-    LDY.W #$0002                                               ;83DD7D|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DD80|22978084|848097;
+    %AIExecute($0000, $0003, $0002)
     RTS                                                        ;83DD84|60      |      ;
  
  
 .saturday:
     REP #$30                                                   ;83DD85|C230    |      ;
-    LDA.W #$0000                                               ;83DD87|A90000  |      ;
-    LDX.W #$0002                                               ;83DD8A|A20200  |      ;
-    LDY.W #$0003                                               ;83DD8D|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DD90|22978084|848097;
+    %AIExecute($0000, $0002, $0003)
     RTS                                                        ;83DD94|60      |      ;
  
  
@@ -11021,10 +10662,7 @@ fAreaEvents_WorksmanHouse:
     AND.W #$1000                                               ;83DDA4|290010  |      ;
     BEQ +                                                      ;83DDA7|F010    |83DDB9;
     REP #$30                                                   ;83DDA9|C230    |      ;
-    LDA.W #$0000                                               ;83DDAB|A90000  |      ;
-    LDX.W #$0019                                               ;83DDAE|A21900  |      ;
-    LDY.W #$0001                                               ;83DDB1|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DDB4|22978084|848097;
+    %AIExecute($0000, $0019, $0001)
     RTS                                                        ;83DDB8|60      |      ;
  
  
@@ -11045,10 +10683,7 @@ fAreaEvents_WorksmanHouse:
     BCS .label1                                                ;83DDDE|B01D    |83DDFD;
  
   + REP #$30                                                   ;83DDE0|C230    |      ;
-    LDA.W #$0000                                               ;83DDE2|A90000  |      ;
-    LDX.W #$000B                                               ;83DDE5|A20B00  |      ;
-    LDY.W #$000A                                               ;83DDE8|A00A00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DDEB|22978084|848097;
+    %AIExecute($0000, $000B, $000A)
     REP #$20                                                   ;83DDEF|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83DDF1|AF681F7F|7F1F68;
     ORA.W #$0008                                               ;83DDF5|090800  |      ;
@@ -11074,37 +10709,25 @@ fAreaEvents_WorksmanHouse:
     AND.W #$0002                                               ;83DE1F|290200  |      ;
     BNE .label3                                                ;83DE22|D010    |83DE34;
     REP #$30                                                   ;83DE24|C230    |      ;
-    LDA.W #$0000                                               ;83DE26|A90000  |      ;
-    LDX.W #$0001                                               ;83DE29|A20100  |      ;
-    LDY.W #$0009                                               ;83DE2C|A00900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DE2F|22978084|848097;
+    %AIExecute($0000, $0001, $0009)
     RTS                                                        ;83DE33|60      |      ;
  
  
 .label3:
     REP #$30                                                   ;83DE34|C230    |      ;
-    LDA.W #$0000                                               ;83DE36|A90000  |      ;
-    LDX.W #$0004                                               ;83DE39|A20400  |      ;
-    LDY.W #$0007                                               ;83DE3C|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DE3F|22978084|848097;
+    %AIExecute($0000, $0004, $0007)
     RTS                                                        ;83DE43|60      |      ;
  
  
 .label4:
     REP #$30                                                   ;83DE44|C230    |      ;
-    LDA.W #$0000                                               ;83DE46|A90000  |      ;
-    LDX.W #$0007                                               ;83DE49|A20700  |      ;
-    LDY.W #$0007                                               ;83DE4C|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DE4F|22978084|848097;
+    %AIExecute($0000, $0007, $0007)
     RTS                                                        ;83DE53|60      |      ;
  
  
 .label5:
     REP #$30                                                   ;83DE54|C230    |      ;
-    LDA.W #$0000                                               ;83DE56|A90000  |      ;
-    LDX.W #$0008                                               ;83DE59|A20800  |      ;
-    LDY.W #$0007                                               ;83DE5C|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DE5F|22978084|848097;
+    %AIExecute($0000, $0008, $0007)
     RTS                                                        ;83DE63|60      |      ;
  
  
@@ -11114,10 +10737,7 @@ fAreaEvents_ImpsUnderground:
     AND.W #$2000                                               ;83DE6A|290020  |      ;
     BNE +                                                      ;83DE6D|D010    |83DE7F;
     REP #$30                                                   ;83DE6F|C230    |      ;
-    LDA.W #$0000                                               ;83DE71|A90000  |      ;
-    LDX.W #$0015                                               ;83DE74|A21500  |      ;
-    LDY.W #$0000                                               ;83DE77|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DE7A|22978084|848097;
+    %AIExecute($0000, $0015, $0000)
     RTS                                                        ;83DE7E|60      |      ;
  
  
@@ -11126,10 +10746,7 @@ fAreaEvents_ImpsUnderground:
     AND.W #$0002                                               ;83DE85|290200  |      ;
     BEQ .justReturn                                            ;83DE88|F010    |83DE9A;
     REP #$30                                                   ;83DE8A|C230    |      ;
-    LDA.W #$0000                                               ;83DE8C|A90000  |      ;
-    LDX.W #$0001                                               ;83DE8F|A20100  |      ;
-    LDY.W #$000A                                               ;83DE92|A00A00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DE95|22978084|848097;
+    %AIExecute($0000, $0001, $000A)
     RTS                                                        ;83DE99|60      |      ;
  
  
@@ -11143,22 +10760,14 @@ fAreaEvents_CowBarn:
     AND.W #$0008                                               ;83DEA1|290800  |      ;
     BEQ .justReturn                                            ;83DEA4|F02C    |83DED2;
     REP #$20                                                   ;83DEA6|C220    |      ;
-    LDA.W #$0015                                               ;83DEA8|A91500  |      ;
-    LDX.W #$0000                                               ;83DEAB|A20000  |      ;
-    LDY.W #$0025                                               ;83DEAE|A02500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83DEB1|22978084|848097;
+    %AIExecute($0015, $0000, $0025)
     SEP #$20                                                   ;83DEB5|E220    |      ;
     LDA.B #$45                                                 ;83DEB7|A945    |      ;
     STA.W nPlayerInteractionIndex                              ;83DEB9|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;83DEBC|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;83DEBF|9C7009  |000970;
-    REP #$30                                                   ;83DEC2|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83DEC4|A5D2    |0000D2;
-    ORA.W #$0040                                               ;83DEC6|094000  |      ;
-    STA.B nPlayerFlags                                         ;83DEC9|85D2    |0000D2;
-    REP #$30                                                   ;83DECB|C230    |      ;
-    LDA.W #$0000                                               ;83DECD|A90000  |      ;
-    STA.B nPlayerAction                                        ;83DED0|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
  
 .justReturn:
     RTS                                                        ;83DED2|60      |      ;
@@ -11343,40 +10952,31 @@ fAreaEvents_House:
     AND.W #$2000                                               ;83E08C|290020  |      ;
     BNE +                                                      ;83E08F|D010    |83E0A1;
     REP #$30                                                   ;83E091|C230    |      ;
-    LDA.W #$0000                                               ;83E093|A90000  |      ;
-    LDX.W #$001F                                               ;83E096|A21F00  |      ;
-    LDY.W #$0000                                               ;83E099|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E09C|22978084|848097;
+    %AIExecute($0000, $001F, $0000)
     RTS                                                        ;83E0A0|60      |      ;
  
  
   + REP #$30                                                   ;83E0A1|C230    |      ;
-    LDA.W #$0000                                               ;83E0A3|A90000  |      ;
-    LDX.W #$001F                                               ;83E0A6|A21F00  |      ;
-    LDY.W #$0001                                               ;83E0A9|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E0AC|22978084|848097;
+    %AIExecute($0000, $001F, $0001)
     REP #$20                                                   ;83E0B0|C220    |      ;
     LDA.L nFirstChildAge                                       ;83E0B2|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E0B6|C93C00  |      ;
     BNE +                                                      ;83E0B9|D008    |83E0C3;
     SEP #$20                                                   ;83E0BB|E220    |      ;
     LDA.B #$05                                                 ;83E0BD|A905    |      ;
-    STA.W nNameInputDestination                                ;83E0BF|8D9F09  |00099F;
+    STA.W strcMenuObjectData.nameDestinationIdx                ;83E0BF|8D9F09  |00099F;
     RTS                                                        ;83E0C2|60      |      ;
  
  
   + SEP #$20                                                   ;83E0C3|E220    |      ;
     LDA.B #$06                                                 ;83E0C5|A906    |      ;
-    STA.W nNameInputDestination                                ;83E0C7|8D9F09  |00099F;
+    STA.W strcMenuObjectData.nameDestinationIdx                ;83E0C7|8D9F09  |00099F;
     RTS                                                        ;83E0CA|60      |      ;
  
  
 .label5:
     REP #$30                                                   ;83E0CB|C230    |      ;
-    LDA.W #$0000                                               ;83E0CD|A90000  |      ;
-    LDX.W #$001F                                               ;83E0D0|A21F00  |      ;
-    LDY.W #$0002                                               ;83E0D3|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E0D6|22978084|848097;
+    %AIExecute($0000, $001F, $0002)
     RTS                                                        ;83E0DA|60      |      ;
  
  
@@ -11418,10 +11018,7 @@ fAreaEvents_House:
     LDA.B [ptrUnknown0x72],Y                                   ;83E12F|B772    |000072;
     STA.W $088F                                                ;83E131|8D8F08  |00088F;
     REP #$30                                                   ;83E134|C230    |      ;
-    LDA.W #$0000                                               ;83E136|A90000  |      ;
-    LDX.W #$0020                                               ;83E139|A22000  |      ;
-    LDY.W #$0000                                               ;83E13C|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E13F|22978084|848097;
+    %AIExecute($0000, $0020, $0000)
     RTS                                                        ;83E143|60      |      ;
  
  
@@ -11506,10 +11103,7 @@ fAreaEvents_House:
     AND.W #$0001                                               ;83E1E1|290100  |      ;
     BNE .label14                                               ;83E1E4|D02A    |83E210;
     REP #$30                                                   ;83E1E6|C230    |      ;
-    LDA.W #$0000                                               ;83E1E8|A90000  |      ;
-    LDX.W #$0022                                               ;83E1EB|A22200  |      ;
-    LDY.W #$0000                                               ;83E1EE|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E1F1|22978084|848097;
+    %AIExecute($0000, $0022, $0000)
     REP #$30                                                   ;83E1F5|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E1F7|AF6E1F7F|7F1F6E;
     ORA.W #$0003                                               ;83E1FB|090300  |      ;
@@ -11570,46 +11164,31 @@ fAreaEvents_House:
  
 .label18:
     REP #$30                                                   ;83E271|C230    |      ;
-    LDA.W #$0013                                               ;83E273|A91300  |      ;
-    LDX.W #$0043                                               ;83E276|A24300  |      ;
-    LDY.W #$0000                                               ;83E279|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E27C|22978084|848097;
+    %AIExecute($0013, $0043, $0000)
     BRA .label23                                               ;83E280|8044    |83E2C6;
  
  
 .label19:
     REP #$30                                                   ;83E282|C230    |      ;
-    LDA.W #$0013                                               ;83E284|A91300  |      ;
-    LDX.W #$0043                                               ;83E287|A24300  |      ;
-    LDY.W #$0001                                               ;83E28A|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E28D|22978084|848097;
+    %AIExecute($0013, $0043, $0001)
     BRA .label23                                               ;83E291|8033    |83E2C6;
  
  
 .label20:
     REP #$30                                                   ;83E293|C230    |      ;
-    LDA.W #$0013                                               ;83E295|A91300  |      ;
-    LDX.W #$0043                                               ;83E298|A24300  |      ;
-    LDY.W #$0002                                               ;83E29B|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E29E|22978084|848097;
+    %AIExecute($0013, $0043, $0002)
     BRA .label23                                               ;83E2A2|8022    |83E2C6;
  
  
 .label21:
     REP #$30                                                   ;83E2A4|C230    |      ;
-    LDA.W #$0013                                               ;83E2A6|A91300  |      ;
-    LDX.W #$0043                                               ;83E2A9|A24300  |      ;
-    LDY.W #$0003                                               ;83E2AC|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E2AF|22978084|848097;
+    %AIExecute($0013, $0043, $0003)
     BRA .label23                                               ;83E2B3|8011    |83E2C6;
  
  
 .label22:
     REP #$30                                                   ;83E2B5|C230    |      ;
-    LDA.W #$0013                                               ;83E2B7|A91300  |      ;
-    LDX.W #$0043                                               ;83E2BA|A24300  |      ;
-    LDY.W #$0004                                               ;83E2BD|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E2C0|22978084|848097;
+    %AIExecute($0013, $0043, $0004)
     BRA .label23                                               ;83E2C4|8000    |83E2C6;
  
  
@@ -11622,10 +11201,7 @@ fAreaEvents_House:
     CMP.W #$003C                                               ;83E2D5|C93C00  |      ;
     BCC .label24                                               ;83E2D8|900F    |83E2E9;
     REP #$30                                                   ;83E2DA|C230    |      ;
-    LDA.W #$0014                                               ;83E2DC|A91400  |      ;
-    LDX.W #$0045                                               ;83E2DF|A24500  |      ;
-    LDY.W #$0000                                               ;83E2E2|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E2E5|22978084|848097;
+    %AIExecute($0014, $0045, $0000)
  
 .label24:
     REP #$30                                                   ;83E2E9|C230    |      ;
@@ -11636,10 +11212,7 @@ fAreaEvents_House:
     CMP.W #$003C                                               ;83E2F8|C93C00  |      ;
     BCC .label25                                               ;83E2FB|900F    |83E30C;
     REP #$30                                                   ;83E2FD|C230    |      ;
-    LDA.W #$0015                                               ;83E2FF|A91500  |      ;
-    LDX.W #$0045                                               ;83E302|A24500  |      ;
-    LDY.W #$0003                                               ;83E305|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E308|22978084|848097;
+    %AIExecute($0015, $0045, $0003)
  
 .label25:
     REP #$30                                                   ;83E30C|C230    |      ;
@@ -11650,19 +11223,13 @@ fAreaEvents_House:
     AND.W #$0001                                               ;83E31B|290100  |      ;
     BNE .label27                                               ;83E31E|D020    |83E340;
     REP #$30                                                   ;83E320|C230    |      ;
-    LDA.W #$0000                                               ;83E322|A90000  |      ;
-    LDX.W #$000A                                               ;83E325|A20A00  |      ;
-    LDY.W #$0000                                               ;83E328|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E32B|22978084|848097;
+    %AIExecute($0000, $000A, $0000)
     RTS                                                        ;83E32F|60      |      ;
  
  
 .label26:
     REP #$30                                                   ;83E330|C230    |      ;
-    LDA.W #$0000                                               ;83E332|A90000  |      ;
-    LDX.W #$000A                                               ;83E335|A20A00  |      ;
-    LDY.W #$0003                                               ;83E338|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E33B|22978084|848097;
+    %AIExecute($0000, $000A, $0003)
     RTS                                                        ;83E33F|60      |      ;
  
  
@@ -11686,10 +11253,7 @@ fAreaEvents_House:
     LDA.L nInGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E;
     BNE .label28                                               ;83E36E|D010    |83E380;
     REP #$30                                                   ;83E370|C230    |      ;
-    LDA.W #$0000                                               ;83E372|A90000  |      ;
-    LDX.W #$000A                                               ;83E375|A20A00  |      ;
-    LDY.W #$0004                                               ;83E378|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E37B|22978084|848097;
+    %AIExecute($0000, $000A, $0004)
     RTS                                                        ;83E37F|60      |      ;
  
  
@@ -11713,10 +11277,7 @@ fAreaEvents_House:
     LDA.L nInGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E;
     BNE .label29                                               ;83E3AE|D010    |83E3C0;
     REP #$30                                                   ;83E3B0|C230    |      ;
-    LDA.W #$0000                                               ;83E3B2|A90000  |      ;
-    LDX.W #$000A                                               ;83E3B5|A20A00  |      ;
-    LDY.W #$0005                                               ;83E3B8|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E3BB|22978084|848097;
+    %AIExecute($0000, $000A, $0005)
     RTS                                                        ;83E3BF|60      |      ;
  
  
@@ -11729,10 +11290,7 @@ fAreaEvents_House:
     CMP.B #$01                                                 ;83E3CE|C901    |      ;
     BNE .label30                                               ;83E3D0|D010    |83E3E2;
     REP #$30                                                   ;83E3D2|C230    |      ;
-    LDA.W #$0000                                               ;83E3D4|A90000  |      ;
-    LDX.W #$0028                                               ;83E3D7|A22800  |      ;
-    LDY.W #$0000                                               ;83E3DA|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E3DD|22978084|848097;
+    %AIExecute($0000, $0028, $0000)
     RTS                                                        ;83E3E1|60      |      ;
  
  
@@ -11746,10 +11304,7 @@ fAreaEvents_House:
     CMP.B #$18                                                 ;83E3F2|C918    |      ;
     BNE .justReturn                                            ;83E3F4|D010    |83E406;
     REP #$30                                                   ;83E3F6|C230    |      ;
-    LDA.W #$0000                                               ;83E3F8|A90000  |      ;
-    LDX.W #$000F                                               ;83E3FB|A20F00  |      ;
-    LDY.W #$0000                                               ;83E3FE|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E401|22978084|848097;
+    %AIExecute($0000, $000F, $0000)
     RTS                                                        ;83E405|60      |      ;
  
  
@@ -11763,10 +11318,7 @@ fAreaEvents_CrossRoad:
     AND.W #$FF7F                                               ;83E40D|297FFF  |      ;
     STA.L strcDailyFlags.flags2                                ;83E410|8F5C1F7F|7F1F5C;
     REP #$30                                                   ;83E414|C230    |      ;
-    LDA.W #$0015                                               ;83E416|A91500  |      ;
-    LDX.W #$0000                                               ;83E419|A20000  |      ;
-    LDY.W #$0015                                               ;83E41C|A01500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E41F|22978084|848097;
+    %AIExecute($0015, $0000, $0015)
     REP #$20                                                   ;83E423|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83E425|AF681F7F|7F1F68;
     AND.W #$0001                                               ;83E429|290100  |      ;
@@ -11775,10 +11327,7 @@ fAreaEvents_CrossRoad:
     AND.W #$0010                                               ;83E432|291000  |      ;
     BNE .houseExtensionCampain                                 ;83E435|D01D    |83E454;
     REP #$30                                                   ;83E437|C230    |      ;
-    LDA.W #$0000                                               ;83E439|A90000  |      ;
-    LDX.W #$000A                                               ;83E43C|A20A00  |      ;
-    LDY.W #$0001                                               ;83E43F|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E442|22978084|848097;
+    %AIExecute($0000, $000A, $0001)
     REP #$20                                                   ;83E446|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83E448|AF681F7F|7F1F68;
     ORA.W #$0010                                               ;83E44C|091000  |      ;
@@ -11788,10 +11337,7 @@ fAreaEvents_CrossRoad:
  
 .houseExtensionCampain:
     REP #$30                                                   ;83E454|C230    |      ;
-    LDA.W #$0000                                               ;83E456|A90000  |      ;
-    LDX.W #$000B                                               ;83E459|A20B00  |      ;
-    LDY.W #$000B                                               ;83E45C|A00B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E45F|22978084|848097;
+    %AIExecute($0000, $000B, $000B)
     RTS                                                        ;83E463|60      |      ;
  
  
@@ -11811,17 +11357,14 @@ fAreaEvents_CrossRoad:
     AND.W #$0040                                               ;83E47E|294000  |      ;
     BNE .label2                                                ;83E481|D024    |83E4A7;
     REP #$30                                                   ;83E483|C230    |      ;
-    LDA.W #$0000                                               ;83E485|A90000  |      ;
-    LDX.W #$000D                                               ;83E488|A20D00  |      ;
-    LDY.W #$0000                                               ;83E48B|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E48E|22978084|848097;
+    %AIExecute($0000, $000D, $0000)
     REP #$20                                                   ;83E492|C220    |      ;
     LDA.L strcEventFlags.flags3                                ;83E494|AF681F7F|7F1F68;
     ORA.W #$0040                                               ;83E498|094000  |      ;
     STA.L strcEventFlags.flags3                                ;83E49B|8F681F7F|7F1F68;
     SEP #$20                                                   ;83E49F|E220    |      ;
     LDA.B #$04                                                 ;83E4A1|A904    |      ;
-    STA.W nNameInputDestination                                ;83E4A3|8D9F09  |00099F;
+    STA.W strcMenuObjectData.nameDestinationIdx                ;83E4A3|8D9F09  |00099F;
     RTS                                                        ;83E4A6|60      |      ;
  
  
@@ -11831,10 +11374,7 @@ fAreaEvents_CrossRoad:
     AND.W #$0100                                               ;83E4AD|290001  |      ;
     BNE .justReturn                                            ;83E4B0|D018    |83E4CA;
     REP #$30                                                   ;83E4B2|C230    |      ;
-    LDA.W #$0000                                               ;83E4B4|A90000  |      ;
-    LDX.W #$000D                                               ;83E4B7|A20D00  |      ;
-    LDY.W #$0001                                               ;83E4BA|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E4BD|22978084|848097;
+    %AIExecute($0000, $000D, $0001)
     SEP #$20                                                   ;83E4C1|E220    |      ;
     LDA.B #$00                                                 ;83E4C3|A900    |      ;
     STA.L nHorseAreaIdMaybe                                    ;83E4C5|8F311F7F|7F1F31;
@@ -11863,18 +11403,12 @@ fAreaEvents_Mine:
     LDA.B nPlayerPosY                                          ;83E4F1|A5D8    |0000D8;
     CMP.W #$0200                                               ;83E4F3|C90002  |      ;
     BCC .label1                                                ;83E4F6|903D    |83E535;
-    REP #$30                                                   ;83E4F8|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83E4FA|A5D2    |0000D2;
-    AND.W #$0800                                               ;83E4FC|290008  |      ;
+    %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BNE +                                                      ;83E4FF|D003    |83E504;
     JMP.W .label1                                              ;83E501|4C35E5  |83E535;
  
  
-  + REP #$30                                                   ;83E504|C230    |      ;
-    LDA.W #!PFLAGS_DOGHUGGING                                               
-    EOR.W #$FFFF                                               ;83E509|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;83E50C|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;83E50E|85D2    |0000D2;
+  + %UnsetPlayerFlag(!PFLAGS_DOGHUGGING)
     SEP #$20                                                   ;83E510|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;83E512|AF191F7F|7F1F19;
     STA.L nDogAreaId                                           ;83E516|8F301F7F|7F1F30;
@@ -11895,10 +11429,7 @@ fAreaEvents_Mine:
     AND.W #$0010                                               ;83E53B|291000  |      ;
     BEQ +                                                      ;83E53E|F010    |83E550;
     REP #$30                                                   ;83E540|C230    |      ;
-    LDA.W #$0000                                               ;83E542|A90000  |      ;
-    LDX.W #$001D                                               ;83E545|A21D00  |      ;
-    LDY.W #$0002                                               ;83E548|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E54B|22978084|848097;
+    %AIExecute($0000, $001D, $0002)
     RTS                                                        ;83E54F|60      |      ;
  
  
@@ -11907,10 +11438,7 @@ fAreaEvents_Mine:
     AND.W #$0001                                               ;83E556|290100  |      ;
     BEQ +                                                      ;83E559|F010    |83E56B;
     REP #$30                                                   ;83E55B|C230    |      ;
-    LDA.W #$0000                                               ;83E55D|A90000  |      ;
-    LDX.W #$001B                                               ;83E560|A21B00  |      ;
-    LDY.W #$0001                                               ;83E563|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E566|22978084|848097;
+    %AIExecute($0000, $001B, $0001)
     RTS                                                        ;83E56A|60      |      ;
  
  
@@ -11919,10 +11447,7 @@ fAreaEvents_Mine:
     CMP.B #!DAY_SATURDAY                                                 
     BNE .justReturn                                            ;83E573|D010    |83E585;
     REP #$30                                                   ;83E575|C230    |      ;
-    LDA.W #$0000                                               ;83E577|A90000  |      ;
-    LDX.W #$0002                                               ;83E57A|A20200  |      ;
-    LDY.W #$0004                                               ;83E57D|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E580|22978084|848097;
+    %AIExecute($0000, $0002, $0004)
     RTS                                                        ;83E584|60      |      ;
  
  
@@ -11936,10 +11461,7 @@ fAreaEvents_MountainTop:
     AND.W #$0200                                               ;83E58C|290002  |      ;
     BEQ .justReturn                                            ;83E58F|F010    |83E5A1;
     REP #$30                                                   ;83E591|C230    |      ;
-    LDA.W #$0000                                               ;83E593|A90000  |      ;
-    LDX.W #$0014                                               ;83E596|A21400  |      ;
-    LDY.W #$0001                                               ;83E599|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E59C|22978084|848097;
+    %AIExecute($0000, $0014, $0001)
     RTS                                                        ;83E5A0|60      |      ;
  
  
@@ -11950,10 +11472,7 @@ fAreaEvents_MountainTop:
 fAreaEvents_GoldChicken:
     REP #$30                                                   ;83E5A2|C230    |      ;
     REP #$30                                                   ;83E5A4|C230    |      ;
-    LDA.W #$0000                                               ;83E5A6|A90000  |      ;
-    LDX.W #$0014                                               ;83E5A9|A21400  |      ;
-    LDY.W #$0002                                               ;83E5AC|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E5AF|22978084|848097;
+    %AIExecute($0000, $0014, $0002)
     RTS                                                        ;83E5B3|60      |      ;
  
  
@@ -11962,10 +11481,7 @@ fAreaEvents_Coop:
     LDA.L strcEventFlags.flags4                                ;83E5B6|AF6A1F7F|7F1F6A;
     AND.W #$4000                                               ;83E5BA|290040  |      ;
     BEQ .justReturn                                            ;83E5BD|F00D    |83E5CC;
-    LDA.W #$0015                                               ;83E5BF|A91500  |      ;
-    LDX.W #$0000                                               ;83E5C2|A20000  |      ;
-    LDY.W #$007F                                               ;83E5C5|A07F00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E5C8|22978084|848097;
+    %AIExecute($0015, $0000, $007F)
  
 .justReturn:
     RTS                                                        ;83E5CC|60      |      ;
@@ -11974,30 +11490,21 @@ fAreaEvents_Coop:
 fAreaEvents_Wedding:
     REP #$30                                                   ;83E5CD|C230    |      ;
     REP #$30                                                   ;83E5CF|C230    |      ;
-    LDA.W #$0000                                               ;83E5D1|A90000  |      ;
-    LDX.W #$001E                                               ;83E5D4|A21E00  |      ;
-    LDY.W #$0000                                               ;83E5D7|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E5DA|22978084|848097;
+    %AIExecute($0000, $001E, $0000)
     RTS                                                        ;83E5DE|60      |      ;
  
  
 fAreaEvents_Festival1:
     REP #$30                                                   ;83E5DF|C230    |      ;
     REP #$30                                                   ;83E5E1|C230    |      ;
-    LDA.W #$0000                                               ;83E5E3|A90000  |      ;
-    LDX.W #$000E                                               ;83E5E6|A20E00  |      ;
-    LDY.W #$0001                                               ;83E5E9|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E5EC|22978084|848097;
+    %AIExecute($0000, $000E, $0001)
     RTS                                                        ;83E5F0|60      |      ;
  
  
 fAreaEvents_Festival2:
     REP #$30                                                   ;83E5F1|C230    |      ;
     REP #$30                                                   ;83E5F3|C230    |      ;
-    LDA.W #$0000                                               ;83E5F5|A90000  |      ;
-    LDX.W #$0026                                               ;83E5F8|A22600  |      ;
-    LDY.W #$0001                                               ;83E5FB|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E5FE|22978084|848097;
+    %AIExecute($0000, $0026, $0001)
     RTS                                                        ;83E602|60      |      ;
  
  
@@ -12015,10 +11522,7 @@ fAreaEvents_Festival3:
     AND.W #$0001                                               ;83E61D|290100  |      ;
     BEQ .justReturn                                            ;83E620|F00F    |83E631;
     REP #$30                                                   ;83E622|C230    |      ;
-    LDA.W #$0000                                               ;83E624|A90000  |      ;
-    LDX.W #$000F                                               ;83E627|A20F00  |      ;
-    LDY.W #$0001                                               ;83E62A|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E62D|22978084|848097;
+    %AIExecute($0000, $000F, $0001)
  
 .justReturn:
     RTS                                                        ;83E631|60      |      ;
@@ -12038,10 +11542,7 @@ fAreaEvents_SNF_MountainTop:
     AND.W #$0008                                               ;83E64C|290800  |      ;
     BEQ .justReturn                                            ;83E64F|F00F    |83E660;
     REP #$30                                                   ;83E651|C230    |      ;
-    LDA.W #$0000                                               ;83E653|A90000  |      ;
-    LDX.W #$000F                                               ;83E656|A20F00  |      ;
-    LDY.W #$0004                                               ;83E659|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E65C|22978084|848097;
+    %AIExecute($0000, $000F, $0004)
  
 .justReturn:
     RTS                                                        ;83E660|60      |      ;
@@ -12061,10 +11562,7 @@ fAreaEvents_SNF_Spa:
     AND.W #$0010                                               ;83E67B|291000  |      ;
     BEQ .justReturn                                            ;83E67E|F00F    |83E68F;
     REP #$30                                                   ;83E680|C230    |      ;
-    LDA.W #$0000                                               ;83E682|A90000  |      ;
-    LDX.W #$000F                                               ;83E685|A20F00  |      ;
-    LDY.W #$0005                                               ;83E688|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E68B|22978084|848097;
+    %AIExecute($0000, $000F, $0005)
  
 .justReturn:
     RTS                                                        ;83E68F|60      |      ;
@@ -12079,10 +11577,7 @@ fAreaEvents_MountainTopUnknown:
     CMP.B #$01                                                 ;83E69E|C901    |      ;
     BNE .justReturn                                            ;83E6A0|D00F    |83E6B1;
     REP #$30                                                   ;83E6A2|C230    |      ;
-    LDA.W #$0000                                               ;83E6A4|A90000  |      ;
-    LDX.W #$0028                                               ;83E6A7|A22800  |      ;
-    LDY.W #$0001                                               ;83E6AA|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E6AD|22978084|848097;
+    %AIExecute($0000, $0028, $0001)
  
 .justReturn:
     RTS                                                        ;83E6B1|60      |      ;
@@ -12091,10 +11586,7 @@ fAreaEvents_MountainTopUnknown:
 fAreaEvents_EggFestival:
     REP #$30                                                   ;83E6B2|C230    |      ;
     REP #$30                                                   ;83E6B4|C230    |      ;
-    LDA.W #$0000                                               ;83E6B6|A90000  |      ;
-    LDX.W #$0028                                               ;83E6B9|A22800  |      ;
-    LDY.W #$0003                                               ;83E6BC|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E6BF|22978084|848097;
+    %AIExecute($0000, $0028, $0003)
     RTS                                                        ;83E6C3|60      |      ;
  
  
@@ -12114,19 +11606,13 @@ fAreaEvents_Shed:
  
 .label1:
     REP #$30                                                   ;83E6E3|C230    |      ;
-    LDA.W #$0013                                               ;83E6E5|A91300  |      ;
-    LDX.W #$0044                                               ;83E6E8|A24400  |      ;
-    LDY.W #$0001                                               ;83E6EB|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E6EE|22978084|848097;
+    %AIExecute($0013, $0044, $0001)
     BRA .label3                                                ;83E6F2|8011    |83E705;
  
  
 .label2:
     REP #$30                                                   ;83E6F4|C230    |      ;
-    LDA.W #$0013                                               ;83E6F6|A91300  |      ;
-    LDX.W #$0044                                               ;83E6F9|A24400  |      ;
-    LDY.W #$0004                                               ;83E6FC|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E6FF|22978084|848097;
+    %AIExecute($0013, $0044, $0004)
     BRA .label3                                                ;83E703|8000    |83E705;
  
  
@@ -12139,10 +11625,7 @@ fAreaEvents_Shed:
     CMP.W #$003C                                               ;83E714|C93C00  |      ;
     BCC +                                                      ;83E717|900F    |83E728;
     REP #$30                                                   ;83E719|C230    |      ;
-    LDA.W #$0014                                               ;83E71B|A91400  |      ;
-    LDX.W #$0045                                               ;83E71E|A24500  |      ;
-    LDY.W #$0002                                               ;83E721|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E724|22978084|848097;
+    %AIExecute($0014, $0045, $0002)
  
   + REP #$30                                                   ;83E728|C230    |      ;
     LDA.L strcEventFlags.flags6                                ;83E72A|AF6E1F7F|7F1F6E;
@@ -12152,10 +11635,7 @@ fAreaEvents_Shed:
     CMP.W #$003C                                               ;83E737|C93C00  |      ;
     BCC .justReturn                                            ;83E73A|900F    |83E74B;
     REP #$30                                                   ;83E73C|C230    |      ;
-    LDA.W #$0015                                               ;83E73E|A91500  |      ;
-    LDX.W #$0045                                               ;83E741|A24500  |      ;
-    LDY.W #$0005                                               ;83E744|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E747|22978084|848097;
+    %AIExecute($0015, $0045, $0005)
  
 .justReturn:
     RTS                                                        ;83E74B|60      |      ;
@@ -12188,19 +11668,14 @@ fAreaEvents_Intro:
     LDA.W nPlayerStamina                                       ;83E790|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83E793|8D1809  |000918;
     STZ.W $0925                                                ;83E796|9C2509  |000925;
-    REP #$30                                                   ;83E799|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83E79B|A5D2    |0000D2;
-    ORA.W #$0001                                               ;83E79D|090100  |      ;
-    STA.B nPlayerFlags                                         ;83E7A0|85D2    |0000D2;
-    REP #$30                                                   ;83E7A2|C230    |      ;
-    LDA.W #$0000                                               ;83E7A4|A90000  |      ;
-    STA.B nPlayerAction                                        ;83E7A7|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83E7A9|C230    |      ;
-    LDA.W #$0000                                               ;83E7AB|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;83E7AE|85DA    |0000DA;
     REP #$30                                                   ;83E7B0|C230    |      ;
     LDA.W #$0000                                               ;83E7B2|A90000  |      ;
-    STA.W $0911                                                ;83E7B5|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;83E7B5|8D1109  |000911;
     REP #$30                                                   ;83E7B8|C230    |      ;
     LDA.W #$0000                                               ;83E7BA|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;83E7BD|8D0109  |000901;
@@ -12208,11 +11683,7 @@ fAreaEvents_Intro:
     STZ.W nTimeState                                           ;83E7C2|9C7309  |000973;
     SEP #$20                                                   ;83E7C5|E220    |      ;
     STZ.W nCarryItem_Current                                   ;83E7C7|9C1D09  |00091D;
-    REP #$30                                                   ;83E7CA|C230    |      ;
-    LDA.W #$0002                                               ;83E7CC|A90200  |      ;
-    EOR.W #$FFFF                                               ;83E7CF|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;83E7D2|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;83E7D4|85D2    |0000D2;
+    %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;83E7D6|E220    |      ;
     LDA.L nIntroHowToPlayIndex2                                ;83E7D8|AF491F7F|7F1F49;
     BNE +                                                      ;83E7DC|D003    |83E7E1;
@@ -12369,10 +11840,7 @@ fAreaEvents_Intro:
  
 .howToPlay00:
     REP #$30                                                   ;83E8AD|C230    |      ;
-    LDA.W #$0000                                               ;83E8AF|A90000  |      ;
-    LDX.W #$0047                                               ;83E8B2|A24700  |      ;
-    LDY.W #$0001                                               ;83E8B5|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E8B8|22978084|848097;
+    %AIExecute($0000, $0047, $0001)
     SEP #$20                                                   ;83E8BC|E220    |      ;
     LDA.B #$01                                                 ;83E8BE|A901    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E8C0|8F491F7F|7F1F49;
@@ -12381,10 +11849,7 @@ fAreaEvents_Intro:
  
 .howToPlay01:
     REP #$30                                                   ;83E8C5|C230    |      ;
-    LDA.W #$0000                                               ;83E8C7|A90000  |      ;
-    LDX.W #$0047                                               ;83E8CA|A24700  |      ;
-    LDY.W #$0002                                               ;83E8CD|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E8D0|22978084|848097;
+    %AIExecute($0000, $0047, $0002)
     SEP #$20                                                   ;83E8D4|E220    |      ;
     LDA.B #$02                                                 ;83E8D6|A902    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E8D8|8F491F7F|7F1F49;
@@ -12393,10 +11858,7 @@ fAreaEvents_Intro:
  
 .howToPlay02:
     REP #$30                                                   ;83E8DD|C230    |      ;
-    LDA.W #$0000                                               ;83E8DF|A90000  |      ;
-    LDX.W #$0047                                               ;83E8E2|A24700  |      ;
-    LDY.W #$0003                                               ;83E8E5|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E8E8|22978084|848097;
+    %AIExecute($0000, $0047, $0003)
     SEP #$20                                                   ;83E8EC|E220    |      ;
     LDA.B #$03                                                 ;83E8EE|A903    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E8F0|8F491F7F|7F1F49;
@@ -12405,10 +11867,7 @@ fAreaEvents_Intro:
  
 .howToPlay03:
     REP #$30                                                   ;83E8F5|C230    |      ;
-    LDA.W #$0000                                               ;83E8F7|A90000  |      ;
-    LDX.W #$0047                                               ;83E8FA|A24700  |      ;
-    LDY.W #$0004                                               ;83E8FD|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E900|22978084|848097;
+    %AIExecute($0000, $0047, $0004)
     SEP #$20                                                   ;83E904|E220    |      ;
     LDA.B #$04                                                 ;83E906|A904    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E908|8F491F7F|7F1F49;
@@ -12417,10 +11876,7 @@ fAreaEvents_Intro:
  
 .howToPlay04:
     REP #$30                                                   ;83E90D|C230    |      ;
-    LDA.W #$0000                                               ;83E90F|A90000  |      ;
-    LDX.W #$0047                                               ;83E912|A24700  |      ;
-    LDY.W #$0005                                               ;83E915|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E918|22978084|848097;
+    %AIExecute($0000, $0047, $0005)
     SEP #$20                                                   ;83E91C|E220    |      ;
     LDA.B #$05                                                 ;83E91E|A905    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E920|8F491F7F|7F1F49;
@@ -12429,10 +11885,7 @@ fAreaEvents_Intro:
  
 .howToPlay05:
     REP #$30                                                   ;83E925|C230    |      ;
-    LDA.W #$0000                                               ;83E927|A90000  |      ;
-    LDX.W #$0047                                               ;83E92A|A24700  |      ;
-    LDY.W #$0006                                               ;83E92D|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E930|22978084|848097;
+    %AIExecute($0000, $0047, $0006)
     SEP #$20                                                   ;83E934|E220    |      ;
     LDA.B #$06                                                 ;83E936|A906    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E938|8F491F7F|7F1F49;
@@ -12441,10 +11894,7 @@ fAreaEvents_Intro:
  
 .howToPlay06:
     REP #$30                                                   ;83E93D|C230    |      ;
-    LDA.W #$0000                                               ;83E93F|A90000  |      ;
-    LDX.W #$0047                                               ;83E942|A24700  |      ;
-    LDY.W #$0007                                               ;83E945|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E948|22978084|848097;
+    %AIExecute($0000, $0047, $0007)
     SEP #$20                                                   ;83E94C|E220    |      ;
     LDA.B #$07                                                 ;83E94E|A907    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E950|8F491F7F|7F1F49;
@@ -12464,10 +11914,7 @@ fAreaEvents_Intro:
     STZ.W nToolEquipped                                        ;83E96F|9C2109  |000921;
     STZ.W nToolSecond                                          ;83E972|9C2309  |000923;
     REP #$30                                                   ;83E975|C230    |      ;
-    LDA.W #$0000                                               ;83E977|A90000  |      ;
-    LDX.W #$0047                                               ;83E97A|A24700  |      ;
-    LDY.W #$0008                                               ;83E97D|A00800  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E980|22978084|848097;
+    %AIExecute($0000, $0047, $0008)
     SEP #$20                                                   ;83E984|E220    |      ;
     LDA.B #$08                                                 ;83E986|A908    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E988|8F491F7F|7F1F49;
@@ -12476,10 +11923,7 @@ fAreaEvents_Intro:
  
 .howToPlay08:
     REP #$30                                                   ;83E98D|C230    |      ;
-    LDA.W #$0000                                               ;83E98F|A90000  |      ;
-    LDX.W #$0047                                               ;83E992|A24700  |      ;
-    LDY.W #$0009                                               ;83E995|A00900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E998|22978084|848097;
+    %AIExecute($0000, $0047, $0009)
     SEP #$20                                                   ;83E99C|E220    |      ;
     LDA.B #$09                                                 ;83E99E|A909    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E9A0|8F491F7F|7F1F49;
@@ -12488,10 +11932,7 @@ fAreaEvents_Intro:
  
 .howToPlay09:
     REP #$30                                                   ;83E9A5|C230    |      ;
-    LDA.W #$0000                                               ;83E9A7|A90000  |      ;
-    LDX.W #$0047                                               ;83E9AA|A24700  |      ;
-    LDY.W #$000A                                               ;83E9AD|A00A00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E9B0|22978084|848097;
+    %AIExecute($0000, $0047, $000A)
     SEP #$20                                                   ;83E9B4|E220    |      ;
     LDA.B #$0A                                                 ;83E9B6|A90A    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E9B8|8F491F7F|7F1F49;
@@ -12500,10 +11941,7 @@ fAreaEvents_Intro:
  
 .howToPlay0A:
     REP #$30                                                   ;83E9BD|C230    |      ;
-    LDA.W #$0000                                               ;83E9BF|A90000  |      ;
-    LDX.W #$0047                                               ;83E9C2|A24700  |      ;
-    LDY.W #$000B                                               ;83E9C5|A00B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E9C8|22978084|848097;
+    %AIExecute($0000, $0047, $000B)
     SEP #$20                                                   ;83E9CC|E220    |      ;
     LDA.B #$0B                                                 ;83E9CE|A90B    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E9D0|8F491F7F|7F1F49;
@@ -12512,10 +11950,7 @@ fAreaEvents_Intro:
  
 .howToPlay0B:
     REP #$30                                                   ;83E9D5|C230    |      ;
-    LDA.W #$0000                                               ;83E9D7|A90000  |      ;
-    LDX.W #$0047                                               ;83E9DA|A24700  |      ;
-    LDY.W #$000C                                               ;83E9DD|A00C00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E9E0|22978084|848097;
+    %AIExecute($0000, $0047, $000C)
     SEP #$20                                                   ;83E9E4|E220    |      ;
     LDA.B #$0C                                                 ;83E9E6|A90C    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83E9E8|8F491F7F|7F1F49;
@@ -12524,10 +11959,7 @@ fAreaEvents_Intro:
  
 .howToPlay0C:
     REP #$30                                                   ;83E9ED|C230    |      ;
-    LDA.W #$0000                                               ;83E9EF|A90000  |      ;
-    LDX.W #$0047                                               ;83E9F2|A24700  |      ;
-    LDY.W #$000D                                               ;83E9F5|A00D00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83E9F8|22978084|848097;
+    %AIExecute($0000, $0047, $000D)
     SEP #$20                                                   ;83E9FC|E220    |      ;
     LDA.B #$0D                                                 ;83E9FE|A90D    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EA00|8F491F7F|7F1F49;
@@ -12547,10 +11979,7 @@ fAreaEvents_Intro:
     STZ.W nToolEquipped                                        ;83EA1F|9C2109  |000921;
     STZ.W nToolSecond                                          ;83EA22|9C2309  |000923;
     REP #$30                                                   ;83EA25|C230    |      ;
-    LDA.W #$0000                                               ;83EA27|A90000  |      ;
-    LDX.W #$0047                                               ;83EA2A|A24700  |      ;
-    LDY.W #$000E                                               ;83EA2D|A00E00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EA30|22978084|848097;
+    %AIExecute($0000, $0047, $000E)
     SEP #$20                                                   ;83EA34|E220    |      ;
     LDA.B #$0E                                                 ;83EA36|A90E    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EA38|8F491F7F|7F1F49;
@@ -12559,10 +11988,7 @@ fAreaEvents_Intro:
  
 .howToPlay0E:
     REP #$30                                                   ;83EA3D|C230    |      ;
-    LDA.W #$0000                                               ;83EA3F|A90000  |      ;
-    LDX.W #$0047                                               ;83EA42|A24700  |      ;
-    LDY.W #$000F                                               ;83EA45|A00F00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EA48|22978084|848097;
+    %AIExecute($0000, $0047, $000F)
     SEP #$20                                                   ;83EA4C|E220    |      ;
     LDA.B #$0F                                                 ;83EA4E|A90F    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EA50|8F491F7F|7F1F49;
@@ -12571,10 +11997,7 @@ fAreaEvents_Intro:
  
 .howToPlay0F:
     REP #$30                                                   ;83EA55|C230    |      ;
-    LDA.W #$0000                                               ;83EA57|A90000  |      ;
-    LDX.W #$0047                                               ;83EA5A|A24700  |      ;
-    LDY.W #$0010                                               ;83EA5D|A01000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EA60|22978084|848097;
+    %AIExecute($0000, $0047, $0010)
     SEP #$20                                                   ;83EA64|E220    |      ;
     LDA.B #$10                                                 ;83EA66|A910    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EA68|8F491F7F|7F1F49;
@@ -12583,10 +12006,7 @@ fAreaEvents_Intro:
  
 .howToPlay10:
     REP #$30                                                   ;83EA6D|C230    |      ;
-    LDA.W #$0000                                               ;83EA6F|A90000  |      ;
-    LDX.W #$0047                                               ;83EA72|A24700  |      ;
-    LDY.W #$0011                                               ;83EA75|A01100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EA78|22978084|848097;
+    %AIExecute($0000, $0047, $0011)
     SEP #$20                                                   ;83EA7C|E220    |      ;
     LDA.B #$11                                                 ;83EA7E|A911    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EA80|8F491F7F|7F1F49;
@@ -12595,10 +12015,7 @@ fAreaEvents_Intro:
  
 .howToPlay11:
     REP #$30                                                   ;83EA85|C230    |      ;
-    LDA.W #$0000                                               ;83EA87|A90000  |      ;
-    LDX.W #$0047                                               ;83EA8A|A24700  |      ;
-    LDY.W #$0012                                               ;83EA8D|A01200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EA90|22978084|848097;
+    %AIExecute($0000, $0047, $0012)
     SEP #$20                                                   ;83EA94|E220    |      ;
     LDA.B #$12                                                 ;83EA96|A912    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EA98|8F491F7F|7F1F49;
@@ -12607,10 +12024,7 @@ fAreaEvents_Intro:
  
 .howToPlay12:
     REP #$30                                                   ;83EA9D|C230    |      ;
-    LDA.W #$0000                                               ;83EA9F|A90000  |      ;
-    LDX.W #$0047                                               ;83EAA2|A24700  |      ;
-    LDY.W #$0013                                               ;83EAA5|A01300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EAA8|22978084|848097;
+    %AIExecute($0000, $0047, $0013)
     SEP #$20                                                   ;83EAAC|E220    |      ;
     LDA.B #$13                                                 ;83EAAE|A913    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EAB0|8F491F7F|7F1F49;
@@ -12619,10 +12033,7 @@ fAreaEvents_Intro:
  
 .howToPlay13:
     REP #$30                                                   ;83EAB5|C230    |      ;
-    LDA.W #$0000                                               ;83EAB7|A90000  |      ;
-    LDX.W #$0047                                               ;83EABA|A24700  |      ;
-    LDY.W #$0014                                               ;83EABD|A01400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EAC0|22978084|848097;
+    %AIExecute($0000, $0047, $0014)
     SEP #$20                                                   ;83EAC4|E220    |      ;
     LDA.B #$14                                                 ;83EAC6|A914    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EAC8|8F491F7F|7F1F49;
@@ -12631,10 +12042,7 @@ fAreaEvents_Intro:
  
 .howToPlay14:
     REP #$30                                                   ;83EACD|C230    |      ;
-    LDA.W #$0000                                               ;83EACF|A90000  |      ;
-    LDX.W #$0047                                               ;83EAD2|A24700  |      ;
-    LDY.W #$0015                                               ;83EAD5|A01500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EAD8|22978084|848097;
+    %AIExecute($0000, $0047, $0015)
     SEP #$20                                                   ;83EADC|E220    |      ;
     LDA.B #$15                                                 ;83EADE|A915    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EAE0|8F491F7F|7F1F49;
@@ -12643,10 +12051,7 @@ fAreaEvents_Intro:
  
 .howToPlay15:
     REP #$30                                                   ;83EAE5|C230    |      ;
-    LDA.W #$0000                                               ;83EAE7|A90000  |      ;
-    LDX.W #$0047                                               ;83EAEA|A24700  |      ;
-    LDY.W #$0016                                               ;83EAED|A01600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EAF0|22978084|848097;
+    %AIExecute($0000, $0047, $0016)
     SEP #$20                                                   ;83EAF4|E220    |      ;
     LDA.B #$16                                                 ;83EAF6|A916    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EAF8|8F491F7F|7F1F49;
@@ -12655,10 +12060,7 @@ fAreaEvents_Intro:
  
 .howToPlay16:
     REP #$30                                                   ;83EAFD|C230    |      ;
-    LDA.W #$0000                                               ;83EAFF|A90000  |      ;
-    LDX.W #$0047                                               ;83EB02|A24700  |      ;
-    LDY.W #$0017                                               ;83EB05|A01700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB08|22978084|848097;
+    %AIExecute($0000, $0047, $0017)
     SEP #$20                                                   ;83EB0C|E220    |      ;
     LDA.B #$17                                                 ;83EB0E|A917    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EB10|8F491F7F|7F1F49;
@@ -12667,10 +12069,7 @@ fAreaEvents_Intro:
  
 .howToPlay17:
     REP #$30                                                   ;83EB15|C230    |      ;
-    LDA.W #$0000                                               ;83EB17|A90000  |      ;
-    LDX.W #$0047                                               ;83EB1A|A24700  |      ;
-    LDY.W #$0018                                               ;83EB1D|A01800  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB20|22978084|848097;
+    %AIExecute($0000, $0047, $0018)
     SEP #$20                                                   ;83EB24|E220    |      ;
     LDA.B #$18                                                 ;83EB26|A918    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EB28|8F491F7F|7F1F49;
@@ -12679,10 +12078,7 @@ fAreaEvents_Intro:
  
 .howToPlay18:
     REP #$30                                                   ;83EB2D|C230    |      ;
-    LDA.W #$0000                                               ;83EB2F|A90000  |      ;
-    LDX.W #$0047                                               ;83EB32|A24700  |      ;
-    LDY.W #$0019                                               ;83EB35|A01900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB38|22978084|848097;
+    %AIExecute($0000, $0047, $0019)
     SEP #$20                                                   ;83EB3C|E220    |      ;
     LDA.B #$19                                                 ;83EB3E|A919    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EB40|8F491F7F|7F1F49;
@@ -12691,10 +12087,7 @@ fAreaEvents_Intro:
  
 .howToPlay19:
     REP #$30                                                   ;83EB45|C230    |      ;
-    LDA.W #$0000                                               ;83EB47|A90000  |      ;
-    LDX.W #$0047                                               ;83EB4A|A24700  |      ;
-    LDY.W #$001A                                               ;83EB4D|A01A00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB50|22978084|848097;
+    %AIExecute($0000, $0047, $001A)
     SEP #$20                                                   ;83EB54|E220    |      ;
     LDA.B #$1A                                                 ;83EB56|A91A    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EB58|8F491F7F|7F1F49;
@@ -12703,10 +12096,7 @@ fAreaEvents_Intro:
  
 .howToPlay1A:
     REP #$30                                                   ;83EB5D|C230    |      ;
-    LDA.W #$0000                                               ;83EB5F|A90000  |      ;
-    LDX.W #$0047                                               ;83EB62|A24700  |      ;
-    LDY.W #$001B                                               ;83EB65|A01B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB68|22978084|848097;
+    %AIExecute($0000, $0047, $001B)
     SEP #$20                                                   ;83EB6C|E220    |      ;
     LDA.B #$1B                                                 ;83EB6E|A91B    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EB70|8F491F7F|7F1F49;
@@ -12715,10 +12105,7 @@ fAreaEvents_Intro:
  
 .howToPlay1B:
     REP #$30                                                   ;83EB75|C230    |      ;
-    LDA.W #$0000                                               ;83EB77|A90000  |      ;
-    LDX.W #$0047                                               ;83EB7A|A24700  |      ;
-    LDY.W #$001C                                               ;83EB7D|A01C00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB80|22978084|848097;
+    %AIExecute($0000, $0047, $001C)
     SEP #$20                                                   ;83EB84|E220    |      ;
     LDA.B #$1C                                                 ;83EB86|A91C    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EB88|8F491F7F|7F1F49;
@@ -12727,10 +12114,7 @@ fAreaEvents_Intro:
  
 .howToPlay1C:
     REP #$30                                                   ;83EB8D|C230    |      ;
-    LDA.W #$0000                                               ;83EB8F|A90000  |      ;
-    LDX.W #$0047                                               ;83EB92|A24700  |      ;
-    LDY.W #$001D                                               ;83EB95|A01D00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EB98|22978084|848097;
+    %AIExecute($0000, $0047, $001D)
     SEP #$20                                                   ;83EB9C|E220    |      ;
     LDA.B #$1D                                                 ;83EB9E|A91D    |      ;
     STA.L nIntroHowToPlayIndex2                                ;83EBA0|8F491F7F|7F1F49;
@@ -12759,19 +12143,14 @@ fAreaEvents_Endings:
     LDA.W nPlayerStamina                                       ;83EBC9|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83EBCC|8D1809  |000918;
     STZ.W $0925                                                ;83EBCF|9C2509  |000925;
-    REP #$30                                                   ;83EBD2|C230    |      ;
-    LDA.B nPlayerFlags                                         ;83EBD4|A5D2    |0000D2;
-    ORA.W #$0001                                               ;83EBD6|090100  |      ;
-    STA.B nPlayerFlags                                         ;83EBD9|85D2    |0000D2;
-    REP #$30                                                   ;83EBDB|C230    |      ;
-    LDA.W #$0000                                               ;83EBDD|A90000  |      ;
-    STA.B nPlayerAction                                        ;83EBE0|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_ACTIVE)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83EBE2|C230    |      ;
-    LDA.W #$0000                                               ;83EBE4|A90000  |      ;
+    LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;83EBE7|85DA    |0000DA;
     REP #$30                                                   ;83EBE9|C230    |      ;
     LDA.W #$0000                                               ;83EBEB|A90000  |      ;
-    STA.W $0911                                                ;83EBEE|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;83EBEE|8D1109  |000911;
     REP #$30                                                   ;83EBF1|C230    |      ;
     LDA.W #$0000                                               ;83EBF3|A90000  |      ;
     STA.W nSmallItemSpriteIndex                                ;83EBF6|8D0109  |000901;
@@ -12779,13 +12158,9 @@ fAreaEvents_Endings:
     STZ.W nTimeState                                           ;83EBFB|9C7309  |000973;
     SEP #$20                                                   ;83EBFE|E220    |      ;
     STZ.W nCarryItem_Current                                   ;83EC00|9C1D09  |00091D;
-    REP #$30                                                   ;83EC03|C230    |      ;
-    LDA.W #$0002                                               ;83EC05|A90200  |      ;
-    EOR.W #$FFFF                                               ;83EC08|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;83EC0B|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;83EC0D|85D2    |0000D2;
+    %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;83EC0F|E220    |      ;
-    LDA.L $7F1F47                                              ;83EC11|AF471F7F|7F1F47;
+    LDA.L nEndingStep                                          ;83EC11|AF471F7F|7F1F47;
     BNE +                                                      ;83EC15|D003    |83EC1A;
     JMP.W .ending00                                            ;83EC17|4C1EED  |83ED1E;
  
@@ -12993,13 +12368,10 @@ fAreaEvents_Endings:
     LDA.L nOwnedChickens                                       ;83ED3C|AF0B1F7F|7F1F0B;
     BNE .ending01                                              ;83ED40|D018    |83ED5A;
     REP #$30                                                   ;83ED42|C230    |      ;
-    LDA.W #$0000                                               ;83ED44|A90000  |      ;
-    LDX.W #$002F                                               ;83ED47|A22F00  |      ;
-    LDY.W #$0000                                               ;83ED4A|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83ED4D|22978084|848097;
+    %AIExecute($0000, $002F, $0000)
     SEP #$20                                                   ;83ED51|E220    |      ;
     LDA.B #$14                                                 ;83ED53|A914    |      ;
-    STA.L $7F1F47                                              ;83ED55|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83ED55|8F471F7F|7F1F47;
     RTS                                                        ;83ED59|60      |      ;
  
  
@@ -13014,13 +12386,10 @@ fAreaEvents_Endings:
     CMP.B #$07                                                 ;83ED6F|C907    |      ;
     BCC .ending02                                              ;83ED71|9018    |83ED8B;
     REP #$30                                                   ;83ED73|C230    |      ;
-    LDA.W #$0000                                               ;83ED75|A90000  |      ;
-    LDX.W #$0030                                               ;83ED78|A23000  |      ;
-    LDY.W #$0000                                               ;83ED7B|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83ED7E|22978084|848097;
+    %AIExecute($0000, $0030, $0000)
     SEP #$20                                                   ;83ED82|E220    |      ;
     LDA.B #$02                                                 ;83ED84|A902    |      ;
-    STA.L $7F1F47                                              ;83ED86|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83ED86|8F471F7F|7F1F47;
     RTS                                                        ;83ED8A|60      |      ;
  
  
@@ -13032,13 +12401,10 @@ fAreaEvents_Endings:
     CMP.B #$07                                                 ;83ED95|C907    |      ;
     BCS .ending03                                              ;83ED97|B018    |83EDB1;
     REP #$30                                                   ;83ED99|C230    |      ;
-    LDA.W #$0000                                               ;83ED9B|A90000  |      ;
-    LDX.W #$0031                                               ;83ED9E|A23100  |      ;
-    LDY.W #$0000                                               ;83EDA1|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EDA4|22978084|848097;
+    %AIExecute($0000, $0031, $0000)
     SEP #$20                                                   ;83EDA8|E220    |      ;
     LDA.B #$03                                                 ;83EDAA|A903    |      ;
-    STA.L $7F1F47                                              ;83EDAC|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EDAC|8F471F7F|7F1F47;
     RTS                                                        ;83EDB0|60      |      ;
  
  
@@ -13048,30 +12414,24 @@ fAreaEvents_Endings:
     LDA.L nOwnedChickens                                       ;83EDB5|AF0B1F7F|7F1F0B;
     BEQ .ending04                                              ;83EDB9|F018    |83EDD3;
     REP #$30                                                   ;83EDBB|C230    |      ;
-    LDA.W #$0000                                               ;83EDBD|A90000  |      ;
-    LDX.W #$0032                                               ;83EDC0|A23200  |      ;
-    LDY.W #$0000                                               ;83EDC3|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EDC6|22978084|848097;
+    %AIExecute($0000, $0032, $0000)
     SEP #$20                                                   ;83EDCA|E220    |      ;
     LDA.B #$04                                                 ;83EDCC|A904    |      ;
-    STA.L $7F1F47                                              ;83EDCE|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EDCE|8F471F7F|7F1F47;
     RTS                                                        ;83EDD2|60      |      ;
  
  
 .ending04:
     SEP #$20                                                   ;83EDD3|E220    |      ;
     REP #$10                                                   ;83EDD5|C210    |      ;
-    LDA.W nUnknown9B5                                          ;83EDD7|ADB509  |0009B5;
+    LDA.W $09B5                                                ;83EDD7|ADB509  |0009B5;
     CMP.B #$C0                                                 ;83EDDA|C9C0    |      ;
     BCC .ending05                                              ;83EDDC|9018    |83EDF6;
     REP #$30                                                   ;83EDDE|C230    |      ;
-    LDA.W #$0000                                               ;83EDE0|A90000  |      ;
-    LDX.W #$0033                                               ;83EDE3|A23300  |      ;
-    LDY.W #$0000                                               ;83EDE6|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EDE9|22978084|848097;
+    %AIExecute($0000, $0033, $0000)
     SEP #$20                                                   ;83EDED|E220    |      ;
     LDA.B #$05                                                 ;83EDEF|A905    |      ;
-    STA.L $7F1F47                                              ;83EDF1|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EDF1|8F471F7F|7F1F47;
     RTS                                                        ;83EDF5|60      |      ;
  
  
@@ -13081,13 +12441,10 @@ fAreaEvents_Endings:
     CMP.W #$00C8                                               ;83EDFC|C9C800  |      ;
     BCC .ending06                                              ;83EDFF|9018    |83EE19;
     REP #$30                                                   ;83EE01|C230    |      ;
-    LDA.W #$0000                                               ;83EE03|A90000  |      ;
-    LDX.W #$0034                                               ;83EE06|A23400  |      ;
-    LDY.W #$0000                                               ;83EE09|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EE0C|22978084|848097;
+    %AIExecute($0000, $0034, $0000)
     SEP #$20                                                   ;83EE10|E220    |      ;
     LDA.B #$06                                                 ;83EE12|A906    |      ;
-    STA.L $7F1F47                                              ;83EE14|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EE14|8F471F7F|7F1F47;
     RTS                                                        ;83EE18|60      |      ;
  
  
@@ -13097,13 +12454,10 @@ fAreaEvents_Endings:
     CMP.W #$00C8                                               ;83EE1F|C9C800  |      ;
     BCC .ending07                                              ;83EE22|9018    |83EE3C;
     REP #$30                                                   ;83EE24|C230    |      ;
-    LDA.W #$0000                                               ;83EE26|A90000  |      ;
-    LDX.W #$0035                                               ;83EE29|A23500  |      ;
-    LDY.W #$0000                                               ;83EE2C|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EE2F|22978084|848097;
+    %AIExecute($0000, $0035, $0000)
     SEP #$20                                                   ;83EE33|E220    |      ;
     LDA.B #$07                                                 ;83EE35|A907    |      ;
-    STA.L $7F1F47                                              ;83EE37|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EE37|8F471F7F|7F1F47;
     RTS                                                        ;83EE3B|60      |      ;
  
  
@@ -13113,13 +12467,10 @@ fAreaEvents_Endings:
     CMP.W #$00C8                                               ;83EE42|C9C800  |      ;
     BCC .ending08                                              ;83EE45|9018    |83EE5F;
     REP #$30                                                   ;83EE47|C230    |      ;
-    LDA.W #$0000                                               ;83EE49|A90000  |      ;
-    LDX.W #$0037                                               ;83EE4C|A23700  |      ;
-    LDY.W #$0000                                               ;83EE4F|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EE52|22978084|848097;
+    %AIExecute($0000, $0037, $0000)
     SEP #$20                                                   ;83EE56|E220    |      ;
     LDA.B #$08                                                 ;83EE58|A908    |      ;
-    STA.L $7F1F47                                              ;83EE5A|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EE5A|8F471F7F|7F1F47;
     RTS                                                        ;83EE5E|60      |      ;
  
  
@@ -13129,13 +12480,10 @@ fAreaEvents_Endings:
     CMP.W #$00C8                                               ;83EE65|C9C800  |      ;
     BCC .ending09                                              ;83EE68|9018    |83EE82;
     REP #$30                                                   ;83EE6A|C230    |      ;
-    LDA.W #$0000                                               ;83EE6C|A90000  |      ;
-    LDX.W #$0036                                               ;83EE6F|A23600  |      ;
-    LDY.W #$0000                                               ;83EE72|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EE75|22978084|848097;
+    %AIExecute($0000, $0036, $0000)
     SEP #$20                                                   ;83EE79|E220    |      ;
     LDA.B #$09                                                 ;83EE7B|A909    |      ;
-    STA.L $7F1F47                                              ;83EE7D|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EE7D|8F471F7F|7F1F47;
     RTS                                                        ;83EE81|60      |      ;
  
  
@@ -13148,13 +12496,10 @@ fAreaEvents_Endings:
     CMP.W #$0064                                               ;83EE91|C96400  |      ;
     BCC .ending0A                                              ;83EE94|9018    |83EEAE;
     REP #$30                                                   ;83EE96|C230    |      ;
-    LDA.W #$0000                                               ;83EE98|A90000  |      ;
-    LDX.W #$0038                                               ;83EE9B|A23800  |      ;
-    LDY.W #$0000                                               ;83EE9E|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EEA1|22978084|848097;
+    %AIExecute($0000, $0038, $0000)
     SEP #$20                                                   ;83EEA5|E220    |      ;
     LDA.B #$0A                                                 ;83EEA7|A90A    |      ;
-    STA.L $7F1F47                                              ;83EEA9|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EEA9|8F471F7F|7F1F47;
     RTS                                                        ;83EEAD|60      |      ;
  
  
@@ -13167,13 +12512,10 @@ fAreaEvents_Endings:
     CMP.W #$0320                                               ;83EEBD|C92003  |      ;
     BCC .ending0B                                              ;83EEC0|9018    |83EEDA;
     REP #$30                                                   ;83EEC2|C230    |      ;
-    LDA.W #$0000                                               ;83EEC4|A90000  |      ;
-    LDX.W #$0039                                               ;83EEC7|A23900  |      ;
-    LDY.W #$0000                                               ;83EECA|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EECD|22978084|848097;
+    %AIExecute($0000, $0039, $0000)
     SEP #$20                                                   ;83EED1|E220    |      ;
     LDA.B #$0B                                                 ;83EED3|A90B    |      ;
-    STA.L $7F1F47                                              ;83EED5|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EED5|8F471F7F|7F1F47;
     RTS                                                        ;83EED9|60      |      ;
  
  
@@ -13183,25 +12525,19 @@ fAreaEvents_Endings:
     AND.W #!EFLAGS2_MARRIEDMARIA                                               
     BEQ .ending0C                                              ;83EEE3|F030    |83EF15;
     REP #$30                                                   ;83EEE5|C230    |      ;
-    LDA.W #$0000                                               ;83EEE7|A90000  |      ;
-    LDX.W #$003A                                               ;83EEEA|A23A00  |      ;
-    LDY.W #$0000                                               ;83EEED|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EEF0|22978084|848097;
+    %AIExecute($0000, $003A, $0000)
     SEP #$20                                                   ;83EEF4|E220    |      ;
     LDA.B #$21                                                 ;83EEF6|A921    |      ;
-    STA.L $7F1F47                                              ;83EEF8|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EEF8|8F471F7F|7F1F47;
     RTS                                                        ;83EEFC|60      |      ;
  
  
 .ending21:
     REP #$30                                                   ;83EEFD|C230    |      ;
-    LDA.W #$0000                                               ;83EEFF|A90000  |      ;
-    LDX.W #$003A                                               ;83EF02|A23A00  |      ;
-    LDY.W #$0001                                               ;83EF05|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EF08|22978084|848097;
+    %AIExecute($0000, $003A, $0001)
     SEP #$20                                                   ;83EF0C|E220    |      ;
     LDA.B #$0C                                                 ;83EF0E|A90C    |      ;
-    STA.L $7F1F47                                              ;83EF10|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EF10|8F471F7F|7F1F47;
     RTS                                                        ;83EF14|60      |      ;
  
  
@@ -13211,25 +12547,19 @@ fAreaEvents_Endings:
     AND.W #!EFLAGS2_MARRIEDANN                                               
     BEQ .ending0D                                              ;83EF1E|F030    |83EF50;
     REP #$30                                                   ;83EF20|C230    |      ;
-    LDA.W #$0000                                               ;83EF22|A90000  |      ;
-    LDX.W #$003B                                               ;83EF25|A23B00  |      ;
-    LDY.W #$0000                                               ;83EF28|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EF2B|22978084|848097;
+    %AIExecute($0000, $003B, $0000)
     SEP #$20                                                   ;83EF2F|E220    |      ;
     LDA.B #$22                                                 ;83EF31|A922    |      ;
-    STA.L $7F1F47                                              ;83EF33|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EF33|8F471F7F|7F1F47;
     RTS                                                        ;83EF37|60      |      ;
  
  
 .ending22:
     REP #$30                                                   ;83EF38|C230    |      ;
-    LDA.W #$0000                                               ;83EF3A|A90000  |      ;
-    LDX.W #$003B                                               ;83EF3D|A23B00  |      ;
-    LDY.W #$0001                                               ;83EF40|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EF43|22978084|848097;
+    %AIExecute($0000, $003B, $0001)
     SEP #$20                                                   ;83EF47|E220    |      ;
     LDA.B #$0D                                                 ;83EF49|A90D    |      ;
-    STA.L $7F1F47                                              ;83EF4B|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EF4B|8F471F7F|7F1F47;
     RTS                                                        ;83EF4F|60      |      ;
  
  
@@ -13239,25 +12569,19 @@ fAreaEvents_Endings:
     AND.W #!EFLAGS2_MARRIEDNINA                                               
     BEQ .ending0E                                              ;83EF59|F030    |83EF8B;
     REP #$30                                                   ;83EF5B|C230    |      ;
-    LDA.W #$0000                                               ;83EF5D|A90000  |      ;
-    LDX.W #$003C                                               ;83EF60|A23C00  |      ;
-    LDY.W #$0000                                               ;83EF63|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EF66|22978084|848097;
+    %AIExecute($0000, $003C, $0000)
     SEP #$20                                                   ;83EF6A|E220    |      ;
     LDA.B #$23                                                 ;83EF6C|A923    |      ;
-    STA.L $7F1F47                                              ;83EF6E|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EF6E|8F471F7F|7F1F47;
     RTS                                                        ;83EF72|60      |      ;
  
  
 .ending23:
     REP #$30                                                   ;83EF73|C230    |      ;
-    LDA.W #$0000                                               ;83EF75|A90000  |      ;
-    LDX.W #$003C                                               ;83EF78|A23C00  |      ;
-    LDY.W #$0001                                               ;83EF7B|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EF7E|22978084|848097;
+    %AIExecute($0000, $003C, $0001)
     SEP #$20                                                   ;83EF82|E220    |      ;
     LDA.B #$0E                                                 ;83EF84|A90E    |      ;
-    STA.L $7F1F47                                              ;83EF86|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EF86|8F471F7F|7F1F47;
     RTS                                                        ;83EF8A|60      |      ;
  
  
@@ -13267,25 +12591,19 @@ fAreaEvents_Endings:
     AND.W #!EFLAGS2_MARRIEDELLEN                                               
     BEQ .ending0F                                              ;83EF94|F030    |83EFC6;
     REP #$30                                                   ;83EF96|C230    |      ;
-    LDA.W #$0000                                               ;83EF98|A90000  |      ;
-    LDX.W #$003D                                               ;83EF9B|A23D00  |      ;
-    LDY.W #$0000                                               ;83EF9E|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EFA1|22978084|848097;
+    %AIExecute($0000, $003D, $0000)
     SEP #$20                                                   ;83EFA5|E220    |      ;
     LDA.B #$24                                                 ;83EFA7|A924    |      ;
-    STA.L $7F1F47                                              ;83EFA9|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EFA9|8F471F7F|7F1F47;
     RTS                                                        ;83EFAD|60      |      ;
  
  
 .ending24:
     REP #$30                                                   ;83EFAE|C230    |      ;
-    LDA.W #$0000                                               ;83EFB0|A90000  |      ;
-    LDX.W #$003D                                               ;83EFB3|A23D00  |      ;
-    LDY.W #$0001                                               ;83EFB6|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EFB9|22978084|848097;
+    %AIExecute($0000, $003D, $0001)
     SEP #$20                                                   ;83EFBD|E220    |      ;
     LDA.B #$0F                                                 ;83EFBF|A90F    |      ;
-    STA.L $7F1F47                                              ;83EFC1|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EFC1|8F471F7F|7F1F47;
     RTS                                                        ;83EFC5|60      |      ;
  
  
@@ -13295,13 +12613,10 @@ fAreaEvents_Endings:
     AND.W #!EFLAGS2_MARRIEDEVE                                               
     BEQ .ending10                                              ;83EFCF|F018    |83EFE9;
     REP #$30                                                   ;83EFD1|C230    |      ;
-    LDA.W #$0000                                               ;83EFD3|A90000  |      ;
-    LDX.W #$003E                                               ;83EFD6|A23E00  |      ;
-    LDY.W #$0000                                               ;83EFD9|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83EFDC|22978084|848097;
+    %AIExecute($0000, $003E, $0000)
     SEP #$20                                                   ;83EFE0|E220    |      ;
     LDA.B #$10                                                 ;83EFE2|A910    |      ;
-    STA.L $7F1F47                                              ;83EFE4|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83EFE4|8F471F7F|7F1F47;
     RTS                                                        ;83EFE8|60      |      ;
  
  
@@ -13322,13 +12637,10 @@ fAreaEvents_Endings:
     CMP.W #$05DC                                               ;83F012|C9DC05  |      ;
     BCC .ending11                                              ;83F015|9018    |83F02F;
     REP #$30                                                   ;83F017|C230    |      ;
-    LDA.W #$0000                                               ;83F019|A90000  |      ;
-    LDX.W #$003F                                               ;83F01C|A23F00  |      ;
-    LDY.W #$0000                                               ;83F01F|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F022|22978084|848097;
+    %AIExecute($0000, $003F, $0000)
     SEP #$20                                                   ;83F026|E220    |      ;
     LDA.B #$11                                                 ;83F028|A911    |      ;
-    STA.L $7F1F47                                              ;83F02A|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F02A|8F471F7F|7F1F47;
     RTS                                                        ;83F02E|60      |      ;
  
  
@@ -13338,13 +12650,10 @@ fAreaEvents_Endings:
     AND.W #$000C                                               ;83F035|290C00  |      ;
     BEQ .ending12                                              ;83F038|F018    |83F052;
     REP #$30                                                   ;83F03A|C230    |      ;
-    LDA.W #$0000                                               ;83F03C|A90000  |      ;
-    LDX.W #$0040                                               ;83F03F|A24000  |      ;
-    LDY.W #$0000                                               ;83F042|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F045|22978084|848097;
+    %AIExecute($0000, $0040, $0000)
     SEP #$20                                                   ;83F049|E220    |      ;
     LDA.B #$12                                                 ;83F04B|A912    |      ;
-    STA.L $7F1F47                                              ;83F04D|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F04D|8F471F7F|7F1F47;
     RTS                                                        ;83F051|60      |      ;
  
  
@@ -13354,13 +12663,10 @@ fAreaEvents_Endings:
     AND.W #$0008                                               ;83F058|290800  |      ;
     BEQ .ending13                                              ;83F05B|F018    |83F075;
     REP #$30                                                   ;83F05D|C230    |      ;
-    LDA.W #$0000                                               ;83F05F|A90000  |      ;
-    LDX.W #$0041                                               ;83F062|A24100  |      ;
-    LDY.W #$0000                                               ;83F065|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F068|22978084|848097;
+    %AIExecute($0000, $0041, $0000)
     SEP #$20                                                   ;83F06C|E220    |      ;
     LDA.B #$13                                                 ;83F06E|A913    |      ;
-    STA.L $7F1F47                                              ;83F070|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F070|8F471F7F|7F1F47;
     RTS                                                        ;83F074|60      |      ;
  
  
@@ -13393,13 +12699,10 @@ fAreaEvents_Endings:
     CMP.W #$0064                                               ;83F0B9|C96400  |      ;
     BCC .ending14                                              ;83F0BC|9025    |83F0E3;
     REP #$30                                                   ;83F0BE|C230    |      ;
-    LDA.W #$0000                                               ;83F0C0|A90000  |      ;
-    LDX.W #$0042                                               ;83F0C3|A24200  |      ;
-    LDY.W #$0000                                               ;83F0C6|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F0C9|22978084|848097;
+    %AIExecute($0000, $0042, $0000)
     SEP #$20                                                   ;83F0CD|E220    |      ;
     LDA.B #$14                                                 ;83F0CF|A914    |      ;
-    STA.L $7F1F47                                              ;83F0D1|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F0D1|8F471F7F|7F1F47;
     REP #$20                                                   ;83F0D5|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;83F0D7|AF5E1F7F|7F1F5E;
     AND.W #$7FFF                                               ;83F0DB|29FF7F  |      ;
@@ -13435,13 +12738,10 @@ fAreaEvents_Endings:
     STA.W $09B3                                                ;83F123|8DB309  |0009B3;
  
   + REP #$30                                                   ;83F126|C230    |      ;
-    LDA.W #$0000                                               ;83F128|A90000  |      ;
-    LDX.W #$0046                                               ;83F12B|A24600  |      ;
-    LDY.W #$0000                                               ;83F12E|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F131|22978084|848097;
+    %AIExecute($0000, $0046, $0000)
     SEP #$20                                                   ;83F135|E220    |      ;
     LDA.B #$15                                                 ;83F137|A915    |      ;
-    STA.L $7F1F47                                              ;83F139|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F139|8F471F7F|7F1F47;
     REP #$20                                                   ;83F13D|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;83F13F|AF5E1F7F|7F1F5E;
     ORA.W #$8000                                               ;83F143|090080  |      ;
@@ -13451,85 +12751,64 @@ fAreaEvents_Endings:
  
 .ending15:
     REP #$30                                                   ;83F14B|C230    |      ;
-    LDA.W #$0000                                               ;83F14D|A90000  |      ;
-    LDX.W #$0046                                               ;83F150|A24600  |      ;
-    LDY.W #$0001                                               ;83F153|A00100  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F156|22978084|848097;
+    %AIExecute($0000, $0046, $0001)
     SEP #$20                                                   ;83F15A|E220    |      ;
     LDA.B #$16                                                 ;83F15C|A916    |      ;
-    STA.L $7F1F47                                              ;83F15E|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F15E|8F471F7F|7F1F47;
     RTS                                                        ;83F162|60      |      ;
  
  
 .ending16:
     REP #$30                                                   ;83F163|C230    |      ;
-    LDA.W #$0000                                               ;83F165|A90000  |      ;
-    LDX.W #$0046                                               ;83F168|A24600  |      ;
-    LDY.W #$0002                                               ;83F16B|A00200  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F16E|22978084|848097;
+    %AIExecute($0000, $0046, $0002)
     SEP #$20                                                   ;83F172|E220    |      ;
     LDA.B #$17                                                 ;83F174|A917    |      ;
-    STA.L $7F1F47                                              ;83F176|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F176|8F471F7F|7F1F47;
     RTS                                                        ;83F17A|60      |      ;
  
  
 .ending17:
     REP #$30                                                   ;83F17B|C230    |      ;
-    LDA.W #$0000                                               ;83F17D|A90000  |      ;
-    LDX.W #$0046                                               ;83F180|A24600  |      ;
-    LDY.W #$0003                                               ;83F183|A00300  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F186|22978084|848097;
+    %AIExecute($0000, $0046, $0003)
     SEP #$20                                                   ;83F18A|E220    |      ;
     LDA.B #$18                                                 ;83F18C|A918    |      ;
-    STA.L $7F1F47                                              ;83F18E|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F18E|8F471F7F|7F1F47;
     RTS                                                        ;83F192|60      |      ;
  
  
 .ending18:
     REP #$30                                                   ;83F193|C230    |      ;
-    LDA.W #$0000                                               ;83F195|A90000  |      ;
-    LDX.W #$0046                                               ;83F198|A24600  |      ;
-    LDY.W #$0004                                               ;83F19B|A00400  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F19E|22978084|848097;
+    %AIExecute($0000, $0046, $0004)
     SEP #$20                                                   ;83F1A2|E220    |      ;
     LDA.B #$19                                                 ;83F1A4|A919    |      ;
-    STA.L $7F1F47                                              ;83F1A6|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F1A6|8F471F7F|7F1F47;
     RTS                                                        ;83F1AA|60      |      ;
  
  
 .ending19:
     REP #$30                                                   ;83F1AB|C230    |      ;
-    LDA.W #$0000                                               ;83F1AD|A90000  |      ;
-    LDX.W #$0046                                               ;83F1B0|A24600  |      ;
-    LDY.W #$0005                                               ;83F1B3|A00500  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F1B6|22978084|848097;
+    %AIExecute($0000, $0046, $0005)
     SEP #$20                                                   ;83F1BA|E220    |      ;
     LDA.B #$1A                                                 ;83F1BC|A91A    |      ;
-    STA.L $7F1F47                                              ;83F1BE|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F1BE|8F471F7F|7F1F47;
     RTS                                                        ;83F1C2|60      |      ;
  
  
 .ending1A:
     REP #$30                                                   ;83F1C3|C230    |      ;
-    LDA.W #$0000                                               ;83F1C5|A90000  |      ;
-    LDX.W #$0046                                               ;83F1C8|A24600  |      ;
-    LDY.W #$0006                                               ;83F1CB|A00600  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F1CE|22978084|848097;
+    %AIExecute($0000, $0046, $0006)
     SEP #$20                                                   ;83F1D2|E220    |      ;
     LDA.B #$1B                                                 ;83F1D4|A91B    |      ;
-    STA.L $7F1F47                                              ;83F1D6|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F1D6|8F471F7F|7F1F47;
     RTS                                                        ;83F1DA|60      |      ;
  
  
 .ending1B:
     REP #$30                                                   ;83F1DB|C230    |      ;
-    LDA.W #$0000                                               ;83F1DD|A90000  |      ;
-    LDX.W #$0046                                               ;83F1E0|A24600  |      ;
-    LDY.W #$0007                                               ;83F1E3|A00700  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F1E6|22978084|848097;
+    %AIExecute($0000, $0046, $0007)
     SEP #$20                                                   ;83F1EA|E220    |      ;
     LDA.B #$20                                                 ;83F1EC|A920    |      ;
-    STA.L $7F1F47                                              ;83F1EE|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F1EE|8F471F7F|7F1F47;
     REP #$20                                                   ;83F1F2|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;83F1F4|AF5E1F7F|7F1F5E;
     AND.W #$7FFF                                               ;83F1F8|29FF7F  |      ;
@@ -13539,49 +12818,37 @@ fAreaEvents_Endings:
  
 .ending1C:
     REP #$30                                                   ;83F200|C230    |      ;
-    LDA.W #$0000                                               ;83F202|A90000  |      ;
-    LDX.W #$0046                                               ;83F205|A24600  |      ;
-    LDY.W #$0008                                               ;83F208|A00800  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F20B|22978084|848097;
+    %AIExecute($0000, $0046, $0008)
     SEP #$20                                                   ;83F20F|E220    |      ;
     LDA.B #$1D                                                 ;83F211|A91D    |      ;
-    STA.L $7F1F47                                              ;83F213|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F213|8F471F7F|7F1F47;
     RTS                                                        ;83F217|60      |      ;
  
  
 .ending1D:
     REP #$30                                                   ;83F218|C230    |      ;
-    LDA.W #$0000                                               ;83F21A|A90000  |      ;
-    LDX.W #$0046                                               ;83F21D|A24600  |      ;
-    LDY.W #$0009                                               ;83F220|A00900  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F223|22978084|848097;
+    %AIExecute($0000, $0046, $0009)
     SEP #$20                                                   ;83F227|E220    |      ;
     LDA.B #$1E                                                 ;83F229|A91E    |      ;
-    STA.L $7F1F47                                              ;83F22B|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F22B|8F471F7F|7F1F47;
     RTS                                                        ;83F22F|60      |      ;
  
  
 .ending1E:
     REP #$30                                                   ;83F230|C230    |      ;
-    LDA.W #$0000                                               ;83F232|A90000  |      ;
-    LDX.W #$0046                                               ;83F235|A24600  |      ;
-    LDY.W #$000A                                               ;83F238|A00A00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F23B|22978084|848097;
+    %AIExecute($0000, $0046, $000A)
     SEP #$20                                                   ;83F23F|E220    |      ;
     LDA.B #$1F                                                 ;83F241|A91F    |      ;
-    STA.L $7F1F47                                              ;83F243|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F243|8F471F7F|7F1F47;
     RTS                                                        ;83F247|60      |      ;
  
  
 .ending1F:
     REP #$30                                                   ;83F248|C230    |      ;
-    LDA.W #$0000                                               ;83F24A|A90000  |      ;
-    LDX.W #$0046                                               ;83F24D|A24600  |      ;
-    LDY.W #$000B                                               ;83F250|A00B00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F253|22978084|848097;
+    %AIExecute($0000, $0046, $000B)
     SEP #$20                                                   ;83F257|E220    |      ;
     LDA.B #$20                                                 ;83F259|A920    |      ;
-    STA.L $7F1F47                                              ;83F25B|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F25B|8F471F7F|7F1F47;
     REP #$20                                                   ;83F25F|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;83F261|AF5E1F7F|7F1F5E;
     AND.W #$7FFF                                               ;83F265|29FF7F  |      ;
@@ -13848,13 +13115,10 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F4AE|8F541F7F|7F1F54;
  
   + REP #$30                                                   ;83F4B2|C230    |      ;
-    LDA.W #$0000                                               ;83F4B4|A90000  |      ;
-    LDX.W #$0046                                               ;83F4B7|A24600  |      ;
-    LDY.W #$000C                                               ;83F4BA|A00C00  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F4BD|22978084|848097;
+    %AIExecute($0000, $0046, $000C)
     SEP #$20                                                   ;83F4C1|E220    |      ;
     LDA.B #$25                                                 ;83F4C3|A925    |      ;
-    STA.L $7F1F47                                              ;83F4C5|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F4C5|8F471F7F|7F1F47;
     REP #$20                                                   ;83F4C9|C220    |      ;
     LDA.L strcDailyFlags.flags3                                ;83F4CB|AF5E1F7F|7F1F5E;
     ORA.W #$8000                                               ;83F4CF|090080  |      ;
@@ -13868,10 +13132,7 @@ fAreaEvents_Endings:
  
 fAreaInit_HouseHelper:
     REP #$30                                                   ;83F4D8|C230    |      ;
-    LDA.W #$0000                                               ;83F4DA|A90000  |      ;
-    LDX.W #$002E                                               ;83F4DD|A22E00  |      ;
-    LDY.W #$0000                                               ;83F4E0|A00000  |      ;
-    JSL.L fAI_SetupAreaScripting                               ;83F4E3|22978084|848097;
+    %AIExecute($0000, $002E, $0000)
     REP #$30                                                   ;83F4E7|C230    |      ;
     STZ.W nMapEngine_flags                                     ;83F4E9|9C9601  |000196;
     LDA.L strcDailyFlags.flags3                                ;83F4EC|AF5E1F7F|7F1F5E;
@@ -13879,10 +13140,10 @@ fAreaInit_HouseHelper:
     STA.L strcDailyFlags.flags3                                ;83F4F3|8F5E1F7F|7F1F5E;
     SEP #$20                                                   ;83F4F7|E220    |      ;
     LDA.B #$00                                                 ;83F4F9|A900    |      ;
-    STA.L $7F1F47                                              ;83F4FB|8F471F7F|7F1F47;
+    STA.L nEndingStep                                          ;83F4FB|8F471F7F|7F1F47;
     SEP #$20                                                   ;83F4FF|E220    |      ;
     REP #$10                                                   ;83F501|C210    |      ;
-    STZ.W nUnknown9B5                                          ;83F503|9CB509  |0009B5;
+    STZ.W $09B5                                                ;83F503|9CB509  |0009B5;
     REP #$20                                                   ;83F506|C220    |      ;
     LDA.W #$00B1                                               ;83F508|A9B100  |      ;
     STA.W $0889                                                ;83F50B|8D8908  |000889;
@@ -13903,14 +13164,14 @@ fAreaInit_HouseHelper:
     BEQ .label2                                                ;83F52D|F044    |83F573;
     LDY.W #$0004                                               ;83F52F|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83F532|B772    |000072;
-    CMP.W nUnknown9B5                                          ;83F534|CDB509  |0009B5;
+    CMP.W $09B5                                                ;83F534|CDB509  |0009B5;
     BCS .label1                                                ;83F537|B002    |83F53B;
     BRA .label2                                                ;83F539|8038    |83F573;
  
  
 .label1:
     SEP #$20                                                   ;83F53B|E220    |      ;
-    STA.W nUnknown9B5                                          ;83F53D|8DB509  |0009B5;
+    STA.W $09B5                                                ;83F53D|8DB509  |0009B5;
     SEP #$20                                                   ;83F540|E220    |      ;
     LDA.B #$00                                                 ;83F542|A900    |      ;
     XBA                                                        ;83F544|EB      |      ;

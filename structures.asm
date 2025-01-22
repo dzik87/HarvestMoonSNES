@@ -1,5 +1,5 @@
 ; Game Objects (40 entries)
-struct strcGameObject       $019C
+struct strcGameObject       $00019C
     .initailized            : skip 2    ; 00 $00019C    - $7777 if initialized, 0 if not
     .spriteTableIdx         : skip 2    ; 02 $00019E    - used as index to get sprite metadata from banks $86/$87
     .flip                   : skip 2    ; 04 $0001A0
@@ -26,6 +26,31 @@ struct strcGameObject       $019C
     .unknown34              : skip 1    ; 22 $0001BE
     .unknown35              : skip 1    ; 23 $0001BF
 endstruct align 36
+
+; Size and start to be confirmed
+struct strcSingleObjectData $00009B
+    .posX                   : skip 2    ; 9B
+    .posY                   : skip 2    ; 9D
+    .flip                   : skip 2    ; 9F
+    .spriteTableIdx         : skip 2    ; A1
+    .unk6                   : skip 2    ; A3
+    .gameObjectIdx          : skip 2    ; A5
+    .exists                 : skip 2    ; A7    0 if exists FF/-1 if does not
+    .gameObjectIdxOffs      : skip 2    ; A9    aGameObjectIndexOffsets[gameObjectIdx]
+endstruct
+
+; Size and start to be confirmed
+struct strcMenuObjectData   $000991
+    .menuIdx                : skip 2    ; 0991
+    .tableSelector          : skip 1    ; 0993
+    .nameEntryIdx           : skip 1    ; 0994
+    .gameObjectIdx          : skip 2    ; 0995
+    .spriteTableIdx         : skip 2    ; 0997
+    .flip                   : skip 2    ; 0999
+    .posX                   : skip 2    ; 099B
+    .posY                   : skip 2    ; 099D
+    .nameDestinationIdx     : skip 1    ; 099F
+endstruct
 
 
 ; Shed Items
@@ -91,6 +116,9 @@ struct strcDailyFlags       $7F1F5A
     .flags5                 : skip 2    ; 08 $7F1F62
 endstruct align 10
 
+!DFLAGS2_BROKECHICKENSTATUE = $0080
+!DFLAGS2_DUGUPMONEY         = $0200
+
 
 ; Event flags
 struct strcEventFlags       $7F1F64
@@ -110,6 +138,11 @@ endstruct align 16
 !EFLAGS2_MARRIEDELLEN       = $0008
 !EFLAGS2_MARRIEDEVE         = $0010
 !EFLAGS2_MARRIED            = !EFLAGS2_MARRIEDMARIA|!EFLAGS2_MARRIEDANN|!EFLAGS2_MARRIEDNINA|!EFLAGS2_MARRIEDELLEN|!EFLAGS2_MARRIEDEVE
+!EFLAGS2_PAINTEDHOUSEDOOR   = $0200
+!EFLAGS2_PAINTEDHOUSELEFT   = $0400
+!EFLAGS2_PAINTEDHOUSECENTER = $0800
+!EFLAGS2_PAINTEDHOUSERIGHT  = $1000
+!EFLAGS2_FREEDIMPFISH       = $2000
 
 
 ; Unknown flags
