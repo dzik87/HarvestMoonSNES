@@ -31,6 +31,7 @@
 
 ; Carry items               $00091D
 !CITEM_NONE                 =   $00
+!CITEM_FISH                 =   $07
 
 
 ; Weather forecast          $00098C
@@ -213,7 +214,7 @@
 !PACTION_DROPITEM           = $0005
 !PACTION_06                 = $0006
 !PACTION_07                 = $0007
-!PACTION_08                 = $0008
+!PACTION_CONSUMEITEM        = $0008
 !PACTION_EXCERCISE          = $0009
 !PACTION_USINGTOOL          = $000A
 !PACTION_TIRED              = $000B
@@ -233,7 +234,7 @@
 !PACTION_AUTOPILOT          = $0019 ;   probably used by AI to make predefined moves also when we go to sleep
 !PACTION_1A                 = $001A
 !PACTION_WHISTLEDOG         = $001B
-!PACTION_USETOOL            = $001C
+!PACTION_SWAPTOOL           = $001C
 !PACTION_1D                 = $001D
 !PACTION_1E                 = $001E
 !PACTION_1F                 = $001F

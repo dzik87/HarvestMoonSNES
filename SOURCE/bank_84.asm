@@ -33,7 +33,7 @@ fAI_Unknown848020:
     REP #$30                                                   ;848031|C230    |      ;
     LDY.W #$0012                                               ;848033|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848036|B7CC    |0000CC;
-    STA.B $A5                                                  ;848038|85A5    |0000A5;
+    STA.B strcSingleObjectData.gameObjectIdx                   ;848038|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;84803A|22A28185|8581A2;
     RTL                                                        ;84803E|6B      |      ;
  
@@ -357,19 +357,19 @@ fAI_Unknown848286:
   + REP #$30                                                   ;84829B|C230    |      ;
     LDY.W #$0012                                               ;84829D|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A0|B7CC    |0000CC;
-    STA.B $A5                                                  ;8482A2|85A5    |0000A5;
+    STA.B strcSingleObjectData.gameObjectIdx                   ;8482A2|85A5    |0000A5;
     LDY.W #$0014                                               ;8482A4|A01400  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A7|B7CC    |0000CC;
-    STA.B $9F                                                  ;8482A9|859F    |00009F;
+    STA.B strcSingleObjectData.flip                            ;8482A9|859F    |00009F;
     LDY.W #$001A                                               ;8482AB|A01A00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482AE|B7CC    |0000CC;
-    STA.B $9B                                                  ;8482B0|859B    |00009B;
+    STA.B strcSingleObjectData.posX                            ;8482B0|859B    |00009B;
     LDY.W #$001C                                               ;8482B2|A01C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482B5|B7CC    |0000CC;
-    STA.B $9D                                                  ;8482B7|859D    |00009D;
+    STA.B strcSingleObjectData.posY                            ;8482B7|859D    |00009D;
     LDY.W #$0016                                               ;8482B9|A01600  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482BC|B7CC    |0000CC;
-    STA.B $A1                                                  ;8482BE|85A1    |0000A1;
+    STA.B strcSingleObjectData.spriteTableIdx                  ;8482BE|85A1    |0000A1;
     SEP #$20                                                   ;8482C0|E220    |      ;
     REP #$10                                                   ;8482C2|C210    |      ;
     LDY.W #$0001                                               ;8482C4|A00100  |      ;
@@ -389,7 +389,7 @@ fAI_Unknown848286:
 .label1:
     JSL.L fUnknown_858000                                      ;8482DF|22008085|858000;
     REP #$30                                                   ;8482E3|C230    |      ;
-    LDA.B $A5                                                  ;8482E5|A5A5    |0000A5;
+    LDA.B strcSingleObjectData.gameObjectIdx                   ;8482E5|A5A5    |0000A5;
     REP #$30                                                   ;8482E7|C230    |      ;
     LDY.W #$0012                                               ;8482E9|A01200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8482EC|97CC    |0000CC;
@@ -1337,34 +1337,18 @@ fAI_Unknown848961:
  
 fAIAction0x00_SetMusicTrack:
     REP #$30                                                   ;8489BB|C230    |      ;
-    REP #$30                                                   ;8489BD|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8489BF|A5C9    |0000C9;
-    CLC                                                        ;8489C1|18      |      ;
-    ADC.W #$0001                                               ;8489C2|690100  |      ;
-    STA.B ptrAIActionData                                      ;8489C5|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8489C7|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8489C9|A7C9    |0000C9;
     STA.W nAudioMusicTrackId                                   ;8489CB|8D1001  |000110;
-    REP #$30                                                   ;8489CE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8489D0|A5C9    |0000C9;
-    CLC                                                        ;8489D2|18      |      ;
-    ADC.W #$0001                                               ;8489D3|690100  |      ;
-    STA.B ptrAIActionData                                      ;8489D6|85C9    |0000C9;
-    REP #$30                                                   ;8489D8|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8489DA|A5C9    |0000C9;
-    CLC                                                        ;8489DC|18      |      ;
-    ADC.W #$0001                                               ;8489DD|690100  |      ;
-    STA.B ptrAIActionData                                      ;8489E0|85C9    |0000C9;
+    %AIMoveAction($0001)
+    %AIMoveAction($0001)
     RTS                                                        ;8489E2|60      |      ;
  
  
 fAIAction0x01_UnfreezeTime:
     REP #$30                                                   ;8489E3|C230    |      ;
-    REP #$30                                                   ;8489E5|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8489E7|A5C9    |0000C9;
-    CLC                                                        ;8489E9|18      |      ;
-    ADC.W #$0001                                               ;8489EA|690100  |      ;
-    STA.B ptrAIActionData                                      ;8489ED|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8489EF|E220    |      ;
     LDA.B #$01                                                 ;8489F1|A901    |      ;
     STA.W nTimeState                                           ;8489F3|8D7309  |000973;
@@ -1380,11 +1364,7 @@ fAIAction0x01_UnfreezeTime:
  
 fAIAction0x02_FreezeTime:
     REP #$30                                                   ;848A0D|C230    |      ;
-    REP #$30                                                   ;848A0F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A11|A5C9    |0000C9;
-    CLC                                                        ;848A13|18      |      ;
-    ADC.W #$0001                                               ;848A14|690100  |      ;
-    STA.B ptrAIActionData                                      ;848A17|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848A19|E220    |      ;
     LDA.B #$00                                                 ;848A1B|A900    |      ;
     STA.W nTimeState                                           ;848A1D|8D7309  |000973;
@@ -1401,73 +1381,41 @@ fAIAction0x02_FreezeTime:
  
 fAIAction0x03_SetHour:
     REP #$30                                                   ;848A39|C230    |      ;
-    REP #$30                                                   ;848A3B|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A3D|A5C9    |0000C9;
-    CLC                                                        ;848A3F|18      |      ;
-    ADC.W #$0001                                               ;848A40|690100  |      ;
-    STA.B ptrAIActionData                                      ;848A43|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848A45|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848A47|A7C9    |0000C9;
     STA.L nCurrentTimeID                                       ;848A49|8F1C1F7F|7F1F1C;
-    REP #$30                                                   ;848A4D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A4F|A5C9    |0000C9;
-    CLC                                                        ;848A51|18      |      ;
-    ADC.W #$0001                                               ;848A52|690100  |      ;
-    STA.B ptrAIActionData                                      ;848A55|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848A57|60      |      ;
  
  
 fAIAction0x04_DoesNothing:
     REP #$30                                                   ;848A58|C230    |      ;
-    REP #$30                                                   ;848A5A|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A5C|A5C9    |0000C9;
-    CLC                                                        ;848A5E|18      |      ;
-    ADC.W #$0001                                               ;848A5F|690100  |      ;
-    STA.B ptrAIActionData                                      ;848A62|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848A64|60      |      ;
  
  
 fAIAction0x05_SetTransferPosition:
     REP #$30                                                   ;848A65|C230    |      ;
-    REP #$30                                                   ;848A67|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A69|A5C9    |0000C9;
-    CLC                                                        ;848A6B|18      |      ;
-    ADC.W #$0001                                               ;848A6C|690100  |      ;
-    STA.B ptrAIActionData                                      ;848A6F|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848A71|A7C9    |0000C9;
     STA.W nMapEngine_DestinationX                              ;848A73|8D7D01  |00017D;
     STA.B nPlayerPosX                                          ;848A76|85D6    |0000D6;
-    REP #$30                                                   ;848A78|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A7A|A5C9    |0000C9;
-    CLC                                                        ;848A7C|18      |      ;
-    ADC.W #$0002                                               ;848A7D|690200  |      ;
-    STA.B ptrAIActionData                                      ;848A80|85C9    |0000C9;
+    %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;848A82|A7C9    |0000C9;
     STA.W nMapEngine_DestinationY                              ;848A84|8D7F01  |00017F;
     STA.B nPlayerPosY                                          ;848A87|85D8    |0000D8;
-    REP #$30                                                   ;848A89|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A8B|A5C9    |0000C9;
-    CLC                                                        ;848A8D|18      |      ;
-    ADC.W #$0002                                               ;848A8E|690200  |      ;
-    STA.B ptrAIActionData                                      ;848A91|85C9    |0000C9;
+    %AIMoveAction($0002)
     RTS                                                        ;848A93|60      |      ;
  
  
 fAIAction0x06_SetDestinationArea:
     REP #$30                                                   ;848A94|C230    |      ;
-    REP #$30                                                   ;848A96|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848A98|A5C9    |0000C9;
-    CLC                                                        ;848A9A|18      |      ;
-    ADC.W #$0001                                               ;848A9B|690100  |      ;
-    STA.B ptrAIActionData                                      ;848A9E|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848AA0|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848AA2|A7C9    |0000C9;
     STA.W nDestinationAreaId                                   ;848AA4|8D8B09  |00098B;
-    REP #$30                                                   ;848AA7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848AA9|A5C9    |0000C9;
-    CLC                                                        ;848AAB|18      |      ;
-    ADC.W #$0001                                               ;848AAC|690100  |      ;
-    STA.B ptrAIActionData                                      ;848AAF|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;848AB1|C230    |      ;
     LDY.W #$0010                                               ;848AB3|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848AB6|B7CC    |0000CC;
@@ -1479,39 +1427,23 @@ fAIAction0x06_SetDestinationArea:
  
 fAIAction0x07_SetPlayerDirection:
     REP #$30                                                   ;848ABF|C230    |      ;
-    REP #$30                                                   ;848AC1|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848AC3|A5C9    |0000C9;
-    CLC                                                        ;848AC5|18      |      ;
-    ADC.W #$0001                                               ;848AC6|690100  |      ;
-    STA.B ptrAIActionData                                      ;848AC9|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848ACB|E220    |      ;
     LDA.B #$00                                                 ;848ACD|A900    |      ;
     XBA                                                        ;848ACF|EB      |      ;
     LDA.B [ptrAIActionData]                                    ;848AD0|A7C9    |0000C9;
     REP #$20                                                   ;848AD2|C220    |      ;
     STA.B nPlayerDirection                                     ;848AD4|85DA    |0000DA;
-    STA.W $0911                                                ;848AD6|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;848AD6|8D1109  |000911;
     STA.W nSmallItemSpriteIndex                                ;848AD9|8D0109  |000901;
-    REP #$30                                                   ;848ADC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848ADE|A5C9    |0000C9;
-    CLC                                                        ;848AE0|18      |      ;
-    ADC.W #$0001                                               ;848AE1|690100  |      ;
-    STA.B ptrAIActionData                                      ;848AE4|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848AE6|60      |      ;
  
  
 fAIAction0x08_EnableAIControl:
     REP #$30                                                   ;848AE7|C230    |      ;
-    REP #$30                                                   ;848AE9|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848AEB|A5C9    |0000C9;
-    CLC                                                        ;848AED|18      |      ;
-    ADC.W #$0001                                               ;848AEE|690100  |      ;
-    STA.B ptrAIActionData                                      ;848AF1|85C9    |0000C9;
-    REP #$30                                                   ;848AF3|C230    |      ;
-    LDA.W #$4000                                               ;848AF5|A90040  |      ;
-    EOR.W #$FFFF                                               ;848AF8|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;848AFB|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;848AFD|85D2    |0000D2;
+    %AIMoveAction($0001)
+    %UnsetPlayerFlag(!PFLAGS_USERCONTROL)
     REP #$20                                                   ;848AFF|C220    |      ;
     STZ.W nAIJoypadInput                                       ;848B01|9CFD08  |0008FD;
     STZ.W nAISteeringCounter                                   ;848B04|9CFF08  |0008FF;
@@ -1520,11 +1452,7 @@ fAIAction0x08_EnableAIControl:
  
 fAIAction0x09:
     REP #$30                                                   ;848B08|C230    |      ;
-    REP #$30                                                   ;848B0A|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848B0C|A5C9    |0000C9;
-    CLC                                                        ;848B0E|18      |      ;
-    ADC.W #$0001                                               ;848B0F|690100  |      ;
-    STA.B ptrAIActionData                                      ;848B12|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B ptrAIUnknown0xCC                                     ;848B14|A5CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;848B16|8572    |000072;
     SEP #$20                                                   ;848B18|E220    |      ;
@@ -1552,11 +1480,7 @@ fAIAction0x09:
     SEP #$20                                                   ;848B45|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848B47|A7C9    |0000C9;
     PHA                                                        ;848B49|48      |      ;
-    REP #$30                                                   ;848B4A|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848B4C|A5C9    |0000C9;
-    CLC                                                        ;848B4E|18      |      ;
-    ADC.W #$0001                                               ;848B4F|690100  |      ;
-    STA.B ptrAIActionData                                      ;848B52|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848B54|A7C9    |0000C9;
     REP #$30                                                   ;848B56|C230    |      ;
     LDY.W #$0030                                               ;848B58|A03000  |      ;
@@ -1574,26 +1498,14 @@ fAIAction0x09:
     SEP #$20                                                   ;848B72|E220    |      ;
     LDA.B ptrUnknown0x72+2                                     ;848B74|A574    |000074;
     STA.B ptrAIUnknown0xCC+2                                   ;848B76|85CE    |0000CE;
-    REP #$30                                                   ;848B78|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848B7A|A5C9    |0000C9;
-    CLC                                                        ;848B7C|18      |      ;
-    ADC.W #$0002                                               ;848B7D|690200  |      ;
-    STA.B ptrAIActionData                                      ;848B80|85C9    |0000C9;
+    %AIMoveAction($0002)
     RTS                                                        ;848B82|60      |      ;
  
  
 fAIAction0x0A:
     REP #$30                                                   ;848B83|C230    |      ;
-    REP #$30                                                   ;848B85|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848B87|A5C9    |0000C9;
-    CLC                                                        ;848B89|18      |      ;
-    ADC.W #$0001                                               ;848B8A|690100  |      ;
-    STA.B ptrAIActionData                                      ;848B8D|85C9    |0000C9;
-    REP #$30                                                   ;848B8F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848B91|A5C9    |0000C9;
-    CLC                                                        ;848B93|18      |      ;
-    ADC.W #$0001                                               ;848B94|690100  |      ;
-    STA.B ptrAIActionData                                      ;848B97|85C9    |0000C9;
+    %AIMoveAction($0001)
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848B99|E220    |      ;
     LDA.B #$03                                                 ;848B9B|A903    |      ;
     STA.B n8TempVar1                                           ;848B9D|8592    |000092;
@@ -1607,11 +1519,7 @@ fAIAction0x0A:
  
 fAIAction0x0B:
     REP #$30                                                   ;848BAC|C230    |      ;
-    REP #$30                                                   ;848BAE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848BB0|A5C9    |0000C9;
-    CLC                                                        ;848BB2|18      |      ;
-    ADC.W #$0001                                               ;848BB3|690100  |      ;
-    STA.B ptrAIActionData                                      ;848BB6|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848BB8|E220    |      ;
     LDA.B #$00                                                 ;848BBA|A900    |      ;
     XBA                                                        ;848BBC|EB      |      ;
@@ -1623,21 +1531,13 @@ fAIAction0x0B:
     LDA.L aAISetMask,X                                         ;848BC5|BFD39484|8494D3;
     ORA.L $7F1F7A                                              ;848BC9|0F7A1F7F|7F1F7A;
     STA.L $7F1F7A                                              ;848BCD|8F7A1F7F|7F1F7A;
-    REP #$30                                                   ;848BD1|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848BD3|A5C9    |0000C9;
-    CLC                                                        ;848BD5|18      |      ;
-    ADC.W #$0001                                               ;848BD6|690100  |      ;
-    STA.B ptrAIActionData                                      ;848BD9|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848BDB|60      |      ;
  
  
 fAIAction0x0C:
     REP #$30                                                   ;848BDC|C230    |      ;
-    REP #$30                                                   ;848BDE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848BE0|A5C9    |0000C9;
-    CLC                                                        ;848BE2|18      |      ;
-    ADC.W #$0001                                               ;848BE3|690100  |      ;
-    STA.B ptrAIActionData                                      ;848BE6|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848BE8|E220    |      ;
     LDA.B #$00                                                 ;848BEA|A900    |      ;
     XBA                                                        ;848BEC|EB      |      ;
@@ -1649,11 +1549,7 @@ fAIAction0x0C:
     LDA.L aAISetMask,X                                         ;848BF5|BFD39484|8494D3;
     AND.L $7F1F7A                                              ;848BF9|2F7A1F7F|7F1F7A;
     BEQ +                                                      ;848BFD|F00B    |848C0A;
-    REP #$30                                                   ;848BFF|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848C01|A5C9    |0000C9;
-    CLC                                                        ;848C03|18      |      ;
-    ADC.W #$0001                                               ;848C04|690100  |      ;
-    STA.B ptrAIActionData                                      ;848C07|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848C09|60      |      ;
  
  
@@ -1673,44 +1569,28 @@ fAIAction0x0C:
  
 fAIAction0x0D:
     REP #$30                                                   ;848C22|C230    |      ;
-    REP #$30                                                   ;848C24|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848C26|A5C9    |0000C9;
-    CLC                                                        ;848C28|18      |      ;
-    ADC.W #$0001                                               ;848C29|690100  |      ;
-    STA.B ptrAIActionData                                      ;848C2C|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848C2E|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C30|A7C9    |0000C9;
     SEP #$20                                                   ;848C32|E220    |      ;
     REP #$10                                                   ;848C34|C210    |      ;
     LDY.W #$0003                                               ;848C36|A00300  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848C39|97CC    |0000CC;
-    REP #$30                                                   ;848C3B|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848C3D|A5C9    |0000C9;
-    CLC                                                        ;848C3F|18      |      ;
-    ADC.W #$0001                                               ;848C40|690100  |      ;
-    STA.B ptrAIActionData                                      ;848C43|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848C45|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C47|A7C9    |0000C9;
     SEP #$20                                                   ;848C49|E220    |      ;
     REP #$10                                                   ;848C4B|C210    |      ;
     LDY.W #$0004                                               ;848C4D|A00400  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848C50|97CC    |0000CC;
-    REP #$30                                                   ;848C52|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848C54|A5C9    |0000C9;
-    CLC                                                        ;848C56|18      |      ;
-    ADC.W #$0001                                               ;848C57|690100  |      ;
-    STA.B ptrAIActionData                                      ;848C5A|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848C5C|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C5E|A7C9    |0000C9;
     SEP #$20                                                   ;848C60|E220    |      ;
     REP #$10                                                   ;848C62|C210    |      ;
     LDY.W #$0010                                               ;848C64|A01000  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848C67|97CC    |0000CC;
-    REP #$30                                                   ;848C69|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848C6B|A5C9    |0000C9;
-    CLC                                                        ;848C6D|18      |      ;
-    ADC.W #$0001                                               ;848C6E|690100  |      ;
-    STA.B ptrAIActionData                                      ;848C71|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848C73|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C75|A7C9    |0000C9;
     SEP #$20                                                   ;848C77|E220    |      ;
@@ -1730,37 +1610,21 @@ fAIAction0x0D:
     REP #$10                                                   ;848C96|C210    |      ;
     LDY.W #$0001                                               ;848C98|A00100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848C9B|97CC    |0000CC;
-    REP #$30                                                   ;848C9D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848C9F|A5C9    |0000C9;
-    CLC                                                        ;848CA1|18      |      ;
-    ADC.W #$0001                                               ;848CA2|690100  |      ;
-    STA.B ptrAIActionData                                      ;848CA5|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848CA7|60      |      ;
  
  
 fAIAction0x0E:
     REP #$30                                                   ;848CA8|C230    |      ;
-    REP #$30                                                   ;848CAA|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848CAC|A5C9    |0000C9;
-    CLC                                                        ;848CAE|18      |      ;
-    ADC.W #$0002                                               ;848CAF|690200  |      ;
-    STA.B ptrAIActionData                                      ;848CB2|85C9    |0000C9;
+    %AIMoveAction($0002)
     JSL.L fAudioUnknown_838401                                 ;848CB4|22018483|838401;
     RTS                                                        ;848CB8|60      |      ;
  
  
 fAIAction0x0F_ScreenFadeout:
     REP #$30                                                   ;848CB9|C230    |      ;
-    REP #$30                                                   ;848CBB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848CBD|A5C9    |0000C9;
-    CLC                                                        ;848CBF|18      |      ;
-    ADC.W #$0001                                               ;848CC0|690100  |      ;
-    STA.B ptrAIActionData                                      ;848CC3|85C9    |0000C9;
-    REP #$30                                                   ;848CC5|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848CC7|A5C9    |0000C9;
-    CLC                                                        ;848CC9|18      |      ;
-    ADC.W #$0001                                               ;848CCA|690100  |      ;
-    STA.B ptrAIActionData                                      ;848CCD|85C9    |0000C9;
+    %AIMoveAction($0001)
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848CCF|E220    |      ;
     LDA.B #$0F                                                 ;848CD1|A90F    |      ;
     STA.B n8TempVar1                                           ;848CD3|8592    |000092;
@@ -1790,25 +1654,14 @@ fAIAction0x10_End:
  
 fAIAction0x11_EnableUserControl:
     REP #$30                                                   ;848CFD|C230    |      ;
-    REP #$30                                                   ;848CFF|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D01|A5C9    |0000C9;
-    CLC                                                        ;848D03|18      |      ;
-    ADC.W #$0001                                               ;848D04|690100  |      ;
-    STA.B ptrAIActionData                                      ;848D07|85C9    |0000C9;
-    REP #$30                                                   ;848D09|C230    |      ;
-    LDA.B nPlayerFlags                                         ;848D0B|A5D2    |0000D2;
-    ORA.W #!PFLAGS_USERCONTROL                                               
-    STA.B nPlayerFlags                                         ;848D10|85D2    |0000D2;
+    %AIMoveAction($0001)
+    %SetPlayerFlag(!PFLAGS_USERCONTROL)
     RTS                                                        ;848D12|60      |      ;
  
  
 fAIAction0x12_AlwaysJump:
     REP #$30                                                   ;848D13|C230    |      ;
-    REP #$30                                                   ;848D15|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D17|A5C9    |0000C9;
-    CLC                                                        ;848D19|18      |      ;
-    ADC.W #$0001                                               ;848D1A|690100  |      ;
-    STA.B ptrAIActionData                                      ;848D1D|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848D1F|A7C9    |0000C9;
     STA.B ptrAIActionData                                      ;848D21|85C9    |0000C9;
     RTS                                                        ;848D23|60      |      ;
@@ -1816,46 +1669,26 @@ fAIAction0x12_AlwaysJump:
  
 fAIAction0x13_Wait:
     REP #$30                                                   ;848D24|C230    |      ;
-    REP #$30                                                   ;848D26|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D28|A5C9    |0000C9;
-    CLC                                                        ;848D2A|18      |      ;
-    ADC.W #$0001                                               ;848D2B|690100  |      ;
-    STA.B ptrAIActionData                                      ;848D2E|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848D30|A7C9    |0000C9;
     REP #$30                                                   ;848D32|C230    |      ;
     LDY.W #$0010                                               ;848D34|A01000  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848D37|97CC    |0000CC;
-    REP #$30                                                   ;848D39|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D3B|A5C9    |0000C9;
-    CLC                                                        ;848D3D|18      |      ;
-    ADC.W #$0002                                               ;848D3E|690200  |      ;
-    STA.B ptrAIActionData                                      ;848D41|85C9    |0000C9;
+    %AIMoveAction($0002)
     RTS                                                        ;848D43|60      |      ;
  
  
 fAIAction0x14_JumpIfFlagSet:
     REP #$30                                                   ;848D44|C230    |      ;
-    REP #$30                                                   ;848D46|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D48|A5C9    |0000C9;
-    CLC                                                        ;848D4A|18      |      ;
-    ADC.W #$0001                                               ;848D4B|690100  |      ;
-    STA.B ptrAIActionData                                      ;848D4E|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;848D50|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;848D52|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;848D54|8572    |000072;
-    REP #$30                                                   ;848D56|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D58|A5C9    |0000C9;
-    CLC                                                        ;848D5A|18      |      ;
-    ADC.W #$0002                                               ;848D5B|690200  |      ;
-    STA.B ptrAIActionData                                      ;848D5E|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;848D60|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848D62|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;848D64|8574    |000074;
-    REP #$30                                                   ;848D66|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D68|A5C9    |0000C9;
-    CLC                                                        ;848D6A|18      |      ;
-    ADC.W #$0001                                               ;848D6B|690100  |      ;
-    STA.B ptrAIActionData                                      ;848D6E|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848D70|E220    |      ;
     LDA.B #$00                                                 ;848D72|A900    |      ;
     XBA                                                        ;848D74|EB      |      ;
@@ -1865,11 +1698,7 @@ fAIAction0x14_JumpIfFlagSet:
     TAX                                                        ;848D7A|AA      |      ;
     LDA.L aAISetMask,X                                         ;848D7B|BFD39484|8494D3;
     STA.B n16TempVar1                                          ;848D7F|857E    |00007E;
-    REP #$30                                                   ;848D81|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D83|A5C9    |0000C9;
-    CLC                                                        ;848D85|18      |      ;
-    ADC.W #$0001                                               ;848D86|690100  |      ;
-    STA.B ptrAIActionData                                      ;848D89|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;848D8B|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848D8D|A772    |000072;
     AND.B n16TempVar1                                          ;848D8F|257E    |00007E;
@@ -1880,45 +1709,25 @@ fAIAction0x14_JumpIfFlagSet:
     RTS                                                        ;848D99|60      |      ;
  
  
-  + REP #$30                                                   ;848D9A|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848D9C|A5C9    |0000C9;
-    CLC                                                        ;848D9E|18      |      ;
-    ADC.W #$0002                                               ;848D9F|690200  |      ;
-    STA.B ptrAIActionData                                      ;848DA2|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;848DA4|60      |      ;
  
  
 fAIAction0x15_JumpIfEquals8:
     REP #$30                                                   ;848DA5|C230    |      ;
-    REP #$30                                                   ;848DA7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848DA9|A5C9    |0000C9;
-    CLC                                                        ;848DAB|18      |      ;
-    ADC.W #$0001                                               ;848DAC|690100  |      ;
-    STA.B ptrAIActionData                                      ;848DAF|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;848DB1|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;848DB3|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;848DB5|8572    |000072;
-    REP #$30                                                   ;848DB7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848DB9|A5C9    |0000C9;
-    CLC                                                        ;848DBB|18      |      ;
-    ADC.W #$0002                                               ;848DBC|690200  |      ;
-    STA.B ptrAIActionData                                      ;848DBF|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;848DC1|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848DC3|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;848DC5|8574    |000074;
-    REP #$30                                                   ;848DC7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848DC9|A5C9    |0000C9;
-    CLC                                                        ;848DCB|18      |      ;
-    ADC.W #$0001                                               ;848DCC|690100  |      ;
-    STA.B ptrAIActionData                                      ;848DCF|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848DD1|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848DD3|A7C9    |0000C9;
     STA.B n8TempVar1                                           ;848DD5|8592    |000092;
-    REP #$30                                                   ;848DD7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848DD9|A5C9    |0000C9;
-    CLC                                                        ;848DDB|18      |      ;
-    ADC.W #$0001                                               ;848DDC|690100  |      ;
-    STA.B ptrAIActionData                                      ;848DDF|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848DE1|E220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848DE3|A772    |000072;
     CMP.B n8TempVar1                                           ;848DE5|C592    |000092;
@@ -1929,54 +1738,30 @@ fAIAction0x15_JumpIfEquals8:
     RTS                                                        ;848DEF|60      |      ;
  
  
-  + REP #$30                                                   ;848DF0|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848DF2|A5C9    |0000C9;
-    CLC                                                        ;848DF4|18      |      ;
-    ADC.W #$0002                                               ;848DF5|690200  |      ;
-    STA.B ptrAIActionData                                      ;848DF8|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;848DFA|60      |      ;
  
  
 fAIAction0x16_JumpIfBetween8:
     REP #$30                                                   ;848DFB|C230    |      ;
-    REP #$30                                                   ;848DFD|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848DFF|A5C9    |0000C9;
-    CLC                                                        ;848E01|18      |      ;
-    ADC.W #$0001                                               ;848E02|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E05|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;848E07|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;848E09|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;848E0B|8572    |000072;
-    REP #$30                                                   ;848E0D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E0F|A5C9    |0000C9;
-    CLC                                                        ;848E11|18      |      ;
-    ADC.W #$0002                                               ;848E12|690200  |      ;
-    STA.B ptrAIActionData                                      ;848E15|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;848E17|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848E19|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;848E1B|8574    |000074;
-    REP #$30                                                   ;848E1D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E1F|A5C9    |0000C9;
-    CLC                                                        ;848E21|18      |      ;
-    ADC.W #$0001                                               ;848E22|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E25|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848E27|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848E29|A7C9    |0000C9;
     STA.B n8TempVar1                                           ;848E2B|8592    |000092;
-    REP #$30                                                   ;848E2D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E2F|A5C9    |0000C9;
-    CLC                                                        ;848E31|18      |      ;
-    ADC.W #$0001                                               ;848E32|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E35|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848E37|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848E39|A7C9    |0000C9;
     INC A                                                      ;848E3B|1A      |      ;
     STA.B n8TempVar2                                           ;848E3C|8593    |000093;
-    REP #$30                                                   ;848E3E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E40|A5C9    |0000C9;
-    CLC                                                        ;848E42|18      |      ;
-    ADC.W #$0001                                               ;848E43|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E46|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848E48|E220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;848E4A|A772    |000072;
     CMP.B n8TempVar1                                           ;848E4C|C592    |000092;
@@ -1990,21 +1775,13 @@ fAIAction0x16_JumpIfBetween8:
     RTS                                                        ;848E5C|60      |      ;
  
  
-  + REP #$30                                                   ;848E5D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E5F|A5C9    |0000C9;
-    CLC                                                        ;848E61|18      |      ;
-    ADC.W #$0002                                               ;848E62|690200  |      ;
-    STA.B ptrAIActionData                                      ;848E65|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;848E67|60      |      ;
  
  
 fAIAction0x17:
     REP #$30                                                   ;848E68|C230    |      ;
-    REP #$30                                                   ;848E6A|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E6C|A5C9    |0000C9;
-    CLC                                                        ;848E6E|18      |      ;
-    ADC.W #$0001                                               ;848E6F|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E72|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848E74|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848E76|A7C9    |0000C9;
     JSL.L fCore_GetRandomNumber                                ;848E78|22F98980|8089F9;
@@ -2012,21 +1789,13 @@ fAIAction0x17:
     REP #$10                                                   ;848E7E|C210    |      ;
     LDY.W #$000D                                               ;848E80|A00D00  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848E83|97CC    |0000CC;
-    REP #$30                                                   ;848E85|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E87|A5C9    |0000C9;
-    CLC                                                        ;848E89|18      |      ;
-    ADC.W #$0001                                               ;848E8A|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E8D|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;848E8F|60      |      ;
  
  
 fAIAction0x18:
     REP #$30                                                   ;848E90|C230    |      ;
-    REP #$30                                                   ;848E92|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848E94|A5C9    |0000C9;
-    CLC                                                        ;848E96|18      |      ;
-    ADC.W #$0001                                               ;848E97|690100  |      ;
-    STA.B ptrAIActionData                                      ;848E9A|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848E9C|A7C9    |0000C9;
     STA.B n8TempVar1                                           ;848E9E|8592    |000092;
     SEP #$20                                                   ;848EA0|E220    |      ;
@@ -2035,39 +1804,23 @@ fAIAction0x18:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848EA7|B7CC    |0000CC;
     CMP.B n8TempVar1                                           ;848EA9|C592    |000092;
     BNE +                                                      ;848EAB|D011    |848EBE;
-    REP #$30                                                   ;848EAD|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848EAF|A5C9    |0000C9;
-    CLC                                                        ;848EB1|18      |      ;
-    ADC.W #$0001                                               ;848EB2|690100  |      ;
-    STA.B ptrAIActionData                                      ;848EB5|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;848EB7|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;848EB9|A7C9    |0000C9;
     STA.B ptrAIActionData                                      ;848EBB|85C9    |0000C9;
     RTS                                                        ;848EBD|60      |      ;
  
  
-  + REP #$30                                                   ;848EBE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848EC0|A5C9    |0000C9;
-    CLC                                                        ;848EC2|18      |      ;
-    ADC.W #$0003                                               ;848EC3|690300  |      ;
-    STA.B ptrAIActionData                                      ;848EC6|85C9    |0000C9;
+  + %AIMoveAction($0003)
     RTS                                                        ;848EC8|60      |      ;
  
  
 fAIAction0x19:
     REP #$30                                                   ;848EC9|C230    |      ;
-    REP #$30                                                   ;848ECB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848ECD|A5C9    |0000C9;
-    CLC                                                        ;848ECF|18      |      ;
-    ADC.W #$0001                                               ;848ED0|690100  |      ;
-    STA.B ptrAIActionData                                      ;848ED3|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848ED5|A7C9    |0000C9;
     STA.W nSmallItemSpriteIndex                                ;848ED7|8D0109  |000901;
-    REP #$30                                                   ;848EDA|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848EDC|A5C9    |0000C9;
-    CLC                                                        ;848EDE|18      |      ;
-    ADC.W #$0002                                               ;848EDF|690200  |      ;
-    STA.B ptrAIActionData                                      ;848EE2|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;848EE4|E220    |      ;
     LDA.B #$00                                                 ;848EE6|A900    |      ;
     XBA                                                        ;848EE8|EB      |      ;
@@ -2080,63 +1833,36 @@ fAIAction0x19:
     ASL A                                                      ;848EF1|0A      |      ;
     ASL A                                                      ;848EF2|0A      |      ;
     STA.W $090F                                                ;848EF3|8D0F09  |00090F;
-    REP #$30                                                   ;848EF6|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848EF8|A5C9    |0000C9;
-    CLC                                                        ;848EFA|18      |      ;
-    ADC.W #$0001                                               ;848EFB|690100  |      ;
-    STA.B ptrAIActionData                                      ;848EFE|85C9    |0000C9;
-    REP #$30                                                   ;848F00|C230    |      ;
-    LDA.B nPlayerFlags                                         ;848F02|A5D2    |0000D2;
-    ORA.W #$2000                                               ;848F04|090020  |      ;
-    STA.B nPlayerFlags                                         ;848F07|85D2    |0000D2;
+    %AIMoveAction($0001)
+    %SetPlayerFlag(!PFLAGS_KNEEING)
     RTS                                                        ;848F09|60      |      ;
  
  
 fAIAction0x1A:
     REP #$30                                                   ;848F0A|C230    |      ;
-    REP #$30                                                   ;848F0C|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848F0E|A5C9    |0000C9;
-    CLC                                                        ;848F10|18      |      ;
-    ADC.W #$0001                                               ;848F11|690100  |      ;
-    STA.B ptrAIActionData                                      ;848F14|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848F16|A7C9    |0000C9;
     REP #$30                                                   ;848F18|C230    |      ;
     LDY.W #$001A                                               ;848F1A|A01A00  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848F1D|97CC    |0000CC;
-    REP #$30                                                   ;848F1F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848F21|A5C9    |0000C9;
-    CLC                                                        ;848F23|18      |      ;
-    ADC.W #$0002                                               ;848F24|690200  |      ;
-    STA.B ptrAIActionData                                      ;848F27|85C9    |0000C9;
+    %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;848F29|A7C9    |0000C9;
     REP #$30                                                   ;848F2B|C230    |      ;
     LDY.W #$001C                                               ;848F2D|A01C00  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848F30|97CC    |0000CC;
-    REP #$30                                                   ;848F32|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848F34|A5C9    |0000C9;
-    CLC                                                        ;848F36|18      |      ;
-    ADC.W #$0002                                               ;848F37|690200  |      ;
-    STA.B ptrAIActionData                                      ;848F3A|85C9    |0000C9;
+    %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;848F3C|A7C9    |0000C9;
     REP #$30                                                   ;848F3E|C230    |      ;
     LDY.W #$0033                                               ;848F40|A03300  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848F43|97CC    |0000CC;
-    REP #$30                                                   ;848F45|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848F47|A5C9    |0000C9;
-    CLC                                                        ;848F49|18      |      ;
-    ADC.W #$0002                                               ;848F4A|690200  |      ;
-    STA.B ptrAIActionData                                      ;848F4D|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;848F4F|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848F51|A7C9    |0000C9;
     SEP #$20                                                   ;848F53|E220    |      ;
     REP #$10                                                   ;848F55|C210    |      ;
     LDY.W #$0002                                               ;848F57|A00200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848F5A|97CC    |0000CC;
-    REP #$30                                                   ;848F5C|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848F5E|A5C9    |0000C9;
-    CLC                                                        ;848F60|18      |      ;
-    ADC.W #$0001                                               ;848F61|690100  |      ;
-    STA.B ptrAIActionData                                      ;848F64|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848F66|E220    |      ;
     REP #$10                                                   ;848F68|C210    |      ;
     LDY.W #$0001                                               ;848F6A|A00100  |      ;
@@ -2165,20 +1891,12 @@ fAIAction0x1A:
  
 fAIAction0x1B:
     REP #$30                                                   ;848F9B|C230    |      ;
-    REP #$30                                                   ;848F9D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848F9F|A5C9    |0000C9;
-    CLC                                                        ;848FA1|18      |      ;
-    ADC.W #$0001                                               ;848FA2|690100  |      ;
-    STA.B ptrAIActionData                                      ;848FA5|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848FA7|A7C9    |0000C9;
     REP #$30                                                   ;848FA9|C230    |      ;
     LDY.W #$0016                                               ;848FAB|A01600  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848FAE|97CC    |0000CC;
-    REP #$30                                                   ;848FB0|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848FB2|A5C9    |0000C9;
-    CLC                                                        ;848FB4|18      |      ;
-    ADC.W #$0002                                               ;848FB5|690200  |      ;
-    STA.B ptrAIActionData                                      ;848FB8|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;848FBA|E220    |      ;
     LDA.B #$00                                                 ;848FBC|A900    |      ;
     XBA                                                        ;848FBE|EB      |      ;
@@ -2193,11 +1911,7 @@ fAIAction0x1B:
     REP #$30                                                   ;848FC9|C230    |      ;
     LDY.W #$0014                                               ;848FCB|A01400  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848FCE|97CC    |0000CC;
-    REP #$30                                                   ;848FD0|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848FD2|A5C9    |0000C9;
-    CLC                                                        ;848FD4|18      |      ;
-    ADC.W #$0001                                               ;848FD5|690100  |      ;
-    STA.B ptrAIActionData                                      ;848FD8|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;848FDA|E220    |      ;
     REP #$10                                                   ;848FDC|C210    |      ;
     LDY.W #$0001                                               ;848FDE|A00100  |      ;
@@ -2212,19 +1926,11 @@ fAIAction0x1B:
  
 fAIAction0x1C_ShowDialog:
     REP #$30                                                   ;848FEF|C230    |      ;
-    REP #$30                                                   ;848FF1|C230    |      ;
-    LDA.B ptrAIActionData                                      ;848FF3|A5C9    |0000C9;
-    CLC                                                        ;848FF5|18      |      ;
-    ADC.W #$0001                                               ;848FF6|690100  |      ;
-    STA.B ptrAIActionData                                      ;848FF9|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;848FFB|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;848FFD|A7C9    |0000C9;
     TAX                                                        ;848FFF|AA      |      ;
-    REP #$30                                                   ;849000|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849002|A5C9    |0000C9;
-    CLC                                                        ;849004|18      |      ;
-    ADC.W #$0002                                               ;849005|690200  |      ;
-    STA.B ptrAIActionData                                      ;849008|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84900A|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84900C|A7C9    |0000C9;
     STA.W $0191                                                ;84900E|8D9101  |000191;
@@ -2232,11 +1938,7 @@ fAIAction0x1C_ShowDialog:
     LDA.B #$02                                                 ;849013|A902    |      ;
     STA.W $019A                                                ;849015|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;849018|225F9383|83935F;
-    REP #$30                                                   ;84901C|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84901E|A5C9    |0000C9;
-    CLC                                                        ;849020|18      |      ;
-    ADC.W #$0001                                               ;849021|690100  |      ;
-    STA.B ptrAIActionData                                      ;849024|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;849026|C230    |      ;
     LDY.W #$0010                                               ;849028|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84902B|B7CC    |0000CC;
@@ -2248,19 +1950,11 @@ fAIAction0x1C_ShowDialog:
  
 fAIAction0x1D_ShowDialog:
     REP #$30                                                   ;849034|C230    |      ;
-    REP #$30                                                   ;849036|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849038|A5C9    |0000C9;
-    CLC                                                        ;84903A|18      |      ;
-    ADC.W #$0001                                               ;84903B|690100  |      ;
-    STA.B ptrAIActionData                                      ;84903E|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;849040|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849042|A7C9    |0000C9;
     TAX                                                        ;849044|AA      |      ;
-    REP #$30                                                   ;849045|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849047|A5C9    |0000C9;
-    CLC                                                        ;849049|18      |      ;
-    ADC.W #$0002                                               ;84904A|690200  |      ;
-    STA.B ptrAIActionData                                      ;84904D|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84904F|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849051|A7C9    |0000C9;
     STA.W $0191                                                ;849053|8D9101  |000191;
@@ -2268,11 +1962,7 @@ fAIAction0x1D_ShowDialog:
     LDA.B #$02                                                 ;849058|A902    |      ;
     STA.W $019A                                                ;84905A|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84905D|225F9383|83935F;
-    REP #$30                                                   ;849061|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849063|A5C9    |0000C9;
-    CLC                                                        ;849065|18      |      ;
-    ADC.W #$0001                                               ;849066|690100  |      ;
-    STA.B ptrAIActionData                                      ;849069|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;84906B|C230    |      ;
     LDY.W #$0010                                               ;84906D|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849070|B7CC    |0000CC;
@@ -2284,11 +1974,7 @@ fAIAction0x1D_ShowDialog:
  
 fAIAction0x1F:
     REP #$30                                                   ;849079|C230    |      ;
-    REP #$30                                                   ;84907B|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84907D|A5C9    |0000C9;
-    CLC                                                        ;84907F|18      |      ;
-    ADC.W #$0001                                               ;849080|690100  |      ;
-    STA.B ptrAIActionData                                      ;849083|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849085|E220    |      ;
     REP #$10                                                   ;849087|C210    |      ;
     LDY.W #$000C                                               ;849089|A00C00  |      ;
@@ -2327,8 +2013,7 @@ fAIAction0x1F:
  
  
   + REP #$20                                                   ;8490C5|C220    |      ;
-    LDA.B nPlayerFlags                                         ;8490C7|A5D2    |0000D2;
-    AND.W #$0004                                               ;8490C9|290400  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;8490CC|F003    |8490D1;
     JMP.W .return                                              ;8490CE|4C8591  |849185;
  
@@ -2402,13 +2087,8 @@ fAIAction0x1F:
     STA.W nPlayerInteractionIndex                              ;84915E|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;849161|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;849164|9C7009  |000970;
-    REP #$30                                                   ;849167|C230    |      ;
-    LDA.B nPlayerFlags                                         ;849169|A5D2    |0000D2;
-    ORA.W #$0040                                               ;84916B|094000  |      ;
-    STA.B nPlayerFlags                                         ;84916E|85D2    |0000D2;
-    REP #$30                                                   ;849170|C230    |      ;
-    LDA.W #$0000                                               ;849172|A90000  |      ;
-    STA.B nPlayerAction                                        ;849175|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;849177|C230    |      ;
     LDY.W #$0010                                               ;849179|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84917C|B7CC    |0000CC;
@@ -2419,11 +2099,7 @@ fAIAction0x1F:
  
  
 .return:
-    REP #$30                                                   ;849185|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849187|A5C9    |0000C9;
-    CLC                                                        ;849189|18      |      ;
-    ADC.W #$0002                                               ;84918A|690200  |      ;
-    STA.B ptrAIActionData                                      ;84918D|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$30                                                   ;84918F|C230    |      ;
     LDY.W #$0010                                               ;849191|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849194|B7CC    |0000CC;
@@ -2435,59 +2111,35 @@ fAIAction0x1F:
  
 fAIAction0x20_JumpIfChoice:
     REP #$30                                                   ;84919D|C230    |      ;
-    REP #$30                                                   ;84919F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8491A1|A5C9    |0000C9;
-    CLC                                                        ;8491A3|18      |      ;
-    ADC.W #$0001                                               ;8491A4|690100  |      ;
-    STA.B ptrAIActionData                                      ;8491A7|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8491A9|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491AB|A7C9    |0000C9;
     STA.B n8TempVar1                                           ;8491AD|8592    |000092;
     LDA.W nSelectedDialogOption                                ;8491AF|AD8F01  |00018F;
     CMP.B n8TempVar1                                           ;8491B2|C592    |000092;
     BNE +                                                      ;8491B4|D011    |8491C7;
-    REP #$30                                                   ;8491B6|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8491B8|A5C9    |0000C9;
-    CLC                                                        ;8491BA|18      |      ;
-    ADC.W #$0001                                               ;8491BB|690100  |      ;
-    STA.B ptrAIActionData                                      ;8491BE|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;8491C0|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491C2|A7C9    |0000C9;
     STA.B ptrAIActionData                                      ;8491C4|85C9    |0000C9;
     RTS                                                        ;8491C6|60      |      ;
  
  
-  + REP #$30                                                   ;8491C7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8491C9|A5C9    |0000C9;
-    CLC                                                        ;8491CB|18      |      ;
-    ADC.W #$0003                                               ;8491CC|690300  |      ;
-    STA.B ptrAIActionData                                      ;8491CF|85C9    |0000C9;
+  + %AIMoveAction($0003)
     RTS                                                        ;8491D1|60      |      ;
  
  
 fAIAction0x21_AddValue8:
     REP #$30                                                   ;8491D2|C230    |      ;
-    REP #$30                                                   ;8491D4|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8491D6|A5C9    |0000C9;
-    CLC                                                        ;8491D8|18      |      ;
-    ADC.W #$0001                                               ;8491D9|690100  |      ;
-    STA.B ptrAIActionData                                      ;8491DC|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;8491DE|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491E0|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;8491E2|8572    |000072;
-    REP #$30                                                   ;8491E4|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8491E6|A5C9    |0000C9;
-    CLC                                                        ;8491E8|18      |      ;
-    ADC.W #$0002                                               ;8491E9|690200  |      ;
-    STA.B ptrAIActionData                                      ;8491EC|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;8491EE|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491F0|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;8491F2|8574    |000074;
-    REP #$30                                                   ;8491F4|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8491F6|A5C9    |0000C9;
-    CLC                                                        ;8491F8|18      |      ;
-    ADC.W #$0001                                               ;8491F9|690100  |      ;
-    STA.B ptrAIActionData                                      ;8491FC|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8491FE|E220    |      ;
     LDA.B #$00                                                 ;849200|A900    |      ;
     XBA                                                        ;849202|EB      |      ;
@@ -2499,11 +2151,7 @@ fAIAction0x21_AddValue8:
  
   + REP #$20                                                   ;84920B|C220    |      ;
     STA.B n16TempVar1                                          ;84920D|857E    |00007E;
-    REP #$30                                                   ;84920F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849211|A5C9    |0000C9;
-    CLC                                                        ;849213|18      |      ;
-    ADC.W #$0001                                               ;849214|690100  |      ;
-    STA.B ptrAIActionData                                      ;849217|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849219|E220    |      ;
     LDA.B #$00                                                 ;84921B|A900    |      ;
     XBA                                                        ;84921D|EB      |      ;
@@ -2532,33 +2180,21 @@ fAIAction0x21_AddValue8:
  
 fAIAction0x22:
     REP #$30                                                   ;84923F|C230    |      ;
-    REP #$30                                                   ;849241|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849243|A5C9    |0000C9;
-    CLC                                                        ;849245|18      |      ;
-    ADC.W #$0001                                               ;849246|690100  |      ;
-    STA.B ptrAIActionData                                      ;849249|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84924B|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84924D|A7C9    |0000C9;
     SEP #$20                                                   ;84924F|E220    |      ;
     REP #$10                                                   ;849251|C210    |      ;
     LDY.W #$0009                                               ;849253|A00900  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;849256|97CC    |0000CC;
-    REP #$30                                                   ;849258|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84925A|A5C9    |0000C9;
-    CLC                                                        ;84925C|18      |      ;
-    ADC.W #$0001                                               ;84925D|690100  |      ;
-    STA.B ptrAIActionData                                      ;849260|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849262|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849264|A7C9    |0000C9;
     SEP #$20                                                   ;849266|E220    |      ;
     REP #$10                                                   ;849268|C210    |      ;
     LDY.W #$000A                                               ;84926A|A00A00  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84926D|97CC    |0000CC;
-    REP #$30                                                   ;84926F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849271|A5C9    |0000C9;
-    CLC                                                        ;849273|18      |      ;
-    ADC.W #$0001                                               ;849274|690100  |      ;
-    STA.B ptrAIActionData                                      ;849277|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849279|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84927B|A7C9    |0000C9;
     SEP #$20                                                   ;84927D|E220    |      ;
@@ -2573,20 +2209,12 @@ fAIAction0x22:
     REP #$10                                                   ;849291|C210    |      ;
     LDY.W #$0006                                               ;849293|A00600  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;849296|97CC    |0000CC;
-    REP #$30                                                   ;849298|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84929A|A5C9    |0000C9;
-    CLC                                                        ;84929C|18      |      ;
-    ADC.W #$0001                                               ;84929D|690100  |      ;
-    STA.B ptrAIActionData                                      ;8492A0|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;8492A2|A7C9    |0000C9;
     REP #$30                                                   ;8492A4|C230    |      ;
     LDY.W #$0036                                               ;8492A6|A03600  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8492A9|97CC    |0000CC;
-    REP #$30                                                   ;8492AB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8492AD|A5C9    |0000C9;
-    CLC                                                        ;8492AF|18      |      ;
-    ADC.W #$0002                                               ;8492B0|690200  |      ;
-    STA.B ptrAIActionData                                      ;8492B3|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;8492B5|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8492B7|A7C9    |0000C9;
     SEP #$20                                                   ;8492B9|E220    |      ;
@@ -2597,11 +2225,7 @@ fAIAction0x22:
     REP #$10                                                   ;8492C4|C210    |      ;
     LDY.W #$0008                                               ;8492C6|A00800  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8492C9|97CC    |0000CC;
-    REP #$30                                                   ;8492CB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8492CD|A5C9    |0000C9;
-    CLC                                                        ;8492CF|18      |      ;
-    ADC.W #$0001                                               ;8492D0|690100  |      ;
-    STA.B ptrAIActionData                                      ;8492D3|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8492D5|E220    |      ;
     REP #$10                                                   ;8492D7|C210    |      ;
     LDY.W #$0001                                               ;8492D9|A00100  |      ;
@@ -2628,27 +2252,15 @@ fAIAction0x22:
  
 fAIAction0x23_OrWithIndexedValue:
     REP #$30                                                   ;849306|C230    |      ;
-    REP #$30                                                   ;849308|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84930A|A5C9    |0000C9;
-    CLC                                                        ;84930C|18      |      ;
-    ADC.W #$0001                                               ;84930D|690100  |      ;
-    STA.B ptrAIActionData                                      ;849310|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;849312|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849314|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;849316|8572    |000072;
-    REP #$30                                                   ;849318|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84931A|A5C9    |0000C9;
-    CLC                                                        ;84931C|18      |      ;
-    ADC.W #$0002                                               ;84931D|690200  |      ;
-    STA.B ptrAIActionData                                      ;849320|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;849322|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849324|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;849326|8574    |000074;
-    REP #$30                                                   ;849328|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84932A|A5C9    |0000C9;
-    CLC                                                        ;84932C|18      |      ;
-    ADC.W #$0001                                               ;84932D|690100  |      ;
-    STA.B ptrAIActionData                                      ;849330|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849332|E220    |      ;
     LDA.B #$00                                                 ;849334|A900    |      ;
     XBA                                                        ;849336|EB      |      ;
@@ -2662,39 +2274,23 @@ fAIAction0x23_OrWithIndexedValue:
     LDA.B [ptrUnknown0x72]                                     ;849345|A772    |000072;
     ORA.B n16TempVar1                                          ;849347|057E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;849349|8772    |000072;
-    REP #$30                                                   ;84934B|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84934D|A5C9    |0000C9;
-    CLC                                                        ;84934F|18      |      ;
-    ADC.W #$0001                                               ;849350|690100  |      ;
-    STA.B ptrAIActionData                                      ;849353|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;849355|60      |      ;
  
  
 fAIAction0x24_NextHourPalette:
     REP #$30                                                   ;849356|C230    |      ;
-    REP #$30                                                   ;849358|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84935A|A5C9    |0000C9;
-    CLC                                                        ;84935C|18      |      ;
-    ADC.W #$0001                                               ;84935D|690100  |      ;
-    STA.B ptrAIActionData                                      ;849360|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849362|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849364|A7C9    |0000C9;
     JSL.L fPalette_Unknown808FC7                               ;849366|22C78F80|808FC7;
-    REP #$30                                                   ;84936A|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84936C|A5C9    |0000C9;
-    CLC                                                        ;84936E|18      |      ;
-    ADC.W #$0001                                               ;84936F|690100  |      ;
-    STA.B ptrAIActionData                                      ;849372|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;849374|60      |      ;
  
  
 fAIAction0x25:
     REP #$30                                                   ;849375|C230    |      ;
-    REP #$30                                                   ;849377|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849379|A5C9    |0000C9;
-    CLC                                                        ;84937B|18      |      ;
-    ADC.W #$0001                                               ;84937C|690100  |      ;
-    STA.B ptrAIActionData                                      ;84937F|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B ptrAIUnknown0xCC                                     ;849381|A5CC    |0000CC;
     STA.B ptrUnknown0x72                                       ;849383|8572    |000072;
     SEP #$20                                                   ;849385|E220    |      ;
@@ -2706,11 +2302,7 @@ fAIAction0x25:
     LDA.B [ptrAIActionData]                                    ;849390|A7C9    |0000C9;
     REP #$20                                                   ;849392|C220    |      ;
     JSL.L fAI_SetCCPointer                                     ;849394|227C8884|84887C;
-    REP #$30                                                   ;849398|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84939A|A5C9    |0000C9;
-    CLC                                                        ;84939C|18      |      ;
-    ADC.W #$0001                                               ;84939D|690100  |      ;
-    STA.B ptrAIActionData                                      ;8493A0|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;8493A2|C230    |      ;
     SEP #$20                                                   ;8493A4|E220    |      ;
     REP #$10                                                   ;8493A6|C210    |      ;
@@ -2720,7 +2312,7 @@ fAIAction0x25:
     REP #$30                                                   ;8493AF|C230    |      ;
     LDY.W #$0012                                               ;8493B1|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8493B4|B7CC    |0000CC;
-    STA.B $A5                                                  ;8493B6|85A5    |0000A5;
+    STA.B strcSingleObjectData.gameObjectIdx                   ;8493B6|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;8493B8|22A28185|8581A2;
     REP #$20                                                   ;8493BC|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;8493BE|A572    |000072;
@@ -2733,27 +2325,15 @@ fAIAction0x25:
  
 fAIAction0x28:
     REP #$30                                                   ;8493C9|C230    |      ;
-    REP #$30                                                   ;8493CB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8493CD|A5C9    |0000C9;
-    CLC                                                        ;8493CF|18      |      ;
-    ADC.W #$0001                                               ;8493D0|690100  |      ;
-    STA.B ptrAIActionData                                      ;8493D3|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;8493D5|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;8493D7|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;8493D9|8572    |000072;
-    REP #$30                                                   ;8493DB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8493DD|A5C9    |0000C9;
-    CLC                                                        ;8493DF|18      |      ;
-    ADC.W #$0002                                               ;8493E0|690200  |      ;
-    STA.B ptrAIActionData                                      ;8493E3|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;8493E5|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8493E7|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;8493E9|8574    |000074;
-    REP #$30                                                   ;8493EB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8493ED|A5C9    |0000C9;
-    CLC                                                        ;8493EF|18      |      ;
-    ADC.W #$0001                                               ;8493F0|690100  |      ;
-    STA.B ptrAIActionData                                      ;8493F3|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8493F5|E220    |      ;
     LDA.B #$00                                                 ;8493F7|A900    |      ;
     XBA                                                        ;8493F9|EB      |      ;
@@ -2767,11 +2347,7 @@ fAIAction0x28:
     LDA.B [ptrUnknown0x72]                                     ;849408|A772    |000072;
     AND.B n16TempVar1                                          ;84940A|257E    |00007E;
     STA.B [ptrUnknown0x72]                                     ;84940C|8772    |000072;
-    REP #$30                                                   ;84940E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849410|A5C9    |0000C9;
-    CLC                                                        ;849412|18      |      ;
-    ADC.W #$0001                                               ;849413|690100  |      ;
-    STA.B ptrAIActionData                                      ;849416|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;849418|60      |      ;
  
  
@@ -2883,52 +2459,28 @@ aAIResetMask:
  
 fAIAction0x29_SetMapScrooling:
     REP #$30                                                   ;849513|C230    |      ;
-    REP #$30                                                   ;849515|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849517|A5C9    |0000C9;
-    CLC                                                        ;849519|18      |      ;
-    ADC.W #$0001                                               ;84951A|690100  |      ;
-    STA.B ptrAIActionData                                      ;84951D|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84951F|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849521|A7C9    |0000C9;
     STA.W nMapScrool_SpeedX                                    ;849523|8D7C08  |00087C;
-    REP #$30                                                   ;849526|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849528|A5C9    |0000C9;
-    CLC                                                        ;84952A|18      |      ;
-    ADC.W #$0002                                               ;84952B|690200  |      ;
-    STA.B ptrAIActionData                                      ;84952E|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$20                                                   ;849530|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849532|A7C9    |0000C9;
     STA.W nMapScrool_SpeedY                                    ;849534|8D7E08  |00087E;
-    REP #$30                                                   ;849537|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849539|A5C9    |0000C9;
-    CLC                                                        ;84953B|18      |      ;
-    ADC.W #$0002                                               ;84953C|690200  |      ;
-    STA.B ptrAIActionData                                      ;84953F|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;849541|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849543|A7C9    |0000C9;
     STA.W nMapScrool_Timer                                     ;849545|8D8008  |000880;
-    REP #$30                                                   ;849548|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84954A|A5C9    |0000C9;
-    CLC                                                        ;84954C|18      |      ;
-    ADC.W #$0001                                               ;84954D|690100  |      ;
-    STA.B ptrAIActionData                                      ;849550|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;849552|60      |      ;
  
  
 fAIAction0x2A:
     REP #$30                                                   ;849553|C230    |      ;
-    REP #$30                                                   ;849555|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849557|A5C9    |0000C9;
-    CLC                                                        ;849559|18      |      ;
-    ADC.W #$0001                                               ;84955A|690100  |      ;
-    STA.B ptrAIActionData                                      ;84955D|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84955F|A7C9    |0000C9;
     JSL.L fUnknownCF_SetPointer                                ;849561|22E1A581|81A5E1;
-    REP #$30                                                   ;849565|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849567|A5C9    |0000C9;
-    CLC                                                        ;849569|18      |      ;
-    ADC.W #$0002                                               ;84956A|690200  |      ;
-    STA.B ptrAIActionData                                      ;84956D|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$30                                                   ;84956F|C230    |      ;
     LDY.W #$0010                                               ;849571|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849574|B7CC    |0000CC;
@@ -2940,31 +2492,19 @@ fAIAction0x2A:
  
 fAIAction0x2B:
     REP #$30                                                   ;84957D|C230    |      ;
-    REP #$30                                                   ;84957F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849581|A5C9    |0000C9;
-    CLC                                                        ;849583|18      |      ;
-    ADC.W #$0001                                               ;849584|690100  |      ;
-    STA.B ptrAIActionData                                      ;849587|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;849589|A7C9    |0000C9;
     REP #$30                                                   ;84958B|C230    |      ;
     LDY.W #$0033                                               ;84958D|A03300  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;849590|97CC    |0000CC;
-    REP #$30                                                   ;849592|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849594|A5C9    |0000C9;
-    CLC                                                        ;849596|18      |      ;
-    ADC.W #$0002                                               ;849597|690200  |      ;
-    STA.B ptrAIActionData                                      ;84959A|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84959C|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84959E|A7C9    |0000C9;
     SEP #$20                                                   ;8495A0|E220    |      ;
     REP #$10                                                   ;8495A2|C210    |      ;
     LDY.W #$0002                                               ;8495A4|A00200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8495A7|97CC    |0000CC;
-    REP #$30                                                   ;8495A9|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8495AB|A5C9    |0000C9;
-    CLC                                                        ;8495AD|18      |      ;
-    ADC.W #$0001                                               ;8495AE|690100  |      ;
-    STA.B ptrAIActionData                                      ;8495B1|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8495B3|E220    |      ;
     REP #$10                                                   ;8495B5|C210    |      ;
     LDY.W #$0001                                               ;8495B7|A00100  |      ;
@@ -2993,27 +2533,15 @@ fAIAction0x2B:
  
 fAIAction0x2C:
     REP #$30                                                   ;8495E8|C230    |      ;
-    REP #$30                                                   ;8495EA|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8495EC|A5C9    |0000C9;
-    CLC                                                        ;8495EE|18      |      ;
-    ADC.W #$0001                                               ;8495EF|690100  |      ;
-    STA.B ptrAIActionData                                      ;8495F2|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8495F4|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8495F6|A7C9    |0000C9;
     PHA                                                        ;8495F8|48      |      ;
-    REP #$30                                                   ;8495F9|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8495FB|A5C9    |0000C9;
-    CLC                                                        ;8495FD|18      |      ;
-    ADC.W #$0001                                               ;8495FE|690100  |      ;
-    STA.B ptrAIActionData                                      ;849601|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;849603|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849605|A7C9    |0000C9;
     PHA                                                        ;849607|48      |      ;
-    REP #$30                                                   ;849608|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84960A|A5C9    |0000C9;
-    CLC                                                        ;84960C|18      |      ;
-    ADC.W #$0002                                               ;84960D|690200  |      ;
-    STA.B ptrAIActionData                                      ;849610|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$20                                                   ;849612|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849614|A7C9    |0000C9;
     TAY                                                        ;849616|A8      |      ;
@@ -3023,22 +2551,14 @@ fAIAction0x2C:
     JSL.L fAudioUnknown_8382FE                                 ;84961B|22FE8283|8382FE;
     SEP #$20                                                   ;84961F|E220    |      ;
     STZ.W $0119                                                ;849621|9C1901  |000119;
-    JSL.L fToolUsed_SoundUnknown828FF3                         ;849624|22F38F82|828FF3;
-    REP #$30                                                   ;849628|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84962A|A5C9    |0000C9;
-    CLC                                                        ;84962C|18      |      ;
-    ADC.W #$0002                                               ;84962D|690200  |      ;
-    STA.B ptrAIActionData                                      ;849630|85C9    |0000C9;
+    JSL.L fToolUsedSound_Unknown828FF3                         ;849624|22F38F82|828FF3;
+    %AIMoveAction($0002)
     RTS                                                        ;849632|60      |      ;
  
  
 fAIAction0x2D:
     REP #$30                                                   ;849633|C230    |      ;
-    REP #$30                                                   ;849635|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849637|A5C9    |0000C9;
-    CLC                                                        ;849639|18      |      ;
-    ADC.W #$0001                                               ;84963A|690100  |      ;
-    STA.B ptrAIActionData                                      ;84963D|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84963F|E220    |      ;
     REP #$10                                                   ;849641|C210    |      ;
     LDY.W #$000C                                               ;849643|A00C00  |      ;
@@ -3077,8 +2597,7 @@ fAIAction0x2D:
  
  
   + REP #$20                                                   ;84967F|C220    |      ;
-    LDA.B nPlayerFlags                                         ;849681|A5D2    |0000D2;
-    AND.W #$0004                                               ;849683|290400  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;849686|F003    |84968B;
     JMP.W .return                                              ;849688|4C5F97  |84975F;
  
@@ -3107,11 +2626,7 @@ fAIAction0x2D:
     LDA.W nCarryItem_Current                                   ;8496B2|AD1D09  |00091D;
     BEQ .continue                                              ;8496B5|F00D    |8496C4;
     STA.W nCarryItem_Previous                                  ;8496B7|8D1E09  |00091E;
-    REP #$30                                                   ;8496BA|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8496BC|A5C9    |0000C9;
-    CLC                                                        ;8496BE|18      |      ;
-    ADC.W #$0002                                               ;8496BF|690200  |      ;
-    STA.B ptrAIActionData                                      ;8496C2|85C9    |0000C9;
+    %AIMoveAction($0002)
  
 .continue:
     REP #$20                                                   ;8496C4|C220    |      ;
@@ -3169,13 +2684,8 @@ fAIAction0x2D:
     STA.W nPlayerInteractionIndex                              ;849738|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;84973B|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;84973E|9C7009  |000970;
-    REP #$30                                                   ;849741|C230    |      ;
-    LDA.B nPlayerFlags                                         ;849743|A5D2    |0000D2;
-    ORA.W #$0040                                               ;849745|094000  |      ;
-    STA.B nPlayerFlags                                         ;849748|85D2    |0000D2;
-    REP #$30                                                   ;84974A|C230    |      ;
-    LDA.W #$0000                                               ;84974C|A90000  |      ;
-    STA.B nPlayerAction                                        ;84974F|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;849751|C230    |      ;
     LDY.W #$0010                                               ;849753|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849756|B7CC    |0000CC;
@@ -3186,11 +2696,7 @@ fAIAction0x2D:
  
  
 .return:
-    REP #$30                                                   ;84975F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849761|A5C9    |0000C9;
-    CLC                                                        ;849763|18      |      ;
-    ADC.W #$0004                                               ;849764|690400  |      ;
-    STA.B ptrAIActionData                                      ;849767|85C9    |0000C9;
+    %AIMoveAction($0004)
     REP #$30                                                   ;849769|C230    |      ;
     LDY.W #$0010                                               ;84976B|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84976E|B7CC    |0000CC;
@@ -3202,11 +2708,7 @@ fAIAction0x2D:
  
 fAIAction0x2E:
     REP #$30                                                   ;849777|C230    |      ;
-    REP #$30                                                   ;849779|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84977B|A5C9    |0000C9;
-    CLC                                                        ;84977D|18      |      ;
-    ADC.W #$0001                                               ;84977E|690100  |      ;
-    STA.B ptrAIActionData                                      ;849781|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849783|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849785|A7C9    |0000C9;
     SEP #$20                                                   ;849787|E220    |      ;
@@ -3221,20 +2723,12 @@ fAIAction0x2E:
     REP #$10                                                   ;84979B|C210    |      ;
     LDY.W #$0006                                               ;84979D|A00600  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8497A0|97CC    |0000CC;
-    REP #$30                                                   ;8497A2|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8497A4|A5C9    |0000C9;
-    CLC                                                        ;8497A6|18      |      ;
-    ADC.W #$0001                                               ;8497A7|690100  |      ;
-    STA.B ptrAIActionData                                      ;8497AA|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;8497AC|A7C9    |0000C9;
     REP #$30                                                   ;8497AE|C230    |      ;
     LDY.W #$0036                                               ;8497B0|A03600  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8497B3|97CC    |0000CC;
-    REP #$30                                                   ;8497B5|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8497B7|A5C9    |0000C9;
-    CLC                                                        ;8497B9|18      |      ;
-    ADC.W #$0002                                               ;8497BA|690200  |      ;
-    STA.B ptrAIActionData                                      ;8497BD|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;8497BF|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8497C1|A7C9    |0000C9;
     SEP #$20                                                   ;8497C3|E220    |      ;
@@ -3245,11 +2739,7 @@ fAIAction0x2E:
     REP #$10                                                   ;8497CE|C210    |      ;
     LDY.W #$0008                                               ;8497D0|A00800  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8497D3|97CC    |0000CC;
-    REP #$30                                                   ;8497D5|C230    |      ;
-    LDA.B ptrAIActionData                                      ;8497D7|A5C9    |0000C9;
-    CLC                                                        ;8497D9|18      |      ;
-    ADC.W #$0001                                               ;8497DA|690100  |      ;
-    STA.B ptrAIActionData                                      ;8497DD|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;8497DF|E220    |      ;
     REP #$10                                                   ;8497E1|C210    |      ;
     LDY.W #$0001                                               ;8497E3|A00100  |      ;
@@ -3276,20 +2766,12 @@ fAIAction0x2E:
  
 fAIAction0x2F:
     REP #$30                                                   ;849810|C230    |      ;
-    REP #$30                                                   ;849812|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849814|A5C9    |0000C9;
-    CLC                                                        ;849816|18      |      ;
-    ADC.W #$0001                                               ;849817|690100  |      ;
-    STA.B ptrAIActionData                                      ;84981A|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84981C|A7C9    |0000C9;
     REP #$30                                                   ;84981E|C230    |      ;
     LDY.W #$0033                                               ;849820|A03300  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;849823|97CC    |0000CC;
-    REP #$30                                                   ;849825|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849827|A5C9    |0000C9;
-    CLC                                                        ;849829|18      |      ;
-    ADC.W #$0002                                               ;84982A|690200  |      ;
-    STA.B ptrAIActionData                                      ;84982D|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$30                                                   ;84982F|C230    |      ;
     LDY.W #$0033                                               ;849831|A03300  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849834|B7CC    |0000CC;
@@ -3312,11 +2794,7 @@ fAIAction0x2F:
  
 fAIAction0x30_UpdateChicken:
     REP #$30                                                   ;849857|C230    |      ;
-    REP #$30                                                   ;849859|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84985B|A5C9    |0000C9;
-    CLC                                                        ;84985D|18      |      ;
-    ADC.W #$0001                                               ;84985E|690100  |      ;
-    STA.B ptrAIActionData                                      ;849861|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849863|E220    |      ;
     REP #$10                                                   ;849865|C210    |      ;
     LDY.W #$003F                                               ;849867|A03F00  |      ;
@@ -3379,14 +2857,12 @@ fAIAction0x30_UpdateChicken:
     JMP.W .label1                                              ;8498D2|4CC899  |8499C8;
  
  
-  + LDA.B nPlayerFlags                                         ;8498D5|A5D2    |0000D2;
-    AND.W #!PFLAGS_EATINGMEAL                                               
+  + %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;8498DA|F003    |8498DF;
     JMP.W .label1                                              ;8498DC|4CC899  |8499C8;
  
  
-  + LDA.B nPlayerFlags                                         ;8498DF|A5D2    |0000D2;
-    AND.W #!PFLAGS_INTERACTING                                               
+  + %CheckPlayerFlagsNoReg(!PFLAGS_INTERACTING)
     BEQ +                                                      ;8498E4|F003    |8498E9;
     JMP.W .label1                                              ;8498E6|4CC899  |8499C8;
  
@@ -3404,9 +2880,7 @@ fAIAction0x30_UpdateChicken:
     JMP.W .label1                                              ;8498FF|4CC899  |8499C8;
  
  
-  + REP #$30                                                   ;849902|C230    |      ;
-    LDA.B nPlayerFlags                                         ;849904|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;849909|F003    |84990E;
     JMP.W .label1                                              ;84990B|4CC899  |8499C8;
  
@@ -3485,12 +2959,8 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrUnknown0x72],Y                                   ;849996|B772    |000072;
     AND.B #$04                                                 ;849998|2904    |      ;
     BEQ +                                                      ;84999A|F00F    |8499AB;
-    SEP #$20                                                   ;84999C|E220    |      ;
-    LDA.B #$26                                                 ;84999E|A926    |      ;
-    STA.W nCarryItem_Current                                   ;8499A0|8D1D09  |00091D;
-    REP #$30                                                   ;8499A3|C230    |      ;
-    LDA.W #!PACTION_ITEMONHAND                                               
-    STA.B nPlayerAction                                        ;8499A8|85D4    |0000D4;
+    %SetCurrentCarriedItemDirect($26)
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;8499AA|60      |      ;
  
  
@@ -3502,12 +2972,8 @@ fAIAction0x30_UpdateChicken:
     JMP.W .label2                                              ;8499B6|4C419A  |849A41;
  
  
-  + SEP #$20                                                   ;8499B9|E220    |      ;
-    LDA.B #$25                                                 ;8499BB|A925    |      ;
-    STA.W nCarryItem_Current                                   ;8499BD|8D1D09  |00091D;
-    REP #$30                                                   ;8499C0|C230    |      ;
-    LDA.W #!PACTION_ITEMONHAND                                               
-    STA.B nPlayerAction                                        ;8499C5|85D4    |0000D4;
+  + %SetCurrentCarriedItemDirect($25)
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;8499C7|60      |      ;
  
  
@@ -3620,13 +3086,8 @@ fAIAction0x30_UpdateChicken:
     STA.W nPlayerInteractionIndex                              ;849A99|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;849A9C|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;849A9F|9C7009  |000970;
-    REP #$30                                                   ;849AA2|C230    |      ;
-    LDA.B nPlayerFlags                                         ;849AA4|A5D2    |0000D2;
-    ORA.W #!PFLAGS_INTERACTING                                               
-    STA.B nPlayerFlags                                         ;849AA9|85D2    |0000D2;
-    REP #$30                                                   ;849AAB|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;849AB0|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;849AB2|E220    |      ;
     REP #$10                                                   ;849AB4|C210    |      ;
     LDY.W #$000E                                               ;849AB6|A00E00  |      ;
@@ -3646,11 +3107,7 @@ fAIAction0x30_UpdateChicken:
  
 fAIAction0x31_UpdateCow:
     REP #$30                                                   ;849AD4|C230    |      ; ANOTHER SPAGHETTI
-    REP #$30                                                   ;849AD6|C230    |      ;
-    LDA.B ptrAIActionData                                      ;849AD8|A5C9    |0000C9;
-    CLC                                                        ;849ADA|18      |      ;
-    ADC.W #$0001                                               ;849ADB|690100  |      ;
-    STA.B ptrAIActionData                                      ;849ADE|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;849AE0|E220    |      ;
     REP #$10                                                   ;849AE2|C210    |      ;
     LDY.W #$003F                                               ;849AE4|A03F00  |      ;
@@ -3742,14 +3199,12 @@ fUnknown_ToFarm:
  
  
   + REP #$20                                                   ;849B85|C220    |      ;
-    LDA.B nPlayerFlags                                         ;849B87|A5D2    |0000D2;
-    AND.W #!PFLAGS_EATINGMEAL                                               
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;849B8C|F003    |849B91;
     JMP.W .continue                                            ;849B8E|4CB9A0  |84A0B9;
  
  
-  + LDA.B nPlayerFlags                                         ;849B91|A5D2    |0000D2;
-    AND.W #!PFLAGS_INTERACTING                                               
+  + %CheckPlayerFlagsNoReg(!PFLAGS_INTERACTING)
     BEQ +                                                      ;849B96|F003    |849B9B;
     JMP.W .continue                                            ;849B98|4CB9A0  |84A0B9;
  
@@ -4117,29 +3572,21 @@ fUnknown_ToFarm:
     LDA.B [ptrUnknown0x72],Y                                   ;849E1A|B772    |000072;
     ORA.B #$02                                                 ;849E1C|0902    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849E1E|9772    |000072;
-    SEP #$20                                                   ;849E20|E220    |      ;
-    LDA.B #$15                                                 ;849E22|A915    |      ;
-    STA.W nCarryItem_Current                                   ;849E24|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_SPRINKLER)
     LDY.W #$0004                                               ;849E27|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E2A|B772    |000072;
     CMP.B #$60                                                 ;849E2C|C960    |      ;
     BCC .label20                                               ;849E2E|9014    |849E44;
     CMP.B #$C0                                                 ;849E30|C9C0    |      ;
     BCC +                                                      ;849E32|9009    |849E3D;
-    SEP #$20                                                   ;849E34|E220    |      ;
-    LDA.B #$17                                                 ;849E36|A917    |      ;
-    STA.W nCarryItem_Current                                   ;849E38|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_BLUEDIAMOND)
     BRA .label20                                               ;849E3B|8007    |849E44;
  
  
-  + SEP #$20                                                   ;849E3D|E220    |      ;
-    LDA.B #$16                                                 ;849E3F|A916    |      ;
-    STA.W nCarryItem_Current                                   ;849E41|8D1D09  |00091D;
+  + %SetCurrentCarriedItemDirect(!EITEM_BEANSTALKSEED)
  
 .label20:
-    REP #$30                                                   ;849E44|C230    |      ;
-    LDA.W #$0004                                               ;849E46|A90400  |      ;
-    STA.B nPlayerAction                                        ;849E49|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     JMP.W .label28                                             ;849E4B|4CD09F  |849FD0;
  
  
@@ -5097,13 +4544,8 @@ fUnkonown_84A498:
     STA.W nPlayerInteractionIndex                              ;84A505|8D6E09  |00096E;
     STZ.W nPlayerInteractionArg1                               ;84A508|9C6F09  |00096F;
     STZ.W nPlayerInteractionArg2                               ;84A50B|9C7009  |000970;
-    REP #$30                                                   ;84A50E|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84A510|A5D2    |0000D2;
-    ORA.W #$0040                                               ;84A512|094000  |      ;
-    STA.B nPlayerFlags                                         ;84A515|85D2    |0000D2;
-    REP #$30                                                   ;84A517|C230    |      ;
-    LDA.W #$0000                                               ;84A519|A90000  |      ;
-    STA.B nPlayerAction                                        ;84A51C|85D4    |0000D4;
+    %SetPlayerFlag(!PFLAGS_INTERACTING)
+    %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;84A51E|E220    |      ;
     REP #$10                                                   ;84A520|C210    |      ;
     LDY.W #$000E                                               ;84A522|A00E00  |      ;
@@ -5677,45 +5119,25 @@ fUnknown_playerDirRight:
  
 fAIAction0x32:
     REP #$30                                                   ;84A90F|C230    |      ;
-    REP #$30                                                   ;84A911|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84A913|A5C9    |0000C9;
-    CLC                                                        ;84A915|18      |      ;
-    ADC.W #$0001                                               ;84A916|690100  |      ;
-    STA.B ptrAIActionData                                      ;84A919|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84A91B|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84A91D|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84A91F|8572    |000072;
-    REP #$30                                                   ;84A921|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84A923|A5C9    |0000C9;
-    CLC                                                        ;84A925|18      |      ;
-    ADC.W #$0002                                               ;84A926|690200  |      ;
-    STA.B ptrAIActionData                                      ;84A929|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84A92B|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84A92D|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84A92F|8574    |000074;
-    REP #$30                                                   ;84A931|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84A933|A5C9    |0000C9;
-    CLC                                                        ;84A935|18      |      ;
-    ADC.W #$0001                                               ;84A936|690100  |      ;
-    STA.B ptrAIActionData                                      ;84A939|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84A93B|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84A93D|A7C9    |0000C9;
     STA.B [ptrUnknown0x72]                                     ;84A93F|8772    |000072;
-    REP #$30                                                   ;84A941|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84A943|A5C9    |0000C9;
-    CLC                                                        ;84A945|18      |      ;
-    ADC.W #$0002                                               ;84A946|690200  |      ;
-    STA.B ptrAIActionData                                      ;84A949|85C9    |0000C9;
+    %AIMoveAction($0002)
     RTS                                                        ;84A94B|60      |      ;
  
  
 fAIAction0x33_UpdateMole:
     REP #$30                                                   ;84A94C|C230    |      ;
-    REP #$30                                                   ;84A94E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84A950|A5C9    |0000C9;
-    CLC                                                        ;84A952|18      |      ;
-    ADC.W #$0001                                               ;84A953|690100  |      ;
-    STA.B ptrAIActionData                                      ;84A956|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84A958|E220    |      ;
     REP #$10                                                   ;84A95A|C210    |      ;
     LDY.W #$000C                                               ;84A95C|A00C00  |      ;
@@ -5754,8 +5176,7 @@ fAIAction0x33_UpdateMole:
  
  
   + REP #$20                                                   ;84A998|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84A99A|A5D2    |0000D2;
-    AND.W #!PFLAGS_EATINGMEAL                                               
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .label1                                                ;84A99F|D07D    |84AA1E;
     LDA.L strcDailyFlags.flags4                                ;84A9A1|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84A9A5|290600  |      ;
@@ -5767,9 +5188,7 @@ fAIAction0x33_UpdateMole:
     JMP.W .label1                                              ;84A9B4|4C1EAA  |84AA1E;
  
  
-  + REP #$30                                                   ;84A9B7|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84A9B9|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84A9BE|F003    |84A9C3;
     JMP.W .label1                                              ;84A9C0|4C1EAA  |84AA1E;
  
@@ -5811,12 +5230,8 @@ fAIAction0x33_UpdateMole:
     CLC                                                        ;84AA09|18      |      ;
     ADC.W #$0001                                               ;84AA0A|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
-    SEP #$20                                                   ;84AA0F|E220    |      ;
-    LDA.B #$29                                                 ;84AA11|A929    |      ;
-    STA.W nCarryItem_Current                                   ;84AA13|8D1D09  |00091D;
-    REP #$30                                                   ;84AA16|C230    |      ;
-    LDA.W #$0004                                               ;84AA18|A90400  |      ;
-    STA.B nPlayerAction                                        ;84AA1B|85D4    |0000D4;
+    %SetCurrentCarriedItemDirect($29)
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AA1D|60      |      ;
  
  
@@ -5858,11 +5273,7 @@ fAIAction0x33_UpdateMole:
  
 fAIAction0x34:
     REP #$30                                                   ;84AA5D|C230    |      ;
-    REP #$30                                                   ;84AA5F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84AA61|A5C9    |0000C9;
-    CLC                                                        ;84AA63|18      |      ;
-    ADC.W #$0001                                               ;84AA64|690100  |      ;
-    STA.B ptrAIActionData                                      ;84AA67|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84AA69|E220    |      ;
     REP #$10                                                   ;84AA6B|C210    |      ;
     LDY.W #$000C                                               ;84AA6D|A00C00  |      ;
@@ -5901,8 +5312,7 @@ fAIAction0x34:
  
  
   + REP #$20                                                   ;84AAA9|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84AAAB|A5D2    |0000D2;
-    AND.W #$0004                                               ;84AAAD|290400  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .return                                                ;84AAB0|D067    |84AB19;
     LDA.L strcDailyFlags.flags4                                ;84AAB2|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84AAB6|290600  |      ;
@@ -5945,12 +5355,8 @@ fAIAction0x34:
     CLC                                                        ;84AB04|18      |      ;
     ADC.W #$0001                                               ;84AB05|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
-    SEP #$20                                                   ;84AB0A|E220    |      ;
-    LDA.B #$07                                                 ;84AB0C|A907    |      ;
-    STA.W nCarryItem_Current                                   ;84AB0E|8D1D09  |00091D;
-    REP #$30                                                   ;84AB11|C230    |      ;
-    LDA.W #$0004                                               ;84AB13|A90400  |      ;
-    STA.B nPlayerAction                                        ;84AB16|85D4    |0000D4;
+    %SetCurrentCarriedItemDirect(!EITEM_POTATOSEED)
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AB18|60      |      ;
  
  
@@ -5966,11 +5372,7 @@ fAIAction0x34:
  
 fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84AB27|C230    |      ;
-    REP #$30                                                   ;84AB29|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84AB2B|A5C9    |0000C9;
-    CLC                                                        ;84AB2D|18      |      ;
-    ADC.W #$0001                                               ;84AB2E|690100  |      ;
-    STA.B ptrAIActionData                                      ;84AB31|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84AB33|C220    |      ;
     LDA.L strcDailyFlags.flags2                                ;84AB35|AF5C1F7F|7F1F5C;
     AND.W #$FFEF                                               ;84AB39|29EFFF  |      ;
@@ -6111,8 +5513,7 @@ fAIAction0x35_UpdateHorse:
  
  
   + REP #$20                                                   ;84AC39|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84AC3B|A5D2    |0000D2;
-    AND.W #$0004                                               ;84AC3D|290400  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84AC40|F003    |84AC45;
     JMP.W .label2                                              ;84AC42|4CEEAC  |84ACEE;
  
@@ -6177,16 +5578,12 @@ fAIAction0x35_UpdateHorse:
     JMP.W .label2                                              ;84ACBD|4CEEAC  |84ACEE;
  
  
-  + REP #$30                                                   ;84ACC0|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84ACC2|A5D2    |0000D2;
-    AND.W #$0002                                               ;84ACC4|290200  |      ;
+  + %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84ACC7|F003    |84ACCC;
     JMP.W .label8                                              ;84ACC9|4C88AD  |84AD88;
  
  
-  + REP #$30                                                   ;84ACCC|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84ACCE|A5D2    |0000D2;
-    AND.W #$0800                                               ;84ACD0|290008  |      ;
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84ACD3|F003    |84ACD8;
     JMP.W .label8                                              ;84ACD5|4C88AD  |84AD88;
  
@@ -6198,9 +5595,7 @@ fAIAction0x35_UpdateHorse:
     JMP.W .label8                                              ;84ACE1|4C88AD  |84AD88;
  
  
-  + REP #$30                                                   ;84ACE4|C230    |      ;
-    LDA.W #$0017                                               ;84ACE6|A91700  |      ;
-    STA.B nPlayerAction                                        ;84ACE9|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_17)
     JMP.W .label8                                              ;84ACEB|4C88AD  |84AD88;
  
  
@@ -6301,10 +5696,7 @@ fAIAction0x35_UpdateHorse:
  
  
 .label9:
-    REP #$30                                                   ;84ADA4|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84ADA6|A5D2    |0000D2;
-    ORA.W #$0010                                               ;84ADA8|091000  |      ;
-    STA.B nPlayerFlags                                         ;84ADAB|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_RIDINGHORSE)
     REP #$20                                                   ;84ADAD|C220    |      ;
     LDA.L strcDailyFlags.flags2                                ;84ADAF|AF5C1F7F|7F1F5C;
     AND.W #$FFDF                                               ;84ADB3|29DFFF  |      ;
@@ -6498,11 +5890,7 @@ fAIAction0x35_UpdateHorse:
  
 fAIAction0x36_UpdateDog:
     REP #$30                                                   ;84AF06|C230    |      ;
-    REP #$30                                                   ;84AF08|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84AF0A|A5C9    |0000C9;
-    CLC                                                        ;84AF0C|18      |      ;
-    ADC.W #$0001                                               ;84AF0D|690100  |      ;
-    STA.B ptrAIActionData                                      ;84AF10|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;84AF12|C230    |      ;
     LDY.W #$001A                                               ;84AF14|A01A00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF17|B7CC    |0000CC;
@@ -6549,8 +5937,7 @@ fAIAction0x36_UpdateDog:
  
  
   + REP #$20                                                   ;84AF68|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84AF6A|A5D2    |0000D2;
-    AND.W #!PFLAGS_EATINGMEAL                                               
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84AF6F|F003    |84AF74;
     JMP.W .label1                                              ;84AF71|4CF4AF  |84AFF4;
  
@@ -6571,15 +5958,12 @@ fAIAction0x36_UpdateDog:
     JMP.W .label1                                              ;84AF91|4CF4AF  |84AFF4;
  
  
-  + REP #$30                                                   ;84AF94|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84AF96|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84AF9B|F003    |84AFA0;
     JMP.W .label1                                              ;84AF9D|4CF4AF  |84AFF4;
  
  
-  + LDA.B nPlayerFlags                                         ;84AFA0|A5D2    |0000D2;
-    AND.W #!PFLAGS_RIDINGHORSE                                               
+  + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84AFA5|F003    |84AFAA;
     JMP.W .label1                                              ;84AFA7|4CF4AF  |84AFF4;
  
@@ -6610,10 +5994,7 @@ fAIAction0x36_UpdateDog:
     REP #$10                                                   ;84AFD6|C210    |      ;
     LDY.W #$0001                                               ;84AFD8|A00100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AFDB|97CC    |0000CC;
-    REP #$30                                                   ;84AFDD|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84AFDF|A5D2    |0000D2;
-    ORA.W #!PFLAGS_DOGHUGGING                                               
-    STA.B nPlayerFlags                                         ;84AFE4|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_DOGHUGGING)
     REP #$30                                                   ;84AFE6|C230    |      ;
     LDA.L nDogHugs                                             ;84AFE8|AF521F7F|7F1F52;
     INC A                                                      ;84AFEC|1A      |      ;
@@ -7069,15 +6450,11 @@ fAIAction0x36_UpdateDog:
  
 fAIAction0x37:
     REP #$30                                                   ;84B34B|C230    |      ;
-    REP #$30                                                   ;84B34D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B34F|A5C9    |0000C9;
-    CLC                                                        ;84B351|18      |      ;
-    ADC.W #$0001                                               ;84B352|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B355|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;84B357|C230    |      ;
     LDY.W #$0012                                               ;84B359|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B35C|B7CC    |0000CC;
-    STA.B $A5                                                  ;84B35E|85A5    |0000A5;
+    STA.B strcSingleObjectData.gameObjectIdx                   ;84B35E|85A5    |0000A5;
     JSL.L fUnknown_8581A2                                      ;84B360|22A28185|8581A2;
     RTS                                                        ;84B364|60      |      ;
  
@@ -7087,11 +6464,7 @@ fAIAction0x38:
     LDA.L strcDailyFlags.flags1                                ;84B367|AF5A1F7F|7F1F5A;
     AND.W #$8000                                               ;84B36B|290080  |      ;
     BEQ +                                                      ;84B36E|F00B    |84B37B;
-    REP #$30                                                   ;84B370|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B372|A5C9    |0000C9;
-    CLC                                                        ;84B374|18      |      ;
-    ADC.W #$0001                                               ;84B375|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B378|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;84B37A|60      |      ;
  
  
@@ -7106,19 +6479,13 @@ fAIAction0x38:
  
 fAIAction0x39_WalkForTime:
     REP #$30                                                   ;84B389|C230    |      ;
-    REP #$30                                                   ;84B38B|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84B38D|A5D2    |0000D2;
-    AND.W #!PFLAGS_AISTEERING                                               
+    %CheckPlayerFlags(!PFLAGS_AISTEERING)
     BEQ .setAiSteering                                         ;84B392|F003    |84B397;
     JMP.W .wait                                                ;84B394|4CE8B3  |84B3E8;
  
  
 .setAiSteering:
-    REP #$30                                                   ;84B397|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B399|A5C9    |0000C9;
-    CLC                                                        ;84B39B|18      |      ;
-    ADC.W #$0001                                               ;84B39C|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B39F|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B3A1|E220    |      ;
     LDA.B #$00                                                 ;84B3A3|A900    |      ;
     XBA                                                        ;84B3A5|EB      |      ;
@@ -7129,11 +6496,7 @@ fAIAction0x39_WalkForTime:
     LDA.L aAIJoypadInput,X                                     ;84B3AC|BFD2B484|84B4D2;
     ORA.W nAIJoypadInput                                       ;84B3B0|0DFD08  |0008FD;
     STA.W nAIJoypadInput                                       ;84B3B3|8DFD08  |0008FD;
-    REP #$30                                                   ;84B3B6|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B3B8|A5C9    |0000C9;
-    CLC                                                        ;84B3BA|18      |      ;
-    ADC.W #$0001                                               ;84B3BB|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B3BE|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B3C0|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B3C2|A7C9    |0000C9;
     STA.W nAISteeringCounter                                   ;84B3C4|8DFF08  |0008FF;
@@ -7148,10 +6511,7 @@ fAIAction0x39_WalkForTime:
     CLC                                                        ;84B3D8|18      |      ;
     ADC.W #$0001                                               ;84B3D9|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B3DC|97CC    |0000CC;
-    REP #$30                                                   ;84B3DE|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84B3E0|A5D2    |0000D2;
-    ORA.W #!PFLAGS_AISTEERING                                               
-    STA.B nPlayerFlags                                         ;84B3E5|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_AISTEERING)
     RTS                                                        ;84B3E7|60      |      ;
  
  
@@ -7174,37 +6534,21 @@ fAIAction0x39_WalkForTime:
     REP #$20                                                   ;84B401|C220    |      ;
     STZ.W nAIJoypadInput                                       ;84B403|9CFD08  |0008FD;
     STZ.W nAISteeringCounter                                   ;84B406|9CFF08  |0008FF;
-    REP #$30                                                   ;84B409|C230    |      ;
-    LDA.W #!PFLAGS_AISTEERING                                               
-    EOR.W #$FFFF                                               ;84B40E|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;84B411|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;84B413|85D2    |0000D2;
-    REP #$30                                                   ;84B415|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84B41A|85D4    |0000D4;
-    REP #$30                                                   ;84B41C|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B41E|A5C9    |0000C9;
-    CLC                                                        ;84B420|18      |      ;
-    ADC.W #$0004                                               ;84B421|690400  |      ;
-    STA.B ptrAIActionData                                      ;84B424|85C9    |0000C9;
+    %UnsetPlayerFlag(!PFLAGS_AISTEERING)
+    %SetPlayerAction(!PACTION_NONE)
+    %AIMoveAction($0004)
     RTS                                                        ;84B426|60      |      ;
  
  
 fAIAction0x3A_RunForTime:
     REP #$30                                                   ;84B427|C230    |      ;
-    REP #$30                                                   ;84B429|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84B42B|A5D2    |0000D2;
-    AND.W #!PFLAGS_AISTEERING                                               
+    %CheckPlayerFlags(!PFLAGS_AISTEERING)
     BEQ .setAiSteering                                         ;84B430|F003    |84B435;
     JMP.W .wait                                                ;84B432|4C93B4  |84B493;
  
  
 .setAiSteering:
-    REP #$30                                                   ;84B435|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B437|A5C9    |0000C9;
-    CLC                                                        ;84B439|18      |      ;
-    ADC.W #$0001                                               ;84B43A|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B43D|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B43F|E220    |      ;
     LDA.B #$00                                                 ;84B441|A900    |      ;
     XBA                                                        ;84B443|EB      |      ;
@@ -7219,11 +6563,7 @@ fAIAction0x3A_RunForTime:
     LDA.L aAIJoypadInput,X                                     ;84B457|BFD2B484|84B4D2;
     ORA.W nAIJoypadInput                                       ;84B45B|0DFD08  |0008FD;
     STA.W nAIJoypadInput                                       ;84B45E|8DFD08  |0008FD;
-    REP #$30                                                   ;84B461|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B463|A5C9    |0000C9;
-    CLC                                                        ;84B465|18      |      ;
-    ADC.W #$0001                                               ;84B466|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B469|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B46B|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B46D|A7C9    |0000C9;
     STA.W nAISteeringCounter                                   ;84B46F|8DFF08  |0008FF;
@@ -7238,10 +6578,7 @@ fAIAction0x3A_RunForTime:
     CLC                                                        ;84B483|18      |      ;
     ADC.W #$0001                                               ;84B484|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B487|97CC    |0000CC;
-    REP #$30                                                   ;84B489|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84B48B|A5D2    |0000D2;
-    ORA.W #!PFLAGS_AISTEERING                                               
-    STA.B nPlayerFlags                                         ;84B490|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_AISTEERING)
     RTS                                                        ;84B492|60      |      ;
  
  
@@ -7264,19 +6601,9 @@ fAIAction0x3A_RunForTime:
     REP #$20                                                   ;84B4AC|C220    |      ;
     STZ.W nAIJoypadInput                                       ;84B4AE|9CFD08  |0008FD;
     STZ.W nAISteeringCounter                                   ;84B4B1|9CFF08  |0008FF;
-    REP #$30                                                   ;84B4B4|C230    |      ;
-    LDA.W #!PFLAGS_AISTEERING                                               
-    EOR.W #$FFFF                                               ;84B4B9|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;84B4BC|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;84B4BE|85D2    |0000D2;
-    REP #$30                                                   ;84B4C0|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84B4C5|85D4    |0000D4;
-    REP #$30                                                   ;84B4C7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B4C9|A5C9    |0000C9;
-    CLC                                                        ;84B4CB|18      |      ;
-    ADC.W #$0004                                               ;84B4CC|690400  |      ;
-    STA.B ptrAIActionData                                      ;84B4CF|85C9    |0000C9;
+    %UnsetPlayerFlag(!PFLAGS_AISTEERING)
+    %SetPlayerAction(!PACTION_NONE)
+    %AIMoveAction($0004)
     RTS                                                        ;84B4D1|60      |      ;
  
  
@@ -7285,33 +6612,18 @@ aAIJoypadInput:
  
 fAIAction0x3B:
     REP #$30                                                   ;84B4DC|C230    |      ;
-    REP #$30                                                   ;84B4DE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B4E0|A5C9    |0000C9;
-    CLC                                                        ;84B4E2|18      |      ;
-    ADC.W #$0001                                               ;84B4E3|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B4E6|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B4E8|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B4EA|A7C9    |0000C9;
     STA.W nCarryItem_Current                                   ;84B4EC|8D1D09  |00091D;
-    REP #$30                                                   ;84B4EF|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B4F1|A5C9    |0000C9;
-    CLC                                                        ;84B4F3|18      |      ;
-    ADC.W #$0001                                               ;84B4F4|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B4F7|85C9    |0000C9;
-    REP #$30                                                   ;84B4F9|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84B4FB|A5D2    |0000D2;
-    ORA.W #$0002                                               ;84B4FD|090200  |      ;
-    STA.B nPlayerFlags                                         ;84B500|85D2    |0000D2;
+    %AIMoveAction($0001)
+    %SetPlayerFlag(!PFLAGS_HOLDINGITEM)
     RTS                                                        ;84B502|60      |      ;
  
  
 fAIAction0x3C:
     REP #$30                                                   ;84B503|C230    |      ;
-    REP #$30                                                   ;84B505|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B507|A5C9    |0000C9;
-    CLC                                                        ;84B509|18      |      ;
-    ADC.W #$0001                                               ;84B50A|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B50D|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B50F|E220    |      ;
     LDA.B #$15                                                 ;84B511|A915    |      ;
     STA.W nDestinationAreaId                                   ;84B513|8D8B09  |00098B;
@@ -7327,19 +6639,11 @@ fAIAction0x3C:
  
 fAIAction0x3D_TeleportToArea:
     REP #$30                                                   ;84B52D|C230    |      ;
-    REP #$30                                                   ;84B52F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B531|A5C9    |0000C9;
-    CLC                                                        ;84B533|18      |      ;
-    ADC.W #$0001                                               ;84B534|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B537|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B539|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B53B|A7C9    |0000C9;
     STA.W nDestinationAreaId                                   ;84B53D|8D8B09  |00098B;
-    REP #$30                                                   ;84B540|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B542|A5C9    |0000C9;
-    CLC                                                        ;84B544|18      |      ;
-    ADC.W #$0001                                               ;84B545|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B548|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;84B54A|C230    |      ;
     LDA.W nMapEngine_flags                                     ;84B54C|AD9601  |000196;
     ORA.W #$4000                                               ;84B54F|090040  |      ;
@@ -7349,45 +6653,25 @@ fAIAction0x3D_TeleportToArea:
  
 fAIAction0x3E:
     REP #$30                                                   ;84B556|C230    |      ;
-    REP #$30                                                   ;84B558|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B55A|A5C9    |0000C9;
-    CLC                                                        ;84B55C|18      |      ;
-    ADC.W #$0001                                               ;84B55D|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B560|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B562|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B564|A7C9    |0000C9;
     STA.W nCarryItem_Current                                   ;84B566|8D1D09  |00091D;
-    REP #$30                                                   ;84B569|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B56B|A5C9    |0000C9;
-    CLC                                                        ;84B56D|18      |      ;
-    ADC.W #$0001                                               ;84B56E|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B571|85C9    |0000C9;
-    REP #$30                                                   ;84B573|C230    |      ;
-    LDA.W #$0004                                               ;84B575|A90400  |      ;
-    STA.B nPlayerAction                                        ;84B578|85D4    |0000D4;
+    %AIMoveAction($0001)
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84B57A|60      |      ;
  
  
 fAIAction0x3F_ThrowHeldItem:
     REP #$30                                                   ;84B57B|C230    |      ;
-    REP #$30                                                   ;84B57D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B57F|A5C9    |0000C9;
-    CLC                                                        ;84B581|18      |      ;
-    ADC.W #$0001                                               ;84B582|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B585|85C9    |0000C9;
-    REP #$30                                                   ;84B587|C230    |      ;
-    LDA.W #$0005                                               ;84B589|A90500  |      ;
-    STA.B nPlayerAction                                        ;84B58C|85D4    |0000D4;
+    %AIMoveAction($0001)
+    %SetPlayerAction(!PACTION_DROPITEM)
     RTS                                                        ;84B58E|60      |      ;
  
  
 fAIAction0x40_DisableTileInteractions:
     REP #$30                                                   ;84B58F|C230    |      ;
-    REP #$30                                                   ;84B591|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B593|A5C9    |0000C9;
-    CLC                                                        ;84B595|18      |      ;
-    ADC.W #$0001                                               ;84B596|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B599|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B59B|C220    |      ;
     LDA.L strcDailyFlags.flags2                                ;84B59D|AF5C1F7F|7F1F5C;
     ORA.W #$0008                                               ;84B5A1|090800  |      ;
@@ -7397,35 +6681,19 @@ fAIAction0x40_DisableTileInteractions:
  
 fAIAction0x41_AddValue16:
     REP #$30                                                   ;84B5A9|C230    |      ;
-    REP #$30                                                   ;84B5AB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B5AD|A5C9    |0000C9;
-    CLC                                                        ;84B5AF|18      |      ;
-    ADC.W #$0001                                               ;84B5B0|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B5B3|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B5B5|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B5B7|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B5B9|8572    |000072;
-    REP #$30                                                   ;84B5BB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B5BD|A5C9    |0000C9;
-    CLC                                                        ;84B5BF|18      |      ;
-    ADC.W #$0002                                               ;84B5C0|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B5C3|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B5C5|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B5C7|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B5C9|8574    |000074;
-    REP #$30                                                   ;84B5CB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B5CD|A5C9    |0000C9;
-    CLC                                                        ;84B5CF|18      |      ;
-    ADC.W #$0001                                               ;84B5D0|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B5D3|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B5D5|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B5D7|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B5D9|857E    |00007E;
-    REP #$30                                                   ;84B5DB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B5DD|A5C9    |0000C9;
-    CLC                                                        ;84B5DF|18      |      ;
-    ADC.W #$0002                                               ;84B5E0|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B5E3|85C9    |0000C9;
+    %AIMoveAction($0002)
     LDA.B [ptrUnknown0x72]                                     ;84B5E5|A772    |000072;
     CLC                                                        ;84B5E7|18      |      ;
     ADC.B n16TempVar1                                          ;84B5E8|657E    |00007E;
@@ -7449,43 +6717,23 @@ fAIAction0x41_AddValue16:
  
 fAIAction0x42_AddValue24:
     REP #$30                                                   ;84B602|C230    |      ;
-    REP #$30                                                   ;84B604|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B606|A5C9    |0000C9;
-    CLC                                                        ;84B608|18      |      ;
-    ADC.W #$0001                                               ;84B609|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B60C|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B60E|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B610|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B612|8572    |000072;
-    REP #$30                                                   ;84B614|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B616|A5C9    |0000C9;
-    CLC                                                        ;84B618|18      |      ;
-    ADC.W #$0002                                               ;84B619|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B61C|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B61E|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B620|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B622|8574    |000074;
-    REP #$30                                                   ;84B624|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B626|A5C9    |0000C9;
-    CLC                                                        ;84B628|18      |      ;
-    ADC.W #$0001                                               ;84B629|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B62C|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B62E|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B630|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B632|8572    |000072;
-    REP #$30                                                   ;84B634|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B636|A5C9    |0000C9;
-    CLC                                                        ;84B638|18      |      ;
-    ADC.W #$0002                                               ;84B639|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B63C|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B63E|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B640|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B642|8574    |000074;
-    REP #$30                                                   ;84B644|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B646|A5C9    |0000C9;
-    CLC                                                        ;84B648|18      |      ;
-    ADC.W #$0001                                               ;84B649|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B64C|85C9    |0000C9;
+    %AIMoveAction($0001)
     JSL.L fGameEngine_AddProfit                                ;84B64E|22C9B183|83B1C9;
     REP #$20                                                   ;84B652|C220    |      ;
     BEQ .justReturn                                            ;84B654|F00F    |84B665;
@@ -7501,35 +6749,19 @@ fAIAction0x42_AddValue24:
  
 fAIAction0x43_JumpIfEqual16:
     REP #$30                                                   ;84B666|C230    |      ;
-    REP #$30                                                   ;84B668|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B66A|A5C9    |0000C9;
-    CLC                                                        ;84B66C|18      |      ;
-    ADC.W #$0001                                               ;84B66D|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B670|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B672|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B674|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B676|8572    |000072;
-    REP #$30                                                   ;84B678|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B67A|A5C9    |0000C9;
-    CLC                                                        ;84B67C|18      |      ;
-    ADC.W #$0002                                               ;84B67D|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B680|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B682|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B684|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B686|8574    |000074;
-    REP #$30                                                   ;84B688|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B68A|A5C9    |0000C9;
-    CLC                                                        ;84B68C|18      |      ;
-    ADC.W #$0001                                               ;84B68D|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B690|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B692|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B694|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B696|857E    |00007E;
-    REP #$30                                                   ;84B698|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B69A|A5C9    |0000C9;
-    CLC                                                        ;84B69C|18      |      ;
-    ADC.W #$0002                                               ;84B69D|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B6A0|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$20                                                   ;84B6A2|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B6A4|A772    |000072;
     CMP.B n16TempVar1                                          ;84B6A6|C57E    |00007E;
@@ -7540,53 +6772,29 @@ fAIAction0x43_JumpIfEqual16:
     RTS                                                        ;84B6B0|60      |      ;
  
  
-  + REP #$30                                                   ;84B6B1|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B6B3|A5C9    |0000C9;
-    CLC                                                        ;84B6B5|18      |      ;
-    ADC.W #$0002                                               ;84B6B6|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B6B9|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;84B6BB|60      |      ;
  
  
 fAIAction0x44_JumpIfEqual24:
     REP #$30                                                   ;84B6BC|C230    |      ;
-    REP #$30                                                   ;84B6BE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B6C0|A5C9    |0000C9;
-    CLC                                                        ;84B6C2|18      |      ;
-    ADC.W #$0001                                               ;84B6C3|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B6C6|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B6C8|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B6CA|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B6CC|8572    |000072;
-    REP #$30                                                   ;84B6CE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B6D0|A5C9    |0000C9;
-    CLC                                                        ;84B6D2|18      |      ;
-    ADC.W #$0002                                               ;84B6D3|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B6D6|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B6D8|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B6DA|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B6DC|8574    |000074;
-    REP #$30                                                   ;84B6DE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B6E0|A5C9    |0000C9;
-    CLC                                                        ;84B6E2|18      |      ;
-    ADC.W #$0001                                               ;84B6E3|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B6E6|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B6E8|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B6EA|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B6EC|857E    |00007E;
-    REP #$30                                                   ;84B6EE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B6F0|A5C9    |0000C9;
-    CLC                                                        ;84B6F2|18      |      ;
-    ADC.W #$0002                                               ;84B6F3|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B6F6|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B6F8|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B6FA|A7C9    |0000C9;
     STA.B n16TempVar2                                          ;84B6FC|8580    |000080;
-    REP #$30                                                   ;84B6FE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B700|A5C9    |0000C9;
-    CLC                                                        ;84B702|18      |      ;
-    ADC.W #$0001                                               ;84B703|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B706|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B708|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B70A|A772    |000072;
     CMP.B n16TempVar1                                          ;84B70C|C57E    |00007E;
@@ -7602,54 +6810,30 @@ fAIAction0x44_JumpIfEqual24:
     RTS                                                        ;84B721|60      |      ;
  
  
-  + REP #$30                                                   ;84B722|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B724|A5C9    |0000C9;
-    CLC                                                        ;84B726|18      |      ;
-    ADC.W #$0002                                               ;84B727|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B72A|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;84B72C|60      |      ;
  
  
 fAIAction0x45_JumpIfBetween16:
     REP #$30                                                   ;84B72D|C230    |      ;
-    REP #$30                                                   ;84B72F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B731|A5C9    |0000C9;
-    CLC                                                        ;84B733|18      |      ;
-    ADC.W #$0001                                               ;84B734|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B737|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B739|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B73B|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B73D|8572    |000072;
-    REP #$30                                                   ;84B73F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B741|A5C9    |0000C9;
-    CLC                                                        ;84B743|18      |      ;
-    ADC.W #$0002                                               ;84B744|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B747|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B749|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B74B|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B74D|8574    |000074;
-    REP #$30                                                   ;84B74F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B751|A5C9    |0000C9;
-    CLC                                                        ;84B753|18      |      ;
-    ADC.W #$0001                                               ;84B754|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B757|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B759|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B75B|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B75D|857E    |00007E;
-    REP #$30                                                   ;84B75F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B761|A5C9    |0000C9;
-    CLC                                                        ;84B763|18      |      ;
-    ADC.W #$0002                                               ;84B764|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B767|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$20                                                   ;84B769|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B76B|A7C9    |0000C9;
     INC A                                                      ;84B76D|1A      |      ;
     STA.B n16TempVar2                                          ;84B76E|8580    |000080;
-    REP #$30                                                   ;84B770|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B772|A5C9    |0000C9;
-    CLC                                                        ;84B774|18      |      ;
-    ADC.W #$0002                                               ;84B775|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B778|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$20                                                   ;84B77A|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84B77C|A772    |000072;
     CMP.B n16TempVar1                                          ;84B77E|C57E    |00007E;
@@ -7663,69 +6847,37 @@ fAIAction0x45_JumpIfBetween16:
     RTS                                                        ;84B78E|60      |      ;
  
  
-  + REP #$30                                                   ;84B78F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B791|A5C9    |0000C9;
-    CLC                                                        ;84B793|18      |      ;
-    ADC.W #$0002                                               ;84B794|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B797|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;84B799|60      |      ;
  
  
 fAIAction0x46_JumpIfBetween24:
     REP #$30                                                   ;84B79A|C230    |      ;
-    REP #$30                                                   ;84B79C|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B79E|A5C9    |0000C9;
-    CLC                                                        ;84B7A0|18      |      ;
-    ADC.W #$0001                                               ;84B7A1|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B7A4|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B7A6|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B7A8|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B7AA|8572    |000072;
-    REP #$30                                                   ;84B7AC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B7AE|A5C9    |0000C9;
-    CLC                                                        ;84B7B0|18      |      ;
-    ADC.W #$0002                                               ;84B7B1|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B7B4|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B7B6|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B7B8|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B7BA|8574    |000074;
-    REP #$30                                                   ;84B7BC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B7BE|A5C9    |0000C9;
-    CLC                                                        ;84B7C0|18      |      ;
-    ADC.W #$0001                                               ;84B7C1|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B7C4|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B7C6|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B7C8|A7C9    |0000C9;
     STA.B n16TempVar1                                          ;84B7CA|857E    |00007E;
-    REP #$30                                                   ;84B7CC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B7CE|A5C9    |0000C9;
-    CLC                                                        ;84B7D0|18      |      ;
-    ADC.W #$0002                                               ;84B7D1|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B7D4|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B7D6|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B7D8|A7C9    |0000C9;
     STA.B n16TempVar2                                          ;84B7DA|8580    |000080;
-    REP #$30                                                   ;84B7DC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B7DE|A5C9    |0000C9;
-    CLC                                                        ;84B7E0|18      |      ;
-    ADC.W #$0001                                               ;84B7E1|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B7E4|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B7E6|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B7E8|A7C9    |0000C9;
     STA.B n16TempVar3                                          ;84B7EA|8582    |000082;
-    REP #$30                                                   ;84B7EC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B7EE|A5C9    |0000C9;
-    CLC                                                        ;84B7F0|18      |      ;
-    ADC.W #$0002                                               ;84B7F1|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B7F4|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B7F6|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B7F8|A7C9    |0000C9;
     STA.B n16TempVar4                                          ;84B7FA|8584    |000084;
-    REP #$30                                                   ;84B7FC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B7FE|A5C9    |0000C9;
-    CLC                                                        ;84B800|18      |      ;
-    ADC.W #$0001                                               ;84B801|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B804|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B806|C220    |      ;
     LDA.B n16TempVar3                                          ;84B808|A582    |000082;
     CLC                                                        ;84B80A|18      |      ;
@@ -7757,107 +6909,59 @@ fAIAction0x46_JumpIfBetween24:
     RTS                                                        ;84B840|60      |      ;
  
  
-  + REP #$30                                                   ;84B841|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B843|A5C9    |0000C9;
-    CLC                                                        ;84B845|18      |      ;
-    ADC.W #$0002                                               ;84B846|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B849|85C9    |0000C9;
+  + %AIMoveAction($0002)
     RTS                                                        ;84B84B|60      |      ;
  
  
 fAIAction0x47_SetValue8:
     REP #$30                                                   ;84B84C|C230    |      ;
-    REP #$30                                                   ;84B84E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B850|A5C9    |0000C9;
-    CLC                                                        ;84B852|18      |      ;
-    ADC.W #$0001                                               ;84B853|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B856|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B858|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B85A|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B85C|8572    |000072;
-    REP #$30                                                   ;84B85E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B860|A5C9    |0000C9;
-    CLC                                                        ;84B862|18      |      ;
-    ADC.W #$0002                                               ;84B863|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B866|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B868|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B86A|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B86C|8574    |000074;
-    REP #$30                                                   ;84B86E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B870|A5C9    |0000C9;
-    CLC                                                        ;84B872|18      |      ;
-    ADC.W #$0001                                               ;84B873|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B876|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B878|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B87A|A7C9    |0000C9;
     STA.B [ptrUnknown0x72]                                     ;84B87C|8772    |000072;
-    REP #$30                                                   ;84B87E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B880|A5C9    |0000C9;
-    CLC                                                        ;84B882|18      |      ;
-    ADC.W #$0001                                               ;84B883|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B886|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;84B888|60      |      ;
  
  
 fAIAction0x48:
     REP #$30                                                   ;84B889|C230    |      ;
-    REP #$30                                                   ;84B88B|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B88D|A5C9    |0000C9;
-    CLC                                                        ;84B88F|18      |      ;
-    ADC.W #$0001                                               ;84B890|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B893|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B895|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B897|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84B899|8572    |000072;
-    REP #$30                                                   ;84B89B|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B89D|A5C9    |0000C9;
-    CLC                                                        ;84B89F|18      |      ;
-    ADC.W #$0002                                               ;84B8A0|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B8A3|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B8A5|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B8A7|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84B8A9|8574    |000074;
-    REP #$30                                                   ;84B8AB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B8AD|A5C9    |0000C9;
-    CLC                                                        ;84B8AF|18      |      ;
-    ADC.W #$0001                                               ;84B8B0|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B8B3|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84B8B5|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B8B7|A7C9    |0000C9;
     STA.B [ptrUnknown0x72]                                     ;84B8B9|8772    |000072;
-    REP #$30                                                   ;84B8BB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B8BD|A5C9    |0000C9;
-    CLC                                                        ;84B8BF|18      |      ;
-    ADC.W #$0002                                               ;84B8C0|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B8C3|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84B8C5|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B8C7|A7C9    |0000C9;
     LDY.W #$0002                                               ;84B8C9|A00200  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;84B8CC|9772    |000072;
-    REP #$30                                                   ;84B8CE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B8D0|A5C9    |0000C9;
-    CLC                                                        ;84B8D2|18      |      ;
-    ADC.W #$0001                                               ;84B8D3|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B8D6|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;84B8D8|60      |      ;
  
  
 fAIAction0x49:
     REP #$30                                                   ;84B8D9|C230    |      ;
-    REP #$30                                                   ;84B8DB|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B8DD|A5C9    |0000C9;
-    CLC                                                        ;84B8DF|18      |      ;
-    ADC.W #$0001                                               ;84B8E0|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B8E3|85C9    |0000C9;
+    %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84B8E5|A7C9    |0000C9;
     REP #$30                                                   ;84B8E7|C230    |      ;
     LDY.W #$0033                                               ;84B8E9|A03300  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B8EC|97CC    |0000CC;
-    REP #$30                                                   ;84B8EE|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B8F0|A5C9    |0000C9;
-    CLC                                                        ;84B8F2|18      |      ;
-    ADC.W #$0002                                               ;84B8F3|690200  |      ;
-    STA.B ptrAIActionData                                      ;84B8F6|85C9    |0000C9;
+    %AIMoveAction($0002)
     REP #$20                                                   ;84B8F8|C220    |      ;
     LDA.B nPlayerDirection                                     ;84B8FA|A5DA    |0000DA;
     SEP #$20                                                   ;84B8FC|E220    |      ;
@@ -7893,11 +6997,7 @@ fAIAction0x49:
  
 fAIAction0x4A:
     REP #$30                                                   ;84B93C|C230    |      ;
-    REP #$30                                                   ;84B93E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84B940|A5C9    |0000C9;
-    CLC                                                        ;84B942|18      |      ;
-    ADC.W #$0001                                               ;84B943|690100  |      ;
-    STA.B ptrAIActionData                                      ;84B946|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84B948|E220    |      ;
     REP #$10                                                   ;84B94A|C210    |      ;
     LDY.W #$000C                                               ;84B94C|A00C00  |      ;
@@ -7936,9 +7036,8 @@ fAIAction0x4A:
  
  
   + REP #$20                                                   ;84B988|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84B98A|A5D2    |0000D2;
-    AND.W #$0004                                               ;84B98C|290400  |      ;
-    BNE .return                                                ;84B98F|D071    |84BA02;
+    %CheckPlayerFlagsNoReg($0004)
+    BNE .return                                                
     LDA.L strcDailyFlags.flags4                                ;84B991|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84B995|290600  |      ;
     BNE .return                                                ;84B998|D068    |84BA02;
@@ -7949,9 +7048,7 @@ fAIAction0x4A:
     JMP.W .return                                              ;84B9A4|4C02BA  |84BA02;
  
  
-  + REP #$30                                                   ;84B9A7|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84B9A9|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84B9AE|F003    |84B9B3;
     JMP.W .return                                              ;84B9B0|4C02BA  |84BA02;
  
@@ -7988,12 +7085,8 @@ fAIAction0x4A:
     CLC                                                        ;84B9ED|18      |      ;
     ADC.W #$0001                                               ;84B9EE|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
-    SEP #$20                                                   ;84B9F3|E220    |      ;
-    LDA.B #$08                                                 ;84B9F5|A908    |      ;
-    STA.W nCarryItem_Current                                   ;84B9F7|8D1D09  |00091D;
-    REP #$30                                                   ;84B9FA|C230    |      ;
-    LDA.W #$0004                                               ;84B9FC|A90400  |      ;
-    STA.B nPlayerAction                                        ;84B9FF|85D4    |0000D4;
+    %SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED)
+    %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84BA01|60      |      ;
  
  
@@ -8009,34 +7102,18 @@ fAIAction0x4A:
  
 fAIAction0x4B:
     REP #$30                                                   ;84BA10|C230    |      ;
-    REP #$30                                                   ;84BA12|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BA14|A5C9    |0000C9;
-    CLC                                                        ;84BA16|18      |      ;
-    ADC.W #$0001                                               ;84BA17|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BA1A|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BA1C|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BA1E|A7C9    |0000C9;
     PHA                                                        ;84BA20|48      |      ;
-    REP #$30                                                   ;84BA21|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BA23|A5C9    |0000C9;
-    CLC                                                        ;84BA25|18      |      ;
-    ADC.W #$0001                                               ;84BA26|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BA29|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BA2B|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BA2D|A7C9    |0000C9;
     PHA                                                        ;84BA2F|48      |      ;
-    REP #$30                                                   ;84BA30|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BA32|A5C9    |0000C9;
-    CLC                                                        ;84BA34|18      |      ;
-    ADC.W #$0002                                               ;84BA35|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BA38|85C9    |0000C9;
+    %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;84BA3A|A7C9    |0000C9;
     PHA                                                        ;84BA3C|48      |      ;
-    REP #$30                                                   ;84BA3D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BA3F|A5C9    |0000C9;
-    CLC                                                        ;84BA41|18      |      ;
-    ADC.W #$0002                                               ;84BA42|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BA45|85C9    |0000C9;
+    %AIMoveAction($0002)
     PLY                                                        ;84BA47|7A      |      ;
     PLX                                                        ;84BA48|FA      |      ;
     SEP #$20                                                   ;84BA49|E220    |      ;
@@ -8047,11 +7124,7 @@ fAIAction0x4B:
  
 fAIAction0x4C:
     REP #$30                                                   ;84BA51|C230    |      ;
-    REP #$30                                                   ;84BA53|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BA55|A5C9    |0000C9;
-    CLC                                                        ;84BA57|18      |      ;
-    ADC.W #$0001                                               ;84BA58|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BA5B|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BA5D|E220    |      ;
     REP #$10                                                   ;84BA5F|C210    |      ;
     LDY.W #$0000                                               ;84BA61|A00000  |      ;
@@ -8066,11 +7139,7 @@ fAIAction0x4C:
  
 fAIAction0x4D:
     REP #$30                                                   ;84BA72|C230    |      ;
-    REP #$30                                                   ;84BA74|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BA76|A5C9    |0000C9;
-    CLC                                                        ;84BA78|18      |      ;
-    ADC.W #$0001                                               ;84BA79|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BA7C|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BA7E|E220    |      ;
     REP #$10                                                   ;84BA80|C210    |      ;
     LDY.W #$000C                                               ;84BA82|A00C00  |      ;
@@ -8154,21 +7223,13 @@ fAIAction0x4D:
  
  
 .return:
-    REP #$30                                                   ;84BB26|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BB28|A5C9    |0000C9;
-    CLC                                                        ;84BB2A|18      |      ;
-    ADC.W #$0002                                               ;84BB2B|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BB2E|85C9    |0000C9;
+    %AIMoveAction($0002)
     RTS                                                        ;84BB30|60      |      ;
  
  
 fAIAction0x4E:
     REP #$30                                                   ;84BB31|C230    |      ;
-    REP #$30                                                   ;84BB33|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BB35|A5C9    |0000C9;
-    CLC                                                        ;84BB37|18      |      ;
-    ADC.W #$0001                                               ;84BB38|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BB3B|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BB3D|C220    |      ;
     LDA.L strcDailyFlags.flags2                                ;84BB3F|AF5C1F7F|7F1F5C;
     AND.W #$FFF7                                               ;84BB43|29F7FF  |      ;
@@ -8178,11 +7239,7 @@ fAIAction0x4E:
  
 fAIAction0x4F:
     REP #$30                                                   ;84BB4B|C230    |      ;
-    REP #$30                                                   ;84BB4D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BB4F|A5C9    |0000C9;
-    CLC                                                        ;84BB51|18      |      ;
-    ADC.W #$0001                                               ;84BB52|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BB55|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BB57|C220    |      ;
     LDA.L strcDailyFlags.flags4                                ;84BB59|AF601F7F|7F1F60;
     ORA.W #$8000                                               ;84BB5D|090080  |      ;
@@ -8256,11 +7313,7 @@ fAIAction0x4F:
  
 fAIAction0x50:
     REP #$30                                                   ;84BBDA|C230    |      ;
-    REP #$30                                                   ;84BBDC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BBDE|A5C9    |0000C9;
-    CLC                                                        ;84BBE0|18      |      ;
-    ADC.W #$0001                                               ;84BBE1|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BBE4|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BBE6|E220    |      ;
     LDA.W nCarryItem_Current                                   ;84BBE8|AD1D09  |00091D;
     BEQ .label2                                                ;84BBEB|F06F    |84BC5C;
@@ -8322,18 +7375,12 @@ fAIAction0x50:
  
  
 .label2:
-    REP #$30                                                   ;84BC5C|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84BC5E|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+    %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BNE +                                                      ;84BC63|D003    |84BC68;
     JMP.W .return                                              ;84BC65|4C9BBC  |84BC9B;
  
  
-  + REP #$30                                                   ;84BC68|C230    |      ;
-    LDA.W #!PFLAGS_DOGHUGGING                                               
-    EOR.W #$FFFF                                               ;84BC6D|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;84BC70|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;84BC72|85D2    |0000D2;
+  + %UnsetPlayerFlag(!PFLAGS_DOGHUGGING)
     SEP #$20                                                   ;84BC74|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;84BC76|AF191F7F|7F1F19;
     STA.L nDogAreaId                                           ;84BC7A|8F301F7F|7F1F30;
@@ -8356,11 +7403,7 @@ fAIAction0x50:
  
 fAIAction0x51:
     REP #$30                                                   ;84BC9C|C230    |      ;
-    REP #$30                                                   ;84BC9E|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BCA0|A5C9    |0000C9;
-    CLC                                                        ;84BCA2|18      |      ;
-    ADC.W #$0001                                               ;84BCA3|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BCA6|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BCA8|E220    |      ;
     LDA.W nCarryItem_Current                                   ;84BCAA|AD1D09  |00091D;
     BEQ .label3                                                ;84BCAD|F060    |84BD0F;
@@ -8418,18 +7461,12 @@ fAIAction0x51:
  
  
 .label3:
-    REP #$30                                                   ;84BD0F|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84BD11|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+    %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BNE +                                                      ;84BD16|D003    |84BD1B;
     JMP.W .return                                              ;84BD18|4C43BD  |84BD43;
  
  
-  + REP #$30                                                   ;84BD1B|C230    |      ;
-    LDA.W #!PFLAGS_DOGHUGGING                                               
-    EOR.W #$FFFF                                               ;84BD20|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;84BD23|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;84BD25|85D2    |0000D2;
+  + %UnsetPlayerFlag(!PFLAGS_DOGHUGGING)
     SEP #$20                                                   ;84BD27|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;84BD29|AF191F7F|7F1F19;
     STA.L nDogAreaId                                           ;84BD2D|8F301F7F|7F1F30;
@@ -8447,11 +7484,7 @@ fAIAction0x51:
  
 fAIAction0x52:
     REP #$30                                                   ;84BD44|C230    |      ;
-    REP #$30                                                   ;84BD46|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BD48|A5C9    |0000C9;
-    CLC                                                        ;84BD4A|18      |      ;
-    ADC.W #$0001                                               ;84BD4B|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BD4E|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BD50|E220    |      ;
     REP #$10                                                   ;84BD52|C210    |      ;
     LDY.W #$000C                                               ;84BD54|A00C00  |      ;
@@ -8490,8 +7523,7 @@ fAIAction0x52:
  
  
   + REP #$20                                                   ;84BD90|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84BD92|A5D2    |0000D2;
-    AND.W #$0004                                               ;84BD94|290400  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .return                                                ;84BD97|D066    |84BDFF;
     LDA.L strcDailyFlags.flags4                                ;84BD99|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84BD9D|290600  |      ;
@@ -8503,9 +7535,7 @@ fAIAction0x52:
     JMP.W .return                                              ;84BDAC|4CFFBD  |84BDFF;
  
  
-  + REP #$30                                                   ;84BDAF|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84BDB1|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84BDB6|F003    |84BDBB;
     JMP.W .return                                              ;84BDB8|4CFFBD  |84BDFF;
  
@@ -8555,11 +7585,7 @@ fAIAction0x52:
  
 fAIAction0x53:
     REP #$30                                                   ;84BE0D|C230    |      ;
-    REP #$30                                                   ;84BE0F|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BE11|A5C9    |0000C9;
-    CLC                                                        ;84BE13|18      |      ;
-    ADC.W #$0001                                               ;84BE14|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BE17|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BE19|E220    |      ;
     REP #$10                                                   ;84BE1B|C210    |      ;
     LDY.W #$000C                                               ;84BE1D|A00C00  |      ;
@@ -8598,8 +7624,7 @@ fAIAction0x53:
  
  
   + REP #$20                                                   ;84BE59|C220    |      ;
-    LDA.B nPlayerFlags                                         ;84BE5B|A5D2    |0000D2;
-    AND.W #$0004                                               ;84BE5D|290400  |      ;
+    %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .return                                                ;84BE60|D066    |84BEC8;
     LDA.L strcDailyFlags.flags4                                ;84BE62|AF601F7F|7F1F60;
     AND.W #$0006                                               ;84BE66|290600  |      ;
@@ -8611,9 +7636,7 @@ fAIAction0x53:
     JMP.W .return                                              ;84BE75|4CC8BE  |84BEC8;
  
  
-  + REP #$30                                                   ;84BE78|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84BE7A|A5D2    |0000D2;
-    AND.W #$0800                                               ;84BE7C|290008  |      ;
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84BE7F|F003    |84BE84;
     JMP.W .return                                              ;84BE81|4CC8BE  |84BEC8;
  
@@ -8663,19 +7686,11 @@ fAIAction0x53:
  
 fAIAction0x54:
     REP #$30                                                   ;84BED6|C230    |      ;
-    REP #$30                                                   ;84BED8|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BEDA|A5C9    |0000C9;
-    CLC                                                        ;84BEDC|18      |      ;
-    ADC.W #$0001                                               ;84BEDD|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BEE0|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BEE2|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BEE4|A7C9    |0000C9;
     TAX                                                        ;84BEE6|AA      |      ;
-    REP #$30                                                   ;84BEE7|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BEE9|A5C9    |0000C9;
-    CLC                                                        ;84BEEB|18      |      ;
-    ADC.W #$0002                                               ;84BEEC|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BEEF|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84BEF1|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BEF3|A7C9    |0000C9;
     STA.W $0191                                                ;84BEF5|8D9101  |000191;
@@ -8685,11 +7700,7 @@ fAIAction0x54:
     LDA.B #$06                                                 ;84BEFF|A906    |      ;
     STA.W $019A                                                ;84BF01|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84BF04|225F9383|83935F;
-    REP #$30                                                   ;84BF08|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF0A|A5C9    |0000C9;
-    CLC                                                        ;84BF0C|18      |      ;
-    ADC.W #$0001                                               ;84BF0D|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BF10|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$30                                                   ;84BF12|C230    |      ;
     LDY.W #$0010                                               ;84BF14|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84BF17|B7CC    |0000CC;
@@ -8701,27 +7712,15 @@ fAIAction0x54:
  
 fAIAction0x55:
     REP #$30                                                   ;84BF20|C230    |      ;
-    REP #$30                                                   ;84BF22|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF24|A5C9    |0000C9;
-    CLC                                                        ;84BF26|18      |      ;
-    ADC.W #$0001                                               ;84BF27|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BF2A|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BF2C|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BF2E|A7C9    |0000C9;
     STA.B ptrUnknown0x72                                       ;84BF30|8572    |000072;
-    REP #$30                                                   ;84BF32|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF34|A5C9    |0000C9;
-    CLC                                                        ;84BF36|18      |      ;
-    ADC.W #$0002                                               ;84BF37|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BF3A|85C9    |0000C9;
+    %AIMoveAction($0002)
     SEP #$20                                                   ;84BF3C|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BF3E|A7C9    |0000C9;
     STA.B ptrUnknown0x72+2                                     ;84BF40|8574    |000074;
-    REP #$30                                                   ;84BF42|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF44|A5C9    |0000C9;
-    CLC                                                        ;84BF46|18      |      ;
-    ADC.W #$0001                                               ;84BF47|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BF4A|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BF4C|E220    |      ;
     LDA.B #$00                                                 ;84BF4E|A900    |      ;
     XBA                                                        ;84BF50|EB      |      ;
@@ -8731,11 +7730,7 @@ fAIAction0x55:
     TAX                                                        ;84BF56|AA      |      ;
     LDA.L aAICheckFlags,X                                      ;84BF57|BF14C084|84C014;
     STA.B n16TempVar1                                          ;84BF5B|857E    |00007E;
-    REP #$30                                                   ;84BF5D|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF5F|A5C9    |0000C9;
-    CLC                                                        ;84BF61|18      |      ;
-    ADC.W #$0001                                               ;84BF62|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BF65|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BF67|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;84BF69|A772    |000072;
     AND.B n16TempVar1                                          ;84BF6B|257E    |00007E;
@@ -8747,28 +7742,18 @@ fAIAction0x55:
  
  
 .return:
-    REP #$30                                                   ;84BF76|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF78|A5C9    |0000C9;
-    CLC                                                        ;84BF7A|18      |      ;
-    ADC.W #$0002                                               ;84BF7B|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BF7E|85C9    |0000C9;
+    %AIMoveAction($0002)
     RTS                                                        ;84BF80|60      |      ;
  
  
 fAIAction0x56_UseEquippedItem:
     REP #$30                                                   ;84BF81|C230    |      ;
-    REP #$30                                                   ;84BF83|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BF85|A5C9    |0000C9;
-    CLC                                                        ;84BF87|18      |      ;
-    ADC.W #$0001                                               ;84BF88|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BF8B|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BF8D|E220    |      ;
     LDA.W nToolEquipped                                        ;84BF8F|AD2109  |000921;
     BEQ .return                                                ;84BF92|F00B    |84BF9F;
-    REP #$30                                                   ;84BF94|C230    |      ;
-    LDA.W #$000A                                               ;84BF96|A90A00  |      ;
-    STA.B nPlayerAction                                        ;84BF99|85D4    |0000D4;
-    JSL.L fToolUsed_AnimationSubrutines                        ;84BF9B|22A89082|8290A8;
+    %SetPlayerAction(!PACTION_USINGTOOL)
+    JSL.L fToolUsedAnimationHandler                            ;84BF9B|22A89082|8290A8;
  
 .return:
     RTS                                                        ;84BF9F|60      |      ;
@@ -8776,52 +7761,28 @@ fAIAction0x56_UseEquippedItem:
  
 fAIAction0x57_UpdateStamina:
     REP #$30                                                   ;84BFA0|C230    |      ;
-    REP #$30                                                   ;84BFA2|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BFA4|A5C9    |0000C9;
-    CLC                                                        ;84BFA6|18      |      ;
-    ADC.W #$0001                                               ;84BFA7|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BFAA|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BFAC|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BFAE|A7C9    |0000C9;
     JSL.L fPlayerEnergyHandler                                 ;84BFB0|2261D081|81D061;
-    REP #$30                                                   ;84BFB4|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BFB6|A5C9    |0000C9;
-    CLC                                                        ;84BFB8|18      |      ;
-    ADC.W #$0001                                               ;84BFB9|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BFBC|85C9    |0000C9;
+    %AIMoveAction($0001)
     RTS                                                        ;84BFBE|60      |      ;
  
  
 fAIAction0x58_ReplaceFarmTile:
     REP #$30                                                   ;84BFBF|C230    |      ;
-    REP #$30                                                   ;84BFC1|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BFC3|A5C9    |0000C9;
-    CLC                                                        ;84BFC5|18      |      ;
-    ADC.W #$0001                                               ;84BFC6|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BFC9|85C9    |0000C9;
+    %AIMoveAction($0001)
     SEP #$20                                                   ;84BFCB|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BFCD|A7C9    |0000C9;
     PHA                                                        ;84BFCF|48      |      ;
-    REP #$30                                                   ;84BFD0|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BFD2|A5C9    |0000C9;
-    CLC                                                        ;84BFD4|18      |      ;
-    ADC.W #$0001                                               ;84BFD5|690100  |      ;
-    STA.B ptrAIActionData                                      ;84BFD8|85C9    |0000C9;
+    %AIMoveAction($0001)
     REP #$20                                                   ;84BFDA|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BFDC|A7C9    |0000C9;
     PHA                                                        ;84BFDE|48      |      ;
-    REP #$30                                                   ;84BFDF|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BFE1|A5C9    |0000C9;
-    CLC                                                        ;84BFE3|18      |      ;
-    ADC.W #$0002                                               ;84BFE4|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BFE7|85C9    |0000C9;
+    %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;84BFE9|A7C9    |0000C9;
     PHA                                                        ;84BFEB|48      |      ;
-    REP #$30                                                   ;84BFEC|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84BFEE|A5C9    |0000C9;
-    CLC                                                        ;84BFF0|18      |      ;
-    ADC.W #$0002                                               ;84BFF1|690200  |      ;
-    STA.B ptrAIActionData                                      ;84BFF4|85C9    |0000C9;
+    %AIMoveAction($0002)
     PLY                                                        ;84BFF6|7A      |      ;
     PLX                                                        ;84BFF7|FA      |      ;
     SEP #$20                                                   ;84BFF8|E220    |      ;
@@ -8832,14 +7793,8 @@ fAIAction0x58_ReplaceFarmTile:
  
 fAIAction0x59_SwapEquippedItems:
     REP #$30                                                   ;84C000|C230    |      ;
-    REP #$30                                                   ;84C002|C230    |      ;
-    LDA.B ptrAIActionData                                      ;84C004|A5C9    |0000C9;
-    CLC                                                        ;84C006|18      |      ;
-    ADC.W #$0001                                               ;84C007|690100  |      ;
-    STA.B ptrAIActionData                                      ;84C00A|85C9    |0000C9;
-    REP #$30                                                   ;84C00C|C230    |      ;
-    LDA.W #$001C                                               ;84C00E|A91C00  |      ;
-    STA.B nPlayerAction                                        ;84C011|85D4    |0000D4;
+    %AIMoveAction($0001)
+    %SetPlayerAction(!PACTION_SWAPTOOL)
     RTS                                                        ;84C013|60      |      ;
  
  
@@ -8929,7 +7884,7 @@ fNameInput_ControlsHandler:
  
 fNameInput_BButton:
     SEP #$20                                                   ;84C0AB|E220    |      ;
-    LDA.W nNameEntryIndex                                      ;84C0AD|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C0AD|AD9409  |000994;
     BEQ .label2                                                ;84C0B0|F029    |84C0DB;
     CMP.B #$04                                                 ;84C0B2|C904    |      ;
     BEQ .label1                                                ;84C0B4|F009    |84C0BF;
@@ -8941,7 +7896,7 @@ fNameInput_BButton:
     SEP #$20                                                   ;84C0BF|E220    |      ;
     LDA.B #$00                                                 ;84C0C1|A900    |      ;
     XBA                                                        ;84C0C3|EB      |      ;
-    LDA.W nNameEntryIndex                                      ;84C0C4|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C0C4|AD9409  |000994;
     DEC A                                                      ;84C0C7|3A      |      ;
     REP #$20                                                   ;84C0C8|C220    |      ;
     TAX                                                        ;84C0CA|AA      |      ;
@@ -8949,9 +7904,9 @@ fNameInput_BButton:
     LDA.B #$B1                                                 ;84C0CD|A9B1    |      ;
     STA.W sTempNameVariable,X                                  ;84C0CF|9D8508  |000885;
     SEP #$20                                                   ;84C0D2|E220    |      ;
-    LDA.W nNameEntryIndex                                      ;84C0D4|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C0D4|AD9409  |000994;
     DEC A                                                      ;84C0D7|3A      |      ;
-    STA.W nNameEntryIndex                                      ;84C0D8|8D9409  |000994;
+    STA.W strcMenuObjectData.nameEntryIdx                      ;84C0D8|8D9409  |000994;
  
 .label2:
     SEP #$20                                                   ;84C0DB|E220    |      ;
@@ -8984,7 +7939,7 @@ fNameInput_AButton:
  
  
   + SEP #$20                                                   ;84C113|E220    |      ;
-    LDA.W nNameEntryIndex                                      ;84C115|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C115|AD9409  |000994;
     CMP.B #$04                                                 ;84C118|C904    |      ;
     BEQ .lastLetterInput                                       ;84C11A|F028    |84C144;
     REP #$20                                                   ;84C11C|C220    |      ;
@@ -8994,7 +7949,7 @@ fNameInput_AButton:
     PHA                                                        ;84C127|48      |      ;
     LDA.B #$00                                                 ;84C128|A900    |      ;
     XBA                                                        ;84C12A|EB      |      ;
-    LDA.W nNameEntryIndex                                      ;84C12B|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C12B|AD9409  |000994;
     REP #$20                                                   ;84C12E|C220    |      ;
     TAX                                                        ;84C130|AA      |      ;
     SEP #$20                                                   ;84C131|E220    |      ;
@@ -9002,9 +7957,9 @@ fNameInput_AButton:
     STA.W sTempNameVariable,X                                  ;84C134|9D8508  |000885;
     JSL.L fTextUnknown_82EA60                                  ;84C137|2260EA82|82EA60;
     SEP #$20                                                   ;84C13B|E220    |      ;
-    LDA.W nNameEntryIndex                                      ;84C13D|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C13D|AD9409  |000994;
     INC A                                                      ;84C140|1A      |      ;
-    STA.W nNameEntryIndex                                      ;84C141|8D9409  |000994;
+    STA.W strcMenuObjectData.nameEntryIdx                      ;84C141|8D9409  |000994;
  
 .lastLetterInput:
     SEP #$20                                                   ;84C144|E220    |      ;
@@ -9020,12 +7975,12 @@ fNameInput_AButton:
 fInput_Unknown84C157:
     SEP #$20                                                   ;84C157|E220    |      ;
     LDA.B #$00                                                 ;84C159|A900    |      ;
-    STA.W nMenuTableSelector                                   ;84C15B|8D9309  |000993;
+    STA.W strcMenuObjectData.tableSelector                     ;84C15B|8D9309  |000993;
     REP #$20                                                   ;84C15E|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;84C160|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;84C163|9C3E01  |00013E;
     REP #$20                                                   ;84C166|C220    |      ;
-    STZ.W nMenuIndex                                           ;84C168|9C9109  |000991;
+    STZ.W strcMenuObjectData.menuIdx                           ;84C168|9C9109  |000991;
     SEP #$20                                                   ;84C16B|E220    |      ;
     REP #$10                                                   ;84C16D|C210    |      ;
     LDA.B #$01                                                 ;84C16F|A901    |      ;
@@ -9039,13 +7994,13 @@ fInput_Unknown84C157:
 fInput_Unknown84C17E:
     SEP #$20                                                   ;84C17E|E220    |      ;
     LDA.B #$01                                                 ;84C180|A901    |      ;
-    STA.W nMenuTableSelector                                   ;84C182|8D9309  |000993;
+    STA.W strcMenuObjectData.tableSelector                     ;84C182|8D9309  |000993;
     REP #$20                                                   ;84C185|C220    |      ;
     LDA.W #$0100                                               ;84C187|A90001  |      ;
     STA.W strcBGScrool.BG1HorOffs                              ;84C18A|8D3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;84C18D|9C3E01  |00013E;
     REP #$20                                                   ;84C190|C220    |      ;
-    STZ.W nMenuIndex                                           ;84C192|9C9109  |000991;
+    STZ.W strcMenuObjectData.menuIdx                           ;84C192|9C9109  |000991;
     SEP #$20                                                   ;84C195|E220    |      ;
     REP #$10                                                   ;84C197|C210    |      ;
     LDA.B #$01                                                 ;84C199|A901    |      ;
@@ -9059,13 +8014,13 @@ fInput_Unknown84C17E:
 fInput_Unknown84C1A8:
     SEP #$20                                                   ;84C1A8|E220    |      ;
     LDA.B #$02                                                 ;84C1AA|A902    |      ;
-    STA.W nMenuTableSelector                                   ;84C1AC|8D9309  |000993;
+    STA.W strcMenuObjectData.tableSelector                     ;84C1AC|8D9309  |000993;
     REP #$20                                                   ;84C1AF|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;84C1B1|9C3C01  |00013C;
     LDA.W #$0100                                               ;84C1B4|A90001  |      ;
     STA.W strcBGScrool.BG1VerOffs                              ;84C1B7|8D3E01  |00013E;
     REP #$20                                                   ;84C1BA|C220    |      ;
-    STZ.W nMenuIndex                                           ;84C1BC|9C9109  |000991;
+    STZ.W strcMenuObjectData.menuIdx                           ;84C1BC|9C9109  |000991;
     SEP #$20                                                   ;84C1BF|E220    |      ;
     REP #$10                                                   ;84C1C1|C210    |      ;
     LDA.B #$01                                                 ;84C1C3|A901    |      ;
@@ -9078,10 +8033,10 @@ fInput_Unknown84C1A8:
  
 fInput_Unknown84C1D2:
     SEP #$20                                                   ;84C1D2|E220    |      ;
-    LDA.W nNameEntryIndex                                      ;84C1D4|AD9409  |000994;
+    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C1D4|AD9409  |000994;
     BEQ +                                                      ;84C1D7|F018    |84C1F1;
     LDA.B #$03                                                 ;84C1D9|A903    |      ;
-    STA.W nMenuTableSelector                                   ;84C1DB|8D9309  |000993;
+    STA.W strcMenuObjectData.tableSelector                     ;84C1DB|8D9309  |000993;
     SEP #$20                                                   ;84C1DE|E220    |      ;
     REP #$10                                                   ;84C1E0|C210    |      ;
     LDA.B #$01                                                 ;84C1E2|A901    |      ;
@@ -9107,7 +8062,7 @@ fNameInput_DownButton:
     LDA.W #$0000                                               ;84C206|A90000  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C209|22ACEB82|82EBAC;
     REP #$20                                                   ;84C20D|C220    |      ;
-    STA.W nMenuIndex                                           ;84C20F|8D9109  |000991;
+    STA.W strcMenuObjectData.menuIdx                           ;84C20F|8D9109  |000991;
     SEP #$20                                                   ;84C212|E220    |      ;
     REP #$10                                                   ;84C214|C210    |      ;
     LDA.B #$03                                                 ;84C216|A903    |      ;
@@ -9123,7 +8078,7 @@ fNameInput_UpButton:
     LDA.W #$0001                                               ;84C227|A90100  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C22A|22ACEB82|82EBAC;
     REP #$20                                                   ;84C22E|C220    |      ;
-    STA.W nMenuIndex                                           ;84C230|8D9109  |000991;
+    STA.W strcMenuObjectData.menuIdx                           ;84C230|8D9109  |000991;
     SEP #$20                                                   ;84C233|E220    |      ;
     REP #$10                                                   ;84C235|C210    |      ;
     LDA.B #$03                                                 ;84C237|A903    |      ;
@@ -9139,7 +8094,7 @@ fNameInput_RightButton:
     LDA.W #$0002                                               ;84C248|A90200  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C24B|22ACEB82|82EBAC;
     REP #$20                                                   ;84C24F|C220    |      ;
-    STA.W nMenuIndex                                           ;84C251|8D9109  |000991;
+    STA.W strcMenuObjectData.menuIdx                           ;84C251|8D9109  |000991;
     SEP #$20                                                   ;84C254|E220    |      ;
     REP #$10                                                   ;84C256|C210    |      ;
     LDA.B #$03                                                 ;84C258|A903    |      ;
@@ -9155,7 +8110,7 @@ fNameInput_LeftButton:
     LDA.W #$0003                                               ;84C269|A90300  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C26C|22ACEB82|82EBAC;
     REP #$20                                                   ;84C270|C220    |      ;
-    STA.W nMenuIndex                                           ;84C272|8D9109  |000991;
+    STA.W strcMenuObjectData.menuIdx                           ;84C272|8D9109  |000991;
     SEP #$20                                                   ;84C275|E220    |      ;
     REP #$10                                                   ;84C277|C210    |      ;
     LDA.B #$03                                                 ;84C279|A903    |      ;
@@ -9765,9 +8720,7 @@ fInput_Unknown84C684:
  
  
 fInput_Handler_case01:
-    REP #$30                                                   ;84C6B7|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84C6B9|A5D2    |0000D2;
-    AND.W #$00C4                                               ;84C6BB|29C400  |      ;
+    %CheckPlayerFlags(!PFLAGS_INTRANSITION|!PFLAGS_INTERACTING|!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84C6BE|F003    |84C6C3;
     JMP.W fInput_Return84C7B5                                  ;84C6C0|4CB5C7  |84C7B5;
  
@@ -9784,16 +8737,12 @@ fInput_Handler_case01:
     JMP.W fInput_Return84C7B5                                  ;84C6D6|4CB5C7  |84C7B5;
  
  
-  + REP #$30                                                   ;84C6D9|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84C6DB|A5D2    |0000D2;
-    AND.W #$1000                                               ;84C6DD|290010  |      ;
+  + %CheckPlayerFlags(!PFLAGS_AISTEERING)
     BEQ +                                                      ;84C6E0|F003    |84C6E5;
     JMP.W fInput_AIJoypadHandler                               ;84C6E2|4CD6C7  |84C7D6;
  
  
-  + REP #$30                                                   ;84C6E5|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84C6E7|A5D2    |0000D2;
-    AND.W #$4000                                               ;84C6E9|290040  |      ;
+  + %CheckPlayerFlags(!PFLAGS_USERCONTROL)
     BNE +                                                      ;84C6EC|D003    |84C6F1;
     JMP.W fInput_Return84C7B5                                  ;84C6EE|4CB5C7  |84C7B5;
  
@@ -9843,9 +8792,7 @@ fInput_Handler_case01:
  
  
 fInput_Unknown84C740:
-    REP #$30                                                   ;84C740|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84C742|A5D2    |0000D2;
-    AND.W #$1000                                               ;84C744|290010  |      ;
+    %CheckPlayerFlags(!PFLAGS_AISTEERING)
     BEQ +                                                      ;84C747|F003    |84C74C;
     JMP.W fInput_Unknown08FD_case0200                          ;84C749|4C04C8  |84C804;
  
@@ -9864,9 +8811,7 @@ fInput_Unknown84C740:
     JMP.W fInput_Unknown84CAA5                                 ;84C762|4CA5CA  |84CAA5;
  
  
-  + REP #$30                                                   ;84C765|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84C767|A5D2    |0000D2;
-    AND.W #$0020                                               ;84C769|292000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;84C76C|F003    |84C771;
     JMP.W fInput_Return84C7B5                                  ;84C76E|4CB5C7  |84C7B5;
  
@@ -10013,9 +8958,7 @@ fInput_Unused84C852:
     JMP.W .left                                                ;84C87F|4CF3C8  |84C8F3;
  
  
-  + REP #$30                                                   ;84C882|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84C887|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
  
 .justReturn:
     RTL                                                        ;84C889|6B      |      ;
@@ -10023,123 +8966,107 @@ fInput_Unused84C852:
  
 .down:
     REP #$30                                                   ;84C88A|C230    |      ;
-    LDA.W $0911                                                ;84C88C|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C88C|AD1109  |000911;
     CMP.W #$0000                                               ;84C88F|C90000  |      ;
     BNE +                                                      ;84C892|D003    |84C897;
     JMP.W .setPlayerAction7                                    ;84C894|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C897|C230    |      ;
-    LDA.W $0911                                                ;84C899|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C899|AD1109  |000911;
     CMP.W #$0001                                               ;84C89C|C90100  |      ;
     BNE +                                                      ;84C89F|D003    |84C8A4;
     JMP.W .setPlayerAction6                                    ;84C8A1|4C21C9  |84C921;
  
  
-  + REP #$30                                                   ;84C8A4|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84C8A9|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     BRA .justReturn                                            ;84C8AB|80DC    |84C889;
  
  
 .up:
     REP #$30                                                   ;84C8AD|C230    |      ;
-    LDA.W $0911                                                ;84C8AF|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C8AF|AD1109  |000911;
     CMP.W #$0001                                               ;84C8B2|C90100  |      ;
     BNE +                                                      ;84C8B5|D003    |84C8BA;
     JMP.W .setPlayerAction7                                    ;84C8B7|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C8BA|C230    |      ;
-    LDA.W $0911                                                ;84C8BC|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C8BC|AD1109  |000911;
     CMP.W #$0000                                               ;84C8BF|C90000  |      ;
     BNE +                                                      ;84C8C2|D003    |84C8C7;
     JMP.W .setPlayerAction6                                    ;84C8C4|4C21C9  |84C921;
  
  
-  + REP #$30                                                   ;84C8C7|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84C8CC|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     BRA .justReturn                                            ;84C8CE|80B9    |84C889;
  
  
 .right:
     REP #$30                                                   ;84C8D0|C230    |      ;
-    LDA.W $0911                                                ;84C8D2|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C8D2|AD1109  |000911;
     CMP.W #$0002                                               ;84C8D5|C90200  |      ;
     BNE +                                                      ;84C8D8|D003    |84C8DD;
     JMP.W .setPlayerAction7                                    ;84C8DA|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C8DD|C230    |      ;
-    LDA.W $0911                                                ;84C8DF|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C8DF|AD1109  |000911;
     CMP.W #$0003                                               ;84C8E2|C90300  |      ;
     BNE +                                                      ;84C8E5|D003    |84C8EA;
     JMP.W .setPlayerAction6                                    ;84C8E7|4C21C9  |84C921;
  
  
-  + REP #$30                                                   ;84C8EA|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84C8EF|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     BRA .justReturn                                            ;84C8F1|8096    |84C889;
  
  
 .left:
     REP #$30                                                   ;84C8F3|C230    |      ;
-    LDA.W $0911                                                ;84C8F5|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C8F5|AD1109  |000911;
     CMP.W #$0003                                               ;84C8F8|C90300  |      ;
     BNE +                                                      ;84C8FB|D003    |84C900;
     JMP.W .setPlayerAction7                                    ;84C8FD|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C900|C230    |      ;
-    LDA.W $0911                                                ;84C902|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C902|AD1109  |000911;
     CMP.W #$0002                                               ;84C905|C90200  |      ;
     BNE +                                                      ;84C908|D003    |84C90D;
     JMP.W .setPlayerAction6                                    ;84C90A|4C21C9  |84C921;
  
  
-  + REP #$30                                                   ;84C90D|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84C912|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_NONE)
     JMP.W .justReturn                                          ;84C914|4C89C8  |84C889;
  
  
 .setPlayerAction7:
-    REP #$30                                                   ;84C917|C230    |      ;
-    LDA.W #$0007                                               ;84C919|A90700  |      ;
-    STA.B nPlayerAction                                        ;84C91C|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_07)
     JMP.W .justReturn                                          ;84C91E|4C89C8  |84C889;
  
  
 .setPlayerAction6:
-    REP #$30                                                   ;84C921|C230    |      ;
-    LDA.W #$0006                                               ;84C923|A90600  |      ;
-    STA.B nPlayerAction                                        ;84C926|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_06)
     JMP.W .justReturn                                          ;84C928|4C89C8  |84C889;
  
  
 .return:
-    REP #$30                                                   ;84C92B|C230    |      ;
-    LDA.W #!PACTION_NONE                                               
-    STA.B nPlayerAction                                        ;84C930|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_NONE)
     JMP.W .justReturn                                          ;84C932|4C89C8  |84C889;
  
  
 fAiInput_PressDown:
-    REP #$30                                                   ;84C935|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84C93A|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C93C|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;84C941|85DA    |0000DA;
     REP #$30                                                   ;84C943|C230    |      ;
     LDA.W #$0000                                               ;84C945|A90000  |      ;
-    STA.W $0911                                                ;84C948|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84C948|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C94B|4C40C7  |84C740;
  
     REP #$30                                                   ;84C94E|C230    |      ;
-    LDA.W $0911                                                ;84C950|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C950|AD1109  |000911;
     CMP.W #$0001                                               ;84C953|C90100  |      ;
     BNE +                                                      ;84C956|D003    |84C95B;
     JMP.W .label1                                              ;84C958|4C5EC9  |84C95E;
@@ -10149,9 +9076,7 @@ fAiInput_PressDown:
  
  
 .label1:
-    REP #$30                                                   ;84C95E|C230    |      ;
-    LDA.W #$0001                                               ;84C960|A90100  |      ;
-    STA.B nPlayerAction                                        ;84C963|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C965|C230    |      ;
     LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;84C96A|85DA    |0000DA;
@@ -10159,19 +9084,17 @@ fAiInput_PressDown:
  
  
 fAiInput_PressUp:
-    REP #$30                                                   ;84C96F|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84C974|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C976|C230    |      ;
     LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;84C97B|85DA    |0000DA;
     REP #$30                                                   ;84C97D|C230    |      ;
     LDA.W #$0001                                               ;84C97F|A90100  |      ;
-    STA.W $0911                                                ;84C982|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84C982|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C985|4C40C7  |84C740;
  
     REP #$30                                                   ;84C988|C230    |      ;
-    LDA.W $0911                                                ;84C98A|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C98A|AD1109  |000911;
     CMP.W #$0000                                               ;84C98D|C90000  |      ;
     BNE +                                                      ;84C990|D003    |84C995;
     JMP.W .label1                                              ;84C992|4C98C9  |84C998;
@@ -10181,9 +9104,7 @@ fAiInput_PressUp:
  
  
 .label1:
-    REP #$30                                                   ;84C998|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84C99D|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C99F|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;84C9A4|85DA    |0000DA;
@@ -10191,19 +9112,17 @@ fAiInput_PressUp:
  
  
 fAiInput_PressRight:
-    REP #$30                                                   ;84C9A9|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84C9AE|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C9B0|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;84C9B5|85DA    |0000DA;
     REP #$30                                                   ;84C9B7|C230    |      ;
     LDA.W #$0002                                               ;84C9B9|A90200  |      ;
-    STA.W $0911                                                ;84C9BC|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84C9BC|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C9BF|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9C2|C230    |      ;
-    LDA.W $0911                                                ;84C9C4|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C9C4|AD1109  |000911;
     CMP.W #$0003                                               ;84C9C7|C90300  |      ;
     BNE +                                                      ;84C9CA|D003    |84C9CF;
     JMP.W .label1                                              ;84C9CC|4CD2C9  |84C9D2;
@@ -10213,9 +9132,7 @@ fAiInput_PressRight:
  
  
 .label1:
-    REP #$30                                                   ;84C9D2|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84C9D7|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C9D9|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;84C9DE|85DA    |0000DA;
@@ -10223,19 +9140,17 @@ fAiInput_PressRight:
  
  
 fAiInput_PressLeft:
-    REP #$30                                                   ;84C9E3|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84C9E8|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84C9EA|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;84C9EF|85DA    |0000DA;
     REP #$30                                                   ;84C9F1|C230    |      ;
     LDA.W #$0003                                               ;84C9F3|A90300  |      ;
-    STA.W $0911                                                ;84C9F6|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84C9F6|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C9F9|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9FC|C230    |      ;
-    LDA.W $0911                                                ;84C9FE|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84C9FE|AD1109  |000911;
     CMP.W #$0002                                               ;84CA01|C90200  |      ;
     BNE +                                                      ;84CA04|D003    |84CA09;
     JMP.W .label1                                              ;84CA06|4C0CCA  |84CA0C;
@@ -10245,9 +9160,7 @@ fAiInput_PressLeft:
  
  
 .label1:
-    REP #$30                                                   ;84CA0C|C230    |      ;
-    LDA.W #!PACTION_WALK                                               
-    STA.B nPlayerAction                                        ;84CA11|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;84CA13|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;84CA18|85DA    |0000DA;
@@ -10255,9 +9168,7 @@ fAiInput_PressLeft:
  
  
 fInput_RunToJump:
-    REP #$30                                                   ;84CA1D|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CA1F|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+    %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CA24|F003    |84CA29;
     JMP.W .return                                              ;84CA26|4C9DCA  |84CA9D;
  
@@ -10276,10 +9187,7 @@ fInput_RunToJump:
     BEQ .return                                                ;84CA49|F052    |84CA9D;
     AND.B #$20                                                 ;84CA4B|2920    |      ;
     BNE .label1                                                ;84CA4D|D010    |84CA5F;
-    REP #$30                                                   ;84CA4F|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CA51|A5D2    |0000D2;
-    ORA.W #$0200                                               ;84CA53|090002  |      ;
-    STA.B nPlayerFlags                                         ;84CA56|85D2    |0000D2;
+    %SetPlayerFlag(!PFLAGS_FALLING)
     REP #$20                                                   ;84CA58|C220    |      ;
     LDA.W #$0021                                               ;84CA5A|A92100  |      ;
     BRA .jump                                                  ;84CA5D|8007    |84CA66;
@@ -10312,31 +9220,24 @@ fInput_RunToJump:
     REP #$30                                                   ;84CA8D|C230    |      ;
     CMP.W #$0000                                               ;84CA8F|C90000  |      ;
     BNE .return                                                ;84CA92|D009    |84CA9D;
-    REP #$30                                                   ;84CA94|C230    |      ;
-    LDA.W #!PACTION_JUMP                                               
-    STA.B nPlayerAction                                        ;84CA99|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_JUMP)
     BRA .justReturn                                            ;84CA9B|8007    |84CAA4;
  
  
 .return:
-    REP #$30                                                   ;84CA9D|C230    |      ;
-    LDA.W #!PACTION_RUN                                               
-    STA.B nPlayerAction                                        ;84CAA2|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_RUN)
  
 .justReturn:
     RTL                                                        ;84CAA4|6B      |      ;
  
  
 fInput_Unknown84CAA5:
-    REP #$30                                                   ;84CAA5|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CAA7|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+    %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CAAC|F003    |84CAB1;
     JMP.W .label3                                              ;84CAAE|4C2BCB  |84CB2B;
  
  
-  + LDA.B nPlayerFlags                                         ;84CAB1|A5D2    |0000D2;
-    AND.W #$0010                                               ;84CAB3|291000  |      ;
+  + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CAB6|F003    |84CABB;
     JMP.W .label4                                              ;84CAB8|4C1CCC  |84CC1C;
  
@@ -10347,9 +9248,7 @@ fInput_Unknown84CAA5:
     JMP.W .label2                                              ;84CAC4|4CFECA  |84CAFE;
  
  
-  + REP #$30                                                   ;84CAC7|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CAC9|A5D2    |0000D2;
-    AND.W #!PFLAGS_HOLDINGITEM                                               
+  + %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CACE|F003    |84CAD3;
     JMP.W .label1                                              ;84CAD0|4CF6CA  |84CAF6;
  
@@ -10369,9 +9268,7 @@ fInput_Unknown84CAA5:
  
  
 .label1:
-    REP #$30                                                   ;84CAF6|C230    |      ;
-    LDA.W #!PACTION_DROPITEM                                               
-    STA.B nPlayerAction                                        ;84CAFB|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_DROPITEM)
     RTL                                                        ;84CAFD|6B      |      ;
  
  
@@ -10389,9 +9286,7 @@ fInput_Unknown84CAA5:
     REP #$30                                                   ;84CB1C|C230    |      ;
     CPX.W #$00F5                                               ;84CB1E|E0F500  |      ;
     BNE .justReturn                                            ;84CB21|D007    |84CB2A;
-    REP #$30                                                   ;84CB23|C230    |      ;
-    LDA.W #$001A                                               ;84CB25|A91A00  |      ;
-    STA.B nPlayerAction                                        ;84CB28|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_1A)
  
 .justReturn:
     RTL                                                        ;84CB2A|6B      |      ;
@@ -10498,14 +9393,8 @@ fInput_Unknown84CAA5:
     SEP #$20                                                   ;84CBFF|E220    |      ;
     LDA.B nMapEngine_AreaIdToLoad                              ;84CC01|A522    |000022;
     STA.L nDogAreaId                                           ;84CC03|8F301F7F|7F1F30;
-    REP #$30                                                   ;84CC07|C230    |      ;
-    LDA.W #!PACTION_DROPPINGDOG                                               
-    STA.B nPlayerAction                                        ;84CC0C|85D4    |0000D4;
-    REP #$30                                                   ;84CC0E|C230    |      ;
-    LDA.W #!PFLAGS_DOGHUGGING                                               
-    EOR.W #$FFFF                                               ;84CC13|49FFFF  |      ;
-    AND.B nPlayerFlags                                         ;84CC16|25D2    |0000D2;
-    STA.B nPlayerFlags                                         ;84CC18|85D2    |0000D2;
+    %SetPlayerAction(!PACTION_DROPPINGDOG)
+    %UnsetPlayerFlag(!PFLAGS_DOGHUGGING)
     RTL                                                        ;84CC1A|6B      |      ;
  
  
@@ -10539,7 +9428,7 @@ fInput_Unknown84CAA5:
 .label5:
     REP #$30                                                   ;84CC40|C230    |      ;
     LDA.W #$0002                                               ;84CC42|A90200  |      ;
-    STA.W $0911                                                ;84CC45|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC45|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC48|2216CD84|84CD16;
     REP #$30                                                   ;84CC4C|C230    |      ;
     BNE +                                                      ;84CC4E|D003    |84CC53;
@@ -10547,7 +9436,7 @@ fInput_Unknown84CAA5:
  
  
   + LDA.W #$0003                                               ;84CC53|A90300  |      ;
-    STA.W $0911                                                ;84CC56|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC56|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC59|2216CD84|84CD16;
     REP #$30                                                   ;84CC5D|C230    |      ;
     BNE +                                                      ;84CC5F|D003    |84CC64;
@@ -10556,68 +9445,66 @@ fInput_Unknown84CAA5:
  
   + LDA.W #!PDIR_DOWN                                               
     STA.B nPlayerDirection                                     ;84CC67|85DA    |0000DA;
-    STA.W $0911                                                ;84CC69|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC69|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC6C|4C15CD  |84CD15;
  
  
 .label6:
     REP #$30                                                   ;84CC6F|C230    |      ;
     LDA.W #$0003                                               ;84CC71|A90300  |      ;
-    STA.W $0911                                                ;84CC74|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC74|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC77|2216CD84|84CD16;
     REP #$30                                                   ;84CC7B|C230    |      ;
     BEQ .label9                                                ;84CC7D|F069    |84CCE8;
     LDA.W #$0002                                               ;84CC7F|A90200  |      ;
-    STA.W $0911                                                ;84CC82|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC82|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC85|2216CD84|84CD16;
     REP #$30                                                   ;84CC89|C230    |      ;
     BEQ .label9                                                ;84CC8B|F05B    |84CCE8;
     LDA.W #!PDIR_UP                                               
     STA.B nPlayerDirection                                     ;84CC90|85DA    |0000DA;
-    STA.W $0911                                                ;84CC92|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC92|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC95|4C15CD  |84CD15;
  
  
 .label7:
     REP #$30                                                   ;84CC98|C230    |      ;
     LDA.W #$0000                                               ;84CC9A|A90000  |      ;
-    STA.W $0911                                                ;84CC9D|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CC9D|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCA0|2216CD84|84CD16;
     REP #$30                                                   ;84CCA4|C230    |      ;
     BEQ .label9                                                ;84CCA6|F040    |84CCE8;
     LDA.W #$0001                                               ;84CCA8|A90100  |      ;
-    STA.W $0911                                                ;84CCAB|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CCAB|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCAE|2216CD84|84CD16;
     REP #$30                                                   ;84CCB2|C230    |      ;
     BEQ .label9                                                ;84CCB4|F032    |84CCE8;
     LDA.W #!PDIR_LEFT                                               
     STA.B nPlayerDirection                                     ;84CCB9|85DA    |0000DA;
-    STA.W $0911                                                ;84CCBB|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CCBB|8D1109  |000911;
     BRA .justReturn3                                           ;84CCBE|8055    |84CD15;
  
  
 .label8:
     REP #$30                                                   ;84CCC0|C230    |      ;
     LDA.W #$0000                                               ;84CCC2|A90000  |      ;
-    STA.W $0911                                                ;84CCC5|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CCC5|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCC8|2216CD84|84CD16;
     REP #$30                                                   ;84CCCC|C230    |      ;
     BEQ .label9                                                ;84CCCE|F018    |84CCE8;
     LDA.W #$0001                                               ;84CCD0|A90100  |      ;
-    STA.W $0911                                                ;84CCD3|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CCD3|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCD6|2216CD84|84CD16;
     REP #$30                                                   ;84CCDA|C230    |      ;
     BEQ .label9                                                ;84CCDC|F00A    |84CCE8;
     LDA.W #!PDIR_RIGHT                                               
     STA.B nPlayerDirection                                     ;84CCE1|85DA    |0000DA;
-    STA.W $0911                                                ;84CCE3|8D1109  |000911;
+    STA.W nPlayerDirectionCopy                                 ;84CCE3|8D1109  |000911;
     BRA .justReturn3                                           ;84CCE6|802D    |84CD15;
  
  
 .label9:
-    REP #$30                                                   ;84CCE8|C230    |      ;
-    LDA.W #$0018                                               ;84CCEA|A91800  |      ;
-    STA.B nPlayerAction                                        ;84CCED|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_18)
     REP #$30                                                   ;84CCEF|C230    |      ;
     LDA.B nPlayerPosX                                          ;84CCF1|A5D6    |0000D6;
     STA.W nTileInFrontOfPlayerX                                ;84CCF3|8D8509  |000985;
@@ -10647,7 +9534,7 @@ fInput_Unknown84CD16:
     STA.B nPlayerPosYCopy                                      ;84CD23|85E1    |0000E1;
     STZ.B nPlayerPosCalculationX                               ;84CD25|64E5    |0000E5;
     STZ.B nPlayerPosCalculationY                               ;84CD27|64E7    |0000E7;
-    LDA.W $0911                                                ;84CD29|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84CD29|AD1109  |000911;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;84CD2C|2237AF83|83AF37;
     REP #$30                                                   ;84CD30|C230    |      ;
     BEQ +                                                      ;84CD32|F003    |84CD37;
@@ -10673,7 +9560,7 @@ fInput_Unknown84CD16:
   + REP #$20                                                   ;84CD53|C220    |      ;
     LDA.W #$0010                                               ;84CD55|A91000  |      ;
     STA.B $E3                                                  ;84CD58|85E3    |0000E3;
-    LDA.W $0911                                                ;84CD5A|AD1109  |000911;
+    LDA.W nPlayerDirectionCopy                                 ;84CD5A|AD1109  |000911;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;84CD5D|2291AD83|83AD91;
     REP #$30                                                   ;84CD61|C230    |      ;
     CMP.W #$0000                                               ;84CD63|C90000  |      ;
@@ -10693,23 +9580,17 @@ fInput_Unknown84CD16:
  
  
 fInput_Unknown84CD77:
-    REP #$30                                                   ;84CD77|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CD79|A5D2    |0000D2;
-    AND.W #$0002                                               ;84CD7B|290200  |      ;
+    %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CD7E|F003    |84CD83;
     JMP.W fInput_Return84CDDC                                  ;84CD80|4CDCCD  |84CDDC;
  
  
-  + REP #$30                                                   ;84CD83|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CD85|A5D2    |0000D2;
-    AND.W #$0010                                               ;84CD87|291000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CD8A|F003    |84CD8F;
     JMP.W fInput_Return84CDDC                                  ;84CD8C|4CDCCD  |84CDDC;
  
  
-  + REP #$30                                                   ;84CD8F|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CD91|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CD96|F003    |84CD9B;
     JMP.W fInput_Return84CDDC                                  ;84CD98|4CDCCD  |84CDDC;
  
@@ -10743,33 +9624,25 @@ fInput_SetPlayerAction0x0A:
     SEP #$20                                                   ;84CDCA|E220    |      ;
     LDA.W nToolEquipped                                        ;84CDCC|AD2109  |000921;
     BEQ fInput_Return84CDDC                                    ;84CDCF|F00B    |84CDDC;
-    REP #$30                                                   ;84CDD1|C230    |      ;
-    LDA.W #$000A                                               ;84CDD3|A90A00  |      ;
-    STA.B nPlayerAction                                        ;84CDD6|85D4    |0000D4;
-    JSL.L fToolUsed_AnimationSubrutines                        ;84CDD8|22A89082|8290A8;
+    %SetPlayerAction(!PACTION_USINGTOOL)
+    JSL.L fToolUsedAnimationHandler                            ;84CDD8|22A89082|8290A8;
  
 fInput_Return84CDDC:
     RTL                                                        ;84CDDC|6B      |      ;
  
  
 fInput_SetPlayerAction0x10:
-    REP #$30                                                   ;84CDDD|C230    |      ;
-    LDA.W #$0010                                               ;84CDDF|A91000  |      ;
-    STA.B nPlayerAction                                        ;84CDE2|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_10)
     RTL                                                        ;84CDE4|6B      |      ;
  
  
 fInput_SetPlayerAction0x0F:
-    REP #$30                                                   ;84CDE5|C230    |      ;
-    LDA.W #$000F                                               ;84CDE7|A90F00  |      ;
-    STA.B nPlayerAction                                        ;84CDEA|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_0F)
     RTL                                                        ;84CDEC|6B      |      ;
  
  
 fInput_SetPlayerAction0x13:
-    REP #$30                                                   ;84CDED|C230    |      ;
-    LDA.W #$0013                                               ;84CDEF|A91300  |      ;
-    STA.B nPlayerAction                                        ;84CDF2|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_REELING)
     SEP #$20                                                   ;84CDF4|E220    |      ;
     LDA.B #$03                                                 ;84CDF6|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;84CDF8|22F98980|8089F9;
@@ -10785,23 +9658,17 @@ fInput_SetPlayerAction0x13:
  
  
 fInput_SetPlayerAction0x0D_WhistleR:
-    REP #$30                                                   ;84CE0C|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE0E|A5D2    |0000D2;
-    AND.W #$0002                                               ;84CE10|290200  |      ;
+    %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE13|F003    |84CE18;
     JMP.W .justReturn                                          ;84CE15|4C42CE  |84CE42;
  
  
-  + REP #$30                                                   ;84CE18|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE1A|A5D2    |0000D2;
-    AND.W #$0010                                               ;84CE1C|291000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CE1F|F003    |84CE24;
     JMP.W .justReturn                                          ;84CE21|4C42CE  |84CE42;
  
  
-  + REP #$30                                                   ;84CE24|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE26|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CE2B|F003    |84CE30;
     JMP.W .justReturn                                          ;84CE2D|4C42CE  |84CE42;
  
@@ -10810,32 +9677,24 @@ fInput_SetPlayerAction0x0D_WhistleR:
     LDA.L strcEventFlags.flags3                                ;84CE32|AF681F7F|7F1F68;
     AND.W #$0100                                               ;84CE36|290001  |      ;
     BEQ .justReturn                                            ;84CE39|F007    |84CE42;
-    REP #$30                                                   ;84CE3B|C230    |      ;
-    LDA.W #$000D                                               ;84CE3D|A90D00  |      ;
-    STA.B nPlayerAction                                        ;84CE40|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WHISTLEHORSE)
  
 .justReturn:
     RTL                                                        ;84CE42|6B      |      ;
  
  
 fInput_SetPlayerAction0x1B_WhistleL:
-    REP #$30                                                   ;84CE43|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE45|A5D2    |0000D2;
-    AND.W #$0002                                               ;84CE47|290200  |      ;
+    %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE4A|F003    |84CE4F;
     JMP.W .justReturn                                          ;84CE4C|4C79CE  |84CE79;
  
  
-  + REP #$30                                                   ;84CE4F|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE51|A5D2    |0000D2;
-    AND.W #$0010                                               ;84CE53|291000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CE56|F003    |84CE5B;
     JMP.W .justReturn                                          ;84CE58|4C79CE  |84CE79;
  
  
-  + REP #$30                                                   ;84CE5B|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE5D|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CE62|F003    |84CE67;
     JMP.W .justReturn                                          ;84CE64|4C79CE  |84CE79;
  
@@ -10844,69 +9703,51 @@ fInput_SetPlayerAction0x1B_WhistleL:
     LDA.L strcEventFlags.flags3                                ;84CE69|AF681F7F|7F1F68;
     AND.W #$0080                                               ;84CE6D|298000  |      ;
     BEQ .justReturn                                            ;84CE70|F007    |84CE79;
-    REP #$30                                                   ;84CE72|C230    |      ;
-    LDA.W #$001B                                               ;84CE74|A91B00  |      ;
-    STA.B nPlayerAction                                        ;84CE77|85D4    |0000D4;
+    %SetPlayerAction(!PACTION_WHISTLEDOG)
  
 .justReturn:
     RTL                                                        ;84CE79|6B      |      ;
  
  
 fInput_SetPlayerAction0x0C:
-    REP #$30                                                   ;84CE7A|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE7C|A5D2    |0000D2;
-    AND.W #$0002                                               ;84CE7E|290200  |      ;
+    %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE81|F003    |84CE86;
     JMP.W .justReturn                                          ;84CE83|4CA5CE  |84CEA5;
  
  
-  + REP #$30                                                   ;84CE86|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE88|A5D2    |0000D2;
-    AND.W #$0010                                               ;84CE8A|291000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CE8D|F003    |84CE92;
     JMP.W .justReturn                                          ;84CE8F|4CA5CE  |84CEA5;
  
  
-  + REP #$30                                                   ;84CE92|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CE94|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CE99|F003    |84CE9E;
     JMP.W .justReturn                                          ;84CE9B|4CA5CE  |84CEA5;
  
  
-  + REP #$30                                                   ;84CE9E|C230    |      ;
-    LDA.W #$000C                                               ;84CEA0|A90C00  |      ;
-    STA.B nPlayerAction                                        ;84CEA3|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_SHOWTOOL)
  
 .justReturn:
     RTL                                                        ;84CEA5|6B      |      ;
  
  
 fInput_SetPlayerAction0x1C:
-    REP #$30                                                   ;84CEA6|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CEA8|A5D2    |0000D2;
-    AND.W #$0002                                               ;84CEAA|290200  |      ;
+    %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CEAD|F003    |84CEB2;
     JMP.W .justReturn                                          ;84CEAF|4CD1CE  |84CED1;
  
  
-  + REP #$30                                                   ;84CEB2|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CEB4|A5D2    |0000D2;
-    AND.W #$0010                                               ;84CEB6|291000  |      ;
+  + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CEB9|F003    |84CEBE;
     JMP.W .justReturn                                          ;84CEBB|4CD1CE  |84CED1;
  
  
-  + REP #$30                                                   ;84CEBE|C230    |      ;
-    LDA.B nPlayerFlags                                         ;84CEC0|A5D2    |0000D2;
-    AND.W #!PFLAGS_DOGHUGGING                                               
+  + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CEC5|F003    |84CECA;
     JMP.W .justReturn                                          ;84CEC7|4CD1CE  |84CED1;
  
  
-  + REP #$30                                                   ;84CECA|C230    |      ;
-    LDA.W #$001C                                               ;84CECC|A91C00  |      ;
-    STA.B nPlayerAction                                        ;84CECF|85D4    |0000D4;
+  + %SetPlayerAction(!PACTION_SWAPTOOL)
  
 .justReturn:
     RTL                                                        ;84CED1|6B      |      ;

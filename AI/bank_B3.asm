@@ -19,7 +19,7 @@ ppAIScriptingList:
     dl pAIScripting0x0D_CrossRoadsEvents                       ;B38027|        |B3F068;
     dl pAIScripting0x0E                                        ;B3802A|        |B3F0E6;
     dl pAIScripting0x0F_StarNightFestival                      ;B3802D|        |B48000;
-    dl pAIScripting0x10                                        ;B38030|        |B487B8;
+    dl pAIScripting0x10_WoodsPondEvent                         ;B38030|        |B487B8;
     dl pAIScripting0x11                                        ;B38033|        |B48818;
     dl pAIScripting0x12                                        ;B38036|        |B488A0;
     dl pAIScripting0x13                                        ;B38039|        |B4892A;

@@ -81,6 +81,7 @@
     nSmallItemSpriteIndex = $000901; !^ n8 ^!
     nPlayerPosXCopy2 = $000907; !^ n16 ^!
     nPlayerPosYCopy2 = $000909; !^ n16 ^!
+    nPlayerDirectionCopy = $000911
     nPlayerStamina = $000917; !^ n8 MaxHP ^!
     nPlayerEnergy = $000918; !^ n8 HP ^!
     nCarryItem_Current = $00091D; !^ n8 ^!
@@ -105,6 +106,7 @@
     nPlayerInteractionArg1 = $00096F; !^ n8 ^!
     nPlayerInteractionArg2 = $000970; !^ n8 ^!
     nTimeState = $000973; !^ n16, 00 - stop, 01- run, 02 - skip to next day ^!
+    nGameObjectIdx = $000978; !^ n16 ^!
     nUnknownX = $000980; !^ n16 ^!
     nUnknownY = $000982; !^ n16 ^!
     nCarriedItemId = $000984; !^ n16 ^!
@@ -114,14 +116,6 @@
     nWeatherForecast = $00098C
     nUnknownFlags09D = $00098D; !^ n8 ^!
     nWeatherDialogIdIndex = $000990; !^ n8 ^!
-    nMenuIndex = $000991; !^ n16 ^!
-    nMenuTableSelector = $000993; !^ n8 ^!
-    nNameEntryIndex = $000994; !^ n16 (we have max 4 letter names - this holds currently used tempname index) ^!
-    nMenuFlip = $000999; !^ n16 ^!
-    nMenuPosX = $00099B; !^ n16 ^!
-    nMenuPoxY = $00099D; !^ n16 ^!
-    nNameInputDestination = $00099F; !^ n8 ^!
-    nUnknown9B5 = $0009B5; !^ n8 ^!
     sCurrentObjectMap = $0009B6; !^ sObjectMap (0x1000) ^!
     DMASpriteOBJQueue = $7EA000
     DMASpriteOBJ2BitQueue = $7EA200
@@ -167,6 +161,7 @@
     sFirstChildNameShort = $7F1F3D; !^ 4 * s16 ^!
     sSecondChildNameShort = $7F1F41; !^ 4 * s8 ^!
     nEggInCoopFlags = $7F1F45
+    nEndingStep = $7F1F47; !^ n8 ^!
     nIntroHowToPlayIndex = $7F1F48; !^ n8 ^!
     nIntroHowToPlayIndex2 = $7F1F49; !^ n8 ^!
     nStatShippedCorns = $7F1F4A; !^ n16 ^!
