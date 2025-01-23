@@ -3112,7 +3112,7 @@ fAIAction0x31_UpdateCow:
     LDY.W #$000A                                               ;849B09|A00A00  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849B0C|9772    |000072;
     SEP #$20                                                   ;849B0E|E220    |      ;
-    LDA.B nMapEngine_AreaIdToLoad                              ;849B10|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;849B10|A522    |000022;
     CMP.B #!AREA_COWBARN                                                 
     BNE +                                                      ;849B14|D010    |849B26;
     SEP #$20                                                   ;849B16|E220    |      ;
@@ -3125,7 +3125,7 @@ fAIAction0x31_UpdateCow:
  
  
   + SEP #$20                                                   ;849B26|E220    |      ;
-    LDA.B nMapEngine_AreaIdToLoad                              ;849B28|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;849B28|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
     BCS fUnknown_ToFarm                                        ;849B2C|B017    |849B45;
     SEP #$20                                                   ;849B2E|E220    |      ;
@@ -9320,7 +9320,7 @@ fInput_Unknown84CAA5:
     LDA.W nTileInFrontOfPlayerY                                ;84CBF8|AD8709  |000987;
     STA.L nDogY                                                ;84CBFB|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84CBFF|E220    |      ;
-    LDA.B nMapEngine_AreaIdToLoad                              ;84CC01|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;84CC01|A522    |000022;
     STA.L nDogAreaId                                           ;84CC03|8F301F7F|7F1F30;
     %SetPlayerAction(!PACTION_DROPPINGDOG)
     %UnsetPlayerFlag(!PFLAGS_DOGHUGGING)

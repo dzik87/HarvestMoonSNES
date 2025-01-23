@@ -2,9 +2,6 @@
     ptrPaletteNext = $000004; !^ ptr24 ^!
     ptrUnknown0x07 = $000007; !^ ptr24 ^!
     ptrAudioData = $00000A; !^ ptr24 ^!
-    ptrSelectedTileMap = $00000D; !^ ptr24 ^!
-    pCurrentTileMapData = $000018; !^ ptr24 ^!
-    nMapEngine_AreaIdToLoad = $000022; !^ n8 ^!
     ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
     ptrUnknown0x75 = $000075; !^ ptr24 ^!
@@ -179,5 +176,12 @@
  
  
     Table_858C8E = $858C8E
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     PTR16_80FFFF = $80FFFF
     EMPTY_FFFFFF = $FFFFFF

@@ -412,7 +412,7 @@ fAudioUnknown_8382C6:
     JSL.L fCore_WaitForNMITimes                                ;8382EA|225D8680|80865D;
     SEP #$20                                                   ;8382EE|E220    |      ;
     LDA.W nDestinationAreaId                                   ;8382F0|AD8B09  |00098B;
-    STA.B nMapEngine_AreaIdToLoad                              ;8382F3|8522    |000022;
+    STA.B strcMap.loadAreaId                                   ;8382F3|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8382F5|22DE9580|8095DE;
     JSL.L fAudioUnknown_838401                                 ;8382F9|22018483|838401;
     RTL                                                        ;8382FD|6B      |      ;
@@ -7587,7 +7587,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C2C6|B772    |000072;
     CMP.B #$04                                                 ;83C2C8|C904    |      ;
     BCS .label3                                                ;83C2CA|B00C    |83C2D8;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C2CC|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C2CC|A522    |000022;
     CMP.B #$04                                                 ;83C2CE|C904    |      ;
     BCC +                                                      ;83C2D0|9003    |83C2D5;
     JMP.W .label12                                             ;83C2D2|4C01C4  |83C401;
@@ -7602,7 +7602,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C2DD|B772    |000072;
     CMP.B #$08                                                 ;83C2DF|C908    |      ;
     BCS .label4                                                ;83C2E1|B012    |83C2F5;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C2E3|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C2E3|A522    |000022;
     CMP.B #$04                                                 ;83C2E5|C904    |      ;
     BCS +                                                      ;83C2E7|B003    |83C2EC;
     JMP.W .label12                                             ;83C2E9|4C01C4  |83C401;
@@ -7622,7 +7622,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C2FA|B772    |000072;
     CMP.B #$10                                                 ;83C2FC|C910    |      ;
     BCS .label5                                                ;83C2FE|B012    |83C312;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C300|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C300|A522    |000022;
     CMP.B #$0C                                                 ;83C302|C90C    |      ;
     BCS +                                                      ;83C304|B003    |83C309;
     JMP.W .label12                                             ;83C306|4C01C4  |83C401;
@@ -7642,7 +7642,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C317|B772    |000072;
     CMP.B #$14                                                 ;83C319|C914    |      ;
     BCS .label6                                                ;83C31B|B012    |83C32F;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C31D|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C31D|A522    |000022;
     CMP.B #$10                                                 ;83C31F|C910    |      ;
     BCS +                                                      ;83C321|B003    |83C326;
     JMP.W .label12                                             ;83C323|4C01C4  |83C401;
@@ -7662,7 +7662,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C334|B772    |000072;
     CMP.B #$18                                                 ;83C336|C918    |      ;
     BCS .label7                                                ;83C338|B012    |83C34C;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C33A|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C33A|A522    |000022;
     CMP.B #$15                                                 ;83C33C|C915    |      ;
     BCS +                                                      ;83C33E|B003    |83C343;
     JMP.W .label12                                             ;83C340|4C01C4  |83C401;
@@ -7682,7 +7682,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C351|B772    |000072;
     CMP.B #$31                                                 ;83C353|C931    |      ;
     BCC .label8                                                ;83C355|900B    |83C362;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C357|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C357|A522    |000022;
     CMP.B #$31                                                 ;83C359|C931    |      ;
     BCS +                                                      ;83C35B|B003    |83C360;
     JMP.W .label12                                             ;83C35D|4C01C4  |83C401;
@@ -7695,7 +7695,7 @@ fGameEngine_ChichenUnknown83C296:
     SEP #$20                                                   ;83C362|E220    |      ;
     LDY.W #$0001                                               ;83C364|A00100  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83C367|B772    |000072;
-    CMP.B nMapEngine_AreaIdToLoad                              ;83C369|C522    |000022;
+    CMP.B strcMap.loadAreaId                                   ;83C369|C522    |000022;
     BEQ .continue                                              ;83C36B|F003    |83C370;
     JMP.W .label12                                             ;83C36D|4C01C4  |83C401;
  
@@ -7803,7 +7803,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + SEP #$20                                                   ;83C42A|E220    |      ;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C42C|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C42C|A522    |000022;
     CMP.B #$27                                                 ;83C42E|C927    |      ;
     BNE .label14                                               ;83C430|D03B    |83C46D;
     LDY.W #$0002                                               ;83C432|A00200  |      ;
@@ -7844,7 +7844,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C472|B772    |000072;
     CMP.B #$04                                                 ;83C474|C904    |      ;
     BCS .label15                                               ;83C476|B00C    |83C484;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C478|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C478|A522    |000022;
     CMP.B #$04                                                 ;83C47A|C904    |      ;
     BCC +                                                      ;83C47C|9003    |83C481;
     JMP.W .label29                                             ;83C47E|4C3DC6  |83C63D;
@@ -7859,7 +7859,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C489|B772    |000072;
     CMP.B #$08                                                 ;83C48B|C908    |      ;
     BCS .label50                                               ;83C48D|B012    |83C4A1;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C48F|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C48F|A522    |000022;
     CMP.B #$04                                                 ;83C491|C904    |      ;
     BCS +                                                      ;83C493|B003    |83C498;
     JMP.W .label29                                             ;83C495|4C3DC6  |83C63D;
@@ -7879,7 +7879,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4A6|B772    |000072;
     CMP.B #$10                                                 ;83C4A8|C910    |      ;
     BCS .label16                                               ;83C4AA|B012    |83C4BE;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C4AC|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C4AC|A522    |000022;
     CMP.B #$0C                                                 ;83C4AE|C90C    |      ;
     BCS +                                                      ;83C4B0|B003    |83C4B5;
     JMP.W .label29                                             ;83C4B2|4C3DC6  |83C63D;
@@ -7899,7 +7899,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4C3|B772    |000072;
     CMP.B #$14                                                 ;83C4C5|C914    |      ;
     BCS .label51                                               ;83C4C7|B012    |83C4DB;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C4C9|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C4C9|A522    |000022;
     CMP.B #$10                                                 ;83C4CB|C910    |      ;
     BCS +                                                      ;83C4CD|B003    |83C4D2;
     JMP.W .label29                                             ;83C4CF|4C3DC6  |83C63D;
@@ -7919,7 +7919,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4E0|B772    |000072;
     CMP.B #$18                                                 ;83C4E2|C918    |      ;
     BCS .label17                                               ;83C4E4|B012    |83C4F8;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C4E6|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C4E6|A522    |000022;
     CMP.B #$15                                                 ;83C4E8|C915    |      ;
     BCS +                                                      ;83C4EA|B003    |83C4EF;
     JMP.W .label29                                             ;83C4EC|4C3DC6  |83C63D;
@@ -7939,7 +7939,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.B [ptrUnknown0x72],Y                                   ;83C4FD|B772    |000072;
     CMP.B #$31                                                 ;83C4FF|C931    |      ;
     BCC .label18                                               ;83C501|900B    |83C50E;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C503|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C503|A522    |000022;
     CMP.B #$31                                                 ;83C505|C931    |      ;
     BCS +                                                      ;83C507|B003    |83C50C;
     JMP.W .label29                                             ;83C509|4C3DC6  |83C63D;
@@ -7952,7 +7952,7 @@ fGameEngine_ChichenUnknown83C296:
     SEP #$20                                                   ;83C50E|E220    |      ;
     LDY.W #$0002                                               ;83C510|A00200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83C513|B772    |000072;
-    CMP.B nMapEngine_AreaIdToLoad                              ;83C515|C522    |000022;
+    CMP.B strcMap.loadAreaId                                   ;83C515|C522    |000022;
     BEQ .label19                                               ;83C517|F003    |83C51C;
     JMP.W .label29                                             ;83C519|4C3DC6  |83C63D;
  
@@ -8144,7 +8144,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C663|AF301F7F|7F1F30;
     CMP.B #$04                                                 ;83C667|C904    |      ;
     BCS .label30                                               ;83C669|B00C    |83C677;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C66B|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C66B|A522    |000022;
     CMP.B #$04                                                 ;83C66D|C904    |      ;
     BCC +                                                      ;83C66F|9003    |83C674;
     JMP.W .label37                                             ;83C671|4C34C7  |83C734;
@@ -8158,7 +8158,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C679|AF301F7F|7F1F30;
     CMP.B #$08                                                 ;83C67D|C908    |      ;
     BCS .label31                                               ;83C67F|B012    |83C693;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C681|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C681|A522    |000022;
     CMP.B #$04                                                 ;83C683|C904    |      ;
     BCS +                                                      ;83C685|B003    |83C68A;
     JMP.W .label37                                             ;83C687|4C34C7  |83C734;
@@ -8177,7 +8177,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C695|AF301F7F|7F1F30;
     CMP.B #$10                                                 ;83C699|C910    |      ;
     BCS .label33                                               ;83C69B|B012    |83C6AF;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C69D|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C69D|A522    |000022;
     CMP.B #$0C                                                 ;83C69F|C90C    |      ;
     BCS +                                                      ;83C6A1|B003    |83C6A6;
     JMP.W .label37                                             ;83C6A3|4C34C7  |83C734;
@@ -8196,7 +8196,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C6B1|AF301F7F|7F1F30;
     CMP.B #$14                                                 ;83C6B5|C914    |      ;
     BCS .label34                                               ;83C6B7|B012    |83C6CB;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C6B9|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C6B9|A522    |000022;
     CMP.B #$10                                                 ;83C6BB|C910    |      ;
     BCS +                                                      ;83C6BD|B003    |83C6C2;
     JMP.W .label37                                             ;83C6BF|4C34C7  |83C734;
@@ -8215,7 +8215,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C6CD|AF301F7F|7F1F30;
     CMP.B #$18                                                 ;83C6D1|C918    |      ;
     BCS .label35                                               ;83C6D3|B012    |83C6E7;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C6D5|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C6D5|A522    |000022;
     CMP.B #$15                                                 ;83C6D7|C915    |      ;
     BCS +                                                      ;83C6D9|B003    |83C6DE;
     JMP.W .label37                                             ;83C6DB|4C34C7  |83C734;
@@ -8234,7 +8234,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nDogAreaId                                           ;83C6E9|AF301F7F|7F1F30;
     CMP.B #$31                                                 ;83C6ED|C931    |      ;
     BCC .label36                                               ;83C6EF|900B    |83C6FC;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C6F1|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C6F1|A522    |000022;
     CMP.B #$31                                                 ;83C6F3|C931    |      ;
     BCS +                                                      ;83C6F5|B003    |83C6FA;
     JMP.W .label37                                             ;83C6F7|4C34C7  |83C734;
@@ -8246,7 +8246,7 @@ fGameEngine_ChichenUnknown83C296:
 .label36:
     SEP #$20                                                   ;83C6FC|E220    |      ;
     LDA.L nDogAreaId                                           ;83C6FE|AF301F7F|7F1F30;
-    CMP.B nMapEngine_AreaIdToLoad                              ;83C702|C522    |000022;
+    CMP.B strcMap.loadAreaId                                   ;83C702|C522    |000022;
     BEQ .jump1                                                 ;83C704|F003    |83C709;
     JMP.W .label37                                             ;83C706|4C34C7  |83C734;
  
@@ -8283,7 +8283,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C74E|AF311F7F|7F1F31;
     CMP.B #$04                                                 ;83C752|C904    |      ;
     BCS .label38                                               ;83C754|B00B    |83C761;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C756|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C756|A522    |000022;
     CMP.B #$04                                                 ;83C758|C904    |      ;
     BCC +                                                      ;83C75A|9003    |83C75F;
     JMP.W .return                                              ;83C75C|4C06C8  |83C806;
@@ -8297,7 +8297,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C763|AF311F7F|7F1F31;
     CMP.B #$08                                                 ;83C767|C908    |      ;
     BCS .label39                                               ;83C769|B012    |83C77D;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C76B|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C76B|A522    |000022;
     CMP.B #$04                                                 ;83C76D|C904    |      ;
     BCS +                                                      ;83C76F|B003    |83C774;
     JMP.W .return                                              ;83C771|4C06C8  |83C806;
@@ -8316,7 +8316,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C77F|AF311F7F|7F1F31;
     CMP.B #$10                                                 ;83C783|C910    |      ;
     BCS .label40                                               ;83C785|B012    |83C799;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C787|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C787|A522    |000022;
     CMP.B #$0C                                                 ;83C789|C90C    |      ;
     BCS +                                                      ;83C78B|B003    |83C790;
     JMP.W .return                                              ;83C78D|4C06C8  |83C806;
@@ -8335,7 +8335,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C79B|AF311F7F|7F1F31;
     CMP.B #$14                                                 ;83C79F|C914    |      ;
     BCS .label41                                               ;83C7A1|B012    |83C7B5;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C7A3|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C7A3|A522    |000022;
     CMP.B #$10                                                 ;83C7A5|C910    |      ;
     BCS +                                                      ;83C7A7|B003    |83C7AC;
     JMP.W .return                                              ;83C7A9|4C06C8  |83C806;
@@ -8354,7 +8354,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.L nHorseAreaIdMaybe                                    ;83C7B7|AF311F7F|7F1F31;
     CMP.B #$31                                                 ;83C7BB|C931    |      ;
     BCC .label42                                               ;83C7BD|900B    |83C7CA;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83C7BF|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83C7BF|A522    |000022;
     CMP.B #$31                                                 ;83C7C1|C931    |      ;
     BCS +                                                      ;83C7C3|B003    |83C7C8;
     JMP.W .return                                              ;83C7C5|4C06C8  |83C806;
@@ -8366,7 +8366,7 @@ fGameEngine_ChichenUnknown83C296:
 .label42:
     SEP #$20                                                   ;83C7CA|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C7CC|AF311F7F|7F1F31;
-    CMP.B nMapEngine_AreaIdToLoad                              ;83C7D0|C522    |000022;
+    CMP.B strcMap.loadAreaId                                   ;83C7D0|C522    |000022;
     BEQ .jump2                                                 ;83C7D2|F003    |83C7D7;
     JMP.W .return                                              ;83C7D4|4C06C8  |83C806;
  
@@ -8722,7 +8722,7 @@ fMapEngine_AreaEvents:
     REP #$10                                                   ;83CA9A|C210    |      ;
     LDA.B #$00                                                 ;83CA9C|A900    |      ;
     XBA                                                        ;83CA9E|EB      |      ;
-    LDA.B nMapEngine_AreaIdToLoad                              ;83CA9F|A522    |000022;
+    LDA.B strcMap.loadAreaId                                   ;83CA9F|A522    |000022;
     REP #$20                                                   ;83CAA1|C220    |      ;
     ASL A                                                      ;83CAA3|0A      |      ;
     TAX                                                        ;83CAA4|AA      |      ;

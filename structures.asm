@@ -29,22 +29,38 @@ endstruct align 36
 
 ; Size and start to be confirmed
 struct strcSingleObjectData $00009B
-    .posX                   : skip 2    ; 9B
-    .posY                   : skip 2    ; 9D
-    .flip                   : skip 2    ; 9F
-    .spriteTableIdx         : skip 2    ; A1
-    .unk6                   : skip 2    ; A3
-    .gameObjectIdx          : skip 2    ; A5
-    .exists                 : skip 2    ; A7    0 if exists FF/-1 if does not
-    .gameObjectIdxOffs      : skip 2    ; A9    aGameObjectIndexOffsets[gameObjectIdx]
-    .unkAB                  : skip 2    ; AB
-    .totalComponents        : skip 2    ; AD    
-    .unkAF                  : skip 2    ; AF    
+    .posX                   : skip 2    ; 9B-9C
+    .posY                   : skip 2    ; 9D-9E
+    .flip                   : skip 2    ; 9F-A0
+    .spriteTableIdx         : skip 2    ; A1-A2
+    .unk6                   : skip 2    ; A3-A4
+    .gameObjectIdx          : skip 2    ; A5-A6
+    .exists                 : skip 2    ; A7-A8 0 if exists FF/-1 if does not
+    .gameObjectIdxOffs      : skip 2    ; A9-AA aGameObjectIndexOffsets[gameObjectIdx]
+    .unkAB                  : skip 2    ; AB-AC
+    .totalComponents        : skip 2    ; AD-AE 
+    .unkAF                  : skip 2    ; AF-B0 
     .unkB1                  : skip 1    ; B1
     .unkB2                  : skip 1    ; B2
-    .pObjectData            : skip 3    ; B3    ptr24
-    .padding                : skip 1    ; B6
-    .unkB7                  : skip 2    ; B7
+    .pObjectData            : skip 4    ; B3-B6 ptr24
+endstruct
+
+
+;
+; Size to be confirmed, start is 100% ok
+;
+struct strcMap              $00000D
+    .pSelectedTilemap       : skip 3    ; 0D-0F ptr24
+    .unk10                  : skip 2    ; 10
+    .unk12                  : skip 2    ; 12
+    .unk14                  : skip 2    ; 14
+    .unk16                  : skip 2    ; 16
+    .pCurrentTilemap        : skip 4    ; 18-1B ptr24
+    .unk1C                  : skip 2    ; 1C
+    .unk1E                  : skip 2    ; 1E
+    .unk20                  : skip 1    ; 20
+    .unk21                  : skip 1    ; 21
+    .loadAreaId             : skip 1    ; 22
 endstruct
 
 
