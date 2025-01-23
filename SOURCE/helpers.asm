@@ -21,9 +21,9 @@ endmacro
 ;
 macro SetPlayerFlag(nFlag)
     REP #$30
-    LDA.B nPlayerFlags
+    LDA.B strcPlayer.flags
     ORA.W #<nFlag>
-    STA.B nPlayerFlags
+    STA.B strcPlayer.flags
 endmacro
 
 
@@ -31,13 +31,13 @@ macro UnsetPlayerFlag(nFlag)
     REP #$30
     LDA.W #<nFlag>
     EOR.W #$FFFF
-    AND.B nPlayerFlags
-    STA.B nPlayerFlags
+    AND.B strcPlayer.flags
+    STA.B strcPlayer.flags
 endmacro
 
 ; used in some places without setting MX
 macro CheckPlayerFlagsNoReg(nFlag)
-    LDA.B nPlayerFlags
+    LDA.B strcPlayer.flags
     AND.W #<nFlag>
 endmacro
 
@@ -54,7 +54,7 @@ endmacro
 macro SetPlayerAction(nAction)
     REP #$30
     LDA.W #<nAction>
-    STA.B nPlayerAction
+    STA.B strcPlayer.action
 endmacro
 
 

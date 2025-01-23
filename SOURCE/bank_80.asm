@@ -2714,7 +2714,7 @@ fAudioEngine_MapMusicHandler:
 fAudioEngine_SelectMapMusic:
     SEP #$20                                                   ;8095F5|E220    |      ;
     REP #$10                                                   ;8095F7|C210    |      ;
-    STZ.W nAudioMusicTrackId                                   ;8095F9|9C1001  |000110;
+    STZ.W strcAudio.trackId                                    ;8095F9|9C1001  |000110;
     REP #$20                                                   ;8095FC|C220    |      ;
     LDA.W nMapEngine_flags                                     ;8095FE|AD9601  |000196;
     AND.W #$0010                                               ;809601|291000  |      ;
@@ -2743,7 +2743,7 @@ fAudioEngine_SelectMapMusic:
     TAY                                                        ;80962F|A8      |      ;
     SEP #$20                                                   ;809630|E220    |      ;
     LDA.B (n16TempVar1),Y                                      ;809632|B17E    |00007E; Y = SeasonId
-    STA.W nAudioMusicTrackId                                   ;809634|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;809634|8D1001  |000110;
     BRA .justReturn                                            ;809637|802F    |809668;
  
  
@@ -2762,21 +2762,21 @@ fAudioEngine_SelectMapMusic:
 ..case31:
     SEP #$20                                                   ;80964D|E220    |      ;
     LDA.B #$13                                                 ;80964F|A913    |      ;
-    STA.W nAudioMusicTrackId                                   ;809651|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;809651|8D1001  |000110;
     BRA .justReturn                                            ;809654|8012    |809668;
  
  
 ..case15:
     SEP #$20                                                   ;809656|E220    |      ;
     LDA.B #$14                                                 ;809658|A914    |      ;
-    STA.W nAudioMusicTrackId                                   ;80965A|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;80965A|8D1001  |000110;
     BRA .justReturn                                            ;80965D|8009    |809668;
  
  
 .return:
     SEP #$20                                                   ;80965F|E220    |      ;
     LDA.B #$16                                                 ;809661|A916    |      ;
-    STA.W nAudioMusicTrackId                                   ;809663|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;809663|8D1001  |000110;
     BRA .justReturn                                            ;809666|8000    |809668;
  
  
@@ -2787,7 +2787,7 @@ fAudioEngine_SelectMapMusic:
 fAudioEngine_TurnOffMusic:
     SEP #$20                                                   ;809669|E220    |      ;
     LDA.B #$FF                                                 ;80966B|A9FF    |      ;
-    STA.W nAudioMusicTrackId                                   ;80966D|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;80966D|8D1001  |000110;
     RTL                                                        ;809670|6B      |      ;
  
  
@@ -3097,9 +3097,9 @@ fMap_SetupArea:
     LDA.W #$0000                                               ;809924|A90000  |      ;
     STA.L $7F1F7A                                              ;809927|8F7A1F7F|7F1F7A;
     STZ.W $0878                                                ;80992B|9C7808  |000878;
-    LDA.B nPlayerPosX                                          ;80992E|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;80992E|A5D6    |0000D6;
     STA.W nPlayerPosXCopy2                                     ;809930|8D0709  |000907;
-    LDA.B nPlayerPosY                                          ;809933|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;809933|A5D8    |0000D8;
     STA.W nPlayerPosYCopy2                                     ;809935|8D0909  |000909;
     SEP #$20                                                   ;809938|E220    |      ;
     STZ.W $098A                                                ;80993A|9C8A09  |00098A;
@@ -3139,7 +3139,7 @@ fMap_SetupArea:
     REP #$30                                                   ;8099A4|C230    |      ;
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
     CLC                                                        ;8099A9|18      |      ;
-    ADC.B nPlayerDirection                                     ;8099AA|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;8099AA|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;8099AC|8D0109  |000901;
     BRA .label12                                               ;8099AF|801C    |8099CD;
  
@@ -3148,7 +3148,7 @@ fMap_SetupArea:
     REP #$30                                                   ;8099B1|C230    |      ;
     LDA.W #$0000                                               ;8099B3|A90000  |      ;
     CLC                                                        ;8099B6|18      |      ;
-    ADC.B nPlayerDirection                                     ;8099B7|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;8099B7|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;8099B9|8D0109  |000901;
  
 .label11:
@@ -3171,7 +3171,7 @@ fMap_SetupArea:
     JSL.L fAudioUnknown_838380                                 ;8099F3|22808383|838380;
     JSL.L fToolUsedSound_Unknown828FF3                         ;8099F7|22F38F82|828FF3;
     SEP #$20                                                   ;8099FB|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;8099FD|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;8099FD|AD1001  |000110;
     STA.W $0117                                                ;809A00|8D1701  |000117;
     JSL.L fCore_WaitForNextNMI                                 ;809A03|22458680|808645;
     REP #$20                                                   ;809A07|C220    |      ;
@@ -3260,7 +3260,7 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809AB9|E220    |      ;
     LDA.B #$00                                                 ;809ABB|A900    |      ;
     XBA                                                        ;809ABD|EB      |      ;
-    LDA.B [strcMap.pSelectedTilemap],Y                         ;809ABE|B70D    |00000D;
+    LDA.B [strcMap.pSelected],Y                                ;809ABE|B70D    |00000D;
     REP #$20                                                   ;809AC0|C220    |      ;
     ASL A                                                      ;809AC2|0A      |      ;
     ASL A                                                      ;809AC3|0A      |      ;
@@ -3300,7 +3300,7 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809B02|E220    |      ;
     LDA.B #$00                                                 ;809B04|A900    |      ;
     XBA                                                        ;809B06|EB      |      ;
-    LDA.B [strcMap.pSelectedTilemap],Y                         ;809B07|B70D    |00000D;
+    LDA.B [strcMap.pSelected],Y                                ;809B07|B70D    |00000D;
     REP #$20                                                   ;809B09|C220    |      ;
     ASL A                                                      ;809B0B|0A      |      ;
     ASL A                                                      ;809B0C|0A      |      ;
@@ -3497,7 +3497,7 @@ fMapChangeHandler_809A64:
     STA.W $098A                                                ;809C71|8D8A09  |00098A;
     %SetPlayerAction(!PACTION_WALK)
     REP #$20                                                   ;809C7B|C220    |      ;
-    LDA.B nPlayerDirection                                     ;809C7D|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809C7D|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
     BEQ .setDirectionDown                                      ;809C82|F01C    |809CA0;
     CMP.W #!PDIR_UP                                               
@@ -3506,7 +3506,7 @@ fMapChangeHandler_809A64:
     BEQ .setDirectionLeft                                      ;809C8C|F034    |809CC2;
     REP #$30                                                   ;809C8E|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
-    STA.B nPlayerDirection                                     ;809C93|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;809C93|85DA    |0000DA;
     REP #$30                                                   ;809C95|C230    |      ;
     LDA.W #$0003                                               ;809C97|A90300  |      ;
     STA.W nPlayerDirectionCopy                                 ;809C9A|8D1109  |000911;
@@ -3516,7 +3516,7 @@ fMapChangeHandler_809A64:
 .setDirectionDown:
     REP #$30                                                   ;809CA0|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
-    STA.B nPlayerDirection                                     ;809CA5|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;809CA5|85DA    |0000DA;
     REP #$30                                                   ;809CA7|C230    |      ;
     LDA.W #$0000                                               ;809CA9|A90000  |      ;
     STA.W nPlayerDirectionCopy                                 ;809CAC|8D1109  |000911;
@@ -3526,7 +3526,7 @@ fMapChangeHandler_809A64:
 .setDirectionUp:
     REP #$30                                                   ;809CB1|C230    |      ;
     LDA.W #!PDIR_UP                                               
-    STA.B nPlayerDirection                                     ;809CB6|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;809CB6|85DA    |0000DA;
     REP #$30                                                   ;809CB8|C230    |      ;
     LDA.W #$0001                                               ;809CBA|A90100  |      ;
     STA.W nPlayerDirectionCopy                                 ;809CBD|8D1109  |000911;
@@ -3536,7 +3536,7 @@ fMapChangeHandler_809A64:
 .setDirectionLeft:
     REP #$30                                                   ;809CC2|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
-    STA.B nPlayerDirection                                     ;809CC7|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;809CC7|85DA    |0000DA;
     REP #$30                                                   ;809CC9|C230    |      ;
     LDA.W #$0002                                               ;809CCB|A90200  |      ;
     STA.W nPlayerDirectionCopy                                 ;809CCE|8D1109  |000911;
@@ -3690,7 +3690,7 @@ fMapChangeHandler_809A64:
  
 .label48:
     REP #$30                                                   ;809DC3|C230    |      ;
-    LDA.B nPlayerAction                                        ;809DC5|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;809DC5|A5D4    |0000D4;
     CMP.W #$0010                                               ;809DC7|C91000  |      ;
     BNE .label49                                               ;809DCA|D003    |809DCF;
     JMP.W .return2                                             ;809DCC|4CBB9E  |809EBB;
@@ -3698,7 +3698,7 @@ fMapChangeHandler_809A64:
  
 .label49:
     REP #$30                                                   ;809DCF|C230    |      ;
-    LDA.B nPlayerAction                                        ;809DD1|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;809DD1|A5D4    |0000D4;
     CMP.W #!PACTION_FISHING                                               
     BNE .label50                                               ;809DD6|D003    |809DDB;
     JMP.W .return2                                             ;809DD8|4CBB9E  |809EBB;
@@ -3706,7 +3706,7 @@ fMapChangeHandler_809A64:
  
 .label50:
     REP #$30                                                   ;809DDB|C230    |      ;
-    LDA.B nPlayerAction                                        ;809DDD|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;809DDD|A5D4    |0000D4;
     CMP.W #!PACTION_FISHINGBITE                                               
     BNE .label51                                               ;809DE2|D003    |809DE7;
     JMP.W .return2                                             ;809DE4|4CBB9E  |809EBB;
@@ -3714,7 +3714,7 @@ fMapChangeHandler_809A64:
  
 .label51:
     REP #$30                                                   ;809DE7|C230    |      ;
-    LDA.B nPlayerAction                                        ;809DE9|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;809DE9|A5D4    |0000D4;
     CMP.W #!PACTION_REELING                                               
     BNE .label52                                               ;809DEE|D003    |809DF3;
     JMP.W .return2                                             ;809DF0|4CBB9E  |809EBB;
@@ -3804,10 +3804,10 @@ fMapChangeHandler_809A64:
  
 fUnknown_809EBC:
     REP #$30                                                   ;809EBC|C230    |      ;
-    LDA.B nPlayerPosX                                          ;809EBE|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;809EBE|A5D6    |0000D6;
     SEC                                                        ;809EC0|38      |      ;
     SBC.W #$0080                                               ;809EC1|E98000  |      ;
-    CMP.B $ED                                                  ;809EC4|C5ED    |0000ED;
+    CMP.B strcPlayer.newCamX                                   ;809EC4|C5ED    |0000ED;
     BMI .label1                                                ;809EC6|3004    |809ECC;
     BEQ .label1                                                ;809EC8|F002    |809ECC;
     BCS .label2                                                ;809ECA|B01A    |809EE6;
@@ -3817,13 +3817,13 @@ fUnknown_809EBC:
     CLC                                                        ;809ECE|18      |      ;
     ADC.W #$0080                                               ;809ECF|698000  |      ;
     SEC                                                        ;809ED2|38      |      ;
-    SBC.B $ED                                                  ;809ED3|E5ED    |0000ED;
+    SBC.B strcPlayer.newCamX                                   ;809ED3|E5ED    |0000ED;
     STA.W $090B                                                ;809ED5|8D0B09  |00090B;
     SEP #$20                                                   ;809ED8|E220    |      ;
     LDA.B #$00                                                 ;809EDA|A900    |      ;
     STA.B strcMap.unk20                                        ;809EDC|8520    |000020;
     REP #$20                                                   ;809EDE|C220    |      ;
-    LDA.B $ED                                                  ;809EE0|A5ED    |0000ED;
+    LDA.B strcPlayer.newCamX                                   ;809EE0|A5ED    |0000ED;
     STA.B nCameraX                                             ;809EE2|85F5    |0000F5;
     BRA .label4                                                ;809EE4|8028    |809F0E;
  
@@ -3854,10 +3854,10 @@ fUnknown_809EBC:
  
 .label4:
     REP #$20                                                   ;809F0E|C220    |      ;
-    LDA.B nPlayerPosY                                          ;809F10|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;809F10|A5D8    |0000D8;
     SEC                                                        ;809F12|38      |      ;
     SBC.W #$0080                                               ;809F13|E98000  |      ;
-    CMP.B $EF                                                  ;809F16|C5EF    |0000EF;
+    CMP.B strcPlayer.newCamY                                   ;809F16|C5EF    |0000EF;
     BMI .label5                                                ;809F18|3004    |809F1E;
     BEQ .label5                                                ;809F1A|F002    |809F1E;
     BCS .label6                                                ;809F1C|B01A    |809F38;
@@ -3867,13 +3867,13 @@ fUnknown_809EBC:
     CLC                                                        ;809F20|18      |      ;
     ADC.W #$0080                                               ;809F21|698000  |      ;
     SEC                                                        ;809F24|38      |      ;
-    SBC.B $EF                                                  ;809F25|E5EF    |0000EF;
+    SBC.B strcPlayer.newCamY                                   ;809F25|E5EF    |0000EF;
     STA.W $090D                                                ;809F27|8D0D09  |00090D;
     SEP #$20                                                   ;809F2A|E220    |      ;
     LDA.B #$00                                                 ;809F2C|A900    |      ;
     STA.B strcMap.unk21                                        ;809F2E|8521    |000021;
     REP #$20                                                   ;809F30|C220    |      ;
-    LDA.B $EF                                                  ;809F32|A5EF    |0000EF;
+    LDA.B strcPlayer.newCamY                                   ;809F32|A5EF    |0000EF;
     STA.B nCameraY                                             ;809F34|85F7    |0000F7;
     BRA .return                                                ;809F36|8028    |809F60;
  
@@ -3920,7 +3920,7 @@ fUnknown_809F61:
     BCC .label6                                                ;809F70|9041    |809FB3;
     REP #$20                                                   ;809F72|C220    |      ;
     LDA.B nCameraY                                             ;809F74|A5F7    |0000F7;
-    CMP.B $EF                                                  ;809F76|C5EF    |0000EF;
+    CMP.B strcPlayer.newCamY                                   ;809F76|C5EF    |0000EF;
     BNE .label2                                                ;809F78|D003    |809F7D;
     JMP.W .return                                              ;809F7A|4CAAA0  |80A0AA;
  
@@ -3938,7 +3938,7 @@ fUnknown_809F61:
     ASL A                                                      ;809F8B|0A      |      ;
     STA.B strcMap.unk1E                                        ;809F8C|851E    |00001E;
     REP #$30                                                   ;809F8E|C230    |      ;
-    LDA.B nPlayerDirection                                     ;809F90|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809F90|A5DA    |0000DA;
     CMP.W #!PDIR_LEFT                                               
     BNE .label4                                                ;809F95|D003    |809F9A;
     JMP.W .return                                              ;809F97|4CAAA0  |80A0AA;
@@ -3946,7 +3946,7 @@ fUnknown_809F61:
  
 .label4:
     REP #$30                                                   ;809F9A|C230    |      ;
-    LDA.B nPlayerDirection                                     ;809F9C|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809F9C|A5DA    |0000DA;
     CMP.W #!PDIR_RIGHT                                               
     BNE .label5                                                ;809FA1|D003    |809FA6;
     JMP.W .return                                              ;809FA3|4CAAA0  |80A0AA;
@@ -3983,7 +3983,7 @@ fUnknown_809F61:
  
 .label8:
     REP #$30                                                   ;809FD7|C230    |      ;
-    LDA.B nPlayerDirection                                     ;809FD9|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809FD9|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
     BNE .label9                                                ;809FDE|D003    |809FE3;
     JMP.W .and0000                                             ;809FE0|4C33A0  |80A033;
@@ -3991,7 +3991,7 @@ fUnknown_809F61:
  
 .label9:
     REP #$30                                                   ;809FE3|C230    |      ;
-    LDA.B nPlayerDirection                                     ;809FE5|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809FE5|A5DA    |0000DA;
     CMP.W #!PDIR_UP                                               
     BNE .label10                                               ;809FEA|D003    |809FEF;
     JMP.W .and0001                                             ;809FEC|4C4AA0  |80A04A;
@@ -3999,7 +3999,7 @@ fUnknown_809F61:
  
 .label10:
     REP #$30                                                   ;809FEF|C230    |      ;
-    LDA.B nPlayerDirection                                     ;809FF1|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809FF1|A5DA    |0000DA;
     CMP.W #!PDIR_LEFT                                               
     BNE .label11                                               ;809FF6|D003    |809FFB;
     JMP.W .and0002                                             ;809FF8|4C61A0  |80A061;
@@ -4007,7 +4007,7 @@ fUnknown_809F61:
  
 .label11:
     REP #$30                                                   ;809FFB|C230    |      ;
-    LDA.B nPlayerDirection                                     ;809FFD|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;809FFD|A5DA    |0000DA;
     CMP.W #!PDIR_RIGHT                                               
     BNE .back                                                  ;80A002|D003    |80A007;
     JMP.W .and0003                                             ;80A004|4C78A0  |80A078;
@@ -4040,7 +4040,7 @@ fUnknown_809F61:
 .and0000:
     REP #$30                                                   ;80A033|C230    |      ;
     LDA.B nCameraY                                             ;80A035|A5F7    |0000F7;
-    CMP.B $EF                                                  ;80A037|C5EF    |0000EF;
+    CMP.B strcPlayer.newCamY                                   ;80A037|C5EF    |0000EF;
     BEQ .back                                                  ;80A039|F0CC    |80A007;
     CMP.B $F3                                                  ;80A03B|C5F3    |0000F3;
     BEQ .back                                                  ;80A03D|F0C8    |80A007;
@@ -4054,7 +4054,7 @@ fUnknown_809F61:
 .and0001:
     REP #$30                                                   ;80A04A|C230    |      ;
     LDA.B nCameraY                                             ;80A04C|A5F7    |0000F7;
-    CMP.B $EF                                                  ;80A04E|C5EF    |0000EF;
+    CMP.B strcPlayer.newCamY                                   ;80A04E|C5EF    |0000EF;
     BEQ .back                                                  ;80A050|F0B5    |80A007;
     CMP.B $F3                                                  ;80A052|C5F3    |0000F3;
     BEQ .back                                                  ;80A054|F0B1    |80A007;
@@ -4068,7 +4068,7 @@ fUnknown_809F61:
 .and0002:
     REP #$30                                                   ;80A061|C230    |      ;
     LDA.B nCameraX                                             ;80A063|A5F5    |0000F5;
-    CMP.B $ED                                                  ;80A065|C5ED    |0000ED;
+    CMP.B strcPlayer.newCamX                                   ;80A065|C5ED    |0000ED;
     BEQ .back                                                  ;80A067|F09E    |80A007;
     CMP.B $F1                                                  ;80A069|C5F1    |0000F1;
     BEQ .back                                                  ;80A06B|F09A    |80A007;
@@ -4082,7 +4082,7 @@ fUnknown_809F61:
 .and0003:
     REP #$30                                                   ;80A078|C230    |      ;
     LDA.B nCameraX                                             ;80A07A|A5F5    |0000F5;
-    CMP.B $ED                                                  ;80A07C|C5ED    |0000ED;
+    CMP.B strcPlayer.newCamX                                   ;80A07C|C5ED    |0000ED;
     BNE .label13                                               ;80A07E|D003    |80A083;
     JMP.W .back                                                ;80A080|4C07A0  |80A007;
  
@@ -4119,7 +4119,7 @@ fUnknown_80A0AB:
     REP #$30                                                   ;80A0AB|C230    |      ;
     LDA.B nCameraY                                             ;80A0AD|A5F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;80A0AF|8D3E01  |00013E;
-    CMP.B $EF                                                  ;80A0B2|C5EF    |0000EF;
+    CMP.B strcPlayer.newCamY                                   ;80A0B2|C5EF    |0000EF;
     BEQ .return                                                ;80A0B4|F02A    |80A0E0;
     CMP.B $F3                                                  ;80A0B6|C5F3    |0000F3;
     BEQ .return                                                ;80A0B8|F026    |80A0E0;
@@ -4152,7 +4152,7 @@ fUnknown_80A0E1:
     REP #$30                                                   ;80A0E1|C230    |      ;
     LDA.B nCameraY                                             ;80A0E3|A5F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;80A0E5|8D3E01  |00013E;
-    CMP.B $EF                                                  ;80A0E8|C5EF    |0000EF;
+    CMP.B strcPlayer.newCamY                                   ;80A0E8|C5EF    |0000EF;
     BEQ .return                                                ;80A0EA|F02F    |80A11B;
     CMP.B $F3                                                  ;80A0EC|C5F3    |0000F3;
     BEQ .return                                                ;80A0EE|F02B    |80A11B;
@@ -4188,7 +4188,7 @@ fUnknown_80A11C:
     REP #$30                                                   ;80A11C|C230    |      ;
     LDA.B nCameraX                                             ;80A11E|A5F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;80A120|8D3C01  |00013C;
-    CMP.B $ED                                                  ;80A123|C5ED    |0000ED;
+    CMP.B strcPlayer.newCamX                                   ;80A123|C5ED    |0000ED;
     BEQ .return                                                ;80A125|F02A    |80A151;
     CMP.B $F1                                                  ;80A127|C5F1    |0000F1;
     BEQ .return                                                ;80A129|F026    |80A151;
@@ -4221,7 +4221,7 @@ fUnknown_80A152:
     REP #$30                                                   ;80A152|C230    |      ;
     LDA.B nCameraX                                             ;80A154|A5F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;80A156|8D3C01  |00013C;
-    CMP.B $ED                                                  ;80A159|C5ED    |0000ED;
+    CMP.B strcPlayer.newCamX                                   ;80A159|C5ED    |0000ED;
     BEQ .return                                                ;80A15B|F02F    |80A18C;
     CMP.B $F1                                                  ;80A15D|C5F1    |0000F1;
     BEQ .return                                                ;80A15F|F02B    |80A18C;
@@ -4447,7 +4447,7 @@ fUnknown_80A18D:
     REP #$30                                                   ;80A2E4|C230    |      ;
     LDA.B strcMap.unk16                                        ;80A2E6|A516    |000016;
     CLC                                                        ;80A2E8|18      |      ;
-    ADC.B strcMap.pCurrentTilemap+2                            ;80A2E9|651A    |00001A;
+    ADC.B strcMap.pCurrent+2                                   ;80A2E9|651A    |00001A;
     STA.B strcMap.unk16                                        ;80A2EB|8516    |000016;
     LDA.B strcMap.unk14                                        ;80A2ED|A514    |000014;
     CLC                                                        ;80A2EF|18      |      ;
@@ -4661,7 +4661,7 @@ fUnknown_80A308:
     REP #$30                                                   ;80A45D|C230    |      ;
     LDA.B strcMap.unk16                                        ;80A45F|A516    |000016;
     SEC                                                        ;80A461|38      |      ;
-    SBC.B strcMap.pCurrentTilemap+2                            ;80A462|E51A    |00001A;
+    SBC.B strcMap.pCurrent+2                                   ;80A462|E51A    |00001A;
     STA.B strcMap.unk16                                        ;80A464|8516    |000016;
     LDA.B strcMap.unk14                                        ;80A466|A514    |000014;
     SEC                                                        ;80A468|38      |      ;
@@ -5148,9 +5148,9 @@ fTileMap_SetTileMapPointerGetAreaFlags:
     ASL A                                                      ;80A7B9|0A      |      ;
     TAX                                                        ;80A7BA|AA      |      ;
     LDA.L aTileMapData,X                                       ;80A7BB|BF7CAA80|80AA7C;
-    STA.B strcMap.pCurrentTilemap                              ;80A7BF|8518    |000018;
+    STA.B strcMap.pCurrent                                     ;80A7BF|8518    |000018;
     SEP #$20                                                   ;80A7C1|E220    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A7C3|B118    |000018;
+    LDA.B (strcMap.pCurrent),Y                                 ;80A7C3|B118    |000018;
     RTL                                                        ;80A7C5|6B      |      ;
  
  
@@ -5164,18 +5164,18 @@ fTileMap_MapChangeHandler:
     ASL A                                                      ;80A7D1|0A      |      ;
     TAX                                                        ;80A7D2|AA      |      ;
     LDA.L aTileMapData,X                                       ;80A7D3|BF7CAA80|80AA7C; X = nSelectedTilemapId * 2
-    STA.B strcMap.pCurrentTilemap                              ;80A7D7|8518    |000018;
+    STA.B strcMap.pCurrent                                     ;80A7D7|8518    |000018;
     SEP #$20                                                   ;80A7D9|E220    |      ;
     LDY.W #$0000                                               ;80A7DB|A00000  |      ;
     LDA.B strcMap.loadAreaId                                   ;80A7DE|A522    |000022;
     CMP.B #$57                                                 ;80A7E0|C957    |      ;
     BCS .label2                                                ;80A7E2|B02E    |80A812;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A7E4|B118    |000018; Y = 0
+    LDA.B (strcMap.pCurrent),Y                                 ;80A7E4|B118    |000018; Y = 0
     STA.W nCurrentMapdataPresetId                              ;80A7E6|8D9501  |000195;
     JSL.L fCore_ManageGraphicsPresets                          ;80A7E9|22598C80|808C59;
     REP #$30                                                   ;80A7ED|C230    |      ;
     INY                                                        ;80A7EF|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A7F0|B118    |000018; Y = 1
+    LDA.B (strcMap.pCurrent),Y                                 ;80A7F0|B118    |000018; Y = 1
     ORA.W nMapEngine_flags                                     ;80A7F2|0D9601  |000196;
     STA.W nMapEngine_flags                                     ;80A7F5|8D9601  |000196;
     REP #$20                                                   ;80A7F8|C220    |      ;
@@ -5193,10 +5193,10 @@ fTileMap_MapChangeHandler:
  
 .label2:
     SEP #$20                                                   ;80A812|E220    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A814|B118    |000018; Y = 3
+    LDA.B (strcMap.pCurrent),Y                                 ;80A814|B118    |000018; Y = 3
     STA.W nCurrentMapdata_RoomWidthMult                        ;80A816|8D8101  |000181;
     INY                                                        ;80A819|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A81A|B118    |000018; Y = 4
+    LDA.B (strcMap.pCurrent),Y                                 ;80A81A|B118    |000018; Y = 4
     STA.W nCurrentMapdata_RoomHeightMult                       ;80A81C|8D8201  |000182;
     CMP.B #$03                                                 ;80A81F|C903    |      ;
     BCC .label3                                                ;80A821|900B    |80A82E;
@@ -5208,29 +5208,29 @@ fTileMap_MapChangeHandler:
 .label3:
     SEP #$20                                                   ;80A82E|E220    |      ;
     INY                                                        ;80A830|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A831|B118    |000018; Y = 5
+    LDA.B (strcMap.pCurrent),Y                                 ;80A831|B118    |000018; Y = 5
     STA.B n8TempVar1                                           ;80A833|8592    |000092; $92 = nTilemapCount
     INY                                                        ;80A835|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A836|B118    |000018; Y = 6
+    LDA.B (strcMap.pCurrent),Y                                 ;80A836|B118    |000018; Y = 6
     STA.B n8TempVar2                                           ;80A838|8593    |000093; $93 = nChacatermapCount
     INY                                                        ;80A83A|C8      |      ;
     LDA.B strcMap.loadAreaId                                   ;80A83B|A522    |000022;
     CMP.B #$57                                                 ;80A83D|C957    |      ;
     BCS .label4                                                ;80A83F|B01A    |80A85B;
     REP #$20                                                   ;80A841|C220    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A843|B118    |000018; Y = 7
-    STA.B $ED                                                  ;80A845|85ED    |0000ED;
+    LDA.B (strcMap.pCurrent),Y                                 ;80A843|B118    |000018; Y = 7
+    STA.B strcPlayer.newCamX                                   ;80A845|85ED    |0000ED;
     INY                                                        ;80A847|C8      |      ;
     INY                                                        ;80A848|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A849|B118    |000018; Y = 9
+    LDA.B (strcMap.pCurrent),Y                                 ;80A849|B118    |000018; Y = 9
     STA.B $F1                                                  ;80A84B|85F1    |0000F1;
     INY                                                        ;80A84D|C8      |      ;
     INY                                                        ;80A84E|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A84F|B118    |000018; Y = 11
-    STA.B $EF                                                  ;80A851|85EF    |0000EF;
+    LDA.B (strcMap.pCurrent),Y                                 ;80A84F|B118    |000018; Y = 11
+    STA.B strcPlayer.newCamY                                   ;80A851|85EF    |0000EF;
     INY                                                        ;80A853|C8      |      ;
     INY                                                        ;80A854|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A855|B118    |000018; Y = 13
+    LDA.B (strcMap.pCurrent),Y                                 ;80A855|B118    |000018; Y = 13
     STA.B $F3                                                  ;80A857|85F3    |0000F3;
     INY                                                        ;80A859|C8      |      ;
     INY                                                        ;80A85A|C8      |      ;
@@ -5242,16 +5242,16 @@ fTileMap_MapChangeHandler:
  
 .tilemaps:
     REP #$20                                                   ;80A861|C220    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A863|B118    |000018; Y = 15
+    LDA.B (strcMap.pCurrent),Y                                 ;80A863|B118    |000018; Y = 15
     PHA                                                        ;80A865|48      |      ; nDestinationAddress -> stack1
     INY                                                        ;80A866|C8      |      ;
     INY                                                        ;80A867|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A868|B118    |000018; Y = 17
+    LDA.B (strcMap.pCurrent),Y                                 ;80A868|B118    |000018; Y = 17
     STA.B ptrUnknown0x72                                       ;80A86A|8572    |000072;
     INY                                                        ;80A86C|C8      |      ;
     INY                                                        ;80A86D|C8      |      ;
     SEP #$20                                                   ;80A86E|E220    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A870|B118    |000018; Y = 19
+    LDA.B (strcMap.pCurrent),Y                                 ;80A870|B118    |000018; Y = 19
     STA.B ptrUnknown0x72+2                                     ;80A872|8574    |000074; $72 = pCompressedMap
     REP #$20                                                   ;80A874|C220    |      ;
     INY                                                        ;80A876|C8      |      ; Y++
@@ -5292,16 +5292,16 @@ fTileMap_MapChangeHandler:
  
 .charactermaps:
     REP #$30                                                   ;80A8BE|C230    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A8C0|B118    |000018;
+    LDA.B (strcMap.pCurrent),Y                                 ;80A8C0|B118    |000018;
     STA.B $8A                                                  ;80A8C2|858A    |00008A;
     INY                                                        ;80A8C4|C8      |      ;
     INY                                                        ;80A8C5|C8      |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A8C6|B118    |000018;
+    LDA.B (strcMap.pCurrent),Y                                 ;80A8C6|B118    |000018;
     STA.B ptrUnknown0x72                                       ;80A8C8|8572    |000072;
     INY                                                        ;80A8CA|C8      |      ;
     INY                                                        ;80A8CB|C8      |      ;
     SEP #$20                                                   ;80A8CC|E220    |      ;
-    LDA.B (strcMap.pCurrentTilemap),Y                          ;80A8CE|B118    |000018;
+    LDA.B (strcMap.pCurrent),Y                                 ;80A8CE|B118    |000018;
     STA.B ptrUnknown0x72+2                                     ;80A8D0|8574    |000074;
     REP #$20                                                   ;80A8D2|C220    |      ;
     INY                                                        ;80A8D4|C8      |      ;
@@ -5362,8 +5362,8 @@ fTileMap_MapChangeHandler:
     STZ.B strcMap.unk20                                        ;80A93A|6420    |000020;
     STZ.B strcMap.unk21                                        ;80A93C|6421    |000021;
     REP #$20                                                   ;80A93E|C220    |      ;
-    STZ.B nPlayerPosX                                          ;80A940|64D6    |0000D6;
-    STZ.B nPlayerPosY                                          ;80A942|64D8    |0000D8;
+    STZ.B strcPlayer.posX                                      ;80A940|64D6    |0000D6;
+    STZ.B strcPlayer.posY                                      ;80A942|64D8    |0000D8;
     SEP #$20                                                   ;80A944|E220    |      ;
     LDA.B #$00                                                 ;80A946|A900    |      ;
     XBA                                                        ;80A948|EB      |      ;
@@ -5372,7 +5372,7 @@ fTileMap_MapChangeHandler:
     ASL A                                                      ;80A94E|0A      |      ;
     TAX                                                        ;80A94F|AA      |      ;
     LDA.L nTable_80AA68,X                                      ;80A950|BF68AA80|80AA68;
-    STA.B strcMap.pCurrentTilemap+2                            ;80A954|851A    |00001A;
+    STA.B strcMap.pCurrent+2                                   ;80A954|851A    |00001A;
     SEC                                                        ;80A956|38      |      ;
     SBC.W #$0040                                               ;80A957|E94000  |      ;
     STA.B n16TempVar2                                          ;80A95A|8580    |000080;
@@ -5473,13 +5473,13 @@ fTileMap_MapChangeHandler:
  
 .destinationX:
     REP #$20                                                   ;80A9FB|C220    |      ;
-    LDA.B nPlayerPosX                                          ;80A9FD|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;80A9FD|A5D6    |0000D6;
     CMP.W nMapEngine_DestinationX                              ;80A9FF|CD7D01  |00017D;
     BEQ .destinationY                                          ;80AA02|F015    |80AA19;
-    LDA.B nPlayerPosX                                          ;80AA04|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;80AA04|A5D6    |0000D6;
     CLC                                                        ;80AA06|18      |      ;
     ADC.B strcMap.unk1E                                        ;80AA07|651E    |00001E;
-    STA.B nPlayerPosX                                          ;80AA09|85D6    |0000D6;
+    STA.B strcPlayer.posX                                      ;80AA09|85D6    |0000D6;
     JSL.L fUnknown_809EBC                                      ;80AA0B|22BC9E80|809EBC;
     JSL.L fUnknown_80A11C                                      ;80AA0F|221CA180|80A11C;
     JSL.L fCore_StartTransfer                                  ;80AA13|22F08A80|808AF0;
@@ -5488,13 +5488,13 @@ fTileMap_MapChangeHandler:
  
 .destinationY:
     REP #$20                                                   ;80AA19|C220    |      ;
-    LDA.B nPlayerPosY                                          ;80AA1B|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;80AA1B|A5D8    |0000D8;
     CMP.W nMapEngine_DestinationY                              ;80AA1D|CD7F01  |00017F;
     BEQ .return                                                ;80AA20|F015    |80AA37;
-    LDA.B nPlayerPosY                                          ;80AA22|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;80AA22|A5D8    |0000D8;
     CLC                                                        ;80AA24|18      |      ;
     ADC.B strcMap.unk1E                                        ;80AA25|651E    |00001E;
-    STA.B nPlayerPosY                                          ;80AA27|85D8    |0000D8;
+    STA.B strcPlayer.posY                                      ;80AA27|85D8    |0000D8;
     JSL.L fUnknown_809EBC                                      ;80AA29|22BC9E80|809EBC;
     JSL.L fUnknown_80A0AB                                      ;80AA2D|22ABA080|80A0AB;
     JSL.L fCore_StartTransfer                                  ;80AA31|22F08A80|808AF0;

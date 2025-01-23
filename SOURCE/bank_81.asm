@@ -16,13 +16,13 @@ fUnknown_818000:
     REP #$20                                                   ;818019|C220    |      ;
     LDA.W #$0002                                               ;81801B|A90200  |      ;
     CLC                                                        ;81801E|18      |      ;
-    ADC.B nPlayerDirection                                     ;81801F|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81801F|65DA    |0000DA;
     TAY                                                        ;818021|A8      |      ;
     JSL.L fUnknown_8180B7                                      ;818022|22B78081|8180B7;
     REP #$20                                                   ;818026|C220    |      ;
-    LDA.B nPlayerPosX                                          ;818028|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;818028|A5D6    |0000D6;
     STA.W nUnknownX                                            ;81802A|8D8009  |000980;
-    LDA.B nPlayerPosY                                          ;81802D|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81802D|A5D8    |0000D8;
     INC A                                                      ;81802F|1A      |      ;
     INC A                                                      ;818030|1A      |      ;
     STA.W nUnknownY                                            ;818031|8D8209  |000982;
@@ -49,7 +49,7 @@ fUnknown_818000:
     SEP #$20                                                   ;818061|E220    |      ;
     LDA.B #$00                                                 ;818063|A900    |      ;
     XBA                                                        ;818065|EB      |      ;
-    LDA.B [strcMap.pSelectedTilemap],Y                         ;818066|B70D    |00000D;
+    LDA.B [strcMap.pSelected],Y                                ;818066|B70D    |00000D;
     LDX.W nTileInFrontOfPlayerX                                ;818068|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;81806B|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;81806E|2288A681|81A688;
@@ -67,9 +67,9 @@ fUnknown_818000:
     SEP #$20                                                   ;818087|E220    |      ;
     REP #$10                                                   ;818089|C210    |      ;
     LDA.B #$08                                                 ;81808B|A908    |      ;
-    STA.W nAudioRegisterValue0                                 ;81808D|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81808D|8D1401  |000114;
     LDA.B #$06                                                 ;818090|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;818092|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;818092|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;818095|22328383|838332;
  
   + RTL                                                        ;818099|6B      |      ;
@@ -1788,14 +1788,14 @@ fReturn_818C23:
  
 fUnknown_818C24:
     REP #$20                                                   ;818C24|C220    |      ;
-    LDA.B nPlayerPosX                                          ;818C26|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;818C26|A5D6    |0000D6;
     STA.W nUnknownX                                            ;818C28|8D8009  |000980;
-    LDA.B nPlayerPosY                                          ;818C2B|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;818C2B|A5D8    |0000D8;
     INC A                                                      ;818C2D|1A      |      ;
     INC A                                                      ;818C2E|1A      |      ;
     STA.W nUnknownY                                            ;818C2F|8D8209  |000982;
     REP #$30                                                   ;818C32|C230    |      ;
-    LDA.B nPlayerAction                                        ;818C34|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;818C34|A5D4    |0000D4;
     CMP.W #!PACTION_JUMP                                               
     BNE .label1                                                ;818C39|D003    |818C3E;
     JMP.W .label2                                              ;818C3B|4C538C  |818C53;
@@ -1839,7 +1839,7 @@ fUnknown_818C24:
  
 .label3:
     REP #$30                                                   ;818C85|C230    |      ;
-    LDA.B nPlayerAction                                        ;818C87|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;818C87|A5D4    |0000D4;
     CMP.W #$0005                                               ;818C89|C90500  |      ;
     BEQ .lable5                                                ;818C8C|F003    |818C91;
     JMP.W fReturn_818E1A                                       ;818C8E|4C1A8E  |818E1A;
@@ -1889,22 +1889,22 @@ fUnknown_818C24:
  
 .label6:
     REP #$30                                                   ;818CF9|C230    |      ;
-    LDA.B nPlayerPosX                                          ;818CFB|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;818CFD|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;818CFF|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;818D01|85E1    |0000E1;
-    STZ.B nPlayerPosCalculationX                               ;818D03|64E5    |0000E5;
-    STZ.B nPlayerPosCalculationY                               ;818D05|64E7    |0000E7;
+    LDA.B strcPlayer.posX                                      ;818CFB|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;818CFD|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;818CFF|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;818D01|85E1    |0000E1;
+    STZ.B strcPlayer.newX                                      ;818D03|64E5    |0000E5;
+    STZ.B strcPlayer.newY                                      ;818D05|64E7    |0000E7;
     LDA.W #$0010                                               ;818D07|A91000  |      ;
-    STA.B $E3                                                  ;818D0A|85E3    |0000E3;
-    LDA.B nPlayerDirection                                     ;818D0C|A5DA    |0000DA;
+    STA.B strcPlayer.unkE3                                     ;818D0A|85E3    |0000E3;
+    LDA.B strcPlayer.direction                                 ;818D0C|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;818D0E|2291AD83|83AD91;
     CMP.W #$0000                                               ;818D12|C90000  |      ;
     BNE .label7                                                ;818D15|D017    |818D2E;
     REP #$30                                                   ;818D17|C230    |      ;
     LDA.W #$0006                                               ;818D19|A90600  |      ;
     CLC                                                        ;818D1C|18      |      ;
-    ADC.B nPlayerDirection                                     ;818D1D|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;818D1D|65DA    |0000DA;
     TAY                                                        ;818D1F|A8      |      ;
     JSL.L fUnknown_8180B7                                      ;818D20|22B78081|8180B7;
     SEP #$20                                                   ;818D24|E220    |      ;
@@ -2291,14 +2291,14 @@ fUnknown_819021:
  
 fUnknown_819049:
     REP #$20                                                   ;819049|C220    |      ;
-    LDA.B nPlayerPosX                                          ;81904B|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81904B|A5D6    |0000D6;
     STA.W nUnknownX                                            ;81904D|8D8009  |000980;
-    LDA.B nPlayerPosY                                          ;819050|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;819050|A5D8    |0000D8;
     INC A                                                      ;819052|1A      |      ;
     INC A                                                      ;819053|1A      |      ;
     STA.W nUnknownY                                            ;819054|8D8209  |000982;
     REP #$30                                                   ;819057|C230    |      ;
-    LDA.B nPlayerAction                                        ;819059|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;819059|A5D4    |0000D4;
     CMP.W #$0003                                               ;81905B|C90300  |      ;
     BNE fUnknown_819063                                        ;81905E|D003    |819063;
     JMP.W fUnknown_819078                                      ;819060|4C7890  |819078;
@@ -2341,22 +2341,22 @@ fUnknown_819078:
  
 fItemSell_Unknown8190AA:
     REP #$30                                                   ;8190AA|C230    |      ;
-    LDA.B nPlayerAction                                        ;8190AC|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;8190AC|A5D4    |0000D4;
     CMP.W #$0005                                               ;8190AE|C90500  |      ;
     BEQ +                                                      ;8190B1|F003    |8190B6;
     JMP.W fReturn_819227                                       ;8190B3|4C2792  |819227;
  
  
   + REP #$30                                                   ;8190B6|C230    |      ;
-    LDA.B nPlayerPosX                                          ;8190B8|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;8190BA|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;8190BC|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;8190BE|85E1    |0000E1;
-    STZ.B nPlayerPosCalculationX                               ;8190C0|64E5    |0000E5;
-    STZ.B nPlayerPosCalculationY                               ;8190C2|64E7    |0000E7;
+    LDA.B strcPlayer.posX                                      ;8190B8|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;8190BA|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;8190BC|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;8190BE|85E1    |0000E1;
+    STZ.B strcPlayer.newX                                      ;8190C0|64E5    |0000E5;
+    STZ.B strcPlayer.newY                                      ;8190C2|64E7    |0000E7;
     LDA.W #$0010                                               ;8190C4|A91000  |      ;
-    STA.B $E3                                                  ;8190C7|85E3    |0000E3;
-    LDA.B nPlayerDirection                                     ;8190C9|A5DA    |0000DA;
+    STA.B strcPlayer.unkE3                                     ;8190C7|85E3    |0000E3;
+    LDA.B strcPlayer.direction                                 ;8190C9|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;8190CB|2291AD83|83AD91;
     REP #$30                                                   ;8190CF|C230    |      ;
     CMP.W #$0000                                               ;8190D1|C90000  |      ;
@@ -2443,7 +2443,7 @@ fUnknown_81917E:
     REP #$30                                                   ;81917E|C230    |      ;
     LDA.W #$0006                                               ;819180|A90600  |      ;
     CLC                                                        ;819183|18      |      ;
-    ADC.B nPlayerDirection                                     ;819184|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;819184|65DA    |0000DA;
     TAY                                                        ;819186|A8      |      ;
     JSL.L fUnknown_8180B7                                      ;819187|22B78081|8180B7;
     SEP #$20                                                   ;81918B|E220    |      ;
@@ -2515,14 +2515,14 @@ fReturn_819227:
  
 fUnknown_819228:
     REP #$20                                                   ;819228|C220    |      ;
-    LDA.B nPlayerPosX                                          ;81922A|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81922A|A5D6    |0000D6;
     STA.W nUnknownX                                            ;81922C|8D8009  |000980;
-    LDA.B nPlayerPosY                                          ;81922F|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81922F|A5D8    |0000D8;
     INC A                                                      ;819231|1A      |      ;
     INC A                                                      ;819232|1A      |      ;
     STA.W nUnknownY                                            ;819233|8D8209  |000982;
     REP #$30                                                   ;819236|C230    |      ;
-    LDA.B nPlayerAction                                        ;819238|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;819238|A5D4    |0000D4;
     CMP.W #!PACTION_JUMP                                               
     BNE .notjump                                               ;81923D|D003    |819242;
     JMP.W .jump                                                ;81923F|4C5792  |819257;
@@ -2566,22 +2566,22 @@ fUnknown_819228:
  
 .label2:
     REP #$30                                                   ;819289|C230    |      ;
-    LDA.B nPlayerAction                                        ;81928B|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81928B|A5D4    |0000D4;
     CMP.W #$0005                                               ;81928D|C90500  |      ;
     BEQ +                                                      ;819290|F003    |819295;
     JMP.W .justReturn                                          ;819292|4C7893  |819378;
  
  
   + REP #$30                                                   ;819295|C230    |      ;
-    LDA.B nPlayerPosX                                          ;819297|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;819299|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;81929B|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;81929D|85E1    |0000E1;
-    STZ.B nPlayerPosCalculationX                               ;81929F|64E5    |0000E5;
-    STZ.B nPlayerPosCalculationY                               ;8192A1|64E7    |0000E7;
+    LDA.B strcPlayer.posX                                      ;819297|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;819299|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;81929B|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;81929D|85E1    |0000E1;
+    STZ.B strcPlayer.newX                                      ;81929F|64E5    |0000E5;
+    STZ.B strcPlayer.newY                                      ;8192A1|64E7    |0000E7;
     LDA.W #$0010                                               ;8192A3|A91000  |      ;
-    STA.B $E3                                                  ;8192A6|85E3    |0000E3;
-    LDA.B nPlayerDirection                                     ;8192A8|A5DA    |0000DA;
+    STA.B strcPlayer.unkE3                                     ;8192A6|85E3    |0000E3;
+    LDA.B strcPlayer.direction                                 ;8192A8|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;8192AA|2291AD83|83AD91;
     REP #$30                                                   ;8192AE|C230    |      ;
     CMP.W #$0000                                               ;8192B0|C90000  |      ;
@@ -2667,7 +2667,7 @@ fUnknown_819228:
   + REP #$30                                                   ;819359|C230    |      ;
     LDA.W #$0006                                               ;81935B|A90600  |      ;
     CLC                                                        ;81935E|18      |      ;
-    ADC.B nPlayerDirection                                     ;81935F|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81935F|65DA    |0000DA;
     TAY                                                        ;819361|A8      |      ;
     JSL.L fUnknown_8180B7                                      ;819362|22B78081|8180B7;
     SEP #$20                                                   ;819366|E220    |      ;
@@ -7369,7 +7369,7 @@ fUnknownSubrutineHandler_81BFB7:
  
 fPlayerAction_Handler:
     REP #$30                                                   ;81BFD3|C230    |      ;
-    LDA.B nPlayerAction                                        ;81BFD5|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81BFD5|A5D4    |0000D4;
     ASL A                                                      ;81BFD7|0A      |      ;
     TAX                                                        ;81BFD8|AA      |      ;
     JMP.W (aPlayerAction_JumpTable,X)                          ;81BFD9|7C27C0  |81C027;
@@ -7381,7 +7381,7 @@ fPlayerAction0x00:
     JMP.W fPlayerAction_EatMeal                                ;81BFE5|4C14CB  |81CB14;
  
  
-  + LDA.B nPlayerAction                                        ;81BFE8|A5D4    |0000D4;
+  + LDA.B strcPlayer.action                                    ;81BFE8|A5D4    |0000D4;
     CMP.W #!PACTION_RUN                                               
     BNE +                                                      ;81BFED|D003    |81BFF2;
     JMP.W fPlayerAction_Run                                    ;81BFEF|4C36C7  |81C736;
@@ -7399,7 +7399,7 @@ fPlayerAction0x00:
  
 fUnknown_81C002:
     REP #$30                                                   ;81C002|C230    |      ;
-    LDA.B nPlayerAction                                        ;81C004|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81C004|A5D4    |0000D4;
     CMP.W #!PACTION_NONE                                               
     BNE fPlayerAction0x19                                      ;81C009|D003    |81C00E;
     JMP.W fUnknown_81C556                                      ;81C00B|4C56C5  |81C556;
@@ -7415,7 +7415,7 @@ fUnknown_81C013:
     LDA.W #$0000                                               ;81C019|A90000  |      ;
     STA.B strcMap.unk1E                                        ;81C01C|851E    |00001E;
     LDA.W nPlayerDirectionCopy                                 ;81C01E|AD1109  |000911;
-    STA.B nPlayerDirection                                     ;81C021|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81C021|85DA    |0000DA;
     STA.W $0913                                                ;81C023|8D1309  |000913;
     RTL                                                        ;81C026|6B      |      ;
  
@@ -7494,7 +7494,7 @@ fPlayerAction0x1A:
     REP #$30                                                   ;81C0B7|C230    |      ;
     LDA.W #$00F2                                               ;81C0B9|A9F200  |      ;
     CLC                                                        ;81C0BC|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C0BD|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C0BD|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C0BF|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C0C2|20E6CF  |81CFE6;
     REP #$20                                                   ;81C0C5|C220    |      ;
@@ -7525,12 +7525,12 @@ fPlayerAction0x1A:
 fPlayerAction0x17:
     REP #$30                                                   ;81C111|C230    |      ;
     LDA.W $0913                                                ;81C113|AD1309  |000913;
-    STA.B nPlayerDirection                                     ;81C116|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81C116|85DA    |0000DA;
     STA.W nPlayerDirectionCopy                                 ;81C118|8D1109  |000911;
     REP #$30                                                   ;81C11B|C230    |      ;
     LDA.W #$00DC                                               ;81C11D|A9DC00  |      ;
     CLC                                                        ;81C120|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C121|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C121|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C123|8D0109  |000901;
     SEP #$20                                                   ;81C126|E220    |      ;
     LDA.B #$01                                                 ;81C128|A901    |      ;
@@ -7558,7 +7558,7 @@ fPlayerAction0x18:
     STA.W nSmallItemSpriteIndex                                ;81C15E|8D0109  |000901;
     REP #$20                                                   ;81C161|C220    |      ;
     LDA.W nPlayerDirectionCopy                                 ;81C163|AD1109  |000911;
-    STA.B nPlayerDirection                                     ;81C166|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81C166|85DA    |0000DA;
     SEP #$20                                                   ;81C168|E220    |      ;
     LDA.B #$01                                                 ;81C16A|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C16C|851E    |00001E;
@@ -7582,7 +7582,7 @@ fPlayerAction0x16:
     REP #$30                                                   ;81C1A3|C230    |      ;
     LDA.W #$00D8                                               ;81C1A5|A9D800  |      ;
     CLC                                                        ;81C1A8|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C1A9|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C1A9|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C1AB|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C1AE|20E6CF  |81CFE6;
     REP #$20                                                   ;81C1B1|C220    |      ;
@@ -7759,7 +7759,7 @@ fPlayerAction0x1B:
     REP #$30                                                   ;81C342|C230    |      ;
     LDA.W #$00BC                                               ;81C344|A9BC00  |      ;
     CLC                                                        ;81C347|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C348|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C348|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C34A|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C34D|20E6CF  |81CFE6;
     REP #$20                                                   ;81C350|C220    |      ;
@@ -7779,7 +7779,7 @@ fPlayerAction0x0D:
     REP #$30                                                   ;81C373|C230    |      ;
     LDA.W #$00BC                                               ;81C375|A9BC00  |      ;
     CLC                                                        ;81C378|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C379|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C379|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C37B|8D0109  |000901;
     JSR.W fUnknown_81CFE6                                      ;81C37E|20E6CF  |81CFE6;
     REP #$20                                                   ;81C381|C220    |      ;
@@ -8044,7 +8044,7 @@ fUnknown_81C556:
     LDA.B #$78                                                 ;81C585|A978    |      ;
     STA.W $0925                                                ;81C587|8D2509  |000925;
     %SetPlayerAction(!PACTION_EXCERCISE)
-    LDA.B nPlayerDirection                                     ;81C591|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81C591|A5DA    |0000DA;
     ASL A                                                      ;81C593|0A      |      ;
     CLC                                                        ;81C594|18      |      ;
     ADC.W #$003C                                               ;81C595|693C00  |      ;
@@ -8101,7 +8101,7 @@ fUnknown_81C556:
     REP #$30                                                   ;81C604|C230    |      ;
     LDA.W #$0000                                               ;81C606|A90000  |      ;
     CLC                                                        ;81C609|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C60A|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C60A|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C60C|8D0109  |000901;
     BRA .exit1                                                 ;81C60F|804B    |81C65C;
  
@@ -8110,7 +8110,7 @@ fUnknown_81C556:
     REP #$30                                                   ;81C611|C230    |      ;
     LDA.W #$0014                                               ;81C613|A91400  |      ;
     CLC                                                        ;81C616|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C617|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C617|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C619|8D0109  |000901;
     BRA .exit2                                                 ;81C61C|8044    |81C662;
  
@@ -8119,7 +8119,7 @@ fUnknown_81C556:
     REP #$30                                                   ;81C61E|C230    |      ;
     LDA.W #$00B0                                               ;81C620|A9B000  |      ;
     CLC                                                        ;81C623|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C624|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C624|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C626|8D0109  |000901;
     BRA .exit2                                                 ;81C629|8037    |81C662;
  
@@ -8128,7 +8128,7 @@ fUnknown_81C556:
     REP #$30                                                   ;81C62B|C230    |      ;
     LDA.W #$00C0                                               ;81C62D|A9C000  |      ;
     CLC                                                        ;81C630|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C631|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C631|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C633|8D0109  |000901;
     BRA .exit2                                                 ;81C636|802A    |81C662;
  
@@ -8144,7 +8144,7 @@ fUnknown_81C556:
     REP #$30                                                   ;81C642|C230    |      ;
     LDA.W #$00D0                                               ;81C644|A9D000  |      ;
     CLC                                                        ;81C647|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C648|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C648|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C64A|8D0109  |000901;
     BRA .exit2                                                 ;81C64D|8013    |81C662;
  
@@ -8153,7 +8153,7 @@ fUnknown_81C556:
     REP #$30                                                   ;81C64F|C230    |      ;
     LDA.W #$00EA                                               ;81C651|A9EA00  |      ;
     CLC                                                        ;81C654|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C655|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C655|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C657|8D0109  |000901;
     BRA .exit2                                                 ;81C65A|8006    |81C662;
  
@@ -8202,7 +8202,7 @@ fPlayerAction_Walk:
     REP #$30                                                   ;81C6AF|C230    |      ;
     LDA.W #$0004                                               ;81C6B1|A90400  |      ;
     CLC                                                        ;81C6B4|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C6B5|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C6B5|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C6B7|8D0109  |000901;
     SEP #$20                                                   ;81C6BA|E220    |      ;
     LDA.B #$01                                                 ;81C6BC|A901    |      ;
@@ -8214,7 +8214,7 @@ fPlayerAction_Walk:
     REP #$30                                                   ;81C6C2|C230    |      ;
     LDA.W #$0028                                               ;81C6C4|A92800  |      ;
     CLC                                                        ;81C6C7|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C6C8|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C6C8|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C6CA|8D0109  |000901;
     SEP #$20                                                   ;81C6CD|E220    |      ;
     LDA.B #$01                                                 ;81C6CF|A901    |      ;
@@ -8226,7 +8226,7 @@ fPlayerAction_Walk:
     REP #$30                                                   ;81C6D5|C230    |      ;
     LDA.W #$00B4                                               ;81C6D7|A9B400  |      ;
     CLC                                                        ;81C6DA|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C6DB|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C6DB|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C6DD|8D0109  |000901;
     SEP #$20                                                   ;81C6E0|E220    |      ;
     LDA.B #$03                                                 ;81C6E2|A903    |      ;
@@ -8238,7 +8238,7 @@ fPlayerAction_Walk:
     REP #$30                                                   ;81C6E9|C230    |      ;
     LDA.W #$00C4                                               ;81C6EB|A9C400  |      ;
     CLC                                                        ;81C6EE|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C6EF|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C6EF|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C6F1|8D0109  |000901;
     SEP #$20                                                   ;81C6F4|E220    |      ;
     LDA.B #$01                                                 ;81C6F6|A901    |      ;
@@ -8250,7 +8250,7 @@ fPlayerAction_Walk:
     REP #$30                                                   ;81C6FC|C230    |      ;
     LDA.W #$00D4                                               ;81C6FE|A9D400  |      ;
     CLC                                                        ;81C701|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C702|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C702|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C704|8D0109  |000901;
     SEP #$20                                                   ;81C707|E220    |      ;
     LDA.B #$01                                                 ;81C709|A901    |      ;
@@ -8262,7 +8262,7 @@ fPlayerAction_Walk:
     REP #$30                                                   ;81C70F|C230    |      ;
     LDA.W #$00EE                                               ;81C711|A9EE00  |      ;
     CLC                                                        ;81C714|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C715|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C715|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C717|8D0109  |000901;
     SEP #$20                                                   ;81C71A|E220    |      ;
     LDA.B #$01                                                 ;81C71C|A901    |      ;
@@ -8322,7 +8322,7 @@ fPlayerAction_Run:
     REP #$30                                                   ;81C794|C230    |      ;
     LDA.W #$0008                                               ;81C796|A90800  |      ;
     CLC                                                        ;81C799|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C79A|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C79A|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C79C|8D0109  |000901;
     SEP #$20                                                   ;81C79F|E220    |      ;
     LDA.B #$02                                                 ;81C7A1|A902    |      ;
@@ -8334,7 +8334,7 @@ fPlayerAction_Run:
     REP #$30                                                   ;81C7A7|C230    |      ;
     LDA.W #$002C                                               ;81C7A9|A92C00  |      ;
     CLC                                                        ;81C7AC|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C7AD|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C7AD|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C7AF|8D0109  |000901;
     SEP #$20                                                   ;81C7B2|E220    |      ;
     LDA.B #$02                                                 ;81C7B4|A902    |      ;
@@ -8346,7 +8346,7 @@ fPlayerAction_Run:
     REP #$30                                                   ;81C7BA|C230    |      ;
     LDA.W #$00B4                                               ;81C7BC|A9B400  |      ;
     CLC                                                        ;81C7BF|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C7C0|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C7C0|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C7C2|8D0109  |000901;
     SEP #$20                                                   ;81C7C5|E220    |      ;
     LDA.B #$03                                                 ;81C7C7|A903    |      ;
@@ -8358,7 +8358,7 @@ fPlayerAction_Run:
     REP #$30                                                   ;81C7CD|C230    |      ;
     LDA.W #$00C4                                               ;81C7CF|A9C400  |      ;
     CLC                                                        ;81C7D2|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C7D3|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C7D3|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C7D5|8D0109  |000901;
     SEP #$20                                                   ;81C7D8|E220    |      ;
     LDA.B #$01                                                 ;81C7DA|A901    |      ;
@@ -8370,7 +8370,7 @@ fPlayerAction_Run:
     REP #$30                                                   ;81C7E0|C230    |      ;
     LDA.W #$00D4                                               ;81C7E2|A9D400  |      ;
     CLC                                                        ;81C7E5|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C7E6|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C7E6|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C7E8|8D0109  |000901;
     SEP #$20                                                   ;81C7EB|E220    |      ;
     LDA.B #$01                                                 ;81C7ED|A901    |      ;
@@ -8382,7 +8382,7 @@ fPlayerAction_Run:
     REP #$30                                                   ;81C7F3|C230    |      ;
     LDA.W #$00EE                                               ;81C7F5|A9EE00  |      ;
     CLC                                                        ;81C7F8|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C7F9|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C7F9|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C7FB|8D0109  |000901;
     SEP #$20                                                   ;81C7FE|E220    |      ;
     LDA.B #$01                                                 ;81C800|A901    |      ;
@@ -8401,9 +8401,9 @@ fUnknown_81C806:
     SEP #$20                                                   ;81C815|E220    |      ;
     REP #$10                                                   ;81C817|C210    |      ;
     LDA.B #$05                                                 ;81C819|A905    |      ;
-    STA.W nAudioRegisterValue0                                 ;81C81B|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81C81B|8D1401  |000114;
     LDA.B #$06                                                 ;81C81E|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81C820|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81C820|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C823|22328383|838332;
  
 fHelper_81C827:
@@ -8461,14 +8461,14 @@ fPlayerAction0x03:
   + REP #$30                                                   ;81C8A2|C230    |      ;
     LDA.W #$000C                                               ;81C8A4|A90C00  |      ;
     CLC                                                        ;81C8A7|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C8A8|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C8A8|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C8AA|8D0109  |000901;
     SEP #$20                                                   ;81C8AD|E220    |      ;
     REP #$10                                                   ;81C8AF|C210    |      ;
     LDA.B #$06                                                 ;81C8B1|A906    |      ;
-    STA.W nAudioRegisterValue0                                 ;81C8B3|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81C8B3|8D1401  |000114;
     LDA.B #$06                                                 ;81C8B6|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81C8B8|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81C8B8|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C8BB|22328383|838332;
     SEP #$20                                                   ;81C8BF|E220    |      ;
     STZ.W $0971                                                ;81C8C1|9C7109  |000971;
@@ -8479,14 +8479,14 @@ fPlayerAction0x03:
     REP #$30                                                   ;81C8C6|C230    |      ;
     LDA.W #$0020                                               ;81C8C8|A92000  |      ;
     CLC                                                        ;81C8CB|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C8CC|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C8CC|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C8CE|8D0109  |000901;
     SEP #$20                                                   ;81C8D1|E220    |      ;
     REP #$10                                                   ;81C8D3|C210    |      ;
     LDA.B #$06                                                 ;81C8D5|A906    |      ;
-    STA.W nAudioRegisterValue0                                 ;81C8D7|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81C8D7|8D1401  |000114;
     LDA.B #$06                                                 ;81C8DA|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81C8DC|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81C8DC|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C8DF|22328383|838332;
     BRA .label4                                                ;81C8E3|803E    |81C923;
  
@@ -8495,14 +8495,14 @@ fPlayerAction0x03:
     REP #$30                                                   ;81C8E5|C230    |      ;
     LDA.W #$00B8                                               ;81C8E7|A9B800  |      ;
     CLC                                                        ;81C8EA|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C8EB|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C8EB|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C8ED|8D0109  |000901;
     SEP #$20                                                   ;81C8F0|E220    |      ;
     REP #$10                                                   ;81C8F2|C210    |      ;
     LDA.B #$06                                                 ;81C8F4|A906    |      ;
-    STA.W nAudioRegisterValue0                                 ;81C8F6|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81C8F6|8D1401  |000114;
     LDA.B #$06                                                 ;81C8F9|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81C8FB|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81C8FB|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C8FE|22328383|838332;
     BRA .label4                                                ;81C902|801F    |81C923;
  
@@ -8511,14 +8511,14 @@ fPlayerAction0x03:
     REP #$30                                                   ;81C904|C230    |      ;
     LDA.W #$00C8                                               ;81C906|A9C800  |      ;
     CLC                                                        ;81C909|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C90A|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C90A|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C90C|8D0109  |000901;
     SEP #$20                                                   ;81C90F|E220    |      ;
     REP #$10                                                   ;81C911|C210    |      ;
     LDA.B #$06                                                 ;81C913|A906    |      ;
-    STA.W nAudioRegisterValue0                                 ;81C915|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81C915|8D1401  |000114;
     LDA.B #$06                                                 ;81C918|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81C91A|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81C91A|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C91D|22328383|838332;
     BRA .label6                                                ;81C921|8026    |81C949;
  
@@ -8560,7 +8560,7 @@ fPlayerAction0x03:
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_FALLING)
     REP #$30                                                   ;81C974|C230    |      ;
-    LDA.B nPlayerDirection                                     ;81C976|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81C976|A5DA    |0000DA;
     CMP.W #!PDIR_RIGHT                                               
     BNE +                                                      ;81C97B|D003    |81C980;
     JMP.W .exit1                                               ;81C97D|4C82C9  |81C982;
@@ -8587,7 +8587,7 @@ fPlayerAction0x04:
     REP #$30                                                   ;81C9A8|C230    |      ;
     LDA.W #$0010                                               ;81C9AA|A91000  |      ;
     CLC                                                        ;81C9AD|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C9AE|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C9AE|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C9B0|8D0109  |000901;
     JSL.L fUnknown_818000                                      ;81C9B3|22008081|818000;
  
@@ -8618,14 +8618,14 @@ fPlayerAction0x05:
     REP #$30                                                   ;81C9F6|C230    |      ;
     LDA.W #$001C                                               ;81C9F8|A91C00  |      ;
     CLC                                                        ;81C9FB|18      |      ;
-    ADC.B nPlayerDirection                                     ;81C9FC|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;81C9FC|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;81C9FE|8D0109  |000901;
     SEP #$20                                                   ;81CA01|E220    |      ;
     REP #$10                                                   ;81CA03|C210    |      ;
     LDA.B #$07                                                 ;81CA05|A907    |      ;
-    STA.W nAudioRegisterValue0                                 ;81CA07|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81CA07|8D1401  |000114;
     LDA.B #$06                                                 ;81CA0A|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81CA0C|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81CA0C|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81CA0F|22328383|838332;
  
 .label1:
@@ -8773,7 +8773,7 @@ fPlayerAction0x09:
 fUnknown_81CB77:
     JSR.W fUnknown_81CFE6                                      ;81CB77|20E6CF  |81CFE6;
     REP #$20                                                   ;81CB7A|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CB7C|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CB7C|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
     BNE +                                                      ;81CB81|D003    |81CB86;
     JMP.W .down                                                ;81CB83|4C9ECB  |81CB9E;
@@ -8797,21 +8797,21 @@ fUnknown_81CB77:
 .down:
     REP #$30                                                   ;81CB9E|C230    |      ;
     REP #$30                                                   ;81CBA0|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CBA2|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CBA2|A5D4    |0000D4;
     CMP.W #!PACTION_JUMP                                               
     BNE +                                                      ;81CBA7|D003    |81CBAC;
     JMP.W .addY                                                ;81CBA9|4C30CC  |81CC30;
  
  
   + REP #$30                                                   ;81CBAC|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CBAE|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CBAE|A5D4    |0000D4;
     CMP.W #$0017                                               ;81CBB0|C91700  |      ;
     BNE +                                                      ;81CBB3|D003    |81CBB8;
     JMP.W .addY                                                ;81CBB5|4C30CC  |81CC30;
  
  
   + REP #$30                                                   ;81CBB8|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CBBA|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CBBA|A5D4    |0000D4;
     CMP.W #$0018                                               ;81CBBC|C91800  |      ;
     BNE +                                                      ;81CBBF|D003    |81CBC4;
     JMP.W .addY                                                ;81CBC1|4C30CC  |81CC30;
@@ -8822,17 +8822,17 @@ fUnknown_81CB77:
     JMP.W .addY                                                ;81CBCD|4C30CC  |81CC30;
  
  
-  + LDA.B nPlayerPosX                                          ;81CBD0|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;81CBD2|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;81CBD4|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;81CBD6|85E1    |0000E1;
+  + LDA.B strcPlayer.posX                                      ;81CBD0|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;81CBD2|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;81CBD4|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;81CBD6|85E1    |0000E1;
     LDA.W #$0000                                               ;81CBD8|A90000  |      ;
-    STA.B nPlayerPosCalculationX                               ;81CBDB|85E5    |0000E5;
+    STA.B strcPlayer.newX                                      ;81CBDB|85E5    |0000E5;
     LDA.B strcMap.unk1E                                        ;81CBDD|A51E    |00001E;
-    STA.B nPlayerPosCalculationY                               ;81CBDF|85E7    |0000E7;
-    STZ.B $E3                                                  ;81CBE1|64E3    |0000E3;
+    STA.B strcPlayer.newY                                      ;81CBDF|85E7    |0000E7;
+    STZ.B strcPlayer.unkE3                                     ;81CBE1|64E3    |0000E3;
     REP #$20                                                   ;81CBE3|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CBE5|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CBE5|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;81CBE7|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CBEB|C90000  |      ;
     BEQ +                                                      ;81CBEE|F003    |81CBF3;
@@ -8840,7 +8840,7 @@ fUnknown_81CB77:
  
  
   + REP #$20                                                   ;81CBF3|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CBF5|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CBF5|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;81CBF7|2237AF83|83AF37;
     REP #$30                                                   ;81CBFB|C230    |      ;
     STY.B n16TempVar1                                          ;81CBFD|847E    |00007E;
@@ -8856,9 +8856,9 @@ fUnknown_81CB77:
  
 .jump0:
     REP #$20                                                   ;81CC0F|C220    |      ;
-    LDA.B $EB                                                  ;81CC11|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CC11|A5EB    |0000EB;
     STA.W $087A                                                ;81CC13|8D7A08  |00087A;
-    LDA.B $E9                                                  ;81CC16|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CC16|A5E9    |0000E9;
     STA.W $0878                                                ;81CC18|8D7808  |000878;
     SEC                                                        ;81CC1B|38      |      ;
     SBC.W #$00C0                                               ;81CC1C|E9C000  |      ;
@@ -8874,10 +8874,10 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CC2E|851E    |00001E;
  
 .addY:
-    LDA.B nPlayerPosY                                          ;81CC30|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81CC30|A5D8    |0000D8;
     CLC                                                        ;81CC32|18      |      ;
     ADC.B strcMap.unk1E                                        ;81CC33|651E    |00001E;
-    STA.B nPlayerPosY                                          ;81CC35|85D8    |0000D8;
+    STA.B strcPlayer.posY                                      ;81CC35|85D8    |0000D8;
     JSL.L fUnknown_809EBC                                      ;81CC37|22BC9E80|809EBC;
     JSL.L fUnknown_80A0AB                                      ;81CC3B|22ABA080|80A0AB;
     JMP.W .exit                                                ;81CC3F|4C2BCE  |81CE2B;
@@ -8886,21 +8886,21 @@ fUnknown_81CB77:
 .up:
     REP #$30                                                   ;81CC42|C230    |      ;
     REP #$30                                                   ;81CC44|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CC46|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CC46|A5D4    |0000D4;
     CMP.W #!PACTION_JUMP                                               
     BNE +                                                      ;81CC4B|D003    |81CC50;
     JMP.W .subY                                                ;81CC4D|4CD4CC  |81CCD4;
  
  
   + REP #$30                                                   ;81CC50|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CC52|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CC52|A5D4    |0000D4;
     CMP.W #$0017                                               ;81CC54|C91700  |      ;
     BNE +                                                      ;81CC57|D003    |81CC5C;
     JMP.W .subY                                                ;81CC59|4CD4CC  |81CCD4;
  
  
   + REP #$30                                                   ;81CC5C|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CC5E|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CC5E|A5D4    |0000D4;
     CMP.W #$0018                                               ;81CC60|C91800  |      ;
     BNE +                                                      ;81CC63|D003    |81CC68;
     JMP.W .subY                                                ;81CC65|4CD4CC  |81CCD4;
@@ -8911,17 +8911,17 @@ fUnknown_81CB77:
     JMP.W .subY                                                ;81CC71|4CD4CC  |81CCD4;
  
  
-  + LDA.B nPlayerPosX                                          ;81CC74|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;81CC76|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;81CC78|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;81CC7A|85E1    |0000E1;
+  + LDA.B strcPlayer.posX                                      ;81CC74|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;81CC76|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;81CC78|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;81CC7A|85E1    |0000E1;
     LDA.W #$0000                                               ;81CC7C|A90000  |      ;
-    STA.B nPlayerPosCalculationX                               ;81CC7F|85E5    |0000E5;
+    STA.B strcPlayer.newX                                      ;81CC7F|85E5    |0000E5;
     LDA.B strcMap.unk1E                                        ;81CC81|A51E    |00001E;
-    STA.B nPlayerPosCalculationY                               ;81CC83|85E7    |0000E7;
-    STZ.B $E3                                                  ;81CC85|64E3    |0000E3;
+    STA.B strcPlayer.newY                                      ;81CC83|85E7    |0000E7;
+    STZ.B strcPlayer.unkE3                                     ;81CC85|64E3    |0000E3;
     REP #$20                                                   ;81CC87|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CC89|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CC89|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;81CC8B|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CC8F|C90000  |      ;
     BEQ +                                                      ;81CC92|F003    |81CC97;
@@ -8929,7 +8929,7 @@ fUnknown_81CB77:
  
  
   + REP #$20                                                   ;81CC97|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CC99|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CC99|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;81CC9B|2237AF83|83AF37;
     REP #$30                                                   ;81CC9F|C230    |      ;
     STY.B n16TempVar1                                          ;81CCA1|847E    |00007E;
@@ -8945,9 +8945,9 @@ fUnknown_81CB77:
  
 .jump1:
     REP #$20                                                   ;81CCB3|C220    |      ;
-    LDA.B $EB                                                  ;81CCB5|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CCB5|A5EB    |0000EB;
     STA.W $087A                                                ;81CCB7|8D7A08  |00087A;
-    LDA.B $E9                                                  ;81CCBA|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CCBA|A5E9    |0000E9;
     STA.W $0878                                                ;81CCBC|8D7808  |000878;
     SEC                                                        ;81CCBF|38      |      ;
     SBC.W #$00C0                                               ;81CCC0|E9C000  |      ;
@@ -8963,10 +8963,10 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CCD2|851E    |00001E;
  
 .subY:
-    LDA.B nPlayerPosY                                          ;81CCD4|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81CCD4|A5D8    |0000D8;
     SEC                                                        ;81CCD6|38      |      ;
     SBC.B strcMap.unk1E                                        ;81CCD7|E51E    |00001E;
-    STA.B nPlayerPosY                                          ;81CCD9|85D8    |0000D8;
+    STA.B strcPlayer.posY                                      ;81CCD9|85D8    |0000D8;
     JSL.L fUnknown_809EBC                                      ;81CCDB|22BC9E80|809EBC;
     JSL.L fUnknown_80A0E1                                      ;81CCDF|22E1A080|80A0E1;
     JMP.W .exit                                                ;81CCE3|4C2BCE  |81CE2B;
@@ -8975,21 +8975,21 @@ fUnknown_81CB77:
 .left:
     REP #$30                                                   ;81CCE6|C230    |      ;
     REP #$30                                                   ;81CCE8|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CCEA|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CCEA|A5D4    |0000D4;
     CMP.W #!PACTION_JUMP                                               
     BNE +                                                      ;81CCEF|D003    |81CCF4;
     JMP.W .addX                                                ;81CCF1|4C78CD  |81CD78;
  
  
   + REP #$30                                                   ;81CCF4|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CCF6|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CCF6|A5D4    |0000D4;
     CMP.W #$0017                                               ;81CCF8|C91700  |      ;
     BNE +                                                      ;81CCFB|D003    |81CD00;
     JMP.W .addX                                                ;81CCFD|4C78CD  |81CD78;
  
  
   + REP #$30                                                   ;81CD00|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CD02|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CD02|A5D4    |0000D4;
     CMP.W #$0018                                               ;81CD04|C91800  |      ;
     BNE +                                                      ;81CD07|D003    |81CD0C;
     JMP.W .addX                                                ;81CD09|4C78CD  |81CD78;
@@ -9000,17 +9000,17 @@ fUnknown_81CB77:
     JMP.W .addX                                                ;81CD15|4C78CD  |81CD78;
  
  
-  + LDA.B nPlayerPosX                                          ;81CD18|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;81CD1A|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;81CD1C|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;81CD1E|85E1    |0000E1;
+  + LDA.B strcPlayer.posX                                      ;81CD18|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;81CD1A|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;81CD1C|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;81CD1E|85E1    |0000E1;
     LDA.B strcMap.unk1E                                        ;81CD20|A51E    |00001E;
-    STA.B nPlayerPosCalculationX                               ;81CD22|85E5    |0000E5;
+    STA.B strcPlayer.newX                                      ;81CD22|85E5    |0000E5;
     LDA.W #$0000                                               ;81CD24|A90000  |      ;
-    STA.B nPlayerPosCalculationY                               ;81CD27|85E7    |0000E7;
-    STZ.B $E3                                                  ;81CD29|64E3    |0000E3;
+    STA.B strcPlayer.newY                                      ;81CD27|85E7    |0000E7;
+    STZ.B strcPlayer.unkE3                                     ;81CD29|64E3    |0000E3;
     REP #$20                                                   ;81CD2B|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CD2D|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CD2D|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;81CD2F|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CD33|C90000  |      ;
     BEQ +                                                      ;81CD36|F003    |81CD3B;
@@ -9018,7 +9018,7 @@ fUnknown_81CB77:
  
  
   + REP #$20                                                   ;81CD3B|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CD3D|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CD3D|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;81CD3F|2237AF83|83AF37;
     REP #$30                                                   ;81CD43|C230    |      ;
     STX.B n16TempVar1                                          ;81CD45|867E    |00007E;
@@ -9034,9 +9034,9 @@ fUnknown_81CB77:
  
 .jump2:
     REP #$20                                                   ;81CD57|C220    |      ;
-    LDA.B $EB                                                  ;81CD59|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CD59|A5EB    |0000EB;
     STA.W $087A                                                ;81CD5B|8D7A08  |00087A;
-    LDA.B $E9                                                  ;81CD5E|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CD5E|A5E9    |0000E9;
     STA.W $0878                                                ;81CD60|8D7808  |000878;
     SEC                                                        ;81CD63|38      |      ;
     SBC.W #$00C0                                               ;81CD64|E9C000  |      ;
@@ -9052,10 +9052,10 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CD76|851E    |00001E;
  
 .addX:
-    LDA.B nPlayerPosX                                          ;81CD78|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81CD78|A5D6    |0000D6;
     CLC                                                        ;81CD7A|18      |      ;
     ADC.B strcMap.unk1E                                        ;81CD7B|651E    |00001E;
-    STA.B nPlayerPosX                                          ;81CD7D|85D6    |0000D6;
+    STA.B strcPlayer.posX                                      ;81CD7D|85D6    |0000D6;
     JSL.L fUnknown_809EBC                                      ;81CD7F|22BC9E80|809EBC;
     JSL.L fUnknown_80A11C                                      ;81CD83|221CA180|80A11C;
     JMP.W .exit                                                ;81CD87|4C2BCE  |81CE2B;
@@ -9064,21 +9064,21 @@ fUnknown_81CB77:
 .right:
     REP #$30                                                   ;81CD8A|C230    |      ;
     REP #$30                                                   ;81CD8C|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CD8E|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CD8E|A5D4    |0000D4;
     CMP.W #!PACTION_JUMP                                               
     BNE +                                                      ;81CD93|D003    |81CD98;
     JMP.W .subX                                                ;81CD95|4C1CCE  |81CE1C;
  
  
   + REP #$30                                                   ;81CD98|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CD9A|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CD9A|A5D4    |0000D4;
     CMP.W #$0017                                               ;81CD9C|C91700  |      ;
     BNE +                                                      ;81CD9F|D003    |81CDA4;
     JMP.W .subX                                                ;81CDA1|4C1CCE  |81CE1C;
  
  
   + REP #$30                                                   ;81CDA4|C230    |      ;
-    LDA.B nPlayerAction                                        ;81CDA6|A5D4    |0000D4;
+    LDA.B strcPlayer.action                                    ;81CDA6|A5D4    |0000D4;
     CMP.W #$0018                                               ;81CDA8|C91800  |      ;
     BNE +                                                      ;81CDAB|D003    |81CDB0;
     JMP.W .subX                                                ;81CDAD|4C1CCE  |81CE1C;
@@ -9089,17 +9089,17 @@ fUnknown_81CB77:
     JMP.W .subX                                                ;81CDB9|4C1CCE  |81CE1C;
  
  
-  + LDA.B nPlayerPosX                                          ;81CDBC|A5D6    |0000D6;
-    STA.B nPlayerPosXCopy                                      ;81CDBE|85DF    |0000DF;
-    LDA.B nPlayerPosY                                          ;81CDC0|A5D8    |0000D8;
-    STA.B nPlayerPosYCopy                                      ;81CDC2|85E1    |0000E1;
+  + LDA.B strcPlayer.posX                                      ;81CDBC|A5D6    |0000D6;
+    STA.B strcPlayer.lastX                                     ;81CDBE|85DF    |0000DF;
+    LDA.B strcPlayer.posY                                      ;81CDC0|A5D8    |0000D8;
+    STA.B strcPlayer.lastY                                     ;81CDC2|85E1    |0000E1;
     LDA.B strcMap.unk1E                                        ;81CDC4|A51E    |00001E;
-    STA.B nPlayerPosCalculationX                               ;81CDC6|85E5    |0000E5;
+    STA.B strcPlayer.newX                                      ;81CDC6|85E5    |0000E5;
     LDA.W #$0000                                               ;81CDC8|A90000  |      ;
-    STA.B nPlayerPosCalculationY                               ;81CDCB|85E7    |0000E7;
-    STZ.B $E3                                                  ;81CDCD|64E3    |0000E3;
+    STA.B strcPlayer.newY                                      ;81CDCB|85E7    |0000E7;
+    STZ.B strcPlayer.unkE3                                     ;81CDCD|64E3    |0000E3;
     REP #$20                                                   ;81CDCF|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CDD1|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CDD1|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;81CDD3|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CDD7|C90000  |      ;
     BEQ +                                                      ;81CDDA|F003    |81CDDF;
@@ -9107,7 +9107,7 @@ fUnknown_81CB77:
  
  
   + REP #$20                                                   ;81CDDF|C220    |      ;
-    LDA.B nPlayerDirection                                     ;81CDE1|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81CDE1|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;81CDE3|2237AF83|83AF37;
     REP #$30                                                   ;81CDE7|C230    |      ;
     STX.B n16TempVar1                                          ;81CDE9|867E    |00007E;
@@ -9123,9 +9123,9 @@ fUnknown_81CB77:
  
 .jump3:
     REP #$20                                                   ;81CDFB|C220    |      ;
-    LDA.B $EB                                                  ;81CDFD|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CDFD|A5EB    |0000EB;
     STA.W $087A                                                ;81CDFF|8D7A08  |00087A;
-    LDA.B $E9                                                  ;81CE02|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CE02|A5E9    |0000E9;
     STA.W $0878                                                ;81CE04|8D7808  |000878;
     SEC                                                        ;81CE07|38      |      ;
     SBC.W #$00C0                                               ;81CE08|E9C000  |      ;
@@ -9141,10 +9141,10 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CE1A|851E    |00001E;
  
 .subX:
-    LDA.B nPlayerPosX                                          ;81CE1C|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81CE1C|A5D6    |0000D6;
     SEC                                                        ;81CE1E|38      |      ;
     SBC.B strcMap.unk1E                                        ;81CE1F|E51E    |00001E;
-    STA.B nPlayerPosX                                          ;81CE21|85D6    |0000D6;
+    STA.B strcPlayer.posX                                      ;81CE21|85D6    |0000D6;
     JSL.L fUnknown_809EBC                                      ;81CE23|22BC9E80|809EBC;
     JSL.L fUnknown_80A152                                      ;81CE27|2252A180|80A152;
  
@@ -9159,9 +9159,9 @@ fUnknown_81CB77:
     BNE .return                                                ;81CE3B|D015    |81CE52;
     JSL.L fUnknownCF_81A58F                                    ;81CE3D|228FA581|81A58F;
     REP #$20                                                   ;81CE41|C220    |      ;
-    LDA.B nPlayerPosX                                          ;81CE43|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81CE43|A5D6    |0000D6;
     STA.W nPlayerPosXCopy2                                     ;81CE45|8D0709  |000907;
-    LDA.B nPlayerPosY                                          ;81CE48|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81CE48|A5D8    |0000D8;
     STA.W nPlayerPosYCopy2                                     ;81CE4A|8D0909  |000909;
     SEP #$20                                                   ;81CE4D|E220    |      ;
     STZ.W $0919                                                ;81CE4F|9C1909  |000919;
@@ -9178,14 +9178,14 @@ fUnknown_81CB77:
  
 .sub1:
     REP #$30                                                   ;81CE58|C230    |      ;
-    LDA.B $EB                                                  ;81CE5A|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CE5A|A5EB    |0000EB;
     BEQ ++                                                     ;81CE5C|F014    |81CE72;
     CMP.W #$00A0                                               ;81CE5E|C9A000  |      ;
     BCC +                                                      ;81CE61|9005    |81CE68;
     CMP.W #$00B0                                               ;81CE63|C9B000  |      ;
     BCC ++                                                     ;81CE66|900A    |81CE72;
  
-  + LDA.B nPlayerPosX                                          ;81CE68|A5D6    |0000D6;
+  + LDA.B strcPlayer.posX                                      ;81CE68|A5D6    |0000D6;
     AND.W #$0008                                               ;81CE6A|290800  |      ;
     BNE ++                                                     ;81CE6D|D003    |81CE72;
     JMP.W .jump0                                               ;81CE6F|4C0FCC  |81CC0F;
@@ -9195,20 +9195,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CE75|851E    |00001E;
     REP #$30                                                   ;81CE77|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
-    STA.B nPlayerDirection                                     ;81CE7C|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CE7C|85DA    |0000DA;
     JMP.W .right                                               ;81CE7E|4C8ACD  |81CD8A;
  
  
 .sub2:
     REP #$30                                                   ;81CE81|C230    |      ;
-    LDA.B $E9                                                  ;81CE83|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CE83|A5E9    |0000E9;
     BEQ ++                                                     ;81CE85|F014    |81CE9B;
     CMP.W #$00A0                                               ;81CE87|C9A000  |      ;
     BCC +                                                      ;81CE8A|9005    |81CE91;
     CMP.W #$00B0                                               ;81CE8C|C9B000  |      ;
     BCC ++                                                     ;81CE8F|900A    |81CE9B;
  
-  + LDA.B nPlayerPosX                                          ;81CE91|A5D6    |0000D6;
+  + LDA.B strcPlayer.posX                                      ;81CE91|A5D6    |0000D6;
     AND.W #$0008                                               ;81CE93|290800  |      ;
     BEQ ++                                                     ;81CE96|F003    |81CE9B;
     JMP.W .jump0                                               ;81CE98|4C0FCC  |81CC0F;
@@ -9218,20 +9218,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CE9E|851E    |00001E;
     REP #$30                                                   ;81CEA0|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
-    STA.B nPlayerDirection                                     ;81CEA5|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CEA5|85DA    |0000DA;
     JMP.W .left                                                ;81CEA7|4CE6CC  |81CCE6;
  
  
 .sub3:
     REP #$30                                                   ;81CEAA|C230    |      ;
-    LDA.B $EB                                                  ;81CEAC|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CEAC|A5EB    |0000EB;
     BEQ ++                                                     ;81CEAE|F014    |81CEC4;
     CMP.W #$00A0                                               ;81CEB0|C9A000  |      ;
     BCC +                                                      ;81CEB3|9005    |81CEBA;
     CMP.W #$00B0                                               ;81CEB5|C9B000  |      ;
     BCC ++                                                     ;81CEB8|900A    |81CEC4;
  
-  + LDA.B nPlayerPosX                                          ;81CEBA|A5D6    |0000D6;
+  + LDA.B strcPlayer.posX                                      ;81CEBA|A5D6    |0000D6;
     AND.W #$0008                                               ;81CEBC|290800  |      ;
     BNE ++                                                     ;81CEBF|D003    |81CEC4;
     JMP.W .jump1                                               ;81CEC1|4CB3CC  |81CCB3;
@@ -9241,20 +9241,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CEC7|851E    |00001E;
     REP #$30                                                   ;81CEC9|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
-    STA.B nPlayerDirection                                     ;81CECE|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CECE|85DA    |0000DA;
     JMP.W .right                                               ;81CED0|4C8ACD  |81CD8A;
  
  
 .sub4:
     REP #$30                                                   ;81CED3|C230    |      ;
-    LDA.B $E9                                                  ;81CED5|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CED5|A5E9    |0000E9;
     BEQ ++                                                     ;81CED7|F014    |81CEED;
     CMP.W #$00A0                                               ;81CED9|C9A000  |      ;
     BCC +                                                      ;81CEDC|9005    |81CEE3;
     CMP.W #$00B0                                               ;81CEDE|C9B000  |      ;
     BCC ++                                                     ;81CEE1|900A    |81CEED;
  
-  + LDA.B nPlayerPosX                                          ;81CEE3|A5D6    |0000D6;
+  + LDA.B strcPlayer.posX                                      ;81CEE3|A5D6    |0000D6;
     AND.W #$0008                                               ;81CEE5|290800  |      ;
     BEQ ++                                                     ;81CEE8|F003    |81CEED;
     JMP.W .jump1                                               ;81CEEA|4CB3CC  |81CCB3;
@@ -9264,20 +9264,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CEF0|851E    |00001E;
     REP #$30                                                   ;81CEF2|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
-    STA.B nPlayerDirection                                     ;81CEF7|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CEF7|85DA    |0000DA;
     JMP.W .left                                                ;81CEF9|4CE6CC  |81CCE6;
  
  
 .sub5:
     REP #$30                                                   ;81CEFC|C230    |      ;
-    LDA.B $EB                                                  ;81CEFE|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CEFE|A5EB    |0000EB;
     BEQ ++                                                     ;81CF00|F014    |81CF16;
     CMP.W #$00A0                                               ;81CF02|C9A000  |      ;
     BCC +                                                      ;81CF05|9005    |81CF0C;
     CMP.W #$00B0                                               ;81CF07|C9B000  |      ;
     BCC ++                                                     ;81CF0A|900A    |81CF16;
  
-  + LDA.B nPlayerPosY                                          ;81CF0C|A5D8    |0000D8;
+  + LDA.B strcPlayer.posY                                      ;81CF0C|A5D8    |0000D8;
     AND.W #$0008                                               ;81CF0E|290800  |      ;
     BNE ++                                                     ;81CF11|D003    |81CF16;
     JMP.W .jump2                                               ;81CF13|4C57CD  |81CD57;
@@ -9287,20 +9287,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CF19|851E    |00001E;
     REP #$30                                                   ;81CF1B|C230    |      ;
     LDA.W #!PDIR_UP                                               
-    STA.B nPlayerDirection                                     ;81CF20|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CF20|85DA    |0000DA;
     JMP.W .up                                                  ;81CF22|4C42CC  |81CC42;
  
  
 .sub6:
     REP #$30                                                   ;81CF25|C230    |      ;
-    LDA.B $E9                                                  ;81CF27|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CF27|A5E9    |0000E9;
     BEQ ++                                                     ;81CF29|F014    |81CF3F;
     CMP.W #$00A0                                               ;81CF2B|C9A000  |      ;
     BCC +                                                      ;81CF2E|9005    |81CF35;
     CMP.W #$00B0                                               ;81CF30|C9B000  |      ;
     BCC ++                                                     ;81CF33|900A    |81CF3F;
  
-  + LDA.B nPlayerPosY                                          ;81CF35|A5D8    |0000D8;
+  + LDA.B strcPlayer.posY                                      ;81CF35|A5D8    |0000D8;
     AND.W #$0008                                               ;81CF37|290800  |      ;
     BEQ ++                                                     ;81CF3A|F003    |81CF3F;
     JMP.W .jump2                                               ;81CF3C|4C57CD  |81CD57;
@@ -9310,20 +9310,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CF42|851E    |00001E;
     REP #$30                                                   ;81CF44|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
-    STA.B nPlayerDirection                                     ;81CF49|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CF49|85DA    |0000DA;
     JMP.W .down                                                ;81CF4B|4C9ECB  |81CB9E;
  
  
 .sub7:
     REP #$30                                                   ;81CF4E|C230    |      ;
-    LDA.B $EB                                                  ;81CF50|A5EB    |0000EB;
+    LDA.B strcPlayer.unkPosY                                   ;81CF50|A5EB    |0000EB;
     BEQ ++                                                     ;81CF52|F014    |81CF68;
     CMP.W #$00A0                                               ;81CF54|C9A000  |      ;
     BCC +                                                      ;81CF57|9005    |81CF5E;
     CMP.W #$00B0                                               ;81CF59|C9B000  |      ;
     BCC ++                                                     ;81CF5C|900A    |81CF68;
  
-  + LDA.B nPlayerPosY                                          ;81CF5E|A5D8    |0000D8;
+  + LDA.B strcPlayer.posY                                      ;81CF5E|A5D8    |0000D8;
     AND.W #$0008                                               ;81CF60|290800  |      ;
     BNE ++                                                     ;81CF63|D003    |81CF68;
     JMP.W .jump3                                               ;81CF65|4CFBCD  |81CDFB;
@@ -9333,20 +9333,20 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CF6B|851E    |00001E;
     REP #$30                                                   ;81CF6D|C230    |      ;
     LDA.W #!PDIR_UP                                               
-    STA.B nPlayerDirection                                     ;81CF72|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CF72|85DA    |0000DA;
     JMP.W .up                                                  ;81CF74|4C42CC  |81CC42;
  
  
 .sub8:
     REP #$30                                                   ;81CF77|C230    |      ;
-    LDA.B $E9                                                  ;81CF79|A5E9    |0000E9;
+    LDA.B strcPlayer.unkPosX                                   ;81CF79|A5E9    |0000E9;
     BEQ ++                                                     ;81CF7B|F014    |81CF91;
     CMP.W #$00A0                                               ;81CF7D|C9A000  |      ;
     BCC +                                                      ;81CF80|9005    |81CF87;
     CMP.W #$00B0                                               ;81CF82|C9B000  |      ;
     BCC ++                                                     ;81CF85|900A    |81CF91;
  
-  + LDA.B nPlayerPosY                                          ;81CF87|A5D8    |0000D8;
+  + LDA.B strcPlayer.posY                                      ;81CF87|A5D8    |0000D8;
     AND.W #$0008                                               ;81CF89|290800  |      ;
     BEQ ++                                                     ;81CF8C|F003    |81CF91;
     JMP.W .jump3                                               ;81CF8E|4CFBCD  |81CDFB;
@@ -9356,7 +9356,7 @@ fUnknown_81CB77:
     STA.B strcMap.unk1E                                        ;81CF94|851E    |00001E;
     REP #$30                                                   ;81CF96|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
-    STA.B nPlayerDirection                                     ;81CF9B|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81CF9B|85DA    |0000DA;
     JMP.W .down                                                ;81CF9D|4C9ECB  |81CB9E;
  
  
@@ -9388,9 +9388,9 @@ fUnknown_81CFA0:
     STA.B strcSingleObjectData.flip                            ;81CFCB|859F    |00009F;
     LDA.W #$0000                                               ;81CFCD|A90000  |      ;
     STA.B strcSingleObjectData.unk6                            ;81CFD0|85A3    |0000A3;
-    LDA.B nPlayerPosX                                          ;81CFD2|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81CFD2|A5D6    |0000D6;
     STA.B strcSingleObjectData.posX                            ;81CFD4|859B    |00009B;
-    LDA.B nPlayerPosY                                          ;81CFD6|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81CFD6|A5D8    |0000D8;
     STA.B strcSingleObjectData.posY                            ;81CFD8|859D    |00009D;
     JSL.L fUnknown_858000                                      ;81CFDA|22008085|858000;
     REP #$20                                                   ;81CFDE|C220    |      ;
@@ -9403,9 +9403,9 @@ fUnknown_81CFE6:
     REP #$30                                                   ;81CFE6|C230    |      ;
     LDA.W $0905                                                ;81CFE8|AD0509  |000905;
     STA.B strcSingleObjectData.gameObjectIdx                   ;81CFEB|85A5    |0000A5;
-    LDA.B nPlayerPosX                                          ;81CFED|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81CFED|A5D6    |0000D6;
     STA.B strcSingleObjectData.posX                            ;81CFEF|859B    |00009B;
-    LDA.B nPlayerPosY                                          ;81CFF1|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81CFF1|A5D8    |0000D8;
     STA.B strcSingleObjectData.posY                            ;81CFF3|859D    |00009D;
     LDA.W $090F                                                ;81CFF5|AD0F09  |00090F;
     STA.B strcSingleObjectData.flip                            ;81CFF8|859F    |00009F;
@@ -9603,14 +9603,14 @@ fStoreTileOnFrontOfPlayerAtDistance:
     STA.B n16TempVar1                                          ;81D154|857E    |00007E; A * 16
     STX.B n16TempVar2                                          ;81D156|8680    |000080; X
     STY.B n16TempVar3                                          ;81D158|8482    |000082; Y
-    LDA.B nPlayerPosX                                          ;81D15A|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81D15A|A5D6    |0000D6;
     STA.W nTileInFrontOfPlayerX                                ;81D15C|8D8509  |000985;
-    LDA.B nPlayerPosY                                          ;81D15F|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81D15F|A5D8    |0000D8;
     STA.W nTileInFrontOfPlayerY                                ;81D161|8D8709  |000987;
-    LDA.B nPlayerDirection                                     ;81D164|A5DA    |0000DA;
+    LDA.B strcPlayer.direction                                 ;81D164|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
     BNE +                                                      ;81D169|D00C    |81D177;
-    LDA.B nPlayerPosY                                          ;81D16B|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81D16B|A5D8    |0000D8;
     CLC                                                        ;81D16D|18      |      ;
     ADC.B n16TempVar1                                          ;81D16E|657E    |00007E;
     ADC.B n16TempVar3                                          ;81D170|6582    |000082;
@@ -9620,7 +9620,7 @@ fStoreTileOnFrontOfPlayerAtDistance:
  
   + CMP.W #!PDIR_UP                                               
     BNE +                                                      ;81D17A|D00C    |81D188;
-    LDA.B nPlayerPosY                                          ;81D17C|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81D17C|A5D8    |0000D8;
     SEC                                                        ;81D17E|38      |      ;
     SBC.B n16TempVar1                                          ;81D17F|E57E    |00007E;
     SBC.B n16TempVar3                                          ;81D181|E582    |000082;
@@ -9630,7 +9630,7 @@ fStoreTileOnFrontOfPlayerAtDistance:
  
   + CMP.W #!PDIR_LEFT                                               
     BNE +                                                      ;81D18B|D00C    |81D199;
-    LDA.B nPlayerPosX                                          ;81D18D|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81D18D|A5D6    |0000D6;
     CLC                                                        ;81D18F|18      |      ;
     ADC.B n16TempVar1                                          ;81D190|657E    |00007E;
     ADC.B n16TempVar2                                          ;81D192|6580    |000080;
@@ -9638,7 +9638,7 @@ fStoreTileOnFrontOfPlayerAtDistance:
     BRA .justReturn                                            ;81D197|800A    |81D1A3;
  
  
-  + LDA.B nPlayerPosX                                          ;81D199|A5D6    |0000D6;
+  + LDA.B strcPlayer.posX                                      ;81D199|A5D6    |0000D6;
     SEC                                                        ;81D19B|38      |      ;
     SBC.B n16TempVar1                                          ;81D19C|E57E    |00007E;
     SBC.B n16TempVar2                                          ;81D19E|E580    |000080;
@@ -9662,11 +9662,11 @@ fFindTileCoordsInFrontOfPLayer:
     ASL A                                                      ;81D1B0|0A      |      ;
     ASL A                                                      ;81D1B1|0A      |      ; Y * 16 -> $80
     STA.B n16TempVar2                                          ;81D1B2|8580    |000080;
-    LDA.B nPlayerPosX                                          ;81D1B4|A5D6    |0000D6;
+    LDA.B strcPlayer.posX                                      ;81D1B4|A5D6    |0000D6;
     CLC                                                        ;81D1B6|18      |      ;
     ADC.B n16TempVar1                                          ;81D1B7|657E    |00007E;
     STA.W nTileInFrontOfPlayerX                                ;81D1B9|8D8509  |000985;
-    LDA.B nPlayerPosY                                          ;81D1BC|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;81D1BC|A5D8    |0000D8;
     CLC                                                        ;81D1BE|18      |      ;
     ADC.B n16TempVar2                                          ;81D1BF|6580    |000080;
     STA.W nTileInFrontOfPlayerY                                ;81D1C1|8D8709  |000987;
@@ -10398,9 +10398,9 @@ fPlayerInteraction0x03:
     BEQ +                                                      ;81D679|F044    |81D6BF;
     SEP #$20                                                   ;81D67B|E220    |      ;
     LDA.B #$19                                                 ;81D67D|A919    |      ;
-    STA.W nAudioRegisterValue0                                 ;81D67F|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;81D67F|8D1401  |000114;
     LDA.B #$06                                                 ;81D682|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;81D684|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;81D684|8D1501  |000115;
     LDA.B #$00                                                 ;81D687|A900    |      ;
     XBA                                                        ;81D689|EB      |      ;
     LDA.W $0118                                                ;81D68A|AD1801  |000118;
@@ -10409,7 +10409,7 @@ fPlayerInteraction0x03:
     SEP #$20                                                   ;81D690|E220    |      ;
     LDA.L nToolSoundData_80B8CD,X                              ;81D692|BFCDB880|80B8CD;
     INC A                                                      ;81D696|1A      |      ;
-    STA.W nAudioUnk104Index                                    ;81D697|8D0301  |000103;
+    STA.W strcAudio.index                                      ;81D697|8D0301  |000103;
     JSL.L fAudioUnknown_83833E                                 ;81D69A|223E8383|83833E;
     JSL.L fAudioSetRegister2to0A                               ;81D69E|22328383|838332;
     REP #$20                                                   ;81D6A2|C220    |      ;
@@ -10679,7 +10679,7 @@ fPlayerInteraction0x10_PlayerDiary:
     %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;81D8BE|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
-    STA.B nPlayerDirection                                     ;81D8C3|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81D8C3|85DA    |0000DA;
     REP #$30                                                   ;81D8C5|C230    |      ;
     LDA.W #$0003                                               ;81D8C7|A90300  |      ;
     STA.W nPlayerDirectionCopy                                 ;81D8CA|8D1109  |000911;
@@ -10711,7 +10711,7 @@ fPlayerInteraction0x10_PlayerDiary:
     %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;81D91A|C230    |      ;
     LDA.W #!PDIR_RIGHT                                               
-    STA.B nPlayerDirection                                     ;81D91F|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81D91F|85DA    |0000DA;
     REP #$30                                                   ;81D921|C230    |      ;
     LDA.W #$0003                                               ;81D923|A90300  |      ;
     STA.W nPlayerDirectionCopy                                 ;81D926|8D1109  |000911;
@@ -10764,7 +10764,7 @@ fPlayerInteraction0x11:
     %SetPlayerAction(!PACTION_0E)
     REP #$30                                                   ;81D994|C230    |      ;
     LDA.W #!PDIR_UP                                               
-    STA.B nPlayerDirection                                     ;81D999|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81D999|85DA    |0000DA;
     REP #$30                                                   ;81D99B|C230    |      ;
     LDA.W #$0001                                               ;81D99D|A90100  |      ;
     STA.W nPlayerDirectionCopy                                 ;81D9A0|8D1109  |000911;
@@ -12157,7 +12157,7 @@ fPlayerInteraction0x42:
     %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;81E710|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
-    STA.B nPlayerDirection                                     ;81E715|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81E715|85DA    |0000DA;
     REP #$30                                                   ;81E717|C230    |      ;
     LDA.W #$0002                                               ;81E719|A90200  |      ;
     STA.W nPlayerDirectionCopy                                 ;81E71C|8D1109  |000911;
@@ -13194,7 +13194,7 @@ fPlayerInteraction0x45:
     %SetPlayerAction(!PACTION_WALK)
     REP #$30                                                   ;81EFF1|C230    |      ;
     LDA.W #!PDIR_LEFT                                               
-    STA.B nPlayerDirection                                     ;81EFF6|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;81EFF6|85DA    |0000DA;
     REP #$30                                                   ;81EFF8|C230    |      ;
     LDA.W #$0002                                               ;81EFFA|A90200  |      ;
     STA.W nPlayerDirectionCopy                                 ;81EFFD|8D1109  |000911;
