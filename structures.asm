@@ -27,7 +27,9 @@ struct strcGameObject       $00019C
     .unknown35              : skip 1    ; 23 $0001BF
 endstruct align 36
 
+;
 ; Size and start to be confirmed
+;
 struct strcSingleObjectData $00009B
     .posX                   : skip 2    ; 9B-9C
     .posY                   : skip 2    ; 9D-9E
@@ -42,7 +44,7 @@ struct strcSingleObjectData $00009B
     .unkAF                  : skip 2    ; AF-B0 
     .unkB1                  : skip 1    ; B1
     .unkB2                  : skip 1    ; B2
-    .pObjectData            : skip 4    ; B3-B6 ptr24
+    .pObjectData            : skip 4    ; B3-B6 ptr24 - B6 not used, end of struct ?
 endstruct
 
 
@@ -50,12 +52,12 @@ endstruct
 ; Size to be confirmed, start is 100% ok
 ;
 struct strcMap              $00000D
-    .pSelectedTilemap       : skip 3    ; 0D-0F ptr24
+    .pSelected              : skip 3    ; 0D-0F ptr24
     .unk10                  : skip 2    ; 10
     .unk12                  : skip 2    ; 12
     .unk14                  : skip 2    ; 14
     .unk16                  : skip 2    ; 16
-    .pCurrentTilemap        : skip 4    ; 18-1B ptr24
+    .pCurrent               : skip 4    ; 18-1B ptr24
     .unk1C                  : skip 2    ; 1C
     .unk1E                  : skip 2    ; 1E
     .unk20                  : skip 1    ; 20
@@ -63,6 +65,45 @@ struct strcMap              $00000D
     .loadAreaId             : skip 1    ; 22
 endstruct
 
+
+;
+; Size and start(99% sure its ok) to be confirmed
+;
+struct strcPlayer           $0000D2
+    .flags                  : skip 2    ; D2-D3
+    .action                 : skip 2    ; D4-D5
+    .posX                   : skip 2    ; D6-D7     current coords
+    .posY                   : skip 2    ; D8-D9     current coords
+    .direction              : skip 2    ; DA-DB     
+    .unkDC                  : skip 2    ; DC-DD     
+    .lastRandomNumber       : skip 1    ; DE
+    .lastX                  : skip 2    ; DF-E0     last coords
+    .lastY                  : skip 2    ; E1-E2     last coords
+    .unkE3                  : skip 2    ; E3-E4     speed? move increment? rounding?
+    .newX                   : skip 2    ; E5-E6     new coords
+    .newY                   : skip 2    ; E7-E8     new coords
+    .unkPosX                : skip 2    ; E9-EA     unknown X
+    .unkPosY                : skip 2    ; EB-EC     unknown Y
+    .newCamX                : skip 2    ; ED-EE     new camera coords
+    .newCamY                : skip 2    ; EF-ED     new camera coords
+endstruct
+
+;
+; Size to be confirmed, start is 100% ok
+;
+struct strcAudio            $000103
+    .index                  : skip 1    ; 103
+    .list                   : skip 10   ; 104-10D
+    .unk10E                 : skip 1    ; 10E
+    .unk10F                 : skip 1    ; 10F
+    .trackId                : skip 1    ; 110
+    .unk111                 : skip 1    ; 111
+    .unk112                 : skip 1    ; 112
+    .unk113                 : skip 1    ; 113
+    .reg114                 : skip 1    ; 114
+    .reg115                 : skip 1    ; 115
+    .reg116                 : skip 1    ; 116
+endstruct
 
 ; Map scrool
 ;struct strcMapScrool        $00087C ; up to 0881

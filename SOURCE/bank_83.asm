@@ -401,11 +401,11 @@ fAudioUnknown_8382C6:
     JSL.L fAudioUnknown_83841F                                 ;8382CB|221F8483|83841F;
     SEP #$20                                                   ;8382CF|E220    |      ;
     PLA                                                        ;8382D1|68      |      ;
-    STA.W nAudioMusicTrackId                                   ;8382D2|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;8382D2|8D1001  |000110;
     JSL.L fAudioUnknown_8383A4                                 ;8382D5|22A48383|8383A4;
     JSL.L fAudioUnknown_838380                                 ;8382D9|22808383|838380;
     SEP #$20                                                   ;8382DD|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;8382DF|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;8382DF|AD1001  |000110;
     STA.W $0117                                                ;8382E2|8D1701  |000117;
     REP #$30                                                   ;8382E5|C230    |      ;
     LDA.W #$00B4                                               ;8382E7|A9B400  |      ;
@@ -421,12 +421,12 @@ fAudioUnknown_8382C6:
 fAudioUnknown_8382FE:
     SEP #$20                                                   ;8382FE|E220    |      ;
     REP #$10                                                   ;838300|C210    |      ;
-    STA.W nAudioRegisterValue0                                 ;838302|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;838302|8D1401  |000114;
     PHY                                                        ;838305|5A      |      ;
     REP #$20                                                   ;838306|C220    |      ;
     TXA                                                        ;838308|8A      |      ;
     SEP #$20                                                   ;838309|E220    |      ;
-    STA.W nAudioRegisterValue1                                 ;83830B|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;83830B|8D1501  |000115;
     LDA.B #$00                                                 ;83830E|A900    |      ;
     XBA                                                        ;838310|EB      |      ;
     LDA.W $0118                                                ;838311|AD1801  |000118;
@@ -435,7 +435,7 @@ fAudioUnknown_8382FE:
     SEP #$20                                                   ;838317|E220    |      ;
     LDA.L nToolSoundData_80B8CD,X                              ;838319|BFCDB880|80B8CD;
     INC A                                                      ;83831D|1A      |      ;
-    STA.W nAudioUnk104Index                                    ;83831E|8D0301  |000103;
+    STA.W strcAudio.index                                      ;83831E|8D0301  |000103;
     JSL.L fAudioUnknown_83833E                                 ;838321|223E8383|83833E;
     JSL.L fAudioSetRegister2to0A                               ;838325|22328383|838332;
     REP #$30                                                   ;838329|C230    |      ;
@@ -448,7 +448,7 @@ fAudioUnknown_8382FE:
 fAudioSetRegister2to0A:
     SEP #$20                                                   ;838332|E220    |      ;
     LDA.B #$0A                                                 ;838334|A90A    |      ;
-    STA.W nAudioRegisterValue2                                 ;838336|8D1601  |000116;
+    STA.W strcAudio.reg116                                     ;838336|8D1601  |000116;
     JSL.L fAudioUnknown_838DDF                                 ;838339|22DF8D83|838DDF;
     RTL                                                        ;83833D|6B      |      ;
  
@@ -457,11 +457,11 @@ fAudioUnknown_83833E:
     SEP #$20                                                   ;83833E|E220    |      ;
     LDA.B #$00                                                 ;838340|A900    |      ;
     XBA                                                        ;838342|EB      |      ;
-    LDA.W nAudioUnk104Index                                    ;838343|AD0301  |000103;
+    LDA.W strcAudio.index                                      ;838343|AD0301  |000103;
     REP #$20                                                   ;838346|C220    |      ;
     TAX                                                        ;838348|AA      |      ;
     SEP #$20                                                   ;838349|E220    |      ;
-    LDA.W sAudioUnk104,X                                       ;83834B|BD0401  |000104;
+    LDA.W strcAudio.list,X                                     ;83834B|BD0401  |000104;
     BEQ +                                                      ;83834E|F00E    |83835E;
     REP #$20                                                   ;838350|C220    |      ;
     TXA                                                        ;838352|8A      |      ;
@@ -473,7 +473,7 @@ fAudioUnknown_83833E:
   + SEP #$20                                                   ;83835E|E220    |      ;
     LDA.B #$00                                                 ;838360|A900    |      ;
     XBA                                                        ;838362|EB      |      ;
-    LDA.W nAudioRegisterValue0                                 ;838363|AD1401  |000114;
+    LDA.W strcAudio.reg114                                     ;838363|AD1401  |000114;
     REP #$20                                                   ;838366|C220    |      ;
     TAX                                                        ;838368|AA      |      ;
     SEP #$20                                                   ;838369|E220    |      ;
@@ -486,24 +486,24 @@ fAudioUnknown_83833E:
  
 fAudioUnused_838376:
     SEP #$20                                                   ;838376|E220    |      ;
-    LDA.W nAudioUnk104Index                                    ;838378|AD0301  |000103;
+    LDA.W strcAudio.index                                      ;838378|AD0301  |000103;
     INC A                                                      ;83837B|1A      |      ;
-    STA.W nAudioUnk104Index                                    ;83837C|8D0301  |000103;
+    STA.W strcAudio.index                                      ;83837C|8D0301  |000103;
     RTL                                                        ;83837F|6B      |      ;
  
  
 fAudioUnknown_838380:
     SEP #$20                                                   ;838380|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;838382|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;838382|AD1001  |000110;
     BEQ +                                                      ;838385|F017    |83839E;
     CMP.W $0117                                                ;838387|CD1701  |000117;
     BEQ +                                                      ;83838A|F012    |83839E;
     CMP.B #$FF                                                 ;83838C|C9FF    |      ;
     BEQ +                                                      ;83838E|F00E    |83839E;
     LDA.B #$01                                                 ;838390|A901    |      ;
-    STA.W nAudioUnk111                                         ;838392|8D1101  |000111;
+    STA.W strcAudio.unk111                                     ;838392|8D1101  |000111;
     LDA.B #$40                                                 ;838395|A940    |      ;
-    STA.W nAudioUnk113                                         ;838397|8D1301  |000113;
+    STA.W strcAudio.unk113                                     ;838397|8D1301  |000113;
     JSL.L fAudioUnknown_838D39                                 ;83839A|22398D83|838D39;
  
   + SEP #$20                                                   ;83839E|E220    |      ;
@@ -513,13 +513,13 @@ fAudioUnknown_838380:
  
 fAudioUnknown_8383A4:
     SEP #$20                                                   ;8383A4|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;8383A6|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;8383A6|AD1001  |000110;
     CMP.W $0117                                                ;8383A9|CD1701  |000117;
     BEQ +                                                      ;8383AC|F022    |8383D0;
     LDA.B #$00                                                 ;8383AE|A900    |      ;
     JSL.L fAudioUnknown_8389C7                                 ;8383B0|22C78983|8389C7;
     SEP #$20                                                   ;8383B4|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;8383B6|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;8383B6|AD1001  |000110;
     BEQ +                                                      ;8383B9|F015    |8383D0;
     CMP.B #$FF                                                 ;8383BB|C9FF    |      ;
     BEQ +                                                      ;8383BD|F011    |8383D0;
@@ -529,17 +529,17 @@ fAudioUnknown_8383A4:
  
     SEP #$20                                                   ;8383C9|E220    |      ;
     LDA.B #$00                                                 ;8383CB|A900    |      ;
-    STA.W nAudioMusicTrackId                                   ;8383CD|8D1001  |000110;
+    STA.W strcAudio.trackId                                    ;8383CD|8D1001  |000110;
  
   + SEP #$20                                                   ;8383D0|E220    |      ;
     LDA.B #$06                                                 ;8383D2|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;8383D4|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;8383D4|8D1501  |000115;
     LDA.B #$03                                                 ;8383D7|A903    |      ;
-    STA.W nAudioRegisterValue0                                 ;8383D9|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;8383D9|8D1401  |000114;
     SEP #$20                                                   ;8383DC|E220    |      ;
     LDA.B #$00                                                 ;8383DE|A900    |      ;
     XBA                                                        ;8383E0|EB      |      ;
-    LDA.W nAudioMusicTrackId                                   ;8383E1|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;8383E1|AD1001  |000110;
     STA.W $0118                                                ;8383E4|8D1801  |000118;
     CMP.B #$FF                                                 ;8383E7|C9FF    |      ;
     BNE +                                                      ;8383E9|D005    |8383F0;
@@ -550,7 +550,7 @@ fAudioUnknown_8383A4:
     TAX                                                        ;8383F2|AA      |      ;
     SEP #$20                                                   ;8383F3|E220    |      ;
     LDA.L nToolSoundData_80B8CD,X                              ;8383F5|BFCDB880|80B8CD;
-    STA.W nAudioUnk104Index                                    ;8383F9|8D0301  |000103;
+    STA.W strcAudio.index                                      ;8383F9|8D0301  |000103;
     JSL.L fAudioUnknown_83833E                                 ;8383FC|223E8383|83833E;
  
 fAudioReturn_838400:
@@ -559,15 +559,15 @@ fAudioReturn_838400:
  
 fAudioUnknown_838401:
     SEP #$20                                                   ;838401|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;838403|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;838403|AD1001  |000110;
     CMP.W $0117                                                ;838406|CD1701  |000117;
     BEQ .return                                                ;838409|F013    |83841E;
     LDA.W $0117                                                ;83840B|AD1701  |000117;
     BEQ fAudioReturn_838400                                    ;83840E|F0F0    |838400; BUG - should be .return in this function rather than previous one since we are out of function scope
     LDA.B #$01                                                 ;838410|A901    |      ;
-    STA.W nAudioUnk112                                         ;838412|8D1201  |000112;
+    STA.W strcAudio.unk112                                     ;838412|8D1201  |000112;
     LDA.B #$40                                                 ;838415|A940    |      ;
-    STA.W nAudioUnk113                                         ;838417|8D1301  |000113;
+    STA.W strcAudio.unk113                                     ;838417|8D1301  |000113;
     JSL.L fAudioUnknown_838D8B                                 ;83841A|228B8D83|838D8B;
  
 .return:
@@ -576,15 +576,15 @@ fAudioUnknown_838401:
  
 fAudioUnknown_83841F:
     SEP #$20                                                   ;83841F|E220    |      ;
-    LDA.W nAudioMusicTrackId                                   ;838421|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;838421|AD1001  |000110;
     CMP.W $0117                                                ;838424|CD1701  |000117;
     BEQ .return                                                ;838427|F013    |83843C;
     LDA.W $0117                                                ;838429|AD1701  |000117;
     BEQ .return                                                ;83842C|F00E    |83843C;
     LDA.B #$01                                                 ;83842E|A901    |      ;
-    STA.W nAudioUnk112                                         ;838430|8D1201  |000112;
+    STA.W strcAudio.unk112                                     ;838430|8D1201  |000112;
     LDA.B #$10                                                 ;838433|A910    |      ;
-    STA.W nAudioUnk113                                         ;838435|8D1301  |000113;
+    STA.W strcAudio.unk113                                     ;838435|8D1301  |000113;
     JSL.L fAudioUnknown_838D8B                                 ;838438|228B8D83|838D8B;
  
 .return:
@@ -1042,17 +1042,17 @@ fAudioUnknown_83878C:
     SEP #$20                                                   ;83878C|E220    |      ;
     REP #$10                                                   ;83878E|C210    |      ;
     LDX.W #$0000                                               ;838790|A20000  |      ;
-    STZ.W nAudioUnk104Index                                    ;838793|9C0301  |000103;
-    STZ.W nAudioUnk10F                                         ;838796|9C0F01  |00010F;
+    STZ.W strcAudio.index                                      ;838793|9C0301  |000103;
+    STZ.W strcAudio.unk10F                                     ;838796|9C0F01  |00010F;
  
-  - STZ.W sAudioUnk104,X                                       ;838799|9E0401  |000104;
+  - STZ.W strcAudio.list,X                                     ;838799|9E0401  |000104;
     INX                                                        ;83879C|E8      |      ;
     CPX.W #$000B                                               ;83879D|E00B00  |      ;
     BNE -                                                      ;8387A0|D0F7    |838799;
     LDY.W #$0000                                               ;8387A2|A00000  |      ;
     LDA.B #$00                                                 ;8387A5|A900    |      ;
     XBA                                                        ;8387A7|EB      |      ;
-    LDA.W nAudioMusicTrackId                                   ;8387A8|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;8387A8|AD1001  |000110;
     REP #$20                                                   ;8387AB|C220    |      ;
     STA.B n16TempVar1                                          ;8387AD|857E    |00007E;
     LDA.W #$000E                                               ;8387AF|A90E00  |      ;
@@ -1084,9 +1084,9 @@ fAudioUnknown_83878C:
 .label1:
     SEP #$20                                                   ;8387DA|E220    |      ;
     LDA.B n8TempVar3                                           ;8387DC|A594    |000094;
-    STA.W sAudioUnk104,Y                                       ;8387DE|990401  |000104;
-    INC.W nAudioUnk104Index                                    ;8387E1|EE0301  |000103;
-    INC.W nAudioUnk10F                                         ;8387E4|EE0F01  |00010F;
+    STA.W strcAudio.list,Y                                     ;8387DE|990401  |000104;
+    INC.W strcAudio.index                                      ;8387E1|EE0301  |000103;
+    INC.W strcAudio.unk10F                                     ;8387E4|EE0F01  |00010F;
  
 .label2:
     SEP #$20                                                   ;8387E7|E220    |      ;
@@ -1388,7 +1388,7 @@ fAudioUnknown_8389C7:
  
 .zeroArray104:
     LDA.B #$00                                                 ;838A1A|A900    |      ;
-    STA.W sAudioUnk104,X                                       ;838A1C|9D0401  |000104;
+    STA.W strcAudio.list,X                                     ;838A1C|9D0401  |000104;
     INX                                                        ;838A1F|E8      |      ;
     CPX.W #$000B                                               ;838A20|E00B00  |      ;
     BNE .zeroArray104                                          ;838A23|D0F5    |838A1A;
@@ -1414,7 +1414,7 @@ fAudioUnknown_838A26:
     BNE .wait1                                                 ;838A44|D0EB    |838A31;
     LDA.B #$00                                                 ;838A46|A900    |      ;
     XBA                                                        ;838A48|EB      |      ;
-    LDA.W nAudioMusicTrackId                                   ;838A49|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;838A49|AD1001  |000110;
     ASL A                                                      ;838A4C|0A      |      ;
     REP #$20                                                   ;838A4D|C220    |      ;
     TAX                                                        ;838A4F|AA      |      ;
@@ -1447,7 +1447,7 @@ fAudioUnknown_838A26:
     SEP #$20                                                   ;838A86|E220    |      ;
     LDA.B #$00                                                 ;838A88|A900    |      ;
     XBA                                                        ;838A8A|EB      |      ;
-    LDA.W nAudioMusicTrackId                                   ;838A8B|AD1001  |000110;
+    LDA.W strcAudio.trackId                                    ;838A8B|AD1001  |000110;
     REP #$20                                                   ;838A8E|C220    |      ;
     STA.B n16TempVar1                                          ;838A90|857E    |00007E;
     LDA.W #$000E                                               ;838A92|A90E00  |      ;
@@ -1526,15 +1526,15 @@ fAudioUnknown_838AFF:
     BNE .wait1                                                 ;838B20|D0EB    |838B0D;
     LDA.B #$00                                                 ;838B22|A900    |      ;
     XBA                                                        ;838B24|EB      |      ;
-    LDA.W nAudioRegisterValue0                                 ;838B25|AD1401  |000114;
+    LDA.W strcAudio.reg114                                     ;838B25|AD1401  |000114;
     TAX                                                        ;838B28|AA      |      ;
     LDA.L aAudioUnknown_83927F,X                               ;838B29|BF7F9283|83927F;
     STA.B n8TempVar3                                           ;838B2D|8594    |000094;
-    LDA.W nAudioUnk104Index                                    ;838B2F|AD0301  |000103;
+    LDA.W strcAudio.index                                      ;838B2F|AD0301  |000103;
     TAX                                                        ;838B32|AA      |      ;
     LDA.B n8TempVar3                                           ;838B33|A594    |000094;
-    STA.W sAudioUnk104,X                                       ;838B35|9D0401  |000104;
-    INC.W nAudioUnk104Index                                    ;838B38|EE0301  |000103;
+    STA.W strcAudio.list,X                                     ;838B35|9D0401  |000104;
+    INC.W strcAudio.index                                      ;838B38|EE0301  |000103;
     LDA.B #$00                                                 ;838B3B|A900    |      ;
     XBA                                                        ;838B3D|EB      |      ;
     LDA.B n8TempVar3                                           ;838B3E|A594    |000094;
@@ -1811,9 +1811,9 @@ fAudioUnknown_838D39:
     LDA.B #$01                                                 ;838D55|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838D57|CD4321  |002143;
     BNE -                                                      ;838D5A|D0EB    |838D47;
-    LDA.W nAudioUnk111                                         ;838D5C|AD1101  |000111;
+    LDA.W strcAudio.unk111                                     ;838D5C|AD1101  |000111;
     STA.W SNES_APUIO0                                          ;838D5F|8D4021  |002140;
-    LDA.W nAudioUnk113                                         ;838D62|AD1301  |000113;
+    LDA.W strcAudio.unk113                                     ;838D62|AD1301  |000113;
     STA.W SNES_APUIO1                                          ;838D65|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838D68|9C4221  |002142;
     LDA.B #$02                                                 ;838D6B|A902    |      ;
@@ -1853,9 +1853,9 @@ fAudioUnknown_838D8B:
     LDA.B #$01                                                 ;838DA9|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DAB|CD4321  |002143;
     BNE -                                                      ;838DAE|D0EB    |838D9B;
-    LDA.W nAudioUnk112                                         ;838DB0|AD1201  |000112;
+    LDA.W strcAudio.unk112                                     ;838DB0|AD1201  |000112;
     STA.W SNES_APUIO0                                          ;838DB3|8D4021  |002140;
-    LDA.W nAudioUnk113                                         ;838DB6|AD1301  |000113;
+    LDA.W strcAudio.unk113                                     ;838DB6|AD1301  |000113;
     STA.W SNES_APUIO1                                          ;838DB9|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838DBC|9C4221  |002142;
     LDA.B #$02                                                 ;838DBF|A902    |      ;
@@ -1896,11 +1896,11 @@ fAudioUnknown_838DDF:
     LDA.B #$01                                                 ;838DFB|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DFD|CD4321  |002143;
     BNE -                                                      ;838E00|D0EB    |838DED;
-    LDA.W nAudioRegisterValue0                                 ;838E02|AD1401  |000114;
+    LDA.W strcAudio.reg114                                     ;838E02|AD1401  |000114;
     STA.W SNES_APUIO0                                          ;838E05|8D4021  |002140;
-    LDA.W nAudioRegisterValue1                                 ;838E08|AD1501  |000115;
+    LDA.W strcAudio.reg115                                     ;838E08|AD1501  |000115;
     STA.W SNES_APUIO1                                          ;838E0B|8D4121  |002141;
-    LDA.W nAudioRegisterValue2                                 ;838E0E|AD1601  |000116;
+    LDA.W strcAudio.reg116                                     ;838E0E|AD1601  |000116;
     STA.W SNES_APUIO2                                          ;838E11|8D4221  |002142;
     LDA.B #$02                                                 ;838E14|A902    |      ;
     STA.W SNES_APUIO3                                          ;838E16|8D4321  |002143;
@@ -2564,9 +2564,9 @@ fDialog_IterateText:
     SEP #$20                                                   ;8395AB|E220    |      ;
     REP #$10                                                   ;8395AD|C210    |      ;
     LDA.B #$03                                                 ;8395AF|A903    |      ;
-    STA.W nAudioRegisterValue0                                 ;8395B1|8D1401  |000114;
+    STA.W strcAudio.reg114                                     ;8395B1|8D1401  |000114;
     LDA.B #$06                                                 ;8395B4|A906    |      ;
-    STA.W nAudioRegisterValue1                                 ;8395B6|8D1501  |000115;
+    STA.W strcAudio.reg115                                     ;8395B6|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;8395B9|22328383|838332;
     SEP #$20                                                   ;8395BD|E220    |      ;
     LDA.W $019B                                                ;8395BF|AD9B01  |00019B;
@@ -4804,9 +4804,9 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AC32|E220    |      ;
     STZ.W nBreakHitCounter                                     ;83AC34|9C6D09  |00096D;
     REP #$20                                                   ;83AC37|C220    |      ;
-    STZ.B nPlayerFlags                                         ;83AC39|64D2    |0000D2;
-    STZ.B $E9                                                  ;83AC3B|64E9    |0000E9;
-    STZ.B $EB                                                  ;83AC3D|64EB    |0000EB;
+    STZ.B strcPlayer.flags                                     ;83AC39|64D2    |0000D2;
+    STZ.B strcPlayer.unkPosX                                   ;83AC3B|64E9    |0000E9;
+    STZ.B strcPlayer.unkPosY                                   ;83AC3D|64EB    |0000EB;
     STZ.W $0878                                                ;83AC3F|9C7808  |000878;
     STZ.W $087A                                                ;83AC42|9C7A08  |00087A;
     STZ.W nTimeState                                           ;83AC45|9C7309  |000973;
@@ -4817,8 +4817,8 @@ fGameEngine_FirstNight:
     STZ.W $098A                                                ;83AC50|9C8A09  |00098A;
     STZ.W $0972                                                ;83AC53|9C7209  |000972;
     REP #$20                                                   ;83AC56|C220    |      ;
-    STZ.B nPlayerPosX                                          ;83AC58|64D6    |0000D6;
-    STZ.B nPlayerPosY                                          ;83AC5A|64D8    |0000D8;
+    STZ.B strcPlayer.posX                                      ;83AC58|64D6    |0000D6;
+    STZ.B strcPlayer.posY                                      ;83AC5A|64D8    |0000D8;
     STZ.W nPlayerPosXCopy2                                     ;83AC5C|9C0709  |000907;
     STZ.W nPlayerPosYCopy2                                     ;83AC5F|9C0909  |000909;
     SEP #$20                                                   ;83AC62|E220    |      ;
@@ -4860,7 +4860,7 @@ fGameEngine_FirstNight:
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83ACDE|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
-    STA.B nPlayerDirection                                     ;83ACE3|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;83ACE3|85DA    |0000DA;
     REP #$30                                                   ;83ACE5|C230    |      ;
     LDA.W #$0000                                               ;83ACE7|A90000  |      ;
     STA.W nPlayerDirectionCopy                                 ;83ACEA|8D1109  |000911;
@@ -4891,8 +4891,8 @@ fGameEngine_FirstNight:
     STZ.W $096C                                                ;83AD2C|9C6C09  |00096C;
     STZ.W $0922                                                ;83AD2F|9C2209  |000922;
     SEP #$20                                                   ;83AD32|E220    |      ;
-    STZ.W nAudioMusicTrackId                                   ;83AD34|9C1001  |000110;
-    STZ.W nAudioRegisterValue0                                 ;83AD37|9C1401  |000114;
+    STZ.W strcAudio.trackId                                    ;83AD34|9C1001  |000110;
+    STZ.W strcAudio.reg114                                     ;83AD37|9C1401  |000114;
     STZ.W $0117                                                ;83AD3A|9C1701  |000117;
     STZ.W $0118                                                ;83AD3D|9C1801  |000118;
     STZ.W $0117                                                ;83AD40|9C1701  |000117;
@@ -4904,7 +4904,7 @@ fGameEngine_FirstNight:
     STZ.W sPlacedChickenFeed                                   ;83AD50|9C3409  |000934;
     REP #$20                                                   ;83AD53|C220    |      ;
     STZ.W $084A                                                ;83AD55|9C4A08  |00084A;
-    STZ.B $DC                                                  ;83AD58|64DC    |0000DC;
+    STZ.B strcPlayer.unkDC                                     ;83AD58|64DC    |0000DC;
     SEP #$20                                                   ;83AD5A|E220    |      ;
     STZ.W nDestinationAreaId                                   ;83AD5C|9C8B09  |00098B;
     REP #$20                                                   ;83AD5F|C220    |      ;
@@ -4948,28 +4948,28 @@ fGameEngine_DirectionHandler83AD91:
     dw .case4                                                  ;83ADAC|        |83ADF1;
  
 .case0:
-    LDA.B nPlayerPosXCopy                                      ;83ADAE|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83ADAE|A5DF    |0000DF;
     CLC                                                        ;83ADB0|18      |      ;
     ADC.W #$000C                                               ;83ADB1|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADB4|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83ADB6|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83ADB6|A5E1    |0000E1;
     CLC                                                        ;83ADB8|18      |      ;
-    ADC.B nPlayerPosCalculationY                               ;83ADB9|65E7    |0000E7;
-    ADC.B $E3                                                  ;83ADBB|65E3    |0000E3;
+    ADC.B strcPlayer.newY                                      ;83ADB9|65E7    |0000E7;
+    ADC.B strcPlayer.unkE3                                     ;83ADBB|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADBD|690C00  |      ;
     STA.B n16TempVar3                                          ;83ADC0|8582    |000082;
     BRA .label1                                                ;83ADC2|8044    |83AE08;
  
  
 .case1:
-    LDA.B nPlayerPosXCopy                                      ;83ADC4|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83ADC4|A5DF    |0000DF;
     CLC                                                        ;83ADC6|18      |      ;
     ADC.W #$000C                                               ;83ADC7|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADCA|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83ADCC|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83ADCC|A5E1    |0000E1;
     SEC                                                        ;83ADCE|38      |      ;
-    SBC.B nPlayerPosCalculationY                               ;83ADCF|E5E7    |0000E7;
-    SBC.B $E3                                                  ;83ADD1|E5E3    |0000E3;
+    SBC.B strcPlayer.newY                                      ;83ADCF|E5E7    |0000E7;
+    SBC.B strcPlayer.unkE3                                     ;83ADD1|E5E3    |0000E3;
     CLC                                                        ;83ADD3|18      |      ;
     ADC.W #$000C                                               ;83ADD4|690C00  |      ;
     STA.B n16TempVar3                                          ;83ADD7|8582    |000082;
@@ -4977,13 +4977,13 @@ fGameEngine_DirectionHandler83AD91:
  
  
 .case3:
-    LDA.B nPlayerPosXCopy                                      ;83ADDB|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83ADDB|A5DF    |0000DF;
     CLC                                                        ;83ADDD|18      |      ;
-    ADC.B nPlayerPosCalculationX                               ;83ADDE|65E5    |0000E5;
-    ADC.B $E3                                                  ;83ADE0|65E3    |0000E3;
+    ADC.B strcPlayer.newX                                      ;83ADDE|65E5    |0000E5;
+    ADC.B strcPlayer.unkE3                                     ;83ADE0|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADE2|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADE5|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83ADE7|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83ADE7|A5E1    |0000E1;
     CLC                                                        ;83ADE9|18      |      ;
     ADC.W #$000C                                               ;83ADEA|690C00  |      ;
     STA.B n16TempVar3                                          ;83ADED|8582    |000082;
@@ -4991,14 +4991,14 @@ fGameEngine_DirectionHandler83AD91:
  
  
 .case4:
-    LDA.B nPlayerPosXCopy                                      ;83ADF1|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83ADF1|A5DF    |0000DF;
     SEC                                                        ;83ADF3|38      |      ;
-    SBC.B nPlayerPosCalculationX                               ;83ADF4|E5E5    |0000E5;
-    SBC.B $E3                                                  ;83ADF6|E5E3    |0000E3;
+    SBC.B strcPlayer.newX                                      ;83ADF4|E5E5    |0000E5;
+    SBC.B strcPlayer.unkE3                                     ;83ADF6|E5E3    |0000E3;
     CLC                                                        ;83ADF8|18      |      ;
     ADC.W #$000C                                               ;83ADF9|690C00  |      ;
     STA.B n16TempVar2                                          ;83ADFC|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83ADFE|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83ADFE|A5E1    |0000E1;
     CLC                                                        ;83AE00|18      |      ;
     ADC.W #$000C                                               ;83AE01|690C00  |      ;
     STA.B n16TempVar3                                          ;83AE04|8582    |000082;
@@ -5092,8 +5092,8 @@ fGameEngine_DirectionHandler83AD91:
  
 .label3:
     REP #$30                                                   ;83AEA2|C230    |      ;
-    LDX.B nPlayerPosCalculationX                               ;83AEA4|A6E5    |0000E5;
-    LDY.B nPlayerPosCalculationY                               ;83AEA6|A4E7    |0000E7;
+    LDX.B strcPlayer.newX                                      ;83AEA4|A6E5    |0000E5;
+    LDY.B strcPlayer.newY                                      ;83AEA6|A4E7    |0000E7;
     LDA.W #$0000                                               ;83AEA8|A90000  |      ;
     BRA .justReturn                                            ;83AEAB|8015    |83AEC2;
  
@@ -5128,41 +5128,41 @@ fGameEngine_Unknown83AEC3:
     dw .case3                                                  ;83AED0|        |83AEF9;
  
 .case0:
-    LDA.B nPlayerPosXCopy                                      ;83AED2|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AED2|A5DF    |0000DF;
     STA.B n16TempVar2                                          ;83AED4|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83AED6|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83AED6|A5E1    |0000E1;
     CLC                                                        ;83AED8|18      |      ;
-    ADC.B nPlayerPosCalculationY                               ;83AED9|65E7    |0000E7;
+    ADC.B strcPlayer.newY                                      ;83AED9|65E7    |0000E7;
     STA.B n16TempVar3                                          ;83AEDB|8582    |000082;
     BRA .continue                                              ;83AEDD|8027    |83AF06;
  
  
 .case1:
-    LDA.B nPlayerPosXCopy                                      ;83AEDF|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AEDF|A5DF    |0000DF;
     STA.B n16TempVar2                                          ;83AEE1|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83AEE3|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83AEE3|A5E1    |0000E1;
     SEC                                                        ;83AEE5|38      |      ;
-    SBC.B nPlayerPosCalculationY                               ;83AEE6|E5E7    |0000E7;
+    SBC.B strcPlayer.newY                                      ;83AEE6|E5E7    |0000E7;
     STA.B n16TempVar3                                          ;83AEE8|8582    |000082;
     BRA .continue                                              ;83AEEA|801A    |83AF06;
  
  
 .case2:
-    LDA.B nPlayerPosXCopy                                      ;83AEEC|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AEEC|A5DF    |0000DF;
     CLC                                                        ;83AEEE|18      |      ;
-    ADC.B nPlayerPosCalculationX                               ;83AEEF|65E5    |0000E5;
+    ADC.B strcPlayer.newX                                      ;83AEEF|65E5    |0000E5;
     STA.B n16TempVar2                                          ;83AEF1|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83AEF3|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83AEF3|A5E1    |0000E1;
     STA.B n16TempVar3                                          ;83AEF5|8582    |000082;
     BRA .continue                                              ;83AEF7|800D    |83AF06;
  
  
 .case3:
-    LDA.B nPlayerPosXCopy                                      ;83AEF9|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AEF9|A5DF    |0000DF;
     SEC                                                        ;83AEFB|38      |      ;
-    SBC.B nPlayerPosCalculationX                               ;83AEFC|E5E5    |0000E5;
+    SBC.B strcPlayer.newX                                      ;83AEFC|E5E5    |0000E5;
     STA.B n16TempVar2                                          ;83AEFE|8580    |000080;
-    LDA.B nPlayerPosYCopy                                      ;83AF00|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83AF00|A5E1    |0000E1;
     STA.B n16TempVar3                                          ;83AF02|8582    |000082;
     BRA .continue                                              ;83AF04|8000    |83AF06;
  
@@ -5170,14 +5170,14 @@ fGameEngine_Unknown83AEC3:
 .continue:
     LDA.B n16TempVar2                                          ;83AF06|A580    |000080;
     SEC                                                        ;83AF08|38      |      ;
-    SBC.B nPlayerPosX                                          ;83AF09|E5D6    |0000D6;
+    SBC.B strcPlayer.posX                                      ;83AF09|E5D6    |0000D6;
     CLC                                                        ;83AF0B|18      |      ;
     ADC.W #$000C                                               ;83AF0C|690C00  |      ;
     CMP.W #$0019                                               ;83AF0F|C91900  |      ;
     BCS .return                                                ;83AF12|B019    |83AF2D;
     LDA.B n16TempVar3                                          ;83AF14|A582    |000082;
     SEC                                                        ;83AF16|38      |      ;
-    SBC.B nPlayerPosY                                          ;83AF17|E5D8    |0000D8;
+    SBC.B strcPlayer.posY                                      ;83AF17|E5D8    |0000D8;
     CLC                                                        ;83AF19|18      |      ;
     ADC.W #$000C                                               ;83AF1A|690C00  |      ;
     CMP.W #$0019                                               ;83AF1D|C91900  |      ;
@@ -5191,8 +5191,8 @@ fGameEngine_Unknown83AEC3:
 .return:
     REP #$30                                                   ;83AF2D|C230    |      ;
     LDA.W #$0000                                               ;83AF2F|A90000  |      ;
-    LDX.B nPlayerPosCalculationX                               ;83AF32|A6E5    |0000E5;
-    LDY.B nPlayerPosCalculationY                               ;83AF34|A4E7    |0000E7;
+    LDX.B strcPlayer.newX                                      ;83AF32|A6E5    |0000E5;
+    LDY.B strcPlayer.newY                                      ;83AF34|A4E7    |0000E7;
  
 .jusReturn:
     RTL                                                        ;83AF36|6B      |      ;
@@ -5212,15 +5212,15 @@ fGameEngine_DirectionHandler83AF37:
     dw .case3                                                  ;83AF44|        |83B07C;
  
 .case0:
-    LDA.B nPlayerPosXCopy                                      ;83AF46|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AF46|A5DF    |0000DF;
     SEC                                                        ;83AF48|38      |      ;
     SBC.W #$0006                                               ;83AF49|E90600  |      ;
     TAX                                                        ;83AF4C|AA      |      ;
-    LDA.B nPlayerPosYCopy                                      ;83AF4D|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83AF4D|A5E1    |0000E1;
     CLC                                                        ;83AF4F|18      |      ;
-    ADC.B nPlayerPosCalculationY                               ;83AF50|65E7    |0000E7;
+    ADC.B strcPlayer.newY                                      ;83AF50|65E7    |0000E7;
     ADC.W #$0006                                               ;83AF52|690600  |      ;
-    ADC.B $E3                                                  ;83AF55|65E3    |0000E3;
+    ADC.B strcPlayer.unkE3                                     ;83AF55|65E3    |0000E3;
     PHA                                                        ;83AF57|48      |      ;
     TAY                                                        ;83AF58|A8      |      ;
     LDA.W #$0000                                               ;83AF59|A90000  |      ;
@@ -5230,7 +5230,7 @@ fGameEngine_DirectionHandler83AF37:
     PHA                                                        ;83AF62|48      |      ;
     LDA.B $90                                                  ;83AF63|A590    |000090;
     PHA                                                        ;83AF65|48      |      ;
-    LDA.B nPlayerPosXCopy                                      ;83AF66|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AF66|A5DF    |0000DF;
     CLC                                                        ;83AF68|18      |      ;
     ADC.W #$0006                                               ;83AF69|690600  |      ;
     TAX                                                        ;83AF6C|AA      |      ;
@@ -5274,15 +5274,15 @@ fGameEngine_DirectionHandler83AF37:
  
  
 .case1:
-    LDA.B nPlayerPosXCopy                                      ;83AFAE|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AFAE|A5DF    |0000DF;
     SEC                                                        ;83AFB0|38      |      ;
     SBC.W #$0006                                               ;83AFB1|E90600  |      ;
     TAX                                                        ;83AFB4|AA      |      ;
-    LDA.B nPlayerPosYCopy                                      ;83AFB5|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83AFB5|A5E1    |0000E1;
     SEC                                                        ;83AFB7|38      |      ;
-    SBC.B nPlayerPosCalculationY                               ;83AFB8|E5E7    |0000E7;
+    SBC.B strcPlayer.newY                                      ;83AFB8|E5E7    |0000E7;
     SBC.W #$0006                                               ;83AFBA|E90600  |      ;
-    SBC.B $E3                                                  ;83AFBD|E5E3    |0000E3;
+    SBC.B strcPlayer.unkE3                                     ;83AFBD|E5E3    |0000E3;
     PHA                                                        ;83AFBF|48      |      ;
     TAY                                                        ;83AFC0|A8      |      ;
     LDA.W #$0000                                               ;83AFC1|A90000  |      ;
@@ -5292,7 +5292,7 @@ fGameEngine_DirectionHandler83AF37:
     PHA                                                        ;83AFCA|48      |      ;
     LDA.B $8E                                                  ;83AFCB|A58E    |00008E;
     PHA                                                        ;83AFCD|48      |      ;
-    LDA.B nPlayerPosXCopy                                      ;83AFCE|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83AFCE|A5DF    |0000DF;
     CLC                                                        ;83AFD0|18      |      ;
     ADC.W #$0006                                               ;83AFD1|690600  |      ;
     TAX                                                        ;83AFD4|AA      |      ;
@@ -5336,14 +5336,14 @@ fGameEngine_DirectionHandler83AF37:
  
  
 .case2:
-    LDA.B nPlayerPosXCopy                                      ;83B016|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83B016|A5DF    |0000DF;
     CLC                                                        ;83B018|18      |      ;
-    ADC.B nPlayerPosCalculationX                               ;83B019|65E5    |0000E5;
+    ADC.B strcPlayer.newX                                      ;83B019|65E5    |0000E5;
     ADC.W #$0006                                               ;83B01B|690600  |      ;
-    ADC.B $E3                                                  ;83B01E|65E3    |0000E3;
+    ADC.B strcPlayer.unkE3                                     ;83B01E|65E3    |0000E3;
     PHA                                                        ;83B020|48      |      ;
     TAX                                                        ;83B021|AA      |      ;
-    LDA.B nPlayerPosYCopy                                      ;83B022|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83B022|A5E1    |0000E1;
     SEC                                                        ;83B024|38      |      ;
     SBC.W #$0006                                               ;83B025|E90600  |      ;
     TAY                                                        ;83B028|A8      |      ;
@@ -5354,7 +5354,7 @@ fGameEngine_DirectionHandler83AF37:
     PHA                                                        ;83B032|48      |      ;
     LDA.B $90                                                  ;83B033|A590    |000090;
     PHA                                                        ;83B035|48      |      ;
-    LDA.B nPlayerPosYCopy                                      ;83B036|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83B036|A5E1    |0000E1;
     CLC                                                        ;83B038|18      |      ;
     ADC.W #$0006                                               ;83B039|690600  |      ;
     TAY                                                        ;83B03C|A8      |      ;
@@ -5398,14 +5398,14 @@ fGameEngine_DirectionHandler83AF37:
  
  
 .case3:
-    LDA.B nPlayerPosXCopy                                      ;83B07C|A5DF    |0000DF;
+    LDA.B strcPlayer.lastX                                     ;83B07C|A5DF    |0000DF;
     SEC                                                        ;83B07E|38      |      ;
-    SBC.B nPlayerPosCalculationX                               ;83B07F|E5E5    |0000E5;
+    SBC.B strcPlayer.newX                                      ;83B07F|E5E5    |0000E5;
     SBC.W #$0006                                               ;83B081|E90600  |      ;
-    SBC.B $E3                                                  ;83B084|E5E3    |0000E3;
+    SBC.B strcPlayer.unkE3                                     ;83B084|E5E3    |0000E3;
     PHA                                                        ;83B086|48      |      ;
     TAX                                                        ;83B087|AA      |      ;
-    LDA.B nPlayerPosYCopy                                      ;83B088|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83B088|A5E1    |0000E1;
     SEC                                                        ;83B08A|38      |      ;
     SBC.W #$0006                                               ;83B08B|E90600  |      ;
     TAY                                                        ;83B08E|A8      |      ;
@@ -5416,7 +5416,7 @@ fGameEngine_DirectionHandler83AF37:
     PHA                                                        ;83B098|48      |      ;
     LDA.B $8E                                                  ;83B099|A58E    |00008E;
     PHA                                                        ;83B09B|48      |      ;
-    LDA.B nPlayerPosYCopy                                      ;83B09C|A5E1    |0000E1;
+    LDA.B strcPlayer.lastY                                     ;83B09C|A5E1    |0000E1;
     CLC                                                        ;83B09E|18      |      ;
     ADC.W #$0006                                               ;83B09F|690600  |      ;
     TAY                                                        ;83B0A2|A8      |      ;
@@ -5468,8 +5468,8 @@ fGameEngine_DirectionHandler83AF37:
 fGameEngine_Unused83B0E6:
     REP #$30                                                   ;83B0E6|C230    |      ;
     LDA.W #$0000                                               ;83B0E8|A90000  |      ;
-    STA.B $EB                                                  ;83B0EB|85EB    |0000EB;
-    STA.B $E9                                                  ;83B0ED|85E9    |0000E9;
+    STA.B strcPlayer.unkPosY                                   ;83B0EB|85EB    |0000EB;
+    STA.B strcPlayer.unkPosX                                   ;83B0ED|85E9    |0000E9;
     LDX.W #$0000                                               ;83B0EF|A20000  |      ;
     LDA.W #$0000                                               ;83B0F2|A90000  |      ;
     RTL                                                        ;83B0F5|6B      |      ;
@@ -5499,12 +5499,12 @@ fGameEngine_Unknown83B0F6:
     PLA                                                        ;83B122|68      |      ;
     CMP.W #$0001                                               ;83B123|C90100  |      ;
     BEQ .label1                                                ;83B126|F004    |83B12C;
-    STX.B $E9                                                  ;83B128|86E9    |0000E9;
+    STX.B strcPlayer.unkPosX                                   ;83B128|86E9    |0000E9;
     BRA +                                                      ;83B12A|8002    |83B12E;
  
  
 .label1:
-    STX.B $EB                                                  ;83B12C|86EB    |0000EB;
+    STX.B strcPlayer.unkPosY                                   ;83B12C|86EB    |0000EB;
  
   + SEP #$20                                                   ;83B12E|E220    |      ;
     LDA.B n8TempVar1                                           ;83B130|A592    |000092;
@@ -5539,7 +5539,7 @@ fGameEngine_Unknown83B0F6:
  
 .label2:
     REP #$30                                                   ;83B16A|C230    |      ;
-    LDA.B nPlayerPosCalculationY                               ;83B16C|A5E7    |0000E7;
+    LDA.B strcPlayer.newY                                      ;83B16C|A5E7    |0000E7;
     BNE +                                                      ;83B16E|D005    |83B175;
     LDA.W #$0008                                               ;83B170|A90800  |      ;
     STA.B $8E                                                  ;83B173|858E    |00008E;
@@ -5552,7 +5552,7 @@ fGameEngine_Unknown83B0F6:
  
 .label3:
     REP #$30                                                   ;83B17E|C230    |      ;
-    LDA.B nPlayerPosCalculationY                               ;83B180|A5E7    |0000E7;
+    LDA.B strcPlayer.newY                                      ;83B180|A5E7    |0000E7;
     BNE +                                                      ;83B182|D005    |83B189;
     LDA.W #$0008                                               ;83B184|A90800  |      ;
     STA.B $90                                                  ;83B187|8590    |000090;
@@ -5565,7 +5565,7 @@ fGameEngine_Unknown83B0F6:
  
 .label4:
     REP #$30                                                   ;83B192|C230    |      ;
-    LDA.B nPlayerPosCalculationX                               ;83B194|A5E5    |0000E5;
+    LDA.B strcPlayer.newX                                      ;83B194|A5E5    |0000E5;
     BNE +                                                      ;83B196|D005    |83B19D;
     LDA.W #$0008                                               ;83B198|A90800  |      ;
     STA.B $8E                                                  ;83B19B|858E    |00008E;
@@ -5578,7 +5578,7 @@ fGameEngine_Unknown83B0F6:
  
 .label5:
     REP #$30                                                   ;83B1A6|C230    |      ;
-    LDA.B nPlayerPosCalculationX                               ;83B1A8|A5E5    |0000E5;
+    LDA.B strcPlayer.newX                                      ;83B1A8|A5E5    |0000E5;
     BNE +                                                      ;83B1AA|D005    |83B1B1;
     LDA.W #$0008                                               ;83B1AC|A90800  |      ;
     STA.B $90                                                  ;83B1AF|8590    |000090;
@@ -9508,7 +9508,7 @@ fAreaEvents_Town:
     TYX                                                        ;83D36E|BB      |      ;
     STY.B n16TempVar4                                          ;83D36F|8484    |000084;
     LDA.W $09A4,X                                              ;83D371|BDA409  |0009A4;
-    STA.B nUnknown0x95                                         ;83D374|8595    |000095;
+    STA.B n8TempVar4                                           ;83D374|8595    |000095;
     SEP #$20                                                   ;83D376|E220    |      ;
     LDA.B #$08                                                 ;83D378|A908    |      ;
     JSL.L fCore_GetRandomNumber                                ;83D37A|22F98980|8089F9;
@@ -9524,7 +9524,7 @@ fAreaEvents_Town:
     LDA.W $09A4,X                                              ;83D38D|BDA409  |0009A4;
     LDX.B n16TempVar4                                          ;83D390|A684    |000084;
     STA.W $09A4,X                                              ;83D392|9DA409  |0009A4;
-    LDA.B nUnknown0x95                                         ;83D395|A595    |000095;
+    LDA.B n8TempVar4                                           ;83D395|A595    |000095;
     LDX.B $86                                                  ;83D397|A686    |000086;
     STA.W $09A4,X                                              ;83D399|9DA409  |0009A4;
     PLY                                                        ;83D39C|7A      |      ;
@@ -11156,7 +11156,7 @@ fAreaEvents_Mine:
     JSL.L fAI_Unknown8480F8                                    ;83E4EB|22F88084|8480F8;
  
   + REP #$30                                                   ;83E4EF|C230    |      ;
-    LDA.B nPlayerPosY                                          ;83E4F1|A5D8    |0000D8;
+    LDA.B strcPlayer.posY                                      ;83E4F1|A5D8    |0000D8;
     CMP.W #$0200                                               ;83E4F3|C90002  |      ;
     BCC .label1                                                ;83E4F6|903D    |83E535;
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
@@ -11176,7 +11176,7 @@ fAreaEvents_Mine:
     REP #$30                                                   ;83E52A|C230    |      ;
     LDA.W #$0000                                               ;83E52C|A90000  |      ;
     CLC                                                        ;83E52F|18      |      ;
-    ADC.B nPlayerDirection                                     ;83E530|65DA    |0000DA;
+    ADC.B strcPlayer.direction                                 ;83E530|65DA    |0000DA;
     STA.W nSmallItemSpriteIndex                                ;83E532|8D0109  |000901;
  
 .label1:
@@ -11406,8 +11406,8 @@ fAreaEvents_Intro:
     STA.L nInGameMinuteCounter                                 ;83E781|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83E785|C220    |      ;
     STZ.W $0915                                                ;83E787|9C1509  |000915;
-    STZ.B nPlayerFlags                                         ;83E78A|64D2    |0000D2;
-    STZ.B nPlayerAction                                        ;83E78C|64D4    |0000D4;
+    STZ.B strcPlayer.flags                                     ;83E78A|64D2    |0000D2;
+    STZ.B strcPlayer.action                                    ;83E78C|64D4    |0000D4;
     SEP #$20                                                   ;83E78E|E220    |      ;
     LDA.W nPlayerStamina                                       ;83E790|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83E793|8D1809  |000918;
@@ -11416,7 +11416,7 @@ fAreaEvents_Intro:
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83E7A9|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
-    STA.B nPlayerDirection                                     ;83E7AE|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;83E7AE|85DA    |0000DA;
     REP #$30                                                   ;83E7B0|C230    |      ;
     LDA.W #$0000                                               ;83E7B2|A90000  |      ;
     STA.W nPlayerDirectionCopy                                 ;83E7B5|8D1109  |000911;
@@ -11881,8 +11881,8 @@ fAreaEvents_Endings:
     STA.L nInGameMinuteCounter                                 ;83EBBA|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83EBBE|C220    |      ;
     STZ.W $0915                                                ;83EBC0|9C1509  |000915;
-    STZ.B nPlayerFlags                                         ;83EBC3|64D2    |0000D2;
-    STZ.B nPlayerAction                                        ;83EBC5|64D4    |0000D4;
+    STZ.B strcPlayer.flags                                     ;83EBC3|64D2    |0000D2;
+    STZ.B strcPlayer.action                                    ;83EBC5|64D4    |0000D4;
     SEP #$20                                                   ;83EBC7|E220    |      ;
     LDA.W nPlayerStamina                                       ;83EBC9|AD1709  |000917;
     STA.W nPlayerEnergy                                        ;83EBCC|8D1809  |000918;
@@ -11891,7 +11891,7 @@ fAreaEvents_Endings:
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83EBE2|C230    |      ;
     LDA.W #!PDIR_DOWN                                               
-    STA.B nPlayerDirection                                     ;83EBE7|85DA    |0000DA;
+    STA.B strcPlayer.direction                                 ;83EBE7|85DA    |0000DA;
     REP #$30                                                   ;83EBE9|C230    |      ;
     LDA.W #$0000                                               ;83EBEB|A90000  |      ;
     STA.W nPlayerDirectionCopy                                 ;83EBEE|8D1109  |000911;
