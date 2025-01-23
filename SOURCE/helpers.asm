@@ -98,3 +98,15 @@ macro CheckFlag(nTable, nFlag)
     LDA.L strcFlags.<nTable>
     AND.W #<nFlag>
 endmacro
+
+
+;
+; Palette helpers
+;
+; I don't like this one but what better can I do ?
+macro PaletteModify(nValue, nRegister, nIndex, nOffset)
+    LDA.L <nValue>,<nRegister>
+    LDX.W #<nIndex>
+    LDY.W #<nOffset>
+    JSL.L fPalette_ModifyPalette
+endmacro

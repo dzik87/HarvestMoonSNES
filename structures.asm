@@ -6,8 +6,8 @@ struct strcGameObject       $00019C
     .unknown6               : skip 2    ; 06 $0001A2
     .positionX              : skip 2    ; 08 $0001A4
     .positionY              : skip 2    ; 0A $0001A6
-    .pointer12              : skip 4    ; 0C $0001A8    - value of table 8X8080, pointer to sprite_table_address
-    .pointer16              : skip 3    ; 10 $0001AC    - pointer value
+    .objectListPointer      : skip 4    ; 0C $0001A8    - value of table 8X8080, pointer to sprite_table_address
+    .objectDataPointer      : skip 3    ; 10 $0001AC    - pointer value
     .totalComponents        : skip 1    ; 13 $0001AF    - the ammount of SOBJ composing the GOBJ
     .components             : skip 1    ; 14 $0001B0    - the components, $FF means unused
     .unknown21              : skip 1    ; 15 $0001B1
@@ -37,6 +37,14 @@ struct strcSingleObjectData $00009B
     .gameObjectIdx          : skip 2    ; A5
     .exists                 : skip 2    ; A7    0 if exists FF/-1 if does not
     .gameObjectIdxOffs      : skip 2    ; A9    aGameObjectIndexOffsets[gameObjectIdx]
+    .unkAB                  : skip 2    ; AB
+    .totalComponents        : skip 2    ; AD    
+    .unkAF                  : skip 2    ; AF    
+    .unkB1                  : skip 1    ; B1
+    .unkB2                  : skip 1    ; B2
+    .pObjectData            : skip 3    ; B3    ptr24
+    .padding                : skip 1    ; B6
+    .unkB7                  : skip 2    ; B7
 endstruct
 
 
@@ -182,6 +190,10 @@ endstruct
 ; event8
 
 ; unknown1
+
+; unknown2
+
+; unknown3
 
 
 ; Joypad 1 controls

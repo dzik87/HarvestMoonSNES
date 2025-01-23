@@ -492,7 +492,7 @@ fEggFestivalUnknown_818337:
     REP #$30                                                   ;818337|C230    |      ;
     LDA.W nGameObjectIdx                                       ;818339|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;81833C|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;81833E|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;81833E|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;818342|22F1A481|81A4F1;
     SEP #$20                                                   ;818346|E220    |      ;
     STZ.W nCarryItem_Current                                   ;818348|9C1D09  |00091D;
@@ -514,7 +514,7 @@ fEggFestivalUnknown_WrongEgg:
     REP #$30                                                   ;81837B|C230    |      ;
     LDA.W nGameObjectIdx                                       ;81837D|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818380|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818382|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818382|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;818386|22F1A481|81A4F1;
     SEP #$20                                                   ;81838A|E220    |      ;
     STZ.W nCarryItem_Current                                   ;81838C|9C1D09  |00091D;
@@ -1187,7 +1187,7 @@ fUnknown_8187C3:
     REP #$20                                                   ;818821|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818823|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818826|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818828|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818828|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;81882C|22F1A481|81A4F1;
     SEP #$20                                                   ;818830|E220    |      ;
     STZ.W nCarryItem_Current                                   ;818832|9C1D09  |00091D;
@@ -1614,7 +1614,7 @@ fItemBuy_Unknown818AA0:
     REP #$20                                                   ;818AA0|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818AA2|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818AA5|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818AA7|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818AA7|22A28185|8581A2;
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     JSL.L fUnknown_81A4F1                                      ;818ABE|22F1A481|81A4F1;
@@ -1689,7 +1689,7 @@ fUnknown_818B19:
     REP #$20                                                   ;818B3C|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818B3E|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818B41|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818B43|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818B43|22A28185|8581A2;
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     JSL.L fUnknown_81A4F1                                      ;818B5A|22F1A481|81A4F1;
@@ -1751,7 +1751,7 @@ fItemFound_Consume:
     REP #$20                                                   ;818BCC|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818BCE|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818BD1|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818BD3|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818BD3|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;818BD7|22F1A481|81A4F1;
     SEP #$20                                                   ;818BDB|E220    |      ;
     STZ.W nCarryItem_Current                                   ;818BDD|9C1D09  |00091D;
@@ -1985,7 +1985,7 @@ fItemShipped_Unknown818DAB:
     REP #$20                                                   ;818DD6|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818DD8|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818DDB|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818DDD|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818DDD|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;818DE1|22F1A481|81A4F1;
     SEP #$20                                                   ;818DE5|E220    |      ;
     STZ.W nCarryItem_Current                                   ;818DE7|9C1D09  |00091D;
@@ -2069,7 +2069,7 @@ fUnknown_818E1B:
     REP #$30                                                   ;818E81|C230    |      ;
     LDA.W nGameObjectIdx                                       ;818E83|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818E86|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818E88|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818E88|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;818E8C|22F1A481|81A4F1;
     SEP #$20                                                   ;818E90|E220    |      ;
     STZ.W nCarryItem_Current                                   ;818E92|9C1D09  |00091D;
@@ -2212,7 +2212,7 @@ fItemSell_Unknown818F5A:
     REP #$20                                                   ;818F99|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818F9B|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;818F9E|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;818FA0|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;818FA0|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;818FA4|22F1A481|81A4F1;
     SEP #$20                                                   ;818FA8|E220    |      ;
     LDA.B #$00                                                 ;818FAA|A900    |      ;
@@ -2280,7 +2280,7 @@ fUnknown_819021:
     REP #$30                                                   ;819021|C230    |      ;
     LDA.W nGameObjectIdx                                       ;819023|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;819026|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;819028|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;819028|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;81902C|22F1A481|81A4F1;
     SEP #$20                                                   ;819030|E220    |      ;
     STZ.W nCarryItem_Current                                   ;819032|9C1D09  |00091D;
@@ -2762,7 +2762,7 @@ fItemShipped_InFarmCoopOrBarn:
   + REP #$20                                                   ;81940E|C220    |      ;
     LDA.W nGameObjectIdx                                       ;819410|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;819413|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;819415|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;819415|22A28185|8581A2;
     SEP #$20                                                   ;819419|E220    |      ;
     LDA.B nMapEngine_AreaIdToLoad                              ;81941B|A522    |000022;
     CMP.B #$27                                                 ;81941D|C927    |      ;
@@ -2871,7 +2871,7 @@ fUnknown_819497:
     REP #$30                                                   ;81951F|C230    |      ;
     LDA.W nGameObjectIdx                                       ;819521|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;819524|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;819526|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;819526|22A28185|8581A2;
     JSL.L fUnknown_81A4F1                                      ;81952A|22F1A481|81A4F1;
     SEP #$20                                                   ;81952E|E220    |      ;
     STZ.W nCarryItem_Current                                   ;819530|9C1D09  |00091D;
@@ -3993,7 +3993,7 @@ fUnknown_81A383:
     REP #$20                                                   ;81A419|C220    |      ;
     LDA.W nGameObjectIdx                                       ;81A41B|AD7809  |000978;
     STA.B strcSingleObjectData.gameObjectIdx                   ;81A41E|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;81A420|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;81A420|22A28185|8581A2;
     SEP #$20                                                   ;81A424|E220    |      ;
     LDA.W $0974                                                ;81A426|AD7409  |000974;
     AND.B #$02                                                 ;81A429|2902    |      ;
@@ -4045,14 +4045,14 @@ fUnknown_81A383:
     LDA.W nUnknownY                                            ;81A494|AD8209  |000982;
     STA.B [ptrUnknown0x07],Y                                   ;81A497|9707    |000007;
     STA.B strcSingleObjectData.posY                            ;81A499|859D    |00009D;
-    JSL.L fUnknown_8580B9                                      ;81A49B|22B98085|8580B9;
+    JSL.L fObject_Unknown8580B9                                ;81A49B|22B98085|8580B9;
     LDA.W $097A                                                ;81A49F|AD7A09  |00097A;
     CMP.W $097C                                                ;81A4A2|CD7C09  |00097C;
     BEQ .caseFFFD                                              ;81A4A5|F00B    |81A4B2;
     STA.B strcSingleObjectData.spriteTableIdx                  ;81A4A7|85A1    |0000A1;
     LDY.W #$0008                                               ;81A4A9|A00800  |      ;
     STA.B [ptrUnknown0x07],Y                                   ;81A4AC|9707    |000007;
-    JSL.L fUnknown_858100                                      ;81A4AE|22008185|858100;
+    JSL.L fObject_Unknown858100                                ;81A4AE|22008185|858100;
  
 .caseFFFD:
     REP #$30                                                   ;81A4B2|C230    |      ;
@@ -4441,11 +4441,11 @@ fUnknown_81A6C1:
     REP #$20                                                   ;81A730|C220    |      ;
     LDA.W #$A096                                               ;81A732|A996A0  |      ;
     STA.B ptrUnknown0x72                                       ;81A735|8572    |000072;
-    STA.B ptrUnknown0x75                                       ;81A737|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;81A737|8575    |000075;
     SEP #$20                                                   ;81A739|E220    |      ;
     LDA.B #$A6                                                 ;81A73B|A9A6    |      ;
     STA.B ptrUnknown0x72+2                                     ;81A73D|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;81A73F|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;81A73F|8577    |000077;
     REP #$20                                                   ;81A741|C220    |      ;
     PLA                                                        ;81A743|68      |      ;
     JSL.L fUnknown_81A801                                      ;81A744|2201A881|81A801;
@@ -4461,7 +4461,7 @@ fUnknown_81A6C1:
     CLC                                                        ;81A757|18      |      ;
     ADC.B n16TempVar1                                          ;81A758|657E    |00007E;
     STA.B ptrUnknown0x72                                       ;81A75A|8572    |000072;
-    STA.B ptrUnknown0x75                                       ;81A75C|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;81A75C|8575    |000075;
     SEP #$20                                                   ;81A75E|E220    |      ;
     LDA.B #$02                                                 ;81A760|A902    |      ;
     STA.B n8TempVar1                                           ;81A762|8592    |000092;
@@ -4517,10 +4517,10 @@ fUnknown_81A6C1:
     LDA.W #$0080                                               ;81A7B1|A98000  |      ;
     JSL.L fCore_PrepareTransfer                                ;81A7B4|22338A80|808A33;
     REP #$20                                                   ;81A7B8|C220    |      ;
-    LDA.B ptrUnknown0x75                                       ;81A7BA|A575    |000075;
+    LDA.B ptrObjectUnknown0x75                                 ;81A7BA|A575    |000075;
     CLC                                                        ;81A7BC|18      |      ;
     ADC.B n16TempVar2                                          ;81A7BD|6580    |000080;
-    STA.B ptrUnknown0x75                                       ;81A7BF|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;81A7BF|8575    |000075;
     STA.B ptrUnknown0x72                                       ;81A7C1|8572    |000072;
     SEP #$20                                                   ;81A7C3|E220    |      ;
     STZ.B n8TempVar1                                           ;81A7C5|6492    |000092;
@@ -4659,19 +4659,19 @@ fUnknown_81A83A:
     CLC                                                        ;81A898|18      |      ;
     ADC.B n16TempVar1                                          ;81A899|657E    |00007E;
     STA.B ptrUnknown0x72                                       ;81A89B|8572    |000072;
-    STA.B ptrUnknown0x78                                       ;81A89D|8578    |000078;
+    STA.B ptrObjectUnknown0x78                                 ;81A89D|8578    |000078;
     SEP #$20                                                   ;81A89F|E220    |      ;
     LDA.B #$A6                                                 ;81A8A1|A9A6    |      ;
     STA.B ptrUnknown0x72+2                                     ;81A8A3|8574    |000074;
-    STA.B ptrUnknown0x78+2                                     ;81A8A5|857A    |00007A;
+    STA.B ptrObjectUnknown0x78+2                               ;81A8A5|857A    |00007A;
     REP #$20                                                   ;81A8A7|C220    |      ;
     LDA.W #$2000                                               ;81A8A9|A90020  |      ;
     CLC                                                        ;81A8AC|18      |      ;
     ADC.B $86                                                  ;81A8AD|6586    |000086;
-    STA.B ptrUnknown0x75                                       ;81A8AF|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;81A8AF|8575    |000075;
     SEP #$20                                                   ;81A8B1|E220    |      ;
     LDA.B #$7E                                                 ;81A8B3|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;81A8B5|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;81A8B5|8577    |000077;
     REP #$30                                                   ;81A8B7|C230    |      ;
     STZ.B $8E                                                  ;81A8B9|648E    |00008E;
     STZ.B $90                                                  ;81A8BB|6490    |000090;
@@ -4688,7 +4688,7 @@ fUnknown_81A83A:
   - LDA.B [ptrUnknown0x72],Y                                   ;81A8CD|B772    |000072;
     PHY                                                        ;81A8CF|5A      |      ;
     TXY                                                        ;81A8D0|9B      |      ;
-    STA.B [ptrUnknown0x75],Y                                   ;81A8D1|9775    |000075;
+    STA.B [ptrObjectUnknown0x75],Y                             ;81A8D1|9775    |000075;
     PLY                                                        ;81A8D3|7A      |      ;
     INY                                                        ;81A8D4|C8      |      ;
     INY                                                        ;81A8D5|C8      |      ;
@@ -4736,20 +4736,20 @@ fUnknown_81A83A:
     CLC                                                        ;81A916|18      |      ;
     ADC.W #$0040                                               ;81A917|694000  |      ;
     STA.B ptrUnknown0x72                                       ;81A91A|8572    |000072;
-    LDA.B ptrUnknown0x75                                       ;81A91C|A575    |000075;
+    LDA.B ptrObjectUnknown0x75                                 ;81A91C|A575    |000075;
     CLC                                                        ;81A91E|18      |      ;
     ADC.B $88                                                  ;81A91F|6588    |000088;
-    STA.B ptrUnknown0x75                                       ;81A921|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;81A921|8575    |000075;
     PLA                                                        ;81A923|68      |      ;
     INC A                                                      ;81A924|1A      |      ;
     CMP.W #$0002                                               ;81A925|C90200  |      ;
     BNE --                                                     ;81A928|D09A    |81A8C4;
     REP #$20                                                   ;81A92A|C220    |      ;
-    LDA.B ptrUnknown0x78                                       ;81A92C|A578    |000078;
+    LDA.B ptrObjectUnknown0x78                                 ;81A92C|A578    |000078;
     CLC                                                        ;81A92E|18      |      ;
     ADC.B n16TempVar2                                          ;81A92F|6580    |000080;
     ADC.B $8E                                                  ;81A931|658E    |00008E;
-    STA.B ptrUnknown0x78                                       ;81A933|8578    |000078;
+    STA.B ptrObjectUnknown0x78                                 ;81A933|8578    |000078;
     STA.B ptrUnknown0x72                                       ;81A935|8572    |000072;
     STZ.B $8E                                                  ;81A937|648E    |00008E;
     LDA.B n16TempVar1                                          ;81A939|A57E    |00007E;
@@ -9409,7 +9409,7 @@ fUnknown_81CFE6:
     STA.B strcSingleObjectData.posY                            ;81CFF3|859D    |00009D;
     LDA.W $090F                                                ;81CFF5|AD0F09  |00090F;
     STA.B strcSingleObjectData.flip                            ;81CFF8|859F    |00009F;
-    JSL.L fUnknown_8580B9                                      ;81CFFA|22B98085|8580B9;
+    JSL.L fObject_Unknown8580B9                                ;81CFFA|22B98085|8580B9;
     REP #$20                                                   ;81CFFE|C220    |      ;
     LDA.W nSmallItemSpriteIndex                                ;81D000|AD0109  |000901;
     CMP.W $0903                                                ;81D003|CD0309  |000903;
@@ -9439,7 +9439,7 @@ fUnknown_81CFE6:
     STA.B strcSingleObjectData.flip                            ;81D02E|859F    |00009F;
     LDA.W $0905                                                ;81D030|AD0509  |000905;
     STA.B strcSingleObjectData.gameObjectIdx                   ;81D033|85A5    |0000A5;
-    JSL.L fUnknown_858100                                      ;81D035|22008185|858100;
+    JSL.L fObject_Unknown858100                                ;81D035|22008185|858100;
  
 .exit:
     JSR.W fUnknown_81D03D                                      ;81D039|203DD0  |81D03D;
