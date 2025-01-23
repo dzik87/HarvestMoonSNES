@@ -7,8 +7,8 @@
     nMapEngine_AreaIdToLoad = $000022; !^ n8 ^!
     ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
-    ptrObjectUnknown0x75 = $000075; !^ ptr24 ^!
-    ptrObjectUnknown0x78 = $000078; !^ ptr24 ^!
+    ptrUnknown0x75 = $000075; !^ ptr24 ^!
+    ptrObjectData = $000078; !^ ptr24 ^!
     n16TempVar1 = $00007E; !^ n16 ^!
     n16TempVar2 = $000080; !^ n16 ^!
     n16TempVar3 = $000082; !^ n16 ^!

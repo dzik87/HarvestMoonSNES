@@ -4354,11 +4354,11 @@ fUnknown_80A18D:
     STA.B ptrUnknown0x72                                       ;80A22B|8572    |000072;
     CLC                                                        ;80A22D|18      |      ;
     ADC.W #$0040                                               ;80A22E|694000  |      ;
-    STA.B ptrObjectUnknown0x75                                 ;80A231|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;80A231|8575    |000075;
     SEP #$20                                                   ;80A233|E220    |      ;
     LDA.B #$7E                                                 ;80A235|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A237|8574    |000074;
-    STA.B ptrObjectUnknown0x75+2                               ;80A239|8577    |000077;
+    STA.B ptrUnknown0x75+2                                     ;80A239|8577    |000077;
     REP #$20                                                   ;80A23B|C220    |      ;
     LDX.W #$0000                                               ;80A23D|A20000  |      ;
  
@@ -4390,7 +4390,7 @@ fUnknown_80A18D:
     STA.W $0746,X                                              ;80A269|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A26C|A482    |000082;
     LDX.B n16TempVar4                                          ;80A26E|A684    |000084;
-    LDA.B [ptrObjectUnknown0x75],Y                             ;80A270|B775    |000075;
+    LDA.B [ptrUnknown0x75],Y                                   ;80A270|B775    |000075;
     STA.W $07C6,X                                              ;80A272|9DC607  |0007C6;
     INC.B n16TempVar1                                          ;80A275|E67E    |00007E;
     INC.B n16TempVar1                                          ;80A277|E67E    |00007E;
@@ -4568,11 +4568,11 @@ fUnknown_80A308:
     STA.B ptrUnknown0x72                                       ;80A3A4|8572    |000072;
     CLC                                                        ;80A3A6|18      |      ;
     ADC.W #$0040                                               ;80A3A7|694000  |      ;
-    STA.B ptrObjectUnknown0x75                                 ;80A3AA|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;80A3AA|8575    |000075;
     SEP #$20                                                   ;80A3AC|E220    |      ;
     LDA.B #$7E                                                 ;80A3AE|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A3B0|8574    |000074;
-    STA.B ptrObjectUnknown0x75+2                               ;80A3B2|8577    |000077;
+    STA.B ptrUnknown0x75+2                                     ;80A3B2|8577    |000077;
     REP #$20                                                   ;80A3B4|C220    |      ;
     LDX.W #$0000                                               ;80A3B6|A20000  |      ;
  
@@ -4604,7 +4604,7 @@ fUnknown_80A308:
     STA.W $0746,X                                              ;80A3E2|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A3E5|A482    |000082;
     LDX.B n16TempVar4                                          ;80A3E7|A684    |000084;
-    LDA.B [ptrObjectUnknown0x75],Y                             ;80A3E9|B775    |000075;
+    LDA.B [ptrUnknown0x75],Y                                   ;80A3E9|B775    |000075;
     STA.W $07C6,X                                              ;80A3EB|9DC607  |0007C6;
     INC.B n16TempVar1                                          ;80A3EE|E67E    |00007E;
     INC.B n16TempVar1                                          ;80A3F0|E67E    |00007E;
@@ -4791,11 +4791,11 @@ fUnknown_80A481:
     ADC.W #$0060                                               ;80A52F|696000  |      ;
     STA.B ptrUnknown0x72                                       ;80A532|8572    |000072;
     ADC.W #$2000                                               ;80A534|690020  |      ;
-    STA.B ptrObjectUnknown0x75                                 ;80A537|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;80A537|8575    |000075;
     SEP #$20                                                   ;80A539|E220    |      ;
     LDA.B #$7E                                                 ;80A53B|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A53D|8574    |000074;
-    STA.B ptrObjectUnknown0x75+2                               ;80A53F|8577    |000077;
+    STA.B ptrUnknown0x75+2                                     ;80A53F|8577    |000077;
     REP #$20                                                   ;80A541|C220    |      ;
     LDX.W #$0000                                               ;80A543|A20000  |      ;
  
@@ -4827,7 +4827,7 @@ fUnknown_80A481:
     STA.W $0746,X                                              ;80A56F|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A572|A482    |000082;
     LDX.B n16TempVar4                                          ;80A574|A684    |000084;
-    LDA.B [ptrObjectUnknown0x75],Y                             ;80A576|B775    |000075;
+    LDA.B [ptrUnknown0x75],Y                                   ;80A576|B775    |000075;
     STA.W $07C6,X                                              ;80A578|9DC607  |0007C6;
     LDA.B n16TempVar1                                          ;80A57B|A57E    |00007E;
     CLC                                                        ;80A57D|18      |      ;
@@ -5020,11 +5020,11 @@ fUnknown_80A617:
     STA.B ptrUnknown0x72                                       ;80A6C8|8572    |000072;
     CLC                                                        ;80A6CA|18      |      ;
     ADC.W #$2000                                               ;80A6CB|690020  |      ;
-    STA.B ptrObjectUnknown0x75                                 ;80A6CE|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;80A6CE|8575    |000075;
     SEP #$20                                                   ;80A6D0|E220    |      ;
     LDA.B #$7E                                                 ;80A6D2|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A6D4|8574    |000074;
-    STA.B ptrObjectUnknown0x75+2                               ;80A6D6|8577    |000077;
+    STA.B ptrUnknown0x75+2                                     ;80A6D6|8577    |000077;
     REP #$20                                                   ;80A6D8|C220    |      ;
     LDX.W #$0000                                               ;80A6DA|A20000  |      ;
  
@@ -5056,7 +5056,7 @@ fUnknown_80A617:
     STA.W $0746,X                                              ;80A706|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A709|A482    |000082;
     LDX.B n16TempVar4                                          ;80A70B|A684    |000084;
-    LDA.B [ptrObjectUnknown0x75],Y                             ;80A70D|B775    |000075;
+    LDA.B [ptrUnknown0x75],Y                                   ;80A70D|B775    |000075;
     STA.W $07C6,X                                              ;80A70F|9DC607  |0007C6;
     LDA.B n16TempVar1                                          ;80A712|A57E    |00007E;
     CLC                                                        ;80A714|18      |      ;
@@ -5257,10 +5257,10 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A876|C8      |      ; Y++
     PHY                                                        ;80A877|5A      |      ; Y -> stack2
     LDA.W #$2000                                               ;80A878|A90020  |      ;
-    STA.B ptrObjectUnknown0x75                                 ;80A87B|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;80A87B|8575    |000075;
     SEP #$20                                                   ;80A87D|E220    |      ;
     LDA.B #$7E                                                 ;80A87F|A97E    |      ;
-    STA.B ptrObjectUnknown0x75+2                               ;80A881|8577    |000077; $75 = 0x7E2000
+    STA.B ptrUnknown0x75+2                                     ;80A881|8577    |000077; $75 = 0x7E2000
     JSL.L fGraphicsDecompressTilemap                           ;80A883|22F88183|8381F8;
     SEP #$20                                                   ;80A887|E220    |      ;
     LDA.B #$00                                                 ;80A889|A900    |      ;
@@ -5307,10 +5307,10 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A8D4|C8      |      ;
     PHY                                                        ;80A8D5|5A      |      ;
     LDA.W #$2000                                               ;80A8D6|A90020  |      ;
-    STA.B ptrObjectUnknown0x75                                 ;80A8D9|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;80A8D9|8575    |000075;
     SEP #$20                                                   ;80A8DB|E220    |      ;
     LDA.B #$7E                                                 ;80A8DD|A97E    |      ;
-    STA.B ptrObjectUnknown0x75+2                               ;80A8DF|8577    |000077;
+    STA.B ptrUnknown0x75+2                                     ;80A8DF|8577    |000077;
     REP #$20                                                   ;80A8E1|C220    |      ;
     LDA.W nMapEngine_flags                                     ;80A8E3|AD9601  |000196;
     AND.W #$8000                                               ;80A8E6|290080  |      ;
@@ -5325,7 +5325,7 @@ fTileMap_MapChangeHandler:
  
 .loop:
     LDA.B [ptrUnknown0x72],Y                                   ;80A8F6|B772    |000072;
-    STA.B [ptrObjectUnknown0x75],Y                             ;80A8F8|9775    |000075;
+    STA.B [ptrUnknown0x75],Y                                   ;80A8F8|9775    |000075;
     INY                                                        ;80A8FA|C8      |      ;
     INY                                                        ;80A8FB|C8      |      ;
     CPY.W #$8000                                               ;80A8FC|C00080  |      ;
