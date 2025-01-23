@@ -2336,9 +2336,7 @@ fDialog_DialogHandler:
     SEP #$20                                                   ;8393E6|E220    |      ;
     STZ.W nTimeState                                           ;8393E8|9C7309  |000973;
     REP #$20                                                   ;8393EB|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;8393ED|AF5A1F7F|7F1F5A;
-    ORA.W #$4000                                               ;8393F1|090040  |      ;
-    STA.L strcDailyFlags.flags1                                ;8393F4|8F5A1F7F|7F1F5A;
+    %SetFlag(daily1, $4000)
     RTL                                                        ;8393F8|6B      |      ;
  
  
@@ -2377,9 +2375,7 @@ fDialog_Unknown_8393F9:
     STA.W nTimeState                                           ;839436|8D7309  |000973;
  
   + REP #$20                                                   ;839439|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;83943B|AF5A1F7F|7F1F5A;
-    AND.W #$BFFF                                               ;83943F|29FFBF  |      ;
-    STA.L strcDailyFlags.flags1                                ;839442|8F5A1F7F|7F1F5A;
+    %UnsetFlag(daily1, ~$BFFF)
     RTL                                                        ;839446|6B      |      ;
  
  
@@ -4651,13 +4647,13 @@ fGameEngine_SetDefaults:
     LDA.W #$0000                                               ;83AA78|A90000  |      ;
     STA.L nLove_Eve                                            ;83AA7B|8F271F7F|7F1F27;
     LDA.W #$0000                                               ;83AA7F|A90000  |      ;
-    STA.L strcEventFlags.flags1                                ;83AA82|8F641F7F|7F1F64;
+    STA.L strcFlags.event1                                     ;83AA82|8F641F7F|7F1F64;
     LDA.W #$0000                                               ;83AA86|A90000  |      ;
-    STA.L strcEventFlags.flags2                                ;83AA89|8F661F7F|7F1F66;
+    STA.L strcFlags.event2                                     ;83AA89|8F661F7F|7F1F66;
     LDA.W #$0000                                               ;83AA8D|A90000  |      ;
-    STA.L strcEventFlags.flags3                                ;83AA90|8F681F7F|7F1F68;
+    STA.L strcFlags.event3                                     ;83AA90|8F681F7F|7F1F68;
     LDA.W #$0000                                               ;83AA94|A90000  |      ;
-    STA.L strcEventFlags.flags4                                ;83AA97|8F6A1F7F|7F1F6A;
+    STA.L strcFlags.event4                                     ;83AA97|8F6A1F7F|7F1F6A;
     LDA.W #$0000                                               ;83AA9B|A90000  |      ;
     STA.L nDogX                                                ;83AA9E|8F2C1F7F|7F1F2C;
     LDA.W #$0000                                               ;83AAA2|A90000  |      ;
@@ -4667,13 +4663,13 @@ fGameEngine_SetDefaults:
     LDA.W #$0000                                               ;83AAB0|A90000  |      ;
     STA.L nEggInCoopFlags                                      ;83AAB3|8F451F7F|7F1F45;
     LDA.W #$0000                                               ;83AAB7|A90000  |      ;
-    STA.L strcEventFlags.flags5                                ;83AABA|8F6C1F7F|7F1F6C;
+    STA.L strcFlags.event5                                     ;83AABA|8F6C1F7F|7F1F6C;
     LDA.W #$0000                                               ;83AABE|A90000  |      ;
-    STA.L strcEventFlags.flags6                                ;83AAC1|8F6E1F7F|7F1F6E;
+    STA.L strcFlags.event6                                     ;83AAC1|8F6E1F7F|7F1F6E;
     LDA.W #$0000                                               ;83AAC5|A90000  |      ;
-    STA.L strcEventFlags.flags7                                ;83AAC8|8F701F7F|7F1F70;
+    STA.L strcFlags.event7                                     ;83AAC8|8F701F7F|7F1F70;
     LDA.W #$0000                                               ;83AACC|A90000  |      ;
-    STA.L strcEventFlags.flags8                                ;83AACF|8F721F7F|7F1F72;
+    STA.L strcFlags.event8                                     ;83AACF|8F721F7F|7F1F72;
     LDA.W #$0000                                               ;83AAD3|A90000  |      ;
     STA.L nMarriedDaysCounter                                  ;83AAD6|8F3B1F7F|7F1F3B;
     LDA.W #$0000                                               ;83AADA|A90000  |      ;
@@ -4842,21 +4838,21 @@ fGameEngine_FirstNight:
     STA.L nInGameMinuteCounter                                 ;83AC87|8F1E1F7F|7F1F1E;
     REP #$20                                                   ;83AC8B|C220    |      ;
     LDA.W #$0000                                               ;83AC8D|A90000  |      ;
-    STA.L strcDailyFlags.flags1                                ;83AC90|8F5A1F7F|7F1F5A;
+    STA.L strcFlags.daily1                                     ;83AC90|8F5A1F7F|7F1F5A;
     LDA.W #$0000                                               ;83AC94|A90000  |      ;
-    STA.L strcDailyFlags.flags2                                ;83AC97|8F5C1F7F|7F1F5C;
+    STA.L strcFlags.daily2                                     ;83AC97|8F5C1F7F|7F1F5C;
     LDA.W #$0000                                               ;83AC9B|A90000  |      ;
-    STA.L strcDailyFlags.flags3                                ;83AC9E|8F5E1F7F|7F1F5E;
+    STA.L strcFlags.daily3                                     ;83AC9E|8F5E1F7F|7F1F5E;
     LDA.W #$0000                                               ;83ACA2|A90000  |      ;
-    STA.L strcDailyFlags.flags4                                ;83ACA5|8F601F7F|7F1F60;
+    STA.L strcFlags.daily4                                     ;83ACA5|8F601F7F|7F1F60;
     LDA.W #$0000                                               ;83ACA9|A90000  |      ;
-    STA.L strcDailyFlags.flags5                                ;83ACAC|8F621F7F|7F1F62;
+    STA.L strcFlags.daily5                                     ;83ACAC|8F621F7F|7F1F62;
     LDA.W #$0000                                               ;83ACB0|A90000  |      ;
-    STA.L strcUnknownFlags.flags1                              ;83ACB3|8F741F7F|7F1F74;
+    STA.L strcFlags.unknown1                                   ;83ACB3|8F741F7F|7F1F74;
     LDA.W #$0000                                               ;83ACB7|A90000  |      ;
-    STA.L strcUnknownFlags.flags2                              ;83ACBA|8F761F7F|7F1F76;
+    STA.L strcFlags.unknown2                                   ;83ACBA|8F761F7F|7F1F76;
     LDA.W #$0000                                               ;83ACBE|A90000  |      ;
-    STA.L strcUnknownFlags.flags3                              ;83ACC1|8F781F7F|7F1F78;
+    STA.L strcFlags.unknown3                                   ;83ACC1|8F781F7F|7F1F78;
     LDA.W #$0000                                               ;83ACC5|A90000  |      ;
     STA.L $7F1F7A                                              ;83ACC8|8F7A1F7F|7F1F7A;
     REP #$20                                                   ;83ACCC|C220    |      ;
@@ -4919,8 +4915,7 @@ fGameEngine_FirstNight:
     REP #$30                                                   ;83AD6C|C230    |      ;
     LDA.W #$00FA                                               ;83AD6E|A9FA00  |      ;
     STA.L nReqWoodForExpansion                                 ;83AD71|8F0E1F7F|7F1F0E;
-    LDA.L strcEventFlags.flags1                                ;83AD75|AF641F7F|7F1F64;
-    AND.W #$0040                                               ;83AD79|294000  |      ;
+    %CheckFlag(event1, $0040)
     BEQ +                                                      ;83AD7C|F007    |83AD85;
     LDA.W #$01F4                                               ;83AD7E|A9F401  |      ;
     STA.L nReqWoodForExpansion                                 ;83AD81|8F0E1F7F|7F1F0E;
@@ -4935,8 +4930,7 @@ fGameEngine_FirstNight:
 fGameEngine_DirectionHandler83AD91:
     REP #$30                                                   ;83AD91|C230    |      ; A: nPlayerDirection
     TAX                                                        ;83AD93|AA      |      ; X = A
-    LDA.L strcDailyFlags.flags4                                ;83AD94|AF601F7F|7F1F60;
-    AND.W #$4000                                               ;83AD98|290040  |      ;
+    %CheckFlag(daily4, $4000)
     BEQ +                                                      ;83AD9B|F003    |83ADA0;
     JMP.W .label3                                              ;83AD9D|4CA2AE  |83AEA2;
  
@@ -5880,16 +5874,16 @@ fGameEngine_LoadGame:
     STA.L nLove_Eve                                            ;83B407|8F271F7F|7F1F27;
     LDY.W #$0060                                               ;83B40B|A06000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B40E|B772    |000072;
-    STA.L strcEventFlags.flags1                                ;83B410|8F641F7F|7F1F64;
+    STA.L strcFlags.event1                                     ;83B410|8F641F7F|7F1F64;
     LDY.W #$0062                                               ;83B414|A06200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B417|B772    |000072;
-    STA.L strcEventFlags.flags2                                ;83B419|8F661F7F|7F1F66;
+    STA.L strcFlags.event2                                     ;83B419|8F661F7F|7F1F66;
     LDY.W #$0064                                               ;83B41D|A06400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B420|B772    |000072;
-    STA.L strcEventFlags.flags3                                ;83B422|8F681F7F|7F1F68;
+    STA.L strcFlags.event3                                     ;83B422|8F681F7F|7F1F68;
     LDY.W #$0066                                               ;83B426|A06600  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B429|B772    |000072;
-    STA.L strcEventFlags.flags4                                ;83B42B|8F6A1F7F|7F1F6A;
+    STA.L strcFlags.event4                                     ;83B42B|8F6A1F7F|7F1F6A;
     LDY.W #$0068                                               ;83B42F|A06800  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B432|B772    |000072;
     STA.L nDogX                                                ;83B434|8F2C1F7F|7F1F2C;
@@ -5904,16 +5898,16 @@ fGameEngine_LoadGame:
     STA.L nEggInCoopFlags                                      ;83B44F|8F451F7F|7F1F45;
     LDY.W #$0070                                               ;83B453|A07000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B456|B772    |000072;
-    STA.L strcEventFlags.flags5                                ;83B458|8F6C1F7F|7F1F6C;
+    STA.L strcFlags.event5                                     ;83B458|8F6C1F7F|7F1F6C;
     LDY.W #$0072                                               ;83B45C|A07200  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B45F|B772    |000072;
-    STA.L strcEventFlags.flags6                                ;83B461|8F6E1F7F|7F1F6E;
+    STA.L strcFlags.event6                                     ;83B461|8F6E1F7F|7F1F6E;
     LDY.W #$0074                                               ;83B465|A07400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B468|B772    |000072;
-    STA.L strcEventFlags.flags7                                ;83B46A|8F701F7F|7F1F70;
+    STA.L strcFlags.event7                                     ;83B46A|8F701F7F|7F1F70;
     LDY.W #$0076                                               ;83B46E|A07600  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B471|B772    |000072;
-    STA.L strcEventFlags.flags8                                ;83B473|8F721F7F|7F1F72;
+    STA.L strcFlags.event8                                     ;83B473|8F721F7F|7F1F72;
     LDY.W #$0078                                               ;83B477|A07800  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B47A|B772    |000072;
     STA.L nMarriedDaysCounter                                  ;83B47C|8F3B1F7F|7F1F3B;
@@ -6259,16 +6253,16 @@ fGameEngine_SaveGame:
     LDA.L nLove_Eve                                            ;83B7E3|AF271F7F|7F1F27;
     STA.B [ptrUnknown0x72],Y                                   ;83B7E7|9772    |000072;
     LDY.W #$0060                                               ;83B7E9|A06000  |      ;
-    LDA.L strcEventFlags.flags1                                ;83B7EC|AF641F7F|7F1F64;
+    LDA.L strcFlags.event1                                     ;83B7EC|AF641F7F|7F1F64;
     STA.B [ptrUnknown0x72],Y                                   ;83B7F0|9772    |000072;
     LDY.W #$0062                                               ;83B7F2|A06200  |      ;
-    LDA.L strcEventFlags.flags2                                ;83B7F5|AF661F7F|7F1F66;
+    LDA.L strcFlags.event2                                     ;83B7F5|AF661F7F|7F1F66;
     STA.B [ptrUnknown0x72],Y                                   ;83B7F9|9772    |000072;
     LDY.W #$0064                                               ;83B7FB|A06400  |      ;
-    LDA.L strcEventFlags.flags3                                ;83B7FE|AF681F7F|7F1F68;
+    LDA.L strcFlags.event3                                     ;83B7FE|AF681F7F|7F1F68;
     STA.B [ptrUnknown0x72],Y                                   ;83B802|9772    |000072;
     LDY.W #$0066                                               ;83B804|A06600  |      ;
-    LDA.L strcEventFlags.flags4                                ;83B807|AF6A1F7F|7F1F6A;
+    LDA.L strcFlags.event4                                     ;83B807|AF6A1F7F|7F1F6A;
     STA.B [ptrUnknown0x72],Y                                   ;83B80B|9772    |000072;
     LDY.W #$0068                                               ;83B80D|A06800  |      ;
     LDA.L nDogX                                                ;83B810|AF2C1F7F|7F1F2C;
@@ -6283,16 +6277,16 @@ fGameEngine_SaveGame:
     LDA.L nEggInCoopFlags                                      ;83B82B|AF451F7F|7F1F45;
     STA.B [ptrUnknown0x72],Y                                   ;83B82F|9772    |000072;
     LDY.W #$0070                                               ;83B831|A07000  |      ;
-    LDA.L strcEventFlags.flags5                                ;83B834|AF6C1F7F|7F1F6C;
+    LDA.L strcFlags.event5                                     ;83B834|AF6C1F7F|7F1F6C;
     STA.B [ptrUnknown0x72],Y                                   ;83B838|9772    |000072;
     LDY.W #$0072                                               ;83B83A|A07200  |      ;
-    LDA.L strcEventFlags.flags6                                ;83B83D|AF6E1F7F|7F1F6E;
+    LDA.L strcFlags.event6                                     ;83B83D|AF6E1F7F|7F1F6E;
     STA.B [ptrUnknown0x72],Y                                   ;83B841|9772    |000072;
     LDY.W #$0074                                               ;83B843|A07400  |      ;
-    LDA.L strcEventFlags.flags7                                ;83B846|AF701F7F|7F1F70;
+    LDA.L strcFlags.event7                                     ;83B846|AF701F7F|7F1F70;
     STA.B [ptrUnknown0x72],Y                                   ;83B84A|9772    |000072;
     LDY.W #$0076                                               ;83B84C|A07600  |      ;
-    LDA.L strcEventFlags.flags8                                ;83B84F|AF721F7F|7F1F72;
+    LDA.L strcFlags.event8                                     ;83B84F|AF721F7F|7F1F72;
     STA.B [ptrUnknown0x72],Y                                   ;83B853|9772    |000072;
     LDY.W #$0078                                               ;83B855|A07800  |      ;
     LDA.L nMarriedDaysCounter                                  ;83B858|AF3B1F7F|7F1F3B;
@@ -6577,9 +6571,7 @@ fGameEngine_SaveCheck:
     REP #$10                                                   ;83BAD6|C210    |      ;
     STZ.W $098E                                                ;83BAD8|9C8E09  |00098E;
     REP #$20                                                   ;83BADB|C220    |      ;
-    LDA.L strcDailyFlags.flags4                                ;83BADD|AF601F7F|7F1F60;
-    AND.W #$F7FF                                               ;83BAE1|29FFF7  |      ;
-    STA.L strcDailyFlags.flags4                                ;83BAE4|8F601F7F|7F1F60;
+    %UnsetFlag(daily4, ~$F7FF)
     STZ.B n16TempVar3                                          ;83BAE8|6482    |000082;
     LDA.W #$0000                                               ;83BAEA|A90000  |      ;
     STA.B ptrUnknown0x72                                       ;83BAED|8572    |000072;
@@ -6756,9 +6748,7 @@ fGameEngine_SaveCheck:
     REP #$20                                                   ;83BC48|C220    |      ;
     LDA.B n16TempVar3                                          ;83BC4A|A582    |000082;
     BEQ .justReturn                                            ;83BC4C|F00B    |83BC59;
-    LDA.L strcDailyFlags.flags4                                ;83BC4E|AF601F7F|7F1F60;
-    ORA.W #$0800                                               ;83BC52|090008  |      ;
-    STA.L strcDailyFlags.flags4                                ;83BC55|8F601F7F|7F1F60;
+    %SetFlag(daily4, $0800)
  
 .justReturn:
     RTL                                                        ;83BC59|6B      |      ;
@@ -6766,8 +6756,7 @@ fGameEngine_SaveCheck:
  
 fGameEngine_AnimalsUnknown83BC5A:
     REP #$30                                                   ;83BC5A|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;83BC5C|AF601F7F|7F1F60;
-    AND.W #$0001                                               ;83BC60|290100  |      ;
+    %CheckFlag(daily4, $0001)
     BEQ +                                                      ;83BC63|F003    |83BC68;
     JMP.W .label13                                             ;83BC65|4C4BBE  |83BE4B;
  
@@ -6938,8 +6927,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     CMP.B #$0A                                                 ;83BDA7|C90A    |      ;
     BEQ .label10                                               ;83BDA9|F040    |83BDEB;
     REP #$20                                                   ;83BDAB|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;83BDAD|AF5A1F7F|7F1F5A;
-    AND.W #$1000                                               ;83BDB1|290010  |      ;
+    %CheckFlag(daily1, $1000)
     BEQ .label9                                                ;83BDB4|F020    |83BDD6;
     SEP #$20                                                   ;83BDB6|E220    |      ;
     LDY.W #$0002                                               ;83BDB8|A00200  |      ;
@@ -7019,9 +7007,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
 .label13:
     REP #$30                                                   ;83BE4B|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83BE4D|AF6E1F7F|7F1F6E;
-    AND.W #$EFBF                                               ;83BE51|29BFEF  |      ;
-    STA.L strcEventFlags.flags6                                ;83BE54|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$EFBF)
     LDX.W #$0000                                               ;83BE58|A20000  |      ;
  
 .label14:
@@ -7099,17 +7085,13 @@ fGameEngine_AnimalsUnknown83BC5A:
     LDA.B #$00                                                 ;83BEE1|A900    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83BEE3|9772    |000072;
     REP #$20                                                   ;83BEE5|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83BEE7|AF6E1F7F|7F1F6E;
-    ORA.W #$1000                                               ;83BEEB|090010  |      ;
-    STA.L strcEventFlags.flags6                                ;83BEEE|8F6E1F7F|7F1F6E;
+    %SetFlag(event6, $1000)
     JMP.W .chicken                                             ;83BEF2|4C1AC0  |83C01A;
  
  
 .label16:
     REP #$30                                                   ;83BEF5|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83BEF7|AF6E1F7F|7F1F6E;
-    ORA.W #$1000                                               ;83BEFB|090010  |      ;
-    STA.L strcEventFlags.flags6                                ;83BEFE|8F6E1F7F|7F1F6E;
+    %SetFlag(event6, $1000)
     SEP #$20                                                   ;83BF02|E220    |      ;
     LDY.W #$0000                                               ;83BF04|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83BF07|B772    |000072;
@@ -7170,9 +7152,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     DEC A                                                      ;83BF6A|3A      |      ;
     STA.L nOwnedCows                                           ;83BF6B|8F0A1F7F|7F1F0A;
     REP #$20                                                   ;83BF6F|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83BF71|AF6E1F7F|7F1F6E;
-    ORA.W #$0040                                               ;83BF75|094000  |      ;
-    STA.L strcEventFlags.flags6                                ;83BF78|8F6E1F7F|7F1F6E;
+    %SetFlag(event6, $0040)
     PLX                                                        ;83BF7C|FA      |      ;
     PHX                                                        ;83BF7D|DA      |      ;
     TXA                                                        ;83BF7E|8A      |      ;
@@ -7223,9 +7203,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     CMP.B #$27                                                 ;83BFD1|C927    |      ;
     BNE .chicken                                               ;83BFD3|D045    |83C01A;
     REP #$20                                                   ;83BFD5|C220    |      ;
-    LDA.L strcEventFlags.flags1                                ;83BFD7|AF641F7F|7F1F64;
-    ORA.W #$0008                                               ;83BFDB|090800  |      ;
-    STA.L strcEventFlags.flags1                                ;83BFDE|8F641F7F|7F1F64;
+    %SetFlag(event1, $0008)
     SEP #$20                                                   ;83BFE2|E220    |      ;
     LDY.W #$0000                                               ;83BFE4|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83BFE7|B772    |000072;
@@ -7268,16 +7246,13 @@ fGameEngine_AnimalsUnknown83BC5A:
  
  
   + REP #$30                                                   ;83C026|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;83C028|AF601F7F|7F1F60;
-    AND.W #$0001                                               ;83C02C|290100  |      ;
+    %CheckFlag(daily4, $0001)
     BEQ +                                                      ;83C02F|F003    |83C034;
     JMP.W .label38                                             ;83C031|4C25C1  |83C125;
  
  
   + REP #$30                                                   ;83C034|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83C036|AF6E1F7F|7F1F6E;
-    AND.W #$FFDF                                               ;83C03A|29DFFF  |      ;
-    STA.L strcEventFlags.flags6                                ;83C03D|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FFDF)
     LDX.W #$0000                                               ;83C041|A20000  |      ;
  
 .chickenDeath:
@@ -7370,8 +7345,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     LDA.W nMapEngine_flags                                     ;83C0E7|AD9601  |000196;
     AND.W #$0410                                               ;83C0EA|291004  |      ;
     BEQ .label29                                               ;83C0ED|F02A    |83C119;
-    LDA.L strcEventFlags.flags6                                ;83C0EF|AF6E1F7F|7F1F6E;
-    AND.W #$0020                                               ;83C0F3|292000  |      ;
+    %CheckFlag(event6, $0020)
     BNE .label29                                               ;83C0F6|D021    |83C119;
     SEP #$20                                                   ;83C0F8|E220    |      ;
     LDY.W #$0001                                               ;83C0FA|A00100  |      ;
@@ -7382,9 +7356,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     LDA.B #$01                                                 ;83C106|A901    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83C108|9772    |000072;
     REP #$20                                                   ;83C10A|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83C10C|AF6E1F7F|7F1F6E;
-    ORA.W #$0020                                               ;83C110|092000  |      ;
-    STA.L strcEventFlags.flags6                                ;83C113|8F6E1F7F|7F1F6E;
+    %SetFlag(event6, $0020)
     BRA .label29                                               ;83C117|8000    |83C119;
  
  
@@ -7457,9 +7429,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     INC A                                                      ;83C197|1A      |      ;
     STA.L nOwnedChickens                                       ;83C198|8F0B1F7F|7F1F0B;
     REP #$30                                                   ;83C19C|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83C19E|AF6E1F7F|7F1F6E;
-    AND.W #$DFFF                                               ;83C1A2|29FFDF  |      ;
-    STA.L strcEventFlags.flags6                                ;83C1A5|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$DFFF)
     BRA .label37                                               ;83C1A9|8031    |83C1DC;
  
  
@@ -7501,9 +7471,7 @@ fGameEngine_AnimalsUnknown83BC5A:
   + REP #$30                                                   ;83C1E8|C230    |      ;
     LDA.W #$0000                                               ;83C1EA|A90000  |      ;
     STA.L nEggInCoopFlags                                      ;83C1ED|8F451F7F|7F1F45;
-    LDA.L strcEventFlags.flags6                                ;83C1F1|AF6E1F7F|7F1F6E;
-    AND.W #$FBFF                                               ;83C1F5|29FFFB  |      ;
-    STA.L strcEventFlags.flags6                                ;83C1F8|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FBFF)
     LDX.W #$0000                                               ;83C1FC|A20000  |      ;
  
 .label33:
@@ -7545,9 +7513,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     ORA.L nEggInCoopFlags                                      ;83C241|0F451F7F|7F1F45;
     STA.L nEggInCoopFlags                                      ;83C245|8F451F7F|7F1F45;
     REP #$20                                                   ;83C249|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83C24B|AF6E1F7F|7F1F6E;
-    ORA.W #$0400                                               ;83C24F|090004  |      ;
-    STA.L strcEventFlags.flags6                                ;83C252|8F6E1F7F|7F1F6E;
+    %SetFlag(event6, $0400)
     BRA .label35                                               ;83C256|8017    |83C26F;
  
  
@@ -7575,8 +7541,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
 .label36:
     REP #$30                                                   ;83C27B|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83C27D|AF681F7F|7F1F68;
-    AND.W #$0100                                               ;83C281|290001  |      ;
+    %CheckFlag(event3, $0100)
     BEQ .justReturn                                            ;83C284|F00F    |83C295;
     SEP #$20                                                   ;83C286|E220    |      ;
     LDA.L nHorseAge                                            ;83C288|AF321F7F|7F1F32;
@@ -8165,8 +8130,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + REP #$30                                                   ;83C649|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83C64B|AF681F7F|7F1F68;
-    AND.W #$0080                                               ;83C64F|298000  |      ;
+    %CheckFlag(event3, $0080)
     BNE +                                                      ;83C652|D003    |83C657;
     JMP.W .label37                                             ;83C654|4C34C7  |83C734;
  
@@ -8305,8 +8269,7 @@ fGameEngine_ChichenUnknown83C296:
  
 .label37:
     REP #$30                                                   ;83C734|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83C736|AF681F7F|7F1F68;
-    AND.W #$0100                                               ;83C73A|290001  |      ;
+    %CheckFlag(event3, $0100)
     BNE +                                                      ;83C73D|D003    |83C742;
     JMP.W .return                                              ;83C73F|4C06C8  |83C806;
  
@@ -8867,17 +8830,13 @@ fMapEngine_AreaEvents:
  
 fAreaEvents_Farm:
     REP #$30                                                   ;83CB69|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83CB6B|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83CB6F|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE +                                                      ;83CB72|D050    |83CBC4;
-    LDA.L strcEventFlags.flags2                                ;83CB74|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE .maria                                                 ;83CB7B|D014    |83CB91;
-    LDA.L strcEventFlags.flags2                                ;83CB7D|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BNE .nina                                                  ;83CB84|D01C    |83CBA2;
-    LDA.L strcEventFlags.flags2                                ;83CB86|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BNE .ellen                                                 ;83CB8D|D024    |83CBB3;
     BRA +                                                      ;83CB8F|8033    |83CBC4;
  
@@ -8901,8 +8860,7 @@ fAreaEvents_Farm:
  
  
   + REP #$30                                                   ;83CBC4|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83CBC6|AF6E1F7F|7F1F6E;
-    AND.W #$0004                                               ;83CBCA|290400  |      ;
+    %CheckFlag(event6, $0004)
     BEQ +                                                      ;83CBCD|F018    |83CBE7;
     LDA.L nFirstChildAge                                       ;83CBCF|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83CBD3|C93C00  |      ;
@@ -8911,8 +8869,7 @@ fAreaEvents_Farm:
     %AIExecute($0014, $0045, $0001)
  
   + REP #$30                                                   ;83CBE7|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83CBE9|AF6E1F7F|7F1F6E;
-    AND.W #$0008                                               ;83CBED|290800  |      ;
+    %CheckFlag(event6, $0008)
     BEQ +                                                      ;83CBF0|F018    |83CC0A;
     LDA.L nSecondChildAge                                      ;83CBF2|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83CBF6|C93C00  |      ;
@@ -8927,32 +8884,27 @@ fAreaEvents_Farm:
     JMP.W .label9                                              ;83CC14|4C5BCE  |83CE5B;
  
  
-  + LDA.L strcEventFlags.flags2                                ;83CC17|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+  + %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BEQ +                                                      ;83CC1E|F003    |83CC23;
     JMP.W .label9                                              ;83CC20|4C5BCE  |83CE5B;
  
  
-  + LDA.L strcEventFlags.flags2                                ;83CC23|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+  + %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BEQ +                                                      ;83CC2A|F003    |83CC2F;
     JMP.W .label9                                              ;83CC2C|4C5BCE  |83CE5B;
  
  
-  + LDA.L strcEventFlags.flags2                                ;83CC2F|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+  + %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BEQ +                                                      ;83CC36|F003    |83CC3B;
     JMP.W .label9                                              ;83CC38|4C5BCE  |83CE5B;
  
  
-  + LDA.L strcEventFlags.flags2                                ;83CC3B|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+  + %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BEQ +                                                      ;83CC42|F003    |83CC47;
     JMP.W .label9                                              ;83CC44|4C5BCE  |83CE5B;
  
  
-  + LDA.L strcEventFlags.flags2                                ;83CC47|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+  + %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BEQ +                                                      ;83CC4E|F003    |83CC53;
     JMP.W .label9                                              ;83CC50|4C5BCE  |83CE5B;
  
@@ -9001,24 +8953,18 @@ fAreaEvents_Farm:
  
 .label4:
     REP #$20                                                   ;83CC9A|C220    |      ;
-    LDA.L strcEventFlags.flags2                                ;83CC9C|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE .label5                                                ;83CCA3|D044    |83CCE9;
-    LDA.L strcEventFlags.flags2                                ;83CCA5|AF661F7F|7F1F66;
-    AND.W #$0080                                               ;83CCA9|298000  |      ;
+    %CheckFlag(event2, $0080)
     BNE .label5                                                ;83CCAC|D03B    |83CCE9;
-    LDA.L strcEventFlags.flags4                                ;83CCAE|AF6A1F7F|7F1F6A;
-    AND.W #$2000                                               ;83CCB2|290020  |      ;
+    %CheckFlag(event4, $2000)
     BNE .label5                                                ;83CCB5|D032    |83CCE9;
-    LDA.L strcEventFlags.flags4                                ;83CCB7|AF6A1F7F|7F1F6A;
-    AND.W #$1000                                               ;83CCBB|290010  |      ;
+    %CheckFlag(event4, $1000)
     BNE .label5                                                ;83CCBE|D029    |83CCE9;
     LDA.L nLove_Maria                                          ;83CCC0|AF1F1F7F|7F1F1F;
     CMP.W #$00C8                                               ;83CCC4|C9C800  |      ;
     BCC .label5                                                ;83CCC7|9020    |83CCE9;
-    LDA.L strcEventFlags.flags4                                ;83CCC9|AF6A1F7F|7F1F6A;
-    ORA.W #$1000                                               ;83CCCD|090010  |      ;
-    STA.L strcEventFlags.flags4                                ;83CCD0|8F6A1F7F|7F1F6A;
+    %SetFlag(event4, $1000)
     REP #$30                                                   ;83CCD4|C230    |      ;
     %AIExecute($0000, $0019, $0000)
     SEP #$20                                                   ;83CCE3|E220    |      ;
@@ -9028,24 +8974,18 @@ fAreaEvents_Farm:
  
 .label5:
     REP #$20                                                   ;83CCE9|C220    |      ;
-    LDA.L strcEventFlags.flags4                                ;83CCEB|AF6A1F7F|7F1F6A;
-    AND.W #$1000                                               ;83CCEF|290010  |      ;
+    %CheckFlag(event4, $1000)
     BNE .label6                                                ;83CCF2|D044    |83CD38;
-    LDA.L strcEventFlags.flags2                                ;83CCF4|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BNE .label6                                                ;83CCFB|D03B    |83CD38;
-    LDA.L strcEventFlags.flags4                                ;83CCFD|AF6A1F7F|7F1F6A;
-    AND.W #$8000                                               ;83CD01|290080  |      ;
+    %CheckFlag(event4, $8000)
     BNE .label6                                                ;83CD04|D032    |83CD38;
-    LDA.L strcEventFlags.flags4                                ;83CD06|AF6A1F7F|7F1F6A;
-    AND.W #$4000                                               ;83CD0A|290040  |      ;
+    %CheckFlag(event4, $4000)
     BNE .label6                                                ;83CD0D|D029    |83CD38;
     LDA.L nLove_Ann                                            ;83CD0F|AF211F7F|7F1F21;
     CMP.W #$00C8                                               ;83CD13|C9C800  |      ;
     BCC .label6                                                ;83CD16|9020    |83CD38;
-    LDA.L strcEventFlags.flags4                                ;83CD18|AF6A1F7F|7F1F6A;
-    ORA.W #$4000                                               ;83CD1C|090040  |      ;
-    STA.L strcEventFlags.flags4                                ;83CD1F|8F6A1F7F|7F1F6A;
+    %SetFlag(event4, $4000)
     REP #$30                                                   ;83CD23|C230    |      ;
     %AIExecute($0000, $001A, $0000)
     SEP #$20                                                   ;83CD32|E220    |      ;
@@ -9055,27 +8995,20 @@ fAreaEvents_Farm:
  
 .label6:
     REP #$20                                                   ;83CD38|C220    |      ;
-    LDA.L strcEventFlags.flags4                                ;83CD3A|AF6A1F7F|7F1F6A;
-    AND.W #$1000                                               ;83CD3E|290010  |      ;
+    %CheckFlag(event4, $1000)
     BNE .label7                                                ;83CD41|D04D    |83CD90;
-    LDA.L strcEventFlags.flags4                                ;83CD43|AF6A1F7F|7F1F6A;
-    AND.W #$4000                                               ;83CD47|290040  |      ;
+    %CheckFlag(event4, $4000)
     BNE .label7                                                ;83CD4A|D044    |83CD90;
-    LDA.L strcEventFlags.flags2                                ;83CD4C|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BNE .label7                                                ;83CD53|D03B    |83CD90;
-    LDA.L strcEventFlags.flags5                                ;83CD55|AF6C1F7F|7F1F6C;
-    AND.W #$0002                                               ;83CD59|290200  |      ;
+    %CheckFlag(event5, $0002)
     BNE .label7                                                ;83CD5C|D032    |83CD90;
-    LDA.L strcEventFlags.flags5                                ;83CD5E|AF6C1F7F|7F1F6C;
-    AND.W #$0001                                               ;83CD62|290100  |      ;
+    %CheckFlag(event5, $0001)
     BNE .label7                                                ;83CD65|D029    |83CD90;
     LDA.L nLove_Nina                                           ;83CD67|AF231F7F|7F1F23;
     CMP.W #$00C8                                               ;83CD6B|C9C800  |      ;
     BCC .label7                                                ;83CD6E|9020    |83CD90;
-    LDA.L strcEventFlags.flags5                                ;83CD70|AF6C1F7F|7F1F6C;
-    ORA.W #$0001                                               ;83CD74|090100  |      ;
-    STA.L strcEventFlags.flags5                                ;83CD77|8F6C1F7F|7F1F6C;
+    %SetFlag(event5, $0001)
     REP #$30                                                   ;83CD7B|C230    |      ;
     %AIExecute($0000, $001B, $0000)
     SEP #$20                                                   ;83CD8A|E220    |      ;
@@ -9085,30 +9018,22 @@ fAreaEvents_Farm:
  
 .label7:
     REP #$20                                                   ;83CD90|C220    |      ;
-    LDA.L strcEventFlags.flags4                                ;83CD92|AF6A1F7F|7F1F6A;
-    AND.W #$1000                                               ;83CD96|290010  |      ;
+    %CheckFlag(event4, $1000)
     BNE .label8                                                ;83CD99|D056    |83CDF1;
-    LDA.L strcEventFlags.flags4                                ;83CD9B|AF6A1F7F|7F1F6A;
-    AND.W #$4000                                               ;83CD9F|290040  |      ;
+    %CheckFlag(event4, $4000)
     BNE .label8                                                ;83CDA2|D04D    |83CDF1;
-    LDA.L strcEventFlags.flags5                                ;83CDA4|AF6C1F7F|7F1F6C;
-    AND.W #$0001                                               ;83CDA8|290100  |      ;
+    %CheckFlag(event5, $0001)
     BNE .label8                                                ;83CDAB|D044    |83CDF1;
-    LDA.L strcEventFlags.flags2                                ;83CDAD|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BNE .label8                                                ;83CDB4|D03B    |83CDF1;
-    LDA.L strcEventFlags.flags5                                ;83CDB6|AF6C1F7F|7F1F6C;
-    AND.W #$0008                                               ;83CDBA|290800  |      ;
+    %CheckFlag(event5, $0008)
     BNE .label8                                                ;83CDBD|D032    |83CDF1;
-    LDA.L strcEventFlags.flags5                                ;83CDBF|AF6C1F7F|7F1F6C;
-    AND.W #$0004                                               ;83CDC3|290400  |      ;
+    %CheckFlag(event5, $0004)
     BNE .label8                                                ;83CDC6|D029    |83CDF1;
     LDA.L nLove_Ellen                                          ;83CDC8|AF251F7F|7F1F25;
     CMP.W #$00C8                                               ;83CDCC|C9C800  |      ;
     BCC .label8                                                ;83CDCF|9020    |83CDF1;
-    LDA.L strcEventFlags.flags5                                ;83CDD1|AF6C1F7F|7F1F6C;
-    ORA.W #$0004                                               ;83CDD5|090400  |      ;
-    STA.L strcEventFlags.flags5                                ;83CDD8|8F6C1F7F|7F1F6C;
+    %SetFlag(event5, $0004)
     REP #$30                                                   ;83CDDC|C230    |      ;
     %AIExecute($0000, $001C, $0000)
     SEP #$20                                                   ;83CDEB|E220    |      ;
@@ -9118,33 +9043,24 @@ fAreaEvents_Farm:
  
 .label8:
     REP #$20                                                   ;83CDF1|C220    |      ;
-    LDA.L strcEventFlags.flags4                                ;83CDF3|AF6A1F7F|7F1F6A;
-    AND.W #$1000                                               ;83CDF7|290010  |      ;
+    %CheckFlag(event4, $1000)
     BNE .label9                                                ;83CDFA|D05F    |83CE5B;
-    LDA.L strcEventFlags.flags4                                ;83CDFC|AF6A1F7F|7F1F6A;
-    AND.W #$4000                                               ;83CE00|290040  |      ;
+    %CheckFlag(event4, $4000)
     BNE .label9                                                ;83CE03|D056    |83CE5B;
-    LDA.L strcEventFlags.flags5                                ;83CE05|AF6C1F7F|7F1F6C;
-    AND.W #$0001                                               ;83CE09|290100  |      ;
+    %CheckFlag(event5, $0001)
     BNE .label9                                                ;83CE0C|D04D    |83CE5B;
-    LDA.L strcEventFlags.flags5                                ;83CE0E|AF6C1F7F|7F1F6C;
-    AND.W #$0004                                               ;83CE12|290400  |      ;
+    %CheckFlag(event5, $0004)
     BNE .label9                                                ;83CE15|D044    |83CE5B;
-    LDA.L strcEventFlags.flags2                                ;83CE17|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BNE .label9                                                ;83CE1E|D03B    |83CE5B;
-    LDA.L strcEventFlags.flags5                                ;83CE20|AF6C1F7F|7F1F6C;
-    AND.W #$0020                                               ;83CE24|292000  |      ;
+    %CheckFlag(event5, $0020)
     BNE .label9                                                ;83CE27|D032    |83CE5B;
-    LDA.L strcEventFlags.flags5                                ;83CE29|AF6C1F7F|7F1F6C;
-    AND.W #$0010                                               ;83CE2D|291000  |      ;
+    %CheckFlag(event5, $0010)
     BNE .label9                                                ;83CE30|D029    |83CE5B;
     LDA.L nLove_Eve                                            ;83CE32|AF271F7F|7F1F27;
     CMP.W #$00C8                                               ;83CE36|C9C800  |      ;
     BCC .label9                                                ;83CE39|9020    |83CE5B;
-    LDA.L strcEventFlags.flags5                                ;83CE3B|AF6C1F7F|7F1F6C;
-    ORA.W #$0010                                               ;83CE3F|091000  |      ;
-    STA.L strcEventFlags.flags5                                ;83CE42|8F6C1F7F|7F1F6C;
+    %SetFlag(event5, $0010)
     REP #$30                                                   ;83CE46|C230    |      ;
     %AIExecute($0000, $001D, $0000)
     SEP #$20                                                   ;83CE55|E220    |      ;
@@ -9154,8 +9070,7 @@ fAreaEvents_Farm:
  
 .label9:
     REP #$30                                                   ;83CE5B|C230    |      ;
-    LDA.L strcDailyFlags.flags1                                ;83CE5D|AF5A1F7F|7F1F5A;
-    AND.W #$0002                                               ;83CE61|290200  |      ;
+    %CheckFlag(daily1, $0002)
     BEQ .label10                                               ;83CE64|F02D    |83CE93;
     REP #$20                                                   ;83CE66|C220    |      ;
     %AIExecute($0007, $0000, $0020)
@@ -9171,8 +9086,7 @@ fAreaEvents_Farm:
  
 .label10:
     REP #$30                                                   ;83CE93|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83CE95|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83CE99|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE .label11                                               ;83CE9C|D010    |83CEAE;
     REP #$30                                                   ;83CE9E|C230    |      ;
     %AIExecute($0000, $000A, $0002)
@@ -9181,15 +9095,12 @@ fAreaEvents_Farm:
  
 .label11:
     REP #$30                                                   ;83CEAE|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83CEB0|AF681F7F|7F1F68;
-    AND.W #$0020                                               ;83CEB4|292000  |      ;
+    %CheckFlag(event3, $0020)
     BNE .label12                                               ;83CEB7|D024    |83CEDD;
     REP #$30                                                   ;83CEB9|C230    |      ;
     %AIExecute($0000, $000C, $0000)
     REP #$20                                                   ;83CEC8|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83CECA|AF681F7F|7F1F68;
-    ORA.W #$0020                                               ;83CECE|092000  |      ;
-    STA.L strcEventFlags.flags3                                ;83CED1|8F681F7F|7F1F68;
+    %SetFlag(event3, $0020)
     SEP #$20                                                   ;83CED5|E220    |      ;
     LDA.B #$03                                                 ;83CED7|A903    |      ;
     STA.W strcMenuObjectData.nameDestinationIdx                ;83CED9|8D9F09  |00099F;
@@ -9198,8 +9109,7 @@ fAreaEvents_Farm:
  
 .label12:
     REP #$30                                                   ;83CEDD|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83CEDF|AF681F7F|7F1F68;
-    AND.W #$0080                                               ;83CEE3|298000  |      ;
+    %CheckFlag(event3, $0080)
     BNE .label13                                               ;83CEE6|D028    |83CF10;
     REP #$30                                                   ;83CEE8|C230    |      ;
     %AIExecute($0000, $000C, $0001)
@@ -9237,8 +9147,7 @@ fAreaEvents_Farm:
  
 .label14:
     REP #$30                                                   ;83CF42|C230    |      ;
-    LDA.L strcEventFlags.flags7                                ;83CF44|AF701F7F|7F1F70;
-    AND.W #$0002                                               ;83CF48|290200  |      ;
+    %CheckFlag(event7, $0002)
     BEQ .label15                                               ;83CF4B|F026    |83CF73;
     SEP #$20                                                   ;83CF4D|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CF4F|AF1C1F7F|7F1F1C;
@@ -9255,8 +9164,7 @@ fAreaEvents_Farm:
  
 .label15:
     REP #$30                                                   ;83CF73|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83CF75|AF641F7F|7F1F64;
-    AND.W #$0010                                               ;83CF79|291000  |      ;
+    %CheckFlag(event1, $0010)
     BEQ .label16                                               ;83CF7C|F026    |83CFA4;
     SEP #$20                                                   ;83CF7E|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CF80|AF1C1F7F|7F1F1C;
@@ -9273,8 +9181,7 @@ fAreaEvents_Farm:
  
 .label16:
     REP #$30                                                   ;83CFA4|C230    |      ;
-    LDA.L strcEventFlags.flags7                                ;83CFA6|AF701F7F|7F1F70;
-    AND.W #$0001                                               ;83CFAA|290100  |      ;
+    %CheckFlag(event7, $0001)
     BNE .label17                                               ;83CFAD|D049    |83CFF8;
     SEP #$20                                                   ;83CFAF|E220    |      ;
     LDA.L nCurrentYearID                                       ;83CFB1|AF181F7F|7F1F18;
@@ -9293,9 +9200,7 @@ fAreaEvents_Farm:
     LDA.L nInGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E;
     BNE .label17                                               ;83CFD9|D01D    |83CFF8;
     REP #$20                                                   ;83CFDB|C220    |      ;
-    LDA.L strcEventFlags.flags7                                ;83CFDD|AF701F7F|7F1F70;
-    ORA.W #$0001                                               ;83CFE1|090100  |      ;
-    STA.L strcEventFlags.flags7                                ;83CFE4|8F701F7F|7F1F70;
+    %SetFlag(event7, $0001)
     REP #$30                                                   ;83CFE8|C230    |      ;
     %AIExecute($000B, $0024, $0001)
     RTS                                                        ;83CFF7|60      |      ;
@@ -9303,8 +9208,7 @@ fAreaEvents_Farm:
  
 .label17:
     REP #$30                                                   ;83CFF8|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83CFFA|AF661F7F|7F1F66;
-    AND.W #$0040                                               ;83CFFE|294000  |      ;
+    %CheckFlag(event2, $0040)
     BEQ .label18                                               ;83D001|F03A    |83D03D;
     REP #$20                                                   ;83D003|C220    |      ;
     %AIExecute($0009, $0000, $002C)
@@ -9316,16 +9220,13 @@ fAreaEvents_Farm:
     %SetPlayerFlag(!PFLAGS_INTERACTING)
     %SetPlayerAction(!PACTION_NONE)
     REP #$20                                                   ;83D02F|C220    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D031|AF661F7F|7F1F66;
-    AND.W #$FFBF                                               ;83D035|29BFFF  |      ;
-    STA.L strcEventFlags.flags2                                ;83D038|8F661F7F|7F1F66;
+    %UnsetFlag(event2, ~$FFBF)
     RTS                                                        ;83D03C|60      |      ;
  
  
 .label18:
     REP #$30                                                   ;83D03D|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D03F|AF661F7F|7F1F66;
-    AND.W #$0080                                               ;83D043|298000  |      ;
+    %CheckFlag(event2, $0080)
     BEQ .label19                                               ;83D046|F018    |83D060;
     SEP #$20                                                   ;83D048|E220    |      ;
     LDA.L nConstructionDayCounter                              ;83D04A|AF351F7F|7F1F35;
@@ -9337,12 +9238,9 @@ fAreaEvents_Farm:
  
 .label19:
     REP #$30                                                   ;83D060|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D062|AF661F7F|7F1F66;
-    AND.W #$0100                                               ;83D066|290001  |      ;
+    %CheckFlag(event2, $0100)
     BEQ .label20                                               ;83D069|F047    |83D0B2;
-    LDA.L strcEventFlags.flags2                                ;83D06B|AF661F7F|7F1F66;
-    AND.W #$FEFF                                               ;83D06F|29FFFE  |      ;
-    STA.L strcEventFlags.flags2                                ;83D072|8F661F7F|7F1F66;
+    %UnsetFlag(event2, ~$FEFF)
     REP #$30                                                   ;83D076|C230    |      ;
     %AIExecute($0009, $0000, $0036)
     REP #$30                                                   ;83D085|C230    |      ;
@@ -9359,17 +9257,14 @@ fAreaEvents_Farm:
  
 .label20:
     REP #$30                                                   ;83D0B2|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D0B4|AF641F7F|7F1F64;
-    AND.W #$0100                                               ;83D0B8|290001  |      ;
+    %CheckFlag(event1, $0100)
     BNE .label21                                               ;83D0BB|D042    |83D0FF;
     SEP #$20                                                   ;83D0BD|E220    |      ;
     LDA.L nHorseAge                                            ;83D0BF|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;83D0C3|C915    |      ;
     BNE .label21                                               ;83D0C5|D038    |83D0FF;
     REP #$30                                                   ;83D0C7|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D0C9|AF641F7F|7F1F64;
-    ORA.W #$0100                                               ;83D0CD|090001  |      ;
-    STA.L strcEventFlags.flags1                                ;83D0D0|8F641F7F|7F1F64;
+    %SetFlag(event1, $0100)
     %AIExecute($000B, $0000, $001D)
     SEP #$20                                                   ;83D0E1|E220    |      ;
     LDA.B #$49                                                 ;83D0E3|A949    |      ;
@@ -9406,15 +9301,12 @@ fAreaEvents_Farm:
     ADC.B #$FF                                                 ;83D137|69FF    |      ;
     BMI .label22                                               ;83D139|3028    |83D163;
     REP #$30                                                   ;83D13B|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D13D|AF681F7F|7F1F68;
-    AND.W #$0400                                               ;83D141|290004  |      ;
+    %CheckFlag(event3, $0400)
     BNE .label22                                               ;83D144|D01D    |83D163;
     REP #$30                                                   ;83D146|C230    |      ;
     %AIExecute($0000, $0013, $0000)
     REP #$20                                                   ;83D155|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D157|AF681F7F|7F1F68;
-    ORA.W #$0400                                               ;83D15B|090004  |      ;
-    STA.L strcEventFlags.flags3                                ;83D15E|8F681F7F|7F1F68;
+    %SetFlag(event3, $0400)
     RTS                                                        ;83D162|60      |      ;
  
  
@@ -9444,16 +9336,12 @@ fAreaEvents_Farm:
     AND.W #$001A                                               ;83D198|291A00  |      ;
     BNE .label24                                               ;83D19B|D031    |83D1CE;
     REP #$30                                                   ;83D19D|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D19F|AF641F7F|7F1F64;
-    AND.W #$00C0                                               ;83D1A3|29C000  |      ;
+    %CheckFlag(event1, $00C0)
     BEQ .label24                                               ;83D1A6|F026    |83D1CE;
     REP #$30                                                   ;83D1A8|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D1AA|AF681F7F|7F1F68;
-    AND.W #$4000                                               ;83D1AE|290040  |      ;
+    %CheckFlag(event3, $4000)
     BNE .label24                                               ;83D1B1|D01B    |83D1CE;
-    LDA.L strcEventFlags.flags3                                ;83D1B3|AF681F7F|7F1F68;
-    ORA.W #$4000                                               ;83D1B7|090040  |      ;
-    STA.L strcEventFlags.flags3                                ;83D1BA|8F681F7F|7F1F68;
+    %SetFlag(event3, $4000)
     REP #$30                                                   ;83D1BE|C230    |      ;
     %AIExecute($0000, $0016, $0000)
     RTS                                                        ;83D1CD|60      |      ;
@@ -9487,20 +9375,15 @@ fAreaEvents_Farm:
     AND.W #$001A                                               ;83D1FD|291A00  |      ;
     BNE .label26                                               ;83D200|D03C    |83D23E;
     REP #$30                                                   ;83D202|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D204|AF641F7F|7F1F64;
-    AND.W #$00C0                                               ;83D208|29C000  |      ;
+    %CheckFlag(event1, $00C0)
     BEQ .label26                                               ;83D20B|F031    |83D23E;
     REP #$30                                                   ;83D20D|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D20F|AF681F7F|7F1F68;
-    AND.W #$2000                                               ;83D213|290020  |      ;
+    %CheckFlag(event3, $2000)
     BEQ .label26                                               ;83D216|F026    |83D23E;
     REP #$30                                                   ;83D218|C230    |      ;
-    LDA.L strcEventFlags.flags4                                ;83D21A|AF6A1F7F|7F1F6A;
-    AND.W #$0100                                               ;83D21E|290001  |      ;
+    %CheckFlag(event4, $0100)
     BNE .label26                                               ;83D221|D01B    |83D23E;
-    LDA.L strcEventFlags.flags4                                ;83D223|AF6A1F7F|7F1F6A;
-    ORA.W #$0080                                               ;83D227|098000  |      ;
-    STA.L strcEventFlags.flags4                                ;83D22A|8F6A1F7F|7F1F6A;
+    %SetFlag(event4, $0080)
     REP #$30                                                   ;83D22E|C230    |      ;
     %AIExecute($0000, $0018, $0000)
     RTS                                                        ;83D23D|60      |      ;
@@ -9508,17 +9391,14 @@ fAreaEvents_Farm:
  
 .label26:
     REP #$30                                                   ;83D23E|C230    |      ;
-    LDA.L strcEventFlags.flags4                                ;83D240|AF6A1F7F|7F1F6A;
-    AND.W #$0800                                               ;83D244|290008  |      ;
+    %CheckFlag(event4, $0800)
     BNE .label28                                               ;83D247|D055    |83D29E;
-    LDA.L strcEventFlags.flags4                                ;83D249|AF6A1F7F|7F1F6A;
-    AND.W #$0400                                               ;83D24D|290004  |      ;
+    %CheckFlag(event4, $0400)
     BNE .label27                                               ;83D250|D03C    |83D28E;
     LDA.W nMapEngine_flags                                     ;83D252|AD9601  |000196;
     AND.W #$001E                                               ;83D255|291E00  |      ;
     BNE .label28                                               ;83D258|D044    |83D29E;
-    LDA.L strcEventFlags.flags6                                ;83D25A|AF6E1F7F|7F1F6E;
-    AND.W #$0400                                               ;83D25E|290004  |      ;
+    %CheckFlag(event6, $0400)
     BEQ .label28                                               ;83D261|F03B    |83D29E;
     SEP #$20                                                   ;83D263|E220    |      ;
     LDA.L nOwnedChickens                                       ;83D265|AF0B1F7F|7F1F0B;
@@ -9532,9 +9412,7 @@ fAreaEvents_Farm:
     LDA.L nInGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E;
     BNE .label28                                               ;83D27F|D01D    |83D29E;
     REP #$20                                                   ;83D281|C220    |      ;
-    LDA.L strcEventFlags.flags4                                ;83D283|AF6A1F7F|7F1F6A;
-    ORA.W #$0400                                               ;83D287|090004  |      ;
-    STA.L strcEventFlags.flags4                                ;83D28A|8F6A1F7F|7F1F6A;
+    %SetFlag(event4, $0400)
  
 .label27:
     REP #$30                                                   ;83D28E|C230    |      ;
@@ -9572,11 +9450,9 @@ fAreaEvents_Farm:
  
 fAreaEvents_Town:
     REP #$30                                                   ;83D2E0|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;83D2E2|AF601F7F|7F1F60;
-    AND.W #$0400                                               ;83D2E6|290004  |      ;
+    %CheckFlag(daily4, $0400)
     BEQ +                                                      ;83D2E9|F019    |83D304;
-    LDA.L strcDailyFlags.flags4                                ;83D2EB|AF601F7F|7F1F60;
-    AND.W #$FBFF                                               ;83D2EF|29FFFB  |      ;
+    %CheckFlag(daily4, $FBFF)
     STA.B $60                                                  ;83D2F2|8560    |000060;
     REP #$30                                                   ;83D2F4|C230    |      ;
     %AIExecute($0000, $0014, $0003)
@@ -9711,14 +9587,12 @@ fAreaEvents_Town:
  
  
   + REP #$30                                                   ;83D43A|C230    |      ;
-    LDA.L strcEventFlags.flags4                                ;83D43C|AF6A1F7F|7F1F6A;
-    AND.W #$4000                                               ;83D440|290040  |      ;
+    %CheckFlag(event4, $4000)
     BNE +                                                      ;83D443|D00D    |83D452;
     %AIExecute($0015, $0000, $007E)
  
   + REP #$30                                                   ;83D452|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D454|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D458|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83D45B|D010    |83D46D;
     REP #$30                                                   ;83D45D|C230    |      ;
     %AIExecute($0000, $000B, $0000)
@@ -9734,8 +9608,7 @@ fAreaEvents_Town:
     CMP.B #$03                                                 ;83D47C|C903    |      ;
     BEQ +                                                      ;83D47E|F036    |83D4B6;
     REP #$30                                                   ;83D480|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D482|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83D486|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE +                                                      ;83D489|D02B    |83D4B6;
     LDA.W nMapEngine_flags                                     ;83D48B|AD9601  |000196;
     AND.W #$0200                                               ;83D48E|290002  |      ;
@@ -9768,15 +9641,13 @@ fAreaEvents_Town:
  
 fAreaEvents_MajorHouse:
     REP #$30                                                   ;83D4D7|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D4D9|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE +                                                      ;83D4E0|D002    |83D4E4;
     BRA fAreaEvents_MajorHouseHandler                          ;83D4E2|801B    |83D4FF;
  
  
   + REP #$30                                                   ;83D4E4|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D4E6|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D4EA|290200  |      ;
+    %CheckFlag(event6, $0002)
     BEQ fAreaEvents_MajorHouseHandler                          ;83D4ED|F010    |83D4FF;
     REP #$30                                                   ;83D4EF|C230    |      ;
     %AIExecute($0000, $0022, $0003)
@@ -9801,8 +9672,7 @@ fAreaEvents_MajorHouseHandler:
  
  
   + REP #$30                                                   ;83D52B|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D52D|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D531|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83D534|D010    |83D546;
     REP #$30                                                   ;83D536|C230    |      ;
     %AIExecute($0000, $000B, $0001)
@@ -9822,8 +9692,7 @@ fAreaEvents_MajorHouseHandler:
     CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D560|F065    |83D5C7;
     REP #$30                                                   ;83D562|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D564|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83D568|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D56B|D05A    |83D5C7;
     LDA.W nMapEngine_flags                                     ;83D56D|AD9601  |000196;
     AND.W #$0200                                               ;83D570|290002  |      ;
@@ -9874,15 +9743,13 @@ fAreaEvents_MajorHouseHandler:
  
 fAreaEvents_MariaBedroom:
     REP #$30                                                   ;83D5E7|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D5E9|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE +                                                      ;83D5F0|D003    |83D5F5;
     JMP.W fAreaEvents_MajorHouseHandler                        ;83D5F2|4CFFD4  |83D4FF;
  
  
   + REP #$30                                                   ;83D5F5|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D5F7|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D5FB|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE +                                                      ;83D5FE|D003    |83D603;
     JMP.W fAreaEvents_MajorHouseHandler                        ;83D600|4CFFD4  |83D4FF;
  
@@ -9918,8 +9785,7 @@ fAreaEvents_Church:
     CMP.B #$18                                                 ;83D64F|C918    |      ;
     BNE +                                                      ;83D651|D01B    |83D66E;
     REP #$20                                                   ;83D653|C220    |      ;
-    LDA.L strcUnknownFlags.flags1                              ;83D655|AF741F7F|7F1F74;
-    AND.W #$0002                                               ;83D659|290200  |      ;
+    %CheckFlag(unknown1, $0002)
     BEQ +                                                      ;83D65C|F010    |83D66E;
     REP #$30                                                   ;83D65E|C230    |      ;
     %AIExecute($0000, $000F, $0002)
@@ -9927,8 +9793,7 @@ fAreaEvents_Church:
  
  
   + REP #$30                                                   ;83D66E|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D670|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D674|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83D677|D010    |83D689;
     REP #$30                                                   ;83D679|C230    |      ;
     %AIExecute($0000, $000B, $000C)
@@ -9954,8 +9819,7 @@ fAreaEvents_Church:
  
  
   + REP #$30                                                   ;83D6AB|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D6AD|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83D6B1|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D6B4|D078    |83D72E;
     LDA.W nMapEngine_flags                                     ;83D6B6|AD9601  |000196;
     AND.W #$0200                                               ;83D6B9|290002  |      ;
@@ -9963,8 +9827,7 @@ fAreaEvents_Church:
     JMP.W .label5                                              ;83D6BE|4C3ED7  |83D73E;
  
  
-  + LDA.L strcEventFlags.flags3                                ;83D6C1|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D6C5|290100  |      ;
+  + %CheckFlag(event3, $0001)
     BEQ .justReturn                                            ;83D6C8|F023    |83D6ED;
     LDA.W nMapEngine_flags                                     ;83D6CA|AD9601  |000196;
     AND.W #$0002                                               ;83D6CD|290200  |      ;
@@ -10021,15 +9884,13 @@ fAreaEvents_Church:
  
 fAreaEvents_Florist:
     REP #$30                                                   ;83D74E|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D750|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BNE +                                                      ;83D757|D002    |83D75B;
     BRA fAreaEvents_FloristHandler                             ;83D759|801B    |83D776;
  
  
   + REP #$30                                                   ;83D75B|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D75D|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D761|290200  |      ;
+    %CheckFlag(event6, $0002)
     BEQ fAreaEvents_FloristHandler                             ;83D764|F010    |83D776;
     REP #$30                                                   ;83D766|C230    |      ;
     %AIExecute($0000, $0022, $0007)
@@ -10038,8 +9899,7 @@ fAreaEvents_Florist:
  
 fAreaEvents_FloristHandler:
     REP #$30                                                   ;83D776|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D778|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D77C|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83D77F|D010    |83D791;
     REP #$30                                                   ;83D781|C230    |      ;
     %AIExecute($0000, $000B, $0003)
@@ -10059,8 +9919,7 @@ fAreaEvents_FloristHandler:
     CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D7AB|F04B    |83D7F8;
     REP #$30                                                   ;83D7AD|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D7AF|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83D7B3|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D7B6|D040    |83D7F8;
     LDA.W nMapEngine_flags                                     ;83D7B8|AD9601  |000196;
     AND.W #$0200                                               ;83D7BB|290002  |      ;
@@ -10101,15 +9960,13 @@ fAreaEvents_FloristHandler:
  
 fAreaEvents_NinaBedroom:
     REP #$30                                                   ;83D818|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D81A|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BNE +                                                      ;83D821|D003    |83D826;
     JMP.W fAreaEvents_FloristHandler                           ;83D823|4C76D7  |83D776;
  
  
   + REP #$30                                                   ;83D826|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D828|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D82C|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE +                                                      ;83D82F|D003    |83D834;
     JMP.W fAreaEvents_FloristHandler                           ;83D831|4C76D7  |83D776;
  
@@ -10121,15 +9978,13 @@ fAreaEvents_NinaBedroom:
  
 fAreaEvents_Toolshop:
     REP #$30                                                   ;83D844|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D846|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BNE +                                                      ;83D84D|D002    |83D851;
     BRA fAreaEvents_ToolshopHandler                            ;83D84F|801B    |83D86C;
  
  
   + REP #$30                                                   ;83D851|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D853|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D857|290200  |      ;
+    %CheckFlag(event6, $0002)
     BEQ fAreaEvents_ToolshopHandler                            ;83D85A|F010    |83D86C;
     REP #$30                                                   ;83D85C|C230    |      ;
     %AIExecute($0000, $0022, $0005)
@@ -10138,8 +9993,7 @@ fAreaEvents_Toolshop:
  
 fAreaEvents_ToolshopHandler:
     REP #$30                                                   ;83D86C|C230    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83D86E|AF5E1F7F|7F1F5E;
-    AND.W #$0010                                               ;83D872|291000  |      ;
+    %CheckFlag(daily3, $0010)
     BEQ +                                                      ;83D875|F010    |83D887;
     REP #$30                                                   ;83D877|C230    |      ;
     %AIExecute($0000, $001A, $0001)
@@ -10147,8 +10001,7 @@ fAreaEvents_ToolshopHandler:
  
  
   + REP #$30                                                   ;83D887|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D889|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D88D|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE .label1                                                ;83D890|D010    |83D8A2;
     REP #$30                                                   ;83D892|C230    |      ;
     %AIExecute($0000, $000B, $0002)
@@ -10169,8 +10022,7 @@ fAreaEvents_ToolshopHandler:
     CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D8BC|F04B    |83D909;
     REP #$30                                                   ;83D8BE|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D8C0|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83D8C4|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D8C7|D040    |83D909;
     LDA.W nMapEngine_flags                                     ;83D8C9|AD9601  |000196;
     AND.W #$0200                                               ;83D8CC|290002  |      ;
@@ -10211,15 +10063,13 @@ fAreaEvents_ToolshopHandler:
  
 fAreaEvents_AnnBedroom:
     REP #$30                                                   ;83D929|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D92B|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BNE +                                                      ;83D932|D003    |83D937;
     JMP.W fAreaEvents_ToolshopHandler                          ;83D934|4C6CD8  |83D86C;
  
  
   + REP #$30                                                   ;83D937|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D939|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D93D|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE +                                                      ;83D940|D003    |83D945;
     JMP.W fAreaEvents_ToolshopHandler                          ;83D942|4C6CD8  |83D86C;
  
@@ -10231,15 +10081,13 @@ fAreaEvents_AnnBedroom:
  
 fAreaEvents_Restaurant:
     REP #$30                                                   ;83D955|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83D957|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BNE +                                                      ;83D95E|D002    |83D962;
     BRA fAreaEvents_RestaurantHandler                          ;83D960|801B    |83D97D;
  
  
   + REP #$30                                                   ;83D962|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83D964|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83D968|290200  |      ;
+    %CheckFlag(event6, $0002)
     BEQ fAreaEvents_RestaurantHandler                          ;83D96B|F010    |83D97D;
     REP #$30                                                   ;83D96D|C230    |      ;
     %AIExecute($0000, $0022, $0009)
@@ -10248,8 +10096,7 @@ fAreaEvents_Restaurant:
  
 fAreaEvents_RestaurantHandler:
     REP #$30                                                   ;83D97D|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83D97F|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83D983|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83D986|D010    |83D998;
     REP #$30                                                   ;83D988|C230    |      ;
     %AIExecute($0000, $000B, $0004)
@@ -10269,8 +10116,7 @@ fAreaEvents_RestaurantHandler:
     CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83D9B2|F04B    |83D9FF;
     REP #$30                                                   ;83D9B4|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83D9B6|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83D9BA|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D9BD|D040    |83D9FF;
     LDA.W nMapEngine_flags                                     ;83D9BF|AD9601  |000196;
     AND.W #$0200                                               ;83D9C2|290002  |      ;
@@ -10311,15 +10157,13 @@ fAreaEvents_RestaurantHandler:
  
 fAreaEvents_EllenBedroom:
     REP #$30                                                   ;83DA1F|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83DA21|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BNE +                                                      ;83DA28|D003    |83DA2D;
     JMP.W fAreaEvents_RestaurantHandler                        ;83DA2A|4C7DD9  |83D97D;
  
  
   + REP #$30                                                   ;83DA2D|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83DA2F|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83DA33|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE +                                                      ;83DA36|D003    |83DA3B;
     JMP.W fAreaEvents_RestaurantHandler                        ;83DA38|4C7DD9  |83D97D;
  
@@ -10331,8 +10175,7 @@ fAreaEvents_EllenBedroom:
  
 fAreaEvents_FortuneTeller:
     REP #$30                                                   ;83DA4B|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DA4D|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83DA51|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83DA54|D010    |83DA66;
     REP #$30                                                   ;83DA56|C230    |      ;
     %AIExecute($0000, $000B, $0005)
@@ -10352,8 +10195,7 @@ fAreaEvents_FortuneTeller:
     CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83DA80|F04B    |83DACD;
     REP #$30                                                   ;83DA82|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83DA84|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83DA88|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83DA8B|D040    |83DACD;
     LDA.W nMapEngine_flags                                     ;83DA8D|AD9601  |000196;
     AND.W #$0200                                               ;83DA90|290002  |      ;
@@ -10394,8 +10236,7 @@ fAreaEvents_FortuneTeller:
  
 fAreaEvents_AnimalShop:
     REP #$30                                                   ;83DAED|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DAEF|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83DAF3|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE +                                                      ;83DAF6|D010    |83DB08;
     REP #$30                                                   ;83DAF8|C230    |      ;
     %AIExecute($0000, $000B, $0006)
@@ -10415,8 +10256,7 @@ fAreaEvents_AnimalShop:
     CMP.B #!WEATHER_HURRICANE                                                 
     BEQ .hurricane                                             ;83DB22|F04B    |83DB6F;
     REP #$30                                                   ;83DB24|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83DB26|AF641F7F|7F1F64;
-    AND.W #$0020                                               ;83DB2A|292000  |      ;
+    %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83DB2D|D040    |83DB6F;
     LDA.W nMapEngine_flags                                     ;83DB2F|AD9601  |000196;
     AND.W #$0200                                               ;83DB32|290002  |      ;
@@ -10457,15 +10297,13 @@ fAreaEvents_AnimalShop:
  
 fAreaEvents_Bar:
     REP #$30                                                   ;83DB8F|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83DB91|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BNE +                                                      ;83DB98|D002    |83DB9C;
     BRA fAreaEvents_BarHandler                                 ;83DB9A|801B    |83DBB7;
  
  
   + REP #$30                                                   ;83DB9C|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83DB9E|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83DBA2|290200  |      ;
+    %CheckFlag(event6, $0002)
     BEQ fAreaEvents_BarHandler                                 ;83DBA5|F010    |83DBB7;
     REP #$30                                                   ;83DBA7|C230    |      ;
     %AIExecute($0000, $0022, $000B)
@@ -10482,8 +10320,7 @@ fAreaEvents_BarHandler:
     CMP.B #$18                                                 ;83DBC7|C918    |      ;
     BNE +                                                      ;83DBC9|D01B    |83DBE6;
     REP #$20                                                   ;83DBCB|C220    |      ;
-    LDA.L strcUnknownFlags.flags1                              ;83DBCD|AF741F7F|7F1F74;
-    AND.W #$0004                                               ;83DBD1|290400  |      ;
+    %CheckFlag(unknown1, $0004)
     BEQ +                                                      ;83DBD4|F010    |83DBE6;
     REP #$30                                                   ;83DBD6|C230    |      ;
     %AIExecute($0000, $000F, $0003)
@@ -10491,15 +10328,12 @@ fAreaEvents_BarHandler:
  
  
   + REP #$30                                                   ;83DBE6|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DBE8|AF681F7F|7F1F68;
-    AND.W #$0002                                               ;83DBEC|290200  |      ;
+    %CheckFlag(event3, $0002)
     BNE +                                                      ;83DBEF|D01D    |83DC0E;
     REP #$30                                                   ;83DBF1|C230    |      ;
     %AIExecute($0000, $000B, $0007)
     REP #$30                                                   ;83DC00|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DC02|AF681F7F|7F1F68;
-    ORA.W #$0002                                               ;83DC06|090200  |      ;
-    STA.L strcEventFlags.flags3                                ;83DC09|8F681F7F|7F1F68;
+    %SetFlag(event3, $0002)
     RTS                                                        ;83DC0D|60      |      ;
  
  
@@ -10510,15 +10344,13 @@ fAreaEvents_BarHandler:
  
 fAreaEvents_EveBedroom:
     REP #$30                                                   ;83DC1E|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83DC20|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BNE +                                                      ;83DC27|D003    |83DC2C;
     JMP.W fAreaEvents_BarHandler                               ;83DC29|4CB7DB  |83DBB7;
  
  
   + REP #$30                                                   ;83DC2C|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83DC2E|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83DC32|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE +                                                      ;83DC35|D003    |83DC3A;
     JMP.W fAreaEvents_BarHandler                               ;83DC37|4CB7DB  |83DBB7;
  
@@ -10530,21 +10362,17 @@ fAreaEvents_EveBedroom:
  
 fAreaEvents_Woods:
     REP #$30                                                   ;83DC4A|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DC4C|AF681F7F|7F1F68;
-    AND.W #$0004                                               ;83DC50|290400  |      ;
+    %CheckFlag(event3, $0004)
     BNE +                                                      ;83DC53|D01D    |83DC72;
     REP #$30                                                   ;83DC55|C230    |      ;
     %AIExecute($0000, $000B, $0009)
     REP #$20                                                   ;83DC64|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DC66|AF681F7F|7F1F68;
-    ORA.W #$0004                                               ;83DC6A|090400  |      ;
-    STA.L strcEventFlags.flags3                                ;83DC6D|8F681F7F|7F1F68;
+    %SetFlag(event3, $0004)
     RTS                                                        ;83DC71|60      |      ;
  
  
   + REP #$30                                                   ;83DC72|C230    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83DC74|AF5E1F7F|7F1F5E;
-    AND.W #$0020                                               ;83DC78|292000  |      ;
+    %CheckFlag(daily3, $0020)
     BEQ +                                                      ;83DC7B|F010    |83DC8D;
     REP #$30                                                   ;83DC7D|C230    |      ;
     %AIExecute($0000, $001D, $0003)
@@ -10552,8 +10380,7 @@ fAreaEvents_Woods:
  
  
   + REP #$30                                                   ;83DC8D|C230    |      ;
-    LDA.L strcEventFlags.flags5                                ;83DC8F|AF6C1F7F|7F1F6C;
-    AND.W #$0010                                               ;83DC93|291000  |      ;
+    %CheckFlag(event5, $0010)
     BEQ +                                                      ;83DC96|F010    |83DCA8;
     REP #$30                                                   ;83DC98|C230    |      ;
     %AIExecute($0000, $001D, $0001)
@@ -10561,11 +10388,9 @@ fAreaEvents_Woods:
  
  
   + REP #$30                                                   ;83DCA8|C230    |      ;
-    LDA.L strcEventFlags.flags5                                ;83DCAA|AF6C1F7F|7F1F6C;
-    AND.W #$0004                                               ;83DCAE|290400  |      ;
+    %CheckFlag(event5, $0004)
     BEQ .label1                                                ;83DCB1|F02C    |83DCDF;
-    LDA.L strcDailyFlags.flags3                                ;83DCB3|AF5E1F7F|7F1F5E;
-    AND.W #$0008                                               ;83DCB7|290800  |      ;
+    %CheckFlag(daily3, $0008)
     BNE +                                                      ;83DCBA|D011    |83DCCD;
     REP #$30                                                   ;83DCBC|C230    |      ;
     %AIExecute($0009, $001C, $0001)
@@ -10605,8 +10430,7 @@ fAreaEvents_Woods:
     LDA.W nMapEngine_flags                                     ;83DD11|AD9601  |000196;
     AND.W #$001A                                               ;83DD14|291A00  |      ;
     BNE .label2                                                ;83DD17|D026    |83DD3F;
-    LDA.L strcEventFlags.flags4                                ;83DD19|AF6A1F7F|7F1F6A;
-    AND.W #$0200                                               ;83DD1D|290002  |      ;
+    %CheckFlag(event4, $0200)
     BNE .label2                                                ;83DD20|D01D    |83DD3F;
     SEP #$20                                                   ;83DD22|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83DD24|AF1A1F7F|7F1F1A;
@@ -10655,11 +10479,9 @@ fAreaEvents_Woods:
  
 fAreaEvents_WorksmanHouse:
     REP #$30                                                   ;83DD95|C230    |      ;
-    LDA.L strcEventFlags.flags4                                ;83DD97|AF6A1F7F|7F1F6A;
-    AND.W #$2000                                               ;83DD9B|290020  |      ;
+    %CheckFlag(event4, $2000)
     BNE +                                                      ;83DD9E|D019    |83DDB9;
-    LDA.L strcEventFlags.flags4                                ;83DDA0|AF6A1F7F|7F1F6A;
-    AND.W #$1000                                               ;83DDA4|290010  |      ;
+    %CheckFlag(event4, $1000)
     BEQ +                                                      ;83DDA7|F010    |83DDB9;
     REP #$30                                                   ;83DDA9|C230    |      ;
     %AIExecute($0000, $0019, $0001)
@@ -10667,8 +10489,7 @@ fAreaEvents_WorksmanHouse:
  
  
   + REP #$30                                                   ;83DDB9|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DDBB|AF681F7F|7F1F68;
-    AND.W #$0008                                               ;83DDBF|290800  |      ;
+    %CheckFlag(event3, $0008)
     BNE .label2                                                ;83DDC2|D046    |83DE0A;
     SEP #$20                                                   ;83DDC4|E220    |      ;
     LDA.L nCurrentYearID                                       ;83DDC6|AF181F7F|7F1F18;
@@ -10685,17 +10506,13 @@ fAreaEvents_WorksmanHouse:
   + REP #$30                                                   ;83DDE0|C230    |      ;
     %AIExecute($0000, $000B, $000A)
     REP #$20                                                   ;83DDEF|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DDF1|AF681F7F|7F1F68;
-    ORA.W #$0008                                               ;83DDF5|090800  |      ;
-    STA.L strcEventFlags.flags3                                ;83DDF8|8F681F7F|7F1F68;
+    %SetFlag(event3, $0008)
     RTS                                                        ;83DDFC|60      |      ;
  
  
 .label1:
     REP #$20                                                   ;83DDFD|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DDFF|AF681F7F|7F1F68;
-    ORA.W #$0008                                               ;83DE03|090800  |      ;
-    STA.L strcEventFlags.flags3                                ;83DE06|8F681F7F|7F1F68;
+    %SetFlag(event3, $0008)
  
 .label2:
     REP #$30                                                   ;83DE0A|C230    |      ;
@@ -10733,8 +10550,7 @@ fAreaEvents_WorksmanHouse:
  
 fAreaEvents_ImpsUnderground:
     REP #$30                                                   ;83DE64|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83DE66|AF681F7F|7F1F68;
-    AND.W #$2000                                               ;83DE6A|290020  |      ;
+    %CheckFlag(event3, $2000)
     BNE +                                                      ;83DE6D|D010    |83DE7F;
     REP #$30                                                   ;83DE6F|C230    |      ;
     %AIExecute($0000, $0015, $0000)
@@ -10742,8 +10558,7 @@ fAreaEvents_ImpsUnderground:
  
  
   + REP #$30                                                   ;83DE7F|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83DE81|AF641F7F|7F1F64;
-    AND.W #$0002                                               ;83DE85|290200  |      ;
+    %CheckFlag(event1, $0002)
     BEQ .justReturn                                            ;83DE88|F010    |83DE9A;
     REP #$30                                                   ;83DE8A|C230    |      ;
     %AIExecute($0000, $0001, $000A)
@@ -10756,8 +10571,7 @@ fAreaEvents_ImpsUnderground:
  
 fAreaEvents_CowBarn:
     REP #$20                                                   ;83DE9B|C220    |      ;
-    LDA.L strcEventFlags.flags1                                ;83DE9D|AF641F7F|7F1F64;
-    AND.W #$0008                                               ;83DEA1|290800  |      ;
+    %CheckFlag(event1, $0008)
     BEQ .justReturn                                            ;83DEA4|F02C    |83DED2;
     REP #$20                                                   ;83DEA6|C220    |      ;
     %AIExecute($0015, $0000, $0025)
@@ -10789,8 +10603,7 @@ fAreaEvents_House:
  
  
   + REP #$30                                                   ;83DEF2|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83DEF4|AF641F7F|7F1F64;
-    AND.W #$0080                                               ;83DEF8|298000  |      ;
+    %CheckFlag(event1, $0080)
     BEQ +                                                      ;83DEFB|F009    |83DF06;
     SEP #$20                                                   ;83DEFD|E220    |      ;
     LDA.B #!AREA_HOUSE3                                                 
@@ -10799,8 +10612,7 @@ fAreaEvents_House:
  
  
   + REP #$30                                                   ;83DF06|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;83DF08|AF641F7F|7F1F64;
-    AND.W #$0040                                               ;83DF0C|294000  |      ;
+    %CheckFlag(event1, $0040)
     BEQ .jump                                                  ;83DF0F|F009    |83DF1A;
     SEP #$20                                                   ;83DF11|E220    |      ;
     LDA.B #!AREA_HOUSE2                                                 
@@ -10810,11 +10622,9 @@ fAreaEvents_House:
  
 .jump:
     REP #$30                                                   ;83DF1A|C230    |      ;
-    LDA.L strcEventFlags.flags5                                ;83DF1C|AF6C1F7F|7F1F6C;
-    AND.W #$2000                                               ;83DF20|290020  |      ;
+    %CheckFlag(event5, $2000)
     BEQ +                                                      ;83DF23|F022    |83DF47;
-    LDA.L strcEventFlags.flags5                                ;83DF25|AF6C1F7F|7F1F6C;
-    AND.W #$4000                                               ;83DF29|290040  |      ;
+    %CheckFlag(event5, $4000)
     BNE +                                                      ;83DF2C|D019    |83DF47;
     LDA.W #$009C                                               ;83DF2E|A99C00  |      ;
     STA.W nTileInFrontOfPlayerX                                ;83DF31|8D8509  |000985;
@@ -10826,16 +10636,13 @@ fAreaEvents_House:
     JSL.L fAI_Unknown8480F8                                    ;83DF43|22F88084|8480F8;
  
   + REP #$30                                                   ;83DF47|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83DF49|AF6E1F7F|7F1F6E;
-    AND.W #$0080                                               ;83DF4D|298000  |      ;
+    %CheckFlag(event6, $0080)
     BNE .label1                                                ;83DF50|D003    |83DF55;
     JMP.W .label2                                              ;83DF52|4CF8DF  |83DFF8;
  
  
 .label1:
-    LDA.L strcEventFlags.flags6                                ;83DF55|AF6E1F7F|7F1F6E;
-    AND.W #$FF7F                                               ;83DF59|297FFF  |      ;
-    STA.L strcEventFlags.flags6                                ;83DF5C|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FF7F)
     SEP #$20                                                   ;83DF60|E220    |      ;
     LDA.B #$19                                                 ;83DF62|A919    |      ;
     JSL.L fAudioUnknown_8382C6                                 ;83DF64|22C68283|8382C6;
@@ -10896,23 +10703,17 @@ fAreaEvents_House:
  
 .label2:
     REP #$30                                                   ;83DFF8|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83DFFA|AF6E1F7F|7F1F6E;
-    AND.W #$0100                                               ;83DFFE|290001  |      ;
+    %CheckFlag(event6, $0100)
     BEQ +                                                      ;83E001|F013    |83E016;
-    LDA.L strcEventFlags.flags6                                ;83E003|AF6E1F7F|7F1F6E;
-    AND.W #$FEFF                                               ;83E007|29FFFE  |      ;
-    STA.L strcEventFlags.flags6                                ;83E00A|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FEFF)
     SEP #$20                                                   ;83E00E|E220    |      ;
     LDA.B #$15                                                 ;83E010|A915    |      ;
     JSL.L fAudioUnknown_8382C6                                 ;83E012|22C68283|8382C6;
  
   + REP #$30                                                   ;83E016|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E018|AF6E1F7F|7F1F6E;
-    AND.W #$0200                                               ;83E01C|290002  |      ;
+    %CheckFlag(event6, $0200)
     BEQ +                                                      ;83E01F|F02B    |83E04C;
-    LDA.L strcEventFlags.flags6                                ;83E021|AF6E1F7F|7F1F6E;
-    AND.W #$FDFF                                               ;83E025|29FFFD  |      ;
-    STA.L strcEventFlags.flags6                                ;83E028|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FDFF)
     SEP #$20                                                   ;83E02C|E220    |      ;
     REP #$10                                                   ;83E02E|C210    |      ;
     LDA.B #$22                                                 ;83E030|A922    |      ;
@@ -10927,8 +10728,7 @@ fAreaEvents_House:
     JSL.L fAudioUnknown_8382FE                                 ;83E048|22FE8283|8382FE;
  
   + REP #$30                                                   ;83E04C|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E04E|AF6E1F7F|7F1F6E;
-    AND.W #$0020                                               ;83E052|292000  |      ;
+    %CheckFlag(event6, $0020)
     BEQ +                                                      ;83E055|F01D    |83E074;
     SEP #$20                                                   ;83E057|E220    |      ;
     REP #$10                                                   ;83E059|C210    |      ;
@@ -10937,19 +10737,14 @@ fAreaEvents_House:
     LDY.W #$003C                                               ;83E060|A03C00  |      ;
     JSL.L fAudioUnknown_8382FE                                 ;83E063|22FE8283|8382FE;
     REP #$30                                                   ;83E067|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E069|AF6E1F7F|7F1F6E;
-    AND.W #$FFDF                                               ;83E06D|29DFFF  |      ;
-    STA.L strcEventFlags.flags6                                ;83E070|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FFDF)
  
   + REP #$30                                                   ;83E074|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E076|AF6E1F7F|7F1F6E;
-    AND.W #$0010                                               ;83E07A|291000  |      ;
+    %CheckFlag(event6, $0010)
     BEQ .label6                                                ;83E07D|F05C    |83E0DB;
-    LDA.L strcDailyFlags.flags3                                ;83E07F|AF5E1F7F|7F1F5E;
-    AND.W #$4000                                               ;83E083|290040  |      ;
+    %CheckFlag(daily3, $4000)
     BNE .label5                                                ;83E086|D043    |83E0CB;
-    LDA.L strcDailyFlags.flags3                                ;83E088|AF5E1F7F|7F1F5E;
-    AND.W #$2000                                               ;83E08C|290020  |      ;
+    %CheckFlag(daily3, $2000)
     BNE +                                                      ;83E08F|D010    |83E0A1;
     REP #$30                                                   ;83E091|C230    |      ;
     %AIExecute($0000, $001F, $0000)
@@ -10982,13 +10777,10 @@ fAreaEvents_House:
  
 .label6:
     REP #$30                                                   ;83E0DB|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E0DD|AF6E1F7F|7F1F6E;
-    AND.W #$0040                                               ;83E0E1|294000  |      ;
+    %CheckFlag(event6, $0040)
     BEQ .label7                                                ;83E0E4|F05E    |83E144;
     REP #$30                                                   ;83E0E6|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E0E8|AF6E1F7F|7F1F6E;
-    AND.W #$FFBF                                               ;83E0EC|29BFFF  |      ;
-    STA.L strcEventFlags.flags6                                ;83E0EF|8F6E1F7F|7F1F6E;
+    %UnsetFlag(event6, ~$FFBF)
     SEP #$20                                                   ;83E0F3|E220    |      ;
     LDA.B #$00                                                 ;83E0F5|A900    |      ;
     XBA                                                        ;83E0F7|EB      |      ;
@@ -11024,20 +10816,15 @@ fAreaEvents_House:
  
 .label7:
     REP #$30                                                   ;83E144|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83E146|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE .label8                                                ;83E14D|D027    |83E176;
-    LDA.L strcEventFlags.flags2                                ;83E14F|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BNE .label9                                                ;83E156|D02E    |83E186;
-    LDA.L strcEventFlags.flags2                                ;83E158|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BNE .label10                                               ;83E15F|D032    |83E193;
-    LDA.L strcEventFlags.flags2                                ;83E161|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BNE .label11                                               ;83E168|D036    |83E1A0;
-    LDA.L strcEventFlags.flags2                                ;83E16A|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BNE .label12                                               ;83E171|D03A    |83E1AD;
     JMP.W .label23                                             ;83E173|4CC6E2  |83E2C6;
  
@@ -11096,57 +10883,43 @@ fAreaEvents_House:
     LDA.L nInGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E;
     BNE .label14                                               ;83E1D0|D03E    |83E210;
     REP #$20                                                   ;83E1D2|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E1D4|AF6E1F7F|7F1F6E;
-    AND.W #$000C                                               ;83E1D8|290C00  |      ;
+    %CheckFlag(event6, $000C)
     BNE .label14                                               ;83E1DB|D033    |83E210;
-    LDA.L strcEventFlags.flags6                                ;83E1DD|AF6E1F7F|7F1F6E;
-    AND.W #$0001                                               ;83E1E1|290100  |      ;
+    %CheckFlag(event6, $0001)
     BNE .label14                                               ;83E1E4|D02A    |83E210;
     REP #$30                                                   ;83E1E6|C230    |      ;
     %AIExecute($0000, $0022, $0000)
     REP #$30                                                   ;83E1F5|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E1F7|AF6E1F7F|7F1F6E;
-    ORA.W #$0003                                               ;83E1FB|090300  |      ;
-    STA.L strcEventFlags.flags6                                ;83E1FE|8F6E1F7F|7F1F6E;
-    LDA.L strcDailyFlags.flags3                                ;83E202|AF5E1F7F|7F1F5E;
-    ORA.W #$1000                                               ;83E206|090010  |      ;
-    STA.L strcDailyFlags.flags3                                ;83E209|8F5E1F7F|7F1F5E;
+    %SetFlag(event6, $0003)
+    %SetFlag(daily3, $1000)
     JMP.W .label23                                             ;83E20D|4CC6E2  |83E2C6;
  
  
 .label14:
     REP #$30                                                   ;83E210|C230    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83E212|AF5E1F7F|7F1F5E;
-    AND.W #$EFFF                                               ;83E216|29FFEF  |      ;
-    STA.L strcDailyFlags.flags3                                ;83E219|8F5E1F7F|7F1F5E;
-    LDA.L strcEventFlags.flags6                                ;83E21D|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83E221|290200  |      ;
+    %UnsetFlag(daily3, ~$EFFF)
+    %CheckFlag(event6, $0002)
     BNE .label17                                               ;83E224|D03C    |83E262;
-    LDA.L strcEventFlags.flags2                                ;83E226|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE .label18                                               ;83E22D|D042    |83E271;
-    LDA.L strcEventFlags.flags2                                ;83E22F|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BEQ +                                                      ;83E236|F003    |83E23B;
     JMP.W .label19                                             ;83E238|4C82E2  |83E282;
  
  
-  + LDA.L strcEventFlags.flags2                                ;83E23B|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+  + %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BEQ .label15                                               ;83E242|F003    |83E247;
     JMP.W .label20                                             ;83E244|4C93E2  |83E293;
  
  
 .label15:
-    LDA.L strcEventFlags.flags2                                ;83E247|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BEQ .label16                                               ;83E24E|F003    |83E253;
     JMP.W .label21                                             ;83E250|4CA4E2  |83E2A4;
  
  
 .label16:
-    LDA.L strcEventFlags.flags2                                ;83E253|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BEQ +                                                      ;83E25A|F003    |83E25F;
     JMP.W .label22                                             ;83E25C|4CB5E2  |83E2B5;
  
@@ -11156,9 +10929,7 @@ fAreaEvents_House:
  
 .label17:
     REP #$30                                                   ;83E262|C230    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83E264|AF5E1F7F|7F1F5E;
-    ORA.W #$1000                                               ;83E268|090010  |      ;
-    STA.L strcDailyFlags.flags3                                ;83E26B|8F5E1F7F|7F1F5E;
+    %SetFlag(daily3, $1000)
     BRA .label23                                               ;83E26F|8055    |83E2C6;
  
  
@@ -11194,8 +10965,7 @@ fAreaEvents_House:
  
 .label23:
     REP #$30                                                   ;83E2C6|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E2C8|AF6E1F7F|7F1F6E;
-    AND.W #$0004                                               ;83E2CC|290400  |      ;
+    %CheckFlag(event6, $0004)
     BEQ .label24                                               ;83E2CF|F018    |83E2E9;
     LDA.L nFirstChildAge                                       ;83E2D1|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E2D5|C93C00  |      ;
@@ -11205,8 +10975,7 @@ fAreaEvents_House:
  
 .label24:
     REP #$30                                                   ;83E2E9|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E2EB|AF6E1F7F|7F1F6E;
-    AND.W #$0008                                               ;83E2EF|290800  |      ;
+    %CheckFlag(event6, $0008)
     BEQ .label25                                               ;83E2F2|F018    |83E30C;
     LDA.L nSecondChildAge                                      ;83E2F4|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83E2F8|C93C00  |      ;
@@ -11216,11 +10985,9 @@ fAreaEvents_House:
  
 .label25:
     REP #$30                                                   ;83E30C|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;83E30E|AF601F7F|7F1F60;
-    AND.W #$0020                                               ;83E312|292000  |      ;
+    %CheckFlag(daily4, $0020)
     BNE .label26                                               ;83E315|D019    |83E330;
-    LDA.L strcEventFlags.flags3                                ;83E317|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83E31B|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE .label27                                               ;83E31E|D020    |83E340;
     REP #$30                                                   ;83E320|C230    |      ;
     %AIExecute($0000, $000A, $0000)
@@ -11314,24 +11081,18 @@ fAreaEvents_House:
  
 fAreaEvents_CrossRoad:
     REP #$30                                                   ;83E407|C230    |      ;
-    LDA.L strcDailyFlags.flags2                                ;83E409|AF5C1F7F|7F1F5C;
-    AND.W #$FF7F                                               ;83E40D|297FFF  |      ;
-    STA.L strcDailyFlags.flags2                                ;83E410|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$FF7F)
     REP #$30                                                   ;83E414|C230    |      ;
     %AIExecute($0015, $0000, $0015)
     REP #$20                                                   ;83E423|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83E425|AF681F7F|7F1F68;
-    AND.W #$0001                                               ;83E429|290100  |      ;
+    %CheckFlag(event3, $0001)
     BNE .horseEventCheck                                       ;83E42C|D036    |83E464;
-    LDA.L strcEventFlags.flags3                                ;83E42E|AF681F7F|7F1F68;
-    AND.W #$0010                                               ;83E432|291000  |      ;
+    %CheckFlag(event3, $0010)
     BNE .houseExtensionCampain                                 ;83E435|D01D    |83E454;
     REP #$30                                                   ;83E437|C230    |      ;
     %AIExecute($0000, $000A, $0001)
     REP #$20                                                   ;83E446|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83E448|AF681F7F|7F1F68;
-    ORA.W #$0010                                               ;83E44C|091000  |      ;
-    STA.L strcEventFlags.flags3                                ;83E44F|8F681F7F|7F1F68;
+    %SetFlag(event3, $0010)
     RTS                                                        ;83E453|60      |      ;
  
  
@@ -11353,15 +11114,12 @@ fAreaEvents_CrossRoad:
  
 .launchHorseEvent:
     REP #$20                                                   ;83E478|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83E47A|AF681F7F|7F1F68;
-    AND.W #$0040                                               ;83E47E|294000  |      ;
+    %CheckFlag(event3, $0040)
     BNE .label2                                                ;83E481|D024    |83E4A7;
     REP #$30                                                   ;83E483|C230    |      ;
     %AIExecute($0000, $000D, $0000)
     REP #$20                                                   ;83E492|C220    |      ;
-    LDA.L strcEventFlags.flags3                                ;83E494|AF681F7F|7F1F68;
-    ORA.W #$0040                                               ;83E498|094000  |      ;
-    STA.L strcEventFlags.flags3                                ;83E49B|8F681F7F|7F1F68;
+    %SetFlag(event3, $0040)
     SEP #$20                                                   ;83E49F|E220    |      ;
     LDA.B #$04                                                 ;83E4A1|A904    |      ;
     STA.W strcMenuObjectData.nameDestinationIdx                ;83E4A3|8D9F09  |00099F;
@@ -11370,8 +11128,7 @@ fAreaEvents_CrossRoad:
  
 .label2:
     REP #$30                                                   ;83E4A7|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83E4A9|AF681F7F|7F1F68;
-    AND.W #$0100                                               ;83E4AD|290001  |      ;
+    %CheckFlag(event3, $0100)
     BNE .justReturn                                            ;83E4B0|D018    |83E4CA;
     REP #$30                                                   ;83E4B2|C230    |      ;
     %AIExecute($0000, $000D, $0001)
@@ -11387,8 +11144,7 @@ fAreaEvents_CrossRoad:
  
 fAreaEvents_Mine:
     REP #$30                                                   ;83E4CB|C230    |      ;
-    LDA.L strcEventFlags.flags4                                ;83E4CD|AF6A1F7F|7F1F6A;
-    AND.W #$0040                                               ;83E4D1|294000  |      ;
+    %CheckFlag(event4, $0040)
     BNE +                                                      ;83E4D4|D019    |83E4EF;
     LDA.W #$00E0                                               ;83E4D6|A9E000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;83E4D9|8D8509  |000985;
@@ -11425,8 +11181,7 @@ fAreaEvents_Mine:
  
 .label1:
     REP #$30                                                   ;83E535|C230    |      ;
-    LDA.L strcEventFlags.flags5                                ;83E537|AF6C1F7F|7F1F6C;
-    AND.W #$0010                                               ;83E53B|291000  |      ;
+    %CheckFlag(event5, $0010)
     BEQ +                                                      ;83E53E|F010    |83E550;
     REP #$30                                                   ;83E540|C230    |      ;
     %AIExecute($0000, $001D, $0002)
@@ -11434,8 +11189,7 @@ fAreaEvents_Mine:
  
  
   + REP #$30                                                   ;83E550|C230    |      ;
-    LDA.L strcEventFlags.flags5                                ;83E552|AF6C1F7F|7F1F6C;
-    AND.W #$0001                                               ;83E556|290100  |      ;
+    %CheckFlag(event5, $0001)
     BEQ +                                                      ;83E559|F010    |83E56B;
     REP #$30                                                   ;83E55B|C230    |      ;
     %AIExecute($0000, $001B, $0001)
@@ -11457,8 +11211,7 @@ fAreaEvents_Mine:
  
 fAreaEvents_MountainTop:
     REP #$30                                                   ;83E586|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;83E588|AF681F7F|7F1F68;
-    AND.W #$0200                                               ;83E58C|290002  |      ;
+    %CheckFlag(event3, $0200)
     BEQ .justReturn                                            ;83E58F|F010    |83E5A1;
     REP #$30                                                   ;83E591|C230    |      ;
     %AIExecute($0000, $0014, $0001)
@@ -11478,8 +11231,7 @@ fAreaEvents_GoldChicken:
  
 fAreaEvents_Coop:
     REP #$30                                                   ;83E5B4|C230    |      ;
-    LDA.L strcEventFlags.flags4                                ;83E5B6|AF6A1F7F|7F1F6A;
-    AND.W #$4000                                               ;83E5BA|290040  |      ;
+    %CheckFlag(event4, $4000)
     BEQ .justReturn                                            ;83E5BD|F00D    |83E5CC;
     %AIExecute($0015, $0000, $007F)
  
@@ -11518,8 +11270,7 @@ fAreaEvents_Festival3:
     CMP.B #$18                                                 ;83E613|C918    |      ;
     BNE .justReturn                                            ;83E615|D01A    |83E631;
     REP #$20                                                   ;83E617|C220    |      ;
-    LDA.L strcUnknownFlags.flags1                              ;83E619|AF741F7F|7F1F74;
-    AND.W #$0001                                               ;83E61D|290100  |      ;
+    %CheckFlag(unknown1, $0001)
     BEQ .justReturn                                            ;83E620|F00F    |83E631;
     REP #$30                                                   ;83E622|C230    |      ;
     %AIExecute($0000, $000F, $0001)
@@ -11538,8 +11289,7 @@ fAreaEvents_SNF_MountainTop:
     CMP.B #$18                                                 ;83E642|C918    |      ;
     BNE .justReturn                                            ;83E644|D01A    |83E660;
     REP #$20                                                   ;83E646|C220    |      ;
-    LDA.L strcUnknownFlags.flags1                              ;83E648|AF741F7F|7F1F74;
-    AND.W #$0008                                               ;83E64C|290800  |      ;
+    %CheckFlag(unknown1, $0008)
     BEQ .justReturn                                            ;83E64F|F00F    |83E660;
     REP #$30                                                   ;83E651|C230    |      ;
     %AIExecute($0000, $000F, $0004)
@@ -11558,8 +11308,7 @@ fAreaEvents_SNF_Spa:
     CMP.B #$18                                                 ;83E671|C918    |      ;
     BNE .justReturn                                            ;83E673|D01A    |83E68F;
     REP #$20                                                   ;83E675|C220    |      ;
-    LDA.L strcUnknownFlags.flags1                              ;83E677|AF741F7F|7F1F74;
-    AND.W #$0010                                               ;83E67B|291000  |      ;
+    %CheckFlag(unknown1, $0010)
     BEQ .justReturn                                            ;83E67E|F00F    |83E68F;
     REP #$30                                                   ;83E680|C230    |      ;
     %AIExecute($0000, $000F, $0005)
@@ -11592,14 +11341,11 @@ fAreaEvents_EggFestival:
  
 fAreaEvents_Shed:
     REP #$30                                                   ;83E6C4|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E6C6|AF6E1F7F|7F1F6E;
-    AND.W #$0002                                               ;83E6CA|290200  |      ;
+    %CheckFlag(event6, $0002)
     BNE .label3                                                ;83E6CD|D036    |83E705;
-    LDA.L strcEventFlags.flags2                                ;83E6CF|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BNE .label1                                                ;83E6D6|D00B    |83E6E3;
-    LDA.L strcEventFlags.flags2                                ;83E6D8|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BNE .label2                                                ;83E6DF|D013    |83E6F4;
     BRA .label3                                                ;83E6E1|8022    |83E705;
  
@@ -11618,8 +11364,7 @@ fAreaEvents_Shed:
  
 .label3:
     REP #$30                                                   ;83E705|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E707|AF6E1F7F|7F1F6E;
-    AND.W #$0004                                               ;83E70B|290400  |      ;
+    %CheckFlag(event6, $0004)
     BEQ +                                                      ;83E70E|F018    |83E728;
     LDA.L nFirstChildAge                                       ;83E710|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E714|C93C00  |      ;
@@ -11628,8 +11373,7 @@ fAreaEvents_Shed:
     %AIExecute($0014, $0045, $0002)
  
   + REP #$30                                                   ;83E728|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83E72A|AF6E1F7F|7F1F6E;
-    AND.W #$0008                                               ;83E72E|290800  |      ;
+    %CheckFlag(event6, $0008)
     BEQ .justReturn                                            ;83E731|F018    |83E74B;
     LDA.L nSecondChildAge                                      ;83E733|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83E737|C93C00  |      ;
@@ -12355,8 +12099,7 @@ fAreaEvents_Endings:
  
 .ending00:
     REP #$30                                                   ;83ED1E|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83ED20|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIED                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIED)
     BNE .ending01                                              ;83ED27|D031    |83ED5A;
     LDA.L nPlayerHappiness                                     ;83ED29|AF331F7F|7F1F33;
     CMP.W #$0064                                               ;83ED2D|C96400  |      ;
@@ -12377,9 +12120,7 @@ fAreaEvents_Endings:
  
 .ending01:
     REP #$20                                                   ;83ED5A|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83ED5C|AF5E1F7F|7F1F5E;
-    ORA.W #$8000                                               ;83ED60|090080  |      ;
-    STA.L strcDailyFlags.flags3                                ;83ED63|8F5E1F7F|7F1F5E;
+    %SetFlag(daily3, $8000)
     SEP #$20                                                   ;83ED67|E220    |      ;
     REP #$10                                                   ;83ED69|C210    |      ;
     LDA.L nOwnedCows                                           ;83ED6B|AF0A1F7F|7F1F0A;
@@ -12489,8 +12230,7 @@ fAreaEvents_Endings:
  
 .ending09:
     REP #$30                                                   ;83EE82|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EE84|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIED                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIED)
     BNE .ending0A                                              ;83EE8B|D021    |83EEAE;
     LDA.L nPlayerHappiness                                     ;83EE8D|AF331F7F|7F1F33;
     CMP.W #$0064                                               ;83EE91|C96400  |      ;
@@ -12505,8 +12245,7 @@ fAreaEvents_Endings:
  
 .ending0A:
     REP #$30                                                   ;83EEAE|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EEB0|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIED                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIED)
     BNE .ending0B                                              ;83EEB7|D021    |83EEDA;
     LDA.L nPlayerHappiness                                     ;83EEB9|AF331F7F|7F1F33;
     CMP.W #$0320                                               ;83EEBD|C92003  |      ;
@@ -12521,8 +12260,7 @@ fAreaEvents_Endings:
  
 .ending0B:
     REP #$30                                                   ;83EEDA|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EEDC|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDMARIA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BEQ .ending0C                                              ;83EEE3|F030    |83EF15;
     REP #$30                                                   ;83EEE5|C230    |      ;
     %AIExecute($0000, $003A, $0000)
@@ -12543,8 +12281,7 @@ fAreaEvents_Endings:
  
 .ending0C:
     REP #$30                                                   ;83EF15|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EF17|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDANN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BEQ .ending0D                                              ;83EF1E|F030    |83EF50;
     REP #$30                                                   ;83EF20|C230    |      ;
     %AIExecute($0000, $003B, $0000)
@@ -12565,8 +12302,7 @@ fAreaEvents_Endings:
  
 .ending0D:
     REP #$30                                                   ;83EF50|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EF52|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDNINA                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BEQ .ending0E                                              ;83EF59|F030    |83EF8B;
     REP #$30                                                   ;83EF5B|C230    |      ;
     %AIExecute($0000, $003C, $0000)
@@ -12587,8 +12323,7 @@ fAreaEvents_Endings:
  
 .ending0E:
     REP #$30                                                   ;83EF8B|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EF8D|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDELLEN                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BEQ .ending0F                                              ;83EF94|F030    |83EFC6;
     REP #$30                                                   ;83EF96|C230    |      ;
     %AIExecute($0000, $003D, $0000)
@@ -12609,8 +12344,7 @@ fAreaEvents_Endings:
  
 .ending0F:
     REP #$30                                                   ;83EFC6|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EFC8|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIEDEVE                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BEQ .ending10                                              ;83EFCF|F018    |83EFE9;
     REP #$30                                                   ;83EFD1|C230    |      ;
     %AIExecute($0000, $003E, $0000)
@@ -12622,8 +12356,7 @@ fAreaEvents_Endings:
  
 .ending10:
     REP #$30                                                   ;83EFE9|C230    |      ;
-    LDA.L strcEventFlags.flags2                                ;83EFEB|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIED                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIED)
     BNE .ending11                                              ;83EFF2|D03B    |83F02F;
     LDA.L nPlayerHappiness                                     ;83EFF4|AF331F7F|7F1F33;
     CMP.W #$00C8                                               ;83EFF8|C9C800  |      ;
@@ -12646,8 +12379,7 @@ fAreaEvents_Endings:
  
 .ending11:
     REP #$30                                                   ;83F02F|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83F031|AF6E1F7F|7F1F6E;
-    AND.W #$000C                                               ;83F035|290C00  |      ;
+    %CheckFlag(event6, $000C)
     BEQ .ending12                                              ;83F038|F018    |83F052;
     REP #$30                                                   ;83F03A|C230    |      ;
     %AIExecute($0000, $0040, $0000)
@@ -12659,8 +12391,7 @@ fAreaEvents_Endings:
  
 .ending12:
     REP #$30                                                   ;83F052|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83F054|AF6E1F7F|7F1F6E;
-    AND.W #$0008                                               ;83F058|290800  |      ;
+    %CheckFlag(event6, $0008)
     BEQ .ending13                                              ;83F05B|F018    |83F075;
     REP #$30                                                   ;83F05D|C230    |      ;
     %AIExecute($0000, $0041, $0000)
@@ -12672,8 +12403,7 @@ fAreaEvents_Endings:
  
 .ending13:
     REP #$30                                                   ;83F075|C230    |      ;
-    LDA.L strcEventFlags.flags6                                ;83F077|AF6E1F7F|7F1F6E;
-    AND.W #$0008                                               ;83F07B|290800  |      ;
+    %CheckFlag(event6, $0008)
     BEQ .ending14                                              ;83F07E|F063    |83F0E3;
     LDA.L nPlayerHappiness                                     ;83F080|AF331F7F|7F1F33;
     CMP.W #$0384                                               ;83F084|C98403  |      ;
@@ -12704,9 +12434,7 @@ fAreaEvents_Endings:
     LDA.B #$14                                                 ;83F0CF|A914    |      ;
     STA.L nEndingStep                                          ;83F0D1|8F471F7F|7F1F47;
     REP #$20                                                   ;83F0D5|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83F0D7|AF5E1F7F|7F1F5E;
-    AND.W #$7FFF                                               ;83F0DB|29FF7F  |      ;
-    STA.L strcDailyFlags.flags3                                ;83F0DE|8F5E1F7F|7F1F5E;
+    %UnsetFlag(daily3, ~$7FFF)
     RTS                                                        ;83F0E2|60      |      ;
  
  
@@ -12743,9 +12471,7 @@ fAreaEvents_Endings:
     LDA.B #$15                                                 ;83F137|A915    |      ;
     STA.L nEndingStep                                          ;83F139|8F471F7F|7F1F47;
     REP #$20                                                   ;83F13D|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83F13F|AF5E1F7F|7F1F5E;
-    ORA.W #$8000                                               ;83F143|090080  |      ;
-    STA.L strcDailyFlags.flags3                                ;83F146|8F5E1F7F|7F1F5E;
+    %SetFlag(daily3, $8000)
     RTS                                                        ;83F14A|60      |      ;
  
  
@@ -12810,9 +12536,7 @@ fAreaEvents_Endings:
     LDA.B #$20                                                 ;83F1EC|A920    |      ;
     STA.L nEndingStep                                          ;83F1EE|8F471F7F|7F1F47;
     REP #$20                                                   ;83F1F2|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83F1F4|AF5E1F7F|7F1F5E;
-    AND.W #$7FFF                                               ;83F1F8|29FF7F  |      ;
-    STA.L strcDailyFlags.flags3                                ;83F1FB|8F5E1F7F|7F1F5E;
+    %UnsetFlag(daily3, ~$7FFF)
     RTS                                                        ;83F1FF|60      |      ;
  
  
@@ -12850,9 +12574,7 @@ fAreaEvents_Endings:
     LDA.B #$20                                                 ;83F259|A920    |      ;
     STA.L nEndingStep                                          ;83F25B|8F471F7F|7F1F47;
     REP #$20                                                   ;83F25F|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83F261|AF5E1F7F|7F1F5E;
-    AND.W #$7FFF                                               ;83F265|29FF7F  |      ;
-    STA.L strcDailyFlags.flags3                                ;83F268|8F5E1F7F|7F1F5E;
+    %UnsetFlag(daily3, ~$7FFF)
     RTS                                                        ;83F26C|60      |      ;
  
  
@@ -13005,8 +12727,7 @@ fAreaEvents_Endings:
     ADC.L nRanchMasteringRate                                  ;83F3A8|6F541F7F|7F1F54;
     STA.L nRanchMasteringRate                                  ;83F3AC|8F541F7F|7F1F54;
     REP #$20                                                   ;83F3B0|C220    |      ;
-    LDA.L strcEventFlags.flags1                                ;83F3B2|AF641F7F|7F1F64;
-    AND.W #$0080                                               ;83F3B6|298000  |      ;
+    %CheckFlag(event1, $0080)
     BEQ +                                                      ;83F3B9|F00C    |83F3C7;
     LDA.L nRanchMasteringRate                                  ;83F3BB|AF541F7F|7F1F54;
     CLC                                                        ;83F3BF|18      |      ;
@@ -13014,8 +12735,7 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F3C3|8F541F7F|7F1F54;
  
   + REP #$20                                                   ;83F3C7|C220    |      ;
-    LDA.L strcEventFlags.flags1                                ;83F3C9|AF641F7F|7F1F64;
-    AND.W #$0040                                               ;83F3CD|294000  |      ;
+    %CheckFlag(event1, $0040)
     BEQ +                                                      ;83F3D0|F00C    |83F3DE;
     LDA.L nRanchMasteringRate                                  ;83F3D2|AF541F7F|7F1F54;
     CLC                                                        ;83F3D6|18      |      ;
@@ -13023,8 +12743,7 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F3DA|8F541F7F|7F1F54;
  
   + REP #$20                                                   ;83F3DE|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83F3E0|AF6E1F7F|7F1F6E;
-    AND.W #$0008                                               ;83F3E4|290800  |      ;
+    %CheckFlag(event6, $0008)
     BEQ +                                                      ;83F3E7|F00C    |83F3F5;
     LDA.L nRanchMasteringRate                                  ;83F3E9|AF541F7F|7F1F54;
     CLC                                                        ;83F3ED|18      |      ;
@@ -13032,8 +12751,7 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F3F1|8F541F7F|7F1F54;
  
   + REP #$20                                                   ;83F3F5|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83F3F7|AF6E1F7F|7F1F6E;
-    AND.W #$0004                                               ;83F3FB|290400  |      ;
+    %CheckFlag(event6, $0004)
     BEQ +                                                      ;83F3FE|F00C    |83F40C;
     LDA.L nRanchMasteringRate                                  ;83F400|AF541F7F|7F1F54;
     CLC                                                        ;83F404|18      |      ;
@@ -13041,8 +12759,7 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F408|8F541F7F|7F1F54;
  
   + REP #$20                                                   ;83F40C|C220    |      ;
-    LDA.L strcEventFlags.flags2                                ;83F40E|AF661F7F|7F1F66;
-    AND.W #!EFLAGS2_MARRIED                                               
+    %CheckFlag(event2, !EFLAGS2_MARRIED)
     BEQ +                                                      ;83F415|F00C    |83F423;
     LDA.L nRanchMasteringRate                                  ;83F417|AF541F7F|7F1F54;
     CLC                                                        ;83F41B|18      |      ;
@@ -13050,8 +12767,7 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F41F|8F541F7F|7F1F54;
  
   + REP #$20                                                   ;83F423|C220    |      ;
-    LDA.L strcEventFlags.flags6                                ;83F425|AF6E1F7F|7F1F6E;
-    AND.W #$4000                                               ;83F429|290040  |      ;
+    %CheckFlag(event6, $4000)
     BEQ +                                                      ;83F42C|F00C    |83F43A;
     LDA.L nRanchMasteringRate                                  ;83F42E|AF541F7F|7F1F54;
     CLC                                                        ;83F432|18      |      ;
@@ -13059,8 +12775,7 @@ fAreaEvents_Endings:
     STA.L nRanchMasteringRate                                  ;83F436|8F541F7F|7F1F54;
  
   + REP #$20                                                   ;83F43A|C220    |      ;
-    LDA.L strcEventFlags.flags5                                ;83F43C|AF6C1F7F|7F1F6C;
-    AND.W #$1000                                               ;83F440|290010  |      ;
+    %CheckFlag(event5, $1000)
     BEQ +                                                      ;83F443|F00C    |83F451;
     LDA.L nRanchMasteringRate                                  ;83F445|AF541F7F|7F1F54;
     CLC                                                        ;83F449|18      |      ;
@@ -13120,9 +12835,7 @@ fAreaEvents_Endings:
     LDA.B #$25                                                 ;83F4C3|A925    |      ;
     STA.L nEndingStep                                          ;83F4C5|8F471F7F|7F1F47;
     REP #$20                                                   ;83F4C9|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;83F4CB|AF5E1F7F|7F1F5E;
-    ORA.W #$8000                                               ;83F4CF|090080  |      ;
-    STA.L strcDailyFlags.flags3                                ;83F4D2|8F5E1F7F|7F1F5E;
+    %SetFlag(daily3, $8000)
     RTS                                                        ;83F4D6|60      |      ;
  
  
@@ -13135,9 +12848,7 @@ fAreaInit_HouseHelper:
     %AIExecute($0000, $002E, $0000)
     REP #$30                                                   ;83F4E7|C230    |      ;
     STZ.W nMapEngine_flags                                     ;83F4E9|9C9601  |000196;
-    LDA.L strcDailyFlags.flags3                                ;83F4EC|AF5E1F7F|7F1F5E;
-    ORA.W #$0002                                               ;83F4F0|090200  |      ;
-    STA.L strcDailyFlags.flags3                                ;83F4F3|8F5E1F7F|7F1F5E;
+    %SetFlag(daily3, $0002)
     SEP #$20                                                   ;83F4F7|E220    |      ;
     LDA.B #$00                                                 ;83F4F9|A900    |      ;
     STA.L nEndingStep                                          ;83F4FB|8F471F7F|7F1F47;
