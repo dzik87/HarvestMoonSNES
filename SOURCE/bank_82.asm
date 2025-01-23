@@ -6918,7 +6918,7 @@ fUnknown_82D1C0:
     JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D2FB|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D2FF|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;82D303|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;82D303|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D307|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D30B|22008084|848000;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D30F|225AA682|82A65A;
@@ -6958,7 +6958,7 @@ fUnknown_82D1C0:
     JSL.L fGraphics_MapScrool                                  ;82D37C|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;82D380|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;82D384|2200A681|81A600;
-    JSL.L fUnknown_8582C7                                      ;82D388|22C78285|8582C7;
+    JSL.L fObject_Unknown8582C7                                ;82D388|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82D38C|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82D390|22E08385|8583E0;
     REP #$20                                                   ;82D394|C220    |      ;
@@ -7086,7 +7086,7 @@ fMainMenu_AutoHowToPlay:
     JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D4FC|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D500|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;82D504|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;82D504|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D508|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D50C|22008084|848000;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D510|225AA682|82A65A;
@@ -7294,7 +7294,7 @@ fMainMenu_PrepareHowToPlay:
     JSL.L fGraphics_MapScrool                                  ;82D6FE|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;82D702|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;82D706|2200A681|81A600;
-    JSL.L fUnknown_8582C7                                      ;82D70A|22C78285|8582C7;
+    JSL.L fObject_Unknown8582C7                                ;82D70A|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82D70E|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82D712|22E08385|8583E0;
     REP #$20                                                   ;82D716|C220    |      ;
@@ -7399,7 +7399,7 @@ fUnknown_82D75E:
     REP #$20                                                   ;82D804|C220    |      ;
     STZ.B $90                                                  ;82D806|6490    |000090;
     LDA.W #$0001                                               ;82D808|A90100  |      ;
-    STA.B ptrUnknown0xAD+2                                     ;82D80B|85AF    |0000AF;
+    STA.B strcSingleObjectData.unkAF                           ;82D80B|85AF    |0000AF;
  
 fUnknown_82D80D:
     SEP #$20                                                   ;82D80D|E220    |      ;
@@ -7504,7 +7504,7 @@ fUnknown_82D8B0:
     JSL.L fCore_ZeroCGRAM                                      ;82D8B6|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D8BA|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D8BE|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;82D8C2|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;82D8C2|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D8C6|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D8CA|22008084|848000;
     REP #$20                                                   ;82D8CE|C220    |      ;
@@ -7559,7 +7559,7 @@ fUnknown_82D8B0:
     JSL.L fGraphics_MapScrool                                  ;82D970|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;82D974|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;82D978|2200A681|81A600;
-    JSL.L fUnknown_8582C7                                      ;82D97C|22C78285|8582C7;
+    JSL.L fObject_Unknown8582C7                                ;82D97C|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82D980|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82D984|22E08385|8583E0;
     REP #$20                                                   ;82D988|C220    |      ;
@@ -7605,7 +7605,7 @@ fUnknown_82D8B0:
     JSL.L fCore_ZeroCGRAM                                      ;82D9E0|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D9E4|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82D9E8|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;82D9EC|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;82D9EC|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82D9F0|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D9F4|22008084|848000;
     SEP #$20                                                   ;82D9F8|E220    |      ;
@@ -7749,7 +7749,7 @@ fUnknown_82DAF5:
     JSL.L fCore_ZeroCGRAM                                      ;82DB25|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82DB29|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82DB2D|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;82DB31|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;82DB31|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;82DB35|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82DB39|22008084|848000;
     REP #$20                                                   ;82DB3D|C220    |      ;
@@ -9201,7 +9201,7 @@ fScreen_NameInput:
     JSL.L fCore_ZeroVRAM                                       ;82E830|22468880|808846;
     JSL.L fCore_Zero0x42Ptr                                    ;82E834|22AB8F80|808FAB;
     JSL.L fUnknown_Zero7EA220                                  ;82E838|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;82E83C|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
     LDA.W nMapEngine_flags                                     ;82E842|AD9601  |000196;
     STA.W nMapEngine_flags_TempCopy                            ;82E845|8D9801  |000198;
@@ -9354,8 +9354,8 @@ fScreen_NameInput:
     STA.B strcSingleObjectData.posY                            ;82E9AF|859D    |00009D;
     LDA.W strcMenuObjectData.gameObjectIdx                     ;82E9B1|AD9509  |000995;
     STA.B strcSingleObjectData.gameObjectIdx                   ;82E9B4|85A5    |0000A5;
-    JSL.L fUnknown_8580B9                                      ;82E9B6|22B98085|8580B9;
-    JSL.L fUnknown_8582C7                                      ;82E9BA|22C78285|8582C7;
+    JSL.L fObject_Unknown8580B9                                ;82E9B6|22B98085|8580B9;
+    JSL.L fObject_Unknown8582C7                                ;82E9BA|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82E9BE|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;82E9C2|22E08385|8583E0;
     SEP #$20                                                   ;82E9C6|E220    |      ;

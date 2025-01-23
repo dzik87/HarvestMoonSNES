@@ -23,9 +23,9 @@
     incsrc "SOURCE/bank_84.asm"
     incsrc "SOURCE/bank_85.asm"
     
-    ; Sprites data
-    incsrc "DATA/sprites/bank_86.asm"
-    incsrc "DATA/sprites/bank_87.asm"
+    ; Objects data
+    incsrc "DATA/objects/bank_86.asm"
+    incsrc "DATA/objects/bank_87.asm"
     
     ; Sprites GFX
     incsrc "GFX/sprites/bank_88.asm"

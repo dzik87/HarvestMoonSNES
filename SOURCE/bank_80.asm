@@ -73,7 +73,7 @@ fCore_MainLoop:
     JSL.L fGraphics_MapScrool                                  ;8080BF|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;8080C3|226F8184|84816F;
     JSL.L fUnknownCF_81A600                                    ;8080C7|2200A681|81A600;
-    JSL.L fUnknown_8582C7                                      ;8080CB|22C78285|8582C7;
+    JSL.L fObject_Unknown8582C7                                ;8080CB|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;8080CF|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;8080D3|22E08385|8583E0;
     SEP #$20                                                   ;8080D7|E220    |      ;
@@ -597,7 +597,7 @@ fCore_Interrupt808428:
     JSL.L fCore_ZeroOAM                                        ;808618|22878880|808887;
     JSL.L fCore_ZeroCGRAM                                      ;80861C|22808980|808980;
     JSL.L fUnknown_Zero7EA220                                  ;808620|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;808624|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;808624|220F8285|85820F;
     JSL.L fGameEngine_SaveCheck                                ;808628|22D4BA83|83BAD4;
     SEP #$20                                                   ;80862C|E220    |      ;
     REP #$10                                                   ;80862E|C210    |      ;
@@ -1008,7 +1008,7 @@ fCore_Unused8088C3:
     STA.W SNES_A1T4H                                           ;808942|8D4343  |004343;
     LDA.B #$7E                                                 ;808945|A97E    |      ;
     STA.W SNES_A1B4                                            ;808947|8D4443  |004344;
-    LDX.B ptrUnknown0xAD+2                                     ;80894A|A6AF    |0000AF;
+    LDX.B strcSingleObjectData.unkAF                           ;80894A|A6AF    |0000AF;
     STX.W SNES_DAS4L                                           ;80894C|8E4543  |004345;
     LDA.B #$10                                                 ;80894F|A910    |      ;
     STA.W SNES_MDMAEN                                          ;808951|8D0B42  |00420B;
@@ -2458,27 +2458,18 @@ fPalette_LoadSpritePallete:
     ASL A                                                      ;809403|0A      |      ;
     TAX                                                        ;809404|AA      |      ;
     PHX                                                        ;809405|DA      |      ;
-    LDA.L nPaletteOverwrite_80BD9C,X                           ;809406|BF9CBD80|80BD9C;
-    LDX.W #$000A                                               ;80940A|A20A00  |      ;
-    LDY.W #$000F                                               ;80940D|A00F00  |      ;
-    JSL.L fPalette_ModifyPalette                               ;809410|229D9180|80919D;
+    %PaletteModify(nPaletteOverwrite_80BD9C,X, $000A, $000F)
     REP #$30                                                   ;809414|C230    |      ;
     PLX                                                        ;809416|FA      |      ;
     INX                                                        ;809417|E8      |      ;
     INX                                                        ;809418|E8      |      ;
     PHX                                                        ;809419|DA      |      ;
-    LDA.L nPaletteOverwrite_80BD9C,X                           ;80941A|BF9CBD80|80BD9C;
-    LDX.W #$000B                                               ;80941E|A20B00  |      ;
-    LDY.W #$000F                                               ;809421|A00F00  |      ;
-    JSL.L fPalette_ModifyPalette                               ;809424|229D9180|80919D;
+    %PaletteModify(nPaletteOverwrite_80BD9C,X, $000B, $000F)
     REP #$30                                                   ;809428|C230    |      ;
     PLX                                                        ;80942A|FA      |      ;
     INX                                                        ;80942B|E8      |      ;
     INX                                                        ;80942C|E8      |      ;
-    LDA.L nPaletteOverwrite_80BD9C,X                           ;80942D|BF9CBD80|80BD9C;
-    LDX.W #$000C                                               ;809431|A20C00  |      ;
-    LDY.W #$000F                                               ;809434|A00F00  |      ;
-    JSL.L fPalette_ModifyPalette                               ;809437|229D9180|80919D;
+    %PaletteModify(nPaletteOverwrite_80BD9C,X, $000C, $000F)
     REP #$30                                                   ;80943B|C230    |      ;
     STZ.B n16TempVar1                                          ;80943D|647E    |00007E;
     SEP #$20                                                   ;80943F|E220    |      ;
@@ -2561,27 +2552,18 @@ fPalette_LoadSpritePallete:
     ASL A                                                      ;8094C8|0A      |      ;
     TAX                                                        ;8094C9|AA      |      ;
     PHX                                                        ;8094CA|DA      |      ;
-    LDA.L sPallete_MarriedGirlTable,X                          ;8094CB|BFFCBD80|80BDFC;
-    LDX.W #$0008                                               ;8094CF|A20800  |      ;
-    LDY.W #$000B                                               ;8094D2|A00B00  |      ;
-    JSL.L fPalette_ModifyPalette                               ;8094D5|229D9180|80919D;
+    %PaletteModify(sPallete_MarriedGirlTable,X, $0008, $000B)
     REP #$30                                                   ;8094D9|C230    |      ;
     PLX                                                        ;8094DB|FA      |      ;
     INX                                                        ;8094DC|E8      |      ;
     INX                                                        ;8094DD|E8      |      ;
     PHX                                                        ;8094DE|DA      |      ;
-    LDA.L sPallete_MarriedGirlTable,X                          ;8094DF|BFFCBD80|80BDFC;
-    LDX.W #$0009                                               ;8094E3|A20900  |      ;
-    LDY.W #$000B                                               ;8094E6|A00B00  |      ;
-    JSL.L fPalette_ModifyPalette                               ;8094E9|229D9180|80919D;
+    %PaletteModify(sPallete_MarriedGirlTable,X, $0009, $000B)
     REP #$30                                                   ;8094ED|C230    |      ;
     PLX                                                        ;8094EF|FA      |      ;
     INX                                                        ;8094F0|E8      |      ;
     INX                                                        ;8094F1|E8      |      ;
-    LDA.L sPallete_MarriedGirlTable,X                          ;8094F2|BFFCBD80|80BDFC;
-    LDX.W #$000A                                               ;8094F6|A20A00  |      ;
-    LDY.W #$000B                                               ;8094F9|A00B00  |      ;
-    JSL.L fPalette_ModifyPalette                               ;8094FC|229D9180|80919D;
+    %PaletteModify(sPallete_MarriedGirlTable,X, $000A, $000B)
  
 .return:
     RTL                                                        ;809500|6B      |      ;
@@ -2866,7 +2848,7 @@ fUnknown_8096D3:
     JSL.L fCore_Zero0x42Ptr                                    ;8096FB|22AB8F80|808FAB;
     JSL.L fPalette_ZeroNextPalletePtr                          ;8096FF|22669180|809166;
     JSL.L fUnknown_Zero7EA220                                  ;809703|22D78E85|858ED7;
-    JSL.L fUnknown_ZeroUnknown_85820F                          ;809707|220F8285|85820F;
+    JSL.L fObject_ClearGameObject                              ;809707|220F8285|85820F;
     JSL.L fUnknown_Zero07Ptr                                   ;80970B|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;80970F|22008084|848000;
     SEP #$20                                                   ;809713|E220    |      ;
@@ -3197,7 +3179,7 @@ fMap_SetupArea:
     STA.B $C7                                                  ;809A0C|85C7    |0000C7;
     JSL.L fUnknown_81A383                                      ;809A0E|2283A381|81A383;
     JSL.L fAI_HowToPlaySetup                                   ;809A12|226F8184|84816F;
-    JSL.L fUnknown_8582C7                                      ;809A16|22C78285|8582C7;
+    JSL.L fObject_Unknown8582C7                                ;809A16|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;809A1A|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;809A1E|22E08385|8583E0;
     SEP #$20                                                   ;809A22|E220    |      ;
@@ -3208,7 +3190,7 @@ fMap_SetupArea:
     STA.B $C7                                                  ;809A2F|85C7    |0000C7;
     JSL.L fUnknown_81A383                                      ;809A31|2283A381|81A383;
     JSL.L fAI_HowToPlaySetup                                   ;809A35|226F8184|84816F;
-    JSL.L fUnknown_8582C7                                      ;809A39|22C78285|8582C7;
+    JSL.L fObject_Unknown8582C7                                ;809A39|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;809A3D|22B28C85|858CB2;
     JSL.L fUnknown_8583E0                                      ;809A41|22E08385|8583E0;
     SEP #$20                                                   ;809A45|E220    |      ;
@@ -4372,11 +4354,11 @@ fUnknown_80A18D:
     STA.B ptrUnknown0x72                                       ;80A22B|8572    |000072;
     CLC                                                        ;80A22D|18      |      ;
     ADC.W #$0040                                               ;80A22E|694000  |      ;
-    STA.B ptrUnknown0x75                                       ;80A231|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;80A231|8575    |000075;
     SEP #$20                                                   ;80A233|E220    |      ;
     LDA.B #$7E                                                 ;80A235|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A237|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A239|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;80A239|8577    |000077;
     REP #$20                                                   ;80A23B|C220    |      ;
     LDX.W #$0000                                               ;80A23D|A20000  |      ;
  
@@ -4408,7 +4390,7 @@ fUnknown_80A18D:
     STA.W $0746,X                                              ;80A269|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A26C|A482    |000082;
     LDX.B n16TempVar4                                          ;80A26E|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A270|B775    |000075;
+    LDA.B [ptrObjectUnknown0x75],Y                             ;80A270|B775    |000075;
     STA.W $07C6,X                                              ;80A272|9DC607  |0007C6;
     INC.B n16TempVar1                                          ;80A275|E67E    |00007E;
     INC.B n16TempVar1                                          ;80A277|E67E    |00007E;
@@ -4586,11 +4568,11 @@ fUnknown_80A308:
     STA.B ptrUnknown0x72                                       ;80A3A4|8572    |000072;
     CLC                                                        ;80A3A6|18      |      ;
     ADC.W #$0040                                               ;80A3A7|694000  |      ;
-    STA.B ptrUnknown0x75                                       ;80A3AA|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;80A3AA|8575    |000075;
     SEP #$20                                                   ;80A3AC|E220    |      ;
     LDA.B #$7E                                                 ;80A3AE|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A3B0|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A3B2|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;80A3B2|8577    |000077;
     REP #$20                                                   ;80A3B4|C220    |      ;
     LDX.W #$0000                                               ;80A3B6|A20000  |      ;
  
@@ -4622,7 +4604,7 @@ fUnknown_80A308:
     STA.W $0746,X                                              ;80A3E2|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A3E5|A482    |000082;
     LDX.B n16TempVar4                                          ;80A3E7|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A3E9|B775    |000075;
+    LDA.B [ptrObjectUnknown0x75],Y                             ;80A3E9|B775    |000075;
     STA.W $07C6,X                                              ;80A3EB|9DC607  |0007C6;
     INC.B n16TempVar1                                          ;80A3EE|E67E    |00007E;
     INC.B n16TempVar1                                          ;80A3F0|E67E    |00007E;
@@ -4809,11 +4791,11 @@ fUnknown_80A481:
     ADC.W #$0060                                               ;80A52F|696000  |      ;
     STA.B ptrUnknown0x72                                       ;80A532|8572    |000072;
     ADC.W #$2000                                               ;80A534|690020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A537|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;80A537|8575    |000075;
     SEP #$20                                                   ;80A539|E220    |      ;
     LDA.B #$7E                                                 ;80A53B|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A53D|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A53F|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;80A53F|8577    |000077;
     REP #$20                                                   ;80A541|C220    |      ;
     LDX.W #$0000                                               ;80A543|A20000  |      ;
  
@@ -4845,7 +4827,7 @@ fUnknown_80A481:
     STA.W $0746,X                                              ;80A56F|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A572|A482    |000082;
     LDX.B n16TempVar4                                          ;80A574|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A576|B775    |000075;
+    LDA.B [ptrObjectUnknown0x75],Y                             ;80A576|B775    |000075;
     STA.W $07C6,X                                              ;80A578|9DC607  |0007C6;
     LDA.B n16TempVar1                                          ;80A57B|A57E    |00007E;
     CLC                                                        ;80A57D|18      |      ;
@@ -5038,11 +5020,11 @@ fUnknown_80A617:
     STA.B ptrUnknown0x72                                       ;80A6C8|8572    |000072;
     CLC                                                        ;80A6CA|18      |      ;
     ADC.W #$2000                                               ;80A6CB|690020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A6CE|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;80A6CE|8575    |000075;
     SEP #$20                                                   ;80A6D0|E220    |      ;
     LDA.B #$7E                                                 ;80A6D2|A97E    |      ;
     STA.B ptrUnknown0x72+2                                     ;80A6D4|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A6D6|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;80A6D6|8577    |000077;
     REP #$20                                                   ;80A6D8|C220    |      ;
     LDX.W #$0000                                               ;80A6DA|A20000  |      ;
  
@@ -5074,7 +5056,7 @@ fUnknown_80A617:
     STA.W $0746,X                                              ;80A706|9D4607  |000746;
     LDY.B n16TempVar3                                          ;80A709|A482    |000082;
     LDX.B n16TempVar4                                          ;80A70B|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A70D|B775    |000075;
+    LDA.B [ptrObjectUnknown0x75],Y                             ;80A70D|B775    |000075;
     STA.W $07C6,X                                              ;80A70F|9DC607  |0007C6;
     LDA.B n16TempVar1                                          ;80A712|A57E    |00007E;
     CLC                                                        ;80A714|18      |      ;
@@ -5275,10 +5257,10 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A876|C8      |      ; Y++
     PHY                                                        ;80A877|5A      |      ; Y -> stack2
     LDA.W #$2000                                               ;80A878|A90020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A87B|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;80A87B|8575    |000075;
     SEP #$20                                                   ;80A87D|E220    |      ;
     LDA.B #$7E                                                 ;80A87F|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;80A881|8577    |000077; $75 = 0x7E2000
+    STA.B ptrObjectUnknown0x75+2                               ;80A881|8577    |000077; $75 = 0x7E2000
     JSL.L fGraphicsDecompressTilemap                           ;80A883|22F88183|8381F8;
     SEP #$20                                                   ;80A887|E220    |      ;
     LDA.B #$00                                                 ;80A889|A900    |      ;
@@ -5325,10 +5307,10 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A8D4|C8      |      ;
     PHY                                                        ;80A8D5|5A      |      ;
     LDA.W #$2000                                               ;80A8D6|A90020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A8D9|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;80A8D9|8575    |000075;
     SEP #$20                                                   ;80A8DB|E220    |      ;
     LDA.B #$7E                                                 ;80A8DD|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;80A8DF|8577    |000077;
+    STA.B ptrObjectUnknown0x75+2                               ;80A8DF|8577    |000077;
     REP #$20                                                   ;80A8E1|C220    |      ;
     LDA.W nMapEngine_flags                                     ;80A8E3|AD9601  |000196;
     AND.W #$8000                                               ;80A8E6|290080  |      ;
@@ -5343,7 +5325,7 @@ fTileMap_MapChangeHandler:
  
 .loop:
     LDA.B [ptrUnknown0x72],Y                                   ;80A8F6|B772    |000072;
-    STA.B [ptrUnknown0x75],Y                                   ;80A8F8|9775    |000075;
+    STA.B [ptrObjectUnknown0x75],Y                             ;80A8F8|9775    |000075;
     INY                                                        ;80A8FA|C8      |      ;
     INY                                                        ;80A8FB|C8      |      ;
     CPY.W #$8000                                               ;80A8FC|C00080  |      ;
@@ -7240,13 +7222,13 @@ aMapPalettesIndexes:
  
 nPaletteOverwrite_80BD9C:
     dw $3BF8,$26D0,$0946,$238C,$1648,$0124                     ;80BD9C|        |      ; ? * [16b, 16b, 16b]
-    db $D7,$22,$71,$01,$A9,$0C,$8C,$23,$EF,$3D,$7B,$7F         ;80BDA8|        |      ;
-    db $A8,$15,$07,$15,$A2,$00,$A8,$15,$07,$15,$A2,$00         ;80BDB4|        |      ;
-    db $4C,$01,$E8,$00,$66,$00,$A8,$15,$EF,$3D,$73,$56         ;80BDC0|        |      ;
-    db $76,$3B,$92,$2A,$07,$11,$8C,$23,$48,$16,$24,$01         ;80BDCC|        |      ;
-    db $7C,$0A,$54,$01,$A8,$08,$76,$3B,$92,$2A,$07,$11         ;80BDD8|        |      ;
-    db $CE,$19,$2A,$11,$85,$08,$CF,$1D,$2B,$0D,$66,$00         ;80BDE4|        |      ;
-    db $70,$01,$CC,$04,$24,$00,$CE,$19,$2A,$11,$85,$08         ;80BDF0|        |      ;
+    dw $22D7,$0171,$0CA9,$238C,$3DEF,$7F7B                     ;80BDA8|        |      ;
+    dw $15A8,$1507,$00A2,$15A8,$1507,$00A2                     ;80BDB4|        |      ;
+    dw $014C,$00E8,$0066,$15A8,$3DEF,$5673                     ;80BDC0|        |      ;
+    dw $3B76,$2A92,$1107,$238C,$1648,$0124                     ;80BDCC|        |      ;
+    dw $0A7C,$0154,$08A8,$3B76,$2A92,$1107                     ;80BDD8|        |      ;
+    dw $19CE,$112A,$0885,$1DCF,$0D2B,$0066                     ;80BDE4|        |      ;
+    dw $0170,$04CC,$0024,$19CE,$112A,$0885                     ;80BDF0|        |      ;
  
 sPallete_MarriedGirlTable:
     dw $0000,$0000,$0000,$7A29,$5DA0,$4100                     ;80BDFC|        |      ; 0x06 * [16b, 16b, 16b, 16b, 16b, 16b] - index by married gitl id 0-5

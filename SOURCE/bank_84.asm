@@ -34,7 +34,7 @@ fAI_Unknown848020:
     LDY.W #$0012                                               ;848033|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848036|B7CC    |0000CC;
     STA.B strcSingleObjectData.gameObjectIdx                   ;848038|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;84803A|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;84803A|22A28185|8581A2;
     RTL                                                        ;84803E|6B      |      ;
  
  
@@ -46,36 +46,36 @@ fAI_Unknown84803F:
     STY.B n16TempVar2                                          ;848049|8480    |000080;
     LDX.W #$0000                                               ;84804B|A20000  |      ;
     LDA.L pppAISelector,X                                      ;84804E|BFCD9484|8494CD; index = 0
-    STA.B ptrUnknown0x75                                       ;848052|8575    |000075;
+    STA.B ptrObjectUnknown0x75                                 ;848052|8575    |000075;
     INX                                                        ;848054|E8      |      ;
     INX                                                        ;848055|E8      |      ;
     SEP #$20                                                   ;848056|E220    |      ;
     LDA.L pppAISelector,X                                      ;848058|BFCD9484|8494CD;
-    STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077; $0x75 = 0xB38000
+    STA.B ptrObjectUnknown0x75+2                               ;84805C|8577    |000077; $0x75 = 0xB38000
     REP #$20                                                   ;84805E|C220    |      ;
     LDA.B n16TempVar1                                          ;848060|A57E    |00007E;
     ASL A                                                      ;848062|0A      |      ;
     CLC                                                        ;848063|18      |      ;
     ADC.B n16TempVar1                                          ;848064|657E    |00007E;
     TAY                                                        ;848066|A8      |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;848067|B775    |000075; index = nIndex * 2
-    STA.B ptrUnknown0x78                                       ;848069|8578    |000078;
+    LDA.B [ptrObjectUnknown0x75],Y                             ;848067|B775    |000075; index = nIndex * 2
+    STA.B ptrObjectUnknown0x78                                 ;848069|8578    |000078;
     INY                                                        ;84806B|C8      |      ;
     INY                                                        ;84806C|C8      |      ;
     SEP #$20                                                   ;84806D|E220    |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;84806F|B775    |000075;
-    STA.B ptrUnknown0x78+2                                     ;848071|857A    |00007A; $78 = 0xB38BB8
+    LDA.B [ptrObjectUnknown0x75],Y                             ;84806F|B775    |000075;
+    STA.B ptrObjectUnknown0x78+2                               ;848071|857A    |00007A; $78 = 0xB38BB8
     REP #$20                                                   ;848073|C220    |      ;
     LDA.B n16TempVar2                                          ;848075|A580    |000080;
     ASL A                                                      ;848077|0A      |      ;
     TAY                                                        ;848078|A8      |      ;
-    LDA.B [ptrUnknown0x78],Y                                   ;848079|B778    |000078; index = nSubindex * 2
+    LDA.B [ptrObjectUnknown0x78],Y                             ;848079|B778    |000078; index = nSubindex * 2
     REP #$30                                                   ;84807B|C230    |      ;
     LDY.W #$0030                                               ;84807D|A03000  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848080|97CC    |0000CC;
     STA.B ptrAIActionData                                      ;848082|85C9    |0000C9;
     SEP #$20                                                   ;848084|E220    |      ;
-    LDA.B ptrUnknown0x78+2                                     ;848086|A57A    |00007A;
+    LDA.B ptrObjectUnknown0x78+2                               ;848086|A57A    |00007A;
     SEP #$20                                                   ;848088|E220    |      ;
     REP #$10                                                   ;84808A|C210    |      ;
     LDY.W #$0032                                               ;84808C|A03200  |      ;
@@ -374,7 +374,7 @@ fAI_Unknown848286:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482D3|B7CC    |0000CC;
     AND.B #$04                                                 ;8482D5|2904    |      ;
     BNE .label2                                                ;8482D7|D017    |8482F0;
-    JSL.L fUnknown_8580B9                                      ;8482D9|22B98085|8580B9;
+    JSL.L fObject_Unknown8580B9                                ;8482D9|22B98085|8580B9;
     BRA .return                                                ;8482DD|802F    |84830E;
  
  
@@ -398,12 +398,12 @@ fAI_Unknown848286:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482FE|B7CC    |0000CC;
     CMP.B n16TempVar1                                          ;848300|C57E    |00007E;
     BEQ .return                                                ;848302|F00A    |84830E;
-    JSL.L fUnknown_858100                                      ;848304|22008185|858100;
+    JSL.L fObject_Unknown858100                                ;848304|22008185|858100;
     BRA .return                                                ;848308|8004    |84830E;
  
  
 .label3:
-    JSL.L fUnknown_8581A2                                      ;84830A|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;84830A|22A28185|8581A2;
  
 .return:
     REP #$30                                                   ;84830E|C230    |      ;
@@ -2300,7 +2300,7 @@ fAIAction0x25:
     LDY.W #$0012                                               ;8493B1|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8493B4|B7CC    |0000CC;
     STA.B strcSingleObjectData.gameObjectIdx                   ;8493B6|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;8493B8|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;8493B8|22A28185|8581A2;
     REP #$20                                                   ;8493BC|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;8493BE|A572    |000072;
     STA.B ptrAIUnknown0xCC                                     ;8493C0|85CC    |0000CC;
@@ -6407,7 +6407,7 @@ fAIAction0x37:
     LDY.W #$0012                                               ;84B359|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B35C|B7CC    |0000CC;
     STA.B strcSingleObjectData.gameObjectIdx                   ;84B35E|85A5    |0000A5;
-    JSL.L fUnknown_8581A2                                      ;84B360|22A28185|8581A2;
+    JSL.L fObject_Unknown8581A2                                ;84B360|22A28185|8581A2;
     RTS                                                        ;84B364|60      |      ;
  
  

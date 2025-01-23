@@ -7,8 +7,8 @@
     nMapEngine_AreaIdToLoad = $000022; !^ n8 ^!
     ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
-    ptrUnknown0x75 = $000075; !^ ptr24 ^!
-    ptrUnknown0x78 = $000078; !^ ptr24 ^!
+    ptrObjectUnknown0x75 = $000075; !^ ptr24 ^!
+    ptrObjectUnknown0x78 = $000078; !^ ptr24 ^!
     n16TempVar1 = $00007E; !^ n16 ^!
     n16TempVar2 = $000080; !^ n16 ^!
     n16TempVar3 = $000082; !^ n16 ^!
@@ -17,8 +17,6 @@
     n8TempVar2 = $000093
     n8TempVar3 = $000094
     nUnknown0x95 = $000095; !^ n8 ^!
-    ptrUnknown0xAD = $0000AD; !^ ptr24 ^!
-    ptrBank86_87Data = $0000B3; !^ ptr24 ^!
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
