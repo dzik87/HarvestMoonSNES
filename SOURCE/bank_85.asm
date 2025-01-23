@@ -1050,7 +1050,7 @@ fUnknown_858647:
     STA.L $7EA21C                                              ;858887|8F1CA27E|7EA21C;
     STA.L $7EA21E                                              ;85888B|8F1EA27E|7EA21E;
     LDA.W #$0001                                               ;85888F|A90100  |      ;
-    STA.W strcSingleObjectData.unkB7                           ;858892|8DB700  |0000B7;
+    STA.W $00B7                                                ;858892|8DB700  |0000B7;
     RTS                                                        ;858895|60      |      ;
  
  
@@ -1203,7 +1203,7 @@ fUnknown_858896:
     STA.L $7EA21C                                              ;858AD6|8F1CA27E|7EA21C;
     STA.L $7EA21E                                              ;858ADA|8F1EA27E|7EA21E;
     LDA.W #$0001                                               ;858ADE|A90100  |      ;
-    STA.W strcSingleObjectData.unkB7                           ;858AE1|8DB700  |0000B7;
+    STA.W $00B7                                                ;858AE1|8DB700  |0000B7;
     RTS                                                        ;858AE4|60      |      ;
  
  
