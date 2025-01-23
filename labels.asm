@@ -62,7 +62,7 @@
     nMapEngine_flags_TempCopy = $000198; !^ n16 ^!
     nMapScrool_SpeedX = $00087C; !^ n16 ^!
     nMapScrool_SpeedY = $00087E; !^ n16 ^!
-    nMapScrool_Timer = $000880
+    nMapScrool_Timer = $000880; !^ n8 ^!
     sPlayerNameShort = $000881; !^ 4 * s8 ^!
     sTempNameVariable = $000885; !^ 4 * s8 ^!
     sDogNameShort = $000899; !^ 4 * s8 ^!

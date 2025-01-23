@@ -39,6 +39,17 @@ struct strcSingleObjectData $00009B
     .gameObjectIdxOffs      : skip 2    ; A9    aGameObjectIndexOffsets[gameObjectIdx]
 endstruct
 
+
+; Map scrool
+;struct strcMapScrool        $00087C ; up to 0881
+; 087C
+; 087E
+; 0880
+
+
+; Names
+;struct strcNames            $000881 ; up to 08FD
+
 ; Size and start to be confirmed
 struct strcMenuObjectData   $000991
     .menuIdx                : skip 2    ; 0991
@@ -107,31 +118,45 @@ endstruct align 16
 !COWSTATUS_BIRTHINGTODAY    =   $80
 
 
-; Daily flags
-struct strcDailyFlags       $7F1F5A
-    .flags1                 : skip 2    ; 00 $7F1F5A
-    .flags2                 : skip 2    ; 02 $7F1F5C
-    .flags3                 : skip 2    ; 04 $7F1F5E
-    .flags4                 : skip 2    ; 06 $7F1F60
-    .flags5                 : skip 2    ; 08 $7F1F62
-endstruct align 10
+; Flags
+struct strcFlags            $7F1F5A
+    ; daily
+    .daily1                 : skip 2    ; 00 $7F1F5A
+    .daily2                 : skip 2    ; 02 $7F1F5C
+    .daily3                 : skip 2    ; 04 $7F1F5E
+    .daily4                 : skip 2    ; 06 $7F1F60
+    .daily5                 : skip 2    ; 08 $7F1F62
+    ; events
+    .event1                 : skip 2    ; 00 $7F1F64
+    .event2                 : skip 2    ; 02 $7F1F66
+    .event3                 : skip 2    ; 04 $7F1F68
+    .event4                 : skip 2    ; 06 $7F1F6A
+    .event5                 : skip 2    ; 08 $7F1F6C
+    .event6                 : skip 2    ; 0A $7F1F6E
+    .event7                 : skip 2    ; 0C $7F1F70
+    .event8                 : skip 2    ; 0E $7F1F72
+    ; unknown
+    .unknown1               : skip 2    ; 00 $7F1F74
+    .unknown2               : skip 2    ; 02 $7F1F76
+    .unknown3               : skip 2    ; 04 $7F1F78
+endstruct
 
+
+; daily1
+
+; daily2
 !DFLAGS2_BROKECHICKENSTATUE = $0080
 !DFLAGS2_DUGUPMONEY         = $0200
 
+; daily3
 
-; Event flags
-struct strcEventFlags       $7F1F64
-    .flags1                 : skip 2    ; 00 $7F1F64
-    .flags2                 : skip 2    ; 02 $7F1F66
-    .flags3                 : skip 2    ; 04 $7F1F68
-    .flags4                 : skip 2    ; 06 $7F1F6A
-    .flags5                 : skip 2    ; 08 $7F1F6C
-    .flags6                 : skip 2    ; 0A $7F1F6E
-    .flags7                 : skip 2    ; 0C $7F1F70
-    .flags8                 : skip 2    ; 0E $7F1F72
-endstruct align 16
+; daily4
 
+; daily5
+
+; event1
+
+; event2
 !EFLAGS2_MARRIEDMARIA       = $0001
 !EFLAGS2_MARRIEDANN         = $0002
 !EFLAGS2_MARRIEDNINA        = $0004
@@ -144,13 +169,19 @@ endstruct align 16
 !EFLAGS2_PAINTEDHOUSERIGHT  = $1000
 !EFLAGS2_FREEDIMPFISH       = $2000
 
+; event3
 
-; Unknown flags
-struct strcUnknownFlags     $7F1F74
-    .flags1                 : skip 2    ; 00 $7F1F74
-    .flags2                 : skip 2    ; 02 $7F1F76
-    .flags3                 : skip 2    ; 04 $7F1F78
-endstruct align 6
+; event4
+
+; event5
+
+; event6
+
+; event7
+
+; event8
+
+; unknown1
 
 
 ; Joypad 1 controls

@@ -77,3 +77,24 @@ macro SetCurrentCarriedItemDirect(nItem)
     LDA.B #<nItem>
     STA.W nCarryItem_Current
 endmacro
+
+
+;
+; Flags helpers
+;
+macro SetFlag(nTable, nFlag)
+    LDA.L strcFlags.<nTable>
+    ORA.W #<nFlag>
+    STA.L strcFlags.<nTable>
+endmacro
+
+macro UnsetFlag(nTable, nFlag)
+    LDA.L strcFlags.<nTable>
+    AND.W #~<nFlag>
+    STA.L strcFlags.<nTable>
+endmacro
+
+macro CheckFlag(nTable, nFlag)
+    LDA.L strcFlags.<nTable>
+    AND.W #<nFlag>
+endmacro

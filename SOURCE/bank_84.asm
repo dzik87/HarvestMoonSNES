@@ -295,18 +295,10 @@ fAI_HowToPlaySetup:
  
 .return:
     REP #$20                                                   ;84821A|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;84821C|AF5A1F7F|7F1F5A;
-    AND.W #$FE2F                                               ;848220|292FFE  |      ;
-    STA.L strcDailyFlags.flags1                                ;848223|8F5A1F7F|7F1F5A;
-    LDA.L strcDailyFlags.flags2                                ;848227|AF5C1F7F|7F1F5C;
-    AND.W #$FBFF                                               ;84822B|29FFFB  |      ;
-    STA.L strcDailyFlags.flags2                                ;84822E|8F5C1F7F|7F1F5C;
-    LDA.L strcDailyFlags.flags3                                ;848232|AF5E1F7F|7F1F5E;
-    AND.W #$FFBF                                               ;848236|29BFFF  |      ;
-    STA.L strcDailyFlags.flags3                                ;848239|8F5E1F7F|7F1F5E;
-    LDA.L strcDailyFlags.flags4                                ;84823D|AF601F7F|7F1F60;
-    AND.W #$FFEF                                               ;848241|29EFFF  |      ;
-    STA.L strcDailyFlags.flags4                                ;848244|8F601F7F|7F1F60;
+    %UnsetFlag(daily1, ~$FE2F)
+    %UnsetFlag(daily2, ~$FBFF)
+    %UnsetFlag(daily3, ~$FFBF)
+    %UnsetFlag(daily4, ~$FFEF)
     RTL                                                        ;848248|6B      |      ;
  
  
@@ -1353,9 +1345,7 @@ fAIAction0x01_UnfreezeTime:
     LDA.B #$01                                                 ;8489F1|A901    |      ;
     STA.W nTimeState                                           ;8489F3|8D7309  |000973;
     REP #$20                                                   ;8489F6|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;8489F8|AF5C1F7F|7F1F5C;
-    AND.W #$FFFE                                               ;8489FC|29FEFF  |      ;
-    STA.L strcDailyFlags.flags2                                ;8489FF|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$FFFE)
     LDA.W nMapEngine_flags                                     ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
     STA.W nMapEngine_flags                                     ;848A09|8D9601  |000196;
@@ -1369,9 +1359,7 @@ fAIAction0x02_FreezeTime:
     LDA.B #$00                                                 ;848A1B|A900    |      ;
     STA.W nTimeState                                           ;848A1D|8D7309  |000973;
     REP #$20                                                   ;848A20|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;848A22|AF5C1F7F|7F1F5C;
-    ORA.W #$0001                                               ;848A26|090100  |      ;
-    STA.L strcDailyFlags.flags2                                ;848A29|8F5C1F7F|7F1F5C;
+    %SetFlag(daily2, $0001)
     REP #$30                                                   ;848A2D|C230    |      ;
     LDA.W nMapEngine_flags                                     ;848A2F|AD9601  |000196;
     AND.W #$FFDF                                               ;848A32|29DFFF  |      ;
@@ -2018,8 +2006,7 @@ fAIAction0x1F:
     JMP.W .return                                              ;8490CE|4C8591  |849185;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;8490D1|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;8490D5|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;8490D8|F003    |8490DD;
     JMP.W .return                                              ;8490DA|4C8591  |849185;
  
@@ -2602,8 +2589,7 @@ fAIAction0x2D:
     JMP.W .return                                              ;849688|4C5F97  |84975F;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;84968B|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84968F|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;849692|F003    |849697;
     JMP.W .return                                              ;849694|4C5F97  |84975F;
  
@@ -2867,8 +2853,7 @@ fAIAction0x30_UpdateChicken:
     JMP.W .label1                                              ;8498E6|4CC899  |8499C8;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;8498E9|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;8498ED|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;8498F0|F003    |8498F5;
     JMP.W .label1                                              ;8498F2|4CC899  |8499C8;
  
@@ -3061,15 +3046,12 @@ fAIAction0x30_UpdateChicken:
  
  
   + REP #$20                                                   ;849A5F|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;849A61|AF5A1F7F|7F1F5A;
-    AND.W #$0008                                               ;849A65|290800  |      ;
+    %CheckFlag(daily1, $0008)
     BNE +                                                      ;849A68|D003    |849A6D;
     JMP.W .loop                                                ;849A6A|4CA198  |8498A1;
  
  
-  + LDA.L strcDailyFlags.flags1                                ;849A6D|AF5A1F7F|7F1F5A;
-    AND.W #$FFF7                                               ;849A71|29F7FF  |      ;
-    STA.L strcDailyFlags.flags1                                ;849A74|8F5A1F7F|7F1F5A;
+  + %UnsetFlag(daily1, ~$FFF7)
     REP #$20                                                   ;849A78|C220    |      ;
     LDA.W #$0032                                               ;849A7A|A93200  |      ;
     STA.L nGameUnk7F1F15                                       ;849A7D|8F151F7F|7F1F15;
@@ -3209,8 +3191,7 @@ fUnknown_ToFarm:
     JMP.W .continue                                            ;849B98|4CB9A0  |84A0B9;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;849B9B|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;849B9F|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;849BA2|F003    |849BA7;
     JMP.W .continue                                            ;849BA4|4CB9A0  |84A0B9;
  
@@ -3228,23 +3209,20 @@ fUnknown_ToFarm:
  
  
   + REP #$20                                                   ;849BBF|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;849BC1|AF5A1F7F|7F1F5A;
-    AND.W #$0100                                               ;849BC5|290001  |      ;
+    %CheckFlag(daily1, $0100)
     BEQ +                                                      ;849BC8|F003    |849BCD;
     JMP.W .label21                                             ;849BCA|4C4E9E  |849E4E;
  
  
   + REP #$20                                                   ;849BCD|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;849BCF|AF5A1F7F|7F1F5A;
-    AND.W #$0080                                               ;849BD3|298000  |      ;
+    %CheckFlag(daily1, $0080)
     BEQ .label1                                                ;849BD6|F003    |849BDB;
     JMP.W .label27                                             ;849BD8|4CBC9F  |849FBC;
  
  
 .label1:
     REP #$20                                                   ;849BDB|C220    |      ;
-    LDA.L strcDailyFlags.flags1                                ;849BDD|AF5A1F7F|7F1F5A;
-    AND.W #$0040                                               ;849BE1|294000  |      ;
+    %CheckFlag(daily1, $0040)
     BEQ +                                                      ;849BE4|F003    |849BE9;
     JMP.W .label18                                             ;849BE6|4CBE9D  |849DBE;
  
@@ -3592,8 +3570,7 @@ fUnknown_ToFarm:
  
 .label21:
     REP #$30                                                   ;849E4E|C230    |      ;
-    LDA.L strcEventFlags.flags1                                ;849E50|AF641F7F|7F1F64;
-    AND.W #$0004                                               ;849E54|290400  |      ;
+    %CheckFlag(event1, $0004)
     BEQ +                                                      ;849E57|F003    |849E5C;
     JMP.W .continue                                            ;849E59|4CB9A0  |84A0B9;
  
@@ -3606,9 +3583,7 @@ fUnknown_ToFarm:
  
  
   + REP #$20                                                   ;849E69|C220    |      ;
-    LDA.L strcEventFlags.flags1                                ;849E6B|AF641F7F|7F1F64;
-    ORA.W #$0004                                               ;849E6F|090400  |      ;
-    STA.L strcEventFlags.flags1                                ;849E72|8F641F7F|7F1F64;
+    %SetFlag(event1, $0004)
     SEP #$20                                                   ;849E76|E220    |      ;
     LDY.W #$0000                                               ;849E78|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E7B|B772    |000072;
@@ -4468,8 +4443,7 @@ fUnknown_ToFarm:
  
 fUnknown_84A46E:
     REP #$30                                                   ;84A46E|C230    |      ;
-    LDA.L strcDailyFlags.flags1                                ;84A470|AF5A1F7F|7F1F5A;
-    AND.W #$0010                                               ;84A474|291000  |      ;
+    %CheckFlag(daily1, $0010)
     BEQ +                                                      ;84A477|F003    |84A47C;
     JMP.W fUnknown_84A740                                      ;84A479|4C40A7  |84A740;
  
@@ -4494,15 +4468,12 @@ fUnknown_DirectionJump:
  
 fUnkonown_84A498:
     REP #$30                                                   ;84A498|C230    |      ;
-    LDA.L strcDailyFlags.flags1                                ;84A49A|AF5A1F7F|7F1F5A;
-    AND.W #$0004                                               ;84A49E|290400  |      ;
+    %CheckFlag(daily1, $0004)
     BNE +                                                      ;84A4A1|D003    |84A4A6;
     JMP.W fUnknown_ToFarm                                      ;84A4A3|4C459B  |849B45;
  
  
-  + LDA.L strcDailyFlags.flags1                                ;84A4A6|AF5A1F7F|7F1F5A;
-    AND.W #$FFFB                                               ;84A4AA|29FBFF  |      ;
-    STA.L strcDailyFlags.flags1                                ;84A4AD|8F5A1F7F|7F1F5A;
+  + %UnsetFlag(daily1, ~$FFFB)
     REP #$20                                                   ;84A4B1|C220    |      ;
     LDA.W #$01F4                                               ;84A4B3|A9F401  |      ;
     STA.L nGameUnk7F1F15                                       ;84A4B6|8F151F7F|7F1F15;
@@ -5178,8 +5149,7 @@ fAIAction0x33_UpdateMole:
   + REP #$20                                                   ;84A998|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .label1                                                ;84A99F|D07D    |84AA1E;
-    LDA.L strcDailyFlags.flags4                                ;84A9A1|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84A9A5|290600  |      ;
+    %CheckFlag(daily4, $0006)
     BNE .label1                                                ;84A9A8|D074    |84AA1E;
     REP #$20                                                   ;84A9AA|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84A9AC|AD2801  |000128;
@@ -5314,8 +5284,7 @@ fAIAction0x34:
   + REP #$20                                                   ;84AAA9|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .return                                                ;84AAB0|D067    |84AB19;
-    LDA.L strcDailyFlags.flags4                                ;84AAB2|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84AAB6|290600  |      ;
+    %CheckFlag(daily4, $0006)
     BNE .return                                                ;84AAB9|D05E    |84AB19;
     REP #$20                                                   ;84AABB|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AABD|AD2801  |000128;
@@ -5374,9 +5343,7 @@ fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84AB27|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84AB33|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84AB35|AF5C1F7F|7F1F5C;
-    AND.W #$FFEF                                               ;84AB39|29EFFF  |      ;
-    STA.L strcDailyFlags.flags2                                ;84AB3C|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$FFEF)
     SEP #$20                                                   ;84AB40|E220    |      ;
     LDA.L nHorseAge                                            ;84AB42|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;84AB46|C915    |      ;
@@ -5403,8 +5370,7 @@ fAIAction0x35_UpdateHorse:
  
 .label1:
     REP #$20                                                   ;84AB73|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84AB75|AF5C1F7F|7F1F5C;
-    AND.W #$0040                                               ;84AB79|294000  |      ;
+    %CheckFlag(daily2, $0040)
     BNE +                                                      ;84AB7C|D003    |84AB81;
     JMP.W .loop                                                ;84AB7E|4CDFAB  |84ABDF;
  
@@ -5457,20 +5423,16 @@ fAIAction0x35_UpdateHorse:
 .break:
     JSL.L fAI_Unknown84803F                                    ;84ABCE|223F8084|84803F;
     REP #$30                                                   ;84ABD2|C230    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84ABD4|AF5C1F7F|7F1F5C;
-    AND.W #$FFBF                                               ;84ABD8|29BFFF  |      ;
-    STA.L strcDailyFlags.flags2                                ;84ABDB|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$FFBF)
  
 .loop:
     REP #$30                                                   ;84ABDF|C230    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84ABE1|AF5C1F7F|7F1F5C;
-    AND.W #$0800                                               ;84ABE5|290008  |      ;
+    %CheckFlag(daily2, $0800)
     BEQ +                                                      ;84ABE8|F003    |84ABED;
     JMP.W .label2                                              ;84ABEA|4CEEAC  |84ACEE;
  
  
-  + LDA.L strcDailyFlags.flags2                                ;84ABED|AF5C1F7F|7F1F5C;
-    AND.W #$0020                                               ;84ABF1|292000  |      ;
+  + %CheckFlag(daily2, $0020)
     BEQ +                                                      ;84ABF4|F003    |84ABF9;
     JMP.W .label9                                              ;84ABF6|4CA4AD  |84ADA4;
  
@@ -5518,16 +5480,13 @@ fAIAction0x35_UpdateHorse:
     JMP.W .label2                                              ;84AC42|4CEEAC  |84ACEE;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;84AC45|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84AC49|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;84AC4C|F003    |84AC51;
     JMP.W .label2                                              ;84AC4E|4CEEAC  |84ACEE;
  
  
   + REP #$20                                                   ;84AC51|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84AC53|AF5C1F7F|7F1F5C;
-    ORA.W #$0010                                               ;84AC57|091000  |      ;
-    STA.L strcDailyFlags.flags2                                ;84AC5A|8F5C1F7F|7F1F5C;
+    %SetFlag(daily2, $0010)
     REP #$20                                                   ;84AC5E|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AC60|AD2801  |000128;
     BIT.W #$0080                                               ;84AC63|898000  |      ;
@@ -5601,9 +5560,7 @@ fAIAction0x35_UpdateHorse:
  
 .label2:
     REP #$30                                                   ;84ACEE|C230    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84ACF0|AF5C1F7F|7F1F5C;
-    AND.W #$F7FF                                               ;84ACF4|29FFF7  |      ;
-    STA.L strcDailyFlags.flags2                                ;84ACF7|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$F7FF)
     SEP #$20                                                   ;84ACFB|E220    |      ;
     LDA.W $0939                                                ;84ACFD|AD3909  |000939;
     CMP.B #$78                                                 ;84AD00|C978    |      ;
@@ -5679,8 +5636,7 @@ fAIAction0x35_UpdateHorse:
  
 .label8:
     REP #$30                                                   ;84AD88|C230    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84AD8A|AF5C1F7F|7F1F5C;
-    AND.W #$0400                                               ;84AD8E|290004  |      ;
+    %CheckFlag(daily2, $0400)
     BEQ .loop2                                                 ;84AD91|F003    |84AD96;
     JMP.W .label10                                             ;84AD93|4CF2AD  |84ADF2;
  
@@ -5698,9 +5654,7 @@ fAIAction0x35_UpdateHorse:
 .label9:
     %SetPlayerFlag(!PFLAGS_RIDINGHORSE)
     REP #$20                                                   ;84ADAD|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84ADAF|AF5C1F7F|7F1F5C;
-    AND.W #$FFDF                                               ;84ADB3|29DFFF  |      ;
-    STA.L strcDailyFlags.flags2                                ;84ADB6|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$FFDF)
     SEP #$20                                                   ;84ADBA|E220    |      ;
     REP #$10                                                   ;84ADBC|C210    |      ;
     LDY.W #$0000                                               ;84ADBE|A00000  |      ;
@@ -5942,8 +5896,7 @@ fAIAction0x36_UpdateDog:
     JMP.W .label1                                              ;84AF71|4CF4AF  |84AFF4;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;84AF74|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84AF78|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BNE .label1                                                ;84AF7B|D077    |84AFF4;
     REP #$20                                                   ;84AF7D|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AF7F|AD2801  |000128;
@@ -6310,8 +6263,7 @@ fAIAction0x36_UpdateDog:
  
 .label24:
     REP #$30                                                   ;84B25C|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;84B25E|AF601F7F|7F1F60;
-    AND.W #$0010                                               ;84B262|291000  |      ;
+    %CheckFlag(daily4, $0010)
     BEQ .loop2                                                 ;84B265|F003    |84B26A;
     JMP.W .whistledog                                          ;84B267|4C78B2  |84B278;
  
@@ -6461,8 +6413,7 @@ fAIAction0x37:
  
 fAIAction0x38:
     REP #$30                                                   ;84B365|C230    |      ;
-    LDA.L strcDailyFlags.flags1                                ;84B367|AF5A1F7F|7F1F5A;
-    AND.W #$8000                                               ;84B36B|290080  |      ;
+    %CheckFlag(daily1, $8000)
     BEQ +                                                      ;84B36E|F00B    |84B37B;
     %AIMoveAction($0001)
     RTS                                                        ;84B37A|60      |      ;
@@ -6631,9 +6582,7 @@ fAIAction0x3C:
     LDA.W nMapEngine_flags                                     ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
     STA.W nMapEngine_flags                                     ;84B51E|8D9601  |000196;
-    LDA.L strcDailyFlags.flags4                                ;84B521|AF601F7F|7F1F60;
-    ORA.W #$0020                                               ;84B525|092000  |      ;
-    STA.L strcDailyFlags.flags4                                ;84B528|8F601F7F|7F1F60;
+    %SetFlag(daily4, $0020)
     RTS                                                        ;84B52C|60      |      ;
  
  
@@ -6673,9 +6622,7 @@ fAIAction0x40_DisableTileInteractions:
     REP #$30                                                   ;84B58F|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84B59B|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84B59D|AF5C1F7F|7F1F5C;
-    ORA.W #$0008                                               ;84B5A1|090800  |      ;
-    STA.L strcDailyFlags.flags2                                ;84B5A4|8F5C1F7F|7F1F5C;
+    %SetFlag(daily2, $0008)
     RTS                                                        ;84B5A8|60      |      ;
  
  
@@ -7038,8 +6985,7 @@ fAIAction0x4A:
   + REP #$20                                                   ;84B988|C220    |      ;
     %CheckPlayerFlagsNoReg($0004)
     BNE .return                                                
-    LDA.L strcDailyFlags.flags4                                ;84B991|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84B995|290600  |      ;
+    %CheckFlag(daily4, $0006)
     BNE .return                                                ;84B998|D068    |84BA02;
     REP #$20                                                   ;84B99A|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84B99C|AD2801  |000128;
@@ -7157,8 +7103,7 @@ fAIAction0x4D:
  
  
   + REP #$20                                                   ;84BA9A|C220    |      ;
-    LDA.L strcDailyFlags.flags3                                ;84BA9C|AF5E1F7F|7F1F5E;
-    AND.W #$0040                                               ;84BAA0|294000  |      ;
+    %CheckFlag(daily3, $0040)
     BNE +                                                      ;84BAA3|D003    |84BAA8;
     JMP.W .return                                              ;84BAA5|4C26BB  |84BB26;
  
@@ -7231,9 +7176,7 @@ fAIAction0x4E:
     REP #$30                                                   ;84BB31|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BB3D|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84BB3F|AF5C1F7F|7F1F5C;
-    AND.W #$FFF7                                               ;84BB43|29F7FF  |      ;
-    STA.L strcDailyFlags.flags2                                ;84BB46|8F5C1F7F|7F1F5C;
+    %UnsetFlag(daily2, ~$FFF7)
     RTS                                                        ;84BB4A|60      |      ;
  
  
@@ -7241,9 +7184,7 @@ fAIAction0x4F:
     REP #$30                                                   ;84BB4B|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BB57|C220    |      ;
-    LDA.L strcDailyFlags.flags4                                ;84BB59|AF601F7F|7F1F60;
-    ORA.W #$8000                                               ;84BB5D|090080  |      ;
-    STA.L strcDailyFlags.flags4                                ;84BB60|8F601F7F|7F1F60;
+    %SetFlag(daily4, $8000)
     RTS                                                        ;84BB64|60      |      ;
  
     SEP #$20                                                   ;84BB65|E220    |      ;
@@ -7525,8 +7466,7 @@ fAIAction0x52:
   + REP #$20                                                   ;84BD90|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .return                                                ;84BD97|D066    |84BDFF;
-    LDA.L strcDailyFlags.flags4                                ;84BD99|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84BD9D|290600  |      ;
+    %CheckFlag(daily4, $0006)
     BNE .return                                                ;84BDA0|D05D    |84BDFF;
     REP #$20                                                   ;84BDA2|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84BDA4|AD2801  |000128;
@@ -7567,9 +7507,7 @@ fAIAction0x52:
     ADC.W #$0001                                               ;84BDEC|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84BDEF|97CC    |0000CC;
     REP #$30                                                   ;84BDF1|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;84BDF3|AF601F7F|7F1F60;
-    ORA.W #$0002                                               ;84BDF7|090200  |      ;
-    STA.L strcDailyFlags.flags4                                ;84BDFA|8F601F7F|7F1F60;
+    %SetFlag(daily4, $0002)
     RTS                                                        ;84BDFE|60      |      ;
  
  
@@ -7626,8 +7564,7 @@ fAIAction0x53:
   + REP #$20                                                   ;84BE59|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BNE .return                                                ;84BE60|D066    |84BEC8;
-    LDA.L strcDailyFlags.flags4                                ;84BE62|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84BE66|290600  |      ;
+    %CheckFlag(daily4, $0006)
     BNE .return                                                ;84BE69|D05D    |84BEC8;
     REP #$20                                                   ;84BE6B|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84BE6D|AD2801  |000128;
@@ -7668,9 +7605,7 @@ fAIAction0x53:
     ADC.W #$0001                                               ;84BEB5|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84BEB8|97CC    |0000CC;
     REP #$30                                                   ;84BEBA|C230    |      ;
-    LDA.L strcDailyFlags.flags4                                ;84BEBC|AF601F7F|7F1F60;
-    ORA.W #$0004                                               ;84BEC0|090400  |      ;
-    STA.L strcDailyFlags.flags4                                ;84BEC3|8F601F7F|7F1F60;
+    %SetFlag(daily4, $0004)
     RTS                                                        ;84BEC7|60      |      ;
  
  
@@ -8162,8 +8097,7 @@ fInput_Unknown84C2B4:
     JSL.L fInput_AIJoypadHandler                               ;84C2BD|22D6C784|84C7D6;
  
   + REP #$30                                                   ;84C2C1|C230    |      ;
-    LDA.L strcDailyFlags.flags1                                ;84C2C3|AF5A1F7F|7F1F5A;
-    AND.W #$8000                                               ;84C2C7|290080  |      ;
+    %CheckFlag(daily1, $8000)
     BEQ .justReturn                                            ;84C2CA|F00B    |84C2D7;
     LDA.W strcJoypad1.newInput                                 ;84C2CC|AD2801  |000128;
     BIT.W #$1000                                               ;84C2CF|890010  |      ;
@@ -8186,9 +8120,7 @@ fInput_Unknown84C2B4:
     STA.W nAudioRegisterValue1                                 ;84C2E9|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C2EC|22328383|838332;
     REP #$20                                                   ;84C2F0|C220    |      ;
-    LDA.L strcDailyFlags.flags2                                ;84C2F2|AF5C1F7F|7F1F5C;
-    ORA.W #$0004                                               ;84C2F6|090400  |      ;
-    STA.L strcDailyFlags.flags2                                ;84C2F9|8F5C1F7F|7F1F5C;
+    %SetFlag(daily2, $0004)
     RTL                                                        ;84C2FD|6B      |      ;
  
  
@@ -8362,8 +8294,7 @@ fInput_Unkown84C380:
  
 fInput_Unknown84C428:
     REP #$30                                                   ;84C428|C230    |      ;
-    LDA.L strcDailyFlags.flags1                                ;84C42A|AF5A1F7F|7F1F5A;
-    AND.W #$8000                                               ;84C42E|290080  |      ;
+    %CheckFlag(daily1, $8000)
     BEQ .justReturn                                            ;84C431|F00B    |84C43E;
     LDA.W strcJoypad1.newInput                                 ;84C433|AD2801  |000128;
     BIT.W #$1000                                               ;84C436|890010  |      ;
@@ -8731,8 +8662,7 @@ fInput_Handler_case01:
     JMP.W fInput_Return84C7B5                                  ;84C6CA|4CB5C7  |84C7B5;
  
  
-  + LDA.L strcDailyFlags.flags2                                ;84C6CD|AF5C1F7F|7F1F5C;
-    AND.W #$0020                                               ;84C6D1|292000  |      ;
+  + %CheckFlag(daily2, $0020)
     BEQ +                                                      ;84C6D4|F003    |84C6D9;
     JMP.W fInput_Return84C7B5                                  ;84C6D6|4CB5C7  |84C7B5;
  
@@ -9242,8 +9172,7 @@ fInput_Unknown84CAA5:
     JMP.W .label4                                              ;84CAB8|4C1CCC  |84CC1C;
  
  
-  + LDA.L strcDailyFlags.flags4                                ;84CABB|AF601F7F|7F1F60;
-    AND.W #$0006                                               ;84CABF|290600  |      ;
+  + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;84CAC2|F003    |84CAC7;
     JMP.W .label2                                              ;84CAC4|4CFECA  |84CAFE;
  
@@ -9618,8 +9547,7 @@ fInput_Unknown84CD77:
  
 fInput_SetPlayerAction0x0A:
     REP #$20                                                   ;84CDBF|C220    |      ;
-    LDA.L strcDailyFlags.flags4                                ;84CDC1|AF601F7F|7F1F60;
-    AND.W #$8000                                               ;84CDC5|290080  |      ;
+    %CheckFlag(daily4, $8000)
     BNE fInput_Return84CDDC                                    ;84CDC8|D012    |84CDDC;
     SEP #$20                                                   ;84CDCA|E220    |      ;
     LDA.W nToolEquipped                                        ;84CDCC|AD2109  |000921;
@@ -9674,8 +9602,7 @@ fInput_SetPlayerAction0x0D_WhistleR:
  
  
   + REP #$30                                                   ;84CE30|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;84CE32|AF681F7F|7F1F68;
-    AND.W #$0100                                               ;84CE36|290001  |      ;
+    %CheckFlag(event3, $0100)
     BEQ .justReturn                                            ;84CE39|F007    |84CE42;
     %SetPlayerAction(!PACTION_WHISTLEHORSE)
  
@@ -9700,8 +9627,7 @@ fInput_SetPlayerAction0x1B_WhistleL:
  
  
   + REP #$30                                                   ;84CE67|C230    |      ;
-    LDA.L strcEventFlags.flags3                                ;84CE69|AF681F7F|7F1F68;
-    AND.W #$0080                                               ;84CE6D|298000  |      ;
+    %CheckFlag(event3, $0080)
     BEQ .justReturn                                            ;84CE70|F007    |84CE79;
     %SetPlayerAction(!PACTION_WHISTLEDOG)
  
