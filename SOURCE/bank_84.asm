@@ -46,36 +46,36 @@ fAI_Unknown84803F:
     STY.B n16TempVar2                                          ;848049|8480    |000080;
     LDX.W #$0000                                               ;84804B|A20000  |      ;
     LDA.L pppAISelector,X                                      ;84804E|BFCD9484|8494CD; index = 0
-    STA.B ptrObjectUnknown0x75                                 ;848052|8575    |000075;
+    STA.B ptrUnknown0x75                                       ;848052|8575    |000075;
     INX                                                        ;848054|E8      |      ;
     INX                                                        ;848055|E8      |      ;
     SEP #$20                                                   ;848056|E220    |      ;
     LDA.L pppAISelector,X                                      ;848058|BFCD9484|8494CD;
-    STA.B ptrObjectUnknown0x75+2                               ;84805C|8577    |000077; $0x75 = 0xB38000
+    STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077; $0x75 = 0xB38000
     REP #$20                                                   ;84805E|C220    |      ;
     LDA.B n16TempVar1                                          ;848060|A57E    |00007E;
     ASL A                                                      ;848062|0A      |      ;
     CLC                                                        ;848063|18      |      ;
     ADC.B n16TempVar1                                          ;848064|657E    |00007E;
     TAY                                                        ;848066|A8      |      ;
-    LDA.B [ptrObjectUnknown0x75],Y                             ;848067|B775    |000075; index = nIndex * 2
-    STA.B ptrObjectUnknown0x78                                 ;848069|8578    |000078;
+    LDA.B [ptrUnknown0x75],Y                                   ;848067|B775    |000075; index = nIndex * 2
+    STA.B ptrObjectData                                        ;848069|8578    |000078;
     INY                                                        ;84806B|C8      |      ;
     INY                                                        ;84806C|C8      |      ;
     SEP #$20                                                   ;84806D|E220    |      ;
-    LDA.B [ptrObjectUnknown0x75],Y                             ;84806F|B775    |000075;
-    STA.B ptrObjectUnknown0x78+2                               ;848071|857A    |00007A; $78 = 0xB38BB8
+    LDA.B [ptrUnknown0x75],Y                                   ;84806F|B775    |000075;
+    STA.B ptrObjectData+2                                      ;848071|857A    |00007A; $78 = 0xB38BB8
     REP #$20                                                   ;848073|C220    |      ;
     LDA.B n16TempVar2                                          ;848075|A580    |000080;
     ASL A                                                      ;848077|0A      |      ;
     TAY                                                        ;848078|A8      |      ;
-    LDA.B [ptrObjectUnknown0x78],Y                             ;848079|B778    |000078; index = nSubindex * 2
+    LDA.B [ptrObjectData],Y                                    ;848079|B778    |000078; index = nSubindex * 2
     REP #$30                                                   ;84807B|C230    |      ;
     LDY.W #$0030                                               ;84807D|A03000  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848080|97CC    |0000CC;
     STA.B ptrAIActionData                                      ;848082|85C9    |0000C9;
     SEP #$20                                                   ;848084|E220    |      ;
-    LDA.B ptrObjectUnknown0x78+2                               ;848086|A57A    |00007A;
+    LDA.B ptrObjectData+2                                      ;848086|A57A    |00007A;
     SEP #$20                                                   ;848088|E220    |      ;
     REP #$10                                                   ;84808A|C210    |      ;
     LDY.W #$0032                                               ;84808C|A03200  |      ;
