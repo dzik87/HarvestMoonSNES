@@ -324,11 +324,11 @@ fObject_ClearGameObject:
 .continue:
     REP #$30                                                   ;85822C|C230    |      ;
     LDA.W #$0000                                               ;85822E|A90000  |      ;
-    STA.W $0086                                                ;858231|8D8600  |000086;
+    STA.W strcVariables.n16Unk86                               ;858231|8D8600  |000086;
     LDY.W #$0000                                               ;858234|A00000  |      ;
  
 .loop:
-    LDX.W $0086                                                ;858237|AE8600  |000086;
+    LDX.W strcVariables.n16Unk86                               ;858237|AE8600  |000086;
     LDA.W #$0000                                               ;85823A|A90000  |      ;
     STA.W strcGameObject.initailized,X                         ;85823D|9D9C01  |00019C;
     LDA.W #$0000                                               ;858240|A90000  |      ;
@@ -368,10 +368,10 @@ fObject_ClearGameObject:
     STA.W strcGameObject.unknown1BE,X                          ;8582A4|9DBE01  |0001BE;
     STA.W strcGameObject.unknown1BF,X                          ;8582A7|9DBF01  |0001BF;
     REP #$20                                                   ;8582AA|C220    |      ;
-    LDA.W $0086                                                ;8582AC|AD8600  |000086;
+    LDA.W strcVariables.n16Unk86                               ;8582AC|AD8600  |000086;
     CLC                                                        ;8582AF|18      |      ;
     ADC.W #$0024                                               ;8582B0|692400  |      ;
-    STA.W $0086                                                ;8582B3|8D8600  |000086;
+    STA.W strcVariables.n16Unk86                               ;8582B3|8D8600  |000086;
     INY                                                        ;8582B6|C8      |      ;
     CPY.W #$0028                                               ;8582B7|C02800  |      ;
     BEQ .exit                                                  ;8582BA|F003    |8582BF;
@@ -509,7 +509,7 @@ fObject_Unknown858377:
     DEC A                                                      ;85838F|3A      |      ;
     STA.B strcObject.unkAF                                     ;858390|85AF    |0000AF;
     LDA.W #$FFFF                                               ;858392|A9FFFF  |      ;
-    STA.B n16TempVar1                                          ;858395|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;858395|857E    |00007E;
     LDY.W #$0000                                               ;858397|A00000  |      ;
     LDX.W #$0000                                               ;85839A|A20000  |      ;
  
@@ -654,12 +654,12 @@ fUnknown_8583E0:
     INC.B ptrObjectData                                        ;858483|E678    |000078;
     LDA.B strcObject.totalComponents                           ;858485|A5AD    |0000AD;
     DEC A                                                      ;858487|3A      |      ;
-    STA.B n16TempVar1                                          ;858488|857E    |00007E; i = i - 1
+    STA.B strcVariables.n16Temp1                               ;858488|857E    |00007E; i = i - 1
     ASL A                                                      ;85848A|0A      |      ; i = i * 2
-    STA.B n16TempVar2                                          ;85848B|8580    |000080; j = i * 2
+    STA.B strcVariables.n16Temp2                               ;85848B|8580    |000080; j = i * 2
     CLC                                                        ;85848D|18      |      ;
-    ADC.B n16TempVar1                                          ;85848E|657E    |00007E; i = i * 3
-    ADC.B n16TempVar2                                          ;858490|6580    |000080; i = i * 5
+    ADC.B strcVariables.n16Temp1                               ;85848E|657E    |00007E; i = i * 3
+    ADC.B strcVariables.n16Temp2                               ;858490|6580    |000080; i = i * 5
     ADC.B ptrObjectData                                        ;858492|6578    |000078;
     STA.B ptrObjectData                                        ;858494|8578    |000078;
     LDA.B strcObject.gameObjectIdxOffs                         ;858496|A5A9    |0000A9;
@@ -740,24 +740,24 @@ fUnknown_8583E0:
     REP #$30                                                   ;858502|C230    |      ;
     LDA.B strcObject.unkAF                                     ;858504|A5AF    |0000AF;
     AND.W #$FFE0                                               ;858506|29E0FF  |      ;
-    STA.B n16TempVar1                                          ;858509|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;858509|857E    |00007E;
     LSR A                                                      ;85850B|4A      |      ;
     LSR A                                                      ;85850C|4A      |      ;
     LSR A                                                      ;85850D|4A      |      ;
     LSR A                                                      ;85850E|4A      |      ;
-    STA.B n16TempVar2                                          ;85850F|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;85850F|8580    |000080;
     LDA.B strcObject.unkAF                                     ;858511|A5AF    |0000AF;
     SEC                                                        ;858513|38      |      ;
-    SBC.B n16TempVar1                                          ;858514|E57E    |00007E;
-    STA.B n16TempVar1                                          ;858516|857E    |00007E;
-    LDA.B n16TempVar2                                          ;858518|A580    |000080;
+    SBC.B strcVariables.n16Temp1                               ;858514|E57E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;858516|857E    |00007E;
+    LDA.B strcVariables.n16Temp2                               ;858518|A580    |000080;
     TAX                                                        ;85851A|AA      |      ;
     LDA.L DMASpriteOBJ2BitQueue,X                              ;85851B|BF00A27E|7EA200;
     STA.B $C3                                                  ;85851F|85C3    |0000C3;
     LDA.B $BF                                                  ;858521|A5BF    |0000BF;
     CMP.W #$0100                                               ;858523|C90001  |      ;
     BCC .label14                                               ;858526|900F    |858537;
-    LDA.B n16TempVar1                                          ;858528|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;858528|A57E    |00007E;
     AND.W #$FFFC                                               ;85852A|29FCFF  |      ;
     LSR A                                                      ;85852D|4A      |      ;
     TAX                                                        ;85852E|AA      |      ;
@@ -796,7 +796,7 @@ fUnknown_8583E0:
     SEP #$20                                                   ;858569|E220    |      ;
     STA.L $7EA001,X                                            ;85856B|9F01A07E|7EA001;
     REP #$20                                                   ;85856F|C220    |      ;
-    LDX.B n16TempVar2                                          ;858571|A680    |000080;
+    LDX.B strcVariables.n16Temp2                               ;858571|A680    |000080;
     LDA.B $C3                                                  ;858573|A5C3    |0000C3;
     STA.L DMASpriteOBJ2BitQueue,X                              ;858575|9F00A27E|7EA200;
     REP #$30                                                   ;858579|C230    |      ;
@@ -1563,7 +1563,7 @@ fUnknown_858CB2:
     REP #$20                                                   ;858D79|C220    |      ;
     LDA.B $C1                                                  ;858D7B|A5C1    |0000C1;
     AND.W #$FFC0                                               ;858D7D|29C0FF  |      ;
-    STA.B n16TempVar1                                          ;858D80|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;858D80|857E    |00007E;
     LSR A                                                      ;858D82|4A      |      ;
     LSR A                                                      ;858D83|4A      |      ;
     LSR A                                                      ;858D84|4A      |      ;
@@ -1573,22 +1573,22 @@ fUnknown_858CB2:
     STA.B $C3                                                  ;858D88|85C3    |0000C3;
     LDA.B $C1                                                  ;858D8A|A5C1    |0000C1;
     SEC                                                        ;858D8C|38      |      ;
-    SBC.B n16TempVar1                                          ;858D8D|E57E    |00007E;
+    SBC.B strcVariables.n16Temp1                               ;858D8D|E57E    |00007E;
     STA.B $C1                                                  ;858D8F|85C1    |0000C1;
     LDA.B $C3                                                  ;858D91|A5C3    |0000C3;
     LSR A                                                      ;858D93|4A      |      ;
     LSR A                                                      ;858D94|4A      |      ;
-    STA.B n16TempVar1                                          ;858D95|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;858D95|857E    |00007E;
     CLC                                                        ;858D97|18      |      ;
     ADC.W #$0088                                               ;858D98|698800  |      ;
     STA.B $C5                                                  ;858D9B|85C5    |0000C5;
-    LDA.B n16TempVar1                                          ;858D9D|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;858D9D|A57E    |00007E;
     ASL A                                                      ;858D9F|0A      |      ;
     ASL A                                                      ;858DA0|0A      |      ;
-    STA.B n16TempVar1                                          ;858DA1|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;858DA1|857E    |00007E;
     LDA.B $C3                                                  ;858DA3|A5C3    |0000C3;
     SEC                                                        ;858DA5|38      |      ;
-    SBC.B n16TempVar1                                          ;858DA6|E57E    |00007E;
+    SBC.B strcVariables.n16Temp1                               ;858DA6|E57E    |00007E;
     STA.B $C3                                                  ;858DA8|85C3    |0000C3;
     LDA.B $C3                                                  ;858DAA|A5C3    |0000C3;
     ASL A                                                      ;858DAC|0A      |      ;

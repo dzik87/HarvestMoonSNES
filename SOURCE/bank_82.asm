@@ -381,11 +381,11 @@ fNextDayHandler:
     JSL.L fAudioUnknown_838401                                 ;828301|22018483|838401;
     SEP #$20                                                   ;828305|E220    |      ;
     LDA.B #$0F                                                 ;828307|A90F    |      ;
-    STA.B n8TempVar1                                           ;828309|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;828309|8592    |000092;
     LDA.B #$03                                                 ;82830B|A903    |      ;
-    STA.B n8TempVar2                                           ;82830D|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82830D|8593    |000093;
     LDA.B #$01                                                 ;82830F|A901    |      ;
-    STA.B n8TempVar3                                           ;828311|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;828311|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;828313|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;828317|220F8E80|808E0F;
     SEP #$20                                                   ;82831B|E220    |      ;
@@ -744,12 +744,12 @@ fUnknown_828790:
     LDA.L nMarriedDaysCounter                                  ;8287CF|AF3B1F7F|7F1F3B;
     INC A                                                      ;8287D3|1A      |      ;
     STA.L nMarriedDaysCounter                                  ;8287D4|8F3B1F7F|7F1F3B;
-    STA.B n16TempVar1                                          ;8287D8|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8287D8|857E    |00007E;
     LDA.W #$0078                                               ;8287DA|A97800  |      ;
-    STA.B n16TempVar2                                          ;8287DD|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;8287DD|8580    |000080;
     JSL.L fMathDivide                                          ;8287DF|22828083|838082;
     REP #$30                                                   ;8287E3|C230    |      ;
-    LDA.B n16TempVar1                                          ;8287E5|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;8287E5|A57E    |00007E;
     BNE +                                                      ;8287E7|D00B    |8287F4;
     %SetFlag(event5, $0080)
  
@@ -907,12 +907,12 @@ fUnknown_828790:
     LDA.L nFirstChildAge                                       ;82895A|AF371F7F|7F1F37;
     SEC                                                        ;82895E|38      |      ;
     SBC.W #$003C                                               ;82895F|E93C00  |      ;
-    STA.B n16TempVar1                                          ;828962|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;828962|857E    |00007E;
     LDA.W #$0078                                               ;828964|A97800  |      ;
-    STA.B n16TempVar2                                          ;828967|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;828967|8580    |000080;
     JSL.L fMathDivide                                          ;828969|22828083|838082;
     REP #$30                                                   ;82896D|C230    |      ;
-    LDA.B n16TempVar1                                          ;82896F|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;82896F|A57E    |00007E;
     BNE .label4                                                ;828971|D00B    |82897E;
     %SetFlag(event5, $0100)
  
@@ -938,12 +938,12 @@ fUnknown_828790:
     LDA.L nSecondChildAge                                      ;8289B1|AF391F7F|7F1F39;
     SEC                                                        ;8289B5|38      |      ;
     SBC.W #$003C                                               ;8289B6|E93C00  |      ;
-    STA.B n16TempVar1                                          ;8289B9|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8289B9|857E    |00007E;
     LDA.W #$0078                                               ;8289BB|A97800  |      ;
-    STA.B n16TempVar2                                          ;8289BE|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;8289BE|8580    |000080;
     JSL.L fMathDivide                                          ;8289C0|22828083|838082;
     REP #$30                                                   ;8289C4|C230    |      ;
-    LDA.B n16TempVar1                                          ;8289C6|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;8289C6|A57E    |00007E;
     BNE .return                                                ;8289C8|D00B    |8289D5;
     %SetFlag(event5, $0200)
  
@@ -1478,19 +1478,19 @@ fCore_FindBestLove:
     REP #$30                                                   ;828EC6|C230    |      ;
     LDY.W #$0000                                               ;828EC8|A00000  |      ;
     LDA.L nLove_Maria                                          ;828ECB|AF1F1F7F|7F1F1F;
-    STA.B n16TempVar1                                          ;828ECF|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;828ECF|857E    |00007E;
     LDX.W #$0002                                               ;828ED1|A20200  |      ;
  
 .loop:
     REP #$30                                                   ;828ED4|C230    |      ;
     LDA.L nLove_Maria,X                                        ;828ED6|BF1F1F7F|7F1F1F;
-    CMP.B n16TempVar1                                          ;828EDA|C57E    |00007E;
+    CMP.B strcVariables.n16Temp1                               ;828EDA|C57E    |00007E;
     BCS +                                                      ;828EDC|B002    |828EE0;
     BRA .someoneLovesMeMuch                                    ;828EDE|8007    |828EE7;
  
  
   + REP #$30                                                   ;828EE0|C230    |      ;
-    STA.B n16TempVar1                                          ;828EE2|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;828EE2|857E    |00007E;
     TXA                                                        ;828EE4|8A      |      ;
     LSR A                                                      ;828EE5|4A      |      ;
     TAY                                                        ;828EE6|A8      |      ;
@@ -1597,16 +1597,16 @@ fToolUsedSound_Unknown828FB1:
     CMP.B #$02                                                 ;828FB9|C902    |      ;
     BEQ .return                                                ;828FBB|F035    |828FF2;
     REP #$20                                                   ;828FBD|C220    |      ;
-    STA.B n16TempVar2                                          ;828FBF|8580    |000080; $80 = $0922
+    STA.B strcVariables.n16Temp2                               ;828FBF|8580    |000080; $80 = $0922
     SEP #$20                                                   ;828FC1|E220    |      ;
     LDA.B #$00                                                 ;828FC3|A900    |      ;
     XBA                                                        ;828FC5|EB      |      ;
     LDA.W strcPlayerData.toolEquipped                          ;828FC6|AD2109  |000921;
     REP #$20                                                   ;828FC9|C220    |      ;
-    STA.B n16TempVar1                                          ;828FCB|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;828FCB|857E    |00007E;
     ASL A                                                      ;828FCD|0A      |      ;
     CLC                                                        ;828FCE|18      |      ;
-    ADC.B n16TempVar1                                          ;828FCF|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;828FCF|657E    |00007E;
     TAX                                                        ;828FD1|AA      |      ;
     SEP #$20                                                   ;828FD2|E220    |      ;
     LDA.L nToolSoundData_829054,X                              ;828FD4|BF549082|829054; X = nToolEquipped * 3
@@ -1615,7 +1615,7 @@ fToolUsedSound_Unknown828FB1:
     REP #$20                                                   ;828FDC|C220    |      ;
     TXA                                                        ;828FDE|8A      |      ;
     CLC                                                        ;828FDF|18      |      ;
-    ADC.B n16TempVar2                                          ;828FE0|6580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;828FE0|6580    |000080;
     TAX                                                        ;828FE2|AA      |      ;
     SEP #$20                                                   ;828FE3|E220    |      ;
     LDA.L nToolSoundData_829054,X                              ;828FE5|BF549082|829054; X = nToolEquipped * 3 + $0922
@@ -1635,10 +1635,10 @@ fToolUsedSound_Unknown828FF3:
     CMP.W $0119                                                ;828FFB|CD1901  |000119;
     BEQ .return                                                ;828FFE|F04B    |82904B;
     REP #$20                                                   ;829000|C220    |      ;
-    STA.B n16TempVar1                                          ;829002|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;829002|857E    |00007E;
     ASL A                                                      ;829004|0A      |      ;
     CLC                                                        ;829005|18      |      ;
-    ADC.B n16TempVar1                                          ;829006|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;829006|657E    |00007E;
     TAX                                                        ;829008|AA      |      ;
     SEP #$20                                                   ;829009|E220    |      ;
     LDA.L nToolSoundData_829054,X                              ;82900B|BF549082|829054;
@@ -2244,7 +2244,7 @@ fToolUsedAction0x02_Plow:
     LDY.W #$0030                                               ;8294A9|A03000  |      ;
     JSL.L fAI_Unknown8480F8                                    ;8294AC|22F88084|8480F8;
     SEP #$20                                                   ;8294B0|E220    |      ;
-    STZ.W strcGoodsData.unkMole                                ;8294B2|9C3A09  |00093A;
+    STZ.W strcStockData.unkMole                                ;8294B2|9C3A09  |00093A;
     REP #$20                                                   ;8294B5|C220    |      ;
     %SetFlag(daily1, $1000)
     JMP.W .return                                              ;8294C2|4CB095  |8295B0;
@@ -2774,7 +2774,7 @@ fToolUsedAction0x05_CornSeedBag:
     REP #$10                                                   ;82999B|C210    |      ;
     LDA.B #$00                                                 ;82999D|A900    |      ;
     XBA                                                        ;82999F|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;8299A0|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;8299A0|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;8299A3|20D692  |8292D6;
     BNE +                                                      ;8299A6|D003    |8299AB;
     JMP.W .label1                                              ;8299A8|4CCA99  |8299CA;
@@ -2796,12 +2796,12 @@ fToolUsedAction0x05_CornSeedBag:
  
 .label1:
     SEP #$20                                                   ;8299CA|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;8299CC|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;8299CC|AD6B09  |00096B;
     INC A                                                      ;8299CF|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;8299D0|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;8299D0|8D6B09  |00096B;
     CMP.B #$09                                                 ;8299D3|C909    |      ;
     BNE .return                                                ;8299D5|D020    |8299F7;
-    STZ.W strcGoodsData.unkAnySeed                             ;8299D7|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;8299D7|9C6B09  |00096B;
     SEP #$20                                                   ;8299DA|E220    |      ;
     LDA.W strcPlayerData.leftCornSeeds                         ;8299DC|AD2809  |000928;
     DEC A                                                      ;8299DF|3A      |      ;
@@ -2823,7 +2823,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     REP #$10                                                   ;8299FA|C210    |      ;
     LDA.B #$00                                                 ;8299FC|A900    |      ;
     XBA                                                        ;8299FE|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;8299FF|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;8299FF|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829A02|20D692  |8292D6;
     BNE +                                                      ;829A05|D003    |829A0A;
     JMP.W .label1                                              ;829A07|4C299A  |829A29;
@@ -2845,12 +2845,12 @@ fToolUsedAction0x06_TomatoSeedBag:
  
 .label1:
     SEP #$20                                                   ;829A29|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829A2B|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829A2B|AD6B09  |00096B;
     INC A                                                      ;829A2E|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;829A2F|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;829A2F|8D6B09  |00096B;
     CMP.B #$09                                                 ;829A32|C909    |      ;
     BNE .return                                                ;829A34|D020    |829A56;
-    STZ.W strcGoodsData.unkAnySeed                             ;829A36|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;829A36|9C6B09  |00096B;
     SEP #$20                                                   ;829A39|E220    |      ;
     LDA.W strcPlayerData.leftTomatoSeeds                       ;829A3B|AD2909  |000929;
     DEC A                                                      ;829A3E|3A      |      ;
@@ -2872,7 +2872,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     REP #$10                                                   ;829A59|C210    |      ;
     LDA.B #$00                                                 ;829A5B|A900    |      ;
     XBA                                                        ;829A5D|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829A5E|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829A5E|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829A61|20D692  |8292D6;
     BNE +                                                      ;829A64|D003    |829A69;
     JMP.W .label1                                              ;829A66|4C869A  |829A86;
@@ -2893,12 +2893,12 @@ fToolUsedAction0x07_PotatoSeedBag:
  
 .label1:
     SEP #$20                                                   ;829A86|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829A88|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829A88|AD6B09  |00096B;
     INC A                                                      ;829A8B|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;829A8C|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;829A8C|8D6B09  |00096B;
     CMP.B #$09                                                 ;829A8F|C909    |      ;
     BNE .return                                                ;829A91|D020    |829AB3;
-    STZ.W strcGoodsData.unkAnySeed                             ;829A93|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;829A93|9C6B09  |00096B;
     SEP #$20                                                   ;829A96|E220    |      ;
     LDA.W strcPlayerData.leftPotatoSeeds                       ;829A98|AD2A09  |00092A;
     DEC A                                                      ;829A9B|3A      |      ;
@@ -2920,7 +2920,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     REP #$10                                                   ;829AB6|C210    |      ;
     LDA.B #$00                                                 ;829AB8|A900    |      ;
     XBA                                                        ;829ABA|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829ABB|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829ABB|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829ABE|20D692  |8292D6;
     BNE +                                                      ;829AC1|D003    |829AC6;
     JMP.W .label1                                              ;829AC3|4CE39A  |829AE3;
@@ -2941,12 +2941,12 @@ fToolUsedAction0x08_TurnipSeedBag:
  
 .label1:
     SEP #$20                                                   ;829AE3|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829AE5|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829AE5|AD6B09  |00096B;
     INC A                                                      ;829AE8|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;829AE9|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;829AE9|8D6B09  |00096B;
     CMP.B #$09                                                 ;829AEC|C909    |      ;
     BNE .return                                                ;829AEE|D020    |829B10;
-    STZ.W strcGoodsData.unkAnySeed                             ;829AF0|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;829AF0|9C6B09  |00096B;
     SEP #$20                                                   ;829AF3|E220    |      ;
     LDA.W strcPlayerData.leftTurnipSeeds                       ;829AF5|AD2B09  |00092B;
     DEC A                                                      ;829AF8|3A      |      ;
@@ -2998,7 +2998,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     REP #$10                                                   ;829B63|C210    |      ;
     LDA.B #$00                                                 ;829B65|A900    |      ;
     XBA                                                        ;829B67|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829B68|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829B68|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829B6B|20D692  |8292D6;
     BNE +                                                      ;829B6E|D003    |829B73;
     JMP.W .label1                                              ;829B70|4C9D9B  |829B9D;
@@ -3024,12 +3024,12 @@ fToolUsedAction0x0C_GrassSeedBag:
  
 .label1:
     SEP #$20                                                   ;829B9D|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829B9F|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829B9F|AD6B09  |00096B;
     INC A                                                      ;829BA2|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;829BA3|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;829BA3|8D6B09  |00096B;
     CMP.B #$09                                                 ;829BA6|C909    |      ;
     BNE .return                                                ;829BA8|D020    |829BCA;
-    STZ.W strcGoodsData.unkAnySeed                             ;829BAA|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;829BAA|9C6B09  |00096B;
     SEP #$20                                                   ;829BAD|E220    |      ;
     LDA.W strcPlayerData.leftGrassSeeds                        ;829BAF|AD2709  |000927;
     DEC A                                                      ;829BB2|3A      |      ;
@@ -3211,7 +3211,7 @@ fToolUsedAction0x11_GoldenSickle:
     REP #$10                                                   ;829D44|C210    |      ;
     LDA.B #$00                                                 ;829D46|A900    |      ;
     XBA                                                        ;829D48|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829D49|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829D49|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829D4C|20D692  |8292D6;
     BNE +                                                      ;829D4F|D003    |829D54;
     JMP.W .label6                                              ;829D51|4C6E9E  |829E6E;
@@ -3339,12 +3339,12 @@ fToolUsedAction0x11_GoldenSickle:
  
 .label6:
     SEP #$20                                                   ;829E6E|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829E70|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829E70|AD6B09  |00096B;
     INC A                                                      ;829E73|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;829E74|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;829E74|8D6B09  |00096B;
     CMP.B #$09                                                 ;829E77|C909    |      ;
     BNE .justReturn                                            ;829E79|D012    |829E8D;
-    STZ.W strcGoodsData.unkAnySeed                             ;829E7B|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;829E7B|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829E85|E220    |      ;
     LDA.B #$F8                                                 ;829E87|A9F8    |      ;
@@ -3359,7 +3359,7 @@ fToolUsedAction0x12_GoldenPlow:
     REP #$10                                                   ;829E90|C210    |      ;
     LDA.B #$00                                                 ;829E92|A900    |      ;
     XBA                                                        ;829E94|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829E95|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829E95|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292BC                              ;829E98|20BC92  |8292BC;
     BNE +                                                      ;829E9B|D003    |829EA0;
     JMP.W .return                                              ;829E9D|4CF09F  |829FF0;
@@ -3476,15 +3476,15 @@ fToolUsedAction0x12_GoldenPlow:
  
 .label6:
     SEP #$20                                                   ;829FE3|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;829FE5|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;829FE5|AD6B09  |00096B;
     INC A                                                      ;829FE8|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;829FE9|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;829FE9|8D6B09  |00096B;
     CMP.B #$06                                                 ;829FEC|C906    |      ;
     BNE .justReturn                                            ;829FEE|D014    |82A004;
  
 .return:
     SEP #$20                                                   ;829FF0|E220    |      ;
-    STZ.W strcGoodsData.unkAnySeed                             ;829FF2|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;829FF2|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829FFC|E220    |      ;
     LDA.B #$F8                                                 ;829FFE|A9F8    |      ;
@@ -3848,7 +3848,7 @@ fToolUsedAction0x15_Sprinkler:
     SEP #$20                                                   ;82A31D|E220    |      ;
     LDA.B #$00                                                 ;82A31F|A900    |      ;
     XBA                                                        ;82A321|EB      |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;82A322|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;82A322|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;82A325|20D692  |8292D6;
     BNE +                                                      ;82A328|D003    |82A32D;
     JMP.W .return                                              ;82A32A|4C57A3  |82A357;
@@ -3878,12 +3878,12 @@ fToolUsedAction0x15_Sprinkler:
  
 .return:
     SEP #$20                                                   ;82A357|E220    |      ;
-    LDA.W strcGoodsData.unkAnySeed                             ;82A359|AD6B09  |00096B;
+    LDA.W strcStockData.unkAnySeed                             ;82A359|AD6B09  |00096B;
     INC A                                                      ;82A35C|1A      |      ;
-    STA.W strcGoodsData.unkAnySeed                             ;82A35D|8D6B09  |00096B;
+    STA.W strcStockData.unkAnySeed                             ;82A35D|8D6B09  |00096B;
     CMP.B #$09                                                 ;82A360|C909    |      ;
     BNE .justReturn                                            ;82A362|D012    |82A376;
-    STZ.W strcGoodsData.unkAnySeed                             ;82A364|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;82A364|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A36E|E220    |      ;
     LDA.B #$F8                                                 ;82A370|A9F8    |      ;
@@ -4289,8 +4289,8 @@ fObjectMap_CurrentMapToFarmMap:
 .continue:
     PHY                                                        ;82A6BB|5A      |      ;
     PHX                                                        ;82A6BC|DA      |      ;
-    STX.B n16TempVar3                                          ;82A6BD|8682    |000082;
-    STY.B n16TempVar4                                          ;82A6BF|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82A6BD|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82A6BF|8484    |000084;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A6C1|203CB1  |82B13C;
     SEP #$20                                                   ;82A6C4|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A6C6|BFE6A47E|7EA4E6;
@@ -4351,9 +4351,9 @@ fObjectMap_CurrentMapToFarmMap:
  
 fObjectMap_HuricaneDamage:
     REP #$30                                                   ;82A713|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
-    STA.B $86                                                  ;82A715|8586    |000086;
-    STX.B $88                                                  ;82A717|8688    |000088;
-    STY.B $8A                                                  ;82A719|848A    |00008A;
+    STA.B strcVariables.n16Unk86                               ;82A715|8586    |000086;
+    STX.B strcVariables.n16Unk88                               ;82A717|8688    |000088;
+    STY.B strcVariables.n16Unk8A                               ;82A719|848A    |00008A;
     SEP #$20                                                   ;82A71B|E220    |      ;
     LDA.B #$04                                                 ;82A71D|A904    |      ;
     STA.W nCurrentMapdata_RoomWidthMult                        ;82A71F|8D8101  |000181;
@@ -4364,8 +4364,8 @@ fObjectMap_HuricaneDamage:
  
   - PHY                                                        ;82A72A|5A      |      ;
     PHX                                                        ;82A72B|DA      |      ;
-    STX.B n16TempVar3                                          ;82A72C|8682    |000082;
-    STY.B n16TempVar4                                          ;82A72E|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82A72C|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82A72E|8484    |000084;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A730|203CB1  |82B13C;
     SEP #$20                                                   ;82A733|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A735|BFE6A47E|7EA4E6;
@@ -4394,7 +4394,7 @@ fObjectMap_HuricaneDamage:
  
 .label1:
     REP #$30                                                   ;82A75E|C230    |      ;
-    LDA.B $86                                                  ;82A760|A586    |000086;
+    LDA.B strcVariables.n16Unk86                               ;82A760|A586    |000086;
     BNE +                                                      ;82A762|D003    |82A767;
     JMP.W .label7                                              ;82A764|4CF0A7  |82A7F0;
  
@@ -4418,7 +4418,7 @@ fObjectMap_HuricaneDamage:
  
 .label3:
     REP #$30                                                   ;82A784|C230    |      ;
-    LDA.B $88                                                  ;82A786|A588    |000088;
+    LDA.B strcVariables.n16Unk88                               ;82A786|A588    |000088;
     BEQ .label7                                                ;82A788|F066    |82A7F0;
     PHX                                                        ;82A78A|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A78B|22F98980|8089F9;
@@ -4447,7 +4447,7 @@ fObjectMap_HuricaneDamage:
  
 .label5:
     REP #$30                                                   ;82A7B8|C230    |      ;
-    LDA.B $88                                                  ;82A7BA|A588    |000088;
+    LDA.B strcVariables.n16Unk88                               ;82A7BA|A588    |000088;
     BEQ .label7                                                ;82A7BC|F032    |82A7F0;
     PHX                                                        ;82A7BE|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A7BF|22F98980|8089F9;
@@ -4463,7 +4463,7 @@ fObjectMap_HuricaneDamage:
  
 .label6:
     REP #$30                                                   ;82A7D4|C230    |      ;
-    LDA.B $8A                                                  ;82A7D6|A58A    |00008A;
+    LDA.B strcVariables.n16Unk8A                               ;82A7D6|A58A    |00008A;
     BEQ .label7                                                ;82A7D8|F016    |82A7F0;
     PHX                                                        ;82A7DA|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A7DB|22F98980|8089F9;
@@ -4517,8 +4517,8 @@ fObjectMap_Unknown82A811:
 .continue:
     PHY                                                        ;82A822|5A      |      ;
     PHX                                                        ;82A823|DA      |      ;
-    STX.B n16TempVar3                                          ;82A824|8682    |000082;
-    STY.B n16TempVar4                                          ;82A826|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82A824|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82A826|8484    |000084;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A828|203CB1  |82B13C;
     SEP #$20                                                   ;82A82B|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A82D|BFE6A47E|7EA4E6;
@@ -4750,8 +4750,8 @@ fObjectMap_EatingGrass:
  
   - PHY                                                        ;82A9B4|5A      |      ;
     PHX                                                        ;82A9B5|DA      |      ;
-    STX.B n16TempVar3                                          ;82A9B6|8682    |000082;
-    STY.B n16TempVar4                                          ;82A9B8|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82A9B6|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82A9B8|8484    |000084;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82A9BA|203CB1  |82B13C;
     SEP #$20                                                   ;82A9BD|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A9BF|BFE6A47E|7EA4E6;
@@ -4816,8 +4816,8 @@ fObjectMap_CalculateRanchDev:
  
   - PHY                                                        ;82AA24|5A      |      ;
     PHX                                                        ;82AA25|DA      |      ;
-    STX.B n16TempVar3                                          ;82AA26|8682    |000082;
-    STY.B n16TempVar4                                          ;82AA28|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82AA26|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82AA28|8484    |000084;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82AA2A|203CB1  |82B13C;
     SEP #$20                                                   ;82AA2D|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82AA2F|BFE6A47E|7EA4E6;
@@ -5158,7 +5158,7 @@ fSound_GetToolSound:
  
 fUnknown_82AC61:
     REP #$30                                                   ;82AC61|C230    |      ; A: nArg1, X: nPosX, Y: nPosY
-    STA.B n16TempVar3                                          ;82AC63|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82AC63|8582    |000082;
     REP #$20                                                   ;82AC65|C220    |      ;
     %CheckFlag(daily2, $0008)
     BEQ +                                                      ;82AC6E|F003    |82AC73;
@@ -5184,13 +5184,13 @@ fUnknown_82AC61:
     ASL A                                                      ;82AC8A|0A      |      ;
     TAX                                                        ;82AC8B|AA      |      ; X = $DA * 2
     LDA.L .data1,X                                             ;82AC8C|BFFEAC82|82ACFE;
-    STA.B n16TempVar4                                          ;82AC90|8584    |000084;
+    STA.B strcVariables.n16Temp4                               ;82AC90|8584    |000084;
     SEP #$20                                                   ;82AC92|E220    |      ;
     LDA.B #$00                                                 ;82AC94|A900    |      ;
     XBA                                                        ;82AC96|EB      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82AC97|B70D    |00000D;
     REP #$20                                                   ;82AC99|C220    |      ;
-    AND.B n16TempVar4                                          ;82AC9B|2584    |000084;
+    AND.B strcVariables.n16Temp4                               ;82AC9B|2584    |000084;
     BEQ +                                                      ;82AC9D|F02D    |82ACCC;
     SEP #$20                                                   ;82AC9F|E220    |      ;
     LDA.B #$00                                                 ;82ACA1|A900    |      ;
@@ -5200,20 +5200,20 @@ fUnknown_82AC61:
     ASL A                                                      ;82ACAA|0A      |      ;
     TAX                                                        ;82ACAB|AA      |      ; X = nSeasonId * 2
     LDA.L .data2,X                                             ;82ACAC|BF06AD82|82AD06;
-    STA.B n16TempVar4                                          ;82ACB0|8584    |000084;
+    STA.B strcVariables.n16Temp4                               ;82ACB0|8584    |000084;
     SEP #$20                                                   ;82ACB2|E220    |      ;
     LDA.B #$00                                                 ;82ACB4|A900    |      ;
     XBA                                                        ;82ACB6|EB      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82ACB7|B70D    |00000D;
     REP #$20                                                   ;82ACB9|C220    |      ;
-    AND.B n16TempVar4                                          ;82ACBB|2584    |000084;
+    AND.B strcVariables.n16Temp4                               ;82ACBB|2584    |000084;
     BEQ +                                                      ;82ACBD|F00D    |82ACCC;
     REP #$30                                                   ;82ACBF|C230    |      ;
     PLA                                                        ;82ACC1|68      |      ;
     PLX                                                        ;82ACC2|FA      |      ;
     ASL A                                                      ;82ACC3|0A      |      ;
     ASL A                                                      ;82ACC4|0A      |      ;
-    ADC.B n16TempVar3                                          ;82ACC5|6582    |000082;
+    ADC.B strcVariables.n16Temp3                               ;82ACC5|6582    |000082;
     TAY                                                        ;82ACC7|A8      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82ACC8|B70D    |00000D;
     BRA .justReturn                                            ;82ACCA|8031    |82ACFD;
@@ -5232,7 +5232,7 @@ fUnknown_82AC61:
     PLX                                                        ;82ACDC|FA      |      ;
     ASL A                                                      ;82ACDD|0A      |      ;
     ASL A                                                      ;82ACDE|0A      |      ;
-    ADC.B n16TempVar3                                          ;82ACDF|6582    |000082;
+    ADC.B strcVariables.n16Temp3                               ;82ACDF|6582    |000082;
     TAY                                                        ;82ACE1|A8      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82ACE2|B70D    |00000D;
     LDX.W #$0000                                               ;82ACE4|A20000  |      ;
@@ -5356,14 +5356,14 @@ fUnknown_82AD0E:
     TXA                                                        ;82AD9E|8A      |      ;
     ASL A                                                      ;82AD9F|0A      |      ;
     ASL A                                                      ;82ADA0|0A      |      ;
-    STA.B n16TempVar1                                          ;82ADA1|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;82ADA1|857E    |00007E;
     SEP #$20                                                   ;82ADA3|E220    |      ;
     LDA.B #$00                                                 ;82ADA5|A900    |      ;
     XBA                                                        ;82ADA7|EB      |      ;
     LDA.L nCurrentSeasonID                                     ;82ADA8|AF191F7F|7F1F19;
     REP #$20                                                   ;82ADAC|C220    |      ;
     CLC                                                        ;82ADAE|18      |      ;
-    ADC.B n16TempVar1                                          ;82ADAF|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;82ADAF|657E    |00007E;
     TAX                                                        ;82ADB1|AA      |      ;
     SEP #$20                                                   ;82ADB2|E220    |      ;
     LDA.L aInteractionItemTable,X                              ;82ADB4|BFB4CF82|82CFB4;
@@ -5399,17 +5399,17 @@ fUnknown_82AD0E:
     LDA.B #$00                                                 ;82ADE8|A900    |      ;
     XBA                                                        ;82ADEA|EB      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82ADEB|B70D    |00000D;
-    STA.B n8TempVar1                                           ;82ADED|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82ADED|8592    |000092;
     INY                                                        ;82ADEF|C8      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82ADF0|B70D    |00000D;
-    STA.B n8TempVar2                                           ;82ADF2|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82ADF2|8593    |000093;
     BNE +                                                      ;82ADF4|D003    |82ADF9;
     JMP.W .justReturn                                          ;82ADF6|4CE5AE  |82AEE5;
  
  
   + LDA.B #$00                                                 ;82ADF9|A900    |      ;
     XBA                                                        ;82ADFB|EB      |      ;
-    LDA.B n8TempVar1                                           ;82ADFC|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;82ADFC|A592    |000092;
     REP #$20                                                   ;82ADFE|C220    |      ;
     ASL A                                                      ;82AE00|0A      |      ;
     ASL A                                                      ;82AE01|0A      |      ;
@@ -5487,7 +5487,7 @@ fUnknown_82AD0E:
     STA.W $0191                                                ;82AE8A|8D9101  |000191;
     LDA.B #$00                                                 ;82AE8D|A900    |      ;
     XBA                                                        ;82AE8F|EB      |      ;
-    LDA.B n8TempVar2                                           ;82AE90|A593    |000093;
+    LDA.B strcVariables.n8Temp2                                ;82AE90|A593    |000093;
     REP #$20                                                   ;82AE92|C220    |      ;
     TAX                                                        ;82AE94|AA      |      ;
     JSL.L fDialog_DialogHandler                                ;82AE95|225F9383|83935F;
@@ -5564,8 +5564,8 @@ fUnknown_82AF00:
 .continue:
     PHY                                                        ;82AF08|5A      |      ;
     PHX                                                        ;82AF09|DA      |      ;
-    STX.B n16TempVar3                                          ;82AF0A|8682    |000082;
-    STY.B n16TempVar4                                          ;82AF0C|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82AF0A|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82AF0C|8484    |000084;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82AF0E|203CB1  |82B13C;
     SEP #$20                                                   ;82AF11|E220    |      ;
     REP #$10                                                   ;82AF13|C210    |      ;
@@ -5590,7 +5590,7 @@ fUnknown_82AF00:
  
  
   + REP #$20                                                   ;82AF32|C220    |      ;
-    STZ.B $86                                                  ;82AF34|6486    |000086;
+    STZ.B strcVariables.n16Unk86                               ;82AF34|6486    |000086;
     PHX                                                        ;82AF36|DA      |      ;
     TXA                                                        ;82AF37|8A      |      ;
     SEC                                                        ;82AF38|38      |      ;
@@ -5605,9 +5605,9 @@ fUnknown_82AF00:
     CMP.B #$7A                                                 ;82AF49|C97A    |      ;
     BCS +                                                      ;82AF4B|B009    |82AF56;
     REP #$20                                                   ;82AF4D|C220    |      ;
-    LDA.B $86                                                  ;82AF4F|A586    |000086;
+    LDA.B strcVariables.n16Unk86                               ;82AF4F|A586    |000086;
     ORA.W #$0008                                               ;82AF51|090800  |      ;
-    STA.B $86                                                  ;82AF54|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82AF54|8586    |000086;
  
   + REP #$30                                                   ;82AF56|C230    |      ;
     PHX                                                        ;82AF58|DA      |      ;
@@ -5624,9 +5624,9 @@ fUnknown_82AF00:
     CMP.B #$7A                                                 ;82AF6B|C97A    |      ;
     BCS +                                                      ;82AF6D|B009    |82AF78;
     REP #$20                                                   ;82AF6F|C220    |      ;
-    LDA.B $86                                                  ;82AF71|A586    |000086;
+    LDA.B strcVariables.n16Unk86                               ;82AF71|A586    |000086;
     ORA.W #$0002                                               ;82AF73|090200  |      ;
-    STA.B $86                                                  ;82AF76|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82AF76|8586    |000086;
  
   + REP #$30                                                   ;82AF78|C230    |      ;
     PHX                                                        ;82AF7A|DA      |      ;
@@ -5643,9 +5643,9 @@ fUnknown_82AF00:
     CMP.B #$7A                                                 ;82AF8D|C97A    |      ;
     BCS +                                                      ;82AF8F|B009    |82AF9A;
     REP #$20                                                   ;82AF91|C220    |      ;
-    LDA.B $86                                                  ;82AF93|A586    |000086;
+    LDA.B strcVariables.n16Unk86                               ;82AF93|A586    |000086;
     ORA.W #$0004                                               ;82AF95|090400  |      ;
-    STA.B $86                                                  ;82AF98|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82AF98|8586    |000086;
  
   + REP #$30                                                   ;82AF9A|C230    |      ;
     PHX                                                        ;82AF9C|DA      |      ;
@@ -5662,18 +5662,18 @@ fUnknown_82AF00:
     CMP.B #$7A                                                 ;82AFAF|C97A    |      ;
     BCS +                                                      ;82AFB1|B009    |82AFBC;
     REP #$20                                                   ;82AFB3|C220    |      ;
-    LDA.B $86                                                  ;82AFB5|A586    |000086;
+    LDA.B strcVariables.n16Unk86                               ;82AFB5|A586    |000086;
     ORA.W #$0001                                               ;82AFB7|090100  |      ;
-    STA.B $86                                                  ;82AFBA|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82AFBA|8586    |000086;
  
   + REP #$30                                                   ;82AFBC|C230    |      ;
     PHX                                                        ;82AFBE|DA      |      ;
-    LDA.B $86                                                  ;82AFBF|A586    |000086;
+    LDA.B strcVariables.n16Unk86                               ;82AFBF|A586    |000086;
     TAX                                                        ;82AFC1|AA      |      ;
     SEP #$20                                                   ;82AFC2|E220    |      ;
     LDA.L .unknownData,X                                       ;82AFC4|BF2AB082|82B02A;
     DEC A                                                      ;82AFC8|3A      |      ;
-    STA.B n8TempVar3                                           ;82AFC9|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82AFC9|8594    |000094;
     PLX                                                        ;82AFCB|FA      |      ;
     SEP #$20                                                   ;82AFCC|E220    |      ;
     LDA.B #$00                                                 ;82AFCE|A900    |      ;
@@ -5688,7 +5688,7 @@ fUnknown_82AF00:
     XBA                                                        ;82AFDD|EB      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82AFDE|B70D    |00000D;
     CLC                                                        ;82AFE0|18      |      ;
-    ADC.B n8TempVar3                                           ;82AFE1|6594    |000094;
+    ADC.B strcVariables.n8Temp3                                ;82AFE1|6594    |000094;
     BRA +                                                      ;82AFE3|801A    |82AFFF;
  
  
@@ -5710,8 +5710,8 @@ fUnknown_82AF00:
     REP #$20                                                   ;82AFFD|C220    |      ;
  
   + REP #$30                                                   ;82AFFF|C230    |      ;
-    LDX.B n16TempVar3                                          ;82B001|A682    |000082;
-    LDY.B n16TempVar4                                          ;82B003|A484    |000084;
+    LDX.B strcVariables.n16Temp3                               ;82B001|A682    |000082;
+    LDY.B strcVariables.n16Temp4                               ;82B003|A484    |000084;
     JSL.L fUnknown_81A83A                                      ;82B005|223AA881|81A83A;
  
 .caseA0:
@@ -5774,8 +5774,8 @@ fUnknown_82B060:
     SEP #$20                                                   ;82B060|E220    |      ; A: nArg1, X: nArg2, Y: nArg3
     REP #$10                                                   ;82B062|C210    |      ;
     STA.B $99                                                  ;82B064|8599    |000099;
-    STX.B n16TempVar3                                          ;82B066|8682    |000082;
-    STY.B n16TempVar4                                          ;82B068|8484    |000084;
+    STX.B strcVariables.n16Temp3                               ;82B066|8682    |000082;
+    STY.B strcVariables.n16Temp4                               ;82B068|8484    |000084;
     LDY.W #$0000                                               ;82B06A|A00000  |      ;
  
  -- PHY                                                        ;82B06D|5A      |      ;
@@ -5784,7 +5784,7 @@ fUnknown_82B060:
     ASL A                                                      ;82B070|0A      |      ;
     ASL A                                                      ;82B071|0A      |      ;
     ASL A                                                      ;82B072|0A      |      ;
-    STA.B $8E                                                  ;82B073|858E    |00008E;
+    STA.B strcVariables.n16Unk8E                               ;82B073|858E    |00008E;
     LDX.W #$0000                                               ;82B075|A20000  |      ;
  
   - PHX                                                        ;82B078|DA      |      ;
@@ -5793,15 +5793,15 @@ fUnknown_82B060:
     ASL A                                                      ;82B07B|0A      |      ;
     ASL A                                                      ;82B07C|0A      |      ;
     ASL A                                                      ;82B07D|0A      |      ;
-    STA.B $90                                                  ;82B07E|8590    |000090;
+    STA.B strcVariables.n16Unk90                               ;82B07E|8590    |000090;
     REP #$30                                                   ;82B080|C230    |      ;
-    LDA.B n16TempVar3                                          ;82B082|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;82B082|A582    |000082;
     CLC                                                        ;82B084|18      |      ;
-    ADC.B $8E                                                  ;82B085|658E    |00008E;
+    ADC.B strcVariables.n16Unk8E                               ;82B085|658E    |00008E;
     TAX                                                        ;82B087|AA      |      ;
-    LDA.B n16TempVar4                                          ;82B088|A584    |000084;
+    LDA.B strcVariables.n16Temp4                               ;82B088|A584    |000084;
     CLC                                                        ;82B08A|18      |      ;
-    ADC.B $90                                                  ;82B08B|6590    |000090;
+    ADC.B strcVariables.n16Unk90                               ;82B08B|6590    |000090;
     TAY                                                        ;82B08D|A8      |      ;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B08E|203CB1  |82B13C;
     SEP #$20                                                   ;82B091|E220    |      ;
@@ -5810,19 +5810,19 @@ fUnknown_82B060:
     STA.W sCurrentObjectMap,X                                  ;82B097|9DB609  |0009B6;
     PLX                                                        ;82B09A|FA      |      ;
     INX                                                        ;82B09B|E8      |      ;
-    CPX.B $86                                                  ;82B09C|E486    |000086;
+    CPX.B strcVariables.n16Unk86                               ;82B09C|E486    |000086;
     BNE -                                                      ;82B09E|D0D8    |82B078;
     PLY                                                        ;82B0A0|7A      |      ;
     INY                                                        ;82B0A1|C8      |      ;
-    CPY.B $88                                                  ;82B0A2|C488    |000088;
+    CPY.B strcVariables.n16Unk88                               ;82B0A2|C488    |000088;
     BNE --                                                     ;82B0A4|D0C7    |82B06D;
     RTL                                                        ;82B0A6|6B      |      ;
  
  
 fUnknown_82B0A7:
     REP #$30                                                   ;82B0A7|C230    |      ;
-    STX.B $8E                                                  ;82B0A9|868E    |00008E;
-    STY.B $90                                                  ;82B0AB|8490    |000090;
+    STX.B strcVariables.n16Unk8E                               ;82B0A9|868E    |00008E;
+    STY.B strcVariables.n16Unk90                               ;82B0AB|8490    |000090;
     JSL.L fUnknown_81A801                                      ;82B0AD|2201A881|81A801;
     REP #$30                                                   ;82B0B1|C230    |      ;
     LDA.W #$F500                                               ;82B0B3|A900F5  |      ;
@@ -5831,12 +5831,12 @@ fUnknown_82B0A7:
     LDA.B #$A7                                                 ;82B0BA|A9A7    |      ;
     STA.B ptrUnknown0x72+2                                     ;82B0BC|8574    |000074;
     REP #$20                                                   ;82B0BE|C220    |      ;
-    LDA.B n16TempVar1                                          ;82B0C0|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;82B0C0|A57E    |00007E;
     AND.W #$007F                                               ;82B0C2|297F00  |      ;
     LSR A                                                      ;82B0C5|4A      |      ;
     LSR A                                                      ;82B0C6|4A      |      ;
-    STA.B $86                                                  ;82B0C7|8586    |000086;
-    LDA.B n16TempVar1                                          ;82B0C9|A57E    |00007E;
+    STA.B strcVariables.n16Unk86                               ;82B0C7|8586    |000086;
+    LDA.B strcVariables.n16Temp1                               ;82B0C9|A57E    |00007E;
     LSR A                                                      ;82B0CB|4A      |      ;
     LSR A                                                      ;82B0CC|4A      |      ;
     LSR A                                                      ;82B0CD|4A      |      ;
@@ -5849,12 +5849,12 @@ fUnknown_82B0A7:
     ASL A                                                      ;82B0D4|0A      |      ;
     ASL A                                                      ;82B0D5|0A      |      ;
     CLC                                                        ;82B0D6|18      |      ;
-    ADC.B $86                                                  ;82B0D7|6586    |000086;
-    STA.B $86                                                  ;82B0D9|8586    |000086;
-    LDA.B n16TempVar3                                          ;82B0DB|A582    |000082;
-    STA.B n16TempVar4                                          ;82B0DD|8584    |000084;
-    LDA.B n16TempVar2                                          ;82B0DF|A580    |000080;
-    STA.B n16TempVar3                                          ;82B0E1|8582    |000082;
+    ADC.B strcVariables.n16Unk86                               ;82B0D7|6586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82B0D9|8586    |000086;
+    LDA.B strcVariables.n16Temp3                               ;82B0DB|A582    |000082;
+    STA.B strcVariables.n16Temp4                               ;82B0DD|8584    |000084;
+    LDA.B strcVariables.n16Temp2                               ;82B0DF|A580    |000080;
+    STA.B strcVariables.n16Temp3                               ;82B0E1|8582    |000082;
     LDY.W #$0000                                               ;82B0E3|A00000  |      ;
  
  -- PHY                                                        ;82B0E6|5A      |      ;
@@ -5863,8 +5863,8 @@ fUnknown_82B0A7:
   - REP #$30                                                   ;82B0EA|C230    |      ;
     PHX                                                        ;82B0EC|DA      |      ;
     PHY                                                        ;82B0ED|5A      |      ;
-    LDY.B $86                                                  ;82B0EE|A486    |000086;
-    INC.B $86                                                  ;82B0F0|E686    |000086;
+    LDY.B strcVariables.n16Unk86                               ;82B0EE|A486    |000086;
+    INC.B strcVariables.n16Unk86                               ;82B0F0|E686    |000086;
     SEP #$20                                                   ;82B0F2|E220    |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;82B0F4|B772    |000072;
     PLY                                                        ;82B0F6|7A      |      ;
@@ -5877,7 +5877,7 @@ fUnknown_82B0A7:
     ASL A                                                      ;82B0FE|0A      |      ;
     ASL A                                                      ;82B0FF|0A      |      ;
     CLC                                                        ;82B100|18      |      ;
-    ADC.B $8E                                                  ;82B101|658E    |00008E;
+    ADC.B strcVariables.n16Unk8E                               ;82B101|658E    |00008E;
     TAX                                                        ;82B103|AA      |      ;
     TYA                                                        ;82B104|98      |      ;
     ASL A                                                      ;82B105|0A      |      ;
@@ -5885,7 +5885,7 @@ fUnknown_82B0A7:
     ASL A                                                      ;82B107|0A      |      ;
     ASL A                                                      ;82B108|0A      |      ;
     CLC                                                        ;82B109|18      |      ;
-    ADC.B $90                                                  ;82B10A|6590    |000090;
+    ADC.B strcVariables.n16Unk90                               ;82B10A|6590    |000090;
     TAY                                                        ;82B10C|A8      |      ;
     SEP #$20                                                   ;82B10D|E220    |      ;
     PLA                                                        ;82B10F|68      |      ;
@@ -5894,11 +5894,11 @@ fUnknown_82B0A7:
     PLY                                                        ;82B116|7A      |      ;
     PLX                                                        ;82B117|FA      |      ;
     INX                                                        ;82B118|E8      |      ;
-    CPX.B n16TempVar3                                          ;82B119|E482    |000082;
+    CPX.B strcVariables.n16Temp3                               ;82B119|E482    |000082;
     BNE -                                                      ;82B11B|D0CD    |82B0EA;
     PLY                                                        ;82B11D|7A      |      ;
     INY                                                        ;82B11E|C8      |      ;
-    CPY.B n16TempVar4                                          ;82B11F|C484    |000084;
+    CPY.B strcVariables.n16Temp4                               ;82B11F|C484    |000084;
     BNE --                                                     ;82B121|D0C3    |82B0E6;
     RTL                                                        ;82B123|6B      |      ;
  
@@ -5929,31 +5929,31 @@ fObjectEngine_ConvertCoordsToOffset:
     LSR A                                                      ;82B140|4A      |      ;
     LSR A                                                      ;82B141|4A      |      ;
     LSR A                                                      ;82B142|4A      |      ;
-    STA.B n16TempVar1                                          ;82B143|857E    |00007E; n16TempVar1 = nPosX * 16
+    STA.B strcVariables.n16Temp1                               ;82B143|857E    |00007E; n16TempVar1 = nPosX * 16
     TYA                                                        ;82B145|98      |      ;
     AND.W #$FFF0                                               ;82B146|29F0FF  |      ;
-    STA.B n16TempVar2                                          ;82B149|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;82B149|8580    |000080;
     SEP #$20                                                   ;82B14B|E220    |      ;
     LDA.W nCurrentMapdata_RoomWidthMult                        ;82B14D|AD8101  |000181;
     CMP.B #$01                                                 ;82B150|C901    |      ;
     BEQ +                                                      ;82B152|F017    |82B16B;
     REP #$20                                                   ;82B154|C220    |      ;
-    LDA.B n16TempVar2                                          ;82B156|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;82B156|A580    |000080;
     ASL A                                                      ;82B158|0A      |      ;
-    STA.B n16TempVar2                                          ;82B159|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;82B159|8580    |000080;
     SEP #$20                                                   ;82B15B|E220    |      ;
     LDA.W nCurrentMapdata_RoomWidthMult                        ;82B15D|AD8101  |000181;
     CMP.B #$02                                                 ;82B160|C902    |      ;
     BEQ +                                                      ;82B162|F007    |82B16B;
     REP #$20                                                   ;82B164|C220    |      ;
-    LDA.B n16TempVar2                                          ;82B166|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;82B166|A580    |000080;
     ASL A                                                      ;82B168|0A      |      ;
-    STA.B n16TempVar2                                          ;82B169|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;82B169|8580    |000080;
  
   + REP #$20                                                   ;82B16B|C220    |      ;
-    LDA.B n16TempVar1                                          ;82B16D|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;82B16D|A57E    |00007E;
     CLC                                                        ;82B16F|18      |      ;
-    ADC.B n16TempVar2                                          ;82B170|6580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;82B170|6580    |000080;
     TAX                                                        ;82B172|AA      |      ;
     RTS                                                        ;82B173|60      |      ;
  
@@ -6820,11 +6820,11 @@ fUnknown_82D1C0:
     SEP #$20                                                   ;82D1C0|E220    |      ; GIGASTART
     REP #$10                                                   ;82D1C2|C210    |      ;
     LDA.B #$0F                                                 ;82D1C4|A90F    |      ;
-    STA.B n8TempVar1                                           ;82D1C6|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82D1C6|8592    |000092;
     LDA.B #$03                                                 ;82D1C8|A903    |      ;
-    STA.B n8TempVar2                                           ;82D1CA|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82D1CA|8593    |000093;
     LDA.B #$01                                                 ;82D1CC|A901    |      ;
-    STA.B n8TempVar3                                           ;82D1CE|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82D1CE|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D1D0|220A8880|80880A;
     SEP #$20                                                   ;82D1D4|E220    |      ;
     LDA.B #$06                                                 ;82D1D6|A906    |      ;
@@ -6834,8 +6834,8 @@ fUnknown_82D1C0:
     LDA.B #$00                                                 ;82D1E2|A900    |      ;
     STA.L nInGameMinuteCounter                                 ;82D1E4|8F1E1F7F|7F1F1E;
     LDA.B #$01                                                 ;82D1E8|A901    |      ;
-    STA.B n8TempVar4                                           ;82D1EA|8595    |000095;
-    STZ.B n8TempVar3                                           ;82D1EC|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82D1EA|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82D1EC|6494    |000094;
     REP #$20                                                   ;82D1EE|C220    |      ;
     LDA.W #$0000                                               ;82D1F0|A90000  |      ;
     STA.L strcFlags.daily1                                     ;82D1F3|8F5A1F7F|7F1F5A;
@@ -6939,7 +6939,7 @@ fUnknown_82D1C0:
     LDY.W #$0000                                               ;82D344|A00000  |      ;
  
   - REP #$20                                                   ;82D347|C220    |      ;
-    STZ.B $90                                                  ;82D349|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82D349|6490    |000090;
     SEP #$20                                                   ;82D34B|E220    |      ;
     LDA.B $00                                                  ;82D34D|A500    |000000;
     BEQ -                                                      ;82D34F|F0F6    |82D347;
@@ -6980,9 +6980,9 @@ fUnknown_82D1C0:
     BNE -                                                      ;82D3B7|D0F2    |82D3AB;
     SEP #$20                                                   ;82D3B9|E220    |      ;
     LDA.B #$09                                                 ;82D3BB|A909    |      ;
-    STA.B n8TempVar4                                           ;82D3BD|8595    |000095;
+    STA.B strcVariables.n8Temp4                                ;82D3BD|8595    |000095;
     REP #$20                                                   ;82D3BF|C220    |      ;
-    STZ.B $90                                                  ;82D3C1|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82D3C1|6490    |000090;
     JML.L fUnknown_82D871                                      ;82D3C3|5C71D882|82D871;
  
  
@@ -6990,11 +6990,11 @@ fMainMenu_AutoHowToPlay:
     SEP #$20                                                   ;82D3C7|E220    |      ;
     REP #$10                                                   ;82D3C9|C210    |      ;
     LDA.B #$0F                                                 ;82D3CB|A90F    |      ;
-    STA.B n8TempVar1                                           ;82D3CD|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82D3CD|8592    |000092;
     LDA.B #$03                                                 ;82D3CF|A903    |      ;
-    STA.B n8TempVar2                                           ;82D3D1|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82D3D1|8593    |000093;
     LDA.B #$01                                                 ;82D3D3|A901    |      ;
-    STA.B n8TempVar3                                           ;82D3D5|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82D3D5|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D3D7|220A8880|80880A;
     SEP #$20                                                   ;82D3DB|E220    |      ;
     LDA.B #$06                                                 ;82D3DD|A906    |      ;
@@ -7004,8 +7004,8 @@ fMainMenu_AutoHowToPlay:
     LDA.B #$00                                                 ;82D3E9|A900    |      ;
     STA.L nInGameMinuteCounter                                 ;82D3EB|8F1E1F7F|7F1F1E;
     LDA.B #$01                                                 ;82D3EF|A901    |      ;
-    STA.B n8TempVar4                                           ;82D3F1|8595    |000095;
-    STZ.B n8TempVar3                                           ;82D3F3|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82D3F1|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82D3F3|6494    |000094;
     REP #$20                                                   ;82D3F5|C220    |      ;
     LDA.W #$0000                                               ;82D3F7|A90000  |      ;
     STA.L strcFlags.daily1                                     ;82D3FA|8F5A1F7F|7F1F5A;
@@ -7053,8 +7053,8 @@ fMainMenu_AutoHowToPlay:
     STA.W strcPlayerData.leftGrassSeeds                        ;82D485|8D2709  |000927;
     STA.W strcPlayerData.leftTurnipSeeds                       ;82D488|8D2B09  |00092B;
     REP #$20                                                   ;82D48B|C220    |      ;
-    STZ.W nAIJoypadInput                                       ;82D48D|9CFD08  |0008FD;
-    STZ.W nAISteeringCounter                                   ;82D490|9CFF08  |0008FF;
+    STZ.W strcAiControlData.input                              ;82D48D|9CFD08  |0008FD;
+    STZ.W strcAiControlData.counter                            ;82D490|9CFF08  |0008FF;
     REP #$20                                                   ;82D493|C220    |      ;
     STZ.W strcObjectData.exist                                 ;82D495|9C1509  |000915;
     STZ.B strcPlayer.flags                                     ;82D498|64D2    |0000D2;
@@ -7275,7 +7275,7 @@ fMainMenu_PrepareHowToPlay:
     LDY.W #$0000                                               ;82D6C6|A00000  |      ;
  
   - REP #$20                                                   ;82D6C9|C220    |      ;
-    STZ.B $90                                                  ;82D6CB|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82D6CB|6490    |000090;
     SEP #$20                                                   ;82D6CD|E220    |      ;
     LDA.B $00                                                  ;82D6CF|A500    |000000;
     BEQ -                                                      ;82D6D1|F0F6    |82D6C9;
@@ -7326,9 +7326,9 @@ fUnknown_82D731:
 fUnknown_82D750:
     SEP #$20                                                   ;82D750|E220    |      ;
     LDA.B #$09                                                 ;82D752|A909    |      ;
-    STA.B n8TempVar4                                           ;82D754|8595    |000095;
+    STA.B strcVariables.n8Temp4                                ;82D754|8595    |000095;
     REP #$20                                                   ;82D756|C220    |      ;
-    STZ.B $90                                                  ;82D758|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82D758|6490    |000090;
     JML.L fUnknown_82D871                                      ;82D75A|5C71D882|82D871;
  
  
@@ -7366,9 +7366,9 @@ fUnknown_82D75E:
     SEP #$20                                                   ;82D7B1|E220    |      ;
     REP #$10                                                   ;82D7B3|C210    |      ;
     LDA.B #$00                                                 ;82D7B5|A900    |      ;
-    STA.B $27                                                  ;82D7B7|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82D7B7|8527    |000027;
     LDA.B #$22                                                 ;82D7B9|A922    |      ;
-    STA.B $29                                                  ;82D7BB|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82D7BB|8529    |000029;
     REP #$20                                                   ;82D7BD|C220    |      ;
     LDY.W #$0200                                               ;82D7BF|A00002  |      ;
     LDX.W #$0000                                               ;82D7C2|A20000  |      ;
@@ -7388,16 +7388,16 @@ fUnknown_82D75E:
     JSL.L fCore_WaitForNextNMI                                 ;82D7EA|22458680|808645;
     SEP #$20                                                   ;82D7EE|E220    |      ;
     LDA.B #$03                                                 ;82D7F0|A903    |      ;
-    STA.B n8TempVar1                                           ;82D7F2|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82D7F2|8592    |000092;
     LDA.B #$03                                                 ;82D7F4|A903    |      ;
-    STA.B n8TempVar2                                           ;82D7F6|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82D7F6|8593    |000093;
     LDA.B #$0F                                                 ;82D7F8|A90F    |      ;
-    STA.B n8TempVar3                                           ;82D7FA|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82D7FA|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82D7FC|22CE8780|8087CE;
     SEP #$20                                                   ;82D800|E220    |      ;
-    STZ.B $97                                                  ;82D802|6497    |000097;
+    STZ.B strcVariables.u8Unk97                                ;82D802|6497    |000097;
     REP #$20                                                   ;82D804|C220    |      ;
-    STZ.B $90                                                  ;82D806|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82D806|6490    |000090;
     LDA.W #$0001                                               ;82D808|A90100  |      ;
     STA.B strcObject.unkAF                                     ;82D80B|85AF    |0000AF;
  
@@ -7408,7 +7408,7 @@ fUnknown_82D80D:
     JSL.L fCore_Unknown808E69                                  ;82D813|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D817|2234C084|84C034;
     SEP #$20                                                   ;82D81B|E220    |      ;
-    LDA.B n8TempVar4                                           ;82D81D|A595    |000095;
+    LDA.B strcVariables.n8Temp4                                ;82D81D|A595    |000095;
     BEQ fUnknown_82D883                                        ;82D81F|F062    |82D883;
     CMP.B #$01                                                 ;82D821|C901    |      ;
     BNE +                                                      ;82D823|D004    |82D829;
@@ -7464,7 +7464,7 @@ fUnknown_82D871:
     SEP #$20                                                   ;82D871|E220    |      ;
     STZ.B $00                                                  ;82D873|6400    |000000;
     REP #$20                                                   ;82D875|C220    |      ;
-    LDA.B $90                                                  ;82D877|A590    |000090;
+    LDA.B strcVariables.n16Unk90                               ;82D877|A590    |000090;
     CMP.W #$0258                                               ;82D879|C95802  |      ;
     BNE +                                                      ;82D87C|D003    |82D881;
     JMP.W fMainMenu_AutoHowToPlay                              ;82D87E|4CC7D3  |82D3C7;
@@ -7485,16 +7485,16 @@ fUnknown_82D883:
     BNE -                                                      ;82D892|D0F2    |82D886;
     SEP #$20                                                   ;82D894|E220    |      ;
     LDA.B #$0F                                                 ;82D896|A90F    |      ;
-    STA.B n8TempVar1                                           ;82D898|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82D898|8592    |000092;
     LDA.B #$03                                                 ;82D89A|A903    |      ;
-    STA.B n8TempVar2                                           ;82D89C|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82D89C|8593    |000093;
     LDA.B #$01                                                 ;82D89E|A901    |      ;
-    STA.B n8TempVar3                                           ;82D8A0|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82D8A0|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D8A2|220A8880|80880A;
     SEP #$20                                                   ;82D8A6|E220    |      ;
     LDA.B #$01                                                 ;82D8A8|A901    |      ;
-    STA.B n8TempVar4                                           ;82D8AA|8595    |000095;
-    STZ.B n8TempVar3                                           ;82D8AC|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82D8AA|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82D8AC|6494    |000094;
     BRA fUnknown_82D871                                        ;82D8AE|80C1    |82D871;
  
  
@@ -7575,15 +7575,15 @@ fUnknown_82D8B0:
     BNE -                                                      ;82D99F|D09E    |82D93F;
     SEP #$20                                                   ;82D9A1|E220    |      ;
     LDA.B #$0F                                                 ;82D9A3|A90F    |      ;
-    STA.B n8TempVar1                                           ;82D9A5|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82D9A5|8592    |000092;
     LDA.B #$03                                                 ;82D9A7|A903    |      ;
-    STA.B n8TempVar2                                           ;82D9A9|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82D9A9|8593    |000093;
     LDA.B #$01                                                 ;82D9AB|A901    |      ;
-    STA.B n8TempVar3                                           ;82D9AD|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82D9AD|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D9AF|220A8880|80880A;
  
   + SEP #$20                                                   ;82D9B3|E220    |      ;
-    LDA.B n8TempVar4                                           ;82D9B5|A595    |000095;
+    LDA.B strcVariables.n8Temp4                                ;82D9B5|A595    |000095;
     CMP.B #$09                                                 ;82D9B7|C909    |      ;
     BNE +                                                      ;82D9B9|D003    |82D9BE;
     JMP.W fUnknown_82D871                                      ;82D9BB|4C71D8  |82D871;
@@ -7591,11 +7591,11 @@ fUnknown_82D8B0:
  
   + SEP #$20                                                   ;82D9BE|E220    |      ;
     LDA.B #$0F                                                 ;82D9C0|A90F    |      ;
-    STA.B n8TempVar1                                           ;82D9C2|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82D9C2|8592    |000092;
     LDA.B #$03                                                 ;82D9C4|A903    |      ;
-    STA.B n8TempVar2                                           ;82D9C6|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82D9C6|8593    |000093;
     LDA.B #$01                                                 ;82D9C8|A901    |      ;
-    STA.B n8TempVar3                                           ;82D9CA|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82D9CA|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82D9CC|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82D9D0|220F8E80|808E0F;
     SEP #$20                                                   ;82D9D4|E220    |      ;
@@ -7618,9 +7618,9 @@ fUnknown_82D8B0:
     SEP #$20                                                   ;82DA0B|E220    |      ;
     REP #$10                                                   ;82DA0D|C210    |      ;
     LDA.B #$00                                                 ;82DA0F|A900    |      ;
-    STA.B $27                                                  ;82DA11|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82DA11|8527    |000027;
     LDA.B #$22                                                 ;82DA13|A922    |      ;
-    STA.B $29                                                  ;82DA15|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82DA15|8529    |000029;
     REP #$20                                                   ;82DA17|C220    |      ;
     LDY.W #$0200                                               ;82DA19|A00002  |      ;
     LDX.W #$0000                                               ;82DA1C|A20000  |      ;
@@ -7651,23 +7651,23 @@ fUnknown_82D8B0:
     JSL.L fCore_WaitForNextNMI                                 ;82DA68|22458680|808645;
     SEP #$20                                                   ;82DA6C|E220    |      ;
     LDA.B #$01                                                 ;82DA6E|A901    |      ;
-    STA.B n8TempVar1                                           ;82DA70|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DA70|8592    |000092;
     LDA.B #$06                                                 ;82DA72|A906    |      ;
-    STA.B n8TempVar2                                           ;82DA74|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DA74|8593    |000093;
     LDA.B #$0F                                                 ;82DA76|A90F    |      ;
-    STA.B n8TempVar3                                           ;82DA78|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DA78|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82DA7A|22CE8780|8087CE;
     SEP #$20                                                   ;82DA7E|E220    |      ;
     LDA.B #$02                                                 ;82DA80|A902    |      ;
-    STA.B n8TempVar4                                           ;82DA82|8595    |000095;
-    STZ.B n8TempVar3                                           ;82DA84|6494    |000094;
-    STZ.B $96                                                  ;82DA86|6496    |000096;
+    STA.B strcVariables.n8Temp4                                ;82DA82|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82DA84|6494    |000094;
+    STZ.B strcVariables.u8Unk96                                ;82DA86|6496    |000096;
     JML.L fUnknown_82D871                                      ;82DA88|5C71D882|82D871;
  
  
 fUnknown_82DA8C:
     SEP #$20                                                   ;82DA8C|E220    |      ;
-    LDA.B n8TempVar3                                           ;82DA8E|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82DA8E|A594    |000094;
     AND.B #$01                                                 ;82DA90|2901    |      ;
     BNE .label1                                                ;82DA92|D012    |82DAA6;
     REP #$20                                                   ;82DA94|C220    |      ;
@@ -7681,14 +7681,14 @@ fUnknown_82DA8C:
  
 .label1:
     SEP #$20                                                   ;82DAA6|E220    |      ;
-    INC.B n8TempVar3                                           ;82DAA8|E694    |000094;
+    INC.B strcVariables.n8Temp3                                ;82DAA8|E694    |000094;
     JML.L fUnknown_82D871                                      ;82DAAA|5C71D882|82D871;
  
  
   + SEP #$20                                                   ;82DAAE|E220    |      ;
-    LDA.B $96                                                  ;82DAB0|A596    |000096;
+    LDA.B strcVariables.u8Unk96                                ;82DAB0|A596    |000096;
     INC A                                                      ;82DAB2|1A      |      ;
-    STA.B $96                                                  ;82DAB3|8596    |000096;
+    STA.B strcVariables.u8Unk96                                ;82DAB3|8596    |000096;
     CMP.B #$3C                                                 ;82DAB5|C93C    |      ;
     BEQ +                                                      ;82DAB7|F004    |82DABD;
     JML.L .label1                                              ;82DAB9|5CA6DA82|82DAA6;
@@ -7696,14 +7696,14 @@ fUnknown_82DA8C:
  
   + SEP #$20                                                   ;82DABD|E220    |      ;
     LDA.B #$03                                                 ;82DABF|A903    |      ;
-    STA.B n8TempVar4                                           ;82DAC1|8595    |000095;
-    STZ.B n8TempVar3                                           ;82DAC3|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82DAC1|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82DAC3|6494    |000094;
     JML.L fUnknown_82D871                                      ;82DAC5|5C71D882|82D871;
  
  
 fUnknown_82DAC9:
     SEP #$20                                                   ;82DAC9|E220    |      ;
-    LDA.B n8TempVar3                                           ;82DACB|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82DACB|A594    |000094;
     AND.B #$01                                                 ;82DACD|2901    |      ;
     BNE .skip                                                  ;82DACF|D01C    |82DAED;
     REP #$20                                                   ;82DAD1|C220    |      ;
@@ -7723,7 +7723,7 @@ fUnknown_82DAC9:
  
 .skip:
     SEP #$20                                                   ;82DAED|E220    |      ;
-    INC.B n8TempVar3                                           ;82DAEF|E694    |000094;
+    INC.B strcVariables.n8Temp3                                ;82DAEF|E694    |000094;
     JML.L fUnknown_82D871                                      ;82DAF1|5C71D882|82D871;
  
  
@@ -7735,11 +7735,11 @@ fUnknown_82DAF5:
     JSL.L fAudioUnknown_838401                                 ;82DAFF|22018483|838401;
     SEP #$20                                                   ;82DB03|E220    |      ;
     LDA.B #$0F                                                 ;82DB05|A90F    |      ;
-    STA.B n8TempVar1                                           ;82DB07|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DB07|8592    |000092;
     LDA.B #$01                                                 ;82DB09|A901    |      ;
-    STA.B n8TempVar2                                           ;82DB0B|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DB0B|8593    |000093;
     LDA.B #$01                                                 ;82DB0D|A901    |      ;
-    STA.B n8TempVar3                                           ;82DB0F|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DB0F|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DB11|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DB15|220F8E80|808E0F;
     SEP #$20                                                   ;82DB19|E220    |      ;
@@ -7768,9 +7768,9 @@ fUnknown_82DAF5:
     SEP #$20                                                   ;82DB5F|E220    |      ;
     REP #$10                                                   ;82DB61|C210    |      ;
     LDA.B #$00                                                 ;82DB63|A900    |      ;
-    STA.B $27                                                  ;82DB65|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82DB65|8527    |000027;
     LDA.B #$22                                                 ;82DB67|A922    |      ;
-    STA.B $29                                                  ;82DB69|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82DB69|8529    |000029;
     REP #$20                                                   ;82DB6B|C220    |      ;
     LDY.W #$0200                                               ;82DB6D|A00002  |      ;
     LDX.W #$0000                                               ;82DB70|A20000  |      ;
@@ -7795,17 +7795,17 @@ fUnknown_82DB8E:
     JSL.L fAudioUnknown_838401                                 ;82DB98|22018483|838401;
     SEP #$20                                                   ;82DB9C|E220    |      ;
     LDA.B #$0F                                                 ;82DB9E|A90F    |      ;
-    STA.B n8TempVar1                                           ;82DBA0|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DBA0|8592    |000092;
     LDA.B #$01                                                 ;82DBA2|A901    |      ;
-    STA.B n8TempVar2                                           ;82DBA4|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DBA4|8593    |000093;
     LDA.B #$01                                                 ;82DBA6|A901    |      ;
-    STA.B n8TempVar3                                           ;82DBA8|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DBA8|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DBAA|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DBAE|220F8E80|808E0F;
  
 fUnknown_82DBB2:
     REP #$20                                                   ;82DBB2|C220    |      ;
-    STZ.B $90                                                  ;82DBB4|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82DBB4|6490    |000090;
     STZ.W strcBGScrool.BG1HorOffs                              ;82DBB6|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;82DBB9|9C3E01  |00013E;
     STZ.W strcBGScrool.BG2HorOffs                              ;82DBBC|9C4001  |000140;
@@ -7826,22 +7826,22 @@ fUnknown_82DBB2:
     JSL.L fCore_WaitForNextNMI                                 ;82DBEB|22458680|808645;
     SEP #$20                                                   ;82DBEF|E220    |      ;
     LDA.B #$01                                                 ;82DBF1|A901    |      ;
-    STA.B n8TempVar1                                           ;82DBF3|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DBF3|8592    |000092;
     LDA.B #$01                                                 ;82DBF5|A901    |      ;
-    STA.B n8TempVar2                                           ;82DBF7|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DBF7|8593    |000093;
     LDA.B #$0F                                                 ;82DBF9|A90F    |      ;
-    STA.B n8TempVar3                                           ;82DBFB|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DBFB|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82DBFD|22CE8780|8087CE;
     SEP #$20                                                   ;82DC01|E220    |      ;
     LDA.B #$04                                                 ;82DC03|A904    |      ;
-    STA.B n8TempVar4                                           ;82DC05|8595    |000095;
-    STZ.B n8TempVar3                                           ;82DC07|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82DC05|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82DC07|6494    |000094;
     JML.L fUnknown_82D871                                      ;82DC09|5C71D882|82D871;
  
  
 fUnknown_82DC0D:
     SEP #$20                                                   ;82DC0D|E220    |      ;
-    LDA.B n8TempVar3                                           ;82DC0F|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82DC0F|A594    |000094;
     AND.B #$01                                                 ;82DC11|2901    |      ;
     BEQ +                                                      ;82DC13|F004    |82DC19;
     JML.L .skip                                                ;82DC15|5C22DC82|82DC22;
@@ -7854,11 +7854,11 @@ fUnknown_82DC0D:
  
 .skip:
     SEP #$20                                                   ;82DC22|E220    |      ;
-    LDA.B n8TempVar3                                           ;82DC24|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82DC24|A594    |000094;
     CMP.B #$3C                                                 ;82DC26|C93C    |      ;
     BEQ +                                                      ;82DC28|F008    |82DC32;
     SEP #$20                                                   ;82DC2A|E220    |      ;
-    INC.B n8TempVar3                                           ;82DC2C|E694    |000094;
+    INC.B strcVariables.n8Temp3                                ;82DC2C|E694    |000094;
     JML.L fUnknown_82D871                                      ;82DC2E|5C71D882|82D871;
  
  
@@ -8020,14 +8020,14 @@ fUnknown_82DC0D:
  
   + SEP #$20                                                   ;82DD80|E220    |      ;
     LDA.B #$05                                                 ;82DD82|A905    |      ;
-    STA.B n8TempVar4                                           ;82DD84|8595    |000095;
-    STZ.B n8TempVar3                                           ;82DD86|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82DD84|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82DD86|6494    |000094;
     JML.L fUnknown_82D871                                      ;82DD88|5C71D882|82D871;
  
  
 fUnknown_82DD8C:
     SEP #$20                                                   ;82DD8C|E220    |      ;
-    LDA.B n8TempVar3                                           ;82DD8E|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82DD8E|A594    |000094;
     AND.B #$01                                                 ;82DD90|2901    |      ;
     BNE +                                                      ;82DD92|D009    |82DD9D;
     REP #$20                                                   ;82DD94|C220    |      ;
@@ -8036,13 +8036,13 @@ fUnknown_82DD8C:
     STA.W strcBGScrool.BG2HorOffs                              ;82DD9A|8D4001  |000140;
  
   + SEP #$20                                                   ;82DD9D|E220    |      ;
-    INC.B n8TempVar3                                           ;82DD9F|E694    |000094;
-    LDA.B $97                                                  ;82DDA1|A597    |000097;
+    INC.B strcVariables.n8Temp3                                ;82DD9F|E694    |000094;
+    LDA.B strcVariables.u8Unk97                                ;82DDA1|A597    |000097;
     BNE +                                                      ;82DDA3|D004    |82DDA9;
     JML.L .return                                              ;82DDA5|5CBDDE82|82DEBD;
  
  
-  + STZ.B $97                                                  ;82DDA9|6497    |000097;
+  + STZ.B strcVariables.u8Unk97                                ;82DDA9|6497    |000097;
     LDA.W nUnknownFlags09D                                     ;82DDAB|AD8D09  |00098D;
     CMP.B #$01                                                 ;82DDAE|C901    |      ;
     BNE +                                                      ;82DDB0|D004    |82DDB6;
@@ -8175,7 +8175,7 @@ fUnknown_82DD8C:
  
 .return:
     REP #$30                                                   ;82DEBD|C230    |      ;
-    INC.B $90                                                  ;82DEBF|E690    |000090;
+    INC.B strcVariables.n16Unk90                               ;82DEBF|E690    |000090;
     JML.L fUnknown_82D871                                      ;82DEC1|5C71D882|82D871;
  
  
@@ -8187,11 +8187,11 @@ fUnknown_82DEC5:
     JSL.L fAudioUnknown_838401                                 ;82DECF|22018483|838401;
     SEP #$20                                                   ;82DED3|E220    |      ;
     LDA.B #$0F                                                 ;82DED5|A90F    |      ;
-    STA.B n8TempVar1                                           ;82DED7|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DED7|8592    |000092;
     LDA.B #$01                                                 ;82DED9|A901    |      ;
-    STA.B n8TempVar2                                           ;82DEDB|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DEDB|8593    |000093;
     LDA.B #$01                                                 ;82DEDD|A901    |      ;
-    STA.B n8TempVar3                                           ;82DEDF|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DEDF|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DEE1|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DEE5|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82DEE9|22468880|808846;
@@ -8222,9 +8222,9 @@ fUnknown_82DEC5:
     SEP #$20                                                   ;82DF2D|E220    |      ;
     REP #$10                                                   ;82DF2F|C210    |      ;
     LDA.B #$00                                                 ;82DF31|A900    |      ;
-    STA.B $27                                                  ;82DF33|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82DF33|8527    |000027;
     LDA.B #$22                                                 ;82DF35|A922    |      ;
-    STA.B $29                                                  ;82DF37|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82DF37|8529    |000029;
     REP #$20                                                   ;82DF39|C220    |      ;
     LDY.W #$0200                                               ;82DF3B|A00002  |      ;
     LDX.W #$0000                                               ;82DF3E|A20000  |      ;
@@ -8245,18 +8245,18 @@ fUnknown_82DEC5:
     JSL.L fCore_WaitForNextNMI                                 ;82DF6C|22458680|808645;
     SEP #$20                                                   ;82DF70|E220    |      ;
     LDA.B #$01                                                 ;82DF72|A901    |      ;
-    STA.B n8TempVar1                                           ;82DF74|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DF74|8592    |000092;
     LDA.B #$01                                                 ;82DF76|A901    |      ;
-    STA.B n8TempVar2                                           ;82DF78|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DF78|8593    |000093;
     LDA.B #$0F                                                 ;82DF7A|A90F    |      ;
-    STA.B n8TempVar3                                           ;82DF7C|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DF7C|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82DF7E|22CE8780|8087CE;
     SEP #$20                                                   ;82DF82|E220    |      ;
     LDA.B #$04                                                 ;82DF84|A904    |      ;
-    STA.B n8TempVar4                                           ;82DF86|8595    |000095;
-    STZ.B n8TempVar3                                           ;82DF88|6494    |000094;
+    STA.B strcVariables.n8Temp4                                ;82DF86|8595    |000095;
+    STZ.B strcVariables.n8Temp3                                ;82DF88|6494    |000094;
     REP #$20                                                   ;82DF8A|C220    |      ;
-    STZ.B $90                                                  ;82DF8C|6490    |000090;
+    STZ.B strcVariables.n16Unk90                               ;82DF8C|6490    |000090;
     JML.L fUnknown_82D871                                      ;82DF8E|5C71D882|82D871;
  
  
@@ -8268,11 +8268,11 @@ fUnknown_82DF92:
     JSL.L fAudioUnknown_838401                                 ;82DF9C|22018483|838401;
     SEP #$20                                                   ;82DFA0|E220    |      ;
     LDA.B #$0F                                                 ;82DFA2|A90F    |      ;
-    STA.B n8TempVar1                                           ;82DFA4|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82DFA4|8592    |000092;
     LDA.B #$03                                                 ;82DFA6|A903    |      ;
-    STA.B n8TempVar2                                           ;82DFA8|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82DFA8|8593    |000093;
     LDA.B #$01                                                 ;82DFAA|A901    |      ;
-    STA.B n8TempVar3                                           ;82DFAC|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82DFAC|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82DFAE|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DFB2|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82DFB6|22468880|808846;
@@ -8286,9 +8286,9 @@ fUnknown_82DF92:
     SEP #$20                                                   ;82DFCF|E220    |      ;
     REP #$10                                                   ;82DFD1|C210    |      ;
     LDA.B #$00                                                 ;82DFD3|A900    |      ;
-    STA.B $27                                                  ;82DFD5|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82DFD5|8527    |000027;
     LDA.B #$22                                                 ;82DFD7|A922    |      ;
-    STA.B $29                                                  ;82DFD9|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82DFD9|8529    |000029;
     REP #$20                                                   ;82DFDB|C220    |      ;
     LDY.W #$0200                                               ;82DFDD|A00002  |      ;
     LDX.W #$0000                                               ;82DFE0|A20000  |      ;
@@ -8395,16 +8395,16 @@ fUnknown_82E0B5:
     JSL.L fCore_WaitForNextNMI                                 ;82E0CD|22458680|808645;
     SEP #$20                                                   ;82E0D1|E220    |      ;
     LDA.B #$03                                                 ;82E0D3|A903    |      ;
-    STA.B n8TempVar1                                           ;82E0D5|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82E0D5|8592    |000092;
     LDA.B #$03                                                 ;82E0D7|A903    |      ;
-    STA.B n8TempVar2                                           ;82E0D9|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82E0D9|8593    |000093;
     LDA.B #$0F                                                 ;82E0DB|A90F    |      ;
-    STA.B n8TempVar3                                           ;82E0DD|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82E0DD|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E0DF|22CE8780|8087CE;
     SEP #$20                                                   ;82E0E3|E220    |      ;
-    STZ.B n8TempVar3                                           ;82E0E5|6494    |000094;
-    STZ.B $96                                                  ;82E0E7|6496    |000096;
-    STZ.B $97                                                  ;82E0E9|6497    |000097;
+    STZ.B strcVariables.n8Temp3                                ;82E0E5|6494    |000094;
+    STZ.B strcVariables.u8Unk96                                ;82E0E7|6496    |000096;
+    STZ.B strcVariables.u8Unk97                                ;82E0E9|6497    |000097;
  
 fUnknown_82E0EB:
     SEP #$20                                                   ;82E0EB|E220    |      ;
@@ -8416,12 +8416,12 @@ fUnknown_82E0EB:
     JSL.L fCore_Unknown808E69                                  ;82E0F8|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82E0FC|2234C084|84C034;
     SEP #$20                                                   ;82E100|E220    |      ;
-    LDA.B $97                                                  ;82E102|A597    |000097;
+    LDA.B strcVariables.u8Unk97                                ;82E102|A597    |000097;
     BNE +                                                      ;82E104|D004    |82E10A;
     JML.L fUnknown_82E1BD                                      ;82E106|5CBDE182|82E1BD;
  
  
-  + STZ.B $97                                                  ;82E10A|6497    |000097;
+  + STZ.B strcVariables.u8Unk97                                ;82E10A|6497    |000097;
     LDA.W $098E                                                ;82E10C|AD8E09  |00098E;
     BEQ +                                                      ;82E10F|F004    |82E115;
     JML.L fUnknown_82E16B                                      ;82E111|5C6BE182|82E16B;
@@ -8514,10 +8514,10 @@ fUnknown_82E16B:
  
 fUnknown_82E1BD:
     SEP #$20                                                   ;82E1BD|E220    |      ;
-    LDA.B $96                                                  ;82E1BF|A596    |000096;
+    LDA.B strcVariables.u8Unk96                                ;82E1BF|A596    |000096;
     CMP.B #$01                                                 ;82E1C1|C901    |      ;
     BNE .label1                                                ;82E1C3|D00C    |82E1D1;
-    STZ.B $96                                                  ;82E1C5|6496    |000096;
+    STZ.B strcVariables.u8Unk96                                ;82E1C5|6496    |000096;
     REP #$20                                                   ;82E1C7|C220    |      ;
     INC.W strcBGScrool.BG2HorOffs                              ;82E1C9|EE4001  |000140;
     DEC.W strcBGScrool.BG2VerOffs                              ;82E1CC|CE4201  |000142;
@@ -8526,10 +8526,10 @@ fUnknown_82E1BD:
  
 .label1:
     SEP #$20                                                   ;82E1D1|E220    |      ;
-    INC.B $96                                                  ;82E1D3|E696    |000096;
+    INC.B strcVariables.u8Unk96                                ;82E1D3|E696    |000096;
  
   + SEP #$20                                                   ;82E1D5|E220    |      ;
-    LDA.B n8TempVar3                                           ;82E1D7|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82E1D7|A594    |000094;
     CMP.B #$01                                                 ;82E1D9|C901    |      ;
     BNE +                                                      ;82E1DB|D004    |82E1E1;
     JML.L fUnknown_82DEC5                                      ;82E1DD|5CC5DE82|82DEC5;
@@ -8553,11 +8553,11 @@ fUnknown_82E1F1:
     JSL.L fAudioUnknown_838401                                 ;82E1FB|22018483|838401;
     SEP #$20                                                   ;82E1FF|E220    |      ;
     LDA.B #$0F                                                 ;82E201|A90F    |      ;
-    STA.B n8TempVar1                                           ;82E203|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82E203|8592    |000092;
     LDA.B #$03                                                 ;82E205|A903    |      ;
-    STA.B n8TempVar2                                           ;82E207|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82E207|8593    |000093;
     LDA.B #$01                                                 ;82E209|A901    |      ;
-    STA.B n8TempVar3                                           ;82E20B|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82E20B|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82E20D|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82E211|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82E215|22468880|808846;
@@ -8571,9 +8571,9 @@ fUnknown_82E1F1:
     SEP #$20                                                   ;82E22E|E220    |      ;
     REP #$10                                                   ;82E230|C210    |      ;
     LDA.B #$00                                                 ;82E232|A900    |      ;
-    STA.B $27                                                  ;82E234|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82E234|8527    |000027;
     LDA.B #$22                                                 ;82E236|A922    |      ;
-    STA.B $29                                                  ;82E238|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82E238|8529    |000029;
     REP #$20                                                   ;82E23A|C220    |      ;
     LDY.W #$0200                                               ;82E23C|A00002  |      ;
     LDX.W #$0000                                               ;82E23F|A20000  |      ;
@@ -8671,16 +8671,16 @@ fUnknown_82E1F1:
     JSL.L fCore_WaitForNextNMI                                 ;82E319|22458680|808645;
     SEP #$20                                                   ;82E31D|E220    |      ;
     LDA.B #$03                                                 ;82E31F|A903    |      ;
-    STA.B n8TempVar1                                           ;82E321|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82E321|8592    |000092;
     LDA.B #$03                                                 ;82E323|A903    |      ;
-    STA.B n8TempVar2                                           ;82E325|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82E325|8593    |000093;
     LDA.B #$0F                                                 ;82E327|A90F    |      ;
-    STA.B n8TempVar3                                           ;82E329|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82E329|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E32B|22CE8780|8087CE;
     SEP #$20                                                   ;82E32F|E220    |      ;
-    STZ.B n8TempVar3                                           ;82E331|6494    |000094;
-    STZ.B $96                                                  ;82E333|6496    |000096;
-    STZ.B $97                                                  ;82E335|6497    |000097;
+    STZ.B strcVariables.n8Temp3                                ;82E331|6494    |000094;
+    STZ.B strcVariables.u8Unk96                                ;82E333|6496    |000096;
+    STZ.B strcVariables.u8Unk97                                ;82E335|6497    |000097;
  
 fUnknown_82E337:
     SEP #$20                                                   ;82E337|E220    |      ;
@@ -8692,12 +8692,12 @@ fUnknown_82E337:
     JSL.L fCore_Unknown808E69                                  ;82E344|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82E348|2234C084|84C034;
     SEP #$20                                                   ;82E34C|E220    |      ;
-    LDA.B $97                                                  ;82E34E|A597    |000097;
+    LDA.B strcVariables.u8Unk97                                ;82E34E|A597    |000097;
     BNE +                                                      ;82E350|D004    |82E356;
     JML.L fUnknown_82E3D1                                      ;82E352|5CD1E382|82E3D1;
  
  
-  + STZ.B $97                                                  ;82E356|6497    |000097;
+  + STZ.B strcVariables.u8Unk97                                ;82E356|6497    |000097;
     LDA.W $098E                                                ;82E358|AD8E09  |00098E;
     BEQ +                                                      ;82E35B|F004    |82E361;
     JML.L fUnknown_82E39B                                      ;82E35D|5C9BE382|82E39B;
@@ -8758,10 +8758,10 @@ fUnknown_82E39B:
  
 fUnknown_82E3D1:
     SEP #$20                                                   ;82E3D1|E220    |      ;
-    LDA.B $96                                                  ;82E3D3|A596    |000096;
+    LDA.B strcVariables.u8Unk96                                ;82E3D3|A596    |000096;
     CMP.B #$01                                                 ;82E3D5|C901    |      ;
     BNE .label1                                                ;82E3D7|D00C    |82E3E5;
-    STZ.B $96                                                  ;82E3D9|6496    |000096;
+    STZ.B strcVariables.u8Unk96                                ;82E3D9|6496    |000096;
     REP #$20                                                   ;82E3DB|C220    |      ;
     INC.W strcBGScrool.BG2HorOffs                              ;82E3DD|EE4001  |000140;
     DEC.W strcBGScrool.BG2VerOffs                              ;82E3E0|CE4201  |000142;
@@ -8770,10 +8770,10 @@ fUnknown_82E3D1:
  
 .label1:
     SEP #$20                                                   ;82E3E5|E220    |      ;
-    INC.B $96                                                  ;82E3E7|E696    |000096;
+    INC.B strcVariables.u8Unk96                                ;82E3E7|E696    |000096;
  
   + SEP #$20                                                   ;82E3E9|E220    |      ;
-    LDA.B n8TempVar3                                           ;82E3EB|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;82E3EB|A594    |000094;
     CMP.B #$01                                                 ;82E3ED|C901    |      ;
     BNE +                                                      ;82E3EF|D004    |82E3F5;
     JML.L fUnknown_82DEC5                                      ;82E3F1|5CC5DE82|82DEC5;
@@ -8808,12 +8808,12 @@ fUnknown_82E405:
     TAX                                                        ;82E41D|AA      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E41E|BF78F282|82F278;
     PHX                                                        ;82E422|DA      |      ;
-    STA.B n16TempVar3                                          ;82E423|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82E423|8582    |000082;
     LDX.W #$0000                                               ;82E425|A20000  |      ;
  
   - REP #$20                                                   ;82E428|C220    |      ;
     PHX                                                        ;82E42A|DA      |      ;
-    LDA.B n16TempVar3                                          ;82E42B|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;82E42B|A582    |000082;
     STA.L $800185                                              ;82E42D|8F850180|800185;
     SEP #$20                                                   ;82E431|E220    |      ;
     LDA.B #$00                                                 ;82E433|A900    |      ;
@@ -8823,10 +8823,10 @@ fUnknown_82E405:
     JSL.L fDialog_TransferGlyph                                ;82E43C|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E440|22F08A80|808AF0;
     REP #$30                                                   ;82E444|C230    |      ;
-    LDA.B n16TempVar3                                          ;82E446|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;82E446|A582    |000082;
     CLC                                                        ;82E448|18      |      ;
     ADC.W #$0008                                               ;82E449|690800  |      ;
-    STA.B n16TempVar3                                          ;82E44C|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82E44C|8582    |000082;
     PLX                                                        ;82E44E|FA      |      ;
     INX                                                        ;82E44F|E8      |      ;
     CPX.W #$0004                                               ;82E450|E00400  |      ;
@@ -8985,19 +8985,19 @@ fUnknown_82E5E7:
     ASL A                                                      ;82E5E9|0A      |      ;
     TAX                                                        ;82E5EA|AA      |      ;
     LDA.L aSystemTransferArgument,X                            ;82E5EB|BF3EE782|82E73E; X = A * 2
-    STA.B n16TempVar2                                          ;82E5EF|8580    |000080; $80 = nTableValue (0x10E8 / 0x1228)
-    STZ.B n16TempVar3                                          ;82E5F1|6482    |000082; $82 = 0
-    STY.B n16TempVar4                                          ;82E5F3|8484    |000084; $84 = nArg2
+    STA.B strcVariables.n16Temp2                               ;82E5EF|8580    |000080; $80 = nTableValue (0x10E8 / 0x1228)
+    STZ.B strcVariables.n16Temp3                               ;82E5F1|6482    |000082; $82 = 0
+    STY.B strcVariables.n16Temp4                               ;82E5F3|8484    |000084; $84 = nArg2
  
  -- REP #$30                                                   ;82E5F5|C230    |      ;
-    LDA.B n16TempVar2                                          ;82E5F7|A580    |000080; A = nTableValue (0x10E8 / 0x1228)
+    LDA.B strcVariables.n16Temp2                               ;82E5F7|A580    |000080; A = nTableValue (0x10E8 / 0x1228)
     TAX                                                        ;82E5F9|AA      |      ; X = nTableValue
     LDY.W #$0024                                               ;82E5FA|A02400  |      ; Y = 0x0024
-    STZ.B n16TempVar1                                          ;82E5FD|647E    |00007E; $7E = 0
-    LDA.B n16TempVar4                                          ;82E5FF|A584    |000084; A = Arg2
+    STZ.B strcVariables.n16Temp1                               ;82E5FD|647E    |00007E; $7E = 0
+    LDA.B strcVariables.n16Temp4                               ;82E5FF|A584    |000084; A = Arg2
     BEQ +                                                      ;82E601|F005    |82E608;
     LDA.W #$006C                                               ;82E603|A96C00  |      ; A = 0x6C (default)
-    STA.B n16TempVar1                                          ;82E606|857E    |00007E; $7E = 0x6C
+    STA.B strcVariables.n16Temp1                               ;82E606|857E    |00007E; $7E = 0x6C
  
   + REP #$30                                                   ;82E608|C230    |      ;
     LDA.W #$0000                                               ;82E60A|A90000  |      ; A = 0
@@ -9007,13 +9007,13 @@ fUnknown_82E5E7:
     SEP #$20                                                   ;82E610|E220    |      ;
     REP #$10                                                   ;82E612|C210    |      ;
     LDA.B #$00                                                 ;82E614|A900    |      ; A = 0x00
-    STA.B $27                                                  ;82E616|8527    |000027; $27 = 0x00
+    STA.B strcSystem.arrayIndex                                ;82E616|8527    |000027; $27 = 0x00
     LDA.B #$18                                                 ;82E618|A918    |      ;
-    STA.B $29                                                  ;82E61A|8529    |000029; $29 = 0x18
+    STA.B strcSystem.unk29                                     ;82E61A|8529    |000029; $29 = 0x18
     REP #$20                                                   ;82E61C|C220    |      ;
     LDA.W #$E666                                               ;82E61E|A966E6  |      ;
     CLC                                                        ;82E621|18      |      ;
-    ADC.B n16TempVar1                                          ;82E622|657E    |00007E; A = 0xE666 / 0xE666 + 0x6C
+    ADC.B strcVariables.n16Temp1                               ;82E622|657E    |00007E; A = 0xE666 / 0xE666 + 0x6C
     STA.B ptrUnknown0x72                                       ;82E624|8572    |000072;
     SEP #$20                                                   ;82E626|E220    |      ;
     LDA.B #$82                                                 ;82E628|A982    |      ;
@@ -9030,22 +9030,22 @@ fUnknown_82E5E7:
     CLC                                                        ;82E63D|18      |      ;
     ADC.W #$0020                                               ;82E63E|692000  |      ;
     TAX                                                        ;82E641|AA      |      ; X = nTableValue + 0x20
-    LDA.B n16TempVar1                                          ;82E642|A57E    |00007E; A = 0x00 / 0x6C
+    LDA.B strcVariables.n16Temp1                               ;82E642|A57E    |00007E; A = 0x00 / 0x6C
     CLC                                                        ;82E644|18      |      ;
     ADC.W #$0024                                               ;82E645|692400  |      ; A = 0x24 / 0x90
-    STA.B n16TempVar1                                          ;82E648|857E    |00007E; $7E = 0x24 / 0x90
+    STA.B strcVariables.n16Temp1                               ;82E648|857E    |00007E; $7E = 0x24 / 0x90
     PLA                                                        ;82E64A|68      |      ; A = 0
     INC A                                                      ;82E64B|1A      |      ; A++
     CMP.W #$0003                                               ;82E64C|C90300  |      ;
     BNE -                                                      ;82E64F|D0BC    |82E60D;
     REP #$20                                                   ;82E651|C220    |      ;
-    LDA.B n16TempVar2                                          ;82E653|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;82E653|A580    |000080;
     CLC                                                        ;82E655|18      |      ;
     ADC.W #$0400                                               ;82E656|690004  |      ;
-    STA.B n16TempVar2                                          ;82E659|8580    |000080;
-    LDA.B n16TempVar3                                          ;82E65B|A582    |000082;
+    STA.B strcVariables.n16Temp2                               ;82E659|8580    |000080;
+    LDA.B strcVariables.n16Temp3                               ;82E65B|A582    |000082;
     INC A                                                      ;82E65D|1A      |      ;
-    STA.B n16TempVar3                                          ;82E65E|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82E65E|8582    |000082;
     CMP.W #$0002                                               ;82E660|C90200  |      ;
     BNE --                                                     ;82E663|D090    |82E5F5;
     RTS                                                        ;82E665|60      |      ;
@@ -9082,28 +9082,28 @@ fUnknown_82E742:
  
  -- REP #$20                                                   ;82E747|C220    |      ;
     LDA.L aUnknown_82F268,X                                    ;82E749|BF68F282|82F268;
-    STA.B n16TempVar1                                          ;82E74D|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;82E74D|857E    |00007E;
     INC A                                                      ;82E74F|1A      |      ;
-    STA.B n16TempVar2                                          ;82E750|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;82E750|8580    |000080;
     CLC                                                        ;82E752|18      |      ;
     ADC.W #$000F                                               ;82E753|690F00  |      ;
-    STA.B n16TempVar3                                          ;82E756|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82E756|8582    |000082;
     INC A                                                      ;82E758|1A      |      ;
-    STA.B n16TempVar4                                          ;82E759|8584    |000084;
+    STA.B strcVariables.n16Temp4                               ;82E759|8584    |000084;
     LDA.L aUnknown_82F258,X                                    ;82E75B|BF58F282|82F258;
-    STA.B $86                                                  ;82E75F|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82E75F|8586    |000086;
     LDY.W #$0000                                               ;82E761|A00000  |      ;
  
   - PHY                                                        ;82E764|5A      |      ;
     PHX                                                        ;82E765|DA      |      ;
     SEP #$20                                                   ;82E766|E220    |      ;
     LDA.B #$00                                                 ;82E768|A900    |      ;
-    STA.B $27                                                  ;82E76A|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82E76A|8527    |000027;
     LDA.B #$18                                                 ;82E76C|A918    |      ;
-    STA.B $29                                                  ;82E76E|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82E76E|8529    |000029;
     REP #$30                                                   ;82E770|C230    |      ;
     LDY.W #$0004                                               ;82E772|A00400  |      ;
-    LDX.B $86                                                  ;82E775|A686    |000086;
+    LDX.B strcVariables.n16Unk86                               ;82E775|A686    |000086;
     LDA.W #$007E                                               ;82E777|A97E00  |      ;
     STA.B ptrUnknown0x72                                       ;82E77A|8572    |000072;
     SEP #$20                                                   ;82E77C|E220    |      ;
@@ -9114,12 +9114,12 @@ fUnknown_82E742:
     JSL.L fCore_PrepareTransfer                                ;82E787|22338A80|808A33;
     SEP #$20                                                   ;82E78B|E220    |      ;
     LDA.B #$01                                                 ;82E78D|A901    |      ;
-    STA.B $27                                                  ;82E78F|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82E78F|8527    |000027;
     LDA.B #$18                                                 ;82E791|A918    |      ;
-    STA.B $29                                                  ;82E793|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82E793|8529    |000029;
     REP #$30                                                   ;82E795|C230    |      ;
     LDY.W #$0004                                               ;82E797|A00400  |      ;
-    LDX.B $86                                                  ;82E79A|A686    |000086;
+    LDX.B strcVariables.n16Unk86                               ;82E79A|A686    |000086;
     TXA                                                        ;82E79C|8A      |      ;
     CLC                                                        ;82E79D|18      |      ;
     ADC.W #$0020                                               ;82E79E|692000  |      ;
@@ -9134,22 +9134,22 @@ fUnknown_82E742:
     JSL.L fCore_PrepareTransfer                                ;82E7B2|22338A80|808A33;
     JSL.L fCore_StartTransfer                                  ;82E7B6|22F08A80|808AF0;
     REP #$30                                                   ;82E7BA|C230    |      ;
-    INC.B n16TempVar1                                          ;82E7BC|E67E    |00007E;
-    INC.B n16TempVar1                                          ;82E7BE|E67E    |00007E;
-    INC.B n16TempVar2                                          ;82E7C0|E680    |000080;
-    INC.B n16TempVar2                                          ;82E7C2|E680    |000080;
-    INC.B n16TempVar3                                          ;82E7C4|E682    |000082;
-    INC.B n16TempVar3                                          ;82E7C6|E682    |000082;
-    INC.B n16TempVar4                                          ;82E7C8|E684    |000084;
-    INC.B n16TempVar4                                          ;82E7CA|E684    |000084;
-    INC.B $86                                                  ;82E7CC|E686    |000086;
-    INC.B $86                                                  ;82E7CE|E686    |000086;
+    INC.B strcVariables.n16Temp1                               ;82E7BC|E67E    |00007E;
+    INC.B strcVariables.n16Temp1                               ;82E7BE|E67E    |00007E;
+    INC.B strcVariables.n16Temp2                               ;82E7C0|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;82E7C2|E680    |000080;
+    INC.B strcVariables.n16Temp3                               ;82E7C4|E682    |000082;
+    INC.B strcVariables.n16Temp3                               ;82E7C6|E682    |000082;
+    INC.B strcVariables.n16Temp4                               ;82E7C8|E684    |000084;
+    INC.B strcVariables.n16Temp4                               ;82E7CA|E684    |000084;
+    INC.B strcVariables.n16Unk86                               ;82E7CC|E686    |000086;
+    INC.B strcVariables.n16Unk86                               ;82E7CE|E686    |000086;
     PLX                                                        ;82E7D0|FA      |      ;
     PLY                                                        ;82E7D1|7A      |      ;
     INY                                                        ;82E7D2|C8      |      ;
     LDA.L aUnknown_82F288,X                                    ;82E7D3|BF88F282|82F288;
-    STA.B $88                                                  ;82E7D7|8588    |000088;
-    CPY.B $88                                                  ;82E7D9|C488    |000088;
+    STA.B strcVariables.n16Unk88                               ;82E7D7|8588    |000088;
+    CPY.B strcVariables.n16Unk88                               ;82E7D9|C488    |000088;
     BNE -                                                      ;82E7DB|D087    |82E764;
     INX                                                        ;82E7DD|E8      |      ;
     INX                                                        ;82E7DE|E8      |      ;
@@ -9191,11 +9191,11 @@ fScreen_NameInput:
     JSL.L fAudioUnknown_838401                                 ;82E816|22018483|838401;
     SEP #$20                                                   ;82E81A|E220    |      ;
     LDA.B #$0F                                                 ;82E81C|A90F    |      ;
-    STA.B n8TempVar1                                           ;82E81E|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82E81E|8592    |000092;
     LDA.B #$03                                                 ;82E820|A903    |      ;
-    STA.B n8TempVar2                                           ;82E822|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82E822|8593    |000093;
     LDA.B #$01                                                 ;82E824|A901    |      ;
-    STA.B n8TempVar3                                           ;82E826|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82E826|8594    |000094;
     JSL.L fCore_ScreenFadeout                                  ;82E828|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82E82C|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82E830|22468880|808846;
@@ -9220,9 +9220,9 @@ fScreen_NameInput:
     SEP #$20                                                   ;82E86A|E220    |      ;
     REP #$10                                                   ;82E86C|C210    |      ;
     LDA.B #$00                                                 ;82E86E|A900    |      ;
-    STA.B $27                                                  ;82E870|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82E870|8527    |000027;
     LDA.B #$22                                                 ;82E872|A922    |      ;
-    STA.B $29                                                  ;82E874|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82E874|8529    |000029;
     REP #$20                                                   ;82E876|C220    |      ;
     LDY.W #$0100                                               ;82E878|A00001  |      ;
     LDX.W #$0000                                               ;82E87B|A20000  |      ;
@@ -9235,9 +9235,9 @@ fScreen_NameInput:
     SEP #$20                                                   ;82E88D|E220    |      ;
     REP #$10                                                   ;82E88F|C210    |      ;
     LDA.B #$01                                                 ;82E891|A901    |      ;
-    STA.B $27                                                  ;82E893|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82E893|8527    |000027;
     LDA.B #$22                                                 ;82E895|A922    |      ;
-    STA.B $29                                                  ;82E897|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82E897|8529    |000029;
     REP #$20                                                   ;82E899|C220    |      ;
     LDY.W #$0100                                               ;82E89B|A00001  |      ;
     LDX.W #$0080                                               ;82E89E|A28000  |      ;
@@ -9286,11 +9286,11 @@ fScreen_NameInput:
     JSL.L fCore_WaitForNextNMI                                 ;82E91B|22458680|808645;
     SEP #$20                                                   ;82E91F|E220    |      ;
     LDA.B #$03                                                 ;82E921|A903    |      ;
-    STA.B n8TempVar1                                           ;82E923|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;82E923|8592    |000092;
     LDA.B #$03                                                 ;82E925|A903    |      ;
-    STA.B n8TempVar2                                           ;82E927|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;82E927|8593    |000093;
     LDA.B #$0F                                                 ;82E929|A90F    |      ;
-    STA.B n8TempVar3                                           ;82E92B|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;82E92B|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E92D|22CE8780|8087CE;
     REP #$20                                                   ;82E931|C220    |      ;
     STZ.W strcMenuData.menuIdx                                 ;82E933|9C9109  |000991;
@@ -9308,9 +9308,9 @@ fScreen_NameInput:
     STA.W strcNames.sTemp+2                                    ;82E951|8D8708  |000887;
     LDA.B #$B1                                                 ;82E954|A9B1    |      ;
     STA.W strcNames.sTemp+3                                    ;82E956|8D8808  |000888;
-    STZ.B n8TempVar3                                           ;82E959|6494    |000094;
-    STZ.B $96                                                  ;82E95B|6496    |000096;
-    STZ.B $97                                                  ;82E95D|6497    |000097;
+    STZ.B strcVariables.n8Temp3                                ;82E959|6494    |000094;
+    STZ.B strcVariables.u8Unk96                                ;82E95B|6496    |000096;
+    STZ.B strcVariables.u8Unk97                                ;82E95D|6497    |000097;
  
   - SEP #$20                                                   ;82E95F|E220    |      ;
     LDA.B $00                                                  ;82E961|A500    |000000;
@@ -9329,10 +9329,10 @@ fScreen_NameInput:
  
   + JSL.L fMenuUnknown_82EB57                                  ;82E97F|2257EB82|82EB57;
     SEP #$20                                                   ;82E983|E220    |      ;
-    LDA.B $96                                                  ;82E985|A596    |000096;
+    LDA.B strcVariables.u8Unk96                                ;82E985|A596    |000096;
     CMP.B #$01                                                 ;82E987|C901    |      ;
     BNE .continue                                              ;82E989|D00C    |82E997;
-    STZ.B $96                                                  ;82E98B|6496    |000096;
+    STZ.B strcVariables.u8Unk96                                ;82E98B|6496    |000096;
     REP #$20                                                   ;82E98D|C220    |      ;
     INC.W strcBGScrool.BG2HorOffs                              ;82E98F|EE4001  |000140;
     DEC.W strcBGScrool.BG2VerOffs                              ;82E992|CE4201  |000142;
@@ -9341,7 +9341,7 @@ fScreen_NameInput:
  
 .continue:
     SEP #$20                                                   ;82E997|E220    |      ;
-    INC.B $96                                                  ;82E999|E696    |000096;
+    INC.B strcVariables.u8Unk96                                ;82E999|E696    |000096;
  
   + REP #$20                                                   ;82E99B|C220    |      ;
     LDA.W strcMenuData.spriteTableIdx                          ;82E99D|AD9709  |000997;
@@ -9470,22 +9470,22 @@ fTextUnknown_82EA60:
 fUnknown_82EA80:
     REP #$20                                                   ;82EA80|C220    |      ;
     LDA.L aUnknown_82EB4D                                      ;82EA82|AF4DEB82|82EB4D;
-    STA.B n16TempVar3                                          ;82EA86|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82EA86|8582    |000082;
     LDX.W #$0000                                               ;82EA88|A20000  |      ;
  
   - REP #$20                                                   ;82EA8B|C220    |      ;
     PHX                                                        ;82EA8D|DA      |      ;
-    LDA.B n16TempVar3                                          ;82EA8E|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;82EA8E|A582    |000082;
     STA.L $800185                                              ;82EA90|8F850180|800185;
     LDA.W #$00A8                                               ;82EA94|A9A800  |      ; nLetterCode
     LDX.W #$0001                                               ;82EA97|A20100  |      ;
     JSL.L fDialog_TransferGlyph                                ;82EA9A|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82EA9E|22F08A80|808AF0;
     REP #$30                                                   ;82EAA2|C230    |      ;
-    LDA.B n16TempVar3                                          ;82EAA4|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;82EAA4|A582    |000082;
     CLC                                                        ;82EAA6|18      |      ;
     ADC.W #$0010                                               ;82EAA7|691000  |      ;
-    STA.B n16TempVar3                                          ;82EAAA|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82EAAA|8582    |000082;
     PLX                                                        ;82EAAC|FA      |      ;
     INX                                                        ;82EAAD|E8      |      ;
     CPX.W #$0004                                               ;82EAAE|E00400  |      ;
@@ -9496,27 +9496,27 @@ fUnknown_82EA80:
 fUnknown_82EAB4:
     REP #$30                                                   ;82EAB4|C230    |      ;
     LDA.L nUnknown_82EB4B                                      ;82EAB6|AF4BEB82|82EB4B;
-    STA.B n16TempVar1                                          ;82EABA|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;82EABA|857E    |00007E;
     INC A                                                      ;82EABC|1A      |      ;
-    STA.B n16TempVar2                                          ;82EABD|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;82EABD|8580    |000080;
     CLC                                                        ;82EABF|18      |      ;
     ADC.W #$000F                                               ;82EAC0|690F00  |      ;
-    STA.B n16TempVar3                                          ;82EAC3|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;82EAC3|8582    |000082;
     INC A                                                      ;82EAC5|1A      |      ;
-    STA.B n16TempVar4                                          ;82EAC6|8584    |000084;
+    STA.B strcVariables.n16Temp4                               ;82EAC6|8584    |000084;
     LDA.L nUnknown_82EB49                                      ;82EAC8|AF49EB82|82EB49;
-    STA.B $86                                                  ;82EACC|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;82EACC|8586    |000086;
     LDY.W #$0000                                               ;82EACE|A00000  |      ;
  
   - PHY                                                        ;82EAD1|5A      |      ;
     SEP #$20                                                   ;82EAD2|E220    |      ;
     LDA.B #$00                                                 ;82EAD4|A900    |      ;
-    STA.B $27                                                  ;82EAD6|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82EAD6|8527    |000027;
     LDA.B #$18                                                 ;82EAD8|A918    |      ;
-    STA.B $29                                                  ;82EADA|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82EADA|8529    |000029;
     REP #$30                                                   ;82EADC|C230    |      ;
     LDY.W #$0004                                               ;82EADE|A00400  |      ;
-    LDX.B $86                                                  ;82EAE1|A686    |000086;
+    LDX.B strcVariables.n16Unk86                               ;82EAE1|A686    |000086;
     LDA.W #$007E                                               ;82EAE3|A97E00  |      ;
     STA.B ptrUnknown0x72                                       ;82EAE6|8572    |000072;
     SEP #$20                                                   ;82EAE8|E220    |      ;
@@ -9527,12 +9527,12 @@ fUnknown_82EAB4:
     JSL.L fCore_PrepareTransfer                                ;82EAF3|22338A80|808A33;
     SEP #$20                                                   ;82EAF7|E220    |      ;
     LDA.B #$01                                                 ;82EAF9|A901    |      ;
-    STA.B $27                                                  ;82EAFB|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;82EAFB|8527    |000027;
     LDA.B #$18                                                 ;82EAFD|A918    |      ;
-    STA.B $29                                                  ;82EAFF|8529    |000029;
+    STA.B strcSystem.unk29                                     ;82EAFF|8529    |000029;
     REP #$30                                                   ;82EB01|C230    |      ;
     LDY.W #$0004                                               ;82EB03|A00400  |      ;
-    LDX.B $86                                                  ;82EB06|A686    |000086;
+    LDX.B strcVariables.n16Unk86                               ;82EB06|A686    |000086;
     TXA                                                        ;82EB08|8A      |      ;
     CLC                                                        ;82EB09|18      |      ;
     ADC.W #$0020                                               ;82EB0A|692000  |      ;
@@ -9547,21 +9547,21 @@ fUnknown_82EAB4:
     JSL.L fCore_PrepareTransfer                                ;82EB1E|22338A80|808A33;
     JSL.L fCore_StartTransfer                                  ;82EB22|22F08A80|808AF0;
     REP #$30                                                   ;82EB26|C230    |      ;
-    INC.B n16TempVar1                                          ;82EB28|E67E    |00007E;
-    INC.B n16TempVar1                                          ;82EB2A|E67E    |00007E;
-    INC.B n16TempVar2                                          ;82EB2C|E680    |000080;
-    INC.B n16TempVar2                                          ;82EB2E|E680    |000080;
-    INC.B n16TempVar3                                          ;82EB30|E682    |000082;
-    INC.B n16TempVar3                                          ;82EB32|E682    |000082;
-    INC.B n16TempVar4                                          ;82EB34|E684    |000084;
-    INC.B n16TempVar4                                          ;82EB36|E684    |000084;
-    INC.B $86                                                  ;82EB38|E686    |000086;
-    INC.B $86                                                  ;82EB3A|E686    |000086;
+    INC.B strcVariables.n16Temp1                               ;82EB28|E67E    |00007E;
+    INC.B strcVariables.n16Temp1                               ;82EB2A|E67E    |00007E;
+    INC.B strcVariables.n16Temp2                               ;82EB2C|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;82EB2E|E680    |000080;
+    INC.B strcVariables.n16Temp3                               ;82EB30|E682    |000082;
+    INC.B strcVariables.n16Temp3                               ;82EB32|E682    |000082;
+    INC.B strcVariables.n16Temp4                               ;82EB34|E684    |000084;
+    INC.B strcVariables.n16Temp4                               ;82EB36|E684    |000084;
+    INC.B strcVariables.n16Unk86                               ;82EB38|E686    |000086;
+    INC.B strcVariables.n16Unk86                               ;82EB3A|E686    |000086;
     PLY                                                        ;82EB3C|7A      |      ;
     INY                                                        ;82EB3D|C8      |      ;
     LDA.L nUnknown82EB55                                       ;82EB3E|AF55EB82|82EB55;
-    STA.B $88                                                  ;82EB42|8588    |000088;
-    CPY.B $88                                                  ;82EB44|C488    |000088;
+    STA.B strcVariables.n16Unk88                               ;82EB42|8588    |000088;
+    CPY.B strcVariables.n16Unk88                               ;82EB44|C488    |000088;
     BNE -                                                      ;82EB46|D089    |82EAD1;
     RTS                                                        ;82EB48|60      |      ;
  
@@ -9661,13 +9661,13 @@ fMenuUnknown_82EBAC:
     PLA                                                        ;82EBE1|68      |      ; A = nArg
     INC A                                                      ;82EBE2|1A      |      ;
     INC A                                                      ;82EBE3|1A      |      ;
-    STA.B n16TempVar1                                          ;82EBE4|857E    |00007E; $7E = nArg * 4
+    STA.B strcVariables.n16Temp1                               ;82EBE4|857E    |00007E; $7E = nArg * 4
     LDA.W strcMenuData.menuIdx                                 ;82EBE6|AD9109  |000991; A = $0991
     ASL A                                                      ;82EBE9|0A      |      ;
     ASL A                                                      ;82EBEA|0A      |      ;
     ASL A                                                      ;82EBEB|0A      |      ;
     CLC                                                        ;82EBEC|18      |      ;
-    ADC.B n16TempVar1                                          ;82EBED|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;82EBED|657E    |00007E;
     TAY                                                        ;82EBEF|A8      |      ; Y = $0991 * 8 + nArg * 4
     SEP #$20                                                   ;82EBF0|E220    |      ;
     LDA.B #$00                                                 ;82EBF2|A900    |      ;

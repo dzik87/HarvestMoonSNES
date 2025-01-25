@@ -11,7 +11,7 @@ fMathMultiply_7EbyA:
     STZ.W $0122                                                ;83800C|9C2201  |000122;
     SEP #$20                                                   ;83800F|E220    |      ;
     STA.W $011A                                                ;838011|8D1A01  |00011A;
-    LDA.B n16TempVar1                                          ;838014|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;838014|A57E    |00007E;
     STA.W $011B                                                ;838016|8D1B01  |00011B;
     JSR.W fMathMultiply                                        ;838019|206780  |838067;
     REP #$20                                                   ;83801C|C220    |      ;
@@ -28,7 +28,7 @@ fMathMultiply_7EbyA:
     XBA                                                        ;838037|EB      |      ;
     STA.W $0120                                                ;838038|8D2001  |000120;
  
-  + LDA.B n16TempVar1                                          ;83803B|A57E    |00007E;
+  + LDA.B strcVariables.n16Temp1                               ;83803B|A57E    |00007E;
     AND.W #$FF00                                               ;83803D|2900FF  |      ;
     BEQ +                                                      ;838040|F018    |83805A;
     SEP #$20                                                   ;838042|E220    |      ;
@@ -69,13 +69,13 @@ fMathMultiply:
 fMathDivide:
     REP #$30                                                   ;838082|C230    |      ;
     LDY.W #$0000                                               ;838084|A00000  |      ;
-    LDA.B n16TempVar2                                          ;838087|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;838087|A580    |000080;
     CMP.W #$00FF                                               ;838089|C9FF00  |      ;
     BCS +                                                      ;83808C|B020    |8380AE;
-    LDA.B n16TempVar1                                          ;83808E|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83808E|A57E    |00007E;
     STA.L SNES_WRDIVL                                          ;838090|8F044200|004204;
     SEP #$20                                                   ;838094|E220    |      ;
-    LDA.B n16TempVar2                                          ;838096|A580    |000080; $7E: nA, $80: nB, return A: $7E / $80
+    LDA.B strcVariables.n16Temp2                               ;838096|A580    |000080; $7E: nA, $80: nB, return A: $7E / $80
     STA.L SNES_WRDIVB                                          ;838098|8F064200|004206;
     REP #$20                                                   ;83809C|C220    |      ;
     NOP                                                        ;83809E|EA      |      ;
@@ -84,7 +84,7 @@ fMathDivide:
     TYA                                                        ;8380A1|98      |      ;
     LSR A                                                      ;8380A2|4A      |      ;
     LDA.L SNES_RDMPYL                                          ;8380A3|AF164200|004216;
-    STA.B n16TempVar1                                          ;8380A7|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8380A7|857E    |00007E;
     LDA.L SNES_RDDIVL                                          ;8380A9|AF144200|004214;
  
 .justReturn:
@@ -94,46 +94,46 @@ fMathDivide:
   + PHY                                                        ;8380AE|5A      |      ;
     LDY.W #$0010                                               ;8380AF|A01000  |      ;
     LDA.W #$0000                                               ;8380B2|A90000  |      ;
-    STA.B n16TempVar3                                          ;8380B5|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;8380B5|8582    |000082;
  
-  - ASL.B n16TempVar3                                          ;8380B7|0682    |000082;
-    ASL.B n16TempVar1                                          ;8380B9|067E    |00007E;
+  - ASL.B strcVariables.n16Temp3                               ;8380B7|0682    |000082;
+    ASL.B strcVariables.n16Temp1                               ;8380B9|067E    |00007E;
     ROL A                                                      ;8380BB|2A      |      ;
-    CMP.B n16TempVar2                                          ;8380BC|C580    |000080;
+    CMP.B strcVariables.n16Temp2                               ;8380BC|C580    |000080;
     BCC +                                                      ;8380BE|9004    |8380C4;
-    SBC.B n16TempVar2                                          ;8380C0|E580    |000080;
-    INC.B n16TempVar3                                          ;8380C2|E682    |000082;
+    SBC.B strcVariables.n16Temp2                               ;8380C0|E580    |000080;
+    INC.B strcVariables.n16Temp3                               ;8380C2|E682    |000082;
  
   + DEY                                                        ;8380C4|88      |      ;
     BNE -                                                      ;8380C5|D0F0    |8380B7;
-    STA.B n16TempVar1                                          ;8380C7|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8380C7|857E    |00007E;
     PLA                                                        ;8380C9|68      |      ;
     LSR A                                                      ;8380CA|4A      |      ;
-    LDA.B n16TempVar3                                          ;8380CB|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;8380CB|A582    |000082;
     JMP.W .justReturn                                          ;8380CD|4CAD80  |8380AD;
  
     REP #$30                                                   ;8380D0|C230    |      ;
     LDY.W #$0000                                               ;8380D2|A00000  |      ;
-    LDA.B n16TempVar1                                          ;8380D5|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;8380D5|A57E    |00007E;
     BPL +                                                      ;8380D7|1007    |8380E0;
     EOR.W #$FFFF                                               ;8380D9|49FFFF  |      ;
     INC A                                                      ;8380DC|1A      |      ;
-    STA.B n16TempVar1                                          ;8380DD|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8380DD|857E    |00007E;
     INY                                                        ;8380DF|C8      |      ;
  
-  + LDA.B n16TempVar2                                          ;8380E0|A580    |000080;
+  + LDA.B strcVariables.n16Temp2                               ;8380E0|A580    |000080;
     BPL +                                                      ;8380E2|1007    |8380EB;
     EOR.W #$FFFF                                               ;8380E4|49FFFF  |      ;
     INC A                                                      ;8380E7|1A      |      ;
-    STA.B n16TempVar2                                          ;8380E8|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;8380E8|8580    |000080;
     INY                                                        ;8380EA|C8      |      ;
  
   + CMP.W #$00FF                                               ;8380EB|C9FF00  |      ;
     BCS .label1                                                ;8380EE|B026    |838116;
-    LDA.B n16TempVar1                                          ;8380F0|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;8380F0|A57E    |00007E;
     STA.L SNES_WRDIVL                                          ;8380F2|8F044200|004204;
     SEP #$20                                                   ;8380F6|E220    |      ;
-    LDA.B n16TempVar2                                          ;8380F8|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;8380F8|A580    |000080;
     STA.L SNES_WRDIVB                                          ;8380FA|8F064200|004206;
     REP #$20                                                   ;8380FE|C220    |      ;
     NOP                                                        ;838100|EA      |      ;
@@ -142,7 +142,7 @@ fMathDivide:
     TYA                                                        ;838103|98      |      ;
     LSR A                                                      ;838104|4A      |      ;
     LDA.L SNES_RDMPYL                                          ;838105|AF164200|004216;
-    STA.B n16TempVar1                                          ;838109|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;838109|857E    |00007E;
     LDA.L SNES_RDDIVL                                          ;83810B|AF144200|004214;
  
  -- BCC +                                                      ;83810F|9004    |838115;
@@ -156,22 +156,22 @@ fMathDivide:
     PHY                                                        ;838116|5A      |      ;
     LDY.W #$0010                                               ;838117|A01000  |      ;
     LDA.W #$0000                                               ;83811A|A90000  |      ;
-    STA.B n16TempVar3                                          ;83811D|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83811D|8582    |000082;
  
-  - ASL.B n16TempVar3                                          ;83811F|0682    |000082;
-    ASL.B n16TempVar1                                          ;838121|067E    |00007E;
+  - ASL.B strcVariables.n16Temp3                               ;83811F|0682    |000082;
+    ASL.B strcVariables.n16Temp1                               ;838121|067E    |00007E;
     ROL A                                                      ;838123|2A      |      ;
-    CMP.B n16TempVar2                                          ;838124|C580    |000080;
+    CMP.B strcVariables.n16Temp2                               ;838124|C580    |000080;
     BCC +                                                      ;838126|9004    |83812C;
-    SBC.B n16TempVar2                                          ;838128|E580    |000080;
-    INC.B n16TempVar3                                          ;83812A|E682    |000082;
+    SBC.B strcVariables.n16Temp2                               ;838128|E580    |000080;
+    INC.B strcVariables.n16Temp3                               ;83812A|E682    |000082;
  
   + DEY                                                        ;83812C|88      |      ;
     BNE -                                                      ;83812D|D0F0    |83811F;
-    STA.B n16TempVar1                                          ;83812F|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83812F|857E    |00007E;
     PLA                                                        ;838131|68      |      ;
     LSR A                                                      ;838132|4A      |      ;
-    LDA.B n16TempVar3                                          ;838133|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;838133|A582    |000082;
     JMP.W --                                                   ;838135|4C0F81  |83810F;
  
  
@@ -206,16 +206,16 @@ fGraphicsTransferData:
     ASL A                                                      ;838169|0A      |      ;
     ASL A                                                      ;83816A|0A      |      ;
     ASL A                                                      ;83816B|0A      |      ;
-    STA.B n16TempVar1                                          ;83816C|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83816C|857E    |00007E;
     SEP #$20                                                   ;83816E|E220    |      ;
     LDA.B #$06                                                 ;838170|A906    |      ;
-    STA.B $27                                                  ;838172|8527    |000027; $27 = 0x06
+    STA.B strcSystem.arrayIndex                                ;838172|8527    |000027; $27 = 0x06
     LDA.B #$18                                                 ;838174|A918    |      ;
-    STA.B $29                                                  ;838176|8529    |000029; $29 = 0x18
+    STA.B strcSystem.unk29                                     ;838176|8529    |000029; $29 = 0x18
     REP #$20                                                   ;838178|C220    |      ;
     LDA.W #$0010                                               ;83817A|A91000  |      ;
     CLC                                                        ;83817D|18      |      ;
-    ADC.B n16TempVar1                                          ;83817E|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;83817E|657E    |00007E;
     TAY                                                        ;838180|A8      |      ; Y = nArg1 * 16 + 0x10
     REP #$20                                                   ;838181|C220    |      ;
     LDA.W #$0080                                               ;838183|A98000  |      ; A = 0x80
@@ -223,9 +223,9 @@ fGraphicsTransferData:
     JSL.L fCore_PrepareTransfer                                ;838187|22338A80|808A33;
     SEP #$20                                                   ;83818B|E220    |      ;
     LDA.B #$07                                                 ;83818D|A907    |      ;
-    STA.B $27                                                  ;83818F|8527    |000027; $27 = 0x07
+    STA.B strcSystem.arrayIndex                                ;83818F|8527    |000027; $27 = 0x07
     LDA.B #$18                                                 ;838191|A918    |      ;
-    STA.B $29                                                  ;838193|8529    |000029; $29 = 0x18
+    STA.B strcSystem.unk29                                     ;838193|8529    |000029; $29 = 0x18
     REP #$30                                                   ;838195|C230    |      ;
     PLX                                                        ;838197|FA      |      ; X = stack1
     TXA                                                        ;838198|8A      |      ;
@@ -234,7 +234,7 @@ fGraphicsTransferData:
     TAX                                                        ;83819D|AA      |      ;
     LDA.W #$0010                                               ;83819E|A91000  |      ;
     CLC                                                        ;8381A1|18      |      ;
-    ADC.B n16TempVar1                                          ;8381A2|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;8381A2|657E    |00007E;
     TAY                                                        ;8381A4|A8      |      ;
     LDA.B ptrUnknown0x72                                       ;8381A5|A572    |000072;
     CLC                                                        ;8381A7|18      |      ;
@@ -250,9 +250,9 @@ fGraphicsUnknown_8381B7:
     SEP #$20                                                   ;8381B7|E220    |      ; X: nArg1, $72: ptr24
     REP #$10                                                   ;8381B9|C210    |      ;
     LDA.B #$06                                                 ;8381BB|A906    |      ;
-    STA.B $27                                                  ;8381BD|8527    |000027; $27 = 0x06
+    STA.B strcSystem.arrayIndex                                ;8381BD|8527    |000027; $27 = 0x06
     LDA.B #$18                                                 ;8381BF|A918    |      ;
-    STA.B $29                                                  ;8381C1|8529    |000029; $29 = 0x18
+    STA.B strcSystem.unk29                                     ;8381C1|8529    |000029; $29 = 0x18
     LDY.W #$0004                                               ;8381C3|A00400  |      ; Y = 0x04
     REP #$20                                                   ;8381C6|C220    |      ;
     LDA.W #$0080                                               ;8381C8|A98000  |      ; A = 0x80
@@ -260,9 +260,9 @@ fGraphicsUnknown_8381B7:
     JSL.L fCore_PrepareTransfer                                ;8381CC|22338A80|808A33;
     SEP #$20                                                   ;8381D0|E220    |      ;
     LDA.B #$07                                                 ;8381D2|A907    |      ;
-    STA.B $27                                                  ;8381D4|8527    |000027; $27 = 0x07
+    STA.B strcSystem.arrayIndex                                ;8381D4|8527    |000027; $27 = 0x07
     LDA.B #$18                                                 ;8381D6|A918    |      ;
-    STA.B $29                                                  ;8381D8|8529    |000029; $29 = 0x18
+    STA.B strcSystem.unk29                                     ;8381D8|8529    |000029; $29 = 0x18
     REP #$30                                                   ;8381DA|C230    |      ;
     PLX                                                        ;8381DC|FA      |      ;
     TXA                                                        ;8381DD|8A      |      ;
@@ -293,30 +293,30 @@ fGraphicsDecompressTilemap:
     BCC -                                                      ;838208|90F5    |8381FF;
     REP #$20                                                   ;83820A|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;83820C|A772    |000072;
-    STA.B n16TempVar1                                          ;83820E|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83820E|857E    |00007E;
     INC.B ptrUnknown0x72                                       ;838210|E672    |000072;
     INC.B ptrUnknown0x72                                       ;838212|E672    |000072;
     INC.B ptrUnknown0x72                                       ;838214|E672    |000072;
     INC.B ptrUnknown0x72                                       ;838216|E672    |000072;
-    STZ.B n16TempVar2                                          ;838218|6480    |000080;
-    STZ.B n16TempVar3                                          ;83821A|6482    |000082;
+    STZ.B strcVariables.n16Temp2                               ;838218|6480    |000080;
+    STZ.B strcVariables.n16Temp3                               ;83821A|6482    |000082;
     LDA.W #$07DE                                               ;83821C|A9DE07  |      ;
-    STA.B n16TempVar4                                          ;83821F|8584    |000084;
-    LDA.B n16TempVar1                                          ;838221|A57E    |00007E;
+    STA.B strcVariables.n16Temp4                               ;83821F|8584    |000084;
+    LDA.B strcVariables.n16Temp1                               ;838221|A57E    |00007E;
     BNE .loop                                                  ;838223|D000    |838225;
  
 .loop:
-    DEC.B n16TempVar3                                          ;838225|C682    |000082;
+    DEC.B strcVariables.n16Temp3                               ;838225|C682    |000082;
     BPL +                                                      ;838227|1010    |838239;
     REP #$20                                                   ;838229|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;83822B|A772    |000072;
     INC.B ptrUnknown0x72                                       ;83822D|E672    |000072;
     AND.W #$00FF                                               ;83822F|29FF00  |      ;
-    STA.B n16TempVar2                                          ;838232|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;838232|8580    |000080;
     LDA.W #$0007                                               ;838234|A90700  |      ;
-    STA.B n16TempVar3                                          ;838237|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;838237|8582    |000082;
  
-  + LSR.B n16TempVar2                                          ;838239|4680    |000080;
+  + LSR.B strcVariables.n16Temp2                               ;838239|4680    |000080;
     BCC +                                                      ;83823B|9028    |838265;
     REP #$20                                                   ;83823D|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;83823F|A772    |000072;
@@ -326,16 +326,16 @@ fGraphicsDecompressTilemap:
     STA.B [ptrUnknown0x75]                                     ;838248|8775    |000075;
     REP #$30                                                   ;83824A|C230    |      ;
     INC.B ptrUnknown0x75                                       ;83824C|E675    |000075;
-    DEC.B n16TempVar1                                          ;83824E|C67E    |00007E;
+    DEC.B strcVariables.n16Temp1                               ;83824E|C67E    |00007E;
     BEQ .return                                                ;838250|F070    |8382C2;
-    LDX.B n16TempVar4                                          ;838252|A684    |000084;
+    LDX.B strcVariables.n16Temp4                               ;838252|A684    |000084;
     SEP #$20                                                   ;838254|E220    |      ;
     STA.L $7F0000,X                                            ;838256|9F00007F|7F0000;
     REP #$30                                                   ;83825A|C230    |      ;
     TXA                                                        ;83825C|8A      |      ;
     INC A                                                      ;83825D|1A      |      ;
     AND.W #$07FF                                               ;83825E|29FF07  |      ;
-    STA.B n16TempVar4                                          ;838261|8584    |000084;
+    STA.B strcVariables.n16Temp4                               ;838261|8584    |000084;
     BRA .loop                                                  ;838263|80C0    |838225;
  
  
@@ -343,7 +343,7 @@ fGraphicsDecompressTilemap:
     LDA.B [ptrUnknown0x72]                                     ;838267|A772    |000072;
     INC.B ptrUnknown0x72                                       ;838269|E672    |000072;
     AND.W #$00FF                                               ;83826B|29FF00  |      ;
-    STA.B $86                                                  ;83826E|8586    |000086;
+    STA.B strcVariables.n16Unk86                               ;83826E|8586    |000086;
     REP #$20                                                   ;838270|C220    |      ;
     LDA.B [ptrUnknown0x72]                                     ;838272|A772    |000072;
     INC.B ptrUnknown0x72                                       ;838274|E672    |000072;
@@ -353,43 +353,43 @@ fGraphicsDecompressTilemap:
     INC A                                                      ;83827D|1A      |      ;
     INC A                                                      ;83827E|1A      |      ;
     INC A                                                      ;83827F|1A      |      ;
-    STA.B $88                                                  ;838280|8588    |000088;
+    STA.B strcVariables.n16Unk88                               ;838280|8588    |000088;
     TXA                                                        ;838282|8A      |      ;
     AND.W #$00E0                                               ;838283|29E000  |      ;
     ASL A                                                      ;838286|0A      |      ;
     ASL A                                                      ;838287|0A      |      ;
     ASL A                                                      ;838288|0A      |      ;
-    ORA.B $86                                                  ;838289|0586    |000086;
-    STA.B $86                                                  ;83828B|8586    |000086;
+    ORA.B strcVariables.n16Unk86                               ;838289|0586    |000086;
+    STA.B strcVariables.n16Unk86                               ;83828B|8586    |000086;
  
-  - LDX.B $86                                                  ;83828D|A686    |000086;
+  - LDX.B strcVariables.n16Unk86                               ;83828D|A686    |000086;
     LDA.L $7F0000,X                                            ;83828F|BF00007F|7F0000;
     AND.W #$00FF                                               ;838293|29FF00  |      ;
     SEP #$20                                                   ;838296|E220    |      ;
     STA.B [ptrUnknown0x75]                                     ;838298|8775    |000075;
     REP #$30                                                   ;83829A|C230    |      ;
     INC.B ptrUnknown0x75                                       ;83829C|E675    |000075;
-    DEC.B n16TempVar1                                          ;83829E|C67E    |00007E;
+    DEC.B strcVariables.n16Temp1                               ;83829E|C67E    |00007E;
     BEQ .return                                                ;8382A0|F020    |8382C2;
-    LDX.B n16TempVar4                                          ;8382A2|A684    |000084;
+    LDX.B strcVariables.n16Temp4                               ;8382A2|A684    |000084;
     SEP #$20                                                   ;8382A4|E220    |      ;
     STA.L $7F0000,X                                            ;8382A6|9F00007F|7F0000;
     REP #$30                                                   ;8382AA|C230    |      ;
     TXA                                                        ;8382AC|8A      |      ;
     INC A                                                      ;8382AD|1A      |      ;
     AND.W #$07FF                                               ;8382AE|29FF07  |      ;
-    STA.B n16TempVar4                                          ;8382B1|8584    |000084;
-    LDA.B $86                                                  ;8382B3|A586    |000086;
+    STA.B strcVariables.n16Temp4                               ;8382B1|8584    |000084;
+    LDA.B strcVariables.n16Unk86                               ;8382B3|A586    |000086;
     INC A                                                      ;8382B5|1A      |      ;
     AND.W #$07FF                                               ;8382B6|29FF07  |      ;
-    STA.B $86                                                  ;8382B9|8586    |000086;
-    DEC.B $88                                                  ;8382BB|C688    |000088;
+    STA.B strcVariables.n16Unk86                               ;8382B9|8586    |000086;
+    DEC.B strcVariables.n16Unk88                               ;8382BB|C688    |000088;
     BNE -                                                      ;8382BD|D0CE    |83828D;
     JMP.W .loop                                                ;8382BF|4C2582  |838225;
  
  
 .return:
-    LDA.B n16TempVar1                                          ;8382C2|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;8382C2|A57E    |00007E;
     PLP                                                        ;8382C4|28      |      ;
     RTL                                                        ;8382C5|6B      |      ;
  
@@ -683,31 +683,31 @@ fAudioUnknown_8384D3:
     SEP #$20                                                   ;8384D3|E220    |      ;
     REP #$10                                                   ;8384D5|C210    |      ;
     LDA.B #$01                                                 ;8384D7|A901    |      ;
-    STA.B n8TempVar1                                           ;8384D9|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;8384D9|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;8384DB|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8384DE|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8384E0|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8384E3|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8384E3|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8384E5|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8384E8|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8384E8|C593    |000093;
     BNE .wait1                                                 ;8384EA|D0F2    |8384DE;
     LDA.B #$01                                                 ;8384EC|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8384EE|CD4321  |002143;
     BNE .wait1                                                 ;8384F1|D0EB    |8384DE;
     REP #$20                                                   ;8384F3|C220    |      ;
     LDA.W #$03F2                                               ;8384F5|A9F203  |      ;
-    STA.B n16TempVar1                                          ;8384F8|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8384F8|857E    |00007E;
     LDA.W #$0003                                               ;8384FA|A90300  |      ;
-    STA.B n16TempVar2                                          ;8384FD|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;8384FD|8580    |000080;
     JSL.L fMathDivide                                          ;8384FF|22828083|838082;
-    STA.B n16TempVar2                                          ;838503|8580    |000080;
-    LDA.B n16TempVar1                                          ;838505|A57E    |00007E;
+    STA.B strcVariables.n16Temp2                               ;838503|8580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;838505|A57E    |00007E;
     BEQ +                                                      ;838507|F002    |83850B;
-    INC.B n16TempVar2                                          ;838509|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;838509|E680    |000080;
  
-  + LDA.B n16TempVar2                                          ;83850B|A580    |000080;
+  + LDA.B strcVariables.n16Temp2                               ;83850B|A580    |000080;
     SEP #$20                                                   ;83850D|E220    |      ;
     STA.W SNES_APUIO0                                          ;83850F|8D4021  |002140;
     XBA                                                        ;838512|EB      |      ;
@@ -719,9 +719,9 @@ fAudioUnknown_8384D3:
 .wait2:
     SEP #$20                                                   ;83851E|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838520|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838523|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838523|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838525|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838528|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838528|C593    |000093;
     BNE .wait2                                                 ;83852A|D0F2    |83851E;
     LDA.W SNES_APUIO3                                          ;83852C|AD4321  |002143;
     CMP.B #$04                                                 ;83852F|C904    |      ;
@@ -736,15 +736,15 @@ fAudioUnknown_8384D3:
     LDA.B #$B2                                                 ;838544|A9B2    |      ;
     STA.B ptrAudioData+2                                       ;838546|850C    |00000C;
     REP #$20                                                   ;838548|C220    |      ;
-    LDA.B n16TempVar2                                          ;83854A|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;83854A|A580    |000080;
     TAX                                                        ;83854C|AA      |      ;
  
 .wait3:
     SEP #$20                                                   ;83854D|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83854F|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838552|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838552|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838554|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838557|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838557|C593    |000093;
     BNE .wait3                                                 ;838559|D0F2    |83854D;
     LDA.B #$01                                                 ;83855B|A901    |      ;
     CMP.W SNES_APUIO3                                          ;83855D|CD4321  |002143;
@@ -765,9 +765,9 @@ fAudioUnknown_8384D3:
 .wait4:
     SEP #$20                                                   ;83857A|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83857C|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83857F|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83857F|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838581|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838584|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838584|C593    |000093;
     BNE .wait4                                                 ;838586|D0F2    |83857A;
     LDA.B #$00                                                 ;838588|A900    |      ;
     CMP.W SNES_APUIO3                                          ;83858A|CD4321  |002143;
@@ -785,7 +785,7 @@ fAudio_PlayAudio_Unknown838598:
  
 .loop:
     LDA.L aAudio2IndexLookup_8392B1,X                          ;83859F|BFB19283|8392B1;
-    STA.B n8TempVar3                                           ;8385A3|8594    |000094; sAudioData2Index
+    STA.B strcVariables.n8Temp3                                ;8385A3|8594    |000094; sAudioData2Index
     BNE +                                                      ;8385A5|D009    |8385B0;
     INX                                                        ;8385A7|E8      |      ;
     CPX.W #$000A                                               ;8385A8|E00A00  |      ;
@@ -795,15 +795,15 @@ fAudio_PlayAudio_Unknown838598:
  
   + SEP #$20                                                   ;8385B0|E220    |      ;
     LDA.B #$02                                                 ;8385B2|A902    |      ;
-    STA.B n8TempVar1                                           ;8385B4|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;8385B4|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;8385B6|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8385B9|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8385BB|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8385BE|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8385BE|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8385C0|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8385C3|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8385C3|C593    |000093;
     BNE .wait1                                                 ;8385C5|D0F2    |8385B9;
     LDA.B #$01                                                 ;8385C7|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8385C9|CD4321  |002143;
@@ -811,14 +811,14 @@ fAudio_PlayAudio_Unknown838598:
     PHX                                                        ;8385CE|DA      |      ;
     LDA.B #$00                                                 ;8385CF|A900    |      ;
     XBA                                                        ;8385D1|EB      |      ;
-    LDA.B n8TempVar3                                           ;8385D2|A594    |000094; sAudioData2Index
+    LDA.B strcVariables.n8Temp3                                ;8385D2|A594    |000094; sAudioData2Index
     REP #$20                                                   ;8385D4|C220    |      ;
-    STA.B n16TempVar1                                          ;8385D6|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8385D6|857E    |00007E;
     LDA.W #$000A                                               ;8385D8|A90A00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;8385DB|22008083|838000; Calculate new X offset (X * 0x0A)
     TAX                                                        ;8385DF|AA      |      ;
     SEP #$20                                                   ;8385E0|E220    |      ;
-    LDA.B n8TempVar3                                           ;8385E2|A594    |000094; sAudioData2Index
+    LDA.B strcVariables.n8Temp3                                ;8385E2|A594    |000094; sAudioData2Index
     STA.W SNES_APUIO0                                          ;8385E4|8D4021  |002140;
     REP #$20                                                   ;8385E7|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;8385E9|BFEF9083|8390EF;
@@ -834,9 +834,9 @@ fAudio_PlayAudio_Unknown838598:
 .wait2:
     SEP #$20                                                   ;8385FD|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8385FF|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838602|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838602|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838604|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838607|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838607|C593    |000093;
     BNE .wait2                                                 ;838609|D0F2    |8385FD;
     LDA.W SNES_APUIO3                                          ;83860B|AD4321  |002143;
     CMP.B #$04                                                 ;83860E|C904    |      ;
@@ -848,9 +848,9 @@ fAudio_PlayAudio_Unknown838598:
  
   - SEP #$20                                                   ;838617|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838619|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83861C|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83861C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83861E|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838621|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838621|C593    |000093;
     BNE -                                                      ;838623|D0F2    |838617;
  
   - LDA.B #$01                                                 ;838625|A901    |      ;
@@ -871,9 +871,9 @@ fAudio_PlayAudio_Unknown838598:
 .wait3:
     SEP #$20                                                   ;838649|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83864B|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83864E|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83864E|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838650|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838653|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838653|C593    |000093;
     BNE .wait3                                                 ;838655|D0F2    |838649;
     LDA.W SNES_APUIO3                                          ;838657|AD4321  |002143;
     CMP.B #$04                                                 ;83865A|C904    |      ;
@@ -885,9 +885,9 @@ fAudio_PlayAudio_Unknown838598:
  
   - SEP #$20                                                   ;838663|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838665|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838668|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838668|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83866A|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;83866D|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;83866D|C593    |000093;
     BNE -                                                      ;83866F|D0F2    |838663;
  
   - LDA.B #$01                                                 ;838671|A901    |      ;
@@ -906,9 +906,9 @@ fAudio_PlayAudio_Unknown838598:
 .wait4:
     SEP #$20                                                   ;838690|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838692|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838695|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838695|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838697|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;83869A|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;83869A|C593    |000093;
     BNE .wait4                                                 ;83869C|D0F2    |838690;
     LDA.W SNES_APUIO3                                          ;83869E|AD4321  |002143;
     CMP.B #$04                                                 ;8386A1|C904    |      ;
@@ -920,9 +920,9 @@ fAudio_PlayAudio_Unknown838598:
  
   - SEP #$20                                                   ;8386AA|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8386AC|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8386AF|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8386AF|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8386B1|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8386B4|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8386B4|C593    |000093;
     BNE -                                                      ;8386B6|D0F2    |8386AA;
  
   - LDA.B #$01                                                 ;8386B8|A901    |      ;
@@ -938,21 +938,21 @@ fAudio_PlayAudio_Unknown838598:
     STA.B ptrAudioData+2                                       ;8386CF|850C    |00000C; store 8b to $0C
     LDA.B #$00                                                 ;8386D1|A900    |      ;
     XBA                                                        ;8386D3|EB      |      ;
-    LDA.B n8TempVar3                                           ;8386D4|A594    |000094; sAudioData2Index
+    LDA.B strcVariables.n8Temp3                                ;8386D4|A594    |000094; sAudioData2Index
     ASL A                                                      ;8386D6|0A      |      ;
     REP #$20                                                   ;8386D7|C220    |      ;
     TAX                                                        ;8386D9|AA      |      ;
     LDA.L aAudioTracks2Size,X                                  ;8386DA|BFFF8E83|838EFF;
-    STA.B n16TempVar1                                          ;8386DE|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8386DE|857E    |00007E;
     LDA.W #$0003                                               ;8386E0|A90300  |      ;
-    STA.B n16TempVar2                                          ;8386E3|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;8386E3|8580    |000080;
     JSL.L fMathDivide                                          ;8386E5|22828083|838082;
-    STA.B n16TempVar2                                          ;8386E9|8580    |000080;
-    LDA.B n16TempVar1                                          ;8386EB|A57E    |00007E;
+    STA.B strcVariables.n16Temp2                               ;8386E9|8580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;8386EB|A57E    |00007E;
     BEQ +                                                      ;8386ED|F002    |8386F1;
-    INC.B n16TempVar2                                          ;8386EF|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;8386EF|E680    |000080;
  
-  + LDA.B n16TempVar2                                          ;8386F1|A580    |000080;
+  + LDA.B strcVariables.n16Temp2                               ;8386F1|A580    |000080;
     TAX                                                        ;8386F3|AA      |      ; X = nAudioTrackSize / 3 (we copy 3 bytes at time
     SEP #$20                                                   ;8386F4|E220    |      ;
     STA.W SNES_APUIO0                                          ;8386F6|8D4021  |002140;
@@ -966,9 +966,9 @@ fAudio_PlayAudio_Unknown838598:
 .wait5:
     SEP #$20                                                   ;838708|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83870A|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83870D|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83870D|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83870F|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838712|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838712|C593    |000093;
     BNE .wait5                                                 ;838714|D0F2    |838708;
     LDA.W SNES_APUIO3                                          ;838716|AD4321  |002143;
     CMP.B #$04                                                 ;838719|C904    |      ;
@@ -980,9 +980,9 @@ fAudio_PlayAudio_Unknown838598:
  
   - SEP #$20                                                   ;838722|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838724|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838727|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838727|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838729|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;83872C|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;83872C|C593    |000093;
     BNE -                                                      ;83872E|D0F2    |838722;
  
   - LDA.B #$01                                                 ;838730|A901    |      ;
@@ -1006,9 +1006,9 @@ fAudio_PlayAudio_Unknown838598:
 .wait6:
     SEP #$20                                                   ;83874F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838751|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838754|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838754|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838756|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838759|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838759|C593    |000093;
     BNE .wait6                                                 ;83875B|D0F2    |83874F;
     LDA.B #$00                                                 ;83875D|A900    |      ;
     CMP.W SNES_APUIO3                                          ;83875F|CD4321  |002143;
@@ -1017,9 +1017,9 @@ fAudio_PlayAudio_Unknown838598:
  
   - SEP #$20                                                   ;838767|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838769|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83876C|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83876C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83876E|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838771|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838771|C593    |000093;
     BNE -                                                      ;838773|D0F2    |838767;
  
   - LDA.B #$01                                                 ;838775|A901    |      ;
@@ -1054,7 +1054,7 @@ fAudioUnknown_83878C:
     XBA                                                        ;8387A7|EB      |      ;
     LDA.W strcAudio.trackId                                    ;8387A8|AD1001  |000110;
     REP #$20                                                   ;8387AB|C220    |      ;
-    STA.B n16TempVar1                                          ;8387AD|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8387AD|857E    |00007E;
     LDA.W #$000E                                               ;8387AF|A90E00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;8387B2|22008083|838000;
     TAX                                                        ;8387B6|AA      |      ;
@@ -1063,27 +1063,27 @@ fAudioUnknown_83878C:
     INX                                                        ;8387B9|E8      |      ;
     CLC                                                        ;8387BA|18      |      ;
     ADC.W #$000E                                               ;8387BB|690E00  |      ;
-    STA.B n16TempVar4                                          ;8387BE|8584    |000084; nIndex = nAudioMusicTrackId * 0x0E + 0x0E + 3
+    STA.B strcVariables.n16Temp4                               ;8387BE|8584    |000084; nIndex = nAudioMusicTrackId * 0x0E + 0x0E + 3
  
 .loop:
     SEP #$20                                                   ;8387C0|E220    |      ;
     LDA.L sAudioData1_838F83,X                                 ;8387C2|BF838F83|838F83;
-    STA.B n8TempVar3                                           ;8387C6|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;8387C6|8594    |000094;
     BNE .label1                                                ;8387C8|D010    |8387DA;
     REP #$20                                                   ;8387CA|C220    |      ;
     INX                                                        ;8387CC|E8      |      ;
-    CPX.B n16TempVar4                                          ;8387CD|E484    |000084;
+    CPX.B strcVariables.n16Temp4                               ;8387CD|E484    |000084;
     BNE .loop                                                  ;8387CF|D0EF    |8387C0;
     SEP #$20                                                   ;8387D1|E220    |      ;
     LDA.B #$06                                                 ;8387D3|A906    |      ;
-    STA.B n8TempVar3                                           ;8387D5|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;8387D5|8594    |000094;
     DEX                                                        ;8387D7|CA      |      ;
     BRA .label2                                                ;8387D8|800D    |8387E7;
  
  
 .label1:
     SEP #$20                                                   ;8387DA|E220    |      ;
-    LDA.B n8TempVar3                                           ;8387DC|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;8387DC|A594    |000094;
     STA.W strcAudio.list,Y                                     ;8387DE|990401  |000104;
     INC.W strcAudio.index                                      ;8387E1|EE0301  |000103;
     INC.W strcAudio.unk10F                                     ;8387E4|EE0F01  |00010F;
@@ -1091,15 +1091,15 @@ fAudioUnknown_83878C:
 .label2:
     SEP #$20                                                   ;8387E7|E220    |      ;
     LDA.B #$03                                                 ;8387E9|A903    |      ;
-    STA.B n8TempVar1                                           ;8387EB|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;8387EB|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;8387ED|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8387F0|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8387F2|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8387F5|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8387F5|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8387F7|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8387FA|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8387FA|C593    |000093;
     BNE .wait1                                                 ;8387FC|D0F2    |8387F0;
     LDA.B #$01                                                 ;8387FE|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838800|CD4321  |002143;
@@ -1108,14 +1108,14 @@ fAudioUnknown_83878C:
     PHY                                                        ;838806|5A      |      ;
     LDA.B #$00                                                 ;838807|A900    |      ;
     XBA                                                        ;838809|EB      |      ;
-    LDA.B n8TempVar3                                           ;83880A|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;83880A|A594    |000094;
     REP #$20                                                   ;83880C|C220    |      ;
-    STA.B n16TempVar1                                          ;83880E|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83880E|857E    |00007E;
     LDA.W #$000A                                               ;838810|A90A00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;838813|22008083|838000;
     TAX                                                        ;838817|AA      |      ;
     SEP #$20                                                   ;838818|E220    |      ;
-    LDA.B n8TempVar3                                           ;83881A|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;83881A|A594    |000094;
     STA.W SNES_APUIO0                                          ;83881C|8D4021  |002140;
     REP #$20                                                   ;83881F|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;838821|BFEF9083|8390EF;
@@ -1131,9 +1131,9 @@ fAudioUnknown_83878C:
 .wait2:
     SEP #$20                                                   ;838835|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838837|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83883A|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83883A|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83883C|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;83883F|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;83883F|C593    |000093;
     BNE .wait2                                                 ;838841|D0F2    |838835;
     LDA.W SNES_APUIO3                                          ;838843|AD4321  |002143;
     CMP.B #$04                                                 ;838846|C904    |      ;
@@ -1145,9 +1145,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83884F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838851|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838854|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838854|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838856|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838859|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838859|C593    |000093;
     BNE -                                                      ;83885B|D0F2    |83884F;
  
   - LDA.B #$01                                                 ;83885D|A901    |      ;
@@ -1168,9 +1168,9 @@ fAudioUnknown_83878C:
 .wait3:
     SEP #$20                                                   ;838881|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838883|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838886|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838886|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838888|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;83888B|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;83888B|C593    |000093;
     BNE .wait3                                                 ;83888D|D0F2    |838881;
     LDA.W SNES_APUIO3                                          ;83888F|AD4321  |002143;
     CMP.B #$04                                                 ;838892|C904    |      ;
@@ -1182,9 +1182,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83889B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83889D|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8388A0|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8388A0|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8388A2|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8388A5|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8388A5|C593    |000093;
     BNE -                                                      ;8388A7|D0F2    |83889B;
  
   - LDA.B #$01                                                 ;8388A9|A901    |      ;
@@ -1203,9 +1203,9 @@ fAudioUnknown_83878C:
 .wait4:
     SEP #$20                                                   ;8388C8|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8388CA|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8388CD|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8388CD|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8388CF|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8388D2|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8388D2|C593    |000093;
     BNE .wait4                                                 ;8388D4|D0F2    |8388C8;
     LDA.W SNES_APUIO3                                          ;8388D6|AD4321  |002143;
     CMP.B #$04                                                 ;8388D9|C904    |      ;
@@ -1217,9 +1217,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;8388E2|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8388E4|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8388E7|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8388E7|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8388E9|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8388EC|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8388EC|C593    |000093;
     BNE -                                                      ;8388EE|D0F2    |8388E2;
  
   - LDA.B #$01                                                 ;8388F0|A901    |      ;
@@ -1235,21 +1235,21 @@ fAudioUnknown_83878C:
     STA.B ptrAudioData+2                                       ;838907|850C    |00000C;
     LDA.B #$00                                                 ;838909|A900    |      ;
     XBA                                                        ;83890B|EB      |      ;
-    LDA.B n8TempVar3                                           ;83890C|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;83890C|A594    |000094;
     ASL A                                                      ;83890E|0A      |      ;
     REP #$20                                                   ;83890F|C220    |      ;
     TAX                                                        ;838911|AA      |      ;
     LDA.L aAudioTracks2Size,X                                  ;838912|BFFF8E83|838EFF;
-    STA.B n16TempVar1                                          ;838916|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;838916|857E    |00007E;
     LDA.W #$0003                                               ;838918|A90300  |      ;
-    STA.B n16TempVar2                                          ;83891B|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83891B|8580    |000080;
     JSL.L fMathDivide                                          ;83891D|22828083|838082;
-    STA.B n16TempVar2                                          ;838921|8580    |000080;
-    LDA.B n16TempVar1                                          ;838923|A57E    |00007E;
+    STA.B strcVariables.n16Temp2                               ;838921|8580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;838923|A57E    |00007E;
     BEQ +                                                      ;838925|F002    |838929;
-    INC.B n16TempVar2                                          ;838927|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;838927|E680    |000080;
  
-  + LDA.B n16TempVar2                                          ;838929|A580    |000080;
+  + LDA.B strcVariables.n16Temp2                               ;838929|A580    |000080;
     TAX                                                        ;83892B|AA      |      ;
     SEP #$20                                                   ;83892C|E220    |      ;
     STA.W SNES_APUIO0                                          ;83892E|8D4021  |002140;
@@ -1263,9 +1263,9 @@ fAudioUnknown_83878C:
 .wait5:
     SEP #$20                                                   ;838940|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838942|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838945|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838945|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838947|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;83894A|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;83894A|C593    |000093;
     BNE .wait5                                                 ;83894C|D0F2    |838940;
     LDA.W SNES_APUIO3                                          ;83894E|AD4321  |002143;
     CMP.B #$04                                                 ;838951|C904    |      ;
@@ -1277,9 +1277,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83895A|E220    |      ;
     LDA.W SNES_APUIO3                                          ;83895C|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83895F|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83895F|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838961|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838964|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838964|C593    |000093;
     BNE -                                                      ;838966|D0F2    |83895A;
  
   - LDA.B #$01                                                 ;838968|A901    |      ;
@@ -1303,9 +1303,9 @@ fAudioUnknown_83878C:
 .wait6:
     SEP #$20                                                   ;838987|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838989|AD4321  |002143;
-    STA.B n8TempVar2                                           ;83898C|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;83898C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;83898E|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838991|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838991|C593    |000093;
     BNE .wait6                                                 ;838993|D0F2    |838987;
     LDA.B #$00                                                 ;838995|A900    |      ;
     CMP.W SNES_APUIO3                                          ;838997|CD4321  |002143;
@@ -1314,9 +1314,9 @@ fAudioUnknown_83878C:
  
   - SEP #$20                                                   ;83899F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8389A1|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8389A4|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8389A4|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8389A6|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8389A9|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8389A9|C593    |000093;
     BNE -                                                      ;8389AB|D0F2    |83899F;
  
   - LDA.B #$01                                                 ;8389AD|A901    |      ;
@@ -1329,7 +1329,7 @@ fAudioUnknown_83878C:
     PLX                                                        ;8389BC|FA      |      ;
     INX                                                        ;8389BD|E8      |      ;
     INY                                                        ;8389BE|C8      |      ;
-    CPX.B n16TempVar4                                          ;8389BF|E484    |000084;
+    CPX.B strcVariables.n16Temp4                               ;8389BF|E484    |000084;
     BEQ .return                                                ;8389C1|F003    |8389C6;
     JMP.W .loop                                                ;8389C3|4CC087  |8387C0;
  
@@ -1341,9 +1341,9 @@ fAudioUnknown_83878C:
 fAudioUnknown_8389C7:
     SEP #$20                                                   ;8389C7|E220    |      ;
     PHA                                                        ;8389C9|48      |      ;
-    STA.B n8TempVar3                                           ;8389CA|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;8389CA|8594    |000094;
  
-  - LDA.B n8TempVar3                                           ;8389CC|A594    |000094;
+  - LDA.B strcVariables.n8Temp3                                ;8389CC|A594    |000094;
     BNE .label1                                                ;8389CE|D005    |8389D5;
     JSR.W fAudioUnknown_838EC9                                 ;8389D0|20C98E  |838EC9;
     BNE -                                                      ;8389D3|D0F7    |8389CC;
@@ -1351,20 +1351,20 @@ fAudioUnknown_8389C7:
 .label1:
     REP #$10                                                   ;8389D5|C210    |      ;
     LDA.B #$04                                                 ;8389D7|A904    |      ;
-    STA.B n8TempVar1                                           ;8389D9|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;8389D9|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;8389DB|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8389DE|E220    |      ;
     LDA.W SNES_APUIO3                                          ;8389E0|AD4321  |002143;
-    STA.B n8TempVar2                                           ;8389E3|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;8389E3|8593    |000093;
     LDA.W SNES_APUIO3                                          ;8389E5|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;8389E8|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;8389E8|C593    |000093;
     BNE .wait1                                                 ;8389EA|D0F2    |8389DE;
     LDA.B #$01                                                 ;8389EC|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8389EE|CD4321  |002143;
     BNE .wait1                                                 ;8389F1|D0EB    |8389DE;
-    LDA.B n8TempVar3                                           ;8389F3|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;8389F3|A594    |000094;
     STA.W SNES_APUIO0                                          ;8389F5|8D4021  |002140;
     STZ.W SNES_APUIO1                                          ;8389F8|9C4121  |002141;
     STZ.W SNES_APUIO2                                          ;8389FB|9C4221  |002142;
@@ -1399,15 +1399,15 @@ fAudioUnknown_838A26:
     SEP #$20                                                   ;838A26|E220    |      ;
     REP #$10                                                   ;838A28|C210    |      ;
     LDA.B #$05                                                 ;838A2A|A905    |      ;
-    STA.B n8TempVar1                                           ;838A2C|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838A2C|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838A2E|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;838A31|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838A33|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838A36|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838A36|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838A38|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838A3B|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838A3B|C593    |000093;
     BNE .wait1                                                 ;838A3D|D0F2    |838A31;
     LDA.B #$01                                                 ;838A3F|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838A41|CD4321  |002143;
@@ -1419,16 +1419,16 @@ fAudioUnknown_838A26:
     REP #$20                                                   ;838A4D|C220    |      ;
     TAX                                                        ;838A4F|AA      |      ;
     LDA.L aAudioUnknown_838F4F,X                               ;838A50|BF4F8F83|838F4F;
-    STA.B n16TempVar1                                          ;838A54|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;838A54|857E    |00007E;
     LDA.W #$0003                                               ;838A56|A90300  |      ;
-    STA.B n16TempVar2                                          ;838A59|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;838A59|8580    |000080;
     JSL.L fMathDivide                                          ;838A5B|22828083|838082;
-    STA.B n16TempVar2                                          ;838A5F|8580    |000080;
-    LDA.B n16TempVar1                                          ;838A61|A57E    |00007E;
+    STA.B strcVariables.n16Temp2                               ;838A5F|8580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;838A61|A57E    |00007E;
     BEQ +                                                      ;838A63|F002    |838A67;
-    INC.B n16TempVar2                                          ;838A65|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;838A65|E680    |000080;
  
-  + LDA.B n16TempVar2                                          ;838A67|A580    |000080;
+  + LDA.B strcVariables.n16Temp2                               ;838A67|A580    |000080;
     SEP #$20                                                   ;838A69|E220    |      ;
     STA.W SNES_APUIO0                                          ;838A6B|8D4021  |002140;
     XBA                                                        ;838A6E|EB      |      ;
@@ -1449,7 +1449,7 @@ fAudioUnknown_838A26:
     XBA                                                        ;838A8A|EB      |      ;
     LDA.W strcAudio.trackId                                    ;838A8B|AD1001  |000110;
     REP #$20                                                   ;838A8E|C220    |      ;
-    STA.B n16TempVar1                                          ;838A90|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;838A90|857E    |00007E;
     LDA.W #$000E                                               ;838A92|A90E00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;838A95|22008083|838000;
     TAX                                                        ;838A99|AA      |      ;
@@ -1461,7 +1461,7 @@ fAudioUnknown_838A26:
     LDA.L sAudioData1_838F83,X                                 ;838AA4|BF838F83|838F83;
     STA.B ptrAudioData+2                                       ;838AA8|850C    |00000C;
     REP #$20                                                   ;838AAA|C220    |      ;
-    LDA.B n16TempVar2                                          ;838AAC|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;838AAC|A580    |000080;
     TAX                                                        ;838AAE|AA      |      ;
  
 .loop:
@@ -1471,9 +1471,9 @@ fAudioUnknown_838A26:
 .wait2:
     SEP #$20                                                   ;838AB4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838AB6|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838AB9|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838AB9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838ABB|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838ABE|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838ABE|C593    |000093;
     BNE .wait2                                                 ;838AC0|D0F2    |838AB4;
     LDA.B #$01                                                 ;838AC2|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838AC4|CD4321  |002143;
@@ -1493,9 +1493,9 @@ fAudioUnknown_838A26:
  
   - SEP #$20                                                   ;838AE1|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838AE3|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838AE6|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838AE6|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838AE8|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838AEB|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838AEB|C593    |000093;
     BNE -                                                      ;838AED|D0F2    |838AE1;
     LDA.B #$00                                                 ;838AEF|A900    |      ;
     CMP.W SNES_APUIO3                                          ;838AF1|CD4321  |002143;
@@ -1511,15 +1511,15 @@ fAudioUnknown_838AFF:
     REP #$10                                                   ;838B01|C210    |      ;
     LDX.W #$0000                                               ;838B03|A20000  |      ;
     LDA.B #$03                                                 ;838B06|A903    |      ;
-    STA.B n8TempVar1                                           ;838B08|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838B08|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838B0A|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;838B0D|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838B0F|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838B12|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838B12|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838B14|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838B17|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838B17|C593    |000093;
     BNE .wait1                                                 ;838B19|D0F2    |838B0D;
     LDA.B #$01                                                 ;838B1B|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838B1D|CD4321  |002143;
@@ -1529,22 +1529,22 @@ fAudioUnknown_838AFF:
     LDA.W strcAudio.reg114                                     ;838B25|AD1401  |000114;
     TAX                                                        ;838B28|AA      |      ;
     LDA.L aAudioUnknown_83927F,X                               ;838B29|BF7F9283|83927F;
-    STA.B n8TempVar3                                           ;838B2D|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;838B2D|8594    |000094;
     LDA.W strcAudio.index                                      ;838B2F|AD0301  |000103;
     TAX                                                        ;838B32|AA      |      ;
-    LDA.B n8TempVar3                                           ;838B33|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;838B33|A594    |000094;
     STA.W strcAudio.list,X                                     ;838B35|9D0401  |000104;
     INC.W strcAudio.index                                      ;838B38|EE0301  |000103;
     LDA.B #$00                                                 ;838B3B|A900    |      ;
     XBA                                                        ;838B3D|EB      |      ;
-    LDA.B n8TempVar3                                           ;838B3E|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;838B3E|A594    |000094;
     REP #$20                                                   ;838B40|C220    |      ;
-    STA.B n16TempVar1                                          ;838B42|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;838B42|857E    |00007E;
     LDA.W #$000A                                               ;838B44|A90A00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;838B47|22008083|838000;
     TAX                                                        ;838B4B|AA      |      ;
     SEP #$20                                                   ;838B4C|E220    |      ;
-    LDA.B n8TempVar3                                           ;838B4E|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;838B4E|A594    |000094;
     STA.W SNES_APUIO0                                          ;838B50|8D4021  |002140;
     REP #$20                                                   ;838B53|C220    |      ;
     LDA.L sAudioData2_8390EF,X                                 ;838B55|BFEF9083|8390EF;
@@ -1560,9 +1560,9 @@ fAudioUnknown_838AFF:
 .wait2:
     SEP #$20                                                   ;838B69|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838B6B|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838B6E|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838B6E|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838B70|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838B73|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838B73|C593    |000093;
     BNE .wait2                                                 ;838B75|D0F2    |838B69;
     LDA.W SNES_APUIO3                                          ;838B77|AD4321  |002143;
     CMP.B #$04                                                 ;838B7A|C904    |      ;
@@ -1574,9 +1574,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838B83|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838B85|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838B88|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838B88|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838B8A|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838B8D|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838B8D|C593    |000093;
     BNE -                                                      ;838B8F|D0F2    |838B83;
  
   - LDA.B #$01                                                 ;838B91|A901    |      ;
@@ -1597,9 +1597,9 @@ fAudioUnknown_838AFF:
 .wait3:
     SEP #$20                                                   ;838BB5|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838BB7|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838BBA|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838BBA|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838BBC|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838BBF|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838BBF|C593    |000093;
     BNE .wait3                                                 ;838BC1|D0F2    |838BB5;
     LDA.W SNES_APUIO3                                          ;838BC3|AD4321  |002143;
     CMP.B #$04                                                 ;838BC6|C904    |      ;
@@ -1611,9 +1611,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838BCF|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838BD1|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838BD4|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838BD4|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838BD6|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838BD9|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838BD9|C593    |000093;
     BNE -                                                      ;838BDB|D0F2    |838BCF;
  
   - LDA.B #$01                                                 ;838BDD|A901    |      ;
@@ -1632,9 +1632,9 @@ fAudioUnknown_838AFF:
 .wait4:
     SEP #$20                                                   ;838BFC|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838BFE|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838C01|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838C01|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C03|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838C06|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838C06|C593    |000093;
     BNE .wait4                                                 ;838C08|D0F2    |838BFC;
     LDA.W SNES_APUIO3                                          ;838C0A|AD4321  |002143;
     CMP.B #$04                                                 ;838C0D|C904    |      ;
@@ -1646,9 +1646,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838C16|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838C18|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838C1B|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838C1B|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C1D|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838C20|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838C20|C593    |000093;
     BNE -                                                      ;838C22|D0F2    |838C16;
  
   - LDA.B #$01                                                 ;838C24|A901    |      ;
@@ -1664,21 +1664,21 @@ fAudioUnknown_838AFF:
     STA.B ptrAudioData+2                                       ;838C3B|850C    |00000C;
     LDA.B #$00                                                 ;838C3D|A900    |      ;
     XBA                                                        ;838C3F|EB      |      ;
-    LDA.B n8TempVar3                                           ;838C40|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;838C40|A594    |000094;
     ASL A                                                      ;838C42|0A      |      ;
     REP #$20                                                   ;838C43|C220    |      ;
     TAX                                                        ;838C45|AA      |      ;
     LDA.L aAudioTracks2Size,X                                  ;838C46|BFFF8E83|838EFF;
-    STA.B n16TempVar1                                          ;838C4A|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;838C4A|857E    |00007E;
     LDA.W #$0003                                               ;838C4C|A90300  |      ;
-    STA.B n16TempVar2                                          ;838C4F|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;838C4F|8580    |000080;
     JSL.L fMathDivide                                          ;838C51|22828083|838082;
-    STA.B n16TempVar2                                          ;838C55|8580    |000080;
-    LDA.B n16TempVar1                                          ;838C57|A57E    |00007E;
+    STA.B strcVariables.n16Temp2                               ;838C55|8580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;838C57|A57E    |00007E;
     BEQ +                                                      ;838C59|F002    |838C5D;
-    INC.B n16TempVar2                                          ;838C5B|E680    |000080;
+    INC.B strcVariables.n16Temp2                               ;838C5B|E680    |000080;
  
-  + LDA.B n16TempVar2                                          ;838C5D|A580    |000080;
+  + LDA.B strcVariables.n16Temp2                               ;838C5D|A580    |000080;
     TAX                                                        ;838C5F|AA      |      ;
     SEP #$20                                                   ;838C60|E220    |      ;
     STA.W SNES_APUIO0                                          ;838C62|8D4021  |002140;
@@ -1692,9 +1692,9 @@ fAudioUnknown_838AFF:
 .wait5:
     SEP #$20                                                   ;838C74|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838C76|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838C79|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838C79|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C7B|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838C7E|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838C7E|C593    |000093;
     BNE .wait5                                                 ;838C80|D0F2    |838C74;
     LDA.W SNES_APUIO3                                          ;838C82|AD4321  |002143;
     CMP.B #$04                                                 ;838C85|C904    |      ;
@@ -1706,9 +1706,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838C8E|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838C90|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838C93|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838C93|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838C95|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838C98|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838C98|C593    |000093;
     BNE -                                                      ;838C9A|D0F2    |838C8E;
  
   - LDA.B #$01                                                 ;838C9C|A901    |      ;
@@ -1733,9 +1733,9 @@ fAudioUnknown_838AFF:
 .wait6:
     SEP #$20                                                   ;838CBD|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838CBF|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838CC2|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838CC2|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838CC4|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838CC7|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838CC7|C593    |000093;
     BNE .wait6                                                 ;838CC9|D0F2    |838CBD;
     LDA.B #$00                                                 ;838CCB|A900    |      ;
     CMP.W SNES_APUIO3                                          ;838CCD|CD4321  |002143;
@@ -1744,9 +1744,9 @@ fAudioUnknown_838AFF:
  
   - SEP #$20                                                   ;838CD5|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838CD7|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838CDA|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838CDA|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838CDC|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838CDF|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838CDF|C593    |000093;
     BNE -                                                      ;838CE1|D0F2    |838CD5;
  
   - LDA.B #$01                                                 ;838CE3|A901    |      ;
@@ -1761,20 +1761,20 @@ fAudioUnknown_838AFF:
 fAudioUnused_838CF3:
     SEP #$20                                                   ;838CF3|E220    |      ;
     REP #$10                                                   ;838CF5|C210    |      ;
-    STA.B n8TempVar3                                           ;838CF7|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;838CF7|8594    |000094;
     LDA.B #$07                                                 ;838CF9|A907    |      ;
-    STA.B n8TempVar1                                           ;838CFB|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838CFB|8592    |000092;
  
   - LDA.W SNES_APUIO3                                          ;838CFD|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838D00|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838D00|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D02|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838D05|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838D05|C593    |000093;
     BNE -                                                      ;838D07|D0F4    |838CFD;
  
   - LDA.B #$01                                                 ;838D09|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838D0B|CD4321  |002143;
     BNE -                                                      ;838D0E|D0F9    |838D09;
-    LDA.B n8TempVar1                                           ;838D10|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;838D10|A592    |000092;
     STA.W SNES_APUIO0                                          ;838D12|8D4021  |002140;
     STZ.W SNES_APUIO1                                          ;838D15|9C4121  |002141;
     STZ.W SNES_APUIO2                                          ;838D18|9C4221  |002142;
@@ -1783,9 +1783,9 @@ fAudioUnused_838CF3:
  
   - SEP #$20                                                   ;838D20|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D22|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838D25|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838D25|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D27|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838D2A|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838D2A|C593    |000093;
     BNE -                                                      ;838D2C|D0F2    |838D20;
     LDA.B #$04                                                 ;838D2E|A904    |      ;
     CMP.W SNES_APUIO3                                          ;838D30|CD4321  |002143;
@@ -1799,14 +1799,14 @@ fAudioUnknown_838D39:
     BNE fAudioUnknown_838D39                                   ;838D3C|D0FB    |838D39;
     SEP #$20                                                   ;838D3E|E220    |      ;
     LDA.B #$08                                                 ;838D40|A908    |      ;
-    STA.B n8TempVar1                                           ;838D42|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838D42|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838D44|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838D47|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D49|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838D4C|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838D4C|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D4E|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838D51|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838D51|C593    |000093;
     BNE -                                                      ;838D53|D0F2    |838D47;
     LDA.B #$01                                                 ;838D55|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838D57|CD4321  |002143;
@@ -1821,9 +1821,9 @@ fAudioUnknown_838D39:
  
   - SEP #$20                                                   ;838D70|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D72|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838D75|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838D75|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838D77|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838D7A|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838D7A|C593    |000093;
     BNE -                                                      ;838D7C|D0F2    |838D70;
     LDA.W SNES_APUIO3                                          ;838D7E|AD4321  |002143;
     CMP.B #$08                                                 ;838D81|C908    |      ;
@@ -1841,14 +1841,14 @@ fAudioUnknown_838D8B:
     BEQ .return                                                ;838D90|F04C    |838DDE;
     SEP #$20                                                   ;838D92|E220    |      ;
     LDA.B #$09                                                 ;838D94|A909    |      ;
-    STA.B n8TempVar1                                           ;838D96|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838D96|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838D98|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838D9B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D9D|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838DA0|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838DA0|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838DA2|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838DA5|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838DA5|C593    |000093;
     BNE -                                                      ;838DA7|D0F2    |838D9B;
     LDA.B #$01                                                 ;838DA9|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DAB|CD4321  |002143;
@@ -1863,9 +1863,9 @@ fAudioUnknown_838D8B:
  
   - SEP #$20                                                   ;838DC4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838DC6|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838DC9|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838DC9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838DCB|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838DCE|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838DCE|C593    |000093;
     BNE -                                                      ;838DD0|D0F2    |838DC4;
     LDA.W SNES_APUIO3                                          ;838DD2|AD4321  |002143;
     CMP.B #$08                                                 ;838DD5|C908    |      ;
@@ -1884,14 +1884,14 @@ fAudioUnknown_838DDF:
     BNE .return                                                ;838DE2|D04D    |838E31;
     SEP #$20                                                   ;838DE4|E220    |      ;
     LDA.B #$0A                                                 ;838DE6|A90A    |      ;
-    STA.B n8TempVar1                                           ;838DE8|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838DE8|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838DEA|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838DED|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838DEF|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838DF2|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838DF2|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838DF4|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838DF7|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838DF7|C593    |000093;
     BNE -                                                      ;838DF9|D0F2    |838DED;
     LDA.B #$01                                                 ;838DFB|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DFD|CD4321  |002143;
@@ -1907,9 +1907,9 @@ fAudioUnknown_838DDF:
  
   - SEP #$20                                                   ;838E19|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E1B|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838E1E|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838E1E|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E20|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838E23|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838E23|C593    |000093;
     BNE -                                                      ;838E25|D0F2    |838E19;
     LDA.W SNES_APUIO3                                          ;838E27|AD4321  |002143;
     CMP.B #$08                                                 ;838E2A|C908    |      ;
@@ -1922,22 +1922,22 @@ fAudioUnknown_838DDF:
  
 fAudioUnknown_838E32:
     SEP #$20                                                   ;838E32|E220    |      ;
-    STA.B n8TempVar3                                           ;838E34|8594    |000094;
+    STA.B strcVariables.n8Temp3                                ;838E34|8594    |000094;
     REP #$10                                                   ;838E36|C210    |      ;
     LDA.B #$0B                                                 ;838E38|A90B    |      ;
-    STA.B n8TempVar1                                           ;838E3A|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838E3A|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838E3C|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838E3F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E41|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838E44|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838E44|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E46|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838E49|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838E49|C593    |000093;
     BNE -                                                      ;838E4B|D0F2    |838E3F;
     LDA.B #$01                                                 ;838E4D|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838E4F|CD4321  |002143;
     BNE -                                                      ;838E52|D0EB    |838E3F;
-    LDA.B n8TempVar3                                           ;838E54|A594    |000094;
+    LDA.B strcVariables.n8Temp3                                ;838E54|A594    |000094;
     STA.W SNES_APUIO0                                          ;838E56|8D4021  |002140;
     STZ.W SNES_APUIO1                                          ;838E59|9C4121  |002141;
     STZ.W SNES_APUIO2                                          ;838E5C|9C4221  |002142;
@@ -1946,9 +1946,9 @@ fAudioUnknown_838E32:
  
   - SEP #$20                                                   ;838E64|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E66|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838E69|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838E69|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E6B|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838E6E|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838E6E|C593    |000093;
     BNE -                                                      ;838E70|D0F2    |838E64;
     LDA.W SNES_APUIO3                                          ;838E72|AD4321  |002143;
     CMP.B #$08                                                 ;838E75|C908    |      ;
@@ -1962,7 +1962,7 @@ fAudioUnknown_838E32:
     SEP #$20                                                   ;838E7F|E220    |      ;
     REP #$10                                                   ;838E81|C210    |      ;
     LDA.B #$0C                                                 ;838E83|A90C    |      ;
-    STA.B n8TempVar1                                           ;838E85|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;838E85|8592    |000092;
     JSR.W fAudioUnknown_838E8B                                 ;838E87|208B8E  |838E8B;
     RTL                                                        ;838E8A|6B      |      ;
  
@@ -1970,15 +1970,15 @@ fAudioUnknown_838E32:
 fAudioUnknown_838E8B:
     SEP #$20                                                   ;838E8B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E8D|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838E90|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838E90|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E92|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838E95|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838E95|C593    |000093;
     BNE fAudioUnknown_838E8B                                   ;838E97|D0F2    |838E8B;
  
   - LDA.B #$01                                                 ;838E99|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838E9B|CD4321  |002143;
     BNE -                                                      ;838E9E|D0F9    |838E99;
-    LDA.B n8TempVar1                                           ;838EA0|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;838EA0|A592    |000092;
     STA.W SNES_APUIO0                                          ;838EA2|8D4021  |002140;
     STZ.W SNES_APUIO1                                          ;838EA5|9C4121  |002141;
     STZ.W SNES_APUIO2                                          ;838EA8|9C4221  |002142;
@@ -1986,9 +1986,9 @@ fAudioUnknown_838E8B:
     STA.W SNES_APUIO3                                          ;838EAD|8D4321  |002143;
  
   - LDA.W SNES_APUIO3                                          ;838EB0|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838EB3|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838EB3|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838EB5|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838EB8|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838EB8|C593    |000093;
     BNE -                                                      ;838EBA|D0F4    |838EB0;
  
   - LDA.W SNES_APUIO3                                          ;838EBC|AD4321  |002143;
@@ -2004,9 +2004,9 @@ fAudioUnknown_838E8B:
 fAudioUnknown_838EC9:
     SEP #$20                                                   ;838EC9|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838ECB|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838ECE|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838ECE|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838ED0|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838ED3|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838ED3|C593    |000093;
     BNE fAudioUnknown_838EC9                                   ;838ED5|D0F2    |838EC9;
     LDA.B #$01                                                 ;838ED7|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838ED9|CD4321  |002143;
@@ -2019,9 +2019,9 @@ fAudioUnknown_838EC9:
 fAudioUnknown_838EE4:
     SEP #$20                                                   ;838EE4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838EE6|AD4321  |002143;
-    STA.B n8TempVar2                                           ;838EE9|8593    |000093;
+    STA.B strcVariables.n8Temp2                                ;838EE9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838EEB|AD4321  |002143;
-    CMP.B n8TempVar2                                           ;838EEE|C593    |000093;
+    CMP.B strcVariables.n8Temp2                                ;838EEE|C593    |000093;
     BNE fAudioUnknown_838EE4                                   ;838EF0|D0F2    |838EE4;
     LDA.B #$01                                                 ;838EF2|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838EF4|CD4321  |002143;
@@ -2208,9 +2208,9 @@ fDialog_Unknown_8392BB:
     JSL.L fGraphicsDecompressTilemap                           ;8392D3|22F88183|8381F8;
     SEP #$20                                                   ;8392D7|E220    |      ;
     LDA.B #$00                                                 ;8392D9|A900    |      ;
-    STA.B $27                                                  ;8392DB|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;8392DB|8527    |000027;
     LDA.B #$18                                                 ;8392DD|A918    |      ;
-    STA.B $29                                                  ;8392DF|8529    |000029;
+    STA.B strcSystem.unk29                                     ;8392DF|8529    |000029;
     REP #$30                                                   ;8392E1|C230    |      ;
     LDY.W #$0400                                               ;8392E3|A00004  |      ;
     LDX.W #$7800                                               ;8392E6|A20078  |      ;
@@ -2225,9 +2225,9 @@ fDialog_Unknown_8392BB:
     JSL.L fCore_StartPreparedTransfer                          ;8392FD|22B28A80|808AB2;
     SEP #$20                                                   ;839301|E220    |      ;
     LDA.B #$00                                                 ;839303|A900    |      ;
-    STA.B $27                                                  ;839305|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;839305|8527    |000027;
     LDA.B #$18                                                 ;839307|A918    |      ;
-    STA.B $29                                                  ;839309|8529    |000029;
+    STA.B strcSystem.unk29                                     ;839309|8529    |000029;
     REP #$30                                                   ;83930B|C230    |      ;
     LDA.W #$5000                                               ;83930D|A90050  |      ;
     TAX                                                        ;839310|AA      |      ;
@@ -2247,9 +2247,9 @@ fDialog_Unknown_8392BB:
 fDialog_Unknown_83932D:
     SEP #$20                                                   ;83932D|E220    |      ;
     LDA.B #$06                                                 ;83932F|A906    |      ;
-    STA.B $27                                                  ;839331|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;839331|8527    |000027;
     LDA.B #$18                                                 ;839333|A918    |      ;
-    STA.B $29                                                  ;839335|8529    |000029;
+    STA.B strcSystem.unk29                                     ;839335|8529    |000029;
     REP #$30                                                   ;839337|C230    |      ;
     LDA.W #$5000                                               ;839339|A90050  |      ;
     TAX                                                        ;83933C|AA      |      ;
@@ -2264,7 +2264,7 @@ fDialog_Unknown_83932D:
     JSL.L fCore_PrepareTransfer                                ;839350|22338A80|808A33;
     SEP #$20                                                   ;839354|E220    |      ;
     LDA.B #$07                                                 ;839356|A907    |      ;
-    STA.B $27                                                  ;839358|8527    |000027;
+    STA.B strcSystem.arrayIndex                                ;839358|8527    |000027;
     JSL.L fCore_RemoveTransfer                                 ;83935A|22A08A80|808AA0;
     RTL                                                        ;83935E|6B      |      ;
  
@@ -2326,12 +2326,12 @@ fDialog_DialogHandler:
     ASL A                                                      ;8393D4|0A      |      ;
     ASL A                                                      ;8393D5|0A      |      ;
     ASL A                                                      ;8393D6|0A      |      ;
-    STA.B n16TempVar1                                          ;8393D7|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8393D7|857E    |00007E;
     LDA.W strcBGScrool.BG3VerOffs                              ;8393D9|AD4601  |000146;
     SEC                                                        ;8393DC|38      |      ;
     SBC.W #$0100                                               ;8393DD|E90001  |      ;
     SEC                                                        ;8393E0|38      |      ;
-    SBC.B n16TempVar1                                          ;8393E1|E57E    |00007E;
+    SBC.B strcVariables.n16Temp1                               ;8393E1|E57E    |00007E;
     STA.W strcBGScrool.BG3VerOffs                              ;8393E3|8D4601  |000146;
     SEP #$20                                                   ;8393E6|E220    |      ;
     STZ.W nTimeState                                           ;8393E8|9C7309  |000973;
@@ -2357,12 +2357,12 @@ fDialog_Unknown_8393F9:
     ASL A                                                      ;83940F|0A      |      ;
     ASL A                                                      ;839410|0A      |      ;
     ASL A                                                      ;839411|0A      |      ;
-    STA.B n16TempVar1                                          ;839412|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;839412|857E    |00007E;
     LDA.W strcBGScrool.BG3VerOffs                              ;839414|AD4601  |000146;
     CLC                                                        ;839417|18      |      ;
     ADC.W #$0100                                               ;839418|690001  |      ;
     CLC                                                        ;83941B|18      |      ;
-    ADC.B n16TempVar1                                          ;83941C|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;83941C|657E    |00007E;
     STA.W strcBGScrool.BG3VerOffs                              ;83941E|8D4601  |000146;
     JSL.L fDialog_Unknown_83932D                               ;839421|222D9383|83932D;
     REP #$20                                                   ;839425|C220    |      ;
@@ -2404,7 +2404,7 @@ aDialogUnknown_83947D:
  
 fDialog_Unknown_839495:
     REP #$30                                                   ;839495|C230    |      ;
-    STA.B n16TempVar1                                          ;839497|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;839497|857E    |00007E;
     LDA.W $018B                                                ;839499|AD8B01  |00018B;
     AND.W #$007F                                               ;83949C|297F00  |      ;
     CMP.W #$0014                                               ;83949F|C91400  |      ;
@@ -2799,7 +2799,7 @@ fDialog_IterateText:
  
 fDialog_NextScreenHandler:
     REP #$20                                                   ;83975F|C220    |      ; A: nLetterCode
-    STA.B n16TempVar1                                          ;839761|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;839761|857E    |00007E;
     LDA.W $018B                                                ;839763|AD8B01  |00018B;
     AND.W #$007F                                               ;839766|297F00  |      ;
     CMP.W #$0014                                               ;839769|C91400  |      ;
@@ -2816,7 +2816,7 @@ fDialog_NextScreenHandler:
     BNE .noSign                                                ;839781|D00D    |839790;
     REP #$30                                                   ;839783|C230    |      ;
     LDX.W #$0001                                               ;839785|A20100  |      ;
-    LDA.B n16TempVar1                                          ;839788|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;839788|A57E    |00007E;
     JSL.L fDialog_TransferGlyph                                ;83978A|22239883|839823;
     BRA .return                                                ;83978E|800C    |83979C;
  
@@ -2847,22 +2847,22 @@ fDialog_Unknown_8397A6:
     REP #$20                                                   ;8397B5|C220    |      ;
     TAX                                                        ;8397B7|AA      |      ;
     LDA.L pTextAmmountTable,X                                  ;8397B8|BFD69883|8398D6;
-    STA.B n16TempVar1                                          ;8397BC|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;8397BC|857E    |00007E;
     INX                                                        ;8397BE|E8      |      ;
     INX                                                        ;8397BF|E8      |      ;
     SEP #$20                                                   ;8397C0|E220    |      ;
     LDA.L pTextAmmountTable,X                                  ;8397C2|BFD69883|8398D6;
-    STA.B n16TempVar2                                          ;8397C6|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;8397C6|8580    |000080;
     LDX.W #$0000                                               ;8397C8|A20000  |      ;
  
   - REP #$20                                                   ;8397CB|C220    |      ;
     LDA.W $0192                                                ;8397CD|AD9201  |000192;
     SEC                                                        ;8397D0|38      |      ;
-    SBC.B n16TempVar1                                          ;8397D1|E57E    |00007E;
+    SBC.B strcVariables.n16Temp1                               ;8397D1|E57E    |00007E;
     STA.W $0192                                                ;8397D3|8D9201  |000192;
     SEP #$20                                                   ;8397D6|E220    |      ;
     LDA.W $0194                                                ;8397D8|AD9401  |000194;
-    SBC.B n16TempVar2                                          ;8397DB|E580    |000080;
+    SBC.B strcVariables.n16Temp2                               ;8397DB|E580    |000080;
     STA.W $0194                                                ;8397DD|8D9401  |000194;
     BMI +                                                      ;8397E0|3003    |8397E5;
     INX                                                        ;8397E2|E8      |      ;
@@ -2872,11 +2872,11 @@ fDialog_Unknown_8397A6:
   + REP #$20                                                   ;8397E5|C220    |      ;
     LDA.W $0192                                                ;8397E7|AD9201  |000192;
     CLC                                                        ;8397EA|18      |      ;
-    ADC.B n16TempVar1                                          ;8397EB|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;8397EB|657E    |00007E;
     STA.W $0192                                                ;8397ED|8D9201  |000192;
     SEP #$20                                                   ;8397F0|E220    |      ;
     LDA.W $0194                                                ;8397F2|AD9401  |000194;
-    ADC.B n16TempVar2                                          ;8397F5|6580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;8397F5|6580    |000080;
     STA.W $0194                                                ;8397F7|8D9401  |000194;
     SEP #$20                                                   ;8397FA|E220    |      ;
     LDA.W $019B                                                ;8397FC|AD9B01  |00019B;
@@ -2890,10 +2890,10 @@ fDialog_Unknown_8397A6:
  
   + REP #$30                                                   ;839810|C230    |      ;
     TXA                                                        ;839812|8A      |      ;
-    STA.B n16TempVar1                                          ;839813|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;839813|857E    |00007E;
     LDA.W #$00BC                                               ;839815|A9BC00  |      ;
     CLC                                                        ;839818|18      |      ;
-    ADC.B n16TempVar1                                          ;839819|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;839819|657E    |00007E;
     LDX.W #$0000                                               ;83981B|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;83981E|22239883|839823;
  
@@ -2922,10 +2922,10 @@ fDialog_Unknown839838:
     ASL A                                                      ;83983F|0A      |      ;
     ASL A                                                      ;839840|0A      |      ;
     ADC.W #$0008                                               ;839841|690800  |      ;
-    STA.B n16TempVar2                                          ;839844|8580    |000080; $80 = A * 8 + 8
+    STA.B strcVariables.n16Temp2                               ;839844|8580    |000080; $80 = A * 8 + 8
     LDA.W $0185                                                ;839846|AD8501  |000185;
     CLC                                                        ;839849|18      |      ;
-    ADC.B n16TempVar2                                          ;83984A|6580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;83984A|6580    |000080;
     STA.W $0185                                                ;83984C|8D8501  |000185; $0185 += A * 8 + 8
     AND.W #$00FF                                               ;83984F|29FF00  |      ;
     CMP.W #$0080                                               ;839852|C98000  |      ;
@@ -2941,17 +2941,17 @@ fDialog_Unknown839838:
  
 fDialog_GetGlyphPointer:
     REP #$30                                                   ;839862|C230    |      ; A: nLetterCode, return $72: ptr24 pGlyph
-    STA.B n16TempVar1                                          ;839864|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;839864|857E    |00007E;
     LSR A                                                      ;839866|4A      |      ;
     LSR A                                                      ;839867|4A      |      ;
     LSR A                                                      ;839868|4A      |      ;
     LSR A                                                      ;839869|4A      |      ;
     LSR A                                                      ;83986A|4A      |      ;
     LSR A                                                      ;83986B|4A      |      ;
-    STA.B n16TempVar2                                          ;83986C|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83986C|8580    |000080;
     ASL A                                                      ;83986E|0A      |      ;
     CLC                                                        ;83986F|18      |      ;
-    ADC.B n16TempVar2                                          ;839870|6580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;839870|6580    |000080;
     TAX                                                        ;839872|AA      |      ; Store pTable index into X
     LDA.L aLetterGlyphsPointers,X                              ;839873|BFAE9883|8398AE;
     STA.B ptrUnknown0x72                                       ;839877|8572    |000072;
@@ -2961,7 +2961,7 @@ fDialog_GetGlyphPointer:
     LDA.L aLetterGlyphsPointers,X                              ;83987D|BFAE9883|8398AE;
     STA.B ptrUnknown0x72+2                                     ;839881|8574    |000074;
     REP #$20                                                   ;839883|C220    |      ;
-    LDA.B n16TempVar1                                          ;839885|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;839885|A57E    |00007E;
     AND.W #$003F                                               ;839887|293F00  |      ;
     LSR A                                                      ;83988A|4A      |      ;
     LSR A                                                      ;83988B|4A      |      ;
@@ -2975,19 +2975,19 @@ fDialog_GetGlyphPointer:
     ASL A                                                      ;839893|0A      |      ;
     ASL A                                                      ;839894|0A      |      ;
     ASL A                                                      ;839895|0A      |      ;
-    STA.B n16TempVar2                                          ;839896|8580    |000080; store calculated row offset
-    LDA.B n16TempVar1                                          ;839898|A57E    |00007E;
+    STA.B strcVariables.n16Temp2                               ;839896|8580    |000080; store calculated row offset
+    LDA.B strcVariables.n16Temp1                               ;839898|A57E    |00007E;
     AND.W #$0007                                               ;83989A|290700  |      ;
     ASL A                                                      ;83989D|0A      |      ;
     ASL A                                                      ;83989E|0A      |      ;
     ASL A                                                      ;83989F|0A      |      ;
     ASL A                                                      ;8398A0|0A      |      ;
     ASL A                                                      ;8398A1|0A      |      ;
-    STA.B n16TempVar1                                          ;8398A2|857E    |00007E; store calculated column offset
+    STA.B strcVariables.n16Temp1                               ;8398A2|857E    |00007E; store calculated column offset
     LDA.B ptrUnknown0x72                                       ;8398A4|A572    |000072;
     CLC                                                        ;8398A6|18      |      ;
-    ADC.B n16TempVar1                                          ;8398A7|657E    |00007E; add column offset to pointer
-    ADC.B n16TempVar2                                          ;8398A9|6580    |000080; add row offset to pointer
+    ADC.B strcVariables.n16Temp1                               ;8398A7|657E    |00007E; add column offset to pointer
+    ADC.B strcVariables.n16Temp2                               ;8398A9|6580    |000080; add row offset to pointer
     STA.B ptrUnknown0x72                                       ;8398AB|8572    |000072; save calculated offset to memory
     RTS                                                        ;8398AD|60      |      ;
  
@@ -4626,7 +4626,7 @@ fGameEngine_SetDefaults:
     LDA.B #$00                                                 ;83AA35|A900    |      ;
     STA.W $09A3                                                ;83AA37|8DA309  |0009A3;
     LDA.B #$00                                                 ;83AA3A|A900    |      ;
-    STA.W strcGoodsData.unkCow                                 ;83AA3C|8D3709  |000937;
+    STA.W strcStockData.unkCow                                 ;83AA3C|8D3709  |000937;
     STZ.W strcPlayerData.toolSecond                            ;83AA3F|9C2309  |000923;
     REP #$20                                                   ;83AA42|C220    |      ;
     LDA.W #$0000                                               ;83AA44|A90000  |      ;
@@ -4781,7 +4781,7 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83ABFB|E220    |      ;
     STZ.W $019B                                                ;83ABFD|9C9B01  |00019B;
     STZ.W $019A                                                ;83AC00|9C9A01  |00019A;
-    STZ.B $28                                                  ;83AC03|6428    |000028;
+    STZ.B strcSystem.unk28                                     ;83AC03|6428    |000028;
     REP #$20                                                   ;83AC05|C220    |      ;
     STZ.B ptrPaletteNext                                       ;83AC07|6404    |000004;
     SEP #$20                                                   ;83AC09|E220    |      ;
@@ -4884,7 +4884,7 @@ fGameEngine_FirstNight:
     STZ.W strcPlayerData.carryItemIdPrev                       ;83AD19|9C1E09  |00091E;
     STZ.W strcPlayerData.unkMap91F                             ;83AD1C|9C1F09  |00091F;
     STZ.W strcPlayerData.nAiArg                                ;83AD1F|9C2009  |000920;
-    STZ.W strcGoodsData.unkAnySeed                             ;83AD22|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnySeed                             ;83AD22|9C6B09  |00096B;
     SEP #$20                                                   ;83AD25|E220    |      ;
     STZ.W $098F                                                ;83AD27|9C8F09  |00098F;
     SEP #$20                                                   ;83AD2A|E220    |      ;
@@ -4951,13 +4951,13 @@ fGameEngine_DirectionHandler83AD91:
     LDA.B strcPlayer.lastX                                     ;83ADAE|A5DF    |0000DF;
     CLC                                                        ;83ADB0|18      |      ;
     ADC.W #$000C                                               ;83ADB1|690C00  |      ;
-    STA.B n16TempVar2                                          ;83ADB4|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83ADB4|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83ADB6|A5E1    |0000E1;
     CLC                                                        ;83ADB8|18      |      ;
     ADC.B strcPlayer.newY                                      ;83ADB9|65E7    |0000E7;
     ADC.B strcPlayer.unkE3                                     ;83ADBB|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADBD|690C00  |      ;
-    STA.B n16TempVar3                                          ;83ADC0|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83ADC0|8582    |000082;
     BRA .label1                                                ;83ADC2|8044    |83AE08;
  
  
@@ -4965,14 +4965,14 @@ fGameEngine_DirectionHandler83AD91:
     LDA.B strcPlayer.lastX                                     ;83ADC4|A5DF    |0000DF;
     CLC                                                        ;83ADC6|18      |      ;
     ADC.W #$000C                                               ;83ADC7|690C00  |      ;
-    STA.B n16TempVar2                                          ;83ADCA|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83ADCA|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83ADCC|A5E1    |0000E1;
     SEC                                                        ;83ADCE|38      |      ;
     SBC.B strcPlayer.newY                                      ;83ADCF|E5E7    |0000E7;
     SBC.B strcPlayer.unkE3                                     ;83ADD1|E5E3    |0000E3;
     CLC                                                        ;83ADD3|18      |      ;
     ADC.W #$000C                                               ;83ADD4|690C00  |      ;
-    STA.B n16TempVar3                                          ;83ADD7|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83ADD7|8582    |000082;
     BRA .label1                                                ;83ADD9|802D    |83AE08;
  
  
@@ -4982,11 +4982,11 @@ fGameEngine_DirectionHandler83AD91:
     ADC.B strcPlayer.newX                                      ;83ADDE|65E5    |0000E5;
     ADC.B strcPlayer.unkE3                                     ;83ADE0|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADE2|690C00  |      ;
-    STA.B n16TempVar2                                          ;83ADE5|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83ADE5|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83ADE7|A5E1    |0000E1;
     CLC                                                        ;83ADE9|18      |      ;
     ADC.W #$000C                                               ;83ADEA|690C00  |      ;
-    STA.B n16TempVar3                                          ;83ADED|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83ADED|8582    |000082;
     BRA .label1                                                ;83ADEF|8017    |83AE08;
  
  
@@ -4997,11 +4997,11 @@ fGameEngine_DirectionHandler83AD91:
     SBC.B strcPlayer.unkE3                                     ;83ADF6|E5E3    |0000E3;
     CLC                                                        ;83ADF8|18      |      ;
     ADC.W #$000C                                               ;83ADF9|690C00  |      ;
-    STA.B n16TempVar2                                          ;83ADFC|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83ADFC|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83ADFE|A5E1    |0000E1;
     CLC                                                        ;83AE00|18      |      ;
     ADC.W #$000C                                               ;83AE01|690C00  |      ;
-    STA.B n16TempVar3                                          ;83AE04|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83AE04|8582    |000082;
     BRA .label1                                                ;83AE06|8000    |83AE08;
  
  
@@ -5019,7 +5019,7 @@ fGameEngine_DirectionHandler83AD91:
     LDA.B #$7E                                                 ;83AE1B|A97E    |      ;
     STA.B ptrAIUnknown0xCC+2                                   ;83AE1D|85CE    |0000CE;
     REP #$20                                                   ;83AE1F|C220    |      ;
-    STZ.B $8C                                                  ;83AE21|648C    |00008C;
+    STZ.B strcVariables.n16Unk8C                               ;83AE21|648C    |00008C;
     LDX.W #$0000                                               ;83AE23|A20000  |      ;
  
 .loop:
@@ -5037,19 +5037,19 @@ fGameEngine_DirectionHandler83AD91:
  
  
   + REP #$20                                                   ;83AE3F|C220    |      ;
-    LDA.B n16TempVar2                                          ;83AE41|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;83AE41|A580    |000080;
     SEC                                                        ;83AE43|38      |      ;
     LDY.W #$001A                                               ;83AE44|A01A00  |      ;
     SBC.B [ptrAIUnknown0xCC],Y                                 ;83AE47|F7CC    |0000CC;
     CMP.W #$0019                                               ;83AE49|C91900  |      ;
     BCS .label2                                                ;83AE4C|B033    |83AE81;
-    LDA.B n16TempVar3                                          ;83AE4E|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;83AE4E|A582    |000082;
     SEC                                                        ;83AE50|38      |      ;
     LDY.W #$001C                                               ;83AE51|A01C00  |      ;
     SBC.B [ptrAIUnknown0xCC],Y                                 ;83AE54|F7CC    |0000CC;
     CMP.W #$0019                                               ;83AE56|C91900  |      ;
     BCS .label2                                                ;83AE59|B026    |83AE81;
-    LDA.B $8C                                                  ;83AE5B|A58C    |00008C;
+    LDA.B strcVariables.n16Unk8C                               ;83AE5B|A58C    |00008C;
     BNE .label2                                                ;83AE5D|D022    |83AE81;
     SEP #$20                                                   ;83AE5F|E220    |      ;
     REP #$10                                                   ;83AE61|C210    |      ;
@@ -5067,7 +5067,7 @@ fGameEngine_DirectionHandler83AD91:
  
   + REP #$20                                                   ;83AE7A|C220    |      ;
     LDA.W #$0001                                               ;83AE7C|A90100  |      ;
-    STA.B $8C                                                  ;83AE7F|858C    |00008C;
+    STA.B strcVariables.n16Unk8C                               ;83AE7F|858C    |00008C;
  
 .label2:
     REP #$20                                                   ;83AE81|C220    |      ;
@@ -5081,7 +5081,7 @@ fGameEngine_DirectionHandler83AD91:
     JMP.W .loop                                                ;83AE91|4C26AE  |83AE26;
  
  
-  + LDA.B $8C                                                  ;83AE94|A58C    |00008C;
+  + LDA.B strcVariables.n16Unk8C                               ;83AE94|A58C    |00008C;
     BNE .return                                                ;83AE96|D015    |83AEAD;
     SEP #$20                                                   ;83AE98|E220    |      ;
     PLA                                                        ;83AE9A|68      |      ;
@@ -5129,21 +5129,21 @@ fGameEngine_Unknown83AEC3:
  
 .case0:
     LDA.B strcPlayer.lastX                                     ;83AED2|A5DF    |0000DF;
-    STA.B n16TempVar2                                          ;83AED4|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83AED4|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83AED6|A5E1    |0000E1;
     CLC                                                        ;83AED8|18      |      ;
     ADC.B strcPlayer.newY                                      ;83AED9|65E7    |0000E7;
-    STA.B n16TempVar3                                          ;83AEDB|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83AEDB|8582    |000082;
     BRA .continue                                              ;83AEDD|8027    |83AF06;
  
  
 .case1:
     LDA.B strcPlayer.lastX                                     ;83AEDF|A5DF    |0000DF;
-    STA.B n16TempVar2                                          ;83AEE1|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83AEE1|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83AEE3|A5E1    |0000E1;
     SEC                                                        ;83AEE5|38      |      ;
     SBC.B strcPlayer.newY                                      ;83AEE6|E5E7    |0000E7;
-    STA.B n16TempVar3                                          ;83AEE8|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83AEE8|8582    |000082;
     BRA .continue                                              ;83AEEA|801A    |83AF06;
  
  
@@ -5151,9 +5151,9 @@ fGameEngine_Unknown83AEC3:
     LDA.B strcPlayer.lastX                                     ;83AEEC|A5DF    |0000DF;
     CLC                                                        ;83AEEE|18      |      ;
     ADC.B strcPlayer.newX                                      ;83AEEF|65E5    |0000E5;
-    STA.B n16TempVar2                                          ;83AEF1|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83AEF1|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83AEF3|A5E1    |0000E1;
-    STA.B n16TempVar3                                          ;83AEF5|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83AEF5|8582    |000082;
     BRA .continue                                              ;83AEF7|800D    |83AF06;
  
  
@@ -5161,21 +5161,21 @@ fGameEngine_Unknown83AEC3:
     LDA.B strcPlayer.lastX                                     ;83AEF9|A5DF    |0000DF;
     SEC                                                        ;83AEFB|38      |      ;
     SBC.B strcPlayer.newX                                      ;83AEFC|E5E5    |0000E5;
-    STA.B n16TempVar2                                          ;83AEFE|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83AEFE|8580    |000080;
     LDA.B strcPlayer.lastY                                     ;83AF00|A5E1    |0000E1;
-    STA.B n16TempVar3                                          ;83AF02|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83AF02|8582    |000082;
     BRA .continue                                              ;83AF04|8000    |83AF06;
  
  
 .continue:
-    LDA.B n16TempVar2                                          ;83AF06|A580    |000080;
+    LDA.B strcVariables.n16Temp2                               ;83AF06|A580    |000080;
     SEC                                                        ;83AF08|38      |      ;
     SBC.B strcPlayer.posX                                      ;83AF09|E5D6    |0000D6;
     CLC                                                        ;83AF0B|18      |      ;
     ADC.W #$000C                                               ;83AF0C|690C00  |      ;
     CMP.W #$0019                                               ;83AF0F|C91900  |      ;
     BCS .return                                                ;83AF12|B019    |83AF2D;
-    LDA.B n16TempVar3                                          ;83AF14|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;83AF14|A582    |000082;
     SEC                                                        ;83AF16|38      |      ;
     SBC.B strcPlayer.posY                                      ;83AF17|E5D8    |0000D8;
     CLC                                                        ;83AF19|18      |      ;
@@ -5228,7 +5228,7 @@ fGameEngine_DirectionHandler83AF37:
     REP #$20                                                   ;83AF5F|C220    |      ;
     PLY                                                        ;83AF61|7A      |      ;
     PHA                                                        ;83AF62|48      |      ;
-    LDA.B $90                                                  ;83AF63|A590    |000090;
+    LDA.B strcVariables.n16Unk90                               ;83AF63|A590    |000090;
     PHA                                                        ;83AF65|48      |      ;
     LDA.B strcPlayer.lastX                                     ;83AF66|A5DF    |0000DF;
     CLC                                                        ;83AF68|18      |      ;
@@ -5237,14 +5237,14 @@ fGameEngine_DirectionHandler83AF37:
     LDA.W #$0001                                               ;83AF6D|A90100  |      ;
     JSR.W fGameEngine_Unknown83B0F6                            ;83AF70|20F6B0  |83B0F6;
     REP #$20                                                   ;83AF73|C220    |      ;
-    STA.B n16TempVar1                                          ;83AF75|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83AF75|857E    |00007E;
     PLY                                                        ;83AF77|7A      |      ;
     PLA                                                        ;83AF78|68      |      ;
     ASL A                                                      ;83AF79|0A      |      ;
-    ORA.B n16TempVar1                                          ;83AF7A|057E    |00007E;
-    STA.B n16TempVar1                                          ;83AF7C|857E    |00007E;
+    ORA.B strcVariables.n16Temp1                               ;83AF7A|057E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83AF7C|857E    |00007E;
     BNE +                                                      ;83AF7E|D008    |83AF88;
-    STZ.B n16TempVar1                                          ;83AF80|647E    |00007E;
+    STZ.B strcVariables.n16Temp1                               ;83AF80|647E    |00007E;
     LDY.W #$0000                                               ;83AF82|A00000  |      ;
     JMP.W .return                                              ;83AF85|4CE1B0  |83B0E1;
  
@@ -5254,20 +5254,20 @@ fGameEngine_DirectionHandler83AF37:
     BEQ +                                                      ;83AF8D|F013    |83AFA2;
     CMP.W #$0002                                               ;83AF8F|C90200  |      ;
     BNE +                                                      ;83AF92|D00E    |83AFA2;
-    STY.B $90                                                  ;83AF94|8490    |000090;
-    LDA.B $88                                                  ;83AF96|A588    |000088;
+    STY.B strcVariables.n16Unk90                               ;83AF94|8490    |000090;
+    LDA.B strcVariables.n16Unk88                               ;83AF96|A588    |000088;
     SEC                                                        ;83AF98|38      |      ;
-    SBC.B $8C                                                  ;83AF99|E58C    |00008C;
-    SBC.B $90                                                  ;83AF9B|E590    |000090;
+    SBC.B strcVariables.n16Unk8C                               ;83AF99|E58C    |00008C;
+    SBC.B strcVariables.n16Unk90                               ;83AF9B|E590    |000090;
     INC A                                                      ;83AF9D|1A      |      ;
     TAY                                                        ;83AF9E|A8      |      ;
     JMP.W .return                                              ;83AF9F|4CE1B0  |83B0E1;
  
  
-  + LDA.B $88                                                  ;83AFA2|A588    |000088;
+  + LDA.B strcVariables.n16Unk88                               ;83AFA2|A588    |000088;
     SEC                                                        ;83AFA4|38      |      ;
-    SBC.B $8C                                                  ;83AFA5|E58C    |00008C;
-    SBC.B $90                                                  ;83AFA7|E590    |000090;
+    SBC.B strcVariables.n16Unk8C                               ;83AFA5|E58C    |00008C;
+    SBC.B strcVariables.n16Unk90                               ;83AFA7|E590    |000090;
     INC A                                                      ;83AFA9|1A      |      ;
     TAY                                                        ;83AFAA|A8      |      ;
     JMP.W .return                                              ;83AFAB|4CE1B0  |83B0E1;
@@ -5290,7 +5290,7 @@ fGameEngine_DirectionHandler83AF37:
     REP #$20                                                   ;83AFC7|C220    |      ;
     PLY                                                        ;83AFC9|7A      |      ;
     PHA                                                        ;83AFCA|48      |      ;
-    LDA.B $8E                                                  ;83AFCB|A58E    |00008E;
+    LDA.B strcVariables.n16Unk8E                               ;83AFCB|A58E    |00008E;
     PHA                                                        ;83AFCD|48      |      ;
     LDA.B strcPlayer.lastX                                     ;83AFCE|A5DF    |0000DF;
     CLC                                                        ;83AFD0|18      |      ;
@@ -5299,14 +5299,14 @@ fGameEngine_DirectionHandler83AF37:
     LDA.W #$0001                                               ;83AFD5|A90100  |      ;
     JSR.W fGameEngine_Unknown83B0F6                            ;83AFD8|20F6B0  |83B0F6;
     REP #$20                                                   ;83AFDB|C220    |      ;
-    STA.B n16TempVar1                                          ;83AFDD|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83AFDD|857E    |00007E;
     PLY                                                        ;83AFDF|7A      |      ;
     PLA                                                        ;83AFE0|68      |      ;
     ASL A                                                      ;83AFE1|0A      |      ;
-    ORA.B n16TempVar1                                          ;83AFE2|057E    |00007E;
-    STA.B n16TempVar1                                          ;83AFE4|857E    |00007E;
+    ORA.B strcVariables.n16Temp1                               ;83AFE2|057E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83AFE4|857E    |00007E;
     BNE +                                                      ;83AFE6|D008    |83AFF0;
-    STZ.B n16TempVar1                                          ;83AFE8|647E    |00007E;
+    STZ.B strcVariables.n16Temp1                               ;83AFE8|647E    |00007E;
     LDY.W #$0000                                               ;83AFEA|A00000  |      ;
     JMP.W .return                                              ;83AFED|4CE1B0  |83B0E1;
  
@@ -5316,21 +5316,21 @@ fGameEngine_DirectionHandler83AF37:
     BEQ +                                                      ;83AFF5|F013    |83B00A;
     CMP.W #$0002                                               ;83AFF7|C90200  |      ;
     BNE +                                                      ;83AFFA|D00E    |83B00A;
-    STY.B $8E                                                  ;83AFFC|848E    |00008E;
-    LDA.B $8C                                                  ;83AFFE|A58C    |00008C;
+    STY.B strcVariables.n16Unk8E                               ;83AFFC|848E    |00008E;
+    LDA.B strcVariables.n16Unk8C                               ;83AFFE|A58C    |00008C;
     CLC                                                        ;83B000|18      |      ;
-    ADC.B $8E                                                  ;83B001|658E    |00008E;
+    ADC.B strcVariables.n16Unk8E                               ;83B001|658E    |00008E;
     SEC                                                        ;83B003|38      |      ;
-    SBC.B $88                                                  ;83B004|E588    |000088;
+    SBC.B strcVariables.n16Unk88                               ;83B004|E588    |000088;
     TAY                                                        ;83B006|A8      |      ;
     JMP.W .return                                              ;83B007|4CE1B0  |83B0E1;
  
  
-  + LDA.B $8C                                                  ;83B00A|A58C    |00008C;
+  + LDA.B strcVariables.n16Unk8C                               ;83B00A|A58C    |00008C;
     CLC                                                        ;83B00C|18      |      ;
-    ADC.B $8E                                                  ;83B00D|658E    |00008E;
+    ADC.B strcVariables.n16Unk8E                               ;83B00D|658E    |00008E;
     SEC                                                        ;83B00F|38      |      ;
-    SBC.B $88                                                  ;83B010|E588    |000088;
+    SBC.B strcVariables.n16Unk88                               ;83B010|E588    |000088;
     TAY                                                        ;83B012|A8      |      ;
     JMP.W .return                                              ;83B013|4CE1B0  |83B0E1;
  
@@ -5352,7 +5352,7 @@ fGameEngine_DirectionHandler83AF37:
     REP #$20                                                   ;83B02F|C220    |      ;
     PLX                                                        ;83B031|FA      |      ;
     PHA                                                        ;83B032|48      |      ;
-    LDA.B $90                                                  ;83B033|A590    |000090;
+    LDA.B strcVariables.n16Unk90                               ;83B033|A590    |000090;
     PHA                                                        ;83B035|48      |      ;
     LDA.B strcPlayer.lastY                                     ;83B036|A5E1    |0000E1;
     CLC                                                        ;83B038|18      |      ;
@@ -5361,14 +5361,14 @@ fGameEngine_DirectionHandler83AF37:
     LDA.W #$0001                                               ;83B03D|A90100  |      ;
     JSR.W fGameEngine_Unknown83B0F6                            ;83B040|20F6B0  |83B0F6;
     REP #$20                                                   ;83B043|C220    |      ;
-    STA.B n16TempVar1                                          ;83B045|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B045|857E    |00007E;
     PLX                                                        ;83B047|FA      |      ;
     PLA                                                        ;83B048|68      |      ;
     ASL A                                                      ;83B049|0A      |      ;
-    ORA.B n16TempVar1                                          ;83B04A|057E    |00007E;
-    STA.B n16TempVar1                                          ;83B04C|857E    |00007E;
+    ORA.B strcVariables.n16Temp1                               ;83B04A|057E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B04C|857E    |00007E;
     BNE +                                                      ;83B04E|D008    |83B058;
-    STZ.B n16TempVar1                                          ;83B050|647E    |00007E;
+    STZ.B strcVariables.n16Temp1                               ;83B050|647E    |00007E;
     LDX.W #$0000                                               ;83B052|A20000  |      ;
     JMP.W .return                                              ;83B055|4CE1B0  |83B0E1;
  
@@ -5378,20 +5378,20 @@ fGameEngine_DirectionHandler83AF37:
     BEQ +                                                      ;83B05D|F012    |83B071;
     CMP.W #$0002                                               ;83B05F|C90200  |      ;
     BNE +                                                      ;83B062|D00D    |83B071;
-    STX.B $90                                                  ;83B064|8690    |000090;
-    LDA.B $86                                                  ;83B066|A586    |000086;
+    STX.B strcVariables.n16Unk90                               ;83B064|8690    |000090;
+    LDA.B strcVariables.n16Unk86                               ;83B066|A586    |000086;
     SEC                                                        ;83B068|38      |      ;
-    SBC.B $8A                                                  ;83B069|E58A    |00008A;
-    SBC.B $90                                                  ;83B06B|E590    |000090;
+    SBC.B strcVariables.n16Unk8A                               ;83B069|E58A    |00008A;
+    SBC.B strcVariables.n16Unk90                               ;83B06B|E590    |000090;
     INC A                                                      ;83B06D|1A      |      ;
     TAX                                                        ;83B06E|AA      |      ;
     BRA .return                                                ;83B06F|8070    |83B0E1;
  
  
-  + LDA.B $86                                                  ;83B071|A586    |000086;
+  + LDA.B strcVariables.n16Unk86                               ;83B071|A586    |000086;
     SEC                                                        ;83B073|38      |      ;
-    SBC.B $8A                                                  ;83B074|E58A    |00008A;
-    SBC.B $90                                                  ;83B076|E590    |000090;
+    SBC.B strcVariables.n16Unk8A                               ;83B074|E58A    |00008A;
+    SBC.B strcVariables.n16Unk90                               ;83B076|E590    |000090;
     INC A                                                      ;83B078|1A      |      ;
     TAX                                                        ;83B079|AA      |      ;
     BRA .return                                                ;83B07A|8065    |83B0E1;
@@ -5414,7 +5414,7 @@ fGameEngine_DirectionHandler83AF37:
     REP #$20                                                   ;83B095|C220    |      ;
     PLX                                                        ;83B097|FA      |      ;
     PHA                                                        ;83B098|48      |      ;
-    LDA.B $8E                                                  ;83B099|A58E    |00008E;
+    LDA.B strcVariables.n16Unk8E                               ;83B099|A58E    |00008E;
     PHA                                                        ;83B09B|48      |      ;
     LDA.B strcPlayer.lastY                                     ;83B09C|A5E1    |0000E1;
     CLC                                                        ;83B09E|18      |      ;
@@ -5423,14 +5423,14 @@ fGameEngine_DirectionHandler83AF37:
     LDA.W #$0001                                               ;83B0A3|A90100  |      ;
     JSR.W fGameEngine_Unknown83B0F6                            ;83B0A6|20F6B0  |83B0F6;
     REP #$20                                                   ;83B0A9|C220    |      ;
-    STA.B n16TempVar1                                          ;83B0AB|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B0AB|857E    |00007E;
     PLX                                                        ;83B0AD|FA      |      ;
     PLA                                                        ;83B0AE|68      |      ;
     ASL A                                                      ;83B0AF|0A      |      ;
-    ORA.B n16TempVar1                                          ;83B0B0|057E    |00007E;
-    STA.B n16TempVar1                                          ;83B0B2|857E    |00007E;
+    ORA.B strcVariables.n16Temp1                               ;83B0B0|057E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B0B2|857E    |00007E;
     BNE +                                                      ;83B0B4|D007    |83B0BD;
-    STZ.B n16TempVar1                                          ;83B0B6|647E    |00007E;
+    STZ.B strcVariables.n16Temp1                               ;83B0B6|647E    |00007E;
     LDX.W #$0000                                               ;83B0B8|A20000  |      ;
     BRA .return                                                ;83B0BB|8024    |83B0E1;
  
@@ -5440,28 +5440,28 @@ fGameEngine_DirectionHandler83AF37:
     BEQ +                                                      ;83B0C2|F012    |83B0D6;
     CMP.W #$0002                                               ;83B0C4|C90200  |      ;
     BNE +                                                      ;83B0C7|D00D    |83B0D6;
-    STX.B $8E                                                  ;83B0C9|868E    |00008E;
-    LDA.B $8A                                                  ;83B0CB|A58A    |00008A;
+    STX.B strcVariables.n16Unk8E                               ;83B0C9|868E    |00008E;
+    LDA.B strcVariables.n16Unk8A                               ;83B0CB|A58A    |00008A;
     CLC                                                        ;83B0CD|18      |      ;
-    ADC.B $8E                                                  ;83B0CE|658E    |00008E;
+    ADC.B strcVariables.n16Unk8E                               ;83B0CE|658E    |00008E;
     SEC                                                        ;83B0D0|38      |      ;
-    SBC.B $86                                                  ;83B0D1|E586    |000086;
+    SBC.B strcVariables.n16Unk86                               ;83B0D1|E586    |000086;
     TAX                                                        ;83B0D3|AA      |      ;
     BRA .return                                                ;83B0D4|800B    |83B0E1;
  
  
-  + LDA.B $8A                                                  ;83B0D6|A58A    |00008A;
+  + LDA.B strcVariables.n16Unk8A                               ;83B0D6|A58A    |00008A;
     CLC                                                        ;83B0D8|18      |      ;
-    ADC.B $8E                                                  ;83B0D9|658E    |00008E;
+    ADC.B strcVariables.n16Unk8E                               ;83B0D9|658E    |00008E;
     SEC                                                        ;83B0DB|38      |      ;
-    SBC.B $86                                                  ;83B0DC|E586    |000086;
+    SBC.B strcVariables.n16Unk86                               ;83B0DC|E586    |000086;
     TAX                                                        ;83B0DE|AA      |      ;
     BRA .return                                                ;83B0DF|8000    |83B0E1;
  
  
 .return:
     REP #$20                                                   ;83B0E1|C220    |      ;
-    LDA.B n16TempVar1                                          ;83B0E3|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83B0E3|A57E    |00007E;
     RTL                                                        ;83B0E5|6B      |      ;
  
  
@@ -5478,23 +5478,23 @@ fGameEngine_Unused83B0E6:
 fGameEngine_Unknown83B0F6:
     REP #$30                                                   ;83B0F6|C230    |      ; return A: nStatus
     PHA                                                        ;83B0F8|48      |      ;
-    STX.B $86                                                  ;83B0F9|8686    |000086;
-    STY.B $88                                                  ;83B0FB|8488    |000088;
+    STX.B strcVariables.n16Unk86                               ;83B0F9|8686    |000086;
+    STY.B strcVariables.n16Unk88                               ;83B0FB|8488    |000088;
     TXA                                                        ;83B0FD|8A      |      ;
     AND.W #$FFF0                                               ;83B0FE|29F0FF  |      ;
-    STA.B $8A                                                  ;83B101|858A    |00008A;
+    STA.B strcVariables.n16Unk8A                               ;83B101|858A    |00008A;
     TYA                                                        ;83B103|98      |      ;
     AND.W #$FFF0                                               ;83B104|29F0FF  |      ;
-    STA.B $8C                                                  ;83B107|858C    |00008C;
+    STA.B strcVariables.n16Unk8C                               ;83B107|858C    |00008C;
     LDA.W #$0010                                               ;83B109|A91000  |      ;
-    STA.B $8E                                                  ;83B10C|858E    |00008E;
+    STA.B strcVariables.n16Unk8E                               ;83B10C|858E    |00008E;
     LDA.W #$0000                                               ;83B10E|A90000  |      ;
-    STA.B $90                                                  ;83B111|8590    |000090;
+    STA.B strcVariables.n16Unk90                               ;83B111|8590    |000090;
     LDA.W #$0002                                               ;83B113|A90200  |      ;
     JSL.L fUnknown_82AC61                                      ;83B116|2261AC82|82AC61;
     SEP #$20                                                   ;83B11A|E220    |      ;
     REP #$10                                                   ;83B11C|C210    |      ;
-    STA.B n8TempVar1                                           ;83B11E|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;83B11E|8592    |000092;
     REP #$20                                                   ;83B120|C220    |      ;
     PLA                                                        ;83B122|68      |      ;
     CMP.W #$0001                                               ;83B123|C90100  |      ;
@@ -5507,22 +5507,22 @@ fGameEngine_Unknown83B0F6:
     STX.B strcPlayer.unkPosY                                   ;83B12C|86EB    |0000EB;
  
   + SEP #$20                                                   ;83B12E|E220    |      ;
-    LDA.B n8TempVar1                                           ;83B130|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;83B130|A592    |000092;
     AND.B #$01                                                 ;83B132|2901    |      ;
     BEQ +                                                      ;83B134|F003    |83B139;
     JMP.W .return1                                             ;83B136|4CBAB1  |83B1BA;
  
  
-  + LDA.B n8TempVar1                                           ;83B139|A592    |000092;
+  + LDA.B strcVariables.n8Temp1                                ;83B139|A592    |000092;
     AND.B #$02                                                 ;83B13B|2902    |      ;
     BNE .label2                                                ;83B13D|D02B    |83B16A;
-    LDA.B n8TempVar1                                           ;83B13F|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;83B13F|A592    |000092;
     AND.B #$04                                                 ;83B141|2904    |      ;
     BNE .label3                                                ;83B143|D039    |83B17E;
-    LDA.B n8TempVar1                                           ;83B145|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;83B145|A592    |000092;
     AND.B #$08                                                 ;83B147|2908    |      ;
     BNE .label4                                                ;83B149|D047    |83B192;
-    LDA.B n8TempVar1                                           ;83B14B|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;83B14B|A592    |000092;
     AND.B #$10                                                 ;83B14D|2910    |      ;
     BNE .label5                                                ;83B14F|D055    |83B1A6;
     %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
@@ -5542,9 +5542,9 @@ fGameEngine_Unknown83B0F6:
     LDA.B strcPlayer.newY                                      ;83B16C|A5E7    |0000E7;
     BNE +                                                      ;83B16E|D005    |83B175;
     LDA.W #$0008                                               ;83B170|A90800  |      ;
-    STA.B $8E                                                  ;83B173|858E    |00008E;
+    STA.B strcVariables.n16Unk8E                               ;83B173|858E    |00008E;
  
-  + LDA.B $86                                                  ;83B175|A586    |000086;
+  + LDA.B strcVariables.n16Unk86                               ;83B175|A586    |000086;
     AND.W #$0008                                               ;83B177|290800  |      ;
     BNE .return0                                               ;83B17A|D045    |83B1C1;
     BRA .return1                                               ;83B17C|803C    |83B1BA;
@@ -5555,9 +5555,9 @@ fGameEngine_Unknown83B0F6:
     LDA.B strcPlayer.newY                                      ;83B180|A5E7    |0000E7;
     BNE +                                                      ;83B182|D005    |83B189;
     LDA.W #$0008                                               ;83B184|A90800  |      ;
-    STA.B $90                                                  ;83B187|8590    |000090;
+    STA.B strcVariables.n16Unk90                               ;83B187|8590    |000090;
  
-  + LDA.B $86                                                  ;83B189|A586    |000086;
+  + LDA.B strcVariables.n16Unk86                               ;83B189|A586    |000086;
     AND.W #$0008                                               ;83B18B|290800  |      ;
     BEQ .return0                                               ;83B18E|F031    |83B1C1;
     BRA .return1                                               ;83B190|8028    |83B1BA;
@@ -5568,9 +5568,9 @@ fGameEngine_Unknown83B0F6:
     LDA.B strcPlayer.newX                                      ;83B194|A5E5    |0000E5;
     BNE +                                                      ;83B196|D005    |83B19D;
     LDA.W #$0008                                               ;83B198|A90800  |      ;
-    STA.B $8E                                                  ;83B19B|858E    |00008E;
+    STA.B strcVariables.n16Unk8E                               ;83B19B|858E    |00008E;
  
-  + LDA.B $88                                                  ;83B19D|A588    |000088;
+  + LDA.B strcVariables.n16Unk88                               ;83B19D|A588    |000088;
     AND.W #$0008                                               ;83B19F|290800  |      ;
     BNE .return0                                               ;83B1A2|D01D    |83B1C1;
     BRA .return1                                               ;83B1A4|8014    |83B1BA;
@@ -5581,9 +5581,9 @@ fGameEngine_Unknown83B0F6:
     LDA.B strcPlayer.newX                                      ;83B1A8|A5E5    |0000E5;
     BNE +                                                      ;83B1AA|D005    |83B1B1;
     LDA.W #$0008                                               ;83B1AC|A90800  |      ;
-    STA.B $90                                                  ;83B1AF|8590    |000090;
+    STA.B strcVariables.n16Unk90                               ;83B1AF|8590    |000090;
  
-  + LDA.B $88                                                  ;83B1B1|A588    |000088;
+  + LDA.B strcVariables.n16Unk88                               ;83B1B1|A588    |000088;
     AND.W #$0008                                               ;83B1B3|290800  |      ;
     BEQ .return0                                               ;83B1B6|F009    |83B1C1;
     BRA .return1                                               ;83B1B8|8000    |83B1BA;
@@ -5656,10 +5656,10 @@ fGameEngine_AddProfit:
  
 fGameEngine_AddWood:
     REP #$30                                                   ;83B224|C230    |      ; A: nWood, return A: nStatus
-    STA.B n16TempVar1                                          ;83B226|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B226|857E    |00007E;
     LDA.L nStoredWood                                          ;83B228|AF0C1F7F|7F1F0C;
     CLC                                                        ;83B22C|18      |      ;
-    ADC.B n16TempVar1                                          ;83B22D|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;83B22D|657E    |00007E;
     BMI .ok                                                    ;83B22F|300E    |83B23F;
     CMP.W #$03E7                                               ;83B231|C9E703  |      ;
     BCS .max                                                   ;83B234|B010    |83B246;
@@ -5686,10 +5686,10 @@ fGameEngine_AddWood:
  
 fGameEngine_AddFeed:
     REP #$30                                                   ;83B253|C230    |      ; A: nFeed, return A: nStatus
-    STA.B n16TempVar1                                          ;83B255|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B255|857E    |00007E;
     LDA.L nStoredFeed                                          ;83B257|AF101F7F|7F1F10;
     CLC                                                        ;83B25B|18      |      ;
-    ADC.B n16TempVar1                                          ;83B25C|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;83B25C|657E    |00007E;
     BMI .ok                                                    ;83B25E|300E    |83B26E;
     CMP.W #$03E7                                               ;83B260|C9E703  |      ;
     BCS .max                                                   ;83B263|B010    |83B275;
@@ -5716,10 +5716,10 @@ fGameEngine_AddFeed:
  
 fGameEngine_AddHappiness:
     REP #$30                                                   ;83B282|C230    |      ; A: nHappiness, return A: nStatus
-    STA.B n16TempVar1                                          ;83B284|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B284|857E    |00007E;
     LDA.L nPlayerHappiness                                     ;83B286|AF331F7F|7F1F33;
     CLC                                                        ;83B28A|18      |      ;
-    ADC.B n16TempVar1                                          ;83B28B|657E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;83B28B|657E    |00007E;
     BMI .ok                                                    ;83B28D|300E    |83B29D;
     CMP.W #$03E7                                               ;83B28F|C9E703  |      ;
     BCS .max                                                   ;83B292|B010    |83B2A4;
@@ -5840,7 +5840,7 @@ fGameEngine_LoadGame:
     STA.W $09A3                                                ;83B3A6|8DA309  |0009A3;
     LDY.W #$0019                                               ;83B3A9|A01900  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3AC|B772    |000072;
-    STA.W strcGoodsData.unkCow                                 ;83B3AE|8D3709  |000937;
+    STA.W strcStockData.unkCow                                 ;83B3AE|8D3709  |000937;
     LDY.W #$001A                                               ;83B3B1|A01A00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3B4|B772    |000072;
     STA.W strcPlayerData.toolSecond                            ;83B3B6|8D2309  |000923;
@@ -6219,7 +6219,7 @@ fGameEngine_SaveGame:
     LDA.W $09A3                                                ;83B782|ADA309  |0009A3;
     STA.B [ptrUnknown0x72],Y                                   ;83B785|9772    |000072;
     LDY.W #$0019                                               ;83B787|A01900  |      ;
-    LDA.W strcGoodsData.unkCow                                 ;83B78A|AD3709  |000937;
+    LDA.W strcStockData.unkCow                                 ;83B78A|AD3709  |000937;
     STA.B [ptrUnknown0x72],Y                                   ;83B78D|9772    |000072;
     LDY.W #$001A                                               ;83B78F|A01A00  |      ;
     LDA.W strcPlayerData.toolSecond                            ;83B792|AD2309  |000923;
@@ -6437,23 +6437,23 @@ fGameEngine_SaveGame:
     LDA.W #$0000                                               ;83B9D8|A90000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83B9DB|9772    |000072;
     LDY.W #$0000                                               ;83B9DD|A00000  |      ;
-    STZ.B n16TempVar1                                          ;83B9E0|647E    |00007E;
+    STZ.B strcVariables.n16Temp1                               ;83B9E0|647E    |00007E;
  
   - LDA.B [ptrUnknown0x72],Y                                   ;83B9E2|B772    |000072; calculate checksum
     CLC                                                        ;83B9E4|18      |      ;
-    ADC.B n16TempVar1                                          ;83B9E5|657E    |00007E;
-    STA.B n16TempVar1                                          ;83B9E7|857E    |00007E;
+    ADC.B strcVariables.n16Temp1                               ;83B9E5|657E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B9E7|857E    |00007E;
     INY                                                        ;83B9E9|C8      |      ;
     INY                                                        ;83B9EA|C8      |      ;
     CPY.W #$1000                                               ;83B9EB|C00010  |      ;
     BNE -                                                      ;83B9EE|D0F2    |83B9E2;
     REP #$30                                                   ;83B9F0|C230    |      ;
     LDY.W #$002F                                               ;83B9F2|A02F00  |      ;
-    LDA.B n16TempVar1                                          ;83B9F5|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83B9F5|A57E    |00007E;
     STA.B [ptrUnknown0x72],Y                                   ;83B9F7|9772    |000072;
     REP #$20                                                   ;83B9F9|C220    |      ;
     PLA                                                        ;83B9FB|68      |      ;
-    STA.B n16TempVar1                                          ;83B9FC|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83B9FC|857E    |00007E;
     LDA.W #$0000                                               ;83B9FE|A90000  |      ;
     STA.B ptrUnknown0x72                                       ;83BA01|8572    |000072;
     SEP #$20                                                   ;83BA03|E220    |      ;
@@ -6461,7 +6461,7 @@ fGameEngine_SaveGame:
     STA.B ptrUnknown0x72+2                                     ;83BA07|8574    |000074;
     REP #$20                                                   ;83BA09|C220    |      ;
     LDY.W #$002E                                               ;83BA0B|A02E00  |      ;
-    LDA.B n16TempVar1                                          ;83BA0E|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83BA0E|A57E    |00007E;
     BEQ .label1                                                ;83BA10|F008    |83BA1A;
     SEP #$20                                                   ;83BA12|E220    |      ;
     LDA.B #$00                                                 ;83BA14|A900    |      ;
@@ -6483,7 +6483,7 @@ fGameEngine_SaveGame:
     STA.B ptrUnknown0x72+2                                     ;83BA2B|8574    |000074;
     REP #$20                                                   ;83BA2D|C220    |      ;
     LDY.W #$002E                                               ;83BA2F|A02E00  |      ;
-    LDA.B n16TempVar1                                          ;83BA32|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83BA32|A57E    |00007E;
     BEQ .return                                                ;83BA34|F008    |83BA3E;
     SEP #$20                                                   ;83BA36|E220    |      ;
     LDA.B #$01                                                 ;83BA38|A901    |      ;
@@ -6572,7 +6572,7 @@ fGameEngine_SaveCheck:
     STZ.W $098E                                                ;83BAD8|9C8E09  |00098E;
     REP #$20                                                   ;83BADB|C220    |      ;
     %UnsetFlag(daily4, ~$F7FF)
-    STZ.B n16TempVar3                                          ;83BAE8|6482    |000082;
+    STZ.B strcVariables.n16Temp3                               ;83BAE8|6482    |000082;
     LDA.W #$0000                                               ;83BAEA|A90000  |      ;
     STA.B ptrUnknown0x72                                       ;83BAED|8572    |000072;
     SEP #$20                                                   ;83BAEF|E220    |      ;
@@ -6597,36 +6597,36 @@ fGameEngine_SaveCheck:
     SEP #$20                                                   ;83BB19|E220    |      ;
     LDY.W #$002E                                               ;83BB1B|A02E00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83BB1E|B772    |000072;
-    STA.B n8TempVar1                                           ;83BB20|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;83BB20|8592    |000092;
     LDA.B #$00                                                 ;83BB22|A900    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83BB24|9772    |000072;
     REP #$30                                                   ;83BB26|C230    |      ;
     LDY.W #$002F                                               ;83BB28|A02F00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83BB2B|B772    |000072;
-    STA.B n16TempVar1                                          ;83BB2D|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83BB2D|857E    |00007E;
     LDA.W #$0000                                               ;83BB2F|A90000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83BB32|9772    |000072;
     LDY.W #$0000                                               ;83BB34|A00000  |      ;
-    STZ.B n16TempVar2                                          ;83BB37|6480    |000080;
+    STZ.B strcVariables.n16Temp2                               ;83BB37|6480    |000080;
  
   - LDA.B [ptrUnknown0x72],Y                                   ;83BB39|B772    |000072;
     CLC                                                        ;83BB3B|18      |      ;
-    ADC.B n16TempVar2                                          ;83BB3C|6580    |000080;
-    STA.B n16TempVar2                                          ;83BB3E|8580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;83BB3C|6580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83BB3E|8580    |000080;
     INY                                                        ;83BB40|C8      |      ;
     INY                                                        ;83BB41|C8      |      ;
     CPY.W #$1000                                               ;83BB42|C00010  |      ;
     BNE -                                                      ;83BB45|D0F2    |83BB39;
     REP #$30                                                   ;83BB47|C230    |      ;
-    LDA.B n16TempVar1                                          ;83BB49|A57E    |00007E;
-    CMP.B n16TempVar2                                          ;83BB4B|C580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;83BB49|A57E    |00007E;
+    CMP.B strcVariables.n16Temp2                               ;83BB4B|C580    |000080;
     BNE .label1                                                ;83BB4D|D012    |83BB61;
     LDY.W #$002F                                               ;83BB4F|A02F00  |      ;
-    LDA.B n16TempVar1                                          ;83BB52|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83BB52|A57E    |00007E;
     STA.B [ptrUnknown0x72],Y                                   ;83BB54|9772    |000072;
     SEP #$20                                                   ;83BB56|E220    |      ;
     LDY.W #$002E                                               ;83BB58|A02E00  |      ;
-    LDA.B n8TempVar1                                           ;83BB5B|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;83BB5B|A592    |000092;
     STA.B [ptrUnknown0x72],Y                                   ;83BB5D|9772    |000072;
     BRA .label2                                                ;83BB5F|8036    |83BB97;
  
@@ -6656,7 +6656,7 @@ fGameEngine_SaveCheck:
     STA.B [ptrUnknown0x72],Y                                   ;83BB8E|9772    |000072;
     REP #$20                                                   ;83BB90|C220    |      ;
     LDA.W #$0001                                               ;83BB92|A90100  |      ;
-    STA.B n16TempVar3                                          ;83BB95|8582    |000082;
+    STA.B strcVariables.n16Temp3                               ;83BB95|8582    |000082;
  
 .label2:
     REP #$30                                                   ;83BB97|C230    |      ;
@@ -6684,36 +6684,36 @@ fGameEngine_SaveCheck:
     SEP #$20                                                   ;83BBC8|E220    |      ;
     LDY.W #$002E                                               ;83BBCA|A02E00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83BBCD|B772    |000072;
-    STA.B n8TempVar1                                           ;83BBCF|8592    |000092;
+    STA.B strcVariables.n8Temp1                                ;83BBCF|8592    |000092;
     LDA.B #$00                                                 ;83BBD1|A900    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83BBD3|9772    |000072;
     REP #$30                                                   ;83BBD5|C230    |      ;
     LDY.W #$002F                                               ;83BBD7|A02F00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83BBDA|B772    |000072;
-    STA.B n16TempVar1                                          ;83BBDC|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83BBDC|857E    |00007E;
     LDA.W #$0000                                               ;83BBDE|A90000  |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83BBE1|9772    |000072;
     LDY.W #$0000                                               ;83BBE3|A00000  |      ;
-    STZ.B n16TempVar2                                          ;83BBE6|6480    |000080;
+    STZ.B strcVariables.n16Temp2                               ;83BBE6|6480    |000080;
  
   - LDA.B [ptrUnknown0x72],Y                                   ;83BBE8|B772    |000072;
     CLC                                                        ;83BBEA|18      |      ;
-    ADC.B n16TempVar2                                          ;83BBEB|6580    |000080;
-    STA.B n16TempVar2                                          ;83BBED|8580    |000080;
+    ADC.B strcVariables.n16Temp2                               ;83BBEB|6580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83BBED|8580    |000080;
     INY                                                        ;83BBEF|C8      |      ;
     INY                                                        ;83BBF0|C8      |      ;
     CPY.W #$1000                                               ;83BBF1|C00010  |      ;
     BNE -                                                      ;83BBF4|D0F2    |83BBE8;
     REP #$30                                                   ;83BBF6|C230    |      ;
-    LDA.B n16TempVar1                                          ;83BBF8|A57E    |00007E;
-    CMP.B n16TempVar2                                          ;83BBFA|C580    |000080;
+    LDA.B strcVariables.n16Temp1                               ;83BBF8|A57E    |00007E;
+    CMP.B strcVariables.n16Temp2                               ;83BBFA|C580    |000080;
     BNE .label3                                                ;83BBFC|D01B    |83BC19;
     LDY.W #$002F                                               ;83BBFE|A02F00  |      ;
-    LDA.B n16TempVar1                                          ;83BC01|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83BC01|A57E    |00007E;
     STA.B [ptrUnknown0x72],Y                                   ;83BC03|9772    |000072;
     SEP #$20                                                   ;83BC05|E220    |      ;
     LDY.W #$002E                                               ;83BC07|A02E00  |      ;
-    LDA.B n8TempVar1                                           ;83BC0A|A592    |000092;
+    LDA.B strcVariables.n8Temp1                                ;83BC0A|A592    |000092;
     STA.B [ptrUnknown0x72],Y                                   ;83BC0C|9772    |000072;
     CMP.B #$01                                                 ;83BC0E|C901    |      ;
     BNE .justReturn                                            ;83BC10|D047    |83BC59;
@@ -6746,7 +6746,7 @@ fGameEngine_SaveCheck:
     LDA.B #$4D                                                 ;83BC44|A94D    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83BC46|9772    |000072;
     REP #$20                                                   ;83BC48|C220    |      ;
-    LDA.B n16TempVar3                                          ;83BC4A|A582    |000082;
+    LDA.B strcVariables.n16Temp3                               ;83BC4A|A582    |000082;
     BEQ .justReturn                                            ;83BC4C|F00B    |83BC59;
     %SetFlag(daily4, $0800)
  
@@ -7157,7 +7157,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     PHX                                                        ;83BF7D|DA      |      ;
     TXA                                                        ;83BF7E|8A      |      ;
     SEP #$20                                                   ;83BF7F|E220    |      ;
-    STA.W strcGoodsData.unkCow                                 ;83BF81|8D3709  |000937;
+    STA.W strcStockData.unkCow                                 ;83BF81|8D3709  |000937;
     JMP.W .chicken                                             ;83BF84|4C1AC0  |83C01A;
  
  
@@ -7762,7 +7762,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C3E8|48      |      ;
     ASL A                                                      ;83C3E9|0A      |      ;
     TAX                                                        ;83C3EA|AA      |      ;
-    STZ.W strcGoodsData.unkEachChicken,X                       ;83C3EB|9E3B09  |00093B;
+    STZ.W strcStockData.unkEachChicken,X                       ;83C3EB|9E3B09  |00093B;
     BRA .label12                                               ;83C3EE|8011    |83C401;
  
  
@@ -8000,7 +8000,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C569|48      |      ;
     ASL A                                                      ;83C56A|0A      |      ;
     TAX                                                        ;83C56B|AA      |      ;
-    STZ.W strcGoodsData.unkEachCow,X                           ;83C56C|9E5309  |000953;
+    STZ.W strcStockData.unkEachCow,X                           ;83C56C|9E5309  |000953;
     JMP.W .label29                                             ;83C56F|4C3DC6  |83C63D;
  
  
@@ -8038,7 +8038,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C5AD|48      |      ;
     ASL A                                                      ;83C5AE|0A      |      ;
     TAX                                                        ;83C5AF|AA      |      ;
-    STZ.W strcGoodsData.unkEachCow,X                           ;83C5B0|9E5309  |000953;
+    STZ.W strcStockData.unkEachCow,X                           ;83C5B0|9E5309  |000953;
     JMP.W .label29                                             ;83C5B3|4C3DC6  |83C63D;
  
  
@@ -8116,7 +8116,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C635|48      |      ;
     ASL A                                                      ;83C636|0A      |      ;
     TAX                                                        ;83C637|AA      |      ;
-    STZ.W strcGoodsData.unkEachCow,X                           ;83C638|9E5309  |000953;
+    STZ.W strcStockData.unkEachCow,X                           ;83C638|9E5309  |000953;
     BRA .label29                                               ;83C63B|8000    |83C63D;
  
  
@@ -8265,7 +8265,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.W #$0001                                               ;83C728|A90100  |      ;
     STA.L $7F1F58                                              ;83C72B|8F581F7F|7F1F58;
     SEP #$20                                                   ;83C72F|E220    |      ;
-    STZ.W strcGoodsData.unkDog                                 ;83C731|9C3809  |000938;
+    STZ.W strcStockData.unkDog                                 ;83C731|9C3809  |000938;
  
 .label37:
     REP #$30                                                   ;83C734|C230    |      ;
@@ -8389,7 +8389,7 @@ fGameEngine_ChichenUnknown83C296:
     LDX.W #$0000                                               ;83C7FA|A20000  |      ;
     JSL.L fAI_Unknown8480F8                                    ;83C7FD|22F88084|8480F8;
     SEP #$20                                                   ;83C801|E220    |      ;
-    STZ.W strcGoodsData.unkHorse                               ;83C803|9C3909  |000939;
+    STZ.W strcStockData.unkHorse                               ;83C803|9C3909  |000939;
  
 .return:
     RTL                                                        ;83C806|6B      |      ;
@@ -8397,7 +8397,7 @@ fGameEngine_ChichenUnknown83C296:
  
 fGameEngine_AddChicken:
     REP #$30                                                   ;83C807|C230    |      ; A: nAddType (0 - bought, 1 - hatched), return A: nResult
-    STA.B n16TempVar1                                          ;83C809|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83C809|857E    |00007E;
     LDX.W #$0000                                               ;83C80B|A20000  |      ;
  
   - REP #$30                                                   ;83C80E|C230    |      ;
@@ -8441,7 +8441,7 @@ fGameEngine_AddChicken:
     LDA.B #$00                                                 ;83C853|A900    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83C855|9772    |000072; strcChickenData.unknown2 = 0
     REP #$20                                                   ;83C857|C220    |      ;
-    LDA.B n16TempVar1                                          ;83C859|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83C859|A57E    |00007E;
     CMP.W #$0001                                               ;83C85B|C90100  |      ;
     BEQ .label5                                                ;83C85E|F022    |83C882;
     CMP.W #$0002                                               ;83C860|C90200  |      ;
@@ -8517,7 +8517,7 @@ fGameEngine_AddChicken:
  
 fGameEngine_AddCow:
     REP #$30                                                   ;83C8DC|C230    |      ; A: nAddType (0 - bought, 1 - born), return A: nResult
-    STA.B n16TempVar1                                          ;83C8DE|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83C8DE|857E    |00007E;
     LDX.W #$0000                                               ;83C8E0|A20000  |      ;
  
   - REP #$30                                                   ;83C8E3|C230    |      ;
@@ -8574,7 +8574,7 @@ fGameEngine_AddCow:
     LDA.B #$05                                                 ;83C946|A905    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;83C948|9772    |000072; strcCowData.statusFlags = 00000101 - adult, exists
     REP #$20                                                   ;83C94A|C220    |      ;
-    LDA.B n16TempVar1                                          ;83C94C|A57E    |00007E;
+    LDA.B strcVariables.n16Temp1                               ;83C94C|A57E    |00007E;
     BEQ +                                                      ;83C94E|F01F    |83C96F;
     SEP #$20                                                   ;83C950|E220    |      ;
     LDY.W #$0000                                               ;83C952|A00000  |      ;
@@ -9482,7 +9482,7 @@ fAreaEvents_Town:
   + REP #$30                                                   ;83D329|C230    |      ;
     %AIExecute($0015, $0000, $007E)
     REP #$20                                                   ;83D338|C220    |      ;
-    STZ.B n16TempVar1                                          ;83D33A|647E    |00007E;
+    STZ.B strcVariables.n16Temp1                               ;83D33A|647E    |00007E;
     SEP #$20                                                   ;83D33C|E220    |      ;
     LDA.B #$00                                                 ;83D33E|A900    |      ;
     STA.W $09A4                                                ;83D340|8DA409  |0009A4;
@@ -9506,9 +9506,9 @@ fAreaEvents_Town:
     REP #$10                                                   ;83D36B|C210    |      ;
     PHY                                                        ;83D36D|5A      |      ;
     TYX                                                        ;83D36E|BB      |      ;
-    STY.B n16TempVar4                                          ;83D36F|8484    |000084;
+    STY.B strcVariables.n16Temp4                               ;83D36F|8484    |000084;
     LDA.W $09A4,X                                              ;83D371|BDA409  |0009A4;
-    STA.B n8TempVar4                                           ;83D374|8595    |000095;
+    STA.B strcVariables.n8Temp4                                ;83D374|8595    |000095;
     SEP #$20                                                   ;83D376|E220    |      ;
     LDA.B #$08                                                 ;83D378|A908    |      ;
     JSL.L fCore_GetRandomNumber                                ;83D37A|22F98980|8089F9;
@@ -9519,13 +9519,13 @@ fAreaEvents_Town:
     XBA                                                        ;83D385|EB      |      ;
     REP #$20                                                   ;83D386|C220    |      ;
     TAX                                                        ;83D388|AA      |      ;
-    STX.B $86                                                  ;83D389|8686    |000086;
+    STX.B strcVariables.n16Unk86                               ;83D389|8686    |000086;
     SEP #$20                                                   ;83D38B|E220    |      ;
     LDA.W $09A4,X                                              ;83D38D|BDA409  |0009A4;
-    LDX.B n16TempVar4                                          ;83D390|A684    |000084;
+    LDX.B strcVariables.n16Temp4                               ;83D390|A684    |000084;
     STA.W $09A4,X                                              ;83D392|9DA409  |0009A4;
-    LDA.B n8TempVar4                                           ;83D395|A595    |000095;
-    LDX.B $86                                                  ;83D397|A686    |000086;
+    LDA.B strcVariables.n8Temp4                                ;83D395|A595    |000095;
+    LDX.B strcVariables.n16Unk86                               ;83D397|A686    |000086;
     STA.W $09A4,X                                              ;83D399|9DA409  |0009A4;
     PLY                                                        ;83D39C|7A      |      ;
     INY                                                        ;83D39D|C8      |      ;
@@ -10784,7 +10784,7 @@ fAreaEvents_House:
     SEP #$20                                                   ;83E0F3|E220    |      ;
     LDA.B #$00                                                 ;83E0F5|A900    |      ;
     XBA                                                        ;83E0F7|EB      |      ;
-    LDA.W strcGoodsData.unkCow                                 ;83E0F8|AD3709  |000937;
+    LDA.W strcStockData.unkCow                                 ;83E0F8|AD3709  |000937;
     REP #$20                                                   ;83E0FB|C220    |      ;
     JSL.L fGameEngine_GetCowData                               ;83E0FD|22A7C983|83C9A7;
     SEP #$20                                                   ;83E101|E220    |      ;
@@ -12915,13 +12915,13 @@ fAreaInit_HouseHelper:
     JSL.L fObjectMap_CalculateRanchDev                         ;83F57C|220CAA82|82AA0C;
     REP #$30                                                   ;83F580|C230    |      ;
     LDA.L nRanchDevelopmentRate                                ;83F582|AF561F7F|7F1F56;
-    STA.B n16TempVar1                                          ;83F586|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83F586|857E    |00007E;
     LDA.W #$000A                                               ;83F588|A90A00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;83F58B|22008083|838000;
     REP #$30                                                   ;83F58F|C230    |      ;
-    STA.B n16TempVar1                                          ;83F591|857E    |00007E;
+    STA.B strcVariables.n16Temp1                               ;83F591|857E    |00007E;
     LDA.W #$0127                                               ;83F593|A92701  |      ;
-    STA.B n16TempVar2                                          ;83F596|8580    |000080;
+    STA.B strcVariables.n16Temp2                               ;83F596|8580    |000080;
     JSL.L fMathDivide                                          ;83F598|22828083|838082;
     REP #$30                                                   ;83F59C|C230    |      ;
     STA.L nRanchDevelopmentRate                                ;83F59E|8F561F7F|7F1F56;

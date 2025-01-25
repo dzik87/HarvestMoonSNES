@@ -6,14 +6,6 @@
     ptrUnknown0x72 = $000072; !^ ptr24 ^!
     ptrUnknown0x75 = $000075; !^ ptr24 ^!
     ptrObjectData = $000078; !^ ptr24 ^!
-    n16TempVar1 = $00007E; !^ n16 ^!
-    n16TempVar2 = $000080; !^ n16 ^!
-    n16TempVar3 = $000082; !^ n16 ^!
-    n16TempVar4 = $000084; !^ n16 ^!
-    n8TempVar1 = $000092; !^ n8 ^!
-    n8TempVar2 = $000093; !^ n8 ^!
-    n8TempVar3 = $000094; !^ n8 ^!
-    n8TempVar4 = $000095; !^ n8 ^!
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
@@ -35,8 +27,6 @@
     nCurrentMapdataPresetId = $000195; !^ n8 (offset 0x00) ^!
     nMapEngine_flags = $000196; !^ n16 (offset 0x01) ^!
     nMapEngine_flags_TempCopy = $000198; !^ n16 ^!
-    nAIJoypadInput = $0008FD; !^ n16 ^!
-    nAISteeringCounter = $0008FF; !^ n16 ^!
     nBreakHitCounter = $00096D; !^ n8 (used for example to break wood or stones) ^!
     nPlayerInteractionIndex = $00096E; !^ n8 ^!
     nPlayerInteractionArg1 = $00096F; !^ n8 ^!
